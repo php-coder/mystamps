@@ -1,0 +1,4 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<div id="footer">
+&copy; <a href="mailto:slava.semushin@gmail.com" title="Написать письмо">Слава Семушин</a>, 2009
+</div>
