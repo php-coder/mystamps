@@ -19,11 +19,11 @@ body {
 
 #content {
 	margin: 10px;
-	text-align: center;
 }
 
 #content h3 {
 	font-variant: small-caps;
+	text-align: center;
 }
 
 #add_series_form table {
