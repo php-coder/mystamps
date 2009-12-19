@@ -28,6 +28,10 @@
 						<td><input type="text" name="count" maxlength="2" /></td>
 					</tr>
 					<tr>
+						<th>Беззубцовка</th>
+						<td><input type="checkbox" name="woperf" /></td>
+					</tr>
+					<tr>
 						<th>Michel #</th>
 						<td><input type="text" name="michelno" /></td>
 					</tr>
@@ -42,6 +46,10 @@
 					<tr>
 						<th>Gibbons#</th>
 						<td><input type="text" name="gibbonsno" /></td>
+					</tr>
+					<tr>
+						<th>Комментарий</th>
+						<td><textarea name="comment" cols="22" rows="3"></textarea></td>
 					</tr>
 					<tr>
 						<th>Изображение</th>

@@ -38,3 +38,7 @@ body {
 	text-align: left;
 }
 
+#add_series_form input[type=checkbox] {
+	margin-left: 0;
+}
+
