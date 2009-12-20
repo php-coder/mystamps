@@ -4,18 +4,32 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>MyStamps: создай свою виртуальную коллекцию!</title>
+<title>MyStamps: авторизация</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
 <%@ include file="/WEB-INF/segments/header.jspf" %>
 <div id="content">
-Вы можете:
-<ul>
-	<li><a href="auth.jsp">авторизоваться на сайте</a></li>
-	<li><a href="add_stamps.jsp">добавить серию марок в базу данных</a></li>
-</ul>
+	<h3>Авторизация на сайте</h3>
+		<div class="generic_form">
+			<form action="" method="post">
+				<table>
+					<tr>
+						<th>Логин</th>
+						<td><input type="text" name="login" /></td>
+					</tr>
+					<tr>
+						<th>Пароль</th>
+						<td><input type="password" name="pass" /></td>
+					</tr>
+					<tr>
+						<th></th>
+						<td><input type="submit" value="Войти" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
 </div>
 <%@ include file="/WEB-INF/segments/footer.jspf" %>
 </body>

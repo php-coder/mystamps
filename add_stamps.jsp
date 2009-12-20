@@ -12,7 +12,7 @@
 <%@ include file="/WEB-INF/segments/header.jspf" %>
 <div id="content">
 	<h3>Добавить серию марок</h3>
-		<div id="add_series_form">
+		<div class="generic_form">
 			<form action="" method="post" enctype="multipart/form-data">
 				<table>
 					<tr>

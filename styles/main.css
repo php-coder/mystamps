@@ -26,19 +26,16 @@ body {
 	text-align: center;
 }
 
-#add_series_form table {
+.generic_form table {
 	margin: auto;
 }
 
-#add_series_form th {
+.generic_form th,
+.generic_form td {
 	text-align: left;
 }
 
-#add_series_form td {
-	text-align: left;
-}
-
-#add_series_form input[type=checkbox] {
+.generic_form input[type=checkbox] {
 	margin-left: 0;
 }
 
