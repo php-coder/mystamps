@@ -13,7 +13,7 @@
 <div id="content">
 Вы можете:
 <ul>
-	<li><a href="register.jsp">зарегистрироваться на сайте</a></li>
+	<li><a href="register_user.jsp">зарегистрироваться на сайте</a></li>
 	<li><a href="auth_user.jsp">авторизоваться на сайте</a></li>
 	<li><a href="restore_password.jsp">восстановить забытый пароль</a></li>
 	<li><a href="add_stamps.jsp">добавить серию марок в базу данных</a></li>
