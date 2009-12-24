@@ -1,5 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:url value="/auth_user.jsp" var="authUserUrl" />
+<c:url value="/restore_password.jsp" var="restorePasswordUrl" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,8 +17,8 @@
 <div id="content">
 	<h3>Регистрация на сайте</h3>
 	<div class="hint">
-		Если вы уже зарегистрированы, то необходимо <a href="auth_user.jsp">авторизоваться</a>.<br />
-		Если вы забыли пароль, то мы поможем его <a href="restore_password.jsp">восстановить</a>.
+		Если вы уже зарегистрированы, то необходимо <a href="<c:out value="${authUserUrl}" />">авторизоваться</a>.<br />
+		Если вы забыли пароль, то мы поможем его <a href="<c:out value="${restorePasswordUrl}" />">восстановить</a>.
 	</div>
 		<div class="generic_form">
 			<form action="" method="post">
