@@ -4,20 +4,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>MyStamps: создай свою виртуальную коллекцию!</title>
+<title>MyStamps: восстановление пароля</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
 <%@ include file="/WEB-INF/segments/header.jspf" %>
 <div id="content">
-Вы можете:
-<ul>
-	<li><a href="register.jsp">зарегистрироваться на сайте</a></li>
-	<li><a href="auth.jsp">авторизоваться на сайте</a></li>
-	<li><a href="restore_password.jsp">восстановить забытый пароль</a></li>
-	<li><a href="add_stamps.jsp">добавить серию марок в базу данных</a></li>
-</ul>
+<%-- TODO: add content (#19) --%>
 </div>
 <%@ include file="/WEB-INF/segments/footer.jspf" %>
 </body>

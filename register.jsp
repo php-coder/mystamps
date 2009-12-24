@@ -12,6 +12,10 @@
 <%@ include file="/WEB-INF/segments/header.jspf" %>
 <div id="content">
 	<h3>Регистрация на сайте</h3>
+	<div class="hint">
+		Если вы уже зарегистрированы, то необходимо <a href="auth.jsp">авторизоваться</a>.<br />
+		Если вы забыли пароль, то мы поможем его <a href="restore_password.jsp">восстановить</a>.
+	</div>
 		<div class="generic_form">
 			<form action="" method="post">
 				<table>

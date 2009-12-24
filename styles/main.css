@@ -39,3 +39,14 @@ body {
 	margin-left: 0;
 }
 
+.hint {
+	color: gray;
+	font-style: italic;
+	font-size: 80%;
+}
+
+#content .hint {
+	text-align: center;
+	margin-bottom: 20px;
+}
+

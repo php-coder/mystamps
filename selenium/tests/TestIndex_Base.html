@@ -53,7 +53,7 @@
 		<td></td>
 	</tr>
 	
-	<!-- check presentation of link to add_stamps.jsp -->
+	<!-- check presentation of link to restore_password.jsp -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
@@ -66,7 +66,38 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
+		<td>http://localhost:8080/stamps/restore_password.jsp</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to index.jsp -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	<!-- check presentation of link to add_stamps.jsp -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/ul/li[4]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>click</td>
+		<td>xpath=//div[@id='content']/ul/li[4]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
 		<td>http://localhost:8080/stamps/add_stamps.jsp</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to index.jsp -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
 		<td></td>
 	</tr>
 	

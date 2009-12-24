@@ -4,6 +4,8 @@
 		<td>http://localhost:8080/stamps/register.jsp</td>
 		<td></td>
 	</tr>
+	
+	<!-- check input fields -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>//input[@name="login"]</td>
@@ -34,4 +36,53 @@
 		<td>//input[@type="submit"]</td>
 		<td></td>
 	</tr>
+	
+	<!-- check presentation of link to auth.jsp -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a[1]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>click</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a[1]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://localhost:8080/stamps/auth.jsp</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to register.jsp -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	<tr>
+	
+	<!-- check presentation of link to restore_password.jsp -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a[2]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>click</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a[2]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://localhost:8080/stamps/restore_password.jsp</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to register.jsp -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	<tr>
+	
 </table>
