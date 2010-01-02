@@ -1,0 +1,33 @@
+<table>
+	
+	<tr>
+		<td>open</td>
+		<td>http://localhost:8080/stamps/page-does-not-exists.jsp</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//td[@id='error-code']</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//td[@id='error-code']</td>
+		<td>404</td>
+	</tr>
+	
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//td[@id='error-msg']</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//td[@id='error-msg']</td>
+		<td>«апрашиваема€<br />вами страница<br />не найдена</td>
+	</tr>
+	
+</table>
