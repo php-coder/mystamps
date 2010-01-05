@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.events.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
-<jsp:setProperty name="suspEvent" property="page" value="<%= request.getServletPath() %>" />
-<jsp:setProperty name="suspEvent" property="ip" value="<%= request.getRemoteAddr() %>" />
-<jsp:setProperty name="suspEvent" property="refererPage" value="<%= request.getHeader(\"referer\") %>" />
-<jsp:setProperty name="suspEvent" property="userAgent" value="<%= request.getHeader(\"user-agent\") %>" />
+<jsp:setProperty name="suspEvent" property="page" value="${pageContext.request.servletPath}" />
+<jsp:setProperty name="suspEvent" property="ip" value="${pageContext.request.remoteAddr}" />
+<jsp:setProperty name="suspEvent" property="refererPage" value="${headerValues[\"referer\"][0]}" />
+<jsp:setProperty name="suspEvent" property="userAgent" value="${headerValues[\"user-agent\"][0]}" />
 </jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
