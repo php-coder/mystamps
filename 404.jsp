@@ -1,5 +1,4 @@
 <%@ page isErrorPage="true" contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.events.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
 <jsp:setProperty name="suspEvent" property="page" value="${pageContext.request.servletPath}" />
