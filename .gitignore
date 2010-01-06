@@ -1,2 +1,3 @@
 logs/site.log
 WEB-INF/lib/*.jar
+WEB-INF/classes/ru/mystamps/site/events/*.class
