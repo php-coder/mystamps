@@ -1,7 +1,7 @@
 <%@ page isErrorPage="true" contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.events.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
-<jsp:setProperty name="suspEvent" property="page" value="${pageContext.request.servletPath}" />
+<jsp:setProperty name="suspEvent" property="page" value="${requestScope[\"javax.servlet.error.request_uri\"]}" />
 <jsp:setProperty name="suspEvent" property="ip" value="${pageContext.request.remoteAddr}" />
 <jsp:setProperty name="suspEvent" property="refererPage" value="${headerValues[\"referer\"][0]}" />
 <jsp:setProperty name="suspEvent" property="userAgent" value="${headerValues[\"user-agent\"][0]}" />
