@@ -1,5 +1,7 @@
 package ru.mystamps.site.events;
 
+import org.apache.log4j.Logger;
+
 public class SuspiciousEventBean {
 	
 	private String type = null;
@@ -8,10 +10,14 @@ public class SuspiciousEventBean {
 	private String refererPage = null;
 	private String userAgent = null;
 	
+	private Logger log = null;
+	
 	public SuspiciousEventBean() {
+		log = Logger.getRootLogger();
 	}
 	
 	public void setType(String type) {
+		log.debug("type: " + type);
 		this.type = type;
 	}
 	
@@ -20,6 +26,7 @@ public class SuspiciousEventBean {
 	}
 	
 	public void setPage(String page) {
+		log.debug("page: " + page);
 		this.page = page;
 	}
 	
@@ -28,6 +35,7 @@ public class SuspiciousEventBean {
 	}
 	
 	public void setIp(String ip) {
+		log.debug("ip: " + ip);
 		this.ip = ip;
 	}
 	
@@ -36,6 +44,7 @@ public class SuspiciousEventBean {
 	}
 	
 	public void setRefererPage(String refererPage) {
+		log.debug("referer: " + refererPage);
 		this.refererPage = refererPage;
 	}
 	
@@ -44,6 +53,7 @@ public class SuspiciousEventBean {
 	}
 	
 	public void setUserAgent(String userAgent) {
+		log.debug("user-agent: " + userAgent);
 		this.userAgent = userAgent;
 	}
 	
