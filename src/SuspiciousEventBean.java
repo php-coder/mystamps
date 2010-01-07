@@ -1,4 +1,4 @@
-package ru.mystamps.site.events;
+package ru.mystamps.site.beans;
 
 import org.apache.log4j.Logger;
 
