@@ -1,22 +1,53 @@
 <table>
 	<tr>
 		<td>open</td>
-		<td>http://localhost:8080/stamps/auth_user.jsp</td>
+		<td>http://localhost:8080/stamps/auth_user.jsp?lang=en</td>
 		<td></td>
 	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//title</td>
+		<td>MyStamps: authorization</td>
+	</tr>
+	
+	<!-- check page's header -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//h3</td>
+		<td>Authorization on site</td>
+	</tr>
+	
+	<!-- check input's lables -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/th[.="Login"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/th[.="Password"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check input fields -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>//input[@name="login"]</td>
 		<td></td>
 	</tr>
+	
 	<tr>
 		<td>assertElementPresent</td>
 		<td>//input[@name="pass"][@type="password"]</td>
 		<td></td>
 	</tr>
+	
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@type="submit"]</td>
+		<td>//input[@type="submit"][@value="Log in"]</td>
 		<td></td>
 	</tr>
+	
 </table>
