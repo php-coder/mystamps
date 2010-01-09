@@ -1,2 +1,1 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<div id="header">Мои марки</div>
+<div id="header"><fmt:message key="t_my_stamps" /></div>

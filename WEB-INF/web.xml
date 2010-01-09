@@ -4,6 +4,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 		http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
 	
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>i18n.Messages</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.locale</param-name>
+		<param-value>ru</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
+		<param-value>en</param-value>
+	</context-param>
+	
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>
