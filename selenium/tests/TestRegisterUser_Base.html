@@ -1,7 +1,48 @@
 <table>
 	<tr>
 		<td>open</td>
-		<td>http://localhost:8080/stamps/register_user.jsp</td>
+		<td>http://localhost:8080/stamps/register_user.jsp?lang=en</td>
+		<td></td>
+	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//title</td>
+		<td>MyStamps: registration</td>
+	</tr>
+	
+	<!-- check page's header -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//h3</td>
+		<td>Register on site</td>
+	</tr>
+	
+	<!-- check input's lables -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/th[.="Login"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/th[.="Password"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[3]/th[.="Password (again)"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[4]/th[.="E-mail"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[5]/th[.="Name"]</td>
 		<td></td>
 	</tr>
 	
@@ -33,15 +74,20 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@type="submit"]</td>
+		<td>//input[@type="submit"][@value="Register"]</td>
 		<td></td>
 	</tr>
 	
-	<!-- check presentation of link to auth_user.jsp -->
+	<!-- check link to auth_user.jsp -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/div[@class='hint']/a[1]</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>verifyTextPresent</td>
+		<td></td>
+		<td>If you already registered then you should pass authorization.</td>
 	</tr>
 	<tr>
 		<td>click</td>
@@ -61,11 +107,16 @@
 		<td></td>
 	<tr>
 	
-	<!-- check presentation of link to restore_password.jsp -->
+	<!-- check link to restore_password.jsp -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/div[@class='hint']/a[2]</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>verifyTextPresent</td>
+		<td></td>
+		<td>If you forget password then we may remind it.</td>
 	</tr>
 	<tr>
 		<td>click</td>
