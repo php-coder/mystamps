@@ -1,6 +1,4 @@
 <div id="footer">
 &copy;
-<a href="mailto:slava.semushin@gmail.com" title="<fmt:message key="t_write_email" />">
-	<fmt:message key="t_slava_semushin" />
-</a>, 2009
+<a href="mailto:slava.semushin@gmail.com" title="<fmt:message key="t_write_email" />"><fmt:message key="t_slava_semushin" /></a>, 2009
 </div>
