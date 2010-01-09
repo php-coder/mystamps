@@ -1,4 +1,5 @@
-<%@ page isErrorPage="true" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/segments/std.jspf" %>
+<%@ page isErrorPage="true" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.beans.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
 <jsp:setProperty name="suspEvent" property="page" value="${requestScope[\"javax.servlet.error.request_uri\"]}" />
@@ -10,7 +11,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>404: страница не найдена</title>
+<title><fmt:message key="t_404_title" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 <link rel="stylesheet" type="text/css" href="styles/main.css" />
 <link rel="stylesheet" type="text/css" href="styles/error.css" />
@@ -21,7 +22,12 @@
 	<table>
 		<tr>
 			<td id="error-code">404</td>
-			<td id="error-msg">Запрашиваемая<br />вами страница<br />не найдена</td>
+			<td id="error-msg">
+				<fmt:message key="t_404_description">
+					<fmt:param value ="<br />" />
+					<fmt:param value ="<br />" />
+				</fmt:message>
+			</td>
 		</tr>
 	</table>
 </div>

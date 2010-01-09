@@ -2,8 +2,15 @@
 	
 	<tr>
 		<td>open</td>
-		<td>http://localhost:8080/stamps/page-does-not-exists.jsp</td>
+		<td>http://localhost:8080/stamps/page-does-not-exists.jsp?lang=en</td>
 		<td></td>
+	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//title</td>
+		<td>404: page not found</td>
 	</tr>
 	
 	<tr>
@@ -27,7 +34,7 @@
 	<tr>
 		<td>verifyText</td>
 		<td>xpath=//td[@id='error-msg']</td>
-		<td>«апрашиваема€<br />вами страница<br />не найдена</td>
+		<td>Requested<br />page<br />not found</td>
 	</tr>
 	
 </table>
