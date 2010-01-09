@@ -1,9 +1,77 @@
 <table>
 	<tr>
 		<td>open</td>
-		<td>http://localhost:8080/stamps/add_stamps.jsp</td>
+		<td>http://localhost:8080/stamps/add_stamps.jsp?lang=en</td>
 		<td></td>
 	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//title</td>
+		<td>MyStamps: add stamp series</td>
+	</tr>
+	
+	<!-- check page's header -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//h3</td>
+		<td>Add stamp series</td>
+	</tr>
+	
+	<!-- check input's lables -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/th[.="Country"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/th[.="Year"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[3]/th[.="Count"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[4]/th[.="Without perforation"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[5]/th[.="Michel #"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[6]/th[.="Scott #"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[7]/th[.="Yvert #"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[8]/th[.="Gibbons #"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[9]/th[.="Comment"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[10]/th[.="Image"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check input fields -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>//input[@name="country"]</td>
@@ -56,7 +124,7 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@type="submit"]</td>
+		<td>//input[@type="submit"][@value="Add"]</td>
 		<td></td>
 	</tr>
 </table>

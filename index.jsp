@@ -21,7 +21,7 @@
 	<li><a href="<c:out value="${registerUserUrl}" />"><fmt:message key="t_register_on_site" /></a></li>
 	<li><a href="<c:out value="${authUserUrl}" />"><fmt:message key="t_auth_on_site" /></a></li>
 	<li><a href="<c:out value="${restorePasswordUrl}" />"><fmt:message key="t_recover_forget_password" /></a></li>
-	<li><a href="<c:out value="${addStampsUrl}" />"><fmt:message key="t_add_series_to_database" /></a></li>
+	<li><a href="<c:out value="${addStampsUrl}" />"><fmt:message key="t_add_series" /></a></li>
 </ul>
 </div>
 <%@ include file="/WEB-INF/segments/footer.jspf" %>
