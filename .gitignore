@@ -1,3 +1,4 @@
 logs/site.log
 WEB-INF/lib/*.jar
 WEB-INF/classes/ru/mystamps/site/beans/*.class
+WEB-INF/classes/ru/mystamps/site/filters/*.class
