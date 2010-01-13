@@ -20,11 +20,13 @@ public class MaintenanceFilter implements Filter {
 	public MaintenanceFilter() {
 	}
 	
+	@Override
 	public void init(FilterConfig config) {
 		this.config = config;
 		this.log = Logger.getRootLogger();
 	}
 	
+	@Override
 	public void doFilter(ServletRequest request,
 						ServletResponse response,
 						FilterChain chain)
@@ -56,6 +58,7 @@ public class MaintenanceFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 	
+	@Override
 	public void destroy() {
 	}
 }
