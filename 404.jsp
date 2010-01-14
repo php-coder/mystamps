@@ -4,8 +4,8 @@
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
 <jsp:setProperty name="suspEvent" property="page" value="${requestScope[\"javax.servlet.error.request_uri\"]}" />
 <jsp:setProperty name="suspEvent" property="ip" value="${pageContext.request.remoteAddr}" />
-<jsp:setProperty name="suspEvent" property="refererPage" value="${headerValues[\"referer\"][0]}" />
-<jsp:setProperty name="suspEvent" property="userAgent" value="${headerValues[\"user-agent\"][0]}" />
+<jsp:setProperty name="suspEvent" property="refererPage" value="${header[\"referer\"]}" />
+<jsp:setProperty name="suspEvent" property="userAgent" value="${header[\"user-agent\"]}" />
 </jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
