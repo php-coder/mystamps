@@ -45,6 +45,10 @@ body {
 	font-size: 80%;
 }
 
+.error {
+	color: darkred;
+}
+
 #content .hint {
 	text-align: center;
 	margin-bottom: 20px;

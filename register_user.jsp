@@ -3,6 +3,10 @@
 <c:url value="/auth_user.jsp" var="authUserUrl" />
 <c:url value="/restore_password.jsp" var="restorePasswordUrl" />
 
+<c:set var="hasErrors" value="${requestScope.context.countFailedElements > 0}" />
+<c:set var="elements" value="${requestScope.context.elements}" />
+<c:set var="failedElements" value="${requestScope.context.failedElements}" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,27 +36,62 @@
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>
-						<td><input type="text" name="login" /></td>
+						<td><input type="text" name="login" value="<c:out value='${elements.login}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.login}">
+									<fmt:message key="${failedElements.login}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password" /></th>
-						<td><input type="password" name="pass1" /></td>
+						<td><input type="password" name="pass1" value="<c:out value='${elements.pass1}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.pass1}">
+									<fmt:message key="${failedElements.pass1}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password_again" /></th>
-						<td><input type="password" name="pass2" /></td>
+						<td><input type="password" name="pass2" value="<c:out value='${elements.pass2}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.pass2}">
+									<fmt:message key="${failedElements.pass2}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th><fmt:message key="t_email" /></th>
-						<td><input type="text" name="email" /></td>
+						<td><input type="text" name="email" value="<c:out value='${elements.email}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.email}">
+									<fmt:message key="${failedElements.email}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th><fmt:message key="t_name" /></th>
-						<td><input type="text" name="name" /></td>
+						<td><input type="text" name="name" value="<c:out value='${elements.name}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.name}">
+									<fmt:message key="${failedElements.name}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th></th>
-						<td><input type="submit" value="<fmt:message key="t_register" />" /></td>
+						<td colspan="2"><input type="submit" value="<fmt:message key="t_register" />" /></td>
 					</tr>
 				</table>
 			</form>
