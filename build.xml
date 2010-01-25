@@ -1,0 +1,29 @@
+<project name="MyStamps" default="compile" basedir=".">
+	
+	<target name="init" description="Initiate environment">
+		<property name="src.dir" value="src" />
+		<property name="build.dir" value="WEB-INF/classes" />
+		<property name="lib.dir" value="WEB-INF/lib" />
+		
+		<path id="classpath">
+			<fileset dir="${build.dir}" />
+			<fileset dir="${lib.dir}" includes="*.jar" />
+		</path>
+		
+		<property name="verbose" value="false" />
+	</target>
+	
+	<target name="compile" depends="init" description="Compile all classes">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" verbose="${verbose}">
+			<include name="**/*.java" />
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	
+	<target name="clean" depends="init" description="Clean all class files">
+		<delete verbose="${verbose}">
+			<fileset dir="${build.dir}" includes="**/*.class" />
+		</delete>
+	</target>
+	
+</project>
