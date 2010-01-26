@@ -12,7 +12,7 @@
 <div id="content">
 	<h3><fmt:message key="t_add_series_ucfirst" /></h3>
 		<div class="generic_form">
-			<form action="" method="post" enctype="multipart/form-data">
+			<form action="" method="post" enctype="multipart/form-data" id="add_stamps_form">
 				<table>
 					<tr>
 						<th><fmt:message key="t_country" /></th>

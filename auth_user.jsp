@@ -17,7 +17,7 @@
 <div id="content">
 	<h3><fmt:message key="t_authorization_on_site" /></h3>
 		<div class="generic_form">
-			<form action="" method="post">
+			<form action="" method="post" id="auth_form">
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>

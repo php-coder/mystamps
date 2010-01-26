@@ -32,7 +32,7 @@
 		.
 	</div>
 		<div class="generic_form">
-			<form action="" method="post">
+			<form action="" method="post" id="register_form">
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>
