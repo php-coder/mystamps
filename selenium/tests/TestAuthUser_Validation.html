@@ -1,0 +1,84 @@
+<table>
+	<tr>
+		<td>open</td>
+		<td>http://localhost:8080/stamps/auth_user.jsp?lang=en</td>
+		<td></td>
+	</tr>
+	
+	<!-- just try to send empty data -->
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/td[@class="error"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/td[@class="error"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	
+	<!-- fill login field -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>login</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>login</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/td[@class="error"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/td[@class="error"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	
+	<!-- fill pass field -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>password</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[1]/td[@class="error"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>password</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="content"]/div[@class="generic_form"]/form/table/tbody/tr[2]/td[@class="error"]</td>
+		<td></td>
+	</tr>
+	
+</table>

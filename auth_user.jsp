@@ -1,4 +1,9 @@
 <%@ include file="/WEB-INF/segments/std.jspf" %>
+
+<c:set var="hasErrors" value="${requestScope.context.countFailedElements > 0}" />
+<c:set var="elements" value="${requestScope.context.elements}" />
+<c:set var="failedElements" value="${requestScope.context.failedElements}" />
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,11 +21,25 @@
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>
-						<td><input type="text" name="login" /></td>
+						<td><input type="text" name="login" value="<c:out value='${elements.login}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.login}">
+									<fmt:message key="${failedElements.login}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password" /></th>
-						<td><input type="password" name="pass" /></td>
+						<td><input type="password" name="pass" value="<c:out value='${elements.pass}' />" /></td>
+						<c:if test="${hasErrors}">
+							<td class="error">
+								<c:if test="${! empty failedElements.pass}">
+									<fmt:message key="${failedElements.pass}" />
+								</c:if>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th></th>
