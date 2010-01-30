@@ -1,5 +1,7 @@
 package ru.mystamps.data.validators;
 
+import javax.servlet.ServletRequest;
+
 public class NotEmpty extends AbstractValidator {
 	
 	public NotEmpty() {
@@ -11,7 +13,7 @@ public class NotEmpty extends AbstractValidator {
 	}
 	
 	@Override
-	public boolean isValid(String data) {
+	public boolean isValid(String data, ServletRequest request) {
 		
 		if (data == null) {
 			throw new IllegalArgumentException("Value cannot be a null!");

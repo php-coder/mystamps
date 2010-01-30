@@ -61,7 +61,7 @@ public class AuthUserDataFilter implements Filter {
 				}
 				
 				// check value
-				if (! notEmptyValidator.isValid(fieldValue)) {
+				if (! notEmptyValidator.isValid(fieldValue, request)) {
 					contextObject.addFailedElement(fieldName, notEmptyValidator.getMessage());
 				}
 				

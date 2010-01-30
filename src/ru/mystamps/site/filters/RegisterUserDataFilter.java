@@ -1,6 +1,8 @@
 package ru.mystamps.site.filters;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
@@ -9,38 +11,38 @@ import javax.servlet.ServletResponse;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletException;
 
-import org.apache.log4j.Logger;
-
 import ru.mystamps.data.validators.Validator;
 import ru.mystamps.data.validators.NotEmpty;
+import ru.mystamps.data.validators.PasswordConfirm;
 import ru.mystamps.site.ContextObject;
 
 public class RegisterUserDataFilter implements Filter {
 	
-	private Logger log = null;
-	
 	/**
-	 * Names of field which should not have empty values.
+	 * Map of fields and its validators.
 	 **/
-	private static final String[] notEmptyFields = {
-		"login",
-		"pass1",
-		"pass2",
-		"email",
-		"name"
-	};
+	private Map<String, Validator[]> validationRules = new HashMap<String, Validator[]>();
 	
 	/**
 	 * Instance of NotEmpty validator.
 	 **/
 	private static final Validator notEmptyValidator = new NotEmpty("tv_empty_value");
 	
+	/**
+	 * Instance of PasswordConfirm validator.
+	 **/
+	private static final Validator passwordConfirm = new PasswordConfirm("tv_password_mismatch");
+	
 	public RegisterUserDataFilter() {
+		validationRules.put("login", new Validator[]{notEmptyValidator});
+		validationRules.put("pass1", new Validator[]{notEmptyValidator, passwordConfirm});
+		validationRules.put("pass2", new Validator[]{notEmptyValidator});
+		validationRules.put("email", new Validator[]{notEmptyValidator});
+		validationRules.put("name",  new Validator[]{notEmptyValidator});
 	}
 	
 	@Override
 	public void init(FilterConfig config) {
-		this.log = Logger.getRootLogger();
 	}
 	
 	@Override
@@ -51,12 +53,13 @@ public class RegisterUserDataFilter implements Filter {
 		
 		// if user sent data
 		if (request.getParameterNames().hasMoreElements()) {
-			int valuesReceivedCounter = 0;
 			ContextObject contextObject = new ContextObject();
 			
 			// check each field
-			for (String fieldName : notEmptyFields) {
-				String fieldValue = request.getParameter(fieldName);
+			for (Map.Entry<String, Validator[]> field : validationRules.entrySet()) {
+				final String fieldName = field.getKey();
+				final Validator[] fieldValidators = field.getValue();
+				final String fieldValue = request.getParameter(fieldName);
 				
 				// user not sent value for this field
 				if (fieldValue == null) {
@@ -64,24 +67,16 @@ public class RegisterUserDataFilter implements Filter {
 				}
 				
 				// check value
-				if (! notEmptyValidator.isValid(fieldValue)) {
-					contextObject.addFailedElement(fieldName, notEmptyValidator.getMessage());
+				for (Validator validator : fieldValidators) {
+					if (! validator.isValid(fieldValue, request)) {
+						contextObject.addFailedElement(fieldName, validator.getMessage());
+						// don't check by other validators
+						break;
+					}
 				}
 				
 				// don't lost user's data
 				contextObject.addElement(fieldName, fieldValue);
-				
-				++valuesReceivedCounter;
-			}
-			
-			if (valuesReceivedCounter != notEmptyFields.length) {
-				StringBuffer msg = new StringBuffer();
-				msg.append("Values received: ");
-				msg.append(valuesReceivedCounter);
-				msg.append(" but ");
-				msg.append(notEmptyFields.length);
-				msg.append(" expected!");
-				log.warn(msg.toString());
 			}
 			
 			request.setAttribute("context", contextObject);
