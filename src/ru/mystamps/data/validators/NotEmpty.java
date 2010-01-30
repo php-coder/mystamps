@@ -14,10 +14,7 @@ public class NotEmpty extends AbstractValidator {
 	
 	@Override
 	public boolean isValid(String data, ServletRequest request) {
-		
-		if (data == null) {
-			throw new IllegalArgumentException("Value cannot be a null!");
-		}
+		checkNotNullArg(data);
 		
 		if (! data.equals("")) {
 			return true;
