@@ -1,27 +1,13 @@
 package ru.mystamps.data.validators;
 
-/**
- * @todo throw Validator_Exception
- **/
-public class NotEmpty implements Validator {
-	
-	private String message = "Value should not be empty";
+public class NotEmpty extends AbstractValidator {
 	
 	public NotEmpty() {
+		setMessage("Value should not be empty");
 	}
 	
 	public NotEmpty(String message) {
-		this.message = message;
-	}
-	
-	@Override
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	@Override
-	public String getMessage() {
-		return message;
+		setMessage(message);
 	}
 	
 	@Override
