@@ -32,12 +32,12 @@ public class MaintenanceFilter implements Filter {
 						FilterChain chain)
 				throws IOException, ServletException {
 		
-		String mode = config.getInitParameter("enableMaintainanceMode");
+		final String mode = config.getInitParameter("enableMaintainanceMode");
 		if (mode == null || mode.equals("")) {
 			throw new ServletException("enableMaintainanceMode parameter not set!");
 		}
 		
-		String allowedIP = config.getInitParameter("allowedIP");
+		final String allowedIP = config.getInitParameter("allowedIP");
 		if (allowedIP == null || allowedIP.equals("")) {
 			throw new ServletException("allowedIP parameter not set!");
 		}
