@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/segments/std.jspf" %>
 
-<c:set var="hasErrors" value="${requestScope.context.countFailedElements > 0}" />
+<c:set var="hasErrors" value="${requestScope.context.countFailedElements gt 0}" />
 <c:set var="elements" value="${requestScope.context.elements}" />
 <c:set var="failedElements" value="${requestScope.context.failedElements}" />
 

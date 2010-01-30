@@ -3,7 +3,7 @@
 <c:url value="/auth_user.jsp" var="authUserUrl" />
 <c:url value="/restore_password.jsp" var="restorePasswordUrl" />
 
-<c:set var="hasErrors" value="${requestScope.context.countFailedElements > 0}" />
+<c:set var="hasErrors" value="${requestScope.context.countFailedElements gt 0}" />
 <c:set var="elements" value="${requestScope.context.elements}" />
 <c:set var="failedElements" value="${requestScope.context.failedElements}" />
 
