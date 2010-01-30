@@ -3,7 +3,7 @@ package ru.mystamps.data.validators;
 public class NotEmpty extends AbstractValidator {
 	
 	public NotEmpty() {
-		setMessage("Value should not be empty");
+		this("Value should not be empty");
 	}
 	
 	public NotEmpty(String message) {
