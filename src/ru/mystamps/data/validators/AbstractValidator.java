@@ -5,19 +5,24 @@ public abstract class AbstractValidator implements Validator {
 	private String message;
 	
 	/**
-	 * @throws IllegalArgumentException when message is null or empty
+	 * Check if argument is not null and not empty.
+	 *
+	 * @throws IllegalArgumentException when argument is null or empty
 	 **/
+	protected void checkNotEmptyArg(String argument) {
+		
+		if (argument == null) {
+			throw new IllegalArgumentException("Argument is null!");
+		}
+		
+		if (argument.equals("")) {
+			throw new IllegalArgumentException("Argument is empty!");
+		}
+	}
+	
 	@Override
 	public void setMessage(String message) {
-		
-		if (message == null) {
-			throw new IllegalArgumentException("Message is null!");
-		}
-		
-		if (message.equals("")) {
-			throw new IllegalArgumentException("Message is empty!");
-		}
-		
+		checkNotEmptyArg(message);
 		this.message = message;
 	}
 	
