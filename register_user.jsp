@@ -36,7 +36,7 @@
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>
-						<td><input type="text" name="login" value="<c:out value='${elements.login}' />" /></td>
+						<td><input type="text" name="login" value="${elements.login}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.login}">
@@ -47,7 +47,7 @@
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password" /></th>
-						<td><input type="password" name="pass1" value="<c:out value='${elements.pass1}' />" /></td>
+						<td><input type="password" name="pass1" value="${elements.pass1}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.pass1}">
@@ -58,7 +58,7 @@
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password_again" /></th>
-						<td><input type="password" name="pass2" value="<c:out value='${elements.pass2}' />" /></td>
+						<td><input type="password" name="pass2" value="${elements.pass2}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.pass2}">
@@ -69,7 +69,7 @@
 					</tr>
 					<tr>
 						<th><fmt:message key="t_email" /></th>
-						<td><input type="text" name="email" value="<c:out value='${elements.email}' />" /></td>
+						<td><input type="text" name="email" value="${elements.email}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.email}">
@@ -80,7 +80,7 @@
 					</tr>
 					<tr>
 						<th><fmt:message key="t_name" /></th>
-						<td><input type="text" name="name" value="<c:out value='${elements.name}' />" /></td>
+						<td><input type="text" name="name" value="${elements.name}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.name}">

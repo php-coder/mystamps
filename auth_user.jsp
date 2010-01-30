@@ -21,7 +21,7 @@
 				<table>
 					<tr>
 						<th><fmt:message key="t_login" /></th>
-						<td><input type="text" name="login" value="<c:out value='${elements.login}' />" /></td>
+						<td><input type="text" name="login" value="${elements.login}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.login}">
@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<th><fmt:message key="t_password" /></th>
-						<td><input type="password" name="pass" value="<c:out value='${elements.pass}' />" /></td>
+						<td><input type="password" name="pass" value="${elements.pass}" /></td>
 						<c:if test="${hasErrors}">
 							<td class="error">
 								<c:if test="${! empty failedElements.pass}">
