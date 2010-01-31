@@ -21,17 +21,20 @@ public class RegisterUserDataFilter implements Filter {
 	/**
 	 * Map of fields and its validators.
 	 **/
-	private Map<String, Validator[]> validationRules = new HashMap<String, Validator[]>();
+	private Map<String, Validator[]> validationRules =
+		new HashMap<String, Validator[]>();
 	
 	/**
 	 * Instance of NotEmpty validator.
 	 **/
-	private static final Validator notEmptyValidator = new NotEmpty("tv_empty_value");
+	private static final Validator notEmptyValidator =
+		new NotEmpty("tv_empty_value");
 	
 	/**
 	 * Instance of PasswordConfirm validator.
 	 **/
-	private static final PasswordConfirm passwordConfirm = new PasswordConfirm("tv_password_mismatch");
+	private static final PasswordConfirm passwordConfirm =
+		new PasswordConfirm("tv_password_mismatch");
 	
 	public RegisterUserDataFilter() {
 		validationRules.put("login", new Validator[]{notEmptyValidator});
