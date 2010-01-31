@@ -31,11 +31,11 @@ public class RegisterUserDataFilter implements Filter {
 	/**
 	 * Instance of PasswordConfirm validator.
 	 **/
-	private static final Validator passwordConfirm = new PasswordConfirm("tv_password_mismatch");
+	private static final PasswordConfirm passwordConfirm = new PasswordConfirm("tv_password_mismatch");
 	
 	public RegisterUserDataFilter() {
 		validationRules.put("login", new Validator[]{notEmptyValidator});
-		validationRules.put("pass1", new Validator[]{notEmptyValidator, passwordConfirm});
+		validationRules.put("pass1", new Validator[]{notEmptyValidator});
 		validationRules.put("pass2", new Validator[]{notEmptyValidator});
 		validationRules.put("email", new Validator[]{notEmptyValidator});
 		validationRules.put("name",  new Validator[]{notEmptyValidator});
@@ -77,6 +77,19 @@ public class RegisterUserDataFilter implements Filter {
 				
 				// don't lost user's data
 				contextObject.addElement(fieldName, fieldValue);
+			}
+			
+			// check password and its confirmation only if:
+			// - its presents in user input
+			// - its passes all standart checks
+			final String field1 = passwordConfirm.getFirstFieldName();
+			final String field2 = passwordConfirm.getSecondFieldName();
+			if (request.getParameter(field1) != null &&
+				request.getParameter(field2) != null &&
+				! contextObject.getFailedElements().containsKey(field1) &&
+				! contextObject.getFailedElements().containsKey(field2) &&
+				! passwordConfirm.isValid("", request)) {
+				contextObject.addFailedElement(field1, passwordConfirm.getMessage());
 			}
 			
 			request.setAttribute("context", contextObject);
