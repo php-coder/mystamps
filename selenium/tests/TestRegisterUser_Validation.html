@@ -307,6 +307,43 @@
 		<td></td>
 	</tr>
 	
+	<!-- check than password and login not match -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>admin</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass1"]</td>
+		<td>admin</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>admin</td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="pass1"]</td>
+		<td>admin</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td[@class="error"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[2]/td[@class="error"]</td>
+		<td>Password and login should be different</td>
+	</tr>
+	
 	<!-- check password mismatch detection -->
 	<tr>
 		<td>type</td>

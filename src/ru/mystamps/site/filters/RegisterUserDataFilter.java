@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import ru.mystamps.data.validators.Validator;
 import ru.mystamps.data.validators.NotEmpty;
 import ru.mystamps.data.validators.PasswordConfirm;
+import ru.mystamps.data.validators.PasswordLoginMismatch;
 import ru.mystamps.site.ContextObject;
 
 public class RegisterUserDataFilter implements Filter {
@@ -35,6 +36,12 @@ public class RegisterUserDataFilter implements Filter {
 	 **/
 	private static final PasswordConfirm passwordConfirm =
 		new PasswordConfirm("tv_password_mismatch");
+	
+	/**
+	 * Instance of PasswordLoginMismatch validator.
+	 **/
+	private static final PasswordLoginMismatch passwordLoginMismatch =
+		new PasswordLoginMismatch("tv_password_login_match");
 	
 	public RegisterUserDataFilter() {
 		validationRules.put("login", new Validator[]{notEmptyValidator});
@@ -82,11 +89,27 @@ public class RegisterUserDataFilter implements Filter {
 				contextObject.addElement(fieldName, fieldValue);
 			}
 			
+			String field1 = null;
+			String field2 = null;
+			
+			// check password and login for unicity only if:
+			// - its presents in user input
+			// - its passes all standart checks
+			field1 = passwordLoginMismatch.getFirstFieldName();
+			field2 = passwordLoginMismatch.getSecondFieldName();
+			if (request.getParameter(field1) != null &&
+				request.getParameter(field2) != null &&
+				! contextObject.getFailedElements().containsKey(field1) &&
+				! contextObject.getFailedElements().containsKey(field2) &&
+				! passwordLoginMismatch.isValid("", request)) {
+				contextObject.addFailedElement(field2, passwordLoginMismatch.getMessage());
+			}
+			
 			// check password and its confirmation only if:
 			// - its presents in user input
 			// - its passes all standart checks
-			final String field1 = passwordConfirm.getFirstFieldName();
-			final String field2 = passwordConfirm.getSecondFieldName();
+			field1 = passwordConfirm.getFirstFieldName();
+			field2 = passwordConfirm.getSecondFieldName();
 			if (request.getParameter(field1) != null &&
 				request.getParameter(field2) != null &&
 				! contextObject.getFailedElements().containsKey(field1) &&
