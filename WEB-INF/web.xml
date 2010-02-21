@@ -6,7 +6,7 @@
 	
 	<context-param>
 		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-		<param-value>i18n.Messages</param-value>
+		<param-value>ru.mystamps.i18n.Messages</param-value>
 	</context-param>
 	
 	<context-param>
