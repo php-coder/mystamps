@@ -33,7 +33,7 @@
 						<table>
 							<tr>
 								<th>
-									<h:outputText value="#{m.t_login}" />
+									<h:outputLabel for="login" value="#{m.t_login}" />
 								</th>
 								<td>
 									<h:inputText id="login" required="true" binding="#{register.loginInput}" />
@@ -44,7 +44,7 @@
 							</tr>
 							<tr>
 								<th>
-									<h:outputText value="#{m.t_password}" />
+									<h:outputLabel for="pass1" value="#{m.t_password}" />
 								</th>
 								<td>
 									<h:inputSecret id="pass1"
@@ -59,7 +59,7 @@
 							</tr>
 							<tr>
 								<th>
-									<h:outputText value="#{m.t_password_again}" />
+									<h:outputLabel for="pass2" value="#{m.t_password_again}" />
 								</th>
 								<td>
 									<h:inputSecret id="pass2"
@@ -73,7 +73,7 @@
 							</tr>
 							<tr>
 								<th>
-									<h:outputText value="#{m.t_email}" />
+									<h:outputLabel for="email" value="#{m.t_email}" />
 								</th>
 								<td>
 									<h:inputText id="email" required="true" />
@@ -84,7 +84,7 @@
 							</tr>
 							<tr>
 								<th>
-									<h:outputText value="#{m.t_name}" />
+									<h:outputLabel for="name" value="#{m.t_name}" />
 								</th>
 								<td>
 									<h:inputText id="name" required="true" />
