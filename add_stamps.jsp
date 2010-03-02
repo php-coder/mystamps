@@ -18,44 +18,44 @@
 						<h:form id="add_stamps_form" prependId="false">
 							<table>
 								<tr>
-									<th><h:outputText value="#{m.t_country}" /></th>
+									<th><h:outputLabel for="country" value="#{m.t_country}" /></th>
 									<td><h:inputText id="country" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_year}" /></th>
+									<th><h:outputLabel for="year" value="#{m.t_year}" /></th>
 									<td><h:inputText id="year" maxlength="4" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_count}" /></th>
+									<th><h:outputLabel for="count" value="#{m.t_count}" /></th>
 									<td><h:inputText id="count" maxlength="2" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_without_perforation}" /></th>
+									<th><h:outputLabel for="woperf" value="#{m.t_without_perforation}" /></th>
 									<td><h:selectBooleanCheckbox id="woperf" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_michel_no}" /></th>
+									<th><h:outputLabel for="michelno" value="#{m.t_michel_no}" /></th>
 									<td><h:inputText id="michelno" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_scott_no}" /></th>
+									<th><h:outputLabel for="scottno" value="#{m.t_scott_no}" /></th>
 									<td><h:inputText id="scottno" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_yvert_no}" /></th>
+									<th><h:outputLabel for="yvertno" value="#{m.t_yvert_no}" /></th>
 									<td><h:inputText id="yvertno" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_sg_no}" /></th>
+									<th><h:outputLabel for="gibbonsno" value="#{m.t_sg_no}" /></th>
 									<td><h:inputText id="gibbonsno" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_comment}" /></th>
+									<th><h:outputLabel for="comment" value="#{m.t_comment}" /></th>
 									<td><h:inputTextarea id="comment" cols="22" rows="3" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_image}" /></th>
-									<td><input type="file" name="image" /></td>
+									<th><h:outputText value="<label for=\"image\">#{m.t_image}</label>" escape="false" /></th>
+									<td><input type="file" id="image" name="image" /></td>
 								</tr>
 								<tr>
 									<th></th>
