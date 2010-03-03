@@ -59,9 +59,9 @@
 							<h:inputText id="name" required="true" />
 							<h:message for="name" styleClass="error" />
 							
-							<h:outputText value="" />
+							<h:panelGroup />
 							<h:commandButton id="submit" type="submit" value="#{m.t_register}" />
-							<h:outputText value="" />
+							<h:panelGroup />
 						</h:panelGrid>
 					</h:form>
 				</div>

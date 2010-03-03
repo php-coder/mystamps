@@ -49,7 +49,7 @@
 									<h:outputText value="<input type=\"file\" id=\"image\" name=\"image\" />"
 										escape="false" />
 									
-									<h:outputText value="" />
+									<h:panelGroup />
 									<h:commandButton id="submit" type="submit" value="#{m.t_add}" />
 							</h:panelGrid>
 						</h:form>

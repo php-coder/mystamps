@@ -25,9 +25,9 @@
 								<h:inputSecret id="pass" redisplay="true" required="true" />
 								<h:message for="pass" styleClass="error" />
 								
-								<h:outputText value="" />
+								<h:panelGroup />
 								<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
-								<h:outputText value="" />
+								<h:panelGroup />
 							</h:panelGrid>
 						</h:form>
 					</div>
