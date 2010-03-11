@@ -14,15 +14,11 @@
 		<body>
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
-				<table>
-					<tr>
-						<td id="error-msg">
-							<h:outputFormat value="#{m.t_maintenance_on_site}" escape="false">
-								<f:param value="<br />" />
-							</h:outputFormat>
-						</td>
-					</tr>
-				</table>
+				<div id="error-msg">
+					<h:outputFormat value="#{m.t_maintenance_on_site}" escape="false">
+						<f:param value="<br />" />
+					</h:outputFormat>
+				</div>
 			</div>
 			<%@ include file="/WEB-INF/segments/footer.jspf" %>
 		</body>
