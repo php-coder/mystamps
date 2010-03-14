@@ -16,24 +16,19 @@
 				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
 					<div class="generic_form">
 						<h:form id="auth_form" prependId="false">
-							<table>
-								<tr>
-									<th><h:outputLabel for="login" value="#{m.t_login}" /></th>
-									<td><h:inputText id="login" required="true" /></td>
-									<td class="error"><h:message for="login" /></td>
-								</tr>
-								<tr>
-									<th><h:outputLabel for="pass" value="#{m.t_password}" /></th>
-									<td><h:inputSecret id="pass" redisplay="true" required="true" />
-									<td class="error"><h:message for="pass" /></td>
-								</tr>
-								<tr>
-									<th></th>
-									<td colspan="2">
-										<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
-									</td>
-								</tr>
-							</table>
+							<h:panelGrid columns="3" columnClasses=",,error">
+								<h:outputLabel for="login" value="#{m.t_login}" />
+								<h:inputText id="login" required="true" />
+								<h:message for="login" />
+								
+								<h:outputLabel for="pass" value="#{m.t_password}" />
+								<h:inputSecret id="pass" redisplay="true" required="true" />
+								<h:message for="pass" />
+								
+								<h:outputText value="" />
+								<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
+								<h:outputText value="" />
+							</h:panelGrid>
 						</h:form>
 					</div>
 			</div>
