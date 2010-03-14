@@ -30,11 +30,11 @@
 				</div>
 				<div class="generic_form">
 					<h:form id="register_form" prependId="false">
-						<h:panelGrid columns="3" columnClasses=",,error">
+						<h:panelGrid columns="3">
 							<h:outputLabel for="login" value="#{m.t_login}" />
 							<h:inputText id="login" required="true"
 								binding="#{register.loginInput}" />
-							<h:message for="login" />
+							<h:message for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />
 							<h:inputSecret id="pass1"
@@ -42,22 +42,22 @@
 								binding="#{register.passwordInput}"
 								validator="#{register.validatePasswordLoginMismatch}"
 								redisplay="true" />
-							<h:message for="pass1" />
+							<h:message for="pass1" styleClass="error" />
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
 							<h:inputSecret id="pass2"
 								required="true"
 								validator="#{register.validatePasswordConfirm}"
 								redisplay="true" />
-							<h:message for="pass2" />
+							<h:message for="pass2" styleClass="error" />
 							
 							<h:outputLabel for="email" value="#{m.t_email}" />
 							<h:inputText id="email" required="true" />
-							<h:message for="email" />
+							<h:message for="email" styleClass="error" />
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:inputText id="name" required="true" />
-							<h:message for="name" />
+							<h:message for="name" styleClass="error" />
 							
 							<h:outputText value="" />
 							<h:commandButton id="submit" type="submit" value="#{m.t_register}" />
