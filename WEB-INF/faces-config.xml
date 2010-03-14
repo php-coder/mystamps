@@ -12,7 +12,13 @@
 			<var>m</var>
 		</resource-bundle>
 		
+		<resource-bundle>
+			<base-name>ru.mystamps.i18n.ErrorMessages</base-name>
+			<var>e</var>
+		</resource-bundle>
+		
 		<message-bundle>ru.mystamps.i18n.Messages</message-bundle>
+		<message-bundle>ru.mystamps.i18n.ErrorMessages</message-bundle>
 		
 		<locale-config>
 			<default-locale>ru</default-locale>
