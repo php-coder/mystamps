@@ -1,6 +1,9 @@
 CREATE DATABASE mystamps;
 USE mystamps;
 
+----
+-- users
+----
 CREATE TABLE `users` (
 	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
 	`login` VARCHAR(20) NOT NULL,
@@ -13,12 +16,20 @@ CREATE TABLE `users` (
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+----
+-- suspicious_activities_types
+----
 CREATE TABLE `suspicious_activities_types` (
 	`id` TINYINT(2) UNSIGNED AUTO_INCREMENT NOT NULL,
 	`name` VARCHAR(100) NOT NULL,
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+INSERT INTO suspicious_activities_types(name) VALUES("PageNotFound");
+
+----
+-- suspicious_activities
+----
 CREATE TABLE `suspicious_activities` (
 	`type_id` TINYINT(2) UNSIGNED NOT NULL,
 	`date` DATETIME NOT NULL,
