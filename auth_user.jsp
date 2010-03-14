@@ -16,14 +16,14 @@
 				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
 					<div class="generic_form">
 						<h:form id="auth_form" prependId="false">
-							<h:panelGrid columns="3" columnClasses=",,error">
+							<h:panelGrid columns="3">
 								<h:outputLabel for="login" value="#{m.t_login}" />
 								<h:inputText id="login" required="true" />
-								<h:message for="login" />
+								<h:message for="login" styleClass="error" />
 								
 								<h:outputLabel for="pass" value="#{m.t_password}" />
 								<h:inputSecret id="pass" redisplay="true" required="true" />
-								<h:message for="pass" />
+								<h:message for="pass" styleClass="error" />
 								
 								<h:outputText value="" />
 								<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
