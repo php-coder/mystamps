@@ -18,12 +18,12 @@
 						<h:form id="auth_form" prependId="false">
 							<table>
 								<tr>
-									<th><h:outputText value="#{m.t_login}" /></th>
+									<th><h:outputLabel for="login" value="#{m.t_login}" /></th>
 									<td><h:inputText id="login" required="true" /></td>
 									<td class="error"><h:message for="login" /></td>
 								</tr>
 								<tr>
-									<th><h:outputText value="#{m.t_password}" /></th>
+									<th><h:outputLabel for="pass" value="#{m.t_password}" /></th>
 									<td><h:inputSecret id="pass" redisplay="true" required="true" />
 									<td class="error"><h:message for="pass" /></td>
 								</tr>
