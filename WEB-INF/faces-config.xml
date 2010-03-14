@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+	
+	<application>
+		
+		<resource-bundle>
+			<base-name>ru.mystamps.i18n.Messages</base-name>
+			<var>m</var>
+		</resource-bundle>
+		
+		<message-bundle>ru.mystamps.i18n.Messages</message-bundle>
+		
+		<locale-config>
+			<default-locale>ru</default-locale>
+			<supported-locale>ru</supported-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+		
+		<managed-bean>
+			<managed-bean-name>register</managed-bean-name>
+			<managed-bean-class>ru.mystamps.site.beans.RegisterBean</managed-bean-class>
+			<managed-bean-scope>request</managed-bean-scope>
+		</managed-bean>
+		
+	</application>
+	
+</faces-config>

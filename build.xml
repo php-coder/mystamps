@@ -4,6 +4,7 @@
 		<property name="src.dir" value="src" />
 		<property name="build.dir" value="WEB-INF/classes" />
 		<property name="lib.dir" value="WEB-INF/lib" />
+		<property name="i18n.dir" value="ru/mystamps/i18n" />
 		
 		<path id="classpath">
 			<fileset dir="${build.dir}" />
@@ -18,11 +19,15 @@
 			<include name="**/*.java" />
 			<classpath refid="classpath" />
 		</javac>
+		<native2ascii encoding="utf8" src="${src.dir}/${i18n.dir}" dest="${build.dir}/${i18n.dir}" />
 	</target>
 	
 	<target name="clean" depends="init" description="Clean all class files">
 		<delete verbose="${verbose}">
 			<fileset dir="${build.dir}" includes="**/*.class" />
+		</delete>
+		<delete verbose="${verbose}">
+			<fileset dir="${build.dir}/${i18n.dir}" includes="**/*.properties" />
 		</delete>
 	</target>
 	

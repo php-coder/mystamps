@@ -16,6 +16,7 @@ public class MaintenanceFilter implements Filter {
 	
 	private FilterConfig config = null;
 	private Logger log = null;
+	private static final String MAINTENANCE_PAGE_URL = "/maintenance.jsf";
 	
 	public MaintenanceFilter() {
 	}
@@ -49,7 +50,7 @@ public class MaintenanceFilter implements Filter {
 				log.warn("Cannot get user IP address");
 			
 			} else if (! allowedIP.equals(userIP)) {
-				RequestDispatcher dispatch = request.getRequestDispatcher("/maintenance.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher(MAINTENANCE_PAGE_URL);
 				dispatch.forward(request, response);
 				return;
 			}
