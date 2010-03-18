@@ -33,7 +33,9 @@
 						<h:panelGrid columns="3">
 							<h:outputLabel for="login" value="#{m.t_login}" />
 							<h:inputText id="login" required="true"
-								binding="#{register.loginInput}" />
+								binding="#{register.loginInput}">
+								<f:validateLength minimum="2" maximum="15" />
+							</h:inputText>
 							<h:message for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />

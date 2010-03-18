@@ -381,4 +381,72 @@
 		<td>Password mismatch</td>
 	</tr>
 	
+	<!-- check login minimum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>a</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td>Value is less than allowable minimum of 2 characters</td>
+	</tr>
+	
+	<!-- check login maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>abcde12345fghkl6</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td>Value is greater than allowable maximum of 15 characters</td>
+	</tr>
+	
+	<!-- check login validation: try short login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>ab</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login validation: try long login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>abcde1234567890</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td></td>
+	</tr>
+	
 </table>
