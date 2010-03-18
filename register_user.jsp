@@ -43,7 +43,9 @@
 								required="true"
 								binding="#{register.passwordInput}"
 								validator="#{register.validatePasswordLoginMismatch}"
-								redisplay="true" />
+								redisplay="true">
+								<f:validateLength minimum="4" />
+							</h:inputSecret>
 							<h:message for="pass1" styleClass="error" />
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
