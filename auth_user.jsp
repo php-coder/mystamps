@@ -18,7 +18,9 @@
 						<h:form id="auth_form" prependId="false">
 							<h:panelGrid columns="3">
 								<h:outputLabel for="login" value="#{m.t_login}" />
-								<h:inputText id="login" required="true" />
+								<h:inputText id="login" required="true">
+									<f:validateLength minimum="2" maximum="15" />
+								</h:inputText>
 								<h:message for="login" styleClass="error" />
 								
 								<h:outputLabel for="pass" value="#{m.t_password}" />
