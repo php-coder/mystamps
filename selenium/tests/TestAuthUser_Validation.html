@@ -149,4 +149,38 @@
 		<td></td>
 	</tr>
 	
+	<!-- check password maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>123</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="auth_form"]/table/tbody/tr[2]/td/span[@class="error"]</td>
+		<td>Value is less than allowable minimum of 4 characters</td>
+	</tr>
+	
+	<!-- check password validation: try short password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>1234</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//form[@id="auth_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td></td>
+	</tr>
+	
 </table>

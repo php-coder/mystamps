@@ -24,7 +24,9 @@
 								<h:message for="login" styleClass="error" />
 								
 								<h:outputLabel for="pass" value="#{m.t_password}" />
-								<h:inputSecret id="pass" redisplay="true" required="true" />
+								<h:inputSecret id="pass" redisplay="true" required="true">
+									<f:validateLength minimum="4" />
+								</h:inputSecret>
 								<h:message for="pass" styleClass="error" />
 								
 								<h:panelGroup />
