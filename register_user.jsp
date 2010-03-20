@@ -34,7 +34,9 @@
 							<h:outputLabel for="login" value="#{m.t_login}" />
 							<h:inputText id="login" required="true"
 								binding="#{register.loginInput}">
-								<f:validateLength minimum="2" maximum="15" />
+								<f:validateLength
+									minimum="#{initParam[\"LOGIN_MIN_LENGTH\"]}"
+									maximum="#{initParam[\"LOGIN_MAX_LENGTH\"]}" />
 							</h:inputText>
 							<h:message for="login" styleClass="error" />
 							
@@ -44,7 +46,8 @@
 								binding="#{register.passwordInput}"
 								validator="#{register.validatePasswordLoginMismatch}"
 								redisplay="true">
-								<f:validateLength minimum="4" />
+								<f:validateLength
+									minimum="#{initParam[\"PASSWORD_MIN_LENGTH\"]}" />
 							</h:inputSecret>
 							<h:message for="pass1" styleClass="error" />
 							

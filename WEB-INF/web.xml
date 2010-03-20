@@ -22,6 +22,21 @@
 		<param-value>true</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>LOGIN_MIN_LENGTH</param-name>
+		<param-value>2</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>LOGIN_MAX_LENGTH</param-name>
+		<param-value>15</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>PASSWORD_MIN_LENGTH</param-name>
+		<param-value>4</param-value>
+	</context-param>
+	
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsf</location>
