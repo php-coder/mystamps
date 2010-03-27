@@ -14,27 +14,27 @@
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
 				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
-					<div class="generic_form">
-						<h:form id="auth_form" prependId="false">
-							<h:panelGrid columns="3">
-								<h:outputLabel for="login" value="#{m.t_login}" />
-								<h:inputText id="login" required="true">
-									<f:validateLength minimum="2" maximum="15" />
-								</h:inputText>
-								<h:message for="login" styleClass="error" />
-								
-								<h:outputLabel for="pass" value="#{m.t_password}" />
-								<h:inputSecret id="pass" redisplay="true" required="true">
-									<f:validateLength minimum="4" />
-								</h:inputSecret>
-								<h:message for="pass" styleClass="error" />
-								
-								<h:panelGroup />
-								<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
-								<h:panelGroup />
-							</h:panelGrid>
-						</h:form>
-					</div>
+				<div class="generic_form">
+					<h:form id="auth_form" prependId="false">
+						<h:panelGrid columns="3">
+							<h:outputLabel for="login" value="#{m.t_login}" />
+							<h:inputText id="login" required="true">
+								<f:validateLength minimum="2" maximum="15" />
+							</h:inputText>
+							<h:message for="login" styleClass="error" />
+							
+							<h:outputLabel for="pass" value="#{m.t_password}" />
+							<h:inputSecret id="pass" redisplay="true" required="true">
+								<f:validateLength minimum="4" />
+							</h:inputSecret>
+							<h:message for="pass" styleClass="error" />
+							
+							<h:panelGroup />
+							<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
+							<h:panelGroup />
+						</h:panelGrid>
+					</h:form>
+				</div>
 			</div>
 			<%@ include file="/WEB-INF/segments/footer.jspf" %>
 		</body>
