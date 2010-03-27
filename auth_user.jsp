@@ -14,21 +14,29 @@
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
 				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
+				<div class="hint">
+					<h:outputFormat value="#{m.t_required_fields_legend}" escape="false">
+						<f:param value="<span class=\"required_field\">*</span>" />
+					</h:outputFormat>
+				</div>
 				<div class="generic_form">
 					<h:form id="auth_form" prependId="false">
-						<h:panelGrid columns="3">
+						<h:panelGrid columns="4">
 							<h:outputLabel for="login" value="#{m.t_login}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputText id="login" required="true">
 								<f:validateLength minimum="2" maximum="15" />
 							</h:inputText>
 							<h:message for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass" value="#{m.t_password}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputSecret id="pass" redisplay="true" required="true">
 								<f:validateLength minimum="4" />
 							</h:inputSecret>
 							<h:message for="pass" styleClass="error" />
 							
+							<h:panelGroup />
 							<h:panelGroup />
 							<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
 							<h:panelGroup />
