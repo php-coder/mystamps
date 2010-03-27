@@ -15,6 +15,11 @@
 			<div id="content">
 				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
 				<div class="hint">
+					<h:outputFormat value="#{m.t_if_you_forget_password}" escape="false">
+						<f:param value="<a href=\"#{facesContext.externalContext.requestContextPath}/restore_password.jsf\">" />
+						<f:param value="</a>" />
+					</h:outputFormat>
+					<br />
 					<h:outputFormat value="#{m.t_required_fields_legend}" escape="false">
 						<f:param value="<span class=\"required_field\">*</span>" />
 					</h:outputFormat>

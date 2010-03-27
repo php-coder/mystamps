@@ -19,6 +19,35 @@
 		<td>Authorization on site</td>
 	</tr>
 	
+	<!-- check link to restore_password.jsf -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyTextPresent</td>
+		<td></td>
+		<td>If you forget password then we may remind it.</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://my-stamps:8080/restore_password.jsf</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to register_user.jsf -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	<tr>
+	
 	<!-- check input's lables -->
 	<tr>
 		<td>verifyText</td>
