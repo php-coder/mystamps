@@ -26,12 +26,16 @@
 						<f:param value="<a href=\"#{facesContext.externalContext.requestContextPath}/restore_password.jsf\">" />
 						<f:param value="</a>" />
 					</h:outputFormat>
-					.
+					.<br />
+					<h:outputFormat value="#{m.t_required_fields_legend}" escape="false">
+						<f:param value="<span class=\"required_field\">*</span>" />
+					</h:outputFormat>
 				</div>
 				<div class="generic_form">
 					<h:form id="register_form" prependId="false">
-						<h:panelGrid columns="3">
+						<h:panelGrid columns="4">
 							<h:outputLabel for="login" value="#{m.t_login}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputText id="login" required="true"
 								binding="#{register.loginInput}">
 								<f:validateLength
@@ -41,6 +45,7 @@
 							<h:message for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
 								required="true"
 								binding="#{register.passwordInput}"
@@ -52,6 +57,7 @@
 							<h:message for="pass1" styleClass="error" />
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputSecret id="pass2"
 								required="true"
 								validator="#{register.validatePasswordConfirm}"
@@ -59,13 +65,16 @@
 							<h:message for="pass2" styleClass="error" />
 							
 							<h:outputLabel for="email" value="#{m.t_email}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputText id="email" required="true" />
 							<h:message for="email" styleClass="error" />
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
+							<h:outputText value="*" styleClass="required_field" />
 							<h:inputText id="name" required="true" />
 							<h:message for="name" styleClass="error" />
 							
+							<h:panelGroup />
 							<h:panelGroup />
 							<h:commandButton id="submit" type="submit" value="#{m.t_register}" />
 							<h:panelGroup />

@@ -45,7 +45,7 @@ body {
 	font-size: 80%;
 }
 
-.error {
+.error, .required_field {
 	color: darkred;
 }
 

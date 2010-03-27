@@ -46,6 +46,33 @@
 		<td>Name</td>
 	</tr>
 	
+	<!-- check asterisk presents -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="required_field"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[2]/td/span[@class="required_field"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[3]/td/span[@class="required_field"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[4]/td/span[@class="required_field"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[5]/td/span[@class="required_field"]</td>
+		<td>*</td>
+	</tr>
+	
 	<!-- check input fields -->
 	<tr>
 		<td>assertElementPresent</td>
@@ -135,5 +162,12 @@
 		<td></td>
 		<td></td>
 	<tr>
+	
+	<!-- check text about required fields -->
+	<tr>
+		<td>verifyTextPresent</td>
+		<td></td>
+		<td>All fiels marked by asterisk (*) should be filled.</td>
+	</tr>
 	
 </table>
