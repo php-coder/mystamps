@@ -70,8 +70,8 @@
 							<h:message for="email" styleClass="error" />
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
-							<h:outputText value="*" styleClass="required_field" />
-							<h:inputText id="name" required="true" />
+							<h:panelGroup />
+							<h:inputText id="name" />
 							<h:message for="name" styleClass="error" />
 							
 							<h:panelGroup />
