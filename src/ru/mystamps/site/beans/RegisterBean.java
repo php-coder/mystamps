@@ -14,20 +14,11 @@ import org.apache.log4j.Logger;
 public class RegisterBean {
 	
 	private UIInput loginInput;
-	private UIInput passwordInput;
 	
 	private Logger log = null;
 	
 	public RegisterBean() {
 		log = Logger.getRootLogger();
-	}
-	
-	public void setPasswordInput(UIInput passwordInput) {
-		this.passwordInput = passwordInput;
-	}
-	
-	public UIInput getPasswordInput() {
-		return passwordInput;
 	}
 	
 	public void setLoginInput(UIInput loginInput) {
@@ -91,44 +82,6 @@ public class RegisterBean {
 			}
 		} catch (NullPointerException ex) {
 			log.error("validatePasswordLoginMismatch() exception: " + ex.getMessage());
-		}
-	}
-	
-	/**
-	 * Check that password and password confirmation are similar.
-	 *
-	 * @param FacesContext context
-	 * @param UIComponent component
-	 * @param Object value
-	 * @throws ValidatorException
-	 **/
-	public void validatePasswordConfirm(FacesContext context,
-			UIComponent component, Object value) {
-		
-		// don't continue if password field not set or not valid
-		if (! passwordInput.isValid()) {
-			return;
-		}
-		
-		final String password = (String)passwordInput.getLocalValue();
-		final String passwordConfirm = (String)value;
-		
-		if (password == null) {
-			log.warn("validatePasswordConfirm(): value of password field is null!");
-		}
-		
-		if (passwordConfirm == null) {
-			log.warn("validatePasswordConfirm(): value of passwordConfirm field is null!");
-		}
-		
-		try {
-			if (! password.equals(passwordConfirm)) {
-				String msg = getMessageTranslation(context, "tv_password_mismatch");
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
-				throw new ValidatorException(message);
-			}
-		} catch (NullPointerException ex) {
-			log.error("validatePasswordConfirm() exception: " + ex.getMessage());
 		}
 	}
 	

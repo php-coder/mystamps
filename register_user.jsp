@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://myfaces.apache.org/tomahawk" prefix="t" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -48,7 +49,6 @@
 							<h:outputText value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
 								required="true"
-								binding="#{register.passwordInput}"
 								validator="#{register.validatePasswordLoginMismatch}"
 								redisplay="true">
 								<f:validateLength
@@ -58,10 +58,9 @@
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
 							<h:outputText value="*" styleClass="required_field" />
-							<h:inputSecret id="pass2"
-								required="true"
-								validator="#{register.validatePasswordConfirm}"
-								redisplay="true" />
+							<h:inputSecret id="pass2" required="true" redisplay="true">
+								<t:validateEqual for="pass1" />
+							</h:inputSecret>
 							<h:message for="pass2" styleClass="error" />
 							
 							<h:outputLabel for="email" value="#{m.t_email}" />
