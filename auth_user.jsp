@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://myfaces.apache.org/tomahawk" prefix="t" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -31,6 +32,9 @@
 							<h:outputText value="*" styleClass="required_field" />
 							<h:inputText id="login" required="true">
 								<f:validateLength minimum="2" maximum="15" />
+								<t:validateRegExpr
+									pattern="[-_a-zA-Z0-9]+"
+									message="#{e.tv_invalid_login}" />
 							</h:inputText>
 							<h:message for="login" styleClass="error" />
 							
