@@ -42,6 +42,9 @@
 							<h:outputText value="*" styleClass="required_field" />
 							<h:inputSecret id="pass" redisplay="true" required="true">
 								<f:validateLength minimum="4" />
+								<t:validateRegExpr
+									pattern="[-_a-zA-Z0-9]+"
+									message="#{e.tv_invalid_password}" />
 							</h:inputSecret>
 							<h:message for="pass" styleClass="error" />
 							
