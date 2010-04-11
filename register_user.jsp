@@ -56,6 +56,9 @@
 								redisplay="true">
 								<f:validateLength
 									minimum="#{initParam[\"PASSWORD_MIN_LENGTH\"]}" />
+								<t:validateRegExpr
+									pattern="[-_a-zA-Z0-9]+"
+									message="#{e.tv_invalid_password}" />
 							</h:inputSecret>
 							<h:message for="pass1" styleClass="error" />
 							

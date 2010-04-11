@@ -518,4 +518,38 @@
 		<td></td>
 	</tr>
 	
+	<!-- check password validation: try allowed symbols in password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass1"]</td>
+		<td>t3s7-T_E_S_T</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[2]/td/span[@class="error"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check password validation: try denied symbols in password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass1"]</td>
+		<td>'t@$t'</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[2]/td/span[@class="error"]</td>
+		<td>Password should contains only latin letters, digits, hyphen or underscore</td>
+	</tr>
+	
 </table>
