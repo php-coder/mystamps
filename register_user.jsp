@@ -42,6 +42,9 @@
 								<f:validateLength
 									minimum="#{initParam[\"LOGIN_MIN_LENGTH\"]}"
 									maximum="#{initParam[\"LOGIN_MAX_LENGTH\"]}" />
+								<t:validateRegExpr
+									pattern="[-_a-zA-Z0-9]+"
+									message="#{e.tv_invalid_login}" />
 							</h:inputText>
 							<h:message for="login" styleClass="error" />
 							

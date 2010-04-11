@@ -450,6 +450,40 @@
 		<td></td>
 	</tr>
 	
+	<!-- check login validation: try allowed symbols in login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>t3s7-T_E_S_T</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login validation: try denied symbols in login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>'t@$t'</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="error"]</td>
+		<td>Login should contains only latin letters, digits, hyphen or underscore</td>
+	</tr>
+	
 	<!-- check password maximum characters validation -->
 	<tr>
 		<td>type</td>
