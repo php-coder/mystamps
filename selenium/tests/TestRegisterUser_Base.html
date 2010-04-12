@@ -49,28 +49,22 @@
 	<!-- check asterisk presents -->
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//form[@id="register_form"]/table/tbody/tr[1]/td/span[@class="required_field"]</td>
+		<td>xpath=//span[@id="login_required"]</td>
 		<td>*</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//form[@id="register_form"]/table/tbody/tr[2]/td/span[@class="required_field"]</td>
+		<td>xpath=//span[@id="pass1_required"]</td>
 		<td>*</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//form[@id="register_form"]/table/tbody/tr[3]/td/span[@class="required_field"]</td>
+		<td>xpath=//span[@id="pass2_required"]</td>
 		<td>*</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//form[@id="register_form"]/table/tbody/tr[4]/td/span[@class="required_field"]</td>
-		<td>*</td>
-	</tr>
-	<tr>
-		<!-- field with name not required (#42) -->
-		<td>assertElementNotPresent</td>
-		<td>xpath=//form[@id="register_form"]/table/tbody/tr[5]/td/span[@class="required_field"]</td>
+		<td>xpath=//span[@id="email_required"]</td>
 		<td>*</td>
 	</tr>
 	

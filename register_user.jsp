@@ -36,7 +36,7 @@
 					<h:form id="register_form" prependId="false">
 						<h:panelGrid columns="4">
 							<h:outputLabel for="login" value="#{m.t_login}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="login_required" value="*" styleClass="required_field" />
 							<h:inputText id="login" required="true"
 								binding="#{register.loginInput}">
 								<f:validateLength
@@ -46,10 +46,10 @@
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_login}" />
 							</h:inputText>
-							<h:message for="login" styleClass="error" />
+							<h:message id="login_error" for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="pass1_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
 								required="true"
 								validator="#{register.validatePasswordLoginMismatch}"
@@ -60,24 +60,24 @@
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_password}" />
 							</h:inputSecret>
-							<h:message for="pass1" styleClass="error" />
+							<h:message id="pass1_error" for="pass1" styleClass="error" />
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="pass2_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass2" required="true" redisplay="true">
 								<t:validateEqual for="pass1" />
 							</h:inputSecret>
-							<h:message for="pass2" styleClass="error" />
+							<h:message id="pass2_error" for="pass2" styleClass="error" />
 							
 							<h:outputLabel for="email" value="#{m.t_email}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="email_required" value="*" styleClass="required_field" />
 							<h:inputText id="email" required="true" />
-							<h:message for="email" styleClass="error" />
+							<h:message id="email_error" for="email" styleClass="error" />
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:panelGroup />
 							<h:inputText id="name" />
-							<h:message for="name" styleClass="error" />
+							<h:message id="name_error" for="name" styleClass="error" />
 							
 							<h:panelGroup />
 							<h:panelGroup />

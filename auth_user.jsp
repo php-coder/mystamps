@@ -29,24 +29,24 @@
 					<h:form id="auth_form" prependId="false">
 						<h:panelGrid columns="4">
 							<h:outputLabel for="login" value="#{m.t_login}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="login_required" value="*" styleClass="required_field" />
 							<h:inputText id="login" required="true">
 								<f:validateLength minimum="2" maximum="15" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_login}" />
 							</h:inputText>
-							<h:message for="login" styleClass="error" />
+							<h:message id="login_error" for="login" styleClass="error" />
 							
 							<h:outputLabel for="pass" value="#{m.t_password}" />
-							<h:outputText value="*" styleClass="required_field" />
+							<h:outputText id="pass_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass" redisplay="true" required="true">
 								<f:validateLength minimum="4" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_password}" />
 							</h:inputSecret>
-							<h:message for="pass" styleClass="error" />
+							<h:message id="pass_error" for="pass" styleClass="error" />
 							
 							<h:panelGroup />
 							<h:panelGroup />
