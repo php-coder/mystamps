@@ -19,12 +19,12 @@
 				</h3>
 				<div class="hint">
 					<h:outputFormat value="#{m.t_if_you_already_registered}" escape="false">
-						<f:param value="<a href=\"#{facesContext.externalContext.requestContextPath}/auth_user.jsf\">" />
+						<f:param value="<a href=\"/auth_user.jsf\">" />
 						<f:param value="</a>" />
 					</h:outputFormat>
 					<br />
 					<h:outputFormat value="#{m.t_if_you_forget_password}" escape="false">
-						<f:param value="<a href=\"#{facesContext.externalContext.requestContextPath}/restore_password.jsf\">" />
+						<f:param value="<a href=\"/restore_password.jsf\">" />
 						<f:param value="</a>" />
 					</h:outputFormat>
 					<br />

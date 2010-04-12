@@ -16,23 +16,23 @@
 				<h:outputText value="#{m.t_you_may}" />:
 				<ul>
 					<li>
-						<h:outputLink value="#{facesContext.externalContext.requestContextPath}/register_user.jsf">
+						<h:outputLink value="/register_user.jsf">
 							<h:outputText value="#{m.t_register_on_site}" />
 						</h:outputLink>
 					</li>
 
 					<li>
-						<h:outputLink value="#{facesContext.externalContext.requestContextPath}/auth_user.jsf">
+						<h:outputLink value="/auth_user.jsf">
 							<h:outputText value="#{m.t_auth_on_site}" />
 						</h:outputLink>
 					</li>
 					<li>
-						<h:outputLink value="#{facesContext.externalContext.requestContextPath}/restore_password.jsf">
+						<h:outputLink value="/restore_password.jsf">
 							<h:outputText value="#{m.t_recover_forget_password}" />
 						</h:outputLink>
 					</li>
 					<li>
-						<h:outputLink value="#{facesContext.externalContext.requestContextPath}/add_stamps.jsf">
+						<h:outputLink value="/add_stamps.jsf">
 							<h:outputText value="#{m.t_add_series}" />
 						</h:outputLink>
 					</li>
