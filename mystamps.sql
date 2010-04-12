@@ -10,10 +10,26 @@ CREATE TABLE `users` (
 	`name` VARCHAR(100) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`registered_at` DATETIME NOT NULL,
-	`status` TINYINT(1), -- -1 (banned), 0 (just registered), 1 (ok), 3 (lost password)
+	`activated_at` DATETIME NOT NULL,
+	`status` TINYINT(1) NOT NULL DEFAULT 1, -- -1 (banned), 0 (lost password), 1 (ok)
 	`hash` CHAR(40) NOT NULL,
 	`salt` CHAR(10) NOT NULL,
-	PRIMARY KEY(`id`)
+	PRIMARY KEY(`id`),
+	UNIQUE KEY(`login`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+----
+-- users_activation
+----
+CREATE TABLE `users_activation` (
+	`login` VARCHAR(15) NOT NULL,
+	`name` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`registered_at` DATETIME NOT NULL,
+	`hash` CHAR(40) NOT NULL,
+	`salt` CHAR(10) NOT NULL,
+	`act_key` CHAR(10) NOT NULL,
+	UNIQUE KEY(`login`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 ----
