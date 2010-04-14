@@ -22,14 +22,10 @@ CREATE TABLE `users` (
 -- users_activation
 ----
 CREATE TABLE `users_activation` (
-	`login` VARCHAR(15) NOT NULL,
-	`name` VARCHAR(100) NOT NULL,
 	`email` VARCHAR(255) NOT NULL,
 	`registered_at` DATETIME NOT NULL,
-	`hash` CHAR(40) NOT NULL,
-	`salt` CHAR(10) NOT NULL,
 	`act_key` CHAR(10) NOT NULL,
-	UNIQUE KEY(`login`)
+	UNIQUE KEY(`act_key`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 ----
