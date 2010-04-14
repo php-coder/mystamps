@@ -11,13 +11,13 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.log4j.Logger;
 
-public class RegisterBean {
+public class ActivateBean {
 	
 	private UIInput loginInput;
 	
 	private Logger log = null;
 	
-	public RegisterBean() {
+	public ActivateBean() {
 		log = Logger.getRootLogger();
 	}
 	
