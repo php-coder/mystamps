@@ -7,6 +7,14 @@
 	
 	<application>
 		
+		<navigation-rule>
+			<from-view-id>/register_user.jsp</from-view-id>
+			<navigation-case>
+				<from-outcome>activation_sent</from-outcome>
+				<to-view-id>/activation_sent.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule>
+		
 		<resource-bundle>
 			<base-name>ru.mystamps.i18n.Messages</base-name>
 			<var>m</var>
@@ -25,6 +33,12 @@
 			<supported-locale>ru</supported-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
+		
+		<managed-bean>
+			<managed-bean-name>register</managed-bean-name>
+			<managed-bean-class>ru.mystamps.site.beans.RegisterBean</managed-bean-class>
+			<managed-bean-scope>request</managed-bean-scope>
+		</managed-bean>
 		
 		<managed-bean>
 			<managed-bean-name>activate</managed-bean-name>

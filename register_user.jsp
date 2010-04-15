@@ -36,12 +36,14 @@
 						<h:panelGrid columns="4">
 							<h:outputLabel for="email" value="#{m.t_email}" />
 							<h:outputText id="email_required" value="*" styleClass="required_field" />
-							<h:inputText id="email" required="true" />
+							<h:inputText id="email" required="true" value="#{register.email}" />
 							<h:message id="email_error" for="email" styleClass="error" />
 							
 							<h:panelGroup />
 							<h:panelGroup />
-							<h:commandButton id="submit" type="submit" value="#{m.t_register}" />
+							<h:commandButton id="submit" type="submit"
+								value="#{m.t_register}"
+								action="#{register.sendActivationKey}" />
 							<h:panelGroup />
 						</h:panelGrid>
 					</h:form>
