@@ -17,4 +17,37 @@
 		<td>Value should not be empty</td>
 	</tr>
 	
+	<!-- check e-mail validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="email"]</td>
+		<td>login</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="email_error"]</td>
+		<td>Wrong e-mail address</td>
+	</tr>
+	
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="email"]</td>
+		<td>login@domain</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="email_error"]</td>
+		<td>Wrong e-mail address</td>
+	</tr>
+	
 </table>
