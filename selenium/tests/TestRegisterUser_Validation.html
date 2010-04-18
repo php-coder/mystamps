@@ -17,6 +17,23 @@
 		<td>Value should not be empty</td>
 	</tr>
 	
+	<!-- check e-mail maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="email"]</td>
+		<td>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001@mail.ru</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="email_error"]</td>
+		<td>Value is greater than allowable maximum of 255 characters</td>
+	</tr>
+	
 	<!-- check e-mail validation -->
 	<tr>
 		<td>type</td>

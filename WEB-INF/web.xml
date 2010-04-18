@@ -37,6 +37,11 @@
 		<param-value>4</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>EMAIL_MAX_LENGTH</param-name>
+		<param-value>255</param-value>
+	</context-param>
+	
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsf</location>
