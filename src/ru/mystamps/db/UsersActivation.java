@@ -9,27 +9,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
-
 public class UsersActivation {
-	private Logger log = null;
 	private DataSource ds = null;
 	
 	private static final String addRecordQuery =
 			"INSERT INTO `users_activation` " +
 			"VALUES(?, NOW(), ?)";
 	
-	public UsersActivation() {
-		log = Logger.getRootLogger();
+	/**
+	 * @throws NamingException
+	 **/
+	public UsersActivation()
+		throws NamingException {
 		
 		Context env = null;
-		try {
-			env = (Context)new InitialContext().lookup("java:comp/env");
-			ds = (DataSource)env.lookup("jdbc/mystamps");
-			
-		} catch (NamingException ex) {
-			log.error(ex);
-		}
+		env = (Context)new InitialContext().lookup("java:comp/env");
+		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
 	/**
@@ -45,24 +40,21 @@ public class UsersActivation {
 	 * Add record about user activation.
 	 *
 	 * @param String email
+	 * @throws SQLException
 	 **/
-	public void add(String email) {
+	public void add(String email)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
 		
 		try {
-			Connection conn = ds.getConnection();
+			PreparedStatement stat = conn.prepareStatement(addRecordQuery);
+			stat.setString(1, email);
+			stat.setString(2, generateActivationKey());
+			stat.executeUpdate();
 			
-			try {
-				PreparedStatement stat = conn.prepareStatement(addRecordQuery);
-				stat.setString(1, email);
-				stat.setString(2, generateActivationKey());
-				stat.executeUpdate();
-				
-			} finally {
-				conn.close();
-			}
-			
-		} catch (SQLException ex) {
-			log.error("add(): " + ex);
+		} finally {
+			conn.close();
 		}
 	}
 	

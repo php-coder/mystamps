@@ -1,5 +1,9 @@
 package ru.mystamps.site.beans;
 
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
 import ru.mystamps.db.UsersActivation;
 
 public class RegisterBean {
@@ -17,7 +21,12 @@ public class RegisterBean {
 	public RegisterBean() {
 	}
 	
-	public String sendActivationKey() {
+	/**
+	 * @throws SQLException
+	 * @throws NamingException
+	 **/
+	public String sendActivationKey()
+		throws SQLException, NamingException {
 		
 		UsersActivation activation = new UsersActivation();
 		activation.add(email);

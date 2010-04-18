@@ -9,10 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
-
 public class SuspiciousActivities {
-	private Logger log = null;
 	private DataSource ds = null;
 	
 	private static final String logEventQuery =
@@ -21,17 +18,15 @@ public class SuspiciousActivities {
 			"FROM `suspicious_activities_types` " +
 			"WHERE name = ?";
 	
-	public SuspiciousActivities() {
-		log = Logger.getRootLogger();
+	/**
+	 * @throws NamingException
+	 **/
+	public SuspiciousActivities()
+		throws NamingException {
 		
 		Context env = null;
-		try {
-			env = (Context)new InitialContext().lookup("java:comp/env");
-			ds = (DataSource)env.lookup("jdbc/mystamps");
-			
-		} catch (NamingException ex) {
-			log.error(ex);
-		}
+		env = (Context)new InitialContext().lookup("java:comp/env");
+		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
 	/**
@@ -45,27 +40,24 @@ public class SuspiciousActivities {
 	 * @param String ip
 	 * @param String refererPage
 	 * @param String userAgent
+	 * @throws SQLException
 	 **/
-	public void logEvent(String type, String page, String ip, String refererPage, String userAgent) {
+	public void logEvent(String type, String page, String ip, String refererPage, String userAgent)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
 		
 		try {
-			Connection conn = ds.getConnection();
+			PreparedStatement stat = conn.prepareStatement(logEventQuery);
+			stat.setString(1, page);
+			stat.setString(2, ip);
+			stat.setString(3, refererPage);
+			stat.setString(4, userAgent);
+			stat.setString(5, type);
+			stat.executeUpdate();
 			
-			try {
-				PreparedStatement stat = conn.prepareStatement(logEventQuery);
-				stat.setString(1, page);
-				stat.setString(2, ip);
-				stat.setString(3, refererPage);
-				stat.setString(4, userAgent);
-				stat.setString(5, type);
-				stat.executeUpdate();
-				
-			} finally {
-				conn.close();
-			}
-			
-		} catch (SQLException ex) {
-			log.error("logEvent(): " + ex);
+		} finally {
+			conn.close();
 		}
 	}
 	
