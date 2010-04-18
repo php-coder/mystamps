@@ -6,7 +6,7 @@ USE mystamps;
 ----
 CREATE TABLE `users` (
 	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`login` VARCHAR(15) NOT NULL,
+	`login` VARCHAR(15) NOT NULL, -- see LOGIN_MAX_LENGTH in WEB-INF/web.xml
 	`name` VARCHAR(100) NOT NULL,
 	`email` VARCHAR(255) NOT NULL, -- see email field at users_activation
 	`registered_at` DATETIME NOT NULL,
