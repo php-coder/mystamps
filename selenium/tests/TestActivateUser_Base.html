@@ -40,6 +40,11 @@
 		<td>xpath=//label[@for="name"]</td>
 		<td>Name</td>
 	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="act_key"]</td>
+		<td>Activation key</td>
+	</tr>
 	
 	<!-- check asterisk presents -->
 	<tr>
@@ -55,6 +60,11 @@
 	<tr>
 		<td>verifyText</td>
 		<td>xpath=//span[@id="pass2_required"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="act_key_required"]</td>
 		<td>*</td>
 	</tr>
 	
@@ -81,6 +91,11 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
+		<td>//input[@name="act_key"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
 		<td>//input[@type="submit"][@value="Activate"]</td>
 		<td></td>
 	</tr>
@@ -90,6 +105,18 @@
 		<td>verifyTextPresent</td>
 		<td></td>
 		<td>All fiels marked by asterisk (*) should be filled.</td>
+	</tr>
+	
+	<!-- check activation key field autofilling -->
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/activate_user.jsf?key=7777744444</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="act_key"]</td>
+		<td>7777744444</td>
 	</tr>
 	
 </table>

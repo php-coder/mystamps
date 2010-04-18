@@ -64,6 +64,11 @@
 							<h:inputText id="name" />
 							<h:message id="name_error" for="name" styleClass="error" />
 							
+							<h:outputLabel for="act_key" value="#{m.t_activation_key}" />
+							<h:outputText id="act_key_required" value="*" styleClass="required_field" />
+							<h:inputText id="act_key" required="true" value="#{param['key']}" />
+							<h:message id="act_key_error" for="act_key" styleClass="error" />
+							
 							<h:panelGroup />
 							<h:panelGroup />
 							<h:commandButton id="submit" type="submit" value="#{m.t_activate}" />
