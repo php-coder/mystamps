@@ -161,7 +161,7 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass1"]</td>
-		<td>password</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyElementNotPresent</td>
@@ -180,6 +180,11 @@
 	</tr>
 	
 	<!-- fill pass2 field -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass1"]</td>
+		<td>password</td>
+	</tr>
 	<tr>
 		<td>type</td>
 		<td>xpath=//input[@name="pass2"]</td>
@@ -213,7 +218,7 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass1"]</td>
-		<td>password</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyElementNotPresent</td>
@@ -223,17 +228,12 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass2"]</td>
-		<td>password2</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
 		<td>xpath=//span[@id="pass2_error"]</td>
 		<td>Password mismatch</td>
-	</tr>
-	<tr>
-		<td>type</td>
-		<td>xpath=//input[@name="pass2"]</td>
-		<td>password</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
@@ -242,11 +242,6 @@
 	</tr>
 	
 	<!-- fill activation name field -->
-	<tr>
-		<td>type</td>
-		<td>xpath=//input[@name="login"]</td>
-		<td></td>
-	</tr>
 	<tr>
 		<td>type</td>
 		<td>xpath=//input[@name="act_key"]</td>
@@ -260,12 +255,12 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="login"]</td>
-		<td></td>
+		<td>login</td>
 	</tr>
 	<tr>
-		<td>verifyText</td>
+		<td>verifyElementNotPresent</td>
 		<td>xpath=//span[@id="login_error"]</td>
-		<td>Value should not be empty</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyValue</td>
@@ -280,22 +275,22 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass1"]</td>
-		<td>password</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>verifyElementNotPresent</td>
+		<td>verifyText</td>
 		<td>xpath=//span[@id="pass1_error"]</td>
-		<td></td>
+		<td>Value should not be empty</td>
 	</tr>
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass2"]</td>
-		<td>password</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>verifyElementNotPresent</td>
+		<td>verifyText</td>
 		<td>xpath=//span[@id="pass2_error"]</td>
-		<td></td>
+		<td>Value should not be empty</td>
 	</tr>
 	<tr>
 		<td>verifyElementNotPresent</td>
@@ -327,7 +322,7 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass1"]</td>
-		<td>admin</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyElementNotPresent</td>
@@ -359,12 +354,12 @@
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass1"]</td>
-		<td>password123</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyValue</td>
 		<td>xpath=//input[@name="pass2"]</td>
-		<td>password321</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>verifyElementNotPresent</td>

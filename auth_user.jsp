@@ -40,7 +40,7 @@
 							
 							<h:outputLabel for="pass" value="#{m.t_password}" />
 							<h:outputText id="pass_required" value="*" styleClass="required_field" />
-							<h:inputSecret id="pass" redisplay="true" required="true">
+							<h:inputSecret id="pass" required="true">
 								<f:validateLength minimum="4" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"

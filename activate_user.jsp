@@ -47,8 +47,7 @@
 							<h:outputText id="pass1_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
 								required="true"
-								validator="#{activate.validatePasswordLoginMismatch}"
-								redisplay="true">
+								validator="#{activate.validatePasswordLoginMismatch}">
 								<f:validateLength
 									minimum="#{initParam[\"PASSWORD_MIN_LENGTH\"]}" />
 								<t:validateRegExpr
@@ -59,7 +58,7 @@
 							
 							<h:outputLabel for="pass2" value="#{m.t_password_again}" />
 							<h:outputText id="pass2_required" value="*" styleClass="required_field" />
-							<h:inputSecret id="pass2" required="true" redisplay="true">
+							<h:inputSecret id="pass2" required="true">
 								<t:validateEqual for="pass1" />
 							</h:inputSecret>
 							<h:message id="pass2_error" for="pass2" styleClass="error" />
