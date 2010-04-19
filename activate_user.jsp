@@ -30,8 +30,8 @@
 							<h:inputText id="login" required="true"
 								binding="#{activate.loginInput}">
 								<f:validateLength
-									minimum="#{initParam[\"LOGIN_MIN_LENGTH\"]}"
-									maximum="#{initParam[\"LOGIN_MAX_LENGTH\"]}" />
+									minimum="#{initParam['LOGIN_MIN_LENGTH']}"
+									maximum="#{initParam['LOGIN_MAX_LENGTH']}" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_login}" />
@@ -52,7 +52,7 @@
 								required="true"
 								validator="#{activate.validatePasswordLoginMismatch}">
 								<f:validateLength
-									minimum="#{initParam[\"PASSWORD_MIN_LENGTH\"]}" />
+									minimum="#{initParam['PASSWORD_MIN_LENGTH']}" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_password}" />

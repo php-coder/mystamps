@@ -38,7 +38,8 @@
 							<h:outputLabel for="email" value="#{m.t_email}" />
 							<h:outputText id="email_required" value="*" styleClass="required_field" />
 							<h:inputText id="email" required="true" value="#{register.email}">
-								<f:validateLength maximum="#{initParam[\"EMAIL_MAX_LENGTH\"]}" />
+								<f:validateLength
+									maximum="#{initParam['EMAIL_MAX_LENGTH']}" />
 								<t:validateEmail />
 							</h:inputText>
 							<h:message id="email_error" for="email" styleClass="error" />
