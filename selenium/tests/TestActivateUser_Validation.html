@@ -474,6 +474,23 @@
 		<td>Login should contains only latin letters, digits, hyphen or underscore</td>
 	</tr>
 	
+	<!-- check name maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="name"]</td>
+		<td>10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="name_error"]</td>
+		<td>Value is greater than allowable maximum of 100 characters</td>
+	</tr>
+	
 	<!-- check password maximum characters validation -->
 	<tr>
 		<td>type</td>

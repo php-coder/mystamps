@@ -40,7 +40,10 @@
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:panelGroup />
-							<h:inputText id="name" />
+							<h:inputText id="name">
+								<f:validateLength
+									maximum="#{initParam['NAME_MAX_LENGTH']}" />
+							</h:inputText>
 							<h:message id="name_error" for="name" styleClass="error" />
 							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />
