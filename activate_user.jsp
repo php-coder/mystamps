@@ -43,6 +43,9 @@
 							<h:inputText id="name">
 								<f:validateLength
 									maximum="#{initParam['NAME_MAX_LENGTH']}" />
+								<t:validateRegExpr
+									pattern="[- [:alpha:]]+"
+									message="#{e.tv_invalid_name}" />
 							</h:inputText>
 							<h:message id="name_error" for="name" styleClass="error" />
 							

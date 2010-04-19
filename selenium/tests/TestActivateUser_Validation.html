@@ -491,6 +491,44 @@
 		<td>Value is greater than allowable maximum of 100 characters</td>
 	</tr>
 	
+	<!-- check name validation: try allowed symbols -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="name"]</td>
+		<td>Slava Se-mushin</td>
+		<!--
+		TODO: test Russian letters also
+		<td>SемЄн як-ушев</td>
+		-->
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="name_error"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check name validation: try denied symbols -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="name"]</td>
+		<td>M@st3r_</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="name_error"]</td>
+		<td>Name should contains only letters, hypen or spaces</td>
+	</tr>
+	
 	<!-- check password maximum characters validation -->
 	<tr>
 		<td>type</td>
