@@ -38,6 +38,11 @@
 							</h:inputText>
 							<h:message id="login_error" for="login" styleClass="error" />
 							
+							<h:outputLabel for="name" value="#{m.t_name}" />
+							<h:panelGroup />
+							<h:inputText id="name" />
+							<h:message id="name_error" for="name" styleClass="error" />
+							
 							<h:outputLabel for="pass1" value="#{m.t_password}" />
 							<h:outputText id="pass1_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
@@ -58,11 +63,6 @@
 								<t:validateEqual for="pass1" />
 							</h:inputSecret>
 							<h:message id="pass2_error" for="pass2" styleClass="error" />
-							
-							<h:outputLabel for="name" value="#{m.t_name}" />
-							<h:panelGroup />
-							<h:inputText id="name" />
-							<h:message id="name_error" for="name" styleClass="error" />
 							
 							<h:outputLabel for="act_key" value="#{m.t_activation_key}" />
 							<h:outputText id="act_key_required" value="*" styleClass="required_field" />
