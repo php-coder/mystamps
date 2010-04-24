@@ -12,6 +12,9 @@ import javax.sql.DataSource;
 public class UsersActivation {
 	private DataSource ds = null;
 	
+	/**
+	 * @see add()
+	 **/
 	private static final String addRecordQuery =
 			"INSERT INTO `users_activation` " +
 			"VALUES(?, NOW(), ?)";
