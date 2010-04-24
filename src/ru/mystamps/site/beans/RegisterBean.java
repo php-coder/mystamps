@@ -28,8 +28,8 @@ public class RegisterBean {
 	public String sendActivationKey()
 		throws SQLException, NamingException {
 		
-		UsersActivation activation = new UsersActivation();
-		activation.add(email);
+		UsersActivation activationRequests = new UsersActivation();
+		activationRequests.add(email);
 		
 		return "activation_sent";
 	}
