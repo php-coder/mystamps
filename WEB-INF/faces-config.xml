@@ -15,6 +15,14 @@
 			</navigation-case>
 		</navigation-rule>
 		
+		<navigation-rule>
+			<from-view-id>/activate_user.jsp</from-view-id>
+			<navigation-case>
+				<from-outcome>activation_successful</from-outcome>
+				<to-view-id>/activation_successful.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule>
+		
 		<resource-bundle>
 			<base-name>ru.mystamps.i18n.Messages</base-name>
 			<var>m</var>
@@ -44,6 +52,11 @@
 			<managed-bean-name>activate</managed-bean-name>
 			<managed-bean-class>ru.mystamps.site.beans.ActivateBean</managed-bean-class>
 			<managed-bean-scope>request</managed-bean-scope>
+			<managed-property>
+				<property-name>actKey</property-name>
+				<property-class>java.lang.String</property-class>
+				<value>#{param.key}</value>
+			</managed-property>
 		</managed-bean>
 		
 	</application>

@@ -3,17 +3,28 @@ package ru.mystamps.site.beans;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import java.sql.SQLException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import javax.naming.NamingException;
+
 import org.apache.log4j.Logger;
+
+import ru.mystamps.db.Users;
+import ru.mystamps.db.UsersActivation;
 
 public class ActivateBean {
 	
 	private UIInput loginInput;
+	
+	private String name;
+	private String password;
+	private String actKey;
 	
 	private Logger log = null;
 	
@@ -27,6 +38,30 @@ public class ActivateBean {
 	
 	public UIInput getLoginInput() {
 		return loginInput;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setActKey(String actKey) {
+		this.actKey = actKey;
+	}
+	
+	public String getActKey() {
+		return actKey;
 	}
 	
 	/**
@@ -83,6 +118,30 @@ public class ActivateBean {
 		} catch (NullPointerException ex) {
 			log.error("validatePasswordLoginMismatch() exception: " + ex.getMessage());
 		}
+	}
+	
+	/**
+	 * @todo use transactions
+	 **/
+	public String activateUser()
+		throws SQLException, NamingException {
+		
+		String login = (String)loginInput.getValue();
+		
+		// use login as name if name is not provided
+		if (name.equals("")) {
+			name = login;
+		}
+		
+		log.debug("Activate user '" + login + "' (" + name + ") with password '" + password + "' (key = " + actKey + ")");
+		
+		Users users = new Users();
+		users.add(login, password, name, actKey);
+		
+		UsersActivation activationiRequests = new UsersActivation();
+		activationiRequests.del(actKey);
+		
+		return "activation_successful";
 	}
 	
 }

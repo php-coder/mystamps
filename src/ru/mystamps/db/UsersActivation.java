@@ -20,6 +20,13 @@ public class UsersActivation {
 			"VALUES(?, NOW(), ?)";
 	
 	/**
+	 * @see del()
+	 **/
+	private static final String delRecordQuery =
+			"DELETE FROM `users_activation` " +
+			"WHERE `act_key` = ?";
+	
+	/**
 	 * @throws NamingException
 	 **/
 	public UsersActivation()
@@ -54,6 +61,25 @@ public class UsersActivation {
 			PreparedStatement stat = conn.prepareStatement(addRecordQuery);
 			stat.setString(1, email);
 			stat.setString(2, generateActivationKey());
+			stat.executeUpdate();
+			
+		} finally {
+			conn.close();
+		}
+	}
+	
+	/**
+	 * Delete record about user's activation based on key.
+	 * @param String actKey activation key
+	 **/
+	public void del(final String actKey)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(delRecordQuery);
+			stat.setString(1, actKey);
 			stat.executeUpdate();
 			
 		} finally {

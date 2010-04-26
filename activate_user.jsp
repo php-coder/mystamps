@@ -40,7 +40,7 @@
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:panelGroup />
-							<h:inputText id="name">
+							<h:inputText id="name" value="#{activate.name}">
 								<f:validateLength
 									maximum="#{initParam['NAME_MAX_LENGTH']}" />
 								<t:validateRegExpr
@@ -53,6 +53,7 @@
 							<h:outputText id="pass1_required" value="*" styleClass="required_field" />
 							<h:inputSecret id="pass1"
 								required="true"
+								value="#{activate.password}"
 								validator="#{activate.validatePasswordLoginMismatch}">
 								<f:validateLength
 									minimum="#{initParam['PASSWORD_MIN_LENGTH']}" />
@@ -71,12 +72,14 @@
 							
 							<h:outputLabel for="act_key" value="#{m.t_activation_key}" />
 							<h:outputText id="act_key_required" value="*" styleClass="required_field" />
-							<h:inputText id="act_key" required="true" value="#{param['key']}" />
+							<h:inputText id="act_key" required="true" value="#{activate.actKey}" />
 							<h:message id="act_key_error" for="act_key" styleClass="error" />
 							
 							<h:panelGroup />
 							<h:panelGroup />
-							<h:commandButton id="submit" type="submit" value="#{m.t_activate}" />
+							<h:commandButton id="submit" type="submit"
+								value="#{m.t_activate}"
+								action="#{activate.activateUser}" />
 							<h:panelGroup />
 						</h:panelGrid>
 					</h:form>
