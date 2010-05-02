@@ -1,8 +1,5 @@
 package ru.mystamps.site.beans;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import java.sql.SQLException;
 
 import javax.faces.application.FacesMessage;
@@ -17,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import ru.mystamps.db.Users;
 import ru.mystamps.db.UsersActivation;
+import ru.mystamps.site.utils.Messages;
 
 public class ActivateBean {
 	
@@ -65,24 +63,6 @@ public class ActivateBean {
 	}
 	
 	/**
-	 * Get message translation from application bundle for current locale.
-	 *
-	 * @param FacesContext context
-	 * @param String message
-	 **/
-	private String getMessageTranslation(FacesContext context, String message) {
-		
-		String bundleName = context.getApplication().getMessageBundle();
-		Locale locale = context.getViewRoot().getLocale();
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		
-		final String translatedMessage =
-			ResourceBundle.getBundle(bundleName, locale, loader).getString(message);
-		
-		return translatedMessage;
-	}
-	
-	/**
 	 * Check that login and password mismath.
 	 *
 	 * @param FacesContext context
@@ -111,7 +91,7 @@ public class ActivateBean {
 		
 		try {
 			if (login.equals(password)) {
-				String msg = getMessageTranslation(context, "tv_password_login_match");
+				String msg = Messages.getTranslation(context, "tv_password_login_match");
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
 				throw new ValidatorException(message);
 			}
