@@ -1,5 +1,9 @@
 package ru.mystamps.site.beans;
 
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
 import org.apache.log4j.Logger;
 
 import ru.mystamps.db.SuspiciousActivities;
@@ -15,15 +19,21 @@ public class SuspiciousEventBean {
 	private Logger log = null;
 	private SuspiciousActivities act = null;
 	
-	public SuspiciousEventBean() {
+	/**
+	 * @throws NamingException
+	 **/
+	public SuspiciousEventBean()
+		throws NamingException {
 		log = Logger.getRootLogger();
 		act = new SuspiciousActivities();
 	}
 	
 	/**
 	 * Log event about suspicious activity to database.
+	 * @throws SQLException
 	 **/
-	public String getLogResult() {
+	public String getLogResult()
+		throws SQLException {
 		act.logEvent(getType(), getPage(), getIp(), getRefererPage(), getUserAgent());
 		return "";
 	}
