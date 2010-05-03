@@ -5,3 +5,4 @@ WEB-INF/classes/ru/mystamps/site/*.class
 WEB-INF/classes/ru/mystamps/i18n/*.properties
 WEB-INF/classes/ru/mystamps/site/beans/*.class
 WEB-INF/classes/ru/mystamps/site/filters/*.class
+WEB-INF/classes/ru/mystamps/site/utils/*.class
