@@ -35,6 +35,8 @@
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_login}" />
+								<f:validator
+									validatorId="ru.mystamps.site.validators.LoginNotExists" />
 							</h:inputText>
 							<h:message id="login_error" for="login" styleClass="error" />
 							

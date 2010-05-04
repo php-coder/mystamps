@@ -2,6 +2,7 @@ package ru.mystamps.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -9,7 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 public class Users {
+	private Logger log = null;
 	private DataSource ds = null;
 	
 	/**
@@ -36,10 +40,20 @@ public class Users {
 				"WHERE ua.act_key = ?";
 	
 	/**
+	 * @see loginExists()
+	 **/
+	private static final String checkUserQuery =
+			"SELECT COUNT(*) " +
+			"FROM users " +
+			"WHERE login = ?";
+	
+	/**
 	 * @throws NamingException
 	 **/
 	public Users()
 		throws NamingException {
+		
+		log = Logger.getRootLogger();
 		
 		Context env = null;
 		env = (Context)new InitialContext().lookup("java:comp/env");
@@ -83,6 +97,41 @@ public class Users {
 		} finally {
 			conn.close();
 		}
+	}
+	
+	/**
+	 * Check if login already exists.
+	 * @param String login user's login
+	 * @throws SQLException
+	 **/
+	public boolean loginExists(final String login)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
+		boolean result = false;
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(checkUserQuery);
+			stat.setString(1, login);
+			
+			ResultSet rs = stat.executeQuery();
+			
+			if (rs.next()) {
+				int usersCounter = rs.getInt(1);
+				if (usersCounter > 0) {
+					result = true;
+				}
+				log.debug("found " + usersCounter + " for login " + login);
+				
+			} else {
+				log.warn("loginExists(" + login +"): next() return false");
+			}
+		
+		} finally {
+			conn.close();
+		}
+		
+		return result;
 	}
 	
 }

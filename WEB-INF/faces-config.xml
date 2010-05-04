@@ -36,6 +36,11 @@
 		<message-bundle>ru.mystamps.i18n.Messages</message-bundle>
 		<message-bundle>ru.mystamps.i18n.ErrorMessages</message-bundle>
 		
+		<validator>
+			<validator-id>ru.mystamps.site.validators.LoginNotExists</validator-id>
+			<validator-class>ru.mystamps.site.validators.LoginNotExistsValidator</validator-class>
+		</validator>
+		
 		<locale-config>
 			<default-locale>ru</default-locale>
 			<supported-locale>ru</supported-locale>
