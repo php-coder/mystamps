@@ -24,7 +24,7 @@ CREATE TABLE `users` (
 CREATE TABLE `users_activation` (
 	`email` VARCHAR(255) NOT NULL, -- see EMAIL_MAX_LENGTH in WEB-INF/web.xml
 	`registered_at` DATETIME NOT NULL,
-	`act_key` CHAR(10) NOT NULL,
+	`act_key` CHAR(10) NOT NULL, -- see ACT_KEY_LENGTH in WEB-INF/web.xml
 	UNIQUE KEY(`act_key`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 

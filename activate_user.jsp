@@ -74,7 +74,11 @@
 							
 							<h:outputLabel for="act_key" value="#{m.t_activation_key}" />
 							<h:outputText id="act_key_required" value="*" styleClass="required_field" />
-							<h:inputText id="act_key" required="true" value="#{activate.actKey}" />
+							<h:inputText id="act_key" required="true" value="#{activate.actKey}">
+								<f:validateLength
+									minimum="#{initParam['ACT_KEY_LENGTH']}"
+									maximum="#{initParam['ACT_KEY_LENGTH']}" />
+							</h:inputText>
 							<h:message id="act_key_error" for="act_key" styleClass="error" />
 							
 							<h:panelGroup />

@@ -603,6 +603,40 @@
 		<td>Password should contains only latin letters, digits, hyphen or underscore</td>
 	</tr>
 	
+	<!-- check activation key validation: try to use short value -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="act_key"]</td>
+		<td>12345</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="act_key_error"]</td>
+		<td>Value is less than allowable minimum of 10 characters</td>
+	</tr>
+	
+	<!-- check activation key validation: try to use long value -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="act_key"]</td>
+		<td>1234567890123</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="act_key_error"]</td>
+		<td>Value is greater than allowable maximum of 10 characters</td>
+	</tr>
+	
 	<!-- try to register login which already exists -->
 	<!--
 		login "test-login" was registered and activated in

@@ -47,6 +47,11 @@
 		<param-value>100</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>ACT_KEY_LENGTH</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsf</location>
