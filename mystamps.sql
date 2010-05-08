@@ -22,7 +22,7 @@ CREATE TABLE `users` (
 -- users_activation
 ----
 CREATE TABLE `users_activation` (
-	`email` VARCHAR(255) NOT NULL, -- see EMAIL_MAX_LENGTH in WEB-INF/web/.xml
+	`email` VARCHAR(255) NOT NULL, -- see EMAIL_MAX_LENGTH in WEB-INF/web.xml
 	`registered_at` DATETIME NOT NULL,
 	`act_key` CHAR(10) NOT NULL,
 	UNIQUE KEY(`act_key`)
