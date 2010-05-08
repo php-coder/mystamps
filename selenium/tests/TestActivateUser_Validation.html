@@ -556,6 +556,28 @@
 		<td>Name should not starts or end with hyphen</td>
 	</tr>
 	
+	<!-- check name modification: should strip any leading and trailing spaces -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="name"]</td>
+		<td>${space}test${space}</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="name_error"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementPresent</td>
+		<td>xpath=//input[@name="name"][@value="test"]</td>
+		<td></td>
+	</tr>
+	
 	<!-- check password maximum characters validation -->
 	<tr>
 		<td>type</td>

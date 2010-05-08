@@ -43,6 +43,8 @@
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:panelGroup />
 							<h:inputText id="name" value="#{activate.name}">
+								<f:converter
+									converterId="ru.mystamps.site.converters.TrimSpaces" />
 								<f:validateLength
 									maximum="#{initParam['NAME_MAX_LENGTH']}" />
 								<t:validateRegExpr
