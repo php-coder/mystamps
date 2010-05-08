@@ -48,6 +48,9 @@
 								<t:validateRegExpr
 									pattern="[- [:alpha:]]+"
 									message="#{e.tv_invalid_name}" />
+								<t:validateRegExpr
+									pattern="[ [:alpha:]][- [:alpha:]]+[ [:alpha:]]"
+									message="#{e.tv_name_hyphen}" />
 							</h:inputText>
 							<h:message id="name_error" for="name" styleClass="error" />
 							
