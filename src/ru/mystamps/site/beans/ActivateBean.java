@@ -118,8 +118,8 @@ public class ActivateBean {
 		Users users = new Users();
 		users.add(login, password, name, actKey);
 		
-		UsersActivation activationiRequests = new UsersActivation();
-		activationiRequests.del(actKey);
+		UsersActivation activationRequests = new UsersActivation();
+		activationRequests.del(actKey);
 		
 		return "activation_successful";
 	}
