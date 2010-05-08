@@ -2,6 +2,7 @@ package ru.mystamps.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -9,7 +10,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 public class UsersActivation {
+	private Logger log = null;
 	private DataSource ds = null;
 	
 	/**
@@ -27,10 +31,20 @@ public class UsersActivation {
 			"WHERE `act_key` = ?";
 	
 	/**
+	 * @see actKeyExists()
+	 **/
+	private static final String checkActKeyQuery =
+			"SELECT COUNT(*) " +
+			"FROM `users_activation` " +
+			"WHERE `act_key` = ?";
+	
+	/**
 	 * @throws NamingException
 	 **/
 	public UsersActivation()
 		throws NamingException {
+		
+		log = Logger.getRootLogger();
 		
 		Context env = null;
 		env = (Context)new InitialContext().lookup("java:comp/env");
@@ -85,6 +99,41 @@ public class UsersActivation {
 		} finally {
 			conn.close();
 		}
+	}
+	
+	/**
+	 * Check if activation key exists.
+	 * @param String actKey activation key
+	 * @throws SQLException
+	 **/
+	public boolean actKeyExists(final String actKey)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
+		boolean result = false;
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(checkActKeyQuery);
+			stat.setString(1, actKey);
+			
+			ResultSet rs = stat.executeQuery();
+			
+			if (rs.next()) {
+				int actKeys = rs.getInt(1);
+				if (actKeys > 0) {
+					result = true;
+				}
+				log.debug("found " + actKeys + " for key " + actKey);
+				
+			} else {
+				log.warn("actKeyExists(" + actKey +"): next() return false");
+			}
+		
+		} finally {
+			conn.close();
+		}
+		
+		return result;
 	}
 	
 }

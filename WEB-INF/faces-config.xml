@@ -41,6 +41,11 @@
 			<validator-class>ru.mystamps.site.validators.LoginNotExistsValidator</validator-class>
 		</validator>
 		
+		<validator>
+			<validator-id>ru.mystamps.site.validators.ActivationKeyExists</validator-id>
+			<validator-class>ru.mystamps.site.validators.ActivationKeyExistsValidator</validator-class>
+		</validator>
+		
 		<locale-config>
 			<default-locale>ru</default-locale>
 			<supported-locale>ru</supported-locale>

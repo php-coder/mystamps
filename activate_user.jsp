@@ -81,6 +81,8 @@
 								<t:validateRegExpr
 									pattern="[0-9a-z]+"
 									message="#{e.tv_invalid_key}" />
+								<f:validator
+									validatorId="ru.mystamps.site.validators.ActivationKeyExists" />
 							</h:inputText>
 							<h:message id="act_key_error" for="act_key" styleClass="error" />
 							

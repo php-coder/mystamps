@@ -248,6 +248,10 @@
 	</tr>
 	
 	<!-- fill activation name field -->
+	<!--
+		Activation key "7777744444" was created during users
+		registration in TestActivateUser_Flow.html test
+	-->
 	<tr>
 		<td>type</td>
 		<td>xpath=//input[@name="act_key"]</td>
@@ -652,6 +656,23 @@
 		<td>verifyText</td>
 		<td>xpath=//span[@id="act_key_error"]</td>
 		<td>Key should contains only latin letters in lower case or digits</td>
+	</tr>
+	
+	<!-- check activation key validation: it should exists -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="act_key"]</td>
+		<td>1111111111</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="act_key_error"]</td>
+		<td>Wrong activation key</td>
 	</tr>
 	
 	<!-- try to register login which already exists -->
