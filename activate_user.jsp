@@ -78,6 +78,9 @@
 								<f:validateLength
 									minimum="#{initParam['ACT_KEY_LENGTH']}"
 									maximum="#{initParam['ACT_KEY_LENGTH']}" />
+								<t:validateRegExpr
+									pattern="[0-9a-z]+"
+									message="#{e.tv_invalid_key}" />
 							</h:inputText>
 							<h:message id="act_key_error" for="act_key" styleClass="error" />
 							
