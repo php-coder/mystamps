@@ -13,7 +13,9 @@
 		<body>
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
-				<h3><h:outputText value="#{m.t_add_series_ucfirst}" /></h3>
+				<h3>
+					<h:outputText value="#{m.t_add_series_ucfirst}" />
+				</h3>
 				<div class="generic_form">
 					<h:form id="add_stamps_form" prependId="false">
 						<h:panelGrid columns="2">

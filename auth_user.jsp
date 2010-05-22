@@ -14,7 +14,9 @@
 		<body>
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
-				<h3><h:outputText value="#{m.t_authorization_on_site}" /></h3>
+				<h3>
+					<h:outputText value="#{m.t_authorization_on_site}" />
+				</h3>
 				<div class="hint">
 					<h:outputFormat value="#{m.t_if_you_forget_password}" escape="false">
 						<f:param value="<a href=\"/restore_password.jsf\">" />
