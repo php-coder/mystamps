@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://myfaces.apache.org/tomahawk" prefix="t" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -46,10 +47,8 @@
 								<h:outputLabel for="comment" value="#{m.t_comment}" />
 								<h:inputTextarea id="comment" cols="22" rows="3" />
 								
-								<h:outputText value="<label for=\"image\">#{m.t_image}</label>"
-									escape="false" />
-								<h:outputText value="<input type=\"file\" id=\"image\" name=\"image\" />"
-									escape="false" />
+								<h:outputLabel for="image" value="#{m.t_image}" />
+								<t:inputFileUpload id="image" />
 								
 								<h:panelGroup />
 								<h:commandButton id="submit" type="submit" value="#{m.t_add}" />
