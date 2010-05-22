@@ -147,6 +147,35 @@
 		<td></td>
 	</tr>
 	
+	<!-- check link to add_country.jsf -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td>add country</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://my-stamps:8080/add_country.jsf</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to index.jsf -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	</tr>
+	
 	<!-- check footer -->
 	<tr>
 		<td>assertElementPresent</td>

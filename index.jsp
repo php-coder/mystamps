@@ -36,6 +36,11 @@
 							<h:outputText value="#{m.t_add_series}" />
 						</h:outputLink>
 					</li>
+					<li>
+						<h:outputLink value="/add_country.jsf">
+							<h:outputText value="#{m.t_add_country}" />
+						</h:outputLink>
+					</li>
 				</ul>
 			</div>
 			<%@ include file="/WEB-INF/segments/footer.jspf" %>
