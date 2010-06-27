@@ -23,8 +23,18 @@
 								<h:outputLabel for="country" value="#{m.t_country}" />
 								<h:inputText id="country" />
 								
-								<h:outputLabel for="year" value="#{m.t_year}" />
-								<h:inputText id="year" maxlength="4" />
+								<h:outputLabel for="issue_year" value="#{m.t_issue_date}" />
+								<h:panelGroup>
+									<h:selectOneMenu id="issue_day">
+										<f:selectItems value="#{form.days}" />
+									</h:selectOneMenu>
+									<h:selectOneMenu id="issue_month">
+										<f:selectItems value="#{form.months}" />
+									</h:selectOneMenu>
+									<h:selectOneMenu id="issue_year">
+										<f:selectItems value="#{form.years}" />
+									</h:selectOneMenu>
+								</h:panelGroup>
 								
 								<h:outputLabel for="count" value="#{m.t_count}" />
 								<h:inputText id="count" maxlength="2" />

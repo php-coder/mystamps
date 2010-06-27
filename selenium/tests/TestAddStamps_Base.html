@@ -27,8 +27,8 @@
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="year"]</td>
-		<td>Year</td>
+		<td>xpath=//label[@for="issue_year"]</td>
+		<td>Date of issue</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
@@ -79,7 +79,17 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="year"]</td>
+		<td>//select[@name="issue_day"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//select[@name="issue_month"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//select[@name="issue_year"]</td>
 		<td></td>
 	</tr>
 	<tr>
