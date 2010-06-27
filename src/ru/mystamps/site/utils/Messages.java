@@ -13,7 +13,7 @@ public class Messages {
 	 * @param FacesContext context
 	 * @param String message
 	 **/
-	public static String getTranslation(FacesContext context, String message) {
+	public static String getTranslation(final FacesContext context, final String message) {
 		
 		String bundleName = context.getApplication().getMessageBundle();
 		Locale locale = context.getViewRoot().getLocale();
