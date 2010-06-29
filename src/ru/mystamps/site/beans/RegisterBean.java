@@ -18,9 +18,6 @@ public class RegisterBean {
 		return email;
 	}
 	
-	public RegisterBean() {
-	}
-	
 	/**
 	 * @throws SQLException
 	 * @throws NamingException
