@@ -42,7 +42,11 @@ public class SuspiciousActivities {
 	 * @param String userAgent
 	 * @throws SQLException
 	 **/
-	public void logEvent(String type, String page, String ip, String refererPage, String userAgent)
+	public void logEvent(final String type,
+			final String page,
+			final String ip,
+			final String refererPage,
+			final String userAgent)
 		throws SQLException {
 		
 		Connection conn = ds.getConnection();
