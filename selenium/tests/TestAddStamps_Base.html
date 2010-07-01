@@ -137,4 +137,66 @@
 		<td>//input[@type="submit"][@value="Add"]</td>
 		<td></td>
 	</tr>
+	
+	<!--
+		Check days range in Date of issue field
+		TODO: test all values
+	-->
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_day"]</td>
+		<td>value=</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_day"]</td>
+		<td>value=1</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_day"]</td>
+		<td>value=31</td>
+	</tr>
+	
+	<!--
+		Check months range in Date of issue field
+		TODO: test all values
+	-->
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_month"]</td>
+		<td>value=</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_month"]</td>
+		<td>value=1</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_month"]</td>
+		<td>value=12</td>
+	</tr>
+	
+	<!--
+		Check years range in Date of issue field
+		TODO: test all values
+		TODO: calculate current year automatically
+	-->
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_year"]</td>
+		<td>value=</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_year"]</td>
+		<td>value=1840</td>
+	</tr>
+	<tr>
+		<td>select</td>
+		<td>//select[@name="issue_year"]</td>
+		<td>value=2010</td>
+	</tr>
+	
 </table>
