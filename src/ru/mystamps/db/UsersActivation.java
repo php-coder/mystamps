@@ -34,7 +34,7 @@ public class UsersActivation {
 	 * @see actKeyExists()
 	 **/
 	private static final String checkActKeyQuery =
-			"SELECT COUNT(*) " +
+			"SELECT COUNT(*) AS keys_count " +
 			"FROM `users_activation` " +
 			"WHERE `act_key` = ?";
 	
@@ -119,7 +119,7 @@ public class UsersActivation {
 			ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
-				int actKeys = rs.getInt(1);
+				int actKeys = rs.getInt("keys_count");
 				if (actKeys > 0) {
 					result = true;
 				}

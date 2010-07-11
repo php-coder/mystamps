@@ -61,7 +61,7 @@ public class Users {
 	 * @see loginExists()
 	 **/
 	private static final String checkUserQuery =
-			"SELECT COUNT(*) " +
+			"SELECT COUNT(*) AS users_count " +
 			"FROM users " +
 			"WHERE login = ?";
 	
@@ -208,7 +208,7 @@ public class Users {
 			ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
-				int usersCounter = rs.getInt(1);
+				int usersCounter = rs.getInt("users_count");
 				if (usersCounter > 0) {
 					result = true;
 				}
