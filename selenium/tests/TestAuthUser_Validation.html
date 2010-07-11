@@ -251,4 +251,31 @@
 		<td>Password should contains only latin letters, digits, hyphen or underscore</td>
 	</tr>
 	
+	<!-- check wrong login and password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>test</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>test</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//tr[@class="error"]/td[1]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//tr[@class="error"]/td[1]</td>
+		<td>Wrong login or password!</td>
+	</tr>
+	
 </table>

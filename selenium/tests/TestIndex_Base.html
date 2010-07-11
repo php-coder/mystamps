@@ -12,68 +12,32 @@
 		<td></td>
 	</tr>
 	
-	<!-- check header -->
+	<!-- check logo -->
 	<tr>
 		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='header']</td>
+		<td>xpath=//div[@id='logo']</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//div[@id='header']</td>
+		<td>xpath=//div[@id='logo']</td>
 		<td>My stamps</td>
 	</tr>
 	
-	<!-- check text -->
-	<tr>
-		<td>verifyTextPresent</td>
-		<td>You may:</td>
-		<td></td>
-	</tr>
-	
-	<!-- check link to register_user.jsf -->
+	<!-- check user bar: link to auth_user.jsf -->
 	<tr>
 		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[1]/a</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
-		<td>register on site</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[1]/a</td>
+		<td>Log in</td>
 	</tr>
 	<tr>
 		<td>clickAndWait</td>
-		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>assertLocation</td>
-		<td>http://my-stamps:8080/register_user.jsf</td>
-		<td></td>
-	</tr>
-	
-	<!-- return to index.jsf -->
-	<tr>
-		<td>goBack</td>
-		<td></td>
-		<td></td>
-	</tr>
-	
-	<!-- check link to auth_user.jsf -->
-	<tr>
-		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>verifyText</td>
-		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
-		<td>pass authorization on site</td>
-	</tr>
-	<tr>
-		<td>clickAndWait</td>
-		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[1]/a</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -89,20 +53,56 @@
 		<td></td>
 	</tr>
 	
-	<!-- check link to restore_password.jsf -->
+	<!-- check user bar: link to register_user.jsf -->
 	<tr>
 		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/a</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/a</td>
+		<td>Register</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://my-stamps:8080/register_user.jsf</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to index.jsf -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	<!-- check text -->
+	<tr>
+		<td>verifyTextPresent</td>
+		<td>You may:</td>
+		<td></td>
+	</tr>
+	
+	<!-- check link to restore_password.jsf -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
 		<td>recovery forgotten password</td>
 	</tr>
 	<tr>
 		<td>clickAndWait</td>
-		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -121,17 +121,17 @@
 	<!-- check link to add_stamps.jsf -->
 	<tr>
 		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='content']/ul/li[4]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//div[@id='content']/ul/li[4]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
 		<td>add stamp series</td>
 	</tr>
 	<tr>
 		<td>clickAndWait</td>
-		<td>xpath=//div[@id='content']/ul/li[4]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -150,17 +150,17 @@
 	<!-- check link to add_country.jsf -->
 	<tr>
 		<td>assertElementPresent</td>
-		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
 		<td>add country</td>
 	</tr>
 	<tr>
 		<td>clickAndWait</td>
-		<td>xpath=//div[@id='content']/ul/li[5]/a</td>
+		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
 		<td></td>
 	</tr>
 	<tr>

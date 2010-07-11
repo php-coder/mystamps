@@ -16,17 +16,6 @@
 				<h:outputText value="#{m.t_you_may}" />:
 				<ul>
 					<li>
-						<h:outputLink value="/register_user.jsf">
-							<h:outputText value="#{m.t_register_on_site}" />
-						</h:outputLink>
-					</li>
-
-					<li>
-						<h:outputLink value="/auth_user.jsf">
-							<h:outputText value="#{m.t_auth_on_site}" />
-						</h:outputLink>
-					</li>
-					<li>
 						<h:outputLink value="/restore_password.jsf">
 							<h:outputText value="#{m.t_recover_forget_password}" />
 						</h:outputLink>

@@ -1,13 +1,27 @@
-body {
+body,
+#user_bar ul {
 	margin: 0;
 }
 
+#header td {
+	padding: 0;
+}
+
 #header {
-	font-style: italic;
-	font-size: 300%;
+	width: 100%;
 	background-color: #f5f5f5;
 	border-bottom: dotted 1px;
+}
+
+#logo {
+	font-style: italic;
+	font-size: 300%;
+	width: 80%;
 	padding-left: 10px;
+}
+
+#user_bar {
+	width: 20%;
 }
 
 #footer {

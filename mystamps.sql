@@ -37,7 +37,8 @@ CREATE TABLE `suspicious_activities_types` (
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
-INSERT INTO suspicious_activities_types(name) VALUES("PageNotFound");
+INSERT INTO suspicious_activities_types(name)
+VALUES ('PageNotFound'), ('AuthenticationFailed');
 
 ----
 -- suspicious_activities

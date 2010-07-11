@@ -29,10 +29,11 @@
 				</div>
 				<div class="generic_form">
 					<h:form id="auth_form" prependId="false">
+						<h:messages globalOnly="true" errorClass="error" layout="table" />
 						<h:panelGrid columns="4">
 							<h:outputLabel for="login" value="#{m.t_login}" />
 							<h:outputText id="login_required" value="*" styleClass="required_field" />
-							<h:inputText id="login" required="true">
+							<h:inputText id="login" value="#{auth.login}" required="true">
 								<f:validateLength minimum="2" maximum="15" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
@@ -42,7 +43,7 @@
 							
 							<h:outputLabel for="pass" value="#{m.t_password}" />
 							<h:outputText id="pass_required" value="*" styleClass="required_field" />
-							<h:inputSecret id="pass" required="true">
+							<h:inputSecret id="pass" value="#{auth.password}" required="true">
 								<f:validateLength minimum="4" />
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
@@ -52,7 +53,10 @@
 							
 							<h:panelGroup />
 							<h:panelGroup />
-							<h:commandButton id="submit" type="submit" value="#{m.t_enter}" />
+							<h:commandButton id="submit"
+								type="submit"
+								value="#{m.t_enter}"
+								action="#{auth.authUser}" />
 							<h:panelGroup />
 						</h:panelGrid>
 					</h:form>

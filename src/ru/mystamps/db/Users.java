@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
+import ru.mystamps.site.beans.UserBean;
+
 public class Users {
 	private Logger log = null;
 	private DataSource ds = null;
@@ -38,6 +40,22 @@ public class Users {
 				"? " +
 				"FROM users_activation AS ua " +
 				"WHERE ua.act_key = ?";
+	
+	/**
+	 * @see auth()
+	 **/
+	private static final String getUserIdByCredentialsQuery =
+				"SELECT id " +
+				"FROM users " +
+				"WHERE login = ? AND hash = SHA1(CONCAT(salt, ?))";
+	
+	/**
+	 * @see getUserById()
+	 **/
+	private static final String getUserByIdQuery =
+				"SELECT login, name " +
+				"FROM users " +
+				"WHERE id = ?";
 	
 	/**
 	 * @see loginExists()
@@ -97,6 +115,79 @@ public class Users {
 		} finally {
 			conn.close();
 		}
+	}
+	
+	/**
+	 * Get user id based on login/password pair.
+	 * @param String login user's login
+	 * @param String password user's password
+	 * @throws SQLException
+	 **/
+	public Long auth(final String login, final String password)
+		throws SQLException {
+		
+		Connection conn = ds.getConnection();
+		Long userId = null;
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(getUserIdByCredentialsQuery);
+			stat.setString(1, login);
+			stat.setString(2, password);
+			
+			ResultSet rs = stat.executeQuery();
+			
+			if (rs.next()) {
+				userId = rs.getLong("id");
+				log.debug("auth(" + login + ", " + password + ") = " + userId + ": SUCCESS");
+				
+			} else {
+				log.debug("auth(" + login + ", " + password + "): FAIL");
+			}
+		
+		} finally {
+			conn.close();
+		}
+		
+		return userId;
+	}
+	
+	/**
+	 * Get bean with info about user based on uid.
+	 * @param Long userId uid
+	 * @return null if user not exists or userId is null
+	 **/
+	public UserBean getUserById(final Long userId)
+		throws SQLException {
+		
+		if (userId == null) {
+			return null;
+		}
+		
+		Connection conn = ds.getConnection();
+		UserBean user = null;
+		
+		try {
+			PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
+			stat.setLong(1, userId);
+			
+			ResultSet rs = stat.executeQuery();
+			
+			if (rs.next()) {
+				user = new UserBean();
+				user.setUid(userId);
+				user.setLogin(rs.getString("login"));
+				user.setName(rs.getString("name"));
+				log.debug("getUserById(" + userId + "): " + user.getLogin() + "/" + user.getName());
+				
+			} else {
+				log.error("getUserById(" + userId + "): cannot get user!");
+			}
+		
+		} finally {
+			conn.close();
+		}
+		
+		return user;
 	}
 	
 	/**
