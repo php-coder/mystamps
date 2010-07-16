@@ -1,5 +1,4 @@
 logs/site.log
-WEB-INF/lib/*.jar
 WEB-INF/classes/ru/mystamps/db/*.class
 WEB-INF/classes/ru/mystamps/site/*.class
 WEB-INF/classes/ru/mystamps/i18n/*.properties

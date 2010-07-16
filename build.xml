@@ -3,12 +3,14 @@
 	<target name="init" description="Initiate environment">
 		<property name="src.dir" value="src" />
 		<property name="build.dir" value="WEB-INF/classes" />
+		<property name="buildlib.dir" value="WEB-INF/build-lib" />
 		<property name="lib.dir" value="WEB-INF/lib" />
 		<property name="i18n.dir" value="ru/mystamps/i18n" />
 		
 		<path id="classpath">
 			<fileset dir="${build.dir}" />
 			<fileset dir="${lib.dir}" includes="*.jar" />
+			<fileset dir="${buildlib.dir}" includes="*.jar" />
 		</path>
 		
 		<property name="verbose" value="false" />
