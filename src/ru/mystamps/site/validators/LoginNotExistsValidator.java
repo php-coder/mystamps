@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.EditableValueHolder;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
@@ -16,6 +17,7 @@ import org.apache.log4j.Logger;
 import ru.mystamps.db.Users;
 import ru.mystamps.site.utils.Messages;
 
+@FacesValidator(value="LoginNotExists")
 public class LoginNotExistsValidator implements Validator {
 	
 	private Logger log = null;

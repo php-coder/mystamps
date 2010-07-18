@@ -20,21 +20,6 @@
 		<message-bundle>ru.mystamps.i18n.Messages</message-bundle>
 		<message-bundle>ru.mystamps.i18n.ErrorMessages</message-bundle>
 		
-		<converter>
-			<converter-id>ru.mystamps.site.converters.TrimSpaces</converter-id>
-			<converter-class>ru.mystamps.site.converters.TrimSpacesConverter</converter-class>
-		</converter>
-		
-		<validator>
-			<validator-id>ru.mystamps.site.validators.LoginNotExists</validator-id>
-			<validator-class>ru.mystamps.site.validators.LoginNotExistsValidator</validator-class>
-		</validator>
-		
-		<validator>
-			<validator-id>ru.mystamps.site.validators.ActivationKeyExists</validator-id>
-			<validator-class>ru.mystamps.site.validators.ActivationKeyExistsValidator</validator-class>
-		</validator>
-		
 		<locale-config>
 			<default-locale>ru</default-locale>
 			<supported-locale>ru</supported-locale>

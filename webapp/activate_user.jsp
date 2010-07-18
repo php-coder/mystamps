@@ -35,16 +35,14 @@
 								<t:validateRegExpr
 									pattern="[-_a-zA-Z0-9]+"
 									message="#{e.tv_invalid_login}" />
-								<f:validator
-									validatorId="ru.mystamps.site.validators.LoginNotExists" />
+								<f:validator validatorId="LoginNotExists" />
 							</h:inputText>
 							<h:message id="login_error" for="login" styleClass="error" />
 							
 							<h:outputLabel for="name" value="#{m.t_name}" />
 							<h:panelGroup />
 							<h:inputText id="name" value="#{activate.name}">
-								<f:converter
-									converterId="ru.mystamps.site.converters.TrimSpaces" />
+								<f:converter converterId="TrimSpaces" />
 								<f:validateLength
 									maximum="#{initParam['NAME_MAX_LENGTH']}" />
 								<t:validateRegExpr
@@ -86,8 +84,7 @@
 								<t:validateRegExpr
 									pattern="[0-9a-z]+"
 									message="#{e.tv_invalid_key}" />
-								<f:validator
-									validatorId="ru.mystamps.site.validators.ActivationKeyExists" />
+								<f:validator validatorId="ActivationKeyExists" />
 							</h:inputText>
 							<h:message id="act_key_error" for="act_key" styleClass="error" />
 							
