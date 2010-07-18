@@ -38,7 +38,7 @@
 		<war destfile="${dist.dir}/${war.name}" basedir="${web.dir}" webxml="${web.dir}/WEB-INF/web.xml">
 			<classes dir="${build.dir}" />
 			<lib dir="${lib.dir}">
-				<exclude file="tomcat6-servlet-2.5-api-6.0.26.jar" />
+				<exclude name="tomcat6-servlet-2.5-api-6.0.26.jar" />
 			</lib>
 		</war>
 	</target>
