@@ -2,10 +2,14 @@ package ru.mystamps.site.beans;
 
 import java.sql.SQLException;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.naming.NamingException;
 
 import ru.mystamps.db.UsersActivation;
 
+@ManagedBean(name="register")
+@RequestScoped
 public class RegisterBean {
 	
 	private String email;

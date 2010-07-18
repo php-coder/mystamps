@@ -2,8 +2,12 @@ package ru.mystamps.site.beans;
 
 import java.util.Calendar;
 
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
+@ManagedBean(name="form")
+@ApplicationScoped
 public class FormBean {
 	private static final int DAYS_IN_MONTHS = 31;
 	private static final int MONTHS_IN_YEAR = 12;

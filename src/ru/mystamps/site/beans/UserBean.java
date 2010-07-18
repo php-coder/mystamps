@@ -1,5 +1,10 @@
 package ru.mystamps.site.beans;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name="user")
+@SessionScoped
 public class UserBean {
 	private Long uid     = - 1L;
 	private String name  = null;

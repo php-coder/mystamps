@@ -3,6 +3,9 @@ package ru.mystamps.site.beans;
 import java.sql.SQLException;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
@@ -16,12 +19,16 @@ import ru.mystamps.db.Users;
 import ru.mystamps.db.UsersActivation;
 import ru.mystamps.site.utils.Messages;
 
+@ManagedBean(name="activate")
+@RequestScoped
 public class ActivateBean {
 	
 	private UIInput loginInput;
 	
 	private String name;
 	private String password;
+	
+	@ManagedProperty(value="#{param.key}")
 	private String actKey;
 	
 	private Logger log = null;

@@ -2,35 +2,10 @@
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-		http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
-	version="1.2">
+		http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
 	
 	<application>
-		
-		<navigation-rule>
-			<from-view-id>/register_user.jsp</from-view-id>
-			<navigation-case>
-				<from-outcome>activation_sent</from-outcome>
-				<to-view-id>/activation_sent.jsp</to-view-id>
-			</navigation-case>
-		</navigation-rule>
-		
-		<navigation-rule>
-			<from-view-id>/activate_user.jsp</from-view-id>
-			<navigation-case>
-				<from-outcome>activation_successful</from-outcome>
-				<to-view-id>/activation_successful.jsp</to-view-id>
-			</navigation-case>
-		</navigation-rule>
-		
-		<navigation-rule>
-			<from-view-id>/auth_user.jsp</from-view-id>
-			<navigation-case>
-				<from-outcome>index</from-outcome>
-				<to-view-id>/index.jsp</to-view-id>
-				<redirect />
-			</navigation-case>
-		</navigation-rule>
 		
 		<resource-bundle>
 			<base-name>ru.mystamps.i18n.Messages</base-name>
@@ -65,45 +40,6 @@
 			<supported-locale>ru</supported-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
-		
-		<managed-bean>
-			<managed-bean-name>form</managed-bean-name>
-			<managed-bean-class>ru.mystamps.site.beans.FormBean</managed-bean-class>
-			<managed-bean-scope>application</managed-bean-scope>
-		</managed-bean>
-		
-		<managed-bean>
-			<managed-bean-name>user</managed-bean-name>
-			<managed-bean-class>ru.mystamps.site.beans.UserBean</managed-bean-class>
-			<managed-bean-scope>session</managed-bean-scope>
-		</managed-bean>
-		
-		<managed-bean>
-			<managed-bean-name>register</managed-bean-name>
-			<managed-bean-class>ru.mystamps.site.beans.RegisterBean</managed-bean-class>
-			<managed-bean-scope>request</managed-bean-scope>
-		</managed-bean>
-		
-		<managed-bean>
-			<managed-bean-name>activate</managed-bean-name>
-			<managed-bean-class>ru.mystamps.site.beans.ActivateBean</managed-bean-class>
-			<managed-bean-scope>request</managed-bean-scope>
-			<managed-property>
-				<property-name>actKey</property-name>
-				<property-class>java.lang.String</property-class>
-				<value>#{param.key}</value>
-			</managed-property>
-		</managed-bean>
-		
-		<managed-bean>
-			<managed-bean-name>auth</managed-bean-name>
-			<managed-bean-class>ru.mystamps.site.beans.AuthBean</managed-bean-class>
-			<managed-bean-scope>request</managed-bean-scope>
-			<managed-property>
-				<property-name>user</property-name>
-				<value>#{user}</value>
-			</managed-property>
-		</managed-bean>
 		
 	</application>
 	

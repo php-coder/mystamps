@@ -3,6 +3,9 @@ package ru.mystamps.site.beans;
 import java.sql.SQLException;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,13 @@ import ru.mystamps.db.Users;
 import ru.mystamps.db.SuspiciousActivities;
 import ru.mystamps.site.utils.Messages;
 
+@ManagedBean(name="auth")
+@RequestScoped
 public class AuthBean {
 	private String login;
 	private String password;
+	
+	@ManagedProperty(value="#user")
 	private UserBean user;
 	
 	/**
@@ -40,7 +47,7 @@ public class AuthBean {
 			user.setName(userBean.getName());
 		}
 		
-		return "index";
+		return "index?faces-redirect=true";
 	}
 	
 	/**
