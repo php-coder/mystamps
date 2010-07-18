@@ -21,7 +21,7 @@
 			<link rel="stylesheet" type="text/css" href="styles/error.css" />
 		</h:head>
 		<h:body>
-			<%@ include file="/WEB-INF/segments/header.jspf" %>
+			<ui:include src="/segments/header.xhtml" />
 			<div id="content">
 				<table>
 					<tr>
@@ -35,7 +35,7 @@
 					</tr>
 				</table>
 			</div>
-			<%@ include file="/WEB-INF/segments/footer.jspf" %>
+			<ui:include src="/segments/footer.xhtml" />
 		</h:body>
 	</f:view>
 </html>

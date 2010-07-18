@@ -12,7 +12,7 @@
 			<link rel="stylesheet" type="text/css" href="styles/main.css" />
 		</h:head>
 		<h:body>
-			<%@ include file="/WEB-INF/segments/header.jspf" %>
+			<ui:include src="/segments/header.xhtml" />
 			<div id="content">
 				<h3>
 					<h:outputText value="#{m.t_add_series_ucfirst}" />
@@ -66,7 +66,7 @@
 					</h:form>
 				</div>
 			</div>
-			<%@ include file="/WEB-INF/segments/footer.jspf" %>
+			<ui:include src="/segments/footer.xhtml" />
 		</h:body>
 	</f:view>
 </html>

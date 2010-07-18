@@ -11,7 +11,7 @@
 			<link rel="stylesheet" type="text/css" href="styles/main.css" />
 		</h:head>
 		<h:body>
-			<%@ include file="/WEB-INF/segments/header.jspf" %>
+			<ui:include src="/segments/header.xhtml" />
 			<div id="content">
 				<h:outputText value="#{m.t_you_may}" />:
 				<ul>
@@ -32,7 +32,7 @@
 					</li>
 				</ul>
 			</div>
-			<%@ include file="/WEB-INF/segments/footer.jspf" %>
+			<ui:include src="/segments/footer.xhtml" />
 		</h:body>
 	</f:view>
 </html>

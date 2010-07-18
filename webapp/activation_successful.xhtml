@@ -11,7 +11,7 @@
 			<link rel="stylesheet" type="text/css" href="styles/main.css" />
 		</h:head>
 		<h:body>
-			<%@ include file="/WEB-INF/segments/header.jspf" %>
+			<ui:include src="/segments/header.xhtml" />
 			<div id="content">
 				<h3>
 					<h:outputText value="#{m.t_activation_on_site}" />
@@ -21,7 +21,7 @@
 					<f:param value="</a>" />
 				</h:outputFormat>
 			</div>
-			<%@ include file="/WEB-INF/segments/footer.jspf" %>
+			<ui:include src="/segments/footer.xhtml" />
 		</h:body>
 	</f:view>
 </html>
