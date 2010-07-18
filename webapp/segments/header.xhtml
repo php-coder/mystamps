@@ -1,27 +1,39 @@
-<table id="header">
-	<tr>
-		<td>
-			<div id="logo">
-				<h:outputText value="#{m.t_my_stamps}" />
-			</div>
-		</td>
-		<td id="user_bar">
-			<ul>
-				<li>
-					<h:outputText value="#{user.name}" rendered="#{user.logged}" />
-					<h:outputLink value="/auth_user.jsf" rendered="#{not user.logged}">
-						<h:outputText value="#{m.t_enter}" />
-					</h:outputLink>
-				</li>
-				<li>
-					<h:form id="logout_form">
-						<h:commandLink value="#{m.t_logout}" action="#{auth.logout}" rendered="#{user.logged}" />
-					</h:form>
-					<h:outputLink value="/register_user.jsf" rendered="#{not user.logged}">
-						<h:outputText value="#{m.t_register}" />
-					</h:outputLink>
-				</li>
-			</ul>
-		</td>
-	</tr>
-</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:composition>
+		<table id="header">
+			<tr>
+				<td>
+					<div id="logo">
+						<h:outputText value="#{m.t_my_stamps}" />
+					</div>
+				</td>
+				<td id="user_bar">
+					<ul>
+						<li>
+							<h:outputText value="#{user.name}" rendered="#{user.logged}" />
+							<h:outputLink value="/auth_user.jsf" rendered="#{not user.logged}">
+								<h:outputText value="#{m.t_enter}" />
+							</h:outputLink>
+						</li>
+						<li>
+							<h:form id="logout_form">
+								<h:commandLink value="#{m.t_logout}"
+									action="#{auth.logout}"
+									rendered="#{user.logged}" />
+							</h:form>
+							<h:outputLink value="/register_user.jsf" rendered="#{not user.logged}">
+								<h:outputText value="#{m.t_register}" />
+							</h:outputLink>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</ui:composition>
+	
+</html>
