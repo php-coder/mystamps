@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page pageEncoding="UTF-8" isErrorPage="true" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.beans.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
 <jsp:setProperty name="suspEvent" property="page" value="${requestScope[\"javax.servlet.error.request_uri\"]}" />
