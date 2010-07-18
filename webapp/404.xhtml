@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.beans.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
@@ -12,7 +11,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 	<f:view>
 		<h:head>
 			<title><h:outputText value="#{m.t_404_title}" /></title>
