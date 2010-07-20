@@ -9,6 +9,10 @@
 		<property name="dist.dir" value="dist" />
 		<property name="war.name" value="mystamps.war" />
 		
+		<property
+			name="glassfish.deploy.dir"
+			value="/mnt/add/glassfishv3/glassfish/domains/domain1/autodeploy" />
+		
 		<path id="classpath">
 			<fileset dir="${build.dir}" />
 			<fileset dir="${lib.dir}" includes="*.jar" />
@@ -41,6 +45,10 @@
 				<exclude name="tomcat6-servlet-2.5-api-6.0.26.jar" />
 			</lib>
 		</war>
+	</target>
+	
+	<target name="deploy-glassfish" depends="war" description="Deploy WAR-file to GlassFish">
+		<copy file="${dist.dir}/${war.name}" todir="${glassfish.deploy.dir}" verbose="${verbose}" />
 	</target>
 	
 </project>
