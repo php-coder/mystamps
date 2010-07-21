@@ -19,18 +19,14 @@
 				</h3>
 				<div class="hint">
 					<h:outputFormat value="#{m.t_if_you_already_registered}" escape="false">
-						<f:param value="<a href=\"/auth_user.jsf\">" />
-						<f:param value="</a>" />
+						<f:param value="/auth_user.jsf" />
 					</h:outputFormat>
 					<br />
 					<h:outputFormat value="#{m.t_if_you_forget_password}" escape="false">
-						<f:param value="<a href=\"/restore_password.jsf\">" />
-						<f:param value="</a>" />
+						<f:param value="/restore_password.jsf" />
 					</h:outputFormat>
 					<br />
-					<h:outputFormat value="#{m.t_required_fields_legend}" escape="false">
-						<f:param value="<span class=\"required_field\">*</span>" />
-					</h:outputFormat>
+					<h:outputText value="#{m.t_required_fields_legend}" escape="false" />
 				</div>
 				<div class="generic_form">
 					<h:form id="register_form" prependId="false">
