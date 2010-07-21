@@ -23,7 +23,7 @@ public class AuthBean {
 	private String login;
 	private String password;
 	
-	@ManagedProperty(value="#user")
+	@ManagedProperty(value="#{user}")
 	private UserBean user;
 	
 	/**
