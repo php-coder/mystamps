@@ -18,9 +18,6 @@ public class MaintenanceFilter implements Filter {
 	private Logger log = null;
 	private static final String MAINTENANCE_PAGE_URL = "/maintenance.jsf";
 	
-	public MaintenanceFilter() {
-	}
-	
 	@Override
 	public void init(FilterConfig config) {
 		this.config = config;
