@@ -60,7 +60,7 @@
 	
 	<error-page>
 		<error-code>404</error-code>
-		<location>/404.jsf</location>
+		<location>/404.jsp</location>
 	</error-page>
 	
 	<filter>
