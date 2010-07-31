@@ -10,14 +10,14 @@ import ru.mystamps.db.SuspiciousActivities;
 
 public class SuspiciousEventBean {
 	
-	private String type = null;
-	private String page = null;
-	private String ip = null;
-	private String refererPage = null;
-	private String userAgent = null;
+	private String type;
+	private String page;
+	private String ip;
+	private String refererPage;
+	private String userAgent;
 	
 	private Logger log = Logger.getRootLogger();
-	private SuspiciousActivities act = null;
+	private SuspiciousActivities act;
 	
 	/**
 	 * @throws NamingException

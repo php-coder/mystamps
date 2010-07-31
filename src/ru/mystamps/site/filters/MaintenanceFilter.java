@@ -14,8 +14,8 @@ import org.apache.log4j.Logger;
 
 public class MaintenanceFilter implements Filter {
 	
-	private FilterConfig config = null;
-	private Logger log = null;
+	private FilterConfig config;
+	private Logger log;
 	private static final String MAINTENANCE_PAGE_URL = "/maintenance.jsf";
 	
 	@Override

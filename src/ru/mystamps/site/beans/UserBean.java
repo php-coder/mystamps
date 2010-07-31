@@ -1,9 +1,9 @@
 package ru.mystamps.site.beans;
 
 public class UserBean {
-	private Long uid     = - 1L;
-	private String name  = null;
-	private String login = null;
+	private Long uid = - 1L;
+	private String name;
+	private String login;
 	
 	public void setUid(Long uid) {
 		this.uid = uid;

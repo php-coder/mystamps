@@ -16,7 +16,7 @@ import ru.mystamps.site.beans.UserBean;
 
 public class Users {
 	private Logger log = Logger.getRootLogger();
-	private DataSource ds = null;
+	private DataSource ds;
 	
 	/**
 	 * @see add()
@@ -71,8 +71,7 @@ public class Users {
 	public Users()
 		throws NamingException {
 		
-		Context env = null;
-		env = (Context)new InitialContext().lookup("java:comp/env");
+		Context env = (Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
