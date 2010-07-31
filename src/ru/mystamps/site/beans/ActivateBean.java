@@ -31,11 +31,7 @@ public class ActivateBean {
 	@ManagedProperty(value="#{param.key}")
 	private String actKey;
 	
-	private Logger log = null;
-	
-	public ActivateBean() {
-		log = Logger.getRootLogger();
-	}
+	private Logger log = Logger.getRootLogger();
 	
 	public void setLoginInput(UIInput loginInput) {
 		this.loginInput = loginInput;

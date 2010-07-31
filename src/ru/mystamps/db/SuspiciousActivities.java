@@ -10,7 +10,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class SuspiciousActivities {
-	private DataSource ds = null;
+	private DataSource ds;
 	
 	private static final String logEventQuery =
 			"INSERT INTO `suspicious_activities` " +
@@ -24,8 +24,7 @@ public class SuspiciousActivities {
 	public SuspiciousActivities()
 		throws NamingException {
 		
-		Context env = null;
-		env = (Context)new InitialContext().lookup("java:comp/env");
+		Context env = (Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	

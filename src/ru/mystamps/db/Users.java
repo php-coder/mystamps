@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import ru.mystamps.site.beans.UserBean;
 
 public class Users {
-	private Logger log = null;
-	private DataSource ds = null;
+	private Logger log = Logger.getRootLogger();
+	private DataSource ds;
 	
 	/**
 	 * @see add()
@@ -71,10 +71,7 @@ public class Users {
 	public Users()
 		throws NamingException {
 		
-		log = Logger.getRootLogger();
-		
-		Context env = null;
-		env = (Context)new InitialContext().lookup("java:comp/env");
+		Context env = (Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
