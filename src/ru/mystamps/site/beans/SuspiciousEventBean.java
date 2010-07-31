@@ -16,7 +16,7 @@ public class SuspiciousEventBean {
 	private String refererPage = null;
 	private String userAgent = null;
 	
-	private Logger log = null;
+	private Logger log = Logger.getRootLogger();
 	private SuspiciousActivities act = null;
 	
 	/**
@@ -24,7 +24,6 @@ public class SuspiciousEventBean {
 	 **/
 	public SuspiciousEventBean()
 		throws NamingException {
-		log = Logger.getRootLogger();
 		act = new SuspiciousActivities();
 	}
 	

@@ -18,12 +18,7 @@ import ru.mystamps.site.utils.Messages;
 
 public class ActivationKeyExistsValidator implements Validator {
 	
-	private Logger log = null;
-	
-	public ActivationKeyExistsValidator() {
-		log = Logger.getRootLogger();
-	}
-	
+	private Logger log = Logger.getRootLogger();
 	
 	/**
 	 * Check that activation key exists in database.

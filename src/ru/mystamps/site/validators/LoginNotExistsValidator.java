@@ -18,12 +18,7 @@ import ru.mystamps.site.utils.Messages;
 
 public class LoginNotExistsValidator implements Validator {
 	
-	private Logger log = null;
-	
-	public LoginNotExistsValidator() {
-		log = Logger.getRootLogger();
-	}
-	
+	private Logger log = Logger.getRootLogger();
 	
 	/**
 	 * Check that login does not exists in database.

@@ -24,11 +24,7 @@ public class ActivateBean {
 	private String password;
 	private String actKey;
 	
-	private Logger log = null;
-	
-	public ActivateBean() {
-		log = Logger.getRootLogger();
-	}
+	private Logger log = Logger.getRootLogger();
 	
 	public void setLoginInput(UIInput loginInput) {
 		this.loginInput = loginInput;
