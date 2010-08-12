@@ -2,15 +2,16 @@
 	
 	<target name="init" description="Initiate environment">
 		<property name="src.dir" value="src" />
-		<property name="build.dir" value="WEB-INF/classes" />
-		<property name="buildlib.dir" value="WEB-INF/build-lib" />
-		<property name="lib.dir" value="WEB-INF/lib" />
+		<property name="build.dir" value="build" />
+		<property name="lib.dir" value="lib" />
 		<property name="i18n.dir" value="ru/mystamps/i18n" />
+		<property name="web.dir" value="webapp" />
+		<property name="dist.dir" value="dist" />
+		<property name="war.name" value="mystamps.war" />
 		
 		<path id="classpath">
 			<fileset dir="${build.dir}" />
 			<fileset dir="${lib.dir}" includes="*.jar" />
-			<fileset dir="${buildlib.dir}" includes="*.jar" />
 		</path>
 		
 		<property name="verbose" value="false" />
@@ -31,6 +32,15 @@
 		<delete verbose="${verbose}">
 			<fileset dir="${build.dir}/${i18n.dir}" includes="**/*.properties" />
 		</delete>
+	</target>
+	
+	<target name="war" depends="init,compile" description="Create WAR-file">
+		<war destfile="${dist.dir}/${war.name}" basedir="${web.dir}" webxml="${web.dir}/WEB-INF/web.xml">
+			<classes dir="${build.dir}" />
+			<lib dir="${lib.dir}">
+				<exclude name="tomcat6-servlet-2.5-api-6.0.26.jar" />
+			</lib>
+		</war>
 	</target>
 	
 </project>
