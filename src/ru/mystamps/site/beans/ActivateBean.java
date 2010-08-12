@@ -24,9 +24,9 @@ public class ActivateBean {
 	private String password;
 	private String actKey;
 	
-	private Logger log = Logger.getRootLogger();
+	private final Logger log = Logger.getRootLogger();
 	
-	public void setLoginInput(UIInput loginInput) {
+	public void setLoginInput(final UIInput loginInput) {
 		this.loginInput = loginInput;
 	}
 	
@@ -34,7 +34,7 @@ public class ActivateBean {
 		return loginInput;
 	}
 	
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 	
@@ -42,7 +42,7 @@ public class ActivateBean {
 		return name;
 	}
 	
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 	
@@ -50,7 +50,7 @@ public class ActivateBean {
 		return password;
 	}
 	
-	public void setActKey(String actKey) {
+	public void setActKey(final String actKey) {
 		this.actKey = actKey;
 	}
 	
@@ -66,8 +66,10 @@ public class ActivateBean {
 	 * @param Object value
 	 * @throws ValidatorException
 	 **/
-	public void validatePasswordLoginMismatch(FacesContext context,
-			UIComponent component, Object value) {
+	public void validatePasswordLoginMismatch(
+			final FacesContext context,
+			final UIComponent component,
+			final Object value) {
 		
 		// don't continue if login field not set or not valid
 		if (! loginInput.isValid()) {
@@ -87,8 +89,10 @@ public class ActivateBean {
 		
 		try {
 			if (login.equals(password)) {
-				String msg = Messages.getTranslation(context, "tv_password_login_match");
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+				final String msg =
+					Messages.getTranslation(context, "tv_password_login_match");
+				final FacesMessage message =
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
 				throw new ValidatorException(message);
 			}
 		} catch (NullPointerException ex) {
@@ -102,7 +106,7 @@ public class ActivateBean {
 	public String activateUser()
 		throws SQLException, NamingException {
 		
-		String login = (String)loginInput.getValue();
+		final String login = (String)loginInput.getValue();
 		
 		// use login as name if name is not provided
 		if (name.equals("")) {
@@ -111,10 +115,10 @@ public class ActivateBean {
 		
 		log.debug("Activate user '" + login + "' (" + name + ") with password '" + password + "' (key = " + actKey + ")");
 		
-		Users users = new Users();
+		final Users users = new Users();
 		users.add(login, password, name, actKey);
 		
-		UsersActivation activationRequests = new UsersActivation();
+		final UsersActivation activationRequests = new UsersActivation();
 		activationRequests.del(actKey);
 		
 		return "activation_successful";

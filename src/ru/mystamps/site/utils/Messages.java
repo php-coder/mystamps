@@ -15,9 +15,9 @@ public class Messages {
 	 **/
 	public static String getTranslation(final FacesContext context, final String message) {
 		
-		String bundleName = context.getApplication().getMessageBundle();
-		Locale locale = context.getViewRoot().getLocale();
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		final String bundleName = context.getApplication().getMessageBundle();
+		final Locale locale = context.getViewRoot().getLocale();
+		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		
 		final String translatedMessage =
 			ResourceBundle.getBundle(bundleName, locale, loader).getString(message);

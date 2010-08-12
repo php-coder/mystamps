@@ -16,8 +16,8 @@ public class SuspiciousEventBean {
 	private String refererPage;
 	private String userAgent;
 	
-	private Logger log = Logger.getRootLogger();
-	private SuspiciousActivities act;
+	private final Logger log = Logger.getRootLogger();
+	private final SuspiciousActivities act;
 	
 	/**
 	 * @throws NamingException
@@ -37,7 +37,7 @@ public class SuspiciousEventBean {
 		return "";
 	}
 	
-	public void setType(String type) {
+	public void setType(final String type) {
 		log.debug("type: " + type);
 		this.type = type;
 	}
@@ -46,7 +46,7 @@ public class SuspiciousEventBean {
 		return this.type;
 	}
 	
-	public void setPage(String page) {
+	public void setPage(final String page) {
 		log.debug("page: " + page);
 		this.page = page;
 	}
@@ -55,7 +55,7 @@ public class SuspiciousEventBean {
 		return this.page;
 	}
 	
-	public void setIp(String ip) {
+	public void setIp(final String ip) {
 		log.debug("ip: " + ip);
 		this.ip = ip;
 	}
@@ -64,7 +64,7 @@ public class SuspiciousEventBean {
 		return this.ip;
 	}
 	
-	public void setRefererPage(String refererPage) {
+	public void setRefererPage(final String refererPage) {
 		log.debug("referer: " + refererPage);
 		this.refererPage = refererPage;
 	}
@@ -73,7 +73,7 @@ public class SuspiciousEventBean {
 		return this.refererPage;
 	}
 	
-	public void setUserAgent(String userAgent) {
+	public void setUserAgent(final String userAgent) {
 		log.debug("user-agent: " + userAgent);
 		this.userAgent = userAgent;
 	}

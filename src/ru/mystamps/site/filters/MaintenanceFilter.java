@@ -15,19 +15,18 @@ import org.apache.log4j.Logger;
 public class MaintenanceFilter implements Filter {
 	
 	private FilterConfig config;
-	private Logger log;
+	private final Logger log = Logger.getRootLogger();
 	private static final String MAINTENANCE_PAGE_URL = "/maintenance.jsf";
 	
 	@Override
-	public void init(FilterConfig config) {
+	public void init(final FilterConfig config) {
 		this.config = config;
-		this.log = Logger.getRootLogger();
 	}
 	
 	@Override
-	public void doFilter(ServletRequest request,
-						ServletResponse response,
-						FilterChain chain)
+	public void doFilter(final ServletRequest request,
+						final ServletResponse response,
+						final FilterChain chain)
 				throws IOException, ServletException {
 		
 		final String mode = config.getInitParameter("enableMaintainanceMode");
@@ -42,12 +41,13 @@ public class MaintenanceFilter implements Filter {
 		
 		if (mode.equalsIgnoreCase("yes")) {
 			
-			String userIP = request.getRemoteHost();
+			final String userIP = request.getRemoteHost();
 			if (userIP == null || userIP.equals("")) {
 				log.warn("Cannot get user IP address");
 			
 			} else if (! allowedIP.equals(userIP)) {
-				RequestDispatcher dispatch = request.getRequestDispatcher(MAINTENANCE_PAGE_URL);
+				final RequestDispatcher dispatch =
+					request.getRequestDispatcher(MAINTENANCE_PAGE_URL);
 				dispatch.forward(request, response);
 				return;
 			}

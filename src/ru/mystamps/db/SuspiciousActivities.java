@@ -10,7 +10,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class SuspiciousActivities {
-	private DataSource ds;
+	private final DataSource ds;
 	
 	private static final String logEventQuery =
 			"INSERT INTO `suspicious_activities` " +
@@ -24,7 +24,8 @@ public class SuspiciousActivities {
 	public SuspiciousActivities()
 		throws NamingException {
 		
-		Context env = (Context)new InitialContext().lookup("java:comp/env");
+		final Context env =
+			(Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
@@ -48,10 +49,11 @@ public class SuspiciousActivities {
 			final String userAgent)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(logEventQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(logEventQuery);
 			stat.setString(1, page);
 			stat.setString(2, ip);
 			stat.setString(3, refererPage);

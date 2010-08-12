@@ -15,8 +15,8 @@ import org.apache.log4j.Logger;
 import ru.mystamps.site.beans.UserBean;
 
 public class Users {
-	private Logger log = Logger.getRootLogger();
-	private DataSource ds;
+	private final Logger log = Logger.getRootLogger();
+	private final DataSource ds;
 	
 	/**
 	 * @see add()
@@ -71,7 +71,8 @@ public class Users {
 	public Users()
 		throws NamingException {
 		
-		Context env = (Context)new InitialContext().lookup("java:comp/env");
+		final Context env =
+			(Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
@@ -95,13 +96,14 @@ public class Users {
 	public void add(final String login, final String password, final String name, final String actKey)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		
 		final String salt = generateSalt();
 		final String hash = salt + password;
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(addUserQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(addUserQuery);
 			stat.setString(1, login);
 			stat.setString(2, name);
 			stat.setString(3, hash);
@@ -123,15 +125,16 @@ public class Users {
 	public Long auth(final String login, final String password)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		Long userId = null;
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(getUserIdByCredentialsQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(getUserIdByCredentialsQuery);
 			stat.setString(1, login);
 			stat.setString(2, password);
 			
-			ResultSet rs = stat.executeQuery();
+			final ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
 				userId = rs.getLong("id");
@@ -160,14 +163,15 @@ public class Users {
 			return null;
 		}
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		UserBean user = null;
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(getUserByIdQuery);
 			stat.setLong(1, userId);
 			
-			ResultSet rs = stat.executeQuery();
+			final ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
 				user = new UserBean();
@@ -195,14 +199,15 @@ public class Users {
 	public boolean loginExists(final String login)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		boolean result = false;
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(checkUserQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(checkUserQuery);
 			stat.setString(1, login);
 			
-			ResultSet rs = stat.executeQuery();
+			final ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
 				int usersCounter = rs.getInt("users_count");

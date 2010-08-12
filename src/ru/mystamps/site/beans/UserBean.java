@@ -5,7 +5,7 @@ public class UserBean {
 	private String name;
 	private String login;
 	
-	public void setUid(Long uid) {
+	public void setUid(final Long uid) {
 		this.uid = uid;
 	}
 	
@@ -13,7 +13,7 @@ public class UserBean {
 		return uid;
 	}
 	
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 	
@@ -21,7 +21,7 @@ public class UserBean {
 		return name;
 	}
 	
-	public void setLogin(String login) {
+	public void setLogin(final String login) {
 		this.login = login;
 	}
 	

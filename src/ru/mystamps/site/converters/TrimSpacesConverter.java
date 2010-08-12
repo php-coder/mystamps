@@ -7,12 +7,18 @@ import javax.faces.convert.Converter;
 public class TrimSpacesConverter implements Converter {
 	
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+	public Object getAsObject(
+			final FacesContext context,
+			final UIComponent component,
+			final String value) {
 		return value.trim();
 	}
 	
 	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object value) {
+	public String getAsString(
+			final FacesContext context,
+			final UIComponent component,
+			final Object value) {
 		return value.toString();
 	}
 	

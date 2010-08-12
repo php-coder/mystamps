@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 public class UsersActivation {
-	private Logger log = Logger.getRootLogger();
-	private DataSource ds;
+	private final Logger log = Logger.getRootLogger();
+	private final DataSource ds;
 	
 	/**
 	 * @see add()
@@ -44,7 +44,8 @@ public class UsersActivation {
 	public UsersActivation()
 		throws NamingException {
 		
-		Context env = (Context)new InitialContext().lookup("java:comp/env");
+		final Context env =
+			(Context)new InitialContext().lookup("java:comp/env");
 		ds = (DataSource)env.lookup("jdbc/mystamps");
 	}
 	
@@ -63,13 +64,14 @@ public class UsersActivation {
 	 * @param String email
 	 * @throws SQLException
 	 **/
-	public void add(String email)
+	public void add(final String email)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(addRecordQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(addRecordQuery);
 			stat.setString(1, email);
 			stat.setString(2, generateActivationKey());
 			stat.executeUpdate();
@@ -86,10 +88,11 @@ public class UsersActivation {
 	public void del(final String actKey)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(delRecordQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(delRecordQuery);
 			stat.setString(1, actKey);
 			stat.executeUpdate();
 			
@@ -106,17 +109,18 @@ public class UsersActivation {
 	public boolean actKeyExists(final String actKey)
 		throws SQLException {
 		
-		Connection conn = ds.getConnection();
+		final Connection conn = ds.getConnection();
 		boolean result = false;
 		
 		try {
-			PreparedStatement stat = conn.prepareStatement(checkActKeyQuery);
+			final PreparedStatement stat =
+				conn.prepareStatement(checkActKeyQuery);
 			stat.setString(1, actKey);
 			
-			ResultSet rs = stat.executeQuery();
+			final ResultSet rs = stat.executeQuery();
 			
 			if (rs.next()) {
-				int actKeys = rs.getInt("keys_count");
+				final int actKeys = rs.getInt("keys_count");
 				if (actKeys > 0) {
 					result = true;
 				}

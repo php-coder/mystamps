@@ -10,7 +10,7 @@ public class RegisterBean {
 	
 	private String email;
 	
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 	
@@ -25,7 +25,7 @@ public class RegisterBean {
 	public String sendActivationKey()
 		throws SQLException, NamingException {
 		
-		UsersActivation activationRequests = new UsersActivation();
+		final UsersActivation activationRequests = new UsersActivation();
 		activationRequests.add(email);
 		
 		return "activation_sent";

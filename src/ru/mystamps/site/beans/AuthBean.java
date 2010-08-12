@@ -106,7 +106,7 @@ public class AuthBean {
 		events.logEvent("AuthenticationFailed", page, ip, referer, agent);
 	}
 	
-	public void setLogin(String login) {
+	public void setLogin(final String login) {
 		this.login = login;
 	}
 	
@@ -114,7 +114,7 @@ public class AuthBean {
 		return login;
 	}
 	
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 	
@@ -122,7 +122,7 @@ public class AuthBean {
 		return password;
 	}
 	
-	public void setUser(UserBean user) {
+	public void setUser(final UserBean user) {
 		this.user = user;
 	}
 	

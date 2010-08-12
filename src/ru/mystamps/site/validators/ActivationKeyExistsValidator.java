@@ -18,7 +18,7 @@ import ru.mystamps.site.utils.Messages;
 
 public class ActivationKeyExistsValidator implements Validator {
 	
-	private Logger log = Logger.getRootLogger();
+	private final Logger log = Logger.getRootLogger();
 	
 	/**
 	 * Check that activation key exists in database.
@@ -29,7 +29,10 @@ public class ActivationKeyExistsValidator implements Validator {
 	 * @throws ValidatorException
 	 **/
 	@Override
-	public void validate(FacesContext context, UIComponent component, Object value)
+	public void validate(
+			final FacesContext context,
+			final UIComponent component,
+			final Object value)
 		throws ValidatorException {
 		
 		if (component instanceof EditableValueHolder) {
@@ -43,8 +46,10 @@ public class ActivationKeyExistsValidator implements Validator {
 			final UsersActivation activationRequests = new UsersActivation();
 			
 			if (! activationRequests.actKeyExists(actKey)) {
-				String msg = Messages.getTranslation(context, "tv_key_not_exists");
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+				final String msg =
+					Messages.getTranslation(context, "tv_key_not_exists");
+				final FacesMessage message =
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
 				throw new ValidatorException(message);
 			}
 			
@@ -52,14 +57,18 @@ public class ActivationKeyExistsValidator implements Validator {
 		// ValidatorException
 		} catch (NamingException ex) {
 			log.error(ex);
-			String errMsg = Messages.getTranslation(context, "tv_internal_error");
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, errMsg, errMsg);
+			final String errMsg =
+				Messages.getTranslation(context, "tv_internal_error");
+			final FacesMessage facesMsg =
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, errMsg, errMsg);
 			throw new ValidatorException(facesMsg, ex);
 			
 		} catch (SQLException ex) {
 			log.error(ex);
-			String errMsg = Messages.getTranslation(context, "tv_internal_error");
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, errMsg, errMsg);
+			final String errMsg =
+				Messages.getTranslation(context, "tv_internal_error");
+			final FacesMessage facesMsg =
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, errMsg, errMsg);
 			throw new ValidatorException(facesMsg, ex);
 		}
 	}
