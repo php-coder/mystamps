@@ -10,6 +10,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import lombok.Cleanup;
+
 import org.apache.log4j.Logger;
 
 public class UsersActivation {
@@ -67,18 +69,14 @@ public class UsersActivation {
 	public void add(final String email)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(addRecordQuery);
-			stat.setString(1, email);
-			stat.setString(2, generateActivationKey());
-			stat.executeUpdate();
-			
-		} finally {
-			conn.close();
-		}
+		final PreparedStatement stat =
+			conn.prepareStatement(addRecordQuery);
+		stat.setString(1, email);
+		stat.setString(2, generateActivationKey());
+		stat.executeUpdate();
 	}
 	
 	/**
@@ -88,17 +86,13 @@ public class UsersActivation {
 	public void del(final String actKey)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(delRecordQuery);
-			stat.setString(1, actKey);
-			stat.executeUpdate();
-			
-		} finally {
-			conn.close();
-		}
+		final PreparedStatement stat =
+			conn.prepareStatement(delRecordQuery);
+		stat.setString(1, actKey);
+		stat.executeUpdate();
 	}
 	
 	/**
@@ -109,29 +103,26 @@ public class UsersActivation {
 	public boolean actKeyExists(final String actKey)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
+		
 		boolean result = false;
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(checkActKeyQuery);
-			stat.setString(1, actKey);
-			
-			final ResultSet rs = stat.executeQuery();
-			
-			if (rs.next()) {
-				final int actKeys = rs.getInt("keys_count");
-				if (actKeys > 0) {
-					result = true;
-				}
-				log.debug("found " + actKeys + " for key " + actKey);
-				
-			} else {
-				log.warn("actKeyExists(" + actKey +"): next() return false");
+		final PreparedStatement stat =
+			conn.prepareStatement(checkActKeyQuery);
+		stat.setString(1, actKey);
+
+		final ResultSet rs = stat.executeQuery();
+
+		if (rs.next()) {
+			final int actKeys = rs.getInt("keys_count");
+			if (actKeys > 0) {
+				result = true;
 			}
-		
-		} finally {
-			conn.close();
+			log.debug("found " + actKeys + " for key " + actKey);
+
+		} else {
+			log.warn("actKeyExists(" + actKey +"): next() return false");
 		}
 		
 		return result;

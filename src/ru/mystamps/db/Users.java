@@ -10,6 +10,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import lombok.Cleanup;
+
 import org.apache.log4j.Logger;
 
 import ru.mystamps.site.beans.UserBean;
@@ -96,24 +98,20 @@ public class Users {
 	public void add(final String login, final String password, final String name, final String actKey)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
 		
 		final String salt = generateSalt();
 		final String hash = salt + password;
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(addUserQuery);
-			stat.setString(1, login);
-			stat.setString(2, name);
-			stat.setString(3, hash);
-			stat.setString(4, salt);
-			stat.setString(5, actKey);
-			stat.executeUpdate();
-			
-		} finally {
-			conn.close();
-		}
+		final PreparedStatement stat =
+			conn.prepareStatement(addUserQuery);
+		stat.setString(1, login);
+		stat.setString(2, name);
+		stat.setString(3, hash);
+		stat.setString(4, salt);
+		stat.setString(5, actKey);
+		stat.executeUpdate();
 	}
 	
 	/**
@@ -125,27 +123,24 @@ public class Users {
 	public Long auth(final String login, final String password)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
+		
 		Long userId = null;
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(getUserIdByCredentialsQuery);
-			stat.setString(1, login);
-			stat.setString(2, password);
-			
-			final ResultSet rs = stat.executeQuery();
-			
-			if (rs.next()) {
-				userId = rs.getLong("id");
-				log.debug("auth(" + login + ", " + password + ") = " + userId + ": SUCCESS");
-				
-			} else {
-				log.debug("auth(" + login + ", " + password + "): FAIL");
-			}
-		
-		} finally {
-			conn.close();
+		final PreparedStatement stat =
+			conn.prepareStatement(getUserIdByCredentialsQuery);
+		stat.setString(1, login);
+		stat.setString(2, password);
+
+		final ResultSet rs = stat.executeQuery();
+
+		if (rs.next()) {
+			userId = rs.getLong("id");
+			log.debug("auth(" + login + ", " + password + ") = " + userId + ": SUCCESS");
+
+		} else {
+			log.debug("auth(" + login + ", " + password + "): FAIL");
 		}
 		
 		return userId;
@@ -163,29 +158,26 @@ public class Users {
 			return null;
 		}
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
+		
 		UserBean user = null;
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(getUserByIdQuery);
-			stat.setLong(1, userId);
-			
-			final ResultSet rs = stat.executeQuery();
-			
-			if (rs.next()) {
-				user = new UserBean();
-				user.setUid(userId);
-				user.setLogin(rs.getString("login"));
-				user.setName(rs.getString("name"));
-				log.debug("getUserById(" + userId + "): " + user.getLogin() + "/" + user.getName());
-				
-			} else {
-				log.error("getUserById(" + userId + "): cannot get user!");
-			}
-		
-		} finally {
-			conn.close();
+		final PreparedStatement stat =
+			conn.prepareStatement(getUserByIdQuery);
+		stat.setLong(1, userId);
+
+		final ResultSet rs = stat.executeQuery();
+
+		if (rs.next()) {
+			user = new UserBean();
+			user.setUid(userId);
+			user.setLogin(rs.getString("login"));
+			user.setName(rs.getString("name"));
+			log.debug("getUserById(" + userId + "): " + user.getLogin() + "/" + user.getName());
+
+		} else {
+			log.error("getUserById(" + userId + "): cannot get user!");
 		}
 		
 		return user;
@@ -199,29 +191,26 @@ public class Users {
 	public boolean loginExists(final String login)
 		throws SQLException {
 		
+		@Cleanup
 		final Connection conn = ds.getConnection();
+		
 		boolean result = false;
 		
-		try {
-			final PreparedStatement stat =
-				conn.prepareStatement(checkUserQuery);
-			stat.setString(1, login);
-			
-			final ResultSet rs = stat.executeQuery();
-			
-			if (rs.next()) {
-				int usersCounter = rs.getInt("users_count");
-				if (usersCounter > 0) {
-					result = true;
-				}
-				log.debug("found " + usersCounter + " for login " + login);
-				
-			} else {
-				log.warn("loginExists(" + login +"): next() return false");
+		final PreparedStatement stat =
+			conn.prepareStatement(checkUserQuery);
+		stat.setString(1, login);
+
+		final ResultSet rs = stat.executeQuery();
+
+		if (rs.next()) {
+			int usersCounter = rs.getInt("users_count");
+			if (usersCounter > 0) {
+				result = true;
 			}
-		
-		} finally {
-			conn.close();
+			log.debug("found " + usersCounter + " for login " + login);
+
+		} else {
+			log.warn("loginExists(" + login +"): next() return false");
 		}
 		
 		return result;

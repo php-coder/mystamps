@@ -10,6 +10,9 @@ import javax.faces.validator.ValidatorException;
 
 import javax.naming.NamingException;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.apache.log4j.Logger;
 
 import ru.mystamps.db.Users;
@@ -18,45 +21,12 @@ import ru.mystamps.site.utils.Messages;
 
 public class ActivateBean {
 	
-	private UIInput loginInput;
-	
-	private String name;
-	private String password;
-	private String actKey;
+	@Getter @Setter private UIInput loginInput;
+	@Getter @Setter private String name;
+	@Getter @Setter private String password;
+	@Getter @Setter private String actKey;
 	
 	private final Logger log = Logger.getRootLogger();
-	
-	public void setLoginInput(final UIInput loginInput) {
-		this.loginInput = loginInput;
-	}
-	
-	public UIInput getLoginInput() {
-		return loginInput;
-	}
-	
-	public void setName(final String name) {
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setPassword(final String password) {
-		this.password = password;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setActKey(final String actKey) {
-		this.actKey = actKey;
-	}
-	
-	public String getActKey() {
-		return actKey;
-	}
 	
 	/**
 	 * Check that login and password mismath.

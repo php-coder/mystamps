@@ -10,14 +10,17 @@ import javax.servlet.http.HttpSession;
 
 import javax.naming.NamingException;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.mystamps.db.Users;
 import ru.mystamps.db.SuspiciousActivities;
 import ru.mystamps.site.utils.Messages;
 
 public class AuthBean {
-	private String login;
-	private String password;
-	private UserBean user;
+	@Getter @Setter private String login;
+	@Getter @Setter private String password;
+	@Getter @Setter private UserBean user;
 	
 	/**
 	 * @throws NamingException
@@ -104,30 +107,6 @@ public class AuthBean {
 		
 		// log failed authentication attempt
 		events.logEvent("AuthenticationFailed", page, ip, referer, agent);
-	}
-	
-	public void setLogin(final String login) {
-		this.login = login;
-	}
-	
-	public String getLogin() {
-		return login;
-	}
-	
-	public void setPassword(final String password) {
-		this.password = password;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setUser(final UserBean user) {
-		this.user = user;
-	}
-	
-	public UserBean getUser() {
-		return user;
 	}
 	
 }

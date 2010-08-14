@@ -4,19 +4,14 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.mystamps.db.UsersActivation;
 
 public class RegisterBean {
 	
-	private String email;
-	
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
+	@Getter @Setter private String email;
 	
 	/**
 	 * @throws SQLException
