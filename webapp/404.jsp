@@ -5,6 +5,7 @@
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.beans.SuspiciousEventBean">
 <jsp:setProperty name="suspEvent" property="type" value="PageNotFound" />
 <jsp:setProperty name="suspEvent" property="page" value="${requestScope[\"javax.servlet.error.request_uri\"]}" />
+<jsp:setProperty name="suspEvent" property="uid" value="${sessionScope.user.uid}" />
 <jsp:setProperty name="suspEvent" property="ip" value="${pageContext.request.remoteAddr}" />
 <jsp:setProperty name="suspEvent" property="refererPage" value="${fn:escapeXml(header[\"referer\"])}" />
 <jsp:setProperty name="suspEvent" property="userAgent" value="${fn:escapeXml(header[\"user-agent\"])}" />

@@ -13,6 +13,7 @@ public class SuspiciousEventBean {
 	
 	@Getter @Setter private String type;
 	@Getter @Setter private String page;
+	@Getter @Setter private Long   uid;
 	@Getter @Setter private String ip;
 	@Getter @Setter private String refererPage;
 	@Getter @Setter private String userAgent;
@@ -33,7 +34,8 @@ public class SuspiciousEventBean {
 	 **/
 	public String getLogResult()
 		throws SQLException {
-		act.logEvent(getType(), getPage(), getIp(), getRefererPage(), getUserAgent());
+		final Long uid = (getUid() > 0 ? getUid() : null);
+		act.logEvent(getType(), getPage(), uid, getIp(), getRefererPage(), getUserAgent());
 		return "";
 	}
 	

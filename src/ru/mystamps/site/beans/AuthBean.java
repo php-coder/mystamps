@@ -101,12 +101,13 @@ public class AuthBean {
 		// TODO: log more info (login/password pair for example) (#59)
 		// TODO: sanitize all user's values (#60)
 		final String page    = request.getRequestURI();
+		final Long uid       = (user.getUid() > 0 ? user.getUid() : null);
 		final String ip      = request.getRemoteAddr();
 		final String referer = request.getHeader("referer");
 		final String agent   = request.getHeader("user-agent");
 		
 		// log failed authentication attempt
-		events.logEvent("AuthenticationFailed", page, ip, referer, agent);
+		events.logEvent("AuthenticationFailed", page, uid, ip, referer, agent);
 	}
 	
 }

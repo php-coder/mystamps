@@ -16,7 +16,7 @@ public class SuspiciousActivities {
 	
 	private static final String logEventQuery =
 			"INSERT INTO `suspicious_activities` " +
-			"SELECT id, NOW(), ?, NULL, ?, ?, ? " +
+			"SELECT id, NOW(), ?, ?, ?, ?, ? " +
 			"FROM `suspicious_activities_types` " +
 			"WHERE name = ?";
 	
@@ -35,10 +35,10 @@ public class SuspiciousActivities {
 	 * Add record about suspicious activity.
 	 *
 	 * @todo check length of arguments and warn() if its greater than field size
-	 * @todo log user login
 	 *
 	 * @param String type
 	 * @param String page
+	 * @param Long   uid user id or null for not authenticated users
 	 * @param String ip
 	 * @param String refererPage
 	 * @param String userAgent
@@ -46,6 +46,7 @@ public class SuspiciousActivities {
 	 **/
 	public void logEvent(final String type,
 			final String page,
+			final Long uid,
 			final String ip,
 			final String refererPage,
 			final String userAgent)
@@ -58,10 +59,17 @@ public class SuspiciousActivities {
 			conn.prepareStatement(logEventQuery);
 		
 		stat.setString(1, page);
-		stat.setString(2, ip);
-		stat.setString(3, refererPage);
-		stat.setString(4, userAgent);
-		stat.setString(5, type);
+		
+		if (uid != null) {
+			stat.setLong(2, uid);
+		} else {
+			stat.setNull(2, java.sql.Types.INTEGER);
+		}
+		
+		stat.setString(3, ip);
+		stat.setString(4, refererPage);
+		stat.setString(5, userAgent);
+		stat.setString(6, type);
 		
 		stat.executeUpdate();
 	}
