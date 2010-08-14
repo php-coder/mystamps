@@ -8,6 +8,7 @@
 		<property name="web.dir" value="webapp" />
 		<property name="dist.dir" value="dist" />
 		<property name="war.name" value="mystamps.war" />
+		<property name="tomcat.dir" value="/var/lib/tomcat6/webapps" />
 		
 		<path id="classpath">
 			<fileset dir="${build.dir}" />
@@ -41,6 +42,10 @@
 				<exclude name="tomcat6-servlet-2.5-api-6.0.26.jar" />
 			</lib>
 		</war>
+	</target>
+	
+	<target name="deploy-tomcat" depends="war" description="Deploy WAR-file to Tomcat">
+		<copy file="${dist.dir}/${war.name}" todir="${tomcat.dir}" verbose="${verbose}" />
 	</target>
 	
 </project>
