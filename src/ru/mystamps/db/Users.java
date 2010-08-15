@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import lombok.Cleanup;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
 import ru.mystamps.site.beans.UserBean;
@@ -80,10 +81,12 @@ public class Users {
 	
 	/**
 	 * Generate password salt.
-	 * @todo implement it
+	 * @return string which contains letters and numbers in 10 characters length
 	 **/
 	private String generateSalt() {
-		return "salt";
+		// Length of users.salt field in database equals to 10
+		// characters (see mystamps.sql)
+		return RandomStringUtils.randomAlphanumeric(10);
 	}
 	
 	/**

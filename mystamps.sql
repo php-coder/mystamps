@@ -13,7 +13,7 @@ CREATE TABLE `users` (
 	`activated_at` DATETIME NOT NULL,
 	`status` TINYINT(1) NOT NULL DEFAULT 1, -- -1 (banned), 0 (lost password), 1 (ok)
 	`hash` CHAR(40) NOT NULL,
-	`salt` CHAR(10) NOT NULL,
+	`salt` CHAR(10) NOT NULL, -- see ru.mystamps.db.Users.generateSalt()
 	PRIMARY KEY(`id`),
 	UNIQUE KEY(`login`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
