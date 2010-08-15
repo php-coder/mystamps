@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page pageEncoding="UTF-8" trimDirectiveWhitespaces="true" isErrorPage="true" %>
 <jsp:useBean id="suspEvent" class="ru.mystamps.site.beans.SuspiciousEventBean">
@@ -10,7 +11,9 @@
 <jsp:setProperty name="suspEvent" property="refererPage" value="${fn:escapeXml(header[\"referer\"])}" />
 <jsp:setProperty name="suspEvent" property="userAgent" value="${fn:escapeXml(header[\"user-agent\"])}" />
 </jsp:useBean>
-<jsp:getProperty name="suspEvent" property="logResult" />
+<c:catch>
+	<jsp:getProperty name="suspEvent" property="logResult" />
+</c:catch>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
