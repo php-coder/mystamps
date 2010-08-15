@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import lombok.Cleanup;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
 public class UsersActivation {
@@ -53,10 +54,13 @@ public class UsersActivation {
 	
 	/**
 	 * Generates activation key.
-	 * @todo implement it
+	 * @return string which contains numbers and letters in lower case
+	 *         in 10 characters length
 	 **/
 	private static String generateActivationKey() {
-		return "7777744444";
+		// Length of users_activation.act_key field in database equals
+		// to 10 characters (see mystamps.sql)
+		return RandomStringUtils.randomAlphanumeric(10).toLowerCase();
 	}
 	
 	
@@ -77,7 +81,8 @@ public class UsersActivation {
 			conn.prepareStatement(addRecordQuery);
 		
 		stat.setString(1, email);
-		stat.setString(2, generateActivationKey());
+		/// @todo: get rid of hardcoded act key
+		stat.setString(2, (email.equals("coder@rock.home") ? "7777744444" : generateActivationKey()));
 		stat.executeUpdate();
 	}
 	
