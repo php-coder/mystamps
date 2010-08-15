@@ -15,7 +15,7 @@
 			<%@ include file="/WEB-INF/segments/header.jspf" %>
 			<div id="content">
 				<h3>
-					<h:outputText value="#{m.t_authorization_on_site}" />
+					<h:outputText value="#{m.t_authentication_on_site}" />
 				</h3>
 				<h:outputText value="#{m.t_already_authenticated}" rendered="#{user.logged}" />
 				<h:panelGroup layout="block" styleClass="hint" rendered="#{not user.logged}">
