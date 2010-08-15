@@ -1,0 +1,70 @@
+<table>
+	
+	<!-- log in as user -->
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/auth_user.jsf</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>coder</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="pass"]</td>
+		<td>test</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check link to logout to ensure than we authenticated -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/form[@id="logout_form"]/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/form[@id="logout_form"]/a</td>
+		<td>Log out</td>
+	</tr>
+	
+	<!-- start test -->
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/register_user.jsf</td>
+		<td></td>
+	</tr>
+	
+	<!-- check message -->
+	<tr>
+		<td>verifyTextPresent</td>
+		<td></td>
+		<td>You already registered.</td>
+	</tr>
+	
+	<!-- ensure than form with legend not present -->
+	<tr>
+		<td>assertElementNotPresent</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementNotPresent</td>
+		<td>xpath=//div[@id='content']/form[@id='auth_form']</td>
+		<td></td>
+	</tr>
+	
+	<!-- log out -->
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//td[@id='user_bar']/ul/li[2]/form[@id="logout_form"]/a</td>
+		<td></td>
+	</tr>
+	
+</table>

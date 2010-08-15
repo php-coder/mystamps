@@ -17,7 +17,8 @@
 				<h3>
 					<h:outputText value="#{m.t_registration_on_site}" />
 				</h3>
-				<div class="hint">
+				<h:outputText value="#{m.t_already_registered}" rendered="#{user.logged}" />
+				<h:panelGroup layout="block" styleClass="hint" rendered="#{not user.logged}">
 					<h:outputFormat value="#{m.t_if_you_already_registered}" escape="false">
 						<f:param value="<a href=\"/auth_user.jsf\">" />
 						<f:param value="</a>" />
@@ -31,8 +32,8 @@
 					<h:outputFormat value="#{m.t_required_fields_legend}" escape="false">
 						<f:param value="<span class=\"required_field\">*</span>" />
 					</h:outputFormat>
-				</div>
-				<div class="generic_form">
+				</h:panelGroup>
+				<h:panelGroup layout="block" styleClass="generic_form" rendered="#{not user.logged}">
 					<h:form id="register_form" prependId="false">
 						<h:panelGrid columns="4">
 							<h:outputLabel for="email" value="#{m.t_email}" />
@@ -52,7 +53,7 @@
 							<h:panelGroup />
 						</h:panelGrid>
 					</h:form>
-				</div>
+				</h:panelGroup>
 			</div>
 			<%@ include file="/WEB-INF/segments/footer.jspf" %>
 		</body>
