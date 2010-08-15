@@ -714,25 +714,4 @@
 		<td>Wrong activation key</td>
 	</tr>
 	
-	<!-- try to register login which already exists -->
-	<!--
-		login "test-login" was registered and activated in
-		TestActivateUser_Flow.html test
-	-->
-	<tr>
-		<td>type</td>
-		<td>xpath=//input[@name="login"]</td>
-		<td>test-login</td>
-	</tr>
-	<tr>
-		<td>clickAndWait</td>
-		<td>xpath=//input[@type="submit"]</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>verifyText</td>
-		<td>xpath=//span[@id="login_error"]</td>
-		<td>Login already exists</td>
-	</tr>
-	
 </table>
