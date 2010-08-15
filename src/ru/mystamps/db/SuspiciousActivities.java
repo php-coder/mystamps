@@ -55,6 +55,7 @@ public class SuspiciousActivities {
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(logEventQuery);
 		

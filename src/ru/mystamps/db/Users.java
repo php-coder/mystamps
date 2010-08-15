@@ -98,14 +98,16 @@ public class Users {
 	public void add(final String login, final String password, final String name, final String actKey)
 		throws SQLException {
 		
-		@Cleanup
-		final Connection conn = ds.getConnection();
-		
 		final String salt = generateSalt();
 		final String hash = salt + password;
 		
+		@Cleanup
+		final Connection conn = ds.getConnection();
+		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(addUserQuery);
+		
 		stat.setString(1, login);
 		stat.setString(2, name);
 		stat.setString(3, hash);
@@ -123,16 +125,19 @@ public class Users {
 	public Long auth(final String login, final String password)
 		throws SQLException {
 		
+		Long userId = null;
+		
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		Long userId = null;
-		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(getUserIdByCredentialsQuery);
+		
 		stat.setString(1, login);
 		stat.setString(2, password);
 
+		@Cleanup
 		final ResultSet rs = stat.executeQuery();
 
 		if (rs.next()) {
@@ -158,15 +163,18 @@ public class Users {
 			return null;
 		}
 		
+		UserBean user = null;
+		
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		UserBean user = null;
-		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(getUserByIdQuery);
+		
 		stat.setLong(1, userId);
 
+		@Cleanup
 		final ResultSet rs = stat.executeQuery();
 
 		if (rs.next()) {
@@ -191,15 +199,18 @@ public class Users {
 	public boolean loginExists(final String login)
 		throws SQLException {
 		
+		boolean result = false;
+		
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		boolean result = false;
-		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(checkUserQuery);
+
 		stat.setString(1, login);
 
+		@Cleanup
 		final ResultSet rs = stat.executeQuery();
 
 		if (rs.next()) {

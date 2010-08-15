@@ -72,8 +72,10 @@ public class UsersActivation {
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(addRecordQuery);
+		
 		stat.setString(1, email);
 		stat.setString(2, generateActivationKey());
 		stat.executeUpdate();
@@ -89,8 +91,10 @@ public class UsersActivation {
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(delRecordQuery);
+		
 		stat.setString(1, actKey);
 		stat.executeUpdate();
 	}
@@ -103,15 +107,18 @@ public class UsersActivation {
 	public boolean actKeyExists(final String actKey)
 		throws SQLException {
 		
+		boolean result = false;
+		
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
-		boolean result = false;
-		
+		@Cleanup
 		final PreparedStatement stat =
 			conn.prepareStatement(checkActKeyQuery);
+		
 		stat.setString(1, actKey);
 
+		@Cleanup
 		final ResultSet rs = stat.executeQuery();
 
 		if (rs.next()) {
