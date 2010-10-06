@@ -72,6 +72,9 @@ public class SuspiciousActivities {
 		stat.setString(5, userAgent);
 		stat.setString(6, type);
 		
+		// TODO: check return value. When we use type which not exists
+		// in suspicious_activities_types table, then logs may be
+		// silently not added.
 		stat.executeUpdate();
 	}
 	
