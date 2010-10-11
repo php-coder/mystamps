@@ -3,6 +3,7 @@ package ru.mystamps.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -70,7 +71,7 @@ public class SuspiciousActivities {
 		if (uid != null) {
 			stat.setLong(2, uid);
 		} else {
-			stat.setNull(2, java.sql.Types.INTEGER);
+			stat.setNull(2, Types.INTEGER);
 		}
 		
 		stat.setString(3, (ip == null ? "" : ip));
