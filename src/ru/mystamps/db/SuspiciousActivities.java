@@ -11,6 +11,9 @@ import javax.sql.DataSource;
 
 import lombok.Cleanup;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class SuspiciousActivities {
 	private final DataSource ds;
 	
@@ -33,6 +36,9 @@ public class SuspiciousActivities {
 	
 	/**
 	 * Add record about suspicious activity.
+	 *
+	 * Parameters ip, refererPage, or userAgent may equals to null, in this case
+	 * empty values will be saved to database.
 	 *
 	 * @todo check length of arguments and warn() if its greater than field size
 	 *
@@ -67,9 +73,9 @@ public class SuspiciousActivities {
 			stat.setNull(2, java.sql.Types.INTEGER);
 		}
 		
-		stat.setString(3, ip);
-		stat.setString(4, refererPage);
-		stat.setString(5, userAgent);
+		stat.setString(3, (ip == null ? "" : ip));
+		stat.setString(4, (refererPage == null ? "" : refererPage));
+		stat.setString(5, (userAgent == null ? "" : userAgent));
 		stat.setString(6, type);
 		
 		// TODO: check return value. When we use type which not exists

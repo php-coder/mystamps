@@ -2,24 +2,38 @@
 	<tr>
 		<td>
 			<div id="logo">
-				<h:outputText value="#{m.t_my_stamps}" />
+				<spring:message code="t_my_stamps" />
 			</div>
 		</td>
 		<td id="user_bar">
 			<ul>
 				<li>
-					<h:outputText value="#{user.name}" rendered="#{user.logged}" />
-					<h:outputLink value="/auth_user.jsf" rendered="#{not user.logged}">
-						<h:outputText value="#{m.t_enter}" />
-					</h:outputLink>
+					
+					<c:if test="${not empty sessionScope.user}">
+						${sessionScope.user.name}
+					</c:if>
+					
+					<c:if test="${empty sessionScope.user}">
+						<a href="${authUrl}">
+							<spring:message code="t_enter" />
+						</a>
+					</c:if>
+					
 				</li>
 				<li>
-					<h:form id="logout_form">
-						<h:commandLink value="#{m.t_logout}" action="#{auth.logout}" rendered="#{user.logged}" />
-					</h:form>
-					<h:outputLink value="/register_user.jsf" rendered="#{not user.logged}">
-						<h:outputText value="#{m.t_register}" />
-					</h:outputLink>
+					
+					<c:if test="${not empty sessionScope.user}">
+						<a href="${logoutUrl}">
+							<spring:message code="t_logout" />
+						</a>
+					</c:if>
+					
+					<c:if test="${empty sessionScope.user}">
+						<a href="${registerUrl}">
+							<spring:message code="t_register" />
+						</a>
+					</c:if>
+					
 				</li>
 			</ul>
 		</td>

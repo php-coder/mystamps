@@ -44,6 +44,10 @@ body,
 	margin: auto;
 }
 
+.generic_form div.error {
+	text-align: center;
+}
+
 .generic_form th,
 .generic_form td {
 	text-align: left;

@@ -1,7 +1,7 @@
 <table>
 	<tr>
 		<td>open</td>
-		<td>http://my-stamps:8080/index.jsf</td>
+		<td>http://my-stamps:8080/site/index.htm</td>
 		<td></td>
 	</tr>
 	
@@ -24,7 +24,7 @@
 		<td>My stamps</td>
 	</tr>
 	
-	<!-- check user bar: link to auth_user.jsf -->
+	<!-- check user bar: link to /account/auth.htm-->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//td[@id='user_bar']/ul/li[1]/a</td>
@@ -42,18 +42,18 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
-		<td>http://my-stamps:8080/auth_user.jsf</td>
+		<td>http://my-stamps:8080/account/auth.htm</td>
 		<td></td>
 	</tr>
 	
-	<!-- return to index.jsf -->
+	<!-- return to /site/index.htm -->
 	<tr>
 		<td>goBack</td>
 		<td></td>
 		<td></td>
 	</tr>
 	
-	<!-- check user bar: link to register_user.jsf -->
+	<!-- check user bar: link to /account/register.htm -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//td[@id='user_bar']/ul/li[2]/a</td>
@@ -71,11 +71,11 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
-		<td>http://my-stamps:8080/register_user.jsf</td>
+		<td>http://my-stamps:8080/account/register.htm</td>
 		<td></td>
 	</tr>
 	
-	<!-- return to index.jsf -->
+	<!-- return to /site/index.htm -->
 	<tr>
 		<td>goBack</td>
 		<td></td>
@@ -89,7 +89,7 @@
 		<td></td>
 	</tr>
 	
-	<!-- check link to restore_password.jsf -->
+	<!-- check link to /password/restore.htm -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/ul/li[1]/a</td>
@@ -107,18 +107,18 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
-		<td>http://my-stamps:8080/restore_password.jsf</td>
+		<td>http://my-stamps:8080/password/restore.htm</td>
 		<td></td>
 	</tr>
 	
-	<!-- return to index.jsf -->
+	<!-- return to /site/index.htm -->
 	<tr>
 		<td>goBack</td>
 		<td></td>
 		<td></td>
 	</tr>
 	
-	<!-- check link to add_stamps.jsf -->
+	<!-- check link to /stamps/add.htm-->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/ul/li[2]/a</td>
@@ -136,18 +136,18 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
-		<td>http://my-stamps:8080/add_stamps.jsf</td>
+		<td>http://my-stamps:8080/stamps/add.htm</td>
 		<td></td>
 	</tr>
 	
-	<!-- return to index.jsf -->
+	<!-- return to /site/index.htm -->
 	<tr>
 		<td>goBack</td>
 		<td></td>
 		<td></td>
 	</tr>
 	
-	<!-- check link to add_country.jsf -->
+	<!-- check link to /country/add.htm -->
 	<tr>
 		<td>assertElementPresent</td>
 		<td>xpath=//div[@id='content']/ul/li[3]/a</td>
@@ -165,11 +165,11 @@
 	</tr>
 	<tr>
 		<td>assertLocation</td>
-		<td>http://my-stamps:8080/add_country.jsf</td>
+		<td>http://my-stamps:8080/country/add.htm</td>
 		<td></td>
 	</tr>
 	
-	<!-- return to index.jsf -->
+	<!-- return to /site/index.htm -->
 	<tr>
 		<td>goBack</td>
 		<td></td>

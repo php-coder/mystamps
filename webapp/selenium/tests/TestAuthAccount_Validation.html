@@ -1,0 +1,281 @@
+<table>
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/account/auth.htm</td>
+		<td></td>
+	</tr>
+	
+	<!-- just try to send empty data -->
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	
+	<!-- fill login field -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>login</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>login</td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	
+	<!-- fill password field -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>password</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td>Value should not be empty</td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login minimum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>a</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td>Value is less than allowable minimum of 2 characters</td>
+	</tr>
+	
+	<!-- check login maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>abcde12345fghkl6</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td>Value is greater than allowable maximum of 15 characters</td>
+	</tr>
+	
+	<!-- check login validation: try short login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>ab</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login validation: try long login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>abcde1234567890</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login validation: try allowed symbols in login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>t3s7-T_E_S_T</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check login validation: try denied symbols in login -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>'t@$t'</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.errors"]</td>
+		<td>Login should contains only latin letters, digits, hyphen or underscore</td>
+	</tr>
+	
+	<!-- check password maximum characters validation -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>123</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td>Value is less than allowable minimum of 4 characters</td>
+	</tr>
+	
+	<!-- check password validation: try short password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>1234</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check password validation: try allowed symbols in password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>t3s7-T_E_S_T</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyElementNotPresent</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check password validation: try denied symbols in password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>'t@$t'</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.errors"]</td>
+		<td>Password should contains only latin letters, digits, hyphen or underscore</td>
+	</tr>
+	
+	<!-- check wrong login and password -->
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="login"]</td>
+		<td>test</td>
+	</tr>
+	<tr>
+		<td>type</td>
+		<td>xpath=//input[@name="password"]</td>
+		<td>test</td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//input[@type="submit"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id="form.errors"][@class="error"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//div[@id="form.errors"][@class="error"]</td>
+		<td>Wrong login or password!</td>
+	</tr>
+	
+</table>

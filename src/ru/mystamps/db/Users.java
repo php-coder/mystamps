@@ -12,11 +12,14 @@ import javax.sql.DataSource;
 
 import lombok.Cleanup;
 
+import org.springframework.stereotype.Repository;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
-import ru.mystamps.site.beans.UserBean;
+import ru.mystamps.web.entity.User;
 
+@Repository
 public class Users {
 	private final Logger log = Logger.getRootLogger();
 	private final DataSource ds;
@@ -53,12 +56,12 @@ public class Users {
 				"WHERE login = ? AND hash = SHA1(CONCAT(salt, ?))";
 	
 	/**
-	 * @see getUserById()
+	 * @see getUserByLogin()
 	 **/
-	private static final String getUserByIdQuery =
-				"SELECT login, name " +
+	private static final String getUserByLoginQuery =
+				"SELECT id, name " +
 				"FROM users " +
-				"WHERE id = ?";
+				"WHERE login = ?";
 	
 	/**
 	 * @see loginExists()
@@ -155,40 +158,35 @@ public class Users {
 	}
 	
 	/**
-	 * Get bean with info about user based on uid.
-	 * @param Long userId uid
-	 * @return null if user not exists or userId is null
+	 * Get bean with info about user based on login.
+	 * @param String login
+	 * @return null if user does not exists
 	 **/
-	public UserBean getUserById(final Long userId)
+	public User getUserByLogin(final String login)
 		throws SQLException {
 		
-		if (userId == null) {
-			return null;
-		}
-		
-		UserBean user = null;
+		User user = null;
 		
 		@Cleanup
 		final Connection conn = ds.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
-			conn.prepareStatement(getUserByIdQuery);
+			conn.prepareStatement(getUserByLoginQuery);
 		
-		stat.setLong(1, userId);
+		stat.setString(1, login);
 
 		@Cleanup
 		final ResultSet rs = stat.executeQuery();
 
 		if (rs.next()) {
-			user = new UserBean();
-			user.setUid(userId);
-			user.setLogin(rs.getString("login"));
-			user.setName(rs.getString("name"));
-			log.debug("getUserById(" + userId + "): " + user.getLogin() + "/" + user.getName());
+			user = new User(rs.getLong("id"), rs.getString("name"), login);
+			log.debug("Found user with login " + login +
+					". id = " + user.getUid() +
+					", name = " + user.getName());
 
 		} else {
-			log.error("getUserById(" + userId + "): cannot get user!");
+			log.error("Cannot get user with login " + login);
 		}
 		
 		return user;

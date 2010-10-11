@@ -6,14 +6,28 @@ USE mystamps;
 ----
 CREATE TABLE `users` (
 	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`login` VARCHAR(15) NOT NULL, -- see LOGIN_MAX_LENGTH in WEB-INF/web.xml
-	`name` VARCHAR(100) NOT NULL, -- see NAME_MAX_LENGTH in WEB-INF/web.xml
-	`email` VARCHAR(255) NOT NULL, -- see email field at users_activation
+	
+	-- see LOGIN_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
+	`login` VARCHAR(15) NOT NULL,
+	
+	-- see NAME_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
+	`name` VARCHAR(100) NOT NULL,
+	
+	-- see email field at users_activation
+	`email` VARCHAR(255) NOT NULL,
+	
 	`registered_at` DATETIME NOT NULL,
 	`activated_at` DATETIME NOT NULL,
-	`status` TINYINT(1) NOT NULL DEFAULT 1, -- -1 (banned), 0 (lost password), 1 (ok)
+	
+	
+	-- -1 (banned), 0 (lost password), 1 (ok)
+	`status` TINYINT(1) NOT NULL DEFAULT 1,
+	
 	`hash` CHAR(40) NOT NULL,
-	`salt` CHAR(10) NOT NULL, -- see ru.mystamps.db.Users.generateSalt()
+	
+	-- see ru.mystamps.db.Users.generateSalt()
+	`salt` CHAR(10) NOT NULL,
+	
 	PRIMARY KEY(`id`),
 	UNIQUE KEY(`login`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
@@ -22,12 +36,16 @@ CREATE TABLE `users` (
 -- users_activation
 ----
 CREATE TABLE `users_activation` (
-	`email` VARCHAR(255) NOT NULL, -- see EMAIL_MAX_LENGTH in WEB-INF/web.xml
+	-- see EMAIL_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
+	`email` VARCHAR(255) NOT NULL,
+	
 	`registered_at` DATETIME NOT NULL,
+	
 	-- see:
 	--- ACT_KEY_LENGTH in WEB-INF/web.xml
 	--- ru.mystamps.db.UsersActivation.generateActivationKey()
 	`act_key` CHAR(10) NOT NULL,
+	
 	UNIQUE KEY(`act_key`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 

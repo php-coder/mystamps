@@ -1,6 +1,6 @@
 <div id="footer">
 &copy;
-<h:outputLink value="mailto:slava.semushin@gmail.com" title="#{m.t_write_email}">
-	<h:outputText value="#{m.t_slava_semushin}" />
-</h:outputLink>, 2009-2010
+<a href="mailto:slava.semushin@gmail.com" title="<spring:message code="t_write_email" />">
+	<spring:message code="t_slava_semushin" />
+</a>, 2009-2010
 </div>

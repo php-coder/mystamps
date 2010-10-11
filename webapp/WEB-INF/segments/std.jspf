@@ -1,0 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<spring:url var="authUrl" value="/account/auth.htm" />
+<spring:url var="logoutUrl" value="/account/logout.htm" />
+<spring:url var="registerUrl" value="/account/register.htm" />
+<spring:url var="restorePasswordUrl" value="/password/restore.htm" />
+<spring:url var="addStampsUrl" value="/stamps/add.htm" />
+<spring:url var="addCountryUrl" value="/country/add.htm" />

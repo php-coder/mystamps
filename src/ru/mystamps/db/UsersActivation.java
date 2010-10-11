@@ -12,9 +12,12 @@ import javax.sql.DataSource;
 
 import lombok.Cleanup;
 
+import org.springframework.stereotype.Repository;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.log4j.Logger;
 
+@Repository
 public class UsersActivation {
 	private final Logger log = Logger.getRootLogger();
 	private final DataSource ds;

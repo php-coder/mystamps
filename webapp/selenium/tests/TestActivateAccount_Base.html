@@ -1,0 +1,122 @@
+<table>
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/account/activate.htm</td>
+		<td></td>
+	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyTitle</td>
+		<td>MyStamps: account activation</td>
+		<td></td>
+	</tr>
+	
+	<!-- check page's header -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//h3</td>
+		<td>Account activation</td>
+	</tr>
+	
+	<!-- check input's labels -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="login"]</td>
+		<td>Login</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="name"]</td>
+		<td>Name</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="password"]</td>
+		<td>Password</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="passwordConfirm"]</td>
+		<td>Password (again)</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="activationKey"]</td>
+		<td>Activation key</td>
+	</tr>
+	
+	<!-- check asterisk presents -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.required"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.required"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="passwordConfirm.required"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="activationKey.required"]</td>
+		<td>*</td>
+	</tr>
+	
+	<!-- check input fields -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="login"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="name"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="password"][@type="password"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="passwordConfirm"][@type="password"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="activationKey"]</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@type="submit"][@value="Activate"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check text about required fields -->
+	<tr>
+		<td>verifyTextPresent</td>
+		<td>All fields marked by asterisk (*) should be filled.</td>
+		<td></td>
+	</tr>
+	
+	<!-- check activation key field autofilling -->
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/account/activate.htm?key=7777744444</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyValue</td>
+		<td>xpath=//input[@name="activationKey"]</td>
+		<td>7777744444</td>
+	</tr>
+	
+</table>

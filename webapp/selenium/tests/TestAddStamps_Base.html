@@ -1,7 +1,7 @@
 <table>
 	<tr>
 		<td>open</td>
-		<td>http://my-stamps:8080/add_stamps.jsf</td>
+		<td>http://my-stamps:8080/stamps/add.htm</td>
 		<td></td>
 	</tr>
 	
@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="issue_year"]</td>
+		<td>xpath=//label[@for="issueYear"]</td>
 		<td>Date of issue</td>
 	</tr>
 	<tr>
@@ -37,27 +37,27 @@
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="woperf"]</td>
+		<td>xpath=//label[@for="withoutPerforation"]</td>
 		<td>Without perforation</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="michelno"]</td>
+		<td>xpath=//label[@for="michelNo"]</td>
 		<td>Michel #</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="scottno"]</td>
+		<td>xpath=//label[@for="scottNo"]</td>
 		<td>Scott #</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="yvertno"]</td>
+		<td>xpath=//label[@for="yvertNo"]</td>
 		<td>Yvert #</td>
 	</tr>
 	<tr>
 		<td>verifyText</td>
-		<td>xpath=//label[@for="gibbonsno"]</td>
+		<td>xpath=//label[@for="gibbonsNo"]</td>
 		<td>Gibbons #</td>
 	</tr>
 	<tr>
@@ -79,17 +79,17 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//select[@name="issue_day"]</td>
+		<td>//select[@name="issueDay"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//select[@name="issue_month"]</td>
+		<td>//select[@name="issueMonth"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//select[@name="issue_year"]</td>
+		<td>//select[@name="issueYear"]</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -99,27 +99,27 @@
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="woperf"][@type="checkbox"]</td>
+		<td>//input[@name="withoutPerforation"][@type="checkbox"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="michelno"]</td>
+		<td>//input[@name="michelNo"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="scottno"]</td>
+		<td>//input[@name="scottNo"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="yvertno"]</td>
+		<td>//input[@name="yvertNo"]</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>assertElementPresent</td>
-		<td>//input[@name="gibbonsno"]</td>
+		<td>//input[@name="gibbonsNo"]</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -144,17 +144,17 @@
 	-->
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_day"]</td>
+		<td>//select[@name="issueDay"]</td>
 		<td>value=</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_day"]</td>
+		<td>//select[@name="issueDay"]</td>
 		<td>value=1</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_day"]</td>
+		<td>//select[@name="issueDay"]</td>
 		<td>value=31</td>
 	</tr>
 	
@@ -164,17 +164,17 @@
 	-->
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_month"]</td>
+		<td>//select[@name="issueMonth"]</td>
 		<td>value=</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_month"]</td>
+		<td>//select[@name="issueMonth"]</td>
 		<td>value=1</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_month"]</td>
+		<td>//select[@name="issueMonth"]</td>
 		<td>value=12</td>
 	</tr>
 	
@@ -185,17 +185,17 @@
 	-->
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_year"]</td>
+		<td>//select[@name="issueYear"]</td>
 		<td>value=</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_year"]</td>
+		<td>//select[@name="issueYear"]</td>
 		<td>value=1840</td>
 	</tr>
 	<tr>
 		<td>select</td>
-		<td>//select[@name="issue_year"]</td>
+		<td>//select[@name="issueYear"]</td>
 		<td>value=2010</td>
 	</tr>
 	

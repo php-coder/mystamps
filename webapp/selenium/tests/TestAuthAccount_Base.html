@@ -1,0 +1,101 @@
+<table>
+	<tr>
+		<td>open</td>
+		<td>http://my-stamps:8080/account/auth.htm</td>
+		<td></td>
+	</tr>
+	
+	<!-- check page's title -->
+	<tr>
+		<td>verifyTitle</td>
+		<td>MyStamps: authentication</td>
+		<td></td>
+	</tr>
+	
+	<!-- check page's header -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//h3</td>
+		<td>Authentication on site</td>
+	</tr>
+	
+	<!-- check link to /password/restore.htm -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>verifyTextPresent</td>
+		<td>If you forget password then we may remind it.</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>clickAndWait</td>
+		<td>xpath=//div[@id='content']/div[@class='hint']/a</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>assertLocation</td>
+		<td>http://my-stamps:8080/password/restore.htm</td>
+		<td></td>
+	</tr>
+	
+	<!-- return to /account/auth.htm -->
+	<tr>
+		<td>goBack</td>
+		<td></td>
+		<td></td>
+	<tr>
+	
+	<!-- check input's labels -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="login"]</td>
+		<td>Login</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//label[@for="password"]</td>
+		<td>Password</td>
+	</tr>
+	
+	<!-- check asterisk presents -->
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="login.required"]</td>
+		<td>*</td>
+	</tr>
+	<tr>
+		<td>verifyText</td>
+		<td>xpath=//span[@id="password.required"]</td>
+		<td>*</td>
+	</tr>
+	
+	<!-- check input fields -->
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="login"]</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@name="password"][@type="password"]</td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td>assertElementPresent</td>
+		<td>//input[@type="submit"][@value="Log in"]</td>
+		<td></td>
+	</tr>
+	
+	<!-- check text about required fields -->
+	<tr>
+		<td>verifyTextPresent</td>
+		<td>All fields marked by asterisk (*) should be filled.</td>
+		<td></td>
+	</tr>
+	
+</table>
