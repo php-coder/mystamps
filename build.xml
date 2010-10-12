@@ -1,4 +1,4 @@
-<project name="MyStamps" default="compile" basedir=".">
+<project name="MyStamps" default="compile-code" basedir=".">
 	
 	<target name="init" description="Initiate environment">
 		<property name="src.dir" value="src" />
@@ -18,7 +18,7 @@
 		<property name="verbose" value="false" />
 	</target>
 	
-	<target name="compile" depends="init" description="Compile all classes">
+	<target name="compile-code" depends="init" description="Compile site sources">
 		<javac srcdir="${src.dir}" destdir="${build.dir}" verbose="${verbose}">
 			<include name="**/*.java" />
 			<classpath refid="classpath-for-code" />
@@ -35,7 +35,7 @@
 		</delete>
 	</target>
 	
-	<target name="war" depends="init,compile" description="Create WAR-file">
+	<target name="war" depends="init,compile-code" description="Create WAR-file">
 		<war destfile="${dist.dir}/${war.name}" basedir="${web.dir}" webxml="${web.dir}/WEB-INF/web.xml">
 			<classes dir="${build.dir}" />
 			<lib dir="${lib.dir}">
