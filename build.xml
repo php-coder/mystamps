@@ -26,7 +26,7 @@
 		<native2ascii encoding="utf8" src="${src.dir}/${i18n.dir}" dest="${build.dir}/${i18n.dir}" />
 	</target>
 	
-	<target name="clean" depends="init" description="Clean all class files">
+	<target name="clean-code" depends="init" description="Clean all site classes">
 		<delete verbose="${verbose}">
 			<fileset dir="${build.dir}" includes="**/*.class" />
 		</delete>
