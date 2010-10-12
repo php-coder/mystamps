@@ -10,7 +10,7 @@
 		<property name="war.name" value="mystamps.war" />
 		<property name="tomcat.dir" value="/var/lib/tomcat6/webapps" />
 		
-		<path id="classpath">
+		<path id="classpath-for-code">
 			<fileset dir="${build.dir}" />
 			<fileset dir="${lib.dir}" includes="*.jar" />
 		</path>
@@ -21,7 +21,7 @@
 	<target name="compile" depends="init" description="Compile all classes">
 		<javac srcdir="${src.dir}" destdir="${build.dir}" verbose="${verbose}">
 			<include name="**/*.java" />
-			<classpath refid="classpath" />
+			<classpath refid="classpath-for-code" />
 		</javac>
 		<native2ascii encoding="utf8" src="${src.dir}/${i18n.dir}" dest="${build.dir}/${i18n.dir}" />
 	</target>
