@@ -13,6 +13,7 @@
 		<path id="classpath-for-code">
 			<fileset dir="${build.dir}" />
 			<fileset dir="${lib.dir}" includes="*.jar" />
+			<fileset dir="${lib.dir}/build" includes="*.jar" />
 		</path>
 		
 		<property name="verbose" value="false" />
@@ -38,11 +39,7 @@
 	<target name="war" depends="init,compile-code" description="Create WAR-file">
 		<war destfile="${dist.dir}/${war.name}" basedir="${web.dir}" webxml="${web.dir}/WEB-INF/web.xml">
 			<classes dir="${build.dir}" />
-			<lib dir="${lib.dir}">
-				<!-- Compile time dependencies -->
-				<exclude name="tomcat6-servlet-2.5-api-6.0.26.jar" />
-				<exclude name="lombok.jar" />
-			</lib>
+			<lib dir="${lib.dir}" includes="*.jar" />
 		</war>
 	</target>
 	
