@@ -68,7 +68,6 @@ public class AuthAccountValidator implements Validator {
 		}
 		
 		final String password = form.getPassword();
-		final String login = form.getLogin();
 		
 		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH) {
 			errors.rejectValue(
