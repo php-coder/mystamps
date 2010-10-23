@@ -12,11 +12,12 @@ import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 
+import static ru.mystamps.web.SiteMap.MAINTENANCE_PAGE_URL;
+
 public class MaintenanceFilter implements Filter {
 	
 	private FilterConfig config;
 	private final Logger log = Logger.getRootLogger();
-	private static final String MAINTENANCE_PAGE_URL = "/site/maintenance.htm";
 	
 	@Override
 	public void init(final FilterConfig config) {

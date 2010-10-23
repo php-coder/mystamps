@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.mystamps.db.SuspiciousActivities;
 import ru.mystamps.web.entity.User;
 
+import static ru.mystamps.web.SiteMap.NOT_FOUND_PAGE_URL;
+
 @Controller
-@RequestMapping("/error/404.htm")
+@RequestMapping(NOT_FOUND_PAGE_URL)
 public class NotFoundErrorController {
 	
 	@Autowired

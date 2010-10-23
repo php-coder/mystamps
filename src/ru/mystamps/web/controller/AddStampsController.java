@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.model.AddStampsForm;
 
+import static ru.mystamps.web.SiteMap.ADD_STAMPS_PAGE_URL;
+
 @Controller
-@RequestMapping("/stamps/add.htm")
+@RequestMapping(ADD_STAMPS_PAGE_URL)
 public class AddStampsController {
 	
 	private static final Integer DAYS_IN_MONTH  = 31;

@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.validation.AddCountryValidator;
 
+import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
+
 @Controller
-@RequestMapping("/country/add.htm")
+@RequestMapping(ADD_COUNTRY_PAGE_URL)
 public class AddCountryController {
 	
 	@InitBinder

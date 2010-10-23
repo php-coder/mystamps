@@ -17,8 +17,10 @@ import ru.mystamps.db.UsersActivation;
 import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.validation.RegisterAccountValidator;
 
+import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
+
 @Controller
-@RequestMapping("/account/register.htm")
+@RequestMapping(REGISTRATION_PAGE_URL)
 public class RegisterAccountController {
 	
 	@Autowired

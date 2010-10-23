@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
+import static ru.mystamps.web.SiteMap.LOGOUT_PAGE_URL;
+
 @Controller
-@RequestMapping("/account/logout.htm")
+@RequestMapping(LOGOUT_PAGE_URL)
 public class LogoutAccountController {
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -19,7 +22,7 @@ public class LogoutAccountController {
 			session.invalidate();
 		}
 		
-		return "redirect:/site/index.htm";
+		return "redirect:" + INDEX_PAGE_URL;
 	}
 	
 }

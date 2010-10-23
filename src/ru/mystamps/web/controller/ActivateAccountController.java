@@ -21,8 +21,10 @@ import ru.mystamps.db.Users;
 import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.validation.ActivateAccountValidator;
 
+import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
+
 @Controller
-@RequestMapping("/account/activate.htm")
+@RequestMapping(ACTIVATE_ACCOUNT_PAGE_URL)
 public class ActivateAccountController {
 	
 	private final Logger log = Logger.getRootLogger();

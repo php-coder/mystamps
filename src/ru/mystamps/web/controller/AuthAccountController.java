@@ -20,8 +20,11 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AuthAccountForm;
 import ru.mystamps.web.validation.AuthAccountValidator;
 
+import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
+import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
+
 @Controller
-@RequestMapping("/account/auth.htm")
+@RequestMapping(AUTHENTICATION_PAGE_URL)
 public class AuthAccountController {
 	
 	@Autowired
@@ -82,7 +85,7 @@ public class AuthAccountController {
 		final User user = users.getUserByLogin(form.getLogin());
 		request.getSession().setAttribute("user", user);
 		
-		return "redirect:/site/index.htm";
+		return "redirect:" + INDEX_PAGE_URL;
 	}
 	
 }
