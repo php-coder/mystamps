@@ -1,6 +1,7 @@
 package ru.mystamps.web.controller;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class AddStampsController {
 	private static final Integer DAYS_IN_MONTH  = 31;
 	private static final Integer MONTHS_IN_YEAR = 12;
 	private static final Integer SINCE_YEAR     = 1840;
-	private static final Integer CURRENT_YEAR   = Calendar.getInstance().get(Calendar.YEAR);
+	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
 	private static final Map<Integer, Integer> days;
 	private static final Map<Integer, Integer> months;
