@@ -39,7 +39,7 @@ public class AddStampsController {
 		}
 		
 		years = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = SINCE_YEAR; i <= CURRENT_YEAR; ++i) {
+		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; --i) {
 			years.put(i, i);
 		}
 	}
