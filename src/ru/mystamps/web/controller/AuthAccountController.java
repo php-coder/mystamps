@@ -33,9 +33,12 @@ public class AuthAccountController {
 	@Autowired
 	private SuspiciousActivities act;
 	
+	@Autowired
+	private AuthAccountValidator authAccountValidator;
+	
 	@InitBinder
 	protected void initAuthBinder(final WebDataBinder binder) {
-		binder.setValidator(new AuthAccountValidator());
+		binder.setValidator(authAccountValidator);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

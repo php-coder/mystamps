@@ -2,8 +2,8 @@ package ru.mystamps.web.validation;
 
 import java.sql.SQLException;
 
-import javax.naming.NamingException;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
@@ -12,7 +12,11 @@ import ru.mystamps.db.Users;
 import ru.mystamps.web.model.AuthAccountForm;
 import ru.mystamps.web.validation.ValidationRules;
 
+@Component
 public class AuthAccountValidator implements Validator {
+	
+	@Autowired
+	private Users users;
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -85,7 +89,7 @@ public class AuthAccountValidator implements Validator {
 		}
 	}
 	
-	private static void validateLoginPasswordPair(final AuthAccountForm form, final Errors errors) {
+	private void validateLoginPasswordPair(final AuthAccountForm form, final Errors errors) {
 		if (errors.hasFieldErrors("login") || errors.hasFieldErrors("password")) {
 			return;
 		}
@@ -94,16 +98,12 @@ public class AuthAccountValidator implements Validator {
 		final String password = form.getPassword();
 		
 		try {
-			final Users users = new Users();
 			final Long userId = users.auth(login, password);
 			
 			if (userId == null) {
 				errors.reject("login.password.invalid");
 			}
 			
-		} catch (final NamingException ex) {
-			errors.reject("error.internal");
-		
 		} catch (final SQLException ex) {
 			errors.reject("error.internal");
 		}

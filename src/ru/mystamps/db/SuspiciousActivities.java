@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import lombok.Cleanup;
@@ -16,24 +14,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SuspiciousActivities {
-	private final DataSource ds;
+	
+	@Resource
+	private DataSource ds;
 	
 	private static final String logEventQuery =
 			"INSERT INTO `suspicious_activities` " +
 			"SELECT id, NOW(), ?, ?, ?, ?, ? " +
 			"FROM `suspicious_activities_types` " +
 			"WHERE name = ?";
-	
-	/**
-	 * @throws NamingException
-	 **/
-	public SuspiciousActivities()
-		throws NamingException {
-		
-		final Context env =
-			(Context)new InitialContext().lookup("java:comp/env");
-		ds = (DataSource)env.lookup("jdbc/mystamps");
-	}
 	
 	/**
 	 * Add record about suspicious activity.

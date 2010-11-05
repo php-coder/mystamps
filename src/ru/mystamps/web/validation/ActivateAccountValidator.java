@@ -2,8 +2,8 @@ package ru.mystamps.web.validation;
 
 import java.sql.SQLException;
 
-import javax.naming.NamingException;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
@@ -13,7 +13,14 @@ import ru.mystamps.db.UsersActivation;
 import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.validation.ValidationRules;
 
+@Component
 public class ActivateAccountValidator implements Validator {
+	
+	@Autowired
+	private Users users;
+	
+	@Autowired
+	private UsersActivation activationRequests;
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -31,7 +38,7 @@ public class ActivateAccountValidator implements Validator {
 		validateActivationKey(form, errors);
 	}
 	
-	private static void validateLogin(final ActivateAccountForm form, final Errors errors) {
+	private void validateLogin(final ActivateAccountForm form, final Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "value.required");
 		if (errors.hasFieldErrors("login")) {
 			return;
@@ -64,14 +71,9 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		try {
-			// TODO: make it static?
-			final Users users = new Users();
 			if (users.loginExists(login)) {
 				errors.rejectValue("login", "login.exists");
 			}
-			
-		} catch (final NamingException ex) {
-			errors.rejectValue("login", "error.internal");
 			
 		} catch (final SQLException ex) {
 			errors.rejectValue("login", "error.internal");
@@ -156,7 +158,7 @@ public class ActivateAccountValidator implements Validator {
 		}
 	}
 	
-	private static void validateActivationKey(final ActivateAccountForm form, final Errors errors) {
+	private void validateActivationKey(final ActivateAccountForm form, final Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "activationKey", "value.required");
 		if (errors.hasFieldErrors("activationKey")) {
 			return;
@@ -189,14 +191,9 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		try {
-			// TODO: make it static?
-			final UsersActivation activations = new UsersActivation();
-			if (! activations.actKeyExists(key)) {
+			if (! activationRequests.actKeyExists(key)) {
 				errors.rejectValue("activationKey", "key.not-exists");
 			}
-			
-		} catch (final NamingException ex) {
-			errors.rejectValue("activationKey", "error.internal");
 			
 		} catch (final SQLException ex) {
 			errors.rejectValue("activationKey", "error.internal");

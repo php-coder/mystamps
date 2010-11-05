@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import lombok.Cleanup;
@@ -20,7 +18,9 @@ import org.apache.log4j.Logger;
 @Repository
 public class UsersActivation {
 	private final Logger log = Logger.getRootLogger();
-	private final DataSource ds;
+	
+	@Resource
+	private DataSource ds;
 	
 	/**
 	 * @see add()
@@ -43,17 +43,6 @@ public class UsersActivation {
 			"SELECT COUNT(*) AS keys_count " +
 			"FROM `users_activation` " +
 			"WHERE `act_key` = ?";
-	
-	/**
-	 * @throws NamingException
-	 **/
-	public UsersActivation()
-		throws NamingException {
-		
-		final Context env =
-			(Context)new InitialContext().lookup("java:comp/env");
-		ds = (DataSource)env.lookup("jdbc/mystamps");
-	}
 	
 	/**
 	 * Generates activation key.

@@ -35,9 +35,12 @@ public class ActivateAccountController {
 	@Autowired
 	private UsersActivation activationRequests;
 	
+	@Autowired
+	private ActivateAccountValidator activateAccountValidator;
+	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(new ActivateAccountValidator());
+		binder.setValidator(activateAccountValidator);
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
 	}
 	

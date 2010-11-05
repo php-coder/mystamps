@@ -5,10 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.annotation.Resource;
 
 import lombok.Cleanup;
 
@@ -22,7 +20,9 @@ import ru.mystamps.web.entity.User;
 @Repository
 public class Users {
 	private final Logger log = Logger.getRootLogger();
-	private final DataSource ds;
+	
+	@Resource
+	private DataSource ds;
 	
 	/**
 	 * @see add()
@@ -70,17 +70,6 @@ public class Users {
 			"SELECT COUNT(*) AS users_count " +
 			"FROM users " +
 			"WHERE login = ?";
-	
-	/**
-	 * @throws NamingException
-	 **/
-	public Users()
-		throws NamingException {
-		
-		final Context env =
-			(Context)new InitialContext().lookup("java:comp/env");
-		ds = (DataSource)env.lookup("jdbc/mystamps");
-	}
 	
 	/**
 	 * Generate password salt.
