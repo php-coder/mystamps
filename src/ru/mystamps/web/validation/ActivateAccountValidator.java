@@ -11,7 +11,17 @@ import org.springframework.validation.ValidationUtils;
 import ru.mystamps.db.Users;
 import ru.mystamps.db.UsersActivation;
 import ru.mystamps.web.model.ActivateAccountForm;
-import ru.mystamps.web.validation.ValidationRules;
+
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.NAME_REGEXP1;
+import static ru.mystamps.web.validation.ValidationRules.NAME_REGEXP2;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 
 @Component
 public class ActivateAccountValidator implements Validator {
@@ -46,26 +56,26 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH.intValue()) {
+		if (login.length() < LOGIN_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
-				new Object[]{ValidationRules.LOGIN_MIN_LENGTH},
+				new Object[]{LOGIN_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 			
-		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH.intValue()) {
+		if (login.length() > LOGIN_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
-				new Object[]{ValidationRules.LOGIN_MAX_LENGTH},
+				new Object[]{LOGIN_MAX_LENGTH},
 				"XXX");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (! login.matches(ValidationRules.LOGIN_REGEXP)) {
+		if (! login.matches(LOGIN_REGEXP)) {
 			errors.rejectValue("login", "login.invalid");
 			return;
 		}
@@ -89,23 +99,23 @@ public class ActivateAccountValidator implements Validator {
 			return;
 		}
 		
-		if (name.length() > ValidationRules.NAME_MAX_LENGTH.intValue()) {
+		if (name.length() > NAME_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"name",
 				"value.too-long",
-				new Object[]{ValidationRules.NAME_MAX_LENGTH},
+				new Object[]{NAME_MAX_LENGTH},
 				"XXX");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (!name.matches(ValidationRules.NAME_REGEXP1)) {
+		if (!name.matches(NAME_REGEXP1)) {
 			errors.rejectValue("name", "name.invalid");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (!name.matches(ValidationRules.NAME_REGEXP2)) {
+		if (!name.matches(NAME_REGEXP2)) {
 			errors.rejectValue("name", "name.hyphen");
 			return;
 		}
@@ -120,17 +130,17 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String login = form.getLogin();
 		
-		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH.intValue()) {
+		if (password.length() < PASSWORD_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",
-				new Object[]{ValidationRules.PASSWORD_MIN_LENGTH},
+				new Object[]{PASSWORD_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (! password.matches(ValidationRules.PASSWORD_REGEXP)) {
+		if (! password.matches(PASSWORD_REGEXP)) {
 			errors.rejectValue("password", "password.invalid");
 			return;
 		}
@@ -166,26 +176,26 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String key = form.getActivationKey();
 		
-		if (key.length() < ValidationRules.ACT_KEY_LENGTH.intValue()) {
+		if (key.length() < ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
 					"value.too-short",
-					new Object[]{ValidationRules.ACT_KEY_LENGTH},
+					new Object[]{ACT_KEY_LENGTH},
 					"XXX");
 			return;
 		}
 		
-		if (key.length() > ValidationRules.ACT_KEY_LENGTH.intValue()) {
+		if (key.length() > ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
 					"value.too-long",
-					new Object[]{ValidationRules.ACT_KEY_LENGTH},
+					new Object[]{ACT_KEY_LENGTH},
 					"XXX");
 			return;
 		}
 			
 		// TODO: use Pattern class
-		if (!key.matches(ValidationRules.ACT_KEY_REGEXP)) {
+		if (!key.matches(ACT_KEY_REGEXP)) {
 			errors.rejectValue("activationKey", "key.invalid");
 			return;
 		}

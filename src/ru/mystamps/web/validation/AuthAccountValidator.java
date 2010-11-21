@@ -10,7 +10,12 @@ import org.springframework.validation.ValidationUtils;
 
 import ru.mystamps.db.Users;
 import ru.mystamps.web.model.AuthAccountForm;
-import ru.mystamps.web.validation.ValidationRules;
+
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
 
 @Component
 public class AuthAccountValidator implements Validator {
@@ -40,26 +45,26 @@ public class AuthAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH.intValue()) {
+		if (login.length() < LOGIN_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
-				new Object[]{ValidationRules.LOGIN_MIN_LENGTH},
+				new Object[]{LOGIN_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 			
-		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH.intValue()) {
+		if (login.length() > LOGIN_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
-				new Object[]{ValidationRules.LOGIN_MAX_LENGTH},
+				new Object[]{LOGIN_MAX_LENGTH},
 				"XXX");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (! login.matches(ValidationRules.LOGIN_REGEXP)) {
+		if (! login.matches(LOGIN_REGEXP)) {
 			errors.rejectValue("login", "login.invalid");
 			return;
 		}
@@ -73,17 +78,17 @@ public class AuthAccountValidator implements Validator {
 		
 		final String password = form.getPassword();
 		
-		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH.intValue()) {
+		if (password.length() < PASSWORD_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",
-				new Object[]{ValidationRules.PASSWORD_MIN_LENGTH},
+				new Object[]{PASSWORD_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 		
 		// TODO: use Pattern class
-		if (! password.matches(ValidationRules.PASSWORD_REGEXP)) {
+		if (! password.matches(PASSWORD_REGEXP)) {
 			errors.rejectValue("password", "password.invalid");
 			return;
 		}

@@ -7,7 +7,8 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
 import ru.mystamps.web.model.RegisterAccountForm;
-import ru.mystamps.web.validation.ValidationRules;
+
+import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 public class RegisterAccountValidator implements Validator {
 	
@@ -31,11 +32,11 @@ public class RegisterAccountValidator implements Validator {
 		
 		final String email = form.getEmail();
 		
-		if (email.length() > ValidationRules.EMAIL_MAX_LENGTH.intValue()) {
+		if (email.length() > EMAIL_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"email",
 				"value.too-long",
-				new Object[]{ValidationRules.EMAIL_MAX_LENGTH},
+				new Object[]{EMAIL_MAX_LENGTH},
 				"XXX");
 			return;
 		}
