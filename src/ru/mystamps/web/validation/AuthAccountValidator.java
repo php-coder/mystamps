@@ -40,20 +40,20 @@ public class AuthAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH) {
+		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
-				new Object[]{new Integer(ValidationRules.LOGIN_MIN_LENGTH)},
+				new Object[]{ValidationRules.LOGIN_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 			
-		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH) {
+		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
-				new Object[]{new Integer(ValidationRules.LOGIN_MAX_LENGTH)},
+				new Object[]{ValidationRules.LOGIN_MAX_LENGTH},
 				"XXX");
 			return;
 		}
@@ -73,11 +73,11 @@ public class AuthAccountValidator implements Validator {
 		
 		final String password = form.getPassword();
 		
-		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH) {
+		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",
-				new Object[]{new Integer(ValidationRules.PASSWORD_MIN_LENGTH)},
+				new Object[]{ValidationRules.PASSWORD_MIN_LENGTH},
 				"XXX");
 			return;
 		}

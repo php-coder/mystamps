@@ -46,20 +46,20 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH) {
+		if (login.length() < ValidationRules.LOGIN_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
-				new Object[]{new Integer(ValidationRules.LOGIN_MIN_LENGTH)},
+				new Object[]{ValidationRules.LOGIN_MIN_LENGTH},
 				"XXX");
 			return;
 		}
 			
-		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH) {
+		if (login.length() > ValidationRules.LOGIN_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
-				new Object[]{new Integer(ValidationRules.LOGIN_MAX_LENGTH)},
+				new Object[]{ValidationRules.LOGIN_MAX_LENGTH},
 				"XXX");
 			return;
 		}
@@ -89,11 +89,11 @@ public class ActivateAccountValidator implements Validator {
 			return;
 		}
 		
-		if (name.length() > ValidationRules.NAME_MAX_LENGTH) {
+		if (name.length() > ValidationRules.NAME_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"name",
 				"value.too-long",
-				new Object[]{new Integer(ValidationRules.NAME_MAX_LENGTH)},
+				new Object[]{ValidationRules.NAME_MAX_LENGTH},
 				"XXX");
 			return;
 		}
@@ -120,11 +120,11 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String login = form.getLogin();
 		
-		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH) {
+		if (password.length() < ValidationRules.PASSWORD_MIN_LENGTH.intValue()) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",
-				new Object[]{new Integer(ValidationRules.PASSWORD_MIN_LENGTH)},
+				new Object[]{ValidationRules.PASSWORD_MIN_LENGTH},
 				"XXX");
 			return;
 		}
@@ -166,20 +166,20 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String key = form.getActivationKey();
 		
-		if (key.length() < ValidationRules.ACT_KEY_LENGTH) {
+		if (key.length() < ValidationRules.ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
 					"value.too-short",
-					new Object[]{new Integer(ValidationRules.ACT_KEY_LENGTH)},
+					new Object[]{ValidationRules.ACT_KEY_LENGTH},
 					"XXX");
 			return;
 		}
 		
-		if (key.length() > ValidationRules.ACT_KEY_LENGTH) {
+		if (key.length() > ValidationRules.ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
 					"value.too-long",
-					new Object[]{new Integer(ValidationRules.ACT_KEY_LENGTH)},
+					new Object[]{ValidationRules.ACT_KEY_LENGTH},
 					"XXX");
 			return;
 		}

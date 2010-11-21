@@ -31,11 +31,11 @@ public class RegisterAccountValidator implements Validator {
 		
 		final String email = form.getEmail();
 		
-		if (email.length() > ValidationRules.EMAIL_MAX_LENGTH) {
+		if (email.length() > ValidationRules.EMAIL_MAX_LENGTH.intValue()) {
 			errors.rejectValue(
 				"email",
 				"value.too-long",
-				new Object[]{new Integer(ValidationRules.EMAIL_MAX_LENGTH)},
+				new Object[]{ValidationRules.EMAIL_MAX_LENGTH},
 				"XXX");
 			return;
 		}
