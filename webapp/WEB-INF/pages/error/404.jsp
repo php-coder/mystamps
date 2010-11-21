@@ -15,7 +15,7 @@
 				<tr>
 					<td id="error-code">404</td>
 					<td id="error-msg">
-						<spring:message code="t_404_description" arguments="<br />,<br />" />
+						<spring:message code="t_404_description" arguments="<br />" />
 					</td>
 				</tr>
 			</table>
