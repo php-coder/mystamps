@@ -13,7 +13,7 @@
 	<url>my-stamps.ru</url>
 	
 	<properties>
-		<tomcat.webapp.dir>/usr/share/tomcat6</tomcat.webapp.dir>
+		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 	</properties>
 	
 	<dependencies>
@@ -167,11 +167,11 @@
 					<container>
 						<containerId>tomcat6x</containerId>
 						<type>installed</type>
-						<home>${tomcat.webapp.dir}</home>
+						<home>${tomcat.dir}</home>
 					</container>
 					<configuration>
 						<type>existing</type>
-						<home>${tomcat.webapp.dir}</home>
+						<home>${tomcat.dir}</home>
 					</configuration>
 					<deployer>
 						<type>installed</type>
