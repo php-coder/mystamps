@@ -1,2 +1,1 @@
-build
-dist/mystamps.war
+target/

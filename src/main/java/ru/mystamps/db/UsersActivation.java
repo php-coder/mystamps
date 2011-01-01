@@ -12,7 +12,7 @@ import lombok.Cleanup;
 
 import org.springframework.stereotype.Repository;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 
 @Repository
