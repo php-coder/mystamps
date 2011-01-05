@@ -105,7 +105,7 @@
 		</repository>
 		<repository>
 			<id>JBoss Maven Repository</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/public/</url>
+			<url>https://repository.jboss.org/nexus/content/repositories/public</url>
 		</repository>
 	</repositories>
 	
