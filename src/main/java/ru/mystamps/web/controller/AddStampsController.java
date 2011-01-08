@@ -30,17 +30,17 @@ public class AddStampsController {
 	static {
 		
 		days = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = 1; i <= DAYS_IN_MONTH; ++i) {
+		for (Integer i = 1; i <= DAYS_IN_MONTH; i++) {
 			days.put(i, i);
 		}
 		
 		months = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = 1; i <= MONTHS_IN_YEAR; ++i) {
+		for (Integer i = 1; i <= MONTHS_IN_YEAR; i++) {
 			months.put(i, i);
 		}
 		
 		years = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; --i) {
+		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			years.put(i, i);
 		}
 	}
