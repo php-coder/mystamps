@@ -6,11 +6,8 @@
 	
 	<groupId>ru.mystamps</groupId>
 	<artifactId>mystamps</artifactId>
-	<packaging>war</packaging>
 	<version>0.1.1-SNAPSHOT</version>
-	
-	<name>My Stamps</name>
-	<url>my-stamps.ru</url>
+	<packaging>war</packaging>
 	
 	<properties>
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
@@ -105,17 +102,6 @@
 		
 	</dependencies>
 	
-	<repositories>
-		<repository>
-			<id>projectlombok.org</id>
-			<url>http://projectlombok.org/mavenrepo</url>
-		</repository>
-		<repository>
-			<id>JBoss Maven Repository</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/public</url>
-		</repository>
-	</repositories>
-	
 	<build>
 		<finalName>mystamps</finalName>
 		
@@ -204,6 +190,66 @@
 		</plugins>
 		
 	</build>
+	
+	<name>My Stamps</name>
+	<url>my-stamps.ru</url>
+	<inceptionYear>2009</inceptionYear>
+	
+	<developers>
+		<developer>
+			<name>Slava Semushin</name>
+			<email>slava.semushin@gmail.com</email>
+			<url>http://my-stamps.ru</url>
+			<roles>
+				<role>founder</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+6</timezone>
+		</developer>
+	</developers>
+	
+	<licenses>
+		<license>
+			<name>GNU GPL v2</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<scm>
+		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
+		<url>https://github.com/php-coder/mystamps</url>
+	</scm>
+	
+	<repositories>
+		
+		<repository>
+			<id>projectlombok.org</id>
+			<url>http://projectlombok.org/mavenrepo</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+		
+		<repository>
+			<id>JBoss Maven Repository</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+		
+	</repositories>
 	
 	<distributionManagement>
 		<snapshotRepository>
