@@ -51,8 +51,8 @@ public class AuthAccountController {
 	public String processInput(
 			final HttpServletRequest request,
 			final HttpSession session,
-			@RequestHeader("referer") final String referer,
-			@RequestHeader("user-agent") final String agent,
+			@RequestHeader(value = "referer", required = false) final String referer,
+			@RequestHeader(value = "user-agent", required = false) final String agent,
 			@Valid final AuthAccountForm form,
 			final BindingResult result)
 		throws SQLException {
