@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
@@ -50,6 +51,8 @@ public class AuthAccountController {
 	public String processInput(
 			final HttpServletRequest request,
 			final HttpSession session,
+			@RequestHeader("referer") final String referer,
+			@RequestHeader("user-agent") final String agent,
 			@Valid final AuthAccountForm form,
 			final BindingResult result)
 		throws SQLException {
@@ -66,10 +69,8 @@ public class AuthAccountController {
 				
 				// TODO: log more info (login/password pair for example) (#59)
 				// TODO: sanitize all user's values (#60)
-				final String page    = request.getRequestURI();
-				final String ip      = request.getRemoteAddr();
-				final String referer = request.getHeader("referer");
-				final String agent   = request.getHeader("user-agent");
+				final String page = request.getRequestURI();
+				final String ip   = request.getRemoteAddr();
 				
 				Long uid = null;
 				final User user = (User)session.getAttribute("user");
