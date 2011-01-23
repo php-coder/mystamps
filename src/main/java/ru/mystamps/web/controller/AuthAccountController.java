@@ -49,6 +49,7 @@ public class AuthAccountController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String processInput(
 			final HttpServletRequest request,
+			final HttpSession session,
 			@Valid final AuthAccountForm form,
 			final BindingResult result)
 		throws SQLException {
@@ -71,12 +72,9 @@ public class AuthAccountController {
 				final String agent   = request.getHeader("user-agent");
 				
 				Long uid = null;
-				final HttpSession session = request.getSession(false);
-				if (session != null) {
-					final User user = (User)session.getAttribute("user");
-					if (user != null) {
-						uid = user.getUid();
-					}
+				final User user = (User)session.getAttribute("user");
+				if (user != null) {
+					uid = user.getUid();
 				}
 				
 				act.logEvent("AuthenticationFailed", page, uid, ip, referer, agent);
@@ -86,7 +84,7 @@ public class AuthAccountController {
 		}
 		
 		final User user = users.getUserByLogin(form.getLogin());
-		request.getSession().setAttribute("user", user);
+		session.setAttribute("user", user);
 		
 		return "redirect:" + INDEX_PAGE_URL;
 	}

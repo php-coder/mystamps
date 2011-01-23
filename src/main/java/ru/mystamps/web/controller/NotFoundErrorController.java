@@ -23,7 +23,9 @@ public class NotFoundErrorController {
 	private SuspiciousActivities act;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String notFound(final HttpServletRequest request) {
+	public String notFound(
+			final HttpServletRequest request,
+			final HttpSession session) {
 		
 		// TODO: sanitize all user's values (#60)
 		final String page    = (String)request.getAttribute("javax.servlet.error.request_uri");
@@ -32,12 +34,9 @@ public class NotFoundErrorController {
 		final String agent   = request.getHeader("user-agent");
 		
 		Long uid = null;
-		final HttpSession session = request.getSession(false);
-		if (session != null) {
-			final User user = (User)session.getAttribute("user");
-			if (user != null) {
-				uid = user.getUid();
-			}
+		final User user = (User)session.getAttribute("user");
+		if (user != null) {
+			uid = user.getUid();
 		}
 		
 		try {
