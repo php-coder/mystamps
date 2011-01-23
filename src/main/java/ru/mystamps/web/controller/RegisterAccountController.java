@@ -3,7 +3,6 @@ package ru.mystamps.web.controller;
 import java.sql.SQLException;
 
 import javax.validation.Valid;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,6 @@ public class RegisterAccountController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String processInput(
-			final HttpServletRequest request,
 			@Valid final RegisterAccountForm form,
 			final BindingResult result)
 		throws SQLException {
