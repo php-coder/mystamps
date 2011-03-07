@@ -94,8 +94,7 @@ public class ActivateAccountValidator implements Validator {
 	private static void validateName(final ActivateAccountForm form, final Errors errors) {
 		final String name = form.getName();
 		
-		if (name.length() == 0) {
-			// don't check empty value
+		if (name.isEmpty()) {
 			return;
 		}
 		
