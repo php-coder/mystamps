@@ -14,8 +14,10 @@
 				<spring:message code="t_add_country_ucfirst" />
 			</h3>
 			<div class="hint">
-				<spring:message code="t_required_fields_legend"
-					arguments="<span class=\"required_field\">*</span>" />
+				<span class="hint_item">
+					<spring:message code="t_required_fields_legend"
+						arguments="<span class=\"required_field\">*</span>" />
+				</span>
 			</div>
 			<div class="generic_form">
 				<form:form method="post" modelAttribute="addCountryForm">

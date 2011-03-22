@@ -10,7 +10,7 @@ package ru.mystamps.web;
  */
 public class SiteMap {
 	
-	public static final String SITE_URL                 = "http://my-stamps:8080/";
+	public static final String SITE_URL                 = "http://my-stamps:8080";
 	
 	// defined at webapp/WEB-INF/spring-servlet.xml
 	public static final String INDEX_PAGE_URL           = "/site/index.htm";

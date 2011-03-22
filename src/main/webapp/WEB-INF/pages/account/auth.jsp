@@ -20,11 +20,15 @@
 			
 			<c:if test="${empty sessionScope.user}">
 				<div class="hint">
-					<spring:message code="t_if_you_forget_password"
-						arguments="${restorePasswordUrl}" />
+					<span class="hint_item">
+						<spring:message code="t_if_you_forget_password"
+							arguments="${restorePasswordUrl}" />
+					</span>
 					<br />
-					<spring:message code="t_required_fields_legend"
-						arguments="<span class=\"required_field\">*</span>" />
+					<span class="hint_item">
+						<spring:message code="t_required_fields_legend"
+							arguments="<span class=\"required_field\">*</span>" />
+					</span>
 				</div>
 				<div class="generic_form">
 					<form:form method="post" modelAttribute="authAccountForm">
