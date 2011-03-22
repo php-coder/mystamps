@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
 	WhenUserActivateAccount.class,
 	WhenUserAuthenticates.class,
 	WhenAuthenticatedUserTryToAuthenticates.class,
+	WhenUserLogsOut.class,
 	WhenUserAddStamps.class,
 	WhenUserAddCountry.class,
 	WhenUserRecoveryPassword.class,
