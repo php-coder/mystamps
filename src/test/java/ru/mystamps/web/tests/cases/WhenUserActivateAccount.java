@@ -111,7 +111,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldBeUnique() {
-		// TODO: inject from config
+		// TODO: inject from config (#95)
 		final String VALID_TEST_LOGIN = "coder";
 		
 		page.fillField("login", VALID_TEST_LOGIN);
@@ -237,8 +237,9 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
 		// NOTE: this test depends from
 		// WhenUserRegisterAccount::successfulMessageShouldBeShownAfterRegistration()
+		// (see also #96)
 		//
-		// TODO: get activation key from database
+		// TODO: get activation key from database (#98)
 		// TODO: delete user after activation
 		
 		page.fillField("login", "test-login");

@@ -23,7 +23,7 @@ public class TranslationUtils {
 		return bundle.getString(key);
 	}
 	
-	// TODO: add simple unit tests
+	// TODO: add simple unit tests (#93)
 	public static String stripHtmlTags(final String msg) {
 		return msg.replaceAll("\\<.*?>", "");
 	}

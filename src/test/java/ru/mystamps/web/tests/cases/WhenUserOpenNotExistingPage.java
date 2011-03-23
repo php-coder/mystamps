@@ -35,7 +35,7 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 	
 	@Test
 	public void incidentShouldBeLoggedToDatabase() {
-		// TODO: check suspicious_events table
+		// TODO: check suspicious_events table (#99)
 	}
 	
 }

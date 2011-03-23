@@ -73,7 +73,7 @@ public class UsersActivation {
 			conn.prepareStatement(addRecordQuery);
 		
 		stat.setString(1, email);
-		/// @todo: get rid of hardcoded act key
+		/// @todo: get rid of hardcoded act key (#98)
 		stat.setString(2, (email.equals("coder@rock.home") ? "7777744444" : generateActivationKey()));
 		stat.executeUpdate();
 	}

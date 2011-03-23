@@ -85,6 +85,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void invalidCredentialsShouldBeRejected() {
+		// TODO: inject from config (#95)
 		final String INVALID_TEST_LOGIN    = "test";
 		final String INVALID_TEST_PASSWORD = "test";
 		
@@ -97,7 +98,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void validCredentialsShouldAuthenticateUserOnSite() {
-		// TODO: inject from config
+		// TODO: inject from config (#95)
 		final String VALID_TEST_LOGIN    = "coder";
 		final String VALID_TEST_PASSWORD = "test";
 		final String VALID_TEST_NAME     = "Test Suite";

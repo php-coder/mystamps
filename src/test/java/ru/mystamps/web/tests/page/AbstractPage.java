@@ -207,7 +207,7 @@ public abstract class AbstractPage {
 	}
 	
 	public void login() {
-		// TODO: inject from config
+		// TODO: inject from config (#95)
 		final String VALID_TEST_LOGIN    = "coder";
 		final String VALID_TEST_PASSWORD = "test";
 		

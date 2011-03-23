@@ -9,7 +9,7 @@ import org.junit.Test;
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
 /**
- * TODO: use @BeforeClass/@AfterClass annotations from TestNG
+ * TODO: use @BeforeClass/@AfterClass annotations from TestNG (#92)
  * (For now we can't use them because JUnit required than them should be static.)
  *
  * TODO: split test to parts
