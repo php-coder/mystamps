@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -11,6 +12,8 @@ import javax.sql.DataSource;
 import lombok.Cleanup;
 
 import org.springframework.stereotype.Repository;
+
+import ru.mystamps.web.entity.SuspiciousActivity;
 
 @Repository
 public class SuspiciousActivities {
@@ -72,6 +75,11 @@ public class SuspiciousActivities {
 		// in suspicious_activities_types table, then logs may be
 		// silently not added.
 		stat.executeUpdate();
+	}
+	
+	public SuspiciousActivity getLastRecord() {
+		// TODO
+		return new SuspiciousActivity(1L, new Date(), "page", 2L, "ip", "referer", "userAgent");
 	}
 	
 }

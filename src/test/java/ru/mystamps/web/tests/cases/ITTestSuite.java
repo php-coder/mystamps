@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	/*
 	WhenUserAtIndexPage.class,
 	WhenUserRegisterAccount.class,
 	WhenAuthenticatedUserRegisterAccount.class,
@@ -14,9 +15,9 @@ import org.junit.runners.Suite;
 	WhenUserLogsOut.class,
 	WhenUserAddStamps.class,
 	WhenUserAddCountry.class,
-	WhenUserRecoveryPassword.class,
-	WhenUserOpenNotExistingPage.class,
-	WhenSiteOnMaintenance.class
+	WhenUserRecoveryPassword.class,*/
+	WhenUserOpenNotExistingPage.class/*,
+	WhenSiteOnMaintenance.class*/
 })
 public class ITTestSuite {
 }
