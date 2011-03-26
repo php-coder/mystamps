@@ -1,4 +1,8 @@
 ----
+-- See also: mystamps.sql
+----
+
+----
 -- users
 ----
 CREATE TABLE "users" (
