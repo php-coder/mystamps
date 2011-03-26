@@ -19,7 +19,6 @@ CREATE TABLE `users` (
 	`registered_at` DATETIME NOT NULL,
 	`activated_at` DATETIME NOT NULL,
 	
-	
 	-- -1 (banned), 0 (lost password), 1 (ok)
 	`status` TINYINT(1) NOT NULL DEFAULT 1,
 	
@@ -42,8 +41,8 @@ CREATE TABLE `users_activation` (
 	`registered_at` DATETIME NOT NULL,
 	
 	-- see:
-	--- ACT_KEY_LENGTH in WEB-INF/web.xml
-	--- ru.mystamps.db.UsersActivation.generateActivationKey()
+	-- ACT_KEY_LENGTH in WEB-INF/web.xml
+	-- ru.mystamps.db.UsersActivation.generateActivationKey()
 	`act_key` CHAR(10) NOT NULL,
 	
 	UNIQUE KEY(`act_key`)
@@ -58,7 +57,7 @@ CREATE TABLE `suspicious_activities_types` (
 	PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
-INSERT INTO suspicious_activities_types(name)
+INSERT INTO `suspicious_activities_types`(`name`)
 VALUES ('PageNotFound'), ('AuthenticationFailed');
 
 ----
@@ -69,7 +68,7 @@ CREATE TABLE `suspicious_activities` (
 	`date` DATETIME NOT NULL,
 	`page` VARCHAR(100) NOT NULL,
 	`user_id` INT(5) UNSIGNED,
-	`ip` CHAR(15) NOT NULL NOT NULL DEFAULT '',
+	`ip` CHAR(15) NOT NULL DEFAULT '',
 	`referrer_page` VARCHAR(255) NOT NULL DEFAULT '',
 	`user_agent` VARCHAR(255) NOT NULL DEFAULT '',
 	FOREIGN KEY (`type_id`) REFERENCES `suspicious_activities_types`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
