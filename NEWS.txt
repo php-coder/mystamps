@@ -1,0 +1,15 @@
+0.1.2 (not released yet)
+- use Maven2 for building project
+- rewrited functional tests for using Selenium2
+
+0.1.1
+- rewrited to using Spring MVC 3
+
+0.1
+- added initial skeleton of site (JSF 1.2 with JSP/JSTL)
+- added functional tests (Selenium Core)
+- added i18n with l10n
+- use Ant for building project
+- use log4j for logging
+- use Lombok for code simplification
+
