@@ -1,42 +1,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	http://www.springframework.org/schema/jee
-	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
-	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/jdbc
+	http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<context:component-scan base-package="ru.mystamps.web.controller,ru.mystamps.web.validation,ru.mystamps.db" />
+	<context:component-scan base-package="ru.mystamps.db" />
 	
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:ru/mystamps/i18n/Messages" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
-	
-	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor">
-		<property name="alwaysUseJndiLookup" value="true" />
-	</bean>
-	
-	<jee:jndi-lookup id="ds" jndi-name="java:comp/env/jdbc/mystamps" />
-	
-	<mvc:annotation-driven />
-	
-	<!-- see also src/ru/mystamps/web/SiteMap.java -->
-	<mvc:view-controller path="/site/index.htm" view-name="site/index" />
-	<mvc:view-controller path="/site/maintenance.htm" view-name="site/maintenance" />
-	<mvc:view-controller path="/password/restore.htm" view-name="password/restore" />
+	<jdbc:embedded-database id="ds" type="HSQL">
+		<jdbc:script location="classpath:hsql-schema.sql" />
+	</jdbc:embedded-database>
 	
 </beans>
