@@ -42,8 +42,8 @@ CREATE TABLE `users_activation` (
 	`registered_at` DATETIME NOT NULL,
 	
 	-- see:
-	--- ACT_KEY_LENGTH in WEB-INF/web.xml
-	--- ru.mystamps.db.UsersActivation.generateActivationKey()
+	-- ACT_KEY_LENGTH in WEB-INF/web.xml
+	-- ru.mystamps.db.UsersActivation.generateActivationKey()
 	`act_key` CHAR(10) NOT NULL,
 	
 	UNIQUE KEY(`act_key`)
