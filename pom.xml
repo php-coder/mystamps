@@ -11,6 +11,7 @@
 	
 	<properties>
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
+		<spring.version>3.0.5.RELEASE</spring.version>
 	</properties>
 	
 	<dependencies>
@@ -43,7 +44,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		
 		<dependency>
