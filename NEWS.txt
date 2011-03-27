@@ -1,6 +1,7 @@
 0.1.2 (not released yet)
 - use Maven2 for building project
 - rewrited functional tests for using Selenium2
+- functional tests works with HSQL database
 
 0.1.1
 - rewrited to using Spring MVC 3
