@@ -22,7 +22,7 @@ public class Users {
 	private final Logger log = Logger.getRootLogger();
 	
 	@Resource
-	private DataSource ds;
+	private DataSource dataSource;
 	
 	/**
 	 * @see add()
@@ -97,7 +97,7 @@ public class Users {
 		final String hash = salt + password;
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
@@ -123,7 +123,7 @@ public class Users {
 		Long userId = null;
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
@@ -157,7 +157,7 @@ public class Users {
 		User user = null;
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
@@ -192,7 +192,7 @@ public class Users {
 		boolean result = false;
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =

@@ -12,7 +12,9 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<context:component-scan base-package="ru.mystamps.web.controller,ru.mystamps.web.validation,ru.mystamps.db" />
+	<context:component-scan base-package="ru.mystamps.web.controller" />
+	<context:component-scan base-package="ru.mystamps.web.validation" />
+	<context:component-scan base-package="ru.mystamps.db" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
@@ -30,7 +32,7 @@
 		<property name="alwaysUseJndiLookup" value="true" />
 	</bean>
 	
-	<jee:jndi-lookup id="ds" jndi-name="java:comp/env/jdbc/mystamps" />
+	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/mystamps" />
 	
 	<mvc:annotation-driven />
 	

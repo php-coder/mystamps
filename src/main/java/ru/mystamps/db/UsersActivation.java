@@ -20,7 +20,7 @@ public class UsersActivation {
 	private final Logger log = Logger.getRootLogger();
 	
 	@Resource
-	private DataSource ds;
+	private DataSource dataSource;
 	
 	/**
 	 * @see add()
@@ -66,7 +66,7 @@ public class UsersActivation {
 		throws SQLException {
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
@@ -86,7 +86,7 @@ public class UsersActivation {
 		throws SQLException {
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
@@ -107,7 +107,7 @@ public class UsersActivation {
 		boolean result = false;
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =

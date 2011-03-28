@@ -47,7 +47,7 @@ public class RegisterAccountController {
 		
 		activationRequests.add(form.getEmail());
 		
-		// TODO: do redirect to protect from double sumbission (#74)
+		// TODO: do redirect to protect from double submission (#74)
 		return "account/activation_sent";
 	}
 	
