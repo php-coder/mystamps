@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 public class SuspiciousActivities {
 	
 	@Resource
-	private DataSource ds;
+	private DataSource dataSource;
 	
 	private static final String logEventQuery =
 			"INSERT INTO `suspicious_activities` " +
@@ -49,7 +49,7 @@ public class SuspiciousActivities {
 		throws SQLException {
 		
 		@Cleanup
-		final Connection conn = ds.getConnection();
+		final Connection conn = dataSource.getConnection();
 		
 		@Cleanup
 		final PreparedStatement stat =
