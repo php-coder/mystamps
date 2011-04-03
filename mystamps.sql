@@ -35,7 +35,7 @@ CREATE TABLE `users_activation` (
 	-- see EMAIL_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`email` VARCHAR(255) NOT NULL,
 	
-	`registered_at` DATETIME NOT NULL,
+	`created_at` DATETIME NOT NULL,
 	
 	-- see:
 	-- ACT_KEY_LENGTH in WEB-INF/web.xml
