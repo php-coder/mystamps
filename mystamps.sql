@@ -19,9 +19,6 @@ CREATE TABLE `users` (
 	`registered_at` DATETIME NOT NULL,
 	`activated_at` DATETIME NOT NULL,
 	
-	-- -1 (banned), 0 (lost password), 1 (ok)
-	`status` TINYINT(1) NOT NULL DEFAULT 1,
-	
 	`hash` CHAR(40) NOT NULL,
 	
 	-- see ru.mystamps.db.Users.generateSalt()
