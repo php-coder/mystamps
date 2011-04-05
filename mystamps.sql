@@ -66,7 +66,7 @@ CREATE TABLE `suspicious_activities` (
 	`page` VARCHAR(100) NOT NULL,
 	`user_id` INT(5) UNSIGNED,
 	`ip` CHAR(15) NOT NULL DEFAULT '',
-	`referrer_page` VARCHAR(255) NOT NULL DEFAULT '',
+	`referer_page` VARCHAR(255) NOT NULL DEFAULT '',
 	`user_agent` VARCHAR(255) NOT NULL DEFAULT '',
 	FOREIGN KEY (`type_id`) REFERENCES `suspicious_activities_types`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
