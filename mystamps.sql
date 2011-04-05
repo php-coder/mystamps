@@ -62,7 +62,7 @@ VALUES ('PageNotFound'), ('AuthenticationFailed');
 ----
 CREATE TABLE `suspicious_activities` (
 	`type_id` TINYINT(2) UNSIGNED NOT NULL,
-	`date` DATETIME NOT NULL,
+	`occured_at` DATETIME NOT NULL,
 	`page` VARCHAR(100) NOT NULL,
 	`user_id` INT(5) UNSIGNED,
 	`ip` CHAR(15) NOT NULL DEFAULT '',
