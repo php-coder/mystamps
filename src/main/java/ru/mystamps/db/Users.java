@@ -40,7 +40,7 @@ public class Users {
 				"?, " +
 				"?, " +
 				"ua.email, " +
-				"ua.registered_at, " +
+				"ua.created_at, " +
 				"NOW(), " +
 				"SHA1(?), " +
 				"? " +

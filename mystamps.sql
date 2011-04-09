@@ -23,9 +23,6 @@ CREATE TABLE `users` (
 	`registered_at` DATETIME NOT NULL,
 	`activated_at` DATETIME NOT NULL,
 	
-	-- -1 (banned), 0 (lost password), 1 (ok)
-	`status` TINYINT(1) NOT NULL DEFAULT 1,
-	
 	`hash` CHAR(40) NOT NULL,
 	
 	-- see ru.mystamps.db.Users.generateSalt()
@@ -42,7 +39,7 @@ CREATE TABLE `users_activation` (
 	-- see EMAIL_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`email` VARCHAR(255) NOT NULL,
 	
-	`registered_at` DATETIME NOT NULL,
+	`created_at` DATETIME NOT NULL,
 	
 	-- see:
 	-- ACT_KEY_LENGTH in WEB-INF/web.xml
