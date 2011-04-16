@@ -51,7 +51,8 @@ CREATE TABLE `users_activation` (
 CREATE TABLE `suspicious_activities_types` (
 	`id` TINYINT(2) UNSIGNED AUTO_INCREMENT NOT NULL,
 	`name` VARCHAR(100) NOT NULL,
-	PRIMARY KEY(`id`)
+	PRIMARY KEY(`id`),
+	UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 INSERT INTO `suspicious_activities_types`(`name`)
