@@ -1,7 +1,5 @@
 package ru.mystamps.web.controller;
 
-import java.sql.SQLException;
-
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
-import ru.mystamps.db.Users;
-import ru.mystamps.db.SuspiciousActivities;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AuthAccountForm;
+import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.validation.AuthAccountValidator;
 
 import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
@@ -29,10 +27,10 @@ import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 public class AuthAccountController {
 	
 	@Autowired
-	private Users users;
+	private UserService userService;
 	
 	@Autowired
-	private SuspiciousActivities act;
+	private SiteService siteService;
 	
 	@Autowired
 	private AuthAccountValidator authAccountValidator;
@@ -54,8 +52,7 @@ public class AuthAccountController {
 			@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestHeader(value = "user-agent", required = false) final String agent,
 			@Valid final AuthAccountForm form,
-			final BindingResult result)
-		throws SQLException {
+			final BindingResult result) {
 		
 		if (result.hasErrors()) {
 			
@@ -72,19 +69,19 @@ public class AuthAccountController {
 				final String page = request.getRequestURI();
 				final String ip   = request.getRemoteAddr();
 				
-				Long uid = null;
 				final User user = (User)session.getAttribute("user");
-				if (user != null) {
-					uid = user.getUid();
-				}
-				
-				act.logEvent("AuthenticationFailed", page, uid, ip, referer, agent);
+				siteService.logAboutFailedAuthentication(page, user, ip, referer, agent);
 			}
 			
 			return "account/auth";
 		}
 		
-		final User user = users.getUserByLogin(form.getLogin());
+		final User user = userService.findByLogin(form.getLogin());
+		
+		// don't save password related fields in session
+		user.setHash(null);
+		user.setSalt(null);
+		
 		session.setAttribute("user", user);
 		
 		return "redirect:" + INDEX_PAGE_URL;

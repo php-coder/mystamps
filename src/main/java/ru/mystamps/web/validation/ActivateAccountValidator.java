@@ -1,15 +1,12 @@
 package ru.mystamps.web.validation;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
-import ru.mystamps.db.Users;
-import ru.mystamps.db.UsersActivation;
+import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.model.ActivateAccountForm;
 
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
@@ -27,10 +24,7 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 public class ActivateAccountValidator implements Validator {
 	
 	@Autowired
-	private Users users;
-	
-	@Autowired
-	private UsersActivation activationRequests;
+	private UserService userService;
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -81,11 +75,10 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		try {
-			if (users.loginExists(login)) {
+			if (userService.findByLogin(login) != null) {
 				errors.rejectValue("login", "login.exists");
 			}
-			
-		} catch (final SQLException ex) {
+		} catch (final Exception ex) {
 			errors.rejectValue("login", "error.internal");
 		}
 		
@@ -192,7 +185,7 @@ public class ActivateAccountValidator implements Validator {
 					"XXX");
 			return;
 		}
-			
+		
 		// TODO: use Pattern class
 		if (!key.matches(ACT_KEY_REGEXP)) {
 			errors.rejectValue("activationKey", "key.invalid");
@@ -200,13 +193,13 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		try {
-			if (! activationRequests.actKeyExists(key)) {
+			if (userService.findRegistrationRequestByActivationKey(key) == null) {
 				errors.rejectValue("activationKey", "key.not-exists");
 			}
-			
-		} catch (final SQLException ex) {
+		} catch (final Exception ex) {
 			errors.rejectValue("activationKey", "error.internal");
 		}
+		
 	}
 	
 }

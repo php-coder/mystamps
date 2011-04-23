@@ -1,6 +1,8 @@
 0.1.2 (not released yet)
 - use Maven2 for building project
 - rewrited functional tests for using Selenium2
+- use JPA (with Hibernate as its implementation)
+  for access to database (instead of JDBC)
 
 0.1.1
 - rewrited to using Spring MVC 3

@@ -1,15 +1,13 @@
 package ru.mystamps.web.validation;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
-import ru.mystamps.db.Users;
 import ru.mystamps.web.model.AuthAccountForm;
+import ru.mystamps.web.service.UserService;
 
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
@@ -21,7 +19,7 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
 public class AuthAccountValidator implements Validator {
 	
 	@Autowired
-	private Users users;
+	private UserService userService;
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -103,15 +101,13 @@ public class AuthAccountValidator implements Validator {
 		final String password = form.getPassword();
 		
 		try {
-			final Long userId = users.auth(login, password);
-			
-			if (userId == null) {
+			if (userService.findByLoginAndPassword(login, password) == null) {
 				errors.reject("login.password.invalid");
 			}
-			
-		} catch (final SQLException ex) {
+		} catch (final Exception ex) {
 			errors.reject("error.internal");
 		}
+		
 	}
 	
 }

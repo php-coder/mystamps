@@ -1,7 +1,5 @@
 package ru.mystamps.web.controller;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ru.mystamps.db.SuspiciousActivities;
 import ru.mystamps.web.entity.User;
+import ru.mystamps.web.service.SiteService;
 
 import static ru.mystamps.web.SiteMap.NOT_FOUND_PAGE_URL;
 
@@ -24,7 +22,7 @@ public class NotFoundErrorController {
 	private final Logger log = Logger.getRootLogger();
 	
 	@Autowired
-	private SuspiciousActivities act;
+	private SiteService siteService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String notFound(
@@ -36,16 +34,11 @@ public class NotFoundErrorController {
 		// TODO: sanitize all user's values (#60)
 		final String page = (String)request.getAttribute("javax.servlet.error.request_uri");
 		final String ip   = request.getRemoteAddr();
-		
-		Long uid = null;
-		final User user = (User)session.getAttribute("user");
-		if (user != null) {
-			uid = user.getUid();
-		}
+		final User user   = (User)session.getAttribute("user");
 		
 		try {
-			act.logEvent("PageNotFound", page, uid, ip, referer, agent);
-		} catch (final SQLException ex) {
+			siteService.logAboutAbsentPage(page, user, ip, referer, agent);
+		} catch (final Exception ex) {
 			// intentionally ignored:
 			// database error should not break showing of 404 page
 			log.warn("Cannot log 404 error", ex);
