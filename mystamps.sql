@@ -49,7 +49,7 @@ CREATE TABLE `users_activation` (
 -- suspicious_activities_types
 ----
 CREATE TABLE `suspicious_activities_types` (
-	`id` TINYINT(2) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
 	`name` VARCHAR(100) NOT NULL,
 	PRIMARY KEY(`id`),
 	UNIQUE KEY(`name`)
@@ -62,7 +62,7 @@ VALUES ('PageNotFound'), ('AuthenticationFailed');
 -- suspicious_activities
 ----
 CREATE TABLE `suspicious_activities` (
-	`type_id` TINYINT(2) UNSIGNED NOT NULL,
+	`type_id` INT(5) UNSIGNED NOT NULL,
 	`occured_at` DATETIME NOT NULL,
 	`page` VARCHAR(100) NOT NULL,
 	`user_id` INT(5) UNSIGNED,
