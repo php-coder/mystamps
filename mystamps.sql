@@ -69,7 +69,7 @@ CREATE TABLE `suspicious_activities` (
 	`ip` CHAR(15) NOT NULL DEFAULT '',
 	`referer_page` VARCHAR(255) NOT NULL DEFAULT '',
 	`user_agent` VARCHAR(255) NOT NULL DEFAULT '',
-	FOREIGN KEY (`type_id`) REFERENCES `suspicious_activities_types`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
+	FOREIGN KEY(`type_id`) REFERENCES `suspicious_activities_types`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
