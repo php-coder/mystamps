@@ -22,8 +22,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractPage {
 	
-	protected final WebDriver driver;
-	protected final String pageUrl;
+	private final WebDriver driver;
+	private final String pageUrl;
 	
 	@FindBy(tagName="body")
 	@CacheLookup

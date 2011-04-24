@@ -21,23 +21,23 @@ public abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
 	 */
-	protected static final String TITLE_PREFIX = "MyStamps: ";
+	private static final String TITLE_PREFIX = "MyStamps: ";
 	
 	/**
 	 * @see hasResponseServerCode()
 	 */
-	protected int serverCode = HttpURLConnection.HTTP_OK;
+	private int serverCode = HttpURLConnection.HTTP_OK;
 	
 	/**
 	 * @see hasTitle()
 	 * @see hasTitleWithoutStandardPrefix()
 	 */
-	protected String title;
+	private String title;
 	
 	/**
 	 * @see hasHeader()
 	 */
-	protected String header;
+	private String header;
 	
 	public WhenUserAtAnyPage(final Class<T> pageClass) {
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
