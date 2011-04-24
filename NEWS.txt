@@ -3,6 +3,7 @@
 - rewrited functional tests for using Selenium2
 - use JPA (with Hibernate as its implementation)
   for access to database (instead of JDBC)
+- functional tests now runs under Jetty
 
 0.1.1
 - rewrited to using Spring MVC 3
