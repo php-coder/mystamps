@@ -119,7 +119,7 @@ public abstract class AbstractPage {
 		final WebElement link = getLinkByText(linkText);
 		final String title    = link.getAttribute("title");
 		final String href     = getLinkHref(link);
-		return targetUrl.equals(href) && titleValue.equals(title) ;
+		return targetUrl.equals(href) && titleValue.equals(title);
 	}
 	
 	public boolean textPresent(final String text) {
