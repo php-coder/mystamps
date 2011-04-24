@@ -46,7 +46,7 @@ public class MaintenanceFilter implements Filter {
 			if (userIP == null || userIP.equals("")) {
 				log.warn("Cannot get user IP address");
 			
-			} else if (! allowedIP.equals(userIP)) {
+			} else if (!allowedIP.equals(userIP)) {
 				final RequestDispatcher dispatch =
 					request.getRequestDispatcher(MAINTENANCE_PAGE_URL);
 				dispatch.forward(request, response);

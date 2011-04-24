@@ -98,7 +98,7 @@ public class UserService {
 			return null;
 		}
 		
-		if (! user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
+		if (!user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
 			log.debug("findByLoginAndPassword(" + login + ", " + password + "): wrong password");
 			return null;
 		}

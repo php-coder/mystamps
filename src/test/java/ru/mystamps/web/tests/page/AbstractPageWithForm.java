@@ -62,7 +62,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	public boolean isFieldExists(final Field field) {
 		final String fieldType = field.getClass().getSimpleName();
-		if (! fieldLocators.containsKey(fieldType)) {
+		if (!fieldLocators.containsKey(fieldType)) {
 			throw new IllegalArgumentException("Internal error: unknown field type");
 		}
 		

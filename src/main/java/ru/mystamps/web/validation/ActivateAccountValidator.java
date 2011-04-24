@@ -69,7 +69,7 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! login.matches(LOGIN_REGEXP)) {
+		if (!login.matches(LOGIN_REGEXP)) {
 			errors.rejectValue("login", "login.invalid");
 			return;
 		}
@@ -132,12 +132,12 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! password.matches(PASSWORD_REGEXP)) {
+		if (!password.matches(PASSWORD_REGEXP)) {
 			errors.rejectValue("password", "password.invalid");
 			return;
 		}
 		
-		if (! errors.hasFieldErrors("login") &&
+		if (!errors.hasFieldErrors("login") &&
 				password.equals(login)) {
 			errors.rejectValue("password", "password.login.match");
 			return;
@@ -153,7 +153,7 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String passwordConfirm = form.getPasswordConfirm();
 		
-		if (! errors.hasFieldErrors("password") &&
+		if (!errors.hasFieldErrors("password") &&
 				!passwordConfirm.equals(password)) {
 			errors.rejectValue("passwordConfirm", "password.mismatch");
 			return;

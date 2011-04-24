@@ -62,7 +62,7 @@ public class AuthAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! login.matches(LOGIN_REGEXP)) {
+		if (!login.matches(LOGIN_REGEXP)) {
 			errors.rejectValue("login", "login.invalid");
 			return;
 		}
@@ -86,7 +86,7 @@ public class AuthAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! password.matches(PASSWORD_REGEXP)) {
+		if (!password.matches(PASSWORD_REGEXP)) {
 			errors.rejectValue("password", "password.invalid");
 			return;
 		}
