@@ -4,6 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class AuthAccountForm {
-	@Getter @Setter String login;
-	@Getter @Setter String password;
+	@Getter @Setter private String login;
+	@Getter @Setter private String password;
 }

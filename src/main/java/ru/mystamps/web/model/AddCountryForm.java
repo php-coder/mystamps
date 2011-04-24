@@ -4,5 +4,5 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class AddCountryForm {
-	@Getter @Setter String country;
+	@Getter @Setter private String country;
 }

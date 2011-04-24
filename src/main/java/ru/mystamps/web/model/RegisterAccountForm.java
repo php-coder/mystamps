@@ -4,5 +4,5 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class RegisterAccountForm {
-	@Getter @Setter String email;
+	@Getter @Setter private String email;
 }
