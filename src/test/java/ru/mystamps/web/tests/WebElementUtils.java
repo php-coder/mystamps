@@ -14,7 +14,7 @@ public class WebElementUtils {
 		}
 		
 		final List<String> result = new ArrayList<String>(elements.size());
-		for(final WebElement el : elements) {
+		for (final WebElement el : elements) {
 			result.add(el.getText());
 		}
 		
