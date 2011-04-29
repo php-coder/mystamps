@@ -4,29 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.HttpURLConnection;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import ru.mystamps.db.SuspiciousActivities;
-import ru.mystamps.db.SuspiciousActivitiesTypes;
-import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:integrationTestsContext.xml"})
 public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
-	
-	@Autowired
-	private SuspiciousActivities act;
-	
-	@Autowired
-	private SuspiciousActivitiesTypes types;
 	
 	public WhenUserOpenNotExistingPage() {
 		super(NotFoundErrorPage.class);
@@ -51,13 +35,9 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 	
 	@Test
 	public void incidentShouldBeLoggedToDatabase() {
-		final Long typeId = types.findByName("PageNotFound").getId();
-		final SuspiciousActivity activity = act.getLastRecord();
-		
-		assertEquals(typeId, activity.getTypeId());
-		
-		// TODO: generate random page
-		assertEquals(page.getCurrentUrl(), activity.getPage());
+		// TODO: check suspicious_events table (#99)
+		// TODO: check url
+		// TODO: check activity type
 	}
 	
 }
