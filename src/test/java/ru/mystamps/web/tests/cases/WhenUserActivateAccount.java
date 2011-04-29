@@ -26,6 +26,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
 		hasHeader(tr("t_activation_on_site"));
+		
+		page.open();
 	}
 	
 	@Test

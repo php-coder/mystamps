@@ -16,6 +16,8 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
 		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
+		
+		page.open();
 	}
 	
 	@Test

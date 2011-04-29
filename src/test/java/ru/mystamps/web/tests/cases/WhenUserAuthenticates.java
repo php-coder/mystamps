@@ -23,6 +23,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		super(AuthAccountPage.class);
 		hasTitle(tr("t_auth_title"));
 		hasHeader(tr("t_authentication_on_site"));
+		
+		page.open();
 	}
 	
 	@Test

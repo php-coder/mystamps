@@ -53,6 +53,8 @@ public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> 
 		super(AddStampsPage.class);
 		hasTitle(tr("t_add_series"));
 		hasHeader(tr("t_add_series_ucfirst"));
+		
+		page.open();
 	}
 	
 	@Test

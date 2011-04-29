@@ -16,6 +16,8 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	public WhenUserAtIndexPage() {
 		super(IndexSitePage.class);
 		hasTitle(tr("t_index_title"));
+		
+		page.open();
 	}
 	
 	@Test

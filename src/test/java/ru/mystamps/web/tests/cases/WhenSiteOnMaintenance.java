@@ -16,6 +16,8 @@ public class WhenSiteOnMaintenance extends WhenUserAtAnyPage<MaintenanceSitePage
 		
 		// TODO:
 		//hasResponseServerCode(HttpURLConnection.HTTP_UNAVAILABLE);
+		
+		page.open();
 	}
 	
 	@Test
