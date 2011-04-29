@@ -53,7 +53,7 @@ public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	private void shouldHaveLabels() {
 		for (final Field field : page.getForm().getFields()) {
-			if (! field.hasLabel()) {
+			if (!field.hasLabel()) {
 				continue;
 			}
 			
@@ -114,7 +114,7 @@ public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	private void fieldsValuesShouldBePreservedWhenErrorOccurs() {
 		for (final Field field : page.getForm().getFields()) {
-			if (! field.hasInvalidValue()) {
+			if (!field.hasInvalidValue()) {
 				System.err.println(
 					"NOTICE: Invalid value not defined for field '" +
 					field.getName() +

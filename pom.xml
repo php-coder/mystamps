@@ -11,7 +11,10 @@
 	
 	<properties>
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
+		<jetty.host>127.0.0.1</jetty.host>
+		<jetty.port>8081</jetty.port>
 		<spring.version>3.0.5.RELEASE</spring.version>
+		<hibernate.version>3.6.2.Final</hibernate.version>
 	</properties>
 	
 	<dependencies>
@@ -36,9 +39,51 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.16</version>
 		</dependency>
 		
 		<dependency>
@@ -51,6 +96,12 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
 		</dependency>
 		
 		<dependency>
@@ -107,12 +158,14 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- HtmlUnit 2.8 use it but does not have dependency -->
+		<!--
+			 HtmlUnit 2.8 use it but does not have dependency
+			 (also without it, project does not run under Jetty)
+		-->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
-			<scope>test</scope>
 		</dependency>
 		
 		<!--
@@ -239,7 +292,48 @@
 					</execution>
 				</executions>
 			</plugin>
-		
+			
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<!--
+					 Stick to Jetty7 because we not ready for servlet
+					 API 3.0. See for details:
+					 http://stackoverflow.com/q/2151075#3172395
+				-->
+				<version>7.3.1.v20110307</version>
+				<configuration>
+					<connectors>
+						<connector
+							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<host>${jetty.host}</host>
+							<port>${jetty.port}</port>
+						</connector>
+					</connectors>
+					<stopPort>9966</stopPort>
+					<stopKey>jetty-stop-signal</stopKey>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 		
 	</build>

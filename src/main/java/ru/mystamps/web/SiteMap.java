@@ -10,7 +10,8 @@ package ru.mystamps.web;
  */
 public class SiteMap {
 	
-	public static final String SITE_URL                 = "http://my-stamps:8080";
+	// defined at pom.xml (and used by functional tests only)
+	public static final String SITE_URL                 = "http://127.0.0.1:8081";
 	
 	// defined at webapp/WEB-INF/spring-servlet.xml
 	public static final String INDEX_PAGE_URL           = "/site/index.htm";

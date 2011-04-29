@@ -1,7 +1,5 @@
 package ru.mystamps.web.controller;
 
-import java.sql.SQLException;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
-import ru.mystamps.db.UsersActivation;
 import ru.mystamps.web.model.RegisterAccountForm;
+import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.validation.RegisterAccountValidator;
 
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
@@ -23,7 +21,7 @@ import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 public class RegisterAccountController {
 	
 	@Autowired
-	private UsersActivation activationRequests;
+	private UserService userService;
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -38,14 +36,13 @@ public class RegisterAccountController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String processInput(
 			@Valid final RegisterAccountForm form,
-			final BindingResult result)
-		throws SQLException {
+			final BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return "account/register";
 		}
 		
-		activationRequests.add(form.getEmail());
+		userService.addRegistrationRequest(form.getEmail());
 		
 		// TODO: do redirect to protect from double submission (#74)
 		return "account/activation_sent";

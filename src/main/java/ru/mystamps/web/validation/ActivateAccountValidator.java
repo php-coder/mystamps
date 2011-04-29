@@ -1,15 +1,12 @@
 package ru.mystamps.web.validation;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
-import ru.mystamps.db.Users;
-import ru.mystamps.db.UsersActivation;
+import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.model.ActivateAccountForm;
 
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
@@ -27,10 +24,7 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 public class ActivateAccountValidator implements Validator {
 	
 	@Autowired
-	private Users users;
-	
-	@Autowired
-	private UsersActivation activationRequests;
+	private UserService userService;
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -75,17 +69,16 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! login.matches(LOGIN_REGEXP)) {
+		if (!login.matches(LOGIN_REGEXP)) {
 			errors.rejectValue("login", "login.invalid");
 			return;
 		}
 		
 		try {
-			if (users.loginExists(login)) {
+			if (userService.findByLogin(login) != null) {
 				errors.rejectValue("login", "login.exists");
 			}
-			
-		} catch (final SQLException ex) {
+		} catch (final Exception ex) {
 			errors.rejectValue("login", "error.internal");
 		}
 		
@@ -139,12 +132,12 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		// TODO: use Pattern class
-		if (! password.matches(PASSWORD_REGEXP)) {
+		if (!password.matches(PASSWORD_REGEXP)) {
 			errors.rejectValue("password", "password.invalid");
 			return;
 		}
 		
-		if (! errors.hasFieldErrors("login") &&
+		if (!errors.hasFieldErrors("login") &&
 				password.equals(login)) {
 			errors.rejectValue("password", "password.login.match");
 			return;
@@ -160,7 +153,7 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String passwordConfirm = form.getPasswordConfirm();
 		
-		if (! errors.hasFieldErrors("password") &&
+		if (!errors.hasFieldErrors("password") &&
 				!passwordConfirm.equals(password)) {
 			errors.rejectValue("passwordConfirm", "password.mismatch");
 			return;
@@ -192,7 +185,7 @@ public class ActivateAccountValidator implements Validator {
 					"XXX");
 			return;
 		}
-			
+		
 		// TODO: use Pattern class
 		if (!key.matches(ACT_KEY_REGEXP)) {
 			errors.rejectValue("activationKey", "key.invalid");
@@ -200,13 +193,13 @@ public class ActivateAccountValidator implements Validator {
 		}
 		
 		try {
-			if (! activationRequests.actKeyExists(key)) {
+			if (userService.findRegistrationRequestByActivationKey(key) == null) {
 				errors.rejectValue("activationKey", "key.not-exists");
 			}
-			
-		} catch (final SQLException ex) {
+		} catch (final Exception ex) {
 			errors.rejectValue("activationKey", "error.internal");
 		}
+		
 	}
 	
 }

@@ -44,7 +44,7 @@ public class RegisterAccountValidator implements Validator {
 		// TODO: Deprecated. Use the new EmailValidator in the
 		// routines package. (Or move to using Hibernate validators.)
 		EmailValidator validator = EmailValidator.getInstance();
-		if (! validator.isValid(email)) {
+		if (!validator.isValid(email)) {
 			errors.rejectValue("email", "email.invalid");
 		}
 		
