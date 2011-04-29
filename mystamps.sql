@@ -2,10 +2,6 @@ CREATE DATABASE mystamps;
 USE mystamps;
 
 ----
--- See also: src/test/resources/hsql-schema.sql
-----
-
-----
 -- users
 -- (see ru.mystamps.web.entity.User)
 ----
