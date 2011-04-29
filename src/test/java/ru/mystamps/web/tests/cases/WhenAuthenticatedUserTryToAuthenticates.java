@@ -21,6 +21,8 @@ public class WhenAuthenticatedUserTryToAuthenticates extends WhenUserAtAnyPageWi
 	public WhenAuthenticatedUserTryToAuthenticates() {
 		super(AuthAccountPage.class);
 		hasTitle(tr("t_auth_title"));
+		
+		page.open();
 	}
 	
 	@Test

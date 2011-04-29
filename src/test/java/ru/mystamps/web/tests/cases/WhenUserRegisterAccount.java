@@ -22,6 +22,8 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
 		hasHeader(tr("t_registration_on_site"));
+		
+		page.open();
 	}
 	
 	@Test

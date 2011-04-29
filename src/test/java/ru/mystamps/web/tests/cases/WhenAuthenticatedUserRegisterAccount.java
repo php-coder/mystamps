@@ -21,6 +21,8 @@ public class WhenAuthenticatedUserRegisterAccount extends WhenUserAtAnyPageWithF
 	public WhenAuthenticatedUserRegisterAccount() {
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
+		
+		page.open();
 	}
 	
 	@Test

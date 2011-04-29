@@ -12,6 +12,8 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		super(AddCountryPage.class);
 		hasTitle(tr("t_add_country"));
 		hasHeader(tr("t_add_country_ucfirst"));
+		
+		page.open();
 	}
 	
 	@Test

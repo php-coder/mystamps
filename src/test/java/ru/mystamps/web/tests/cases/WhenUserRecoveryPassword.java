@@ -11,6 +11,8 @@ public class WhenUserRecoveryPassword extends WhenUserAtAnyPage<RestorePasswordP
 	public WhenUserRecoveryPassword() {
 		super(RestorePasswordPage.class);
 		hasTitle(tr("t_restore_password_title"));
+		
+		page.open();
 	}
 	
 	@Test

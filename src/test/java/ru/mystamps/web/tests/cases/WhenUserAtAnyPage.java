@@ -41,7 +41,6 @@ public abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	
 	public WhenUserAtAnyPage(final Class<T> pageClass) {
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
-		page.open();
 	}
 	
 	protected void hasResponseServerCode(final int serverCode) {
