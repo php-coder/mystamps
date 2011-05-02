@@ -1,6 +1,7 @@
 package ru.mystamps.web.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,20 @@ public class SuspiciousActivityDao {
 	
 	public void add(final SuspiciousActivity activity) {
 		entityManager.persist(activity);
+	}
+	
+	public SuspiciousActivity findByPage(final String page) {
+		try {
+			final SuspiciousActivity activity = (SuspiciousActivity)entityManager
+				.createQuery("from SuspiciousActivity sa where sa.page = :page")
+				.setParameter("page", page)
+				.getSingleResult()
+				;
+			
+			return activity;
+		} catch (final NoResultException ex) {
+			return null;
+		}
 	}
 	
 }

@@ -10,10 +10,8 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<context:component-scan base-package="ru.mystamps.db" />
+	<context:component-scan base-package="ru.mystamps.web.dao" />
 	
-	<jdbc:embedded-database id="ds" type="HSQL">
-		<jdbc:script location="classpath:hsql-schema.sql" />
-	</jdbc:embedded-database>
+	<jdbc:embedded-database id="dataSource" type="HSQL" />
 	
 </beans>
