@@ -14,7 +14,7 @@
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<hibernate.version>3.6.2.Final</hibernate.version>
+		<hibernate.version>3.6.4.Final</hibernate.version>
 	</properties>
 	
 	<dependencies>
