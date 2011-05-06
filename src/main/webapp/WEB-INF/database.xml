@@ -36,7 +36,7 @@
 			<props>
 				<prop key="hibernate.format_sql">${hibernate.formatSql}</prop>
 				<prop key="hibernate.connection.charset">UTF-8</prop>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 			</props>
 		</property>
 	</bean>
