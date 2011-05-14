@@ -54,7 +54,12 @@ public class UserService {
 			final String name, final String activationKey) {
 		
 		// use login as name if name is not provided
-		final String finalName = ("".equals(name) ? login : name);
+		final String finalName;
+		if ("".equals(name)) {
+			finalName = login;
+		} else {
+			finalName = name;
+		}
 		
 		final UsersActivation activation =
 			usersActivation.findByActivationKey(activationKey);
