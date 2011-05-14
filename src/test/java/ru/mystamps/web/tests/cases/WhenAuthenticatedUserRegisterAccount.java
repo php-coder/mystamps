@@ -16,7 +16,8 @@ import ru.mystamps.web.tests.page.RegisterAccountPage;
  * (For now we can't do this because order of tests not defined and logout
  * may happens before some of test.)
  **/
-public class WhenAuthenticatedUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
+public class WhenAuthenticatedUserRegisterAccount
+	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	public WhenAuthenticatedUserRegisterAccount() {
 		super(RegisterAccountPage.class);

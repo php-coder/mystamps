@@ -36,7 +36,9 @@ public class ActivateAccountController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ActivateAccountForm showForm(
-			@RequestParam(value = "key", required = false, defaultValue = "") final String activationKey) {
+			@RequestParam(value = "key", required = false, defaultValue = "")
+			final String activationKey) {
+		
 		final ActivateAccountForm form = new ActivateAccountForm();
 		form.setActivationKey(activationKey);
 		return form;

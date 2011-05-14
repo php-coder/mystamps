@@ -109,13 +109,20 @@ public abstract class AbstractPage {
 		return elementWithIdExists("footer");
 	}
 	
-	public  boolean linkHasLabelAndPointsTo(final String linkText, final String targetUrl) {
+	public boolean linkHasLabelAndPointsTo(
+			final String linkText,
+			final String targetUrl) {
+		
 		final WebElement link = getLinkByText(linkText);
 		final String href     = getLinkHref(link);
 		return targetUrl.equals(href);
 	}
 	
-	public boolean linkHasLabelWithTitleAndPointsTo(final String linkText, final String titleValue, final String targetUrl) {
+	public boolean linkHasLabelWithTitleAndPointsTo(
+			final String linkText,
+			final String titleValue,
+			final String targetUrl) {
+		
 		final WebElement link = getLinkByText(linkText);
 		final String title    = link.getAttribute("title");
 		final String href     = getLinkHref(link);

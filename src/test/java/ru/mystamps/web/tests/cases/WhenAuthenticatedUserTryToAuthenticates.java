@@ -16,7 +16,8 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
  * (For now we can't do this because order of tests not defined and logout
  * may happens before some of test.)
  **/
-public class WhenAuthenticatedUserTryToAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+public class WhenAuthenticatedUserTryToAuthenticates
+	extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	public WhenAuthenticatedUserTryToAuthenticates() {
 		super(AuthAccountPage.class);

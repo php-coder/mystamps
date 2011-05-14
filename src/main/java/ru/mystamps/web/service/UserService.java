@@ -103,7 +103,7 @@ public class UserService {
 			return null;
 		}
 		
-		log.debug("findByLoginAndPassword(" + login + ", " + password + ") = " + user.getId() + ": SUCCESS");
+		log.debug("findByLoginAndPassword(" + login + ", " + password + ") = " + user.getId());
 		
 		return user;
 	}

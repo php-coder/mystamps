@@ -144,7 +144,10 @@ public class ActivateAccountValidator implements Validator {
 		}
 	}
 	
-	private static void validatePasswordConfirm(final ActivateAccountForm form, final Errors errors) {
+	private static void validatePasswordConfirm(
+			final ActivateAccountForm form,
+			final Errors errors) {
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "value.required");
 		if (errors.hasFieldErrors("passwordConfirm")) {
 			return;

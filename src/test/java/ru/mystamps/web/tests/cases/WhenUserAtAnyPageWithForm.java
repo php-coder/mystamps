@@ -58,7 +58,11 @@ public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			}
 			
 			assertEquals(
-				"field with id '" + field.getId() + "' should have label '" + field.getLabel() + "'",
+				String.format(
+					"field with id '%s' should have label '%s'",
+					field.getId(),
+					field.getLabel()
+				),
 				field.getLabel(),
 				page.getInputLabelValue(field.getId())
 			);
@@ -129,13 +133,19 @@ public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			
 			if (field.shouldPreserveInvalidValue()) {
 				assertEquals(
-					"field named '" + field.getName() + "' should preserve input value after error",
+					String.format(
+						"field named '%s' should preserve input value after error",
+						field.getName()
+					),
 					field.getInvalidValue(),
 					page.getFieldValue(field.getName())
 				);
 			} else {
 				assertEquals(
-					"field named '" + field.getName() + "' should not preserve input value after error",
+					String.format(
+						"field named '%s' should not preserve input value after error",
+						field.getName()
+					),
 					"",
 					page.getFieldValue(field.getName())
 				);
