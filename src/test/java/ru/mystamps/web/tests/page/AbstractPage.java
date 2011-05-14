@@ -25,7 +25,7 @@ public abstract class AbstractPage {
 	private final WebDriver driver;
 	private final String pageUrl;
 	
-	@FindBy(tagName="body")
+	@FindBy(tagName = "body")
 	@CacheLookup
 	private WebElement body;
 	
