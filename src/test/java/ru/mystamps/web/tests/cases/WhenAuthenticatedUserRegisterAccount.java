@@ -8,14 +8,14 @@ import org.junit.Test;
 
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
-/**
+/*
  * TODO: use @BeforeClass/@AfterClass annotations from TestNG (#92)
  * (For now we can't use them because JUnit required than them should be static.)
  *
  * TODO: split test to parts
  * (For now we can't do this because order of tests not defined and logout
  * may happens before some of test.)
- **/
+ */
 public class WhenAuthenticatedUserRegisterAccount
 	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
