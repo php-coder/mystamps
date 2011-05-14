@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
+import org.apache.commons.lang.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,9 +78,9 @@ public class SiteService {
 		}
 		activity.setUser(currentUser);
 		
-		activity.setIp(ip == null ? "" : ip);
-		activity.setRefererPage(referer == null ? "" : referer);
-		activity.setUserAgent(agent == null ? "" : agent);
+		activity.setIp(StringUtils.defaultString(ip));
+		activity.setRefererPage(StringUtils.defaultString(referer));
+		activity.setUserAgent(StringUtils.defaultString(agent));
 		
 		suspiciousActivities.add(activity);
 	}

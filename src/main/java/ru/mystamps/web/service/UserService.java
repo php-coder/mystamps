@@ -54,7 +54,12 @@ public class UserService {
 			final String name, final String activationKey) {
 		
 		// use login as name if name is not provided
-		final String finalName = ("".equals(name) ? login : name);
+		final String finalName;
+		if ("".equals(name)) {
+			finalName = login;
+		} else {
+			finalName = name;
+		}
 		
 		final UsersActivation activation =
 			usersActivation.findByActivationKey(activationKey);
@@ -79,9 +84,9 @@ public class UserService {
 		usersActivation.delete(activation);
 		
 		log.debug(
-			"Added user '" + login + "' (" + finalName + ") " +
-			"with password '" + password + "' " +
-			"(key = " + activationKey + ")"
+			"Added user '" + login + "' (" + finalName + ") "
+			+ "with password '" + password + "' "
+			+ "(key = " + activationKey + ")"
 		);
 	}
 	
@@ -103,7 +108,7 @@ public class UserService {
 			return null;
 		}
 		
-		log.debug("findByLoginAndPassword(" + login + ", " + password + ") = " + user.getId() + ": SUCCESS");
+		log.debug("findByLoginAndPassword(" + login + ", " + password + ") = " + user.getId());
 		
 		return user;
 	}

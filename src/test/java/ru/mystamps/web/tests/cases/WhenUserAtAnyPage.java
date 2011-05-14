@@ -76,7 +76,8 @@ public abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	private void shouldHaveTitle() {
 		if (title == null) {
 			throw new IllegalStateException(
-				"Page title was not set! Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
+				"Page title was not set!"
+				+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
 			);
 		}
 		
