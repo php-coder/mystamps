@@ -79,9 +79,9 @@ public class UserService {
 		usersActivation.delete(activation);
 		
 		log.debug(
-			"Added user '" + login + "' (" + finalName + ") " +
-			"with password '" + password + "' " +
-			"(key = " + activationKey + ")"
+			"Added user '" + login + "' (" + finalName + ") "
+			+ "with password '" + password + "' "
+			+ "(key = " + activationKey + ")"
 		);
 	}
 	

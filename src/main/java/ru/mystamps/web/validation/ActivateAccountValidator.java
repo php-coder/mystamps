@@ -137,8 +137,8 @@ public class ActivateAccountValidator implements Validator {
 			return;
 		}
 		
-		if (!errors.hasFieldErrors("login") &&
-				password.equals(login)) {
+		if (!errors.hasFieldErrors("login")
+				&& password.equals(login)) {
 			errors.rejectValue("password", "password.login.match");
 			return;
 		}
@@ -156,8 +156,8 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String passwordConfirm = form.getPasswordConfirm();
 		
-		if (!errors.hasFieldErrors("password") &&
-				!passwordConfirm.equals(password)) {
+		if (!errors.hasFieldErrors("password")
+				&& !passwordConfirm.equals(password)) {
 			errors.rejectValue("passwordConfirm", "password.mismatch");
 			return;
 		}

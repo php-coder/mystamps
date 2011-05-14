@@ -120,10 +120,10 @@ public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		for (final Field field : page.getForm().getFields()) {
 			if (!field.hasInvalidValue()) {
 				System.err.println(
-					"NOTICE: Invalid value not defined for field '" +
-					field.getName() +
-					"' at page " +
-					page.getUrl()
+					"NOTICE: Invalid value not defined for field '"
+					+ field.getName()
+					+ "' at page "
+					+ page.getUrl()
 				);
 				continue;
 			}

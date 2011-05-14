@@ -60,9 +60,9 @@ public class AuthAccountController {
 			// validation mechanism add error to form. Check this to
 			// handle situation with wrong credentials.
 			// @see AuthAccountValidator::validateLoginPasswordPair()
-			if (result.hasGlobalErrors() &&
-				result.getGlobalError() != null &&
-				result.getGlobalError().getCode().equals("login.password.invalid")) {
+			if (result.hasGlobalErrors()
+					&& result.getGlobalError() != null
+					&& result.getGlobalError().getCode().equals("login.password.invalid")) {
 				
 				// TODO: log more info (login/password pair for example) (#59)
 				// TODO: sanitize all user's values (#60)
