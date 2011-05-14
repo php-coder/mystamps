@@ -8,7 +8,7 @@ package ru.mystamps.web;
  * @author Slava Semushin <slava.semushin@gmail.com>
  * @since 2010-10-24
  */
-public class SiteMap {
+public final class SiteMap {
 	
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE_URL                  = "http://127.0.0.1:8081";
@@ -30,5 +30,8 @@ public class SiteMap {
 	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore.htm";
 	
 	public static final String NOT_FOUND_PAGE_URL        = "/error/404.htm";
+	
+	private SiteMap() {
+	}
 	
 }

@@ -3,7 +3,8 @@ package ru.mystamps.web.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public class WebDriverFactory {
+public final class WebDriverFactory {
+	
 	private static WebDriver driver;
 	
 	public static WebDriver getDriver() {
@@ -12,6 +13,9 @@ public class WebDriverFactory {
 		}
 		
 		return driver;
+	}
+	
+	private WebDriverFactory() {
 	}
 	
 }

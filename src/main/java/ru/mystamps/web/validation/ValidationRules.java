@@ -1,6 +1,6 @@
 package ru.mystamps.web.validation;
 
-public class ValidationRules {
+public final class ValidationRules {
 	
 	public static final Integer LOGIN_MIN_LENGTH = 2;
 	public static final Integer LOGIN_MAX_LENGTH = 15;
@@ -17,6 +17,9 @@ public class ValidationRules {
 	
 	public static final Integer ACT_KEY_LENGTH = 10;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
+	
+	private ValidationRules() {
+	}
 	
 }
 

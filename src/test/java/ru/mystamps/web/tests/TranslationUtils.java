@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class TranslationUtils {
+public final class TranslationUtils {
 	
 	private static final String DEFAULT_BUNDLE_CLASS_NAME =
 		"ru.mystamps.i18n.Messages";
@@ -30,6 +30,9 @@ public class TranslationUtils {
 	
 	public static String tr(final String key, final Object... args) {
 		return MessageFormat.format(tr(key), args);
+	}
+	
+	private TranslationUtils() {
 	}
 	
 }
