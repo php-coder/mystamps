@@ -9,10 +9,8 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-	<context:component-scan base-package="ru.mystamps.web.controller" />
-	<context:component-scan base-package="ru.mystamps.web.dao" />
-	<context:component-scan base-package="ru.mystamps.web.service" />
-	<context:component-scan base-package="ru.mystamps.web.validation" />
+	<context:component-scan
+		base-package="ru.mystamps.web.controller,ru.mystamps.web.dao,ru.mystamps.web.service,ru.mystamps.web.validation" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
