@@ -4,6 +4,7 @@
 - use JPA (with Hibernate as its implementation)
   for access to database (instead of JDBC)
 - functional tests now runs under Jetty
+- functional tests now may use HSQL as database
 
 0.1.1
 - rewrited to using Spring MVC 3

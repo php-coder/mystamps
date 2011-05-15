@@ -17,7 +17,7 @@ public class UsersActivation {
 	@Getter
 	@Setter
 	@Id
-	@Column(name = "act_key", columnDefinition = "CHAR(10)")
+	@Column(name = "act_key", length = 10)
 	private String activationKey;
 	
 	@Getter

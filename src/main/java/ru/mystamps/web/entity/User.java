@@ -48,12 +48,12 @@ public class User {
 	
 	@Getter
 	@Setter
-	@Column(columnDefinition = "CHAR(40)", nullable = false)
+	@Column(length = 40, nullable = false)
 	private String hash;
 	
 	@Getter
 	@Setter
-	@Column(columnDefinition = "CHAR(10)", nullable = false)
+	@Column(length = 10, nullable = false)
 	private String salt;
 	
 }
