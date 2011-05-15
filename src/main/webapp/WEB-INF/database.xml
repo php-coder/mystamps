@@ -13,14 +13,7 @@
 	
 	<context:property-placeholder location="/WEB-INF/database.properties" />
 	
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${db.driverClassName}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-	</bean>
+	<import resource="datasource.xml" />
 	
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

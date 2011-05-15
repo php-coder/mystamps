@@ -10,11 +10,14 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
-		<jetty.host>127.0.0.1</jetty.host>
-		<jetty.port>8081</jetty.port>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<hibernate.version>3.6.4.Final</hibernate.version>
+		
+		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
+		<env.dir>src/env</env.dir>
+		
+		<jetty.host>127.0.0.1</jetty.host>
+		<jetty.port>8081</jetty.port>
 	</properties>
 	
 	<dependencies>
@@ -72,18 +75,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.16</version>
 		</dependency>
 		
 		<dependency>
@@ -199,7 +190,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>mystamps</finalName>
+		<finalName>${project.artifactId}</finalName>
 		
 		<plugins>
 			
@@ -311,6 +302,9 @@
 					</connectors>
 					<stopPort>9966</stopPort>
 					<stopKey>jetty-stop-signal</stopKey>
+					<webAppSourceDirectory>
+						${project.build.directory}/${build.finalName}
+					</webAppSourceDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -403,5 +397,167 @@
 			<url>file://${HOME}/.m2/repository</url>
 		</snapshotRepository>
 	</distributionManagement>
+	
+	<!--
+		 There are 2 profiles:
+		 - dev (enabled by default, uses MySQL)
+		 - test (uses HSQL)
+	-->
+	<profiles>
+		
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>commons-dbcp</groupId>
+					<artifactId>commons-dbcp</artifactId>
+					<version>1.4</version>
+				</dependency>
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>5.1.16</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-dev-resources</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>
+										${project.build.directory}/${build.finalName}
+									</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${env.dir}/dev</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jdbc</artifactId>
+					<version>${spring.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.hsqldb</groupId>
+					<artifactId>hsqldb</artifactId>
+					<version>2.0.0</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-test-resources</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>
+										${project.build.directory}/${build.finalName}
+									</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${env.dir}/test</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>hibernate3-maven-plugin</artifactId>
+						<configuration>
+							<components>
+								<component>
+									<name>hbm2ddl</name>
+									<implementation>jpaconfiguration</implementation>
+									<outputDirectory>
+										target/${build.finalName}/WEB-INF/classes
+									</outputDirectory>
+								</component>
+							</components>
+							<componentProperties>
+								<console>false</console>
+								<format>true</format>
+								<jdk5>true</jdk5>
+								<propertyfile>
+									${env.dir}/test/WEB-INF/database.properties
+								</propertyfile>
+								<outputfilename>hsql-scheme.sql</outputfilename>
+								
+								<!--
+									Don't try to connect to database. See:
+									http://www.mail-archive.com/users@maven.apache.org/msg61394.html
+								-->
+								<export>false</export>
+							</componentProperties>
+						</configuration>
+						<dependencies>
+							<!--
+								Use latest version of Hibernate. See:
+								http://stackoverflow.com/q/2734971
+							-->
+							<dependency>
+								<groupId>org.hibernate</groupId>
+								<artifactId>hibernate-core</artifactId>
+								<version>${hibernate.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.hibernate</groupId>
+								<artifactId>hibernate-entitymanager</artifactId>
+								<version>${hibernate.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>javax.validation</groupId>
+								<artifactId>validation-api</artifactId>
+								<version>1.0.0.GA</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>generate-hsql-scheme</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>hbm2ddl</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+				</plugins>
+			</build>
+		</profile>
+		
+	</profiles>
 	
 </project>

@@ -20,10 +20,10 @@ CREATE TABLE `users` (
 	`registered_at` DATETIME NOT NULL,
 	`activated_at` DATETIME NOT NULL,
 	
-	`hash` CHAR(40) NOT NULL,
+	`hash` VARCHAR(40) NOT NULL,
 	
 	-- see ru.mystamps.web.service.UserService.generateSalt()
-	`salt` CHAR(10) NOT NULL,
+	`salt` VARCHAR(10) NOT NULL,
 	
 	PRIMARY KEY(`id`),
 	UNIQUE KEY(`login`)
@@ -37,7 +37,7 @@ CREATE TABLE `users_activation` (
 	-- see:
 	-- ACT_KEY_LENGTH in WEB-INF/web.xml
 	-- ru.mystamps.web.service.UserService.generateActivationKey()
-	`act_key` CHAR(10) NOT NULL,
+	`act_key` VARCHAR(10) NOT NULL,
 	
 	-- see EMAIL_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`email` VARCHAR(255) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `suspicious_activities` (
 	`occured_at` DATETIME NOT NULL,
 	`page` VARCHAR(100) NOT NULL,
 	`user_id` INT(5) UNSIGNED,
-	`ip` CHAR(15) NOT NULL DEFAULT '',
+	`ip` VARCHAR(15) NOT NULL DEFAULT '',
 	`referer_page` VARCHAR(255) NOT NULL DEFAULT '',
 	`user_agent` VARCHAR(255) NOT NULL DEFAULT '',
 	PRIMARY KEY(`id`),

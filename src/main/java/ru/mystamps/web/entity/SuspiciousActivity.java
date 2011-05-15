@@ -45,7 +45,7 @@ public class SuspiciousActivity {
 	
 	@Getter
 	@Setter
-	@Column(columnDefinition = "CHAR(15)", nullable = false)
+	@Column(length = 15, nullable = false)
 	private String ip;
 	
 	@Getter
