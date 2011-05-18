@@ -22,7 +22,7 @@ import static ru.mystamps.web.SiteMap.SITE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:integrationTestsContext.xml"})
+@ContextConfiguration(locations = {"classpath:spring/DispatcherServletContext.xml"})
 public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
 	
 	private final String currentUrl;
