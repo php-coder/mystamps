@@ -119,9 +119,8 @@ public class UserService {
 	 *         in 10 characters length
 	 **/
 	private static String generateActivationKey() {
-		// Length of users_activation.act_key field in database equals
-		// to 10 characters (see mystamps.sql)
-		return RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+		final int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH;
+		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase();
 	}
 	
 	/**
@@ -129,9 +128,7 @@ public class UserService {
 	 * @return string which contains letters and numbers in 10 characters length
 	 **/
 	private String generateSalt() {
-		// Length of users.salt field in database equals to 10
-		// characters (see mystamps.sql)
-		return RandomStringUtils.randomAlphanumeric(10);
+		return RandomStringUtils.randomAlphanumeric(User.SALT_LENGTH);
 	}
 	
 	private String computeSha1Sum(final String string) {

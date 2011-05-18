@@ -15,6 +15,11 @@ import lombok.Setter;
 @Table(name = "users")
 public class User {
 	
+	public static final int LOGIN_LENGTH = 15;
+	public static final int NAME_LENGTH  = 100;
+	public static final int HASH_LENGTH  = 40;
+	public static final int SALT_LENGTH  = 10;
+	
 	@Getter
 	@Setter
 	@Id
@@ -23,12 +28,12 @@ public class User {
 	
 	@Getter
 	@Setter
-	@Column(length = 15, unique = true, nullable = false)
+	@Column(length = LOGIN_LENGTH, unique = true, nullable = false)
 	private String login;
 	
 	@Getter
 	@Setter
-	@Column(length = 100, nullable = false)
+	@Column(length = NAME_LENGTH, nullable = false)
 	private String name;
 	
 	@Getter
@@ -48,12 +53,12 @@ public class User {
 	
 	@Getter
 	@Setter
-	@Column(length = 40, nullable = false)
+	@Column(length = HASH_LENGTH, nullable = false)
 	private String hash;
 	
 	@Getter
 	@Setter
-	@Column(length = 10, nullable = false)
+	@Column(length = SALT_LENGTH, nullable = false)
 	private String salt;
 	
 }

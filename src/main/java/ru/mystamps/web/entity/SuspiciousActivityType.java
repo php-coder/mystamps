@@ -13,6 +13,8 @@ import lombok.Setter;
 @Table(name = "suspicious_activities_types")
 public class SuspiciousActivityType {
 	
+	public static final int NAME_LENGTH = 100;
+	
 	@Getter
 	@Setter
 	@Id
@@ -21,7 +23,7 @@ public class SuspiciousActivityType {
 	
 	@Getter
 	@Setter
-	@Column(length = 100, unique = true, nullable = false)
+	@Column(length = NAME_LENGTH, unique = true, nullable = false)
 	private String name;
 	
 }

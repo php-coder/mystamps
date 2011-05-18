@@ -17,6 +17,9 @@ import lombok.Setter;
 @Table(name = "suspicious_activities")
 public class SuspiciousActivity {
 	
+	public static final int PAGE_URL_LENGTH = 100;
+	public static final int IP_LENGTH       = 15;
+	
 	@Getter
 	@Setter
 	@Id
@@ -35,7 +38,7 @@ public class SuspiciousActivity {
 	
 	@Getter
 	@Setter
-	@Column(length = 100, nullable = false)
+	@Column(length = PAGE_URL_LENGTH, nullable = false)
 	private String page;
 	
 	@Getter
@@ -45,7 +48,7 @@ public class SuspiciousActivity {
 	
 	@Getter
 	@Setter
-	@Column(length = 15, nullable = false)
+	@Column(length = IP_LENGTH, nullable = false)
 	private String ip;
 	
 	@Getter
