@@ -23,33 +23,33 @@ public class AddStampsController {
 	private static final Integer SINCE_YEAR     = 1840;
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
-	private static final Map<Integer, Integer> days;
-	private static final Map<Integer, Integer> months;
-	private static final Map<Integer, Integer> years;
+	private static final Map<Integer, Integer> DAYS;
+	private static final Map<Integer, Integer> MONTHS;
+	private static final Map<Integer, Integer> YEARS;
 	
 	static {
 		
-		days = new LinkedHashMap<Integer, Integer>();
+		DAYS = new LinkedHashMap<Integer, Integer>();
 		for (Integer i = 1; i <= DAYS_IN_MONTH; i++) {
-			days.put(i, i);
+			DAYS.put(i, i);
 		}
 		
-		months = new LinkedHashMap<Integer, Integer>();
+		MONTHS = new LinkedHashMap<Integer, Integer>();
 		for (Integer i = 1; i <= MONTHS_IN_YEAR; i++) {
-			months.put(i, i);
+			MONTHS.put(i, i);
 		}
 		
-		years = new LinkedHashMap<Integer, Integer>();
+		YEARS = new LinkedHashMap<Integer, Integer>();
 		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
-			years.put(i, i);
+			YEARS.put(i, i);
 		}
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void showForm(final Model model) {
-		model.addAttribute("days", days);
-		model.addAttribute("months", months);
-		model.addAttribute("years", years);
+		model.addAttribute("days", DAYS);
+		model.addAttribute("months", MONTHS);
+		model.addAttribute("years", YEARS);
 		model.addAttribute(new AddStampsForm());
 	}
 	

@@ -14,14 +14,14 @@ import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public abstract class WhenUserAtAnyPage<T extends AbstractPage> {
-	
-	protected final T page;
+abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
 	 */
 	private static final String TITLE_PREFIX = "MyStamps: ";
+	
+	protected final T page;
 	
 	/**
 	 * @see hasResponseServerCode()

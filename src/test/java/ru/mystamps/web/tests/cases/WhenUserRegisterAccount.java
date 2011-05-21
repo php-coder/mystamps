@@ -59,7 +59,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	
 	@Test
 	public void emailShouldNotBeTooLong() {
-		page.fillField("email", StringUtils.repeat("0", 250) + "@mail.ru");
+		page.fillField("email", StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		page.submit();
 		assertEquals(tr("value.too-long", EMAIL_MAX_LENGTH), page.getFieldError("email"));
 	}

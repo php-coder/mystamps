@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 
 public final class WebElementUtils {
 	
+	private WebElementUtils() {
+	}
+	
 	public static List<String> convertToListWithText(final List<WebElement> elements) {
 		if (elements.isEmpty()) {
 			return Collections.<String>emptyList();
@@ -19,9 +22,6 @@ public final class WebElementUtils {
 		}
 		
 		return result;
-	}
-	
-	private WebElementUtils() {
 	}
 	
 }

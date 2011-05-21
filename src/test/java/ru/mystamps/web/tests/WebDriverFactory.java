@@ -7,15 +7,15 @@ public final class WebDriverFactory {
 	
 	private static WebDriver driver;
 	
+	private WebDriverFactory() {
+	}
+	
 	public static WebDriver getDriver() {
 		if (driver == null) {
 			driver = new HtmlUnitDriver();
 		}
 		
 		return driver;
-	}
-	
-	private WebDriverFactory() {
 	}
 	
 }

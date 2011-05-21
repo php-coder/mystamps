@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 
-public abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
+abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenUserAtAnyPage<T> {
 	
 	public WhenUserAtAnyPageWithForm(final Class<T> pageClass) {

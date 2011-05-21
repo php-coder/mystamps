@@ -188,7 +188,7 @@ public abstract class AbstractPage {
 			return false;
 		}
 		
-		return (el != null);
+		return el != null;
 	}
 	
 	protected boolean elementWithXPathExists(final String xpath) {
@@ -200,7 +200,7 @@ public abstract class AbstractPage {
 			return false;
 		}
 		
-		return (el != null);
+		return el != null;
 	}
 	
 	protected WebElement getLinkByText(final String linkText) {

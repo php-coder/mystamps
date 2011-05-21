@@ -14,10 +14,12 @@ import lombok.Setter;
 @Table(name = "users_activation")
 public class UsersActivation {
 	
+	public static final int ACTIVATION_KEY_LENGTH = 10;
+	
 	@Getter
 	@Setter
 	@Id
-	@Column(name = "act_key", length = 10)
+	@Column(name = "act_key", length = ACTIVATION_KEY_LENGTH)
 	private String activationKey;
 	
 	@Getter

@@ -124,7 +124,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameShouldNotBeTooLong() {
-		page.fillField("name", StringUtils.repeat("0", 101));
+		page.fillField("name", StringUtils.repeat("0", NAME_MAX_LENGTH + 1));
 		page.submit();
 		
 		assertEquals(tr("value.too-long", NAME_MAX_LENGTH), page.getFieldError("name"));
@@ -229,7 +229,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void wrongActivationKeyShouldBeRejected() {
-		page.fillField("activationKey", StringUtils.repeat("1", 10));
+		page.fillField("activationKey", StringUtils.repeat("1", ACT_KEY_LENGTH));
 		page.submit();
 		
 		assertEquals(tr("key.not-exists"), page.getFieldError("activationKey"));
