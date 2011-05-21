@@ -16,12 +16,12 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	
-	protected final T page;
-	
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
 	 */
 	private static final String TITLE_PREFIX = "MyStamps: ";
+	
+	protected final T page;
 	
 	/**
 	 * @see hasResponseServerCode()

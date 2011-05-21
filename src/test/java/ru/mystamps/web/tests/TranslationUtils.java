@@ -19,6 +19,9 @@ public final class TranslationUtils {
 			DEFAULT_BUNDLE_LOCALE
 		);
 	
+	private TranslationUtils() {
+	}
+	
 	public static String tr(final String key) {
 		return bundle.getString(key);
 	}
@@ -30,9 +33,6 @@ public final class TranslationUtils {
 	
 	public static String tr(final String key, final Object... args) {
 		return MessageFormat.format(tr(key), args);
-	}
-	
-	private TranslationUtils() {
 	}
 	
 }

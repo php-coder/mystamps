@@ -22,8 +22,6 @@ import ru.mystamps.web.tests.page.element.Form.UploadFileField;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
-	@Getter private Form form;
-	
 	private static final String              FORM_LOCATOR = "//form";
 	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
 	private static final String    PASSWORD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"password\"]";
@@ -41,6 +39,8 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	/// @see isFieldExists()
 	private static final Map<String, String> fieldLocators = new HashMap<String, String>();
+	
+	@Getter private Form form;
 	
 	static {
 		fieldLocators.put(InputField.class.getSimpleName(), INPUT_FIELD_LOCATOR);
