@@ -14,7 +14,7 @@ import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public abstract class WhenUserAtAnyPage<T extends AbstractPage> {
+abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	
 	protected final T page;
 	
