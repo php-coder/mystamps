@@ -21,10 +21,11 @@ public class SuspiciousActivityDao {
 	public SuspiciousActivity findByPage(final String page) {
 		try {
 			final SuspiciousActivity activity = (SuspiciousActivity)entityManager
-				.createQuery("from SuspiciousActivity sa where sa.page = :page")
-				.setParameter("page", page)
+				.createQuery("from SuspiciousActivity sa")
 				.getSingleResult()
 				;
+				//.createQuery("from SuspiciousActivity sa where sa.page = :page")
+				//.setParameter("page", page)
 			
 			return activity;
 		} catch (final NoResultException ex) {

@@ -10,6 +10,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +20,11 @@ import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
-import static ru.mystamps.web.SiteMap.SITE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/DispatcherServletContext.xml"})
+@TransactionConfiguration(defaultRollback = false)
 public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
 	
 	private final String currentUrl;
@@ -62,11 +64,14 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 	}
 	
 	@Test
+	@Transactional(readOnly = true)
 	public void incidentShouldBeLoggedToDatabase() {
 		SuspiciousActivity activity =
-			suspiciousActivities.findByPage(SITE_URL + currentUrl);
+			suspiciousActivities.findByPage(currentUrl);
 		
+		System.out.println("current = " + currentUrl);
 		assertNotNull(activity);
+		System.out.println("page = " + activity.getPage());
 		assertEquals("PageNotFound", activity.getType().getName());
 	}
 	
