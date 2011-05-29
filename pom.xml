@@ -369,10 +369,12 @@
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
 				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 		</repository>
 		
