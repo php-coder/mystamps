@@ -64,7 +64,7 @@ public class AuthAccountController {
 					&& result.getGlobalError() != null
 					&& result.getGlobalError().getCode().equals("login.password.invalid")) {
 				
-				// TODO: log more info (login/password pair for example) (#59)
+				// TODO: log more info (login for example) (#59)
 				// TODO: sanitize all user's values (#60)
 				final String page = request.getRequestURI();
 				final String ip   = request.getRemoteAddr();

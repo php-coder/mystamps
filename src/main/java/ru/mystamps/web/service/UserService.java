@@ -84,9 +84,9 @@ public class UserService {
 		usersActivation.delete(activation);
 		
 		log.debug(
-			"Added user '" + login + "' (" + finalName + ") "
-			+ "with password '" + password + "' "
-			+ "(key = " + activationKey + ")"
+			"Added user (login='" + login
+			+ "', name='" + finalName
+			+ "', activation key='" + activationKey + "')"
 		);
 	}
 	
@@ -99,16 +99,18 @@ public class UserService {
 	public User findByLoginAndPassword(final String login, final String password) {
 		final User user = users.findByLogin(login);
 		if (user == null) {
-			log.debug("findByLoginAndPassword(" + login + ", " + password + "): wrong login");
+			log.debug("Wrong login '" + login + "'");
 			return null;
 		}
 		
 		if (!user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
-			log.debug("findByLoginAndPassword(" + login + ", " + password + "): wrong password");
+			log.debug("Wrong password for login '" + login + "'");
 			return null;
 		}
 		
-		log.debug("findByLoginAndPassword(" + login + ", " + password + ") = " + user.getId());
+		log.debug(
+			"Valid credentials for login '" + login + "'. User has id = " + user.getId()
+		);
 		
 		return user;
 	}
