@@ -2,7 +2,8 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -19,7 +20,7 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 
 @Service
 public class SiteService {
-	private final Logger log = Logger.getRootLogger();
+	private final Logger log = LoggerFactory.getLogger(SiteService.class);
 	
 	@Autowired
 	private UserDao users;
@@ -73,7 +74,7 @@ public class SiteService {
 		if (currentUser != null) {
 			currentUser = users.findById(user.getId());
 			if (currentUser == null) {
-				log.warn("Cannot find user with id " + user.getId());
+				log.warn("Cannot find user with id {}", user.getId());
 			}
 		}
 		activity.setUser(currentUser);

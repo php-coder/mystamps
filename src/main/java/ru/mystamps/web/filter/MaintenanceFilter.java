@@ -10,14 +10,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static ru.mystamps.web.SiteMap.MAINTENANCE_PAGE_URL;
 
 public class MaintenanceFilter implements Filter {
 	
 	private FilterConfig config;
-	private final Logger log = Logger.getRootLogger();
+	private final Logger log = LoggerFactory.getLogger(MaintenanceFilter.class);
 	
 	@Override
 	public void init(final FilterConfig config) {
