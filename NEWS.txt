@@ -5,6 +5,7 @@
   for access to database (instead of JDBC)
 - functional tests now runs under Jetty
 - functional tests now may use HSQL as database
+- switching to use slf4j over log4j
 
 0.1.1
 - rewrited to using Spring MVC 3

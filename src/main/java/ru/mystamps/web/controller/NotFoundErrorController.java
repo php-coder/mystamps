@@ -3,7 +3,8 @@ package ru.mystamps.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import static ru.mystamps.web.SiteMap.NOT_FOUND_PAGE_URL;
 @Controller
 @RequestMapping(NOT_FOUND_PAGE_URL)
 public class NotFoundErrorController {
-	private final Logger log = Logger.getRootLogger();
+	private final Logger log = LoggerFactory.getLogger(NotFoundErrorController.class);
 	
 	@Autowired
 	private SiteService siteService;

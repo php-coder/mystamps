@@ -5,7 +5,9 @@ import java.util.Date;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ import ru.mystamps.web.dao.UsersActivationDao;
 @Service
 public class UserService {
 	
-	private final Logger log = Logger.getRootLogger();
+	private final Logger log = LoggerFactory.getLogger(UserService.class);
 	
 	@Autowired
 	private UserDao users;
@@ -83,10 +85,9 @@ public class UserService {
 		users.add(user);
 		usersActivation.delete(activation);
 		
-		log.debug(
-			"Added user (login='" + login
-			+ "', name='" + finalName
-			+ "', activation key='" + activationKey + "')"
+		log.info(
+			"Added user (login='{}', name='{}', activation key='{}')",
+			new Object[]{login, finalName, activationKey}
 		);
 	}
 	
@@ -99,18 +100,16 @@ public class UserService {
 	public User findByLoginAndPassword(final String login, final String password) {
 		final User user = users.findByLogin(login);
 		if (user == null) {
-			log.debug("Wrong login '" + login + "'");
+			log.info("Wrong login '{}'", login);
 			return null;
 		}
 		
 		if (!user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
-			log.debug("Wrong password for login '" + login + "'");
+			log.info("Wrong password for login '{}'", login);
 			return null;
 		}
 		
-		log.debug(
-			"Valid credentials for login '" + login + "'. User has id = " + user.getId()
-		);
+		log.info("Valid credentials for login '{}'. User has id = {}", login, user.getId());
 		
 		return user;
 	}
