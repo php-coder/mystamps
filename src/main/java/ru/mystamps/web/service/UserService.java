@@ -85,7 +85,7 @@ public class UserService {
 		users.add(user);
 		usersActivation.delete(activation);
 		
-		log.debug(
+		log.info(
 			"Added user (login='{}', name='{}', activation key='{}')",
 			new Object[]{login, finalName, activationKey}
 		);
@@ -100,16 +100,16 @@ public class UserService {
 	public User findByLoginAndPassword(final String login, final String password) {
 		final User user = users.findByLogin(login);
 		if (user == null) {
-			log.debug("Wrong login '{}'", login);
+			log.info("Wrong login '{}'", login);
 			return null;
 		}
 		
 		if (!user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
-			log.debug("Wrong password for login '{}'", login);
+			log.info("Wrong password for login '{}'", login);
 			return null;
 		}
 		
-		log.debug("Valid credentials for login '{}'. User has id = {}", login, user.getId());
+		log.info("Valid credentials for login '{}'. User has id = {}", login, user.getId());
 		
 		return user;
 	}
