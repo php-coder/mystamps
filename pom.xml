@@ -18,6 +18,8 @@
 		
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
 	<dependencies>
@@ -188,19 +190,8 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<encoding>UTF8</encoding>
-				</configuration>
-			</plugin>
-			
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
-				<configuration>
-					<encoding>UTF8</encoding>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
