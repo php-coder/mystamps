@@ -11,7 +11,7 @@
 	
 	<tx:annotation-driven />
 	
-	<context:property-placeholder location="/WEB-INF/database.properties" />
+	<context:property-placeholder location="classpath:spring/database.properties" />
 	
 	<import resource="datasource.xml" />
 	

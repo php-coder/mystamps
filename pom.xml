@@ -417,7 +417,7 @@
 								</goals>
 								<configuration>
 									<outputDirectory>
-										${project.build.directory}/${build.finalName}
+										${project.build.outputDirectory}
 									</outputDirectory>
 									<resources>
 										<resource>
@@ -463,7 +463,7 @@
 								</goals>
 								<configuration>
 									<outputDirectory>
-										${project.build.directory}/${build.finalName}
+										${project.build.outputDirectory}
 									</outputDirectory>
 									<resources>
 										<resource>
@@ -483,9 +483,7 @@
 								<component>
 									<name>hbm2ddl</name>
 									<implementation>jpaconfiguration</implementation>
-									<outputDirectory>
-										target/${build.finalName}/WEB-INF/classes
-									</outputDirectory>
+									<outputDirectory>target/classes</outputDirectory>
 								</component>
 							</components>
 							<componentProperties>
@@ -493,7 +491,7 @@
 								<format>true</format>
 								<jdk5>true</jdk5>
 								<propertyfile>
-									${env.dir}/test/WEB-INF/database.properties
+									${env.dir}/test/spring/database.properties
 								</propertyfile>
 								<outputfilename>hsql-scheme.sql</outputfilename>
 								

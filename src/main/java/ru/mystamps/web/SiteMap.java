@@ -13,7 +13,7 @@ public final class SiteMap {
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE_URL                  = "http://127.0.0.1:8081";
 	
-	// defined at webapp/WEB-INF/spring-servlet.xml
+	// defined at src/main/resources/spring/DispatcherServletContext.xml
 	public static final String INDEX_PAGE_URL            = "/site/index.htm";
 	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance.htm";
 	
@@ -26,7 +26,7 @@ public final class SiteMap {
 	
 	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add.htm";
 	
-	// defined at webapp/WEB-INF/spring-servlet.xml
+	// defined at src/main/resources/spring/DispatcherServletContext.xml
 	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore.htm";
 	
 	public static final String NOT_FOUND_PAGE_URL        = "/error/404.htm";
