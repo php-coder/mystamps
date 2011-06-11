@@ -213,16 +213,20 @@ public abstract class AbstractPage {
 		return href.replaceFirst(";jsessionid=\\p{Alnum}+", "");
 	}
 	
-	public void login() {
-		// TODO: inject from config (#95)
-		final String VALID_TEST_LOGIN    = "coder";
-		final String VALID_TEST_PASSWORD = "test";
+	public void login(final String login, final String password) {
+		if ("".equals(login)) {
+			throw new IllegalArgumentException("login must be not null and not empty");
+		}
+		
+		if ("".equals(password)) {
+			throw new IllegalArgumentException("password must be not null and not empty");
+		}
 		
 		// TODO: check than we already authenticated and do nothing
 		final AuthAccountPage authPage = new AuthAccountPage(driver);
 		authPage.open();
-		authPage.fillField("login", VALID_TEST_LOGIN);
-		authPage.fillField("password", VALID_TEST_PASSWORD);
+		authPage.fillField("login", login);
+		authPage.fillField("password", password);
 		authPage.submit();
 		
 		// return to current page

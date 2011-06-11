@@ -6,6 +6,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
 
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
@@ -17,7 +22,24 @@ import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+	
+	@Value("#{test.valid_user_login}")
+	private String VALID_USER_LOGIN;
+	
+	@Value("#{test.valid_user_password}")
+	private String VALID_USER_PASSWORD;
+	
+	@Value("#{test.valid_user_name}")
+	private String VALID_USER_NAME;
+	
+	@Value("#{test.invalid_user_login}")
+	private String INVALID_USER_LOGIN;
+	
+	@Value("#{test.invalid_user_password}")
+	private String INVALID_USER_PASSWORD;
 	
 	public WhenUserAuthenticates() {
 		super(AuthAccountPage.class);
@@ -87,12 +109,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void invalidCredentialsShouldBeRejected() {
-		// TODO: inject from config (#95)
-		final String INVALID_TEST_LOGIN    = "test";
-		final String INVALID_TEST_PASSWORD = "test";
-		
-		page.fillField("login", INVALID_TEST_LOGIN);
-		page.fillField("password", INVALID_TEST_PASSWORD);
+		page.fillField("login", INVALID_USER_LOGIN);
+		page.fillField("password", INVALID_USER_PASSWORD);
 		page.submit();
 		
 		assertEquals(tr("login.password.invalid"), page.getFormError());
@@ -100,13 +118,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void validCredentialsShouldAuthenticateUserOnSite() {
-		// TODO: inject from config (#95)
-		final String VALID_TEST_LOGIN    = "coder";
-		final String VALID_TEST_PASSWORD = "test";
-		final String VALID_TEST_NAME     = "Test Suite";
-		
-		page.fillField("login", VALID_TEST_LOGIN);
-		page.fillField("password", VALID_TEST_PASSWORD);
+		page.fillField("login", VALID_USER_LOGIN);
+		page.fillField("password", VALID_USER_PASSWORD);
 		page.submit();
 		
 		assertEquals(
@@ -117,7 +130,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		
 		assertEquals(
 			"after login user name should be in user bar",
-			VALID_TEST_NAME,
+			VALID_USER_NAME,
 			page.getUserBarEntries().get(0)
 		);
 		

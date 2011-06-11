@@ -5,6 +5,11 @@ import static org.junit.Assert.assertTrue;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
 
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
@@ -16,8 +21,16 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
  * (For now we can't do this because order of tests not defined and logout
  * may happens before some of test.)
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenAuthenticatedUserTryToAuthenticates
 	extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+	
+	@Value("#{test.valid_user_login}")
+	private String VALID_USER_LOGIN;
+	
+	@Value("#{test.valid_user_password}")
+	private String VALID_USER_PASSWORD;
 	
 	public WhenAuthenticatedUserTryToAuthenticates() {
 		super(AuthAccountPage.class);
@@ -33,7 +46,7 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	
 	@Test
 	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
-		page.login();
+		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
 		
 		assertTrue(page.textPresent(tr("t_already_authenticated")));
 		assertFalse(page.authenticationFormExists());

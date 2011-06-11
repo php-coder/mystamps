@@ -6,6 +6,11 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
 
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
@@ -20,8 +25,13 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
-
+	
+	@Value("#{test.valid_user_login}")
+	private String VALID_USER_LOGIN;
+	
 	public WhenUserActivateAccount() {
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
@@ -113,10 +123,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldBeUnique() {
-		// TODO: inject from config (#95)
-		final String VALID_TEST_LOGIN = "coder";
-		
-		page.fillField("login", VALID_TEST_LOGIN);
+		page.fillField("login", VALID_USER_LOGIN);
 		page.submit();
 		
 		assertEquals(tr("login.exists"), page.getFieldError("login"));

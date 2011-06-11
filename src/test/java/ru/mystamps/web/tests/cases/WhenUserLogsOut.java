@@ -1,6 +1,11 @@
 package ru.mystamps.web.tests.cases;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,7 +17,15 @@ import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
+	
+	@Value("#{test.valid_user_login}")
+	private String VALID_USER_LOGIN;
+	
+	@Value("#{test.valid_user_password}")
+	private String VALID_USER_PASSWORD;
 	
 	public WhenUserLogsOut() {
 		super(LogoutAccountPage.class);
@@ -20,7 +33,7 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 	
 	@Test
 	public void shouldRedirectAndClearSession() {
-		page.login();
+		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
 		page.open();
 		
 		assertEquals(
