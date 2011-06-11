@@ -131,7 +131,7 @@ public class Form {
 		}
 		
 		public Field invalidValue(final String invalidValue) {
-			if (invalidValue == null || invalidValue.isEmpty()) {
+			if ("".equals(invalidValue)) {
 				throw new IllegalArgumentException("Invalid value for field should be non empty");
 			}
 			
