@@ -231,7 +231,7 @@ public abstract class AbstractPage {
 		
 		// return to current page
 		open();
-		// TODO: test for presence link with text "Log out" to ensure than all right?
+		// TODO: test for presence link with text "Sign out" to ensure than all right?
 	}
 	
 	public void logout() {
@@ -241,7 +241,7 @@ public abstract class AbstractPage {
 		
 		// return to current page
 		open();
-		// TODO: test for presence link with text "Log in" to ensure than all right?
+		// TODO: test for presence link with text "Sign in" to ensure than all right?
 	}
 	
 }
