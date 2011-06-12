@@ -309,6 +309,28 @@
 				</executions>
 			</plugin>
 			
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.8.0</version>
+				<configuration>
+					<basedir>src</basedir>
+					<header>src/main/config/license_header.txt</header>
+					<strictCheck>true</strictCheck>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<copyright.years>${project.inceptionYear}-2011</copyright.years>
+						<author.name>${project.developers[0].name}</author.name>
+						<author.email>${project.developers[0].email}</author.email>
+					</properties>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 		
 	</build>
@@ -374,6 +396,23 @@
 		</repository>
 		
 	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mc-repo</id>
+			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	
 	<distributionManagement>
 		<snapshotRepository>
