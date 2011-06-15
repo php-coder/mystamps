@@ -1,4 +1,4 @@
-0.1.2 (not released yet)
+0.1.2
 - use Maven2 for building project
 - rewrited functional tests for using Selenium2
 - use JPA (with Hibernate as its implementation)
