@@ -23,7 +23,9 @@
 	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="jpaVendorAdapter">
+			<ref local="jpaVendorAdapter" />
+		</property>
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaProperties">
 			<props>
@@ -36,7 +38,9 @@
 	
 	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="entityManagerFactory">
+			<ref local="entityManagerFactory" />
+		</property>
 	</bean>
 	
 	<!-- enable injection of EntityManager to beans with @PersistenceContext annotation -->
