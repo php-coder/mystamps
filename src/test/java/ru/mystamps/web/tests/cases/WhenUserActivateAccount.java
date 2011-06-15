@@ -50,6 +50,9 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Value("#{test.valid_user_login}")
 	private String VALID_USER_LOGIN;
 	
+	@Value("#{test.not_activated_user_act_key}")
+	private String NOT_ACTIVATED_USER_ACT_KEY;
+	
 	public WhenUserActivateAccount() {
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
@@ -262,18 +265,11 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
-		// NOTE: this test depends from
-		// WhenUserRegisterAccount::successfulMessageShouldBeShownAfterRegistration()
-		// (see also #96)
-		//
-		// TODO: get activation key from database (#98)
-		// TODO: delete user after activation
-		
 		page.fillField("login", "test-login");
 		page.fillField("name", "Test Suite");
 		page.fillField("password", "test-password");
 		page.fillField("passwordConfirm", "test-password");
-		page.fillField("activationKey", "7777744444");
+		page.fillField("activationKey", NOT_ACTIVATED_USER_ACT_KEY);
 		page.submit();
 		
 		assertTrue(page.textPresent(stripHtmlTags(tr("t_activation_successful"))));

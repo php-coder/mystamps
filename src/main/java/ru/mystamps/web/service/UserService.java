@@ -51,13 +51,7 @@ public class UserService {
 	public void addRegistrationRequest(final String email) {
 		final UsersActivation activation = new UsersActivation();
 		
-		/// @todo: get rid of hardcoded act key (#98)
-		activation.setActivationKey(
-			email.equals("coder@rock.home")
-			? "7777744444"
-			: generateActivationKey()
-		);
-		
+		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(email);
 		activation.setCreatedAt(new Date());
 		usersActivation.add(activation);
