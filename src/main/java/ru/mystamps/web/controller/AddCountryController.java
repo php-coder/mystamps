@@ -20,6 +20,7 @@ package ru.mystamps.web.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,9 +37,12 @@ import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
 @RequestMapping(ADD_COUNTRY_PAGE_URL)
 public class AddCountryController {
 	
+	@Autowired
+	private AddCountryValidator addCountryValidator;
+	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(new AddCountryValidator());
+		binder.setValidator(addCountryValidator);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

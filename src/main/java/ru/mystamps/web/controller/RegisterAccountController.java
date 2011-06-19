@@ -41,9 +41,12 @@ public class RegisterAccountController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RegisterAccountValidator registerAccountValidator;
+	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(new RegisterAccountValidator());
+		binder.setValidator(registerAccountValidator);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

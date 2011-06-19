@@ -20,6 +20,7 @@ package ru.mystamps.web.validation;
 
 import org.apache.commons.validator.EmailValidator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
@@ -28,6 +29,7 @@ import ru.mystamps.web.model.RegisterAccountForm;
 
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
+@Component
 public class RegisterAccountValidator implements Validator {
 	
 	@Override
