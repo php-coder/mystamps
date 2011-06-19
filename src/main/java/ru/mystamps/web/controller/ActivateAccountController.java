@@ -40,11 +40,17 @@ import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 @RequestMapping(ACTIVATE_ACCOUNT_PAGE_URL)
 public class ActivateAccountController {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+	private final ActivateAccountValidator activateAccountValidator;
 	
 	@Autowired
-	private ActivateAccountValidator activateAccountValidator;
+	ActivateAccountController(
+		final UserService userService,
+		final ActivateAccountValidator activateAccountValidator) {
+		
+		this.userService = userService;
+		this.activateAccountValidator = activateAccountValidator;
+	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {

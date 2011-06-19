@@ -41,8 +41,12 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 @Component
 public class ActivateAccountValidator implements Validator {
 	
+	private final UserService userService;
+	
 	@Autowired
-	private UserService userService;
+	ActivateAccountValidator(final UserService userService) {
+		this.userService = userService;
+	}
 	
 	@Override
 	public boolean supports(final Class clazz) {

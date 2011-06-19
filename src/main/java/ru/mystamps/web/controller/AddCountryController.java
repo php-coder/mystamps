@@ -37,8 +37,12 @@ import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
 @RequestMapping(ADD_COUNTRY_PAGE_URL)
 public class AddCountryController {
 	
+	private final AddCountryValidator addCountryValidator;
+	
 	@Autowired
-	private AddCountryValidator addCountryValidator;
+	AddCountryController(final AddCountryValidator addCountryValidator) {
+		this.addCountryValidator = addCountryValidator;
+	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {

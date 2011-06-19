@@ -38,11 +38,17 @@ import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 @RequestMapping(REGISTRATION_PAGE_URL)
 public class RegisterAccountController {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+	private final RegisterAccountValidator registerAccountValidator;
 	
 	@Autowired
-	private RegisterAccountValidator registerAccountValidator;
+	RegisterAccountController(
+		final UserService userService,
+		final RegisterAccountValidator registerAccountValidator) {
+		
+		this.userService = userService;
+		this.registerAccountValidator = registerAccountValidator;
+	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {

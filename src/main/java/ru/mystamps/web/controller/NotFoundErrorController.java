@@ -40,8 +40,12 @@ import static ru.mystamps.web.SiteMap.NOT_FOUND_PAGE_URL;
 public class NotFoundErrorController {
 	private final Logger log = LoggerFactory.getLogger(NotFoundErrorController.class);
 	
+	private final SiteService siteService;
+	
 	@Autowired
-	private SiteService siteService;
+	NotFoundErrorController(final SiteService siteService) {
+		this.siteService = siteService;
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String notFound(

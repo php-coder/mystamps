@@ -40,14 +40,25 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 public class SiteService {
 	private final Logger log = LoggerFactory.getLogger(SiteService.class);
 	
-	@Autowired
 	private UserDao users;
+	private SuspiciousActivityDao suspiciousActivities;
+	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+
+	SiteService() {
+		// no-argument constructor is required by Spring AOP
+		// (due to usage of @Transactional annotation)
+	}
 	
 	@Autowired
-	private SuspiciousActivityDao suspiciousActivities;
-
-	@Autowired
-	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+	SiteService(
+		final UserDao users,
+		final SuspiciousActivityDao suspiciousActivities,
+		final SuspiciousActivityTypeDao suspiciousActivityTypes) {
+		
+		this.users = users;
+		this.suspiciousActivities = suspiciousActivities;
+		this.suspiciousActivityTypes = suspiciousActivityTypes;
+	}
 	
 	@Transactional
 	public void logAboutAbsentPage(

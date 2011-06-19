@@ -36,8 +36,12 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
 @Component
 public class AuthAccountValidator implements Validator {
 	
+	private final UserService userService;
+	
 	@Autowired
-	private UserService userService;
+	AuthAccountValidator(final UserService userService) {
+		this.userService = userService;
+	}
 	
 	@Override
 	public boolean supports(final Class clazz) {

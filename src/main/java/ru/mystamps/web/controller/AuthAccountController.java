@@ -44,14 +44,20 @@ import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 @RequestMapping(AUTHENTICATION_PAGE_URL)
 public class AuthAccountController {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+	private final SiteService siteService;
+	private final AuthAccountValidator authAccountValidator;
 	
 	@Autowired
-	private SiteService siteService;
-	
-	@Autowired
-	private AuthAccountValidator authAccountValidator;
+	AuthAccountController(
+		final UserService userService,
+		final SiteService siteService,
+		final AuthAccountValidator authAccountValidator) {
+		
+		this.userService = userService;
+		this.siteService = siteService;
+		this.authAccountValidator = authAccountValidator;
+	}
 	
 	@InitBinder
 	protected void initAuthBinder(final WebDataBinder binder) {
