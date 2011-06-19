@@ -193,19 +193,10 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String key = form.getActivationKey();
 		
-		if (key.length() < ACT_KEY_LENGTH.intValue()) {
+		if (key.length() != ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
-					"value.too-short",
-					new Object[]{ACT_KEY_LENGTH},
-					"XXX");
-			return;
-		}
-		
-		if (key.length() > ACT_KEY_LENGTH.intValue()) {
-			errors.rejectValue(
-					"activationKey",
-					"value.too-long",
+					"value.invalid-length",
 					new Object[]{ACT_KEY_LENGTH},
 					"XXX");
 			return;
