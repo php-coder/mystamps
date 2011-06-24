@@ -161,10 +161,18 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test
 	public void nameWithAllowedCharactersShouldBeAccepted() {
 		// TODO: test Russian letters (like 'SемЄн як-ушев')
-		page.fillField("name", "Slava Se-mushin");
-		page.submit();
 		
-		assertFalse(page.isFieldHasError("name"));
+		final String[] names = new String[] {
+			"x",
+			"Slava Se-mushin"
+		};
+		
+		for (final String name : names) {
+			page.fillField("name", name);
+			page.submit();
+			
+			assertFalse(page.isFieldHasError("name"));
+		}
 	}
 	
 	@Test
