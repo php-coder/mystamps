@@ -512,7 +512,7 @@
 									<goal>run</goal>
 								</goals>
 								<configuration>
-									<tasks>
+									<target>
 										<copy
 											file="${env.dir}/test/test-data.sql"
 											todir="${project.build.outputDirectory}"
@@ -524,7 +524,7 @@
 													file="${env.dir}/test/spring/test-credentials.properties" />
 											</filterset>
 										</copy>
-									</tasks>
+									</target>
 								</configuration>
 							</execution>
 						</executions>
