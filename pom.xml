@@ -190,6 +190,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -215,6 +216,7 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.1.1</version>
 				<configuration>
 					<wait>false</wait>
 					<container>
@@ -250,6 +252,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
@@ -451,6 +454,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-dev-resources</id>
@@ -499,6 +503,7 @@
 					
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
 						<executions>
 							<execution>
 								<id>copy-test-sql-data</id>
@@ -527,6 +532,7 @@
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-test-resources</id>
@@ -554,6 +560,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>hibernate3-maven-plugin</artifactId>
+						<version>2.2</version>
 						<configuration>
 							<components>
 								<component>
