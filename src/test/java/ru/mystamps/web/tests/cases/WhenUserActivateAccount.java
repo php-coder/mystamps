@@ -160,7 +160,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameWithAllowedCharactersShouldBeAccepted() {
-		// TODO: test Russian letters (like 'Såì¸í ßê-óøåâ')
+		// TODO: test Russian letters (like 'SÐµÐ¼Ñ‘Ð½ Ð¯Ðº-ÑƒÑˆÐµÐ²')
 		
 		final String[] names = new String[] {
 			"x",
