@@ -111,7 +111,7 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		}
 		
 		assertThat(
-			"legeng about required fields exists",
+			"legend about required fields should exist",
 			page.getFormHints(),
 			hasItem(tr("t_required_fields_legend", "*"))
 		);
