@@ -114,7 +114,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public String getFieldValue(final String name) {
-		return getElementByXPath(String.format(INPUT_FIELD_LOCATOR, name)).getValue();
+		return getElementByXPath(String.format(INPUT_FIELD_LOCATOR, name)).getAttribute("value");
 	}
 	
 	public String getFieldError(final String id) {
