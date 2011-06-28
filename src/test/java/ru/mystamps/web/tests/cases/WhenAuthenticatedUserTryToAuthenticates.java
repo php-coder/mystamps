@@ -18,8 +18,8 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
+
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import org.junit.Test;
@@ -66,9 +66,9 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
 		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
 		
-		assertTrue(page.textPresent(tr("t_already_authenticated")));
-		assertFalse(page.authenticationFormExists());
-		assertTrue(page.getFormHints().isEmpty());
+		assertThat(page.textPresent(tr("t_already_authenticated"))).isTrue();
+		assertThat(page.authenticationFormExists()).isFalse();
+		assertThat(page.getFormHints()).isEmpty();
 		
 		page.logout();
 	}

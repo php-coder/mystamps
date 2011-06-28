@@ -18,14 +18,12 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
-
-import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
@@ -82,17 +80,17 @@ public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> 
 	
 	@Test
 	public void issueDayFieldShouldHaveOptionsFor31Days() {
-		assertThat(page.getDayFieldValues(), is(expectedDays));
+		assertThat(page.getDayFieldValues()).isEqualTo(expectedDays);
 	}
 	
 	@Test
 	public void issueMonthFieldShouldHaveOptionsFor12Months() {
-		assertThat(page.getMonthFieldValues(), is(expectedMonths));
+		assertThat(page.getMonthFieldValues()).isEqualTo(expectedMonths);
 	}
 	
 	@Test
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
-		assertThat(page.getYearFieldValues(), is(expectedYears));
+		assertThat(page.getYearFieldValues()).isEqualTo(expectedYears);
 	}
 	
 }

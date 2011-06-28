@@ -22,8 +22,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
+
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import org.junit.Test;
@@ -66,9 +66,9 @@ public class WhenAuthenticatedUserRegisterAccount
 	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
 		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
 		
-		assertTrue(page.textPresent(tr("t_already_registered")));
-		assertFalse(page.registrationFormExists());
-		assertTrue(page.getFormHints().isEmpty());
+		assertThat(page.textPresent(tr("t_already_registered"))).isTrue();
+		assertThat(page.registrationFormExists()).isFalse();
+		assertThat(page.getFormHints()).isEmpty();
 		
 		page.logout();
 	}

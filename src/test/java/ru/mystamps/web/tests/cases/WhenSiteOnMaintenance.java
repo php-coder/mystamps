@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class WhenSiteOnMaintenance extends WhenUserAtAnyPage<MaintenanceSitePage
 	
 	@Test
 	public void shouldExistsMessage() {
-		assertEquals(tr("t_maintenance_on_site", "\n"), page.getErrorMessage());
+		assertThat(page.getErrorMessage()).isEqualTo(tr("t_maintenance_on_site", "\n"));
 	}
 	
 }

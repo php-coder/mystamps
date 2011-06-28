@@ -18,10 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.matchers.JUnitMatchers.hasItem;
+import static org.fest.assertions.Assertions.assertThat;
 
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
@@ -51,35 +48,28 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	
 	@Test
 	public void shouldExistsMessageWithLinkToAuthenticationPage() {
-		assertThat(
-			page.getFormHints(),
-			hasItem(stripHtmlTags(tr("t_if_you_already_registered")))
-		);
+		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
-		assertTrue(
-			"should exists link to authentication page",
-			page.linkHasLabelAndPointsTo("authentication", AUTHENTICATION_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo("authentication", AUTHENTICATION_PAGE_URL))
+			.overridingErrorMessage("should exists link to authentication page")
+			.isTrue();
 	}
 	
 	@Test
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
-		assertThat(
-			page.getFormHints(),
-			hasItem(stripHtmlTags(tr("t_if_you_forget_password")))
-		);
+		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
-		assertTrue(
-			"should exists link to password restoration page",
-			page.linkHasLabelAndPointsTo("remind", RESTORE_PASSWORD_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo("remind", RESTORE_PASSWORD_PAGE_URL))
+			.overridingErrorMessage("should exists link to password restoration page")
+			.isTrue();
 	}
 	
 	@Test
 	public void emailShouldNotBeTooLong() {
 		page.fillField("email", StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		page.submit();
-		assertEquals(tr("value.too-long", EMAIL_MAX_LENGTH), page.getFieldError("email"));
+		
+		assertThat(page.getFieldError("email")).isEqualTo(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
 	@Test
@@ -92,7 +82,8 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		for (final String invalidEmail : emails) {
 			page.fillField("email", invalidEmail);
 			page.submit();
-			assertEquals(tr("email.invalid"), page.getFieldError("email"));
+			
+			assertThat(page.getFieldError("email")).isEqualTo(tr("email.invalid"));
 		}
 	}
 	
@@ -102,7 +93,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		page.submit();
 		// TODO: check page url
 		// TODO: delete email if it already exists
-		assertTrue(page.textPresent(tr("t_activation_sent_message")));
+		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
 	}
 	
 }

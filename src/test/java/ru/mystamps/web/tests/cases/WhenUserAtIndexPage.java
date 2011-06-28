@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -45,31 +45,28 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	
 	@Test
 	public void shouldExistsWelcomeText() {
-		assertTrue(page.textPresent(tr("t_you_may")));
+		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
 	}
 	
 	@Test
 	public void shouldExistsLinkForPasswordRecovery() {
-		assertTrue(
-			"should exists link to password restoration page",
-			page.linkHasLabelAndPointsTo(tr("t_recover_forget_password"), RESTORE_PASSWORD_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo(tr("t_recover_forget_password"), RESTORE_PASSWORD_PAGE_URL))
+			.overridingErrorMessage("should exists link to password restoration page")
+			.isTrue();
 	}
 	
 	@Test
 	public void shouldExistsLinkForAddingStamps() {
-		assertTrue(
-			"should exists link to page for adding stamps",
-			page.linkHasLabelAndPointsTo(tr("t_add_series"), ADD_STAMPS_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo(tr("t_add_series"), ADD_STAMPS_PAGE_URL))
+			.overridingErrorMessage("should exists link to page for adding stamps")
+			.isTrue();
 	}
 	
 	@Test
 	public void shouldExistsLinkForAddingCountries() {
-		assertTrue(
-			"should exists link to page for adding countries",
-			page.linkHasLabelAndPointsTo(tr("t_add_country"), ADD_COUNTRY_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo(tr("t_add_country"), ADD_COUNTRY_PAGE_URL))
+			.overridingErrorMessage("should exists link to page for adding countries")
+			.isTrue();
 	}
 	
 }

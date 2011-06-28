@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.net.HttpURLConnection;
 
@@ -45,12 +45,12 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 	
 	@Test
 	public void shouldExistsErrorMessage() {
-		assertEquals(tr("t_404_description", "\n"), page.getErrorMessage());
+		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
 	}
 	
 	@Test
 	public void shouldExistsErrorCode() {
-		assertEquals("404", page.getErrorCode());
+		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
 	@Test

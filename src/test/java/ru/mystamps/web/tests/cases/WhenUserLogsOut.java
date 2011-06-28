@@ -25,8 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import ru.mystamps.web.tests.page.LogoutAccountPage;
 
@@ -54,21 +53,17 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
 		page.open();
 		
-		assertEquals(
-			"after logout we should be redirected to main page",
-			INDEX_PAGE_URL,
-			page.getCurrentUrl()
-		);
+		assertThat(page.getCurrentUrl())
+			.overridingErrorMessage("after logout we should be redirected to main page")
+			.isEqualTo(INDEX_PAGE_URL);
 		
-		assertTrue(
-			"should exists link to authentication page",
-			page.linkHasLabelAndPointsTo(tr("t_enter"), AUTHENTICATION_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo(tr("t_enter"), AUTHENTICATION_PAGE_URL))
+			.overridingErrorMessage("should exists link to authentication page")
+			.isTrue();
 		
-		assertTrue(
-			"should exists link to registration page",
-			page.linkHasLabelAndPointsTo(tr("t_register"), REGISTRATION_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo(tr("t_register"), REGISTRATION_PAGE_URL))
+			.overridingErrorMessage("should exists link to registration page")
+			.isTrue();
 	}
 	
 }
