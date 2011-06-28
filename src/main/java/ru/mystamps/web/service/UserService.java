@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.service;
 
 import java.util.Date;
@@ -23,23 +41,28 @@ public class UserService {
 	
 	private final Logger log = LoggerFactory.getLogger(UserService.class);
 	
-	@Autowired
 	private UserDao users;
+	private UsersActivationDao usersActivation;
+	
+	UserService() {
+		// no-argument constructor is required by Spring AOP
+		// (due to usage of @Transactional annotation)
+	}
 	
 	@Autowired
-	private UsersActivationDao usersActivation;
+	UserService(
+		final UserDao users,
+		final UsersActivationDao usersActivation) {
+		
+		this.users = users;
+		this.usersActivation = usersActivation;
+	}
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {
 		final UsersActivation activation = new UsersActivation();
 		
-		/// @todo: get rid of hardcoded act key (#98)
-		activation.setActivationKey(
-			email.equals("coder@rock.home")
-			? "7777744444"
-			: generateActivationKey()
-		);
-		
+		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(email);
 		activation.setCreatedAt(new Date());
 		usersActivation.add(activation);

@@ -6,12 +6,12 @@
 	
 	<groupId>ru.mystamps</groupId>
 	<artifactId>mystamps</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<hibernate.version>3.6.4.Final</hibernate.version>
+		<hibernate.version>3.6.5.Final</hibernate.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
@@ -20,6 +20,7 @@
 		<jetty.port>8081</jetty.port>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	
 	<dependencies>
@@ -121,6 +122,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
@@ -130,7 +138,8 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium</artifactId>
-			<version>2.0b1</version>
+			<version>2.0rc2</version>
+			<type>pom</type>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -157,7 +166,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.1.0.Final</version>
+			<version>4.2.0.Final</version>
 		</dependency>
 		
 		<dependency>
@@ -190,6 +199,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -215,6 +225,7 @@
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.1.1</version>
 				<configuration>
 					<wait>false</wait>
 					<container>
@@ -250,6 +261,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
@@ -307,6 +319,28 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.9.0</version>
+				<configuration>
+					<basedir>src</basedir>
+					<header>src/main/config/license_header.txt</header>
+					<strictCheck>true</strictCheck>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<copyright.years>${project.inceptionYear}-2011</copyright.years>
+						<author.name>${project.developers[0].name}</author.name>
+						<author.email>${project.developers[0].email}</author.email>
+					</properties>
+				</configuration>
 			</plugin>
 			
 		</plugins>
@@ -375,6 +409,23 @@
 		
 	</repositories>
 	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mc-repo</id>
+			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>localRepository</id>
@@ -412,6 +463,7 @@
 				<plugins>
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-dev-resources</id>
@@ -460,6 +512,7 @@
 					
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
 						<executions>
 							<execution>
 								<id>copy-test-sql-data</id>
@@ -468,7 +521,7 @@
 									<goal>run</goal>
 								</goals>
 								<configuration>
-									<tasks>
+									<target>
 										<copy
 											file="${env.dir}/test/test-data.sql"
 											todir="${project.build.outputDirectory}"
@@ -480,7 +533,7 @@
 													file="${env.dir}/test/spring/test-credentials.properties" />
 											</filterset>
 										</copy>
-									</tasks>
+									</target>
 								</configuration>
 							</execution>
 						</executions>
@@ -488,6 +541,7 @@
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-test-resources</id>
@@ -515,6 +569,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>hibernate3-maven-plugin</artifactId>
+						<version>2.2</version>
 						<configuration>
 							<components>
 								<component>

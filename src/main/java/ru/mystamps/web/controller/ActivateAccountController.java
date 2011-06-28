@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.controller;
 
 import javax.validation.Valid;
@@ -22,11 +40,17 @@ import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 @RequestMapping(ACTIVATE_ACCOUNT_PAGE_URL)
 public class ActivateAccountController {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+	private final ActivateAccountValidator activateAccountValidator;
 	
 	@Autowired
-	private ActivateAccountValidator activateAccountValidator;
+	ActivateAccountController(
+		final UserService userService,
+		final ActivateAccountValidator activateAccountValidator) {
+		
+		this.userService = userService;
+		this.activateAccountValidator = activateAccountValidator;
+	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {

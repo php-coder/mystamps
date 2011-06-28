@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +41,12 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 @Component
 public class ActivateAccountValidator implements Validator {
 	
+	private final UserService userService;
+	
 	@Autowired
-	private UserService userService;
+	ActivateAccountValidator(final UserService userService) {
+		this.userService = userService;
+	}
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -171,19 +193,10 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String key = form.getActivationKey();
 		
-		if (key.length() < ACT_KEY_LENGTH.intValue()) {
+		if (key.length() != ACT_KEY_LENGTH.intValue()) {
 			errors.rejectValue(
 					"activationKey",
-					"value.too-short",
-					new Object[]{ACT_KEY_LENGTH},
-					"XXX");
-			return;
-		}
-		
-		if (key.length() > ACT_KEY_LENGTH.intValue()) {
-			errors.rejectValue(
-					"activationKey",
-					"value.too-long",
+					"value.invalid-length",
 					new Object[]{ACT_KEY_LENGTH},
 					"XXX");
 			return;

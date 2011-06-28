@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.service;
 
 import java.util.Date;
@@ -22,14 +40,25 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 public class SiteService {
 	private final Logger log = LoggerFactory.getLogger(SiteService.class);
 	
-	@Autowired
 	private UserDao users;
+	private SuspiciousActivityDao suspiciousActivities;
+	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+
+	SiteService() {
+		// no-argument constructor is required by Spring AOP
+		// (due to usage of @Transactional annotation)
+	}
 	
 	@Autowired
-	private SuspiciousActivityDao suspiciousActivities;
-
-	@Autowired
-	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+	SiteService(
+		final UserDao users,
+		final SuspiciousActivityDao suspiciousActivities,
+		final SuspiciousActivityTypeDao suspiciousActivityTypes) {
+		
+		this.users = users;
+		this.suspiciousActivities = suspiciousActivities;
+		this.suspiciousActivityTypes = suspiciousActivityTypes;
+	}
 	
 	@Transactional
 	public void logAboutAbsentPage(

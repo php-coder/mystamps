@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.tests.cases;
 
 import java.util.List;
@@ -8,10 +26,7 @@ import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
-import static org.junit.matchers.JUnitMatchers.hasItem;
+import static org.fest.assertions.Assertions.assertThat;
 
 abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenUserAtAnyPage<T> {
@@ -37,17 +52,18 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void shouldHaveForm() {
-		assertTrue("form tag should exists", page.formExists());
+		assertThat(page.formExists())
+			.overridingErrorMessage("form tag should exists")
+			.isTrue();
 	}
 	
 	private void shouldHaveFields() {
 		for (final Field field : page.getForm().getFields()) {
 			// TODO: improve message to showing input type.
 			// Probably we need to call field.toString() there
-			assertTrue(
-				"field named '" + field.getName() + "' should exists",
-				page.isFieldExists(field)
-			);
+			assertThat(page.isFieldExists(field))
+				.overridingErrorMessage("field named '" + field.getName() + "' should exists")
+				.isTrue();
 		}
 	}
 	
@@ -57,33 +73,31 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 				continue;
 			}
 			
-			assertEquals(
-				String.format(
-					"field with id '%s' should have label '%s'",
-					field.getId(),
-					field.getLabel()
-				),
-				field.getLabel(),
-				page.getInputLabelValue(field.getId())
+			final String msg =	String.format(
+				"field with id '%s' should have label '%s'",
+				field.getId(),
+				field.getLabel()
 			);
+			
+			assertThat(page.getInputLabelValue(field.getId()))
+				.overridingErrorMessage(msg)
+				.isEqualTo(field.getLabel());
 		}
 	}
 	
 	private void shouldHaveSubmitButton() {
 		for (final SubmitButton button : page.getForm().getSubmitButtons()) {
-			assertTrue(
-				"submit button with value '" + button.getValue() + "' should exists",
-				page.isSubmitButtonExists(button)
-			);
+			assertThat(page.isSubmitButtonExists(button))
+				.overridingErrorMessage("submit button with value '" + button.getValue() + "' should exists")
+				.isTrue();
 		}
 	}
 	
 	private void requiredFieldsShouldBeMarkedByAsterisk() {
 		for (final Field field : page.getForm().getRequiredFields()) {
-			assertTrue(
-				"required field with id '" + field.getId() + "' should be marked by asterisk",
-				page.inputHasAsterisk(field.getId())
-			);
+			assertThat(page.inputHasAsterisk(field.getId()))
+				.overridingErrorMessage("required field with id '" + field.getId() + "' should be marked by asterisk")
+				.isTrue();
 		}
 	}
 	
@@ -92,11 +106,9 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			return;
 		}
 		
-		assertThat(
-			"legeng about required fields exists",
-			page.getFormHints(),
-			hasItem(tr("t_required_fields_legend", "*"))
-		);
+		assertThat(page.getFormHints())
+			.overridingErrorMessage("legend about required fields should exists")
+			.contains(tr("t_required_fields_legend", "*"));
 	}
 	
 	private void emptyValueShouldBeForbiddenForRequiredFields() {
@@ -108,11 +120,9 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		page.submit();
 		
 		for (final Field field : requiredFields) {
-			assertEquals(
-				"required field with id '" + field.getId() + "' should not accept empty value",
-				tr("value.required"),
-				page.getFieldError(field.getId())
-			);
+			assertThat(page.getFieldError(field.getId()))
+				.overridingErrorMessage("required field with id '" + field.getId() + "' should not accept empty value")
+				.isEqualTo(tr("value.required"));
 		}
 	}
 	
@@ -132,23 +142,24 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			page.submit();
 			
 			if (field.shouldPreserveInvalidValue()) {
-				assertEquals(
-					String.format(
-						"field named '%s' should preserve input value after error",
-						field.getName()
-					),
-					field.getInvalidValue(),
-					page.getFieldValue(field.getName())
+				final String msg = String.format(
+					"field named '%s' should preserve input value after error",
+					field.getName()
 				);
+				
+				assertThat(page.getFieldValue(field.getName()))
+					.overridingErrorMessage(msg)
+					.isEqualTo(field.getInvalidValue());
+				
 			} else {
-				assertEquals(
-					String.format(
-						"field named '%s' should not preserve input value after error",
-						field.getName()
-					),
-					"",
-					page.getFieldValue(field.getName())
+				final String msg = String.format(
+					"field named '%s' should not preserve input value after error",
+					field.getName()
 				);
+				
+				assertThat(page.getFieldValue(field.getName()))
+					.overridingErrorMessage(msg)
+					.isEmpty();
 			}
 		}
 	}

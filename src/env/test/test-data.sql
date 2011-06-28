@@ -11,3 +11,11 @@ VALUES (
 	'@valid_user_password_hash@',
 	'@valid_user_password_salt@'
 );
+
+INSERT INTO users_activation(act_key, email, created_at)
+VALUES(
+	'@not_activated_user_act_key@',
+	'test@example.org',
+	NOW()
+);
+

@@ -1,9 +1,24 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.matchers.JUnitMatchers.hasItem;
+import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,15 +71,11 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
-		assertThat(
-			page.getFormHints(),
-			hasItem(stripHtmlTags(tr("t_if_you_forget_password")))
-		);
+		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
-		assertTrue(
-			"should exists link to password restoration page",
-			page.linkHasLabelAndPointsTo("remind", RESTORE_PASSWORD_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo("remind", RESTORE_PASSWORD_PAGE_URL))
+			.overridingErrorMessage("should exists link to password restoration page")
+			.isTrue();
 	}
 	
 	@Test
@@ -72,7 +83,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("login", "a");
 		page.submit();
 		
-		assertEquals(tr("value.too-short", LOGIN_MIN_LENGTH), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
 	@Test
@@ -80,7 +91,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("login", "abcde12345fghkl6");
 		page.submit();
 		
-		assertEquals(tr("value.too-long", LOGIN_MAX_LENGTH), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test
@@ -88,7 +99,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("login", "'t@$t'");
 		page.submit();
 		
-		assertEquals(tr("login.invalid"), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
 	}
 	
 	@Test
@@ -96,7 +107,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("password", "123");
 		page.submit();
 		
-		assertEquals(tr("value.too-short", PASSWORD_MIN_LENGTH), page.getFieldError("password"));
+		assertThat(page.getFieldError("password")).isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
 	@Test
@@ -104,7 +115,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("password", "'t@$t'");
 		page.submit();
 		
-		assertEquals(tr("password.invalid"), page.getFieldError("password"));
+		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
 	}
 	
 	@Test
@@ -113,7 +124,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("password", INVALID_USER_PASSWORD);
 		page.submit();
 		
-		assertEquals(tr("login.password.invalid"), page.getFormError());
+		assertThat(page.getFormError()).isEqualTo(tr("login.password.invalid"));
 	}
 	
 	@Test
@@ -122,23 +133,17 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("password", VALID_USER_PASSWORD);
 		page.submit();
 		
-		assertEquals(
-			"after login we should be redirected to main page",
-			INDEX_PAGE_URL,
-			page.getCurrentUrl()
-		);
+		assertThat(page.getCurrentUrl())
+			.overridingErrorMessage("after login we should be redirected to main page")
+			.isEqualTo(INDEX_PAGE_URL);
 		
-		assertEquals(
-			"after login user name should be in user bar",
-			VALID_USER_NAME,
-			page.getUserBarEntries().get(0)
-		);
+		assertThat(page.getUserBarEntries())
+			.overridingErrorMessage("after login user name should be in user bar")
+			.contains(VALID_USER_NAME);
 		
-		assertEquals(
-			"after login link for logout should be in user bar",
-			tr("t_logout"),
-			page.getUserBarEntries().get(1)
-		);
+		assertThat(page.getUserBarEntries())
+			.overridingErrorMessage("after login link for logout should be in user bar")
+			.contains(tr("t_logout"));
 		
 		page.logout();
 	}

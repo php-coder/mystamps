@@ -1,8 +1,24 @@
+/*
+ * Copyright (C) 2009-2011 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
 package ru.mystamps.web.tests.cases;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -32,6 +48,9 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Value("#{test.valid_user_login}")
 	private String VALID_USER_LOGIN;
 	
+	@Value("#{test.not_activated_user_act_key}")
+	private String NOT_ACTIVATED_USER_ACT_KEY;
+	
 	public WhenUserActivateAccount() {
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
@@ -50,7 +69,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		final String key = "7777744444";
 		
 		page.open(ACTIVATE_ACCOUNT_PAGE_URL + "?key=" + key);
-		assertEquals(key, page.getFieldValue("activationKey"));
+		assertThat(page.getFieldValue("activationKey")).isEqualTo(key);
 		
 		page.open();
 	}
@@ -61,7 +80,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "admin");
 		page.submit();
 		
-		assertEquals(tr("password.login.match"), page.getFieldError("password"));
+		assertThat(page.getFieldError("password")).isEqualTo(tr("password.login.match"));
 	}
 	
 	@Test
@@ -70,7 +89,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("passwordConfirm", "password321");
 		page.submit();
 		
-		assertEquals(tr("password.mismatch"), page.getFieldError("passwordConfirm"));
+		assertThat(page.getFieldError("passwordConfirm")).isEqualTo(tr("password.mismatch"));
 	}
 	
 	@Test
@@ -78,7 +97,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "a");
 		page.submit();
 		
-		assertEquals(tr("value.too-short", LOGIN_MIN_LENGTH), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
 	@Test
@@ -86,7 +105,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "ab");
 		page.submit();
 		
-		assertFalse(page.isFieldHasError("login"));
+		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
@@ -94,7 +113,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "abcde12345fghkl6");
 		page.submit();
 		
-		assertEquals(tr("value.too-long", LOGIN_MAX_LENGTH), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test
@@ -102,7 +121,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "abcde1234567890");
 		page.submit();
 		
-		assertFalse(page.isFieldHasError("login"));
+		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
@@ -110,7 +129,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "t3s7-T_E_S_T");
 		page.submit();
 		
-		assertFalse(page.isFieldHasError("login"));
+		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
@@ -118,7 +137,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", "'t@$t'");
 		page.submit();
 		
-		assertEquals(tr("login.invalid"), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
 	}
 	
 	@Test
@@ -126,7 +145,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("login", VALID_USER_LOGIN);
 		page.submit();
 		
-		assertEquals(tr("login.exists"), page.getFieldError("login"));
+		assertThat(page.getFieldError("login")).isEqualTo(tr("login.exists"));
 	}
 	
 	@Test
@@ -134,16 +153,24 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", StringUtils.repeat("0", NAME_MAX_LENGTH + 1));
 		page.submit();
 		
-		assertEquals(tr("value.too-long", NAME_MAX_LENGTH), page.getFieldError("name"));
+		assertThat(page.getFieldError("name")).isEqualTo(tr("value.too-long", NAME_MAX_LENGTH));
 	}
 	
 	@Test
 	public void nameWithAllowedCharactersShouldBeAccepted() {
-		// TODO: test Russian letters (like 'Såì¸í ßê-óøåâ')
-		page.fillField("name", "Slava Se-mushin");
-		page.submit();
+		// TODO: test Russian letters (like 'SÐµÐ¼Ñ‘Ð½ Ð¯Ðº-ÑƒÑˆÐµÐ²')
 		
-		assertFalse(page.isFieldHasError("name"));
+		final String[] names = new String[] {
+			"x",
+			"Slava Se-mushin"
+		};
+		
+		for (final String name : names) {
+			page.fillField("name", name);
+			page.submit();
+			
+			assertThat(page.isFieldHasError("name")).isFalse();
+		}
 	}
 	
 	@Test
@@ -151,7 +178,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", "M@st3r_");
 		page.submit();
 		
-		assertEquals(tr("name.invalid"), page.getFieldError("name"));
+		assertThat(page.getFieldError("name")).isEqualTo(tr("name.invalid"));
 	}
 	
 	@Test
@@ -159,7 +186,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", "-test");
 		page.submit();
 		
-		assertEquals(tr("name.hyphen"), page.getFieldError("name"));
+		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
 	}
 	
 	@Test
@@ -167,7 +194,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", "test-");
 		page.submit();
 		
-		assertEquals(tr("name.hyphen"), page.getFieldError("name"));
+		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
 	}
 	
 	@Test
@@ -175,7 +202,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", " test ");
 		page.submit();
 		
-		assertEquals("test", page.getFieldValue("name"));
+		assertThat(page.getFieldValue("name")).isEqualTo("test");
 	}
 	
 	@Test
@@ -183,7 +210,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "123");
 		page.submit();
 		
-		assertEquals(tr("value.too-short", PASSWORD_MIN_LENGTH), page.getFieldError("password"));
+		assertThat(page.getFieldError("password")).isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
 	@Test
@@ -191,7 +218,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "1234");
 		page.submit();
 		
-		assertFalse(page.isFieldHasError("password"));
+		assertThat(page.isFieldHasError("password")).isFalse();
 	}
 	
 	@Test
@@ -199,7 +226,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "t3s7-T_E_S_T");
 		page.submit();
 		
-		assertFalse(page.isFieldHasError("password"));
+		assertThat(page.isFieldHasError("password")).isFalse();
 	}
 	
 	@Test
@@ -207,7 +234,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "'t@$t'");
 		page.submit();
 		
-		assertEquals(tr("password.invalid"), page.getFieldError("password"));
+		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
 	}
 	
 	@Test
@@ -215,7 +242,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", "12345");
 		page.submit();
 		
-		assertEquals(tr("value.too-short", ACT_KEY_LENGTH), page.getFieldError("activationKey"));
+		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
 	}
 	
 	@Test
@@ -223,7 +250,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", "1234567890123");
 		page.submit();
 		
-		assertEquals(tr("value.too-long", ACT_KEY_LENGTH), page.getFieldError("activationKey"));
+		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
 	}
 	
 	@Test
@@ -231,7 +258,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", "A123=+TEST");
 		page.submit();
 		
-		assertEquals(tr("key.invalid"), page.getFieldError("activationKey"));
+		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.invalid"));
 	}
 	
 	@Test
@@ -239,31 +266,23 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", StringUtils.repeat("1", ACT_KEY_LENGTH));
 		page.submit();
 		
-		assertEquals(tr("key.not-exists"), page.getFieldError("activationKey"));
+		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.not-exists"));
 	}
 	
 	@Test
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
-		// NOTE: this test depends from
-		// WhenUserRegisterAccount::successfulMessageShouldBeShownAfterRegistration()
-		// (see also #96)
-		//
-		// TODO: get activation key from database (#98)
-		// TODO: delete user after activation
-		
 		page.fillField("login", "test-login");
 		page.fillField("name", "Test Suite");
 		page.fillField("password", "test-password");
 		page.fillField("passwordConfirm", "test-password");
-		page.fillField("activationKey", "7777744444");
+		page.fillField("activationKey", NOT_ACTIVATED_USER_ACT_KEY);
 		page.submit();
 		
-		assertTrue(page.textPresent(stripHtmlTags(tr("t_activation_successful"))));
+		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		
-		assertTrue(
-			"should exists link to authentication page",
-			page.linkHasLabelAndPointsTo("authentication", AUTHENTICATION_PAGE_URL)
-		);
+		assertThat(page.linkHasLabelAndPointsTo("authentication", AUTHENTICATION_PAGE_URL))
+			.overridingErrorMessage("should exists link to authentication page")
+			.isTrue();
 	}
 	
 }
