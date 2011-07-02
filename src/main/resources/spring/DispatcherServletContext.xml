@@ -26,6 +26,8 @@
 	
 	<mvc:annotation-driven />
 	
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/*" />
+	
 	<!-- see also src/ru/mystamps/web/SiteMap.java -->
 	<mvc:view-controller path="/site/index.htm" view-name="site/index" />
 	<mvc:view-controller path="/site/maintenance.htm" view-name="site/maintenance" />

@@ -7,5 +7,5 @@
 <spring:url var="restorePasswordUrl" value="/password/restore.htm" />
 <spring:url var="addStampsUrl" value="/stamps/add.htm" />
 <spring:url var="addCountryUrl" value="/country/add.htm" />
-<spring:url var="mainCssUrl" value="/styles/main.css" />
-<spring:url var="errorCssUrl" value="/styles/error.css" />
+<spring:url var="mainCssUrl" value="/static/styles/main.css" />
+<spring:url var="errorCssUrl" value="/static/styles/error.css" />
