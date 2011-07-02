@@ -5,7 +5,7 @@
 	<head>
 		<title>MyStamps: <spring:message code="t_index_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<link rel="stylesheet" type="text/css" href="/styles/main.css" />
+		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/segments/header.jspf" %>

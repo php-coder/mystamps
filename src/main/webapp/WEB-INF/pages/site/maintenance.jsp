@@ -5,8 +5,8 @@
 	<head>
 		<title>MyStamps: <spring:message code="t_maintenance_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<link rel="stylesheet" type="text/css" href="/styles/main.css" />
-		<link rel="stylesheet" type="text/css" href="/styles/error.css" />
+		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
+		<link rel="stylesheet" type="text/css" href="${errorCssUrl}" />
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/segments/header.jspf" %>
