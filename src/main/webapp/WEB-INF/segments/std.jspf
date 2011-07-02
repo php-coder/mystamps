@@ -1,11 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<spring:url var="authUrl" value="/account/auth.htm" />
-<spring:url var="logoutUrl" value="/account/logout.htm" />
-<spring:url var="registerUrl" value="/account/register.htm" />
-<spring:url var="restorePasswordUrl" value="/password/restore.htm" />
-<spring:url var="addStampsUrl" value="/stamps/add.htm" />
-<spring:url var="addCountryUrl" value="/country/add.htm" />
+<%@ page import="ru.mystamps.web.SiteMap" %>
+<spring:url var="authUrl" value="<%= SiteMap.AUTHENTICATION_PAGE_URL %>" />
+<spring:url var="logoutUrl" value="<%= SiteMap.LOGOUT_PAGE_URL %>" />
+<spring:url var="registerUrl" value="<%= SiteMap.REGISTRATION_PAGE_URL %>" />
+<spring:url var="restorePasswordUrl" value="<%= SiteMap.RESTORE_PASSWORD_PAGE_URL %>" />
+<spring:url var="addStampsUrl" value="<%= SiteMap.ADD_STAMPS_PAGE_URL %>" />
+<spring:url var="addCountryUrl" value="<%= SiteMap.ADD_COUNTRY_PAGE_URL %>" />
 <spring:url var="mainCssUrl" value="/static/styles/main.css" />
 <spring:url var="errorCssUrl" value="/static/styles/error.css" />
