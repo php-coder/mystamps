@@ -47,6 +47,7 @@ public final class SiteMap {
 	// defined at src/main/resources/spring/DispatcherServletContext.xml
 	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore.htm";
 	
+	// see also error-page definition at src/main/webapp/WEB-INF/web.xml
 	public static final String NOT_FOUND_PAGE_URL        = "/error/404.htm";
 	
 	private SiteMap() {

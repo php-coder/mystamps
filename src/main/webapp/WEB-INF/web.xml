@@ -32,6 +32,10 @@
 		</jsp-property-group>
 	</jsp-config>
 	
+	<!--
+		see also src/main/java/ru/mystamps/web/SiteMap.java with
+		mapping controller to location
+	-->
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404.htm</location>
