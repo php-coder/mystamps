@@ -58,14 +58,14 @@ body,
 }
 
 .hint {
-	color: gray;
+	color: #808080;
 	font-style: italic;
 	font-size: 80%;
 }
 
 .error,
 .required_field {
-	color: darkred;
+	color: #8b0000;
 }
 
 #content .hint {
