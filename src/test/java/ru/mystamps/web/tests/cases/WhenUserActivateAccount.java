@@ -38,7 +38,7 @@ import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
-import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
+import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -67,8 +67,9 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test
 	public void activationKeyShouldBeAutoFilledFromURL() {
 		final String key = "7777744444";
+		final String url = ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL.replace("{key}", key);
 		
-		page.open(ACTIVATE_ACCOUNT_PAGE_URL + "?key=" + key);
+		page.open(url);
 		assertThat(page.getFieldValue("activationKey")).isEqualTo(key);
 		
 		page.open();

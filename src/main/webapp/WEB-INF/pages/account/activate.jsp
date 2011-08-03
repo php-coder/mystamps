@@ -20,7 +20,7 @@
 				</span>
 			</div>
 			<div class="generic_form">
-				<form:form method="post" modelAttribute="activateAccountForm">
+				<form:form method="post" action="${activateUrl}" modelAttribute="activateAccountForm">
 					<table>
 						<tr>
 							<td>

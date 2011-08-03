@@ -18,15 +18,17 @@
 
 package ru.mystamps.web.controller;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
@@ -35,9 +37,9 @@ import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.validation.ActivateAccountValidator;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
+import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
 
 @Controller
-@RequestMapping(ACTIVATE_ACCOUNT_PAGE_URL)
 public class ActivateAccountController {
 	
 	private final UserService userService;
@@ -58,17 +60,22 @@ public class ActivateAccountController {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ActivateAccountForm showForm(
-			@RequestParam(value = "key", required = false, defaultValue = "")
-			final String activationKey) {
+	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.GET)
+	public ActivateAccountForm showForm() {
+		return new ActivateAccountForm();
+	}
+	
+	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL, method = RequestMethod.GET)
+	public String showForm(@PathVariable("key") final String activationKey, final Map model) {
 		
 		final ActivateAccountForm form = new ActivateAccountForm();
 		form.setActivationKey(activationKey);
-		return form;
+		model.put("activateAccountForm", form);
+		
+		return "account/activate";
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.POST)
 	public String processInput(
 			@Valid final ActivateAccountForm form,
 			final BindingResult result) {

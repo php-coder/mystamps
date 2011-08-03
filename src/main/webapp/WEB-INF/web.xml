@@ -38,7 +38,7 @@
 	-->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/error/404.htm</location>
+		<location>/error/404</location>
 	</error-page>
 	
 	<filter>
@@ -58,7 +58,7 @@
 	
 	<filter-mapping>
 		<filter-name>MaintenanceFilter</filter-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 	<filter>
@@ -74,7 +74,7 @@
 	
 	<filter-mapping>
 		<filter-name>CharsetFilter</filter-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 </web-app>

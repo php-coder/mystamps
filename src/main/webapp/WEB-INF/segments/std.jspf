@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page import="ru.mystamps.web.SiteMap" %>
 <spring:url var="authUrl" value="<%= SiteMap.AUTHENTICATION_PAGE_URL %>" />
+<spring:url var="activateUrl" value="<%= SiteMap.ACTIVATE_ACCOUNT_PAGE_URL %>" />
 <spring:url var="logoutUrl" value="<%= SiteMap.LOGOUT_PAGE_URL %>" />
 <spring:url var="registerUrl" value="<%= SiteMap.REGISTRATION_PAGE_URL %>" />
 <spring:url var="restorePasswordUrl" value="<%= SiteMap.RESTORE_PASSWORD_PAGE_URL %>" />

@@ -32,23 +32,27 @@ public final class SiteMap {
 	public static final String SITE_URL                  = "http://127.0.0.1:8081";
 	
 	// defined at src/main/resources/spring/DispatcherServletContext.xml
-	public static final String INDEX_PAGE_URL            = "/site/index.htm";
-	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance.htm";
+	public static final String INDEX_PAGE_URL            = "/";
+	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance";
 	
-	public static final String REGISTRATION_PAGE_URL     = "/account/register.htm";
-	public static final String AUTHENTICATION_PAGE_URL   = "/account/auth.htm";
-	public static final String ACTIVATE_ACCOUNT_PAGE_URL = "/account/activate.htm";
-	public static final String LOGOUT_PAGE_URL           = "/account/logout.htm";
+	public static final String REGISTRATION_PAGE_URL     = "/account/register";
+	public static final String AUTHENTICATION_PAGE_URL   = "/account/auth";
+	public static final String ACTIVATE_ACCOUNT_PAGE_URL = "/account/activate";
 	
-	public static final String ADD_STAMPS_PAGE_URL       = "/stamps/add.htm";
+	public static final String
+		ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL = "/account/activate/key/{key}";
 	
-	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add.htm";
+	public static final String LOGOUT_PAGE_URL           = "/account/logout";
+	
+	public static final String ADD_STAMPS_PAGE_URL       = "/stamps/add";
+	
+	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add";
 	
 	// defined at src/main/resources/spring/DispatcherServletContext.xml
-	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore.htm";
+	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore";
 	
 	// see also error-page definition at src/main/webapp/WEB-INF/web.xml
-	public static final String NOT_FOUND_PAGE_URL        = "/error/404.htm";
+	public static final String NOT_FOUND_PAGE_URL        = "/error/404";
 	
 	private SiteMap() {
 	}

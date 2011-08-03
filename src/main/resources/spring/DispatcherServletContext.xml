@@ -25,13 +25,13 @@
 	</bean>
 	
 	<mvc:annotation-driven />
-	
+	<mvc:default-servlet-handler />
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/*" />
 	
 	<!-- see also src/ru/mystamps/web/SiteMap.java -->
-	<mvc:view-controller path="/site/index.htm" view-name="site/index" />
-	<mvc:view-controller path="/site/maintenance.htm" view-name="site/maintenance" />
-	<mvc:view-controller path="/password/restore.htm" view-name="password/restore" />
+	<mvc:view-controller path="/" view-name="site/index" />
+	<mvc:view-controller path="/site/maintenance" view-name="site/maintenance" />
+	<mvc:view-controller path="/password/restore" view-name="password/restore" />
 	
 	<import resource="database.xml" />
 	
