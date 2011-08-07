@@ -159,11 +159,10 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameWithAllowedCharactersShouldBeAccepted() {
-		// TODO: test Russian letters (like 'Sемён Як-ушев')
-		
 		final String[] names = new String[] {
 			"x",
-			"Slava Se-mushin"
+			"Slava Se-mushin",
+			"Семён Якушев"
 		};
 		
 		for (final String name : names) {

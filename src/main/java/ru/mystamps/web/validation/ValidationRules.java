@@ -25,8 +25,8 @@ public final class ValidationRules {
 	public static final String LOGIN_REGEXP = "[-_a-zA-Z0-9]+";
 	
 	public static final Integer NAME_MAX_LENGTH = 100;
-	public static final String NAME_REGEXP1 = "[- \\p{Alpha}]+";
-	public static final String NAME_REGEXP2 = "[ \\p{Alpha}]([- \\p{Alpha}]+[ \\p{Alpha}])*";
+	public static final String NAME_REGEXP1 = "[- \\p{L}]+";
+	public static final String NAME_REGEXP2 = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final Integer PASSWORD_MIN_LENGTH = 4;
 	public static final String PASSWORD_REGEXP = "[-_a-zA-Z0-9]+";
