@@ -100,7 +100,6 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		page.fillField("email", "coder@rock.home");
 		page.submit();
 		// TODO: check page url
-		// TODO: delete email if it already exists
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
 	}
 	
