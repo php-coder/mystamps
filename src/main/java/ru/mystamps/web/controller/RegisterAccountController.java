@@ -20,6 +20,7 @@ package ru.mystamps.web.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -53,6 +54,7 @@ public class RegisterAccountController {
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(registerAccountValidator);
+		binder.registerCustomEditor(String.class, "email", new StringTrimmerEditor(false));
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)

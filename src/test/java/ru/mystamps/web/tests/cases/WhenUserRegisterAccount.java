@@ -88,6 +88,14 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	}
 	
 	@Test
+	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
+		page.fillField("email", " test ");
+		page.submit();
+		
+		assertThat(page.getFieldValue("email")).isEqualTo("test");
+	}
+	
+	@Test
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.fillField("email", "coder@rock.home");
 		page.submit();
