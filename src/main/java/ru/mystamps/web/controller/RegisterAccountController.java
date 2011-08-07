@@ -69,7 +69,7 @@ public class RegisterAccountController {
 			final BindingResult result) {
 		
 		if (result.hasErrors()) {
-			return "account/register";
+			return null;
 		}
 		
 		userService.addRegistrationRequest(form.getEmail());

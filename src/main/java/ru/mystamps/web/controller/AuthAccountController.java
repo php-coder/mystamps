@@ -97,7 +97,7 @@ public class AuthAccountController {
 				siteService.logAboutFailedAuthentication(page, user, ip, referer, agent);
 			}
 			
-			return "account/auth";
+			return null;
 		}
 		
 		final User user = userService.findByLogin(form.getLogin());

@@ -48,7 +48,7 @@ public class NotFoundErrorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String notFound(
+	public void notFound(
 			final HttpServletRequest request,
 			final HttpSession session,
 			@RequestHeader(value = "referer", required = false) final String referer,
@@ -66,8 +66,6 @@ public class NotFoundErrorController {
 			// database error should not break showing of 404 page
 			log.warn("Cannot log 404 error", ex);
 		}
-		
-		return "error/404";
 	}
 	
 }

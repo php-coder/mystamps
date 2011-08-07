@@ -82,7 +82,7 @@ public class ActivateAccountController {
 			final BindingResult result) {
 		
 		if (result.hasErrors()) {
-			return "account/activate";
+			return null;
 		}
 		
 		userService.registerUser(
