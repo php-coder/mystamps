@@ -40,6 +40,7 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
+import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/TestContext.xml")
@@ -277,6 +278,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("passwordConfirm", "test-password");
 		page.fillField("activationKey", NOT_ACTIVATED_USER_ACT_KEY);
 		page.submit();
+		
+		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		

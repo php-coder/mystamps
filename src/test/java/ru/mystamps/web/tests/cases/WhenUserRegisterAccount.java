@@ -22,6 +22,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
+import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
@@ -99,7 +100,9 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.fillField("email", "coder@rock.home");
 		page.submit();
-		// TODO: check page url
+		
+		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_REGISTRATION_PAGE_URL);
+		
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
 	}
 	

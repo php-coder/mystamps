@@ -32,6 +32,8 @@
 	<mvc:view-controller path="/" view-name="site/index" />
 	<mvc:view-controller path="/site/maintenance" view-name="site/maintenance" />
 	<mvc:view-controller path="/password/restore" view-name="password/restore" />
+	<mvc:view-controller path="/successful/registration" view-name="account/activation_sent" />
+	<mvc:view-controller path="/successful/activation" view-name="account/activation_successful" />
 	
 	<import resource="database.xml" />
 	

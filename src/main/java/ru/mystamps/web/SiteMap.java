@@ -34,6 +34,8 @@ public final class SiteMap {
 	// defined at src/main/resources/spring/DispatcherServletContext.xml
 	public static final String INDEX_PAGE_URL            = "/";
 	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance";
+	public static final String SUCCESSFUL_REGISTRATION_PAGE_URL = "/successful/registration";
+	public static final String SUCCESSFUL_ACTIVATION_PAGE_URL = "/successful/activation";
 	
 	public static final String REGISTRATION_PAGE_URL     = "/account/register";
 	public static final String AUTHENTICATION_PAGE_URL   = "/account/auth";

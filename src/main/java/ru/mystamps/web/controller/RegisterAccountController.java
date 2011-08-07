@@ -34,6 +34,7 @@ import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.validation.RegisterAccountValidator;
 
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
+import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 
 @Controller
 @RequestMapping(REGISTRATION_PAGE_URL)
@@ -73,8 +74,7 @@ public class RegisterAccountController {
 		
 		userService.addRegistrationRequest(form.getEmail());
 		
-		// TODO: do redirect to protect from double submission (#74)
-		return "account/activation_sent";
+		return "redirect:" + SUCCESSFUL_REGISTRATION_PAGE_URL;
 	}
 	
 }

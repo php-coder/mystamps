@@ -38,6 +38,7 @@ import ru.mystamps.web.validation.ActivateAccountValidator;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
+import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
 @Controller
 public class ActivateAccountController {
@@ -91,7 +92,7 @@ public class ActivateAccountController {
 			form.getActivationKey()
 		);
 		
-		return "account/activation_successful";
+		return "redirect:" + SUCCESSFUL_ACTIVATION_PAGE_URL;
 	}
 	
 }
