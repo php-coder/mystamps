@@ -22,16 +22,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 public class Form {
 	@Getter private List<Field> fields;
 	@Getter private List<SubmitButton> submitButtons;
 	
+	private static final String              FORM_LOCATOR = "//form";
+	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
+	private static final String    PASSWORD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"password\"]";
+	private static final String    CHECKBOX_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"checkbox\"]";
+	private static final String      UPLOAD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"file\"]";
+	private static final String      SELECT_FIELD_LOCATOR = "//select[@name=\"%s\"]";
+	private static final String    TEXTAREA_FIELD_LOCATOR = "//textarea[@name=\"%s\"]";
+	private static final String     SUBMIT_BUTTON_LOCATOR = "//input[@type=\"submit\"]";
+	private static final String SUBMIT_WITH_VALUE_LOCATOR = "//input[@type=\"submit\"][@value=\"%s\"]";
+	
 	private Form() {
 		fields = new ArrayList<Field>();
 		submitButtons = new ArrayList<SubmitButton>();
+	}
+	
+	@Override
+	public String toString() {
+		return FORM_LOCATOR;
 	}
 	
 	public static Form with(final Field... fields) {
@@ -64,6 +78,18 @@ public class Form {
 		}
 		
 		return requiredFields;
+	}
+	
+	public Field getField(final String name) {
+		for (final Field field : fields) {
+			if (field.getName().equals(name)) {
+				return field;
+			}
+		}
+		
+		throw new IllegalStateException(
+			"Form does not have field with name '" + name + "'"
+		);
 	}
 	
 	public Form and() {
@@ -107,9 +133,25 @@ public class Form {
 	// Inner classes
 	//
 	
-	@RequiredArgsConstructor
 	public static class SubmitButton {
 		@Getter private final String value;
+		
+		private final String xpath;
+		
+		public SubmitButton() {
+			this.value = "";
+			this.xpath = SUBMIT_BUTTON_LOCATOR;
+		}
+		
+		public SubmitButton(final String value) {
+			this.value = value;
+			this.xpath = String.format(SUBMIT_WITH_VALUE_LOCATOR, value);
+		}
+		
+		@Override
+		public String toString() {
+			return xpath;
+		}
 	}
 	
 	public static class Field {
@@ -118,10 +160,13 @@ public class Form {
 		@Setter private boolean required;
 		@Getter private String label;
 		@Getter private String invalidValue;
+		
+		private final String xpath;
 		private boolean preserveInvalidValue = true;
 		
-		protected Field(final String name) {
+		protected Field(final String name, final String xpath) {
 			this.name = name;
+			this.xpath = String.format(xpath, name);
 			
 			// Assume that name and id is similar by default
 			this.id = name;
@@ -164,42 +209,47 @@ public class Form {
 		public boolean shouldPreserveInvalidValue() {
 			return preserveInvalidValue;
 		}
+		
+		@Override
+		public String toString() {
+			return xpath;
+		}
 	}
 	
 	public static class InputField extends Field {
 		public InputField(final String name) {
-			super(name);
+			super(name, INPUT_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class CheckboxField extends Field {
 		public CheckboxField(final String name) {
-			super(name);
+			super(name, CHECKBOX_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class UploadFileField extends Field {
 		public UploadFileField(final String name) {
-			super(name);
+			super(name, UPLOAD_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class PasswordField extends Field {
 		public PasswordField(final String name) {
-			super(name);
+			super(name, PASSWORD_FIELD_LOCATOR);
 			preserveInvalidValue(false);
 		}
 	}
 	
 	public static class SelectField extends Field {
 		public SelectField(final String name) {
-			super(name);
+			super(name, SELECT_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class TextareaField extends Field {
 		public TextareaField(final String name) {
-			super(name);
+			super(name, TEXTAREA_FIELD_LOCATOR);
 		}
 	}
 	

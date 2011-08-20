@@ -59,10 +59,8 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	private void shouldHaveFields() {
 		for (final Field field : page.getForm().getFields()) {
-			// TODO: improve message to showing input type.
-			// Probably we need to call field.toString() there
 			assertThat(page.isFieldExists(field))
-				.overridingErrorMessage("field named '" + field.getName() + "' should exists")
+				.overridingErrorMessage("field with XPath '" + field + "' should exists")
 				.isTrue();
 		}
 	}

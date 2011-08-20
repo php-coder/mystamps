@@ -18,9 +18,7 @@
 
 package ru.mystamps.web.tests.page;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -40,34 +38,12 @@ import ru.mystamps.web.tests.page.element.Form.UploadFileField;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
-	private static final String              FORM_LOCATOR = "//form";
-	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
-	private static final String    PASSWORD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"password\"]";
-	private static final String    CHECKBOX_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"checkbox\"]";
-	private static final String      UPLOAD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"file\"]";
-	private static final String      SELECT_FIELD_LOCATOR = "//select[@name=\"%s\"]";
-	private static final String    TEXTAREA_FIELD_LOCATOR = "//textarea[@name=\"%s\"]";
-	private static final String     SUBMIT_BUTTON_LOCATOR = "//input[@type=\"submit\"]";
-	private static final String SUBMIT_WITH_VALUE_LOCATOR = "//input[@type=\"submit\"][@value=\"%s\"]";
-	
 	private static final String             LABEL_LOCATOR = "//label[@for=\"%s\"]";
 	private static final String       FIELD_ERROR_LOCATOR = "//span[@id=\"%s.errors\"]";
 	private static final String    FIELD_REQUIRED_LOCATOR = "//span[@id=\"%s.required\"]";
 	private static final String        FORM_ERROR_LOCATOR = "//div[@id=\"form.errors\"]";
 	
-	/// @see isFieldExists()
-	private static final Map<String, String> fieldLocators = new HashMap<String, String>();
-	
 	@Getter private Form form;
-	
-	static {
-		fieldLocators.put(InputField.class.getSimpleName(), INPUT_FIELD_LOCATOR);
-		fieldLocators.put(CheckboxField.class.getSimpleName(), CHECKBOX_FIELD_LOCATOR);
-		fieldLocators.put(UploadFileField.class.getSimpleName(), UPLOAD_FIELD_LOCATOR);
-		fieldLocators.put(PasswordField.class.getSimpleName(), PASSWORD_FIELD_LOCATOR);
-		fieldLocators.put(SelectField.class.getSimpleName(), SELECT_FIELD_LOCATOR);
-		fieldLocators.put(TextareaField.class.getSimpleName(), TEXTAREA_FIELD_LOCATOR);
-	}
 	
 	public AbstractPageWithForm(final WebDriver driver, final String pageUrl) {
 		super(driver, pageUrl);
@@ -78,15 +54,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public boolean isFieldExists(final Field field) {
-		final String fieldType = field.getClass().getSimpleName();
-		if (!fieldLocators.containsKey(fieldType)) {
-			throw new IllegalArgumentException("Internal error: unknown field type");
-		}
-		
-		final String fieldXpath =
-			String.format(fieldLocators.get(fieldType), field.getName());
-		
-		return elementWithXPathExists(fieldXpath);
+		return elementWithXPathExists(field.toString());
 	}
 	
 	public boolean isFieldHasError(final String id) {
@@ -94,15 +62,36 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public boolean isSubmitButtonExists(final SubmitButton button) {
-		return elementWithXPathExists(String.format(SUBMIT_WITH_VALUE_LOCATOR, button.getValue()));
+		return elementWithXPathExists(button.toString());
 	}
 	
 	public void submit() {
-		getElementByXPath(SUBMIT_BUTTON_LOCATOR).submit();
+		if (form == null) {
+			throw new IllegalStateException(
+				"You are trying to submit form at page which does not have form"
+			);
+		}
+		
+		final List<SubmitButton> buttons = form.getSubmitButtons();
+		if (buttons.isEmpty()) {
+			throw new IllegalStateException(
+				"You are trying to submit form at page which does not have submit button"
+			);
+		}
+		
+		final String xpathOfFirstSubmitButton = buttons.get(0).toString();
+		
+		getElementByXPath(xpathOfFirstSubmitButton).submit();
 	}
 	
 	public boolean formExists() {
-		return elementWithXPathExists(FORM_LOCATOR);
+		if (form == null) {
+			throw new IllegalStateException(
+				"You are trying to check form at page which does not has form"
+			);
+		}
+		
+		return elementWithXPathExists(form.toString());
 	}
 	
 	public String getInputLabelValue(final String id) {
@@ -114,7 +103,15 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public String getFieldValue(final String name) {
-		return getElementByXPath(String.format(INPUT_FIELD_LOCATOR, name)).getAttribute("value");
+		if (form == null) {
+			throw new IllegalStateException(
+				"You are trying to find field at page which does not have form"
+			);
+		}
+		
+		final String xpathField = form.getField(name).toString();
+		
+		return getElementByXPath(xpathField).getAttribute("value");
 	}
 	
 	public String getFieldError(final String id) {
