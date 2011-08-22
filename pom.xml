@@ -213,6 +213,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
 				<executions>
 					<execution>
 						<goals>
@@ -297,7 +298,7 @@
 					<stopPort>9966</stopPort>
 					<stopKey>jetty-stop-signal</stopKey>
 					<webAppSourceDirectory>
-						${project.build.directory}/${build.finalName}
+						${project.build.directory}/${project.build.finalName}
 					</webAppSourceDirectory>
 				</configuration>
 				<executions>
