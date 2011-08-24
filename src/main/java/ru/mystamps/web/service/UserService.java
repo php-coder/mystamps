@@ -88,6 +88,10 @@ public class UserService {
 		
 		final UsersActivation activation =
 			usersActivation.findByActivationKey(activationKey);
+		if (activation == null) {
+			log.warn("Cannot find registration request for activation key '{}'", activationKey);
+			return;
+		}
 		
 		final String email = activation.getEmail();
 		final Date registrationDate = activation.getCreatedAt();

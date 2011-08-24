@@ -34,6 +34,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
 import ru.mystamps.web.dao.UserDao;
@@ -144,6 +145,16 @@ public class UserServiceTest {
 		service.registerUser(null, null, null, null);
 		
 		verify(usersActivationDao).delete(activation);
+	}
+	
+	@Test
+	public void registerUserShouldDoNothingWhenRegistrationRequestNotFound() {
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(null);
+		
+		service.registerUser(null, null, null, null);
+		
+		verify(userDao, never()).add(any(User.class));
+		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
 	}
 	
 	@Test
