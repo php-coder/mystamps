@@ -127,7 +127,19 @@ public class UserService {
 			return null;
 		}
 		
-		if (!user.getHash().equals(computeSha1Sum(user.getSalt() + password))) {
+		final String hash = user.getHash();
+		if (hash == null) {
+			log.warn("User with login '{}' and id={} has null hash!", login, user.getId());
+			return null;
+		}
+		
+		final String salt = user.getSalt();
+		if (salt == null) {
+			log.warn("User with login '{}' and id={} has null salt!", login, user.getId());
+			return null;
+		}
+		
+		if (!hash.equals(computeSha1Sum(salt + password))) {
 			log.info("Wrong password for login '{}'", login);
 			return null;
 		}

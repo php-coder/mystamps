@@ -286,6 +286,26 @@ public class UserServiceTest {
 		//assertThat(user).isEqualTo(resultUser);
 	}
 	
+	@Test
+	public void findByLoginAndPasswordShouldReturnNullWhenUserHasNullSalt() {
+		final User resultUser = getValidUser();
+		resultUser.setSalt(null);
+		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
+		
+		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		assertThat(user).isNull();
+	}
+	
+	@Test
+	public void findByLoginAndPasswordShouldReturnNullWhenUserHasNullHash() {
+		final User resultUser = getValidUser();
+		resultUser.setHash(null);
+		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
+		
+		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		assertThat(user).isNull();
+	}
+	
 	private User getValidUser() {
 		final User user = new User();
 		user.setId(777);
