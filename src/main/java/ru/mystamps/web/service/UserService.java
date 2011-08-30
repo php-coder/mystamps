@@ -41,22 +41,11 @@ public class UserService {
 	
 	private final Logger log = LoggerFactory.getLogger(UserService.class);
 	
+	@Autowired
 	private UserDao users;
-	private UsersActivationDao usersActivation;
-	
-	UserService() {
-		// no-argument constructor is required by Spring AOP
-		// (due to usage of @Transactional annotation)
-	}
 	
 	@Autowired
-	UserService(
-		final UserDao users,
-		final UsersActivationDao usersActivation) {
-		
-		this.users = users;
-		this.usersActivation = usersActivation;
-	}
+	private UsersActivationDao usersActivation;
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {

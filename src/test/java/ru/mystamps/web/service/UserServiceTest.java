@@ -20,12 +20,12 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -68,12 +68,8 @@ public class UserServiceTest {
 	@Captor
 	private ArgumentCaptor<User> userCaptor;
 	
-	private UserService service;
-	
-	@Before
-	public void setup() {
-		service = new UserService(userDao, usersActivationDao);
-	}
+	@InjectMocks
+	private UserService service = new UserService();
 	
 	//
 	// Tests for addRegistrationRequest()
