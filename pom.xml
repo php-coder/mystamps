@@ -11,7 +11,7 @@
 	
 	<properties>
 		<spring.version>3.0.6.RELEASE</spring.version>
-		<hibernate.version>3.6.5.Final</hibernate.version>
+		<hibernate.version>3.6.7.Final</hibernate.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.0.Final</version>
+			<version>1.0.1.Final</version>
 		</dependency>
 		
 		<dependency>
