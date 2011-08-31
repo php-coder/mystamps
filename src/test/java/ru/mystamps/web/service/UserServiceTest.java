@@ -77,19 +77,24 @@ public class UserServiceTest {
 	
 	@Test
 	public void addRegistrationRequestShouldCallDao() {
-		service.addRegistrationRequest(null);
+		service.addRegistrationRequest(TEST_EMAIL);
 		verify(usersActivationDao).add(any(UsersActivation.class));
 	}
 	
 	@Test
 	public void addRegistrationRequestShouldGenerateActivationKey() {
-		service.addRegistrationRequest(null);
+		service.addRegistrationRequest(TEST_EMAIL);
 		
 		verify(usersActivationDao).add(activationCaptor.capture());
 		
 		final String activationKey = activationCaptor.getValue().getActivationKey();
 		assertThat(activationKey.length()).as("activation key length").isEqualTo(UsersActivation.ACTIVATION_KEY_LENGTH);
 		assertThat(activationKey).matches("^[\\p{Lower}\\p{Digit}]+$");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void addRegistrationRequestShouldThrowExceptionWhenEmailIsNull() {
+		service.addRegistrationRequest(null);
 	}
 	
 	@Test
@@ -103,7 +108,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void addRegistrationRequestShouldAssignCurrentDate() {
-		service.addRegistrationRequest(null);
+		service.addRegistrationRequest(TEST_EMAIL);
 		
 		verify(usersActivationDao).add(activationCaptor.capture());
 		
@@ -113,6 +118,11 @@ public class UserServiceTest {
 	//
 	// Tests for findRegistrationRequestByActivationKey()
 	//
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void findRegistrationRequestByActivationKeyShouldThrowExceptionWhenActivationKeyIsNull() {
+		service.findRegistrationRequestByActivationKey(null);
+	}
 	
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldPassActivationKeyToDao() {
@@ -128,7 +138,7 @@ public class UserServiceTest {
 	public void registerUserShouldCreateUser() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(any(User.class));
 	}
@@ -138,26 +148,36 @@ public class UserServiceTest {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(usersActivationDao).delete(activation);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void registerUserShouldThrowExceptionWhenActivationKeyIsNull() {
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, null);
 	}
 	
 	@Test
 	public void registerUserShouldDoNothingWhenRegistrationRequestNotFound() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(null);
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao, never()).add(any(User.class));
 		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void registerUserShouldThrowExceptionWhenNameIsNull() {
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
 	}
 	
 	@Test
 	public void registerUserShouldPassNameToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(null, null, TEST_NAME, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -168,7 +188,7 @@ public class UserServiceTest {
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(TEST_LOGIN, null, "", null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, "", TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -180,7 +200,7 @@ public class UserServiceTest {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -192,7 +212,7 @@ public class UserServiceTest {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -203,7 +223,7 @@ public class UserServiceTest {
 	public void registerUserShouldGenerateSalt() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -212,11 +232,16 @@ public class UserServiceTest {
 		assertThat(salt).matches("^[\\p{Alnum}]+$");
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void registerUserShouldThrowExceptionWhenPasswordIsNull() {
+		service.registerUser(TEST_LOGIN, null, TEST_NAME, TEST_ACTIVATION_KEY);
+	}
+	
 	@Test
 	public void registerUserShouldGenerateHash() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -228,11 +253,16 @@ public class UserServiceTest {
 		// TODO: check that hash based on password
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void registerUserShouldThrowExceptionWhenLoginIsNull() {
+		service.registerUser(null, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+	}
+	
 	@Test
 	public void registerUserShouldPassLoginToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(TEST_LOGIN, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -243,7 +273,7 @@ public class UserServiceTest {
 	public void registerUserShouldAssignActivationDate() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		service.registerUser(null, null, null, null);
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).add(userCaptor.capture());
 		
@@ -253,6 +283,11 @@ public class UserServiceTest {
 	//
 	// Tests for findByLogin()
 	//
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void findByLoginShouldThrowExceptionWhenLoginIsNull() {
+		service.findByLogin(null);
+	}
 	
 	@Test
 	public void findByLoginShouldPassLoginToDao() {
@@ -264,11 +299,21 @@ public class UserServiceTest {
 	// Tests for findByLoginAndPassword()
 	//
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void findByLoginAndPasswordShouldThrowExceptionWhenLoginIsNull() {
+		service.findByLoginAndPassword(null, TEST_PASSWORD);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void findByLoginAndPasswordShouldThrowExceptionWhenPasswordIsNull() {
+		service.findByLoginAndPassword(TEST_LOGIN, null);
+	}
+	
 	@Test
 	public void findByLoginAndPasswordShouldReturnNullWhenUserNotFound() {
 		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(null);
 		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, null);
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNull();
 	}
 	
@@ -278,7 +323,7 @@ public class UserServiceTest {
 		resultUser.setHash("anyHash");
 		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
 		
-		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNull();
 	}
 	
@@ -286,7 +331,7 @@ public class UserServiceTest {
 	public void findByLoginAndPasswordShouldReturnUserForValidCredentials() {
 		when(userDao.findByLogin(anyString())).thenReturn(getValidUser());
 		
-		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNotNull();
 		
 		// TODO
@@ -299,7 +344,7 @@ public class UserServiceTest {
 		resultUser.setSalt(null);
 		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
 		
-		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNull();
 	}
 	
@@ -309,7 +354,7 @@ public class UserServiceTest {
 		resultUser.setHash(null);
 		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
 		
-		final User user = service.findByLoginAndPassword(null, TEST_PASSWORD);
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNull();
 	}
 	

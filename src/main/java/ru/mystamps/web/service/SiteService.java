@@ -83,6 +83,10 @@ public class SiteService {
 			throw new IllegalArgumentException("Type of suspicious activity was not set");
 		}
 		
+		if (page == null) {
+			throw new IllegalArgumentException("Page should be non null");
+		}
+		
 		final SuspiciousActivity activity = new SuspiciousActivity();
 		activity.setType(type);
 		activity.setOccuredAt(new Date());

@@ -49,6 +49,10 @@ public class UserService {
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {
+		if (email == null) {
+			throw new IllegalArgumentException("Email should be non null");
+		}
+		
 		final UsersActivation activation = new UsersActivation();
 		
 		activation.setActivationKey(generateActivationKey());
@@ -60,12 +64,33 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public UsersActivation findRegistrationRequestByActivationKey(
 			final String activationKey) {
+		
+		if (activationKey == null) {
+			throw new IllegalArgumentException("Activation key should be non null");
+		}
+		
 		return usersActivation.findByActivationKey(activationKey);
 	}
 	
 	@Transactional
 	public void registerUser(final String login, final String password,
 			final String name, final String activationKey) {
+		
+		if (login == null) {
+			throw new IllegalArgumentException("Login should be non null");
+		}
+		
+		if (password == null) {
+			throw new IllegalArgumentException("Password should be non null");
+		}
+		
+		if (name == null) {
+			throw new IllegalArgumentException("Name should be non null");
+		}
+		
+		if (activationKey == null) {
+			throw new IllegalArgumentException("Activation key should be non null");
+		}
 		
 		// use login as name if name is not provided
 		final String finalName;
@@ -109,11 +134,23 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public User findByLogin(final String login) {
+		if (login == null) {
+			throw new IllegalArgumentException("Login should be non null");
+		}
+		
 		return users.findByLogin(login);
 	}
 	
 	@Transactional(readOnly = true)
 	public User findByLoginAndPassword(final String login, final String password) {
+		if (login == null) {
+			throw new IllegalArgumentException("Login should be non null");
+		}
+		
+		if (password == null) {
+			throw new IllegalArgumentException("Password should be non null");
+		}
+		
 		final User user = users.findByLogin(login);
 		if (user == null) {
 			log.info("Wrong login '{}'", login);
