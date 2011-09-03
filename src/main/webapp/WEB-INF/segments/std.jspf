@@ -9,5 +9,6 @@
 <spring:url var="restorePasswordUrl" value="<%= SiteMap.RESTORE_PASSWORD_PAGE_URL %>" />
 <spring:url var="addStampsUrl" value="<%= SiteMap.ADD_STAMPS_PAGE_URL %>" />
 <spring:url var="addCountryUrl" value="<%= SiteMap.ADD_COUNTRY_PAGE_URL %>" />
+<spring:url var="faviconUrl" value="/favicon.ico" />
 <spring:url var="mainCssUrl" value="/static/styles/main.css" />
 <spring:url var="errorCssUrl" value="/static/styles/error.css" />

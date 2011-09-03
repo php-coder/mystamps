@@ -5,6 +5,7 @@
 	<head>
 		<title>MyStamps: <spring:message code="t_restore_password_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 	</head>
 	<body>

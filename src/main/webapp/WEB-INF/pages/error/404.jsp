@@ -5,6 +5,7 @@
 	<head>
 		<title><spring:message code="t_404_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 		<link rel="stylesheet" type="text/css" href="${errorCssUrl}" />
 	</head>
