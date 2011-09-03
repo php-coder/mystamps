@@ -125,6 +125,18 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	public void findRegistrationRequestByActivationKeyShouldCallDao() {
+		final UsersActivation expectedActivation = getUsersActivation();
+		when(usersActivationDao.findByActivationKey(TEST_ACTIVATION_KEY)).thenReturn(expectedActivation);
+		
+		final UsersActivation activation =
+			service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
+		
+		assertThat(activation).isEqualTo(expectedActivation);
+	}
+	
+	
+	@Test
 	public void findRegistrationRequestByActivationKeyShouldPassActivationKeyToDao() {
 		service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
 		verify(usersActivationDao).findByActivationKey(TEST_ACTIVATION_KEY);
@@ -290,6 +302,16 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	public void findByLoginShouldCallDao() {
+		final User expectedUser = getValidUser();
+		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(expectedUser);
+		
+		final User user = service.findByLogin(TEST_LOGIN);
+		
+		assertThat(user).isEqualTo(expectedUser);
+	}
+	
+	@Test
 	public void findByLoginShouldPassLoginToDao() {
 		service.findByLogin(TEST_LOGIN);
 		verify(userDao).findByLogin(TEST_LOGIN);
@@ -307,6 +329,16 @@ public class UserServiceTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void findByLoginAndPasswordShouldThrowExceptionWhenPasswordIsNull() {
 		service.findByLoginAndPassword(TEST_LOGIN, null);
+	}
+	
+	@Test
+	public void findByLoginAndPasswordShouldCallDao() {
+		final User expectedUser = getValidUser();
+		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(expectedUser);
+		
+		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
+		
+		assertThat(user).isEqualTo(expectedUser);
 	}
 	
 	@Test
