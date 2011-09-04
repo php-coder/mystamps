@@ -41,7 +41,6 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
-import ru.mystamps.web.service.SiteService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SiteServiceTest {
