@@ -27,14 +27,8 @@ import lombok.Getter;
 
 import ru.mystamps.web.tests.WebElementUtils;
 import ru.mystamps.web.tests.page.element.Form;
-import ru.mystamps.web.tests.page.element.Form.CheckboxField;
 import ru.mystamps.web.tests.page.element.Form.Field;
-import ru.mystamps.web.tests.page.element.Form.InputField;
-import ru.mystamps.web.tests.page.element.Form.PasswordField;
-import ru.mystamps.web.tests.page.element.Form.SelectField;
 import ru.mystamps.web.tests.page.element.Form.SubmitButton;
-import ru.mystamps.web.tests.page.element.Form.TextareaField;
-import ru.mystamps.web.tests.page.element.Form.UploadFileField;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
