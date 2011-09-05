@@ -38,30 +38,30 @@ public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> 
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
-	private static final List<String> expectedDays =
+	private static final List<String> EXPECTED_DAYS =
 		new ArrayList<String>(DAYS_IN_MONTH + 1);
 	
-	private static final List<String> expectedMonths =
+	private static final List<String> EXPECTED_MONTHS =
 		new ArrayList<String>(MONTHS_IN_YEAR + 1);
 	
-	private static final List<String> expectedYears =
+	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<String>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
 	static {
-		expectedDays.add("");
+		EXPECTED_DAYS.add("");
 		for (int i = 1; i <= DAYS_IN_MONTH; i++) {
-			expectedDays.add(String.valueOf(i));
+			EXPECTED_DAYS.add(String.valueOf(i));
 		}
 		
-		expectedMonths.add("");
+		EXPECTED_MONTHS.add("");
 		for (int i = 1; i <= MONTHS_IN_YEAR; i++) {
-			expectedMonths.add(String.valueOf(i));
+			EXPECTED_MONTHS.add(String.valueOf(i));
 		}
 		
-		expectedYears.add("");
+		EXPECTED_YEARS.add("");
 		// years in reverse order
 		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
-			expectedYears.add(String.valueOf(i));
+			EXPECTED_YEARS.add(String.valueOf(i));
 		}
 	}
 	
@@ -80,17 +80,17 @@ public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> 
 	
 	@Test
 	public void issueDayFieldShouldHaveOptionsFor31Days() {
-		assertThat(page.getDayFieldValues()).isEqualTo(expectedDays);
+		assertThat(page.getDayFieldValues()).isEqualTo(EXPECTED_DAYS);
 	}
 	
 	@Test
 	public void issueMonthFieldShouldHaveOptionsFor12Months() {
-		assertThat(page.getMonthFieldValues()).isEqualTo(expectedMonths);
+		assertThat(page.getMonthFieldValues()).isEqualTo(EXPECTED_MONTHS);
 	}
 	
 	@Test
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
-		assertThat(page.getYearFieldValues()).isEqualTo(expectedYears);
+		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
 	}
 	
 }

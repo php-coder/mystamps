@@ -31,7 +31,7 @@ public final class TranslationUtils {
 	private static final Locale DEFAULT_BUNDLE_LOCALE =
 		Locale.ENGLISH;
 	
-	private static final ResourceBundle bundle =
+	private static final ResourceBundle BUNDLE =
 		PropertyResourceBundle.getBundle(
 			DEFAULT_BUNDLE_CLASS_NAME,
 			DEFAULT_BUNDLE_LOCALE
@@ -41,7 +41,7 @@ public final class TranslationUtils {
 	}
 	
 	public static String tr(final String key) {
-		return bundle.getString(key);
+		return BUNDLE.getString(key);
 	}
 	
 	// TODO: add simple unit tests (#93)
