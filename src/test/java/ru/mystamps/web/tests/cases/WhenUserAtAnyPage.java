@@ -89,8 +89,7 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	private void checkServerResponseCode() {
 		assertThat(page.getServerResponseCode())
 			.overridingErrorMessage("Server response code")
-			.isEqualTo(serverCode)
-			;
+			.isEqualTo(serverCode);
 	}
 	
 	private void shouldHaveTitle() {

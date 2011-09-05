@@ -45,8 +45,7 @@ public class UserDao {
 			final User user = (User)entityManager
 				.createQuery("from User u where u.login = :login")
 				.setParameter("login", login)
-				.getSingleResult()
-				;
+				.getSingleResult();
 			
 			return user;
 		} catch (final NoResultException ex) {

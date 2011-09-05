@@ -35,8 +35,7 @@ public class SuspiciousActivityTypeDao {
 		final SuspiciousActivityType type = (SuspiciousActivityType)entityManager
 			.createQuery("from SuspiciousActivityType sat where sat.name = :name")
 			.setParameter("name", name)
-			.getSingleResult()
-			;
+			.getSingleResult();
 		
 		return type;
 	}
