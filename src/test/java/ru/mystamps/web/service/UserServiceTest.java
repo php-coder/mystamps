@@ -127,7 +127,7 @@ public class UserServiceTest {
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldCallDao() {
 		final UsersActivation expectedActivation = getUsersActivation();
-		when(usersActivationDao.findByActivationKey(TEST_ACTIVATION_KEY)).thenReturn(expectedActivation);
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(expectedActivation);
 		
 		final UsersActivation activation =
 			service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
@@ -304,7 +304,7 @@ public class UserServiceTest {
 	@Test
 	public void findByLoginShouldCallDao() {
 		final User expectedUser = getValidUser();
-		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(expectedUser);
+		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
 		
 		final User user = service.findByLogin(TEST_LOGIN);
 		
@@ -334,7 +334,7 @@ public class UserServiceTest {
 	@Test
 	public void findByLoginAndPasswordShouldCallDao() {
 		final User expectedUser = getValidUser();
-		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(expectedUser);
+		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
 		
 		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		
@@ -343,7 +343,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void findByLoginAndPasswordShouldReturnNullWhenUserNotFound() {
-		when(userDao.findByLogin(TEST_LOGIN)).thenReturn(null);
+		when(userDao.findByLogin(anyString())).thenReturn(null);
 		
 		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
 		assertThat(user).isNull();
