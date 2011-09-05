@@ -25,9 +25,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Form {
-	@Getter private List<Field> fields;
-	@Getter private List<SubmitButton> submitButtons;
-	
 	private static final String              FORM_LOCATOR = "//form";
 	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
 	private static final String    PASSWORD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"password\"]";
@@ -37,6 +34,9 @@ public class Form {
 	private static final String    TEXTAREA_FIELD_LOCATOR = "//textarea[@name=\"%s\"]";
 	private static final String     SUBMIT_BUTTON_LOCATOR = "//input[@type=\"submit\"]";
 	private static final String SUBMIT_WITH_VALUE_LOCATOR = "//input[@type=\"submit\"][@value=\"%s\"]";
+	
+	@Getter private List<Field> fields;
+	@Getter private List<SubmitButton> submitButtons;
 	
 	private Form() {
 		fields = new ArrayList<Field>();
