@@ -202,7 +202,7 @@ public class Form {
 			return this;
 		}
 		
-		protected void preserveInvalidValue(boolean preserveInvalidValue) {
+		protected void preserveInvalidValue(final boolean preserveInvalidValue) {
 			this.preserveInvalidValue = preserveInvalidValue;
 		}
 		
