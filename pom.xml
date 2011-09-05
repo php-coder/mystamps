@@ -351,6 +351,33 @@
 				</configuration>
 			</plugin>
 			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<enableRSS>false</enableRSS>
+					<consoleOutput>true</consoleOutput>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<linkXRef>false</linkXRef>
+					<configLocation>
+						${basedir}/src/main/config/checkstyle.xml
+					</configLocation>
+					<suppressionsLocation>
+						${basedir}/src/main/config/checkstyle-suppressions.xml
+					</suppressionsLocation>
+				</configuration>
+				<executions>
+					<execution>
+						<id>run-checkstyle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 		
 	</build>

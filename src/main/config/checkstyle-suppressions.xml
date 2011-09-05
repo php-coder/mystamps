@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!DOCTYPE suppressions PUBLIC
+	"-//Puppy Crawl//DTD Suppressions 1.0//EN"
+	"http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+	
+	<suppress checks="LineLength" files="AbstractPageWithForm.java" lines="27,28,33" />
+	<suppress checks="LineLength" files="Form.java" lines="30,31,36" />
+	
+	<!-- false positives due to Lombok usage -->
+	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.model" />
+	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.entity" />
+	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.tests.page.element.Form" />
+	
+	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.WebDriverFactory" />
+	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPage" />
+	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPageWithForm" />
+	
+</suppressions>
