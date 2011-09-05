@@ -412,8 +412,9 @@ public class SiteServiceTest {
 	}
 	
 	private User getUser() {
+		final Integer anyId = 777;
 		final User user = new User();
-		user.setId(777);
+		user.setId(anyId);
 		user.setLogin("test");
 		user.setName("Test Name");
 		user.setEmail("test@example.org");

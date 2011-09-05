@@ -393,8 +393,9 @@ public class UserServiceTest {
 	}
 	
 	private User getValidUser() {
+		final Integer anyId = 777;
 		final User user = new User();
-		user.setId(777);
+		user.setId(anyId);
 		user.setLogin(TEST_LOGIN);
 		user.setName(TEST_NAME);
 		user.setEmail(TEST_EMAIL);
