@@ -45,10 +45,10 @@ public class WhenAuthenticatedUserRegisterAccount
 	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
-	private String VALID_USER_LOGIN;
+	private String validUserLogin;
 	
 	@Value("#{test.valid_user_password}")
-	private String VALID_USER_PASSWORD;
+	private String validUserPassword;
 	
 	public WhenAuthenticatedUserRegisterAccount() {
 		super(RegisterAccountPage.class);
@@ -64,7 +64,7 @@ public class WhenAuthenticatedUserRegisterAccount
 	
 	@Test
 	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
-		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
+		page.login(validUserLogin, validUserPassword);
 		
 		assertThat(page.textPresent(tr("t_already_registered"))).isTrue();
 		assertThat(page.registrationFormExists()).isFalse();

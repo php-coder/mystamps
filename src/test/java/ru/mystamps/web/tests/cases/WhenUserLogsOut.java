@@ -39,10 +39,10 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
-	private String VALID_USER_LOGIN;
+	private String validUserLogin;
 	
 	@Value("#{test.valid_user_password}")
-	private String VALID_USER_PASSWORD;
+	private String validUserPassword;
 	
 	public WhenUserLogsOut() {
 		super(LogoutAccountPage.class);
@@ -50,7 +50,7 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 	
 	@Test
 	public void shouldRedirectAndClearSession() {
-		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
+		page.login(validUserLogin, validUserPassword);
 		page.open();
 		
 		assertThat(page.getCurrentUrl())

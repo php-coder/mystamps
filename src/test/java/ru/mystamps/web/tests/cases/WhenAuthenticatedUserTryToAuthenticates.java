@@ -45,10 +45,10 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
-	private String VALID_USER_LOGIN;
+	private String validUserLogin;
 	
 	@Value("#{test.valid_user_password}")
-	private String VALID_USER_PASSWORD;
+	private String validUserPassword;
 	
 	public WhenAuthenticatedUserTryToAuthenticates() {
 		super(AuthAccountPage.class);
@@ -64,7 +64,7 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	
 	@Test
 	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
-		page.login(VALID_USER_LOGIN, VALID_USER_PASSWORD);
+		page.login(validUserLogin, validUserPassword);
 		
 		assertThat(page.textPresent(tr("t_already_authenticated"))).isTrue();
 		assertThat(page.authenticationFormExists()).isFalse();

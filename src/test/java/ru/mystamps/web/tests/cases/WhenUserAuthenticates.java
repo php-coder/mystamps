@@ -42,19 +42,19 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
-	private String VALID_USER_LOGIN;
+	private String validUserLogin;
 	
 	@Value("#{test.valid_user_password}")
-	private String VALID_USER_PASSWORD;
+	private String validUserPassword;
 	
 	@Value("#{test.valid_user_name}")
-	private String VALID_USER_NAME;
+	private String validUserName;
 	
 	@Value("#{test.invalid_user_login}")
-	private String INVALID_USER_LOGIN;
+	private String invalidUserLogin;
 	
 	@Value("#{test.invalid_user_password}")
-	private String INVALID_USER_PASSWORD;
+	private String invalidUserPassword;
 	
 	public WhenUserAuthenticates() {
 		super(AuthAccountPage.class);
@@ -121,8 +121,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void invalidCredentialsShouldBeRejected() {
-		page.fillField("login", INVALID_USER_LOGIN);
-		page.fillField("password", INVALID_USER_PASSWORD);
+		page.fillField("login", invalidUserLogin);
+		page.fillField("password", invalidUserPassword);
 		page.submit();
 		
 		assertThat(page.getFormError()).isEqualTo(tr("login.password.invalid"));
@@ -130,8 +130,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void validCredentialsShouldAuthenticateUserOnSite() {
-		page.fillField("login", VALID_USER_LOGIN);
-		page.fillField("password", VALID_USER_PASSWORD);
+		page.fillField("login", validUserLogin);
+		page.fillField("password", validUserPassword);
 		page.submit();
 		
 		assertThat(page.getCurrentUrl())
@@ -140,7 +140,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		
 		assertThat(page.getUserBarEntries())
 			.overridingErrorMessage("after login user name should be in user bar")
-			.contains(VALID_USER_NAME);
+			.contains(validUserName);
 		
 		assertThat(page.getUserBarEntries())
 			.overridingErrorMessage("after login link for logout should be in user bar")

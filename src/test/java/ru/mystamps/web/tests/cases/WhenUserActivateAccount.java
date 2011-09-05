@@ -47,10 +47,10 @@ import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
-	private String VALID_USER_LOGIN;
+	private String validUserLogin;
 	
 	@Value("#{test.not_activated_user_act_key}")
-	private String NOT_ACTIVATED_USER_ACT_KEY;
+	private String notActivatedUserActKey;
 	
 	public WhenUserActivateAccount() {
 		super(ActivateAccountPage.class);
@@ -144,7 +144,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldBeUnique() {
-		page.fillField("login", VALID_USER_LOGIN);
+		page.fillField("login", validUserLogin);
 		page.submit();
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.exists"));
@@ -279,7 +279,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("name", "Test Suite");
 		page.fillField("password", "test-password");
 		page.fillField("passwordConfirm", "test-password");
-		page.fillField("activationKey", NOT_ACTIVATED_USER_ACT_KEY);
+		page.fillField("activationKey", notActivatedUserActKey);
 		page.submit();
 		
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);

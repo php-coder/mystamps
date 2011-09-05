@@ -259,9 +259,9 @@ public class UserServiceTest {
 		
 		verify(userDao).add(userCaptor.capture());
 		
-		final int SHA1_SUM_LENGTH = 40;
+		final int sha1SumLength = 40;
 		final String hash = userCaptor.getValue().getHash();
-		assertThat(hash.length()).as("hash length").isEqualTo(SHA1_SUM_LENGTH);
+		assertThat(hash.length()).as("hash length").isEqualTo(sha1SumLength);
 		assertThat(hash).matches("^[\\p{Lower}\\p{Digit}]+$");
 		
 		// TODO: check that hash based on password
