@@ -88,7 +88,9 @@ public class UserServiceTest {
 		verify(usersActivationDao).add(activationCaptor.capture());
 		
 		final String activationKey = activationCaptor.getValue().getActivationKey();
-		assertThat(activationKey.length()).as("activation key length").isEqualTo(UsersActivation.ACTIVATION_KEY_LENGTH);
+		assertThat(activationKey.length()).as("activation key length")
+			.isEqualTo(UsersActivation.ACTIVATION_KEY_LENGTH);
+		
 		assertThat(activationKey).matches("^[\\p{Lower}\\p{Digit}]+$");
 	}
 	
@@ -120,7 +122,7 @@ public class UserServiceTest {
 	//
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void findRegistrationRequestByActivationKeyShouldThrowExceptionWhenActivationKeyIsNull() {
+	public void findRegistrationRequestByActivationKeyShouldThrowExceptionWhenKeyIsNull() {
 		service.findRegistrationRequestByActivationKey(null);
 	}
 	

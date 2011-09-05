@@ -86,7 +86,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	private void shouldHaveSubmitButton() {
 		for (final SubmitButton button : page.getForm().getSubmitButtons()) {
 			assertThat(page.isSubmitButtonExists(button))
-				.overridingErrorMessage("submit button with value '" + button.getValue() + "' should exists")
+				.overridingErrorMessage(
+					String.format(
+						"submit button with value '%s' should exists", button.getValue()
+					)
+				)
 				.isTrue();
 		}
 	}
@@ -94,7 +98,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	private void requiredFieldsShouldBeMarkedByAsterisk() {
 		for (final Field field : page.getForm().getRequiredFields()) {
 			assertThat(page.inputHasAsterisk(field.getId()))
-				.overridingErrorMessage("required field with id '" + field.getId() + "' should be marked by asterisk")
+				.overridingErrorMessage(
+					String.format(
+						"required field with id '%s' should be marked by asterisk", field.getId()
+					)
+				)
 				.isTrue();
 		}
 	}
@@ -119,7 +127,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		
 		for (final Field field : requiredFields) {
 			assertThat(page.getFieldError(field.getId()))
-				.overridingErrorMessage("required field with id '" + field.getId() + "' should not accept empty value")
+				.overridingErrorMessage(
+					String.format(
+						"required field with id '%s' should not accept empty value", field.getId()
+					)
+				)
 				.isEqualTo(tr("value.required"));
 		}
 	}

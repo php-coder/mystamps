@@ -211,7 +211,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("password", "123");
 		page.submit();
 		
-		assertThat(page.getFieldError("password")).isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
+		assertThat(page.getFieldError("password"))
+			.isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
 	@Test
@@ -243,7 +244,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", "12345");
 		page.submit();
 		
-		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
+		assertThat(page.getFieldError("activationKey"))
+			.isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
 	}
 	
 	@Test
@@ -251,7 +253,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillField("activationKey", "1234567890123");
 		page.submit();
 		
-		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
+		assertThat(page.getFieldError("activationKey"))
+			.isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
 	}
 	
 	@Test

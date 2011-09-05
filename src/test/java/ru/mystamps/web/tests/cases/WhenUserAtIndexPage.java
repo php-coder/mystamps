@@ -50,7 +50,12 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	
 	@Test
 	public void shouldExistsLinkForPasswordRecovery() {
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_recover_forget_password"), RESTORE_PASSWORD_PAGE_URL))
+		assertThat(
+				page.linkHasLabelAndPointsTo(
+					tr("t_recover_forget_password"),
+					RESTORE_PASSWORD_PAGE_URL
+				)
+			)
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}

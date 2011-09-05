@@ -107,7 +107,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.fillField("password", "123");
 		page.submit();
 		
-		assertThat(page.getFieldError("password")).isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
+		assertThat(page.getFieldError("password"))
+			.isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
 	@Test
