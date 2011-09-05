@@ -24,7 +24,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Form {
+public final class Form {
 	private static final String              FORM_LOCATOR = "//form";
 	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
 	private static final String    PASSWORD_FIELD_LOCATOR = "//input[@name=\"%s\"][@type=\"password\"]";
