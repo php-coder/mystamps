@@ -47,7 +47,12 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("registerAccountForm");
 	}
 	
-	public void fillEmail(final String email) {
+	public void registerUser(final String email) {
+		fillEmail(email);
+		submit();
+	}
+	
+	private void fillEmail(final String email) {
 		fillField("email", email);
 	}
 	
