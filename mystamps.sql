@@ -7,11 +7,7 @@ USE mystamps;
 ----
 CREATE TABLE `users` (
 	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
-	
-	-- see LOGIN_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`login` VARCHAR(15) NOT NULL,
-	
-	-- see NAME_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`name` VARCHAR(100) NOT NULL,
 	
 	-- see email field at users_activation
@@ -39,9 +35,7 @@ CREATE TABLE `users_activation` (
 	-- ru.mystamps.web.service.UserService.generateActivationKey()
 	`act_key` VARCHAR(10) NOT NULL,
 	
-	-- see EMAIL_MAX_LENGTH in ru.mystamps.web.validation.ValidationRules
 	`email` VARCHAR(255) NOT NULL,
-	
 	`created_at` DATETIME NOT NULL,
 	
 	PRIMARY KEY(`act_key`)

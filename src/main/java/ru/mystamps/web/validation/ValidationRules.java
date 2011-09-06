@@ -18,22 +18,25 @@
 
 package ru.mystamps.web.validation;
 
+import ru.mystamps.web.entity.User;
+import ru.mystamps.web.entity.UsersActivation;
+
 public final class ValidationRules {
 	
 	public static final Integer LOGIN_MIN_LENGTH = 2;
-	public static final Integer LOGIN_MAX_LENGTH = 15;
+	public static final Integer LOGIN_MAX_LENGTH = User.LOGIN_LENGTH;
 	public static final String LOGIN_REGEXP = "[-_a-zA-Z0-9]+";
 	
-	public static final Integer NAME_MAX_LENGTH = 100;
+	public static final Integer NAME_MAX_LENGTH = User.NAME_LENGTH;
 	public static final String NAME_REGEXP1 = "[- \\p{L}]+";
 	public static final String NAME_REGEXP2 = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final Integer PASSWORD_MIN_LENGTH = 4;
 	public static final String PASSWORD_REGEXP = "[-_a-zA-Z0-9]+";
 	
-	public static final Integer EMAIL_MAX_LENGTH = 255;
+	public static final Integer EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;
 	
-	public static final Integer ACT_KEY_LENGTH = 10;
+	public static final Integer ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
 	
 	private ValidationRules() {
