@@ -33,6 +33,7 @@ import lombok.Setter;
 public class UsersActivation {
 	
 	public static final int ACTIVATION_KEY_LENGTH = 10;
+	public static final int EMAIL_LENGTH = 255;
 	
 	@Getter
 	@Setter
@@ -42,7 +43,7 @@ public class UsersActivation {
 	
 	@Getter
 	@Setter
-	@Column(nullable = false)
+	@Column(length = EMAIL_LENGTH, nullable = false)
 	private String email;
 	
 	@Getter

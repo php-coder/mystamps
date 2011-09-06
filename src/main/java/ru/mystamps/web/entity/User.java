@@ -56,7 +56,7 @@ public class User {
 	
 	@Getter
 	@Setter
-	@Column(nullable = false)
+	@Column(length = UsersActivation.EMAIL_LENGTH, nullable = false)
 	private String email;
 	
 	@Getter
