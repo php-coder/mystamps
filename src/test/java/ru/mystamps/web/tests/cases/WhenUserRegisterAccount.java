@@ -67,7 +67,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	
 	@Test
 	public void emailShouldNotBeTooLong() {
-		page.fillField("email", StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
+		page.fillEmail(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		page.submit();
 		
 		assertThat(page.getFieldError("email")).isEqualTo(tr("value.too-long", EMAIL_MAX_LENGTH));
@@ -81,7 +81,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		};
 		
 		for (final String invalidEmail : emails) {
-			page.fillField("email", invalidEmail);
+			page.fillEmail(invalidEmail);
 			page.submit();
 			
 			assertThat(page.getFieldError("email")).isEqualTo(tr("email.invalid"));
@@ -90,7 +90,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	
 	@Test
 	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.fillField("email", " test ");
+		page.fillEmail(" test ");
 		page.submit();
 		
 		assertThat(page.getFieldValue("email")).isEqualTo("test");
@@ -98,7 +98,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	
 	@Test
 	public void successfulMessageShouldBeShownAfterRegistration() {
-		page.fillField("email", "coder@rock.home");
+		page.fillEmail("coder@rock.home");
 		page.submit();
 		
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_REGISTRATION_PAGE_URL);
