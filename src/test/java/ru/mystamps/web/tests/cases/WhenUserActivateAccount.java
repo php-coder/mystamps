@@ -241,7 +241,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void activationKeyShouldNotBeTooShort() {
-		page.fillField("activationKey", "12345");
+		page.fillActivationKey("12345");
 		page.submit();
 		
 		assertThat(page.getFieldError("activationKey"))
@@ -250,7 +250,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void activationKeyShouldNotBeTooLong() {
-		page.fillField("activationKey", "1234567890123");
+		page.fillActivationKey("1234567890123");
 		page.submit();
 		
 		assertThat(page.getFieldError("activationKey"))
@@ -259,7 +259,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void activationKeyWithForbiddenCharactersShouldBeRejected() {
-		page.fillField("activationKey", "A123=+TEST");
+		page.fillActivationKey("A123=+TEST");
 		page.submit();
 		
 		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.invalid"));
@@ -267,7 +267,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void wrongActivationKeyShouldBeRejected() {
-		page.fillField("activationKey", StringUtils.repeat("1", ACT_KEY_LENGTH));
+		page.fillActivationKey(StringUtils.repeat("1", ACT_KEY_LENGTH));
 		page.submit();
 		
 		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.not-exists"));
@@ -279,7 +279,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillName("Test Suite");
 		page.fillPassword("test-password");
 		page.fillField("passwordConfirm", "test-password");
-		page.fillField("activationKey", notActivatedUserActKey);
+		page.fillActivationKey(notActivatedUserActKey);
 		page.submit();
 		
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
