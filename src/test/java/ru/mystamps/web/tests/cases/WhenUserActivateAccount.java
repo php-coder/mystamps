@@ -78,82 +78,70 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginAndPasswordShouldBeDifferent() {
-		page.fillLogin("admin");
-		page.fillPassword("admin");
-		page.submit();
+		page.activateAccount("admin", null, "admin", null, null);
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.login.match"));
 	}
 	
 	@Test
 	public void passwordAndConfirmationShouldMatch() {
-		page.fillPassword("password123");
-		page.fillPasswordConfirmation("password321");
-		page.submit();
+		page.activateAccount(null, null, "password123", "password321", null);
 		
 		assertThat(page.getFieldError("passwordConfirm")).isEqualTo(tr("password.mismatch"));
 	}
 	
 	@Test
 	public void loginShouldNotBeTooShort() {
-		page.fillLogin("a");
-		page.submit();
+		page.activateAccount("a", null, null, null, null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
 	@Test
 	public void mostShortLoginShouldBeAccepted() {
-		page.fillLogin("ab");
-		page.submit();
+		page.activateAccount("ab", null, null, null, null);
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
 	public void loginShouldNotBeTooLong() {
-		page.fillLogin("abcde12345fghkl6");
-		page.submit();
+		page.activateAccount("abcde12345fghkl6", null, null, null, null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test
 	public void mostLongLoginShouldBeAccepted() {
-		page.fillLogin("abcde1234567890");
-		page.submit();
+		page.activateAccount("abcde1234567890", null, null, null, null);
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
 	public void loginWithAllowedCharactersShouldBeAccepted() {
-		page.fillLogin("t3s7-T_E_S_T");
-		page.submit();
+		page.activateAccount("t3s7-T_E_S_T", null, null, null, null);
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
 	}
 	
 	@Test
 	public void loginWithForbiddenCharactersShouldBeRejected() {
-		page.fillLogin("'t@$t'");
-		page.submit();
+		page.activateAccount("'t@$t'", null, null, null, null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
 	}
 	
 	@Test
 	public void loginShouldBeUnique() {
-		page.fillLogin(validUserLogin);
-		page.submit();
+		page.activateAccount(validUserLogin, null, null, null, null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.exists"));
 	}
 	
 	@Test
 	public void nameShouldNotBeTooLong() {
-		page.fillName(StringUtils.repeat("0", NAME_MAX_LENGTH + 1));
-		page.submit();
+		page.activateAccount(null, StringUtils.repeat("0", NAME_MAX_LENGTH + 1), null, null, null);
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("value.too-long", NAME_MAX_LENGTH));
 	}
@@ -167,8 +155,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		};
 		
 		for (final String name : names) {
-			page.fillName(name);
-			page.submit();
+			page.activateAccount(null, name, null, null, null);
 			
 			assertThat(page.isFieldHasError("name")).isFalse();
 		}
@@ -176,40 +163,35 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameWithForbiddenCharactersShouldBeRejected() {
-		page.fillName("M@st3r_");
-		page.submit();
+		page.activateAccount(null, "M@st3r_", null, null, null);
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.invalid"));
 	}
 	
 	@Test
 	public void nameShouldNotStartsFromHyphen() {
-		page.fillName("-test");
-		page.submit();
+		page.activateAccount(null, "-test", null, null, null);
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
 	}
 	
 	@Test
 	public void nameShouldNotEndsWithHyphen() {
-		page.fillName("test-");
-		page.submit();
+		page.activateAccount(null, "test-", null, null, null);
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
 	}
 	
 	@Test
 	public void nameShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.fillName(" test ");
-		page.submit();
+		page.activateAccount(null, " test ", null, null, null);
 		
 		assertThat(page.getFieldValue("name")).isEqualTo("test");
 	}
 	
 	@Test
 	public void passwordShouldNotBeTooShort() {
-		page.fillPassword("123");
-		page.submit();
+		page.activateAccount(null, null, "123", null, null);
 		
 		assertThat(page.getFieldError("password"))
 			.isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
@@ -217,32 +199,28 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void mostShortPasswordShouldBeAccepted() {
-		page.fillPassword("1234");
-		page.submit();
+		page.activateAccount(null, null, "1234", null, null);
 		
 		assertThat(page.isFieldHasError("password")).isFalse();
 	}
 	
 	@Test
 	public void passwordWithAllowedCharactersShouldBeAccepted() {
-		page.fillPassword("t3s7-T_E_S_T");
-		page.submit();
+		page.activateAccount(null, null, "t3s7-T_E_S_T", null, null);
 		
 		assertThat(page.isFieldHasError("password")).isFalse();
 	}
 	
 	@Test
 	public void passwordWithForbiddenCharactersShouldBeRejected() {
-		page.fillPassword("'t@$t'");
-		page.submit();
+		page.activateAccount(null, null, "'t@$t'", null, null);
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
 	}
 	
 	@Test
 	public void activationKeyShouldNotBeTooShort() {
-		page.fillActivationKey("12345");
-		page.submit();
+		page.activateAccount(null, null, null, null, "12345");
 		
 		assertThat(page.getFieldError("activationKey"))
 			.isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
@@ -250,8 +228,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void activationKeyShouldNotBeTooLong() {
-		page.fillActivationKey("1234567890123");
-		page.submit();
+		page.activateAccount(null, null, null, null, "1234567890123");
 		
 		assertThat(page.getFieldError("activationKey"))
 			.isEqualTo(tr("value.invalid-length", ACT_KEY_LENGTH));
@@ -259,28 +236,27 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void activationKeyWithForbiddenCharactersShouldBeRejected() {
-		page.fillActivationKey("A123=+TEST");
-		page.submit();
+		page.activateAccount(null, null, null, null, "A123=+TEST");
 		
 		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.invalid"));
 	}
 	
 	@Test
 	public void wrongActivationKeyShouldBeRejected() {
-		page.fillActivationKey(StringUtils.repeat("1", ACT_KEY_LENGTH));
-		page.submit();
+		page.activateAccount(null, null, null, null, StringUtils.repeat("1", ACT_KEY_LENGTH));
 		
 		assertThat(page.getFieldError("activationKey")).isEqualTo(tr("key.not-exists"));
 	}
 	
 	@Test
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
-		page.fillLogin("test-login");
-		page.fillName("Test Suite");
-		page.fillPassword("test-password");
-		page.fillPasswordConfirmation("test-password");
-		page.fillActivationKey(notActivatedUserActKey);
-		page.submit();
+		page.activateAccount(
+			"test-login",
+			"Test Suite",
+			"test-password",
+			"test-password",
+			notActivatedUserActKey
+		);
 		
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
 		

@@ -66,24 +66,60 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		);
 	}
 	
-	public void fillLogin(final String login) {
-		fillField("login", login);
+	public void activateAccount(
+			final String login,
+			final String name,
+			final String password,
+			final String passwordConfirmation,
+			final String activationKey) {
+		
+		if (login == null
+			&& name == null
+			&& password == null
+			&& passwordConfirmation == null
+			&& activationKey == null) {
+			
+			throw new IllegalStateException(
+				"Login, name, password with confirmation and activation key should not be null"
+			);
+		}
+		
+		fillLogin(login);
+		fillName(name);
+		fillPassword(password);
+		fillPasswordConfirmation(passwordConfirmation);
+		fillActivationKey(activationKey);
+		submit();
 	}
 	
-	public void fillName(final String name) {
-		fillField("name", name);
+	private void fillLogin(final String login) {
+		if (login != null) {
+			fillField("login", login);
+		}
 	}
 	
-	public void fillPassword(final String password) {
-		fillField("password", password);
+	private void fillName(final String name) {
+		if (name != null) {
+			fillField("name", name);
+		}
 	}
 	
-	public void fillPasswordConfirmation(final String passwordConfirmation) {
-		fillField("passwordConfirm", passwordConfirmation);
+	private void fillPassword(final String password) {
+		if (password != null) {
+			fillField("password", password);
+		}
 	}
 	
-	public void fillActivationKey(final String activationKey) {
-		fillField("activationKey", activationKey);
+	private void fillPasswordConfirmation(final String passwordConfirmation) {
+		if (passwordConfirmation != null) {
+			fillField("passwordConfirm", passwordConfirmation);
+		}
+	}
+	
+	private void fillActivationKey(final String activationKey) {
+		if (activationKey != null) {
+			fillField("activationKey", activationKey);
+		}
 	}
 	
 }
