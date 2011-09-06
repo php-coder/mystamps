@@ -56,4 +56,8 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("authAccountForm");
 	}
 	
+	public void fillLogin(final String login) {
+		fillField("login", login);
+	}
+	
 }

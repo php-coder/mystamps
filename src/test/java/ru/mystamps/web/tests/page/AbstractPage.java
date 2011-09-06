@@ -243,7 +243,7 @@ public abstract class AbstractPage {
 		// TODO: check than we already authenticated and do nothing
 		final AuthAccountPage authPage = new AuthAccountPage(driver);
 		authPage.open();
-		authPage.fillField("login", login);
+		authPage.fillLogin(login);
 		authPage.fillField("password", password);
 		authPage.submit();
 		
