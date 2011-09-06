@@ -78,7 +78,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginAndPasswordShouldBeDifferent() {
-		page.fillField("login", "admin");
+		page.fillLogin("admin");
 		page.fillField("password", "admin");
 		page.submit();
 		
@@ -96,7 +96,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldNotBeTooShort() {
-		page.fillField("login", "a");
+		page.fillLogin("a");
 		page.submit();
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
@@ -104,7 +104,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void mostShortLoginShouldBeAccepted() {
-		page.fillField("login", "ab");
+		page.fillLogin("ab");
 		page.submit();
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
@@ -112,7 +112,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldNotBeTooLong() {
-		page.fillField("login", "abcde12345fghkl6");
+		page.fillLogin("abcde12345fghkl6");
 		page.submit();
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
@@ -120,7 +120,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void mostLongLoginShouldBeAccepted() {
-		page.fillField("login", "abcde1234567890");
+		page.fillLogin("abcde1234567890");
 		page.submit();
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
@@ -128,7 +128,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginWithAllowedCharactersShouldBeAccepted() {
-		page.fillField("login", "t3s7-T_E_S_T");
+		page.fillLogin("t3s7-T_E_S_T");
 		page.submit();
 		
 		assertThat(page.isFieldHasError("login")).isFalse();
@@ -136,7 +136,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginWithForbiddenCharactersShouldBeRejected() {
-		page.fillField("login", "'t@$t'");
+		page.fillLogin("'t@$t'");
 		page.submit();
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
@@ -144,7 +144,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void loginShouldBeUnique() {
-		page.fillField("login", validUserLogin);
+		page.fillLogin(validUserLogin);
 		page.submit();
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.exists"));
@@ -275,7 +275,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
-		page.fillField("login", "test-login");
+		page.fillLogin("test-login");
 		page.fillField("name", "Test Suite");
 		page.fillField("password", "test-password");
 		page.fillField("passwordConfirm", "test-password");
