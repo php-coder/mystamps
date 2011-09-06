@@ -244,7 +244,7 @@ public abstract class AbstractPage {
 		final AuthAccountPage authPage = new AuthAccountPage(driver);
 		authPage.open();
 		authPage.fillLogin(login);
-		authPage.fillField("password", password);
+		authPage.fillPassword(password);
 		authPage.submit();
 		
 		// return to current page

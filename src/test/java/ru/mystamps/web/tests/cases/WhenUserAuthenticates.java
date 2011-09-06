@@ -104,7 +104,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void passwordShouldNotBeTooShort() {
-		page.fillField("password", "123");
+		page.fillPassword("123");
 		page.submit();
 		
 		assertThat(page.getFieldError("password"))
@@ -113,7 +113,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void passwordWithForbiddenCharacterShouldBeRejected() {
-		page.fillField("password", "'t@$t'");
+		page.fillPassword("'t@$t'");
 		page.submit();
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
@@ -122,7 +122,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	@Test
 	public void invalidCredentialsShouldBeRejected() {
 		page.fillLogin(invalidUserLogin);
-		page.fillField("password", invalidUserPassword);
+		page.fillPassword(invalidUserPassword);
 		page.submit();
 		
 		assertThat(page.getFormError()).isEqualTo(tr("login.password.invalid"));
@@ -131,7 +131,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	@Test
 	public void validCredentialsShouldAuthenticateUserOnSite() {
 		page.fillLogin(validUserLogin);
-		page.fillField("password", validUserPassword);
+		page.fillPassword(validUserPassword);
 		page.submit();
 		
 		assertThat(page.getCurrentUrl())
