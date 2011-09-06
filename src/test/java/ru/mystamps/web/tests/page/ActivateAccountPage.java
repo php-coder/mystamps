@@ -70,6 +70,10 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		fillField("login", login);
 	}
 	
+	public void fillName(final String name) {
+		fillField("name", name);
+	}
+	
 	public void fillPassword(final String password) {
 		fillField("password", password);
 	}

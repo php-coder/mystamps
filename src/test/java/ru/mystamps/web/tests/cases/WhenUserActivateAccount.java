@@ -152,7 +152,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameShouldNotBeTooLong() {
-		page.fillField("name", StringUtils.repeat("0", NAME_MAX_LENGTH + 1));
+		page.fillName(StringUtils.repeat("0", NAME_MAX_LENGTH + 1));
 		page.submit();
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("value.too-long", NAME_MAX_LENGTH));
@@ -167,7 +167,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		};
 		
 		for (final String name : names) {
-			page.fillField("name", name);
+			page.fillName(name);
 			page.submit();
 			
 			assertThat(page.isFieldHasError("name")).isFalse();
@@ -176,7 +176,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameWithForbiddenCharactersShouldBeRejected() {
-		page.fillField("name", "M@st3r_");
+		page.fillName("M@st3r_");
 		page.submit();
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.invalid"));
@@ -184,7 +184,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameShouldNotStartsFromHyphen() {
-		page.fillField("name", "-test");
+		page.fillName("-test");
 		page.submit();
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
@@ -192,7 +192,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameShouldNotEndsWithHyphen() {
-		page.fillField("name", "test-");
+		page.fillName("test-");
 		page.submit();
 		
 		assertThat(page.getFieldError("name")).isEqualTo(tr("name.hyphen"));
@@ -200,7 +200,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void nameShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.fillField("name", " test ");
+		page.fillName(" test ");
 		page.submit();
 		
 		assertThat(page.getFieldValue("name")).isEqualTo("test");
@@ -276,7 +276,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
 		page.fillLogin("test-login");
-		page.fillField("name", "Test Suite");
+		page.fillName("Test Suite");
 		page.fillPassword("test-password");
 		page.fillField("passwordConfirm", "test-password");
 		page.fillField("activationKey", notActivatedUserActKey);
