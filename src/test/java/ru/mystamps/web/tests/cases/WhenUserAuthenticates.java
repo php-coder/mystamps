@@ -80,32 +80,28 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void loginShouldNotBeTooShort() {
-		page.fillLogin("a");
-		page.submit();
+		page.authorizeUser("a", null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
 	@Test
 	public void loginShouldNotBeTooLong() {
-		page.fillLogin("abcde12345fghkl6");
-		page.submit();
+		page.authorizeUser("abcde12345fghkl6", null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test
 	public void loginWithForbiddenCharactersShouldBeRejected() {
-		page.fillLogin("'t@$t'");
-		page.submit();
+		page.authorizeUser("'t@$t'", null);
 		
 		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
 	}
 	
 	@Test
 	public void passwordShouldNotBeTooShort() {
-		page.fillPassword("123");
-		page.submit();
+		page.authorizeUser(null, "123");
 		
 		assertThat(page.getFieldError("password"))
 			.isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
@@ -113,26 +109,21 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	
 	@Test
 	public void passwordWithForbiddenCharacterShouldBeRejected() {
-		page.fillPassword("'t@$t'");
-		page.submit();
+		page.authorizeUser(null, "'t@$t'");
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
 	}
 	
 	@Test
 	public void invalidCredentialsShouldBeRejected() {
-		page.fillLogin(invalidUserLogin);
-		page.fillPassword(invalidUserPassword);
-		page.submit();
+		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
 		assertThat(page.getFormError()).isEqualTo(tr("login.password.invalid"));
 	}
 	
 	@Test
 	public void validCredentialsShouldAuthenticateUserOnSite() {
-		page.fillLogin(validUserLogin);
-		page.fillPassword(validUserPassword);
-		page.submit();
+		page.authorizeUser(validUserLogin, validUserPassword);
 		
 		assertThat(page.getCurrentUrl())
 			.overridingErrorMessage("after login we should be redirected to main page")

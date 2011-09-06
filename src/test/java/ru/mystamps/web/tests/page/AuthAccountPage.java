@@ -56,12 +56,27 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("authAccountForm");
 	}
 	
-	public void fillLogin(final String login) {
-		fillField("login", login);
+	public void authorizeUser(final String login, final String password) {
+		if (login == null && password == null) {
+			throw new IllegalStateException("Login and password should not be a null");
+		}
+		
+		fillLogin(login);
+		fillPassword(password);
+		
+		submit();
 	}
 	
-	public void fillPassword(final String password) {
-		fillField("password", password);
+	private void fillLogin(final String login) {
+		if (login != null) {
+			fillField("login", login);
+		}
+	}
+	
+	private void fillPassword(final String password) {
+		if (password != null) {
+			fillField("password", password);
+		}
 	}
 	
 }
