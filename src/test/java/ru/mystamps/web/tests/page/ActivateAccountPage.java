@@ -78,6 +78,10 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		fillField("password", password);
 	}
 	
+	public void fillPasswordConfirmation(final String passwordConfirmation) {
+		fillField("passwordConfirm", passwordConfirmation);
+	}
+	
 	public void fillActivationKey(final String activationKey) {
 		fillField("activationKey", activationKey);
 	}

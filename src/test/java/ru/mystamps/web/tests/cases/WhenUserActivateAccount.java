@@ -88,7 +88,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test
 	public void passwordAndConfirmationShouldMatch() {
 		page.fillPassword("password123");
-		page.fillField("passwordConfirm", "password321");
+		page.fillPasswordConfirmation("password321");
 		page.submit();
 		
 		assertThat(page.getFieldError("passwordConfirm")).isEqualTo(tr("password.mismatch"));
@@ -278,7 +278,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.fillLogin("test-login");
 		page.fillName("Test Suite");
 		page.fillPassword("test-password");
-		page.fillField("passwordConfirm", "test-password");
+		page.fillPasswordConfirmation("test-password");
 		page.fillActivationKey(notActivatedUserActKey);
 		page.submit();
 		
