@@ -79,7 +79,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test
 	public void loginAndPasswordShouldBeDifferent() {
 		page.fillLogin("admin");
-		page.fillField("password", "admin");
+		page.fillPassword("admin");
 		page.submit();
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.login.match"));
@@ -87,7 +87,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void passwordAndConfirmationShouldMatch() {
-		page.fillField("password", "password123");
+		page.fillPassword("password123");
 		page.fillField("passwordConfirm", "password321");
 		page.submit();
 		
@@ -208,7 +208,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void passwordShouldNotBeTooShort() {
-		page.fillField("password", "123");
+		page.fillPassword("123");
 		page.submit();
 		
 		assertThat(page.getFieldError("password"))
@@ -217,7 +217,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void mostShortPasswordShouldBeAccepted() {
-		page.fillField("password", "1234");
+		page.fillPassword("1234");
 		page.submit();
 		
 		assertThat(page.isFieldHasError("password")).isFalse();
@@ -225,7 +225,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void passwordWithAllowedCharactersShouldBeAccepted() {
-		page.fillField("password", "t3s7-T_E_S_T");
+		page.fillPassword("t3s7-T_E_S_T");
 		page.submit();
 		
 		assertThat(page.isFieldHasError("password")).isFalse();
@@ -233,7 +233,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	
 	@Test
 	public void passwordWithForbiddenCharactersShouldBeRejected() {
-		page.fillField("password", "'t@$t'");
+		page.fillPassword("'t@$t'");
 		page.submit();
 		
 		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
@@ -277,7 +277,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
 		page.fillLogin("test-login");
 		page.fillField("name", "Test Suite");
-		page.fillField("password", "test-password");
+		page.fillPassword("test-password");
 		page.fillField("passwordConfirm", "test-password");
 		page.fillField("activationKey", notActivatedUserActKey);
 		page.submit();
