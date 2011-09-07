@@ -108,7 +108,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void mostShortLoginShouldBeAccepted() {
 		page.activateAccount("ab", null, null, null, null);
 		
-		assertThat(page.isFieldHasError("login")).isFalse();
+		assertThat(page).field("login").hasNoError();
 	}
 	
 	@Test
@@ -124,14 +124,14 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void mostLongLoginShouldBeAccepted() {
 		page.activateAccount("abcde1234567890", null, null, null, null);
 		
-		assertThat(page.isFieldHasError("login")).isFalse();
+		assertThat(page).field("login").hasNoError();
 	}
 	
 	@Test
 	public void loginWithAllowedCharactersShouldBeAccepted() {
 		page.activateAccount("t3s7-T_E_S_T", null, null, null, null);
 		
-		assertThat(page.isFieldHasError("login")).isFalse();
+		assertThat(page).field("login").hasNoError();
 	}
 	
 	@Test
@@ -172,7 +172,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		for (final String name : names) {
 			page.activateAccount(null, name, null, null, null);
 			
-			assertThat(page.isFieldHasError("name")).isFalse();
+			assertThat(page).field("name").hasNoError();
 		}
 	}
 	
@@ -223,14 +223,14 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void mostShortPasswordShouldBeAccepted() {
 		page.activateAccount(null, null, "1234", null, null);
 		
-		assertThat(page.isFieldHasError("password")).isFalse();
+		assertThat(page).field("password").hasNoError();
 	}
 	
 	@Test
 	public void passwordWithAllowedCharactersShouldBeAccepted() {
 		page.activateAccount(null, null, "t3s7-T_E_S_T", null, null);
 		
-		assertThat(page.isFieldHasError("password")).isFalse();
+		assertThat(page).field("password").hasNoError();
 	}
 	
 	@Test
