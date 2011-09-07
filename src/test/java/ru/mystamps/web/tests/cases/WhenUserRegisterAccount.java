@@ -25,6 +25,7 @@ import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
 import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
+import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 import org.apache.commons.lang.StringUtils;
@@ -69,7 +70,9 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void emailShouldNotBeTooLong() {
 		page.registerUser(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		
-		assertThat(page.getFieldError("email")).isEqualTo(tr("value.too-long", EMAIL_MAX_LENGTH));
+		assertThat(page)
+			.field("email")
+			.hasError(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
 	@Test
@@ -82,7 +85,9 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		for (final String invalidEmail : emails) {
 			page.registerUser(invalidEmail);
 			
-			assertThat(page.getFieldError("email")).isEqualTo(tr("email.invalid"));
+			assertThat(page)
+				.field("email")
+				.hasError(tr("email.invalid"));
 		}
 	}
 	

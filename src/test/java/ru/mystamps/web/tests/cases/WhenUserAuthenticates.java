@@ -33,6 +33,7 @@ import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
 import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
+import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
@@ -82,36 +83,45 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	public void loginShouldNotBeTooShort() {
 		page.authorizeUser("a", null);
 		
-		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-short", LOGIN_MIN_LENGTH));
+		assertThat(page)
+			.field("login")
+			.hasError(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
 	@Test
 	public void loginShouldNotBeTooLong() {
 		page.authorizeUser("abcde12345fghkl6", null);
 		
-		assertThat(page.getFieldError("login")).isEqualTo(tr("value.too-long", LOGIN_MAX_LENGTH));
+		assertThat(page)
+			.field("login")
+			.hasError(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test
 	public void loginWithForbiddenCharactersShouldBeRejected() {
 		page.authorizeUser("'t@$t'", null);
 		
-		assertThat(page.getFieldError("login")).isEqualTo(tr("login.invalid"));
+		assertThat(page)
+			.field("login")
+			.hasError(tr("login.invalid"));
 	}
 	
 	@Test
 	public void passwordShouldNotBeTooShort() {
 		page.authorizeUser(null, "123");
 		
-		assertThat(page.getFieldError("password"))
-			.isEqualTo(tr("value.too-short", PASSWORD_MIN_LENGTH));
+		assertThat(page)
+			.field("password")
+			.hasError(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
 	@Test
 	public void passwordWithForbiddenCharacterShouldBeRejected() {
 		page.authorizeUser(null, "'t@$t'");
 		
-		assertThat(page.getFieldError("password")).isEqualTo(tr("password.invalid"));
+		assertThat(page)
+			.field("password")
+			.hasError(tr("password.invalid"));
 	}
 	
 	@Test
