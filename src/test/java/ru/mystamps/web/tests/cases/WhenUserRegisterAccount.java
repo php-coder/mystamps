@@ -95,7 +95,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.registerUser(" test ");
 		
-		assertThat(page.getFieldValue("email")).isEqualTo("test");
+		assertThat(page).field("email").hasValue("test");
 	}
 	
 	@Test

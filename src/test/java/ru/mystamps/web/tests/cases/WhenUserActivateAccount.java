@@ -72,7 +72,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		final String url = ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL.replace("{key}", key);
 		
 		page.open(url);
-		assertThat(page.getFieldValue("activationKey")).isEqualTo(key);
+		assertThat(page).field("activationKey").hasValue(key);
 		
 		page.open();
 	}
@@ -207,7 +207,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	public void nameShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.activateAccount(null, " test ", null, null, null);
 		
-		assertThat(page.getFieldValue("name")).isEqualTo("test");
+		assertThat(page).field("name").hasValue("test");
 	}
 	
 	@Test

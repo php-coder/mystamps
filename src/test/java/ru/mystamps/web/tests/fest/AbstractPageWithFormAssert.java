@@ -82,6 +82,26 @@ public final class AbstractPageWithFormAssert
 		return this;
 	}
 	
+	public AbstractPageWithFormAssert hasValue(final String expectedValue) {
+		isNotNull();
+		checkThatFieldNameNotNull();
+		
+		final String value = actual.getFieldValue(fieldName);
+		
+		final String msg = String.format(
+			"Expected value of field '%s' is '%s' but was '%s'",
+			fieldName,
+			expectedValue,
+			value
+		);
+		
+		Assertions.assertThat(value)
+			.overridingErrorMessage(msg)
+			.isEqualTo(expectedValue);
+		
+		return this;
+	}
+	
 	private void checkThatFieldNameNotNull() {
 		if (fieldName == null) {
 			throw new IllegalArgumentException("Error in test case: field name not specified");
