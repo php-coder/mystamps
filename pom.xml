@@ -313,7 +313,7 @@
 						<id>start-jetty</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>run-war</goal>
 						</goals>
 						<configuration>
 							<daemon>true</daemon>
@@ -370,7 +370,7 @@
 				<executions>
 					<execution>
 						<id>run-checkstyle</id>
-						<phase>package</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
