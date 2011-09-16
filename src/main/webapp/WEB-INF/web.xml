@@ -5,6 +5,15 @@
 		http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	
+	<!--
+		Specifies the default mode of this application, to be activated if no
+		other profile (or mode) is specified
+	-->
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>

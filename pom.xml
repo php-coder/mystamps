@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<spring.version>3.0.6.RELEASE</spring.version>
+		<spring.version>3.1.0.M2</spring.version>
 		<hibernate.version>3.6.7.Final</hibernate.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
@@ -18,6 +18,13 @@
 		
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
+		
+		<!--
+			 Stick to Jetty7 because we not ready for servlet
+			 API 3.0. See for details:
+			 http://stackoverflow.com/q/2151075#3172395
+		-->
+		<jetty.plugin.version>7.3.1.v20110307</jetty.plugin.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -288,12 +295,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<!--
-					 Stick to Jetty7 because we not ready for servlet
-					 API 3.0. See for details:
-					 http://stackoverflow.com/q/2151075#3172395
-				-->
-				<version>7.3.1.v20110307</version>
+				<version>${jetty.plugin.version}</version>
 				<configuration>
 					<connectors>
 						<connector
@@ -429,6 +431,21 @@
 			</snapshots>
 		</repository>
 		
+		<repository>
+			<id>Spring Framework Milestone Repository</id>
+			<url>http://maven.springframework.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+		
 	</repositories>
 	
 	<pluginRepositories>
@@ -483,6 +500,7 @@
 			</dependencies>
 			<build>
 				<plugins>
+					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
 						<version>2.5</version>
@@ -506,6 +524,21 @@
 							</execution>
 						</executions>
 					</plugin>
+					
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>${jetty.plugin.version}</version>
+						<configuration>
+							<systemProperties>
+								<systemProperty>
+									<name>spring.profiles.active</name>
+									<value>dev</value>
+								</systemProperty>
+							</systemProperties>
+						</configuration>
+					</plugin>
+					
 				</plugins>
 			</build>
 		</profile>
@@ -646,6 +679,20 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>${jetty.plugin.version}</version>
+						<configuration>
+							<systemProperties>
+								<systemProperty>
+									<name>spring.profiles.active</name>
+									<value>test</value>
+								</systemProperty>
+							</systemProperties>
+						</configuration>
 					</plugin>
 					
 				</plugins>
