@@ -636,7 +636,7 @@
 								<component>
 									<name>hbm2ddl</name>
 									<implementation>jpaconfiguration</implementation>
-									<outputDirectory>target/classes</outputDirectory>
+									<outputDirectory>${env.dir}/test</outputDirectory>
 								</component>
 							</components>
 							<componentProperties>
@@ -676,15 +676,6 @@
 								<version>1.0.0.GA</version>
 							</dependency>
 						</dependencies>
-						<executions>
-							<execution>
-								<id>generate-hsql-scheme</id>
-								<phase>prepare-package</phase>
-								<goals>
-									<goal>hbm2ddl</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 					
 					<plugin>
