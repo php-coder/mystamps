@@ -25,6 +25,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import lombok.Getter;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import ru.mystamps.web.tests.WebElementUtils;
 import ru.mystamps.web.tests.page.element.Form;
 import ru.mystamps.web.tests.page.element.Form.Field;
@@ -60,18 +62,18 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public void submit() {
-		if (form == null) {
-			throw new IllegalStateException(
-				"You are trying to submit form at page which does not have form"
-			);
-		}
+		
+		checkState(
+			form != null,
+			"You are trying to submit form at page which does not have form"
+		);
 		
 		final List<SubmitButton> buttons = form.getSubmitButtons();
-		if (buttons.isEmpty()) {
-			throw new IllegalStateException(
-				"You are trying to submit form at page which does not have submit button"
-			);
-		}
+		
+		checkState(
+			!buttons.isEmpty(),
+			"You are trying to submit form at page which does not have submit button"
+		);
 		
 		final String xpathOfFirstSubmitButton = buttons.get(0).toString();
 		
@@ -79,11 +81,10 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public boolean formExists() {
-		if (form == null) {
-			throw new IllegalStateException(
-				"You are trying to check form at page which does not has form"
-			);
-		}
+		checkState(
+			form != null,
+			"You are trying to check form at page which does not has form"
+		);
 		
 		return elementWithXPathExists(form.toString());
 	}
@@ -97,11 +98,10 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public String getFieldValue(final String name) {
-		if (form == null) {
-			throw new IllegalStateException(
-				"You are trying to find field at page which does not have form"
-			);
-		}
+		checkState(
+			form != null,
+			"You are trying to find field at page which does not have form"
+		);
 		
 		final String xpathField = form.getField(name).toString();
 		

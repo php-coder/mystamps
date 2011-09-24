@@ -20,6 +20,8 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -57,9 +59,10 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	}
 	
 	public void authorizeUser(final String login, final String password) {
-		if (login == null && password == null) {
-			throw new IllegalStateException("Login and password should not be a null");
-		}
+		checkState(
+			!(login == null && password == null),
+			"Login and password should not be a null"
+		);
 		
 		fillLogin(login);
 		fillPassword(password);

@@ -27,6 +27,8 @@ import ru.mystamps.web.tests.page.AbstractPage;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -93,12 +95,11 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	}
 	
 	private void shouldHaveTitle() {
-		if (title == null) {
-			throw new IllegalStateException(
-				"Page title was not set!"
-				+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
-			);
-		}
+		checkState(
+			title != null,
+			"Page title was not set!"
+			+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
+		);
 		
 		assertThat(page.getTitle())
 			.overridingErrorMessage("title should be '" + title + "'")

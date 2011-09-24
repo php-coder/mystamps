@@ -21,6 +21,8 @@ package ru.mystamps.web.tests.fest;
 import org.fest.assertions.GenericAssert;
 import org.fest.assertions.Assertions;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 
 /**
@@ -48,7 +50,7 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasError(final String expectedErrorMessage) {
 		isNotNull();
-		checkThatFieldNameNotNull();
+		checkState(fieldName != null, "Error in test case: field name should be specified");
 		
 		final String errorMessage = actual.getFieldError(fieldName);
 		
@@ -68,7 +70,7 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasNoError() {
 		isNotNull();
-		checkThatFieldNameNotNull();
+		checkState(fieldName != null, "Error in test case: field name should be specified");
 		
 		final String msg = String.format(
 			"Expected that field '%s' should not have any error",
@@ -84,7 +86,7 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasValue(final String expectedValue) {
 		isNotNull();
-		checkThatFieldNameNotNull();
+		checkState(fieldName != null, "Error in test case: field name should be specified");
 		
 		final String value = actual.getFieldValue(fieldName);
 		
@@ -100,12 +102,6 @@ public final class AbstractPageWithFormAssert
 			.isEqualTo(expectedValue);
 		
 		return this;
-	}
-	
-	private void checkThatFieldNameNotNull() {
-		if (fieldName == null) {
-			throw new IllegalArgumentException("Error in test case: field name not specified");
-		}
 	}
 	
 }

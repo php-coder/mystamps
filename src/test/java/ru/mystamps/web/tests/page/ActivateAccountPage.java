@@ -20,6 +20,8 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -73,16 +75,17 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 			final String passwordConfirmation,
 			final String activationKey) {
 		
-		if (login == null
+		final boolean allFieldsAreNull =
+			login == null
 			&& name == null
 			&& password == null
 			&& passwordConfirmation == null
-			&& activationKey == null) {
-			
-			throw new IllegalStateException(
-				"Login, name, password with confirmation and activation key should not be null"
-			);
-		}
+			&& activationKey == null;
+		
+		checkState(
+			!allFieldsAreNull,
+			"Login, name, password with confirmation and activation key should not be null"
+		);
 		
 		fillLogin(login);
 		fillName(name);
