@@ -203,6 +203,12 @@
 			<version>2.0.8</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r09</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>

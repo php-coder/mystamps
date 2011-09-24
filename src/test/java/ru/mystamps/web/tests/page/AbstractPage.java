@@ -30,6 +30,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import ru.mystamps.web.tests.WebElementUtils;
 
 import static ru.mystamps.web.SiteMap.SITE_URL;
@@ -232,13 +234,8 @@ public abstract class AbstractPage {
 	}
 	
 	public void login(final String login, final String password) {
-		if ("".equals(login)) {
-			throw new IllegalArgumentException("login must be not null and not empty");
-		}
-		
-		if ("".equals(password)) {
-			throw new IllegalArgumentException("password must be not null and not empty");
-		}
+		checkArgument(!"".equals(login), "login must be not null and not empty");
+		checkArgument(!"".equals(password), "password must be not null and not empty");
 		
 		// TODO: check than we already authenticated and do nothing
 		final AuthAccountPage authPage = new AuthAccountPage(driver);

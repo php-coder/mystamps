@@ -31,6 +31,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UserDao;
@@ -49,9 +51,7 @@ public class UserService {
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {
-		if (email == null) {
-			throw new IllegalArgumentException("Email should be non null");
-		}
+		checkArgument(email != null, "Email should be non null");
 		
 		final UsersActivation activation = new UsersActivation();
 		
@@ -65,9 +65,7 @@ public class UserService {
 	public UsersActivation findRegistrationRequestByActivationKey(
 			final String activationKey) {
 		
-		if (activationKey == null) {
-			throw new IllegalArgumentException("Activation key should be non null");
-		}
+		checkArgument(activationKey != null, "Activation key should be non null");
 		
 		return usersActivation.findByActivationKey(activationKey);
 	}
@@ -76,21 +74,10 @@ public class UserService {
 	public void registerUser(final String login, final String password,
 			final String name, final String activationKey) {
 		
-		if (login == null) {
-			throw new IllegalArgumentException("Login should be non null");
-		}
-		
-		if (password == null) {
-			throw new IllegalArgumentException("Password should be non null");
-		}
-		
-		if (name == null) {
-			throw new IllegalArgumentException("Name should be non null");
-		}
-		
-		if (activationKey == null) {
-			throw new IllegalArgumentException("Activation key should be non null");
-		}
+		checkArgument(login != null, "Login should be non null");
+		checkArgument(password != null, "Password should be non null");
+		checkArgument(name != null, "Name should be non null");
+		checkArgument(activationKey != null, "Activation key should be non null");
 		
 		// use login as name if name is not provided
 		final String finalName;
@@ -134,22 +121,15 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public User findByLogin(final String login) {
-		if (login == null) {
-			throw new IllegalArgumentException("Login should be non null");
-		}
+		checkArgument(login != null, "Login should be non null");
 		
 		return users.findByLogin(login);
 	}
 	
 	@Transactional(readOnly = true)
 	public User findByLoginAndPassword(final String login, final String password) {
-		if (login == null) {
-			throw new IllegalArgumentException("Login should be non null");
-		}
-		
-		if (password == null) {
-			throw new IllegalArgumentException("Password should be non null");
-		}
+		checkArgument(login != null, "Login should be non null");
+		checkArgument(password != null, "Password should be non null");
 		
 		final User user = users.findByLogin(login);
 		if (user == null) {

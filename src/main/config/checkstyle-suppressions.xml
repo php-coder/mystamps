@@ -6,7 +6,7 @@
 <suppressions>
 	
 	<suppress checks="LineLength" files="AbstractPageWithForm.java" lines="27,28,33" />
-	<suppress checks="LineLength" files="Form.java" lines="30,31,36" />
+	<suppress checks="LineLength" files="Form.java" lines="32,33,38" />
 	
 	<!-- false positives due to Lombok usage -->
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.model" />

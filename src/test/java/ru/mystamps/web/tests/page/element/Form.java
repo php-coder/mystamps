@@ -24,6 +24,8 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 public final class Form {
 	private static final String              FORM_LOCATOR = "//form";
 	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
@@ -194,10 +196,7 @@ public final class Form {
 		}
 		
 		public Field invalidValue(final String invalidValue) {
-			if ("".equals(invalidValue)) {
-				throw new IllegalArgumentException("Invalid value for field should be non empty");
-			}
-			
+			checkArgument(!"".equals(invalidValue), "Invalid value for field should be non empty");
 			this.invalidValue = invalidValue;
 			return this;
 		}

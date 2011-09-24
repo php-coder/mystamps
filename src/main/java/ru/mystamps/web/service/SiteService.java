@@ -29,6 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
 import ru.mystamps.web.dao.UserDao;
@@ -79,13 +81,8 @@ public class SiteService {
 			final String referer,
 			final String agent) {
 		
-		if (type == null) {
-			throw new IllegalArgumentException("Type of suspicious activity was not set");
-		}
-		
-		if (page == null) {
-			throw new IllegalArgumentException("Page should be non null");
-		}
+		checkArgument(type != null, "Type of suspicious activity was not set");
+		checkArgument(page != null, "Page should be non null");
 		
 		final SuspiciousActivity activity = new SuspiciousActivity();
 		activity.setType(type);
