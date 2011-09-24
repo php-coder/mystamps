@@ -524,6 +524,9 @@
 									<resources>
 										<resource>
 											<directory>${env.dir}/dev</directory>
+											<excludes>
+												<exclude>mysql-scheme.sql</exclude>
+											</excludes>
 										</resource>
 									</resources>
 								</configuration>

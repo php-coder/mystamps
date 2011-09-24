@@ -106,12 +106,12 @@ public class SiteService {
 	}
 	
 	private SuspiciousActivityType getAbsentPageType() {
-		// see mystamps.sql
+		// see mysql-scheme.sql and init-data.sql
 		return suspiciousActivityTypes.findByName("PageNotFound");
 	}
 	
 	private SuspiciousActivityType getFailedAuthenticationType() {
-		// see mystamps.sql
+		// see mysql-scheme.sql and init-data.sql
 		return suspiciousActivityTypes.findByName("AuthenticationFailed");
 	}
 	
