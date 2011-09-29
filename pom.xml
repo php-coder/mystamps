@@ -495,7 +495,6 @@
 					<groupId>commons-dbcp</groupId>
 					<artifactId>commons-dbcp</artifactId>
 					<version>1.4</version>
-					<scope>runtime</scope>
 				</dependency>
 				<dependency>
 					<groupId>mysql</groupId>
@@ -506,6 +505,16 @@
 			</dependencies>
 			<build>
 				<plugins>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>**/TestDataSource.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -562,7 +571,6 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-jdbc</artifactId>
 					<version>${spring.version}</version>
-					<scope>runtime</scope>
 				</dependency>
 				<dependency>
 					<groupId>org.hsqldb</groupId>
@@ -573,6 +581,16 @@
 			</dependencies>
 			<build>
 				<plugins>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>**/DevDataSource.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
 					
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>

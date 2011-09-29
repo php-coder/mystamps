@@ -31,7 +31,7 @@ public final class SiteMap {
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE_URL                  = "http://127.0.0.1:8081";
 	
-	// defined at src/main/resources/spring/DispatcherServletContext.xml
+	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String INDEX_PAGE_URL            = "/";
 	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance";
 	public static final String SUCCESSFUL_REGISTRATION_PAGE_URL = "/successful/registration";
@@ -50,7 +50,7 @@ public final class SiteMap {
 	
 	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add";
 	
-	// defined at src/main/resources/spring/DispatcherServletContext.xml
+	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore";
 	
 	// see also error-page definition at src/main/webapp/WEB-INF/web.xml
