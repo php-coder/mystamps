@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -37,7 +37,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:spring/database.properties")
+@ImportResource("classpath:spring/database.xml")
 public class DbConfig {
 	
 	@Value("${jpa.showSql}")
