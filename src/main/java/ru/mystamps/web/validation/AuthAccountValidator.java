@@ -18,7 +18,8 @@
 
 package ru.mystamps.web.validation;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -38,7 +39,7 @@ public class AuthAccountValidator implements Validator {
 	
 	private final UserService userService;
 	
-	@Autowired
+	@Inject
 	AuthAccountValidator(final UserService userService) {
 		this.userService = userService;
 	}

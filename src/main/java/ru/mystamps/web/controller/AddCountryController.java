@@ -18,10 +18,10 @@
 
 package ru.mystamps.web.controller;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ public class AddCountryController {
 	private final AddCountryValidator addCountryValidator;
 	private final CountryService countryService;
 	
-	@Autowired
+	@Inject
 	AddCountryController(
 			final AddCountryValidator addCountryValidator,
 			final CountryService countryService) {

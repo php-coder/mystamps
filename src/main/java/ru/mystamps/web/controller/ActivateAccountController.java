@@ -20,10 +20,10 @@ package ru.mystamps.web.controller;
 
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +46,7 @@ public class ActivateAccountController {
 	private final UserService userService;
 	private final ActivateAccountValidator activateAccountValidator;
 	
-	@Autowired
+	@Inject
 	ActivateAccountController(
 		final UserService userService,
 		final ActivateAccountValidator activateAccountValidator) {

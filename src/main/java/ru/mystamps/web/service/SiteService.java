@@ -18,6 +18,8 @@
 
 package ru.mystamps.web.service;
 
+import javax.inject.Inject;
+
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -25,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,13 +43,13 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 public class SiteService {
 	private final Logger log = LoggerFactory.getLogger(SiteService.class);
 	
-	@Autowired
+	@Inject
 	private UserDao users;
 	
-	@Autowired
+	@Inject
 	private SuspiciousActivityDao suspiciousActivities;
 
-	@Autowired
+	@Inject
 	private SuspiciousActivityTypeDao suspiciousActivityTypes;
 	
 	@Transactional

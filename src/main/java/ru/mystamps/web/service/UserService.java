@@ -18,6 +18,8 @@
 
 package ru.mystamps.web.service;
 
+import javax.inject.Inject;
+
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Hex;
@@ -27,7 +29,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,10 +44,10 @@ public class UserService {
 	
 	private final Logger log = LoggerFactory.getLogger(UserService.class);
 	
-	@Autowired
+	@Inject
 	private UserDao users;
 	
-	@Autowired
+	@Inject
 	private UsersActivationDao usersActivation;
 	
 	@Transactional

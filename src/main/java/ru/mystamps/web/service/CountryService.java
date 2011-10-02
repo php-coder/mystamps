@@ -18,10 +18,11 @@
 
 package ru.mystamps.web.service;
 
+import javax.inject.Inject;
+
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,7 @@ import ru.mystamps.web.dao.CountryDao;
 @Service
 public class CountryService {
 	
-	@Autowired
+	@Inject
 	private CountryDao countryDao;
 	
 	@Transactional

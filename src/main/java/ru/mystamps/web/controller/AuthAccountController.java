@@ -18,11 +18,11 @@
 
 package ru.mystamps.web.controller;
 
-import javax.validation.Valid;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -48,7 +48,7 @@ public class AuthAccountController {
 	private final SiteService siteService;
 	private final AuthAccountValidator authAccountValidator;
 	
-	@Autowired
+	@Inject
 	AuthAccountController(
 		final UserService userService,
 		final SiteService siteService,

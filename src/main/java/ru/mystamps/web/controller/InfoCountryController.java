@@ -18,7 +18,8 @@
 
 package ru.mystamps.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public class InfoCountryController {
 	
 	private final CountryService countryService;
 	
-	@Autowired
+	@Inject
 	InfoCountryController(final CountryService countryService) {
 		this.countryService = countryService;
 	}
