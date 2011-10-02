@@ -20,6 +20,8 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -40,6 +42,19 @@ public class AddCountryPage extends AbstractPageWithForm {
 			.and()
 			.with(submitButton(tr("t_add")))
 		);
+	}
+	
+	public void addCountry(final String countryName) {
+		checkState(countryName != null, "Country name should be non null");
+		
+		fillName(countryName);
+		submit();
+	}
+	
+	private void fillName(final String name) {
+		if (name != null) {
+			fillField("country", name);
+		}
 	}
 	
 }

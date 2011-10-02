@@ -24,7 +24,10 @@
 								</form:label>
 							</td>
 							<td>
-								<form:input path="country" />
+								<form:select path="country">
+									<form:option value="" />
+									<form:options items="${countries}" />
+								</form:select>
 							</td>
 						</tr>
 						<tr>

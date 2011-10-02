@@ -23,12 +23,15 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.model.AddStampsForm;
+import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.service.CountryService;
 
 import static ru.mystamps.web.SiteMap.ADD_STAMPS_PAGE_URL;
 
@@ -44,6 +47,8 @@ public class AddStampsController {
 	private static final Map<Integer, Integer> DAYS;
 	private static final Map<Integer, Integer> MONTHS;
 	private static final Map<Integer, Integer> YEARS;
+	
+	private final CountryService countryService;
 	
 	static {
 		
@@ -63,11 +68,23 @@ public class AddStampsController {
 		}
 	}
 	
+	@Autowired
+	AddStampsController(final CountryService countryService) {
+		this.countryService = countryService;
+	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public void showForm(final Model model) {
 		model.addAttribute("days", DAYS);
 		model.addAttribute("months", MONTHS);
 		model.addAttribute("years", YEARS);
+		
+		final Map<Integer, String> countries = new LinkedHashMap<Integer, String>();
+		for (final Country country : countryService.findAll()) {
+			countries.put(country.getId(), country.getName());
+		}
+		model.addAttribute("countries", countries);
+		
 		model.addAttribute(new AddStampsForm());
 	}
 	

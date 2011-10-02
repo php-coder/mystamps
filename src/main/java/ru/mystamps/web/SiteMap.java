@@ -49,6 +49,7 @@ public final class SiteMap {
 	public static final String ADD_STAMPS_PAGE_URL       = "/stamps/add";
 	
 	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add";
+	public static final String INFO_COUNTRY_PAGE_URL     = "/country/{id}";
 	
 	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String RESTORE_PASSWORD_PAGE_URL = "/password/restore";

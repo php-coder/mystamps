@@ -40,7 +40,7 @@ public class AddStampsPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				inputField("country").withLabel(tr("t_country")),
+				selectField("country").withLabel(tr("t_country")),
 				selectField("issueDay"),
 				selectField("issueMonth"),
 				selectField("issueYear").withLabel(tr("t_issue_date")),
@@ -56,6 +56,10 @@ public class AddStampsPage extends AbstractPageWithForm {
 			.and()
 			.with(submitButton(tr("t_add")))
 		);
+	}
+	
+	public List<String> getContryFieldValues() {
+		return getSelectOptions("country");
 	}
 	
 	public List<String> getDayFieldValues() {

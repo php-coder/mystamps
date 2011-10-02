@@ -18,15 +18,30 @@
 
 package ru.mystamps.web.validation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
 import ru.mystamps.web.model.AddCountryForm;
+import ru.mystamps.web.service.CountryService;
+
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP1;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP2;
 
 @Component
 public class AddCountryValidator implements Validator {
+	
+	private final CountryService countryService;
+	
+	@Autowired
+	AddCountryValidator(final CountryService countryService) {
+		this.countryService = countryService;
+	}
+	
 	
 	@Override
 	public boolean supports(final Class clazz) {
@@ -35,7 +50,50 @@ public class AddCountryValidator implements Validator {
 	
 	@Override
 	public void validate(final Object target, final Errors errors) {
+		final AddCountryForm form = (AddCountryForm)target;
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "country", "value.required");
+		if (errors.hasFieldErrors("country")) {
+			return;
+		}
+		
+		final String name = form.getCountry();
+		if (name.length() < COUNTRY_NAME_MIN_LENGTH.intValue()) {
+			errors.rejectValue(
+				"country",
+				"value.too-short",
+				new Object[]{COUNTRY_NAME_MIN_LENGTH},
+				"XXX");
+			return;
+		}
+		
+		if (name.length() > COUNTRY_NAME_MAX_LENGTH.intValue()) {
+			errors.rejectValue(
+				"country",
+				"value.too-long",
+				new Object[]{COUNTRY_NAME_MAX_LENGTH},
+				"XXX");
+			return;
+		}
+		
+		if (!name.matches(COUNTRY_NAME_REGEXP1)) {
+			errors.rejectValue("country", "country-name.invalid");
+			return;
+		}
+		
+		if (!name.matches(COUNTRY_NAME_REGEXP2)) {
+			errors.rejectValue("country", "country-name.hyphen");
+			return;
+		}
+		
+		try {
+			if (countryService.findByName(name) != null) {
+				errors.rejectValue("country", "country-name.exists");
+			}
+		} catch (final Exception ex) {
+			errors.rejectValue("country", "error.internal");
+		}
+		
 	}
 	
 }

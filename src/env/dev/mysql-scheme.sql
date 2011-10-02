@@ -76,3 +76,15 @@ CREATE TABLE `suspicious_activities` (
 	FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
+----
+-- countries
+-- (see ru.mystamps.web.entity.Country)
+----
+CREATE TABLE `countries` (
+	`id` INT(5) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`created_at` DATETIME NOT NULL,
+	PRIMARY KEY(`id`),
+	UNIQUE KEY(`name`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
