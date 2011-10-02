@@ -386,9 +386,49 @@
 				</executions>
 			</plugin>
 			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<check>
+						<regexes>
+							<!-- Code coverage of service's classes should be 100% -->
+							<regex>
+								<pattern>ru.mystamps.web.service.*</pattern>
+								<branchRate>100</branchRate>
+								<lineRate>100</lineRate>
+							</regex>
+						</regexes>
+					</check>
+				</configuration>
+				<executions>
+					<execution>
+						<id>run-cobertura</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>clean</goal>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 		
 	</build>
+	
+	<reporting>
+		<plugins>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.1</version>
+			</plugin>
+			
+		</plugins>
+	</reporting>
 	
 	<name>My Stamps</name>
 	<url>my-stamps.ru</url>
