@@ -57,8 +57,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		configurer.mapViewName(INDEX_PAGE_URL, "site/index");
 		configurer.mapViewName(MAINTENANCE_PAGE_URL, "site/maintenance");
 		configurer.mapViewName(RESTORE_PASSWORD_PAGE_URL, "password/restore");
-		configurer.mapViewName(SUCCESSFUL_ACTIVATION_PAGE_URL, "account/activation_successful");
-		configurer.mapViewName(SUCCESSFUL_REGISTRATION_PAGE_URL, "account/activation_sent");
+		configurer.mapViewName(SUCCESSFUL_ACTIVATION_PAGE_URL, "successful/activation");
+		configurer.mapViewName(SUCCESSFUL_REGISTRATION_PAGE_URL, "successful/registration");
 	}
 	
 	@Override
