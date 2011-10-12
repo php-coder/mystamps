@@ -24,9 +24,6 @@ import org.junit.Test;
 
 import ru.mystamps.web.tests.page.IndexSitePage;
 
-import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
-import static ru.mystamps.web.SiteMap.ADD_STAMPS_PAGE_URL;
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
@@ -50,26 +47,21 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	
 	@Test
 	public void shouldExistsLinkForPasswordRecovery() {
-		assertThat(
-				page.linkHasLabelAndPointsTo(
-					tr("t_recover_forget_password"),
-					RESTORE_PASSWORD_PAGE_URL
-				)
-			)
+		assertThat(page.linkWithLabelExists(tr("t_recover_forget_password")))
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
 	
 	@Test
 	public void shouldExistsLinkForAddingStamps() {
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_add_series"), ADD_STAMPS_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_add_series")))
 			.overridingErrorMessage("should exists link to page for adding stamps")
 			.isTrue();
 	}
 	
 	@Test
 	public void shouldExistsLinkForAddingCountries() {
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_add_country"), ADD_COUNTRY_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_add_country")))
 			.overridingErrorMessage("should exists link to page for adding countries")
 			.isTrue();
 	}

@@ -29,9 +29,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import ru.mystamps.web.tests.page.LogoutAccountPage;
 
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,11 +55,11 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 			.overridingErrorMessage("after logout we should be redirected to main page")
 			.isEqualTo(INDEX_PAGE_URL);
 		
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_enter"), AUTHENTICATION_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_enter")))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 		
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_register"), REGISTRATION_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_register")))
 			.overridingErrorMessage("should exists link to registration page")
 			.isTrue();
 	}

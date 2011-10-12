@@ -129,24 +129,17 @@ public abstract class AbstractPage {
 		return elementWithIdExists("footer");
 	}
 	
-	public boolean linkHasLabelAndPointsTo(
-			final String linkText,
-			final String targetUrl) {
-		
-		final WebElement link = getLinkByText(linkText);
-		final String href     = getLinkHref(link);
-		return targetUrl.equals(href);
+	public boolean linkWithLabelExists(final String label) {
+		return getLinkByText(label) != null;
 	}
 	
-	public boolean linkHasLabelWithTitleAndPointsTo(
-			final String linkText,
-			final String titleValue,
-			final String targetUrl) {
+	public boolean linkWithLabelAndTitleExists(final String label, final String title) {
+		final WebElement link = getLinkByText(label);
+		if (link == null) {
+			return false;
+		}
 		
-		final WebElement link = getLinkByText(linkText);
-		final String title    = link.getAttribute("title");
-		final String href     = getLinkHref(link);
-		return targetUrl.equals(href) && titleValue.equals(title);
+		return link.getAttribute("title").equals(title);
 	}
 	
 	public boolean textPresent(final String text) {
@@ -224,13 +217,12 @@ public abstract class AbstractPage {
 	}
 	
 	protected WebElement getLinkByText(final String linkText) {
-		return driver.findElement(By.linkText(linkText));
-	}
-	
-	protected String getLinkHref(final WebElement link) {
-		final String href = link.getAttribute("href");
-		// TODO: use Pattern class directly
-		return href.replaceFirst(";jsessionid=\\p{Alnum}+", "");
+		try {
+			return  driver.findElement(By.linkText(linkText));
+		
+		} catch (final NoSuchElementException ex) {
+			return null;
+		}
 	}
 	
 	public void login(final String login, final String password) {

@@ -30,7 +30,6 @@ import org.springframework.beans.factory.annotation.Value;
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
 import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
@@ -74,7 +73,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
-		assertThat(page.linkHasLabelAndPointsTo("remind", RESTORE_PASSWORD_PAGE_URL))
+		assertThat(page.linkWithLabelExists("remind"))
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}

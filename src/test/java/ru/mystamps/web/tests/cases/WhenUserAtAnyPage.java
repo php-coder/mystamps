@@ -29,8 +29,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
-import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 abstract class WhenUserAtAnyPage<T extends AbstractPage> {
@@ -117,11 +115,11 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 			.overridingErrorMessage("user bar should exists")
 			.isTrue();
 		
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_enter"), AUTHENTICATION_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_enter")))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 		
-		assertThat(page.linkHasLabelAndPointsTo(tr("t_register"), REGISTRATION_PAGE_URL))
+		assertThat(page.linkWithLabelExists(tr("t_register")))
 			.overridingErrorMessage("should exists link to registration page")
 			.isTrue();
 	}
@@ -146,10 +144,9 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 			.isTrue();
 		
 		assertThat(
-				page.linkHasLabelWithTitleAndPointsTo(
+				page.linkWithLabelAndTitleExists(
 					tr("t_site_author_name"),
-					tr("t_write_email"),
-					"mailto:" + tr("t_site_author_email")
+					tr("t_write_email")
 				)
 			)
 			.overridingErrorMessage("should exists link with author's email")
