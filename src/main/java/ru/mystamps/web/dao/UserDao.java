@@ -43,7 +43,7 @@ public class UserDao {
 	public User findByLogin(final String login) {
 		try {
 			final User user = (User)entityManager
-				.createQuery("from User as u where u.login = :login")
+				.createQuery("select u from User as u where u.login = :login")
 				.setParameter("login", login)
 				.getSingleResult();
 			

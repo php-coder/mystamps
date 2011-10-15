@@ -41,7 +41,7 @@ public class CountryDao {
 	
 	public List<Country> findAll() {
 		final List<Country> result = (List<Country>)entityManager
-			.createQuery("from Country")
+			.createQuery("select c from Country as c")
 			.getResultList();
 		
 		return result;
@@ -54,7 +54,7 @@ public class CountryDao {
 	public Country findByName(final String name) {
 		try {
 			final Country country = (Country)entityManager
-				.createQuery("from Country as c where c.name = :name")
+				.createQuery("select c from Country as c where c.name = :name")
 				.setParameter("name", name)
 				.getSingleResult();
 			
