@@ -33,7 +33,7 @@ public class SuspiciousActivityTypeDao {
 	
 	public SuspiciousActivityType findByName(final String name) {
 		final SuspiciousActivityType type = (SuspiciousActivityType)entityManager
-			.createQuery("from SuspiciousActivityType sat where sat.name = :name")
+			.createQuery("from SuspiciousActivityType as sat where sat.name = :name")
 			.setParameter("name", name)
 			.getSingleResult();
 		
