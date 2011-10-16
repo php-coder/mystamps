@@ -59,7 +59,7 @@ public class AddCountryValidator implements Validator {
 		}
 		
 		final String name = form.getCountry();
-		if (name.length() < COUNTRY_NAME_MIN_LENGTH.intValue()) {
+		if (name.length() < COUNTRY_NAME_MIN_LENGTH) {
 			errors.rejectValue(
 				"country",
 				"value.too-short",
@@ -68,7 +68,7 @@ public class AddCountryValidator implements Validator {
 			return;
 		}
 		
-		if (name.length() > COUNTRY_NAME_MAX_LENGTH.intValue()) {
+		if (name.length() > COUNTRY_NAME_MAX_LENGTH) {
 			errors.rejectValue(
 				"country",
 				"value.too-long",

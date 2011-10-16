@@ -66,7 +66,7 @@ public class AuthAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < LOGIN_MIN_LENGTH.intValue()) {
+		if (login.length() < LOGIN_MIN_LENGTH) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
@@ -75,7 +75,7 @@ public class AuthAccountValidator implements Validator {
 			return;
 		}
 			
-		if (login.length() > LOGIN_MAX_LENGTH.intValue()) {
+		if (login.length() > LOGIN_MAX_LENGTH) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
@@ -99,7 +99,7 @@ public class AuthAccountValidator implements Validator {
 		
 		final String password = form.getPassword();
 		
-		if (password.length() < PASSWORD_MIN_LENGTH.intValue()) {
+		if (password.length() < PASSWORD_MIN_LENGTH) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",

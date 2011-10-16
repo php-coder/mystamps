@@ -52,7 +52,7 @@ public class RegisterAccountValidator implements Validator {
 		
 		final String email = form.getEmail();
 		
-		if (email.length() > EMAIL_MAX_LENGTH.intValue()) {
+		if (email.length() > EMAIL_MAX_LENGTH) {
 			errors.rejectValue(
 				"email",
 				"value.too-long",

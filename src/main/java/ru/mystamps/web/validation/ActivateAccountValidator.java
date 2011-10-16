@@ -73,7 +73,7 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String login = form.getLogin();
 		
-		if (login.length() < LOGIN_MIN_LENGTH.intValue()) {
+		if (login.length() < LOGIN_MIN_LENGTH) {
 			errors.rejectValue(
 				"login",
 				"value.too-short",
@@ -82,7 +82,7 @@ public class ActivateAccountValidator implements Validator {
 			return;
 		}
 			
-		if (login.length() > LOGIN_MAX_LENGTH.intValue()) {
+		if (login.length() > LOGIN_MAX_LENGTH) {
 			errors.rejectValue(
 				"login",
 				"value.too-long",
@@ -114,7 +114,7 @@ public class ActivateAccountValidator implements Validator {
 			return;
 		}
 		
-		if (name.length() > NAME_MAX_LENGTH.intValue()) {
+		if (name.length() > NAME_MAX_LENGTH) {
 			errors.rejectValue(
 				"name",
 				"value.too-long",
@@ -145,7 +145,7 @@ public class ActivateAccountValidator implements Validator {
 		final String password = form.getPassword();
 		final String login = form.getLogin();
 		
-		if (password.length() < PASSWORD_MIN_LENGTH.intValue()) {
+		if (password.length() < PASSWORD_MIN_LENGTH) {
 			errors.rejectValue(
 				"password",
 				"value.too-short",
@@ -194,7 +194,7 @@ public class ActivateAccountValidator implements Validator {
 		
 		final String key = form.getActivationKey();
 		
-		if (key.length() != ACT_KEY_LENGTH.intValue()) {
+		if (key.length() != ACT_KEY_LENGTH) {
 			errors.rejectValue(
 					"activationKey",
 					"value.invalid-length",
