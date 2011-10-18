@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>MyStamps: <spring:message code="t_add_country" /></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 	</head>
