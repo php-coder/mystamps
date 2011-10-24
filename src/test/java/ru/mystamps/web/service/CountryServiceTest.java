@@ -36,6 +36,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -53,12 +54,6 @@ public class CountryServiceTest {
 	
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
-	
-	@Captor
-	private ArgumentCaptor<Integer> countryIdCaptor;
-	
-	@Captor
-	private ArgumentCaptor<String> countryNameCaptor;
 	
 	@InjectMocks
 	private CountryService service = new CountryService();
@@ -146,9 +141,7 @@ public class CountryServiceTest {
 	public void findByNameShouldPassCountryNameToDao() {
 		service.findByName(TEST_COUNTRY_NAME);
 		
-		verify(countryDao).findByName(countryNameCaptor.capture());
-		
-		assertThat(countryNameCaptor.getValue()).isEqualTo(TEST_COUNTRY_NAME);
+		verify(countryDao).findByName(eq(TEST_COUNTRY_NAME));
 	}
 	
 	//
@@ -174,9 +167,7 @@ public class CountryServiceTest {
 	public void findByIdShouldPassIdToDao() {
 		service.findById(TEST_COUNTRY_ID);
 		
-		verify(countryDao).findById(countryIdCaptor.capture());
-		
-		assertThat(countryIdCaptor.getValue()).isEqualTo(TEST_COUNTRY_ID);
+		verify(countryDao).findById(eq(TEST_COUNTRY_ID));
 	}
 	
 	private Country getCountry() {
