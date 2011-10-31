@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<spring.version>3.1.0.M2</spring.version>
+		<spring.version>3.1.0.RC1</spring.version>
 		<hibernate.version>3.6.7.Final</hibernate.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>

@@ -25,8 +25,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceConfigurer;
-import org.springframework.web.servlet.config.annotation.ViewControllerConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -53,17 +53,17 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Override
-	public void configureViewControllers(final ViewControllerConfigurer configurer) {
-		configurer.mapViewName(INDEX_PAGE_URL, "site/index");
-		configurer.mapViewName(MAINTENANCE_PAGE_URL, "site/maintenance");
-		configurer.mapViewName(RESTORE_PASSWORD_PAGE_URL, "password/restore");
-		configurer.mapViewName(SUCCESSFUL_ACTIVATION_PAGE_URL, "successful/activation");
-		configurer.mapViewName(SUCCESSFUL_REGISTRATION_PAGE_URL, "successful/registration");
+	public void addViewControllers(final ViewControllerRegistry registry) {
+		registry.addViewController(INDEX_PAGE_URL).setViewName("site/index");
+		registry.addViewController(MAINTENANCE_PAGE_URL);
+		registry.addViewController(RESTORE_PASSWORD_PAGE_URL);
+		registry.addViewController(SUCCESSFUL_ACTIVATION_PAGE_URL);
+		registry.addViewController(SUCCESSFUL_REGISTRATION_PAGE_URL);
 	}
 	
 	@Override
-	public void configureResourceHandling(final ResourceConfigurer configurer) {
-		configurer.addPathMapping("/static/**").addResourceLocation("/WEB-INF/static/*");
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/*");
 	}
 	
 	@Bean
