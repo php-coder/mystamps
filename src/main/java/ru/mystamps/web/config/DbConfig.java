@@ -31,6 +31,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -57,7 +58,7 @@ public class DbConfig {
 	
 	@Bean
 	public JpaVendorAdapter getJpaVendorAdapter() {
-		final HibernateJpaVendorAdapter jpaVendorAdapter =
+		final AbstractJpaVendorAdapter jpaVendorAdapter =
 			new HibernateJpaVendorAdapter();
 		
 		jpaVendorAdapter.setDatabasePlatform(dialectClassName);
