@@ -13,6 +13,7 @@
 		<spring.version>3.1.0.RC1</spring.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
 		<lombok.version>0.10.2</lombok.version>
+		<slf4j.version>1.6.4</slf4j.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
@@ -220,13 +221,13 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.2</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.2</version>
+			<version>${slf4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
