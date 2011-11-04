@@ -12,6 +12,7 @@
 	<properties>
 		<spring.version>3.1.0.RC1</spring.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
+		<lombok.version>0.10.2</lombok.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
@@ -131,7 +132,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>0.10.0</version>
+			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
