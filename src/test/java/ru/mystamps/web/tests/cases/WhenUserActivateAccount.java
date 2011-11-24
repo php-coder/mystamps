@@ -90,7 +90,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		page.activateAccount(null, null, "password123", "password321", null);
 		
 		assertThat(page)
-			.field("passwordConfirm")
+			.field("passwordConfirmation")
 			.hasError(tr("password.mismatch"));
 	}
 	

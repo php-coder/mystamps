@@ -61,7 +61,7 @@ public class ActivateAccountValidator implements Validator {
 		validateLogin(form, errors);
 		validateName(form, errors);
 		validatePassword(form, errors);
-		validatePasswordConfirm(form, errors);
+		validatePasswordConfirmation(form, errors);
 		validateActivationKey(form, errors);
 	}
 	
@@ -167,21 +167,21 @@ public class ActivateAccountValidator implements Validator {
 		}
 	}
 	
-	private static void validatePasswordConfirm(
+	private static void validatePasswordConfirmation(
 			final ActivateAccountForm form,
 			final Errors errors) {
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirm", "value.required");
-		if (errors.hasFieldErrors("passwordConfirm")) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passwordConfirmation", "value.required");
+		if (errors.hasFieldErrors("passwordConfirmation")) {
 			return;
 		}
 		
 		final String password = form.getPassword();
-		final String passwordConfirm = form.getPasswordConfirm();
+		final String passwordConfirmation = form.getPasswordConfirmation();
 		
 		if (!errors.hasFieldErrors("password")
-				&& !passwordConfirm.equals(password)) {
-			errors.rejectValue("passwordConfirm", "password.mismatch");
+				&& !passwordConfirmation.equals(password)) {
+			errors.rejectValue("passwordConfirmation", "password.mismatch");
 			return;
 		}
 	}

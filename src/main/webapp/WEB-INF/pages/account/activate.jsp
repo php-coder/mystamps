@@ -71,18 +71,18 @@
 						</tr>
 						<tr>
 							<td>
-								<form:label path="passwordConfirm">
+								<form:label path="passwordConfirmation">
 									<spring:message code="t_password_again" />
 								</form:label>
 							</td>
 							<td>
-								<span id="passwordConfirm.required" class="required_field">*</span>
+								<span id="passwordConfirmation.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:password path="passwordConfirm" />
+								<form:password path="passwordConfirmation" />
 							</td>
 							<td>
-								<form:errors path="passwordConfirm" cssClass="error" />
+								<form:errors path="passwordConfirmation" cssClass="error" />
 							</td>
 						</tr>
 						<tr>

@@ -53,7 +53,7 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 					.and()
 					.invalidValue("x"),
 				
-				required(passwordField("passwordConfirm"))
+				required(passwordField("passwordConfirmation"))
 					.withLabel(tr("t_password_again"))
 					.and()
 					.invalidValue("x"),
@@ -115,7 +115,7 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 	
 	private void fillPasswordConfirmation(final String passwordConfirmation) {
 		if (passwordConfirmation != null) {
-			fillField("passwordConfirm", passwordConfirmation);
+			fillField("passwordConfirmation", passwordConfirmation);
 		}
 	}
 	
