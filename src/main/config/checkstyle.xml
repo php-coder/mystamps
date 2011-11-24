@@ -224,16 +224,18 @@
             <property name="severity" value="warning"/>
         </module>
         <module name="TodoComment">
-            <property name="severity" value="info"/>
-        </module>
-        <module name="TodoComment">
             <property name="format" value="XXX"/>
             <property name="severity" value="warning"/>
         </module>
-        <module name="TodoComment">
-            <property name="format" value="@todo"/>
-            <property name="severity" value="info"/>
-        </module>
+        <!--
+            <module name="TodoComment">
+                <property name="severity" value="info"/>
+            </module>
+            <module name="TodoComment">
+                <property name="format" value="@todo"/>
+                <property name="severity" value="info"/>
+            </module>
+        -->
         <module name="UpperEll"/>
         <module name="TrailingComment">
             <property name="legalComment" value="TODO|XXX"/>
