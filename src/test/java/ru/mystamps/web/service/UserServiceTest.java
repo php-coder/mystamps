@@ -34,6 +34,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
@@ -92,6 +93,19 @@ public class UserServiceTest {
 			.isEqualTo(UsersActivation.ACTIVATION_KEY_LENGTH);
 		
 		assertThat(activationKey).matches("^[\\p{Lower}\\p{Digit}]+$");
+	}
+	
+	@Test
+	public void addRegistrationRequestShouldGenerateUniqueActivationKey() {
+		service.addRegistrationRequest(TEST_EMAIL);
+		verify(usersActivationDao).add(activationCaptor.capture());
+		final String firstActivationKey = activationCaptor.getValue().getActivationKey();
+		
+		service.addRegistrationRequest(TEST_EMAIL);
+		verify(usersActivationDao, atLeastOnce()).add(activationCaptor.capture());
+		final String secondActivationKey = activationCaptor.getValue().getActivationKey();
+		
+		assertThat(firstActivationKey).isNotEqualTo(secondActivationKey);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -244,6 +258,21 @@ public class UserServiceTest {
 		final String salt = userCaptor.getValue().getSalt();
 		assertThat(salt.length()).as("salt length").isEqualTo(User.SALT_LENGTH);
 		assertThat(salt).matches("^[\\p{Alnum}]+$");
+	}
+	
+	@Test
+	public void registerUserShouldGenerateUniqueSalt() {
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		verify(userDao).add(userCaptor.capture());
+		final String firstSalt = userCaptor.getValue().getSalt();
+		
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		verify(userDao, atLeastOnce()).add(userCaptor.capture());
+		final String secondSalt = userCaptor.getValue().getSalt();
+		
+		assertThat(firstSalt).isNotEqualTo(secondSalt);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
