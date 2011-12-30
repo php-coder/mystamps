@@ -14,7 +14,7 @@
 		<hibernate.version>3.6.8.Final</hibernate.version>
 		<lombok.version>0.10.6</lombok.version>
 		<mysql.connector.version>5.1.18</mysql.connector.version>
-		<selenium.version>2.11.0</selenium.version>
+		<selenium.version>2.15.0</selenium.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
