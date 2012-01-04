@@ -42,6 +42,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractPage {
 	
+	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
+	
 	private final WebDriver driver;
 	private final String pageUrl;
 	
@@ -140,6 +142,11 @@ public abstract class AbstractPage {
 		}
 		
 		return link.getAttribute("title").equals(title);
+	}
+	
+	public boolean existsLinkTo(final String relativeUrl) {
+		checkArgument(!"".equals(relativeUrl));
+		return elementWithXPathExists(String.format(A_HREF_LOCATOR, relativeUrl));
 	}
 	
 	public boolean textPresent(final String text) {

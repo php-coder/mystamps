@@ -40,6 +40,7 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
+import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -291,7 +292,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		
-		assertThat(page.linkWithLabelExists("authentication"))
+		assertThat(page.existsLinkTo(AUTHENTICATION_PAGE_URL))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
