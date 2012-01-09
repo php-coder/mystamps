@@ -145,6 +145,7 @@
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter">
             <property name="tokens" value="ARRAY_INIT,BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS,TYPECAST"/>
+            <property name="severity" value="warning"/>
         </module>
         <module name="NoWhitespaceBefore">
             <property name="severity" value="warning"/>
