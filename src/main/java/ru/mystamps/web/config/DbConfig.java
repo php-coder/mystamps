@@ -75,9 +75,7 @@ public class DbConfig {
 		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
 		entityManagerFactory.setDataSource(dataSource);
 		
-		entityManagerFactory.setPackagesToScan(new String[] {
-			"ru.mystamps.web.entity"
-		});
+		entityManagerFactory.setPackagesToScan(new String[] { "ru.mystamps.web.entity" });
 		
 		final Map<String, String> jpaProperties = new HashMap<String, String>();
 		jpaProperties.put("hibernate.format_sql", formatSql);
