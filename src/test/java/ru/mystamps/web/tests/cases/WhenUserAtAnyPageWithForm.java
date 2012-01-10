@@ -132,7 +132,7 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 						"required field with id '%s' should not accept empty value", field.getId()
 					)
 				)
-				.isEqualTo(tr("value.required"));
+				.isEqualTo(tr("org.hibernate.validator.constraints.NotEmpty.message"));
 		}
 	}
 	

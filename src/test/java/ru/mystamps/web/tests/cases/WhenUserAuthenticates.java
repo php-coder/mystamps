@@ -128,7 +128,8 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	public void invalidCredentialsShouldBeRejected() {
 		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
-		assertThat(page.getFormError()).isEqualTo(tr("login.password.invalid"));
+		assertThat(page.getFormError())
+			.isEqualTo(tr("ru.mystamps.web.validation.jsr303.ValidCredentials.message"));
 	}
 	
 	@Test

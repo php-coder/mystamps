@@ -42,8 +42,7 @@ import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 @ComponentScan(basePackages = {
 	"ru.mystamps.web.controller",
 	"ru.mystamps.web.dao",
-	"ru.mystamps.web.service",
-	"ru.mystamps.web.validation"
+	"ru.mystamps.web.service"
 })
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	

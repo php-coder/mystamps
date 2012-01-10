@@ -149,7 +149,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		
 		assertThat(page)
 			.field("login")
-			.hasError(tr("login.exists"));
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueLogin.message"));
 	}
 	
 	@Test
@@ -275,7 +275,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		
 		assertThat(page)
 			.field("activationKey")
-			.hasError(tr("key.not-exists"));
+			.hasError(tr("ru.mystamps.web.validation.jsr303.ExistingActivationKey.message"));
 	}
 	
 	@Test

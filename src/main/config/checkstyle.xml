@@ -122,7 +122,7 @@
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"> <!-- defaults to sun.* packages -->
-            <property name="illegalPkgs" value="java.sql, org.hibernate, org.apache.log4j"/>
+            <property name="illegalPkgs" value="java.sql, org.apache.log4j"/>
         </module>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>

@@ -18,9 +18,41 @@
 
 package ru.mystamps.web.model;
 
+import javax.validation.constraints.Size;
+import javax.validation.GroupSequence;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import ru.mystamps.web.validation.jsr303.Email;
+
 import lombok.Getter;
 import lombok.Setter;
 
+import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
+
+@GroupSequence({
+	RegisterAccountForm.class,
+	RegisterAccountForm.Level1Checks.class,
+	RegisterAccountForm.Level2Checks.class,
+	RegisterAccountForm.Level3Checks.class
+})
 public class RegisterAccountForm {
-	@Getter @Setter private String email;
+	
+	@Getter
+	@Setter
+	@NotEmpty(groups = Level1Checks.class)
+	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Level2Checks.class)
+	@Email(groups = Level3Checks.class)
+	private String email;
+	
+	
+	public interface Level1Checks {
+	}
+	
+	public interface Level2Checks {
+	}
+	
+	public interface Level3Checks {
+	}
+	
 }

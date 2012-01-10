@@ -31,7 +31,6 @@ import org.springframework.validation.BindingResult;
 
 import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
-import ru.mystamps.web.validation.RegisterAccountValidator;
 
 import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
@@ -41,20 +40,14 @@ import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 public class RegisterAccountController {
 	
 	private final UserService userService;
-	private final RegisterAccountValidator registerAccountValidator;
 	
 	@Inject
-	RegisterAccountController(
-		final UserService userService,
-		final RegisterAccountValidator registerAccountValidator) {
-		
+	RegisterAccountController(final UserService userService) {
 		this.userService = userService;
-		this.registerAccountValidator = registerAccountValidator;
 	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(registerAccountValidator);
 		binder.registerCustomEditor(String.class, "email", new StringTrimmerEditor(false));
 	}
 	

@@ -31,7 +31,6 @@ import org.springframework.validation.BindingResult;
 
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
-import ru.mystamps.web.validation.AddCountryValidator;
 
 import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
 import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
@@ -40,20 +39,15 @@ import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
 @RequestMapping(ADD_COUNTRY_PAGE_URL)
 public class AddCountryController {
 	
-	private final AddCountryValidator addCountryValidator;
 	private final CountryService countryService;
 	
 	@Inject
-	AddCountryController(
-			final AddCountryValidator addCountryValidator,
-			final CountryService countryService) {
-		this.addCountryValidator = addCountryValidator;
+	AddCountryController(final CountryService countryService) {
 		this.countryService = countryService;
 	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(addCountryValidator);
 		binder.registerCustomEditor(String.class, "country", new StringTrimmerEditor(false));
 	}
 	

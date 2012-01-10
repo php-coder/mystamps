@@ -87,7 +87,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			
 			assertThat(page)
 				.field("email")
-				.hasError(tr("email.invalid"));
+				.hasError(tr("ru.mystamps.web.validation.jsr303.Email.message"));
 		}
 	}
 	

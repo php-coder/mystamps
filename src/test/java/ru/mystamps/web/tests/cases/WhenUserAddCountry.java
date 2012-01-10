@@ -86,7 +86,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		
 		assertThat(page)
 			.field("country")
-			.hasError(tr("country-name.exists"));
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCountryName.message"));
 	}
 	
 	@Test

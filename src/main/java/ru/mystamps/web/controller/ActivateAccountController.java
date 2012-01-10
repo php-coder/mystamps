@@ -21,7 +21,6 @@ package ru.mystamps.web.controller;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -31,10 +30,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import ru.mystamps.web.model.ActivateAccountForm;
+import ru.mystamps.web.model.ActivateAccountForm.LoginChecks;
+import ru.mystamps.web.model.ActivateAccountForm.NameChecks;
+import ru.mystamps.web.model.ActivateAccountForm.PasswordChecks;
+import ru.mystamps.web.model.ActivateAccountForm.PasswordConfirmationChecks;
+import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
+import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.service.UserService;
-import ru.mystamps.web.validation.ActivateAccountValidator;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
@@ -44,21 +49,15 @@ import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 public class ActivateAccountController {
 	
 	private final UserService userService;
-	private final ActivateAccountValidator activateAccountValidator;
 	
 	@Inject
-	ActivateAccountController(
-		final UserService userService,
-		final ActivateAccountValidator activateAccountValidator) {
-		
+	ActivateAccountController(final UserService userService) {
 		this.userService = userService;
-		this.activateAccountValidator = activateAccountValidator;
 	}
 	
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
-		binder.setValidator(activateAccountValidator);
-		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
+		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
 	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.GET)
@@ -78,8 +77,10 @@ public class ActivateAccountController {
 	
 	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.POST)
 	public String processInput(
-			@Valid final ActivateAccountForm form,
-			final BindingResult result) {
+		@Validated({
+			LoginChecks.class, NameChecks.class, PasswordChecks.class,
+			PasswordConfirmationChecks.class, ActKeyChecks.class, FormChecks.class
+		}) final ActivateAccountForm form, final BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;

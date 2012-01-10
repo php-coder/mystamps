@@ -18,10 +18,83 @@
 
 package ru.mystamps.web.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.GroupSequence;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import ru.mystamps.web.validation.jsr303.ValidCredentials;
+
 import lombok.Getter;
 import lombok.Setter;
 
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.LOGIN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
+
+@ValidCredentials(groups = AuthAccountForm.FormChecks.class)
 public class AuthAccountForm {
-	@Getter @Setter private String login;
-	@Getter @Setter private String password;
+	
+	@Getter
+	@Setter
+	@NotEmpty(groups = Login1Checks.class)
+	@Size.List({
+		@Size(min = LOGIN_MIN_LENGTH, message = "{value.too-short}", groups = Login2Checks.class),
+		@Size(max = LOGIN_MAX_LENGTH, message = "{value.too-long}", groups = Login2Checks.class)
+	})
+	@Pattern(regexp = LOGIN_REGEXP, message = "{login.invalid}", groups = Login3Checks.class)
+	private String login;
+	
+	@Getter
+	@Setter
+	@NotEmpty(groups = Password1Checks.class)
+	@Size(min = PASSWORD_MIN_LENGTH, message = "{value.too-short}", groups = Password2Checks.class)
+	@Pattern(
+		regexp = PASSWORD_REGEXP,
+		message = "{password.invalid}",
+		groups = Password3Checks.class
+	)
+	private String password;
+	
+	
+	@GroupSequence({
+		Login1Checks.class,
+		Login2Checks.class,
+		Login3Checks.class
+	})
+	public interface LoginChecks {
+	}
+	
+	public interface Login1Checks {
+	}
+	
+	public interface Login2Checks {
+	}
+	
+	public interface Login3Checks {
+	}
+	
+	@GroupSequence({
+		Password1Checks.class,
+		Password2Checks.class,
+		Password3Checks.class
+	})
+	public interface PasswordChecks {
+	}
+	
+	public interface Password1Checks {
+	}
+	
+	public interface Password2Checks {
+	}
+	
+	public interface Password3Checks {
+	}
+	
+	public interface FormChecks {
+	}
+	
 }

@@ -21,21 +21,21 @@ package ru.mystamps.web.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AuthAccountForm;
+import ru.mystamps.web.model.AuthAccountForm.FormChecks;
+import ru.mystamps.web.model.AuthAccountForm.LoginChecks;
+import ru.mystamps.web.model.AuthAccountForm.PasswordChecks;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.service.UserService;
-import ru.mystamps.web.validation.AuthAccountValidator;
 
 import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
@@ -46,22 +46,11 @@ public class AuthAccountController {
 	
 	private final UserService userService;
 	private final SiteService siteService;
-	private final AuthAccountValidator authAccountValidator;
 	
 	@Inject
-	AuthAccountController(
-		final UserService userService,
-		final SiteService siteService,
-		final AuthAccountValidator authAccountValidator) {
-		
+	AuthAccountController(final UserService userService, final SiteService siteService) {
 		this.userService = userService;
 		this.siteService = siteService;
-		this.authAccountValidator = authAccountValidator;
-	}
-	
-	@InitBinder
-	protected void initAuthBinder(final WebDataBinder binder) {
-		binder.setValidator(authAccountValidator);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -75,7 +64,11 @@ public class AuthAccountController {
 			final HttpSession session,
 			@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestHeader(value = "user-agent", required = false) final String agent,
-			@Valid final AuthAccountForm form,
+			@Validated({
+				LoginChecks.class,
+				PasswordChecks.class,
+				FormChecks.class
+			}) final AuthAccountForm form,
 			final BindingResult result) {
 		
 		if (result.hasErrors()) {
@@ -83,10 +76,9 @@ public class AuthAccountController {
 			// When user provides wrong login/password pair than
 			// validation mechanism add error to form. Check this to
 			// handle situation with wrong credentials.
-			// @see AuthAccountValidator::validateLoginPasswordPair()
 			if (result.hasGlobalErrors()
 					&& result.getGlobalError() != null
-					&& result.getGlobalError().getCode().equals("login.password.invalid")) {
+					&& "ValidCredentials".equals(result.getGlobalError().getCode())) {
 				
 				// TODO: log more info (login for example) (#59)
 				// TODO: sanitize all user's values (#60)
