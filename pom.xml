@@ -10,12 +10,13 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<spring.version>3.1.0.RELEASE</spring.version>
+		<guava.version>11.0.1</guava.version>
 		<hibernate.version>4.0.0.Final</hibernate.version>
 		<lombok.version>0.10.6</lombok.version>
 		<mysql.connector.version>5.1.18</mysql.connector.version>
 		<selenium.version>2.15.0</selenium.version>
 		<slf4j.version>1.6.4</slf4j.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
@@ -236,7 +237,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>10.0.1</version>
+			<version>${guava.version}</version>
 		</dependency>
 		
 	</dependencies>
