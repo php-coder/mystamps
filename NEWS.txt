@@ -1,5 +1,12 @@
-0.1.3 (not released yet)
+0.1.3
+- implemented ability to add countries
+- ported to use JSR-303 validation
 - functional tests now uses FEST's assertions
+- added checking by CheckStyle
+- added code coverage generation by Cobertura
+- added ability to generate Javadocs
+- migrated from XML configs to Java bean confiuration
+- added unit tests for business logic layer
 
 0.1.2
 - use Maven2 for building project

@@ -6,7 +6,7 @@
 	
 	<groupId>ru.mystamps</groupId>
 	<artifactId>mystamps</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
 	<properties>
