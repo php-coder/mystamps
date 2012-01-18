@@ -556,15 +556,15 @@
 	
 	<!--
 		 There are 2 profiles:
-		 - dev (enabled by default, uses MySQL)
-		 - test (uses HSQL)
+		 - dev (uses MySQL)
+		 - test (enabled by default, uses HSQL)
 	-->
 	<profiles>
 		
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
@@ -640,7 +640,7 @@
 		<profile>
 			<id>test</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
