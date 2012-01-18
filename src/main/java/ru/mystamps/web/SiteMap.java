@@ -46,7 +46,7 @@ public final class SiteMap {
 	
 	public static final String LOGOUT_PAGE_URL           = "/account/logout";
 	
-	public static final String ADD_STAMPS_PAGE_URL       = "/stamps/add";
+	public static final String ADD_SERIES_PAGE_URL       = "/series/add";
 	
 	public static final String ADD_COUNTRY_PAGE_URL      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE_URL     = "/country/{id}";

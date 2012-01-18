@@ -21,7 +21,7 @@ package ru.mystamps.web.model;
 import lombok.Getter;
 import lombok.Setter;
 
-public class AddStampsForm {
+public class AddSeriesForm {
 	@Getter @Setter private String country;
 	@Getter @Setter private Integer issueDay;
 	@Getter @Setter private Integer issueMonth;

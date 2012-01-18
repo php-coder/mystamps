@@ -27,11 +27,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import ru.mystamps.web.tests.page.AddStampsPage;
+import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> {
+public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> {
 	
 	private static final int DAYS_IN_MONTH  = 31;
 	private static final int MONTHS_IN_YEAR = 12;
@@ -65,8 +65,8 @@ public class WhenUserAddStamps extends WhenUserAtAnyPageWithForm<AddStampsPage> 
 		}
 	}
 	
-	public WhenUserAddStamps() {
-		super(AddStampsPage.class);
+	public WhenUserAddSeries() {
+		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
 		hasHeader(tr("t_add_series_ucfirst"));
 		

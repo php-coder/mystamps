@@ -30,7 +30,7 @@ import org.junit.runners.Suite;
 	WhenUserAuthenticates.class,
 	WhenAuthenticatedUserTryToAuthenticates.class,
 	WhenUserLogsOut.class,
-	WhenUserAddStamps.class,
+	WhenUserAddSeries.class,
 	WhenUserAddCountry.class,
 	WhenUserRecoveryPassword.class,
 	WhenUserOpenNotExistingPage.class,

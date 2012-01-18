@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import static ru.mystamps.web.SiteMap.ADD_STAMPS_PAGE_URL;
+import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -33,10 +33,10 @@ import static ru.mystamps.web.tests.page.element.Form.textareaField;
 import static ru.mystamps.web.tests.page.element.Form.uploadFileField;
 import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
-public class AddStampsPage extends AbstractPageWithForm {
+public class AddSeriesPage extends AbstractPageWithForm {
 	
-	public AddStampsPage(final WebDriver driver) {
-		super(driver, ADD_STAMPS_PAGE_URL);
+	public AddSeriesPage(final WebDriver driver) {
+		super(driver, ADD_SERIES_PAGE_URL);
 		
 		hasForm(
 			with(

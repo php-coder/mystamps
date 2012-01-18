@@ -31,13 +31,13 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.tests.page.AddCountryPage;
-import ru.mystamps.web.tests.page.AddStampsPage;
+import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.SiteMap.ADD_STAMPS_PAGE_URL;
+import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
 import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -141,15 +141,15 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 	}
 	
 	@Test
-	public void countryShouldBeAvailableForChoosingAtPageWithStamps() {
+	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
 		// NOTE: this test depends from
 		// shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation()
 		
-		page.open(ADD_STAMPS_PAGE_URL);
+		page.open(ADD_SERIES_PAGE_URL);
 		
-		final AddStampsPage stampsPage = new AddStampsPage(WebDriverFactory.getDriver());
+		final AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
 		
-		assertThat(stampsPage.getContryFieldValues()).contains(TEST_COUNTRY_NAME);
+		assertThat(seriesPage.getContryFieldValues()).contains(TEST_COUNTRY_NAME);
 	}
 	
 }

@@ -15,7 +15,7 @@
 				<spring:message code="t_add_series_ucfirst" />
 			</h3>
 			<div class="generic_form">
-				<form:form method="post" enctype="multipart/form-data" modelAttribute="addStampsForm">
+				<form:form method="post" enctype="multipart/form-data" modelAttribute="addSeriesForm">
 					<table>
 						<tr>
 							<td>

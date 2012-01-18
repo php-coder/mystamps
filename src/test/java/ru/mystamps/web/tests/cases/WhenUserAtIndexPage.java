@@ -53,9 +53,9 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test
-	public void shouldExistsLinkForAddingStamps() {
+	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			.overridingErrorMessage("should exists link to page for adding stamps")
+			.overridingErrorMessage("should exists link to page for adding series of stamps")
 			.isTrue();
 	}
 	

@@ -7,7 +7,7 @@
 <spring:url var="logoutUrl" value="<%= SiteMap.LOGOUT_PAGE_URL %>" />
 <spring:url var="registerUrl" value="<%= SiteMap.REGISTRATION_PAGE_URL %>" />
 <spring:url var="restorePasswordUrl" value="<%= SiteMap.RESTORE_PASSWORD_PAGE_URL %>" />
-<spring:url var="addStampsUrl" value="<%= SiteMap.ADD_STAMPS_PAGE_URL %>" />
+<spring:url var="addSeriesUrl" value="<%= SiteMap.ADD_SERIES_PAGE_URL %>" />
 <spring:url var="addCountryUrl" value="<%= SiteMap.ADD_COUNTRY_PAGE_URL %>" />
 <spring:url var="faviconUrl" value="/favicon.ico" />
 <spring:url var="mainCssUrl" value="/static/styles/main.css" />
