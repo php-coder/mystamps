@@ -36,10 +36,11 @@ import ru.mystamps.web.tests.WebElementUtils;
 
 import static ru.mystamps.web.SiteMap.SITE_URL;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+import static lombok.AccessLevel.PROTECTED;
+
+@RequiredArgsConstructor(access = PROTECTED)
 public abstract class AbstractPage {
 	
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
