@@ -26,7 +26,7 @@ public class AddSeriesForm {
 	@Getter @Setter private Integer issueDay;
 	@Getter @Setter private Integer issueMonth;
 	@Getter @Setter private Integer issueYear;
-	@Getter @Setter private String count;
+	@Getter @Setter private String amount;
 	@Getter @Setter private boolean withoutPerforation;
 	@Getter @Setter private String michelNo;
 	@Getter @Setter private String scottNo;
