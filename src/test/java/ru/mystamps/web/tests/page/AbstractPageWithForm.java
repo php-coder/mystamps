@@ -20,6 +20,7 @@ package ru.mystamps.web.tests.page;
 
 import java.util.List;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -94,7 +95,14 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public boolean inputHasAsterisk(final String id) {
-		return "*".equals(getTextOfElementByXPath(String.format(FIELD_REQUIRED_LOCATOR, id)));
+		try {
+			final String requiredFieldMark =
+				getTextOfElementByXPath(String.format(FIELD_REQUIRED_LOCATOR, id));
+			
+			return "*".equals(requiredFieldMark);
+		} catch (final NoSuchElementException ex) {
+			return false;
+		}
 	}
 	
 	public String getFieldValue(final String name) {
