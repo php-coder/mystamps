@@ -38,7 +38,7 @@ public class CountryService {
 	private CountryDao countryDao;
 	
 	@Transactional
-	public Integer add(final String countryName) {
+	public Country add(final String countryName) {
 		checkArgument(countryName != null, "Country name should be non null");
 		
 		final Country country = new Country();

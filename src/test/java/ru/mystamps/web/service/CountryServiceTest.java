@@ -69,12 +69,12 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldCallDao() {
-		final Integer expectedValue = new Integer(777);
-		when(countryDao.add(any(Country.class))).thenReturn(expectedValue);
+		final Country expected = getCountry();
+		when(countryDao.add(any(Country.class))).thenReturn(expected);
 		
-		final Integer returnValue = service.add(TEST_COUNTRY_NAME);
+		final Country actual = service.add(TEST_COUNTRY_NAME);
 		
-		assertThat(returnValue).isEqualTo(expectedValue);
+		assertThat(actual).isEqualTo(expected);
 	}
 	
 	@Test

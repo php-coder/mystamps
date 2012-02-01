@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 
@@ -65,9 +66,9 @@ public class AddCountryController {
 			return null;
 		}
 		
-		final Integer countryId = countryService.add(form.getCountry());
+		final Country country = countryService.add(form.getCountry());
 		
-		return "redirect:" + INFO_COUNTRY_PAGE_URL.replace("{id}", countryId.toString());
+		return "redirect:" + INFO_COUNTRY_PAGE_URL.replace("{id}", country.getId().toString());
 	}
 	
 }

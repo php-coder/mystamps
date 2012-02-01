@@ -34,9 +34,9 @@ public class CountryDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public Integer add(final Country country) {
+	public Country add(final Country country) {
 		entityManager.persist(country);
-		return country.getId();
+		return country;
 	}
 	
 	public List<Country> findAll() {
