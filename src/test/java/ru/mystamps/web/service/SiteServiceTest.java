@@ -75,7 +75,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(any(SuspiciousActivity.class));
+		verify(suspiciousActivityDao).save(any(SuspiciousActivity.class));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -92,7 +92,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getType()).isEqualTo(expectedType);
 	}
@@ -103,7 +103,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
 	}
@@ -121,7 +121,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getPage()).isEqualTo(TEST_PAGE);
 	}
@@ -132,7 +132,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isNull();
 	}
@@ -141,12 +141,12 @@ public class SiteServiceTest {
 	public void logAboutAbsentPageShouldPassNullToDaoForNotExistingUser() {
 		final User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
-		when(userDao.findById(any(Integer.class))).thenReturn(null);
+		when(userDao.findOne(any(Integer.class))).thenReturn(null);
 		
 		service.logAboutAbsentPage(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findById(user.getId());
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(userDao).findOne(user.getId());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isNull();
 	}
@@ -155,12 +155,12 @@ public class SiteServiceTest {
 	public void logAboutAbsentPageShouldPassUserToDao() {
 		final User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
-		when(userDao.findById(any(Integer.class))).thenReturn(user);
+		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
 		service.logAboutAbsentPage(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findById(user.getId());
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(userDao).findOne(user.getId());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isEqualTo(user);
 	}
@@ -171,7 +171,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, TEST_IP, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getIp()).isEqualTo(TEST_IP);
 	}
@@ -182,7 +182,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getIp()).isEmpty();
 	}
@@ -193,7 +193,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, TEST_REFERER_PAGE, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getRefererPage()).isEqualTo(TEST_REFERER_PAGE);
 	}
@@ -204,7 +204,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getRefererPage()).isEmpty();
 	}
@@ -215,7 +215,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, TEST_USER_AGENT);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEqualTo(TEST_USER_AGENT);
 	}
@@ -226,7 +226,7 @@ public class SiteServiceTest {
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEmpty();
 	}
@@ -241,7 +241,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(any(SuspiciousActivity.class));
+		verify(suspiciousActivityDao).save(any(SuspiciousActivity.class));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -258,7 +258,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getType()).isEqualTo(expectedType);
 	}
@@ -269,7 +269,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
 	}
@@ -287,7 +287,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getPage()).isEqualTo(TEST_PAGE);
 	}
@@ -298,7 +298,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isNull();
 	}
@@ -307,12 +307,12 @@ public class SiteServiceTest {
 	public void logAboutFailedAuthenticationShouldPassNullToDaoForNotExistingUser() {
 		final User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
-		when(userDao.findById(any(Integer.class))).thenReturn(null);
+		when(userDao.findOne(any(Integer.class))).thenReturn(null);
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findById(user.getId());
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(userDao).findOne(user.getId());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isNull();
 	}
@@ -321,12 +321,12 @@ public class SiteServiceTest {
 	public void logAboutFailedAuthenticationShouldPassUserToDao() {
 		final User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
-		when(userDao.findById(any(Integer.class))).thenReturn(user);
+		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findById(user.getId());
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(userDao).findOne(user.getId());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isEqualTo(user);
 	}
@@ -337,7 +337,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, TEST_IP, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getIp()).isEqualTo(TEST_IP);
 	}
@@ -348,7 +348,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getIp()).isEmpty();
 	}
@@ -359,7 +359,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, TEST_REFERER_PAGE, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getRefererPage()).isEqualTo(TEST_REFERER_PAGE);
 	}
@@ -370,7 +370,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getRefererPage()).isEmpty();
 	}
@@ -381,7 +381,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, TEST_USER_AGENT);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEqualTo(TEST_USER_AGENT);
 	}
@@ -392,7 +392,7 @@ public class SiteServiceTest {
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
-		verify(suspiciousActivityDao).add(activityCaptor.capture());
+		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEmpty();
 	}

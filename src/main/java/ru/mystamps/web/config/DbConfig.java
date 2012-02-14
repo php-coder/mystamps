@@ -84,7 +84,10 @@ public class DbConfig {
 		return entityManagerFactory;
 	}
 	
-	@Bean
+	/*
+	 * Explicitly specify name of bean which will be looking by Spring Data.
+	 */
+	@Bean(name = "transactionManager")
 	public PlatformTransactionManager getTransactionManager() {
 		final JpaTransactionManager transactionManager =
 			new JpaTransactionManager();

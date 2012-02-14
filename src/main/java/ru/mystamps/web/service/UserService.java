@@ -59,7 +59,7 @@ public class UserService {
 		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(email);
 		activation.setCreatedAt(new Date());
-		usersActivation.add(activation);
+		usersActivation.save(activation);
 	}
 	
 	@Transactional(readOnly = true)
@@ -111,7 +111,7 @@ public class UserService {
 		user.setHash(hash);
 		user.setSalt(salt);
 		
-		users.add(user);
+		users.save(user);
 		usersActivation.delete(activation);
 		
 		log.info(

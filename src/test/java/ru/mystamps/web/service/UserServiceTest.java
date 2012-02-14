@@ -79,14 +79,14 @@ public class UserServiceTest {
 	@Test
 	public void addRegistrationRequestShouldCallDao() {
 		service.addRegistrationRequest(TEST_EMAIL);
-		verify(usersActivationDao).add(any(UsersActivation.class));
+		verify(usersActivationDao).save(any(UsersActivation.class));
 	}
 	
 	@Test
 	public void addRegistrationRequestShouldGenerateActivationKey() {
 		service.addRegistrationRequest(TEST_EMAIL);
 		
-		verify(usersActivationDao).add(activationCaptor.capture());
+		verify(usersActivationDao).save(activationCaptor.capture());
 		
 		final String activationKey = activationCaptor.getValue().getActivationKey();
 		assertThat(activationKey.length()).as("activation key length")
@@ -98,11 +98,11 @@ public class UserServiceTest {
 	@Test
 	public void addRegistrationRequestShouldGenerateUniqueActivationKey() {
 		service.addRegistrationRequest(TEST_EMAIL);
-		verify(usersActivationDao).add(activationCaptor.capture());
+		verify(usersActivationDao).save(activationCaptor.capture());
 		final String firstActivationKey = activationCaptor.getValue().getActivationKey();
 		
 		service.addRegistrationRequest(TEST_EMAIL);
-		verify(usersActivationDao, atLeastOnce()).add(activationCaptor.capture());
+		verify(usersActivationDao, atLeastOnce()).save(activationCaptor.capture());
 		final String secondActivationKey = activationCaptor.getValue().getActivationKey();
 		
 		assertThat(firstActivationKey).isNotEqualTo(secondActivationKey);
@@ -117,7 +117,7 @@ public class UserServiceTest {
 	public void addRegistrationRequestShouldPassEmailToDao() {
 		service.addRegistrationRequest(TEST_EMAIL);
 		
-		verify(usersActivationDao).add(activationCaptor.capture());
+		verify(usersActivationDao).save(activationCaptor.capture());
 		
 		assertThat(activationCaptor.getValue().getEmail()).isEqualTo(TEST_EMAIL);
 	}
@@ -126,7 +126,7 @@ public class UserServiceTest {
 	public void addRegistrationRequestShouldAssignCurrentDate() {
 		service.addRegistrationRequest(TEST_EMAIL);
 		
-		verify(usersActivationDao).add(activationCaptor.capture());
+		verify(usersActivationDao).save(activationCaptor.capture());
 		
 		assertThat(activationCaptor.getValue().getCreatedAt()).isNotNull();
 	}
@@ -168,7 +168,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(any(User.class));
+		verify(userDao).save(any(User.class));
 	}
 	
 	@Test
@@ -192,7 +192,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao, never()).add(any(User.class));
+		verify(userDao, never()).save(any(User.class));
 		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
 	}
 	
@@ -207,7 +207,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_NAME);
 	}
@@ -218,7 +218,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, "", TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_LOGIN);
 	}
@@ -230,7 +230,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getEmail()).isEqualTo(activation.getEmail());
 	}
@@ -242,7 +242,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getRegisteredAt()).isEqualTo(activation.getCreatedAt());
 	}
@@ -253,7 +253,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		final String salt = userCaptor.getValue().getSalt();
 		assertThat(salt.length()).as("salt length").isEqualTo(User.SALT_LENGTH);
@@ -265,11 +265,11 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		final String firstSalt = userCaptor.getValue().getSalt();
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
-		verify(userDao, atLeastOnce()).add(userCaptor.capture());
+		verify(userDao, atLeastOnce()).save(userCaptor.capture());
 		final String secondSalt = userCaptor.getValue().getSalt();
 		
 		assertThat(firstSalt).isNotEqualTo(secondSalt);
@@ -286,7 +286,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		final int sha1SumLength = 40;
 		final String hash = userCaptor.getValue().getHash();
@@ -307,7 +307,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getLogin()).isEqualTo(TEST_LOGIN);
 	}
@@ -318,7 +318,7 @@ public class UserServiceTest {
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
-		verify(userDao).add(userCaptor.capture());
+		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getActivatedAt()).isNotNull();
 	}

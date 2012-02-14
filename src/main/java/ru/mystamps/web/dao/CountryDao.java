@@ -18,51 +18,10 @@
 
 package ru.mystamps.web.dao;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
 import ru.mystamps.web.entity.Country;
 
-@Repository
-public class CountryDao {
-	
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	public Country add(final Country country) {
-		entityManager.persist(country);
-		return country;
-	}
-	
-	public List<Country> findAll() {
-		final List<Country> result = (List<Country>)entityManager
-			.createQuery("select c from Country as c")
-			.getResultList();
-		
-		return result;
-	}
-	
-	public Country findById(final Integer id) {
-		return entityManager.find(Country.class, id);
-	}
-	
-	public Country findByName(final String name) {
-		try {
-			final Country country = (Country)entityManager
-				.createQuery("select c from Country as c where c.name = :name")
-				.setParameter("name", name)
-				.getSingleResult();
-			
-			return country;
-			
-		} catch (final NoResultException ex) {
-			return null;
-		}
-	}
-	
+public interface CountryDao extends CrudRepository<Country, Integer> {
+	Country findByName(final String name);
 }

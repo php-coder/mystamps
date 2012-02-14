@@ -92,7 +92,7 @@ public class SiteService {
 		
 		User currentUser = user;
 		if (currentUser != null) {
-			currentUser = users.findById(user.getId());
+			currentUser = users.findOne(user.getId());
 			if (currentUser == null) {
 				log.warn("Cannot find user with id {}", user.getId());
 			}
@@ -103,7 +103,7 @@ public class SiteService {
 		activity.setRefererPage(StringUtils.defaultString(referer));
 		activity.setUserAgent(StringUtils.defaultString(agent));
 		
-		suspiciousActivities.add(activity);
+		suspiciousActivities.save(activity);
 	}
 	
 	private SuspiciousActivityType getAbsentPageType() {

@@ -33,6 +33,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import static com.google.common.collect.Iterables.elementsEqual;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
@@ -70,7 +72,7 @@ public class CountryServiceTest {
 	@Test
 	public void addShouldCallDao() {
 		final Country expected = getCountry();
-		when(countryDao.add(any(Country.class))).thenReturn(expected);
+		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
 		final Country actual = service.add(TEST_COUNTRY_NAME);
 		
@@ -81,7 +83,7 @@ public class CountryServiceTest {
 	public void addShouldPassCountryNameToDao() {
 		service.add(TEST_COUNTRY_NAME);
 		
-		verify(countryDao).add(countryCaptor.capture());
+		verify(countryDao).save(countryCaptor.capture());
 		
 		assertThat(countryCaptor.getValue().getName()).isEqualTo(TEST_COUNTRY_NAME);
 	}
@@ -90,7 +92,7 @@ public class CountryServiceTest {
 	public void addShouldAssignCurrentDate() {
 		service.add(TEST_COUNTRY_NAME);
 		
-		verify(countryDao).add(countryCaptor.capture());
+		verify(countryDao).save(countryCaptor.capture());
 		
 		assertThat(countryCaptor.getValue().getCreatedAt()).isNotNull();
 	}
@@ -113,9 +115,9 @@ public class CountryServiceTest {
 		
 		when(countryDao.findAll()).thenReturn(expectedCountries);
 		
-		final List<Country> resultCountries = service.findAll();
+		final Iterable<Country> resultCountries = service.findAll();
 		
-		assertThat(resultCountries).isEqualTo(expectedCountries);
+		assertThat(elementsEqual(resultCountries, expectedCountries)).isTrue();
 	}
 	
 	//
@@ -156,7 +158,7 @@ public class CountryServiceTest {
 	@Test
 	public void findByIdShouldCallDao() {
 		final Country expectedCountry = getCountry();
-		when(countryDao.findById(anyInt())).thenReturn(expectedCountry);
+		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
 		
 		final Country country = service.findById(TEST_COUNTRY_ID);
 		
@@ -167,7 +169,7 @@ public class CountryServiceTest {
 	public void findByIdShouldPassIdToDao() {
 		service.findById(TEST_COUNTRY_ID);
 		
-		verify(countryDao).findById(eq(TEST_COUNTRY_ID));
+		verify(countryDao).findOne(eq(TEST_COUNTRY_ID));
 	}
 	
 	private Country getCountry() {

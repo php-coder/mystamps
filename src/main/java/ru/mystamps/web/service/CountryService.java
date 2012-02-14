@@ -21,7 +21,6 @@ package ru.mystamps.web.service;
 import javax.inject.Inject;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,11 +44,11 @@ public class CountryService {
 		country.setName(countryName);
 		country.setCreatedAt(new Date());
 		
-		return countryDao.add(country);
+		return countryDao.save(country);
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Country> findAll() {
+	public Iterable<Country> findAll() {
 		return countryDao.findAll();
 	}
 	
@@ -62,7 +61,7 @@ public class CountryService {
 	@Transactional(readOnly = true)
 	public Country findById(final Integer id) {
 		checkArgument(id != null, "Id should be non null");
-		return countryDao.findById(id);
+		return countryDao.findOne(id);
 	}
 	
 }
