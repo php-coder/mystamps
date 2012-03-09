@@ -22,7 +22,8 @@ import static org.fest.assertions.Assertions.assertThat;
 
 import java.net.HttpURLConnection;
 
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
@@ -34,7 +35,10 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
 		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	

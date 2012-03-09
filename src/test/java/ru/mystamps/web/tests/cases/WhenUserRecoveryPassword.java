@@ -18,7 +18,8 @@
 
 package ru.mystamps.web.tests.cases;
 
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.RestorePasswordPage;
 
@@ -29,7 +30,10 @@ public class WhenUserRecoveryPassword extends WhenUserAtAnyPage<RestorePasswordP
 	public WhenUserRecoveryPassword() {
 		super(RestorePasswordPage.class);
 		hasTitle(tr("t_restore_password_title"));
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	

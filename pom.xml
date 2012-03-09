@@ -19,6 +19,8 @@
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<spring.data.version>1.0.3.RELEASE</spring.data.version>
 		
+		<testng.version>6.4</testng.version>
+		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.dir>src/env</env.dir>
 		
@@ -143,9 +145,9 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -176,10 +178,6 @@
 			<version>${selenium.version}</version>
 			<scope>test</scope>
 			<exclusions>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
 				<exclusion>
 					<groupId>org.seleniumhq.selenium</groupId>
 					<artifactId>selenium-android-driver</artifactId>
@@ -319,6 +317,9 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
+					<includes>
+						<include>**/When*.java</include>
+					</includes>
 				</configuration>
 				<executions>
 					<execution>

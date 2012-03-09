@@ -21,12 +21,11 @@ package ru.mystamps.web.tests.cases;
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
@@ -43,8 +42,6 @@ import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
@@ -57,7 +54,10 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
 		hasHeader(tr("t_activation_on_site"));
-		
+	}
+	
+	@BeforeMethod
+	public void openPage() {
 		page.open();
 	}
 	
@@ -73,8 +73,6 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		
 		page.open(url);
 		assertThat(page).field("activationKey").hasValue(key);
-		
-		page.open();
 	}
 	
 	@Test

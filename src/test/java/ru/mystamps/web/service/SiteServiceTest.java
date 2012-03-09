@@ -20,14 +20,14 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -43,7 +43,6 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 
-@RunWith(MockitoJUnitRunner.class)
 public class SiteServiceTest {
 	private static final String TEST_PAGE         = "http://example.org/some/page";
 	private static final String TEST_IP           = "127.0.0.1";
@@ -65,6 +64,11 @@ public class SiteServiceTest {
 	@InjectMocks
 	private SiteService service = new SiteService();
 	
+	@BeforeMethod
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
 	//
 	// Tests for logAboutAbsentPage()
 	//
@@ -78,7 +82,7 @@ public class SiteServiceTest {
 		verify(suspiciousActivityDao).save(any(SuspiciousActivity.class));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void logAboutAbsentPageShouldThrowExceptionWhenActivityTypeNotFound() {
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(null);
 		
@@ -108,7 +112,7 @@ public class SiteServiceTest {
 		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void logAboutAbsentPageShouldThrowExceptionWhenPageIsNull() {
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
 		
@@ -244,7 +248,7 @@ public class SiteServiceTest {
 		verify(suspiciousActivityDao).save(any(SuspiciousActivity.class));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void logAboutFailedAuthenticationShouldThrowExceptionWhenActivityTypeNotFound() {
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(null);
 		
@@ -274,7 +278,7 @@ public class SiteServiceTest {
 		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void logAboutFailedAuthenticationShouldThrowExceptionWhenPageIsNull() {
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
 		

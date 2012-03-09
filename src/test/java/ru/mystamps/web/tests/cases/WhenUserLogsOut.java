@@ -18,12 +18,8 @@
 
 package ru.mystamps.web.tests.cases;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
+import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -32,8 +28,6 @@ import ru.mystamps.web.tests.page.LogoutAccountPage;
 import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 	
 	@Value("#{test.valid_user_login}")

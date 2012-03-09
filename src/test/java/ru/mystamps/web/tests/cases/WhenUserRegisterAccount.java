@@ -29,7 +29,8 @@ import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
@@ -39,7 +40,10 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
 		hasHeader(tr("t_registration_on_site"));
-		
+	}
+	
+	@BeforeMethod
+	public void openPage() {
 		page.open();
 	}
 	

@@ -21,6 +21,8 @@ package ru.mystamps.web.tests.cases;
 import java.net.HttpURLConnection;
 
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.tests.page.AbstractPage;
@@ -31,7 +33,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-abstract class WhenUserAtAnyPage<T extends AbstractPage> {
+@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
+abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGSpringContextTests {
 	
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
@@ -57,6 +60,7 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> {
 	private String header;
 	
 	public WhenUserAtAnyPage(final Class<T> pageClass) {
+		super();
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	

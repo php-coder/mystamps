@@ -20,12 +20,9 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
@@ -38,8 +35,6 @@ import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("#{test.valid_user_login}")
@@ -61,7 +56,10 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		super(AuthAccountPage.class);
 		hasTitle(tr("t_auth_title"));
 		hasHeader(tr("t_authentication_on_site"));
-		
+	}
+	
+	@BeforeMethod
+	public void openPage() {
 		page.open();
 	}
 	

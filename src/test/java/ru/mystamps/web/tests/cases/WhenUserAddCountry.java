@@ -20,12 +20,9 @@ package ru.mystamps.web.tests.cases;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -40,8 +37,6 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH
 import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
 import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage> {
 	
 	private static final String TEST_COUNTRY_NAME = "Russia";
@@ -53,7 +48,10 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		super(AddCountryPage.class);
 		hasTitle(tr("t_add_country"));
 		hasHeader(tr("t_add_country_ucfirst"));
-		
+	}
+	
+	@BeforeMethod
+	public void openPage() {
 		page.open();
 	}
 	
@@ -140,11 +138,8 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME);
 	}
 	
-	@Test
+	@Test(dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation")
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
-		// NOTE: this test depends from
-		// shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation()
-		
 		page.open(ADD_SERIES_PAGE_URL);
 		
 		final AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());

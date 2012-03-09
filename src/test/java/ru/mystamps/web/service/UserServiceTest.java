@@ -20,14 +20,14 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -43,7 +43,6 @@ import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 
-@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
 	private static final String TEST_NAME           = "Test Name";
@@ -71,6 +70,11 @@ public class UserServiceTest {
 	
 	@InjectMocks
 	private UserService service = new UserService();
+	
+	@BeforeMethod
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	//
 	// Tests for addRegistrationRequest()
@@ -108,7 +112,7 @@ public class UserServiceTest {
 		assertThat(firstActivationKey).isNotEqualTo(secondActivationKey);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void addRegistrationRequestShouldThrowExceptionWhenEmailIsNull() {
 		service.addRegistrationRequest(null);
 	}
@@ -135,7 +139,7 @@ public class UserServiceTest {
 	// Tests for findRegistrationRequestByActivationKey()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findRegistrationRequestByActivationKeyShouldThrowExceptionWhenKeyIsNull() {
 		service.findRegistrationRequestByActivationKey(null);
 	}
@@ -181,7 +185,7 @@ public class UserServiceTest {
 		verify(usersActivationDao).delete(activation);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenActivationKeyIsNull() {
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, null);
 	}
@@ -196,7 +200,7 @@ public class UserServiceTest {
 		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenNameIsNull() {
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
 	}
@@ -275,7 +279,7 @@ public class UserServiceTest {
 		assertThat(firstSalt).isNotEqualTo(secondSalt);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenPasswordIsNull() {
 		service.registerUser(TEST_LOGIN, null, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
@@ -296,7 +300,7 @@ public class UserServiceTest {
 		// TODO: check that hash based on password
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenLoginIsNull() {
 		service.registerUser(null, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
@@ -327,7 +331,7 @@ public class UserServiceTest {
 	// Tests for findByLogin()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findByLoginShouldThrowExceptionWhenLoginIsNull() {
 		service.findByLogin(null);
 	}
@@ -352,12 +356,12 @@ public class UserServiceTest {
 	// Tests for findByLoginAndPassword()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findByLoginAndPasswordShouldThrowExceptionWhenLoginIsNull() {
 		service.findByLoginAndPassword(null, TEST_PASSWORD);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findByLoginAndPasswordShouldThrowExceptionWhenPasswordIsNull() {
 		service.findByLoginAndPassword(TEST_LOGIN, null);
 	}

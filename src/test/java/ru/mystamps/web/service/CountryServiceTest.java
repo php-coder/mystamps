@@ -22,14 +22,14 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -45,7 +45,6 @@ import static org.mockito.Mockito.when;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
 
-@RunWith(MockitoJUnitRunner.class)
 public class CountryServiceTest {
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
@@ -60,11 +59,16 @@ public class CountryServiceTest {
 	@InjectMocks
 	private CountryService service = new CountryService();
 	
+	@BeforeMethod
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
+	
 	//
 	// Tests for add()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenCountryNameIsNull() {
 		service.add(null);
 	}
@@ -124,7 +128,7 @@ public class CountryServiceTest {
 	// Tests for findByName()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findByNameShouldThrowExceptionWhenNameIsNull() {
 		service.findByName(null);
 	}
@@ -150,7 +154,7 @@ public class CountryServiceTest {
 	// Tests for findById()
 	//
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void findByIdShouldThrowExceptionWhenIdIsNull() {
 		service.findById(null);
 	}

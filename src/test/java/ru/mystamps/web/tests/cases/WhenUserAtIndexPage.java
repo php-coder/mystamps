@@ -20,7 +20,8 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.IndexSitePage;
 
@@ -31,7 +32,10 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	public WhenUserAtIndexPage() {
 		super(IndexSitePage.class);
 		hasTitle(tr("t_index_title"));
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	

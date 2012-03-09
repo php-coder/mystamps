@@ -25,7 +25,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AddSeriesPage;
 
@@ -69,7 +70,10 @@ public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> 
 		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
 		hasHeader(tr("t_add_series_ucfirst"));
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	

@@ -20,7 +20,8 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import org.junit.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.MaintenanceSitePage;
 
@@ -34,7 +35,10 @@ public class WhenSiteOnMaintenance extends WhenUserAtAnyPage<MaintenanceSitePage
 		
 		// TODO:
 		//hasResponseServerCode(HttpURLConnection.HTTP_UNAVAILABLE);
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	

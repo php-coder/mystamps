@@ -18,29 +18,21 @@
 
 package ru.mystamps.web.tests.cases;
 
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Value;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 /*
- * TODO: use @BeforeClass/@AfterClass annotations from TestNG (#92)
- * (For now we can't use them because JUnit required than them should be static.)
- *
  * TODO: split test to parts
  * (For now we can't do this because order of tests not defined and logout
  * may happens before some of test.)
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
 public class WhenAuthenticatedUserRegisterAccount
 	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
@@ -53,7 +45,10 @@ public class WhenAuthenticatedUserRegisterAccount
 	public WhenAuthenticatedUserRegisterAccount() {
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
-		
+	}
+	
+	@BeforeClass
+	public void setUp() {
 		page.open();
 	}
 	
