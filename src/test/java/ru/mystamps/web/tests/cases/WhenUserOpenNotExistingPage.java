@@ -57,7 +57,7 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
-	@Test
+	@Test(enabled = false)
 	public void incidentShouldBeLoggedToDatabase() {
 		// TODO: check suspicious_events table (#99)
 	}
