@@ -63,12 +63,12 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
@@ -77,7 +77,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.isTrue();
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginShouldNotBeTooShort() {
 		page.authorizeUser("a", null);
 		
@@ -86,7 +86,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.hasError(tr("value.too-short", LOGIN_MIN_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginShouldNotBeTooLong() {
 		page.authorizeUser("abcde12345fghkl6", null);
 		
@@ -95,7 +95,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.hasError(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginWithForbiddenCharactersShouldBeRejected() {
 		page.authorizeUser("'t@$t'", null);
 		
@@ -104,7 +104,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.hasError(tr("login.invalid"));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void passwordShouldNotBeTooShort() {
 		page.authorizeUser(null, "123");
 		
@@ -113,7 +113,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.hasError(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void passwordWithForbiddenCharacterShouldBeRejected() {
 		page.authorizeUser(null, "'t@$t'");
 		
@@ -122,7 +122,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.hasError(tr("password.invalid"));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void invalidCredentialsShouldBeRejected() {
 		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
@@ -130,7 +130,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.isEqualTo(tr("ru.mystamps.web.validation.jsr303.ValidCredentials.message"));
 	}
 	
-	@Test
+	@Test(groups = "logic", dependsOnGroups = "std")
 	public void validCredentialsShouldAuthenticateUserOnSite() {
 		page.authorizeUser(validUserLogin, validUserPassword);
 		

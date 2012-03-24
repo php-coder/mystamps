@@ -47,12 +47,12 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsMessageWithLinkToAuthenticationPage() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
@@ -61,7 +61,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			.isTrue();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
@@ -70,7 +70,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			.isTrue();
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void emailShouldNotBeTooLong() {
 		page.registerUser(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		
@@ -79,7 +79,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			.hasError(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void emailShouldBeValid() {
 		final String[] emails = new String[] {
 				"login",
@@ -95,14 +95,16 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		}
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.registerUser(" test ");
 		
 		assertThat(page).field("email").hasValue("test");
 	}
 	
-	@Test
+	@Test(groups = "logic", dependsOnGroups = {
+		"std", "invalid", "misc"
+	})
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		

@@ -37,7 +37,7 @@ public class WhenUserRecoveryPassword extends WhenUserAtAnyPage<RestorePasswordP
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}

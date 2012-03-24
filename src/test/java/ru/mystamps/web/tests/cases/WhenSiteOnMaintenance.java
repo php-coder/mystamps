@@ -42,12 +42,12 @@ public class WhenSiteOnMaintenance extends WhenUserAtAnyPage<MaintenanceSitePage
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsMessage() {
 		assertThat(page.getErrorMessage()).isEqualTo(tr("t_maintenance_on_site", "\n"));
 	}

@@ -42,22 +42,22 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorMessage() {
 		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorCode() {
 		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
-	@Test(enabled = false)
+	@Test(groups = "logic", dependsOnGroups = "std", enabled = false)
 	public void incidentShouldBeLoggedToDatabase() {
 		// TODO: check suspicious_events table (#99)
 	}

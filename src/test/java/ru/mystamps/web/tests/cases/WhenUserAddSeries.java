@@ -77,22 +77,22 @@ public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> 
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueDayFieldShouldHaveOptionsFor31Days() {
 		assertThat(page.getDayFieldValues()).isEqualTo(EXPECTED_DAYS);
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueMonthFieldShouldHaveOptionsFor12Months() {
 		assertThat(page.getMonthFieldValues()).isEqualTo(EXPECTED_MONTHS);
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
 		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
 	}

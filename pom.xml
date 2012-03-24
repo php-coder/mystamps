@@ -317,9 +317,9 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
-					<includes>
-						<include>**/When*.java</include>
-					</includes>
+					<suiteXmlFiles>
+						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
 				</configuration>
 				<executions>
 					<execution>

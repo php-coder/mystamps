@@ -40,7 +40,7 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 		super(LogoutAccountPage.class);
 	}
 	
-	@Test
+	@Test(groups = "logic")
 	public void shouldRedirectAndClearSession() {
 		page.login(validUserLogin, validUserPassword);
 		page.open();

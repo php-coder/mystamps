@@ -55,12 +55,12 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldNotBeTooShort() {
 		page.addCountry("ee");
 		
@@ -69,7 +69,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("value.too-short", COUNTRY_NAME_MIN_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldNotBeTooLong() {
 		page.addCountry(StringUtils.repeat("e", COUNTRY_NAME_MAX_LENGTH + 1));
 		
@@ -78,7 +78,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("value.too-long", COUNTRY_NAME_MAX_LENGTH));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldBeUnique() {
 		page.addCountry(validCountryName);
 		
@@ -87,14 +87,14 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCountryName.message"));
 	}
 	
-	@Test
+	@Test(groups = "valid", dependsOnGroups = "std")
 	public void countryNameWithAllowedCharactersShouldBeAccepted() {
 		page.addCountry("Valid-Name Country");
 		
 		assertThat(page).field("country").hasNoError();
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameWithForbiddenCharactersShouldBeRejected() {
 		page.addCountry("S0m3+CountryN_ame");
 		
@@ -103,7 +103,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("country-name.invalid"));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldNotStartsFromHyphen() {
 		page.addCountry("-test");
 		
@@ -112,7 +112,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("country-name.hyphen"));
 	}
 	
-	@Test
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldNotEndsWithHyphen() {
 		page.addCountry("test-");
 		
@@ -121,14 +121,16 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 			.hasError(tr("country-name.hyphen"));
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void countryNameShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.addCountry(" t3st ");
 		
 		assertThat(page).field("country").hasValue("t3st");
 	}
 	
-	@Test
+	@Test(groups = "logic", dependsOnGroups = {
+		"std", "invalid", "valid", "misc"
+	})
 	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
 		page.addCountry(TEST_COUNTRY_NAME);
 		
@@ -138,7 +140,10 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME);
 	}
 	
-	@Test(dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation")
+	@Test(
+		groups = "logic",
+		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation"
+	)
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(ADD_SERIES_PAGE_URL);
 		

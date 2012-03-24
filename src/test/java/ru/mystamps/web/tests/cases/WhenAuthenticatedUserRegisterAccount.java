@@ -19,6 +19,7 @@
 package ru.mystamps.web.tests.cases;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,11 +29,6 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
-/*
- * TODO: split test to parts
- * (For now we can't do this because order of tests not defined and logout
- * may happens before some of test.)
- */
 public class WhenAuthenticatedUserRegisterAccount
 	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
@@ -50,22 +46,23 @@ public class WhenAuthenticatedUserRegisterAccount
 	@BeforeClass
 	public void setUp() {
 		page.open();
-	}
-	
-	@Test
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test
-	public void messageShouldBeShownAndFormWithLegendAreAbsent() {
 		page.login(validUserLogin, validUserPassword);
-		
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		page.logout();
+	}
+	
+	@Test(groups = "logic")
+	public void messageShouldBeShown() {
 		assertThat(page.textPresent(tr("t_already_registered"))).isTrue();
+	}
+	
+	@Test(groups = "misc")
+	public void formWithLegendShouldBeAbsent() {
 		assertThat(page.registrationFormExists()).isFalse();
 		assertThat(page.getFormHints()).isEmpty();
-		
-		page.logout();
 	}
 	
 }

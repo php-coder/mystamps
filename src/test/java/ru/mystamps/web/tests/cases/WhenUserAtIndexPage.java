@@ -39,31 +39,31 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 		page.open();
 	}
 	
-	@Test
+	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsWelcomeText() {
 		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForPasswordRecovery() {
 		assertThat(page.linkWithLabelExists(tr("t_recover_forget_password")))
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
 			.overridingErrorMessage("should exists link to page for adding series of stamps")
 			.isTrue();
 	}
 	
-	@Test
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
 			.overridingErrorMessage("should exists link to page for adding countries")
