@@ -21,17 +21,19 @@ package ru.mystamps.web.model;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class AddSeriesForm {
-	@Getter @Setter private String country;
-	@Getter @Setter private Integer issueDay;
-	@Getter @Setter private Integer issueMonth;
-	@Getter @Setter private Integer issueYear;
-	@Getter @Setter private String amount;
-	@Getter @Setter private boolean withoutPerforation;
-	@Getter @Setter private String michelNo;
-	@Getter @Setter private String scottNo;
-	@Getter @Setter private String yvertNo;
-	@Getter @Setter private String gibbonsNo;
-	@Getter @Setter private String comment;
-	@Getter @Setter private String image;
+	private String country;
+	private Integer issueDay;
+	private Integer issueMonth;
+	private Integer issueYear;
+	private String amount;
+	private boolean withoutPerforation;
+	private String michelNo;
+	private String scottNo;
+	private String yvertNo;
+	private String gibbonsNo;
+	private String comment;
+	private String image;
 }

@@ -43,6 +43,8 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 
+@Getter
+@Setter
 @FieldsMismatch(
 	first = "login",
 	second = "password",
@@ -57,8 +59,6 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 )
 public class ActivateAccountForm {
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Login1Checks.class)
 	@Size.List({
 		@Size(min = LOGIN_MIN_LENGTH, message = "{value.too-short}", groups = Login2Checks.class),
@@ -68,8 +68,6 @@ public class ActivateAccountForm {
 	@UniqueLogin(groups = Login4Checks.class)
 	private String login;
 	
-	@Getter
-	@Setter
 	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Name1Checks.class)
 	@Pattern.List({
 		@Pattern(regexp = NAME_REGEXP1, message = "{name.invalid}", groups = Name2Checks.class),
@@ -77,8 +75,6 @@ public class ActivateAccountForm {
 	})
 	private String name;
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Password1Checks.class)
 	@Size(min = PASSWORD_MIN_LENGTH, message = "{value.too-short}", groups = Password2Checks.class)
 	@Pattern(
@@ -88,13 +84,9 @@ public class ActivateAccountForm {
 	)
 	private String password;
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = PasswordConfirmation1Checks.class)
 	private String passwordConfirmation;
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = ActKey1Checks.class)
 	@Size(
 		min = ACT_KEY_LENGTH,

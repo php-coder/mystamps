@@ -30,24 +30,20 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "users_activation")
+@Getter
+@Setter
 public class UsersActivation {
 	
 	public static final int ACTIVATION_KEY_LENGTH = 10;
 	public static final int EMAIL_LENGTH = 255;
 	
-	@Getter
-	@Setter
 	@Id
 	@Column(name = "act_key", length = ACTIVATION_KEY_LENGTH)
 	private String activationKey;
 	
-	@Getter
-	@Setter
 	@Column(length = EMAIL_LENGTH, nullable = false)
 	private String email;
 	
-	@Getter
-	@Setter
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 	

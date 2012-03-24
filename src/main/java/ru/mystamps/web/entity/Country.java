@@ -31,23 +31,19 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "countries")
+@Getter
+@Setter
 public class Country {
 	
 	public static final int NAME_LENGTH = 50;
 	
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Getter
-	@Setter
 	@Column(length = NAME_LENGTH, unique = true, nullable = false)
 	private String name;
 	
-	@Getter
-	@Setter
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 	

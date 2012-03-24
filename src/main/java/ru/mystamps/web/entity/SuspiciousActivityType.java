@@ -29,18 +29,16 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "suspicious_activities_types")
+@Getter
+@Setter
 public class SuspiciousActivityType {
 	
 	public static final int NAME_LENGTH = 100;
 	
-	@Getter
-	@Setter
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Getter
-	@Setter
 	@Column(length = NAME_LENGTH, unique = true, nullable = false)
 	private String name;
 	

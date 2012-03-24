@@ -34,6 +34,8 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP1;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP2;
 
+@Getter
+@Setter
 @GroupSequence({
 	AddCountryForm.class,
 	AddCountryForm.Level1Checks.class,
@@ -44,8 +46,6 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP2;
 })
 public class AddCountryForm {
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Level1Checks.class)
 	@Size.List({
 		@Size(

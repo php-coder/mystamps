@@ -30,6 +30,8 @@ import lombok.Setter;
 
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
+@Getter
+@Setter
 @GroupSequence({
 	RegisterAccountForm.class,
 	RegisterAccountForm.Level1Checks.class,
@@ -38,8 +40,6 @@ import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 })
 public class RegisterAccountForm {
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Level1Checks.class)
 	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Level2Checks.class)
 	@Email(groups = Level3Checks.class)

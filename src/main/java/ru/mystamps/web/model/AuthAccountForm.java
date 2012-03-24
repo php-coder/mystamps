@@ -35,11 +35,11 @@ import static ru.mystamps.web.validation.ValidationRules.LOGIN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
 
+@Getter
+@Setter
 @ValidCredentials(groups = AuthAccountForm.FormChecks.class)
 public class AuthAccountForm {
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Login1Checks.class)
 	@Size.List({
 		@Size(min = LOGIN_MIN_LENGTH, message = "{value.too-short}", groups = Login2Checks.class),
@@ -48,8 +48,6 @@ public class AuthAccountForm {
 	@Pattern(regexp = LOGIN_REGEXP, message = "{login.invalid}", groups = Login3Checks.class)
 	private String login;
 	
-	@Getter
-	@Setter
 	@NotEmpty(groups = Password1Checks.class)
 	@Size(min = PASSWORD_MIN_LENGTH, message = "{value.too-short}", groups = Password2Checks.class)
 	@Pattern(
