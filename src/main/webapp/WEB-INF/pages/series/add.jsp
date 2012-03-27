@@ -53,12 +53,12 @@
 						</tr>
 						<tr>
 							<td>
-								<form:label path="amount">
-									<spring:message code="t_count" />
+								<form:label path="quantity">
+									<spring:message code="t_quantity" />
 								</form:label>
 							</td>
 							<td>
-								<form:input path="amount" maxlength="2" />
+								<form:input path="quantity" maxlength="2" />
 							</td>
 						</tr>
 						<tr>

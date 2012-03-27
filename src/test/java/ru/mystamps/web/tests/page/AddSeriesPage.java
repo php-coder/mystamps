@@ -44,7 +44,7 @@ public class AddSeriesPage extends AbstractPageWithForm {
 				selectField("issueDay"),
 				selectField("issueMonth"),
 				selectField("issueYear").withLabel(tr("t_issue_date")),
-				inputField("amount").withLabel(tr("t_count")),
+				inputField("quantity").withLabel(tr("t_quantity")),
 				checkboxField("withoutPerforation").withLabel(tr("t_without_perforation")),
 				inputField("michelNo").withLabel(tr("t_michel_no")),
 				inputField("scottNo").withLabel(tr("t_scott_no")),

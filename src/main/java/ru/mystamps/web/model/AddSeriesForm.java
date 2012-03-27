@@ -28,7 +28,7 @@ public class AddSeriesForm {
 	private Integer issueDay;
 	private Integer issueMonth;
 	private Integer issueYear;
-	private String amount;
+	private String quantity;
 	private boolean withoutPerforation;
 	private String michelNo;
 	private String scottNo;
