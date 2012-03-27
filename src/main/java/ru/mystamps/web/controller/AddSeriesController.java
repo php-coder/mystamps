@@ -86,7 +86,10 @@ public class AddSeriesController {
 		}
 		model.addAttribute("countries", countries);
 		
-		model.addAttribute(new AddSeriesForm());
+		final AddSeriesForm addSeriesForm = new AddSeriesForm();
+		addSeriesForm.setPerforated(true);
+		
+		model.addAttribute("addSeriesForm", addSeriesForm);
 	}
 	
 }

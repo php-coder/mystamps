@@ -63,12 +63,12 @@
 						</tr>
 						<tr>
 							<td>
-								<form:label path="withoutPerforation">
-									<spring:message code="t_without_perforation" />
+								<form:label path="perforated">
+									<spring:message code="t_perforated" />
 								</form:label>
 							</td>
 							<td>
-								<form:checkbox path="withoutPerforation" />
+								<form:checkbox path="perforated" />
 							</td>
 						</tr>
 						<tr>
