@@ -30,7 +30,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @Profile("test")
 public class TestDataSource {
 	
-	@Bean
+	@Bean(destroyMethod = "shutdown")
 	public DataSource getDataSource() {
 		return new EmbeddedDatabaseBuilder()
 			.setType(EmbeddedDatabaseType.H2)
