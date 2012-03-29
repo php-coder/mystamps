@@ -7,13 +7,9 @@
 	
 	<!-- See also src/env/dev/WEB-INF/web.xml for development configuration -->
 	
-	<!--
-		Specifies the default mode of this application, to be activated if no
-		other profile (or mode) is specified
-	-->
 	<context-param>
-		<param-name>spring.profiles.default</param-name>
-		<param-value>dev</param-value>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>test</param-value>
 	</context-param>
 	
 	<servlet>
