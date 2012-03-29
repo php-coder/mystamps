@@ -22,7 +22,7 @@
 		<testng.version>6.4</testng.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
-		<env.dir>src/env</env.dir>
+		<env.root.dir>src/env</env.root.dir>
 		
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
@@ -574,6 +574,9 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+			<properties>
+				<env.dir>${env.root.dir}/dev</env.dir>
+			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>commons-dbcp</groupId>
@@ -616,7 +619,7 @@
 									</outputDirectory>
 									<resources>
 										<resource>
-											<directory>${env.dir}/dev</directory>
+											<directory>${env.dir}</directory>
 											<excludes>
 												<exclude>mysql-scheme.sql</exclude>
 											</excludes>
@@ -650,6 +653,9 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<properties>
+				<env.dir>${env.root.dir}/test</env.dir>
+			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>org.springframework</groupId>
@@ -689,14 +695,14 @@
 								<configuration>
 									<target>
 										<copy
-											file="${env.dir}/test/test-data.sql"
+											file="${env.dir}/test-data.sql"
 											todir="${project.build.outputDirectory}"
 											failonerror="yes"
 											verbose="yes"
 											encoding="${project.build.sourceEncoding}">
 											<filterset>
 												<filtersfile
-													file="${env.dir}/test/spring/test-credentials.properties" />
+													file="${env.dir}/spring/test-credentials.properties" />
 											</filterset>
 										</copy>
 									</target>
@@ -721,7 +727,7 @@
 									</outputDirectory>
 									<resources>
 										<resource>
-											<directory>${env.dir}/test</directory>
+											<directory>${env.dir}</directory>
 											<excludes>
 												<exclude>test-data.sql</exclude>
 											</excludes>
@@ -741,7 +747,7 @@
 								<component>
 									<name>hbm2ddl</name>
 									<implementation>jpaconfiguration</implementation>
-									<outputDirectory>${env.dir}/test</outputDirectory>
+									<outputDirectory>${env.dir}</outputDirectory>
 								</component>
 							</components>
 							<componentProperties>
@@ -749,7 +755,7 @@
 								<format>true</format>
 								<jdk5>true</jdk5>
 								<propertyfile>
-									${env.dir}/test/spring/database.properties
+									${env.dir}/spring/database.properties
 								</propertyfile>
 								<outputfilename>hsql-scheme.sql</outputfilename>
 								
