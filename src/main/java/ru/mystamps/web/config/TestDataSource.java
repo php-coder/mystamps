@@ -33,8 +33,9 @@ public class TestDataSource {
 	@Bean
 	public DataSource getDataSource() {
 		return new EmbeddedDatabaseBuilder()
-			.setType(EmbeddedDatabaseType.HSQL)
-			.addScript("classpath:hsql-scheme.sql")
+			.setType(EmbeddedDatabaseType.H2)
+			.setName("mystamps")
+			.addScript("classpath:h2-scheme.sql")
 			.addScript("classpath:init-data.sql")
 			.addScript("classpath:test-data.sql")
 			.build();

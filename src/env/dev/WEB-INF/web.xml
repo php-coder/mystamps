@@ -5,6 +5,8 @@
 		http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	
+	<!-- See also src/env/test/WEB-INF/web.xml for testing configuration -->
+	
 	<!--
 		Specifies the default mode of this application, to be activated if no
 		other profile (or mode) is specified

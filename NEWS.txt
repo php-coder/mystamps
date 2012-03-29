@@ -1,6 +1,7 @@
 0.2 (not released yet)
 - ported DAO layer to use Spring-Data
 - ported unit and functional tests to TestNG
+- migrated from HSQL to H2 (in test environment)
 
 0.1.3
 - implemented ability to add countries
