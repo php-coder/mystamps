@@ -30,6 +30,7 @@ import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 import org.apache.commons.lang.StringUtils;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.RegisterAccountPage;
@@ -79,20 +80,11 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			.hasError(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void emailShouldBeValid() {
-		final String[] emails = new String[] {
-				"login",
-				"login@domain"
-		};
+	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidEmails")
+	public void emailShouldBeValid(final String invalidEmail, final String expectedMessage) {
+		page.registerUser(invalidEmail);
 		
-		for (final String invalidEmail : emails) {
-			page.registerUser(invalidEmail);
-			
-			assertThat(page)
-				.field("email")
-				.hasError(tr("ru.mystamps.web.validation.jsr303.Email.message"));
-		}
+		assertThat(page).field("email").hasError(expectedMessage);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
@@ -111,6 +103,17 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_REGISTRATION_PAGE_URL);
 		
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
+	}
+	
+	@DataProvider(name = "invalidEmails")
+	public Object[][] getInvalidEmails() {
+		final String expectedErrorMessage =
+			tr("ru.mystamps.web.validation.jsr303.Email.message");
+		
+		return new Object[][] {
+			{"login", expectedErrorMessage},
+			{"login@domain", expectedErrorMessage}
+		};
 	}
 	
 }

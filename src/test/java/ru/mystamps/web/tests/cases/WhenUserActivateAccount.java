@@ -25,6 +25,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.ActivateAccountPage;
@@ -159,19 +160,14 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 			.hasError(tr("value.too-long", NAME_MAX_LENGTH));
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void nameWithAllowedCharactersShouldBeAccepted() {
-		final String[] names = new String[] {
-			"x",
-			"Slava Se-mushin",
-			"Семён Якушев"
-		};
+	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validNames")
+	public void nameWithAllowedCharactersShouldBeAccepted(
+		final String name,
+		final Object whatever) {
 		
-		for (final String name : names) {
-			page.activateAccount(null, name, null, null, null);
-			
-			assertThat(page).field("name").hasNoError();
-		}
+		page.activateAccount(null, name, null, null, null);
+		
+		assertThat(page).field("name").hasNoError();
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -295,6 +291,15 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		assertThat(page.existsLinkTo(AUTHENTICATION_PAGE_URL))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
+	}
+	
+	@DataProvider(name = "validNames")
+	public Object[][] getValidNames() {
+		return new Object[][] {
+			{"x", null},
+			{"Slava Se-mushin", null},
+			{"Семён Якушев", null}
+		};
 	}
 	
 }
