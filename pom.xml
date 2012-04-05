@@ -12,6 +12,7 @@
 	<properties>
 		<guava.version>11.0.1</guava.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
+		<hibernate.validator.version>4.3.0.Beta1</hibernate.validator.version>
 		<lombok.version>0.10.8</lombok.version>
 		<mysql.connector.version>5.1.18</mysql.connector.version>
 		<selenium.version>2.16.1</selenium.version>
@@ -218,7 +219,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>${hibernate.validator.version}</version>
 		</dependency>
 		
 		<dependency>
