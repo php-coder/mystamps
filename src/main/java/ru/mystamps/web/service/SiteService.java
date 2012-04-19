@@ -25,7 +25,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

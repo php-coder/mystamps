@@ -24,7 +24,7 @@ import java.util.Date;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
