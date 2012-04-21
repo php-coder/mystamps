@@ -3,8 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><spring:message code="t_404_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><spring:message code="t_404_title" /></title>
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 		<link rel="stylesheet" type="text/css" href="${errorCssUrl}" />

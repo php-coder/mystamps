@@ -3,8 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>MyStamps: <spring:message code="t_restore_password_title" /></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MyStamps: <spring:message code="t_restore_password_title" /></title>
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
 	</head>
