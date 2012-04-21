@@ -129,7 +129,7 @@ public abstract class AbstractPage {
 	}
 	
 	public boolean footerExists() {
-		return elementWithIdExists("footer");
+		return elementWithTagNameExists("footer");
 	}
 	
 	public boolean linkWithLabelExists(final String label) {
@@ -217,6 +217,18 @@ public abstract class AbstractPage {
 		
 		try {
 			el = getElementByXPath(xpath);
+		} catch (final NoSuchElementException ex) {
+			return false;
+		}
+		
+		return el != null;
+	}
+	
+	protected boolean elementWithTagNameExists(final String tagName) {
+		WebElement el = null;
+		
+		try {
+			el = getElementByTagName(tagName);
 		} catch (final NoSuchElementException ex) {
 			return false;
 		}
