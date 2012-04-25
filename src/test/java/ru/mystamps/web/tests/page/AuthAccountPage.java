@@ -18,9 +18,13 @@
 
 package ru.mystamps.web.tests.page;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.notNull;
+import static com.google.common.collect.Iterables.any;
 
 import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 
@@ -59,8 +63,10 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	}
 	
 	public void authorizeUser(final String login, final String password) {
+		final Iterable<String> fieldNames = Arrays.asList(login, password);
+		
 		checkState(
-			!(login == null && password == null),
+			any(fieldNames, notNull()),
 			"Login and password should not be a null"
 		);
 		

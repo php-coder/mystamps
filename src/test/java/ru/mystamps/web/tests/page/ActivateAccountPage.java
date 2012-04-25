@@ -18,9 +18,13 @@
 
 package ru.mystamps.web.tests.page;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.notNull;
+import static com.google.common.collect.Iterables.any;
 
 import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 
@@ -75,15 +79,12 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 			final String passwordConfirmation,
 			final String activationKey) {
 		
-		final boolean allFieldsAreNull =
-			login == null
-			&& name == null
-			&& password == null
-			&& passwordConfirmation == null
-			&& activationKey == null;
+		final Iterable<String> fieldNames = Arrays.asList(
+			login, name, password, passwordConfirmation, activationKey
+		);
 		
 		checkState(
-			!allFieldsAreNull,
+			any(fieldNames, notNull()),
 			"Login, name, password with confirmation and activation key should not be null"
 		);
 		
