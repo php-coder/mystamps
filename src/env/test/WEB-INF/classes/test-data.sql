@@ -19,6 +19,13 @@ VALUES(
 	NOW()
 );
 
+INSERT INTO users_activation(act_key, email, created_at)
+VALUES(
+	'@not_activated_user2_act_key@',
+	'test2@example.org',
+	NOW()
+);
+
 INSERT INTO countries(name, created_at)
 VALUES(
 	'@valid_country_name@',

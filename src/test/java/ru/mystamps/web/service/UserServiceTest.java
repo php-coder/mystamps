@@ -200,11 +200,6 @@ public class UserServiceTest {
 		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
-	public void registerUserShouldThrowExceptionWhenNameIsNull() {
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
-	}
-	
 	@Test
 	public void registerUserShouldPassNameToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
@@ -214,6 +209,17 @@ public class UserServiceTest {
 		verify(userDao).save(userCaptor.capture());
 		
 		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_NAME);
+	}
+	
+	@Test
+	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
+		
+		verify(userDao).save(userCaptor.capture());
+		
+		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_LOGIN);
 	}
 	
 	@Test

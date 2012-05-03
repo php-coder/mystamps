@@ -51,6 +51,9 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Value("#{test.not_activated_user_act_key}")
 	private String notActivatedUserActKey;
 	
+	@Value("#{test.not_activated_user2_act_key}")
+	private String secondNotActivatedUserActKey;
+	
 	public WhenUserActivateAccount() {
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
@@ -291,6 +294,23 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		assertThat(page.existsLinkTo(AUTHENTICATION_PAGE_URL))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
+	}
+	
+	@Test(groups = "logic", dependsOnGroups = {
+		"std", "invalid", "valid", "misc"
+	})
+	public void activationShouldPassWhenUserProvidedEmptyName() {
+		page.activateAccount(
+			"2nd-test-login",
+			"",
+			"test-password",
+			"test-password",
+			secondNotActivatedUserActKey
+		);
+		
+		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
+		
+		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 	}
 	
 	@DataProvider(name = "validNames")

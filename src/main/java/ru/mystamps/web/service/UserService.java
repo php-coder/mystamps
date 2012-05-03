@@ -33,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -77,12 +78,11 @@ public class UserService {
 		
 		checkArgument(login != null, "Login should be non null");
 		checkArgument(password != null, "Password should be non null");
-		checkArgument(name != null, "Name should be non null");
 		checkArgument(activationKey != null, "Activation key should be non null");
 		
 		// use login as name if name is not provided
 		final String finalName;
-		if ("".equals(name)) {
+		if (isNullOrEmpty(name)) {
 			finalName = login;
 		} else {
 			finalName = name;
