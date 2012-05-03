@@ -48,8 +48,8 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Value("#{test.valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("#{test.not_activated_user_act_key}")
-	private String notActivatedUserActKey;
+	@Value("#{test.not_activated_user1_act_key}")
+	private String firstNotActivatedUserActKey;
 	
 	@Value("#{test.not_activated_user2_act_key}")
 	private String secondNotActivatedUserActKey;
@@ -280,11 +280,11 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	})
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
 		page.activateAccount(
-			"test-login",
+			"1st-test-login",
 			"Test Suite",
 			"test-password",
 			"test-password",
-			notActivatedUserActKey
+			firstNotActivatedUserActKey
 		);
 		
 		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);

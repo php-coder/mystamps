@@ -14,8 +14,8 @@ VALUES (
 
 INSERT INTO users_activation(act_key, email, created_at)
 VALUES(
-	'@not_activated_user_act_key@',
-	'test@example.org',
+	'@not_activated_user1_act_key@',
+	'test1@example.org',
 	NOW()
 );
 
