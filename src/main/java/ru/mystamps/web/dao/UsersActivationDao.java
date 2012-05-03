@@ -18,10 +18,14 @@
 
 package ru.mystamps.web.dao;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import ru.mystamps.web.entity.UsersActivation;
 
 public interface UsersActivationDao extends CrudRepository<UsersActivation, Integer> {
 	UsersActivation findByActivationKey(final String activationKey);
+	List<UsersActivation> findByCreatedAtLessThan(final Date expiredSince);
 }

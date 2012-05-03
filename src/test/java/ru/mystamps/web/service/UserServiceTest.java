@@ -446,7 +446,7 @@ public class UserServiceTest {
 		return user;
 	}
 	
-	private UsersActivation getUsersActivation() {
+	static UsersActivation getUsersActivation() {
 		final UsersActivation activation = new UsersActivation();
 		activation.setActivationKey(TEST_ACTIVATION_KEY);
 		activation.setEmail(TEST_EMAIL);
