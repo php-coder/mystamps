@@ -199,45 +199,28 @@ public abstract class AbstractPage {
 	//
 	
 	protected boolean elementWithIdExists(final String elementId) {
-		WebElement el = null;
-		
-		try {
-			el = getElementById(elementId);
-		} catch (final NoSuchElementException ex) {
-			return false;
-		}
-		
-		return el != null;
+		return getElement(By.id(elementId)) != null;
 	}
 	
 	protected boolean elementWithXPathExists(final String xpath) {
-		WebElement el = null;
-		
-		try {
-			el = getElementByXPath(xpath);
-		} catch (final NoSuchElementException ex) {
-			return false;
-		}
-		
-		return el != null;
+		return getElement(By.xpath(xpath)) != null;
 	}
 	
 	protected boolean elementWithTagNameExists(final String tagName) {
-		WebElement el = null;
-		
-		try {
-			el = getElementByTagName(tagName);
-		} catch (final NoSuchElementException ex) {
-			return false;
-		}
-		
-		return el != null;
+		return getElement(By.tagName(tagName)) != null;
 	}
 	
 	protected WebElement getLinkByText(final String linkText) {
 		try {
 			return  driver.findElement(By.linkText(linkText));
-		
+		} catch (final NoSuchElementException ex) {
+			return null;
+		}
+	}
+	
+	private WebElement getElement(By byMethod) {
+		try {
+			return driver.findElement(byMethod);
 		} catch (final NoSuchElementException ex) {
 			return null;
 		}
