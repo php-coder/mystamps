@@ -33,7 +33,6 @@ public final class SiteMap {
 	
 	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String INDEX_PAGE_URL            = "/";
-	public static final String MAINTENANCE_PAGE_URL      = "/site/maintenance";
 	public static final String SUCCESSFUL_REGISTRATION_PAGE_URL = "/successful/registration";
 	public static final String SUCCESSFUL_ACTIVATION_PAGE_URL = "/successful/activation";
 	

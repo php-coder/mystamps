@@ -13,12 +13,6 @@
 		</classes>
 	</test>
 	
-	<test name="When site on maintenance">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenSiteOnMaintenance" />
-		</classes>
-	</test>
-	
 	<test name="When user activate account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserActivateAccount" />
