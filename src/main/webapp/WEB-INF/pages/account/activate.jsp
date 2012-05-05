@@ -32,7 +32,7 @@
 								<span id="login.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:input path="login" />
+								<form:input path="login" required="required" />
 							</td>
 							<td>
 								<form:errors path="login" cssClass="error" />
@@ -62,7 +62,7 @@
 								<span id="password.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:password path="password" />
+								<form:password path="password" required="required" />
 							</td>
 							<td>
 								<form:errors path="password" cssClass="error" />
@@ -78,7 +78,7 @@
 								<span id="passwordConfirmation.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:password path="passwordConfirmation" />
+								<form:password path="passwordConfirmation" required="required" />
 							</td>
 							<td>
 								<form:errors path="passwordConfirmation" cssClass="error" />
@@ -94,7 +94,7 @@
 								<span id="activationKey.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:input path="activationKey" />
+								<form:input path="activationKey" required="required" />
 							</td>
 							<td>
 								<form:errors path="activationKey" cssClass="error" />

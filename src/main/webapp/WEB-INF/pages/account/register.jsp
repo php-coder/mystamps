@@ -48,7 +48,7 @@
 									<span id="email.required" class="required_field">*</span>
 								</td>
 								<td>
-									<form:input path="email" type="email" />
+									<form:input path="email" type="email" required="required" />
 								</td>
 								<td>
 									<form:errors path="email" cssClass="error" />
