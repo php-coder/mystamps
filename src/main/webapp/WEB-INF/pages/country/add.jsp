@@ -32,7 +32,7 @@
 								<span id="country.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:input path="country" required="required" />
+								<form:input path="country" required="required" autofocus="autofocus" />
 							</td>
 							<td>
 								<form:errors path="country" cssClass="error" />
