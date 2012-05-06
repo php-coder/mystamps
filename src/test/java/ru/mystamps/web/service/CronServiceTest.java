@@ -85,7 +85,7 @@ public class CronServiceTest {
 		
 		verify(usersActivationDao).findByCreatedAtLessThan(dateCaptor.capture());
 		
-		final Calendar calendar = new GregorianCalendar().getInstance();
+		final Calendar calendar = new GregorianCalendar();
 		calendar.setTime(new Date());
 		calendar.add(
 			Calendar.DAY_OF_MONTH,
