@@ -218,7 +218,7 @@ public abstract class AbstractPage {
 		}
 	}
 	
-	private WebElement getElement(By byMethod) {
+	private WebElement getElement(final By byMethod) {
 		try {
 			return driver.findElement(byMethod);
 		} catch (final NoSuchElementException ex) {
