@@ -64,7 +64,7 @@ public abstract class AbstractPage {
 	 */
 	public int getServerResponseCode() {
 		/**
-		 * XXX: currently we can't get access to server response from Selenium :(
+		 * FIXME: currently we can't get access to server response from Selenium :(
 		 * @see http://code.google.com/p/selenium/issues/detail?id=141
 		 */
 		
