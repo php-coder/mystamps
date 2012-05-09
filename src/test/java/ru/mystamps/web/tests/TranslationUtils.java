@@ -25,26 +25,26 @@ import java.util.ResourceBundle;
 
 public final class TranslationUtils {
 	
-	private static final String DEFAULT_BUNDLE_CLASS_NAME =
-		"ru.mystamps.i18n.Messages";
-	
-	private static final String VALIDATION_BUNDLE_CLASS_NAME =
-		"ValidationMessages";
+	private static final String [] BUNDLE_CLASS_NAMES = new String[] {
+		"ru.mystamps.i18n.Messages",
+		"ValidationMessages"
+	};
 	
 	private static final Locale DEFAULT_BUNDLE_LOCALE =
 		Locale.ENGLISH;
 	
-	private static final ResourceBundle BUNDLE =
-		PropertyResourceBundle.getBundle(
-			DEFAULT_BUNDLE_CLASS_NAME,
-			DEFAULT_BUNDLE_LOCALE
-		);
+	private static final ResourceBundle [] BUNDLES;
 	
-	private static final ResourceBundle VALIDATION_BUNDLE =
-			PropertyResourceBundle.getBundle(
-				VALIDATION_BUNDLE_CLASS_NAME,
+	static {
+		BUNDLES = new ResourceBundle[BUNDLE_CLASS_NAMES.length];
+		int i = 0;
+		for (String bundleClassName : BUNDLE_CLASS_NAMES) {
+			BUNDLES[i++] = PropertyResourceBundle.getBundle(
+				bundleClassName,
 				DEFAULT_BUNDLE_LOCALE
 			);
+		}
+	}
 	
 	private TranslationUtils() {
 	}
@@ -52,11 +52,10 @@ public final class TranslationUtils {
 	public static String tr(final String key) {
 		String msg = "";
 		
-		if (BUNDLE.containsKey(key)) {
-			msg = BUNDLE.getString(key);
-		
-		} else if (VALIDATION_BUNDLE.containsKey(key)) {
-			msg = VALIDATION_BUNDLE.getString(key);
+		for (ResourceBundle bundle : BUNDLES) {
+			if (bundle.containsKey(key)) {
+				return bundle.getString(key);
+			}
 		}
 		
 		return msg;
