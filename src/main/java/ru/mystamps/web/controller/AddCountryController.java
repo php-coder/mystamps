@@ -58,9 +58,7 @@ public class AddCountryController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String processInput(
-			@Valid final AddCountryForm form,
-			final BindingResult result) {
+	public String processInput(@Valid final AddCountryForm form, final BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;
