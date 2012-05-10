@@ -785,6 +785,17 @@
 								<artifactId>validation-api</artifactId>
 								<version>1.0.0.GA</version>
 							</dependency>
+							<!--
+								Explicitly add dependency to jboss-logging (which used by
+								hibernate-validator since 4.3.0) to prevent following error:
+								"Unable to get the default Bean Validation factory: InvocationTargetException:
+								org.jboss.logging.Logger.getMessageLogger(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object"
+							-->
+							<dependency>
+								<groupId>org.jboss.logging</groupId>
+								<artifactId>jboss-logging</artifactId>
+								<version>3.1.1.GA</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 					
