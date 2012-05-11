@@ -25,7 +25,6 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,12 +101,12 @@ public class AddSeriesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public void showForm(final Model model) {
+	public AddSeriesForm showForm() {
 		
 		final AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
 		
-		model.addAttribute("addSeriesForm", addSeriesForm);
+		return addSeriesForm;
 	}
 	
 }
