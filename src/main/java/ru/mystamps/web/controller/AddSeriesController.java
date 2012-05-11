@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -74,17 +75,34 @@ public class AddSeriesController {
 		this.countryService = countryService;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public void showForm(final Model model) {
-		model.addAttribute("days", DAYS);
-		model.addAttribute("months", MONTHS);
-		model.addAttribute("years", YEARS);
-		
+	@ModelAttribute("days")
+	public Map<Integer, Integer> getDays() {
+		return DAYS;
+	}
+	
+	@ModelAttribute("months")
+	public Map<Integer, Integer> getMonths() {
+		return MONTHS;
+	}
+	
+	@ModelAttribute("years")
+	public Map<Integer, Integer> getYears() {
+		return YEARS;
+	}
+	
+	@ModelAttribute("countries")
+	public Map<Integer, String> getCountries() {
 		final Map<Integer, String> countries = new LinkedHashMap<Integer, String>();
+		
 		for (final Country country : countryService.findAll()) {
 			countries.put(country.getId(), country.getName());
 		}
-		model.addAttribute("countries", countries);
+		
+		return countries;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public void showForm(final Model model) {
 		
 		final AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
