@@ -127,7 +127,7 @@
 								</form:label>
 							</td>
 							<td>
-								<input type="file" name="image" id="image" />
+								<form:input path="image" type="file" />
 							</td>
 						</tr>
 						<tr>
