@@ -212,10 +212,6 @@
 			<version>3.2.1</version>
 		</dependency>
 		
-		<!--
-			Spring try to find validation provider when we use
-			@Valid annotation
-		-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
