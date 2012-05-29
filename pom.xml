@@ -17,7 +17,7 @@
 		<mysql.connector.version>5.1.18</mysql.connector.version>
 		<selenium.version>2.16.1</selenium.version>
 		<slf4j.version>1.6.4</slf4j.version>
-		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.version>3.2.0.M1</spring.version>
 		<spring.data.version>1.1.0.RELEASE</spring.data.version>
 		
 		<testng.version>6.4</testng.version>
@@ -531,8 +531,8 @@
 		</repository>
 		
 		<repository>
-			<id>SpringSource Repository</id>
-			<url>http://repo.springsource.org/release</url>
+			<id>SpringSource Milestone Repository</id>
+			<url>http://repo.springsource.org/milestone</url>
 			<releases>
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
