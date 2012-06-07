@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<guava.version>11.0.1</guava.version>
+		<guava.version>12.0</guava.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
 		<hibernate.validator.version>4.3.0.Final</hibernate.validator.version>
 		<lombok.version>0.11.0</lombok.version>
