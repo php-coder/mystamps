@@ -32,6 +32,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.model.ActivateAccountForm.LoginChecks;
 import ru.mystamps.web.model.ActivateAccountForm.NameChecks;
@@ -40,10 +41,6 @@ import ru.mystamps.web.model.ActivateAccountForm.PasswordConfirmationChecks;
 import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.service.UserService;
-
-import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
-import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
 @Controller
 public class ActivateAccountController {
@@ -60,12 +57,12 @@ public class ActivateAccountController {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
-	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.GET)
+	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.GET)
 	public ActivateAccountForm showForm() {
 		return new ActivateAccountForm();
 	}
 	
-	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL, method = RequestMethod.GET)
+	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY, method = RequestMethod.GET)
 	public String showForm(@PathVariable("key") final String activationKey, final Map model) {
 		
 		final ActivateAccountForm form = new ActivateAccountForm();
@@ -75,7 +72,7 @@ public class ActivateAccountController {
 		return "account/activate";
 	}
 	
-	@RequestMapping(value = ACTIVATE_ACCOUNT_PAGE_URL, method = RequestMethod.POST)
+	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.POST)
 	public String processInput(
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,
@@ -93,7 +90,7 @@ public class ActivateAccountController {
 			form.getActivationKey()
 		);
 		
-		return "redirect:" + SUCCESSFUL_ACTIVATION_PAGE_URL;
+		return "redirect:" + Url.SUCCESSFUL_ACTIVATION_PAGE;
 	}
 	
 }

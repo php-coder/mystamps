@@ -30,14 +30,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.service.CountryService;
 
-import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
-
 @Controller
-@RequestMapping(ADD_SERIES_PAGE_URL)
+@RequestMapping(Url.ADD_SERIES_PAGE)
 public class AddSeriesController {
 	
 	private static final Integer DAYS_IN_MONTH  = 31;

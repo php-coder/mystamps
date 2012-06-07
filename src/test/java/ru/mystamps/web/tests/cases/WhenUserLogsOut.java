@@ -23,9 +23,9 @@ import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.LogoutAccountPage;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
@@ -47,7 +47,7 @@ public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 		
 		assertThat(page.getCurrentUrl())
 			.overridingErrorMessage("after logout we should be redirected to main page")
-			.isEqualTo(INDEX_PAGE_URL);
+			.isEqualTo(Url.INDEX_PAGE);
 		
 		assertThat(page.linkWithLabelExists(tr("t_enter")))
 			.overridingErrorMessage("should exists link to authentication page")

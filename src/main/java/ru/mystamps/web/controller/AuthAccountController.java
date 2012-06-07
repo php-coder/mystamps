@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AuthAccountForm;
 import ru.mystamps.web.model.AuthAccountForm.FormChecks;
@@ -37,11 +38,8 @@ import ru.mystamps.web.model.AuthAccountForm.PasswordChecks;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.service.UserService;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
-
 @Controller
-@RequestMapping(AUTHENTICATION_PAGE_URL)
+@RequestMapping(Url.AUTHENTICATION_PAGE)
 public class AuthAccountController {
 	
 	private final UserService userService;
@@ -100,7 +98,7 @@ public class AuthAccountController {
 		
 		session.setAttribute("user", user);
 		
-		return "redirect:" + INDEX_PAGE_URL;
+		return "redirect:" + Url.INDEX_PAGE;
 	}
 	
 }

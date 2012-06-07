@@ -30,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
 
-import static ru.mystamps.web.SiteMap.NOT_FOUND_PAGE_URL;
-
 @Controller
-@RequestMapping(NOT_FOUND_PAGE_URL)
+@RequestMapping(Url.NOT_FOUND_PAGE)
 public class NotFoundErrorController {
 	private final Logger log = LoggerFactory.getLogger(NotFoundErrorController.class);
 	

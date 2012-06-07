@@ -20,7 +20,7 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
-import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
+import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -31,7 +31,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 public class RegisterAccountPage extends AbstractPageWithForm {
 	
 	public RegisterAccountPage(final WebDriver driver) {
-		super(driver, REGISTRATION_PAGE_URL);
+		super(driver, Url.REGISTRATION_PAGE);
 		
 		hasForm(
 			with(

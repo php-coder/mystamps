@@ -31,9 +31,8 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.WebElementUtils;
-
-import static ru.mystamps.web.SiteMap.SITE_URL;
 
 import lombok.RequiredArgsConstructor;
 
@@ -55,7 +54,7 @@ public abstract class AbstractPage {
 	}
 	
 	public void open(final String pageUrl) {
-		driver.get(SITE_URL + pageUrl);
+		driver.get(Url.SITE + pageUrl);
 	}
 	
 	/**
@@ -83,7 +82,7 @@ public abstract class AbstractPage {
 	}
 	
 	private String getFullUrl() {
-		return SITE_URL + pageUrl;
+		return Url.SITE + pageUrl;
 	}
 	
 	/**
@@ -97,7 +96,7 @@ public abstract class AbstractPage {
 	 * Get short URL (without host name) of current page.
 	 **/
 	public String getCurrentUrl() {
-		return driver.getCurrentUrl().replace(SITE_URL, "");
+		return driver.getCurrentUrl().replace(Url.SITE, "");
 	}
 	
 	public String getTitle() {

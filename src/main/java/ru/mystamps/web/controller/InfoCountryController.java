@@ -26,12 +26,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
-
+import ru.mystamps.web.Url;
 import ru.mystamps.web.service.CountryService;
 
 @Controller
-@RequestMapping(INFO_COUNTRY_PAGE_URL)
+@RequestMapping(Url.INFO_COUNTRY_PAGE)
 public class InfoCountryController {
 	
 	private final CountryService countryService;

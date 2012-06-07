@@ -24,10 +24,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
@@ -72,7 +71,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
-		assertThat(page.existsLinkTo(RESTORE_PASSWORD_PAGE_URL))
+		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
@@ -136,7 +135,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		
 		assertThat(page.getCurrentUrl())
 			.overridingErrorMessage("after login we should be redirected to main page")
-			.isEqualTo(INDEX_PAGE_URL);
+			.isEqualTo(Url.INDEX_PAGE);
 		
 		assertThat(page.getUserBarEntries())
 			.overridingErrorMessage("after login user name should be in user bar")

@@ -20,9 +20,6 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
@@ -33,6 +30,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
@@ -57,7 +55,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void shouldExistsMessageWithLinkToAuthenticationPage() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
-		assertThat(page.existsLinkTo(AUTHENTICATION_PAGE_URL))
+		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
@@ -66,7 +64,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
-		assertThat(page.existsLinkTo(RESTORE_PASSWORD_PAGE_URL))
+		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
 			.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
@@ -100,7 +98,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_REGISTRATION_PAGE_URL);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_REGISTRATION_PAGE);
 		
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
 	}

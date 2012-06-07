@@ -22,11 +22,11 @@ import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 
+import ru.mystamps.web.Url;
+
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.Iterables.any;
-
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -38,7 +38,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 public class AuthAccountPage extends AbstractPageWithForm {
 	
 	public AuthAccountPage(final WebDriver driver) {
-		super(driver, AUTHENTICATION_PAGE_URL);
+		super(driver, Url.AUTHENTICATION_PAGE);
 		
 		hasForm(
 			with(

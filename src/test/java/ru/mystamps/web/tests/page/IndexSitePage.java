@@ -20,12 +20,12 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
+import ru.mystamps.web.Url;
 
 public class IndexSitePage extends AbstractPage {
 	
 	public IndexSitePage(final WebDriver driver) {
-		super(driver, INDEX_PAGE_URL);
+		super(driver, Url.INDEX_PAGE);
 	}
 	
 }

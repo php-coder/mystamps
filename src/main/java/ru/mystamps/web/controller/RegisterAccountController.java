@@ -29,14 +29,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
 
-import static ru.mystamps.web.SiteMap.REGISTRATION_PAGE_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
-
 @Controller
-@RequestMapping(REGISTRATION_PAGE_URL)
+@RequestMapping(Url.REGISTRATION_PAGE)
 public class RegisterAccountController {
 	
 	private final UserService userService;
@@ -67,7 +65,7 @@ public class RegisterAccountController {
 		
 		userService.addRegistrationRequest(form.getEmail());
 		
-		return "redirect:" + SUCCESSFUL_REGISTRATION_PAGE_URL;
+		return "redirect:" + Url.SUCCESSFUL_REGISTRATION_PAGE;
 	}
 	
 }

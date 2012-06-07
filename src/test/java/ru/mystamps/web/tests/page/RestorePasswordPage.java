@@ -20,12 +20,12 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
+import ru.mystamps.web.Url;
 
 public class RestorePasswordPage extends AbstractPage {
 	
 	public RestorePasswordPage(final WebDriver driver) {
-		super(driver, RESTORE_PASSWORD_PAGE_URL);
+		super(driver, Url.RESTORE_PASSWORD_PAGE);
 	}
 	
 }

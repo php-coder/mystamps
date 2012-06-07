@@ -20,9 +20,9 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
-import static com.google.common.base.Preconditions.checkState;
+import ru.mystamps.web.Url;
 
-import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
+import static com.google.common.base.Preconditions.checkState;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -33,7 +33,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 public class AddCountryPage extends AbstractPageWithForm {
 	
 	public AddCountryPage(final WebDriver driver) {
-		super(driver, ADD_COUNTRY_PAGE_URL);
+		super(driver, Url.ADD_COUNTRY_PAGE);
 		
 		hasForm(
 			with(

@@ -32,10 +32,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.RESTORE_PASSWORD_PAGE_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_REGISTRATION_PAGE_URL;
+import ru.mystamps.web.Url;
 
 @Configuration
 @EnableWebMvc
@@ -53,10 +50,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
-		registry.addViewController(INDEX_PAGE_URL).setViewName("site/index");
-		registry.addViewController(RESTORE_PASSWORD_PAGE_URL);
-		registry.addViewController(SUCCESSFUL_ACTIVATION_PAGE_URL);
-		registry.addViewController(SUCCESSFUL_REGISTRATION_PAGE_URL);
+		registry.addViewController(Url.INDEX_PAGE).setViewName("site/index");
+		registry.addViewController(Url.RESTORE_PASSWORD_PAGE);
+		registry.addViewController(Url.SUCCESSFUL_ACTIVATION_PAGE);
+		registry.addViewController(Url.SUCCESSFUL_REGISTRATION_PAGE);
 	}
 	
 	@Override

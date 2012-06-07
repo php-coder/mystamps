@@ -24,17 +24,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static ru.mystamps.web.SiteMap.INDEX_PAGE_URL;
-import static ru.mystamps.web.SiteMap.LOGOUT_PAGE_URL;
+import ru.mystamps.web.Url;
 
 @Controller
-@RequestMapping(LOGOUT_PAGE_URL)
+@RequestMapping(Url.LOGOUT_PAGE)
 public class LogoutAccountController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String logout(final HttpSession session) {
 		session.invalidate();
-		return "redirect:" + INDEX_PAGE_URL;
+		return "redirect:" + Url.INDEX_PAGE;
 	}
 	
 }

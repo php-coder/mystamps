@@ -28,6 +28,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
@@ -38,10 +39,6 @@ import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
-
-import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL;
-import static ru.mystamps.web.SiteMap.AUTHENTICATION_PAGE_URL;
-import static ru.mystamps.web.SiteMap.SUCCESSFUL_ACTIVATION_PAGE_URL;
 
 public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
@@ -73,7 +70,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void activationKeyShouldBeAutoFilledFromURL() {
 		final String key = "7777744444";
-		final String url = ACTIVATE_ACCOUNT_PAGE_WITH_KEY_URL.replace("{key}", key);
+		final String url = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", key);
 		
 		page.open(url);
 		assertThat(page).field("activationKey").hasValue(key);
@@ -287,11 +284,11 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 			firstNotActivatedUserActKey
 		);
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_ACTIVATION_PAGE);
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		
-		assertThat(page.existsLinkTo(AUTHENTICATION_PAGE_URL))
+		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
@@ -308,7 +305,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 			secondNotActivatedUserActKey
 		);
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(SUCCESSFUL_ACTIVATION_PAGE_URL);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_ACTIVATION_PAGE);
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 	}

@@ -22,11 +22,11 @@ import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 
+import ru.mystamps.web.Url;
+
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.Iterables.any;
-
-import static ru.mystamps.web.SiteMap.ACTIVATE_ACCOUNT_PAGE_URL;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -38,7 +38,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 public class ActivateAccountPage extends AbstractPageWithForm {
 	
 	public ActivateAccountPage(final WebDriver driver) {
-		super(driver, ACTIVATE_ACCOUNT_PAGE_URL);
+		super(driver, Url.ACTIVATE_ACCOUNT_PAGE);
 		
 		hasForm(
 			with(

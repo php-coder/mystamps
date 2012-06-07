@@ -61,7 +61,7 @@
 	</jsp-config>
 	
 	<!--
-		see also src/main/java/ru/mystamps/web/SiteMap.java with
+		see also src/main/java/ru/mystamps/web/Url.java with
 		mapping controller to location
 	-->
 	<error-page>

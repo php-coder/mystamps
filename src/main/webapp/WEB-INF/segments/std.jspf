@@ -1,14 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page import="ru.mystamps.web.SiteMap" %>
-<spring:url var="authUrl" value="<%= SiteMap.AUTHENTICATION_PAGE_URL %>" />
-<spring:url var="activateUrl" value="<%= SiteMap.ACTIVATE_ACCOUNT_PAGE_URL %>" />
-<spring:url var="logoutUrl" value="<%= SiteMap.LOGOUT_PAGE_URL %>" />
-<spring:url var="registerUrl" value="<%= SiteMap.REGISTRATION_PAGE_URL %>" />
-<spring:url var="restorePasswordUrl" value="<%= SiteMap.RESTORE_PASSWORD_PAGE_URL %>" />
-<spring:url var="addSeriesUrl" value="<%= SiteMap.ADD_SERIES_PAGE_URL %>" />
-<spring:url var="addCountryUrl" value="<%= SiteMap.ADD_COUNTRY_PAGE_URL %>" />
+<%@ page import="ru.mystamps.web.Url" %>
+<spring:url var="authUrl" value="<%= Url.AUTHENTICATION_PAGE %>" />
+<spring:url var="activateUrl" value="<%= Url.ACTIVATE_ACCOUNT_PAGE %>" />
+<spring:url var="logoutUrl" value="<%= Url.LOGOUT_PAGE %>" />
+<spring:url var="registerUrl" value="<%= Url.REGISTRATION_PAGE %>" />
+<spring:url var="restorePasswordUrl" value="<%= Url.RESTORE_PASSWORD_PAGE %>" />
+<spring:url var="addSeriesUrl" value="<%= Url.ADD_SERIES_PAGE %>" />
+<spring:url var="addCountryUrl" value="<%= Url.ADD_COUNTRY_PAGE %>" />
 <spring:url var="faviconUrl" value="/favicon.ico" />
 <spring:url var="mainCssUrl" value="/static/styles/main.css" />
 <spring:url var="errorCssUrl" value="/static/styles/error.css" />

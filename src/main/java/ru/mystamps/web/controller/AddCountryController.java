@@ -29,15 +29,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.validation.BindingResult;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 
-import static ru.mystamps.web.SiteMap.ADD_COUNTRY_PAGE_URL;
-import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
-
 @Controller
-@RequestMapping(ADD_COUNTRY_PAGE_URL)
+@RequestMapping(Url.ADD_COUNTRY_PAGE)
 public class AddCountryController {
 	
 	private final CountryService countryService;
@@ -66,7 +64,7 @@ public class AddCountryController {
 		
 		final Country country = countryService.add(form.getCountry());
 		
-		return "redirect:" + INFO_COUNTRY_PAGE_URL.replace("{id}", country.getId().toString());
+		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
 	}
 	
 }

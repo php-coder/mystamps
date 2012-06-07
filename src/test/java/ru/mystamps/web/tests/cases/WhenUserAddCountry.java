@@ -26,6 +26,7 @@ import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.tests.page.AddCountryPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
@@ -34,8 +35,6 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
-import static ru.mystamps.web.SiteMap.INFO_COUNTRY_PAGE_URL;
 
 public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -134,7 +133,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
 		page.addCountry(TEST_COUNTRY_NAME);
 		
-		final String expectedUrl = INFO_COUNTRY_PAGE_URL.replace("{id}", "\\d+");
+		final String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{id}", "\\d+");
 		
 		assertThat(page.getCurrentUrl()).matches(expectedUrl);
 		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME);
@@ -145,7 +144,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation"
 	)
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
-		page.open(ADD_SERIES_PAGE_URL);
+		page.open(Url.ADD_SERIES_PAGE);
 		
 		final AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
 		

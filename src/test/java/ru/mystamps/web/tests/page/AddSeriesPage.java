@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 
-import static ru.mystamps.web.SiteMap.ADD_SERIES_PAGE_URL;
+import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -36,7 +36,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 public class AddSeriesPage extends AbstractPageWithForm {
 	
 	public AddSeriesPage(final WebDriver driver) {
-		super(driver, ADD_SERIES_PAGE_URL);
+		super(driver, Url.ADD_SERIES_PAGE);
 		
 		hasForm(
 			with(
