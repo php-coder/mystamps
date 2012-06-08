@@ -30,7 +30,6 @@ public final class Url {
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE                  = "http://127.0.0.1:8081";
 	
-	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String INDEX_PAGE            = "/";
 	public static final String SUCCESSFUL_REGISTRATION_PAGE = "/successful/registration";
 	public static final String SUCCESSFUL_ACTIVATION_PAGE = "/successful/activation";
@@ -46,7 +45,6 @@ public final class Url {
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
 	
-	// defined at ru.mystamps.web.config.MvcConfig
 	public static final String RESTORE_PASSWORD_PAGE = "/password/restore";
 	
 	// see also error-page definition at src/main/webapp/WEB-INF/web.xml
