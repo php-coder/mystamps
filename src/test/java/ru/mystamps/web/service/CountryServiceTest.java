@@ -45,6 +45,8 @@ import static org.mockito.Mockito.when;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
 
+import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+
 public class CountryServiceTest {
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
@@ -98,7 +100,7 @@ public class CountryServiceTest {
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
-		assertThat(countryCaptor.getValue().getCreatedAt()).isNotNull();
+		assertThat(countryCaptor.getValue().getCreatedAt()).isCurrentDate();
 	}
 	
 	//

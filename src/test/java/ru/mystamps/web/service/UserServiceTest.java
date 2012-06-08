@@ -43,6 +43,8 @@ import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 
+import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+
 public class UserServiceTest {
 	
 	private static final String TEST_NAME           = "Test Name";
@@ -132,7 +134,7 @@ public class UserServiceTest {
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		
-		assertThat(activationCaptor.getValue().getCreatedAt()).isNotNull();
+		assertThat(activationCaptor.getValue().getCreatedAt()).isCurrentDate();
 	}
 	
 	//
@@ -330,7 +332,7 @@ public class UserServiceTest {
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getActivatedAt()).isNotNull();
+		assertThat(userCaptor.getValue().getActivatedAt()).isCurrentDate();
 	}
 	
 	//

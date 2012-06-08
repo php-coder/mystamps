@@ -43,6 +43,8 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 
+import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+
 public class SiteServiceTest {
 	private static final String TEST_PAGE         = "http://example.org/some/page";
 	private static final String TEST_IP           = "127.0.0.1";
@@ -109,7 +111,7 @@ public class SiteServiceTest {
 		
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
-		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
+		assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
 	}
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -275,7 +277,7 @@ public class SiteServiceTest {
 		
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
-		assertThat(activityCaptor.getValue().getOccuredAt()).isNotNull();
+		assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
 	}
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
