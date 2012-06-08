@@ -100,14 +100,14 @@ public class UserService {
 		
 		final String salt = generateSalt();
 		final String hash = computeSha1Sum(salt + password);
-		final Date currentDate = new Date();
+		final Date now = new Date();
 		
 		final User user = new User();
 		user.setLogin(login);
 		user.setName(finalName);
 		user.setEmail(email);
 		user.setRegisteredAt(registrationDate);
-		user.setActivatedAt(currentDate);
+		user.setActivatedAt(now);
 		user.setHash(hash);
 		user.setSalt(salt);
 		
