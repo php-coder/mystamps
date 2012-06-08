@@ -26,10 +26,10 @@ import static com.google.common.base.Preconditions.checkState;
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 
 /**
-  * Custom assertions for AbstractPageWithForm class.
-  *
-  * @see http://docs.codehaus.org/display/FEST/Extending+FEST-Assert+with+Custom+Assertions
-  **/
+ * Custom assertions for AbstractPageWithForm class.
+ *
+ * @see http://docs.codehaus.org/display/FEST/Extending+FEST-Assert+with+Custom+Assertions
+ **/
 public final class AbstractPageWithFormAssert
 	extends GenericAssert<AbstractPageWithFormAssert, AbstractPageWithForm> {
 	
