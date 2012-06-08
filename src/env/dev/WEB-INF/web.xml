@@ -25,7 +25,10 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>ru.mystamps.web.config</param-value>
+			<param-value>
+				ru.mystamps.web.config.DispatcherServletContext,
+				ru.mystamps.web.config.DevDataSource
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
