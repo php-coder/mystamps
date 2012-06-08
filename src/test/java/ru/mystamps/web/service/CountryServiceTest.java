@@ -93,7 +93,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void addShouldAssignCurrentDate() {
+	public void addShouldAssignCreatedAtToCurrentDate() {
 		service.add(TEST_COUNTRY_NAME);
 		
 		verify(countryDao).save(countryCaptor.capture());

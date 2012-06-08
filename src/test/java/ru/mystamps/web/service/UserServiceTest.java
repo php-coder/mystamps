@@ -127,7 +127,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void addRegistrationRequestShouldAssignCurrentDate() {
+	public void addRegistrationRequestShouldAssignCreatedAtToCurrentDate() {
 		service.addRegistrationRequest(TEST_EMAIL);
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
@@ -323,7 +323,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void registerUserShouldAssignActivationDate() {
+	public void registerUserShouldAssignActivatedAtToCurrentDate() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
