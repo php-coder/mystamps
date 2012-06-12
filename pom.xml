@@ -442,6 +442,9 @@
 							</regex>
 						</regexes>
 					</check>
+					<formats>
+						<format>xml</format>
+					</formats>
 				</configuration>
 				<executions>
 					<execution>
@@ -449,6 +452,7 @@
 						<phase>verify</phase>
 						<goals>
 							<goal>clean</goal>
+							<goal>cobertura</goal>
 							<goal>check</goal>
 						</goals>
 					</execution>
