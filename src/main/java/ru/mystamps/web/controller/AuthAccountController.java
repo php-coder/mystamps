@@ -83,8 +83,13 @@ public class AuthAccountController {
 				final String page = request.getRequestURI();
 				final String ip   = request.getRemoteAddr();
 				
+				Integer uid = null;
 				final User user = (User)session.getAttribute("user");
-				siteService.logAboutFailedAuthentication(page, user, ip, referer, agent);
+				if (user != null)  {
+					uid = user.getId();
+				}
+				
+				siteService.logAboutFailedAuthentication(page, uid, ip, referer, agent);
 			}
 			
 			return null;

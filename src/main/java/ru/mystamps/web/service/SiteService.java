@@ -55,29 +55,29 @@ public class SiteService {
 	@Transactional
 	public void logAboutAbsentPage(
 			final String page,
-			final User user,
+			final Integer userId,
 			final String ip,
 			final String referer,
 			final String agent) {
 		
-		log(getAbsentPageType(), page, user, ip, referer, agent);
+		log(getAbsentPageType(), page, userId, ip, referer, agent);
 	}
 	
 	@Transactional
 	public void logAboutFailedAuthentication(
 			final String page,
-			final User user,
+			final Integer userId,
 			final String ip,
 			final String referer,
 			final String agent) {
 		
-		log(getFailedAuthenticationType(), page, user, ip, referer, agent);
+		log(getFailedAuthenticationType(), page, userId, ip, referer, agent);
 	}
 	
 	private void log(
 			final SuspiciousActivityType type,
 			final String page,
-			final User user,
+			final Integer userId,
 			final String ip,
 			final String referer,
 			final String agent) {
@@ -90,11 +90,11 @@ public class SiteService {
 		activity.setOccuredAt(new Date());
 		activity.setPage(page);
 		
-		User currentUser = user;
-		if (currentUser != null) {
-			currentUser = users.findOne(user.getId());
+		User currentUser = null;
+		if (userId != null) {
+			currentUser = users.findOne(userId);
 			if (currentUser == null) {
-				log.warn("Cannot find user with id {}", user.getId());
+				log.warn("Cannot find user with id {}", userId);
 			}
 		}
 		activity.setUser(currentUser);

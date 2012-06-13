@@ -57,9 +57,13 @@ public class NotFoundErrorController {
 		final String page = (String)request.getAttribute("javax.servlet.error.request_uri");
 		final String ip   = request.getRemoteAddr();
 		final User user   = (User)session.getAttribute("user");
+		Integer uid = null;
+		if (user != null) {
+			uid = user.getId();
+		}
 		
 		try {
-			siteService.logAboutAbsentPage(page, user, ip, referer, agent);
+			siteService.logAboutAbsentPage(page, uid, ip, referer, agent);
 		} catch (final Exception ex) {
 			// intentionally ignored:
 			// database error should not break showing of 404 page
