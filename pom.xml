@@ -409,6 +409,7 @@
 					<consoleOutput>true</consoleOutput>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<linkXRef>false</linkXRef>
+					<failOnViolation>false</failOnViolation>
 					<configLocation>
 						${basedir}/src/main/config/checkstyle.xml
 					</configLocation>
