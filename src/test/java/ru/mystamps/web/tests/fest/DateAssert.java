@@ -18,10 +18,8 @@
 
 package ru.mystamps.web.tests.fest;
 
-import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 import java.util.Date;
-
-import org.apache.commons.lang.time.DateUtils;
 
 import org.fest.assertions.api.AbstractAssert;
 import org.fest.assertions.api.Assertions;
@@ -32,6 +30,8 @@ import org.fest.assertions.api.Assertions;
  * @see https://github.com/alexruiz/fest-assert-2.x/wiki/Creating-specific-assertions
  **/
 public final class DateAssert extends AbstractAssert<DateAssert, Date> {
+	
+	private static final long TIME_DELTA = 10;
 	
 	private DateAssert(final Date actual) {
 		super(actual, DateAssert.class);
@@ -50,9 +50,9 @@ public final class DateAssert extends AbstractAssert<DateAssert, Date> {
 		final Date now = new Date();
 		//final String msg = String.format("%s is not current date. Expected: %s", actual, now);
 		
-		Assertions.assertThat(DateUtils.truncatedEquals(now, actual, Calendar.SECOND))
+		Assertions.assertThat(actual)
 			//.overridingErrorMessage(msg)
-			.isTrue();
+			.isCloseTo(now, TimeUnit.SECONDS.toMillis(TIME_DELTA));
 		
 		return this;
 	}
