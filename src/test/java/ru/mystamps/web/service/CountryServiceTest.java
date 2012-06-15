@@ -33,8 +33,6 @@ import org.mockito.MockitoAnnotations;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import static com.google.common.collect.Iterables.elementsEqual;
-
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
@@ -122,7 +120,7 @@ public class CountryServiceTest {
 		
 		final Iterable<Country> resultCountries = service.findAll();
 		
-		assertThat(elementsEqual(resultCountries, expectedCountries)).isTrue();
+		assertThat(resultCountries).isEqualTo(expectedCountries);
 	}
 	
 	//
