@@ -29,7 +29,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
@@ -42,8 +42,7 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
-
-import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+import ru.mystamps.web.tests.fest.DateAssert;
 
 public class SiteServiceTest {
 	private static final String TEST_PAGE         = "http://example.org/some/page";
@@ -111,7 +110,7 @@ public class SiteServiceTest {
 		
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
-		assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
+		DateAssert.assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
 	}
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -277,7 +276,7 @@ public class SiteServiceTest {
 		
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
-		assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
+		DateAssert.assertThat(activityCaptor.getValue().getOccuredAt()).isCurrentDate();
 	}
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)

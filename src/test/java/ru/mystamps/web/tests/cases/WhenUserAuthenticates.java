@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.BeforeMethod;
@@ -72,7 +72,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
 		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
-			.overridingErrorMessage("should exists link to password restoration page")
+			//.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
 	
@@ -134,15 +134,15 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.authorizeUser(validUserLogin, validUserPassword);
 		
 		assertThat(page.getCurrentUrl())
-			.overridingErrorMessage("after login we should be redirected to main page")
+			//.overridingErrorMessage("after login we should be redirected to main page")
 			.isEqualTo(Url.INDEX_PAGE);
 		
 		assertThat(page.getUserBarEntries())
-			.overridingErrorMessage("after login user name should be in user bar")
+			//.overridingErrorMessage("after login user name should be in user bar")
 			.contains(validUserName);
 		
 		assertThat(page.getUserBarEntries())
-			.overridingErrorMessage("after login link for logout should be in user bar")
+			//.overridingErrorMessage("after login link for logout should be in user bar")
 			.contains(tr("t_logout"));
 		
 		page.logout();

@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.net.HttpURLConnection;
 

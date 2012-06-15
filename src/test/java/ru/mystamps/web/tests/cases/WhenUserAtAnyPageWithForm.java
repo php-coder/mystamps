@@ -26,7 +26,7 @@ import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenUserAtAnyPage<T> {
@@ -53,14 +53,14 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	private void shouldHaveForm() {
 		assertThat(page.formExists())
-			.overridingErrorMessage("form tag should exists")
+			//.overridingErrorMessage("form tag should exists")
 			.isTrue();
 	}
 	
 	private void shouldHaveFields() {
 		for (final Field field : page.getForm().getFields()) {
 			assertThat(page.isFieldExists(field))
-				.overridingErrorMessage("field with XPath '" + field + "' should exists")
+				//.overridingErrorMessage("field with XPath '" + field + "' should exists")
 				.isTrue();
 		}
 	}
@@ -71,14 +71,14 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 				continue;
 			}
 			
-			final String msg = String.format(
-				"field with id '%s' should have label '%s'",
-				field.getId(),
-				field.getLabel()
-			);
+			//final String msg = String.format(
+			//	"field with id '%s' should have label '%s'",
+			//	field.getId(),
+			//	field.getLabel()
+			//);
 			
 			assertThat(page.getInputLabelValue(field.getId()))
-				.overridingErrorMessage(msg)
+				//.overridingErrorMessage(msg)
 				.isEqualTo(field.getLabel());
 		}
 	}
@@ -86,11 +86,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	private void shouldHaveSubmitButton() {
 		for (final SubmitButton button : page.getForm().getSubmitButtons()) {
 			assertThat(page.isSubmitButtonExists(button))
-				.overridingErrorMessage(
-					String.format(
-						"submit button with value '%s' should exists", button.getValue()
-					)
-				)
+				//.overridingErrorMessage(
+				//	String.format(
+				//		"submit button with value '%s' should exists", button.getValue()
+				//	)
+				//)
 				.isTrue();
 		}
 	}
@@ -98,11 +98,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	private void requiredFieldsShouldBeMarkedByAsterisk() {
 		for (final Field field : page.getForm().getRequiredFields()) {
 			assertThat(page.inputHasAsterisk(field.getId()))
-				.overridingErrorMessage(
-					String.format(
-						"required field with id '%s' should be marked by asterisk", field.getId()
-					)
-				)
+				//.overridingErrorMessage(
+				//	String.format(
+				//		"required field with id '%s' should be marked by asterisk", field.getId()
+				//	)
+				//)
 				.isTrue();
 		}
 	}
@@ -113,7 +113,7 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		}
 		
 		assertThat(page.getFormHints())
-			.overridingErrorMessage("legend about required fields should exists")
+			//.overridingErrorMessage("legend about required fields should exists")
 			.contains(tr("t_required_fields_legend", "*"));
 	}
 	
@@ -127,11 +127,11 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		
 		for (final Field field : requiredFields) {
 			assertThat(page.getFieldError(field.getId()))
-				.overridingErrorMessage(
-					String.format(
-						"required field with id '%s' should not accept empty value", field.getId()
-					)
-				)
+				//.overridingErrorMessage(
+				//	String.format(
+				//		"required field with id '%s' should not accept empty value", field.getId()
+				//	)
+				//)
 				.isEqualTo(tr("org.hibernate.validator.constraints.NotEmpty.message"));
 		}
 	}
@@ -152,23 +152,23 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			page.submit();
 			
 			if (field.shouldPreserveInvalidValue()) {
-				final String msg = String.format(
-					"field named '%s' should preserve input value after error",
-					field.getName()
-				);
+				//final String msg = String.format(
+				//	"field named '%s' should preserve input value after error",
+				//	field.getName()
+				//);
 				
 				assertThat(page.getFieldValue(field.getName()))
-					.overridingErrorMessage(msg)
+					//.overridingErrorMessage(msg)
 					.isEqualTo(field.getInvalidValue());
 				
 			} else {
-				final String msg = String.format(
-					"field named '%s' should not preserve input value after error",
-					field.getName()
-				);
+				//final String msg = String.format(
+				//	"field named '%s' should not preserve input value after error",
+				//	field.getName()
+				//);
 				
 				assertThat(page.getFieldValue(field.getName()))
-					.overridingErrorMessage(msg)
+					//.overridingErrorMessage(msg)
 					.isEmpty();
 			}
 		}

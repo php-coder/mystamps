@@ -31,7 +31,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import static com.google.common.collect.Iterables.elementsEqual;
 
@@ -44,8 +44,7 @@ import static org.mockito.Mockito.when;
 
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
-
-import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+import ru.mystamps.web.tests.fest.DateAssert;
 
 public class CountryServiceTest {
 	
@@ -100,7 +99,7 @@ public class CountryServiceTest {
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
-		assertThat(countryCaptor.getValue().getCreatedAt()).isCurrentDate();
+		DateAssert.assertThat(countryCaptor.getValue().getCreatedAt()).isCurrentDate();
 	}
 	
 	//

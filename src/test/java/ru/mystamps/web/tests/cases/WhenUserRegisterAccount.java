@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
@@ -56,7 +56,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
 		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			.overridingErrorMessage("should exists link to authentication page")
+			//.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
 	
@@ -65,7 +65,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
 		
 		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
-			.overridingErrorMessage("should exists link to password restoration page")
+			//.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
 	

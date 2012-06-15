@@ -23,18 +23,18 @@ import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
 
-import org.fest.assertions.GenericAssert;
-import org.fest.assertions.Assertions;
+import org.fest.assertions.api.AbstractAssert;
+import org.fest.assertions.api.Assertions;
 
 /**
  * Custom assertions for Date class.
  *
- * @see http://docs.codehaus.org/display/FEST/Extending+FEST-Assert+with+Custom+Assertions
+ * @see https://github.com/alexruiz/fest-assert-2.x/wiki/Creating-specific-assertions
  **/
-public final class DateAssert extends GenericAssert<DateAssert, Date> {
+public final class DateAssert extends AbstractAssert<DateAssert, Date> {
 	
 	private DateAssert(final Date actual) {
-		super(DateAssert.class, actual);
+		super(actual, DateAssert.class);
 	}
 	
 	public static DateAssert assertThat(final Date actual) {
@@ -48,10 +48,10 @@ public final class DateAssert extends GenericAssert<DateAssert, Date> {
 		isNotNull();
 		
 		final Date now = new Date();
-		final String msg = String.format("%s is not current date. Expected: %s", actual, now);
+		//final String msg = String.format("%s is not current date. Expected: %s", actual, now);
 		
 		Assertions.assertThat(DateUtils.truncatedEquals(now, actual, Calendar.SECOND))
-			.overridingErrorMessage(msg)
+			//.overridingErrorMessage(msg)
 			.isTrue();
 		
 		return this;

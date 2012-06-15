@@ -29,7 +29,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
@@ -42,8 +42,7 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
-
-import static ru.mystamps.web.tests.fest.DateAssert.assertThat;
+import ru.mystamps.web.tests.fest.DateAssert;
 
 public class UserServiceTest {
 	
@@ -134,7 +133,7 @@ public class UserServiceTest {
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		
-		assertThat(activationCaptor.getValue().getCreatedAt()).isCurrentDate();
+		DateAssert.assertThat(activationCaptor.getValue().getCreatedAt()).isCurrentDate();
 	}
 	
 	//
@@ -332,7 +331,7 @@ public class UserServiceTest {
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getActivatedAt()).isCurrentDate();
+		DateAssert.assertThat(userCaptor.getValue().getActivatedAt()).isCurrentDate();
 	}
 	
 	//

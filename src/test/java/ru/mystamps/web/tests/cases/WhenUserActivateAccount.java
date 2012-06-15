@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -289,7 +289,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		
 		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			.overridingErrorMessage("should exists link to authentication page")
+			//.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
 	

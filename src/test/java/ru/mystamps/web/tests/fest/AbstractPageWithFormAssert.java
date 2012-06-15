@@ -18,8 +18,8 @@
 
 package ru.mystamps.web.tests.fest;
 
-import org.fest.assertions.GenericAssert;
-import org.fest.assertions.Assertions;
+import org.fest.assertions.api.AbstractAssert;
+import org.fest.assertions.api.Assertions;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -28,15 +28,15 @@ import ru.mystamps.web.tests.page.AbstractPageWithForm;
 /**
  * Custom assertions for AbstractPageWithForm class.
  *
- * @see http://docs.codehaus.org/display/FEST/Extending+FEST-Assert+with+Custom+Assertions
+ * @see https://github.com/alexruiz/fest-assert-2.x/wiki/Creating-specific-assertions
  **/
 public final class AbstractPageWithFormAssert
-	extends GenericAssert<AbstractPageWithFormAssert, AbstractPageWithForm> {
+	extends AbstractAssert<AbstractPageWithFormAssert, AbstractPageWithForm> {
 	
 	private String fieldName;
 	
 	private AbstractPageWithFormAssert(final AbstractPageWithForm actual) {
-		super(AbstractPageWithFormAssert.class, actual);
+		super(actual, AbstractPageWithFormAssert.class);
 	}
 	
 	public static AbstractPageWithFormAssert assertThat(final AbstractPageWithForm actual) {
@@ -54,15 +54,15 @@ public final class AbstractPageWithFormAssert
 		
 		final String errorMessage = actual.getFieldError(fieldName);
 		
-		final String msg = String.format(
-			"Expected that field '%s' should have error '%s' but was '%s'",
-			fieldName,
-			expectedErrorMessage,
-			errorMessage
-		);
+		//final String msg = String.format(
+		//	"Expected that field '%s' should have error '%s' but was '%s'",
+		//	fieldName,
+		//	expectedErrorMessage,
+		//	errorMessage
+		//);
 		
 		Assertions.assertThat(errorMessage)
-			.overridingErrorMessage(msg)
+			//.overridingErrorMessage(msg)
 			.isEqualTo(expectedErrorMessage);
 		
 		return this;
@@ -72,13 +72,13 @@ public final class AbstractPageWithFormAssert
 		isNotNull();
 		checkState(fieldName != null, "Error in test case: field name should be specified");
 		
-		final String msg = String.format(
-			"Expected that field '%s' should not have any error",
-			fieldName
-		);
+		//final String msg = String.format(
+		//	"Expected that field '%s' should not have any error",
+		//	fieldName
+		//);
 		
 		Assertions.assertThat(actual.isFieldHasError(fieldName))
-			.overridingErrorMessage(msg)
+			//.overridingErrorMessage(msg)
 			.isFalse();
 		
 		return this;
@@ -90,15 +90,15 @@ public final class AbstractPageWithFormAssert
 		
 		final String value = actual.getFieldValue(fieldName);
 		
-		final String msg = String.format(
-			"Expected value of field '%s' is '%s' but was '%s'",
-			fieldName,
-			expectedValue,
-			value
-		);
+		//final String msg = String.format(
+		//	"Expected value of field '%s' is '%s' but was '%s'",
+		//	fieldName,
+		//	expectedValue,
+		//	value
+		//);
 		
 		Assertions.assertThat(value)
-			.overridingErrorMessage(msg)
+			//.overridingErrorMessage(msg)
 			.isEqualTo(expectedValue);
 		
 		return this;

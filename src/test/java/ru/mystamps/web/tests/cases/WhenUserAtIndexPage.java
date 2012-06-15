@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -52,21 +52,21 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForPasswordRecovery() {
 		assertThat(page.linkWithLabelExists(tr("t_recover_forget_password")))
-			.overridingErrorMessage("should exists link to password restoration page")
+			//.overridingErrorMessage("should exists link to password restoration page")
 			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			.overridingErrorMessage("should exists link to page for adding series of stamps")
+			//.overridingErrorMessage("should exists link to page for adding series of stamps")
 			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			.overridingErrorMessage("should exists link to page for adding countries")
+			//.overridingErrorMessage("should exists link to page for adding countries")
 			.isTrue();
 	}
 	
