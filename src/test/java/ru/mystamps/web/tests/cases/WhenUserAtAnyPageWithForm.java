@@ -71,7 +71,7 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 				continue;
 			}
 			
-			final String msg =	String.format(
+			final String msg = String.format(
 				"field with id '%s' should have label '%s'",
 				field.getId(),
 				field.getLabel()
