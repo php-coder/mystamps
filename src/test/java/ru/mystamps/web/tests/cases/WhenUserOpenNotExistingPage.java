@@ -59,7 +59,7 @@ public class WhenUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundError
 	
 	@Test(groups = "logic", dependsOnGroups = "std", enabled = false)
 	public void incidentShouldBeLoggedToDatabase() {
-		// TODO: check suspicious_events table (#99)
+		// TODO: check suspicious_activities table (#99)
 	}
 	
 }
