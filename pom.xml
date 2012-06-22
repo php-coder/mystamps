@@ -379,6 +379,68 @@
 			</plugin>
 			
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<components>
+						<component>
+							<name>hbm2ddl</name>
+							<implementation>jpaconfiguration</implementation>
+							<outputDirectory>${env.dir}</outputDirectory>
+						</component>
+					</components>
+					<componentProperties>
+						<console>false</console>
+						<format>true</format>
+						<jdk5>true</jdk5>
+						<propertyfile>
+							${env.dir}/spring/database.properties
+						</propertyfile>
+						<outputfilename>${ddl.file}</outputfilename>
+						
+						<!--
+							Don't try to connect to database. See:
+							http://www.mail-archive.com/users@maven.apache.org/msg61394.html
+						-->
+						<export>false</export>
+					</componentProperties>
+				</configuration>
+				<dependencies>
+					<!--
+						Use latest version of Hibernate. See:
+						http://stackoverflow.com/q/2734971
+					-->
+					<dependency>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-core</artifactId>
+						<version>${hibernate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-entitymanager</artifactId>
+						<version>${hibernate.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>javax.validation</groupId>
+						<artifactId>validation-api</artifactId>
+						<version>1.0.0.GA</version>
+					</dependency>
+					<!--
+						Explicitly add dependency to jboss-logging (which used by
+						hibernate-validator since 4.3.0) to prevent following error:
+						"Unable to get the default Bean Validation factory: InvocationTargetException:
+						org.jboss.logging.Logger.getMessageLogger(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object"
+					-->
+					<dependency>
+						<groupId>org.jboss.logging</groupId>
+						<artifactId>jboss-logging</artifactId>
+						<version>3.1.1.GA</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			
+			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<version>1.9.0</version>
@@ -588,6 +650,7 @@
 			</activation>
 			<properties>
 				<env.dir>${env.root.dir}/dev/WEB-INF/classes</env.dir>
+				<ddl.file>mysql-scheme.sql</ddl.file>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -653,6 +716,7 @@
 			</activation>
 			<properties>
 				<env.dir>${env.root.dir}/test/WEB-INF/classes</env.dir>
+				<ddl.file>h2-scheme.sql</ddl.file>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -734,68 +798,6 @@
 								</configuration>
 							</execution>
 						</executions>
-					</plugin>
-					
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>hibernate3-maven-plugin</artifactId>
-						<version>2.2</version>
-						<configuration>
-							<components>
-								<component>
-									<name>hbm2ddl</name>
-									<implementation>jpaconfiguration</implementation>
-									<outputDirectory>${env.dir}</outputDirectory>
-								</component>
-							</components>
-							<componentProperties>
-								<console>false</console>
-								<format>true</format>
-								<jdk5>true</jdk5>
-								<propertyfile>
-									${env.dir}/spring/database.properties
-								</propertyfile>
-								<outputfilename>h2-scheme.sql</outputfilename>
-								
-								<!--
-									Don't try to connect to database. See:
-									http://www.mail-archive.com/users@maven.apache.org/msg61394.html
-								-->
-								<export>false</export>
-							</componentProperties>
-						</configuration>
-						<dependencies>
-							<!--
-								Use latest version of Hibernate. See:
-								http://stackoverflow.com/q/2734971
-							-->
-							<dependency>
-								<groupId>org.hibernate</groupId>
-								<artifactId>hibernate-core</artifactId>
-								<version>${hibernate.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>org.hibernate</groupId>
-								<artifactId>hibernate-entitymanager</artifactId>
-								<version>${hibernate.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>javax.validation</groupId>
-								<artifactId>validation-api</artifactId>
-								<version>1.0.0.GA</version>
-							</dependency>
-							<!--
-								Explicitly add dependency to jboss-logging (which used by
-								hibernate-validator since 4.3.0) to prevent following error:
-								"Unable to get the default Bean Validation factory: InvocationTargetException:
-								org.jboss.logging.Logger.getMessageLogger(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object"
-							-->
-							<dependency>
-								<groupId>org.jboss.logging</groupId>
-								<artifactId>jboss-logging</artifactId>
-								<version>3.1.1.GA</version>
-							</dependency>
-						</dependencies>
 					</plugin>
 					
 				</plugins>
