@@ -633,7 +633,7 @@
 										<resource>
 											<directory>${env.dir}</directory>
 											<excludes>
-												<exclude>mysql-scheme.sql</exclude>
+												<exclude>*.sql</exclude>
 											</excludes>
 										</resource>
 									</resources>

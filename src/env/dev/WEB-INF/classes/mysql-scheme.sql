@@ -52,12 +52,6 @@ CREATE TABLE `suspicious_activities_types` (
 	UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
--- see:
--- ru.mystamps.web.service.SiteService.getAbsentPageType()
--- ru.mystamps.web.service.SiteService.getFailedAuthenticationType()
-INSERT INTO `suspicious_activities_types`(`name`)
-VALUES ('PageNotFound'), ('AuthenticationFailed');
-
 ----
 -- suspicious_activities
 -- (see ru.mystamps.web.entity.SuspiciousActivity)
