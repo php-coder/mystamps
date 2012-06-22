@@ -91,6 +91,17 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring.data.version}</version>
+			<exclusions>
+				<!--
+					Temporary workaround for https://jira.springsource.org/browse/DATACMNS-178
+					Will be removed during updates to new version.
+					See https://github.com/SpringSource/spring-data-commons/commit/31926a6299b1ea85da3ced7fd7714e2a1480613a
+				-->
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit-dep</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
