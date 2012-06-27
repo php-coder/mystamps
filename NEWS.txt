@@ -1,4 +1,5 @@
 0.2 (not released yet)
+- introduced Spring Security support
 - ported DAO layer to use Spring-Data
 - ported unit and functional tests to TestNG
 - migrated from HSQL to H2 (in test environment)

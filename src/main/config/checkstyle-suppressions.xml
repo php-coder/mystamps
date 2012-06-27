@@ -24,6 +24,5 @@
 	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.FieldsMismatch" />
 	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.UniqueCountryName" />
 	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.UniqueLogin" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.ValidCredentials" />
 	
 </suppressions>

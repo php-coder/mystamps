@@ -29,10 +29,6 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
@@ -77,48 +73,11 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginShouldNotBeTooShort() {
-		page.authorizeUser("a", null);
+	public void emptyValuesShouldBeConsideredAsInvalidCredentials() {
+		page.authorizeUser("", "");
 		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("value.too-short", LOGIN_MIN_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginShouldNotBeTooLong() {
-		page.authorizeUser("abcde12345fghkl6", null);
-		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("value.too-long", LOGIN_MAX_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginWithForbiddenCharactersShouldBeRejected() {
-		page.authorizeUser("'t@$t'", null);
-		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("login.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void passwordShouldNotBeTooShort() {
-		page.authorizeUser(null, "123");
-		
-		assertThat(page)
-			.field("password")
-			.hasError(tr("value.too-short", PASSWORD_MIN_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void passwordWithForbiddenCharacterShouldBeRejected() {
-		page.authorizeUser(null, "'t@$t'");
-		
-		assertThat(page)
-			.field("password")
-			.hasError(tr("password.invalid"));
+		assertThat(page.getFormError())
+			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -126,7 +85,7 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
 		assertThat(page.getFormError())
-			.isEqualTo(tr("ru.mystamps.web.validation.jsr303.ValidCredentials.message"));
+			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = "std")
@@ -146,6 +105,13 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 			.contains(tr("t_logout"));
 		
 		page.logout();
+	}
+	
+	@Override
+	protected void emptyValueShouldBeForbiddenForRequiredFields() {
+		// Ignore this check entirely because login page has another behavior:
+		// message about invalid credentials displayed for all type of errors.
+		// See also test emptyValuesShouldBeConsideredAsInvalidCredentials()
 	}
 	
 }

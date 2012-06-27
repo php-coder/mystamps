@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2012 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -16,25 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-package ru.mystamps.web.controller;
+package ru.mystamps.web.config;
 
-import javax.servlet.http.HttpSession;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import ru.mystamps.web.Url;
-
-@Controller
-@RequestMapping(Url.LOGOUT_PAGE)
-public class LogoutAccountController {
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String logout(final HttpSession session) {
-		session.invalidate();
-		return "redirect:" + Url.INDEX_PAGE;
-	}
-	
+@Configuration
+@Import({
+	DbConfig.class,
+	SecurityConfig.class
+})
+@ComponentScan(basePackages = {
+	"ru.mystamps.web.service"
+})
+public class ApplicationContext {
 }
-

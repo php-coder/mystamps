@@ -9,30 +9,30 @@
 			<ul>
 				<li>
 					
-					<c:if test="${not empty sessionScope.user}">
-						${sessionScope.user.name}
-					</c:if>
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.name" />
+					</sec:authorize>
 					
-					<c:if test="${empty sessionScope.user}">
+					<sec:authorize access="isAnonymous()">
 						<a href="${authUrl}">
 							<spring:message code="t_enter" />
 						</a>
-					</c:if>
+					</sec:authorize>
 					
 				</li>
 				<li>
 					
-					<c:if test="${not empty sessionScope.user}">
+					<sec:authorize access="isAuthenticated()">
 						<a href="${logoutUrl}">
 							<spring:message code="t_logout" />
 						</a>
-					</c:if>
+					</sec:authorize>
 					
-					<c:if test="${empty sessionScope.user}">
+					<sec:authorize access="isAnonymous()">
 						<a href="${registerUrl}">
 							<spring:message code="t_register" />
 						</a>
-					</c:if>
+					</sec:authorize>
 					
 				</li>
 			</ul>

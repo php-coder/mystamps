@@ -14,11 +14,11 @@
 				<spring:message code="t_registration_on_site" />
 			</h3>
 			
-			<c:if test="${not empty sessionScope.user}">
+			<sec:authorize access="isAuthenticated()">
 				<spring:message code="t_already_registered" />
-			</c:if>
+			</sec:authorize>
 			
-			<c:if test="${empty sessionScope.user}">
+			<sec:authorize access="isAnonymous()">
 				<div class="hint">
 					<span class="hint_item">
 						<spring:message code="t_if_you_already_registered"
@@ -65,7 +65,7 @@
 						</table>
 					</form:form>
 				</div>
-			</c:if>
+			</sec:authorize>
 			
 		</div>
 		<%@ include file="/WEB-INF/segments/footer.jspf" %>

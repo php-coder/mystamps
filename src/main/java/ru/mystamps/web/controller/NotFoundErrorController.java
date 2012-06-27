@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Controller
 @RequestMapping(Url.NOT_FOUND_PAGE)
@@ -50,16 +50,17 @@ public class NotFoundErrorController {
 	public void notFound(
 			final HttpServletRequest request,
 			final HttpSession session,
+			final CustomUserDetails userDetails,
 			@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestHeader(value = "user-agent", required = false) final String agent) {
 		
 		// TODO: sanitize all user's values (#60)
 		final String page = (String)request.getAttribute("javax.servlet.error.request_uri");
 		final String ip   = request.getRemoteAddr();
-		final User user   = (User)session.getAttribute("user");
+		
 		Integer uid = null;
-		if (user != null) {
-			uid = user.getId();
+		if (userDetails != null) {
+			uid = userDetails.getId();
 		}
 		
 		try {

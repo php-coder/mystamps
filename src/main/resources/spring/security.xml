@@ -1,0 +1,36 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<http pattern="/static/**" security="none" />
+	
+	<http use-expressions="true">
+		<form-login
+			login-page="/account/auth"
+			login-processing-url="/account/login"
+			username-parameter="login"
+			password-parameter="password"
+			authentication-failure-url="/account/auth?failed"
+			default-target-url="/" />
+		
+		<logout
+			logout-url="/account/logout"
+			logout-success-url="/"
+			invalidate-session="true" />
+		
+		<intercept-url pattern="/**" access="permitAll" />
+	</http>
+	
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService">
+			<password-encoder ref="passwordEncoder">
+				<salt-source user-property="salt" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+	
+</beans:beans>

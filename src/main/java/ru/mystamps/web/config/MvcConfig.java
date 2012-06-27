@@ -18,12 +18,15 @@
 
 package ru.mystamps.web.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -32,14 +35,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.ViewResolver;
 
+import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
 
 @Configuration
 @EnableWebMvc
 @EnableScheduling
 @ComponentScan(basePackages = {
-	"ru.mystamps.web.controller",
-	"ru.mystamps.web.service"
+	"ru.mystamps.web.controller"
 })
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
@@ -50,6 +53,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(final ViewControllerRegistry registry) {
+		registry.addViewController(Url.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.INDEX_PAGE).setViewName("site/index");
 		registry.addViewController(Url.RESTORE_PASSWORD_PAGE);
 		registry.addViewController(Url.SUCCESSFUL_ACTIVATION_PAGE);
@@ -59,6 +63,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/*");
+	}
+	
+	@Override
+	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new CustomUserDetailsArgumentResolver());
 	}
 	
 	@Bean

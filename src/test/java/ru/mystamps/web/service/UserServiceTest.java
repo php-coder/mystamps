@@ -20,6 +20,8 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -35,6 +37,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
 
@@ -51,8 +54,8 @@ public class UserServiceTest {
 	private static final String TEST_PASSWORD       = "secret";
 	private static final String TEST_SALT           = "salt";
 	
-	// sha1(TEST_SALT + TEST_PASSWORD)
-	private static final String TEST_HASH           = "da00ec2e6ff9ed4d342b24a16e262c82f3c8b10b";
+	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
+	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
@@ -62,6 +65,9 @@ public class UserServiceTest {
 	
 	@Mock
 	private UsersActivationDao usersActivationDao;
+	
+	@Mock
+	private PasswordEncoder encoder;
 	
 	@Captor
 	private ArgumentCaptor<UsersActivation> activationCaptor;
@@ -170,6 +176,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldCreateUser() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -180,6 +187,7 @@ public class UserServiceTest {
 	public void registerUserShouldDeleteRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -204,6 +212,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassNameToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -215,6 +224,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
 		
@@ -226,6 +236,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, "", TEST_ACTIVATION_KEY);
 		
@@ -238,6 +249,7 @@ public class UserServiceTest {
 	public void registerUserShouldUseEmailFromRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -250,6 +262,7 @@ public class UserServiceTest {
 	public void registerUserShouldUseRegistrationDateFromRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -261,6 +274,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldGenerateSalt() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -274,6 +288,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldGenerateUniqueSalt() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		verify(userDao).save(userCaptor.capture());
@@ -292,19 +307,27 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void registerUserShouldGenerateHash() {
+	public void registerUserShouldGetsHashFromEncoder() {
+		final String expectedHash = TEST_HASH;
+		
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
 		verify(userDao).save(userCaptor.capture());
+		verify(encoder).encodePassword(eq(TEST_PASSWORD), anyString());
 		
-		final int sha1SumLength = 40;
-		final String hash = userCaptor.getValue().getHash();
-		assertThat(hash.length()).as("hash length").isEqualTo(sha1SumLength);
-		assertThat(hash).matches("^[\\p{Lower}\\p{Digit}]+$");
+		final String actualHash = userCaptor.getValue().getHash();
+		assertThat(actualHash).isEqualTo(expectedHash);
+	}
+	
+	@Test(expectedExceptions = IllegalStateException.class)
+	public void registerUserShouldThrowExceptionWhenEncoderReturnsNull() {
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(null);
 		
-		// TODO: check that hash based on password
+		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
 	
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -315,6 +338,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -326,6 +350,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldAssignActivatedAtToCurrentDate() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 		
@@ -357,79 +382,6 @@ public class UserServiceTest {
 	public void findByLoginShouldPassLoginToDao() {
 		service.findByLogin(TEST_LOGIN);
 		verify(userDao).findByLogin(TEST_LOGIN);
-	}
-	
-	//
-	// Tests for findByLoginAndPassword()
-	//
-	
-	@Test(expectedExceptions = IllegalArgumentException.class)
-	public void findByLoginAndPasswordShouldThrowExceptionWhenLoginIsNull() {
-		service.findByLoginAndPassword(null, TEST_PASSWORD);
-	}
-	
-	@Test(expectedExceptions = IllegalArgumentException.class)
-	public void findByLoginAndPasswordShouldThrowExceptionWhenPasswordIsNull() {
-		service.findByLoginAndPassword(TEST_LOGIN, null);
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldCallDao() {
-		final User expectedUser = getValidUser();
-		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		
-		assertThat(user).isEqualTo(expectedUser);
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldReturnNullWhenUserNotFound() {
-		when(userDao.findByLogin(anyString())).thenReturn(null);
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		assertThat(user).isNull();
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldReturnNullWhenInvalidPasswordProvided() {
-		final User resultUser = getValidUser();
-		resultUser.setHash("anyHash");
-		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		assertThat(user).isNull();
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldReturnUserForValidCredentials() {
-		when(userDao.findByLogin(anyString())).thenReturn(getValidUser());
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		assertThat(user).isNotNull();
-		
-		// TODO
-		//assertThat(user).isEqualTo(resultUser);
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldReturnNullWhenUserHasNullSalt() {
-		final User resultUser = getValidUser();
-		resultUser.setSalt(null);
-		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		assertThat(user).isNull();
-	}
-	
-	@Test
-	public void findByLoginAndPasswordShouldReturnNullWhenUserHasNullHash() {
-		final User resultUser = getValidUser();
-		resultUser.setHash(null);
-		when(userDao.findByLogin(anyString())).thenReturn(resultUser);
-		
-		final User user = service.findByLoginAndPassword(TEST_LOGIN, TEST_PASSWORD);
-		assertThat(user).isNull();
 	}
 	
 	private User getValidUser() {

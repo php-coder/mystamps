@@ -22,9 +22,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({
-	DbConfig.class,
-	MvcConfig.class
-})
+@Import(MvcConfig.class)
 public class DispatcherServletContext {
 }

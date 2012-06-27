@@ -22,17 +22,17 @@ import javax.inject.Inject;
 
 import java.util.Date;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 import ru.mystamps.web.entity.User;
@@ -50,6 +50,9 @@ public class UserService {
 	
 	@Inject
 	private UsersActivationDao usersActivation;
+	
+	@Inject
+	private PasswordEncoder encoder;
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {
@@ -99,7 +102,10 @@ public class UserService {
 		final Date registrationDate = activation.getCreatedAt();
 		
 		final String salt = generateSalt();
-		final String hash = computeSha1Sum(salt + password);
+		
+		final String hash = encoder.encodePassword(password, salt);
+		checkState(hash != null, "Generated hash must be non null");
+		
 		final Date now = new Date();
 		
 		final User user = new User();
@@ -127,39 +133,6 @@ public class UserService {
 		return users.findByLogin(login);
 	}
 	
-	@Transactional(readOnly = true)
-	public User findByLoginAndPassword(final String login, final String password) {
-		checkArgument(login != null, "Login should be non null");
-		checkArgument(password != null, "Password should be non null");
-		
-		final User user = users.findByLogin(login);
-		if (user == null) {
-			log.info("Wrong login '{}'", login);
-			return null;
-		}
-		
-		final String hash = user.getHash();
-		if (hash == null) {
-			log.warn("User with login '{}' and id={} has null hash!", login, user.getId());
-			return null;
-		}
-		
-		final String salt = user.getSalt();
-		if (salt == null) {
-			log.warn("User with login '{}' and id={} has null salt!", login, user.getId());
-			return null;
-		}
-		
-		if (!hash.equals(computeSha1Sum(salt + password))) {
-			log.info("Wrong password for login '{}'", login);
-			return null;
-		}
-		
-		log.info("Valid credentials for login '{}'. User has id = {}", login, user.getId());
-		
-		return user;
-	}
-	
 	/**
 	 * Generates activation key.
 	 * @return string which contains numbers and letters in lower case
@@ -176,10 +149,6 @@ public class UserService {
 	 **/
 	private String generateSalt() {
 		return RandomStringUtils.randomAlphanumeric(User.SALT_LENGTH);
-	}
-	
-	private String computeSha1Sum(final String string) {
-		return Hex.encodeHexString(DigestUtils.sha(string));
 	}
 	
 }

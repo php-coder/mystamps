@@ -14,11 +14,11 @@
 				<spring:message code="t_authentication_on_site" />
 			</h3>
 			
-			<c:if test="${not empty sessionScope.user}">
+			<sec:authorize access="isAuthenticated()">
 				<spring:message code="t_already_authenticated" />
-			</c:if>
+			</sec:authorize>
 			
-			<c:if test="${empty sessionScope.user}">
+			<sec:authorize access="isAnonymous()">
 				<div class="hint">
 					<span class="hint_item">
 						<spring:message code="t_if_you_forget_password"
@@ -30,40 +30,42 @@
 							arguments="<span class=\"required_field\">*</span>" />
 					</span>
 				</div>
+				<c:if test="${pageContext.request.queryString eq 'failed' and SPRING_SECURITY_LAST_EXCEPTION ne null}">
+					<c:set var="errorMessage" value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+					<c:set var="lastLogin" value="${SPRING_SECURITY_LAST_EXCEPTION.authentication.principal}" />
+				</c:if>
 				<div class="generic_form">
-					<form:form method="post" modelAttribute="authAccountForm">
-						<form:errors id="form.errors" element="div" cssClass="error" />
+					<form id="authAccountForm" action="${loginUrl}" method="post">
+						<c:if test="${not empty pageScope.errorMessage}">
+							<div id="form.errors" class="error">
+								<c:out value="${pageScope.errorMessage}" />
+							</div>
+						</c:if>
 						<table>
 							<tr>
 								<td>
-									<form:label path="login">
+									<label for="login">
 										<spring:message code="t_login" />
-									</form:label>
+									</label>
 								</td>
 								<td>
 									<span id="login.required" class="required_field">*</span>
 								</td>
 								<td>
-									<form:input path="login" required="required" />
-								</td>
-								<td>
-									<form:errors path="login" cssClass="error" />
+									<input type="text" id="login" name="login" required="required" value="<c:out value='${pageScope.lastLogin}' />" />
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<form:label path="password">
+									<label for="password">
 										<spring:message code="t_password" />
-									</form:label>
+									</label>
 								</td>
 								<td>
 									<span id="password.required" class="required_field">*</span>
 								</td>
 								<td>
-									<form:password path="password" required="required" />
-								</td>
-								<td>
-									<form:errors path="password" cssClass="error" />
+									<input type="password" id="password" name="password" required="required" value="" />
 								</td>
 							</tr>
 							<tr>
@@ -72,12 +74,11 @@
 								<td>
 									<input type="submit" value="<spring:message code="t_enter" />" />
 								</td>
-								<td></td>
 							</tr>
 						</table>
-					</form:form>
+					</form>
 				</div>
-			</c:if>
+			</sec:authorize>
 			
 		</div>
 		<%@ include file="/WEB-INF/segments/footer.jspf" %>

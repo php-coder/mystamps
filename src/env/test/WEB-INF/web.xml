@@ -12,6 +12,30 @@
 		<param-value>test</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>
+			org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			ru.mystamps.web.config.ApplicationContext,
+			ru.mystamps.web.config.TestDataSource
+		</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- To expose user's request to AuthenticationFailureListener where we need it for logging -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>
@@ -26,8 +50,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				ru.mystamps.web.config.DispatcherServletContext,
-				ru.mystamps.web.config.TestDataSource
+				ru.mystamps.web.config.DispatcherServletContext
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -85,6 +108,18 @@
 	
 	<filter-mapping>
 		<filter-name>CharsetFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>
+			org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	

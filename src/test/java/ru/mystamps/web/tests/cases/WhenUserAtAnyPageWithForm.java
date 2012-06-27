@@ -117,7 +117,7 @@ abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			.contains(tr("t_required_fields_legend", "*"));
 	}
 	
-	private void emptyValueShouldBeForbiddenForRequiredFields() {
+	protected void emptyValueShouldBeForbiddenForRequiredFields() {
 		final List<Field> requiredFields = page.getForm().getRequiredFields();
 		if (requiredFields.isEmpty()) {
 			return;
