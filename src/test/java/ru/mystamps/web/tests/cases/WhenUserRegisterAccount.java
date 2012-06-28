@@ -92,9 +92,7 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 		assertThat(page).field("email").hasValue("test");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = {
-		"std", "invalid", "misc"
-	})
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		

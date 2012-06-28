@@ -127,9 +127,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 		assertThat(page).field("country").hasValue("t3st");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = {
-		"std", "invalid", "valid", "misc"
-	})
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
 		page.addCountry(TEST_COUNTRY_NAME);
 		

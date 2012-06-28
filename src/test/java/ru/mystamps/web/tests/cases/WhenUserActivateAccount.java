@@ -272,9 +272,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 			.hasError(tr("ru.mystamps.web.validation.jsr303.ExistingActivationKey.message"));
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = {
-		"std", "invalid", "valid", "misc"
-	})
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
 		page.activateAccount(
 			"1st-test-login",
@@ -293,9 +291,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 			.isTrue();
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = {
-		"std", "invalid", "valid", "misc"
-	})
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void activationShouldPassWhenUserProvidedEmptyName() {
 		page.activateAccount(
 			"2nd-test-login",
