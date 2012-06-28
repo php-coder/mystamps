@@ -18,11 +18,4 @@
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPage" />
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPageWithForm" />
 	
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.Email" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.ExistingActivationKey" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.FieldsMatch" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.FieldsMismatch" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.UniqueCountryName" />
-	<suppress checks="WhitespaceAround" files="ru.mystamps.web.validation.jsr303.UniqueLogin" />
-	
 </suppressions>
