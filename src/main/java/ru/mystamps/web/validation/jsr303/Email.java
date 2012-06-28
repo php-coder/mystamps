@@ -45,7 +45,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @org.hibernate.validator.constraints.Email
 @Pattern(regexp = ".+@.+\\..+")
 @ReportAsSingleViolation
-@Target({METHOD, FIELD, ANNOTATION_TYPE})
+@Target({ METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = {})
 @Documented
