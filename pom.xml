@@ -24,6 +24,7 @@
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
 		
 		<testng.version>6.5.2</testng.version>
+		<mockito.version>1.9.5-rc1</mockito.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.root.dir>src/env</env.root.dir>
@@ -186,7 +187,7 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.9.0</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
