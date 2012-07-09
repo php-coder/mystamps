@@ -25,6 +25,7 @@
 		
 		<testng.version>6.5.2</testng.version>
 		<mockito.version>1.9.5-rc1</mockito.version>
+		<fest.assert.version>2.0M6</fest.assert.version>
 		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.root.dir>src/env</env.root.dir>
@@ -194,7 +195,7 @@
 		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
-			<version>2.0M5</version>
+			<version>${fest.assert.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
