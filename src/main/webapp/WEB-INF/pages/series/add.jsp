@@ -72,42 +72,42 @@
 						</tr>
 						<tr>
 							<td>
-								<form:label path="michelNo">
+								<form:label path="michelNumbers">
 									<spring:message code="t_michel_no" />
 								</form:label>
 							</td>
 							<td>
-								<form:input path="michelNo" />
+								<form:input path="michelNumbers" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<form:label path="scottNo">
+								<form:label path="scottNumbers">
 									<spring:message code="t_scott_no" />
 								</form:label>
 							</td>
 							<td>
-								<form:input path="scottNo" />
+								<form:input path="scottNumbers" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<form:label path="yvertNo">
+								<form:label path="yvertNumbers">
 									<spring:message code="t_yvert_no" />
 								</form:label>
 							</td>
 							<td>
-								<form:input path="yvertNo" />
+								<form:input path="yvertNumbers" />
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<form:label path="gibbonsNo">
+								<form:label path="gibbonsNumbers">
 									<spring:message code="t_sg_no" />
 								</form:label>
 							</td>
 							<td>
-								<form:input path="gibbonsNo" />
+								<form:input path="gibbonsNumbers" />
 							</td>
 						</tr>
 						<tr>

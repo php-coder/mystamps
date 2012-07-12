@@ -30,10 +30,10 @@ public class AddSeriesForm {
 	private Integer issueYear;
 	private String quantity;
 	private boolean perforated;
-	private String michelNo;
-	private String scottNo;
-	private String yvertNo;
-	private String gibbonsNo;
+	private String michelNumbers;
+	private String scottNumbers;
+	private String yvertNumbers;
+	private String gibbonsNumbers;
 	private String comment;
 	private String image;
 }
