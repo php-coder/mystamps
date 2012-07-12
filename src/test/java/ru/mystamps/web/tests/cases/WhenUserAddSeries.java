@@ -34,31 +34,13 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> {
 	
-	private static final int DAYS_IN_MONTH  = 31;
-	private static final int MONTHS_IN_YEAR = 12;
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
-	
-	private static final List<String> EXPECTED_DAYS =
-		new ArrayList<String>(DAYS_IN_MONTH + 1);
-	
-	private static final List<String> EXPECTED_MONTHS =
-		new ArrayList<String>(MONTHS_IN_YEAR + 1);
 	
 	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<String>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
 	static {
-		EXPECTED_DAYS.add("");
-		for (int i = 1; i <= DAYS_IN_MONTH; i++) {
-			EXPECTED_DAYS.add(String.valueOf(i));
-		}
-		
-		EXPECTED_MONTHS.add("");
-		for (int i = 1; i <= MONTHS_IN_YEAR; i++) {
-			EXPECTED_MONTHS.add(String.valueOf(i));
-		}
-		
 		EXPECTED_YEARS.add("");
 		// years in reverse order
 		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
@@ -80,16 +62,6 @@ public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> 
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void issueDayFieldShouldHaveOptionsFor31Days() {
-		assertThat(page.getDayFieldValues()).isEqualTo(EXPECTED_DAYS);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void issueMonthFieldShouldHaveOptionsFor12Months() {
-		assertThat(page.getMonthFieldValues()).isEqualTo(EXPECTED_MONTHS);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

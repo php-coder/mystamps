@@ -25,9 +25,7 @@ import lombok.Setter;
 @Setter
 public class AddSeriesForm {
 	private String country;
-	private Integer issueDay;
-	private Integer issueMonth;
-	private Integer issueYear;
+	private Integer year;
 	private String quantity;
 	private boolean perforated;
 	private String michelNumbers;

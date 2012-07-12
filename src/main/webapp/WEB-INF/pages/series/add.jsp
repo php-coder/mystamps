@@ -31,20 +31,12 @@
 						</tr>
 						<tr>
 							<td>
-								<form:label path="issueYear">
-									<spring:message code="t_issue_date" />
+								<form:label path="year">
+									<spring:message code="t_issue_year" />
 								</form:label>
 							</td>
 							<td>
-								<form:select path="issueDay">
-									<form:option value="" />
-									<form:options items="${days}" />
-								</form:select>
-								<form:select path="issueMonth">
-									<form:option value="" />
-									<form:options items="${months}" />
-								</form:select>
-								<form:select path="issueYear">
+								<form:select path="year">
 									<form:option value="" />
 									<form:options items="${years}" />
 								</form:select>

@@ -39,29 +39,14 @@ import ru.mystamps.web.service.CountryService;
 @RequestMapping(Url.ADD_SERIES_PAGE)
 public class AddSeriesController {
 	
-	private static final Integer DAYS_IN_MONTH  = 31;
-	private static final Integer MONTHS_IN_YEAR = 12;
 	private static final Integer SINCE_YEAR     = 1840;
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
-	private static final Map<Integer, Integer> DAYS;
-	private static final Map<Integer, Integer> MONTHS;
 	private static final Map<Integer, Integer> YEARS;
 	
 	private final CountryService countryService;
 	
 	static {
-		
-		DAYS = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = 1; i <= DAYS_IN_MONTH; i++) {
-			DAYS.put(i, i);
-		}
-		
-		MONTHS = new LinkedHashMap<Integer, Integer>();
-		for (Integer i = 1; i <= MONTHS_IN_YEAR; i++) {
-			MONTHS.put(i, i);
-		}
-		
 		YEARS = new LinkedHashMap<Integer, Integer>();
 		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			YEARS.put(i, i);
@@ -71,16 +56,6 @@ public class AddSeriesController {
 	@Inject
 	AddSeriesController(final CountryService countryService) {
 		this.countryService = countryService;
-	}
-	
-	@ModelAttribute("days")
-	public Map<Integer, Integer> getDays() {
-		return DAYS;
-	}
-	
-	@ModelAttribute("months")
-	public Map<Integer, Integer> getMonths() {
-		return MONTHS;
 	}
 	
 	@ModelAttribute("years")
