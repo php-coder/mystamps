@@ -26,6 +26,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -68,6 +70,18 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(new CustomUserDetailsArgumentResolver());
+	}
+	
+	@Override
+	public Validator getValidator() {
+		final ReloadableResourceBundleMessageSource messageSource =
+			new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:ru/mystamps/i18n/ValidationMessages");
+		
+		final LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+		factory.setValidationMessageSource(messageSource);
+		
+		return factory;
 	}
 	
 	@Bean

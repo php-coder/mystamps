@@ -27,7 +27,7 @@ public final class TranslationUtils {
 	
 	private static final String [] BUNDLE_CLASS_NAMES = new String[] {
 		"ru.mystamps.i18n.Messages",
-		"ValidationMessages",
+		"ru.mystamps.i18n.ValidationMessages",
 		"ru.mystamps.i18n.SpringSecurityMessages"
 	};
 	
