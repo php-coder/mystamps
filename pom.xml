@@ -243,16 +243,6 @@
 			</exclusions>
 		</dependency>
 		
-		<!--
-			 HtmlUnit 2.8 use it but does not have dependency
-			 (also without it, project does not run under Jetty)
-		-->
-		<dependency>
-			<groupId>commons-collections</groupId>
-			<artifactId>commons-collections</artifactId>
-			<version>3.2.1</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
