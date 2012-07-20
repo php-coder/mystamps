@@ -614,21 +614,6 @@
 	<repositories>
 		
 		<repository>
-			<id>JBoss Maven Repository</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/public</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		
-		<repository>
 			<id>SpringSource Milestone Repository</id>
 			<url>http://repo.springsource.org/milestone</url>
 			<releases>
