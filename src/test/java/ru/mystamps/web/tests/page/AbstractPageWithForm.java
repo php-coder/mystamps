@@ -62,7 +62,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		return elementWithXPathExists(button.toString());
 	}
 	
-	public void submit() {
+	public AbstractPage submit() {
 		
 		checkState(
 			form != null,
@@ -79,6 +79,12 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		final String xpathOfFirstSubmitButton = buttons.get(0).toString();
 		
 		getElementByXPath(xpathOfFirstSubmitButton).submit();
+		
+		if (pageUrlChanged()) {
+			return null;
+		}
+		
+		return this;
 	}
 	
 	public boolean formExists() {

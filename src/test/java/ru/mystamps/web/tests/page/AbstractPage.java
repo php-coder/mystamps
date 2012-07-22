@@ -43,7 +43,7 @@ public abstract class AbstractPage {
 	
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
 	
-	private final WebDriver driver;
+	protected final WebDriver driver;
 	private final String pageUrl;
 	
 	@FindBy(tagName = "body")
@@ -97,6 +97,13 @@ public abstract class AbstractPage {
 	 **/
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl().replace(Url.SITE, "");
+	}
+	
+	/**
+	 * Verifies that current url differs from page's url.
+	 **/
+	protected boolean pageUrlChanged() {
+		return !driver.getCurrentUrl().equals(getFullUrl());
 	}
 	
 	public String getTitle() {
