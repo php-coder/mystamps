@@ -11,7 +11,7 @@
 	
 	<properties>
 		<guava.version>12.0</guava.version>
-		<hibernate.version>3.6.8.Final</hibernate.version>
+		<hibernate.version>3.6.10.Final</hibernate.version>
 		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
 		<lombok.version>0.11.2</lombok.version>
 		<mysql.connector.version>5.1.18</mysql.connector.version>
