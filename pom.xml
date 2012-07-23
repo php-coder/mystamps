@@ -636,23 +636,6 @@
 		
 	</repositories>
 	
-	<pluginRepositories>
-		<pluginRepository>
-			<id>mc-repo</id>
-			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>localRepository</id>
