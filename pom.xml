@@ -606,6 +606,10 @@
 		</license>
 	</licenses>
 	
+	<prerequisites>
+		<maven>2.2.1</maven>
+	</prerequisites>
+	
 	<scm>
 		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
 		<url>https://github.com/php-coder/mystamps</url>
