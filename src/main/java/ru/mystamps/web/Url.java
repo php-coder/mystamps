@@ -45,9 +45,12 @@ public final class Url {
 	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
 	public static final String ADD_SERIES_PAGE       = "/series/add";
+	public static final String INFO_SERIES_PAGE      = "/series/{id}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
+	
+	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
 	public static final String RESTORE_PASSWORD_PAGE = "/password/restore";
 	

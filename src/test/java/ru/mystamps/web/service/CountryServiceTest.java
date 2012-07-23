@@ -175,7 +175,7 @@ public class CountryServiceTest {
 		verify(countryDao).findOne(eq(TEST_COUNTRY_ID));
 	}
 	
-	private Country getCountry() {
+	static Country getCountry() {
 		final Country country = new Country();
 		country.setId(TEST_COUNTRY_ID);
 		country.setName(TEST_COUNTRY_NAME);

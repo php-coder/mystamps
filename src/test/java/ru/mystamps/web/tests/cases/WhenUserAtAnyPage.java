@@ -90,7 +90,7 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGS
 		shouldHaveFooter();
 	}
 	
-	private void checkServerResponseCode() {
+	protected void checkServerResponseCode() {
 		assertThat(page.getServerResponseCode())
 			//.overridingErrorMessage("Server response code")
 			.isEqualTo(serverCode);

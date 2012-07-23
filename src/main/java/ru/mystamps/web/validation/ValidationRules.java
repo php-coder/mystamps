@@ -45,6 +45,11 @@ public final class ValidationRules {
 	public static final String COUNTRY_NAME_REGEXP1 = "[- a-zA-Z]+";
 	public static final String COUNTRY_NAME_REGEXP2 = "[ a-zA-Z]([- a-zA-Z]+[ a-zA-Z])*";
 	
+	public static final int MIN_STAMPS_IN_SERIES = 1;
+	public static final int MAX_STAMPS_IN_SERIES = 50;
+	public static final int MAX_SERIES_COMMENT_LENGTH = 255;
+	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
+	
 	private ValidationRules() {
 	}
 	

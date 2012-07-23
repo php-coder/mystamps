@@ -1,7 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ page import="ru.mystamps.web.validation.ValidationRules" %>
 <%@ page import="ru.mystamps.web.Url" %>
 <spring:url var="authUrl" value="<%= Url.AUTHENTICATION_PAGE %>" />
 <spring:url var="activateUrl" value="<%= Url.ACTIVATE_ACCOUNT_PAGE %>" />

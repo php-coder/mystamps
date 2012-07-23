@@ -20,7 +20,9 @@ package ru.mystamps.web.tests.page;
 
 import java.util.List;
 
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import ru.mystamps.web.Url;
 
@@ -28,6 +30,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
 import static ru.mystamps.web.tests.page.element.Form.inputField;
 import static ru.mystamps.web.tests.page.element.Form.checkboxField;
+import static ru.mystamps.web.tests.page.element.Form.required;
 import static ru.mystamps.web.tests.page.element.Form.selectField;
 import static ru.mystamps.web.tests.page.element.Form.textareaField;
 import static ru.mystamps.web.tests.page.element.Form.uploadFileField;
@@ -42,26 +45,104 @@ public class AddSeriesPage extends AbstractPageWithForm {
 			with(
 				selectField("country").withLabel(tr("t_country")),
 				selectField("year").withLabel(tr("t_issue_year")),
-				inputField("quantity").withLabel(tr("t_quantity")),
+				required(inputField("quantity").withLabel(tr("t_quantity"))),
 				checkboxField("perforated").withLabel(tr("t_perforated")),
 				inputField("michelNumbers").withLabel(tr("t_michel_no")),
 				inputField("scottNumbers").withLabel(tr("t_scott_no")),
 				inputField("yvertNumbers").withLabel(tr("t_yvert_no")),
 				inputField("gibbonsNumbers").withLabel(tr("t_sg_no")),
 				textareaField("comment").withLabel(tr("t_comment")),
-				uploadFileField("image").withLabel(tr("t_image"))
+				required(uploadFileField("image").withLabel(tr("t_image")))
 			)
 			.and()
 			.with(submitButton(tr("t_add")))
 		);
 	}
 	
+	@Override
+	public AbstractPage submit() {
+		AbstractPage nextPage = super.submit();
+		if (nextPage == null) {
+			nextPage = new InfoSeriesPage(driver);
+		}
+		
+		return nextPage;
+	}
+	
 	public List<String> getContryFieldValues() {
 		return getSelectOptions("country");
 	}
 	
+	public void fillCountry(final String value) {
+		if (value != null) {
+			new Select(getElementByName("country")).selectByVisibleText(value);
+		}
+	}
+	
 	public List<String> getYearFieldValues() {
 		return getSelectOptions("year");
+	}
+	
+	public void fillYear(final String value) {
+		if (value != null) {
+			new Select(getElementByName("year")).selectByVisibleText(value);
+		}
+	}
+	
+	public void fillQuantity(final String value) {
+		if (value != null) {
+			fillField("quantity", value);
+		}
+	}
+	
+	public void fillPerforated(final boolean turnOn) {
+		final WebElement el = getElementByName("perforated");
+		if (el.isSelected()) {
+			if (!turnOn) {
+				el.click();
+			}
+			
+		} else {
+			if (turnOn) {
+				el.click();
+			}
+		}
+	}
+	
+	public void fillMichelNumbers(final String value) {
+		if (value != null) {
+			fillField("michelNumbers", value);
+		}
+	}
+	
+	public void fillScottNumbers(final String value) {
+		if (value != null) {
+			fillField("scottNumbers", value);
+		}
+	}
+	
+	public void fillYvertNumbers(final String value) {
+		if (value != null) {
+			fillField("yvertNumbers", value);
+		}
+	}
+	
+	public void fillGibbonsNumbers(final String value) {
+		if (value != null) {
+			fillField("gibbonsNumbers", value);
+		}
+	}
+	
+	public void fillComment(final String value) {
+		if (value != null) {
+			fillField("comment", value);
+		}
+	}
+	
+	public void fillImage(final String value) {
+		if (value != null) {
+			fillField("image", value);
+		}
 	}
 	
 }

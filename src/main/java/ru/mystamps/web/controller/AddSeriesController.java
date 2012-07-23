@@ -19,21 +19,29 @@
 package ru.mystamps.web.controller;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.service.SeriesService;
+
 
 @Controller
 @RequestMapping(Url.ADD_SERIES_PAGE)
@@ -45,6 +53,7 @@ public class AddSeriesController {
 	private static final Map<Integer, Integer> YEARS;
 	
 	private final CountryService countryService;
+	private final SeriesService seriesService;
 	
 	static {
 		YEARS = new LinkedHashMap<Integer, Integer>();
@@ -54,8 +63,19 @@ public class AddSeriesController {
 	}
 	
 	@Inject
-	AddSeriesController(final CountryService countryService) {
+	AddSeriesController(final CountryService countryService, final SeriesService seriesService) {
 		this.countryService = countryService;
+		this.seriesService = seriesService;
+	}
+	
+	@InitBinder
+	protected void initBinder(final WebDataBinder binder) {
+		final StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
+		binder.registerCustomEditor(String.class, "michelNumbers", editor);
+		binder.registerCustomEditor(String.class, "scottNumbers", editor);
+		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
+		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
+		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
 	}
 	
 	@ModelAttribute("years")
@@ -81,6 +101,18 @@ public class AddSeriesController {
 		addSeriesForm.setPerforated(true);
 		
 		return addSeriesForm;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String processInput(@Valid final AddSeriesForm form, final BindingResult result) {
+		
+		if (result.hasErrors()) {
+			return null;
+		}
+		
+		final Series series = seriesService.add(form);
+		
+		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
 	}
 	
 }
