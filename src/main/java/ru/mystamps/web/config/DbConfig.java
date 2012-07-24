@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -38,6 +39,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories("ru.mystamps.web.dao")
 @ImportResource("classpath:spring/database.xml")
 public class DbConfig {
 	
@@ -67,7 +69,9 @@ public class DbConfig {
 		return jpaVendorAdapter;
 	}
 	
-	@Bean
+	// Explicitly specified bean names which will be looking by Spring Data
+	
+	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
 		final LocalContainerEntityManagerFactoryBean entityManagerFactory =
 			new LocalContainerEntityManagerFactoryBean();
@@ -84,9 +88,6 @@ public class DbConfig {
 		return entityManagerFactory;
 	}
 	
-	/*
-	 * Explicitly specify name of bean which will be looking by Spring Data.
-	 */
 	@Bean(name = "transactionManager")
 	public PlatformTransactionManager getTransactionManager() {
 		final JpaTransactionManager transactionManager =

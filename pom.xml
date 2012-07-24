@@ -18,7 +18,7 @@
 		<selenium.version>2.25.0</selenium.version>
 		<slf4j.version>1.6.6</slf4j.version>
 		<spring.version>3.2.0.M1</spring.version>
-		<spring.data.version>1.1.0.RELEASE</spring.data.version>
+		<spring.data.version>1.2.0.M1</spring.data.version>
 		<spring.security.version>3.1.0.RELEASE</spring.security.version>
 		<h2.version>1.3.168</h2.version>
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
@@ -104,17 +104,6 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring.data.version}</version>
-			<exclusions>
-				<!--
-					Temporary workaround for https://jira.springsource.org/browse/DATACMNS-178
-					Will be removed during updates to new version.
-					See https://github.com/SpringSource/spring-data-commons/commit/31926a6299b1ea85da3ced7fd7714e2a1480613a
-				-->
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit-dep</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<dependency>
