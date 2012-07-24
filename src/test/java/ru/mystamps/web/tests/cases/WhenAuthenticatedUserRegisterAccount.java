@@ -49,7 +49,7 @@ public class WhenAuthenticatedUserRegisterAccount
 		page.login(validUserLogin, validUserPassword);
 	}
 	
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		page.logout();
 	}
