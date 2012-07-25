@@ -24,10 +24,10 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -40,20 +40,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("ru.mystamps.web.dao")
-@ImportResource("classpath:spring/database.xml")
+@PropertySource("classpath:spring/database.properties")
 public class DbConfig {
 	
-	@Value("${jpa.showSql}")
-	private String showSql;
-	
-	@Value("${jpa.dialectClassName}")
-	private String dialectClassName;
-	
-	@Value("${hibernate.formatSql}")
-	private String formatSql;
-	
-	@Value("${hibernate.hbm2ddl.auto}")
-	private String hbm2ddl;
+	@Inject
+	private Environment env;
 	
 	@Inject
 	private DataSource dataSource;
@@ -63,8 +54,8 @@ public class DbConfig {
 		final AbstractJpaVendorAdapter jpaVendorAdapter =
 			new HibernateJpaVendorAdapter();
 		
-		jpaVendorAdapter.setDatabasePlatform(dialectClassName);
-		jpaVendorAdapter.setShowSql(Boolean.valueOf(showSql));
+		jpaVendorAdapter.setDatabasePlatform(env.getRequiredProperty("jpa.dialectClassName"));
+		jpaVendorAdapter.setShowSql(env.getRequiredProperty("jpa.showSql", Boolean.class));
 		
 		return jpaVendorAdapter;
 	}
@@ -80,9 +71,18 @@ public class DbConfig {
 		entityManagerFactory.setDataSource(dataSource);
 		
 		final Map<String, String> jpaProperties = new HashMap<String, String>();
-		jpaProperties.put("hibernate.format_sql", formatSql);
-		jpaProperties.put("hibernate.connection.charset", "UTF-8");
-		jpaProperties.put("hibernate.hbm2ddl.auto", hbm2ddl);
+		jpaProperties.put(
+			"hibernate.format_sql",
+			env.getRequiredProperty("hibernate.formatSql")
+		);
+		jpaProperties.put(
+			"hibernate.connection.charset",
+			"UTF-8"
+		);
+		jpaProperties.put(
+			"hibernate.hbm2ddl.auto",
+			env.getRequiredProperty("hibernate.hbm2ddl.auto")
+		);
 		entityManagerFactory.setJpaPropertyMap(jpaProperties);
 		
 		return entityManagerFactory;

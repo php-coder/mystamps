@@ -18,41 +18,33 @@
 
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 @Configuration
 @Profile("dev")
-@ImportResource("classpath:spring/database.xml")
+@PropertySource("classpath:spring/database.properties")
 public class DevDataSource {
 	
-	@Value("${db.driverClassName}")
-	private String driverClassName;
-	
-	@Value("${db.url}")
-	private String url;
-	
-	@Value("${db.username}")
-	private String username;
-	
-	@Value("${db.password}")
-	private String password;
+	@Inject
+	private Environment env;
 	
 	@Bean(destroyMethod = "close")
 	public DataSource getDataSource() {
 		final BasicDataSource dataSource = new BasicDataSource();
 		
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
+		dataSource.setUrl(env.getRequiredProperty("db.url"));
+		dataSource.setUsername(env.getRequiredProperty("db.username"));
+		dataSource.setPassword(env.getRequiredProperty("db.password"));
 		
 		return dataSource;
 	}
