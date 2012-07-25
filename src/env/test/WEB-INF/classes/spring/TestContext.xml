@@ -6,6 +6,6 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util.xsd">
 	
-	<util:properties id="test" location="classpath:spring/test-credentials.properties" />
+	<util:properties id="test" location="classpath:spring/test-data.properties" />
 	
 </beans>

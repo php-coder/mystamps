@@ -796,8 +796,7 @@
 											verbose="yes"
 											encoding="${project.build.sourceEncoding}">
 											<filterset>
-												<filtersfile
-													file="${env.dir}/spring/test-credentials.properties" />
+												<filtersfile file="${env.dir}/spring/test-data.properties" />
 											</filterset>
 										</copy>
 									</target>
