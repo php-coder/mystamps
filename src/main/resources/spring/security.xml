@@ -6,21 +6,31 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 	
+	<global-method-security pre-post-annotations="enabled" />
+	
 	<http pattern="/static/**" security="none" />
 	
-	<http use-expressions="true">
+	<http
+		use-expressions="true"
+		entry-point-ref="http401UnauthorizedEntryPoint">
+		
 		<form-login
 			login-page="/account/auth"
 			login-processing-url="/account/login"
 			username-parameter="login"
 			password-parameter="password"
 			authentication-failure-url="/account/auth?failed"
-			default-target-url="/" />
+			default-target-url="/"
+			always-use-default-target="true" />
 		
 		<logout
 			logout-url="/account/logout"
 			logout-success-url="/"
 			invalidate-session="true" />
+		
+		<access-denied-handler error-page="/error/401" />
+		
+		<intercept-url pattern="/country/add" access="hasRole('ROLE_USER')" />
 		
 		<intercept-url pattern="/**" access="permitAll" />
 	</http>

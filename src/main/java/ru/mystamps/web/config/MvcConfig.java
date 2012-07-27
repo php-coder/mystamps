@@ -61,6 +61,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController(Url.INDEX_PAGE).setViewName("site/index");
 		registry.addViewController(Url.SUCCESSFUL_ACTIVATION_PAGE);
 		registry.addViewController(Url.SUCCESSFUL_REGISTRATION_PAGE);
+		registry.addViewController(Url.UNAUTHORIZED_PAGE);
 	}
 	
 	@Override

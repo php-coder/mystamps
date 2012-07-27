@@ -3,20 +3,22 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>MyStamps: <spring:message code="t_index_title" /></title>
+		<title><spring:message code="t_401_title" /></title>
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
 		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
+		<link rel="stylesheet" type="text/css" href="${errorCssUrl}" />
 	</head>
 	<body>
 		<%@ include file="/WEB-INF/segments/header.jspf" %>
 		<div id="content">
-			<spring:message code="t_you_may" />:
-			<ul>
-				<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
-				<sec:authorize access="hasRole('ROLE_USER')">
-					<li><a href="${addCountryUrl}"><spring:message code="t_add_country" /></a></li>
-				</sec:authorize>
-			</ul>
+			<table>
+				<tr>
+					<td id="error-code">401</td>
+					<td id="error-msg">
+						<spring:message code="t_401_description" arguments="<br />" />
+					</td>
+				</tr>
+			</table>
 		</div>
 		<%@ include file="/WEB-INF/segments/footer.jspf" %>
 	</body>

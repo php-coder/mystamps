@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import java.util.Date;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class CountryService {
 	private CountryDao countryDao;
 	
 	@Transactional
+	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public Country add(final String countryName) {
 		checkArgument(countryName != null, "Country name should be non null");
 		

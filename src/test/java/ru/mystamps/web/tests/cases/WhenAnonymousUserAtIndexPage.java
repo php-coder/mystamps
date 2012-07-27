@@ -20,9 +20,6 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,15 +27,9 @@ import ru.mystamps.web.tests.page.IndexSitePage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
+public class WhenAnonymousUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	
-	@Value("${valid_user_login}")
-	private String validUserLogin;
-	
-	@Value("${valid_user_password}")
-	private String validUserPassword;
-	
-	public WhenUserAtIndexPage() {
+	public WhenAnonymousUserAtIndexPage() {
 		super(IndexSitePage.class);
 		hasTitle(tr("t_index_title"));
 	}
@@ -46,12 +37,6 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	@BeforeClass
 	public void setUp() {
 		page.open();
-		page.login(validUserLogin, validUserPassword);
-	}
-	
-	@AfterClass(alwaysRun = true)
-	public void tearDown() {
-		page.logout();
 	}
 	
 	@Test(groups = "std")
@@ -72,15 +57,10 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsLinkForAddingCountries() {
+	public void linkForAddingCountriesShouldBeAbsent() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			//.overridingErrorMessage("should exists link to page for adding countries")
-			.isTrue();
-	}
-	
-	@Override
-	protected void shouldHaveUserBar() {
-		// Ignore this check because when user authenticated there is no links for login/register.
+			//.overridingErrorMessage("should absent link to page for adding countries")
+			.isFalse();
 	}
 	
 }

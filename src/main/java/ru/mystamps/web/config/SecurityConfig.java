@@ -29,9 +29,11 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 import ru.mystamps.web.support.spring.security.AuthenticationFailureListener;
 import ru.mystamps.web.support.spring.security.CustomUserDetailsService;
+import ru.mystamps.web.support.spring.security.Http401UnauthorizedEntryPoint;
 
 @Configuration
 @ImportResource("classpath:spring/security.xml")
@@ -63,6 +65,11 @@ public class SecurityConfig {
 	@Bean(name = "customUserDetailsService")
 	public UserDetailsService getUserDetailsService() {
 		return new CustomUserDetailsService();
+	}
+	
+	@Bean(name = "http401UnauthorizedEntryPoint")
+	public AuthenticationEntryPoint getHttp401UnauthorizedEntryPoint() {
+		return new Http401UnauthorizedEntryPoint();
 	}
 	
 }

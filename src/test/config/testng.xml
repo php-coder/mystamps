@@ -19,6 +19,12 @@
 		</classes>
 	</test>
 	
+	<test name="When anonymous user add country">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAddCountry" />
+		</classes>
+	</test>
+	
 	<test name="When user add country">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserAddCountry" />
@@ -49,6 +55,12 @@
 		</classes>
 	</test>
 	
+	<test name="When anonymous user at index page">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtIndexPage" />
+		</classes>
+	</test>
+	
 	<test name="When user at index page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserAtIndexPage" />
@@ -70,6 +82,12 @@
 	<test name="When user open not existing page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserOpenNotExistingPage" />
+		</classes>
+	</test>
+	
+	<test name="When user at unauthorized page">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenUserAtUnauthorizedPage" />
 		</classes>
 	</test>
 	

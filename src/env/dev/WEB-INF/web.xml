@@ -71,6 +71,11 @@
 		mapping controller to location
 	-->
 	<error-page>
+		<error-code>401</error-code>
+		<location>/error/401</location>
+	</error-page>
+	
+	<error-page>
 		<error-code>404</error-code>
 		<location>/error/404</location>
 	</error-page>
@@ -101,6 +106,10 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		
+		<!-- apply Spring Security authentication to error-pages -->
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	
 </web-app>

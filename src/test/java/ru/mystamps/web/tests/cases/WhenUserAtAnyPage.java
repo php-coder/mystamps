@@ -119,7 +119,7 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGS
 			.isEqualTo(tr("t_my_stamps"));
 	}
 	
-	private void shouldHaveUserBar() {
+	protected void shouldHaveUserBar() {
 		assertThat(page.userBarExists())
 			//.overridingErrorMessage("user bar should exists")
 			.isTrue();

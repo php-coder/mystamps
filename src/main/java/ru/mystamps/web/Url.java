@@ -52,7 +52,8 @@ public final class Url {
 	
 	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
-	// see also error-page definition at src/env/{dev,test}/WEB-INF/web.xml
+	// see also error-page definitions at src/env/{dev,test}/WEB-INF/web.xml
+	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	
 	private Url() {
