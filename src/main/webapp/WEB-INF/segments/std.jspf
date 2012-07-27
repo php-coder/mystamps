@@ -10,7 +10,6 @@
 <spring:url var="loginUrl" value="<%= Url.LOGIN_PAGE %>" />
 <spring:url var="logoutUrl" value="<%= Url.LOGOUT_PAGE %>" />
 <spring:url var="registerUrl" value="<%= Url.REGISTRATION_PAGE %>" />
-<spring:url var="restorePasswordUrl" value="<%= Url.RESTORE_PASSWORD_PAGE %>" />
 <spring:url var="addSeriesUrl" value="<%= Url.ADD_SERIES_PAGE %>" />
 <spring:url var="addCountryUrl" value="<%= Url.ADD_COUNTRY_PAGE %>" />
 <spring:url var="faviconUrl" value="/favicon.ico" />

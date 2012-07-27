@@ -50,13 +50,6 @@ public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsLinkForPasswordRecovery() {
-		assertThat(page.linkWithLabelExists(tr("t_recover_forget_password")))
-			//.overridingErrorMessage("should exists link to password restoration page")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
 			//.overridingErrorMessage("should exists link to page for adding series of stamps")

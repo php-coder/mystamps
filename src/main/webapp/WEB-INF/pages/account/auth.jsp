@@ -21,11 +21,6 @@
 			<sec:authorize access="isAnonymous()">
 				<div class="hint">
 					<span class="hint_item">
-						<spring:message code="t_if_you_forget_password"
-							arguments="${restorePasswordUrl}" />
-					</span>
-					<br />
-					<span class="hint_item">
 						<spring:message code="t_required_fields_legend"
 							arguments="<span class=\"required_field\">*</span>" />
 					</span>

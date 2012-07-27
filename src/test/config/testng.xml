@@ -67,12 +67,6 @@
 		</classes>
 	</test>
 	
-	<test name="When user recovery password">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserRecoveryPassword" />
-		</classes>
-	</test>
-	
 	<test name="When user register account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserRegisterAccount" />

@@ -12,7 +12,6 @@
 		<div id="content">
 			<spring:message code="t_you_may" />:
 			<ul>
-				<li><a href="${restorePasswordUrl}"><spring:message code="t_recover_forget_password" /></a></li>
 				<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
 				<li><a href="${addCountryUrl}"><spring:message code="t_add_country" /></a></li>
 			</ul>

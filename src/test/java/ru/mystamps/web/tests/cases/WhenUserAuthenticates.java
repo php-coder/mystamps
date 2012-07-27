@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
@@ -61,15 +60,6 @@ public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccount
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
-		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
-		
-		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
-			//.overridingErrorMessage("should exists link to password restoration page")
-			.isTrue();
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")

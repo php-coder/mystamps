@@ -59,7 +59,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public void addViewControllers(final ViewControllerRegistry registry) {
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.INDEX_PAGE).setViewName("site/index");
-		registry.addViewController(Url.RESTORE_PASSWORD_PAGE);
 		registry.addViewController(Url.SUCCESSFUL_ACTIVATION_PAGE);
 		registry.addViewController(Url.SUCCESSFUL_REGISTRATION_PAGE);
 	}

@@ -52,8 +52,6 @@ public final class Url {
 	
 	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
-	public static final String RESTORE_PASSWORD_PAGE = "/password/restore";
-	
 	// see also error-page definition at src/env/{dev,test}/WEB-INF/web.xml
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	

@@ -60,15 +60,6 @@ public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterA
 			.isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsMessageWithLinkAboutPasswordRecovery() {
-		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_forget_password")));
-		
-		assertThat(page.existsLinkTo(Url.RESTORE_PASSWORD_PAGE))
-			//.overridingErrorMessage("should exists link to password restoration page")
-			.isTrue();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void emailShouldNotBeTooLong() {
 		page.registerUser(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
