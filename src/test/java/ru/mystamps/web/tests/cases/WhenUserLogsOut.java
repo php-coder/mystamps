@@ -30,10 +30,10 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
 	
-	@Value("#{test.valid_user_login}")
+	@Value("${valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("#{test.valid_user_password}")
+	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
 	public WhenUserLogsOut() {

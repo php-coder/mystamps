@@ -32,19 +32,19 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
-	@Value("#{test.valid_user_login}")
+	@Value("${valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("#{test.valid_user_password}")
+	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
-	@Value("#{test.valid_user_name}")
+	@Value("${valid_user_name}")
 	private String validUserName;
 	
-	@Value("#{test.invalid_user_login}")
+	@Value("${invalid_user_login}")
 	private String invalidUserLogin;
 	
-	@Value("#{test.invalid_user_password}")
+	@Value("${invalid_user_password}")
 	private String invalidUserPassword;
 	
 	public WhenUserAuthenticates() {

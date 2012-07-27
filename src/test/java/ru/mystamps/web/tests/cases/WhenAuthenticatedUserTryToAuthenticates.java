@@ -32,10 +32,10 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
 public class WhenAuthenticatedUserTryToAuthenticates
 	extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
-	@Value("#{test.valid_user_login}")
+	@Value("${valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("#{test.valid_user_password}")
+	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
 	public WhenAuthenticatedUserTryToAuthenticates() {

@@ -40,7 +40,7 @@ public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage
 	
 	private static final String TEST_COUNTRY_NAME = "Russia";
 	
-	@Value("#{test.valid_country_name}")
+	@Value("${valid_country_name}")
 	private String validCountryName;
 	
 	public WhenUserAddCountry() {

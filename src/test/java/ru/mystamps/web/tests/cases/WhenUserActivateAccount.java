@@ -42,13 +42,13 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
-	@Value("#{test.valid_user_login}")
+	@Value("${valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("#{test.not_activated_user1_act_key}")
+	@Value("${not_activated_user1_act_key}")
 	private String firstNotActivatedUserActKey;
 	
-	@Value("#{test.not_activated_user2_act_key}")
+	@Value("${not_activated_user2_act_key}")
 	private String secondNotActivatedUserActKey;
 	
 	public WhenUserActivateAccount() {

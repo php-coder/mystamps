@@ -22,9 +22,11 @@ import java.net.HttpURLConnection;
 
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import ru.mystamps.web.tests.WebDriverFactory;
+import ru.mystamps.web.config.TestContext;
 import ru.mystamps.web.tests.page.AbstractPage;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -33,7 +35,10 @@ import static com.google.common.base.Preconditions.checkState;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-@ContextConfiguration(locations = "classpath:spring/TestContext.xml")
+@ContextConfiguration(
+	loader = AnnotationConfigContextLoader.class,
+	classes = TestContext.class
+)
 abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGSpringContextTests {
 	
 	/**
