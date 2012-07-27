@@ -296,6 +296,32 @@
 			<version>${guava.version}</version>
 		</dependency>
 		
+		<!-- Dependencies which used only in dev environment -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- Dependencies which used only in test environment -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>
@@ -685,31 +711,8 @@
 				<env.dir>${env.root.dir}/dev/WEB-INF/classes</env.dir>
 				<ddl.file>mysql-scheme.sql</ddl.file>
 			</properties>
-			<dependencies>
-				<dependency>
-					<groupId>commons-dbcp</groupId>
-					<artifactId>commons-dbcp</artifactId>
-					<version>1.4</version>
-				</dependency>
-				<dependency>
-					<groupId>mysql</groupId>
-					<artifactId>mysql-connector-java</artifactId>
-					<version>${mysql.connector.version}</version>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
 			<build>
 				<plugins>
-					
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<excludes>
-								<exclude>**/TestDataSource.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -751,31 +754,8 @@
 				<env.dir>${env.root.dir}/test/WEB-INF/classes</env.dir>
 				<ddl.file>h2-scheme.sql</ddl.file>
 			</properties>
-			<dependencies>
-				<dependency>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-jdbc</artifactId>
-					<version>${spring.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>com.h2database</groupId>
-					<artifactId>h2</artifactId>
-					<version>${h2.version}</version>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
 			<build>
 				<plugins>
-					
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<excludes>
-								<exclude>**/DevDataSource.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
 					
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>

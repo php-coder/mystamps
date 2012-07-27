@@ -21,10 +21,7 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			ru.mystamps.web.config.ApplicationContext,
-			ru.mystamps.web.config.TestDataSource
-		</param-value>
+		<param-value>ru.mystamps.web.config.ApplicationContext</param-value>
 	</context-param>
 	
 	<listener>
