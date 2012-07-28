@@ -18,8 +18,6 @@
 
 package ru.mystamps.web.service;
 
-import java.util.Collections;
-
 import javax.inject.Inject;
 
 import org.testng.annotations.Test;
@@ -31,11 +29,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.TestContext;
@@ -65,37 +58,16 @@ public class CountryServiceMethodSecurityTest extends AbstractTestNGSpringContex
 	
 	@Test(expectedExceptions = AccessDeniedException.class)
 	public void addShouldDenyAccessToAnonymousUser() {
-		authenticateAsAnonymous();
+		AuthUtils.authenticateAsAnonymous();
 		
 		service.add(null);
 	}
 	
 	@Test
 	public void addShouldAllowAccessToAuthenticatedUser() {
-		authenticateAsUser(validUserLogin, validUserPassword);
+		AuthUtils.authenticateAsUser(validUserLogin, validUserPassword);
 		
 		service.add("Any Country Name");
-	}
-	
-	private static void authenticateAsAnonymous() {
-		final Authentication authentication = new AnonymousAuthenticationToken(
-			"anonymous",
-			"anonymous",
-			Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))
-		);
-		
-		authenticate(authentication);
-	}
-	
-	private static void authenticateAsUser(final String login, final String password) {
-		final Authentication authentication =
-			new UsernamePasswordAuthenticationToken(login, password);
-		
-		authenticate(authentication);
-	}
-	
-	private static void authenticate(final Authentication authentication) {
-		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 	
 }
