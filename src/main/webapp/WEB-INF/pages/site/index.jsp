@@ -10,13 +10,13 @@
 	<body>
 		<%@ include file="/WEB-INF/segments/header.jspf" %>
 		<div id="content">
-			<spring:message code="t_you_may" />:
-			<ul>
-				<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
-				<sec:authorize access="hasRole('ROLE_USER')">
+			<sec:authorize access="hasRole('ROLE_USER')">
+				<spring:message code="t_you_may" />:
+				<ul>
+					<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
 					<li><a href="${addCountryUrl}"><spring:message code="t_add_country" /></a></li>
-				</sec:authorize>
-			</ul>
+				</ul>
+			</sec:authorize>
 		</div>
 		<%@ include file="/WEB-INF/segments/footer.jspf" %>
 	</body>

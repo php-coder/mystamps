@@ -29,6 +29,10 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import org.springframework.beans.factory.annotation.Value;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -71,15 +75,31 @@ public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> 
 		}
 	}
 	
+	@Value("${valid_user_login}")
+	private String validUserLogin;
+	
+	@Value("${valid_user_password}")
+	private String validUserPassword;
+	
 	public WhenUserAddSeries() {
 		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
 		hasHeader(tr("t_add_series_ucfirst"));
 	}
 	
+	@BeforeClass
+	public void login() {
+		page.login(validUserLogin, validUserPassword);
+	}
+	
 	@BeforeMethod
 	public void openPage() {
 		page.open();
+	}
+	
+	@AfterClass(alwaysRun = true)
+	public void tearDown() {
+		page.logout();
 	}
 	
 	@Test(groups = "std")
@@ -382,6 +402,17 @@ public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> 
 			{"1,09", expectedErrorMessage},
 			{"10000", expectedErrorMessage}
 		};
+	}
+	
+	@Override
+	protected void checkServerResponseCode() {
+		// Ignore this check because server always returns 401 for anonymous user and our test suite
+		// lack ability to check response code after authentication.
+	}
+	
+	@Override
+	protected void shouldHaveUserBar() {
+		// Ignore this check because when user authenticated there is no links for login/register.
 	}
 	
 }

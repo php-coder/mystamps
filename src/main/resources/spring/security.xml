@@ -31,6 +31,7 @@
 		<access-denied-handler error-page="/error/401" />
 		
 		<intercept-url pattern="/country/add" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/series/add" access="hasRole('ROLE_USER')" />
 		
 		<intercept-url pattern="/**" access="permitAll" />
 	</http>

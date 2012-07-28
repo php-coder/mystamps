@@ -25,6 +25,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +73,7 @@ public class SeriesService {
 	private ImageService imageService;
 	
 	@Transactional
+	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public Series add(final AddSeriesForm form) {
 		checkArgument(form != null, "Series info must be non null");
 		checkArgument(form.getQuantity() != null, "Stamps quantity must be non null");

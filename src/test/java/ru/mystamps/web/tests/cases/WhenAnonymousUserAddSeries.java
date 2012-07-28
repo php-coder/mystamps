@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2012 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,25 +18,30 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import java.net.HttpURLConnection;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import ru.mystamps.web.tests.page.IndexSitePage;
+import static org.fest.assertions.api.Assertions.assertThat;
+
+import ru.mystamps.web.tests.page.UnauthorizedErrorPage;
+
+import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
+public class WhenAnonymousUserAddSeries extends WhenUserAtAnyPage<UnauthorizedErrorPage> {
 	
-	public WhenAnonymousUserAtIndexPage() {
-		super(IndexSitePage.class);
-		hasTitle(tr("t_index_title"));
+	public WhenAnonymousUserAddSeries() {
+		super(UnauthorizedErrorPage.class);
+		hasTitleWithoutStandardPrefix(tr("t_401_title"));
+		hasResponseServerCode(HttpURLConnection.HTTP_UNAUTHORIZED);
 	}
 	
 	@BeforeClass
 	public void setUp() {
-		page.open();
+		page.open(Url.ADD_SERIES_PAGE);
 	}
 	
 	@Test(groups = "std")
@@ -45,22 +50,13 @@ public class WhenAnonymousUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePag
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldAbsentWelcomeText() {
-		assertThat(page.textPresent(tr("t_you_may"))).isFalse();
+	public void shouldExistsErrorMessage() {
+		assertThat(page.getErrorMessage()).isEqualTo(tr("t_401_description", "\n"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void linkForAddingSeriesShouldBeAbsent() {
-		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			//.overridingErrorMessage("should absent link to page for adding series of stamps")
-			.isFalse();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void linkForAddingCountriesShouldBeAbsent() {
-		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			//.overridingErrorMessage("should absent link to page for adding countries")
-			.isFalse();
+	public void shouldExistsErrorCode() {
+		assertThat(page.getErrorCode()).isEqualTo("401");
 	}
 	
 }
