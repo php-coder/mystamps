@@ -41,7 +41,7 @@ public class WhenAnonymousUserAddCountry extends WhenUserAtAnyPage<UnauthorizedE
 	
 	@BeforeClass
 	public void setUp() {
-		page.open(Url.UNAUTHORIZED_PAGE);
+		page.open(Url.ADD_COUNTRY_PAGE);
 	}
 	
 	@Test(groups = "std")
