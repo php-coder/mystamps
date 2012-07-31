@@ -1,6 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Functional tests on Selenium">
 	
+	<test name="Spring Security annotations tests">
+		<classes>
+			<class name="ru.mystamps.web.service.CountryServiceMethodSecurityTest" />
+			<class name="ru.mystamps.web.service.SeriesServiceMethodSecurityTest" />
+		</classes>
+	</test>
+	
 	<test name="When authenticated user register account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAuthenticatedUserRegisterAccount" />
