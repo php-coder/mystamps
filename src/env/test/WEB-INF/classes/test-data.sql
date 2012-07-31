@@ -26,8 +26,10 @@ VALUES(
 	NOW()
 );
 
-INSERT INTO countries(name, created_at)
+INSERT INTO countries(name, created_at, updated_at, version)
 VALUES(
 	'@valid_country_name@',
-	NOW()
+	NOW(),
+	NOW(),
+	0
 );

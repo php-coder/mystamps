@@ -44,7 +44,10 @@ public class CountryService {
 		
 		final Country country = new Country();
 		country.setName(countryName);
-		country.setCreatedAt(new Date());
+		
+		final Date now = new Date();
+		country.setCreatedAt(now);
+		country.setUpdatedAt(now);
 		
 		return countryDao.save(country);
 	}

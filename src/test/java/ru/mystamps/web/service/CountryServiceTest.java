@@ -100,6 +100,15 @@ public class CountryServiceTest {
 		DateAssert.assertThat(countryCaptor.getValue().getCreatedAt()).isCurrentDate();
 	}
 	
+	@Test
+	public void addShouldAssignUpdatedAtToCurrentDate() {
+		service.add(TEST_COUNTRY_NAME);
+		
+		verify(countryDao).save(countryCaptor.capture());
+		
+		DateAssert.assertThat(countryCaptor.getValue().getUpdatedAt()).isCurrentDate();
+	}
+	
 	//
 	// Tests for findAll()
 	//
@@ -179,7 +188,9 @@ public class CountryServiceTest {
 		final Country country = new Country();
 		country.setId(TEST_COUNTRY_ID);
 		country.setName(TEST_COUNTRY_NAME);
-		country.setCreatedAt(new Date());
+		final Date now = new Date();
+		country.setCreatedAt(now);
+		country.setUpdatedAt(now);
 		return country;
 	}
 	

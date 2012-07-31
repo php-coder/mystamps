@@ -6,6 +6,8 @@
         id integer not null auto_increment,
         created_at datetime not null,
         name varchar(50) not null unique,
+        updated_at datetime not null,
+        version bigint not null,
         primary key (id)
     ) ENGINE=InnoDB;
 
