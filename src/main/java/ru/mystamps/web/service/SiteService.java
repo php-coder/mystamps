@@ -41,7 +41,8 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 
 @Service
 public class SiteService {
-	private final Logger log = LoggerFactory.getLogger(SiteService.class);
+	
+	private static final Logger LOG = LoggerFactory.getLogger(SiteService.class);
 	
 	@Inject
 	private UserDao users;
@@ -94,7 +95,7 @@ public class SiteService {
 		if (userId != null) {
 			currentUser = users.findOne(userId);
 			if (currentUser == null) {
-				log.warn("Cannot find user with id {}", userId);
+				LOG.warn("Cannot find user with id {}", userId);
 			}
 		}
 		activity.setUser(currentUser);

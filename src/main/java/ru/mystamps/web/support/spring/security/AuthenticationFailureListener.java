@@ -34,7 +34,7 @@ import ru.mystamps.web.service.SiteService;
 public class AuthenticationFailureListener
 	implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 	
-	private final Logger log = LoggerFactory.getLogger(AuthenticationFailureListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 	
 	@Inject
 	private SiteService siteService;
@@ -43,7 +43,7 @@ public class AuthenticationFailureListener
 	public void onApplicationEvent(final AuthenticationFailureBadCredentialsEvent event) {
 		final HttpServletRequest request = getRequest();
 		if (request == null) {
-			log.warn("Can't get http request object");
+			LOG.warn("Can't get http request object");
 			return;
 		}
 		

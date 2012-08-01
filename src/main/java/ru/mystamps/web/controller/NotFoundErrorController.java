@@ -37,7 +37,7 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 @Controller
 @RequestMapping(Url.NOT_FOUND_PAGE)
 public class NotFoundErrorController {
-	private final Logger log = LoggerFactory.getLogger(NotFoundErrorController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(NotFoundErrorController.class);
 	
 	private final SiteService siteService;
 	
@@ -68,7 +68,7 @@ public class NotFoundErrorController {
 		} catch (final Exception ex) {
 			// intentionally ignored:
 			// database error should not break showing of 404 page
-			log.warn("Cannot log 404 error", ex);
+			LOG.warn("Cannot log 404 error", ex);
 		}
 	}
 	

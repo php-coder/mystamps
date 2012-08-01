@@ -44,7 +44,7 @@ public class CronService {
 	
 	private static final long CHECK_UNACTIVATED_REQUESTS_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
 	
-	private final Logger log = LoggerFactory.getLogger(CronService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
 	
 	@Inject
 	private UsersActivationDao usersActivationDao;
@@ -63,12 +63,12 @@ public class CronService {
 		checkState(expiredActivations != null, "Expired activations should be non null");
 		
 		if (expiredActivations.isEmpty()) {
-			log.info("Expired activations was not found.");
+			LOG.info("Expired activations was not found.");
 			return;
 		}
 		
 		for (final UsersActivation activation : expiredActivations) {
-			log.info(
+			LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				new Object[] {
 					activation.getActivationKey(),

@@ -43,7 +43,7 @@ import ru.mystamps.web.dao.UsersActivationDao;
 @Service
 public class UserService {
 	
-	private final Logger log = LoggerFactory.getLogger(UserService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 	
 	@Inject
 	private UserDao users;
@@ -94,7 +94,7 @@ public class UserService {
 		final UsersActivation activation =
 			usersActivation.findByActivationKey(activationKey);
 		if (activation == null) {
-			log.warn("Cannot find registration request for activation key '{}'", activationKey);
+			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
 		}
 		
@@ -120,7 +120,7 @@ public class UserService {
 		users.save(user);
 		usersActivation.delete(activation);
 		
-		log.info(
+		LOG.info(
 			"Added user (login='{}', name='{}', activation key='{}')",
 			new Object[]{login, finalName, activationKey}
 		);

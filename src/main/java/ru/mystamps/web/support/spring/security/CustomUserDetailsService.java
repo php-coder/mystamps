@@ -43,7 +43,7 @@ import ru.mystamps.web.service.UserService;
  */
 public class CustomUserDetailsService implements UserDetailsService {
 	
-	private final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
 	@Inject
 	private UserService userService;
@@ -53,15 +53,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(final String login) {
 		checkArgument(login != null, "Login should be non null");
 		
-		log.debug("Find user by login '{}'", login);
+		LOG.debug("Find user by login '{}'", login);
 		
 		final User user = userService.findByLogin(login);
 		if (user == null) {
-			log.debug("User '{}' not found", login);
+			LOG.debug("User '{}' not found", login);
 			throw new UsernameNotFoundException("User not found");
 		}
 		
-		log.debug("User '{}' found", login);
+		LOG.debug("User '{}' found", login);
 		
 		return new CustomUserDetails(user, getAuthorities());
 	}
