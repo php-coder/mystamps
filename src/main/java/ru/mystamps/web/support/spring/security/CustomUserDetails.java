@@ -25,7 +25,7 @@ import org.springframework.security.core.GrantedAuthority;
 import ru.mystamps.web.entity.User;
 
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
-	private User user;
+	private final User user;
 	
 	public CustomUserDetails(
 		final User user,

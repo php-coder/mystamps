@@ -35,7 +35,7 @@ import ru.mystamps.web.Url;
 @Controller
 public class ImageController {
 	
-	private ImageService imageService;
+	private final ImageService imageService;
 	
 	@Inject
 	public ImageController(final ImageService imageService) {
