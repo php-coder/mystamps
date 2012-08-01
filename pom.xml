@@ -27,6 +27,8 @@
 		<mockito.version>1.9.5-rc1</mockito.version>
 		<fest.assert.version>2.0M6</fest.assert.version>
 		
+		<java.version>1.6</java.version>
+		
 		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.root.dir>src/env</env.root.dir>
 		
@@ -334,8 +336,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${compiler.plugin.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<verbose>true</verbose>
