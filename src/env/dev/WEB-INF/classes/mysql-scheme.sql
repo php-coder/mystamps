@@ -8,6 +8,8 @@
         name varchar(50) not null unique,
         updated_at datetime not null,
         version bigint not null,
+        created_by integer not null,
+        updated_by integer not null,
         primary key (id)
     ) ENGINE=InnoDB;
 
@@ -116,6 +118,18 @@
         code varchar(4) unique,
         primary key (id)
     ) ENGINE=InnoDB;
+
+    alter table countries 
+        add index FK509F9AB4E7A879A3 (created_by), 
+        add constraint FK509F9AB4E7A879A3 
+        foreign key (created_by) 
+        references users (id);
+
+    alter table countries 
+        add index FK509F9AB4846862F0 (updated_by), 
+        add constraint FK509F9AB4846862F0 
+        foreign key (updated_by) 
+        references users (id);
 
     alter table series 
         add index FKCA01FE77DF85B0F0 (country_id), 

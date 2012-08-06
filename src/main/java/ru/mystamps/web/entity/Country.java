@@ -24,6 +24,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,9 +54,17 @@ public class Country {
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "created_by", nullable = false)
+	private User createdBy;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
 	
 	@Setter(AccessLevel.PROTECTED)
 	@Version

@@ -42,6 +42,7 @@ import static org.mockito.Mockito.when;
 
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 public class CountryServiceTest {
@@ -52,6 +53,9 @@ public class CountryServiceTest {
 	@Mock
 	private CountryDao countryDao;
 	
+	@Mock
+	private UserService userService;
+	
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
 	
@@ -61,6 +65,7 @@ public class CountryServiceTest {
 	@BeforeMethod
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 	}
 	
 	//
@@ -107,6 +112,35 @@ public class CountryServiceTest {
 		verify(countryDao).save(countryCaptor.capture());
 		
 		DateAssert.assertThat(countryCaptor.getValue().getUpdatedAt()).isCurrentDate();
+	}
+	
+	@Test(expectedExceptions = IllegalStateException.class)
+	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
+		when(userService.getCurrentUser()).thenReturn(null);
+		
+		service.add(TEST_COUNTRY_NAME);
+	}
+	
+	@Test
+	public void addShouldAssignCreatedAtToCurrentUser() {
+		final User expectedUser = UserServiceTest.getValidUser();
+		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		
+		service.add(TEST_COUNTRY_NAME);
+		
+		verify(countryDao).save(countryCaptor.capture());
+		assertThat(countryCaptor.getValue().getCreatedBy()).isEqualTo(expectedUser);
+	}
+	
+	@Test
+	public void addShouldAssignUpdatedAtToCurrentUser() {
+		final User expectedUser = UserServiceTest.getValidUser();
+		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		
+		service.add(TEST_COUNTRY_NAME);
+		
+		verify(countryDao).save(countryCaptor.capture());
+		assertThat(countryCaptor.getValue().getUpdatedBy()).isEqualTo(expectedUser);
 	}
 	
 	//

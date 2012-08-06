@@ -27,8 +27,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 
 @Service
@@ -36,6 +38,9 @@ public class CountryService {
 	
 	@Inject
 	private CountryDao countryDao;
+	
+	@Inject
+	private UserService userService;
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -48,6 +53,11 @@ public class CountryService {
 		final Date now = new Date();
 		country.setCreatedAt(now);
 		country.setUpdatedAt(now);
+		
+		final User currentUser = userService.getCurrentUser();
+		checkState(currentUser != null, "Current user must be non null");
+		country.setCreatedBy(currentUser);
+		country.setUpdatedBy(currentUser);
 		
 		return countryDao.save(country);
 	}

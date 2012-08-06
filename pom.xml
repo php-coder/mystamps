@@ -24,8 +24,9 @@
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
 		
 		<testng.version>6.7</testng.version>
-		<mockito.version>1.9.5-rc1</mockito.version>
+		<mockito.version>1.9.0</mockito.version>
 		<fest.assert.version>2.0M6</fest.assert.version>
+		<powermock.version>1.4.12</powermock.version>
 		
 		<java.version>1.6</java.version>
 		
@@ -219,6 +220,20 @@
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>${fest.assert.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-testng</artifactId>
+			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
 		

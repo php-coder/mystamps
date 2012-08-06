@@ -8,6 +8,8 @@
         name varchar(50) not null unique,
         updated_at timestamp not null,
         version bigint not null,
+        created_by integer not null,
+        updated_by integer not null,
         primary key (id)
     );
 
@@ -116,6 +118,16 @@
         code varchar(4) unique,
         primary key (id)
     );
+
+    alter table countries 
+        add constraint FK509F9AB4E7A879A3 
+        foreign key (created_by) 
+        references users;
+
+    alter table countries 
+        add constraint FK509F9AB4846862F0 
+        foreign key (updated_by) 
+        references users;
 
     alter table series 
         add constraint FKCA01FE77DF85B0F0 

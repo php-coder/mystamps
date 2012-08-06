@@ -28,6 +28,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +43,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Service
 public class UserService {
@@ -131,6 +136,30 @@ public class UserService {
 		checkArgument(login != null, "Login should be non null");
 		
 		return users.findByLogin(login);
+	}
+	
+	User getCurrentUser() {
+		final SecurityContext ctx = SecurityContextHolder.getContext();
+		checkState(ctx != null, "Security context must be non null");
+		
+		final Authentication auth = ctx.getAuthentication();
+		if (auth == null) {
+			return null;
+		}
+		
+		final Object principal = auth.getPrincipal();
+		if (principal == null) {
+			return null;
+		}
+		
+		checkState(
+			principal instanceof CustomUserDetails,
+			"Principal must be CustomUserDetails type"
+		);
+		
+		final CustomUserDetails userDetails = (CustomUserDetails)principal;
+		
+		return userDetails.getUser();
 	}
 	
 	/**
