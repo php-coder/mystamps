@@ -39,7 +39,7 @@ import ru.mystamps.web.support.spring.security.Http401UnauthorizedEntryPoint;
 public class SecurityConfig {
 	
 	@Bean(name = "messageSource")
-	MessageSource getMessageSource() {
+	public MessageSource getMessageSource() {
 		final ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		

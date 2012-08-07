@@ -97,7 +97,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean(name = "messageSource")
-	MessageSource getMessageSource() {
+	public MessageSource getMessageSource() {
 		final ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		
