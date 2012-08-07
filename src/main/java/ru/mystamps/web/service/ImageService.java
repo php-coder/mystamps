@@ -50,7 +50,7 @@ public class ImageService {
 		
 		final String extension = StringUtils.substringAfter(contentType, "/");
 		checkState(
-			extension.equals("png") || extension.equals("jpeg"),
+			"png".equals(extension) || "jpeg".equals(extension),
 			"File type must be PNG or JPEG image"
 		);
 		
