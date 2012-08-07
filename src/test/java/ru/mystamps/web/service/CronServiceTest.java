@@ -86,10 +86,7 @@ public class CronServiceTest {
 		
 		final Calendar calendar = new GregorianCalendar();
 		calendar.setTime(new Date());
-		calendar.add(
-			Calendar.DAY_OF_MONTH,
-			-(CronService.PURGE_UNACTIVATED_REQUEST_AFTER_DAYS)
-		);
+		calendar.add(Calendar.DAY_OF_MONTH, -(CronService.PURGE_AFTER_DAYS));
 		
 		// Truncate seconds in dates to prevent test fail due to different milliseconds in dates
 		final Date expectedDate = DateUtils.truncate(calendar.getTime(), Calendar.SECOND);
