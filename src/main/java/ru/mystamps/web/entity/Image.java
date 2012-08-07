@@ -37,10 +37,6 @@ import lombok.Setter;
 @Setter
 public class Image {
 	
-	public enum Type {
-		JPEG, PNG
-	}
-	
 	public static final int MAX_TYPE_LENGTH = 4;
 	
 	@Id
@@ -54,5 +50,9 @@ public class Image {
 	@Lob
 	@Basic(optional = false, fetch = FetchType.LAZY)
 	private byte[] image;
+	
+	public enum Type {
+		JPEG, PNG
+	}
 	
 }
