@@ -18,7 +18,10 @@
 
 package ru.mystamps.web.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +29,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.Url;
 
 @Controller
 @RequestMapping(Url.INFO_COUNTRY_PAGE)
@@ -41,8 +45,18 @@ public class InfoCountryController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") final Integer id, final Model model) {
-		model.addAttribute("country", countryService.findById(id));
+	public String showInfo(
+		@PathVariable("id") final Integer id,
+		final Model model,
+		final HttpServletResponse response) throws IOException {
+		
+		final Country country = countryService.findById(id);
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		model.addAttribute("country", country);
 		return "country/info";
 	}
 	

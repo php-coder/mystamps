@@ -38,6 +38,12 @@
 		</classes>
 	</test>
 	
+	<test name="When user open not existing country page">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenUserOpenNotExistingCountryPage" />
+		</classes>
+	</test>
+	
 	<test name="When user add series">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserAddSeries" />
