@@ -96,6 +96,10 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		submit();
 	}
 	
+	public boolean activationFormExists() {
+		return elementWithIdExists("activateAccountForm");
+	}
+	
 	private void fillLogin(final String login) {
 		if (login != null) {
 			fillField("login", login);

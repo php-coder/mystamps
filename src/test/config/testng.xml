@@ -20,6 +20,12 @@
 		</classes>
 	</test>
 	
+	<test name="When authenticated user activate account">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenAuthenticatedUserAtActivateAccountPage" />
+		</classes>
+	</test>
+	
 	<test name="When user activate account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserActivateAccount" />
