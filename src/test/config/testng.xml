@@ -8,21 +8,21 @@
 		</classes>
 	</test>
 	
-	<test name="When authenticated user register account">
+	<test name="When user at register account page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAuthenticatedUserRegisterAccount" />
+			<class name="ru.mystamps.web.tests.cases.WhenUserAtRegisterAccountPage" />
 		</classes>
 	</test>
 	
-	<test name="When authenticated user try to authenticates">
+	<test name="When user at auth page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAuthenticatedUserTryToAuthenticates" />
+			<class name="ru.mystamps.web.tests.cases.WhenUserAtAuthPage" />
 		</classes>
 	</test>
 	
-	<test name="When authenticated user activate account">
+	<test name="When user at activate account page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAuthenticatedUserAtActivateAccountPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenUserAtActivateAccountPage" />
 		</classes>
 	</test>
 	

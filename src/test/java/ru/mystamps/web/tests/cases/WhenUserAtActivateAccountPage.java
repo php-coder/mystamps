@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2012 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,10 +27,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import ru.mystamps.web.tests.page.AuthAccountPage;
+import ru.mystamps.web.tests.page.ActivateAccountPage;
 
-public class WhenAuthenticatedUserTryToAuthenticates
-	extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+public class WhenUserAtActivateAccountPage
+	extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
@@ -38,9 +38,9 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
-	public WhenAuthenticatedUserTryToAuthenticates() {
-		super(AuthAccountPage.class);
-		hasTitle(tr("t_auth_title"));
+	public WhenUserAtActivateAccountPage() {
+		super(ActivateAccountPage.class);
+		hasTitle(tr("t_activation_title"));
 	}
 	
 	@BeforeClass
@@ -56,13 +56,13 @@ public class WhenAuthenticatedUserTryToAuthenticates
 	
 	@Test(groups = "logic")
 	public void messageShouldBeShown() {
-		assertThat(page.textPresent(tr("t_already_authenticated"))).isTrue();
+		assertThat(page.textPresent(tr("t_already_activated"))).isTrue();
 
 	}
 	
 	@Test(groups = "misc")
 	public void formWithLegendShouldBeAbsent() {
-		assertThat(page.authenticationFormExists()).isFalse();
+		assertThat(page.activationFormExists()).isFalse();
 		assertThat(page.getFormHints()).isEmpty();
 	}
 	

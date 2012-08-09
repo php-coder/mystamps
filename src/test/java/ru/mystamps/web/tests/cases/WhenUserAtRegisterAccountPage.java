@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,19 +18,19 @@
 
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import ru.mystamps.web.tests.page.ActivateAccountPage;
+import static org.fest.assertions.api.Assertions.assertThat;
 
-public class WhenAuthenticatedUserAtActivateAccountPage
-	extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
+import static ru.mystamps.web.tests.TranslationUtils.tr;
+
+import ru.mystamps.web.tests.page.RegisterAccountPage;
+
+public class WhenUserAtRegisterAccountPage
+	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
@@ -38,9 +38,9 @@ public class WhenAuthenticatedUserAtActivateAccountPage
 	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
-	public WhenAuthenticatedUserAtActivateAccountPage() {
-		super(ActivateAccountPage.class);
-		hasTitle(tr("t_activation_title"));
+	public WhenUserAtRegisterAccountPage() {
+		super(RegisterAccountPage.class);
+		hasTitle(tr("t_registration_title"));
 	}
 	
 	@BeforeClass
@@ -56,13 +56,12 @@ public class WhenAuthenticatedUserAtActivateAccountPage
 	
 	@Test(groups = "logic")
 	public void messageShouldBeShown() {
-		assertThat(page.textPresent(tr("t_already_activated"))).isTrue();
-
+		assertThat(page.textPresent(tr("t_already_registered"))).isTrue();
 	}
 	
 	@Test(groups = "misc")
 	public void formWithLegendShouldBeAbsent() {
-		assertThat(page.activationFormExists()).isFalse();
+		assertThat(page.registrationFormExists()).isFalse();
 		assertThat(page.getFormHints()).isEmpty();
 	}
 	

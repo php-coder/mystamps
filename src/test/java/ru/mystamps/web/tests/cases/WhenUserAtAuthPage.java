@@ -18,19 +18,18 @@
 
 package ru.mystamps.web.tests.cases;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+
+import static ru.mystamps.web.tests.TranslationUtils.tr;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import ru.mystamps.web.tests.page.AuthAccountPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
-import ru.mystamps.web.tests.page.RegisterAccountPage;
-
-public class WhenAuthenticatedUserRegisterAccount
-	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
+public class WhenUserAtAuthPage extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
@@ -38,9 +37,9 @@ public class WhenAuthenticatedUserRegisterAccount
 	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
-	public WhenAuthenticatedUserRegisterAccount() {
-		super(RegisterAccountPage.class);
-		hasTitle(tr("t_registration_title"));
+	public WhenUserAtAuthPage() {
+		super(AuthAccountPage.class);
+		hasTitle(tr("t_auth_title"));
 	}
 	
 	@BeforeClass
@@ -56,12 +55,13 @@ public class WhenAuthenticatedUserRegisterAccount
 	
 	@Test(groups = "logic")
 	public void messageShouldBeShown() {
-		assertThat(page.textPresent(tr("t_already_registered"))).isTrue();
+		assertThat(page.textPresent(tr("t_already_authenticated"))).isTrue();
+
 	}
 	
 	@Test(groups = "misc")
 	public void formWithLegendShouldBeAbsent() {
-		assertThat(page.registrationFormExists()).isFalse();
+		assertThat(page.authenticationFormExists()).isFalse();
 		assertThat(page.getFormHints()).isEmpty();
 	}
 	
