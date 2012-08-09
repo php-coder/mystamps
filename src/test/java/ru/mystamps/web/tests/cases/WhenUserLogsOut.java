@@ -28,7 +28,7 @@ import ru.mystamps.web.tests.page.LogoutAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserLogsOut extends WhenUserAtAnyPage<LogoutAccountPage> {
+public class WhenUserLogsOut extends WhenAnyUserAtAnyPage<LogoutAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

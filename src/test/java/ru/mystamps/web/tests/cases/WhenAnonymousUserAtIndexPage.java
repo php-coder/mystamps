@@ -27,7 +27,7 @@ import ru.mystamps.web.tests.page.IndexSitePage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
+public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	
 	public WhenAnonymousUserAtIndexPage() {
 		super(IndexSitePage.class);

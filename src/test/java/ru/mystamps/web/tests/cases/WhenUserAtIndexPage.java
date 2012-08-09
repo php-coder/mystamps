@@ -30,7 +30,7 @@ import ru.mystamps.web.tests.page.IndexSitePage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserAtIndexPage extends WhenUserAtAnyPage<IndexSitePage> {
+public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

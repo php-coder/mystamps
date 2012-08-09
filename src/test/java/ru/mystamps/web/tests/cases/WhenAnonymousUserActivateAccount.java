@@ -41,7 +41,7 @@ import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 public class WhenAnonymousUserActivateAccount
-	extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
+	extends WhenAnyUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

@@ -29,7 +29,7 @@ import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
+public class WhenAnonymousUserOpenNotExistingPage extends WhenAnyUserAtAnyPage<NotFoundErrorPage> {
 	
 	public WhenAnonymousUserOpenNotExistingPage() {
 		super(NotFoundErrorPage.class);

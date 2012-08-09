@@ -62,15 +62,15 @@
 		</classes>
 	</test>
 	
-	<test name="When user at any page">
+	<test name="When any user at any page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtAnyPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
 		</classes>
 	</test>
 	
-	<test name="When user at any page with form">
+	<test name="When any user at any page with form">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtAnyPageWithForm" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
 		</classes>
 	</test>
 	

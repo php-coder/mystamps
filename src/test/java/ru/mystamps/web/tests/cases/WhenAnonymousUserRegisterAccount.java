@@ -34,7 +34,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 public class WhenAnonymousUserRegisterAccount
-	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
+	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	public WhenAnonymousUserRegisterAccount() {
 		super(RegisterAccountPage.class);

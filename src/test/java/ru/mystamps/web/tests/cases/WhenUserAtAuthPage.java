@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
-public class WhenUserAtAuthPage extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+public class WhenUserAtAuthPage extends WhenAnyUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

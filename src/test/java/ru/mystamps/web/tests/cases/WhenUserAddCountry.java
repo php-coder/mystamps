@@ -38,7 +38,7 @@ import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 
-public class WhenUserAddCountry extends WhenUserAtAnyPageWithForm<AddCountryPage> {
+public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
 	private static final String TEST_COUNTRY_NAME = "Russia";
 	

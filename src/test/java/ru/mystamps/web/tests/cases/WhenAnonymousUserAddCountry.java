@@ -31,7 +31,7 @@ import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserAddCountry extends WhenUserAtAnyPage<UnauthorizedErrorPage> {
+public class WhenAnonymousUserAddCountry extends WhenAnyUserAtAnyPage<UnauthorizedErrorPage> {
 	
 	public WhenAnonymousUserAddCountry() {
 		super(UnauthorizedErrorPage.class);

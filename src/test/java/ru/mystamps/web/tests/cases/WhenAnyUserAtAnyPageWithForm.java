@@ -28,10 +28,10 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-abstract class WhenUserAtAnyPageWithForm<T extends AbstractPageWithForm>
-	extends WhenUserAtAnyPage<T> {
+abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
+	extends WhenAnyUserAtAnyPage<T> {
 	
-	public WhenUserAtAnyPageWithForm(final Class<T> pageClass) {
+	public WhenAnyUserAtAnyPageWithForm(final Class<T> pageClass) {
 		super(pageClass);
 	}
 	

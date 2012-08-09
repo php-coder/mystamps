@@ -39,7 +39,8 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 	loader = AnnotationConfigContextLoader.class,
 	classes = TestContext.class
 )
-abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGSpringContextTests {
+abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
+	extends AbstractTestNGSpringContextTests {
 	
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
@@ -64,7 +65,7 @@ abstract class WhenUserAtAnyPage<T extends AbstractPage> extends AbstractTestNGS
 	 */
 	private String header;
 	
-	public WhenUserAtAnyPage(final Class<T> pageClass) {
+	public WhenAnyUserAtAnyPage(final Class<T> pageClass) {
 		super();
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}

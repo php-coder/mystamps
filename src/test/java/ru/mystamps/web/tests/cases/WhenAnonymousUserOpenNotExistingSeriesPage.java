@@ -30,7 +30,7 @@ import ru.mystamps.web.Url;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAnonymousUserOpenNotExistingSeriesPage
-	extends WhenUserAtAnyPage<NotFoundErrorPage> {
+	extends WhenAnyUserAtAnyPage<NotFoundErrorPage> {
 	
 	public WhenAnonymousUserOpenNotExistingSeriesPage() {
 		super(NotFoundErrorPage.class);

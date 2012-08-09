@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 public class WhenUserAtActivateAccountPage
-	extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
+	extends WhenAnyUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

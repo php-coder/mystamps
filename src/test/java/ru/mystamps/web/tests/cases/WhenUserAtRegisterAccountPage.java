@@ -30,7 +30,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 public class WhenUserAtRegisterAccountPage
-	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
+	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

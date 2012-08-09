@@ -48,7 +48,7 @@ import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENG
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
-public class WhenUserAddSeries extends WhenUserAtAnyPageWithForm<AddSeriesPage> {
+public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);

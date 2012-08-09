@@ -15,7 +15,7 @@
 	
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.WebDriverFactory" />
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.fest.AbstractPageWithFormAssert" />
-	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPage" />
-	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenUserAtAnyPageWithForm" />
+	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
+	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
 	
 </suppressions>

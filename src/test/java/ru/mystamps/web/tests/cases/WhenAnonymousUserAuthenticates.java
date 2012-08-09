@@ -29,7 +29,7 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserAuthenticates extends WhenUserAtAnyPageWithForm<AuthAccountPage> {
+public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm<AuthAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
