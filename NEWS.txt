@@ -1,4 +1,8 @@
-0.2 (not released yet)
+0.2
+- implemented ability to add series
+- use some new elements from HTML5
+- purge unactivated registration requests
+- deleted /site/maintenance and /password/restore pages
 - introduced Spring Security support
 - ported DAO layer to use Spring-Data
 - ported unit and functional tests to TestNG
