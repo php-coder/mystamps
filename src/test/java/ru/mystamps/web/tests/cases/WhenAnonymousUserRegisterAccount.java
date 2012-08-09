@@ -33,9 +33,10 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.RegisterAccountPage;
 
-public class WhenUserRegisterAccount extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
+public class WhenAnonymousUserRegisterAccount
+	extends WhenUserAtAnyPageWithForm<RegisterAccountPage> {
 	
-	public WhenUserRegisterAccount() {
+	public WhenAnonymousUserRegisterAccount() {
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
 		hasHeader(tr("t_registration_on_site"));

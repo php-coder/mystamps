@@ -29,9 +29,10 @@ import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserOpenNotExistingCountryPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
+public class WhenAnonymousUserOpenNotExistingSeriesPage
+	extends WhenUserAtAnyPage<NotFoundErrorPage> {
 	
-	public WhenUserOpenNotExistingCountryPage() {
+	public WhenAnonymousUserOpenNotExistingSeriesPage() {
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
 		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
@@ -39,8 +40,8 @@ public class WhenUserOpenNotExistingCountryPage extends WhenUserAtAnyPage<NotFou
 	
 	@Test(groups = "logic")
 	public void shouldShow404Page() {
-		final String absentCountryId = "999";
-		page.open(Url.INFO_COUNTRY_PAGE.replace("{id}", absentCountryId));
+		final String absentSeriesId = "999";
+		page.open(Url.INFO_SERIES_PAGE.replace("{id}", absentSeriesId));
 		
 		checkStandardStructure();
 		

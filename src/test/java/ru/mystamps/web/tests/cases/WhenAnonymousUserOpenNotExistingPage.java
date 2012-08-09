@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +18,28 @@
 
 package ru.mystamps.web.tests.cases;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+
 import java.net.HttpURLConnection;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import ru.mystamps.web.tests.page.UnauthorizedErrorPage;
-
-import ru.mystamps.web.Url;
+import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserAtUnauthorizedPage extends WhenUserAtAnyPage<UnauthorizedErrorPage> {
+public class WhenAnonymousUserOpenNotExistingPage extends WhenUserAtAnyPage<NotFoundErrorPage> {
 	
-	public WhenUserAtUnauthorizedPage() {
-		super(UnauthorizedErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_401_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_UNAUTHORIZED);
+	public WhenAnonymousUserOpenNotExistingPage() {
+		super(NotFoundErrorPage.class);
+		hasTitleWithoutStandardPrefix(tr("t_404_title"));
+		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
 	}
 	
 	@BeforeClass
 	public void setUp() {
-		page.open(Url.UNAUTHORIZED_PAGE);
+		page.open();
 	}
 	
 	@Test(groups = "std")
@@ -51,12 +49,17 @@ public class WhenUserAtUnauthorizedPage extends WhenUserAtAnyPage<UnauthorizedEr
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorMessage() {
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_401_description", "\n"));
+		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorCode() {
-		assertThat(page.getErrorCode()).isEqualTo("401");
+		assertThat(page.getErrorCode()).isEqualTo("404");
+	}
+	
+	@Test(groups = "logic", dependsOnGroups = "std", enabled = false)
+	public void incidentShouldBeLoggedToDatabase() {
+		// TODO: check suspicious_activities table (#99)
 	}
 	
 }

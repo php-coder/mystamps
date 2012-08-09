@@ -40,7 +40,8 @@ import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
-public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
+public class WhenAnonymousUserActivateAccount
+	extends WhenUserAtAnyPageWithForm<ActivateAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
@@ -51,7 +52,7 @@ public class WhenUserActivateAccount extends WhenUserAtAnyPageWithForm<ActivateA
 	@Value("${not_activated_user2_act_key}")
 	private String secondNotActivatedUserActKey;
 	
-	public WhenUserActivateAccount() {
+	public WhenAnonymousUserActivateAccount() {
 		super(ActivateAccountPage.class);
 		hasTitle(tr("t_activation_title"));
 		hasHeader(tr("t_activation_on_site"));

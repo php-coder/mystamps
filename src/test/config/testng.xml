@@ -26,9 +26,9 @@
 		</classes>
 	</test>
 	
-	<test name="When user activate account">
+	<test name="When anonymous user activate account">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserActivateAccount" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserActivateAccount" />
 		</classes>
 	</test>
 	
@@ -44,9 +44,9 @@
 		</classes>
 	</test>
 	
-	<test name="When user open not existing country page">
+	<test name="When anonymous user open not existing country page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserOpenNotExistingCountryPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingCountryPage" />
 		</classes>
 	</test>
 	
@@ -56,9 +56,9 @@
 		</classes>
 	</test>
 	
-	<test name="When user open not existing series page">
+	<test name="When anonymous user open not existing series page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserOpenNotExistingSeriesPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingSeriesPage" />
 		</classes>
 	</test>
 	
@@ -86,9 +86,9 @@
 		</classes>
 	</test>
 	
-	<test name="When user authenticates">
+	<test name="When anonymous user authenticates">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAuthenticates" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAuthenticates" />
 		</classes>
 	</test>
 	
@@ -98,21 +98,21 @@
 		</classes>
 	</test>
 	
-	<test name="When user open not existing page">
+	<test name="When anonymous user open not existing page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserOpenNotExistingPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingPage" />
 		</classes>
 	</test>
 	
-	<test name="When user at unauthorized page">
+	<test name="When anonymous user at unauthorized page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtUnauthorizedPage" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtUnauthorizedPage" />
 		</classes>
 	</test>
 	
-	<test name="When user register account">
+	<test name="When anonymous user register account">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserRegisterAccount" />
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserRegisterAccount" />
 		</classes>
 	</test>
 	
