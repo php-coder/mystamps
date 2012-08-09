@@ -288,7 +288,7 @@ public class WhenAnonymousUserActivateAccount
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 		
 		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			//.overridingErrorMessage("should exists link to authentication page")
+			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
 	

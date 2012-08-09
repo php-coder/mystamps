@@ -57,7 +57,7 @@ public class WhenAnonymousUserRegisterAccount
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
 		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			//.overridingErrorMessage("should exists link to authentication page")
+			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 	}
 	

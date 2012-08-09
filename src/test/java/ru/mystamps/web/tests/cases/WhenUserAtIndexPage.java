@@ -67,14 +67,14 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			//.overridingErrorMessage("should exists link to page for adding series of stamps")
+			.overridingErrorMessage("should exists link to page for adding series of stamps")
 			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			//.overridingErrorMessage("should exists link to page for adding countries")
+			.overridingErrorMessage("should exists link to page for adding countries")
 			.isTrue();
 	}
 	

@@ -48,10 +48,10 @@ public final class DateAssert extends AbstractAssert<DateAssert, Date> {
 		isNotNull();
 		
 		final Date now = new Date();
-		//final String msg = String.format("%s is not current date. Expected: %s", actual, now);
+		final String msg = String.format("%s is not current date. Expected: %s", actual, now);
 		
 		Assertions.assertThat(actual)
-			//.overridingErrorMessage(msg)
+			.overridingErrorMessage(msg)
 			.isCloseTo(now, TimeUnit.SECONDS.toMillis(TIME_DELTA));
 		
 		return this;

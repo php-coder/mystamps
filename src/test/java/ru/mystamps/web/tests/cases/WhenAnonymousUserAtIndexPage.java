@@ -52,14 +52,14 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void linkForAddingSeriesShouldBeAbsent() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			//.overridingErrorMessage("should absent link to page for adding series of stamps")
+			.overridingErrorMessage("should absent link to page for adding series of stamps")
 			.isFalse();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void linkForAddingCountriesShouldBeAbsent() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			//.overridingErrorMessage("should absent link to page for adding countries")
+			.overridingErrorMessage("should absent link to page for adding countries")
 			.isFalse();
 	}
 	

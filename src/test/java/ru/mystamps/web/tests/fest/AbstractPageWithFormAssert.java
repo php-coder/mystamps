@@ -54,15 +54,15 @@ public final class AbstractPageWithFormAssert
 		
 		final String errorMessage = actual.getFieldError(fieldName);
 		
-		//final String msg = String.format(
-		//	"Expected that field '%s' should have error '%s' but was '%s'",
-		//	fieldName,
-		//	expectedErrorMessage,
-		//	errorMessage
-		//);
+		final String msg = String.format(
+			"Expected that field '%s' should have error '%s' but was '%s'",
+			fieldName,
+			expectedErrorMessage,
+			errorMessage
+		);
 		
 		Assertions.assertThat(errorMessage)
-			//.overridingErrorMessage(msg)
+			.overridingErrorMessage(msg)
 			.isEqualTo(expectedErrorMessage);
 		
 		return this;
@@ -72,13 +72,13 @@ public final class AbstractPageWithFormAssert
 		isNotNull();
 		checkState(fieldName != null, "Error in test case: field name should be specified");
 		
-		//final String msg = String.format(
-		//	"Expected that field '%s' should not have any error",
-		//	fieldName
-		//);
+		final String msg = String.format(
+			"Expected that field '%s' should not have any error",
+			fieldName
+		);
 		
 		Assertions.assertThat(actual.isFieldHasError(fieldName))
-			//.overridingErrorMessage(msg)
+			.overridingErrorMessage(msg)
 			.isFalse();
 		
 		return this;
@@ -90,15 +90,15 @@ public final class AbstractPageWithFormAssert
 		
 		final String value = actual.getFieldValue(fieldName);
 		
-		//final String msg = String.format(
-		//	"Expected value of field '%s' is '%s' but was '%s'",
-		//	fieldName,
-		//	expectedValue,
-		//	value
-		//);
+		final String msg = String.format(
+			"Expected value of field '%s' is '%s' but was '%s'",
+			fieldName,
+			expectedValue,
+			value
+		);
 		
 		Assertions.assertThat(value)
-			//.overridingErrorMessage(msg)
+			.overridingErrorMessage(msg)
 			.isEqualTo(expectedValue);
 		
 		return this;

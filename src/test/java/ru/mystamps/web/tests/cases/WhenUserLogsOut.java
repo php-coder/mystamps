@@ -46,15 +46,15 @@ public class WhenUserLogsOut extends WhenAnyUserAtAnyPage<LogoutAccountPage> {
 		page.open();
 		
 		assertThat(page.getCurrentUrl())
-			//.overridingErrorMessage("after logout we should be redirected to main page")
+			.overridingErrorMessage("after logout we should be redirected to main page")
 			.isEqualTo(Url.INDEX_PAGE);
 		
 		assertThat(page.linkWithLabelExists(tr("t_enter")))
-			//.overridingErrorMessage("should exists link to authentication page")
+			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 		
 		assertThat(page.linkWithLabelExists(tr("t_register")))
-			//.overridingErrorMessage("should exists link to registration page")
+			.overridingErrorMessage("should exists link to registration page")
 			.isTrue();
 	}
 	

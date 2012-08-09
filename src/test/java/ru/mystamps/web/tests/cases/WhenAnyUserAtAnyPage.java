@@ -98,7 +98,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	
 	protected void checkServerResponseCode() {
 		assertThat(page.getServerResponseCode())
-			//.overridingErrorMessage("Server response code")
+			.overridingErrorMessage("Server response code")
 			.isEqualTo(serverCode);
 	}
 	
@@ -110,47 +110,47 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 		);
 		
 		assertThat(page.getTitle())
-			//.overridingErrorMessage("title should be '" + title + "'")
+			.overridingErrorMessage("title should be '" + title + "'")
 			.isEqualTo(title);
 	}
 	
 	private void shouldHaveLogo() {
 		assertThat(page.getTextAtLogo())
-			//.overridingErrorMessage("text at logo should be '" + tr("t_my_stamps") + "'")
+			.overridingErrorMessage("text at logo should be '" + tr("t_my_stamps") + "'")
 			.isEqualTo(tr("t_my_stamps"));
 	}
 	
 	protected void shouldHaveUserBar() {
 		assertThat(page.userBarExists())
-			//.overridingErrorMessage("user bar should exists")
+			.overridingErrorMessage("user bar should exists")
 			.isTrue();
 		
 		assertThat(page.linkWithLabelExists(tr("t_enter")))
-			//.overridingErrorMessage("should exists link to authentication page")
+			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
 		
 		assertThat(page.linkWithLabelExists(tr("t_register")))
-			//.overridingErrorMessage("should exists link to registration page")
+			.overridingErrorMessage("should exists link to registration page")
 			.isTrue();
 	}
 	
 	private void shouldHaveContentArea() {
 		assertThat(page.contentAreaExists())
-			//.overridingErrorMessage("should exists content area")
+			.overridingErrorMessage("should exists content area")
 			.isTrue();
 	}
 	
 	private void mayHaveHeader() {
 		if (header != null) {
 			assertThat(page.getHeader())
-				//.overridingErrorMessage("header should exists")
+				.overridingErrorMessage("header should exists")
 				.isEqualTo(header);
 		}
 	}
 	
 	private void shouldHaveFooter() {
 		assertThat(page.footerExists())
-			//.overridingErrorMessage("footer should exists")
+			.overridingErrorMessage("footer should exists")
 			.isTrue();
 		
 		assertThat(
@@ -159,7 +159,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 					tr("t_write_email")
 				)
 			)
-			//.overridingErrorMessage("should exists link with author's email")
+			.overridingErrorMessage("should exists link with author's email")
 			.isTrue();
 	}
 	

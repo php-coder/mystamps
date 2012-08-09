@@ -83,15 +83,15 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 		page.authorizeUser(validUserLogin, validUserPassword);
 		
 		assertThat(page.getCurrentUrl())
-			//.overridingErrorMessage("after login we should be redirected to main page")
+			.overridingErrorMessage("after login we should be redirected to main page")
 			.isEqualTo(Url.INDEX_PAGE);
 		
 		assertThat(page.getUserBarEntries())
-			//.overridingErrorMessage("after login user name should be in user bar")
+			.overridingErrorMessage("after login user name should be in user bar")
 			.contains(validUserName);
 		
 		assertThat(page.getUserBarEntries())
-			//.overridingErrorMessage("after login link for logout should be in user bar")
+			.overridingErrorMessage("after login link for logout should be in user bar")
 			.contains(tr("t_logout"));
 		
 		page.logout();
