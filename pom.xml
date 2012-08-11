@@ -30,13 +30,13 @@
 		
 		<java.version>1.6</java.version>
 		
-		<tomcat.dir>/usr/share/tomcat6</tomcat.dir>
 		<env.root.dir>src/env</env.root.dir>
 		
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
 		
 		<compiler.plugin.version>2.4</compiler.plugin.version>
+		<tomcat.plugin.version>1.1</tomcat.plugin.version>
 		<jetty.plugin.version>8.1.5.v20120716</jetty.plugin.version>
 		<javadoc.plugin.version>2.8.1</javadoc.plugin.version>
 		
@@ -383,39 +383,14 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.1.4</version>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>${tomcat.plugin.version}</version>
 				<configuration>
-					<wait>false</wait>
-					<container>
-						<containerId>tomcat6x</containerId>
-						<type>installed</type>
-						<home>${tomcat.dir}</home>
-					</container>
-					<configuration>
-						<type>existing</type>
-						<home>${tomcat.dir}</home>
-					</configuration>
-					<deployer>
-						<type>installed</type>
-						<deployables>
-							<deployable>
-								<groupId>${project.groupId}</groupId>
-								<artifactId>${project.artifactId}</artifactId>
-								<type>${project.packaging}</type>
-							</deployable>
-						</deployables>
-					</deployer>
+					<path>/</path>
+					<server>tomcat-at-localhost</server>
+					<url>http://localhost:8080/manager/text</url>
 				</configuration>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deployer-deploy</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
