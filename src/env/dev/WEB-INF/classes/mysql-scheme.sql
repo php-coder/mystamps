@@ -49,6 +49,8 @@
         updated_at datetime not null,
         version bigint not null,
         country_id integer,
+        created_by integer not null,
+        updated_by integer not null,
         primary key (id)
     ) ENGINE=InnoDB;
 
@@ -132,10 +134,22 @@
         references users (id);
 
     alter table series 
+        add index FKCA01FE77E7A879A3 (created_by), 
+        add constraint FKCA01FE77E7A879A3 
+        foreign key (created_by) 
+        references users (id);
+
+    alter table series 
         add index FKCA01FE77DF85B0F0 (country_id), 
         add constraint FKCA01FE77DF85B0F0 
         foreign key (country_id) 
         references countries (id);
+
+    alter table series 
+        add index FKCA01FE77846862F0 (updated_by), 
+        add constraint FKCA01FE77846862F0 
+        foreign key (updated_by) 
+        references users (id);
 
     alter table series_gibbons_catalog 
         add index FK40EBC5A4FC1DFB59 (gibbons_id), 

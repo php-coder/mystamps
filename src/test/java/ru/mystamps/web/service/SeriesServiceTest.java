@@ -56,6 +56,7 @@ import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.tests.fest.DateAssert;
@@ -82,6 +83,9 @@ public class SeriesServiceTest {
 	
 	@Mock
 	private SeriesDao seriesDao;
+	
+	@Mock
+	private UserService userService;
 	
 	@Mock
 	private MultipartFile multipartFile;
@@ -118,6 +122,7 @@ public class SeriesServiceTest {
 		form.setPerforated(false);
 		
 		when(imageService.save(any(MultipartFile.class))).thenReturn("/fake/path/to/image");
+		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 	}
 	
 	//
@@ -430,6 +435,35 @@ public class SeriesServiceTest {
 		verify(seriesDao).save(seriesCaptor.capture());
 		
 		DateAssert.assertThat(seriesCaptor.getValue().getUpdatedAt()).isCurrentDate();
+	}
+	
+	@Test(expectedExceptions = IllegalStateException.class)
+	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
+		when(userService.getCurrentUser()).thenReturn(null);
+		
+		service.add(form);
+	}
+	
+	@Test
+	public void addShouldAssignCreatedAtToCurrentUser() {
+		final User expectedUser = UserServiceTest.getValidUser();
+		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		
+		service.add(form);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		assertThat(seriesCaptor.getValue().getCreatedBy()).isEqualTo(expectedUser);
+	}
+	
+	@Test
+	public void addShouldAssignUpdatedAtToCurrentUser() {
+		final User expectedUser = UserServiceTest.getValidUser();
+		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		
+		service.add(form);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		assertThat(seriesCaptor.getValue().getUpdatedBy()).isEqualTo(expectedUser);
 	}
 	
 	//

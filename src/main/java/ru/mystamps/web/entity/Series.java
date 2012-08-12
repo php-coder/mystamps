@@ -25,6 +25,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
@@ -91,19 +92,17 @@ public class Series {
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 	
-	// TODO: created_by
-	//@ManyToOne(optional = false)
-	//@JoinColumn(name = "created_by")
-	//private User createdBy;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "created_by", nullable = false)
+	private User createdBy;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 	
-	// TODO: updated_by
-	//@ManyToOne(optional = false)
-	//@JoinColumn(name = "updated_by")
-	//private User updatedBy;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
 	
 	@Setter(AccessLevel.PROTECTED)
 	@Version

@@ -43,6 +43,7 @@ import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.util.CatalogUtils;
@@ -70,6 +71,9 @@ public class SeriesService {
 	
 	@Inject
 	private ImageService imageService;
+	
+	@Inject
+	private UserService userService;
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -142,8 +146,10 @@ public class SeriesService {
 		series.setCreatedAt(now);
 		series.setUpdatedAt(now);
 		
-		// TODO: createdBy
-		// TODO: updatedBy
+		final User currentUser = userService.getCurrentUser();
+		checkState(currentUser != null, "Current user must be non null");
+		series.setCreatedBy(currentUser);
+		series.setUpdatedBy(currentUser);
 		
 		return seriesDao.save(series);
 	}
