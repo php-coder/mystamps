@@ -397,6 +397,13 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassImageUrlToSeriesDao() {
+		final String expectedUrl = "http://example.org/example.jpg";
+		when(imageService.save(any(MultipartFile.class))).thenReturn(expectedUrl);
+		
+		service.add(form);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		assertThat(seriesCaptor.getValue().getImageUrl()).isEqualTo(expectedUrl);
 		
 	}
 	
