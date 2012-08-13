@@ -46,12 +46,11 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 		
 		try {
 			final String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
-			final String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
-			
 			if (isNullOrEmpty(firstFieldValue)) {
 				return true;
 			}
 			
+			final String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
 			if (isNullOrEmpty(secondFieldValue)) {
 				return true;
 			}
