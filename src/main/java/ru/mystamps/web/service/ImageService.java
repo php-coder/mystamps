@@ -27,6 +27,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import  com.google.common.base.Throwables;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
@@ -61,7 +63,7 @@ public class ImageService {
 			image.setImage(file.getBytes());
 		} catch (final IOException e) {
 			// throw RuntimeException for rolling back transaction
-			throw new RuntimeException(e);
+			throw Throwables.propagate(e);
 		}
 		
 		final Image entity = imageDao.save(image);
