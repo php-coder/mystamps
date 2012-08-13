@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -57,7 +58,7 @@ public class ImageService {
 		);
 		
 		final Image image = new Image();
-		image.setType(Image.Type.valueOf(extension.toUpperCase()));
+		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
 		
 		try {
 			image.setData(file.getBytes());
