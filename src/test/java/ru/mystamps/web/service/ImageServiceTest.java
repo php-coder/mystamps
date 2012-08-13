@@ -131,7 +131,7 @@ public class ImageServiceTest {
 		
 		verify(imageDao).save(imageCaptor.capture());
 		
-		assertThat(imageCaptor.getValue().getImage()).isEqualTo(expected);
+		assertThat(imageCaptor.getValue().getData()).isEqualTo(expected);
 	}
 	
 	@Test

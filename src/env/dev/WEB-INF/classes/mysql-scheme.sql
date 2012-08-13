@@ -21,7 +21,7 @@
 
     create table images (
         id integer not null auto_increment,
-        image longblob not null,
+        data longblob not null,
         type varchar(4) not null,
         primary key (id)
     ) ENGINE=InnoDB;

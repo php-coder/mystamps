@@ -53,9 +53,9 @@ public class ImageController {
 
 		// TODO: set content disposition
 		response.setContentType("image/" + image.getType().toString().toLowerCase());
-		response.setContentLength(image.getImage().length);
+		response.setContentLength(image.getData().length);
 		
-		response.getOutputStream().write(image.getImage());
+		response.getOutputStream().write(image.getData());
 	}
 	
 }

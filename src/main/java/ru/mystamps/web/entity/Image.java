@@ -49,7 +49,7 @@ public class Image {
 	
 	@Lob
 	@Basic(optional = false, fetch = FetchType.LAZY)
-	private byte[] image;
+	private byte[] data;
 	
 	public enum Type {
 		JPEG, PNG

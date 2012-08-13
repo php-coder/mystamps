@@ -60,7 +60,7 @@ public class ImageService {
 		image.setType(Image.Type.valueOf(extension.toUpperCase()));
 		
 		try {
-			image.setImage(file.getBytes());
+			image.setData(file.getBytes());
 		} catch (final IOException e) {
 			// throw RuntimeException for rolling back transaction
 			throw Throwables.propagate(e);
