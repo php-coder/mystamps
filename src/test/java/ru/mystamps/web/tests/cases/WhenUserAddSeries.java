@@ -389,7 +389,8 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@DataProvider(name = "invalidCatalogNumbers")
 	public Object[][] getInvalidCatalogNumbers() {
-		final String expectedErrorMessage = tr("catalog-numbers.invalid");
+		final String expectedErrorMessage =
+			tr("ru.mystamps.web.validation.jsr303.CatalogNumbers.message");
 		
 		return new Object[][] {
 			{"t", expectedErrorMessage},

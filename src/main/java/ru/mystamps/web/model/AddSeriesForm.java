@@ -21,17 +21,16 @@ package ru.mystamps.web.model;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
-import static ru.mystamps.web.validation.ValidationRules.CATALOG_NUMBERS_REGEXP;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -50,16 +49,16 @@ public class AddSeriesForm {
 	@NotNull
 	private Boolean perforated;
 	
-	@Pattern(regexp = CATALOG_NUMBERS_REGEXP, message = "{catalog-numbers.invalid}")
+	@CatalogNumbers
 	private String michelNumbers;
 	
-	@Pattern(regexp = CATALOG_NUMBERS_REGEXP, message = "{catalog-numbers.invalid}")
+	@CatalogNumbers
 	private String scottNumbers;
 	
-	@Pattern(regexp = CATALOG_NUMBERS_REGEXP, message = "{catalog-numbers.invalid}")
+	@CatalogNumbers
 	private String yvertNumbers;
 	
-	@Pattern(regexp = CATALOG_NUMBERS_REGEXP, message = "{catalog-numbers.invalid}")
+	@CatalogNumbers
 	private String gibbonsNumbers;
 	
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
