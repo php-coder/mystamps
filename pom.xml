@@ -596,7 +596,10 @@
 						</regexes>
 					</check>
 					<formats>
+						<!-- for Jenkins' Cobertura plugin -->
 						<format>xml</format>
+						<!-- for personal use -->
+						<format>html</format>
 					</formats>
 				</configuration>
 				<executions>
