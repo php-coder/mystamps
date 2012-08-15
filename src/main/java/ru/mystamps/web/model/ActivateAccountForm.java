@@ -28,20 +28,10 @@ import ru.mystamps.web.validation.jsr303.ExistingActivationKey;
 import ru.mystamps.web.validation.jsr303.FieldsMatch;
 import ru.mystamps.web.validation.jsr303.FieldsMismatch;
 import ru.mystamps.web.validation.jsr303.UniqueLogin;
+import ru.mystamps.web.validation.ValidationRules;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.NAME_REGEXP1;
-import static ru.mystamps.web.validation.ValidationRules.NAME_REGEXP2;
-import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PASSWORD_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_REGEXP;
 
 @Getter
 @Setter
@@ -61,24 +51,52 @@ public class ActivateAccountForm {
 	
 	@NotEmpty(groups = Login1Checks.class)
 	@Size.List({
-		@Size(min = LOGIN_MIN_LENGTH, message = "{value.too-short}", groups = Login2Checks.class),
-		@Size(max = LOGIN_MAX_LENGTH, message = "{value.too-long}", groups = Login2Checks.class)
+		@Size(
+			min = ValidationRules.LOGIN_MIN_LENGTH,
+			message = "{value.too-short}",
+			groups = Login2Checks.class
+		),
+		@Size(
+			max = ValidationRules.LOGIN_MAX_LENGTH,
+			message = "{value.too-long}",
+			groups = Login2Checks.class
+		)
 	})
-	@Pattern(regexp = LOGIN_REGEXP, message = "{login.invalid}", groups = Login3Checks.class)
+	@Pattern(
+		regexp = ValidationRules.LOGIN_REGEXP,
+		message = "{login.invalid}",
+		groups = Login3Checks.class
+	)
 	@UniqueLogin(groups = Login4Checks.class)
 	private String login;
 	
-	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Name1Checks.class)
+	@Size(
+		max = ValidationRules.NAME_MAX_LENGTH,
+		message = "{value.too-long}",
+		groups = Name1Checks.class
+	)
 	@Pattern.List({
-		@Pattern(regexp = NAME_REGEXP1, message = "{name.invalid}", groups = Name2Checks.class),
-		@Pattern(regexp = NAME_REGEXP2, message = "{name.hyphen}", groups = Name3Checks.class)
+		@Pattern(
+			regexp = ValidationRules.NAME_REGEXP1,
+			message = "{name.invalid}",
+			groups = Name2Checks.class
+		),
+		@Pattern(
+			regexp = ValidationRules.NAME_REGEXP2,
+			message = "{name.hyphen}",
+			groups = Name3Checks.class
+		)
 	})
 	private String name;
 	
 	@NotEmpty(groups = Password1Checks.class)
-	@Size(min = PASSWORD_MIN_LENGTH, message = "{value.too-short}", groups = Password2Checks.class)
+	@Size(
+		min = ValidationRules.PASSWORD_MIN_LENGTH,
+		message = "{value.too-short}",
+		groups = Password2Checks.class
+	)
 	@Pattern(
-		regexp = PASSWORD_REGEXP,
+		regexp = ValidationRules.PASSWORD_REGEXP,
 		message = "{password.invalid}",
 		groups = Password3Checks.class
 	)
@@ -89,12 +107,16 @@ public class ActivateAccountForm {
 	
 	@NotEmpty(groups = ActKey1Checks.class)
 	@Size(
-		min = ACT_KEY_LENGTH,
-		max = ACT_KEY_LENGTH,
+		min = ValidationRules.ACT_KEY_LENGTH,
+		max = ValidationRules.ACT_KEY_LENGTH,
 		message = "{value.invalid-length}",
 		groups = ActKey2Checks.class
 	)
-	@Pattern(regexp = ACT_KEY_REGEXP, message = "{key.invalid}", groups = ActKey3Checks.class)
+	@Pattern(
+		regexp = ValidationRules.ACT_KEY_REGEXP,
+		message = "{key.invalid}",
+		groups = ActKey3Checks.class
+	)
 	@ExistingActivationKey(groups = ActKey4Checks.class)
 	private String activationKey;
 	
