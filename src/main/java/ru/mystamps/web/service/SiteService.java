@@ -61,7 +61,7 @@ public class SiteService {
 			final String referer,
 			final String agent) {
 		
-		log(getAbsentPageType(), page, userId, ip, referer, agent);
+		logEvent(getAbsentPageType(), page, userId, ip, referer, agent);
 	}
 	
 	@Transactional
@@ -72,10 +72,10 @@ public class SiteService {
 			final String referer,
 			final String agent) {
 		
-		log(getFailedAuthenticationType(), page, userId, ip, referer, agent);
+		logEvent(getFailedAuthenticationType(), page, userId, ip, referer, agent);
 	}
 	
-	private void log(
+	private void logEvent(
 			final SuspiciousActivityType type,
 			final String page,
 			final Integer userId,
