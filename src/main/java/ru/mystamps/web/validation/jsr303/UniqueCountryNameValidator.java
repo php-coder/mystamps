@@ -30,6 +30,7 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 	
 	@Override
 	public void initialize(final UniqueCountryName annotation) {
+		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override

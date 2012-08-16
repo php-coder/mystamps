@@ -31,6 +31,7 @@ public class ExistingActivationKeyValidator
 	
 	@Override
 	public void initialize(final ExistingActivationKey annotation) {
+		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override

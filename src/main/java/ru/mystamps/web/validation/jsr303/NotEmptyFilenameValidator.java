@@ -29,6 +29,7 @@ public class NotEmptyFilenameValidator
 	
 	@Override
 	public void initialize(final NotEmptyFilename annotation) {
+		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override

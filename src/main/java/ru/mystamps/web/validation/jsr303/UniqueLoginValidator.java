@@ -30,6 +30,7 @@ public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, St
 	
 	@Override
 	public void initialize(final UniqueLogin annotation) {
+		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override
