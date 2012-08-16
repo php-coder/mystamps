@@ -44,6 +44,7 @@ import ru.mystamps.web.validation.ValidationRules;
 @Table(name = "series")
 @Getter
 @Setter
+@SuppressWarnings("PMD.TooManyFields")
 public class Series {
 	
 	public static final int IMAGE_URL_LENGTH = 255;

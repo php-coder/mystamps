@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<ruleset name="MyStamps ruleset"
+	xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
+	xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+	
+	<description>Customized rule set for MyStamps</description>
+	
+	<!-- For rules description see http://pmd.sourceforge.net/rules/index.html -->
+	
+	<!--<rule ref="rulesets/jsp/basic.xml" />-->
+	<rule ref="rulesets/java/design.xml">
+		<exclude name="ImmutableField" />
+	</rule>
+	<rule ref="rulesets/java/design.xml/ImmutableField">
+		<properties>
+			<property name="violationSuppressXPath">
+				<value>
+					<![CDATA[
+./ancestor::TypeDeclaration/Annotation//Name[@Image='Setter'] |
+./ancestor::ClassOrInterfaceBodyDeclaration/Annotation//Name[@Image='Setter']
+					]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	
+	<rule ref="rulesets/java/coupling.xml">
+		<exclude name="LawOfDemeter" />
+		<exclude name="LoosePackageCoupling" />
+	</rule>
+	<rule ref="rulesets/java/logging-jakarta-commons.xml" />
+	<rule ref="rulesets/java/basic.xml" />
+	<rule ref="rulesets/java/strictexception.xml" />
+	<rule ref="rulesets/java/sunsecure.xml" />
+	<rule ref="rulesets/java/logging-java.xml" />
+	<rule ref="rulesets/java/controversial.xml">
+		<exclude name="AtLeastOneConstructor" />
+		<exclude name="OnlyOneReturn" />
+		<exclude name="DataflowAnomalyAnalysis" />
+		<exclude name="UseConcurrentHashMap" />
+		
+		<exclude name="UseObjectForClearerAPI" />
+		<exclude name="AvoidLiteralsInIfCondition" />
+		
+	</rule>
+	
+	<!-- Workaround for bug: https://sourceforge.net/tracker/?func=detail&atid=479921&aid=3557810&group_id=56262 -->
+	<rule ref="rulesets/java/controversial.xml/UseObjectForClearerAPI">
+		<properties>
+			<property name="violationSuppressXPath">
+				<value>
+					<![CDATA[./ancestor::MethodDeclaration[@Public="false"]]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<!-- Workaround for bug: http://sourceforge.net/tracker/?func=detail&aid=3539585&group_id=56262&atid=479921 -->
+	<rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition">
+		<properties>
+			<property name="violationSuppressXPath">
+				<value>
+					<![CDATA[./NullLiteral]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<!--<rule ref="rulesets/java/comments.xml" />-->
+	<rule ref="rulesets/java/typeresolution.xml" />
+	<!--<rule ref="rulesets/java/empty.xml" />-->
+	<rule ref="rulesets/java/strings.xml" />
+	<rule ref="rulesets/java/codesize.xml" />
+	<rule ref="rulesets/java/braces.xml" />
+	
+	<rule ref="rulesets/java/unusedcode.xml">
+		<exclude name="UnusedPrivateField" />
+	</rule>
+	<rule ref="rulesets/java/unusedcode.xml/UnusedPrivateField">
+		<properties>
+			<property name="violationSuppressXPath">
+				<value>
+					<![CDATA[
+./ancestor::TypeDeclaration/Annotation//Name[@Image='Getter' or @Image='Setter'] |
+./ancestor::ClassOrInterfaceBodyDeclaration/Annotation//Name[@Image='Getter' or @Image='Setter']
+					]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<!--<rule ref="rulesets/java/unnecessary.xml" />-->
+	<rule ref="rulesets/java/j2ee.xml" />
+	<rule ref="rulesets/java/javabeans.xml">
+		<exclude name="BeanMembersShouldSerialize" />
+	</rule>
+	<rule ref="rulesets/java/migrating.xml" />
+	<rule ref="rulesets/java/imports.xml" />
+	<rule ref="rulesets/java/junit.xml" />
+	
+	<rule ref="rulesets/java/naming.xml">
+		<exclude name="LongVariable" />
+		<exclude name="ShortClassName" />
+		
+		<!--
+			See also:
+			- http://sourceforge.net/tracker/?func=detail&aid=3107486&group_id=56262&atid=479921
+			- http://sourceforge.net/tracker/?func=detail&aid=3003477&group_id=56262&atid=479924
+		-->
+		<exclude name="ShortVariable" />
+	</rule>
+	<rule ref="rulesets/java/naming.xml/LongVariable">
+		<properties>
+			<property name="minimum" value="30" />
+		</properties>
+	</rule>
+	<rule ref="rulesets/java/naming.xml/ShortClassName">
+		<properties>
+			<property name="violationSuppressXPath">
+				<value>
+					<![CDATA[.[string-length(@Image) &gt; 2]]]>
+				</value>
+			</property>
+		</properties>
+	</rule>
+	
+	<rule ref="rulesets/java/finalizers.xml" />
+	<rule ref="rulesets/java/optimizations.xml" />
+	<rule ref="rulesets/java/clone.xml" />
+	
+</ruleset>

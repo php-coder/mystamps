@@ -53,6 +53,7 @@ public class SiteService {
 	@Inject
 	private SuspiciousActivityTypeDao suspiciousActivityTypes;
 	
+	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
 	public void logAboutAbsentPage(
 			final String page,
@@ -64,6 +65,7 @@ public class SiteService {
 		logEvent(getAbsentPageType(), page, userId, ip, referer, agent);
 	}
 	
+	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
 	public void logAboutFailedAuthentication(
 			final String page,

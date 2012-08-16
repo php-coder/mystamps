@@ -81,6 +81,7 @@ public class UserService {
 	}
 	
 	@Transactional
+	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	public void registerUser(final String login, final String password,
 			final String name, final String activationKey) {
 		
@@ -89,7 +90,7 @@ public class UserService {
 		checkArgument(activationKey != null, "Activation key should be non null");
 		
 		// use login as name if name is not provided
-		final String finalName;
+		final String finalName; // NOPMD: SF #3557789
 		if (isNullOrEmpty(name)) {
 			finalName = login;
 		} else {

@@ -90,7 +90,7 @@ public final class CatalogUtils {
 					ConstructorUtils.invokeConstructor(elementClass, number)
 				);
 				
-			} catch (final Exception ex) {
+			} catch (final Exception ex) { // NOPMD
 				throw Throwables.propagate(ex);
 			}
 		}

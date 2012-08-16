@@ -50,6 +50,7 @@ public class CronService {
 	
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	public void purgeUsersActivations() {
 		final Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
 		

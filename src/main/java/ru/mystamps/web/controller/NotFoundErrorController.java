@@ -65,7 +65,7 @@ public class NotFoundErrorController {
 		
 		try {
 			siteService.logAboutAbsentPage(page, uid, ip, referer, agent);
-		} catch (final Exception ex) {
+		} catch (final Exception ex) { // NOPMD
 			// intentionally ignored:
 			// database error should not break showing of 404 page
 			LOG.warn("Cannot log 404 error", ex);

@@ -243,7 +243,7 @@
         -->
         <module name="UpperEll"/>
         <module name="TrailingComment">
-            <property name="legalComment" value="TODO|XXX"/>
+            <property name="legalComment" value="TODO|XXX|NOPMD"/>
         </module>
 
     </module>
