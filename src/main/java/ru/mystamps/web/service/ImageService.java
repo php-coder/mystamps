@@ -44,7 +44,7 @@ public class ImageService {
 	private ImageDao imageDao;
 	
 	// Method called from SeriesService.add()
-	String save(final MultipartFile file) {
+	protected String save(final MultipartFile file) {
 		checkArgument(file != null, "File should be non null");
 		checkArgument(file.getSize() > 0, "Image size must be greater than zero");
 		

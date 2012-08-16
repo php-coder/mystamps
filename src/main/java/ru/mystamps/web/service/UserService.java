@@ -138,7 +138,7 @@ public class UserService {
 		return users.findByLogin(login);
 	}
 	
-	User getCurrentUser() {
+	protected User getCurrentUser() {
 		final SecurityContext ctx = SecurityContextHolder.getContext();
 		checkState(ctx != null, "Security context must be non null");
 		
