@@ -57,7 +57,9 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		new ArrayList<String>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
 	private static final String SAMPLE_IMAGE_NAME = "test.png";
+	private static final String EMPTY_IMAGE_NAME  = "empty.jpg";
 	private static final String SAMPLE_IMAGE_PATH;
+	private static final String EMPTY_IMAGE_PATH;
 	
 	static {
 		EXPECTED_YEARS.add("");
@@ -70,6 +72,11 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 			SAMPLE_IMAGE_PATH = new File(
 				WhenUserAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
 			).getAbsolutePath();
+			
+			EMPTY_IMAGE_PATH = new File(
+				WhenUserAddSeries.class.getClassLoader().getResource(EMPTY_IMAGE_NAME).toURI()
+			).getAbsolutePath();
+		
 		} catch (final URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
@@ -210,6 +217,17 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page)
 			.field("comment")
 			.hasError(tr("value.too-long", MAX_SERIES_COMMENT_LENGTH));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void imageSizeMustBeGreaterThanZero() {
+		page.fillImage(EMPTY_IMAGE_PATH);
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("image")
+			.hasError(tr("ru.mystamps.web.validation.jsr303.NotEmptyFile.message"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

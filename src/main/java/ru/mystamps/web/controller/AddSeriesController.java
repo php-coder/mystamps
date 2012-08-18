@@ -19,7 +19,7 @@
 package ru.mystamps.web.controller;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
+import javax.validation.groups.Default;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.WebDataBinder;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.model.AddSeriesForm;
+import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CountryService;
@@ -104,7 +106,9 @@ public class AddSeriesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String processInput(@Valid final AddSeriesForm form, final BindingResult result) {
+	public String processInput(
+		@Validated({Default.class, ImageChecks.class}) final AddSeriesForm form,
+		final BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;

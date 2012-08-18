@@ -22,10 +22,12 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.GroupSequence;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
+import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
@@ -65,7 +67,22 @@ public class AddSeriesForm {
 	private String comment;
 	
 	@NotNull
-	@NotEmptyFilename
+	@NotEmptyFilename(groups = Image1Checks.class)
+	@NotEmptyFile(groups = Image2Checks.class)
 	private MultipartFile image;
+	
+	
+	@GroupSequence({
+		Image1Checks.class,
+		Image2Checks.class
+	})
+	public interface ImageChecks {
+	}
+	
+	public interface Image1Checks {
+	}
+	
+	public interface Image2Checks {
+	}
 	
 }
