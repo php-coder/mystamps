@@ -162,4 +162,38 @@ public class UserService {
 		</example>
 	</rule>
 	
+	<rule
+		name="FieldInjectionInControllers"
+		message="Use contructor injection instead of field injection in @Controller-s"
+		class="net.sourceforge.pmd.lang.rule.XPathRule"
+		language="java">
+		
+		<description>
+			Prefer constructor injection over field injection in @Controller classes.
+		</description>
+		
+		<properties>
+			<property name="xpath">
+				<value>
+<![CDATA[
+//TypeDeclaration[Annotation/*/Name[@Image="Controller"]]//FieldDeclaration[../Annotation/*/Name[@Image="Autowired" or @Image="Inject"]]
+]]>
+				</value>
+			</property>
+		</properties>
+		<priority>4</priority>
+		<example>
+<![CDATA[
+@Controller
+public class UserController {
+    @Inject
+    private UserDao userDao;
+
+    @Autowired
+    private SiteService siteService;
+}
+]]>
+		</example>
+	</rule>
+	
 </ruleset>
