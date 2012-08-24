@@ -31,7 +31,7 @@ import ru.mystamps.web.tests.page.AbstractPage;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
@@ -103,7 +103,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	}
 	
 	private void shouldHaveTitle() {
-		checkState(
+		Validate.validState(
 			title != null,
 			"Page title was not set!"
 			+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"

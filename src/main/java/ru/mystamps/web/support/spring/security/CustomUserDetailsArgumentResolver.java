@@ -27,7 +27,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 
 public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentResolver {
 	
@@ -44,7 +44,7 @@ public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentR
 		final WebDataBinderFactory binderFactory) {
 		
 		final SecurityContext ctx = SecurityContextHolder.getContext();
-		checkState(ctx != null, "Security context must be non null");
+		Validate.validState(ctx != null, "Security context must be non null");
 		
 		final Authentication auth = ctx.getAuthentication();
 		if (auth == null) {

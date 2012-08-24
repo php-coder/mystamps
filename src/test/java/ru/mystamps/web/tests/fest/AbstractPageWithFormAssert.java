@@ -20,7 +20,7 @@ package ru.mystamps.web.tests.fest;
 import org.fest.assertions.api.AbstractAssert;
 import org.fest.assertions.api.Assertions;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 
@@ -49,7 +49,10 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasError(final String expectedErrorMessage) {
 		isNotNull();
-		checkState(fieldName != null, "Error in test case: field name should be specified");
+		Validate.validState(
+			fieldName != null,
+			"Error in test case: field name must be specified"
+		);
 		
 		final String errorMessage = actual.getFieldError(fieldName);
 		
@@ -69,7 +72,10 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasNoError() {
 		isNotNull();
-		checkState(fieldName != null, "Error in test case: field name should be specified");
+		Validate.validState(
+			fieldName != null,
+			"Error in test case: field name must be specified"
+		);
 		
 		final String msg = String.format(
 			"Expected that field '%s' should not have any error",
@@ -85,7 +91,10 @@ public final class AbstractPageWithFormAssert
 	
 	public AbstractPageWithFormAssert hasValue(final String expectedValue) {
 		isNotNull();
-		checkState(fieldName != null, "Error in test case: field name should be specified");
+		Validate.validState(
+			fieldName != null,
+			"Error in test case: field name must be specified"
+		);
 		
 		final String value = actual.getFieldValue(fieldName);
 		

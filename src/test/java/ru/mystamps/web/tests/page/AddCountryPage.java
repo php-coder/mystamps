@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -45,7 +45,7 @@ public class AddCountryPage extends AbstractPageWithForm {
 	}
 	
 	public void addCountry(final String countryName) {
-		checkState(countryName != null, "Country name should be non null");
+		Validate.validState(countryName != null, "Country name should be non null");
 		
 		fillName(countryName);
 		submit();

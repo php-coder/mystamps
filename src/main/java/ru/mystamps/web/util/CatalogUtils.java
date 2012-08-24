@@ -28,7 +28,6 @@ import com.google.common.base.Throwables;
 
 import ru.mystamps.web.entity.StampsCatalog;
 
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
@@ -81,7 +80,7 @@ public final class CatalogUtils {
 		
 		final Set<T> result = new LinkedHashSet<T>();
 		for (final String number : catalogNumbers.split(",")) {
-			checkState(!number.trim().isEmpty(), "Catalog number must be non empty");
+			Validate.validState(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
 			// TODO: parse range of numbers
 			

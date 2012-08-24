@@ -31,8 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import  com.google.common.base.Throwables;
 
-import static com.google.common.base.Preconditions.checkState;
-
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
@@ -52,7 +50,7 @@ public class ImageService {
 		Validate.isTrue(contentType != null, "File type must be non null");
 		
 		final String extension = StringUtils.substringAfter(contentType, "/");
-		checkState(
+		Validate.validState(
 			"png".equals(extension) || "jpeg".equals(extension),
 			"File type must be PNG or JPEG image"
 		);

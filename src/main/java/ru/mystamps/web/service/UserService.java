@@ -36,7 +36,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 import ru.mystamps.web.entity.User;
@@ -110,7 +109,7 @@ public class UserService {
 		final String salt = generateSalt();
 		
 		final String hash = encoder.encodePassword(password, salt);
-		checkState(hash != null, "Generated hash must be non null");
+		Validate.validState(hash != null, "Generated hash must be non null");
 		
 		final Date now = new Date();
 		
@@ -141,7 +140,7 @@ public class UserService {
 	
 	protected User getCurrentUser() {
 		final SecurityContext ctx = SecurityContextHolder.getContext();
-		checkState(ctx != null, "Security context must be non null");
+		Validate.validState(ctx != null, "Security context must be non null");
 		
 		final Authentication auth = ctx.getAuthentication();
 		if (auth == null) {
@@ -153,7 +152,7 @@ public class UserService {
 			return null;
 		}
 		
-		checkState(
+		Validate.validState(
 			principal instanceof CustomUserDetails,
 			"Principal must be CustomUserDetails type"
 		);

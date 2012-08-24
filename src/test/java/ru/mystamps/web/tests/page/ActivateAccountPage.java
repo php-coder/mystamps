@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.Iterables.any;
 
@@ -83,7 +83,7 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 			login, name, password, passwordConfirmation, activationKey
 		);
 		
-		checkState(
+		Validate.validState(
 			any(fieldNames, notNull()),
 			"Login, name, password with confirmation and activation key should not be null"
 		);

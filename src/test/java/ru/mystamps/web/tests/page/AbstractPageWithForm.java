@@ -26,7 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import lombok.Getter;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.tests.WebElementUtils;
 import ru.mystamps.web.tests.page.element.Form;
@@ -64,14 +64,14 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	public AbstractPage submit() {
 		
-		checkState(
+		Validate.validState(
 			form != null,
 			"You are trying to submit form at page which does not have form"
 		);
 		
 		final List<SubmitButton> buttons = form.getSubmitButtons();
 		
-		checkState(
+		Validate.validState(
 			!buttons.isEmpty(),
 			"You are trying to submit form at page which does not have submit button"
 		);
@@ -88,7 +88,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public boolean formExists() {
-		checkState(
+		Validate.validState(
 			form != null,
 			"You are trying to check form at page which does not has form"
 		);
@@ -112,7 +112,7 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	}
 	
 	public String getFieldValue(final String name) {
-		checkState(
+		Validate.validState(
 			form != null,
 			"You are trying to find field at page which does not have form"
 		);

@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.commons.lang3.Validate;
-import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
@@ -54,7 +53,7 @@ public class CountryService {
 		country.setUpdatedAt(now);
 		
 		final User currentUser = userService.getCurrentUser();
-		checkState(currentUser != null, "Current user must be non null");
+		Validate.validState(currentUser != null, "Current user must be non null");
 		country.setCreatedBy(currentUser);
 		country.setUpdatedBy(currentUser);
 		

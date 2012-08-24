@@ -23,6 +23,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
@@ -57,7 +56,7 @@ public class CronService {
 		final List<UsersActivation> expiredActivations =
 			usersActivationDao.findByCreatedAtLessThan(expiredSince);
 		
-		checkState(expiredActivations != null, "Expired activations should be non null");
+		Validate.validState(expiredActivations != null, "Expired activations should be non null");
 		
 		if (expiredActivations.isEmpty()) {
 			LOG.info("Expired activations was not found.");

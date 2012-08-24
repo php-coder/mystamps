@@ -31,7 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 import static java.util.Calendar.JANUARY;
 
 import org.apache.commons.lang3.Validate;
-import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.GibbonsCatalogDao;
@@ -131,8 +130,8 @@ public class SeriesService {
 		}
 		
 		final String imageUrl = imageService.save(form.getImage());
-		checkState(imageUrl != null, "Image url must be non null");
-		checkState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
+		Validate.validState(imageUrl != null, "Image url must be non null");
+		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
 		
 		series.setImageUrl(imageUrl);
 		
@@ -150,7 +149,7 @@ public class SeriesService {
 		series.setUpdatedAt(now);
 		
 		final User currentUser = userService.getCurrentUser();
-		checkState(currentUser != null, "Current user must be non null");
+		Validate.validState(currentUser != null, "Current user must be non null");
 		series.setCreatedBy(currentUser);
 		series.setUpdatedBy(currentUser);
 		

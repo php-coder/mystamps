@@ -24,7 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
-import static com.google.common.base.Preconditions.checkState;
+import org.apache.commons.lang3.Validate;
 import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.Iterables.any;
 
@@ -65,7 +65,7 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	public void authorizeUser(final String login, final String password) {
 		final Iterable<String> fieldNames = Arrays.asList(login, password);
 		
-		checkState(
+		Validate.validState(
 			any(fieldNames, notNull()),
 			"Login and password should not be a null"
 		);
