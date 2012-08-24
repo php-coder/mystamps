@@ -34,7 +34,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
 import static org.mockito.Mockito.any;
@@ -232,7 +231,7 @@ public class SeriesServiceTest {
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
-		form.setMichelNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setMichelNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -246,7 +245,7 @@ public class SeriesServiceTest {
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
-		form.setMichelNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setMichelNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -271,7 +270,7 @@ public class SeriesServiceTest {
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
-		form.setScottNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setScottNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -285,7 +284,7 @@ public class SeriesServiceTest {
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
-		form.setScottNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setScottNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -310,7 +309,7 @@ public class SeriesServiceTest {
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
-		form.setYvertNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setYvertNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -324,7 +323,7 @@ public class SeriesServiceTest {
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
-		form.setYvertNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setYvertNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -349,7 +348,7 @@ public class SeriesServiceTest {
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
-		form.setGibbonsNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
@@ -363,7 +362,7 @@ public class SeriesServiceTest {
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
-		form.setGibbonsNumbers(Joiner.on(",").join(expectedNumbers));
+		form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','));
 		
 		service.add(form);
 		
