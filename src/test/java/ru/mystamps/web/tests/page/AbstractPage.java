@@ -29,7 +29,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.WebElementUtils;
@@ -150,7 +150,7 @@ public abstract class AbstractPage {
 	}
 	
 	public boolean existsLinkTo(final String relativeUrl) {
-		checkArgument(!"".equals(relativeUrl));
+		Validate.isTrue(!"".equals(relativeUrl));
 		return elementWithXPathExists(String.format(A_HREF_LOCATOR, relativeUrl));
 	}
 	
@@ -233,8 +233,8 @@ public abstract class AbstractPage {
 	}
 	
 	public void login(final String login, final String password) {
-		checkArgument(!"".equals(login), "login must be not null and not empty");
-		checkArgument(!"".equals(password), "password must be not null and not empty");
+		Validate.isTrue(!"".equals(login), "login must be not null and not empty");
+		Validate.isTrue(!"".equals(password), "password must be not null and not empty");
 		
 		// TODO: check than we already authenticated and do nothing
 		final AuthAccountPage authPage = new AuthAccountPage(driver);

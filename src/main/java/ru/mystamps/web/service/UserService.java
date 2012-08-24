@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
@@ -61,7 +61,7 @@ public class UserService {
 	
 	@Transactional
 	public void addRegistrationRequest(final String email) {
-		checkArgument(email != null, "Email should be non null");
+		Validate.isTrue(email != null, "Email should be non null");
 		
 		final UsersActivation activation = new UsersActivation();
 		
@@ -75,7 +75,7 @@ public class UserService {
 	public UsersActivation findRegistrationRequestByActivationKey(
 			final String activationKey) {
 		
-		checkArgument(activationKey != null, "Activation key should be non null");
+		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
 		return usersActivation.findByActivationKey(activationKey);
 	}
@@ -85,9 +85,9 @@ public class UserService {
 	public void registerUser(final String login, final String password,
 			final String name, final String activationKey) {
 		
-		checkArgument(login != null, "Login should be non null");
-		checkArgument(password != null, "Password should be non null");
-		checkArgument(activationKey != null, "Activation key should be non null");
+		Validate.isTrue(login != null, "Login should be non null");
+		Validate.isTrue(password != null, "Password should be non null");
+		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
 		// use login as name if name is not provided
 		final String finalName; // NOPMD: SF #3557789
@@ -134,7 +134,7 @@ public class UserService {
 	
 	@Transactional(readOnly = true)
 	public User findByLogin(final String login) {
-		checkArgument(login != null, "Login should be non null");
+		Validate.isTrue(login != null, "Login should be non null");
 		
 		return users.findByLogin(login);
 	}

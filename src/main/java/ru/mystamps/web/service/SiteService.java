@@ -26,11 +26,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.google.common.base.Preconditions.checkArgument;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
@@ -85,8 +84,8 @@ public class SiteService {
 			final String referer,
 			final String agent) {
 		
-		checkArgument(type != null, "Type of suspicious activity was not set");
-		checkArgument(page != null, "Page should be non null");
+		Validate.isTrue(type != null, "Type of suspicious activity was not set");
+		Validate.isTrue(page != null, "Page should be non null");
 		
 		final SuspiciousActivity activity = new SuspiciousActivity();
 		activity.setType(type);

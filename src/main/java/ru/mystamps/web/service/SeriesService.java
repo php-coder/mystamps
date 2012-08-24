@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.Calendar.JANUARY;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import org.apache.commons.lang3.Validate;
 import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.dao.CountryDao;
@@ -78,9 +78,12 @@ public class SeriesService {
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public Series add(final AddSeriesForm form) {
-		checkArgument(form != null, "Series info must be non null");
-		checkArgument(form.getQuantity() != null, "Stamps quantity must be non null");
-		checkArgument(form.getPerforated() != null, "Stamps' perforated property must be non null");
+		Validate.isTrue(form != null, "Series info must be non null");
+		Validate.isTrue(form.getQuantity() != null, "Stamps quantity must be non null");
+		Validate.isTrue(
+			form.getPerforated() != null,
+			"Stamps perforated property must be non null"
+		);
 		
 		final Series series = new Series();
 		
@@ -134,7 +137,7 @@ public class SeriesService {
 		series.setImageUrl(imageUrl);
 		
 		if (form.getComment() != null) {
-			checkArgument(
+			Validate.isTrue(
 				!form.getComment().trim().isEmpty(),
 				"Comment must be non empty"
 			);
@@ -156,7 +159,7 @@ public class SeriesService {
 	
 	@Transactional(readOnly = true)
 	public Series findById(final Integer id) {
-		checkArgument(id != null, "Id should be non null");
+		Validate.isTrue(id != null, "Id should be non null");
 		return seriesDao.findOne(id);
 	}
 	

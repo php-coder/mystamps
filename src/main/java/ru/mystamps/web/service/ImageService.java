@@ -23,6 +23,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import  com.google.common.base.Throwables;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.dao.ImageDao;
@@ -45,11 +45,11 @@ public class ImageService {
 	
 	// Method called from SeriesService.add()
 	protected String save(final MultipartFile file) {
-		checkArgument(file != null, "File should be non null");
-		checkArgument(file.getSize() > 0, "Image size must be greater than zero");
+		Validate.isTrue(file != null, "File should be non null");
+		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
 		final String contentType = file.getContentType();
-		checkArgument(contentType != null, "File type must be non null");
+		Validate.isTrue(contentType != null, "File type must be non null");
 		
 		final String extension = StringUtils.substringAfter(contentType, "/");
 		checkState(
@@ -74,7 +74,7 @@ public class ImageService {
 	
 	@Transactional(readOnly = true)
 	public Image findById(final Integer id) {
-		checkArgument(id != null, "Id should be non null");
+		Validate.isTrue(id != null, "Id should be non null");
 		return imageDao.findOne(id);
 	}
 	

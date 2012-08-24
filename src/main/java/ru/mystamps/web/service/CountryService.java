@@ -25,7 +25,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import org.apache.commons.lang3.Validate;
 import static com.google.common.base.Preconditions.checkState;
 
 import ru.mystamps.web.entity.Country;
@@ -44,7 +44,7 @@ public class CountryService {
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public Country add(final String countryName) {
-		checkArgument(countryName != null, "Country name should be non null");
+		Validate.isTrue(countryName != null, "Country name should be non null");
 		
 		final Country country = new Country();
 		country.setName(countryName);
@@ -68,13 +68,13 @@ public class CountryService {
 	
 	@Transactional(readOnly = true)
 	public Country findByName(final String name) {
-		checkArgument(name != null, "Name should be non null");
+		Validate.isTrue(name != null, "Name should be non null");
 		return countryDao.findByName(name);
 	}
 	
 	@Transactional(readOnly = true)
 	public Country findById(final Integer id) {
-		checkArgument(id != null, "Id should be non null");
+		Validate.isTrue(id != null, "Id should be non null");
 		return countryDao.findOne(id);
 	}
 	

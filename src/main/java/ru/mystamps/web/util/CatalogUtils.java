@@ -22,12 +22,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
+import org.apache.commons.lang3.Validate;
 
 import com.google.common.base.Throwables;
 
 import ru.mystamps.web.entity.StampsCatalog;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
@@ -43,7 +43,7 @@ public final class CatalogUtils {
 	 * Converts set of catalog numbers from objects representation to comma-delimited string.
 	 **/
 	public static String toShortForm(final Set<? extends StampsCatalog> catalogNumbers) {
-		checkArgument(catalogNumbers != null, "Catalog numbers must be non null");
+		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
 		
 		if (catalogNumbers.isEmpty()) {
 			return "";
@@ -77,7 +77,7 @@ public final class CatalogUtils {
 			return Collections.emptySet();
 		}
 		
-		checkArgument(elementClass != null, "Class of element must be non null");
+		Validate.isTrue(elementClass != null, "Class of element must be non null");
 		
 		final Set<T> result = new LinkedHashSet<T>();
 		for (final String number : catalogNumbers.split(",")) {

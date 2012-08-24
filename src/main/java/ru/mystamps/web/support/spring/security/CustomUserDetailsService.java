@@ -32,7 +32,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.UserService;
@@ -50,7 +50,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(final String login) {
-		checkArgument(login != null, "Login should be non null");
+		Validate.isTrue(login != null, "Login should be non null");
 		
 		LOG.debug("Find user by login '{}'", login);
 		
