@@ -20,9 +20,9 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.lang3.StringUtils;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 public class NotEmptyFilenameValidator
 	implements ConstraintValidator<NotEmptyFilename, MultipartFile> {
@@ -39,7 +39,7 @@ public class NotEmptyFilenameValidator
 			return true;
 		}
 		
-		if (isNullOrEmpty(file.getOriginalFilename())) {
+		if (StringUtils.isEmpty(file.getOriginalFilename())) {
 			return false;
 		}
 		

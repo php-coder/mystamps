@@ -22,13 +22,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.google.common.base.Throwables;
 
 import ru.mystamps.web.entity.StampsCatalog;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
  * Helpers for dealing with stamps catalog numbers.
@@ -72,7 +71,7 @@ public final class CatalogUtils {
 		final String catalogNumbers,
 		final Class<T> elementClass) {
 		
-		if (isNullOrEmpty(catalogNumbers)) {
+		if (StringUtils.isEmpty(catalogNumbers)) {
 			return Collections.emptySet();
 		}
 		

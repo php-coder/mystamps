@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.validation.jsr303;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
-
 import java.lang.reflect.InvocationTargetException;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Object> {
 	
@@ -46,12 +45,12 @@ public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Ob
 		
 		try {
 			final String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
-			if (isNullOrEmpty(firstFieldValue)) {
+			if (StringUtils.isEmpty(firstFieldValue)) {
 				return true;
 			}
 			
 			final String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
-			if (isNullOrEmpty(secondFieldValue)) {
+			if (StringUtils.isEmpty(secondFieldValue)) {
 				return true;
 			}
 			

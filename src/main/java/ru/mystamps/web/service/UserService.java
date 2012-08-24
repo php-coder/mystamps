@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -35,8 +36,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -90,7 +89,7 @@ public class UserService {
 		
 		// use login as name if name is not provided
 		final String finalName; // NOPMD: SF #3557789
-		if (isNullOrEmpty(name)) {
+		if (StringUtils.isEmpty(name)) {
 			finalName = login;
 		} else {
 			finalName = name;

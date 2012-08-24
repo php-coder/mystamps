@@ -23,8 +23,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.beanutils.BeanUtils;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
+import org.apache.commons.lang3.StringUtils;
 
 public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismatch, Object> {
 	
@@ -46,12 +45,12 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 		
 		try {
 			final String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
-			if (isNullOrEmpty(firstFieldValue)) {
+			if (StringUtils.isEmpty(firstFieldValue)) {
 				return true;
 			}
 			
 			final String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
-			if (isNullOrEmpty(secondFieldValue)) {
+			if (StringUtils.isEmpty(secondFieldValue)) {
 				return true;
 			}
 			
