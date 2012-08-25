@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,8 +34,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import com.google.common.collect.ImmutableSet;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
@@ -227,7 +226,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveMichelNumbers() {
-		final Set<MichelCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<MichelCatalog> expectedNumbers = newSet(
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
@@ -241,7 +240,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassMichelNumbersToSeriesDao() {
-		final Set<MichelCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<MichelCatalog> expectedNumbers = newSet(
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
@@ -266,7 +265,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveScottNumbers() {
-		final Set<ScottCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<ScottCatalog> expectedNumbers = newSet(
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
@@ -280,7 +279,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassScottNumbersToSeriesDao() {
-		final Set<ScottCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<ScottCatalog> expectedNumbers = newSet(
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
@@ -305,7 +304,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveYvertNumbers() {
-		final Set<YvertCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<YvertCatalog> expectedNumbers = newSet(
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
@@ -319,7 +318,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassYvertNumbersToSeriesDao() {
-		final Set<YvertCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<YvertCatalog> expectedNumbers = newSet(
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
@@ -344,7 +343,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveGibbonsNumbers() {
-		final Set<GibbonsCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<GibbonsCatalog> expectedNumbers = newSet(
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
@@ -358,7 +357,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassGibbonsNumbersToSeriesDao() {
-		final Set<GibbonsCatalog> expectedNumbers = ImmutableSet.of(
+		final Set<GibbonsCatalog> expectedNumbers = newSet(
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
@@ -507,6 +506,16 @@ public class SeriesServiceTest {
 		final Series actualSeries = service.findById(seriesId);
 		
 		assertThat(actualSeries).isEqualTo(expectedSeries);
+	}
+	
+	private static <T> Set<T> newSet(final T... elements) {
+		final Set<T> result = new LinkedHashSet<T>();
+		
+		for (final T element : elements) {
+			result.add(element);
+		}
+		
+		return result;
 	}
 	
 	private static Series getSeries() {
