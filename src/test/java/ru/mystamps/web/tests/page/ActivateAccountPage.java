@@ -19,14 +19,16 @@
 package ru.mystamps.web.tests.page;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
 import org.apache.commons.lang3.Validate;
-import static com.google.common.base.Predicates.notNull;
-import static com.google.common.collect.Iterables.any;
+
+import static org.apache.commons.collections.CollectionUtils.exists;
+import static org.apache.commons.collections.PredicateUtils.notNullPredicate;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -79,12 +81,12 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 			final String passwordConfirmation,
 			final String activationKey) {
 		
-		final Iterable<String> fieldNames = Arrays.asList(
+		final Collection<String> fieldNames = Arrays.asList(
 			login, name, password, passwordConfirmation, activationKey
 		);
 		
 		Validate.validState(
-			any(fieldNames, notNull()),
+			exists(fieldNames, notNullPredicate()),
 			"Login, name, password with confirmation and activation key should not be null"
 		);
 		

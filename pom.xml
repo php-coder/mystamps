@@ -196,6 +196,13 @@
 			<version>2.4</version>
 		</dependency>
 		
+		<!-- Needed for CollectionUtils/PredicateUtils -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
