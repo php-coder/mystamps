@@ -25,8 +25,6 @@ import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.google.common.base.Throwables;
-
 import ru.mystamps.web.entity.StampsCatalog;
 
 /**
@@ -88,8 +86,11 @@ public final class CatalogUtils {
 					ConstructorUtils.invokeConstructor(elementClass, number)
 				);
 				
+			} catch (final RuntimeException ex) { // NOPMD
+				throw ex;
+			
 			} catch (final Exception ex) { // NOPMD
-				throw Throwables.propagate(ex);
+				throw new RuntimeException(ex); // NOPMD
 			}
 		}
 		

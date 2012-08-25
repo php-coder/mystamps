@@ -29,8 +29,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import  com.google.common.base.Throwables;
-
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
@@ -62,7 +60,7 @@ public class ImageService {
 			image.setData(file.getBytes());
 		} catch (final IOException e) {
 			// throw RuntimeException for rolling back transaction
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e); // NOPMD
 		}
 		
 		final Image entity = imageDao.save(image);

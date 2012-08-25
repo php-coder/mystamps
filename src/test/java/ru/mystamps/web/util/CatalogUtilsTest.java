@@ -21,9 +21,21 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.reflect.ConstructorUtils;
+
+import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
+import org.testng.IObjectFactory;
+
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.testng.PowerMockObjectFactory;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyVararg;
+import static org.mockito.Mockito.when;
 
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
@@ -31,7 +43,13 @@ import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.StampsCatalog;
 import ru.mystamps.web.entity.YvertCatalog;
 
+@PrepareForTest(ConstructorUtils.class)
 public class CatalogUtilsTest {
+	
+	@ObjectFactory
+	public IObjectFactory getObjectFactory() {
+		return new PowerMockObjectFactory();
+	}
 	
 	//
 	// Tests for toShortForm()
@@ -103,8 +121,21 @@ public class CatalogUtilsTest {
 	}
 	
 	@Test(expectedExceptions = RuntimeException.class)
-	public void fromStringShouldThrowRuntimeExceptionForIllegalElementClass() {
+	public void fromStringShouldConvertExceptionToRuntimeException() throws Exception {
+		PowerMockito.mockStatic(ConstructorUtils.class);
+		when(ConstructorUtils.invokeConstructor(any(Class.class), anyVararg()))
+			.thenThrow(new InstantiationException("Can't initiate object"));
+		
 		CatalogUtils.fromString("1", NopCatalog.class);
+	}
+	
+	@Test(expectedExceptions = RuntimeException.class)
+	public void fromStringShouldThrowRuntimeExceptionAsIs() throws Exception {
+		PowerMockito.mockStatic(ConstructorUtils.class);
+		when(ConstructorUtils.invokeConstructor(any(Class.class), anyVararg()))
+			.thenThrow(new RuntimeException("Error occurs"));
+		
+		CatalogUtils.fromString("1", MichelCatalog.class);
 	}
 	
 	@Test

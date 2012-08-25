@@ -10,7 +10,6 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<guava.version>13.0</guava.version>
 		<hibernate.version>3.6.10.Final</hibernate.version>
 		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
 		<lombok.version>0.11.2</lombok.version>
@@ -313,12 +312,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
 		</dependency>
 		
 		<!-- Dependencies which used only in dev environment -->
