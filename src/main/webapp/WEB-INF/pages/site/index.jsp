@@ -12,10 +12,12 @@
 		<div id="content">
 			<sec:authorize access="hasRole('ROLE_USER')">
 				<spring:message code="t_you_may" />:
-				<ul>
-					<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
-					<li><a href="${addCountryUrl}"><spring:message code="t_add_country" /></a></li>
-				</ul>
+				<nav>
+					<ul>
+						<li><a href="${addSeriesUrl}"><spring:message code="t_add_series" /></a></li>
+						<li><a href="${addCountryUrl}"><spring:message code="t_add_country" /></a></li>
+					</ul>
+				</nav>
 			</sec:authorize>
 		</div>
 		<%@ include file="/WEB-INF/segments/footer.jspf" %>
