@@ -17,9 +17,13 @@
  */
 package ru.mystamps.web.util;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,11 +36,30 @@ import ru.mystamps.web.entity.StampsCatalog;
  **/
 public final class CatalogUtils {
 	
+	private static final int ONE_ELEMENT_SIZE = 1;
+	private static final int TWO_ELEMENTS_SIZE = 2;
+	
+	private static final Comparator<String> STR_AFTER_INT =
+		new Comparator<String>() {
+			@Override
+			public int compare(final String lhs, final String rhs) {
+				try {
+					final Integer left = Integer.valueOf(lhs);
+					final Integer right = Integer.valueOf(rhs);
+					return left.compareTo(right);
+				
+				} catch (final NumberFormatException ex) {
+					return 1;
+				}
+				
+			}
+		};
+	
 	private CatalogUtils() {
 	}
 	
 	/**
-	 * Converts set of catalog numbers from objects representation to comma-delimited string.
+	 * Converts set of catalog numbers to comma-delimited string with range of numbers.
 	 **/
 	public static String toShortForm(final Set<? extends StampsCatalog> catalogNumbers) {
 		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
@@ -45,21 +68,39 @@ public final class CatalogUtils {
 			return "";
 		}
 		
-		final StringBuilder sb = new StringBuilder();
-		
-		// TODO: more sophisticated impl
-		boolean firstElement = true;
+		final Set<String> numbers = new TreeSet<String>(STR_AFTER_INT);
 		for (final StampsCatalog catalog : catalogNumbers) {
-			if (firstElement) {
-				firstElement = false;
-			} else {
-				sb.append(", ");
-			}
-			
-			sb.append(catalog.getCode());
+			numbers.add(catalog.getCode());
 		}
 		
-		return sb.toString();
+		final List<String> groups = new ArrayList<String>();
+		final List<String> currentBuffer = new ArrayList<String>();
+		for (final String currentString : numbers) {
+			
+			// for first element
+			if (currentBuffer.isEmpty()) {
+				currentBuffer.add(currentString);
+				continue;
+			}
+			
+			// in range
+			final Integer current = Integer.valueOf(currentString);
+			final Integer previous = Integer.valueOf(currentBuffer.get(currentBuffer.size() - 1));
+			if (previous + 1 == current) {
+				currentBuffer.add(currentString);
+				continue;
+			}
+			
+			addBufferToGroups(currentBuffer, groups);
+			currentBuffer.clear();
+			
+			// start new group
+			currentBuffer.add(currentString);
+		}
+		
+		addBufferToGroups(currentBuffer, groups);
+		
+		return StringUtils.join(groups, ", ");
 	}
 	
 	/**
@@ -95,6 +136,25 @@ public final class CatalogUtils {
 		}
 		
 		return result;
+	}
+	
+	private static void addBufferToGroups(final List<String> buffer, final List<String> groups) {
+		Validate.isTrue(!buffer.isEmpty(), "Buffer must be non-empty");
+		
+		final String firstElement = buffer.get(0);
+		final String lastElement = buffer.get(buffer.size() - 1);
+		
+		if (buffer.size() == ONE_ELEMENT_SIZE) {
+			groups.add(firstElement);
+			
+		} else if (buffer.size() == TWO_ELEMENTS_SIZE) {
+			groups.add(firstElement);
+			groups.add(lastElement);
+			
+		// save sequence as range
+		} else {
+			groups.add(firstElement + "-" + lastElement);
+		}
 	}
 	
 }

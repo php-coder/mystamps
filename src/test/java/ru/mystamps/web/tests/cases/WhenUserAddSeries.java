@@ -307,20 +307,16 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		final String expectedQuantity       = "3";
 		final String expectedYear         = "1999";
 		final String expectedCountryName  = "Italy";
-		final String expectedMichelNumbers  = "1, 2, 3";
-		final String expectedScottNumbers   = "10, 11, 12";
-		final String expectedYvertNumbers   = "20, 21, 22";
-		final String expectedGibbonsNumbers = "30, 31, 32";
 		final String expectedComment        = "Any text";
 		
 		page.fillCountry(expectedCountryName);
 		page.fillYear(expectedYear);
 		page.fillQuantity(expectedQuantity);
 		page.fillPerforated(false);
-		page.fillMichelNumbers(expectedMichelNumbers);
-		page.fillScottNumbers(expectedScottNumbers);
-		page.fillYvertNumbers(expectedYvertNumbers);
-		page.fillGibbonsNumbers(expectedGibbonsNumbers);
+		page.fillMichelNumbers("1, 2, 3");
+		page.fillScottNumbers("10, 11, 12");
+		page.fillYvertNumbers("20, 21, 22");
+		page.fillGibbonsNumbers("30, 31, 32");
 		page.fillComment(expectedComment);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
@@ -336,10 +332,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getYear()).isEqualTo(expectedYear);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
-		assertThat(nextPage.getMichelNumbers()).isEqualTo(expectedMichelNumbers);
-		assertThat(nextPage.getScottNumbers()).isEqualTo(expectedScottNumbers);
-		assertThat(nextPage.getYvertNumbers()).isEqualTo(expectedYvertNumbers);
-		assertThat(nextPage.getGibbonsNumbers()).isEqualTo(expectedGibbonsNumbers);
+		assertThat(nextPage.getMichelNumbers()).isEqualTo("1-3");
+		assertThat(nextPage.getScottNumbers()).isEqualTo("10-12");
+		assertThat(nextPage.getYvertNumbers()).isEqualTo("20-22");
+		assertThat(nextPage.getGibbonsNumbers()).isEqualTo("30-32");
 		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
 	

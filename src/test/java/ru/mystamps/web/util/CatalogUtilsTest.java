@@ -81,6 +81,41 @@ public class CatalogUtilsTest {
 		assertThat(CatalogUtils.toShortForm(setOfNumbers)).isEqualTo("1, 2");
 	}
 	
+	@Test
+	public void toShortFormShouldProduceRangeForSequence() {
+		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		setOfNumbers.add(new MichelCatalog("1"));
+		setOfNumbers.add(new MichelCatalog("2"));
+		setOfNumbers.add(new MichelCatalog("3"));
+		
+		assertThat(CatalogUtils.toShortForm(setOfNumbers)).isEqualTo("1-3");
+	}
+	
+	@Test
+	public void toShortFormShouldReturnCommaSeparatedNumbersIfTheyAreNotASequence() {
+		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		setOfNumbers.add(new MichelCatalog("1"));
+		setOfNumbers.add(new MichelCatalog("2"));
+		setOfNumbers.add(new MichelCatalog("4"));
+		setOfNumbers.add(new MichelCatalog("5"));
+		
+		assertThat(CatalogUtils.toShortForm(setOfNumbers)).isEqualTo("1, 2, 4, 5");
+	}
+	
+	@Test
+	public void toShortFormShouldProduceTwoRangesForTwoSequences() {
+		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		setOfNumbers.add(new MichelCatalog("1"));
+		setOfNumbers.add(new MichelCatalog("2"));
+		setOfNumbers.add(new MichelCatalog("3"));
+		setOfNumbers.add(new MichelCatalog("10"));
+		setOfNumbers.add(new MichelCatalog("19"));
+		setOfNumbers.add(new MichelCatalog("20"));
+		setOfNumbers.add(new MichelCatalog("21"));
+		
+		assertThat(CatalogUtils.toShortForm(setOfNumbers)).isEqualTo("1-3, 10, 19-21");
+	}
+	
 	//
 	// Tests for fromString()
 	//
