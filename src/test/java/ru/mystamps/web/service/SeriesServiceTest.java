@@ -26,14 +26,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
@@ -59,6 +60,7 @@ import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.tests.fest.DateAssert;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SeriesServiceTest {
 	
 	@Mock
@@ -111,10 +113,8 @@ public class SeriesServiceTest {
 	
 	private AddSeriesForm form;
 	
-	@BeforeMethod
+	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-		
 		form = new AddSeriesForm();
 		form.setQuantity(2);
 		form.setPerforated(false);
@@ -127,19 +127,19 @@ public class SeriesServiceTest {
 	// Tests for add()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionArgumentIsNull() {
 		service.add(null);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionIfQuantityIsNull() {
 		form.setQuantity(null);
 		
 		service.add(form);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionIfPerforatedIsNull() {
 		form.setPerforated(null);
 		
@@ -378,14 +378,14 @@ public class SeriesServiceTest {
 		assertThat(multipartFileCaptor.getValue()).isEqualTo(multipartFile);
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionIfImageUrlIsNull() {
 		when(imageService.save(any(MultipartFile.class))).thenReturn(null);
 		
 		service.add(form);
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionIfImageUrlTooLong() {
 		final String aVeryLongPath = StringUtils.repeat("x", Series.IMAGE_URL_LENGTH + 1);
 		when(imageService.save(any(MultipartFile.class))).thenReturn(aVeryLongPath);
@@ -405,7 +405,7 @@ public class SeriesServiceTest {
 		
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionIfCommentIsEmpty() {
 		form.setComment("  ");
 
@@ -442,7 +442,7 @@ public class SeriesServiceTest {
 		DateAssert.assertThat(seriesCaptor.getValue().getUpdatedAt()).isCurrentDate();
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
 		when(userService.getCurrentUser()).thenReturn(null);
 		
@@ -475,7 +475,7 @@ public class SeriesServiceTest {
 	// Tests for findById()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findByIdShouldThrowExceptionWhenIdIsNull() {
 		service.findById(null);
 	}

@@ -26,20 +26,19 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.ObjectFactory;
-import org.testng.annotations.Test;
-import org.testng.IObjectFactory;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockObjectFactory;
+import org.powermock.modules.junit4.rule.PowerMockRule;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -59,6 +58,7 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 @PrepareForTest(SecurityContextHolder.class)
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
 	private static final String TEST_NAME           = "Test Name";
@@ -71,6 +71,9 @@ public class UserServiceTest {
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
+	
+	@Rule
+	public PowerMockRule powerMockRule = new PowerMockRule();
 	
 	@Mock
 	private UserDao userDao;
@@ -95,16 +98,6 @@ public class UserServiceTest {
 	
 	@InjectMocks
 	private UserService service = new UserService();
-	
-	@BeforeMethod
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
-	
-	@ObjectFactory
-	public IObjectFactory getObjectFactory() {
-		return new PowerMockObjectFactory();
-	}
 	
 	//
 	// Tests for addRegistrationRequest()
@@ -142,7 +135,7 @@ public class UserServiceTest {
 		assertThat(firstActivationKey).isNotEqualTo(secondActivationKey);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addRegistrationRequestShouldThrowExceptionWhenEmailIsNull() {
 		service.addRegistrationRequest(null);
 	}
@@ -169,7 +162,7 @@ public class UserServiceTest {
 	// Tests for findRegistrationRequestByActivationKey()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findRegistrationRequestByActivationKeyShouldThrowExceptionWhenKeyIsNull() {
 		service.findRegistrationRequestByActivationKey(null);
 	}
@@ -217,7 +210,7 @@ public class UserServiceTest {
 		verify(usersActivationDao).delete(activation);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenActivationKeyIsNull() {
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, null);
 	}
@@ -324,7 +317,7 @@ public class UserServiceTest {
 		assertThat(firstSalt).isNotEqualTo(secondSalt);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenPasswordIsNull() {
 		service.registerUser(TEST_LOGIN, null, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
@@ -345,7 +338,7 @@ public class UserServiceTest {
 		assertThat(actualHash).isEqualTo(expectedHash);
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void registerUserShouldThrowExceptionWhenEncoderReturnsNull() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(null);
@@ -353,7 +346,7 @@ public class UserServiceTest {
 		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenLoginIsNull() {
 		service.registerUser(null, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
 	}
@@ -386,7 +379,7 @@ public class UserServiceTest {
 	// Tests for findByLogin()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findByLoginShouldThrowExceptionWhenLoginIsNull() {
 		service.findByLogin(null);
 	}
@@ -411,7 +404,7 @@ public class UserServiceTest {
 	// Tests for getCurrentUser()
 	//
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void getCurrentUserShouldThrowExceptionIfSecurityContextIsNull() {
 		PowerMockito.mockStatic(SecurityContextHolder.class);
 		when(SecurityContextHolder.getContext()).thenReturn(null);
@@ -438,7 +431,7 @@ public class UserServiceTest {
 		assertThat(service.getCurrentUser()).isNull();
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void getCurrentUserShouldThrowExceptionWhenPrincipalHasUnknownType() {
 		PowerMockito.mockStatic(SecurityContextHolder.class);
 		when(authentication.getPrincipal()).thenReturn(new Object());

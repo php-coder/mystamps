@@ -23,9 +23,11 @@
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
 		
 		<testng.version>6.7</testng.version>
+		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.0</mockito.version>
 		<fest.assert.version>2.0M7</fest.assert.version>
 		<powermock.version>1.4.12</powermock.version>
+		<aspectj.version>1.7.0</aspectj.version>
 		
 		<java.version>1.6</java.version>
 		
@@ -217,6 +219,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito.version}</version>
@@ -231,15 +240,23 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- PowerMock Java agent for PowerMockRule -->
 		<dependency>
 			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-testng</artifactId>
+			<artifactId>powermock-module-junit4-rule-agent</artifactId>
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -399,9 +416,8 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12</version>
 				<configuration>
-					<excludes>
-						<exclude>ru/mystamps/web/service/*MethodSecurityTest.java</exclude>
-					</excludes>
+					<!-- Run junit tests only (see #SUREFIRE-377) -->
+					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
 			</plugin>
 			

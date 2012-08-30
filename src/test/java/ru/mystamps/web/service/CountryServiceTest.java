@@ -21,14 +21,15 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -44,6 +45,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.tests.fest.DateAssert;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CountryServiceTest {
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
@@ -61,9 +63,8 @@ public class CountryServiceTest {
 	@InjectMocks
 	private CountryService service = new CountryService();
 	
-	@BeforeMethod
+	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
 		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 	}
 	
@@ -71,7 +72,7 @@ public class CountryServiceTest {
 	// Tests for add()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenCountryNameIsNull() {
 		service.add(null);
 	}
@@ -113,7 +114,7 @@ public class CountryServiceTest {
 		DateAssert.assertThat(countryCaptor.getValue().getUpdatedAt()).isCurrentDate();
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
 		when(userService.getCurrentUser()).thenReturn(null);
 		
@@ -169,7 +170,7 @@ public class CountryServiceTest {
 	// Tests for findByName()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findByNameShouldThrowExceptionWhenNameIsNull() {
 		service.findByName(null);
 	}
@@ -195,7 +196,7 @@ public class CountryServiceTest {
 	// Tests for findById()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findByIdShouldThrowExceptionWhenIdIsNull() {
 		service.findById(null);
 	}

@@ -25,14 +25,14 @@ import java.util.List;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -45,6 +45,7 @@ import static org.mockito.Mockito.when;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CronServiceTest {
 	
 	@Mock
@@ -55,11 +56,6 @@ public class CronServiceTest {
 	
 	@InjectMocks
 	private CronService service = new CronService();
-	
-	@BeforeMethod
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
 	
 	//
 	// Tests for purgeUsersActivations()
@@ -95,7 +91,7 @@ public class CronServiceTest {
 		assertThat(passedDate.equals(expectedDate)).isTrue();
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void purgeUsersActivationsShouldThrowExceptionWhenNullActivationsWasReturned() {
 		when(usersActivationDao.findByCreatedAtLessThan(any(Date.class))).thenReturn(null);
 		

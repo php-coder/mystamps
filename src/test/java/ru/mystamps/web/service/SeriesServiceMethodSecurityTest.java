@@ -19,13 +19,14 @@ package ru.mystamps.web.service;
 
 import javax.inject.Inject;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import org.springframework.security.access.AccessDeniedException;
 
@@ -40,7 +41,8 @@ import ru.mystamps.web.config.TestContext;
 		TestContext.class
 	}
 )
-public class SeriesServiceMethodSecurityTest extends AbstractTestNGSpringContextTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+public class SeriesServiceMethodSecurityTest {
 	
 	@Inject
 	private SeriesService service;
@@ -55,14 +57,14 @@ public class SeriesServiceMethodSecurityTest extends AbstractTestNGSpringContext
 	// Tests for add()
 	//
 	
-	@Test(expectedExceptions = AccessDeniedException.class)
+	@Test(expected = AccessDeniedException.class)
 	public void addShouldDenyAccessToAnonymousUser() {
 		AuthUtils.authenticateAsAnonymous();
 		
 		service.add(null);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldAllowAccessToAuthenticatedUser() {
 		AuthUtils.authenticateAsUser(validUserLogin, validUserPassword);
 		

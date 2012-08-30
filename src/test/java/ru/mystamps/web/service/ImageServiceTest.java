@@ -21,16 +21,17 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.testng.Assert.fail;
+import static org.junit.Assert.fail;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
@@ -44,6 +45,7 @@ import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ImageServiceTest {
 	
 	@Mock
@@ -61,10 +63,8 @@ public class ImageServiceTest {
 	@InjectMocks
 	private ImageService service = new ImageService();
 	
-	@BeforeMethod
+	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-		
 		final long anyValue = 1024;
 		when(multipartFile.getSize()).thenReturn(anyValue);
 		when(multipartFile.getContentType()).thenReturn("image/png");
@@ -75,26 +75,26 @@ public class ImageServiceTest {
 	// Tests for save()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void saveShouldThrowExceptionIfFileIsNull() {
 		service.save(null);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void saveShouldThrowExceptionIfFileHasZeroSize() {
 		when(multipartFile.getSize()).thenReturn(0L);
 		
 		service.save(multipartFile);
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void saveShouldThrowExceptionIfContentTypeIsNull() {
 		when(multipartFile.getContentType()).thenReturn(null);
 		
 		service.save(multipartFile);
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void saveShouldThrowExceptionForUnsupportedContentType() {
 		when(multipartFile.getContentType()).thenReturn("image/tiff");
 		
@@ -161,7 +161,7 @@ public class ImageServiceTest {
 	// Tests for findById()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void findByIdShouldThrowExceptionWhenIdIsNull() {
 		service.findById(null);
 	}

@@ -23,13 +23,15 @@ import java.util.Set;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 
-import org.testng.annotations.ObjectFactory;
-import org.testng.annotations.Test;
-import org.testng.IObjectFactory;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import org.junit.Test;
+
+import org.mockito.runners.MockitoJUnitRunner;
 
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockObjectFactory;
+import org.powermock.modules.junit4.rule.PowerMockRule;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -44,18 +46,17 @@ import ru.mystamps.web.entity.StampsCatalog;
 import ru.mystamps.web.entity.YvertCatalog;
 
 @PrepareForTest(ConstructorUtils.class)
+@RunWith(MockitoJUnitRunner.class)
 public class CatalogUtilsTest {
 	
-	@ObjectFactory
-	public IObjectFactory getObjectFactory() {
-		return new PowerMockObjectFactory();
-	}
+	@Rule
+	public PowerMockRule powerMockRule = new PowerMockRule();
 	
 	//
 	// Tests for toShortForm()
 	//
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void toShortFormShouldThrowExceptionIfNumbersIsNull() {
 		CatalogUtils.toShortForm(null);
 	}
@@ -130,7 +131,7 @@ public class CatalogUtilsTest {
 		assertThat(CatalogUtils.fromString("", MichelCatalog.class)).isEmpty();
 	}
 	
-	@Test(expectedExceptions = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void fromStringShouldThrowExceptionIfElementClassIsNull() {
 		CatalogUtils.fromString("1", null);
 	}
@@ -150,12 +151,12 @@ public class CatalogUtilsTest {
 		assertThat(CatalogUtils.fromString("1,2", MichelCatalog.class)).hasSize(2);
 	}
 	
-	@Test(expectedExceptions = IllegalStateException.class)
+	@Test(expected = IllegalStateException.class)
 	public void fromStringShouldThrowExceptionIfOneOfCatalogNumbersIsABlankString() {
 		CatalogUtils.fromString("1, ", MichelCatalog.class);
 	}
 	
-	@Test(expectedExceptions = RuntimeException.class)
+	@Test(expected = RuntimeException.class)
 	public void fromStringShouldConvertExceptionToRuntimeException() throws Exception {
 		PowerMockito.mockStatic(ConstructorUtils.class);
 		when(ConstructorUtils.invokeConstructor(any(Class.class), anyVararg()))
@@ -164,7 +165,7 @@ public class CatalogUtilsTest {
 		CatalogUtils.fromString("1", NopCatalog.class);
 	}
 	
-	@Test(expectedExceptions = RuntimeException.class)
+	@Test(expected = RuntimeException.class)
 	public void fromStringShouldThrowRuntimeExceptionAsIs() throws Exception {
 		PowerMockito.mockStatic(ConstructorUtils.class);
 		when(ConstructorUtils.invokeConstructor(any(Class.class), anyVararg()))
