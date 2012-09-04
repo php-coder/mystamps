@@ -50,7 +50,7 @@ import ru.mystamps.web.entity.YvertCatalog;
 public class CatalogUtilsTest {
 	
 	@Rule
-	public PowerMockRule powerMockRule = new PowerMockRule();
+	public PowerMockRule powerMockRule = new PowerMockRule(); // NOCHECKSTYLE
 	
 	//
 	// Tests for toShortForm()

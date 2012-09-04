@@ -74,10 +74,19 @@
         <property name="message" value="Line has trailing spaces."/>
     </module>
 
+    <module name="SuppressWithNearbyCommentFilter">
+        <property name="commentFormat" value="NOCHECKSTYLE"/>
+        <property name="checkFormat" value=".*"/>
+        <property name="influenceFormat" value="0"/>
+    </module>
+
     <module name="TreeWalker">
 
         <property name="cacheFile" value="${checkstyle.cache.file}"/>
         <property name="tabWidth" value="4"/>
+
+        <!-- Required by SuppressWithNearbyCommentFilter to make comments available to the filter -->
+        <module name="FileContentsHolder"/>
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
@@ -243,7 +252,7 @@
         -->
         <module name="UpperEll"/>
         <module name="TrailingComment">
-            <property name="legalComment" value="TODO|XXX|NOPMD"/>
+            <property name="legalComment" value="TODO|XXX|NOPMD|NOCHECKSTYLE"/>
         </module>
 
     </module>

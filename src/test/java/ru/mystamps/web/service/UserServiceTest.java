@@ -73,7 +73,7 @@ public class UserServiceTest {
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
 	
 	@Rule
-	public PowerMockRule powerMockRule = new PowerMockRule();
+	public PowerMockRule powerMockRule = new PowerMockRule(); // NOCHECKSTYLE
 	
 	@Mock
 	private UserDao userDao;

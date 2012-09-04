@@ -18,7 +18,4 @@
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
 	
-	<suppress checks="VisibilityModifierCheck" files="ru.mystamps.web.service.UserServiceTest" />
-	<suppress checks="VisibilityModifierCheck" files="ru.mystamps.web.util.CatalogUtilsTest" />
-	
 </suppressions>
