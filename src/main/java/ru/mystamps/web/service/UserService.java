@@ -126,7 +126,9 @@ public class UserService {
 		
 		LOG.info(
 			"Added user (login='{}', name='{}', activation key='{}')",
-			new Object[]{login, finalName, activationKey}
+			login,
+			finalName,
+			activationKey
 		);
 	}
 	

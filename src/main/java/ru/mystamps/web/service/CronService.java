@@ -49,7 +49,6 @@ public class CronService {
 	
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	public void purgeUsersActivations() {
 		final Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
 		
@@ -66,11 +65,9 @@ public class CronService {
 		for (final UsersActivation activation : expiredActivations) {
 			LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
-				new Object[] {
-					activation.getActivationKey(),
-					activation.getEmail(),
-					activation.getCreatedAt()
-				}
+				activation.getActivationKey(),
+				activation.getEmail(),
+				activation.getCreatedAt()
 			);
 		}
 		
