@@ -19,12 +19,7 @@
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-					<div class="hint">
-						<span class="hint_item">
-							<spring:message code="t_required_fields_legend"
-								arguments="<span class=\"required_field\">*</span>" />
-						</span>
-					</div>
+					<elem:legend />
 					<div class="generic_form">
 						<form:form method="post" action="${activateUrl}" modelAttribute="activateAccountForm">
 							<table>

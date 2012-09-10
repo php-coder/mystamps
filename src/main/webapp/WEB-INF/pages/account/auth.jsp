@@ -19,12 +19,7 @@
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-				<div class="hint">
-					<span class="hint_item">
-						<spring:message code="t_required_fields_legend"
-							arguments="<span class=\"required_field\">*</span>" />
-					</span>
-				</div>
+				<elem:legend />
 				<c:if test="${pageContext.request.queryString eq 'failed' and SPRING_SECURITY_LAST_EXCEPTION ne null}">
 					<c:set var="errorMessage" value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
 					<c:set var="lastLogin" value="${SPRING_SECURITY_LAST_EXCEPTION.authentication.principal}" />

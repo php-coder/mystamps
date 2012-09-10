@@ -19,17 +19,7 @@
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
-				<div class="hint">
-					<span class="hint_item">
-						<spring:message code="t_if_you_already_registered"
-							arguments="${authUrl}" />
-					</span>
-					<br />
-					<span class="hint_item">
-						<spring:message code="t_required_fields_legend"
-							arguments="<span class=\"required_field\">*</span>" />
-					</span>
-				</div>
+				<elem:legend showLinkToAuthPage="true" />
 				<div class="generic_form">
 					<form:form method="post" modelAttribute="registerAccountForm">
 						<table>
