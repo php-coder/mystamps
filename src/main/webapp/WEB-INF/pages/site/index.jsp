@@ -1,4 +1,3 @@
-<%@ page pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 	<head>

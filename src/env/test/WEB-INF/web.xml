@@ -75,11 +75,13 @@
 		<url-pattern>/console/*</url-pattern>
 	</servlet-mapping>
 	
-	<!-- see http://javatalks.ru/sutra67480.php#67480 -->
+	<!-- see http://docs.oracle.com/javaee/5/tutorial/doc/bnajg.html -->
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/pages/*</url-pattern>
 			<include-prelude>/WEB-INF/segments/std.jspf</include-prelude>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+			<page-encoding>UTF-8</page-encoding>
 		</jsp-property-group>
 	</jsp-config>
 	
