@@ -10,7 +10,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<hibernate.version>3.6.10.Final</hibernate.version>
+		<hibernate.version>4.1.7.Final</hibernate.version>
 		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
 		<lombok.version>0.11.2</lombok.version>
 		<mysql.connector.version>5.1.21</mysql.connector.version>
@@ -507,20 +507,18 @@
 					</componentProperties>
 				</configuration>
 				<dependencies>
-					<!--
-						Use latest version of Hibernate. See:
-						http://stackoverflow.com/q/2734971
-					-->
+					<!-- Stick to 3.6.x version because plugin not works with Hibernate 4.x -->
 					<dependency>
 						<groupId>org.hibernate</groupId>
 						<artifactId>hibernate-core</artifactId>
-						<version>${hibernate.version}</version>
+						<version>3.6.10.Final</version>
 					</dependency>
 					<dependency>
 						<groupId>org.hibernate</groupId>
 						<artifactId>hibernate-entitymanager</artifactId>
-						<version>${hibernate.version}</version>
+						<version>3.6.10.Final</version>
 					</dependency>
+					<!-- Using last version of hibernate-validator -->
 					<dependency>
 						<groupId>javax.validation</groupId>
 						<artifactId>validation-api</artifactId>
