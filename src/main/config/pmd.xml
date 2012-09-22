@@ -9,7 +9,7 @@
 	
 	<!-- For rules description see http://pmd.sourceforge.net/rules/index.html -->
 	
-	<!--<rule ref="rulesets/jsp/basic.xml" />-->
+	<rule ref="rulesets/jsp/basic.xml" />
 	<rule ref="rulesets/java/design.xml">
 		<exclude name="ImmutableField" />
 	</rule>
@@ -69,9 +69,12 @@
 		</properties>
 	</rule>
 	
-	<!--<rule ref="rulesets/java/comments.xml" />-->
+	<rule ref="rulesets/java/comments.xml">
+		<exclude name="CommentSize" />
+	</rule>
+	
 	<rule ref="rulesets/java/typeresolution.xml" />
-	<!--<rule ref="rulesets/java/empty.xml" />-->
+	<rule ref="rulesets/java/empty.xml" />
 	<rule ref="rulesets/java/strings.xml" />
 	<rule ref="rulesets/java/codesize.xml" />
 	<rule ref="rulesets/java/braces.xml" />
@@ -92,7 +95,7 @@
 		</properties>
 	</rule>
 	
-	<!--<rule ref="rulesets/java/unnecessary.xml" />-->
+	<rule ref="rulesets/java/unnecessary.xml" />
 	<rule ref="rulesets/java/j2ee.xml" />
 	<rule ref="rulesets/java/javabeans.xml">
 		<exclude name="BeanMembersShouldSerialize" />
