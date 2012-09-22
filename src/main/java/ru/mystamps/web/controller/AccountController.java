@@ -21,6 +21,7 @@ package ru.mystamps.web.controller;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -40,30 +41,57 @@ import ru.mystamps.web.model.ActivateAccountForm.PasswordChecks;
 import ru.mystamps.web.model.ActivateAccountForm.PasswordConfirmationChecks;
 import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
+import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
 
 @Controller
-public class ActivateAccountController {
+public class AccountController {
 	
 	private final UserService userService;
 	
 	@Inject
-	ActivateAccountController(final UserService userService) {
+	AccountController(final UserService userService) {
 		this.userService = userService;
 	}
 	
-	@InitBinder
-	protected void initBinder(final WebDataBinder binder) {
+	@InitBinder("registerAccountForm")
+	protected void registrationInitBinder(final WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "email", new StringTrimmerEditor(false));
+	}
+	
+	@InitBinder("activateAccountForm")
+	protected void activationInitBinder(final WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
+	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.GET)
+	public RegisterAccountForm showRegistrationForm() {
+		return new RegisterAccountForm();
+	}
+	
+	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.POST)
+	public String processRegistrationForm(
+			@Valid final RegisterAccountForm form,
+			final BindingResult result) {
+		
+		if (result.hasErrors()) {
+			return null;
+		}
+		
+		userService.addRegistrationRequest(form.getEmail());
+		
+		return "redirect:" + Url.SUCCESSFUL_REGISTRATION_PAGE;
+	}
+	
 	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.GET)
-	public ActivateAccountForm showForm() {
+	public ActivateAccountForm showActivationForm() {
 		return new ActivateAccountForm();
 	}
 	
 	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY, method = RequestMethod.GET)
-	public String showForm(@PathVariable("key") final String activationKey, final Map model) {
+	public String showActivationFormWithKey(
+		@PathVariable("key") final String activationKey,
+		final Map model) {
 		
 		final ActivateAccountForm form = new ActivateAccountForm();
 		form.setActivationKey(activationKey);
@@ -73,7 +101,7 @@ public class ActivateAccountController {
 	}
 	
 	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.POST)
-	public String processInput(
+	public String processActivationForm(
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,
 			PasswordConfirmationChecks.class, ActKeyChecks.class, FormChecks.class

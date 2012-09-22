@@ -18,7 +18,10 @@
 
 package ru.mystamps.web.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
 import java.util.Calendar;
@@ -28,10 +31,12 @@ import java.util.Map;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
@@ -43,11 +48,10 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
-
+import ru.mystamps.web.util.CatalogUtils;
 
 @Controller
-@RequestMapping(Url.ADD_SERIES_PAGE)
-public class AddSeriesController {
+public class SeriesController {
 	
 	private static final Integer SINCE_YEAR     = 1840;
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
@@ -65,12 +69,12 @@ public class AddSeriesController {
 	}
 	
 	@Inject
-	AddSeriesController(final CountryService countryService, final SeriesService seriesService) {
+	SeriesController(final CountryService countryService, final SeriesService seriesService) {
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
 	
-	@InitBinder
+	@InitBinder("addSeriesForm")
 	protected void initBinder(final WebDataBinder binder) {
 		final StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
 		binder.registerCustomEditor(String.class, "michelNumbers", editor);
@@ -96,7 +100,7 @@ public class AddSeriesController {
 		return countries;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.GET)
 	public AddSeriesForm showForm() {
 		
 		final AddSeriesForm addSeriesForm = new AddSeriesForm();
@@ -105,7 +109,7 @@ public class AddSeriesController {
 		return addSeriesForm;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
 	public String processInput(
 		@Validated({Default.class, ImageChecks.class}) final AddSeriesForm form,
 		final BindingResult result) {
@@ -117,6 +121,27 @@ public class AddSeriesController {
 		final Series series = seriesService.add(form);
 		
 		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
+	}
+	
+	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
+	public String showInfo(
+		@PathVariable("id") final Integer id,
+		final Model model,
+		final HttpServletResponse response) throws IOException {
+		
+		final Series series = seriesService.findById(id);
+		if (series == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		model.addAttribute("series", series);
+		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
+		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
+		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert()));
+		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons()));
+		
+		return "series/info";
 	}
 	
 }
