@@ -15,4 +15,25 @@
 	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
+	<properties>
+		<lombok.version>0.11.2</lombok.version>
+	</properties>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
+		
+	</dependencies>
+	
 </project>
