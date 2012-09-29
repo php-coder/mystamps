@@ -21,6 +21,7 @@
 		<java.version>1.6</java.version>
 		
 		<compiler.plugin.version>2.4</compiler.plugin.version>
+		<surefire.plugin.version>2.12</surefire.plugin.version>
 	</properties>
 	
 	<build>
@@ -38,6 +39,16 @@
 						<showWarnings>true</showWarnings>
 						<verbose>true</verbose>
 						<debug>false</debug>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${surefire.plugin.version}</version>
+					<configuration>
+						<!-- Run junit tests only (see #SUREFIRE-377) -->
+						<testNGArtifactName>none:none</testNGArtifactName>
 					</configuration>
 				</plugin>
 				
