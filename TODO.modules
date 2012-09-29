@@ -1,0 +1,5 @@
+- ru.mystamps.web.entity -> ru.mystamps.web.domain
+
+- версии и зависимости модулей между собой
+- попробовать вынести зависимости в модули? (h2 with jetty)
+
