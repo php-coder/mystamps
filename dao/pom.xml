@@ -4,78 +4,37 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
+	<parent>
+		<groupId>ru.mystamps</groupId>
+		<artifactId>main</artifactId>
+		<version>0.2-SNAPSHOT</version>
+	</parent>
+	
 	<groupId>ru.mystamps</groupId>
-	<artifactId>main</artifactId>
+	<artifactId>dao</artifactId>
 	<version>0.2-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	
-	<modules>
-		<module>domain</module>
-		<module>dao</module>
-		<module>service</module>
-		<module>web</module>
-		<module>it</module>
-	</modules>
-	
-	<properties>
-		<java.version>1.6</java.version>
-		
-		<compiler.plugin.version>2.4</compiler.plugin.version>
-	</properties>
-	
-	<build>
-		<pluginManagement>
-			<plugins>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${compiler.plugin.version}</version>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-						<showDeprecation>true</showDeprecation>
-						<showWarnings>true</showWarnings>
-						<verbose>true</verbose>
-						<debug>false</debug>
-					</configuration>
-				</plugin>
-				
-			</plugins>
-		</pluginManagement>
-	</build>
+	<packaging>jar</packaging>
 	
 	<!-- XXX Rest of the code -->
 	
 	<properties>
-		<hibernate.version>4.1.9.Final</hibernate.version>
+		<hibernate.version>4.1.7.Final</hibernate.version>
 		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
-		<lombok.version>0.11.6</lombok.version>
+		<lombok.version>0.11.2</lombok.version>
 		<mysql.connector.version>5.1.21</mysql.connector.version>
-		<selenium.version>2.26.0</selenium.version>
-		<slf4j.version>1.7.2</slf4j.version>
-		<spring.version>3.2.0.RELEASE</spring.version>
-		<spring.data.version>1.2.0.RELEASE</spring.data.version>
-		<spring.security.version>3.1.3.RELEASE</spring.security.version>
+		<selenium.version>2.25.0</selenium.version>
+		<slf4j.version>1.7.0</slf4j.version>
+		<spring.version>3.2.0.M2</spring.version>
+		<spring.data.version>1.2.0.RC1</spring.data.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
 		<h2.version>1.3.168</h2.version>
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
-		<javax.inject.version>1</javax.inject.version>
-		<javax.persistence.version>1.0.1.Final</javax.persistence.version>
-		<servlet.api.version>3.0.20100224</servlet.api.version>
-		<jstl.version>1.2</jstl.version>
-		<commons.lang.version>3.1</commons.lang.version>
-		<commons.beanutils.version>1.8.3</commons.beanutils.version>
-		<commons.fileupload.version>1.2.2</commons.fileupload.version>
-		<commons.io.version>2.4</commons.io.version>
-		<commons.collections.version>3.2.1</commons.collections.version>
-		<commons.dbcp.version>1.4</commons.dbcp.version>
-		<tiles.version>2.2.2</tiles.version>
 		
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
-		<mockito.version>1.9.5</mockito.version>
-		<fest.assert.version>2.0M8</fest.assert.version>
-		<powermock.version>1.5</powermock.version>
+		<mockito.version>1.9.0</mockito.version>
+		<fest.assert.version>2.0M7</fest.assert.version>
+		<powermock.version>1.4.12</powermock.version>
 		<aspectj.version>1.7.0</aspectj.version>
 		
 		
@@ -84,22 +43,10 @@
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
 		
-		<compiler.plugin.version>2.4</compiler.plugin.version>
-		<resources.plugin.version>2.5</resources.plugin.version>
-		<war.plugin.version>2.2</war.plugin.version>
-		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<tomcat.plugin.version>1.1</tomcat.plugin.version>
-		<surefire.plugin.version>2.12</surefire.plugin.version>
-		<failsafe.plugin.version>2.12</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.5.v20120716</jetty.plugin.version>
-		<hibernate.plugin.version>3.0</hibernate.plugin.version>
-		<license.plugin.version>1.9.0</license.plugin.version>
-		<checkstyle.plugin.version>2.9.1</checkstyle.plugin.version>
 		<pmd.plugin.version>2.8-SNAPSHOT</pmd.plugin.version>
-		<cobertura.plugin.version>2.5.1</cobertura.plugin.version>
 		<javadoc.plugin.version>2.8.1</javadoc.plugin.version>
-		<enforcer.plugin.version>1.1.1</enforcer.plugin.version>
-		<antrun.plugin.version>1.7</antrun.plugin.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -110,14 +57,14 @@
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>${servlet.api.version}</version>
+			<version>3.0.20100224</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
+			<version>1.2</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -125,7 +72,7 @@
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
-			<version>${javax.inject.version}</version>
+			<version>1</version>
 		</dependency>
 		
 		<dependency>
@@ -137,7 +84,7 @@
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>${javax.persistence.version}</version>
+			<version>1.0.1.Final</version>
 		</dependency>
 		
 		<dependency>
@@ -220,13 +167,13 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>${commons.lang.version}</version>
+			<version>3.1</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>${commons.beanutils.version}</version>
+			<version>1.8.3</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -239,29 +186,21 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>${commons.fileupload.version}</version>
+			<version>1.2.2</version>
 		</dependency>
 		
 		<!-- Dependency of commons-fileupload -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
+			<version>2.4</version>
 		</dependency>
 		
 		<!-- Needed for CollectionUtils/PredicateUtils -->
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>${commons.collections.version}</version>
-		</dependency>
-		
-		<!-- For Tiles template engine -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>${tiles.version}</version>
-			<scope>runtime</scope>
+			<version>3.2.1</version>
 		</dependency>
 		
 		<dependency>
@@ -395,7 +334,7 @@
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>${commons.dbcp.version}</version>
+			<version>1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -427,7 +366,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.plugin.version}</version>
+				<version>2.2</version>
 				<configuration>
 					<webXml>${env.dir}/../web.xml</webXml>
 				</configuration>
@@ -436,10 +375,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
-				<version>${native2ascii.plugin.version}</version>
-				<configuration>
-					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
-				</configuration>
+				<version>1.0-beta-1</version>
 				<executions>
 					<execution>
 						<goals>
@@ -463,7 +399,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire.plugin.version}</version>
+				<version>2.12</version>
 				<configuration>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
@@ -473,7 +409,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${failsafe.plugin.version}</version>
+				<version>2.12</version>
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
@@ -537,12 +473,30 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>${hibernate.plugin.version}</version>
+				<version>2.2</version>
 				<configuration>
-					<hibernatetool destdir="${env.dir}">
-						<jpaconfiguration propertyfile="${env.dir}/spring/database.properties" />
-						<hbm2ddl export="false" format="true" haltonerror="true" outputfilename="${ddl.file}" />
-					</hibernatetool>
+					<components>
+						<component>
+							<name>hbm2ddl</name>
+							<implementation>jpaconfiguration</implementation>
+							<outputDirectory>${env.dir}</outputDirectory>
+						</component>
+					</components>
+					<componentProperties>
+						<console>false</console>
+						<format>true</format>
+						<jdk5>true</jdk5>
+						<propertyfile>
+							${env.dir}/spring/database.properties
+						</propertyfile>
+						<outputfilename>${ddl.file}</outputfilename>
+						
+						<!--
+							Don't try to connect to database. See:
+							http://www.mail-archive.com/users@maven.apache.org/msg61394.html
+						-->
+						<export>false</export>
+					</componentProperties>
 				</configuration>
 				<dependencies>
 					<!-- Stick to 3.6.x version because plugin not works with Hibernate 4.x -->
@@ -556,13 +510,30 @@
 						<artifactId>hibernate-entitymanager</artifactId>
 						<version>3.6.10.Final</version>
 					</dependency>
+					<!-- Using last version of hibernate-validator -->
+					<dependency>
+						<groupId>javax.validation</groupId>
+						<artifactId>validation-api</artifactId>
+						<version>${javax.validation.version}</version>
+					</dependency>
+					<!--
+						Explicitly add dependency to jboss-logging (which used by
+						hibernate-validator since 4.3.0) to prevent following error:
+						"Unable to get the default Bean Validation factory: InvocationTargetException:
+						org.jboss.logging.Logger.getMessageLogger(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object"
+					-->
+					<dependency>
+						<groupId>org.jboss.logging</groupId>
+						<artifactId>jboss-logging</artifactId>
+						<version>3.1.1.GA</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 			
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>${license.plugin.version}</version>
+				<version>1.9.0</version>
 				<configuration>
 					<basedir>src</basedir>
 					<header>src/main/config/license_header.txt</header>
@@ -584,7 +555,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin.version}</version>
+				<version>2.9.1</version>
 				<configuration>
 					<enableRSS>false</enableRSS>
 					<consoleOutput>true</consoleOutput>
@@ -622,12 +593,28 @@
 						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
 					</rulesets>
 				</configuration>
+				<executions>
+					<execution>
+						<id>run-pmd</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>run-cpd</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>cpd-check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura.plugin.version}</version>
+				<version>2.5.1</version>
 				<configuration>
 					<check>
 						<regexes>
@@ -669,29 +656,6 @@
 				</configuration>
 			</plugin>
 			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${enforcer.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>enforce-banned-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<bannedDependencies>
-									<excludes>
-										<exclude>commons-logging</exclude>
-									</excludes>
-								</bannedDependencies>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			
 		</plugins>
 		
 	</build>
@@ -702,7 +666,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura.plugin.version}</version>
+				<version>2.5.1</version>
 			</plugin>
 			
 		</plugins>
@@ -741,6 +705,25 @@
 		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
 		<url>https://github.com/php-coder/mystamps</url>
 	</scm>
+	
+	<repositories>
+		
+		<repository>
+			<id>SpringSource Milestone Repository</id>
+			<url>http://repo.springsource.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+		
+	</repositories>
 	
 	<pluginRepositories>
 		<pluginRepository>
@@ -787,7 +770,7 @@
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-dev-resources</id>
@@ -830,7 +813,7 @@
 					
 					<plugin>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${antrun.plugin.version}</version>
+						<version>1.7</version>
 						<executions>
 							<execution>
 								<id>copy-test-sql-data</id>
@@ -858,7 +841,7 @@
 					
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
+						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-test-resources</id>
