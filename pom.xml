@@ -5,9 +5,46 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>ru.mystamps</groupId>
-	<artifactId>mystamps</artifactId>
+	<artifactId>main</artifactId>
 	<version>0.2-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>domain</module>
+		<module>service</module>
+		<module>web</module>
+		<module>it</module>
+	</modules>
+	
+	<properties>
+		<java.version>1.6</java.version>
+		
+		<compiler.plugin.version>2.4</compiler.plugin.version>
+	</properties>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler.plugin.version}</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<verbose>true</verbose>
+						<debug>false</debug>
+					</configuration>
+				</plugin>
+				
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<!-- XXX Rest of the code -->
 	
 	<properties>
 		<hibernate.version>4.1.9.Final</hibernate.version>
@@ -40,7 +77,6 @@
 		<powermock.version>1.5</powermock.version>
 		<aspectj.version>1.7.0</aspectj.version>
 		
-		<java.version>1.6</java.version>
 		
 		<env.root.dir>src/env</env.root.dir>
 		
@@ -386,20 +422,6 @@
 		<finalName>${project.artifactId}</finalName>
 		
 		<plugins>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.plugin.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<verbose>true</verbose>
-					<debug>false</debug>
-				</configuration>
-			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
