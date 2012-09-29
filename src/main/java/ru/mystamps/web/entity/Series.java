@@ -38,8 +38,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.validation.ValidationRules;
-
 @Entity
 @Table(name = "series")
 @Getter
@@ -48,7 +46,7 @@ import ru.mystamps.web.validation.ValidationRules;
 public class Series {
 	
 	public static final int IMAGE_URL_LENGTH = 255;
-	public static final int COMMENT_LENGTH   = ValidationRules.MAX_SERIES_COMMENT_LENGTH;
+	public static final int COMMENT_LENGTH   = 255;
 	
 	@Id
 	@GeneratedValue
