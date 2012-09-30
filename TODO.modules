@@ -2,6 +2,9 @@
 - data-commons в compile зависимости (остальное в runtime?)
 - подумать как убрать из service MultipartFile
 - ImageService: возвращать id, вместо Url
+- интерфейсы/классы для передачи данных в сервисы (ru.mystamps.web.service.dto)
+- классы для передачи данных в контроллеры (ru.mystamps.web.controller.dto)
+- CustomUserDetails: в domain или в service?
 
 - версии и зависимости модулей между собой
 - попробовать вынести зависимости в модули? (h2 with jetty)
