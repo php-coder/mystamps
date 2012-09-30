@@ -15,4 +15,47 @@
 	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
+	<properties>
+		<domain.version>0.2-SNAPSHOT</domain.version>
+		
+		<spring.data.commons.version>1.4.0.RC1</spring.data.commons.version>
+	</properties>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>ru.mystamps</groupId>
+			<artifactId>domain</artifactId>
+			<version>${domain.version}</version>
+		</dependency>
+		
+		<!-- For CrudRepository interface -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons-core</artifactId>
+			<version>${spring.data.commons.version}</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<repositories>
+		
+		<!-- For latest spring-data releases -->
+		<repository>
+			<id>SpringSource Milestone Repository</id>
+			<url>http://repo.springsource.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+		
+	</repositories>
+	
 </project>
