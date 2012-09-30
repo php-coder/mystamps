@@ -1,4 +1,5 @@
 - ru.mystamps.web.entity -> ru.mystamps.web.domain
+- data-commons в compile зависимости (остальное в runtime?)
 
 - версии и зависимости модулей между собой
 - попробовать вынести зависимости в модули? (h2 with jetty)
