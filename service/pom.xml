@@ -14,5 +14,99 @@
 	<artifactId>service</artifactId>
 	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
+
+	<properties>
+		<domain.version>0.2-SNAPSHOT</domain.version>
+		<dao.version>0.2-SNAPSHOT</dao.version>
+		
+		<javax.inject.version>1</javax.inject.version>
+		<slf4j.version>1.7.0</slf4j.version>
+		<commons.lang.version>3.1</commons.lang.version>
+		<spring.version>3.2.0.M2</spring.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+	</properties>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>ru.mystamps</groupId>
+			<artifactId>domain</artifactId>
+			<version>${domain.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ru.mystamps</groupId>
+			<artifactId>dao</artifactId>
+			<version>${dao.version}</version>
+		</dependency>
+		
+		<!-- For @Inject annotation -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		
+		<!-- For StringUtils, RandomStringUtils, DateUtils, Validate classes -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+		
+		<!-- For @Service and @Scheduled annotations -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- For @Transactional annotation -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- For MultipartFile interface -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- For @PreAuthorize, SecurityContext, Authentication, PasswordEncoder etc -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<repositories>
+		
+		<!-- For latest Spring releases -->
+		<repository>
+			<id>SpringSource Milestone Repository</id>
+			<url>http://repo.springsource.org/milestone</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+		
+	</repositories>
 	
 </project>
