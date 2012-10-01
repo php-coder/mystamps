@@ -18,6 +18,8 @@
 
 package ru.mystamps.web;
 
+import ru.mystamps.web.service.ImageService;
+
 /**
  * Holds path to site and all URLs.
  *
@@ -50,7 +52,7 @@ public final class Url {
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
 	
-	public static final String GET_IMAGE_PAGE        = "/image/{id}";
+	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
 	
 	// see also error-page definitions at src/env/{dev,test}/WEB-INF/web.xml
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";

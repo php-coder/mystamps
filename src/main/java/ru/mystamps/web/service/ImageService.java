@@ -31,10 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.Url;
 
 @Service
 public class ImageService {
+	public static final String GET_IMAGE_PAGE = "/image/{id}";
 	
 	@Inject
 	private ImageDao imageDao;
@@ -65,7 +65,7 @@ public class ImageService {
 		
 		final Image entity = imageDao.save(image);
 		
-		return Url.GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
+		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
 	}
 	
 	@Transactional(readOnly = true)

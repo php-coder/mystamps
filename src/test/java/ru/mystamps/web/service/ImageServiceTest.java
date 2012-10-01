@@ -43,7 +43,6 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.Url;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageServiceTest {
@@ -148,7 +147,8 @@ public class ImageServiceTest {
 	@Test
 	public void saveShouldReturnUrlWithImage() {
 		final Integer expectedId = 10;
-		final String expectedUrl = Url.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedId));
+		final String expectedUrl =
+			ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedId));
 		when(image.getId()).thenReturn(expectedId);
 		when(imageDao.save(any(Image.class))).thenReturn(image);
 		
