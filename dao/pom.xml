@@ -24,7 +24,7 @@
 	<dependencies>
 		
 		<dependency>
-			<groupId>ru.mystamps</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>domain</artifactId>
 			<version>${domain.version}</version>
 		</dependency>
