@@ -44,7 +44,7 @@ import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
-import ru.mystamps.web.model.AddSeriesForm;
+import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.util.CatalogUtils;
 
 @Service
@@ -76,72 +76,72 @@ public class SeriesService {
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Series add(final AddSeriesForm form) {
-		Validate.isTrue(form != null, "Series info must be non null");
-		Validate.isTrue(form.getQuantity() != null, "Stamps quantity must be non null");
+	public Series add(final AddSeriesDto dto) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
-			form.getPerforated() != null,
+			dto.getPerforated() != null,
 			"Stamps perforated property must be non null"
 		);
 		
 		final Series series = new Series();
 		
-		if (form.getCountry() != null) {
-			series.setCountry(countryDao.findOne(form.getCountry()));
+		if (dto.getCountry() != null) {
+			series.setCountry(countryDao.findOne(dto.getCountry()));
 		}
 		
-		if (form.getYear() != null) {
+		if (dto.getYear() != null) {
 			final Calendar releaseDate = GregorianCalendar.getInstance();
 			releaseDate.clear();
-			releaseDate.set(form.getYear(), JANUARY, 1);
+			releaseDate.set(dto.getYear(), JANUARY, 1);
 			
 			series.setReleasedAt(releaseDate.getTime());
 		}
 		
-		series.setQuantity(form.getQuantity());
-		series.setPerforated(form.getPerforated());
+		series.setQuantity(dto.getQuantity());
+		series.setPerforated(dto.getPerforated());
 		
 		final Set<MichelCatalog> michelNumbers =
-			CatalogUtils.fromString(form.getMichelNumbers(), MichelCatalog.class);
+			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
 		if (!michelNumbers.isEmpty()) {
 			michelCatalogDao.save(michelNumbers);
 			series.setMichel(michelNumbers);
 		}
 		
 		final Set<ScottCatalog> scottNumbers =
-			CatalogUtils.fromString(form.getScottNumbers(), ScottCatalog.class);
+			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
 		if (!scottNumbers.isEmpty()) {
 			scottCatalogDao.save(scottNumbers);
 			series.setScott(scottNumbers);
 		}
 		
 		final Set<YvertCatalog> yvertNumbers =
-			CatalogUtils.fromString(form.getYvertNumbers(), YvertCatalog.class);
+			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
 		if (!yvertNumbers.isEmpty()) {
 			yvertCatalogDao.save(yvertNumbers);
 			series.setYvert(yvertNumbers);
 		}
 		
 		final Set<GibbonsCatalog> gibbonsNumbers =
-			CatalogUtils.fromString(form.getGibbonsNumbers(), GibbonsCatalog.class);
+			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
 		if (!gibbonsNumbers.isEmpty()) {
 			gibbonsCatalogDao.save(gibbonsNumbers);
 			series.setGibbons(gibbonsNumbers);
 		}
 		
-		final String imageUrl = imageService.save(form.getImage());
+		final String imageUrl = imageService.save(dto.getImage());
 		Validate.validState(imageUrl != null, "Image url must be non null");
 		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
 		
 		series.setImageUrl(imageUrl);
 		
-		if (form.getComment() != null) {
+		if (dto.getComment() != null) {
 			Validate.isTrue(
-				!form.getComment().trim().isEmpty(),
+				!dto.getComment().trim().isEmpty(),
 				"Comment must be non empty"
 			);
 			
-			series.setComment(form.getComment());
+			series.setComment(dto.getComment());
 		}
 		
 		final Date now = new Date();
