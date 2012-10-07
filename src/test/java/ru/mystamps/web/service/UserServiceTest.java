@@ -107,6 +107,8 @@ public class UserServiceTest {
 	
 	@Before
 	public void setUp() {
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
+		
 		registrationForm = new RegisterAccountForm();
 		registrationForm.setEmail(TEST_EMAIL);
 		
@@ -225,7 +227,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldCreateUser() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -236,7 +237,6 @@ public class UserServiceTest {
 	public void registerUserShouldDeleteRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -263,7 +263,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassNameToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -275,7 +274,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		activationForm.setName(null);
 		
 		service.registerUser(activationForm);
@@ -288,7 +286,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		activationForm.setName("");
 		
 		service.registerUser(activationForm);
@@ -302,7 +299,6 @@ public class UserServiceTest {
 	public void registerUserShouldUseEmailFromRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -315,7 +311,6 @@ public class UserServiceTest {
 	public void registerUserShouldUseRegistrationDateFromRegistrationRequest() {
 		final UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -327,7 +322,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldGenerateSalt() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -341,7 +335,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldGenerateUniqueSalt() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		verify(userDao).save(userCaptor.capture());
@@ -395,7 +388,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldPassLoginToDao() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
@@ -407,7 +399,6 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldAssignActivatedAtToCurrentDate() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
 		service.registerUser(activationForm);
 		
