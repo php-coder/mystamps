@@ -43,6 +43,7 @@ import static org.mockito.Mockito.when;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
+import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -63,9 +64,14 @@ public class CountryServiceTest {
 	@InjectMocks
 	private CountryService service = new CountryService();
 	
+	private AddCountryForm form;
+	
 	@Before
 	public void setUp() {
 		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
+		
+		form = new AddCountryForm();
+		form.setName(TEST_COUNTRY_NAME);
 	}
 	
 	//
@@ -73,8 +79,15 @@ public class CountryServiceTest {
 	//
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void addShouldThrowExceptionWhenCountryNameIsNull() {
+	public void addShouldThrowExceptionWhenDtoIsNull() {
 		service.add(null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionWhenCountryNameIsNull() {
+		form.setName(null);
+		
+		service.add(form);
 	}
 	
 	@Test
@@ -82,23 +95,26 @@ public class CountryServiceTest {
 		final Country expected = getCountry();
 		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
-		final Country actual = service.add(TEST_COUNTRY_NAME);
+		final Country actual = service.add(form);
 		
 		assertThat(actual).isEqualTo(expected);
 	}
 	
 	@Test
 	public void addShouldPassCountryNameToDao() {
-		service.add(TEST_COUNTRY_NAME);
+		final String expectedCountryName = "Italy";
+		form.setName(expectedCountryName);
+		
+		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
-		assertThat(countryCaptor.getValue().getName()).isEqualTo(TEST_COUNTRY_NAME);
+		assertThat(countryCaptor.getValue().getName()).isEqualTo(expectedCountryName);
 	}
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentDate() {
-		service.add(TEST_COUNTRY_NAME);
+		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -107,7 +123,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentDate() {
-		service.add(TEST_COUNTRY_NAME);
+		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -118,7 +134,7 @@ public class CountryServiceTest {
 	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
 		when(userService.getCurrentUser()).thenReturn(null);
 		
-		service.add(TEST_COUNTRY_NAME);
+		service.add(form);
 	}
 	
 	@Test
@@ -126,7 +142,7 @@ public class CountryServiceTest {
 		final User expectedUser = UserServiceTest.getValidUser();
 		when(userService.getCurrentUser()).thenReturn(expectedUser);
 		
-		service.add(TEST_COUNTRY_NAME);
+		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		assertThat(countryCaptor.getValue().getCreatedBy()).isEqualTo(expectedUser);
@@ -137,7 +153,7 @@ public class CountryServiceTest {
 		final User expectedUser = UserServiceTest.getValidUser();
 		when(userService.getCurrentUser()).thenReturn(expectedUser);
 		
-		service.add(TEST_COUNTRY_NAME);
+		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		assertThat(countryCaptor.getValue().getUpdatedBy()).isEqualTo(expectedUser);

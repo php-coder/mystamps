@@ -24,6 +24,7 @@ import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName;
 
 import lombok.Getter;
@@ -44,7 +45,7 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP2;
 	AddCountryForm.Level4Checks.class,
 	AddCountryForm.Level5Checks.class
 })
-public class AddCountryForm {
+public class AddCountryForm implements AddCountryDto {
 	
 	@NotEmpty(groups = Level1Checks.class)
 	@Size.List({

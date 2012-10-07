@@ -30,6 +30,7 @@ import org.apache.commons.lang3.Validate;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
+import ru.mystamps.web.service.dto.AddCountryDto;
 
 @Service
 public class CountryService {
@@ -42,11 +43,12 @@ public class CountryService {
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Country add(final String countryName) {
-		Validate.isTrue(countryName != null, "Country name should be non null");
+	public Country add(final AddCountryDto dto) {
+		Validate.isTrue(dto != null, "DTO should be non null");
+		Validate.isTrue(dto.getName() != null, "Country name should be non null");
 		
 		final Country country = new Country();
-		country.setName(countryName);
+		country.setName(dto.getName());
 		
 		final Date now = new Date();
 		country.setCreatedAt(now);

@@ -66,7 +66,7 @@ public class CountryController {
 			return null;
 		}
 		
-		final Country country = countryService.add(form.getName());
+		final Country country = countryService.add(form);
 		
 		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
 	}
