@@ -26,6 +26,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.GrantedAuthority;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -54,6 +55,7 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.tests.fest.DateAssert;
 
@@ -99,19 +101,32 @@ public class UserServiceTest {
 	@InjectMocks
 	private UserService service = new UserService();
 	
+	private RegisterAccountForm registrationForm;
+	
+	@Before
+	public void setUp() {
+		registrationForm = new RegisterAccountForm();
+		registrationForm.setEmail(TEST_EMAIL);
+	}
+	
 	//
 	// Tests for addRegistrationRequest()
 	//
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void addRegistrationRequestShouldThrowExceptionWhenDtoIsNull() {
+		service.addRegistrationRequest(null);
+	}
+	
 	@Test
 	public void addRegistrationRequestShouldCallDao() {
-		service.addRegistrationRequest(TEST_EMAIL);
+		service.addRegistrationRequest(registrationForm);
 		verify(usersActivationDao).save(any(UsersActivation.class));
 	}
 	
 	@Test
 	public void addRegistrationRequestShouldGenerateActivationKey() {
-		service.addRegistrationRequest(TEST_EMAIL);
+		service.addRegistrationRequest(registrationForm);
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		
@@ -124,11 +139,11 @@ public class UserServiceTest {
 	
 	@Test
 	public void addRegistrationRequestShouldGenerateUniqueActivationKey() {
-		service.addRegistrationRequest(TEST_EMAIL);
+		service.addRegistrationRequest(registrationForm);
 		verify(usersActivationDao).save(activationCaptor.capture());
 		final String firstActivationKey = activationCaptor.getValue().getActivationKey();
 		
-		service.addRegistrationRequest(TEST_EMAIL);
+		service.addRegistrationRequest(registrationForm);
 		verify(usersActivationDao, atLeastOnce()).save(activationCaptor.capture());
 		final String secondActivationKey = activationCaptor.getValue().getActivationKey();
 		
@@ -137,21 +152,26 @@ public class UserServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addRegistrationRequestShouldThrowExceptionWhenEmailIsNull() {
-		service.addRegistrationRequest(null);
+		registrationForm.setEmail(null);
+		
+		service.addRegistrationRequest(registrationForm);
 	}
 	
 	@Test
 	public void addRegistrationRequestShouldPassEmailToDao() {
-		service.addRegistrationRequest(TEST_EMAIL);
+		final String expectedEmail = "somename@example.org";
+		registrationForm.setEmail(expectedEmail);
+		
+		service.addRegistrationRequest(registrationForm);
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		
-		assertThat(activationCaptor.getValue().getEmail()).isEqualTo(TEST_EMAIL);
+		assertThat(activationCaptor.getValue().getEmail()).isEqualTo(expectedEmail);
 	}
 	
 	@Test
 	public void addRegistrationRequestShouldAssignCreatedAtToCurrentDate() {
-		service.addRegistrationRequest(TEST_EMAIL);
+		service.addRegistrationRequest(registrationForm);
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		

@@ -41,6 +41,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
+import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Service
@@ -58,13 +59,14 @@ public class UserService {
 	private PasswordEncoder encoder;
 	
 	@Transactional
-	public void addRegistrationRequest(final String email) {
-		Validate.isTrue(email != null, "Email should be non null");
+	public void addRegistrationRequest(final RegisterAccountDto dto) {
+		Validate.isTrue(dto != null, "DTO should be non null");
+		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
 		
 		final UsersActivation activation = new UsersActivation();
 		
 		activation.setActivationKey(generateActivationKey());
-		activation.setEmail(email);
+		activation.setEmail(dto.getEmail());
 		activation.setCreatedAt(new Date());
 		usersActivation.save(activation);
 	}

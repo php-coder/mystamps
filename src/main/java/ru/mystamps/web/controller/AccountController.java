@@ -78,7 +78,7 @@ public class AccountController {
 			return null;
 		}
 		
-		userService.addRegistrationRequest(form.getEmail());
+		userService.addRegistrationRequest(form);
 		
 		return "redirect:" + Url.SUCCESSFUL_REGISTRATION_PAGE;
 	}

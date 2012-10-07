@@ -23,6 +23,7 @@ import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.validation.jsr303.Email;
 
 import lombok.Getter;
@@ -38,7 +39,7 @@ import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 	RegisterAccountForm.Level2Checks.class,
 	RegisterAccountForm.Level3Checks.class
 })
-public class RegisterAccountForm {
+public class RegisterAccountForm implements RegisterAccountDto {
 	
 	@NotEmpty(groups = Level1Checks.class)
 	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Level2Checks.class)
