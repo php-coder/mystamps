@@ -41,6 +41,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
+import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
@@ -81,22 +82,23 @@ public class UserService {
 	}
 	
 	@Transactional
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	public void registerUser(final String login, final String password,
-			final String name, final String activationKey) {
+	public void registerUser(final ActivateAccountDto dto) {
+		Validate.isTrue(dto != null, "DTO should be non null");
+		Validate.isTrue(dto.getLogin() != null, "Login should be non null");
+		Validate.isTrue(dto.getPassword() != null, "Password should be non null");
+		Validate.isTrue(dto.getActivationKey() != null, "Activation key should be non null");
 		
-		Validate.isTrue(login != null, "Login should be non null");
-		Validate.isTrue(password != null, "Password should be non null");
-		Validate.isTrue(activationKey != null, "Activation key should be non null");
+		final String login = dto.getLogin();
 		
 		// use login as name if name is not provided
 		final String finalName; // NOPMD: SF #3557789
-		if (StringUtils.isEmpty(name)) {
+		if (StringUtils.isEmpty(dto.getName())) {
 			finalName = login;
 		} else {
-			finalName = name;
+			finalName = dto.getName();
 		}
 		
+		final String activationKey = dto.getActivationKey();
 		final UsersActivation activation =
 			usersActivation.findByActivationKey(activationKey);
 		if (activation == null) {
@@ -109,7 +111,7 @@ public class UserService {
 		
 		final String salt = generateSalt();
 		
-		final String hash = encoder.encodePassword(password, salt);
+		final String hash = encoder.encodePassword(dto.getPassword(), salt);
 		Validate.validState(hash != null, "Generated hash must be non null");
 		
 		final Date now = new Date();

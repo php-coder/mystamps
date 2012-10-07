@@ -24,6 +24,7 @@ import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.validation.jsr303.ExistingActivationKey;
 import ru.mystamps.web.validation.jsr303.FieldsMatch;
 import ru.mystamps.web.validation.jsr303.FieldsMismatch;
@@ -47,7 +48,7 @@ import lombok.Setter;
 	message = "{password.mismatch}",
 	groups = ActivateAccountForm.FormChecks.class
 )
-public class ActivateAccountForm {
+public class ActivateAccountForm implements ActivateAccountDto {
 	
 	@NotEmpty(groups = Login1Checks.class)
 	@Size.List({

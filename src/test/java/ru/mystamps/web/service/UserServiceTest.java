@@ -55,6 +55,7 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.tests.fest.DateAssert;
@@ -101,12 +102,19 @@ public class UserServiceTest {
 	@InjectMocks
 	private UserService service = new UserService();
 	
+	private ActivateAccountForm activationForm;
 	private RegisterAccountForm registrationForm;
 	
 	@Before
 	public void setUp() {
 		registrationForm = new RegisterAccountForm();
 		registrationForm.setEmail(TEST_EMAIL);
+		
+		activationForm = new ActivateAccountForm();
+		activationForm.setLogin(TEST_LOGIN);
+		activationForm.setPassword(TEST_PASSWORD);
+		activationForm.setName(TEST_NAME);
+		activationForm.setActivationKey(TEST_ACTIVATION_KEY);
 	}
 	
 	//
@@ -209,12 +217,17 @@ public class UserServiceTest {
 	// Tests for registerUser()
 	//
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void registerUserShouldThrowExceptionWhenDtoIsNull() {
+		service.registerUser(null);
+	}
+	
 	@Test
 	public void registerUserShouldCreateUser() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(any(User.class));
 	}
@@ -225,21 +238,23 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(usersActivationDao).delete(activation);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenActivationKeyIsNull() {
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, null);
+		activationForm.setActivationKey(null);
+		
+		service.registerUser(activationForm);
 	}
 	
 	@Test
 	public void registerUserShouldDoNothingWhenRegistrationRequestNotFound() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(null);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao, never()).save(any(User.class));
 		verify(usersActivationDao, never()).delete(any(UsersActivation.class));
@@ -250,7 +265,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -261,8 +276,9 @@ public class UserServiceTest {
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
+		activationForm.setName(null);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, null, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -273,8 +289,9 @@ public class UserServiceTest {
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
+		activationForm.setName("");
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, "", TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -287,7 +304,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -300,7 +317,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -312,7 +329,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -326,11 +343,11 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		verify(userDao).save(userCaptor.capture());
 		final String firstSalt = userCaptor.getValue().getSalt();
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		verify(userDao, atLeastOnce()).save(userCaptor.capture());
 		final String secondSalt = userCaptor.getValue().getSalt();
 		
@@ -339,7 +356,9 @@ public class UserServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenPasswordIsNull() {
-		service.registerUser(TEST_LOGIN, null, TEST_NAME, TEST_ACTIVATION_KEY);
+		activationForm.setPassword(null);
+		
+		service.registerUser(activationForm);
 	}
 	
 	@Test
@@ -349,7 +368,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		verify(encoder).encodePassword(eq(TEST_PASSWORD), anyString());
@@ -363,12 +382,14 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(null);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void registerUserShouldThrowExceptionWhenLoginIsNull() {
-		service.registerUser(null, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		activationForm.setLogin(null);
+		
+		service.registerUser(activationForm);
 	}
 	
 	@Test
@@ -376,7 +397,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
@@ -388,7 +409,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		service.registerUser(TEST_LOGIN, TEST_PASSWORD, TEST_NAME, TEST_ACTIVATION_KEY);
+		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		

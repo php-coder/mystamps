@@ -111,12 +111,7 @@ public class AccountController {
 			return null;
 		}
 		
-		userService.registerUser(
-			form.getLogin(),
-			form.getPassword(),
-			form.getName(),
-			form.getActivationKey()
-		);
+		userService.registerUser(form);
 		
 		return "redirect:" + Url.SUCCESSFUL_ACTIVATION_PAGE;
 	}
