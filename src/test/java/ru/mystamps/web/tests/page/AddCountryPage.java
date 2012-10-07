@@ -37,7 +37,7 @@ public class AddCountryPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("country")).withLabel(tr("t_country"))
+				required(inputField("name")).withLabel(tr("t_country"))
 			)
 			.and()
 			.with(submitButton(tr("t_add")))
@@ -53,7 +53,7 @@ public class AddCountryPage extends AbstractPageWithForm {
 	
 	private void fillName(final String name) {
 		if (name != null) {
-			fillField("country", name);
+			fillField("name", name);
 		}
 	}
 	

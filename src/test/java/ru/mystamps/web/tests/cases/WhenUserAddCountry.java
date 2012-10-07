@@ -82,7 +82,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry("ee");
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("value.too-short", COUNTRY_NAME_MIN_LENGTH));
 	}
 	
@@ -91,7 +91,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry(StringUtils.repeat("e", COUNTRY_NAME_MAX_LENGTH + 1));
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("value.too-long", COUNTRY_NAME_MAX_LENGTH));
 	}
 	
@@ -100,7 +100,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry(validCountryName);
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCountryName.message"));
 	}
 	
@@ -108,7 +108,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	public void countryNameWithAllowedCharactersShouldBeAccepted() {
 		page.addCountry("Valid-Name Country");
 		
-		assertThat(page).field("country").hasNoError();
+		assertThat(page).field("name").hasNoError();
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -116,7 +116,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry("S0m3+CountryN_ame");
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("country-name.invalid"));
 	}
 	
@@ -125,7 +125,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry("-test");
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("country-name.hyphen"));
 	}
 	
@@ -134,7 +134,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		page.addCountry("test-");
 		
 		assertThat(page)
-			.field("country")
+			.field("name")
 			.hasError(tr("country-name.hyphen"));
 	}
 	
@@ -142,7 +142,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	public void countryNameShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.addCountry(" t3st ");
 		
-		assertThat(page).field("country").hasValue("t3st");
+		assertThat(page).field("name").hasValue("t3st");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })

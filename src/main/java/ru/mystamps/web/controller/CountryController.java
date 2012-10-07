@@ -51,7 +51,7 @@ public class CountryController {
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(final WebDataBinder binder) {
-		binder.registerCustomEditor(String.class, "country", new StringTrimmerEditor(false));
+		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
 	}
 	
 	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.GET)
@@ -66,7 +66,7 @@ public class CountryController {
 			return null;
 		}
 		
-		final Country country = countryService.add(form.getCountry());
+		final Country country = countryService.add(form.getName());
 		
 		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
 	}

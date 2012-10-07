@@ -18,18 +18,18 @@
 					<table>
 						<tr>
 							<td>
-								<form:label path="country">
+								<form:label path="name">
 									<spring:message code="t_country" />
 								</form:label>
 							</td>
 							<td>
-								<span id="country.required" class="required_field">*</span>
+								<span id="name.required" class="required_field">*</span>
 							</td>
 							<td>
-								<form:input path="country" required="required" autofocus="autofocus" />
+								<form:input path="name" required="required" autofocus="autofocus" />
 							</td>
 							<td>
-								<form:errors path="country" cssClass="error" />
+								<form:errors path="name" cssClass="error" />
 							</td>
 						</tr>
 						<tr>

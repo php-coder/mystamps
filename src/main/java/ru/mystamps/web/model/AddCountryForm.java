@@ -72,7 +72,7 @@ public class AddCountryForm {
 		)
 	})
 	@UniqueCountryName(groups = Level5Checks.class)
-	private String country;
+	private String name;
 	
 	
 	public interface Level1Checks {
