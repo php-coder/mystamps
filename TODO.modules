@@ -1,4 +1,5 @@
 CRITICAL:
+- service: тесты должны компилироваться (реализовать аналог *Form классов)
 
 BACKPORT
 - data-commons в compile зависимости (остальное в runtime?)
