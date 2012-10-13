@@ -24,6 +24,11 @@
 		<commons.lang.version>3.1</commons.lang.version>
 		<spring.version>3.2.0.M2</spring.version>
 		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		
+		<junit.version>4.10</junit.version>
+		<mockito.version>1.9.0</mockito.version>
+		<fest.assert.version>2.0M7</fest.assert.version>
+		<powermock.version>1.4.12</powermock.version>
 	</properties>
 	
 	<dependencies>
@@ -85,6 +90,44 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<!-- Dependencies for tests -->
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert-core</artifactId>
+			<version>${fest.assert.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- For @PowerMockRule -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4-rule-agent</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 	</dependencies>
