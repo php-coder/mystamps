@@ -1,5 +1,4 @@
 CRITICAL:
-- CustomUserDetails: в domain или в service?
 
 BACKPORT
 - data-commons в compile зависимости (остальное в runtime?)
@@ -11,6 +10,7 @@ TODO
 - классы для передачи данных в контроллеры (ru.mystamps.web.controller.dto)
 - версии и зависимости модулей между собой
 - ImageService: возвращать id, вместо Url
+- отвязать хэширование пароля?
 
 TRY
 - попробовать вынести зависимости в модули? (h2 with jetty)
