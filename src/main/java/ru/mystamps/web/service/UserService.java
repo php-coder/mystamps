@@ -153,7 +153,7 @@ public class UserService {
 	 * Generate password salt.
 	 * @return string which contains letters and numbers in 10 characters length
 	 **/
-	private String generateSalt() {
+	private static String generateSalt() {
 		return RandomStringUtils.randomAlphanumeric(User.SALT_LENGTH);
 	}
 	
