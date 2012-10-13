@@ -1,1 +1,0 @@
-../../../../../../../../../src/test/java/ru/mystamps/web/tests/fest/DateAssert.java
