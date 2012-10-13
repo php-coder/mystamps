@@ -17,17 +17,11 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.GrantedAuthority;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 
@@ -36,10 +30,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.rule.PowerMockRule;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -57,10 +47,8 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.model.RegisterAccountForm;
-import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.tests.fest.DateAssert;
 
-@PrepareForTest(SecurityContextHolder.class)
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
@@ -75,9 +63,6 @@ public class UserServiceTest {
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
 	
-	@Rule
-	public PowerMockRule powerMockRule = new PowerMockRule(); // NOCHECKSTYLE
-	
 	@Mock
 	private UserDao userDao;
 	
@@ -86,12 +71,6 @@ public class UserServiceTest {
 	
 	@Mock
 	private PasswordEncoder encoder;
-	
-	@Mock
-	private Authentication authentication;
-	
-	@Mock
-	private SecurityContext securityContext;
 	
 	@Captor
 	private ArgumentCaptor<UsersActivation> activationCaptor;
@@ -430,62 +409,6 @@ public class UserServiceTest {
 	public void findByLoginShouldPassLoginToDao() {
 		service.findByLogin(TEST_LOGIN);
 		verify(userDao).findByLogin(TEST_LOGIN);
-	}
-	
-	//
-	// Tests for getCurrentUser()
-	//
-	
-	@Test(expected = IllegalStateException.class)
-	public void getCurrentUserShouldThrowExceptionIfSecurityContextIsNull() {
-		PowerMockito.mockStatic(SecurityContextHolder.class);
-		when(SecurityContextHolder.getContext()).thenReturn(null);
-		
-		service.getCurrentUser();
-	}
-	
-	@Test
-	public void getCurrentUserShouldReturnNullWhenAuthenticationIsNull() {
-		PowerMockito.mockStatic(SecurityContextHolder.class);
-		when(securityContext.getAuthentication()).thenReturn(null);
-		when(SecurityContextHolder.getContext()).thenReturn(securityContext);
-		
-		assertThat(service.getCurrentUser()).isNull();
-	}
-	
-	@Test
-	public void getCurrentUserShouldReturnNullWhenPrincipalIsNull() {
-		PowerMockito.mockStatic(SecurityContextHolder.class);
-		when(authentication.getPrincipal()).thenReturn(null);
-		when(securityContext.getAuthentication()).thenReturn(authentication);
-		when(SecurityContextHolder.getContext()).thenReturn(securityContext);
-		
-		assertThat(service.getCurrentUser()).isNull();
-	}
-	
-	@Test(expected = IllegalStateException.class)
-	public void getCurrentUserShouldThrowExceptionWhenPrincipalHasUnknownType() {
-		PowerMockito.mockStatic(SecurityContextHolder.class);
-		when(authentication.getPrincipal()).thenReturn(new Object());
-		when(securityContext.getAuthentication()).thenReturn(authentication);
-		when(SecurityContextHolder.getContext()).thenReturn(securityContext);
-		
-		assertThat(service.getCurrentUser()).isNull();
-	}
-	
-	@Test
-	public void getCurrentUserShouldReturnUser() {
-		PowerMockito.mockStatic(SecurityContextHolder.class);
-		final User expectedUser = getValidUser();
-		final CustomUserDetails userDetails = new CustomUserDetails(
-			expectedUser,
-			Collections.<GrantedAuthority>emptyList()
-		);
-		when(authentication.getPrincipal()).thenReturn(userDetails);
-		when(securityContext.getAuthentication()).thenReturn(authentication);
-		when(SecurityContextHolder.getContext()).thenReturn(securityContext);
-		
-		assertThat(service.getCurrentUser()).isEqualTo(expectedUser);
 	}
 	
 	static User getValidUser() {

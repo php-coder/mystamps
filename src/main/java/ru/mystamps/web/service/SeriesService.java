@@ -72,7 +72,7 @@ public class SeriesService {
 	private ImageService imageService;
 	
 	@Inject
-	private UserService userService;
+	private AuthService authService;
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -148,7 +148,7 @@ public class SeriesService {
 		series.setCreatedAt(now);
 		series.setUpdatedAt(now);
 		
-		final User currentUser = userService.getCurrentUser();
+		final User currentUser = authService.getCurrentUser();
 		Validate.validState(currentUser != null, "Current user must be non null");
 		series.setCreatedBy(currentUser);
 		series.setUpdatedBy(currentUser);

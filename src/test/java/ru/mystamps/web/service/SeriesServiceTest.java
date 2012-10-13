@@ -85,7 +85,7 @@ public class SeriesServiceTest {
 	private SeriesDao seriesDao;
 	
 	@Mock
-	private UserService userService;
+	private AuthService authService;
 	
 	@Mock
 	private MultipartFile multipartFile;
@@ -120,7 +120,7 @@ public class SeriesServiceTest {
 		form.setPerforated(false);
 		
 		when(imageService.save(any(MultipartFile.class))).thenReturn("/fake/path/to/image");
-		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
+		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 	}
 	
 	//
@@ -444,7 +444,7 @@ public class SeriesServiceTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
-		when(userService.getCurrentUser()).thenReturn(null);
+		when(authService.getCurrentUser()).thenReturn(null);
 		
 		service.add(form);
 	}
@@ -452,7 +452,7 @@ public class SeriesServiceTest {
 	@Test
 	public void addShouldAssignCreatedAtToCurrentUser() {
 		final User expectedUser = UserServiceTest.getValidUser();
-		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
 		
@@ -463,7 +463,7 @@ public class SeriesServiceTest {
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentUser() {
 		final User expectedUser = UserServiceTest.getValidUser();
-		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
 		

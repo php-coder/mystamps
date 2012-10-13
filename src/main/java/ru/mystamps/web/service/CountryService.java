@@ -39,7 +39,7 @@ public class CountryService {
 	private CountryDao countryDao;
 	
 	@Inject
-	private UserService userService;
+	private AuthService authService;
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -54,7 +54,7 @@ public class CountryService {
 		country.setCreatedAt(now);
 		country.setUpdatedAt(now);
 		
-		final User currentUser = userService.getCurrentUser();
+		final User currentUser = authService.getCurrentUser();
 		Validate.validState(currentUser != null, "Current user must be non null");
 		country.setCreatedBy(currentUser);
 		country.setUpdatedBy(currentUser);

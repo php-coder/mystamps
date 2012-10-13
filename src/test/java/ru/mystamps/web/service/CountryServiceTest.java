@@ -56,7 +56,7 @@ public class CountryServiceTest {
 	private CountryDao countryDao;
 	
 	@Mock
-	private UserService userService;
+	private AuthService authService;
 	
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
@@ -68,7 +68,7 @@ public class CountryServiceTest {
 	
 	@Before
 	public void setUp() {
-		when(userService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
+		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 		
 		form = new AddCountryForm();
 		form.setName(TEST_COUNTRY_NAME);
@@ -132,7 +132,7 @@ public class CountryServiceTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
-		when(userService.getCurrentUser()).thenReturn(null);
+		when(authService.getCurrentUser()).thenReturn(null);
 		
 		service.add(form);
 	}
@@ -140,7 +140,7 @@ public class CountryServiceTest {
 	@Test
 	public void addShouldAssignCreatedAtToCurrentUser() {
 		final User expectedUser = UserServiceTest.getValidUser();
-		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
 		
@@ -151,7 +151,7 @@ public class CountryServiceTest {
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentUser() {
 		final User expectedUser = UserServiceTest.getValidUser();
-		when(userService.getCurrentUser()).thenReturn(expectedUser);
+		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
 		
