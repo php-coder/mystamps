@@ -109,8 +109,13 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 			+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
 		);
 		
+		final String msg = String.format(
+			"title should be '%s' but actual is '%s'",
+			title,
+			page.getTitle()
+		);
 		assertThat(page.getTitle())
-			.overridingErrorMessage("title should be '" + title + "'")
+			.overridingErrorMessage(msg)
 			.isEqualTo(title);
 	}
 	
