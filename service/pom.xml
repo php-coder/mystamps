@@ -131,6 +131,7 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- For @Getter/@Setter and some other annotations -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
