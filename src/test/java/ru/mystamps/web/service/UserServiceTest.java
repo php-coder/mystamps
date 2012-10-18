@@ -31,6 +31,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -45,8 +48,8 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
-import ru.mystamps.web.model.ActivateAccountForm;
-import ru.mystamps.web.model.RegisterAccountForm;
+import ru.mystamps.web.service.dto.ActivateAccountDto;
+import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -81,18 +84,18 @@ public class UserServiceTest {
 	@InjectMocks
 	private UserService service = new UserService();
 	
-	private ActivateAccountForm activationForm;
-	private RegisterAccountForm registrationForm;
+	private ActivationForm activationForm;
+	private RegistrationForm registrationForm;
 	
 	@Before
 	public void setUp() {
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
-		registrationForm = new RegisterAccountForm();
+		registrationForm = new RegistrationForm();
 		registrationForm.setEmail(TEST_EMAIL);
 		
-		activationForm = new ActivateAccountForm();
+		activationForm = new ActivationForm();
 		activationForm.setLogin(TEST_LOGIN);
 		activationForm.setPassword(TEST_PASSWORD);
 		activationForm.setName(TEST_NAME);
@@ -417,6 +420,21 @@ public class UserServiceTest {
 		activation.setEmail(TEST_EMAIL);
 		activation.setCreatedAt(new Date());
 		return activation;
+	}
+	
+	@Getter
+	@Setter
+	protected static class ActivationForm implements ActivateAccountDto {
+		private String login;
+		private String name;
+		private String password;
+		private String activationKey;
+	}
+	
+	@Getter
+	@Setter
+	protected static class RegistrationForm implements RegisterAccountDto {
+		private String email;
 	}
 	
 }

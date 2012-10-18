@@ -36,6 +36,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,7 +59,7 @@ import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
-import ru.mystamps.web.model.AddSeriesForm;
+import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -107,12 +110,12 @@ public class SeriesServiceTest {
 	@InjectMocks
 	private SeriesService service = new SeriesService();
 	
-	private AddSeriesForm form;
+	private SeriesForm form;
 	private User user;
 	
 	@Before
 	public void setUp() {
-		form = new AddSeriesForm();
+		form = new SeriesForm();
 		form.setQuantity(2);
 		form.setPerforated(false);
 		
@@ -471,6 +474,21 @@ public class SeriesServiceTest {
 		}
 		
 		return result;
+	}
+	
+	@Getter
+	@Setter
+	protected static class SeriesForm implements AddSeriesDto {
+		private Integer country;
+		private Integer year;
+		private Integer quantity;
+		private Boolean perforated;
+		private String michelNumbers;
+		private String scottNumbers;
+		private String yvertNumbers;
+		private String gibbonsNumbers;
+		private String comment;
+		private MultipartFile image;
 	}
 	
 }

@@ -40,10 +40,13 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.model.AddCountryForm;
+import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -64,13 +67,13 @@ public class CountryServiceTest {
 	@InjectMocks
 	private CountryService service = new CountryService();
 	
-	private AddCountryForm form;
+	private CountryForm form;
 	
 	@Before
 	public void setUp() {
 		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 		
-		form = new AddCountryForm();
+		form = new CountryForm();
 		form.setName(TEST_COUNTRY_NAME);
 	}
 	
@@ -242,6 +245,12 @@ public class CountryServiceTest {
 		country.setCreatedAt(now);
 		country.setUpdatedAt(now);
 		return country;
+	}
+	
+	@Getter
+	@Setter
+	protected static class CountryForm implements AddCountryDto {
+		private String name;
 	}
 	
 }

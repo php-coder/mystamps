@@ -24,6 +24,7 @@
 		<commons.lang.version>3.1</commons.lang.version>
 		<spring.version>3.2.0.M2</spring.version>
 		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<lombok.version>0.11.2</lombok.version>
 		
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.0</mockito.version>
@@ -127,6 +128,13 @@
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4-rule-agent</artifactId>
 			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 			<scope>test</scope>
 		</dependency>
 		

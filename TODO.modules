@@ -1,8 +1,8 @@
 CRITICAL:
-- service: тесты должны компилироваться (реализовать аналог *Form классов)
 
 BACKPORT
 - data-commons в compile зависимости (остальное в runtime?)
+- отвязка юнит тестов от models
 
 TODO
 - ru.mystamps.web.entity -> ru.mystamps.web.domain
