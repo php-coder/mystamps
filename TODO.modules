@@ -1,4 +1,5 @@
 CRITICAL:
+- разобраться с запаковкой web.xml
 
 BACKPORT
 - unused HttpSession
