@@ -15,4 +15,92 @@
 	<version>0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
+	<properties>
+		<domain.version>0.2-SNAPSHOT</domain.version>
+		<service.version>0.2-SNAPSHOT</service.version>
+		
+		<javax.inject.version>1</javax.inject.version>
+		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
+		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
+		<servlet.api.version>3.0.20100224</servlet.api.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<commons.beanutils.version>1.8.3</commons.beanutils.version>
+		<lombok.version>0.11.2</lombok.version>
+	</properties>
+	
+	<dependencies>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>domain</artifactId>
+			<version>${domain.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>service</artifactId>
+			<version>${service.version}</version>
+		</dependency>
+		
+		<!-- For @Inject annotation -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
+		</dependency>
+		
+		<!-- For @Valid and standard constraints -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation.version}</version>
+		</dependency>
+		
+		<!-- As JSR-303 provider and for non-standard constraints -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
+		
+		<!-- For HttpServletRequest/HttpServletResponse -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- For AuthenticationEntryPoint class -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<!-- For BeanUtils class (used in validators) -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons.beanutils.version}</version>
+			<!-- TODO -->
+			<!--
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+			-->
+		</dependency>
+		
+		<!-- For @Getter/@Setter and some other annotations -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+	
 </project>
