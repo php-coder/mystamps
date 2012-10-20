@@ -20,7 +20,6 @@ package ru.mystamps.web.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +48,6 @@ public class NotFoundErrorController {
 	@RequestMapping(method = RequestMethod.GET)
 	public void notFound(
 			final HttpServletRequest request,
-			final HttpSession session,
 			final CustomUserDetails userDetails,
 			@RequestHeader(value = "referer", required = false) final String referer,
 			@RequestHeader(value = "user-agent", required = false) final String agent) {
