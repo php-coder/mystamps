@@ -61,8 +61,7 @@
 	<!-- see http://docs.oracle.com/javaee/5/tutorial/doc/bnajg.html -->
 	<jsp-config>
 		<jsp-property-group>
-			<url-pattern>/WEB-INF/pages/*</url-pattern>
-			<include-prelude>/WEB-INF/segments/std.jspf</include-prelude>
+			<url-pattern>/WEB-INF/tiles/*</url-pattern>
 			<trim-directive-whitespaces>true</trim-directive-whitespaces>
 			<page-encoding>UTF-8</page-encoding>
 			<scripting-invalid>true></scripting-invalid>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	
+	<!-- Templates -->
+	
+	<definition name="defaultTemplate" template="/WEB-INF/tiles/layout/default.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/header/default.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer/default.jsp" />
+	</definition>
+	
+	<definition name="errorTemplate" template="/WEB-INF/tiles/layout/error.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/header/default.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer/default.jsp" />
+	</definition>
+	
+	<!-- Pages -->
+	
+	<definition name="site/index" extends="defaultTemplate">
+		<put-attribute name="title" value="t_index_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/site/index.jsp" />
+	</definition>
+	
+	<definition name="successful/activation" extends="defaultTemplate">
+		<put-attribute name="title" value="t_activation_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/successful/activation.jsp" />
+	</definition>
+	
+	<definition name="successful/registration" extends="defaultTemplate">
+		<put-attribute name="title" value="t_registration_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/successful/registration.jsp" />
+	</definition>
+	
+	<definition name="account/register" extends="defaultTemplate">
+		<put-attribute name="title" value="t_registration_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/account/register.jsp" />
+	</definition>
+	
+	<definition name="account/activate" extends="defaultTemplate">
+		<put-attribute name="title" value="t_activation_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/account/activate.jsp" />
+	</definition>
+	
+	<definition name="account/auth" extends="defaultTemplate">
+		<put-attribute name="title" value="t_auth_title" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/account/auth.jsp" />
+	</definition>
+	
+	<definition name="country/add" extends="defaultTemplate">
+		<put-attribute name="title" value="t_add_country" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/country/add.jsp" />
+	</definition>
+	
+	<definition name="country/info" extends="defaultTemplate">
+		<put-attribute name="title" value="t_country_info" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/country/info.jsp" />
+	</definition>
+	
+	<definition name="series/add" extends="defaultTemplate">
+		<put-attribute name="title" value="t_add_series" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/series/add.jsp" />
+	</definition>
+	
+	<definition name="series/info" extends="defaultTemplate">
+		<put-attribute name="title" value="t_series_info" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/series/info.jsp" />
+	</definition>
+	
+	<!-- Error pages -->
+	
+	<definition name="error/401" extends="errorTemplate">
+		<put-attribute name="title" value="t_401_title" />
+		<put-attribute name="errorCode" value="401" />
+		<put-attribute name="errorDescription" value="t_401_description" />
+	</definition>
+	
+	<definition name="error/404" extends="errorTemplate">
+		<put-attribute name="title" value="t_404_title" />
+		<put-attribute name="errorCode" value="404" />
+		<put-attribute name="errorDescription" value="t_404_description" />
+	</definition>
+	
+</tiles-definitions>

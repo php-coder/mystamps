@@ -1,3 +1,10 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ page import="ru.mystamps.web.Url" %>
+<spring:url var="authUrl" value="<%= Url.AUTHENTICATION_PAGE %>" />
+<spring:url var="logoutUrl" value="<%= Url.LOGOUT_PAGE %>" />
+<spring:url var="registerUrl" value="<%= Url.REGISTRATION_PAGE %>" />
+
 <table id="header">
 	<tr>
 		<td>

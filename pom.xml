@@ -31,6 +31,7 @@
 		<commons.io.version>2.4</commons.io.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<tiles.version>2.2.2</tiles.version>
 		
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
@@ -215,6 +216,14 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>${commons.collections.version}</version>
+		</dependency>
+		
+		<!-- For Tiles template engine -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${tiles.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>

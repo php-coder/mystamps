@@ -35,8 +35,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles2.TilesView;
 
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
@@ -86,12 +88,21 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public ViewResolver getViewResolver() {
-		final InternalResourceViewResolver viewResolver =
-			new InternalResourceViewResolver();
+	public TilesConfigurer getTilesConfigurer() {
+		final TilesConfigurer configurer = new TilesConfigurer();
 		
-		viewResolver.setPrefix("/WEB-INF/pages/");
-		viewResolver.setSuffix(".jsp");
+		configurer.setDefinitions(new String[]{
+			"/WEB-INF/tiles/tiles.xml"
+		});
+		
+		return configurer;
+	}
+	
+	@Bean
+	public ViewResolver getViewResolver() {
+		final UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+		
+		viewResolver.setViewClass(TilesView.class);
 		
 		return viewResolver;
 	}

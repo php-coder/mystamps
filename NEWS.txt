@@ -1,5 +1,6 @@
 0.3 (not released yet)
 - added checking by PMD
+- use Tiles as template engine for views
 
 0.2
 - implemented ability to add series
