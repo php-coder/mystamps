@@ -18,7 +18,7 @@
 	<properties>
 		<domain.version>0.2-SNAPSHOT</domain.version>
 		
-		<spring.data.commons.version>1.4.0.RC1</spring.data.commons.version>
+		<spring.data.commons.version>1.4.0.RELEASE</spring.data.commons.version>
 	</properties>
 	
 	<dependencies>
@@ -37,25 +37,5 @@
 		</dependency>
 		
 	</dependencies>
-	
-	<repositories>
-		
-		<!-- For latest spring-data releases -->
-		<repository>
-			<id>SpringSource Milestone Repository</id>
-			<url>http://repo.springsource.org/milestone</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-		
-	</repositories>
 	
 </project>
