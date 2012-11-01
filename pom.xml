@@ -55,7 +55,7 @@
 		<surefire.plugin.version>2.12</surefire.plugin.version>
 		<failsafe.plugin.version>2.12</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.5.v20120716</jetty.plugin.version>
-		<hibernate.plugin.version>2.2</hibernate.plugin.version>
+		<hibernate.plugin.version>3.0</hibernate.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.9.1</checkstyle.plugin.version>
 		<pmd.plugin.version>2.8-SNAPSHOT</pmd.plugin.version>
@@ -512,28 +512,10 @@
 				<artifactId>hibernate3-maven-plugin</artifactId>
 				<version>${hibernate.plugin.version}</version>
 				<configuration>
-					<components>
-						<component>
-							<name>hbm2ddl</name>
-							<implementation>jpaconfiguration</implementation>
-							<outputDirectory>${env.dir}</outputDirectory>
-						</component>
-					</components>
-					<componentProperties>
-						<console>false</console>
-						<format>true</format>
-						<jdk5>true</jdk5>
-						<propertyfile>
-							${env.dir}/spring/database.properties
-						</propertyfile>
-						<outputfilename>${ddl.file}</outputfilename>
-						
-						<!--
-							Don't try to connect to database. See:
-							http://www.mail-archive.com/users@maven.apache.org/msg61394.html
-						-->
-						<export>false</export>
-					</componentProperties>
+					<hibernatetool destdir="${env.dir}">
+						<jpaconfiguration propertyfile="${env.dir}/spring/database.properties" />
+						<hbm2ddl export="false" format="true" haltonerror="true" outputfilename="${ddl.file}" />
+					</hibernatetool>
 				</configuration>
 				<dependencies>
 					<!-- Stick to 3.6.x version because plugin not works with Hibernate 4.x -->
@@ -546,23 +528,6 @@
 						<groupId>org.hibernate</groupId>
 						<artifactId>hibernate-entitymanager</artifactId>
 						<version>3.6.10.Final</version>
-					</dependency>
-					<!-- Using last version of hibernate-validator -->
-					<dependency>
-						<groupId>javax.validation</groupId>
-						<artifactId>validation-api</artifactId>
-						<version>${javax.validation.version}</version>
-					</dependency>
-					<!--
-						Explicitly add dependency to jboss-logging (which used by
-						hibernate-validator since 4.3.0) to prevent following error:
-						"Unable to get the default Bean Validation factory: InvocationTargetException:
-						org.jboss.logging.Logger.getMessageLogger(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object"
-					-->
-					<dependency>
-						<groupId>org.jboss.logging</groupId>
-						<artifactId>jboss-logging</artifactId>
-						<version>3.1.1.GA</version>
 					</dependency>
 				</dependencies>
 			</plugin>
