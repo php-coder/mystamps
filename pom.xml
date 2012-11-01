@@ -413,6 +413,9 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>native2ascii-maven-plugin</artifactId>
 				<version>${native2ascii.plugin.version}</version>
+				<configuration>
+					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
