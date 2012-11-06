@@ -18,7 +18,7 @@
 
 package ru.mystamps.web.tests.cases;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;

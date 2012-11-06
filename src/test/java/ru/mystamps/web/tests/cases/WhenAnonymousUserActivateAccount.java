@@ -20,7 +20,7 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
 
