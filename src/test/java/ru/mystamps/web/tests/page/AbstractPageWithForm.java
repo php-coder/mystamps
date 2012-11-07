@@ -42,23 +42,23 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	@Getter private Form form;
 	
-	public AbstractPageWithForm(final WebDriver driver, final String pageUrl) {
+	public AbstractPageWithForm(WebDriver driver, String pageUrl) {
 		super(driver, pageUrl);
 	}
 	
-	protected void hasForm(final Form form) {
+	protected void hasForm(Form form) {
 		this.form = form;
 	}
 	
-	public boolean isFieldExists(final Field field) {
+	public boolean isFieldExists(Field field) {
 		return elementWithXPathExists(field.toString());
 	}
 	
-	public boolean isFieldHasError(final String id) {
+	public boolean isFieldHasError(String id) {
 		return elementWithXPathExists(String.format(FIELD_ERROR_LOCATOR, id));
 	}
 	
-	public boolean isSubmitButtonExists(final SubmitButton button) {
+	public boolean isSubmitButtonExists(SubmitButton button) {
 		return elementWithXPathExists(button.toString());
 	}
 	
@@ -69,14 +69,14 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 			"You are trying to submit form at page which does not have form"
 		);
 		
-		final List<SubmitButton> buttons = form.getSubmitButtons();
+		List<SubmitButton> buttons = form.getSubmitButtons();
 		
 		Validate.validState(
 			!buttons.isEmpty(),
 			"You are trying to submit form at page which does not have submit button"
 		);
 		
-		final String xpathOfFirstSubmitButton = buttons.get(0).toString();
+		String xpathOfFirstSubmitButton = buttons.get(0).toString();
 		
 		getElementByXPath(xpathOfFirstSubmitButton).submit();
 		
@@ -96,33 +96,33 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		return elementWithXPathExists(form.toString());
 	}
 	
-	public String getInputLabelValue(final String id) {
+	public String getInputLabelValue(String id) {
 		return getTextOfElementByXPath(String.format(LABEL_LOCATOR, id));
 	}
 	
-	public boolean inputHasAsterisk(final String id) {
+	public boolean inputHasAsterisk(String id) {
 		try {
-			final String requiredFieldMark =
+			String requiredFieldMark =
 				getTextOfElementByXPath(String.format(FIELD_REQUIRED_LOCATOR, id));
 			
 			return "*".equals(requiredFieldMark);
-		} catch (final NoSuchElementException ex) {
+		} catch (NoSuchElementException ex) {
 			return false;
 		}
 	}
 	
-	public String getFieldValue(final String name) {
+	public String getFieldValue(String name) {
 		Validate.validState(
 			form != null,
 			"You are trying to find field at page which does not have form"
 		);
 		
-		final String xpathField = form.getField(name).toString();
+		String xpathField = form.getField(name).toString();
 		
 		return getElementByXPath(xpathField).getAttribute("value");
 	}
 	
-	public String getFieldError(final String id) {
+	public String getFieldError(String id) {
 		return getTextOfElementByXPath(String.format(FIELD_ERROR_LOCATOR, id));
 	}
 	
@@ -136,13 +136,13 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		);
 	}
 	
-	public List<String> getSelectOptions(final String id) {
+	public List<String> getSelectOptions(String id) {
 		return WebElementUtils.convertToListWithText(
 			new Select(getElementById(id)).getOptions()
 		);
 	}
 	
-	public void fillField(final String name, final String value) {
+	public void fillField(String name, String value) {
 		getElementByName(name).sendKeys(value);
 	}
 	

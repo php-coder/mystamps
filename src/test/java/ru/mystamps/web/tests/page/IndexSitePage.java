@@ -24,7 +24,7 @@ import ru.mystamps.web.Url;
 
 public class IndexSitePage extends AbstractPage {
 	
-	public IndexSitePage(final WebDriver driver) {
+	public IndexSitePage(WebDriver driver) {
 		super(driver, Url.INDEX_PAGE);
 	}
 	

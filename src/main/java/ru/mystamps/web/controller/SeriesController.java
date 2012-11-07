@@ -69,14 +69,14 @@ public class SeriesController {
 	}
 	
 	@Inject
-	SeriesController(final CountryService countryService, final SeriesService seriesService) {
+	SeriesController(CountryService countryService, SeriesService seriesService) {
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
 	
 	@InitBinder("addSeriesForm")
-	protected void initBinder(final WebDataBinder binder) {
-		final StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
+	protected void initBinder(WebDataBinder binder) {
+		StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
 		binder.registerCustomEditor(String.class, "michelNumbers", editor);
 		binder.registerCustomEditor(String.class, "scottNumbers", editor);
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
@@ -91,9 +91,9 @@ public class SeriesController {
 	
 	@ModelAttribute("countries")
 	public Map<Integer, String> getCountries() {
-		final Map<Integer, String> countries = new LinkedHashMap<Integer, String>();
+		Map<Integer, String> countries = new LinkedHashMap<Integer, String>();
 		
-		for (final Country country : countryService.findAll()) {
+		for (Country country : countryService.findAll()) {
 			countries.put(country.getId(), country.getName());
 		}
 		
@@ -103,7 +103,7 @@ public class SeriesController {
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.GET)
 	public AddSeriesForm showForm() {
 		
-		final AddSeriesForm addSeriesForm = new AddSeriesForm();
+		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
 		
 		return addSeriesForm;
@@ -111,25 +111,25 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
 	public String processInput(
-		@Validated({Default.class, ImageChecks.class}) final AddSeriesForm form,
-		final BindingResult result) {
+		@Validated({Default.class, ImageChecks.class}) AddSeriesForm form,
+		BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		final Series series = seriesService.add(form);
+		Series series = seriesService.add(form);
 		
 		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
 	public String showInfo(
-		@PathVariable("id") final Integer id,
-		final Model model,
-		final HttpServletResponse response) throws IOException {
+		@PathVariable("id") Integer id,
+		Model model,
+		HttpServletResponse response) throws IOException {
 		
-		final Series series = seriesService.findById(id);
+		Series series = seriesService.findById(id);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

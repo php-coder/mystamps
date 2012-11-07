@@ -50,9 +50,9 @@ public class CronService {
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
 	public void purgeUsersActivations() {
-		final Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
+		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
 		
-		final List<UsersActivation> expiredActivations =
+		List<UsersActivation> expiredActivations =
 			usersActivationDao.findByCreatedAtLessThan(expiredSince);
 		
 		Validate.validState(expiredActivations != null, "Expired activations should be non null");
@@ -62,7 +62,7 @@ public class CronService {
 			return;
 		}
 		
-		for (final UsersActivation activation : expiredActivations) {
+		for (UsersActivation activation : expiredActivations) {
 			LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				activation.getActivationKey(),

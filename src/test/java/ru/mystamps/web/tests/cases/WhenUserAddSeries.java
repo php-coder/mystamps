@@ -77,7 +77,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 				WhenUserAddSeries.class.getClassLoader().getResource(EMPTY_IMAGE_NAME).toURI()
 			).getAbsolutePath();
 		
-		} catch (final URISyntaxException e) {
+		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -115,7 +115,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void michelNumbersShouldAcceptValidValues(final String numbers, final Object whatever) {
+	public void michelNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.fillMichelNumbers(numbers);
 		
 		page.submit();
@@ -124,7 +124,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void scottNumbersShouldAcceptValidValues(final String numbers, final Object whatever) {
+	public void scottNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.fillScottNumbers(numbers);
 		
 		page.submit();
@@ -133,7 +133,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void yvertNumbersShouldAcceptValidValues(final String numbers, final Object whatever) {
+	public void yvertNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.fillYvertNumbers(numbers);
 		
 		page.submit();
@@ -142,7 +142,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void gibbonsNumbersShouldAcceptValidValues(final String numbers, final Object whatever) {
+	public void gibbonsNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
@@ -173,7 +173,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void michelNumbersShouldRejectInvalidValues(final String numbers, final String msg) {
+	public void michelNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.fillMichelNumbers(numbers);
 		
 		page.submit();
@@ -182,7 +182,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void scottNumbersShouldRejectInvalidValues(final String numbers, final String msg) {
+	public void scottNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.fillScottNumbers(numbers);
 		
 		page.submit();
@@ -191,7 +191,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void yvertNumbersShouldRejectInvalidValues(final String numbers, final String msg) {
+	public void yvertNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.fillYvertNumbers(numbers);
 		
 		page.submit();
@@ -200,7 +200,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void gibbonsNumbersShouldRejectInvalidValues(final String numbers, final String msg) {
+	public void gibbonsNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
@@ -282,17 +282,17 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
-		final String expectedQuantity = "2";
-		final String expectedPageUrl  = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		final String expectedImageUrl = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+		String expectedQuantity = "2";
+		String expectedPageUrl  = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
 		
 		page.fillQuantity(expectedQuantity);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
 		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
@@ -302,12 +302,12 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
-		final String expectedPageUrl        = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		final String expectedImageUrl       = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
-		final String expectedQuantity       = "3";
-		final String expectedYear         = "1999";
-		final String expectedCountryName  = "Italy";
-		final String expectedComment        = "Any text";
+		String expectedPageUrl     = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl    = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+		String expectedQuantity    = "3";
+		String expectedYear        = "1999";
+		String expectedCountryName = "Italy";
+		String expectedComment     = "Any text";
 		
 		page.fillCountry(expectedCountryName);
 		page.fillYear(expectedYear);
@@ -320,10 +320,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillComment(expectedComment);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
 		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
@@ -345,10 +345,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillMichelNumbers("4,5,4");
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		assertThat(nextPage.getMichelNumbers()).isEqualTo("4, 5");
 	}
 	
@@ -358,10 +358,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillScottNumbers("14,15,14");
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		assertThat(nextPage.getScottNumbers()).isEqualTo("14, 15");
 	}
 	
@@ -371,10 +371,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillYvertNumbers("24,25,24");
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		assertThat(nextPage.getYvertNumbers()).isEqualTo("24, 25");
 	}
 	
@@ -384,10 +384,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillGibbonsNumbers("34,35,34");
 		
-		final AbstractPage next = page.submit();
+		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
-		final InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		assertThat(nextPage.getGibbonsNumbers()).isEqualTo("34, 35");
 	}
 	
@@ -403,7 +403,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@DataProvider(name = "invalidCatalogNumbers")
 	public Object[][] getInvalidCatalogNumbers() {
-		final String expectedErrorMessage =
+		String expectedErrorMessage =
 			tr("ru.mystamps.web.validation.jsr303.CatalogNumbers.message");
 		
 		return new Object[][] {

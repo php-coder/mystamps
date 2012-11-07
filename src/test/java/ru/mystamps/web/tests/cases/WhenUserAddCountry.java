@@ -149,7 +149,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
 		page.addCountry(TEST_COUNTRY_NAME);
 		
-		final String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{id}", "\\d+");
+		String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{id}", "\\d+");
 		
 		assertThat(page.getCurrentUrl()).matches(expectedUrl);
 		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME);
@@ -162,7 +162,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(Url.ADD_SERIES_PAGE);
 		
-		final AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
+		AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
 		
 		assertThat(seriesPage.getContryFieldValues()).contains(TEST_COUNTRY_NAME);
 	}

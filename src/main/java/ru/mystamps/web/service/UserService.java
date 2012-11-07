@@ -56,11 +56,11 @@ public class UserService {
 	private PasswordEncoder encoder;
 	
 	@Transactional
-	public void addRegistrationRequest(final RegisterAccountDto dto) {
+	public void addRegistrationRequest(RegisterAccountDto dto) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
 		
-		final UsersActivation activation = new UsersActivation();
+		UsersActivation activation = new UsersActivation();
 		
 		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(dto.getEmail());
@@ -69,50 +69,47 @@ public class UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	public UsersActivation findRegistrationRequestByActivationKey(
-			final String activationKey) {
-		
+	public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
 		return usersActivation.findByActivationKey(activationKey);
 	}
 	
 	@Transactional
-	public void registerUser(final ActivateAccountDto dto) {
+	public void registerUser(ActivateAccountDto dto) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getLogin() != null, "Login should be non null");
 		Validate.isTrue(dto.getPassword() != null, "Password should be non null");
 		Validate.isTrue(dto.getActivationKey() != null, "Activation key should be non null");
 		
-		final String login = dto.getLogin();
+		String login = dto.getLogin();
 		
 		// use login as name if name is not provided
-		final String finalName; // NOPMD: SF #3557789
+		String finalName; // NOPMD: SF #3557789
 		if (StringUtils.isEmpty(dto.getName())) {
 			finalName = login;
 		} else {
 			finalName = dto.getName();
 		}
 		
-		final String activationKey = dto.getActivationKey();
-		final UsersActivation activation =
-			usersActivation.findByActivationKey(activationKey);
+		String activationKey = dto.getActivationKey();
+		UsersActivation activation = usersActivation.findByActivationKey(activationKey);
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
 		}
 		
-		final String email = activation.getEmail();
-		final Date registrationDate = activation.getCreatedAt();
+		String email = activation.getEmail();
+		Date registrationDate = activation.getCreatedAt();
 		
-		final String salt = generateSalt();
+		String salt = generateSalt();
 		
-		final String hash = encoder.encodePassword(dto.getPassword(), salt);
+		String hash = encoder.encodePassword(dto.getPassword(), salt);
 		Validate.validState(hash != null, "Generated hash must be non null");
 		
-		final Date now = new Date();
+		Date now = new Date();
 		
-		final User user = new User();
+		User user = new User();
 		user.setLogin(login);
 		user.setName(finalName);
 		user.setEmail(email);
@@ -133,7 +130,7 @@ public class UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	public User findByLogin(final String login) {
+	public User findByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		return users.findByLogin(login);
@@ -145,7 +142,7 @@ public class UserService {
 	 *         in 10 characters length
 	 **/
 	private static String generateActivationKey() {
-		final int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH;
+		int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH;
 		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase();
 	}
 	

@@ -45,7 +45,7 @@ public class ScottCatalog implements StampsCatalog {
 	@Column(length = CODE_LENGTH, unique = true)
 	private String code;
 	
-	public ScottCatalog(final String code) {
+	public ScottCatalog(String code) {
 		this.code = code;
 	}
 	

@@ -118,8 +118,8 @@ public class SpringSecurityAuthServiceTest {
 	@Test
 	public void getCurrentUserShouldReturnUser() {
 		PowerMockito.mockStatic(SecurityContextHolder.class);
-		final User expectedUser = getValidUser();
-		final CustomUserDetails userDetails = new CustomUserDetails(
+		User expectedUser = getValidUser();
+		CustomUserDetails userDetails = new CustomUserDetails(
 			expectedUser,
 			Collections.<GrantedAuthority>emptyList()
 		);
@@ -131,8 +131,8 @@ public class SpringSecurityAuthServiceTest {
 	}
 	
 	static User getValidUser() {
-		final Integer anyId = 777;
-		final User user = new User();
+		Integer anyId = 777;
+		User user = new User();
 		user.setId(anyId);
 		user.setLogin(TEST_LOGIN);
 		user.setName(TEST_NAME);

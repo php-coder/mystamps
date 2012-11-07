@@ -32,26 +32,26 @@ import org.apache.commons.lang3.Validate;
 public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentResolver {
 	
 	@Override
-	public boolean supportsParameter(final MethodParameter parameter) {
+	public boolean supportsParameter(MethodParameter parameter) {
 		return isSupportedType(parameter.getParameterType());
 	}
 	
 	@Override
 	public Object resolveArgument(
-		final MethodParameter parameter,
-		final ModelAndViewContainer mavContainer,
-		final NativeWebRequest webRequest,
-		final WebDataBinderFactory binderFactory) {
+		MethodParameter parameter,
+		ModelAndViewContainer mavContainer,
+		NativeWebRequest webRequest,
+		WebDataBinderFactory binderFactory) {
 		
-		final SecurityContext ctx = SecurityContextHolder.getContext();
+		SecurityContext ctx = SecurityContextHolder.getContext();
 		Validate.validState(ctx != null, "Security context must be non null");
 		
-		final Authentication auth = ctx.getAuthentication();
+		Authentication auth = ctx.getAuthentication();
 		if (auth == null) {
 			return null;
 		}
 		
-		final Object principal = auth.getPrincipal();
+		Object principal = auth.getPrincipal();
 		if (principal == null) {
 			return null;
 		}
@@ -63,7 +63,7 @@ public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentR
 		return null;
 	}
 	
-	private static boolean isSupportedType(final Class<?> clazz) {
+	private static boolean isSupportedType(Class<?> clazz) {
 		return CustomUserDetails.class.isAssignableFrom(clazz);
 	}
 	

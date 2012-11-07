@@ -45,7 +45,7 @@ public class GibbonsCatalog implements StampsCatalog {
 	@Column(length = CODE_LENGTH, unique = true)
 	private String code;
 	
-	public GibbonsCatalog(final String code) {
+	public GibbonsCatalog(String code) {
 		this.code = code;
 	}
 	

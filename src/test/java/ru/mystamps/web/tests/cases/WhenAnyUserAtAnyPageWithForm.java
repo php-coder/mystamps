@@ -31,7 +31,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenAnyUserAtAnyPage<T> {
 	
-	public WhenAnyUserAtAnyPageWithForm(final Class<T> pageClass) {
+	public WhenAnyUserAtAnyPageWithForm(Class<T> pageClass) {
 		super(pageClass);
 	}
 	
@@ -58,7 +58,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void shouldHaveFields() {
-		for (final Field field : page.getForm().getFields()) {
+		for (Field field : page.getForm().getFields()) {
 			assertThat(page.isFieldExists(field))
 				.overridingErrorMessage("field with XPath '" + field + "' should exists")
 				.isTrue();
@@ -66,12 +66,12 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void shouldHaveLabels() {
-		for (final Field field : page.getForm().getFields()) {
+		for (Field field : page.getForm().getFields()) {
 			if (!field.hasLabel()) {
 				continue;
 			}
 			
-			final String msg = String.format(
+			String msg = String.format(
 				"field with id '%s' should have label '%s'",
 				field.getId(),
 				field.getLabel()
@@ -84,7 +84,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void shouldHaveSubmitButton() {
-		for (final SubmitButton button : page.getForm().getSubmitButtons()) {
+		for (SubmitButton button : page.getForm().getSubmitButtons()) {
 			assertThat(page.isSubmitButtonExists(button))
 				.overridingErrorMessage(
 					String.format(
@@ -96,7 +96,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void requiredFieldsShouldBeMarkedByAsterisk() {
-		for (final Field field : page.getForm().getRequiredFields()) {
+		for (Field field : page.getForm().getRequiredFields()) {
 			assertThat(page.inputHasAsterisk(field.getId()))
 				.overridingErrorMessage(
 					String.format(
@@ -118,14 +118,14 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	protected void emptyValueShouldBeForbiddenForRequiredFields() {
-		final List<Field> requiredFields = page.getForm().getRequiredFields();
+		List<Field> requiredFields = page.getForm().getRequiredFields();
 		if (requiredFields.isEmpty()) {
 			return;
 		}
 		
 		page.submit();
 		
-		for (final Field field : requiredFields) {
+		for (Field field : requiredFields) {
 			assertThat(page.getFieldError(field.getId()))
 				.overridingErrorMessage(
 					String.format(
@@ -137,7 +137,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	private void fieldsValuesShouldBePreservedWhenErrorOccurs() {
-		for (final Field field : page.getForm().getFields()) {
+		for (Field field : page.getForm().getFields()) {
 			if (!field.hasInvalidValue()) {
 				System.err.println(
 					"NOTICE: Invalid value not defined for field '"
@@ -152,7 +152,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 			page.submit();
 			
 			if (field.shouldPreserveInvalidValue()) {
-				final String msg = String.format(
+				String msg = String.format(
 					"field named '%s' should preserve input value after error",
 					field.getName()
 				);
@@ -162,7 +162,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.isEqualTo(field.getInvalidValue());
 				
 			} else {
-				final String msg = String.format(
+				String msg = String.format(
 					"field named '%s' should not preserve input value after error",
 					field.getName()
 				);

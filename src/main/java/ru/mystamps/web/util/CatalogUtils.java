@@ -42,13 +42,13 @@ public final class CatalogUtils {
 	private static final Comparator<String> STR_AFTER_INT =
 		new Comparator<String>() {
 			@Override
-			public int compare(final String lhs, final String rhs) {
+			public int compare(String lhs, String rhs) {
 				try {
-					final Integer left = Integer.valueOf(lhs);
-					final Integer right = Integer.valueOf(rhs);
+					Integer left = Integer.valueOf(lhs);
+					Integer right = Integer.valueOf(rhs);
 					return left.compareTo(right);
 				
-				} catch (final NumberFormatException ex) {
+				} catch (NumberFormatException ex) {
 					return 1;
 				}
 				
@@ -61,21 +61,21 @@ public final class CatalogUtils {
 	/**
 	 * Converts set of catalog numbers to comma-delimited string with range of numbers.
 	 **/
-	public static String toShortForm(final Set<? extends StampsCatalog> catalogNumbers) {
+	public static String toShortForm(Set<? extends StampsCatalog> catalogNumbers) {
 		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
 		
 		if (catalogNumbers.isEmpty()) {
 			return "";
 		}
 		
-		final Set<String> numbers = new TreeSet<String>(STR_AFTER_INT);
-		for (final StampsCatalog catalog : catalogNumbers) {
+		Set<String> numbers = new TreeSet<String>(STR_AFTER_INT);
+		for (StampsCatalog catalog : catalogNumbers) {
 			numbers.add(catalog.getCode());
 		}
 		
-		final List<String> groups = new ArrayList<String>();
-		final List<String> currentBuffer = new ArrayList<String>();
-		for (final String currentString : numbers) {
+		List<String> groups = new ArrayList<String>();
+		List<String> currentBuffer = new ArrayList<String>();
+		for (String currentString : numbers) {
 			
 			// for first element
 			if (currentBuffer.isEmpty()) {
@@ -84,8 +84,8 @@ public final class CatalogUtils {
 			}
 			
 			// in range
-			final Integer current = Integer.valueOf(currentString);
-			final Integer previous = Integer.valueOf(currentBuffer.get(currentBuffer.size() - 1));
+			Integer current = Integer.valueOf(currentString);
+			Integer previous = Integer.valueOf(currentBuffer.get(currentBuffer.size() - 1));
 			if (previous + 1 == current) {
 				currentBuffer.add(currentString);
 				continue;
@@ -107,8 +107,8 @@ public final class CatalogUtils {
 	 * Parses comma-delimited string and converts catalog numbers to set of objects.
 	 **/
 	public static <T extends StampsCatalog> Set<T> fromString(
-		final String catalogNumbers,
-		final Class<T> elementClass) {
+		String catalogNumbers,
+		Class<T> elementClass) {
 		
 		if (StringUtils.isEmpty(catalogNumbers)) {
 			return Collections.emptySet();
@@ -116,8 +116,8 @@ public final class CatalogUtils {
 		
 		Validate.isTrue(elementClass != null, "Class of element must be non null");
 		
-		final Set<T> result = new LinkedHashSet<T>();
-		for (final String number : catalogNumbers.split(",")) {
+		Set<T> result = new LinkedHashSet<T>();
+		for (String number : catalogNumbers.split(",")) {
 			Validate.validState(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
 			// TODO: parse range of numbers
@@ -127,10 +127,10 @@ public final class CatalogUtils {
 					ConstructorUtils.invokeConstructor(elementClass, number)
 				);
 				
-			} catch (final RuntimeException ex) { // NOPMD
+			} catch (RuntimeException ex) { // NOPMD
 				throw ex;
 			
-			} catch (final Exception ex) { // NOPMD
+			} catch (Exception ex) { // NOPMD
 				throw new RuntimeException(ex); // NOPMD
 			}
 		}
@@ -138,11 +138,11 @@ public final class CatalogUtils {
 		return result;
 	}
 	
-	private static void addBufferToGroups(final List<String> buffer, final List<String> groups) {
+	private static void addBufferToGroups(List<String> buffer, List<String> groups) {
 		Validate.isTrue(!buffer.isEmpty(), "Buffer must be non-empty");
 		
-		final String firstElement = buffer.get(0);
-		final String lastElement = buffer.get(buffer.size() - 1);
+		String firstElement = buffer.get(0);
+		String lastElement = buffer.get(buffer.size() - 1);
 		
 		if (buffer.size() == ONE_ELEMENT_SIZE) {
 			groups.add(firstElement);

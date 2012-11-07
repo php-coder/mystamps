@@ -45,7 +45,7 @@ public class MichelCatalog implements StampsCatalog {
 	@Column(length = CODE_LENGTH, unique = true)
 	private String code;
 	
-	public MichelCatalog(final String code) {
+	public MichelCatalog(String code) {
 		this.code = code;
 	}
 	

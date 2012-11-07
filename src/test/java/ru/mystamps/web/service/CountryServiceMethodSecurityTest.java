@@ -69,7 +69,7 @@ public class CountryServiceMethodSecurityTest {
 	public void addShouldAllowAccessToAuthenticatedUser() {
 		AuthUtils.authenticateAsUser(validUserLogin, validUserPassword);
 		
-		final AddCountryForm form = new AddCountryForm();
+		AddCountryForm form = new AddCountryForm();
 		form.setName("Any Country Name");
 		service.add(form);
 	}

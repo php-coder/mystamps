@@ -92,17 +92,17 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldCallDao() {
-		final Country expected = getCountry();
+		Country expected = getCountry();
 		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
-		final Country actual = service.add(form);
+		Country actual = service.add(form);
 		
 		assertThat(actual).isEqualTo(expected);
 	}
 	
 	@Test
 	public void addShouldPassCountryNameToDao() {
-		final String expectedCountryName = "Italy";
+		String expectedCountryName = "Italy";
 		form.setName(expectedCountryName);
 		
 		service.add(form);
@@ -139,7 +139,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentUser() {
-		final User expectedUser = UserServiceTest.getValidUser();
+		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
@@ -150,7 +150,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentUser() {
-		final User expectedUser = UserServiceTest.getValidUser();
+		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
@@ -165,19 +165,19 @@ public class CountryServiceTest {
 	
 	@Test
 	public void findAllShouldCallDao() {
-		final List<Country> expectedCountries = new ArrayList<Country>();
+		List<Country> expectedCountries = new ArrayList<Country>();
 		
-		final Country country1 = getCountry();
+		Country country1 = getCountry();
 		country1.setName("First Country");
 		expectedCountries.add(country1);
 		
-		final Country country2 = getCountry();
+		Country country2 = getCountry();
 		country1.setName("Second Country");
 		expectedCountries.add(country2);
 		
 		when(countryDao.findAll()).thenReturn(expectedCountries);
 		
-		final Iterable<Country> resultCountries = service.findAll();
+		Iterable<Country> resultCountries = service.findAll();
 		
 		assertThat(resultCountries).isEqualTo(expectedCountries);
 	}
@@ -193,10 +193,10 @@ public class CountryServiceTest {
 	
 	@Test
 	public void findByNameShouldCallDao() {
-		final Country expectedCountry = getCountry();
+		Country expectedCountry = getCountry();
 		when(countryDao.findByName(anyString())).thenReturn(expectedCountry);
 		
-		final Country country = service.findByName(TEST_COUNTRY_NAME);
+		Country country = service.findByName(TEST_COUNTRY_NAME);
 		
 		assertThat(country).isEqualTo(expectedCountry);
 	}
@@ -219,10 +219,10 @@ public class CountryServiceTest {
 	
 	@Test
 	public void findByIdShouldCallDao() {
-		final Country expectedCountry = getCountry();
+		Country expectedCountry = getCountry();
 		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
 		
-		final Country country = service.findById(TEST_COUNTRY_ID);
+		Country country = service.findById(TEST_COUNTRY_ID);
 		
 		assertThat(country).isEqualTo(expectedCountry);
 	}
@@ -235,10 +235,10 @@ public class CountryServiceTest {
 	}
 	
 	static Country getCountry() {
-		final Country country = new Country();
+		Country country = new Country();
 		country.setId(TEST_COUNTRY_ID);
 		country.setName(TEST_COUNTRY_NAME);
-		final Date now = new Date();
+		Date now = new Date();
 		country.setCreatedAt(now);
 		country.setUpdatedAt(now);
 		return country;

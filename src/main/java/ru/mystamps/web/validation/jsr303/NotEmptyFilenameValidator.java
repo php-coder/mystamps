@@ -28,12 +28,12 @@ public class NotEmptyFilenameValidator
 	implements ConstraintValidator<NotEmptyFilename, MultipartFile> {
 	
 	@Override
-	public void initialize(final NotEmptyFilename annotation) {
+	public void initialize(NotEmptyFilename annotation) {
 		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override
-	public boolean isValid(final MultipartFile file, final ConstraintValidatorContext ctx) {
+	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {
 			return true;

@@ -53,7 +53,7 @@ public abstract class AbstractPage {
 		driver.get(getFullUrl());
 	}
 	
-	public void open(final String pageUrl) {
+	public void open(String pageUrl) {
 		driver.get(Url.SITE + pageUrl);
 	}
 	
@@ -70,11 +70,11 @@ public abstract class AbstractPage {
 		try {
 			// As workaround, for a while, use HttpUrlConnection
 			// (but it leads to two connection to each page).
-			final URL url = new URL(getFullUrl());
-			final HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			URL url = new URL(getFullUrl());
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			return conn.getResponseCode();
 		
-		} catch (final IOException ex) {
+		} catch (IOException ex) {
 			// don't throw exception because it leads to error in tests
 			// instead of failure
 			return -1;
@@ -119,8 +119,8 @@ public abstract class AbstractPage {
 	}
 	
 	public List<String> getUserBarEntries() {
-		final WebElement userBar       = getElementById("user_bar");
-		final List<WebElement> entries = userBar.findElements(By.tagName("li"));
+		WebElement userBar       = getElementById("user_bar");
+		List<WebElement> entries = userBar.findElements(By.tagName("li"));
 		return WebElementUtils.convertToListWithText(entries);
 	}
 	
@@ -136,12 +136,12 @@ public abstract class AbstractPage {
 		return elementWithTagNameExists("footer");
 	}
 	
-	public boolean linkWithLabelExists(final String label) {
+	public boolean linkWithLabelExists(String label) {
 		return getLinkByText(label) != null;
 	}
 	
-	public boolean linkWithLabelAndTitleExists(final String label, final String title) {
-		final WebElement link = getLinkByText(label);
+	public boolean linkWithLabelAndTitleExists(String label, String title) {
+		WebElement link = getLinkByText(label);
 		if (link == null) {
 			return false;
 		}
@@ -149,12 +149,12 @@ public abstract class AbstractPage {
 		return link.getAttribute("title").equals(title);
 	}
 	
-	public boolean existsLinkTo(final String relativeUrl) {
+	public boolean existsLinkTo(String relativeUrl) {
 		Validate.isTrue(!"".equals(relativeUrl));
 		return elementWithXPathExists(String.format(A_HREF_LOCATOR, relativeUrl));
 	}
 	
-	public boolean textPresent(final String text) {
+	public boolean textPresent(String text) {
 		return body.getText().contains(text);
 	}
 	
@@ -163,23 +163,23 @@ public abstract class AbstractPage {
 	// Helpers for find elements
 	//
 	
-	protected WebElement getElementById(final String elementId) {
+	protected WebElement getElementById(String elementId) {
 		return driver.findElement(By.id(elementId));
 	}
 	
-	protected WebElement getElementByName(final String name) {
+	protected WebElement getElementByName(String name) {
 		return driver.findElement(By.name(name));
 	}
 	
-	protected WebElement getElementByXPath(final String xpath) {
+	protected WebElement getElementByXPath(String xpath) {
 		return driver.findElement(By.xpath(xpath));
 	}
 	
-	protected WebElement getElementByTagName(final String tagName) {
+	protected WebElement getElementByTagName(String tagName) {
 		return driver.findElement(By.tagName(tagName));
 	}
 	
-	protected List<WebElement> getElementsByClassName(final String className) {
+	protected List<WebElement> getElementsByClassName(String className) {
 		return driver.findElements(By.className(className));
 	}
 	
@@ -187,15 +187,15 @@ public abstract class AbstractPage {
 	// Helpers for getting element's value
 	//
 	
-	protected String getTextOfElementById(final String elementId) {
+	protected String getTextOfElementById(String elementId) {
 		return getElementById(elementId).getText();
 	}
 	
-	protected String getTextOfElementByXPath(final String xpath) {
+	protected String getTextOfElementByXPath(String xpath) {
 		return getElementByXPath(xpath).getText();
 	}
 	
-	protected String getTextOfElementByTagName(final String tagName) {
+	protected String getTextOfElementByTagName(String tagName) {
 		return getElementByTagName(tagName).getText();
 	}
 	
@@ -204,40 +204,40 @@ public abstract class AbstractPage {
 	// Other helpers
 	//
 	
-	protected boolean elementWithIdExists(final String elementId) {
+	protected boolean elementWithIdExists(String elementId) {
 		return getElement(By.id(elementId)) != null;
 	}
 	
-	protected boolean elementWithXPathExists(final String xpath) {
+	protected boolean elementWithXPathExists(String xpath) {
 		return getElement(By.xpath(xpath)) != null;
 	}
 	
-	protected boolean elementWithTagNameExists(final String tagName) {
+	protected boolean elementWithTagNameExists(String tagName) {
 		return getElement(By.tagName(tagName)) != null;
 	}
 	
-	protected WebElement getLinkByText(final String linkText) {
+	protected WebElement getLinkByText(String linkText) {
 		try {
 			return  driver.findElement(By.linkText(linkText));
-		} catch (final NoSuchElementException ex) {
+		} catch (NoSuchElementException ex) {
 			return null;
 		}
 	}
 	
-	private WebElement getElement(final By byMethod) {
+	private WebElement getElement(By byMethod) {
 		try {
 			return driver.findElement(byMethod);
-		} catch (final NoSuchElementException ex) {
+		} catch (NoSuchElementException ex) {
 			return null;
 		}
 	}
 	
-	public void login(final String login, final String password) {
+	public void login(String login, String password) {
 		Validate.isTrue(!"".equals(login), "login must be not null and not empty");
 		Validate.isTrue(!"".equals(password), "password must be not null and not empty");
 		
 		// TODO: check than we already authenticated and do nothing
-		final AuthAccountPage authPage = new AuthAccountPage(driver);
+		AuthAccountPage authPage = new AuthAccountPage(driver);
 		authPage.open();
 		authPage.authorizeUser(login, password);
 		
@@ -248,7 +248,7 @@ public abstract class AbstractPage {
 	
 	public void logout() {
 		// TODO: check than we not authenticated and do nothing
-		final LogoutAccountPage logoutPage = new LogoutAccountPage(driver);
+		LogoutAccountPage logoutPage = new LogoutAccountPage(driver);
 		logoutPage.open();
 		
 		// return to current page

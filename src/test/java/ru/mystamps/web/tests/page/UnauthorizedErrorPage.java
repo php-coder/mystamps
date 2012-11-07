@@ -23,7 +23,7 @@ import ru.mystamps.web.Url;
 
 public class UnauthorizedErrorPage extends AbstractPage {
 	
-	public UnauthorizedErrorPage(final WebDriver driver) {
+	public UnauthorizedErrorPage(WebDriver driver) {
 		super(driver, Url.ADD_COUNTRY_PAGE);
 	}
 	

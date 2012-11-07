@@ -34,29 +34,29 @@ public final class AbstractPageWithFormAssert
 	
 	private String fieldName;
 	
-	private AbstractPageWithFormAssert(final AbstractPageWithForm actual) {
+	private AbstractPageWithFormAssert(AbstractPageWithForm actual) {
 		super(actual, AbstractPageWithFormAssert.class);
 	}
 	
-	public static AbstractPageWithFormAssert assertThat(final AbstractPageWithForm actual) {
+	public static AbstractPageWithFormAssert assertThat(AbstractPageWithForm actual) {
 		return new AbstractPageWithFormAssert(actual);
 	}
 	
-	public AbstractPageWithFormAssert field(final String fieldName) {
+	public AbstractPageWithFormAssert field(String fieldName) {
 		this.fieldName = fieldName;
 		return this;
 	}
 	
-	public AbstractPageWithFormAssert hasError(final String expectedErrorMessage) {
+	public AbstractPageWithFormAssert hasError(String expectedErrorMessage) {
 		isNotNull();
 		Validate.validState(
 			fieldName != null,
 			"Error in test case: field name must be specified"
 		);
 		
-		final String errorMessage = actual.getFieldError(fieldName);
+		String errorMessage = actual.getFieldError(fieldName);
 		
-		final String msg = String.format(
+		String msg = String.format(
 			"Expected that field '%s' should have error '%s' but was '%s'",
 			fieldName,
 			expectedErrorMessage,
@@ -77,7 +77,7 @@ public final class AbstractPageWithFormAssert
 			"Error in test case: field name must be specified"
 		);
 		
-		final String msg = String.format(
+		String msg = String.format(
 			"Expected that field '%s' should not have any error",
 			fieldName
 		);
@@ -89,16 +89,16 @@ public final class AbstractPageWithFormAssert
 		return this;
 	}
 	
-	public AbstractPageWithFormAssert hasValue(final String expectedValue) {
+	public AbstractPageWithFormAssert hasValue(String expectedValue) {
 		isNotNull();
 		Validate.validState(
 			fieldName != null,
 			"Error in test case: field name must be specified"
 		);
 		
-		final String value = actual.getFieldValue(fieldName);
+		String value = actual.getFieldValue(fieldName);
 		
-		final String msg = String.format(
+		String msg = String.format(
 			"Expected value of field '%s' is '%s' but was '%s'",
 			fieldName,
 			expectedValue,

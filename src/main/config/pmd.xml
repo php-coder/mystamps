@@ -131,7 +131,10 @@
 	</rule>
 	
 	<rule ref="rulesets/java/finalizers.xml" />
-	<rule ref="rulesets/java/optimizations.xml" />
+	<rule ref="rulesets/java/optimizations.xml">
+		<exclude name="LocalVariableCouldBeFinal" />
+		<exclude name="MethodArgumentCouldBeFinal" />
+	</rule>
 	<rule ref="rulesets/java/clone.xml" />
 	
 	

@@ -29,12 +29,12 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 	private CountryService countryService;
 	
 	@Override
-	public void initialize(final UniqueCountryName annotation) {
+	public void initialize(UniqueCountryName annotation) {
 		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override
-	public boolean isValid(final String value, final ConstraintValidatorContext ctx) {
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {
 			return true;

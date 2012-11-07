@@ -64,7 +64,7 @@ public class ImageServiceTest {
 	
 	@Before
 	public void setUp() {
-		final long anyValue = 1024;
+		long anyValue = 1024;
 		when(multipartFile.getSize()).thenReturn(anyValue);
 		when(multipartFile.getContentType()).thenReturn("image/png");
 		when(imageDao.save(any(Image.class))).thenReturn(new Image());
@@ -116,14 +116,14 @@ public class ImageServiceTest {
 			
 			fail("Expected RuntimeException should be thrown");
 			
-		} catch (final RuntimeException ex) {
+		} catch (RuntimeException ex) {
 			assertThat(ex.getCause()).isExactlyInstanceOf(IOException.class);
 		}
 	}
 	
 	@Test
 	public void saveShouldPassFileContentToDao() throws IOException {
-		final byte[] expected = "test".getBytes();
+		byte[] expected = "test".getBytes();
 		when(multipartFile.getBytes()).thenReturn(expected);
 		
 		service.save(multipartFile);
@@ -146,13 +146,13 @@ public class ImageServiceTest {
 	
 	@Test
 	public void saveShouldReturnUrlWithImage() {
-		final Integer expectedId = 10;
-		final String expectedUrl =
+		Integer expectedId = 10;
+		String expectedUrl =
 			ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedId));
 		when(image.getId()).thenReturn(expectedId);
 		when(imageDao.save(any(Image.class))).thenReturn(image);
 		
-		final String result = service.save(multipartFile);
+		String result = service.save(multipartFile);
 		
 		assertThat(result).isEqualTo(expectedUrl);
 	}
@@ -168,7 +168,7 @@ public class ImageServiceTest {
 	
 	@Test
 	public void findByIdShouldCallImageDao() {
-		final Integer anyId = 3;
+		Integer anyId = 3;
 		service.findById(anyId);
 		
 		verify(imageDao).findOne(anyInt());
@@ -176,7 +176,7 @@ public class ImageServiceTest {
 	
 	@Test
 	public void findByIdShouldPassIdToImageDao() {
-		final Integer expectedId = 3;
+		Integer expectedId = 3;
 		
 		service.findById(expectedId);
 		
@@ -185,17 +185,17 @@ public class ImageServiceTest {
 	
 	@Test
 	public void findByIdShouldReturnValueFromImageDao() {
-		final Image expectedImage = getImage();
-		final Integer imageId = expectedImage.getId();
+		Image expectedImage = getImage();
+		Integer imageId = expectedImage.getId();
 		when(imageDao.findOne(eq(imageId))).thenReturn(expectedImage);
 		
-		final Image actualImage = service.findById(imageId);
+		Image actualImage = service.findById(imageId);
 		
 		assertThat(actualImage).isEqualTo(expectedImage);
 	}
 	
 	private static Image getImage() {
-		final Image image = new Image();
+		Image image = new Image();
 		image.setId(1);
 		return image;
 	}

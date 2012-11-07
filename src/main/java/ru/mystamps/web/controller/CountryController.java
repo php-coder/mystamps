@@ -45,12 +45,12 @@ public class CountryController {
 	private final CountryService countryService;
 	
 	@Inject
-	CountryController(final CountryService countryService) {
+	CountryController(CountryService countryService) {
 		this.countryService = countryService;
 	}
 	
 	@InitBinder("addCountryForm")
-	protected void initBinder(final WebDataBinder binder) {
+	protected void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
 	}
 	
@@ -60,24 +60,24 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.POST)
-	public String processInput(@Valid final AddCountryForm form, final BindingResult result) {
+	public String processInput(@Valid AddCountryForm form, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		final Country country = countryService.add(form);
+		Country country = countryService.add(form);
 		
 		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
 	}
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
 	public String showInfo(
-		@PathVariable("id") final Integer id,
-		final Model model,
-		final HttpServletResponse response) throws IOException {
+		@PathVariable("id") Integer id,
+		Model model,
+		HttpServletResponse response) throws IOException {
 		
-		final Country country = countryService.findById(id);
+		Country country = countryService.findById(id);
 		if (country == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

@@ -37,15 +37,15 @@ public class ImageController {
 	private final ImageService imageService;
 	
 	@Inject
-	public ImageController(final ImageService imageService) {
+	public ImageController(ImageService imageService) {
 		this.imageService = imageService;
 	}
 	
 	@RequestMapping(value = Url.GET_IMAGE_PAGE, method = RequestMethod.GET)
-	public void getImage(@PathVariable("id") final Integer id, final HttpServletResponse response)
+	public void getImage(@PathVariable("id") Integer id, HttpServletResponse response)
 		throws IOException {
 		
-		final Image image = imageService.findById(id);
+		Image image = imageService.findById(id);
 		if (image == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;

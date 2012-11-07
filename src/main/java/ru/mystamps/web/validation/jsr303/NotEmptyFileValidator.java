@@ -25,12 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, MultipartFile> {
 	
 	@Override
-	public void initialize(final NotEmptyFile annotation) {
+	public void initialize(NotEmptyFile annotation) {
 		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override
-	public boolean isValid(final MultipartFile file, final ConstraintValidatorContext ctx) {
+	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {
 			return true;

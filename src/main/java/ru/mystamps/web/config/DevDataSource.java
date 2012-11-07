@@ -38,7 +38,7 @@ public class DevDataSource {
 	
 	@Bean(destroyMethod = "close")
 	public DataSource getDataSource() {
-		final BasicDataSource dataSource = new BasicDataSource();
+		BasicDataSource dataSource = new BasicDataSource();
 		
 		dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
 		dataSource.setUrl(env.getRequiredProperty("db.url"));

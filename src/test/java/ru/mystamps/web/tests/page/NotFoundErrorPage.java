@@ -22,7 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 public class NotFoundErrorPage extends AbstractPage {
 	
-	public NotFoundErrorPage(final WebDriver driver) {
+	public NotFoundErrorPage(WebDriver driver) {
 		super(driver, "/tests/page-does-not-exists.htm");
 	}
 	

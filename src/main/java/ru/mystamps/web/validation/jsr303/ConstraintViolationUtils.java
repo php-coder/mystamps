@@ -28,9 +28,9 @@ public final class ConstraintViolationUtils {
 	 * Bind error {@code msgTemplate} to field named {@code fieldName}.
 	 */
 	public static void recreate(
-		final ConstraintValidatorContext ctx,
-		final String fieldName,
-		final String msgTemplate) {
+		ConstraintValidatorContext ctx,
+		String fieldName,
+		String msgTemplate) {
 		
 		ctx.disableDefaultConstraintViolation();
 		ctx.buildConstraintViolationWithTemplate(msgTemplate)
@@ -41,10 +41,7 @@ public final class ConstraintViolationUtils {
 	/**
 	 * Bind error {@code msgTemplate} to whole form.
 	 */
-	public static void recreate(
-		final ConstraintValidatorContext ctx,
-		final String msgTemplate) {
-		
+	public static void recreate(ConstraintValidatorContext ctx, String msgTemplate) {
 		ctx.disableDefaultConstraintViolation();
 		ctx.buildConstraintViolationWithTemplate(msgTemplate)
 			.addConstraintViolation();

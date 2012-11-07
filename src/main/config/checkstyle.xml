@@ -234,9 +234,11 @@
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
+        <!--
         <module name="FinalParameters">
             <property name="severity" value="warning"/>
         </module>
+        -->
         <module name="TodoComment">
             <property name="format" value="XXX"/>
             <property name="severity" value="warning"/>

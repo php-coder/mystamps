@@ -32,9 +32,9 @@ public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 	 **/
 	@Override
 	public void commence(
-		final HttpServletRequest req,
-		final HttpServletResponse resp,
-		final AuthenticationException ex)
+		HttpServletRequest req,
+		HttpServletResponse resp,
+		AuthenticationException ex)
 		throws IOException {
 		
 		resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);

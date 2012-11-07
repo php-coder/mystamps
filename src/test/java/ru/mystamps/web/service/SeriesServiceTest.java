@@ -155,9 +155,9 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldLoadAndPassCountryToSeriesDaoIfCountryPresent() {
-		final Country expectedCountry = CountryServiceTest.getCountry();
-		final Integer expectedId      = expectedCountry.getId();
-		final String expectedName     = expectedCountry.getName();
+		Country expectedCountry = CountryServiceTest.getCountry();
+		Integer expectedId      = expectedCountry.getId();
+		String expectedName     = expectedCountry.getName();
 		
 		form.setCountry(expectedId);
 		
@@ -175,7 +175,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassDateWithSpecifiedYearToSeriesDaoIfYearPresent() {
-		final int expectedYear = 2000;
+		int expectedYear = 2000;
 		form.setYear(expectedYear);
 		
 		service.add(form);
@@ -184,14 +184,14 @@ public class SeriesServiceTest {
 		
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.setTime(seriesCaptor.getValue().getReleasedAt());
-		final int actualYear = cal.get(Calendar.YEAR);
+		int actualYear = cal.get(Calendar.YEAR);
 		
 		assertThat(actualYear).isEqualTo(expectedYear);
 	}
 	
 	@Test
 	public void addShouldPassQuantityToSeriesDao() {
-		final Integer expectedQuantity = 3;
+		Integer expectedQuantity = 3;
 		form.setQuantity(expectedQuantity);
 		
 		service.add(form);
@@ -203,7 +203,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassPerforatedToSeriesDao() {
-		final Boolean expectedResult = true;
+		Boolean expectedResult = true;
 		form.setPerforated(expectedResult);
 		
 		service.add(form);
@@ -226,7 +226,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveMichelNumbers() {
-		final Set<MichelCatalog> expectedNumbers = newSet(
+		Set<MichelCatalog> expectedNumbers = newSet(
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
@@ -240,7 +240,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassMichelNumbersToSeriesDao() {
-		final Set<MichelCatalog> expectedNumbers = newSet(
+		Set<MichelCatalog> expectedNumbers = newSet(
 			new MichelCatalog("1"),
 			new MichelCatalog("2")
 		);
@@ -265,7 +265,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveScottNumbers() {
-		final Set<ScottCatalog> expectedNumbers = newSet(
+		Set<ScottCatalog> expectedNumbers = newSet(
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
@@ -279,7 +279,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassScottNumbersToSeriesDao() {
-		final Set<ScottCatalog> expectedNumbers = newSet(
+		Set<ScottCatalog> expectedNumbers = newSet(
 			new ScottCatalog("1"),
 			new ScottCatalog("2")
 		);
@@ -304,7 +304,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveYvertNumbers() {
-		final Set<YvertCatalog> expectedNumbers = newSet(
+		Set<YvertCatalog> expectedNumbers = newSet(
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
@@ -318,7 +318,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassYvertNumbersToSeriesDao() {
-		final Set<YvertCatalog> expectedNumbers = newSet(
+		Set<YvertCatalog> expectedNumbers = newSet(
 			new YvertCatalog("1"),
 			new YvertCatalog("2")
 		);
@@ -343,7 +343,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldSaveGibbonsNumbers() {
-		final Set<GibbonsCatalog> expectedNumbers = newSet(
+		Set<GibbonsCatalog> expectedNumbers = newSet(
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
@@ -357,7 +357,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassGibbonsNumbersToSeriesDao() {
-		final Set<GibbonsCatalog> expectedNumbers = newSet(
+		Set<GibbonsCatalog> expectedNumbers = newSet(
 			new GibbonsCatalog("1"),
 			new GibbonsCatalog("2")
 		);
@@ -387,7 +387,7 @@ public class SeriesServiceTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void addShouldThrowExceptionIfImageUrlTooLong() {
-		final String aVeryLongPath = StringUtils.repeat("x", Series.IMAGE_URL_LENGTH + 1);
+		String aVeryLongPath = StringUtils.repeat("x", Series.IMAGE_URL_LENGTH + 1);
 		when(imageService.save(any(MultipartFile.class))).thenReturn(aVeryLongPath);
 		
 		service.add(form);
@@ -395,7 +395,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassImageUrlToSeriesDao() {
-		final String expectedUrl = "http://example.org/example.jpg";
+		String expectedUrl = "http://example.org/example.jpg";
 		when(imageService.save(any(MultipartFile.class))).thenReturn(expectedUrl);
 		
 		service.add(form);
@@ -414,7 +414,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassCommentToSeriesDaoIfPresent() {
-		final String expectedComment = "Some text";
+		String expectedComment = "Some text";
 		form.setComment(expectedComment);
 		
 		service.add(form);
@@ -451,7 +451,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentUser() {
-		final User expectedUser = UserServiceTest.getValidUser();
+		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
@@ -462,7 +462,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentUser() {
-		final User expectedUser = UserServiceTest.getValidUser();
+		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
 		service.add(form);
@@ -482,7 +482,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void findByIdShouldCallSeriesDao() {
-		final Integer anyId = 3;
+		Integer anyId = 3;
 		service.findById(anyId);
 		
 		verify(seriesDao).findOne(anyInt());
@@ -490,7 +490,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void findByIdShouldPassIdToSeriesDao() {
-		final Integer expectedId = 3;
+		Integer expectedId = 3;
 		
 		service.findById(expectedId);
 		
@@ -499,19 +499,19 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void findByIdShouldReturnValueFromSeriesDao() {
-		final Series expectedSeries = getSeries();
-		final Integer seriesId = expectedSeries.getId();
+		Series expectedSeries = getSeries();
+		Integer seriesId = expectedSeries.getId();
 		when(seriesDao.findOne(eq(seriesId))).thenReturn(expectedSeries);
 		
-		final Series actualSeries = service.findById(seriesId);
+		Series actualSeries = service.findById(seriesId);
 		
 		assertThat(actualSeries).isEqualTo(expectedSeries);
 	}
 	
-	private static <T> Set<T> newSet(final T... elements) {
-		final Set<T> result = new LinkedHashSet<T>();
+	private static <T> Set<T> newSet(T... elements) {
+		Set<T> result = new LinkedHashSet<T>();
 		
-		for (final T element : elements) {
+		for (T element : elements) {
 			result.add(element);
 		}
 		
@@ -519,7 +519,7 @@ public class SeriesServiceTest {
 	}
 	
 	private static Series getSeries() {
-		final Series series = new Series();
+		Series series = new Series();
 		series.setId(1);
 		return series;
 	}

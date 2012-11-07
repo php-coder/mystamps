@@ -41,20 +41,20 @@ public class NotFoundErrorController {
 	private final SiteService siteService;
 	
 	@Inject
-	NotFoundErrorController(final SiteService siteService) {
+	NotFoundErrorController(SiteService siteService) {
 		this.siteService = siteService;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public void notFound(
-			final HttpServletRequest request,
-			final CustomUserDetails userDetails,
-			@RequestHeader(value = "referer", required = false) final String referer,
-			@RequestHeader(value = "user-agent", required = false) final String agent) {
+			HttpServletRequest request,
+			CustomUserDetails userDetails,
+			@RequestHeader(value = "referer", required = false) String referer,
+			@RequestHeader(value = "user-agent", required = false) String agent) {
 		
 		// TODO: sanitize all user's values (#60)
-		final String page = (String)request.getAttribute("javax.servlet.error.request_uri");
-		final String ip   = request.getRemoteAddr();
+		String page = (String)request.getAttribute("javax.servlet.error.request_uri");
+		String ip   = request.getRemoteAddr();
 		
 		Integer uid = null;
 		if (userDetails != null) {
@@ -63,7 +63,7 @@ public class NotFoundErrorController {
 		
 		try {
 			siteService.logAboutAbsentPage(page, uid, ip, referer, agent);
-		} catch (final Exception ex) { // NOPMD
+		} catch (Exception ex) { // NOPMD
 			// intentionally ignored:
 			// database error should not break showing of 404 page
 			LOG.warn("Cannot log 404 error", ex);

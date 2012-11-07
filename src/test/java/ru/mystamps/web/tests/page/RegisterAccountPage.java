@@ -30,7 +30,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class RegisterAccountPage extends AbstractPageWithForm {
 	
-	public RegisterAccountPage(final WebDriver driver) {
+	public RegisterAccountPage(WebDriver driver) {
 		super(driver, Url.REGISTRATION_PAGE);
 		
 		hasForm(
@@ -47,12 +47,12 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("registerAccountForm");
 	}
 	
-	public void registerUser(final String email) {
+	public void registerUser(String email) {
 		fillEmail(email);
 		submit();
 	}
 	
-	private void fillEmail(final String email) {
+	private void fillEmail(String email) {
 		fillField("email", email);
 	}
 	

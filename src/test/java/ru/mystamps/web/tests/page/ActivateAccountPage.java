@@ -39,7 +39,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class ActivateAccountPage extends AbstractPageWithForm {
 	
-	public ActivateAccountPage(final WebDriver driver) {
+	public ActivateAccountPage(WebDriver driver) {
 		super(driver, Url.ACTIVATE_ACCOUNT_PAGE);
 		
 		hasForm(
@@ -75,13 +75,13 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 	}
 	
 	public void activateAccount(
-			final String login,
-			final String name,
-			final String password,
-			final String passwordConfirmation,
-			final String activationKey) {
+			String login,
+			String name,
+			String password,
+			String passwordConfirmation,
+			String activationKey) {
 		
-		final Collection<String> fieldNames = Arrays.asList(
+		Collection<String> fieldNames = Arrays.asList(
 			login, name, password, passwordConfirmation, activationKey
 		);
 		
@@ -102,31 +102,31 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("activateAccountForm");
 	}
 	
-	private void fillLogin(final String login) {
+	private void fillLogin(String login) {
 		if (login != null) {
 			fillField("login", login);
 		}
 	}
 	
-	private void fillName(final String name) {
+	private void fillName(String name) {
 		if (name != null) {
 			fillField("name", name);
 		}
 	}
 	
-	private void fillPassword(final String password) {
+	private void fillPassword(String password) {
 		if (password != null) {
 			fillField("password", password);
 		}
 	}
 	
-	private void fillPasswordConfirmation(final String passwordConfirmation) {
+	private void fillPasswordConfirmation(String passwordConfirmation) {
 		if (passwordConfirmation != null) {
 			fillField("passwordConfirmation", passwordConfirmation);
 		}
 	}
 	
-	private void fillActivationKey(final String activationKey) {
+	private void fillActivationKey(String activationKey) {
 		if (activationKey != null) {
 			fillField("activationKey", activationKey);
 		}

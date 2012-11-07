@@ -70,8 +70,8 @@ public class WhenAnonymousUserActivateAccount
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void activationKeyShouldBeAutoFilledFromURL() {
-		final String key = "7777744444";
-		final String url = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", key);
+		String key = "7777744444";
+		String url = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", key);
 		
 		page.open(url);
 		assertThat(page).field("activationKey").hasValue(key);
@@ -162,10 +162,7 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validNames")
-	public void nameWithAllowedCharactersShouldBeAccepted(
-		final String name,
-		final Object whatever) {
-		
+	public void nameWithAllowedCharactersShouldBeAccepted(String name, Object whatever) {
 		page.activateAccount(null, name, null, null, null);
 		
 		assertThat(page).field("name").hasNoError();

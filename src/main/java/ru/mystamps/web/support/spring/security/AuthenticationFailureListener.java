@@ -39,8 +39,8 @@ public class AuthenticationFailureListener
 	private SiteService siteService;
 	
 	@Override
-	public void onApplicationEvent(final AuthenticationFailureBadCredentialsEvent event) {
-		final HttpServletRequest request = getRequest();
+	public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
+		HttpServletRequest request = getRequest();
 		if (request == null) {
 			LOG.warn("Can't get http request object");
 			return;
@@ -48,16 +48,16 @@ public class AuthenticationFailureListener
 		
 		// TODO: log more info (login for example) (#59)
 		// TODO: sanitize all user's values (#60)
-		final String page    = request.getRequestURI();
-		final String ip      = request.getRemoteAddr();
-		final String referer = request.getHeader("referer");
-		final String agent   = request.getHeader("user-agent");
+		String page    = request.getRequestURI();
+		String ip      = request.getRemoteAddr();
+		String referer = request.getHeader("referer");
+		String agent   = request.getHeader("user-agent");
 		
 		siteService.logAboutFailedAuthentication(page, null, ip, referer, agent);
 	}
 	
 	private HttpServletRequest getRequest() {
-		final ServletRequestAttributes attrs =
+		ServletRequestAttributes attrs =
 			(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
 		if (attrs == null) {
 			return null;

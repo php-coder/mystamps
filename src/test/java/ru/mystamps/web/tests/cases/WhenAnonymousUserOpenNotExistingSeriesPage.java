@@ -39,7 +39,7 @@ public class WhenAnonymousUserOpenNotExistingSeriesPage
 	
 	@Test(groups = "logic")
 	public void shouldShow404Page() {
-		final String absentSeriesId = "999";
+		String absentSeriesId = "999";
 		page.open(Url.INFO_SERIES_PAGE.replace("{id}", absentSeriesId));
 		
 		checkStandardStructure();

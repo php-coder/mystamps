@@ -55,8 +55,7 @@ public class DbConfig {
 	
 	@Bean
 	public JpaVendorAdapter getJpaVendorAdapter() {
-		final AbstractJpaVendorAdapter jpaVendorAdapter =
-			new HibernateJpaVendorAdapter();
+		AbstractJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		
 		jpaVendorAdapter.setDatabasePlatform(env.getRequiredProperty("jpa.dialectClassName"));
 		jpaVendorAdapter.setShowSql(env.getRequiredProperty("jpa.showSql", Boolean.class));
@@ -68,13 +67,13 @@ public class DbConfig {
 	
 	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
-		final LocalContainerEntityManagerFactoryBean entityManagerFactory =
+		LocalContainerEntityManagerFactoryBean entityManagerFactory =
 			new LocalContainerEntityManagerFactoryBean();
 		
 		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
 		entityManagerFactory.setDataSource(dataSource);
 		
-		final Map<String, String> jpaProperties = new HashMap<String, String>();
+		Map<String, String> jpaProperties = new HashMap<String, String>();
 		jpaProperties.put(
 			"hibernate.format_sql",
 			env.getRequiredProperty("hibernate.formatSql")
@@ -94,8 +93,7 @@ public class DbConfig {
 	
 	@Bean(name = "transactionManager")
 	public PlatformTransactionManager getTransactionManager() {
-		final JpaTransactionManager transactionManager =
-			new JpaTransactionManager();
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		
 		transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
 		

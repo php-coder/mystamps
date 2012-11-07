@@ -52,12 +52,12 @@ import ru.mystamps.web.Url;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
-	public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 	
 	@Override
-	public void addViewControllers(final ViewControllerRegistry registry) {
+	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.INDEX_PAGE).setViewName("site/index");
 		registry.addViewController(Url.SUCCESSFUL_ACTIVATION_PAGE);
@@ -66,22 +66,22 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Override
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/*");
 	}
 	
 	@Override
-	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> argumentResolvers) {
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(new CustomUserDetailsArgumentResolver());
 	}
 	
 	@Override
 	public Validator getValidator() {
-		final ReloadableResourceBundleMessageSource messageSource =
+		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:ru/mystamps/i18n/ValidationMessages");
 		
-		final LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+		LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
 		factory.setValidationMessageSource(messageSource);
 		
 		return factory;
@@ -89,7 +89,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public TilesConfigurer getTilesConfigurer() {
-		final TilesConfigurer configurer = new TilesConfigurer();
+		TilesConfigurer configurer = new TilesConfigurer();
 		
 		configurer.setDefinitions(new String[]{
 			"/WEB-INF/tiles/tiles.xml"
@@ -100,7 +100,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public ViewResolver getViewResolver() {
-		final UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
 		
 		viewResolver.setViewClass(TilesView.class);
 		
@@ -109,7 +109,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
-		final ReloadableResourceBundleMessageSource messageSource =
+		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		
 		messageSource.setBasename("classpath:ru/mystamps/i18n/Messages");

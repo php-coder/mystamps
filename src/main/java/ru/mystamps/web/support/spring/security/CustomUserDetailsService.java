@@ -49,12 +49,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(final String login) {
+	public UserDetails loadUserByUsername(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		LOG.debug("Find user by login '{}'", login);
 		
-		final User user = userService.findByLogin(login);
+		User user = userService.findByLogin(login);
 		if (user == null) {
 			LOG.debug("User '{}' not found", login);
 			throw new UsernameNotFoundException("User not found");

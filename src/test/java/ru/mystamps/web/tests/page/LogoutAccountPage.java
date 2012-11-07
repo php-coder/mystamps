@@ -24,7 +24,7 @@ import ru.mystamps.web.Url;
 
 public class LogoutAccountPage extends AbstractPage {
 	
-	public LogoutAccountPage(final WebDriver driver) {
+	public LogoutAccountPage(WebDriver driver) {
 		super(driver, Url.LOGOUT_PAGE);
 	}
 	

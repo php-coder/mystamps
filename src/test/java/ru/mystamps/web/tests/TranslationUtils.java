@@ -50,7 +50,7 @@ public final class TranslationUtils {
 	private TranslationUtils() {
 	}
 	
-	public static String tr(final String key) {
+	public static String tr(String key) {
 		String msg = "";
 		
 		for (ResourceBundle bundle : BUNDLES) {
@@ -63,13 +63,13 @@ public final class TranslationUtils {
 	}
 	
 	// TODO: add simple unit tests (#93)
-	public static String stripHtmlTags(final String msg) {
+	public static String stripHtmlTags(String msg) {
 		return msg.replaceAll("\\<.*?>", "");
 	}
 	
-	public static String tr(final String key, final Object... args) {
+	public static String tr(String key, Object... args) {
 		// TODO: replace this hack to something less ugly
-		final String messageFormat = tr(key).replaceAll("\\{[^\\}]+\\}", "{0}");
+		String messageFormat = tr(key).replaceAll("\\{[^\\}]+\\}", "{0}");
 		return MessageFormat.format(messageFormat, args);
 	}
 	

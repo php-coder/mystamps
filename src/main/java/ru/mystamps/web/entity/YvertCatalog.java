@@ -45,7 +45,7 @@ public class YvertCatalog implements StampsCatalog {
 	@Column(length = CODE_LENGTH, unique = true)
 	private String code;
 	
-	public YvertCatalog(final String code) {
+	public YvertCatalog(String code) {
 		this.code = code;
 	}
 	

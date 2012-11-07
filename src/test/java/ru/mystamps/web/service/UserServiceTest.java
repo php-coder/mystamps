@@ -119,7 +119,7 @@ public class UserServiceTest {
 		
 		verify(usersActivationDao).save(activationCaptor.capture());
 		
-		final String activationKey = activationCaptor.getValue().getActivationKey();
+		String activationKey = activationCaptor.getValue().getActivationKey();
 		assertThat(activationKey.length()).as("activation key length")
 			.isEqualTo(UsersActivation.ACTIVATION_KEY_LENGTH);
 		
@@ -130,11 +130,11 @@ public class UserServiceTest {
 	public void addRegistrationRequestShouldGenerateUniqueActivationKey() {
 		service.addRegistrationRequest(registrationForm);
 		verify(usersActivationDao).save(activationCaptor.capture());
-		final String firstActivationKey = activationCaptor.getValue().getActivationKey();
+		String firstActivationKey = activationCaptor.getValue().getActivationKey();
 		
 		service.addRegistrationRequest(registrationForm);
 		verify(usersActivationDao, atLeastOnce()).save(activationCaptor.capture());
-		final String secondActivationKey = activationCaptor.getValue().getActivationKey();
+		String secondActivationKey = activationCaptor.getValue().getActivationKey();
 		
 		assertThat(firstActivationKey).isNotEqualTo(secondActivationKey);
 	}
@@ -148,7 +148,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void addRegistrationRequestShouldPassEmailToDao() {
-		final String expectedEmail = "somename@example.org";
+		String expectedEmail = "somename@example.org";
 		registrationForm.setEmail(expectedEmail);
 		
 		service.addRegistrationRequest(registrationForm);
@@ -178,10 +178,10 @@ public class UserServiceTest {
 	
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldCallDao() {
-		final UsersActivation expectedActivation = getUsersActivation();
+		UsersActivation expectedActivation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(expectedActivation);
 		
-		final UsersActivation activation =
+		UsersActivation activation =
 			service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
 		
 		assertThat(activation).isEqualTo(expectedActivation);
@@ -214,7 +214,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldDeleteRegistrationRequest() {
-		final UsersActivation activation = getUsersActivation();
+		UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -276,7 +276,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldUseEmailFromRegistrationRequest() {
-		final UsersActivation activation = getUsersActivation();
+		UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -288,7 +288,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldUseRegistrationDateFromRegistrationRequest() {
-		final UsersActivation activation = getUsersActivation();
+		UsersActivation activation = getUsersActivation();
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -306,7 +306,7 @@ public class UserServiceTest {
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		final String salt = userCaptor.getValue().getSalt();
+		String salt = userCaptor.getValue().getSalt();
 		assertThat(salt.length()).as("salt length").isEqualTo(User.SALT_LENGTH);
 		assertThat(salt).matches("^[\\p{Alnum}]+$");
 	}
@@ -317,11 +317,11 @@ public class UserServiceTest {
 		
 		service.registerUser(activationForm);
 		verify(userDao).save(userCaptor.capture());
-		final String firstSalt = userCaptor.getValue().getSalt();
+		String firstSalt = userCaptor.getValue().getSalt();
 		
 		service.registerUser(activationForm);
 		verify(userDao, atLeastOnce()).save(userCaptor.capture());
-		final String secondSalt = userCaptor.getValue().getSalt();
+		String secondSalt = userCaptor.getValue().getSalt();
 		
 		assertThat(firstSalt).isNotEqualTo(secondSalt);
 	}
@@ -335,7 +335,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldGetsHashFromEncoder() {
-		final String expectedHash = TEST_HASH;
+		String expectedHash = TEST_HASH;
 		
 		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
@@ -345,7 +345,7 @@ public class UserServiceTest {
 		verify(userDao).save(userCaptor.capture());
 		verify(encoder).encodePassword(eq(TEST_PASSWORD), anyString());
 		
-		final String actualHash = userCaptor.getValue().getHash();
+		String actualHash = userCaptor.getValue().getHash();
 		assertThat(actualHash).isEqualTo(expectedHash);
 	}
 	
@@ -397,10 +397,10 @@ public class UserServiceTest {
 	
 	@Test
 	public void findByLoginShouldCallDao() {
-		final User expectedUser = getValidUser();
+		User expectedUser = getValidUser();
 		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
 		
-		final User user = service.findByLogin(TEST_LOGIN);
+		User user = service.findByLogin(TEST_LOGIN);
 		
 		assertThat(user).isEqualTo(expectedUser);
 	}
@@ -412,8 +412,8 @@ public class UserServiceTest {
 	}
 	
 	static User getValidUser() {
-		final Integer anyId = 777;
-		final User user = new User();
+		Integer anyId = 777;
+		User user = new User();
 		user.setId(anyId);
 		user.setLogin(TEST_LOGIN);
 		user.setName(TEST_NAME);
@@ -427,7 +427,7 @@ public class UserServiceTest {
 	}
 	
 	static UsersActivation getUsersActivation() {
-		final UsersActivation activation = new UsersActivation();
+		UsersActivation activation = new UsersActivation();
 		activation.setActivationKey(TEST_ACTIVATION_KEY);
 		activation.setEmail(TEST_EMAIL);
 		activation.setCreatedAt(new Date());

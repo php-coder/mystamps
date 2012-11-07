@@ -47,7 +47,7 @@ public class SecurityConfig {
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
-		final ReloadableResourceBundleMessageSource messageSource =
+		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		
 		messageSource.setBasename("classpath:ru/mystamps/i18n/SpringSecurityMessages");

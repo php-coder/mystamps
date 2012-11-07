@@ -71,7 +71,7 @@ public class WhenAnonymousUserRegisterAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidEmails")
-	public void emailShouldBeValid(final String invalidEmail, final String expectedMessage) {
+	public void emailShouldBeValid(String invalidEmail, String expectedMessage) {
 		page.registerUser(invalidEmail);
 		
 		assertThat(page).field("email").hasError(expectedMessage);
@@ -95,8 +95,7 @@ public class WhenAnonymousUserRegisterAccount
 	
 	@DataProvider(name = "invalidEmails")
 	public Object[][] getInvalidEmails() {
-		final String expectedErrorMessage =
-			tr("ru.mystamps.web.validation.jsr303.Email.message");
+		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Email.message");
 		
 		return new Object[][] {
 			{"login", expectedErrorMessage},

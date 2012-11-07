@@ -29,13 +29,13 @@ public final class WebElementUtils {
 	private WebElementUtils() {
 	}
 	
-	public static List<String> convertToListWithText(final List<WebElement> elements) {
+	public static List<String> convertToListWithText(List<WebElement> elements) {
 		if (elements.isEmpty()) {
 			return Collections.<String>emptyList();
 		}
 		
-		final List<String> result = new ArrayList<String>(elements.size());
-		for (final WebElement el : elements) {
+		List<String> result = new ArrayList<String>(elements.size());
+		for (WebElement el : elements) {
 			result.add(el.getText());
 		}
 		

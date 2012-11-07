@@ -55,11 +55,11 @@ public class SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
 	public void logAboutAbsentPage(
-			final String page,
-			final Integer userId,
-			final String ip,
-			final String referer,
-			final String agent) {
+			String page,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent) {
 		
 		logEvent(getAbsentPageType(), page, userId, ip, referer, agent);
 	}
@@ -67,27 +67,27 @@ public class SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
 	public void logAboutFailedAuthentication(
-			final String page,
-			final Integer userId,
-			final String ip,
-			final String referer,
-			final String agent) {
+			String page,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent) {
 		
 		logEvent(getFailedAuthenticationType(), page, userId, ip, referer, agent);
 	}
 	
 	private void logEvent(
-			final SuspiciousActivityType type,
-			final String page,
-			final Integer userId,
-			final String ip,
-			final String referer,
-			final String agent) {
+			SuspiciousActivityType type,
+			String page,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent) {
 		
 		Validate.isTrue(type != null, "Type of suspicious activity was not set");
 		Validate.isTrue(page != null, "Page should be non null");
 		
-		final SuspiciousActivity activity = new SuspiciousActivity();
+		SuspiciousActivity activity = new SuspiciousActivity();
 		activity.setType(type);
 		activity.setOccuredAt(new Date());
 		activity.setPage(page);

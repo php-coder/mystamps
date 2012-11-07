@@ -32,7 +32,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class AddCountryPage extends AbstractPageWithForm {
 	
-	public AddCountryPage(final WebDriver driver) {
+	public AddCountryPage(WebDriver driver) {
 		super(driver, Url.ADD_COUNTRY_PAGE);
 		
 		hasForm(
@@ -44,14 +44,14 @@ public class AddCountryPage extends AbstractPageWithForm {
 		);
 	}
 	
-	public void addCountry(final String countryName) {
+	public void addCountry(String countryName) {
 		Validate.validState(countryName != null, "Country name should be non null");
 		
 		fillName(countryName);
 		submit();
 	}
 	
-	private void fillName(final String name) {
+	private void fillName(String name) {
 		if (name != null) {
 			fillField("name", name);
 		}

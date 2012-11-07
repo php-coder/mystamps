@@ -38,7 +38,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class AddSeriesPage extends AbstractPageWithForm {
 	
-	public AddSeriesPage(final WebDriver driver) {
+	public AddSeriesPage(WebDriver driver) {
 		super(driver, Url.ADD_SERIES_PAGE);
 		
 		hasForm(
@@ -73,7 +73,7 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		return getSelectOptions("country");
 	}
 	
-	public void fillCountry(final String value) {
+	public void fillCountry(String value) {
 		if (value != null) {
 			new Select(getElementByName("country")).selectByVisibleText(value);
 		}
@@ -83,20 +83,20 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		return getSelectOptions("year");
 	}
 	
-	public void fillYear(final String value) {
+	public void fillYear(String value) {
 		if (value != null) {
 			new Select(getElementByName("year")).selectByVisibleText(value);
 		}
 	}
 	
-	public void fillQuantity(final String value) {
+	public void fillQuantity(String value) {
 		if (value != null) {
 			fillField("quantity", value);
 		}
 	}
 	
-	public void fillPerforated(final boolean turnOn) {
-		final WebElement el = getElementByName("perforated");
+	public void fillPerforated(boolean turnOn) {
+		WebElement el = getElementByName("perforated");
 		if (el.isSelected()) {
 			if (!turnOn) {
 				el.click();
@@ -109,37 +109,37 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		}
 	}
 	
-	public void fillMichelNumbers(final String value) {
+	public void fillMichelNumbers(String value) {
 		if (value != null) {
 			fillField("michelNumbers", value);
 		}
 	}
 	
-	public void fillScottNumbers(final String value) {
+	public void fillScottNumbers(String value) {
 		if (value != null) {
 			fillField("scottNumbers", value);
 		}
 	}
 	
-	public void fillYvertNumbers(final String value) {
+	public void fillYvertNumbers(String value) {
 		if (value != null) {
 			fillField("yvertNumbers", value);
 		}
 	}
 	
-	public void fillGibbonsNumbers(final String value) {
+	public void fillGibbonsNumbers(String value) {
 		if (value != null) {
 			fillField("gibbonsNumbers", value);
 		}
 	}
 	
-	public void fillComment(final String value) {
+	public void fillComment(String value) {
 		if (value != null) {
 			fillField("comment", value);
 		}
 	}
 	
-	public void fillImage(final String value) {
+	public void fillImage(String value) {
 		if (value != null) {
 			fillField("image", value);
 		}

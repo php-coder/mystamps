@@ -50,30 +50,30 @@ public final class Form {
 		return FORM_LOCATOR;
 	}
 	
-	public static Form with(final Field... fields) {
-		final Form form = new Form();
+	public static Form with(Field... fields) {
+		Form form = new Form();
 		
-		for (final Field field : fields) {
+		for (Field field : fields) {
 			form.with(field);
 		}
 		
 		return form;
 	}
 	
-	public Form with(final Field field) {
+	public Form with(Field field) {
 		fields.add(field);
 		return this;
 	}
 	
-	public Form with(final SubmitButton button) {
+	public Form with(SubmitButton button) {
 		submitButtons.add(button);
 		return this;
 	}
 	
 	public List<Field> getRequiredFields() {
-		final List<Field> requiredFields = new ArrayList<Field>();
+		List<Field> requiredFields = new ArrayList<Field>();
 		
-		for (final Field field : fields) {
+		for (Field field : fields) {
 			if (field.isRequired()) {
 				requiredFields.add(field);
 			}
@@ -82,8 +82,8 @@ public final class Form {
 		return requiredFields;
 	}
 	
-	public Field getField(final String name) {
-		for (final Field field : fields) {
+	public Field getField(String name) {
+		for (Field field : fields) {
 			if (field.getName().equals(name)) {
 				return field;
 			}
@@ -98,36 +98,36 @@ public final class Form {
 		return this;
 	}
 	
-	public static Field required(final Field field) {
+	public static Field required(Field field) {
 		field.setRequired(true);
 		return field;
 	}
 	
-	public static Field inputField(final String name) {
+	public static Field inputField(String name) {
 		return new InputField(name);
 	}
 	
-	public static Field checkboxField(final String name) {
+	public static Field checkboxField(String name) {
 		return new CheckboxField(name);
 	}
 	
-	public static Field uploadFileField(final String name) {
+	public static Field uploadFileField(String name) {
 		return new UploadFileField(name);
 	}
 	
-	public static Field passwordField(final String name) {
+	public static Field passwordField(String name) {
 		return new PasswordField(name);
 	}
 	
-	public static Field selectField(final String name) {
+	public static Field selectField(String name) {
 		return new SelectField(name);
 	}
 	
-	public static Field textareaField(final String name) {
+	public static Field textareaField(String name) {
 		return new TextareaField(name);
 	}
 	
-	public static SubmitButton submitButton(final String value) {
+	public static SubmitButton submitButton(String value) {
 		return new SubmitButton(value);
 	}
 	
@@ -145,7 +145,7 @@ public final class Form {
 			this.xpath = SUBMIT_BUTTON_LOCATOR;
 		}
 		
-		public SubmitButton(final String value) {
+		public SubmitButton(String value) {
 			this.value = value;
 			this.xpath = String.format(SUBMIT_WITH_VALUE_LOCATOR, value);
 		}
@@ -166,7 +166,7 @@ public final class Form {
 		private final String xpath;
 		private boolean preserveInvalidValue = true;
 		
-		protected Field(final String name, final String xpath) {
+		protected Field(String name, String xpath) {
 			this.name = name;
 			this.xpath = String.format(xpath, name);
 			
@@ -186,7 +186,7 @@ public final class Form {
 			return label != null;
 		}
 		
-		public Field withLabel(final String label) {
+		public Field withLabel(String label) {
 			this.label = label;
 			return this;
 		}
@@ -195,13 +195,13 @@ public final class Form {
 			return invalidValue != null;
 		}
 		
-		public Field invalidValue(final String invalidValue) {
+		public Field invalidValue(String invalidValue) {
 			Validate.isTrue(!"".equals(invalidValue), "Invalid value for field must be non empty");
 			this.invalidValue = invalidValue;
 			return this;
 		}
 		
-		protected void preserveInvalidValue(final boolean preserveInvalidValue) {
+		protected void preserveInvalidValue(boolean preserveInvalidValue) {
 			this.preserveInvalidValue = preserveInvalidValue;
 		}
 		
@@ -216,38 +216,38 @@ public final class Form {
 	}
 	
 	public static class InputField extends Field {
-		public InputField(final String name) {
+		public InputField(String name) {
 			super(name, INPUT_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class CheckboxField extends Field {
-		public CheckboxField(final String name) {
+		public CheckboxField(String name) {
 			super(name, CHECKBOX_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class UploadFileField extends Field {
-		public UploadFileField(final String name) {
+		public UploadFileField(String name) {
 			super(name, UPLOAD_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class PasswordField extends Field {
-		public PasswordField(final String name) {
+		public PasswordField(String name) {
 			super(name, PASSWORD_FIELD_LOCATOR);
 			preserveInvalidValue(false);
 		}
 	}
 	
 	public static class SelectField extends Field {
-		public SelectField(final String name) {
+		public SelectField(String name) {
 			super(name, SELECT_FIELD_LOCATOR);
 		}
 	}
 	
 	public static class TextareaField extends Field {
-		public TextareaField(final String name) {
+		public TextareaField(String name) {
 			super(name, TEXTAREA_FIELD_LOCATOR);
 		}
 	}

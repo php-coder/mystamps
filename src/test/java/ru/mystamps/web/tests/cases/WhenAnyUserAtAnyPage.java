@@ -65,24 +65,24 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	 */
 	private String header;
 	
-	public WhenAnyUserAtAnyPage(final Class<T> pageClass) {
+	public WhenAnyUserAtAnyPage(Class<T> pageClass) {
 		super();
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	
-	protected void hasResponseServerCode(final int serverCode) {
+	protected void hasResponseServerCode(int serverCode) {
 		this.serverCode = serverCode;
 	}
 	
-	protected void hasTitle(final String title) {
+	protected void hasTitle(String title) {
 		this.title = TITLE_PREFIX + title;
 	}
 	
-	protected void hasTitleWithoutStandardPrefix(final String title) {
+	protected void hasTitleWithoutStandardPrefix(String title) {
 		this.title = title;
 	}
 	
-	protected void hasHeader(final String header) {
+	protected void hasHeader(String header) {
 		this.header = header;
 	}
 	
@@ -109,7 +109,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 			+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
 		);
 		
-		final String msg = String.format(
+		String msg = String.format(
 			"title should be '%s' but actual is '%s'",
 			title,
 			page.getTitle()

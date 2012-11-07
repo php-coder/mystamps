@@ -23,7 +23,7 @@ import ru.mystamps.web.Url;
 
 public class InfoSeriesPage extends AbstractPage {
 	
-	public InfoSeriesPage(final WebDriver driver) {
+	public InfoSeriesPage(WebDriver driver) {
 		super(driver, Url.INFO_SERIES_PAGE);
 	}
 	

@@ -23,5 +23,5 @@ import org.springframework.data.repository.CrudRepository;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 
 public interface SuspiciousActivityTypeDao extends CrudRepository<SuspiciousActivityType, Integer> {
-	SuspiciousActivityType findByName(final String name);
+	SuspiciousActivityType findByName(String name);
 }

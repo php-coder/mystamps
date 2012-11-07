@@ -50,17 +50,17 @@ public class AccountController {
 	private final UserService userService;
 	
 	@Inject
-	AccountController(final UserService userService) {
+	AccountController(UserService userService) {
 		this.userService = userService;
 	}
 	
 	@InitBinder("registerAccountForm")
-	protected void registrationInitBinder(final WebDataBinder binder) {
+	protected void registrationInitBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "email", new StringTrimmerEditor(false));
 	}
 	
 	@InitBinder("activateAccountForm")
-	protected void activationInitBinder(final WebDataBinder binder) {
+	protected void activationInitBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
@@ -70,9 +70,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.POST)
-	public String processRegistrationForm(
-			@Valid final RegisterAccountForm form,
-			final BindingResult result) {
+	public String processRegistrationForm(@Valid RegisterAccountForm form, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;
@@ -89,11 +87,9 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY, method = RequestMethod.GET)
-	public String showActivationFormWithKey(
-		@PathVariable("key") final String activationKey,
-		final Map model) {
+	public String showActivationFormWithKey(@PathVariable("key") String activationKey, Map model) {
 		
-		final ActivateAccountForm form = new ActivateAccountForm();
+		ActivateAccountForm form = new ActivateAccountForm();
 		form.setActivationKey(activationKey);
 		model.put("activateAccountForm", form);
 		
@@ -105,7 +101,7 @@ public class AccountController {
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,
 			PasswordConfirmationChecks.class, ActKeyChecks.class, FormChecks.class
-		}) final ActivateAccountForm form, final BindingResult result) {
+		}) ActivateAccountForm form, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			return null;

@@ -32,15 +32,15 @@ import ru.mystamps.web.service.AuthService;
 public class SpringSecurityAuthService implements AuthService {
 	
 	public User getCurrentUser() {
-		final SecurityContext ctx = SecurityContextHolder.getContext();
+		SecurityContext ctx = SecurityContextHolder.getContext();
 		Validate.validState(ctx != null, "Security context must be non null");
 		
-		final Authentication auth = ctx.getAuthentication();
+		Authentication auth = ctx.getAuthentication();
 		if (auth == null) {
 			return null;
 		}
 		
-		final Object principal = auth.getPrincipal();
+		Object principal = auth.getPrincipal();
 		if (principal == null) {
 			return null;
 		}
@@ -50,7 +50,7 @@ public class SpringSecurityAuthService implements AuthService {
 			"Principal must be CustomUserDetails type"
 		);
 		
-		final CustomUserDetails userDetails = (CustomUserDetails)principal;
+		CustomUserDetails userDetails = (CustomUserDetails)principal;
 		
 		return userDetails.getUser();
 	}

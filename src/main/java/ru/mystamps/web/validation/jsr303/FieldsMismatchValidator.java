@@ -31,25 +31,25 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 	private String secondFieldName;
 	
 	@Override
-	public void initialize(final FieldsMismatch annotation) {
+	public void initialize(FieldsMismatch annotation) {
 		firstFieldName  = annotation.first();
 		secondFieldName = annotation.second();
 	}
 	
 	@Override
-	public boolean isValid(final Object value, final ConstraintValidatorContext ctx) {
+	public boolean isValid(Object value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {
 			return true;
 		}
 		
 		try {
-			final String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
+			String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
 			if (StringUtils.isEmpty(firstFieldValue)) {
 				return true;
 			}
 			
-			final String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
+			String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
 			if (StringUtils.isEmpty(secondFieldValue)) {
 				return true;
 			}
@@ -66,15 +66,15 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 				return false;
 			}
 		
-		} catch (final NoSuchMethodException ex) {
+		} catch (NoSuchMethodException ex) {
 			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
 			return false;
 		
-		} catch (final InvocationTargetException ex) {
+		} catch (InvocationTargetException ex) {
 			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
 			return false;
 		
-		} catch (final IllegalAccessException ex) {
+		} catch (IllegalAccessException ex) {
 			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
 			return false;
 		}

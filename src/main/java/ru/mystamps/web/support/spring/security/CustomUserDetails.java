@@ -26,10 +26,7 @@ import ru.mystamps.web.entity.User;
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
 	private final User user;
 	
-	public CustomUserDetails(
-		final User user,
-		final Collection<? extends GrantedAuthority> authorities) {
-		
+	public CustomUserDetails(User user, Collection<? extends GrantedAuthority> authorities) {
 		super(user.getLogin(), user.getHash(), authorities);
 		this.user = user;
 	}

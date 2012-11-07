@@ -31,7 +31,7 @@ final class AuthUtils {
 	}
 	
 	static void authenticateAsAnonymous() {
-		final Authentication authentication = new AnonymousAuthenticationToken(
+		Authentication authentication = new AnonymousAuthenticationToken(
 			"anonymous",
 			"anonymous",
 			Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))
@@ -40,14 +40,11 @@ final class AuthUtils {
 		authenticate(authentication);
 	}
 	
-	static void authenticateAsUser(final String login, final String password) {
-		final Authentication authentication =
-			new UsernamePasswordAuthenticationToken(login, password);
-		
-		authenticate(authentication);
+	static void authenticateAsUser(String login, String password) {
+		authenticate(new UsernamePasswordAuthenticationToken(login, password));
 	}
 	
-	private static void authenticate(final Authentication authentication) {
+	private static void authenticate(Authentication authentication) {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 	

@@ -23,5 +23,5 @@ import org.springframework.data.repository.CrudRepository;
 import ru.mystamps.web.entity.User;
 
 public interface UserDao extends CrudRepository<User, Integer> {
-	User findByLogin(final String login);
+	User findByLogin(String login);
 }

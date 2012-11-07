@@ -30,12 +30,12 @@ public class ExistingActivationKeyValidator
 	private UserService userService;
 	
 	@Override
-	public void initialize(final ExistingActivationKey annotation) {
+	public void initialize(ExistingActivationKey annotation) {
 		// Intentionally empty: nothing to initialize
 	}
 	
 	@Override
-	public boolean isValid(final String value, final ConstraintValidatorContext ctx) {
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {
 			return true;

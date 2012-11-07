@@ -39,7 +39,7 @@ import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class AuthAccountPage extends AbstractPageWithForm {
 	
-	public AuthAccountPage(final WebDriver driver) {
+	public AuthAccountPage(WebDriver driver) {
 		super(driver, Url.AUTHENTICATION_PAGE);
 		
 		hasForm(
@@ -64,8 +64,8 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		return elementWithIdExists("authAccountForm");
 	}
 	
-	public void authorizeUser(final String login, final String password) {
-		final Collection<String> fieldNames = Arrays.asList(login, password);
+	public void authorizeUser(String login, String password) {
+		Collection<String> fieldNames = Arrays.asList(login, password);
 		
 		Validate.validState(
 			exists(fieldNames, notNullPredicate()),
@@ -78,13 +78,13 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		submit();
 	}
 	
-	private void fillLogin(final String login) {
+	private void fillLogin(String login) {
 		if (login != null) {
 			fillField("login", login);
 		}
 	}
 	
-	private void fillPassword(final String password) {
+	private void fillPassword(String password) {
 		if (password != null) {
 			fillField("password", password);
 		}
