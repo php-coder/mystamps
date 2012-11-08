@@ -69,7 +69,7 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		return nextPage;
 	}
 	
-	public List<String> getContryFieldValues() {
+	public List<String> getCountryFieldValues() {
 		return getSelectOptions("country");
 	}
 	

@@ -164,7 +164,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 		
 		AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
 		
-		assertThat(seriesPage.getContryFieldValues()).contains(TEST_COUNTRY_NAME);
+		assertThat(seriesPage.getCountryFieldValues()).contains(TEST_COUNTRY_NAME);
 	}
 	
 	@Override
