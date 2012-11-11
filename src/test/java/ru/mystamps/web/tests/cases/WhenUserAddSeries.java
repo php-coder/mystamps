@@ -332,10 +332,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getYear()).isEqualTo(expectedYear);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
-		assertThat(nextPage.getMichelNumbers()).isEqualTo("1-3");
-		assertThat(nextPage.getScottNumbers()).isEqualTo("10-12");
-		assertThat(nextPage.getYvertNumbers()).isEqualTo("20-22");
-		assertThat(nextPage.getGibbonsNumbers()).isEqualTo("30-32");
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("1-3");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("10-12");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("20-22");
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("30-32");
 		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
 	
@@ -349,7 +349,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelNumbers()).isEqualTo("4, 5");
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("4, 5");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
@@ -362,7 +362,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getScottNumbers()).isEqualTo("14, 15");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("14, 15");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
@@ -375,7 +375,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getYvertNumbers()).isEqualTo("24, 25");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("24, 25");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
@@ -388,7 +388,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getGibbonsNumbers()).isEqualTo("34, 35");
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("34, 35");
 	}
 	
 	@DataProvider(name = "validCatalogNumbers")

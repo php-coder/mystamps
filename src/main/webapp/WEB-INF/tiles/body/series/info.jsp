@@ -59,7 +59,7 @@
 			<td>
 				<spring:message code="t_michel_no" />
 			</td>
-			<td id="michel_numbers">
+			<td id="michel_catalog_info">
 				<c:out value="${michelNumbers}" />
 			</td>
 		</tr>
@@ -69,7 +69,7 @@
 			<td>
 				<spring:message code="t_scott_no" />
 			</td>
-			<td id="scott_numbers">
+			<td id="scott_catalog_info">
 				<c:out value="${scottNumbers}" />
 			</td>
 		</tr>
@@ -79,7 +79,7 @@
 			<td>
 				<spring:message code="t_yvert_no" />
 			</td>
-			<td id="yvert_numbers">
+			<td id="yvert_catalog_info">
 				<c:out value="${yvertNumbers}" />
 			</td>
 		</tr>
@@ -89,7 +89,7 @@
 			<td>
 				<spring:message code="t_sg_no" />
 			</td>
-			<td id="gibbons_numbers">
+			<td id="gibbons_catalog_info">
 				<c:out value="${gibbonsNumbers}" />
 			</td>
 		</tr>

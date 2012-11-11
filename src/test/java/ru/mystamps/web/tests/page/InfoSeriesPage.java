@@ -47,20 +47,20 @@ public class InfoSeriesPage extends AbstractPage {
 		return getTextOfElementById("perforated");
 	}
 	
-	public String getMichelNumbers() {
-		return getTextOfElementById("michel_numbers");
+	public String getMichelCatalogInfo() {
+		return getTextOfElementById("michel_catalog_info");
 	}
 	
-	public String getScottNumbers() {
-		return getTextOfElementById("scott_numbers");
+	public String getScottCatalogInfo() {
+		return getTextOfElementById("scott_catalog_info");
 	}
 	
-	public String getYvertNumbers() {
-		return getTextOfElementById("yvert_numbers");
+	public String getYvertCatalogInfo() {
+		return getTextOfElementById("yvert_catalog_info");
 	}
 	
-	public String getGibbonsNumbers() {
-		return getTextOfElementById("gibbons_numbers");
+	public String getGibbonsCatalogInfo() {
+		return getTextOfElementById("gibbons_catalog_info");
 	}
 	
 	public String getComment() {
