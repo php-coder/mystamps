@@ -47,8 +47,7 @@ public class ImageController {
 		
 		Image image = imageService.findById(id);
 		if (image == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
+			throw new NotFoundException();
 		}
 
 		// TODO: set content disposition

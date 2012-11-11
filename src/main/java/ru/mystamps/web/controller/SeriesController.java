@@ -21,7 +21,6 @@ package ru.mystamps.web.controller;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
 import java.util.Calendar;
@@ -124,15 +123,11 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
-	public String showInfo(
-		@PathVariable("id") Integer id,
-		Model model,
-		HttpServletResponse response) throws IOException {
+	public String showInfo(@PathVariable("id") Integer id, Model model) throws IOException {
 		
 		Series series = seriesService.findById(id);
 		if (series == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+			throw new NotFoundException();
 		}
 		
 		model.addAttribute("series", series);
