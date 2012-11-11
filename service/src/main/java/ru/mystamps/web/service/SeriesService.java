@@ -76,7 +76,7 @@ public class SeriesService {
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Series add(final AddSeriesDto dto) {
+	public Series add(AddSeriesDto dto) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
@@ -84,14 +84,14 @@ public class SeriesService {
 			"Stamps perforated property must be non null"
 		);
 		
-		final Series series = new Series();
+		Series series = new Series();
 		
 		if (dto.getCountry() != null) {
 			series.setCountry(countryDao.findOne(dto.getCountry()));
 		}
 		
 		if (dto.getYear() != null) {
-			final Calendar releaseDate = GregorianCalendar.getInstance();
+			Calendar releaseDate = GregorianCalendar.getInstance();
 			releaseDate.clear();
 			releaseDate.set(dto.getYear(), JANUARY, 1);
 			
@@ -101,35 +101,35 @@ public class SeriesService {
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
 		
-		final Set<MichelCatalog> michelNumbers =
+		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
 		if (!michelNumbers.isEmpty()) {
 			michelCatalogDao.save(michelNumbers);
 			series.setMichel(michelNumbers);
 		}
 		
-		final Set<ScottCatalog> scottNumbers =
+		Set<ScottCatalog> scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
 		if (!scottNumbers.isEmpty()) {
 			scottCatalogDao.save(scottNumbers);
 			series.setScott(scottNumbers);
 		}
 		
-		final Set<YvertCatalog> yvertNumbers =
+		Set<YvertCatalog> yvertNumbers =
 			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
 		if (!yvertNumbers.isEmpty()) {
 			yvertCatalogDao.save(yvertNumbers);
 			series.setYvert(yvertNumbers);
 		}
 		
-		final Set<GibbonsCatalog> gibbonsNumbers =
+		Set<GibbonsCatalog> gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
 		if (!gibbonsNumbers.isEmpty()) {
 			gibbonsCatalogDao.save(gibbonsNumbers);
 			series.setGibbons(gibbonsNumbers);
 		}
 		
-		final String imageUrl = imageService.save(dto.getImage());
+		String imageUrl = imageService.save(dto.getImage());
 		Validate.validState(imageUrl != null, "Image url must be non null");
 		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
 		
@@ -144,11 +144,11 @@ public class SeriesService {
 			series.setComment(dto.getComment());
 		}
 		
-		final Date now = new Date();
+		Date now = new Date();
 		series.setCreatedAt(now);
 		series.setUpdatedAt(now);
 		
-		final User currentUser = authService.getCurrentUser();
+		User currentUser = authService.getCurrentUser();
 		Validate.validState(currentUser != null, "Current user must be non null");
 		series.setCreatedBy(currentUser);
 		series.setUpdatedBy(currentUser);
@@ -157,7 +157,7 @@ public class SeriesService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Series findById(final Integer id) {
+	public Series findById(Integer id) {
 		Validate.isTrue(id != null, "Id should be non null");
 		return seriesDao.findOne(id);
 	}

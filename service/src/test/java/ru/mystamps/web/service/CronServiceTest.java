@@ -80,13 +80,13 @@ public class CronServiceTest {
 		
 		verify(usersActivationDao).findByCreatedAtLessThan(dateCaptor.capture());
 		
-		final Calendar calendar = new GregorianCalendar();
+		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(new Date());
 		calendar.add(Calendar.DAY_OF_MONTH, -(CronService.PURGE_AFTER_DAYS));
 		
 		// Truncate seconds in dates to prevent test fail due to different milliseconds in dates
-		final Date expectedDate = DateUtils.truncate(calendar.getTime(), Calendar.SECOND);
-		final Date passedDate   = DateUtils.truncate(dateCaptor.getValue(), Calendar.SECOND);
+		Date expectedDate = DateUtils.truncate(calendar.getTime(), Calendar.SECOND);
+		Date passedDate   = DateUtils.truncate(dateCaptor.getValue(), Calendar.SECOND);
 		
 		assertThat(passedDate.equals(expectedDate)).isTrue();
 	}
@@ -100,7 +100,7 @@ public class CronServiceTest {
 	
 	@Test
 	public void purgeUsersActivationsShouldDeleteExpiredActivations() {
-		final List<UsersActivation> expectedActivations =
+		List<UsersActivation> expectedActivations =
 			Collections.singletonList(UserServiceTest.getUsersActivation());
 		when(usersActivationDao.findByCreatedAtLessThan(any(Date.class)))
 			.thenReturn(expectedActivations);

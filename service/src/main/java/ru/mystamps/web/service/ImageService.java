@@ -40,36 +40,36 @@ public class ImageService {
 	private ImageDao imageDao;
 	
 	// Method called from SeriesService.add()
-	protected String save(final MultipartFile file) {
+	protected String save(MultipartFile file) {
 		Validate.isTrue(file != null, "File should be non null");
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
-		final String contentType = file.getContentType();
+		String contentType = file.getContentType();
 		Validate.isTrue(contentType != null, "File type must be non null");
 		
-		final String extension = StringUtils.substringAfter(contentType, "/");
+		String extension = StringUtils.substringAfter(contentType, "/");
 		Validate.validState(
 			"png".equals(extension) || "jpeg".equals(extension),
 			"File type must be PNG or JPEG image"
 		);
 		
-		final Image image = new Image();
+		Image image = new Image();
 		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
 		
 		try {
 			image.setData(file.getBytes());
-		} catch (final IOException e) {
+		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
 			throw new RuntimeException(e); // NOPMD
 		}
 		
-		final Image entity = imageDao.save(image);
+		Image entity = imageDao.save(image);
 		
 		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
 	}
 	
 	@Transactional(readOnly = true)
-	public Image findById(final Integer id) {
+	public Image findById(Integer id) {
 		Validate.isTrue(id != null, "Id should be non null");
 		return imageDao.findOne(id);
 	}

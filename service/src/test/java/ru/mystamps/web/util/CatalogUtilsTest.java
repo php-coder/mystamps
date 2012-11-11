@@ -68,14 +68,14 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void toShortFormShouldReturnOneNumberAsIs() {
-		final Set<MichelCatalog> setOfSingleNumber = Collections.singleton(new MichelCatalog("1"));
+		Set<MichelCatalog> setOfSingleNumber = Collections.singleton(new MichelCatalog("1"));
 		
 		assertThat(CatalogUtils.toShortForm(setOfSingleNumber)).isEqualTo("1");
 	}
 	
 	@Test
 	public void toShortFormShouldReturnTwoNumbersAsCommaSeparated() {
-		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
 		setOfNumbers.add(new MichelCatalog("1"));
 		setOfNumbers.add(new MichelCatalog("2"));
 		
@@ -84,7 +84,7 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void toShortFormShouldProduceRangeForSequence() {
-		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
 		setOfNumbers.add(new MichelCatalog("1"));
 		setOfNumbers.add(new MichelCatalog("2"));
 		setOfNumbers.add(new MichelCatalog("3"));
@@ -94,7 +94,7 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void toShortFormShouldReturnCommaSeparatedNumbersIfTheyAreNotASequence() {
-		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
 		setOfNumbers.add(new MichelCatalog("1"));
 		setOfNumbers.add(new MichelCatalog("2"));
 		setOfNumbers.add(new MichelCatalog("4"));
@@ -105,7 +105,7 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void toShortFormShouldProduceTwoRangesForTwoSequences() {
-		final Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
+		Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
 		setOfNumbers.add(new MichelCatalog("1"));
 		setOfNumbers.add(new MichelCatalog("2"));
 		setOfNumbers.add(new MichelCatalog("3"));
@@ -176,28 +176,28 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void fromStringShouldReturnsSetOfMichelNumbersForAppropriateElementClass() {
-		for (final StampsCatalog catalog : CatalogUtils.fromString("1,2", MichelCatalog.class)) {
+		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", MichelCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(MichelCatalog.class);
 		}
 	}
 	
 	@Test
 	public void fromStringShouldReturnsSetOfScottNumbersForAppropriateElementClass() {
-		for (final StampsCatalog catalog : CatalogUtils.fromString("1,2", ScottCatalog.class)) {
+		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", ScottCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(ScottCatalog.class);
 		}
 	}
 	
 	@Test
 	public void fromStringShouldReturnsSetOfYvertNumbersForAppropriateElementClass() {
-		for (final StampsCatalog catalog : CatalogUtils.fromString("1,2", YvertCatalog.class)) {
+		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", YvertCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(YvertCatalog.class);
 		}
 	}
 	
 	@Test
 	public void fromStringShouldReturnsSetOfGibbonsNumbersForAppropriateElementClass() {
-		for (final StampsCatalog catalog : CatalogUtils.fromString("1,2", GibbonsCatalog.class)) {
+		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", GibbonsCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(GibbonsCatalog.class);
 		}
 	}

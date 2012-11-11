@@ -32,11 +32,11 @@ public final class DateAssert extends AbstractAssert<DateAssert, Date> {
 	
 	private static final long TIME_DELTA = 10;
 	
-	private DateAssert(final Date actual) {
+	private DateAssert(Date actual) {
 		super(actual, DateAssert.class);
 	}
 	
-	public static DateAssert assertThat(final Date actual) {
+	public static DateAssert assertThat(Date actual) {
 		return new DateAssert(actual);
 	}
 	
@@ -46,8 +46,8 @@ public final class DateAssert extends AbstractAssert<DateAssert, Date> {
 	public DateAssert isCurrentDate() {
 		isNotNull();
 		
-		final Date now = new Date();
-		final String msg = String.format("%s is not current date. Expected: %s", actual, now);
+		Date now = new Date();
+		String msg = String.format("%s is not current date. Expected: %s", actual, now);
 		
 		Assertions.assertThat(actual)
 			.overridingErrorMessage(msg)

@@ -87,7 +87,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassActivityTypeToDao() {
-		final SuspiciousActivityType expectedType = getPageNotFoundType();
+		SuspiciousActivityType expectedType = getPageNotFoundType();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(expectedType);
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
@@ -139,7 +139,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassNullToDaoForNotExistingUser() {
-		final Integer notExistingUserId = 1010;
+		Integer notExistingUserId = 1010;
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
 		when(userDao.findOne(any(Integer.class))).thenReturn(null);
 		
@@ -153,7 +153,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassUserToDao() {
-		final User user = getUser();
+		User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
 		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
@@ -253,7 +253,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassActivityTypeToDao() {
-		final SuspiciousActivityType expectedType = getAuthFailedType();
+		SuspiciousActivityType expectedType = getAuthFailedType();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(expectedType);
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
@@ -305,8 +305,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassNullToDaoForNotExistingUser() {
-		final User user = getUser();
-		final Integer userId = user.getId();
+		User user = getUser();
+		Integer userId = user.getId();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
 		when(userDao.findOne(any(Integer.class))).thenReturn(null);
 		
@@ -320,8 +320,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassUserToDao() {
-		final User user = getUser();
-		final Integer userId = user.getId();
+		User user = getUser();
+		Integer userId = user.getId();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
 		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
@@ -400,22 +400,22 @@ public class SiteServiceTest {
 	}
 	
 	private SuspiciousActivityType getPageNotFoundType() {
-		final SuspiciousActivityType type = new SuspiciousActivityType();
+		SuspiciousActivityType type = new SuspiciousActivityType();
 		type.setId(1);
 		type.setName("PageNotFound");
 		return type;
 	}
 	
 	private SuspiciousActivityType getAuthFailedType() {
-		final SuspiciousActivityType type = new SuspiciousActivityType();
+		SuspiciousActivityType type = new SuspiciousActivityType();
 		type.setId(2);
 		type.setName("AuthenticationFailed");
 		return type;
 	}
 	
 	private User getUser() {
-		final Integer anyId = 777;
-		final User user = new User();
+		Integer anyId = 777;
+		User user = new User();
 		user.setId(anyId);
 		user.setLogin("test");
 		user.setName("Test Name");
