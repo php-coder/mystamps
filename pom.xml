@@ -61,6 +61,7 @@
 		<pmd.plugin.version>2.8-SNAPSHOT</pmd.plugin.version>
 		<cobertura.plugin.version>2.5.1</cobertura.plugin.version>
 		<javadoc.plugin.version>2.8.1</javadoc.plugin.version>
+		<enforcer.plugin.version>1.1.1</enforcer.plugin.version>
 		<antrun.plugin.version>1.7</antrun.plugin.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -659,6 +660,29 @@
 					<nohelp>true</nohelp>
 					<nodeprecatedlist>true</nodeprecatedlist>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${enforcer.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-banned-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedDependencies>
+									<excludes>
+										<exclude>commons-logging</exclude>
+									</excludes>
+								</bannedDependencies>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			
 		</plugins>
