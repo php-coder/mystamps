@@ -101,33 +101,11 @@ public class SeriesService {
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
 		
-		Set<MichelCatalog> michelNumbers =
-			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
-		if (!michelNumbers.isEmpty()) {
-			michelCatalogDao.save(michelNumbers);
-			series.setMichel(michelNumbers);
-		}
+		setMichelNumbersIfProvided(dto, series);
+		setScottNumbersIfProvided(dto, series);
+		setYvertNumbersIfProvided(dto, series);
+		setGibbonsNumbersIfProvided(dto, series);
 		
-		Set<ScottCatalog> scottNumbers =
-			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
-		if (!scottNumbers.isEmpty()) {
-			scottCatalogDao.save(scottNumbers);
-			series.setScott(scottNumbers);
-		}
-		
-		Set<YvertCatalog> yvertNumbers =
-			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
-		if (!yvertNumbers.isEmpty()) {
-			yvertCatalogDao.save(yvertNumbers);
-			series.setYvert(yvertNumbers);
-		}
-		
-		Set<GibbonsCatalog> gibbonsNumbers =
-			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
-		if (!gibbonsNumbers.isEmpty()) {
-			gibbonsCatalogDao.save(gibbonsNumbers);
-			series.setGibbons(gibbonsNumbers);
-		}
 		
 		String imageUrl = imageService.save(dto.getImage());
 		Validate.validState(imageUrl != null, "Image url must be non null");
@@ -160,6 +138,42 @@ public class SeriesService {
 	public Series findById(Integer id) {
 		Validate.isTrue(id != null, "Id should be non null");
 		return seriesDao.findOne(id);
+	}
+	
+	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
+		Set<MichelCatalog> michelNumbers =
+			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
+		if (!michelNumbers.isEmpty()) {
+			michelCatalogDao.save(michelNumbers);
+			series.setMichel(michelNumbers);
+		}
+	}
+	
+	private void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
+		Set<ScottCatalog> scottNumbers =
+			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
+		if (!scottNumbers.isEmpty()) {
+			scottCatalogDao.save(scottNumbers);
+			series.setScott(scottNumbers);
+		}
+	}
+	
+	private void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
+		Set<YvertCatalog> yvertNumbers =
+			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
+		if (!yvertNumbers.isEmpty()) {
+			yvertCatalogDao.save(yvertNumbers);
+			series.setYvert(yvertNumbers);
+		}
+	}
+	
+	private void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
+		Set<GibbonsCatalog> gibbonsNumbers =
+			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
+		if (!gibbonsNumbers.isEmpty()) {
+			gibbonsCatalogDao.save(gibbonsNumbers);
+			series.setGibbons(gibbonsNumbers);
+		}
 	}
 	
 }
