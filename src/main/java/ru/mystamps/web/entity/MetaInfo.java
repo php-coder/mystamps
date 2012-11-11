@@ -17,43 +17,37 @@
  */
 package ru.mystamps.web.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import java.util.Date;
 
-import lombok.AccessLevel;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "countries")
+@Embeddable
 @Getter
 @Setter
-public class Country {
+public class MetaInfo {
 	
-	public static final int NAME_LENGTH = 50;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", nullable = false)
+	private Date createdAt;
 	
-	@Id
-	@GeneratedValue
-	private Integer id;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "created_by", nullable = false)
+	private User createdBy;
 	
-	@Column(length = NAME_LENGTH, unique = true, nullable = false)
-	private String name;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at", nullable = false)
+	private Date updatedAt;
 	
-	@Embedded
-	private MetaInfo metaInfo; // NOPMD
-	
-	@Setter(AccessLevel.PROTECTED)
-	@Version
-	@Column(nullable = false)
-	private Long version;
-	
-	public Country() {
-		metaInfo = new MetaInfo();
-	}
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
 	
 }

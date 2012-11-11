@@ -21,11 +21,11 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
@@ -87,25 +87,16 @@ public class Series {
 	@Column(length = COMMENT_LENGTH)
 	private String comment;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at", nullable = false)
-	private Date createdAt;
-	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "created_by", nullable = false)
-	private User createdBy;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at", nullable = false)
-	private Date updatedAt;
-	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "updated_by", nullable = false)
-	private User updatedBy;
+	@Embedded
+	private MetaInfo metaInfo; // NOPMD
 	
 	@Setter(AccessLevel.PROTECTED)
 	@Version
 	@Column(nullable = false)
 	private Long version;
+	
+	public Series() {
+		metaInfo = new MetaInfo();
+	}
 	
 }

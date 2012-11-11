@@ -123,13 +123,13 @@ public class SeriesService {
 		}
 		
 		Date now = new Date();
-		series.setCreatedAt(now);
-		series.setUpdatedAt(now);
+		series.getMetaInfo().setCreatedAt(now);
+		series.getMetaInfo().setUpdatedAt(now);
 		
 		User currentUser = authService.getCurrentUser();
 		Validate.validState(currentUser != null, "Current user must be non null");
-		series.setCreatedBy(currentUser);
-		series.setUpdatedBy(currentUser);
+		series.getMetaInfo().setCreatedBy(currentUser);
+		series.getMetaInfo().setUpdatedBy(currentUser);
 		
 		return seriesDao.save(series);
 	}

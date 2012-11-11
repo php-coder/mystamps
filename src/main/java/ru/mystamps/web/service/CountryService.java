@@ -51,13 +51,13 @@ public class CountryService {
 		country.setName(dto.getName());
 		
 		Date now = new Date();
-		country.setCreatedAt(now);
-		country.setUpdatedAt(now);
+		country.getMetaInfo().setCreatedAt(now);
+		country.getMetaInfo().setUpdatedAt(now);
 		
 		User currentUser = authService.getCurrentUser();
 		Validate.validState(currentUser != null, "Current user must be non null");
-		country.setCreatedBy(currentUser);
-		country.setUpdatedBy(currentUser);
+		country.getMetaInfo().setCreatedBy(currentUser);
+		country.getMetaInfo().setUpdatedBy(currentUser);
 		
 		return countryDao.save(country);
 	}
