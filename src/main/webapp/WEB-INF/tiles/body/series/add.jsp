@@ -57,6 +57,7 @@
 					<form:input
 						path="quantity"
 						type="number"
+						size="2"
 						min="<%= ValidationRules.MIN_STAMPS_IN_SERIES %>"
 						max="<%= ValidationRules.MAX_STAMPS_IN_SERIES %>" />
 				</td>
