@@ -20,8 +20,10 @@ package ru.mystamps.web.service.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.entity.Country;
+
 public interface AddSeriesDto {
-	Integer getCountry();
+	Country getCountry();
 	Integer getYear();
 	Integer getQuantity();
 	Boolean getPerforated();

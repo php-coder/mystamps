@@ -55,6 +55,7 @@ import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.YvertCatalogDao;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.GibbonsCatalog;
+import ru.mystamps.web.entity.MetaInfo;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
@@ -159,21 +160,15 @@ public class SeriesServiceTest {
 	@Test
 	public void addShouldLoadAndPassCountryToSeriesDaoIfCountryPresent() {
 		Country expectedCountry = CountryServiceTest.getCountry();
-		Integer expectedId      = expectedCountry.getId();
-		String expectedName     = expectedCountry.getName();
 		
-		form.setCountry(expectedId);
-		
-		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
+		form.setCountry(expectedCountry);
 		
 		service.add(form);
 		
-		verify(countryDao).findOne(eq(expectedId));
 		verify(seriesDao).save(seriesCaptor.capture());
 
 		assertThat(seriesCaptor.getValue().getCountry()).isNotNull();
-		assertThat(seriesCaptor.getValue().getCountry().getId()).isEqualTo(expectedId);
-		assertThat(seriesCaptor.getValue().getCountry().getName()).isEqualTo(expectedName);
+		assertThat(seriesCaptor.getValue().getCountry()).isEqualTo(expectedCountry);
 	}
 	
 	@Test
@@ -433,7 +428,9 @@ public class SeriesServiceTest {
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
-		DateAssert.assertThat(seriesCaptor.getValue().getCreatedAt()).isCurrentDate();
+		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		DateAssert.assertThat(metaInfo.getCreatedAt()).isCurrentDate();
 	}
 	
 	@Test
@@ -442,7 +439,9 @@ public class SeriesServiceTest {
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
-		DateAssert.assertThat(seriesCaptor.getValue().getUpdatedAt()).isCurrentDate();
+		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		DateAssert.assertThat(metaInfo.getUpdatedAt()).isCurrentDate();
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -460,7 +459,9 @@ public class SeriesServiceTest {
 		service.add(form);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
-		assertThat(seriesCaptor.getValue().getCreatedBy()).isEqualTo(expectedUser);
+		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		assertThat(metaInfo.getCreatedBy()).isEqualTo(expectedUser);
 	}
 	
 	@Test
@@ -471,7 +472,9 @@ public class SeriesServiceTest {
 		service.add(form);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
-		assertThat(seriesCaptor.getValue().getUpdatedBy()).isEqualTo(expectedUser);
+		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		assertThat(metaInfo.getUpdatedBy()).isEqualTo(expectedUser);
 	}
 	
 	//

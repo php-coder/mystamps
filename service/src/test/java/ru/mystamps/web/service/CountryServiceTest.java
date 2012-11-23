@@ -45,6 +45,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.MetaInfo;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.tests.fest.DateAssert;
@@ -121,7 +122,9 @@ public class CountryServiceTest {
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
-		DateAssert.assertThat(countryCaptor.getValue().getCreatedAt()).isCurrentDate();
+		MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		DateAssert.assertThat(metaInfo.getCreatedAt()).isCurrentDate();
 	}
 	
 	@Test
@@ -130,7 +133,9 @@ public class CountryServiceTest {
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
-		DateAssert.assertThat(countryCaptor.getValue().getUpdatedAt()).isCurrentDate();
+		MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		DateAssert.assertThat(metaInfo.getUpdatedAt()).isCurrentDate();
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -148,7 +153,9 @@ public class CountryServiceTest {
 		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
-		assertThat(countryCaptor.getValue().getCreatedBy()).isEqualTo(expectedUser);
+		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		assertThat(metaInfo.getCreatedBy()).isEqualTo(expectedUser);
 	}
 	
 	@Test
@@ -159,7 +166,9 @@ public class CountryServiceTest {
 		service.add(form);
 		
 		verify(countryDao).save(countryCaptor.capture());
-		assertThat(countryCaptor.getValue().getUpdatedBy()).isEqualTo(expectedUser);
+		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
+		assertThat(metaInfo).isNotNull();
+		assertThat(metaInfo.getUpdatedBy()).isEqualTo(expectedUser);
 	}
 	
 	//
@@ -242,8 +251,8 @@ public class CountryServiceTest {
 		country.setId(TEST_COUNTRY_ID);
 		country.setName(TEST_COUNTRY_NAME);
 		Date now = new Date();
-		country.setCreatedAt(now);
-		country.setUpdatedAt(now);
+		country.getMetaInfo().setCreatedAt(now);
+		country.getMetaInfo().setUpdatedAt(now);
 		return country;
 	}
 	
