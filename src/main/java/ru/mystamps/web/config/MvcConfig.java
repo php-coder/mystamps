@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.repository.support.DomainClassConverter;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.Validator;
@@ -122,5 +126,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public MultipartResolver getMultipartResolver() {
 		return new CommonsMultipartResolver();
 	}
-
+	
+	@Bean
+	@Inject
+	public DomainClassConverter<?> getDomainClassConverter(FormattingConversionService service) {
+		return new DomainClassConverter<FormattingConversionService>(service);
+	}
+	
 }

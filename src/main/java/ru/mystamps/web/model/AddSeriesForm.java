@@ -26,6 +26,7 @@ import javax.validation.GroupSequence;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
@@ -41,7 +42,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddSeriesForm implements AddSeriesDto {
-	private Integer country;
+	private Country country;
 	private Integer year;
 	
 	@NotNull

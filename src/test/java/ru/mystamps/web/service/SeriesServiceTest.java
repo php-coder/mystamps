@@ -157,21 +157,15 @@ public class SeriesServiceTest {
 	@Test
 	public void addShouldLoadAndPassCountryToSeriesDaoIfCountryPresent() {
 		Country expectedCountry = CountryServiceTest.getCountry();
-		Integer expectedId      = expectedCountry.getId();
-		String expectedName     = expectedCountry.getName();
 		
-		form.setCountry(expectedId);
-		
-		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
+		form.setCountry(expectedCountry);
 		
 		service.add(form);
 		
-		verify(countryDao).findOne(eq(expectedId));
 		verify(seriesDao).save(seriesCaptor.capture());
 
 		assertThat(seriesCaptor.getValue().getCountry()).isNotNull();
-		assertThat(seriesCaptor.getValue().getCountry().getId()).isEqualTo(expectedId);
-		assertThat(seriesCaptor.getValue().getCountry().getName()).isEqualTo(expectedName);
+		assertThat(seriesCaptor.getValue().getCountry()).isEqualTo(expectedCountry);
 	}
 	
 	@Test

@@ -32,7 +32,6 @@ import static java.util.Calendar.JANUARY;
 
 import org.apache.commons.lang3.Validate;
 
-import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.GibbonsCatalogDao;
 import ru.mystamps.web.dao.MichelCatalogDao;
 import ru.mystamps.web.dao.ScottCatalogDao;
@@ -49,9 +48,6 @@ import ru.mystamps.web.util.CatalogUtils;
 
 @Service
 public class SeriesService {
-	
-	@Inject
-	private CountryDao countryDao;
 	
 	@Inject
 	private SeriesDao seriesDao;
@@ -87,7 +83,7 @@ public class SeriesService {
 		Series series = new Series();
 		
 		if (dto.getCountry() != null) {
-			series.setCountry(countryDao.findOne(dto.getCountry()));
+			series.setCountry(dto.getCountry());
 		}
 		
 		if (dto.getYear() != null) {
