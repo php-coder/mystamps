@@ -533,7 +533,7 @@ public class SeriesServiceTest {
 	@Getter
 	@Setter
 	protected static class SeriesForm implements AddSeriesDto {
-		private Integer country;
+		private Country country;
 		private Integer year;
 		private Integer quantity;
 		private Boolean perforated;
