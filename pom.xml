@@ -22,6 +22,8 @@
 	<properties>
 		<java.version>1.6</java.version>
 		
+		<env.root.dir>src/env</env.root.dir>
+		
 		<compiler.plugin.version>2.4</compiler.plugin.version>
 		<surefire.plugin.version>2.12</surefire.plugin.version>
 		
@@ -60,7 +62,6 @@
 		</pluginManagement>
 	</build>
 	
-<<<<<<< HEAD
 	<!-- XXX Rest of the code -->
 	
 	<properties>
@@ -796,40 +797,7 @@
 			</activation>
 			<properties>
 				<env.dir>${env.root.dir}/dev/WEB-INF/classes</env.dir>
-				<ddl.file>mysql-scheme.sql</ddl.file>
 			</properties>
-			<build>
-				<plugins>
-					
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-dev-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>
-										${project.build.outputDirectory}
-									</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${env.dir}</directory>
-											<excludes>
-												<exclude>*.sql</exclude>
-											</excludes>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-				</plugins>
-			</build>
 		</profile>
 		
 		<profile>
@@ -839,68 +807,7 @@
 			</activation>
 			<properties>
 				<env.dir>${env.root.dir}/test/WEB-INF/classes</env.dir>
-				<ddl.file>h2-scheme.sql</ddl.file>
 			</properties>
-			<build>
-				<plugins>
-					
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${antrun.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-test-sql-data</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<copy
-											file="${env.dir}/test-data.sql"
-											todir="${project.build.outputDirectory}"
-											failonerror="yes"
-											verbose="yes"
-											encoding="${project.build.sourceEncoding}">
-											<filterset>
-												<filtersfile file="${env.dir}/spring/test-data.properties" />
-											</filterset>
-										</copy>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-test-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>
-										${project.build.outputDirectory}
-									</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${env.dir}</directory>
-											<excludes>
-												<exclude>test-data.sql</exclude>
-											</excludes>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-				</plugins>
-			</build>
 		</profile>
 		
 	</profiles>

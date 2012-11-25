@@ -1,6 +1,3 @@
-CRITICAL:
-- разобраться с запаковкой web.xml
-
 BACKPORT
 - data-commons в compile зависимости (остальное в runtime?)
 - отвязка юнит тестов от models
