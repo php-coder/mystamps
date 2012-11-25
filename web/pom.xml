@@ -27,7 +27,11 @@
 		<commons.beanutils.version>1.8.3</commons.beanutils.version>
 		<lombok.version>0.11.6</lombok.version>
 		
+		<jetty.host>127.0.0.1</jetty.host>
+		<jetty.port>8081</jetty.port>
+		
 		<war.plugin.version>2.2</war.plugin.version>
+		<jetty.plugin.version>8.1.5.v20120716</jetty.plugin.version>
 	</properties>
 	
 	<dependencies>
@@ -109,6 +113,7 @@
 		<finalName>mystamps</finalName>
 		
 		<plugins>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -117,6 +122,49 @@
 					<webXml>${env.dir}/../web.xml</webXml>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<connectors>
+						<connector
+							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<host>${jetty.host}</host>
+							<port>${jetty.port}</port>
+						</connector>
+					</connectors>
+					<stopPort>9966</stopPort>
+					<stopKey>jetty-stop-signal</stopKey>
+					<webAppSourceDirectory>
+						${project.build.directory}/${project.build.finalName}
+					</webAppSourceDirectory>
+					<webAppConfig>
+						<overrideDescriptor>${env.dir}/../web.xml</overrideDescriptor>
+					</webAppConfig>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-jetty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>run-war</goal>
+						</goals>
+						<configuration>
+							<daemon>true</daemon>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-jetty</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 		</plugins>
 	</build>
 	
