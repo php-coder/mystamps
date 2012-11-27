@@ -85,7 +85,7 @@ public class UserService {
 		String login = dto.getLogin();
 		
 		// use login as name if name is not provided
-		String finalName; // NOPMD: SF #3557789
+		String finalName;
 		if (StringUtils.isEmpty(dto.getName())) {
 			finalName = login;
 		} else {
