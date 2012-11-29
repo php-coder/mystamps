@@ -67,16 +67,13 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 			}
 		
 		} catch (NoSuchMethodException ex) {
-			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
-			return false;
+			throw new RuntimeException(ex); // NOPMD
 		
 		} catch (InvocationTargetException ex) {
-			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
-			return false;
+			throw new RuntimeException(ex); // NOPMD
 		
 		} catch (IllegalAccessException ex) {
-			ConstraintViolationUtils.recreate(ctx, secondFieldName, "error.internal");
-			return false;
+			throw new RuntimeException(ex); // NOPMD
 		}
 		
 		return true;
