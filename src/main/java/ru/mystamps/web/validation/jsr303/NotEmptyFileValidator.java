@@ -36,7 +36,7 @@ public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, 
 			return true;
 		}
 		
-		if (file.getSize() == 0) { // NOPMD
+		if (file.isEmpty()) {
 			return false;
 		}
 		
