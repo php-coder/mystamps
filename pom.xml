@@ -599,22 +599,6 @@
 						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
 					</rulesets>
 				</configuration>
-				<executions>
-					<execution>
-						<id>run-pmd</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>run-cpd</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>cpd-check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
