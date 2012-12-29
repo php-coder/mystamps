@@ -399,7 +399,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war.plugin.version}</version>
 				<configuration>
-					<webXml>${env.dir}/../web.xml</webXml>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 			
@@ -481,9 +481,6 @@
 					<webAppSourceDirectory>
 						${project.build.directory}/${project.build.finalName}
 					</webAppSourceDirectory>
-					<webAppConfig>
-						<overrideDescriptor>${env.dir}/../web.xml</overrideDescriptor>
-					</webAppConfig>
 					<skip>${skipTests}</skip>
 				</configuration>
 				<executions>
