@@ -52,6 +52,7 @@ public class SecurityConfig {
 		
 		messageSource.setBasename("classpath:ru/mystamps/i18n/SpringSecurityMessages");
 		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setFallbackToSystemLocale(false);
 		
 		return messageSource;
 	}

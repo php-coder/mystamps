@@ -84,6 +84,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:ru/mystamps/i18n/ValidationMessages");
+		messageSource.setFallbackToSystemLocale(false);
 		
 		LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
 		factory.setValidationMessageSource(messageSource);
@@ -118,6 +119,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		
 		messageSource.setBasename("classpath:ru/mystamps/i18n/Messages");
 		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setFallbackToSystemLocale(false);
 		
 		return messageSource;
 	}

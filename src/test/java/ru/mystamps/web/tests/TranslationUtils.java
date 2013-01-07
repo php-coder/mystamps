@@ -18,36 +18,55 @@
 
 package ru.mystamps.web.tests;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
-import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.apache.commons.io.IOUtils;
+
 public final class TranslationUtils {
 	
-	private static final String [] BUNDLE_CLASS_NAMES = new String[] {
-		"ru.mystamps.i18n.Messages",
-		"ru.mystamps.i18n.ValidationMessages",
-		"ru.mystamps.i18n.SpringSecurityMessages"
+	private static final String [] PROPERTIES_FILE_NAMES = new String[] {
+		"ru/mystamps/i18n/Messages.properties",
+		"ru/mystamps/i18n/ValidationMessages.properties",
+		"ru/mystamps/i18n/SpringSecurityMessages.properties"
 	};
-	
-	private static final Locale DEFAULT_BUNDLE_LOCALE =
-		Locale.ENGLISH;
 	
 	private static final ResourceBundle [] BUNDLES;
 	
 	static {
-		BUNDLES = new ResourceBundle[BUNDLE_CLASS_NAMES.length];
+		BUNDLES = new ResourceBundle[PROPERTIES_FILE_NAMES.length];
 		int i = 0;
-		for (String bundleClassName : BUNDLE_CLASS_NAMES) {
-			BUNDLES[i++] = PropertyResourceBundle.getBundle(
-				bundleClassName,
-				DEFAULT_BUNDLE_LOCALE
-			);
+		for (String propertiesFileName : PROPERTIES_FILE_NAMES) {
+			BUNDLES[i++] = getResourceBundleForFile(propertiesFileName);
 		}
 	}
 	
 	private TranslationUtils() {
+	}
+	
+	private static ResourceBundle getResourceBundleForFile(String filename) {
+		FileInputStream stream = null;
+		try {
+			File file = new File(
+				TranslationUtils.class.getClassLoader().getResource(filename).toURI()
+			);
+			stream = new FileInputStream(file);
+			return new PropertyResourceBundle(stream);
+		
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		
+		} catch (URISyntaxException ex) {
+			throw new RuntimeException(ex);
+		
+		} finally {
+			IOUtils.closeQuietly(stream);
+		}
 	}
 	
 	public static String tr(String key) {
