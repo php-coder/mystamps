@@ -17,7 +17,7 @@
 				<li>
 					
 					<sec:authorize access="isAuthenticated()">
-						<sec:authentication property="principal.name" />
+						<sec:authentication property="principal.user.name" />
 					</sec:authorize>
 					
 					<sec:authorize access="isAnonymous()">

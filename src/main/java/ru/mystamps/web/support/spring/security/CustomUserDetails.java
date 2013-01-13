@@ -31,11 +31,6 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	// used for showing user name at interface
-	public String getName() {
-		return user.getName();
-	}
-	
 	// used during authentication by password-encoder with salt-source
 	public String getSalt() {
 		return user.getSalt();
