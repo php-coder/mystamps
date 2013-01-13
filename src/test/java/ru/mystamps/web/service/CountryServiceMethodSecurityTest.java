@@ -32,7 +32,6 @@ import org.springframework.security.access.AccessDeniedException;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.TestContext;
-import ru.mystamps.web.model.AddCountryForm;
 
 @ActiveProfiles("test")
 @ContextConfiguration(
@@ -65,13 +64,11 @@ public class CountryServiceMethodSecurityTest {
 		service.add(null);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void addShouldAllowAccessToAuthenticatedUser() {
 		AuthUtils.authenticateAsUser(validUserLogin, validUserPassword);
 		
-		AddCountryForm form = new AddCountryForm();
-		form.setName("Any Country Name");
-		service.add(form);
+		service.add(null);
 	}
 	
 }
