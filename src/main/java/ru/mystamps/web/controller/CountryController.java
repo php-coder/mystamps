@@ -21,7 +21,6 @@ package ru.mystamps.web.controller;
 import java.io.IOException;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -75,14 +74,10 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
-	public String showInfo(
-		@PathVariable("id") Country country,
-		Model model,
-		HttpServletResponse response) throws IOException {
+	public String showInfo(@PathVariable("id") Country country, Model model) throws IOException {
 		
 		if (country == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+			throw new NotFoundException();
 		}
 		
 		model.addAttribute("country", country);
