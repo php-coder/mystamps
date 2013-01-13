@@ -57,8 +57,8 @@ public class NotFoundErrorController {
 		String ip   = request.getRemoteAddr();
 		
 		Integer uid = null;
-		if (userDetails != null) {
-			uid = userDetails.getId();
+		if (userDetails != null && userDetails.getUser() != null) {
+			uid = userDetails.getUser().getId();
 		}
 		
 		try {

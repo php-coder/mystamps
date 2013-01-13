@@ -31,11 +31,6 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	// used at least by NotFoundErrorController to getting and logging current user id
-	public Integer getId() {
-		return user.getId();
-	}
-	
 	// used for showing user name at interface
 	public String getName() {
 		return user.getName();
