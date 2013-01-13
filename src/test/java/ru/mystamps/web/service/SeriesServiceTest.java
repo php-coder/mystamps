@@ -449,7 +449,7 @@ public class SeriesServiceTest {
 	}
 	
 	@Test
-	public void addShouldAssignCreatedAtToCurrentUser() {
+	public void addShouldAssignCreatedByToCurrentUser() {
 		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
@@ -462,7 +462,7 @@ public class SeriesServiceTest {
 	}
 	
 	@Test
-	public void addShouldAssignUpdatedAtToCurrentUser() {
+	public void addShouldAssignUpdatedByToCurrentUser() {
 		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
