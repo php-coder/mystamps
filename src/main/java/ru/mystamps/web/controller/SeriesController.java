@@ -130,9 +130,8 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Integer id, Model model) throws IOException {
+	public String showInfo(@PathVariable("id") Series series, Model model) throws IOException {
 		
-		Series series = seriesService.findById(id);
 		if (series == null) {
 			throw new NotFoundException();
 		}

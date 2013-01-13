@@ -37,8 +37,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -465,43 +463,6 @@ public class SeriesServiceTest {
 		assertThat(metaInfo.getUpdatedBy()).isEqualTo(user);
 	}
 	
-	//
-	// Tests for findById()
-	//
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void findByIdShouldThrowExceptionWhenIdIsNull() {
-		service.findById(null);
-	}
-	
-	@Test
-	public void findByIdShouldCallSeriesDao() {
-		Integer anyId = 3;
-		service.findById(anyId);
-		
-		verify(seriesDao).findOne(anyInt());
-	}
-	
-	@Test
-	public void findByIdShouldPassIdToSeriesDao() {
-		Integer expectedId = 3;
-		
-		service.findById(expectedId);
-		
-		verify(seriesDao).findOne(eq(expectedId));
-	}
-	
-	@Test
-	public void findByIdShouldReturnValueFromSeriesDao() {
-		Series expectedSeries = getSeries();
-		Integer seriesId = expectedSeries.getId();
-		when(seriesDao.findOne(eq(seriesId))).thenReturn(expectedSeries);
-		
-		Series actualSeries = service.findById(seriesId);
-		
-		assertThat(actualSeries).isEqualTo(expectedSeries);
-	}
-	
 	private static <T> Set<T> newSet(T... elements) {
 		Set<T> result = new LinkedHashSet<T>();
 		
@@ -510,12 +471,6 @@ public class SeriesServiceTest {
 		}
 		
 		return result;
-	}
-	
-	private static Series getSeries() {
-		Series series = new Series();
-		series.setId(1);
-		return series;
 	}
 	
 }

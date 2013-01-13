@@ -126,12 +126,6 @@ public class SeriesService {
 		return seriesDao.save(series);
 	}
 	
-	@Transactional(readOnly = true)
-	public Series findById(Integer id) {
-		Validate.isTrue(id != null, "Id should be non null");
-		return seriesDao.findOne(id);
-	}
-	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
