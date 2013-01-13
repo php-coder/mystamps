@@ -46,7 +46,7 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		return user.getSalt();
 	}
 	
-	// used by UserService.getCurrentUser()
+	// used by AuthService.getCurrentUser()
 	public User getUser() {
 		return user;
 	}
