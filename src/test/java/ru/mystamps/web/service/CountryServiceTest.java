@@ -56,9 +56,6 @@ public class CountryServiceTest {
 	@Mock
 	private CountryDao countryDao;
 	
-	@Mock
-	private AuthService authService;
-	
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
 	
@@ -66,13 +63,14 @@ public class CountryServiceTest {
 	private CountryService service = new CountryService();
 	
 	private AddCountryForm form;
+	private User user;
 	
 	@Before
 	public void setUp() {
-		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
-		
 		form = new AddCountryForm();
 		form.setName(TEST_COUNTRY_NAME);
+		
+		user = UserServiceTest.getValidUser();
 	}
 	
 	//
@@ -81,14 +79,19 @@ public class CountryServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenDtoIsNull() {
-		service.add(null);
+		service.add(null, user);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenCountryNameIsNull() {
 		form.setName(null);
 		
-		service.add(form);
+		service.add(form, user);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionWhenUserIsNull() {
+		service.add(form, null);
 	}
 	
 	@Test
@@ -96,7 +99,7 @@ public class CountryServiceTest {
 		Country expected = getCountry();
 		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
-		Country actual = service.add(form);
+		Country actual = service.add(form, user);
 		
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -106,7 +109,7 @@ public class CountryServiceTest {
 		String expectedCountryName = "Italy";
 		form.setName(expectedCountryName);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -115,7 +118,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -126,7 +129,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -135,37 +138,24 @@ public class CountryServiceTest {
 		DateAssert.assertThat(metaInfo.getUpdatedAt()).isCurrentDate();
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
-		when(authService.getCurrentUser()).thenReturn(null);
-		
-		service.add(form);
-	}
-	
 	@Test
-	public void addShouldAssignCreatedByToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignCreatedByToUser() {
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getCreatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getCreatedBy()).isEqualTo(user);
 	}
 	
 	@Test
-	public void addShouldAssignUpdatedByToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignUpdatedByToUser() {
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getUpdatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getUpdatedBy()).isEqualTo(user);
 	}
 	
 	//

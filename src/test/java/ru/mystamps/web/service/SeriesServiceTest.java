@@ -86,9 +86,6 @@ public class SeriesServiceTest {
 	private SeriesDao seriesDao;
 	
 	@Mock
-	private AuthService authService;
-	
-	@Mock
 	private MultipartFile multipartFile;
 	
 	@Captor
@@ -113,6 +110,7 @@ public class SeriesServiceTest {
 	private SeriesService service = new SeriesService();
 	
 	private AddSeriesForm form;
+	private User user;
 	
 	@Before
 	public void setUp() {
@@ -120,8 +118,9 @@ public class SeriesServiceTest {
 		form.setQuantity(2);
 		form.setPerforated(false);
 		
+		user = UserServiceTest.getValidUser();
+		
 		when(imageService.save(any(MultipartFile.class))).thenReturn("/fake/path/to/image");
-		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
 	}
 	
 	//
@@ -130,26 +129,31 @@ public class SeriesServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionArgumentIsNull() {
-		service.add(null);
+		service.add(null, user);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionIfQuantityIsNull() {
 		form.setQuantity(null);
 		
-		service.add(form);
+		service.add(form, user);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionIfPerforatedIsNull() {
 		form.setPerforated(null);
 		
-		service.add(form);
+		service.add(form, user);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionWhenUserIsNull() {
+		service.add(form, null);
 	}
 	
 	@Test
 	public void addShouldPassEntityToSeriesDao() {
-		service.add(form);
+		service.add(form, user);
 
 		verify(seriesDao).save(any(Series.class));
 	}
@@ -160,7 +164,7 @@ public class SeriesServiceTest {
 		
 		form.setCountry(expectedCountry);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 
@@ -173,7 +177,7 @@ public class SeriesServiceTest {
 		int expectedYear = 2000;
 		form.setYear(expectedYear);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -189,7 +193,7 @@ public class SeriesServiceTest {
 		Integer expectedQuantity = 3;
 		form.setQuantity(expectedQuantity);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -201,7 +205,7 @@ public class SeriesServiceTest {
 		Boolean expectedResult = true;
 		form.setPerforated(expectedResult);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -212,7 +216,7 @@ public class SeriesServiceTest {
 	public void addShouldPassNullToSeriesDaoIfMichelNumbersIsNull() {
 		assertThat(form.getMichelNumbers()).isNull();
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -227,7 +231,7 @@ public class SeriesServiceTest {
 		);
 		form.setMichelNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(michelCatalogDao).save(michelCatalogCaptor.capture());
 		assertThat(michelCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
@@ -241,7 +245,7 @@ public class SeriesServiceTest {
 		);
 		form.setMichelNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getMichel()).isEqualTo(expectedNumbers);
@@ -251,7 +255,7 @@ public class SeriesServiceTest {
 	public void addShouldPassNullToSeriesDaoIfScottNumbersIsNull() {
 		assertThat(form.getScottNumbers()).isNull();
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -266,7 +270,7 @@ public class SeriesServiceTest {
 		);
 		form.setScottNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(scottCatalogDao).save(scottCatalogCaptor.capture());
 		assertThat(scottCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
@@ -280,7 +284,7 @@ public class SeriesServiceTest {
 		);
 		form.setScottNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getScott()).isEqualTo(expectedNumbers);
@@ -290,7 +294,7 @@ public class SeriesServiceTest {
 	public void addShouldPassNullToSeriesDaoIfYvertNumbersIsNull() {
 		assertThat(form.getYvertNumbers()).isNull();
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -305,7 +309,7 @@ public class SeriesServiceTest {
 		);
 		form.setYvertNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(yvertCatalogDao).save(yvertCatalogCaptor.capture());
 		assertThat(yvertCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
@@ -319,7 +323,7 @@ public class SeriesServiceTest {
 		);
 		form.setYvertNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getYvert()).isEqualTo(expectedNumbers);
@@ -329,7 +333,7 @@ public class SeriesServiceTest {
 	public void addShouldPassNullToSeriesDaoIfGibbonsNumbersIsNull() {
 		assertThat(form.getGibbonsNumbers()).isNull();
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -344,7 +348,7 @@ public class SeriesServiceTest {
 		);
 		form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(gibbonsCatalogDao).save(gibbonsCatalogCaptor.capture());
 		assertThat(gibbonsCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
@@ -358,7 +362,7 @@ public class SeriesServiceTest {
 		);
 		form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','));
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getGibbons()).isEqualTo(expectedNumbers);
@@ -367,7 +371,7 @@ public class SeriesServiceTest {
 	@Test
 	public void addShouldPassImageToImageService() {
 		form.setImage(multipartFile);
-		service.add(form);
+		service.add(form, user);
 		
 		verify(imageService).save(multipartFileCaptor.capture());
 		assertThat(multipartFileCaptor.getValue()).isEqualTo(multipartFile);
@@ -377,7 +381,7 @@ public class SeriesServiceTest {
 	public void addShouldThrowExceptionIfImageUrlIsNull() {
 		when(imageService.save(any(MultipartFile.class))).thenReturn(null);
 		
-		service.add(form);
+		service.add(form, user);
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -385,7 +389,7 @@ public class SeriesServiceTest {
 		String aVeryLongPath = StringUtils.repeat("x", Series.IMAGE_URL_LENGTH + 1);
 		when(imageService.save(any(MultipartFile.class))).thenReturn(aVeryLongPath);
 		
-		service.add(form);
+		service.add(form, user);
 	}
 	
 	@Test
@@ -393,7 +397,7 @@ public class SeriesServiceTest {
 		String expectedUrl = "http://example.org/example.jpg";
 		when(imageService.save(any(MultipartFile.class))).thenReturn(expectedUrl);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getImageUrl()).isEqualTo(expectedUrl);
@@ -404,7 +408,7 @@ public class SeriesServiceTest {
 	public void addShouldThrowExceptionIfCommentIsEmpty() {
 		form.setComment("  ");
 
-		service.add(form);
+		service.add(form, user);
 	}
 	
 	@Test
@@ -412,7 +416,7 @@ public class SeriesServiceTest {
 		String expectedComment = "Some text";
 		form.setComment(expectedComment);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -421,7 +425,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -432,7 +436,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		
@@ -441,37 +445,24 @@ public class SeriesServiceTest {
 		DateAssert.assertThat(metaInfo.getUpdatedAt()).isCurrentDate();
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
-		when(authService.getCurrentUser()).thenReturn(null);
-		
-		service.add(form);
-	}
-	
 	@Test
-	public void addShouldAssignCreatedByToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignCreatedByToUser() {
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getCreatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getCreatedBy()).isEqualTo(user);
 	}
 	
 	@Test
-	public void addShouldAssignUpdatedByToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignUpdatedByToUser() {
+		service.add(form, user);
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		MetaInfo metaInfo = seriesCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getUpdatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getUpdatedBy()).isEqualTo(user);
 	}
 	
 	//

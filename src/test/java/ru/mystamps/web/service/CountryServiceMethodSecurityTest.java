@@ -61,14 +61,14 @@ public class CountryServiceMethodSecurityTest {
 	public void addShouldDenyAccessToAnonymousUser() {
 		AuthUtils.authenticateAsAnonymous();
 		
-		service.add(null);
+		service.add(null, null);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldAllowAccessToAuthenticatedUser() {
 		AuthUtils.authenticateAsUser(validUserLogin, validUserPassword);
 		
-		service.add(null);
+		service.add(null, null);
 	}
 	
 }

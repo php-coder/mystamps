@@ -45,6 +45,7 @@ import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.service.AuthService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
@@ -57,6 +58,7 @@ public class SeriesController {
 	
 	private static final Map<Integer, Integer> YEARS;
 	
+	private final AuthService authService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
@@ -68,7 +70,12 @@ public class SeriesController {
 	}
 	
 	@Inject
-	SeriesController(CountryService countryService, SeriesService seriesService) {
+	SeriesController(
+		AuthService authService,
+		CountryService countryService,
+		SeriesService seriesService) {
+		
+		this.authService = authService;
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
@@ -117,7 +124,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Series series = seriesService.add(form);
+		Series series = seriesService.add(form, authService.getCurrentUser());
 		
 		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
 	}
