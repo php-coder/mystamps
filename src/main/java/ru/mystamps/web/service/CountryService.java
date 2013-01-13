@@ -69,10 +69,4 @@ public class CountryService {
 		return countryDao.findByName(name);
 	}
 	
-	@Transactional(readOnly = true)
-	public Country findById(Integer id) {
-		Validate.isTrue(id != null, "Id should be non null");
-		return countryDao.findOne(id);
-	}
-	
 }

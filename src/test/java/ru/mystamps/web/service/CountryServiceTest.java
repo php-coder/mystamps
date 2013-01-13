@@ -34,7 +34,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
@@ -205,32 +204,6 @@ public class CountryServiceTest {
 		service.findByName(TEST_COUNTRY_NAME);
 		
 		verify(countryDao).findByName(eq(TEST_COUNTRY_NAME));
-	}
-	
-	//
-	// Tests for findById()
-	//
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void findByIdShouldThrowExceptionWhenIdIsNull() {
-		service.findById(null);
-	}
-	
-	@Test
-	public void findByIdShouldCallDao() {
-		Country expectedCountry = getCountry();
-		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
-		
-		Country country = service.findById(TEST_COUNTRY_ID);
-		
-		assertThat(country).isEqualTo(expectedCountry);
-	}
-	
-	@Test
-	public void findByIdShouldPassIdToDao() {
-		service.findById(TEST_COUNTRY_ID);
-		
-		verify(countryDao).findOne(eq(TEST_COUNTRY_ID));
 	}
 	
 	static Country getCountry() {

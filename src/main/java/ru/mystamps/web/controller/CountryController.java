@@ -76,11 +76,10 @@ public class CountryController {
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
 	public String showInfo(
-		@PathVariable("id") Integer id,
+		@PathVariable("id") Country country,
 		Model model,
 		HttpServletResponse response) throws IOException {
 		
-		Country country = countryService.findById(id);
 		if (country == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
