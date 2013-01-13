@@ -34,8 +34,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.fail;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyInt;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -155,49 +153,6 @@ public class ImageServiceTest {
 		String result = service.save(multipartFile);
 		
 		assertThat(result).isEqualTo(expectedUrl);
-	}
-	
-	//
-	// Tests for findById()
-	//
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void findByIdShouldThrowExceptionWhenIdIsNull() {
-		service.findById(null);
-	}
-	
-	@Test
-	public void findByIdShouldCallImageDao() {
-		Integer anyId = 3;
-		service.findById(anyId);
-		
-		verify(imageDao).findOne(anyInt());
-	}
-	
-	@Test
-	public void findByIdShouldPassIdToImageDao() {
-		Integer expectedId = 3;
-		
-		service.findById(expectedId);
-		
-		verify(imageDao).findOne(eq(expectedId));
-	}
-	
-	@Test
-	public void findByIdShouldReturnValueFromImageDao() {
-		Image expectedImage = getImage();
-		Integer imageId = expectedImage.getId();
-		when(imageDao.findOne(eq(imageId))).thenReturn(expectedImage);
-		
-		Image actualImage = service.findById(imageId);
-		
-		assertThat(actualImage).isEqualTo(expectedImage);
-	}
-	
-	private static Image getImage() {
-		Image image = new Image();
-		image.setId(1);
-		return image;
 	}
 	
 }

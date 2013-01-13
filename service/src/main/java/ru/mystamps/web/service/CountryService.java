@@ -38,14 +38,12 @@ public class CountryService {
 	@Inject
 	private CountryDao countryDao;
 	
-	@Inject
-	private AuthService authService;
-	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Country add(AddCountryDto dto) {
+	public Country add(AddCountryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "Country name should be non null");
+		Validate.isTrue(user != null, "Current user must be non null");
 		
 		Country country = new Country();
 		country.setName(dto.getName());
@@ -54,10 +52,8 @@ public class CountryService {
 		country.getMetaInfo().setCreatedAt(now);
 		country.getMetaInfo().setUpdatedAt(now);
 		
-		User currentUser = authService.getCurrentUser();
-		Validate.validState(currentUser != null, "Current user must be non null");
-		country.getMetaInfo().setCreatedBy(currentUser);
-		country.getMetaInfo().setUpdatedBy(currentUser);
+		country.getMetaInfo().setCreatedBy(user);
+		country.getMetaInfo().setUpdatedBy(user);
 		
 		return countryDao.save(country);
 	}
@@ -71,12 +67,6 @@ public class CountryService {
 	public Country findByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
 		return countryDao.findByName(name);
-	}
-	
-	@Transactional(readOnly = true)
-	public Country findById(Integer id) {
-		Validate.isTrue(id != null, "Id should be non null");
-		return countryDao.findOne(id);
 	}
 	
 }

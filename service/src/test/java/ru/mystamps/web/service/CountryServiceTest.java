@@ -34,7 +34,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
@@ -59,9 +58,6 @@ public class CountryServiceTest {
 	@Mock
 	private CountryDao countryDao;
 	
-	@Mock
-	private AuthService authService;
-	
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
 	
@@ -69,13 +65,14 @@ public class CountryServiceTest {
 	private CountryService service = new CountryService();
 	
 	private CountryForm form;
+	private User user;
 	
 	@Before
 	public void setUp() {
-		when(authService.getCurrentUser()).thenReturn(UserServiceTest.getValidUser());
-		
 		form = new CountryForm();
 		form.setName(TEST_COUNTRY_NAME);
+		
+		user = UserServiceTest.getValidUser();
 	}
 	
 	//
@@ -84,14 +81,19 @@ public class CountryServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenDtoIsNull() {
-		service.add(null);
+		service.add(null, user);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void addShouldThrowExceptionWhenCountryNameIsNull() {
 		form.setName(null);
 		
-		service.add(form);
+		service.add(form, user);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionWhenUserIsNull() {
+		service.add(form, null);
 	}
 	
 	@Test
@@ -99,7 +101,7 @@ public class CountryServiceTest {
 		Country expected = getCountry();
 		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
-		Country actual = service.add(form);
+		Country actual = service.add(form, user);
 		
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -109,7 +111,7 @@ public class CountryServiceTest {
 		String expectedCountryName = "Italy";
 		form.setName(expectedCountryName);
 		
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -118,7 +120,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignCreatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -129,7 +131,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldAssignUpdatedAtToCurrentDate() {
-		service.add(form);
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		
@@ -138,37 +140,24 @@ public class CountryServiceTest {
 		DateAssert.assertThat(metaInfo.getUpdatedAt()).isCurrentDate();
 	}
 	
-	@Test(expected = IllegalStateException.class)
-	public void addShouldThrowExceptionWhenCannotDetermineCurrentUser() {
-		when(authService.getCurrentUser()).thenReturn(null);
-		
-		service.add(form);
-	}
-	
 	@Test
-	public void addShouldAssignCreatedAtToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignCreatedByToUser() {
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getCreatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getCreatedBy()).isEqualTo(user);
 	}
 	
 	@Test
-	public void addShouldAssignUpdatedAtToCurrentUser() {
-		User expectedUser = UserServiceTest.getValidUser();
-		when(authService.getCurrentUser()).thenReturn(expectedUser);
-		
-		service.add(form);
+	public void addShouldAssignUpdatedByToUser() {
+		service.add(form, user);
 		
 		verify(countryDao).save(countryCaptor.capture());
 		final MetaInfo metaInfo = countryCaptor.getValue().getMetaInfo();
 		assertThat(metaInfo).isNotNull();
-		assertThat(metaInfo.getUpdatedBy()).isEqualTo(expectedUser);
+		assertThat(metaInfo.getUpdatedBy()).isEqualTo(user);
 	}
 	
 	//
@@ -218,32 +207,6 @@ public class CountryServiceTest {
 		service.findByName(TEST_COUNTRY_NAME);
 		
 		verify(countryDao).findByName(eq(TEST_COUNTRY_NAME));
-	}
-	
-	//
-	// Tests for findById()
-	//
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void findByIdShouldThrowExceptionWhenIdIsNull() {
-		service.findById(null);
-	}
-	
-	@Test
-	public void findByIdShouldCallDao() {
-		Country expectedCountry = getCountry();
-		when(countryDao.findOne(anyInt())).thenReturn(expectedCountry);
-		
-		Country country = service.findById(TEST_COUNTRY_ID);
-		
-		assertThat(country).isEqualTo(expectedCountry);
-	}
-	
-	@Test
-	public void findByIdShouldPassIdToDao() {
-		service.findById(TEST_COUNTRY_ID);
-		
-		verify(countryDao).findOne(eq(TEST_COUNTRY_ID));
 	}
 	
 	static Country getCountry() {

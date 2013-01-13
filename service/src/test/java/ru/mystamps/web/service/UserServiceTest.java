@@ -90,6 +90,7 @@ public class UserServiceTest {
 	@Before
 	public void setUp() {
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
+		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		
 		registrationForm = new RegistrationForm();
 		registrationForm.setEmail(TEST_EMAIL);
@@ -208,8 +209,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldCreateUser() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(any(User.class));
@@ -244,8 +243,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassNameToDao() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
@@ -255,7 +252,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		activationForm.setName(null);
 		
 		service.registerUser(activationForm);
@@ -267,7 +263,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		activationForm.setName("");
 		
 		service.registerUser(activationForm);
@@ -303,8 +298,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldGenerateSalt() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
@@ -316,8 +309,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldGenerateUniqueSalt() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		verify(userDao).save(userCaptor.capture());
 		String firstSalt = userCaptor.getValue().getSalt();
@@ -340,7 +331,6 @@ public class UserServiceTest {
 	public void registerUserShouldGetsHashFromEncoder() {
 		String expectedHash = TEST_HASH;
 		
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
 		
 		service.registerUser(activationForm);
@@ -354,7 +344,6 @@ public class UserServiceTest {
 	
 	@Test(expected = IllegalStateException.class)
 	public void registerUserShouldThrowExceptionWhenEncoderReturnsNull() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(null);
 		
 		service.registerUser(activationForm);
@@ -369,8 +358,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassLoginToDao() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
@@ -380,8 +367,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldAssignActivatedAtToCurrentDate() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
-		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());

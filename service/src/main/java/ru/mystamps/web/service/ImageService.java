@@ -26,7 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.dao.ImageDao;
@@ -66,12 +65,6 @@ public class ImageService {
 		Image entity = imageDao.save(image);
 		
 		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
-	}
-	
-	@Transactional(readOnly = true)
-	public Image findById(Integer id) {
-		Validate.isTrue(id != null, "Id should be non null");
-		return imageDao.findOne(id);
 	}
 	
 }

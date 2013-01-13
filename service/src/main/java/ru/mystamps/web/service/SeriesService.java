@@ -67,18 +67,16 @@ public class SeriesService {
 	@Inject
 	private ImageService imageService;
 	
-	@Inject
-	private AuthService authService;
-	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Series add(AddSeriesDto dto) {
+	public Series add(AddSeriesDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
 			dto.getPerforated() != null,
 			"Stamps perforated property must be non null"
 		);
+		Validate.isTrue(user != null, "Current user must be non null");
 		
 		Series series = new Series();
 		
@@ -122,18 +120,10 @@ public class SeriesService {
 		series.getMetaInfo().setCreatedAt(now);
 		series.getMetaInfo().setUpdatedAt(now);
 		
-		User currentUser = authService.getCurrentUser();
-		Validate.validState(currentUser != null, "Current user must be non null");
-		series.getMetaInfo().setCreatedBy(currentUser);
-		series.getMetaInfo().setUpdatedBy(currentUser);
+		series.getMetaInfo().setCreatedBy(user);
+		series.getMetaInfo().setUpdatedBy(user);
 		
 		return seriesDao.save(series);
-	}
-	
-	@Transactional(readOnly = true)
-	public Series findById(Integer id) {
-		Validate.isTrue(id != null, "Id should be non null");
-		return seriesDao.findOne(id);
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
