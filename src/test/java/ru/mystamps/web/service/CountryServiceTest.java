@@ -143,7 +143,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void addShouldAssignCreatedAtToCurrentUser() {
+	public void addShouldAssignCreatedByToCurrentUser() {
 		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
@@ -156,7 +156,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void addShouldAssignUpdatedAtToCurrentUser() {
+	public void addShouldAssignUpdatedByToCurrentUser() {
 		User expectedUser = UserServiceTest.getValidUser();
 		when(authService.getCurrentUser()).thenReturn(expectedUser);
 		
