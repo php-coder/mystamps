@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -73,7 +71,7 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Country country, Model model) throws IOException {
+	public String showInfo(@PathVariable("id") Country country, Model model) {
 		
 		if (country == null) {
 			throw new NotFoundException();
