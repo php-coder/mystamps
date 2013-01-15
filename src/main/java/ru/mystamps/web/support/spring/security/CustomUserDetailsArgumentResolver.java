@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2012 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2013 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
