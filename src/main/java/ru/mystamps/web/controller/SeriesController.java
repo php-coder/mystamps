@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 import javax.validation.groups.Default;
 
@@ -129,7 +127,7 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Series series, Model model) throws IOException {
+	public String showInfo(@PathVariable("id") Series series, Model model) {
 		
 		if (series == null) {
 			throw new NotFoundException();
