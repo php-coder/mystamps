@@ -32,11 +32,7 @@ import static java.util.Calendar.JANUARY;
 
 import org.apache.commons.lang3.Validate;
 
-import ru.mystamps.web.dao.GibbonsCatalogDao;
-import ru.mystamps.web.dao.MichelCatalogDao;
-import ru.mystamps.web.dao.ScottCatalogDao;
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.dao.YvertCatalogDao;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.ScottCatalog;
@@ -51,18 +47,6 @@ public class SeriesService {
 	
 	@Inject
 	private SeriesDao seriesDao;
-	
-	@Inject
-	private MichelCatalogDao michelCatalogDao;
-	
-	@Inject
-	private ScottCatalogDao scottCatalogDao;
-	
-	@Inject
-	private YvertCatalogDao yvertCatalogDao;
-	
-	@Inject
-	private GibbonsCatalogDao gibbonsCatalogDao;
 	
 	@Inject
 	private ImageService imageService;
@@ -130,7 +114,6 @@ public class SeriesService {
 		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
 		if (!michelNumbers.isEmpty()) {
-			michelCatalogDao.save(michelNumbers);
 			series.setMichel(michelNumbers);
 		}
 	}
@@ -139,7 +122,6 @@ public class SeriesService {
 		Set<ScottCatalog> scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
 		if (!scottNumbers.isEmpty()) {
-			scottCatalogDao.save(scottNumbers);
 			series.setScott(scottNumbers);
 		}
 	}
@@ -148,7 +130,6 @@ public class SeriesService {
 		Set<YvertCatalog> yvertNumbers =
 			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
 		if (!yvertNumbers.isEmpty()) {
-			yvertCatalogDao.save(yvertNumbers);
 			series.setYvert(yvertNumbers);
 		}
 	}
@@ -157,7 +138,6 @@ public class SeriesService {
 		Set<GibbonsCatalog> gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
 		if (!gibbonsNumbers.isEmpty()) {
-			gibbonsCatalogDao.save(gibbonsNumbers);
 			series.setGibbons(gibbonsNumbers);
 		}
 	}

@@ -43,11 +43,7 @@ import static org.mockito.Mockito.when;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import ru.mystamps.web.dao.CountryDao;
-import ru.mystamps.web.dao.GibbonsCatalogDao;
-import ru.mystamps.web.dao.MichelCatalogDao;
-import ru.mystamps.web.dao.ScottCatalogDao;
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.dao.YvertCatalogDao;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MetaInfo;
@@ -66,18 +62,6 @@ public class SeriesServiceTest {
 	private CountryDao countryDao;
 	
 	@Mock
-	private MichelCatalogDao michelCatalogDao;
-	
-	@Mock
-	private ScottCatalogDao scottCatalogDao;
-	
-	@Mock
-	private YvertCatalogDao yvertCatalogDao;
-	
-	@Mock
-	private GibbonsCatalogDao gibbonsCatalogDao;
-	
-	@Mock
 	private ImageService imageService;
 	
 	@Mock
@@ -88,18 +72,6 @@ public class SeriesServiceTest {
 	
 	@Captor
 	private ArgumentCaptor<Series> seriesCaptor;
-	
-	@Captor
-	private ArgumentCaptor<Set<MichelCatalog>> michelCatalogCaptor;
-	
-	@Captor
-	private ArgumentCaptor<Set<ScottCatalog>> scottCatalogCaptor;
-	
-	@Captor
-	private ArgumentCaptor<Set<YvertCatalog>> yvertCatalogCaptor;
-	
-	@Captor
-	private ArgumentCaptor<Set<GibbonsCatalog>> gibbonsCatalogCaptor;
 	
 	@Captor
 	private ArgumentCaptor<MultipartFile> multipartFileCaptor;
@@ -222,20 +194,6 @@ public class SeriesServiceTest {
 	}
 	
 	@Test
-	public void addShouldSaveMichelNumbers() {
-		Set<MichelCatalog> expectedNumbers = newSet(
-			new MichelCatalog("1"),
-			new MichelCatalog("2")
-		);
-		form.setMichelNumbers(StringUtils.join(expectedNumbers, ','));
-		
-		service.add(form, user);
-		
-		verify(michelCatalogDao).save(michelCatalogCaptor.capture());
-		assertThat(michelCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
-	}
-	
-	@Test
 	public void addShouldPassMichelNumbersToSeriesDao() {
 		Set<MichelCatalog> expectedNumbers = newSet(
 			new MichelCatalog("1"),
@@ -258,20 +216,6 @@ public class SeriesServiceTest {
 		verify(seriesDao).save(seriesCaptor.capture());
 		
 		assertThat(seriesCaptor.getValue().getScott()).isNull();
-	}
-	
-	@Test
-	public void addShouldSaveScottNumbers() {
-		Set<ScottCatalog> expectedNumbers = newSet(
-			new ScottCatalog("1"),
-			new ScottCatalog("2")
-		);
-		form.setScottNumbers(StringUtils.join(expectedNumbers, ','));
-		
-		service.add(form, user);
-		
-		verify(scottCatalogDao).save(scottCatalogCaptor.capture());
-		assertThat(scottCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
 	}
 	
 	@Test
@@ -300,20 +244,6 @@ public class SeriesServiceTest {
 	}
 	
 	@Test
-	public void addShouldSaveYvertNumbers() {
-		Set<YvertCatalog> expectedNumbers = newSet(
-			new YvertCatalog("1"),
-			new YvertCatalog("2")
-		);
-		form.setYvertNumbers(StringUtils.join(expectedNumbers, ','));
-		
-		service.add(form, user);
-		
-		verify(yvertCatalogDao).save(yvertCatalogCaptor.capture());
-		assertThat(yvertCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
-	}
-	
-	@Test
 	public void addShouldPassYvertNumbersToSeriesDao() {
 		Set<YvertCatalog> expectedNumbers = newSet(
 			new YvertCatalog("1"),
@@ -336,20 +266,6 @@ public class SeriesServiceTest {
 		verify(seriesDao).save(seriesCaptor.capture());
 		
 		assertThat(seriesCaptor.getValue().getGibbons()).isNull();
-	}
-	
-	@Test
-	public void addShouldSaveGibbonsNumbers() {
-		Set<GibbonsCatalog> expectedNumbers = newSet(
-			new GibbonsCatalog("1"),
-			new GibbonsCatalog("2")
-		);
-		form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','));
-		
-		service.add(form, user);
-		
-		verify(gibbonsCatalogDao).save(gibbonsCatalogCaptor.capture());
-		assertThat(gibbonsCatalogCaptor.getValue()).isEqualTo(expectedNumbers);
 	}
 	
 	@Test

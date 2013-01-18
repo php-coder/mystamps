@@ -20,6 +20,7 @@ package ru.mystamps.web.entity;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -65,19 +66,19 @@ public class Series {
 	@Column(nullable = false)
 	private Boolean perforated;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<MichelCatalog> michel;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<ScottCatalog> scott;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<YvertCatalog> yvert;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<GibbonsCatalog> gibbons;
 	
