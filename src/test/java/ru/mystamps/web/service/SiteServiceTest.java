@@ -63,7 +63,7 @@ public class SiteServiceTest {
 	private ArgumentCaptor<SuspiciousActivity> activityCaptor;
 	
 	@InjectMocks
-	private SiteService service = new SiteService();
+	private SiteService service = new SiteServiceImpl();
 	
 	//
 	// Tests for logAboutAbsentPage()

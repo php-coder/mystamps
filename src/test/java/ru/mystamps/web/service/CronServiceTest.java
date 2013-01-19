@@ -55,7 +55,7 @@ public class CronServiceTest {
 	private ArgumentCaptor<Date> dateCaptor;
 	
 	@InjectMocks
-	private CronService service = new CronService();
+	private CronService service = new CronServiceImpl();
 	
 	//
 	// Tests for purgeUsersActivations()

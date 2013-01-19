@@ -59,7 +59,7 @@ public class CountryServiceTest {
 	private ArgumentCaptor<Country> countryCaptor;
 	
 	@InjectMocks
-	private CountryService service = new CountryService();
+	private CountryService service = new CountryServiceImpl();
 	
 	private AddCountryForm form;
 	private User user;

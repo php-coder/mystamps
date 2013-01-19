@@ -17,61 +17,8 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.commons.lang3.Validate;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import ru.mystamps.web.dao.UsersActivationDao;
-import ru.mystamps.web.entity.UsersActivation;
-
-@Service
-public class CronService {
+public interface CronService {
+	int PURGE_AFTER_DAYS = 3;
 	
-	public static final int PURGE_AFTER_DAYS = 3;
-	
-	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
-	
-	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
-	
-	@Inject
-	private UsersActivationDao usersActivationDao;
-	
-	@Scheduled(fixedDelay = CHECK_PERIOD)
-	@Transactional
-	public void purgeUsersActivations() {
-		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
-		
-		List<UsersActivation> expiredActivations =
-			usersActivationDao.findByCreatedAtLessThan(expiredSince);
-		
-		Validate.validState(expiredActivations != null, "Expired activations should be non null");
-		
-		if (expiredActivations.isEmpty()) {
-			LOG.info("Expired activations was not found.");
-			return;
-		}
-		
-		for (UsersActivation activation : expiredActivations) {
-			LOG.info(
-				"Delete expired activation (key: {}, email: {}, created: {})",
-				activation.getActivationKey(),
-				activation.getEmail(),
-				activation.getCreatedAt()
-			);
-		}
-		
-		usersActivationDao.delete(expiredActivations);
-	}
-	
+	void purgeUsersActivations();
 }
