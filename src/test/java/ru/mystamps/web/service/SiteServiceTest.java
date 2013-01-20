@@ -37,7 +37,6 @@ import static org.mockito.Mockito.when;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
-import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
@@ -55,9 +54,6 @@ public class SiteServiceTest {
 	
 	@Mock
 	private SuspiciousActivityTypeDao suspiciousActivityTypeDao;
-	
-	@Mock
-	private UserDao userDao;
 	
 	@Captor
 	private ArgumentCaptor<SuspiciousActivity> activityCaptor;
@@ -138,28 +134,12 @@ public class SiteServiceTest {
 	}
 	
 	@Test
-	public void logAboutAbsentPageShouldPassNullToDaoForNotExistingUser() {
-		Integer notExistingUserId = 1010;
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
-		when(userDao.findOne(any(Integer.class))).thenReturn(null);
-		
-		service.logAboutAbsentPage(TEST_PAGE, notExistingUserId, null, null, null);
-		
-		verify(userDao).findOne(notExistingUserId);
-		verify(suspiciousActivityDao).save(activityCaptor.capture());
-		
-		assertThat(activityCaptor.getValue().getUser()).isNull();
-	}
-	
-	@Test
 	public void logAboutAbsentPageShouldPassUserToDao() {
 		User user = getUser();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
-		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
-		service.logAboutAbsentPage(TEST_PAGE, user.getId(), null, null, null);
+		service.logAboutAbsentPage(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findOne(user.getId());
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isEqualTo(user);
@@ -304,30 +284,12 @@ public class SiteServiceTest {
 	}
 	
 	@Test
-	public void logAboutFailedAuthenticationShouldPassNullToDaoForNotExistingUser() {
-		User user = getUser();
-		Integer userId = user.getId();
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
-		when(userDao.findOne(any(Integer.class))).thenReturn(null);
-		
-		service.logAboutFailedAuthentication(TEST_PAGE, userId, null, null, null);
-		
-		verify(userDao).findOne(userId);
-		verify(suspiciousActivityDao).save(activityCaptor.capture());
-		
-		assertThat(activityCaptor.getValue().getUser()).isNull();
-	}
-	
-	@Test
 	public void logAboutFailedAuthenticationShouldPassUserToDao() {
 		User user = getUser();
-		Integer userId = user.getId();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
-		when(userDao.findOne(any(Integer.class))).thenReturn(user);
 		
-		service.logAboutFailedAuthentication(TEST_PAGE, userId, null, null, null);
+		service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null);
 		
-		verify(userDao).findOne(userId);
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUser()).isEqualTo(user);

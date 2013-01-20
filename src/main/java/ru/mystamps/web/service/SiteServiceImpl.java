@@ -21,9 +21,6 @@ import javax.inject.Inject;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -32,18 +29,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
-import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 
 @Service
 public class SiteServiceImpl implements SiteService {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(SiteService.class);
-	
-	@Inject
-	private UserDao users;
 	
 	@Inject
 	private SuspiciousActivityDao suspiciousActivities;
@@ -56,12 +47,12 @@ public class SiteServiceImpl implements SiteService {
 	@Transactional
 	public void logAboutAbsentPage(
 			String page,
-			Integer userId,
+			User user,
 			String ip,
 			String referer,
 			String agent) {
 		
-		logEvent(getAbsentPageType(), page, userId, ip, referer, agent);
+		logEvent(getAbsentPageType(), page, user, ip, referer, agent);
 	}
 	
 	@Override
@@ -69,18 +60,18 @@ public class SiteServiceImpl implements SiteService {
 	@Transactional
 	public void logAboutFailedAuthentication(
 			String page,
-			Integer userId,
+			User user,
 			String ip,
 			String referer,
 			String agent) {
 		
-		logEvent(getFailedAuthenticationType(), page, userId, ip, referer, agent);
+		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent);
 	}
 	
 	private void logEvent(
 			SuspiciousActivityType type,
 			String page,
-			Integer userId,
+			User user,
 			String ip,
 			String referer,
 			String agent) {
@@ -93,14 +84,7 @@ public class SiteServiceImpl implements SiteService {
 		activity.setOccuredAt(new Date());
 		activity.setPage(page);
 		
-		User currentUser = null;
-		if (userId != null) {
-			currentUser = users.findOne(userId);
-			if (currentUser == null) {
-				LOG.warn("Cannot find user with id {}", userId);
-			}
-		}
-		activity.setUser(currentUser);
+		activity.setUser(user);
 		
 		activity.setIp(StringUtils.defaultString(ip));
 		activity.setRefererPage(StringUtils.defaultString(referer));

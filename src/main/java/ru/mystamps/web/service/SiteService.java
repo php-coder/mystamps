@@ -17,11 +17,13 @@
  */
 package ru.mystamps.web.service;
 
+import ru.mystamps.web.entity.User;
+
 public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutAbsentPage(
 		String page,
-		Integer userId,
+		User user,
 		String ip,
 		String referer,
 		String agent
@@ -29,7 +31,7 @@ public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutFailedAuthentication(
 		String page,
-		Integer userId,
+		User user,
 		String ip,
 		String referer,
 		String agent

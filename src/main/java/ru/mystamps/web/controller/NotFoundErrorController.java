@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
@@ -55,13 +56,13 @@ public class NotFoundErrorController {
 		String page = (String)request.getAttribute("javax.servlet.error.request_uri");
 		String ip   = request.getRemoteAddr();
 		
-		Integer uid = null;
-		if (userDetails != null && userDetails.getUser() != null) {
-			uid = userDetails.getUser().getId();
+		User currentUser = null;
+		if (userDetails != null) {
+			currentUser = userDetails.getUser();
 		}
 		
 		try {
-			siteService.logAboutAbsentPage(page, uid, ip, referer, agent);
+			siteService.logAboutAbsentPage(page, currentUser, ip, referer, agent);
 		} catch (Exception ex) { // NOPMD
 			// intentionally ignored:
 			// database error should not break showing of 404 page
