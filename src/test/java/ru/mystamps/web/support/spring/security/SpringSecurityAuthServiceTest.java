@@ -131,7 +131,7 @@ public class SpringSecurityAuthServiceTest {
 	}
 	
 	static User getValidUser() {
-		Integer anyId = 777;
+		final Integer anyId = 777;
 		User user = new User();
 		user.setId(anyId);
 		user.setLogin(TEST_LOGIN);

@@ -144,7 +144,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassDateWithSpecifiedYearToSeriesDaoIfYearPresent() {
-		int expectedYear = 2000;
+		final int expectedYear = 2000;
 		form.setYear(expectedYear);
 		
 		service.add(form, user);
@@ -160,7 +160,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldPassQuantityToSeriesDao() {
-		Integer expectedQuantity = 3;
+		final Integer expectedQuantity = 3;
 		form.setQuantity(expectedQuantity);
 		
 		service.add(form, user);

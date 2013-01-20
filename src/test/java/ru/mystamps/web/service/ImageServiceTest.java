@@ -62,7 +62,7 @@ public class ImageServiceTest {
 	
 	@Before
 	public void setUp() {
-		long anyValue = 1024;
+		final long anyValue = 1024;
 		when(multipartFile.getSize()).thenReturn(anyValue);
 		when(multipartFile.getContentType()).thenReturn("image/png");
 		when(imageDao.save(any(Image.class))).thenReturn(new Image());
@@ -144,7 +144,7 @@ public class ImageServiceTest {
 	
 	@Test
 	public void saveShouldReturnUrlWithImage() {
-		Integer expectedId = 10;
+		final Integer expectedId = 10;
 		String expectedUrl =
 			ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedId));
 		when(image.getId()).thenReturn(expectedId);
