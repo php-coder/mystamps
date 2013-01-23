@@ -68,18 +68,18 @@ public class CatalogUtilsTest {
 	
 	@Test
 	public void toShortFormShouldReturnSingleNumberAsIs() {
-		Set<MichelCatalog> setOfSingleNumber = Collections.singleton(new MichelCatalog("1"));
+		Set<MichelCatalog> singleNumber = Collections.singleton(new MichelCatalog("1"));
 		
-		assertThat(CatalogUtils.toShortForm(setOfSingleNumber)).isEqualTo("1");
+		assertThat(CatalogUtils.toShortForm(singleNumber)).isEqualTo("1");
 	}
 	
 	@Test
 	public void toShortFormShouldReturnPairOfNumbersAsCommaSeparated() {
-		Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>();
-		setOfNumbers.add(new MichelCatalog("1"));
-		setOfNumbers.add(new MichelCatalog("2"));
+		Set<MichelCatalog> pairOfNumbers = new LinkedHashSet<MichelCatalog>();
+		pairOfNumbers.add(new MichelCatalog("1"));
+		pairOfNumbers.add(new MichelCatalog("2"));
 		
-		assertThat(CatalogUtils.toShortForm(setOfNumbers)).isEqualTo("1, 2");
+		assertThat(CatalogUtils.toShortForm(pairOfNumbers)).isEqualTo("1, 2");
 	}
 	
 	@Test
