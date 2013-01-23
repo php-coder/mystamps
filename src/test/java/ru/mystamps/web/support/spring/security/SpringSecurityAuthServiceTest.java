@@ -20,7 +20,6 @@ package ru.mystamps.web.support.spring.security;
 import java.util.Collections;
 import java.util.Date;
 
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,19 +50,15 @@ public class SpringSecurityAuthServiceTest {
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
-	private static final String TEST_PASSWORD       = "secret";
 	private static final String TEST_SALT           = "salt";
 	
-	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
+	// sha1(TEST_SALT + "{secret}")
 	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	
 	@Rule
 	public PowerMockRule powerMockRule = new PowerMockRule(); // NOCHECKSTYLE
-	
-	@Mock
-	private PasswordEncoder encoder;
 	
 	@Mock
 	private Authentication authentication;
