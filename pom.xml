@@ -53,7 +53,7 @@
 		<tomcat.plugin.version>1.1</tomcat.plugin.version>
 		<surefire.plugin.version>2.13</surefire.plugin.version>
 		<failsafe.plugin.version>2.13</failsafe.plugin.version>
-		<jetty.plugin.version>8.1.5.v20120716</jetty.plugin.version>
+		<jetty.plugin.version>8.1.8.v20121106</jetty.plugin.version>
 		<hibernate.plugin.version>3.0</hibernate.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.9.1</checkstyle.plugin.version>
