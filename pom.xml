@@ -47,7 +47,7 @@
 		<jetty.port>8081</jetty.port>
 		
 		<compiler.plugin.version>3.0</compiler.plugin.version>
-		<resources.plugin.version>2.5</resources.plugin.version>
+		<resources.plugin.version>2.6</resources.plugin.version>
 		<war.plugin.version>2.2</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<tomcat.plugin.version>1.1</tomcat.plugin.version>
