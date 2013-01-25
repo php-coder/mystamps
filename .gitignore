@@ -4,3 +4,8 @@ target/
 .classpath
 .project
 .settings/
+
+# IDEA related files
+.idea
+mystamps.iml
+
