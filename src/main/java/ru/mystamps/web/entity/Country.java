@@ -23,9 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,11 +44,6 @@ public class Country {
 	
 	@Embedded
 	private MetaInfo metaInfo; // NOPMD
-	
-	@Setter(AccessLevel.PROTECTED)
-	@Version
-	@Column(nullable = false)
-	private Long version;
 	
 	public Country() {
 		metaInfo = new MetaInfo();

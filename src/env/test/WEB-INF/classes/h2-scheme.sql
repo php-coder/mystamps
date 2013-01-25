@@ -7,7 +7,6 @@
         created_at timestamp not null,
         updated_at timestamp not null,
         name varchar(50) not null unique,
-        version bigint not null,
         created_by integer not null,
         updated_by integer not null,
         primary key (id)
@@ -47,7 +46,6 @@
         perforated boolean not null,
         quantity integer not null,
         released_at date,
-        version bigint not null,
         country_id integer,
         created_by integer not null,
         updated_by integer not null,

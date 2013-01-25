@@ -33,9 +33,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -90,11 +88,6 @@ public class Series {
 	
 	@Embedded
 	private MetaInfo metaInfo; // NOPMD
-	
-	@Setter(AccessLevel.PROTECTED)
-	@Version
-	@Column(nullable = false)
-	private Long version;
 	
 	public Series() {
 		metaInfo = new MetaInfo();
