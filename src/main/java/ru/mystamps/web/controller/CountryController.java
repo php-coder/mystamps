@@ -32,19 +32,17 @@ import org.springframework.validation.BindingResult;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCountryForm;
-import ru.mystamps.web.service.AuthService;
 import ru.mystamps.web.service.CountryService;
 
 @Controller
 public class CountryController {
 	
-	private final AuthService authService;
 	private final CountryService countryService;
 	
 	@Inject
-	CountryController(AuthService authService, CountryService countryService) {
-		this.authService = authService;
+	CountryController(CountryService countryService) {
 		this.countryService = countryService;
 	}
 	
@@ -59,13 +57,13 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.POST)
-	public String processInput(@Valid AddCountryForm form, BindingResult result) {
+	public String processInput(@Valid AddCountryForm form, BindingResult result, User currentUser) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		Country country = countryService.add(form, authService.getCurrentUser());
+		Country country = countryService.add(form, currentUser);
 		
 		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
 	}

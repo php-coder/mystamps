@@ -30,20 +30,13 @@ import org.springframework.security.authentication.event.AuthenticationFailureBa
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import ru.mystamps.web.service.AuthService;
 import ru.mystamps.web.support.spring.security.AuthenticationFailureListener;
 import ru.mystamps.web.support.spring.security.CustomUserDetailsService;
 import ru.mystamps.web.support.spring.security.Http401UnauthorizedEntryPoint;
-import ru.mystamps.web.support.spring.security.SpringSecurityAuthService;
 
 @Configuration
 @ImportResource("classpath:spring/security.xml")
 public class SecurityConfig {
-	
-	@Bean
-	public AuthService getAuthService() {
-		return new SpringSecurityAuthService();
-	}
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {

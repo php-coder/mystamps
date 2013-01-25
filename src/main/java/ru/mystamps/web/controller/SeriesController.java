@@ -38,11 +38,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.service.AuthService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
@@ -55,7 +55,6 @@ public class SeriesController {
 	
 	private static final Map<Integer, Integer> YEARS;
 	
-	private final AuthService authService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
@@ -67,12 +66,7 @@ public class SeriesController {
 	}
 	
 	@Inject
-	SeriesController(
-		AuthService authService,
-		CountryService countryService,
-		SeriesService seriesService) {
-		
-		this.authService = authService;
+	SeriesController(CountryService countryService, SeriesService seriesService) {
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
@@ -115,13 +109,14 @@ public class SeriesController {
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
 	public String processInput(
 		@Validated({Default.class, ImageChecks.class}) AddSeriesForm form,
-		BindingResult result) {
+		BindingResult result,
+		User currentUser) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		Series series = seriesService.add(form, authService.getCurrentUser());
+		Series series = seriesService.add(form, currentUser);
 		
 		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
 	}
