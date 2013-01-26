@@ -137,7 +137,7 @@ public class CatalogUtilsTest {
 	}
 	
 	@Test
-	public void fromStringShouldReturnsOneElementIfCatalogNumbersDoesNotContainsComma() {
+	public void fromStringShouldReturnsOneElementIfCatalogNumbersContainsOneNumber() {
 		assertThat(CatalogUtils.fromString("1", MichelCatalog.class)).hasSize(1);
 	}
 	
@@ -147,7 +147,7 @@ public class CatalogUtilsTest {
 	}
 	
 	@Test
-	public void fromStringShouldReturnsTwoElementIfCatalogNumbersHasTwoNumbers() {
+	public void fromStringShouldReturnsTwoElementIfCatalogNumbersContainsTwoNumbers() {
 		assertThat(CatalogUtils.fromString("1,2", MichelCatalog.class)).hasSize(2);
 	}
 	
