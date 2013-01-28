@@ -14,8 +14,8 @@
 		<meta charset="utf-8" />
 		<title><spring:message code="${titleCode}" /></title>
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
-		<link rel="stylesheet" type="text/css" href="${mainCssUrl}" />
-		<link rel="stylesheet" type="text/css" href="${errorCssUrl}" />
+		<link rel="stylesheet" href="${mainCssUrl}" />
+		<link rel="stylesheet" href="${errorCssUrl}" />
 	</head>
 	<body>
 		<tiles:insertAttribute name="header" />
