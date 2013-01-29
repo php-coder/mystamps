@@ -57,6 +57,7 @@
 					<form:input
 						path="quantity"
 						type="number"
+						required="required"
 						size="2"
 						min="<%= ValidationRules.MIN_STAMPS_IN_SERIES %>"
 						max="<%= ValidationRules.MAX_STAMPS_IN_SERIES %>" />
@@ -159,7 +160,7 @@
 					<span id="image.required" class="required_field">*</span>
 				</td>
 				<td>
-					<form:input path="image" type="file" accept="image/png,image/jpeg" />
+					<form:input path="image" type="file" required="required" accept="image/png,image/jpeg" />
 				</td>
 				<td>
 					<form:errors path="image" cssClass="error" />
