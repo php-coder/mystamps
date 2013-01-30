@@ -62,7 +62,6 @@
 		<cobertura.plugin.version>2.5.2</cobertura.plugin.version>
 		<javadoc.plugin.version>2.9</javadoc.plugin.version>
 		<enforcer.plugin.version>1.2</enforcer.plugin.version>
-		<antrun.plugin.version>1.7</antrun.plugin.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -808,34 +807,6 @@
 				<plugins>
 					
 					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>${antrun.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-test-sql-data</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<copy
-											file="${env.dir}/test-data.sql"
-											todir="${project.build.outputDirectory}"
-											failonerror="yes"
-											verbose="yes"
-											encoding="${project.build.sourceEncoding}">
-											<filterset>
-												<filtersfile file="${env.dir}/spring/test-data.properties" />
-											</filterset>
-										</copy>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
 						<version>${resources.plugin.version}</version>
 						<executions>
@@ -852,11 +823,12 @@
 									<resources>
 										<resource>
 											<directory>${env.dir}</directory>
-											<excludes>
-												<exclude>test-data.sql</exclude>
-											</excludes>
+											<filtering>true</filtering>
 										</resource>
 									</resources>
+									<filters>
+										<filter>${env.dir}/spring/test-data.properties</filter>
+									</filters>
 								</configuration>
 							</execution>
 						</executions>
