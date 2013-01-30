@@ -87,14 +87,8 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("countries")
-	public Map<Integer, String> getCountries() {
-		Map<Integer, String> countries = new LinkedHashMap<Integer, String>();
-		
-		for (Country country : countryService.findAll()) {
-			countries.put(country.getId(), country.getName());
-		}
-		
-		return countries;
+	public Iterable<Country> getCountries() {
+		return countryService.findAll();
 	}
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.GET)

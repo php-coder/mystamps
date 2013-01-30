@@ -20,7 +20,7 @@
 				<td>
 					<form:select path="country">
 						<form:option value="" />
-						<form:options items="${countries}" />
+						<form:options items="${countries}" itemLabel="name" itemValue="id" />
 					</form:select>
 				</td>
 				<td>
