@@ -539,6 +539,7 @@
 				<configuration>
 					<changeLogFile>src/main/resources/liquibase/full-changelog.xml</changeLogFile>
 					<propertyFile>${env.dir}/liquibase.properties</propertyFile>
+					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
 				</configuration>
 			</plugin>
 			
