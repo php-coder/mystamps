@@ -7,3 +7,9 @@ jdk:
 branches:
   except:
   - /^(re|old)_.*$/
+
+notifications:
+  email:
+    on_success: always # default: change
+    on_failure: always # default: always
+
