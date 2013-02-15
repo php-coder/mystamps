@@ -65,6 +65,8 @@
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<skipTests>false</skipTests>
 	</properties>
 	
 	<dependencies>
@@ -435,6 +437,7 @@
 				<configuration>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
+					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
 			
@@ -448,6 +451,7 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
+					<skipTests>${skipTests}</skipTests>
 				</configuration>
 				<executions>
 					<execution>
@@ -480,6 +484,7 @@
 					<webAppConfig>
 						<overrideDescriptor>${env.dir}/../web.xml</overrideDescriptor>
 					</webAppConfig>
+					<skip>${skipTests}</skip>
 				</configuration>
 				<executions>
 					<execution>
@@ -623,6 +628,7 @@
 						<!-- for personal use -->
 						<format>html</format>
 					</formats>
+					<skip>${skipTests}</skip>
 				</configuration>
 				<executions>
 					<execution>
