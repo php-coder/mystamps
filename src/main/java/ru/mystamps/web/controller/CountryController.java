@@ -42,7 +42,7 @@ public class CountryController {
 	private final CountryService countryService;
 	
 	@Inject
-	CountryController(CountryService countryService) {
+	public CountryController(CountryService countryService) {
 		this.countryService = countryService;
 	}
 	

@@ -41,7 +41,7 @@ public class NotFoundErrorController {
 	private final SiteService siteService;
 	
 	@Inject
-	NotFoundErrorController(SiteService siteService) {
+	public NotFoundErrorController(SiteService siteService) {
 		this.siteService = siteService;
 	}
 	

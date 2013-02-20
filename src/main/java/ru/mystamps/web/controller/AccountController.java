@@ -49,7 +49,7 @@ public class AccountController {
 	private final UserService userService;
 	
 	@Inject
-	AccountController(UserService userService) {
+	public AccountController(UserService userService) {
 		this.userService = userService;
 	}
 	

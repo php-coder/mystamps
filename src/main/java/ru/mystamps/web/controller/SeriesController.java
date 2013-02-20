@@ -66,7 +66,7 @@ public class SeriesController {
 	}
 	
 	@Inject
-	SeriesController(CountryService countryService, SeriesService seriesService) {
+	public SeriesController(CountryService countryService, SeriesService seriesService) {
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}

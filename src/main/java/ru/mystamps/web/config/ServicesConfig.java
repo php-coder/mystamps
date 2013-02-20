@@ -17,14 +17,42 @@
  */
 package ru.mystamps.web.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+
+import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck
 
 @Configuration
-@Import({
-	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class
-})
-public class ApplicationContext {
+public class ServicesConfig {
+	
+	@Bean
+	public CountryService getCountryService() {
+		return new CountryServiceImpl();
+	}
+	
+	@Bean
+	public CronService getCronService() {
+		return new CronServiceImpl();
+	}
+	
+	@Bean
+	public ImageService getImageService() {
+		return new ImageServiceImpl();
+	}
+	
+	@Bean
+	public SeriesService getSeriesService() {
+		return new SeriesServiceImpl();
+	}
+	
+	@Bean
+	public SiteService getSiteService() {
+		return new SiteServiceImpl();
+	}
+	
+	@Bean
+	public UserService getUserService() {
+		return new UserServiceImpl();
+	}
+	
 }
