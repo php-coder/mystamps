@@ -32,7 +32,6 @@ public final class Url {
 	public static final String SITE                  = "http://127.0.0.1:8081";
 	
 	public static final String INDEX_PAGE            = "/";
-	public static final String SUCCESSFUL_ACTIVATION_PAGE = "/successful/activation";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
 	

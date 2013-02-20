@@ -5,6 +5,12 @@
 <%@ page import="ru.mystamps.web.Url" %>
 <spring:url var="loginUrl" value="<%= Url.LOGIN_PAGE %>" />
 
+<c:if test="${justActivatedUser}">
+	<div class="success-message">
+		<spring:message code="t_activation_successful" />
+	</div>
+</c:if>
+
 <h3>
 	<spring:message code="t_authentication_on_site" />
 </h3>

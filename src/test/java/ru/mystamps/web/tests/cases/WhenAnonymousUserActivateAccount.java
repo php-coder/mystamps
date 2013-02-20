@@ -279,13 +279,9 @@ public class WhenAnonymousUserActivateAccount
 			firstNotActivatedUserActKey
 		);
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_ACTIVATION_PAGE);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.AUTHENTICATION_PAGE);
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
-		
-		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			.overridingErrorMessage("should exists link to authentication page")
-			.isTrue();
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
@@ -298,7 +294,7 @@ public class WhenAnonymousUserActivateAccount
 			secondNotActivatedUserActKey
 		);
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_ACTIVATION_PAGE);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.AUTHENTICATION_PAGE);
 		
 		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 	}

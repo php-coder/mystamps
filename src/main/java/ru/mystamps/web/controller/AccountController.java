@@ -107,7 +107,7 @@ public class AccountController {
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,
 			PasswordConfirmationChecks.class, ActKeyChecks.class, FormChecks.class
-		}) ActivateAccountForm form, BindingResult result) {
+		}) ActivateAccountForm form, BindingResult result, RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
@@ -115,7 +115,9 @@ public class AccountController {
 		
 		userService.registerUser(form);
 		
-		return "redirect:" + Url.SUCCESSFUL_ACTIVATION_PAGE;
+		redirectAttributes.addFlashAttribute("justActivatedUser", true);
+		
+		return "redirect:" + Url.AUTHENTICATION_PAGE;
 	}
 	
 }
