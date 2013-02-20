@@ -87,7 +87,7 @@ public class WhenAnonymousUserRegisterAccount
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		
-		assertThat(page.getCurrentUrl()).isEqualTo(Url.SUCCESSFUL_REGISTRATION_PAGE);
+		assertThat(page.getCurrentUrl()).isEqualTo(Url.ACTIVATE_ACCOUNT_PAGE);
 		
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
 	}

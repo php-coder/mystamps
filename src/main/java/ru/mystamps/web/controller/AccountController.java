@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
@@ -68,7 +69,10 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.POST)
-	public String processRegistrationForm(@Valid RegisterAccountForm form, BindingResult result) {
+	public String processRegistrationForm(
+		@Valid RegisterAccountForm form,
+		BindingResult result,
+		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
@@ -76,7 +80,9 @@ public class AccountController {
 		
 		userService.addRegistrationRequest(form);
 		
-		return "redirect:" + Url.SUCCESSFUL_REGISTRATION_PAGE;
+		redirectAttributes.addFlashAttribute("justRegisteredUser", true);
+		
+		return "redirect:" + Url.ACTIVATE_ACCOUNT_PAGE;
 	}
 	
 	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.GET)

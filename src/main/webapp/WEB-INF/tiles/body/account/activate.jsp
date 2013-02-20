@@ -1,9 +1,16 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib tagdir="/WEB-INF/tags/elem" prefix="elem" %>
 <%@ page import="ru.mystamps.web.Url" %>
 <spring:url var="activateUrl" value="<%= Url.ACTIVATE_ACCOUNT_PAGE %>" />
+
+<c:if test="${justRegisteredUser}">
+	<div class="success-message">
+		<spring:message code="t_activation_sent_message" />
+	</div>
+</c:if>
 
 <h3>
 	<spring:message code="t_activation_on_site" />
