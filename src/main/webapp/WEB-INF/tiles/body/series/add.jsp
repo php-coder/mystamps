@@ -83,7 +83,7 @@
 			<tr>
 				<td>
 					<form:label path="michelNumbers">
-						<spring:message code="t_michel_no" />
+						<spring:message code="t_michel" />
 					</form:label>
 				</td>
 				<td></td>
@@ -97,7 +97,7 @@
 			<tr>
 				<td>
 					<form:label path="scottNumbers">
-						<spring:message code="t_scott_no" />
+						<spring:message code="t_scott" />
 					</form:label>
 				</td>
 				<td></td>
@@ -111,7 +111,7 @@
 			<tr>
 				<td>
 					<form:label path="yvertNumbers">
-						<spring:message code="t_yvert_no" />
+						<spring:message code="t_yvert" />
 					</form:label>
 				</td>
 				<td></td>
@@ -125,7 +125,7 @@
 			<tr>
 				<td>
 					<form:label path="gibbonsNumbers">
-						<spring:message code="t_sg_no" />
+						<spring:message code="t_sg" />
 					</form:label>
 				</td>
 				<td></td>

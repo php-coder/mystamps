@@ -57,40 +57,40 @@
 	<c:if test="${not empty michelNumbers}">
 		<tr>
 			<td>
-				<spring:message code="t_michel_no" />
+				<spring:message code="t_michel" />
 			</td>
 			<td id="michel_catalog_info">
-				<c:out value="${michelNumbers}" />
+				#<c:out value="${michelNumbers}" />
 			</td>
 		</tr>
 	</c:if>
 	<c:if test="${not empty scottNumbers}">
 		<tr>
 			<td>
-				<spring:message code="t_scott_no" />
+				<spring:message code="t_scott" />
 			</td>
 			<td id="scott_catalog_info">
-				<c:out value="${scottNumbers}" />
+				#<c:out value="${scottNumbers}" />
 			</td>
 		</tr>
 	</c:if>
 	<c:if test="${not empty yvertNumbers}">
 		<tr>
 			<td>
-				<spring:message code="t_yvert_no" />
+				<spring:message code="t_yvert" />
 			</td>
 			<td id="yvert_catalog_info">
-				<c:out value="${yvertNumbers}" />
+				#<c:out value="${yvertNumbers}" />
 			</td>
 		</tr>
 	</c:if>
 	<c:if test="${not empty gibbonsNumbers}">
 		<tr>
 			<td>
-				<spring:message code="t_sg_no" />
+				<spring:message code="t_sg" />
 			</td>
 			<td id="gibbons_catalog_info">
-				<c:out value="${gibbonsNumbers}" />
+				#<c:out value="${gibbonsNumbers}" />
 			</td>
 		</tr>
 	</c:if>

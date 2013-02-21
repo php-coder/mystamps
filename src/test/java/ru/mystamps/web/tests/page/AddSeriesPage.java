@@ -46,10 +46,10 @@ public class AddSeriesPage extends AbstractPageWithForm {
 				selectField("year").withLabel(tr("t_issue_year")),
 				required(inputField("quantity").withLabel(tr("t_quantity"))),
 				checkboxField("perforated").withLabel(tr("t_perforated")),
-				inputField("michelNumbers").withLabel(tr("t_michel_no")),
-				inputField("scottNumbers").withLabel(tr("t_scott_no")),
-				inputField("yvertNumbers").withLabel(tr("t_yvert_no")),
-				inputField("gibbonsNumbers").withLabel(tr("t_sg_no")),
+				inputField("michelNumbers").withLabel(tr("t_michel")),
+				inputField("scottNumbers").withLabel(tr("t_scott")),
+				inputField("yvertNumbers").withLabel(tr("t_yvert")),
+				inputField("gibbonsNumbers").withLabel(tr("t_sg")),
 				textareaField("comment").withLabel(tr("t_comment")),
 				required(uploadFileField("image").withLabel(tr("t_image")))
 			)
