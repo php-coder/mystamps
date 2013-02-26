@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
-		return usersActivation.findByActivationKey(activationKey);
+		return usersActivation.findOne(activationKey);
 	}
 	
 	@Override
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		String activationKey = dto.getActivationKey();
-		UsersActivation activation = usersActivation.findByActivationKey(activationKey);
+		UsersActivation activation = usersActivation.findOne(activationKey);
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;

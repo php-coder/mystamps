@@ -87,7 +87,7 @@ public class UserServiceTest {
 	@Before
 	public void setUp() {
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(getUsersActivation());
+		when(usersActivationDao.findOne(anyString())).thenReturn(getUsersActivation());
 		
 		registrationForm = new RegisterAccountForm();
 		registrationForm.setEmail(TEST_EMAIL);
@@ -180,7 +180,7 @@ public class UserServiceTest {
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldCallDao() {
 		UsersActivation expectedActivation = getUsersActivation();
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(expectedActivation);
+		when(usersActivationDao.findOne(anyString())).thenReturn(expectedActivation);
 		
 		UsersActivation activation =
 			service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
@@ -192,7 +192,7 @@ public class UserServiceTest {
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldPassActivationKeyToDao() {
 		service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
-		verify(usersActivationDao).findByActivationKey(TEST_ACTIVATION_KEY);
+		verify(usersActivationDao).findOne(TEST_ACTIVATION_KEY);
 	}
 	
 	//
@@ -214,7 +214,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldDeleteRegistrationRequest() {
 		UsersActivation activation = getUsersActivation();
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
 		
@@ -230,7 +230,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldDoNothingWhenRegistrationRequestNotFound() {
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(null);
+		when(usersActivationDao.findOne(anyString())).thenReturn(null);
 		
 		service.registerUser(activationForm);
 		
@@ -272,7 +272,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldUseEmailFromRegistrationRequest() {
 		UsersActivation activation = getUsersActivation();
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
 		
@@ -284,7 +284,7 @@ public class UserServiceTest {
 	@Test
 	public void registerUserShouldUseRegistrationDateFromRegistrationRequest() {
 		UsersActivation activation = getUsersActivation();
-		when(usersActivationDao.findByActivationKey(anyString())).thenReturn(activation);
+		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
 		
