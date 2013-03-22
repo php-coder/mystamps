@@ -26,10 +26,13 @@ import javax.validation.GroupSequence;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
+import ru.mystamps.web.validation.jsr303.NotNullIfFirstField;
+import ru.mystamps.web.validation.jsr303.Price;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
@@ -40,6 +43,22 @@ import lombok.Setter;
 
 @Getter
 @Setter
+// TODO: combine price with currency to separate class
+@SuppressWarnings({"PMD.TooManyFields", "PMD.AvoidDuplicateLiterals"})
+@NotNullIfFirstField.List({
+	@NotNullIfFirstField(
+		first = "michelPrice", second = "michelCurrency", message = "{currency.required}"
+	),
+	@NotNullIfFirstField(
+		first = "scottPrice", second = "scottCurrency", message = "{currency.required}"
+	),
+	@NotNullIfFirstField(
+		first = "yvertPrice", second = "yvertCurrency", message = "{currency.required}"
+	),
+	@NotNullIfFirstField(
+		first = "gibbonsPrice", second = "gibbonsCurrency", message = "{currency.required}"
+	)
+})
 public class AddSeriesForm implements AddSeriesDto {
 	private Country country;
 	private Integer year;
@@ -55,14 +74,34 @@ public class AddSeriesForm implements AddSeriesDto {
 	@CatalogNumbers
 	private String michelNumbers;
 	
+	@Price
+	private Double michelPrice;
+	
+	private Currency michelCurrency;
+	
 	@CatalogNumbers
 	private String scottNumbers;
+	
+	@Price
+	private Double scottPrice;
+	
+	private Currency scottCurrency;
 	
 	@CatalogNumbers
 	private String yvertNumbers;
 	
+	@Price
+	private Double yvertPrice;
+	
+	private Currency yvertCurrency;
+	
 	@CatalogNumbers
 	private String gibbonsNumbers;
+	
+	@Price
+	private Double gibbonsPrice;
+	
+	private Currency gibbonsCurrency;
 	
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
 	private String comment;

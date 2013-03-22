@@ -20,6 +20,8 @@ package ru.mystamps.web.entity;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -68,17 +70,69 @@ public class Series {
 	@OrderBy
 	private Set<MichelCatalog> michel;
 	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(
+			name = Price.VALUE_FIELD_NAME,
+			column = @Column(name = "michel_price")
+		),
+		@AttributeOverride(
+			name = Price.CURRENCY_FIELD_NAME,
+			column = @Column(name = "michel_currency", length = Price.MAX_CURRENCY_LEGNTH)
+		)
+	})
+	private Price michelPrice;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<ScottCatalog> scott;
+	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(
+			name = Price.VALUE_FIELD_NAME,
+			column = @Column(name = "scott_price")
+		),
+		@AttributeOverride(
+			name = Price.CURRENCY_FIELD_NAME,
+			column = @Column(name = "scott_currency", length = Price.MAX_CURRENCY_LEGNTH)
+		)
+	})
+	private Price scottPrice;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<YvertCatalog> yvert;
 	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(
+			name = Price.VALUE_FIELD_NAME,
+			column = @Column(name = "yvert_price")
+		),
+		@AttributeOverride(
+			name = Price.CURRENCY_FIELD_NAME,
+			column = @Column(name = "yvert_currency", length = Price.MAX_CURRENCY_LEGNTH)
+		)
+	})
+	private Price yvertPrice;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy
 	private Set<GibbonsCatalog> gibbons;
+	
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(
+			name = Price.VALUE_FIELD_NAME,
+			column = @Column(name = "gibbons_price")
+		),
+		@AttributeOverride(
+			name = Price.CURRENCY_FIELD_NAME,
+			column = @Column(name = "gibbons_currency", length = Price.MAX_CURRENCY_LEGNTH)
+		)
+	})
+	private Price gibbonsPrice;
 	
 	@Column(name = "image_url", length = IMAGE_URL_LENGTH)
 	private String imageUrl;

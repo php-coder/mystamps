@@ -89,9 +89,15 @@
 				<td></td>
 				<td>
 					<form:input path="michelNumbers" />
+					<form:input path="michelPrice" size="5" />
+					<form:select path="michelCurrency">
+						<form:options />
+					</form:select>
 				</td>
 				<td>
 					<form:errors path="michelNumbers" cssClass="error" />
+					<form:errors path="michelPrice" cssClass="error" />
+					<form:errors path="michelCurrency" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
@@ -103,9 +109,15 @@
 				<td></td>
 				<td>
 					<form:input path="scottNumbers" />
+					<form:input path="scottPrice" size="5" />
+					<form:select path="scottCurrency">
+						<form:options />
+					</form:select>
 				</td>
 				<td>
 					<form:errors path="scottNumbers" cssClass="error" />
+					<form:errors path="scottPrice" cssClass="error" />
+					<form:errors path="scottCurrency" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
@@ -117,9 +129,15 @@
 				<td></td>
 				<td>
 					<form:input path="yvertNumbers" />
+					<form:input path="yvertPrice" size="5" />
+					<form:select path="yvertCurrency">
+						<form:options />
+					</form:select>
 				</td>
 				<td>
 					<form:errors path="yvertNumbers" cssClass="error" />
+					<form:errors path="yvertPrice" cssClass="error" />
+					<form:errors path="yvertCurrency" cssClass="error" />
 				</td>
 			</tr>
 			<tr>
@@ -131,9 +149,15 @@
 				<td></td>
 				<td>
 					<form:input path="gibbonsNumbers" />
+					<form:input path="gibbonsPrice" size="5" />
+					<form:select path="gibbonsCurrency">
+						<form:options />
+					</form:select>
 				</td>
 				<td>
 					<form:errors path="gibbonsNumbers" cssClass="error" />
+					<form:errors path="gibbonsPrice" cssClass="error" />
+					<form:errors path="gibbonsCurrency" cssClass="error" />
 				</td>
 			</tr>
 			<tr>

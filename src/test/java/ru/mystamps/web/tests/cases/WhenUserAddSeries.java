@@ -36,6 +36,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
@@ -52,6 +53,8 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
+	private static final List<String> EXPECTED_CURRENCIES = new ArrayList<String>();
+	
 	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<String>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
@@ -65,6 +68,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		// years in reverse order
 		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			EXPECTED_YEARS.add(String.valueOf(i));
+		}
+		
+		for (Currency currency : Currency.values()) {
+			EXPECTED_CURRENCIES.add(currency.toString());
 		}
 		
 		try {
@@ -216,6 +223,42 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("gibbonsNumbers").hasError(msg);
 	}
 	
+	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
+	public void michelPriceShouldRejectInvalidValues(String price, String msg) {
+		page.fillMichelPrice(price);
+		
+		page.submit();
+		
+		assertThat(page).field("michelPrice").hasError(msg);
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
+	public void scottPriceShouldRejectInvalidValues(String price, String msg) {
+		page.fillScottPrice(price);
+		
+		page.submit();
+		
+		assertThat(page).field("scottPrice").hasError(msg);
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
+	public void yvertPriceShouldRejectInvalidValues(String price, String msg) {
+		page.fillYvertPrice(price);
+		
+		page.submit();
+		
+		assertThat(page).field("yvertPrice").hasError(msg);
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
+	public void gibbonsPriceShouldRejectInvalidValues(String price, String msg) {
+		page.fillGibbonsPrice(price);
+		
+		page.submit();
+		
+		assertThat(page).field("gibbonsPrice").hasError(msg);
+	}
+	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void commentShouldNotBeTooLong() {
 		page.fillComment(StringUtils.repeat("x", MAX_SERIES_COMMENT_LENGTH + 1));
@@ -241,6 +284,26 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
 		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void michelCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
+		assertThat(page.getMichelCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void scottCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
+		assertThat(page.getScottCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void yvertCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
+		assertThat(page.getYvertCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void gibbonsCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
+		assertThat(page.getGibbonsCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
@@ -321,10 +384,23 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillYear(expectedYear);
 		page.fillQuantity(expectedQuantity);
 		page.fillPerforated(false);
+		
 		page.fillMichelNumbers("1, 2, 3");
+		page.fillMichelPrice("10.5");
+		page.fillMichelCurrency("EUR");
+		
 		page.fillScottNumbers("10, 11, 12");
+		page.fillScottPrice("1000");
+		page.fillScottCurrency("USD");
+		
 		page.fillYvertNumbers("20, 21, 22");
+		page.fillYvertPrice("8.11");
+		page.fillYvertCurrency("USD");
+		
 		page.fillGibbonsNumbers("30, 31, 32");
+		page.fillGibbonsPrice("400.335");
+		page.fillGibbonsCurrency("RUR");
+		
 		page.fillComment(expectedComment);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
@@ -340,10 +416,13 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getYear()).isEqualTo(expectedYear);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#1-3");
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#10-12");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22");
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32");
+		
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#1-3 (10.5 EUR)");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#10-12 (1000 USD)");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22 (8.11 USD)");
+		// TODO: disable rounding mode
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 RUR)");
+		
 		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
 	
@@ -424,6 +503,17 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 			{"05", expectedErrorMessage},
 			{"1,09", expectedErrorMessage},
 			{"10000", expectedErrorMessage}
+		};
+	}
+	
+	@DataProvider(name = "invalidCatalogPrices")
+	public Object[][] getInvalidCatalogPrices() {
+		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Price.message");
+		
+		return new Object[][] {
+			{"0", expectedErrorMessage},
+			{"-1", expectedErrorMessage},
+			{"NaN", expectedErrorMessage}
 		};
 	}
 	

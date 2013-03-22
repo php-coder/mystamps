@@ -15,35 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.entity;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public interface AddSeriesDto {
-	Country getCountry();
-	Integer getYear();
-	Integer getQuantity();
-	Boolean getPerforated();
+@Embeddable
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Price {
+	public static final int MAX_CURRENCY_LEGNTH = 3;
 	
-	String getMichelNumbers();
-	Double getMichelPrice();
-	Currency getMichelCurrency();
+	public static final String VALUE_FIELD_NAME = "value";
+	public static final String CURRENCY_FIELD_NAME = "currency";
 	
-	String getScottNumbers();
-	Double getScottPrice();
-	Currency getScottCurrency();
+	@Column(name = "price")
+	private Double value;
 	
-	String getYvertNumbers();
-	Double getYvertPrice();
-	Currency getYvertCurrency();
+	@Enumerated(EnumType.STRING)
+	@Column(length = MAX_CURRENCY_LEGNTH)
+	private Currency currency;
 	
-	String getGibbonsNumbers();
-	Double getGibbonsPrice();
-	Currency getGibbonsCurrency();
-	
-	String getComment();
-	MultipartFile getImage();
 }

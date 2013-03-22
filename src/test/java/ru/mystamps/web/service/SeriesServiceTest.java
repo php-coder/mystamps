@@ -45,9 +45,11 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MetaInfo;
 import ru.mystamps.web.entity.MichelCatalog;
+import ru.mystamps.web.entity.Price;
 import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
@@ -57,6 +59,7 @@ import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SeriesServiceTest {
+	private static final Double ANY_PRICE = 17d;
 	
 	@Mock
 	private CountryDao countryDao;
@@ -207,6 +210,43 @@ public class SeriesServiceTest {
 		assertThat(seriesCaptor.getValue().getMichel()).isEqualTo(expectedNumbers);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionIfMichelPriceSpecifiedWithoutCurrency() {
+		form.setMichelPrice(ANY_PRICE);
+		form.setMichelCurrency(null);
+		
+		service.add(form, user);
+	}
+	
+	@Test
+	public void addShouldPassMichelPriceToSeriesDao() {
+		Double expectedPrice = ANY_PRICE;
+		Currency expectedCurrency = Currency.RUR;
+		form.setMichelPrice(expectedPrice);
+		form.setMichelCurrency(expectedCurrency);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		Price actualPrice = seriesCaptor.getValue().getMichelPrice();
+		assertThat(actualPrice).isNotNull();
+		assertThat(actualPrice.getValue()).isEqualTo(expectedPrice);
+		assertThat(actualPrice.getCurrency()).isEqualTo(expectedCurrency);
+	}
+	
+	@Test
+	public void addShouldPassNullToSeriesDaoIfMichelPriceIsNull() {
+		form.setMichelPrice(null);
+		form.setMichelCurrency(null);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		
+		Price actualPrice = seriesCaptor.getValue().getMichelPrice();
+		assertThat(actualPrice).isNull();
+	}
+	
 	@Test
 	public void addShouldPassNullToSeriesDaoIfScottNumbersIsNull() {
 		assertThat(form.getScottNumbers()).isNull();
@@ -230,6 +270,43 @@ public class SeriesServiceTest {
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getScott()).isEqualTo(expectedNumbers);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionIfScottPriceSpecifiedWithoutCurrency() {
+		form.setScottPrice(ANY_PRICE);
+		form.setScottCurrency(null);
+		
+		service.add(form, user);
+	}
+	
+	@Test
+	public void addShouldPassScottPriceToSeriesDao() {
+		Double expectedPrice = ANY_PRICE;
+		Currency expectedCurrency = Currency.RUR;
+		form.setScottPrice(expectedPrice);
+		form.setScottCurrency(expectedCurrency);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		Price actualPrice = seriesCaptor.getValue().getScottPrice();
+		assertThat(actualPrice).isNotNull();
+		assertThat(actualPrice.getValue()).isEqualTo(expectedPrice);
+		assertThat(actualPrice.getCurrency()).isEqualTo(expectedCurrency);
+	}
+	
+	@Test
+	public void addShouldPassNullToSeriesDaoIfScottPriceIsNull() {
+		form.setScottPrice(null);
+		form.setScottCurrency(null);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		
+		Price actualPrice = seriesCaptor.getValue().getScottPrice();
+		assertThat(actualPrice).isNull();
 	}
 	
 	@Test
@@ -257,6 +334,43 @@ public class SeriesServiceTest {
 		assertThat(seriesCaptor.getValue().getYvert()).isEqualTo(expectedNumbers);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionIfYvertPriceSpecifiedWithoutCurrency() {
+		form.setYvertPrice(ANY_PRICE);
+		form.setYvertCurrency(null);
+		
+		service.add(form, user);
+	}
+	
+	@Test
+	public void addShouldPassYvertPriceToSeriesDao() {
+		Double expectedPrice = ANY_PRICE;
+		Currency expectedCurrency = Currency.RUR;
+		form.setYvertPrice(expectedPrice);
+		form.setYvertCurrency(expectedCurrency);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		Price actualPrice = seriesCaptor.getValue().getYvertPrice();
+		assertThat(actualPrice).isNotNull();
+		assertThat(actualPrice.getValue()).isEqualTo(expectedPrice);
+		assertThat(actualPrice.getCurrency()).isEqualTo(expectedCurrency);
+	}
+	
+	@Test
+	public void addShouldPassNullToSeriesDaoIfYvertPriceIsNull() {
+		form.setYvertPrice(null);
+		form.setYvertCurrency(null);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		
+		Price actualPrice = seriesCaptor.getValue().getYvertPrice();
+		assertThat(actualPrice).isNull();
+	}
+	
 	@Test
 	public void addShouldPassNullToSeriesDaoIfGibbonsNumbersIsNull() {
 		assertThat(form.getGibbonsNumbers()).isNull();
@@ -280,6 +394,43 @@ public class SeriesServiceTest {
 		
 		verify(seriesDao).save(seriesCaptor.capture());
 		assertThat(seriesCaptor.getValue().getGibbons()).isEqualTo(expectedNumbers);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void addShouldThrowExceptionIfGibbonsPriceSpecifiedWithoutCurrency() {
+		form.setGibbonsPrice(ANY_PRICE);
+		form.setGibbonsCurrency(null);
+		
+		service.add(form, user);
+	}
+	
+	@Test
+	public void addShouldPassGibbonsPriceToSeriesDao() {
+		Double expectedPrice = ANY_PRICE;
+		Currency expectedCurrency = Currency.RUR;
+		form.setGibbonsPrice(expectedPrice);
+		form.setGibbonsCurrency(expectedCurrency);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		Price actualPrice = seriesCaptor.getValue().getGibbonsPrice();
+		assertThat(actualPrice).isNotNull();
+		assertThat(actualPrice.getValue()).isEqualTo(expectedPrice);
+		assertThat(actualPrice.getCurrency()).isEqualTo(expectedCurrency);
+	}
+	
+	@Test
+	public void addShouldPassNullToSeriesDaoIfGibbonsPriceIsNull() {
+		form.setGibbonsPrice(null);
+		form.setGibbonsCurrency(null);
+		
+		service.add(form, user);
+		
+		verify(seriesDao).save(seriesCaptor.capture());
+		
+		Price actualPrice = seriesCaptor.getValue().getGibbonsPrice();
+		assertThat(actualPrice).isNull();
 	}
 	
 	@Test

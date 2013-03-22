@@ -47,9 +47,17 @@ public class AddSeriesPage extends AbstractPageWithForm {
 				required(inputField("quantity").withLabel(tr("t_quantity"))),
 				checkboxField("perforated").withLabel(tr("t_perforated")),
 				inputField("michelNumbers").withLabel(tr("t_michel")),
+				inputField("michelPrice"),
+				selectField("michelCurrency"),
 				inputField("scottNumbers").withLabel(tr("t_scott")),
+				inputField("scottPrice"),
+				selectField("scottCurrency"),
 				inputField("yvertNumbers").withLabel(tr("t_yvert")),
+				inputField("yvertPrice"),
+				selectField("yvertCurrency"),
 				inputField("gibbonsNumbers").withLabel(tr("t_sg")),
+				inputField("gibbonsPrice"),
+				selectField("gibbonsCurrency"),
 				textareaField("comment").withLabel(tr("t_comment")),
 				required(uploadFileField("image").withLabel(tr("t_image")))
 			)
@@ -108,10 +116,30 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		}
 	}
 	
+	public List<String> getMichelCurrencies() {
+		return getSelectOptions("michelCurrency");
+	}
+	
 	public void fillMichelNumbers(String value) {
 		if (value != null) {
 			fillField("michelNumbers", value);
 		}
+	}
+	
+	public void fillMichelPrice(String value) {
+		if (value != null) {
+			fillField("michelPrice", value);
+		}
+	}
+	
+	public void fillMichelCurrency(String value) {
+		if (value != null) {
+			new Select(getElementByName("michelCurrency")).selectByVisibleText(value);
+		}
+	}
+	
+	public List<String> getScottCurrencies() {
+		return getSelectOptions("scottCurrency");
 	}
 	
 	public void fillScottNumbers(String value) {
@@ -120,15 +148,59 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		}
 	}
 	
+	public void fillScottPrice(String value) {
+		if (value != null) {
+			fillField("scottPrice", value);
+		}
+	}
+	
+	public void fillScottCurrency(String value) {
+		if (value != null) {
+			new Select(getElementByName("scottCurrency")).selectByVisibleText(value);
+		}
+	}
+	
+	public List<String> getYvertCurrencies() {
+		return getSelectOptions("yvertCurrency");
+	}
+	
 	public void fillYvertNumbers(String value) {
 		if (value != null) {
 			fillField("yvertNumbers", value);
 		}
 	}
 	
+	public void fillYvertPrice(String value) {
+		if (value != null) {
+			fillField("yvertPrice", value);
+		}
+	}
+	
+	public void fillYvertCurrency(String value) {
+		if (value != null) {
+			new Select(getElementByName("yvertCurrency")).selectByVisibleText(value);
+		}
+	}
+	
+	public List<String> getGibbonsCurrencies() {
+		return getSelectOptions("gibbonsCurrency");
+	}
+	
 	public void fillGibbonsNumbers(String value) {
 		if (value != null) {
 			fillField("gibbonsNumbers", value);
+		}
+	}
+	
+	public void fillGibbonsPrice(String value) {
+		if (value != null) {
+			fillField("gibbonsPrice", value);
+		}
+	}
+	
+	public void fillGibbonsCurrency(String value) {
+		if (value != null) {
+			new Select(getElementByName("gibbonsCurrency")).selectByVisibleText(value);
 		}
 	}
 	

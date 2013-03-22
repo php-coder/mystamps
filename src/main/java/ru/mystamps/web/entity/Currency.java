@@ -15,35 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.entity;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
-
-public interface AddSeriesDto {
-	Country getCountry();
-	Integer getYear();
-	Integer getQuantity();
-	Boolean getPerforated();
-	
-	String getMichelNumbers();
-	Double getMichelPrice();
-	Currency getMichelCurrency();
-	
-	String getScottNumbers();
-	Double getScottPrice();
-	Currency getScottCurrency();
-	
-	String getYvertNumbers();
-	Double getYvertPrice();
-	Currency getYvertCurrency();
-	
-	String getGibbonsNumbers();
-	Double getGibbonsPrice();
-	Currency getGibbonsCurrency();
-	
-	String getComment();
-	MultipartFile getImage();
+public enum Currency {
+	EUR, RUR, USD
 }
