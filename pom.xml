@@ -171,7 +171,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
-			<scope>runtime</scope>
+			<!-- Required in compiled scope for customized version of MySQL5InnoDBDialect -->
 		</dependency>
 		
 		<dependency>
