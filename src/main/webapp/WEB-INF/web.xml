@@ -5,11 +5,11 @@
 		http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	
-	<!-- See also src/env/dev/WEB-INF/web.xml for development configuration -->
+	<!-- See also src/main/config/test-override-web.xml for test specific configuration -->
 	
 	<context-param>
 		<param-name>spring.profiles.active</param-name>
-		<param-value>test</param-value>
+		<param-value>dev</param-value>
 	</context-param>
 	
 	<context-param>
@@ -56,23 +56,6 @@
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<!--
-		Web console for managing H2 database.
-		
-		Access it via http://127.0.0.1:8081/console and use "org.h2.Driver" as the driver,
-		"jdbc:h2:mem:mystamps" as the URL, "sa" as the username and a blank password.
-	-->
-	<servlet>
-		<servlet-name>H2Console</servlet-name>
-		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>H2Console</servlet-name>
-		<url-pattern>/console/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- see http://docs.oracle.com/javaee/5/tutorial/doc/bnajg.html -->

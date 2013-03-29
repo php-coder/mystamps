@@ -398,9 +398,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war.plugin.version}</version>
-				<configuration>
-					<webXml>${env.dir}/../web.xml</webXml>
-				</configuration>
 			</plugin>
 			
 			<plugin>
@@ -482,7 +479,9 @@
 						${project.build.directory}/${project.build.finalName}
 					</webAppSourceDirectory>
 					<webAppConfig>
-						<overrideDescriptor>${env.dir}/../web.xml</overrideDescriptor>
+						<overrideDescriptor>
+							${basedir}/src/main/config/test-override-web.xml
+						</overrideDescriptor>
 					</webAppConfig>
 					<skip>${skipTests}</skip>
 				</configuration>
