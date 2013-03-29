@@ -41,8 +41,6 @@
 		
 		<java.version>1.6</java.version>
 		
-		<env.root.dir>src/env</env.root.dir>
-		
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
 		
@@ -379,6 +377,25 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>test/test-data.sql</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		
+		<filters>
+			<filter>
+				${basedir}/src/main/resources/test/spring/test-data.properties
+			</filter>
+		</filters>
+		
 		<plugins>
 			
 			<plugin>
@@ -391,6 +408,14 @@
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<debug>false</debug>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${resources.plugin.version}</version>
+				<configuration>
 				</configuration>
 			</plugin>
 			
@@ -767,41 +792,9 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<env.dir>${env.root.dir}/dev/WEB-INF/classes</env.dir>
+				<env.dir>${basedir}/src/main/resources/dev</env.dir>
 				<ddl.file>mysql-scheme.sql</ddl.file>
 			</properties>
-			<build>
-				<plugins>
-					
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-dev-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>
-										${project.build.outputDirectory}
-									</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${env.dir}</directory>
-											<excludes>
-												<exclude>*.sql</exclude>
-											</excludes>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-				</plugins>
-			</build>
 		</profile>
 		
 		<profile>
@@ -810,42 +803,9 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<env.dir>${env.root.dir}/test/WEB-INF/classes</env.dir>
+				<env.dir>${basedir}/src/main/resources/test</env.dir>
 				<ddl.file>h2-scheme.sql</ddl.file>
 			</properties>
-			<build>
-				<plugins>
-					
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>${resources.plugin.version}</version>
-						<executions>
-							<execution>
-								<id>copy-test-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>
-										${project.build.outputDirectory}
-									</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${env.dir}</directory>
-											<filtering>true</filtering>
-										</resource>
-									</resources>
-									<filters>
-										<filter>${env.dir}/spring/test-data.properties</filter>
-									</filters>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-				</plugins>
-			</build>
 		</profile>
 		
 	</profiles>

@@ -94,12 +94,12 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	private SuspiciousActivityType getAbsentPageType() {
-		// see src/env/{dev,test}/WEB-INF/classes/init-data.sql
+		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("PageNotFound");
 	}
 	
 	private SuspiciousActivityType getFailedAuthenticationType() {
-		// see src/env/{dev,test}/WEB-INF/classes/init-data.sql
+		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("AuthenticationFailed");
 	}
 	

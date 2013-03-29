@@ -40,7 +40,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("ru.mystamps.web.dao")
-@PropertySource("classpath:spring/database.properties")
+@PropertySource("classpath:${spring.profiles.active}/spring/database.properties")
 @Import({
 	TestDataSource.class,
 	DevDataSource.class

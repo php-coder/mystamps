@@ -30,7 +30,7 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @Profile("dev")
-@PropertySource("classpath:spring/database.properties")
+@PropertySource("classpath:dev/spring/database.properties")
 public class DevDataSource {
 	
 	@Inject

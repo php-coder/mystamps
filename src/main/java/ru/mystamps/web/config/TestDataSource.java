@@ -34,9 +34,9 @@ public class TestDataSource {
 		return new EmbeddedDatabaseBuilder()
 			.setType(EmbeddedDatabaseType.H2)
 			.setName("mystamps")
-			.addScript("classpath:h2-scheme.sql")
-			.addScript("classpath:init-data.sql")
-			.addScript("classpath:test-data.sql")
+			.addScript("classpath:test/h2-scheme.sql")
+			.addScript("classpath:test/init-data.sql")
+			.addScript("classpath:test/test-data.sql")
 			.build();
 	}
 }

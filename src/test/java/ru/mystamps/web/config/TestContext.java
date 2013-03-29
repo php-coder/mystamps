@@ -29,7 +29,7 @@ public class TestContext {
 	public PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer configurer =
 			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocation(new ClassPathResource("spring/test-data.properties"));
+		configurer.setLocation(new ClassPathResource("test/spring/test-data.properties"));
 		return configurer;
 	}
 	
