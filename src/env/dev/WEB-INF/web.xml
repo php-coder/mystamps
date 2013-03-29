@@ -64,7 +64,7 @@
 			<url-pattern>/WEB-INF/tiles/*</url-pattern>
 			<trim-directive-whitespaces>true</trim-directive-whitespaces>
 			<page-encoding>UTF-8</page-encoding>
-			<scripting-invalid>true></scripting-invalid>
+			<scripting-invalid>true</scripting-invalid>
 		</jsp-property-group>
 	</jsp-config>
 	
