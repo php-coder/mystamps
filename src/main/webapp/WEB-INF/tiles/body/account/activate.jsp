@@ -25,84 +25,27 @@
 	<div class="generic_form">
 		<form:form method="post" action="${activateUrl}" modelAttribute="activateAccountForm">
 			<table>
-				<tr>
-					<td>
-						<form:label path="login">
-							<spring:message code="t_login" />
-						</form:label>
-					</td>
-					<td>
-						<span id="login.required" class="required_field">*</span>
-					</td>
-					<td>
-						<form:input path="login" required="required" />
-					</td>
-					<td>
-						<form:errors path="login" cssClass="error" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form:label path="name">
-							<spring:message code="t_name" />
-						</form:label>
-					</td>
-					<td></td>
-					<td>
-						<form:input path="name" />
-					</td>
-					<td>
-						<form:errors path="name" cssClass="error" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form:label path="password">
-							<spring:message code="t_password" />
-						</form:label>
-					</td>
-					<td>
-						<span id="password.required" class="required_field">*</span>
-					</td>
-					<td>
-						<form:password path="password" required="required" />
-					</td>
-					<td>
-						<form:errors path="password" cssClass="error" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form:label path="passwordConfirmation">
-							<spring:message code="t_password_again" />
-						</form:label>
-					</td>
-					<td>
-						<span id="passwordConfirmation.required" class="required_field">*</span>
-					</td>
-					<td>
-						<form:password path="passwordConfirmation" required="required" />
-					</td>
-					<td>
-						<form:errors path="passwordConfirmation" cssClass="error" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<form:label path="activationKey">
-							<spring:message code="t_activation_key" />
-						</form:label>
-					</td>
-					<td>
-						<span id="activationKey.required" class="required_field">*</span>
-					</td>
-					<td>
-						<form:input path="activationKey" required="required" />
-					</td>
-					<td>
-						<form:errors path="activationKey" cssClass="error" />
-					</td>
-				</tr>
+				
+				<elem:field path="login" label="t_login" required="true">
+					<form:input path="login" required="required" />
+				</elem:field>
+				
+				<elem:field path="name" label="t_name">
+					<form:input path="name" />
+				</elem:field>
+				
+				<elem:field path="password" label="t_password" required="true">
+					<form:password path="password" required="required" />
+				</elem:field>
+				
+				<elem:field path="passwordConfirmation" label="t_password_again" required="true">
+					<form:password path="passwordConfirmation" required="required" />
+				</elem:field>
+				
+				<elem:field path="activationKey" label="t_activation_key" required="true">
+					<form:input path="activationKey" required="required" />
+				</elem:field>
+				
 				<tr>
 					<td></td>
 					<td></td>

@@ -16,22 +16,11 @@
 	<div class="generic_form">
 		<form:form method="post" modelAttribute="registerAccountForm">
 			<table>
-				<tr>
-					<td>
-						<form:label path="email">
-							<spring:message code="t_email" />
-						</form:label>
-					</td>
-					<td>
-						<span id="email.required" class="required_field">*</span>
-					</td>
-					<td>
-						<form:input path="email" type="email" required="required" autofocus="autofocus" />
-					</td>
-					<td>
-						<form:errors path="email" cssClass="error" />
-					</td>
-				</tr>
+				
+				<elem:field path="email" label="t_email" required="true">
+					<form:input path="email" type="email" required="required" autofocus="autofocus" />
+				</elem:field>
+				
 				<tr>
 					<td></td>
 					<td></td>
