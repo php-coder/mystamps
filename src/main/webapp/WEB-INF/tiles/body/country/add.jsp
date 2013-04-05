@@ -14,14 +14,8 @@
 				<form:input path="name" required="required" autofocus="autofocus" />
 			</elem:field>
 			
-			<tr>
-				<td></td>
-				<td></td>
-				<td>
-					<input type="submit" value="<spring:message code="t_add" />" />
-				</td>
-				<td></td>
-			</tr>
+			<elem:submit label="t_add" />
+			
 		</table>
 	</form:form>
 </div>

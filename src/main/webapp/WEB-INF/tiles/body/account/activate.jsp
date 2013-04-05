@@ -46,15 +46,8 @@
 					<form:input path="activationKey" required="required" />
 				</elem:field>
 				
-				<tr>
-					<td></td>
-					<td></td>
-					<td>
-						<input type="submit" value="<spring:message code="t_activate" />" />
-					</td>
-					<td>
-					</td>
-				</tr>
+				<elem:submit label="t_activate" />
+				
 			</table>
 		</form:form>
 	</div>

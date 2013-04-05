@@ -128,14 +128,8 @@
 				<form:input path="image" type="file" required="required" accept="image/png,image/jpeg" />
 			</elem:field>
 			
-			<tr>
-				<td></td>
-				<td></td>
-				<td>
-					<input type="submit" value="<spring:message code="t_add" />" />
-				</td>
-				<td></td>
-			</tr>
+			<elem:submit label="t_add" />
+			
 		</table>
 	</form:form>
 </div>

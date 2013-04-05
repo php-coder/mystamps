@@ -21,14 +21,8 @@
 					<form:input path="email" type="email" required="required" autofocus="autofocus" />
 				</elem:field>
 				
-				<tr>
-					<td></td>
-					<td></td>
-					<td>
-						<input type="submit" value="<spring:message code="t_register" />" />
-					</td>
-					<td></td>
-				</tr>
+				<elem:submit label="t_register" />
+				
 			</table>
 		</form:form>
 	</div>
