@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
@@ -112,7 +113,11 @@ public class SeriesController {
 		
 		Series series = seriesService.add(form, currentUser);
 		
-		return "redirect:" + Url.INFO_SERIES_PAGE.replace("{id}", series.getId().toString());
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(series.getId())
+			.toString();
+		
+		return "redirect:" + dstUrl;
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)

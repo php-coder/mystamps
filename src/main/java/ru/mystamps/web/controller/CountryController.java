@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.validation.BindingResult;
 
 import ru.mystamps.web.Url;
@@ -65,7 +66,11 @@ public class CountryController {
 		
 		Country country = countryService.add(form, currentUser);
 		
-		return "redirect:" + Url.INFO_COUNTRY_PAGE.replace("{id}", country.getId().toString());
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
+			.buildAndExpand(country.getId())
+			.toString();
+		
+		return "redirect:" + dstUrl;
 	}
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
