@@ -21,6 +21,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -38,7 +39,7 @@ public class MetaInfo {
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "created_by", nullable = false)
 	private User createdBy;
 	
@@ -46,7 +47,7 @@ public class MetaInfo {
 	@Column(name = "updated_at", nullable = false)
 	private Date updatedAt;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "updated_by", nullable = false)
 	private User updatedBy;
 	
