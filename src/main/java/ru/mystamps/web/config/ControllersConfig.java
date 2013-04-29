@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ru.mystamps.web.controller.*; // NOCHECKSTYLE: AvoidStarImportCheck
+import ru.mystamps.web.controller.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 
 @Configuration
 public class ControllersConfig {

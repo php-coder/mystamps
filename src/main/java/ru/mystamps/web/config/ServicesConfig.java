@@ -20,7 +20,7 @@ package ru.mystamps.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck
+import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 
 @Configuration
 public class ServicesConfig {
