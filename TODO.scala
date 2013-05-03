@@ -20,3 +20,5 @@
 * использовать трейт Versionable/Identifiable/Auditable
   (created/updated) для сущностей
 
+* использовать @scala.throws для обозначения того какие исключения возбуждает метод (?)
+
