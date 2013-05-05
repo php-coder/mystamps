@@ -6,21 +6,21 @@
 <%@ attribute name="label" required="true" rtexprvalue="true" %>
 <%@ attribute name="required" required="false" rtexprvalue="true" type="java.lang.Boolean" %>
 
-<tr>
-	<td>
-		<form:label path="${path}">
-			<spring:message code="${label}" />
+<spring:bind path="${path}">
+	<c:set var="hasError" value="${status.error}" />
+	
+	<div class="control-group ${hasError ? 'error' : ''}">
+		<form:label path="${path}" cssClass="control-label">
+			<span class="field-label">
+				<spring:message code="${label}" />
+			</span>
+			<c:if test="${required}">
+				<span id="${path}.required" class="required_field">*</span>
+			</c:if>
 		</form:label>
-	</td>
-	<td>
-		<c:if test="${required}">
-			<span id="${path}.required" class="required_field">*</span>
-		</c:if>
-	</td>
-	<td>
-		<jsp:doBody />
-	</td>
-	<td>
-		<form:errors path="${path}" cssClass="error" />
-	</td>
-</tr>
+		<div class="controls">
+			<jsp:doBody />
+			<form:errors path="${path}" cssClass="help-inline" />
+		</div>
+	</div>
+</spring:bind>

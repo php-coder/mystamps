@@ -34,7 +34,7 @@ import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
-	private static final String             LABEL_LOCATOR = "//label[@for=\"%s\"]";
+	private static final String             LABEL_LOCATOR = "//label[@for=\"%s\"]/span[@class=\"field-label\"]";
 	private static final String       FIELD_ERROR_LOCATOR = "//span[@id=\"%s.errors\"]";
 	private static final String    FIELD_REQUIRED_LOCATOR = "//span[@id=\"%s.required\"]";
 	private static final String        FORM_ERROR_LOCATOR = "//div[@id=\"form.errors\"]";

@@ -2,11 +2,6 @@
 
 <%@ attribute name="label" required="true" rtexprvalue="true" %>
 
-<tr>
-	<td></td>
-	<td></td>
-	<td>
-		<input type="submit" value="<spring:message code="${label}" />" />
-	</td>
-	<td></td>
-</tr>
+<div class="form-actions">
+	<input type="submit" class="btn btn-primary" value="<spring:message code="${label}" />" />
+</div>

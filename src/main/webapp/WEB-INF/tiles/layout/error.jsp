@@ -4,31 +4,43 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <c:set var="titleCode"><tiles:getAsString name="title" /></c:set>
 <c:set var="description"><tiles:getAsString name="errorDescription" /></c:set>
+
 <spring:url var="faviconUrl" value="/favicon.ico" />
 <spring:url var="mainCssUrl" value="/static/styles/main.css" />
-<spring:url var="errorCssUrl" value="/static/styles/error.css" />
+<spring:url var="bootstrapCssUrl" value="/public/bootstrap/css/bootstrap.min.css" />
+<spring:url var="bootstrapResponsiveCssUrl" value="/public/bootstrap/css/bootstrap-responsive.min.css" />
+<spring:url var="bootstrapJsUrl" value="/public/bootstrap/js/bootstrap.min.js" />
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title><spring:message code="${titleCode}" /></title>
 		<link rel="shortcut icon" type="image/x-icon" href="${faviconUrl}" />
+		<link rel="stylesheet" href="${bootstrapCssUrl}" />
+		<link rel="stylesheet" href="${bootstrapResponsiveCssUrl}" />
 		<link rel="stylesheet" href="${mainCssUrl}" />
-		<link rel="stylesheet" href="${errorCssUrl}" />
 	</head>
 	<body>
-		<tiles:insertAttribute name="header" />
-		<div id="content">
-			<table>
-				<tr>
-					<td id="error-code"><tiles:getAsString name="errorCode" /></td>
-					<td id="error-msg">
-						<spring:message code="${description}" arguments="<br />" />
-					</td>
-				</tr>
-			</table>
+		<div class="row-fluid">
+			<tiles:insertAttribute name="header" />
 		</div>
-		<tiles:insertAttribute name="footer" />
+		<div class="row-fluid text-center">
+			<div id="content" class="span12">
+				<h1 id="error-code">
+					<tiles:getAsString name="errorCode" />
+				</h1>
+				<h4 id="error-msg">
+					<spring:message code="${description}" arguments="<br />" />
+				</h4>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<tiles:insertAttribute name="footer" />
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="${bootstrapJsUrl}"></script>
 	</body>
 </html>

@@ -33,6 +33,9 @@
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<tiles.version>2.2.2</tiles.version>
 		
+		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
+		<bootstrap.version>2.3.1</bootstrap.version>
+		
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.5</mockito.version>
@@ -223,6 +226,13 @@
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
 			<version>${tiles.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>${bootstrap.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
