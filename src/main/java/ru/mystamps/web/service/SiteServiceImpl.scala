@@ -15,32 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
-import java.util.Date;
+import java.util.Date
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.Validate
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
-import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.SuspiciousActivity;
-import ru.mystamps.web.entity.SuspiciousActivityType;
+import ru.mystamps.web.dao.SuspiciousActivityDao
+import ru.mystamps.web.dao.SuspiciousActivityTypeDao
+import ru.mystamps.web.entity.User
+import ru.mystamps.web.entity.SuspiciousActivity
+import ru.mystamps.web.entity.SuspiciousActivityType
 
 @Service
 public class SiteServiceImpl implements SiteService {
 	
 	@Inject
-	private SuspiciousActivityDao suspiciousActivities;
+	private SuspiciousActivityDao suspiciousActivities
 
 	@Inject
-	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+	private SuspiciousActivityTypeDao suspiciousActivityTypes
 	
 	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
@@ -52,7 +52,7 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(getAbsentPageType(), page, user, ip, referer, agent);
+		logEvent(getAbsentPageType(), page, user, ip, referer, agent)
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent);
+		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent)
 	}
 	
 	private void logEvent(
@@ -76,31 +76,31 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		Validate.isTrue(type != null, "Type of suspicious activity was not set");
-		Validate.isTrue(page != null, "Page should be non null");
+		Validate.isTrue(type != null, "Type of suspicious activity was not set")
+		Validate.isTrue(page != null, "Page should be non null")
 		
-		SuspiciousActivity activity = new SuspiciousActivity();
-		activity.setType(type);
-		activity.setOccuredAt(new Date());
-		activity.setPage(page);
+		SuspiciousActivity activity = new SuspiciousActivity()
+		activity.setType(type)
+		activity.setOccuredAt(new Date())
+		activity.setPage(page)
 		
-		activity.setUser(user);
+		activity.setUser(user)
 		
-		activity.setIp(StringUtils.defaultString(ip));
-		activity.setRefererPage(StringUtils.defaultString(referer));
-		activity.setUserAgent(StringUtils.defaultString(agent));
+		activity.setIp(StringUtils.defaultString(ip))
+		activity.setRefererPage(StringUtils.defaultString(referer))
+		activity.setUserAgent(StringUtils.defaultString(agent))
 		
-		suspiciousActivities.save(activity);
+		suspiciousActivities.save(activity)
 	}
 	
 	private SuspiciousActivityType getAbsentPageType() {
 		// see src/main/resources/{dev,test}/init-data.sql
-		return suspiciousActivityTypes.findByName("PageNotFound");
+		return suspiciousActivityTypes.findByName("PageNotFound")
 	}
 	
 	private SuspiciousActivityType getFailedAuthenticationType() {
 		// see src/main/resources/{dev,test}/init-data.sql
-		return suspiciousActivityTypes.findByName("AuthenticationFailed");
+		return suspiciousActivityTypes.findByName("AuthenticationFailed")
 	}
 	
 }

@@ -15,49 +15,49 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service
 
-import java.util.Date;
-import java.util.List;
+import java.util.Date
+import java.util.List
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DateUtils
+import org.apache.commons.lang3.Validate
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.annotation.Scheduled
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
-import ru.mystamps.web.dao.UsersActivationDao;
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.UsersActivationDao
+import ru.mystamps.web.entity.UsersActivation
 
 @Service
 public class CronServiceImpl implements CronService {
-	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
+	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CronService.class)
 	
 	@Inject
-	private UsersActivationDao usersActivationDao;
+	private UsersActivationDao usersActivationDao
 	
 	@Override
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
 	public void purgeUsersActivations() {
-		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
+		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
 		
 		List<UsersActivation> expiredActivations =
-			usersActivationDao.findByCreatedAtLessThan(expiredSince);
+			usersActivationDao.findByCreatedAtLessThan(expiredSince)
 		
-		Validate.validState(expiredActivations != null, "Expired activations should be non null");
+		Validate.validState(expiredActivations != null, "Expired activations should be non null")
 		
 		if (expiredActivations.isEmpty()) {
-			LOG.info("Expired activations was not found.");
-			return;
+			LOG.info("Expired activations was not found.")
+			return
 		}
 		
 		for (UsersActivation activation : expiredActivations) {
@@ -66,10 +66,10 @@ public class CronServiceImpl implements CronService {
 				activation.getActivationKey(),
 				activation.getEmail(),
 				activation.getCreatedAt()
-			);
+			)
 		}
 		
-		usersActivationDao.delete(expiredActivations);
+		usersActivationDao.delete(expiredActivations)
 	}
 	
 }

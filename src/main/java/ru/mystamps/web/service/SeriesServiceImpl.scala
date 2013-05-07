@@ -15,187 +15,187 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Set;
+import java.util.Calendar
+import java.util.Date
+import java.util.GregorianCalendar
+import java.util.Set
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
-import static java.util.Calendar.JANUARY;
+import static java.util.Calendar.JANUARY
 
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.Validate
 
-import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.entity.GibbonsCatalog;
-import ru.mystamps.web.entity.MichelCatalog;
-import ru.mystamps.web.entity.Price;
-import ru.mystamps.web.entity.ScottCatalog;
-import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.YvertCatalog;
-import ru.mystamps.web.service.dto.AddSeriesDto;
-import ru.mystamps.web.util.CatalogUtils;
+import ru.mystamps.web.dao.SeriesDao
+import ru.mystamps.web.entity.GibbonsCatalog
+import ru.mystamps.web.entity.MichelCatalog
+import ru.mystamps.web.entity.Price
+import ru.mystamps.web.entity.ScottCatalog
+import ru.mystamps.web.entity.Series
+import ru.mystamps.web.entity.User
+import ru.mystamps.web.entity.YvertCatalog
+import ru.mystamps.web.service.dto.AddSeriesDto
+import ru.mystamps.web.util.CatalogUtils
 
 @Service
 public class SeriesServiceImpl implements SeriesService {
 	
 	@Inject
-	private SeriesDao seriesDao;
+	private SeriesDao seriesDao
 	
 	@Inject
-	private ImageService imageService;
+	private ImageService imageService
 	
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public Series add(AddSeriesDto dto, User user) {
-		Validate.isTrue(dto != null, "DTO must be non null");
-		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
+		Validate.isTrue(dto != null, "DTO must be non null")
+		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null")
 		Validate.isTrue(
 			dto.getPerforated() != null,
 			"Stamps perforated property must be non null"
-		);
-		Validate.isTrue(user != null, "Current user must be non null");
+		)
+		Validate.isTrue(user != null, "Current user must be non null")
 		
-		Series series = new Series();
+		Series series = new Series()
 		
 		if (dto.getCountry() != null) {
-			series.setCountry(dto.getCountry());
+			series.setCountry(dto.getCountry())
 		}
 		
 		if (dto.getYear() != null) {
-			Calendar releaseDate = GregorianCalendar.getInstance();
-			releaseDate.clear();
-			releaseDate.set(dto.getYear(), JANUARY, 1);
+			Calendar releaseDate = GregorianCalendar.getInstance()
+			releaseDate.clear()
+			releaseDate.set(dto.getYear(), JANUARY, 1)
 			
-			series.setReleasedAt(releaseDate.getTime());
+			series.setReleasedAt(releaseDate.getTime())
 		}
 		
-		series.setQuantity(dto.getQuantity());
-		series.setPerforated(dto.getPerforated());
+		series.setQuantity(dto.getQuantity())
+		series.setPerforated(dto.getPerforated())
 		
-		setMichelNumbersIfProvided(dto, series);
-		setMichelPriceIfProvided(dto, series);
+		setMichelNumbersIfProvided(dto, series)
+		setMichelPriceIfProvided(dto, series)
 		
-		setScottNumbersIfProvided(dto, series);
-		setScottPriceIfProvided(dto, series);
+		setScottNumbersIfProvided(dto, series)
+		setScottPriceIfProvided(dto, series)
 		
-		setYvertNumbersIfProvided(dto, series);
-		setYvertPriceIfProvided(dto, series);
+		setYvertNumbersIfProvided(dto, series)
+		setYvertPriceIfProvided(dto, series)
 		
-		setGibbonsNumbersIfProvided(dto, series);
-		setGibbonsPriceIfProvided(dto, series);
+		setGibbonsNumbersIfProvided(dto, series)
+		setGibbonsPriceIfProvided(dto, series)
 		
-		String imageUrl = imageService.save(dto.getImage());
-		Validate.validState(imageUrl != null, "Image url must be non null");
-		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
+		String imageUrl = imageService.save(dto.getImage())
+		Validate.validState(imageUrl != null, "Image url must be non null")
+		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path")
 		
-		series.setImageUrl(imageUrl);
+		series.setImageUrl(imageUrl)
 		
 		if (dto.getComment() != null) {
 			Validate.isTrue(
 				!dto.getComment().trim().isEmpty(),
 				"Comment must be non empty"
-			);
+			)
 			
-			series.setComment(dto.getComment());
+			series.setComment(dto.getComment())
 		}
 		
-		Date now = new Date();
-		series.getMetaInfo().setCreatedAt(now);
-		series.getMetaInfo().setUpdatedAt(now);
+		Date now = new Date()
+		series.getMetaInfo().setCreatedAt(now)
+		series.getMetaInfo().setUpdatedAt(now)
 		
-		series.getMetaInfo().setCreatedBy(user);
-		series.getMetaInfo().setUpdatedBy(user);
+		series.getMetaInfo().setCreatedBy(user)
+		series.getMetaInfo().setUpdatedBy(user)
 		
-		return seriesDao.save(series);
+		return seriesDao.save(series)
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<MichelCatalog> michelNumbers =
-			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
+			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class)
 		if (!michelNumbers.isEmpty()) {
-			series.setMichel(michelNumbers);
+			series.setMichel(michelNumbers)
 		}
 	}
 	
 	private static void setMichelPriceIfProvided(AddSeriesDto dto, Series series) {
 		if (dto.getMichelPrice() == null) {
-			return;
+			return
 		}
 		
 		Validate.isTrue(
 			dto.getMichelCurrency() != null,
 			"Michel currency must be non null when price is specified"
-		);
-		series.setMichelPrice(new Price(dto.getMichelPrice(), dto.getMichelCurrency()));
+		)
+		series.setMichelPrice(new Price(dto.getMichelPrice(), dto.getMichelCurrency()))
 	}
 	
 	private void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<ScottCatalog> scottNumbers =
-			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
+			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class)
 		if (!scottNumbers.isEmpty()) {
-			series.setScott(scottNumbers);
+			series.setScott(scottNumbers)
 		}
 	}
 	
 	private static void setScottPriceIfProvided(AddSeriesDto dto, Series series) {
 		if (dto.getScottPrice() == null) {
-			return;
+			return
 		}
 		
 		Validate.isTrue(
 			dto.getScottCurrency() != null,
 			"Scott currency must be non null when price is specified"
-		);
-		series.setScottPrice(new Price(dto.getScottPrice(), dto.getScottCurrency()));
+		)
+		series.setScottPrice(new Price(dto.getScottPrice(), dto.getScottCurrency()))
 	}
 	
 	private void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<YvertCatalog> yvertNumbers =
-			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
+			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class)
 		if (!yvertNumbers.isEmpty()) {
-			series.setYvert(yvertNumbers);
+			series.setYvert(yvertNumbers)
 		}
 	}
 	
 	private static void setYvertPriceIfProvided(AddSeriesDto dto, Series series) {
 		if (dto.getYvertPrice() == null) {
-			return;
+			return
 		}
 		
 		Validate.isTrue(
 			dto.getYvertCurrency() != null,
 			"Yvert currency must be non null when price is specified"
-		);
-		series.setYvertPrice(new Price(dto.getYvertPrice(), dto.getYvertCurrency()));
+		)
+		series.setYvertPrice(new Price(dto.getYvertPrice(), dto.getYvertCurrency()))
 	}
 	
 	private void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<GibbonsCatalog> gibbonsNumbers =
-			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
+			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class)
 		if (!gibbonsNumbers.isEmpty()) {
-			series.setGibbons(gibbonsNumbers);
+			series.setGibbons(gibbonsNumbers)
 		}
 	}
 	
 	private static void setGibbonsPriceIfProvided(AddSeriesDto dto, Series series) {
 		if (dto.getGibbonsPrice() == null) {
-			return;
+			return
 		}
 		
 		Validate.isTrue(
 			dto.getGibbonsCurrency() != null,
 			"Gibbons currency must be non null when price is specified"
-		);
-		series.setGibbonsPrice(new Price(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
+		)
+		series.setGibbonsPrice(new Price(dto.getGibbonsPrice(), dto.getGibbonsCurrency()))
 	}
 	
 }

@@ -15,57 +15,57 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service
 
-import java.io.IOException;
-import java.util.Locale;
+import java.io.IOException
+import java.util.Locale
 
-import javax.inject.Inject;
+import javax.inject.Inject
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.Validate
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.multipart.MultipartFile
 
-import ru.mystamps.web.dao.ImageDao;
-import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.dao.ImageDao
+import ru.mystamps.web.entity.Image
 
 @Service
 public class ImageServiceImpl implements ImageService {
 	
 	@Inject
-	private ImageDao imageDao;
+	private ImageDao imageDao
 	
 	@Override
 	@Transactional
 	public String save(MultipartFile file) {
-		Validate.isTrue(file != null, "File should be non null");
-		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
+		Validate.isTrue(file != null, "File should be non null")
+		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero")
 		
-		String contentType = file.getContentType();
-		Validate.isTrue(contentType != null, "File type must be non null");
+		String contentType = file.getContentType()
+		Validate.isTrue(contentType != null, "File type must be non null")
 		
-		String extension = StringUtils.substringAfter(contentType, "/");
+		String extension = StringUtils.substringAfter(contentType, "/")
 		Validate.validState(
 			"png".equals(extension) || "jpeg".equals(extension),
 			"File type must be PNG or JPEG image"
-		);
+		)
 		
-		Image image = new Image();
-		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
+		Image image = new Image()
+		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)))
 		
 		try {
-			image.setData(file.getBytes());
+			image.setData(file.getBytes())
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
-			throw new RuntimeException(e); // NOPMD
+			throw new RuntimeException(e) // NOPMD
 		}
 		
-		Image entity = imageDao.save(image);
+		Image entity = imageDao.save(image)
 		
-		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
+		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()))
 	}
 	
 }
