@@ -57,7 +57,7 @@ class CronServiceImpl extends CronService {
 			return
 		}
 		
-		for (UsersActivation activation <- expiredActivations) {
+		for (activation: UsersActivation <- expiredActivations) {
 			LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				activation.getActivationKey(),
