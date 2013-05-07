@@ -35,7 +35,7 @@ import ru.mystamps.web.service.dto.AddCountryDto
 class CountryServiceImpl extends CountryService {
 	
 	@Inject
-	private CountryDao countryDao
+	private var countryDao: CountryDao
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -44,10 +44,10 @@ class CountryServiceImpl extends CountryService {
 		Validate.isTrue(dto.getName() != null, "Country name should be non null")
 		Validate.isTrue(user != null, "Current user must be non null")
 		
-		Country country = new Country()
+		val country: Country = new Country()
 		country.setName(dto.getName())
 		
-		Date now = new Date()
+		val now: Date = new Date()
 		country.getMetaInfo().setCreatedAt(now)
 		country.getMetaInfo().setUpdatedAt(now)
 		

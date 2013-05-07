@@ -39,10 +39,10 @@ import ru.mystamps.web.util.CatalogUtils
 class SeriesServiceImpl extends SeriesService {
 	
 	@Inject
-	private SeriesDao seriesDao
+	private var seriesDao: SeriesDao
 	
 	@Inject
-	private ImageService imageService
+	private var imageService: ImageService
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -55,14 +55,14 @@ class SeriesServiceImpl extends SeriesService {
 		)
 		Validate.isTrue(user != null, "Current user must be non null")
 		
-		Series series = new Series()
+		val series: series = new Series()
 		
 		if (dto.getCountry() != null) {
 			series.setCountry(dto.getCountry())
 		}
 		
 		if (dto.getYear() != null) {
-			Calendar releaseDate = GregorianCalendar.getInstance()
+			val releaseDate: Calendar = GregorianCalendar.getInstance()
 			releaseDate.clear()
 			releaseDate.set(dto.getYear(), JANUARY, 1)
 			
@@ -84,7 +84,7 @@ class SeriesServiceImpl extends SeriesService {
 		setGibbonsNumbersIfProvided(dto, series)
 		setGibbonsPriceIfProvided(dto, series)
 		
-		String imageUrl = imageService.save(dto.getImage())
+		val imageUrl: String = imageService.save(dto.getImage())
 		Validate.validState(imageUrl != null, "Image url must be non null")
 		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path")
 		
@@ -99,7 +99,7 @@ class SeriesServiceImpl extends SeriesService {
 			series.setComment(dto.getComment())
 		}
 		
-		Date now = new Date()
+		val now: Date = new Date()
 		series.getMetaInfo().setCreatedAt(now)
 		series.getMetaInfo().setUpdatedAt(now)
 		
@@ -110,8 +110,8 @@ class SeriesServiceImpl extends SeriesService {
 	}
 	
 	private def setMichelNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set[MichelCatalog] michelNumbers =
-			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class)
+		val michelNumbers: Set[MichelCatalog] =
+			CatalogUtils.fromString(dto.getMichelNumbers(), classOf[MichelCatalog])
 		if (!michelNumbers.isEmpty()) {
 			series.setMichel(michelNumbers)
 		}
@@ -130,8 +130,8 @@ class SeriesServiceImpl extends SeriesService {
 	}
 	
 	private def setScottNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set[ScottCatalog] scottNumbers =
-			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class)
+		val scottNumbers: Set[ScottCatalog] =
+			CatalogUtils.fromString(dto.getScottNumbers(), classOf[ScottCatalog])
 		if (!scottNumbers.isEmpty()) {
 			series.setScott(scottNumbers)
 		}
@@ -150,8 +150,8 @@ class SeriesServiceImpl extends SeriesService {
 	}
 	
 	private def setYvertNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set[YvertCatalog] yvertNumbers =
-			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class)
+		val yvertNumbers: Set[YvertCatalog] =
+			CatalogUtils.fromString(dto.getYvertNumbers(), classOf[YvertCatalog])
 		if (!yvertNumbers.isEmpty()) {
 			series.setYvert(yvertNumbers)
 		}
@@ -170,8 +170,8 @@ class SeriesServiceImpl extends SeriesService {
 	}
 	
 	private def setGibbonsNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set[GibbonsCatalog] gibbonsNumbers =
-			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class)
+		val gibbonsNumbers: Set[GibbonsCatalog] =
+			CatalogUtils.fromString(dto.getGibbonsNumbers(), classOf[GibbonsCatalog])
 		if (!gibbonsNumbers.isEmpty()) {
 			series.setGibbons(gibbonsNumbers)
 		}

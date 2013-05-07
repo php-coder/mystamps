@@ -35,23 +35,23 @@ import ru.mystamps.web.entity.Image
 class ImageServiceImpl extends ImageService {
 	
 	@Inject
-	private ImageDao imageDao
+	private var imageDao: ImageDao
 	
 	@Transactional
 	override def save(file: MultipartFile): String = {
 		Validate.isTrue(file != null, "File should be non null")
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero")
 		
-		String contentType = file.getContentType()
+		val contentType: String = file.getContentType()
 		Validate.isTrue(contentType != null, "File type must be non null")
 		
-		String extension = StringUtils.substringAfter(contentType, "/")
+		val extension: String = StringUtils.substringAfter(contentType, "/")
 		Validate.validState(
 			"png".equals(extension) || "jpeg".equals(extension),
 			"File type must be PNG or JPEG image"
 		)
 		
-		Image image = new Image()
+		val image: Image = new Image()
 		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)))
 		
 		try {
@@ -61,7 +61,7 @@ class ImageServiceImpl extends ImageService {
 			throw new RuntimeException(e) // NOPMD
 		}
 		
-		Image entity = imageDao.save(image)
+		val entity: Image = imageDao.save(image)
 		
 		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()))
 	}

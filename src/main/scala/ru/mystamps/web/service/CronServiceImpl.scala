@@ -35,19 +35,19 @@ import ru.mystamps.web.entity.UsersActivation
 
 @Service
 class CronServiceImpl extends CronService {
-	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR
+	private val CHECK_PERIOD: Long = 12 * DateUtils.MILLIS_PER_HOUR
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CronService.class)
+	private val LOG: Logger = LoggerFactory.getLogger(classOf[CronService])
 	
 	@Inject
-	private UsersActivationDao usersActivationDao
+	private var usersActivationDao: UsersActivationDao
 	
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
 	override def purgeUsersActivations(): Unit = {
-		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
+		val expiredSince: Date = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
 		
-		List[UsersActivation] expiredActivations =
+		val expiredActivations: List[UsersActivation] =
 			usersActivationDao.findByCreatedAtLessThan(expiredSince)
 		
 		Validate.validState(expiredActivations != null, "Expired activations should be non null")

@@ -33,10 +33,10 @@ import ru.mystamps.web.entity.{User, SuspiciousActivity, SuspiciousActivityType}
 class SiteServiceImpl extends SiteService {
 	
 	@Inject
-	private SuspiciousActivityDao suspiciousActivities
+	private var suspiciousActivities: SuspiciousActivityDao
 
 	@Inject
-	private SuspiciousActivityTypeDao suspiciousActivityTypes
+	private var suspiciousActivityTypes: SuspiciousActivityTypeDao
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
@@ -73,7 +73,7 @@ class SiteServiceImpl extends SiteService {
 		Validate.isTrue(type != null, "Type of suspicious activity was not set")
 		Validate.isTrue(page != null, "Page should be non null")
 		
-		SuspiciousActivity activity = new SuspiciousActivity()
+		val activity: SuspiciousActivity = new SuspiciousActivity()
 		activity.setType(type)
 		activity.setOccuredAt(new Date())
 		activity.setPage(page)

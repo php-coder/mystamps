@@ -36,24 +36,23 @@ import ru.mystamps.web.service.dto.{ActivateAccountDto, RegisterAccountDto}
 
 @Service
 class UserServiceImpl extends UserService {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class)
-	
-	@Inject
-	private UserDao users
+	private val LOG: Logger = LoggerFactory.getLogger(classOf[UserService])
 	
 	@Inject
-	private UsersActivationDao usersActivation
+	private var users: UserDao
 	
 	@Inject
-	private PasswordEncoder encoder
+	private var usersActivation: UsersActivationDao
+	
+	@Inject
+	private var encoder: PasswordEncoder
 	
 	@Transactional
 	override def addRegistrationRequest(dto: RegisterAccountDto): Unit = {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null")
 		
-		UsersActivation activation = new UsersActivation()
+		val activation: UsersActivation = new UsersActivation()
 		
 		activation.setActivationKey(generateActivationKey())
 		activation.setEmail(dto.getEmail())
@@ -75,34 +74,34 @@ class UserServiceImpl extends UserService {
 		Validate.isTrue(dto.getPassword() != null, "Password should be non null")
 		Validate.isTrue(dto.getActivationKey() != null, "Activation key should be non null")
 		
-		String login = dto.getLogin()
+		val login: String = dto.getLogin()
 		
 		// use login as name if name is not provided
-		String finalName
+		val finalName: String
 		if (StringUtils.isEmpty(dto.getName())) {
 			finalName = login
 		} else {
 			finalName = dto.getName()
 		}
 		
-		String activationKey = dto.getActivationKey()
-		UsersActivation activation = usersActivation.findOne(activationKey)
+		val activationKey: String = dto.getActivationKey()
+		val activation: UsersActivation = usersActivation.findOne(activationKey)
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey)
 			return
 		}
 		
-		String email = activation.getEmail()
-		Date registrationDate = activation.getCreatedAt()
+		val email: String = activation.getEmail()
+		val registrationDate: Date = activation.getCreatedAt()
 		
-		String salt = generateSalt()
+		val salt: String = generateSalt()
 		
-		String hash = encoder.encodePassword(dto.getPassword(), salt)
+		val hash: String = encoder.encodePassword(dto.getPassword(), salt)
 		Validate.validState(hash != null, "Generated hash must be non null")
 		
-		Date now = new Date()
+		val now: Date = new Date()
 		
-		User user = new User()
+		val user: User = new User()
 		user.setLogin(login)
 		user.setName(finalName)
 		user.setEmail(email)
@@ -135,7 +134,7 @@ class UserServiceImpl extends UserService {
 	 *         in 10 characters length
 	 **/
 	private def generateActivationKey(): String = {
-		int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH
+		val actKeyLength: Int = UsersActivation.ACTIVATION_KEY_LENGTH
 		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase()
 	}
 	
