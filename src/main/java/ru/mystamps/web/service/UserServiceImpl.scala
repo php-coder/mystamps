@@ -41,7 +41,7 @@ import ru.mystamps.web.service.dto.ActivateAccountDto
 import ru.mystamps.web.service.dto.RegisterAccountDto
 
 @Service
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class)
 	

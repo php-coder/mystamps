@@ -33,7 +33,7 @@ import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.service.dto.AddCountryDto
 
 @Service
-public class CountryServiceImpl implements CountryService {
+class CountryServiceImpl implements CountryService {
 	
 	@Inject
 	private CountryDao countryDao

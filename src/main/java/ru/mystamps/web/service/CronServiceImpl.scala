@@ -36,7 +36,7 @@ import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.UsersActivation
 
 @Service
-public class CronServiceImpl implements CronService {
+class CronServiceImpl implements CronService {
 	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronService.class)
