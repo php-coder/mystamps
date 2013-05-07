@@ -49,7 +49,7 @@
 		<jetty.port>8081</jetty.port>
 		
 		<compiler.plugin.version>3.0</compiler.plugin.version>
-		<scala.plugin.version>2.15.2</scala.plugin.version>
+		<scala.plugin.version>3.1.4</scala.plugin.version>
 		<resources.plugin.version>2.6</resources.plugin.version>
 		<war.plugin.version>2.3</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
@@ -415,8 +415,8 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
 				<version>${scala.plugin.version}</version>
 				<configuration>
 					<includes>
