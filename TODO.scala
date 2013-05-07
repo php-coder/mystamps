@@ -9,8 +9,6 @@
 
 * проверить и убрать все checked исключения
 
-* проверить что все if-ы имеют else ветки
-
 * использовать require:
   - Validate.isTrue(dto != null, "DTO must be non null");
   + require(dto != null, "DTO must be non null")
