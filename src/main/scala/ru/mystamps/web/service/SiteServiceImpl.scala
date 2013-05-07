@@ -63,18 +63,18 @@ class SiteServiceImpl extends SiteService {
 	}
 	
 	private def logEvent(
-			type: SuspiciousActivityType,
+			eventType: SuspiciousActivityType,
 			page: String,
 			user: User,
 			ip: String,
 			referer: String,
 			agent: String): Unit = {
 		
-		Validate.isTrue(type != null, "Type of suspicious activity was not set")
+		Validate.isTrue(eventType != null, "Type of suspicious activity was not set")
 		Validate.isTrue(page != null, "Page should be non null")
 		
 		val activity: SuspiciousActivity = new SuspiciousActivity()
-		activity.setType(type)
+		activity.setType(eventType)
 		activity.setOccuredAt(new Date())
 		activity.setPage(page)
 		
