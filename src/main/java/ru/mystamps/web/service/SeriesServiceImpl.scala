@@ -118,7 +118,7 @@ class SeriesServiceImpl implements SeriesService {
 	}
 	
 	private def setMichelNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set<MichelCatalog> michelNumbers =
+		Set[MichelCatalog] michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class)
 		if (!michelNumbers.isEmpty()) {
 			series.setMichel(michelNumbers)
@@ -138,7 +138,7 @@ class SeriesServiceImpl implements SeriesService {
 	}
 	
 	private def setScottNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set<ScottCatalog> scottNumbers =
+		Set[ScottCatalog] scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class)
 		if (!scottNumbers.isEmpty()) {
 			series.setScott(scottNumbers)
@@ -158,7 +158,7 @@ class SeriesServiceImpl implements SeriesService {
 	}
 	
 	private def setYvertNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set<YvertCatalog> yvertNumbers =
+		Set[YvertCatalog] yvertNumbers =
 			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class)
 		if (!yvertNumbers.isEmpty()) {
 			series.setYvert(yvertNumbers)
@@ -178,7 +178,7 @@ class SeriesServiceImpl implements SeriesService {
 	}
 	
 	private def setGibbonsNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
-		Set<GibbonsCatalog> gibbonsNumbers =
+		Set[GibbonsCatalog] gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class)
 		if (!gibbonsNumbers.isEmpty()) {
 			series.setGibbons(gibbonsNumbers)

@@ -49,7 +49,7 @@ class CronServiceImpl implements CronService {
 	override def purgeUsersActivations(): Unit = {
 		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
 		
-		List<UsersActivation> expiredActivations =
+		List[UsersActivation] expiredActivations =
 			usersActivationDao.findByCreatedAtLessThan(expiredSince)
 		
 		Validate.validState(expiredActivations != null, "Expired activations should be non null")
