@@ -419,11 +419,30 @@
 				<artifactId>scala-maven-plugin</artifactId>
 				<version>${scala.plugin.version}</version>
 				<configuration>
-					<includes>
-						<include>${basedir}/src/main/scala/**/*.scala</include>
-					</includes>
+					<!--
+					<args>
+						<arg>-deprecation</arg>
+						<arg>-unchecked</arg>
+						<arg>-explaintypes</arg>
+						<arg>-Xcheckinit</arg>
+						<arg>-Xwarninit</arg>
+						<arg>-Xstrict-warnings</arg>
+					</args>
+					-->
 				</configuration>
 				<executions>
+					<execution>
+						<id>add-scala-sources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/main/scala</source>
+							</sources>
+						</configuration>
+					</execution>
 					<execution>
 						<goals>
 							<goal>compile</goal>
