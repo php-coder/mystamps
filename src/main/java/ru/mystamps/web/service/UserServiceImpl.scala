@@ -21,24 +21,18 @@ import javax.inject.Inject
 
 import java.util.Date
 
-import org.apache.commons.lang3.RandomStringUtils
-import org.apache.commons.lang3.StringUtils
-import org.apache.commons.lang3.Validate
+import org.apache.commons.lang3.{RandomStringUtils, StringUtils, Validate}
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 import org.springframework.security.authentication.encoding.PasswordEncoder
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.UsersActivation
-import ru.mystamps.web.dao.UserDao
-import ru.mystamps.web.dao.UsersActivationDao
-import ru.mystamps.web.service.dto.ActivateAccountDto
-import ru.mystamps.web.service.dto.RegisterAccountDto
+import ru.mystamps.web.entity.{User, UsersActivation}
+import ru.mystamps.web.dao.{UserDao, UsersActivationDao}
+import ru.mystamps.web.service.dto.{ActivateAccountDto, RegisterAccountDto}
 
 @Service
 class UserServiceImpl implements UserService {

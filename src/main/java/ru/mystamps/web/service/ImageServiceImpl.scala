@@ -22,8 +22,7 @@ import java.util.Locale
 
 import javax.inject.Inject
 
-import org.apache.commons.lang3.StringUtils
-import org.apache.commons.lang3.Validate
+import org.apache.commons.lang3.{StringUtils, Validate}
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

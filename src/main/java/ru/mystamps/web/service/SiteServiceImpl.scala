@@ -21,17 +21,13 @@ import javax.inject.Inject
 
 import java.util.Date
 
-import org.apache.commons.lang3.StringUtils
-import org.apache.commons.lang3.Validate
+import org.apache.commons.lang3.{StringUtils, Validate}
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-import ru.mystamps.web.dao.SuspiciousActivityDao
-import ru.mystamps.web.dao.SuspiciousActivityTypeDao
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.SuspiciousActivity
-import ru.mystamps.web.entity.SuspiciousActivityType
+import ru.mystamps.web.dao.{SuspiciousActivityDao, SuspiciousActivityTypeDao}
+import ru.mystamps.web.entity.{User, SuspiciousActivity, SuspiciousActivityType}
 
 @Service
 class SiteServiceImpl implements SiteService {

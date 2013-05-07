@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.service
 
-import java.util.Date
-import java.util.List
+import java.util.{Date, List}
 
 import javax.inject.Inject
 
 import org.apache.commons.lang3.time.DateUtils
 import org.apache.commons.lang3.Validate
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service

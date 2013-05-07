@@ -27,8 +27,7 @@ import org.springframework.transaction.annotation.Transactional
 
 import org.apache.commons.lang3.Validate
 
-import ru.mystamps.web.entity.Country
-import ru.mystamps.web.entity.User
+import ru.mystamps.web.entity.{Country, User}
 import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.service.dto.AddCountryDto
 

@@ -17,10 +17,7 @@
  */
 package ru.mystamps.web.service
 
-import java.util.Calendar
-import java.util.Date
-import java.util.GregorianCalendar
-import java.util.Set
+import java.util.{Calendar, Date, GregorianCalendar, Set}
 
 import javax.inject.Inject
 
@@ -33,13 +30,8 @@ import static java.util.Calendar.JANUARY
 import org.apache.commons.lang3.Validate
 
 import ru.mystamps.web.dao.SeriesDao
-import ru.mystamps.web.entity.GibbonsCatalog
-import ru.mystamps.web.entity.MichelCatalog
-import ru.mystamps.web.entity.Price
-import ru.mystamps.web.entity.ScottCatalog
-import ru.mystamps.web.entity.Series
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.YvertCatalog
+import ru.mystamps.web.entity.{GibbonsCatalog, MichelCatalog, ScottCatalog, YvertCatalog}
+import ru.mystamps.web.entity.{Price, Series, User}
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.util.CatalogUtils
 
