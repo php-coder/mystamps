@@ -42,10 +42,9 @@ public class SiteServiceImpl implements SiteService {
 	@Inject
 	private SuspiciousActivityTypeDao suspiciousActivityTypes
 	
-	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
-	public void logAboutAbsentPage(
+	override public void logAboutAbsentPage(
 			String page,
 			User user,
 			String ip,
@@ -55,10 +54,9 @@ public class SiteServiceImpl implements SiteService {
 		logEvent(getAbsentPageType(), page, user, ip, referer, agent)
 	}
 	
-	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
-	public void logAboutFailedAuthentication(
+	override public void logAboutFailedAuthentication(
 			String page,
 			User user,
 			String ip,

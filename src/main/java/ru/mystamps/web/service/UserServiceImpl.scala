@@ -54,9 +54,8 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private PasswordEncoder encoder
 	
-	@Override
 	@Transactional
-	public void addRegistrationRequest(RegisterAccountDto dto) {
+	override public void addRegistrationRequest(RegisterAccountDto dto) {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null")
 		
@@ -68,17 +67,15 @@ public class UserServiceImpl implements UserService {
 		usersActivation.save(activation)
 	}
 	
-	@Override
 	@Transactional(readOnly = true)
-	public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
+	override public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null")
 		
 		return usersActivation.findOne(activationKey)
 	}
 	
-	@Override
 	@Transactional
-	public void registerUser(ActivateAccountDto dto) {
+	override public void registerUser(ActivateAccountDto dto) {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getLogin() != null, "Login should be non null")
 		Validate.isTrue(dto.getPassword() != null, "Password should be non null")
@@ -131,9 +128,8 @@ public class UserServiceImpl implements UserService {
 		)
 	}
 	
-	@Override
 	@Transactional(readOnly = true)
-	public User findByLogin(String login) {
+	override public User findByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null")
 		
 		return users.findByLogin(login)

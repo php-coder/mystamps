@@ -52,10 +52,9 @@ public class SeriesServiceImpl implements SeriesService {
 	@Inject
 	private ImageService imageService
 	
-	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Series add(AddSeriesDto dto, User user) {
+	override public Series add(AddSeriesDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO must be non null")
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null")
 		Validate.isTrue(

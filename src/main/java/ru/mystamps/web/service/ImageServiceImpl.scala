@@ -38,9 +38,8 @@ public class ImageServiceImpl implements ImageService {
 	@Inject
 	private ImageDao imageDao
 	
-	@Override
 	@Transactional
-	public String save(MultipartFile file) {
+	override public String save(MultipartFile file) {
 		Validate.isTrue(file != null, "File should be non null")
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero")
 		
