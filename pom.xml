@@ -36,6 +36,8 @@
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
 		<bootstrap.version>2.3.1</bootstrap.version>
 		
+		<scala.lang.version>2.10.1</scala.lang.version>
+		
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.5</mockito.version>
@@ -47,6 +49,7 @@
 		<jetty.port>8081</jetty.port>
 		
 		<compiler.plugin.version>3.0</compiler.plugin.version>
+		<scala.plugin.version>2.15.2</scala.plugin.version>
 		<resources.plugin.version>2.6</resources.plugin.version>
 		<war.plugin.version>2.3</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
@@ -236,6 +239,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.lang.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
@@ -403,6 +412,24 @@
 					<showWarnings>true</showWarnings>
 					<debug>false</debug>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<version>${scala.plugin.version}</version>
+				<configuration>
+					<includes>
+						<include>${basedir}/src/main/scala/**/*.scala</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>
