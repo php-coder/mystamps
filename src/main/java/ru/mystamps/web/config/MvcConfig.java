@@ -23,7 +23,6 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.repository.support.DomainClassConverter;
@@ -51,7 +50,6 @@ import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 @Configuration
 @EnableWebMvc
 @EnableScheduling
-@Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override

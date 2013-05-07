@@ -23,8 +23,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({
 	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class
+	SecurityConfig.class
 })
 public class ApplicationContext {
 }
