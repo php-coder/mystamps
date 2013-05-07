@@ -30,7 +30,7 @@ import ru.mystamps.web.dao.{SuspiciousActivityDao, SuspiciousActivityTypeDao}
 import ru.mystamps.web.entity.{User, SuspiciousActivity, SuspiciousActivityType}
 
 @Service
-class SiteServiceImpl implements SiteService {
+class SiteServiceImpl extends SiteService {
 	
 	@Inject
 	private SuspiciousActivityDao suspiciousActivities

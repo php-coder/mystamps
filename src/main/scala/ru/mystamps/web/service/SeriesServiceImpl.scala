@@ -36,7 +36,7 @@ import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.util.CatalogUtils
 
 @Service
-class SeriesServiceImpl implements SeriesService {
+class SeriesServiceImpl extends SeriesService {
 	
 	@Inject
 	private SeriesDao seriesDao

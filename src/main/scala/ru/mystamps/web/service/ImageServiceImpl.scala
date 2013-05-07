@@ -32,7 +32,7 @@ import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.entity.Image
 
 @Service
-class ImageServiceImpl implements ImageService {
+class ImageServiceImpl extends ImageService {
 	
 	@Inject
 	private ImageDao imageDao

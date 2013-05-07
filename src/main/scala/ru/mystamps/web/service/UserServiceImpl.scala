@@ -35,7 +35,7 @@ import ru.mystamps.web.dao.{UserDao, UsersActivationDao}
 import ru.mystamps.web.service.dto.{ActivateAccountDto, RegisterAccountDto}
 
 @Service
-class UserServiceImpl implements UserService {
+class UserServiceImpl extends UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class)
 	
