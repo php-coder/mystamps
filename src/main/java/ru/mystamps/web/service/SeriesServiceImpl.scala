@@ -54,7 +54,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	override public Series add(AddSeriesDto dto, User user) {
+	override def add(dto: AddSeriesDto, user: User): Series = {
 		Validate.isTrue(dto != null, "DTO must be non null")
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null")
 		Validate.isTrue(
@@ -117,7 +117,7 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.save(series)
 	}
 	
-	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private def setMichelNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class)
 		if (!michelNumbers.isEmpty()) {
@@ -125,7 +125,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setMichelPriceIfProvided(AddSeriesDto dto, Series series) {
+	private def setMichelPriceIfProvided(dto: AddSeriesDto, series: Series): Unit {
 		if (dto.getMichelPrice() == null) {
 			return
 		}
@@ -137,7 +137,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setMichelPrice(new Price(dto.getMichelPrice(), dto.getMichelCurrency()))
 	}
 	
-	private void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private def setScottNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		Set<ScottCatalog> scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class)
 		if (!scottNumbers.isEmpty()) {
@@ -145,7 +145,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setScottPriceIfProvided(AddSeriesDto dto, Series series) {
+	private def setScottPriceIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		if (dto.getScottPrice() == null) {
 			return
 		}
@@ -157,7 +157,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setScottPrice(new Price(dto.getScottPrice(), dto.getScottCurrency()))
 	}
 	
-	private void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private def setYvertNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		Set<YvertCatalog> yvertNumbers =
 			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class)
 		if (!yvertNumbers.isEmpty()) {
@@ -165,7 +165,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setYvertPriceIfProvided(AddSeriesDto dto, Series series) {
+	private def setYvertPriceIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		if (dto.getYvertPrice() == null) {
 			return
 		}
@@ -177,7 +177,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setYvertPrice(new Price(dto.getYvertPrice(), dto.getYvertCurrency()))
 	}
 	
-	private void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private def setGibbonsNumbersIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		Set<GibbonsCatalog> gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class)
 		if (!gibbonsNumbers.isEmpty()) {
@@ -185,7 +185,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setGibbonsPriceIfProvided(AddSeriesDto dto, Series series) {
+	private def setGibbonsPriceIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		if (dto.getGibbonsPrice() == null) {
 			return
 		}

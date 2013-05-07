@@ -44,35 +44,35 @@ public class SiteServiceImpl implements SiteService {
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
-	override public void logAboutAbsentPage(
-			String page,
-			User user,
-			String ip,
-			String referer,
-			String agent) {
+	override def logAboutAbsentPage(
+			page: String,
+			user: User,
+			ip: String,
+			referer: String,
+			agent: String): Unit = {
 		
 		logEvent(getAbsentPageType(), page, user, ip, referer, agent)
 	}
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
-	override public void logAboutFailedAuthentication(
-			String page,
-			User user,
-			String ip,
-			String referer,
-			String agent) {
+	override def logAboutFailedAuthentication(
+			page: String,
+			user: User,
+			ip: String,
+			referer: String,
+			agent: String): Unit = {
 		
 		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent)
 	}
 	
-	private void logEvent(
-			SuspiciousActivityType type,
-			String page,
-			User user,
-			String ip,
-			String referer,
-			String agent) {
+	private def logEvent(
+			type: SuspiciousActivityType,
+			page: String,
+			user: User,
+			ip: String,
+			referer: String,
+			agent: String): Unit = {
 		
 		Validate.isTrue(type != null, "Type of suspicious activity was not set")
 		Validate.isTrue(page != null, "Page should be non null")
@@ -91,12 +91,12 @@ public class SiteServiceImpl implements SiteService {
 		suspiciousActivities.save(activity)
 	}
 	
-	private SuspiciousActivityType getAbsentPageType() {
+	private def getAbsentPageType() : SuspiciousActivity = {
 		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("PageNotFound")
 	}
 	
-	private SuspiciousActivityType getFailedAuthenticationType() {
+	private def getFailedAuthenticationType(): SuspiciousActivityType = {
 		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("AuthenticationFailed")
 	}

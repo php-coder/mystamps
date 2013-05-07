@@ -40,7 +40,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
-	override public Country add(AddCountryDto dto, User user) {
+	override def add(dto: AddCountryDto, user: User): Country = {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getName() != null, "Country name should be non null")
 		Validate.isTrue(user != null, "Current user must be non null")
@@ -59,12 +59,12 @@ public class CountryServiceImpl implements CountryService {
 	}
 	
 	@Transactional(readOnly = true)
-	override public Iterable<Country> findAll() {
+	override def findAll(): Iterable[Country] = {
 		return countryDao.findAll()
 	}
 	
 	@Transactional(readOnly = true)
-	override public Country findByName(String name) {
+	override def findByName(name: String): Country = {
 		Validate.isTrue(name != null, "Name should be non null")
 		return countryDao.findByName(name)
 	}

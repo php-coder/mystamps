@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder encoder
 	
 	@Transactional
-	override public void addRegistrationRequest(RegisterAccountDto dto) {
+	override def addRegistrationRequest(dto: RegisterAccountDto): Unit = {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null")
 		
@@ -68,14 +68,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	override public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
+	override def findRegistrationRequestByActivationKey(activationKey: String): UsersActivation = {
 		Validate.isTrue(activationKey != null, "Activation key should be non null")
 		
 		return usersActivation.findOne(activationKey)
 	}
 	
 	@Transactional
-	override public void registerUser(ActivateAccountDto dto) {
+	override def registerUser(dto: ActivateAccountDto): Unit = {
 		Validate.isTrue(dto != null, "DTO should be non null")
 		Validate.isTrue(dto.getLogin() != null, "Login should be non null")
 		Validate.isTrue(dto.getPassword() != null, "Password should be non null")
@@ -129,7 +129,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	override public User findByLogin(String login) {
+	override def findByLogin(login: String): User = {
 		Validate.isTrue(login != null, "Login should be non null")
 		
 		return users.findByLogin(login)
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
 	 * @return string which contains numbers and letters in lower case
 	 *         in 10 characters length
 	 **/
-	private static String generateActivationKey() {
+	private def generateActivationKey(): String = {
 		int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH
 		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase()
 	}
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
 	 * Generate password salt.
 	 * @return string which contains letters and numbers in 10 characters length
 	 **/
-	private static String generateSalt() {
+	private def generateSalt(): String = {
 		return RandomStringUtils.randomAlphanumeric(User.SALT_LENGTH)
 	}
 	

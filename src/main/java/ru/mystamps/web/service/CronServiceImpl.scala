@@ -46,7 +46,7 @@ public class CronServiceImpl implements CronService {
 	
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
-	override public void purgeUsersActivations() {
+	override def purgeUsersActivations(): Unit = {
 		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
 		
 		List<UsersActivation> expiredActivations =
