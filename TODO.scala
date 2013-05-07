@@ -1,6 +1,4 @@
 
-* использовать var/val для определния переменных и констант
-
 * использовать require:
   - Validate.isTrue(dto != null, "DTO must be non null");
   + require(dto != null, "DTO must be non null")
