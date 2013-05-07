@@ -56,7 +56,7 @@ class ImageServiceImpl extends ImageService {
 		
 		try {
 			image.setData(file.getBytes())
-		} catch (IOException e) {
+		} catch (e: IOException) {
 			// throw RuntimeException for rolling back transaction
 			throw new RuntimeException(e) // NOPMD
 		}
