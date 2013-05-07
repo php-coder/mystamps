@@ -117,7 +117,7 @@ class SeriesServiceImpl extends SeriesService {
 		}
 	}
 	
-	private def setMichelPriceIfProvided(dto: AddSeriesDto, series: Series): Unit {
+	private def setMichelPriceIfProvided(dto: AddSeriesDto, series: Series): Unit = {
 		if (dto.getMichelPrice() == null) {
 			return
 		}
