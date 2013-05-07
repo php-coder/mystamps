@@ -87,7 +87,7 @@ class SiteServiceImpl extends SiteService {
 		suspiciousActivities.save(activity)
 	}
 	
-	private def getAbsentPageType() : SuspiciousActivity = {
+	private def getAbsentPageType(): SuspiciousActivity = {
 		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("PageNotFound")
 	}

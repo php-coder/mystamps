@@ -25,8 +25,6 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-import static java.util.Calendar.JANUARY
-
 import org.apache.commons.lang3.Validate
 
 import ru.mystamps.web.dao.SeriesDao
@@ -64,7 +62,7 @@ class SeriesServiceImpl extends SeriesService {
 		if (dto.getYear() != null) {
 			val releaseDate: Calendar = GregorianCalendar.getInstance()
 			releaseDate.clear()
-			releaseDate.set(dto.getYear(), JANUARY, 1)
+			releaseDate.set(dto.getYear(), Calendar.JANUARY, 1)
 			
 			series.setReleasedAt(releaseDate.getTime())
 		}
