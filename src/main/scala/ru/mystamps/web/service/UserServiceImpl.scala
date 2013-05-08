@@ -39,13 +39,13 @@ class UserServiceImpl extends UserService {
 	private val LOG: Logger = LoggerFactory.getLogger(classOf[UserService])
 	
 	@Inject
-	private var users: UserDao
+	private var users: UserDao = _
 	
 	@Inject
-	private var usersActivation: UsersActivationDao
+	private var usersActivation: UsersActivationDao = _
 	
 	@Inject
-	private var encoder: PasswordEncoder
+	private var encoder: PasswordEncoder = _
 	
 	@Transactional
 	override def addRegistrationRequest(dto: RegisterAccountDto): Unit = {
@@ -77,12 +77,7 @@ class UserServiceImpl extends UserService {
 		val login: String = dto.getLogin()
 		
 		// use login as name if name is not provided
-		val finalName: String
-		if (StringUtils.isEmpty(dto.getName())) {
-			finalName = login
-		} else {
-			finalName = dto.getName()
-		}
+		val finalName: String = if (StringUtils.isEmpty(dto.getName())) login else dto.getName()
 		
 		val activationKey: String = dto.getActivationKey()
 		val activation: UsersActivation = usersActivation.findOne(activationKey)

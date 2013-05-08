@@ -21,6 +21,8 @@ import java.util.{Date, List}
 
 import javax.inject.Inject
 
+import scala.collection.JavaConverters.asScalaBufferConverter
+
 import org.apache.commons.lang3.time.DateUtils
 import org.apache.commons.lang3.Validate
 
@@ -40,12 +42,12 @@ class CronServiceImpl extends CronService {
 	private val LOG: Logger = LoggerFactory.getLogger(classOf[CronService])
 	
 	@Inject
-	private var usersActivationDao: UsersActivationDao
+	private var usersActivationDao: UsersActivationDao = _
 	
 	@Scheduled(fixedDelay = CHECK_PERIOD)
 	@Transactional
 	override def purgeUsersActivations(): Unit = {
-		val expiredSince: Date = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS)
+		val expiredSince: Date = DateUtils.addDays(new Date(), -CronService.PURGE_AFTER_DAYS)
 		
 		val expiredActivations: List[UsersActivation] =
 			usersActivationDao.findByCreatedAtLessThan(expiredSince)
@@ -57,14 +59,14 @@ class CronServiceImpl extends CronService {
 			return
 		}
 		
-		for (activation: UsersActivation <- expiredActivations) {
-			LOG.info(
+		expiredActivations.asScala.foreach(
+			activation => LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				activation.getActivationKey(),
 				activation.getEmail(),
 				activation.getCreatedAt()
 			)
-		}
+		);
 		
 		usersActivationDao.delete(expiredActivations)
 	}

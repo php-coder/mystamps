@@ -19,6 +19,7 @@ package ru.mystamps.web.service
 
 import javax.inject.Inject
 
+import java.lang.Iterable
 import java.util.Date
 
 import org.springframework.security.access.prepost.PreAuthorize
@@ -35,7 +36,7 @@ import ru.mystamps.web.service.dto.AddCountryDto
 class CountryServiceImpl extends CountryService {
 	
 	@Inject
-	private var countryDao: CountryDao
+	private var countryDao: CountryDao = _
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")

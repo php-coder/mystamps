@@ -35,7 +35,7 @@ import ru.mystamps.web.entity.Image
 class ImageServiceImpl extends ImageService {
 	
 	@Inject
-	private var imageDao: ImageDao
+	private var imageDao: ImageDao = _
 	
 	@Transactional
 	override def save(file: MultipartFile): String = {
@@ -56,14 +56,14 @@ class ImageServiceImpl extends ImageService {
 		
 		try {
 			image.setData(file.getBytes())
-		} catch (e: IOException) {
+		} catch {
 			// throw RuntimeException for rolling back transaction
-			throw new RuntimeException(e) // NOPMD
+			case e: IOException => throw new RuntimeException(e)
 		}
 		
 		val entity: Image = imageDao.save(image)
 		
-		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()))
+		return ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()))
 	}
 	
 }

@@ -33,10 +33,10 @@ import ru.mystamps.web.entity.{User, SuspiciousActivity, SuspiciousActivityType}
 class SiteServiceImpl extends SiteService {
 	
 	@Inject
-	private var suspiciousActivities: SuspiciousActivityDao
+	private var suspiciousActivities: SuspiciousActivityDao = _
 
 	@Inject
-	private var suspiciousActivityTypes: SuspiciousActivityTypeDao
+	private var suspiciousActivityTypes: SuspiciousActivityTypeDao = _
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
@@ -87,7 +87,7 @@ class SiteServiceImpl extends SiteService {
 		suspiciousActivities.save(activity)
 	}
 	
-	private def getAbsentPageType(): SuspiciousActivity = {
+	private def getAbsentPageType(): SuspiciousActivityType = {
 		// see src/main/resources/{dev,test}/init-data.sql
 		return suspiciousActivityTypes.findByName("PageNotFound")
 	}

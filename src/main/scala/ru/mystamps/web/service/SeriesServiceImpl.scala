@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service
 
-import java.util.{Calendar, Date, GregorianCalendar, Set}
+import java.util.{Calendar, Date, Set}
 
 import javax.inject.Inject
 
@@ -37,10 +37,10 @@ import ru.mystamps.web.util.CatalogUtils
 class SeriesServiceImpl extends SeriesService {
 	
 	@Inject
-	private var seriesDao: SeriesDao
+	private var seriesDao: SeriesDao = _
 	
 	@Inject
-	private var imageService: ImageService
+	private var imageService: ImageService = _
 	
 	@Transactional
 	@PreAuthorize("hasAuthority('ROLE_USER')")
@@ -53,14 +53,14 @@ class SeriesServiceImpl extends SeriesService {
 		)
 		Validate.isTrue(user != null, "Current user must be non null")
 		
-		val series: series = new Series()
+		val series: Series = new Series()
 		
 		if (dto.getCountry() != null) {
 			series.setCountry(dto.getCountry())
 		}
 		
 		if (dto.getYear() != null) {
-			val releaseDate: Calendar = GregorianCalendar.getInstance()
+			val releaseDate: Calendar = Calendar.getInstance()
 			releaseDate.clear()
 			releaseDate.set(dto.getYear(), Calendar.JANUARY, 1)
 			
