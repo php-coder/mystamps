@@ -36,7 +36,7 @@
 		</elem:field>
 		
 		<elem:field path="perforated" label="t_perforated">
-			<form:checkbox path="perforated" />
+			<form:checkbox path="perforated" id="perforated" />
 		</elem:field>
 		
 		<spring:hasBindErrors name="addSeriesForm">
