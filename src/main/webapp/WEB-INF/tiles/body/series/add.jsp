@@ -31,7 +31,6 @@
 				cssClass="span2"
 				type="number"
 				required="required"
-				size="2"
 				min="<%= ValidationRules.MIN_STAMPS_IN_SERIES %>"
 				max="<%= ValidationRules.MAX_STAMPS_IN_SERIES %>" />
 		</elem:field>
