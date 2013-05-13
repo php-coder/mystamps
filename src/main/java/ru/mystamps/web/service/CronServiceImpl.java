@@ -29,13 +29,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
-@Service
 public class CronServiceImpl implements CronService {
 	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
 	

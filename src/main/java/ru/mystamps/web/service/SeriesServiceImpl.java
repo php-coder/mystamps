@@ -25,7 +25,6 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.Calendar.JANUARY;
@@ -43,7 +42,6 @@ import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.util.CatalogUtils;
 
-@Service
 public class SeriesServiceImpl implements SeriesService {
 	
 	@Inject

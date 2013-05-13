@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.mystamps.web.entity.User;
@@ -40,7 +39,6 @@ import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 
-@Service
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
