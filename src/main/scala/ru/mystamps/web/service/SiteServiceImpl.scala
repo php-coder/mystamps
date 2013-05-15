@@ -23,13 +23,11 @@ import java.util.Date
 
 import org.apache.commons.lang3.{StringUtils, Validate}
 
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import ru.mystamps.web.dao.{SuspiciousActivityDao, SuspiciousActivityTypeDao}
 import ru.mystamps.web.entity.{User, SuspiciousActivity, SuspiciousActivityType}
 
-@Service
 class SiteServiceImpl extends SiteService {
 	
 	@Inject

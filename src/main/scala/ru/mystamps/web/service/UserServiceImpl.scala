@@ -27,14 +27,12 @@ import org.slf4j.{Logger, LoggerFactory}
 
 import org.springframework.security.authentication.encoding.PasswordEncoder
 
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import ru.mystamps.web.entity.{User, UsersActivation}
 import ru.mystamps.web.dao.{UserDao, UsersActivationDao}
 import ru.mystamps.web.service.dto.{ActivateAccountDto, RegisterAccountDto}
 
-@Service
 class UserServiceImpl extends UserService {
 	private val LOG: Logger = LoggerFactory.getLogger(classOf[UserService])
 	

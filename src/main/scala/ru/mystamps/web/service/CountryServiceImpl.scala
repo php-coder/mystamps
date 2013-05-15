@@ -23,7 +23,6 @@ import java.lang.Iterable
 import java.util.Date
 
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import org.apache.commons.lang3.Validate
@@ -32,7 +31,6 @@ import ru.mystamps.web.entity.{Country, User}
 import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.service.dto.AddCountryDto
 
-@Service
 class CountryServiceImpl extends CountryService {
 	
 	@Inject

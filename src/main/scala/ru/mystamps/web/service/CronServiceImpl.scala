@@ -29,13 +29,11 @@ import org.apache.commons.lang3.Validate
 import org.slf4j.{Logger, LoggerFactory}
 
 import org.springframework.scheduling.annotation.Scheduled
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.UsersActivation
 
-@Service
 class CronServiceImpl extends CronService {
 	private val CHECK_PERIOD: Long = 12 * DateUtils.MILLIS_PER_HOUR
 	

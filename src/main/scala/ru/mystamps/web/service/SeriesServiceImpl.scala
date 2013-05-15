@@ -22,7 +22,6 @@ import java.util.{Calendar, Date, Set}
 import javax.inject.Inject
 
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 import org.apache.commons.lang3.Validate
@@ -33,7 +32,6 @@ import ru.mystamps.web.entity.{Price, Series, User}
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.util.CatalogUtils
 
-@Service
 class SeriesServiceImpl extends SeriesService {
 	
 	@Inject
