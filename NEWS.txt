@@ -1,3 +1,5 @@
+- ported to using Gradle for building project
+
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
 - (functionality)  added charts on page with collection
