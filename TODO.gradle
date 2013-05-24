@@ -1,18 +1,19 @@
 
 - defaultTasks 'build'
+- intergation tests
+- test/dev environment
 
-
-mvn clean
+mvn clean -> gradle clean
 mvn compile
 mvn package
 mvn verify
-mvn jetty:run
+mvn jetty:run -> gradle jettyRun
 
 mvn hibernate:hbm2ddl
 mvn checkstyle:checkstyle
 mvn pmd:check
 mvn pmd:cpd-check
-mvn javadoc:javadoc
+mvn javadoc:javadoc -> gradle javadoc
 mvn cobertura:cobertura
 
 maven enforcer plugin
