@@ -40,6 +40,7 @@ dependencies {
 	def springVersion = '3.2.2.RELEASE'
 	compile 'org.springframework:spring-tx:' + springVersion // for @Transactional
 	compile 'org.springframework:spring-web:' + springVersion // for MultipartFile
+	compile 'org.springframework:spring-webmvc:' + springVersion
 	compile 'org.springframework:spring-orm:' + springVersion // for JpaTransactionManager
 	compile 'org.springframework:spring-jdbc:' + springVersion // used only in test environment
 	
@@ -58,5 +59,16 @@ dependencies {
 	
 	// misc
 	providedCompile 'org.projectlombok:lombok:0.11.6'
+	
+	// test
+	testCompile 'junit:junit:4.10'
+	testCompile 'org.testng:testng:6.7'
+	testCompile 'org.mockito:mockito-core:1.9.5'
+	testCompile 'org.easytesting:fest-assert-core:2.0M8'
+	testCompile 'org.seleniumhq.selenium:selenium-java:2.30.0'
+	testCompile 'org.powermock:powermock-api-mockito:1.5'
+	testCompile 'org.powermock:powermock-module-junit4-rule-agent:1.5' // for PowerMockRule
+	testCompile 'org.springframework:spring-test:' + springVersion
+	
 }
 
