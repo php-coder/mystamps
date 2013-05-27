@@ -14,6 +14,12 @@ apply plugin: 'jetty'
 jettyRun.overrideWebXml = file('src/main/config/test-override-web.xml')
 jettyRunWar.overrideWebXml = file('src/main/config/test-override-web.xml')
 
+apply plugin: 'checkstyle'
+
+checkstyle {
+	configFile = file('src/main/config/checkstyle.xml')
+}
+
 processResources {
 	ant.loadproperties(
 		srcFile: file('src/main/resources/test/spring/test-data.properties')
