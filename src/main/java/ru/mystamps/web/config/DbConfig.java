@@ -72,7 +72,21 @@ public class DbConfig {
 		
 		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
 		entityManagerFactory.setDataSource(dataSource);
+		entityManagerFactory.setJpaPropertyMap(getJpaProperties());
 		
+		return entityManagerFactory;
+	}
+	
+	@Bean(name = "transactionManager")
+	public PlatformTransactionManager getTransactionManager() {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		
+		transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
+		
+		return transactionManager;
+	}
+	
+	private Map<String, String> getJpaProperties() {
 		Map<String, String> jpaProperties = new HashMap<String, String>();
 		jpaProperties.put(
 			"hibernate.format_sql",
@@ -86,18 +100,9 @@ public class DbConfig {
 			"hibernate.hbm2ddl.auto",
 			env.getRequiredProperty("hibernate.hbm2ddl.auto")
 		);
-		entityManagerFactory.setJpaPropertyMap(jpaProperties);
 		
-		return entityManagerFactory;
+		return jpaProperties;
 	}
 	
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager getTransactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		
-		transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
-		
-		return transactionManager;
-	}
 	
 }
