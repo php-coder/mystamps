@@ -604,15 +604,6 @@
 						${basedir}/src/main/config/checkstyle-suppressions.xml
 					</suppressionsLocation>
 				</configuration>
-				<executions>
-					<execution>
-						<id>run-checkstyle</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
@@ -653,17 +644,6 @@
 					</formats>
 					<skip>${skipTests}</skip>
 				</configuration>
-				<executions>
-					<execution>
-						<id>run-cobertura</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>clean</goal>
-							<goal>cobertura</goal>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
