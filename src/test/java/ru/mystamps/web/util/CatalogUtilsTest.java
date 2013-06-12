@@ -122,12 +122,12 @@ public class CatalogUtilsTest {
 	//
 	
 	@Test
-	public void fromStringShouldReturnsEmptyCollectionIfCatalogNumbersIsNull() {
+	public void fromStringShouldReturnEmptyCollectionIfCatalogNumbersIsNull() {
 		assertThat(CatalogUtils.fromString(null, MichelCatalog.class)).isEmpty();
 	}
 	
 	@Test
-	public void fromStringShouldReturnsEmptyCollectionIfCatalogNumbersIsEmpty() {
+	public void fromStringShouldReturnEmptyCollectionIfCatalogNumbersIsEmpty() {
 		assertThat(CatalogUtils.fromString("", MichelCatalog.class)).isEmpty();
 	}
 	
@@ -137,17 +137,17 @@ public class CatalogUtilsTest {
 	}
 	
 	@Test
-	public void fromStringShouldReturnsOneElementIfCatalogNumbersContainsOneNumber() {
+	public void fromStringShouldReturnOneElementIfCatalogNumbersContainsOneNumber() {
 		assertThat(CatalogUtils.fromString("1", MichelCatalog.class)).hasSize(1);
 	}
 	
 	@Test
-	public void fromStringShouldReturnsOneElementIfCatalogNumbersContainsExtraComma() {
+	public void fromStringShouldReturnOneElementIfCatalogNumbersContainsExtraComma() {
 		assertThat(CatalogUtils.fromString("1,", MichelCatalog.class)).hasSize(1);
 	}
 	
 	@Test
-	public void fromStringShouldReturnsTwoElementIfCatalogNumbersContainsTwoNumbers() {
+	public void fromStringShouldReturnTwoElementsIfCatalogNumbersContainsTwoNumbers() {
 		assertThat(CatalogUtils.fromString("1,2", MichelCatalog.class)).hasSize(2);
 	}
 	
@@ -175,28 +175,28 @@ public class CatalogUtilsTest {
 	}
 	
 	@Test
-	public void fromStringShouldReturnsSetOfMichelNumbersForAppropriateElementClass() {
+	public void fromStringShouldReturnSetOfMichelNumbersForAppropriateElementClass() {
 		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", MichelCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(MichelCatalog.class);
 		}
 	}
 	
 	@Test
-	public void fromStringShouldReturnsSetOfScottNumbersForAppropriateElementClass() {
+	public void fromStringShouldReturnSetOfScottNumbersForAppropriateElementClass() {
 		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", ScottCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(ScottCatalog.class);
 		}
 	}
 	
 	@Test
-	public void fromStringShouldReturnsSetOfYvertNumbersForAppropriateElementClass() {
+	public void fromStringShouldReturnSetOfYvertNumbersForAppropriateElementClass() {
 		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", YvertCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(YvertCatalog.class);
 		}
 	}
 	
 	@Test
-	public void fromStringShouldReturnsSetOfGibbonsNumbersForAppropriateElementClass() {
+	public void fromStringShouldReturnSetOfGibbonsNumbersForAppropriateElementClass() {
 		for (StampsCatalog catalog : CatalogUtils.fromString("1,2", GibbonsCatalog.class)) {
 			assertThat(catalog).isExactlyInstanceOf(GibbonsCatalog.class);
 		}
