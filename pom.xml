@@ -40,7 +40,6 @@
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
-		<powermock.version>1.5</powermock.version>
 		
 		<java.version>1.6</java.version>
 		
@@ -268,21 +267,6 @@
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>${fest.assert.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- PowerMock Java agent for PowerMockRule -->
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4-rule-agent</artifactId>
-			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
