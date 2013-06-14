@@ -70,12 +70,14 @@
 		<attributes>
 			<basic name="createdAt">
 				<column name="created_at" nullable="false" />
+				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<many-to-one name="createdBy" optional="false" fetch="LAZY">
 				<join-column name="created_by" nullable="false" />
 			</many-to-one>
 			<basic name="updatedAt">
 				<column name="updated_at" nullable="false" />
+				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<many-to-one name="updatedBy" optional="false" fetch="LAZY">
 				<join-column name="updated_by" nullable="false" />
@@ -145,6 +147,7 @@
 			<many-to-one name="country" />
 			<basic name="releasedAt">
 				<column name="released_at" />
+				<temporal>DATE</temporal>
 			</basic>
 			<basic name="quantity">
 				<column name="quantity" nullable="false" />

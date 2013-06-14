@@ -77,11 +77,19 @@ while read FILE; do
 					echo -n " unique=\"true\""
 				fi
 				echo " />"
+				
 				ENUM="$(echo "$ANNOTATIONS" | fgrep '@Enumerated')"
 				if [ -n "$ENUM" ]; then
 					ENUM_TYPE=$(echo "$ENUM" | sed 's|.*@Enumerated(\([^)]\+\)).*|\1|' | sed 's|EnumType\.||')
 					echo "\t\t\t\t<enumerated>$ENUM_TYPE</enumerated>"
 				fi
+				
+				TEMPORAL="$(echo "$ANNOTATIONS" | fgrep '@Temporal')"
+				if [ -n "$TEMPORAL" ]; then
+					TEMPORAL_TYPE=$(echo "$TEMPORAL" | sed 's|.*@Temporal(\([^)]\+\)).*|\1|' | sed 's|TemporalType\.||')
+					echo "\t\t\t\t<temporal>$TEMPORAL_TYPE</temporal>"
+				fi
+				
 				echo "\t\t\t</basic>"
 				continue
 			fi
