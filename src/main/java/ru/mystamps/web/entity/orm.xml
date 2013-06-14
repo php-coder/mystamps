@@ -9,6 +9,7 @@
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="SuspiciousActivity" class="ru.mystamps.web.entity.SuspiciousActivity" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -36,6 +37,7 @@
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="Image" class="ru.mystamps.web.entity.Image" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -49,6 +51,7 @@
 
 		</attributes>
 	</entity>
+	
 	<embeddable class="ru.mystamps.web.entity.MetaInfo" access="FIELD">
 		<attributes>
 			<basic name="createdAt">
@@ -65,6 +68,7 @@
 	private User updatedBy;
 		</attributes>
 	</embeddable>
+	
 	<entity name="MichelCatalog" class="ru.mystamps.web.entity.MichelCatalog" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -76,6 +80,7 @@
 			</basic>
 		</attributes>
 	</entity>
+	
 	<embeddable class="ru.mystamps.web.entity.Price" access="FIELD">
 		<attributes>
 			<basic name="value">
@@ -87,6 +92,7 @@
 			</basic>
 		</attributes>
 	</embeddable>
+	
 	<entity name="ScottCatalog" class="ru.mystamps.web.entity.ScottCatalog" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -98,6 +104,7 @@
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="Country" class="ru.mystamps.web.entity.Country" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -110,6 +117,7 @@
 			<embedded name="metaInfo" />
 		</attributes>
 	</entity>
+	
 	<entity name="Series" class="ru.mystamps.web.entity.Series" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -164,6 +172,7 @@ gibbons_currency" length="3" />
 			<embedded name="metaInfo" />
 		</attributes>
 	</entity>
+	
 	<entity name="SuspiciousActivityType" class="ru.mystamps.web.entity.SuspiciousActivityType" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -175,6 +184,7 @@ gibbons_currency" length="3" />
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="YvertCatalog" class="ru.mystamps.web.entity.YvertCatalog" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -186,6 +196,7 @@ gibbons_currency" length="3" />
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="UsersActivation" class="ru.mystamps.web.entity.UsersActivation" access="FIELD">
 		<attributes>
 			<id name="activationKey">
@@ -200,6 +211,7 @@ gibbons_currency" length="3" />
 			</basic>
 		</attributes>
 	</entity>
+	
 	<entity name="User" class="ru.mystamps.web.entity.User" access="FIELD">
 		<attributes>
 			<id name="id">
@@ -229,3 +241,4 @@ gibbons_currency" length="3" />
 			</basic>
 		</attributes>
 	</entity>
+	

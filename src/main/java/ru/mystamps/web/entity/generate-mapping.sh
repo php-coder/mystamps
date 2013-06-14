@@ -91,6 +91,7 @@ while read FILE; do
 	else
 		echo "\t</embeddable>"
 	fi
+	echo "\t"
 	
 done
 
