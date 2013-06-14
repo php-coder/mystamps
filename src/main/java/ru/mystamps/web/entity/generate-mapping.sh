@@ -87,24 +87,37 @@ while read FILE; do
 			fi
 			
 			MANY_TO_ONE=$(echo "$ANNOTATIONS" | fgrep '@ManyToOne')
-			if [ -n "$MANY_TO_ONE" ]; then
-				echo -n "\t\t\t<many-to-one name=\"$FIELD_NAME\""
+			MANY_TO_MANY=$(echo "$ANNOTATIONS" | fgrep '@ManyToMany')
+			if [ -n "$MANY_TO_ONE" -o -n "$MANY_TO_MANY" ]; then
+				if [ -n "$MANY_TO_ONE" ]; then
+					echo -n "\t\t\t<many-to-one name=\"$FIELD_NAME\""
+					MANY_TO_X="$MANY_TO_ONE"
+				else
+					echo -n "\t\t\t<many-to-many name=\"$FIELD_NAME\""
+					MANY_TO_X="$MANY_TO_MANY"
+				fi
 				
 				if [ -n "$(echo "$MANY_TO_ONE" | fgrep 'optional = false')" ]; then
 					echo -n " optional=\"false\""
 				fi
 				
-				if [ -n "$(echo "$MANY_TO_ONE" | fgrep 'fetch = FetchType.LAZY')" ]; then
-					echo -n " fetch=\"LAZY\""
+				if [ -n "$(echo "$MANY_TO_X" | fgrep 'fetch =')" ]; then
+					FETCH_TYPE="$(echo "$MANY_TO_X" | sed 's|FetchType\.||' | sed 's|.*fetch = \([A-Z]\+\).*|\1|')"
+					echo -n " fetch=\"$FETCH_TYPE\""
 				fi
 				
 				JOIN_COLUMN=$(echo "$ANNOTATIONS" | fgrep '@JoinColumn')
-				CASCADE=$(echo "$MANY_TO_ONE" | fgrep 'cascade = CascadeType.ALL')
+				CASCADE=$(echo "$MANY_TO_X" | fgrep 'cascade = CascadeType.ALL')
+				ORDER_BY=$(echo "$ANNOTATIONS" | fgrep '@OrderBy')
 				
-				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" ]; then
+				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" -o -n "$ORDER_BY" ]; then
 					echo ">"
 				else
 					echo " />"
+				fi
+				
+				if [ -n "$ORDER_BY" ]; then
+					echo "\t\t\t\t<order-by />"
 				fi
 				
 				if [ -n "$JOIN_COLUMN" ]; then
@@ -122,8 +135,12 @@ while read FILE; do
 					echo "\t\t\t\t</cascade>"
 				fi
 				
-				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" ]; then
-					echo "\t\t\t</many-to-one>"
+				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" -o -n "$ORDER_BY" ]; then
+					if [ -n "$MANY_TO_ONE" ]; then
+						echo "\t\t\t</many-to-one>"
+					else
+						echo "\t\t\t</many-to-many>"
+					fi
 				fi
 				
 				continue

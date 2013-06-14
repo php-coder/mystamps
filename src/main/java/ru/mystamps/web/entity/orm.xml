@@ -152,30 +152,42 @@
 			<basic name="perforated">
 				<column name="perforated" nullable="false" />
 			</basic>
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderBy
-	private Set<MichelCatalog> michel;
+			<many-to-many name="michel" fetch="EAGER">
+				<order-by />
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-many>
 			<basic name="michelPrice">
 				<column name="michel_price
 michel_currency" length="3" />
 			</basic>
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderBy
-	private Set<ScottCatalog> scott;
+			<many-to-many name="scott" fetch="EAGER">
+				<order-by />
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-many>
 			<basic name="scottPrice">
 				<column name="scott_price
 scott_currency" length="3" />
 			</basic>
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderBy
-	private Set<YvertCatalog> yvert;
+			<many-to-many name="yvert" fetch="EAGER">
+				<order-by />
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-many>
 			<basic name="yvertPrice">
 				<column name="yvert_price
 yvert_currency" length="3" />
 			</basic>
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderBy
-	private Set<GibbonsCatalog> gibbons;
+			<many-to-many name="gibbons" fetch="EAGER">
+				<order-by />
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-many>
 			<basic name="gibbonsPrice">
 				<column name="gibbons_price
 gibbons_currency" length="3" />
