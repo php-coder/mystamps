@@ -74,6 +74,49 @@ while read FILE; do
 				continue
 			fi
 			
+			MANY_TO_ONE=$(echo "$ANNOTATIONS" | fgrep '@ManyToOne')
+			if [ -n "$MANY_TO_ONE" ]; then
+				echo -n "\t\t\t<many-to-one name=\"$FIELD_NAME\""
+				
+				if [ -n "$(echo "$MANY_TO_ONE" | fgrep 'optional = false')" ]; then
+					echo -n " optional=\"false\""
+				fi
+				
+				if [ -n "$(echo "$MANY_TO_ONE" | fgrep 'fetch = FetchType.LAZY')" ]; then
+					echo -n " fetch=\"LAZY\""
+				fi
+				
+				JOIN_COLUMN=$(echo "$ANNOTATIONS" | fgrep '@JoinColumn')
+				CASCADE=$(echo "$MANY_TO_ONE" | fgrep 'cascade = CascadeType.ALL')
+				
+				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" ]; then
+					echo ">"
+				else
+					echo " />"
+				fi
+				
+				if [ -n "$JOIN_COLUMN" ]; then
+					JOIN_COLUMN_NAME=$(echo "$JOIN_COLUMN" | sed -n 's|.*name = "\([^"]\+\)".*|\1|p')
+					if [ -n "$(echo "$JOIN_COLUMN" | fgrep 'nullable = false')" ]; then
+						echo "\t\t\t\t<join-column name=\"$JOIN_COLUMN_NAME\" nullable=\"false\" />"
+					else
+						echo "\t\t\t\t<join-column name=\"$JOIN_COLUMN_NAME\" />"
+					fi
+				fi
+				
+				if [ -n "$CASCADE" ]; then
+					echo "\t\t\t\t<cascade>"
+					echo "\t\t\t\t\t<cascade-all />"
+					echo "\t\t\t\t</cascade>"
+				fi
+				
+				if [ -n "$JOIN_COLUMN" -o -n "$CASCADE" ]; then
+					echo "\t\t\t</many-to-one>"
+				fi
+				
+				continue
+			fi
+			
 			IS_EMBEDDED=$(echo "$ANNOTATIONS" | fgrep '@Embedded')
 			if [ -n "$IS_EMBEDDED" ]; then
 				echo "\t\t\t<embedded name=\"$FIELD_NAME\" />"

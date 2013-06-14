@@ -16,16 +16,22 @@
 				<column name="id" />
 				<generated-value />
 			</id>
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	private SuspiciousActivityType type;
+			<many-to-one name="type" optional="false">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-one>
 			<basic name="occuredAt">
 				<column name="occured_at" nullable="false" />
 			</basic>
 			<basic name="page">
 				<column name="page" length="100" nullable="false" />
 			</basic>
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;
+			<many-to-one name="user">
+				<cascade>
+					<cascade-all />
+				</cascade>
+			</many-to-one>
 			<basic name="ip">
 				<column name="ip" length="15" nullable="false" />
 			</basic>
@@ -57,15 +63,15 @@
 			<basic name="createdAt">
 				<column name="created_at" nullable="false" />
 			</basic>
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "created_by", nullable = false)
-	private User createdBy;
+			<many-to-one name="createdBy" optional="false" fetch="LAZY">
+				<join-column name="created_by" nullable="false" />
+			</many-to-one>
 			<basic name="updatedAt">
 				<column name="updated_at" nullable="false" />
 			</basic>
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "updated_by", nullable = false)
-	private User updatedBy;
+			<many-to-one name="updatedBy" optional="false" fetch="LAZY">
+				<join-column name="updated_by" nullable="false" />
+			</many-to-one>
 		</attributes>
 	</embeddable>
 	
@@ -124,8 +130,7 @@
 				<column name="id" />
 				<generated-value />
 			</id>
-	@ManyToOne
-	private Country country;
+			<many-to-one name="country" />
 			<basic name="releasedAt">
 				<column name="released_at" />
 			</basic>
