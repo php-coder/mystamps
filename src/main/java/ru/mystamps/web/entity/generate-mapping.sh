@@ -1,5 +1,13 @@
 #!/bin/sh
 
+cat <<EOF
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_0.xsd"
+	version="2.0">
+	
+EOF
+
 find . -type f -name '*.java' |
 xargs egrep -l '@(Entity|Embeddable)' |
 while read FILE; do
@@ -141,4 +149,6 @@ while read FILE; do
 	echo "\t"
 	
 done
+
+echo "</entity-mappings>"
 
