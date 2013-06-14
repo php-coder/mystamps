@@ -1,4 +1,5 @@
 	<entity name="GibbonsCatalog" class="ru.mystamps.web.entity.GibbonsCatalog" access="FIELD">
+		<table name="gibbons_catalog" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -11,6 +12,7 @@
 	</entity>
 	
 	<entity name="SuspiciousActivity" class="ru.mystamps.web.entity.SuspiciousActivity" access="FIELD">
+		<table name="suspicious_activities" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -45,6 +47,7 @@
 	</entity>
 	
 	<entity name="Image" class="ru.mystamps.web.entity.Image" access="FIELD">
+		<table name="images" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -76,6 +79,7 @@
 	</embeddable>
 	
 	<entity name="MichelCatalog" class="ru.mystamps.web.entity.MichelCatalog" access="FIELD">
+		<table name="michel_catalog" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -100,6 +104,7 @@
 	</embeddable>
 	
 	<entity name="ScottCatalog" class="ru.mystamps.web.entity.ScottCatalog" access="FIELD">
+		<table name="scott_catalog" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -112,6 +117,7 @@
 	</entity>
 	
 	<entity name="Country" class="ru.mystamps.web.entity.Country" access="FIELD">
+		<table name="countries" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -125,6 +131,7 @@
 	</entity>
 	
 	<entity name="Series" class="ru.mystamps.web.entity.Series" access="FIELD">
+		<table name="series" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -179,6 +186,7 @@ gibbons_currency" length="3" />
 	</entity>
 	
 	<entity name="SuspiciousActivityType" class="ru.mystamps.web.entity.SuspiciousActivityType" access="FIELD">
+		<table name="suspicious_activities_types" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -191,6 +199,7 @@ gibbons_currency" length="3" />
 	</entity>
 	
 	<entity name="YvertCatalog" class="ru.mystamps.web.entity.YvertCatalog" access="FIELD">
+		<table name="yvert_catalog" />
 		<attributes>
 			<id name="id">
 				<column name="id" />
@@ -203,6 +212,7 @@ gibbons_currency" length="3" />
 	</entity>
 	
 	<entity name="UsersActivation" class="ru.mystamps.web.entity.UsersActivation" access="FIELD">
+		<table name="users_activation" />
 		<attributes>
 			<id name="activationKey">
 				<column name="activationKey" />
@@ -218,6 +228,7 @@ gibbons_currency" length="3" />
 	</entity>
 	
 	<entity name="User" class="ru.mystamps.web.entity.User" access="FIELD">
+		<table name="users" />
 		<attributes>
 			<id name="id">
 				<column name="id" />

@@ -15,6 +15,10 @@ while read FILE; do
 		echo "\t<embeddable class=\"$FULL_CLASS_NAME\" access=\"FIELD\">"
 	fi
 	
+	if [ -n "$TABLE" ]; then
+		echo "\t\t<table name=\"$TABLE\" />"
+	fi
+	
 	echo "\t\t<attributes>"
 	
 	fgrep private "$FILE" | sed 's|^[\t ]\+private ||;s|;.*$||' |
