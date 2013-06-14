@@ -62,7 +62,9 @@
 				<column name="type" length="4" nullable="false" />
 				<enumerated>STRING</enumerated>
 			</basic>
-
+			<basic name="data" optional="false" fetch="LAZY">
+				<lob />
+			</basic>
 		</attributes>
 	</entity>
 	

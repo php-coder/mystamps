@@ -31,6 +31,7 @@ while read FILE; do
 	
 	fgrep private "$FILE" | sed 's|^[\t ]\+private ||;s|;.*$||' |
 		while read FIELD_TYPE FIELD_NAME; do
+			FIELD_TYPE="$(echo "$FIELD_TYPE" | sed 's|\[|\\[|;s|\]|\\]|')"
 			ANNOTATIONS=$(tac "$FILE" | sed -n "/private $FIELD_TYPE $FIELD_NAME/,/^[\t ]*$/p" | sed '$d' | tac)
 			
 			# TODO: use simple <id name="id" /> ?
@@ -42,6 +43,30 @@ while read FILE; do
 					echo "\t\t\t\t<generated-value />"
 				fi
 				echo "\t\t\t</id>"
+				continue
+			fi
+			
+			BASIC=$(echo "$ANNOTATIONS" | fgrep '@Basic')
+			if [ -n "$BASIC" ]; then
+				echo -n "\t\t\t<basic name=\"$FIELD_NAME\""
+				
+				if [ -n "$(echo "$BASIC" | fgrep 'optional = false')" ]; then
+					echo -n " optional=\"false\""
+				fi
+				
+				if [ -n "$(echo "$BASIC" | fgrep 'fetch =')" ]; then
+					FETCH_TYPE="$(echo "$BASIC" | sed 's|FetchType\.||' | sed 's|.*fetch = \([A-Z]\+\).*|\1|')"
+					echo -n " fetch=\"$FETCH_TYPE\""
+				fi
+				
+				echo ">"
+				
+				if [ -n "$(echo "$ANNOTATIONS" | fgrep '@Lob')" ]; then
+					echo "\t\t\t\t<lob />"
+				fi
+				
+				echo "\t\t\t</basic>"
+				
 				continue
 			fi
 			
