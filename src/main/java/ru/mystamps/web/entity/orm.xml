@@ -1,0 +1,231 @@
+	<entity name="GibbonsCatalog" class="ru.mystamps.web.entity.GibbonsCatalog" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="code">
+				<column name="code" length="4" unique="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="SuspiciousActivity" class="ru.mystamps.web.entity.SuspiciousActivity" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	private SuspiciousActivityType type;
+			<basic name="occuredAt">
+				<column name="occured_at" nullable="false" />
+			</basic>
+			<basic name="page">
+				<column name="page" length="100" nullable="false" />
+			</basic>
+	@ManyToOne(cascade = CascadeType.ALL)
+	private User user;
+			<basic name="ip">
+				<column name="ip" length="15" nullable="false" />
+			</basic>
+			<basic name="refererPage">
+				<column name="referer_page" nullable="false" />
+			</basic>
+			<basic name="userAgent">
+				<column name="user_agent" nullable="false" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="Image" class="ru.mystamps.web.entity.Image" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="type">
+				<column name="type" length="4" nullable="false" />
+				<enumerated>STRING</enumerated>
+			</basic>
+
+		</attributes>
+	</entity>
+	<embeddable class="ru.mystamps.web.entity.MetaInfo" access="FIELD">
+		<attributes>
+			<basic name="createdAt">
+				<column name="created_at" nullable="false" />
+			</basic>
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "created_by", nullable = false)
+	private User createdBy;
+			<basic name="updatedAt">
+				<column name="updated_at" nullable="false" />
+			</basic>
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+		</attributes>
+	</embeddable>
+	<entity name="MichelCatalog" class="ru.mystamps.web.entity.MichelCatalog" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="code">
+				<column name="code" length="4" unique="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<embeddable class="ru.mystamps.web.entity.Price" access="FIELD">
+		<attributes>
+			<basic name="value">
+				<column name="price" />
+			</basic>
+			<basic name="currency">
+				<column name="currency" length="3" />
+				<enumerated>STRING</enumerated>
+			</basic>
+		</attributes>
+	</embeddable>
+	<entity name="ScottCatalog" class="ru.mystamps.web.entity.ScottCatalog" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="code">
+				<column name="code" length="4" unique="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="Country" class="ru.mystamps.web.entity.Country" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="name">
+				<column name="name" length="50" nullable="false" unique="true" />
+			</basic>
+			<embedded name="metaInfo" />
+		</attributes>
+	</entity>
+	<entity name="Series" class="ru.mystamps.web.entity.Series" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+	@ManyToOne
+	private Country country;
+			<basic name="releasedAt">
+				<column name="released_at" />
+			</basic>
+			<basic name="quantity">
+				<column name="quantity" nullable="false" />
+			</basic>
+			<basic name="perforated">
+				<column name="perforated" nullable="false" />
+			</basic>
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy
+	private Set<MichelCatalog> michel;
+			<basic name="michelPrice">
+				<column name="michel_price
+michel_currency" length="3" />
+			</basic>
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy
+	private Set<ScottCatalog> scott;
+			<basic name="scottPrice">
+				<column name="scott_price
+scott_currency" length="3" />
+			</basic>
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy
+	private Set<YvertCatalog> yvert;
+			<basic name="yvertPrice">
+				<column name="yvert_price
+yvert_currency" length="3" />
+			</basic>
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy
+	private Set<GibbonsCatalog> gibbons;
+			<basic name="gibbonsPrice">
+				<column name="gibbons_price
+gibbons_currency" length="3" />
+			</basic>
+			<basic name="imageUrl">
+				<column name="image_url" length="255" />
+			</basic>
+			<basic name="comment">
+				<column name="comment" length="255" />
+			</basic>
+			<embedded name="metaInfo" />
+		</attributes>
+	</entity>
+	<entity name="SuspiciousActivityType" class="ru.mystamps.web.entity.SuspiciousActivityType" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="name">
+				<column name="name" length="100" nullable="false" unique="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="YvertCatalog" class="ru.mystamps.web.entity.YvertCatalog" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="code">
+				<column name="code" length="4" unique="true" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="UsersActivation" class="ru.mystamps.web.entity.UsersActivation" access="FIELD">
+		<attributes>
+			<id name="activationKey">
+				<column name="activationKey" />
+				<generated-value />
+			</id>
+			<basic name="email">
+				<column name="email" length="255" nullable="false" />
+			</basic>
+			<basic name="createdAt">
+				<column name="created_at" nullable="false" />
+			</basic>
+		</attributes>
+	</entity>
+	<entity name="User" class="ru.mystamps.web.entity.User" access="FIELD">
+		<attributes>
+			<id name="id">
+				<column name="id" />
+				<generated-value />
+			</id>
+			<basic name="login">
+				<column name="login" length="15" nullable="false" unique="true" />
+			</basic>
+			<basic name="name">
+				<column name="name" length="100" nullable="false" />
+			</basic>
+			<basic name="email">
+				<column name="email" length="255" nullable="false" />
+			</basic>
+			<basic name="registeredAt">
+				<column name="registered_at" nullable="false" />
+			</basic>
+			<basic name="activatedAt">
+				<column name="activated_at" nullable="false" />
+			</basic>
+			<basic name="hash">
+				<column name="hash" length="40" nullable="false" />
+			</basic>
+			<basic name="salt">
+				<column name="salt" length="10" nullable="false" />
+			</basic>
+		</attributes>
+	</entity>
