@@ -170,7 +170,7 @@ public class UserService {
 	
 	<rule
 		name="FieldInjectionInControllers"
-		message="Use contructor injection instead of field injection in @Controller-s"
+		message="Use constructor injection instead of field injection in @Controller-s"
 		class="net.sourceforge.pmd.lang.rule.XPathRule"
 		language="java">
 		
