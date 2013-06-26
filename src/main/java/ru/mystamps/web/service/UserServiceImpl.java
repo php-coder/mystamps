@@ -43,14 +43,20 @@ public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 	
-	@Inject
-	private UserDao users;
+	private final UserDao users;
+	private final UsersActivationDao usersActivation;
+	private final PasswordEncoder encoder;
 	
 	@Inject
-	private UsersActivationDao usersActivation;
-	
-	@Inject
-	private PasswordEncoder encoder;
+	public UserServiceImpl(
+		UserDao users,
+		UsersActivationDao usersActivation,
+		PasswordEncoder encoder) {
+		
+		this.users = users;
+		this.usersActivation = usersActivation;
+		this.encoder = encoder;
+	}
 	
 	@Override
 	@Transactional

@@ -56,7 +56,7 @@ public class ImageServiceTest {
 	private ArgumentCaptor<Image> imageCaptor;
 	
 	@InjectMocks
-	private ImageService service = new ImageServiceImpl();
+	private ImageService service = new ImageServiceImpl(imageDao);
 	
 	@Before
 	public void setUp() {

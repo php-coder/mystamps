@@ -44,11 +44,14 @@ import ru.mystamps.web.util.CatalogUtils;
 
 public class SeriesServiceImpl implements SeriesService {
 	
-	@Inject
-	private SeriesDao seriesDao;
+	private final SeriesDao seriesDao;
+	private final ImageService imageService;
 	
 	@Inject
-	private ImageService imageService;
+	public SeriesServiceImpl(SeriesDao seriesDao, ImageService imageService) {
+		this.seriesDao = seriesDao;
+		this.imageService = imageService;
+	}
 	
 	@Override
 	@Transactional

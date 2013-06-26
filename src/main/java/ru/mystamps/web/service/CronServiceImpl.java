@@ -39,8 +39,12 @@ public class CronServiceImpl implements CronService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
 	
+	private final UsersActivationDao usersActivationDao;
+	
 	@Inject
-	private UsersActivationDao usersActivationDao;
+	public CronServiceImpl(UsersActivationDao usersActivationDao) {
+		this.usersActivationDao = usersActivationDao;
+	}
 	
 	@Override
 	@Scheduled(fixedDelay = CHECK_PERIOD)

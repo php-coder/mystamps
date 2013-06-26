@@ -80,7 +80,7 @@ public class SeriesServiceTest {
 	private ArgumentCaptor<MultipartFile> multipartFileCaptor;
 	
 	@InjectMocks
-	private SeriesService service = new SeriesServiceImpl();
+	private SeriesService service = new SeriesServiceImpl(seriesDao, imageService);
 	
 	private AddSeriesForm form;
 	private User user;

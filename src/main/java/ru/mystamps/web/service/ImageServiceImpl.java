@@ -33,8 +33,12 @@ import ru.mystamps.web.entity.Image;
 
 public class ImageServiceImpl implements ImageService {
 	
+	private final ImageDao imageDao;
+	
 	@Inject
-	private ImageDao imageDao;
+	public ImageServiceImpl(ImageDao imageDao) {
+		this.imageDao = imageDao;
+	}
 	
 	@Override
 	@Transactional

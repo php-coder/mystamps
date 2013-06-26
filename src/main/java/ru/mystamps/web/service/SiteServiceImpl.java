@@ -34,11 +34,17 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 
 public class SiteServiceImpl implements SiteService {
 	
+	private final SuspiciousActivityDao suspiciousActivities;
+	private final SuspiciousActivityTypeDao suspiciousActivityTypes;
+	
 	@Inject
-	private SuspiciousActivityDao suspiciousActivities;
-
-	@Inject
-	private SuspiciousActivityTypeDao suspiciousActivityTypes;
+	public SiteServiceImpl(
+		SuspiciousActivityDao suspiciousActivities,
+		SuspiciousActivityTypeDao suspiciousActivityTypes) {
+		
+		this.suspiciousActivities = suspiciousActivities;
+		this.suspiciousActivityTypes = suspiciousActivityTypes;
+	}
 	
 	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")

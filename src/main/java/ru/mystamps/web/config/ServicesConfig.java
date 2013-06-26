@@ -17,42 +17,73 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import ru.mystamps.web.dao.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 
 @Configuration
 public class ServicesConfig {
 	
+	@Inject
+	private CountryDao countryDao;
+	
+	@Inject
+	private ImageDao imageDao;
+	
+	@Inject
+	private SecurityConfig securityConfig;
+	
+	@Inject
+	private SeriesDao seriesDao;
+	
+	@Inject
+	private SuspiciousActivityDao suspiciousActivityDao;
+	
+	@Inject
+	private SuspiciousActivityTypeDao suspiciousActivityTypeDao;
+	
+	@Inject
+	private UserDao userDao;
+	
+	@Inject
+	private UsersActivationDao usersActivationDao;
+	
 	@Bean
 	public CountryService getCountryService() {
-		return new CountryServiceImpl();
+		return new CountryServiceImpl(countryDao);
 	}
 	
 	@Bean
 	public CronService getCronService() {
-		return new CronServiceImpl();
+		return new CronServiceImpl(usersActivationDao);
 	}
 	
 	@Bean
 	public ImageService getImageService() {
-		return new ImageServiceImpl();
+		return new ImageServiceImpl(imageDao);
 	}
 	
 	@Bean
 	public SeriesService getSeriesService() {
-		return new SeriesServiceImpl();
+		return new SeriesServiceImpl(seriesDao, getImageService());
 	}
 	
 	@Bean
 	public SiteService getSiteService() {
-		return new SiteServiceImpl();
+		return new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao);
 	}
 	
 	@Bean
 	public UserService getUserService() {
-		return new UserServiceImpl();
+		return new UserServiceImpl(
+			userDao,
+			usersActivationDao,
+			securityConfig.getPasswordEncoder()
+		);
 	}
 	
 }

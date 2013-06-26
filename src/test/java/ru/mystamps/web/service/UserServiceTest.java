@@ -79,7 +79,7 @@ public class UserServiceTest {
 	private ArgumentCaptor<User> userCaptor;
 	
 	@InjectMocks
-	private UserService service = new UserServiceImpl();
+	private UserService service = new UserServiceImpl(userDao, usersActivationDao, encoder);
 	
 	private ActivateAccountForm activationForm;
 	private RegisterAccountForm registrationForm;

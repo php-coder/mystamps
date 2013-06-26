@@ -59,7 +59,8 @@ public class SiteServiceTest {
 	private ArgumentCaptor<SuspiciousActivity> activityCaptor;
 	
 	@InjectMocks
-	private SiteService service = new SiteServiceImpl();
+	private SiteService service =
+		new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao);
 	
 	//
 	// Tests for logAboutAbsentPage()

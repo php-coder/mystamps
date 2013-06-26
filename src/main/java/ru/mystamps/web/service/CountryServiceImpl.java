@@ -33,8 +33,12 @@ import ru.mystamps.web.service.dto.AddCountryDto;
 
 public class CountryServiceImpl implements CountryService {
 	
+	private final CountryDao countryDao;
+	
 	@Inject
-	private CountryDao countryDao;
+	public CountryServiceImpl(CountryDao countryDao) {
+		this.countryDao = countryDao;
+	}
 	
 	@Override
 	@Transactional

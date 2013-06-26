@@ -44,8 +44,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
+	private final UserService userService;
+	
 	@Inject
-	private UserService userService;
+	public CustomUserDetailsService(UserService userService) {
+		this.userService = userService;
+	}
 	
 	@Override
 	@Transactional(readOnly = true)

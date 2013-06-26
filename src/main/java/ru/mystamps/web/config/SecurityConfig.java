@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -37,6 +39,9 @@ import ru.mystamps.web.support.spring.security.Http401UnauthorizedEntryPoint;
 @Configuration
 @ImportResource("classpath:spring/security.xml")
 public class SecurityConfig {
+	
+	@Inject
+	private ServicesConfig servicesConfig;
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
@@ -64,7 +69,7 @@ public class SecurityConfig {
 	
 	@Bean(name = "customUserDetailsService")
 	public UserDetailsService getUserDetailsService() {
-		return new CustomUserDetailsService();
+		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
 	@Bean(name = "http401UnauthorizedEntryPoint")
