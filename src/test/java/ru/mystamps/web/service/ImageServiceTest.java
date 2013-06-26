@@ -34,6 +34,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.fail;
 
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,9 +48,6 @@ public class ImageServiceTest {
 	
 	@Mock
 	private ImageDao imageDao;
-	
-	@Mock
-	private Image image;
 	
 	@Mock
 	private MultipartFile multipartFile;
@@ -147,6 +145,7 @@ public class ImageServiceTest {
 		final Integer expectedId = 10;
 		String expectedUrl =
 			ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedId));
+		Image image = mock(Image.class);
 		when(image.getId()).thenReturn(expectedId);
 		when(imageDao.save(any(Image.class))).thenReturn(image);
 		
