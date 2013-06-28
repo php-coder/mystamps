@@ -18,6 +18,7 @@ apply plugin: 'checkstyle'
 
 checkstyle {
 	configFile = file('src/main/config/checkstyle.xml')
+	ignoreFailures = true
 }
 
 processResources {

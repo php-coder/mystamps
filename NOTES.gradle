@@ -1,0 +1,17 @@
+- checkstyle: в src/main/config/checkstyle.xml maven заменял плейсхолдер
+  ${checkstyle.cache.file} на значение по умолчанию. Т.к. gradle такой замены
+  не делает, то пришлось прописать значение вручную.
+
+- checkstyle: в checkstyle с версии 5.6 удалено правило DoubleCheckedLocking.
+  Чтобы проверка не перестала работать, я удалил запись об этой проверке из
+  конфига.
+
+  https://jira.codehaus.org/browse/MCHECKSTYLE-189
+  http://sourceforge.net/p/eclipse-cs/bugs/343/
+  http://checkstyle.sourceforge.net/releasenotes.html
+
+- checkstyle: т.к. в gradle 1.6 нет способа указать файл с настройками для
+  игнорирования ошибок, то я стал подключать его в конфигурацинный файл, с
+  помощью SuppressionFilter.
+
+

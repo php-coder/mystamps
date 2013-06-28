@@ -85,9 +85,13 @@
 
     <module name="UniqueProperties"/>
 
+    <module name="SuppressionFilter">
+        <property name="file" value="src/main/config/checkstyle-suppressions.xml"/>
+    </module>
+
     <module name="TreeWalker">
 
-        <property name="cacheFile" value="${checkstyle.cache.file}"/>
+        <property name="cacheFile" value="target/checkstyle-cachefile"/>
         <property name="tabWidth" value="4"/>
 
         <!-- Required by SuppressWithNearbyCommentFilter to make comments available to the filter -->
