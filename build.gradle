@@ -21,6 +21,15 @@ checkstyle {
 	ignoreFailures = true
 }
 
+apply plugin: 'pmd'
+
+pmd {
+	ruleSetFiles = files('src/main/config/pmd.xml')
+	ignoreFailures = true
+	toolVersion = '5.0.4'
+	targetJdk = sourceCompatibility
+}
+
 processResources {
 	ant.loadproperties(
 		srcFile: file('src/main/resources/test/spring/test-data.properties')
