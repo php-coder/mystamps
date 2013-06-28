@@ -14,4 +14,14 @@
   игнорирования ошибок, то я стал подключать его в конфигурацинный файл, с
   помощью SuppressionFilter.
 
+  http://forums.gradle.org/gradle/topics/checkstyle_plugin_allow_to_configure_suppressions_file_location
+
+- checkstyle: возможность указать версию checkstyle
+
+  http://forums.gradle.org/gradle/topics/checkstyle_plugin_add_toolversion_property
+
+- pmd: выводить сообщения в консоль
+
+  http://forums.gradle.org/gradle/topics/pmd_plugin_add_showviolations_property
+
 
