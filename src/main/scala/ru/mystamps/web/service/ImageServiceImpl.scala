@@ -45,7 +45,7 @@ class ImageServiceImpl extends ImageService {
 		
 		val extension: String = StringUtils.substringAfter(contentType, "/")
 		Validate.validState(
-			"png".equals(extension) || "jpeg".equals(extension),
+			"png" == extension || "jpeg" == extension,
 			"File type must be PNG or JPEG image"
 		)
 		
