@@ -43,8 +43,6 @@
 		<exclude name="UseConcurrentHashMap" />
 		
 		<exclude name="UseObjectForClearerAPI" />
-		<exclude name="AvoidLiteralsInIfCondition" />
-		
 	</rule>
 	
 	<!-- Workaround for bug: http://sourceforge.net/p/pmd/bugs/1022/ -->
@@ -53,17 +51,6 @@
 			<property name="violationSuppressXPath">
 				<value>
 					<![CDATA[./ancestor::MethodDeclaration[@Public="false"]]]>
-				</value>
-			</property>
-		</properties>
-	</rule>
-	
-	<!-- Workaround for bug: http://sourceforge.net/p/pmd/bugs/1014/ -->
-	<rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition">
-		<properties>
-			<property name="violationSuppressXPath">
-				<value>
-					<![CDATA[./NullLiteral]]>
 				</value>
 			</property>
 		</properties>
