@@ -72,6 +72,7 @@ public class SiteServiceImpl implements SiteService {
 		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent);
 	}
 	
+	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void logEvent(
 			SuspiciousActivityType type,
 			String page,

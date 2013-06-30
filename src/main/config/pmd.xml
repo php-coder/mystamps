@@ -41,19 +41,6 @@
 		<exclude name="OnlyOneReturn" />
 		<exclude name="DataflowAnomalyAnalysis" />
 		<exclude name="UseConcurrentHashMap" />
-		
-		<exclude name="UseObjectForClearerAPI" />
-	</rule>
-	
-	<!-- Workaround for bug: http://sourceforge.net/p/pmd/bugs/1022/ -->
-	<rule ref="rulesets/java/controversial.xml/UseObjectForClearerAPI">
-		<properties>
-			<property name="violationSuppressXPath">
-				<value>
-					<![CDATA[./ancestor::MethodDeclaration[@Public="false"]]]>
-				</value>
-			</property>
-		</properties>
 	</rule>
 	
 	<rule ref="rulesets/java/comments.xml">
