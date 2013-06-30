@@ -25,8 +25,8 @@ import org.hibernate.dialect.MySQL5InnoDBDialect;
  * Customized version of MySQL5InnoDBDialect.
  *
  * Allows to use bit type in database for boolean members.
- * @see http://stackoverflow.com/q/8667965/found-bit-expected-boolean-after-hibernate-4-upgrade
- * @see https://hibernate.atlassian.net/browse/HHH-6935
+ * @see <a href="http://stackoverflow.com/q/8667965">Question at StackOverflow</a>
+ * @see <a href="https://hibernate.atlassian.net/browse/HHH-6935">Issue in Hibernate's JIRA</a>
  **/
 public class MySql5InnoDbDialect extends MySQL5InnoDBDialect {
 	
