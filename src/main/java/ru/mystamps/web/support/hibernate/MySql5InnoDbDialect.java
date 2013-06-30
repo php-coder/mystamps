@@ -24,7 +24,8 @@ import org.hibernate.dialect.MySQL5InnoDBDialect;
 /**
  * Customized version of MySQL5InnoDBDialect.
  *
- * Allows to use bit type in database for boolean members.
+ * Allows to use {@code bit} type in database for {@code boolean} members.
+ *
  * @see <a href="http://stackoverflow.com/q/8667965">Question at StackOverflow</a>
  * @see <a href="https://hibernate.atlassian.net/browse/HHH-6935">Issue in Hibernate's JIRA</a>
  **/
