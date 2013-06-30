@@ -46,7 +46,7 @@
 		<jetty.host>127.0.0.1</jetty.host>
 		<jetty.port>8081</jetty.port>
 		
-		<compiler.plugin.version>3.0</compiler.plugin.version>
+		<compiler.plugin.version>3.1</compiler.plugin.version>
 		<resources.plugin.version>2.6</resources.plugin.version>
 		<war.plugin.version>2.3</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
