@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -55,8 +54,7 @@ public class ImageServiceTest {
 	@Captor
 	private ArgumentCaptor<Image> imageCaptor;
 	
-	@InjectMocks
-	private ImageService service = new ImageServiceImpl(imageDao);
+	private ImageService service;
 	
 	@Before
 	public void setUp() {
@@ -64,6 +62,8 @@ public class ImageServiceTest {
 		when(multipartFile.getSize()).thenReturn(anyValue);
 		when(multipartFile.getContentType()).thenReturn("image/png");
 		when(imageDao.save(any(Image.class))).thenReturn(new Image());
+		
+		service = new ImageServiceImpl(imageDao);
 	}
 	
 	//

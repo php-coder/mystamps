@@ -25,12 +25,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.time.DateUtils;
 
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -54,8 +54,12 @@ public class CronServiceTest {
 	@Captor
 	private ArgumentCaptor<Date> dateCaptor;
 	
-	@InjectMocks
-	private CronService service = new CronServiceImpl(usersActivationDao);
+	private CronService service;
+	
+	@Before
+	public void setUp() {
+		service = new CronServiceImpl(usersActivationDao);
+	}
 	
 	//
 	// Tests for purgeUsersActivations()

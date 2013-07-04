@@ -19,12 +19,12 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -58,9 +58,12 @@ public class SiteServiceTest {
 	@Captor
 	private ArgumentCaptor<SuspiciousActivity> activityCaptor;
 	
-	@InjectMocks
-	private SiteService service =
-		new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao);
+	private SiteService service;
+	
+	@Before
+	public void setUp() {
+		service = new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao);
+	}
 	
 	//
 	// Tests for logAboutAbsentPage()

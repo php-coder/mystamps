@@ -32,7 +32,6 @@ import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -79,9 +78,7 @@ public class SeriesServiceTest {
 	@Captor
 	private ArgumentCaptor<MultipartFile> multipartFileCaptor;
 	
-	@InjectMocks
-	private SeriesService service = new SeriesServiceImpl(seriesDao, imageService);
-	
+	private SeriesService service;
 	private AddSeriesForm form;
 	private User user;
 	
@@ -94,6 +91,8 @@ public class SeriesServiceTest {
 		user = UserServiceTest.getValidUser();
 		
 		when(imageService.save(any(MultipartFile.class))).thenReturn("/fake/path/to/image");
+		
+		service = new SeriesServiceImpl(seriesDao, imageService);
 	}
 	
 	//

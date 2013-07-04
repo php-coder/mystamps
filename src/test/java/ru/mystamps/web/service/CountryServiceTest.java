@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -58,9 +57,7 @@ public class CountryServiceTest {
 	@Captor
 	private ArgumentCaptor<Country> countryCaptor;
 	
-	@InjectMocks
-	private CountryService service = new CountryServiceImpl(countryDao);
-	
+	private CountryService service;
 	private AddCountryForm form;
 	private User user;
 	
@@ -70,6 +67,8 @@ public class CountryServiceTest {
 		form.setName(TEST_COUNTRY_NAME);
 		
 		user = UserServiceTest.getValidUser();
+		
+		service = new CountryServiceImpl(countryDao);
 	}
 	
 	//

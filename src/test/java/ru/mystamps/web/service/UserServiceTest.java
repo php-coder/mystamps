@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -78,9 +77,7 @@ public class UserServiceTest {
 	@Captor
 	private ArgumentCaptor<User> userCaptor;
 	
-	@InjectMocks
-	private UserService service = new UserServiceImpl(userDao, usersActivationDao, encoder);
-	
+	private UserService service;
 	private ActivateAccountForm activationForm;
 	private RegisterAccountForm registrationForm;
 	
@@ -97,6 +94,8 @@ public class UserServiceTest {
 		activationForm.setPassword(TEST_PASSWORD);
 		activationForm.setName(TEST_NAME);
 		activationForm.setActivationKey(TEST_ACTIVATION_KEY);
+		
+		service = new UserServiceImpl(userDao, usersActivationDao, encoder);
 	}
 	
 	//
