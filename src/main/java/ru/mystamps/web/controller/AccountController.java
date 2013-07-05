@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,7 @@ import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
 
+@Controller
 public class AccountController {
 	
 	private final UserService userService;

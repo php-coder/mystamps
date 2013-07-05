@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
+@Controller
 @RequestMapping(Url.NOT_FOUND_PAGE)
 public class NotFoundErrorController {
 	private static final Logger LOG = LoggerFactory.getLogger(NotFoundErrorController.class);

@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
 
+@Controller
 public class ImageController {
 	
 	@RequestMapping(value = Url.GET_IMAGE_PAGE, method = RequestMethod.GET)
