@@ -502,6 +502,12 @@
 							${basedir}/src/main/config/test-override-web.xml
 						</overrideDescriptor>
 					</webAppConfig>
+					<systemProperties>
+						<systemProperty>
+							<name>log4j.configuration</name>
+							<value>file:///${env.dir}/log4j.properties</value>
+						</systemProperty>
+					</systemProperties>
 					<skip>${skipTests}</skip>
 				</configuration>
 				<executions>
