@@ -10,3 +10,5 @@
 
 * использовать Option
 
+* `ensuring` is used on a method's return value to check post-conditions
+
