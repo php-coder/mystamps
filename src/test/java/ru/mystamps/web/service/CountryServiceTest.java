@@ -169,7 +169,7 @@ public class CountryServiceTest {
 		expectedCountries.add(country1);
 		
 		Country country2 = getCountry();
-		country1.setName("Second Country");
+		country2.setName("Second Country");
 		expectedCountries.add(country2);
 		
 		when(countryDao.findAll()).thenReturn(expectedCountries);
