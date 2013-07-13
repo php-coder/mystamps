@@ -1,0 +1,88 @@
+/*
+ * Copyright (C) 2009-2013 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+package ru.mystamps.web.service
+
+import spock.lang.Specification
+
+import ru.mystamps.web.dao.UsersActivationDao
+import ru.mystamps.web.entity.UsersActivation
+import ru.mystamps.web.tests.DateUtils
+
+public class CronServiceTest extends Specification {
+	
+	private UsersActivationDao usersActivationDao = Mock()
+	
+	private CronService service = new CronServiceImpl(usersActivationDao)
+	
+	//
+	// Tests for purgeUsersActivations()
+	//
+	
+	def "purgeUsersActivations() should get expired activations from dao"() {
+		when:
+			service.purgeUsersActivations()
+		then:
+			1 * usersActivationDao.findByCreatedAtLessThan(_ as Date) >> Collections.<UsersActivation>emptyList()
+	}
+	
+	def "purgeUsersActivations() should pass expired date to dao"() {
+		when:
+			service.purgeUsersActivations()
+		then:
+			1 * usersActivationDao.findByCreatedAtLessThan({ Date passedDate ->
+				Calendar expectedDate = new GregorianCalendar()
+				expectedDate.setTime(new Date())
+				expectedDate.add(Calendar.DAY_OF_MONTH, -(CronService.PURGE_AFTER_DAYS))
+
+				assert DateUtils.roughlyEqual(passedDate, expectedDate.getTime())
+				
+				return true
+			}) >> Collections.<UsersActivation>emptyList()
+	}
+	
+	def "purgeUsersActivations() should throw exception when null activations was returned"() {
+		given:
+			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> null
+		when:
+			service.purgeUsersActivations()
+		then:
+			thrown IllegalStateException
+	}
+	
+	def "purgeUsersActivations() should delete expired activations"() {
+		given:
+			List<UsersActivation> expectedActivations =
+				Collections.singletonList(TestObjects.createUsersActivation())
+			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> expectedActivations
+		when:
+			service.purgeUsersActivations()
+		then:
+			1 * usersActivationDao.delete(expectedActivations)
+	}
+	
+	def "purgeUsersActivations() should do nothing if no activations"() {
+		given:
+			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> Collections.<UsersActivation>emptyList()
+		when:		
+			service.purgeUsersActivations()
+		then:
+			0 * usersActivationDao.delete(_ as Iterable)
+	}
+	
+}
+
