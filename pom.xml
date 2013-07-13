@@ -39,6 +39,8 @@
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.5</mockito.version>
+		<spock.version>0.7-groovy-2.0</spock.version>
+		<groovy.version>2.0.8</groovy.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		
 		<java.version>1.6</java.version>
@@ -52,6 +54,8 @@
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<tomcat.plugin.version>1.1</tomcat.plugin.version>
 		<surefire.plugin.version>2.15</surefire.plugin.version>
+		<gmaven.plugin.version>1.4</gmaven.plugin.version>
+		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		<failsafe.plugin.version>2.15</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.8.v20121106</jetty.plugin.version>
 		<hibernate.plugin.version>3.0</hibernate.plugin.version>
@@ -264,6 +268,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>${fest.assert.version}</version>
@@ -455,6 +466,41 @@
 					<testNGArtifactName>none:none</testNGArtifactName>
 					<skipTests>${skipTests}</skipTests>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>${gmaven.plugin.version}</version>
+				<configuration>
+					<providerSelection>2.0</providerSelection>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.gmaven.runtime</groupId>
+						<artifactId>gmaven-runtime-2.0</artifactId>
+						<version>${gmaven.runtime.plugin.version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.codehaus.groovy</groupId>
+								<artifactId>groovy-all</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.groovy</groupId>
+						<artifactId>groovy-all</artifactId>
+						<version>${groovy.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>
