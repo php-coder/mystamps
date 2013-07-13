@@ -40,6 +40,7 @@
 		<junit.version>4.10</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<spock.version>0.7-groovy-2.0</spock.version>
+		<cglib.version>2.2.2</cglib.version>
 		<groovy.version>2.0.8</groovy.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		
@@ -271,6 +272,14 @@
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
 			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- For mocking of non-interface types -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
