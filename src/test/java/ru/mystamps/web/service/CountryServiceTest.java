@@ -64,7 +64,7 @@ public class CountryServiceTest {
 	@Before
 	public void setUp() {
 		form = new AddCountryForm();
-		form.setName(TEST_COUNTRY_NAME);
+		form.setName("Any country name");
 		
 		user = UserServiceTest.getValidUser();
 		
@@ -193,16 +193,16 @@ public class CountryServiceTest {
 		Country expectedCountry = getCountry();
 		when(countryDao.findByName(anyString())).thenReturn(expectedCountry);
 		
-		Country country = service.findByName(TEST_COUNTRY_NAME);
+		Country country = service.findByName("Any name here");
 		
 		assertThat(country).isEqualTo(expectedCountry);
 	}
 	
 	@Test
 	public void findByNameShouldPassCountryNameToDao() {
-		service.findByName(TEST_COUNTRY_NAME);
+		service.findByName("Canada");
 		
-		verify(countryDao).findByName(eq(TEST_COUNTRY_NAME));
+		verify(countryDao).findByName(eq("Canada"));
 	}
 	
 	static Country getCountry() {
