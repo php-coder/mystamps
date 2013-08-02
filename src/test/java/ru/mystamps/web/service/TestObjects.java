@@ -1,0 +1,42 @@
+/*
+ * Copyright (C) 2009-2013 Slava Semushin <slava.semushin@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+package ru.mystamps.web.service;
+
+import java.util.Date;
+
+import ru.mystamps.web.entity.Country;
+
+final class TestObjects {
+	
+	private static final Integer TEST_COUNTRY_ID = 1;
+	private static final String TEST_COUNTRY_NAME = "Somewhere";
+	
+	private TestObjects() {
+	}
+	
+	public static Country createCountry() {
+		Country country = new Country();
+		country.setId(TEST_COUNTRY_ID);
+		country.setName(TEST_COUNTRY_NAME);
+		Date now = new Date();
+		country.getMetaInfo().setCreatedAt(now);
+		country.getMetaInfo().setUpdatedAt(now);
+		return country;
+	}
+	
+}

@@ -132,7 +132,7 @@ public class SeriesServiceTest {
 	
 	@Test
 	public void addShouldLoadAndPassCountryToSeriesDaoIfCountryPresent() {
-		Country expectedCountry = CountryServiceTest.getCountry();
+		Country expectedCountry = TestObjects.createCountry();
 		
 		form.setCountry(expectedCountry);
 		

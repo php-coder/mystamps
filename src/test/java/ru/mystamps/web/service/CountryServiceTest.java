@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +46,6 @@ import ru.mystamps.web.tests.fest.DateAssert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CountryServiceTest {
-	
-	private static final Integer TEST_COUNTRY_ID = 1;
-	private static final String TEST_COUNTRY_NAME = "Somewhere";
 	
 	@Mock
 	private CountryDao countryDao;
@@ -94,7 +90,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void addShouldCallDao() {
-		Country expected = getCountry();
+		Country expected = TestObjects.createCountry();
 		when(countryDao.save(any(Country.class))).thenReturn(expected);
 		
 		Country actual = service.add(form, user);
@@ -164,11 +160,11 @@ public class CountryServiceTest {
 	public void findAllShouldCallDao() {
 		List<Country> expectedCountries = new ArrayList<Country>();
 		
-		Country country1 = getCountry();
+		Country country1 = TestObjects.createCountry();
 		country1.setName("First Country");
 		expectedCountries.add(country1);
 		
-		Country country2 = getCountry();
+		Country country2 = TestObjects.createCountry();
 		country2.setName("Second Country");
 		expectedCountries.add(country2);
 		
@@ -190,7 +186,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void findByNameShouldCallDao() {
-		Country expectedCountry = getCountry();
+		Country expectedCountry = TestObjects.createCountry();
 		when(countryDao.findByName(anyString())).thenReturn(expectedCountry);
 		
 		Country country = service.findByName("Any name here");
@@ -203,16 +199,6 @@ public class CountryServiceTest {
 		service.findByName("Canada");
 		
 		verify(countryDao).findByName(eq("Canada"));
-	}
-	
-	static Country getCountry() {
-		Country country = new Country();
-		country.setId(TEST_COUNTRY_ID);
-		country.setName(TEST_COUNTRY_NAME);
-		Date now = new Date();
-		country.getMetaInfo().setCreatedAt(now);
-		country.getMetaInfo().setUpdatedAt(now);
-		return country;
 	}
 	
 }
