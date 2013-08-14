@@ -20,11 +20,15 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.UsersActivation;
 
 final class TestObjects {
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
 	private static final String TEST_COUNTRY_NAME = "Somewhere";
+	
+	private static final String TEST_EMAIL          = "test@example.org";
+	private static final String TEST_ACTIVATION_KEY = "1234567890";
 	
 	private TestObjects() {
 	}
@@ -37,6 +41,14 @@ final class TestObjects {
 		country.getMetaInfo().setCreatedAt(now);
 		country.getMetaInfo().setUpdatedAt(now);
 		return country;
+	}
+	
+	public static UsersActivation createUsersActivation() {
+		UsersActivation activation = new UsersActivation();
+		activation.setActivationKey(TEST_ACTIVATION_KEY);
+		activation.setEmail(TEST_EMAIL);
+		activation.setCreatedAt(new Date());
+		return activation;
 	}
 	
 }

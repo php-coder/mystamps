@@ -105,7 +105,7 @@ public class CronServiceTest {
 	@Test
 	public void purgeUsersActivationsShouldDeleteExpiredActivations() {
 		List<UsersActivation> expectedActivations =
-			Collections.singletonList(UserServiceTest.getUsersActivation());
+			Collections.singletonList(TestObjects.createUsersActivation());
 		when(usersActivationDao.findByCreatedAtLessThan(any(Date.class)))
 			.thenReturn(expectedActivations);
 		

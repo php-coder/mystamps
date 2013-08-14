@@ -60,7 +60,6 @@ public class UserServiceTest {
 	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
 	
 	private static final String TEST_EMAIL          = "test@example.org";
-	private static final String TEST_ACTIVATION_KEY = "1234567890";
 	
 	@Mock
 	private UserDao userDao;
@@ -85,7 +84,7 @@ public class UserServiceTest {
 	public void setUp() {
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
 		
-		UsersActivation activation = getUsersActivation();
+		UsersActivation activation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		registrationForm = new RegisterAccountForm();
@@ -180,7 +179,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldCallDao() {
-		UsersActivation expectedActivation = getUsersActivation();
+		UsersActivation expectedActivation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(expectedActivation);
 		
 		UsersActivation activation =
@@ -214,7 +213,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldDeleteRegistrationRequest() {
-		UsersActivation activation = getUsersActivation();
+		UsersActivation activation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -272,7 +271,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldUseEmailFromRegistrationRequest() {
-		UsersActivation activation = getUsersActivation();
+		UsersActivation activation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -284,7 +283,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldUseRegistrationDateFromRegistrationRequest() {
-		UsersActivation activation = getUsersActivation();
+		UsersActivation activation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		service.registerUser(activationForm);
@@ -410,14 +409,6 @@ public class UserServiceTest {
 		user.setSalt(TEST_SALT);
 		
 		return user;
-	}
-	
-	static UsersActivation getUsersActivation() {
-		UsersActivation activation = new UsersActivation();
-		activation.setActivationKey(TEST_ACTIVATION_KEY);
-		activation.setEmail(TEST_EMAIL);
-		activation.setCreatedAt(new Date());
-		return activation;
 	}
 	
 }
