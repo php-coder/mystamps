@@ -84,16 +84,18 @@ public class UserServiceTest {
 	@Before
 	public void setUp() {
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
-		when(usersActivationDao.findOne(anyString())).thenReturn(getUsersActivation());
+		
+		UsersActivation activation = getUsersActivation();
+		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
 		
 		registrationForm = new RegisterAccountForm();
-		registrationForm.setEmail(TEST_EMAIL);
+		registrationForm.setEmail("john.dou@example.org");
 		
 		activationForm = new ActivateAccountForm();
 		activationForm.setLogin(TEST_LOGIN);
 		activationForm.setPassword(TEST_PASSWORD);
 		activationForm.setName(TEST_NAME);
-		activationForm.setActivationKey(TEST_ACTIVATION_KEY);
+		activationForm.setActivationKey(activation.getActivationKey());
 		
 		service = new UserServiceImpl(userDao, usersActivationDao, encoder);
 	}
@@ -182,7 +184,7 @@ public class UserServiceTest {
 		when(usersActivationDao.findOne(anyString())).thenReturn(expectedActivation);
 		
 		UsersActivation activation =
-			service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
+			service.findRegistrationRequestByActivationKey(expectedActivation.getActivationKey());
 		
 		assertThat(activation).isEqualTo(expectedActivation);
 	}
@@ -190,8 +192,8 @@ public class UserServiceTest {
 	
 	@Test
 	public void findRegistrationRequestByActivationKeyShouldPassActivationKeyToDao() {
-		service.findRegistrationRequestByActivationKey(TEST_ACTIVATION_KEY);
-		verify(usersActivationDao).findOne(TEST_ACTIVATION_KEY);
+		service.findRegistrationRequestByActivationKey("0987654321");
+		verify(usersActivationDao).findOne("0987654321");
 	}
 	
 	//
