@@ -59,4 +59,11 @@ final class TestObjects {
 		return type;
 	}
 	
+	public static SuspiciousActivityType createAuthFailedActivityType() {
+		SuspiciousActivityType type = new SuspiciousActivityType();
+		type.setId(2);
+		type.setName("AuthenticationFailed");
+		return type;
+	}
+	
 }

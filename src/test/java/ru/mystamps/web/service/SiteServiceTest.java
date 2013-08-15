@@ -233,7 +233,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldCallDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -249,7 +250,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassActivityTypeToDao() {
-		SuspiciousActivityType expectedType = getAuthFailedType();
+		SuspiciousActivityType expectedType = TestObjects.createAuthFailedActivityType();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(expectedType);
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
@@ -261,7 +262,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldAssignOccuredAtToCurrentDate() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -272,14 +274,16 @@ public class SiteServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void logAboutFailedAuthenticationShouldThrowExceptionWhenPageIsNull() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(null, null, null, null, null);
 	}
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassPageToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -290,7 +294,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassNullToDaoForUnknownUser() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -302,7 +307,8 @@ public class SiteServiceTest {
 	@Test
 	public void logAboutFailedAuthenticationShouldPassUserToDao() {
 		User user = getUser();
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null);
 		
@@ -313,7 +319,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassIpToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, TEST_IP, null, null);
 		
@@ -324,7 +331,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassEmptyStringToDaoForUnknownIp() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -335,7 +343,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassRefererToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, TEST_REFERER_PAGE, null);
 		
@@ -346,7 +355,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassEmptyStringToDaoForUnknownReferer() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
@@ -357,7 +367,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassUserAgentToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, TEST_USER_AGENT);
 		
@@ -368,20 +379,14 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassEmptyStringToDaoForUnknownUserAgent() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getAuthFailedType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
 		service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null);
 		
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEmpty();
-	}
-	
-	private SuspiciousActivityType getAuthFailedType() {
-		SuspiciousActivityType type = new SuspiciousActivityType();
-		type.setId(2);
-		type.setName("AuthenticationFailed");
-		return type;
 	}
 	
 	private User getUser() {
