@@ -71,7 +71,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldCallDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -87,7 +88,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassActivityTypeToDao() {
-		SuspiciousActivityType expectedType = getPageNotFoundType();
+		SuspiciousActivityType expectedType = TestObjects.createPageNotFoundActivityType();
 		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(expectedType);
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
@@ -99,7 +100,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldAssignOccuredAtToCurrentDate() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -110,14 +112,16 @@ public class SiteServiceTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void logAboutAbsentPageShouldThrowExceptionWhenPageIsNull() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(null, null, null, null, null);
 	}
 	
 	@Test
 	public void logAboutAbsentPageShouldPassPageToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -128,7 +132,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassNullToDaoForUnknownUser() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -140,7 +145,8 @@ public class SiteServiceTest {
 	@Test
 	public void logAboutAbsentPageShouldPassUserToDao() {
 		User user = getUser();
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, user, null, null, null);
 		
@@ -151,7 +157,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassIpToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, TEST_IP, null, null);
 		
@@ -162,7 +169,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassEmptyStringToDaoForUnknownIp() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -173,7 +181,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassRefererToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, TEST_REFERER_PAGE, null);
 		
@@ -184,7 +193,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassEmptyStringToDaoForUnknownReferer() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -195,7 +205,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassUserAgentToDao() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, TEST_USER_AGENT);
 		
@@ -206,7 +217,8 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassEmptyStringToDaoForUnknownUserAgent() {
-		when(suspiciousActivityTypeDao.findByName(anyString())).thenReturn(getPageNotFoundType());
+		when(suspiciousActivityTypeDao.findByName(anyString()))
+			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
 		service.logAboutAbsentPage(TEST_PAGE, null, null, null, null);
 		
@@ -363,13 +375,6 @@ public class SiteServiceTest {
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEmpty();
-	}
-	
-	private SuspiciousActivityType getPageNotFoundType() {
-		SuspiciousActivityType type = new SuspiciousActivityType();
-		type.setId(1);
-		type.setName("PageNotFound");
-		return type;
 	}
 	
 	private SuspiciousActivityType getAuthFailedType() {

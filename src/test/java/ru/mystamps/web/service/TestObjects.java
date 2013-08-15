@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.UsersActivation;
 
 final class TestObjects {
@@ -49,6 +50,13 @@ final class TestObjects {
 		activation.setEmail(TEST_EMAIL);
 		activation.setCreatedAt(new Date());
 		return activation;
+	}
+	
+	public static SuspiciousActivityType createPageNotFoundActivityType() {
+		SuspiciousActivityType type = new SuspiciousActivityType();
+		type.setId(1);
+		type.setName("PageNotFound");
+		return type;
 	}
 	
 }
