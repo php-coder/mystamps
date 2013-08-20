@@ -82,7 +82,9 @@ public class UserServiceTest {
 	
 	@Before
 	public void setUp() {
-		when(encoder.encodePassword(anyString(), anyString())).thenReturn(TEST_HASH);
+		User user = getValidUser();
+		
+		when(encoder.encodePassword(anyString(), anyString())).thenReturn(user.getHash());
 		
 		UsersActivation activation = TestObjects.createUsersActivation();
 		when(usersActivationDao.findOne(anyString())).thenReturn(activation);
@@ -91,9 +93,9 @@ public class UserServiceTest {
 		registrationForm.setEmail("john.dou@example.org");
 		
 		activationForm = new ActivateAccountForm();
-		activationForm.setLogin(TEST_LOGIN);
+		activationForm.setLogin(user.getLogin());
 		activationForm.setPassword(TEST_PASSWORD);
-		activationForm.setName(TEST_NAME);
+		activationForm.setName(user.getName());
 		activationForm.setActivationKey(activation.getActivationKey());
 		
 		service = new UserServiceImpl(userDao, usersActivationDao, encoder);
@@ -240,33 +242,37 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassNameToDao() {
+		String expectedUserName = activationForm.getName();
+		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_NAME);
+		assertThat(userCaptor.getValue().getName()).isEqualTo(expectedUserName);
 	}
 	
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsNull() {
+		String expectedUserLogin = activationForm.getLogin();
 		activationForm.setName(null);
 		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_LOGIN);
+		assertThat(userCaptor.getValue().getName()).isEqualTo(expectedUserLogin);
 	}
 	
 	@Test
 	public void registerUserShouldPassLoginInsteadOfNameWhenNameIsEmpty() {
+		String expectedUserLogin = activationForm.getLogin();
 		activationForm.setName("");
 		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getName()).isEqualTo(TEST_LOGIN);
+		assertThat(userCaptor.getValue().getName()).isEqualTo(expectedUserLogin);
 	}
 	
 	@Test
@@ -326,7 +332,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldGetsHashFromEncoder() {
-		String expectedHash = TEST_HASH;
+		String expectedHash = getValidUser().getHash();
 		
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
 		
@@ -355,11 +361,13 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldPassLoginToDao() {
+		String expectedUserLogin = activationForm.getLogin();
+		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
 		
-		assertThat(userCaptor.getValue().getLogin()).isEqualTo(TEST_LOGIN);
+		assertThat(userCaptor.getValue().getLogin()).isEqualTo(expectedUserLogin);
 	}
 	
 	@Test
@@ -385,15 +393,16 @@ public class UserServiceTest {
 		User expectedUser = getValidUser();
 		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
 		
-		User user = service.findByLogin(TEST_LOGIN);
+		User user = service.findByLogin("any-login");
 		
 		assertThat(user).isEqualTo(expectedUser);
 	}
 	
 	@Test
 	public void findByLoginShouldPassLoginToDao() {
-		service.findByLogin(TEST_LOGIN);
-		verify(userDao).findByLogin(TEST_LOGIN);
+		service.findByLogin("john");
+		
+		verify(userDao).findByLogin("john");
 	}
 	
 	static User getValidUser() {
