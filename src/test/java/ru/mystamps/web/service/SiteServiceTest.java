@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -144,7 +142,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutAbsentPageShouldPassUserToDao() {
-		User user = getUser();
+		User user = TestObjects.createUser();
 		when(suspiciousActivityTypeDao.findByName(anyString()))
 			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
@@ -306,7 +304,7 @@ public class SiteServiceTest {
 	
 	@Test
 	public void logAboutFailedAuthenticationShouldPassUserToDao() {
-		User user = getUser();
+		User user = TestObjects.createUser();
 		when(suspiciousActivityTypeDao.findByName(anyString()))
 			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
@@ -387,21 +385,6 @@ public class SiteServiceTest {
 		verify(suspiciousActivityDao).save(activityCaptor.capture());
 		
 		assertThat(activityCaptor.getValue().getUserAgent()).isEmpty();
-	}
-	
-	private User getUser() {
-		final Integer anyId = 777;
-		User user = new User();
-		user.setId(anyId);
-		user.setLogin("test");
-		user.setName("Test Name");
-		user.setEmail("test@example.org");
-		user.setRegisteredAt(new Date());
-		user.setActivatedAt(new Date());
-		user.setHash("da00ec2e6ff9ed4d342b24a16e262c82f3c8b10b");
-		user.setSalt("salt");
-		
-		return user;
 	}
 	
 }
