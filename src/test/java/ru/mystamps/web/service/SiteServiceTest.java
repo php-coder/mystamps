@@ -97,7 +97,7 @@ public class SiteServiceTest {
 	}
 	
 	@Test
-	public void logAboutAbsentPageShouldAssignOccuredAtToCurrentDate() {
+	public void logAboutAbsentPageShouldAssignOccurredAtToCurrentDate() {
 		when(suspiciousActivityTypeDao.findByName(anyString()))
 			.thenReturn(TestObjects.createPageNotFoundActivityType());
 		
@@ -259,7 +259,7 @@ public class SiteServiceTest {
 	}
 	
 	@Test
-	public void logAboutFailedAuthenticationShouldAssignOccuredAtToCurrentDate() {
+	public void logAboutFailedAuthenticationShouldAssignOccurredAtToCurrentDate() {
 		when(suspiciousActivityTypeDao.findByName(anyString()))
 			.thenReturn(TestObjects.createAuthFailedActivityType());
 		
