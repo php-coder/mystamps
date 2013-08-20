@@ -25,6 +25,8 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 
 final class TestObjects {
+
+	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
 	private static final String TEST_COUNTRY_NAME = "Somewhere";
@@ -35,7 +37,6 @@ final class TestObjects {
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
 	private static final String TEST_SALT           = "salt";
-	protected static final String TEST_PASSWORD     = "secret";
 
 	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
 	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
