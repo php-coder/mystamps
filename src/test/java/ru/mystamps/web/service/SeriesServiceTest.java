@@ -88,7 +88,7 @@ public class SeriesServiceTest {
 		form.setQuantity(2);
 		form.setPerforated(false);
 		
-		user = UserServiceTest.getValidUser();
+		user = TestObjects.createUser();
 		
 		when(imageService.save(any(MultipartFile.class))).thenReturn("/fake/path/to/image");
 		

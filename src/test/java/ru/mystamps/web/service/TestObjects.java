@@ -21,6 +21,7 @@ import java.util.Date;
 
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.SuspiciousActivityType;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 
 final class TestObjects {
@@ -30,7 +31,15 @@ final class TestObjects {
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
-	
+
+	private static final String TEST_NAME           = "Test Name";
+	private static final String TEST_LOGIN          = "test";
+	private static final String TEST_SALT           = "salt";
+	protected static final String TEST_PASSWORD     = "secret";
+
+	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
+	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
+
 	private TestObjects() {
 	}
 	
@@ -50,6 +59,21 @@ final class TestObjects {
 		activation.setEmail(TEST_EMAIL);
 		activation.setCreatedAt(new Date());
 		return activation;
+	}
+	
+	public static User createUser() {
+		final Integer anyId = 777;
+		User user = new User();
+		user.setId(anyId);
+		user.setLogin(TEST_LOGIN);
+		user.setName(TEST_NAME);
+		user.setEmail(TEST_EMAIL);
+		user.setRegisteredAt(new Date());
+		user.setActivatedAt(new Date());
+		user.setHash(TEST_HASH);
+		user.setSalt(TEST_SALT);
+
+		return user;
 	}
 	
 	public static SuspiciousActivityType createPageNotFoundActivityType() {

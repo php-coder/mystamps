@@ -62,7 +62,7 @@ public class CountryServiceTest {
 		form = new AddCountryForm();
 		form.setName("Any country name");
 		
-		user = UserServiceTest.getValidUser();
+		user = TestObjects.createUser();
 		
 		service = new CountryServiceImpl(countryDao);
 	}

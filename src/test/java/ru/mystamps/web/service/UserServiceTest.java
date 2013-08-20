@@ -51,16 +51,6 @@ import ru.mystamps.web.tests.fest.DateAssert;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 	
-	private static final String TEST_NAME           = "Test Name";
-	private static final String TEST_LOGIN          = "test";
-	private static final String TEST_PASSWORD       = "secret";
-	private static final String TEST_SALT           = "salt";
-	
-	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
-	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
-	
-	private static final String TEST_EMAIL          = "test@example.org";
-	
 	@Mock
 	private UserDao userDao;
 	
@@ -82,7 +72,7 @@ public class UserServiceTest {
 	
 	@Before
 	public void setUp() {
-		User user = getValidUser();
+		User user = TestObjects.createUser();
 		
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(user.getHash());
 		
@@ -94,7 +84,7 @@ public class UserServiceTest {
 		
 		activationForm = new ActivateAccountForm();
 		activationForm.setLogin(user.getLogin());
-		activationForm.setPassword(TEST_PASSWORD);
+		activationForm.setPassword(TestObjects.TEST_PASSWORD);
 		activationForm.setName(user.getName());
 		activationForm.setActivationKey(activation.getActivationKey());
 		
@@ -332,14 +322,14 @@ public class UserServiceTest {
 	
 	@Test
 	public void registerUserShouldGetsHashFromEncoder() {
-		String expectedHash = getValidUser().getHash();
+		String expectedHash = TestObjects.createUser().getHash();
 		
 		when(encoder.encodePassword(anyString(), anyString())).thenReturn(expectedHash);
 		
 		service.registerUser(activationForm);
 		
 		verify(userDao).save(userCaptor.capture());
-		verify(encoder).encodePassword(eq(TEST_PASSWORD), anyString());
+		verify(encoder).encodePassword(eq(TestObjects.TEST_PASSWORD), anyString());
 		
 		String actualHash = userCaptor.getValue().getHash();
 		assertThat(actualHash).isEqualTo(expectedHash);
@@ -390,7 +380,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void findByLoginShouldCallDao() {
-		User expectedUser = getValidUser();
+		User expectedUser = TestObjects.createUser();
 		when(userDao.findByLogin(anyString())).thenReturn(expectedUser);
 		
 		User user = service.findByLogin("any-login");
@@ -403,21 +393,6 @@ public class UserServiceTest {
 		service.findByLogin("john");
 		
 		verify(userDao).findByLogin("john");
-	}
-	
-	static User getValidUser() {
-		final Integer anyId = 777;
-		User user = new User();
-		user.setId(anyId);
-		user.setLogin(TEST_LOGIN);
-		user.setName(TEST_NAME);
-		user.setEmail(TEST_EMAIL);
-		user.setRegisteredAt(new Date());
-		user.setActivatedAt(new Date());
-		user.setHash(TEST_HASH);
-		user.setSalt(TEST_SALT);
-		
-		return user;
 	}
 	
 }
