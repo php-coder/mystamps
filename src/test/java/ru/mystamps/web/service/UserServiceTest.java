@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import org.junit.Before;
