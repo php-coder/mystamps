@@ -41,7 +41,6 @@ import static org.mockito.Mockito.when;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Currency;
@@ -59,9 +58,6 @@ import ru.mystamps.web.tests.fest.DateAssert;
 @RunWith(MockitoJUnitRunner.class)
 public class SeriesServiceTest {
 	private static final Double ANY_PRICE = 17d;
-	
-	@Mock
-	private CountryDao countryDao;
 	
 	@Mock
 	private ImageService imageService;
