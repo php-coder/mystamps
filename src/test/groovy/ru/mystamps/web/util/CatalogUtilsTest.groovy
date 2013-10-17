@@ -48,7 +48,7 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return single number as is"() {
 		given:
-			Set<MichelCatalog> singleNumber = Collections.singleton(new MichelCatalog("1"))
+			Set<MichelCatalog> singleNumber = [ new MichelCatalog("1") ] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(singleNumber)
 		then:
