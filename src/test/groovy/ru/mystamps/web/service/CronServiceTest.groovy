@@ -41,16 +41,13 @@ public class CronServiceTest extends Specification {
 	}
 	
 	def "purgeUsersActivations() should pass expired date to dao"() {
+		given:
+			Date expectedDate = new Date() - CronService.PURGE_AFTER_DAYS
 		when:
 			service.purgeUsersActivations()
 		then:
 			1 * usersActivationDao.findByCreatedAtLessThan({ Date passedDate ->
-				Calendar expectedDate = new GregorianCalendar()
-				expectedDate.setTime(new Date())
-				expectedDate.add(Calendar.DAY_OF_MONTH, -(CronService.PURGE_AFTER_DAYS))
-
-				assert DateUtils.roughlyEqual(passedDate, expectedDate.getTime())
-				
+				assert DateUtils.roughlyEqual(passedDate, expectedDate)
 				return true
 			}) >> []
 	}
