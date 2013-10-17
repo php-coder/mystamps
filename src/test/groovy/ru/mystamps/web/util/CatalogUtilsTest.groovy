@@ -57,9 +57,10 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return pair of numbers as comma separated"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>()
-			setOfNumbers.add(new MichelCatalog("1"))
-			setOfNumbers.add(new MichelCatalog("2"))
+			Set<MichelCatalog> setOfNumbers = [
+				new MichelCatalog("1"),
+				new MichelCatalog("2")
+			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -68,10 +69,11 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce range for sequence"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>()
-			setOfNumbers.add(new MichelCatalog("1"))
-			setOfNumbers.add(new MichelCatalog("2"))
-			setOfNumbers.add(new MichelCatalog("3"))
+			Set<MichelCatalog> setOfNumbers = [
+				new MichelCatalog("1"),
+				new MichelCatalog("2"),
+				new MichelCatalog("3")
+			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -80,11 +82,12 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return comma separated numbers if they are not a sequence"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>()
-			setOfNumbers.add(new MichelCatalog("1"))
-			setOfNumbers.add(new MichelCatalog("2"))
-			setOfNumbers.add(new MichelCatalog("4"))
-			setOfNumbers.add(new MichelCatalog("5"))
+			Set<MichelCatalog> setOfNumbers = [
+				new MichelCatalog("1"),
+				new MichelCatalog("2"),
+				new MichelCatalog("4"),
+				new MichelCatalog("5")
+			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -93,14 +96,15 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce two ranges for two sequences"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = new LinkedHashSet<MichelCatalog>()
-			setOfNumbers.add(new MichelCatalog("1"))
-			setOfNumbers.add(new MichelCatalog("2"))
-			setOfNumbers.add(new MichelCatalog("3"))
-			setOfNumbers.add(new MichelCatalog("10"))
-			setOfNumbers.add(new MichelCatalog("19"))
-			setOfNumbers.add(new MichelCatalog("20"))
-			setOfNumbers.add(new MichelCatalog("21"))
+			Set<MichelCatalog> setOfNumbers = [
+				new MichelCatalog("1"),
+				new MichelCatalog("2"),
+				new MichelCatalog("3"),
+				new MichelCatalog("10"),
+				new MichelCatalog("19"),
+				new MichelCatalog("20"),
+				new MichelCatalog("21")
+			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
