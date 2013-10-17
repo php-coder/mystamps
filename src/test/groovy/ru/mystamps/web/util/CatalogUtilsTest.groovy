@@ -39,7 +39,7 @@ public class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return empty string for empty numbers"() {
 		given:
-			Set<MichelCatalog> empty = Collections.<MichelCatalog>emptySet()
+			Set<MichelCatalog> empty = [] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(empty)
 		then:
