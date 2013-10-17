@@ -172,10 +172,10 @@ public class SeriesServiceTest extends Specification {
 	
 	def "add() should pass michel numbers to series dao"() {
 		given:
-			Set<MichelCatalog> expectedNumbers = newSet(
+			Set<MichelCatalog> expectedNumbers = [
 				new MichelCatalog("1"),
 				new MichelCatalog("2")
-			)
+			] as Set
 			form.setMichelNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
@@ -242,10 +242,10 @@ public class SeriesServiceTest extends Specification {
 	
 	def "add() should pass scott numbers to series dao"() {
 		given:
-			Set<ScottCatalog> expectedNumbers = newSet(
+			Set<ScottCatalog> expectedNumbers = [
 				new ScottCatalog("1"),
 				new ScottCatalog("2")
-			)
+			] as Set
 			form.setScottNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
@@ -312,10 +312,10 @@ public class SeriesServiceTest extends Specification {
 	
 	def "add() should pass yvert numbers to series dao"() {
 		given:
-			Set<YvertCatalog> expectedNumbers = newSet(
+			Set<YvertCatalog> expectedNumbers = [
 				new YvertCatalog("1"),
 				new YvertCatalog("2")
-			)
+			] as Set
 			form.setYvertNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
@@ -382,10 +382,10 @@ public class SeriesServiceTest extends Specification {
 	
 	def "add() should pass gibbons numbers to series dao"() {
 		given:
-			Set<GibbonsCatalog> expectedNumbers = newSet(
+			Set<GibbonsCatalog> expectedNumbers = [
 				new GibbonsCatalog("1"),
 				new GibbonsCatalog("2")
-			)
+			] as Set
 			form.setGibbonsNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
@@ -544,16 +544,6 @@ public class SeriesServiceTest extends Specification {
 				assert series?.metaInfo?.updatedBy == user
 				return true
 			})
-	}
-	
-	private static <T> Set<T> newSet(T... elements) {
-		Set<T> result = new LinkedHashSet<T>()
-		
-		for (T element : elements) {
-			result.add(element)
-		}
-		
-		return result
 	}
 	
 }
