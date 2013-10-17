@@ -142,9 +142,7 @@ public class CountryServiceTest extends Specification {
 			Country country2 = TestObjects.createCountry()
 			country2.setName("Second Country")
 		and:
-			List<Country> expectedCountries = new ArrayList<Country>()
-			expectedCountries.add(country1)
-			expectedCountries.add(country2)
+			List<Country> expectedCountries = [ country1, country2 ]
 		and:
 			countryDao.findAll() >> expectedCountries
 		when:

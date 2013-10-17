@@ -90,7 +90,7 @@ public class UserServiceTest extends Specification {
 	
 	def "addRegistrationRequest() should generate unique activation key"() {
 		given:
-			List<String> passedArguments = new LinkedList<String>()
+			List<String> passedArguments = []
 		when:
 			service.addRegistrationRequest(registrationForm)
 			service.addRegistrationRequest(registrationForm)
@@ -305,7 +305,7 @@ public class UserServiceTest extends Specification {
 	
 	def "registerUser() should generate unique salt"() {
 		given:
-			List<String> passedArguments = new LinkedList<String>()
+			List<String> passedArguments = []
 		when:
 			service.registerUser(activationForm)
 			service.registerUser(activationForm)
