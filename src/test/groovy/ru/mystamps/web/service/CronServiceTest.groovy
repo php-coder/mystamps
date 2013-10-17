@@ -37,7 +37,7 @@ public class CronServiceTest extends Specification {
 		when:
 			service.purgeUsersActivations()
 		then:
-			1 * usersActivationDao.findByCreatedAtLessThan(_ as Date) >> Collections.<UsersActivation>emptyList()
+			1 * usersActivationDao.findByCreatedAtLessThan(_ as Date) >> []
 	}
 	
 	def "purgeUsersActivations() should pass expired date to dao"() {
@@ -52,7 +52,7 @@ public class CronServiceTest extends Specification {
 				assert DateUtils.roughlyEqual(passedDate, expectedDate.getTime())
 				
 				return true
-			}) >> Collections.<UsersActivation>emptyList()
+			}) >> []
 	}
 	
 	def "purgeUsersActivations() should throw exception when null activations was returned"() {
@@ -77,7 +77,7 @@ public class CronServiceTest extends Specification {
 	
 	def "purgeUsersActivations() should do nothing if no activations"() {
 		given:
-			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> Collections.<UsersActivation>emptyList()
+			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> []
 		when:		
 			service.purgeUsersActivations()
 		then:
