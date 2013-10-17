@@ -3,6 +3,7 @@
 - implemented ability to specify series price by different catalogs
 - added checking by PMD
 - use Tiles as template engine for views
+- ported unit tests to Spock Framework
 
 0.2
 - implemented ability to add series
