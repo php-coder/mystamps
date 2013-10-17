@@ -38,7 +38,6 @@
 		
 		<testng.version>6.7</testng.version>
 		<junit.version>4.10</junit.version>
-		<mockito.version>1.9.5</mockito.version>
 		<spock.version>0.7-groovy-2.0</spock.version>
 		<cglib.version>2.2.2</cglib.version>
 		<groovy.version>2.0.8</groovy.version>
@@ -258,13 +257,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
