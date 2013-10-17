@@ -467,7 +467,7 @@ public class SeriesServiceTest extends Specification {
 			service.add(form, user)
 		then:
 			// override setup() settings
-			imageService.save(_) >> StringUtils.repeat("x", Series.IMAGE_URL_LENGTH + 1)
+			imageService.save(_) >> "x" * (Series.IMAGE_URL_LENGTH + 1)
 		and:
 			thrown IllegalStateException
 	}
