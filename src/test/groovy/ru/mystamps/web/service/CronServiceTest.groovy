@@ -66,8 +66,7 @@ public class CronServiceTest extends Specification {
 	
 	def "purgeUsersActivations() should delete expired activations"() {
 		given:
-			List<UsersActivation> expectedActivations =
-				Collections.singletonList(TestObjects.createUsersActivation())
+			List<UsersActivation> expectedActivations = [ TestObjects.createUsersActivation() ]
 			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> expectedActivations
 		when:
 			service.purgeUsersActivations()
