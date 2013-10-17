@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service
 
-import org.apache.commons.lang3.StringUtils
-
 import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
@@ -178,7 +176,7 @@ public class SeriesServiceTest extends Specification {
 				new MichelCatalog("1"),
 				new MichelCatalog("2")
 			)
-			form.setMichelNumbers(StringUtils.join(expectedNumbers, ','))
+			form.setMichelNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
 		then:
@@ -248,7 +246,7 @@ public class SeriesServiceTest extends Specification {
 				new ScottCatalog("1"),
 				new ScottCatalog("2")
 			)
-			form.setScottNumbers(StringUtils.join(expectedNumbers, ','))
+			form.setScottNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
 		then:
@@ -318,7 +316,7 @@ public class SeriesServiceTest extends Specification {
 				new YvertCatalog("1"),
 				new YvertCatalog("2")
 			)
-			form.setYvertNumbers(StringUtils.join(expectedNumbers, ','))
+			form.setYvertNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
 		then:
@@ -388,7 +386,7 @@ public class SeriesServiceTest extends Specification {
 				new GibbonsCatalog("1"),
 				new GibbonsCatalog("2")
 			)
-			form.setGibbonsNumbers(StringUtils.join(expectedNumbers, ','))
+			form.setGibbonsNumbers(expectedNumbers.join(','))
 		when:
 			service.add(form, user)
 		then:
