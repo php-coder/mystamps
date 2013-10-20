@@ -24,7 +24,7 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.entity.Image
 
-public class ImageServiceTest extends Specification {
+class ImageServiceTest extends Specification {
 	
 	private ImageDao imageDao = Mock()
 	private MultipartFile multipartFile = Mock()

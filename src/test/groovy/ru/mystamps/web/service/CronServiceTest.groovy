@@ -23,7 +23,7 @@ import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.tests.DateUtils
 
-public class CronServiceTest extends Specification {
+class CronServiceTest extends Specification {
 	
 	private UsersActivationDao usersActivationDao = Mock()
 	

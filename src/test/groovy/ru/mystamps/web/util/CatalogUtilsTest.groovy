@@ -24,7 +24,7 @@ import ru.mystamps.web.entity.MichelCatalog
 import ru.mystamps.web.entity.ScottCatalog
 import ru.mystamps.web.entity.YvertCatalog
 
-public class CatalogUtilsTest extends Specification {
+class CatalogUtilsTest extends Specification {
 	
 	//
 	// Tests for toShortForm()

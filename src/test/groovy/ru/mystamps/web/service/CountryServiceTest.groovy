@@ -25,7 +25,7 @@ import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.tests.DateUtils
 
-public class CountryServiceTest extends Specification {
+class CountryServiceTest extends Specification {
 	
 	private AddCountryForm form
 	private User user
