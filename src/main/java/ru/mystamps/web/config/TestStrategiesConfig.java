@@ -17,15 +17,24 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+
+import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.service.DatabaseImagePersistenceStrategy;
+import ru.mystamps.web.service.ImagePersistenceStrategy;
 
 @Configuration
-@Import({
-	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class,
-	TestStrategiesConfig.class
-})
-public class ApplicationContext {
+public class TestStrategiesConfig implements StrategiesConfig {
+	
+	@Inject
+	private ImageDao imageDao;
+	
+	@Bean
+	public ImagePersistenceStrategy getImagePersistenceStrategy() {
+		return new DatabaseImagePersistenceStrategy(imageDao);
+	}
+	
 }

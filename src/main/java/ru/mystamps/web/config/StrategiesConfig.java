@@ -17,15 +17,8 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import ru.mystamps.web.service.ImagePersistenceStrategy;
 
-@Configuration
-@Import({
-	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class,
-	TestStrategiesConfig.class
-})
-public class ApplicationContext {
+public interface StrategiesConfig {
+	ImagePersistenceStrategy getImagePersistenceStrategy();
 }

@@ -28,8 +28,9 @@ class ImageServiceTest extends Specification {
 	
 	private ImageDao imageDao = Mock()
 	private MultipartFile multipartFile = Mock()
+	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(imageDao)
+	private ImageService service = new ImageServiceImpl(imageDao, imagePersistenceStrategy)
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L
@@ -133,6 +134,24 @@ class ImageServiceTest extends Specification {
 			String expectedUrl =
 				ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedImageId))
 			result == expectedUrl
+	}
+	
+	//
+	// Tests for get()
+	//
+	
+	def "get() should pass argument to dao and return result from it"() {
+		given:
+			Image expectedImage = TestObjects.createImage()
+		when:
+			Image image = service.get(7)
+		then:
+			1 * imagePersistenceStrategy.get({ Integer imageId ->
+				assert imageId == 7
+				return true
+			}) >> expectedImage
+		and:
+			image == expectedImage
 	}
 	
 }

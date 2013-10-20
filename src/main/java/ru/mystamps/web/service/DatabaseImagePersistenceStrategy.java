@@ -15,17 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.service;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import javax.inject.Inject;
 
-@Configuration
-@Import({
-	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class,
-	TestStrategiesConfig.class
-})
-public class ApplicationContext {
+import org.apache.commons.lang3.Validate;
+
+import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.entity.Image;
+
+public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
+	
+	private final ImageDao imageDao;
+	
+	@Inject
+	public DatabaseImagePersistenceStrategy(ImageDao imageDao) {
+		this.imageDao = imageDao;
+	}
+	
+	@Override
+	public Image get(Integer id) {
+		Validate.isTrue(id != null, "Image id must be non null");
+		Validate.isTrue(id > 0, "Image id must be greater than zero");
+		
+		return imageDao.findOne(id);
+	}
+	
 }

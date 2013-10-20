@@ -15,17 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.service;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import ru.mystamps.web.entity.Image;
 
-@Configuration
-@Import({
-	DbConfig.class,
-	SecurityConfig.class,
-	ServicesConfig.class,
-	TestStrategiesConfig.class
-})
-public class ApplicationContext {
+public interface ImagePersistenceStrategy {
+	Image get(Integer id);
 }

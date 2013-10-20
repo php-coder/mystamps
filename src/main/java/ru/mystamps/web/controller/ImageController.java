@@ -19,6 +19,7 @@ package ru.mystamps.web.controller;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.service.ImageService;
 
 @Controller
 public class ImageController {
 	
+	private final ImageService imageService;
+	
+	@Inject
+	public ImageController(ImageService imageService) {
+		this.imageService = imageService;
+	}
+	
 	@RequestMapping(value = Url.GET_IMAGE_PAGE, method = RequestMethod.GET)
-	public void getImage(@PathVariable("id") Image image, HttpServletResponse response)
+	public void getImage(@PathVariable("id") Integer imageId, HttpServletResponse response)
 		throws IOException {
 		
+		if (imageId == null) {
+			throw new NotFoundException();
+		}
+		
+		Image image = imageService.get(imageId);
 		if (image == null) {
 			throw new NotFoundException();
 		}

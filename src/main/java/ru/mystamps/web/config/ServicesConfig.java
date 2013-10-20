@@ -52,6 +52,9 @@ public class ServicesConfig {
 	@Inject
 	private UsersActivationDao usersActivationDao;
 	
+	@Inject
+	private StrategiesConfig strategiesConfig;
+	
 	@Bean
 	public CountryService getCountryService() {
 		return new CountryServiceImpl(countryDao);
@@ -64,7 +67,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public ImageService getImageService() {
-		return new ImageServiceImpl(imageDao);
+		return new ImageServiceImpl(imageDao, strategiesConfig.getImagePersistenceStrategy());
 	}
 	
 	@Bean

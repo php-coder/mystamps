@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -89,6 +90,14 @@ final class TestObjects {
 		type.setId(2);
 		type.setName("AuthenticationFailed");
 		return type;
+	}
+	
+	public static Image createImage() {
+		Image image = new Image();
+		image.setId(1);
+		image.setType(Image.Type.PNG);
+		image.setData("test".getBytes());
+		return image;
 	}
 	
 }

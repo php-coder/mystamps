@@ -19,8 +19,11 @@ package ru.mystamps.web.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.entity.Image;
+
 public interface ImageService {
 	String GET_IMAGE_PAGE = "/image/{id}";
 	
 	String save(MultipartFile file);
+	Image get(Integer imageId);
 }

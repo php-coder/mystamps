@@ -42,7 +42,7 @@ public class ControllersConfig {
 	
 	@Bean
 	public ImageController getImageController() {
-		return new ImageController();
+		return new ImageController(servicesConfig.getImageService());
 	}
 	
 	@Bean

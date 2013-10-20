@@ -34,10 +34,12 @@ import ru.mystamps.web.entity.Image;
 public class ImageServiceImpl implements ImageService {
 	
 	private final ImageDao imageDao;
+	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	
 	@Inject
-	public ImageServiceImpl(ImageDao imageDao) {
+	public ImageServiceImpl(ImageDao imageDao, ImagePersistenceStrategy imagePersistenceStrategy) {
 		this.imageDao = imageDao;
+		this.imagePersistenceStrategy = imagePersistenceStrategy;
 	}
 	
 	@Override
@@ -68,6 +70,12 @@ public class ImageServiceImpl implements ImageService {
 		Image entity = imageDao.save(image);
 		
 		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Image get(Integer imageId) {
+		return imagePersistenceStrategy.get(imageId);
 	}
 	
 }
