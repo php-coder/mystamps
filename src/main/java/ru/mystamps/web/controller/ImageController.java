@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.ImageService;
+import ru.mystamps.web.service.dto.ImageDto;
 
 @Controller
 public class ImageController {
@@ -49,13 +49,13 @@ public class ImageController {
 			throw new NotFoundException();
 		}
 		
-		Image image = imageService.get(imageId);
+		ImageDto image = imageService.get(imageId);
 		if (image == null) {
 			throw new NotFoundException();
 		}
 
 		// TODO: set content disposition
-		response.setContentType("image/" + image.getType().toString().toLowerCase());
+		response.setContentType("image/" + image.getType().toLowerCase());
 		response.setContentLength(image.getData().length);
 		
 		response.getOutputStream().write(image.getData());

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.service.dto.ImageDto;
 
 public class ImageServiceImpl implements ImageService {
 	
@@ -43,8 +44,32 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Image get(Integer imageId) {
-		return imagePersistenceStrategy.get(imageId);
+	public ImageDto get(Integer imageId) {
+		Image image = imagePersistenceStrategy.get(imageId);
+		if (image == null) {
+			return null;
+		}
+		
+		return new ImageDtoImpl(image);
+	}
+	
+	private final class ImageDtoImpl implements ImageDto {
+		private final Image image;
+
+		ImageDtoImpl(Image image) {
+			// image must be non null, caller must care about this
+			this.image = image;
+		}
+
+		@Override
+		public String getType() {
+			return image.getType().toString();
+		}
+
+		@Override
+		public byte[] getData() {
+			return image.getData();
+		}
 	}
 	
 }

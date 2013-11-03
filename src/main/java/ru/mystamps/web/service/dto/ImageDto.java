@@ -15,15 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import ru.mystamps.web.service.dto.ImageDto;
-
-public interface ImageService {
-	String GET_IMAGE_PAGE = "/image/{id}";
-	
-	String save(MultipartFile file);
-	ImageDto get(Integer imageId);
+public interface ImageDto {
+	String getType();
+	byte[] getData();
 }
