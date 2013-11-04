@@ -24,6 +24,7 @@ import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.service.dto.DbImageDto;
 
 final class TestObjects {
 
@@ -98,6 +99,10 @@ final class TestObjects {
 		image.setType(Image.Type.PNG);
 		image.setData("test".getBytes());
 		return image;
+	}
+	
+	public static DbImageDto createDbImageDto() {
+		return new DbImageDto(createImage());
 	}
 	
 }

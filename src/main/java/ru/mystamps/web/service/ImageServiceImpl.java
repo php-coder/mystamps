@@ -22,8 +22,6 @@ import javax.inject.Inject;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 
 public class ImageServiceImpl implements ImageService {
@@ -46,12 +44,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	@Transactional(readOnly = true)
 	public ImageDto get(Integer imageId) {
-		Image image = imagePersistenceStrategy.get(imageId);
-		if (image == null) {
-			return null;
-		}
-		
-		return new DbImageDto(image);
+		return imagePersistenceStrategy.get(imageId);
 	}
 	
 }

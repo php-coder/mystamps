@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 
 class ImageServiceTest extends Specification {
@@ -56,11 +55,7 @@ class ImageServiceTest extends Specification {
 	
 	def "get() should pass argument to dao and return result from it"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
-		and:
-			String expectedType = expectedImage.type.toString()
-		and:
-			byte[] expectedData = expectedImage.data
+			ImageDto expectedImage = TestObjects.createDbImageDto()
 		when:
 			ImageDto image = service.get(7)
 		then:
@@ -69,8 +64,7 @@ class ImageServiceTest extends Specification {
 				return true
 			}) >> expectedImage
 		and:
-			image.type == expectedType
-			image.data == expectedData
+			image == expectedImage
 	}
 	
 	def "get() should return null when dao returned null"() {

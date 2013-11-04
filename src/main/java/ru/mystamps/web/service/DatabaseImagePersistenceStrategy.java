@@ -29,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.service.dto.ImageDto;
 
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
@@ -68,11 +70,16 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public Image get(Integer id) {
+	public ImageDto get(Integer id) {
 		Validate.isTrue(id != null, "Image id must be non null");
 		Validate.isTrue(id > 0, "Image id must be greater than zero");
-		
-		return imageDao.findOne(id);
+
+		Image image = imageDao.findOne(id);
+		if (image == null) {
+			return null;
+		}
+
+		return new DbImageDto(image);
 	}
 	
 }

@@ -17,8 +17,11 @@
  */
 package ru.mystamps.web.service.dto;
 
+import lombok.EqualsAndHashCode;
+
 import ru.mystamps.web.entity.Image;
 
+@EqualsAndHashCode
 public class DbImageDto implements ImageDto {
 	private final Image image;
 	

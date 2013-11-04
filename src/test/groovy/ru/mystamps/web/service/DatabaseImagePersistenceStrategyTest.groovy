@@ -7,6 +7,8 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.entity.Image
+import ru.mystamps.web.service.dto.DbImageDto
+import ru.mystamps.web.service.dto.ImageDto
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
@@ -135,16 +137,26 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should pass argument to dao and return result from it"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Image imageEntity = TestObjects.createImage()
+			ImageDto expectedImage = new DbImageDto(imageEntity)
 		when:
-			Image image = strategy.get(7)
+			ImageDto image = strategy.get(7)
 		then:
 			1 * imageDao.findOne({ Integer imageId ->
 				assert imageId == 7
 				return true
-			}) >> expectedImage
+			}) >> imageEntity
 		and:
 			image == expectedImage
+	}
+	
+	def "get() should return null when dao returned null"() {
+		given:
+			imageDao.findOne(_ as Integer) >> null
+		when:
+			ImageDto image = strategy.get(8)
+		then:
+			image == null
 	}
 	
 }
