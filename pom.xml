@@ -32,6 +32,7 @@
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<tiles.version>2.2.2</tiles.version>
+		<liquibase.version>2.0.5</liquibase.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
 		<bootstrap.version>2.3.1</bootstrap.version>
@@ -229,6 +230,13 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>${tiles.version}</version>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- For running database migration during application's startup time -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -601,10 +609,10 @@
 				<version>${liquibase.plugin.version}</version>
 				<configuration>
 					<changeLogFile>
-						${basedir}/src/main/config/liquibase/full-changelog.xml
+						${basedir}/src/main/resources/liquibase/changelog.xml
 					</changeLogFile>
 					<propertyFile>
-						${basedir}/src/main/config/liquibase/liquibase.properties
+						${basedir}/src/main/resources/liquibase/liquibase.properties
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
 				</configuration>
