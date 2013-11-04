@@ -21,6 +21,7 @@ import java.util.Date;
 
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -97,12 +98,18 @@ final class TestObjects {
 		Image image = new Image();
 		image.setId(1);
 		image.setType(Image.Type.PNG);
-		image.setData("test".getBytes());
 		return image;
 	}
 	
+	public static ImageData createImageData() {
+		ImageData imageData = new ImageData();
+		imageData.setContent("test".getBytes());
+		imageData.setImage(createImage());
+		return imageData;
+	}
+	
 	public static DbImageDto createDbImageDto() {
-		return new DbImageDto(createImage());
+		return new DbImageDto(createImageData());
 	}
 	
 }

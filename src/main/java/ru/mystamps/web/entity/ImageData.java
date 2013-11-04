@@ -17,35 +17,33 @@
  */
 package ru.mystamps.web.entity;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "images")
+@Table(name = "images_data")
 @Getter
 @Setter
-public class Image {
-	
-	public static final int MAX_TYPE_LENGTH = 4;
+public class ImageData {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(length = MAX_TYPE_LENGTH, nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Type type;
+	@Lob
+	@Basic(optional = false, fetch = FetchType.LAZY)
+	private byte[] content;
 	
-	public enum Type {
-		JPEG, PNG
-	}
+	@ManyToOne(optional = false)
+	private Image image;
 	
 }

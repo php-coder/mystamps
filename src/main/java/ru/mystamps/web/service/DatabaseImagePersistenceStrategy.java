@@ -25,20 +25,29 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
+	private static final Logger LOG =
+		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
 	private final ImageDao imageDao;
+	private final ImageDataDao imageDataDao;
 	
 	@Inject
-	public DatabaseImagePersistenceStrategy(ImageDao imageDao) {
+	public DatabaseImagePersistenceStrategy(ImageDao imageDao, ImageDataDao imageDataDao) {
 		this.imageDao = imageDao;
+		this.imageDataDao = imageDataDao;
 	}
 	
 	@Override
@@ -57,15 +66,24 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		
 		Image image = new Image();
 		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
+
+		Image entity = imageDao.save(image);
+		if (entity == null) {
+			throw new RuntimeException("Can't save image"); // NOPMD
+		}
 		
 		try {
-			image.setData(file.getBytes());
+			ImageData imageData = new ImageData();
+			imageData.setImage(entity);
+			imageData.setContent(file.getBytes());
+			imageDataDao.save(imageData);
+
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
 			throw new RuntimeException(e); // NOPMD
 		}
 		
-		Image entity = imageDao.save(image);
+		
 		return entity.getId();
 	}
 	
@@ -78,8 +96,14 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		if (image == null) {
 			return null;
 		}
-
-		return new DbImageDto(image);
+		
+		ImageData imageData = imageDataDao.findByImage(image);
+		if (imageData == null) {
+			LOG.warn("Found image without content: #{}", id);
+			return null;
+		}
+		
+		return new DbImageDto(imageData);
 	}
 	
 }

@@ -6,5 +6,6 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 	
 	<include file="22-03-2013-1-add_prices_to_series.xml" relativeToChangelogFile="true" />
+	<include file="04-11-2013-1-move_images_to_separate_table.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

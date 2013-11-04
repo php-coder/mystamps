@@ -15,37 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.entity;
+package ru.mystamps.web.dao;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.repository.CrudRepository;
 
-import lombok.Getter;
-import lombok.Setter;
+import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.entity.ImageData;
 
-@Entity
-@Table(name = "images")
-@Getter
-@Setter
-public class Image {
-	
-	public static final int MAX_TYPE_LENGTH = 4;
-	
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-	@Column(length = MAX_TYPE_LENGTH, nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Type type;
-	
-	public enum Type {
-		JPEG, PNG
-	}
-	
+public interface ImageDataDao extends CrudRepository<ImageData, Integer> {
+	ImageData findByImage(Image image);
 }

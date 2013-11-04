@@ -19,24 +19,24 @@ package ru.mystamps.web.service.dto;
 
 import lombok.EqualsAndHashCode;
 
-import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.entity.ImageData;
 
 @EqualsAndHashCode
 public class DbImageDto implements ImageDto {
-	private final Image image;
+	private final ImageData imageData;
 	
-	public DbImageDto(Image image) {
-		this.image = image;
+	public DbImageDto(ImageData imageData) {
+		this.imageData = imageData;
 	}
 	
 	@Override
 	public String getType() {
-		return image.getType().toString();
+		return imageData.getImage().getType().toString();
 	}
 	
 	@Override
 	public byte[] getData() {
-		return image.getData();
+		return imageData.getContent();
 	}
 	
 }
