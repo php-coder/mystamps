@@ -18,92 +18,23 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private ImageDao imageDao = Mock()
 	private ImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
+	private Image image = TestObjects.createImage()
 	
 	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDao, imageDataDao)
-	
-	def setup() {
-		multipartFile.getSize() >> 1024L
-		multipartFile.getContentType() >> "image/png"
-		imageDao.save(_ as Image) >> new Image()
-	}
 	
 	//
 	// Tests for save()
 	//
 	
-	def "save() should throw exception if file is null"() {
-		when:
-			strategy.save(null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "save() should throw exception if file has zero size"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			multipartFile.getSize() >> 0L
-		and:
-			thrown IllegalArgumentException
-	}
-	
-	def "save() should throw exception if content type is null"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			multipartFile.getContentType() >> null
-		and:
-			thrown IllegalArgumentException
-	}
-	
-	def "save() should throw exception for unsupported content type"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			multipartFile.getContentType() >> "image/tiff"
-		and:
-			thrown IllegalStateException
-	}
-	
-	def "save() should pass image to image dao"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			1 * imageDao.save(_ as Image) >> new Image()
-	}
-	
 	def "save() should convert IOException to RuntimeException"() {
 		given:
 			multipartFile.getBytes() >> { throw new IOException() }
 		when:
-			strategy.save(multipartFile)
+			strategy.save(multipartFile, image)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
-	}
-	
-	def "save() should pass content type to image dao"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			multipartFile.getContentType() >> "image/jpeg"
-		and:
-			1 * imageDao.save({ Image image ->
-				assert image?.type == Image.Type.JPEG
-				return true
-			}) >> new Image()
-	}
-	
-	def "save() should throw exception when image dao returned null"() {
-		when:
-			strategy.save(multipartFile)
-		then:
-			imageDao.save(_ as Image) >> null
-		and:
-			0 * imageDataDao.save(_ as ImageData)
-		and:
-			thrown ImagePersistenceException
 	}
 	
 	def "save() should pass file content to image data dao"() {
@@ -111,7 +42,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			byte[] expected = "test".getBytes()
 			multipartFile.getBytes() >> expected
 		when:
-			strategy.save(multipartFile)
+			strategy.save(multipartFile, image)
 		then:
 			1 * imageDataDao.save({ ImageData imageData ->
 				assert imageData?.content == expected
@@ -119,14 +50,12 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			})
 	}
 	
-	def "save() should pass image from image dao to image data dao"() {
+	def "save() should pass image to image data dao"() {
 		given:
 			Image expectedImage = TestObjects.createImage()
 		when:
-			strategy.save(multipartFile)
+			strategy.save(multipartFile, expectedImage)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
-		and:
 			1 * imageDataDao.save({ ImageData imageData ->
 				assert imageData?.image == expectedImage
 				return true
@@ -135,15 +64,10 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should return value from image dao"() {
 		given:
-			Integer expectedImageId = 12
-		and:
-			Image expectedImage = TestObjects.createImage()
-			expectedImage.setId(expectedImageId)
+			Integer expectedImageId = image.id
 		when:
-			Integer imageId = strategy.save(multipartFile)
+			Integer imageId = strategy.save(multipartFile, image)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
-		and:
 			imageId == expectedImageId
 	}
 	

@@ -18,11 +18,9 @@
 package ru.mystamps.web.service;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -52,27 +50,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public Integer save(MultipartFile file) {
-		Validate.isTrue(file != null, "File should be non null");
-		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
-		
-		String contentType = file.getContentType();
-		Validate.isTrue(contentType != null, "File type must be non null");
-		
-		String extension = StringUtils.substringAfter(contentType, "/");
-		Validate.validState(
-			"png".equals(extension) || "jpeg".equals(extension),
-			"File type must be PNG or JPEG image"
-		);
-		
-		Image image = new Image();
-		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
-
-		Image entity = imageDao.save(image);
-		if (entity == null) {
-			throw new ImagePersistenceException("Can't save image");
-		}
-		
+	public Integer save(MultipartFile file, Image entity) {
 		try {
 			ImageData imageData = new ImageData();
 			imageData.setImage(entity);

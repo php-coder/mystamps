@@ -21,28 +21,108 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
+import ru.mystamps.web.dao.ImageDao
+import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class ImageServiceTest extends Specification {
-	
+
+	private ImageDao imageDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy)
+	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
+	
+	def setup() {
+		multipartFile.getSize() >> 1024L
+		multipartFile.getContentType() >> "image/png"
+		imageDao.save(_ as Image) >> new Image()
+	}
 	
 	//
 	// Tests for save()
 	//
 	
-	def "save() should return url with image"() {
+	def "save() should throw exception if file is null"() {
+		when:
+			service.save(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "save() should throw exception if file has zero size"() {
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.getSize() >> 0L
+		and:
+			thrown IllegalArgumentException
+	}
+	
+	def "save() should throw exception if content type is null"() {
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.getContentType() >> null
+		and:
+			thrown IllegalArgumentException
+	}
+	
+	def "save() should throw exception for unsupported content type"() {
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.getContentType() >> "image/tiff"
+		and:
+			thrown IllegalStateException
+	}
+	
+	def "save() should pass image to image dao"() {
+		when:
+			service.save(multipartFile)
+		then:
+			1 * imageDao.save(_ as Image) >> new Image()
+	}
+	
+	def "save() should pass content type to image dao"() {
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.getContentType() >> "image/jpeg"
+		and:
+			1 * imageDao.save({ Image image ->
+				assert image?.type == Image.Type.JPEG
+				return true
+			}) >> new Image()
+	}
+	
+	def "save() should throw exception when image dao returned null"() {
+		when:
+			service.save(multipartFile)
+		then:
+			imageDao.save(_ as Image) >> null
+		and:
+			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as Image)
+		and:
+			thrown ImagePersistenceException
+	}
+	
+	def "save() should call strategy and return url with result from it"() {
 		given:
-			Integer expectedImageId = 17
+			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = expectedImage.id
 			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedImageId))
 		when:
 			String url = service.save(multipartFile)
 		then:
+			imageDao.save(_ as Image) >> expectedImage
+		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
+				return true
+			}, { Image passedImage ->
+				assert passedImage == expectedImage
 				return true
 			}) >> expectedImageId
 		and:

@@ -17,26 +17,56 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 public class ImageServiceImpl implements ImageService {
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
+	private final ImageDao imageDao;
 	
 	@Inject
-	public ImageServiceImpl(ImagePersistenceStrategy imagePersistenceStrategy) {
+	public ImageServiceImpl(ImagePersistenceStrategy imagePersistenceStrategy, ImageDao imageDao) {
 		this.imagePersistenceStrategy = imagePersistenceStrategy;
+		this.imageDao = imageDao;
 	}
 	
 	@Override
 	@Transactional
 	public String save(MultipartFile file) {
-		Integer imageId = imagePersistenceStrategy.save(file);
+		Validate.isTrue(file != null, "File should be non null");
+		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
+		
+		String contentType = file.getContentType();
+		Validate.isTrue(contentType != null, "File type must be non null");
+		
+		String extension = StringUtils.substringAfter(contentType, "/");
+		Validate.validState(
+				"png".equals(extension) || "jpeg".equals(extension),
+				"File type must be PNG or JPEG image"
+		);
+		
+		Image image = new Image();
+		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
+		
+		Image entity = imageDao.save(image);
+		if (entity == null) {
+			throw new ImagePersistenceException("Can't save image");
+		}
+		
+		Integer imageId = imagePersistenceStrategy.save(file, entity);
 		
 		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(imageId));
 	}
