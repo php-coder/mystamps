@@ -56,12 +56,14 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public void save(MultipartFile file, Image entity) {
+	public void save(MultipartFile file, Image image) {
 		try {
 			ImageData imageData = new ImageData();
-			imageData.setImage(entity);
+			imageData.setImage(image);
 			imageData.setContent(file.getBytes());
-			imageDataDao.save(imageData);
+			
+			ImageData entity = imageDataDao.save(imageData);
+			LOG.debug("Image's data entity saved to database ({})", entity);
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction

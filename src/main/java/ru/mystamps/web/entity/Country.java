@@ -26,11 +26,13 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "countries")
 @Getter
 @Setter
+@ToString(exclude = "metaInfo")
 public class Country {
 	
 	public static final int NAME_LENGTH = 50;

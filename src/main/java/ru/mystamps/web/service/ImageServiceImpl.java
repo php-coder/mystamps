@@ -24,6 +24,9 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +36,7 @@ import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 public class ImageServiceImpl implements ImageService {
+	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;
@@ -65,6 +69,8 @@ public class ImageServiceImpl implements ImageService {
 		if (entity == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}
+		
+		LOG.debug("Image entity was saved to database ({})", entity);
 		
 		imagePersistenceStrategy.save(file, entity);
 		

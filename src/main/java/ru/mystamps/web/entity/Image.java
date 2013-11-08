@@ -27,11 +27,13 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "images")
 @Getter
 @Setter
+@ToString
 public class Image {
 	
 	public static final int MAX_TYPE_LENGTH = 4;

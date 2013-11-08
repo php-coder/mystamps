@@ -26,12 +26,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
 
 public class CountryServiceImpl implements CountryService {
+	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
 	private final CountryDao countryDao;
 	
@@ -57,8 +61,11 @@ public class CountryServiceImpl implements CountryService {
 		
 		country.getMetaInfo().setCreatedBy(user);
 		country.getMetaInfo().setUpdatedBy(user);
+
+		Country entity = countryDao.save(country);
+		LOG.debug("Created country ({})", entity);
 		
-		return countryDao.save(country);
+		return entity;
 	}
 	
 	@Override

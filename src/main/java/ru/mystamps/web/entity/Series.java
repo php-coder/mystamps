@@ -38,11 +38,13 @@ import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "series")
 @Getter
 @Setter
+@ToString(exclude = "metaInfo")
 @SuppressWarnings("PMD.TooManyFields")
 public class Series {
 	

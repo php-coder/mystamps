@@ -61,7 +61,11 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	@Override
 	public void save(MultipartFile file, Image image) {
 		try {
-			file.transferTo(new File(storageDir, generateFileName(image)));
+			String fileName = generateFileName(image);
+			File dest = new File(storageDir, fileName);
+			file.transferTo(dest);
+			
+			LOG.debug("Image's data was written into file {}", dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);

@@ -45,4 +45,14 @@ public class Price {
 	@Column(length = MAX_CURRENCY_LEGNTH)
 	private Currency currency;
 	
+	@Override
+	public String toString() {
+		// TODO(performance): specify initial capacity explicitly
+		return new StringBuilder()
+			.append(value)
+			.append(' ')
+			.append(currency)
+			.toString();
+	}
+	
 }

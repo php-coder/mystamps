@@ -31,6 +31,9 @@ import static java.util.Calendar.JANUARY;
 
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
@@ -43,6 +46,7 @@ import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.util.CatalogUtils;
 
 public class SeriesServiceImpl implements SeriesService {
+	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
 	private final SeriesDao seriesDao;
 	private final ImageService imageService;
@@ -115,8 +119,11 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		series.getMetaInfo().setCreatedBy(user);
 		series.getMetaInfo().setUpdatedBy(user);
+
+		Series entity = seriesDao.save(series);
+		LOG.debug("Created series ({})", entity);
 		
-		return seriesDao.save(series);
+		return entity;
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {

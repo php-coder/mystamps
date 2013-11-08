@@ -28,11 +28,13 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "images_data")
 @Getter
 @Setter
+@ToString(exclude = "content")
 public class ImageData {
 	
 	@Id
