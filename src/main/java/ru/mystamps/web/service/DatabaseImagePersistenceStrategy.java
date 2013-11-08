@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.Validate;
@@ -47,6 +48,11 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	public DatabaseImagePersistenceStrategy(ImageDao imageDao, ImageDataDao imageDataDao) {
 		this.imageDao = imageDao;
 		this.imageDataDao = imageDataDao;
+	}
+	
+	@PostConstruct
+	public void init() {
+		LOG.info("Images will be saved into in-memory database");
 	}
 	
 	@Override
