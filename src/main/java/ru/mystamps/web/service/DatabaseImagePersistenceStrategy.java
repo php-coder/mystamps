@@ -50,7 +50,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public Integer save(MultipartFile file, Image entity) {
+	public void save(MultipartFile file, Image entity) {
 		try {
 			ImageData imageData = new ImageData();
 			imageData.setImage(entity);
@@ -61,9 +61,6 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			// throw RuntimeException for rolling back transaction
 			throw new ImagePersistenceException(e);
 		}
-		
-		
-		return entity.getId();
 	}
 	
 	@Override

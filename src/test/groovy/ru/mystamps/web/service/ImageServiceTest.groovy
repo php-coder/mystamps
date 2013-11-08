@@ -108,11 +108,9 @@ class ImageServiceTest extends Specification {
 			thrown ImagePersistenceException
 	}
 	
-	def "save() should call strategy and return url with result from it"() {
+	def "save() should call strategy"() {
 		given:
 			Image expectedImage = TestObjects.createImage()
-			Integer expectedImageId = expectedImage.id
-			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedImageId))
 		when:
 			String url = service.save(multipartFile)
 		then:
@@ -124,7 +122,18 @@ class ImageServiceTest extends Specification {
 			}, { Image passedImage ->
 				assert passedImage == expectedImage
 				return true
-			}) >> expectedImageId
+			})
+	}
+	
+	def "save() should return url with saved image"() {
+		given:
+			Image expectedImage = TestObjects.createImage()
+		and:
+			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedImage.id))
+		when:
+			String url = service.save(multipartFile)
+		then:
+			imageDao.save(_ as Image) >> expectedImage
 		and:
 			url == expectedUrl
 	}

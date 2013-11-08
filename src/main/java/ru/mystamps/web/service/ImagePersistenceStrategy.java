@@ -23,6 +23,6 @@ import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 
 public interface ImagePersistenceStrategy {
-	Integer save(MultipartFile file, Image image);
+	void save(MultipartFile file, Image image);
 	ImageDto get(Integer id);
 }

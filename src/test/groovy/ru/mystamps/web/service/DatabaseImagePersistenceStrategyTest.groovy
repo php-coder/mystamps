@@ -62,15 +62,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			})
 	}
 	
-	def "save() should return value from image dao"() {
-		given:
-			Integer expectedImageId = image.id
-		when:
-			Integer imageId = strategy.save(multipartFile, image)
-		then:
-			imageId == expectedImageId
-	}
-	
 	//
 	// Tests for get()
 	//

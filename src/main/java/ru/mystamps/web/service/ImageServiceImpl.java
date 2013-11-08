@@ -66,9 +66,9 @@ public class ImageServiceImpl implements ImageService {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		Integer imageId = imagePersistenceStrategy.save(file, entity);
+		imagePersistenceStrategy.save(file, entity);
 		
-		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(imageId));
+		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
 	}
 	
 	@Override
