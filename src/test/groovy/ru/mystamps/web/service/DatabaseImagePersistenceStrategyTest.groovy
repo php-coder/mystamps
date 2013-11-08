@@ -19,7 +19,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private ImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	
-	private DatabaseImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDao, imageDataDao)
+	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDao, imageDataDao)
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L
