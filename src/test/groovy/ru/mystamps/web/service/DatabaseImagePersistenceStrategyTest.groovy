@@ -26,7 +26,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for save()
 	//
 	
-	def "save() should convert IOException to RuntimeException"() {
+	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
 			multipartFile.getBytes() >> { throw new IOException() }
 		when:
