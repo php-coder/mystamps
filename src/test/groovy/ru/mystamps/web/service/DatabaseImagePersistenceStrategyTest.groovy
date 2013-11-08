@@ -11,6 +11,7 @@ import ru.mystamps.web.entity.Image
 import ru.mystamps.web.entity.ImageData
 import ru.mystamps.web.service.dto.DbImageDto
 import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
@@ -77,7 +78,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile)
 		then:
-			RuntimeException ex = thrown()
+			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
 	}
@@ -102,7 +103,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		and:
 			0 * imageDataDao.save(_ as ImageData)
 		and:
-			thrown RuntimeException
+			thrown ImagePersistenceException
 	}
 	
 	def "save() should pass file content to image data dao"() {

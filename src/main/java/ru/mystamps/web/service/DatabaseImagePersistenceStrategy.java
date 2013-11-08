@@ -36,6 +36,7 @@ import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
 	private static final Logger LOG =
@@ -69,7 +70,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 
 		Image entity = imageDao.save(image);
 		if (entity == null) {
-			throw new RuntimeException("Can't save image"); // NOPMD
+			throw new ImagePersistenceException("Can't save image");
 		}
 		
 		try {
@@ -80,7 +81,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
-			throw new RuntimeException(e); // NOPMD
+			throw new ImagePersistenceException(e);
 		}
 		
 		
