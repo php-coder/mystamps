@@ -156,7 +156,7 @@ class ImageServiceTest extends Specification {
 			image == expectedImage
 	}
 	
-	def "get() should return null when dao returned null"() {
+	def "get() should return null when strategy returned null"() {
 		given:
 			imagePersistenceStrategy.get(_ as Integer) >> null
 		when:
