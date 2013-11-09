@@ -77,7 +77,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			null    | _
 			-1      | _
 			0       | _
-		}
+	}
 	
 	def "get() should pass argument to image dao"() {
 		when:
