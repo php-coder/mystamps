@@ -142,7 +142,7 @@ class ImageServiceTest extends Specification {
 	// Tests for get()
 	//
 	
-	def "get() should pass argument to dao and return result from it"() {
+	def "get() should pass argument to strategy and return result from it"() {
 		given:
 			ImageDto expectedImage = TestObjects.createDbImageDto()
 		when:
