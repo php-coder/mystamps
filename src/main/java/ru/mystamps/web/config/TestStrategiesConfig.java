@@ -22,7 +22,6 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.service.DatabaseImagePersistenceStrategy;
 import ru.mystamps.web.service.ImagePersistenceStrategy;
