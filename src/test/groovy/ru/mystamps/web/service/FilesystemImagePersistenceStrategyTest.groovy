@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 
 import ru.mystamps.web.entity.Image
+import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class FilesystemImagePersistenceStrategyTest extends Specification {
@@ -12,8 +13,9 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
+	private File mockFile = Mock(File, constructorArgs: ["/fake/path"])
 	
-	private ImagePersistenceStrategy strategy = new FilesystemImagePersistenceStrategy(STORAGE_DIR)
+	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
 	
 	//
 	// Tests for save()
@@ -72,6 +74,54 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IllegalStateException
+	}
+	
+	//
+	// Tests for get()
+	//
+	
+	def "get() should returns null when file doesn't exist"() {
+		given:
+			mockFile.exists() >> false
+		and:
+			strategy.createFile(_ as Image) >> mockFile
+		when:
+			ImageDto result = strategy.get(image)
+		then:
+			result == null
+	}
+	
+	def "get() should converts IOException to ImagePersistenceException"() {
+		given:
+			mockFile.exists() >> true
+		and:
+			strategy.createFile(_ as Image) >> mockFile
+		and:
+			strategy.toByteArray(_ as File) >> { throw new IOException() }
+		when:
+			strategy.get(image)
+		then:
+			ImagePersistenceException ex = thrown()
+		and:
+			ex.cause instanceof IOException
+	}
+	
+	def "get() should return result with correct type and content"() {
+		given:
+			String expectedType = image.type
+		and:
+			byte[] expectedData = 'any data'.bytes
+		and:
+			mockFile.exists() >> true
+		and:
+			strategy.createFile(_ as Image) >> mockFile
+		and:
+			strategy.toByteArray(_ as File) >> expectedData
+		when:
+			ImageDto result = strategy.get(image)
+		then:
+			result.type == expectedType
+			result.data == expectedData
 	}
 	
 }

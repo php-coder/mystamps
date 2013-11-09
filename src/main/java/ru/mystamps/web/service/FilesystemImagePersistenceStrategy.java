@@ -22,12 +22,15 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.io.FileUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.service.dto.FsImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
@@ -76,13 +79,32 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	@Override
 	public ImageDto get(Image image) {
-		return null; // TODO: implement
+		File dest = createFile(image);
+		if (!dest.exists()) {
+			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
+			return null;
+		}
+		
+		try {
+			byte[] content = toByteArray(dest);
+			return new FsImageDto(image, content);
+		
+		} catch (IOException ex) {
+			throw new ImagePersistenceException(ex);
+		}
 	}
 	
-	private File createFile(Image image) {
+	// protected to allow spying
+	protected File createFile(Image image) {
 		return new File(storageDir, generateFileName(image));
 	}
-	
+
+	// protected to allow spying
+	protected byte[] toByteArray(File dest) throws IOException {
+		// TODO(guava): use Files.toByteArray()
+		return FileUtils.readFileToByteArray(dest);
+	}
+
 	private static String generateFileName(Image image) {
 		// TODO(performance): specify initial capacity explicitly
 		return new StringBuilder()
