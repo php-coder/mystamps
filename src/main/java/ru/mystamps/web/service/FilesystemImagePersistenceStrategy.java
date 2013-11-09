@@ -83,7 +83,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		return new File(storageDir, generateFileName(image));
 	}
 	
-	private String generateFileName(Image image) {
+	private static String generateFileName(Image image) {
 		// TODO(performance): specify initial capacity explicitly
 		return new StringBuilder()
 			.append(image.getId())
