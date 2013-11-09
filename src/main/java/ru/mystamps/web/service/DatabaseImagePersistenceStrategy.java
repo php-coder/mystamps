@@ -22,14 +22,11 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
@@ -41,12 +38,10 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	private static final Logger LOG =
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
-	private final ImageDao imageDao;
 	private final ImageDataDao imageDataDao;
 	
 	@Inject
-	public DatabaseImagePersistenceStrategy(ImageDao imageDao, ImageDataDao imageDataDao) {
-		this.imageDao = imageDao;
+	public DatabaseImagePersistenceStrategy(ImageDataDao imageDataDao) {
 		this.imageDataDao = imageDataDao;
 	}
 	
@@ -72,18 +67,10 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public ImageDto get(Integer id) {
-		Validate.isTrue(id != null, "Image id must be non null");
-		Validate.isTrue(id > 0, "Image id must be greater than zero");
-
-		Image image = imageDao.findOne(id);
-		if (image == null) {
-			return null;
-		}
-		
+	public ImageDto get(Image image) {
 		ImageData imageData = imageDataDao.findByImage(image);
 		if (imageData == null) {
-			LOG.warn("Found image without content: #{}", id);
+			LOG.warn("Found image without content: #{}", image.getId());
 			return null;
 		}
 		

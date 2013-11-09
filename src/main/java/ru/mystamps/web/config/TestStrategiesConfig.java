@@ -31,14 +31,11 @@ import ru.mystamps.web.service.ImagePersistenceStrategy;
 public class TestStrategiesConfig implements StrategiesConfig {
 	
 	@Inject
-	private ImageDao imageDao;
-	
-	@Inject
 	private ImageDataDao imageDataDao;
 	
 	@Bean
 	public ImagePersistenceStrategy getImagePersistenceStrategy() {
-		return new DatabaseImagePersistenceStrategy(imageDao, imageDataDao);
+		return new DatabaseImagePersistenceStrategy(imageDataDao);
 	}
 	
 }

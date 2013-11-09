@@ -80,7 +80,15 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	@Transactional(readOnly = true)
 	public ImageDto get(Integer imageId) {
-		return imagePersistenceStrategy.get(imageId);
+		Validate.isTrue(imageId != null, "Image id must be non null");
+		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
+		
+		Image image = imageDao.findOne(imageId);
+		if (image == null) {
+			return null;
+		}
+		
+		return imagePersistenceStrategy.get(image);
 	}
 	
 }

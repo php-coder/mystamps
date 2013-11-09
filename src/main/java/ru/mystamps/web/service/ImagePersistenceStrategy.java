@@ -24,5 +24,5 @@ import ru.mystamps.web.service.dto.ImageDto;
 
 public interface ImagePersistenceStrategy {
 	void save(MultipartFile file, Image image);
-	ImageDto get(Integer id);
+	ImageDto get(Image image);
 }

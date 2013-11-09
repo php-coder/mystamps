@@ -20,6 +20,7 @@ package ru.mystamps.web.service
 import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.entity.Image
@@ -142,22 +143,62 @@ class ImageServiceTest extends Specification {
 	// Tests for get()
 	//
 	
-	def "get() should pass argument to strategy and return result from it"() {
-		given:
-			ImageDto expectedImage = TestObjects.createDbImageDto()
+	@Unroll
+	def "get() should throw exception if image id is #imageId"(Integer imageId, Object _) {
 		when:
-			ImageDto image = service.get(7)
+			service.get(imageId)
 		then:
-			1 * imagePersistenceStrategy.get({ Integer imageId ->
+			thrown IllegalArgumentException
+		where:
+			imageId | _
+			null    | _
+			-1      | _
+			0       | _
+	}
+	
+	def "get() should pass argument to image dao"() {
+		when:
+			service.get(7)
+		then:
+			1 * imageDao.findOne({ Integer imageId ->
 				assert imageId == 7
 				return true
-			}) >> expectedImage
+			})
+	}
+	
+	def "get() should not call strategy when image dao returned null"() {
+		when:
+			ImageDto image = service.get(9)
+		then:
+			imageDao.findOne(_ as Integer) >> null
 		and:
-			image == expectedImage
+			0 * imagePersistenceStrategy.get(_ as Integer)
+		and:
+			image == null
+	}
+	
+	def "get() should pass argument to strategy and return result from it"() {
+		given:
+			Image expectedImage = TestObjects.createImage()
+		and:
+			imageDao.findOne(_ as Integer) >> expectedImage
+		and:
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+		when:
+			ImageDto actualImageDto = service.get(7)
+		then:
+			1 * imagePersistenceStrategy.get({ Image passedImage ->
+				assert passedImage == expectedImage
+				return true
+			}) >> expectedImageDto
+		and:
+			actualImageDto == expectedImageDto
 	}
 	
 	def "get() should return null when strategy returned null"() {
 		given:
+			imageDao.findOne(_ as Integer) >> TestObjects.createImage()
+		and:
 			imagePersistenceStrategy.get(_ as Integer) >> null
 		when:
 			ImageDto image = service.get(8)

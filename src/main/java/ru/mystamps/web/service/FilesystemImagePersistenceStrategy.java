@@ -76,7 +76,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	}
 	
 	@Override
-	public ImageDto get(Integer id) {
+	public ImageDto get(Image image) {
 		return null; // TODO: implement
 	}
 	
