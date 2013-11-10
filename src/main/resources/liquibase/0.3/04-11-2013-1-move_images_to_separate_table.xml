@@ -9,13 +9,13 @@
 		<comment>Creates new table for holding images' content (#132)</comment>
 		
 		<createTable tableName="images_data">
-			<column name="id" type="INT" autoIncrement="true">
+			<column name="id" type="INTEGER" autoIncrement="true">
 				<constraints primaryKey="true" primaryKeyName="images_data_pk" />
 			</column>
 			<column name="content" type="LONGBLOB">
 				<constraints nullable="false" />
 			</column>
-			<column name="image_id" type="INT">
+			<column name="image_id" type="INTEGER">
 				<constraints nullable="false" references="images" foreignKeyName="images_data_to_images_fk" />
 			</column>
 		</createTable>
