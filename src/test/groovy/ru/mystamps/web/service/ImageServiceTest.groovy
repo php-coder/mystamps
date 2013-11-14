@@ -86,16 +86,23 @@ class ImageServiceTest extends Specification {
 			1 * imageDao.save(_ as Image) >> new Image()
 	}
 	
-	def "save() should pass content type to image dao"() {
+	@Unroll
+	def "save() should pass content type '#contentType' to image dao"(String contentType, Image.Type expectedType) {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> "image/jpeg"
+			multipartFile.getContentType() >> contentType
 		and:
 			1 * imageDao.save({ Image image ->
-				assert image?.type == Image.Type.JPEG
+				assert image?.type == expectedType
 				return true
 			}) >> new Image()
+		where:
+			contentType                 | expectedType
+			'image/jpeg'                | Image.Type.JPEG
+			'image/jpeg; charset=UTF-8' | Image.Type.JPEG
+			'image/png'                 | Image.Type.PNG
+			'image/png; charset=UTF8'   | Image.Type.PNG
 	}
 	
 	def "save() should throw exception when image dao returned null"() {

@@ -21,7 +21,6 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -34,6 +33,9 @@ import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
+
+import static org.apache.commons.lang3.StringUtils.substringAfter;
+import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 public class ImageServiceImpl implements ImageService {
 	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
@@ -56,7 +58,7 @@ public class ImageServiceImpl implements ImageService {
 		String contentType = file.getContentType();
 		Validate.isTrue(contentType != null, "File type must be non null");
 		
-		String extension = StringUtils.substringAfter(contentType, "/");
+		String extension = extractExtensionFromContentType(contentType);
 		Validate.validState(
 				"png".equals(extension) || "jpeg".equals(extension),
 				"File type must be PNG or JPEG image, but '%s' (%s) were passed",
@@ -90,6 +92,11 @@ public class ImageServiceImpl implements ImageService {
 		}
 		
 		return imagePersistenceStrategy.get(image);
+	}
+	
+	private static String extractExtensionFromContentType(String contentType) {
+		// "image/jpeg; charset=UTF-8" -> "jpeg"
+		return substringBefore(substringAfter(contentType, "/"), ";");
 	}
 	
 }
