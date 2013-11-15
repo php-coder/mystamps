@@ -53,10 +53,10 @@
 		<war.plugin.version>2.3</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<tomcat.plugin.version>1.1</tomcat.plugin.version>
-		<surefire.plugin.version>2.15</surefire.plugin.version>
+		<surefire.plugin.version>2.16</surefire.plugin.version>
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
-		<failsafe.plugin.version>2.15</failsafe.plugin.version>
+		<failsafe.plugin.version>2.16</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.8.v20121106</jetty.plugin.version>
 		<hibernate.plugin.version>3.0</hibernate.plugin.version>
 		<liquibase.plugin.version>2.0.5</liquibase.plugin.version>
