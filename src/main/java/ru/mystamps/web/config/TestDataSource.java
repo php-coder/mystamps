@@ -38,6 +38,7 @@ public class TestDataSource {
 			.addScript("classpath:test/init-data.sql")
 			.addScript("classpath:test/test-data.sql")
 			.addScript("classpath:test/test-country-italy.sql")
+			.addScript("classpath:test/test-users-activations.sql")
 			.build();
 	}
 }

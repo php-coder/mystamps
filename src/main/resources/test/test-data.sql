@@ -12,17 +12,3 @@ VALUES (
 	'@valid_user_password_hash@',
 	'@valid_user_password_salt@'
 );
-
-INSERT INTO users_activation(act_key, email, created_at)
-VALUES(
-	'@not_activated_user1_act_key@',
-	'test1@example.org',
-	NOW()
-);
-
-INSERT INTO users_activation(act_key, email, created_at)
-VALUES(
-	'@not_activated_user2_act_key@',
-	'test2@example.org',
-	NOW()
-);
