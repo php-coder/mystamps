@@ -26,12 +26,3 @@ VALUES(
 	'test2@example.org',
 	NOW()
 );
-
-INSERT INTO countries(name, created_at, created_by, updated_at, updated_by)
-VALUES(
-	'@valid_country_name@',
-	NOW(),
-	1,
-	NOW(),
-	1
-);

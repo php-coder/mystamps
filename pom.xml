@@ -388,7 +388,7 @@
 				<directory>${basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>test/test-data.sql</include>
+					<include>test/test-*.sql</include>
 				</includes>
 			</resource>
 			<resource>

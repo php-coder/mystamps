@@ -37,6 +37,7 @@ public class TestDataSource {
 			.addScript("classpath:test/h2-scheme.sql")
 			.addScript("classpath:test/init-data.sql")
 			.addScript("classpath:test/test-data.sql")
+			.addScript("classpath:test/test-country-italy.sql")
 			.build();
 	}
 }
