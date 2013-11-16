@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+	
+	<changeSet id="create-users_activation-table" author="php-coder" context="scheme">
+		<comment>Creates users_activation table</comment>
+		
+		<createTable tableName="users_activation">
+			<column name="act_key" type="VARCHAR(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-users_table" author="php-coder" context="scheme">
+		<comment>Creates users table</comment>
+		
+		<createTable tableName="users">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="login" type="VARCHAR(15)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="hash" type="VARCHAR(40)">
+				<constraints nullable="false" />
+			</column>
+			<column name="salt" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="registered_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="activated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-countries-table" author="php-coder" context="scheme">
+		<comment>Creates countries table</comment>
+		
+		<createTable tableName="countries">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="INTEGER">
+				<constraints nullable="false" references="users" foreignKeyName="fk_countries_created_by" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_by" type="INTEGER">
+				<constraints nullable="false" references="users" foreignKeyName="fk_countries_updated_by" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-series-table" author="php-coder" context="scheme">
+		<comment>Creates series table</comment>
+		
+		<createTable tableName="series">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="quantity" type="INTEGER">
+				<constraints nullable="false" />
+			</column>
+			<column name="perforated" type="BOOLEAN">
+				<constraints nullable="false" />
+			</column>
+			<column name="country_id" type="INTEGER">
+				<constraints references="countries" foreignKeyName="fk_series_country_id" />
+			</column>
+			<column name="released_at" type="DATE" />
+			<column name="gibbons_currency" type="VARCHAR(3)" />
+			<column name="gibbons_price" type="DOUBLE PRECISION" />
+			<column name="michel_currency" type="VARCHAR(3)" />
+			<column name="michel_price" type="DOUBLE PRECISION" />
+			<column name="scott_currency" type="VARCHAR(3)" />
+			<column name="scott_price" type="DOUBLE PRECISION" />
+			<column name="yvert_currency" type="VARCHAR(3)" />
+			<column name="yvert_price" type="DOUBLE PRECISION" />
+			<column name="image_url" type="VARCHAR(255)" />
+			<column name="comment" type="VARCHAR(255)" />
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="INTEGER">
+				<constraints nullable="false" references="users" foreignKeyName="fk_series_created_by" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_by" type="INTEGER">
+				<constraints nullable="false" references="users" foreignKeyName="fk_series_updated_by" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-michel_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates michel_catalog table</comment>
+		
+		<createTable tableName="michel_catalog">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="code" type="VARCHAR(4)">
+				<constraints unique="true" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_michel_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates series_michel_catalog table</comment>
+		
+		<createTable tableName="series_michel_catalog">
+			<column name="series_id" type="INTEGER">
+				<constraints primaryKey="true" references="series" foreignKeyName="fk_series_michel_catalog_series_id" />
+			</column>
+			<column name="michel_id" type="INTEGER">
+				<constraints primaryKey="true" references="michel_catalog" foreignKeyName="fk_series_michel_catalog_michel_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-scott_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates scott_catalog table</comment>
+		
+		<createTable tableName="scott_catalog">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="code" type="VARCHAR(4)">
+				<constraints unique="true" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_scott_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates series_scott_catalog table</comment>
+		
+		<createTable tableName="series_scott_catalog">
+			<column name="series_id" type="INTEGER">
+				<constraints primaryKey="true" references="series" foreignKeyName="fk_series_scott_catalog_series_id" />
+			</column>
+			<column name="scott_id" type="INTEGER">
+				<constraints primaryKey="true" references="scott_catalog" foreignKeyName="fk_series_scott_catalog_scott_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-yvert_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates yvert_catalog table</comment>
+		
+		<createTable tableName="yvert_catalog">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="code" type="VARCHAR(4)">
+				<constraints unique="true" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_yvert_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates series_yvert_catalog table</comment>
+		
+		<createTable tableName="series_yvert_catalog">
+			<column name="series_id" type="INTEGER">
+				<constraints primaryKey="true" references="series" foreignKeyName="fk_series_yvert_catalog_series_id" />
+			</column>
+			<column name="yvert_id" type="INTEGER">
+				<constraints primaryKey="true" references="yvert_catalog" foreignKeyName="fk_series_yvert_catalog_yvert_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-gibbons_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates gibbons_catalog table</comment>
+		
+		<createTable tableName="gibbons_catalog">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="code" type="VARCHAR(4)">
+				<constraints unique="true" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_gibbons_catalog-table" author="php-coder" context="scheme">
+		<comment>Creates series_gibbons_catalog table</comment>
+		
+		<createTable tableName="series_gibbons_catalog">
+			<column name="series_id" type="INTEGER">
+				<constraints primaryKey="true" references="series" foreignKeyName="fk_series_gibbons_catalog_series_id" />
+			</column>
+			<column name="gibbons_id" type="INTEGER">
+				<constraints primaryKey="true" references="gibbons_catalog" foreignKeyName="fk_series_gibbons_catalog_gibbons_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-images-table" author="php-coder" context="scheme">
+		<comment>Creates images table</comment>
+		
+		<createTable tableName="images">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="type" type="VARCHAR(4)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-images_data-table" author="php-coder" context="scheme">
+		<comment>Creates images_data table</comment>
+		
+		<createTable tableName="images_data">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="content" type="LONGBLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="image_id" type="INTEGER">
+				<constraints nullable="false" references="images" foreignKeyName="fk_images_data_image_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+		<modifySql dbms="h2">
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-1288 -->
+			<replace replace="VARBINARY" with="BLOB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-suspicious_activities_types-table" author="php-coder" context="scheme">
+		<comment>Creates suspicious_activities_types table</comment>
+		
+		<createTable tableName="suspicious_activities_types">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(100)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-suspicious_activities-table" author="php-coder" context="scheme">
+		<comment>Creates suspicious_activities table</comment>
+		
+		<createTable tableName="suspicious_activities">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="page" type="VARCHAR(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="type_id" type="INTEGER">
+				<constraints nullable="false" references="suspicious_activities_types" foreignKeyName="fk_suspicious_activities_type_id" />
+			</column>
+			<column name="user_id" type="INTEGER">
+				<constraints references="users" foreignKeyName="fk_suspicious_activities_user_id" />
+			</column>
+			<column name="user_agent" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="referer_page" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ip" type="VARCHAR(15)">
+				<constraints nullable="false" />
+			</column>
+			<column name="occured_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+			
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
+			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="initiate-suspicious_activities_types-table" author="php-coder" context="init-data">
+		<insert tableName="suspicious_activities_types">
+			<column name="name" value="PageNotFound" />
+		</insert>
+		<insert tableName="suspicious_activities_types">
+			<column name="name" value="AuthenticationFailed" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="create-user-coder" author="php-coder" context="test-data">
+		<sqlFile path="sql/test-user-coder.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+	<changeSet id="create-users-activations" author="php-coder" context="test-data">
+		<sqlFile path="sql/test-users-activations.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+	<changeSet id="create-country-italy" author="php-coder" context="test-data">
+		<sqlFile path="sql/test-country-italy.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+</databaseChangeLog>

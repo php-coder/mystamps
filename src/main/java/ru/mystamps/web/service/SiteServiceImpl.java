@@ -99,12 +99,14 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	private SuspiciousActivityType getAbsentPageType() {
-		// see src/main/resources/{dev,test}/init-data.sql
+		// see initiate-suspicious_activities_types-table changeset
+		// in src/main/resources/liquibase/initial-state.xml
 		return suspiciousActivityTypes.findByName("PageNotFound");
 	}
 	
 	private SuspiciousActivityType getFailedAuthenticationType() {
-		// see src/main/resources/{dev,test}/init-data.sql
+		// see initiate-suspicious_activities_types-table changeset
+		// in src/main/resources/liquibase/initial-state.xml
 		return suspiciousActivityTypes.findByName("AuthenticationFailed");
 	}
 	

@@ -22,6 +22,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import liquibase.integration.spring.SpringLiquibase;
 
@@ -30,11 +31,21 @@ public class LiquibaseConfig {
 	
 	@Inject
 	@Bean(name = "liquibase")
-	public SpringLiquibase getSpringLiquibase(DataSource dataSource) {
+	public SpringLiquibase getSpringLiquibase(DataSource dataSource, Environment env) {
 		SpringLiquibase liquibase = new SpringLiquibase();
 		liquibase.setDataSource(dataSource);
 		liquibase.setChangeLog("classpath:/liquibase/changelog.xml");
+		liquibase.setContexts(getActiveContexts(env));
 		return liquibase;
+	}
+	
+	private static String getActiveContexts(Environment env) {
+		if (env.acceptsProfiles("test")) {
+			return "scheme, init-data, test-data";
+		} else {
+			// see also duplicate definition at pom.xml
+			return "scheme, init-data";
+		}
 	}
 	
 }

@@ -58,7 +58,6 @@
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		<failsafe.plugin.version>2.16</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.14.v20131031</jetty.plugin.version>
-		<hibernate.plugin.version>3.0</hibernate.plugin.version>
 		<liquibase.plugin.version>2.0.5</liquibase.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.10</checkstyle.plugin.version>
@@ -388,11 +387,14 @@
 				<directory>${basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>test/test-*.sql</include>
+					<include>liquibase/sql/test-*.sql</include>
 				</includes>
 			</resource>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
+				<excludes>
+					<exclude>liquibase/sql/test-*.sql</exclude>
+				</excludes>
 			</resource>
 		</resources>
 		
@@ -579,31 +581,6 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>${hibernate.plugin.version}</version>
-				<configuration>
-					<hibernatetool destdir="${env.dir}">
-						<jpaconfiguration propertyfile="${env.dir}/spring/database.properties" />
-						<hbm2ddl export="false" format="true" haltonerror="true" outputfilename="${ddl.file}" />
-					</hibernatetool>
-				</configuration>
-				<dependencies>
-					<!-- Stick to 3.6.x version because plugin not works with Hibernate 4.x -->
-					<dependency>
-						<groupId>org.hibernate</groupId>
-						<artifactId>hibernate-core</artifactId>
-						<version>3.6.10.Final</version>
-					</dependency>
-					<dependency>
-						<groupId>org.hibernate</groupId>
-						<artifactId>hibernate-entitymanager</artifactId>
-						<version>3.6.10.Final</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			
-			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.plugin.version}</version>
@@ -615,6 +592,8 @@
 						${basedir}/src/main/resources/liquibase/liquibase.properties
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
+					<!-- See also src/main/java/ru/mystamps/web/config/LiquibaseConfig.java -->
+					<contexts>scheme,init-data</contexts>
 				</configuration>
 			</plugin>
 			
@@ -803,7 +782,6 @@
 			</activation>
 			<properties>
 				<env.dir>${basedir}/src/main/resources/dev</env.dir>
-				<ddl.file>mysql-scheme.sql</ddl.file>
 			</properties>
 		</profile>
 		
@@ -814,7 +792,6 @@
 			</activation>
 			<properties>
 				<env.dir>${basedir}/src/main/resources/test</env.dir>
-				<ddl.file>h2-scheme.sql</ddl.file>
 			</properties>
 		</profile>
 		
