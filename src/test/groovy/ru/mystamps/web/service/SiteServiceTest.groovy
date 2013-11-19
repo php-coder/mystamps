@@ -83,7 +83,7 @@ class SiteServiceTest extends Specification {
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
-				assert DateUtils.roughlyEqual(activity?.occuredAt, new Date())
+				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
 	}
@@ -249,7 +249,7 @@ class SiteServiceTest extends Specification {
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
-				assert DateUtils.roughlyEqual(activity?.occuredAt, new Date())
+				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
 	}

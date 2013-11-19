@@ -391,7 +391,7 @@
 			<column name="ip" type="VARCHAR(15)">
 				<constraints nullable="false" />
 			</column>
-			<column name="occured_at" type="DATETIME">
+			<column name="occurred_at" type="DATETIME">
 				<constraints nullable="false" />
 			</column>
 		</createTable>

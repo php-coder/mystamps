@@ -86,7 +86,7 @@ public class SiteServiceImpl implements SiteService {
 		
 		SuspiciousActivity activity = new SuspiciousActivity();
 		activity.setType(type);
-		activity.setOccuredAt(new Date());
+		activity.setOccurredAt(new Date());
 		activity.setPage(page);
 		
 		activity.setUser(user);

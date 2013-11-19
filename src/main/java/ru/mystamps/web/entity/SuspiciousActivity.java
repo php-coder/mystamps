@@ -46,8 +46,8 @@ public class SuspiciousActivity {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	private SuspiciousActivityType type;
 	
-	@Column(name = "occured_at", nullable = false)
-	private Date occuredAt;
+	@Column(name = "occurred_at", nullable = false)
+	private Date occurredAt;
 	
 	@Column(length = PAGE_URL_LENGTH, nullable = false)
 	private String page;
