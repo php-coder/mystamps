@@ -18,7 +18,8 @@
 package ru.mystamps.web.support.spring.security;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -70,7 +71,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+		List<SimpleGrantedAuthority> authorities = new LinkedList<SimpleGrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
+		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
+		return authorities;
 	}
 	
 }

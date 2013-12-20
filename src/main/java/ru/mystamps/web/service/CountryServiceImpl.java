@@ -46,7 +46,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('ROLE_USER')")
+	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
 	public Country add(AddCountryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "Country name should be non null");

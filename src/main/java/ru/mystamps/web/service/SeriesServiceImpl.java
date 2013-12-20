@@ -59,7 +59,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('ROLE_USER')")
+	@PreAuthorize("hasAuthority('CREATE_SERIES')")
 	public Series add(AddSeriesDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
