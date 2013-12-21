@@ -113,6 +113,7 @@
 			<version>${spring.version}</version>
 			<exclusions>
 				<exclusion>
+					<!-- Because we use jcl-over-slf4j instead -->
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
@@ -196,6 +197,7 @@
 			<version>${commons.beanutils.version}</version>
 			<exclusions>
 				<exclusion>
+					<!-- Because we use jcl-over-slf4j instead -->
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
@@ -295,6 +297,7 @@
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
+					<!-- Because we use jcl-over-slf4j instead -->
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
@@ -694,6 +697,7 @@
 							<rules>
 								<bannedDependencies>
 									<excludes>
+										<!-- Because we use jcl-over-slf4j instead -->
 										<exclude>commons-logging</exclude>
 									</excludes>
 								</bannedDependencies>
