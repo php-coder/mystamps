@@ -60,7 +60,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_SERIES')")
-	public Series add(AddSeriesDto dto, User user) {
+	public Series add(AddSeriesDto dto, User user, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
@@ -104,7 +104,7 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		series.setImageUrl(imageUrl);
 		
-		if (dto.getComment() != null) {
+		if (userCanAddComments && dto.getComment() != null) {
 			Validate.isTrue(
 				!dto.getComment().trim().isEmpty(),
 				"Comment must be non empty"

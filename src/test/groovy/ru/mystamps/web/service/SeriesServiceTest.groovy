@@ -20,6 +20,7 @@ package ru.mystamps.web.service
 import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.entity.Country
@@ -62,7 +63,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should throw exception argument is null"() {
 		when:
-			service.add(null, user)
+			service.add(null, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -71,7 +72,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			form.setQuantity(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -80,21 +81,21 @@ class SeriesServiceTest extends Specification {
 		given:
 			form.setPerforated(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
 
 	def "add() should throw exception when user is null"() {
 		when:
-			service.add(form, null)
+			service.add(form, null, false)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "add() should pass entity to series dao"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save(_ as Series)
 	}
@@ -104,7 +105,7 @@ class SeriesServiceTest extends Specification {
 			Country expectedCountry = TestObjects.createCountry()
 			form.setCountry(expectedCountry)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.country == expectedCountry
@@ -118,7 +119,7 @@ class SeriesServiceTest extends Specification {
 			Date passedDate = null
 			form.setYear(expectedYear)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				passedDate = series?.releasedAt
@@ -137,7 +138,7 @@ class SeriesServiceTest extends Specification {
 			Integer expectedQuantity = 3
 			form.setQuantity(expectedQuantity)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.quantity == expectedQuantity
@@ -150,7 +151,7 @@ class SeriesServiceTest extends Specification {
 			Boolean expectedResult = true
 			form.setPerforated(expectedResult)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.perforated == expectedResult
@@ -162,7 +163,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			assert form.getMichelNumbers() == null
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.michel == null
@@ -178,7 +179,7 @@ class SeriesServiceTest extends Specification {
 			] as Set
 			form.setMichelNumbers(expectedNumbers.join(','))
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.michel == expectedNumbers
@@ -192,7 +193,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setMichelCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -205,7 +206,7 @@ class SeriesServiceTest extends Specification {
 			Currency expectedCurrency = Currency.RUR
 			form.setMichelCurrency(expectedCurrency)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.michelPrice?.value == expectedPrice
@@ -220,7 +221,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setMichelCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.michelPrice == null
@@ -232,7 +233,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			assert form.getScottNumbers() == null
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.scott == null
@@ -248,7 +249,7 @@ class SeriesServiceTest extends Specification {
 			] as Set
 			form.setScottNumbers(expectedNumbers.join(','))
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.scott == expectedNumbers
@@ -262,7 +263,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setScottCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -275,7 +276,7 @@ class SeriesServiceTest extends Specification {
 			Currency expectedCurrency = Currency.RUR
 			form.setScottCurrency(expectedCurrency)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.scottPrice?.value == expectedPrice
@@ -290,7 +291,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setScottCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.scottPrice == null
@@ -302,7 +303,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			assert form.getYvertNumbers() == null
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvert == null
@@ -318,7 +319,7 @@ class SeriesServiceTest extends Specification {
 			] as Set
 			form.setYvertNumbers(expectedNumbers.join(','))
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvert == expectedNumbers
@@ -332,7 +333,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setYvertCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -345,7 +346,7 @@ class SeriesServiceTest extends Specification {
 			Currency expectedCurrency = Currency.RUR
 			form.setYvertCurrency(expectedCurrency)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvertPrice?.value == expectedPrice
@@ -360,7 +361,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setYvertCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvertPrice == null
@@ -372,7 +373,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			assert form.getGibbonsNumbers() == null
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbons == null
@@ -388,7 +389,7 @@ class SeriesServiceTest extends Specification {
 			] as Set
 			form.setGibbonsNumbers(expectedNumbers.join(','))
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbons == expectedNumbers
@@ -402,7 +403,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setGibbonsCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -415,7 +416,7 @@ class SeriesServiceTest extends Specification {
 			Currency expectedCurrency = Currency.RUR
 			form.setGibbonsCurrency(expectedCurrency)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbonsPrice?.value == expectedPrice
@@ -430,7 +431,7 @@ class SeriesServiceTest extends Specification {
 		and:
 			form.setGibbonsCurrency(null)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbonsPrice == null
@@ -442,7 +443,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			form.setImage(multipartFile)
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -452,7 +453,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should throw exception if image url is null"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			// override setup() settings
 			imageService.save(_) >> null
@@ -462,7 +463,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should throw exception if image url too long"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			// override setup() settings
 			imageService.save(_) >> "x" * (Series.IMAGE_URL_LENGTH + 1)
@@ -474,7 +475,7 @@ class SeriesServiceTest extends Specification {
 		given:
 			String expectedUrl = "http://example.org/example.jpg"
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			imageService.save(_) >> expectedUrl
 		and:
@@ -488,27 +489,33 @@ class SeriesServiceTest extends Specification {
 		given:
 			form.setComment("  ")
 		when:
-			service.add(form, user)
+			service.add(form, user, true)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should pass comment to series dao if present"() {
+	@Unroll
+	def "add() should pass '#expectedComment' as comment to series dao if user can add comment is #canAddComment"(boolean canAddComment, String comment, String expectedComment) {
 		given:
-			String expectedComment = "Some text"
-			form.setComment(expectedComment)
+			form.setComment(comment)
 		when:
-			service.add(form, user)
+			service.add(form, user, canAddComment)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.comment == expectedComment
 				return true
 			})
+		where:
+			canAddComment | comment     | expectedComment
+			false         | null        | null
+			false         | "test"      | null
+			true          | null        | null
+			true          | "Some text" | "Some text"
 	}
 	
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert DateUtils.roughlyEqual(series?.metaInfo?.createdAt, new Date())
@@ -518,7 +525,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert DateUtils.roughlyEqual(series?.metaInfo?.updatedAt, new Date())
@@ -528,7 +535,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should assign created by to user"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.metaInfo?.createdBy == user
@@ -538,7 +545,7 @@ class SeriesServiceTest extends Specification {
 	
 	def "add() should assign updated by to user"() {
 		when:
-			service.add(form, user)
+			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.metaInfo?.updatedBy == user

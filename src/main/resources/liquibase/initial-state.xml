@@ -36,6 +36,9 @@
 			<column name="login" type="VARCHAR(15)">
 				<constraints nullable="false" unique="true" />
 			</column>
+			<column name="role" type="VARCHAR(5)">
+				<constraints nullable="false" />
+			</column>
 			<column name="name" type="VARCHAR(100)">
 				<constraints nullable="false" />
 			</column>
@@ -412,6 +415,10 @@
 		<insert tableName="suspicious_activities_types">
 			<column name="name" value="AuthenticationFailed" />
 		</insert>
+	</changeSet>
+
+	<changeSet id="create-user-admin" author="php-coder" context="test-data">
+		<sqlFile path="sql/test-user-admin.sql" relativeToChangelogFile="true" />
 	</changeSet>
 	
 	<changeSet id="create-user-coder" author="php-coder" context="test-data">

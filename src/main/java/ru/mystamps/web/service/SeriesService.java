@@ -22,5 +22,5 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 
 public interface SeriesService {
-	Series add(AddSeriesDto dto, User user);
+	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
 }

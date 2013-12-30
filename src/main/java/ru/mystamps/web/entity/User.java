@@ -21,9 +21,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import static javax.persistence.EnumType.STRING;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +38,7 @@ import lombok.Setter;
 public class User {
 	
 	public static final int LOGIN_LENGTH = 15;
+	public static final int ROLE_LENGTH  = 5;
 	public static final int NAME_LENGTH  = 100;
 	public static final int HASH_LENGTH  = 40;
 	public static final int SALT_LENGTH  = 10;
@@ -45,6 +49,10 @@ public class User {
 	
 	@Column(length = LOGIN_LENGTH, unique = true, nullable = false)
 	private String login;
+	
+	@Column(length = ROLE_LENGTH, nullable = false)
+	@Enumerated(STRING)
+	private Role role;
 	
 	@Column(length = NAME_LENGTH, nullable = false)
 	private String name;
@@ -63,5 +71,13 @@ public class User {
 	
 	@Column(length = SALT_LENGTH, nullable = false)
 	private String salt;
+	
+	public boolean isAdmin() {
+		return role == Role.ADMIN;
+	}
+	
+	public enum Role {
+		USER, ADMIN
+	};
 	
 }

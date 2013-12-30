@@ -17,14 +17,14 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -34,18 +34,25 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
-import ru.mystamps.web.Url;
 
-import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
+import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
+import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
-public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
+import static org.fest.assertions.api.Assertions.assertThat;
+
+/**
+ * The main difference between this test and {@link WhenUserAddSeries} is that as admin we have
+ * additional field for comment.
+ */
+public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
@@ -73,11 +80,11 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		
 		try {
 			SAMPLE_IMAGE_PATH = new File(
-				WhenUserAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
+				WhenAdminAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
 			).getAbsolutePath();
 			
 			EMPTY_IMAGE_PATH = new File(
-				WhenUserAddSeries.class.getClassLoader().getResource(EMPTY_IMAGE_NAME).toURI()
+				WhenAdminAddSeries.class.getClassLoader().getResource(EMPTY_IMAGE_NAME).toURI()
 			).getAbsolutePath();
 		
 		} catch (URISyntaxException e) {
@@ -85,13 +92,13 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		}
 	}
 	
-	@Value("${valid_user_login}")
-	private String validUserLogin;
+	@Value("${valid_admin_login}")
+	private String validAdminLogin;
 	
-	@Value("${valid_user_password}")
-	private String validUserPassword;
+	@Value("${valid_admin_password}")
+	private String validAdminPassword;
 	
-	public WhenUserAddSeries() {
+	public WhenAdminAddSeries() {
 		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
 		hasHeader(tr("t_add_series_ucfirst"));
@@ -99,7 +106,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@BeforeClass
 	public void login() {
-		page.login(validUserLogin, validUserPassword);
+		page.login(validAdminLogin, validAdminPassword);
 	}
 	
 	@BeforeMethod
@@ -257,6 +264,17 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void commentShouldNotBeTooLong() {
+		page.fillComment(StringUtils.repeat("x", MAX_SERIES_COMMENT_LENGTH + 1));
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("comment")
+			.hasError(tr("value.too-long", MAX_SERIES_COMMENT_LENGTH));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void imageSizeMustBeGreaterThanZero() {
 		page.fillImage(EMPTY_IMAGE_PATH);
 		
@@ -328,6 +346,15 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
 	}
 	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void commentShouldBeStripedFromLeadingAndTrailingSpaces() {
+		page.fillComment(" example comment ");
+		
+		page.submit();
+		
+		assertThat(page).field("comment").hasValue("example comment");
+	}
+	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
 		String expectedQuantity = "2";
@@ -355,6 +382,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		String expectedQuantity    = "3";
 		String expectedYear        = "1999";
 		String expectedCountryName = "Italy";
+		String expectedComment     = "Any text";
 		
 		page.fillCountry(expectedCountryName);
 		page.fillYear(expectedYear);
@@ -377,6 +405,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillGibbonsPrice("400.335");
 		page.fillGibbonsCurrency("RUR");
 		
+		page.fillComment(expectedComment);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
 		AbstractPage next = page.submit();
@@ -397,6 +426,8 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22 (8.11 USD)");
 		// TODO: disable rounding mode
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 RUR)");
+		
+		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })

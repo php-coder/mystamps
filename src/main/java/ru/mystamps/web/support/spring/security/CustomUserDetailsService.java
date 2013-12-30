@@ -36,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.entity.User;
+import ru.mystamps.web.entity.User.Role;
 import ru.mystamps.web.service.UserService;
 
 /**
@@ -67,13 +68,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		LOG.debug("User '{}' found", login);
 		
-		return new CustomUserDetails(user, getAuthorities());
+		return new CustomUserDetails(user, getAuthorities(user));
 	}
 	
-	private static Collection<? extends GrantedAuthority> getAuthorities() {
+	private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
 		List<SimpleGrantedAuthority> authorities = new LinkedList<SimpleGrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
+		
+		if (user.isAdmin()) {
+			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
+		}
+		
 		return authorities;
 	}
 	

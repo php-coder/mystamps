@@ -39,6 +39,8 @@ import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 
+import static ru.mystamps.web.entity.User.Role.USER;
+
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
@@ -117,6 +119,7 @@ public class UserServiceImpl implements UserService {
 		
 		User user = new User();
 		user.setLogin(login);
+		user.setRole(USER);
 		user.setName(finalName);
 		user.setEmail(email);
 		user.setRegisteredAt(registrationDate);

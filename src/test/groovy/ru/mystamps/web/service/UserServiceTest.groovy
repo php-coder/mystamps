@@ -24,6 +24,7 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.User
+import ru.mystamps.web.entity.User.Role
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.model.RegisterAccountForm
@@ -260,6 +261,16 @@ class UserServiceTest extends Specification {
 		then:
 			1 * userDao.save({ User user ->
 				assert user?.name == expectedUserLogin
+				return true
+			})
+	}
+	
+	def "registerUser() should fill role field"() {
+		when:
+			service.registerUser(activationForm)
+		then:
+			1 * userDao.save({ User user ->
+				assert user?.role == Role.USER
 				return true
 			})
 	}

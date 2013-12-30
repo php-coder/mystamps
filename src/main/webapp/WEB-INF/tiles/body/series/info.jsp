@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib tagdir="/WEB-INF/tags/elem" prefix="elem" %>
 
 <div class="row-fluid">
@@ -92,7 +93,8 @@
 					/>
 				</dd>
 			</c:if>
-			<c:if test="${not empty series.comment}">
+			<sec:authorize var="userCanAddComments" access="hasAuthority('ADD_COMMENTS_TO_SERIES')" />
+			<c:if test="${userCanAddComments and not empty series.comment}">
 				<dt>
 					<spring:message code="t_comment" />
 				</dt>

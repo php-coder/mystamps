@@ -164,6 +164,7 @@ public final class Form {
 		
 		private final String xpath;
 		private boolean preserveInvalidValue = true;
+		private boolean accessibleByAll = false;
 		
 		protected Field(String name, String xpath) {
 			this.name = name;
@@ -179,6 +180,15 @@ public final class Form {
 		
 		public boolean isRequired() {
 			return required;
+		}
+		
+		public Field accessibleByAll(boolean visible) {
+			accessibleByAll = visible;
+			return this;
+		}
+		
+		public boolean isAccessibleByAll() {
+			return accessibleByAll;
 		}
 		
 		public boolean hasLabel() {

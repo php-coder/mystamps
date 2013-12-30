@@ -58,15 +58,17 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	private void shouldHaveFields() {
 		for (Field field : page.getForm().getFields()) {
-			assertThat(page.isFieldExists(field))
-				.overridingErrorMessage("field with XPath '" + field + "' should exists")
-				.isTrue();
+			if (field.isAccessibleByAll()) {
+				assertThat(page.isFieldExists(field))
+					.overridingErrorMessage("field with XPath '" + field + "' should exists")
+					.isTrue();
+			}
 		}
 	}
 	
 	private void shouldHaveLabels() {
 		for (Field field : page.getForm().getFields()) {
-			if (!field.hasLabel()) {
+			if (!field.isAccessibleByAll() || !field.hasLabel()) {
 				continue;
 			}
 			

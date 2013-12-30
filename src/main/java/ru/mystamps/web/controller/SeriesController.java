@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.groups.Default;
 
 import java.util.Calendar;
@@ -46,6 +47,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 
 @Controller
@@ -105,13 +107,16 @@ public class SeriesController {
 	public String processInput(
 		@Validated({Default.class, ImageChecks.class}) AddSeriesForm form,
 		BindingResult result,
+		HttpServletRequest request,
 		User currentUser) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		Series series = seriesService.add(form, currentUser);
+		boolean userCanAddComments =
+			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
+		Series series = seriesService.add(form, currentUser, userCanAddComments);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
 			.buildAndExpand(series.getId())

@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib tagdir="/WEB-INF/tags/elem" prefix="elem" %>
 <%@ page import="ru.mystamps.web.validation.ValidationRules" %>
 
@@ -127,7 +128,8 @@
 			</div>
 		</div>
 		
-		<elem:field path="comment" label="t_comment">
+		<sec:authorize var="userCanAddComments" access="hasAuthority('ADD_COMMENTS_TO_SERIES')" />
+		<elem:field path="comment" label="t_comment" render="${userCanAddComments}">
 			<form:textarea path="comment" cssClass="span6" cols="22" rows="3" />
 		</elem:field>
 		
