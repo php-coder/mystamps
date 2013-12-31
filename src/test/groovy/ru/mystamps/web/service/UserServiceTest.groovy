@@ -431,4 +431,31 @@ class UserServiceTest extends Specification {
 			1 * userDao.findByLogin("john")
 	}
 	
+	//
+	// Tests for countByLogin()
+	//
+	
+	def "countByLogin() should throw exception when login is null"() {
+		when:
+			service.countByLogin(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countByLogin() should call dao"() {
+		given:
+			userDao.countByLogin(_ as String) >> 2
+		when:
+			int result = service.countByLogin("any-login")
+		then:
+			result == 2
+	}
+	
+	def "countByLogin() should pass login to dao"() {
+		when:
+			service.countByLogin("john")
+		then:
+			1 * userDao.countByLogin("john")
+	}
+	
 }

@@ -146,6 +146,14 @@ public class UserServiceImpl implements UserService {
 		return users.findByLogin(login);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public int countByLogin(String login) {
+		Validate.isTrue(login != null, "Login should be non null");
+		
+		return users.countByLogin(login);
+	}
+	
 	/**
 	 * Generates activation key.
 	 * @return string which contains numbers and letters in lower case

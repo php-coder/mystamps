@@ -27,4 +27,5 @@ public interface UserService {
 	int countRegistrationRequestByActivationKey(String activationKey);
 	void registerUser(ActivateAccountDto dto);
 	User findByLogin(String login);
+	int countByLogin(String login);
 }
