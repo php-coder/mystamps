@@ -24,7 +24,7 @@ import ru.mystamps.web.service.dto.RegisterAccountDto;
 
 public interface UserService {
 	void addRegistrationRequest(RegisterAccountDto dto);
-	UsersActivation findRegistrationRequestByActivationKey(String activationKey);
+	int countRegistrationRequestByActivationKey(String activationKey);
 	void registerUser(ActivateAccountDto dto);
 	User findByLogin(String login);
 }

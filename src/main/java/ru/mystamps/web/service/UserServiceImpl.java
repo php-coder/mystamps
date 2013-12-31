@@ -76,10 +76,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public UsersActivation findRegistrationRequestByActivationKey(String activationKey) {
+	public int countRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
-		return usersActivation.findOne(activationKey);
+		return usersActivation.countByActivationKey(activationKey);
 	}
 	
 	@Override

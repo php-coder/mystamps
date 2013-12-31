@@ -145,33 +145,30 @@ class UserServiceTest extends Specification {
 	}
 	
 	//
-	// Tests for findRegistrationRequestByActivationKey()
+	// Tests for countRegistrationRequestByActivationKey()
 	//
 	
-	def "findRegistrationRequestByActivationKey() should throw exception when key is null"() {
+	def "countRegistrationRequestByActivationKey() should throw exception when key is null"() {
 		when:
-			service.findRegistrationRequestByActivationKey(null)
+			service.countRegistrationRequestByActivationKey(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findRegistrationRequestByActivationKey() should call dao"() {
+	def "countRegistrationRequestByActivationKey() should call dao"() {
 		given:
-			UsersActivation expectedActivation = TestObjects.createUsersActivation()
+			usersActivationDao.countByActivationKey(_ as String) >> 2
 		when:
-			UsersActivation activation =
-				service.findRegistrationRequestByActivationKey(expectedActivation.getActivationKey())
+			int result = service.countRegistrationRequestByActivationKey("0123456789")
 		then:
-			usersActivationDao.findOne(_ as String) >> expectedActivation
-		and:
-			activation == expectedActivation
+			result == 2
 	}
 	
-	def "findRegistrationRequestByActivationKey() should pass activation key to dao"() {
+	def "countRegistrationRequestByActivationKey() should pass activation key to dao"() {
 		when:
-			service.findRegistrationRequestByActivationKey("0987654321")
+			service.countRegistrationRequestByActivationKey("0987654321")
 		then:
-			1 * usersActivationDao.findOne("0987654321")
+			1 * usersActivationDao.countByActivationKey("0987654321")
 	}
 	
 	//
