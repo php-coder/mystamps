@@ -152,31 +152,30 @@ class CountryServiceTest extends Specification {
 	}
 	
 	//
-	// Tests for findByName()
+	// Tests for countByName()
 	//
 	
-	def "findByName() should throw exception when name is null"() {
+	def "countByName() should throw exception when name is null"() {
 		when:
-			service.findByName(null)
+			service.countByName(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByName() should call dao"() {
+	def "countByName() should call dao"() {
 		given:
-			Country expectedCountry = TestObjects.createCountry()
-			countryDao.findByName(_ as String) >> expectedCountry
+			countryDao.countByName(_ as String) >> 2
 		when:
-			Country country = service.findByName("Any name here")
+			int result = service.countByName("Any name here")
 		then:
-			country == expectedCountry
+			result == 2
 	}
 	
-	def "findByName() should pass country name to dao"() {
+	def "countByName() should pass country name to dao"() {
 		when:
-			service.findByName("Canada")
+			service.countByName("Canada")
 		then:
-			1 * countryDao.findByName({ String name ->
+			1 * countryDao.countByName({ String name ->
 				assert name == "Canada"
 				return true
 			})

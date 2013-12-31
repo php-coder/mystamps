@@ -22,5 +22,5 @@ import org.springframework.data.repository.CrudRepository;
 import ru.mystamps.web.entity.Country;
 
 public interface CountryDao extends CrudRepository<Country, Integer> {
-	Country findByName(String name);
+	int countByName(String name);
 }

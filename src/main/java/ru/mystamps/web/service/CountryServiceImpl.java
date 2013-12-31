@@ -76,9 +76,9 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Country findByName(String name) {
+	public int countByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
-		return countryDao.findByName(name);
+		return countryDao.countByName(name);
 	}
 	
 }

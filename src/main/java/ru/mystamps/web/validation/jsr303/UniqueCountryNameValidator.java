@@ -40,7 +40,7 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 			return true;
 		}
 		
-		if (countryService.findByName(value) != null) {
+		if (countryService.countByName(value) > 0) {
 			return false;
 		}
 		
