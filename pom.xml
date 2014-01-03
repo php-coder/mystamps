@@ -608,6 +608,7 @@
 					<strictCheck>true</strictCheck>
 					<includes>
 						<include>**/*.java</include>
+						<include>**/*.groovy</include>
 					</includes>
 					<mapping>
 						<java>SLASHSTAR_STYLE</java>
