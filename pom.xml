@@ -614,7 +614,7 @@
 						<java>SLASHSTAR_STYLE</java>
 					</mapping>
 					<properties>
-						<copyright.years>${project.inceptionYear}-2013</copyright.years>
+						<copyright.years>${project.inceptionYear}-2014</copyright.years>
 						<author.name>${project.developers[0].name}</author.name>
 						<author.email>${project.developers[0].email}</author.email>
 					</properties>
