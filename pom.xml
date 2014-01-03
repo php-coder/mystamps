@@ -27,7 +27,6 @@
 		<jstl.version>1.2</jstl.version>
 		<commons.lang.version>3.1</commons.lang.version>
 		<commons.beanutils.version>1.8.3</commons.beanutils.version>
-		<commons.fileupload.version>1.2.2</commons.fileupload.version>
 		<commons.io.version>2.4</commons.io.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
@@ -204,14 +203,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- File uploading support -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>${commons.fileupload.version}</version>
-		</dependency>
-		
-		<!-- Dependency of commons-fileupload -->
+		<!-- Needed for FileUtils/IOUtils -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

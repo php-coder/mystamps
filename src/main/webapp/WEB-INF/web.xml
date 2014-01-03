@@ -51,6 +51,13 @@
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- See http://docs.oracle.com/javaee/6/tutorial/doc/gmhal.html for details -->
+		<multipart-config>
+			<location>/tmp</location>
+			<max-request-size>10485760</max-request-size>     <!-- 10Mb -->
+			<max-file-size>5242880</max-file-size>            <!-- 5 Mb -->
+			<file-size-threshold>1048576</file-size-threshold><!-- 1 Mb -->
+		</multipart-config>
 	</servlet>
 	
 	<servlet-mapping>
