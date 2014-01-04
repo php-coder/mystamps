@@ -31,7 +31,7 @@
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<tiles.version>2.2.2</tiles.version>
-		<liquibase.version>2.0.5</liquibase.version>
+		<liquibase.version>3.0.8</liquibase.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
 		<bootstrap.version>2.3.1</bootstrap.version>
@@ -57,7 +57,7 @@
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		<failsafe.plugin.version>2.16</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.14.v20131031</jetty.plugin.version>
-		<liquibase.plugin.version>2.0.5</liquibase.plugin.version>
+		<liquibase.plugin.version>3.0.8</liquibase.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.11</checkstyle.plugin.version>
 		<pmd.plugin.version>3.0.1</pmd.plugin.version>

@@ -3,7 +3,7 @@
 		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 	
 	<changeSet id="create-users_activation-table" author="php-coder" context="scheme">
 		<comment>Creates users_activation table</comment>
@@ -93,7 +93,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -143,7 +143,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -182,7 +182,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -221,7 +221,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -260,7 +260,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -299,7 +299,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -341,12 +341,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
-		</modifySql>
-		
-		<modifySql dbms="h2">
-			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-1288 -->
-			<replace replace="VARBINARY" with="BLOB" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
@@ -403,7 +398,7 @@
 			<append value=" ENGINE=InnoDB" />
 			
 			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-891 -->
-			<regExpReplace replace="(REFERENCES \w+)" with="$1(id)" />
+			<regExpReplace replace="(REFERENCES \w+(\.\w+)?)" with="$1(id)" />
 		</modifySql>
 		
 	</changeSet>
