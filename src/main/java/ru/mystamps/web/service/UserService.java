@@ -18,7 +18,6 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 
