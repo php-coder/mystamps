@@ -63,7 +63,7 @@ public class CountryServiceImpl implements CountryService {
 		country.getMetaInfo().setUpdatedBy(user);
 
 		Country entity = countryDao.save(country);
-		LOG.debug("Created country ({})", entity);
+		LOG.debug("Country has been created ({})", entity);
 		
 		return entity;
 	}
