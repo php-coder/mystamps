@@ -389,19 +389,19 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		page.fillQuantity(expectedQuantity);
 		page.fillPerforated(false);
 		
-		page.fillMichelNumbers("1, 2, 3");
+		page.fillMichelNumbers("101, 102, 103");
 		page.fillMichelPrice("10.5");
 		page.fillMichelCurrency("EUR");
 		
-		page.fillScottNumbers("10, 11, 12");
+		page.fillScottNumbers("110, 111, 112");
 		page.fillScottPrice("1000");
 		page.fillScottCurrency("USD");
 		
-		page.fillYvertNumbers("20, 21, 22");
+		page.fillYvertNumbers("120, 121, 122");
 		page.fillYvertPrice("8.11");
 		page.fillYvertCurrency("USD");
 		
-		page.fillGibbonsNumbers("30, 31, 32");
+		page.fillGibbonsNumbers("130, 131, 132");
 		page.fillGibbonsPrice("400.335");
 		page.fillGibbonsCurrency("RUR");
 		
@@ -421,11 +421,11 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
 		
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#1-3 (10.5 EUR)");
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#10-12 (1000 USD)");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22 (8.11 USD)");
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#101-103 (10.5 EUR)");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#110-112 (1000 USD)");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#120-122 (8.11 USD)");
 		// TODO: disable rounding mode
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 RUR)");
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#130-132 (400.34 RUR)");
 		
 		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
@@ -434,52 +434,52 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	public void shouldIgnoreDuplicatedMichelNumbers() {
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.fillMichelNumbers("4,5,4");
+		page.fillMichelNumbers("104,105,104");
 		
 		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#4, 5");
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#104, 105");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedScottNumbers() {
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.fillScottNumbers("14,15,14");
+		page.fillScottNumbers("114,115,114");
 		
 		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#14, 15");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#114, 115");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedYvertNumbers() {
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.fillYvertNumbers("24,25,24");
+		page.fillYvertNumbers("124,125,124");
 		
 		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#24, 25");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#124, 125");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedGibbonsNumbers() {
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.fillGibbonsNumbers("34,35,34");
+		page.fillGibbonsNumbers("134,135,134");
 		
 		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#34, 35");
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#134, 135");
 	}
 	
 	@DataProvider(name = "validCatalogNumbers")
