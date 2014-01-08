@@ -8,4 +8,4 @@ INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt
 
 -- Used only in WhenUserAddCountry
 INSERT INTO countries(name, created_at, created_by, updated_at, updated_by) VALUES
-	('@valid_country_name@', NOW(), 2, NOW(), 2);
+	('@valid_country_name@', NOW(), 3, NOW(), 3);
