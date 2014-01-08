@@ -33,6 +33,10 @@ import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 import ru.mystamps.web.validation.jsr303.NotNullIfFirstField;
 import ru.mystamps.web.validation.jsr303.Price;
+import ru.mystamps.web.validation.jsr303.UniqueGibbonsNumbers;
+import ru.mystamps.web.validation.jsr303.UniqueMichelNumbers;
+import ru.mystamps.web.validation.jsr303.UniqueScottNumbers;
+import ru.mystamps.web.validation.jsr303.UniqueYvertNumbers;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
@@ -71,7 +75,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	@NotNull
 	private Boolean perforated;
 	
-	@CatalogNumbers
+	@CatalogNumbers(groups = MichelCatalog1Checks.class)
+	@UniqueMichelNumbers(groups = MichelCatalog2Checks.class)
 	private String michelNumbers;
 	
 	@Price
@@ -79,7 +84,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	
 	private Currency michelCurrency;
 	
-	@CatalogNumbers
+	@CatalogNumbers(groups = ScottCatalog1Checks.class)
+	@UniqueScottNumbers(groups = ScottCatalog2Checks.class)
 	private String scottNumbers;
 	
 	@Price
@@ -87,7 +93,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	
 	private Currency scottCurrency;
 	
-	@CatalogNumbers
+	@CatalogNumbers(groups = YvertCatalog1Checks.class)
+	@UniqueYvertNumbers(groups = YvertCatalog2Checks.class)
 	private String yvertNumbers;
 	
 	@Price
@@ -95,7 +102,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	
 	private Currency yvertCurrency;
 	
-	@CatalogNumbers
+	@CatalogNumbers(groups = GibbonsCatalog1Checks.class)
+	@UniqueGibbonsNumbers(groups = GibbonsCatalog2Checks.class)
 	private String gibbonsNumbers;
 	
 	@Price
@@ -111,6 +119,58 @@ public class AddSeriesForm implements AddSeriesDto {
 	@NotEmptyFile(groups = Image2Checks.class)
 	private MultipartFile image;
 	
+	
+	@GroupSequence({
+			MichelCatalog1Checks.class,
+			MichelCatalog2Checks.class
+	})
+	public interface MichelCatalogChecks {
+	}
+	
+	public interface MichelCatalog1Checks {
+	}
+	
+	public interface MichelCatalog2Checks {
+	}
+	
+	@GroupSequence({
+			ScottCatalog1Checks.class,
+			ScottCatalog2Checks.class
+	})
+	public interface ScottCatalogChecks {
+	}
+	
+	public interface ScottCatalog1Checks {
+	}
+	
+	public interface ScottCatalog2Checks {
+	}
+	
+	@GroupSequence({
+			YvertCatalog1Checks.class,
+			YvertCatalog2Checks.class
+	})
+	public interface YvertCatalogChecks {
+	}
+	
+	public interface YvertCatalog1Checks {
+	}
+	
+	public interface YvertCatalog2Checks {
+	}
+	
+	@GroupSequence({
+			GibbonsCatalog1Checks.class,
+			GibbonsCatalog2Checks.class
+	})
+	public interface GibbonsCatalogChecks {
+	}
+	
+	public interface GibbonsCatalog1Checks {
+	}
+	
+	public interface GibbonsCatalog2Checks {
+	}
 	
 	@GroupSequence({
 		Image1Checks.class,

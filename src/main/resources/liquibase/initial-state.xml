@@ -428,4 +428,8 @@
 		<sqlFile path="sql/test-country-italy.sql" relativeToChangelogFile="true" />
 	</changeSet>
 	
+	<changeSet id="create-series-with-catalogs-numbers" author="php-coder" context="test-data">
+		<sqlFile path="sql/test-series-with-catalogs-numbers.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
 </databaseChangeLog>

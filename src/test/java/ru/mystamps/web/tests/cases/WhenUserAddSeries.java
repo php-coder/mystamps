@@ -91,6 +91,18 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
+	@Value("${existing_michel_number}")
+	private String existingMichelNumber;
+	
+	@Value("${existing_scott_number}")
+	private String existingScottNumber;
+	
+	@Value("${existing_yvert_number}")
+	private String existingYvertNumber;
+	
+	@Value("${existing_gibbons_number}")
+	private String existingGibbonsNumber;
+	
 	public WhenUserAddSeries() {
 		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
@@ -254,6 +266,50 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.submit();
 		
 		assertThat(page).field("gibbonsPrice").hasError(msg);
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void michelNumbersShouldRejectExistingValues() {
+		page.fillMichelNumbers(existingMichelNumber);
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("michelNumbers")
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueMichelNumbers.message"));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void scottNumbersShouldRejectExistingValues() {
+		page.fillScottNumbers(existingScottNumber);
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("scottNumbers")
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueScottNumbers.message"));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void yvertNumbersShouldRejectExistingValues() {
+		page.fillYvertNumbers(existingYvertNumber);
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("yvertNumbers")
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueYvertNumbers.message"));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void gibbonsNumbersShouldRejectExistingValues() {
+		page.fillGibbonsNumbers(existingGibbonsNumber);
+		
+		page.submit();
+		
+		assertThat(page)
+			.field("gibbonsNumbers")
+			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueGibbonsNumbers.message"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")

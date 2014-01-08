@@ -126,6 +126,41 @@ public class SeriesServiceImpl implements SeriesService {
 		return entity;
 	}
 	
+	@Override
+	public int countByMichelNumber(String michelNumberCode) {
+		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
+		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
+		
+		return seriesDao.countByMichelNumberCode(michelNumberCode);
+	}
+	
+	@Override
+	public int countByScottNumber(String scottNumberCode) {
+		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
+		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
+		
+		return seriesDao.countByScottNumberCode(scottNumberCode);
+	}
+	
+	@Override
+	public int countByYvertNumber(String yvertNumberCode) {
+		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
+		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
+		
+		return seriesDao.countByYvertNumberCode(yvertNumberCode);
+	}
+	
+	@Override
+	public int countByGibbonsNumber(String gibbonsNumberCode) {
+		Validate.isTrue(gibbonsNumberCode != null, "Gibbons number code must be non null");
+		Validate.isTrue(
+			!gibbonsNumberCode.trim().isEmpty(),
+			"Gibbons number code must be non empty"
+		);
+		
+		return seriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
+	}
+	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
