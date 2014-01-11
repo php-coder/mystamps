@@ -51,7 +51,6 @@
 		<resources.plugin.version>2.6</resources.plugin.version>
 		<war.plugin.version>2.3</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
-		<tomcat.plugin.version>1.1</tomcat.plugin.version>
 		<surefire.plugin.version>2.16</surefire.plugin.version>
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
@@ -440,17 +439,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>${tomcat.plugin.version}</version>
-				<configuration>
-					<path>/</path>
-					<server>tomcat-at-localhost</server>
-					<url>http://localhost:8080/manager/text</url>
-				</configuration>
 			</plugin>
 			
 			<plugin>
