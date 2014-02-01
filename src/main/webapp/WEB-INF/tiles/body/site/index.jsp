@@ -30,4 +30,7 @@
 	<p>
 		<spring:message code="t_series_amount" />: ${seriesCounter}
 	</p>
+	<p>
+		<spring:message code="t_stamps_amount" />: ${stampsCounter}
+	</p>
 </div>

@@ -41,6 +41,7 @@ public class SiteController {
 	public String showIndexPage(Model model) {
 		model.addAttribute("countryCounter", countryService.countAll());
 		model.addAttribute("seriesCounter", seriesService.countAll());
+		model.addAttribute("stampsCounter", seriesService.countAllStamps());
 		return "site/index";
 	}
 	
