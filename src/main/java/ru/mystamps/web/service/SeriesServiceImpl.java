@@ -127,6 +127,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public int countByMichelNumber(String michelNumberCode) {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
@@ -135,6 +136,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public int countByScottNumber(String scottNumberCode) {
 		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
 		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
@@ -143,6 +145,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public int countByYvertNumber(String yvertNumberCode) {
 		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
 		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
@@ -151,6 +154,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public int countByGibbonsNumber(String gibbonsNumberCode) {
 		Validate.isTrue(gibbonsNumberCode != null, "Gibbons number code must be non null");
 		Validate.isTrue(
