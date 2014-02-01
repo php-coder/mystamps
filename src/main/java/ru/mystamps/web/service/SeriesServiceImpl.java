@@ -128,6 +128,12 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countAll() {
+		return seriesDao.count();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public int countByMichelNumber(String michelNumberCode) {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");

@@ -58,4 +58,12 @@ public class ControllersConfig {
 		);
 	}
 	
+	@Bean
+	public SiteController getSiteController() {
+		return new SiteController(
+			servicesConfig.getCountryService(),
+			servicesConfig.getSeriesService()
+		);
+	}
+	
 }

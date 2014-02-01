@@ -554,6 +554,21 @@ class SeriesServiceTest extends Specification {
 	}
 	
 	//
+	// Tests for countAll()
+	//
+	
+	def "countAll() should call dao and returns result"() {
+		given:
+			long expectedResult = 20
+		when:
+			long result = service.countAll()
+		then:
+			1 * seriesDao.count() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for countByMichelNumber()
 	//
 	

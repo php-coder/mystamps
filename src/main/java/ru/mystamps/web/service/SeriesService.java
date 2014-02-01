@@ -23,6 +23,7 @@ import ru.mystamps.web.service.dto.AddSeriesDto;
 
 public interface SeriesService {
 	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
+	long countAll();
 	int countByMichelNumber(String michelNumberCode);
 	int countByScottNumber(String scottNumberCode);
 	int countByYvertNumber(String yvertNumberCode);
