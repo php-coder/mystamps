@@ -506,11 +506,11 @@ class SeriesServiceTest extends Specification {
 				return true
 			})
 		where:
-			canAddComment | comment     | expectedComment
-			false         | null        | null
-			false         | "test"      | null
-			true          | null        | null
-			true          | "Some text" | "Some text"
+			canAddComment | comment     || expectedComment
+			false         | null        || null
+			false         | "test"      || null
+			true          | null        || null
+			true          | "Some text" || "Some text"
 	}
 	
 	def "add() should assign created at to current date"() {

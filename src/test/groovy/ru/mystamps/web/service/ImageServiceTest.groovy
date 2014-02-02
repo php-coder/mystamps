@@ -98,11 +98,11 @@ class ImageServiceTest extends Specification {
 				return true
 			}) >> new Image()
 		where:
-			contentType                 | expectedType
-			'image/jpeg'                | Image.Type.JPEG
-			'image/jpeg; charset=UTF-8' | Image.Type.JPEG
-			'image/png'                 | Image.Type.PNG
-			'image/png; charset=UTF8'   | Image.Type.PNG
+			contentType                 || expectedType
+			'image/jpeg'                || Image.Type.JPEG
+			'image/jpeg; charset=UTF-8' || Image.Type.JPEG
+			'image/png'                 || Image.Type.PNG
+			'image/png; charset=UTF8'   || Image.Type.PNG
 	}
 	
 	def "save() should throw exception when image dao returned null"() {
