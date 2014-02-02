@@ -12,6 +12,16 @@
 		<param-value>test</param-value>
 	</context-param>
 	
+	<servlet id="jsp">
+		<servlet-name>jsp</servlet-name>
+		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+		<!-- Check for JSP modification on every access -->
+		<init-param>
+			<param-name>development</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	
 	<!--
 		Web console for managing H2 database.
 		

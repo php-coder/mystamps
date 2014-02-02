@@ -12,6 +12,21 @@
 		<param-value>prod</param-value>
 	</context-param>
 	
+	<servlet id="jsp">
+		<servlet-name>jsp</servlet-name>
+		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+		<!-- Don't check for JSP modification on every access -->
+		<init-param>
+			<param-name>development</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<!-- Should Jasper check for modified JSPs? No. -->
+		<init-param>
+			<param-name>reloading</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
+	
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>
