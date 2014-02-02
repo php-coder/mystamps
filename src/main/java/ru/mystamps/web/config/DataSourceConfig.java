@@ -27,25 +27,48 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
-@Profile("prod")
-@PropertySource("classpath:prod/spring/database.properties")
-public class ProdDataSource {
+public interface DataSourceConfig {
 	
-	@Inject
-	private Environment env;
+	DataSource getDataSource();
 	
-	@Bean(destroyMethod = "close")
-	public DataSource getDataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
+	@Profile("prod")
+	@PropertySource("classpath:prod/spring/database.properties")
+	class ProdDataSourceConfig implements DataSourceConfig {
 		
-		dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
-		dataSource.setUrl(env.getRequiredProperty("db.url"));
-		dataSource.setUsername(env.getRequiredProperty("db.username"));
-		dataSource.setPassword(env.getRequiredProperty("db.password"));
+		@Inject
+		private Environment env;
 		
-		return dataSource;
+		@Bean(destroyMethod = "close")
+		@Override
+		public DataSource getDataSource() {
+			BasicDataSource dataSource = new BasicDataSource();
+			
+			dataSource.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
+			dataSource.setUrl(env.getRequiredProperty("db.url"));
+			dataSource.setUsername(env.getRequiredProperty("db.username"));
+			dataSource.setPassword(env.getRequiredProperty("db.password"));
+			
+			return dataSource;
+		}
+		
+	}
+	
+	@Profile("test")
+	class TestDataSourceConfig implements DataSourceConfig {
+		
+		@Bean(destroyMethod = "shutdown")
+		@Override
+		public DataSource getDataSource() {
+			return new EmbeddedDatabaseBuilder()
+				.setType(EmbeddedDatabaseType.H2)
+				.setName("mystamps")
+				.build();
+		}
+		
 	}
 	
 }

@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,17 +41,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableTransactionManagement
 @EnableJpaRepositories("ru.mystamps.web.dao")
 @PropertySource("classpath:${spring.profiles.active}/spring/database.properties")
-@Import({
-	TestDataSource.class,
-	ProdDataSource.class
-})
+@Import(DataSourceConfig.class)
 public class DbConfig {
 	
 	@Inject
 	private Environment env;
 	
 	@Inject
-	private DataSource dataSource;
+	private DataSourceConfig dataSourceConfig;
 	
 	@Bean
 	public JpaVendorAdapter getJpaVendorAdapter() {
@@ -73,7 +69,7 @@ public class DbConfig {
 			new LocalContainerEntityManagerFactoryBean();
 		
 		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
-		entityManagerFactory.setDataSource(dataSource);
+		entityManagerFactory.setDataSource(dataSourceConfig.getDataSource());
 		entityManagerFactory.setJpaPropertyMap(getJpaProperties());
 		
 		return entityManagerFactory;
