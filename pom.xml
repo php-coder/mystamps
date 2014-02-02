@@ -345,7 +345,7 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<!-- Dependencies which used only in dev environment -->
+		<!-- Dependencies which used only in prod environment -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -722,18 +722,18 @@
 	
 	<!--
 		 There are 2 profiles:
-		 - dev (uses MySQL)
+		 - prod (uses MySQL)
 		 - test (enabled by default, uses H2)
 	-->
 	<profiles>
 		
 		<profile>
-			<id>dev</id>
+			<id>prod</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
-				<env.dir>${basedir}/src/main/resources/dev</env.dir>
+				<env.dir>${basedir}/src/main/resources/prod</env.dir>
 			</properties>
 		</profile>
 		

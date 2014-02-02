@@ -44,7 +44,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @PropertySource("classpath:${spring.profiles.active}/spring/database.properties")
 @Import({
 	TestDataSource.class,
-	DevDataSource.class
+	ProdDataSource.class
 })
 public class DbConfig {
 	

@@ -29,9 +29,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@Profile("dev")
-@PropertySource("classpath:dev/spring/database.properties")
-public class DevDataSource {
+@Profile("prod")
+@PropertySource("classpath:prod/spring/database.properties")
+public class ProdDataSource {
 	
 	@Inject
 	private Environment env;

@@ -9,7 +9,7 @@
 	
 	<context-param>
 		<param-name>spring.profiles.active</param-name>
-		<param-value>dev</param-value>
+		<param-value>prod</param-value>
 	</context-param>
 	
 	<context-param>
