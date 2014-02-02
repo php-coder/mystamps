@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Import;
 	LiquibaseConfig.class,
 	SecurityConfig.class,
 	ServicesConfig.class,
-	TestStrategiesConfig.class
+	StrategiesConfig.class
 })
 public class ApplicationContext {
 }
