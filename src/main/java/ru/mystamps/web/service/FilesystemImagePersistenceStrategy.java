@@ -18,11 +18,13 @@
 package ru.mystamps.web.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,14 +67,11 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	public void save(MultipartFile file, Image image) {
 		try {
 			File dest = createFile(image);
-			file.transferTo(dest);
+			writeToFile(file, dest);
 			
 			LOG.debug("Image's data was written into file {}", dest);
 		
 		} catch (IOException ex) {
-			throw new ImagePersistenceException(ex);
-		
-		} catch (IllegalStateException ex) {
 			throw new ImagePersistenceException(ex);
 		}
 	}
@@ -98,7 +97,15 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	protected File createFile(Image image) {
 		return new File(storageDir, generateFileName(image));
 	}
-
+	
+	// protected to allow spying
+	protected void writeToFile(MultipartFile file, File dest) throws IOException {
+		// we can't use file.transferTo(dest) there because it creates file
+		// relatively to directory from multipart-config/location in web.xml
+		// TODO(java7): use Files.copy() instead
+		IOUtils.copy(file.getInputStream(), new FileOutputStream(dest));
+	}
+	
 	// protected to allow spying
 	protected byte[] toByteArray(File dest) throws IOException {
 		// TODO(guava): use Files.toByteArray()

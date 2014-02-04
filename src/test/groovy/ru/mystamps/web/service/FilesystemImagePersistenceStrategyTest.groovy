@@ -42,7 +42,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * multipartFile.transferTo(_ as File)
+			1 * strategy.writeToFile(_ as MultipartFile, _ as File) >> {}
 	}
 	
 	def "save() should saves file onto the configured directory"() {
@@ -51,10 +51,10 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * multipartFile.transferTo({File file ->
+			1 * strategy.writeToFile(_ as MultipartFile, { File file ->
 				assert file.parent == expectedDirectoryName
 				return true
-			})
+			}) >> {}
 	}
 	
 	def "save() should gives proper name to the file"() {
@@ -65,32 +65,21 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * multipartFile.transferTo({File file ->
+			1 * strategy.writeToFile(_ as MultipartFile, { File file ->
 				assert file.name == expectedFileName
 				return true
-			})
+			}) >> {}
 	}
 	
 	def "save() should converts IOException to ImagePersistenceException"() {
 		given:
-			multipartFile.transferTo(_ as File) >> { throw new IOException() }
+			strategy.writeToFile(_ as MultipartFile, _ as File) >> { throw new IOException() }
 		when:
 			strategy.save(multipartFile, image)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
-	}
-	
-	def "save() should converts IllegalStateException to ImagePersistenceException"() {
-		given:
-			multipartFile.transferTo(_ as File) >> { throw new IllegalStateException() }
-		when:
-			strategy.save(multipartFile, image)
-		then:
-			ImagePersistenceException ex = thrown()
-		and:
-			ex.cause instanceof IllegalStateException
 	}
 	
 	//
