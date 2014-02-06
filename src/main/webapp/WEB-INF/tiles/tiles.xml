@@ -51,6 +51,7 @@
 	<definition name="series/add" extends="defaultTemplate">
 		<put-attribute name="title" value="t_add_series" />
 		<put-attribute name="body" value="/WEB-INF/tiles/body/series/add.jsp" />
+		<put-attribute name="tail" value="/WEB-INF/tiles/tail/series/add.jsp" />
 	</definition>
 	
 	<definition name="series/info" extends="defaultTemplate">

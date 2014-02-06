@@ -35,5 +35,7 @@
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="${bootstrapJsUrl}"></script>
+		
+		<tiles:insertAttribute name="tail" ignore="true" />
 	</body>
 </html>

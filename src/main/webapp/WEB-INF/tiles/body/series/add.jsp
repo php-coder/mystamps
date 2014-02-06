@@ -51,7 +51,7 @@
 				<span class="field-label"><spring:message code="t_michel" /></span>
 			</form:label>
 			<div class="controls controls-row">
-				<form:input path="michelNumbers" cssClass="span4" />
+				<form:input path="michelNumbers" cssClass="span4 js-catalog-numbers" />
 				<form:input path="michelPrice" cssClass="span2" size="5" />
 				<form:select path="michelCurrency" cssClass="span2">
 					<form:options />
@@ -73,7 +73,7 @@
 				<span class="field-label"><spring:message code="t_scott" /></span>
 			</form:label>
 			<div class="controls controls-row">
-				<form:input path="scottNumbers" cssClass="span4" />
+				<form:input path="scottNumbers" cssClass="span4 js-catalog-numbers" />
 				<form:input path="scottPrice" cssClass="span2" size="5" />
 				<form:select path="scottCurrency" cssClass="span2">
 					<form:options />
@@ -95,7 +95,7 @@
 				<span class="field-label"><spring:message code="t_yvert" /></span>
 			</form:label>
 			<div class="controls controls-row">
-				<form:input path="yvertNumbers" cssClass="span4" />
+				<form:input path="yvertNumbers" cssClass="span4 js-catalog-numbers" />
 				<form:input path="yvertPrice" cssClass="span2" size="5" />
 				<form:select path="yvertCurrency" cssClass="span2">
 					<form:options />
@@ -117,7 +117,7 @@
 				<span class="field-label"><spring:message code="t_sg" /></span>
 			</form:label>
 			<div class="controls controls-row">
-				<form:input path="gibbonsNumbers" cssClass="span4" />
+				<form:input path="gibbonsNumbers" cssClass="span4 js-catalog-numbers" />
 				<form:input path="gibbonsPrice" cssClass="span2" size="5" />
 				<form:select path="gibbonsCurrency" cssClass="span2">
 					<form:options />
