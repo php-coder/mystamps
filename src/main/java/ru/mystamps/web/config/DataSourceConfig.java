@@ -51,6 +51,8 @@ public interface DataSourceConfig {
 			dataSource.setUrl(env.getRequiredProperty("db.url"));
 			dataSource.setUsername(env.getRequiredProperty("db.username"));
 			dataSource.setPassword(env.getRequiredProperty("db.password"));
+			dataSource.setValidationQuery("SELECT 1");
+			dataSource.setTestOnBorrow(true);
 			
 			return dataSource;
 		}
