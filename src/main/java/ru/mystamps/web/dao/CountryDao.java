@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import ru.mystamps.web.entity.Country;
 
-public interface CountryDao extends CrudRepository<Country, Integer> {
+public interface CountryDao extends PagingAndSortingRepository<Country, Integer> {
 	int countByName(String name);
 }

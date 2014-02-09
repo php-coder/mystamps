@@ -21,6 +21,7 @@ import javax.inject.Inject;
 
 import java.util.Date;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,8 @@ import ru.mystamps.web.service.dto.AddCountryDto;
 
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
+	
+	private static final Sort SORT_BY_NAME = new Sort("name");
 	
 	private final CountryDao countryDao;
 	
@@ -71,7 +74,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<Country> findAll() {
-		return countryDao.findAll();
+		return countryDao.findAll(SORT_BY_NAME);
 	}
 	
 	@Override

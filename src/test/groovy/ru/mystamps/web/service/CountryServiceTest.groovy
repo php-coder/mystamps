@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.springframework.data.domain.Sort
+
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.CountryDao
@@ -144,7 +146,7 @@ class CountryServiceTest extends Specification {
 		and:
 			List<Country> expectedCountries = [ country1, country2 ]
 		and:
-			countryDao.findAll() >> expectedCountries
+			countryDao.findAll(_ as Sort) >> expectedCountries
 		when:
 			Iterable<Country> resultCountries = service.findAll()
 		then:
