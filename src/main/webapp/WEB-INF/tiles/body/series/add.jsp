@@ -12,6 +12,13 @@
 <div class="span6 offset3">
 	<form:form method="post" enctype="multipart/form-data" modelAttribute="addSeriesForm" cssClass="form-horizontal">
 		
+		<elem:field path="category" label="t_category" required="true">
+			<form:select path="category" required="required">
+				<form:option value="" />
+				<form:options items="${categories}" itemLabel="name" itemValue="id" />
+			</form:select>
+		</elem:field>
+		
 		<elem:field path="country" label="t_country">
 			<form:select path="country">
 				<form:option value="" />

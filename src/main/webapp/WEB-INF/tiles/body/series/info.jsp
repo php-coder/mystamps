@@ -13,6 +13,12 @@
 	
 	<div class="span6">
 		<dl class="dl-horizontal">
+			<dt>
+				<spring:message code="t_category" />
+			</dt>
+			<dd id="category_name">
+				<c:out value="${series.category.name}" />
+			</dd>
 			<c:if test="${not empty series.country}">
 				<dt>
 					<spring:message code="t_country" />

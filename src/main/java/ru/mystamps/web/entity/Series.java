@@ -55,6 +55,9 @@ public class Series {
 	@GeneratedValue
 	private Integer id;
 	
+	@ManyToOne(optional = false)
+	private Category category;
+	
 	@ManyToOne
 	private Country country;
 	

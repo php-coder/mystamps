@@ -3,4 +3,4 @@
 --
 
 INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt, email) VALUES
-	(1, '@valid_admin_login@', 'ADMIN', 'Site Admin', NOW(), NOW(), '@valid_admin_password_hash@', '@valid_admin_password_salt@', 'admin@localhost');
+	(2, '@valid_admin_login@', 'ADMIN', 'Site Admin', NOW(), NOW(), '@valid_admin_password_hash@', '@valid_admin_password_salt@', 'admin@localhost');

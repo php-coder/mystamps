@@ -17,35 +17,7 @@
  */
 package ru.mystamps.web.service.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
-
-public interface AddSeriesDto {
-	Category getCategory();
-	Country getCountry();
-	Integer getYear();
-	Integer getQuantity();
-	Boolean getPerforated();
-	
-	String getMichelNumbers();
-	Double getMichelPrice();
-	Currency getMichelCurrency();
-	
-	String getScottNumbers();
-	Double getScottPrice();
-	Currency getScottCurrency();
-	
-	String getYvertNumbers();
-	Double getYvertPrice();
-	Currency getYvertCurrency();
-	
-	String getGibbonsNumbers();
-	Double getGibbonsPrice();
-	Currency getGibbonsCurrency();
-	
-	String getComment();
-	MultipartFile getImage();
+public interface AddCategoryDto {
+	String getName();
+	String getNameRu();
 }

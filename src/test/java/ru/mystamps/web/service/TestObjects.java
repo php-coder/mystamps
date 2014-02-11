@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
@@ -112,4 +113,17 @@ final class TestObjects {
 		return new DbImageDto(createImageData());
 	}
 	
+	public static Category createCategory() {
+		Category category = new Category();
+		category.setId(1);
+		category.setName("Test");
+		category.setNameRu("Тест");
+		Date now = new Date();
+		category.getMetaInfo().setCreatedAt(now);
+		category.getMetaInfo().setUpdatedAt(now);
+		User owner = createUser();
+		category.getMetaInfo().setCreatedBy(owner);
+		category.getMetaInfo().setUpdatedBy(owner);
+		return category;
+	}
 }

@@ -32,6 +32,9 @@ public class ServicesConfig {
 	private CountryDao countryDao;
 	
 	@Inject
+	private CategoryDao categoryDao;
+	
+	@Inject
 	private SecurityConfig securityConfig;
 	
 	@Inject
@@ -58,6 +61,11 @@ public class ServicesConfig {
 	@Bean
 	public CountryService getCountryService() {
 		return new CountryServiceImpl(countryDao);
+	}
+	
+	@Bean
+	public CategoryService getCategoryService() {
+		return new CategoryServiceImpl(categoryDao);
 	}
 	
 	@Bean

@@ -76,6 +76,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		
 		if (user.isAdmin()) {
+			authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
 			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
 		}
 		

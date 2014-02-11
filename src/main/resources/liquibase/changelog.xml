@@ -5,6 +5,10 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 	
+	<property name="NOW" value="NOW()" dbms="mysql" />
+	<property name="NOW" value="CURRENT_TIMESTAMP()" dbms="h2" />
+	
 	<include file="initial-state.xml" relativeToChangelogFile="true" />
+	<include file="version/0.3.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

@@ -30,6 +30,7 @@
 		
 		<access-denied-handler error-page="/error/401" />
 		
+		<intercept-url pattern="/category/add" access="hasAuthority('CREATE_CATEGORY')" />
 		<intercept-url pattern="/country/add" access="hasAuthority('CREATE_COUNTRY')" />
 		<intercept-url pattern="/series/add" access="hasAuthority('CREATE_SERIES')" />
 		

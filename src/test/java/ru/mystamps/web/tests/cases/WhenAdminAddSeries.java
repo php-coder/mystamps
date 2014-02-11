@@ -110,6 +110,9 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	@Value("${existing_gibbons_number}")
 	private String existingGibbonsNumber;
 	
+	@Value("${valid_category_name_en}")
+	private String validCategoryName;
+	
 	public WhenAdminAddSeries() {
 		super(AddSeriesPage.class);
 		hasTitle(tr("t_add_series"));
@@ -413,10 +416,12 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
-		String expectedQuantity = "2";
-		String expectedPageUrl  = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
-		
+		String expectedCategoryName = validCategoryName;
+		String expectedQuantity     = "2";
+		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+
+		page.fillCategory(expectedCategoryName);
 		page.fillQuantity(expectedQuantity);
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		
@@ -427,19 +432,22 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
 		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
+		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
-		String expectedPageUrl     = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl    = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
-		String expectedQuantity    = "3";
-		String expectedYear        = "1999";
-		String expectedCountryName = "Italy";
-		String expectedComment     = "Any text";
-		
+		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+		String expectedQuantity     = "3";
+		String expectedYear         = "1999";
+		String expectedCountryName  = "Italy";
+		String expectedCategoryName = validCategoryName;
+		String expectedComment      = "Any text";
+
+		page.fillCategory(expectedCategoryName);
 		page.fillCountry(expectedCountryName);
 		page.fillYear(expectedYear);
 		page.fillQuantity(expectedQuantity);
@@ -471,7 +479,8 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
 		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
-		
+
+		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
 		assertThat(nextPage.getYear()).isEqualTo(expectedYear);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
@@ -488,6 +497,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedMichelNumbers() {
+		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillMichelNumbers("104,105,104");
@@ -501,6 +511,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedScottNumbers() {
+		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillScottNumbers("114,115,114");
@@ -514,6 +525,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedYvertNumbers() {
+		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillYvertNumbers("124,125,124");
@@ -527,6 +539,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedGibbonsNumbers() {
+		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.fillGibbonsNumbers("134,135,134");

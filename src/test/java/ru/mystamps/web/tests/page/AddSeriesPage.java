@@ -75,6 +75,16 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		
 		return nextPage;
 	}
+
+	public List<String> getCategoryFieldValues() {
+		return getSelectOptions("category");
+	}
+	
+	public void fillCategory(String value) {
+		if (value != null) {
+			new Select(getElementByName("category")).selectByVisibleText(value);
+		}
+	}
 	
 	public List<String> getCountryFieldValues() {
 		return getSelectOptions("country");

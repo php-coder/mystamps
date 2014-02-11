@@ -15,37 +15,43 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.entity;
 
-import org.springframework.web.multipart.MultipartFile;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-public interface AddSeriesDto {
-	Category getCategory();
-	Country getCountry();
-	Integer getYear();
-	Integer getQuantity();
-	Boolean getPerforated();
+@Entity
+@Table(name = "categories")
+@Getter
+@Setter
+@ToString(exclude = "metaInfo")
+public class Category {
 	
-	String getMichelNumbers();
-	Double getMichelPrice();
-	Currency getMichelCurrency();
+	public static final int NAME_LENGTH = 50;
 	
-	String getScottNumbers();
-	Double getScottPrice();
-	Currency getScottCurrency();
+	@Id
+	@GeneratedValue
+	private Integer id;
 	
-	String getYvertNumbers();
-	Double getYvertPrice();
-	Currency getYvertCurrency();
+	@Column(length = NAME_LENGTH, unique = true, nullable = false)
+	private String name;
 	
-	String getGibbonsNumbers();
-	Double getGibbonsPrice();
-	Currency getGibbonsCurrency();
+	@Column(name = "name_ru", length = NAME_LENGTH, unique = true, nullable = false)
+	private String nameRu;
 	
-	String getComment();
-	MultipartFile getImage();
+	@Embedded
+	private MetaInfo metaInfo; // NOPMD
+	
+	public Category() {
+		metaInfo = new MetaInfo();
+	}
+	
 }

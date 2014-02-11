@@ -40,6 +40,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
@@ -49,6 +50,7 @@ import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
@@ -62,6 +64,7 @@ public class SeriesController {
 	
 	private static final Map<Integer, Integer> YEARS;
 	
+	private final CategoryService categoryService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
@@ -73,7 +76,12 @@ public class SeriesController {
 	}
 	
 	@Inject
-	public SeriesController(CountryService countryService, SeriesService seriesService) {
+	public SeriesController(
+		CategoryService categoryService,
+		CountryService countryService,
+		SeriesService seriesService) {
+		
+		this.categoryService = categoryService;
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
@@ -91,6 +99,11 @@ public class SeriesController {
 	@ModelAttribute("years")
 	public Map<Integer, Integer> getYears() {
 		return YEARS;
+	}
+	
+	@ModelAttribute("categories")
+	public Iterable<Category> getCategories() {
+		return categoryService.findAll();
 	}
 	
 	@ModelAttribute("countries")

@@ -23,6 +23,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.SeriesDao
+import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Currency
 import ru.mystamps.web.entity.GibbonsCatalog
@@ -49,6 +50,7 @@ class SeriesServiceTest extends Specification {
 		form = new AddSeriesForm()
 		form.setQuantity(2)
 		form.setPerforated(false)
+		form.setCategory(TestObjects.createCategory())
 		
 		user = TestObjects.createUser()
 		
@@ -85,7 +87,16 @@ class SeriesServiceTest extends Specification {
 		then:
 			thrown IllegalArgumentException
 	}
-
+	
+	def "add() should throw exception if category is null"() {
+		given:
+			form.setCategory(null)
+		when:
+			service.add(form, user, false)
+		then:
+			thrown IllegalArgumentException
+	}
+	
 	def "add() should throw exception when user is null"() {
 		when:
 			service.add(form, null, false)
@@ -131,6 +142,19 @@ class SeriesServiceTest extends Specification {
 			int actualYear = cal.get(Calendar.YEAR)
 			
 			actualYear == expectedYear
+	}
+	
+	def "add() should pass category to series dao"() {
+		given:
+			Category expectedCategory = TestObjects.createCategory()
+			form.setCategory(expectedCategory)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * seriesDao.save({ Series series ->
+				assert series?.category == expectedCategory
+				return true
+			})
 	}
 	
 	def "add() should pass quantity to series dao"() {

@@ -67,6 +67,7 @@ public class SeriesServiceImpl implements SeriesService {
 			dto.getPerforated() != null,
 			"Stamps perforated property must be non null"
 		);
+		Validate.isTrue(dto.getCategory() != null, "Category must be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
 		Series series = new Series();
@@ -83,6 +84,7 @@ public class SeriesServiceImpl implements SeriesService {
 			series.setReleasedAt(releaseDate.getTime());
 		}
 		
+		series.setCategory(dto.getCategory());
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
 		

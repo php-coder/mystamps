@@ -23,22 +23,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 
 @Controller
 public class SiteController {
 	
+	private final CategoryService categoryService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
-	public SiteController(CountryService countryService, SeriesService seriesService) {
+	public SiteController(
+		CategoryService categoryService,
+		CountryService countryService,
+		SeriesService seriesService) {
+		
+		this.categoryService = categoryService;
 		this.countryService = countryService;
 		this.seriesService = seriesService;
 	}
 	
 	@RequestMapping(value = Url.INDEX_PAGE, method = RequestMethod.GET)
 	public String showIndexPage(Model model) {
+		model.addAttribute("categoryCounter", categoryService.countAll());
 		model.addAttribute("countryCounter", countryService.countAll());
 		model.addAttribute("seriesCounter", seriesService.countAll());
 		model.addAttribute("stampsCounter", seriesService.countAllStamps());

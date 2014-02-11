@@ -38,6 +38,16 @@
 		<put-attribute name="body" value="/WEB-INF/tiles/body/account/auth.jsp" />
 	</definition>
 	
+	<definition name="category/add" extends="defaultTemplate">
+		<put-attribute name="title" value="t_create_category" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/category/add.jsp" />
+	</definition>
+	
+	<definition name="category/info" extends="defaultTemplate">
+		<put-attribute name="title" value="t_category_info" />
+		<put-attribute name="body" value="/WEB-INF/tiles/body/category/info.jsp" />
+	</definition>
+	
 	<definition name="country/add" extends="defaultTemplate">
 		<put-attribute name="title" value="t_add_country" />
 		<put-attribute name="body" value="/WEB-INF/tiles/body/country/add.jsp" />

@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.validation;
 
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
@@ -39,6 +40,12 @@ public final class ValidationRules {
 	
 	public static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
+	
+	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
+	public static final int CATEGORY_NAME_MAX_LENGTH = Category.NAME_LENGTH;
+	public static final String CATEGORY_NAME_EN_REGEXP = "[- a-zA-Z]+";
+	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яА-Я]+";
+	public static final String CATEGORY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final int COUNTRY_NAME_MIN_LENGTH = 3;
 	public static final int COUNTRY_NAME_MAX_LENGTH = Country.NAME_LENGTH;

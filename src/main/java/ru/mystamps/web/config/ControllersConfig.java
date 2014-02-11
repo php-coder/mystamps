@@ -36,6 +36,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public CategoryController getCategoryController() {
+		return new CategoryController(servicesConfig.getCategoryService());
+	}
+	
+	@Bean
 	public CountryController getCountryController() {
 		return new CountryController(servicesConfig.getCountryService());
 	}
@@ -53,6 +58,7 @@ public class ControllersConfig {
 	@Bean
 	public SeriesController getSeriesController() {
 		return new SeriesController(
+			servicesConfig.getCategoryService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService()
 		);
@@ -61,6 +67,7 @@ public class ControllersConfig {
 	@Bean
 	public SiteController getSiteController() {
 		return new SiteController(
+			servicesConfig.getCategoryService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService()
 		);

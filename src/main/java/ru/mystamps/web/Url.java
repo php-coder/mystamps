@@ -46,6 +46,9 @@ public final class Url {
 	public static final String ADD_SERIES_PAGE       = "/series/add";
 	public static final String INFO_SERIES_PAGE      = "/series/{id}";
 	
+	public static final String ADD_CATEGORY_PAGE     = "/category/add";
+	public static final String INFO_CATEGORY_PAGE    = "/category/{id}";
+	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
 	

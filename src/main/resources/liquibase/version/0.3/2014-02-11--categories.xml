@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-categories-table" author="php-coder" context="scheme">
+		<comment>Creates categories table</comment>
+		
+		<createTable tableName="categories">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="name_ru" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="INTEGER">
+				<constraints nullable="false" references="users(id)" foreignKeyName="fk_categories_created_by" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_by" type="INTEGER">
+				<constraints nullable="false" references="users(id)" foreignKeyName="fk_categories_updated_by" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="initiate-categories-table" author="php-coder" context="init-data">
+		<comment>Creates category for Prehistoric animals</comment>
+		
+		<insert tableName="categories">
+			<column name="id" value="1" />
+			<column name="name" value="Prehistoric animals" />
+			<column name="name_ru" value="Доисторические животные" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" value="2" /><!-- it's admin -->
+			<column name="updated_at"  valueComputed="${NOW}" />
+			<column name="updated_by" value="2" /><!-- it's admin -->
+		</insert>
+	</changeSet>
+	
+	<changeSet id="add-categories_id-column-to-series-table" author="php-coder" context="scheme">
+		<comment>Adds category_id column to series table</comment>
+		
+		<addColumn tableName="series">
+			<column name="category_id" type="INTEGER">
+				<constraints references="categories(id)" foreignKeyName="fk_series_category_id" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="make-categories_id-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks series.categories_id field as NOT NULL</comment>
+		
+		<!-- All series belongs to "Prehistoric animals" category-->
+		<addNotNullConstraint tableName="series" columnName="category_id" columnDataType="INTEGER" defaultNullValue="1" />
+		
+	</changeSet>
+	
+	<changeSet id="create-category-animals" author="php-coder" context="test-data">
+		<sqlFile path="../../sql/test-category-animals.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+</databaseChangeLog>

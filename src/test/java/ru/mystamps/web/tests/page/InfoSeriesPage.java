@@ -31,6 +31,10 @@ public class InfoSeriesPage extends AbstractPage {
 		return getElementById("image").getAttribute("src");
 	}
 	
+	public String getCategory() {
+		return getTextOfElementById("category_name");
+	}
+	
 	public String getCountry() {
 		return getTextOfElementById("country_name");
 	}
