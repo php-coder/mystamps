@@ -144,13 +144,13 @@ class CategoryServiceTest extends Specification {
 			Category category2 = TestObjects.createCategory()
 			category2.setName("Second Category")
 		and:
-			List<Category> expectedCountries = [ category1, category2 ]
+			List<Category> expectedCategories = [ category1, category2 ]
 		and:
-			categoryDao.findAll(_ as Sort) >> expectedCountries
+			categoryDao.findAll(_ as Sort) >> expectedCategories
 		when:
-			Iterable<Category> resultCountries = service.findAll()
+			Iterable<Category> resultCategories = service.findAll()
 		then:
-			resultCountries == expectedCountries
+			resultCategories == expectedCategories
 	}
 	
 	//
