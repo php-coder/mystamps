@@ -61,6 +61,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController(Url.ROBOTS_TXT).setViewName("site/robots");
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.UNAUTHORIZED_PAGE);
 	}

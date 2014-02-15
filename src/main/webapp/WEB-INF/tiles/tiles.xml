@@ -69,6 +69,10 @@
 		<put-attribute name="body" value="/WEB-INF/tiles/body/series/info.jsp" />
 	</definition>
 	
+	<!-- Special pages -->
+	
+	<definition name="site/robots" template="/WEB-INF/tiles/body/site/robots.jsp" />
+	
 	<!-- Error pages -->
 	
 	<definition name="error/401" extends="errorTemplate">
