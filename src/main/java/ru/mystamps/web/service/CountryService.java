@@ -20,10 +20,11 @@ package ru.mystamps.web.service;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.service.dto.SelectEntryDto;
 
 public interface CountryService {
 	Country add(AddCountryDto dto, User user);
-	Iterable<Country> findAll();
+	Iterable<SelectEntryDto> findAll();
 	long countAll();
 	int countByName(String name);
 }

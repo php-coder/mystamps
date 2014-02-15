@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
+import ru.mystamps.web.service.dto.SelectEntryDto
 import ru.mystamps.web.tests.DateUtils
 
 class CountryServiceTest extends Specification {
@@ -138,17 +139,15 @@ class CountryServiceTest extends Specification {
 	
 	def "findAll() should call dao"() {
 		given:
-			Country country1 = TestObjects.createCountry()
-			country1.setName("First Country")
+			SelectEntryDto country1 = new SelectEntryDto(1, "First Country")
 		and:
-			Country country2 = TestObjects.createCountry()
-			country2.setName("Second Country")
+			SelectEntryDto country2 = new SelectEntryDto(2, "Second Country")
 		and:
-			List<Country> expectedCountries = [ country1, country2 ]
+			List<SelectEntryDto> expectedCountries = [ country1, country2 ]
 		and:
-			countryDao.findAll(_ as Sort) >> expectedCountries
+			countryDao.findAllAsSelectEntries() >> expectedCountries
 		when:
-			Iterable<Country> resultCountries = service.findAll()
+			Iterable<SelectEntryDto> resultCountries = service.findAll()
 		then:
 			resultCountries == expectedCountries
 	}

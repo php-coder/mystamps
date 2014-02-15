@@ -47,7 +47,6 @@ import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CountryService;
@@ -107,7 +106,7 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("countries")
-	public Iterable<Country> getCountries() {
+	public Iterable<SelectEntryDto> getCountries() {
 		return countryService.findAll();
 	}
 	
