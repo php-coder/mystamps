@@ -37,6 +37,7 @@
 		<liquibase.version>3.3.2</liquibase.version>
 		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
 		<togglz.version>2.1.0.Final</togglz.version>
+		<mini.profiler.version>0.7</mini.profiler.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
 		<bootstrap.version>2.3.1</bootstrap.version>
@@ -461,6 +462,17 @@
 			<version>${mysql.connector.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>au.com.funkworks.jmp</groupId>
+			<artifactId>java-mini-profiler-web</artifactId>
+			<version>${mini.profiler.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>au.com.funkworks.jmp</groupId>
+			<artifactId>java-mini-profiler-sql</artifactId>
+			<version>${mini.profiler.version}</version>
+		</dependency>
 		
 		<!-- Dependencies which used only in test environment -->
 		<dependency>
@@ -853,6 +865,23 @@
 		<system>Travis CI</system>
 		<url>https://travis-ci.org/php-coder/mystamps</url>
 	</ciManagement>
+	
+	<repositories>
+		<repository>
+			<id>Java Mini Profiler repository</id>
+			<url>https://github.com/alvins82/mvn-repo/raw/master/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 	
 	<!--
 		 There are 2 profiles:

@@ -367,6 +367,8 @@
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		
+		<p th:utext="${mini_profile_includes}" th:remove="tag"></p>
+		
 		<script>
 			$(function() {
 				$('.js-catalog-numbers').on('blur', function() {

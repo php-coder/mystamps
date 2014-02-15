@@ -20,6 +20,8 @@ package ru.mystamps.web.config;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import au.com.funkworks.jmp.SqlRecordDataSource;
+
 import org.apache.commons.dbcp.BasicDataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -29,6 +31,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 
 @Configuration
 public interface DataSourceConfig {
@@ -62,13 +65,17 @@ public interface DataSourceConfig {
 	@Profile("test")
 	class TestDataSourceConfig implements DataSourceConfig {
 		
-		@Bean(destroyMethod = "shutdown")
+		@Bean
 		@Override
 		public DataSource getDataSource() {
-			return new EmbeddedDatabaseBuilder()
+			DataSource originalDataSource = new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
 				.setName("mystamps")
 				.build();
+			
+			DataSource proxyDataSource = new SqlRecordDataSource(originalDataSource);
+			
+			return new LazyConnectionDataSourceProxy(proxyDataSource);
 		}
 		
 	}
