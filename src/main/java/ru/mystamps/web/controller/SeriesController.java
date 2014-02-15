@@ -40,7 +40,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
@@ -53,6 +52,7 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.SelectEntryDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 
@@ -102,7 +102,7 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("categories")
-	public Iterable<Category> getCategories() {
+	public Iterable<SelectEntryDto> getCategories() {
 		return categoryService.findAll();
 	}
 	

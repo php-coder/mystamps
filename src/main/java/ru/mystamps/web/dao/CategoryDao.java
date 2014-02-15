@@ -17,11 +17,20 @@
  */
 package ru.mystamps.web.dao;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.service.dto.SelectEntryDto;
 
 public interface CategoryDao extends PagingAndSortingRepository<Category, Integer> {
 	int countByName(String name);
 	int countByNameRu(String name);
+	
+	@Query(
+		"SELECT NEW ru.mystamps.web.service.dto.SelectEntryDto(c.id, c.name) "
+		+ "FROM Category c "
+		+ "ORDER BY c.name"
+	)
+	Iterable<SelectEntryDto> findAllAsSelectEntries();
 }

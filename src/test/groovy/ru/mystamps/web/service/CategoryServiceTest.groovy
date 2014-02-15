@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.service
 
-import org.springframework.data.domain.Sort
-
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
+import ru.mystamps.web.service.dto.SelectEntryDto
 import ru.mystamps.web.tests.DateUtils
 
 class CategoryServiceTest extends Specification {
@@ -138,17 +137,15 @@ class CategoryServiceTest extends Specification {
 	
 	def "findAll() should call dao"() {
 		given:
-			Category category1 = TestObjects.createCategory()
-			category1.setName("First Category")
+			SelectEntryDto category1 = new SelectEntryDto(1, "First Category")
 		and:
-			Category category2 = TestObjects.createCategory()
-			category2.setName("Second Category")
+			SelectEntryDto category2 = new SelectEntryDto(2, "Second Category")
 		and:
-			List<Category> expectedCategories = [ category1, category2 ]
+			List<SelectEntryDto> expectedCategories = [ category1, category2 ]
 		and:
-			categoryDao.findAll(_ as Sort) >> expectedCategories
+			categoryDao.findAllAsSelectEntries() >> expectedCategories
 		when:
-			Iterable<Category> resultCategories = service.findAll()
+			Iterable<SelectEntryDto> resultCategories = service.findAll()
 		then:
 			resultCategories == expectedCategories
 	}

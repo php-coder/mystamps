@@ -21,7 +21,6 @@ import javax.inject.Inject;
 
 import java.util.Date;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,11 +33,10 @@ import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
+import ru.mystamps.web.service.dto.SelectEntryDto;
 
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
-	
-	private static final Sort SORT_BY_NAME = new Sort("name");
 	
 	private final CategoryDao categoryDao;
 	
@@ -74,8 +72,8 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<Category> findAll() {
-		return categoryDao.findAll(SORT_BY_NAME);
+	public Iterable<SelectEntryDto> findAll() {
+		return categoryDao.findAllAsSelectEntries();
 	}
 	
 	@Override
