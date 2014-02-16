@@ -20,11 +20,11 @@ package ru.mystamps.web.service;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.SelectEntryDto;
+import ru.mystamps.web.service.dto.EntityInfoDto;
 
 public interface CategoryService {
 	Category add(AddCategoryDto dto, User user);
-	Iterable<SelectEntryDto> findAll();
+	Iterable<EntityInfoDto> findAll();
 	long countAll();
 	int countByName(String name);
 	int countByNameRu(String name);

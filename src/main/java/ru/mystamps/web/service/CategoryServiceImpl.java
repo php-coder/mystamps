@@ -33,7 +33,7 @@ import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.SelectEntryDto;
+import ru.mystamps.web.service.dto.EntityInfoDto;
 
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
@@ -72,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntryDto> findAll() {
+	public Iterable<EntityInfoDto> findAll() {
 		return categoryDao.findAllAsSelectEntries();
 	}
 	

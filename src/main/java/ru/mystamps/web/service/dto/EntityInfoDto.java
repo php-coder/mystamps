@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class SelectEntryDto {
+public class EntityInfoDto {
 	private final Integer id;
 	private final String name;
 }

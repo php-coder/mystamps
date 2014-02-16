@@ -33,7 +33,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.SelectEntryDto;
+import ru.mystamps.web.service.dto.EntityInfoDto;
 
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
@@ -71,7 +71,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntryDto> findAll() {
+	public Iterable<EntityInfoDto> findAll() {
 		return countryDao.findAllAsSelectEntries();
 	}
 	

@@ -24,8 +24,8 @@ import lombok.Getter;
 @Getter
 public class SeriesInfoDto {
 	private final Integer id;
-	private final SelectEntryDto category;
-	private final SelectEntryDto country;
+	private final EntityInfoDto category;
+	private final EntityInfoDto country;
 	private final Date releasedAt;
 	private final Integer quantity;
 	private final Boolean perforated;
@@ -38,8 +38,8 @@ public class SeriesInfoDto {
 			Integer quantity,
 			Boolean perforated) {
 		this.id = id;
-		this.category = new SelectEntryDto(categoryId, categoryName);
-		this.country = new SelectEntryDto(countryId, countryName);
+		this.category = new EntityInfoDto(categoryId, categoryName);
+		this.country = new EntityInfoDto(countryId, countryName);
 		this.releasedAt = releasedAt;
 		this.quantity = quantity;
 		this.perforated = perforated;
