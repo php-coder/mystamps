@@ -36,15 +36,18 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.service.SeriesService;
 
 @Controller
 public class CountryController {
 	
 	private final CountryService countryService;
+	private final SeriesService seriesService;
 	
 	@Inject
-	public CountryController(CountryService countryService) {
+	public CountryController(CountryService countryService, SeriesService seriesService) {
 		this.countryService = countryService;
+		this.seriesService = seriesService;
 	}
 	
 	@InitBinder("addCountryForm")
@@ -81,6 +84,7 @@ public class CountryController {
 		}
 		
 		model.addAttribute("country", country);
+		model.addAttribute("seriesOfCountry", seriesService.findBy(country));
 		return "country/info";
 	}
 	

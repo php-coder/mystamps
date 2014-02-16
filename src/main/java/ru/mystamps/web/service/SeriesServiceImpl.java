@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.Price;
@@ -186,6 +187,13 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(category != null, "Category must be non null");
 		
 		return seriesDao.findByAsSeriesInfo(category);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findBy(Country country) {
+		Validate.isTrue(country != null, "Country must be non null");
+		
+		return seriesDao.findByAsSeriesInfo(country);
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {

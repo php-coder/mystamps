@@ -22,6 +22,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 
@@ -57,4 +58,20 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		+ "WHERE s.category = :category"
 	)
 	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("category") Category category);
+
+	@Query(
+		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
+			+ "s.id, "
+			+ "cat.id, cat.name, "
+			+ "c.id, c.name, "
+			+ "s.releasedAt, "
+			+ "s.quantity, "
+			+ "s.perforated"
+		+ ") "
+		+ "FROM Series s "
+		+ "JOIN s.category cat "
+		+ "LEFT JOIN s.country c "
+		+ "WHERE s.country = :country"
+	)
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("country") Country country);
 }

@@ -755,4 +755,28 @@ class SeriesServiceTest extends Specification {
 			result == expectedResult
 	}
 	
+	//
+	// Tests for findBy(Country)
+	//
+	
+	def "findBy(Country) should throw exception if country is null"() {
+		when:
+			service.findBy(null as Country)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findBy(Country) should call dao and return result"() {
+		given:
+			Country expectedCountry = TestObjects.createCountry()
+		and:
+			Iterable<Country> expectedResult = [ expectedCountry ]
+		and:
+			seriesDao.findByAsSeriesInfo(_ as Country) >> expectedResult
+		when:
+			Iterable<Country> result = service.findBy(expectedCountry)
+		then:
+			result == expectedResult
+	}
+	
 }

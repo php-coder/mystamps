@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -32,4 +33,5 @@ public interface SeriesService {
 	int countByYvertNumber(String yvertNumberCode);
 	int countByGibbonsNumber(String gibbonsNumberCode);
 	Iterable<SeriesInfoDto> findBy(Category category);
+	Iterable<SeriesInfoDto> findBy(Country country);
 }

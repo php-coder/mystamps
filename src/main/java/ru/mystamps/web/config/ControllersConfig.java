@@ -45,7 +45,10 @@ public class ControllersConfig {
 	
 	@Bean
 	public CountryController getCountryController() {
-		return new CountryController(servicesConfig.getCountryService());
+		return new CountryController(
+			servicesConfig.getCountryService(),
+			servicesConfig.getSeriesService()
+		);
 	}
 	
 	@Bean
