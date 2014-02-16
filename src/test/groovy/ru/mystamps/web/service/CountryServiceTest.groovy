@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service
 
-import org.springframework.data.domain.Sort
-
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.CountryDao
