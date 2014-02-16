@@ -731,4 +731,28 @@ class SeriesServiceTest extends Specification {
 			result == expectedResult
 	}
 	
+	//
+	// Tests for findBy(Category)
+	//
+	
+	def "findBy(Category) should throw exception if category is null"() {
+		when:
+			service.findBy(null as Category)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findBy(Category) should call dao and return result"() {
+		given:
+			Category expectedCategory = TestObjects.createCategory()
+		and:
+			Iterable<Category> expectedResult = [ expectedCategory ]
+		and:
+			seriesDao.findByAsSeriesInfo(_ as Category) >> expectedResult
+		when:
+			Iterable<Category> result = service.findBy(expectedCategory)
+		then:
+			result == expectedResult
+	}
+	
 }

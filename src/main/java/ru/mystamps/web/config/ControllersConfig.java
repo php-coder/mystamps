@@ -37,7 +37,10 @@ public class ControllersConfig {
 	
 	@Bean
 	public CategoryController getCategoryController() {
-		return new CategoryController(servicesConfig.getCategoryService());
+		return new CategoryController(
+			servicesConfig.getCategoryService(),
+			servicesConfig.getSeriesService()
+		);
 	}
 	
 	@Bean

@@ -21,7 +21,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.service.dto.SeriesInfoDto;
 
 public interface SeriesDao extends CrudRepository<Series, Integer> {
 	
@@ -39,4 +41,20 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	
 	@Query("SELECT COALESCE(SUM(quantity), 0) FROM Series")
 	long countAllStamps();
+	
+	@Query(
+		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
+			+ "s.id, "
+			+ "cat.id, cat.name, "
+			+ "c.id, c.name, "
+			+ "s.releasedAt, "
+			+ "s.quantity, "
+			+ "s.perforated"
+		+ ") "
+		+ "FROM Series s "
+		+ "JOIN s.category cat "
+		+ "LEFT JOIN s.country c "
+		+ "WHERE s.category = :category"
+	)
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("category") Category category);
 }

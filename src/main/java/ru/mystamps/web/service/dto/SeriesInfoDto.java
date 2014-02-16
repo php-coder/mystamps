@@ -15,21 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.AddSeriesDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
+import java.util.Date;
 
-public interface SeriesService {
-	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
-	long countAll();
-	long countAllStamps();
-	int countByMichelNumber(String michelNumberCode);
-	int countByScottNumber(String scottNumberCode);
-	int countByYvertNumber(String yvertNumberCode);
-	int countByGibbonsNumber(String gibbonsNumberCode);
-	Iterable<SeriesInfoDto> findBy(Category category);
+import lombok.Getter;
+
+@Getter
+public class SeriesInfoDto {
+	private final Integer id;
+	private final SelectEntryDto category;
+	private final SelectEntryDto country;
+	private final Date releasedAt;
+	private final Integer quantity;
+	private final Boolean perforated;
+	
+	public SeriesInfoDto( // NOCHECKSTYLE: ParameterNumber
+			Integer id,
+			Integer categoryId, String categoryName,
+			Integer countryId, String countryName,
+			Date releasedAt,
+			Integer quantity,
+			Boolean perforated) {
+		this.id = id;
+		this.category = new SelectEntryDto(categoryId, categoryName);
+		this.country = new SelectEntryDto(countryId, countryName);
+		this.releasedAt = releasedAt;
+		this.quantity = quantity;
+		this.perforated = perforated;
+	}
+	
 }

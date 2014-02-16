@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ru.mystamps.web.dao.SeriesDao;
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.Price;
@@ -43,6 +44,7 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
 
 public class SeriesServiceImpl implements SeriesService {
@@ -177,6 +179,13 @@ public class SeriesServiceImpl implements SeriesService {
 		);
 		
 		return seriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findBy(Category category) {
+		Validate.isTrue(category != null, "Category must be non null");
+		
+		return seriesDao.findByAsSeriesInfo(category);
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
