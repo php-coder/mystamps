@@ -130,6 +130,8 @@ public class SeriesController {
 		User currentUser) {
 		
 		if (result.hasErrors()) {
+			// don't try to re-display file upload field
+			form.setImage(null);
 			return null;
 		}
 		
