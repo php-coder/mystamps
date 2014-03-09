@@ -126,7 +126,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.getMetaInfo().setUpdatedBy(user);
 
 		Series entity = seriesDao.save(series);
-		LOG.debug("Series has been created ({})", entity);
+		LOG.info("Series has been created ({})", entity);
 		
 		return entity;
 	}
