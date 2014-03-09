@@ -88,7 +88,7 @@ class CountryServiceTest extends Specification {
 			1 * countryDao.save({ Country country ->
 				assert country?.name == expectedCountryName
 				return true
-			})
+			}) >> TestObjects.createCountry()
 	}
 	
 	def "add() should assign created at to current date"() {
@@ -98,7 +98,7 @@ class CountryServiceTest extends Specification {
 			1 * countryDao.save({ Country country ->
 				assert DateUtils.roughlyEqual(country?.metaInfo?.createdAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createCountry()
 	}
 	
 	def "add() should assign updated at to current date"() {
@@ -108,7 +108,7 @@ class CountryServiceTest extends Specification {
 			1 * countryDao.save({ Country country ->
 				assert DateUtils.roughlyEqual(country?.metaInfo?.updatedAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createCountry()
 	}
 	
 	def "add() should assign created by to user"() {
@@ -118,7 +118,7 @@ class CountryServiceTest extends Specification {
 			1 * countryDao.save({ Country country ->
 				assert country?.metaInfo?.createdBy == user
 				return true
-			})
+			}) >> TestObjects.createCountry()
 	}
 	
 	def "add() should assign updated by to user"() {
@@ -128,7 +128,7 @@ class CountryServiceTest extends Specification {
 			1 * countryDao.save({ Country country ->
 				assert country?.metaInfo?.updatedBy == user
 				return true
-			})
+			}) >> TestObjects.createCountry()
 	}
 	
 	//

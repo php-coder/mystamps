@@ -65,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
 		category.getMetaInfo().setUpdatedBy(user);
 
 		Category entity = categoryDao.save(category);
-		LOG.debug("Category has been created ({})", entity);
+		LOG.debug("Category has been created ({})", entity.toLongString());
 		
 		return entity;
 	}

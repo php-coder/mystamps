@@ -88,7 +88,7 @@ class CategoryServiceTest extends Specification {
 			1 * categoryDao.save({ Category category ->
 				assert category?.name == expectedCategoryName
 				return true
-			})
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign created at to current date"() {
@@ -98,7 +98,7 @@ class CategoryServiceTest extends Specification {
 			1 * categoryDao.save({ Category category ->
 				assert DateUtils.roughlyEqual(category?.metaInfo?.createdAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign updated at to current date"() {
@@ -108,7 +108,7 @@ class CategoryServiceTest extends Specification {
 			1 * categoryDao.save({ Category category ->
 				assert DateUtils.roughlyEqual(category?.metaInfo?.updatedAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign created by to user"() {
@@ -118,7 +118,7 @@ class CategoryServiceTest extends Specification {
 			1 * categoryDao.save({ Category category ->
 				assert category?.metaInfo?.createdBy == user
 				return true
-			})
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign updated by to user"() {
@@ -128,7 +128,7 @@ class CategoryServiceTest extends Specification {
 			1 * categoryDao.save({ Category category ->
 				assert category?.metaInfo?.updatedBy == user
 				return true
-			})
+			}) >> TestObjects.createCategory()
 	}
 	
 	//
