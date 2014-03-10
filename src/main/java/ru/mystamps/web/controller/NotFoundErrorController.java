@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -40,7 +39,6 @@ public class NotFoundErrorController {
 	
 	private final SiteService siteService;
 	
-	@Inject
 	public NotFoundErrorController(SiteService siteService) {
 		this.siteService = siteService;
 	}

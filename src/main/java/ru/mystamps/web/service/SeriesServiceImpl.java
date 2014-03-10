@@ -22,8 +22,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +52,6 @@ public class SeriesServiceImpl implements SeriesService {
 	private final SeriesDao seriesDao;
 	private final ImageService imageService;
 	
-	@Inject
 	public SeriesServiceImpl(SeriesDao seriesDao, ImageService imageService) {
 		this.seriesDao = seriesDao;
 		this.imageService = imageService;

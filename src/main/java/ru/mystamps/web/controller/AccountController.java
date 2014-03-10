@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -48,7 +47,6 @@ public class AccountController {
 	
 	private final UserService userService;
 	
-	@Inject
 	public AccountController(UserService userService) {
 		this.userService = userService;
 	}

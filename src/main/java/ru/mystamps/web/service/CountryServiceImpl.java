@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import javax.inject.Inject;
-
 import java.util.Date;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +38,6 @@ public class CountryServiceImpl implements CountryService {
 	
 	private final CountryDao countryDao;
 	
-	@Inject
 	public CountryServiceImpl(CountryDao countryDao) {
 		this.countryDao = countryDao;
 	}

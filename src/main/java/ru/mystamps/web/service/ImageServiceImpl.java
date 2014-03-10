@@ -19,8 +19,6 @@ package ru.mystamps.web.service;
 
 import java.util.Locale;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -43,7 +41,6 @@ public class ImageServiceImpl implements ImageService {
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;
 	
-	@Inject
 	public ImageServiceImpl(ImagePersistenceStrategy imagePersistenceStrategy, ImageDao imageDao) {
 		this.imagePersistenceStrategy = imagePersistenceStrategy;
 		this.imageDao = imageDao;

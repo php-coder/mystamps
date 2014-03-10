@@ -20,8 +20,6 @@ package ru.mystamps.web.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -41,7 +39,6 @@ public class CronServiceImpl implements CronService {
 	
 	private final UsersActivationDao usersActivationDao;
 	
-	@Inject
 	public CronServiceImpl(UsersActivationDao usersActivationDao) {
 		this.usersActivationDao = usersActivationDao;
 	}

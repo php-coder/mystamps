@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import javax.inject.Inject;
-
 import java.util.Date;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +38,6 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	private final CategoryDao categoryDao;
 	
-	@Inject
 	public CategoryServiceImpl(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
 	}

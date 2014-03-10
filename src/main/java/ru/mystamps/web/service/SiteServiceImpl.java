@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import javax.inject.Inject;
-
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +35,6 @@ public class SiteServiceImpl implements SiteService {
 	private final SuspiciousActivityDao suspiciousActivities;
 	private final SuspiciousActivityTypeDao suspiciousActivityTypes;
 	
-	@Inject
 	public SiteServiceImpl(
 		SuspiciousActivityDao suspiciousActivities,
 		SuspiciousActivityTypeDao suspiciousActivityTypes) {

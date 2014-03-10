@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import javax.inject.Inject;
-
 import java.util.Date;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -49,7 +47,6 @@ public class UserServiceImpl implements UserService {
 	private final UsersActivationDao usersActivation;
 	private final PasswordEncoder encoder;
 	
-	@Inject
 	public UserServiceImpl(
 		UserDao users,
 		UsersActivationDao usersActivation,

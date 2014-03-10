@@ -19,7 +19,6 @@ package ru.mystamps.web.controller;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,6 @@ public class ImageController {
 	
 	private final ImageService imageService;
 	
-	@Inject
 	public ImageController(ImageService imageService) {
 		this.imageService = imageService;
 	}

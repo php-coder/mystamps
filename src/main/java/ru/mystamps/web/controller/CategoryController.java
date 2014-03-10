@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -44,7 +43,6 @@ public class CategoryController {
 	private final CategoryService categoryService;
 	private final SeriesService seriesService;
 	
-	@Inject
 	public CategoryController(CategoryService categoryService, SeriesService seriesService) {
 		this.categoryService = categoryService;
 		this.seriesService = seriesService;

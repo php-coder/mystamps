@@ -20,7 +20,6 @@ package ru.mystamps.web.service;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +39,6 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	
 	private final ImageDataDao imageDataDao;
 	
-	@Inject
 	public DatabaseImagePersistenceStrategy(ImageDataDao imageDataDao) {
 		this.imageDataDao = imageDataDao;
 	}

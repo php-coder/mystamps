@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.groups.Default;
 
@@ -74,7 +73,6 @@ public class SeriesController {
 		}
 	}
 	
-	@Inject
 	public SeriesController(
 		CategoryService categoryService,
 		CountryService countryService,

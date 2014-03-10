@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -44,7 +43,6 @@ public class CountryController {
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
-	@Inject
 	public CountryController(CountryService countryService, SeriesService seriesService) {
 		this.countryService = countryService;
 		this.seriesService = seriesService;

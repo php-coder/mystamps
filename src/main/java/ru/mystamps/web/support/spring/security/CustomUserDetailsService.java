@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +45,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private final UserService userService;
 	
-	@Inject
 	public CustomUserDetailsService(UserService userService) {
 		this.userService = userService;
 	}
