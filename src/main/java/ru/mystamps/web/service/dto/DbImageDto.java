@@ -18,16 +18,14 @@
 package ru.mystamps.web.service.dto;
 
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.entity.ImageData;
 
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class DbImageDto implements ImageDto {
 	private final ImageData imageData;
-	
-	public DbImageDto(ImageData imageData) {
-		this.imageData = imageData;
-	}
 	
 	@Override
 	public String getType() {

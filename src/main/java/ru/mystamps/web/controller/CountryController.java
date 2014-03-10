@@ -30,6 +30,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.validation.BindingResult;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
@@ -38,15 +40,11 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 
 @Controller
+@RequiredArgsConstructor
 public class CountryController {
 	
 	private final CountryService countryService;
 	private final SeriesService seriesService;
-	
-	public CountryController(CountryService countryService, SeriesService seriesService) {
-		this.countryService = countryService;
-		this.seriesService = seriesService;
-	}
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {

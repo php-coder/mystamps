@@ -33,21 +33,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.commons.lang3.Validate;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.UserService;
 
 /**
  * Implementation of Spring's {@link UserDetailsService} which uses our DAO to load user.
  */
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
 	private final UserService userService;
-	
-	public CustomUserDetailsService(UserService userService) {
-		this.userService = userService;
-	}
 	
 	@Override
 	@Transactional(readOnly = true)

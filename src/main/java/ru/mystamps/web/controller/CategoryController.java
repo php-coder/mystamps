@@ -30,6 +30,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.validation.BindingResult;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
@@ -38,15 +40,11 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
 
 @Controller
+@RequiredArgsConstructor
 public class CategoryController {
 	
 	private final CategoryService categoryService;
 	private final SeriesService seriesService;
-	
-	public CategoryController(CategoryService categoryService, SeriesService seriesService) {
-		this.categoryService = categoryService;
-		this.seriesService = seriesService;
-	}
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {

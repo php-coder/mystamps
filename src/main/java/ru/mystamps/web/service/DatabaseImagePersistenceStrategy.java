@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
@@ -33,15 +35,12 @@ import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
+@RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
 	private static final Logger LOG =
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
 	private final ImageDataDao imageDataDao;
-	
-	public DatabaseImagePersistenceStrategy(ImageDataDao imageDataDao) {
-		this.imageDataDao = imageDataDao;
-	}
 	
 	@PostConstruct
 	public void init() {

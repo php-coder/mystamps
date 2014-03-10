@@ -18,18 +18,15 @@
 package ru.mystamps.web.service.dto;
 
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.entity.Image;
 
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class FsImageDto implements ImageDto {
 	private final Image image;
 	private final byte[] data;
-	
-	public FsImageDto(Image image, byte[] data) { // NOPMD: ArrayIsStoredDirectly
-		this.image = image;
-		this.data = data;
-	}
 	
 	@Override
 	public String getType() {

@@ -27,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
@@ -35,16 +37,12 @@ import ru.mystamps.web.service.exception.ImagePersistenceException;
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 
+@RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;
-	
-	public ImageServiceImpl(ImagePersistenceStrategy imagePersistenceStrategy, ImageDao imageDao) {
-		this.imagePersistenceStrategy = imagePersistenceStrategy;
-		this.imageDao = imageDao;
-	}
 	
 	@Override
 	@Transactional

@@ -38,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
@@ -55,6 +57,7 @@ import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 
 @Controller
+@RequiredArgsConstructor
 public class SeriesController {
 	
 	private static final Integer SINCE_YEAR     = 1840;
@@ -71,16 +74,6 @@ public class SeriesController {
 		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			YEARS.put(i, i);
 		}
-	}
-	
-	public SeriesController(
-		CategoryService categoryService,
-		CountryService countryService,
-		SeriesService seriesService) {
-		
-		this.categoryService = categoryService;
-		this.countryService = countryService;
-		this.seriesService = seriesService;
 	}
 	
 	@InitBinder("addSeriesForm")

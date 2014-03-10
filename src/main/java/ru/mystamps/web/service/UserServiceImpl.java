@@ -30,6 +30,8 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UserDao;
@@ -39,6 +41,7 @@ import ru.mystamps.web.service.dto.RegisterAccountDto;
 
 import static ru.mystamps.web.entity.User.Role.USER;
 
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
@@ -46,16 +49,6 @@ public class UserServiceImpl implements UserService {
 	private final UserDao users;
 	private final UsersActivationDao usersActivation;
 	private final PasswordEncoder encoder;
-	
-	public UserServiceImpl(
-		UserDao users,
-		UsersActivationDao usersActivation,
-		PasswordEncoder encoder) {
-		
-		this.users = users;
-		this.usersActivation = usersActivation;
-		this.encoder = encoder;
-	}
 	
 	@Override
 	@Transactional

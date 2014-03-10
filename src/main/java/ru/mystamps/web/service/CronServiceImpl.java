@@ -29,19 +29,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
+@RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
 	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
 	
 	private final UsersActivationDao usersActivationDao;
-	
-	public CronServiceImpl(UsersActivationDao usersActivationDao) {
-		this.usersActivationDao = usersActivationDao;
-	}
 	
 	@Override
 	@Scheduled(fixedDelay = CHECK_PERIOD)

@@ -27,20 +27,19 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.EntityInfoDto;
 
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
 	private final CategoryDao categoryDao;
-	
-	public CategoryServiceImpl(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
 	
 	@Override
 	@Transactional

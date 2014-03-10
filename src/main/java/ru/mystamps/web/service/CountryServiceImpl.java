@@ -27,20 +27,19 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.EntityInfoDto;
 
+@RequiredArgsConstructor
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
 	private final CountryDao countryDao;
-	
-	public CountryServiceImpl(CountryDao countryDao) {
-		this.countryDao = countryDao;
-	}
 	
 	@Override
 	@Transactional

@@ -23,15 +23,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.entity.User;
 
+@RequiredArgsConstructor
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	
 	private final CustomUserDetailsArgumentResolver userDetailsResolver;
-	
-	public UserArgumentResolver(CustomUserDetailsArgumentResolver userDetailsResolver) {
-		this.userDetailsResolver = userDetailsResolver;
-	}
 	
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {

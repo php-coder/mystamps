@@ -24,24 +24,19 @@ import org.apache.commons.lang3.Validate;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 
+@RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	private final SuspiciousActivityTypeDao suspiciousActivityTypes;
-	
-	public SiteServiceImpl(
-		SuspiciousActivityDao suspiciousActivities,
-		SuspiciousActivityTypeDao suspiciousActivityTypes) {
-		
-		this.suspiciousActivities = suspiciousActivities;
-		this.suspiciousActivityTypes = suspiciousActivityTypes;
-	}
 	
 	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")

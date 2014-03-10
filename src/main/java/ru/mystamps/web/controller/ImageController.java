@@ -26,18 +26,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.ImageService;
 import ru.mystamps.web.service.dto.ImageDto;
 
 @Controller
+@RequiredArgsConstructor
 public class ImageController {
 	
 	private final ImageService imageService;
-	
-	public ImageController(ImageService imageService) {
-		this.imageService = imageService;
-	}
 	
 	@RequestMapping(value = Url.GET_IMAGE_PAGE, method = RequestMethod.GET)
 	public void getImage(@PathVariable("id") Integer imageId, HttpServletResponse response)

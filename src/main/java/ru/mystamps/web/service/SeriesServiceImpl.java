@@ -32,6 +32,8 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
@@ -46,16 +48,12 @@ import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
 
+@RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
 	private final SeriesDao seriesDao;
 	private final ImageService imageService;
-	
-	public SeriesServiceImpl(SeriesDao seriesDao, ImageService imageService) {
-		this.seriesDao = seriesDao;
-		this.imageService = imageService;
-	}
 	
 	@Override
 	@Transactional

@@ -31,6 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.model.ActivateAccountForm;
 import ru.mystamps.web.model.ActivateAccountForm.LoginChecks;
@@ -43,13 +45,10 @@ import ru.mystamps.web.model.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
 
 @Controller
+@RequiredArgsConstructor
 public class AccountController {
 	
 	private final UserService userService;
-	
-	public AccountController(UserService userService) {
-		this.userService = userService;
-	}
 	
 	@InitBinder("registerAccountForm")
 	protected void registrationInitBinder(WebDataBinder binder) {

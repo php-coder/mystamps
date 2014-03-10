@@ -27,20 +27,19 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Controller
+@RequiredArgsConstructor
 public class NotFoundErrorController {
 	private static final Logger LOG = LoggerFactory.getLogger(NotFoundErrorController.class);
 	
 	private final SiteService siteService;
-	
-	public NotFoundErrorController(SiteService siteService) {
-		this.siteService = siteService;
-	}
 	
 	@RequestMapping(value = Url.NOT_FOUND_PAGE, method = RequestMethod.GET)
 	public void notFound(
