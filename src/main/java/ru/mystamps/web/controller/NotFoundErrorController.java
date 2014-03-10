@@ -33,7 +33,6 @@ import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Controller
-@RequestMapping(Url.NOT_FOUND_PAGE)
 public class NotFoundErrorController {
 	private static final Logger LOG = LoggerFactory.getLogger(NotFoundErrorController.class);
 	
@@ -43,7 +42,7 @@ public class NotFoundErrorController {
 		this.siteService = siteService;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = Url.NOT_FOUND_PAGE, method = RequestMethod.GET)
 	public void notFound(
 			HttpServletRequest request,
 			CustomUserDetails userDetails,
