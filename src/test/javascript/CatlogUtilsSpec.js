@@ -48,6 +48,10 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers("2499-501")).toEqual("2499,2500,2501");
 	});
 	
+	it("should return '1,2,3,5' for '1-3,5'", function() {
+		expect(CatalogUtils.expandNumbers("1-3,5")).toEqual("1,2,3,5");
+	});
+	
 	it("should return '1,2,3,5,6' for '1-3,5-6'", function() {
 		expect(CatalogUtils.expandNumbers("1-3,5-6")).toEqual("1,2,3,5,6");
 	});
