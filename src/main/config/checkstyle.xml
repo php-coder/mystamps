@@ -80,6 +80,11 @@
         <property name="influenceFormat" value="0"/>
     </module>
 
+    <!-- Allow to use @SuppressWarning annotation to suppress warnings -->
+    <module name="SuppressWarningsFilter"/>
+
+    <module name="UniqueProperties"/>
+
     <module name="TreeWalker">
 
         <property name="cacheFile" value="${checkstyle.cache.file}"/>
@@ -87,6 +92,9 @@
 
         <!-- Required by SuppressWithNearbyCommentFilter to make comments available to the filter -->
         <module name="FileContentsHolder"/>
+
+        <!-- Required by SuppressWarningsFilter to make annotations available to the filter -->
+        <module name="SuppressWarningsHolder"/>
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->

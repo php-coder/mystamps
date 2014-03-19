@@ -30,7 +30,8 @@ public class SeriesInfoDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	
-	public SeriesInfoDto( // NOCHECKSTYLE: ParameterNumber
+	@SuppressWarnings("checkstyle:parameternumber")
+	public SeriesInfoDto(
 			Integer id,
 			Integer categoryId, String categoryName,
 			Integer countryId, String countryName,
