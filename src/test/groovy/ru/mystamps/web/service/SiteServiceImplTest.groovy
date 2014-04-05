@@ -26,7 +26,7 @@ import ru.mystamps.web.entity.SuspiciousActivity
 import ru.mystamps.web.entity.SuspiciousActivityType
 import ru.mystamps.web.tests.DateUtils
 
-class SiteServiceTest extends Specification {
+class SiteServiceImplTest extends Specification {
 	private static final String TEST_PAGE         = "http://example.org/some/page"
 	private static final String TEST_IP           = "127.0.0.1"
 	private static final String TEST_REFERER_PAGE = "http://example.org/referer"

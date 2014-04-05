@@ -19,24 +19,24 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.CountryDao
-import ru.mystamps.web.entity.Country
+import ru.mystamps.web.dao.CategoryDao
+import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.User
-import ru.mystamps.web.model.AddCountryForm
+import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.service.dto.EntityInfoDto
 import ru.mystamps.web.tests.DateUtils
 
-class CountryServiceTest extends Specification {
+class CategoryServiceImplTest extends Specification {
 	
-	private AddCountryForm form
+	private AddCategoryForm form
 	private User user
 	
-	private CountryDao countryDao = Mock()
-	private CountryService service = new CountryServiceImpl(countryDao)
+	private CategoryDao categoryDao = Mock()
+	private CategoryService service = new CategoryServiceImpl(categoryDao)
 	
 	def setup() {
-		form = new AddCountryForm()
-		form.setName("Any country name")
+		form = new AddCategoryForm()
+		form.setName("Any category name")
 		
 		user = TestObjects.createUser()
 	}
@@ -52,7 +52,7 @@ class CountryServiceTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when country name is null"() {
+	def "add() should throw exception when category name is null"() {
 		given:
 			form.setName(null)
 		when:
@@ -70,65 +70,65 @@ class CountryServiceTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Country expected = TestObjects.createCountry()
-			countryDao.save(_ as Country) >> expected
+			Category expected = TestObjects.createCategory()
+			categoryDao.save(_ as Category) >> expected
 		when:
-			Country actual = service.add(form, user)
+			Category actual = service.add(form, user)
 		then:
 			actual == expected
 	}
 	
-	def "add() should pass country name to dao"() {
+	def "add() should pass category name to dao"() {
 		given:
-			String expectedCountryName = "Italy"
-			form.setName(expectedCountryName)
+			String expectedCategoryName = "Animals"
+			form.setName(expectedCategoryName)
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert country?.name == expectedCountryName
+			1 * categoryDao.save({ Category category ->
+				assert category?.name == expectedCategoryName
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert DateUtils.roughlyEqual(country?.metaInfo?.createdAt, new Date())
+			1 * categoryDao.save({ Category category ->
+				assert DateUtils.roughlyEqual(category?.metaInfo?.createdAt, new Date())
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert DateUtils.roughlyEqual(country?.metaInfo?.updatedAt, new Date())
+			1 * categoryDao.save({ Category category ->
+				assert DateUtils.roughlyEqual(category?.metaInfo?.updatedAt, new Date())
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign created by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert country?.metaInfo?.createdBy == user
+			1 * categoryDao.save({ Category category ->
+				assert category?.metaInfo?.createdBy == user
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> TestObjects.createCategory()
 	}
 	
 	def "add() should assign updated by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert country?.metaInfo?.updatedBy == user
+			1 * categoryDao.save({ Category category ->
+				assert category?.metaInfo?.updatedBy == user
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> TestObjects.createCategory()
 	}
 	
 	//
@@ -137,17 +137,17 @@ class CountryServiceTest extends Specification {
 	
 	def "findAll() should call dao"() {
 		given:
-			EntityInfoDto country1 = new EntityInfoDto(1, "First Country")
+			EntityInfoDto category1 = new EntityInfoDto(1, "First Category")
 		and:
-			EntityInfoDto country2 = new EntityInfoDto(2, "Second Country")
+			EntityInfoDto category2 = new EntityInfoDto(2, "Second Category")
 		and:
-			List<EntityInfoDto> expectedCountries = [ country1, country2 ]
+			List<EntityInfoDto> expectedCategories = [ category1, category2 ]
 		and:
-			countryDao.findAllAsSelectEntries() >> expectedCountries
+			categoryDao.findAllAsSelectEntries() >> expectedCategories
 		when:
-			Iterable<EntityInfoDto> resultCountries = service.findAll()
+			Iterable<EntityInfoDto> resultCategories = service.findAll()
 		then:
-			resultCountries == expectedCountries
+			resultCategories == expectedCategories
 	}
 	
 	//
@@ -156,11 +156,11 @@ class CountryServiceTest extends Specification {
 	
 	def "countAll() should call dao and returns result"() {
 		given:
-			long expectedResult = 20
+			long expectedResult = 10
 		when:
 			long result = service.countAll()
 		then:
-			1 * countryDao.count() >> expectedResult
+			1 * categoryDao.count() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -178,19 +178,49 @@ class CountryServiceTest extends Specification {
 	
 	def "countByName() should call dao"() {
 		given:
-			countryDao.countByName(_ as String) >> 2
+			categoryDao.countByName(_ as String) >> 2
 		when:
 			int result = service.countByName("Any name here")
 		then:
 			result == 2
 	}
 	
-	def "countByName() should pass country name to dao"() {
+	def "countByName() should pass category name to dao"() {
 		when:
-			service.countByName("Canada")
+			service.countByName("Sport")
 		then:
-			1 * countryDao.countByName({ String name ->
-				assert name == "Canada"
+			1 * categoryDao.countByName({ String name ->
+				assert name == "Sport"
+				return true
+			})
+	}
+	
+	//
+	// Tests for countByNameRu()
+	//
+	
+	def "countByNameRu() should throw exception when name is null"() {
+		when:
+			service.countByNameRu(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countByNameRu() should call dao"() {
+		given:
+			categoryDao.countByNameRu(_ as String) >> 2
+		when:
+			int result = service.countByNameRu("Any name here")
+		then:
+			result == 2
+	}
+	
+	def "countByNameRu() should pass category name to dao"() {
+		when:
+			service.countByNameRu("Спорт")
+		then:
+			1 * categoryDao.countByNameRu({ String name ->
+				assert name == "Спорт"
 				return true
 			})
 	}

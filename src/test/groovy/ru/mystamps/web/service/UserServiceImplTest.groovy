@@ -30,7 +30,7 @@ import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.tests.DateUtils
 
-class UserServiceTest extends Specification {
+class UserServiceImplTest extends Specification {
 	
 	private UserDao userDao = Mock()
 	private UsersActivationDao usersActivationDao = Mock()

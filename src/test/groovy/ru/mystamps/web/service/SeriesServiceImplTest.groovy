@@ -35,7 +35,7 @@ import ru.mystamps.web.entity.YvertCatalog
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.tests.DateUtils
 
-class SeriesServiceTest extends Specification {
+class SeriesServiceImplTest extends Specification {
 	private static final Double ANY_PRICE = 17d
 	
 	private ImageService imageService = Mock()

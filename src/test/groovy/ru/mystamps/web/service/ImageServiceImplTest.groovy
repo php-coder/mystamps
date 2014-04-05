@@ -27,7 +27,7 @@ import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
-class ImageServiceTest extends Specification {
+class ImageServiceImplTest extends Specification {
 
 	private ImageDao imageDao = Mock()
 	private MultipartFile multipartFile = Mock()
