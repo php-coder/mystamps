@@ -52,7 +52,7 @@ public class SuspiciousActivity {
 	@Column(length = PAGE_URL_LENGTH, nullable = false)
 	private String page;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private User user;
 	
 	@Column(length = IP_LENGTH, nullable = false)
