@@ -64,13 +64,7 @@ public class NotNullIfFirstFieldValidator
 			
 			return false;
 		
-		} catch (NoSuchMethodException ex) {
-			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
-		
-		} catch (InvocationTargetException ex) {
-			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
-		
-		} catch (IllegalAccessException ex) {
+		} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
 			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
 		}
 	}

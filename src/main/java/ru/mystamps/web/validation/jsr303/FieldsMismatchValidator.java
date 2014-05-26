@@ -66,13 +66,7 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 				return false;
 			}
 		
-		} catch (NoSuchMethodException ex) {
-			throw new RuntimeException(ex); // NOPMD
-		
-		} catch (InvocationTargetException ex) {
-			throw new RuntimeException(ex); // NOPMD
-		
-		} catch (IllegalAccessException ex) {
+		} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
 			throw new RuntimeException(ex); // NOPMD
 		}
 		

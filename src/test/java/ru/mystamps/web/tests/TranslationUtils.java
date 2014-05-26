@@ -57,10 +57,7 @@ public final class TranslationUtils {
 			stream = new FileInputStream(file);
 			return new PropertyResourceBundle(stream);
 		
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		
-		} catch (URISyntaxException ex) {
+		} catch (IOException | URISyntaxException ex) {
 			throw new RuntimeException(ex);
 		
 		} finally {
