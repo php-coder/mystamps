@@ -2,7 +2,8 @@ language: java
 script: mvn verify jasmine:test
 
 jdk:
-  - openjdk6
+  - openjdk7
+  - oraclejdk7
 
 branches:
   except:
