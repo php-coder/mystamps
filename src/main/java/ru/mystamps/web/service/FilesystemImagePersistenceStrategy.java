@@ -23,8 +23,6 @@ import java.nio.file.Files;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.io.FileUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,8 +104,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	// protected to allow spying
 	protected byte[] toByteArray(File dest) throws IOException {
-		// TODO(guava): use Files.toByteArray()
-		return FileUtils.readFileToByteArray(dest);
+		return Files.readAllBytes(dest.toPath());
 	}
 
 	private static String generateFileName(Image image) {

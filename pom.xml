@@ -205,7 +205,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- Needed for FileUtils/IOUtils -->
+		<!-- Needed for IOUtils -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
