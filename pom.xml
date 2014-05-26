@@ -696,6 +696,9 @@
 										<exclude>commons-logging</exclude>
 									</excludes>
 								</bannedDependencies>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
 							</rules>
 						</configuration>
 					</execution>
