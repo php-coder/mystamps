@@ -25,12 +25,14 @@ import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+import java.nio.file.Path
+
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = "/tmp"
 	
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
-	private File mockFile = Mock(File, constructorArgs: ["/fake/path"])
+	private Path mockFile = Mock(Path)
 	
 	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
 	
@@ -42,7 +44,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, _ as File) >> {}
+			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
 	}
 	
 	def "save() should saves file onto the configured directory"() {
@@ -51,8 +53,8 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, { File file ->
-				assert file.parent == expectedDirectoryName
+			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
+				assert path.parent.toString() == expectedDirectoryName
 				return true
 			}) >> {}
 	}
@@ -65,15 +67,15 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, { File file ->
-				assert file.name == expectedFileName
+			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
+				assert path.fileName.toString() == expectedFileName
 				return true
 			}) >> {}
 	}
 	
 	def "save() should converts IOException to ImagePersistenceException"() {
 		given:
-			strategy.writeToFile(_ as MultipartFile, _ as File) >> { throw new IOException() }
+			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException() }
 		when:
 			strategy.save(multipartFile, image)
 		then:
@@ -88,7 +90,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should returns null when file doesn't exist"() {
 		given:
-			mockFile.exists() >> false
+			strategy.exists(_ as Path) >> false
 		and:
 			strategy.createFile(_ as Image) >> mockFile
 		when:
@@ -99,11 +101,11 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should converts IOException to ImagePersistenceException"() {
 		given:
-			mockFile.exists() >> true
+			strategy.exists(_ as Path) >> true
 		and:
 			strategy.createFile(_ as Image) >> mockFile
 		and:
-			strategy.toByteArray(_ as File) >> { throw new IOException() }
+			strategy.toByteArray(_ as Path) >> { throw new IOException() }
 		when:
 			strategy.get(image)
 		then:
@@ -118,11 +120,11 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			byte[] expectedData = 'any data'.bytes
 		and:
-			mockFile.exists() >> true
+			strategy.exists(_ as Path) >> true
 		and:
 			strategy.createFile(_ as Image) >> mockFile
 		and:
-			strategy.toByteArray(_ as File) >> expectedData
+			strategy.toByteArray(_ as Path) >> expectedData
 		when:
 			ImageDto result = strategy.get(image)
 		then:

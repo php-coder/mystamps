@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.annotation.PostConstruct;
 
@@ -63,7 +64,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	@Override
 	public void save(MultipartFile file, Image image) {
 		try {
-			File dest = createFile(image);
+			Path dest = createFile(image);
 			writeToFile(file, dest);
 			
 			LOG.debug("Image's data was written into file {}", dest);
@@ -75,8 +76,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	@Override
 	public ImageDto get(Image image) {
-		File dest = createFile(image);
-		if (!dest.exists()) {
+		Path dest = createFile(image);
+		if (!exists(dest)) {
 			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
 			return null;
 		}
@@ -91,20 +92,25 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	}
 	
 	// protected to allow spying
-	protected File createFile(Image image) {
-		return new File(storageDir, generateFileName(image));
+	protected Path createFile(Image image) {
+		return new File(storageDir, generateFileName(image)).toPath();
 	}
 	
 	// protected to allow spying
-	protected void writeToFile(MultipartFile file, File dest) throws IOException {
+	protected void writeToFile(MultipartFile file, Path dest) throws IOException {
 		// we can't use file.transferTo(dest) there because it creates file
 		// relatively to directory from multipart-config/location in web.xml
-		Files.copy(file.getInputStream(), dest.toPath());
+		Files.copy(file.getInputStream(), dest);
+	}
+
+	// protected to allow spying
+	protected boolean exists(Path path) {
+		return Files.exists(path);
 	}
 	
 	// protected to allow spying
-	protected byte[] toByteArray(File dest) throws IOException {
-		return Files.readAllBytes(dest.toPath());
+	protected byte[] toByteArray(Path dest) throws IOException {
+		return Files.readAllBytes(dest);
 	}
 
 	private static String generateFileName(Image image) {
