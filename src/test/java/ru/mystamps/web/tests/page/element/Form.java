@@ -40,8 +40,8 @@ public final class Form {
 	@Getter private List<SubmitButton> submitButtons;
 	
 	private Form() {
-		fields = new ArrayList<Field>();
-		submitButtons = new ArrayList<SubmitButton>();
+		fields = new ArrayList<>();
+		submitButtons = new ArrayList<>();
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public final class Form {
 	}
 	
 	public List<Field> getRequiredFields() {
-		List<Field> requiredFields = new ArrayList<Field>();
+		List<Field> requiredFields = new ArrayList<>();
 		
 		for (Field field : fields) {
 			if (field.isRequired()) {

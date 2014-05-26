@@ -67,7 +67,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
-		List<SimpleGrantedAuthority> authorities = new LinkedList<SimpleGrantedAuthority>();
+		List<SimpleGrantedAuthority> authorities = new LinkedList<>();
 		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		

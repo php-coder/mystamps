@@ -85,7 +85,7 @@ public class DbConfig {
 	}
 	
 	private Map<String, String> getJpaProperties() {
-		Map<String, String> jpaProperties = new HashMap<String, String>();
+		Map<String, String> jpaProperties = new HashMap<>();
 		jpaProperties.put(
 			"hibernate.format_sql",
 			env.getRequiredProperty("hibernate.formatSql")

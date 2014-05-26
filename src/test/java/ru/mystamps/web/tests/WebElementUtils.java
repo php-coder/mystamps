@@ -30,10 +30,10 @@ public final class WebElementUtils {
 	
 	public static List<String> convertToListWithText(List<WebElement> elements) {
 		if (elements.isEmpty()) {
-			return Collections.<String>emptyList();
+			return Collections.emptyList();
 		}
 		
-		List<String> result = new ArrayList<String>(elements.size());
+		List<String> result = new ArrayList<>(elements.size());
 		for (WebElement el : elements) {
 			result.add(el.getText());
 		}

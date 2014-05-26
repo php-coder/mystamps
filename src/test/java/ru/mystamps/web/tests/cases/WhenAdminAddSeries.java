@@ -57,10 +57,10 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
-	private static final List<String> EXPECTED_CURRENCIES = new ArrayList<String>();
+	private static final List<String> EXPECTED_CURRENCIES = new ArrayList<>();
 	
 	private static final List<String> EXPECTED_YEARS =
-		new ArrayList<String>(CURRENT_YEAR - SINCE_YEAR + 1);
+		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
 	private static final String SAMPLE_IMAGE_NAME = "test.png";
 	private static final String EMPTY_IMAGE_NAME  = "empty.jpg";

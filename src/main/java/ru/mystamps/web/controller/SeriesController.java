@@ -70,7 +70,7 @@ public class SeriesController {
 	private final SeriesService seriesService;
 	
 	static {
-		YEARS = new LinkedHashMap<Integer, Integer>();
+		YEARS = new LinkedHashMap<>();
 		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			YEARS.put(i, i);
 		}
