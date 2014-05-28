@@ -4,6 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib tagdir="/WEB-INF/tags/elem" prefix="elem" %>
 
+<%@ page import="ru.mystamps.web.Url" %>
+
 <div class="row-fluid">
 	
 	<div class="span4">
@@ -17,14 +19,24 @@
 				<spring:message code="t_category" />
 			</dt>
 			<dd id="category_name">
-				<c:out value="${series.category.name}" />
+				<spring:url var="categoryUrl" value="<%= Url.INFO_CATEGORY_PAGE %>">
+					<spring:param name="id" value="${series.category.id}" />
+				</spring:url>
+				<a href="${categoryUrl}">
+					<c:out value="${series.category.name}" />
+				</a>
 			</dd>
 			<c:if test="${not empty series.country}">
+				<spring:url var="countryUrl" value="<%= Url.INFO_COUNTRY_PAGE %>">
+					<spring:param name="id" value="${series.country.id}" />
+				</spring:url>
 				<dt>
 					<spring:message code="t_country" />
 				</dt>
 				<dd id="country_name">
-					<c:out value="${series.country.name}" />
+					<a href="${countryUrl}">
+						<c:out value="${series.country.name}" />
+					</a>
 				</dd>
 			</c:if>
 			<c:if test="${not empty series.releaseYear}">
