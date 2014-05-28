@@ -17,15 +17,11 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Set;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-
-import static java.util.Calendar.JANUARY;
 
 import org.apache.commons.lang3.Validate;
 
@@ -75,11 +71,15 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 		
 		if (dto.getYear() != null) {
-			Calendar releaseDate = GregorianCalendar.getInstance();
-			releaseDate.clear();
-			releaseDate.set(dto.getYear(), JANUARY, 1);
-			
-			series.setReleasedAt(releaseDate.getTime());
+			series.setReleaseYear(dto.getYear());
+
+			if (dto.getMonth() != null) {
+				series.setReleaseMonth(dto.getMonth());
+
+				if (dto.getDay() != null) {
+					series.setReleaseDay(dto.getDay());
+				}
+			}
 		}
 		
 		series.setCategory(dto.getCategory());

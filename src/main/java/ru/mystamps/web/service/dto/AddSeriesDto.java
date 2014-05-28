@@ -26,6 +26,8 @@ import ru.mystamps.web.entity.Currency;
 public interface AddSeriesDto {
 	Category getCategory();
 	Country getCountry();
+	Integer getDay();
+	Integer getMonth();
 	Integer getYear();
 	Integer getQuantity();
 	Boolean getPerforated();

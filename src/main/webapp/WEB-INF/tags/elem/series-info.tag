@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <%@ tag import="ru.mystamps.web.Url" %>
@@ -33,8 +32,8 @@
 </spring:url>
 
 <a href="${seriesInfoUrl}">
-	<c:if test="${not empty series.releasedAt}">
-		<fmt:formatDate value="${series.releasedAt}" pattern="yyyy, " />
+	<c:if test="${not empty series.releaseYear}">
+		<c:out value="${series.releaseYear}, " />
 	</c:if>
 	
 	<c:out value="${series.quantity}" />&nbsp;<spring:message code="t_items" />

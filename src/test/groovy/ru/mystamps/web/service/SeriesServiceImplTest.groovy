@@ -124,24 +124,17 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 	
-	def "add() should pass date with specified year to series dao if year present"() {
+	def "add() should pass year to series dao if year present"() {
 		given:
 			int expectedYear = 2000
-			Date passedDate = null
 			form.setYear(expectedYear)
 		when:
 			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
-				passedDate = series?.releasedAt
+				assert series?.releaseYear == expectedYear
 				return true
 			})
-		and:
-			Calendar cal = GregorianCalendar.getInstance()
-			cal.setTime(passedDate)
-			int actualYear = cal.get(Calendar.YEAR)
-			
-			actualYear == expectedYear
 	}
 	
 	def "add() should pass category to series dao"() {

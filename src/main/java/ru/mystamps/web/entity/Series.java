@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.entity;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -33,8 +32,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,9 +58,14 @@ public class Series {
 	@ManyToOne
 	private Country country;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "released_at")
-	private Date releasedAt;
+	@Column(name = "release_day")
+	private Integer releaseDay;
+	
+	@Column(name = "release_month")
+	private Integer releaseMonth;
+	
+	@Column(name = "release_year")
+	private Integer releaseYear;
 	
 	@Column(nullable = false)
 	private Integer quantity;

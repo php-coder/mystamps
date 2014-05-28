@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 
 @Getter
@@ -26,7 +24,9 @@ public class SeriesInfoDto {
 	private final Integer id;
 	private final EntityInfoDto category;
 	private final EntityInfoDto country;
-	private final Date releasedAt;
+	private final Integer releaseDay;
+	private final Integer releaseMonth;
+	private final Integer releaseYear;
 	private final Integer quantity;
 	private final Boolean perforated;
 	
@@ -35,13 +35,15 @@ public class SeriesInfoDto {
 			Integer id,
 			Integer categoryId, String categoryName,
 			Integer countryId, String countryName,
-			Date releasedAt,
+			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
 			Integer quantity,
 			Boolean perforated) {
 		this.id = id;
 		this.category = new EntityInfoDto(categoryId, categoryName);
 		this.country = new EntityInfoDto(countryId, countryName);
-		this.releasedAt = releasedAt;
+		this.releaseDay = releaseDay;
+		this.releaseMonth = releaseMonth;
+		this.releaseYear = releaseYear;
 		this.quantity = quantity;
 		this.perforated = perforated;
 	}

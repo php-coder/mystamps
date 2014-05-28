@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="add-release_day-column-to-series-table" author="php-coder" context="scheme">
+		<comment>Adds release_day column to series table</comment>
+		
+		<addColumn tableName="series">
+			<column name="release_day" type="INTEGER" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-release_month-column-to-series-table" author="php-coder" context="scheme">
+		<comment>Adds release_month column to series table</comment>
+		
+		<addColumn tableName="series">
+			<column name="release_month" type="INTEGER" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-release_year-column-to-series-table" author="php-coder" context="scheme">
+		<comment>Adds release_year column to series table</comment>
+		
+		<addColumn tableName="series">
+			<column name="release_year" type="INTEGER" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="fill-release_year-column-based-on-values-from-released_at" author="php-coder" context="test-data, prod-data">
+		<comment>Migrates data from series.released_at to series.release_year</comment>
+		
+		<sql>
+			UPDATE series
+			SET release_year=YEAR(released_at)
+			WHERE released_at IS NOT NULL
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="drop-released_at-column-from-series-table" author="php-coder" context="scheme">
+		<comment>Drops released_at column from series table</comment>
+		
+		<dropColumn tableName="series" columnName="released_at" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

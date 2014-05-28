@@ -43,7 +43,9 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		hasForm(
 			with(
 				selectField("country").withLabel(tr("t_country")),
-				selectField("year").withLabel(tr("t_issue_year")),
+				selectField("day"),
+				selectField("month"),
+				selectField("year").withLabel(tr("t_issue_date")),
 				required(inputField("quantity").withLabel(tr("t_quantity"))),
 				checkboxField("perforated").withLabel(tr("t_perforated")),
 				inputField("michelNumbers").withLabel(tr("t_michel")),
@@ -98,6 +100,18 @@ public class AddSeriesPage extends AbstractPageWithForm {
 	
 	public List<String> getYearFieldValues() {
 		return getSelectOptions("year");
+	}
+	
+	public void fillDay(String value) {
+		if (value != null) {
+			new Select(getElementByName("day")).selectByVisibleText(value);
+		}
+	}
+	
+	public void fillMonth(String value) {
+		if (value != null) {
+			new Select(getElementByName("month")).selectByVisibleText(value);
+		}
 	}
 	
 	public void fillYear(String value) {

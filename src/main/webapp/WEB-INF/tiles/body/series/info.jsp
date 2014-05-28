@@ -27,12 +27,20 @@
 					<c:out value="${series.country.name}" />
 				</dd>
 			</c:if>
-			<c:if test="${not empty series.releasedAt}">
+			<c:if test="${not empty series.releaseYear}">
 				<dt>
-					<spring:message code="t_issue_year" />
+					<spring:message code="t_issue_date" />
 				</dt>
-				<dd id="issue_year">
-					<fmt:formatDate value="${series.releasedAt}" pattern="yyyy" />
+				<dd id="issue_date">
+					<c:if test="${not empty series.releaseDay}">
+						<fmt:formatNumber type="number" minIntegerDigits="2" value="${series.releaseDay}" />.
+					</c:if>
+					<c:if test="${not empty series.releaseMonth}">
+						<fmt:formatNumber type="number" minIntegerDigits="2" value="${series.releaseMonth}" />.
+					</c:if>
+					<c:if test="${not empty series.releaseYear}">
+						<c:out value="${series.releaseYear}" />
+					</c:if>
 				</dd>
 			</c:if>
 				<dt>

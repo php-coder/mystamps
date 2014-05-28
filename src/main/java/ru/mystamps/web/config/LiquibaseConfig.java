@@ -49,7 +49,7 @@ public class LiquibaseConfig {
 			return "scheme, init-data, test-data";
 		} else {
 			// see also duplicate definition at pom.xml
-			return "scheme, init-data";
+			return "scheme, init-data, prod-data";
 		}
 	}
 	

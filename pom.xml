@@ -602,7 +602,7 @@
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
 					<!-- See also src/main/java/ru/mystamps/web/config/LiquibaseConfig.java -->
-					<contexts>scheme,init-data</contexts>
+					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
 			</plugin>
 			

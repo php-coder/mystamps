@@ -23,6 +23,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.GroupSequence;
 
+import org.hibernate.validator.constraints.Range;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Category;
@@ -42,6 +44,8 @@ import ru.mystamps.web.validation.jsr303.UniqueYvertNumbers;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
+import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
+import static ru.mystamps.web.validation.ValidationRules.MAX_MONTHS_IN_YEAR;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +55,12 @@ import lombok.Setter;
 // TODO: combine price with currency to separate class
 @SuppressWarnings({"PMD.TooManyFields", "PMD.AvoidDuplicateLiterals"})
 @NotNullIfFirstField.List({
+	@NotNullIfFirstField(
+		first = "month", second = "year", message = "{month.requires.year}"
+	),
+	@NotNullIfFirstField(
+		first = "day", second = "month", message = "{day.requires.month}"
+	),
 	@NotNullIfFirstField(
 		first = "michelPrice", second = "michelCurrency", message = "{currency.required}"
 	),
@@ -70,6 +80,13 @@ public class AddSeriesForm implements AddSeriesDto {
 	private Category category;
 	
 	private Country country;
+	
+	@Range(min = 1, max = MAX_DAYS_IN_MONTH, message = "{day.invalid}")
+	private Integer day;
+	
+	@Range(min = 1, max = MAX_MONTHS_IN_YEAR, message = "{month.invalid}")
+	private Integer month;
+	
 	private Integer year;
 	
 	@NotNull

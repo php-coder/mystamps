@@ -55,6 +55,7 @@ import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.EntityInfoDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
+import ru.mystamps.web.validation.ValidationRules;
 
 @Controller
 @RequiredArgsConstructor
@@ -63,6 +64,8 @@ public class SeriesController {
 	private static final Integer SINCE_YEAR     = 1840;
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
+	private static final Map<Integer, Integer> DAYS;
+	private static final Map<Integer, Integer> MONTHS;
 	private static final Map<Integer, Integer> YEARS;
 	
 	private final CategoryService categoryService;
@@ -70,6 +73,18 @@ public class SeriesController {
 	private final SeriesService seriesService;
 	
 	static {
+		DAYS = new LinkedHashMap<>(ValidationRules.MAX_DAYS_IN_MONTH);
+		for (int i = 1; i <= ValidationRules.MAX_DAYS_IN_MONTH; i++) {
+			Integer day = Integer.valueOf(i);
+			DAYS.put(day, day);
+		}
+		
+		MONTHS = new LinkedHashMap<>(ValidationRules.MAX_MONTHS_IN_YEAR);
+		for (int i = 1; i <= ValidationRules.MAX_MONTHS_IN_YEAR; i++) {
+			Integer month = Integer.valueOf(i);
+			MONTHS.put(month, month);
+		}
+		
 		YEARS = new LinkedHashMap<>();
 		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			YEARS.put(i, i);
@@ -84,6 +99,16 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
+	}
+	
+	@ModelAttribute("days")
+	public Map<Integer, Integer> getDays() {
+		return DAYS;
+	}
+	
+	@ModelAttribute("months")
+	public Map<Integer, Integer> getMonths() {
+		return MONTHS;
 	}
 	
 	@ModelAttribute("years")

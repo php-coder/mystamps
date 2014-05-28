@@ -415,13 +415,17 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
 		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
 		String expectedQuantity     = "3";
-		String expectedYear         = "1999";
+		String day                  = "8";
+		String month                = "9";
+		String year                 = "1999";
 		String expectedCountryName  = "Italy";
 		String expectedCategoryName = validCategoryName;
 
 		page.fillCategory(expectedCategoryName);
 		page.fillCountry(expectedCountryName);
-		page.fillYear(expectedYear);
+		page.fillDay(day);
+		page.fillMonth(month);
+		page.fillYear(year);
 		page.fillQuantity(expectedQuantity);
 		page.fillPerforated(false);
 		
@@ -453,7 +457,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		
 		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
-		assertThat(nextPage.getYear()).isEqualTo(expectedYear);
+		assertThat(nextPage.getDateOfRelease()).isEqualTo("08. 09. 1999");
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
 		

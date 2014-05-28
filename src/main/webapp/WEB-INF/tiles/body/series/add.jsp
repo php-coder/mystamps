@@ -26,12 +26,40 @@
 			</form:select>
 		</elem:field>
 		
-		<elem:field path="year" label="t_issue_year">
-			<form:select path="year" cssClass="span2">
-				<form:option value="" />
-				<form:options items="${years}" />
-			</form:select>
-		</elem:field>
+		<spring:hasBindErrors name="addSeriesForm">
+			<c:if test="${errors.hasFieldErrors('day') or errors.hasFieldErrors('month') or errors.hasFieldErrors('year')}">
+				<c:set var="releaseDateHasError" value="true" />
+			</c:if>
+		</spring:hasBindErrors>
+		
+		<div class="control-group ${releaseDateHasError ? 'error' : ''}">
+			<form:label path="year" cssClass="control-label">
+				<span class="field-label"><spring:message code="t_issue_date" /></span>
+			</form:label>
+			
+			<div class="controls controls-row">
+				<form:select path="day" cssClass="span2">
+					<form:option value="" />
+					<form:options items="${days}" />
+				</form:select>
+				
+				<form:select path="month" cssClass="span2">
+					<form:option value="" />
+					<form:options items="${months}" />
+				</form:select>
+				
+				<form:select path="year" cssClass="span2">
+					<form:option value="" />
+					<form:options items="${years}" />
+				</form:select>
+				
+			</div>
+			<div class="controls">
+				<form:errors path="day" cssClass="help-block" />
+				<form:errors path="month" cssClass="help-block" />
+				<form:errors path="year" cssClass="help-block" />
+			</div>
+		</div>
 		
 		<elem:field path="quantity" label="t_quantity" required="true">
 			<form:input

@@ -39,8 +39,8 @@ public class InfoSeriesPage extends AbstractPage {
 		return getTextOfElementById("country_name");
 	}
 	
-	public String getYear() {
-		return getTextOfElementById("issue_year");
+	public String getDateOfRelease() {
+		return getTextOfElementById("issue_date");
 	}
 	
 	public String getQuantity() {
