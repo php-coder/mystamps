@@ -124,6 +124,62 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 	
+	def "add() should pass day of month to dao when month and year are present"() {
+		given:
+			int expectedDay = 17
+			form.setDay(expectedDay)
+			form.setMonth(1)
+			form.setYear(1996)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * seriesDao.save({ Series series ->
+				assert series?.releaseDay == expectedDay
+				return true
+			})
+	}
+	
+	def "add() shouldn't pass day of month to dao when month and year aren't present"() {
+		given:
+			form.setDay(17)
+			form.setMonth(null)
+			form.setYear(null)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * seriesDao.save({ Series series ->
+				assert series?.releaseDay == null
+				return true
+			})
+	}
+	
+	def "add() should pass month to dao when month and year are present"() {
+		given:
+			int expectedMonth = 6
+			form.setMonth(expectedMonth)
+			form.setYear(1997)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * seriesDao.save({ Series series ->
+				assert series?.releaseMonth == expectedMonth
+				return true
+			})
+	}
+	
+	def "add() shouldn't pass month to dao when year aren't present"() {
+		given:
+			form.setMonth(11)
+			form.setYear(null)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * seriesDao.save({ Series series ->
+				assert series?.releaseMonth == null
+				return true
+			})
+	}
+	
 	def "add() should pass year to series dao if year present"() {
 		given:
 			int expectedYear = 2000
