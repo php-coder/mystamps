@@ -19,4 +19,5 @@ package ru.mystamps.web.service.dto;
 
 public interface AddCountryDto {
 	String getName();
+	String getNameRu();
 }

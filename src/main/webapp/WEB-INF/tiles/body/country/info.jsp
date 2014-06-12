@@ -2,7 +2,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/elem" prefix="elem" %>
 
 <h3>
-	<c:out value="${country.name}" />
+	<c:out value="${country.getLocalizedName(pageContext.request.locale)}" />
 </h3>
 
 <ul>

@@ -32,6 +32,6 @@ public interface SeriesService {
 	int countByScottNumber(String scottNumberCode);
 	int countByYvertNumber(String yvertNumberCode);
 	int countByGibbonsNumber(String gibbonsNumberCode);
-	Iterable<SeriesInfoDto> findBy(Category category);
-	Iterable<SeriesInfoDto> findBy(Country country);
+	Iterable<SeriesInfoDto> findBy(Category category, String lang);
+	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 }

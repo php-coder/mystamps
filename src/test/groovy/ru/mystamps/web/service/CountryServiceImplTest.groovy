@@ -18,6 +18,7 @@
 package ru.mystamps.web.service
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.entity.Country
@@ -37,6 +38,7 @@ class CountryServiceImplTest extends Specification {
 	def setup() {
 		form = new AddCountryForm()
 		form.setName("Any country name")
+		form.setNameRu("Любое название страны")
 		
 		user = TestObjects.createUser()
 	}
@@ -52,9 +54,18 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when country name is null"() {
+	def "add() should throw exception when country name on English is null"() {
 		given:
 			form.setName(null)
+		when:
+			service.add(form, user)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "add() should throw exception when country name on Russian is null"() {
+		given:
+			form.setNameRu(null)
 		when:
 			service.add(form, user)
 		then:
@@ -78,7 +89,7 @@ class CountryServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	def "add() should pass country name to dao"() {
+	def "add() should pass country name on English to dao"() {
 		given:
 			String expectedCountryName = "Italy"
 			form.setName(expectedCountryName)
@@ -87,6 +98,19 @@ class CountryServiceImplTest extends Specification {
 		then:
 			1 * countryDao.save({ Country country ->
 				assert country?.name == expectedCountryName
+				return true
+			}) >> TestObjects.createCountry()
+	}
+	
+	def "add() should pass country name on Russian to dao"() {
+		given:
+			String expectedCountryName = "Италия"
+			form.setNameRu(expectedCountryName)
+		when:
+			service.add(form, user)
+		then:
+			1 * countryDao.save({ Country country ->
+				assert country?.nameRu == expectedCountryName
 				return true
 			}) >> TestObjects.createCountry()
 	}
@@ -132,10 +156,10 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAll()
+	// Tests for findAll(String)
 	//
 	
-	def "findAll() should call dao"() {
+	def "findAll(String) should call dao"() {
 		given:
 			EntityInfoDto country1 = new EntityInfoDto(1, "First Country")
 		and:
@@ -143,11 +167,26 @@ class CountryServiceImplTest extends Specification {
 		and:
 			List<EntityInfoDto> expectedCountries = [ country1, country2 ]
 		and:
-			countryDao.findAllAsSelectEntries() >> expectedCountries
+			countryDao.findAllAsSelectEntries(_ as String) >> expectedCountries
 		when:
-			Iterable<EntityInfoDto> resultCountries = service.findAll()
+			Iterable<EntityInfoDto> resultCountries = service.findAll("de")
 		then:
 			resultCountries == expectedCountries
+	}
+	
+	@Unroll
+	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage, Object _) {
+		when:
+			service.findAll(expectedLanguage)
+		then:
+			1 * countryDao.findAllAsSelectEntries({ String language ->
+				assert language == expectedLanguage
+				return true
+			})
+		where:
+			expectedLanguage | _
+			"ru"             | _
+			null             | _
 	}
 	
 	//
@@ -191,6 +230,36 @@ class CountryServiceImplTest extends Specification {
 		then:
 			1 * countryDao.countByName({ String name ->
 				assert name == "Canada"
+				return true
+			})
+	}
+	
+	//
+	// Tests for countByNameRu()
+	//
+	
+	def "countByNameRu() should throw exception when name is null"() {
+		when:
+			service.countByNameRu(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countByNameRu() should call dao"() {
+		given:
+			countryDao.countByNameRu(_ as String) >> 2
+		when:
+			int result = service.countByNameRu("Any name here")
+		then:
+			result == 2
+	}
+	
+	def "countByNameRu() should pass category name to dao"() {
+		when:
+			service.countByNameRu("Канада")
+		then:
+			1 * countryDao.countByNameRu({ String name ->
+				assert name == "Канада"
 				return true
 			})
 	}

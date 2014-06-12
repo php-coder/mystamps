@@ -9,10 +9,14 @@
 <div class="span6 offset3">
 	<form:form method="post" modelAttribute="addCountryForm" cssClass="form-horizontal">
 		
-		<elem:field path="name" label="t_country" required="true">
-			<form:input path="name" required="required" autofocus="autofocus" />
+		<elem:field path="name" label="t_country_on_english" required="true">
+			<form:input path="name" required="required" />
 		</elem:field>
 		
+		<elem:field path="nameRu" label="t_country_on_russian" required="true">
+			<form:input path="nameRu" required="required" />
+		</elem:field>
+        		
 		<elem:submit label="t_add" />
 		
 	</form:form>

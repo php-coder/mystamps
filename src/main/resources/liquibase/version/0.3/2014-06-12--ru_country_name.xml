@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-name_ru-column-to-countries-table" author="php-coder" context="scheme">
+		<comment>Adds name_ru column to countries table</comment>
+		
+		<addColumn tableName="countries">
+			<column name="name_ru" type="VARCHAR(50)">
+				<constraints unique="true" />
+			</column>
+		</addColumn>
+		
+		<modifySql>
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-1745 -->
+			<!--
+				We can't use <append> here because it fails on H2 where 2 queries generated
+				(2nd for unique constraint) and each have our string at the end.
+			-->
+			<replace replace="name_ru VARCHAR(50)" with="name_ru VARCHAR(50) AFTER name" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="update-italy-country-name" author="php-coder" context="test-data">
+		<comment>Sets value of name_ru field to value of name field</comment>
+		
+		<update tableName="countries">
+			<column name="name_ru" value="Италия" />
+			<where>name = :value</where>
+			<whereParams>
+				<param value="Italy" />
+			</whereParams>
+		</update>
+		
+	</changeSet>
+	
+	<changeSet id="update-countries-names" author="php-coder" context="prod-data">
+		<comment>Sets value of name_ru field to value of name field</comment>
+		
+		<update tableName="countries">
+			<!-- Because CONCAT() in H2 requires at least 2 arguments -->
+			<column name="name_ru" valueComputed="CONCAT(name, '')" />
+		</update>
+		
+	</changeSet>
+	
+	<changeSet id="make-name_ru-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks countries.name_ru field as NOT NULL</comment>
+		
+		<addNotNullConstraint tableName="countries" columnName="name_ru" columnDataType="VARCHAR(50)" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

@@ -46,11 +46,13 @@ public class CountryServiceImpl implements CountryService {
 	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
 	public Country add(AddCountryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "Country name should be non null");
+		Validate.isTrue(dto.getName() != null, "Country name on English should be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Country name on Russian should be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
 		Country country = new Country();
 		country.setName(dto.getName());
+		country.setNameRu(dto.getNameRu());
 		
 		Date now = new Date();
 		country.getMetaInfo().setCreatedAt(now);
@@ -67,8 +69,8 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<EntityInfoDto> findAll() {
-		return countryDao.findAllAsSelectEntries();
+	public Iterable<EntityInfoDto> findAll(String lang) {
+		return countryDao.findAllAsSelectEntries(lang);
 	}
 	
 	@Override
@@ -82,6 +84,13 @@ public class CountryServiceImpl implements CountryService {
 	public int countByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
 		return countryDao.countByName(name);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int countByNameRu(String name) {
+		Validate.isTrue(name != null, "Name on Russian should be non null");
+		return countryDao.countByNameRu(name);
 	}
 	
 }

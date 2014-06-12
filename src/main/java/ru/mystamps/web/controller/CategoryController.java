@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -38,6 +40,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
@@ -78,14 +81,17 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = Url.INFO_CATEGORY_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Category category, Model model) {
+	public String showInfo(@PathVariable("id") Category category, Model model, Locale userLocale) {
 		
 		if (category == null) {
 			throw new NotFoundException();
 		}
 		
 		model.addAttribute("category", category);
-		model.addAttribute("seriesOfCategory", seriesService.findBy(category));
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute("seriesOfCategory", seriesService.findBy(category, lang));
+		
 		return "category/info";
 	}
 	

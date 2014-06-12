@@ -178,17 +178,17 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
-	public Iterable<SeriesInfoDto> findBy(Category category) {
+	public Iterable<SeriesInfoDto> findBy(Category category, String lang) {
 		Validate.isTrue(category != null, "Category must be non null");
 		
-		return seriesDao.findByAsSeriesInfo(category);
+		return seriesDao.findByAsSeriesInfo(category, lang);
 	}
 	
 	@Override
-	public Iterable<SeriesInfoDto> findBy(Country country) {
+	public Iterable<SeriesInfoDto> findBy(Country country, String lang) {
 		Validate.isTrue(country != null, "Country must be non null");
 		
-		return seriesDao.findByAsSeriesInfo(country);
+		return seriesDao.findByAsSeriesInfo(country, lang);
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {

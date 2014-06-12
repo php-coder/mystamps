@@ -7,5 +7,6 @@
 	
 	<include file="0.3/2014-02-11--categories.xml" relativeToChangelogFile="true" />
 	<include file="0.3/2014-05-28--release_month_and_day.xml" relativeToChangelogFile="true" />
+	<include file="0.3/2014-06-12--ru_country_name.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

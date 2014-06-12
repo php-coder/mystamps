@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -38,6 +40,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,7 +51,9 @@ public class CountryController {
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(false));
+		StringTrimmerEditor editor = new StringTrimmerEditor(false);
+		binder.registerCustomEditor(String.class, "name", editor);
+		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
 	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.GET)
@@ -73,14 +78,17 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Country country, Model model) {
+	public String showInfo(@PathVariable("id") Country country, Model model, Locale userLocale) {
 		
 		if (country == null) {
 			throw new NotFoundException();
 		}
 		
 		model.addAttribute("country", country);
-		model.addAttribute("seriesOfCountry", seriesService.findBy(country));
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute("seriesOfCountry", seriesService.findBy(country, lang));
+		
 		return "country/info";
 	}
 	

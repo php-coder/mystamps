@@ -25,6 +25,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName;
+import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ import lombok.Setter;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
 
 @Getter
@@ -62,7 +64,7 @@ public class AddCountryForm implements AddCountryDto {
 	@Pattern.List({
 		@Pattern(
 			regexp = COUNTRY_NAME_EN_REGEXP,
-			message = "{country-name.invalid}",
+			message = "{country-name-en.invalid}",
 			groups = Level3Checks.class
 		),
 		@Pattern(
@@ -71,9 +73,36 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Level4Checks.class
 		)
 	})
-	@UniqueCountryName(groups = Level5Checks.class)
+	@UniqueCountryName(lang = Lang.EN, groups = Level5Checks.class)
 	private String name;
 	
+	@NotEmpty(groups = Level1Checks.class)
+	@Size.List({
+		@Size(
+			min = COUNTRY_NAME_MIN_LENGTH,
+			message = "{value.too-short}",
+			groups = Level2Checks.class
+		),
+		@Size(
+			max = COUNTRY_NAME_MAX_LENGTH,
+			message = "{value.too-long}",
+			groups = Level2Checks.class
+		)
+	})
+	@Pattern.List({
+		@Pattern(
+			regexp = COUNTRY_NAME_RU_REGEXP,
+			message = "{country-name-ru.invalid}",
+			groups = Level3Checks.class
+		),
+		@Pattern(
+			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
+			message = "{country-name.hyphen}",
+			groups = Level4Checks.class
+		)
+	})
+	@UniqueCountryName(lang = Lang.RU, groups = Level5Checks.class)
+	private String nameRu;
 	
 	public interface Level1Checks {
 	}

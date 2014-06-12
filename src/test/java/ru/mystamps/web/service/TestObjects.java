@@ -33,7 +33,8 @@ final class TestObjects {
 	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
-	private static final String TEST_COUNTRY_NAME = "Somewhere";
+	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
+	public static final String TEST_COUNTRY_RU_NAME = "Где-то";
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
@@ -51,7 +52,8 @@ final class TestObjects {
 	public static Country createCountry() {
 		Country country = new Country();
 		country.setId(TEST_COUNTRY_ID);
-		country.setName(TEST_COUNTRY_NAME);
+		country.setName(TEST_COUNTRY_EN_NAME);
+		country.setNameRu(TEST_COUNTRY_RU_NAME);
 		Date now = new Date();
 		country.getMetaInfo().setCreatedAt(now);
 		country.getMetaInfo().setUpdatedAt(now);

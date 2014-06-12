@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.entity;
 
+import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -27,11 +29,13 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.util.LocaleUtils;
+
 @Entity
 @Table(name = "countries")
 @Getter
 @Setter
-public class Country {
+public class Country implements LocalizedEntity {
 	
 	public static final int NAME_LENGTH = 50;
 	
@@ -41,6 +45,9 @@ public class Country {
 	
 	@Column(length = NAME_LENGTH, unique = true, nullable = false)
 	private String name;
+	
+	@Column(name = "name_ru", length = NAME_LENGTH, nullable = false, unique = true)
+	private String nameRu;
 	
 	@Embedded
 	private MetaInfo metaInfo; // NOPMD
@@ -60,8 +67,15 @@ public class Country {
 			.append(id)
 			.append(", name=")
 			.append(name)
+			.append(", nameRu=")
+			.append(nameRu)
 			.append(')')
 			.toString();
+	}
+	
+	@Override
+	public String getLocalizedName(Locale locale) {
+		return LocaleUtils.getLocalizedName(locale, this);
 	}
 	
 }

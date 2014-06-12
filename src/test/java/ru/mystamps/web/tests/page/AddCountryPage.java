@@ -36,23 +36,32 @@ public class AddCountryPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("name")).withLabel(tr("t_country"))
+				required(inputField("name")).withLabel(tr("t_country_on_english")),
+				required(inputField("nameRu")).withLabel(tr("t_country_on_russian"))
 			)
 			.and()
 			.with(submitButton(tr("t_add")))
 		);
 	}
 	
-	public void addCountry(String countryName) {
-		Validate.validState(countryName != null, "Country name should be non null");
+	public void addCountry(String nameEn, String nameRu) {
+		Validate.validState(nameEn != null, "Country name on English must be non null");
+		Validate.validState(nameRu != null, "Country name on Russian must be non null");
 		
-		fillName(countryName);
+		fillNameEn(nameEn);
+		fillNameRu(nameRu);
 		submit();
 	}
 	
-	private void fillName(String name) {
+	private void fillNameEn(String name) {
 		if (name != null) {
 			fillField("name", name);
+		}
+	}
+	
+	private void fillNameRu(String name) {
+		if (name != null) {
+			fillField("nameRu", name);
 		}
 	}
 	

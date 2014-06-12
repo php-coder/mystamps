@@ -24,7 +24,8 @@ import ru.mystamps.web.service.dto.EntityInfoDto;
 
 public interface CountryService {
 	Country add(AddCountryDto dto, User user);
-	Iterable<EntityInfoDto> findAll();
+	Iterable<EntityInfoDto> findAll(String lang);
 	long countAll();
 	int countByName(String name);
+	int countByNameRu(String name);
 }

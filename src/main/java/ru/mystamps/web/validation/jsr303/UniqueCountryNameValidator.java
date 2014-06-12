@@ -22,15 +22,18 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
 
 public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCountryName, String> {
 	
 	@Inject
 	private CountryService countryService;
+
+	private Lang lang;
 	
 	@Override
 	public void initialize(UniqueCountryName annotation) {
-		// Intentionally empty: nothing to initialize
+		lang = annotation.lang();
 	}
 	
 	@Override
@@ -40,7 +43,10 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 			return true;
 		}
 		
-		if (countryService.countByName(value) > 0) {
+		if (lang == Lang.EN && countryService.countByName(value) > 0) {
+			return false;
+		
+		} else if (lang == Lang.RU && countryService.countByNameRu(value) > 0) {
 			return false;
 		}
 		

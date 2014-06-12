@@ -1,4 +1,5 @@
 0.3 (not released yet)
+- added localization support for countries
 - added categories to series
 - save images to the disk
 - use JaCoCo for code coverage

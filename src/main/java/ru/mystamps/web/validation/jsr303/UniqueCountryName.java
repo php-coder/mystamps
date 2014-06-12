@@ -37,4 +37,11 @@ public @interface UniqueCountryName {
 	String message() default "{ru.mystamps.web.validation.jsr303.UniqueCountryName.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
+
+	Lang lang();
+
+	public enum Lang {
+		EN, RU
+	};
+	
 }

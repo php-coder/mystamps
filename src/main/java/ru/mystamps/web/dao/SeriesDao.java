@@ -47,7 +47,7 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
 			+ "cat.id, cat.name, "
-			+ "c.id, c.name, "
+			+ "c.id, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
 			+ "s.releaseDay, "
 			+ "s.releaseMonth, "
 			+ "s.releaseYear, "
@@ -59,13 +59,13 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		+ "LEFT JOIN s.country c "
 		+ "WHERE s.category = :category"
 	)
-	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("category") Category category);
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("category") Category category, @Param("lang") String lang);
 
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
 			+ "cat.id, cat.name, "
-			+ "c.id, c.name, "
+			+ "c.id, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
 			+ "s.releaseDay, "
 			+ "s.releaseMonth, "
 			+ "s.releaseYear, "
@@ -77,5 +77,5 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		+ "LEFT JOIN s.country c "
 		+ "WHERE s.country = :country"
 	)
-	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("country") Country country);
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("country") Country country, @Param("lang") String lang);
 }

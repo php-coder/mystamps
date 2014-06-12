@@ -35,7 +35,7 @@
 				</dt>
 				<dd id="country_name">
 					<a href="${countryUrl}">
-						<c:out value="${series.country.name}" />
+						<c:out value="${series.country.getLocalizedName(pageContext.request.locale)}" />
 					</a>
 				</dd>
 			</c:if>

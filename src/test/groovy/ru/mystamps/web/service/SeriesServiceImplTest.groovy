@@ -786,7 +786,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findBy(Category) should throw exception if category is null"() {
 		when:
-			service.findBy(null as Category)
+			service.findBy(null as Category, "any")
 		then:
 			thrown IllegalArgumentException
 	}
@@ -797,9 +797,9 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<Category> expectedResult = [ expectedCategory ]
 		and:
-			seriesDao.findByAsSeriesInfo(_ as Category) >> expectedResult
+			seriesDao.findByAsSeriesInfo(_ as Category, _ as String) >> expectedResult
 		when:
-			Iterable<Category> result = service.findBy(expectedCategory)
+			Iterable<Category> result = service.findBy(expectedCategory, "any")
 		then:
 			result == expectedResult
 	}
@@ -810,7 +810,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findBy(Country) should throw exception if country is null"() {
 		when:
-			service.findBy(null as Country)
+			service.findBy(null as Country, "any")
 		then:
 			thrown IllegalArgumentException
 	}
@@ -821,9 +821,9 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<Country> expectedResult = [ expectedCountry ]
 		and:
-			seriesDao.findByAsSeriesInfo(_ as Country) >> expectedResult
+			seriesDao.findByAsSeriesInfo(_ as Country, _ as String) >> expectedResult
 		when:
-			Iterable<Country> result = service.findBy(expectedCountry)
+			Iterable<Country> result = service.findBy(expectedCountry, "any")
 		then:
 			result == expectedResult
 	}

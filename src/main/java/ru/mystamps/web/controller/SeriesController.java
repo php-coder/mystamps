@@ -23,6 +23,7 @@ import javax.validation.groups.Default;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -55,6 +56,7 @@ import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.EntityInfoDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
+import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.validation.ValidationRules;
 
 @Controller
@@ -122,8 +124,9 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("countries")
-	public Iterable<EntityInfoDto> getCountries() {
-		return countryService.findAll();
+	public Iterable<EntityInfoDto> getCountries(Locale userLocale) {
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		return countryService.findAll(lang);
 	}
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.GET)
