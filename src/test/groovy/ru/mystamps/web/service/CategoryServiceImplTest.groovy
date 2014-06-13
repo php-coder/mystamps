@@ -37,6 +37,7 @@ class CategoryServiceImplTest extends Specification {
 	def setup() {
 		form = new AddCategoryForm()
 		form.setName("Any category name")
+		form.setNameRu("Любое название категории")
 		
 		user = TestObjects.createUser()
 	}
@@ -52,9 +53,18 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when category name is null"() {
+	def "add() should throw exception when English category name is null"() {
 		given:
 			form.setName(null)
+		when:
+			service.add(form, user)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "add() should throw exception when Russian category name is null"() {
+		given:
+			form.setNameRu(null)
 		when:
 			service.add(form, user)
 		then:
@@ -78,7 +88,7 @@ class CategoryServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	def "add() should pass category name to dao"() {
+	def "add() should pass English category name to dao"() {
 		given:
 			String expectedCategoryName = "Animals"
 			form.setName(expectedCategoryName)
@@ -87,6 +97,19 @@ class CategoryServiceImplTest extends Specification {
 		then:
 			1 * categoryDao.save({ Category category ->
 				assert category?.name == expectedCategoryName
+				return true
+			}) >> TestObjects.createCategory()
+	}
+	
+	def "add() should pass Russian category name to dao"() {
+		given:
+			String expectedCategoryName = "Животные"
+			form.setNameRu(expectedCategoryName)
+		when:
+			service.add(form, user)
+		then:
+			1 * categoryDao.save({ Category category ->
+				assert category?.nameRu == expectedCategoryName
 				return true
 			}) >> TestObjects.createCategory()
 	}

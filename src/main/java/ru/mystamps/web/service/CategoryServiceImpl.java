@@ -46,7 +46,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@PreAuthorize("hasAuthority('CREATE_CATEGORY')")
 	public Category add(AddCategoryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "Category name should be non null");
+		Validate.isTrue(dto.getName() != null, "English category name should be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
 		Category category = new Category();
