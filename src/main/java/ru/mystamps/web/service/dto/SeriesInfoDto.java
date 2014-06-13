@@ -21,16 +21,32 @@ import lombok.Getter;
 
 @Getter
 public class SeriesInfoDto {
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Integer id;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final EntityInfoDto category;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final EntityInfoDto country;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseDay;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseMonth;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseYear;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Integer quantity;
+	
+	@SuppressWarnings("PMD.SingularField")
 	private final Boolean perforated;
 	
-	@SuppressWarnings("checkstyle:parameternumber")
+	@SuppressWarnings({"checkstyle:parameternumber", "PMD.ExcessiveParameterList"})
 	public SeriesInfoDto(
 			Integer id,
 			Integer categoryId, String categoryName,
