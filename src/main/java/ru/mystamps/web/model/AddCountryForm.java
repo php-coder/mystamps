@@ -31,8 +31,8 @@ import lombok.Setter;
 
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP1;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_REGEXP2;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
 
 @Getter
 @Setter
@@ -61,12 +61,12 @@ public class AddCountryForm implements AddCountryDto {
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = COUNTRY_NAME_REGEXP1,
+			regexp = COUNTRY_NAME_EN_REGEXP,
 			message = "{country-name.invalid}",
 			groups = Level3Checks.class
 		),
 		@Pattern(
-			regexp = COUNTRY_NAME_REGEXP2,
+			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
 			message = "{country-name.hyphen}",
 			groups = Level4Checks.class
 		)
