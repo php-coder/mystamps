@@ -8,7 +8,9 @@
 <div id="header" class="span12">
 	
 	<div id="logo" class="span10">
-		<spring:message code="t_my_stamps" />
+		<a href="/">
+			<spring:message code="t_my_stamps" />
+		</a>
 	</div>
 	
 	<div id="user_bar" class="span2">
