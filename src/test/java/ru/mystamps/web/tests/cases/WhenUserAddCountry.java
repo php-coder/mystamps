@@ -48,7 +48,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	private String validUserPassword;
 	
 	@Value("${valid_country_name}")
-	private String validCountryName;
+	private String existingCountryName;
 	
 	public WhenUserAddCountry() {
 		super(AddCountryPage.class);
@@ -96,7 +96,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameShouldBeUnique() {
-		page.addCountry(validCountryName);
+		page.addCountry(existingCountryName);
 		
 		assertThat(page)
 			.field("name")
