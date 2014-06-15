@@ -50,10 +50,10 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	private String validAdminPassword;
 	
 	@Value("${valid_category_name_en}")
-	private String validCategoryNameEn;
+	private String existingCategoryNameEn;
 	
 	@Value("${valid_category_name_ru}")
-	private String validCategoryNameRu;
+	private String existingCategoryNameRu;
 	
 	public WhenAdminAddCategory() {
 		super(AddCategoryPage.class);
@@ -113,7 +113,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameEnShouldBeUnique() {
-		page.addCategory(validCategoryNameEn, TEST_CATEGORY_NAME_RU);
+		page.addCategory(existingCategoryNameEn, TEST_CATEGORY_NAME_RU);
 		
 		assertThat(page)
 			.field("name")
@@ -122,7 +122,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameRuShouldBeUnique() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, validCategoryNameRu);
+		page.addCategory(TEST_CATEGORY_NAME_EN, existingCategoryNameRu);
 		
 		assertThat(page)
 			.field("nameRu")
