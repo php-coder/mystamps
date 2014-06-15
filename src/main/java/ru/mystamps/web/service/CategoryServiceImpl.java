@@ -69,8 +69,8 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<EntityInfoDto> findAll() {
-		return categoryDao.findAllAsSelectEntries();
+	public Iterable<EntityInfoDto> findAll(String lang) {
+		return categoryDao.findAllAsSelectEntries(lang);
 	}
 	
 	@Override

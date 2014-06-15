@@ -24,7 +24,7 @@ import ru.mystamps.web.service.dto.EntityInfoDto;
 
 public interface CategoryService {
 	Category add(AddCategoryDto dto, User user);
-	Iterable<EntityInfoDto> findAll();
+	Iterable<EntityInfoDto> findAll(String lang);
 	long countAll();
 	int countByName(String name);
 	int countByNameRu(String name);

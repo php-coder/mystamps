@@ -119,8 +119,9 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("categories")
-	public Iterable<EntityInfoDto> getCategories() {
-		return categoryService.findAll();
+	public Iterable<EntityInfoDto> getCategories(Locale userLocale) {
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		return categoryService.findAll(lang);
 	}
 	
 	@ModelAttribute("countries")

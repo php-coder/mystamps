@@ -23,7 +23,7 @@
 					<spring:param name="id" value="${series.category.id}" />
 				</spring:url>
 				<a href="${categoryUrl}">
-					<c:out value="${series.category.name}" />
+					<c:out value="${series.category.getLocalizedName(pageContext.request.locale)}" />
 				</a>
 			</dd>
 			<c:if test="${not empty series.country}">

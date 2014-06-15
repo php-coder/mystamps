@@ -18,6 +18,7 @@
 package ru.mystamps.web.service
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.entity.Category
@@ -155,10 +156,10 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAll()
+	// Tests for findAll(String)
 	//
 	
-	def "findAll() should call dao"() {
+	def "findAll(String) should call dao"() {
 		given:
 			EntityInfoDto category1 = new EntityInfoDto(1, "First Category")
 		and:
@@ -166,11 +167,26 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			List<EntityInfoDto> expectedCategories = [ category1, category2 ]
 		and:
-			categoryDao.findAllAsSelectEntries() >> expectedCategories
+			categoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
 		when:
-			Iterable<EntityInfoDto> resultCategories = service.findAll()
+			Iterable<EntityInfoDto> resultCategories = service.findAll("fr")
 		then:
 			resultCategories == expectedCategories
+	}
+	
+	@Unroll
+	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage, Object _) {
+		when:
+			service.findAll(expectedLanguage)
+		then:
+			1 * categoryDao.findAllAsSelectEntries({ String language ->
+				assert language == expectedLanguage
+				return true
+			})
+		where:
+			expectedLanguage | _
+			"ru"             | _
+			null             | _
 	}
 	
 	//

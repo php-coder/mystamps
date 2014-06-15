@@ -19,6 +19,7 @@ package ru.mystamps.web.dao;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.service.dto.EntityInfoDto;
@@ -28,9 +29,12 @@ public interface CategoryDao extends PagingAndSortingRepository<Category, Intege
 	int countByNameRu(String name);
 	
 	@Query(
-		"SELECT NEW ru.mystamps.web.service.dto.EntityInfoDto(c.id, c.name) "
+		"SELECT NEW ru.mystamps.web.service.dto.EntityInfoDto("
+			+ "c.id, "
+			+ "CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
+		+ ") "
 		+ "FROM Category c "
 		+ "ORDER BY c.name"
 	)
-	Iterable<EntityInfoDto> findAllAsSelectEntries();
+	Iterable<EntityInfoDto> findAllAsSelectEntries(@Param("lang") String lang);
 }
