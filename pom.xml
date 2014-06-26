@@ -724,6 +724,7 @@
 									<excludes>
 										<!-- Because we use jcl-over-slf4j instead -->
 										<exclude>commons-logging</exclude>
+										<exclude>junit:*:*:*:compile</exclude>
 									</excludes>
 								</bannedDependencies>
 								<requireJavaVersion>
