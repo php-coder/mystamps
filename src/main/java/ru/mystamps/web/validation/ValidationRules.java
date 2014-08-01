@@ -59,7 +59,7 @@ public final class ValidationRules {
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	
 	public static final int MAX_DAYS_IN_MONTH = 31;
-	public static final int MAX_MONTHS_IN_YEAR = 31;
+	public static final int MAX_MONTHS_IN_YEAR = 12;
 	
 	private ValidationRules() {
 	}
