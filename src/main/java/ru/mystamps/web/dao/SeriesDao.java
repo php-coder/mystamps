@@ -59,7 +59,10 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		+ "LEFT JOIN s.country c "
 		+ "WHERE s.category = :category"
 	)
-	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("category") Category category, @Param("lang") String lang);
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(
+		@Param("category") Category category,
+		@Param("lang") String lang
+	);
 
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
@@ -77,5 +80,8 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		+ "LEFT JOIN s.country c "
 		+ "WHERE s.country = :country"
 	)
-	Iterable<SeriesInfoDto> findByAsSeriesInfo(@Param("country") Country country, @Param("lang") String lang);
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(
+		@Param("country") Country country,
+		@Param("lang") String lang
+	);
 }

@@ -28,6 +28,7 @@ public final class LocaleUtils {
 	private LocaleUtils() {
 	}
 	
+	@SuppressWarnings("checkstyle:avoidinlineconditionals")
 	public static String getLanguageOrNull(Locale locale) {
 		return locale != null ? locale.getLanguage() : null;
 	}

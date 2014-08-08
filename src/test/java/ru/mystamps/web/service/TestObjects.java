@@ -29,12 +29,12 @@ import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
 
 final class TestObjects {
-
+	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
+	public static final String TEST_COUNTRY_RU_NAME = "Где-то";
+	
 	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
-	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
-	public static final String TEST_COUNTRY_RU_NAME = "Где-то";
 	
 	private static final String TEST_EMAIL          = "test@example.org";
 	private static final String TEST_ACTIVATION_KEY = "1234567890";
