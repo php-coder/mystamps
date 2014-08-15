@@ -23,8 +23,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -42,18 +40,6 @@ public class SecurityConfig {
 	
 	@Inject
 	private ServicesConfig servicesConfig;
-	
-	@Bean(name = "messageSource")
-	public MessageSource getMessageSource() {
-		ReloadableResourceBundleMessageSource messageSource =
-			new ReloadableResourceBundleMessageSource();
-		
-		messageSource.setBasename("classpath:ru/mystamps/i18n/SpringSecurityMessages");
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setFallbackToSystemLocale(false);
-		
-		return messageSource;
-	}
 	
 	@Bean
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
