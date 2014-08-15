@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Configuration;
 
 import ru.mystamps.web.dao.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
+import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
 public class ServicesConfig {

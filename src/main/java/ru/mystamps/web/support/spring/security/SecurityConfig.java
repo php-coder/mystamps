@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.support.spring.security;
 
 import javax.inject.Inject;
 
@@ -30,9 +30,7 @@ import org.springframework.security.authentication.event.AuthenticationFailureBa
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import ru.mystamps.web.support.spring.security.AuthenticationFailureListener;
-import ru.mystamps.web.support.spring.security.CustomUserDetailsService;
-import ru.mystamps.web.support.spring.security.Http401UnauthorizedEntryPoint;
+import ru.mystamps.web.config.ServicesConfig;
 
 @Configuration
 @ImportResource("classpath:spring/security.xml")
