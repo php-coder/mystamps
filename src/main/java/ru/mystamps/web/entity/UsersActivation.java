@@ -18,6 +18,7 @@
 package ru.mystamps.web.entity;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,7 @@ public class UsersActivation {
 	
 	public static final int ACTIVATION_KEY_LENGTH = 10;
 	public static final int EMAIL_LENGTH = 255;
+	public static final int LANG_LENGTH = 2;
 	
 	@Id
 	@Column(name = "act_key", length = ACTIVATION_KEY_LENGTH)
@@ -43,7 +45,14 @@ public class UsersActivation {
 	@Column(length = EMAIL_LENGTH, nullable = false)
 	private String email;
 	
+	@Column(length = LANG_LENGTH, nullable = false)
+	private String lang;
+	
 	@Column(name = "created_at", nullable = false)
 	private Date createdAt;
+	
+	public Locale getLocale() {
+		return new Locale(lang);
+	}
 	
 }

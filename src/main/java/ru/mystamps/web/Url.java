@@ -27,6 +27,7 @@ import ru.mystamps.web.service.ImageService;
  * @author Slava Semushin <slava.semushin@gmail.com>
  */
 public final class Url {
+	public static final String PUBLIC_URL            = "http://my-stamps.ru";
 	
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE                  = "http://127.0.0.1:8081";

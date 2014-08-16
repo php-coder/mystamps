@@ -20,6 +20,7 @@ package ru.mystamps.web.service
 import org.springframework.security.authentication.encoding.PasswordEncoder
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.UsersActivationDao
@@ -34,11 +35,14 @@ class UserServiceImplTest extends Specification {
 	
 	private UserDao userDao = Mock()
 	private UsersActivationDao usersActivationDao = Mock()
+	private MailService mailService = Mock()
 	private PasswordEncoder encoder = Mock()
 	
 	private UserService service
 	private ActivateAccountForm activationForm
 	private RegisterAccountForm registrationForm
+	
+	private static final Locale ANY_LOCALE = Locale.ENGLISH;
 	
 	def setup() {
 		User user = TestObjects.createUser()
@@ -57,7 +61,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(activation.getActivationKey())
 		
-		service = new UserServiceImpl(userDao, usersActivationDao, encoder)
+		service = new UserServiceImpl(userDao, usersActivationDao, mailService, encoder)
 	}
 	
 	//
@@ -66,21 +70,21 @@ class UserServiceImplTest extends Specification {
 	
 	def "addRegistrationRequest() should throw exception when dto is null"() {
 		when:
-			service.addRegistrationRequest(null)
+			service.addRegistrationRequest(null, ANY_LOCALE)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "addRegistrationRequest() should call dao"() {
 		when:
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.save(_ as UsersActivation)
 	}
 	
 	def "addRegistrationRequest() should generate activation key"() {
 		when:
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.save({ UsersActivation activation ->
 				assert activation?.activationKey?.length() == UsersActivation.ACTIVATION_KEY_LENGTH
@@ -93,8 +97,8 @@ class UserServiceImplTest extends Specification {
 		given:
 			List<String> passedArguments = []
 		when:
-			service.addRegistrationRequest(registrationForm)
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			2 * usersActivationDao.save({ UsersActivation activation ->
 				passedArguments.add(activation?.activationKey)
@@ -116,7 +120,7 @@ class UserServiceImplTest extends Specification {
 		given:
 			registrationForm.setEmail(null)
 		when:
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -126,7 +130,7 @@ class UserServiceImplTest extends Specification {
 			String expectedEmail = "somename@example.org"
 			registrationForm.setEmail(expectedEmail)
 		when:
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.save({ UsersActivation activation ->
 				assert activation?.email == expectedEmail
@@ -134,13 +138,41 @@ class UserServiceImplTest extends Specification {
 			})
 	}
 	
+	@Unroll
+	def "addRegistrationRequest() should pass language '#expectedLang' to dao"(Locale lang, String expectedLang) {
+		when:
+			service.addRegistrationRequest(registrationForm, lang)
+		then:
+			1 * usersActivationDao.save({ UsersActivation activation ->
+				assert activation?.lang == expectedLang
+				return true
+			})
+		where:
+			lang          || expectedLang
+			null          || "en"
+			Locale.FRENCH || "fr"
+	}
+	
 	def "addRegistrationRequest() should assign created at to current date"() {
 		when:
-			service.addRegistrationRequest(registrationForm)
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.save({ UsersActivation activation ->
 				assert DateUtils.roughlyEqual(activation?.createdAt, new Date())
 				return true
+			})
+	}
+	
+	def "addRegistrationRequest() should pass user's activation request to mail service"() {
+		when:
+			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
+		then:
+			1 * mailService.sendActivationKeyToUser({ UsersActivation activation ->
+				assert activation != null
+				assert activation.activationKey != null
+				assert activation.email == registrationForm.email
+				assert DateUtils.roughlyEqual(activation.createdAt, new Date())
+				return  true;
 			})
 	}
 	

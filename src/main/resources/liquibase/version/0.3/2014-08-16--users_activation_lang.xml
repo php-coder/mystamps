@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-lang-column-to-users_activation-table" author="php-coder" context="scheme">
+		<comment>Adds lang column to users_activation table (with default value "en")</comment>
+		
+		<addColumn tableName="users_activation">
+			<column name="lang" type="VARCHAR(2)" value="en" afterColumn="email" />
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="make-lang-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks users_activation.lang field as NOT NULL</comment>
+		
+		<addNotNullConstraint tableName="users_activation" columnName="lang" columnDataType="VARCHAR(2)" />
+	</changeSet>
+	
+</databaseChangeLog>

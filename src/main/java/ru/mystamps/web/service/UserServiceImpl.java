@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +39,7 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
+import ru.mystamps.web.support.togglz.Features;
 
 import static ru.mystamps.web.entity.User.Role.USER;
 
@@ -48,11 +50,12 @@ public class UserServiceImpl implements UserService {
 	
 	private final UserDao users;
 	private final UsersActivationDao usersActivation;
+	private final MailService mailService;
 	private final PasswordEncoder encoder;
 	
 	@Override
 	@Transactional
-	public void addRegistrationRequest(RegisterAccountDto dto) {
+	public void addRegistrationRequest(RegisterAccountDto dto, Locale lang) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
 		
@@ -60,8 +63,13 @@ public class UserServiceImpl implements UserService {
 		
 		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(dto.getEmail());
+		activation.setLang(lang == null ? "en" : lang.getLanguage());
 		activation.setCreatedAt(new Date());
 		usersActivation.save(activation);
+
+		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
+			mailService.sendActivationKeyToUser(activation);
+		}
 	}
 	
 	@Override

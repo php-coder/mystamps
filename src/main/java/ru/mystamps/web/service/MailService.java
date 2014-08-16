@@ -17,16 +17,8 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Locale;
+import ru.mystamps.web.entity.UsersActivation;
 
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.ActivateAccountDto;
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-
-public interface UserService {
-	void addRegistrationRequest(RegisterAccountDto dto, Locale lang);
-	int countRegistrationRequestByActivationKey(String activationKey);
-	void registerUser(ActivateAccountDto dto);
-	User findByLogin(String login);
-	int countByLogin(String login);
+public interface MailService {
+	void sendActivationKeyToUser(UsersActivation activation);
 }

@@ -17,6 +17,12 @@
  */
 package ru.mystamps.web.tests.cases;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import javax.mail.MessagingException;
+
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -25,6 +31,14 @@ import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 import org.apache.commons.lang3.StringUtils;
+
+import org.springframework.beans.factory.annotation.Value;
+
+import org.subethamail.wiser.Wiser;
+import org.subethamail.wiser.WiserMessage;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -35,10 +49,37 @@ import ru.mystamps.web.tests.page.RegisterAccountPage;
 public class WhenAnonymousUserRegisterAccount
 	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
 	
+	private static final Pattern ACTIVATION_LINK_REGEXP =
+		Pattern.compile(".*/account/activate/key/[0-9a-z]{10}.*", Pattern.DOTALL);
+	
+	@Value("${mail.smtp.host}")
+	private String mailHost;
+	
+	@Value("${mail.smtp.port}")
+	private Integer mailPort;
+	
+	@Value("${activation.subject}")
+	private String subjectOfActivationMail;
+	
+	private Wiser mailServer;
+	
 	public WhenAnonymousUserRegisterAccount() {
 		super(RegisterAccountPage.class);
 		hasTitle(tr("t_registration_title"));
 		hasHeader(tr("t_registration_on_site"));
+	}
+	
+	@BeforeClass
+	public void startMailServer() {
+		mailServer = new Wiser();
+		mailServer.setHostname(mailHost);
+		mailServer.setPort(mailPort);
+		mailServer.start();
+	}
+	
+	@AfterClass(alwaysRun = true)
+	public void stopMailServer() {
+		mailServer.stop();
 	}
 	
 	@BeforeMethod
@@ -90,6 +131,41 @@ public class WhenAnonymousUserRegisterAccount
 		assertThat(page.getCurrentUrl()).isEqualTo(Url.ACTIVATE_ACCOUNT_PAGE);
 		
 		assertThat(page.textPresent(tr("t_activation_sent_message"))).isTrue();
+	}
+	
+	@Test(groups = "logic", dependsOnMethods = "successfulMessageShouldBeShownAfterRegistration")
+	public void emailWithActivationKeyShouldBeSentAfterRegistration()
+		throws MessagingException, IOException {
+		
+		List<WiserMessage> messages = mailServer.getMessages();
+		assertThat(messages)
+			.overridingErrorMessage("No messages has been sent via mail server")
+			.isNotEmpty();
+		
+		boolean activationMailFound = false;
+		for (WiserMessage message : messages) {
+			String subject = message.getMimeMessage().getSubject();
+			if (!subjectOfActivationMail.equals(subject)) {
+				continue;
+			}
+			
+			activationMailFound = true;
+			
+			Object body = message.getMimeMessage().getContent();
+			assertThat(body).isInstanceOf(String.class);
+			
+			String text = (String)body;
+			assertThat(text)
+				.overridingErrorMessage("Message doesn't contain link with activation key")
+				.matches(ACTIVATION_LINK_REGEXP);
+			break;
+		}
+		
+		assertThat(activationMailFound)
+			.overridingErrorMessage(
+				"Messages with subject '" + subjectOfActivationMail + "' not found"
+			)
+			.isTrue();
 	}
 	
 	@DataProvider(name = "invalidEmails")

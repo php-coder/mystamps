@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -69,13 +71,14 @@ public class AccountController {
 	public String processRegistrationForm(
 		@Valid RegisterAccountForm form,
 		BindingResult result,
-		RedirectAttributes redirectAttributes) {
+		RedirectAttributes redirectAttributes,
+		Locale userLocale) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		userService.addRegistrationRequest(form);
+		userService.addRegistrationRequest(form, userLocale);
 		
 		redirectAttributes.addFlashAttribute("justRegisteredUser", true);
 		

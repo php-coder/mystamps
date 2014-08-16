@@ -15,18 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.support.togglz;
 
-import java.util.Locale;
+import org.togglz.core.Feature;
+import org.togglz.core.annotation.EnabledByDefault;
+import org.togglz.core.annotation.Label;
+import org.togglz.core.context.FeatureContext;
 
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.ActivateAccountDto;
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-
-public interface UserService {
-	void addRegistrationRequest(RegisterAccountDto dto, Locale lang);
-	int countRegistrationRequestByActivationKey(String activationKey);
-	void registerUser(ActivateAccountDto dto);
-	User findByLogin(String login);
-	int countByLogin(String login);
+public enum Features implements Feature {
+	
+	@Label("Send mail with activation key to user")
+	@EnabledByDefault
+	SEND_ACTIVATION_MAIL;
+	
+	public boolean isActive() {
+		return FeatureContext.getFeatureManager().isActive(this);
+	}
+	
 }

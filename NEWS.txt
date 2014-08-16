@@ -1,4 +1,6 @@
 0.3 (not released yet)
+- implemented sending of mail with activation key
+- started using feature flags with Togglz
 - added localization support for countries
 - added categories to series
 - save images to the disk

@@ -19,8 +19,10 @@ package ru.mystamps.web.config;
 
 import javax.inject.Inject;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import ru.mystamps.web.dao.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
@@ -59,6 +61,15 @@ public class ServicesConfig {
 	@Inject
 	private ImageDao imageDao;
 	
+	@Inject
+	private MailConfig mailConfig;
+	
+	@Inject
+	private Environment env;
+	
+	@Inject
+	private MessageSource messageSource;
+	
 	@Bean
 	public CountryService getCountryService() {
 		return new CountryServiceImpl(countryDao);
@@ -80,6 +91,18 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public MailService getMailService() {
+		boolean isProductionEnvironment = env.acceptsProfiles("prod");
+		boolean enableTestMode = !isProductionEnvironment;
+		
+		return new MailServiceImpl(
+			mailConfig.getMailSender(),
+			messageSource,
+			env.getRequiredProperty("mail.robot.email"),
+			enableTestMode);
+	}
+	
+	@Bean
 	public SeriesService getSeriesService() {
 		return new SeriesServiceImpl(seriesDao, getImageService());
 	}
@@ -94,6 +117,7 @@ public class ServicesConfig {
 		return new UserServiceImpl(
 			userDao,
 			usersActivationDao,
+			getMailService(),
 			securityConfig.getPasswordEncoder()
 		);
 	}

@@ -74,6 +74,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (user.isAdmin()) {
 			authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
 			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
+			
+			// gives access to Togglz web console
+			authorities.add(new SimpleGrantedAuthority("CHANGE_FEATURES"));
 		}
 		
 		return authorities;

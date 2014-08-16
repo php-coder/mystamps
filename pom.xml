@@ -15,6 +15,7 @@
 		<lombok.version>1.12.6</lombok.version>
 		<mysql.connector.version>5.1.30</mysql.connector.version>
 		<selenium.version>2.41.0</selenium.version>
+		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<spring.version>3.2.5.RELEASE</spring.version>
 		<spring.data.version>1.5.1.RELEASE</spring.data.version>
@@ -22,6 +23,7 @@
 		<h2.version>1.4.178</h2.version>
 		<javax.validation.version>1.1.0.Alpha1</javax.validation.version>
 		<javax.inject.version>1</javax.inject.version>
+		<javax.mail.version>1.5.2</javax.mail.version>
 		<javax.persistence.version>1.0.1.Final</javax.persistence.version>
 		<servlet.api.version>3.0.20100224</servlet.api.version>
 		<jstl.version>1.2</jstl.version>
@@ -33,6 +35,7 @@
 		<tiles.version>2.2.2</tiles.version>
 		<liquibase.version>3.2.0</liquibase.version>
 		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
+		<togglz.version>2.0.1.Final</togglz.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
 		<bootstrap.version>2.3.1</bootstrap.version>
@@ -97,6 +100,13 @@
 			<version>${javax.inject.version}</version>
 		</dependency>
 		
+		<!-- For MimeMessage class -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>${javax.mail.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -131,6 +141,13 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- For mail classes -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		
@@ -267,6 +284,39 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-core</artifactId>
+			<version>${togglz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-spring</artifactId>
+			<version>${togglz.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-spring-security</artifactId>
+			<version>${togglz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-slf4j</artifactId>
+			<version>${togglz.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-console</artifactId>
+			<version>${togglz.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>${bootstrap.version}</version>
@@ -320,6 +370,27 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-testing</artifactId>
+			<version>${togglz.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.subethamail</groupId>
+			<artifactId>subethasmtp</artifactId>
+			<version>${subethasmtp.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${javax.mail.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -468,6 +539,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${war.plugin.version}</version>
+				<configuration>
+					<packagingExcludes>WEB-INF/classes/prod/spring/mail.properties.example</packagingExcludes>
+				</configuration>
 			</plugin>
 			
 			<plugin>

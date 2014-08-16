@@ -17,25 +17,31 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
-public class TestContext {
+@PropertySource("classpath:${spring.profiles.active}/spring/mail.properties")
+public class MailConfig {
+	
+	@Inject
+	private Environment env;
 	
 	@Bean
-	public PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
-		PropertySourcesPlaceholderConfigurer configurer =
-			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocations(new Resource[] {
-			new ClassPathResource("test/spring/test-data.properties"),
-			new ClassPathResource("test/spring/mail.properties"),
-			new ClassPathResource("ru/mystamps/i18n/MailTemplates.properties")
-		});
-		return configurer;
+	public JavaMailSender getMailSender() {
+		JavaMailSenderImpl mailer = new JavaMailSenderImpl();
+		mailer.setHost(env.getRequiredProperty("mail.smtp.host"));
+		mailer.setPort(env.getRequiredProperty("mail.smtp.port", Integer.class));
+		mailer.setUsername(env.getRequiredProperty("mail.smtp.login"));
+		mailer.setPassword(env.getRequiredProperty("mail.smtp.password"));
+		
+		return mailer;
 	}
 	
 }

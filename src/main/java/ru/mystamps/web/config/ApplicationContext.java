@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.config;
 
+import javax.inject.Inject;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,26 +27,42 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
+import org.togglz.core.manager.TogglzConfig;
+
+import ru.mystamps.web.support.togglz.FeatureConfig;
+
 @Configuration
 @Import({
 	DbConfig.class,
 	LiquibaseConfig.class,
+	MailConfig.class,
 	SecurityConfig.class,
 	ServicesConfig.class,
 	StrategiesConfig.class
 })
 public class ApplicationContext {
 	
+	@Inject
+	private DataSourceConfig dataSourceConfig;
+	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		
-		messageSource.setBasename("classpath:ru/mystamps/i18n/SpringSecurityMessages");
+		messageSource.setBasenames(
+			"classpath:ru/mystamps/i18n/SpringSecurityMessages",
+			"classpath:ru/mystamps/i18n/MailTemplates"
+		);
 		messageSource.setDefaultEncoding("UTF-8");
 		messageSource.setFallbackToSystemLocale(false);
 		
 		return messageSource;
+	}
+	
+	@Bean
+	public TogglzConfig getTogglzConfig() {
+		return new FeatureConfig(dataSourceConfig.getDataSource());
 	}
 	
 }
