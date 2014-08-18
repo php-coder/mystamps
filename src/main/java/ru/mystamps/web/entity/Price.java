@@ -17,6 +17,10 @@
  */
 package ru.mystamps.web.entity;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Enumerated;
@@ -53,6 +57,15 @@ public class Price {
 			.append(' ')
 			.append(currency)
 			.toString();
+	}
+
+	// used to emulate <fmt:formatNumber pattern="###.##" />
+	public String getFormattedValue() {
+		NumberFormat formatter = NumberFormat.getInstance(Locale.ENGLISH);
+		if (formatter instanceof DecimalFormat) {
+			((DecimalFormat)formatter).applyPattern("###.##");
+		}
+		return formatter.format(value.doubleValue());
 	}
 	
 }

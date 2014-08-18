@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -40,9 +41,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import org.springframework.web.servlet.view.tiles2.TilesView;
+
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring3.SpringTemplateEngine;
+import org.thymeleaf.spring3.view.ThymeleafView;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
@@ -54,6 +59,9 @@ import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 @Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
+	@Inject
+	private Environment env;
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -61,7 +69,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController(Url.ROBOTS_TXT).setViewName("site/robots");
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.UNAUTHORIZED_PAGE);
 	}
@@ -103,21 +110,26 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public TilesConfigurer getTilesConfigurer() {
-		TilesConfigurer configurer = new TilesConfigurer();
+	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
+	public ViewResolver getThymeleafViewResolver() throws Exception {
+		TemplateResolver templateResolver = new ServletContextTemplateResolver();
+		templateResolver.setTemplateMode("HTML5");
+		templateResolver.setPrefix("/WEB-INF/views/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setCacheable(env.acceptsProfiles("prod"));
+
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		templateEngine.setTemplateEngineMessageSource(getMessageSource());
+		templateEngine.addDialect(new SpringSecurityDialect());
+		templateEngine.afterPropertiesSet();
 		
-		configurer.setDefinitions(new String[]{
-			"/WEB-INF/tiles/tiles.xml"
-		});
-		
-		return configurer;
-	}
-	
-	@Bean
-	public ViewResolver getViewResolver() {
-		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
-		
-		viewResolver.setViewClass(TilesView.class);
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine);
+		viewResolver.setContentType("text/html; charset=UTF-8");
+		viewResolver.setStaticVariables(Url.asMap());
+		viewResolver.setViewClass(ThymeleafView.class);
 		
 		return viewResolver;
 	}

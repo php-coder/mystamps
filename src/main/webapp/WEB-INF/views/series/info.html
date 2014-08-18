@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title th:text="|MyStamps: #{t_series_info}|">MyStamps: Info about series</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="row-fluid">
+			<div id="header" class="span12">
+				
+				<div id="logo" class="span10">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div>
+				
+				<div id="user_bar" class="span2">
+					<ul class="unstyled">
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-user"></i>
+							<span sec:authentication="principal.user.name" th:remove="tag">John Doe</span>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-share"></i>
+							<a href="../site/index.html" th:href="@{${LOGOUT_PAGE}}" th:text="#{t_logout}">Sign out</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div id="content" class="span12">
+				
+				<div class="span4">
+					<img id="image" src="../../../../../test/resources/test.png" class="img-polaroid" th:src="${series.imageUrl}" />
+				</div>
+				
+				<div class="span6">
+					<dl class="dl-horizontal">
+						<dt th:text="#{t_category}">
+							Category
+						</dt>
+						<dd id="category_name">
+							<a href="../category/info.html"
+							   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id})}"
+							   th:text="${series.category.getLocalizedName(#locale)}">
+								Animals
+							</a>
+						</dd>
+						
+						<!--/*/ <th:block th:if="${series.country != null}"> /*/-->
+							<dt th:text="#{t_country}">
+								Country
+							</dt>
+							<dd id="country_name">
+								<a href="../country/info.html"
+								   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id})}"
+								   th:text="${series.country.getLocalizedName(#locale)}">
+									Italy
+								</a>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+						
+						<!--/*/ <th:block th:if="${series.releaseYear != null}"> /*/-->
+							<dt th:text="#{t_issue_date}">
+								Date of release
+							</dt>
+							<dd id="issue_date">
+								<span th:if="${series.releaseDay != null}"
+									  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
+									  th:remove="tag">
+									01.
+								</span>
+								<span th:if="${series.releaseMonth != null}"
+									  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
+									  th:remove="tag">
+									02.
+								</span>
+								<span th:if="${series.releaseYear != null}"
+									  th:text="${series.releaseYear}"
+									  th:remove="tag">
+									1999
+								</span>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+							
+							<dt th:text="#{t_quantity}">
+								Quantity
+							</dt>
+							<dd id="quantity" th:text="${series.quantity}">
+								7
+							</dd>
+							
+							<dt th:text="#{t_perforated}">
+								Perforated
+							</dt>
+							<dd id="perforated">
+								<!--/*/ <th:block th:if="${series.perforated}"> /*/-->
+									<span th:text="#{t_yes}">Yes</span> <i class="icon-ok"></i>
+								<!--/*/ </th:block> /*/-->
+								
+								<!--/*/
+								<th:block th:if="${not series.perforated}">
+									<span th:text="#{t_no}">No</span> <i class="icon-remove"></i>
+								</th:block>
+								/*/-->
+							</dd>
+						
+						<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michelPrice != null}"> /*/-->
+							<dt th:text="#{t_michel}">
+								Michel
+							</dt>
+							<dd id="michel_catalog_info"
+								th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michelPrice != null}">
+								<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
+									#101-104
+								</span>
+								<span th:if="${showPrice}"
+									  th:with="showBrackets=${showNumbers and showPrice}"
+									  th:text="${showBrackets ? '(' : ''} + ${series.michelPrice.formattedValue} + ' ' + ${series.michelPrice.currency} + ${showBrackets ? ')' : ''}"
+									  th:remove="tag">
+									(10 EUR)
+								</span>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+						
+						<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scottPrice != null}"> /*/-->
+							<dt th:text="#{t_scott}">
+								Scott
+							</dt>
+							<dd id="scott_catalog_info"
+								th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scottPrice != null}">
+								<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
+								<span th:if="${showPrice}"
+									  th:with="price=${#numbers.formatDecimal(series.scottPrice.value, 1, 1)},showBrackets=${showNumbers and showPrice}"
+									  th:text="${showBrackets ? '(' : ''} + ${series.scottPrice.formattedValue} + ' ' + ${series.scottPrice.currency} + ${showBrackets ? ')' : ''}"
+									  th:remove="tag">
+									12 USD
+								</span>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+						
+						<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvertPrice != null}"> /*/-->
+							<dt th:text="#{t_yvert}">
+								Yvert
+							</dt>
+							<dd id="yvert_catalog_info"
+								th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvertPrice != null}">
+								<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
+									#13, 17, 20
+								</span>
+								<span th:if="${showPrice}"
+									  th:with="showBrackets=${showNumbers and showPrice}"
+									  th:text="${showBrackets ? '(' : ''} + ${series.yvertPrice.formattedValue} + ' ' + ${series.yvertPrice.currency} + ${showBrackets ? ')' : ''}"
+									  th:remove="tag">
+									(7 RUR)
+								</span>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+						
+						<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbonsPrice != null}"> /*/-->
+							<dt th:text="#{t_sg}">
+								Gibbons
+							</dt>
+							<dd id="gibbons_catalog_info"
+								th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbonsPrice != null}">
+								<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
+									#77, 79-83
+								</span>
+								<span th:if="${showPrice}"
+									  th:with="showBrackets=${showNumbers and showPrice}"
+									  th:text="${showBrackets ? '(' : ''} + ${series.gibbonsPrice.formattedValue} + ' ' + ${series.gibbonsPrice.currency} + ${showBrackets ? ')' : ''}"
+									  th:remove="tag">
+								</span>
+							</dd>
+						<!--/*/ </th:block> /*/-->
+						
+						<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
+							<dt th:text="#{t_comment}">
+								Comment
+							</dt>
+							<dd id="comment" th:text="${series.comment}">
+								My favorite series.
+							</dd>
+						<!--/*/ </th:block> /*/-->
+					</dl>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row-fluid">
+			<footer class="text-right">
+				<i class="icon-envelope"></i>
+				<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2014
+			</footer>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/bootstrap/2.3.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>

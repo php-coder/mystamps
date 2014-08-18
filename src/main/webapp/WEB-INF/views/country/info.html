@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title th:text="|MyStamps: #{t_country_info}|">MyStamps: Country info</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="row-fluid">
+			<div id="header" class="span12">
+				
+				<div id="logo" class="span10">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div>
+				
+				<div id="user_bar" class="span2">
+					<ul class="unstyled">
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-user"></i>
+							<span sec:authentication="principal.user.name" th:remove="tag">John Doe</span>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-share"></i>
+							<a href="../site/index.html" th:href="@{${LOGOUT_PAGE}}" th:text="#{t_logout}">Sign out</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div id="content" class="span12">
+				<h3 th:text="${country.getLocalizedName(#locale)}">
+					Italy
+				</h3>
+				
+				<ul th:if="${not #lists.isEmpty(seriesOfCountry)}" th:remove="all-but-first">
+					<li th:each="series : ${seriesOfCountry}">
+						<span th:if="${series.category.id != null}" th:remove="tag">
+							<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+						</span>
+						
+						<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+							<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1980, </span>
+							<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">10&nbsp;item(s)</span>
+							<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+						</a>
+					</li>
+					<li>
+						<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+						
+						<a href="../series/info.html">
+							22&nbsp;item(s)
+						</a>
+					</li>
+					<li>
+						<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+						
+						<a href="../series/info.html">
+							1983, 5&nbsp;item(s)
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<footer class="text-right">
+				<i class="icon-envelope"></i>
+				<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2014
+			</footer>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/bootstrap/2.3.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>

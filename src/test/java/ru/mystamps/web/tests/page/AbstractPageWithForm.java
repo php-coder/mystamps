@@ -145,4 +145,8 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		getElementByName(name).sendKeys(value);
 	}
 	
+	public void clearField(String name) {
+		getElementByName(name).clear();
+	}
+	
 }

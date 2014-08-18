@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title th:text="|MyStamps: #{t_add_series}|">MyStamps: add stamp series</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="row-fluid">
+			<div id="header" class="span12">
+				
+				<div id="logo" class="span10">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div>
+				
+				<div id="user_bar" class="span2">
+					<ul class="unstyled">
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-user"></i>
+							<span sec:authentication="principal.user.name" th:remove="tag">John Doe</span>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAuthenticated()">
+							<i class="icon-share"></i>
+							<a href="../site/index.html" th:href="@{${LOGOUT_PAGE}}" th:text="#{t_logout}">Sign out</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+						/*/-->
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div id="content" class="span12">
+				<h3 th:text="#{t_add_series_ucfirst}">
+					Add stamp series
+				</h3>
+				
+				<div class="hint text-center">
+					<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
+						<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
+							All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
+						</span>
+					</small>
+				</div>
+				
+				<div class="span6 offset3">
+					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_PAGE}}" th:object="${addSeriesForm}">
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('category') ? 'error' : ''}">
+							<label for="category" class="control-label">
+									<span class="field-label" th:text="#{t_category}">
+										Category
+									</span>
+								<span id="category.required" class="required_field">*</span>
+							</label>
+							<div class="controls">
+								<select id="category" required="required" th:field="*{category}">
+									<option value=""></option>
+									<!--/*/
+									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="1">Animals</option>
+									<option value="2">Music</option>
+									<option value="3">Sport</option>
+									<!--*/-->
+								</select>
+								<span id="category.errors" class="help-inline" th:if="${#fields.hasErrors('category')}" th:each="error : ${#fields.errors('category')}" th:text="${error}"></span>
+							</div>
+						</div>
+		
+						<div class="control-group" th:classappend="${#fields.hasErrors('country') ? 'error' : ''}">
+							<label for="country" class="control-label">
+								<span class="field-label" th:text="#{t_country}">
+									Country
+								</span>
+							</label>
+							<div class="controls">
+								<select id="country" th:field="*{country}">
+									<option value=""></option>
+									<!--/*/
+									<option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="1">Russia</option>
+									<option value="2">Canada</option>
+									<option value="3">Italy</option>
+									<!--*/-->
+								</select>
+								<span id="country.errors" class="help-inline" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'error' : ''}">
+							<label for="year" class="control-label">
+								<span class="field-label" th:text="#{t_issue_date}">
+									Date of release
+								</span>
+							</label>
+							
+							<div class="controls controls-row">
+								<select class="span2" th:field="*{day}">
+									<option value=""></option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								
+								<select class="span2" th:field="*{month}">
+									<option value=""></option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+								</select>
+								
+								<select class="span2" th:field="*{year}" id="year">
+									<option value=""></option>
+									<!--/*/
+									<option th:each="year : ${years}" th:value="${year.key}" th:text="${year.value}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="1990">1999</option>
+									<option value="2000">2000</option>
+									<option value="2010">2010</option>
+									<!--*/-->
+								</select>
+							</div>
+							<div class="controls">
+								<span id="day.errors" class="help-block" th:if="${#fields.hasErrors('day')}" th:each="error : ${#fields.errors('day')}" th:text="${error}"></span>
+								<span id="month.errors" class="help-block" th:if="${#fields.hasErrors('month')}" th:each="error : ${#fields.errors('month')}" th:text="${error}"></span>
+								<span id="year.errors" class="help-block" th:if="${#fields.hasErrors('year')}" th:each="error : ${#fields.errors('year')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('quantity') ? 'error' : ''}">
+							<label for="quantity" class="control-label">
+								<span class="field-label" th:text="#{t_quantity}">
+									Quantity
+								</span>
+								<span id="quantity.required" class="required_field">*</span>
+							</label>
+							<div class="controls">
+								<input type="number"
+										id="quantity"
+										class="span2"
+										required="required"
+										th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
+										th:max="${T(ru.mystamps.web.validation.ValidationRules).MAX_STAMPS_IN_SERIES}"
+										min="1"
+										max="50"
+										th:field="*{quantity}" />
+								<span id="quantity.errors" class="help-inline" th:if="${#fields.hasErrors('quantity')}" th:each="error : ${#fields.errors('quantity')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('perforated') ? 'error' : ''}">
+							<label for="perforated" class="control-label">
+								<span class="field-label" th:text="#{t_perforated}">
+									Perforated
+								</span>
+							</label>
+							<div class="controls">
+								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
+								<span id="perforated.errors" class="help-inline" th:if="${#fields.hasErrors('perforated')}" th:each="error : ${#fields.errors('perforated')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice') or #fields.hasErrors('michelCurrency') ? 'error' : ''}">
+							<label for="michelNumbers" class="control-label">
+								<span class="field-label" th:text="#{t_michel}">
+									Michel
+								</span>
+							</label>
+							<div class="controls controls-row">
+								<input type="text" id="michelNumbers" class="span4 js-catalog-numbers" th:field="*{michelNumbers}" />
+								<input type="text" class="span2" size="5" th:field="*{michelPrice}" />
+								<select class="span2" th:field="*{michelCurrency}">
+									<!--/*/
+									<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="EUR">EUR</option>
+									<option value="RUR">RUR</option>
+									<option value="USD">USD</option>
+									<!--*/-->
+								</select>
+								<span id="michelNumbers.errors" class="help-inline" th:if="${#fields.hasErrors('michelNumbers')}" th:each="error : ${#fields.errors('michelNumbers')}" th:text="${error}"></span>
+								<span id="michelPrice.errors" class="help-inline" th:if="${#fields.hasErrors('michelPrice')}" th:each="error : ${#fields.errors('michelPrice')}" th:text="${error}"></span>
+								<span id="michelCurrency.errors" class="help-inline" th:if="${#fields.hasErrors('michelCurrency')}" th:each="error : ${#fields.errors('michelCurrency')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice') or #fields.hasErrors('scottCurrency') ? 'error' : ''}">
+							<label for="scottNumbers" class="control-label">
+								<span class="field-label" th:text="#{t_scott}">
+									Scott
+								</span>
+							</label>
+							<div class="controls controls-row">
+								<input type="text" id="scottNumbers" class="span4 js-catalog-numbers" th:field="*{scottNumbers}" />
+								<input type="text" class="span2" size="5" th:field="*{scottPrice}" />
+								<select class="span2" th:field="*{scottCurrency}">
+									<!--/*/
+									<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="EUR">EUR</option>
+									<option value="RUR">RUR</option>
+									<option value="USD">USD</option>
+									<!--*/-->
+								</select>
+								<span id="scottNumbers.errors" class="help-inline" th:if="${#fields.hasErrors('scottNumbers')}" th:each="error : ${#fields.errors('scottNumbers')}" th:text="${error}"></span>
+								<span id="scottPrice.errors" class="help-inline" th:if="${#fields.hasErrors('scottPrice')}" th:each="error : ${#fields.errors('scottPrice')}" th:text="${error}"></span>
+								<span id="scottCurrency.errors" class="help-inline" th:if="${#fields.hasErrors('scottCurrency')}" th:each="error : ${#fields.errors('scottCurrency')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice') or #fields.hasErrors('yvertCurrency') ? 'error' : ''}">
+							<label for="yvertNumbers" class="control-label">
+								<span class="field-label" th:text="#{t_yvert}">
+									Yvert
+								</span>
+							</label>
+							<div class="controls controls-row">
+								<input type="text" id="yvertNumbers" class="span4 js-catalog-numbers" th:field="*{yvertNumbers}" />
+								<input type="text" class="span2" size="5" th:field="*{yvertPrice}" />
+								<select class="span2" th:field="*{yvertCurrency}">
+									<!--/*/
+									<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="EUR">EUR</option>
+									<option value="RUR">RUR</option>
+									<option value="USD">USD</option>
+									<!--*/-->
+								</select>
+								<span id="yvertNumbers.errors" class="help-inline" th:if="${#fields.hasErrors('yvertNumbers')}" th:each="error : ${#fields.errors('yvertNumbers')}" th:text="${error}"></span>
+								<span id="yvertPrice.errors" class="help-inline" th:if="${#fields.hasErrors('yvertPrice')}" th:each="error : ${#fields.errors('yvertPrice')}" th:text="${error}"></span>
+								<span id="yvertCurrency.errors" class="help-inline" th:if="${#fields.hasErrors('yvertCurrency')}" th:each="error : ${#fields.errors('yvertCurrency')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice') or #fields.hasErrors('gibbonsCurrency') ? 'error' : ''}">
+							<label for="gibbonsNumbers" class="control-label">
+								<span class="field-label" th:text="#{t_sg}">
+									Gibbons
+								</span>
+							</label>
+							<div class="controls controls-row">
+								<input type="text" id="gibbonsNumbers" class="span4 js-catalog-numbers" th:field="*{gibbonsNumbers}" />
+								<input type="text" class="span2" size="5" th:field="*{gibbonsPrice}" />
+								<select class="span2" th:field="*{gibbonsCurrency}">
+									<!--/*/
+									<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
+									/*/-->
+									<!--/*-->
+									<option value="EUR">EUR</option>
+									<option value="RUR">RUR</option>
+									<option value="USD">USD</option>
+									<!--*/-->
+								</select>
+								<span id="gibbonsNumbers.errors" class="help-inline" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
+								<span id="gibbonsPrice.errors" class="help-inline" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
+								<span id="gibbonsCurrency.errors" class="help-inline" th:if="${#fields.hasErrors('gibbonsCurrency')}" th:each="error : ${#fields.errors('gibbonsCurrency')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('comment') ? 'error' : ''}" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+							<label for="comment" class="control-label">
+								<span class="field-label" th:text="#{t_comment}">
+									Comment
+								</span>
+							</label>
+							<div class="controls">
+								<textarea id="comment" class="span6" cols="22" rows="3" th:field="*{comment}"></textarea>
+								<span id="comment.errors" class="help-inline" th:if="${#fields.hasErrors('comment')}" th:each="error : ${#fields.errors('comment')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="control-group" th:classappend="${#fields.hasErrors('image') ? 'error' : ''}">
+							<label for="image" class="control-label">
+								<span class="field-label" th:text="#{t_image}">
+									Image
+								</span>
+								<span id="image.required" class="required_field">*</span>
+							</label>
+							<div class="controls">
+								<input type="file" id="image" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+								<span id="image.errors" class="help-inline" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="form-actions">
+							<input type="submit" class="btn btn-primary" value="Add" th:value="#{t_add}" />
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<footer class="text-right">
+				<i class="icon-envelope"></i>
+				<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2014
+			</footer>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/bootstrap/2.3.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		
+		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+		
+		<script>
+			$(function() {
+				$('.js-catalog-numbers').on('blur', function() {
+					$(this).val(function(idx, val) {
+						return CatalogUtils.expandNumbers(val);
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

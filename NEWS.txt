@@ -1,4 +1,6 @@
 0.3 (not released yet)
+- views has been ported from JSP to Thymeleaf
+- rejection of Apache Tiles
 - implemented sending of mail with activation key
 - started using feature flags with Togglz
 - added localization support for countries

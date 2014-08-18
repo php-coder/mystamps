@@ -62,6 +62,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public RobotsTxtController getRobotsTxtController() {
+		return new RobotsTxtController();
+	}
+	
+	@Bean
 	public SeriesController getSeriesController() {
 		return new SeriesController(
 			servicesConfig.getCategoryService(),

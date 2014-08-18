@@ -12,21 +12,6 @@
 		<param-value>prod</param-value>
 	</context-param>
 	
-	<servlet id="jsp">
-		<servlet-name>jsp</servlet-name>
-		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-		<!-- Don't check for JSP modification on every access -->
-		<init-param>
-			<param-name>development</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<!-- Should Jasper check for modified JSPs? No. -->
-		<init-param>
-			<param-name>reloading</param-name>
-			<param-value>false</param-value>
-		</init-param>
-	</servlet>
-	
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>
@@ -79,15 +64,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	<!-- see http://docs.oracle.com/javaee/5/tutorial/doc/bnajg.html -->
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>/WEB-INF/tiles/*</url-pattern>
-			<trim-directive-whitespaces>true</trim-directive-whitespaces>
-			<page-encoding>UTF-8</page-encoding>
-		</jsp-property-group>
-	</jsp-config>
 	
 	<!--
 		see also src/main/java/ru/mystamps/web/Url.java with

@@ -9,7 +9,6 @@
 	
 	<!-- For rules description see http://pmd.sourceforge.net/rules/index.html -->
 	
-	<rule ref="rulesets/jsp/basic.xml" />
 	<rule ref="rulesets/java/design.xml">
 		<exclude name="ImmutableField" />
 	</rule>

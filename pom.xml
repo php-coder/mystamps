@@ -26,13 +26,13 @@
 		<javax.mail.version>1.5.2</javax.mail.version>
 		<javax.persistence.version>1.0.1.Final</javax.persistence.version>
 		<servlet.api.version>3.0.20100224</servlet.api.version>
-		<jstl.version>1.2</jstl.version>
 		<commons.lang.version>3.3.2</commons.lang.version>
 		<commons.beanutils.version>1.9.2</commons.beanutils.version>
 		<commons.io.version>2.4</commons.io.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
-		<tiles.version>2.2.2</tiles.version>
+		<thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
+		<thymeleaf.security.version>2.1.1.RELEASE</thymeleaf.security.version>
 		<liquibase.version>3.2.0</liquibase.version>
 		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
 		<togglz.version>2.0.1.Final</togglz.version>
@@ -84,13 +84,6 @@
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet.api.version}</version>
 			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<!-- @Inject -->
@@ -184,13 +177,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>${spring.security.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
@@ -238,14 +224,18 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- For Tiles template engine -->
 		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>${tiles.version}</version>
-			<scope>runtime</scope>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring3</artifactId>
+			<version>${thymeleaf.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+			<version>${thymeleaf.security.version}</version>
+		</dependency>
+				
 		<!-- For running database migration during application's startup time -->
 		<dependency>
 			<groupId>org.liquibase</groupId>

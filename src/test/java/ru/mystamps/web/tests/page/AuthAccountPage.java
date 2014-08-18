@@ -79,6 +79,7 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	
 	private void fillLogin(String login) {
 		if (login != null) {
+			clearField("login");
 			fillField("login", login);
 		}
 	}

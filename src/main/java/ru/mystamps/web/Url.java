@@ -17,6 +17,9 @@
  */
 package ru.mystamps.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ru.mystamps.web.service.ImageService;
 
 /**
@@ -60,7 +63,40 @@ public final class Url {
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	
+	// resources
+	public static final String FAVICON_ICO            = "/favicon.ico";
+	public static final String MAIN_CSS               = "/static/styles/main.css";
+	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_RESPONSIVE_CSS = "/public/bootstrap/css/bootstrap-responsive.min.css";
+	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
+	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
+	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
+	
 	private Url() {
+	}
+	
+	public static Map<String, String> asMap() {
+		// There is not all urls but only those which used on views
+		Map<String, String> map = new HashMap<>();
+		map.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
+		map.put("LOGIN_PAGE", LOGIN_PAGE);
+		map.put("LOGOUT_PAGE", LOGOUT_PAGE);
+		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
+		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
+		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
+		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
+		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
+		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
+		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
+		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
+		map.put("FAVICON_ICO", FAVICON_ICO);
+		map.put("MAIN_CSS", MAIN_CSS);
+		map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
+		map.put("BOOTSTRAP_RESPONSIVE_CSS", BOOTSTRAP_RESPONSIVE_CSS);
+		map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
+		map.put("JQUERY_JS", JQUERY_JS);
+		map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
+		return map;
 	}
 	
 }
