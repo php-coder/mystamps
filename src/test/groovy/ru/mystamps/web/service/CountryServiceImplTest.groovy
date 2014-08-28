@@ -37,8 +37,8 @@ class CountryServiceImplTest extends Specification {
 	
 	def setup() {
 		form = new AddCountryForm()
-		form.setName("Any country name")
-		form.setNameRu("Любое название страны")
+		form.setName('Any country name')
+		form.setNameRu('Любое название страны')
 		
 		user = TestObjects.createUser()
 	}
@@ -91,7 +91,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should pass country name on English to dao"() {
 		given:
-			String expectedCountryName = "Italy"
+			String expectedCountryName = 'Italy'
 			form.setName(expectedCountryName)
 		when:
 			service.add(form, user)
@@ -104,7 +104,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should pass country name on Russian to dao"() {
 		given:
-			String expectedCountryName = "Италия"
+			String expectedCountryName = 'Италия'
 			form.setNameRu(expectedCountryName)
 		when:
 			service.add(form, user)
@@ -161,15 +161,15 @@ class CountryServiceImplTest extends Specification {
 	
 	def "findAll(String) should call dao"() {
 		given:
-			EntityInfoDto country1 = new EntityInfoDto(1, "First Country")
+			EntityInfoDto country1 = new EntityInfoDto(1, 'First Country')
 		and:
-			EntityInfoDto country2 = new EntityInfoDto(2, "Second Country")
+			EntityInfoDto country2 = new EntityInfoDto(2, 'Second Country')
 		and:
 			List<EntityInfoDto> expectedCountries = [ country1, country2 ]
 		and:
 			countryDao.findAllAsSelectEntries(_ as String) >> expectedCountries
 		when:
-			Iterable<EntityInfoDto> resultCountries = service.findAll("de")
+			Iterable<EntityInfoDto> resultCountries = service.findAll('de')
 		then:
 			resultCountries == expectedCountries
 	}
@@ -185,7 +185,7 @@ class CountryServiceImplTest extends Specification {
 			})
 		where:
 			expectedLanguage | _
-			"ru"             | _
+			'ru'             | _
 			null             | _
 	}
 	
@@ -219,17 +219,17 @@ class CountryServiceImplTest extends Specification {
 		given:
 			countryDao.countByName(_ as String) >> 2
 		when:
-			int result = service.countByName("Any name here")
+			int result = service.countByName('Any name here')
 		then:
 			result == 2
 	}
 	
 	def "countByName() should pass country name to dao"() {
 		when:
-			service.countByName("Canada")
+			service.countByName('Canada')
 		then:
 			1 * countryDao.countByName({ String name ->
-				assert name == "Canada"
+				assert name == 'Canada'
 				return true
 			})
 	}
@@ -249,17 +249,17 @@ class CountryServiceImplTest extends Specification {
 		given:
 			countryDao.countByNameRu(_ as String) >> 2
 		when:
-			int result = service.countByNameRu("Any name here")
+			int result = service.countByNameRu('Any name here')
 		then:
 			result == 2
 	}
 	
 	def "countByNameRu() should pass category name to dao"() {
 		when:
-			service.countByNameRu("Канада")
+			service.countByNameRu('Канада')
 		then:
 			1 * countryDao.countByNameRu({ String name ->
-				assert name == "Канада"
+				assert name == 'Канада'
 				return true
 			})
 	}

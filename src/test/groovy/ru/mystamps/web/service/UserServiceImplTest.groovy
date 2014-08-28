@@ -53,7 +53,7 @@ class UserServiceImplTest extends Specification {
 		usersActivationDao.findOne(_ as String) >> activation
 		
 		registrationForm = new RegisterAccountForm()
-		registrationForm.setEmail("john.dou@example.org")
+		registrationForm.setEmail('john.dou@example.org')
 		
 		activationForm = new ActivateAccountForm()
 		activationForm.setLogin(user.getLogin())
@@ -127,7 +127,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "addRegistrationRequest() should pass email to dao"() {
 		given:
-			String expectedEmail = "somename@example.org"
+			String expectedEmail = 'somename@example.org'
 			registrationForm.setEmail(expectedEmail)
 		when:
 			service.addRegistrationRequest(registrationForm, ANY_LOCALE)
@@ -149,8 +149,8 @@ class UserServiceImplTest extends Specification {
 			})
 		where:
 			lang          || expectedLang
-			null          || "en"
-			Locale.FRENCH || "fr"
+			null          || 'en'
+			Locale.FRENCH || 'fr'
 	}
 	
 	def "addRegistrationRequest() should assign created at to current date"() {
@@ -191,16 +191,16 @@ class UserServiceImplTest extends Specification {
 		given:
 			usersActivationDao.countByActivationKey(_ as String) >> 2
 		when:
-			int result = service.countRegistrationRequestByActivationKey("0123456789")
+			int result = service.countRegistrationRequestByActivationKey('0123456789')
 		then:
 			result == 2
 	}
 	
 	def "countRegistrationRequestByActivationKey() should pass activation key to dao"() {
 		when:
-			service.countRegistrationRequestByActivationKey("0987654321")
+			service.countRegistrationRequestByActivationKey('0987654321')
 		then:
-			1 * usersActivationDao.countByActivationKey("0987654321")
+			1 * usersActivationDao.countByActivationKey('0987654321')
 	}
 	
 	//
@@ -284,7 +284,7 @@ class UserServiceImplTest extends Specification {
 		given:
 			String expectedUserLogin = activationForm.getLogin()
 		and:
-			activationForm.setName("")
+			activationForm.setName('')
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -451,16 +451,16 @@ class UserServiceImplTest extends Specification {
 			User expectedUser = TestObjects.createUser()
 			userDao.findByLogin(_ as String) >> expectedUser
 		when:
-			User user = service.findByLogin("any-login")
+			User user = service.findByLogin('any-login')
 		then:
 			user == expectedUser
 	}
 	
 	def "findByLogin() should pass login to dao"() {
 		when:
-			service.findByLogin("john")
+			service.findByLogin('john')
 		then:
-			1 * userDao.findByLogin("john")
+			1 * userDao.findByLogin('john')
 	}
 	
 	//
@@ -478,16 +478,16 @@ class UserServiceImplTest extends Specification {
 		given:
 			userDao.countByLogin(_ as String) >> 2
 		when:
-			int result = service.countByLogin("any-login")
+			int result = service.countByLogin('any-login')
 		then:
 			result == 2
 	}
 	
 	def "countByLogin() should pass login to dao"() {
 		when:
-			service.countByLogin("john")
+			service.countByLogin('john')
 		then:
-			1 * userDao.countByLogin("john")
+			1 * userDao.countByLogin('john')
 	}
 	
 }

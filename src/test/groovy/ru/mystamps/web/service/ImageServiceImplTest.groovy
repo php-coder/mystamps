@@ -37,7 +37,7 @@ class ImageServiceImplTest extends Specification {
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L
-		multipartFile.getContentType() >> "image/png"
+		multipartFile.getContentType() >> 'image/png'
 		imageDao.save(_ as Image) >> new Image()
 	}
 	
@@ -74,7 +74,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> "image/tiff"
+			multipartFile.getContentType() >> 'image/tiff'
 		and:
 			thrown IllegalStateException
 	}
@@ -137,7 +137,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			Image expectedImage = TestObjects.createImage()
 		and:
-			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace("{id}", String.valueOf(expectedImage.id))
+			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace('{id}', String.valueOf(expectedImage.id))
 		when:
 			String url = service.save(multipartFile)
 		then:

@@ -37,8 +37,8 @@ class CategoryServiceImplTest extends Specification {
 	
 	def setup() {
 		form = new AddCategoryForm()
-		form.setName("Any category name")
-		form.setNameRu("Любое название категории")
+		form.setName('Any category name')
+		form.setNameRu('Любое название категории')
 		
 		user = TestObjects.createUser()
 	}
@@ -91,7 +91,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should pass English category name to dao"() {
 		given:
-			String expectedCategoryName = "Animals"
+			String expectedCategoryName = 'Animals'
 			form.setName(expectedCategoryName)
 		when:
 			service.add(form, user)
@@ -104,7 +104,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should pass Russian category name to dao"() {
 		given:
-			String expectedCategoryName = "Животные"
+			String expectedCategoryName = 'Животные'
 			form.setNameRu(expectedCategoryName)
 		when:
 			service.add(form, user)
@@ -161,15 +161,15 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "findAll(String) should call dao"() {
 		given:
-			EntityInfoDto category1 = new EntityInfoDto(1, "First Category")
+			EntityInfoDto category1 = new EntityInfoDto(1, 'First Category')
 		and:
-			EntityInfoDto category2 = new EntityInfoDto(2, "Second Category")
+			EntityInfoDto category2 = new EntityInfoDto(2, 'Second Category')
 		and:
 			List<EntityInfoDto> expectedCategories = [ category1, category2 ]
 		and:
 			categoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
 		when:
-			Iterable<EntityInfoDto> resultCategories = service.findAll("fr")
+			Iterable<EntityInfoDto> resultCategories = service.findAll('fr')
 		then:
 			resultCategories == expectedCategories
 	}
@@ -185,7 +185,7 @@ class CategoryServiceImplTest extends Specification {
 			})
 		where:
 			expectedLanguage | _
-			"ru"             | _
+			'ru'             | _
 			null             | _
 	}
 	
@@ -219,17 +219,17 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			categoryDao.countByName(_ as String) >> 2
 		when:
-			int result = service.countByName("Any name here")
+			int result = service.countByName('Any name here')
 		then:
 			result == 2
 	}
 	
 	def "countByName() should pass category name to dao"() {
 		when:
-			service.countByName("Sport")
+			service.countByName('Sport')
 		then:
 			1 * categoryDao.countByName({ String name ->
-				assert name == "Sport"
+				assert name == 'Sport'
 				return true
 			})
 	}
@@ -249,17 +249,17 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			categoryDao.countByNameRu(_ as String) >> 2
 		when:
-			int result = service.countByNameRu("Any name here")
+			int result = service.countByNameRu('Any name here')
 		then:
 			result == 2
 	}
 	
 	def "countByNameRu() should pass category name to dao"() {
 		when:
-			service.countByNameRu("Спорт")
+			service.countByNameRu('Спорт')
 		then:
 			1 * categoryDao.countByNameRu({ String name ->
-				assert name == "Спорт"
+				assert name == 'Спорт'
 				return true
 			})
 	}

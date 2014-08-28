@@ -38,8 +38,8 @@ class LocaleUtilsTest extends Specification {
 		where:
 			locale                 || language
 			null                   || null
-			Locale.ENGLISH         || "en"
-			new Locale("ru", "RU") || "ru"
+			Locale.ENGLISH         || 'en'
+			new Locale('ru', 'RU') || 'ru'
 	}
 	
 	//
@@ -64,7 +64,7 @@ class LocaleUtilsTest extends Specification {
 			null                   | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
 			Locale.ENGLISH         | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
 			Locale.FRENCH          | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
-			new Locale("ru", "RU") | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_RU_NAME
+			new Locale('ru', 'RU') | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_RU_NAME
 	}
 	
 }

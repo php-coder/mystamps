@@ -54,7 +54,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		user = TestObjects.createUser()
 		
-		imageService.save(_) >> "/fake/path/to/image"
+		imageService.save(_) >> '/fake/path/to/image'
 		
 		service = new SeriesServiceImpl(seriesDao, imageService)
 	}
@@ -247,8 +247,8 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass michel numbers to series dao"() {
 		given:
 			Set<MichelCatalog> expectedNumbers = [
-				new MichelCatalog("1"),
-				new MichelCatalog("2")
+				new MichelCatalog('1'),
+				new MichelCatalog('2')
 			] as Set
 			form.setMichelNumbers(expectedNumbers.join(','))
 		when:
@@ -317,8 +317,8 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass scott numbers to series dao"() {
 		given:
 			Set<ScottCatalog> expectedNumbers = [
-				new ScottCatalog("1"),
-				new ScottCatalog("2")
+				new ScottCatalog('1'),
+				new ScottCatalog('2')
 			] as Set
 			form.setScottNumbers(expectedNumbers.join(','))
 		when:
@@ -387,8 +387,8 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass yvert numbers to series dao"() {
 		given:
 			Set<YvertCatalog> expectedNumbers = [
-				new YvertCatalog("1"),
-				new YvertCatalog("2")
+				new YvertCatalog('1'),
+				new YvertCatalog('2')
 			] as Set
 			form.setYvertNumbers(expectedNumbers.join(','))
 		when:
@@ -457,8 +457,8 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass gibbons numbers to series dao"() {
 		given:
 			Set<GibbonsCatalog> expectedNumbers = [
-				new GibbonsCatalog("1"),
-				new GibbonsCatalog("2")
+				new GibbonsCatalog('1'),
+				new GibbonsCatalog('2')
 			] as Set
 			form.setGibbonsNumbers(expectedNumbers.join(','))
 		when:
@@ -521,7 +521,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}) >> "/any/path"
+			}) >> '/any/path'
 	}
 	
 	def "add() should throw exception if image url is null"() {
@@ -539,14 +539,14 @@ class SeriesServiceImplTest extends Specification {
 			service.add(form, user, false)
 		then:
 			// override setup() settings
-			imageService.save(_) >> "x" * (Series.IMAGE_URL_LENGTH + 1)
+			imageService.save(_) >> 'x' * (Series.IMAGE_URL_LENGTH + 1)
 		and:
 			thrown IllegalStateException
 	}
 	
 	def "add() should pass image url to series dao"() {
 		given:
-			String expectedUrl = "http://example.org/example.jpg"
+			String expectedUrl = 'http://example.org/example.jpg'
 		when:
 			service.add(form, user, false)
 		then:
@@ -560,7 +560,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception if comment is empty"() {
 		given:
-			form.setComment("  ")
+			form.setComment('  ')
 		when:
 			service.add(form, user, true)
 		then:
@@ -581,9 +581,9 @@ class SeriesServiceImplTest extends Specification {
 		where:
 			canAddComment | comment     || expectedComment
 			false         | null        || null
-			false         | "test"      || null
+			false         | 'test'      || null
 			true          | null        || null
-			true          | "Some text" || "Some text"
+			true          | 'Some text' || 'Some text'
 	}
 	
 	def "add() should assign created at to current date"() {
@@ -669,18 +669,18 @@ class SeriesServiceImplTest extends Specification {
 		where:
 			catalogCode | _
 			null        | _
-			""          | _
-			" "         | _
+			''          | _
+			' '         | _
 	}
 	
 	def "countByMichelNumber() should pass argument to dao and return result"() {
 		given:
 			int expectedResult = 1
 		when:
-			int result = service.countByMichelNumber("7")
+			int result = service.countByMichelNumber('7')
 		then:
 			1 * seriesDao.countByMichelNumberCode({ String code ->
-				assert code == "7"
+				assert code == '7'
 				return true
 			}) >> expectedResult
 		and:
@@ -700,18 +700,18 @@ class SeriesServiceImplTest extends Specification {
 		where:
 			catalogCode | _
 			null        | _
-			""          | _
-			" "         | _
+			''          | _
+			' '         | _
 	}
 	
 	def "countByScottNumber() should pass argument to dao and return result"() {
 		given:
 			int expectedResult = 2
 		when:
-			int result = service.countByScottNumber("8")
+			int result = service.countByScottNumber('8')
 		then:
 			1 * seriesDao.countByScottNumberCode({ String code ->
-				assert code == "8"
+				assert code == '8'
 				return true
 			}) >> expectedResult
 		and:
@@ -731,18 +731,18 @@ class SeriesServiceImplTest extends Specification {
 		where:
 			catalogCode | _
 			null        | _
-			""          | _
-			" "         | _
+			''          | _
+			' '         | _
 	}
 	
 	def "countByYvertNumber() should pass argument to dao and return result"() {
 		given:
 			int expectedResult = 3
 		when:
-			int result = service.countByYvertNumber("9")
+			int result = service.countByYvertNumber('9')
 		then:
 			1 * seriesDao.countByYvertNumberCode({ String code ->
-				assert code == "9"
+				assert code == '9'
 				return true
 			}) >> expectedResult
 		and:
@@ -762,18 +762,18 @@ class SeriesServiceImplTest extends Specification {
 		where:
 			catalogCode | _
 			null        | _
-			""          | _
-			" "         | _
+			''          | _
+			' '         | _
 	}
 	
 	def "countByGibbonsNumber() should pass argument to dao and return result"() {
 		given:
 			int expectedResult = 4
 		when:
-			int result = service.countByGibbonsNumber("10")
+			int result = service.countByGibbonsNumber('10')
 		then:
 			1 * seriesDao.countByGibbonsNumberCode({ String code ->
-				assert code == "10"
+				assert code == '10'
 				return true
 			}) >> expectedResult
 		and:
@@ -786,7 +786,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findBy(Category) should throw exception if category is null"() {
 		when:
-			service.findBy(null as Category, "any")
+			service.findBy(null as Category, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
@@ -799,7 +799,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.findByAsSeriesInfo(_ as Category, _ as String) >> expectedResult
 		when:
-			Iterable<Category> result = service.findBy(expectedCategory, "any")
+			Iterable<Category> result = service.findBy(expectedCategory, 'any')
 		then:
 			result == expectedResult
 	}
@@ -810,7 +810,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findBy(Country) should throw exception if country is null"() {
 		when:
-			service.findBy(null as Country, "any")
+			service.findBy(null as Country, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
@@ -823,7 +823,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.findByAsSeriesInfo(_ as Country, _ as String) >> expectedResult
 		when:
-			Iterable<Country> result = service.findBy(expectedCountry, "any")
+			Iterable<Country> result = service.findBy(expectedCountry, 'any')
 		then:
 			result == expectedResult
 	}

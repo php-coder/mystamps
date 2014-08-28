@@ -28,7 +28,7 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 import java.nio.file.Path
 
 class FilesystemImagePersistenceStrategyTest extends Specification {
-	private static final STORAGE_DIR = File.separator + "tmp"
+	private static final STORAGE_DIR = File.separator + 'tmp'
 	
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()

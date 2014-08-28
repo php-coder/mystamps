@@ -53,7 +53,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should pass file content to image data dao"() {
 		given:
-			byte[] expected = "test".getBytes()
+			byte[] expected = 'test'.getBytes()
 			multipartFile.getBytes() >> expected
 		when:
 			strategy.save(multipartFile, image)

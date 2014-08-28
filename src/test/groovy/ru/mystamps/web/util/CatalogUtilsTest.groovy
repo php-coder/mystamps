@@ -43,72 +43,72 @@ class CatalogUtilsTest extends Specification {
 		when:
 			String numbers = CatalogUtils.toShortForm(empty)
 		then:
-			numbers == ""
+			numbers == ''
 	}
 	
 	def "toShortForm() should return single number as is"() {
 		given:
-			Set<MichelCatalog> singleNumber = [ new MichelCatalog("1") ] as Set
+			Set<MichelCatalog> singleNumber = [ new MichelCatalog('1') ] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(singleNumber)
 		then:
-			numbers == "1"
+			numbers == '1'
 	}
 	
 	def "toShortForm() should return pair of numbers as comma separated"() {
 		given:
 			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog("1"),
-				new MichelCatalog("2")
+				new MichelCatalog('1'),
+				new MichelCatalog('2')
 			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
-			numbers == "1, 2"
+			numbers == '1, 2'
 	}
 	
 	def "toShortForm() should produce range for sequence"() {
 		given:
 			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog("1"),
-				new MichelCatalog("2"),
-				new MichelCatalog("3")
+				new MichelCatalog('1'),
+				new MichelCatalog('2'),
+				new MichelCatalog('3')
 			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
-			numbers == "1-3"
+			numbers == '1-3'
 	}
 	
 	def "toShortForm() should return comma separated numbers if they are not a sequence"() {
 		given:
 			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog("1"),
-				new MichelCatalog("2"),
-				new MichelCatalog("4"),
-				new MichelCatalog("5")
+				new MichelCatalog('1'),
+				new MichelCatalog('2'),
+				new MichelCatalog('4'),
+				new MichelCatalog('5')
 			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
-			numbers == "1, 2, 4, 5"
+			numbers == '1, 2, 4, 5'
 	}
 	
 	def "toShortForm() should produce two ranges for two sequences"() {
 		given:
 			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog("1"),
-				new MichelCatalog("2"),
-				new MichelCatalog("3"),
-				new MichelCatalog("10"),
-				new MichelCatalog("19"),
-				new MichelCatalog("20"),
-				new MichelCatalog("21")
+				new MichelCatalog('1'),
+				new MichelCatalog('2'),
+				new MichelCatalog('3'),
+				new MichelCatalog('10'),
+				new MichelCatalog('19'),
+				new MichelCatalog('20'),
+				new MichelCatalog('21')
 			] as Set
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
-			numbers == "1-3, 10, 19-21"
+			numbers == '1-3, 10, 19-21'
 	}
 	
 	//
@@ -124,42 +124,42 @@ class CatalogUtilsTest extends Specification {
 	
 	def "fromString() should return empty collection if catalog numbers is empty"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString("", MichelCatalog.class)
+			Set<MichelCatalog> numbers = CatalogUtils.fromString('', MichelCatalog.class)
 		then:
 			numbers.isEmpty()
 	}
 	
 	def "fromString() should throw exception if element class is null"() {
 		when:
-			CatalogUtils.fromString("1", null)
+			CatalogUtils.fromString('1', null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "fromString() should return one element if catalog numbers contains one number"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString("1", MichelCatalog.class)
+			Set<MichelCatalog> numbers = CatalogUtils.fromString('1', MichelCatalog.class)
 		then:
 			numbers.size() == 1
 	}
 	
 	def "fromString() should return one element if catalog numbers contains extra comma"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString("1,", MichelCatalog.class)
+			Set<MichelCatalog> numbers = CatalogUtils.fromString('1,', MichelCatalog.class)
 		then:
 			numbers.size() == 1
 	}
 	
 	def "fromString() should return two elements if catalog numbers contains two numbers"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString("1,2", MichelCatalog.class)
+			Set<MichelCatalog> numbers = CatalogUtils.fromString('1,2', MichelCatalog.class)
 		then:
 			numbers.size() == 2
 	}
 	
 	def "fromString() should throw exception if one of catalog numbers is a blank string"() {
 		when:
-			CatalogUtils.fromString("1, ", MichelCatalog)
+			CatalogUtils.fromString('1, ', MichelCatalog)
 		then:
 			thrown IllegalStateException
 	}
@@ -169,7 +169,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "fromString() should return set of MichelNumbers for appropriate element class"() {
 		when:
-			Set<?> numbers = CatalogUtils.fromString("1,2", MichelCatalog.class)
+			Set<?> numbers = CatalogUtils.fromString('1,2', MichelCatalog.class)
 		then:
 			numbers.each {
 				assert it instanceof MichelCatalog
@@ -178,7 +178,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "fromString() should return set of ScottNumbers for appropriate element class"() {
 		when:
-			Set<?> numbers = CatalogUtils.fromString("1,2", ScottCatalog.class)
+			Set<?> numbers = CatalogUtils.fromString('1,2', ScottCatalog.class)
 		then:
 			numbers.each {
 				assert it instanceof ScottCatalog
@@ -187,7 +187,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "fromString() should return set of YvertNumbers for appropriate element class"() {
 		when:
-			Set<?> numbers = CatalogUtils.fromString("1,2", YvertCatalog.class)
+			Set<?> numbers = CatalogUtils.fromString('1,2', YvertCatalog.class)
 		then:
 			numbers.each {
 				assert it instanceof YvertCatalog
@@ -196,7 +196,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "fromString() should return set of GibbonsNumbers for appropriate element class"() {
 		when:
-			Set<?> numbers = CatalogUtils.fromString("1,2", GibbonsCatalog.class)
+			Set<?> numbers = CatalogUtils.fromString('1,2', GibbonsCatalog.class)
 		then:
 			numbers.each {
 				assert it instanceof GibbonsCatalog
