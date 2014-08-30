@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 	
-	private final UserDao users;
-	private final UsersActivationDao usersActivation;
+	private final UserDao userDao;
+	private final UsersActivationDao usersActivationDao;
 	private final MailService mailService;
 	private final PasswordEncoder encoder;
 	
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		activation.setEmail(dto.getEmail());
 		activation.setLang(lang == null ? "en" : lang.getLanguage());
 		activation.setCreatedAt(new Date());
-		usersActivation.save(activation);
+		usersActivationDao.save(activation);
 
 		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
 			mailService.sendActivationKeyToUser(activation);
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	public int countRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
-		return usersActivation.countByActivationKey(activationKey);
+		return usersActivationDao.countByActivationKey(activationKey);
 	}
 	
 	@Override
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		String activationKey = dto.getActivationKey();
-		UsersActivation activation = usersActivation.findOne(activationKey);
+		UsersActivation activation = usersActivationDao.findOne(activationKey);
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
@@ -125,8 +125,8 @@ public class UserServiceImpl implements UserService {
 		user.setHash(hash);
 		user.setSalt(salt);
 		
-		users.save(user);
-		usersActivation.delete(activation);
+		userDao.save(user);
+		usersActivationDao.delete(activation);
 		
 		LOG.info(
 			"Added user (login='{}', name='{}', activation key='{}')",
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
 	public User findByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
-		return users.findByLogin(login);
+		return userDao.findByLogin(login);
 	}
 	
 	@Override
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
 	public int countByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
-		return users.countByLogin(login);
+		return userDao.countByLogin(login);
 	}
 	
 	/**
