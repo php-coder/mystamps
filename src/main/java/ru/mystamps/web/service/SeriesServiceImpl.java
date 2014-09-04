@@ -69,19 +69,9 @@ public class SeriesServiceImpl implements SeriesService {
 		if (dto.getCountry() != null) {
 			series.setCountry(dto.getCountry());
 		}
-		
-		if (dto.getYear() != null) {
-			series.setReleaseYear(dto.getYear());
 
-			if (dto.getMonth() != null) {
-				series.setReleaseMonth(dto.getMonth());
+		setDateOfReleaseIfProvided(dto, series);
 
-				if (dto.getDay() != null) {
-					series.setReleaseDay(dto.getDay());
-				}
-			}
-		}
-		
 		series.setCategory(dto.getCategory());
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
@@ -189,6 +179,21 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(country != null, "Country must be non null");
 		
 		return seriesDao.findByAsSeriesInfo(country, lang);
+	}
+	
+	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, Series series) {
+		if (dto.getYear() == null) {
+			return;
+		}
+		
+		series.setReleaseYear(dto.getYear());
+		
+		if (dto.getMonth() == null) {
+			return;
+		}
+		
+		series.setReleaseMonth(dto.getMonth());
+		series.setReleaseDay(dto.getDay()); // even if day is null it won't change anything
 	}
 	
 	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
