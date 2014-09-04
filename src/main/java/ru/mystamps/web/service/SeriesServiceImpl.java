@@ -38,6 +38,7 @@ import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.Price;
 import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.entity.StampsCatalog;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -69,23 +70,23 @@ public class SeriesServiceImpl implements SeriesService {
 		if (dto.getCountry() != null) {
 			series.setCountry(dto.getCountry());
 		}
-
+		
 		setDateOfReleaseIfProvided(dto, series);
-
+		
 		series.setCategory(dto.getCategory());
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
 		
-		setMichelNumbersIfProvided(dto, series);
+		series.setMichel(getCatalogNumbersOrNull(dto.getMichelNumbers(), MichelCatalog.class));
 		series.setMichelPrice(Price.valueOf(dto.getMichelPrice(), dto.getMichelCurrency()));
 		
-		setScottNumbersIfProvided(dto, series);
+		series.setScott(getCatalogNumbersOrNull(dto.getScottNumbers(), ScottCatalog.class));
 		series.setScottPrice(Price.valueOf(dto.getScottPrice(), dto.getScottCurrency()));
 		
-		setYvertNumbersIfProvided(dto, series);
+		series.setYvert(getCatalogNumbersOrNull(dto.getYvertNumbers(), YvertCatalog.class));
 		series.setYvertPrice(Price.valueOf(dto.getYvertPrice(), dto.getYvertCurrency()));
 		
-		setGibbonsNumbersIfProvided(dto, series);
+		series.setGibbons(getCatalogNumbersOrNull(dto.getGibbonsNumbers(), GibbonsCatalog.class));
 		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
 		
 		String imageUrl = imageService.save(dto.getImage());
@@ -196,36 +197,13 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setReleaseDay(dto.getDay()); // even if day is null it won't change anything
 	}
 	
-	private static void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
-		Set<MichelCatalog> michelNumbers =
-			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
-		if (!michelNumbers.isEmpty()) {
-			series.setMichel(michelNumbers);
+	private static <T extends StampsCatalog> Set<T> getCatalogNumbersOrNull(String catalogNumbers, Class<T> clazz) {
+		Set<T> result = CatalogUtils.fromString(catalogNumbers, clazz);
+		if (result.isEmpty()) {
+			return null;
 		}
-	}
-	
-	private static void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
-		Set<ScottCatalog> scottNumbers =
-			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
-		if (!scottNumbers.isEmpty()) {
-			series.setScott(scottNumbers);
-		}
-	}
-	
-	private static void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
-		Set<YvertCatalog> yvertNumbers =
-			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
-		if (!yvertNumbers.isEmpty()) {
-			series.setYvert(yvertNumbers);
-		}
-	}
-	
-	private static void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
-		Set<GibbonsCatalog> gibbonsNumbers =
-			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
-		if (!gibbonsNumbers.isEmpty()) {
-			series.setGibbons(gibbonsNumbers);
-		}
+		
+		return result;
 	}
 	
 }
