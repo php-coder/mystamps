@@ -124,73 +124,34 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 	
-	def "add() should pass day of month to dao when month and year are present"() {
+	@Unroll
+	def "add() should pass date of release (#expectedDay/#expectedMonth/#expectedYear) when it's #day/#month/#year"(
+		Integer day, Integer month, Integer year,
+		Integer expectedDay, Integer expectedMonth, Integer expectedYear) {
+		
 		given:
-			int expectedDay = 17
-			form.setDay(expectedDay)
-			form.setMonth(1)
-			form.setYear(1996)
+			form.setDay(day)
+			form.setMonth(month)
+			form.setYear(year)
 		when:
 			service.add(form, user, false)
 		then:
 			1 * seriesDao.save({ Series series ->
 				assert series?.releaseDay == expectedDay
-				return true
-			})
-	}
-	
-	def "add() shouldn't pass day of month to dao when month and year aren't present"() {
-		given:
-			form.setDay(17)
-			form.setMonth(null)
-			form.setYear(null)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.releaseDay == null
-				return true
-			})
-	}
-	
-	def "add() should pass month to dao when month and year are present"() {
-		given:
-			int expectedMonth = 6
-			form.setMonth(expectedMonth)
-			form.setYear(1997)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
 				assert series?.releaseMonth == expectedMonth
-				return true
-			})
-	}
-	
-	def "add() shouldn't pass month to dao when year aren't present"() {
-		given:
-			form.setMonth(11)
-			form.setYear(null)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.releaseMonth == null
-				return true
-			})
-	}
-	
-	def "add() should pass year to series dao if year present"() {
-		given:
-			int expectedYear = 2000
-			form.setYear(expectedYear)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
 				assert series?.releaseYear == expectedYear
 				return true
 			})
+		where:
+			day  | month | year || expectedDay | expectedMonth | expectedYear
+			null | null  | null || null        | null          | null
+			null | null  | 1996 || null        | null          | 1996
+			null | 6     | 1996 || null        | 6             | 1996
+			7    | 6     | 1996 ||  7          | 6             | 1996
+			7    | 6     | null || null        | null          | null
+			7    | null  | null || null        | null          | null
+			7    | null  | 1996 || null        | null          | 1996
+			null | 6     | null || null        | null          | null
 	}
 	
 	def "add() should pass category to series dao"() {
