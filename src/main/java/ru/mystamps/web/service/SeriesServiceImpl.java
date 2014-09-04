@@ -77,16 +77,16 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setPerforated(dto.getPerforated());
 		
 		setMichelNumbersIfProvided(dto, series);
-		setMichelPriceIfProvided(dto, series);
+		series.setMichelPrice(Price.valueOf(dto.getMichelPrice(), dto.getMichelCurrency()));
 		
 		setScottNumbersIfProvided(dto, series);
-		setScottPriceIfProvided(dto, series);
+		series.setScottPrice(Price.valueOf(dto.getScottPrice(), dto.getScottCurrency()));
 		
 		setYvertNumbersIfProvided(dto, series);
-		setYvertPriceIfProvided(dto, series);
+		series.setYvertPrice(Price.valueOf(dto.getYvertPrice(), dto.getYvertCurrency()));
 		
 		setGibbonsNumbersIfProvided(dto, series);
-		setGibbonsPriceIfProvided(dto, series);
+		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
 		
 		String imageUrl = imageService.save(dto.getImage());
 		Validate.validState(imageUrl != null, "Image url must be non null");
@@ -204,36 +204,12 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setMichelPriceIfProvided(AddSeriesDto dto, Series series) {
-		if (dto.getMichelPrice() == null) {
-			return;
-		}
-		
-		Validate.isTrue(
-			dto.getMichelCurrency() != null,
-			"Michel currency must be non null when price is specified"
-		);
-		series.setMichelPrice(new Price(dto.getMichelPrice(), dto.getMichelCurrency()));
-	}
-	
 	private static void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<ScottCatalog> scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
 		if (!scottNumbers.isEmpty()) {
 			series.setScott(scottNumbers);
 		}
-	}
-	
-	private static void setScottPriceIfProvided(AddSeriesDto dto, Series series) {
-		if (dto.getScottPrice() == null) {
-			return;
-		}
-		
-		Validate.isTrue(
-			dto.getScottCurrency() != null,
-			"Scott currency must be non null when price is specified"
-		);
-		series.setScottPrice(new Price(dto.getScottPrice(), dto.getScottCurrency()));
 	}
 	
 	private static void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
@@ -244,36 +220,12 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
-	private static void setYvertPriceIfProvided(AddSeriesDto dto, Series series) {
-		if (dto.getYvertPrice() == null) {
-			return;
-		}
-		
-		Validate.isTrue(
-			dto.getYvertCurrency() != null,
-			"Yvert currency must be non null when price is specified"
-		);
-		series.setYvertPrice(new Price(dto.getYvertPrice(), dto.getYvertCurrency()));
-	}
-	
 	private static void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<GibbonsCatalog> gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
 		if (!gibbonsNumbers.isEmpty()) {
 			series.setGibbons(gibbonsNumbers);
 		}
-	}
-	
-	private static void setGibbonsPriceIfProvided(AddSeriesDto dto, Series series) {
-		if (dto.getGibbonsPrice() == null) {
-			return;
-		}
-		
-		Validate.isTrue(
-			dto.getGibbonsCurrency() != null,
-			"Gibbons currency must be non null when price is specified"
-		);
-		series.setGibbonsPrice(new Price(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
 	}
 	
 }

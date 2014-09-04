@@ -26,6 +26,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 
+import org.apache.commons.lang3.Validate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +50,16 @@ public class Price {
 	@Enumerated(EnumType.STRING)
 	@Column(length = MAX_CURRENCY_LEGNTH)
 	private Currency currency;
+	
+	public static Price valueOf(Double price, Currency currency) {
+		if (price == null) {
+			return null;
+		}
+		
+		Validate.isTrue(currency != null, "Currency must be non null when price is specified");
+		
+		return new Price(price, currency);
+	}
 	
 	@Override
 	public String toString() {
