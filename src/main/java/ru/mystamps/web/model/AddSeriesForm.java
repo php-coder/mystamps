@@ -207,4 +207,17 @@ public class AddSeriesForm implements AddSeriesDto {
 	public interface Image2Checks {
 	}
 	
+	public Price getPrice(Catalog catalog){
+		switch (catalog) {
+			case YVERT:
+				yvertPrice == null ? null : new Price(yvertPrice, yvertCurrency);
+				break;
+			default:
+				throw new RuntimeException("WTF? Can't be");
+		}
+	}
+	
+	public enum Catalog {
+		YVERT;
+	}
 }
