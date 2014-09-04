@@ -196,7 +196,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setReleaseDay(dto.getDay()); // even if day is null it won't change anything
 	}
 	
-	private void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private static void setMichelNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<MichelCatalog> michelNumbers =
 			CatalogUtils.fromString(dto.getMichelNumbers(), MichelCatalog.class);
 		if (!michelNumbers.isEmpty()) {
@@ -216,7 +216,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setMichelPrice(new Price(dto.getMichelPrice(), dto.getMichelCurrency()));
 	}
 	
-	private void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private static void setScottNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<ScottCatalog> scottNumbers =
 			CatalogUtils.fromString(dto.getScottNumbers(), ScottCatalog.class);
 		if (!scottNumbers.isEmpty()) {
@@ -236,7 +236,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setScottPrice(new Price(dto.getScottPrice(), dto.getScottCurrency()));
 	}
 	
-	private void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private static void setYvertNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<YvertCatalog> yvertNumbers =
 			CatalogUtils.fromString(dto.getYvertNumbers(), YvertCatalog.class);
 		if (!yvertNumbers.isEmpty()) {
@@ -256,7 +256,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setYvertPrice(new Price(dto.getYvertPrice(), dto.getYvertCurrency()));
 	}
 	
-	private void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
+	private static void setGibbonsNumbersIfProvided(AddSeriesDto dto, Series series) {
 		Set<GibbonsCatalog> gibbonsNumbers =
 			CatalogUtils.fromString(dto.getGibbonsNumbers(), GibbonsCatalog.class);
 		if (!gibbonsNumbers.isEmpty()) {
