@@ -17,36 +17,43 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.Locale;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.service.CategoryService;
-import ru.mystamps.web.service.CollectionService;
-import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
-public class SiteController {
+public class CollectionController {
 	
-	private final CategoryService categoryService;
-	private final CollectionService collectionService;
-	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
-	@RequestMapping(value = Url.INDEX_PAGE, method = RequestMethod.GET)
-	public String showIndexPage(Model model) {
-		model.addAttribute("categoryCounter", categoryService.countAll());
-		model.addAttribute("countryCounter", countryService.countAll());
-		model.addAttribute("seriesCounter", seriesService.countAll());
-		model.addAttribute("stampsCounter", seriesService.countAllStamps());
-		model.addAttribute("collectionsCounter", collectionService.countCollectionsOfUsers());
-		return "site/index";
+	@RequestMapping(value = Url.INFO_COLLECTION_PAGE, method = RequestMethod.GET)
+	public String showInfo(
+		@PathVariable("id") Collection collection,
+		Model model,
+		Locale userLocale) {
+		
+		if (collection == null) {
+			throw new NotFoundException();
+		}
+		
+		model.addAttribute("ownerName", collection.getOwner().getName());
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute("seriesOfCollection", seriesService.findBy(collection, lang));
+		
+		return "collection/info";
 	}
 	
 }

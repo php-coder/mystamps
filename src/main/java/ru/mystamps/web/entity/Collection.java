@@ -17,67 +17,38 @@
  */
 package ru.mystamps.web.entity;
 
-import java.util.Locale;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import ru.mystamps.web.util.LocaleUtils;
+import lombok.ToString;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "collections")
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = "metaInfo")
-public class Category implements LocalizedEntity {
-	
-	public static final int NAME_LENGTH = 50;
+@ToString
+public class Collection {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(length = NAME_LENGTH, unique = true, nullable = false)
-	private String name;
+	@OneToOne(optional = false)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User owner;
 	
-	@Column(name = "name_ru", length = NAME_LENGTH, unique = true, nullable = false)
-	private String nameRu;
-	
-	@Embedded
-	private MetaInfo metaInfo; // NOPMD
-	
-	public Category() {
-		metaInfo = new MetaInfo();
-	}
-	
-	@Override
-	public String toString() {
-		return String.valueOf(id);
-	}
-	
-	public String toLongString() {
-		return new StringBuilder()
-			.append("Category(id=")
-			.append(id)
-			.append(", name=")
-			.append(name)
-			.append(", nameRu=")
-			.append(nameRu)
-			.append(')')
-			.toString();
-	}
-	
-	@Override
-	public String getLocalizedName(Locale locale) {
-		return LocaleUtils.getLocalizedName(locale, this);
-	}
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "collection_id"))
+	private Set<Series> series;
 	
 }

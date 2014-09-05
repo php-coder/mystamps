@@ -23,7 +23,13 @@
 					<ul class="unstyled">
 						<li sec:authorize="isAuthenticated()">
 							<i class="icon-user"></i>
-							<span sec:authentication="principal.user.name" th:remove="tag">John Doe</span>
+							<a sec:authentication="principal.user.name"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id})}">
+								John Doe
+							</a>
 						</li>
 						<!--/*/
 						<li sec:authorize="isAnonymous()">

@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.Price;
@@ -180,6 +181,14 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(country != null, "Country must be non null");
 		
 		return seriesDao.findByAsSeriesInfo(country, lang);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findBy(Collection collection, String lang) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return seriesDao.findByAsSeriesInfo(collection.getId(), lang);
 	}
 	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, Series series) {

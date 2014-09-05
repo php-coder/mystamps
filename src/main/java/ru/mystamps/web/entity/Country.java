@@ -26,6 +26,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +36,7 @@ import ru.mystamps.web.util.LocaleUtils;
 @Table(name = "countries")
 @Getter
 @Setter
+@EqualsAndHashCode(exclude = "metaInfo")
 public class Country implements LocalizedEntity {
 	
 	public static final int NAME_LENGTH = 50;

@@ -42,6 +42,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.ViewResolver;
 
+import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafView;
@@ -123,6 +124,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		templateEngine.setTemplateResolver(templateResolver);
 		templateEngine.setTemplateEngineMessageSource(getMessageSource());
 		templateEngine.addDialect(new SpringSecurityDialect());
+		templateEngine.addDialect(new TogglzDialect());
 		templateEngine.afterPropertiesSet();
 		
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();

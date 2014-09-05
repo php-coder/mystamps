@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
@@ -34,4 +35,5 @@ public interface SeriesService {
 	int countByGibbonsNumber(String gibbonsNumberCode);
 	Iterable<SeriesInfoDto> findBy(Category category, String lang);
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
+	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);
 }

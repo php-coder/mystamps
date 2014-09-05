@@ -57,6 +57,8 @@ public final class Url {
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
 	
+	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}";
+	
 	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
 	
 	// see also error-page definitions at src/main/webapp/WEB-INF/web.xml
@@ -89,6 +91,7 @@ public final class Url {
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
+		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
 		map.put("FAVICON_ICO", FAVICON_ICO);
 		map.put("MAIN_CSS", MAIN_CSS);
 		map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);

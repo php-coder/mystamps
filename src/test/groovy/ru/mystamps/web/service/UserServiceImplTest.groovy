@@ -35,6 +35,7 @@ class UserServiceImplTest extends Specification {
 	
 	private UserDao userDao = Mock()
 	private UsersActivationDao usersActivationDao = Mock()
+	private CollectionService collectionService = Mock()
 	private MailService mailService = Mock()
 	private PasswordEncoder encoder = Mock()
 	
@@ -61,7 +62,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(activation.getActivationKey())
 		
-		service = new UserServiceImpl(userDao, usersActivationDao, mailService, encoder)
+		service = new UserServiceImpl(userDao, usersActivationDao, collectionService, mailService, encoder)
 	}
 	
 	//

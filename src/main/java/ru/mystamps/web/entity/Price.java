@@ -29,6 +29,7 @@ import javax.persistence.EnumType;
 import org.apache.commons.lang3.Validate;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,6 +39,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Price {
 	public static final int MAX_CURRENCY_LEGNTH = 3;
 	

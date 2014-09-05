@@ -62,6 +62,9 @@ public class ServicesConfig {
 	private ImageDao imageDao;
 	
 	@Inject
+	private CollectionDao collectionDao;
+	
+	@Inject
 	private MailConfig mailConfig;
 	
 	@Inject
@@ -78,6 +81,11 @@ public class ServicesConfig {
 	@Bean
 	public CategoryService getCategoryService() {
 		return new CategoryServiceImpl(categoryDao);
+	}
+	
+	@Bean
+	public CollectionService getCollectionService() {
+		return new CollectionServiceImpl(collectionDao);
 	}
 	
 	@Bean
@@ -117,6 +125,7 @@ public class ServicesConfig {
 		return new UserServiceImpl(
 			userDao,
 			usersActivationDao,
+			getCollectionService(),
 			getMailService(),
 			securityConfig.getPasswordEncoder()
 		);

@@ -15,25 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.togglz;
+package ru.mystamps.web.service;
 
-import org.togglz.core.Feature;
-import org.togglz.core.annotation.EnabledByDefault;
-import org.togglz.core.annotation.Label;
-import org.togglz.core.context.FeatureContext;
+import ru.mystamps.web.entity.Series;
+import ru.mystamps.web.entity.User;
 
-public enum Features implements Feature {
-	
-	@Label("Send mail with activation key to user")
-	@EnabledByDefault
-	SEND_ACTIVATION_MAIL,
-	
-	@Label("Possibility to user to add series to collection")
-	@EnabledByDefault
-	ADD_SERIES_TO_COLLECTION;
-	
-	public boolean isActive() {
-		return FeatureContext.getFeatureManager().isActive(this);
-	}
-	
+public interface CollectionService {
+	void createCollection(User user);
+	Integer addToCollection(User user, Series series);
+	Integer removeFromCollection(User user, Series series);
+	boolean isSeriesInCollection(User user, Series series);
+	long countCollectionsOfUsers();
 }

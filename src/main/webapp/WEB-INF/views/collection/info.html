@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title th:text="|MyStamps: #{t_registration_title}|">MyStamps: registration</title>
+		<title th:text="|MyStamps: #{t_country_info}|">MyStamps: Country info</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
@@ -52,52 +52,68 @@
 		</div>
 		<div class="row-fluid">
 			<div id="content" class="span12">
-				<h3 th:text="#{t_registration_on_site}">
-					Register on site
-				</h3>
 				
 				<!--/*/
-				<div class="row-fluid span12" sec:authorize="isAuthenticated()">
-					<div class="alert alert-info text-center span8 offset2" th:text="#{t_already_registered}">
-						You already registered.
+				<div class="row-fluid span12" th:if="${justAddedSeries}">
+					<div class="alert alert-success text-center span8 offset2" th:text="#{t_collection_just_added}">
+						Series has been added to your collection
 					</div>
 				</div>
 				/*/-->
 				
-				<!--/*/ <th:block sec:authorize="isAnonymous()"> /*/-->
-					<div class="hint text-center">
-						<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
-							<span class="hint_item" th:utext="#{t_if_you_already_registered(@{${AUTHENTICATION_PAGE}})}">
-								If you already registered then you should pass <a href="auth.html">authentication</a>.
-							</span>
-							<br />
-							<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
-								All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
-							</span>
-						</small>
+				<!--/*/
+				<div class="row-fluid span12" th:if="${justRemovedSeries}">
+					<div class="alert alert-info text-center span8 offset2" th:text="#{t_collection_just_removed}">
+						Series has been removed from your collection
 					</div>
-					
-					<div class="span6 offset3">
-						<form method="post" action="../account/activate.html" class="form-horizontal" th:action="@{${REGISTRATION_PAGE}}" th:object="${registerAccountForm}">
-							
-							<div class="control-group" th:classappend="${#fields.hasErrors('email') ? 'error' : ''}">
-								<label class="control-label" for="email">
-									<span class="field-label" th:text="#{t_email}">E-mail</span>
-									<span id="email.required" class="required_field">*</span>
-								</label>
-								<div class="controls">
-									<input type="email" id="email" required="required" autofocus="autofocus" th:field="*{email}" />
-									<span id="email.errors" class="help-inline" th:if="${#fields.hasErrors('email')}" th:each="error : ${#fields.errors('email')}" th:text="${error}"></span>
-								</div>
-							</div>
-							
-							<div class="form-actions">
-								<input type="submit" class="btn btn-primary" value="Register" th:value="#{t_register}" />
-							</div>
-							
-						</form>
-					</div>
-				<!--/*/ </th:block> /*/-->
+				</div>
+				/*/-->
+				
+				<h3 th:text="#{t_collection_of(${ownerName})}">
+					John Doe's collection
+				</h3>
+				
+				<!--/*/
+				<p th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
+					In this collection is no stamps
+				</p>
+				/*/-->
+				
+				<ul th:if="${not #lists.isEmpty(seriesOfCollection)}" th:remove="all-but-first">
+					<li th:each="series : ${seriesOfCollection}">
+						<span th:if="${series.category.id != null}" th:remove="tag">
+							<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+						</span>
+						
+						<span th:if="${series.country.id != null}" th:remove="tag">
+							<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+						</span>
+						
+						<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+							<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>
+							<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
+							<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+						</a>
+					</li>
+					<li>
+						<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+						
+						<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+						
+						<a href="../series/info.html">
+							22&nbsp;item(s)
+						</a>
+					</li>
+					<li>
+						<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+						
+						<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+						
+						<a href="../series/info.html">
+							1983, 5&nbsp;item(s)
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<div class="row-fluid">

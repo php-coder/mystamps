@@ -15,25 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.togglz;
+package ru.mystamps.web.dao;
 
-import org.togglz.core.Feature;
-import org.togglz.core.annotation.EnabledByDefault;
-import org.togglz.core.annotation.Label;
-import org.togglz.core.context.FeatureContext;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-public enum Features implements Feature {
-	
-	@Label("Send mail with activation key to user")
-	@EnabledByDefault
-	SEND_ACTIVATION_MAIL,
-	
-	@Label("Possibility to user to add series to collection")
-	@EnabledByDefault
-	ADD_SERIES_TO_COLLECTION;
-	
-	public boolean isActive() {
-		return FeatureContext.getFeatureManager().isActive(this);
-	}
-	
+import ru.mystamps.web.entity.Collection;
+
+public interface CollectionDao extends CrudRepository<Collection, Integer> {
+	@Query("SELECT COUNT(*) FROM Collection c WHERE c.series IS NOT EMPTY")
+	int countCollectionsOfUsers();
 }

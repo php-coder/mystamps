@@ -33,6 +33,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,6 +43,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = "metaInfo")
+@EqualsAndHashCode(exclude = "metaInfo")
 @SuppressWarnings("PMD.TooManyFields")
 public class Series {
 	

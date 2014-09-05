@@ -24,7 +24,13 @@
 						<!--/*/
 						<li sec:authorize="isAuthenticated()">
 							<i class="icon-user"></i>
-							<span sec:authentication="principal.user.name" th:remove="tag">John Doe</span>
+							<a sec:authentication="principal.user.name"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id})}">
+								John Doe
+							</a>
 						</li>
 						/*/-->
 						<li sec:authorize="isAnonymous()">
@@ -70,6 +76,7 @@
 					<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 10</p>
 					<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 22</p>
 					<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 84</p>
+					<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Amount of collections: 3</p>
 				</div>
 			</div>
 		</div>

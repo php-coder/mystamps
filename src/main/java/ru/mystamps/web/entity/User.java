@@ -22,8 +22,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import static javax.persistence.EnumType.STRING;
@@ -71,6 +73,9 @@ public class User {
 	
 	@Column(length = SALT_LENGTH, nullable = false)
 	private String salt;
+	
+	@OneToOne(mappedBy = "owner", optional = false, fetch = FetchType.LAZY)
+	private Collection collection;
 	
 	public boolean isAdmin() {
 		return role == Role.ADMIN;

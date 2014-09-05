@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,7 @@ import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.EntityInfoDto;
@@ -68,6 +70,7 @@ public class SeriesController {
 	private static final Map<Integer, Integer> YEARS;
 	
 	private final CategoryService categoryService;
+	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
@@ -142,7 +145,7 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
-	public String showInfo(@PathVariable("id") Series series, Model model) {
+	public String showInfo(@PathVariable("id") Series series, Model model, User currentUser) {
 		
 		if (series == null) {
 			throw new NotFoundException();
@@ -154,7 +157,62 @@ public class SeriesController {
 		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert()));
 		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons()));
 		
+		model.addAttribute(
+			"isSeriesInCollection",
+			collectionService.isSeriesInCollection(currentUser, series)
+		);
+		
 		return "series/info";
+	}
+	
+	@RequestMapping(
+		value = Url.INFO_SERIES_PAGE,
+		method = RequestMethod.POST,
+		params = "action=ADD"
+	)
+	public String addToCollection(
+		@PathVariable("id") Series series,
+		User currentUser,
+		RedirectAttributes redirectAttributes) {
+		
+		if (series == null) {
+			throw new NotFoundException();
+		}
+		
+		Integer collectionId = collectionService.addToCollection(currentUser, series);
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
+			.buildAndExpand(collectionId)
+			.toString();
+		
+		redirectAttributes.addFlashAttribute("justAddedSeries", true);
+		
+		return "redirect:" + dstUrl;
+	}
+	
+	@RequestMapping(
+		value = Url.INFO_SERIES_PAGE,
+		method = RequestMethod.POST,
+		params = "action=REMOVE"
+	)
+	public String removeFromCollection(
+		@PathVariable("id") Series series,
+		User currentUser,
+		RedirectAttributes redirectAttributes) {
+		
+		if (series == null) {
+			throw new NotFoundException();
+		}
+		
+		Integer collectionId = collectionService.removeFromCollection(currentUser, series);
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
+			.buildAndExpand(collectionId)
+			.toString();
+		
+		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
+		
+		return "redirect:" + dstUrl;
 	}
 	
 }

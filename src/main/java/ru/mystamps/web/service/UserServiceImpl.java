@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 	
 	private final UserDao userDao;
 	private final UsersActivationDao usersActivationDao;
+	private final CollectionService collectionService;
 	private final MailService mailService;
 	private final PasswordEncoder encoder;
 	
@@ -127,6 +128,8 @@ public class UserServiceImpl implements UserService {
 		
 		userDao.save(user);
 		usersActivationDao.delete(activation);
+		
+		collectionService.createCollection(user);
 		
 		LOG.info(
 			"Added user (login='{}', name='{}', activation key='{}')",

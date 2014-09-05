@@ -52,6 +52,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public CollectionController getCollectionController() {
+		return new CollectionController(servicesConfig.getSeriesService());
+	}
+	
+	@Bean
 	public ImageController getImageController() {
 		return new ImageController(servicesConfig.getImageService());
 	}
@@ -70,6 +75,7 @@ public class ControllersConfig {
 	public SeriesController getSeriesController() {
 		return new SeriesController(
 			servicesConfig.getCategoryService(),
+			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService()
 		);
@@ -79,6 +85,7 @@ public class ControllersConfig {
 	public SiteController getSiteController() {
 		return new SiteController(
 			servicesConfig.getCategoryService(),
+			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService()
 		);

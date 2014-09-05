@@ -84,4 +84,26 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 		@Param("country") Country country,
 		@Param("lang") String lang
 	);
+	
+	@Query(
+		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
+			+ "s.id, "
+			+ "cat.id, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
+			+ "c.id, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
+			+ "s.releaseDay, "
+			+ "s.releaseMonth, "
+			+ "s.releaseYear, "
+			+ "s.quantity, "
+			+ "s.perforated"
+		+ ") "
+		+ "FROM Collection coll "
+		+ "JOIN coll.series s "
+		+ "JOIN s.category cat "
+		+ "LEFT JOIN s.country c "
+		+ "WHERE coll.id = :collectionId"
+	)
+	Iterable<SeriesInfoDto> findByAsSeriesInfo(
+		@Param("collectionId") Integer collectionId,
+		@Param("lang") String lang
+	);
 }

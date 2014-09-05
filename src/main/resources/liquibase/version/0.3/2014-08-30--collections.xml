@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="create-collections-table" author="php-coder" context="scheme">
+		<comment>Creates collections table</comment>
+		
+		<createTable tableName="collections">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="user_id" type="INTEGER">
+				<constraints nullable="false" references="users(id)" foreignKeyName="fk_collections_user_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="create-collections_series-table" author="php-coder" context="scheme">
+		<comment>Creates collections_series table</comment>
+		
+		<createTable tableName="collections_series">
+			<column name="collection_id" type="INTEGER">
+				<constraints nullable="false" references="collections(id)" foreignKeyName="fk_collections_series_collection_id" />
+			</column>
+			<column name="series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)" foreignKeyName="fk_collections_series_series_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="fill-collections_series-tables-based-on-values-from-users_table" author="php-coder" context="test-data, prod-data">
+		<comment>Creates collections for existing users</comment>
+		
+		<sql>
+			INSERT INTO COLLECTIONS(user_id)
+			SELECT id
+			FROM users
+			ORDER BY id
+		</sql>
+		
+		<rollback>
+			<sql>
+				DELETE FROM collections
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+</databaseChangeLog>
