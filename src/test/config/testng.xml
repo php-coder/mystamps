@@ -49,9 +49,9 @@
 		</classes>
 	</test>
 	
-	<test name="When user add country">
+	<test name="When admin add country">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAddCountry" />
+			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCountry" />
 		</classes>
 	</test>
 	

@@ -37,16 +37,16 @@ import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 
-public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
+public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
 	private static final String TEST_COUNTRY_NAME_EN = "Russia";
 	private static final String TEST_COUNTRY_NAME_RU = "Россия";
 	
-	@Value("${valid_user_login}")
-	private String validUserLogin;
+	@Value("${valid_admin_login}")
+	private String validAdminLogin;
 	
-	@Value("${valid_user_password}")
-	private String validUserPassword;
+	@Value("${valid_admin_password}")
+	private String validAdminPassword;
 	
 	@Value("${valid_country_name_en}")
 	private String existingCountryNameEn;
@@ -54,7 +54,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	@Value("${valid_country_name_ru}")
 	private String existingCountryNameRu;
 	
-	public WhenUserAddCountry() {
+	public WhenAdminAddCountry() {
 		super(AddCountryPage.class);
 		hasTitle(tr("t_add_country"));
 		hasHeader(tr("t_add_country_ucfirst"));
@@ -62,7 +62,7 @@ public class WhenUserAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryP
 	
 	@BeforeClass
 	public void login() {
-		page.login(validUserLogin, validUserPassword);
+		page.login(validAdminLogin, validAdminPassword);
 	}
 	
 	@BeforeMethod
