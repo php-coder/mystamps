@@ -812,6 +812,7 @@
 	</build>
 	
 	<name>My Stamps</name>
+	<description>Site about post stamps</description>
 	<url>my-stamps.ru</url>
 	<inceptionYear>2009</inceptionYear>
 	
