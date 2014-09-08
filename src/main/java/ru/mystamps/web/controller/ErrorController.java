@@ -66,5 +66,31 @@ public class ErrorController {
 		}
 	}
 	
+	@RequestMapping(value = Url.INTERNAL_ERROR_PAGE, method = RequestMethod.GET)
+	public void internalError(HttpServletRequest request) {
+		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
+		
+		String page            = (String)request.getAttribute("javax.servlet.error.request_uri");
+		Class<?> exceptionType = (Class<?>)request.getAttribute("javax.servlet.error.exception_type");
+		Exception exception    = (Exception)request.getAttribute("javax.servlet.error.exception");
+		
+		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
+			String msg = String.format(
+				"Exception '%s' occurred at page %s",
+				getNameOrAsIs(exceptionType),
+				page
+			);
+			LOG.error(msg, exception);
+		}
+	}
+	
+	private static Object getNameOrAsIs(Class<?> clazz) {
+		if (clazz == null) {
+			return null;
+		}
+		
+		return clazz.getName();
+	}
+	
 }
 

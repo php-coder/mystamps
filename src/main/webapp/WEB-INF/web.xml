@@ -79,6 +79,11 @@
 		<location>/error/404</location>
 	</error-page>
 	
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/error/500</location>
+	</error-page>
+	
 	<filter>
 		<filter-name>CharsetFilter</filter-name>
 		<filter-class>

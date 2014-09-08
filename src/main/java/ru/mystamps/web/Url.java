@@ -64,6 +64,7 @@ public final class Url {
 	// see also error-page definitions at src/main/webapp/WEB-INF/web.xml
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
+	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
 	// resources
 	public static final String FAVICON_ICO            = "/favicon.ico";
