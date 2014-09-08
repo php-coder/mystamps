@@ -62,8 +62,8 @@ public class ControllersConfig {
 	}
 	
 	@Bean
-	public NotFoundErrorController getNotFoundErrorController() {
-		return new NotFoundErrorController(servicesConfig.getSiteService());
+	public ErrorController getErrorController() {
+		return new ErrorController(servicesConfig.getSiteService());
 	}
 	
 	@Bean

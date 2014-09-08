@@ -36,8 +36,8 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Controller
 @RequiredArgsConstructor
-public class NotFoundErrorController {
-	private static final Logger LOG = LoggerFactory.getLogger(NotFoundErrorController.class);
+public class ErrorController {
+	private static final Logger LOG = LoggerFactory.getLogger(ErrorController.class);
 	
 	private final SiteService siteService;
 	
