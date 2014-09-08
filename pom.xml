@@ -845,6 +845,16 @@
 		<url>https://github.com/php-coder/mystamps</url>
 	</scm>
 	
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/php-coder/mystamps/issues</url>
+	</issueManagement>
+	
+	<ciManagement>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/php-coder/mystamps</url>
+	</ciManagement>
+	
 	<!--
 		 There are 2 profiles:
 		 - prod (uses MySQL)
