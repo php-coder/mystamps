@@ -845,13 +845,6 @@
 		<url>https://github.com/php-coder/mystamps</url>
 	</scm>
 	
-	<distributionManagement>
-		<snapshotRepository>
-			<id>localRepository</id>
-			<url>file://${HOME}/.m2/repository</url>
-		</snapshotRepository>
-	</distributionManagement>
-	
 	<!--
 		 There are 2 profiles:
 		 - prod (uses MySQL)
