@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
@@ -40,6 +41,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	private ImageService imageService = Mock()
 	private SeriesDao seriesDao = Mock()
+	private JdbcSeriesDao jdbcSeriesDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	
 	private SeriesService service
@@ -56,7 +58,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		imageService.save(_) >> '/fake/path/to/image'
 		
-		service = new SeriesServiceImpl(seriesDao, imageService)
+		service = new SeriesServiceImpl(seriesDao, jdbcSeriesDao, imageService)
 	}
 	
 	//

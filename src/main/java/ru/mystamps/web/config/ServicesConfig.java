@@ -38,6 +38,9 @@ public class ServicesConfig {
 	private CategoryDao categoryDao;
 	
 	@Inject
+	private DaoConfig daoConfig;
+	
+	@Inject
 	private SecurityConfig securityConfig;
 	
 	@Inject
@@ -112,7 +115,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public SeriesService getSeriesService() {
-		return new SeriesServiceImpl(seriesDao, getImageService());
+		return new SeriesServiceImpl(seriesDao, daoConfig.getJdbcSeriesDao(), getImageService());
 	}
 	
 	@Bean

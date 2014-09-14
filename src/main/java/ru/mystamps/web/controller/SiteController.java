@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.Locale;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +31,13 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
 public class SiteController {
+	
+	private static final int AMOUNT_OF_RECENTLY_ADDED_SERIES = 10; // NOPMD: LongVariable
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
@@ -40,12 +45,19 @@ public class SiteController {
 	private final SeriesService seriesService;
 	
 	@RequestMapping(value = Url.INDEX_PAGE, method = RequestMethod.GET)
-	public String showIndexPage(Model model) {
+	public String showIndexPage(Model model, Locale userLocale) {
 		model.addAttribute("categoryCounter", categoryService.countAll());
 		model.addAttribute("countryCounter", countryService.countAll());
 		model.addAttribute("seriesCounter", seriesService.countAll());
 		model.addAttribute("stampsCounter", seriesService.countAllStamps());
 		model.addAttribute("collectionsCounter", collectionService.countCollectionsOfUsers());
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute(
+			"recentlyAddedSeries",
+			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang)
+		);
+		
 		return "site/index";
 	}
 	

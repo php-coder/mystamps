@@ -23,7 +23,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
@@ -37,6 +40,7 @@ import ru.mystamps.web.support.togglz.FeatureConfig;
 	LiquibaseConfig.class,
 	MailConfig.class,
 	SecurityConfig.class,
+	DaoConfig.class,
 	ServicesConfig.class,
 	StrategiesConfig.class
 })
@@ -58,6 +62,16 @@ public class ApplicationContext {
 		messageSource.setFallbackToSystemLocale(false);
 		
 		return messageSource;
+	}
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
+		PropertySourcesPlaceholderConfigurer configurer =
+			new PropertySourcesPlaceholderConfigurer();
+		configurer.setLocations(new Resource[] {
+			new ClassPathResource("sql/series_dao_queries.properties")
+		});
+		return configurer;
 	}
 	
 	@Bean

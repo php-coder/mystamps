@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
@@ -51,6 +52,7 @@ public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
 	private final SeriesDao seriesDao;
+	private final JdbcSeriesDao jdbcSeriesDao;
 	private final ImageService imageService;
 	
 	@Override
@@ -189,6 +191,14 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
 		return seriesDao.findByAsSeriesInfo(collection.getId(), lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
+		Validate.isTrue(quantity > 0, "Quantity of recently added series must be greater than 0");
+		
+		return jdbcSeriesDao.findLastAdded(quantity, lang);
 	}
 	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, Series series) {

@@ -52,7 +52,7 @@
 		</div>
 		<div class="row-fluid">
 			<div id="content" class="span12">
-				<div class="span10">
+				<div class="span6">
 					<nav sec:authorize="hasAnyAuthority('CREATE_CATEGORY', 'CREATE_COUNTRY', 'CREATE_SERIES')">
 						<p th:text="|#{t_you_may}:|">You may</p>
 						<ul>
@@ -67,6 +67,98 @@
 							</li>
 						</ul>
 					</nav>
+				</div>
+				<div class="span4">
+					<p>
+						<strong th:text="|#{t_recently_added_series}:|">Recently added series:</strong>
+					</p>
+					<div th:remove="all-but-first">
+						<p th:each="series : ${recentlyAddedSeries}">
+							<span th:if="${series.category.id != null}" th:remove="tag">
+								<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+							</span>
+							
+							<span th:if="${series.country.id != null}" th:remove="tag">
+								<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+							</span>
+							
+							<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+								<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>
+								<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
+								<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								1997, 8&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								2009, 10&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								2003, 11&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								4&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								2002, 12&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								1993, 19&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								4&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								11&nbsp;item(s) (without perforation)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								2014, 1&nbsp;item(s)
+							</a>
+						</p>
+						<p>
+							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+							<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+							<a href="../series/info.html">
+								1996, 16&nbsp;item(s) (without perforation)
+							</a>
+						</p>
+					</div>
 				</div>
 				<div class="span2">
 					<p>

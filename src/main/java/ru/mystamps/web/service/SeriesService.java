@@ -36,4 +36,5 @@ public interface SeriesService {
 	Iterable<SeriesInfoDto> findBy(Category category, String lang);
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);
+	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
 }
