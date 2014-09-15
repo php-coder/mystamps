@@ -28,6 +28,10 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SEND_ACTIVATION_MAIL,
 	
+	@Label("Show list of recently added series on index page")
+	@EnabledByDefault
+	SHOW_RECENT_SERIES_ON_INDEX_PAGE,
+	
 	@Label("Possibility to user to add series to collection")
 	@EnabledByDefault
 	ADD_SERIES_TO_COLLECTION;
