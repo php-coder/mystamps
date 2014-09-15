@@ -172,6 +172,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Iterable<SeriesInfoDto> findBy(Category category, String lang) {
 		Validate.isTrue(category != null, "Category must be non null");
 		
