@@ -186,6 +186,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Iterable<SeriesInfoDto> findBy(Collection collection, String lang) {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
