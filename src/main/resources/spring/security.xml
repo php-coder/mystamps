@@ -12,7 +12,7 @@
 	
 	<http
 		use-expressions="true"
-		path-type="regex"
+		request-matcher="regex"
 		entry-point-ref="http401UnauthorizedEntryPoint">
 		
 		<form-login
