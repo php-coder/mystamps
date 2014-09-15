@@ -179,6 +179,7 @@ public class SeriesServiceImpl implements SeriesService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Iterable<SeriesInfoDto> findBy(Country country, String lang) {
 		Validate.isTrue(country != null, "Country must be non null");
 		
