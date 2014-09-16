@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
@@ -26,6 +27,7 @@ public interface CountryService {
 	Country add(AddCountryDto dto, User user);
 	Iterable<EntityInfoDto> findAll(String lang);
 	long countAll();
+	long countCountriesOf(Collection collection);
 	int countByName(String name);
 	int countByNameRu(String name);
 }

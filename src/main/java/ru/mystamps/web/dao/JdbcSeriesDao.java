@@ -21,4 +21,6 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 
 public interface JdbcSeriesDao {
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	long countSeriesOfCollection(Integer collectionId);
+	long countStampsOfCollection(Integer collectionId);
 }

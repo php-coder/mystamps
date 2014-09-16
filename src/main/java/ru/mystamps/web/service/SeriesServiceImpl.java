@@ -134,6 +134,24 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countSeriesOf(Collection collection) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return jdbcSeriesDao.countSeriesOfCollection(collection.getId());
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countStampsOf(Collection collection) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return jdbcSeriesDao.countStampsOfCollection(collection.getId());
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public int countByMichelNumber(String michelNumberCode) {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");

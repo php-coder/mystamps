@@ -29,6 +29,8 @@ public interface SeriesService {
 	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
 	long countAll();
 	long countAllStamps();
+	long countSeriesOf(Collection collection);
+	long countStampsOf(Collection collection);
 	int countByMichelNumber(String michelNumberCode);
 	int countByScottNumber(String scottNumberCode);
 	int countByYvertNumber(String yvertNumberCode);

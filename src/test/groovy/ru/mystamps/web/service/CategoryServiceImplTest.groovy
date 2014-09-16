@@ -21,6 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CategoryDao
+import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
@@ -33,7 +34,8 @@ class CategoryServiceImplTest extends Specification {
 	private User user
 	
 	private CategoryDao categoryDao = Mock()
-	private CategoryService service = new CategoryServiceImpl(categoryDao)
+	private JdbcCategoryDao jdbcCategoryDao = Mock()
+	private CategoryService service = new CategoryServiceImpl(categoryDao, jdbcCategoryDao)
 	
 	def setup() {
 		form = new AddCategoryForm()

@@ -15,19 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao;
 
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.EntityInfoDto;
-
-public interface CategoryService {
-	Category add(AddCategoryDto dto, User user);
-	Iterable<EntityInfoDto> findAll(String lang);
-	long countAll();
-	long countCategoriesOf(Collection collection);
-	int countByName(String name);
-	int countByNameRu(String name);
+public interface JdbcCategoryDao {
+	long countCategoriesOfCollection(Integer collectionId);
 }

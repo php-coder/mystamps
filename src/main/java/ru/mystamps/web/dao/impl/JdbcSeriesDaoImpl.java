@@ -41,6 +41,12 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_last_added_ru_sql}")
 	private String findLastAddedSeriesRuSql;
 	
+	@Value("${series.count_series_of_collection}")
+	private String countSeriesOfCollectionSql;
+	
+	@Value("${series.count_stamps_of_collection}")
+	private String countStampsOfCollectionSql;
+	
 	public JdbcSeriesDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
@@ -58,6 +64,24 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 			sql,
 			Collections.singletonMap("quantity", quantity),
 			SERIES_INFO_DTO_ROW_MAPPER
+		);
+	}
+	
+	@Override
+	public long countSeriesOfCollection(Integer collectionId) {
+		return jdbcTemplate.queryForObject(
+			countSeriesOfCollectionSql,
+			Collections.singletonMap("collection_id", collectionId),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countStampsOfCollection(Integer collectionId) {
+		return jdbcTemplate.queryForObject(
+			countStampsOfCollectionSql,
+			Collections.singletonMap("collection_id", collectionId),
+			Long.class
 		);
 	}
 	

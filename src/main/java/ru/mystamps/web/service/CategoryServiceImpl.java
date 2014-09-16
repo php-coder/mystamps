@@ -29,7 +29,9 @@ import org.slf4j.LoggerFactory;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
@@ -40,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
 	private final CategoryDao categoryDao;
+	private final JdbcCategoryDao jdbcCategoryDao;
 	
 	@Override
 	@Transactional
@@ -77,6 +80,15 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public long countAll() {
 		return categoryDao.count();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countCategoriesOf(Collection collection) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return jdbcCategoryDao.countCategoriesOfCollection(collection.getId());
 	}
 	
 	@Override

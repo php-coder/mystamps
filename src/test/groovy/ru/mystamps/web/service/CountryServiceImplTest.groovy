@@ -21,6 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CountryDao
+import ru.mystamps.web.dao.JdbcCountryDao
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
@@ -33,7 +34,8 @@ class CountryServiceImplTest extends Specification {
 	private User user
 	
 	private CountryDao countryDao = Mock()
-	private CountryService service = new CountryServiceImpl(countryDao)
+	private JdbcCountryDao jdbcCountryDao = Mock()
+	private CountryService service = new CountryServiceImpl(countryDao, jdbcCountryDao)
 	
 	def setup() {
 		form = new AddCountryForm()

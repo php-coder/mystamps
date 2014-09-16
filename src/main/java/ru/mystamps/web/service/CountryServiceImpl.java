@@ -29,6 +29,8 @@ import org.slf4j.LoggerFactory;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
@@ -40,6 +42,7 @@ public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
 	private final CountryDao countryDao;
+	private final JdbcCountryDao jdbcCountryDao;
 	
 	@Override
 	@Transactional
@@ -77,6 +80,15 @@ public class CountryServiceImpl implements CountryService {
 	@Transactional(readOnly = true)
 	public long countAll() {
 		return countryDao.count();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countCountriesOf(Collection collection) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return jdbcCountryDao.countCountriesOfCollection(collection.getId());
 	}
 	
 	@Override

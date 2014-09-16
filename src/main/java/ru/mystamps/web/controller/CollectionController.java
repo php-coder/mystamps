@@ -29,13 +29,18 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
 public class CollectionController {
 	
+	private final CategoryService categoryService;
+	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
 	@RequestMapping(value = Url.INFO_COLLECTION_PAGE, method = RequestMethod.GET)
@@ -51,7 +56,15 @@ public class CollectionController {
 		model.addAttribute("ownerName", collection.getOwner().getName());
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("seriesOfCollection", seriesService.findBy(collection, lang));
+		Iterable<SeriesInfoDto> seriesOfCollection = seriesService.findBy(collection, lang);
+		model.addAttribute("seriesOfCollection", seriesOfCollection);
+		
+		if (seriesOfCollection.iterator().hasNext()) {
+			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collection));
+			model.addAttribute("countryCounter", countryService.countCountriesOf(collection));
+			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collection));
+			model.addAttribute("stampsCounter", seriesService.countStampsOf(collection));
+		}
 		
 		return "collection/info";
 	}

@@ -53,7 +53,10 @@ public class ControllersConfig {
 	
 	@Bean
 	public CollectionController getCollectionController() {
-		return new CollectionController(servicesConfig.getSeriesService());
+		return new CollectionController(
+			servicesConfig.getCategoryService(),
+			servicesConfig.getCountryService(),
+			servicesConfig.getSeriesService());
 	}
 	
 	@Bean
