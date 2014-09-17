@@ -35,7 +35,8 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.EntityInfoDto;
+import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CountryServiceImpl implements CountryService {
@@ -57,6 +58,10 @@ public class CountryServiceImpl implements CountryService {
 		country.setName(dto.getName());
 		country.setNameRu(dto.getNameRu());
 		
+		String slug = SlugUtils.slugify(dto.getName());
+		Validate.isTrue(slug != null, "Slug for string '%s' is null", dto.getName());
+		country.setSlug(slug);
+		
 		Date now = new Date();
 		country.getMetaInfo().setCreatedAt(now);
 		country.getMetaInfo().setUpdatedAt(now);
@@ -72,7 +77,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<EntityInfoDto> findAll(String lang) {
+	public Iterable<SelectEntityDto> findAll(String lang) {
 		return countryDao.findAllAsSelectEntries(lang);
 	}
 	

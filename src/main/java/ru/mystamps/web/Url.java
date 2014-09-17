@@ -55,7 +55,7 @@ public final class Url {
 	public static final String INFO_CATEGORY_PAGE    = "/category/{id}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
-	public static final String INFO_COUNTRY_PAGE     = "/country/{id}";
+	public static final String INFO_COUNTRY_PAGE     = "/country/{id}/{slug}";
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}";
 	
@@ -81,6 +81,7 @@ public final class Url {
 	public static Map<String, String> asMap() {
 		// There is not all urls but only those which used on views
 		Map<String, String> map = new HashMap<>();
+		map.put("PUBLIC_URL", PUBLIC_URL);
 		map.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
 		map.put("LOGIN_PAGE", LOGIN_PAGE);
 		map.put("LOGOUT_PAGE", LOGOUT_PAGE);

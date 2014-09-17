@@ -56,6 +56,7 @@ import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.EntityInfoDto;
+import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
@@ -103,7 +104,7 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("countries")
-	public Iterable<EntityInfoDto> getCountries(Locale userLocale) {
+	public Iterable<SelectEntityDto> getCountries(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		return countryService.findAll(lang);
 	}

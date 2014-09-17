@@ -71,7 +71,7 @@ public class CountryController {
 		Country country = countryService.add(form, currentUser);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(country.getId())
+			.buildAndExpand(country.getId(), country.getSlug())
 			.toString();
 		
 		return "redirect:" + dstUrl;

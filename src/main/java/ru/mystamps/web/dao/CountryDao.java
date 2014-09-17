@@ -22,19 +22,19 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.service.dto.EntityInfoDto;
+import ru.mystamps.web.service.dto.SelectEntityDto;
 
 public interface CountryDao extends PagingAndSortingRepository<Country, Integer> {
 	int countByName(String name);
 	int countByNameRu(String name);
 	
 	@Query(
-		"SELECT NEW ru.mystamps.web.service.dto.EntityInfoDto("
+		"SELECT NEW ru.mystamps.web.service.dto.SelectEntityDto("
 			+ "c.id, "
 			+ "CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
 		+ ") "
 		+ "FROM Country c "
 		+ "ORDER BY c.name"
 	)
-	Iterable<EntityInfoDto> findAllAsSelectEntries(@Param("lang") String lang);
+	Iterable<SelectEntityDto> findAllAsSelectEntries(@Param("lang") String lang);
 }

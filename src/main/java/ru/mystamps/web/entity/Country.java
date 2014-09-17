@@ -40,6 +40,7 @@ import ru.mystamps.web.util.LocaleUtils;
 public class Country implements LocalizedEntity {
 	
 	public static final int NAME_LENGTH = 50;
+	public static final int SLUG_LENGTH = NAME_LENGTH;
 	
 	@Id
 	@GeneratedValue
@@ -50,6 +51,9 @@ public class Country implements LocalizedEntity {
 	
 	@Column(name = "name_ru", length = NAME_LENGTH, nullable = false, unique = true)
 	private String nameRu;
+	
+	@Column(length = SLUG_LENGTH, nullable = false)
+	private String slug;
 	
 	@Embedded
 	private MetaInfo metaInfo; // NOPMD

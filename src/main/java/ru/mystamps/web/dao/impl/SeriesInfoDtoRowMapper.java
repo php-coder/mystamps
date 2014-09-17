@@ -37,6 +37,7 @@ class SeriesInfoDtoRowMapper implements RowMapper<SeriesInfoDto> {
 		Integer categoryId   = resultSet.getInt("category_id");
 		String categoryName  = resultSet.getString("category_name");
 		Integer countryId    = JdbcUtils.getInteger(resultSet, "country_id");
+		String countrySlug   = resultSet.getString("country_slug");
 		String countryName   = resultSet.getString("country_name");
 		
 		return new SeriesInfoDto(
@@ -44,6 +45,7 @@ class SeriesInfoDtoRowMapper implements RowMapper<SeriesInfoDto> {
 			categoryId,
 			categoryName,
 			countryId,
+			countrySlug,
 			countryName,
 			releaseDay,
 			releaseMonth,

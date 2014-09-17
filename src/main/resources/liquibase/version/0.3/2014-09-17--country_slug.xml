@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-slug-column-to-countries-table" author="php-coder" context="scheme">
+		<comment>Adds slug column to countries table</comment>
+		
+		<addColumn tableName="countries">
+			<column name="slug" type="VARCHAR(50)" afterColumn="name_ru" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="update-countries-slug" author="php-coder" context="test-data,prod-data">
+		<comment>Sets value of slug field to value of name field in lower case</comment>
+		
+		<update tableName="countries">
+			<column name="slug" valueComputed="LOWER(name)" />
+		</update>
+		
+	</changeSet>
+	
+	<changeSet id="make-slug-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks countries.slug field as NOT NULL</comment>
+		
+		<addNotNullConstraint tableName="countries" columnName="slug" columnDataType="VARCHAR(50)" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

@@ -15,19 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-public interface CountryService {
-	Country add(AddCountryDto dto, User user);
-	Iterable<SelectEntityDto> findAll(String lang);
-	long countAll();
-	long countCountriesOf(Collection collection);
-	int countByName(String name);
-	int countByNameRu(String name);
+@Getter
+@ToString
+@RequiredArgsConstructor
+public class LinkEntityDto {
+	private final Integer id;
+	private final String slug;
+	private final String name;
 }

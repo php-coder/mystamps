@@ -76,7 +76,7 @@
 							</dt>
 							<dd id="country_name">
 								<a href="../country/info.html"
-								   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id})}"
+								   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}"
 								   th:text="${series.country.getLocalizedName(#locale)}">
 									Italy
 								</a>

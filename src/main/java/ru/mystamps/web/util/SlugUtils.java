@@ -15,19 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.util;
 
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import java.util.Locale;
 
-public interface CountryService {
-	Country add(AddCountryDto dto, User user);
-	Iterable<SelectEntityDto> findAll(String lang);
-	long countAll();
-	long countCountriesOf(Collection collection);
-	int countByName(String name);
-	int countByNameRu(String name);
+import org.apache.commons.lang3.Validate;
+
+public final class SlugUtils {
+	
+	private SlugUtils() {
+	}
+	
+	public static String slugify(String text) {
+		Validate.isTrue(text != null, "Text must be non null");
+		
+		return text.toLowerCase(Locale.ENGLISH)
+			// replace all characters except letters and digits to hyphen
+			.replaceAll("[^\\p{Alnum}]", "-")
+			// replace multiple hyphens by one
+			.replaceAll("-{2,}", "-")
+			// remove leading hyphen
+			.replaceAll("^-", "")
+			// remove ending hyphen
+			.replaceAll("-$", "");
+	}
+	
 }

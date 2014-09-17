@@ -29,7 +29,7 @@ public class SeriesInfoDto {
 	private final EntityInfoDto category;
 	
 	@SuppressWarnings("PMD.SingularField")
-	private final EntityInfoDto country;
+	private final LinkEntityDto country;
 	
 	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseDay;
@@ -50,13 +50,13 @@ public class SeriesInfoDto {
 	public SeriesInfoDto(
 			Integer id,
 			Integer categoryId, String categoryName,
-			Integer countryId, String countryName,
+			Integer countryId, String countrySlug, String countryName,
 			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
 			Integer quantity,
 			Boolean perforated) {
 		this.id = id;
 		this.category = new EntityInfoDto(categoryId, categoryName);
-		this.country = new EntityInfoDto(countryId, countryName);
+		this.country = new LinkEntityDto(countryId, countrySlug, countryName);
 		this.releaseDay = releaseDay;
 		this.releaseMonth = releaseMonth;
 		this.releaseYear = releaseYear;

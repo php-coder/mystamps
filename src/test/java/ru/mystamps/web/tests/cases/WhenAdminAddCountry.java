@@ -222,7 +222,9 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
 		page.addCountry(TEST_COUNTRY_NAME_EN, TEST_COUNTRY_NAME_RU);
 		
-		String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{id}", "\\d+");
+		String expectedUrl = Url.INFO_COUNTRY_PAGE
+			.replace("{id}", "\\d+")
+			.replace("{slug}", TEST_COUNTRY_NAME_EN.toLowerCase());
 		
 		assertThat(page.getCurrentUrl()).matches(expectedUrl);
 		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME_EN);

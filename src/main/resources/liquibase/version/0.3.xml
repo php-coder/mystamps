@@ -10,5 +10,6 @@
 	<include file="0.3/2014-06-12--ru_country_name.xml" relativeToChangelogFile="true" />
 	<include file="0.3/2014-08-16--users_activation_lang.xml" relativeToChangelogFile="true" />
 	<include file="0.3/2014-08-30--collections.xml" relativeToChangelogFile="true" />
+	<include file="0.3/2014-09-17--country_slug.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
