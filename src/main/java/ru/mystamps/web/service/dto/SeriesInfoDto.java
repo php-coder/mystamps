@@ -26,7 +26,7 @@ public class SeriesInfoDto {
 	private final Integer id;
 	
 	@SuppressWarnings("PMD.SingularField")
-	private final EntityInfoDto category;
+	private final LinkEntityDto category;
 	
 	@SuppressWarnings("PMD.SingularField")
 	private final LinkEntityDto country;
@@ -49,13 +49,13 @@ public class SeriesInfoDto {
 	@SuppressWarnings({"checkstyle:parameternumber", "PMD.ExcessiveParameterList"})
 	public SeriesInfoDto(
 			Integer id,
-			Integer categoryId, String categoryName,
+			Integer categoryId, String categorySlug, String categoryName,
 			Integer countryId, String countrySlug, String countryName,
 			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
 			Integer quantity,
 			Boolean perforated) {
 		this.id = id;
-		this.category = new EntityInfoDto(categoryId, categoryName);
+		this.category = new LinkEntityDto(categoryId, categorySlug, categoryName);
 		this.country = new LinkEntityDto(countryId, countrySlug, countryName);
 		this.releaseDay = releaseDay;
 		this.releaseMonth = releaseMonth;

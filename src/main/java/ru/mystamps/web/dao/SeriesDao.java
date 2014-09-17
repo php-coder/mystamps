@@ -46,7 +46,7 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
-			+ "cat.id, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
+			+ "cat.id, cat.slug, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
 			+ "c.id, c.slug, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
 			+ "s.releaseDay, "
 			+ "s.releaseMonth, "
@@ -67,7 +67,7 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
-			+ "cat.id, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
+			+ "cat.id, cat.slug, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
 			+ "c.id, c.slug, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
 			+ "s.releaseDay, "
 			+ "s.releaseMonth, "
@@ -88,7 +88,7 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
-			+ "cat.id, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
+			+ "cat.id, cat.slug, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
 			+ "c.id, c.slug, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
 			+ "s.releaseDay, "
 			+ "s.releaseMonth, "

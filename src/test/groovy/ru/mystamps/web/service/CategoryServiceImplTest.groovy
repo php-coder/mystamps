@@ -25,7 +25,7 @@ import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
-import ru.mystamps.web.service.dto.EntityInfoDto
+import ru.mystamps.web.service.dto.SelectEntityDto
 import ru.mystamps.web.tests.DateUtils
 
 class CategoryServiceImplTest extends Specification {
@@ -163,15 +163,15 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "findAll(String) should call dao"() {
 		given:
-			EntityInfoDto category1 = new EntityInfoDto(1, 'First Category')
+			SelectEntityDto category1 = new SelectEntityDto(1, 'First Category')
 		and:
-			EntityInfoDto category2 = new EntityInfoDto(2, 'Second Category')
+			SelectEntityDto category2 = new SelectEntityDto(2, 'Second Category')
 		and:
-			List<EntityInfoDto> expectedCategories = [ category1, category2 ]
+			List<SelectEntityDto> expectedCategories = [ category1, category2 ]
 		and:
 			categoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
 		when:
-			Iterable<EntityInfoDto> resultCategories = service.findAll('fr')
+			Iterable<SelectEntityDto> resultCategories = service.findAll('fr')
 		then:
 			resultCategories == expectedCategories
 	}

@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+		<link rel="canonical" href="" th:href="@{${PUBLIC_URL} + ${INFO_CATEGORY_PAGE}(id=${category.id},slug=${category.slug})}" />
 	</head>
 	<body lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}">
 		<div class="row-fluid">

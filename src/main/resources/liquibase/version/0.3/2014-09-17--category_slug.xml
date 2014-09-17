@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-slug-column-to-categories-table" author="php-coder" context="scheme">
+		<comment>Adds slug column to categories table</comment>
+		
+		<addColumn tableName="categories">
+			<column name="slug" type="VARCHAR(50)" afterColumn="name_ru" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="update-categories-slug" author="php-coder" context="test-data,prod-data">
+		<comment>Sets value of slug field to value of name field in lower case</comment>
+		
+		<update tableName="categories">
+			<column name="slug" valueComputed="LOWER(REPLACE(name, ' ', '-'))" />
+		</update>
+		
+	</changeSet>
+	
+	<changeSet id="make-slug-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks categories.slug field as NOT NULL</comment>
+		
+		<addNotNullConstraint tableName="categories" columnName="slug" columnDataType="VARCHAR(50)" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

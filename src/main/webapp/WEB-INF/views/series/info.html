@@ -64,7 +64,7 @@
 						</dt>
 						<dd id="category_name">
 							<a href="../category/info.html"
-							   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id})}"
+							   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}"
 							   th:text="${series.category.getLocalizedName(#locale)}">
 								Animals
 							</a>

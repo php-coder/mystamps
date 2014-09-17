@@ -203,7 +203,9 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	public void shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation() {
 		page.addCategory(TEST_CATEGORY_NAME_EN, TEST_CATEGORY_NAME_RU);
 		
-		String expectedUrl = Url.INFO_CATEGORY_PAGE.replace("{id}", "\\d+");
+		String expectedUrl = Url.INFO_CATEGORY_PAGE
+			.replace("{id}", "\\d+")
+			.replace("{slug}", TEST_CATEGORY_NAME_EN.toLowerCase());
 		
 		assertThat(page.getCurrentUrl()).matches(expectedUrl);
 		assertThat(page.getHeader()).isEqualTo(TEST_CATEGORY_NAME_EN);

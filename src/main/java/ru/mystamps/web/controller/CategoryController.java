@@ -74,7 +74,7 @@ public class CategoryController {
 		Category category = categoryService.add(form, currentUser);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(category.getId())
+			.buildAndExpand(category.getId(), category.getSlug())
 			.toString();
 		
 		return "redirect:" + dstUrl;

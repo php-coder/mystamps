@@ -35,7 +35,8 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.EntityInfoDto;
+import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -57,6 +58,10 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setName(dto.getName());
 		category.setNameRu(dto.getNameRu());
 		
+		String slug = SlugUtils.slugify(dto.getName());
+		Validate.isTrue(slug != null, "Slug for string '%s' is null", dto.getName());
+		category.setSlug(slug);
+		
 		Date now = new Date();
 		category.getMetaInfo().setCreatedAt(now);
 		category.getMetaInfo().setUpdatedAt(now);
@@ -72,7 +77,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<EntityInfoDto> findAll(String lang) {
+	public Iterable<SelectEntityDto> findAll(String lang) {
 		return categoryDao.findAllAsSelectEntries(lang);
 	}
 	
