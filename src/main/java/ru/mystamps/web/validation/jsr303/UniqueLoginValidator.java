@@ -40,7 +40,8 @@ public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, St
 			return true;
 		}
 		
-		if (userService.countByLogin(value) > 0) {
+		boolean loginExists = userService.countByLogin(value) > 0;
+		if (loginExists) {
 			return false;
 		}
 		
