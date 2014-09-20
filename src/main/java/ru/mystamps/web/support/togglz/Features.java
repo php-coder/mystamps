@@ -36,6 +36,10 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SHOW_COLLECTION_STATISTICS,
 	
+	@Label("Show charts on collection page")
+	@EnabledByDefault
+	SHOW_COLLECTION_CHARTS,
+	
 	@Label("Possibility to user to add series to collection")
 	@EnabledByDefault
 	ADD_SERIES_TO_COLLECTION;

@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,6 +109,15 @@ public class CountryServiceImpl implements CountryService {
 	public int countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name on Russian should be non null");
 		return countryDao.countByNameRu(name);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Map<String, Integer> getStatisticsOf(Collection collection, String lang) {
+		Validate.isTrue(collection != null, "Collection must be non null");
+		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+		
+		return jdbcCountryDao.getStatisticsOf(collection.getId(), lang);
 	}
 	
 }

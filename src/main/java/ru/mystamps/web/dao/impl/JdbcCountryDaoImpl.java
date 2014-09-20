@@ -18,20 +18,30 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 
 public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
+	private static final RowMapper<Pair<String, Integer>> STRING_INTEGER_PAIR_ROW_MAPPER =
+		new StringIntegerPairRowMapper("name", "counter");
+	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Value("${country.count_countries_of_collection}")
 	private String countCountriesOfCollectionSql;
+	
+	@Value("${country.count_stamps_by_countries}")
+	private String countStampsByCountriesSql;
 	
 	public JdbcCountryDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -44,6 +54,27 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 			Collections.singletonMap("collection_id", collectionId),
 			Long.class
 		);
+	}
+	
+	@Override
+	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("collection_id", collectionId);
+		params.put("lang", lang);
+		
+		// TODO: find a better way of extracting results
+		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
+			countStampsByCountriesSql,
+			params,
+			STRING_INTEGER_PAIR_ROW_MAPPER
+		);
+		
+		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
+		for (Pair<String, Integer> pair : rawResult) {
+			result.put(pair.getFirst(), pair.getSecond());
+		}
+		
+		return result;
 	}
 	
 }

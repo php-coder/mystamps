@@ -15,11 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.impl;
 
-import java.util.Map;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface JdbcCountryDao {
-	long countCountriesOfCollection(Integer collectionId);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
+@Getter
+@RequiredArgsConstructor
+public class Pair<F, S> {
+	private final F first;
+	private final S second;
 }

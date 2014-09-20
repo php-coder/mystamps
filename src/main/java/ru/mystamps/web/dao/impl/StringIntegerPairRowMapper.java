@@ -15,11 +15,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.impl;
 
-import java.util.Map;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public interface JdbcCountryDao {
-	long countCountriesOfCollection(Integer collectionId);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
+import org.springframework.jdbc.core.RowMapper;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+class StringIntegerPairRowMapper implements RowMapper<Pair<String, Integer>> {
+	
+	private final String firstFieldName;
+	private final String secondFieldName;
+	
+	@Override
+	public Pair<String, Integer> mapRow(ResultSet resultSet, int i) throws SQLException {
+		String firstValue   = resultSet.getString(firstFieldName);
+		Integer secondValue = JdbcUtils.getInteger(resultSet, secondFieldName);
+		
+		return new Pair<>(firstValue, secondValue);
+	}
+	
 }

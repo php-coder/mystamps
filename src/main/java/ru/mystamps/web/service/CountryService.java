@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Map;
+
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
@@ -30,4 +32,5 @@ public interface CountryService {
 	long countCountriesOf(Collection collection);
 	int countByName(String name);
 	int countByNameRu(String name);
+	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
 }

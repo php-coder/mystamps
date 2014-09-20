@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<div class="row-fluid">
-			<div id="content" class="span10">
+			<div id="content" class="span4">
 				
 				<!--/*/
 				<div class="row-fluid span12" th:if="${justAddedSeries}">
@@ -115,6 +115,16 @@
 					</li>
 				</ul>
 			</div>
+			<div class="span6">
+				<div class="row-fluid" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+					<div class="span6">
+						<div id="categories-chart"></div>
+					</div>
+					<div class="span6">
+						<div id="countries-chart"></div>
+					</div>
+				</div>
+			</div>
 			<div class="span2">
 				<!--/*/
 				<th:block togglz:active="SHOW_COLLECTION_STATISTICS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
@@ -140,5 +150,102 @@
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/bootstrap/2.3.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		
+		<!--/*/
+		<th:block togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+		/*/-->
+			<!-- Charts -->
+			<script src="https://www.google.com/jsapi"></script>
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+				
+				var drawChart = function(containerId, title, table) {
+					var options = {
+						title: title,
+						pieHole: 0.3
+					};
+					var chart = new google.visualization.PieChart(document.getElementById(containerId));
+					chart.draw(table, options);
+				};
+				
+				var createCategoriesDataTable = function() {
+					var table = new google.visualization.DataTable();
+					table.addColumn('string', 'Category');
+					table.addColumn('number', 'Quantity of stamps');
+					
+					/*[+
+					var obj = [[${statOfCollectionByCategories}]];
+					for (field in obj) {
+						table.addRow([field, obj[field]]);
+					}
+					+]*/
+					
+					/*[- */
+					table.addRows([
+						['Animals', 94],
+						['Prehistoric animals', 37],
+						['Sport', 1]
+					]);
+					/* -]*/
+					
+					return table;
+				};
+				
+				var drawCategoriesChart = function() {
+					drawChart(
+						'categories-chart',
+						/*[[#{t_stamps_by_categories}]]*/'Stamps by categories',
+						createCategoriesDataTable()
+					);
+				};
+				
+				var createCountriesDataTable = function() {
+					var table = new google.visualization.DataTable();
+					table.addColumn('string', 'Country');
+					table.addColumn('number', 'Quantity of stamps');
+					
+					/*[+
+					var obj = [[${statOfCollectionByCountries}]];
+					for (field in obj) {
+						table.addRow([field, obj[field]]);
+					}
+					+]*/
+					
+					/*[- */
+					table.addRows([
+						['Russia', 5],
+						['USA', 2],
+						['Australia', 11],
+						['Canada', 3],
+						['Germany', 2],
+						['China', 1],
+						['Congo', 20],
+						['Brazil', 4],
+						['Korea', 2]
+					]);
+					/* -]*/
+					
+					return table;
+				};
+				
+				var drawCountriesChart = function() {
+					drawChart(
+						'countries-chart',
+						/*[[#{t_stamps_by_countries}]]*/'Stamps by countries',
+						createCountriesDataTable()
+					);
+				};
+				
+				google.load("visualization", "1", {packages:["corechart"]});
+				google.setOnLoadCallback(function() {
+					drawCategoriesChart();
+					drawCountriesChart();
+				});
+				
+				/*]]>*/
+			</script>
+		<!--/*/
+		</th:block>
+		/*/-->
 	</body>
 </html>

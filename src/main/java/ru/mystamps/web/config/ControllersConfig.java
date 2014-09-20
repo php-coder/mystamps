@@ -19,6 +19,7 @@ package ru.mystamps.web.config;
 
 import javax.inject.Inject;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +30,9 @@ public class ControllersConfig {
 	
 	@Inject
 	private ServicesConfig servicesConfig;
+	
+	@Inject
+	private MessageSource messageSource;
 	
 	@Bean
 	public AccountController getAccountController() {
@@ -56,7 +60,9 @@ public class ControllersConfig {
 		return new CollectionController(
 			servicesConfig.getCategoryService(),
 			servicesConfig.getCountryService(),
-			servicesConfig.getSeriesService());
+			servicesConfig.getSeriesService(),
+			messageSource
+		);
 	}
 	
 	@Bean

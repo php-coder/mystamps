@@ -18,7 +18,9 @@
 package ru.mystamps.web.controller;
 
 import java.util.Locale;
+import java.util.Map;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +44,7 @@ public class CollectionController {
 	private final CategoryService categoryService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
+	private final MessageSource messageSource;
 	
 	@RequestMapping(value = Url.INFO_COLLECTION_PAGE, method = RequestMethod.GET)
 	public String showInfo(
@@ -64,9 +67,31 @@ public class CollectionController {
 			model.addAttribute("countryCounter", countryService.countCountriesOf(collection));
 			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collection));
 			model.addAttribute("stampsCounter", seriesService.countStampsOf(collection));
+			
+			model.addAttribute(
+				"statOfCollectionByCategories",
+				categoryService.getStatisticsOf(collection, lang)
+			);
+			model.addAttribute(
+				"statOfCollectionByCountries",
+				getCountriesStatistics(collection, lang)
+			);
 		}
 		
 		return "collection/info";
 	}
-	
+
+	private Map<String, Integer> getCountriesStatistics(Collection collection, String lang) {
+		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collection, lang);
+		
+		// manually localize "Unknown" country's name
+		if (countriesStat.containsKey("Unknown")) {
+			String message = messageSource.getMessage("t_unspecified", null, new Locale(lang));
+			countriesStat.put(message, countriesStat.get("Unknown"));
+			countriesStat.remove("Unknown");
+		}
+		
+		return countriesStat;
+	}
+
 }
