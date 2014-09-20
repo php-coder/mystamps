@@ -234,7 +234,9 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 		
 		series.setReleaseMonth(dto.getMonth());
-		series.setReleaseDay(dto.getDay()); // even if day is null it won't change anything
+		
+		// even if day is null it won't change anything
+		series.setReleaseDay(dto.getDay());
 	}
 	
 	private static <T extends StampsCatalog> Set<T> getCatalogNumbersOrNull(
