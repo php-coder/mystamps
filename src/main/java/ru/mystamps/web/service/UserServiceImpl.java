@@ -40,6 +40,7 @@ import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.togglz.Features;
+import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.entity.User.Role.USER;
 
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
 		
 		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(dto.getEmail());
-		activation.setLang(lang == null ? "en" : lang.getLanguage());
+		activation.setLang(LocaleUtils.getLanguageOrDefault(lang, "en"));
 		activation.setCreatedAt(new Date());
 		usersActivationDao.save(activation);
 

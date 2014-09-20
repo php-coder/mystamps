@@ -43,6 +43,24 @@ class LocaleUtilsTest extends Specification {
 	}
 	
 	//
+	// Tests for getLanguageOrDefault()
+	//
+	
+	@Unroll
+	def "getLanguageOrDefault() should returns '#expected' for #locale/#value"(Locale locale, String value, String expected) {
+		when:
+			String result = LocaleUtils.getLanguageOrDefault(locale, value)
+		then:
+			result == expected
+		where:
+			locale         | value || expected
+			null           | null  || null
+			null           | "en"  || "en"
+			Locale.ENGLISH | "ru"  || "en"
+			Locale.ENGLISH | null  || "en"
+	}
+	
+	//
 	// Tests for getLocalizedName()
 	//
 	

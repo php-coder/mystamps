@@ -33,6 +33,14 @@ public final class LocaleUtils {
 		return locale != null ? locale.getLanguage() : null;
 	}
 	
+	public static String getLanguageOrDefault(Locale locale, String defaultValue) {
+		if (locale == null) {
+			return defaultValue;
+		}
+		
+		return locale.getLanguage();
+	}
+	
 	public static String getLocalizedName(Locale locale, LocalizedEntity entity) {
 		Validate.isTrue(entity != null, "LocalizedEntity must be non null");
 		
