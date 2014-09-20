@@ -103,7 +103,7 @@ public class MailServiceImpl implements MailService {
 			Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", activation.getActivationKey());
 		
 		Map<String, String> ctx = new HashMap<>();
-		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL);
+		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL); // NOCHECKSTYLE: AvoidInlineConditionalsCheck
 		ctx.put("activation_url_with_key", activationUrl);
 		ctx.put("expire_after_days", String.valueOf(CronService.PURGE_AFTER_DAYS));
 		
