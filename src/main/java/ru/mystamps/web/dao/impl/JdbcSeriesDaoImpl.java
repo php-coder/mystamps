@@ -18,6 +18,8 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -38,9 +40,6 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_last_added_sql}")
 	private String findLastAddedSeriesSql;
 	
-	@Value("${series.find_last_added_ru_sql}")
-	private String findLastAddedSeriesRuSql;
-	
 	@Value("${series.count_series_of_collection}")
 	private String countSeriesOfCollectionSql;
 	
@@ -53,18 +52,11 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Override
 	public Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang) {
-		String sql;
-		if ("ru".equals(lang)) {
-			sql = findLastAddedSeriesRuSql;
-		} else {
-			sql = findLastAddedSeriesSql;
-		}
+		Map<String, Object> params = new HashMap<>();
+		params.put("quantity", quantity);
+		params.put("lang", lang);
 		
-		return jdbcTemplate.query(
-			sql,
-			Collections.singletonMap("quantity", quantity),
-			SERIES_INFO_DTO_ROW_MAPPER
-		);
+		return jdbcTemplate.query(findLastAddedSeriesSql, params, SERIES_INFO_DTO_ROW_MAPPER);
 	}
 	
 	@Override
