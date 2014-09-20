@@ -47,7 +47,8 @@ public class UniqueMichelNumbersValidator
 		
 		Set<MichelCatalog> michelNumbers = CatalogUtils.fromString(value, MichelCatalog.class);
 		for (MichelCatalog michelNumber : michelNumbers) {
-			if (seriesService.countByMichelNumber(michelNumber.getCode()) > 0) {
+			boolean numberExists = seriesService.countByMichelNumber(michelNumber.getCode()) > 0;
+			if (numberExists) {
 				return false;
 			}
 		}

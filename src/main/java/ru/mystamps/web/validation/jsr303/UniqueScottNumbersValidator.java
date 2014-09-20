@@ -47,7 +47,8 @@ public class UniqueScottNumbersValidator
 		
 		Set<ScottCatalog> scottNumbers = CatalogUtils.fromString(value, ScottCatalog.class);
 		for (ScottCatalog scottNumber : scottNumbers) {
-			if (seriesService.countByScottNumber(scottNumber.getCode()) > 0) {
+			boolean numberExists = seriesService.countByScottNumber(scottNumber.getCode()) > 0;
+			if (numberExists) {
 				return false;
 			}
 		}

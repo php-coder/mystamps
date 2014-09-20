@@ -47,7 +47,8 @@ public class UniqueYvertNumbersValidator
 		
 		Set<YvertCatalog> yvertNumbers = CatalogUtils.fromString(value, YvertCatalog.class);
 		for (YvertCatalog yvertNumber : yvertNumbers) {
-			if (seriesService.countByYvertNumber(yvertNumber.getCode()) > 0) {
+			boolean numberExists = seriesService.countByYvertNumber(yvertNumber.getCode()) > 0;
+			if (numberExists) {
 				return false;
 			}
 		}

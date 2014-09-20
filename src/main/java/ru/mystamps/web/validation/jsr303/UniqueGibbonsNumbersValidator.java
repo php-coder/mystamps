@@ -47,7 +47,8 @@ public class UniqueGibbonsNumbersValidator
 		
 		Set<GibbonsCatalog> gibbonsNumbers = CatalogUtils.fromString(value, GibbonsCatalog.class);
 		for (GibbonsCatalog gibbonsNumber : gibbonsNumbers) {
-			if (seriesService.countByGibbonsNumber(gibbonsNumber.getCode()) > 0) {
+			boolean numberExists = seriesService.countByGibbonsNumber(gibbonsNumber.getCode()) > 0;
+			if (numberExists) {
 				return false;
 			}
 		}
