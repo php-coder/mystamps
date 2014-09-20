@@ -237,7 +237,10 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setReleaseDay(dto.getDay()); // even if day is null it won't change anything
 	}
 	
-	private static <T extends StampsCatalog> Set<T> getCatalogNumbersOrNull(String catalogNumbers, Class<T> clazz) {
+	private static <T extends StampsCatalog> Set<T> getCatalogNumbersOrNull(
+		String catalogNumbers,
+		Class<T> clazz) {
+		
 		Set<T> result = CatalogUtils.fromString(catalogNumbers, clazz);
 		if (result.isEmpty()) {
 			return null;
