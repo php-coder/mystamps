@@ -29,6 +29,7 @@
 	<rule ref="rulesets/java/coupling.xml">
 		<exclude name="LawOfDemeter" />
 		<exclude name="LoosePackageCoupling" />
+		<exclude name="ExcessiveImports" />
 	</rule>
 	<rule ref="rulesets/java/logging-jakarta-commons.xml" />
 	<rule ref="rulesets/java/basic.xml" />
