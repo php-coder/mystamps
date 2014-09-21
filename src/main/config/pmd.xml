@@ -75,7 +75,9 @@
 		<exclude name="BeanMembersShouldSerialize" />
 	</rule>
 	<rule ref="rulesets/java/migrating.xml" />
-	<rule ref="rulesets/java/imports.xml" />
+	<rule ref="rulesets/java/imports.xml">
+		<exclude name="TooManyStaticImports" />
+	</rule>
 	<rule ref="rulesets/java/junit.xml" />
 	
 	<rule ref="rulesets/java/naming.xml">
