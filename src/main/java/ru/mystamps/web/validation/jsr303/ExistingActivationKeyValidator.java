@@ -41,7 +41,8 @@ public class ExistingActivationKeyValidator
 			return true;
 		}
 		
-		if (userService.countRegistrationRequestByActivationKey(value) != 1) {
+		boolean requestExists = userService.countRegistrationRequestByActivationKey(value) == 1;
+		if (!requestExists) {
 			return false;
 		}
 		
