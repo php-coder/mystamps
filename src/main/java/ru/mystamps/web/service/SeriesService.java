@@ -25,6 +25,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
 	long countAll();

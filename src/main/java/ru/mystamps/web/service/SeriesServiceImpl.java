@@ -48,6 +48,7 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyMethods")
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
