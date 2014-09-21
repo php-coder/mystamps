@@ -20,30 +20,15 @@ package ru.mystamps.web.service.dto;
 import lombok.Getter;
 
 @Getter
+@SuppressWarnings("PMD.SingularField")
 public class SeriesInfoDto {
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Integer id;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final LinkEntityDto category;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final LinkEntityDto country;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseDay;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseMonth;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Integer releaseYear;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Integer quantity;
-	
-	@SuppressWarnings("PMD.SingularField")
 	private final Boolean perforated;
 	
 	@SuppressWarnings({"checkstyle:parameternumber", "PMD.ExcessiveParameterList"})
