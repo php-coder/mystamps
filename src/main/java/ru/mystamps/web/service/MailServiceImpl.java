@@ -49,7 +49,7 @@ public class MailServiceImpl implements MailService {
 	private final boolean testMode;
 	
 	@Override
-	public void sendActivationKeyToUser(final UsersActivation activation) {
+	public void sendActivationKeyToUser(UsersActivation activation) {
 		Validate.isTrue(activation != null, "Activation must be non null");
 		Validate.isTrue(activation.getEmail() != null, "E-mail must be non null");
 		Validate.isTrue(activation.getLang() != null, "Language must be non null");
