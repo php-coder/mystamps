@@ -38,6 +38,7 @@ import ru.mystamps.web.util.LocaleUtils;
 public class SiteController {
 	
 	private static final int AMOUNT_OF_RECENTLY_ADDED_SERIES = 10; // NOPMD: LongVariable
+	private static final int AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS = 10; // NOPMD: LongVariable
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
@@ -56,6 +57,11 @@ public class SiteController {
 		model.addAttribute(
 			"recentlyAddedSeries",
 			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang)
+		);
+		
+		model.addAttribute(
+			"recentlyAddedCollections",
+			collectionService.findRecentlyCreated(AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS)
 		);
 		
 		return "site/index";

@@ -88,7 +88,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CollectionService getCollectionService() {
-		return new CollectionServiceImpl(collectionDao);
+		return new CollectionServiceImpl(collectionDao, daoConfig.getJdbcCollectionDao());
 	}
 	
 	@Bean

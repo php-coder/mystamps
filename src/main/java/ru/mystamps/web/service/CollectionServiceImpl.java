@@ -28,15 +28,18 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
+import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
 public class CollectionServiceImpl implements CollectionService {
 	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
 	private final CollectionDao collectionDao;
+	private final JdbcCollectionDao jdbcCollectionDao;
 	
 	@Override
 	@Transactional
@@ -128,6 +131,14 @@ public class CollectionServiceImpl implements CollectionService {
 	@Transactional(readOnly = true)
 	public long countCollectionsOfUsers() {
 		return collectionDao.countCollectionsOfUsers();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<LinkEntityDto> findRecentlyCreated(int quantity) {
+		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
+		
+		return jdbcCollectionDao.findLastCreated(quantity);
 	}
 	
 }

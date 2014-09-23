@@ -15,17 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao.impl;
 
-import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.entity.User;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
-public interface CollectionService {
-	void createCollection(User user);
-	Integer addToCollection(User user, Series series);
-	Integer removeFromCollection(User user, Series series);
-	boolean isSeriesInCollection(User user, Series series);
-	long countCollectionsOfUsers();
-	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
+class LinkEntityDtoRowMapper implements RowMapper<LinkEntityDto> {
+	
+	@Override
+	public LinkEntityDto mapRow(ResultSet resultSet, int i) throws SQLException {
+		Integer collectionId = resultSet.getInt("collection_id");
+		String ownerName     = resultSet.getString("owner_name");
+		
+		// slug isn't used yet
+		return new LinkEntityDto(collectionId, null, ownerName);
+	}
+	
 }
