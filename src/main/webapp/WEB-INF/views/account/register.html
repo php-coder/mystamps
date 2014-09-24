@@ -48,17 +48,10 @@
 		</div>
 		<div class="row-fluid">
 			<div id="content" class="span12">
+				
 				<h3 th:text="#{t_registration_on_site}">
 					Register on site
 				</h3>
-				
-				<!--/*/
-				<div class="row-fluid span12" sec:authorize="isAuthenticated()">
-					<div class="alert alert-info text-center span8 offset2" th:text="#{t_already_registered}">
-						You already registered.
-					</div>
-				</div>
-				/*/-->
 				
 				<!--/*/ <th:block sec:authorize="isAnonymous()"> /*/-->
 					<div class="hint text-center">
@@ -96,6 +89,13 @@
 				<!--/*/ </th:block> /*/-->
 			</div>
 		</div>
+		<!--/*/
+		<div class="row-fluid" sec:authorize="isAuthenticated()">
+			<div class="alert alert-info text-center span8 offset2" th:text="#{t_already_registered}">
+				You already registered.
+			</div>
+		</div>
+		/*/-->
 		<div class="row-fluid">
 			<footer class="text-right">
 				<i class="icon-envelope"></i>
