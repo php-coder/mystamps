@@ -46,24 +46,22 @@
 				</ul>
 			</div>
 		</div>
+		<!--/*/
+		<div class="row-fluid top-indent" th:if="${justAddedSeries}">
+			<div class="alert alert-success text-center span8 offset2" th:text="#{t_collection_just_added}">
+				Series has been added to your collection
+			</div>
+		</div>
+		/*/-->
+		<!--/*/
+		<div class="row-fluid top-indent" th:if="${justRemovedSeries}">
+			<div class="alert alert-info text-center span8 offset2" th:text="#{t_collection_just_removed}">
+				Series has been removed from your collection
+			</div>
+		</div>
+		/*/-->
 		<div class="row-fluid">
 			<div id="content" class="span4">
-				
-				<!--/*/
-				<div class="row-fluid span12" th:if="${justAddedSeries}">
-					<div class="alert alert-success text-center span8 offset2" th:text="#{t_collection_just_added}">
-						Series has been added to your collection
-					</div>
-				</div>
-				/*/-->
-				
-				<!--/*/
-				<div class="row-fluid span12" th:if="${justRemovedSeries}">
-					<div class="alert alert-info text-center span8 offset2" th:text="#{t_collection_just_removed}">
-						Series has been removed from your collection
-					</div>
-				</div>
-				/*/-->
 				
 				<h3 th:text="#{t_collection_of(${ownerName})}">
 					John Doe's collection
