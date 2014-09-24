@@ -46,28 +46,19 @@
 				</ul>
 			</div>
 		</div>
+		<!--/*/
+		<div class="row-fluid top-indent" th:if="${justRegisteredUser}">
+			<div class="alert alert-success text-center span8 offset2" th:text="#{t_activation_sent_message}">
+				Instructions to finish registration sent to your e-mail
+			</div>
+		</div>
+		/*/-->
 		<div class="row-fluid">
 			<div id="content" class="span12">
-				
-				<!--/*/
-				<div class="row-fluid span12" th:if="${justRegisteredUser}">
-					<div class="alert alert-success text-center span8 offset2" th:text="#{t_activation_sent_message}">
-						Instructions to finish registration sent to your e-mail
-					</div>
-				</div>
-				/*/-->
 				
 				<h3 th:text="#{t_activation_on_site}">
 					Account activation
 				</h3>
-				
-				<!--/*/
-				<div class="row-fluid span12" sec:authorize="isAuthenticated()">
-					<div class="alert alert-info text-center span8 offset2" th:text="#{t_already_activated}">
-						You already activated account.
-					</div>
-				</div>
-				/*/-->
 				
 				<!--/*/ <th:block sec:authorize="isAnonymous()"> /*/-->
 					<div class="hint text-center">
@@ -143,6 +134,13 @@
 				<!--/*/ </th:block> /*/-->
 			</div>
 		</div>
+		<!--/*/
+		<div class="row-fluid" sec:authorize="isAuthenticated()">
+			<div class="alert alert-info text-center span8 offset2" th:text="#{t_already_activated}">
+				You already activated account.
+			</div>
+		</div>
+		<!--/*/
 		<div class="row-fluid">
 			<footer class="text-right">
 				<i class="icon-envelope"></i>
