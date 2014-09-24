@@ -14,7 +14,7 @@
 		<hibernate.validator.version>5.0.0.Alpha1</hibernate.validator.version>
 		<lombok.version>1.14.6</lombok.version>
 		<mysql.connector.version>5.1.30</mysql.connector.version>
-		<selenium.version>2.41.0</selenium.version>
+		<selenium.version>2.43.1</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<spring.version>3.2.5.RELEASE</spring.version>
