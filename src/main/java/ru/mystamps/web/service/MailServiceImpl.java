@@ -92,7 +92,7 @@ public class MailServiceImpl implements MailService {
 			mailer.send(preparator);
 			
 		} catch (MailException ex) {
-			LOG.error("Can't send mail to e-mail " + email, ex);
+			LOG.error("Can't send mail to e-mail " + email, ex); // NOPMD: GuardLogStatementJavaUtil
 		}
 	}
 	
