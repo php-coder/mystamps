@@ -78,6 +78,19 @@
 		<skipTests>false</skipTests>
 	</properties>
 	
+	<dependencyManagement>
+		<dependencies>
+			<!-- http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/html/overview.html#overview-maven-bom -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		
 		<dependency>
@@ -116,7 +129,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
 			<exclusions>
 				<exclusion>
 					<!-- Because we use jcl-over-slf4j instead -->
@@ -129,20 +141,17 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		
 		<!-- For mail classes -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -155,19 +164,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.security.version}</version>
-		</dependency>
-		
-		<!--
-			spring-security-web 3.1.0 depends from spring-aop 3.0.6,
-			so to force application use spring-aop 3.1.1 we add this
-			dependency explicitly. May be removed when new Spring
-			Security will not depends from old version of Spring.
-		-->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -366,7 +362,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -472,7 +467,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
