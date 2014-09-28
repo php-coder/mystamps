@@ -43,6 +43,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
@@ -179,10 +180,10 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		Integer collectionId = collectionService.addToCollection(currentUser, series);
+		Collection collection = collectionService.addToCollection(currentUser, series);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
-			.buildAndExpand(collectionId)
+			.buildAndExpand(collection.getId(), collection.getSlug())
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
@@ -204,10 +205,10 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		Integer collectionId = collectionService.removeFromCollection(currentUser, series);
+		Collection collection = collectionService.removeFromCollection(currentUser, series);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
-			.buildAndExpand(collectionId)
+			.buildAndExpand(collection.getId(), collection.getSlug())
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);

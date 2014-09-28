@@ -33,6 +33,7 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CollectionServiceImpl implements CollectionService {
@@ -49,6 +50,10 @@ public class CollectionServiceImpl implements CollectionService {
 		Collection collection = new Collection();
 		collection.setOwner(user);
 		
+		String slug = SlugUtils.slugify(user.getLogin());
+		Validate.isTrue(slug != null, "Slug for string '%s' is null", user.getLogin());
+		collection.setSlug(slug);
+		
 		collectionDao.save(collection);
 		
 		LOG.info("Collection has been created ({})", collection);
@@ -57,7 +62,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
-	public Integer addToCollection(User user, Series series) {
+	public Collection addToCollection(User user, Series series) {
 		Validate.isTrue(user != null, "User must be non null");
 		Validate.isTrue(user != null, "Series must be non null");
 		
@@ -74,13 +79,13 @@ public class CollectionServiceImpl implements CollectionService {
 			user.getId()
 		);
 		
-		return collection.getId();
+		return collection;
 	}
 	
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
-	public Integer removeFromCollection(User user, Series series) {
+	public Collection removeFromCollection(User user, Series series) {
 		Validate.isTrue(user != null, "User must be non null");
 		Validate.isTrue(user != null, "Series must be non null");
 		
@@ -97,7 +102,7 @@ public class CollectionServiceImpl implements CollectionService {
 			user.getId()
 		);
 		
-		return collection.getId();
+		return collection;
 	}
 	
 	@Override

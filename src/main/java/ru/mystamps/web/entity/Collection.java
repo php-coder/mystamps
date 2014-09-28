@@ -19,6 +19,7 @@ package ru.mystamps.web.entity;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,6 +40,8 @@ import lombok.ToString;
 @ToString
 public class Collection {
 	
+	public static final int SLUG_LENGTH = User.NAME_LENGTH;
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -50,5 +53,8 @@ public class Collection {
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "collection_id"))
 	private Set<Series> series;
+	
+	@Column(length = SLUG_LENGTH, nullable = false)
+	private String slug;
 	
 }

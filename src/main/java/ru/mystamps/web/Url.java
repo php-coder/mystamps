@@ -57,7 +57,7 @@ public final class Url {
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}/{slug}";
 	
-	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}";
+	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}/{slug}";
 	
 	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
 	

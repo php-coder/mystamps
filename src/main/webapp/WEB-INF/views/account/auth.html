@@ -26,7 +26,7 @@
 							href="../collection/info.html"
 							title="Open my collection"
 							th:title="#{t_open_my_collection}"
-							th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id})}">
+							th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
 							John Doe
 						</a>
 					</li>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-slug-column-to-collections-table" author="php-coder" context="scheme">
+		<comment>Adds slug column to collections table</comment>
+		
+		<addColumn tableName="collections">
+			<column name="slug" type="VARCHAR(50)" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="update-collections-slug" author="php-coder" context="test-data,prod-data">
+		<comment>Sets value of slug field to transformed collection's owner's name</comment>
+		
+		<!-- Unfortunately, H2 doesn't support UPDATE with JOIN -->
+		<sql>
+			UPDATE collections c
+			SET c.slug = (
+				SELECT LOWER(REPLACE(u.login, ' ', '-'))
+				FROM users u
+				WHERE u.id = c.user_id
+			);
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="make-slug-field-not-nullable" author="php-coder" context="scheme">
+		<comment>Marks collections.slug field as NOT NULL</comment>
+		
+		<addNotNullConstraint tableName="collections" columnName="slug" columnDataType="VARCHAR(50)" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

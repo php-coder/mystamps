@@ -17,14 +17,15 @@
  */
 package ru.mystamps.web.service;
 
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
 public interface CollectionService {
 	void createCollection(User user);
-	Integer addToCollection(User user, Series series);
-	Integer removeFromCollection(User user, Series series);
+	Collection addToCollection(User user, Series series);
+	Collection removeFromCollection(User user, Series series);
 	boolean isSeriesInCollection(User user, Series series);
 	long countCollectionsOfUsers();
 	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
