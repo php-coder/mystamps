@@ -65,7 +65,7 @@
 		<jetty.plugin.version>8.1.14.v20131031</jetty.plugin.version>
 		<liquibase.plugin.version>3.2.0</liquibase.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
-		<checkstyle.plugin.version>2.12.1</checkstyle.plugin.version>
+		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
 		<pmd.plugin.version>3.1</pmd.plugin.version>
 		<jacoco.plugin.version>0.6.4.201312101107</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
