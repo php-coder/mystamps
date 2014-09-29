@@ -138,7 +138,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
 	public void categoryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCategory("НевернаяКатегорияНаАнглийском", "Категория");
+		page.addCategory("НевернаяКатегорияНаАнглийском", "Категория Ёё");
 		
 		assertThat(page).field("nameRu").hasNoError();
 	}

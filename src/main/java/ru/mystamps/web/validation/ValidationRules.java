@@ -44,7 +44,7 @@ public final class ValidationRules {
 	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
 	public static final int CATEGORY_NAME_MAX_LENGTH = Category.NAME_LENGTH;
 	public static final String CATEGORY_NAME_EN_REGEXP = "[- a-zA-Z]+";
-	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яА-Я]+";
+	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
 	public static final String CATEGORY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final int COUNTRY_NAME_MIN_LENGTH = 3;
