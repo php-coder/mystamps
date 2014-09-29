@@ -50,7 +50,7 @@ public final class ValidationRules {
 	public static final int COUNTRY_NAME_MIN_LENGTH = 3;
 	public static final int COUNTRY_NAME_MAX_LENGTH = Country.NAME_LENGTH;
 	public static final String COUNTRY_NAME_EN_REGEXP = "[- a-zA-Z]+";
-	public static final String COUNTRY_NAME_RU_REGEXP = "[- а-яА-Я]+";
+	public static final String COUNTRY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
 	public static final String COUNTRY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final int MIN_STAMPS_IN_SERIES = 1;

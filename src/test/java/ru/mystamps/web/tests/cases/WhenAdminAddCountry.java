@@ -145,7 +145,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
 	public void countryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCountry("ValidName", "Нормальное-название страны");
+		page.addCountry("ValidName", "Ёё Нормальное-название страны");
 		
 		assertThat(page).field("nameRu").hasNoError();
 	}
