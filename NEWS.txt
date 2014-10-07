@@ -1,18 +1,28 @@
-0.3 (not released yet)
-- implemented possibility to user to add series to his collection
-- views has been ported from JSP to Thymeleaf
-- rejection of Apache Tiles
-- implemented sending of mail with activation key
-- started using feature flags with Togglz
-- added localization support for countries
-- added categories to series
-- save images to the disk
-- use JaCoCo for code coverage
-- ported to Bootstrap
-- implemented ability to specify series price by different catalogs
-- added checking by PMD
-- use Tiles as template engine for views
-- ported unit tests to Spock Framework
+0.3
+- (functionality)  implemented possibility to user to add series to his collection
+- (functionality)  added charts on page with collection
+- (functionality)  implemented sending of mail with activation key
+- (functionality)  added stats about stamps/series/categories/countries on index page
+- (functionality)  added list of recently added series on index page
+- (functionality)  added list of last created collections on index page
+- (functionality)  added categories to series
+- (functionality)  implemented ability to specify series price by different catalogs
+- (functionality)  added fields with day/month of release of series
+- (functionality)  added localization support for countries
+- (functionality)  show special error page when exception occurs
+- (functionality)  save images to the disk
+- (user interface) ported to Bootstrap
+- (search engines) robots.txt file has been added
+- (search engines) added human readable URLs for countries, categories and collections
+- (integration)    added continuous building on TravisCI service
+- (integration)    enabled posting of code coverage to coveralls.io service
+- (infrastructure) Liquibase is used for database migrations
+- (infrastructure) switched to Java7
+- (infrastructure) views has been ported from JSP to Thymeleaf
+- (infrastructure) started using feature flags with Togglz
+- (infrastructure) ported unit tests to Spock Framework
+- (infrastructure) use JaCoCo for code coverage (instead of Cobertura)
+- (infrastructure) added checking by PMD
 
 0.2
 - implemented ability to add series
