@@ -34,7 +34,7 @@ public final class ConstraintViolationUtils {
 		
 		ctx.disableDefaultConstraintViolation();
 		ctx.buildConstraintViolationWithTemplate(msgTemplate)
-			.addNode(fieldName)
+			.addPropertyNode(fieldName)
 			.addConstraintViolation();
 	}
 	
