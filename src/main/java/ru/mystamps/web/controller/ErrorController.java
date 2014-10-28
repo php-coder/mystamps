@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,7 +40,7 @@ public class ErrorController {
 	
 	private final SiteService siteService;
 	
-	@RequestMapping(value = Url.NOT_FOUND_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.NOT_FOUND_PAGE)
 	public void notFound(
 			HttpServletRequest request,
 			CustomUserDetails userDetails,
@@ -66,7 +65,7 @@ public class ErrorController {
 		}
 	}
 	
-	@RequestMapping(value = Url.INTERNAL_ERROR_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INTERNAL_ERROR_PAGE)
 	public void internalError(HttpServletRequest request) {
 		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		

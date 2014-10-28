@@ -56,7 +56,7 @@ public class CountryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.ADD_COUNTRY_PAGE)
 	public AddCountryForm showForm() {
 		return new AddCountryForm();
 	}
@@ -77,7 +77,7 @@ public class CountryController {
 		return "redirect:" + dstUrl;
 	}
 	
-	@RequestMapping(value = Url.INFO_COUNTRY_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INFO_COUNTRY_PAGE)
 	public String showInfo(@PathVariable("id") Country country, Model model, Locale userLocale) {
 		
 		if (country == null) {

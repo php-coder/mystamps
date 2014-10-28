@@ -22,7 +22,6 @@ import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,7 +44,7 @@ public class SiteController {
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	
-	@RequestMapping(value = Url.INDEX_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INDEX_PAGE)
 	public String showIndexPage(Model model, Locale userLocale) {
 		model.addAttribute("categoryCounter", categoryService.countAll());
 		model.addAttribute("countryCounter", countryService.countAll());

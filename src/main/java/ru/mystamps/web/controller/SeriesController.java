@@ -109,7 +109,7 @@ public class SeriesController {
 		return countryService.findAll(lang);
 	}
 	
-	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.ADD_SERIES_PAGE)
 	public AddSeriesForm showForm() {
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
@@ -145,7 +145,7 @@ public class SeriesController {
 		return "redirect:" + dstUrl;
 	}
 	
-	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INFO_SERIES_PAGE)
 	public String showInfo(@PathVariable("id") Series series, Model model, User currentUser) {
 		
 		if (series == null) {

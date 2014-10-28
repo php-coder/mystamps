@@ -62,7 +62,7 @@ public class AccountController {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
-	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.REGISTRATION_PAGE)
 	public RegisterAccountForm showRegistrationForm() {
 		return new RegisterAccountForm();
 	}
@@ -85,12 +85,12 @@ public class AccountController {
 		return "redirect:" + Url.ACTIVATE_ACCOUNT_PAGE;
 	}
 	
-	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.ACTIVATE_ACCOUNT_PAGE)
 	public ActivateAccountForm showActivationForm() {
 		return new ActivateAccountForm();
 	}
 	
-	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY, method = RequestMethod.GET)
+	@RequestMapping(Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
 	public String showActivationFormWithKey(
 		@PathVariable("key") String activationKey,
 		Model model) {

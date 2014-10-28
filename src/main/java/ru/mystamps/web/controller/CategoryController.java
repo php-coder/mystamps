@@ -56,7 +56,7 @@ public class CategoryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(value = Url.ADD_CATEGORY_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.ADD_CATEGORY_PAGE)
 	public AddCategoryForm showForm() {
 		return new AddCategoryForm();
 	}
@@ -80,7 +80,7 @@ public class CategoryController {
 		return "redirect:" + dstUrl;
 	}
 	
-	@RequestMapping(value = Url.INFO_CATEGORY_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INFO_CATEGORY_PAGE)
 	public String showInfo(@PathVariable("id") Category category, Model model, Locale userLocale) {
 		
 		if (category == null) {

@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.mystamps.web.Url;
 
@@ -35,7 +34,7 @@ import ru.mystamps.web.Url;
 public class RobotsTxtController {
 	private static final Logger LOG = LoggerFactory.getLogger(RobotsTxtController.class);
 	
-	@RequestMapping(value = Url.ROBOTS_TXT, method = RequestMethod.GET)
+	@RequestMapping(Url.ROBOTS_TXT)
 	@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 	public void getRobotsText(HttpServletResponse response) {
 		response.setContentType("text/plain");

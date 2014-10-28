@@ -25,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,7 +45,7 @@ public class CollectionController {
 	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
-	@RequestMapping(value = Url.INFO_COLLECTION_PAGE, method = RequestMethod.GET)
+	@RequestMapping(Url.INFO_COLLECTION_PAGE)
 	public String showInfo(
 		@PathVariable("id") Collection collection,
 		Model model,
