@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.entity;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -47,13 +48,13 @@ public class Price {
 	public static final String CURRENCY_FIELD_NAME = "currency";
 	
 	@Column(name = "price")
-	private Double value;
+	private BigDecimal value;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(length = MAX_CURRENCY_LEGNTH)
 	private Currency currency;
 	
-	public static Price valueOf(Double price, Currency currency) {
+	public static Price valueOf(BigDecimal price, Currency currency) {
 		if (price == null) {
 			return null;
 		}

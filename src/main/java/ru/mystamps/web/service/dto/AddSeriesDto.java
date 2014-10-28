@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service.dto;
 
+import java.math.BigDecimal;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Category;
@@ -33,19 +35,19 @@ public interface AddSeriesDto {
 	Boolean getPerforated();
 	
 	String getMichelNumbers();
-	Double getMichelPrice();
+	BigDecimal getMichelPrice();
 	Currency getMichelCurrency();
 	
 	String getScottNumbers();
-	Double getScottPrice();
+	BigDecimal getScottPrice();
 	Currency getScottCurrency();
 	
 	String getYvertNumbers();
-	Double getYvertPrice();
+	BigDecimal getYvertPrice();
 	Currency getYvertCurrency();
 	
 	String getGibbonsNumbers();
-	Double getGibbonsPrice();
+	BigDecimal getGibbonsPrice();
 	Currency getGibbonsCurrency();
 	
 	String getComment();

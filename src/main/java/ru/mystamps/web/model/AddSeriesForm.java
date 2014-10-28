@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.model;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -102,7 +104,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	private String michelNumbers;
 	
 	@Price
-	private Double michelPrice;
+	private BigDecimal michelPrice;
 	
 	private Currency michelCurrency;
 	
@@ -111,7 +113,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	private String scottNumbers;
 	
 	@Price
-	private Double scottPrice;
+	private BigDecimal scottPrice;
 	
 	private Currency scottCurrency;
 	
@@ -120,7 +122,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	private String yvertNumbers;
 	
 	@Price
-	private Double yvertPrice;
+	private BigDecimal yvertPrice;
 	
 	private Currency yvertCurrency;
 	
@@ -129,7 +131,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	private String gibbonsNumbers;
 	
 	@Price
-	private Double gibbonsPrice;
+	private BigDecimal gibbonsPrice;
 	
 	private Currency gibbonsCurrency;
 	

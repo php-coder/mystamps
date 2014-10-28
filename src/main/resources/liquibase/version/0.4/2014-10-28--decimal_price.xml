@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="modify-gibbons_price-type" author="php-coder" context="scheme">
+		<comment>Modifies type of series.gibbons_price field</comment>
+		
+		<modifyDataType tableName="series" columnName="gibbons_price" newDataType="DECIMAL(19,2)" />
+	</changeSet>
+	
+	<changeSet id="modify-michel_price-type" author="php-coder" context="scheme">
+		<comment>Modifies type of series.michel_price field</comment>
+		
+		<modifyDataType tableName="series" columnName="michel_price" newDataType="DECIMAL(19,2)" />
+	</changeSet>
+	
+	<changeSet id="modify-scott_price-type" author="php-coder" context="scheme">
+		<comment>Modifies type of series.scott_price field</comment>
+		
+		<modifyDataType tableName="series" columnName="scott_price" newDataType="DECIMAL(19,2)" />
+	</changeSet>
+	
+	<changeSet id="modify-yvert_price-type" author="php-coder" context="scheme">
+		<comment>Modifies type of series.yvert_price field</comment>
+		
+		<modifyDataType tableName="series" columnName="yvert_price" newDataType="DECIMAL(19,2)" />
+	</changeSet>
+	
+</databaseChangeLog>

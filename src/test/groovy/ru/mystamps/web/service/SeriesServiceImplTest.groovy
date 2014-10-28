@@ -37,7 +37,7 @@ import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {
-	private static final Double ANY_PRICE = 17d
+	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
 	
 	private ImageService imageService = Mock()
 	private SeriesDao seriesDao = Mock()
@@ -236,7 +236,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass michel price to series dao"() {
 		given:
-			Double expectedPrice = ANY_PRICE
+			BigDecimal expectedPrice = ANY_PRICE
 			form.setMichelPrice(expectedPrice)
 		and:
 			Currency expectedCurrency = Currency.RUR
@@ -306,7 +306,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass scott price to series dao"() {
 		given:
-			Double expectedPrice = ANY_PRICE
+			BigDecimal expectedPrice = ANY_PRICE
 			form.setScottPrice(expectedPrice)
 		and:
 			Currency expectedCurrency = Currency.RUR
@@ -376,7 +376,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass yvert price to series dao"() {
 		given:
-			Double expectedPrice = ANY_PRICE
+			BigDecimal expectedPrice = ANY_PRICE
 			form.setYvertPrice(expectedPrice)
 		and:
 			Currency expectedCurrency = Currency.RUR
@@ -446,7 +446,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass gibbons price to series dao"() {
 		given:
-			Double expectedPrice = ANY_PRICE
+			BigDecimal expectedPrice = ANY_PRICE
 			form.setGibbonsPrice(expectedPrice)
 		and:
 			Currency expectedCurrency = Currency.RUR
