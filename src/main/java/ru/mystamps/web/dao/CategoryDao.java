@@ -34,7 +34,7 @@ public interface CategoryDao extends PagingAndSortingRepository<Category, Intege
 			+ "CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
 		+ ") "
 		+ "FROM Category c "
-		+ "ORDER BY c.name"
+		+ "ORDER BY CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
 	)
 	Iterable<SelectEntityDto> findAllAsSelectEntries(@Param("lang") String lang);
 }
