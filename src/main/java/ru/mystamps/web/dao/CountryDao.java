@@ -34,7 +34,7 @@ public interface CountryDao extends PagingAndSortingRepository<Country, Integer>
 			+ "CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
 		+ ") "
 		+ "FROM Country c "
-		+ "ORDER BY c.name"
+		+ "ORDER BY CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END"
 	)
 	Iterable<SelectEntityDto> findAllAsSelectEntries(@Param("lang") String lang);
 }
