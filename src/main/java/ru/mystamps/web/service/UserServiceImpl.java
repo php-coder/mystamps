@@ -47,7 +47,7 @@ import static ru.mystamps.web.entity.User.Role.USER;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	private final UserDao userDao;
 	private final UsersActivationDao usersActivationDao;

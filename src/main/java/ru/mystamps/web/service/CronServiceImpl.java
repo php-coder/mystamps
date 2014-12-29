@@ -38,7 +38,7 @@ import ru.mystamps.web.entity.UsersActivation;
 public class CronServiceImpl implements CronService {
 	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CronService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
 	private final UsersActivationDao usersActivationDao;
 	

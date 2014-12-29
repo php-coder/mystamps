@@ -16,7 +16,7 @@
 		<mysql.connector.version>5.1.33</mysql.connector.version>
 		<selenium.version>2.43.1</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
-		<slf4j.version>1.7.7</slf4j.version>
+		<slf4j.version>1.7.9</slf4j.version>
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.data.version>1.6.4.RELEASE</spring.data.version>
 		<spring.security.version>3.1.7.RELEASE</spring.security.version>
@@ -662,6 +662,11 @@
 						<systemProperty>
 							<name>log4j.configuration</name>
 							<value>file:///${env.dir}/log4j.properties</value>
+						</systemProperty>
+						<systemProperty>
+							<!-- http://www.slf4j.org/codes.html#loggerNameMismatch -->
+							<name>slf4j.detectLoggerNameMismatch</name>
+							<value>true</value>
 						</systemProperty>
 					</systemProperties>
 					<skip>${skipTests}</skip>
