@@ -99,11 +99,7 @@
 	</rule>
 	<rule ref="rulesets/java/naming.xml/ShortClassName">
 		<properties>
-			<property name="violationSuppressXPath">
-				<value>
-					<![CDATA[.[string-length(@Image) &gt; 2]]]>
-				</value>
-			</property>
+			<property name="minimum" value="2" />
 		</properties>
 	</rule>
 	
