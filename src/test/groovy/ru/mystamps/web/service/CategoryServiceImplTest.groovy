@@ -23,6 +23,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.entity.Category
+import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.service.dto.SelectEntityDto
@@ -266,4 +267,48 @@ class CategoryServiceImplTest extends Specification {
 			})
 	}
 	
+	//
+	// Tests for getStatisticsOf()
+	//
+
+	def "getStatisticsOf() should throw exception when collection is null"() {
+		when:
+			service.getStatisticsOf(null, 'whatever')
+		then:
+			thrown IllegalArgumentException
+	}
+
+	def "getStatisticsOf() should throw exception when collection id is null"() {
+		given:
+			Collection collection = Mock()
+			collection.getId() >> null
+		when:
+			service.getStatisticsOf(collection, 'whatever')
+		then:
+			thrown IllegalArgumentException
+	}
+
+	def "getStatisticsOf() should pass arguments to dao"() {
+		given:
+			Integer expectedCollectionId = 15
+		and:
+			String expectedLang = 'expected'
+		and:
+			Collection expectedCollection = Mock()
+			expectedCollection.getId() >> expectedCollectionId
+		when:
+			service.getStatisticsOf(expectedCollection, expectedLang)
+		then:
+			1 * jdbcCategoryDao.getStatisticsOf(
+				{ Integer collectionId ->
+					assert expectedCollectionId == collectionId
+					return true
+				},
+				{ String lang ->
+					assert expectedLang == lang
+					return true
+				}
+			) >> null
+	}
+
 }
