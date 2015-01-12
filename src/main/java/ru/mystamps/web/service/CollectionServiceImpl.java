@@ -64,7 +64,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
 	public Collection addToCollection(User user, Series series) {
 		Validate.isTrue(user != null, "User must be non null");
-		Validate.isTrue(user != null, "Series must be non null");
+		Validate.isTrue(series != null, "Series must be non null");
 		
 		// We can't just invoke user.getCollection().getSeries() because
 		// it will lead to LazyInitializationException. To workaround this
@@ -87,7 +87,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
 	public Collection removeFromCollection(User user, Series series) {
 		Validate.isTrue(user != null, "User must be non null");
-		Validate.isTrue(user != null, "Series must be non null");
+		Validate.isTrue(series != null, "Series must be non null");
 		
 		// We can't just invoke user.getCollection().getSeries() because
 		// it will lead to LazyInitializationException. To workaround this
