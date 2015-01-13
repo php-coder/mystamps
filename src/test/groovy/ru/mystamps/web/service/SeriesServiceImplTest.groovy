@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
+import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.Currency
 import ru.mystamps.web.entity.GibbonsCatalog
 import ru.mystamps.web.entity.MichelCatalog
@@ -617,6 +618,42 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.countAllStamps() >> expectedResult
 		and:
 			result == expectedResult
+	}
+	
+	//
+	// Tests for countSeriesOf()
+	//
+	
+	def "countSeriesOf() should throw exception when collection is null"() {
+		when:
+			service.countSeriesOf(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countSeriesOf() should throw exception when collection id is null"() {
+		given:
+			Collection collection = Mock()
+			collection.getId() >> null
+		when:
+			service.countSeriesOf(collection)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countSeriesOf() should pass arguments to dao"() {
+		given:
+			Integer expectedCollectionId = 7
+		and:
+			Collection expectedCollection = Mock()
+			expectedCollection.getId() >> expectedCollectionId
+		when:
+			service.countSeriesOf(expectedCollection)
+		then:
+			1 * jdbcSeriesDao.countSeriesOfCollection({ Integer collectionId ->
+				assert expectedCollectionId == collectionId
+				return true
+			}) >> 0L
 	}
 	
 	//
