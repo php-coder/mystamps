@@ -657,6 +657,42 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countStampsOf()
+	//
+	
+	def "countStampsOf() should throw exception when collection is null"() {
+		when:
+			service.countStampsOf(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countStampsOf() should throw exception when collection id is null"() {
+		given:
+			Collection collection = Mock()
+			collection.getId() >> null
+		when:
+			service.countStampsOf(collection)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countStampsOf() should pass arguments to dao"() {
+		given:
+			Integer expectedCollectionId = 8
+		and:
+			Collection expectedCollection = Mock()
+			expectedCollection.getId() >> expectedCollectionId
+		when:
+			service.countStampsOf(expectedCollection)
+		then:
+			1 * jdbcSeriesDao.countStampsOfCollection({ Integer collectionId ->
+				assert expectedCollectionId == collectionId
+				return true
+			}) >> 0L
+	}
+	
+	//
 	// Tests for countByMichelNumber()
 	//
 	
