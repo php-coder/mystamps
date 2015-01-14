@@ -38,6 +38,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	@Value("${collection.find_last_created_sql}")
 	private String findLastCreatedCollectionsSql;
 	
+	@Value("${collection.count_collections_of_users}")
+	private String countCollectionsOfUsersSql;
+	
 	public JdbcCollectionDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
@@ -48,6 +51,15 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
 			LINK_ENTITY_DTO_ROW_MAPPER
+		);
+	}
+	
+	@Override
+	public long countCollectionsOfUsers() {
+		return jdbcTemplate.queryForObject(
+			countCollectionsOfUsersSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
 		);
 	}
 	

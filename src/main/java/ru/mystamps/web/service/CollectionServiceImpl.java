@@ -135,7 +135,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countCollectionsOfUsers() {
-		return collectionDao.countCollectionsOfUsers();
+		return jdbcCollectionDao.countCollectionsOfUsers();
 	}
 	
 	@Override

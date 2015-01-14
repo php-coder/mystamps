@@ -17,12 +17,9 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import ru.mystamps.web.entity.Collection;
 
 public interface CollectionDao extends CrudRepository<Collection, Integer> {
-	@Query("SELECT COUNT(*) FROM Collection c WHERE c.series IS NOT EMPTY")
-	int countCollectionsOfUsers();
 }
