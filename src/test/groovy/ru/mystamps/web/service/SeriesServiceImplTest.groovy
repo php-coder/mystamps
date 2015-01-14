@@ -615,7 +615,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countAllStamps()
 		then:
-			1 * seriesDao.countAllStamps() >> expectedResult
+			1 * jdbcSeriesDao.countAllStamps() >> expectedResult
 		and:
 			result == expectedResult
 	}

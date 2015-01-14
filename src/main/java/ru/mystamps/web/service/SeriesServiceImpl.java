@@ -130,7 +130,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countAllStamps() {
-		return seriesDao.countAllStamps();
+		return jdbcSeriesDao.countAllStamps();
 	}
 	
 	@Override

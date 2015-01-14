@@ -40,6 +40,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_last_added_sql}")
 	private String findLastAddedSeriesSql;
 	
+	@Value("${series.count_all_stamps}")
+	private String countAllStampsSql;
+	
 	@Value("${series.count_series_of_collection}")
 	private String countSeriesOfCollectionSql;
 	
@@ -57,6 +60,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+	}
+	
+	@Override
+	public long countAllStamps() {
+		return jdbcTemplate.queryForObject(
+			countAllStampsSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
 	}
 	
 	@Override

@@ -40,9 +40,6 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	@Query("SELECT COUNT(*) FROM Series s INNER JOIN s.gibbons m WHERE m.code = :gibbonsCode")
 	int countByGibbonsNumberCode(@Param("gibbonsCode") String gibbonsNumberCode);
 	
-	@Query("SELECT COALESCE(SUM(quantity), 0) FROM Series")
-	long countAllStamps();
-	
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "
