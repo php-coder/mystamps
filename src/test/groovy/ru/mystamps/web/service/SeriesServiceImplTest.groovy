@@ -908,4 +908,40 @@ class SeriesServiceImplTest extends Specification {
 			) >> []
 	}
 	
+	//
+	// Tests for findRecentlyAdded
+	//
+	
+	@Unroll
+	def "findRecentlyAdded should throw exception when quantity is #quantity"(Integer quantity, Object _) {
+		when:
+			service.findRecentlyAdded(quantity, null)
+		then:
+			thrown IllegalArgumentException
+		where:
+			quantity | _
+			-1       | _
+			0        | _
+	}
+	
+	def "findRecentlyAdded should pass arguments to dao"() {
+		given:
+			int expectedQuantity = 3
+		and:
+			String expectedLang = 'expected'
+		when:
+			service.findRecentlyAdded(expectedQuantity, expectedLang)
+		then:
+			1 * jdbcSeriesDao.findLastAdded(
+				{ int quantity ->
+					assert expectedQuantity == quantity
+					return true
+				},
+				{ String lang ->
+					assert expectedLang == lang
+					return true
+				}
+			) >> []
+	}
+	
 }
