@@ -31,7 +31,7 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	// used during authentication by password-encoder with salt-source
+	// used during authentication (see SecurityConfig.getSaltSource())
 	public String getSalt() {
 		return user.getSalt();
 	}

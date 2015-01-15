@@ -21,44 +21,120 @@ import javax.inject.Inject;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.ApplicationListener;
+import org.springframework.http.HttpMethod;
 
+import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
+import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.AuthenticationEntryPoint;
 
 import ru.mystamps.web.config.ServicesConfig;
+import ru.mystamps.web.Url;
 
 @Configuration
-@ImportResource("classpath:spring/security.xml")
-public class SecurityConfig {
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Inject
+	private MessageSource messageSource;
 	
 	@Inject
 	private ServicesConfig servicesConfig;
 	
+	@Override
+	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/static/**");
+	}
+	
+	@Override
+	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.authorizeRequests()
+				.antMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority("CREATE_CATEGORY")
+				.antMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority("CREATE_COUNTRY")
+				.antMatchers(Url.ADD_SERIES_PAGE).hasAuthority("CREATE_SERIES")
+				.regexMatchers(HttpMethod.POST, "/series/[0-9]+").hasAuthority("UPDATE_COLLECTION")
+				.anyRequest().permitAll()
+				.and()
+			.formLogin()
+				.loginPage(Url.AUTHENTICATION_PAGE)
+				.usernameParameter("login")
+				.passwordParameter("password")
+				.loginProcessingUrl(Url.LOGIN_PAGE)
+				.failureUrl(Url.AUTHENTICATION_PAGE + "?failed")
+				.defaultSuccessUrl(Url.INDEX_PAGE, true)
+				.permitAll()
+				.and()
+			.logout()
+				.logoutUrl(Url.LOGOUT_PAGE)
+				.logoutSuccessUrl(Url.INDEX_PAGE)
+				.invalidateHttpSession(true)
+				.permitAll()
+				.and()
+			.exceptionHandling()
+				.accessDeniedPage(Url.UNAUTHORIZED_PAGE)
+				// This entry point handles when you request a protected page and you are
+				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
+				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
+				.and()
+			.rememberMe()
+				// TODO: GH #27
+				.disable()
+			.csrf()
+				// TODO: GH #25
+				.disable()
+			.headers()
+				// TODO
+				.disable();
+	}
+	
+	@Inject
+	protected void configure(AuthenticationManagerBuilder auth) {
+		auth.authenticationProvider(getAuthenticationProvider());
+	}
+
+	// Used in ServicesConfig.getUserService()
+	public PasswordEncoder getPasswordEncoder() {
+		return new ShaPasswordEncoder();
+	}
+
 	@Bean
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
 		return new AuthenticationFailureListener();
 	}
 	
-	// Explicitly specified bean names due to its usage in XML config
-	
-	@Bean(name = "passwordEncoder")
-	public PasswordEncoder getPasswordEncoder() {
-		return new ShaPasswordEncoder();
-	}
-	
-	@Bean(name = "customUserDetailsService")
-	public UserDetailsService getUserDetailsService() {
+	private UserDetailsService getUserDetailsService() {
 		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
-	@Bean(name = "http401UnauthorizedEntryPoint")
-	public AuthenticationEntryPoint getHttp401UnauthorizedEntryPoint() {
-		return new Http401UnauthorizedEntryPoint();
+	private SaltSource getSaltSource() {
+		ReflectionSaltSource saltSource = new ReflectionSaltSource();
+		saltSource.setUserPropertyToUse("salt");
+		return saltSource;
+	}
+	
+	private AuthenticationProvider getAuthenticationProvider() {
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(getPasswordEncoder());
+		provider.setSaltSource(getSaltSource());
+		provider.setUserDetailsService(getUserDetailsService());
+		provider.setMessageSource(messageSource);
+		return provider;
 	}
 	
 }

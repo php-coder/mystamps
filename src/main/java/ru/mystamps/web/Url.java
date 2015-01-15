@@ -40,7 +40,6 @@ public final class Url {
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
 	
-	// defined at src/main/resources/spring/security.xml
 	public static final String AUTHENTICATION_PAGE   = "/account/auth";
 	public static final String LOGIN_PAGE            = "/account/login";
 	public static final String LOGOUT_PAGE           = "/account/logout";
