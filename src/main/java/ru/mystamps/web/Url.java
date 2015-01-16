@@ -37,6 +37,7 @@ public final class Url {
 	
 	public static final String INDEX_PAGE            = "/";
 	public static final String ROBOTS_TXT            = "/robots.txt";
+	public static final String SITEMAP_XML           = "/sitemap.xml";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
 	

@@ -15,15 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service.dto;
 
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
+import java.util.Date;
 
-public interface JdbcSeriesDao {
-	Iterable<SitemapInfoDto> findAllForSitemap();
-	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
-	long countAllStamps();
-	long countSeriesOfCollection(Integer collectionId);
-	long countStampsOfCollection(Integer collectionId);
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@RequiredArgsConstructor
+public class SitemapInfoDto {
+	private final Integer id;
+	private final Date updatedAt;
 }

@@ -35,6 +35,7 @@ import ru.mystamps.web.entity.Series
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.YvertCatalog
 import ru.mystamps.web.model.AddSeriesForm
+import ru.mystamps.web.service.dto.SitemapInfoDto
 import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {
@@ -942,6 +943,22 @@ class SeriesServiceImplTest extends Specification {
 					return true
 				}
 			) >> []
+	}
+	
+	//
+	// Tests for findAllForSitemap()
+	//
+	
+	def "findAllForSitemap() should call dao and returns result"() {
+		given:
+			Iterable<SitemapInfoDto> expectedResult =
+				Collections.singletonList(TestObjects.createSitemapInfoDto())
+		when:
+			Iterable<SitemapInfoDto> result = service.findAllForSitemap()
+		then:
+			1 * jdbcSeriesDao.findAllForSitemap() >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

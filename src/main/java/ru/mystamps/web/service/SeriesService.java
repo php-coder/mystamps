@@ -24,6 +24,7 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
+import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
@@ -40,4 +41,5 @@ public interface SeriesService {
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);
 	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
+	Iterable<SitemapInfoDto> findAllForSitemap();
 }

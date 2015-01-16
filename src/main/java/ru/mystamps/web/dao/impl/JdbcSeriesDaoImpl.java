@@ -29,13 +29,20 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
+import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
+	
+	private static final RowMapper<SitemapInfoDto> SITEMAP_INFO_DTO_ROW_MAPPER =
+		new SitemapInfoDtoRowMapper();
 	
 	private static final RowMapper<SeriesInfoDto> SERIES_INFO_DTO_ROW_MAPPER =
 		new SeriesInfoDtoRowMapper();
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${series.find_all_for_sitemap}")
+	private String findAllForSitemapSql;
 	
 	@Value("${series.find_last_added_sql}")
 	private String findLastAddedSeriesSql;
@@ -51,6 +58,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	public JdbcSeriesDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public Iterable<SitemapInfoDto> findAllForSitemap() {
+		return jdbcTemplate.query(
+			findAllForSitemapSql,
+			Collections.<String, Object>emptyMap(),
+			SITEMAP_INFO_DTO_ROW_MAPPER
+		);
 	}
 	
 	@Override

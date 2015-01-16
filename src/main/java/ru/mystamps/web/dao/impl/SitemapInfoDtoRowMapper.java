@@ -15,15 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.impl;
 
-import ru.mystamps.web.service.dto.SeriesInfoDto;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
+import org.springframework.jdbc.core.RowMapper;
+
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
-public interface JdbcSeriesDao {
-	Iterable<SitemapInfoDto> findAllForSitemap();
-	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
-	long countAllStamps();
-	long countSeriesOfCollection(Integer collectionId);
-	long countStampsOfCollection(Integer collectionId);
+class SitemapInfoDtoRowMapper implements RowMapper<SitemapInfoDto> {
+	
+	@Override
+	public SitemapInfoDto mapRow(ResultSet resultSet, int i) throws SQLException {
+		Integer id     = resultSet.getInt("id");
+		Date updatedAt = resultSet.getTimestamp("updated_at");
+		
+		return new SitemapInfoDto(id, updatedAt);
+	}
+	
 }

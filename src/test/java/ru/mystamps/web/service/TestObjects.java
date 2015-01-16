@@ -27,6 +27,7 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 final class TestObjects {
 	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
@@ -127,5 +128,9 @@ final class TestObjects {
 		category.getMetaInfo().setCreatedBy(owner);
 		category.getMetaInfo().setUpdatedBy(owner);
 		return category;
+	}
+	
+	public static SitemapInfoDto createSitemapInfoDto() {
+		return new SitemapInfoDto(1, new Date());
 	}
 }

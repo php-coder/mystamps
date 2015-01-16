@@ -45,6 +45,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
+import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
 
 @RequiredArgsConstructor
@@ -223,6 +224,12 @@ public class SeriesServiceImpl implements SeriesService {
 		return jdbcSeriesDao.findLastAdded(quantity, lang);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<SitemapInfoDto> findAllForSitemap() {
+		return jdbcSeriesDao.findAllForSitemap();
+	}
+
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, Series series) {
 		if (dto.getYear() == null) {
 			return;

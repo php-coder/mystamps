@@ -100,4 +100,9 @@ public class ControllersConfig {
 		);
 	}
 	
+	@Bean
+	public SitemapController getSitemapController() {
+		return new SitemapController(servicesConfig.getSeriesService());
+	}
+	
 }
