@@ -44,7 +44,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_all_for_sitemap}")
 	private String findAllForSitemapSql;
 	
-	@Value("${series.find_last_added_sql}")
+	@Value("${series.find_last_added}")
 	private String findLastAddedSeriesSql;
 	
 	@Value("${series.count_all_stamps}")

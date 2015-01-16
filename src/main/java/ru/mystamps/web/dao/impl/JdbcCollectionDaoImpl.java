@@ -35,7 +35,7 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
-	@Value("${collection.find_last_created_sql}")
+	@Value("${collection.ind_last_created}")
 	private String findLastCreatedCollectionsSql;
 	
 	@Value("${collection.count_collections_of_users}")
