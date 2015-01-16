@@ -42,7 +42,7 @@ public class WhenAnonymousUserOpenNotExistingCategoryPage
 		String absentCategoryId = "888";
 		String url = Url.INFO_CATEGORY_PAGE
 			.replace("{id}", absentCategoryId)
-			.replace("slug", "category-404-error-test");
+			.replace("{slug}", "category-404-error-test");
 		page.open(url);
 		
 		checkStandardStructure();
