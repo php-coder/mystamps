@@ -28,6 +28,7 @@ import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.service.dto.SelectEntityDto
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.util.SlugUtils
 
 class CategoryServiceImplTest extends Specification {
 	
@@ -114,6 +115,31 @@ class CategoryServiceImplTest extends Specification {
 		then:
 			1 * categoryDao.save({ Category category ->
 				assert category?.nameRu == expectedCategoryName
+				return true
+			}) >> TestObjects.createCategory()
+	}
+	
+	def "add() should throw exception when name can't be converted to slug"() {
+		given:
+			form.setName(null)
+		when:
+			service.add(form, user)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "add() should pass slug to dao"() {
+		given:
+			String name = "-foo123 test_"
+		and:
+			String slug = SlugUtils.slugify(name)
+		and:
+			form.setName(name)
+		when:
+			service.add(form, user)
+		then:
+			1 * categoryDao.save({ Category category ->
+				assert category?.slug == slug
 				return true
 			}) >> TestObjects.createCategory()
 	}
