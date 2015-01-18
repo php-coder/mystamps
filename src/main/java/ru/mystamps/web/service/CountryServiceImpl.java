@@ -23,6 +23,7 @@ import java.util.Map;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -58,9 +59,12 @@ public class CountryServiceImpl implements CountryService {
 		Country country = new Country();
 		country.setName(dto.getName());
 		country.setNameRu(dto.getNameRu());
-		
+
 		String slug = SlugUtils.slugify(dto.getName());
-		Validate.isTrue(slug != null, "Slug for string '%s' is null", dto.getName());
+		Validate.isTrue(
+			StringUtils.isNotEmpty(slug),
+			"Slug for string '%s' must be non empty", dto.getName()
+		);
 		country.setSlug(slug);
 		
 		Date now = new Date();
