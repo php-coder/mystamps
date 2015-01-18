@@ -436,6 +436,23 @@ class UserServiceImplTest extends Specification {
 			})
 	}
 	
+	def "registerUser() should create collection for user"() {
+		when:
+			service.registerUser(activationForm)
+		then:
+			1 * collectionService.createCollection({ User user ->
+				assert user?.login == activationForm.login
+				assert user?.role == Role.USER
+				assert user?.name == activationForm.name
+				assert user?.email != null
+				assert user?.registeredAt != null
+				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
+				assert user?.hash != null
+				assert user?.salt != null
+				return true
+			})
+	}
+	
 	//
 	// Tests for findByLogin()
 	//
