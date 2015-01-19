@@ -34,7 +34,7 @@
 		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
 		<thymeleaf.security.version>2.1.1.RELEASE</thymeleaf.security.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<liquibase.version>3.2.2</liquibase.version>
+		<liquibase.version>3.3.2</liquibase.version>
 		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
 		<togglz.version>2.1.0.Final</togglz.version>
 		
@@ -63,7 +63,6 @@
 		<jasmine.plugin.version>1.3.1.5</jasmine.plugin.version>
 		<failsafe.plugin.version>2.18.1</failsafe.plugin.version>
 		<jetty.plugin.version>8.1.16.v20140903</jetty.plugin.version>
-		<liquibase.plugin.version>3.2.2</liquibase.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
 		<pmd.plugin.version>3.3</pmd.plugin.version>
@@ -248,20 +247,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<version>${liquibase.version}</version>
-			<exclusions>
-				<!--
-					Exclude unused and bloat dependencies.
-					See: https://liquibase.jira.com/browse/CORE-1933
-				-->
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- Allow liquibase to log over slf4j -->
@@ -699,7 +684,7 @@
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.plugin.version}</version>
+				<version>${liquibase.version}</version>
 				<configuration>
 					<changeLogFile>
 						${basedir}/src/main/resources/liquibase/changelog.xml
