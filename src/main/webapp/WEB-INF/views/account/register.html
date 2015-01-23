@@ -37,8 +37,9 @@
 					</li>
 					<!--/*/
 					<li sec:authorize="isAuthenticated()">
-						<i class="icon-share"></i>
-						<a href="../site/index.html" th:href="@{${LOGOUT_PAGE}}" th:text="#{t_logout}">Sign out</a>
+						<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+							<i class="icon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+						</form>
 					</li>
 					/*/-->
 					<li sec:authorize="isAnonymous()">

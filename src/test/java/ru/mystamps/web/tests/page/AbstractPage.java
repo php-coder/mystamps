@@ -41,6 +41,8 @@ import static lombok.AccessLevel.PROTECTED;
 public abstract class AbstractPage {
 	
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
+	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"LogoutForm\"]/input[@type=\"submit\"]";
+	private static final String USER_BAR_ENTRIES_LOCATOR = "//*[@id=\"user_bar\"]//li/a | //*[@id=\"user_bar\"]//li//input[not(@type=\"hidden\")]";
 	
 	protected final WebDriver driver;
 	private final String pageUrl;
@@ -118,8 +120,7 @@ public abstract class AbstractPage {
 	}
 	
 	public List<String> getUserBarEntries() {
-		WebElement userBar       = getElementById("user_bar");
-		List<WebElement> entries = userBar.findElements(By.tagName("li"));
+		List<WebElement> entries = getElementsByXPath(USER_BAR_ENTRIES_LOCATOR);
 		return WebElementUtils.convertToListWithText(entries);
 	}
 	
@@ -180,6 +181,10 @@ public abstract class AbstractPage {
 	
 	protected List<WebElement> getElementsByClassName(String className) {
 		return driver.findElements(By.className(className));
+	}
+	
+	protected List<WebElement> getElementsByXPath(String xpath) {
+		return driver.findElements(By.xpath(xpath));
 	}
 	
 	//
@@ -243,8 +248,9 @@ public abstract class AbstractPage {
 	
 	public void logout() {
 		// TODO: check than we not authenticated and do nothing
-		LogoutAccountPage logoutPage = new LogoutAccountPage(driver);
-		logoutPage.open();
+		
+		WebElement logoutButton = getElementByXPath(LOGOUT_BUTTON_LOCATOR);
+		logoutButton.submit();
 		
 		// return to current page
 		open();

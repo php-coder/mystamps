@@ -35,7 +35,15 @@ public final class WebElementUtils {
 		
 		List<String> result = new ArrayList<>(elements.size());
 		for (WebElement el : elements) {
-			result.add(el.getText());
+			String text = null;
+			if ("input".equals(el.getTagName())) {
+				text = el.getAttribute("value");
+			} else {
+				text = el.getText();
+			}
+			if (text != null) {
+				result.add(text);
+			}
 		}
 		
 		return result;

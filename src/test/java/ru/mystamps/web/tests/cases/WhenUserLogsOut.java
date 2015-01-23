@@ -23,11 +23,11 @@ import org.testng.annotations.Test;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.page.LogoutAccountPage;
+import ru.mystamps.web.tests.page.IndexSitePage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenUserLogsOut extends WhenAnyUserAtAnyPage<LogoutAccountPage> {
+public class WhenUserLogsOut extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
@@ -36,13 +36,13 @@ public class WhenUserLogsOut extends WhenAnyUserAtAnyPage<LogoutAccountPage> {
 	private String validUserPassword;
 	
 	public WhenUserLogsOut() {
-		super(LogoutAccountPage.class);
+		super(IndexSitePage.class);
 	}
 	
 	@Test(groups = "logic")
 	public void shouldRedirectAndClearSession() {
 		page.login(validUserLogin, validUserPassword);
-		page.open();
+		page.logout();
 		
 		assertThat(page.getCurrentUrl())
 			.overridingErrorMessage("after logout we should be redirected to main page")

@@ -58,3 +58,12 @@ label {
 .top-indent {
 	padding-top: 20px;
 }
+
+.no-margin {
+	margin: 0px;
+}
+
+.no-padding {
+	padding: 0px;
+}
+

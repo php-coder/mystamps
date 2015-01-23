@@ -36,15 +36,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.Url;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -94,9 +94,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.rememberMe()
 				// TODO: GH #27
-				.disable()
-			.csrf()
-				// TODO: GH #25
 				.disable()
 			.headers()
 				// TODO
