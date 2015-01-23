@@ -216,11 +216,7 @@ public abstract class AbstractPage {
 	}
 	
 	protected WebElement getLinkByText(String linkText) {
-		try {
-			return  driver.findElement(By.linkText(linkText));
-		} catch (NoSuchElementException ex) {
-			return null;
-		}
+		return getElement(By.linkText(linkText));
 	}
 	
 	private WebElement getElement(By byMethod) {
