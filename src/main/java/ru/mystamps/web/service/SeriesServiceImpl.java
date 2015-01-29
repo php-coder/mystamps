@@ -125,7 +125,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return seriesDao.count();
+		return jdbcSeriesDao.countAll();
 	}
 	
 	@Override

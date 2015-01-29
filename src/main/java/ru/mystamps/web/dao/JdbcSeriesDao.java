@@ -23,6 +23,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 public interface JdbcSeriesDao {
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);
 	long countStampsOfCollection(Integer collectionId);
