@@ -37,6 +37,9 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
+	@Value("${category.count_all_categories}")
+	private String countAllSql;
+	
 	@Value("${category.count_categories_of_collection}")
 	private String countCategoriesOfCollectionSql;
 	
@@ -45,6 +48,15 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	public JdbcCategoryDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public long countAll() {
+		return jdbcTemplate.queryForObject(
+			countAllSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
 	}
 	
 	@Override

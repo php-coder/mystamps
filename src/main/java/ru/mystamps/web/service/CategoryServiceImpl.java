@@ -89,7 +89,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return categoryDao.count();
+		return jdbcCategoryDao.countAll();
 	}
 	
 	@Override

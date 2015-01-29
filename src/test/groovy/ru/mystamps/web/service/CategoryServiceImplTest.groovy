@@ -228,7 +228,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			long result = service.countAll()
 		then:
-			1 * categoryDao.count() >> expectedResult
+			1 * jdbcCategoryDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}
