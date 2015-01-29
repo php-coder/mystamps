@@ -37,6 +37,9 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
+	@Value("${country.count_all_countries}")
+	private String countAllSql;
+	
 	@Value("${country.count_countries_of_collection}")
 	private String countCountriesOfCollectionSql;
 	
@@ -45,6 +48,15 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	public JdbcCountryDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public long countAll() {
+		return jdbcTemplate.queryForObject(
+			countAllSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
 	}
 	
 	@Override

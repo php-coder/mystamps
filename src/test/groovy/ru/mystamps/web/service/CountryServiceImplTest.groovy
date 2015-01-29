@@ -228,7 +228,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			long result = service.countAll()
 		then:
-			1 * countryDao.count() >> expectedResult
+			1 * jdbcCountryDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}

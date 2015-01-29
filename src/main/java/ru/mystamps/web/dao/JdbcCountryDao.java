@@ -20,6 +20,7 @@ package ru.mystamps.web.dao;
 import java.util.Map;
 
 public interface JdbcCountryDao {
+	long countAll();
 	long countCountriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 }

@@ -89,7 +89,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return countryDao.count();
+		return jdbcCountryDao.countAll();
 	}
 	
 	@Override
