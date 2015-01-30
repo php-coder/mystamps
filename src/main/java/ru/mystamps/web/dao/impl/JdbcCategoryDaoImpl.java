@@ -40,6 +40,12 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	@Value("${category.count_all_categories}")
 	private String countAllSql;
 	
+	@Value("${category.count_categories_by_name}")
+	private String countByNameSql;
+	
+	@Value("${category.count_categories_by_name_ru}")
+	private String countByNameRuSql;
+	
 	@Value("${category.count_categories_of_collection}")
 	private String countCategoriesOfCollectionSql;
 	
@@ -55,6 +61,24 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		return jdbcTemplate.queryForObject(
 			countAllSql,
 			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByName(String name) {
+		return jdbcTemplate.queryForObject(
+			countByNameSql,
+			Collections.singletonMap("name", name),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByNameRu(String name) {
+		return jdbcTemplate.queryForObject(
+			countByNameRuSql,
+			Collections.singletonMap("name", name),
 			Long.class
 		);
 	}

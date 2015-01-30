@@ -282,7 +282,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "countByName() should call dao"() {
 		given:
-			categoryDao.countByName(_ as String) >> 2
+			jdbcCategoryDao.countByName(_ as String) >> 2
 		when:
 			int result = service.countByName('Any name here')
 		then:
@@ -293,7 +293,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByName('Sport')
 		then:
-			1 * categoryDao.countByName({ String name ->
+			1 * jdbcCategoryDao.countByName({ String name ->
 				assert name == 'Sport'
 				return true
 			})
@@ -312,7 +312,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "countByNameRu() should call dao"() {
 		given:
-			categoryDao.countByNameRu(_ as String) >> 2
+			jdbcCategoryDao.countByNameRu(_ as String) >> 2
 		when:
 			int result = service.countByNameRu('Any name here')
 		then:
@@ -323,7 +323,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByNameRu('Спорт')
 		then:
-			1 * categoryDao.countByNameRu({ String name ->
+			1 * jdbcCategoryDao.countByNameRu({ String name ->
 				assert name == 'Спорт'
 				return true
 			})

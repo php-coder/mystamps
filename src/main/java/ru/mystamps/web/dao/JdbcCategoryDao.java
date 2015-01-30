@@ -21,6 +21,8 @@ import java.util.Map;
 
 public interface JdbcCategoryDao {
 	long countAll();
+	long countByName(String name);
+	long countByNameRu(String name);
 	long countCategoriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 }

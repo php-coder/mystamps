@@ -105,14 +105,14 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
-		return categoryDao.countByName(name);
+		return jdbcCategoryDao.countByName(name);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name on Russian should be non null");
-		return categoryDao.countByNameRu(name);
+		return jdbcCategoryDao.countByNameRu(name);
 	}
 	
 	@Override
