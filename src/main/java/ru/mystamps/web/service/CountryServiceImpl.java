@@ -110,7 +110,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int countByNameRu(String name) {
+	public long countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name on Russian should be non null");
 		return countryDao.countByNameRu(name);
 	}

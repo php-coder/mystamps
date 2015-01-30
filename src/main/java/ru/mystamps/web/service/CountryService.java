@@ -31,6 +31,6 @@ public interface CountryService {
 	long countAll();
 	long countCountriesOf(Collection collection);
 	long countByName(String name);
-	int countByNameRu(String name);
+	long countByNameRu(String name);
 	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
 }
