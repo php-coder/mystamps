@@ -25,7 +25,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 public interface CountryDao extends PagingAndSortingRepository<Country, Integer> {
-	int countByName(String name);
+	long countByName(String name);
 	int countByNameRu(String name);
 	
 	@Query(

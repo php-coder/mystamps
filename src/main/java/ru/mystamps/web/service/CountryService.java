@@ -30,7 +30,7 @@ public interface CountryService {
 	Iterable<SelectEntityDto> findAll(String lang);
 	long countAll();
 	long countCountriesOf(Collection collection);
-	int countByName(String name);
+	long countByName(String name);
 	int countByNameRu(String name);
 	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
 }
