@@ -26,6 +26,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>H2Console</servlet-name>
+		<!-- See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java -->
 		<url-pattern>/console/*</url-pattern>
 	</servlet-mapping>
 	

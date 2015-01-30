@@ -18,6 +18,7 @@
 package ru.mystamps.web.support.spring.security;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +40,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.Url;
@@ -92,6 +94,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
 				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
 				.and()
+			.csrf()
+				// Allow unsecured requests to Togglz and H2 consoles.
+				// See also: https://github.com/togglz/togglz/issues/119
+				// See also: src/main/config/test-override-web.xml
+				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/togglz", "/console"))
+			.and()
 			.rememberMe()
 				// TODO: GH #27
 				.disable()
@@ -132,6 +140,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
+	}
+	
+	private static class AllExceptUrlsStartedWith implements RequestMatcher {
+		
+		private static final String[] ALLOWED_METHODS =
+			new String[] {"GET", "HEAD", "TRACE", "OPTIONS"};
+		
+		private final String[] allowedUrls;
+		
+		public AllExceptUrlsStartedWith(String... allowedUrls) {
+			this.allowedUrls = allowedUrls;
+		}
+		
+		@Override
+		public boolean matches(HttpServletRequest request) {
+			// replicate default behavior (see CsrfFilter.DefaultRequiresCsrfMatcher class)
+			String method = request.getMethod();
+			for (String allowedMethod : ALLOWED_METHODS) {
+				if (allowedMethod.equals(method)) {
+					return false;
+				}
+			}
+			
+			// apply our own exceptions
+			String uri = request.getRequestURI();
+			for (String allowedUrl : allowedUrls) {
+				if (uri.startsWith(allowedUrl)) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
 	}
 	
 }
