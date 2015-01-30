@@ -40,6 +40,12 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	@Value("${country.count_all_countries}")
 	private String countAllSql;
 	
+	@Value("${country.count_countries_by_name}")
+	private String countByNameSql;
+	
+	@Value("${country.count_countries_by_name_ru}")
+	private String countByNameRuSql;
+	
 	@Value("${country.count_countries_of_collection}")
 	private String countCountriesOfCollectionSql;
 	
@@ -55,6 +61,24 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 		return jdbcTemplate.queryForObject(
 			countAllSql,
 			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByName(String name) {
+		return jdbcTemplate.queryForObject(
+			countByNameSql,
+			Collections.singletonMap("name", name),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByNameRu(String name) {
+		return jdbcTemplate.queryForObject(
+			countByNameRuSql,
+			Collections.singletonMap("name", name),
 			Long.class
 		);
 	}

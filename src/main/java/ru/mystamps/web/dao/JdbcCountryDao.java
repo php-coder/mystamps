@@ -21,6 +21,8 @@ import java.util.Map;
 
 public interface JdbcCountryDao {
 	long countAll();
+	long countByName(String name);
+	long countByNameRu(String name);
 	long countCountriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 }

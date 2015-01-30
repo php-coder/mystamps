@@ -282,7 +282,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "countByName() should call dao"() {
 		given:
-			countryDao.countByName(_ as String) >> 2
+			jdbcCountryDao.countByName(_ as String) >> 2
 		when:
 			int result = service.countByName('Any name here')
 		then:
@@ -293,7 +293,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.countByName('Canada')
 		then:
-			1 * countryDao.countByName({ String name ->
+			1 * jdbcCountryDao.countByName({ String name ->
 				assert name == 'Canada'
 				return true
 			})
@@ -312,7 +312,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "countByNameRu() should call dao"() {
 		given:
-			countryDao.countByNameRu(_ as String) >> 2
+			jdbcCountryDao.countByNameRu(_ as String) >> 2
 		when:
 			int result = service.countByNameRu('Any name here')
 		then:
@@ -323,7 +323,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.countByNameRu('Канада')
 		then:
-			1 * countryDao.countByNameRu({ String name ->
+			1 * jdbcCountryDao.countByNameRu({ String name ->
 				assert name == 'Канада'
 				return true
 			})
