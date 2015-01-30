@@ -25,8 +25,8 @@ import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 public interface CategoryDao extends PagingAndSortingRepository<Category, Integer> {
-	int countByName(String name);
-	int countByNameRu(String name);
+	long countByName(String name);
+	long countByNameRu(String name);
 	
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SelectEntityDto("

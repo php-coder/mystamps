@@ -30,7 +30,7 @@ public interface CategoryService {
 	Iterable<SelectEntityDto> findAll(String lang);
 	long countAll();
 	long countCategoriesOf(Collection collection);
-	int countByName(String name);
-	int countByNameRu(String name);
+	long countByName(String name);
+	long countByNameRu(String name);
 	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
 }
