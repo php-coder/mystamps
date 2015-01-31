@@ -32,7 +32,7 @@ import ru.mystamps.web.dao.JdbcCategoryDao;
 
 public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
-	private static final RowMapper<Pair<String, Integer>> STRING_INTEGER_PAIR_ROW_MAPPER =
+	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
 		new StringIntegerPairRowMapper("name", "counter");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -102,7 +102,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
 			countStampsByCategoriesSql,
 			params,
-			STRING_INTEGER_PAIR_ROW_MAPPER
+			NAME_AND_COUNTER_ROW_MAPPER
 		);
 		
 		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
