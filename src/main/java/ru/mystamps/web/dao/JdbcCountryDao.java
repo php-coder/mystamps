@@ -19,10 +19,13 @@ package ru.mystamps.web.dao;
 
 import java.util.Map;
 
+import ru.mystamps.web.service.dto.SelectEntityDto;
+
 public interface JdbcCountryDao {
 	long countAll();
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countCountriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
+	Iterable<SelectEntityDto> findAllAsSelectEntries(String lang);
 }

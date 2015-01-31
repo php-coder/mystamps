@@ -196,7 +196,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCountries = [ country1, country2 ]
 		and:
-			countryDao.findAllAsSelectEntries(_ as String) >> expectedCountries
+			jdbcCountryDao.findAllAsSelectEntries(_ as String) >> expectedCountries
 		when:
 			Iterable<SelectEntityDto> resultCountries = service.findAll('de')
 		then:
@@ -208,7 +208,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.findAll(expectedLanguage)
 		then:
-			1 * countryDao.findAllAsSelectEntries({ String language ->
+			1 * jdbcCountryDao.findAllAsSelectEntries({ String language ->
 				assert language == expectedLanguage
 				return true
 			})
