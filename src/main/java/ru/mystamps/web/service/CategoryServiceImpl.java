@@ -83,7 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<SelectEntityDto> findAll(String lang) {
-		return categoryDao.findAllAsSelectEntries(lang);
+		return jdbcCategoryDao.findAllAsSelectEntries(lang);
 	}
 	
 	@Override

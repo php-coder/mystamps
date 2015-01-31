@@ -196,7 +196,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCategories = [ category1, category2 ]
 		and:
-			categoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
+			jdbcCategoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
 		when:
 			Iterable<SelectEntityDto> resultCategories = service.findAll('fr')
 		then:
@@ -208,7 +208,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findAll(expectedLanguage)
 		then:
-			1 * categoryDao.findAllAsSelectEntries({ String language ->
+			1 * jdbcCategoryDao.findAllAsSelectEntries({ String language ->
 				assert language == expectedLanguage
 				return true
 			})

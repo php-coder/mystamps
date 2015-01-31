@@ -19,6 +19,7 @@ package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,11 +30,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.service.dto.SelectEntityDto;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
 		new StringIntegerPairRowMapper("name", "counter");
+	
+	private static final RowMapper<Pair<String, Integer>> NAME_AND_ID_ROW_MAPPER =
+		new StringIntegerPairRowMapper("name", "id");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -51,6 +57,9 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	@Value("${category.count_stamps_by_categories}")
 	private String countStampsByCategoriesSql;
+	
+	@Value("${category.find_all_categories_names_with_ids}")
+	private String findCategoriesNamesWithIdsSql;
 	
 	public JdbcCategoryDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -108,6 +117,24 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
 		for (Pair<String, Integer> pair : rawResult) {
 			result.put(pair.getFirst(), pair.getSecond());
+		}
+		
+		return result;
+	}
+	
+	@Override
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public Iterable<SelectEntityDto> findAllAsSelectEntries(String lang) {
+		// TODO: find a better way of extracting results
+		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
+			findCategoriesNamesWithIdsSql,
+			Collections.singletonMap("lang", lang),
+			NAME_AND_ID_ROW_MAPPER
+		);
+		
+		List<SelectEntityDto> result = new LinkedList<>();
+		for (Pair<String, Integer> pair : rawResult) {
+			result.add(new SelectEntityDto(pair.getSecond(), pair.getFirst()));
 		}
 		
 		return result;
