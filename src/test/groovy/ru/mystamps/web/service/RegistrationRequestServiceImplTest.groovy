@@ -154,4 +154,31 @@ class RegistrationRequestServiceImplTest extends Specification {
 			})
 	}
 	
+	//
+	// Tests for countByActivationKey()
+	//
+	
+	def "countByActivationKey() should throw exception when key is null"() {
+		when:
+			service.countByActivationKey(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countByActivationKey() should call dao"() {
+		given:
+			usersActivationDao.countByActivationKey(_ as String) >> 2
+		when:
+			int result = service.countByActivationKey('0123456789')
+		then:
+			result == 2
+	}
+	
+	def "countByActivationKey() should pass activation key to dao"() {
+		when:
+			service.countByActivationKey('0987654321')
+		then:
+			1 * usersActivationDao.countByActivationKey('0987654321')
+	}
+	
 }

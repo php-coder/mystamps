@@ -23,4 +23,5 @@ import ru.mystamps.web.service.dto.RegisterAccountDto;
 
 public interface RegistrationRequestService {
 	void add(RegisterAccountDto dto, Locale lang);
+	long countByActivationKey(String activationKey);
 }

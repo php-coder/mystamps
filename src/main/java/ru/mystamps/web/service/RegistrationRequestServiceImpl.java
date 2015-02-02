@@ -58,6 +58,14 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
 		}
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public long countByActivationKey(String activationKey) {
+		Validate.isTrue(activationKey != null, "Activation key should be non null");
+		
+		return usersActivationDao.countByActivationKey(activationKey);
+	}
+	
 	/**
 	 * Generates activation key.
 	 * @return string which contains numbers and letters in lower case

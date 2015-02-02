@@ -59,33 +59,6 @@ class UserServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for countRegistrationRequestByActivationKey()
-	//
-	
-	def "countRegistrationRequestByActivationKey() should throw exception when key is null"() {
-		when:
-			service.countRegistrationRequestByActivationKey(null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "countRegistrationRequestByActivationKey() should call dao"() {
-		given:
-			usersActivationDao.countByActivationKey(_ as String) >> 2
-		when:
-			int result = service.countRegistrationRequestByActivationKey('0123456789')
-		then:
-			result == 2
-	}
-	
-	def "countRegistrationRequestByActivationKey() should pass activation key to dao"() {
-		when:
-			service.countRegistrationRequestByActivationKey('0987654321')
-		then:
-			1 * usersActivationDao.countByActivationKey('0987654321')
-	}
-	
-	//
 	// Tests for registerUser()
 	//
 	

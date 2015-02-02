@@ -53,14 +53,6 @@ public class UserServiceImpl implements UserService {
 	private final PasswordEncoder encoder;
 	
 	@Override
-	@Transactional(readOnly = true)
-	public long countRegistrationRequestByActivationKey(String activationKey) {
-		Validate.isTrue(activationKey != null, "Activation key should be non null");
-		
-		return usersActivationDao.countByActivationKey(activationKey);
-	}
-	
-	@Override
 	@Transactional
 	public void registerUser(ActivateAccountDto dto) {
 		Validate.isTrue(dto != null, "DTO should be non null");

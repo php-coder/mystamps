@@ -21,7 +21,6 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
 public interface UserService {
-	long countRegistrationRequestByActivationKey(String activationKey);
 	void registerUser(ActivateAccountDto dto);
 	User findByLogin(String login);
 	long countByLogin(String login);

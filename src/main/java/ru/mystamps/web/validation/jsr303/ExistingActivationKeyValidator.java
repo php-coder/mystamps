@@ -21,13 +21,13 @@ import javax.inject.Inject;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import ru.mystamps.web.service.UserService;
+import ru.mystamps.web.service.RegistrationRequestService;
 
 public class ExistingActivationKeyValidator
 	implements ConstraintValidator<ExistingActivationKey, String> {
 	
 	@Inject
-	private UserService userService;
+	private RegistrationRequestService registrationRequestService;
 	
 	@Override
 	public void initialize(ExistingActivationKey annotation) {
@@ -41,7 +41,7 @@ public class ExistingActivationKeyValidator
 			return true;
 		}
 		
-		boolean requestExists = userService.countRegistrationRequestByActivationKey(value) == 1;
+		boolean requestExists = registrationRequestService.countByActivationKey(value) == 1;
 		if (!requestExists) {
 			return false;
 		}
