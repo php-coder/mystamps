@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 @Configuration
 public class TestContext {
@@ -30,11 +29,11 @@ public class TestContext {
 	public PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer configurer =
 			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocations(new Resource[] {
+		configurer.setLocations(
 			new ClassPathResource("test/spring/test-data.properties"),
 			new ClassPathResource("test/spring/mail.properties"),
 			new ClassPathResource("ru/mystamps/i18n/MailTemplates.properties")
-		});
+		);
 		return configurer;
 	}
 	

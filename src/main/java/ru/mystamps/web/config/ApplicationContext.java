@@ -26,7 +26,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
@@ -68,12 +67,12 @@ public class ApplicationContext {
 	public static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
 		PropertySourcesPlaceholderConfigurer configurer =
 			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocations(new Resource[] {
+		configurer.setLocations(
 			new ClassPathResource("sql/category_dao_queries.properties"),
 			new ClassPathResource("sql/country_dao_queries.properties"),
 			new ClassPathResource("sql/collection_dao_queries.properties"),
 			new ClassPathResource("sql/series_dao_queries.properties")
-		});
+		);
 		return configurer;
 	}
 	
