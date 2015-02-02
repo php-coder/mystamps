@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int countRegistrationRequestByActivationKey(String activationKey) {
+	public long countRegistrationRequestByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
 		return usersActivationDao.countByActivationKey(activationKey);
