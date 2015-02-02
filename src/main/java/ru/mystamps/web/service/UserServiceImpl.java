@@ -18,7 +18,6 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
-import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,9 +38,6 @@ import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.support.togglz.Features;
-import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.entity.User.Role.USER;
 
@@ -54,27 +50,7 @@ public class UserServiceImpl implements UserService {
 	private final JdbcUserDao jdbcUserDao;
 	private final UsersActivationDao usersActivationDao;
 	private final CollectionService collectionService;
-	private final MailService mailService;
 	private final PasswordEncoder encoder;
-	
-	@Override
-	@Transactional
-	public void addRegistrationRequest(RegisterAccountDto dto, Locale lang) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
-		
-		UsersActivation activation = new UsersActivation();
-		
-		activation.setActivationKey(generateActivationKey());
-		activation.setEmail(dto.getEmail());
-		activation.setLang(LocaleUtils.getLanguageOrDefault(lang, "en"));
-		activation.setCreatedAt(new Date());
-		usersActivationDao.save(activation);
-
-		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
-			mailService.sendActivationKeyToUser(activation);
-		}
-	}
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -156,16 +132,6 @@ public class UserServiceImpl implements UserService {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		return jdbcUserDao.countByLogin(login);
-	}
-	
-	/**
-	 * Generates activation key.
-	 * @return string which contains numbers and letters in lower case
-	 *         in 10 characters length
-	 **/
-	private static String generateActivationKey() {
-		int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH;
-		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase();
 	}
 	
 	/**

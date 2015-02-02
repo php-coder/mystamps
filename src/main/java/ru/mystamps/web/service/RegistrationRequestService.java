@@ -17,12 +17,10 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.ActivateAccountDto;
+import java.util.Locale;
 
-public interface UserService {
-	long countRegistrationRequestByActivationKey(String activationKey);
-	void registerUser(ActivateAccountDto dto);
-	User findByLogin(String login);
-	long countByLogin(String login);
+import ru.mystamps.web.service.dto.RegisterAccountDto;
+
+public interface RegistrationRequestService {
+	void add(RegisterAccountDto dto, Locale lang);
 }

@@ -36,7 +36,10 @@ public class ControllersConfig {
 	
 	@Bean
 	public AccountController getAccountController() {
-		return new AccountController(servicesConfig.getUserService());
+		return new AccountController(
+			servicesConfig.getUserService(),
+			servicesConfig.getRegistrationRequestService()
+		);
 	}
 	
 	@Bean

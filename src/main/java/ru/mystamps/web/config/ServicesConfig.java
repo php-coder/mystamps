@@ -114,6 +114,11 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public RegistrationRequestService getRegistrationRequestService() {
+		return new RegistrationRequestServiceImpl(usersActivationDao, getMailService());
+	}
+	
+	@Bean
 	public SeriesService getSeriesService() {
 		return new SeriesServiceImpl(seriesDao, daoConfig.getJdbcSeriesDao(), getImageService());
 	}
@@ -130,7 +135,6 @@ public class ServicesConfig {
 			daoConfig.getJdbcUserDao(),
 			usersActivationDao,
 			getCollectionService(),
-			getMailService(),
 			securityConfig.getPasswordEncoder()
 		);
 	}
