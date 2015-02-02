@@ -35,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	private final UserDao userDao;
+	private final JdbcUserDao jdbcUserDao;
 	private final UsersActivationDao usersActivationDao;
 	private final CollectionService collectionService;
 	private final MailService mailService;
@@ -153,7 +155,7 @@ public class UserServiceImpl implements UserService {
 	public long countByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
-		return userDao.countByLogin(login);
+		return jdbcUserDao.countByLogin(login);
 	}
 	
 	/**

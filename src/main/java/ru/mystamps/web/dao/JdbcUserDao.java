@@ -17,10 +17,6 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
-import ru.mystamps.web.entity.User;
-
-public interface UserDao extends CrudRepository<User, Integer> {
-	User findByLogin(String login);
+public interface JdbcUserDao {
+    long countByLogin(String login);
 }

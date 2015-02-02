@@ -22,6 +22,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import ru.mystamps.web.dao.JdbcUserDao
 import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.User
@@ -34,6 +35,7 @@ import ru.mystamps.web.tests.DateUtils
 class UserServiceImplTest extends Specification {
 	
 	private UserDao userDao = Mock()
+	private JdbcUserDao jdbcUserDao = Mock()
 	private UsersActivationDao usersActivationDao = Mock()
 	private CollectionService collectionService = Mock()
 	private MailService mailService = Mock()
@@ -62,7 +64,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(activation.getActivationKey())
 		
-		service = new UserServiceImpl(userDao, usersActivationDao, collectionService, mailService, encoder)
+		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationDao, collectionService, mailService, encoder)
 	}
 	
 	//
@@ -494,7 +496,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "countByLogin() should call dao"() {
 		given:
-			userDao.countByLogin(_ as String) >> 2
+			jdbcUserDao.countByLogin(_ as String) >> 2
 		when:
 			int result = service.countByLogin('any-login')
 		then:
@@ -505,7 +507,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.countByLogin('john')
 		then:
-			1 * userDao.countByLogin('john')
+			1 * jdbcUserDao.countByLogin('john')
 	}
 	
 }

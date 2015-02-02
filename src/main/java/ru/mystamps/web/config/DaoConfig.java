@@ -25,10 +25,12 @@ import org.springframework.context.annotation.Configuration;
 import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.impl.JdbcCategoryDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcCollectionDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcCountryDaoImpl;
+import ru.mystamps.web.dao.impl.JdbcUserDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcSeriesDaoImpl;
 
 @Configuration
@@ -55,6 +57,11 @@ public class DaoConfig {
 	@Bean
 	public JdbcSeriesDao getJdbcSeriesDao() {
 		return new JdbcSeriesDaoImpl(dataSourceConfig.getDataSource());
+	}
+	
+	@Bean
+	public JdbcUserDao getJdbcUserDao() {
+		return new JdbcUserDaoImpl(dataSourceConfig.getDataSource());
 	}
 	
 }

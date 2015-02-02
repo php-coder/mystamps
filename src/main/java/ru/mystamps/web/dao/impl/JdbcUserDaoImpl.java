@@ -15,12 +15,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.impl;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.dao.JdbcUserDao;
 
-import ru.mystamps.web.entity.User;
+import javax.sql.DataSource;
+import java.util.Collections;
 
-public interface UserDao extends CrudRepository<User, Integer> {
-	User findByLogin(String login);
+public class JdbcUserDaoImpl implements JdbcUserDao {
+	
+	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${user.count_users_by_login}")
+	private String countByLoginSql;
+	
+	public JdbcUserDaoImpl(DataSource dataSource) {
+		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public long countByLogin(String login) {
+		return jdbcTemplate.queryForObject(
+			countByLoginSql,
+			Collections.singletonMap("login", login),
+			Long.class
+		);
+	}
+	
 }

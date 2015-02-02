@@ -127,6 +127,7 @@ public class ServicesConfig {
 	public UserService getUserService() {
 		return new UserServiceImpl(
 			userDao,
+			daoConfig.getJdbcUserDao(),
 			usersActivationDao,
 			getCollectionService(),
 			getMailService(),
