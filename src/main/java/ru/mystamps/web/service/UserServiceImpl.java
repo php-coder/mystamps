@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int countByLogin(String login) {
+	public long countByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		return userDao.countByLogin(login);

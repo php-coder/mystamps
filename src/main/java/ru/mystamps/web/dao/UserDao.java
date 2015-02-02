@@ -23,5 +23,5 @@ import ru.mystamps.web.entity.User;
 
 public interface UserDao extends CrudRepository<User, Integer> {
 	User findByLogin(String login);
-	int countByLogin(String login);
+	long countByLogin(String login);
 }
