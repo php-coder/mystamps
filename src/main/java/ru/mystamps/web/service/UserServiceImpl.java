@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 	private final UserDao userDao;
 	private final JdbcUserDao jdbcUserDao;
 	private final UsersActivationDao usersActivationDao;
+	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
 	private final PasswordEncoder encoder;
 	
@@ -98,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		user.setSalt(salt);
 		
 		userDao.save(user);
-		usersActivationDao.delete(activation);
+		usersActivationService.remove(activation);
 		
 		collectionService.createCollection(user);
 		

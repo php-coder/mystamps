@@ -59,6 +59,14 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	}
 	
 	@Override
+	@Transactional
+	public void remove(UsersActivation activation) {
+		Validate.isTrue(activation != null, "Activation must be non null");
+		
+		usersActivationDao.delete(activation);
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public long countByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");

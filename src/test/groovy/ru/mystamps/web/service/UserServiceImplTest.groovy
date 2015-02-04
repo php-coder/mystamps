@@ -35,6 +35,7 @@ class UserServiceImplTest extends Specification {
 	private UserDao userDao = Mock()
 	private JdbcUserDao jdbcUserDao = Mock()
 	private UsersActivationDao usersActivationDao = Mock()
+	private UsersActivationService usersActivationService = Mock()
 	private CollectionService collectionService = Mock()
 	private PasswordEncoder encoder = Mock()
 	
@@ -55,7 +56,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(activation.getActivationKey())
 		
-		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationDao, collectionService, encoder)
+		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationDao, usersActivationService, collectionService, encoder)
 	}
 	
 	//
@@ -84,7 +85,7 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationDao.findOne(_ as String) >> expectedActivation
 		and:
-			1 * usersActivationDao.delete({ UsersActivation actualActivation ->
+			1 * usersActivationService.remove({ UsersActivation actualActivation ->
 				assert actualActivation == expectedActivation
 				return true
 			})
@@ -107,7 +108,7 @@ class UserServiceImplTest extends Specification {
 		and:
 			0 * userDao.save(_ as User)
 		and:
-			0 * usersActivationDao.delete(_ as UsersActivation)
+			0 * usersActivationService.remove(_ as UsersActivation)
 	}
 	
 	def "registerUser() should pass name to dao"() {

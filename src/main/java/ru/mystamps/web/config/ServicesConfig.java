@@ -134,6 +134,7 @@ public class ServicesConfig {
 			userDao,
 			daoConfig.getJdbcUserDao(),
 			usersActivationDao,
+			getUsersActivationService(),
 			getCollectionService(),
 			securityConfig.getPasswordEncoder()
 		);
