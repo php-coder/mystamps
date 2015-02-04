@@ -68,6 +68,14 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public UsersActivation findByActivationKey(String activationKey) {
+		Validate.isTrue(activationKey != null, "Activation key must be non null");
+		
+		return usersActivationDao.findOne(activationKey);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		

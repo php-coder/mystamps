@@ -23,7 +23,6 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.JdbcUserDao
 import ru.mystamps.web.dao.UserDao
-import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.User.Role
 import ru.mystamps.web.entity.UsersActivation
@@ -34,7 +33,6 @@ class UserServiceImplTest extends Specification {
 	
 	private UserDao userDao = Mock()
 	private JdbcUserDao jdbcUserDao = Mock()
-	private UsersActivationDao usersActivationDao = Mock()
 	private UsersActivationService usersActivationService = Mock()
 	private CollectionService collectionService = Mock()
 	private PasswordEncoder encoder = Mock()
@@ -48,7 +46,7 @@ class UserServiceImplTest extends Specification {
 		encoder.encodePassword(_ as String, _ as String) >> user.getHash()
 		
 		UsersActivation activation = TestObjects.createUsersActivation()
-		usersActivationDao.findOne(_ as String) >> activation
+		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
 		activationForm.setLogin(user.getLogin())
@@ -56,7 +54,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(activation.getActivationKey())
 		
-		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationDao, usersActivationService, collectionService, encoder)
+		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationService, collectionService, encoder)
 	}
 	
 	//
@@ -83,7 +81,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			usersActivationDao.findOne(_ as String) >> expectedActivation
+			usersActivationService.findByActivationKey(_ as String) >> expectedActivation
 		and:
 			1 * usersActivationService.remove({ UsersActivation actualActivation ->
 				assert actualActivation == expectedActivation
@@ -104,7 +102,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			usersActivationDao.findOne(_ as String) >> null
+			usersActivationService.findByActivationKey(_ as String) >> null
 		and:
 			0 * userDao.save(_ as User)
 		and:
@@ -164,7 +162,7 @@ class UserServiceImplTest extends Specification {
 		given:
 			UsersActivation activation = TestObjects.createUsersActivation()
 		and:
-			usersActivationDao.findOne(_ as String) >> activation
+			usersActivationService.findByActivationKey(_ as String) >> activation
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -180,7 +178,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			usersActivationDao.findOne(_ as String) >> activation
+			usersActivationService.findByActivationKey(_ as String) >> activation
 		and:
 			1 * userDao.save({ User user ->
 				assert user?.registeredAt == activation.createdAt

@@ -25,5 +25,6 @@ import ru.mystamps.web.service.dto.RegisterAccountDto;
 public interface UsersActivationService {
 	void add(RegisterAccountDto dto, Locale lang);
 	void remove(UsersActivation activation);
+	UsersActivation findByActivationKey(String activationKey);
 	long countByActivationKey(String activationKey);
 }

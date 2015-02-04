@@ -36,7 +36,6 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
-import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
 import static ru.mystamps.web.entity.User.Role.USER;
@@ -48,7 +47,6 @@ public class UserServiceImpl implements UserService {
 	
 	private final UserDao userDao;
 	private final JdbcUserDao jdbcUserDao;
-	private final UsersActivationDao usersActivationDao;
 	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
 	private final PasswordEncoder encoder;
@@ -72,7 +70,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		String activationKey = dto.getActivationKey();
-		UsersActivation activation = usersActivationDao.findOne(activationKey);
+		UsersActivation activation = usersActivationService.findByActivationKey(activationKey);
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;

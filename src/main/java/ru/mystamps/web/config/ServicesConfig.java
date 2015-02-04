@@ -133,7 +133,6 @@ public class ServicesConfig {
 		return new UserServiceImpl(
 			userDao,
 			daoConfig.getJdbcUserDao(),
-			usersActivationDao,
 			getUsersActivationService(),
 			getCollectionService(),
 			securityConfig.getPasswordEncoder()
