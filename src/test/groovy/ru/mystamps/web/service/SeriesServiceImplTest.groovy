@@ -858,7 +858,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<Country> expectedResult = [ expectedCountry ]
 		and:
-			seriesDao.findByAsSeriesInfo(_ as Country, _ as String) >> expectedResult
+			jdbcSeriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
 			Iterable<Country> result = service.findBy(expectedCountry, 'any')
 		then:

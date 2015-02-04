@@ -24,6 +24,7 @@ public interface JdbcSeriesDao {
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
+	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);

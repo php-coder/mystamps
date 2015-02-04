@@ -204,7 +204,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SeriesInfoDto> findBy(Country country, String lang) {
 		Validate.isTrue(country != null, "Country must be non null");
 		
-		return seriesDao.findByAsSeriesInfo(country, lang);
+		return jdbcSeriesDao.findByCountryIdAsSeriesInfo(country.getId(), lang);
 	}
 	
 	@Override

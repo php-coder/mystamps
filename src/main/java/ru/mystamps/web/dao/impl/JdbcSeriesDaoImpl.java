@@ -50,6 +50,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_by_category_id}")
 	private String findByCategoryIdSql;
 	
+	@Value("${series.find_by_country_id}")
+	private String findByCountryIdSql;
+	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
 	
@@ -91,6 +94,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCategoryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("country_id", countryId);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(findByCountryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
 	}
 	
 	@Override
