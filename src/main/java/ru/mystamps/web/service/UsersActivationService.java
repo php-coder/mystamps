@@ -21,7 +21,7 @@ import java.util.Locale;
 
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 
-public interface RegistrationRequestService {
+public interface UsersActivationService {
 	void add(RegisterAccountDto dto, Locale lang);
 	long countByActivationKey(String activationKey);
 }

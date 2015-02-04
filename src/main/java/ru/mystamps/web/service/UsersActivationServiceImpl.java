@@ -34,7 +34,7 @@ import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
 
 @RequiredArgsConstructor
-public class RegistrationRequestServiceImpl implements RegistrationRequestService {
+public class UsersActivationServiceImpl implements UsersActivationService {
 	
 	private final UsersActivationDao usersActivationDao;
 	private final MailService mailService;

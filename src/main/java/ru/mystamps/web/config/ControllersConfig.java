@@ -38,7 +38,7 @@ public class ControllersConfig {
 	public AccountController getAccountController() {
 		return new AccountController(
 			servicesConfig.getUserService(),
-			servicesConfig.getRegistrationRequestService()
+			servicesConfig.getUsersActivationService()
 		);
 	}
 	

@@ -114,8 +114,8 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public RegistrationRequestService getRegistrationRequestService() {
-		return new RegistrationRequestServiceImpl(usersActivationDao, getMailService());
+	public UsersActivationService getUsersActivationService() {
+		return new UsersActivationServiceImpl(usersActivationDao, getMailService());
 	}
 	
 	@Bean

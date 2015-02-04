@@ -25,12 +25,12 @@ import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.tests.DateUtils
 
-class RegistrationRequestServiceImplTest extends Specification {
+class UsersActivationServiceImplTest extends Specification {
 	
 	private UsersActivationDao usersActivationDao = Mock()
 	private MailService mailService = Mock()
 	
-	private RegistrationRequestService service
+	private UsersActivationService service
 	private RegisterAccountForm registrationForm
 	
 	private static final Locale ANY_LOCALE = Locale.ENGLISH;
@@ -39,7 +39,7 @@ class RegistrationRequestServiceImplTest extends Specification {
 		registrationForm = new RegisterAccountForm()
 		registrationForm.setEmail('john.dou@example.org')
 		
-		service = new RegistrationRequestServiceImpl(usersActivationDao, mailService)
+		service = new UsersActivationServiceImpl(usersActivationDao, mailService)
 	}
 	
 	//

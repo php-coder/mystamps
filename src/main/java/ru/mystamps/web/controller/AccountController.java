@@ -44,7 +44,7 @@ import ru.mystamps.web.model.ActivateAccountForm.PasswordConfirmationChecks;
 import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.model.RegisterAccountForm;
-import ru.mystamps.web.service.RegistrationRequestService;
+import ru.mystamps.web.service.UsersActivationService;
 import ru.mystamps.web.service.UserService;
 
 @Controller
@@ -52,7 +52,7 @@ import ru.mystamps.web.service.UserService;
 public class AccountController {
 	
 	private final UserService userService;
-	private final RegistrationRequestService registrationRequestService;
+	private final UsersActivationService usersActivationService;
 	
 	@InitBinder("registerAccountForm")
 	protected void registrationInitBinder(WebDataBinder binder) {
@@ -80,7 +80,7 @@ public class AccountController {
 			return null;
 		}
 		
-		registrationRequestService.add(form, userLocale);
+		usersActivationService.add(form, userLocale);
 		
 		redirectAttributes.addFlashAttribute("justRegisteredUser", true);
 		
