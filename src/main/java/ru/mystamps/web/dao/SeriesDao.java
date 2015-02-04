@@ -21,7 +21,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -40,27 +39,6 @@ public interface SeriesDao extends CrudRepository<Series, Integer> {
 	@Query("SELECT COUNT(*) FROM Series s INNER JOIN s.gibbons m WHERE m.code = :gibbonsCode")
 	int countByGibbonsNumberCode(@Param("gibbonsCode") String gibbonsNumberCode);
 	
-	@Query(
-		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
-			+ "s.id, "
-			+ "cat.id, cat.slug, CASE WHEN (:lang = 'ru') THEN cat.nameRu ELSE cat.name END, "
-			+ "c.id, c.slug, CASE WHEN (:lang = 'ru') THEN c.nameRu ELSE c.name END, "
-			+ "s.releaseDay, "
-			+ "s.releaseMonth, "
-			+ "s.releaseYear, "
-			+ "s.quantity, "
-			+ "s.perforated"
-		+ ") "
-		+ "FROM Series s "
-		+ "JOIN s.category cat "
-		+ "LEFT JOIN s.country c "
-		+ "WHERE s.category = :category"
-	)
-	Iterable<SeriesInfoDto> findByAsSeriesInfo(
-		@Param("category") Category category,
-		@Param("lang") String lang
-	);
-
 	@Query(
 		"SELECT NEW ru.mystamps.web.service.dto.SeriesInfoDto("
 			+ "s.id, "

@@ -834,7 +834,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<Category> expectedResult = [ expectedCategory ]
 		and:
-			seriesDao.findByAsSeriesInfo(_ as Category, _ as String) >> expectedResult
+			jdbcSeriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
 			Iterable<Category> result = service.findBy(expectedCategory, 'any')
 		then:

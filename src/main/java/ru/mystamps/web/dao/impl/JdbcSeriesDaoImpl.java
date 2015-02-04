@@ -47,6 +47,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.find_last_added}")
 	private String findLastAddedSeriesSql;
 	
+	@Value("${series.find_by_category_id}")
+	private String findByCategoryIdSql;
+	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
 	
@@ -79,6 +82,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("category_id", categoryId);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(findByCategoryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
 	}
 	
 	@Override
