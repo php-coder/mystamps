@@ -213,7 +213,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
-		return seriesDao.findByAsSeriesInfo(collection.getId(), lang);
+		return jdbcSeriesDao.findByCollectionIdAsSeriesInfo(collection.getId(), lang);
 	}
 	
 	@Override

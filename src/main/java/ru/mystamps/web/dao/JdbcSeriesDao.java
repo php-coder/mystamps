@@ -25,6 +25,7 @@ public interface JdbcSeriesDao {
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
+	Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);

@@ -31,6 +31,7 @@ import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	private static final RowMapper<SitemapInfoDto> SITEMAP_INFO_DTO_ROW_MAPPER =
@@ -52,6 +53,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.find_by_country_id}")
 	private String findByCountryIdSql;
+	
+	@Value("${series.find_by_collection_id}")
+	private String findByCollectionIdSql;
 	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
@@ -103,6 +107,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCountryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+	}
+	
+	@Override
+	public Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("collection_id", collectionId);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(findByCollectionIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
 	}
 	
 	@Override

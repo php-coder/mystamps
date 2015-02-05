@@ -897,7 +897,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findBy(expectedCollection, expectedLang)
 		then:
-			1 * seriesDao.findByAsSeriesInfo(
+			1 * jdbcSeriesDao.findByCollectionIdAsSeriesInfo(
 				{ Integer collectionId ->
 					assert expectedCollectionId == collectionId
 					return true
