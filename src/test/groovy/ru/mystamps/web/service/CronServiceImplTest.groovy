@@ -26,8 +26,9 @@ import ru.mystamps.web.tests.DateUtils
 class CronServiceImplTest extends Specification {
 	
 	private UsersActivationDao usersActivationDao = Mock()
+	private UsersActivationService usersActivationService = Mock()
 	
-	private CronService service = new CronServiceImpl(usersActivationDao)
+	private CronService service = new CronServiceImpl(usersActivationDao, usersActivationService)
 	
 	//
 	// Tests for purgeUsersActivations()
@@ -68,7 +69,7 @@ class CronServiceImplTest extends Specification {
 		when:
 			service.purgeUsersActivations()
 		then:
-			1 * usersActivationDao.delete(expectedActivations)
+			1 * usersActivationService.remove(_ as UsersActivation)
 	}
 	
 	def "purgeUsersActivations() should do nothing if no activations"() {
@@ -77,7 +78,7 @@ class CronServiceImplTest extends Specification {
 		when:		
 			service.purgeUsersActivations()
 		then:
-			0 * usersActivationDao.delete(_ as Iterable)
+			0 * usersActivationService.remove(_ as UsersActivation)
 	}
 	
 }

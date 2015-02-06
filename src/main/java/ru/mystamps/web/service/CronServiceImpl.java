@@ -41,6 +41,7 @@ public class CronServiceImpl implements CronService {
 	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
 	private final UsersActivationDao usersActivationDao;
+	private final UsersActivationService usersActivationService;
 	
 	@Override
 	@Scheduled(fixedDelay = CHECK_PERIOD)
@@ -65,9 +66,9 @@ public class CronServiceImpl implements CronService {
 				activation.getEmail(),
 				activation.getCreatedAt()
 			);
+			
+			usersActivationService.remove(activation);
 		}
-		
-		usersActivationDao.delete(expiredActivations);
 	}
 	
 }

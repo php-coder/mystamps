@@ -93,7 +93,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CronService getCronService() {
-		return new CronServiceImpl(usersActivationDao);
+		return new CronServiceImpl(usersActivationDao, getUsersActivationService());
 	}
 	
 	@Bean
