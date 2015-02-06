@@ -23,6 +23,7 @@ import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
+import ru.mystamps.web.entity.MetaInfo;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -57,9 +58,7 @@ final class TestObjects {
 		country.setName(TEST_COUNTRY_EN_NAME);
 		country.setNameRu(TEST_COUNTRY_RU_NAME);
 		country.setSlug(SlugUtils.slugify(country.getName()));
-		Date now = new Date();
-		country.getMetaInfo().setCreatedAt(now);
-		country.getMetaInfo().setUpdatedAt(now);
+		country.setMetaInfo(createMetaInfo());
 		return country;
 	}
 	
@@ -124,16 +123,23 @@ final class TestObjects {
 		category.setName("Test");
 		category.setNameRu("Тест");
 		category.setSlug(SlugUtils.slugify(category.getName()));
-		Date now = new Date();
-		category.getMetaInfo().setCreatedAt(now);
-		category.getMetaInfo().setUpdatedAt(now);
-		User owner = createUser();
-		category.getMetaInfo().setCreatedBy(owner);
-		category.getMetaInfo().setUpdatedBy(owner);
+		category.setMetaInfo(createMetaInfo());
 		return category;
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
 		return new SitemapInfoDto(1, new Date());
 	}
+	
+	private static MetaInfo createMetaInfo() {
+		MetaInfo metaInfo = new MetaInfo();
+		Date now = new Date();
+		metaInfo.setCreatedAt(now);
+		metaInfo.setUpdatedAt(now);
+		User owner = createUser();
+		metaInfo.setCreatedBy(owner);
+		metaInfo.setUpdatedBy(owner);
+		return metaInfo;
+	}
+	
 }
