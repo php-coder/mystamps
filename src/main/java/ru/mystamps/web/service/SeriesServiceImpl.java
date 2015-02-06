@@ -188,7 +188,7 @@ public class SeriesServiceImpl implements SeriesService {
 			"Gibbons number code must be non empty"
 		);
 		
-		return seriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
+		return jdbcSeriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
 	}
 	
 	@Override

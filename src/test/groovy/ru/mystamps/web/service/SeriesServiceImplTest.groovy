@@ -809,7 +809,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByGibbonsNumber('10')
 		then:
-			1 * seriesDao.countByGibbonsNumberCode({ String code ->
+			1 * jdbcSeriesDao.countByGibbonsNumberCode({ String code ->
 				assert code == '10'
 				return true
 			}) >> expectedResult

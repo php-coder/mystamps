@@ -33,4 +33,5 @@ public interface JdbcSeriesDao {
 	long countByMichelNumberCode(String michelNumber);
 	long countByScottNumberCode(String scottNumber);
 	long countByYvertNumberCode(String yvertNumber);
+	long countByGibbonsNumberCode(String gibbonsNumber);
 }

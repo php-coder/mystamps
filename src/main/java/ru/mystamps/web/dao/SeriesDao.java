@@ -17,15 +17,9 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import ru.mystamps.web.entity.Series;
 
 public interface SeriesDao extends CrudRepository<Series, Integer> {
-	
-	@Query("SELECT COUNT(*) FROM Series s INNER JOIN s.gibbons m WHERE m.code = :gibbonsCode")
-	long countByGibbonsNumberCode(@Param("gibbonsCode") String gibbonsNumberCode);
-	
 }
