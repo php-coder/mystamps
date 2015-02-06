@@ -33,10 +33,10 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Collection collection);
 	long countStampsOf(Collection collection);
-	int countByMichelNumber(String michelNumberCode);
-	int countByScottNumber(String scottNumberCode);
-	int countByYvertNumber(String yvertNumberCode);
-	int countByGibbonsNumber(String gibbonsNumberCode);
+	long countByMichelNumber(String michelNumberCode);
+	long countByScottNumber(String scottNumberCode);
+	long countByYvertNumber(String yvertNumberCode);
+	long countByGibbonsNumber(String gibbonsNumberCode);
 	Iterable<SeriesInfoDto> findBy(Category category, String lang);
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);

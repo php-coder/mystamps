@@ -712,9 +712,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countByMichelNumber() should pass argument to dao and return result"() {
 		given:
-			int expectedResult = 1
+			long expectedResult = 1L
 		when:
-			int result = service.countByMichelNumber('7')
+			long result = service.countByMichelNumber('7')
 		then:
 			1 * seriesDao.countByMichelNumberCode({ String code ->
 				assert code == '7'
@@ -743,9 +743,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countByScottNumber() should pass argument to dao and return result"() {
 		given:
-			int expectedResult = 2
+			long expectedResult = 2L
 		when:
-			int result = service.countByScottNumber('8')
+			long result = service.countByScottNumber('8')
 		then:
 			1 * seriesDao.countByScottNumberCode({ String code ->
 				assert code == '8'
@@ -774,9 +774,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countByYvertNumber() should pass argument to dao and return result"() {
 		given:
-			int expectedResult = 3
+			long expectedResult = 3L
 		when:
-			int result = service.countByYvertNumber('9')
+			long result = service.countByYvertNumber('9')
 		then:
 			1 * seriesDao.countByYvertNumberCode({ String code ->
 				assert code == '9'
@@ -805,9 +805,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countByGibbonsNumber() should pass argument to dao and return result"() {
 		given:
-			int expectedResult = 4
+			long expectedResult = 4L
 		when:
-			int result = service.countByGibbonsNumber('10')
+			long result = service.countByGibbonsNumber('10')
 		then:
 			1 * seriesDao.countByGibbonsNumberCode({ String code ->
 				assert code == '10'
