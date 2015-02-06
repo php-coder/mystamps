@@ -27,6 +27,7 @@ import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.service.dto.SelectEntityDto
+import ru.mystamps.web.service.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
@@ -85,10 +86,13 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Category expected = TestObjects.createCategory()
-			categoryDao.save(_ as Category) >> expected
+			Category category = TestObjects.createCategory()
+		and:
+			categoryDao.save(_ as Category) >> category
+		and:
+			UrlEntityDto expected = new UrlEntityDto(category.getId(), category.getSlug())
 		when:
-			Category actual = service.add(form, user)
+			UrlEntityDto actual = service.add(form, user)
 		then:
 			actual == expected
 	}

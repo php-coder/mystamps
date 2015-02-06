@@ -15,22 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import java.util.Map;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
-
-public interface CategoryService {
-	UrlEntityDto add(AddCategoryDto dto, User user);
-	Iterable<SelectEntityDto> findAll(String lang);
-	long countAll();
-	long countCategoriesOf(Collection collection);
-	long countByName(String name);
-	long countByNameRu(String name);
-	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
+@Getter
+@ToString
+@EqualsAndHashCode
+@RequiredArgsConstructor
+public class UrlEntityDto {
+	private final Integer id;
+	private final String slug;
 }

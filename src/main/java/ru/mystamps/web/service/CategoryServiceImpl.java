@@ -38,6 +38,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -50,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_CATEGORY')")
-	public Category add(AddCategoryDto dto, User user) {
+	public UrlEntityDto add(AddCategoryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "English category name should be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
@@ -77,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category entity = categoryDao.save(category);
 		LOG.info("Category has been created ({})", entity.toLongString());
 		
-		return entity;
+		return new UrlEntityDto(entity.getId(), entity.getSlug());
 	}
 	
 	@Override

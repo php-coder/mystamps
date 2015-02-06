@@ -40,6 +40,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -71,10 +72,10 @@ public class CategoryController {
 			return null;
 		}
 		
-		Category category = categoryService.add(form, currentUser);
+		UrlEntityDto categoryUrl = categoryService.add(form, currentUser);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(category.getId(), category.getSlug())
+			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())
 			.toString();
 		
 		return "redirect:" + dstUrl;
