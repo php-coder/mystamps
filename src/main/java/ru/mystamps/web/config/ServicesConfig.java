@@ -115,7 +115,11 @@ public class ServicesConfig {
 	
 	@Bean
 	public UsersActivationService getUsersActivationService() {
-		return new UsersActivationServiceImpl(usersActivationDao, getMailService());
+		return new UsersActivationServiceImpl(
+			usersActivationDao,
+			daoConfig.getJdbcUsersActivationDao(),
+			getMailService()
+		);
 	}
 	
 	@Bean

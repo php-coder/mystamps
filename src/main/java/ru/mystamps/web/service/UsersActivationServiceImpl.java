@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
@@ -37,6 +38,7 @@ import ru.mystamps.web.util.LocaleUtils;
 public class UsersActivationServiceImpl implements UsersActivationService {
 	
 	private final UsersActivationDao usersActivationDao;
+	private final JdbcUsersActivationDao jdbcUsersActivationDao;
 	private final MailService mailService;
 	
 	@Override
@@ -62,8 +64,9 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	@Transactional
 	public void remove(UsersActivation activation) {
 		Validate.isTrue(activation != null, "Activation must be non null");
+		Validate.isTrue(activation.getActivationKey() != null, "Activation key must be non null");
 		
-		usersActivationDao.delete(activation);
+		jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey());
 	}
 	
 	@Override
