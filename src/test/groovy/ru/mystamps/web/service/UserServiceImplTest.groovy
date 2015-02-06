@@ -347,11 +347,11 @@ class UserServiceImplTest extends Specification {
 	
 	def "countByLogin() should call dao"() {
 		given:
-			jdbcUserDao.countByLogin(_ as String) >> 2
+			jdbcUserDao.countByLogin(_ as String) >> 2L
 		when:
-			int result = service.countByLogin('any-login')
+			long result = service.countByLogin('any-login')
 		then:
-			result == 2
+			result == 2L
 	}
 	
 	def "countByLogin() should pass login to dao"() {
