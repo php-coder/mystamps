@@ -18,6 +18,8 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -27,6 +29,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.entity.UsersActivation;
 
 public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -36,6 +39,9 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	
 	@Value("${users_activation.remove_by_activation_key}")
 	private String removeByActivationKeySql;
+	
+	@Value("${users_activation.create}")
+	private String addActivationKeySql;
 	
 	public JdbcUsersActivationDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -61,6 +67,26 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 			affected == 1,
 			"Unexpected number of affected rows after removing activation key '%s': %d",
 			activationKey,
+			affected
+		);
+	}
+	
+	@Override
+	public void add(UsersActivation activation) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("activation_key", activation.getActivationKey());
+		params.put("email", activation.getEmail());
+		params.put("lang", activation.getLang());
+		params.put("created_at", activation.getCreatedAt());
+		
+		int affected = jdbcTemplate.update(
+			addActivationKeySql,
+			params
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of user's activation: %d",
 			affected
 		);
 	}

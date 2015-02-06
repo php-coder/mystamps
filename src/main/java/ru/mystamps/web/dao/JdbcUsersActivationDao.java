@@ -17,7 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
+import ru.mystamps.web.entity.UsersActivation;
+
 public interface JdbcUsersActivationDao {
 	long countByActivationKey(String activationKey);
 	void removeByActivationKey(String activationKey);
+	void add(UsersActivation activation);
 }

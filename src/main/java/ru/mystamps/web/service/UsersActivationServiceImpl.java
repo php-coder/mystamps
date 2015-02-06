@@ -53,7 +53,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		activation.setEmail(dto.getEmail());
 		activation.setLang(LocaleUtils.getLanguageOrDefault(lang, "en"));
 		activation.setCreatedAt(new Date());
-		usersActivationDao.save(activation);
+		jdbcUsersActivationDao.add(activation);
 		
 		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
 			mailService.sendActivationKeyToUser(activation);

@@ -59,14 +59,14 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.save(_ as UsersActivation)
+			1 * jdbcUsersActivationDao.add(_ as UsersActivation)
 	}
 	
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.save({ UsersActivation activation ->
+			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
 				assert activation?.activationKey?.length() == UsersActivation.ACTIVATION_KEY_LENGTH
 				assert activation?.activationKey ==~ /^[\p{Lower}\p{Digit}]+$/
 				return true
@@ -80,7 +80,7 @@ class UsersActivationServiceImplTest extends Specification {
 			service.add(registrationForm, ANY_LOCALE)
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			2 * usersActivationDao.save({ UsersActivation activation ->
+			2 * jdbcUsersActivationDao.add({ UsersActivation activation ->
 				passedArguments.add(activation?.activationKey)
 				return true
 			})
@@ -112,7 +112,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.save({ UsersActivation activation ->
+			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
 				assert activation?.email == expectedEmail
 				return true
 			})
@@ -123,7 +123,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, lang)
 		then:
-			1 * usersActivationDao.save({ UsersActivation activation ->
+			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
 				assert activation?.lang == expectedLang
 				return true
 			})
@@ -137,7 +137,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.save({ UsersActivation activation ->
+			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
 				assert DateUtils.roughlyEqual(activation?.createdAt, new Date())
 				return true
 			})
