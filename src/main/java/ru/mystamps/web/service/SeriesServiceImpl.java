@@ -60,7 +60,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_SERIES')")
-	public Series add(AddSeriesDto dto, User user, boolean userCanAddComments) {
+	public Integer add(AddSeriesDto dto, User user, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
@@ -119,7 +119,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Series entity = seriesDao.save(series);
 		LOG.info("Series has been created ({})", entity);
 		
-		return entity;
+		return entity.getId();
 	}
 	
 	@Override

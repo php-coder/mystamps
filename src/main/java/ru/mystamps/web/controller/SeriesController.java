@@ -136,10 +136,10 @@ public class SeriesController {
 		
 		boolean userCanAddComments =
 			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
-		Series series = seriesService.add(form, currentUser, userCanAddComments);
+		Integer seriesId = seriesService.add(form, currentUser, userCanAddComments);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(series.getId())
+			.buildAndExpand(seriesId)
 			.toString();
 		
 		return "redirect:" + dstUrl;

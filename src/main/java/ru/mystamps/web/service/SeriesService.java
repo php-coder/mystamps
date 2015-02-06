@@ -20,7 +20,6 @@ package ru.mystamps.web.service;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -28,7 +27,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
-	Series add(AddSeriesDto dto, User user, boolean userCanAddComments);
+	Integer add(AddSeriesDto dto, User user, boolean userCanAddComments);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOf(Collection collection);

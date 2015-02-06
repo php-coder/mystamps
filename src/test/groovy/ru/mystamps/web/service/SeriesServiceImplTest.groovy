@@ -112,7 +112,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save(_ as Series)
+			1 * seriesDao.save(_ as Series) >> TestObjects.createSeries()
 	}
 	
 	def "add() should load and pass country to series dao if country present"() {
@@ -125,7 +125,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.country == expectedCountry
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	@Unroll
@@ -145,7 +145,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.releaseMonth == expectedMonth
 				assert series?.releaseYear == expectedYear
 				return true
-			})
+			}) >> TestObjects.createSeries()
 		where:
 			day  | month | year || expectedDay | expectedMonth | expectedYear
 			null | null  | null || null        | null          | null
@@ -168,7 +168,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.category == expectedCategory
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass quantity to series dao"() {
@@ -181,7 +181,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.quantity == expectedQuantity
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass perforated to series dao"() {
@@ -194,7 +194,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.perforated == expectedResult
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 
 	def "add() should pass null to series dao if michel numbers is null"() {
@@ -206,7 +206,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.michel == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass michel numbers to series dao"() {
@@ -222,7 +222,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.michel == expectedNumbers
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should throw exception if michel price specified without currency"() {
@@ -250,7 +250,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.michelPrice?.value == expectedPrice
 				assert series?.michelPrice?.currency == expectedCurrency
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if michel price is null"() {
@@ -264,7 +264,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.michelPrice == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if scott numbers is null"() {
@@ -276,7 +276,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.scott == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass scott numbers to series dao"() {
@@ -292,7 +292,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.scott == expectedNumbers
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should throw exception if scott price specified without currency"() {
@@ -320,7 +320,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.scottPrice?.value == expectedPrice
 				assert series?.scottPrice?.currency == expectedCurrency
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if scott price is null"() {
@@ -334,7 +334,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.scottPrice == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if yvert numbers is null"() {
@@ -346,7 +346,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvert == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass yvert numbers to series dao"() {
@@ -362,7 +362,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvert == expectedNumbers
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should throw exception if yvert price specified without currency"() {
@@ -390,7 +390,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.yvertPrice?.value == expectedPrice
 				assert series?.yvertPrice?.currency == expectedCurrency
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if yvert price is null"() {
@@ -404,7 +404,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.yvertPrice == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if gibbons numbers is null"() {
@@ -416,7 +416,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbons == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass gibbons numbers to series dao"() {
@@ -432,7 +432,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbons == expectedNumbers
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should throw exception if gibbons price specified without currency"() {
@@ -460,7 +460,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.gibbonsPrice?.value == expectedPrice
 				assert series?.gibbonsPrice?.currency == expectedCurrency
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass null to series dao if gibbons price is null"() {
@@ -474,12 +474,14 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.gibbonsPrice == null
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should pass image to image service"() {
 		given:
 			form.setImage(multipartFile)
+		and:
+			seriesDao.save(_ as Series) >> TestObjects.createSeries()
 		when:
 			service.add(form, user, false)
 		then:
@@ -520,7 +522,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.imageUrl == expectedUrl
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should throw exception if comment is empty"() {
@@ -542,7 +544,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.comment == expectedComment
 				return true
-			})
+			}) >> TestObjects.createSeries()
 		where:
 			canAddComment | comment     || expectedComment
 			false         | null        || null
@@ -558,7 +560,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert DateUtils.roughlyEqual(series?.metaInfo?.createdAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should assign updated at to current date"() {
@@ -568,7 +570,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert DateUtils.roughlyEqual(series?.metaInfo?.updatedAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should assign created by to user"() {
@@ -578,7 +580,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.metaInfo?.createdBy == user
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	def "add() should assign updated by to user"() {
@@ -588,7 +590,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.save({ Series series ->
 				assert series?.metaInfo?.updatedBy == user
 				return true
-			})
+			}) >> TestObjects.createSeries()
 	}
 	
 	//
