@@ -778,7 +778,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByYvertNumber('9')
 		then:
-			1 * seriesDao.countByYvertNumberCode({ String code ->
+			1 * jdbcSeriesDao.countByYvertNumberCode({ String code ->
 				assert code == '9'
 				return true
 			}) >> expectedResult

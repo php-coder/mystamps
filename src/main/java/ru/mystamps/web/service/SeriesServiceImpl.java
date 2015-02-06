@@ -176,7 +176,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
 		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
 		
-		return seriesDao.countByYvertNumberCode(yvertNumberCode);
+		return jdbcSeriesDao.countByYvertNumberCode(yvertNumberCode);
 	}
 	
 	@Override

@@ -32,4 +32,5 @@ public interface JdbcSeriesDao {
 	long countStampsOfCollection(Integer collectionId);
 	long countByMichelNumberCode(String michelNumber);
 	long countByScottNumberCode(String scottNumber);
+	long countByYvertNumberCode(String yvertNumber);
 }
