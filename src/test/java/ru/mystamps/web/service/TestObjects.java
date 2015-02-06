@@ -123,6 +123,7 @@ final class TestObjects {
 		category.setId(1);
 		category.setName("Test");
 		category.setNameRu("Тест");
+		category.setSlug(SlugUtils.slugify(category.getName()));
 		Date now = new Date();
 		category.getMetaInfo().setCreatedAt(now);
 		category.getMetaInfo().setUpdatedAt(now);
