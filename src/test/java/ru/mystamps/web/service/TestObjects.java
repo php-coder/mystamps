@@ -28,6 +28,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.util.SlugUtils;
 
 final class TestObjects {
 	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
@@ -55,6 +56,7 @@ final class TestObjects {
 		country.setId(TEST_COUNTRY_ID);
 		country.setName(TEST_COUNTRY_EN_NAME);
 		country.setNameRu(TEST_COUNTRY_RU_NAME);
+		country.setSlug(SlugUtils.slugify(country.getName()));
 		Date now = new Date();
 		country.getMetaInfo().setCreatedAt(now);
 		country.getMetaInfo().setUpdatedAt(now);
