@@ -82,7 +82,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	public long countByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
-		return usersActivationDao.countByActivationKey(activationKey);
+		return jdbcUsersActivationDao.countByActivationKey(activationKey);
 	}
 	
 	/**

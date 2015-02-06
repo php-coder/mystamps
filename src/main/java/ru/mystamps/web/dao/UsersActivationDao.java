@@ -26,5 +26,4 @@ import ru.mystamps.web.entity.UsersActivation;
 
 public interface UsersActivationDao extends CrudRepository<UsersActivation, String> {
 	List<UsersActivation> findByCreatedAtLessThan(Date expiredSince);
-	long countByActivationKey(String activationKey);
 }

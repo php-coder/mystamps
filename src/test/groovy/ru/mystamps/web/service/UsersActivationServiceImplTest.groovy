@@ -169,7 +169,7 @@ class UsersActivationServiceImplTest extends Specification {
 	
 	def "countByActivationKey() should call dao"() {
 		given:
-			usersActivationDao.countByActivationKey(_ as String) >> 2L
+			jdbcUsersActivationDao.countByActivationKey(_ as String) >> 2L
 		when:
 			long result = service.countByActivationKey('0123456789')
 		then:
@@ -180,7 +180,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.countByActivationKey('0987654321')
 		then:
-			1 * usersActivationDao.countByActivationKey('0987654321')
+			1 * jdbcUsersActivationDao.countByActivationKey('0987654321')
 	}
 	
 }

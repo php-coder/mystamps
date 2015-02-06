@@ -31,11 +31,23 @@ import ru.mystamps.web.dao.JdbcUsersActivationDao;
 public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
+	@Value("${users_activation.count_by_activation_key}")
+	private String countByActivationKeySql;
+	
 	@Value("${users_activation.remove_by_activation_key}")
 	private String removeByActivationKeySql;
 	
 	public JdbcUsersActivationDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public long countByActivationKey(String activationKey) {
+		return jdbcTemplate.queryForObject(
+			countByActivationKeySql,
+			Collections.singletonMap("activation_key", activationKey),
+			Long.class
+		);
 	}
 	
 	@Override
