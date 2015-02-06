@@ -27,6 +27,7 @@ import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.service.dto.SelectEntityDto
+import ru.mystamps.web.service.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
@@ -85,10 +86,13 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Country expected = TestObjects.createCountry()
-			countryDao.save(_ as Country) >> expected
+			Country country = TestObjects.createCountry()
+		and:
+			countryDao.save(_ as Country) >> country
+		and:
+			UrlEntityDto expected = new UrlEntityDto(country.getId(), country.getSlug())
 		when:
-			Country actual = service.add(form, user)
+			UrlEntityDto actual = service.add(form, user)
 		then:
 			actual == expected
 	}

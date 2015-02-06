@@ -38,6 +38,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -50,7 +51,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
-	public Country add(AddCountryDto dto, User user) {
+	public UrlEntityDto add(AddCountryDto dto, User user) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "Country name on English should be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Country name on Russian should be non null");
@@ -77,7 +78,7 @@ public class CountryServiceImpl implements CountryService {
 		Country entity = countryDao.save(country);
 		LOG.info("Country has been created ({})", entity.toLongString());
 		
-		return entity;
+		return new UrlEntityDto(entity.getId(), entity.getSlug());
 	}
 	
 	@Override
