@@ -72,6 +72,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.count_stamps_by_michel_number}")
 	private String countStampsByMichelNumberSql;
 	
+	@Value("${series.count_stamps_by_scott_number}")
+	private String countStampsByScottNumberSql;
+	
 	public JdbcSeriesDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
@@ -162,6 +165,15 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		return jdbcTemplate.queryForObject(
 			countStampsByMichelNumberSql,
 			Collections.singletonMap("michel_number", michelNumber),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByScottNumberCode(String scottNumber) {
+		return jdbcTemplate.queryForObject(
+			countStampsByScottNumberSql,
+			Collections.singletonMap("scott_number", scottNumber),
 			Long.class
 		);
 	}

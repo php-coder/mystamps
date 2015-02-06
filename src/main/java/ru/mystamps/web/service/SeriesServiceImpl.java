@@ -167,7 +167,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
 		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
 		
-		return seriesDao.countByScottNumberCode(scottNumberCode);
+		return jdbcSeriesDao.countByScottNumberCode(scottNumberCode);
 	}
 	
 	@Override

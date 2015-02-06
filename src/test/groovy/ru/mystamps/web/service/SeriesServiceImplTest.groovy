@@ -747,7 +747,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByScottNumber('8')
 		then:
-			1 * seriesDao.countByScottNumberCode({ String code ->
+			1 * jdbcSeriesDao.countByScottNumberCode({ String code ->
 				assert code == '8'
 				return true
 			}) >> expectedResult
