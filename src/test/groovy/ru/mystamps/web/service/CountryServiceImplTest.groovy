@@ -312,11 +312,11 @@ class CountryServiceImplTest extends Specification {
 	
 	def "countByNameRu() should call dao"() {
 		given:
-			jdbcCountryDao.countByNameRu(_ as String) >> 2
+			jdbcCountryDao.countByNameRu(_ as String) >> 2L
 		when:
-			int result = service.countByNameRu('Any name here')
+			long result = service.countByNameRu('Any name here')
 		then:
-			result == 2
+			result == 2L
 	}
 	
 	def "countByNameRu() should pass category name to dao"() {
