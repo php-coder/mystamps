@@ -25,9 +25,6 @@ import ru.mystamps.web.entity.Series;
 
 public interface SeriesDao extends CrudRepository<Series, Integer> {
 	
-	@Query("SELECT COUNT(*) FROM Series s INNER JOIN s.michel m WHERE m.code = :michelCode")
-	long countByMichelNumberCode(@Param("michelCode") String michelNumberCode);
-	
 	@Query("SELECT COUNT(*) FROM Series s INNER JOIN s.scott m WHERE m.code = :scottCode")
 	long countByScottNumberCode(@Param("scottCode") String scottNumberCode);
 	

@@ -158,7 +158,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
 		
-		return seriesDao.countByMichelNumberCode(michelNumberCode);
+		return jdbcSeriesDao.countByMichelNumberCode(michelNumberCode);
 	}
 	
 	@Override

@@ -716,7 +716,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByMichelNumber('7')
 		then:
-			1 * seriesDao.countByMichelNumberCode({ String code ->
+			1 * jdbcSeriesDao.countByMichelNumberCode({ String code ->
 				assert code == '7'
 				return true
 			}) >> expectedResult
