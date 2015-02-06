@@ -25,13 +25,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users_activation")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsersActivation {
 	
 	public static final int ACTIVATION_KEY_LENGTH = 10;

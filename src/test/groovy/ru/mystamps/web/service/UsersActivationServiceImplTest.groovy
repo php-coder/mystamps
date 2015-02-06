@@ -21,14 +21,12 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao
-import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.tests.DateUtils
 
 class UsersActivationServiceImplTest extends Specification {
 	
-	private UsersActivationDao usersActivationDao = Mock()
 	private JdbcUsersActivationDao jdbcUsersActivationDao = Mock()
 	private MailService mailService = Mock()
 	
@@ -41,7 +39,7 @@ class UsersActivationServiceImplTest extends Specification {
 		registrationForm = new RegisterAccountForm()
 		registrationForm.setEmail('john.dou@example.org')
 		
-		service = new UsersActivationServiceImpl(usersActivationDao, jdbcUsersActivationDao, mailService)
+		service = new UsersActivationServiceImpl(jdbcUsersActivationDao, mailService)
 	}
 	
 	//

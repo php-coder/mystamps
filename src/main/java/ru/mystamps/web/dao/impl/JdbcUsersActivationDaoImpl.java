@@ -26,13 +26,22 @@ import javax.sql.DataSource;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
+	
+	private static final RowMapper<UsersActivation> USERS_ACTIVATION_ROW_MAPPER =
+		new UsersActivationRowMapper();
+	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${users_activation.find_by_activation_key}")
+	private String findByActivationKeySql;
 	
 	@Value("${users_activation.count_by_activation_key}")
 	private String countByActivationKeySql;
@@ -45,6 +54,15 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	
 	public JdbcUsersActivationDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Override
+	public UsersActivation findByActivationKey(String activationKey) {
+		return jdbcTemplate.queryForObject(
+			findByActivationKeySql,
+			Collections.singletonMap("activation_key", activationKey),
+			USERS_ACTIVATION_ROW_MAPPER
+		);
 	}
 	
 	@Override

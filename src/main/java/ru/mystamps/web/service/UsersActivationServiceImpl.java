@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
-import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
@@ -37,7 +36,6 @@ import ru.mystamps.web.util.LocaleUtils;
 @RequiredArgsConstructor
 public class UsersActivationServiceImpl implements UsersActivationService {
 	
-	private final UsersActivationDao usersActivationDao;
 	private final JdbcUsersActivationDao jdbcUsersActivationDao;
 	private final MailService mailService;
 	
@@ -74,7 +72,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	public UsersActivation findByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
-		return usersActivationDao.findOne(activationKey);
+		return jdbcUsersActivationDao.findByActivationKey(activationKey);
 	}
 	
 	@Override
