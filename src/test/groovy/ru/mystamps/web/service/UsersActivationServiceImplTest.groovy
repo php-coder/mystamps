@@ -167,11 +167,11 @@ class UsersActivationServiceImplTest extends Specification {
 	
 	def "countByActivationKey() should call dao"() {
 		given:
-			usersActivationDao.countByActivationKey(_ as String) >> 2
+			usersActivationDao.countByActivationKey(_ as String) >> 2L
 		when:
-			int result = service.countByActivationKey('0123456789')
+			long result = service.countByActivationKey('0123456789')
 		then:
-			result == 2
+			result == 2L
 	}
 	
 	def "countByActivationKey() should pass activation key to dao"() {
