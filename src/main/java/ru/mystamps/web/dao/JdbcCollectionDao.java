@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.dao;
 
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
 public interface JdbcCollectionDao {
 	Iterable<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
+	void add(Collection collection);
 }

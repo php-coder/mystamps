@@ -18,14 +18,19 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.sql.DataSource;
+
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcCollectionDao;
+import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
 public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
@@ -40,6 +45,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	@Value("${collection.count_collections_of_users}")
 	private String countCollectionsOfUsersSql;
+	
+	@Value("${collection.create}")
+	private String addCollectionSql;
 	
 	public JdbcCollectionDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -60,6 +68,25 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 			countCollectionsOfUsersSql,
 			Collections.<String, Object>emptyMap(),
 			Long.class
+		);
+	}
+	
+	@Override
+	public void add(Collection collection) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("user_id", collection.getOwner().getId());
+		params.put("slug", collection.getSlug());
+		
+		int affected = jdbcTemplate.update(
+			addCollectionSql,
+			params
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of collection of user #%d: %d",
+			params.get("user_id"),
+			affected
 		);
 	}
 	
