@@ -18,6 +18,7 @@
 package ru.mystamps.web.config;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,13 +33,13 @@ public class LiquibaseConfig {
 	private Environment env;
 	
 	@Inject
-	private DataSourceConfig dataSourceConfig;
+	private DataSource dataSource;
 	
 	@Inject
 	@Bean(name = "liquibase")
 	public SpringLiquibase getSpringLiquibase() {
 		SpringLiquibase liquibase = new SpringLiquibase();
-		liquibase.setDataSource(dataSourceConfig.getDataSource());
+		liquibase.setDataSource(dataSource);
 		liquibase.setChangeLog("classpath:/liquibase/changelog.xml");
 		liquibase.setContexts(getActiveContexts(env));
 		return liquibase;

@@ -18,6 +18,7 @@
 package ru.mystamps.web.config;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,36 +40,36 @@ import ru.mystamps.web.dao.impl.JdbcUsersActivationDaoImpl;
 public class DaoConfig {
 	
 	@Inject
-	private DataSourceConfig dataSourceConfig;
+	private DataSource dataSource;
 	
 	@Bean
 	public JdbcCategoryDao getJdbcCategoryDao() {
-		return new JdbcCategoryDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcCategoryDaoImpl(dataSource);
 	}
 	
 	@Bean
 	public JdbcCountryDao getJdbcCountryDao() {
-		return new JdbcCountryDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcCountryDaoImpl(dataSource);
 	}
 	
 	@Bean
 	public JdbcCollectionDao getJdbcCollectionDao() {
-		return new JdbcCollectionDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcCollectionDaoImpl(dataSource);
 	}
 	
 	@Bean
 	public JdbcSeriesDao getJdbcSeriesDao() {
-		return new JdbcSeriesDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcSeriesDaoImpl(dataSource);
 	}
 	
 	@Bean
 	public JdbcUserDao getJdbcUserDao() {
-		return new JdbcUserDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcUserDaoImpl(dataSource);
 	}
 	
 	@Bean
 	public JdbcUsersActivationDao getJdbcUsersActivationDao() {
-		return new JdbcUsersActivationDaoImpl(dataSourceConfig.getDataSource());
+		return new JdbcUsersActivationDaoImpl(dataSource);
 	}
 	
 }

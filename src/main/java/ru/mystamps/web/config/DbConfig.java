@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +49,7 @@ public class DbConfig {
 	private Environment env;
 	
 	@Inject
-	private DataSourceConfig dataSourceConfig;
+	private DataSource dataSource;
 	
 	@Bean
 	public JpaVendorAdapter getJpaVendorAdapter() {
@@ -69,7 +70,7 @@ public class DbConfig {
 			new LocalContainerEntityManagerFactoryBean();
 		
 		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
-		entityManagerFactory.setDataSource(dataSourceConfig.getDataSource());
+		entityManagerFactory.setDataSource(dataSource);
 		entityManagerFactory.setJpaPropertyMap(getJpaProperties());
 		
 		return entityManagerFactory;

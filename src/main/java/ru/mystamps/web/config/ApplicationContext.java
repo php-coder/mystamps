@@ -18,6 +18,7 @@
 package ru.mystamps.web.config;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +47,7 @@ import ru.mystamps.web.support.togglz.FeatureConfig;
 public class ApplicationContext {
 	
 	@Inject
-	private DataSourceConfig dataSourceConfig;
+	private DataSource dataSource;
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
@@ -80,7 +81,7 @@ public class ApplicationContext {
 	
 	@Bean
 	public TogglzConfig getTogglzConfig() {
-		return new FeatureConfig(dataSourceConfig.getDataSource());
+		return new FeatureConfig(dataSource);
 	}
 	
 }
