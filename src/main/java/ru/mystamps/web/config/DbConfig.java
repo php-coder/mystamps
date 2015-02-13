@@ -34,6 +34,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -81,6 +82,7 @@ public class DbConfig {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		
 		transactionManager.setEntityManagerFactory(getEntityManagerFactory().getObject());
+		transactionManager.setJpaDialect(new HibernateJpaDialect());
 		
 		return transactionManager;
 	}
