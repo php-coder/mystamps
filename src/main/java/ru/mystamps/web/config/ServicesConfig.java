@@ -47,12 +47,6 @@ public class ServicesConfig {
 	private SeriesDao seriesDao;
 	
 	@Inject
-	private SuspiciousActivityDao suspiciousActivityDao;
-	
-	@Inject
-	private SuspiciousActivityTypeDao suspiciousActivityTypeDao;
-	
-	@Inject
 	private UserDao userDao;
 	
 	@Inject
@@ -128,7 +122,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public SiteService getSiteService() {
-		return new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao);
+		return new SiteServiceImpl(daoConfig.getSuspiciousActivityDao());
 	}
 	
 	@Bean

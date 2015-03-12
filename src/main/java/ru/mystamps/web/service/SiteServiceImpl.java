@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.SuspiciousActivityTypeDao;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
@@ -35,8 +34,12 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
 	
+	// see initiate-suspicious_activities_types-table changeset
+	// in src/main/resources/liquibase/initial-state.xml
+	private static final String PAGE_NOT_FOUND = "PageNotFound";
+	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+	
 	private final SuspiciousActivityDao suspiciousActivities;
-	private final SuspiciousActivityTypeDao suspiciousActivityTypes;
 	
 	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
@@ -48,7 +51,7 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(getAbsentPageType(), page, user, ip, referer, agent);
+		logEvent(PAGE_NOT_FOUND, page, user, ip, referer, agent);
 	}
 	
 	@Override
@@ -61,12 +64,12 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(getFailedAuthenticationType(), page, user, ip, referer, agent);
+		logEvent(AUTHENTICATION_FAILED, page, user, ip, referer, agent);
 	}
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void logEvent(
-			SuspiciousActivityType type,
+			String type,
 			String page,
 			User user,
 			String ip,
@@ -77,7 +80,12 @@ public class SiteServiceImpl implements SiteService {
 		Validate.isTrue(page != null, "Page should be non null");
 		
 		SuspiciousActivity activity = new SuspiciousActivity();
-		activity.setType(type);
+		
+		// TODO: replace entity with DTO and replace SuspiciousActivityType by String
+		SuspiciousActivityType activityType = new SuspiciousActivityType();
+		activityType.setName(type);
+		activity.setType(activityType);
+		
 		activity.setOccurredAt(new Date());
 		activity.setPage(page);
 		
@@ -87,19 +95,7 @@ public class SiteServiceImpl implements SiteService {
 		activity.setRefererPage(StringUtils.defaultString(referer));
 		activity.setUserAgent(StringUtils.defaultString(agent));
 		
-		suspiciousActivities.save(activity);
-	}
-	
-	private SuspiciousActivityType getAbsentPageType() {
-		// see initiate-suspicious_activities_types-table changeset
-		// in src/main/resources/liquibase/initial-state.xml
-		return suspiciousActivityTypes.findByName("PageNotFound");
-	}
-	
-	private SuspiciousActivityType getFailedAuthenticationType() {
-		// see initiate-suspicious_activities_types-table changeset
-		// in src/main/resources/liquibase/initial-state.xml
-		return suspiciousActivityTypes.findByName("AuthenticationFailed");
+		suspiciousActivities.add(activity);
 	}
 	
 }

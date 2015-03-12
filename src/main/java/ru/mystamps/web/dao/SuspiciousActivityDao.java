@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
 import ru.mystamps.web.entity.SuspiciousActivity;
 
-public interface SuspiciousActivityDao extends CrudRepository<SuspiciousActivity, Integer> {
+public interface SuspiciousActivityDao {
+	void add(SuspiciousActivity activity);
 }

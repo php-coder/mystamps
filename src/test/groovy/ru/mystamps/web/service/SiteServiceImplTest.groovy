@@ -20,7 +20,6 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.SuspiciousActivityDao
-import ru.mystamps.web.dao.SuspiciousActivityTypeDao
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.SuspiciousActivity
 import ru.mystamps.web.entity.SuspiciousActivityType
@@ -33,12 +32,10 @@ class SiteServiceImplTest extends Specification {
 	private static final String TEST_USER_AGENT   = 'Some browser'
 	
 	private SuspiciousActivityDao suspiciousActivityDao = Mock()
-	private SuspiciousActivityTypeDao suspiciousActivityTypeDao = Mock()
-	
 	private SiteService service
 	
 	def setup() {
-		service = new SiteServiceImpl(suspiciousActivityDao, suspiciousActivityTypeDao)
+		service = new SiteServiceImpl(suspiciousActivityDao)
 	}
 	
 	//
@@ -46,51 +43,35 @@ class SiteServiceImplTest extends Specification {
 	//
 	
 	def "logAboutAbsentPage() should call dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save(_ as SuspiciousActivity)
-	}
-	
-	def "logAboutAbsentPage() should throw exception when activity type not found"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> null
-		when:
-			service.logAboutAbsentPage(null, null, null, null, null)
-		then:
-			thrown IllegalArgumentException
+			1 * suspiciousActivityDao.add(_ as SuspiciousActivity)
 	}
 	
 	def "logAboutAbsentPage() should pass activity type to dao"() {
 		given:
 			SuspiciousActivityType expectedType = TestObjects.createPageNotFoundActivityType()
-			suspiciousActivityTypeDao.findByName(_ as String) >> expectedType
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
-				assert activity?.type == expectedType
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.type?.name == expectedType.name
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should assign occurred at to current date"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should throw exception when page is null"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(null, null, null, null, null)
 		then:
@@ -98,24 +79,20 @@ class SiteServiceImplTest extends Specification {
 	}
 	
 	def "logAboutAbsentPage() should pass page to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.page == TEST_PAGE
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass null to dao for unknown user"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == null
 				return true
 			})
@@ -124,84 +101,70 @@ class SiteServiceImplTest extends Specification {
 	def "logAboutAbsentPage() should pass user to dao"() {
 		given:
 			User user = TestObjects.createUser()
-		and:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, user, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == user
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass ip to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, TEST_IP, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip == TEST_IP
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass empty string to dao for unknown ip"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip?.empty
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass referer to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, TEST_REFERER_PAGE, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass empty string to dao for unknown referer"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage?.empty
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass user agent to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, TEST_USER_AGENT)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass empty string to dao for unknown user agent"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent?.empty
 				return true
 			})
@@ -212,51 +175,35 @@ class SiteServiceImplTest extends Specification {
 	//
 	
 	def "logAboutFailedAuthentication() should call dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save(_ as SuspiciousActivity)
-	}
-	
-	def "logAboutFailedAuthentication() should throw exception when activity type not found"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> null
-		when:
-			service.logAboutFailedAuthentication(null, null, null, null, null)
-		then:
-			thrown IllegalArgumentException
+			1 * suspiciousActivityDao.add(_ as SuspiciousActivity)
 	}
 	
 	def "logAboutFailedAuthentication() should pass activity type to dao"() {
 		given:
 			SuspiciousActivityType expectedType = TestObjects.createAuthFailedActivityType()
-			suspiciousActivityTypeDao.findByName(_ as String) >> expectedType
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
-				assert activity?.type == expectedType
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.type?.name == expectedType.name
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should assign occurred at to current date"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should throw exception when page is null"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(null, null, null, null, null)
 		then:
@@ -264,24 +211,20 @@ class SiteServiceImplTest extends Specification {
 	}
 	
 	def "logAboutFailedAuthentication() should pass page to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.page == TEST_PAGE
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass null to dao for unknown user"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == null
 				return true
 			})
@@ -290,84 +233,70 @@ class SiteServiceImplTest extends Specification {
 	def "logAboutFailedAuthentication() should pass user to dao"() {
 		given:
 			User user = TestObjects.createUser()
-		and:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == user
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass ip to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, TEST_IP, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip == TEST_IP
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown ip"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip?.empty
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass referer to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, TEST_REFERER_PAGE, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown referer"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage?.empty
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass user agent to dao"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, TEST_USER_AGENT)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown user agent"() {
-		given:
-			suspiciousActivityTypeDao.findByName(_ as String) >> TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.save({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent?.empty
 				return true
 			})

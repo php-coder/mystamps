@@ -29,9 +29,11 @@ import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.impl.JdbcCategoryDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcCollectionDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcCountryDaoImpl;
+import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
 import ru.mystamps.web.dao.impl.JdbcUserDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcSeriesDaoImpl;
 import ru.mystamps.web.dao.impl.JdbcUsersActivationDaoImpl;
@@ -70,6 +72,11 @@ public class DaoConfig {
 	@Bean
 	public JdbcUsersActivationDao getJdbcUsersActivationDao() {
 		return new JdbcUsersActivationDaoImpl(dataSource);
+	}
+	
+	@Bean
+	public SuspiciousActivityDao getSuspiciousActivityDao() {
+		return new JdbcSuspiciousActivityDao(dataSource);
 	}
 	
 }

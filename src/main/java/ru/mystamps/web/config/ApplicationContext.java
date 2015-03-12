@@ -74,7 +74,8 @@ public class ApplicationContext {
 			new ClassPathResource("sql/collection_dao_queries.properties"),
 			new ClassPathResource("sql/user_dao_queries.properties"),
 			new ClassPathResource("sql/users_activation_dao_queries.properties"),
-			new ClassPathResource("sql/series_dao_queries.properties")
+			new ClassPathResource("sql/series_dao_queries.properties"),
+			new ClassPathResource("sql/suspicious_activity_dao_queries.properties")
 		);
 		return configurer;
 	}
