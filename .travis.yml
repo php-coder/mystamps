@@ -3,8 +3,6 @@ script: mvn verify jasmine:test
 after_success: mvn jacoco:prepare-agent test jacoco:report coveralls:jacoco
 
 jdk:
-  - openjdk7
-  - oraclejdk7
   - oraclejdk8
 
 branches:

@@ -1,3 +1,6 @@
+0.x
+- (infrastructure) switched to Java8
+
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
 - (functionality)  added charts on page with collection
