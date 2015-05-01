@@ -82,6 +82,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<skipTests>false</skipTests>
+		
+		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
+		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 	</properties>
 	
 	<dependencyManagement>
