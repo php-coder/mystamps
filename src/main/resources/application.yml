@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: test
+---
+spring:
+  profiles: test
+---
+spring:
+  profiles: prod
