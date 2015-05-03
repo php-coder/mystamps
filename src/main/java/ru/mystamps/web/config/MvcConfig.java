@@ -111,7 +111,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		return factory;
 	}
 	
-	@Bean
+	// override Spring Boot default configuration
+	@Bean(name = "thymeleafViewResolver")
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public ViewResolver getThymeleafViewResolver() throws Exception {
 		TemplateResolver templateResolver = new ServletContextTemplateResolver();
