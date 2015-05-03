@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: test
+  thymeleaf:
+    prefix: /WEB-INF/views/
+    suffix: .html
 ---
 spring:
   profiles: test
