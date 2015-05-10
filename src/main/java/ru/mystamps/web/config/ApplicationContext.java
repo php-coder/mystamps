@@ -17,9 +17,6 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,12 +26,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.io.ClassPathResource;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
-
-import org.togglz.core.manager.FeatureManager;
-import org.togglz.core.manager.FeatureManagerBuilder;
-import org.togglz.core.manager.TogglzConfig;
-
-import ru.mystamps.web.support.togglz.FeatureConfig;
+import ru.mystamps.web.support.togglz.TogglzConfig;
 
 @Configuration
 @Import({
@@ -44,12 +36,10 @@ import ru.mystamps.web.support.togglz.FeatureConfig;
 	SecurityConfig.class,
 	DaoConfig.class,
 	ServicesConfig.class,
-	StrategiesConfig.class
+	StrategiesConfig.class,
+	TogglzConfig.class
 })
 public class ApplicationContext {
-	
-	@Inject
-	private DataSource dataSource;
 	
 	@Bean(name = "messageSource")
 	public MessageSource getMessageSource() {
@@ -80,13 +70,6 @@ public class ApplicationContext {
 			new ClassPathResource("sql/suspicious_activity_dao_queries.properties")
 		);
 		return configurer;
-	}
-	
-	@Bean
-	public FeatureManager getFeatureManager() {
-		return new FeatureManagerBuilder()
-			.togglzConfig(new FeatureConfig(dataSource))
-			.build();
 	}
 	
 }
