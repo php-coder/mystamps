@@ -17,12 +17,16 @@
  */
 package ru.mystamps.web.support.togglz;
 
+import java.util.Collections;
+
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.togglz.console.TogglzConsoleServlet;
 import org.togglz.core.manager.FeatureManager;
 import org.togglz.core.manager.FeatureManagerBuilder;
 
@@ -37,6 +41,22 @@ public class TogglzConfig {
 		return new FeatureManagerBuilder()
 			.togglzConfig(new FeatureConfig(dataSource))
 			.build();
+	}
+	
+	/* Web console for managing Togglz.
+	 *
+	 * Access it via http://127.0.0.1:8081/togglz after authentication as "admin" user.
+	 *
+	 * @see http://www.togglz.org/documentation/admin-console.html
+	 */
+	@Bean
+	public ServletRegistrationBean getTogglzConsole() {
+		ServletRegistrationBean servlet = new ServletRegistrationBean();
+		servlet.setName("TogglzConsole");
+		servlet.setServlet(new TogglzConsoleServlet());
+		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
+		servlet.setUrlMappings(Collections.singletonList("/togglz/*"));
+		return servlet;
 	}
 	
 }

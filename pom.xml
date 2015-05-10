@@ -323,7 +323,6 @@
 			<groupId>org.togglz</groupId>
 			<artifactId>togglz-console</artifactId>
 			<version>${togglz.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
