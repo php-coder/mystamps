@@ -30,6 +30,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
+import org.togglz.core.manager.FeatureManager;
+import org.togglz.core.manager.FeatureManagerBuilder;
 import org.togglz.core.manager.TogglzConfig;
 
 import ru.mystamps.web.support.togglz.FeatureConfig;
@@ -81,8 +83,10 @@ public class ApplicationContext {
 	}
 	
 	@Bean
-	public TogglzConfig getTogglzConfig() {
-		return new FeatureConfig(dataSource);
+	public FeatureManager getFeatureManager() {
+		return new FeatureManagerBuilder()
+			.togglzConfig(new FeatureConfig(dataSource))
+			.build();
 	}
 	
 }
