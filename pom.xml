@@ -514,7 +514,6 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 	</dependencies>
@@ -699,11 +698,6 @@
 					<webAppSourceDirectory>
 						${project.build.directory}/${project.build.finalName}
 					</webAppSourceDirectory>
-					<webAppConfig>
-						<overrideDescriptor>
-							${basedir}/src/main/config/test-override-web.xml
-						</overrideDescriptor>
-					</webAppConfig>
 					<systemProperties>
 						<systemProperty>
 							<name>log4j.configuration</name>

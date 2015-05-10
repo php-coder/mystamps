@@ -27,11 +27,13 @@ import org.togglz.core.manager.FeatureManager;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
+import ru.mystamps.web.support.h2.H2Config;
 
 @EnableAutoConfiguration
 @Import({
 	ApplicationContext.class,
-	DispatcherServletContext.class
+	DispatcherServletContext.class,
+	H2Config.class
 })
 public class ApplicationBootstrap {
 	
