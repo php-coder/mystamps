@@ -19,6 +19,7 @@ package ru.mystamps.web.support.spring.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 
@@ -29,11 +30,12 @@ import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 import ru.mystamps.web.support.h2.H2Config;
 
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = ErrorMvcAutoConfiguration.class)
 @Import({
 	ApplicationContext.class,
 	DispatcherServletContext.class,
-	H2Config.class
+	H2Config.class,
+	ErrorPagesServletContainerCustomizer.class
 })
 public class ApplicationBootstrap {
 	

@@ -61,7 +61,6 @@ public final class Url {
 	
 	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
 	
-	// see also error-page definitions at src/main/webapp/WEB-INF/web.xml
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";

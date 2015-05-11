@@ -63,30 +63,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<!--
-		see also src/main/java/ru/mystamps/web/Url.java with
-		mapping controller to location
-	-->
-	<error-page>
-		<error-code>401</error-code>
-		<location>/error/401</location>
-	</error-page>
-	
-	<error-page>
-		<error-code>403</error-code>
-		<location>/error/403</location>
-	</error-page>
-	
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error/404</location>
-	</error-page>
-	
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/error/500</location>
-	</error-page>
-	
 	<filter>
 		<filter-name>CharsetFilter</filter-name>
 		<filter-class>
