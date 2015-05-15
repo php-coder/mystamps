@@ -17,10 +17,13 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
@@ -29,6 +32,10 @@ import org.togglz.core.manager.FeatureManager;
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 import ru.mystamps.web.support.h2.H2Config;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import java.util.EnumSet;
 
 @EnableAutoConfiguration(exclude = ErrorMvcAutoConfiguration.class)
 @Import({
@@ -45,6 +52,18 @@ public class ApplicationBootstrap {
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
+	}
+	
+	// TODO: remove @Qualifier and inject by type
+	// See for details: https://github.com/spring-projects/spring-boot/issues/2774
+	@Bean
+	public FilterRegistrationBean getSpringSecurityFilterChainBindedToError(
+			@Qualifier("springSecurityFilterChain") Filter springSecurityFilterChain) {
+		
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(springSecurityFilterChain);
+		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+		return registration;
 	}
 	
 }
