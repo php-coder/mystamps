@@ -699,7 +699,7 @@
 						${basedir}/src/main/resources/liquibase/liquibase.properties
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also src/main/java/ru/mystamps/web/config/LiquibaseConfig.java -->
+					<!-- See also application.yml -->
 					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
 			</plugin>

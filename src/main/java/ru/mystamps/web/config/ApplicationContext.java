@@ -31,7 +31,6 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 @Configuration
 @Import({
 	DbConfig.class,
-	LiquibaseConfig.class,
 	MailConfig.class,
 	SecurityConfig.class,
 	DaoConfig.class,

@@ -8,9 +8,16 @@ spring:
   thymeleaf:
     prefix: /WEB-INF/views/
     suffix: .html
+liquibase:
+  change-log: classpath:/liquibase/changelog.xml
 ---
 spring:
   profiles: test
+liquibase:
+  contexts: scheme, init-data, test-data
 ---
 spring:
   profiles: prod
+liquibase:
+  # see also duplicate definition at pom.xml
+  contexts: scheme, init-data, prod-data

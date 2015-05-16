@@ -25,7 +25,6 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -65,7 +64,6 @@ public class DbConfig {
 	// Explicitly specified bean names which will be looking by Spring Data
 	
 	@Bean(name = "entityManagerFactory")
-	@DependsOn("liquibase")
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory =
 			new LocalContainerEntityManagerFactoryBean();
