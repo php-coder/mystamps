@@ -26,11 +26,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<!-- To expose user's request to AuthenticationFailureListener where we need it for logging -->
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
-	
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>

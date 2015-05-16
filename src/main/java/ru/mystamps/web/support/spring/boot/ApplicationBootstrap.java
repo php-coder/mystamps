@@ -25,6 +25,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.context.request.RequestContextListener;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
 import org.togglz.core.manager.FeatureManager;
@@ -64,6 +65,12 @@ public class ApplicationBootstrap {
 		registration.setFilter(springSecurityFilterChain);
 		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
 		return registration;
+	}
+	
+	// To expose user's request to AuthenticationFailureListener where we need it for logging
+	@Bean
+	public RequestContextListener getRequestContextListener() {
+		return new RequestContextListener();
 	}
 	
 }
