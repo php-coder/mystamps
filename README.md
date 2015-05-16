@@ -46,4 +46,4 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 * *Logging*: Slf4j (log4j)
 * *Unit tests*: Groovy and Spock Framework (for Java code), jasmine (for JavaScript code)
 * *Integration tests*: Selenium2, TestNG and fest-assert
-* *Other*: Lombok, Togglz, WebJars
+* *Others*: Lombok, Togglz, WebJars
