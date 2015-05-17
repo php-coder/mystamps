@@ -17,13 +17,11 @@
 	</parent>
 	
 	<properties>
-		<hibernate.version>4.3.6.Final</hibernate.version>
 		<lombok.version>1.14.8</lombok.version>
 		<mysql.connector.version>5.1.33</mysql.connector.version>
 		<selenium.version>2.46.0</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<spring.version>4.2.0.RC1</spring.version>
-		<spring.data.version>1.6.4.RELEASE</spring.data.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<h2.version>1.4.184</h2.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
@@ -83,6 +81,10 @@
 		
 		<!-- Definitions and redefinitions of default values from spring-boot-starter-log4j -->
 		<slf4j.version>1.7.9</slf4j.version>
+		
+		<!-- Definitions and redefinitions of default values from spring-boot-starter-data-jpa -->
+		<spring-data-releasetrain.version>Dijkstra-SR4</spring-data-releasetrain.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -174,6 +176,12 @@
 			</exclusions>
 		</dependency>
 		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.2.3.RELEASE/spring-boot-starters/spring-boot-starter-data-jpa/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -201,17 +209,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.version}</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
@@ -222,13 +219,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 			<!-- Required in compiled scope for customized version of MySQL5InnoDBDialect -->
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
