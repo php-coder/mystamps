@@ -13,7 +13,7 @@
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.2.3.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
+		<version>1.3.0.BUILD-SNAPSHOT</version>
 	</parent>
 	
 	<properties>
@@ -485,7 +485,30 @@
 				<checksumPolicy>fail</checksumPolicy>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
 	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -527,6 +550,21 @@
 					-->
 					<addResources>false</addResources>
 				</configuration>
+				<executions>
+					<execution>
+						<id>start-application</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-application</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+				
 			</plugin>
 			
 			<plugin>
@@ -667,25 +705,6 @@
 					</systemProperties>
 					<skip>${skipTests}</skip>
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-war</goal>
-						</goals>
-						<configuration>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
