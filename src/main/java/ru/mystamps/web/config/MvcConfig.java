@@ -143,7 +143,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		ReloadableResourceBundleMessageSource messageSource =
 			new ReloadableResourceBundleMessageSource();
 		
-		messageSource.setBasename("classpath:ru/mystamps/i18n/Messages");
+		messageSource.setBasenames(
+			"classpath:ru/mystamps/i18n/Messages",
+			"classpath:ru/mystamps/i18n/SpringSecurityMessages",
+			"classpath:ru/mystamps/i18n/MailTemplates"
+		);
 		messageSource.setDefaultEncoding("UTF-8");
 		messageSource.setFallbackToSystemLocale(false);
 		
