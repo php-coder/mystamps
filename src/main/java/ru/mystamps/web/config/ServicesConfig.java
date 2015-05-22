@@ -22,13 +22,16 @@ import javax.inject.Inject;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import ru.mystamps.web.dao.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 import ru.mystamps.web.service.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
+@PropertySource("classpath:${spring.profiles.active}/spring/mail.properties")
 public class ServicesConfig {
 	
 	@Inject
@@ -62,7 +65,7 @@ public class ServicesConfig {
 	private CollectionDao collectionDao;
 	
 	@Inject
-	private MailConfig mailConfig;
+	private JavaMailSender mailSender;
 	
 	@Inject
 	private Environment env;
@@ -101,7 +104,7 @@ public class ServicesConfig {
 		boolean enableTestMode = !isProductionEnvironment;
 		
 		return new MailServiceImpl(
-			mailConfig.getMailSender(),
+			mailSender,
 			messageSource,
 			env.getRequiredProperty("mail.robot.email"),
 			enableTestMode);

@@ -19,6 +19,11 @@ spring:
     password:
     driver-class-name: org.h2.Driver
     initialize: false
+  mail:
+    host: 127.0.0.1
+    port: 1025
+    username: unused
+    password: unused
 liquibase:
   contexts: scheme, init-data, test-data
 ---
@@ -32,6 +37,11 @@ spring:
     initialize: false
     validation-query: SELECT 1
     test-on-borrow: false
+  mail:
+    host: 127.0.0.1
+    port: 25
+    username: test
+    password: test
 liquibase:
   # see also duplicate definition at pom.xml
   contexts: scheme, init-data, prod-data

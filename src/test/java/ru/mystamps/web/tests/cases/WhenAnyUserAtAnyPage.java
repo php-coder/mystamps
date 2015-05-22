@@ -20,6 +20,8 @@ package ru.mystamps.web.tests.cases;
 import java.net.HttpURLConnection;
 
 import org.openqa.selenium.support.PageFactory;
+
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -36,6 +38,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @ContextConfiguration(
 	loader = AnnotationConfigContextLoader.class,
+	initializers = ConfigFileApplicationContextInitializer.class,
 	classes = TestContext.class
 )
 abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
