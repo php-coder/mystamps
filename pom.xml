@@ -98,6 +98,10 @@
 					<groupId>org.springframework.boot</groupId>
 					 <artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		
@@ -705,7 +709,7 @@
 						${basedir}/src/main/resources/liquibase/liquibase.properties
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also application.yml -->
+					<!-- See also application-prod.properties -->
 					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
 			</plugin>
