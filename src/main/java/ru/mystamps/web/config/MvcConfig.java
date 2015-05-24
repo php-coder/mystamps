@@ -42,8 +42,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.ViewResolver;
 
-import com.github.heneke.thymeleaf.togglz.TogglzDialect;
-import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafView;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -62,6 +60,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Inject
 	private Environment env;
+	
+	@Inject
+	private SpringTemplateEngine templateEngine;
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -112,23 +113,20 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	// override Spring Boot default configuration
-	@Bean(name = "thymeleafViewResolver")
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
-	public ViewResolver getThymeleafViewResolver() throws Exception {
+	@Bean(name = "defaultTemplateResolver")
+	public TemplateResolver getThymeleafTemplateResolver() {
 		TemplateResolver templateResolver = new ServletContextTemplateResolver();
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(env.acceptsProfiles("prod"));
-
-		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver);
-		templateEngine.setTemplateEngineMessageSource(getMessageSource());
-		templateEngine.addDialect(new SpringSecurityDialect());
-		templateEngine.addDialect(new TogglzDialect());
-		templateEngine.afterPropertiesSet();
-		
+		return templateResolver;
+	}
+	
+	// override Spring Boot default configuration
+	@Bean(name = "thymeleafViewResolver")
+	public ViewResolver getThymeleafViewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine);
 		viewResolver.setContentType("text/html; charset=UTF-8");
