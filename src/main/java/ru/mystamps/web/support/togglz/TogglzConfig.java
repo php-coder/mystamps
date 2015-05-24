@@ -29,6 +29,9 @@ import org.springframework.context.annotation.Configuration;
 import org.togglz.console.TogglzConsoleServlet;
 import org.togglz.core.manager.FeatureManager;
 import org.togglz.core.manager.FeatureManagerBuilder;
+import org.togglz.core.repository.cache.CachingStateRepository;
+import org.togglz.core.repository.jdbc.JDBCStateRepository;
+import org.togglz.spring.security.SpringSecurityUserProvider;
 
 @Configuration
 public class TogglzConfig {
@@ -39,7 +42,9 @@ public class TogglzConfig {
 	@Bean
 	public FeatureManager getFeatureManager() {
 		return new FeatureManagerBuilder()
-			.togglzConfig(new FeatureConfig(dataSource))
+			.stateRepository(new CachingStateRepository(new JDBCStateRepository(dataSource)))
+			.featureEnum(Features.class)
+			.userProvider(new SpringSecurityUserProvider("CHANGE_FEATURES"))
 			.build();
 	}
 	
