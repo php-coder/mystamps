@@ -30,8 +30,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -46,15 +44,8 @@ public class DbConfig {
 	@Inject
 	private DataSource dataSource;
 	
-	@Bean
-	public JpaVendorAdapter getJpaVendorAdapter() {
-		AbstractJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-		
-		jpaVendorAdapter.setDatabasePlatform(env.getRequiredProperty("jpa.dialectClassName"));
-		jpaVendorAdapter.setShowSql(env.getRequiredProperty("jpa.showSql", Boolean.class));
-		
-		return jpaVendorAdapter;
-	}
+	@Inject
+	private JpaVendorAdapter jpaVendorAdapter;
 	
 	// Explicitly specified bean names which will be looking by Spring Data
 	
@@ -63,7 +54,7 @@ public class DbConfig {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory =
 			new LocalContainerEntityManagerFactoryBean();
 		
-		entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
+		entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
 		entityManagerFactory.setDataSource(dataSource);
 		entityManagerFactory.setJpaPropertyMap(getJpaProperties());
 		
