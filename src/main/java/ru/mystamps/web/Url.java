@@ -27,7 +27,7 @@ import ru.mystamps.web.service.ImageService;
  *
  * Should be used anywhere instead of hard-coded paths.
  *
- * @author Slava Semushin <slava.semushin@gmail.com>
+ * @author Slava Semushin
  */
 public final class Url {
 	public static final String PUBLIC_URL            = "http://my-stamps.ru";

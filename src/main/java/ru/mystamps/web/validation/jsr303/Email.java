@@ -39,7 +39,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @see <a href="http://stackoverflow.com/q/4459474">Question at StackOverflow</a>
  * @see <a href="https://hibernate.atlassian.net/browse/HVAL-43">Issue in Hibernate's JIRA</a>
- * @author Slava Semushin <slava.semushin@gmail.com>
+ * @author Slava Semushin
  */
 @org.hibernate.validator.constraints.Email
 @Pattern(regexp = ".+@.+\\..+")
