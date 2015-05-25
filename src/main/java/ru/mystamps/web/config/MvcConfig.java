@@ -24,7 +24,6 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.repository.support.DomainClassConverter;
@@ -115,22 +114,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(env.acceptsProfiles("prod"));
 		return templateResolver;
-	}
-	
-	@Bean(name = "messageSource")
-	public MessageSource getMessageSource() {
-		ReloadableResourceBundleMessageSource messageSource =
-			new ReloadableResourceBundleMessageSource();
-		
-		messageSource.setBasenames(
-			"classpath:ru/mystamps/i18n/Messages",
-			"classpath:ru/mystamps/i18n/SpringSecurityMessages",
-			"classpath:ru/mystamps/i18n/MailTemplates"
-		);
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setFallbackToSystemLocale(false);
-		
-		return messageSource;
 	}
 	
 	@Bean(name = "multipartResolver")
