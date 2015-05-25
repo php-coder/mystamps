@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -40,9 +39,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
-
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
@@ -52,9 +48,6 @@ import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 @EnableScheduling
 @Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
-	
-	@Inject
-	private Environment env;
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -102,18 +95,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		factory.setValidationMessageSource(messageSource);
 		
 		return factory;
-	}
-	
-	// override Spring Boot default configuration
-	@Bean(name = "defaultTemplateResolver")
-	public TemplateResolver getThymeleafTemplateResolver() {
-		TemplateResolver templateResolver = new ServletContextTemplateResolver();
-		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setPrefix("/WEB-INF/views/");
-		templateResolver.setSuffix(".html");
-		templateResolver.setCharacterEncoding("UTF-8");
-		templateResolver.setCacheable(env.acceptsProfiles("prod"));
-		return templateResolver;
 	}
 	
 	@Bean(name = "multipartResolver")
