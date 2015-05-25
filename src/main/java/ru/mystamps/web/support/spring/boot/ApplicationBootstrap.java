@@ -43,6 +43,7 @@ import java.util.EnumSet;
 	ApplicationContext.class,
 	DispatcherServletContext.class,
 	H2Config.class,
+	ThymeleafViewResolverInitializingBean.class,
 	ErrorPagesServletContainerCustomizer.class
 })
 public class ApplicationBootstrap {

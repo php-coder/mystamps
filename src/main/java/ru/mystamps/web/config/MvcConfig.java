@@ -40,11 +40,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.ViewResolver;
 
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafView;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
@@ -60,9 +56,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Inject
 	private Environment env;
-	
-	@Inject
-	private SpringTemplateEngine templateEngine;
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -122,18 +115,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(env.acceptsProfiles("prod"));
 		return templateResolver;
-	}
-	
-	// override Spring Boot default configuration
-	@Bean(name = "thymeleafViewResolver")
-	public ViewResolver getThymeleafViewResolver() {
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(templateEngine);
-		viewResolver.setContentType("text/html; charset=UTF-8");
-		viewResolver.setStaticVariables(Url.asMap());
-		viewResolver.setViewClass(ThymeleafView.class);
-		
-		return viewResolver;
 	}
 	
 	@Bean(name = "messageSource")
