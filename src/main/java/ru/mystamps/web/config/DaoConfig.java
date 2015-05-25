@@ -17,9 +17,7 @@
  */
 package ru.mystamps.web.config;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,14 +42,7 @@ import ru.mystamps.web.dao.impl.JdbcUsersActivationDaoImpl;
 public class DaoConfig {
 	
 	@Inject
-	private DataSource dataSource;
-	
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@PostConstruct
-	protected void init() {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Bean
 	public JdbcCategoryDao getJdbcCategoryDao() {
