@@ -21,19 +21,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.dao.JdbcUserDao;
 
-import javax.sql.DataSource;
 import java.util.Collections;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class JdbcUserDaoImpl implements JdbcUserDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Value("${user.count_users_by_login}")
 	private String countByLoginSql;
-	
-	public JdbcUserDaoImpl(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public long countByLogin(String login) {

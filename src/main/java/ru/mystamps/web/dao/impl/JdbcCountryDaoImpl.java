@@ -23,16 +23,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@RequiredArgsConstructor
 public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
@@ -60,10 +61,6 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	@Value("${country.find_all_countries_names_with_ids}")
 	private String findCountriesNamesWithIdsSql;
-	
-	public JdbcCountryDaoImpl(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public long countAll() {

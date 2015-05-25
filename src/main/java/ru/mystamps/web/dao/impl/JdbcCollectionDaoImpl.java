@@ -21,18 +21,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
+@RequiredArgsConstructor
 public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	private static final RowMapper<LinkEntityDto> LINK_ENTITY_DTO_ROW_MAPPER =
@@ -48,10 +49,6 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	@Value("${collection.create}")
 	private String addCollectionSql;
-	
-	public JdbcCollectionDaoImpl(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public Iterable<LinkEntityDto> findLastCreated(int quantity) {

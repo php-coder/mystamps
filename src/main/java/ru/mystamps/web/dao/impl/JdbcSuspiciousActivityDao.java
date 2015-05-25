@@ -20,26 +20,23 @@ package ru.mystamps.web.dao.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.entity.SuspiciousActivity;
 
+@RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
-	
-	public JdbcSuspiciousActivityDao(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public void add(SuspiciousActivity activity) {

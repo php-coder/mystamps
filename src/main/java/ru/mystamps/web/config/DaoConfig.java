@@ -17,11 +17,13 @@
  */
 package ru.mystamps.web.config;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.dao.JdbcCollectionDao;
@@ -44,39 +46,46 @@ public class DaoConfig {
 	@Inject
 	private DataSource dataSource;
 	
+	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@PostConstruct
+	protected void init() {
+		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+	}
+	
 	@Bean
 	public JdbcCategoryDao getJdbcCategoryDao() {
-		return new JdbcCategoryDaoImpl(dataSource);
+		return new JdbcCategoryDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public JdbcCountryDao getJdbcCountryDao() {
-		return new JdbcCountryDaoImpl(dataSource);
+		return new JdbcCountryDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public JdbcCollectionDao getJdbcCollectionDao() {
-		return new JdbcCollectionDaoImpl(dataSource);
+		return new JdbcCollectionDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public JdbcSeriesDao getJdbcSeriesDao() {
-		return new JdbcSeriesDaoImpl(dataSource);
+		return new JdbcSeriesDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public JdbcUserDao getJdbcUserDao() {
-		return new JdbcUserDaoImpl(dataSource);
+		return new JdbcUserDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public JdbcUsersActivationDao getJdbcUsersActivationDao() {
-		return new JdbcUsersActivationDaoImpl(dataSource);
+		return new JdbcUsersActivationDaoImpl(jdbcTemplate);
 	}
 	
 	@Bean
 	public SuspiciousActivityDao getSuspiciousActivityDao() {
-		return new JdbcSuspiciousActivityDao(dataSource);
+		return new JdbcSuspiciousActivityDao(jdbcTemplate);
 	}
 	
 }

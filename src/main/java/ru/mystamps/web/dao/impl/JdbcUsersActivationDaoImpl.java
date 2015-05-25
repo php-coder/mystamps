@@ -21,18 +21,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@RequiredArgsConstructor
 public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	
 	private static final RowMapper<UsersActivation> USERS_ACTIVATION_ROW_MAPPER =
@@ -51,10 +52,6 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	
 	@Value("${users_activation.create}")
 	private String addActivationKeySql;
-	
-	public JdbcUsersActivationDaoImpl(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public UsersActivation findByActivationKey(String activationKey) {

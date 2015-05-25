@@ -21,17 +21,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	private static final RowMapper<SitemapInfoDto> SITEMAP_INFO_DTO_ROW_MAPPER =
@@ -80,10 +81,6 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.count_stamps_by_gibbons_number}")
 	private String countStampsByGibbonsNumberSql;
-	
-	public JdbcSeriesDaoImpl(DataSource dataSource) {
-		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-	}
 	
 	@Override
 	public Iterable<SitemapInfoDto> findAllForSitemap() {
