@@ -32,7 +32,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -42,7 +41,6 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 
 @Configuration
-@EnableWebMvc
 @EnableScheduling
 @Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
