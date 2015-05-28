@@ -69,10 +69,4 @@ public class ApplicationBootstrap {
 		return registration;
 	}
 	
-	// To expose user's request to AuthenticationFailureListener where we need it for logging
-	@Bean
-	public RequestContextListener getRequestContextListener() {
-		return new RequestContextListener();
-	}
-	
 }
