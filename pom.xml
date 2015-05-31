@@ -539,6 +539,25 @@
 						@see https://github.com/spring-projects/spring-boot/issues/980
 					-->
 					<addResources>false</addResources>
+					<!--
+						Exclude provided artifacts from resulted WAR.
+						@see https://github.com/spring-projects/spring-boot/issues/649
+						@see https://github.com/spring-projects/spring-boot/issues/650
+					-->
+					<excludes>
+						<exclude>
+							<groupId>org.mortbay.jetty</groupId>
+							<artifactId>servlet-api</artifactId>
+						</exclude>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+						<exclude>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-validator-annotation-processor</artifactId>
+						</exclude>
+					</excludes>
 				</configuration>
 				<executions>
 					<execution>
