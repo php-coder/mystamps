@@ -27,7 +27,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 * install Maven
 * clone this project
 * from the console inside the directory with source code, execute command `mvn clean jetty:run`
-* open up `http://127.0.0.1:8081` in the browser
+* open up `http://127.0.0.1:8080` in the browser
 * browse the site or log in as one of the pre-created users: `admin` / `test` or `coder` / `test`
 * press `Ctrl-C` to stop the server
 
