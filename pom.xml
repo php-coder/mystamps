@@ -99,7 +99,7 @@
 				<exclusion>
 					<!-- In favour of spring-boot-starter-log4j -->
 					<groupId>org.springframework.boot</groupId>
-					 <artifactId>spring-boot-starter-logging</artifactId>
+					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.yaml</groupId>
@@ -116,7 +116,7 @@
 				<exclusion>
 					<!-- In favour of spring-boot-starter-jetty -->
 					<groupId>org.springframework.boot</groupId>
-					 <artifactId>spring-boot-starter-tomcat</artifactId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
