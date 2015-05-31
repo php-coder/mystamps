@@ -207,7 +207,6 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
 			<!-- Required in compiled scope for customized version of MySQL5InnoDBDialect -->
 		</dependency>
 		
