@@ -50,7 +50,7 @@ public class TogglzConfig {
 	
 	/* Web console for managing Togglz.
 	 *
-	 * Access it via http://127.0.0.1:8081/togglz after authentication as "admin" user.
+	 * Access it via http://127.0.0.1:8080/togglz after authentication as "admin" user.
 	 *
 	 * @see http://www.togglz.org/documentation/admin-console.html
 	 */

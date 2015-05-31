@@ -32,7 +32,7 @@ public class H2Config {
 	
 	/* Web console for managing H2 database.
 	 *
-	 * Access it via http://127.0.0.1:8081/console and use "org.h2.Driver" as the driver,
+	 * Access it via http://127.0.0.1:8080/console and use "org.h2.Driver" as the driver,
 	 * "jdbc:h2:mem:mystamps" as the URL, "sa" as the username and a blank password.
 	 */
 	@Bean
