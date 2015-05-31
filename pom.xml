@@ -728,11 +728,6 @@
 							<name>log4j.configuration</name>
 							<value>file:///${env.dir}/log4j.properties</value>
 						</systemProperty>
-						<systemProperty>
-							<!-- http://www.slf4j.org/codes.html#loggerNameMismatch -->
-							<name>slf4j.detectLoggerNameMismatch</name>
-							<value>true</value>
-						</systemProperty>
 					</systemProperties>
 					<skip>${skipTests}</skip>
 				</configuration>

@@ -50,6 +50,9 @@ import java.util.EnumSet;
 public class ApplicationBootstrap {
 	
 	public static void main(String[] args) {
+		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
+		System.setProperty("slf4j.detectLoggerNameMismatch", "true");
+		
 		ConfigurableApplicationContext context =
 			SpringApplication.run(ApplicationBootstrap.class, args);
 		
