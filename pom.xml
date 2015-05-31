@@ -78,6 +78,9 @@
 		<!-- Definitions and redefinitions of default values from spring-boot-starter-web -->
 		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
 		
+		<!-- Definitions and redefinitions of default values from spring-boot-starter-jetty -->
+		<jetty.version>8.1.16.v20140903</jetty.version>
+		
 		<!-- Definitions and redefinitions of default values from spring-boot-starter-log4j -->
 		<slf4j.version>1.7.9</slf4j.version>
 		
@@ -122,6 +125,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>websocket-server</artifactId>
+				</exclusion>
+			
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>javax-websocket-server-impl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.2.3.RELEASE/spring-boot-starters/spring-boot-starter-log4j/pom.xml -->
