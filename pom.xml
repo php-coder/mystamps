@@ -40,9 +40,6 @@
 		<cglib.version>2.2.2</cglib.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		
-		<jetty.host>127.0.0.1</jetty.host>
-		<jetty.port>8080</jetty.port>
-		
 		<compiler.plugin.version>3.2</compiler.plugin.version>
 		<resources.plugin.version>2.7</resources.plugin.version>
 		<war.plugin.version>2.5</war.plugin.version>
@@ -52,7 +49,6 @@
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		<jasmine.plugin.version>1.3.1.5</jasmine.plugin.version>
 		<failsafe.plugin.version>2.18.1</failsafe.plugin.version>
-		<jetty.plugin.version>8.1.16.v20140903</jetty.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
 		<pmd.plugin.version>3.3</pmd.plugin.version>
@@ -687,33 +683,6 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.plugin.version}</version>
-				<configuration>
-					<connectors>
-						<connector
-							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<host>${jetty.host}</host>
-							<port>${jetty.port}</port>
-						</connector>
-					</connectors>
-					<stopPort>9966</stopPort>
-					<stopKey>jetty-stop-signal</stopKey>
-					<webAppSourceDirectory>
-						${project.build.directory}/${project.build.finalName}
-					</webAppSourceDirectory>
-					<systemProperties>
-						<systemProperty>
-							<name>log4j.configuration</name>
-							<value>file:///${env.dir}/log4j.properties</value>
-						</systemProperty>
-					</systemProperties>
-					<skip>${skipTests}</skip>
-				</configuration>
-			</plugin>
-			
-			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
@@ -896,9 +865,6 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<properties>
-				<env.dir>${basedir}/src/main/resources/prod</env.dir>
-			</properties>
 		</profile>
 		
 		<profile>
@@ -906,9 +872,6 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<env.dir>${basedir}/src/main/resources/test</env.dir>
-			</properties>
 		</profile>
 		
 	</profiles>
