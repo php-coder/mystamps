@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.HttpMethod;
 
@@ -45,7 +44,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.Url;
 
-@Configuration
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
