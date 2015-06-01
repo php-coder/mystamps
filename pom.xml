@@ -19,7 +19,7 @@
 		<slf4j.version>1.7.9</slf4j.version>
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<spring.data.version>1.6.4.RELEASE</spring.data.version>
-		<spring.security.version>3.2.7.RELEASE</spring.security.version>
+		<spring.security.version>4.0.1.RELEASE</spring.security.version>
 		<h2.version>1.4.184</h2.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<javax.inject.version>1</javax.inject.version>
@@ -32,7 +32,7 @@
 		<commons.collections.version>3.2.1</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
-		<thymeleaf.security.version>2.1.1.RELEASE</thymeleaf.security.version>
+		<thymeleaf.security.version>2.1.2.RELEASE</thymeleaf.security.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
 		<liquibase.version>3.3.2</liquibase.version>
 		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
@@ -232,7 +232,7 @@
 		
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 			<version>${thymeleaf.security.version}</version>
 		</dependency>
 		

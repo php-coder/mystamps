@@ -79,7 +79,7 @@
 					</div>
 					/*/-->
 					
-					<div class="row-fluid" th:with="lastLogin=${exceptionOccurred ? session.SPRING_SECURITY_LAST_EXCEPTION.authentication.principal : ''}">
+					<div class="row-fluid">
 						<div class="span6 offset3">
 							<form id="authAccountForm" action="../site/index.html" th:action="@{${LOGIN_PAGE}}" method="post" class="form-horizontal">
 								
@@ -89,7 +89,7 @@
 										<span id="login.required" class="required_field">*</span>
 									</label>
 									<div class="controls">
-										<input type="text" id="login" name="login" required="required" value="" th:value="${lastLogin}" />
+										<input type="text" id="login" name="login" required="required" value="" />
 									</div>
 								</div>
 								
