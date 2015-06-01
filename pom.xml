@@ -73,6 +73,7 @@
 		<slf4j.version>1.7.9</slf4j.version>
 		<spock.version>0.7-groovy-2.0</spock.version>
 		<spring-data-releasetrain.version>Dijkstra-SR4</spring-data-releasetrain.version>
+		<spring-security.version>4.0.1.RELEASE</spring-security.version>
 		
 		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
 		<java.version>1.8</java.version>
