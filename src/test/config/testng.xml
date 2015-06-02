@@ -139,6 +139,24 @@
 		</classes>
 	</test>
 	
+	<test name="When anonymous user at forbidden page">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtForbiddenPage" />
+		</classes>
+	</test>
+	
+	<test name="When anonymous user open Togglz console">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenTogglzConsole" />
+		</classes>
+	</test>
+	
+	<test name="When user open Togglz console">
+		<classes>
+			<class name="ru.mystamps.web.tests.cases.WhenUserOpenTogglzConsole" />
+		</classes>
+	</test>
+	
 	<test name="When anonymous user register account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserRegisterAccount" />
