@@ -22,6 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -36,6 +37,9 @@ import ru.mystamps.web.support.h2.H2Config;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import java.util.EnumSet;
 
 @EnableAutoConfiguration(exclude = ErrorMvcAutoConfiguration.class)
@@ -47,7 +51,7 @@ import java.util.EnumSet;
 	ResourceBundleMessageSourceInitializingBean.class,
 	ErrorPagesServletContainerCustomizer.class
 })
-public class ApplicationBootstrap {
+public class ApplicationBootstrap implements ServletContextInitializer {
 	
 	public static void main(String[] args) {
 		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
@@ -58,6 +62,11 @@ public class ApplicationBootstrap {
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
+	}
+	
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		servletContext.getSessionCookieConfig().setHttpOnly(true);
 	}
 	
 	// TODO: remove @Qualifier and inject by type
