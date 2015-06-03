@@ -31,7 +31,6 @@ public class TestContext {
 			new PropertySourcesPlaceholderConfigurer();
 		configurer.setLocations(
 			new ClassPathResource("test/spring/test-data.properties"),
-			new ClassPathResource("test/spring/mail.properties"),
 			new ClassPathResource("ru/mystamps/i18n/MailTemplates.properties")
 		);
 		return configurer;
