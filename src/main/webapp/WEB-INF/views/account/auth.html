@@ -48,13 +48,6 @@
 					</ul>
 				</div>
 			</div>
-			<!--/*/
-			<div class="row top-indent" th:if="${justActivatedUser}">
-				<div class="alert alert-success text-center col-sm-8 col-sm-offset-2" th:text="#{t_activation_successful}">
-					Account successfully activated! Now you can pass authentication.
-				</div>
-			</div>
-			/*/-->
 			<div class="row">
 				<div id="content" class="col-sm-6 col-sm-offset-3" th:with="requestFailed=${(#httpServletRequest.queryString ?: '') eq 'failed'}">
 					
@@ -75,6 +68,14 @@
 						<div class="row" th:if="${requestFailed and exceptionOccurred}">
 							<div id="form.errors" class="alert alert-danger text-center col-sm-8 col-sm-offset-2" th:with="errorMessage=${session.SPRING_SECURITY_LAST_EXCEPTION.message}" th:text="${errorMessage}">
 								Wrong login or password!
+							</div>
+						</div>
+						/*/-->
+						
+						<!--/*/
+						<div class="row" th:if="${justActivatedUser}">
+							<div class="alert alert-success text-center col-sm-8 col-sm-offset-2" th:text="#{t_activation_successful}">
+								Account successfully activated! Now you can pass authentication.
 							</div>
 						</div>
 						/*/-->
