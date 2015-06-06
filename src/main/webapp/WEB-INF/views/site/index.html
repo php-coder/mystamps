@@ -71,7 +71,7 @@
 						/*/-->
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title" th:text="|#{t_recently_added_collections}|">Recently created collections</h4>
+									<h4 class="panel-title" th:text="#{t_recently_added_collections}">Recently created collections</h4>
 								</div>
 								<div class="panel-body" th:remove="all-but-first">
 									<p th:each="collection : ${recentlyAddedCollections}">
@@ -98,7 +98,7 @@
 						/*/-->
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title" th:text="|#{t_recently_added_series}|">Recently added series</h4>
+									<h4 class="panel-title" th:text="#{t_recently_added_series}">Recently added series</h4>
 								</div>
 								<div class="panel-body" th:remove="all-but-first">
 									<p th:each="series : ${recentlyAddedSeries}">
@@ -195,7 +195,7 @@
 					<div class="col-sm-2">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h4 class="panel-title" th:text="|#{t_in_db}|">In our database</h4>
+								<h4 class="panel-title" th:text="#{t_in_db}">In our database</h4>
 							</div>
 							<div class="panel-body">
 								<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 2</p>
