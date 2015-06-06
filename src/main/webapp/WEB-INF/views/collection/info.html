@@ -115,27 +115,41 @@
 								</li>
 							</ul>
 						</div>
-						<div class="col-sm-6">
-							<div class="row" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-								<div class="col-sm-6">
-									<div id="categories-chart"></div>
+						<div class="col-sm-3">
+							<div class="col-sm-12" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
+										</div>
+										<div id="categories-chart" class="panel-body no-padding"></div>
+									</div>
 								</div>
-								<div class="col-sm-6">
-									<div id="countries-chart"></div>
-								</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="col-sm-12" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
+										</div>
+										<div id="countries-chart" class="panel-body no-padding"></div>
+									</div>
 							</div>
 						</div>
 						<div class="col-sm-2">
 							<!--/*/
 							<th:block togglz:active="SHOW_COLLECTION_STATISTICS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 							/*/-->
-								<p>
-									<strong th:text="|#{t_in_collection}:|">In this collection:</strong>
-								</p>
-								<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
-								<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
-								<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
-								<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
+									</div>
+									<div class="panel-body">
+										<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
+										<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
+										<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
+										<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
+									</div>
+								</div>
 							<!--/*/
 							</th:block>
 							/*/-->
@@ -163,9 +177,8 @@
 			<script th:inline="javascript">
 				/*<![CDATA[*/
 				
-				var drawChart = function(containerId, title, table) {
+				var drawChart = function(containerId, table) {
 					var options = {
-						title: title,
 						pieHole: 0.3
 					};
 					var chart = new google.visualization.PieChart(document.getElementById(containerId));
@@ -198,7 +211,6 @@
 				var drawCategoriesChart = function() {
 					drawChart(
 						'categories-chart',
-						/*[[#{t_stamps_by_categories}]]*/'Stamps by categories',
 						createCategoriesDataTable()
 					);
 				};
@@ -235,7 +247,6 @@
 				var drawCountriesChart = function() {
 					drawChart(
 						'countries-chart',
-						/*[[#{t_stamps_by_countries}]]*/'Stamps by countries',
 						createCountriesDataTable()
 					);
 				};
