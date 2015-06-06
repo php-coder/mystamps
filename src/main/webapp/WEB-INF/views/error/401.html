@@ -8,66 +8,68 @@
 		<meta name="robots" content="noindex" />
 		<title th:text="#{t_401_title}">401: unauthorized</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
-		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
-		<link rel="stylesheet" href="http://yandex.st/bootstrap/2.3.1/css/bootstrap-responsive.min.css" th:href="${BOOTSTRAP_RESPONSIVE_CSS}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 	</head>
 	<body lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}">
-		<div class="row-fluid" id="header">
-			<div id="logo" class="span10">
-				<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div id="logo" class="col-sm-10">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div>
+				
+				<div id="user_bar" class="col-sm-2">
+					<ul class="list-unstyled">
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="glyphicon glyphicon-user"></i>
+							<a sec:authentication="principal.user.name"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
+								John Doe
+							</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+							</form>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			
-			<div id="user_bar" class="span2">
-				<ul class="unstyled">
-					<!--/*/
-					<li sec:authorize="isAuthenticated()">
-						<i class="icon-user"></i>
-						<a sec:authentication="principal.user.name"
-							href="../collection/info.html"
-							title="Open my collection"
-							th:title="#{t_open_my_collection}"
-							th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
-							John Doe
-						</a>
-					</li>
-					/*/-->
-					<li sec:authorize="isAnonymous()">
-						<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
-					</li>
-					<!--/*/
-					<li sec:authorize="isAuthenticated()">
-						<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
-							<i class="icon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
-						</form>
-					</li>
-					/*/-->
-					<li sec:authorize="isAnonymous()">
-						<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
-					</li>
-				</ul>
+			<div class="row text-center">
+				<div id="content" class="col-sm-12">
+					<h1 id="error-code">
+						401
+					</h1>
+					<h4 id="error-msg" th:utext="#{t_401_description('&lt;br /&gt;')}">
+						Authorization required<br />to access page
+					</h4>
+				</div>
 			</div>
-		</div>
-		
-		<div class="row-fluid text-center">
-			<div id="content" class="span12">
-				<h1 id="error-code">
-					401
-				</h1>
-				<h4 id="error-msg" th:utext="#{t_401_description('&lt;br /&gt;')}">
-					Authorization required<br />to access page
-				</h4>
+			
+			<div class="row">
+				<footer class="text-right">
+					<i class="glyphicon glyphicon-envelope"></i>
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2015
+				</footer>
 			</div>
+			
+			<!-- Placed at the end of the document so the pages load faster -->
+			<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		</div>
-		
-		<div class="row-fluid">
-			<footer class="text-right">
-				<i class="icon-envelope"></i>
-				<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2015
-			</footer>
-		</div>
-		
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="http://yandex.st/bootstrap/2.3.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 	</body>
 </html>
