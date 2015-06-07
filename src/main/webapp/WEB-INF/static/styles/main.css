@@ -63,3 +63,9 @@ label {
 	padding: 0px;
 }
 
+// hide borders from file upload input
+input[type="file"].form-control {
+	border: 0px;	/* default: 1px solid #CCC */
+	box-shadow: none;	/* default: inset 0 1px 1px rgba(0, 0, 0, .075); */
+}
+
