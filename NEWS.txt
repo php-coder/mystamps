@@ -1,5 +1,6 @@
 0.x
 - (infrastructure) switched to Java8
+- (user interface) ported to Bootstrap 3
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

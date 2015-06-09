@@ -55,10 +55,6 @@ label {
 	font-weight: bold;
 }
 
-.top-indent {
-	padding-top: 20px;
-}
-
 .no-margin {
 	margin: 0px;
 }
@@ -66,4 +62,3 @@ label {
 .no-padding {
 	padding: 0px;
 }
-
