@@ -378,7 +378,7 @@
 								<span id="image.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<input type="file" id="image" class="form-control" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+								<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
 								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
 							</div>
 						</div>
