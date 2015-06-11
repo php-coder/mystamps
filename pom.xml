@@ -730,7 +730,6 @@
 					<consoleOutput>true</consoleOutput>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<linkXRef>false</linkXRef>
-					<failOnViolation>false</failOnViolation>
 					<configLocation>
 						${basedir}/src/main/config/checkstyle.xml
 					</configLocation>
@@ -746,7 +745,6 @@
 				<version>${pmd.plugin.version}</version>
 				<configuration>
 					<linkXRef>false</linkXRef>
-					<failOnViolation>false</failOnViolation>
 					<verbose>true</verbose>
 					<targetJdk>${java.version}</targetJdk>
 					<rulesets>

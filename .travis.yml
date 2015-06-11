@@ -1,5 +1,10 @@
 language: java
-script: mvn verify jasmine:test
+script:
+  - mvn checkstyle:check -Dcheckstyle.violationSeverity=warning
+  - mvn pmd:check
+  - mvn license:check
+  - mvn verify
+  - mvn jasmine:test
 after_success: mvn jacoco:prepare-agent test jacoco:report coveralls:jacoco
 
 jdk:
