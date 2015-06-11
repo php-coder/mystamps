@@ -11,7 +11,7 @@
 	<suppress checks="LineLength" files="Url.java" lines="74" />
 	<suppress checks="LineLength" files="ErrorController.java" lines="73" />
 	<suppress checks="LineLength" files="SecurityConfig.java" lines="36,37,40,41" />
-	<suppress checks="LineLength" files="JdbcSeriesDaoImpl.java" lines="125" />
+	<suppress checks="LineLength" files="JdbcSeriesDaoImpl.java" lines="122" />
 	
 	<!-- false positives due to Lombok usage -->
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.model" />
