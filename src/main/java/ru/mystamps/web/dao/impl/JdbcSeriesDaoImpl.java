@@ -31,7 +31,8 @@ import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+// TODO: move stamps related methods to separate interface (#88)
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 @RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	

@@ -20,6 +20,8 @@ package ru.mystamps.web.dao;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
+// TODO: move stamps related methods to separate interface (#88)
+@SuppressWarnings("PMD.TooManyMethods")
 public interface JdbcSeriesDao {
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
