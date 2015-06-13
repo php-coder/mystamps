@@ -77,6 +77,9 @@
 		<spring-data-releasetrain.version>Dijkstra-SR4</spring-data-releasetrain.version>
 		<spring-security.version>4.0.1.RELEASE</spring-security.version>
 		
+		<!-- Downgraded because of bug: http://sourceforge.net/p/htmlunit/bugs/1692/ -->
+		<httpclient.version>4.3.4</httpclient.version>
+		
 		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
 		<java.version>1.8</java.version>
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
