@@ -29,7 +29,6 @@
 		<commons.io.version>2.4</commons.io.version>
 		<thymeleaf.security.version>2.1.2.RELEASE</thymeleaf.security.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
 		<togglz.version>2.1.0.Final</togglz.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
@@ -261,14 +260,6 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-		</dependency>
-		
-		<!-- Allow liquibase to log over slf4j -->
-		<dependency>
-			<groupId>com.mattbertolini</groupId>
-			<artifactId>liquibase-slf4j</artifactId>
-			<version>${liquibase.slf4j.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
