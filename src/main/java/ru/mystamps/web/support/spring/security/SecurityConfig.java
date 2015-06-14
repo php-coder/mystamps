@@ -107,6 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Inject
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		auth.authenticationProvider(getAuthenticationProvider());
 	}
