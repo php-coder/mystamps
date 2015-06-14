@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -126,12 +127,11 @@ public final class CatalogUtils {
 				result.add(
 					ConstructorUtils.invokeConstructor(elementClass, number)
 				);
-				
-			} catch (RuntimeException ex) { // NOPMD
-				throw ex;
-			
-			} catch (Exception ex) { // NOPMD
-				throw new RuntimeException(ex); // NOPMD
+			} catch (NoSuchMethodException |
+					IllegalAccessException |
+					InvocationTargetException |
+					InstantiationException ex) {
+				throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
 			}
 		}
 		
