@@ -17,7 +17,7 @@
 		<selenium.version>2.43.1</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<slf4j.version>1.7.9</slf4j.version>
-		<spring.version>4.1.6.RELEASE</spring.version>
+		<spring.version>4.2.0.RC1</spring.version>
 		<spring.data.version>1.6.4.RELEASE</spring.data.version>
 		<spring.security.version>4.0.1.RELEASE</spring.security.version>
 		<h2.version>1.4.184</h2.version>
@@ -475,6 +475,19 @@
 		</dependency>
 		
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 	
 	<build>
 		<finalName>${project.artifactId}</finalName>
