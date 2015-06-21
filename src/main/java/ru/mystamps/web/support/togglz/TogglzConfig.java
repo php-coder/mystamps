@@ -33,6 +33,8 @@ import org.togglz.core.repository.cache.CachingStateRepository;
 import org.togglz.core.repository.jdbc.JDBCStateRepository;
 import org.togglz.spring.security.SpringSecurityUserProvider;
 
+import ru.mystamps.web.Url;
+
 @Configuration
 public class TogglzConfig {
 	
@@ -60,7 +62,7 @@ public class TogglzConfig {
 		servlet.setName("TogglzConsole");
 		servlet.setServlet(new TogglzConsoleServlet());
 		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
-		servlet.setUrlMappings(Collections.singletonList("/togglz/*"));
+		servlet.setUrlMappings(Collections.singletonList(Url.TOGGLZ_CONSOLE_PAGE + "/*"));
 		return servlet;
 	}
 	
