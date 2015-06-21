@@ -19,10 +19,12 @@ package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
 
+import ru.mystamps.web.Url;
+
 public class ForbiddenErrorPage extends AbstractPage {
 	
 	public ForbiddenErrorPage(WebDriver driver) {
-		super(driver, "/togglz");
+		super(driver, Url.TOGGLZ_CONSOLE_PAGE);
 	}
 	
 	public String getErrorMessage() {

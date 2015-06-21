@@ -22,6 +22,7 @@ import java.net.HttpURLConnection;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ForbiddenErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -38,7 +39,7 @@ public class WhenAnonymousUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<For
 	
 	@BeforeClass
 	public void setUp() {
-		page.open("/togglz");
+		page.open(Url.TOGGLZ_CONSOLE_PAGE);
 	}
 	
 	@Test(groups = "std")

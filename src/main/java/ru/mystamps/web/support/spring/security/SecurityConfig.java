@@ -96,7 +96,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Allow unsecured requests to Togglz and H2 consoles.
 				// See also: https://github.com/togglz/togglz/issues/119
 				// See also: src/main/config/test-override-web.xml
-				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/togglz", "/console"))
+				.requireCsrfProtectionMatcher(
+					new AllExceptUrlsStartedWith(Url.TOGGLZ_CONSOLE_PAGE, "/console")
+				)
 			.and()
 			.rememberMe()
 				// TODO: GH #27

@@ -76,6 +76,8 @@ public final class Url {
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
 	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
 	
+	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
+	
 	private Url() {
 	}
 	

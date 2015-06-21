@@ -25,6 +25,7 @@ import org.testng.annotations.Test;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ForbiddenErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -48,7 +49,7 @@ public class WhenUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErr
 	@BeforeClass
 	public void setUp() {
 		page.login(validUserLogin, validUserPassword);
-		page.open("/togglz");
+		page.open(Url.TOGGLZ_CONSOLE_PAGE);
 	}
 	
 	@AfterClass(alwaysRun = true)
