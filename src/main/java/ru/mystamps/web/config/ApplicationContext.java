@@ -26,6 +26,7 @@ import org.springframework.core.io.ClassPathResource;
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 import ru.mystamps.web.support.togglz.TogglzConfig;
 
+@SuppressWarnings("checkstyle:hideutilityclassconstructor")
 @Configuration
 @Import({
 	DbConfig.class,
