@@ -1,11 +1,12 @@
 language: java
 script:
-  - mvn checkstyle:check -Dcheckstyle.violationSeverity=warning
-  - mvn pmd:check
-  - mvn license:check
-  - mvn verify
-  - mvn jasmine:test
-after_success: mvn jacoco:prepare-agent test jacoco:report coveralls:jacoco
+  - mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning | egrep -v '^\[INFO\] Download(ing|ed):'
+  - mvn --batch-mode pmd:check | egrep -v '^\[INFO\] Download(ing|ed):'
+  - mvn --batch-mode license:check | egrep -v '^\[INFO\] Download(ing|ed):'
+  - mvn --batch-mode verify | egrep -v '^\[INFO\] Download(ing|ed):'
+  - mvn --batch-mode jasmine:test | egrep -v '^\[INFO\] Download(ing|ed):'
+after_success:
+  - mvn --batch-mode jacoco:prepare-agent test jacoco:report coveralls:jacoco | egrep -v '^\[INFO\] Download(ing|ed):'
 
 jdk:
   - oraclejdk8
