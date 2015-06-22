@@ -52,7 +52,7 @@ import java.util.EnumSet;
 })
 public class ApplicationBootstrap implements ServletContextInitializer {
 	
-	public static void main(String[] args) {
+	public static void main(String... args) {
 		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
 		System.setProperty("slf4j.detectLoggerNameMismatch", "true");
 		
