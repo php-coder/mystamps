@@ -9,33 +9,29 @@
 	<version>0.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
+	<parent>
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.0.M1</version>
+	</parent>
+	
 	<properties>
-		<hibernate.version>4.3.6.Final</hibernate.version>
-		<hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
 		<lombok.version>1.14.8</lombok.version>
-		<mysql.connector.version>5.1.33</mysql.connector.version>
-		<selenium.version>2.46.0</selenium.version>
+		<!--
+			Fix NoClassDefFoundError: org/apache/http/conn/ssl/NoopHostnameVerifier
+			Stick to version 2.45.0 until htmlunit will be fixed to work with httpclient 4.5 (see below).
+		-->
+		<selenium.version>2.45.0</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
-		<slf4j.version>1.7.9</slf4j.version>
-		<spring.version>4.2.0.RC1</spring.version>
-		<spring.data.version>1.6.4.RELEASE</spring.data.version>
-		<spring.security.version>4.0.1.RELEASE</spring.security.version>
-		<h2.version>1.4.184</h2.version>
+		<aspectj.version>1.8.5</aspectj.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<javax.inject.version>1</javax.inject.version>
-		<javax.mail.version>1.5.2</javax.mail.version>
 		<javax.persistence.version>1.0.0.Final</javax.persistence.version>
 		<servlet.api.version>3.0.20100224</servlet.api.version>
 		<commons.lang.version>3.3.2</commons.lang.version>
-		<commons.beanutils.version>1.9.2</commons.beanutils.version>
 		<commons.io.version>2.4</commons.io.version>
-		<commons.collections.version>3.2.1</commons.collections.version>
-		<commons.dbcp.version>1.4</commons.dbcp.version>
-		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
-		<thymeleaf.security.version>2.1.2.RELEASE</thymeleaf.security.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<liquibase.version>3.3.2</liquibase.version>
-		<liquibase.slf4j.version>1.2.1</liquibase.slf4j.version>
 		<togglz.version>2.1.0.Final</togglz.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
@@ -43,26 +39,17 @@
 		<jquery.version>1.9.1</jquery.version>
 		
 		<testng.version>6.8.8</testng.version>
-		<spock.version>0.7-groovy-2.0</spock.version>
 		<cglib.version>2.2.2</cglib.version>
-		<groovy.version>2.0.8</groovy.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
-		
-		<java.version>1.8</java.version>
-		
-		<jetty.host>127.0.0.1</jetty.host>
-		<jetty.port>8080</jetty.port>
 		
 		<compiler.plugin.version>3.2</compiler.plugin.version>
 		<resources.plugin.version>2.7</resources.plugin.version>
-		<war.plugin.version>2.5</war.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<surefire.plugin.version>2.18.1</surefire.plugin.version>
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		<jasmine.plugin.version>1.3.1.5</jasmine.plugin.version>
 		<failsafe.plugin.version>2.18.1</failsafe.plugin.version>
-		<jetty.plugin.version>8.1.16.v20140903</jetty.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
 		<pmd.plugin.version>3.3</pmd.plugin.version>
@@ -71,33 +58,136 @@
 		<javadoc.plugin.version>2.10.1</javadoc.plugin.version>
 		<enforcer.plugin.version>1.3.1</enforcer.plugin.version>
 		
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
 		<skipTests>false</skipTests>
+		
+		<!--
+			Definitions and redefinitions of default values from spring-boot-dependencies:
+			https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-dependencies/pom.xml
+		-->
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<commons-pool.version>1.5.4</commons-pool.version>
+		<groovy.version>2.0.8</groovy.version>
+		<h2.version>1.4.184</h2.version>
+		<hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
+		<hibernate.version>4.3.6.Final</hibernate.version>
+		<javax-mail.version>1.5.2</javax-mail.version>
+		<jetty.version>8.1.16.v20140903</jetty.version>
+		<liquibase.version>3.3.2</liquibase.version>
+		<mysql.version>5.1.33</mysql.version>
+		<slf4j.version>1.7.9</slf4j.version>
+		<spock.version>0.7-groovy-2.0</spock.version>
+		<spring.version>4.2.0.RC1</spring.version>
+		<spring-data-releasetrain.version>Dijkstra-SR4</spring-data-releasetrain.version>
+		<spring-security.version>4.0.1.RELEASE</spring-security.version>
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		<thymeleaf-extras-springsecurity4.version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+		
+		<!-- Downgraded because of bug: http://sourceforge.net/p/htmlunit/bugs/1692/ -->
+		<httpclient.version>4.3.4</httpclient.version>
+		
+		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
+		<java.version>1.8</java.version>
+		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
+		
 	</properties>
 	
-	<dependencyManagement>
-		<dependencies>
-			<!-- http://docs.spring.io/spring/docs/4.1.x/spring-framework-reference/html/overview.html#overview-maven-bom -->
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>${spring.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-bom</artifactId>
-				<version>${spring.security.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
 	<dependencies>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<!-- In favour of spring-boot-starter-log4j -->
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<!-- In favour of spring-boot-starter-jetty -->
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>websocket-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty.websocket</groupId>
+					<artifactId>javax-websocket-server-impl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-log4j/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j</artifactId>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-security/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>nz.net.ultraq.thymeleaf</groupId>
+					<artifactId>thymeleaf-layout-dialect</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat</groupId>
+					<artifactId>tomcat-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.M1/spring-boot-starters/spring-boot-starter-data-jpa/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
@@ -113,13 +203,6 @@
 			<version>${javax.inject.version}</version>
 		</dependency>
 		
-		<!-- For MimeMessage class -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>${javax.mail.version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -133,61 +216,15 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<exclusions>
-				<exclusion>
-					<!-- Because we use jcl-over-slf4j instead -->
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		
-		<!-- For mail classes -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
 			<!-- Required in compiled scope for customized version of MySQL5InnoDBDialect -->
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -199,14 +236,6 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>${commons.beanutils.version}</version>
-			<exclusions>
-				<exclusion>
-					<!-- Because we use jcl-over-slf4j instead -->
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<!-- Needed for IOUtils -->
@@ -220,20 +249,12 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>${commons.collections.version}</version>
 			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf-spring4</artifactId>
-			<version>${thymeleaf.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>${thymeleaf.security.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -246,15 +267,6 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>${liquibase.version}</version>
-		</dependency>
-		
-		<!-- Allow liquibase to log over slf4j -->
-		<dependency>
-			<groupId>com.mattbertolini</groupId>
-			<artifactId>liquibase-slf4j</artifactId>
-			<version>${liquibase.slf4j.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -287,7 +299,6 @@
 			<groupId>org.togglz</groupId>
 			<artifactId>togglz-console</artifactId>
 			<version>${togglz.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -321,7 +332,12 @@
 		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
-			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
@@ -360,13 +376,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>${javax.mail.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -418,60 +427,30 @@
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate.validator.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
-			<version>${hibernate.validator.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 		<!-- Dependencies which used only in prod environment -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>${commons.dbcp.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.connector.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
 		<!-- Dependencies which used only in test environment -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		
 	</dependencies>
@@ -488,6 +467,19 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>http://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -520,6 +512,52 @@
 		<plugins>
 			
 			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!--
+						Don't add src/main/resources to classpath, because we are using maven's resource filtering
+						@see https://github.com/spring-projects/spring-boot/issues/980
+					-->
+					<addResources>false</addResources>
+					<!--
+						Exclude provided artifacts from resulted WAR.
+						@see https://github.com/spring-projects/spring-boot/issues/649
+						@see https://github.com/spring-projects/spring-boot/issues/650
+					-->
+					<excludes>
+						<exclude>
+							<groupId>org.mortbay.jetty</groupId>
+							<artifactId>servlet-api</artifactId>
+						</exclude>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+						<exclude>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-validator-annotation-processor</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-application</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-application</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+				
+			</plugin>
+			
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${compiler.plugin.version}</version>
@@ -536,15 +574,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${resources.plugin.version}</version>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.plugin.version}</version>
-				<configuration>
-					<packagingExcludes>WEB-INF/classes/prod/spring/mail.properties.example</packagingExcludes>
-				</configuration>
 			</plugin>
 			
 			<plugin>
@@ -594,17 +623,6 @@
 						<groupId>org.codehaus.gmaven.runtime</groupId>
 						<artifactId>gmaven-runtime-2.0</artifactId>
 						<version>${gmaven.runtime.plugin.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>org.codehaus.groovy</groupId>
-								<artifactId>groovy-all</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-all</artifactId>
-						<version>${groovy.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -639,62 +657,6 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.plugin.version}</version>
-				<configuration>
-					<connectors>
-						<connector
-							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<host>${jetty.host}</host>
-							<port>${jetty.port}</port>
-						</connector>
-					</connectors>
-					<stopPort>9966</stopPort>
-					<stopKey>jetty-stop-signal</stopKey>
-					<webAppSourceDirectory>
-						${project.build.directory}/${project.build.finalName}
-					</webAppSourceDirectory>
-					<webAppConfig>
-						<overrideDescriptor>
-							${basedir}/src/main/config/test-override-web.xml
-						</overrideDescriptor>
-					</webAppConfig>
-					<systemProperties>
-						<systemProperty>
-							<name>log4j.configuration</name>
-							<value>file:///${env.dir}/log4j.properties</value>
-						</systemProperty>
-						<systemProperty>
-							<!-- http://www.slf4j.org/codes.html#loggerNameMismatch -->
-							<name>slf4j.detectLoggerNameMismatch</name>
-							<value>true</value>
-						</systemProperty>
-					</systemProperties>
-					<skip>${skipTests}</skip>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-war</goal>
-						</goals>
-						<configuration>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
@@ -706,7 +668,7 @@
 						${basedir}/src/main/resources/liquibase/liquibase.properties
 					</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also src/main/java/ru/mystamps/web/config/LiquibaseConfig.java -->
+					<!-- See also application-prod.properties -->
 					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
 			</plugin>
@@ -864,34 +826,5 @@
 		<system>Travis CI</system>
 		<url>https://travis-ci.org/php-coder/mystamps</url>
 	</ciManagement>
-	
-	<!--
-		 There are 2 profiles:
-		 - prod (uses MySQL)
-		 - test (enabled by default, uses H2)
-	-->
-	<profiles>
-		
-		<profile>
-			<id>prod</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<env.dir>${basedir}/src/main/resources/prod</env.dir>
-			</properties>
-		</profile>
-		
-		<profile>
-			<id>test</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<env.dir>${basedir}/src/main/resources/test</env.dir>
-			</properties>
-		</profile>
-		
-	</profiles>
 	
 </project>

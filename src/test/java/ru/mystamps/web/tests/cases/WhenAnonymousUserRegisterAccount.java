@@ -52,10 +52,10 @@ public class WhenAnonymousUserRegisterAccount
 	private static final Pattern ACTIVATION_LINK_REGEXP =
 		Pattern.compile(".*/account/activate/key/[0-9a-z]{10}.*", Pattern.DOTALL);
 	
-	@Value("${mail.smtp.host}")
+	@Value("${spring.mail.host}")
 	private String mailHost;
 	
-	@Value("${mail.smtp.port}")
+	@Value("${spring.mail.port}")
 	private Integer mailPort;
 	
 	@Value("${activation.subject}")

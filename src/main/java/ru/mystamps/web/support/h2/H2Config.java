@@ -15,33 +15,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.support.h2;
 
-import javax.inject.Inject;
+import java.util.Collections;
 
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.context.annotation.Profile;
+
+import org.h2.server.web.WebServlet;
 
 @Configuration
-@PropertySource("classpath:${spring.profiles.active}/spring/mail.properties")
-public class MailConfig {
+@Profile("test")
+public class H2Config {
 	
-	@Inject
-	private Environment env;
-	
+	/* Web console for managing H2 database.
+	 *
+	 * Access it via http://127.0.0.1:8080/console and use "org.h2.Driver" as the driver,
+	 * "jdbc:h2:mem:mystamps" as the URL, "sa" as the username and a blank password.
+	 */
 	@Bean
-	public JavaMailSender getMailSender() {
-		JavaMailSenderImpl mailer = new JavaMailSenderImpl();
-		mailer.setHost(env.getRequiredProperty("mail.smtp.host"));
-		mailer.setPort(env.getRequiredProperty("mail.smtp.port", Integer.class));
-		mailer.setUsername(env.getRequiredProperty("mail.smtp.login"));
-		mailer.setPassword(env.getRequiredProperty("mail.smtp.password"));
-		
-		return mailer;
+	public ServletRegistrationBean getH2Console() {
+		ServletRegistrationBean servlet = new ServletRegistrationBean();
+		servlet.setName("H2Console");
+		servlet.setServlet(new WebServlet());
+		servlet.setLoadOnStartup(2);
+		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
+		servlet.setUrlMappings(Collections.singletonList("/console/*"));
+		return servlet;
 	}
 	
 }

@@ -61,7 +61,6 @@ public final class Url {
 	
 	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
 	
-	// see also error-page definitions at src/main/webapp/WEB-INF/web.xml
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
@@ -76,6 +75,7 @@ public final class Url {
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
 	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
 	
+	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
 	
 	private Url() {

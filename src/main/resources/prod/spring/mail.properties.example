@@ -1,5 +1,0 @@
-mail.smtp.host = 127.0.0.1
-mail.smtp.port = 25
-mail.smtp.login = test
-mail.smtp.password = test
-mail.robot.email = dont-reply@my-stamps.ru

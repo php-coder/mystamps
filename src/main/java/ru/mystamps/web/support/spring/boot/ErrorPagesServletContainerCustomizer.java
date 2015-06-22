@@ -15,25 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.support.spring.boot;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+
+import ru.mystamps.web.Url;
 
 @Configuration
-public class TestContext {
+public class ErrorPagesServletContainerCustomizer implements EmbeddedServletContainerCustomizer {
 	
-	@Bean
-	public PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
-		PropertySourcesPlaceholderConfigurer configurer =
-			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocations(
-			new ClassPathResource("test/spring/test-data.properties"),
-			new ClassPathResource("ru/mystamps/i18n/MailTemplates.properties")
-		);
-		return configurer;
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer container) {
+		container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, Url.UNAUTHORIZED_PAGE));
+		container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, Url.FORBIDDEN_PAGE));
+		container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, Url.NOT_FOUND_PAGE));
+		container.addErrorPages(new ErrorPage(Exception.class, Url.INTERNAL_ERROR_PAGE));
 	}
 	
 }

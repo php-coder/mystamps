@@ -24,44 +24,26 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.ViewResolver;
-
-import com.github.heneke.thymeleaf.togglz.TogglzDialect;
-import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.ThymeleafView;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
 
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 
 @Configuration
-@EnableWebMvc
 @EnableScheduling
 @Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
-	
-	@Inject
-	private Environment env;
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -109,49 +91,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		factory.setValidationMessageSource(messageSource);
 		
 		return factory;
-	}
-	
-	@Bean
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
-	public ViewResolver getThymeleafViewResolver() throws Exception {
-		TemplateResolver templateResolver = new ServletContextTemplateResolver();
-		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setPrefix("/WEB-INF/views/");
-		templateResolver.setSuffix(".html");
-		templateResolver.setCharacterEncoding("UTF-8");
-		templateResolver.setCacheable(env.acceptsProfiles("prod"));
-
-		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver);
-		templateEngine.setTemplateEngineMessageSource(getMessageSource());
-		templateEngine.addDialect(new SpringSecurityDialect());
-		templateEngine.addDialect(new TogglzDialect());
-		templateEngine.afterPropertiesSet();
-		
-		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-		viewResolver.setTemplateEngine(templateEngine);
-		viewResolver.setContentType("text/html; charset=UTF-8");
-		viewResolver.setStaticVariables(Url.asMap());
-		viewResolver.setViewClass(ThymeleafView.class);
-		
-		return viewResolver;
-	}
-	
-	@Bean(name = "messageSource")
-	public MessageSource getMessageSource() {
-		ReloadableResourceBundleMessageSource messageSource =
-			new ReloadableResourceBundleMessageSource();
-		
-		messageSource.setBasename("classpath:ru/mystamps/i18n/Messages");
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setFallbackToSystemLocale(false);
-		
-		return messageSource;
-	}
-	
-	@Bean(name = "multipartResolver")
-	public MultipartResolver getMultipartResolver() {
-		return new StandardServletMultipartResolver();
 	}
 	
 	@Bean

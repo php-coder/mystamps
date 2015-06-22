@@ -8,5 +8,3 @@ target/
 # IDEA related files
 .idea
 mystamps.iml
-
-src/main/resources/prod/spring/mail.properties

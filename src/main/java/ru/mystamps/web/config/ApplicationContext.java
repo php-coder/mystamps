@@ -17,52 +17,26 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-import javax.sql.DataSource;
-
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
-
-import org.togglz.core.manager.TogglzConfig;
-
-import ru.mystamps.web.support.togglz.FeatureConfig;
+import ru.mystamps.web.support.togglz.TogglzConfig;
 
 @Configuration
 @Import({
 	DbConfig.class,
-	LiquibaseConfig.class,
-	MailConfig.class,
 	SecurityConfig.class,
 	DaoConfig.class,
 	ServicesConfig.class,
-	StrategiesConfig.class
+	StrategiesConfig.class,
+	TogglzConfig.class
 })
+@SuppressWarnings({"checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass"})
 public class ApplicationContext {
-	
-	@Inject
-	private DataSource dataSource;
-	
-	@Bean(name = "messageSource")
-	public MessageSource getMessageSource() {
-		ReloadableResourceBundleMessageSource messageSource =
-			new ReloadableResourceBundleMessageSource();
-		
-		messageSource.setBasenames(
-			"classpath:ru/mystamps/i18n/SpringSecurityMessages",
-			"classpath:ru/mystamps/i18n/MailTemplates"
-		);
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setFallbackToSystemLocale(false);
-		
-		return messageSource;
-	}
 	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
@@ -78,11 +52,6 @@ public class ApplicationContext {
 			new ClassPathResource("sql/suspicious_activity_dao_queries.properties")
 		);
 		return configurer;
-	}
-	
-	@Bean
-	public TogglzConfig getTogglzConfig() {
-		return new FeatureConfig(dataSource);
 	}
 	
 }

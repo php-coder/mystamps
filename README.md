@@ -26,7 +26,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 * install Java (at least 8th version is required)
 * install Maven
 * clone this project
-* from the console inside the directory with source code, execute command `mvn clean jetty:run`
+* from the console inside the directory with source code, execute command `mvn spring-boot:run`
 * open up `http://127.0.0.1:8080` in the browser
 * browse the site or log in as one of the pre-created users: `admin` / `test` or `coder` / `test`
 * press `Ctrl-C` to stop the server
@@ -35,7 +35,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 
 ## What's inside? (interesting only for programmers)
 
-* *At the heart of*: Spring Framework
+* *At the heart of*: Spring Framework (and especially Spring Boot)
 * *Template engine*: Thymeleaf
 * *UI*: HTML, Bootstrap and a bit of JavaScript with JQuery
 * *Security*: Spring Security
