@@ -56,7 +56,7 @@
 								<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
 							</div>
 						</div>
-						<div class="row" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES">
+						<div class="row" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 							<div class="col-sm-6 col-sm-offset-3">
 								<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}" th:object="${addImageForm}">
 									<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
