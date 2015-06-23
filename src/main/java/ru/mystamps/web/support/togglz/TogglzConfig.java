@@ -26,6 +26,7 @@ import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.togglz.console.TogglzConsoleServlet;
 import org.togglz.core.manager.FeatureManager;
 import org.togglz.core.manager.FeatureManagerBuilder;
@@ -64,6 +65,11 @@ public class TogglzConfig {
 		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
 		servlet.setUrlMappings(Collections.singletonList(Url.TOGGLZ_CONSOLE_PAGE + "/*"));
 		return servlet;
+	}
+	
+	@Bean
+	public TogglzDialect getTogglzDialect() {
+		return new TogglzDialect();
 	}
 	
 }
