@@ -404,7 +404,11 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
-		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
+		
+		List<String> imageUrls = nextPage.getImageUrls();
+		assertThat(imageUrls).hasSize(1);
+		assertThat(imageUrls.get(0)).matches(expectedImageUrl);
+		
 		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
@@ -453,7 +457,10 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		
 		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
-		assertThat(nextPage.getImageUrl()).matches(expectedImageUrl);
+		
+		List<String> imageUrls = nextPage.getImageUrls();
+		assertThat(imageUrls).hasSize(1);
+		assertThat(imageUrls.get(0)).matches(expectedImageUrl);
 		
 		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
