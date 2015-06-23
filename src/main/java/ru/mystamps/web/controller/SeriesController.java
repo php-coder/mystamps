@@ -47,7 +47,6 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
-import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
@@ -122,7 +121,7 @@ public class SeriesController {
 	public String processInput(
 		@Validated({
 			Default.class, MichelCatalogChecks.class, ScottCatalogChecks.class,
-			YvertCatalogChecks.class, GibbonsCatalogChecks.class, ImageChecks.class
+			YvertCatalogChecks.class, GibbonsCatalogChecks.class, AddSeriesForm.ImageChecks.class
 		}) AddSeriesForm form,
 		BindingResult result,
 		HttpServletRequest request,
