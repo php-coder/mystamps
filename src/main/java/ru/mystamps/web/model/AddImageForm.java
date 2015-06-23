@@ -15,14 +15,40 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.model;
+
+import javax.validation.GroupSequence;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface ImageService {
-	Image save(MultipartFile file);
-	ImageDto get(Integer imageId);
+import ru.mystamps.web.service.dto.AddImageDto;
+import ru.mystamps.web.validation.jsr303.NotEmptyFile;
+import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
+
+@Getter
+@Setter
+public class AddImageForm implements AddImageDto {
+	
+	@NotNull
+	@NotEmptyFilename(groups = Image1Checks.class)
+	@NotEmptyFile(groups = Image2Checks.class)
+	private MultipartFile image;
+	
+	@GroupSequence({
+		Image1Checks.class,
+		Image2Checks.class
+	})
+	public interface ImageChecks {
+	}
+	
+	public interface Image1Checks {
+	}
+	
+	public interface Image2Checks {
+	}
+	
 }

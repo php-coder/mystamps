@@ -133,17 +133,15 @@ class ImageServiceImplTest extends Specification {
 			})
 	}
 	
-	def "save() should return url with saved image"() {
+	def "save() should return saved image"() {
 		given:
 			Image expectedImage = TestObjects.createImage()
-		and:
-			String expectedUrl = ImageService.GET_IMAGE_PAGE.replace('{id}', String.valueOf(expectedImage.id))
 		when:
-			String url = service.save(multipartFile)
+			Image actualImage = service.save(multipartFile)
 		then:
 			imageDao.save(_ as Image) >> expectedImage
 		and:
-			url == expectedUrl
+			actualImage == expectedImage
 	}
 	
 	//

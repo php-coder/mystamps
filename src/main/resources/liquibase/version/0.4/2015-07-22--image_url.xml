@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-series_images-table" author="php-coder" context="scheme">
+		<comment>Creates series_images table</comment>
+		
+		<createTable tableName="series_images">
+			<column name="series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)" foreignKeyName="fk_series_images_series_id" />
+			</column>
+			<column name="image_id" type="INTEGER">
+				<constraints nullable="false" references="images(id)" foreignKeyName="fk_series_images_image_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+</databaseChangeLog>

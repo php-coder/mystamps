@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 
@@ -36,6 +37,7 @@ import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.GibbonsCatalog;
+import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.entity.Price;
 import ru.mystamps.web.entity.ScottCatalog;
@@ -43,6 +45,7 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.StampsCatalog;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.YvertCatalog;
+import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
@@ -95,11 +98,8 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setGibbons(getCatalogNumbersOrNull(dto.getGibbonsNumbers(), GibbonsCatalog.class));
 		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
 		
-		String imageUrl = imageService.save(dto.getImage());
-		Validate.validState(imageUrl != null, "Image url must be non null");
-		Validate.validState(imageUrl.length() <= Series.IMAGE_URL_LENGTH, "Too long image path");
-		
-		series.setImageUrl(imageUrl);
+		Image image = imageService.save(dto.getImage());
+		series.setImages(Collections.singleton(image));
 		
 		if (userCanAddComments && dto.getComment() != null) {
 			Validate.isTrue(
@@ -121,6 +121,19 @@ public class SeriesServiceImpl implements SeriesService {
 		LOG.info("Series has been created ({})", entity);
 		
 		return entity.getId();
+	}
+
+	@Override
+	@Transactional
+	public void addImageToSeries(AddImageDto dto, Series series) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(series != null, "DTO must be non null");
+		
+		Image image = imageService.save(dto.getImage());
+		
+		series.addImage(image);
+		
+		seriesDao.save(series);
 	}
 	
 	@Override

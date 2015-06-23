@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.entity;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -28,8 +29,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -47,8 +51,7 @@ import lombok.ToString;
 @SuppressWarnings("PMD.TooManyFields")
 public class Series {
 	
-	public static final int IMAGE_URL_LENGTH = 255;
-	public static final int COMMENT_LENGTH   = 255;
+	public static final int COMMENT_LENGTH = 255;
 	
 	@Id
 	@GeneratedValue
@@ -143,8 +146,9 @@ public class Series {
 	})
 	private Price gibbonsPrice;
 	
-	@Column(name = "image_url", length = IMAGE_URL_LENGTH)
-	private String imageUrl;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(inverseJoinColumns = @JoinColumn(name = "image_id"))
+	private Set<Image> images;
 	
 	@Column(length = COMMENT_LENGTH)
 	private String comment;
@@ -154,6 +158,14 @@ public class Series {
 	
 	public Series() {
 		metaInfo = new MetaInfo();
+	}
+	
+	public void addImage(Image image) {
+		if (images == null) {
+			images = new LinkedHashSet<>();
+		}
+		
+		images.add(image);
 	}
 	
 }
