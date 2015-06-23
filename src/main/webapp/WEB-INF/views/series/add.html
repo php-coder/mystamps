@@ -379,7 +379,7 @@
 							</label>
 							<div class="col-sm-7">
 								<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
-								<small>
+								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES">
 									<span class="hint-block" th:text="#{t_add_more_images_hint}">
 										You will be able to add additional images on the series page
 									</span>
