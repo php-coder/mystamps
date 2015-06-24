@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 
 import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.service.DatabaseImagePersistenceStrategy;
@@ -50,10 +51,15 @@ public interface StrategiesConfig {
 	@Profile("prod")
 	class ProdStrategiesConfig implements StrategiesConfig {
 		
+		@Inject
+		private Environment env;
+		
 		@Bean
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
-			return new FilesystemImagePersistenceStrategy("/data/uploads");
+			return new FilesystemImagePersistenceStrategy(
+				env.getRequiredProperty("app.upload.dir")
+			);
 		}
 		
 	}
