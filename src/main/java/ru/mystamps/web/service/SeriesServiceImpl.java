@@ -128,7 +128,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@PreAuthorize("hasAuthority('ADD_IMAGES_TO_SERIES')")
 	public void addImageToSeries(AddImageDto dto, Series series) {
 		Validate.isTrue(dto != null, "DTO must be non null");
-		Validate.isTrue(series != null, "DTO must be non null");
+		Validate.isTrue(series != null, "Series must be non null");
 		
 		Image image = imageService.save(dto.getImage());
 		
