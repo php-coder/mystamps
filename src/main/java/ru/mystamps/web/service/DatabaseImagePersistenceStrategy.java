@@ -55,7 +55,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			imageData.setContent(file.getBytes());
 			
 			ImageData entity = imageDataDao.save(imageData);
-			LOG.debug("Image's data entity saved to database ({})", entity);
+			LOG.info("Image's data entity saved to database ({})", entity);
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction

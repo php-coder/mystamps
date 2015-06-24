@@ -68,7 +68,7 @@ public class ImageServiceImpl implements ImageService {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		LOG.debug("Image entity was saved to database ({})", entity);
+		LOG.info("Image entity was saved to database ({})", entity);
 		
 		imagePersistenceStrategy.save(file, entity);
 		
