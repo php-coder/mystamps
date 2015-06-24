@@ -7,8 +7,9 @@ INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt
 	(4, 'test1', 'USER', 'Series Owner', NOW(), NOW(), '@valid_user_password_hash@', '@valid_user_password_salt@', 'test1@example.org');
 
 -- Used only in WhenUserAddSeries and WhenAdminAddSeries
-INSERT INTO series(id, quantity, perforated, created_at, created_by, updated_at, updated_by) VALUES
-	(1, 1, 1, NOW(), 4, NOW(), 4);
+INSERT INTO images(id, type) VALUES(1, 'PNG');
+INSERT INTO series(id, quantity, perforated, image_url, created_at, created_by, updated_at, updated_by) VALUES
+	(1, 1, 1, '/image/1', NOW(), 4, NOW(), 4);
 
 INSERT INTO michel_catalog(id, code) VALUES(1, '@existing_michel_number@');
 INSERT INTO series_michel_catalog(series_id, michel_id) VALUES(1, 1);

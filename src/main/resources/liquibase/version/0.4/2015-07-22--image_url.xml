@@ -23,4 +23,30 @@
 		
 	</changeSet>
 	
+	<changeSet id="fill-series_images-table-based-on-values-from-image_url" author="php-coder" context="test-data, prod-data">
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				FROM series
+				WHERE image_url IS NULL
+			</sqlCheck>
+		</preConditions>
+		
+		<comment>Migrates data from series.image_url to series_images</comment>
+		
+		<sql>
+			INSERT INTO series_images(series_id, image_id)
+			SELECT id AS series_id, REPLACE(image_url, '/image/', '') AS image_id
+			FROM series
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="drop-image_url-column-from-series-table" author="php-coder" context="scheme">
+		<comment>Drops image_url column from series table</comment>
+		
+		<dropColumn tableName="series" columnName="image_url" />
+		
+	</changeSet>
+	
 </databaseChangeLog>
