@@ -23,6 +23,9 @@ import java.util.Locale;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -35,6 +38,7 @@ import ru.mystamps.web.util.LocaleUtils;
 
 @RequiredArgsConstructor
 public class UsersActivationServiceImpl implements UsersActivationService {
+	private static final Logger LOG = LoggerFactory.getLogger(UsersActivationServiceImpl.class);
 	
 	private final JdbcUsersActivationDao jdbcUsersActivationDao;
 	private final MailService mailService;
@@ -52,6 +56,8 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		activation.setLang(LocaleUtils.getLanguageOrDefault(lang, "en"));
 		activation.setCreatedAt(new Date());
 		jdbcUsersActivationDao.add(activation);
+		
+		LOG.info("Users activation has been created ({})", activation);
 		
 		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
 			mailService.sendActivationKeyToUser(activation);
