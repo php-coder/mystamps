@@ -31,7 +31,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, User user, boolean userCanAddComments);
-	void addImageToSeries(AddImageDto dto, Series series);
+	void addImageToSeries(AddImageDto dto, Series series, User user);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOf(Collection collection);

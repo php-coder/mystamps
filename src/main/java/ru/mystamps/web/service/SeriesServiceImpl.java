@@ -126,15 +126,23 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('ADD_IMAGES_TO_SERIES')")
-	public void addImageToSeries(AddImageDto dto, Series series) {
+	public void addImageToSeries(AddImageDto dto, Series series, User user) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(series != null, "Series must be non null");
+		Validate.isTrue(user != null, "User must be non null");
 		
 		Image image = imageService.save(dto.getImage());
 		
 		series.addImage(image);
 		
 		seriesDao.save(series);
+		
+		LOG.info(
+			"Image #{} was added to series #{} by user #{}",
+			image.getId(),
+			series.getId(),
+			user.getId()
+		);
 	}
 	
 	@Override

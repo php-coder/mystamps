@@ -196,7 +196,7 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		seriesService.addImageToSeries(form, series);
+		seriesService.addImageToSeries(form, series, currentUser);
 		
 		return "series/info";
 	}
