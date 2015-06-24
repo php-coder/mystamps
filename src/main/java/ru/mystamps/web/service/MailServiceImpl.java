@@ -38,6 +38,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.service.exception.EmailSendingException;
 
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService {
@@ -98,7 +99,7 @@ public class MailServiceImpl implements MailService {
 			mailer.send(preparator);
 			
 		} catch (MailException ex) {
-			LOG.error("Can't send mail to e-mail " + email, ex); // NOPMD: GuardLogStatementJavaUtil
+			throw new EmailSendingException("Can't send mail to e-mail " + email, ex);
 		}
 	}
 	
