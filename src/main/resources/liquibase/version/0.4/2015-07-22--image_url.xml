@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-series_images-table" author="php-coder" context="scheme">
+		<comment>Creates series_images table</comment>
+		
+		<createTable tableName="series_images">
+			<column name="series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)" foreignKeyName="fk_series_images_series_id" />
+			</column>
+			<column name="image_id" type="INTEGER">
+				<constraints nullable="false" references="images(id)" foreignKeyName="fk_series_images_image_id" />
+			</column>
+		</createTable>
+		
+		<modifySql dbms="mysql">
+			<append value=" ENGINE=InnoDB" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet id="fill-series_images-table-based-on-values-from-image_url" author="php-coder" context="test-data, prod-data">
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				FROM series
+				WHERE image_url IS NULL
+			</sqlCheck>
+		</preConditions>
+		
+		<comment>Migrates data from series.image_url to series_images</comment>
+		
+		<sql>
+			INSERT INTO series_images(series_id, image_id)
+			SELECT id AS series_id, REPLACE(image_url, '/image/', '') AS image_id
+			FROM series
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="drop-image_url-column-from-series-table" author="php-coder" context="scheme">
+		<comment>Drops image_url column from series table</comment>
+		
+		<dropColumn tableName="series" columnName="image_url" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

@@ -20,8 +20,6 @@ package ru.mystamps.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.mystamps.web.service.ImageService;
-
 /**
  * Holds path to site and all URLs.
  *
@@ -59,7 +57,7 @@ public final class Url {
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}/{slug}";
 	
-	public static final String GET_IMAGE_PAGE        = ImageService.GET_IMAGE_PAGE;
+	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
 	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String FORBIDDEN_PAGE        = "/error/403";
@@ -97,6 +95,7 @@ public final class Url {
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
+		map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
 		map.put("FAVICON_ICO", FAVICON_ICO);
 		map.put("MAIN_CSS", MAIN_CSS);
 		map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);

@@ -62,3 +62,16 @@ label {
 .no-padding {
 	padding: 0px;
 }
+
+.hint-block {
+	color: #808080;
+	font-style: italic;
+	// copy&paste .help-block properties (except color)
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.row .series-images {
+	margin-bottom: 10px;
+}

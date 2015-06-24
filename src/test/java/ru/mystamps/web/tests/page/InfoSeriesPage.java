@@ -17,9 +17,14 @@
  */
 package ru.mystamps.web.tests.page;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import ru.mystamps.web.Url;
+
+import static java.util.stream.Collectors.toList;
 
 public class InfoSeriesPage extends AbstractPage {
 	
@@ -27,8 +32,11 @@ public class InfoSeriesPage extends AbstractPage {
 		super(driver, Url.INFO_SERIES_PAGE);
 	}
 	
-	public String getImageUrl() {
-		return getElementById("image").getAttribute("src");
+	public List<String> getImageUrls() {
+		return getElementsByClassName("series-images")
+			.stream()
+			.map((WebElement el) -> el.getAttribute("src"))
+			.collect(toList());
 	}
 	
 	public String getCategory() {

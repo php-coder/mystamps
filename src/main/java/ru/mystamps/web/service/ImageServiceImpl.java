@@ -46,7 +46,7 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional
-	public String save(MultipartFile file) {
+	public Image save(MultipartFile file) {
 		Validate.isTrue(file != null, "File should be non null");
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
@@ -72,7 +72,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		imagePersistenceStrategy.save(file, entity);
 		
-		return GET_IMAGE_PAGE.replace("{id}", String.valueOf(entity.getId()));
+		return entity;
 	}
 	
 	@Override

@@ -46,7 +46,11 @@ public enum Features implements Feature {
 	
 	@Label("Possibility to user to add series to collection")
 	@EnabledByDefault
-	ADD_SERIES_TO_COLLECTION;
+	ADD_SERIES_TO_COLLECTION,
+	
+	@Label("Possibility of user to add additional images to series")
+	@EnabledByDefault
+	ADD_ADDITIONAL_IMAGES_TO_SERIES;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);

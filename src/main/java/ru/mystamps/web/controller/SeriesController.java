@@ -45,9 +45,9 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
+import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
-import ru.mystamps.web.model.AddSeriesForm.ImageChecks;
 import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
@@ -122,7 +122,7 @@ public class SeriesController {
 	public String processInput(
 		@Validated({
 			Default.class, MichelCatalogChecks.class, ScottCatalogChecks.class,
-			YvertCatalogChecks.class, GibbonsCatalogChecks.class, ImageChecks.class
+			YvertCatalogChecks.class, GibbonsCatalogChecks.class, AddSeriesForm.ImageChecks.class
 		}) AddSeriesForm form,
 		BindingResult result,
 		HttpServletRequest request,
@@ -152,6 +152,7 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
+		model.addAttribute("addImageForm", new AddImageForm());
 		model.addAttribute("series", series);
 		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
 		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
@@ -162,6 +163,40 @@ public class SeriesController {
 			"isSeriesInCollection",
 			collectionService.isSeriesInCollection(currentUser, series)
 		);
+		
+		return "series/info";
+	}
+	
+	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.POST)
+	public String processImage(
+			@Validated({ Default.class, AddImageForm.ImageChecks.class }) AddImageForm form,
+			BindingResult result,
+			@PathVariable("id") Series series,
+			Model model,
+			User currentUser) {
+		
+		model.addAttribute("series", series);
+		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
+		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
+		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert()));
+		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons()));
+		
+		model.addAttribute(
+			"isSeriesInCollection",
+			collectionService.isSeriesInCollection(currentUser, series)
+		);
+		
+		if (result.hasErrors()) {
+			// don't try to re-display file upload field
+			form.setImage(null);
+			return "series/info";
+		}
+		
+		if (series == null) {
+			throw new NotFoundException();
+		}
+		
+		seriesService.addImageToSeries(form, series, currentUser);
 		
 		return "series/info";
 	}

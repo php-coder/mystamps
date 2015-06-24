@@ -70,6 +70,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		List<SimpleGrantedAuthority> authorities = new LinkedList<>();
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		authorities.add(new SimpleGrantedAuthority("UPDATE_COLLECTION"));
+		authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
 		
 		if (user.isAdmin()) {
 			authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));

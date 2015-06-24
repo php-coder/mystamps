@@ -29,6 +29,7 @@ import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.Currency
 import ru.mystamps.web.entity.GibbonsCatalog
+import ru.mystamps.web.entity.Image
 import ru.mystamps.web.entity.MichelCatalog
 import ru.mystamps.web.entity.ScottCatalog
 import ru.mystamps.web.entity.Series
@@ -58,7 +59,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		user = TestObjects.createUser()
 		
-		imageService.save(_) >> '/fake/path/to/image'
+		imageService.save(_) >> TestObjects.createImage()
 		
 		service = new SeriesServiceImpl(seriesDao, jdbcSeriesDao, imageService)
 	}
@@ -488,39 +489,20 @@ class SeriesServiceImplTest extends Specification {
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}) >> '/any/path'
+			}) >> TestObjects.createImage()
 	}
 	
-	def "add() should throw exception if image url is null"() {
-		when:
-			service.add(form, user, false)
-		then:
-			// override setup() settings
-			imageService.save(_) >> null
-		and:
-			thrown IllegalStateException
-	}
-	
-	def "add() should throw exception if image url too long"() {
-		when:
-			service.add(form, user, false)
-		then:
-			// override setup() settings
-			imageService.save(_) >> 'x' * (Series.IMAGE_URL_LENGTH + 1)
-		and:
-			thrown IllegalStateException
-	}
-	
-	def "add() should pass image url to series dao"() {
+	def "add() should pass image to series dao"() {
 		given:
-			String expectedUrl = 'http://example.org/example.jpg'
+			Image expectedImage = TestObjects.createImage()
 		when:
 			service.add(form, user, false)
 		then:
-			imageService.save(_) >> expectedUrl
+			imageService.save(_) >> expectedImage
 		and:
 			1 * seriesDao.save({ Series series ->
-				assert series?.imageUrl == expectedUrl
+				assert !series?.images.empty
+				assert series?.images.iterator().next() == expectedImage
 				return true
 			}) >> TestObjects.createSeries()
 	}
