@@ -187,6 +187,7 @@ public class SeriesController {
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
+		redirectAttributes.addFlashAttribute("justAddedSeriesId", series.getId());
 		
 		return "redirect:" + dstUrl;
 	}

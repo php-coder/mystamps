@@ -94,6 +94,7 @@
 										<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
 										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
 									</a>
+									<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id}" class="label label-success">New</span>
 								</li>
 								<li>
 									<a href="../category/info.html">Animals</a>&nbsp;&raquo;
