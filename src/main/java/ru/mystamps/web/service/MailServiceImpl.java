@@ -61,6 +61,12 @@ public class MailServiceImpl implements MailService {
 			getTextOfActivationMail(activation),
 			"activation_key"
 		);
+		
+		LOG.info(
+			"E-mail with activation code has been sent to {} (lang: {})",
+			activation.getEmail(),
+			activation.getLang()
+		);
 	}
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
