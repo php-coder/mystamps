@@ -52,7 +52,7 @@
 		<failsafe.plugin.version>2.18.1</failsafe.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
-		<pmd.plugin.version>3.3</pmd.plugin.version>
+		<pmd.plugin.version>3.4</pmd.plugin.version>
 		<jacoco.plugin.version>0.7.4.201502262128</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<javadoc.plugin.version>2.10.1</javadoc.plugin.version>
