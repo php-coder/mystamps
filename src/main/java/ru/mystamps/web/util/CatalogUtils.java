@@ -127,10 +127,10 @@ public final class CatalogUtils {
 				result.add(
 					ConstructorUtils.invokeConstructor(elementClass, number)
 				);
-			} catch (NoSuchMethodException |
-					IllegalAccessException |
-					InvocationTargetException |
-					InstantiationException ex) {
+			} catch (NoSuchMethodException
+					| IllegalAccessException
+					| InvocationTargetException
+					| InstantiationException ex) {
 				throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
 			}
 		}

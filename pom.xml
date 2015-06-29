@@ -51,7 +51,7 @@
 		<jasmine.plugin.version>1.3.1.6</jasmine.plugin.version>
 		<failsafe.plugin.version>2.18.1</failsafe.plugin.version>
 		<license.plugin.version>1.9.0</license.plugin.version>
-		<checkstyle.plugin.version>2.13</checkstyle.plugin.version>
+		<checkstyle.plugin.version>2.15</checkstyle.plugin.version>
 		<pmd.plugin.version>3.4</pmd.plugin.version>
 		<jacoco.plugin.version>0.7.4.201502262128</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
