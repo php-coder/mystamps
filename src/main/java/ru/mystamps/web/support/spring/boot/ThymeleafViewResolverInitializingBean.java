@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +24,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.Url;
 
@@ -35,11 +35,9 @@ import ru.mystamps.web.Url;
  * @see <a href="https://github.com/spring-projects/spring-boot/issues/3037">spring-boot#3037</a>
  **/
 @Configuration
+@Slf4j
 public class ThymeleafViewResolverInitializingBean
 	implements InitializingBean, ApplicationContextAware {
-	
-	private static final Logger LOG =
-		LoggerFactory.getLogger(ThymeleafViewResolverInitializingBean.class);
 	
 	private ApplicationContext context;
 	

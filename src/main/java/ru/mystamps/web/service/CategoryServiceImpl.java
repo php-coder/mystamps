@@ -26,10 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.entity.Category;
@@ -42,8 +40,8 @@ import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
-	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
 	private final CategoryDao categoryDao;
 	private final JdbcCategoryDao jdbcCategoryDao;

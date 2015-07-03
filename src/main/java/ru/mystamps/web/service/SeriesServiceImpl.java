@@ -26,10 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.apache.commons.lang3.Validate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.SeriesDao;
@@ -54,8 +52,8 @@ import ru.mystamps.web.util.CatalogUtils;
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor
+@Slf4j
 public class SeriesServiceImpl implements SeriesService {
-	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
 	private final SeriesDao seriesDao;
 	private final JdbcSeriesDao jdbcSeriesDao;

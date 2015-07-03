@@ -25,9 +25,6 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.context.MessageSource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -35,14 +32,15 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
 @RequiredArgsConstructor
+@Slf4j
 public class MailServiceImpl implements MailService {
-	private static final Logger LOG = LoggerFactory.getLogger(MailServiceImpl.class);
 	
 	private final JavaMailSender mailer;
 	private final MessageSource messageSource;

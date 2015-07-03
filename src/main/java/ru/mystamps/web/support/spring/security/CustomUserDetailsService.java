@@ -21,9 +21,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.Validate;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.UserService;
@@ -42,9 +40,8 @@ import ru.mystamps.web.service.UserService;
  * Implementation of Spring's {@link UserDetailsService} which uses our DAO to load user.
  */
 @RequiredArgsConstructor
+@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
 	private final UserService userService;
 	

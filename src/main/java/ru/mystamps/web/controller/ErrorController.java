@@ -19,14 +19,12 @@ package ru.mystamps.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.User;
@@ -35,8 +33,8 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ErrorController {
-	private static final Logger LOG = LoggerFactory.getLogger(ErrorController.class);
 	
 	private final SiteService siteService;
 	

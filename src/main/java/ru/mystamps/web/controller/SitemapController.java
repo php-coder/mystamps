@@ -25,9 +25,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,11 +33,12 @@ import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.Url;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class SitemapController {
-	private static final Logger LOG = LoggerFactory.getLogger(SitemapController.class);
 	
 	// TODO: convert dates to UTC and omit server-specific timezone part
 	// According to http://www.w3.org/TR/NOTE-datetime

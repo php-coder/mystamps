@@ -23,14 +23,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -41,9 +39,8 @@ import ru.mystamps.web.service.dto.ActivateAccountDto;
 import static ru.mystamps.web.entity.User.Role.USER;
 
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	private final UserDao userDao;
 	private final JdbcUserDao jdbcUserDao;
