@@ -23,6 +23,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -31,17 +32,18 @@ import lombok.extern.slf4j.Slf4j;
  * @see <a href="https://github.com/spring-projects/spring-boot/issues/3038">spring-boot#3038</a>
  **/
 @Configuration
+@Setter
 @Slf4j
 public class ResourceBundleMessageSourceInitializingBean
 	implements InitializingBean, ApplicationContextAware {
 	
-	private ApplicationContext context;
+	private ApplicationContext applicationContext;
 	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void afterPropertiesSet() throws Exception {
 		ResourceBundleMessageSource messageSource =
-			context.getBean(ResourceBundleMessageSource.class);
+			applicationContext.getBean(ResourceBundleMessageSource.class);
 		if (messageSource == null) {
 			LOG.warn(// NOPMD: GuardLogStatement
 				"Cannot adjust ResourceBundleMessageSource: "
@@ -51,11 +53,6 @@ public class ResourceBundleMessageSourceInitializingBean
 		}
 		
 		messageSource.setFallbackToSystemLocale(false);
-	}
-	
-	@Override
-	public void setApplicationContext(ApplicationContext context) {
-		this.context = context;
 	}
 	
 }

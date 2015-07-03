@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.Url;
@@ -35,16 +36,18 @@ import ru.mystamps.web.Url;
  * @see <a href="https://github.com/spring-projects/spring-boot/issues/3037">spring-boot#3037</a>
  **/
 @Configuration
+@Setter
 @Slf4j
 public class ThymeleafViewResolverInitializingBean
 	implements InitializingBean, ApplicationContextAware {
 	
-	private ApplicationContext context;
+	private ApplicationContext applicationContext;
 	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void afterPropertiesSet() throws Exception {
-		ThymeleafViewResolver viewResolver = context.getBean(ThymeleafViewResolver.class);
+		ThymeleafViewResolver viewResolver =
+			applicationContext.getBean(ThymeleafViewResolver.class);
 		if (viewResolver == null) {
 			LOG.warn(// NOPMD: GuardLogStatement
 				"Cannot adjust ThymeleafViewResolver: "
@@ -54,11 +57,6 @@ public class ThymeleafViewResolverInitializingBean
 		}
 		
 		viewResolver.setStaticVariables(Url.asMap());
-	}
-	
-	@Override
-	public void setApplicationContext(ApplicationContext context) {
-		this.context = context;
 	}
 	
 }
