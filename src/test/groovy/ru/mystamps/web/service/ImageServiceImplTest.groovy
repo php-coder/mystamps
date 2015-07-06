@@ -149,7 +149,7 @@ class ImageServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "get() should throw exception if image id is #imageId"(Integer imageId, Object _) {
+	def "get() should throw exception if image id is #imageId"(Integer imageId) {
 		when:
 			service.get(imageId)
 		then:

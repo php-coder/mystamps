@@ -682,7 +682,7 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "countByMichelNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode, Object _) {
+	def "countByMichelNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode) {
 		when:
 			service.countByMichelNumber(catalogCode)
 		then:
@@ -713,7 +713,7 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "countByScottNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode, Object _) {
+	def "countByScottNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode) {
 		when:
 			service.countByScottNumber(catalogCode)
 		then:
@@ -744,7 +744,7 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "countByYvertNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode, Object _) {
+	def "countByYvertNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode) {
 		when:
 			service.countByYvertNumber(catalogCode)
 		then:
@@ -775,7 +775,7 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "countByGibbonsNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode, Object _) {
+	def "countByGibbonsNumber() should throw exception for invalid argument '#catalogCode'"(String catalogCode) {
 		when:
 			service.countByGibbonsNumber(catalogCode)
 		then:
@@ -898,7 +898,7 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findRecentlyAdded should throw exception when quantity is #quantity"(Integer quantity, Object _) {
+	def "findRecentlyAdded should throw exception when quantity is #quantity"(Integer quantity) {
 		when:
 			service.findRecentlyAdded(quantity, null)
 		then:

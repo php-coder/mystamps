@@ -208,7 +208,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage, Object _) {
+	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAll(expectedLanguage)
 		then:

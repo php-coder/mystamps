@@ -38,7 +38,7 @@ class CollectionServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findRecentlyCreated should throw exception when quantity is #quantity"(Integer quantity, Object _) {
+	def "findRecentlyCreated should throw exception when quantity is #quantity"(Integer quantity) {
 		when:
 			service.findRecentlyCreated(quantity)
 		then:
