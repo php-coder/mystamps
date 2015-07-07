@@ -4,7 +4,7 @@
 
 -- Used below as series' owner
 INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt, email) VALUES
-	(4, 'test1', 'USER', 'Series Owner', NOW(), NOW(), '@valid_user_password_hash@', '@valid_user_password_salt@', 'test1@example.org');
+	(4, 'test1', 'USER', 'Series Owner', NOW(), NOW(), '@old_valid_user_password_hash@', '@old_valid_user_password_salt@', 'test1@example.org');
 
 -- Used only in WhenUserAddSeries and WhenAdminAddSeries
 INSERT INTO images(id, type) VALUES(1, 'PNG');

@@ -4,7 +4,7 @@
 
 -- Used below as category's owner
 INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt, email) VALUES
-	(5, 'test2', 'USER', '@valid_category_name_en@ Category Owner', NOW(), NOW(), '@valid_user_password_hash@', '@valid_user_password_salt@', 'test2@example.org');
+	(5, 'test2', 'USER', '@valid_category_name_en@ Category Owner', NOW(), NOW(), '@old_valid_user_password_hash@', '@old_valid_user_password_salt@', 'test2@example.org');
 
 -- Used only in WhenUserAddSeries and WhenAdminAddSeries
 INSERT INTO categories(name, name_ru, created_at, created_by, updated_at, updated_by) VALUES

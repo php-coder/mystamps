@@ -19,11 +19,10 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,9 +75,7 @@ public class UserServiceImpl implements UserService {
 		String email = activation.getEmail();
 		Date registrationDate = activation.getCreatedAt();
 		
-		String salt = generateSalt();
-		
-		String hash = encoder.encodePassword(dto.getPassword(), salt);
+		String hash = encoder.encode(dto.getPassword());
 		Validate.validState(hash != null, "Generated hash must be non null");
 		
 		Date now = new Date();
@@ -91,7 +88,6 @@ public class UserServiceImpl implements UserService {
 		user.setRegisteredAt(registrationDate);
 		user.setActivatedAt(now);
 		user.setHash(hash);
-		user.setSalt(salt);
 		
 		userDao.save(user);
 		usersActivationService.remove(activation);
@@ -120,14 +116,6 @@ public class UserServiceImpl implements UserService {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		return jdbcUserDao.countByLogin(login);
-	}
-	
-	/**
-	 * Generate password salt.
-	 * @return string which contains letters and numbers in 10 characters length
-	 **/
-	private static String generateSalt() {
-		return RandomStringUtils.randomAlphanumeric(User.SALT_LENGTH);
 	}
 	
 }

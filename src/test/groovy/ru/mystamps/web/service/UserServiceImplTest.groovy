@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service
 
-import org.springframework.security.authentication.encoding.PasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 
 import spock.lang.Specification
 
@@ -43,7 +43,7 @@ class UserServiceImplTest extends Specification {
 	def setup() {
 		User user = TestObjects.createUser()
 		
-		encoder.encodePassword(_ as String, _ as String) >> user.getHash()
+		encoder.encode(_ as String) >> user.getHash()
 		
 		UsersActivation activation = TestObjects.createUsersActivation()
 		usersActivationService.findByActivationKey(_ as String) >> activation
@@ -186,40 +186,6 @@ class UserServiceImplTest extends Specification {
 			})
 	}
 	
-	def "registerUser() should generate salt"() {
-		when:
-			service.registerUser(activationForm)
-		then:
-			1 * userDao.save({ User user ->
-				assert user?.salt?.length() == User.SALT_LENGTH
-				assert user?.salt ==~ /^[\p{Alnum}]+$/
-				return true
-			})
-	}
-	
-	def "registerUser() should generate unique salt"() {
-		given:
-			List<String> passedArguments = []
-		when:
-			service.registerUser(activationForm)
-			service.registerUser(activationForm)
-		then:
-			2 * userDao.save({ User user ->
-				passedArguments.add(user?.salt)
-				return true
-			})
-		and:
-			passedArguments.size() == 2
-		and:
-			String firstSalt = passedArguments.get(0)
-			firstSalt != null
-		and:
-			String secondSalt = passedArguments.get(1)
-			secondSalt != null
-		and:
-			firstSalt != secondSalt
-	}
-	
 	def "registerUser() should throw exception when password is null"() {
 		given:
 			activationForm.setPassword(null)
@@ -240,20 +206,17 @@ class UserServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			1 * encoder.encodePassword(
-				{ String password ->
-					assert password == TestObjects.TEST_PASSWORD
-					return true
-				},
-				_ as String
-			) >> expectedHash
+			1 * encoder.encode({ String password ->
+				assert password == TestObjects.TEST_PASSWORD
+				return true
+			}) >> expectedHash
 	}
 	
 	def "registerUser() should throw exception when encoder returns null"() {
 		when:
 			service.registerUser(activationForm)
 		then:
-			encoder.encodePassword(_ as String, _ as String) >> null
+			encoder.encode(_ as String) >> null
 		and:
 			thrown IllegalStateException
 	}
@@ -301,7 +264,6 @@ class UserServiceImplTest extends Specification {
 				assert user?.registeredAt != null
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				assert user?.hash != null
-				assert user?.salt != null
 				return true
 			})
 	}

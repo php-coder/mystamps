@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="drop-salt-column-from-users-table" author="php-coder" context="scheme">
+		<comment>Drops salt column from users table</comment>
+		
+		<dropColumn tableName="users" columnName="salt" />
+		
+	</changeSet>
+	
+	<changeSet id="increase-length-of-hash-column-in-users-table" author="php-coder" context="scheme">
+		<comment>Increases length of hash column in users table</comment>
+		
+		<modifyDataType tableName="users" columnName="hash" newDataType="VARCHAR(60)" />
+		
+	</changeSet>
+	
+	<changeSet id="migrate-test-users-passwords-hashes" author="php-coder" context="test-data">
+		<sqlFile path="../../sql/test-hash-from-sha1-to-bcrypt.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+</databaseChangeLog>

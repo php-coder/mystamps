@@ -49,10 +49,7 @@ final class TestObjects {
 
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
-	private static final String TEST_SALT           = "salt";
-
-	// sha1(TEST_SALT + "{" + TEST_PASSWORD + "}")
-	private static final String TEST_HASH           = "b0dd94c84e784ddb1e9a83c8a2e8f403846647b9";
+	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
 	private TestObjects() {
 	}
@@ -85,7 +82,6 @@ final class TestObjects {
 		user.setRegisteredAt(new Date());
 		user.setActivatedAt(new Date());
 		user.setHash(TEST_HASH);
-		user.setSalt(TEST_SALT);
 
 		return user;
 	}

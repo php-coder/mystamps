@@ -31,11 +31,6 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	// used during authentication (see SecurityConfig.getSaltSource())
-	public String getSalt() {
-		return user.getSalt();
-	}
-	
 	// used in controllers for getting current user
 	public User getUser() {
 		return user;

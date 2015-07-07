@@ -42,8 +42,7 @@ public class User {
 	public static final int LOGIN_LENGTH = 15;
 	public static final int ROLE_LENGTH  = 5;
 	public static final int NAME_LENGTH  = 100;
-	public static final int HASH_LENGTH  = 40;
-	public static final int SALT_LENGTH  = 10;
+	public static final int HASH_LENGTH  = 60;
 	
 	@Id
 	@GeneratedValue
@@ -70,9 +69,6 @@ public class User {
 	
 	@Column(length = HASH_LENGTH, nullable = false)
 	private String hash;
-	
-	@Column(length = SALT_LENGTH, nullable = false)
-	private String salt;
 	
 	@OneToOne(mappedBy = "owner", optional = false, fetch = FetchType.LAZY)
 	private Collection collection;

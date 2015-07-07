@@ -27,10 +27,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.authentication.dao.ReflectionSaltSource;
-import org.springframework.security.authentication.dao.SaltSource;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -39,6 +35,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.config.ServicesConfig;
@@ -118,7 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// Used in ServicesConfig.getUserService()
 	public PasswordEncoder getPasswordEncoder() {
-		return new ShaPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -130,16 +128,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
-	private SaltSource getSaltSource() {
-		ReflectionSaltSource saltSource = new ReflectionSaltSource();
-		saltSource.setUserPropertyToUse("salt");
-		return saltSource;
-	}
-	
 	private AuthenticationProvider getAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(getPasswordEncoder());
-		provider.setSaltSource(getSaltSource());
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
