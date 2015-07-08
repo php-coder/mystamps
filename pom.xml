@@ -74,7 +74,7 @@
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<javax-mail.version>1.5.2</javax-mail.version>
 		<jetty.version>8.1.16.v20140903</jetty.version>
-		<liquibase.version>3.3.2</liquibase.version>
+		<liquibase.version>3.3.5</liquibase.version>
 		<mysql.version>5.1.33</mysql.version>
 		<slf4j.version>1.7.9</slf4j.version>
 		<spock.version>1.0-groovy-2.0</spock.version>
