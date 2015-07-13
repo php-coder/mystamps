@@ -35,7 +35,7 @@
 		<togglz.version>2.1.0.Final</togglz.version>
 		
 		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
-		<bootstrap.version>3.3.4</bootstrap.version>
+		<bootstrap.version>3.3.5</bootstrap.version>
 		<jquery.version>1.9.1</jquery.version>
 		
 		<testng.version>6.8.8</testng.version>
