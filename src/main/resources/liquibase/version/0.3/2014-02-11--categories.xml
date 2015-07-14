@@ -34,7 +34,7 @@
 		
 	</changeSet>
 	
-	<changeSet id="initiate-categories-table" author="php-coder" context="init-data">
+	<changeSet id="initiate-categories-table" author="php-coder" context="test-data">
 		<comment>Creates category for Prehistoric animals</comment>
 		
 		<insert tableName="categories">
