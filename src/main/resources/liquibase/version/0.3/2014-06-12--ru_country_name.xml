@@ -9,19 +9,10 @@
 		<comment>Adds name_ru column to countries table</comment>
 		
 		<addColumn tableName="countries">
-			<column name="name_ru" type="VARCHAR(50)">
+			<column name="name_ru" type="VARCHAR(50)" afterColumn="name">
 				<constraints unique="true" />
 			</column>
 		</addColumn>
-		
-		<modifySql>
-			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-1745 -->
-			<!--
-				We can't use <append> here because it fails on H2 where 2 queries generated
-				(2nd for unique constraint) and each have our string at the end.
-			-->
-			<replace replace="name_ru VARCHAR(50)" with="name_ru VARCHAR(50) AFTER name" />
-		</modifySql>
 		
 	</changeSet>
 	
