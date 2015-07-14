@@ -45,7 +45,7 @@
 		<comment>Creates collections for existing users</comment>
 		
 		<sql>
-			INSERT INTO COLLECTIONS(user_id)
+			INSERT INTO collections(user_id)
 			SELECT id
 			FROM users
 			ORDER BY id
