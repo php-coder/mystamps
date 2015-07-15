@@ -18,7 +18,7 @@
 		<comment>Sets value of slug field to value of name field in lower case</comment>
 		
 		<update tableName="countries">
-			<column name="slug" valueComputed="LOWER(name)" />
+			<column name="slug" valueComputed="LOWER(REPLACE(name, ' ', '-'))" />
 		</update>
 		
 	</changeSet>
