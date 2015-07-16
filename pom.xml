@@ -515,6 +515,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<executable>true</executable>
 					<!--
 						Don't add src/main/resources to classpath, because we are using maven's resource filtering
 						@see https://github.com/spring-projects/spring-boot/issues/980
