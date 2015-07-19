@@ -45,6 +45,7 @@ import java.util.EnumSet;
 	H2Config.class,
 	ThymeleafViewResolverInitializingBean.class,
 	ResourceBundleMessageSourceInitializingBean.class,
+	JettyServletContainerCustomizer.class,
 	ErrorPagesServletContainerCustomizer.class
 })
 public class ApplicationBootstrap {
