@@ -15,7 +15,14 @@
 	<changeSet id="increase-length-of-hash-column-in-users-table" author="php-coder" context="scheme">
 		<comment>Increases length of hash column in users table</comment>
 		
-		<modifyDataType tableName="users" columnName="hash" newDataType="VARCHAR(60)" />
+		<!--
+			We can't use modifyDataType because it looses not null setting:
+			http://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
+		-->
+		<sql>
+			ALTER TABLE users
+			MODIFY COLUMN hash VARCHAR(60) NOT NULL
+		</sql>
 		
 	</changeSet>
 	
