@@ -148,6 +148,7 @@ public class Series {
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(inverseJoinColumns = @JoinColumn(name = "image_id"))
+	@OrderBy
 	private Set<Image> images;
 	
 	@Column(length = COMMENT_LENGTH)
