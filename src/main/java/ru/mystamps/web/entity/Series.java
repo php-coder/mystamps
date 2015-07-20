@@ -47,7 +47,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = "metaInfo")
-@EqualsAndHashCode(exclude = "metaInfo")
+@EqualsAndHashCode(exclude = { "metaInfo", "images" })
 @SuppressWarnings("PMD.TooManyFields")
 public class Series {
 	
