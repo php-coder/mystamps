@@ -225,15 +225,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void passwordWithForbiddenCharactersShouldBeRejected() {
-		page.activateAccount(null, null, "'t@$t'", null, null);
-		
-		assertThat(page)
-			.field("password")
-			.hasError(tr("password.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void activationKeyShouldNotBeTooShort() {
 		page.activateAccount(null, null, null, null, "12345");
 		

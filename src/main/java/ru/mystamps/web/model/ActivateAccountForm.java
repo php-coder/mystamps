@@ -95,11 +95,6 @@ public class ActivateAccountForm implements ActivateAccountDto {
 		message = "{value.too-short}",
 		groups = Password2Checks.class
 	)
-	@Pattern(
-		regexp = ValidationRules.PASSWORD_REGEXP,
-		message = "{password.invalid}",
-		groups = Password3Checks.class
-	)
 	private String password;
 	
 	@NotEmpty(groups = PasswordConfirmation1Checks.class)
@@ -161,8 +156,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	
 	@GroupSequence({
 		Password1Checks.class,
-		Password2Checks.class,
-		Password3Checks.class
+		Password2Checks.class
 	})
 	public interface PasswordChecks {
 	}
@@ -171,9 +165,6 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	}
 	
 	public interface Password2Checks {
-	}
-	
-	public interface Password3Checks {
 	}
 	
 	@GroupSequence({
