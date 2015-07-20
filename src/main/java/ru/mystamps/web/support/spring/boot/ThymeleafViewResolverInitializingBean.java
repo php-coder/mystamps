@@ -21,7 +21,9 @@ package ru.mystamps.web.support.spring.boot;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
@@ -39,9 +41,10 @@ import ru.mystamps.web.Url;
 @Setter
 @Slf4j
 public class ThymeleafViewResolverInitializingBean
-	implements InitializingBean, ApplicationContextAware {
+	implements InitializingBean, ApplicationContextAware, EnvironmentAware {
 	
 	private ApplicationContext applicationContext;
+	private Environment environment;
 	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
@@ -56,7 +59,8 @@ public class ThymeleafViewResolverInitializingBean
 			return;
 		}
 		
-		viewResolver.setStaticVariables(Url.asMap());
+		boolean useCdn = environment.acceptsProfiles("prod");
+		viewResolver.setStaticVariables(Url.asMap(useCdn));
 	}
 	
 }

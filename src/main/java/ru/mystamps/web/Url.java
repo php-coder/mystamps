@@ -67,10 +67,16 @@ public final class Url {
 	// resources
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	public static final String MAIN_CSS               = "/static/styles/main.css";
+	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
+	
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
-	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
+	
+	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
+	public static final String BOOTSTRAP_CSS_CDN     = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS_CDN      = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
+	public static final String JQUERY_JS_CDN         = "http://yandex.st/jquery/1.9.1/jquery.min.js";
 	
 	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
@@ -78,7 +84,7 @@ public final class Url {
 	private Url() {
 	}
 	
-	public static Map<String, String> asMap() {
+	public static Map<String, String> asMap(boolean useCdn) {
 		// There is not all urls but only those which used on views
 		Map<String, String> map = new HashMap<>();
 		map.put("PUBLIC_URL", PUBLIC_URL);
@@ -97,10 +103,18 @@ public final class Url {
 		map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
 		map.put("FAVICON_ICO", FAVICON_ICO);
 		map.put("MAIN_CSS", MAIN_CSS);
-		map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
-		map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
-		map.put("JQUERY_JS", JQUERY_JS);
 		map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
+		
+		if (useCdn) {
+			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
+			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
+			map.put("JQUERY_JS", JQUERY_JS_CDN);
+		} else {
+			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
+			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
+			map.put("JQUERY_JS", JQUERY_JS);
+		}
+		
 		return map;
 	}
 	

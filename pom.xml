@@ -34,7 +34,11 @@
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
 		<togglz.version>2.1.0.Final</togglz.version>
 		
-		<!-- Also don't forget to change version in src/main/java/ru/mystamps/web/config/MvcConfig.java -->
+		<!--
+			Also don't forget to change version in:
+			src/main/java/ru/mystamps/web/config/MvcConfig.java
+			src/main/java/ru/mystamps/web/Url.java
+		-->
 		<bootstrap.version>3.3.5</bootstrap.version>
 		<jquery.version>1.9.1</jquery.version>
 		
