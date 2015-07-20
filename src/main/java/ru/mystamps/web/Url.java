@@ -68,7 +68,6 @@ public final class Url {
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	public static final String MAIN_CSS               = "/static/styles/main.css";
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_RESPONSIVE_CSS = "/public/bootstrap/css/bootstrap-responsive.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
 	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
@@ -99,7 +98,6 @@ public final class Url {
 		map.put("FAVICON_ICO", FAVICON_ICO);
 		map.put("MAIN_CSS", MAIN_CSS);
 		map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
-		map.put("BOOTSTRAP_RESPONSIVE_CSS", BOOTSTRAP_RESPONSIVE_CSS);
 		map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
 		map.put("JQUERY_JS", JQUERY_JS);
 		map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);

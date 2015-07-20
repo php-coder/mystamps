@@ -8,7 +8,6 @@
 	<suppress checks="LineLength" files="AbstractPage.java" lines="44,45" />
 	<suppress checks="LineLength" files="AbstractPageWithForm.java" lines="27,28,33" />
 	<suppress checks="LineLength" files="Form.java" lines="31,32,37" />
-	<suppress checks="LineLength" files="Url.java" lines="71" />
 	<suppress checks="LineLength" files="ErrorController.java" lines="73" />
 	<suppress checks="LineLength" files="SecurityConfig.java" lines="35,36,40" />
 	<suppress checks="LineLength" files="JdbcSeriesDaoImpl.java" lines="123" />
