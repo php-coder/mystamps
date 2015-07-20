@@ -68,7 +68,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	private static final String EMPTY_IMAGE_PATH;
 	
 	static {
-		EXPECTED_YEARS.add("");
+		EXPECTED_YEARS.add("Year");
 		// years in reverse order
 		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			EXPECTED_YEARS.add(String.valueOf(i));
