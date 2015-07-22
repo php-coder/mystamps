@@ -29,25 +29,25 @@ import ru.mystamps.web.tests.page.AbstractPageWithForm;
  *
  * @see https://github.com/alexruiz/fest-assert-2.x/wiki/Creating-specific-assertions
  **/
-public final class AbstractPageWithFormAssert
-	extends AbstractAssert<AbstractPageWithFormAssert, AbstractPageWithForm> {
+public final class PageWithFormAssert
+	extends AbstractAssert<PageWithFormAssert, AbstractPageWithForm> {
 	
 	private String fieldName;
 	
-	private AbstractPageWithFormAssert(AbstractPageWithForm actual) {
-		super(actual, AbstractPageWithFormAssert.class);
+	private PageWithFormAssert(AbstractPageWithForm actual) {
+		super(actual, PageWithFormAssert.class);
 	}
 	
-	public static AbstractPageWithFormAssert assertThat(AbstractPageWithForm actual) {
-		return new AbstractPageWithFormAssert(actual);
+	public static PageWithFormAssert assertThat(AbstractPageWithForm actual) {
+		return new PageWithFormAssert(actual);
 	}
 	
-	public AbstractPageWithFormAssert field(String fieldName) {
+	public PageWithFormAssert field(String fieldName) {
 		this.fieldName = fieldName;
 		return this;
 	}
 	
-	public AbstractPageWithFormAssert hasError(String expectedErrorMessage) {
+	public PageWithFormAssert hasError(String expectedErrorMessage) {
 		isNotNull();
 		Validate.validState(
 			fieldName != null,
@@ -70,7 +70,7 @@ public final class AbstractPageWithFormAssert
 		return this;
 	}
 	
-	public AbstractPageWithFormAssert hasNoError() {
+	public PageWithFormAssert hasNoError() {
 		isNotNull();
 		Validate.validState(
 			fieldName != null,
@@ -89,7 +89,7 @@ public final class AbstractPageWithFormAssert
 		return this;
 	}
 	
-	public AbstractPageWithFormAssert hasValue(String expectedValue) {
+	public PageWithFormAssert hasValue(String expectedValue) {
 		isNotNull();
 		Validate.validState(
 			fieldName != null,

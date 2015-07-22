@@ -32,7 +32,7 @@ import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
+import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;

@@ -34,7 +34,7 @@ import ru.mystamps.web.tests.page.AddCategoryPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.AbstractPageWithFormAssert.assertThat;
+import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
 
