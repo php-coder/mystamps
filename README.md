@@ -19,7 +19,7 @@ With this site you can:
 
 ## How I can try it?
 
-Site is under development and doesn't exist on the Internet so unfortunately you can't try it right now. You can watch on issue [#71](https://github.com/php-coder/mystamps/issues/71) and when it will be done, be a first beta users!
+You can look at it and try on http://my-stamps.ru
 
 If you are programmer/sysadmin or you just feeling that you are able to run local version of the site then follow the following instructions:
 
