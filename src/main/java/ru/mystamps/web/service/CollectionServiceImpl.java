@@ -19,11 +19,13 @@ package ru.mystamps.web.service;
 
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.JdbcCollectionDao;
@@ -34,8 +36,8 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
-@Slf4j
 public class CollectionServiceImpl implements CollectionService {
+	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
 	private final CollectionDao collectionDao;
 	private final JdbcCollectionDao jdbcCollectionDao;

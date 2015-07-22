@@ -22,16 +22,17 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.Url;
 
 @Controller
-@Slf4j
 public class RobotsTxtController {
+	private static final Logger LOG = LoggerFactory.getLogger(RobotsTxtController.class);
 	
 	@RequestMapping(Url.ROBOTS_TXT)
 	@SuppressWarnings("PMD.AvoidDuplicateLiterals")

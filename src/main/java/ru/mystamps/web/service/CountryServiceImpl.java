@@ -26,8 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.entity.Collection;
@@ -40,8 +42,8 @@ import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
-@Slf4j
 public class CountryServiceImpl implements CountryService {
+	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
 	private final CountryDao countryDao;
 	private final JdbcCountryDao jdbcCountryDao;

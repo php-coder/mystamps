@@ -23,19 +23,22 @@ import java.util.List;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.entity.UsersActivation;
 
 @RequiredArgsConstructor
-@Slf4j
 public class CronServiceImpl implements CronService {
 	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
 	private final UsersActivationDao usersActivationDao;
 	private final UsersActivationService usersActivationService;

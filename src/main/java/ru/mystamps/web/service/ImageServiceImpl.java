@@ -21,11 +21,13 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.entity.Image;
@@ -36,8 +38,8 @@ import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 @RequiredArgsConstructor
-@Slf4j
 public class ImageServiceImpl implements ImageService {
+	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;

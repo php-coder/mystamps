@@ -17,6 +17,9 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -24,7 +27,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Adjusts {@link ResourceBundleMessageSource} instance by disabling falling back to system locale.
@@ -33,9 +35,11 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Configuration
 @Setter
-@Slf4j
 public class ResourceBundleMessageSourceInitializingBean
 	implements InitializingBean, ApplicationContextAware {
+	
+	private static final Logger LOG =
+		LoggerFactory.getLogger(ResourceBundleMessageSourceInitializingBean.class);
 	
 	private ApplicationContext applicationContext;
 	

@@ -20,18 +20,20 @@ package ru.mystamps.web.support.spring.security;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import lombok.extern.slf4j.Slf4j;
-
 import ru.mystamps.web.service.SiteService;
 
-@Slf4j
 public class AuthenticationFailureListener
 	implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 	
 	@Inject
 	private SiteService siteService;
