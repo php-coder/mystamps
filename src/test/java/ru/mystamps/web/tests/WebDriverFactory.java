@@ -20,7 +20,7 @@ package ru.mystamps.web.tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public final class WebDriverFactory {
+public abstract class WebDriverFactory {
 	
 	private static WebDriver driver;
 	
