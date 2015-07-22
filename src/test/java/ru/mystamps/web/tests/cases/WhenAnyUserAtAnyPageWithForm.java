@@ -27,6 +27,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
+@SuppressWarnings("checkstyle:abstractclassname")
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenAnyUserAtAnyPage<T> {
 	

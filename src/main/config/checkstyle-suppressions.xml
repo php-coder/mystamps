@@ -10,7 +10,4 @@
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.entity" />
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.tests.page.element.Form" />
 	
-	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
-	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
-	
 </suppressions>

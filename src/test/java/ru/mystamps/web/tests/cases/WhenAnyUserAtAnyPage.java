@@ -41,6 +41,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 	initializers = ConfigFileApplicationContextInitializer.class,
 	classes = TestContext.class
 )
+@SuppressWarnings("checkstyle:abstractclassname")
 abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	extends AbstractTestNGSpringContextTests {
 	
