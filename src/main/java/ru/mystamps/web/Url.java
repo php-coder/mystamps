@@ -29,6 +29,7 @@ import java.util.Map;
  */
 public final class Url {
 	public static final String PUBLIC_URL            = "http://my-stamps.ru";
+	public static final String STATIC_RESOURCES_URL  = "http://stamps.filezz.ru";
 	
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE                  = "http://127.0.0.1:8080";
@@ -85,7 +86,7 @@ public final class Url {
 	private Url() {
 	}
 	
-	public static Map<String, String> asMap(boolean useCdn) {
+	public static Map<String, String> asMap(boolean serveContentFromSingleHost) {
 		// There is not all urls but only those which used on views
 		Map<String, String> map = new HashMap<>();
 		map.put("PUBLIC_URL", PUBLIC_URL);
@@ -101,19 +102,26 @@ public final class Url {
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
-		map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
-		map.put("FAVICON_ICO", FAVICON_ICO);
-		map.put("MAIN_CSS", MAIN_CSS);
-		map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
 		
-		if (useCdn) {
-			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
-			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
-			map.put("JQUERY_JS", JQUERY_JS_CDN);
-		} else {
+		if (serveContentFromSingleHost) {
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
 			map.put("JQUERY_JS", JQUERY_JS);
+			map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
+			map.put("FAVICON_ICO", FAVICON_ICO);
+			map.put("MAIN_CSS", MAIN_CSS);
+			map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
+		} else {
+			// Use separate domain for our own resources
+			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
+			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
+			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
+			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
+			
+			// Use CDN for external resources like frameworks
+			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
+			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
+			map.put("JQUERY_JS", JQUERY_JS_CDN);
 		}
 		
 		return map;

@@ -62,8 +62,8 @@ public class ThymeleafViewResolverInitializingBean
 			return;
 		}
 		
-		boolean useCdn = environment.acceptsProfiles("prod");
-		viewResolver.setStaticVariables(Url.asMap(useCdn));
+		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		viewResolver.setStaticVariables(Url.asMap(useSingleHost));
 	}
 	
 }
