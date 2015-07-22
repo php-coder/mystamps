@@ -69,9 +69,10 @@ public class ErrorController {
 	public void internalError(HttpServletRequest request) {
 		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
-		String page            = (String)request.getAttribute("javax.servlet.error.request_uri");
+		// CheckStyle: ignore LineLength for next 1 line
 		Class<?> exceptionType = (Class<?>)request.getAttribute("javax.servlet.error.exception_type");
 		Exception exception    = (Exception)request.getAttribute("javax.servlet.error.exception");
+		String page            = (String)request.getAttribute("javax.servlet.error.request_uri");
 		
 		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
 			String msg = String.format(

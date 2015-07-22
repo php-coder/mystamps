@@ -74,6 +74,7 @@ public final class Url {
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
+	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String BOOTSTRAP_CSS_CDN     = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS_CDN      = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
 	public static final String JQUERY_JS_CDN         = "http://yandex.st/jquery/1.9.1/jquery.min.js";

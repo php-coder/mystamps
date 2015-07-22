@@ -120,6 +120,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	}
 	
 	@Override
+	// CheckStyle: ignore LineLength for next 1 line
 	public Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("collection_id", collectionId);

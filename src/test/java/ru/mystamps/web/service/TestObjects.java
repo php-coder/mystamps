@@ -49,6 +49,7 @@ final class TestObjects {
 
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
+	// CheckStyle: ignore LineLength for next 1 line
 	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
 	private TestObjects() {

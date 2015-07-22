@@ -40,9 +40,10 @@ import static lombok.AccessLevel.PROTECTED;
 @RequiredArgsConstructor(access = PROTECTED)
 public abstract class AbstractPage {
 	
-	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
+	// CheckStyle: ignore LineLength for next 2 lines
 	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"LogoutForm\"]/input[@type=\"submit\"]";
 	private static final String USER_BAR_ENTRIES_LOCATOR = "//*[@id=\"user_bar\"]//li/a | //*[@id=\"user_bar\"]//li//input[not(@type=\"hidden\")]";
+	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
 	
 	protected final WebDriver driver;
 	private final String pageUrl;

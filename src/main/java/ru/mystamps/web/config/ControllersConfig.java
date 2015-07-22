@@ -23,7 +23,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ru.mystamps.web.controller.*; // NOCHECKSTYLE: AvoidStarImportCheck, NOPMD: UnusedImports
+// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 
 @Configuration
 public class ControllersConfig {

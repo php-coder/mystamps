@@ -34,6 +34,7 @@ import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
+	// CheckStyle: ignore LineLength for next 1 line
 	private static final String          LABEL_LOCATOR = "//label[@for=\"%s\"]/span[@class=\"field-label\"]";
 	private static final String    FIELD_ERROR_LOCATOR = "//span[@id=\"%s.errors\"]";
 	private static final String FIELD_REQUIRED_LOCATOR = "//span[@id=\"%s.required\"]";

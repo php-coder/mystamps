@@ -5,15 +5,6 @@
 
 <suppressions>
 	
-	<suppress checks="LineLength" files="AbstractPage.java" lines="44,45" />
-	<suppress checks="LineLength" files="AbstractPageWithForm.java" lines="27,28,33" />
-	<suppress checks="LineLength" files="Form.java" lines="31,32,37" />
-	<suppress checks="LineLength" files="Url.java" lines="77,78,79" />
-	<suppress checks="LineLength" files="ErrorController.java" lines="73" />
-	<suppress checks="LineLength" files="SecurityConfig.java" lines="31,32,36" />
-	<suppress checks="LineLength" files="JdbcSeriesDaoImpl.java" lines="123" />
-	<suppress checks="LineLength" files="TestObjects.java" lines="52" />
-	
 	<!-- false positives due to Lombok usage -->
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.model" />
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.entity" />
