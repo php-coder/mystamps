@@ -45,7 +45,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 		params.put("occurred_at", activity.getOccurredAt());
 		params.put("page", activity.getPage());
 		Integer userId = activity.getUser() != null // NOPMD
-			? activity.getUser().getId() // NOCHECKSTYLE
+			? activity.getUser().getId()
 			: null;
 		params.put("user_id", userId);
 		params.put("ip", activity.getIp());
