@@ -208,7 +208,6 @@
         <module name="InnerAssignment"/>
         <module name="MagicNumber"/>
         <module name="MissingSwitchDefault"/>
-        <module name="RedundantThrows"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="ParameterAssignment"/>
@@ -224,7 +223,6 @@
             <module name="IllegalCatch"/>
             <module name="ArrayTrailingComma"/>
             <module name="MultipleStringLiterals"/>
-            <module name="JUnitTestCase"/>
         -->
 
         <!-- Checks for class design                         -->
