@@ -53,6 +53,7 @@ public class RobotsTxtController {
 			writer.println("Disallow: " + Url.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + Url.ADD_CATEGORY_PAGE);
 			writer.println("Disallow: " + Url.UNAUTHORIZED_PAGE);
+			writer.println("Disallow: " + Url.FORBIDDEN_PAGE);
 			writer.println("Disallow: " + Url.NOT_FOUND_PAGE);
 			writer.println("Disallow: " + Url.INTERNAL_ERROR_PAGE);
 			writer.println("Sitemap: " + Url.PUBLIC_URL + Url.SITEMAP_XML);
