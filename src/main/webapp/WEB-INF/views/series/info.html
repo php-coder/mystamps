@@ -215,7 +215,7 @@
 								<dt th:text="#{t_comment}">
 									Comment
 								</dt>
-								<dd id="comment" th:text="${series.comment}">
+								<dd id="comment" th:utext="${#strings.replace(#strings.escapeXml(series.comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
 									My favorite series.
 								</dd>
 							<!--/*/ </th:block> /*/-->
