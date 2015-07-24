@@ -1,8 +1,11 @@
 language: java
+before_script:
+  - npm install -g bootlint
 script:
   - mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning | egrep -v '^\[INFO\] Download(ing|ed):' | tee cs.log; fgrep -qs '[ERROR]' cs.log && false || true
   - mvn --batch-mode pmd:check | egrep -v '^\[INFO\] Download(ing|ed):' | tee pmd.log; fgrep -qs '[ERROR]' pmd.log && false || true
   - mvn --batch-mode license:check | egrep -v '^\[INFO\] Download(ing|ed):' | tee licence.log; fgrep -qs '[ERROR]' licence.log && false || true
+  - find src -type f -name '*.html' | xargs bootlint
   - mvn --batch-mode verify | egrep -v '^\[INFO\] Download(ing|ed):' | tee verify.log; fgrep -qs '[ERROR]' verify.log && false || true
   - mvn --batch-mode jasmine:test | egrep -v '^\[INFO\] Download(ing|ed):' | tee jasmine.log; fgrep -qs '[ERROR]' jasmine.log && false || true
 after_success:

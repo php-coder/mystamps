@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title th:text="|MyStamps: #{t_collection_of(${ownerName})}|">MyStamps: John Doe's collection</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
@@ -117,23 +118,19 @@
 							</ul>
 						</div>
 						<div class="col-sm-3">
-							<div class="col-sm-12" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
-										</div>
-										<div id="categories-chart" class="panel-body no-padding"></div>
-									</div>
+							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+								<div class="panel-heading">
+									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
 								</div>
+								<div id="categories-chart" class="panel-body no-padding"></div>
+							</div>
 						</div>
 						<div class="col-sm-3">
-							<div class="col-sm-12" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
-										</div>
-										<div id="countries-chart" class="panel-body no-padding"></div>
-									</div>
+							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+								<div class="panel-heading">
+									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
+								</div>
+								<div id="countries-chart" class="panel-body no-padding"></div>
 							</div>
 						</div>
 						<div class="col-sm-2">
@@ -159,7 +156,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<footer class="text-right">
+				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
 					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2015
 				</footer>

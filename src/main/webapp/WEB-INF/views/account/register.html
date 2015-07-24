@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
 		<title th:text="|MyStamps: #{t_registration_title}|">MyStamps: registration</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
@@ -99,7 +100,7 @@
 			</div>
 			/*/-->
 			<div class="row">
-				<footer class="text-right">
+				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
 					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2015
 				</footer>
