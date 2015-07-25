@@ -117,6 +117,57 @@
 							</div>
 						</div>
 						
+						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
+							<label for="quantity" class="control-label col-sm-3">
+								<span class="field-label" th:text="#{t_quantity}">
+									Quantity
+								</span>
+								<span id="quantity.required" class="required_field">*</span>
+							</label>
+							<div class="col-sm-2">
+								<input type="number"
+										id="quantity"
+										class="form-control"
+										required="required"
+										th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
+										th:max="${T(ru.mystamps.web.validation.ValidationRules).MAX_STAMPS_IN_SERIES}"
+										min="1"
+										max="50"
+										th:field="*{quantity}" />
+								<span id="quantity.errors" class="help-block" th:if="${#fields.hasErrors('quantity')}" th:each="error : ${#fields.errors('quantity')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
+							<label for="perforated" class="control-label col-sm-3">
+								<span class="field-label" th:text="#{t_perforated}">
+									Perforated
+								</span>
+							</label>
+							<div class="col-sm-1">
+								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
+								<span id="perforated.errors" class="help-block" th:if="${#fields.hasErrors('perforated')}" th:each="error : ${#fields.errors('perforated')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
+							<label for="image" class="control-label col-sm-3">
+								<span class="field-label" th:text="#{t_image}">
+									Image
+								</span>
+								<span id="image.required" class="required_field">*</span>
+							</label>
+							<div class="col-sm-7">
+								<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
+									<span class="hint-block" th:text="#{t_add_more_images_hint}">
+										You will be able to add additional images on the series page
+									</span>
+								</small>
+								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+							</div>
+						</div>
+						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
 								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
@@ -206,39 +257,6 @@
 								<span id="day.errors" class="help-block" th:if="${#fields.hasErrors('day')}" th:each="error : ${#fields.errors('day')}" th:text="${error}"></span>
 								<span id="year.errors" class="help-block" th:if="${#fields.hasErrors('year')}" th:each="error : ${#fields.errors('year')}" th:text="${error}"></span>
 								<span id="month.errors" class="help-block" th:if="${#fields.hasErrors('month')}" th:each="error : ${#fields.errors('month')}" th:text="${error}"></span>
-							</div>
-						</div>
-						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
-							<label for="quantity" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_quantity}">
-									Quantity
-								</span>
-								<span id="quantity.required" class="required_field">*</span>
-							</label>
-							<div class="col-sm-2">
-								<input type="number"
-										id="quantity"
-										class="form-control"
-										required="required"
-										th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
-										th:max="${T(ru.mystamps.web.validation.ValidationRules).MAX_STAMPS_IN_SERIES}"
-										min="1"
-										max="50"
-										th:field="*{quantity}" />
-								<span id="quantity.errors" class="help-block" th:if="${#fields.hasErrors('quantity')}" th:each="error : ${#fields.errors('quantity')}" th:text="${error}"></span>
-							</div>
-						</div>
-						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
-							<label for="perforated" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_perforated}">
-									Perforated
-								</span>
-							</label>
-							<div class="col-sm-1">
-								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
-								<span id="perforated.errors" class="help-block" th:if="${#fields.hasErrors('perforated')}" th:each="error : ${#fields.errors('perforated')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
@@ -399,24 +417,6 @@
 							<div class="col-sm-5">
 								<textarea id="comment" class="form-control" cols="22" rows="3" th:field="*{comment}"></textarea>
 								<span id="comment.errors" class="help-block" th:if="${#fields.hasErrors('comment')}" th:each="error : ${#fields.errors('comment')}" th:text="${error}"></span>
-							</div>
-						</div>
-						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
-							<label for="image" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_image}">
-									Image
-								</span>
-								<span id="image.required" class="required_field">*</span>
-							</label>
-							<div class="col-sm-7">
-								<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
-								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
-									<span class="hint-block" th:text="#{t_add_more_images_hint}">
-										You will be able to add additional images on the series page
-									</span>
-								</small>
-								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
