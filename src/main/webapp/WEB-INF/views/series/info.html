@@ -49,217 +49,228 @@
 				</div>
 			</div>
 			<div class="row" id="content">
-				
-				<div class="col-sm-4">
-					<div class="row" th:each="image : ${series.images}">
-						<div class="col-sm-12">
-							<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
-						</div>
-					</div>
-					<div class="row" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
-						<div class="col-sm-6 col-sm-offset-3">
-							<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}" th:object="${addImageForm}">
-								<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
-									<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
-									<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
-								</div>
-								<div class="form-group from-group-sm">
-									<input type="submit" class="btn btn-primary" value="Add image" th:value="#{t_add_image}" />
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-sm-4">
-					<dl class="dl-horizontal">
-						<dt th:text="#{t_category}">
-							Category
-						</dt>
-						<dd id="category_name">
-							<a href="../category/info.html"
-							   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}"
-							   th:text="${series.category.getLocalizedName(#locale)}">
-								Animals
-							</a>
-						</dd>
+				<div class="col-sm-12">
+					
+					<div class="row">
 						
-						<!--/*/ <th:block th:if="${series.country != null}"> /*/-->
-							<dt th:text="#{t_country}">
-								Country
-							</dt>
-							<dd id="country_name">
-								<a href="../country/info.html"
-								   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}"
-								   th:text="${series.country.getLocalizedName(#locale)}">
-									Italy
-								</a>
-							</dd>
-						<!--/*/ </th:block> /*/-->
+						<div class="col-sm-4">
+							<div class="row" th:each="image : ${series.images}">
+								<div class="col-sm-12">
+									<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
+								</div>
+							</div>
+						</div>
 						
-						<!--/*/ <th:block th:if="${series.releaseYear != null}"> /*/-->
-							<dt th:text="#{t_issue_date}">
-								Date of release
-							</dt>
-							<dd id="issue_date">
-								<span th:if="${series.releaseDay != null}"
-									  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
-									  th:remove="tag">
-									01.
-								</span>
-								<span th:if="${series.releaseMonth != null}"
-									  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
-									  th:remove="tag">
-									02.
-								</span>
-								<span th:if="${series.releaseYear != null}"
-									  th:text="${series.releaseYear}"
-									  th:remove="tag">
-									1999
-								</span>
-							</dd>
-						<!--/*/ </th:block> /*/-->
-							
-							<dt th:text="#{t_quantity}">
-								Quantity
-							</dt>
-							<dd id="quantity" th:text="${series.quantity}">
-								7
-							</dd>
-							
-							<dt th:text="#{t_perforated}">
-								Perforated
-							</dt>
-							<dd id="perforated">
-								<!--/*/ <th:block th:if="${series.perforated}"> /*/-->
-									<span th:text="#{t_yes}">Yes</span> <i class="glyphicon glyphicon-ok"></i>
+						<div class="col-sm-4">
+							<dl class="dl-horizontal">
+								<dt th:text="#{t_category}">
+									Category
+								</dt>
+								<dd id="category_name">
+									<a href="../category/info.html"
+									   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}"
+									   th:text="${series.category.getLocalizedName(#locale)}">
+										Animals
+									</a>
+								</dd>
+								
+								<!--/*/ <th:block th:if="${series.country != null}"> /*/-->
+									<dt th:text="#{t_country}">
+										Country
+									</dt>
+									<dd id="country_name">
+										<a href="../country/info.html"
+										   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}"
+										   th:text="${series.country.getLocalizedName(#locale)}">
+											Italy
+										</a>
+									</dd>
 								<!--/*/ </th:block> /*/-->
 								
-								<!--/*/
-								<th:block th:if="${not series.perforated}">
-									<span th:text="#{t_no}">No</span> <i class="glyphicon glyphicon-remove"></i>
-								</th:block>
-								/*/-->
-							</dd>
+								<!--/*/ <th:block th:if="${series.releaseYear != null}"> /*/-->
+									<dt th:text="#{t_issue_date}">
+										Date of release
+									</dt>
+									<dd id="issue_date">
+										<span th:if="${series.releaseDay != null}"
+											  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
+											  th:remove="tag">
+											01.
+										</span>
+										<span th:if="${series.releaseMonth != null}"
+											  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
+											  th:remove="tag">
+											02.
+										</span>
+										<span th:if="${series.releaseYear != null}"
+											  th:text="${series.releaseYear}"
+											  th:remove="tag">
+											1999
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+									
+									<dt th:text="#{t_quantity}">
+										Quantity
+									</dt>
+									<dd id="quantity" th:text="${series.quantity}">
+										7
+									</dd>
+									
+									<dt th:text="#{t_perforated}">
+										Perforated
+									</dt>
+									<dd id="perforated">
+										<!--/*/ <th:block th:if="${series.perforated}"> /*/-->
+											<span th:text="#{t_yes}">Yes</span> <i class="glyphicon glyphicon-ok"></i>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/
+										<th:block th:if="${not series.perforated}">
+											<span th:text="#{t_no}">No</span> <i class="glyphicon glyphicon-remove"></i>
+										</th:block>
+										/*/-->
+									</dd>
+								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michelPrice != null}"> /*/-->
+									<dt th:text="#{t_michel}">
+										Michel
+									</dt>
+									<dd id="michel_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michelPrice != null}">
+										<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
+											#101-104
+										</span>
+										<span th:if="${showPrice}"
+											  th:with="showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.michelPrice.formattedValue} + ' ' + ${series.michelPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+											(10 EUR)
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scottPrice != null}"> /*/-->
+									<dt th:text="#{t_scott}">
+										Scott
+									</dt>
+									<dd id="scott_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scottPrice != null}">
+										<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
+										<span th:if="${showPrice}"
+											  th:with="price=${#numbers.formatDecimal(series.scottPrice.value, 1, 1)},showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.scottPrice.formattedValue} + ' ' + ${series.scottPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+											12 USD
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvertPrice != null}"> /*/-->
+									<dt th:text="#{t_yvert}">
+										Yvert
+									</dt>
+									<dd id="yvert_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvertPrice != null}">
+										<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
+											#13, 17, 20
+										</span>
+										<span th:if="${showPrice}"
+											  th:with="showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.yvertPrice.formattedValue} + ' ' + ${series.yvertPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+											(7 RUR)
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbonsPrice != null}"> /*/-->
+									<dt th:text="#{t_sg}">
+										Gibbons
+									</dt>
+									<dd id="gibbons_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbonsPrice != null}">
+										<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
+											#77, 79-83
+										</span>
+										<span th:if="${showPrice}"
+											  th:with="showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.gibbonsPrice.formattedValue} + ' ' + ${series.gibbonsPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
+								<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
+									<dt th:text="#{t_comment}">
+										Comment
+									</dt>
+									<dd id="comment" th:utext="${#strings.replace(#strings.escapeXml(series.comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
+										My favorite series.
+									</dd>
+								<!--/*/ </th:block> /*/-->
+							</dl>
+						</div>
 						
-						<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michelPrice != null}"> /*/-->
-							<dt th:text="#{t_michel}">
-								Michel
-							</dt>
-							<dd id="michel_catalog_info"
-								th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michelPrice != null}">
-								<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
-									#101-104
-								</span>
-								<span th:if="${showPrice}"
-									  th:with="showBrackets=${showNumbers and showPrice}"
-									  th:text="${showBrackets ? '(' : ''} + ${series.michelPrice.formattedValue} + ' ' + ${series.michelPrice.currency} + ${showBrackets ? ')' : ''}"
-									  th:remove="tag">
-									(10 EUR)
-								</span>
-							</dd>
-						<!--/*/ </th:block> /*/-->
-						
-						<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scottPrice != null}"> /*/-->
-							<dt th:text="#{t_scott}">
-								Scott
-							</dt>
-							<dd id="scott_catalog_info"
-								th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scottPrice != null}">
-								<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
-								<span th:if="${showPrice}"
-									  th:with="price=${#numbers.formatDecimal(series.scottPrice.value, 1, 1)},showBrackets=${showNumbers and showPrice}"
-									  th:text="${showBrackets ? '(' : ''} + ${series.scottPrice.formattedValue} + ' ' + ${series.scottPrice.currency} + ${showBrackets ? ')' : ''}"
-									  th:remove="tag">
-									12 USD
-								</span>
-							</dd>
-						<!--/*/ </th:block> /*/-->
-						
-						<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvertPrice != null}"> /*/-->
-							<dt th:text="#{t_yvert}">
-								Yvert
-							</dt>
-							<dd id="yvert_catalog_info"
-								th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvertPrice != null}">
-								<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
-									#13, 17, 20
-								</span>
-								<span th:if="${showPrice}"
-									  th:with="showBrackets=${showNumbers and showPrice}"
-									  th:text="${showBrackets ? '(' : ''} + ${series.yvertPrice.formattedValue} + ' ' + ${series.yvertPrice.currency} + ${showBrackets ? ')' : ''}"
-									  th:remove="tag">
-									(7 RUR)
-								</span>
-							</dd>
-						<!--/*/ </th:block> /*/-->
-						
-						<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbonsPrice != null}"> /*/-->
-							<dt th:text="#{t_sg}">
-								Gibbons
-							</dt>
-							<dd id="gibbons_catalog_info"
-								th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbonsPrice != null}">
-								<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
-									#77, 79-83
-								</span>
-								<span th:if="${showPrice}"
-									  th:with="showBrackets=${showNumbers and showPrice}"
-									  th:text="${showBrackets ? '(' : ''} + ${series.gibbonsPrice.formattedValue} + ' ' + ${series.gibbonsPrice.currency} + ${showBrackets ? ')' : ''}"
-									  th:remove="tag">
-								</span>
-							</dd>
-						<!--/*/ </th:block> /*/-->
-						
-						<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
-							<dt th:text="#{t_comment}">
-								Comment
-							</dt>
-							<dd id="comment" th:utext="${#strings.replace(#strings.escapeXml(series.comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
-								My favorite series.
-							</dd>
-						<!--/*/ </th:block> /*/-->
-					</dl>
+						<!--/*/
+						<th:block togglz:active="ADD_SERIES_TO_COLLECTION">
+						/*/-->
+							<div class="col-sm-4" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
+								<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+									<p th:text="#{t_series_not_in_collection}">
+										Series isn't part of your collection
+									</p>
+									<p>
+										<input type="hidden" name="action" value="ADD" />
+										<input type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
+									</p>
+								</form>
+							</div>
+							
+						<!--/*/
+							<div class="col-sm-4" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
+								<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+									<p th:text="#{t_series_in_collection}">
+										Series is part of your collection
+									</p>
+									<p>
+										<input type="hidden" name="action" value="REMOVE" />
+										<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
+									</p>
+								</form>
+							</div>
+							
+							<div class="col-sm-4" sec:authorize="isAnonymous()">
+								<p th:utext="#{t_need_authentication_to_add_series_to_collection(@{${REGISTRATION_PAGE}}, @{${AUTHENTICATION_PAGE}})}">
+									In order to add this series to your collection you should <a href="../account/register.html">register</a>
+									or <a href="../account/auth.html">pass authentication</a>.
+								</p>
+							</div>
+						</th:block>
+						/*/-->
+							
+					</div>
+					
+					<div class="row" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
+						<div class="col-sm-4">
+							<div class="row">
+								<div class="col-sm-6 col-sm-offset-3">
+									<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}" th:object="${addImageForm}">
+										<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
+											<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+											<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+										</div>
+										<div class="from-group-sm">
+											<input type="submit" class="btn btn-primary" value="Add image" th:value="#{t_add_image}" />
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				
-				<!--/*/
-				<th:block togglz:active="ADD_SERIES_TO_COLLECTION">
-				/*/-->
-					<div class="col-sm-4" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-						<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-							<p th:text="#{t_series_not_in_collection}">
-								Series isn't part of your collection
-							</p>
-							<p>
-								<input type="hidden" name="action" value="ADD" />
-								<input type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
-							</p>
-						</form>
-					</div>
-					
-				<!--/*/
-					<div class="col-sm-4" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-						<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-							<p th:text="#{t_series_in_collection}">
-								Series is part of your collection
-							</p>
-							<p>
-								<input type="hidden" name="action" value="REMOVE" />
-								<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
-							</p>
-						</form>
-					</div>
-					
-					<div class="col-sm-4" sec:authorize="isAnonymous()">
-						<p th:utext="#{t_need_authentication_to_add_series_to_collection(@{${REGISTRATION_PAGE}}, @{${AUTHENTICATION_PAGE}})}">
-							In order to add this series to your collection you should <a href="../account/register.html">register</a>
-							or <a href="../account/auth.html">pass authentication</a>.
-						</p>
-					</div>
-				</th:block>
-				/*/-->
-				
 			</div>
+			
 			<div class="row">
 				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
