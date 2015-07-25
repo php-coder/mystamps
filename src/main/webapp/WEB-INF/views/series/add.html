@@ -63,7 +63,14 @@
 						</small>
 					</div>
 					
-					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_PAGE}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}" th:object="${addSeriesForm}">
+					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html"
+						th:action="@{${ADD_SERIES_PAGE}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}"
+						th:object="${addSeriesForm}"
+						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice') or #fields.hasErrors('michelCurrency')},
+							scottHasErrors=${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice') or #fields.hasErrors('scottCurrency')},
+							yvertHasErrors=${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice') or #fields.hasErrors('yvertCurrency')},
+							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice') or #fields.hasErrors('gibbonsCurrency')},
+							showCatalogsInfo=${michelHasErrors or scottHasErrors or yvertHasErrors or gibbonsHasErrors}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 							<label for="category" class="control-label col-sm-3">
@@ -110,7 +117,15 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'has-error' : ''}">
+						<div class="form-group js-collapse-toggle-header">
+							<div class="col-sm-offset-3 col-sm-5">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
+									Specify date of release
+								</a>
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'has-error in' : ''}">
 							<label for="year" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_issue_date}">
 									Date of release
@@ -227,7 +242,15 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice') or #fields.hasErrors('michelCurrency') ? 'has-error' : ''}">
+						<div class="form-group js-collapse-toggle-header">
+							<div class="col-sm-offset-3 col-sm-7">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">
+									Add information from stamps catalogues
+								</a>
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${michelHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="michelNumbers" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_michel}">
 									Michel
@@ -260,7 +283,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice') or #fields.hasErrors('scottCurrency') ? 'has-error' : ''}">
+						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${scottHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="scottNumbers" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_scott}">
 									Scott
@@ -293,7 +316,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice') or #fields.hasErrors('yvertCurrency') ? 'has-error' : ''}">
+						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${yvertHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="yvertNumbers" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_yvert}">
 									Yvert
@@ -326,7 +349,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice') or #fields.hasErrors('gibbonsCurrency') ? 'has-error' : ''}">
+						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${gibbonsHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="gibbonsNumbers" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_sg}">
 									Gibbons
@@ -359,7 +382,15 @@
 							</div>
 						</div>
 						
-						<div class="form-group" th:classappend="${#fields.hasErrors('comment') ? 'has-error' : ''}" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+							<div class="col-sm-offset-3 col-sm-5">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
+									Add comment
+								</a>
+							</div>
+						</div>
+						
+						<div class="form-group collapse js-comment" th:classappend="${#fields.hasErrors('comment') ? 'has-error in' : ''}" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<label for="comment" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_comment}">
 									Comment
@@ -418,6 +449,13 @@
 					$(this).val(function(idx, val) {
 						return CatalogUtils.expandNumbers(val);
 					});
+				});
+				
+				$('.collapse').on('show.bs.collapse hide.bs.collapse', function toggleChevron() {
+					$(this)
+						.prev('.js-collapse-toggle-header')
+						.find('.glyphicon')
+						.toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
 				});
 			});
 		</script>
