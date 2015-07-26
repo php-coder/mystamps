@@ -167,7 +167,7 @@ public class SeriesController {
 		return "series/info";
 	}
 	
-	@RequestMapping(value = Url.INFO_SERIES_PAGE, method = RequestMethod.POST)
+	@RequestMapping(value = Url.ADD_IMAGE_SERIES_PAGE, method = RequestMethod.POST)
 	public String processImage(
 			@Validated({ Default.class, AddImageForm.ImageChecks.class }) AddImageForm form,
 			BindingResult result,
@@ -198,7 +198,11 @@ public class SeriesController {
 		
 		seriesService.addImageToSeries(form, series, currentUser);
 		
-		return "series/info";
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(series.getId())
+			.toString();
+		
+		return "redirect:" + dstUrl;
 	}
 	
 	@RequestMapping(

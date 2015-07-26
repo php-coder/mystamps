@@ -49,6 +49,7 @@ public final class Url {
 	
 	public static final String ADD_SERIES_PAGE       = "/series/add";
 	public static final String INFO_SERIES_PAGE      = "/series/{id}";
+	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{id}/{slug}";
@@ -97,6 +98,7 @@ public final class Url {
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
+		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
