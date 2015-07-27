@@ -68,4 +68,8 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers("09-5")).toEqual("09-5");
 	});
 	
+	it("should return '854,855,856,146' for '854-856, 146'", function() {
+		expect(CatalogUtils.expandNumbers("854-856, 146")).toEqual("854,855,856,146");
+	});
+	
 });

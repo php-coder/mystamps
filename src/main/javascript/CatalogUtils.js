@@ -10,11 +10,11 @@ var CatalogUtils = {
 			return input;
 		}
 		
-		if (! /^[0-9]+-[0-9]+(,[0-9]+(-[0-9]+)?)*$/.test(input)) {
+		if (! /^[0-9]+-[0-9]+(,[ ]*[0-9]+(-[0-9]+)?)*$/.test(input)) {
 			return input;
 		}
 		
-		var ranges = input.split(','),
+		var ranges = input.replace(' ', '').split(','),
 			result = [];
 		// TODO: use jQuery.each() + jQuery.map()
 		for (var i = 0; i < ranges.length; i++) {
