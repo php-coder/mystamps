@@ -34,6 +34,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
+import ru.mystamps.web.validation.jsr303.ImageFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 import ru.mystamps.web.validation.jsr303.NotNullIfFirstField;
@@ -141,6 +142,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	@NotNull
 	@NotEmptyFilename(groups = Image1Checks.class)
 	@NotEmptyFile(groups = Image2Checks.class)
+	@ImageFile(groups = Image3Checks.class)
 	private MultipartFile image;
 	
 	
@@ -198,7 +200,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	
 	@GroupSequence({
 		Image1Checks.class,
-		Image2Checks.class
+		Image2Checks.class,
+		Image3Checks.class
 	})
 	public interface ImageChecks {
 	}
@@ -207,6 +210,9 @@ public class AddSeriesForm implements AddSeriesDto {
 	}
 	
 	public interface Image2Checks {
+	}
+	
+	public interface Image3Checks {
 	}
 	
 }

@@ -26,6 +26,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddImageDto;
+import ru.mystamps.web.validation.jsr303.ImageFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 
@@ -36,11 +37,13 @@ public class AddImageForm implements AddImageDto {
 	@NotNull
 	@NotEmptyFilename(groups = Image1Checks.class)
 	@NotEmptyFile(groups = Image2Checks.class)
+	@ImageFile(groups = Image3Checks.class)
 	private MultipartFile image;
 	
 	@GroupSequence({
 		Image1Checks.class,
-		Image2Checks.class
+		Image2Checks.class,
+		Image3Checks.class
 	})
 	public interface ImageChecks {
 	}
@@ -49,6 +52,9 @@ public class AddImageForm implements AddImageDto {
 	}
 	
 	public interface Image2Checks {
+	}
+	
+	public interface Image3Checks {
 	}
 	
 }
