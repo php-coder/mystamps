@@ -33,6 +33,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,6 +51,7 @@ public class MailServiceImpl implements MailService {
 	private final boolean testMode;
 	
 	@Override
+	@Async
 	public void sendActivationKeyToUser(UsersActivation activation) {
 		Validate.isTrue(activation != null, "Activation must be non null");
 		Validate.isTrue(activation.getEmail() != null, "E-mail must be non null");
