@@ -814,7 +814,7 @@
 	</licenses>
 	
 	<prerequisites>
-		<maven>2.2.1</maven>
+		<maven>3.2.1</maven>
 	</prerequisites>
 	
 	<scm>
