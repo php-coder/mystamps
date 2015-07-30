@@ -94,13 +94,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
 				.and()
 			.csrf()
-				// Allow unsecured requests to Togglz and H2 consoles.
-				// See also: https://github.com/togglz/togglz/issues/119
+				// Allow unsecured requests to H2 consoles.
 				// See also: src/main/java/ru/mystamps/web/support/h2/H2Config.java
-				// See also: src/main/java/ru/mystamps/web/support/togglz/TogglzConfig.java
-				.requireCsrfProtectionMatcher(
-					new AllExceptUrlsStartedWith(Url.TOGGLZ_CONSOLE_PAGE, "/console")
-				)
+				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/console"))
 			.and()
 			.rememberMe()
 				// TODO: GH #27

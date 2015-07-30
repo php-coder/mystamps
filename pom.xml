@@ -32,7 +32,7 @@
 		<commons.lang.version>3.3.2</commons.lang.version>
 		<commons.io.version>2.4</commons.io.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<togglz.version>2.1.0.Final</togglz.version>
+		<togglz.version>2.2.0.Final</togglz.version>
 		
 		<!--
 			Also don't forget to change version in:
@@ -281,7 +281,7 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-spring</artifactId>
+			<artifactId>togglz-spring-core</artifactId>
 			<version>${togglz.version}</version>
 			<scope>runtime</scope>
 		</dependency>
