@@ -101,7 +101,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		try (InputStream stream = file.getInputStream()) {
 			
 			byte[] firstPart = readFourBytes(stream);
-			if (firstPart != null) {
+			if (firstPart == null) {
 				LOG.warn("Failed to read 4 bytes from file");
 				return false;
 			}
