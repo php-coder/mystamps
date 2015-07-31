@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.validation.BindingResult;
 
@@ -63,7 +64,11 @@ public class CountryController {
 	}
 	
 	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.POST)
-	public String processInput(@Valid AddCountryForm form, BindingResult result, User currentUser) {
+	public String processInput(
+		@Valid AddCountryForm form,
+		BindingResult result,
+		User currentUser,
+		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
@@ -74,6 +79,8 @@ public class CountryController {
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
 			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())
 			.toString();
+		
+		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
 		return "redirect:" + dstUrl;
 	}

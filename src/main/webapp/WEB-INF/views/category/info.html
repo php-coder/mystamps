@@ -55,6 +55,15 @@
 						Animals
 					</h3>
 					
+					<!--/*/
+					<div class="row" th:if="${justAddedCategory}">
+						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_category_just_added(@{${ADD_SERIES_PAGE}})}">
+							Category has been added.<br />
+							Now you could <a href="../series/add.html" class="alert-link">proceed with creating series</a>.
+						</div>
+					</div>
+					/*/-->
+					
 					<ul th:if="${not #lists.isEmpty(seriesOfCategory)}" th:remove="all-but-first">
 						<li th:each="series: ${seriesOfCategory}">
 							<span th:if="${series.country.id != null}" th:remove="tag">

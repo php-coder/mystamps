@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.validation.BindingResult;
 
@@ -66,7 +67,8 @@ public class CategoryController {
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
-		User currentUser) {
+		User currentUser,
+		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
@@ -77,6 +79,8 @@ public class CategoryController {
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
 			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())
 			.toString();
+		
+		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
 		return "redirect:" + dstUrl;
 	}

@@ -55,6 +55,15 @@
 						Italy
 					</h3>
 					
+					<!--/*/
+					<div class="row" th:if="${justAddedCountry}">
+						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_country_just_added(@{${ADD_SERIES_PAGE}})}">
+							Country has been added.<br />
+							Now you could <a href="../series/add.html" class="alert-link">proceed with creating series</a>.
+						</div>
+					</div>
+					/*/-->
+					
 					<ul th:if="${not #lists.isEmpty(seriesOfCountry)}" th:remove="all-but-first">
 						<li th:each="series : ${seriesOfCountry}">
 							<span th:if="${series.category.id != null}" th:remove="tag">
