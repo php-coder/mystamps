@@ -66,10 +66,10 @@
 					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html"
 						th:action="@{${ADD_SERIES_PAGE}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}"
 						th:object="${addSeriesForm}"
-						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice') or #fields.hasErrors('michelCurrency')},
-							scottHasErrors=${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice') or #fields.hasErrors('scottCurrency')},
-							yvertHasErrors=${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice') or #fields.hasErrors('yvertCurrency')},
-							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice') or #fields.hasErrors('gibbonsCurrency')},
+						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice')},
+							scottHasErrors=${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice')},
+							yvertHasErrors=${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice')},
+							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice')},
 							showCatalogsInfo=${michelHasErrors or scottHasErrors or yvertHasErrors or gibbonsHasErrors}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
@@ -283,21 +283,13 @@
 										<input type="text" class="form-control" size="5" th:field="*{michelPrice}" />
 									</div>
 									<div class="col-xs-3">
-										<select class="form-control" th:field="*{michelCurrency}">
-											<!--/*/
-											<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
-											/*/-->
-											<!--/*-->
+										<select class="form-control" disabled="disabled">
 											<option value="EUR">EUR</option>
-											<option value="RUR">RUR</option>
-											<option value="USD">USD</option>
-											<!--*/-->
 										</select>
 									</div>
 								</div>
 								<span id="michelNumbers.errors" class="help-block" th:if="${#fields.hasErrors('michelNumbers')}" th:each="error : ${#fields.errors('michelNumbers')}" th:text="${error}"></span>
 								<span id="michelPrice.errors" class="help-block" th:if="${#fields.hasErrors('michelPrice')}" th:each="error : ${#fields.errors('michelPrice')}" th:text="${error}"></span>
-								<span id="michelCurrency.errors" class="help-block" th:if="${#fields.hasErrors('michelCurrency')}" th:each="error : ${#fields.errors('michelCurrency')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
@@ -316,21 +308,13 @@
 										<input type="text" class="form-control" size="5" th:field="*{scottPrice}" />
 									</div>
 									<div class="col-xs-3">
-										<select class="form-control" th:field="*{scottCurrency}">
-											<!--/*/
-											<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
-											/*/-->
-											<!--/*-->
-											<option value="EUR">EUR</option>
-											<option value="RUR">RUR</option>
+										<select class="form-control" disabled="disabled">
 											<option value="USD">USD</option>
-											<!--*/-->
 										</select>
 									</div>
 								</div>
 								<span id="scottNumbers.errors" class="help-block" th:if="${#fields.hasErrors('scottNumbers')}" th:each="error : ${#fields.errors('scottNumbers')}" th:text="${error}"></span>
 								<span id="scottPrice.errors" class="help-block" th:if="${#fields.hasErrors('scottPrice')}" th:each="error : ${#fields.errors('scottPrice')}" th:text="${error}"></span>
-								<span id="scottCurrency.errors" class="help-block" th:if="${#fields.hasErrors('scottCurrency')}" th:each="error : ${#fields.errors('scottCurrency')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
@@ -349,21 +333,13 @@
 										<input type="text" class="form-control" size="5" th:field="*{yvertPrice}" />
 									</div>
 									<div class="col-xs-3">
-										<select class="form-control" th:field="*{yvertCurrency}">
-											<!--/*/
-											<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
-											/*/-->
-											<!--/*-->
+										<select class="form-control" disabled="disabled">
 											<option value="EUR">EUR</option>
-											<option value="RUR">RUR</option>
-											<option value="USD">USD</option>
-											<!--*/-->
 										</select>
 									</div>
 								</div>
 								<span id="yvertNumbers.errors" class="help-block" th:if="${#fields.hasErrors('yvertNumbers')}" th:each="error : ${#fields.errors('yvertNumbers')}" th:text="${error}"></span>
 								<span id="yvertPrice.errors" class="help-block" th:if="${#fields.hasErrors('yvertPrice')}" th:each="error : ${#fields.errors('yvertPrice')}" th:text="${error}"></span>
-								<span id="yvertCurrency.errors" class="help-block" th:if="${#fields.hasErrors('yvertCurrency')}" th:each="error : ${#fields.errors('yvertCurrency')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
@@ -382,21 +358,13 @@
 										<input type="text" class="form-control" size="5" th:field="*{gibbonsPrice}" />
 									</div>
 									<div class="col-xs-3">
-										<select class="form-control" th:field="*{gibbonsCurrency}">
-											<!--/*/
-											<option th:each="currency: ${T(ru.mystamps.web.entity.Currency).values()}" th:value="${currency}" th:text="${currency}"></option>
-											/*/-->
-											<!--/*-->
-											<option value="EUR">EUR</option>
-											<option value="RUR">RUR</option>
-											<option value="USD">USD</option>
-											<!--*/-->
+										<select class="form-control" disabled="disabled">
+											<option value="GBP">GBP</option>
 										</select>
 									</div>
 								</div>
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
 								<span id="gibbonsPrice.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
-								<span id="gibbonsCurrency.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsCurrency')}" th:each="error : ${#fields.errors('gibbonsCurrency')}" th:text="${error}"></span>
 							</div>
 						</div>
 						

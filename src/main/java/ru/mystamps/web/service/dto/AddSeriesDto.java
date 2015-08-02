@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
 
 public interface AddSeriesDto {
 	Category getCategory();
@@ -36,19 +35,15 @@ public interface AddSeriesDto {
 	
 	String getMichelNumbers();
 	BigDecimal getMichelPrice();
-	Currency getMichelCurrency();
 	
 	String getScottNumbers();
 	BigDecimal getScottPrice();
-	Currency getScottCurrency();
 	
 	String getYvertNumbers();
 	BigDecimal getYvertPrice();
-	Currency getYvertCurrency();
 	
 	String getGibbonsNumbers();
 	BigDecimal getGibbonsPrice();
-	Currency getGibbonsCurrency();
 	
 	String getComment();
 	MultipartFile getImage();

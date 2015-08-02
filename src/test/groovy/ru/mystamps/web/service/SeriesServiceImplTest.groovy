@@ -226,24 +226,12 @@ class SeriesServiceImplTest extends Specification {
 			}) >> TestObjects.createSeries()
 	}
 	
-	def "add() should throw exception if michel price specified without currency"() {
-		given:
-			form.setMichelPrice(ANY_PRICE)
-		and:
-			form.setMichelCurrency(null)
-		when:
-			service.add(form, user, false)
-		then:
-			thrown IllegalArgumentException
-	}
-	
 	def "add() should pass michel price to series dao"() {
 		given:
 			BigDecimal expectedPrice = ANY_PRICE
 			form.setMichelPrice(expectedPrice)
 		and:
-			Currency expectedCurrency = Currency.RUR
-			form.setMichelCurrency(expectedCurrency)
+			Currency expectedCurrency = Currency.EUR
 		when:
 			service.add(form, user, false)
 		then:
@@ -257,8 +245,6 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass null to series dao if michel price is null"() {
 		given:
 			form.setMichelPrice(null)
-		and:
-			form.setMichelCurrency(null)
 		when:
 			service.add(form, user, false)
 		then:
@@ -296,24 +282,12 @@ class SeriesServiceImplTest extends Specification {
 			}) >> TestObjects.createSeries()
 	}
 	
-	def "add() should throw exception if scott price specified without currency"() {
-		given:
-			form.setScottPrice(ANY_PRICE)
-		and:
-			form.setScottCurrency(null)
-		when:
-			service.add(form, user, false)
-		then:
-			thrown IllegalArgumentException
-	}
-	
 	def "add() should pass scott price to series dao"() {
 		given:
 			BigDecimal expectedPrice = ANY_PRICE
 			form.setScottPrice(expectedPrice)
 		and:
-			Currency expectedCurrency = Currency.RUR
-			form.setScottCurrency(expectedCurrency)
+			Currency expectedCurrency = Currency.USD
 		when:
 			service.add(form, user, false)
 		then:
@@ -327,8 +301,6 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass null to series dao if scott price is null"() {
 		given:
 			form.setScottPrice(null)
-		and:
-			form.setScottCurrency(null)
 		when:
 			service.add(form, user, false)
 		then:
@@ -366,24 +338,12 @@ class SeriesServiceImplTest extends Specification {
 			}) >> TestObjects.createSeries()
 	}
 	
-	def "add() should throw exception if yvert price specified without currency"() {
-		given:
-			form.setYvertPrice(ANY_PRICE)
-		and:
-			form.setYvertCurrency(null)
-		when:
-			service.add(form, user, false)
-		then:
-			thrown IllegalArgumentException
-	}
-	
 	def "add() should pass yvert price to series dao"() {
 		given:
 			BigDecimal expectedPrice = ANY_PRICE
 			form.setYvertPrice(expectedPrice)
 		and:
-			Currency expectedCurrency = Currency.RUR
-			form.setYvertCurrency(expectedCurrency)
+			Currency expectedCurrency = Currency.EUR
 		when:
 			service.add(form, user, false)
 		then:
@@ -397,8 +357,6 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass null to series dao if yvert price is null"() {
 		given:
 			form.setYvertPrice(null)
-		and:
-			form.setYvertCurrency(null)
 		when:
 			service.add(form, user, false)
 		then:
@@ -436,24 +394,12 @@ class SeriesServiceImplTest extends Specification {
 			}) >> TestObjects.createSeries()
 	}
 	
-	def "add() should throw exception if gibbons price specified without currency"() {
-		given:
-			form.setGibbonsPrice(ANY_PRICE)
-		and:
-			form.setGibbonsCurrency(null)
-		when:
-			service.add(form, user, false)
-		then:
-			thrown IllegalArgumentException
-	}
-	
 	def "add() should pass gibbons price to series dao"() {
 		given:
 			BigDecimal expectedPrice = ANY_PRICE
 			form.setGibbonsPrice(expectedPrice)
 		and:
-			Currency expectedCurrency = Currency.RUR
-			form.setGibbonsCurrency(expectedCurrency)
+			Currency expectedCurrency = Currency.GBP
 		when:
 			service.add(form, user, false)
 		then:
@@ -467,8 +413,6 @@ class SeriesServiceImplTest extends Specification {
 	def "add() should pass null to series dao if gibbons price is null"() {
 		given:
 			form.setGibbonsPrice(null)
-		and:
-			form.setGibbonsCurrency(null)
 		when:
 			service.add(form, user, false)
 		then:

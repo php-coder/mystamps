@@ -31,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
-import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.ImageFile;
@@ -63,18 +62,6 @@ import lombok.Setter;
 	),
 	@NotNullIfFirstField(
 		first = "day", second = "month", message = "{day.requires.month}"
-	),
-	@NotNullIfFirstField(
-		first = "michelPrice", second = "michelCurrency", message = "{currency.required}"
-	),
-	@NotNullIfFirstField(
-		first = "scottPrice", second = "scottCurrency", message = "{currency.required}"
-	),
-	@NotNullIfFirstField(
-		first = "yvertPrice", second = "yvertCurrency", message = "{currency.required}"
-	),
-	@NotNullIfFirstField(
-		first = "gibbonsPrice", second = "gibbonsCurrency", message = "{currency.required}"
 	)
 })
 public class AddSeriesForm implements AddSeriesDto {
@@ -107,16 +94,12 @@ public class AddSeriesForm implements AddSeriesDto {
 	@Price
 	private BigDecimal michelPrice;
 	
-	private Currency michelCurrency;
-	
 	@CatalogNumbers(groups = ScottCatalog1Checks.class)
 	@UniqueScottNumbers(groups = ScottCatalog2Checks.class)
 	private String scottNumbers;
 	
 	@Price
 	private BigDecimal scottPrice;
-	
-	private Currency scottCurrency;
 	
 	@CatalogNumbers(groups = YvertCatalog1Checks.class)
 	@UniqueYvertNumbers(groups = YvertCatalog2Checks.class)
@@ -125,16 +108,12 @@ public class AddSeriesForm implements AddSeriesDto {
 	@Price
 	private BigDecimal yvertPrice;
 	
-	private Currency yvertCurrency;
-	
 	@CatalogNumbers(groups = GibbonsCatalog1Checks.class)
 	@UniqueGibbonsNumbers(groups = GibbonsCatalog2Checks.class)
 	private String gibbonsNumbers;
 	
 	@Price
 	private BigDecimal gibbonsPrice;
-	
-	private Currency gibbonsCurrency;
 	
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
 	private String comment;

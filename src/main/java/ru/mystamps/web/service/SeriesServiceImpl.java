@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.MichelCatalog;
@@ -88,16 +89,16 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setPerforated(dto.getPerforated());
 		
 		series.setMichel(getCatalogNumbersOrNull(dto.getMichelNumbers(), MichelCatalog.class));
-		series.setMichelPrice(Price.valueOf(dto.getMichelPrice(), dto.getMichelCurrency()));
+		series.setMichelPrice(Price.valueOf(dto.getMichelPrice(), Currency.EUR));
 		
 		series.setScott(getCatalogNumbersOrNull(dto.getScottNumbers(), ScottCatalog.class));
-		series.setScottPrice(Price.valueOf(dto.getScottPrice(), dto.getScottCurrency()));
+		series.setScottPrice(Price.valueOf(dto.getScottPrice(), Currency.USD));
 		
 		series.setYvert(getCatalogNumbersOrNull(dto.getYvertNumbers(), YvertCatalog.class));
-		series.setYvertPrice(Price.valueOf(dto.getYvertPrice(), dto.getYvertCurrency()));
+		series.setYvertPrice(Price.valueOf(dto.getYvertPrice(), Currency.EUR));
 		
 		series.setGibbons(getCatalogNumbersOrNull(dto.getGibbonsNumbers(), GibbonsCatalog.class));
-		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), dto.getGibbonsCurrency()));
+		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), Currency.GBP));
 		
 		Image image = imageService.save(dto.getImage());
 		series.setImages(Collections.singleton(image));

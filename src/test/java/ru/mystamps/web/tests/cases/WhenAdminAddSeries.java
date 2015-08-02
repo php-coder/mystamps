@@ -35,7 +35,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
@@ -57,8 +56,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	private static final int SINCE_YEAR     = 1840;
 	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
-	private static final List<String> EXPECTED_CURRENCIES = new ArrayList<>();
-	
 	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
@@ -72,10 +69,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		// years in reverse order
 		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
 			EXPECTED_YEARS.add(String.valueOf(i));
-		}
-		
-		for (Currency currency : Currency.values()) {
-			EXPECTED_CURRENCIES.add(currency.toString());
 		}
 		
 		try {
@@ -350,26 +343,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void michelCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
-		assertThat(page.getMichelCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void scottCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
-		assertThat(page.getScottCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void yvertCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
-		assertThat(page.getYvertCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void gibbonsCurrencyFieldShouldHaveOptionsWithAllCurrencies() {
-		assertThat(page.getGibbonsCurrencies()).isEqualTo(EXPECTED_CURRENCIES);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
 	public void michelNumbersShouldBeStripedFromSpaces() {
 		page.fillMichelNumbers(" 1 , 2 ");
 		
@@ -463,19 +436,15 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		
 		page.fillMichelNumbers("101, 102, 103");
 		page.fillMichelPrice("10.5");
-		page.fillMichelCurrency("EUR");
 		
 		page.fillScottNumbers("110, 111, 112");
 		page.fillScottPrice("1000");
-		page.fillScottCurrency("USD");
 		
 		page.fillYvertNumbers("120, 121, 122");
 		page.fillYvertPrice("8.11");
-		page.fillYvertCurrency("USD");
 		
 		page.fillGibbonsNumbers("130, 131, 132");
 		page.fillGibbonsPrice("400.335");
-		page.fillGibbonsCurrency("RUR");
 		
 		page.fillComment(expectedComment);
 		page.fillImage(SAMPLE_IMAGE_PATH);
@@ -499,9 +468,9 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		
 		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#101-103 (10.5 EUR)");
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#110-112 (1000 USD)");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#120-122 (8.11 USD)");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#120-122 (8.11 EUR)");
 		// TODO: disable rounding mode
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#130-132 (400.34 RUR)");
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#130-132 (400.34 GBP)");
 		
 		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
