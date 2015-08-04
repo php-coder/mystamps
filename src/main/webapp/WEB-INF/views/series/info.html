@@ -96,13 +96,11 @@
 											  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
 											  th:remove="tag">
 											01.
-										</span>
-										<span th:if="${series.releaseMonth != null}"
+										</span><span th:if="${series.releaseMonth != null}"
 											  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
 											  th:remove="tag">
 											02.
-										</span>
-										<span th:if="${series.releaseYear != null}"
+										</span><span th:if="${series.releaseYear != null}"
 											  th:text="${series.releaseYear}"
 											  th:remove="tag">
 											1999
