@@ -10,7 +10,7 @@ var CatalogUtils = {
 			return input;
 		}
 		
-		if (! /^[0-9]+-[0-9]+(,[ ]*[0-9]+(-[0-9]+)?)*$/.test(input)) {
+		if (! /^\s*[0-9]+-[0-9]+(,[ ]*[0-9]+(-[0-9]+)?)*\s*$/.test(input)) {
 			return input;
 		}
 		

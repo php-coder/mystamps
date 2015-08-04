@@ -72,4 +72,12 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers("854-856, 146")).toEqual("854,855,856,146");
 	});
 	
+	it("should return '4596,4597,4598' for ' 4596-8'", function() {
+		expect(CatalogUtils.expandNumbers(" 4596-8")).toEqual("4596,4597,4598");
+	});
+	
+	it("should return '4596,4597,4598' for '4596-8 '", function() {
+		expect(CatalogUtils.expandNumbers("4596-8 ")).toEqual("4596,4597,4598");
+	});
+	
 });
