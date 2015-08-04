@@ -80,4 +80,12 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers("4596-8 ")).toEqual("4596,4597,4598");
 	});
 	
+	it("should return '1,2,3' for '1/3'", function() {
+		expect(CatalogUtils.expandNumbers("1/3")).toEqual("1,2,3");
+	});
+	
+	it("should return '1,2,3,4,5,6' for '1/3, 4-6'", function() {
+		expect(CatalogUtils.expandNumbers("1/3, 4-6")).toEqual("1,2,3,4,5,6");
+	});
+	
 });

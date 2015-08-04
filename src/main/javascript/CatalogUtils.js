@@ -6,11 +6,11 @@ var CatalogUtils = {
 			return input;
 		}
 		
-		if (input.indexOf('-') < 0) {
+		if (input.indexOf('-') < 0 && input.indexOf('/') < 0) {
 			return input;
 		}
 		
-		if (! /^\s*[0-9]+-[0-9]+(,[ ]*[0-9]+(-[0-9]+)?)*\s*$/.test(input)) {
+		if (! /^\s*[0-9]+[-\/][0-9]+(,[ ]*[0-9]+([-\/][0-9]+)?)*\s*$/.test(input)) {
 			return input;
 		}
 		
@@ -27,7 +27,7 @@ var CatalogUtils = {
 	
 	/** @private */
 	expandRange: function(range) {
-		var parts = range.split('-');
+		var parts = range.split(/[-\/]/);
 		if (parts.length != 2) {
 			return range;
 		}
