@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Optional;
+
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
@@ -32,8 +34,14 @@ public interface JdbcSeriesDao {
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);
 	long countStampsOfCollection(Integer collectionId);
+	
 	long countByMichelNumberCode(String michelNumber);
 	long countByScottNumberCode(String scottNumber);
 	long countByYvertNumberCode(String yvertNumber);
 	long countByGibbonsNumberCode(String gibbonsNumber);
+	
+	Optional<Integer> findSeriesIdByMichelNumberCode(String michelNumber);
+	Optional<Integer> findSeriesIdByScottNumberCode(String scottNumber);
+	Optional<Integer> findSeriesIdByYvertNumberCode(String yvertNumber);
+	Optional<Integer> findSeriesIdByGibbonsNumberCode(String gibbonsNumber);
 }

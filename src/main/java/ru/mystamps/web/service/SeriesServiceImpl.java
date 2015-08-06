@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -212,6 +213,45 @@ public class SeriesServiceImpl implements SeriesService {
 		);
 		
 		return jdbcSeriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Integer> findSeriesIdByMichelNumber(String michelNumberCode) {
+		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
+		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
+		
+		return jdbcSeriesDao.findSeriesIdByMichelNumberCode(michelNumberCode);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Integer> findSeriesIdByScottNumber(String scottNumberCode) {
+		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
+		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
+		
+		return jdbcSeriesDao.findSeriesIdByScottNumberCode(scottNumberCode);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode) {
+		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
+		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
+		
+		return jdbcSeriesDao.findSeriesIdByYvertNumberCode(yvertNumberCode);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode) {
+		Validate.isTrue(gibbonsNumberCode != null, "Gibbons number code must be non null");
+		Validate.isTrue(
+			!gibbonsNumberCode.trim().isEmpty(),
+			"Gibbons number code must be non empty"
+		);
+		
+		return jdbcSeriesDao.findSeriesIdByGibbonsNumberCode(gibbonsNumberCode);
 	}
 	
 	@Override

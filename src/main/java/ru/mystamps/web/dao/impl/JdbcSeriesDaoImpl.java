@@ -20,9 +20,11 @@ package ru.mystamps.web.dao.impl;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,7 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 @RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
@@ -82,6 +84,18 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.count_stamps_by_gibbons_number}")
 	private String countStampsByGibbonsNumberSql;
+	
+	@Value("${series.find_series_id_by_michel_number}")
+	private String findSeriesIdByMichelNumberSql;
+	
+	@Value("${series.find_series_id_by_scott_number}")
+	private String findSeriesIdByScottNumberSql;
+	
+	@Value("${series.find_series_id_by_yvert_number}")
+	private String findSeriesIdByYvertNumberSql;
+	
+	@Value("${series.find_series_id_by_gibbons_number}")
+	private String findSeriesIdByGibbonsNumberSql;
 	
 	@Override
 	public Iterable<SitemapInfoDto> findAllForSitemap() {
@@ -199,6 +213,66 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 			Collections.singletonMap("gibbons_number", gibbonsNumber),
 			Long.class
 		);
+	}
+	
+	@Override
+	public Optional<Integer> findSeriesIdByMichelNumberCode(String michelNumber) {
+		try {
+			Integer seriesId = jdbcTemplate.queryForObject(
+				findSeriesIdByMichelNumberSql,
+				Collections.singletonMap("michel_number", michelNumber),
+				Integer.class
+			);
+			return Optional.of(seriesId);
+			
+		} catch (EmptyResultDataAccessException ignored) {
+			return Optional.empty();
+		}
+	}
+	
+	@Override
+	public Optional<Integer> findSeriesIdByScottNumberCode(String scottNumber) {
+		try {
+			Integer seriesId = jdbcTemplate.queryForObject(
+				findSeriesIdByScottNumberSql,
+				Collections.singletonMap("scott_number", scottNumber),
+				Integer.class
+			);
+			return Optional.of(seriesId);
+			
+		} catch (EmptyResultDataAccessException ignored) {
+			return Optional.empty();
+		}
+	}
+	
+	@Override
+	public Optional<Integer> findSeriesIdByYvertNumberCode(String yvertNumber) {
+		try {
+			Integer seriesId = jdbcTemplate.queryForObject(
+				findSeriesIdByYvertNumberSql,
+				Collections.singletonMap("yvert_number", yvertNumber),
+				Integer.class
+			);
+			return Optional.of(seriesId);
+			
+		} catch (EmptyResultDataAccessException ignored) {
+			return Optional.empty();
+		}
+	}
+	
+	@Override
+	public Optional<Integer> findSeriesIdByGibbonsNumberCode(String gibbonsNumber) {
+		try {
+			Integer seriesId = jdbcTemplate.queryForObject(
+				findSeriesIdByGibbonsNumberSql,
+				Collections.singletonMap("gibbons_number", gibbonsNumber),
+				Integer.class
+			);
+			return Optional.of(seriesId);
+			
+		} catch (EmptyResultDataAccessException ignored) {
+			return Optional.empty();
+		}
 	}
 	
 }

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Optional;
+
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
@@ -36,10 +38,17 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Collection collection);
 	long countStampsOf(Collection collection);
+	
 	long countByMichelNumber(String michelNumberCode);
 	long countByScottNumber(String scottNumberCode);
 	long countByYvertNumber(String yvertNumberCode);
 	long countByGibbonsNumber(String gibbonsNumberCode);
+	
+	Optional<Integer> findSeriesIdByMichelNumber(String michelNumberCode);
+	Optional<Integer> findSeriesIdByScottNumber(String scottNumberCode);
+	Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode);
+	Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode);
+	
 	Iterable<SeriesInfoDto> findBy(Category category, String lang);
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);

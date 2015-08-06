@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,7 @@ import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
 @RequiredArgsConstructor
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 public class SeriesController {
 	
 	private static final Integer SINCE_YEAR     = 1840;
@@ -252,6 +254,78 @@ public class SeriesController {
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
+		
+		return "redirect:" + dstUrl;
+	}
+	
+	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
+	public String findSeriesByMichel(@PathVariable("num") String michelNumberCode) {
+		if (michelNumberCode == null) {
+			throw new NotFoundException();
+		}
+		
+		Optional<Integer> seriesId = seriesService.findSeriesIdByMichelNumber(michelNumberCode);
+		if (!seriesId.isPresent()) {
+			throw new NotFoundException();
+		}
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(seriesId.get())
+			.toString();
+		
+		return "redirect:" + dstUrl;
+	}
+	
+	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
+	public String findSeriesByScott(@PathVariable("num") String scottNumberCode) {
+		if (scottNumberCode == null) {
+			throw new NotFoundException();
+		}
+		
+		Optional<Integer> seriesId = seriesService.findSeriesIdByScottNumber(scottNumberCode);
+		if (!seriesId.isPresent()) {
+			throw new NotFoundException();
+		}
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(seriesId.get())
+			.toString();
+		
+		return "redirect:" + dstUrl;
+	}
+	
+	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
+	public String findSeriesByYvert(@PathVariable("num") String yvertNumberCode) {
+		if (yvertNumberCode == null) {
+			throw new NotFoundException();
+		}
+		
+		Optional<Integer> seriesId = seriesService.findSeriesIdByYvertNumber(yvertNumberCode);
+		if (!seriesId.isPresent()) {
+			throw new NotFoundException();
+		}
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(seriesId.get())
+			.toString();
+		
+		return "redirect:" + dstUrl;
+	}
+	
+	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
+	public String findSeriesByGibbons(@PathVariable("num") String gibbonsNumberCode) {
+		if (gibbonsNumberCode == null) {
+			throw new NotFoundException();
+		}
+		
+		Optional<Integer> seriesId = seriesService.findSeriesIdByGibbonsNumber(gibbonsNumberCode);
+		if (!seriesId.isPresent()) {
+			throw new NotFoundException();
+		}
+		
+		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
+			.buildAndExpand(seriesId.get())
+			.toString();
 		
 		return "redirect:" + dstUrl;
 	}
