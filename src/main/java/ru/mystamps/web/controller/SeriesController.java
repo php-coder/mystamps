@@ -140,11 +140,7 @@ public class SeriesController {
 			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
 		Integer seriesId = seriesService.add(form, currentUser, userCanAddComments);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(seriesId)
-			.toString();
-		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
 	
 	@RequestMapping(Url.INFO_SERIES_PAGE)
@@ -200,11 +196,7 @@ public class SeriesController {
 		
 		seriesService.addImageToSeries(form, series, currentUser);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(series.getId())
-			.toString();
-		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
 	
 	@RequestMapping(
@@ -223,14 +215,10 @@ public class SeriesController {
 		
 		Collection collection = collectionService.addToCollection(currentUser, series);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
-			.buildAndExpand(collection.getId(), collection.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", series.getId());
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
 	
 	@RequestMapping(
@@ -249,13 +237,9 @@ public class SeriesController {
 		
 		Collection collection = collectionService.removeFromCollection(currentUser, series);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COLLECTION_PAGE)
-			.buildAndExpand(collection.getId(), collection.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
@@ -269,11 +253,7 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(seriesId.get())
-			.toString();
-		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
@@ -287,11 +267,7 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(seriesId.get())
-			.toString();
-		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
@@ -305,11 +281,7 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(seriesId.get())
-			.toString();
-		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
@@ -323,8 +295,12 @@ public class SeriesController {
 			throw new NotFoundException();
 		}
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_SERIES_PAGE)
-			.buildAndExpand(seriesId.get())
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+	}
+	
+	private static String redirectTo(String url, Object... args) {
+		String dstUrl = UriComponentsBuilder.fromUriString(url)
+			.buildAndExpand(args)
 			.toString();
 		
 		return "redirect:" + dstUrl;
