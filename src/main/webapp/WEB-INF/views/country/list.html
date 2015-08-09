@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title th:text="|MyStamps: #{t_country_list}|">MyStamps: country list</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}">
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div id="logo" class="col-sm-10">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div>
+				
+				<div id="user_bar" class="col-sm-2">
+					<ul class="list-unstyled">
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="glyphicon glyphicon-user"></i>
+							<a sec:authentication="principal.user.name"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
+								John Doe
+							</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+							</form>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div id="content" class="col-sm-12" th:with="country_list=#{t_country_list}">
+					<h3 th:text="${#strings.capitalize(country_list)}">
+						Country list
+					</h3>
+					
+					<ul th:if="${not #lists.isEmpty(countries)}">
+						<li th:each="country : ${countries}">
+							<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${country.id},slug=${country.slug})}" th:text="${country.name}">Italy</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<footer class="col-sm-12 text-right">
+					<i class="glyphicon glyphicon-envelope"></i>
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2015
+				</footer>
+			</div>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>

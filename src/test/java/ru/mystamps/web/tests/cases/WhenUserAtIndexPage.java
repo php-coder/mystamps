@@ -91,6 +91,13 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 			.isFalse();
 	}
 	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void shouldExistsLinkForListingCountries() {
+		assertThat(page.linkWithLabelExists(tr("t_show_countries_list")))
+			.overridingErrorMessage("should exists link to page for listing countries")
+			.isTrue();
+	}
+	
 	@Override
 	protected void shouldHaveUserBar() {
 		// Ignore this check because when user authenticated there is no links for login/register.

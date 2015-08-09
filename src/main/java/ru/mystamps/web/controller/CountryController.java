@@ -100,5 +100,11 @@ public class CountryController {
 		return "country/info";
 	}
 	
+	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
+	public void list(Model model, Locale userLocale) {
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute("countries", countryService.findAllAsLinkEntities(lang));
+	}
+	
 }
 

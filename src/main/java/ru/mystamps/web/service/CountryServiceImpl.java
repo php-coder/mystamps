@@ -37,6 +37,7 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -85,6 +86,12 @@ public class CountryServiceImpl implements CountryService {
 	@Transactional(readOnly = true)
 	public Iterable<SelectEntityDto> findAll(String lang) {
 		return jdbcCountryDao.findAllAsSelectEntries(lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+		return jdbcCountryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override

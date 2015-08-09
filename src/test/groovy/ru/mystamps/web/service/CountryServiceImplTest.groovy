@@ -26,6 +26,7 @@ import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
+import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SelectEntityDto
 import ru.mystamps.web.service.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
@@ -213,6 +214,40 @@ class CountryServiceImplTest extends Specification {
 			service.findAll(expectedLanguage)
 		then:
 			1 * jdbcCountryDao.findAllAsSelectEntries({ String language ->
+				assert language == expectedLanguage
+				return true
+			})
+		where:
+			expectedLanguage | _
+			'ru'             | _
+			null             | _
+	}
+	
+	//
+	// Tests for findAllAsLinkEntities(String)
+	//
+	
+	def "findAllAsLinkEntities(String) should call dao"() {
+		given:
+			LinkEntityDto country1 = new LinkEntityDto(1, 'first-country', 'First Country')
+		and:
+			LinkEntityDto country2 = new LinkEntityDto(2, 'second-country', 'Second Country')
+		and:
+			List<LinkEntityDto> expectedCountries = [ country1, country2 ]
+		and:
+			jdbcCountryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
+		when:
+			Iterable<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
+		then:
+			resultCountries == expectedCountries
+	}
+	
+	@Unroll
+	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
+		when:
+			service.findAllAsLinkEntities(expectedLanguage)
+		then:
+			1 * jdbcCountryDao.findAllAsLinkEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})

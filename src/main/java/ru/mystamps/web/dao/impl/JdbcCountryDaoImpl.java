@@ -30,11 +30,15 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class JdbcCountryDaoImpl implements JdbcCountryDao {
+	
+	private static final RowMapper<LinkEntityDto> LINK_ENTITY_DTO_ROW_MAPPER =
+		new LinkEntityDtoRowMapper();
 	
 	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
 		new StringIntegerPairRowMapper("name", "counter");
@@ -61,6 +65,9 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	@Value("${country.find_all_countries_names_with_ids}")
 	private String findCountriesNamesWithIdsSql;
+	
+	@Value("${country.find_all_countries_names_with_slug}")
+	private String findCountriesNamesWithSlugSql;
 	
 	@Override
 	public long countAll() {
@@ -135,6 +142,15 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+		return jdbcTemplate.query(
+			findCountriesNamesWithSlugSql,
+			Collections.singletonMap("lang", lang),
+			LINK_ENTITY_DTO_ROW_MAPPER
+		);
 	}
 	
 }

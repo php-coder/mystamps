@@ -56,6 +56,13 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
+	public void shouldExistsLinkForListingCountries() {
+		assertThat(page.linkWithLabelExists(tr("t_show_countries_list")))
+			.overridingErrorMessage("should exists link to page for listing countries")
+			.isTrue();
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void linkForAddingSeriesShouldBeAbsent() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
 			.overridingErrorMessage("should absent link to page for adding series of stamps")

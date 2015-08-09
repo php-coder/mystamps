@@ -56,6 +56,9 @@
 							<li togglz:active="LIST_CATEGORIES">
 								<a th:href="@{${LIST_CATEGORIES_PAGE}}" th:text="#{t_show_categories_list}" href="../category/list.html">show list of categories</a>
 							</li>
+							<li togglz:active="LIST_COUNTRIES">
+								<a th:href="@{${LIST_COUNTRIES_PAGE}}" th:text="#{t_show_countries_list}" href="../country/list.html">show list of countries</a>
+							</li>
 							<li sec:authorize="hasAuthority('CREATE_SERIES')">
 								<a th:href="@{${ADD_SERIES_PAGE}}" th:text="#{t_add_series}" href="../series/add.html">add stamp series</a>
 							</li>

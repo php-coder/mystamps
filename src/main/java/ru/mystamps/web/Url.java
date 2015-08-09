@@ -63,6 +63,7 @@ public final class Url {
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{id}/{slug}";
+	public static final String LIST_COUNTRIES_PAGE   = "/country/list";
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}/{slug}";
 	
@@ -111,6 +112,7 @@ public final class Url {
 		map.put("LIST_CATEGORIES_PAGE", LIST_CATEGORIES_PAGE);
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
+		map.put("LIST_COUNTRIES_PAGE", LIST_COUNTRIES_PAGE);
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
 		
 		if (serveContentFromSingleHost) {
