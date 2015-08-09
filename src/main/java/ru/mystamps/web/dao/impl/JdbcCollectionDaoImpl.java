@@ -24,7 +24,10 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -65,14 +68,17 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	}
 	
 	@Override
-	public void add(Collection collection) {
+	public Integer add(Collection collection) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", collection.getOwner().getId());
 		params.put("slug", collection.getSlug());
 		
+		KeyHolder holder = new GeneratedKeyHolder();
+		
 		int affected = jdbcTemplate.update(
 			addCollectionSql,
-			params
+			new MapSqlParameterSource(params),
+			holder
 		);
 		
 		Validate.validState(
@@ -81,6 +87,8 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 			params.get("user_id"),
 			affected
 		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
 	}
 	
 }

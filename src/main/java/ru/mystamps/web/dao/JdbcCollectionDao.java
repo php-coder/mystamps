@@ -23,5 +23,5 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 public interface JdbcCollectionDao {
 	Iterable<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
-	void add(Collection collection);
+	Integer add(Collection collection);
 }

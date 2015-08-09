@@ -54,7 +54,8 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(slug != null, "Slug for string '%s' is null", user.getLogin());
 		collection.setSlug(slug);
 		
-		jdbcCollectionDao.add(collection);
+		Integer collectionId = jdbcCollectionDao.add(collection);
+		collection.setId(collectionId);
 		
 		LOG.info("Collection has been created ({})", collection);
 	}
