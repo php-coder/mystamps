@@ -56,7 +56,9 @@
 						<div class="col-sm-4">
 							<div class="row" th:each="image : ${series.images}">
 								<div class="col-sm-12">
-									<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
+									<a target="_blank" href="../../../../../test/resources/test.png" th:href="@{${GET_IMAGE_PAGE}(id=${image.id})}">
+										<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
+									</a>
 								</div>
 							</div>
 						</div>
