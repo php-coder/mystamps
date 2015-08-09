@@ -94,9 +94,9 @@ public class UserServiceImpl implements UserService {
 		user = userDao.save(user);
 		usersActivationService.remove(activation);
 		
-		collectionService.createCollection(user);
-		
 		LOG.info("User has been created ({})", user);
+		
+		collectionService.createCollection(user);
 	}
 	
 	@Override
