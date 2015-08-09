@@ -19,7 +19,6 @@ package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -116,21 +115,12 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	public Iterable<SelectEntityDto> findAllAsSelectEntries(String lang) {
-		// TODO: find a better way of extracting results
-		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
+		return jdbcTemplate.query(
 			findCountriesNamesWithIdsSql,
 			Collections.singletonMap("lang", lang),
-			RowMappers.forNameAndId()
+			RowMappers::forSelectEntityDto
 		);
-		
-		List<SelectEntityDto> result = new LinkedList<>();
-		for (Pair<String, Integer> pair : rawResult) {
-			result.add(new SelectEntityDto(pair.getSecond(), pair.getFirst()));
-		}
-		
-		return result;
 	}
 	
 	@Override

@@ -17,10 +17,14 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
 
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
@@ -61,6 +65,13 @@ final class RowMappers {
 	
 	public static RowMapper<SitemapInfoDto> forSitemapInfoDto() {
 		return SITEMAP_INFO_DTO_ROW_MAPPER;
+	}
+	
+	public static SelectEntityDto forSelectEntityDto(ResultSet rs, int i) throws SQLException {
+		return new SelectEntityDto(
+			rs.getInt("id"),
+			rs.getString("name")
+		);
 	}
 	
 	public static RowMapper<SeriesInfoDto> forSeriesInfoDto() {
