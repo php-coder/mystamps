@@ -24,7 +24,6 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -35,9 +34,6 @@ import ru.mystamps.web.entity.UsersActivation;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
-	
-	private static final RowMapper<UsersActivation> USERS_ACTIVATION_ROW_MAPPER =
-		new UsersActivationRowMapper();
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -58,7 +54,7 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 		return jdbcTemplate.queryForObject(
 			findByActivationKeySql,
 			Collections.singletonMap("activation_key", activationKey),
-			USERS_ACTIVATION_ROW_MAPPER
+			RowMappers.forUsersActivation()
 		);
 	}
 	

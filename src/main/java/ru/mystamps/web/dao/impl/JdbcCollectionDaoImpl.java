@@ -24,7 +24,6 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -35,9 +34,6 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
 public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
-	
-	private static final RowMapper<LinkEntityDto> LINK_ENTITY_DTO_ROW_MAPPER =
-		new LinkEntityDtoRowMapper();
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -55,7 +51,7 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 		return jdbcTemplate.query(
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
-			LINK_ENTITY_DTO_ROW_MAPPER
+			RowMappers.forLinkEntityDto()
 		);
 	}
 	

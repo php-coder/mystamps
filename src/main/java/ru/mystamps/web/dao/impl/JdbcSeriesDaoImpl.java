@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -37,12 +36,6 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 @RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
-	
-	private static final RowMapper<SitemapInfoDto> SITEMAP_INFO_DTO_ROW_MAPPER =
-		new SitemapInfoDtoRowMapper();
-	
-	private static final RowMapper<SeriesInfoDto> SERIES_INFO_DTO_ROW_MAPPER =
-		new SeriesInfoDtoRowMapper();
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -102,7 +95,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		return jdbcTemplate.query(
 			findAllForSitemapSql,
 			Collections.<String, Object>emptyMap(),
-			SITEMAP_INFO_DTO_ROW_MAPPER
+			RowMappers.forSitemapInfoDto()
 		);
 	}
 	
@@ -112,7 +105,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("quantity", quantity);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findLastAddedSeriesSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers.forSeriesInfoDto());
 	}
 	
 	@Override
@@ -121,7 +114,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("category_id", categoryId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCategoryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+		return jdbcTemplate.query(findByCategoryIdSql, params, RowMappers.forSeriesInfoDto());
 	}
 	
 	@Override
@@ -130,7 +123,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("country_id", countryId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCountryIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+		return jdbcTemplate.query(findByCountryIdSql, params, RowMappers.forSeriesInfoDto());
 	}
 	
 	@Override
@@ -140,7 +133,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCollectionIdSql, params, SERIES_INFO_DTO_ROW_MAPPER);
+		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers.forSeriesInfoDto());
 	}
 	
 	@Override

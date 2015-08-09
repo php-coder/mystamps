@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -33,18 +32,8 @@ import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
-	
-	private static final RowMapper<LinkEntityDto> LINK_ENTITY_DTO_ROW_MAPPER =
-		new LinkEntityDtoRowMapper();
-	
-	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
-		new StringIntegerPairRowMapper("name", "counter");
-	
-	private static final RowMapper<Pair<String, Integer>> NAME_AND_ID_ROW_MAPPER =
-		new StringIntegerPairRowMapper("name", "id");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -115,7 +104,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
 			countStampsByCategoriesSql,
 			params,
-			NAME_AND_COUNTER_ROW_MAPPER
+			RowMappers.forNameAndCounter()
 		);
 		
 		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
@@ -133,7 +122,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
 			findCategoriesNamesWithIdsSql,
 			Collections.singletonMap("lang", lang),
-			NAME_AND_ID_ROW_MAPPER
+			RowMappers.forNameAndId()
 		);
 		
 		List<SelectEntityDto> result = new LinkedList<>();
@@ -149,7 +138,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		return jdbcTemplate.query(
 			findCategoriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),
-			LINK_ENTITY_DTO_ROW_MAPPER
+			RowMappers.forLinkEntityDto()
 		);
 	}
 	
