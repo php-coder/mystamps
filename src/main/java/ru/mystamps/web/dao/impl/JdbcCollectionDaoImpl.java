@@ -51,7 +51,7 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 		return jdbcTemplate.query(
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
-			RowMappers.forLinkEntityDto()
+			RowMappers::forLinkEntityDto
 		);
 	}
 	

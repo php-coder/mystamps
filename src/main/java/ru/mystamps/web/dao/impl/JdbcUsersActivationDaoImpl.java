@@ -54,7 +54,7 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 		return jdbcTemplate.queryForObject(
 			findByActivationKeySql,
 			Collections.singletonMap("activation_key", activationKey),
-			RowMappers.forUsersActivation()
+			RowMappers::forUsersActivation
 		);
 	}
 	

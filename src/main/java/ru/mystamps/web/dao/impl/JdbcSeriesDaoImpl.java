@@ -95,7 +95,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		return jdbcTemplate.query(
 			findAllForSitemapSql,
 			Collections.<String, Object>emptyMap(),
-			RowMappers.forSitemapInfoDto()
+			RowMappers::forSitemapInfoDto
 		);
 	}
 	
@@ -105,7 +105,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("quantity", quantity);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers.forSeriesInfoDto());
+		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
 	@Override
@@ -114,7 +114,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("category_id", categoryId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCategoryIdSql, params, RowMappers.forSeriesInfoDto());
+		return jdbcTemplate.query(findByCategoryIdSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
 	@Override
@@ -123,7 +123,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("country_id", countryId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCountryIdSql, params, RowMappers.forSeriesInfoDto());
+		return jdbcTemplate.query(findByCountryIdSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
 	@Override
@@ -133,7 +133,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers.forSeriesInfoDto());
+		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
 	@Override

@@ -103,7 +103,7 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
 			countStampsByCountriesSql,
 			params,
-			RowMappers.forNameAndCounter()
+			RowMappers::forNameAndCounter
 		);
 		
 		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
@@ -128,7 +128,7 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 		return jdbcTemplate.query(
 			findCountriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),
-			RowMappers.forLinkEntityDto()
+			RowMappers::forLinkEntityDto
 		);
 	}
 	

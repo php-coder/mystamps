@@ -19,8 +19,7 @@ package ru.mystamps.web.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.springframework.jdbc.core.RowMapper;
+import java.util.Date;
 
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -28,43 +27,39 @@ import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RowMappers {
-	
-	private static final RowMapper<LinkEntityDto> LINK_ENTITY_DTO_ROW_MAPPER =
-		new LinkEntityDtoRowMapper();
-	
-	private static final RowMapper<Pair<String, Integer>> NAME_AND_COUNTER_ROW_MAPPER =
-		new StringIntegerPairRowMapper("name", "counter");
-	
-	private static final RowMapper<Pair<String, Integer>> NAME_AND_ID_ROW_MAPPER =
-		new StringIntegerPairRowMapper("name", "id");
-	
-	private static final RowMapper<SitemapInfoDto> SITEMAP_INFO_DTO_ROW_MAPPER =
-		new SitemapInfoDtoRowMapper();
-	
-	private static final RowMapper<SeriesInfoDto> SERIES_INFO_DTO_ROW_MAPPER =
-		new SeriesInfoDtoRowMapper();
-	
-	private static final RowMapper<UsersActivation> USERS_ACTIVATION_ROW_MAPPER =
-		new UsersActivationRowMapper();
 	
 	private RowMappers() {
 	}
 	
-	public static RowMapper<LinkEntityDto> forLinkEntityDto() {
-		return LINK_ENTITY_DTO_ROW_MAPPER;
+	public static LinkEntityDto forLinkEntityDto(ResultSet rs, int i) throws SQLException {
+		return new LinkEntityDto(
+			rs.getInt("id"),
+			rs.getString("slug"),
+			rs.getString("name")
+		);
 	}
 	
-	public static RowMapper<Pair<String, Integer>> forNameAndCounter() {
-		return NAME_AND_COUNTER_ROW_MAPPER;
+	public static Pair<String, Integer> forNameAndCounter(ResultSet rs, int i) throws SQLException {
+		return new Pair<>(
+			rs.getString("name"),
+			JdbcUtils.getInteger(rs, "counter")
+		);
 	}
 	
-	public static RowMapper<Pair<String, Integer>> forNameAndId() {
-		return NAME_AND_ID_ROW_MAPPER;
+	public static Pair<String, Integer> forNameAndId(ResultSet rs, int i) throws SQLException {
+		return new Pair<>(
+			rs.getString("name"),
+			JdbcUtils.getInteger(rs, "id")
+		);
 	}
 	
-	public static RowMapper<SitemapInfoDto> forSitemapInfoDto() {
-		return SITEMAP_INFO_DTO_ROW_MAPPER;
+	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int i) throws SQLException {
+		return new SitemapInfoDto(
+			rs.getInt("id"),
+			rs.getTimestamp("updated_at")
+		);
 	}
 	
 	public static SelectEntityDto forSelectEntityDto(ResultSet rs, int i) throws SQLException {
@@ -74,12 +69,43 @@ final class RowMappers {
 		);
 	}
 	
-	public static RowMapper<SeriesInfoDto> forSeriesInfoDto() {
-		return SERIES_INFO_DTO_ROW_MAPPER;
+	public static SeriesInfoDto forSeriesInfoDto(ResultSet rs, int i) throws SQLException {
+		Integer seriesId     = rs.getInt("id");
+		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
+		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
+		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity     = rs.getInt("quantity");
+		Boolean perforated   = rs.getBoolean("perforated");
+		Integer categoryId   = rs.getInt("category_id");
+		String categorySlug  = rs.getString("category_slug");
+		String categoryName  = rs.getString("category_name");
+		Integer countryId    = JdbcUtils.getInteger(rs, "country_id");
+		String countrySlug   = rs.getString("country_slug");
+		String countryName   = rs.getString("country_name");
+		
+		return new SeriesInfoDto(
+			seriesId,
+			categoryId,
+			categorySlug,
+			categoryName,
+			countryId,
+			countrySlug,
+			countryName,
+			releaseDay,
+			releaseMonth,
+			releaseYear,
+			quantity,
+			perforated
+		);
 	}
 	
-	public static RowMapper<UsersActivation> forUsersActivation() {
-		return USERS_ACTIVATION_ROW_MAPPER;
+	public static UsersActivation forUsersActivation(ResultSet rs, int i) throws SQLException {
+		String activationKey  = rs.getString("act_key");
+		String email          = rs.getString("email");
+		String lang           = rs.getString("lang");
+		Date createdAt        = rs.getTimestamp("created_at");
+		
+		return new UsersActivation(activationKey, email, lang, createdAt);
 	}
 	
 }

@@ -103,7 +103,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
 			countStampsByCategoriesSql,
 			params,
-			RowMappers.forNameAndCounter()
+			RowMappers::forNameAndCounter
 		);
 		
 		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
@@ -128,7 +128,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 		return jdbcTemplate.query(
 			findCategoriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),
-			RowMappers.forLinkEntityDto()
+			RowMappers::forLinkEntityDto
 		);
 	}
 	
