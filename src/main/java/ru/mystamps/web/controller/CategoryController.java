@@ -100,5 +100,11 @@ public class CategoryController {
 		return "category/info";
 	}
 	
+	@RequestMapping(Url.LIST_CATEGORIES_PAGE)
+	public void list(Model model, Locale userLocale) {
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		model.addAttribute("categories", categoryService.findAllAsLinkEntities(lang));
+	}
+	
 }
 

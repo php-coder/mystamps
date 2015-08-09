@@ -19,6 +19,7 @@ package ru.mystamps.web.dao;
 
 import java.util.Map;
 
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 public interface JdbcCategoryDao {
@@ -28,4 +29,5 @@ public interface JdbcCategoryDao {
 	long countCategoriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 	Iterable<SelectEntityDto> findAllAsSelectEntries(String lang);
+	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 }

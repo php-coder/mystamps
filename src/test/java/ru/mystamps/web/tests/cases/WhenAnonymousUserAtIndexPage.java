@@ -44,8 +44,15 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldAbsentWelcomeText() {
-		assertThat(page.textPresent(tr("t_you_may"))).isFalse();
+	public void shouldExistsWelcomeText() {
+		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void shouldExistsLinkForListingCategories() {
+		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
+			.overridingErrorMessage("should exists link to page for listing categories")
+			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

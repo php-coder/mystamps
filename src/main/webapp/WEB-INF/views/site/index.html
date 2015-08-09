@@ -50,9 +50,12 @@
 			</div>
 			<div class="row" id="content">
 				<div class="col-sm-3">
-					<nav sec:authorize="hasAnyAuthority('CREATE_CATEGORY', 'CREATE_COUNTRY', 'CREATE_SERIES')">
+					<nav>
 						<p th:text="|#{t_you_may}:|">You may</p>
 						<ul>
+							<li togglz:active="LIST_CATEGORIES">
+								<a th:href="@{${LIST_CATEGORIES_PAGE}}" th:text="#{t_show_categories_list}" href="../category/list.html">show list of categories</a>
+							</li>
 							<li sec:authorize="hasAuthority('CREATE_SERIES')">
 								<a th:href="@{${ADD_SERIES_PAGE}}" th:text="#{t_add_series}" href="../series/add.html">add stamp series</a>
 							</li>

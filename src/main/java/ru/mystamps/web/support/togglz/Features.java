@@ -50,7 +50,11 @@ public enum Features implements Feature {
 	
 	@Label("Possibility of user to add additional images to series")
 	@EnabledByDefault
-	ADD_ADDITIONAL_IMAGES_TO_SERIES;
+	ADD_ADDITIONAL_IMAGES_TO_SERIES,
+	
+	@Label("Show link to list of categories on index page")
+	@EnabledByDefault
+	LIST_CATEGORIES;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);

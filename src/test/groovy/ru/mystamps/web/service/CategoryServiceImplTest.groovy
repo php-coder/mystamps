@@ -26,6 +26,7 @@ import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
+import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SelectEntityDto
 import ru.mystamps.web.service.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
@@ -213,6 +214,40 @@ class CategoryServiceImplTest extends Specification {
 			service.findAll(expectedLanguage)
 		then:
 			1 * jdbcCategoryDao.findAllAsSelectEntries({ String language ->
+				assert language == expectedLanguage
+				return true
+			})
+		where:
+			expectedLanguage | _
+			'ru'             | _
+			null             | _
+	}
+	
+	//
+	// Tests for findAllAsLinkEntities(String)
+	//
+	
+	def "findAllAsLinkEntities(String) should call dao"() {
+		given:
+			LinkEntityDto category1 = new LinkEntityDto(1, 'first-category', 'First Category')
+		and:
+			LinkEntityDto category2 = new LinkEntityDto(2, 'second-category', 'Second Category')
+		and:
+			List<LinkEntityDto> expectedCategories = [ category1, category2 ]
+		and:
+			jdbcCategoryDao.findAllAsLinkEntities(_ as String) >> expectedCategories
+		when:
+			Iterable<LinkEntityDto> resultCategories = service.findAllAsLinkEntities('fr')
+		then:
+			resultCategories == expectedCategories
+	}
+	
+	@Unroll
+	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
+		when:
+			service.findAllAsLinkEntities(expectedLanguage)
+		then:
+			1 * jdbcCategoryDao.findAllAsLinkEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})

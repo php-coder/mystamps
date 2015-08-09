@@ -78,6 +78,13 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
+	public void shouldExistsLinkForListingCategories() {
+		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
+			.overridingErrorMessage("should exists link to page for listing categories")
+			.isTrue();
+	}
+	
+	@Test(groups = "misc", dependsOnGroups = "std")
 	public void linkForAddingCountriesShouldBeAbsent() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
 			.overridingErrorMessage("should absent link to page for adding countries")

@@ -37,6 +37,7 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -85,6 +86,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public Iterable<SelectEntityDto> findAll(String lang) {
 		return jdbcCategoryDao.findAllAsSelectEntries(lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+		return jdbcCategoryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override

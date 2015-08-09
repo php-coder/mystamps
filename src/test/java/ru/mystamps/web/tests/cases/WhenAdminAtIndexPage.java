@@ -84,6 +84,13 @@ public class WhenAdminAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 			.isTrue();
 	}
 	
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void shouldExistsLinkForListingCategories() {
+		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
+			.overridingErrorMessage("should exists link to page for listing categories")
+			.isTrue();
+	}
+	
 	@Override
 	protected void shouldHaveUserBar() {
 		// Ignore this check because when user authenticated there is no links for login/register.
