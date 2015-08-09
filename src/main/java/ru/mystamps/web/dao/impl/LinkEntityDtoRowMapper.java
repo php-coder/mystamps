@@ -28,11 +28,11 @@ class LinkEntityDtoRowMapper implements RowMapper<LinkEntityDto> {
 	
 	@Override
 	public LinkEntityDto mapRow(ResultSet resultSet, int i) throws SQLException {
-		Integer collectionId  = resultSet.getInt("collection_id");
-		String collectionSlug = resultSet.getString("collection_slug");
-		String ownerName      = resultSet.getString("owner_name");
+		Integer id  = resultSet.getInt("id");
+		String slug = resultSet.getString("slug");
+		String name = resultSet.getString("name");
 		
-		return new LinkEntityDto(collectionId, collectionSlug, ownerName);
+		return new LinkEntityDto(id, slug, name);
 	}
 	
 }
