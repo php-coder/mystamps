@@ -78,6 +78,7 @@ final class TestObjects {
 		User user = new User();
 		user.setId(anyId);
 		user.setLogin(TEST_LOGIN);
+		user.setRole(User.Role.USER);
 		user.setName(TEST_NAME);
 		user.setEmail(TEST_EMAIL);
 		user.setRegisteredAt(new Date());

@@ -32,11 +32,13 @@ import static javax.persistence.EnumType.STRING;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
+@ToString(exclude = {"registeredAt", "activatedAt", "hash", "collection"})
 public class User {
 	
 	public static final int LOGIN_LENGTH = 15;

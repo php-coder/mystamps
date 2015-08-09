@@ -253,6 +253,8 @@ class UserServiceImplTest extends Specification {
 	}
 	
 	def "registerUser() should create collection for user"() {
+		given:
+			userDao.save(_ as User) >> TestObjects.createUser()
 		when:
 			service.registerUser(activationForm)
 		then:

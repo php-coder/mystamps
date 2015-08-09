@@ -71,6 +71,8 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		Validate.isTrue(activation.getActivationKey() != null, "Activation key must be non null");
 		
 		jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey());
+		
+		LOG.info("Users activation has been deleted ({})", activation);
 	}
 	
 	@Override

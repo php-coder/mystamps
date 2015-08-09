@@ -91,17 +91,12 @@ public class UserServiceImpl implements UserService {
 		user.setActivatedAt(now);
 		user.setHash(hash);
 		
-		userDao.save(user);
+		user = userDao.save(user);
 		usersActivationService.remove(activation);
 		
 		collectionService.createCollection(user);
 		
-		LOG.info(
-			"Added user (login='{}', name='{}', activation key='{}')",
-			login,
-			finalName,
-			activationKey
-		);
+		LOG.info("User has been created ({})", user);
 	}
 	
 	@Override
