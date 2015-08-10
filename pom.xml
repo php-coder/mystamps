@@ -57,7 +57,7 @@
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.16</checkstyle.plugin.version>
 		<pmd.plugin.version>3.4</pmd.plugin.version>
-		<jacoco.plugin.version>0.7.4.201502262128</jacoco.plugin.version>
+		<jacoco.plugin.version>0.7.5.201505241946</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<javadoc.plugin.version>2.10.1</javadoc.plugin.version>
 		<enforcer.plugin.version>1.4</enforcer.plugin.version>
