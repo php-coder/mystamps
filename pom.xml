@@ -46,7 +46,7 @@
 		<cglib.version>2.2.2</cglib.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		
-		<compiler.plugin.version>3.2</compiler.plugin.version>
+		<compiler.plugin.version>3.3</compiler.plugin.version>
 		<resources.plugin.version>2.7</resources.plugin.version>
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<surefire.plugin.version>2.18.1</surefire.plugin.version>
