@@ -56,13 +56,7 @@ public class ErrorController {
 			currentUser = userDetails.getUser();
 		}
 		
-		try {
-			siteService.logAboutAbsentPage(page, currentUser, ip, referer, agent);
-		} catch (Exception ex) { // NOPMD
-			// intentionally ignored:
-			// database error should not break showing of 404 page
-			LOG.warn("Cannot log 404 error", ex);
-		}
+		siteService.logAboutAbsentPage(page, currentUser, ip, referer, agent);
 	}
 	
 	@RequestMapping(Url.INTERNAL_ERROR_PAGE)

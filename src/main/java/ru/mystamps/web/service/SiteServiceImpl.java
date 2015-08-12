@@ -22,6 +22,7 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,7 @@ public class SiteServiceImpl implements SiteService {
 	
 	@Override
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
+	@Async
 	@Transactional
 	public void logAboutAbsentPage(
 			String page,
