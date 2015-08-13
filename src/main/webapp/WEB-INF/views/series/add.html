@@ -11,6 +11,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
 	<body lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}">
 		<div class="container-fluid">
@@ -408,11 +409,14 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
 		
 		<script>
 			$(function() {
+				$('#country').selectize();
+				
 				$('.js-catalog-numbers').on('blur', function() {
 					$(this).val(function(idx, val) {
 						return CatalogUtils.expandNumbers(val);

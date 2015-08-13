@@ -41,6 +41,7 @@
 		-->
 		<bootstrap.version>3.3.5</bootstrap.version>
 		<jquery.version>1.9.1</jquery.version>
+		<selectizejs.version>0.12.1</selectizejs.version>
 		
 		<testng.version>6.8.8</testng.version>
 		<cglib.version>2.2.2</cglib.version>
@@ -316,6 +317,13 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${jquery.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>selectize.js</artifactId>
+			<version>${selectizejs.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		

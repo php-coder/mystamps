@@ -83,11 +83,18 @@ public final class Url {
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
 	
-	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 3 lines
+	// TODO: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
+	public static final String SELECTIZE_CSS          = "/public/selectize/css/selectize.bootstrap3.css";
+	public static final String SELECTIZE_JS           = "/public/selectize/js/standalone/selectize.min.js";
+	
+	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
+	// CheckStyle: ignore LineLength for next 5 lines
 	public static final String BOOTSTRAP_CSS_CDN     = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS_CDN      = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
 	public static final String JQUERY_JS_CDN         = "http://yandex.st/jquery/1.9.1/jquery.min.js";
+	public static final String SELECTIZE_CSS_CDN     = "http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css";
+	public static final String SELECTIZE_JS_CDN      = "http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js";
 	
 	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
@@ -119,6 +126,8 @@ public final class Url {
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
 			map.put("JQUERY_JS", JQUERY_JS);
+			map.put("SELECTIZE_CSS", SELECTIZE_CSS);
+			map.put("SELECTIZE_JS", SELECTIZE_JS);
 			map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
 			map.put("FAVICON_ICO", FAVICON_ICO);
 			map.put("MAIN_CSS", MAIN_CSS);
@@ -134,6 +143,8 @@ public final class Url {
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
 			map.put("JQUERY_JS", JQUERY_JS_CDN);
+			map.put("SELECTIZE_CSS", SELECTIZE_CSS_CDN);
+			map.put("SELECTIZE_JS", SELECTIZE_JS_CDN);
 		}
 		
 		return map;
