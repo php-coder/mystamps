@@ -68,11 +68,16 @@
 						th:action="@{${ADD_SERIES_PAGE}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}"
 						th:object="${addSeriesForm}"
 						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice')},
+							michelHasValues=${addSeriesForm.michelNumbers != null or addSeriesForm.michelPrice != null},
 							scottHasErrors=${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice')},
+							scottHasValues=${addSeriesForm.scottNumbers != null or addSeriesForm.scottPrice != null},
 							yvertHasErrors=${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice')},
+							yvertHasValues=${addSeriesForm.yvertNumbers != null or addSeriesForm.yvertPrice != null},
 							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice')},
-							showCatalogsInfo=${michelHasErrors or scottHasErrors or yvertHasErrors or gibbonsHasErrors},
-							issueDateHasErrors=${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year')}">
+							gibbonsHasValues=${addSeriesForm.gibbonsNumbers != null or addSeriesForm.gibbonsPrice != null},
+							showCatalogsInfo=${michelHasErrors or michelHasValues or scottHasErrors or scottHasValues or yvertHasErrors or yvertHasValues or gibbonsHasErrors or gibbonsHasValues},
+							issueDateHasErrors=${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year')},
+							issueDateHasValues=${addSeriesForm.day != null or addSeriesForm.month != null or addSeriesForm.year != null}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 							<label for="category" class="control-label col-sm-3">
@@ -172,13 +177,13 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
 									Specify date of release
 								</a>
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="${issueDateHasErrors ? 'has-error in' : ''}">
+						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="|${issueDateHasErrors ? 'has-error in' : ''} ${issueDateHasValues ? 'in' : ''}|">
 							<label for="year" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_issue_date}">
 									Date of release
@@ -372,13 +377,13 @@
 						
 						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
 									Add comment
 								</a>
 							</div>
 						</div>
 						
-						<div class="form-group collapse js-comment" th:classappend="${#fields.hasErrors('comment') ? 'has-error in' : ''}" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+						<div class="form-group collapse js-comment" th:classappend="|${#fields.hasErrors('comment') ? 'has-error in' : ''} ${addSeriesForm.comment != null ? 'in' : ''}|" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<label for="comment" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_comment}">
 									Comment
