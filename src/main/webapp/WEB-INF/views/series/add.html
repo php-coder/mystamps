@@ -71,7 +71,8 @@
 							scottHasErrors=${#fields.hasErrors('scottNumbers') or #fields.hasErrors('scottPrice')},
 							yvertHasErrors=${#fields.hasErrors('yvertNumbers') or #fields.hasErrors('yvertPrice')},
 							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice')},
-							showCatalogsInfo=${michelHasErrors or scottHasErrors or yvertHasErrors or gibbonsHasErrors}">
+							showCatalogsInfo=${michelHasErrors or scottHasErrors or yvertHasErrors or gibbonsHasErrors},
+							issueDateHasErrors=${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year')}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 							<label for="category" class="control-label col-sm-3">
@@ -171,13 +172,13 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
 									Specify date of release
 								</a>
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year') ? 'has-error in' : ''}">
+						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="${issueDateHasErrors ? 'has-error in' : ''}">
 							<label for="year" class="control-label col-sm-3">
 								<span class="field-label" th:text="#{t_issue_date}">
 									Date of release
