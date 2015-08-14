@@ -44,7 +44,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
@@ -52,7 +55,6 @@ import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -118,6 +120,30 @@ public class SeriesController {
 		addSeriesForm.setPerforated(true);
 		
 		return addSeriesForm;
+	}
+	
+	@RequestMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
+	public String showFormWithCategory(@PathVariable("id") Category category, Model model) {
+		
+		AddSeriesForm form = new AddSeriesForm();
+		form.setPerforated(true);
+		form.setCategory(category);
+		
+		model.addAttribute("addSeriesForm", form);
+		
+		return "series/add";
+	}
+	
+	@RequestMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
+	public String showFormWithCountry(@PathVariable("id") Country country, Model model) {
+		
+		AddSeriesForm form = new AddSeriesForm();
+		form.setPerforated(true);
+		form.setCountry(country);
+		
+		model.addAttribute("addSeriesForm", form);
+		
+		return "series/add";
 	}
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)

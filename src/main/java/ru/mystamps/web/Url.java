@@ -47,7 +47,10 @@ public final class Url {
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
 	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
+	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String ADD_SERIES_PAGE       = "/series/add";
+	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{id}";
+	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{id}";
 	public static final String INFO_SERIES_PAGE      = "/series/{id}";
 	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
 	
@@ -112,6 +115,8 @@ public final class Url {
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
+		map.put("ADD_SERIES_WITH_CATEGORY_PAGE", ADD_SERIES_WITH_CATEGORY_PAGE);
+		map.put("ADD_SERIES_WITH_COUNTRY_PAGE", ADD_SERIES_WITH_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
