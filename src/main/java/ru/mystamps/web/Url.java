@@ -28,7 +28,7 @@ import java.util.Map;
  * @author Slava Semushin
  */
 public final class Url {
-	public static final String PUBLIC_URL            = "http://my-stamps.ru";
+	public static final String PUBLIC_URL            = "https://my-stamps.ru";
 	public static final String STATIC_RESOURCES_URL  = "http://stamps.filezz.ru";
 	
 	// defined at pom.xml (and used by functional tests only)
@@ -93,11 +93,11 @@ public final class Url {
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
-	public static final String BOOTSTRAP_CSS_CDN     = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS_CDN      = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
-	public static final String JQUERY_JS_CDN         = "http://yandex.st/jquery/1.9.1/jquery.min.js";
-	public static final String SELECTIZE_CSS_CDN     = "http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css";
-	public static final String SELECTIZE_JS_CDN      = "http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js";
+	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js";
+	public static final String JQUERY_JS_CDN         = "https://yandex.st/jquery/1.9.1/jquery.min.js";
+	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css";
+	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js";
 	
 	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
