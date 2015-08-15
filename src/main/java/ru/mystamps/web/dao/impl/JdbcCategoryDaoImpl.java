@@ -115,7 +115,7 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	}
 	
 	@Override
-	public Iterable<SelectEntityDto> findAllAsSelectEntries(String lang) {
+	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
 		return jdbcTemplate.query(
 			findCategoriesNamesWithIdsSql,
 			Collections.singletonMap("lang", lang),

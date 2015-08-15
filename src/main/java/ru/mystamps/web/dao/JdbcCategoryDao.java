@@ -28,6 +28,6 @@ public interface JdbcCategoryDao {
 	long countByNameRu(String name);
 	long countCategoriesOfCollection(Integer collectionId);
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<SelectEntityDto> findAllAsSelectEntries(String lang);
+	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 }

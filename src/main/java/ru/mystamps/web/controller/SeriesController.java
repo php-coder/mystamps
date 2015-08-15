@@ -106,13 +106,13 @@ public class SeriesController {
 	@ModelAttribute("categories")
 	public Iterable<SelectEntityDto> getCategories(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findAll(lang);
+		return categoryService.findAllAsSelectEntities(lang);
 	}
 	
 	@ModelAttribute("countries")
 	public Iterable<SelectEntityDto> getCountries(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return countryService.findAll(lang);
+		return countryService.findAllAsSelectEntities(lang);
 	}
 	
 	@RequestMapping(Url.ADD_SERIES_PAGE)

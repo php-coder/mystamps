@@ -190,10 +190,10 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAll(String)
+	// Tests for findAllAsSelectEntities(String)
 	//
 	
-	def "findAll(String) should call dao"() {
+	def "findAllAsSelectEntities(String) should call dao"() {
 		given:
 			SelectEntityDto category1 = new SelectEntityDto(1, 'First Category')
 		and:
@@ -201,19 +201,19 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCategories = [ category1, category2 ]
 		and:
-			jdbcCategoryDao.findAllAsSelectEntries(_ as String) >> expectedCategories
+			jdbcCategoryDao.findAllAsSelectEntities(_ as String) >> expectedCategories
 		when:
-			Iterable<SelectEntityDto> resultCategories = service.findAll('fr')
+			Iterable<SelectEntityDto> resultCategories = service.findAllAsSelectEntities('fr')
 		then:
 			resultCategories == expectedCategories
 	}
 	
 	@Unroll
-	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
+	def "findAllAsSelectEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
-			service.findAll(expectedLanguage)
+			service.findAllAsSelectEntities(expectedLanguage)
 		then:
-			1 * jdbcCategoryDao.findAllAsSelectEntries({ String language ->
+			1 * jdbcCategoryDao.findAllAsSelectEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})

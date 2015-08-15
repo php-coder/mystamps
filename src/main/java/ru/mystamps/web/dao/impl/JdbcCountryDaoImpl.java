@@ -115,7 +115,7 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	}
 	
 	@Override
-	public Iterable<SelectEntityDto> findAllAsSelectEntries(String lang) {
+	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
 		return jdbcTemplate.query(
 			findCountriesNamesWithIdsSql,
 			Collections.singletonMap("lang", lang),

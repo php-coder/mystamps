@@ -190,10 +190,10 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAll(String)
+	// Tests for findAllAsSelectEntities(String)
 	//
 	
-	def "findAll(String) should call dao"() {
+	def "findAllAsSelectEntities(String) should call dao"() {
 		given:
 			SelectEntityDto country1 = new SelectEntityDto(1, 'First Country')
 		and:
@@ -201,19 +201,19 @@ class CountryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCountries = [ country1, country2 ]
 		and:
-			jdbcCountryDao.findAllAsSelectEntries(_ as String) >> expectedCountries
+			jdbcCountryDao.findAllAsSelectEntities(_ as String) >> expectedCountries
 		when:
-			Iterable<SelectEntityDto> resultCountries = service.findAll('de')
+			Iterable<SelectEntityDto> resultCountries = service.findAllAsSelectEntities('de')
 		then:
 			resultCountries == expectedCountries
 	}
 	
 	@Unroll
-	def "findAll(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
+	def "findAllAsSelectEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
-			service.findAll(expectedLanguage)
+			service.findAllAsSelectEntities(expectedLanguage)
 		then:
-			1 * jdbcCountryDao.findAllAsSelectEntries({ String language ->
+			1 * jdbcCountryDao.findAllAsSelectEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})

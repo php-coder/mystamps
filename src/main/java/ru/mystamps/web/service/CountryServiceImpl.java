@@ -84,8 +84,8 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAll(String lang) {
-		return jdbcCountryDao.findAllAsSelectEntries(lang);
+	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
+		return jdbcCountryDao.findAllAsSelectEntities(lang);
 	}
 	
 	@Override
