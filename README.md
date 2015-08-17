@@ -20,7 +20,7 @@ With this site you can:
 
 ## How I can try it?
 
-You can look at it and try on http://my-stamps.ru
+You can look at it and try on https://my-stamps.ru
 
 If you are programmer/sysadmin or you just feeling that you are able to run local version of the site then follow the following instructions:
 
