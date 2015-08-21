@@ -17,7 +17,7 @@
 	</parent>
 	
 	<properties>
-		<lombok.version>1.16.4</lombok.version>
+		<lombok.version>1.16.6</lombok.version>
 		<!--
 			Fix NoClassDefFoundError: org/apache/http/conn/ssl/NoopHostnameVerifier
 			Stick to version 2.45.0 until htmlunit will be fixed to work with httpclient 4.5 (see below).
