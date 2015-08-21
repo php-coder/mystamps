@@ -44,7 +44,6 @@ import java.util.EnumSet;
 	DispatcherServletContext.class,
 	H2Config.class,
 	ThymeleafViewResolverInitializingBean.class,
-	ResourceBundleMessageSourceInitializingBean.class,
 	JettyServletContainerCustomizer.class,
 	ErrorPagesServletContainerCustomizer.class
 })
