@@ -33,6 +33,7 @@
 	</rule>
 	<rule ref="rulesets/java/logging-jakarta-commons.xml" />
 	<rule ref="rulesets/java/basic.xml" />
+	<rule ref="rulesets/java/empty.xml" />
 	<rule ref="rulesets/java/strictexception.xml" />
 	<rule ref="rulesets/java/sunsecure.xml" />
 	<rule ref="rulesets/java/logging-java.xml" />

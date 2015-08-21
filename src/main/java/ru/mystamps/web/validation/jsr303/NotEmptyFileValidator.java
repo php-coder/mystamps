@@ -36,11 +36,7 @@ public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, 
 			return true;
 		}
 		
-		if (file.isEmpty()) {
-			return false;
-		}
-		
-		return true;
+		return !file.isEmpty();
 	}
 	
 }
