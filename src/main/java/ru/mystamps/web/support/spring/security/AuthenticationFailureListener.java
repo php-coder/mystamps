@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,8 +54,9 @@ public class AuthenticationFailureListener
 		String ip      = request.getRemoteAddr();
 		String referer = request.getHeader("referer");
 		String agent   = request.getHeader("user-agent");
+		Date date      = new Date(event.getTimestamp());
 		
-		siteService.logAboutFailedAuthentication(page, null, ip, referer, agent);
+		siteService.logAboutFailedAuthentication(page, null, ip, referer, agent, date);
 	}
 	
 	private HttpServletRequest getRequest() {

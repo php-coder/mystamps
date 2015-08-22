@@ -176,7 +176,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should call dao"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add(_ as SuspiciousActivity)
 	}
@@ -185,7 +185,7 @@ class SiteServiceImplTest extends Specification {
 		given:
 			SuspiciousActivityType expectedType = TestObjects.createAuthFailedActivityType()
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.type?.name == expectedType.name
@@ -193,9 +193,21 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should assign occurred at to current date"() {
+	def "logAboutFailedAuthentication() should assign occurred at to current date when date was provided"() {
+		given:
+			Date expectedDate = new Date() - 100;
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, expectedDate)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert DateUtils.roughlyEqual(activity?.occurredAt, expectedDate)
+				return true
+			})
+	}
+	
+	def "logAboutFailedAuthentication() should assign occurred at to current date when date wasn't provided"() {
+		when:
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
@@ -205,14 +217,14 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should throw exception when page is null"() {
 		when:
-			service.logAboutFailedAuthentication(null, null, null, null, null)
+			service.logAboutFailedAuthentication(null, null, null, null, null, null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "logAboutFailedAuthentication() should pass page to dao"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.page == TEST_PAGE
@@ -222,7 +234,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass null to dao for unknown user"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == null
@@ -234,7 +246,7 @@ class SiteServiceImplTest extends Specification {
 		given:
 			User user = TestObjects.createUser()
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, user, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.user == user
@@ -244,7 +256,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass ip to dao"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, TEST_IP, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, TEST_IP, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip == TEST_IP
@@ -254,7 +266,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown ip"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.ip?.empty
@@ -264,7 +276,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass referer to dao"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, TEST_REFERER_PAGE, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, TEST_REFERER_PAGE, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
@@ -274,7 +286,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown referer"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.refererPage?.empty
@@ -284,7 +296,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass user agent to dao"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, TEST_USER_AGENT)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, TEST_USER_AGENT, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
@@ -294,7 +306,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass empty string to dao for unknown user agent"() {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent?.empty

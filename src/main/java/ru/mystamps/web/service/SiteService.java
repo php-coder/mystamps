@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
+
 import ru.mystamps.web.entity.User;
 
 public interface SiteService {
@@ -34,6 +36,7 @@ public interface SiteService {
 		User user,
 		String ip,
 		String referer,
-		String agent
+		String agent,
+		Date date
 	);
 }

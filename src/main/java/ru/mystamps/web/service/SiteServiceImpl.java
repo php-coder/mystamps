@@ -53,7 +53,7 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(PAGE_NOT_FOUND, page, user, ip, referer, agent);
+		logEvent(PAGE_NOT_FOUND, page, user, ip, referer, agent, new Date());
 	}
 	
 	@Override
@@ -64,9 +64,10 @@ public class SiteServiceImpl implements SiteService {
 			User user,
 			String ip,
 			String referer,
-			String agent) {
+			String agent,
+			Date date) {
 		
-		logEvent(AUTHENTICATION_FAILED, page, user, ip, referer, agent);
+		logEvent(AUTHENTICATION_FAILED, page, user, ip, referer, agent, date);
 	}
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
@@ -76,7 +77,8 @@ public class SiteServiceImpl implements SiteService {
 			User user,
 			String ip,
 			String referer,
-			String agent) {
+			String agent,
+			Date date) {
 		
 		Validate.isTrue(type != null, "Type of suspicious activity was not set");
 		Validate.isTrue(page != null, "Page should be non null");
@@ -88,7 +90,7 @@ public class SiteServiceImpl implements SiteService {
 		activityType.setName(type);
 		activity.setType(activityType);
 		
-		activity.setOccurredAt(new Date());
+		activity.setOccurredAt(date == null ? new Date() : date);
 		activity.setPage(page);
 		
 		activity.setUser(user);
