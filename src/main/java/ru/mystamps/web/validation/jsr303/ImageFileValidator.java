@@ -34,6 +34,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	private static final Logger LOG = LoggerFactory.getLogger(ImageFileValidator.class);
 	
 	// see https://en.wikipedia.org/wiki/JPEG#Syntax_and_structure
+	// CheckStyle: ignore NoWhitespaceAfterCheck for next 3 lines
 	private static final byte[][] JPEG_SIGNATURES = {
 		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE0 },
 		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE1 }
