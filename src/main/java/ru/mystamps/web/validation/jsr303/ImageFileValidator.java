@@ -34,8 +34,9 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	private static final Logger LOG = LoggerFactory.getLogger(ImageFileValidator.class);
 	
 	// see https://en.wikipedia.org/wiki/JPEG#Syntax_and_structure
-	private static final byte[] JPEG_SIGNATURE = new byte[] {
-		(byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE0
+	private static final byte[][] JPEG_SIGNATURES = {
+		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE0 },
+		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE1 }
 	};
 	
 	// see https://en.wikipedia.org/wiki/Portable_Network_Graphics#File_header
@@ -49,7 +50,14 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	
 	private static boolean isJpeg(byte[] bytes) {
 		// TODO: also check that last 2 bytes are FF D9 (use RandomAccessFile)
-		return Arrays.equals(bytes, JPEG_SIGNATURE);
+		
+		for (byte[] signature: JPEG_SIGNATURES) {
+			if (Arrays.equals(bytes, signature)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	private static boolean doesItLookLikePng(byte[] bytes) {
