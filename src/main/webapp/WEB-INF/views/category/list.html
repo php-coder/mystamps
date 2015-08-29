@@ -14,11 +14,29 @@
 	<body lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}">
 		<div class="container-fluid">
 			<div class="row" id="header">
-				<div id="logo" class="col-sm-10">
+				<div id="logo" class="col-sm-9 vcenter">
 					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
-				</div>
+				</div><!--
 				
-				<div id="user_bar" class="col-sm-2">
+				--><div class="col-sm-1 vcenter">
+					<div class="dropdown">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+							<span th:text="#{t_english}" th:if="${#locale.language == 'en'}">English</span>
+							<!--/*/
+							<span th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">Russian</span>
+							/*/-->
+						</a>
+						<span class="caret"></span>
+						<ul class="dropdown-menu">
+							<li><a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a></li>
+							<!--/*/
+							<li><a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a></li>
+							/*/-->
+						</ul>
+					</div>
+				</div><!--
+				
+				--><div id="user_bar" class="col-sm-2 vcenter">
 					<ul class="list-unstyled">
 						<!--/*/
 						<li sec:authorize="isAuthenticated()">

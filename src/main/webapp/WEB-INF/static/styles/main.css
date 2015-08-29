@@ -75,3 +75,10 @@ label {
 .row .series-images {
 	margin-bottom: 10px;
 }
+
+/* http://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3 */
+.vcenter {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
