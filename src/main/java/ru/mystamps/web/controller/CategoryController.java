@@ -17,8 +17,10 @@
  */
 package ru.mystamps.web.controller;
 
+import java.io.IOException;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -86,10 +88,16 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)
-	public String showInfo(@PathVariable("id") Category category, Model model, Locale userLocale) {
+	public String showInfo(
+		@PathVariable("id") Category category,
+		Model model,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (category == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		model.addAttribute("category", category);

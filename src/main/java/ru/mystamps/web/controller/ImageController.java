@@ -42,12 +42,14 @@ public class ImageController {
 		throws IOException {
 		
 		if (imageId == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
 		}
 		
 		ImageDto image = imageService.get(imageId);
 		if (image == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
 		}
 
 		// TODO: set content disposition

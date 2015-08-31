@@ -17,8 +17,11 @@
  */
 package ru.mystamps.web.controller;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -49,10 +52,13 @@ public class CollectionController {
 	public String showInfo(
 		@PathVariable("id") Collection collection,
 		Model model,
-		Locale userLocale) {
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (collection == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		model.addAttribute("ownerName", collection.getOwner().getName());

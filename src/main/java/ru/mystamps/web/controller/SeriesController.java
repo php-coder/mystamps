@@ -18,8 +18,10 @@
 package ru.mystamps.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
@@ -170,10 +172,16 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(Url.INFO_SERIES_PAGE)
-	public String showInfo(@PathVariable("id") Series series, Model model, User currentUser) {
+	public String showInfo(
+		@PathVariable("id") Series series,
+		Model model,
+		User currentUser,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (series == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		model.addAttribute("addImageForm", new AddImageForm());
@@ -197,7 +205,9 @@ public class SeriesController {
 			BindingResult result,
 			@PathVariable("id") Series series,
 			Model model,
-			User currentUser) {
+			User currentUser,
+			HttpServletResponse response)
+			throws IOException {
 		
 		model.addAttribute("series", series);
 		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
@@ -217,7 +227,8 @@ public class SeriesController {
 		}
 		
 		if (series == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		seriesService.addImageToSeries(form, series, currentUser);
@@ -233,10 +244,13 @@ public class SeriesController {
 	public String addToCollection(
 		@PathVariable("id") Series series,
 		User currentUser,
-		RedirectAttributes redirectAttributes) {
+		RedirectAttributes redirectAttributes,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (series == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Collection collection = collectionService.addToCollection(currentUser, series);
@@ -255,10 +269,13 @@ public class SeriesController {
 	public String removeFromCollection(
 		@PathVariable("id") Series series,
 		User currentUser,
-		RedirectAttributes redirectAttributes) {
+		RedirectAttributes redirectAttributes,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (series == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Collection collection = collectionService.removeFromCollection(currentUser, series);
@@ -269,56 +286,80 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
-	public String findSeriesByMichel(@PathVariable("num") String michelNumberCode) {
+	public String findSeriesByMichel(
+		@PathVariable("num") String michelNumberCode,
+		HttpServletResponse response)
+		throws IOException {
+		
 		if (michelNumberCode == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Optional<Integer> seriesId = seriesService.findSeriesIdByMichelNumber(michelNumberCode);
 		if (!seriesId.isPresent()) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
-	public String findSeriesByScott(@PathVariable("num") String scottNumberCode) {
+	public String findSeriesByScott(
+		@PathVariable("num") String scottNumberCode,
+		HttpServletResponse response)
+		throws IOException {
+		
 		if (scottNumberCode == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Optional<Integer> seriesId = seriesService.findSeriesIdByScottNumber(scottNumberCode);
 		if (!seriesId.isPresent()) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
-	public String findSeriesByYvert(@PathVariable("num") String yvertNumberCode) {
+	public String findSeriesByYvert(
+		@PathVariable("num") String yvertNumberCode,
+		HttpServletResponse response)
+		throws IOException {
+		
 		if (yvertNumberCode == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Optional<Integer> seriesId = seriesService.findSeriesIdByYvertNumber(yvertNumberCode);
 		if (!seriesId.isPresent()) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
-	public String findSeriesByGibbons(@PathVariable("num") String gibbonsNumberCode) {
+	public String findSeriesByGibbons(
+		@PathVariable("num") String gibbonsNumberCode,
+		HttpServletResponse response)
+		throws IOException {
+		
 		if (gibbonsNumberCode == null) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		Optional<Integer> seriesId = seriesService.findSeriesIdByGibbonsNumber(gibbonsNumberCode);
 		if (!seriesId.isPresent()) {
-			throw new NotFoundException();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
 		}
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
