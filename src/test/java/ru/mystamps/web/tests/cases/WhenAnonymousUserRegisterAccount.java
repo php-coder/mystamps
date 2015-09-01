@@ -18,7 +18,9 @@
 package ru.mystamps.web.tests.cases;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import javax.mail.MessagingException;
@@ -51,6 +53,8 @@ public class WhenAnonymousUserRegisterAccount
 	
 	private static final Pattern ACTIVATION_LINK_REGEXP =
 		Pattern.compile(".*/account/activate/key/[0-9a-z]{10}.*", Pattern.DOTALL);
+	
+	private static final int MAX_TIME_TO_WAIT_EMAIL_IN_SECONDS = 5;
 	
 	@Value("${spring.mail.host}")
 	private String mailHost;
@@ -135,9 +139,19 @@ public class WhenAnonymousUserRegisterAccount
 	
 	@Test(groups = "logic", dependsOnMethods = "successfulMessageShouldBeShownAfterRegistration")
 	public void emailWithActivationKeyShouldBeSentAfterRegistration()
-		throws MessagingException, IOException {
+		throws MessagingException, IOException, InterruptedException {
 		
-		List<WiserMessage> messages = mailServer.getMessages();
+		List<WiserMessage> messages = Collections.emptyList();
+		
+		for (int cnt = 0; cnt < MAX_TIME_TO_WAIT_EMAIL_IN_SECONDS; cnt++) {
+			messages = mailServer.getMessages();
+			if (!messages.isEmpty()) {
+				break;
+			}
+			
+			TimeUnit.SECONDS.sleep(1);
+		}
+		
 		assertThat(messages)
 			.overridingErrorMessage("No messages has been sent via mail server")
 			.isNotEmpty();
