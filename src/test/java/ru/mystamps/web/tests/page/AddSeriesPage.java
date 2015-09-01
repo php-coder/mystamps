@@ -19,11 +19,18 @@ package ru.mystamps.web.tests.page;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import ru.mystamps.web.Url;
+
+import static java.util.stream.Collectors.toList;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -36,6 +43,21 @@ import static ru.mystamps.web.tests.page.element.Form.uploadFileField;
 import static ru.mystamps.web.tests.page.element.Form.submitButton;
 
 public class AddSeriesPage extends AbstractPageWithForm {
+	
+	private static final String COUNTRY_OPTION_LOCATOR =
+		"//*[contains(@class, \"selectize-control\")]"
+		+ "/*[contains(@class, \"selectize-dropdown\")]"
+		+ "/*[contains(@class, \"selectize-dropdown-content\")]"
+		+ "/*[contains(@class, \"option\")]";
+	
+	private static final String COUNTRY_BY_NAME_OPTION_LOCATOR_FMT =
+		"//*[contains(@class, \"selectize-control\")]"
+		+ "/*[contains(@class, \"selectize-dropdown\")]"
+		+ "/*[contains(@class, \"selectize-dropdown-content\")]"
+		+ "/*[contains(@class, \"option\") and text()='%s']";
+	
+	// in seconds
+	private static final int WAITING_FOR_ELEMENT_TIMEOUT = 5;
 	
 	public AddSeriesPage(WebDriver driver) {
 		super(driver, Url.ADD_SERIES_PAGE);
@@ -85,13 +107,45 @@ public class AddSeriesPage extends AbstractPageWithForm {
 	}
 	
 	public List<String> getCountryFieldValues() {
-		return getSelectOptions("country");
+		List<WebElement> selectizedFields = getElementsByClassName("selectize-input");
+		Validate.isTrue(
+			selectizedFields.size() == 1,
+			"At page for series creation must be exactly one selectized field"
+		);
+		
+		selectizedFields.get(0).click();
+		
+		return new WebDriverWait(driver, WAITING_FOR_ELEMENT_TIMEOUT)
+			.until(
+				ExpectedConditions.visibilityOfAllElementsLocatedBy(
+					By.xpath(COUNTRY_OPTION_LOCATOR)
+				)
+			)
+			.stream()
+			.map(WebElement::getText)
+			.collect(toList());
 	}
 	
 	public void fillCountry(String value) {
-		if (value != null) {
-			new Select(getElementByName("country")).selectByVisibleText(value);
+		if (value == null) {
+			return;
 		}
+		
+		List<WebElement> selectizedFields = getElementsByClassName("selectize-input");
+		Validate.isTrue(
+			selectizedFields.size() == 1,
+			"At page for series creation must be exactly one selectized field"
+		);
+		
+		selectizedFields.get(0).click();
+		
+		new WebDriverWait(driver, WAITING_FOR_ELEMENT_TIMEOUT)
+			.until(
+				ExpectedConditions.visibilityOfElementLocated(
+					By.xpath(String.format(COUNTRY_BY_NAME_OPTION_LOCATOR_FMT, value))
+				)
+			)
+			.click();
 	}
 	
 	public List<String> getYearFieldValues() {
