@@ -127,6 +127,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
 	public void michelNumbersShouldAcceptValidValues(String numbers, Object whatever) {
+		page.showCatalogNumbers();
 		page.fillMichelNumbers(numbers);
 		
 		page.submit();
@@ -136,6 +137,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
 	public void scottNumbersShouldAcceptValidValues(String numbers, Object whatever) {
+		page.showCatalogNumbers();
 		page.fillScottNumbers(numbers);
 		
 		page.submit();
@@ -145,6 +147,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
 	public void yvertNumbersShouldAcceptValidValues(String numbers, Object whatever) {
+		page.showCatalogNumbers();
 		page.fillYvertNumbers(numbers);
 		
 		page.submit();
@@ -154,6 +157,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
 	public void gibbonsNumbersShouldAcceptValidValues(String numbers, Object whatever) {
+		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
@@ -194,6 +198,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
 	public void michelNumbersShouldRejectInvalidValues(String numbers, String msg) {
+		page.showCatalogNumbers();
 		page.fillMichelNumbers(numbers);
 		
 		page.submit();
@@ -203,6 +208,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
 	public void scottNumbersShouldRejectInvalidValues(String numbers, String msg) {
+		page.showCatalogNumbers();
 		page.fillScottNumbers(numbers);
 		
 		page.submit();
@@ -212,6 +218,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
 	public void yvertNumbersShouldRejectInvalidValues(String numbers, String msg) {
+		page.showCatalogNumbers();
 		page.fillYvertNumbers(numbers);
 		
 		page.submit();
@@ -221,6 +228,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
 	public void gibbonsNumbersShouldRejectInvalidValues(String numbers, String msg) {
+		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
@@ -230,6 +238,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
 	public void michelPriceShouldRejectInvalidValues(String price, String msg) {
+		page.showCatalogNumbers();
 		page.fillMichelPrice(price);
 		
 		page.submit();
@@ -239,6 +248,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
 	public void scottPriceShouldRejectInvalidValues(String price, String msg) {
+		page.showCatalogNumbers();
 		page.fillScottPrice(price);
 		
 		page.submit();
@@ -248,6 +258,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
 	public void yvertPriceShouldRejectInvalidValues(String price, String msg) {
+		page.showCatalogNumbers();
 		page.fillYvertPrice(price);
 		
 		page.submit();
@@ -257,6 +268,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
 	public void gibbonsPriceShouldRejectInvalidValues(String price, String msg) {
+		page.showCatalogNumbers();
 		page.fillGibbonsPrice(price);
 		
 		page.submit();
@@ -266,6 +278,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void michelNumbersShouldRejectExistingValues() {
+		page.showCatalogNumbers();
 		page.fillMichelNumbers(existingMichelNumber);
 		
 		page.submit();
@@ -277,6 +290,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void scottNumbersShouldRejectExistingValues() {
+		page.showCatalogNumbers();
 		page.fillScottNumbers(existingScottNumber);
 		
 		page.submit();
@@ -288,6 +302,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void yvertNumbersShouldRejectExistingValues() {
+		page.showCatalogNumbers();
 		page.fillYvertNumbers(existingYvertNumber);
 		
 		page.submit();
@@ -299,6 +314,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void gibbonsNumbersShouldRejectExistingValues() {
+		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(existingGibbonsNumber);
 		
 		page.submit();
@@ -321,11 +337,14 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
+		page.showDateOfRelease();
+		
 		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void michelNumbersShouldBeStripedFromSpaces() {
+		page.showCatalogNumbers();
 		page.fillMichelNumbers(" 1 , 2 ");
 		
 		page.submit();
@@ -335,6 +354,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void scottNumbersShouldBeStripedFromSpaces() {
+		page.showCatalogNumbers();
 		page.fillScottNumbers(" 3 , 4 ");
 		
 		page.submit();
@@ -344,6 +364,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void yvertNumbersShouldBeStripedFromSpaces() {
+		page.showCatalogNumbers();
 		page.fillYvertNumbers(" 5 , 6 ");
 		
 		page.submit();
@@ -353,6 +374,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void gibbonsNumbersShouldBeStripedFromSpaces() {
+		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(" 7 , 8 ");
 		
 		page.submit();
@@ -400,11 +422,16 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 
 		page.fillCategory(expectedCategoryName);
 		page.fillCountry(expectedCountryName);
+		
+		page.showDateOfRelease();
 		page.fillDay(day);
 		page.fillMonth(month);
 		page.fillYear(year);
+		
 		page.fillQuantity(expectedQuantity);
 		page.fillPerforated(false);
+		
+		page.showCatalogNumbers();
 		
 		page.fillMichelNumbers("1, 2, 3");
 		page.fillMichelPrice("10.5");
@@ -449,6 +476,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
+		page.showCatalogNumbers();
 		page.fillMichelNumbers("4,5,4");
 		
 		AbstractPage next = page.submit();
@@ -463,6 +491,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
+		page.showCatalogNumbers();
 		page.fillScottNumbers("14,15,14");
 		
 		AbstractPage next = page.submit();
@@ -477,6 +506,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
+		page.showCatalogNumbers();
 		page.fillYvertNumbers("24,25,24");
 		
 		AbstractPage next = page.submit();
@@ -491,6 +521,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
+		page.showCatalogNumbers();
 		page.fillGibbonsNumbers("34,35,34");
 		
 		AbstractPage next = page.submit();

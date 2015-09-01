@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.tests;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -29,7 +30,8 @@ public abstract class WebDriverFactory {
 	
 	public static WebDriver getDriver() {
 		if (driver == null) {
-			driver = new HtmlUnitDriver();
+			boolean enableJavascript = true;
+			driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38, enableJavascript);
 		}
 		
 		return driver;

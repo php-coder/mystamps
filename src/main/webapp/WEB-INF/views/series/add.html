@@ -195,7 +195,7 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
 									Specify date of release
 								</a>
 							</div>
@@ -287,7 +287,7 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-7">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">
 									Add information from stamps catalogues
 								</a>
 							</div>
@@ -395,7 +395,7 @@
 						
 						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
 									Add comment
 								</a>
 							</div>
@@ -435,7 +435,10 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
+		<!-- TODO: #126
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
+		-->
+		<script src="https://my-stamps.ru/public/js/CatalogUtils.js"></script>
 		
 		<script>
 			$(function() {

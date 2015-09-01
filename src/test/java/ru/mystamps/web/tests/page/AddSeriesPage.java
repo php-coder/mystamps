@@ -136,6 +136,14 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		}
 	}
 	
+	public void showDateOfRelease() {
+		getElementById("specify-issue-date-link").click();
+	}
+	
+	public void showCatalogNumbers() {
+		getElementById("add-catalog-numbers-link").click();
+	}
+	
 	public void fillMichelNumbers(String value) {
 		if (value != null) {
 			fillField("michelNumbers", value);
@@ -182,6 +190,10 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		if (value != null) {
 			fillField("gibbonsPrice", value);
 		}
+	}
+	
+	public void showComment() {
+		getElementById("add-comment-link").click();
 	}
 	
 	public void fillComment(String value) {
