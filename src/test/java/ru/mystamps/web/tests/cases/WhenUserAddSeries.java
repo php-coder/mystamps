@@ -460,7 +460,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		
 		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
-		assertThat(nextPage.getDateOfRelease()).isEqualTo("08. 09. 1999");
+		assertThat(nextPage.getDateOfRelease()).isEqualTo("08.09.1999");
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
 		

@@ -493,7 +493,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 
 		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
 		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
-		assertThat(nextPage.getDateOfRelease()).isEqualTo("04. 05. 1999");
+		assertThat(nextPage.getDateOfRelease()).isEqualTo("04.05.1999");
 		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
 		
