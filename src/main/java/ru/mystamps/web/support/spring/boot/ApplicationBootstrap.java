@@ -31,7 +31,6 @@ import org.togglz.core.manager.FeatureManager;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
-import ru.mystamps.web.support.h2.H2Config;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -42,7 +41,6 @@ import java.util.EnumSet;
 @Import({
 	ApplicationContext.class,
 	DispatcherServletContext.class,
-	H2Config.class,
 	ThymeleafViewResolverInitializingBean.class,
 	JettyServletContainerCustomizer.class,
 	ErrorPagesServletContainerCustomizer.class

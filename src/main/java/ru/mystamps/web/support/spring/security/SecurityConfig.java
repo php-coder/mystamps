@@ -95,7 +95,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
-				// See also: src/main/java/ru/mystamps/web/support/h2/H2Config.java
 				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/console"))
 			.and()
 			.rememberMe()
