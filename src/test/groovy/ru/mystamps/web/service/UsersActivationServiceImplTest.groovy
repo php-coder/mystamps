@@ -17,49 +17,48 @@
  */
 package ru.mystamps.web.service
 
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.dao.JdbcUsersActivationDao
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.tests.DateUtils
+import spock.lang.Specification
+import spock.lang.Unroll
 
 class UsersActivationServiceImplTest extends Specification {
-	
+
 	private JdbcUsersActivationDao jdbcUsersActivationDao = Mock()
 	private MailService mailService = Mock()
-	
+
 	private UsersActivationService service
 	private RegisterAccountForm registrationForm
-	
+
 	private static final Locale ANY_LOCALE = Locale.ENGLISH;
-	
+
 	def setup() {
 		registrationForm = new RegisterAccountForm()
 		registrationForm.setEmail('john.dou@example.org')
-		
+
 		service = new UsersActivationServiceImpl(jdbcUsersActivationDao, mailService)
 	}
-	
+
 	//
 	// Tests for add()
 	//
-	
+
 	def "add() should throw exception when dto is null"() {
 		when:
 			service.add(null, ANY_LOCALE)
 		then:
 			thrown IllegalArgumentException
 	}
-	
+
 	def "add() should call dao"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
 			1 * jdbcUsersActivationDao.add(_ as UsersActivation)
 	}
-	
+
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -70,7 +69,7 @@ class UsersActivationServiceImplTest extends Specification {
 				return true
 			})
 	}
-	
+
 	def "add() should generate unique activation key"() {
 		given:
 			List<String> passedArguments = []
@@ -93,7 +92,7 @@ class UsersActivationServiceImplTest extends Specification {
 		and:
 			firstActivationKey != secondActivationKey
 	}
-	
+
 	def "add() should throw exception when email is null"() {
 		given:
 			registrationForm.setEmail(null)
@@ -102,7 +101,7 @@ class UsersActivationServiceImplTest extends Specification {
 		then:
 			thrown IllegalArgumentException
 	}
-	
+
 	def "add() should pass email to dao"() {
 		given:
 			String expectedEmail = 'somename@example.org'
@@ -115,7 +114,7 @@ class UsersActivationServiceImplTest extends Specification {
 				return true
 			})
 	}
-	
+
 	@Unroll
 	def "add() should pass language '#expectedLang' to dao"(Locale lang, String expectedLang) {
 		when:
@@ -130,7 +129,7 @@ class UsersActivationServiceImplTest extends Specification {
 			null          || 'en'
 			Locale.FRENCH || 'fr'
 	}
-	
+
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -140,7 +139,7 @@ class UsersActivationServiceImplTest extends Specification {
 				return true
 			})
 	}
-	
+
 	def "add() should pass user's activation request to mail service"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -153,18 +152,18 @@ class UsersActivationServiceImplTest extends Specification {
 				return  true;
 			})
 	}
-	
+
 	//
 	// Tests for countByActivationKey()
 	//
-	
+
 	def "countByActivationKey() should throw exception when key is null"() {
 		when:
 			service.countByActivationKey(null)
 		then:
 			thrown IllegalArgumentException
 	}
-	
+
 	def "countByActivationKey() should call dao"() {
 		given:
 			jdbcUsersActivationDao.countByActivationKey(_ as String) >> 2L
@@ -173,12 +172,42 @@ class UsersActivationServiceImplTest extends Specification {
 		then:
 			result == 2L
 	}
-	
+
 	def "countByActivationKey() should pass activation key to dao"() {
 		when:
 			service.countByActivationKey('0987654321')
 		then:
 			1 * jdbcUsersActivationDao.countByActivationKey('0987654321')
 	}
-	
+
+    //
+    // Tests for remove()
+    //
+
+
+    def "remove() should throw exception when key is null"() {
+        when:
+            service.remove(null)
+        then:
+            thrown IllegalArgumentException
+    }
+
+    def "remove() should throw exception when Activation Key is null"() {
+        given:
+            UsersActivation activation = TestObjects.createUsersActivation()
+            activation.setActivationKey(null)
+        when:
+            service.remove(activation)
+        then:
+            thrown IllegalArgumentException
+    }
+
+    def "remove() should pass argument to DAO method"() {
+        given:
+            UsersActivation activation = TestObjects.createUsersActivation()
+        when:
+            service.remove(activation)
+        then:
+            1 * jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey())
+    }
 }
