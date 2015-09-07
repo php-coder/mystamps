@@ -209,6 +209,11 @@ public class SeriesController {
 			HttpServletResponse response)
 			throws IOException {
 		
+		if (series == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
 		model.addAttribute("series", series);
 		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
 		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
@@ -224,11 +229,6 @@ public class SeriesController {
 			// don't try to re-display file upload field
 			form.setImage(null);
 			return "series/info";
-		}
-		
-		if (series == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
 		}
 		
 		seriesService.addImageToSeries(form, series, currentUser);
