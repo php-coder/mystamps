@@ -88,9 +88,9 @@ class CountryServiceImplTest extends Specification {
 		given:
 			Integer expectedId = 7
 		and:
-			form.setName("Example Country")
+			form.setName('Example Country')
 		and:
-			String expectedSlug = "example-country"
+			String expectedSlug = 'example-country'
 		and:
 			jdbcCountryDao.add(_ as AddCountryDbDto) >> expectedId
 		and:
