@@ -32,7 +32,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCollectionDao;
-import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
@@ -68,9 +68,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	}
 	
 	@Override
-	public Integer add(Collection collection) {
+	public Integer add(AddCollectionDbDto collection) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("user_id", collection.getOwner().getId());
+		params.put("user_id", collection.getOwnerId());
 		params.put("slug", collection.getSlug());
 		
 		KeyHolder holder = new GeneratedKeyHolder();

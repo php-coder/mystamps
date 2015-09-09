@@ -15,13 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.AddCollectionDbDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-public interface JdbcCollectionDao {
-	Iterable<LinkEntityDto> findLastCreated(int quantity);
-	long countCollectionsOfUsers();
-	Integer add(AddCollectionDbDto collection);
+@Getter
+@Setter
+@ToString
+public class AddCollectionDbDto {
+	private Integer ownerId;
+	private String slug;
 }

@@ -29,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.JdbcCollectionDao;
+import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
@@ -47,17 +48,16 @@ public class CollectionServiceImpl implements CollectionService {
 	public void createCollection(User user) {
 		Validate.isTrue(user != null, "User must be non null");
 		
-		Collection collection = new Collection();
-		collection.setOwner(user);
+		AddCollectionDbDto collection = new AddCollectionDbDto();
+		collection.setOwnerId(user.getId());
 		
 		String slug = SlugUtils.slugify(user.getLogin());
 		Validate.isTrue(slug != null, "Slug for string '%s' is null", user.getLogin());
 		collection.setSlug(slug);
 		
-		Integer collectionId = jdbcCollectionDao.add(collection);
-		collection.setId(collectionId);
+		Integer id = jdbcCollectionDao.add(collection);
 		
-		LOG.info("Collection has been created ({})", collection);
+		LOG.info("Collection #{} has been created ({})", id, collection);
 	}
 	
 	@Override
