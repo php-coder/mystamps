@@ -20,8 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.JdbcCategoryDao
+import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
@@ -37,9 +37,8 @@ class CategoryServiceImplTest extends Specification {
 	private AddCategoryForm form
 	private User user
 	
-	private CategoryDao categoryDao = Mock()
 	private JdbcCategoryDao jdbcCategoryDao = Mock()
-	private CategoryService service = new CategoryServiceImpl(categoryDao, jdbcCategoryDao)
+	private CategoryService service = new CategoryServiceImpl(jdbcCategoryDao)
 	
 	def setup() {
 		form = new AddCategoryForm()
@@ -87,11 +86,15 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Category category = TestObjects.createCategory()
+			Integer expectedId = 10
 		and:
-			categoryDao.save(_ as Category) >> category
+			form.setName('Example Category')
 		and:
-			UrlEntityDto expected = new UrlEntityDto(category.getId(), category.getSlug())
+			String expectedSlug = 'example-category'
+		and:
+			jdbcCategoryDao.add(_ as AddCategoryDbDto) >> expectedId
+		and:
+			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
 			UrlEntityDto actual = service.add(form, user)
 		then:
@@ -105,10 +108,10 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
 				assert category?.name == expectedCategoryName
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 20
 	}
 	
 	def "add() should pass Russian category name to dao"() {
@@ -118,10 +121,10 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
 				assert category?.nameRu == expectedCategoryName
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 30
 	}
 	
 	def "add() should throw exception when name can't be converted to slug"() {
@@ -143,50 +146,50 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
 				assert category?.slug == slug
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 40
 	}
 	
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
-				assert DateUtils.roughlyEqual(category?.metaInfo?.createdAt, new Date())
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 50
 	}
 	
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
-				assert DateUtils.roughlyEqual(category?.metaInfo?.updatedAt, new Date())
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 60
 	}
 	
 	def "add() should assign created by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
-				assert category?.metaInfo?.createdBy == user
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+				assert category?.createdBy == user.id
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 70
 	}
 	
 	def "add() should assign updated by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * categoryDao.save({ Category category ->
-				assert category?.metaInfo?.updatedBy == user
+			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+				assert category?.updatedBy == user.id
 				return true
-			}) >> TestObjects.createCategory()
+			}) >> 80
 	}
 	
 	//

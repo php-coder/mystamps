@@ -32,10 +32,10 @@ import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
@@ -46,7 +46,6 @@ import ru.mystamps.web.util.SlugUtils;
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
-	private final CategoryDao categoryDao;
 	private final JdbcCategoryDao jdbcCategoryDao;
 	
 	@Override
@@ -58,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
-		Category category = new Category();
+		AddCategoryDbDto category = new AddCategoryDbDto();
 		category.setName(dto.getName());
 		category.setNameRu(dto.getNameRu());
 		
@@ -70,16 +69,16 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setSlug(slug);
 		
 		Date now = new Date();
-		category.getMetaInfo().setCreatedAt(now);
-		category.getMetaInfo().setUpdatedAt(now);
+		category.setCreatedAt(now);
+		category.setUpdatedAt(now);
 		
-		category.getMetaInfo().setCreatedBy(user);
-		category.getMetaInfo().setUpdatedBy(user);
+		category.setCreatedBy(user.getId());
+		category.setUpdatedBy(user.getId());
 
-		Category entity = categoryDao.save(category);
-		LOG.info("Category has been created ({})", entity.toLongString());
+		Integer id = jdbcCategoryDao.add(category);
+		LOG.info("Category #{} has been created ({})", id, category);
 		
-		return new UrlEntityDto(entity.getId(), entity.getSlug());
+		return new UrlEntityDto(id, slug);
 	}
 	
 	@Override

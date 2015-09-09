@@ -15,21 +15,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import java.util.Map;
+import java.util.Date;
 
-import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-public interface JdbcCategoryDao {
-	Integer add(AddCategoryDbDto category);
-	long countAll();
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countCategoriesOfCollection(Integer collectionId);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+@Getter
+@Setter
+@ToString(of = { "name", "nameRu"})
+public class AddCategoryDbDto {
+	private String name;
+	private String nameRu;
+	private String slug;
+	private Date createdAt;
+	private Integer createdBy;
+	private Date updatedAt;
+	private Integer updatedBy;
 }

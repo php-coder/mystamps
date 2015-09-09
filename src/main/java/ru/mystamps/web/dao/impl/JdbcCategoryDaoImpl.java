@@ -22,12 +22,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
@@ -35,6 +41,9 @@ import ru.mystamps.web.service.dto.SelectEntityDto;
 public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${category.create}")
+	private String addCategorySql;
 	
 	@Value("${category.count_all_categories}")
 	private String countAllSql;
@@ -56,6 +65,34 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	@Value("${category.find_all_categories_names_with_slug}")
 	private String findCategoriesNamesWithSlugSql;
+	
+	@Override
+	public Integer add(AddCategoryDbDto category) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", category.getName());
+		params.put("name_ru", category.getNameRu());
+		params.put("slug", category.getSlug());
+		params.put("created_at", category.getCreatedAt());
+		params.put("created_by", category.getCreatedBy());
+		params.put("updated_at", category.getUpdatedAt());
+		params.put("updated_by", category.getUpdatedBy());
+		
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addCategorySql,
+			new MapSqlParameterSource(params),
+			holder
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of category: %d",
+			affected
+		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
+	}
 	
 	@Override
 	public long countAll() {

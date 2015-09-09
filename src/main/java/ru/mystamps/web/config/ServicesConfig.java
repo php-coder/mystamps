@@ -36,9 +36,6 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 public class ServicesConfig {
 	
 	@Inject
-	private CategoryDao categoryDao;
-	
-	@Inject
 	private DaoConfig daoConfig;
 	
 	@Inject
@@ -78,7 +75,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CategoryService getCategoryService() {
-		return new CategoryServiceImpl(categoryDao, daoConfig.getJdbcCategoryDao());
+		return new CategoryServiceImpl(daoConfig.getJdbcCategoryDao());
 	}
 	
 	@Bean

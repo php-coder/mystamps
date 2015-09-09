@@ -67,18 +67,6 @@ public class Category implements LocalizedEntity {
 		return String.valueOf(id);
 	}
 	
-	public String toLongString() {
-		return new StringBuilder()
-			.append("Category(id=")
-			.append(id)
-			.append(", name=")
-			.append(name)
-			.append(", nameRu=")
-			.append(nameRu)
-			.append(')')
-			.toString();
-	}
-	
 	@Override
 	public String getLocalizedName(Locale locale) {
 		return LocaleUtils.getLocalizedName(locale, this);
