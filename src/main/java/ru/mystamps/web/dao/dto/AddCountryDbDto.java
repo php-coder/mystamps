@@ -15,21 +15,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import ru.mystamps.web.dao.dto.AddCountryDbDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import java.util.Date;
 
-public interface JdbcCountryDao {
-	Integer add(AddCountryDbDto country);
-	long countAll();
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countCountriesOfCollection(Integer collectionId);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+@Getter
+@Setter
+@ToString(of = { "name", "nameRu"})
+public class AddCountryDbDto {
+	private String name;
+	private String nameRu;
+	private String slug;
+	private Date createdAt;
+	private Integer createdBy;
+	private Date updatedAt;
+	private Integer updatedBy;
 }

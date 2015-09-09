@@ -20,8 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.JdbcCountryDao
+import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
@@ -37,9 +37,8 @@ class CountryServiceImplTest extends Specification {
 	private AddCountryForm form
 	private User user
 	
-	private CountryDao countryDao = Mock()
 	private JdbcCountryDao jdbcCountryDao = Mock()
-	private CountryService service = new CountryServiceImpl(countryDao, jdbcCountryDao)
+	private CountryService service = new CountryServiceImpl(jdbcCountryDao)
 	
 	def setup() {
 		form = new AddCountryForm()
@@ -87,11 +86,15 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Country country = TestObjects.createCountry()
+			Integer expectedId = 7
 		and:
-			countryDao.save(_ as Country) >> country
+			form.setName("Example Country")
 		and:
-			UrlEntityDto expected = new UrlEntityDto(country.getId(), country.getSlug())
+			String expectedSlug = "example-country"
+		and:
+			jdbcCountryDao.add(_ as AddCountryDbDto) >> expectedId
+		and:
+			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
 			UrlEntityDto actual = service.add(form, user)
 		then:
@@ -105,10 +108,10 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 10
 	}
 	
 	def "add() should pass country name on Russian to dao"() {
@@ -118,10 +121,10 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 20
 	}
 	
 	def "add() should throw exception when name can't be converted to slug"() {
@@ -143,50 +146,50 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 30
 	}
 	
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert DateUtils.roughlyEqual(country?.metaInfo?.createdAt, new Date())
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 40
 	}
 	
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert DateUtils.roughlyEqual(country?.metaInfo?.updatedAt, new Date())
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 50
 	}
 	
 	def "add() should assign created by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert country?.metaInfo?.createdBy == user
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+				assert country?.createdBy == user.id
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 60
 	}
 	
 	def "add() should assign updated by to user"() {
 		when:
 			service.add(form, user)
 		then:
-			1 * countryDao.save({ Country country ->
-				assert country?.metaInfo?.updatedBy == user
+			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+				assert country?.updatedBy == user.id
 				return true
-			}) >> TestObjects.createCountry()
+			}) >> 70
 	}
 	
 	//

@@ -32,10 +32,9 @@ import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
@@ -46,7 +45,6 @@ import ru.mystamps.web.util.SlugUtils;
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
-	private final CountryDao countryDao;
 	private final JdbcCountryDao jdbcCountryDao;
 	
 	@Override
@@ -58,7 +56,7 @@ public class CountryServiceImpl implements CountryService {
 		Validate.isTrue(dto.getNameRu() != null, "Country name on Russian should be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
-		Country country = new Country();
+		AddCountryDbDto country = new AddCountryDbDto();
 		country.setName(dto.getName());
 		country.setNameRu(dto.getNameRu());
 
@@ -70,16 +68,17 @@ public class CountryServiceImpl implements CountryService {
 		country.setSlug(slug);
 		
 		Date now = new Date();
-		country.getMetaInfo().setCreatedAt(now);
-		country.getMetaInfo().setUpdatedAt(now);
 		
-		country.getMetaInfo().setCreatedBy(user);
-		country.getMetaInfo().setUpdatedBy(user);
-
-		Country entity = countryDao.save(country);
-		LOG.info("Country has been created ({})", entity.toLongString());
+		country.setCreatedAt(now);
+		country.setCreatedBy(user.getId());
+		country.setUpdatedAt(now);
+		country.setUpdatedBy(user.getId());
 		
-		return new UrlEntityDto(entity.getId(), entity.getSlug());
+		Integer id = jdbcCountryDao.add(country);
+		
+		LOG.info("Country #{} has been created ({})", id, country);
+		
+		return new UrlEntityDto(id, slug);
 	}
 	
 	@Override

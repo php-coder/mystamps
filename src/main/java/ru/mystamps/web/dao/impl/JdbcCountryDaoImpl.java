@@ -22,12 +22,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
@@ -35,6 +41,9 @@ import ru.mystamps.web.service.dto.SelectEntityDto;
 public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${country.create}")
+	private String addCountrySql;
 	
 	@Value("${country.count_all_countries}")
 	private String countAllSql;
@@ -56,6 +65,34 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	@Value("${country.find_all_countries_names_with_slug}")
 	private String findCountriesNamesWithSlugSql;
+	
+	@Override
+	public Integer add(AddCountryDbDto country) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", country.getName());
+		params.put("name_ru", country.getNameRu());
+		params.put("slug", country.getSlug());
+		params.put("created_at", country.getCreatedAt());
+		params.put("created_by", country.getCreatedBy());
+		params.put("updated_at", country.getUpdatedAt());
+		params.put("updated_by", country.getUpdatedBy());
+		
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addCountrySql,
+			new MapSqlParameterSource(params),
+			holder
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of country: %d",
+			affected
+		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
+	}
 	
 	@Override
 	public long countAll() {
