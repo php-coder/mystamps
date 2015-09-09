@@ -86,7 +86,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should call dao"() {
 		given:
-			Integer expectedId = 7
+			Integer expectedId = 10
 		and:
 			form.setName('Example Country')
 		and:
@@ -111,7 +111,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
 				return true
-			}) >> 10
+			}) >> 20
 	}
 	
 	def "add() should pass country name on Russian to dao"() {
@@ -124,7 +124,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
 				return true
-			}) >> 20
+			}) >> 30
 	}
 	
 	def "add() should throw exception when name can't be converted to slug"() {
@@ -149,7 +149,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
 				return true
-			}) >> 30
+			}) >> 40
 	}
 	
 	def "add() should assign created at to current date"() {
@@ -159,7 +159,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
 				return true
-			}) >> 40
+			}) >> 50
 	}
 	
 	def "add() should assign updated at to current date"() {
@@ -169,7 +169,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
-			}) >> 50
+			}) >> 60
 	}
 	
 	def "add() should assign created by to user"() {
@@ -179,7 +179,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.createdBy == user.id
 				return true
-			}) >> 60
+			}) >> 70
 	}
 	
 	def "add() should assign updated by to user"() {
@@ -189,7 +189,7 @@ class CountryServiceImplTest extends Specification {
 			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
 				assert country?.updatedBy == user.id
 				return true
-			}) >> 70
+			}) >> 80
 	}
 	
 	//
