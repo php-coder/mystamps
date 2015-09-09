@@ -33,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCategoryDto;
