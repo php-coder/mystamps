@@ -26,7 +26,6 @@ import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
-import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.Currency
 import ru.mystamps.web.entity.GibbonsCatalog
 import ru.mystamps.web.entity.Image
@@ -768,36 +767,23 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findBy(Collection)
+	// Tests for findByCollectionId()
 	//
 	
-	def "findBy(Collection) should throw exception when collection is null"() {
+	def "findByCollectionId() should throw exception when collection id is null"() {
 		when:
-			service.findBy(null as Collection, 'whatever')
+			service.findByCollectionId(null, 'whatever')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findBy(Collection) should throw exception when collection id is null"() {
-		given:
-			Collection collection = Mock()
-			collection.getId() >> null
-		when:
-			service.findBy(collection, 'whatever')
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "findBy(Collection) should pass arguments to dao"() {
+	def "findByCollectionId() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 16
 		and:
 			String expectedLang = 'expected'
-		and:
-			Collection expectedCollection = Mock()
-			expectedCollection.getId() >> expectedCollectionId
 		when:
-			service.findBy(expectedCollection, expectedLang)
+			service.findByCollectionId(expectedCollectionId, expectedLang)
 		then:
 			1 * jdbcSeriesDao.findByCollectionIdAsSeriesInfo(
 				{ Integer collectionId ->
