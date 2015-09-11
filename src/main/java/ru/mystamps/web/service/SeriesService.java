@@ -37,7 +37,7 @@ public interface SeriesService {
 	long countAll();
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
-	long countStampsOf(Collection collection);
+	long countStampsOf(Integer collectionId);
 	
 	long countByMichelNumber(String michelNumberCode);
 	long countByScottNumber(String scottNumberCode);
