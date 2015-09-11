@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Currency;
@@ -255,10 +254,10 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findBy(Category category, String lang) {
-		Validate.isTrue(category != null, "Category must be non null");
+	public Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang) {
+		Validate.isTrue(categoryId != null, "Category id must be non null");
 		
-		return jdbcSeriesDao.findByCategoryIdAsSeriesInfo(category.getId(), lang);
+		return jdbcSeriesDao.findByCategoryIdAsSeriesInfo(categoryId, lang);
 	}
 	
 	@Override

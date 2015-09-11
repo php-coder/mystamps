@@ -720,17 +720,17 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findBy(Category)
+	// Tests for findByCategoryId()
 	//
 	
-	def "findBy(Category) should throw exception if category is null"() {
+	def "findByCategoryId() should throw exception if category id is null"() {
 		when:
-			service.findBy(null as Category, 'any')
+			service.findByCategoryId(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findBy(Category) should call dao and return result"() {
+	def "findByCategoryId() should call dao and return result"() {
 		given:
 			Category expectedCategory = TestObjects.createCategory()
 		and:
@@ -738,7 +738,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
-			Iterable<Category> result = service.findBy(expectedCategory, 'any')
+			Iterable<Category> result = service.findByCategoryId(10, 'any')
 		then:
 			result == expectedResult
 	}

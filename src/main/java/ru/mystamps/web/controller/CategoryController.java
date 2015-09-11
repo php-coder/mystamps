@@ -103,7 +103,8 @@ public class CategoryController {
 		model.addAttribute("category", category);
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("seriesOfCategory", seriesService.findBy(category, lang));
+		Integer categoryId = category.getId();
+		model.addAttribute("seriesOfCategory", seriesService.findByCategoryId(categoryId, lang));
 		
 		return "category/info";
 	}

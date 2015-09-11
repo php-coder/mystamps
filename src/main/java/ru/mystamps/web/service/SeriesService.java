@@ -19,7 +19,6 @@ package ru.mystamps.web.service;
 
 import java.util.Optional;
 
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
@@ -49,7 +48,7 @@ public interface SeriesService {
 	Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode);
 	Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode);
 	
-	Iterable<SeriesInfoDto> findBy(Category category, String lang);
+	Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findBy(Country country, String lang);
 	Iterable<SeriesInfoDto> findBy(Collection collection, String lang);
 	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
