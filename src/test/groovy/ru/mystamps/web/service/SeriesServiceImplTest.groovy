@@ -553,31 +553,18 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for countSeriesOf()
 	//
 	
-	def "countSeriesOf() should throw exception when collection is null"() {
+	def "countSeriesOf() should throw exception when argument is null"() {
 		when:
 			service.countSeriesOf(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "countSeriesOf() should throw exception when collection id is null"() {
-		given:
-			Collection collection = Mock()
-			collection.getId() >> null
-		when:
-			service.countSeriesOf(collection)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "countSeriesOf() should pass arguments to dao"() {
+	def "countSeriesOf() should pass argument to dao"() {
 		given:
 			Integer expectedCollectionId = 7
-		and:
-			Collection expectedCollection = Mock()
-			expectedCollection.getId() >> expectedCollectionId
 		when:
-			service.countSeriesOf(expectedCollection)
+			service.countSeriesOf(expectedCollectionId)
 		then:
 			1 * jdbcSeriesDao.countSeriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId

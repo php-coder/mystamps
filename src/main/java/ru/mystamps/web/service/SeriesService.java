@@ -36,7 +36,7 @@ public interface SeriesService {
 	void addImageToSeries(AddImageDto dto, Series series, User user);
 	long countAll();
 	long countAllStamps();
-	long countSeriesOf(Collection collection);
+	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Collection collection);
 	
 	long countByMichelNumber(String michelNumberCode);

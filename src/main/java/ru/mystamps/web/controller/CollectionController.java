@@ -68,9 +68,10 @@ public class CollectionController {
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {
+			Integer collectionId = collection.getId();
 			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collection));
 			model.addAttribute("countryCounter", countryService.countCountriesOf(collection));
-			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collection));
+			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
 			model.addAttribute("stampsCounter", seriesService.countStampsOf(collection));
 			
 			model.addAttribute(

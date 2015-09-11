@@ -161,11 +161,10 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public long countSeriesOf(Collection collection) {
-		Validate.isTrue(collection != null, "Collection must be non null");
-		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+	public long countSeriesOf(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return jdbcSeriesDao.countSeriesOfCollection(collection.getId());
+		return jdbcSeriesDao.countSeriesOfCollection(collectionId);
 	}
 	
 	@Override
