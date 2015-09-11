@@ -743,17 +743,17 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findBy(Country)
+	// Tests for findByCountryId()
 	//
 	
-	def "findBy(Country) should throw exception if country is null"() {
+	def "findByCountryId() should throw exception if country id is null"() {
 		when:
-			service.findBy(null as Country, 'any')
+			service.findByCountryId(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findBy(Country) should call dao and return result"() {
+	def "findByCountryId() should call dao and return result"() {
 		given:
 			Country expectedCountry = TestObjects.createCountry()
 		and:
@@ -761,7 +761,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
-			Iterable<Country> result = service.findBy(expectedCountry, 'any')
+			Iterable<Country> result = service.findByCountryId(20, 'any')
 		then:
 			result == expectedResult
 	}

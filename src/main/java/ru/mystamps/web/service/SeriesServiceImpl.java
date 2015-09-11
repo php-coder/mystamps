@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Currency;
 import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.entity.Image;
@@ -261,10 +260,10 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findBy(Country country, String lang) {
-		Validate.isTrue(country != null, "Country must be non null");
+	public Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang) {
+		Validate.isTrue(countryId != null, "Country id must be non null");
 		
-		return jdbcSeriesDao.findByCountryIdAsSeriesInfo(country.getId(), lang);
+		return jdbcSeriesDao.findByCountryIdAsSeriesInfo(countryId, lang);
 	}
 	
 	@Override

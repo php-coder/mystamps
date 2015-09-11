@@ -103,7 +103,8 @@ public class CountryController {
 		model.addAttribute("country", country);
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("seriesOfCountry", seriesService.findBy(country, lang));
+		Integer countryId = country.getId();
+		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
 		
 		return "country/info";
 	}

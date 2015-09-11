@@ -19,7 +19,6 @@ package ru.mystamps.web.service;
 
 import java.util.Optional;
 
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddImageDto;
@@ -48,7 +47,7 @@ public interface SeriesService {
 	Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode);
 	
 	Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang);
-	Iterable<SeriesInfoDto> findBy(Country country, String lang);
+	Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang);
 	Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
 	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
 	Iterable<SitemapInfoDto> findAllForSitemap();
