@@ -182,6 +182,28 @@ class UsersActivationServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findByActivationKey()
+	//
+
+	def "findByActivationKey() should throw exception when argument is null"() {
+		when:
+			service.findByActivationKey(null)
+		then:
+			thrown IllegalArgumentException
+	}
+
+	def "findByActivationKey() should call dao, pass argument to it and return result"() {
+		given:
+			UsersActivation expectedResult = TestObjects.createUsersActivation();
+		when:
+			UsersActivation result = service.findByActivationKey("0987654321")
+		then:
+			1 * jdbcUsersActivationDao.findByActivationKey("0987654321") >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for remove()
 	//
 	
