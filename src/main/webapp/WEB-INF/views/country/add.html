@@ -69,8 +69,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div id="content" class="col-sm-6 col-sm-offset-3">
-					<h3 th:text="#{t_add_country_ucfirst}">
+				<div id="content" class="col-sm-6 col-sm-offset-3" th:with="add_country=#{t_add_country}">
+					<h3 th:text="${#strings.capitalize(add_country)}">
 						Add country
 					</h3>
 					

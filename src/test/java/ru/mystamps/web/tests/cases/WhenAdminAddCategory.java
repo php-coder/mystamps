@@ -58,7 +58,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	public WhenAdminAddCategory() {
 		super(AddCategoryPage.class);
 		hasTitle(tr("t_create_category"));
-		hasHeader(tr("t_create_category_ucfirst"));
+		hasHeader(StringUtils.capitalize(tr("t_create_category")));
 	}
 	
 	@BeforeClass
