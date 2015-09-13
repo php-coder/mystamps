@@ -21,10 +21,11 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface CollectionService {
 	void createCollection(User user);
-	Collection addToCollection(User user, Series series);
+	UrlEntityDto addToCollection(Integer userId, Integer seriesId);
 	Collection removeFromCollection(User user, Series series);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();

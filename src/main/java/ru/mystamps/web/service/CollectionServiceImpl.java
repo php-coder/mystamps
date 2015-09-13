@@ -34,6 +34,7 @@ import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -63,24 +64,23 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
-	public Collection addToCollection(User user, Series series) {
-		Validate.isTrue(user != null, "User must be non null");
-		Validate.isTrue(series != null, "Series must be non null");
+	public UrlEntityDto addToCollection(Integer userId, Integer seriesId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		// We can't just invoke user.getCollection().getSeries() because
-		// it will lead to LazyInitializationException. To workaround this
-		// we are loading collection by invoking dao.
-		Collection collection = collectionDao.findOne(user.getCollection().getId());
+		UrlEntityDto url = jdbcCollectionDao.findCollectionUrlEntityByUserId(userId);
+		Integer collectionId = url.getId();
 		
-		collection.getSeries().add(series);
+		jdbcCollectionDao.addSeriesToCollection(collectionId, seriesId);
 		
 		LOG.info(
-			"Series #{} has been added to collection of user #{}",
-			series.getId(),
-			user.getId()
+			"Series #{} has been added to collection #{} of user #{}",
+			seriesId,
+			collectionId,
+			userId
 		);
 		
-		return collection;
+		return url;
 	}
 	
 	@Override

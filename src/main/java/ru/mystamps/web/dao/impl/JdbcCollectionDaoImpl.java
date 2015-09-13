@@ -34,8 +34,10 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -51,6 +53,13 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	@Value("${collection.is_series_in_collection}")
 	private String isSeriesInUserCollectionSql;
+	
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${collection.find_id_and_slug_by_user_id}")
+	private String findCollectionIdAndSlugByUserIdSql;
+	
+	@Value("${collection.add_series_to_collection}")
+	private String addSeriesToCollectionSql;
 	
 	@Override
 	public Iterable<LinkEntityDto> findLastCreated(int quantity) {
@@ -104,6 +113,31 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 		Validate.validState(result != null, "Query returned null instead of long");
 		
 		return result > 0;
+	}
+	
+	@Override
+	public UrlEntityDto findCollectionUrlEntityByUserId(Integer userId) {
+		return jdbcTemplate.queryForObject(
+			findCollectionIdAndSlugByUserIdSql,
+			Collections.singletonMap("user_id", userId),
+			RowMappers::forUrlEntityDto
+		);
+	}
+	
+	@Override
+	public void addSeriesToCollection(Integer collectionId, Integer seriesId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("collection_id", collectionId);
+		params.put("series_id", seriesId);
+		
+		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after adding series #%d to collection #%d: %d",
+			seriesId,
+			collectionId,
+			affected
+		);
 	}
 	
 }

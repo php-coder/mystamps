@@ -62,6 +62,7 @@ import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
@@ -255,7 +256,8 @@ public class SeriesController {
 			return null;
 		}
 		
-		Collection collection = collectionService.addToCollection(currentUser, series);
+		UrlEntityDto collection =
+			collectionService.addToCollection(currentUser.getId(), series.getId());
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", series.getId());

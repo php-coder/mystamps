@@ -26,6 +26,7 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RowMappers {
@@ -38,6 +39,13 @@ final class RowMappers {
 			rs.getInt("id"),
 			rs.getString("slug"),
 			rs.getString("name")
+		);
+	}
+	
+	public static UrlEntityDto forUrlEntityDto(ResultSet rs, int i) throws SQLException {
+		return new UrlEntityDto(
+			rs.getInt("id"),
+			rs.getString("slug")
 		);
 	}
 	

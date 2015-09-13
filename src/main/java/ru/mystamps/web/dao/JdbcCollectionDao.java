@@ -19,10 +19,13 @@ package ru.mystamps.web.dao;
 
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface JdbcCollectionDao {
 	Iterable<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
 	Integer add(AddCollectionDbDto collection);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
+	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
+	void addSeriesToCollection(Integer collectionId, Integer seriesId);
 }
