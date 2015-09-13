@@ -27,11 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
@@ -41,7 +38,6 @@ import ru.mystamps.web.util.SlugUtils;
 public class CollectionServiceImpl implements CollectionService {
 	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
-	private final CollectionDao collectionDao;
 	private final JdbcCollectionDao jdbcCollectionDao;
 	
 	@Override
@@ -86,24 +82,22 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
-	public Collection removeFromCollection(User user, Series series) {
-		Validate.isTrue(user != null, "User must be non null");
-		Validate.isTrue(series != null, "Series must be non null");
+	public UrlEntityDto removeFromCollection(Integer userId, Integer seriesId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		// We can't just invoke user.getCollection().getSeries() because
-		// it will lead to LazyInitializationException. To workaround this
-		// we are loading collection by invoking dao.
-		Collection collection = collectionDao.findOne(user.getCollection().getId());
+		UrlEntityDto url = jdbcCollectionDao.findCollectionUrlEntityByUserId(userId);
+		Integer collectionId = url.getId();
 		
-		collection.getSeries().remove(series);
+		jdbcCollectionDao.removeSeriesFromCollection(collectionId, seriesId);
 		
 		LOG.info(
 			"Series #{} has been removed from collection of user #{}",
-			series.getId(),
-			user.getId()
+			seriesId,
+			userId
 		);
 		
-		return collection;
+		return url;
 	}
 	
 	@Override

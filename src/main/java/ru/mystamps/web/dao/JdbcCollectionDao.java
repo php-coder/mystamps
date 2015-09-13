@@ -28,4 +28,5 @@ public interface JdbcCollectionDao {
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
 	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
 	void addSeriesToCollection(Integer collectionId, Integer seriesId);
+	void removeSeriesFromCollection(Integer collectionId, Integer seriesId);
 }

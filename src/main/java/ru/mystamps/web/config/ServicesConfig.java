@@ -57,9 +57,6 @@ public class ServicesConfig {
 	private ImageDao imageDao;
 	
 	@Inject
-	private CollectionDao collectionDao;
-	
-	@Inject
 	private JavaMailSender mailSender;
 	
 	@Inject
@@ -80,7 +77,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CollectionService getCollectionService() {
-		return new CollectionServiceImpl(collectionDao, daoConfig.getJdbcCollectionDao());
+		return new CollectionServiceImpl(daoConfig.getJdbcCollectionDao());
 	}
 	
 	@Bean

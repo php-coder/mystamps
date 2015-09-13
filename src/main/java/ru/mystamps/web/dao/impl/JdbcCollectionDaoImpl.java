@@ -23,6 +23,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -39,6 +42,7 @@ import ru.mystamps.web.service.dto.UrlEntityDto;
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
+	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDaoImpl.class);
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -60,6 +64,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	@Value("${collection.add_series_to_collection}")
 	private String addSeriesToCollectionSql;
+	
+	@Value("${collection.remove_series_from_collection}")
+	private String removeSeriesFromCollectionSql;
 	
 	@Override
 	public Iterable<LinkEntityDto> findLastCreated(int quantity) {
@@ -138,6 +145,25 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 			collectionId,
 			affected
 		);
+	}
+	
+	@SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
+	@Override
+	public void removeSeriesFromCollection(Integer collectionId, Integer seriesId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("collection_id", collectionId);
+		params.put("series_id", seriesId);
+		
+		int affected = jdbcTemplate.update(removeSeriesFromCollectionSql, params);
+		if (affected != 1) {
+			// CheckStyle: ignore LineLength for next 2 lines
+			LOG.warn(
+				"Unexpected number of affected rows after removing series #{} from collection #{}: %{}",
+				seriesId,
+				collectionId,
+				affected
+			);
+		}
 	}
 	
 }

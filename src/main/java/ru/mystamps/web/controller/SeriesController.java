@@ -282,7 +282,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Collection collection = collectionService.removeFromCollection(currentUser, series);
+		UrlEntityDto collection = collectionService.removeFromCollection(currentUser.getId(), series.getId());
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		

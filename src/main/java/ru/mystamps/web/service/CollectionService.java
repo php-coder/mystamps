@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.entity.Collection;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
@@ -26,7 +24,7 @@ import ru.mystamps.web.service.dto.UrlEntityDto;
 public interface CollectionService {
 	void createCollection(User user);
 	UrlEntityDto addToCollection(Integer userId, Integer seriesId);
-	Collection removeFromCollection(User user, Series series);
+	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);

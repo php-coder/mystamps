@@ -20,17 +20,15 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.JdbcCollectionDao
 
 class CollectionServiceImplTest extends Specification {
-	private CollectionDao collectionDao = Mock()
 	private JdbcCollectionDao jdbcCollectionDao = Mock()
 	
 	private CollectionService service
 	
 	def setup() {
-		service = new CollectionServiceImpl(collectionDao, jdbcCollectionDao)
+		service = new CollectionServiceImpl(jdbcCollectionDao)
 	}
 	
 	//
