@@ -38,7 +38,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CollectionServiceImpl implements CollectionService {
 	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
-	private final JdbcCollectionDao jdbcCollectionDao;
+	private final JdbcCollectionDao collectionDao;
 	
 	@Override
 	@Transactional
@@ -52,7 +52,7 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(slug != null, "Slug for string '%s' is null", user.getLogin());
 		collection.setSlug(slug);
 		
-		Integer id = jdbcCollectionDao.add(collection);
+		Integer id = collectionDao.add(collection);
 		
 		LOG.info("Collection #{} has been created ({})", id, collection);
 	}
@@ -64,10 +64,10 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		UrlEntityDto url = jdbcCollectionDao.findCollectionUrlEntityByUserId(userId);
+		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
 		Integer collectionId = url.getId();
 		
-		jdbcCollectionDao.addSeriesToCollection(collectionId, seriesId);
+		collectionDao.addSeriesToCollection(collectionId, seriesId);
 		
 		LOG.info(
 			"Series #{} has been added to collection #{} of user #{}",
@@ -86,10 +86,10 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		UrlEntityDto url = jdbcCollectionDao.findCollectionUrlEntityByUserId(userId);
+		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
 		Integer collectionId = url.getId();
 		
-		jdbcCollectionDao.removeSeriesFromCollection(collectionId, seriesId);
+		collectionDao.removeSeriesFromCollection(collectionId, seriesId);
 		
 		LOG.info(
 			"Series #{} has been removed from collection of user #{}",
@@ -110,7 +110,7 @@ public class CollectionServiceImpl implements CollectionService {
 			return false;
 		}
 		
-		boolean isSeriesInCollection = jdbcCollectionDao.isSeriesInUserCollection(userId, seriesId);
+		boolean isSeriesInCollection = collectionDao.isSeriesInUserCollection(userId, seriesId);
 		
 		LOG.debug(
 			"Series #{} belongs to collection of user #{}: {}",
@@ -125,7 +125,7 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countCollectionsOfUsers() {
-		return jdbcCollectionDao.countCollectionsOfUsers();
+		return collectionDao.countCollectionsOfUsers();
 	}
 	
 	@Override
@@ -133,7 +133,7 @@ public class CollectionServiceImpl implements CollectionService {
 	public Iterable<LinkEntityDto> findRecentlyCreated(int quantity) {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
-		return jdbcCollectionDao.findLastCreated(quantity);
+		return collectionDao.findLastCreated(quantity);
 	}
 	
 }

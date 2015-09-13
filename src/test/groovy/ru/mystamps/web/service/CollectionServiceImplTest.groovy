@@ -23,12 +23,12 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.JdbcCollectionDao
 
 class CollectionServiceImplTest extends Specification {
-	private JdbcCollectionDao jdbcCollectionDao = Mock()
+	private JdbcCollectionDao collectionDao = Mock()
 	
 	private CollectionService service
 	
 	def setup() {
-		service = new CollectionServiceImpl(jdbcCollectionDao)
+		service = new CollectionServiceImpl(collectionDao)
 	}
 	
 	//
@@ -53,7 +53,7 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.findRecentlyCreated(expectedQuantity)
 		then:
-			1 * jdbcCollectionDao.findLastCreated({ int quantity ->
+			1 * collectionDao.findLastCreated({ int quantity ->
 				assert expectedQuantity == quantity
 				return true
 			}) >> []
