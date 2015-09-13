@@ -49,6 +49,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	@Value("${collection.create}")
 	private String addCollectionSql;
 	
+	@Value("${collection.is_series_in_collection}")
+	private String isSeriesInUserCollectionSql;
+	
 	@Override
 	public Iterable<LinkEntityDto> findLastCreated(int quantity) {
 		return jdbcTemplate.query(
@@ -89,6 +92,18 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+	
+	@Override
+	public boolean isSeriesInUserCollection(Integer userId, Integer seriesId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("user_id", userId);
+		params.put("series_id", seriesId);
+		
+		Long result = jdbcTemplate.queryForObject(isSeriesInUserCollectionSql, params, Long.class);
+		Validate.validState(result != null, "Query returned null instead of long");
+		
+		return result > 0;
 	}
 	
 }

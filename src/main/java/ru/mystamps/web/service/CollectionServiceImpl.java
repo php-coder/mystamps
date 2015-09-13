@@ -108,25 +108,20 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = false)
-	public boolean isSeriesInCollection(User user, Series series) {
-		Validate.isTrue(series != null, "Series must be non null");
+	public boolean isSeriesInCollection(Integer userId, Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		if (user == null) {
+		if (userId == null) {
 			// Anonymous user doesn't have collection
 			return false;
 		}
 		
-		// We can't just invoke user.getCollection().getSeries() because
-		// it will lead to LazyInitializationException. To workaround this
-		// we are loading collection by invoking dao.
-		Collection collection = collectionDao.findOne(user.getCollection().getId());
-		
-		boolean isSeriesInCollection = collection.getSeries().contains(series);
+		boolean isSeriesInCollection = jdbcCollectionDao.isSeriesInUserCollection(userId, seriesId);
 		
 		LOG.debug(
 			"Series #{} belongs to collection of user #{}: {}",
-			series.getId(),
-			user.getId(),
+			seriesId,
+			userId,
 			isSeriesInCollection
 		);
 		

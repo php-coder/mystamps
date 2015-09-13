@@ -24,4 +24,5 @@ public interface JdbcCollectionDao {
 	Iterable<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
 	Integer add(AddCollectionDbDto collection);
+	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
 }

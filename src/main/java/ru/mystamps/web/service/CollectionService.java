@@ -26,7 +26,7 @@ public interface CollectionService {
 	void createCollection(User user);
 	Collection addToCollection(User user, Series series);
 	Collection removeFromCollection(User user, Series series);
-	boolean isSeriesInCollection(User user, Series series);
+	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
 }
