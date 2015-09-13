@@ -57,7 +57,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	public WhenAdminAddCountry() {
 		super(AddCountryPage.class);
 		hasTitle(tr("t_add_country"));
-		hasHeader(tr("t_add_country_ucfirst"));
+		hasHeader(StringUtils.capitalize(tr("t_add_country")));
 	}
 	
 	@BeforeClass
