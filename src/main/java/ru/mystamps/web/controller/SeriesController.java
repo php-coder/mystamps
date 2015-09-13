@@ -47,7 +47,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
@@ -282,7 +281,8 @@ public class SeriesController {
 			return null;
 		}
 		
-		UrlEntityDto collection = collectionService.removeFromCollection(currentUser.getId(), series.getId());
+		UrlEntityDto collection =
+			collectionService.removeFromCollection(currentUser.getId(), series.getId());
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
