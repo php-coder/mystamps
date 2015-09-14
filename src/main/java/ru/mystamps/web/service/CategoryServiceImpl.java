@@ -45,7 +45,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
-	private final JdbcCategoryDao jdbcCategoryDao;
+	private final JdbcCategoryDao categoryDao;
 	
 	@Override
 	@Transactional
@@ -74,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setCreatedBy(user.getId());
 		category.setUpdatedBy(user.getId());
 
-		Integer id = jdbcCategoryDao.add(category);
+		Integer id = categoryDao.add(category);
 		LOG.info("Category #{} has been created ({})", id, category);
 		
 		return new UrlEntityDto(id, slug);
@@ -83,19 +83,19 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return jdbcCategoryDao.findAllAsSelectEntities(lang);
+		return categoryDao.findAllAsSelectEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
-		return jdbcCategoryDao.findAllAsLinkEntities(lang);
+		return categoryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return jdbcCategoryDao.countAll();
+		return categoryDao.countAll();
 	}
 	
 	@Override
@@ -104,21 +104,21 @@ public class CategoryServiceImpl implements CategoryService {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
-		return jdbcCategoryDao.countCategoriesOfCollection(collection.getId());
+		return categoryDao.countCategoriesOfCollection(collection.getId());
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
-		return jdbcCategoryDao.countByName(name);
+		return categoryDao.countByName(name);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name on Russian should be non null");
-		return jdbcCategoryDao.countByNameRu(name);
+		return categoryDao.countByNameRu(name);
 	}
 	
 	@Override
@@ -127,7 +127,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
-		return jdbcCategoryDao.getStatisticsOf(collection.getId(), lang);
+		return categoryDao.getStatisticsOf(collection.getId(), lang);
 	}
 	
 }

@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
-import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
@@ -37,8 +36,8 @@ class CategoryServiceImplTest extends Specification {
 	private AddCategoryForm form
 	private User user
 	
-	private JdbcCategoryDao jdbcCategoryDao = Mock()
-	private CategoryService service = new CategoryServiceImpl(jdbcCategoryDao)
+	private JdbcCategoryDao categoryDao = Mock()
+	private CategoryService service = new CategoryServiceImpl(categoryDao)
 	
 	def setup() {
 		form = new AddCategoryForm()
@@ -92,7 +91,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			String expectedSlug = 'example-category'
 		and:
-			jdbcCategoryDao.add(_ as AddCategoryDbDto) >> expectedId
+			categoryDao.add(_ as AddCategoryDbDto) >> expectedId
 		and:
 			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
@@ -108,7 +107,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.name == expectedCategoryName
 				return true
 			}) >> 20
@@ -121,7 +120,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.nameRu == expectedCategoryName
 				return true
 			}) >> 30
@@ -146,7 +145,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.slug == slug
 				return true
 			}) >> 40
@@ -156,7 +155,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
 				return true
 			}) >> 50
@@ -166,7 +165,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
 				return true
 			}) >> 60
@@ -176,7 +175,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.createdBy == user.id
 				return true
 			}) >> 70
@@ -186,7 +185,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCategoryDao.add({ AddCategoryDbDto category ->
+			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.updatedBy == user.id
 				return true
 			}) >> 80
@@ -204,7 +203,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCategories = [ category1, category2 ]
 		and:
-			jdbcCategoryDao.findAllAsSelectEntities(_ as String) >> expectedCategories
+			categoryDao.findAllAsSelectEntities(_ as String) >> expectedCategories
 		when:
 			Iterable<SelectEntityDto> resultCategories = service.findAllAsSelectEntities('fr')
 		then:
@@ -216,7 +215,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findAllAsSelectEntities(expectedLanguage)
 		then:
-			1 * jdbcCategoryDao.findAllAsSelectEntities({ String language ->
+			1 * categoryDao.findAllAsSelectEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})
@@ -238,7 +237,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			List<LinkEntityDto> expectedCategories = [ category1, category2 ]
 		and:
-			jdbcCategoryDao.findAllAsLinkEntities(_ as String) >> expectedCategories
+			categoryDao.findAllAsLinkEntities(_ as String) >> expectedCategories
 		when:
 			Iterable<LinkEntityDto> resultCategories = service.findAllAsLinkEntities('fr')
 		then:
@@ -250,7 +249,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
 		then:
-			1 * jdbcCategoryDao.findAllAsLinkEntities({ String language ->
+			1 * categoryDao.findAllAsLinkEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})
@@ -270,7 +269,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			long result = service.countAll()
 		then:
-			1 * jdbcCategoryDao.countAll() >> expectedResult
+			1 * categoryDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -305,7 +304,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countCategoriesOf(expectedCollection)
 		then:
-			1 * jdbcCategoryDao.countCategoriesOfCollection({ Integer collectionId ->
+			1 * categoryDao.countCategoriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId
 				return true
 			}) >> 0L
@@ -324,7 +323,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "countByName() should call dao"() {
 		given:
-			jdbcCategoryDao.countByName(_ as String) >> 2L
+			categoryDao.countByName(_ as String) >> 2L
 		when:
 			long result = service.countByName('Any name here')
 		then:
@@ -335,7 +334,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByName('Sport')
 		then:
-			1 * jdbcCategoryDao.countByName({ String name ->
+			1 * categoryDao.countByName({ String name ->
 				assert name == 'Sport'
 				return true
 			})
@@ -354,7 +353,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "countByNameRu() should call dao"() {
 		given:
-			jdbcCategoryDao.countByNameRu(_ as String) >> 2L
+			categoryDao.countByNameRu(_ as String) >> 2L
 		when:
 			long result = service.countByNameRu('Any name here')
 		then:
@@ -365,7 +364,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByNameRu('Спорт')
 		then:
-			1 * jdbcCategoryDao.countByNameRu({ String name ->
+			1 * categoryDao.countByNameRu({ String name ->
 				assert name == 'Спорт'
 				return true
 			})
@@ -403,7 +402,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.getStatisticsOf(expectedCollection, expectedLang)
 		then:
-			1 * jdbcCategoryDao.getStatisticsOf(
+			1 * categoryDao.getStatisticsOf(
 				{ Integer collectionId ->
 					assert expectedCollectionId == collectionId
 					return true
