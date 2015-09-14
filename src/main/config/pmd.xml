@@ -111,35 +111,4 @@
 	</rule>
 	<rule ref="rulesets/java/clone.xml" />
 	
-	
-	<rule
-		name="SpringAutowiredUsage"
-		message="Use @Inject over @Autowired for dependency injection"
-		class="net.sourceforge.pmd.lang.rule.XPathRule"
-		language="java">
-		
-		<description>
-			Use @Inject annotation from javax.inject which is standartized (belongs to JSR-303) analogue of Spring-specific @Autowired.
-		</description>
-		
-		<properties>
-			<property name="xpath">
-				<value>
-<![CDATA[
-//ClassOrInterfaceBodyDeclaration/Annotation/*/Name[@Image="Autowired"]
-]]>
-				</value>
-			</property>
-		</properties>
-		<priority>4</priority>
-		<example>
-<![CDATA[
-public class UserService {
-    @Autowired
-    private UserDao userDao;
-}
-]]>
-		</example>
-	</rule>
-	
 </ruleset>

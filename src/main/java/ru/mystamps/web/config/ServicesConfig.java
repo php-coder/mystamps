@@ -17,8 +17,7 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,34 +34,34 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 @EnableAsync
 public class ServicesConfig {
 	
-	@Inject
+	@Autowired
 	private DaoConfig daoConfig;
 	
-	@Inject
+	@Autowired
 	private SecurityConfig securityConfig;
 	
-	@Inject
+	@Autowired
 	private SeriesDao seriesDao;
 	
-	@Inject
+	@Autowired
 	private UserDao userDao;
 	
-	@Inject
+	@Autowired
 	private UsersActivationDao usersActivationDao;
 	
-	@Inject
+	@Autowired
 	private StrategiesConfig strategiesConfig;
 	
-	@Inject
+	@Autowired
 	private ImageDao imageDao;
 	
-	@Inject
+	@Autowired
 	private JavaMailSender mailSender;
 	
-	@Inject
+	@Autowired
 	private Environment env;
 	
-	@Inject
+	@Autowired
 	private MessageSource messageSource;
 	
 	@Bean

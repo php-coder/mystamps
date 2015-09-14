@@ -19,9 +19,10 @@ package ru.mystamps.web.validation.jsr303;
 
 import java.util.Set;
 
-import javax.inject.Inject;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.SeriesService;
@@ -30,7 +31,7 @@ import ru.mystamps.web.util.CatalogUtils;
 public class UniqueYvertNumbersValidator
 	implements ConstraintValidator<UniqueYvertNumbers, String> {
 	
-	@Inject
+	@Autowired
 	private SeriesService seriesService;
 	
 	@Override

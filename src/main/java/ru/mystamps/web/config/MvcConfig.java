@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -116,7 +115,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	@Inject
+	@Autowired
 	public DomainClassConverter<?> getDomainClassConverter(FormattingConversionService service) {
 		return new DomainClassConverter<FormattingConversionService>(service);
 	}

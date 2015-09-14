@@ -17,8 +17,7 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -41,7 +40,7 @@ import ru.mystamps.web.dao.impl.JdbcUsersActivationDaoImpl;
 @Configuration
 public class DaoConfig {
 	
-	@Inject
+	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Bean

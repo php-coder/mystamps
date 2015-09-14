@@ -19,12 +19,12 @@ package ru.mystamps.web.support.spring.security;
 
 import java.util.Date;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -37,7 +37,7 @@ public class AuthenticationFailureListener
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFailureListener.class);
 	
-	@Inject
+	@Autowired
 	private SiteService siteService;
 	
 	@Override

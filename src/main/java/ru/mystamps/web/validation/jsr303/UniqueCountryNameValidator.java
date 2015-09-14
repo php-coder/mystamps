@@ -17,16 +17,17 @@
  */
 package ru.mystamps.web.validation.jsr303;
 
-import javax.inject.Inject;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
 
 public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCountryName, String> {
 	
-	@Inject
+	@Autowired
 	private CountryService countryService;
 
 	private Lang lang;

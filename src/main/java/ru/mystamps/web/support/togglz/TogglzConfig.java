@@ -19,9 +19,9 @@ package ru.mystamps.web.support.togglz;
 
 import java.util.Collections;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +39,7 @@ import ru.mystamps.web.Url;
 @Configuration
 public class TogglzConfig {
 	
-	@Inject
+	@Autowired
 	private DataSource dataSource;
 	
 	@Bean

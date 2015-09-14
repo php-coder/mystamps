@@ -17,9 +17,10 @@
  */
 package ru.mystamps.web.validation.jsr303;
 
-import javax.inject.Inject;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
@@ -27,7 +28,7 @@ import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
 public class UniqueCategoryNameValidator
 	implements ConstraintValidator<UniqueCategoryName, String> {
 	
-	@Inject
+	@Autowired
 	private CategoryService categoryService;
 	
 	private Lang lang;

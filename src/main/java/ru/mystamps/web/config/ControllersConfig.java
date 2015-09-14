@@ -17,8 +17,7 @@
  */
 package ru.mystamps.web.config;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +28,10 @@ import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 @Configuration
 public class ControllersConfig {
 	
-	@Inject
+	@Autowired
 	private ServicesConfig servicesConfig;
 	
-	@Inject
+	@Autowired
 	private MessageSource messageSource;
 	
 	@Bean

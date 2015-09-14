@@ -17,9 +17,9 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.HttpMethod;
@@ -48,10 +48,10 @@ import ru.mystamps.web.Url;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Inject
+	@Autowired
 	private MessageSource messageSource;
 	
-	@Inject
+	@Autowired
 	private ServicesConfig servicesConfig;
 	
 	@Override
@@ -105,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 	}
 	
-	@Inject
+	@Autowired
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) {
 		auth.authenticationProvider(getAuthenticationProvider());

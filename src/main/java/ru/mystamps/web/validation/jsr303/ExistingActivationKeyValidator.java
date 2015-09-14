@@ -17,16 +17,17 @@
  */
 package ru.mystamps.web.validation.jsr303;
 
-import javax.inject.Inject;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ru.mystamps.web.service.UsersActivationService;
 
 public class ExistingActivationKeyValidator
 	implements ConstraintValidator<ExistingActivationKey, String> {
 	
-	@Inject
+	@Autowired
 	private UsersActivationService usersActivationService;
 	
 	@Override
