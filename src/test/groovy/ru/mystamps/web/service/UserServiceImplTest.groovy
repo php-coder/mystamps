@@ -72,7 +72,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save(_ as User)
+			1 * userDao.save(_ as User) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should delete registration request"() {
@@ -87,6 +87,8 @@ class UserServiceImplTest extends Specification {
 				assert actualActivation == expectedActivation
 				return true
 			})
+		and:
+			userDao.save(_ as User) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should throw exception when activation key is null"() {
@@ -118,7 +120,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.name == expectedUserName
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should pass login instead of name when name is null"() {
@@ -131,7 +133,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.name == expectedUserLogin
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should pass login instead of name when name is empty"() {
@@ -145,7 +147,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.name == expectedUserLogin
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should fill role field"() {
@@ -155,7 +157,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.role == Role.USER
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should use email from registration request"() {
@@ -169,7 +171,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.email == activation.email
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should use registration date from registration request"() {
@@ -183,7 +185,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.registeredAt == activation.createdAt
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should throw exception when password is null"() {
@@ -204,7 +206,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.hash == expectedHash
 				return true
-			})
+			}) >> TestObjects.createUser()
 		and:
 			1 * encoder.encode({ String password ->
 				assert password == TestObjects.TEST_PASSWORD
@@ -239,7 +241,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert user?.login == expectedUserLogin
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should assign activated at to current date"() {
@@ -249,23 +251,27 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.save({ User user ->
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				return true
-			})
+			}) >> TestObjects.createUser()
 	}
 	
 	def "registerUser() should create collection for user"() {
 		given:
-			userDao.save(_ as User) >> TestObjects.createUser()
+			Integer expectedId = 909;
+			String expectedLogin = "foobar"
+		and:
+			User user = TestObjects.createUser();
+			user.setId(expectedId)
+			user.setLogin(expectedLogin)
+		and:
+			userDao.save(_ as User) >> user
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * collectionService.createCollection({ User user ->
-				assert user?.login == activationForm.login
-				assert user?.role == Role.USER
-				assert user?.name == activationForm.name
-				assert user?.email != null
-				assert user?.registeredAt != null
-				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
-				assert user?.hash != null
+			1 * collectionService.createCollection({ Integer ownerId ->
+				assert ownerId == expectedId
+				return true
+			}, { String ownerLogin ->
+				assert ownerLogin == expectedLogin
 				return true
 			})
 	}

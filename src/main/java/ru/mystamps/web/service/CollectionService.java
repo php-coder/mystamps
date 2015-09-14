@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface CollectionService {
-	void createCollection(User user);
+	void createCollection(Integer ownerId, String ownerLogin);
 	UrlEntityDto addToCollection(Integer userId, Integer seriesId);
 	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);

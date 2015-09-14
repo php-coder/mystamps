@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 		
 		LOG.info("User has been created ({})", user);
 		
-		collectionService.createCollection(user);
+		collectionService.createCollection(user.getId(), user.getLogin());
 	}
 	
 	@Override

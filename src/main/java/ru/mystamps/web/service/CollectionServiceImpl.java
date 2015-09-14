@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -42,14 +41,15 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional
-	public void createCollection(User user) {
-		Validate.isTrue(user != null, "User must be non null");
+	public void createCollection(Integer ownerId, String ownerLogin) {
+		Validate.isTrue(ownerId != null, "Owner id must be non null");
+		Validate.isTrue(ownerLogin != null, "Owner login must be non null");
 		
 		AddCollectionDbDto collection = new AddCollectionDbDto();
-		collection.setOwnerId(user.getId());
+		collection.setOwnerId(ownerId);
 		
-		String slug = SlugUtils.slugify(user.getLogin());
-		Validate.isTrue(slug != null, "Slug for string '%s' is null", user.getLogin());
+		String slug = SlugUtils.slugify(ownerLogin);
+		Validate.isTrue(slug != null, "Slug for string '%s' is null", ownerLogin);
 		collection.setSlug(slug);
 		
 		Integer id = collectionDao.add(collection);
