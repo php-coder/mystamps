@@ -56,13 +56,6 @@ final class RowMappers {
 		);
 	}
 	
-	public static Pair<String, Integer> forNameAndId(ResultSet rs, int i) throws SQLException {
-		return new Pair<>(
-			rs.getString("name"),
-			JdbcUtils.getInteger(rs, "id")
-		);
-	}
-	
 	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int i) throws SQLException {
 		return new SitemapInfoDto(
 			rs.getInt("id"),
