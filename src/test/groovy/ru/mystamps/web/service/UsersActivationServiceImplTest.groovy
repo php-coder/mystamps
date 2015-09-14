@@ -27,7 +27,7 @@ import ru.mystamps.web.tests.DateUtils
 
 class UsersActivationServiceImplTest extends Specification {
 	
-	private JdbcUsersActivationDao jdbcUsersActivationDao = Mock()
+	private JdbcUsersActivationDao usersActivationDao = Mock()
 	private MailService mailService = Mock()
 	
 	private UsersActivationService service
@@ -39,7 +39,7 @@ class UsersActivationServiceImplTest extends Specification {
 		registrationForm = new RegisterAccountForm()
 		registrationForm.setEmail('john.dou@example.org')
 		
-		service = new UsersActivationServiceImpl(jdbcUsersActivationDao, mailService)
+		service = new UsersActivationServiceImpl(usersActivationDao, mailService)
 	}
 	
 	//
@@ -57,14 +57,14 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * jdbcUsersActivationDao.add(_ as UsersActivation)
+			1 * usersActivationDao.add(_ as UsersActivation)
 	}
 	
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ UsersActivation activation ->
 				assert activation?.activationKey?.length() == UsersActivation.ACTIVATION_KEY_LENGTH
 				assert activation?.activationKey ==~ /^[\p{Lower}\p{Digit}]+$/
 				return true
@@ -78,7 +78,7 @@ class UsersActivationServiceImplTest extends Specification {
 			service.add(registrationForm, ANY_LOCALE)
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			2 * jdbcUsersActivationDao.add({ UsersActivation activation ->
+			2 * usersActivationDao.add({ UsersActivation activation ->
 				passedArguments.add(activation?.activationKey)
 				return true
 			})
@@ -110,7 +110,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ UsersActivation activation ->
 				assert activation?.email == expectedEmail
 				return true
 			})
@@ -121,7 +121,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, lang)
 		then:
-			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ UsersActivation activation ->
 				assert activation?.lang == expectedLang
 				return true
 			})
@@ -135,7 +135,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * jdbcUsersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ UsersActivation activation ->
 				assert DateUtils.roughlyEqual(activation?.createdAt, new Date())
 				return true
 			})
@@ -167,7 +167,7 @@ class UsersActivationServiceImplTest extends Specification {
 	
 	def "countByActivationKey() should call dao"() {
 		given:
-			jdbcUsersActivationDao.countByActivationKey(_ as String) >> 2L
+			usersActivationDao.countByActivationKey(_ as String) >> 2L
 		when:
 			long result = service.countByActivationKey('0123456789')
 		then:
@@ -178,7 +178,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.countByActivationKey('0987654321')
 		then:
-			1 * jdbcUsersActivationDao.countByActivationKey('0987654321')
+			1 * usersActivationDao.countByActivationKey('0987654321')
 	}
 	
 	//
@@ -198,7 +198,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			UsersActivation result = service.findByActivationKey("0987654321")
 		then:
-			1 * jdbcUsersActivationDao.findByActivationKey("0987654321") >> expectedResult
+			1 * usersActivationDao.findByActivationKey("0987654321") >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -230,7 +230,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.remove(activation)
 		then:
-			1 * jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey())
+			1 * usersActivationDao.removeByActivationKey(activation.getActivationKey())
 	}
 	
 }

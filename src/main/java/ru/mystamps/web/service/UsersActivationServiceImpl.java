@@ -40,7 +40,7 @@ import ru.mystamps.web.util.LocaleUtils;
 public class UsersActivationServiceImpl implements UsersActivationService {
 	private static final Logger LOG = LoggerFactory.getLogger(UsersActivationServiceImpl.class);
 	
-	private final JdbcUsersActivationDao jdbcUsersActivationDao;
+	private final JdbcUsersActivationDao usersActivationDao;
 	private final MailService mailService;
 	
 	@Override
@@ -55,7 +55,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		activation.setEmail(dto.getEmail());
 		activation.setLang(LocaleUtils.getLanguageOrDefault(lang, "en"));
 		activation.setCreatedAt(new Date());
-		jdbcUsersActivationDao.add(activation);
+		usersActivationDao.add(activation);
 		
 		LOG.info("Users activation has been created ({})", activation);
 		
@@ -70,7 +70,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		Validate.isTrue(activation != null, "Activation must be non null");
 		Validate.isTrue(activation.getActivationKey() != null, "Activation key must be non null");
 		
-		jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey());
+		usersActivationDao.removeByActivationKey(activation.getActivationKey());
 		
 		LOG.info("Users activation has been deleted ({})", activation);
 	}
@@ -80,7 +80,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	public UsersActivation findByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
-		return jdbcUsersActivationDao.findByActivationKey(activationKey);
+		return usersActivationDao.findByActivationKey(activationKey);
 	}
 	
 	@Override
@@ -88,7 +88,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	public long countByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key should be non null");
 		
-		return jdbcUsersActivationDao.countByActivationKey(activationKey);
+		return usersActivationDao.countByActivationKey(activationKey);
 	}
 	
 	/**
