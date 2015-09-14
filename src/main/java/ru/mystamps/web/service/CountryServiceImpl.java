@@ -45,7 +45,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
-	private final JdbcCountryDao jdbcCountryDao;
+	private final JdbcCountryDao countryDao;
 	
 	@Override
 	@Transactional
@@ -74,7 +74,7 @@ public class CountryServiceImpl implements CountryService {
 		country.setUpdatedAt(now);
 		country.setUpdatedBy(user.getId());
 		
-		Integer id = jdbcCountryDao.add(country);
+		Integer id = countryDao.add(country);
 		
 		LOG.info("Country #{} has been created ({})", id, country);
 		
@@ -84,19 +84,19 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return jdbcCountryDao.findAllAsSelectEntities(lang);
+		return countryDao.findAllAsSelectEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
-		return jdbcCountryDao.findAllAsLinkEntities(lang);
+		return countryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return jdbcCountryDao.countAll();
+		return countryDao.countAll();
 	}
 	
 	@Override
@@ -105,21 +105,21 @@ public class CountryServiceImpl implements CountryService {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
-		return jdbcCountryDao.countCountriesOfCollection(collection.getId());
+		return countryDao.countCountriesOfCollection(collection.getId());
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name should be non null");
-		return jdbcCountryDao.countByName(name);
+		return countryDao.countByName(name);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name on Russian should be non null");
-		return jdbcCountryDao.countByNameRu(name);
+		return countryDao.countByNameRu(name);
 	}
 	
 	@Override
@@ -128,7 +128,7 @@ public class CountryServiceImpl implements CountryService {
 		Validate.isTrue(collection != null, "Collection must be non null");
 		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
 		
-		return jdbcCountryDao.getStatisticsOf(collection.getId(), lang);
+		return countryDao.getStatisticsOf(collection.getId(), lang);
 	}
 	
 }

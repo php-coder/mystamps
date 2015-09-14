@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
-import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
@@ -37,8 +36,8 @@ class CountryServiceImplTest extends Specification {
 	private AddCountryForm form
 	private User user
 	
-	private JdbcCountryDao jdbcCountryDao = Mock()
-	private CountryService service = new CountryServiceImpl(jdbcCountryDao)
+	private JdbcCountryDao countryDao = Mock()
+	private CountryService service = new CountryServiceImpl(countryDao)
 	
 	def setup() {
 		form = new AddCountryForm()
@@ -92,7 +91,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			String expectedSlug = 'example-country'
 		and:
-			jdbcCountryDao.add(_ as AddCountryDbDto) >> expectedId
+			countryDao.add(_ as AddCountryDbDto) >> expectedId
 		and:
 			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
@@ -108,7 +107,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
 				return true
 			}) >> 20
@@ -121,7 +120,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
 				return true
 			}) >> 30
@@ -146,7 +145,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
 				return true
 			}) >> 40
@@ -156,7 +155,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
 				return true
 			}) >> 50
@@ -166,7 +165,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
 			}) >> 60
@@ -176,7 +175,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.createdBy == user.id
 				return true
 			}) >> 70
@@ -186,7 +185,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.add(form, user)
 		then:
-			1 * jdbcCountryDao.add({ AddCountryDbDto country ->
+			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.updatedBy == user.id
 				return true
 			}) >> 80
@@ -204,7 +203,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			List<SelectEntityDto> expectedCountries = [ country1, country2 ]
 		and:
-			jdbcCountryDao.findAllAsSelectEntities(_ as String) >> expectedCountries
+			countryDao.findAllAsSelectEntities(_ as String) >> expectedCountries
 		when:
 			Iterable<SelectEntityDto> resultCountries = service.findAllAsSelectEntities('de')
 		then:
@@ -216,7 +215,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.findAllAsSelectEntities(expectedLanguage)
 		then:
-			1 * jdbcCountryDao.findAllAsSelectEntities({ String language ->
+			1 * countryDao.findAllAsSelectEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})
@@ -238,7 +237,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			List<LinkEntityDto> expectedCountries = [ country1, country2 ]
 		and:
-			jdbcCountryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
+			countryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
 		when:
 			Iterable<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
 		then:
@@ -250,7 +249,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
 		then:
-			1 * jdbcCountryDao.findAllAsLinkEntities({ String language ->
+			1 * countryDao.findAllAsLinkEntities({ String language ->
 				assert language == expectedLanguage
 				return true
 			})
@@ -270,7 +269,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			long result = service.countAll()
 		then:
-			1 * jdbcCountryDao.countAll() >> expectedResult
+			1 * countryDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -305,7 +304,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.countCountriesOf(expectedCollection)
 		then:
-			1 * jdbcCountryDao.countCountriesOfCollection({ Integer collectionId ->
+			1 * countryDao.countCountriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId
 				return true
 			}) >> 0L
@@ -324,7 +323,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "countByName() should call dao"() {
 		given:
-			jdbcCountryDao.countByName(_ as String) >> 2L
+			countryDao.countByName(_ as String) >> 2L
 		when:
 			long result = service.countByName('Any name here')
 		then:
@@ -335,7 +334,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.countByName('Canada')
 		then:
-			1 * jdbcCountryDao.countByName({ String name ->
+			1 * countryDao.countByName({ String name ->
 				assert name == 'Canada'
 				return true
 			})
@@ -354,7 +353,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "countByNameRu() should call dao"() {
 		given:
-			jdbcCountryDao.countByNameRu(_ as String) >> 2L
+			countryDao.countByNameRu(_ as String) >> 2L
 		when:
 			long result = service.countByNameRu('Any name here')
 		then:
@@ -365,7 +364,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.countByNameRu('Канада')
 		then:
-			1 * jdbcCountryDao.countByNameRu({ String name ->
+			1 * countryDao.countByNameRu({ String name ->
 				assert name == 'Канада'
 				return true
 			})
@@ -403,7 +402,7 @@ class CountryServiceImplTest extends Specification {
 		when:
 			service.getStatisticsOf(expectedCollection, expectedLang)
 		then:
-			1 * jdbcCountryDao.getStatisticsOf(
+			1 * countryDao.getStatisticsOf(
 				{ Integer collectionId ->
 					assert expectedCollectionId == collectionId
 					return true
