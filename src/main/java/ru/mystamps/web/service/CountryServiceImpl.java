@@ -33,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
-import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -123,11 +122,10 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String, Integer> getStatisticsOf(Collection collection, String lang) {
-		Validate.isTrue(collection != null, "Collection must be non null");
-		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return countryDao.getStatisticsOf(collection.getId(), lang);
+		return countryDao.getStatisticsOf(collectionId, lang);
 	}
 	
 }

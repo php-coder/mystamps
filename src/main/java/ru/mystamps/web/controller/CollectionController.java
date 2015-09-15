@@ -82,7 +82,7 @@ public class CollectionController {
 			);
 			model.addAttribute(
 				"statOfCollectionByCountries",
-				getCountriesStatistics(collection, lang)
+				getCountriesStatistics(collection.getId(), lang)
 			);
 		}
 		
@@ -91,8 +91,8 @@ public class CollectionController {
 
 	// false positive
 	@SuppressWarnings("PMD.UnusedPrivateMethod")
-	private Map<String, Integer> getCountriesStatistics(Collection collection, String lang) {
-		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collection, lang);
+	private Map<String, Integer> getCountriesStatistics(Integer collectionId, String lang) {
+		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collectionId, lang);
 		
 		// manually localize "Unknown" country's name
 		if (countriesStat.containsKey("Unknown")) {

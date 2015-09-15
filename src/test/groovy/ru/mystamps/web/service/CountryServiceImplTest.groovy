@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
-import ru.mystamps.web.entity.Collection
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.service.dto.LinkEntityDto
@@ -361,19 +360,9 @@ class CountryServiceImplTest extends Specification {
 	// Tests for getStatisticsOf()
 	//
 	
-	def "getStatisticsOf() should throw exception when collection is null"() {
+	def "getStatisticsOf() should throw exception when collection id is null"() {
 		when:
 			service.getStatisticsOf(null, 'whatever')
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "getStatisticsOf() should throw exception when collection id is null"() {
-		given:
-			Collection collection = Mock()
-			collection.getId() >> null
-		when:
-			service.getStatisticsOf(collection, 'whatever')
 		then:
 			thrown IllegalArgumentException
 	}
@@ -383,11 +372,8 @@ class CountryServiceImplTest extends Specification {
 			Integer expectedCollectionId = 17
 		and:
 			String expectedLang = 'expected'
-		and:
-			Collection expectedCollection = Mock()
-			expectedCollection.getId() >> expectedCollectionId
 		when:
-			service.getStatisticsOf(expectedCollection, expectedLang)
+			service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
 			1 * countryDao.getStatisticsOf(
 				{ Integer collectionId ->
