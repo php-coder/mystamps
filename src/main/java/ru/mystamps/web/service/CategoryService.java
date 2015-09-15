@@ -19,7 +19,6 @@ package ru.mystamps.web.service;
 
 import java.util.Map;
 
-import ru.mystamps.web.entity.Collection;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -34,5 +33,5 @@ public interface CategoryService {
 	long countCategoriesOf(Integer collectionId);
 	long countByName(String name);
 	long countByNameRu(String name);
-	Map<String, Integer> getStatisticsOf(Collection collection, String lang);
+	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 }

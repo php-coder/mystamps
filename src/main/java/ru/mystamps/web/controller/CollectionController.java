@@ -78,7 +78,7 @@ public class CollectionController {
 			
 			model.addAttribute(
 				"statOfCollectionByCategories",
-				categoryService.getStatisticsOf(collection, lang)
+				categoryService.getStatisticsOf(collection.getId(), lang)
 			);
 			model.addAttribute(
 				"statOfCollectionByCountries",
