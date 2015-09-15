@@ -101,11 +101,10 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public long countCountriesOf(Collection collection) {
-		Validate.isTrue(collection != null, "Collection must be non null");
-		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+	public long countCountriesOf(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return countryDao.countCountriesOfCollection(collection.getId());
+		return countryDao.countCountriesOfCollection(collectionId);
 	}
 	
 	@Override

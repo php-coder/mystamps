@@ -278,19 +278,9 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countCountriesOf()
 	//
 	
-	def "countCountriesOf() should throw exception when collection is null"() {
+	def "countCountriesOf() should throw exception when collection id is null"() {
 		when:
 			service.countCountriesOf(null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "countCountriesOf() should throw exception when collection id is null"() {
-		given:
-			Collection collection = Mock()
-			collection.getId() >> null
-		when:
-			service.countCountriesOf(collection)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -298,11 +288,8 @@ class CountryServiceImplTest extends Specification {
 	def "countCountriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 9
-		and:
-			Collection expectedCollection = Mock()
-			expectedCollection.getId() >> expectedCollectionId
 		when:
-			service.countCountriesOf(expectedCollection)
+			service.countCountriesOf(expectedCollectionId)
 		then:
 			1 * countryDao.countCountriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId
