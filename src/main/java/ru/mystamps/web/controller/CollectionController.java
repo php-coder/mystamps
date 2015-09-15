@@ -70,7 +70,8 @@ public class CollectionController {
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {
-			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collection));
+			// CheckStyle: ignore LineLength for next 1 line
+			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collection.getId()));
 			model.addAttribute("countryCounter", countryService.countCountriesOf(collection));
 			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
 			model.addAttribute("stampsCounter", seriesService.countStampsOf(collectionId));

@@ -278,19 +278,9 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countCategoriesOf()
 	//
 	
-	def "countCategoriesOf() should throw exception when collection is null"() {
+	def "countCategoriesOf() should throw exception when collection id is null"() {
 		when:
 			service.countCategoriesOf(null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "countCategoriesOf() should throw exception when collection id is null"() {
-		given:
-			Collection collection = Mock()
-			collection.getId() >> null
-		when:
-			service.countCategoriesOf(collection)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -298,11 +288,8 @@ class CategoryServiceImplTest extends Specification {
 	def "countCategoriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 10
-		and:
-			Collection expectedCollection = Mock()
-			expectedCollection.getId() >> expectedCollectionId
 		when:
-			service.countCategoriesOf(expectedCollection)
+			service.countCategoriesOf(expectedCollectionId)
 		then:
 			1 * categoryDao.countCategoriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId

@@ -100,11 +100,10 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public long countCategoriesOf(Collection collection) {
-		Validate.isTrue(collection != null, "Collection must be non null");
-		Validate.isTrue(collection.getId() != null, "Collection id must be non null");
+	public long countCategoriesOf(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return categoryDao.countCategoriesOfCollection(collection.getId());
+		return categoryDao.countCategoriesOfCollection(collectionId);
 	}
 	
 	@Override
