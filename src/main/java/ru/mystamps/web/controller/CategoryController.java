@@ -76,7 +76,7 @@ public class CategoryController {
 			return null;
 		}
 		
-		UrlEntityDto categoryUrl = categoryService.add(form, currentUser);
+		UrlEntityDto categoryUrl = categoryService.add(form, currentUser.getId());
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
 			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())

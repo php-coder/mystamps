@@ -33,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
@@ -49,11 +48,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_CATEGORY')")
-	public UrlEntityDto add(AddCategoryDto dto, User user) {
+	public UrlEntityDto add(AddCategoryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "English category name should be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
-		Validate.isTrue(user != null, "Current user must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCategoryDbDto category = new AddCategoryDbDto();
 		category.setName(dto.getName());
@@ -70,8 +69,8 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setCreatedAt(now);
 		category.setUpdatedAt(now);
 		
-		category.setCreatedBy(user.getId());
-		category.setUpdatedBy(user.getId());
+		category.setCreatedBy(userId);
+		category.setUpdatedBy(userId);
 
 		Integer id = categoryDao.add(category);
 		LOG.info("Category #{} has been created ({})", id, category);

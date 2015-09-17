@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
-import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SelectEntityDto
@@ -33,7 +32,7 @@ import ru.mystamps.web.util.SlugUtils
 class CategoryServiceImplTest extends Specification {
 	
 	private AddCategoryForm form
-	private User user
+	private Integer userId = 123
 	
 	private JdbcCategoryDao categoryDao = Mock()
 	private CategoryService service = new CategoryServiceImpl(categoryDao)
@@ -42,8 +41,6 @@ class CategoryServiceImplTest extends Specification {
 		form = new AddCategoryForm()
 		form.setName('Any category name')
 		form.setNameRu('Любое название категории')
-		
-		user = TestObjects.createUser()
 	}
 	
 	//
@@ -52,7 +49,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, user)
+			service.add(null, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -61,7 +58,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -70,7 +67,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setNameRu(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -94,7 +91,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
-			UrlEntityDto actual = service.add(form, user)
+			UrlEntityDto actual = service.add(form, userId)
 		then:
 			actual == expected
 	}
@@ -104,7 +101,7 @@ class CategoryServiceImplTest extends Specification {
 			String expectedCategoryName = 'Animals'
 			form.setName(expectedCategoryName)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.name == expectedCategoryName
@@ -117,7 +114,7 @@ class CategoryServiceImplTest extends Specification {
 			String expectedCategoryName = 'Животные'
 			form.setNameRu(expectedCategoryName)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.nameRu == expectedCategoryName
@@ -129,7 +126,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -142,7 +139,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			form.setName(name)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.slug == slug
@@ -152,7 +149,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
@@ -162,7 +159,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
@@ -171,21 +168,25 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	def "add() should assign created by to user"() {
+		given:
+			Integer expectedUserId = 10
 		when:
-			service.add(form, user)
+			service.add(form, expectedUserId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.createdBy == user.id
+				assert category?.createdBy == expectedUserId
 				return true
 			}) >> 70
 	}
 	
 	def "add() should assign updated by to user"() {
+		given:
+			Integer expectedUserId = 20
 		when:
-			service.add(form, user)
+			service.add(form, expectedUserId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.updatedBy == user.id
+				assert category?.updatedBy == expectedUserId
 				return true
 			}) >> 80
 	}
