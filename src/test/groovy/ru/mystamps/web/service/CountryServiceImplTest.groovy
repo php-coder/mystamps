@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
-import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SelectEntityDto
@@ -33,7 +32,7 @@ import ru.mystamps.web.util.SlugUtils
 class CountryServiceImplTest extends Specification {
 	
 	private AddCountryForm form
-	private User user
+	private Integer userId = 321
 	
 	private JdbcCountryDao countryDao = Mock()
 	private CountryService service = new CountryServiceImpl(countryDao)
@@ -42,8 +41,6 @@ class CountryServiceImplTest extends Specification {
 		form = new AddCountryForm()
 		form.setName('Any country name')
 		form.setNameRu('Любое название страны')
-		
-		user = TestObjects.createUser()
 	}
 	
 	//
@@ -52,7 +49,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, user)
+			service.add(null, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -61,7 +58,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -70,7 +67,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setNameRu(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -94,7 +91,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
-			UrlEntityDto actual = service.add(form, user)
+			UrlEntityDto actual = service.add(form, userId)
 		then:
 			actual == expected
 	}
@@ -104,7 +101,7 @@ class CountryServiceImplTest extends Specification {
 			String expectedCountryName = 'Italy'
 			form.setName(expectedCountryName)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
@@ -117,7 +114,7 @@ class CountryServiceImplTest extends Specification {
 			String expectedCountryName = 'Италия'
 			form.setNameRu(expectedCountryName)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
@@ -129,7 +126,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -142,7 +139,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			form.setName(name)
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
@@ -152,7 +149,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
@@ -162,7 +159,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, user)
+			service.add(form, userId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
@@ -171,21 +168,25 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	def "add() should assign created by to user"() {
+		given:
+			Integer expectedUserId = 10
 		when:
-			service.add(form, user)
+			service.add(form, expectedUserId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
-				assert country?.createdBy == user.id
+				assert country?.createdBy == expectedUserId
 				return true
 			}) >> 70
 	}
 	
 	def "add() should assign updated by to user"() {
+		given:
+			Integer expectedUserId = 10
 		when:
-			service.add(form, user)
+			service.add(form, expectedUserId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
-				assert country?.updatedBy == user.id
+				assert country?.updatedBy == expectedUserId
 				return true
 			}) >> 80
 	}

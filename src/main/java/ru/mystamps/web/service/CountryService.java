@@ -19,14 +19,13 @@ package ru.mystamps.web.service;
 
 import java.util.Map;
 
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface CountryService {
-	UrlEntityDto add(AddCountryDto dto, User user);
+	UrlEntityDto add(AddCountryDto dto, Integer userId);
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 	long countAll();

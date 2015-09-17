@@ -76,7 +76,7 @@ public class CountryController {
 			return null;
 		}
 		
-		UrlEntityDto countryUrl = countryService.add(form, currentUser);
+		UrlEntityDto countryUrl = countryService.add(form, currentUser.getId());
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
 			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())

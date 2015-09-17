@@ -33,7 +33,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
@@ -49,11 +48,11 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
-	public UrlEntityDto add(AddCountryDto dto, User user) {
+	public UrlEntityDto add(AddCountryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "Country name on English should be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Country name on Russian should be non null");
-		Validate.isTrue(user != null, "Current user must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCountryDbDto country = new AddCountryDbDto();
 		country.setName(dto.getName());
@@ -69,9 +68,9 @@ public class CountryServiceImpl implements CountryService {
 		Date now = new Date();
 		
 		country.setCreatedAt(now);
-		country.setCreatedBy(user.getId());
+		country.setCreatedBy(userId);
 		country.setUpdatedAt(now);
-		country.setUpdatedBy(user.getId());
+		country.setUpdatedBy(userId);
 		
 		Integer id = countryDao.add(country);
 		
