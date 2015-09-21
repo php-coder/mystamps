@@ -66,7 +66,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/static/**")
 			.addResourceLocations("/WEB-INF/static/");
 		registry.addResourceHandler("/public/js/*.js")
-			.addResourceLocations("/WEB-INF/classes/");
+			.addResourceLocations("classpath:/");
 		
 		// For WebJars:
 		registry.addResourceHandler("/public/bootstrap/**")
