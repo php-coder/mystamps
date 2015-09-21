@@ -67,7 +67,7 @@ public class CronServiceImpl implements CronService {
 				activation.getCreatedAt()
 			);
 			
-			usersActivationService.remove(activation);
+			usersActivationService.remove(activation.getActivationKey());
 		}
 	}
 	

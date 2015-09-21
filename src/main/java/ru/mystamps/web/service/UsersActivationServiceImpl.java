@@ -66,13 +66,12 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	
 	@Override
 	@Transactional
-	public void remove(UsersActivation activation) {
-		Validate.isTrue(activation != null, "Activation must be non null");
-		Validate.isTrue(activation.getActivationKey() != null, "Activation key must be non null");
+	public void remove(String activationKey) {
+		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
-		usersActivationDao.removeByActivationKey(activation.getActivationKey());
+		usersActivationDao.removeByActivationKey(activationKey);
 		
-		LOG.info("Users activation has been deleted ({})", activation);
+		LOG.info("Users activation '{}' has been deleted", activationKey);
 	}
 	
 	@Override

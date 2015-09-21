@@ -78,13 +78,14 @@ class UserServiceImplTest extends Specification {
 	def "registerUser() should delete registration request"() {
 		given:
 			UsersActivation expectedActivation = TestObjects.createUsersActivation()
+			String expectedActivationKey = expectedActivation.getActivationKey()
 		when:
 			service.registerUser(activationForm)
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> expectedActivation
 		and:
-			1 * usersActivationService.remove({ UsersActivation actualActivation ->
-				assert actualActivation == expectedActivation
+			1 * usersActivationService.remove({ String actualActivationKey ->
+				assert actualActivationKey == expectedActivationKey
 				return true
 			})
 		and:

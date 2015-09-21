@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		user.setHash(hash);
 		
 		user = userDao.save(user);
-		usersActivationService.remove(activation);
+		usersActivationService.remove(activation.getActivationKey());
 		
 		LOG.info("User has been created ({})", user);
 		

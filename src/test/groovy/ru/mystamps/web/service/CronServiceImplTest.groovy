@@ -69,7 +69,7 @@ class CronServiceImplTest extends Specification {
 		when:
 			service.purgeUsersActivations()
 		then:
-			1 * usersActivationService.remove(_ as UsersActivation)
+			1 * usersActivationService.remove(_ as String)
 	}
 	
 	def "purgeUsersActivations() should do nothing if no activations"() {
@@ -78,7 +78,7 @@ class CronServiceImplTest extends Specification {
 		when:		
 			service.purgeUsersActivations()
 		then:
-			0 * usersActivationService.remove(_ as UsersActivation)
+			0 * usersActivationService.remove(_ as String)
 	}
 	
 }
