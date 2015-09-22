@@ -82,3 +82,7 @@ label {
 	vertical-align: middle;
 	float: none;
 }
+
+.dropdown-entry-lang {
+	padding-left: 5px;
+}
