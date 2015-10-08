@@ -806,14 +806,14 @@
 	
 	<name>My Stamps</name>
 	<description>Site about post stamps</description>
-	<url>my-stamps.ru</url>
+	<url>https://my-stamps.ru</url>
 	<inceptionYear>2009</inceptionYear>
 	
 	<developers>
 		<developer>
 			<name>Slava Semushin</name>
 			<email>slava.semushin@gmail.com</email>
-			<url>http://my-stamps.ru</url>
+			<url>https://my-stamps.ru</url>
 			<roles>
 				<role>founder</role>
 				<role>developer</role>
