@@ -15,14 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
-import ru.mystamps.web.entity.UsersActivation;
+import java.util.Date;
+import java.util.Locale;
 
-public interface JdbcUsersActivationDao {
-	long countByActivationKey(String activationKey);
-	void removeByActivationKey(String activationKey);
-	void add(AddUsersActivationDbDto activation);
-	UsersActivation findByActivationKey(String activationKey);
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class AddUsersActivationDbDto {
+	private String activationKey;
+	private String email;
+	private String lang;
+	private Date createdAt;
+	
+	public Locale getLocale() {
+		return new Locale(lang);
+	}
+	
 }

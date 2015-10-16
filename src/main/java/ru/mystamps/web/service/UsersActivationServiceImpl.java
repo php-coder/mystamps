@@ -31,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.togglz.Features;
@@ -49,7 +50,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
 		
-		UsersActivation activation = new UsersActivation();
+		AddUsersActivationDbDto activation = new AddUsersActivationDbDto();
 		
 		activation.setActivationKey(generateActivationKey());
 		activation.setEmail(dto.getEmail());

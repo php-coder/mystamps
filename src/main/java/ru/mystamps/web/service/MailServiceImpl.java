@@ -38,7 +38,7 @@ import org.springframework.scheduling.annotation.Async;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
 @RequiredArgsConstructor
@@ -52,7 +52,7 @@ public class MailServiceImpl implements MailService {
 	
 	@Override
 	@Async
-	public void sendActivationKeyToUser(UsersActivation activation) {
+	public void sendActivationKeyToUser(AddUsersActivationDbDto activation) {
 		Validate.isTrue(activation != null, "Activation must be non null");
 		Validate.isTrue(activation.getEmail() != null, "E-mail must be non null");
 		Validate.isTrue(activation.getLang() != null, "Language must be non null");
@@ -105,7 +105,7 @@ public class MailServiceImpl implements MailService {
 		}
 	}
 	
-	private String getTextOfActivationMail(UsersActivation activation) {
+	private String getTextOfActivationMail(AddUsersActivationDbDto activation) {
 		String template = messageSource.getMessage("activation.text", null, activation.getLocale());
 		
 		String activationUrl =
@@ -120,7 +120,7 @@ public class MailServiceImpl implements MailService {
 		return substitutor.replace(template);
 	}
 	
-	private String getSubjectOfActivationMail(UsersActivation activation) {
+	private String getSubjectOfActivationMail(AddUsersActivationDbDto activation) {
 		return messageSource.getMessage("activation.subject", null, activation.getLocale());
 	}
 	

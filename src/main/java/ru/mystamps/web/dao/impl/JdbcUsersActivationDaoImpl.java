@@ -29,6 +29,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.entity.UsersActivation;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -83,7 +84,7 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	}
 	
 	@Override
-	public void add(UsersActivation activation) {
+	public void add(AddUsersActivationDbDto activation) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("activation_key", activation.getActivationKey());
 		params.put("email", activation.getEmail());

@@ -21,6 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.tests.DateUtils
@@ -57,14 +58,14 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.add(_ as UsersActivation)
+			1 * usersActivationDao.add(_ as AddUsersActivationDbDto)
 	}
 	
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
 				assert activation?.activationKey?.length() == UsersActivation.ACTIVATION_KEY_LENGTH
 				assert activation?.activationKey ==~ /^[\p{Lower}\p{Digit}]+$/
 				return true
@@ -78,7 +79,7 @@ class UsersActivationServiceImplTest extends Specification {
 			service.add(registrationForm, ANY_LOCALE)
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			2 * usersActivationDao.add({ UsersActivation activation ->
+			2 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
 				passedArguments.add(activation?.activationKey)
 				return true
 			})
@@ -110,7 +111,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
 				assert activation?.email == expectedEmail
 				return true
 			})
@@ -121,7 +122,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, lang)
 		then:
-			1 * usersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
 				assert activation?.lang == expectedLang
 				return true
 			})
@@ -135,7 +136,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			1 * usersActivationDao.add({ UsersActivation activation ->
+			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
 				assert DateUtils.roughlyEqual(activation?.createdAt, new Date())
 				return true
 			})
@@ -145,7 +146,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, Locale.FRANCE)
 		then:
-			1 * mailService.sendActivationKeyToUser({ UsersActivation activation ->
+			1 * mailService.sendActivationKeyToUser({ AddUsersActivationDbDto activation ->
 				assert activation != null
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
