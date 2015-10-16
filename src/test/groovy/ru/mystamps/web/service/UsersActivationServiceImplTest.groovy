@@ -143,14 +143,14 @@ class UsersActivationServiceImplTest extends Specification {
 	
 	def "add() should pass user's activation request to mail service"() {
 		when:
-			service.add(registrationForm, ANY_LOCALE)
+			service.add(registrationForm, Locale.FRANCE)
 		then:
 			1 * mailService.sendActivationKeyToUser({ UsersActivation activation ->
 				assert activation != null
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
-				assert DateUtils.roughlyEqual(activation.createdAt, new Date())
-				return  true;
+				assert activation.locale == new Locale("fr")
+				return true;
 			})
 	}
 	
