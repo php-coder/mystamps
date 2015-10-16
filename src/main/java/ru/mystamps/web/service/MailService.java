@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+import ru.mystamps.web.service.dto.SendUsersActivationDto;
 
 public interface MailService {
-	void sendActivationKeyToUser(AddUsersActivationDbDto activation);
+	void sendActivationKeyToUser(SendUsersActivationDto activation);
 }

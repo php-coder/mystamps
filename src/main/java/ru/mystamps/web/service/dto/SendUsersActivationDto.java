@@ -15,18 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.dto;
+package ru.mystamps.web.service.dto;
 
-import java.util.Date;
+import java.util.Locale;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 
-@Getter
-@Setter
-public class AddUsersActivationDbDto {
-	private String activationKey;
-	private String email;
-	private String lang;
-	private Date createdAt;
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+
+@RequiredArgsConstructor
+public class SendUsersActivationDto {
+	private final AddUsersActivationDbDto activation;
+	
+	public String getActivationKey() {
+		return activation.getActivationKey();
+	}
+	
+	public String getEmail() {
+		return activation.getEmail();
+	}
+	
+	public String getLang() {
+		return activation.getLang();
+	}
+	
+	public Locale getLocale() {
+		return new Locale(getLang());
+	}
+	
 }

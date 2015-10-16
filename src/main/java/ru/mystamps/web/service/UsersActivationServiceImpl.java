@@ -32,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.togglz.Features;
@@ -61,7 +62,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		LOG.info("Users activation has been created ({})", activation);
 		
 		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
-			mailService.sendActivationKeyToUser(activation);
+			mailService.sendActivationKeyToUser(new SendUsersActivationDto(activation));
 		}
 	}
 	

@@ -24,6 +24,7 @@ import ru.mystamps.web.dao.JdbcUsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
+import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
 
 class UsersActivationServiceImplTest extends Specification {
@@ -146,7 +147,7 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, Locale.FRANCE)
 		then:
-			1 * mailService.sendActivationKeyToUser({ AddUsersActivationDbDto activation ->
+			1 * mailService.sendActivationKeyToUser({ SendUsersActivationDto activation ->
 				assert activation != null
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
