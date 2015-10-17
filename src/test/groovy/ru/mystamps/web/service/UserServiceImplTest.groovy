@@ -23,6 +23,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.JdbcUserDao
 import ru.mystamps.web.dao.UserDao
+import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.User.Role
 import ru.mystamps.web.entity.UsersActivation
@@ -45,14 +46,14 @@ class UserServiceImplTest extends Specification {
 		
 		encoder.encode(_ as String) >> user.getHash()
 		
-		UsersActivation activation = TestObjects.createUsersActivation()
+		UsersActivationDto activation = TestObjects.createUsersActivationDto()
 		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
 		activationForm.setLogin(user.getLogin())
 		activationForm.setPassword(TestObjects.TEST_PASSWORD)
 		activationForm.setName(user.getName())
-		activationForm.setActivationKey(activation.getActivationKey())
+		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
 		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationService, collectionService, encoder)
 	}
@@ -77,13 +78,10 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should delete registration request"() {
 		given:
-			UsersActivation expectedActivation = TestObjects.createUsersActivation()
-			String expectedActivationKey = expectedActivation.getActivationKey()
+			String expectedActivationKey = activationForm.getActivationKey()
 		when:
 			service.registerUser(activationForm)
 		then:
-			usersActivationService.findByActivationKey(_ as String) >> expectedActivation
-		and:
 			1 * usersActivationService.remove({ String actualActivationKey ->
 				assert actualActivationKey == expectedActivationKey
 				return true
@@ -163,7 +161,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should use email from registration request"() {
 		given:
-			UsersActivation activation = TestObjects.createUsersActivation()
+			UsersActivationDto activation = new UsersActivationDto("test@example.org", new Date())
 		and:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		when:
@@ -177,7 +175,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should use registration date from registration request"() {
 		given:
-			UsersActivation activation = TestObjects.createUsersActivation()
+			UsersActivationDto activation = new UsersActivationDto(TestObjects.TEST_EMAIL, new Date(86, 8, 12))
 		when:
 			service.registerUser(activationForm)
 		then:

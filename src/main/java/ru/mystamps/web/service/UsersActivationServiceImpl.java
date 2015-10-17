@@ -32,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
@@ -78,7 +79,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public UsersActivation findByActivationKey(String activationKey) {
+	public UsersActivationDto findByActivationKey(String activationKey) {
 		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
 		return usersActivationDao.findByActivationKey(activationKey);

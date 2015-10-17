@@ -15,14 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
-import ru.mystamps.web.dao.dto.UsersActivationDto;
+import java.util.Date;
 
-public interface JdbcUsersActivationDao {
-	long countByActivationKey(String activationKey);
-	void removeByActivationKey(String activationKey);
-	void add(AddUsersActivationDbDto activation);
-	UsersActivationDto findByActivationKey(String activationKey);
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public class UsersActivationDto {
+	private final String email;
+	private final Date createdAt;
 }

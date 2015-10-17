@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -100,13 +100,12 @@ final class RowMappers {
 		);
 	}
 	
-	public static UsersActivation forUsersActivation(ResultSet rs, int i) throws SQLException {
-		String activationKey  = rs.getString("act_key");
-		String email          = rs.getString("email");
-		String lang           = rs.getString("lang");
-		Date createdAt        = rs.getTimestamp("created_at");
+	// CheckStyle: ignore LineLength for next 1 line
+	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int i) throws SQLException {
+		String email   = rs.getString("email");
+		Date createdAt = rs.getTimestamp("created_at");
 		
-		return new UsersActivation(activationKey, email, lang, createdAt);
+		return new UsersActivationDto(email, createdAt);
 	}
 	
 }

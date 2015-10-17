@@ -22,6 +22,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
@@ -40,13 +41,13 @@ final class TestObjects {
 	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
 	public static final String TEST_COUNTRY_RU_NAME = "Где-то";
 	
+	public static final String TEST_EMAIL           = "test@example.org";
+	public static final String TEST_ACTIVATION_KEY  = "1234567890";
+	
 	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final Integer TEST_COUNTRY_ID = 1;
 	
-	private static final String TEST_EMAIL          = "test@example.org";
-	private static final String TEST_ACTIVATION_KEY = "1234567890";
-
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
 	// CheckStyle: ignore LineLength for next 1 line
@@ -71,6 +72,10 @@ final class TestObjects {
 		activation.setEmail(TEST_EMAIL);
 		activation.setCreatedAt(new Date());
 		return activation;
+	}
+	
+	public static UsersActivationDto createUsersActivationDto() {
+		return new UsersActivationDto(TEST_EMAIL, new Date());
 	}
 	
 	public static User createUser() {

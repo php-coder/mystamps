@@ -19,12 +19,12 @@ package ru.mystamps.web.service;
 
 import java.util.Locale;
 
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 
 public interface UsersActivationService {
 	void add(RegisterAccountDto dto, Locale lang);
 	void remove(String activationKey);
-	UsersActivation findByActivationKey(String activationKey);
+	UsersActivationDto findByActivationKey(String activationKey);
 	long countByActivationKey(String activationKey);
 }

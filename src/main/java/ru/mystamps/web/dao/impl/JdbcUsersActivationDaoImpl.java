@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
@@ -51,11 +51,11 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	private String addActivationKeySql;
 	
 	@Override
-	public UsersActivation findByActivationKey(String activationKey) {
+	public UsersActivationDto findByActivationKey(String activationKey) {
 		return jdbcTemplate.queryForObject(
 			findByActivationKeySql,
 			Collections.singletonMap("activation_key", activationKey),
-			RowMappers::forUsersActivation
+			RowMappers::forUsersActivationDto
 		);
 	}
 	

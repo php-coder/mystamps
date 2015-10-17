@@ -22,6 +22,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcUsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
+import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.service.dto.SendUsersActivationDto
@@ -196,9 +197,9 @@ class UsersActivationServiceImplTest extends Specification {
 
 	def "findByActivationKey() should call dao, pass argument to it and return result"() {
 		given:
-			UsersActivation expectedResult = TestObjects.createUsersActivation();
+			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto();
 		when:
-			UsersActivation result = service.findByActivationKey("0987654321")
+			UsersActivationDto result = service.findByActivationKey("0987654321")
 		then:
 			1 * usersActivationDao.findByActivationKey("0987654321") >> expectedResult
 		and:

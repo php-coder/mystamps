@@ -30,8 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		String activationKey = dto.getActivationKey();
-		UsersActivation activation = usersActivationService.findByActivationKey(activationKey);
+		UsersActivationDto activation = usersActivationService.findByActivationKey(activationKey);
 		if (activation == null) {
 			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		user.setHash(hash);
 		
 		user = userDao.save(user);
-		usersActivationService.remove(activation.getActivationKey());
+		usersActivationService.remove(activationKey);
 		
 		LOG.info("User has been created ({})", user);
 		
