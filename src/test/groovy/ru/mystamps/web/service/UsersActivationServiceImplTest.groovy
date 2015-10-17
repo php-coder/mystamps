@@ -219,7 +219,7 @@ class UsersActivationServiceImplTest extends Specification {
 	
 	def "remove() should pass argument to DAO method"() {
 		given:
-			String activationKey = TestObjects.createUsersActivation().getActivationKey()
+			String activationKey = TestObjects.TEST_ACTIVATION_KEY
 		when:
 			service.remove(activationKey)
 		then:
