@@ -26,7 +26,6 @@ import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.User.Role
-import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.tests.DateUtils
 
@@ -107,7 +106,7 @@ class UserServiceImplTest extends Specification {
 		and:
 			0 * userDao.save(_ as User)
 		and:
-			0 * usersActivationService.remove(_ as UsersActivation)
+			0 * usersActivationService.remove(_ as String)
 	}
 	
 	def "registerUser() should pass name to dao"() {
