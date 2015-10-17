@@ -34,10 +34,10 @@ import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
-import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
+import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
 public class UsersActivationServiceImpl implements UsersActivationService {
@@ -99,7 +99,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	 *         in 10 characters length
 	 **/
 	private static String generateActivationKey() {
-		int actKeyLength = UsersActivation.ACTIVATION_KEY_LENGTH;
+		int actKeyLength = ValidationRules.ACT_KEY_LENGTH;
 		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase();
 	}
 	

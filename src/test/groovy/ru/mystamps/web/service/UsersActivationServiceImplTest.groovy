@@ -23,10 +23,10 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.JdbcUsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
-import ru.mystamps.web.entity.UsersActivation
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.validation.ValidationRules
 
 class UsersActivationServiceImplTest extends Specification {
 	
@@ -68,7 +68,7 @@ class UsersActivationServiceImplTest extends Specification {
 			service.add(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
-				assert activation?.activationKey?.length() == UsersActivation.ACTIVATION_KEY_LENGTH
+				assert activation?.activationKey?.length() == ValidationRules.ACT_KEY_LENGTH
 				assert activation?.activationKey ==~ /^[\p{Lower}\p{Digit}]+$/
 				return true
 			})
