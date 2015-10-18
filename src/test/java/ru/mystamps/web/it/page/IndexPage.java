@@ -45,7 +45,7 @@ public class IndexPage {
 	}
 	
 	public void open() {
-		driver.get(Url.SITE + Url.INDEX_PAGE);
+		driver.navigate().to(Url.SITE + Url.INDEX_PAGE);
 	}
 	
 	public String getWelcomeText() {
