@@ -39,6 +39,7 @@
 		<jquery.version>1.9.1</jquery.version>
 		<selectizejs.version>0.12.1</selectizejs.version>
 		
+		<cucumber.version>1.2.4</cucumber.version>
 		<testng.version>6.8.8</testng.version>
 		<cglib.version>2.2.2</cglib.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
@@ -313,6 +314,32 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<dependency>
@@ -611,9 +638,11 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
-					<suiteXmlFiles>
-						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
+					<includes>
+						<include>ru/mystamps/web/it/CucumberRunner.java</include>
+					</includes>
+					<!-- Run junit tests only (see #SUREFIRE-377) -->
+					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
 				<executions>
 					<execution>

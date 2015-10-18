@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2015 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,30 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.tests.cases;
+package ru.mystamps.web.it;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 
-import ru.mystamps.web.tests.page.IndexSitePage;
+import org.junit.runner.RunWith;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
-public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
-	
-	public WhenAnonymousUserAtIndexPage() {
-		super(IndexSitePage.class);
-		hasTitle(tr("t_index_title"));
-	}
-	
-	@BeforeClass
-	public void setUp() {
-		page.open();
-	}
-	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
+@RunWith(Cucumber.class)
+@CucumberOptions(
+	strict = true,
+	features = "src/test/resources/ru/mystamps/web/it/feature"
+)
+public class CucumberRunner {
 }
