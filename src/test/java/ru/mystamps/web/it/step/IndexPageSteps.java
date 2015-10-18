@@ -24,7 +24,11 @@ import cucumber.api.java.en.But;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
 import ru.mystamps.web.it.page.IndexPage;
+import ru.mystamps.web.tests.WebDriverFactory;
 
 import static org.junit.Assert.assertThat;
 
@@ -41,7 +45,8 @@ public class IndexPageSteps {
 	private final IndexPage page;
 	
 	public IndexPageSteps() {
-		page = new IndexPage();
+		WebDriver driver = WebDriverFactory.getDriver();
+		page = PageFactory.initElements(driver, IndexPage.class);
 	}
 	
 	@When("^I open index page$")

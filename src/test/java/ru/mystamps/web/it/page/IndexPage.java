@@ -22,10 +22,8 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.WebDriverFactory;
 
 import static java.util.stream.Collectors.toList;
 
@@ -39,9 +37,8 @@ public class IndexPage {
 	@FindBy(xpath = "//*[@id='content']//nav//a")
 	private List<WebElement> navigationLinks;
 	
-	public IndexPage() {
-		driver = WebDriverFactory.getDriver();
-		PageFactory.initElements(driver, this);
+	public IndexPage(WebDriver driver) {
+		this.driver = driver;
 	}
 	
 	public void open() {
