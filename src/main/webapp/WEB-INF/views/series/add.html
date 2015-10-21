@@ -11,6 +11,7 @@
 		<title th:text="|MyStamps: #{t_add_series}|">MyStamps: add stamp series</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
@@ -23,17 +24,33 @@
 				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-							<span th:text="#{t_english}" th:if="${#locale.language == 'en'}">English</span>
-							<!--/*/
-							<span th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">Russian</span>
-							/*/-->
+						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
+							English
 						</a>
+						
+						<!--/*/
+						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
+							Russian
+						</a>
+						/*/-->
+						
 						<span class="caret"></span>
 						<ul class="dropdown-menu">
-							<li><a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a></li>
+							<li>
+								<div class="dropdown-entry-lang">
+									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
+								</div>
+							</li>
 							<!--/*/
-							<li><a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a></li>
+							<li>
+								<div class="dropdown-entry-lang">
+									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
+									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+								</div>
+							</li>
 							/*/-->
 						</ul>
 					</div>

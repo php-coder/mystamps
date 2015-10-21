@@ -85,6 +85,8 @@ public final class Url {
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
+	// CheckStyle: ignore LineLength for next 1 lines
+	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	// TODO: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
@@ -126,6 +128,7 @@ public final class Url {
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		map.put("LIST_COUNTRIES_PAGE", LIST_COUNTRIES_PAGE);
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
+		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		
 		if (serveContentFromSingleHost) {
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
