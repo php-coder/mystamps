@@ -1,6 +1,6 @@
 Feature: User on index page
 
-  Scenario: Anonymous user open index page
+  Scenario: Anonymous user opens index page
       Given As anonymous user
        When I open index page
        Then I see welcome text
@@ -11,7 +11,7 @@ Feature: User on index page
         But I don't see link for adding categories
         But I don't see link for adding countries
 
-  Scenario: Authenticated user open index page
+  Scenario: Authenticated user opens index page
       Given As authenticated user
        When I open index page
        Then I see welcome text
