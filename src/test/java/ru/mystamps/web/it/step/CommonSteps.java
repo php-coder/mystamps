@@ -33,17 +33,41 @@ public class CommonSteps {
 		WebDriver driver = WebDriverFactory.getDriver();
 		page = PageFactory.initElements(driver, AuthAccountPage.class);
 	}
+	
 	@Given("^As anonymous user$")
 	public void becomeAnonymousUser() {
-		// TODO: do logout if we're already authenticated
+		page.open();
+		
+		logoutIfCurrentUserIsAuthenticated(false);
 	}
 	
 	@Given("^As authenticated user$")
 	public void becomeAuthenticatedUser() {
 		page.open();
-		// TODO: check message and do nothing if we're already authenticated
+		
+		logoutIfCurrentUserIsAuthenticated(true);
+		
 		// TODO: get login/password from spring context
 		page.loginAs("coder", "test");
+	}
+	
+	@Given("^As administrator$")
+	public void becomeAdministrator() {
+		page.open();
+		
+		logoutIfCurrentUserIsAuthenticated(true);
+		
+		// TODO: get login/password from spring context
+		page.loginAs("admin", "test");
+	}
+	
+	private void logoutIfCurrentUserIsAuthenticated(boolean returnToAuthPageAfterLogout) {
+		if (page.hasInfoMessage()) {
+			page.logout();
+			if (returnToAuthPageAfterLogout) {
+				page.open();
+			}
+		}
 	}
 	
 }

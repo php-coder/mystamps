@@ -87,9 +87,19 @@ public class IndexPageSteps {
 		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_add_series"))));
 	}
 	
+	@And("^I see link for adding categories$")
+	public void shouldSeeLinkForAddingCategories() {
+		assertThat(page.getNavigationLinks(), hasItem(tr("t_create_category")));
+	}
+	
 	@But("^I don't see link for adding categories$")
 	public void shouldNotSeeLinkForAddingCategories() {
 		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_create_category"))));
+	}
+	
+	@And("^I see link for adding countries$")
+	public void shouldSeeLinkForAddingCountries() {
+		assertThat(page.getNavigationLinks(), hasItem(tr("t_add_country")));
 	}
 	
 	@But("^I don't see link for adding countries$")

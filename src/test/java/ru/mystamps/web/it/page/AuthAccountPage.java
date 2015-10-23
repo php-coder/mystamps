@@ -19,6 +19,7 @@ package ru.mystamps.web.it.page;
 
 import org.apache.commons.lang3.Validate;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,9 @@ public class AuthAccountPage {
 	
 	private final WebDriver driver;
 	
+	@FindBy(id = "sign-out-btn")
+	private WebElement signOutButton;
+	
 	@FindBy(id = "login")
 	private WebElement loginField;
 	
@@ -40,6 +44,9 @@ public class AuthAccountPage {
 	
 	@FindBy(id = "sign-in-btn")
 	private WebElement signInButton;
+	
+	@FindBy(id = "info-msg")
+	private WebElement infoMessage;
 	
 	public void open() {
 		driver.navigate().to(Url.SITE + Url.AUTHENTICATION_PAGE);
@@ -51,6 +58,18 @@ public class AuthAccountPage {
 		signInButton.submit();
 
 		ensureCurrentPageUrl(Url.SITE + Url.INDEX_PAGE);
+	}
+	
+	public void logout() {
+		signOutButton.submit();
+	}
+	
+	public boolean hasInfoMessage() {
+		try {
+			return !"".equals(infoMessage.getText());
+		} catch (NoSuchElementException ex) {
+			return false;
+		}
 	}
 	
 	private void ensureCurrentPageUrl(String expectedUrl) {
