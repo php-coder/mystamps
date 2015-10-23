@@ -17,17 +17,40 @@
  */
 package ru.mystamps.web.it.step;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
 import cucumber.api.java.en.Given;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import ru.mystamps.web.config.TestContext;
 import ru.mystamps.web.it.page.AuthAccountPage;
 import ru.mystamps.web.tests.WebDriverFactory;
 
+@ContextConfiguration(
+	loader = AnnotationConfigContextLoader.class,
+	initializers = ConfigFileApplicationContextInitializer.class,
+	classes = TestContext.class
+)
 public class CommonSteps {
 	
 	private final AuthAccountPage page;
+	
+	@Value("${valid_user_login}")
+	private String validUserLogin;
+	
+	@Value("${valid_user_password}")
+	private String validUserPassword;
+	
+	@Value("${valid_admin_login}")
+	private String validAdminLogin;
+	
+	@Value("${valid_admin_password}")
+	private String validAdminPassword;
 	
 	public CommonSteps() {
 		WebDriver driver = WebDriverFactory.getDriver();
@@ -47,8 +70,7 @@ public class CommonSteps {
 		
 		logoutIfCurrentUserIsAuthenticated(true);
 		
-		// TODO: get login/password from spring context
-		page.loginAs("coder", "test");
+		page.loginAs(validUserLogin, validUserPassword);
 	}
 	
 	@Given("^As administrator$")
@@ -57,8 +79,7 @@ public class CommonSteps {
 		
 		logoutIfCurrentUserIsAuthenticated(true);
 		
-		// TODO: get login/password from spring context
-		page.loginAs("admin", "test");
+		page.loginAs(validAdminLogin, validAdminPassword);
 	}
 	
 	private void logoutIfCurrentUserIsAuthenticated(boolean returnToAuthPageAfterLogout) {
