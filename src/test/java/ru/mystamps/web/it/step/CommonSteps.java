@@ -19,11 +19,31 @@ package ru.mystamps.web.it.step;
 
 import cucumber.api.java.en.Given;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import ru.mystamps.web.it.page.AuthAccountPage;
+import ru.mystamps.web.tests.WebDriverFactory;
+
 public class CommonSteps {
 	
+	private final AuthAccountPage page;
+	
+	public CommonSteps() {
+		WebDriver driver = WebDriverFactory.getDriver();
+		page = PageFactory.initElements(driver, AuthAccountPage.class);
+	}
 	@Given("^As anonymous user$")
 	public void becomeAnonymousUser() {
 		// TODO: do logout if we're already authenticated
+	}
+	
+	@Given("^As authenticated user$")
+	public void becomeAuthenticatedUser() {
+		page.open();
+		// TODO: check message and do nothing if we're already authenticated
+		// TODO: get login/password from spring context
+		page.loginAs("coder", "test");
 	}
 	
 }

@@ -77,6 +77,11 @@ public class IndexPageSteps {
 		assertThat(page.getNavigationLinks(), hasItem(tr("t_show_countries_list")));
 	}
 	
+	@And("^I see link for adding series$")
+	public void shouldSeeLinkForAddingSeries() {
+		assertThat(page.getNavigationLinks(), hasItem(tr("t_add_series")));
+	}
+	
 	@But("^I don't see link for adding series$")
 	public void shouldNotSeeLinkForAddingSeries() {
 		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_add_series"))));
