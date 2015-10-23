@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 	strict = true,
-	features = "src/test/resources/ru/mystamps/web/it/feature"
+	features = "classpath:ru/mystamps/web/it/feature"
 )
 public class CucumberRunner {
 }
