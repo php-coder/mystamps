@@ -47,6 +47,16 @@ public class ErrorPageSteps {
 		page.open(Url.SITE + Url.ADD_CATEGORY_PAGE);
 	}
 	
+	@When("^I open non-existing category page$")
+	public void openNonExistingCategoryPage() {
+		String absentCategoryId = "888";
+		String url = Url.SITE + Url.INFO_CATEGORY_PAGE
+			.replace("{id}", absentCategoryId)
+			.replace("{slug}", "category-404-error-test");
+		
+		page.open(url);
+	}
+	
 	@Then("^I see error message \"([^\"]*)\"$")
 	public void shouldSeeErrorMessage(String errorMessage) {
 		assertThat(page.getErrorMessage(), is(equalTo(errorMessage)));
