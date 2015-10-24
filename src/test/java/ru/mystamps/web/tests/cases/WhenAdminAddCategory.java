@@ -82,13 +82,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnShouldNotBeTooShort() {
-		page.addCategory("ee", TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasError(tr("value.too-short", CATEGORY_NAME_MIN_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameRuShouldNotBeTooShort() {
 		page.addCategory(TEST_CATEGORY_NAME_EN, "яя");
 		

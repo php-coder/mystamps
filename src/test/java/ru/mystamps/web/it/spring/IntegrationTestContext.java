@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import ru.mystamps.web.it.page.AddCategoryPage;
 import ru.mystamps.web.it.page.AuthAccountPage;
 import ru.mystamps.web.it.page.ErrorPage;
 import ru.mystamps.web.it.page.IndexPage;
@@ -36,6 +37,11 @@ public class IntegrationTestContext {
 	public WebDriver getWebDriver() {
 		boolean enableJavascript = true;
 		return new HtmlUnitDriver(BrowserVersion.FIREFOX_38, enableJavascript);
+	}
+	
+	@Bean
+	public AddCategoryPage getAddCategoryPage() {
+		return new AddCategoryPage(getWebDriver());
 	}
 	
 	@Bean
