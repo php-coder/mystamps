@@ -22,6 +22,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,6 +42,7 @@ public class IndexPage {
 	private List<WebElement> navigationLinks;
 	
 	public void open() {
+		PageFactory.initElements(driver, this);
 		driver.navigate().to(Url.SITE + Url.INDEX_PAGE);
 	}
 	

@@ -19,16 +19,14 @@ package ru.mystamps.web.it.step;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.But;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
 import ru.mystamps.web.it.page.IndexPage;
-import ru.mystamps.web.tests.WebDriverFactory;
 
 import static org.junit.Assert.assertThat;
 
@@ -44,9 +42,9 @@ public class IndexPageSteps {
 	
 	private final IndexPage page;
 	
-	public IndexPageSteps() {
-		WebDriver driver = WebDriverFactory.getDriver();
-		page = PageFactory.initElements(driver, IndexPage.class);
+	@Autowired
+	public IndexPageSteps(IndexPage page) {
+		this.page = page;
 	}
 	
 	@When("^I open index page$")

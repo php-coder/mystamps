@@ -15,39 +15,42 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.it.page;
+package ru.mystamps.web.it.spring;
 
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.it.page.AuthAccountPage;
+import ru.mystamps.web.it.page.ErrorPage;
+import ru.mystamps.web.it.page.IndexPage;
 
-@RequiredArgsConstructor
-public class ErrorPage {
+@Configuration
+public class IntegrationTestContext {
 	
-	private final WebDriver driver;
-	
-	@FindBy(id = "error-msg")
-	private WebElement errorMessage;
-	
-	@FindBy(id = "error-code")
-	private WebElement errorCode;
-	
-	public void open(String url) {
-		PageFactory.initElements(driver, this);
-		driver.navigate().to(url);
+	@Bean
+	public WebDriver getWebDriver() {
+		boolean enableJavascript = true;
+		return new HtmlUnitDriver(BrowserVersion.FIREFOX_38, enableJavascript);
 	}
 	
-	public String getErrorMessage() {
-		return StringUtils.replace(errorMessage.getText(), "\n", " ");
+	@Bean
+	public AuthAccountPage getAuthAccountPage() {
+		return new AuthAccountPage(getWebDriver());
 	}
 	
-	public String getErrorCode() {
-		return errorCode.getText();
+	@Bean
+	public ErrorPage getErrorPage() {
+		return new ErrorPage(getWebDriver());
+	}
+	
+	@Bean
+	public IndexPage getIndexPage() {
+		return new IndexPage(getWebDriver());
 	}
 	
 }

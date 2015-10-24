@@ -23,6 +23,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,6 +50,7 @@ public class AuthAccountPage {
 	private WebElement infoMessage;
 	
 	public void open() {
+		PageFactory.initElements(driver, this);
 		driver.navigate().to(Url.SITE + Url.AUTHENTICATION_PAGE);
 	}
 	

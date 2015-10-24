@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.it.step;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.it.page.ErrorPage;
-import ru.mystamps.web.tests.WebDriverFactory;
 
 import static org.junit.Assert.assertThat;
 
@@ -37,9 +35,9 @@ public class ErrorPageSteps {
 	
 	private final ErrorPage page;
 	
-	public ErrorPageSteps() {
-		WebDriver driver = WebDriverFactory.getDriver();
-		page = PageFactory.initElements(driver, ErrorPage.class);
+	@Autowired
+	public ErrorPageSteps(ErrorPage page) {
+		this.page = page;
 	}
 	
 	@When("^I open create category page but I don't have enough permissions$")

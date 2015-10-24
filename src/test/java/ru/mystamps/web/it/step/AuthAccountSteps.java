@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.it.step;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,17 +25,14 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import cucumber.api.java.en.Given;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
 import ru.mystamps.web.config.TestContext;
 import ru.mystamps.web.it.page.AuthAccountPage;
-import ru.mystamps.web.tests.WebDriverFactory;
+import ru.mystamps.web.it.spring.IntegrationTestContext;
 
 @ContextConfiguration(
 	loader = AnnotationConfigContextLoader.class,
 	initializers = ConfigFileApplicationContextInitializer.class,
-	classes = TestContext.class
+	classes = { TestContext.class, IntegrationTestContext.class }
 )
 public class AuthAccountSteps {
 	
@@ -52,9 +50,9 @@ public class AuthAccountSteps {
 	@Value("${valid_admin_password}")
 	private String validAdminPassword;
 	
-	public AuthAccountSteps() {
-		WebDriver driver = WebDriverFactory.getDriver();
-		page = PageFactory.initElements(driver, AuthAccountPage.class);
+	@Autowired
+	public AuthAccountSteps(AuthAccountPage page) {
+		this.page = page;
 	}
 	
 	@Given("^As anonymous user$")
