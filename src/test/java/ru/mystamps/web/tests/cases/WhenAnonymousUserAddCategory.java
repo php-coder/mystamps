@@ -27,8 +27,6 @@ import ru.mystamps.web.tests.page.UnauthorizedErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 public class WhenAnonymousUserAddCategory extends WhenAnyUserAtAnyPage<UnauthorizedErrorPage> {
 	
 	public WhenAnonymousUserAddCategory() {
@@ -45,16 +43,6 @@ public class WhenAnonymousUserAddCategory extends WhenAnyUserAtAnyPage<Unauthori
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorMessage() {
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_401_description", "\n"));
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorCode() {
-		assertThat(page.getErrorCode()).isEqualTo("401");
 	}
 	
 }
