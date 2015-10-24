@@ -86,6 +86,8 @@ public class AddCategoryPage {
 		switch (fieldName) {
 			case "Name (on English)":
 				return toErrorMessage ? nameErrorMessage : nameField;
+			case "Name (on Russian)":
+				return toErrorMessage ? nameRuErrorMessage : nameRuField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);
 		}

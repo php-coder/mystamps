@@ -12,11 +12,15 @@ Feature: User creates category
        Then I see error message "Requested page not found"
         And I see error code "404"
 
-  Scenario: Category name in English should not be too short
+  Scenario Outline: Category name should not be too short
       Given As administrator
        When I open create category page
         And I fill create category form with valid values
-        And I fill field "Name (on English)" with value "ee" in create category form
+        And I fill field "<fieldName>" with value "<value>" in create category form
         And I submit create category form
-       Then I see that field "Name (on English)" has error "Value is less than allowable minimum of 3 characters" in create category form
+       Then I see that field "<fieldName>" has error "Value is less than allowable minimum of 3 characters" in create category form
+  Examples:
+          | fieldName         | value |
+          | Name (on English) | ee    |
+          | Name (on Russian) | яя    |
 

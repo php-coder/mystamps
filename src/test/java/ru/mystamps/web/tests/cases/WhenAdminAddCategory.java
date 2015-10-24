@@ -36,7 +36,6 @@ import ru.mystamps.web.tests.page.AddSeriesPage;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
@@ -79,13 +78,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuShouldNotBeTooShort() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "яя");
-		
-		assertThat(page).field("nameRu").hasError(tr("value.too-short", CATEGORY_NAME_MIN_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
