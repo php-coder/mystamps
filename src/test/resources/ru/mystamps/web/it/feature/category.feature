@@ -24,3 +24,15 @@ Feature: User creates category
           | Name (on English) | ee    |
           | Name (on Russian) | яя    |
 
+  Scenario Outline: Category name should not be too long
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create category form
+        And I submit create category form
+       Then I see that field "<fieldName>" has error "Value is greater than allowable maximum of 50 characters" in create category form
+  Examples:
+          | fieldName         | value                                               |
+          | Name (on English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+          | Name (on Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
+
