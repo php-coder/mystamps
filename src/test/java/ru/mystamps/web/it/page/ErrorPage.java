@@ -25,10 +25,8 @@ import org.openqa.selenium.support.FindBy;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.Url;
-
 @RequiredArgsConstructor
-public class AddCategoryPage {
+public class ErrorPage {
 	
 	private final WebDriver driver;
 	
@@ -38,8 +36,8 @@ public class AddCategoryPage {
 	@FindBy(id = "error-code")
 	private WebElement errorCode;
 	
-	public void open() {
-		driver.navigate().to(Url.SITE + Url.ADD_CATEGORY_PAGE);
+	public void open(String url) {
+		driver.navigate().to(url);
 	}
 	
 	public String getErrorMessage() {

@@ -24,7 +24,8 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import ru.mystamps.web.it.page.AddCategoryPage;
+import ru.mystamps.web.Url;
+import ru.mystamps.web.it.page.ErrorPage;
 import ru.mystamps.web.tests.WebDriverFactory;
 
 import static org.junit.Assert.assertThat;
@@ -32,18 +33,18 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
-public class AddCategorySteps {
+public class ErrorPageSteps {
 	
-	private final AddCategoryPage page;
+	private final ErrorPage page;
 	
-	public AddCategorySteps() {
+	public ErrorPageSteps() {
 		WebDriver driver = WebDriverFactory.getDriver();
-		page = PageFactory.initElements(driver, AddCategoryPage.class);
+		page = PageFactory.initElements(driver, ErrorPage.class);
 	}
 	
-	@When("^I open create category page$")
+	@When("^I open create category page but I don't have enough permissions$")
 	public void openAddCategoryPage() {
-		page.open();
+		page.open(Url.SITE + Url.ADD_CATEGORY_PAGE);
 	}
 	
 	@Then("^I see error message \"([^\"]*)\"$")
