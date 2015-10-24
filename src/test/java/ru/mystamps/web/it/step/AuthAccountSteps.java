@@ -36,7 +36,7 @@ import ru.mystamps.web.tests.WebDriverFactory;
 	initializers = ConfigFileApplicationContextInitializer.class,
 	classes = TestContext.class
 )
-public class CommonSteps {
+public class AuthAccountSteps {
 	
 	private final AuthAccountPage page;
 	
@@ -52,7 +52,7 @@ public class CommonSteps {
 	@Value("${valid_admin_password}")
 	private String validAdminPassword;
 	
-	public CommonSteps() {
+	public AuthAccountSteps() {
 		WebDriver driver = WebDriverFactory.getDriver();
 		page = PageFactory.initElements(driver, AuthAccountPage.class);
 	}
