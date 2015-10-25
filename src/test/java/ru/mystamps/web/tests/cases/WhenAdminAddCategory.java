@@ -73,20 +73,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void categoryNameEnWithAllowedCharactersShouldBeAccepted() {
-		page.addCategory("Valid-Name Category", "InvalidRussianCategory");
-		
-		assertThat(page).field("name").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void categoryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCategory("НевернаяКатегорияНаАнглийском", "Категория Ёё");
-		
-		assertThat(page).field("nameRu").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameEnWithForbiddenCharactersShouldBeRejected() {
 		page.addCategory("S0m3+CategoryN_ame", TEST_CATEGORY_NAME_RU);

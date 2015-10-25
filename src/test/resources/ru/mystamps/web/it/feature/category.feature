@@ -47,3 +47,15 @@ Feature: User creates category
             | fieldName         | value    |
             | Name (on English) | Animals  |
             | Name (on Russian) | Животные |
+
+  Scenario Outline: Category name should accept all valid characters
+      Given As administrator
+       When I open create category page
+        And I fill create category form with invalid values
+        And I fill field "<fieldName>" with value "<value>" in create category form
+        And I submit create category form
+       Then I see that field "<fieldName>" has no error in create category form
+    Examples:
+            | fieldName         | value               |
+            | Name (on English) | Valid-Name Category |
+            | Name (on Russian) | Категория Ё-ё       |

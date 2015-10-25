@@ -17,6 +17,9 @@
  */
 package ru.mystamps.web.it.page;
 
+import org.apache.commons.lang3.StringUtils;
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -62,6 +65,14 @@ public class AddCategoryPage {
 	
 	public void submitForm() {
 		addCategoryButton.submit();
+	}
+	
+	public boolean fieldHasError(String fieldName) {
+		try {
+			return StringUtils.isNotEmpty(getErrorByFieldName(fieldName));
+		} catch (NoSuchElementException ex) {
+			return false;
+		}
 	}
 	
 	public String getErrorByFieldName(String fieldName) {

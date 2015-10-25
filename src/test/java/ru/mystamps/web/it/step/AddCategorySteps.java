@@ -36,6 +36,9 @@ public class AddCategorySteps {
 	private static final String VALID_CATEGORY_NAME_EN = "Space";
 	private static final String VALID_CATEGORY_NAME_RU = "Космос";
 	
+	private static final String INVALID_CATEGORY_NAME_EN = "";
+	private static final String INVALID_CATEGORY_NAME_RU = "";
+	
 	private final AddCategoryPage page;
 	
 	@Autowired
@@ -53,6 +56,11 @@ public class AddCategorySteps {
 		page.fillForm(VALID_CATEGORY_NAME_EN, VALID_CATEGORY_NAME_RU);
 	}
 	
+	@And("^I fill create category form with invalid values$")
+	public void fillFormWithInvalidValues() {
+		page.fillForm(INVALID_CATEGORY_NAME_EN, INVALID_CATEGORY_NAME_RU);
+	}
+	
 	@And("^I fill field \"([^\"]*)\" with value \"([^\"]*)\" in create category form$")
 	public void fillField(String fieldName, String value) {
 		page.fillFieldByName(fieldName, value);
@@ -66,6 +74,11 @@ public class AddCategorySteps {
 	@Then("^I see that field \"([^\"]*)\" has error \"([^\"]*)\" in create category form$")
 	public void fieldShouldHaveAnError(String fieldName, String errorMessage) {
 		assertThat(page.getErrorByFieldName(fieldName), is(equalTo(errorMessage)));
+	}
+	
+	@Then("^I see that field \"([^\"]*)\" has no error in create category form$")
+	public void fieldShouldNotHaveAnError(String fieldName) {
+		assertThat(page.fieldHasError(fieldName), is(false));
 	}
 	
 }
