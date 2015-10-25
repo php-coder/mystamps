@@ -36,3 +36,14 @@ Feature: User creates category
           | Name (on English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
           | Name (on Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
 
+  Scenario Outline: Category name should be unique
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create category form
+        And I submit create category form
+       Then I see that field "<fieldName>" has error "Category already exists" in create category form
+    Examples:
+            | fieldName         | value    |
+            | Name (on English) | Animals  |
+            | Name (on Russian) | Животные |
