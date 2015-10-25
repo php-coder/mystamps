@@ -59,3 +59,15 @@ Feature: User creates category
             | fieldName         | value               |
             | Name (on English) | Valid-Name Category |
             | Name (on Russian) | Категория Ё-ё       |
+
+  Scenario Outline: Category name should reject forbidden characters
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create category form
+        And I submit create category form
+       Then I see that field "<fieldName>" has error "<errorMessage>" in create category form
+    Examples:
+            | fieldName         | value              | errorMessage                                                      |
+            | Name (on English) | S0m3+CategoryN_ame | Category name must consist only latin letters, hyphen or spaces   |
+            | Name (on Russian) | Категория+1_2_3    | Category name must consist only Russian letters, hyphen or spaces |
