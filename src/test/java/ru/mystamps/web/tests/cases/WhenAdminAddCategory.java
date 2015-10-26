@@ -34,7 +34,6 @@ import ru.mystamps.web.tests.page.AddCategoryPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
@@ -71,20 +70,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCategory(" t3st ", TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasValue("t3st");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameRuShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, " т3ст ");
-		
-		assertThat(page).field("nameRu").hasValue("т3ст");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })

@@ -81,4 +81,9 @@ public class AddCategorySteps {
 		assertThat(page.fieldHasError(fieldName), is(false));
 	}
 	
+	@Then("^I see that field \"([^\"]*)\" has value \"([^\"]*)\" in create category form$")
+	public void fieldShouldHaveValue(String fieldName, String expectedValue) {
+		assertThat(page.getValueByFieldName(fieldName), is(equalTo(expectedValue)));
+	}
+	
 }

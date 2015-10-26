@@ -85,3 +85,15 @@ Feature: User creates category
             | Name (on English) | test- |
             | Name (on Russian) | -тест |
             | Name (on Russian) | тест- |
+
+  Scenario Outline: Category name should be stripped from leading and trailing spaces
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "<fieldName>" with value " <value> " in create category form
+        And I submit create category form
+       Then I see that field "<fieldName>" has value "<value>" in create category form
+    Examples:
+            | fieldName         | value |
+            | Name (on English) | t3st  |
+            | Name (on Russian) | т3ст  |
