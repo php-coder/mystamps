@@ -22,8 +22,6 @@ import java.net.HttpURLConnection;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import ru.mystamps.web.tests.page.UnauthorizedErrorPage;
 
 import ru.mystamps.web.Url;
@@ -46,16 +44,6 @@ public class WhenAnonymousUserAddCountry extends WhenAnyUserAtAnyPage<Unauthoriz
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorMessage() {
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_401_description", "\n"));
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorCode() {
-		assertThat(page.getErrorCode()).isEqualTo("401");
 	}
 	
 }
