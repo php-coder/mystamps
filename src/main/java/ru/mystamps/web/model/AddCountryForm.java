@@ -69,7 +69,7 @@ public class AddCountryForm implements AddCountryDto {
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
-			message = "{country-name.hyphen}",
+			message = "{value.hyphen}",
 			groups = Level4Checks.class
 		)
 	})
@@ -97,7 +97,7 @@ public class AddCountryForm implements AddCountryDto {
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
-			message = "{country-name.hyphen}",
+			message = "{value.hyphen}",
 			groups = Level4Checks.class
 		)
 	})
