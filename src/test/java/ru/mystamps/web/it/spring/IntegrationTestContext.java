@@ -25,10 +25,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import ru.mystamps.web.it.page.AddCategoryPage;
-import ru.mystamps.web.it.page.AuthAccountPage;
-import ru.mystamps.web.it.page.ErrorPage;
-import ru.mystamps.web.it.page.IndexPage;
+// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+import ru.mystamps.web.it.page.*;
 
 @Configuration
 public class IntegrationTestContext {
@@ -57,6 +55,11 @@ public class IntegrationTestContext {
 	@Bean
 	public IndexPage getIndexPage() {
 		return new IndexPage(getWebDriver());
+	}
+	
+	@Bean
+	public InfoCategoryPage getInfoCategoryPage() {
+		return new InfoCategoryPage(getWebDriver());
 	}
 	
 }

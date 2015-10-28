@@ -97,3 +97,13 @@ Feature: User creates category
             | fieldName         | value |
             | Name (on English) | t3st  |
             | Name (on Russian) | т3ст  |
+
+  Scenario: Administrator creates a category
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "Name (on English)" with value "Mushrooms" in create category form
+        And I fill field "Name (on Russian)" with value "Грибы" in create category form
+        And I submit create category form
+       Then I'm on a category info page
+        And I see a header "Mushrooms" on category info page

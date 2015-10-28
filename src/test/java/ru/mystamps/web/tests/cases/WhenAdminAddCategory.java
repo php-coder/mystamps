@@ -38,7 +38,6 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
 	private static final String TEST_CATEGORY_NAME_EN = "Space";
-	private static final String TEST_CATEGORY_NAME_RU = "Космос";
 	
 	@Value("${valid_admin_login}")
 	private String validAdminLogin;
@@ -72,22 +71,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, TEST_CATEGORY_NAME_RU);
-		
-		String expectedUrl = Url.INFO_CATEGORY_PAGE
-			.replace("{id}", "\\d+")
-			.replace("{slug}", TEST_CATEGORY_NAME_EN.toLowerCase());
-		
-		assertThat(page.getCurrentUrl()).matches(expectedUrl);
-		assertThat(page.getHeader()).isEqualTo(TEST_CATEGORY_NAME_EN);
-	}
-	
-	@Test(
-		groups = "logic",
-		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation"
-	)
+	@Test(groups = "logic")
 	public void categoryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(Url.ADD_SERIES_PAGE);
 		
