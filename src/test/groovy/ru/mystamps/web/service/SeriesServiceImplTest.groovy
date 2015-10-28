@@ -750,6 +750,37 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSeriesIdByScottNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
+		when:
+			service.findSeriesIdByScottNumber(scottNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			scottNumberCode | _
+			null            | _
+			''              | _
+			' '             | _
+	}
+	
+	def "findSeriesIdByScottNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByScottNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByScottNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategoryId()
 	//
 	
