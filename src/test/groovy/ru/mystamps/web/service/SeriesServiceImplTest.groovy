@@ -781,6 +781,37 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSeriesIdByYvertNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
+		when:
+			service.findSeriesIdByYvertNumber(yvertNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			yvertNumberCode | _
+			null            | _
+			''              | _
+			' '             | _
+	}
+	
+	def "findSeriesIdByYvertNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByYvertNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByYvertNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategoryId()
 	//
 	
