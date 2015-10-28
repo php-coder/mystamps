@@ -719,6 +719,37 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSeriesIdByMichelNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
+		when:
+			service.findSeriesIdByMichelNumber(michelNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			michelNumberCode | _
+			null             | _
+			''               | _
+			' '              | _
+	}
+	
+	def "findSeriesIdByMichelNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByMichelNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByMichelNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategoryId()
 	//
 	
