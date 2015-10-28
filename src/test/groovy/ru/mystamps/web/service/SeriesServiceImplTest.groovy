@@ -719,6 +719,130 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSeriesIdByMichelNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
+		when:
+			service.findSeriesIdByMichelNumber(michelNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			michelNumberCode | _
+			null             | _
+			''               | _
+			' '              | _
+	}
+	
+	def "findSeriesIdByMichelNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByMichelNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByMichelNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSeriesIdByScottNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
+		when:
+			service.findSeriesIdByScottNumber(scottNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			scottNumberCode | _
+			null            | _
+			''              | _
+			' '             | _
+	}
+	
+	def "findSeriesIdByScottNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByScottNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByScottNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSeriesIdByYvertNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
+		when:
+			service.findSeriesIdByYvertNumber(yvertNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			yvertNumberCode | _
+			null            | _
+			''              | _
+			' '             | _
+	}
+	
+	def "findSeriesIdByYvertNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByYvertNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByYvertNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSeriesIdByGibbonsNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
+		when:
+			service.findSeriesIdByGibbonsNumber(gibbonsNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			gibbonsNumberCode | _
+			null              | _
+			''                | _
+			' '               | _
+	}
+	
+	def "findSeriesIdByGibbonsNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByGibbonsNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByGibbonsNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategoryId()
 	//
 	
