@@ -101,7 +101,7 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 	
 	@Override
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = true)
 	public boolean isSeriesInCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
