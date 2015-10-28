@@ -812,6 +812,37 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSeriesIdByGibbonsNumber()
+	//
+	
+	@Unroll
+	def "findSeriesIdByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
+		when:
+			service.findSeriesIdByGibbonsNumber(gibbonsNumberCode)
+		then:
+			thrown IllegalArgumentException
+		where:
+			gibbonsNumberCode | _
+			null              | _
+			''                | _
+			' '               | _
+	}
+	
+	def "findSeriesIdByGibbonsNumber() should pass argument to dao and return result"() {
+		given:
+			Optional<Integer> expectedResult = Optional.of(1);
+		when:
+			Optional<Integer> result = service.findSeriesIdByGibbonsNumber('5');
+		then:
+			1 * jdbcSeriesDao.findSeriesIdByGibbonsNumberCode({ String code ->
+				assert code == '5'
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategoryId()
 	//
 	
