@@ -32,11 +32,11 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findRecentlyCreated
+	// Tests for findRecentlyCreated()
 	//
 	
 	@Unroll
-	def "findRecentlyCreated should throw exception when quantity is #quantity"(Integer quantity) {
+	def "findRecentlyCreated() should throw exception when quantity is #quantity"(Integer quantity) {
 		when:
 			service.findRecentlyCreated(quantity)
 		then:
@@ -47,7 +47,7 @@ class CollectionServiceImplTest extends Specification {
 			0        | _
 	}
 	
-	def "findRecentlyCreated should pass arguments to dao"() {
+	def "findRecentlyCreated() should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 4
 		when:
