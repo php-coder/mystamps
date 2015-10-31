@@ -107,3 +107,13 @@ Feature: User creates category
         And I submit create category form
        Then I'm on a category info page
         And I see a header "Mushrooms" on category info page
+
+  Scenario: Category should be available for choosing after its creation
+      Given As administrator
+       When I open create category page
+        And I fill create category form with valid values
+        And I fill field "Name (on English)" with value "Flowers" in create category form
+        And I fill field "Name (on Russian)" with value "Цветы" in create category form
+        And I submit create category form
+       Then I open create series page
+        And Field "Category" in create series form contains "Flowers"

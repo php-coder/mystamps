@@ -43,6 +43,11 @@ public class IntegrationTestContext {
 	}
 	
 	@Bean
+	public AddSeriesPage getAddSeriesPage() {
+		return new AddSeriesPage(getWebDriver());
+	}
+	
+	@Bean
 	public AuthAccountPage getAuthAccountPage() {
 		return new AuthAccountPage(getWebDriver());
 	}

@@ -26,18 +26,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.tests.page.AddCategoryPage;
-import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
-	
-	private static final String TEST_CATEGORY_NAME_EN = "Space";
 	
 	@Value("${valid_admin_login}")
 	private String validAdminLogin;
@@ -69,15 +62,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "logic")
-	public void categoryShouldBeAvailableForChoosingAtPageWithSeries() {
-		page.open(Url.ADD_SERIES_PAGE);
-		
-		AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
-		
-		assertThat(seriesPage.getCategoryFieldValues()).contains(TEST_CATEGORY_NAME_EN);
 	}
 	
 	@Override
