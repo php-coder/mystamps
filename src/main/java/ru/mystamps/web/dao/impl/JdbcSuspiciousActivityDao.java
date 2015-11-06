@@ -49,6 +49,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 			: null;
 		params.put("user_id", userId);
 		params.put("ip", activity.getIp());
+		params.put("method", activity.getMethod());
 		params.put("referer_page", activity.getRefererPage());
 		params.put("user_agent", activity.getUserAgent());
 		

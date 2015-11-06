@@ -8,5 +8,6 @@
 	<include file="0.4/2014-10-28--decimal_price.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2015-06-22--image_url.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2015-07-07--salt_and_hash.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2015-10-14--http-method.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
