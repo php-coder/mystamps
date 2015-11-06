@@ -38,6 +38,7 @@ public class SuspiciousActivity {
 	
 	public static final int PAGE_URL_LENGTH = 100;
 	public static final int IP_LENGTH       = 15;
+	public static final int METHOD_LENGTH   = 7;
 	
 	@Id
 	@GeneratedValue
@@ -51,6 +52,9 @@ public class SuspiciousActivity {
 	
 	@Column(length = PAGE_URL_LENGTH, nullable = false)
 	private String page;
+
+	@Column(length = METHOD_LENGTH)
+	private String method;
 	
 	@ManyToOne
 	private User user;

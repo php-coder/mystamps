@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="add-method-column-to-suspicious_activities-table" author="AleksSPb" context="scheme">
+		<comment>Add method column to suspicious_activities table</comment>
+
+		<addColumn tableName="suspicious_activities">
+			<!-- Field size set to fit the longest name of HTTP method ("OPTIONS") -->
+			<column name="method" type="VARCHAR(7)" />
+		</addColumn>
+
+	</changeSet>
+
+</databaseChangeLog>

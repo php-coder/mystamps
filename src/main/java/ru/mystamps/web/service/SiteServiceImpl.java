@@ -48,12 +48,13 @@ public class SiteServiceImpl implements SiteService {
 	@Transactional
 	public void logAboutAbsentPage(
 			String page,
+			String method,
 			User user,
 			String ip,
 			String referer,
 			String agent) {
 		
-		logEvent(PAGE_NOT_FOUND, page, user, ip, referer, agent, new Date());
+		logEvent(PAGE_NOT_FOUND, page, method, user, ip, referer, agent, new Date());
 	}
 	
 	@Override
@@ -61,19 +62,21 @@ public class SiteServiceImpl implements SiteService {
 	@Transactional
 	public void logAboutFailedAuthentication(
 			String page,
+			String method,
 			User user,
 			String ip,
 			String referer,
 			String agent,
 			Date date) {
 		
-		logEvent(AUTHENTICATION_FAILED, page, user, ip, referer, agent, date);
+		logEvent(AUTHENTICATION_FAILED, page, method, user, ip, referer, agent, date);
 	}
 	
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
+	@SuppressWarnings({"PMD.UseObjectForClearerAPI", "checkstyle:parameternumber"})
 	private void logEvent(
 			String type,
 			String page,
+			String method,
 			User user,
 			String ip,
 			String referer,
@@ -92,6 +95,7 @@ public class SiteServiceImpl implements SiteService {
 		
 		activity.setOccurredAt(date == null ? new Date() : date);
 		activity.setPage(page);
+		activity.setMethod(method);
 		
 		activity.setUser(user);
 		

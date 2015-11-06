@@ -25,6 +25,7 @@ public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutAbsentPage(
 		String page,
+		String method,
 		User user,
 		String ip,
 		String referer,
@@ -33,6 +34,7 @@ public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutFailedAuthentication(
 		String page,
+		String method,
 		User user,
 		String ip,
 		String referer,
