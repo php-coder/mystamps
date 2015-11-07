@@ -11,3 +11,15 @@ Feature: User creates country
        When I open non-existing country page
        Then I see error message "Requested page not found"
         And I see error code "404"
+
+  Scenario Outline: Country name should not be too short
+      Given As administrator
+       When I open create country page
+        And I fill create country form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create country form
+        And I submit create country form
+       Then I see that field "<fieldName>" has error "Value is less than allowable minimum of 3 characters" in create country form
+  Examples:
+          | fieldName         | value |
+          | Name (on English) | ee    |
+          | Name (on Russian) | яя    |

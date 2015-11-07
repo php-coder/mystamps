@@ -43,6 +43,11 @@ public class IntegrationTestContext {
 	}
 	
 	@Bean
+	public AddCountryPage getAddCountryPage() {
+		return new AddCountryPage(getWebDriver());
+	}
+	
+	@Bean
 	public AddSeriesPage getAddSeriesPage() {
 		return new AddSeriesPage(getWebDriver());
 	}
