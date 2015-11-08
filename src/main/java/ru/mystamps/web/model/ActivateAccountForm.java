@@ -83,7 +83,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 		),
 		@Pattern(
 			regexp = ValidationRules.NAME_REGEXP2,
-			message = "{name.hyphen}",
+			message = "{value.hyphen}",
 			groups = Name3Checks.class
 		)
 	})

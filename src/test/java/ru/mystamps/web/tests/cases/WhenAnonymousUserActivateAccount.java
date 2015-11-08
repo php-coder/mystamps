@@ -182,7 +182,7 @@ public class WhenAnonymousUserActivateAccount
 		
 		assertThat(page)
 			.field("name")
-			.hasError(tr("name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -191,7 +191,7 @@ public class WhenAnonymousUserActivateAccount
 		
 		assertThat(page)
 			.field("name")
-			.hasError(tr("name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

@@ -69,7 +69,7 @@ public class AddCategoryForm implements AddCategoryDto {
 		),
 		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
-			message = "{category-name.hyphen}",
+			message = "{value.hyphen}",
 			groups = Level4Checks.class
 		)
 	})
@@ -97,7 +97,7 @@ public class AddCategoryForm implements AddCategoryDto {
 		),
 		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
-			message = "{category-name.hyphen}",
+			message = "{value.hyphen}",
 			groups = Level4Checks.class
 		)
 	})

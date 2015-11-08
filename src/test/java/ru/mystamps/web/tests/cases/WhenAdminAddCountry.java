@@ -174,7 +174,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page)
 			.field("name")
-			.hasError(tr("country-name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -183,7 +183,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page)
 			.field("nameRu")
-			.hasError(tr("country-name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -192,7 +192,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page)
 			.field("name")
-			.hasError(tr("country-name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -201,7 +201,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page)
 			.field("nameRu")
-			.hasError(tr("country-name.hyphen"));
+			.hasError(tr("value.hyphen"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
