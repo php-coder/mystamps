@@ -76,20 +76,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void countryNameEnWithAllowedCharactersShouldBeAccepted() {
-		page.addCountry("Valid-Name Country", "НазваниеСтраны");
-		
-		assertThat(page).field("name").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void countryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCountry("ValidName", "Ёё Нормальное-название страны");
-		
-		assertThat(page).field("nameRu").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameEnWithForbiddenCharactersShouldBeRejected() {
 		page.addCountry("S0m3+CountryN_ame", TEST_COUNTRY_NAME_RU);

@@ -47,3 +47,15 @@ Feature: User creates country
             | fieldName         | value  |
             | Name (on English) | Italy  |
             | Name (on Russian) | Италия |
+
+    Scenario Outline: Country name should accept all valid characters
+        Given As administrator
+         When I open create country page
+          And I fill create country form with invalid values
+          And I fill field "<fieldName>" with value "<value>" in create country form
+          And I submit create country form
+         Then I see that field "<fieldName>" has no error in create country form
+      Examples:
+              | fieldName         | value                         |
+              | Name (on English) | Valid-Name Country            |
+              | Name (on Russian) | Ёё Нормальное-название страны |

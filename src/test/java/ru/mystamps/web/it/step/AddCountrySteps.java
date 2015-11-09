@@ -36,6 +36,9 @@ public class AddCountrySteps {
 	private static final String VALID_COUNTRY_NAME_EN = "Russia";
 	private static final String VALID_COUNTRY_NAME_RU = "Россия";
 	
+	private static final String INVALID_COUNTRY_NAME_EN = "";
+	private static final String INVALID_COUNTRY_NAME_RU = "";
+	
 	private final AddCountryPage page;
 	
 	@Autowired
@@ -53,6 +56,11 @@ public class AddCountrySteps {
 		page.fillForm(VALID_COUNTRY_NAME_EN, VALID_COUNTRY_NAME_RU);
 	}
 	
+	@And("^I fill create country form with invalid values$")
+	public void fillFormWithInvalidValues() {
+		page.fillForm(INVALID_COUNTRY_NAME_EN, INVALID_COUNTRY_NAME_RU);
+	}
+	
 	@And("^I fill field \"([^\"]*)\" with value \"([^\"]*)\" in create country form$")
 	public void fillField(String fieldName, String value) {
 		page.fillFieldByName(fieldName, value);
@@ -66,6 +74,11 @@ public class AddCountrySteps {
 	@Then("^I see that field \"([^\"]*)\" has error \"([^\"]*)\" in create country form$")
 	public void fieldShouldHaveAnError(String fieldName, String errorMessage) {
 		assertThat(page.getErrorByFieldName(fieldName), is(equalTo(errorMessage)));
+	}
+	
+	@Then("^I see that field \"([^\"]*)\" has no error in create country form$")
+	public void fieldShouldNotHaveAnError(String fieldName) {
+		assertThat(page.fieldHasError(fieldName), is(false));
 	}
 	
 }
