@@ -76,42 +76,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldNotStartsFromHyphen() {
-		page.addCountry("-test", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("value.hyphen"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldNotStartsFromHyphen() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "-тест");
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("value.hyphen"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldNotEndsWithHyphen() {
-		page.addCountry("test-", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("value.hyphen"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldNotEndsWithHyphen() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "тест-");
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("value.hyphen"));
-	}
-	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void countryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.addCountry(" t3st ", TEST_COUNTRY_NAME_RU);

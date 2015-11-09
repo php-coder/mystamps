@@ -71,3 +71,17 @@ Feature: User creates country
               | fieldName         | value               | errorMessage                                                     |
               | Name (on English) | S0m3+CountryN_ame   | Country name must consist only latin letters, hyphen or spaces   |
               | Name (on Russian) | Нек0торо3+наз_вание | Country name must consist only Russian letters, hyphen or spaces |
+
+    Scenario Outline: Country name should not start or end with hyphen
+        Given As administrator
+         When I open create country page
+          And I fill create country form with valid values
+          And I fill field "<fieldName>" with value "<value>" in create country form
+          And I submit create country form
+         Then I see that field "<fieldName>" has error "Value must not start or end with hyphen" in create country form
+      Examples:
+              | fieldName         | value |
+              | Name (on English) | -test |
+              | Name (on English) | test- |
+              | Name (on Russian) | -тест |
+              | Name (on Russian) | тест- |
