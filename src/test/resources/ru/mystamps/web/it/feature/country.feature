@@ -35,3 +35,15 @@ Feature: User creates country
           | fieldName         | value                                               |
           | Name (on English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
           | Name (on Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
+
+  Scenario Outline: Country name should be unique
+      Given As administrator
+       When I open create country page
+        And I fill create country form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create country form
+        And I submit create country form
+       Then I see that field "<fieldName>" has error "Country already exists" in create country form
+    Examples:
+            | fieldName         | value  |
+            | Name (on English) | Italy  |
+            | Name (on Russian) | Италия |

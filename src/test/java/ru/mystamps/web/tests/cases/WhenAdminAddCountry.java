@@ -50,12 +50,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Value("${valid_admin_password}")
 	private String validAdminPassword;
 	
-	@Value("${valid_country_name_en}")
-	private String existingCountryNameEn;
-	
-	@Value("${valid_country_name_ru}")
-	private String existingCountryNameRu;
-	
 	public WhenAdminAddCountry() {
 		super(AddCountryPage.class);
 		hasTitle(tr("t_add_country"));
@@ -80,24 +74,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldBeUnique() {
-		page.addCountry(existingCountryNameEn, TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCountryName.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldBeUnique() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, existingCountryNameRu);
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCountryName.message"));
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
