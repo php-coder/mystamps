@@ -23,3 +23,15 @@ Feature: User creates country
           | fieldName         | value |
           | Name (on English) | ee    |
           | Name (on Russian) | яя    |
+
+  Scenario Outline: Country name should not be too long
+      Given As administrator
+       When I open create country page
+        And I fill create country form with valid values
+        And I fill field "<fieldName>" with value "<value>" in create country form
+        And I submit create country form
+       Then I see that field "<fieldName>" has error "Value is greater than allowable maximum of 50 characters" in create country form
+  Examples:
+          | fieldName         | value                                               |
+          | Name (on English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+          | Name (on Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
