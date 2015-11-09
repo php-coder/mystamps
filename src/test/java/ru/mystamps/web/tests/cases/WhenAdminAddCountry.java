@@ -37,7 +37,6 @@ import ru.mystamps.web.tests.page.AddCountryPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -74,20 +73,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCountry(" t3st ", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page).field("name").hasValue("t3st");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameRuShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, " т3ст ");
-		
-		assertThat(page).field("nameRu").hasValue("т3ст");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })

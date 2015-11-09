@@ -85,3 +85,15 @@ Feature: User creates country
               | Name (on English) | test- |
               | Name (on Russian) | -тест |
               | Name (on Russian) | тест- |
+
+    Scenario Outline: Country name should be stripped from leading and trailing spaces
+        Given As administrator
+         When I open create country page
+          And I fill create country form with valid values
+          And I fill field "<fieldName>" with value " <value> " in create country form
+          And I submit create country form
+         Then I see that field "<fieldName>" has value "<value>" in create country form
+      Examples:
+              | fieldName         | value |
+              | Name (on English) | t3st  |
+              | Name (on Russian) | т3ст  |

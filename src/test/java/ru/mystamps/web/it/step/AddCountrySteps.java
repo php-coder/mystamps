@@ -81,4 +81,9 @@ public class AddCountrySteps {
 		assertThat(page.fieldHasError(fieldName), is(false));
 	}
 	
+	@Then("^I see that field \"([^\"]*)\" has value \"([^\"]*)\" in create country form$")
+	public void fieldShouldHaveValue(String fieldName, String expectedValue) {
+		assertThat(page.getValueByFieldName(fieldName), is(equalTo(expectedValue)));
+	}
+	
 }

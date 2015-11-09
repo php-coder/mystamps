@@ -79,6 +79,10 @@ public class AddCountryPage {
 		return fieldNameToErrorMessage(fieldName).getText();
 	}
 	
+	public String getValueByFieldName(String fieldName) {
+		return fieldNameToField(fieldName).getAttribute("value");
+	}
+	
 	// TODO: move to helper or parent
 	private static void clearAndTypeIntoField(WebElement element, String value) {
 		element.clear();
