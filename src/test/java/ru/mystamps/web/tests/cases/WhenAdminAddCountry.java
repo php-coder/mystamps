@@ -41,7 +41,6 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
 	private static final String TEST_COUNTRY_NAME_EN = "Russia";
-	private static final String TEST_COUNTRY_NAME_RU = "Россия";
 	
 	@Value("${valid_admin_login}")
 	private String validAdminLogin;
@@ -75,22 +74,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, TEST_COUNTRY_NAME_RU);
-		
-		String expectedUrl = Url.INFO_COUNTRY_PAGE
-			.replace("{id}", "\\d+")
-			.replace("{slug}", TEST_COUNTRY_NAME_EN.toLowerCase());
-		
-		assertThat(page.getCurrentUrl()).matches(expectedUrl);
-		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME_EN);
-	}
-	
-	@Test(
-		groups = "logic",
-		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation"
-	)
+	@Test(groups = "logic")
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(Url.ADD_SERIES_PAGE);
 		

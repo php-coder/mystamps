@@ -72,4 +72,9 @@ public class IntegrationTestContext {
 		return new InfoCategoryPage(getWebDriver());
 	}
 	
+	@Bean
+	public InfoCountryPage getInfoCountryPage() {
+		return new InfoCountryPage(getWebDriver());
+	}
+	
 }

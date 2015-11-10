@@ -97,3 +97,12 @@ Feature: User creates country
               | fieldName         | value |
               | Name (on English) | t3st  |
               | Name (on Russian) | т3ст  |
+
+    Scenario: Administrator creates a country
+        Given As administrator
+         When I open create country page
+          And I fill field "Name (on English)" with value "Israel" in create country form
+          And I fill field "Name (on Russian)" with value "Израиль" in create country form
+          And I submit create country form
+         Then I'm on a country info page
+          And I see a header "Israel" on country info page
