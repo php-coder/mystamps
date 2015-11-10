@@ -38,12 +38,12 @@ public class InfoCategoryPage {
 		// It looks wrong to initialize page here, but I didn't find a better place
 		PageFactory.initElements(driver, this);
 		
-		String categoryUrlRegexp = Url.SITE + Url.INFO_CATEGORY_PAGE
+		String urlRegexp = Url.SITE + Url.INFO_CATEGORY_PAGE
 			.replace("{id}", "\\d+")
 			.replace("{slug}", "\\w+");
 		
 		// TODO: move to the step and use regexp matchers
-		return driver.getCurrentUrl().matches(categoryUrlRegexp);
+		return driver.getCurrentUrl().matches(urlRegexp);
 	}
 	
 	public String getHeaderText() {
