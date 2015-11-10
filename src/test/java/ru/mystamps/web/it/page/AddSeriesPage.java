@@ -19,11 +19,14 @@ package ru.mystamps.web.it.page;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,10 +37,22 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class AddSeriesPage {
 	
+	private static final String COUNTRY_OPTION_LOCATOR =
+		"//*[contains(@class, \"selectize-control\")]"
+		+ "/*[contains(@class, \"selectize-dropdown\")]"
+		+ "/*[contains(@class, \"selectize-dropdown-content\")]"
+		+ "/*[contains(@class, \"option\")]";
+	
+	// in seconds
+	private static final int WAITING_FOR_ELEMENT_TIMEOUT = 5;
+	
 	private final WebDriver driver;
 	
 	@FindBy(id = "category")
 	private WebElement categoryField;
+	
+	@FindBy(className = "selectize-input")
+	private List<WebElement> selectizedFields;
 	
 	public void open() {
 		PageFactory.initElements(driver, this);
@@ -45,10 +60,30 @@ public class AddSeriesPage {
 	}
 	
 	public List<String> getValuesByFieldName(String fieldName) {
+		if ("Country".equals(fieldName)) {
+			return getCountryFieldValues();
+		}
+		
 		Select select = new Select(fieldNameToField(fieldName));
 		
 		return select
 			.getOptions()
+			.stream()
+			.map(WebElement::getText)
+			.collect(toList());
+	}
+	
+	private List<String> getCountryFieldValues() {
+		WebElement countryField = selectizedFields.get(0);
+		
+		countryField.click();
+		
+		return new WebDriverWait(driver, WAITING_FOR_ELEMENT_TIMEOUT)
+			.until(
+				ExpectedConditions.visibilityOfAllElementsLocatedBy(
+					By.xpath(COUNTRY_OPTION_LOCATOR)
+				)
+			)
 			.stream()
 			.map(WebElement::getText)
 			.collect(toList());

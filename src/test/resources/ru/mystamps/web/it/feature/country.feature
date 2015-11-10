@@ -106,3 +106,12 @@ Feature: User creates country
           And I submit create country form
          Then I'm on a country info page
           And I see a header "Israel" on country info page
+
+    Scenario: Country should be available for choosing after its creation
+        Given As administrator
+         When I open create country page
+          And I fill field "Name (on English)" with value "Germany" in create country form
+          And I fill field "Name (on Russian)" with value "Германия" in create country form
+          And I submit create country form
+         Then I open create series page
+          And Field "Country" in create series form contains "Germany"

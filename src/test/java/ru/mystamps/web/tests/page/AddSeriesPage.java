@@ -107,8 +107,10 @@ public class AddSeriesPage extends AbstractPageWithForm {
 	}
 	
 	public List<String> getCountryFieldValues() {
-		List<WebElement> selectizedFields = getElementsByClassName("selectize-input");
-		Validate.isTrue(
+		List<WebElement> selectizedFields =
+			driver.findElements(By.className("selectize-input"));
+		
+		Validate.validState(
 			selectizedFields.size() == 1,
 			"At page for series creation must be exactly one selectized field"
 		);
