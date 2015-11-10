@@ -101,7 +101,6 @@ Feature: User creates category
   Scenario: Administrator creates a category
       Given As administrator
        When I open create category page
-        And I fill create category form with valid values
         And I fill field "Name (on English)" with value "Mushrooms" in create category form
         And I fill field "Name (on Russian)" with value "Грибы" in create category form
         And I submit create category form
@@ -111,7 +110,6 @@ Feature: User creates category
   Scenario: Category should be available for choosing after its creation
       Given As administrator
        When I open create category page
-        And I fill create category form with valid values
         And I fill field "Name (on English)" with value "Flowers" in create category form
         And I fill field "Name (on Russian)" with value "Цветы" in create category form
         And I submit create category form
