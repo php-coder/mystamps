@@ -89,7 +89,21 @@ class SiteServiceImplTest extends Specification {
 				return true
 			})
 	}
-
+	
+	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
+		given:
+			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
+		and:
+			String expectedPageUrl = longPageUrl.take(SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
+		when:
+			service.logAboutAbsentPage(longPageUrl, TEST_METHOD, null, null, null, null)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.page == expectedPageUrl
+				return true
+			})
+	}
+	
 	@Unroll
 	def "logAboutAbsentPage() should pass method to dao"(String expectedMethod) {
 		when:
@@ -155,6 +169,19 @@ class SiteServiceImplTest extends Specification {
 				return true
 			})
 	}
+	def "logAboutAbsentPage() should pass abbreviated referer when it's too long"() {
+		given:
+			String longRefererUrl = '/long/url/' + ('x' * SuspiciousActivity.REFERER_PAGE_LENGTH)
+		and:
+			String expectedRefererUrl = longRefererUrl.take(SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
+		when:
+			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.refererPage == expectedRefererUrl
+				return true
+			})
+	}
 	
 	def "logAboutAbsentPage() should pass empty string to dao for unknown referer"() {
 		when:
@@ -172,6 +199,19 @@ class SiteServiceImplTest extends Specification {
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
+				return true
+			})
+	}
+	def "logAboutAbsentPage() should pass abbreviated user agent when it's too long"() {
+		given:
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
+		and:
+			String expectedUserAgent = longUserAgent.take(SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
+		when:
+			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.userAgent == expectedUserAgent
 				return true
 			})
 	}
@@ -247,6 +287,19 @@ class SiteServiceImplTest extends Specification {
 				return true
 			})
 	}
+	def "logAboutFailedAuthentication() should pass abbreviated page when it's too long"() {
+		given:
+			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
+		and:
+			String expectedPageUrl = longPageUrl.take(SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
+		when:
+			service.logAboutFailedAuthentication(longPageUrl, TEST_METHOD, null, null, null, null, null)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.page == expectedPageUrl
+				return true
+			})
+	}
 	
 	def "logAboutFailedAuthentication() should pass null to dao for unknown user"() {
 		when:
@@ -310,6 +363,20 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	def "logAboutFailedAuthentication() should pass abbreviated referer when it's too long"() {
+		given:
+			String longRefererUrl = '/long/url/' + ('x' * SuspiciousActivity.REFERER_PAGE_LENGTH)
+		and:
+			String expectedRefererUrl = longRefererUrl.take(SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
+		when:
+			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null, null)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.refererPage == expectedRefererUrl
+				return true
+			})
+	}
+	
 	def "logAboutFailedAuthentication() should pass user agent to dao"() {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
@@ -326,6 +393,20 @@ class SiteServiceImplTest extends Specification {
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
 				assert activity?.userAgent?.empty
+				return true
+			})
+	}
+	
+	def "logAboutFailedAuthentication() should pass abbreviated user agent when it's too long"() {
+		given:
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
+		and:
+			String expectedUserAgent = longUserAgent.take(SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
+		when:
+			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent, null)
+		then:
+			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+				assert activity?.userAgent == expectedUserAgent
 				return true
 			})
 	}

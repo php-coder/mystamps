@@ -22,6 +22,8 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,8 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
 	
 	// see initiate-suspicious_activities_types-table changeset
 	// in src/main/resources/liquibase/initial-state.xml
@@ -94,16 +98,48 @@ public class SiteServiceImpl implements SiteService {
 		activity.setType(activityType);
 		
 		activity.setOccurredAt(date == null ? new Date() : date);
-		activity.setPage(page);
+		activity.setPage(abbreviatePage(page));
 		activity.setMethod(method);
 		
 		activity.setUser(user);
 		
 		activity.setIp(StringUtils.defaultString(ip));
-		activity.setRefererPage(StringUtils.defaultString(referer));
-		activity.setUserAgent(StringUtils.defaultString(agent));
+		activity.setRefererPage(abbreviateRefererPage(StringUtils.defaultString(referer)));
+		activity.setUserAgent(abbreviateUserAgent(StringUtils.defaultString(agent)));
 		
 		suspiciousActivities.add(activity);
+	}
+	
+	private static String abbreviatePage(String page) {
+		return abbreviateIfLengthGreaterThan(page, SuspiciousActivity.PAGE_URL_LENGTH, "page");
+	}
+	
+	private static String abbreviateRefererPage(String referer) {
+		// CheckStyle: ignore LineLength for next 1 lines
+		return abbreviateIfLengthGreaterThan(referer, SuspiciousActivity.REFERER_PAGE_LENGTH, "referer_page");
+	}
+	
+	private static String abbreviateUserAgent(String agent) {
+		// CheckStyle: ignore LineLength for next 1 lines
+		return abbreviateIfLengthGreaterThan(agent, SuspiciousActivity.USER_AGENT_LENGTH, "user_agent");
+	}
+	
+	// CheckStyle: ignore LineLength for next 1 lines
+	private static String abbreviateIfLengthGreaterThan(String text, int maxLength, String fieldName) {
+		if (text == null || text.length() <= maxLength) {
+			return text;
+		}
+		
+		// TODO(security): fix possible log injection
+		LOG.warn(
+				"Length of value for '{}' field ({}) exceeds max field size ({}): '{}'",
+				fieldName,
+				text.length(),
+				maxLength,
+				text
+		);
+		
+		return StringUtils.abbreviate(text, maxLength);
 	}
 	
 }

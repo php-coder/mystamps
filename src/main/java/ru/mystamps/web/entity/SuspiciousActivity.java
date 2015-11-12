@@ -36,9 +36,11 @@ import lombok.Setter;
 @Setter
 public class SuspiciousActivity {
 	
-	public static final int PAGE_URL_LENGTH = 100;
-	public static final int IP_LENGTH       = 15;
-	public static final int METHOD_LENGTH   = 7;
+	public static final int PAGE_URL_LENGTH     = 100;
+	public static final int METHOD_LENGTH       = 7;
+	public static final int IP_LENGTH           = 15;
+	public static final int REFERER_PAGE_LENGTH = 255;
+	public static final int USER_AGENT_LENGTH   = 255;
 	
 	@Id
 	@GeneratedValue
@@ -62,10 +64,10 @@ public class SuspiciousActivity {
 	@Column(length = IP_LENGTH, nullable = false)
 	private String ip;
 	
-	@Column(name = "referer_page", nullable = false)
+	@Column(name = "referer_page", length = REFERER_PAGE_LENGTH, nullable = false)
 	private String refererPage;
 	
-	@Column(name = "user_agent", nullable = false)
+	@Column(name = "user_agent", length = USER_AGENT_LENGTH, nullable = false)
 	private String userAgent;
 	
 }
