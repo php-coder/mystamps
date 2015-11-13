@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="allow-nullable-values-to-suspicious_activities-table" author="AleksSPb" context="scheme">
+		
+		<dropNotNullConstraint
+			columnDataType="VARCHAR(255)"
+			columnName="referer_page"
+			tableName="suspicious_activities"/>
+		
+		<dropNotNullConstraint
+			columnDataType="VARCHAR(255)"
+			columnName="user_agent"
+			tableName="suspicious_activities"/>
+		
+	</changeSet>
+	
+	<changeSet id="update-empty-values-to-null-in-suspicious_activities-table" author="AleksSPb" context="test-data, prod-data">
+		
+		<!-- Be caution: there is no rollback! -->
+		<sql>
+			UPDATE suspicious_activities
+			SET referer_page = NULL
+			WHERE TRIM(referer_page) = ''
+		</sql>
+		
+		<!-- Be caution: there is no rollback! -->
+		<sql>
+			UPDATE suspicious_activities
+			SET user_agent = NULL
+			WHERE TRIM(user_agent) = ''
+		</sql>
+		
+	</changeSet>
+	
+</databaseChangeLog>
+

@@ -183,14 +183,18 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass empty string to dao for unknown referer"() {
+	def "logAboutAbsentPage() should pass null to dao for unknown referer"(String refererPage) {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, refererPage, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.refererPage?.empty
+				assert activity?.refererPage == null
 				return true
 			})
+		where: refererPage | _
+			'  '           | _
+			''             | _
+			null           | _
 	}
 	
 	def "logAboutAbsentPage() should pass user agent to dao"() {
@@ -216,14 +220,18 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass empty string to dao for unknown user agent"() {
+	def "logAboutAbsentPage() should pass null to dao for unknown user agent"(String userAgent) {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, userAgent)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.userAgent?.empty
+				assert activity?.userAgent == null
 				return true
 			})
+		where: userAgent | _
+		'  '             | _
+		''               | _
+		null             | _
 	}
 	
 	//
@@ -353,14 +361,18 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should pass empty string to dao for unknown referer"() {
+	def "logAboutFailedAuthentication() should pass null to dao for unknown referer"(String refererPage) {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.refererPage?.empty
+				assert activity?.refererPage == null
 				return true
 			})
+		where: refererPage | _
+			'  '           | _
+			''             | _
+			null           | _
 	}
 	
 	def "logAboutFailedAuthentication() should pass abbreviated referer when it's too long"() {
@@ -387,14 +399,18 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should pass empty string to dao for unknown user agent"() {
+	def "logAboutFailedAuthentication() should pass null to dao for unknown user agent"(String userAgent) {
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)
 		then:
 			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.userAgent?.empty
+				assert activity?.userAgent == null
 				return true
 			})
+		where: userAgent | _
+			'  '         | _
+			''           | _
+			null         | _
 	}
 	
 	def "logAboutFailedAuthentication() should pass abbreviated user agent when it's too long"() {
