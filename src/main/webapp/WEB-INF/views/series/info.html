@@ -87,6 +87,14 @@
 			<div class="row" id="content">
 				<div class="col-sm-12">
 					
+					<!--/*/
+					<div class="row" th:if="${maxQuantityOfImagesExceeded}">
+						<div class="alert alert-danger text-center col-sm-8 col-sm-offset-2" th:text="#{t_add_image_error}">
+							This series has enough images. Please, contact with admin if you want to add more images
+						</div>
+					</div>
+					/*/-->
+					
 					<div class="row">
 						
 						<div class="col-sm-4">
@@ -287,7 +295,7 @@
 							
 					</div>
 					
-					<div class="row" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
+					<div class="row" th:if="${allowAddingImages}" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 						<div class="col-sm-4">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">

@@ -198,6 +198,13 @@ public class SeriesController {
 			: collectionService.isSeriesInCollection(currentUser.getId(), series.getId())
 		);
 		
+		model.addAttribute(
+			"allowAddingImages",
+			isAllowedToAddingImages(series)
+		);
+		
+		model.addAttribute("maxQuantityOfImagesExceeded", false);
+		
 		return "series/info";
 	}
 	
@@ -227,7 +234,15 @@ public class SeriesController {
 			collectionService.isSeriesInCollection(currentUser.getId(), series.getId())
 		);
 		
-		if (result.hasErrors()) {
+		model.addAttribute(
+			"allowAddingImages",
+			isAllowedToAddingImages(series)
+		);
+		
+		boolean maxQuantityOfImagesExceeded = !isAllowedToAddingImages(series);
+		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
+		
+		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			// don't try to re-display file upload field
 			form.setImage(null);
 			return "series/info";
@@ -367,6 +382,10 @@ public class SeriesController {
 		}
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+	}
+	
+	private static boolean isAllowedToAddingImages(Series series) {
+		return series.getImages().size() <= series.getQuantity();
 	}
 	
 	private static String redirectTo(String url, Object... args) {
