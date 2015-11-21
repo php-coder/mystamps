@@ -55,6 +55,11 @@ public class ErrorPageSteps {
 		page.open(Url.SITE + Url.ADD_SERIES_PAGE);
 	}
 	
+	@When("^I open Togglz console but I don't have enough permissions$")
+	public void openTogglzConsolePage() {
+		page.open(Url.SITE + Url.TOGGLZ_CONSOLE_PAGE);
+	}
+	
 	@When("^I open non-existing category page$")
 	public void openNonExistingCategoryPage() {
 		String absentCategoryId = "888";

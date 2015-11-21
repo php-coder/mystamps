@@ -30,8 +30,6 @@ import ru.mystamps.web.tests.page.ForbiddenErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 public class WhenUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErrorPage> {
 	
 	@Value("${valid_user_login}")
@@ -60,16 +58,6 @@ public class WhenUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErr
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorMessage() {
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_403_description"));
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsErrorCode() {
-		assertThat(page.getErrorCode()).isEqualTo("403");
 	}
 	
 	@Override
