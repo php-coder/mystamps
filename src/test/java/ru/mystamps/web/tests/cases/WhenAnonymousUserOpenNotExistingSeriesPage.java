@@ -19,8 +19,6 @@ package ru.mystamps.web.tests.cases;
 
 import java.net.HttpURLConnection;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.NotFoundErrorPage;
@@ -43,9 +41,6 @@ public class WhenAnonymousUserOpenNotExistingSeriesPage
 		page.open(Url.INFO_SERIES_PAGE.replace("{id}", absentSeriesId));
 		
 		checkStandardStructure();
-		
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
-		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
 }

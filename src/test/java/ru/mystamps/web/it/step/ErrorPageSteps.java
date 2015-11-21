@@ -50,6 +50,11 @@ public class ErrorPageSteps {
 		page.open(Url.SITE + Url.ADD_COUNTRY_PAGE);
 	}
 	
+	@When("^I open add series page but I don't have enough permissions$")
+	public void openAddSeriesPage() {
+		page.open(Url.SITE + Url.ADD_SERIES_PAGE);
+	}
+	
 	@When("^I open non-existing category page$")
 	public void openNonExistingCategoryPage() {
 		String absentCategoryId = "888";
@@ -66,6 +71,16 @@ public class ErrorPageSteps {
 		String url = Url.SITE + Url.INFO_COUNTRY_PAGE
 			.replace("{id}", absentCountryId)
 			.replace("{slug}", "country-404-error-test");
+		
+		page.open(url);
+	}
+	
+	@When("^I open non-existing series page$")
+	public void openNotExistingSeriesPage() {
+		String absentSeriesId = "999";
+		String url = Url.SITE + Url.INFO_SERIES_PAGE
+			.replace("{id}", absentSeriesId)
+			.replace("{slug}", "series-404-error-test");
 		
 		page.open(url);
 	}
