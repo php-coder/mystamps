@@ -12,6 +12,15 @@ Feature: User creates category
        Then I see error message "Requested page not found"
         And I see error code "404"
 
+  Scenario: All fields should be mandatory
+      Given As administrator
+       When I open create category page
+        And I fill field "Name (on English)" with value "" in create category form
+        And I fill field "Name (on Russian)" with value "" in create category form
+        And I submit create category form
+       Then I see that field "Name (on English)" has error "Value must not be empty" in create category form
+       And  I see that field "Name (on Russian)" has error "Value must not be empty" in create category form
+
   Scenario Outline: Category name should not be too short
       Given As administrator
        When I open create category page
