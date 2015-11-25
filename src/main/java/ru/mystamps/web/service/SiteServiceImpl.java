@@ -104,8 +104,8 @@ public class SiteServiceImpl implements SiteService {
 		activity.setUser(user);
 		
 		activity.setIp(StringUtils.defaultString(ip));
-		activity.setRefererPage(abbreviateRefererPage(StringUtils.defaultString(referer)));
-		activity.setUserAgent(abbreviateUserAgent(StringUtils.defaultString(agent)));
+		activity.setRefererPage(StringUtils.stripToNull(abbreviateRefererPage(referer)));
+		activity.setUserAgent(StringUtils.stripToNull(abbreviateUserAgent(agent)));
 		
 		suspiciousActivities.add(activity);
 	}

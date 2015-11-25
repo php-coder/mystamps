@@ -64,10 +64,10 @@ public class SuspiciousActivity {
 	@Column(length = IP_LENGTH, nullable = false)
 	private String ip;
 	
-	@Column(name = "referer_page", length = REFERER_PAGE_LENGTH, nullable = false)
+	@Column(name = "referer_page", length = REFERER_PAGE_LENGTH)
 	private String refererPage;
 	
-	@Column(name = "user_agent", length = USER_AGENT_LENGTH, nullable = false)
+	@Column(name = "user_agent", length = USER_AGENT_LENGTH)
 	private String userAgent;
 	
 }
