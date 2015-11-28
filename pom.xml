@@ -248,6 +248,7 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
