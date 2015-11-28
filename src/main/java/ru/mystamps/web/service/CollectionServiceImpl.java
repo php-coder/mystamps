@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -49,7 +50,10 @@ public class CollectionServiceImpl implements CollectionService {
 		collection.setOwnerId(ownerId);
 		
 		String slug = SlugUtils.slugify(ownerLogin);
-		Validate.isTrue(slug != null, "Slug for string '%s' is null", ownerLogin);
+		Validate.isTrue(
+			StringUtils.isNotEmpty(slug),
+			"Slug for string '%s' must be non empty", ownerLogin
+		);
 		collection.setSlug(slug);
 		
 		Integer id = collectionDao.add(collection);
