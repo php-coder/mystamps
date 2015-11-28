@@ -36,7 +36,7 @@ import ru.mystamps.web.entity.UsersActivation;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
-	private static final long CHECK_PERIOD = 12 * DateUtils.MILLIS_PER_HOUR;
+	private static final String EVERY_DAY_AT_00_30 = "30 0 * * * *";
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
@@ -44,7 +44,7 @@ public class CronServiceImpl implements CronService {
 	private final UsersActivationService usersActivationService;
 	
 	@Override
-	@Scheduled(fixedDelay = CHECK_PERIOD)
+	@Scheduled(cron = EVERY_DAY_AT_00_30)
 	@Transactional
 	public void purgeUsersActivations() {
 		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
