@@ -36,7 +36,7 @@ import ru.mystamps.web.entity.UsersActivation;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
-	private static final String EVERY_DAY_AT_00_30 = "30 0 * * * *";
+	private static final String EVERY_DAY_AT_00_30 = "0 30 0 * * *";
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
