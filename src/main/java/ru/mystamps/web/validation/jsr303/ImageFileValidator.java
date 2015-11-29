@@ -33,6 +33,9 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ImageFileValidator.class);
 	
+	private static final String JPEG_CONTENT_TYPE = "image/jpeg";
+	private static final String PNG_CONTENT_TYPE  = "image/png";
+	
 	// see https://en.wikipedia.org/wiki/JPEG#Syntax_and_structure
 	// CheckStyle: ignore NoWhitespaceAfterCheck for next 3 lines
 	private static final byte[][] JPEG_SIGNATURES = {
@@ -97,6 +100,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	}
 	
 	@Override
+	@SuppressWarnings("PMD.CyclomaticComplexity")
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {
@@ -104,6 +108,13 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		}
 		
 		if (file.isEmpty()) {
+			return false;
+		}
+
+		String contentType = file.getContentType();
+		if (!PNG_CONTENT_TYPE.equals(contentType)
+			&& !JPEG_CONTENT_TYPE.equals(file.getContentType())) {
+			LOG.debug("Reject file with content type '{}'", contentType);
 			return false;
 		}
 		
