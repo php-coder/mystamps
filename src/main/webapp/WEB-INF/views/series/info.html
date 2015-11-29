@@ -293,7 +293,7 @@
 								<div class="col-sm-6 col-sm-offset-3">
 									<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}" th:object="${addImageForm}">
 										<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
-											<input type="file" id="image" class="form-control" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+											<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
 											<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
 										</div>
 										<div class="from-group-sm">
