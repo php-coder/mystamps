@@ -39,7 +39,7 @@
 			src/main/java/ru/mystamps/web/config/MvcConfig.java
 			src/main/java/ru/mystamps/web/Url.java
 		-->
-		<bootstrap.version>3.3.5</bootstrap.version>
+		<bootstrap.version>3.3.6</bootstrap.version>
 		<jquery.version>1.9.1</jquery.version>
 		<selectizejs.version>0.12.1</selectizejs.version>
 		

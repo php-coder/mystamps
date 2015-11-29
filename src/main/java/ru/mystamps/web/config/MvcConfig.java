@@ -70,7 +70,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		
 		// For WebJars:
 		registry.addResourceHandler("/public/bootstrap/**")
-			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/3.3.5/");
+			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/3.3.6/");
 		registry.addResourceHandler("/public/jquery/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/jquery/1.9.1/");
 		registry.addResourceHandler("/public/selectize/**")
