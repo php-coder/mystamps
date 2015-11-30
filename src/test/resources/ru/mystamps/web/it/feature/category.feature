@@ -53,9 +53,9 @@ Feature: User creates category
         And I submit create category form
        Then I see that field "<fieldName>" has error "Category already exists" in create category form
     Examples:
-            | fieldName         | value    |
-            | Name (on English) | Animals  |
-            | Name (on Russian) | Животные |
+          | fieldName         | value    |
+          | Name (on English) | Animals  |
+          | Name (on Russian) | Животные |
 
   Scenario Outline: Category name should accept all valid characters
       Given As administrator
@@ -77,9 +77,9 @@ Feature: User creates category
         And I submit create category form
        Then I see that field "<fieldName>" has error "<errorMessage>" in create category form
     Examples:
-            | fieldName         | value              | errorMessage                                                      |
-            | Name (on English) | S0m3+CategoryN_ame | Category name must consist only latin letters, hyphen or spaces   |
-            | Name (on Russian) | Категория+1_2_3    | Category name must consist only Russian letters, hyphen or spaces |
+          | fieldName         | value              | errorMessage                                                      |
+          | Name (on English) | S0m3+CategoryN_ame | Category name must consist only latin letters, hyphen or spaces   |
+          | Name (on Russian) | Категория+1_2_3    | Category name must consist only Russian letters, hyphen or spaces |
 
   Scenario Outline: Category name should not start or end with hyphen
       Given As administrator
@@ -89,11 +89,11 @@ Feature: User creates category
         And I submit create category form
        Then I see that field "<fieldName>" has error "Value must not start or end with hyphen" in create category form
     Examples:
-            | fieldName         | value |
-            | Name (on English) | -test |
-            | Name (on English) | test- |
-            | Name (on Russian) | -тест |
-            | Name (on Russian) | тест- |
+          | fieldName         | value |
+          | Name (on English) | -test |
+          | Name (on English) | test- |
+          | Name (on Russian) | -тест |
+          | Name (on Russian) | тест- |
 
   Scenario Outline: Category name should be stripped from leading and trailing spaces
       Given As administrator
@@ -103,9 +103,9 @@ Feature: User creates category
         And I submit create category form
        Then I see that field "<fieldName>" has value "<value>" in create category form
     Examples:
-            | fieldName         | value |
-            | Name (on English) | t3st  |
-            | Name (on Russian) | т3ст  |
+          | fieldName         | value |
+          | Name (on English) | t3st  |
+          | Name (on Russian) | т3ст  |
 
   Scenario: Administrator creates a category
       Given As administrator
