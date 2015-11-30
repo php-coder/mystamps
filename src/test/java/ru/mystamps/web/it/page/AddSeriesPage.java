@@ -51,12 +51,42 @@ public class AddSeriesPage {
 	@FindBy(id = "category")
 	private WebElement categoryField;
 	
+	@FindBy(id = "category.errors")
+	private WebElement categoryErrorMessage;
+	
 	@FindBy(className = "selectize-input")
 	private List<WebElement> selectizedFields;
+	
+	@FindBy(id = "quantity")
+	private WebElement quantityField;
+	
+	@FindBy(id = "quantity.errors")
+	private WebElement quantityErrorMessage;
+	
+	@FindBy(id = "image")
+	private WebElement imageField;
+	
+	@FindBy(id = "image.errors")
+	private WebElement imageErrorMessage;
+	
+	@FindBy(id = "add-series-btn")
+	private WebElement addSeriesButton;
 	
 	public void open() {
 		PageFactory.initElements(driver, this);
 		driver.navigate().to(Url.SITE + Url.ADD_SERIES_PAGE);
+	}
+	
+	public void fillFieldByName(String fieldName, String value) {
+		clearAndTypeIntoField(fieldNameToField(fieldName), value);
+	}
+	
+	public void submitForm() {
+		addSeriesButton.submit();
+	}
+	
+	public String getErrorByFieldName(String fieldName) {
+		return fieldNameToErrorMessage(fieldName).getText();
 	}
 	
 	public List<String> getValuesByFieldName(String fieldName) {
@@ -71,6 +101,12 @@ public class AddSeriesPage {
 			.stream()
 			.map(WebElement::getText)
 			.collect(toList());
+	}
+	
+	// TODO: move to helper or parent
+	private static void clearAndTypeIntoField(WebElement element, String value) {
+		element.clear();
+		element.sendKeys(value);
 	}
 	
 	private List<String> getCountryFieldValues() {
@@ -90,13 +126,21 @@ public class AddSeriesPage {
 	}
 	
 	private WebElement fieldNameToField(String fieldName) {
-		return fieldNameToElement(fieldName);
+		return fieldNameToElement(fieldName, false);
 	}
 	
-	private WebElement fieldNameToElement(String fieldName) {
+	private WebElement fieldNameToErrorMessage(String fieldName) {
+		return fieldNameToElement(fieldName, true);
+	}
+	
+	private WebElement fieldNameToElement(String fieldName, boolean toErrorMessage) {
 		switch (fieldName) {
 			case "Category":
-				return categoryField;
+				return toErrorMessage ? categoryErrorMessage : categoryField;
+			case "Quantity":
+				return toErrorMessage ? quantityErrorMessage : quantityField;
+			case "Image":
+				return toErrorMessage ? imageErrorMessage : imageField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);
 		}

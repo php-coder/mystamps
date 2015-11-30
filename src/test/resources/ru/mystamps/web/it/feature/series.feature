@@ -11,3 +11,14 @@ Feature: User or admin add series
        When I open non-existing series page
        Then I see error message "Requested page not found"
         And I see error code "404"
+
+  Scenario: Some fields should be mandatory
+      Given As administrator
+       When I open add series page
+        And I fill field "Category" with value "" in add series form
+        And I fill field "Quantity" with value "" in add series form
+        And I fill field "Image" with value "" in add series form
+        And I submit add series form
+       Then I see that field "Category" has error "Value must not be empty" in add series form
+        And I see that field "Quantity" has error "Value must not be empty" in add series form
+        And I see that field "Image" has error "Value must not be empty" in add series form

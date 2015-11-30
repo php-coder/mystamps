@@ -122,5 +122,5 @@ Feature: User creates country
           And I fill field "Name (on English)" with value "Germany" in create country form
           And I fill field "Name (on Russian)" with value "Германия" in create country form
           And I submit create country form
-         Then I open create series page
+         Then I open add series page
           And Field "Country" in create series form contains "Germany"

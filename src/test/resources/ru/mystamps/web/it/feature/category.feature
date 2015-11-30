@@ -122,5 +122,5 @@ Feature: User creates category
         And I fill field "Name (on English)" with value "Flowers" in create category form
         And I fill field "Name (on Russian)" with value "Цветы" in create category form
         And I submit create category form
-       Then I open create series page
+       Then I open add series page
         And Field "Category" in create series form contains "Flowers"

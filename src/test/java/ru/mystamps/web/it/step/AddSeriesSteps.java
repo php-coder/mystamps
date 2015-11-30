@@ -26,7 +26,9 @@ import ru.mystamps.web.it.page.AddSeriesPage;
 
 import static org.junit.Assert.assertThat;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.is;
 
 public class AddSeriesSteps {
 	
@@ -37,7 +39,7 @@ public class AddSeriesSteps {
 		this.page = page;
 	}
 	
-	@Then("^I open create series page$")
+	@Then("^I open add series page$")
 	public void openAddSeriesPage() {
 		page.open();
 	}
@@ -45,6 +47,21 @@ public class AddSeriesSteps {
 	@And("^Field \"([^\"]*)\" in create series form contains \"([^\"]*)\"$")
 	public void fieldShouldContainsValue(String fieldName, String value) {
 		assertThat(page.getValuesByFieldName(fieldName), hasItem(value));
+	}
+	
+	@And("^I fill field \"([^\"]*)\" with value \"([^\"]*)\" in add series form$")
+	public void fillField(String fieldName, String value) {
+		page.fillFieldByName(fieldName, value);
+	}
+	
+	@And("^I submit add series form$")
+	public void submitForm() {
+		page.submitForm();
+	}
+	
+	@Then("^I see that field \"([^\"]*)\" has error \"([^\"]*)\" in add series form$")
+	public void fieldShouldHaveAnError(String fieldName, String errorMessage) {
+		assertThat(page.getErrorByFieldName(fieldName), is(equalTo(errorMessage)));
 	}
 	
 }
