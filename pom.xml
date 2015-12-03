@@ -511,11 +511,6 @@
 						<profile>test</profile>
 					</profiles>
 					<!--
-						Don't add src/main/resources to classpath, because we are using maven's resource filtering
-						@see https://github.com/spring-projects/spring-boot/issues/980
-					-->
-					<addResources>false</addResources>
-					<!--
 						Exclude provided artifacts from resulted WAR.
 						@see https://github.com/spring-projects/spring-boot/issues/649
 						@see https://github.com/spring-projects/spring-boot/issues/650
@@ -549,7 +544,6 @@
 						</goals>
 					</execution>
 				</executions>
-				
 			</plugin>
 			
 			<plugin>
