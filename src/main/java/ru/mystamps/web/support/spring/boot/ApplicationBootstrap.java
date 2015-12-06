@@ -29,7 +29,6 @@ import org.springframework.context.annotation.Import;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
@@ -38,7 +37,7 @@ import org.togglz.core.manager.FeatureManager;
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 
-@EnableAutoConfiguration(exclude = ErrorMvcAutoConfiguration.class)
+@EnableAutoConfiguration
 @Import({
 	ApplicationContext.class,
 	DispatcherServletContext.class,
