@@ -123,6 +123,12 @@
 			</exclusions>
 		</dependency>
 		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.RELEASE/spring-boot-starters/spring-boot-starter-validation/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.RELEASE/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
