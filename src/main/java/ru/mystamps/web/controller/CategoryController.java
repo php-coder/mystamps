@@ -100,7 +100,9 @@ public class CategoryController {
 			return null;
 		}
 		
-		model.addAttribute("category", category);
+		model.addAttribute("categoryId", category.getId());
+		model.addAttribute("categorySlug", category.getSlug());
+		model.addAttribute("categoryName", LocaleUtils.getLocalizedName(userLocale, category));
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		Integer categoryId = category.getId();
