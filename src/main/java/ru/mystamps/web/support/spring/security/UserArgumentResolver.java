@@ -34,7 +34,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 	
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return isSupportedType(parameter.getParameterType());
+		return User.class.isAssignableFrom(parameter.getParameterType());
 	}
 	
 	@Override
@@ -56,10 +56,6 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 		}
 		
 		return null;
-	}
-	
-	private static boolean isSupportedType(Class<?> clazz) {
-		return User.class.isAssignableFrom(clazz);
 	}
 	
 }
