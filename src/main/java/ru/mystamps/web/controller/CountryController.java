@@ -100,7 +100,9 @@ public class CountryController {
 			return null;
 		}
 		
-		model.addAttribute("country", country);
+		model.addAttribute("countryId", country.getId());
+		model.addAttribute("countrySlug", country.getSlug());
+		model.addAttribute("countryName", LocaleUtils.getLocalizedName(userLocale, country));
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		Integer countryId = country.getId();
