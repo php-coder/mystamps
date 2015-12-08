@@ -21,6 +21,9 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcCollectionDao
+import ru.mystamps.web.dao.dto.AddCollectionDbDto
+import ru.mystamps.web.service.dto.UrlEntityDto
+import ru.mystamps.web.util.SlugUtils
 
 class CollectionServiceImplTest extends Specification {
 	private JdbcCollectionDao collectionDao = Mock()
@@ -29,6 +32,240 @@ class CollectionServiceImplTest extends Specification {
 	
 	def setup() {
 		service = new CollectionServiceImpl(collectionDao)
+	}
+	
+	//
+	// Tests for createCollection()
+	//
+	
+	def "createCollection() should throw exception when owner id is null"() {
+		when:
+			service.createCollection(null, 'test-owner-login')
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "createCollection() should throw exception when owner login is null"() {
+		when:
+			service.createCollection(123, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "createCollection() should throw exception when owner login can't be converted to slug"() {
+		when:
+			service.createCollection(123, '')
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "createCollection() should pass owner id to dao"() {
+		given:
+			Integer expectedOwnerId = 123
+		when:
+			service.createCollection(expectedOwnerId, 'test')
+		then:
+			1 * collectionDao.add({ AddCollectionDbDto collection ->
+				assert collection?.ownerId == expectedOwnerId
+				return true
+			}) >> 100
+	}
+	
+	def "createCollection() should pass slugified owner login to dao"() {
+		given:
+			String ownerLogin = 'Test User'
+		and:
+			String expectedSlug = SlugUtils.slugify(ownerLogin)
+		when:
+			service.createCollection(123, ownerLogin)
+		then:
+			1 * collectionDao.add({ AddCollectionDbDto collection ->
+				assert collection?.slug == expectedSlug
+				return true
+			}) >> 200
+	}
+	
+	//
+	// Tests for addToCollection()
+	//
+	
+	def "addToCollection() should throw exception when user id is null"() {
+		when:
+			service.addToCollection(null, 456)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addToCollection() should throw exception when series id is null"() {
+		when:
+			service.addToCollection(123, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addToCollection() should find collection by user id"() {
+		given:
+			Integer expectedUserId = 123
+		when:
+			service.addToCollection(expectedUserId, 321)
+		then:
+			1 * collectionDao.findCollectionUrlEntityByUserId({ Integer userId ->
+				assert userId == expectedUserId
+				return true
+			}) >> TestObjects.createUrlEntityDto()
+	}
+	
+	def "addToCollection() should add series to collection"() {
+		given:
+			Integer expectedSeriesId = 456
+		and:
+			UrlEntityDto url = TestObjects.createUrlEntityDto()
+		and:
+			Integer expectedCollectionId = url.getId()
+		and:
+			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
+		when:
+			service.addToCollection(123, expectedSeriesId)
+		then:
+			1 * collectionDao.addSeriesToCollection({ Integer collectionId ->
+				assert collectionId == expectedCollectionId
+				return true
+			}, { Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			})
+	}
+	
+	def "addToCollection() should return result from dao"() {
+		given:
+			UrlEntityDto expectedUrl = TestObjects.createUrlEntityDto()
+		and:
+			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> expectedUrl
+		when:
+			UrlEntityDto serviceResult = service.addToCollection(123, 456)
+		then:
+			serviceResult == expectedUrl
+	}
+	
+	//
+	// Tests for removeFromCollection()
+	//
+	
+	def "removeFromCollection() should throw exception when user id is null"() {
+		when:
+			service.removeFromCollection(null, 123)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "removeFromCollection() should throw exception when series id is null"() {
+		when:
+			service.removeFromCollection(456, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	
+	def "removeFromCollection() should find collection by user id"() {
+		given:
+			Integer expectedUserId = 123
+		when:
+			service.removeFromCollection(expectedUserId, 321)
+		then:
+			1 * collectionDao.findCollectionUrlEntityByUserId({ Integer userId ->
+				assert userId == expectedUserId
+				return true
+			}) >> TestObjects.createUrlEntityDto()
+	}
+	
+	def "removeFromCollection() should remove series from collection"() {
+		given:
+			Integer expectedSeriesId = 456
+		and:
+			UrlEntityDto url = TestObjects.createUrlEntityDto()
+		and:
+			Integer expectedCollectionId = url.getId()
+		and:
+			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
+		when:
+			service.removeFromCollection(123, expectedSeriesId)
+		then:
+			1 * collectionDao.removeSeriesFromCollection({ Integer collectionId ->
+				assert collectionId == expectedCollectionId
+				return true
+			}, { Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			})
+	}
+	
+	def "removeFromCollection() should return result from dao"() {
+		given:
+			UrlEntityDto expectedResult = TestObjects.createUrlEntityDto()
+		and:
+			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> expectedResult
+		when:
+			UrlEntityDto serviceResult = service.removeFromCollection(123, 456)
+		then:
+			serviceResult == expectedResult
+	}
+	
+	//
+	// Tests for isSeriesInCollection()
+	//
+	
+	def "isSeriesInCollection() should throw exception when series id is null"() {
+		when:
+			service.isSeriesInCollection(100, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "isSeriesInCollection() should return false for anonymous"() {
+		given:
+			Integer anonymousUserId = null
+		when:
+			boolean serviceResult = service.isSeriesInCollection(anonymousUserId, 456)
+		then:
+			serviceResult == false
+		and:
+			0 * collectionDao.isSeriesInUserCollection(_ as Integer, _ as Integer)
+	}
+	
+	def "isSeriesInCollection() should pass arguments to dao"() {
+		given:
+			Integer expectedUserId = 123
+		and:
+			Integer expectedSeriesId = 456
+		and:
+			boolean expectedResult = true
+		when:
+			boolean serviceResult = service.isSeriesInCollection(expectedUserId, expectedSeriesId)
+		then:
+			1 * collectionDao.isSeriesInUserCollection({ Integer userId ->
+				assert userId == expectedUserId
+				return true
+			}, { Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
+		and:
+			serviceResult == expectedResult
+	}
+	
+	//
+	// Tests for countCollectionsOfUsers()
+	//
+	
+	def "countCollectionsOfUsers() should call dao and return result"() {
+		given:
+			long expectedResult = Long.MAX_VALUE
+		when:
+			long serviceResult = service.countCollectionsOfUsers()
+		then:
+			1 * collectionDao.countCollectionsOfUsers() >> expectedResult
+		and:
+			serviceResult == expectedResult
 	}
 	
 	//

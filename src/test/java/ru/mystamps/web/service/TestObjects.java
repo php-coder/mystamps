@@ -34,6 +34,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 import ru.mystamps.web.validation.ValidationRules;
 
@@ -50,6 +51,10 @@ final class TestObjects {
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
+	
+	private static final Integer TEST_COLLECTION_ID = 456;
+	private static final String TEST_SLUG           = "test-slug";
+	
 	// CheckStyle: ignore LineLength for next 1 line
 	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
@@ -76,6 +81,10 @@ final class TestObjects {
 	
 	public static UsersActivationDto createUsersActivationDto() {
 		return new UsersActivationDto(TEST_EMAIL, new Date());
+	}
+	
+	public static UrlEntityDto createUrlEntityDto() {
+		return new UrlEntityDto(TEST_COLLECTION_ID, TEST_SLUG);
 	}
 	
 	public static User createUser() {
