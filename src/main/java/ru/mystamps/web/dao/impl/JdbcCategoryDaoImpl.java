@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -38,6 +39,7 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -65,6 +67,9 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	
 	@Value("${category.find_all_categories_names_with_slug}")
 	private String findCategoriesNamesWithSlugSql;
+	
+	@Value("${category.find_category_link_info_by_id}")
+	private String findCategoryLinkEntityByIdSql;
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
@@ -167,6 +172,23 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 			Collections.singletonMap("lang", lang),
 			RowMappers::forLinkEntityDto
 		);
+	}
+	
+	@Override
+	public LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("category_id", categoryId);
+		params.put("lang", lang);
+		
+		try {
+			return jdbcTemplate.queryForObject(
+				findCategoryLinkEntityByIdSql,
+				params,
+				RowMappers::forLinkEntityDto
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 }

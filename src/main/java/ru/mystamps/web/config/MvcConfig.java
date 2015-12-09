@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.repository.support.DomainClassConverter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -40,6 +41,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import ru.mystamps.web.controller.converter.LinkEntityDtoConverter;
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
@@ -48,6 +50,14 @@ import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 @EnableScheduling
 @Import(ControllersConfig.class)
 public class MvcConfig extends WebMvcConfigurerAdapter {
+	
+	@Autowired
+	private ServicesConfig servicesConfig;
+	
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		registry.addConverter(new LinkEntityDtoConverter(servicesConfig.getCategoryService()));
+	}
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

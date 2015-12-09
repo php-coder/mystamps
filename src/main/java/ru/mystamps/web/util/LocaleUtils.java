@@ -21,6 +21,9 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.Validate;
 
+import org.springframework.context.i18n.LocaleContext;
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import ru.mystamps.web.entity.LocalizedEntity;
 
 public final class LocaleUtils {
@@ -38,6 +41,18 @@ public final class LocaleUtils {
 		}
 		
 		return locale.getLanguage();
+	}
+	
+	// Our version of LocaleContextHolder.getLocale() that
+	// doesn't fallback to the system default locale and
+	// returns string representation of locale.
+	public static String getCurrentLanguageOrNull() {
+		LocaleContext localeContext = LocaleContextHolder.getLocaleContext();
+		if (localeContext == null) {
+			return null;
+		}
+		
+		return getLanguageOrNull(localeContext.getLocale());
 	}
 	
 	public static String getLocalizedName(Locale locale, LocalizedEntity entity) {

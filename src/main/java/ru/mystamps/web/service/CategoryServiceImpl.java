@@ -92,6 +92,14 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang) {
+		Validate.isTrue(categoryId != null, "Category id must be non null");
+		
+		return categoryDao.findOneAsLinkEntity(categoryId, lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countAll() {
 		return categoryDao.countAll();
 	}

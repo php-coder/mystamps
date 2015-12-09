@@ -33,6 +33,7 @@ import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -53,6 +54,7 @@ final class TestObjects {
 	private static final String TEST_LOGIN          = "test";
 	
 	private static final Integer TEST_ENTITY_ID     = 456;
+	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";
 	
 	// CheckStyle: ignore LineLength for next 1 line
@@ -85,6 +87,10 @@ final class TestObjects {
 	
 	public static UrlEntityDto createUrlEntityDto() {
 		return new UrlEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG);
+	}
+	
+	public static LinkEntityDto createLinkEntityDto() {
+		return new LinkEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
 	}
 	
 	public static User createUser() {

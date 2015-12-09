@@ -38,12 +38,13 @@ import org.springframework.validation.BindingResult;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -89,7 +90,7 @@ public class CategoryController {
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)
 	public String showInfo(
-		@PathVariable("id") Category category,
+		@Category @PathVariable("id") LinkEntityDto category,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -102,7 +103,7 @@ public class CategoryController {
 		
 		model.addAttribute("categoryId", category.getId());
 		model.addAttribute("categorySlug", category.getSlug());
-		model.addAttribute("categoryName", LocaleUtils.getLocalizedName(userLocale, category));
+		model.addAttribute("categoryName", category.getName());
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		Integer categoryId = category.getId();

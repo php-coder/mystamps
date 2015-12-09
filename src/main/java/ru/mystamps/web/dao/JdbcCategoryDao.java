@@ -32,4 +32,5 @@ public interface JdbcCategoryDao {
 	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+	LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang);
 }
