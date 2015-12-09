@@ -38,12 +38,13 @@ import org.springframework.validation.BindingResult;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -89,7 +90,7 @@ public class CountryController {
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)
 	public String showInfo(
-		@PathVariable("id") Country country,
+		@Country @PathVariable("id") LinkEntityDto country,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -102,7 +103,7 @@ public class CountryController {
 		
 		model.addAttribute("countryId", country.getId());
 		model.addAttribute("countrySlug", country.getSlug());
-		model.addAttribute("countryName", LocaleUtils.getLocalizedName(userLocale, country));
+		model.addAttribute("countryName", country.getName());
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		Integer countryId = country.getId();

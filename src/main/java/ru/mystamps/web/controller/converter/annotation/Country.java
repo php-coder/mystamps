@@ -15,23 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.controller.converter.annotation;
 
-import java.util.Map;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
-
-public interface CountryService {
-	UrlEntityDto add(AddCountryDto dto, Integer userId);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang);
-	long countAll();
-	long countCountriesOf(Integer collectionId);
-	long countByName(String name);
-	long countByNameRu(String name);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Country {
 }

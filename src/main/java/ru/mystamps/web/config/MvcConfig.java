@@ -41,7 +41,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import ru.mystamps.web.controller.converter.LinkEntityDtoConverter;
+import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
@@ -56,7 +56,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(new LinkEntityDtoConverter(servicesConfig.getCategoryService()));
+		registry.addConverter(
+			new LinkEntityDtoGenericConverter(
+				servicesConfig.getCategoryService(),
+				servicesConfig.getCountryService()
+			)
+		);
 	}
 	
 	@Override

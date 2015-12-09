@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -38,6 +39,7 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -65,6 +67,9 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	@Value("${country.find_all_countries_names_with_slug}")
 	private String findCountriesNamesWithSlugSql;
+	
+	@Value("${country.find_country_link_info_by_id}")
+	private String findCountryLinkEntityByIdSql;
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
@@ -167,6 +172,23 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 			Collections.singletonMap("lang", lang),
 			RowMappers::forLinkEntityDto
 		);
+	}
+	
+	@Override
+	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("country_id", countryId);
+		params.put("lang", lang);
+		
+		try {
+			return jdbcTemplate.queryForObject(
+				findCountryLinkEntityByIdSql,
+				params,
+				RowMappers::forLinkEntityDto
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 }

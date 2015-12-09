@@ -93,6 +93,14 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
+		Validate.isTrue(countryId != null, "Country id must be non null");
+		
+		return countryDao.findOneAsLinkEntity(countryId, lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countAll() {
 		return countryDao.countAll();
 	}

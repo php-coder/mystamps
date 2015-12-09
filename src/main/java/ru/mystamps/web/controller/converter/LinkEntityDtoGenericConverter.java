@@ -17,40 +17,65 @@
  */
 package ru.mystamps.web.controller.converter;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.core.convert.TypeDescriptor;
-import org.springframework.core.convert.converter.ConditionalConverter;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.convert.converter.ConditionalGenericConverter;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.util.LocaleUtils;
 
 @RequiredArgsConstructor
-public class LinkEntityDtoConverter
-	implements Converter<String, LinkEntityDto>, ConditionalConverter {
+public class LinkEntityDtoGenericConverter implements ConditionalGenericConverter {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(LinkEntityDtoConverter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LinkEntityDtoGenericConverter.class);
 	
 	private final CategoryService categoryService;
+	private final CountryService countryService;
 	
 	@Override
-	public LinkEntityDto convert(String value) {
-		String lang = LocaleUtils.getCurrentLanguageOrNull();
+	public Set<ConvertiblePair> getConvertibleTypes() {
+		return Collections.singleton(new ConvertiblePair(String.class, LinkEntityDto.class));
+	}
+	
+	@Override
+	public Object convert(Object value, TypeDescriptor sourceType, TypeDescriptor targetType) {
+		if (value == null) {
+			LOG.warn("Attempt to convert null");
+			return null;
+		}
 		
 		try {
-			Integer id = Integer.valueOf(value);
+			Integer id = Integer.valueOf(value.toString());
 			if (id <= 0) {
 				LOG.warn("Attempt to convert non positive number ({})", id);
 				return null;
 			}
 			
-			return categoryService.findOneAsLinkEntity(id, lang);
+			String lang = LocaleUtils.getCurrentLanguageOrNull();
+			
+			if (targetType.hasAnnotation(Category.class)) {
+				return categoryService.findOneAsLinkEntity(id, lang);
+				
+			} else if (targetType.hasAnnotation(Country.class)) {
+				return countryService.findOneAsLinkEntity(id, lang);
+			}
+			
+			LOG.warn(
+				"Can't convert type '{}' because it doesn't contain supported annotations",
+				targetType
+			);
+			return null;
 			
 		} catch (NumberFormatException ex) {
 			LOG.warn("Can't convert value '{}' from string to integer: {}", value, ex.getMessage());
@@ -65,7 +90,7 @@ public class LinkEntityDtoConverter
 			return false;
 		}
 		
-		return targetType.hasAnnotation(Category.class);
+		return targetType.hasAnnotation(Category.class) || targetType.hasAnnotation(Country.class);
 	}
 	
 }
