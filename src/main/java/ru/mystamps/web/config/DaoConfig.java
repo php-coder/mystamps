@@ -22,20 +22,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import ru.mystamps.web.dao.JdbcCategoryDao;
-import ru.mystamps.web.dao.JdbcCollectionDao;
-import ru.mystamps.web.dao.JdbcCountryDao;
-import ru.mystamps.web.dao.JdbcUserDao;
-import ru.mystamps.web.dao.JdbcSeriesDao;
-import ru.mystamps.web.dao.JdbcUsersActivationDao;
-import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.impl.JdbcCategoryDaoImpl;
-import ru.mystamps.web.dao.impl.JdbcCollectionDaoImpl;
-import ru.mystamps.web.dao.impl.JdbcCountryDaoImpl;
-import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
-import ru.mystamps.web.dao.impl.JdbcUserDaoImpl;
-import ru.mystamps.web.dao.impl.JdbcSeriesDaoImpl;
-import ru.mystamps.web.dao.impl.JdbcUsersActivationDaoImpl;
+// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
+import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
 
 @Configuration
 public class DaoConfig {
@@ -59,6 +48,26 @@ public class DaoConfig {
 	}
 	
 	@Bean
+	public GibbonsCatalogDao getGibbonsCatalogDao() {
+		return new JdbcGibbonsCatalogDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
+	public JdbcImageDao getJdbcImageDao() {
+		return new JdbcImageDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
+	public MichelCatalogDao getMichelCatalogDao() {
+		return new JdbcMichelCatalogDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
+	public ScottCatalogDao getScottCatalogDao() {
+		return new JdbcScottCatalogDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
 	public JdbcSeriesDao getJdbcSeriesDao() {
 		return new JdbcSeriesDaoImpl(jdbcTemplate);
 	}
@@ -76,6 +85,11 @@ public class DaoConfig {
 	@Bean
 	public SuspiciousActivityDao getSuspiciousActivityDao() {
 		return new JdbcSuspiciousActivityDao(jdbcTemplate);
+	}
+	
+	@Bean
+	public YvertCatalogDao getYvertCatalogDao() {
+		return new JdbcYvertCatalogDaoImpl(jdbcTemplate);
 	}
 	
 }

@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.util;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -105,34 +103,21 @@ public final class CatalogUtils {
 	}
 	
 	/**
-	 * Parses comma-delimited string and converts catalog numbers to set of objects.
+	 * Parses comma-delimited string and converts catalog numbers to set of strings.
 	 **/
-	public static <T extends StampsCatalog> Set<T> fromString(
-		String catalogNumbers,
-		Class<T> elementClass) {
+	public static Set<String> parseCatalogNumbers(String catalogNumbers) {
 		
 		if (StringUtils.isEmpty(catalogNumbers)) {
 			return Collections.emptySet();
 		}
 		
-		Validate.isTrue(elementClass != null, "Class of element must be non null");
-		
-		Set<T> result = new LinkedHashSet<>();
+		Set<String> result = new LinkedHashSet<>();
 		for (String number : catalogNumbers.split(",")) {
 			Validate.validState(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
 			// TODO: parse range of numbers
 			
-			try {
-				result.add(
-					ConstructorUtils.invokeConstructor(elementClass, number)
-				);
-			} catch (NoSuchMethodException
-					| IllegalAccessException
-					| InvocationTargetException
-					| InstantiationException ex) {
-				throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
-			}
+			result.add(number);
 		}
 		
 		return result;

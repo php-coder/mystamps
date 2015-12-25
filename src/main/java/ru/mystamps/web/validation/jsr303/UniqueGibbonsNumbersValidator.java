@@ -24,7 +24,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.mystamps.web.entity.GibbonsCatalog;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
 
@@ -46,9 +45,9 @@ public class UniqueGibbonsNumbersValidator
 			return true;
 		}
 		
-		Set<GibbonsCatalog> gibbonsNumbers = CatalogUtils.fromString(value, GibbonsCatalog.class);
-		for (GibbonsCatalog gibbonsNumber : gibbonsNumbers) {
-			boolean numberExists = seriesService.countByGibbonsNumber(gibbonsNumber.getCode()) > 0;
+		Set<String> gibbonsNumbers = CatalogUtils.parseCatalogNumbers(value);
+		for (String gibbonsNumber : gibbonsNumbers) {
+			boolean numberExists = seriesService.countByGibbonsNumber(gibbonsNumber) > 0;
 			if (numberExists) {
 				return false;
 			}

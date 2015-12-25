@@ -17,13 +17,9 @@
  */
 package ru.mystamps.web.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.Set;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
-
-public interface ImageService {
-	Image save(MultipartFile file);
-	ImageDto get(Integer imageId);
-	void addToSeries(Integer seriesId, Integer imageId);
+public interface MichelCatalogService {
+	void add(Set<String> michelNumbers);
+	void addToSeries(Integer seriesId, Set<String> michelNumbers);
 }

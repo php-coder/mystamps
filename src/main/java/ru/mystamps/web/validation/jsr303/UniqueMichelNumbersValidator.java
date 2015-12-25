@@ -24,7 +24,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.mystamps.web.entity.MichelCatalog;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
 
@@ -46,9 +45,9 @@ public class UniqueMichelNumbersValidator
 			return true;
 		}
 		
-		Set<MichelCatalog> michelNumbers = CatalogUtils.fromString(value, MichelCatalog.class);
-		for (MichelCatalog michelNumber : michelNumbers) {
-			boolean numberExists = seriesService.countByMichelNumber(michelNumber.getCode()) > 0;
+		Set<String> michelNumbers = CatalogUtils.parseCatalogNumbers(value);
+		for (String michelNumber : michelNumbers) {
+			boolean numberExists = seriesService.countByMichelNumber(michelNumber) > 0;
 			if (numberExists) {
 				return false;
 			}

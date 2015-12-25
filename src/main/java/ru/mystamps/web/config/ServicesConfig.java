@@ -86,7 +86,11 @@ public class ServicesConfig {
 	
 	@Bean
 	public ImageService getImageService() {
-		return new ImageServiceImpl(strategiesConfig.getImagePersistenceStrategy(), imageDao);
+		return new ImageServiceImpl(
+			strategiesConfig.getImagePersistenceStrategy(),
+			imageDao,
+			daoConfig.getJdbcImageDao()
+		);
 	}
 	
 	@Bean
@@ -111,7 +115,15 @@ public class ServicesConfig {
 	
 	@Bean
 	public SeriesService getSeriesService() {
-		return new SeriesServiceImpl(seriesDao, daoConfig.getJdbcSeriesDao(), getImageService());
+		return new SeriesServiceImpl(
+			seriesDao,
+			daoConfig.getJdbcSeriesDao(),
+			getImageService(),
+			getMichelCatalogService(),
+			getScottCatalogService(),
+			getYvertCatalogService(),
+			getGibbonsCatalogService()
+		);
 	}
 	
 	@Bean
@@ -128,6 +140,26 @@ public class ServicesConfig {
 			getCollectionService(),
 			securityConfig.getPasswordEncoder()
 		);
+	}
+	
+	@Bean
+	public MichelCatalogService getMichelCatalogService() {
+		return new MichelCatalogServiceImpl(daoConfig.getMichelCatalogDao());
+	}
+	
+	@Bean
+	public ScottCatalogService getScottCatalogService() {
+		return new ScottCatalogServiceImpl(daoConfig.getScottCatalogDao());
+	}
+	
+	@Bean
+	public YvertCatalogService getYvertCatalogService() {
+		return new YvertCatalogServiceImpl(daoConfig.getYvertCatalogDao());
+	}
+	
+	@Bean
+	public GibbonsCatalogService getGibbonsCatalogService() {
+		return new GibbonsCatalogServiceImpl(daoConfig.getGibbonsCatalogDao());
 	}
 	
 }

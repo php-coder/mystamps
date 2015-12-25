@@ -15,15 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.Set;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
-
-public interface ImageService {
-	Image save(MultipartFile file);
-	ImageDto get(Integer imageId);
-	void addToSeries(Integer seriesId, Integer imageId);
+public interface MichelCatalogDao {
+	void add(Set<String> michelNumbers);
+	void addToSeries(Integer seriesId, Set<String> michelNumbers);
 }

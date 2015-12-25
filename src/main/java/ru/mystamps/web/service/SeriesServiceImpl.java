@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -34,18 +33,13 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.entity.Currency;
-import ru.mystamps.web.entity.GibbonsCatalog;
+import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.MichelCatalog;
-import ru.mystamps.web.entity.Price;
-import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.entity.StampsCatalog;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.Currency;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
@@ -59,10 +53,15 @@ public class SeriesServiceImpl implements SeriesService {
 	private final SeriesDao seriesDao;
 	private final JdbcSeriesDao jdbcSeriesDao;
 	private final ImageService imageService;
+	private final MichelCatalogService michelCatalogService;
+	private final ScottCatalogService scottCatalogService;
+	private final YvertCatalogService yvertCatalogService;
+	private final GibbonsCatalogService gibbonsCatalogService;
 	
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer add(AddSeriesDto dto, User user, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
@@ -73,33 +72,38 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(dto.getCategory() != null, "Category must be non null");
 		Validate.isTrue(user != null, "Current user must be non null");
 		
-		Series series = new Series();
+		AddSeriesDbDto series = new AddSeriesDbDto();
 		
 		if (dto.getCountry() != null) {
-			series.setCountry(dto.getCountry());
+			series.setCountryId(dto.getCountry().getId());
 		}
 		
 		setDateOfReleaseIfProvided(dto, series);
 		
-		series.setCategory(dto.getCategory());
+		series.setCategoryId(dto.getCategory().getId());
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
 		
-		series.setMichel(getCatalogNumbersOrNull(dto.getMichelNumbers(), MichelCatalog.class));
-		series.setMichelPrice(Price.valueOf(dto.getMichelPrice(), Currency.EUR));
-		
-		series.setScott(getCatalogNumbersOrNull(dto.getScottNumbers(), ScottCatalog.class));
-		series.setScottPrice(Price.valueOf(dto.getScottPrice(), Currency.USD));
-		
-		series.setYvert(getCatalogNumbersOrNull(dto.getYvertNumbers(), YvertCatalog.class));
-		series.setYvertPrice(Price.valueOf(dto.getYvertPrice(), Currency.EUR));
-		
-		series.setGibbons(getCatalogNumbersOrNull(dto.getGibbonsNumbers(), GibbonsCatalog.class));
-		series.setGibbonsPrice(Price.valueOf(dto.getGibbonsPrice(), Currency.GBP));
-		
-		Image image = imageService.save(dto.getImage());
-		series.setImages(Collections.singleton(image));
-		
+		if (dto.getMichelPrice() != null) {
+			series.setMichelPrice(dto.getMichelPrice());
+			series.setMichelCurrency(Currency.EUR.toString());
+		}
+
+		if (dto.getScottPrice() != null) {
+			series.setScottPrice(dto.getScottPrice());
+			series.setScottCurrency(Currency.USD.toString());
+		}
+
+		if (dto.getYvertPrice() != null) {
+			series.setYvertPrice(dto.getYvertPrice());
+			series.setYvertCurrency(Currency.EUR.toString());
+		}
+
+		if (dto.getGibbonsPrice() != null) {
+			series.setGibbonsPrice(dto.getGibbonsPrice());
+			series.setGibbonsCurrency(Currency.GBP.toString());
+		}
+
 		if (userCanAddComments && dto.getComment() != null) {
 			Validate.isTrue(
 				!dto.getComment().trim().isEmpty(),
@@ -110,16 +114,43 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 		
 		Date now = new Date();
-		series.getMetaInfo().setCreatedAt(now);
-		series.getMetaInfo().setUpdatedAt(now);
+		series.setCreatedAt(now);
+		series.setUpdatedAt(now);
 		
-		series.getMetaInfo().setCreatedBy(user);
-		series.getMetaInfo().setUpdatedBy(user);
-
-		Series entity = seriesDao.save(series);
-		LOG.info("Series has been created ({})", entity);
+		series.setCreatedBy(user.getId());
+		series.setUpdatedBy(user.getId());
 		
-		return entity.getId();
+		Integer id = jdbcSeriesDao.add(series);
+		LOG.info("Series #{} has been created ({})", id, series);
+		
+		Image image = imageService.save(dto.getImage());
+		imageService.addToSeries(id, image.getId());
+		
+		Set<String> michelNumbers = CatalogUtils.parseCatalogNumbers(dto.getMichelNumbers());
+		if (!michelNumbers.isEmpty()) {
+			michelCatalogService.add(michelNumbers);
+			michelCatalogService.addToSeries(id, michelNumbers);
+		}
+		
+		Set<String> scottNumbers = CatalogUtils.parseCatalogNumbers(dto.getScottNumbers());
+		if (!scottNumbers.isEmpty()) {
+			scottCatalogService.add(scottNumbers);
+			scottCatalogService.addToSeries(id, scottNumbers);
+		}
+		
+		Set<String> yvertNumbers = CatalogUtils.parseCatalogNumbers(dto.getYvertNumbers());
+		if (!yvertNumbers.isEmpty()) {
+			yvertCatalogService.add(yvertNumbers);
+			yvertCatalogService.addToSeries(id, yvertNumbers);
+		}
+		
+		Set<String> gibbonsNumbers = CatalogUtils.parseCatalogNumbers(dto.getGibbonsNumbers());
+		if (!gibbonsNumbers.isEmpty()) {
+			gibbonsCatalogService.add(gibbonsNumbers);
+			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
+		}
+		
+		return id;
 	}
 
 	@Override
@@ -288,7 +319,7 @@ public class SeriesServiceImpl implements SeriesService {
 		return jdbcSeriesDao.findAllForSitemap();
 	}
 
-	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, Series series) {
+	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {
 		if (dto.getYear() == null) {
 			return;
 		}
@@ -303,18 +334,6 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		// even if day is null it won't change anything
 		series.setReleaseDay(dto.getDay());
-	}
-	
-	private static <T extends StampsCatalog> Set<T> getCatalogNumbersOrNull(
-		String catalogNumbers,
-		Class<T> clazz) {
-		
-		Set<T> result = CatalogUtils.fromString(catalogNumbers, clazz);
-		if (result.isEmpty()) {
-			return null;
-		}
-		
-		return result;
 	}
 	
 }

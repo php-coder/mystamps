@@ -24,12 +24,14 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.dao.JdbcImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
@@ -43,6 +45,7 @@ public class ImageServiceImpl implements ImageService {
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;
+	private final JdbcImageDao jdbcImageDao;
 	
 	@Override
 	@Transactional
@@ -87,6 +90,18 @@ public class ImageServiceImpl implements ImageService {
 		}
 		
 		return imagePersistenceStrategy.get(image);
+	}
+	
+	@Override
+	@Transactional
+	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	public void addToSeries(Integer seriesId, Integer imageId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(imageId != null, "Image id must be non null");
+		
+		jdbcImageDao.addToSeries(seriesId, imageId);
+		
+		LOG.info("Series #{}: image #{} was added", seriesId, imageId);
 	}
 	
 	private static String extractExtensionFromContentType(String contentType) {

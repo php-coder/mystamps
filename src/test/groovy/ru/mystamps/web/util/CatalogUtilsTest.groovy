@@ -19,10 +19,7 @@ package ru.mystamps.web.util
 
 import spock.lang.Specification
 
-import ru.mystamps.web.entity.GibbonsCatalog
 import ru.mystamps.web.entity.MichelCatalog
-import ru.mystamps.web.entity.ScottCatalog
-import ru.mystamps.web.entity.YvertCatalog
 
 class CatalogUtilsTest extends Specification {
 	
@@ -112,94 +109,49 @@ class CatalogUtilsTest extends Specification {
 	}
 	
 	//
-	// Tests for fromString()
+	// Tests for parseCatalogNumbers()
 	//
 	
-	def "fromString() should return empty collection if catalog numbers is null"() {
+	def "parseCatalogNumbers() should return empty collection if catalog numbers is null"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString(null, MichelCatalog.class)
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers(null)
 		then:
 			numbers.isEmpty()
 	}
 	
-	def "fromString() should return empty collection if catalog numbers is empty"() {
+	def "parseCatalogNumbers() should return empty collection if catalog numbers is empty"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString('', MichelCatalog.class)
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers('')
 		then:
 			numbers.isEmpty()
 	}
 	
-	def "fromString() should throw exception if element class is null"() {
+	def "parseCatalogNumbers() should return one element if catalog numbers contains one number"() {
 		when:
-			CatalogUtils.fromString('1', null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "fromString() should return one element if catalog numbers contains one number"() {
-		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString('1', MichelCatalog.class)
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1')
 		then:
 			numbers.size() == 1
 	}
 	
-	def "fromString() should return one element if catalog numbers contains extra comma"() {
+	def "parseCatalogNumbers() should return one element if catalog numbers contains extra comma"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString('1,', MichelCatalog.class)
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,')
 		then:
 			numbers.size() == 1
 	}
 	
-	def "fromString() should return two elements if catalog numbers contains two numbers"() {
+	def "parseCatalogNumbers() should return two elements if catalog numbers contains two numbers"() {
 		when:
-			Set<MichelCatalog> numbers = CatalogUtils.fromString('1,2', MichelCatalog.class)
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,2')
 		then:
 			numbers.size() == 2
 	}
 	
-	def "fromString() should throw exception if one of catalog numbers is a blank string"() {
+	def "parseCatalogNumbers() should throw exception if one of catalog numbers is a blank string"() {
 		when:
-			CatalogUtils.fromString('1, ', MichelCatalog)
+			CatalogUtils.parseCatalogNumbers('1, ')
 		then:
 			thrown IllegalStateException
 	}
 	
-	// TODO: fromString() should convert Exception to RuntimeException
-	// TODO: fromString() should throw RuntimeException as is
-	
-	def "fromString() should return set of MichelNumbers for appropriate element class"() {
-		when:
-			Set<?> numbers = CatalogUtils.fromString('1,2', MichelCatalog.class)
-		then:
-			numbers.each {
-				assert it instanceof MichelCatalog
-			}
-	}
-	
-	def "fromString() should return set of ScottNumbers for appropriate element class"() {
-		when:
-			Set<?> numbers = CatalogUtils.fromString('1,2', ScottCatalog.class)
-		then:
-			numbers.each {
-				assert it instanceof ScottCatalog
-			}
-	}
-	
-	def "fromString() should return set of YvertNumbers for appropriate element class"() {
-		when:
-			Set<?> numbers = CatalogUtils.fromString('1,2', YvertCatalog.class)
-		then:
-			numbers.each {
-				assert it instanceof YvertCatalog
-			}
-	}
-	
-	def "fromString() should return set of GibbonsNumbers for appropriate element class"() {
-		when:
-			Set<?> numbers = CatalogUtils.fromString('1,2', GibbonsCatalog.class)
-		then:
-			numbers.each {
-				assert it instanceof GibbonsCatalog
-			}
-	}
 }

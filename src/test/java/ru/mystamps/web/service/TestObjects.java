@@ -18,9 +18,6 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
-import java.util.Random;
-
-import org.apache.commons.lang3.Validate;
 
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.entity.Category;
@@ -28,7 +25,6 @@ import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.entity.MetaInfo;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -37,7 +33,6 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
-import ru.mystamps.web.validation.ValidationRules;
 
 final class TestObjects {
 	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
@@ -154,17 +149,6 @@ final class TestObjects {
 		return new SitemapInfoDto(1, new Date());
 	}
 	
-	// only mandatory fields are filled
-	public static Series createSeries() {
-		Series series = new Series();
-		series.setId(1);
-		series.setCategory(createCategory());
-		series.setQuantity(getRandomNumber(ValidationRules.MAX_STAMPS_IN_SERIES));
-		series.setPerforated(Boolean.TRUE);
-		series.setMetaInfo(createMetaInfo());
-		return series;
-	}
-	
 	private static MetaInfo createMetaInfo() {
 		MetaInfo metaInfo = new MetaInfo();
 		Date now = new Date();
@@ -174,13 +158,6 @@ final class TestObjects {
 		metaInfo.setCreatedBy(owner);
 		metaInfo.setUpdatedBy(owner);
 		return metaInfo;
-	}
-	
-	// returns random number [1, maxValue]
-	private static int getRandomNumber(int maxValue) {
-		int number = new Random().nextInt(maxValue) + 1;
-		Validate.inclusiveBetween(1, Integer.MAX_VALUE, number);
-		return number;
 	}
 	
 }

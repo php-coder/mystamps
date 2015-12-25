@@ -23,6 +23,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.ImageDao
+import ru.mystamps.web.dao.JdbcImageDao
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
@@ -30,10 +31,15 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 class ImageServiceImplTest extends Specification {
 
 	private ImageDao imageDao = Mock()
+	private JdbcImageDao jdbcImageDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
+	private ImageService service = new ImageServiceImpl(
+		imagePersistenceStrategy,
+		imageDao,
+		jdbcImageDao
+	)
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L

@@ -15,15 +15,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao.impl;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.HashMap;
+import java.util.Map;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-public interface ImageService {
-	Image save(MultipartFile file);
-	ImageDto get(Integer imageId);
-	void addToSeries(Integer seriesId, Integer imageId);
+import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.dao.JdbcImageDao;
+
+@RequiredArgsConstructor
+public class JdbcImageDaoImpl implements JdbcImageDao {
+	
+	private final NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Value("${series_image.add}")
+	private String addImageToSeriesSql;
+	
+	@Override
+	public void addToSeries(Integer seriesId, Integer imageId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("image_id", imageId);
+		
+		jdbcTemplate.update(addImageToSeriesSql, params);
+	}
+	
 }

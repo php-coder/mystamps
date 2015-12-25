@@ -24,7 +24,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.mystamps.web.entity.YvertCatalog;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
 
@@ -46,9 +45,9 @@ public class UniqueYvertNumbersValidator
 			return true;
 		}
 		
-		Set<YvertCatalog> yvertNumbers = CatalogUtils.fromString(value, YvertCatalog.class);
-		for (YvertCatalog yvertNumber : yvertNumbers) {
-			boolean numberExists = seriesService.countByYvertNumber(yvertNumber.getCode()) > 0;
+		Set<String> yvertNumbers = CatalogUtils.parseCatalogNumbers(value);
+		for (String yvertNumber : yvertNumbers) {
+			boolean numberExists = seriesService.countByYvertNumber(yvertNumber) > 0;
 			if (numberExists) {
 				return false;
 			}

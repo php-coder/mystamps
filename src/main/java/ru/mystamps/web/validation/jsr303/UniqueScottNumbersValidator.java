@@ -24,7 +24,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ru.mystamps.web.entity.ScottCatalog;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.CatalogUtils;
 
@@ -46,9 +45,9 @@ public class UniqueScottNumbersValidator
 			return true;
 		}
 		
-		Set<ScottCatalog> scottNumbers = CatalogUtils.fromString(value, ScottCatalog.class);
-		for (ScottCatalog scottNumber : scottNumbers) {
-			boolean numberExists = seriesService.countByScottNumber(scottNumber.getCode()) > 0;
+		Set<String> scottNumbers = CatalogUtils.parseCatalogNumbers(value);
+		for (String scottNumber : scottNumbers) {
+			boolean numberExists = seriesService.countByScottNumber(scottNumber) > 0;
 			if (numberExists) {
 				return false;
 			}

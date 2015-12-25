@@ -24,18 +24,14 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
+import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
-import ru.mystamps.web.entity.Currency
-import ru.mystamps.web.entity.GibbonsCatalog
 import ru.mystamps.web.entity.Image
-import ru.mystamps.web.entity.MichelCatalog
-import ru.mystamps.web.entity.ScottCatalog
-import ru.mystamps.web.entity.Series
 import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.YvertCatalog
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.SitemapInfoDto
+import ru.mystamps.web.service.dto.Currency
 import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {
@@ -44,6 +40,10 @@ class SeriesServiceImplTest extends Specification {
 	private ImageService imageService = Mock()
 	private SeriesDao seriesDao = Mock()
 	private JdbcSeriesDao jdbcSeriesDao = Mock()
+	private MichelCatalogService michelCatalogService = Mock()
+	private ScottCatalogService scottCatalogService = Mock()
+	private YvertCatalogService yvertCatalogService = Mock()
+	private GibbonsCatalogService gibbonsCatalogService = Mock()
 	private MultipartFile multipartFile = Mock()
 	
 	private SeriesService service
@@ -60,7 +60,15 @@ class SeriesServiceImplTest extends Specification {
 		
 		imageService.save(_) >> TestObjects.createImage()
 		
-		service = new SeriesServiceImpl(seriesDao, jdbcSeriesDao, imageService)
+		service = new SeriesServiceImpl(
+			seriesDao,
+			jdbcSeriesDao,
+			imageService,
+			michelCatalogService,
+			scottCatalogService,
+			yvertCatalogService,
+			gibbonsCatalogService
+		)
 	}
 	
 	//
@@ -108,24 +116,20 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should pass entity to series dao"() {
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save(_ as Series) >> TestObjects.createSeries()
-	}
-	
 	def "add() should load and pass country to series dao if country present"() {
 		given:
-			Country expectedCountry = TestObjects.createCountry()
-			form.setCountry(expectedCountry)
+			Country country = TestObjects.createCountry()
+		and:
+			Integer expectedCountryId = country.getId()
+		and:
+			form.setCountry(country)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.country == expectedCountry
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.countryId == expectedCountryId
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	@Unroll
@@ -140,12 +144,12 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
 				assert series?.releaseMonth == expectedMonth
 				assert series?.releaseYear == expectedYear
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 		where:
 			day  | month | year || expectedDay | expectedMonth | expectedYear
 			null | null  | null || null        | null          | null
@@ -160,15 +164,18 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass category to series dao"() {
 		given:
-			Category expectedCategory = TestObjects.createCategory()
-			form.setCategory(expectedCategory)
+			Category category = TestObjects.createCategory()
+		and:
+			Integer expectedCategoryId = category.getId()
+		and:
+			form.setCategory(category)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.category == expectedCategory
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.categoryId == expectedCategoryId
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	def "add() should pass quantity to series dao"() {
@@ -178,10 +185,10 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	def "add() should pass perforated to series dao"() {
@@ -191,263 +198,82 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
 				return true
-			}) >> TestObjects.createSeries()
-	}
-
-	def "add() should pass null to series dao if michel numbers is null"() {
-		given:
-			assert form.getMichelNumbers() == null
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.michel == null
-				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
-	def "add() should pass michel numbers to series dao"() {
+	@Unroll
+	def "add() should pass michel price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			Set<MichelCatalog> expectedNumbers = [
-				new MichelCatalog('1'),
-				new MichelCatalog('2')
-			] as Set
-			form.setMichelNumbers(expectedNumbers.join(','))
+			form.setMichelPrice(price)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.michel == expectedNumbers
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.michelPrice == expectedPrice
+				assert series?.michelCurrency == expectedCurrency
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
+		where:
+			price     || expectedPrice | expectedCurrency
+			ANY_PRICE || ANY_PRICE     | Currency.EUR.toString()
+			null      || null          | null
 	}
 	
-	def "add() should pass michel price to series dao"() {
+	@Unroll
+	def "add() should pass scott price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			BigDecimal expectedPrice = ANY_PRICE
-			form.setMichelPrice(expectedPrice)
-		and:
-			Currency expectedCurrency = Currency.EUR
+			form.setScottPrice(price)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.michelPrice?.value == expectedPrice
-				assert series?.michelPrice?.currency == expectedCurrency
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.scottPrice == expectedPrice
+				assert series?.scottCurrency == expectedCurrency
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
+		where:
+			price     || expectedPrice | expectedCurrency
+			ANY_PRICE || ANY_PRICE     | Currency.USD.toString()
+			null      || null          | null
 	}
 	
-	def "add() should pass null to series dao if michel price is null"() {
+	@Unroll
+	def "add() should pass yvert price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			form.setMichelPrice(null)
+			form.setYvertPrice(price)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.michelPrice == null
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.yvertPrice == expectedPrice
+				assert series?.yvertCurrency == expectedCurrency
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
+		where:
+			price     || expectedPrice | expectedCurrency
+			ANY_PRICE || ANY_PRICE     | Currency.EUR.toString()
+			null      || null          | null
 	}
 	
-	def "add() should pass null to series dao if scott numbers is null"() {
+	@Unroll
+	def "add() should pass gibbons price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			assert form.getScottNumbers() == null
+			form.setGibbonsPrice(price)
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.scott == null
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.gibbonsPrice == expectedPrice
+				assert series?.gibbonsCurrency == expectedCurrency
 				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass scott numbers to series dao"() {
-		given:
-			Set<ScottCatalog> expectedNumbers = [
-				new ScottCatalog('1'),
-				new ScottCatalog('2')
-			] as Set
-			form.setScottNumbers(expectedNumbers.join(','))
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.scott == expectedNumbers
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass scott price to series dao"() {
-		given:
-			BigDecimal expectedPrice = ANY_PRICE
-			form.setScottPrice(expectedPrice)
-		and:
-			Currency expectedCurrency = Currency.USD
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.scottPrice?.value == expectedPrice
-				assert series?.scottPrice?.currency == expectedCurrency
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass null to series dao if scott price is null"() {
-		given:
-			form.setScottPrice(null)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.scottPrice == null
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass null to series dao if yvert numbers is null"() {
-		given:
-			assert form.getYvertNumbers() == null
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.yvert == null
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass yvert numbers to series dao"() {
-		given:
-			Set<YvertCatalog> expectedNumbers = [
-				new YvertCatalog('1'),
-				new YvertCatalog('2')
-			] as Set
-			form.setYvertNumbers(expectedNumbers.join(','))
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.yvert == expectedNumbers
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass yvert price to series dao"() {
-		given:
-			BigDecimal expectedPrice = ANY_PRICE
-			form.setYvertPrice(expectedPrice)
-		and:
-			Currency expectedCurrency = Currency.EUR
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.yvertPrice?.value == expectedPrice
-				assert series?.yvertPrice?.currency == expectedCurrency
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass null to series dao if yvert price is null"() {
-		given:
-			form.setYvertPrice(null)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.yvertPrice == null
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass null to series dao if gibbons numbers is null"() {
-		given:
-			assert form.getGibbonsNumbers() == null
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.gibbons == null
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass gibbons numbers to series dao"() {
-		given:
-			Set<GibbonsCatalog> expectedNumbers = [
-				new GibbonsCatalog('1'),
-				new GibbonsCatalog('2')
-			] as Set
-			form.setGibbonsNumbers(expectedNumbers.join(','))
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.gibbons == expectedNumbers
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass gibbons price to series dao"() {
-		given:
-			BigDecimal expectedPrice = ANY_PRICE
-			form.setGibbonsPrice(expectedPrice)
-		and:
-			Currency expectedCurrency = Currency.GBP
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.gibbonsPrice?.value == expectedPrice
-				assert series?.gibbonsPrice?.currency == expectedCurrency
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass null to series dao if gibbons price is null"() {
-		given:
-			form.setGibbonsPrice(null)
-		when:
-			service.add(form, user, false)
-		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.gibbonsPrice == null
-				return true
-			}) >> TestObjects.createSeries()
-	}
-	
-	def "add() should pass image to image service"() {
-		given:
-			form.setImage(multipartFile)
-		and:
-			seriesDao.save(_ as Series) >> TestObjects.createSeries()
-		when:
-			service.add(form, user, false)
-		then:
-			1 * imageService.save({ MultipartFile passedFile ->
-				assert passedFile == multipartFile
-				return true
-			}) >> TestObjects.createImage()
-	}
-	
-	def "add() should pass image to series dao"() {
-		given:
-			Image expectedImage = TestObjects.createImage()
-		when:
-			service.add(form, user, false)
-		then:
-			imageService.save(_) >> expectedImage
-		and:
-			1 * seriesDao.save({ Series series ->
-				assert !series?.images.empty
-				assert series?.images.iterator().next() == expectedImage
-				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
+		where:
+			price     || expectedPrice | expectedCurrency
+			ANY_PRICE || ANY_PRICE     | Currency.GBP.toString()
+			null      || null          | null
 	}
 	
 	def "add() should throw exception if comment is empty"() {
@@ -466,10 +292,10 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, canAddComment)
 		then:
-			1 * seriesDao.save({ Series series ->
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.comment == expectedComment
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 		where:
 			canAddComment | comment     || expectedComment
 			false         | null        || null
@@ -482,40 +308,260 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert DateUtils.roughlyEqual(series?.metaInfo?.createdAt, new Date())
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert DateUtils.roughlyEqual(series?.metaInfo?.updatedAt, new Date())
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	def "add() should assign created by to user"() {
+		given:
+			Integer expectedUserId = user.getId()
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.metaInfo?.createdBy == user
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.createdBy == expectedUserId
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
 	}
 	
 	def "add() should assign updated by to user"() {
+		given:
+			Integer expectedUserId = user.getId()
 		when:
 			service.add(form, user, false)
 		then:
-			1 * seriesDao.save({ Series series ->
-				assert series?.metaInfo?.updatedBy == user
+			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+				assert series?.updatedBy == expectedUserId
 				return true
-			}) >> TestObjects.createSeries()
+			}) >> 123
+	}
+	
+	def "add() should pass dto to series dao and returnds its result"() {
+		given:
+			Integer expected = 456
+		when:
+			Integer actual = service.add(form, user, false)
+		then:
+			1 * jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expected
+		and:
+			actual == expected
+	}
+	
+	def "add() should pass image to image service"() {
+		given:
+			form.setImage(multipartFile)
+		when:
+			service.add(form, user, false)
+		then:
+			1 * imageService.save({ MultipartFile passedFile ->
+				assert passedFile == multipartFile
+				return true
+			}) >> TestObjects.createImage()
+	}
+	
+	def "add() should add image to the series"() {
+		given:
+			Integer expectedSeriesId = 123
+		and:
+			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		and:
+			Integer expectedImageId = 456
+		and:
+			Image image = TestObjects.createImage()
+			image.setId(expectedImageId)
+		when:
+			service.add(form, user, false)
+		then:
+			// FIXME: why we can't use _ as MultipartFile here?
+			imageService.save(_) >> image
+		and:
+			1 * imageService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			})
+	}
+	
+	@Unroll
+	def "add() should not call services if michel numbers is '#numbers'"(String numbers) {
+		given:
+			form.setMichelNumbers(numbers)
+		when:
+			service.add(form, user, false)
+		then:
+			0 * michelCatalogService.add(_ as Set<String>)
+		and:
+			0 * michelCatalogService.addToSeries(_ as Integer, _ as Set<String>)
+		where:
+			numbers | _
+			""      | _
+			null    | _
+	}
+	
+	def "add() should add michel numbers to series"() {
+		given:
+			Set<String> expectedNumbers = [ '1', '2' ] as Set
+		and:
+			form.setMichelNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = 456
+		and:
+			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, user, false)
+		then:
+			1 * michelCatalogService.add({ Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+		and:
+			1 * michelCatalogService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+	}
+	
+	@Unroll
+	def "add() should not call services if scott numbers is '#numbers'"(String numbers) {
+		given:
+			form.setScottNumbers(numbers)
+		when:
+			service.add(form, user, false)
+		then:
+			0 * scottCatalogService.add(_ as Set<String>)
+		and:
+			0 * scottCatalogService.addToSeries(_ as Integer, _ as Set<String>)
+		where:
+			numbers | _
+			""      | _
+			null    | _
+	}
+	
+	def "add() should add scott numbers to series"() {
+		given:
+			Set<String> expectedNumbers = [ '1', '2' ] as Set
+		and:
+			form.setScottNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = 456
+		and:
+			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, user, false)
+		then:
+			1 * scottCatalogService.add({ Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+		and:
+			1 * scottCatalogService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+	}
+	
+	@Unroll
+	def "add() should not call services if yvert numbers is '#numbers'"(String numbers) {
+		given:
+			form.setYvertNumbers(numbers)
+		when:
+			service.add(form, user, false)
+		then:
+			0 * yvertCatalogService.add(_ as Set<String>)
+		and:
+			0 * yvertCatalogService.addToSeries(_ as Integer, _ as Set<String>)
+		where:
+			numbers | _
+			""      | _
+			null    | _
+	}
+	
+	def "add() should add yvert numbers to series"() {
+		given:
+			Set<String> expectedNumbers = [ '1', '2' ] as Set
+		and:
+			form.setYvertNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = 456
+		and:
+			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, user, false)
+		then:
+			1 * yvertCatalogService.add({ Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+		and:
+			1 * yvertCatalogService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+	}
+	
+	@Unroll
+	def "add() should not call services if gibbons numbers is '#numbers'"(String numbers) {
+		given:
+			form.setGibbonsNumbers(numbers)
+		when:
+			service.add(form, user, false)
+		then:
+			0 * gibbonsCatalogService.add(_ as Set<String>)
+		and:
+			0 * gibbonsCatalogService.addToSeries(_ as Integer, _ as Set<String>)
+		where:
+			numbers | _
+			""      | _
+			null    | _
+	}
+	
+	def "add() should add gibbons numbers to series"() {
+		given:
+			Set<String> expectedNumbers = [ '1', '2' ] as Set
+		and:
+			form.setGibbonsNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = 456
+		and:
+			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, user, false)
+		then:
+			1 * gibbonsCatalogService.add({ Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
+		and:
+			1 * gibbonsCatalogService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			})
 	}
 	
 	//
