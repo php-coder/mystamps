@@ -101,7 +101,7 @@
 					</div>
 					
 					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html"
-						th:action="@{${ADD_SERIES_PAGE}} + '?' + ${_csrf.parameterName} + '=' + ${_csrf.token}"
+						th:action="@{${ADD_SERIES_PAGE}}"
 						th:object="${addSeriesForm}"
 						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice')},
 							michelHasValues=${addSeriesForm.michelNumbers != null or addSeriesForm.michelPrice != null},
