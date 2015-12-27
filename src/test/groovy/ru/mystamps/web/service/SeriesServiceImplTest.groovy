@@ -28,7 +28,6 @@ import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Image
-import ru.mystamps.web.entity.User
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.Currency
@@ -48,7 +47,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	private SeriesService service
 	private AddSeriesForm form
-	private User user
+	private Integer userId
 	
 	def setup() {
 		form = new AddSeriesForm()
@@ -56,7 +55,7 @@ class SeriesServiceImplTest extends Specification {
 		form.setPerforated(false)
 		form.setCategory(TestObjects.createCategory())
 		
-		user = TestObjects.createUser()
+		userId = TestObjects.createUser().getId()
 		
 		imageService.save(_) >> TestObjects.createImage()
 		
@@ -77,7 +76,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception argument is null"() {
 		when:
-			service.add(null, user, false)
+			service.add(null, userId, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -86,7 +85,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setQuantity(null)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -95,7 +94,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setPerforated(null)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -104,7 +103,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(null)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -124,7 +123,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCountry(country)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
@@ -142,7 +141,7 @@ class SeriesServiceImplTest extends Specification {
 			form.setMonth(month)
 			form.setYear(year)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
@@ -170,7 +169,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCategory(category)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
@@ -183,7 +182,7 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedQuantity = 3
 			form.setQuantity(expectedQuantity)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
@@ -196,7 +195,7 @@ class SeriesServiceImplTest extends Specification {
 			Boolean expectedResult = true
 			form.setPerforated(expectedResult)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
@@ -209,7 +208,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setMichelPrice(price)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
@@ -227,7 +226,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setScottPrice(price)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.scottPrice == expectedPrice
@@ -245,7 +244,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setYvertPrice(price)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.yvertPrice == expectedPrice
@@ -263,7 +262,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setGibbonsPrice(price)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.gibbonsPrice == expectedPrice
@@ -280,7 +279,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setComment('  ')
 		when:
-			service.add(form, user, true)
+			service.add(form, userId, true)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -290,7 +289,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setComment(comment)
 		when:
-			service.add(form, user, canAddComment)
+			service.add(form, userId, canAddComment)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.comment == expectedComment
@@ -306,7 +305,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
@@ -316,7 +315,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
@@ -326,9 +325,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should assign created by to user"() {
 		given:
-			Integer expectedUserId = user.getId()
+			Integer expectedUserId = 456
 		when:
-			service.add(form, user, false)
+			service.add(form, expectedUserId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.createdBy == expectedUserId
@@ -338,9 +337,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should assign updated by to user"() {
 		given:
-			Integer expectedUserId = user.getId()
+			Integer expectedUserId = 789
 		when:
-			service.add(form, user, false)
+			service.add(form, expectedUserId, false)
 		then:
 			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
 				assert series?.updatedBy == expectedUserId
@@ -352,7 +351,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expected = 456
 		when:
-			Integer actual = service.add(form, user, false)
+			Integer actual = service.add(form, userId, false)
 		then:
 			1 * jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expected
 		and:
@@ -363,7 +362,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setImage(multipartFile)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -382,7 +381,7 @@ class SeriesServiceImplTest extends Specification {
 			Image image = TestObjects.createImage()
 			image.setId(expectedImageId)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
 			imageService.save(_) >> image
@@ -401,7 +400,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setMichelNumbers(numbers)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			0 * michelCatalogService.add(_ as Set<String>)
 		and:
@@ -422,7 +421,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * michelCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -443,7 +442,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setScottNumbers(numbers)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			0 * scottCatalogService.add(_ as Set<String>)
 		and:
@@ -464,7 +463,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * scottCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -485,7 +484,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setYvertNumbers(numbers)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			0 * yvertCatalogService.add(_ as Set<String>)
 		and:
@@ -506,7 +505,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * yvertCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -527,7 +526,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setGibbonsNumbers(numbers)
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			0 * gibbonsCatalogService.add(_ as Set<String>)
 		and:
@@ -548,7 +547,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, user, false)
+			service.add(form, userId, false)
 		then:
 			1 * gibbonsCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers

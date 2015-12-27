@@ -166,7 +166,7 @@ public class SeriesController {
 		
 		boolean userCanAddComments =
 			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
-		Integer seriesId = seriesService.add(form, currentUser, userCanAddComments);
+		Integer seriesId = seriesService.add(form, currentUser.getId(), userCanAddComments);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}

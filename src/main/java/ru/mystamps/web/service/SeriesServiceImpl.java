@@ -62,7 +62,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Transactional
 	@PreAuthorize("hasAuthority('CREATE_SERIES')")
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
-	public Integer add(AddSeriesDto dto, User user, boolean userCanAddComments) {
+	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
 		Validate.isTrue(
@@ -70,7 +70,7 @@ public class SeriesServiceImpl implements SeriesService {
 			"Stamps perforated property must be non null"
 		);
 		Validate.isTrue(dto.getCategory() != null, "Category must be non null");
-		Validate.isTrue(user != null, "Current user must be non null");
+		Validate.isTrue(userId != null, "Current user id must be non null");
 		
 		AddSeriesDbDto series = new AddSeriesDbDto();
 		
@@ -117,8 +117,8 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setCreatedAt(now);
 		series.setUpdatedAt(now);
 		
-		series.setCreatedBy(user.getId());
-		series.setUpdatedBy(user.getId());
+		series.setCreatedBy(userId);
+		series.setUpdatedBy(userId);
 		
 		Integer id = jdbcSeriesDao.add(series);
 		LOG.info("Series #{} has been created ({})", id, series);
