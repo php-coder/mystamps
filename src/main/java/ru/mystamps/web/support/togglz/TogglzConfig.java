@@ -22,9 +22,10 @@ import java.util.Collections;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 
 import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.togglz.console.TogglzConsoleServlet;

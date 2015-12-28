@@ -141,6 +141,13 @@
         <module name="IllegalImport"> <!-- defaults to sun.* packages -->
             <property name="illegalPkgs" value="org.apache.log4j, org.apache.commons.lang"/>
         </module>
+        <module name="ImportOrder">
+            <property name="option" value="bottom"/>
+            <property name="groups" value="java,javax,org.apache.commons,org.slf4j,org.hibernate,org.springframework,org.springframework.boot,org.springframework.security,*,org.testng,org.fest.assertions,org.openqa.selenium,lombok,ru.mystamps"/>
+            <property name="separated" value="true"/>
+            <property name="sortStaticImportsAlphabetically" value="true"/>
+            <property name="severity" value="warning"/>
+        </module>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 

@@ -17,21 +17,21 @@
  */
 package ru.mystamps.web.model;
 
+import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.mystamps.web.service.dto.ActivateAccountDto;
+import ru.mystamps.web.validation.ValidationRules;
 import ru.mystamps.web.validation.jsr303.ExistingActivationKey;
 import ru.mystamps.web.validation.jsr303.FieldsMatch;
 import ru.mystamps.web.validation.jsr303.FieldsMismatch;
 import ru.mystamps.web.validation.jsr303.UniqueLogin;
-import ru.mystamps.web.validation.ValidationRules;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter

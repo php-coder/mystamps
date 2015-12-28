@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import org.apache.commons.lang3.Validate;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -26,8 +28,6 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import org.apache.commons.lang3.Validate;
 
 public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentResolver {
 	

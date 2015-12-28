@@ -25,15 +25,16 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
 import static ru.mystamps.web.entity.User.Role.USER;

@@ -20,11 +20,11 @@ package ru.mystamps.web.support.spring.security;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 
-import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
@@ -37,12 +37,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 // CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.config.ServicesConfig;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

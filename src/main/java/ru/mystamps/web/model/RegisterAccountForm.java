@@ -17,16 +17,16 @@
  */
 package ru.mystamps.web.model;
 
-import javax.validation.constraints.Size;
 import javax.validation.GroupSequence;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.validation.jsr303.Email;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import ru.mystamps.web.service.dto.RegisterAccountDto;
+import ru.mystamps.web.validation.jsr303.Email;
 
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 

@@ -24,28 +24,28 @@ import javax.validation.Valid;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.model.ActivateAccountForm;
+import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
+import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.model.ActivateAccountForm.LoginChecks;
 import ru.mystamps.web.model.ActivateAccountForm.NameChecks;
 import ru.mystamps.web.model.ActivateAccountForm.PasswordChecks;
 import ru.mystamps.web.model.ActivateAccountForm.PasswordConfirmationChecks;
-import ru.mystamps.web.model.ActivateAccountForm.ActKeyChecks;
-import ru.mystamps.web.model.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.model.RegisterAccountForm;
-import ru.mystamps.web.service.UsersActivationService;
 import ru.mystamps.web.service.UserService;
+import ru.mystamps.web.service.UsersActivationService;
 
 @Controller
 @RequiredArgsConstructor

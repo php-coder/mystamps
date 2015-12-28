@@ -29,8 +29,8 @@ import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -41,9 +41,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 
 @Configuration

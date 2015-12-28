@@ -17,24 +17,24 @@
  */
 package ru.mystamps.web.model;
 
+import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 
 @Getter
 @Setter

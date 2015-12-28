@@ -17,13 +17,14 @@
  */
 package ru.mystamps.web.dao.impl;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.dao.JdbcUserDao;
-
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
 import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.dao.JdbcUserDao;
 
 @RequiredArgsConstructor
 public class JdbcUserDaoImpl implements JdbcUserDao {

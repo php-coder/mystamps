@@ -17,23 +17,23 @@
  */
 package ru.mystamps.web.model;
 
+import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.GroupSequence;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
 
 @Getter

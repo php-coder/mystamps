@@ -26,25 +26,25 @@ import javax.validation.Valid;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.validation.BindingResult;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
-import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller

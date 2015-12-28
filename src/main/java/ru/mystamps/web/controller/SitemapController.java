@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ru.mystamps.web.service.dto.SitemapInfoDto;
-import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.Url;
-
 import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.Url;
+import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 @Controller
 @RequiredArgsConstructor

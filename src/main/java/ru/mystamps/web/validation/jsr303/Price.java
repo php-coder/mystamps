@@ -22,9 +22,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
-import javax.validation.constraints.Min;
 import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
+import javax.validation.constraints.Min;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;

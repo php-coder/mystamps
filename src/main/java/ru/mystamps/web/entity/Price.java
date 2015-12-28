@@ -24,8 +24,8 @@ import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import org.apache.commons.lang3.Validate;
 

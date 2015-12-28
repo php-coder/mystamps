@@ -17,25 +17,26 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
 import org.togglz.core.manager.FeatureManager;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-
-import java.util.EnumSet;
 
 @EnableAutoConfiguration(exclude = ErrorMvcAutoConfiguration.class)
 @Import({

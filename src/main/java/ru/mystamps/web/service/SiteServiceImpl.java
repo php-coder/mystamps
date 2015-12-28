@@ -24,15 +24,16 @@ import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.SuspiciousActivity;
 import ru.mystamps.web.entity.SuspiciousActivityType;
+import ru.mystamps.web.entity.User;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {

@@ -17,10 +17,6 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.groups.Default;
-
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,17 +25,21 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.groups.Default;
+
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -52,9 +52,9 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
-import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
+import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
 import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
