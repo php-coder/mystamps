@@ -40,7 +40,7 @@ public @interface UniqueCountryName {
 
 	Lang lang();
 
-	public enum Lang {
+	enum Lang {
 		EN, RU
 	};
 	

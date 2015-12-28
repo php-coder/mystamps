@@ -40,7 +40,7 @@ public @interface UniqueCategoryName {
 	
 	Lang lang();
 	
-	public enum Lang {
+	enum Lang {
 		EN, RU
 	};
 	

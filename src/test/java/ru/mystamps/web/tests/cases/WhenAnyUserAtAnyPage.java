@@ -68,7 +68,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	 */
 	private String header;
 	
-	public WhenAnyUserAtAnyPage(Class<T> pageClass) {
+	WhenAnyUserAtAnyPage(Class<T> pageClass) {
 		super();
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}

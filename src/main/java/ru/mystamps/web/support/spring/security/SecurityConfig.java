@@ -140,7 +140,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		private final String[] allowedUrls;
 		
-		public AllExceptUrlsStartedWith(String... allowedUrls) {
+		AllExceptUrlsStartedWith(String... allowedUrls) {
 			this.allowedUrls = allowedUrls;
 		}
 		

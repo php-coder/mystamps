@@ -31,7 +31,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenAnyUserAtAnyPage<T> {
 	
-	public WhenAnyUserAtAnyPageWithForm(Class<T> pageClass) {
+	WhenAnyUserAtAnyPageWithForm(Class<T> pageClass) {
 		super(pageClass);
 	}
 	
