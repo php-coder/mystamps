@@ -116,6 +116,8 @@ Feature: User creates country
          Then I'm on a country info page
           And I see a header "Israel" on country info page
 
+    # TODO: see issue #280
+    @ignore
     Scenario: Country should be available for choosing after its creation
         Given As administrator
          When I open create country page
