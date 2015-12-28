@@ -143,7 +143,7 @@
         </module>
         <module name="ImportOrder">
             <property name="option" value="bottom"/>
-            <property name="groups" value="java,javax,org.apache.commons,org.slf4j,org.hibernate,org.springframework,org.springframework.boot,org.springframework.security,*,org.testng,org.fest.assertions,org.openqa.selenium,lombok,ru.mystamps"/>
+            <property name="groups" value="java,javax,org.apache.commons,org.slf4j,org.hibernate,org.springframework,org.springframework.boot,org.springframework.security,*,org.junit,org.hamcrest,org.openqa.selenium,lombok,ru.mystamps"/>
             <property name="separated" value="true"/>
             <property name="sortStaticImportsAlphabetically" value="true"/>
             <property name="severity" value="warning"/>
