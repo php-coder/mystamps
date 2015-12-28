@@ -24,10 +24,9 @@ import cucumber.api.java.en.Then;
 
 import ru.mystamps.web.it.page.InfoCountryPage;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class InfoCountrySteps {
 	

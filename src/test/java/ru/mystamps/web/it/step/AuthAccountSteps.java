@@ -19,9 +19,10 @@ package ru.mystamps.web.it.step;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import org.springframework.boot.test.ConfigFileApplicationContextInitializer;
 
 import cucumber.api.java.en.Given;
 

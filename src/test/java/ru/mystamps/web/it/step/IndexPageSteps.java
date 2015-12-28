@@ -28,13 +28,12 @@ import cucumber.api.java.en.When;
 
 import ru.mystamps.web.it.page.IndexPage;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 

@@ -26,10 +26,9 @@ import cucumber.api.java.en.When;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.it.page.ErrorPage;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ErrorPageSteps {
 	

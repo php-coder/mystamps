@@ -24,11 +24,10 @@ import cucumber.api.java.en.Then;
 
 import ru.mystamps.web.it.page.AddSeriesPage;
 
-import static org.junit.Assert.assertThat;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class AddSeriesSteps {
 	
