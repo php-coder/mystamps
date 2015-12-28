@@ -20,7 +20,7 @@
     - some best practices
 
   Checkstyle is very configurable. Be sure to read the documentation at
-  http://checkstyle.sf.net (or in your downloaded distribution).
+  http://checkstyle.sourceforge.net (or in your downloaded distribution).
 
   Most Checks are configurable, be sure to consult the documentation.
 
@@ -34,27 +34,27 @@
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
-        http://checkstyle.sourceforge.net/5.x/config.html#Checker
+        http://checkstyle.sourceforge.net/config.html#Checker
 
         <property name="basedir" value="${basedir}"/>
     -->
 
-    <!-- Checks that each Java package has a Javadoc file used for commenting. -->
-    <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocPackage       -->
+    <!-- Checks that each Java package has a Javadoc file used for commenting.    -->
+    <!-- See http://checkstyle.sourceforge.net/config_javadoc.html#JavadocPackage -->
     <!--
         <module name="JavadocPackage">
             <property name="allowLegacy" value="true"/>
         </module>
     -->
 
-    <!-- Checks whether files end with a new line.                        -->
-    <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
+    <!-- Checks whether files end with a new line.                                 -->
+    <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
         <property name="severity" value="warning"/>
     </module>
 
-    <!-- Checks that property files contain the same keys.         -->
-    <!-- See http://checkstyle.sf.net/config_misc.html#Translation -->
+    <!-- Checks that property files contain the same keys.                  -->
+    <!-- See http://checkstyle.sourceforge.net/config_misc.html#Translation -->
     <module name="Translation"/>
 
     <module name="FileLength"/>
@@ -96,8 +96,8 @@
         <!-- Required by SuppressWarningsFilter to make annotations available to the filter -->
         <module name="SuppressWarningsHolder"/>
 
-        <!-- Checks for Javadoc comments.                     -->
-        <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+        <!-- Checks for Javadoc comments.                              -->
+        <!-- See http://checkstyle.sourceforge.net/config_javadoc.html -->
         <!--
             <module name="JavadocMethod"/>
             <module name="JavadocType"/>
@@ -106,8 +106,8 @@
         <module name="JavadocStyle"/>
 
 
-        <!-- Checks for Naming Conventions.                  -->
-        <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <!-- Checks for Naming Conventions.                           -->
+        <!-- See http://checkstyle.sourceforge.net/config_naming.html -->
         <module name="AbstractClassName"/>
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
@@ -120,23 +120,23 @@
         <module name="TypeName"/>
 
 
-        <!-- Checks for Headers                                -->
-        <!-- See http://checkstyle.sf.net/config_header.html   -->
-        <!-- <module name="Header">                            -->
-            <!-- The follow property value demonstrates the ability     -->
-            <!-- to have access to ANT properties. In this case it uses -->
-            <!-- the ${basedir} property to allow Checkstyle to be run  -->
-            <!-- from any directory within a project. See property      -->
-            <!-- expansion,                                             -->
-            <!-- http://checkstyle.sf.net/config.html#properties        -->
-            <!-- <property                                              -->
-            <!--     name="headerFile"                                  -->
-            <!--     value="${basedir}/java.header"/>                   -->
+        <!-- Checks for Headers                                           -->
+        <!-- See http://checkstyle.sourceforge.net/config_header.html     -->
+        <!-- <module name="Header">                                       -->
+            <!-- The follow property value demonstrates the ability       -->
+            <!-- to have access to ANT properties. In this case it uses   -->
+            <!-- the ${basedir} property to allow Checkstyle to be run    -->
+            <!-- from any directory within a project. See property        -->
+            <!-- expansion,                                               -->
+            <!-- http://checkstyle.sourceforge.net/config.html#Properties -->
+            <!-- <property                                                -->
+            <!--     name="headerFile"                                    -->
+            <!--     value="${basedir}/java.header"/>                     -->
         <!-- </module> -->
 
 
-        <!-- Checks for imports                              -->
-        <!-- See http://checkstyle.sf.net/config_import.html -->
+        <!-- Checks for imports                                        -->
+        <!-- See http://checkstyle.sourceforge.net/config_imports.html -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"> <!-- defaults to sun.* packages -->
             <property name="illegalPkgs" value="org.apache.log4j, org.apache.commons.lang"/>
@@ -145,8 +145,8 @@
         <module name="UnusedImports"/>
 
 
-        <!-- Checks for Size Violations.                    -->
-        <!-- See http://checkstyle.sf.net/config_sizes.html -->
+        <!-- Checks for Size Violations.                             -->
+        <!-- See http://checkstyle.sourceforge.net/config_sizes.html -->
         <module name="LineLength">
             <property name="severity" value="warning"/>
             <property name="max" value="100"/>
@@ -156,8 +156,8 @@
         <module name="AnonInnerLength"/>
 
 
-        <!-- Checks for whitespace                               -->
-        <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+        <!-- Checks for whitespace                                        -->
+        <!-- See http://checkstyle.sourceforge.net/config_whitespace.html -->
         <module name="EmptyForIteratorPad"/>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter">
@@ -178,14 +178,14 @@
         </module>
 
 
-        <!-- Modifier Checks                                    -->
-        <!-- See http://checkstyle.sf.net/config_modifiers.html -->
+        <!-- Modifier Checks                                            -->
+        <!-- See http://checkstyle.sourceforge.net/config_modifier.html -->
         <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
 
 
-        <!-- Checks for blocks. You know, those {}'s         -->
-        <!-- See http://checkstyle.sf.net/config_blocks.html -->
+        <!-- Checks for blocks. You know, those {}'s                  -->
+        <!-- See http://checkstyle.sourceforge.net/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
         <module name="LeftCurly"/>
@@ -193,8 +193,8 @@
         <module name="RightCurly"/>
 
 
-        <!-- Checks for common coding problems               -->
-        <!-- See http://checkstyle.sf.net/config_coding.html -->
+        <!-- Checks for common coding problems                        -->
+        <!-- See http://checkstyle.sourceforge.net/config_coding.html -->
 	<!--
         <module name="AvoidInlineConditionals"/>
 	-->
@@ -225,8 +225,8 @@
             <module name="MultipleStringLiterals"/>
         -->
 
-        <!-- Checks for class design                         -->
-        <!-- See http://checkstyle.sf.net/config_design.html -->
+        <!-- Checks for class design                                  -->
+        <!-- See http://checkstyle.sourceforge.net/config_design.html -->
         <!--
             <module name="DesignForExtension"/>
         -->
@@ -238,8 +238,8 @@
         </module>
 
 
-        <!-- Miscellaneous other checks.                   -->
-        <!-- See http://checkstyle.sf.net/config_misc.html -->
+        <!-- Miscellaneous other checks.                            -->
+        <!-- See http://checkstyle.sourceforge.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
         <!--
         <module name="FinalParameters">
