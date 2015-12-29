@@ -25,7 +25,6 @@ import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletConta
 import org.springframework.boot.context.embedded.jetty.JettyServerCustomizer;
 
 import org.eclipse.jetty.server.Connector;
-import org.eclipse.jetty.server.ForwardedRequestCustomizer;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
@@ -47,7 +46,6 @@ public class JettyServletContainerCustomizer implements EmbeddedServletContainer
 							connectionFactory.getHttpConfiguration();
 						if (httpConfiguration != null) {
 							httpConfiguration.setSendServerVersion(false);
-							httpConfiguration.addCustomizer(new ForwardedRequestCustomizer());
 						}
 					}
 				}
