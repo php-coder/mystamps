@@ -513,9 +513,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
-					<profiles>
-						<profile>test</profile>
-					</profiles>
 					<!--
 						Exclude provided artifacts from resulted WAR.
 						@see https://github.com/spring-projects/spring-boot/issues/649
