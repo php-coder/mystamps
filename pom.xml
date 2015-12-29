@@ -622,6 +622,15 @@
 				<groupId>com.github.searls</groupId>
 				<artifactId>jasmine-maven-plugin</artifactId>
 				<version>${jasmine.plugin.version}</version>
+				<configuration>
+					<!--
+						Remove explicit specifying of version when phantomjs will be available for Linux
+						https://github.com/searls/jasmine-maven-plugin/issues/278
+					-->
+					<phantomjs>
+						<version>1.9.8</version>
+					</phantomjs>
+				</configuration>
 			</plugin>
 			
 			<plugin>
