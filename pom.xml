@@ -61,7 +61,7 @@
 		<jacoco.plugin.version>0.7.5.201505241946</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<javadoc.plugin.version>2.10.3</javadoc.plugin.version>
-		<enforcer.plugin.version>1.4</enforcer.plugin.version>
+		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		
 		<skipTests>false</skipTests>
 		
