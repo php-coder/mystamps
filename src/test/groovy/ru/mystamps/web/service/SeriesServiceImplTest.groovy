@@ -25,11 +25,11 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
-import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.LinkEntityDto
+import ru.mystamps.web.service.dto.SeriesInfoDto
 import ru.mystamps.web.service.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.Currency
 import ru.mystamps.web.tests.DateUtils
@@ -910,13 +910,13 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCategoryId() should call dao and return result"() {
 		given:
-			Category expectedCategory = TestObjects.createCategory()
+			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
-			Iterable<Category> expectedResult = [ expectedCategory ]
+			Iterable<SeriesInfoDto> expectedResult = [ series ]
 		and:
 			jdbcSeriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
-			Iterable<Category> result = service.findByCategoryId(10, 'any')
+			Iterable<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
 		then:
 			result == expectedResult
 	}

@@ -20,7 +20,6 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.entity.Category;
 import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
@@ -30,6 +29,7 @@ import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -135,18 +135,20 @@ final class TestObjects {
 		return new DbImageDto(createImageData());
 	}
 	
-	public static Category createCategory() {
-		Category category = new Category();
-		category.setId(1);
-		category.setName("Test");
-		category.setNameRu("Тест");
-		category.setSlug(SlugUtils.slugify(category.getName()));
-		category.setMetaInfo(createMetaInfo());
-		return category;
-	}
-	
 	public static SitemapInfoDto createSitemapInfoDto() {
 		return new SitemapInfoDto(1, new Date());
+	}
+	
+	@SuppressWarnings("checkstyle:magicnumber")
+	public static SeriesInfoDto createSeriesInfoDto() {
+		return new SeriesInfoDto(
+			12,
+			13, "test-category", "Test Category",
+			14, "test-country", "Test Country",
+			15, 10, 2000,
+			16,
+			true
+		);
 	}
 	
 	private static MetaInfo createMetaInfo() {
