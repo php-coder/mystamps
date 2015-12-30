@@ -25,7 +25,6 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
-import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.LinkEntityDto
@@ -934,13 +933,13 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCountryId() should call dao and return result"() {
 		given:
-			Country expectedCountry = TestObjects.createCountry()
+			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
-			Iterable<Country> expectedResult = [ expectedCountry ]
+			Iterable<SeriesInfoDto> expectedResult = [ series ]
 		and:
 			jdbcSeriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
-			Iterable<Country> result = service.findByCountryId(20, 'any')
+			Iterable<SeriesInfoDto> result = service.findByCountryId(20, 'any')
 		then:
 			result == expectedResult
 	}
