@@ -72,17 +72,31 @@ class LocaleUtilsTest extends Specification {
 	}
 	
 	@Unroll
-	def "getLocalizedName() should returns '#expectedName' for locale '#locale'"(Locale locale, LocalizedEntity entity, String expectedName) {
+	def "getLocalizedName() should returns '#expectedName' for locale '#locale'"(Locale locale, String expectedName) {
 		when:
+			LocalizedEntity entity = new LocalizedEntity() {
+				@Override String getName() {
+					return 'Canada'
+				}
+
+				@Override String getNameRu() {
+					return 'Канада'
+				}
+
+				@Override String getLocalizedName(Locale unused) {
+					throw new UnsupportedOperationException()
+				}
+			}
+		and:
 			String name = LocaleUtils.getLocalizedName(locale, entity)
 		then:
 			name == expectedName
 		where:
-			locale                 | entity                      || expectedName
-			null                   | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
-			Locale.ENGLISH         | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
-			Locale.FRENCH          | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_EN_NAME
-			new Locale('ru', 'RU') | TestObjects.createCountry() || TestObjects.TEST_COUNTRY_RU_NAME
+			locale                 || expectedName
+			null                   || 'Canada'
+			Locale.ENGLISH         || 'Canada'
+			Locale.FRENCH          || 'Canada'
+			new Locale('ru', 'RU') || 'Канада'
 	}
 	
 }

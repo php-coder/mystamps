@@ -20,10 +20,8 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.entity.Country;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
-import ru.mystamps.web.entity.MetaInfo;
 import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
@@ -32,18 +30,12 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
-import ru.mystamps.web.util.SlugUtils;
 
 final class TestObjects {
-	public static final String TEST_COUNTRY_EN_NAME = "Somewhere";
-	public static final String TEST_COUNTRY_RU_NAME = "Где-то";
-	
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
 	
 	protected static final String TEST_PASSWORD     = "secret";
-	
-	private static final Integer TEST_COUNTRY_ID = 1;
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
@@ -56,16 +48,6 @@ final class TestObjects {
 	private static final String TEST_HASH           = "$2a$10$Oo8A/oaKQYwt4Zi1RWGir.HHziCG267CJaqaNaNUtE/8ceysZn0za";
 
 	private TestObjects() {
-	}
-	
-	public static Country createCountry() {
-		Country country = new Country();
-		country.setId(TEST_COUNTRY_ID);
-		country.setName(TEST_COUNTRY_EN_NAME);
-		country.setNameRu(TEST_COUNTRY_RU_NAME);
-		country.setSlug(SlugUtils.slugify(country.getName()));
-		country.setMetaInfo(createMetaInfo());
-		return country;
 	}
 	
 	public static UsersActivation createUsersActivation() {
@@ -149,17 +131,6 @@ final class TestObjects {
 			16,
 			true
 		);
-	}
-	
-	private static MetaInfo createMetaInfo() {
-		MetaInfo metaInfo = new MetaInfo();
-		Date now = new Date();
-		metaInfo.setCreatedAt(now);
-		metaInfo.setUpdatedAt(now);
-		User owner = createUser();
-		metaInfo.setCreatedBy(owner);
-		metaInfo.setUpdatedBy(owner);
-		return metaInfo;
 	}
 	
 }
