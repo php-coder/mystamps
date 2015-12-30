@@ -21,12 +21,9 @@ import java.math.BigDecimal;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Country;
-
 public interface AddSeriesDto {
-	Category getCategory();
-	Country getCountry();
+	LinkEntityDto getCategory();
+	LinkEntityDto getCountry();
 	Integer getDay();
 	Integer getMonth();
 	Integer getYear();

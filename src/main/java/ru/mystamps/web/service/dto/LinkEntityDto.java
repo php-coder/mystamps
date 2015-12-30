@@ -17,15 +17,17 @@
  */
 package ru.mystamps.web.service.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class LinkEntityDto {
-	private final Integer id;
-	private final String slug;
-	private final String name;
+	private Integer id;
+	private String slug;
+	private String name;
 }

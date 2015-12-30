@@ -29,6 +29,7 @@ import ru.mystamps.web.entity.Category
 import ru.mystamps.web.entity.Country
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.model.AddSeriesForm
+import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.Currency
 import ru.mystamps.web.tests.DateUtils
@@ -53,7 +54,7 @@ class SeriesServiceImplTest extends Specification {
 		form = new AddSeriesForm()
 		form.setQuantity(2)
 		form.setPerforated(false)
-		form.setCategory(TestObjects.createCategory())
+		form.setCategory(TestObjects.createLinkEntityDto())
 		
 		userId = TestObjects.createUser().getId()
 		
@@ -108,6 +109,15 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	def "add() should throw exception if category id is null"() {
+		given:
+			form.setCategory(new LinkEntityDto(null, 'test', 'Test'))
+		when:
+			service.add(form, userId, false)
+		then:
+			thrown IllegalArgumentException
+	}
+	
 	def "add() should throw exception when user is null"() {
 		when:
 			service.add(form, null, false)
@@ -117,7 +127,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should load and pass country to series dao if country present"() {
 		given:
-			Country country = TestObjects.createCountry()
+			LinkEntityDto country = TestObjects.createLinkEntityDto()
 		and:
 			Integer expectedCountryId = country.getId()
 		and:
@@ -163,7 +173,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass category to series dao"() {
 		given:
-			Category category = TestObjects.createCategory()
+			LinkEntityDto category = TestObjects.createLinkEntityDto()
 		and:
 			Integer expectedCategoryId = category.getId()
 		and:

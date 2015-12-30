@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.controller.converter;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -45,52 +45,94 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 	
 	@Override
 	public Set<ConvertiblePair> getConvertibleTypes() {
-		return Collections.singleton(new ConvertiblePair(String.class, LinkEntityDto.class));
+		Set<ConvertiblePair> pairs = new HashSet<>();
+		pairs.add(new ConvertiblePair(String.class, LinkEntityDto.class));
+		pairs.add(new ConvertiblePair(LinkEntityDto.class, String.class));
+		return pairs;
 	}
 	
 	@Override
 	public Object convert(Object value, TypeDescriptor sourceType, TypeDescriptor targetType) {
 		if (value == null) {
-			LOG.warn("Attempt to convert null");
 			return null;
 		}
 		
-		try {
-			Integer id = Integer.valueOf(value.toString());
-			if (id <= 0) {
-				LOG.warn("Attempt to convert non positive number ({})", id);
+		if (isDto(sourceType) && isString(targetType)) {
+			LinkEntityDto dto = (LinkEntityDto)value;
+			return String.valueOf(dto.getId());
+		}
+		
+		if (isString(sourceType) && isDto(targetType)) {
+			String string = value.toString();
+			if (string.isEmpty()) {
 				return null;
 			}
 			
-			String lang = LocaleUtils.getCurrentLanguageOrNull();
-			
-			if (targetType.hasAnnotation(Category.class)) {
-				return categoryService.findOneAsLinkEntity(id, lang);
+			try {
+				Integer id = Integer.valueOf(string);
+				if (id <= 0) {
+					LOG.warn("Attempt to convert non positive number ({})", id);
+					return null;
+				}
 				
-			} else if (targetType.hasAnnotation(Country.class)) {
-				return countryService.findOneAsLinkEntity(id, lang);
+				String lang = LocaleUtils.getCurrentLanguageOrNull();
+				
+				if (hasCategoryAnnotation(targetType)) {
+					return categoryService.findOneAsLinkEntity(id, lang);
+				}
+				
+				if (hasCountryAnnotation(targetType)) {
+					return countryService.findOneAsLinkEntity(id, lang);
+				}
+				
+				LOG.warn(
+					"Can't convert type '{}' because it doesn't contain supported annotations",
+					targetType
+				);
+				return null;
+				
+			} catch (NumberFormatException ex) {
+				// CheckStyle: ignore LineLength for next 1 line
+				LOG.warn("Can't convert value '{}' from string to integer: {}", value, ex.getMessage());
+				return null;
 			}
-			
-			LOG.warn(
-				"Can't convert type '{}' because it doesn't contain supported annotations",
-				targetType
-			);
-			return null;
-			
-		} catch (NumberFormatException ex) {
-			LOG.warn("Can't convert value '{}' from string to integer: {}", value, ex.getMessage());
-			return null;
 		}
+		
+		LOG.warn("Attempt to convert unsupported types: from {} to {}", sourceType, targetType);
+		return null;
 	}
 	
 	@Override
 	public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
-		if (targetType == null) {
-			LOG.warn("Can't determine whether type matches or not because target type is null");
+		if (sourceType == null || targetType == null) {
 			return false;
 		}
 		
-		return targetType.hasAnnotation(Category.class) || targetType.hasAnnotation(Country.class);
+		// LinkEntityDto -> String
+		if (isDto(sourceType) && isString(targetType)) {
+			return true;
+		}
+		
+		// String -> @Category/@Country LinkEntityDto
+		return isString(sourceType)
+			&& isDto(targetType)
+			&& (hasCategoryAnnotation(targetType) || hasCountryAnnotation(targetType));
+	}
+	
+	private static boolean isString(TypeDescriptor type) {
+		return String.class.equals(type.getType());
+	}
+	
+	private static boolean isDto(TypeDescriptor type) {
+		return LinkEntityDto.class.equals(type.getType());
+	}
+	
+	private static boolean hasCategoryAnnotation(TypeDescriptor type) {
+		return type.hasAnnotation(Category.class);
+	}
+	
+	private static boolean hasCountryAnnotation(TypeDescriptor type) {
+		return type.hasAnnotation(Country.class);
 	}
 	
 }

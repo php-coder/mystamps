@@ -32,9 +32,10 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.controller.converter.annotation.Category;
+import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.ImageFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
@@ -66,10 +67,14 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 })
 public class AddSeriesForm implements AddSeriesDto {
 	
+	// FIXME: change type to SelectEntityDto or plain Integer
 	@NotNull
-	private Category category;
+	@Category
+	private LinkEntityDto category;
 	
-	private Country country;
+	// FIXME: change type to SelectEntityDto or plain Integer
+	@Country
+	private LinkEntityDto country;
 	
 	@Range(min = 1, max = MAX_DAYS_IN_MONTH, message = "{day.invalid}")
 	private Integer day;

@@ -46,8 +46,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Category;
-import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.controller.converter.annotation.Category;
+import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
@@ -60,6 +60,7 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
@@ -125,7 +126,9 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
-	public String showFormWithCategory(@PathVariable("id") Category category, Model model) {
+	public String showFormWithCategory(
+		@Category @PathVariable("id") LinkEntityDto category,
+		Model model) {
 		
 		AddSeriesForm form = new AddSeriesForm();
 		form.setPerforated(true);
@@ -137,7 +140,9 @@ public class SeriesController {
 	}
 	
 	@RequestMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
-	public String showFormWithCountry(@PathVariable("id") Country country, Model model) {
+	public String showFormWithCountry(
+		@Country @PathVariable("id") LinkEntityDto country,
+		Model model) {
 		
 		AddSeriesForm form = new AddSeriesForm();
 		form.setPerforated(true);

@@ -71,6 +71,7 @@ public class SeriesServiceImpl implements SeriesService {
 			"Stamps perforated property must be non null"
 		);
 		Validate.isTrue(dto.getCategory() != null, "Category must be non null");
+		Validate.isTrue(dto.getCategory().getId() != null, "Category id must be non null");
 		Validate.isTrue(userId != null, "Current user id must be non null");
 		
 		AddSeriesDbDto series = new AddSeriesDbDto();
