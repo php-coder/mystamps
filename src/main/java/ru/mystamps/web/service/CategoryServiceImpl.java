@@ -123,7 +123,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
-		Validate.isTrue(name != null, "Name on Russian should be non null");
+		Validate.isTrue(name != null, "Name in Russian should be non null");
 		return categoryDao.countByNameRu(name);
 	}
 	

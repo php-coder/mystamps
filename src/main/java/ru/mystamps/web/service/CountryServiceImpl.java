@@ -51,8 +51,8 @@ public class CountryServiceImpl implements CountryService {
 	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
 	public UrlEntityDto add(AddCountryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "Country name on English should be non null");
-		Validate.isTrue(dto.getNameRu() != null, "Country name on Russian should be non null");
+		Validate.isTrue(dto.getName() != null, "Country name in English should be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Country name in Russian should be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCountryDbDto country = new AddCountryDbDto();
@@ -124,7 +124,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
-		Validate.isTrue(name != null, "Name on Russian should be non null");
+		Validate.isTrue(name != null, "Name in Russian should be non null");
 		return countryDao.countByNameRu(name);
 	}
 	

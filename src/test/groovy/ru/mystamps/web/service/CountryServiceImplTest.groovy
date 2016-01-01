@@ -54,7 +54,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when country name on English is null"() {
+	def "add() should throw exception when country name in English is null"() {
 		given:
 			form.setName(null)
 		when:
@@ -63,7 +63,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when country name on Russian is null"() {
+	def "add() should throw exception when country name in Russian is null"() {
 		given:
 			form.setNameRu(null)
 		when:
@@ -96,7 +96,7 @@ class CountryServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	def "add() should pass country name on English to dao"() {
+	def "add() should pass country name in English to dao"() {
 		given:
 			String expectedCountryName = 'Italy'
 			form.setName(expectedCountryName)
@@ -109,7 +109,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 20
 	}
 	
-	def "add() should pass country name on Russian to dao"() {
+	def "add() should pass country name in Russian to dao"() {
 		given:
 			String expectedCountryName = 'Италия'
 			form.setNameRu(expectedCountryName)

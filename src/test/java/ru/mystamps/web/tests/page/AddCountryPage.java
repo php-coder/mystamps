@@ -45,8 +45,8 @@ public class AddCountryPage extends AbstractPageWithForm {
 	}
 	
 	public void addCountry(String nameEn, String nameRu) {
-		Validate.validState(nameEn != null, "Country name on English must be non null");
-		Validate.validState(nameRu != null, "Country name on Russian must be non null");
+		Validate.validState(nameEn != null, "Country name in English must be non null");
+		Validate.validState(nameRu != null, "Country name in Russian must be non null");
 		
 		fillNameEn(nameEn);
 		fillNameRu(nameRu);

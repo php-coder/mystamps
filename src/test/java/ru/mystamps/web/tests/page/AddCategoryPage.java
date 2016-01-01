@@ -45,8 +45,8 @@ public class AddCategoryPage extends AbstractPageWithForm {
 	}
 	
 	public void addCategory(String nameEn, String nameRu) {
-		Validate.validState(nameEn != null, "Category name on English must be non null");
-		Validate.validState(nameRu != null, "Category name on Russian must be non null");
+		Validate.validState(nameEn != null, "Category name in English must be non null");
+		Validate.validState(nameRu != null, "Category name in Russian must be non null");
 		
 		fillNameEn(nameEn);
 		fillNameRu(nameRu);
