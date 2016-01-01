@@ -48,7 +48,7 @@ import ru.mystamps.web.util.CatalogUtils;
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
-	private final JdbcSeriesDao jdbcSeriesDao;
+	private final JdbcSeriesDao seriesDao;
 	private final ImageService imageService;
 	private final MichelCatalogService michelCatalogService;
 	private final ScottCatalogService scottCatalogService;
@@ -118,7 +118,7 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setCreatedBy(userId);
 		series.setUpdatedBy(userId);
 		
-		Integer id = jdbcSeriesDao.add(series);
+		Integer id = seriesDao.add(series);
 		LOG.info("Series #{} has been created ({})", id, series);
 		
 		Image image = imageService.save(dto.getImage());
@@ -174,13 +174,13 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {
-		return jdbcSeriesDao.countAll();
+		return seriesDao.countAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countAllStamps() {
-		return jdbcSeriesDao.countAllStamps();
+		return seriesDao.countAllStamps();
 	}
 	
 	@Override
@@ -188,7 +188,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public long countSeriesOf(Integer collectionId) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return jdbcSeriesDao.countSeriesOfCollection(collectionId);
+		return seriesDao.countSeriesOfCollection(collectionId);
 	}
 	
 	@Override
@@ -196,7 +196,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public long countStampsOf(Integer collectionId) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return jdbcSeriesDao.countStampsOfCollection(collectionId);
+		return seriesDao.countStampsOfCollection(collectionId);
 	}
 	
 	@Override
@@ -205,7 +205,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
 		
-		return jdbcSeriesDao.countByMichelNumberCode(michelNumberCode);
+		return seriesDao.countByMichelNumberCode(michelNumberCode);
 	}
 	
 	@Override
@@ -214,7 +214,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
 		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
 		
-		return jdbcSeriesDao.countByScottNumberCode(scottNumberCode);
+		return seriesDao.countByScottNumberCode(scottNumberCode);
 	}
 	
 	@Override
@@ -223,7 +223,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
 		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
 		
-		return jdbcSeriesDao.countByYvertNumberCode(yvertNumberCode);
+		return seriesDao.countByYvertNumberCode(yvertNumberCode);
 	}
 	
 	@Override
@@ -235,7 +235,7 @@ public class SeriesServiceImpl implements SeriesService {
 			"Gibbons number code must be non empty"
 		);
 		
-		return jdbcSeriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
+		return seriesDao.countByGibbonsNumberCode(gibbonsNumberCode);
 	}
 	
 	@Override
@@ -244,7 +244,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
 		
-		return jdbcSeriesDao.findSeriesIdByMichelNumberCode(michelNumberCode);
+		return seriesDao.findSeriesIdByMichelNumberCode(michelNumberCode);
 	}
 	
 	@Override
@@ -253,7 +253,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
 		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
 		
-		return jdbcSeriesDao.findSeriesIdByScottNumberCode(scottNumberCode);
+		return seriesDao.findSeriesIdByScottNumberCode(scottNumberCode);
 	}
 	
 	@Override
@@ -262,7 +262,7 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
 		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
 		
-		return jdbcSeriesDao.findSeriesIdByYvertNumberCode(yvertNumberCode);
+		return seriesDao.findSeriesIdByYvertNumberCode(yvertNumberCode);
 	}
 	
 	@Override
@@ -274,7 +274,7 @@ public class SeriesServiceImpl implements SeriesService {
 			"Gibbons number code must be non empty"
 		);
 		
-		return jdbcSeriesDao.findSeriesIdByGibbonsNumberCode(gibbonsNumberCode);
+		return seriesDao.findSeriesIdByGibbonsNumberCode(gibbonsNumberCode);
 	}
 	
 	@Override
@@ -282,7 +282,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang) {
 		Validate.isTrue(categoryId != null, "Category id must be non null");
 		
-		return jdbcSeriesDao.findByCategoryIdAsSeriesInfo(categoryId, lang);
+		return seriesDao.findByCategoryIdAsSeriesInfo(categoryId, lang);
 	}
 	
 	@Override
@@ -290,7 +290,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang) {
 		Validate.isTrue(countryId != null, "Country id must be non null");
 		
-		return jdbcSeriesDao.findByCountryIdAsSeriesInfo(countryId, lang);
+		return seriesDao.findByCountryIdAsSeriesInfo(countryId, lang);
 	}
 	
 	@Override
@@ -298,7 +298,7 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return jdbcSeriesDao.findByCollectionIdAsSeriesInfo(collectionId, lang);
+		return seriesDao.findByCollectionIdAsSeriesInfo(collectionId, lang);
 	}
 	
 	@Override
@@ -306,13 +306,13 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
 		Validate.isTrue(quantity > 0, "Quantity of recently added series must be greater than 0");
 		
-		return jdbcSeriesDao.findLastAdded(quantity, lang);
+		return seriesDao.findLastAdded(quantity, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<SitemapInfoDto> findAllForSitemap() {
-		return jdbcSeriesDao.findAllForSitemap();
+		return seriesDao.findAllForSitemap();
 	}
 
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {

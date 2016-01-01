@@ -36,7 +36,7 @@ class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
 	
 	private ImageService imageService = Mock()
-	private JdbcSeriesDao jdbcSeriesDao = Mock()
+	private JdbcSeriesDao seriesDao = Mock()
 	private MichelCatalogService michelCatalogService = Mock()
 	private ScottCatalogService scottCatalogService = Mock()
 	private YvertCatalogService yvertCatalogService = Mock()
@@ -58,7 +58,7 @@ class SeriesServiceImplTest extends Specification {
 		imageService.save(_) >> TestObjects.createImage()
 		
 		service = new SeriesServiceImpl(
-			jdbcSeriesDao,
+			seriesDao,
 			imageService,
 			michelCatalogService,
 			scottCatalogService,
@@ -131,7 +131,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
 				return true
 			}) >> 123
@@ -149,7 +149,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
 				assert series?.releaseMonth == expectedMonth
 				assert series?.releaseYear == expectedYear
@@ -177,7 +177,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
 				return true
 			}) >> 123
@@ -190,7 +190,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
 				return true
 			}) >> 123
@@ -203,7 +203,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
 				return true
 			}) >> 123
@@ -216,7 +216,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
 				assert series?.michelCurrency == expectedCurrency
 				return true
@@ -234,7 +234,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.scottPrice == expectedPrice
 				assert series?.scottCurrency == expectedCurrency
 				return true
@@ -252,7 +252,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.yvertPrice == expectedPrice
 				assert series?.yvertCurrency == expectedCurrency
 				return true
@@ -270,7 +270,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.gibbonsPrice == expectedPrice
 				assert series?.gibbonsCurrency == expectedCurrency
 				return true
@@ -297,7 +297,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, canAddComment)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.comment == expectedComment
 				return true
 			}) >> 123
@@ -313,7 +313,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
 				return true
 			}) >> 123
@@ -323,7 +323,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
 				return true
 			}) >> 123
@@ -335,7 +335,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, expectedUserId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.createdBy == expectedUserId
 				return true
 			}) >> 123
@@ -347,7 +347,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, expectedUserId, false)
 		then:
-			1 * jdbcSeriesDao.add({ AddSeriesDbDto series ->
+			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.updatedBy == expectedUserId
 				return true
 			}) >> 123
@@ -359,7 +359,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Integer actual = service.add(form, userId, false)
 		then:
-			1 * jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expected
+			1 * seriesDao.add(_ as AddSeriesDbDto) >> expected
 		and:
 			actual == expected
 	}
@@ -380,7 +380,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 123
 		and:
-			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		and:
 			Integer expectedImageId = 456
 		and:
@@ -425,7 +425,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedSeriesId = 456
 		and:
-			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
 			service.add(form, userId, false)
 		then:
@@ -467,7 +467,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedSeriesId = 456
 		and:
-			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
 			service.add(form, userId, false)
 		then:
@@ -509,7 +509,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedSeriesId = 456
 		and:
-			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
 			service.add(form, userId, false)
 		then:
@@ -551,7 +551,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedSeriesId = 456
 		and:
-			jdbcSeriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
 			service.add(form, userId, false)
 		then:
@@ -579,7 +579,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countAll()
 		then:
-			1 * jdbcSeriesDao.countAll() >> expectedResult
+			1 * seriesDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -594,7 +594,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countAllStamps()
 		then:
-			1 * jdbcSeriesDao.countAllStamps() >> expectedResult
+			1 * seriesDao.countAllStamps() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -616,7 +616,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countSeriesOf(expectedCollectionId)
 		then:
-			1 * jdbcSeriesDao.countSeriesOfCollection({ Integer collectionId ->
+			1 * seriesDao.countSeriesOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId
 				return true
 			}) >> 0L
@@ -639,7 +639,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countStampsOf(expectedCollectionId)
 		then:
-			1 * jdbcSeriesDao.countStampsOfCollection({ Integer collectionId ->
+			1 * seriesDao.countStampsOfCollection({ Integer collectionId ->
 				assert expectedCollectionId == collectionId
 				return true
 			}) >> 0L
@@ -668,7 +668,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByMichelNumber('7')
 		then:
-			1 * jdbcSeriesDao.countByMichelNumberCode({ String code ->
+			1 * seriesDao.countByMichelNumberCode({ String code ->
 				assert code == '7'
 				return true
 			}) >> expectedResult
@@ -699,7 +699,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByScottNumber('8')
 		then:
-			1 * jdbcSeriesDao.countByScottNumberCode({ String code ->
+			1 * seriesDao.countByScottNumberCode({ String code ->
 				assert code == '8'
 				return true
 			}) >> expectedResult
@@ -730,7 +730,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByYvertNumber('9')
 		then:
-			1 * jdbcSeriesDao.countByYvertNumberCode({ String code ->
+			1 * seriesDao.countByYvertNumberCode({ String code ->
 				assert code == '9'
 				return true
 			}) >> expectedResult
@@ -761,7 +761,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countByGibbonsNumber('10')
 		then:
-			1 * jdbcSeriesDao.countByGibbonsNumberCode({ String code ->
+			1 * seriesDao.countByGibbonsNumberCode({ String code ->
 				assert code == '10'
 				return true
 			}) >> expectedResult
@@ -792,7 +792,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Optional<Integer> result = service.findSeriesIdByMichelNumber('5');
 		then:
-			1 * jdbcSeriesDao.findSeriesIdByMichelNumberCode({ String code ->
+			1 * seriesDao.findSeriesIdByMichelNumberCode({ String code ->
 				assert code == '5'
 				return true
 			}) >> expectedResult
@@ -823,7 +823,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Optional<Integer> result = service.findSeriesIdByScottNumber('5');
 		then:
-			1 * jdbcSeriesDao.findSeriesIdByScottNumberCode({ String code ->
+			1 * seriesDao.findSeriesIdByScottNumberCode({ String code ->
 				assert code == '5'
 				return true
 			}) >> expectedResult
@@ -854,7 +854,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Optional<Integer> result = service.findSeriesIdByYvertNumber('5');
 		then:
-			1 * jdbcSeriesDao.findSeriesIdByYvertNumberCode({ String code ->
+			1 * seriesDao.findSeriesIdByYvertNumberCode({ String code ->
 				assert code == '5'
 				return true
 			}) >> expectedResult
@@ -885,7 +885,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Optional<Integer> result = service.findSeriesIdByGibbonsNumber('5');
 		then:
-			1 * jdbcSeriesDao.findSeriesIdByGibbonsNumberCode({ String code ->
+			1 * seriesDao.findSeriesIdByGibbonsNumberCode({ String code ->
 				assert code == '5'
 				return true
 			}) >> expectedResult
@@ -910,7 +910,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			jdbcSeriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
 			Iterable<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
 		then:
@@ -934,7 +934,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Iterable<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			jdbcSeriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
 			Iterable<SeriesInfoDto> result = service.findByCountryId(20, 'any')
 		then:
@@ -960,7 +960,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findByCollectionId(expectedCollectionId, expectedLang)
 		then:
-			1 * jdbcSeriesDao.findByCollectionIdAsSeriesInfo(
+			1 * seriesDao.findByCollectionIdAsSeriesInfo(
 				{ Integer collectionId ->
 					assert expectedCollectionId == collectionId
 					return true
@@ -996,7 +996,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findRecentlyAdded(expectedQuantity, expectedLang)
 		then:
-			1 * jdbcSeriesDao.findLastAdded(
+			1 * seriesDao.findLastAdded(
 				{ int quantity ->
 					assert expectedQuantity == quantity
 					return true
@@ -1019,7 +1019,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			Iterable<SitemapInfoDto> result = service.findAllForSitemap()
 		then:
-			1 * jdbcSeriesDao.findAllForSitemap() >> expectedResult
+			1 * seriesDao.findAllForSitemap() >> expectedResult
 		and:
 			result == expectedResult
 	}

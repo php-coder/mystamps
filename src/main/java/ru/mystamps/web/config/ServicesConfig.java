@@ -113,7 +113,7 @@ public class ServicesConfig {
 	@Bean
 	public SeriesService getSeriesService() {
 		return new SeriesServiceImpl(
-			daoConfig.getJdbcSeriesDao(),
+			daoConfig.getSeriesDao(),
 			getImageService(),
 			getMichelCatalogService(),
 			getScottCatalogService(),
