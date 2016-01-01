@@ -33,11 +33,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
-import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.Series;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.Currency;
@@ -51,7 +48,6 @@ import ru.mystamps.web.util.CatalogUtils;
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
-	private final SeriesDao seriesDao;
 	private final JdbcSeriesDao jdbcSeriesDao;
 	private final ImageService imageService;
 	private final MichelCatalogService michelCatalogService;
@@ -158,22 +154,20 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize("hasAuthority('ADD_IMAGES_TO_SERIES')")
-	public void addImageToSeries(AddImageDto dto, Series series, User user) {
+	public void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
-		Validate.isTrue(series != null, "Series must be non null");
-		Validate.isTrue(user != null, "User must be non null");
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
 		Image image = imageService.save(dto.getImage());
 		
-		series.addImage(image);
-		
-		seriesDao.save(series);
+		imageService.addToSeries(seriesId, image.getId());
 		
 		LOG.info(
 			"Image #{} was added to series #{} by user #{}",
 			image.getId(),
-			series.getId(),
-			user.getId()
+			seriesId,
+			userId
 		);
 	}
 	

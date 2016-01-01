@@ -41,9 +41,6 @@ public class ServicesConfig {
 	private SecurityConfig securityConfig;
 	
 	@Autowired
-	private SeriesDao seriesDao;
-	
-	@Autowired
 	private UserDao userDao;
 	
 	@Autowired
@@ -116,7 +113,6 @@ public class ServicesConfig {
 	@Bean
 	public SeriesService getSeriesService() {
 		return new SeriesServiceImpl(
-			seriesDao,
 			daoConfig.getJdbcSeriesDao(),
 			getImageService(),
 			getMichelCatalogService(),

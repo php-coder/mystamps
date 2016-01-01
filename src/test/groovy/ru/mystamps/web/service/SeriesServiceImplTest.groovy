@@ -23,7 +23,6 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcSeriesDao
-import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.model.AddSeriesForm
@@ -37,7 +36,6 @@ class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
 	
 	private ImageService imageService = Mock()
-	private SeriesDao seriesDao = Mock()
 	private JdbcSeriesDao jdbcSeriesDao = Mock()
 	private MichelCatalogService michelCatalogService = Mock()
 	private ScottCatalogService scottCatalogService = Mock()
@@ -60,7 +58,6 @@ class SeriesServiceImplTest extends Specification {
 		imageService.save(_) >> TestObjects.createImage()
 		
 		service = new SeriesServiceImpl(
-			seriesDao,
 			jdbcSeriesDao,
 			imageService,
 			michelCatalogService,

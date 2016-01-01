@@ -253,7 +253,7 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		seriesService.addImageToSeries(form, series, currentUser);
+		seriesService.addImageToSeries(form, series.getId(), currentUser.getId());
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
