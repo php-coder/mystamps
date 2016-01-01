@@ -99,9 +99,9 @@ public class AddCategoryPage {
 	
 	private WebElement fieldNameToElement(String fieldName, boolean toErrorMessage) {
 		switch (fieldName) {
-			case "Name (on English)":
+			case "Name (in English)":
 				return toErrorMessage ? nameErrorMessage : nameField;
-			case "Name (on Russian)":
+			case "Name (in Russian)":
 				return toErrorMessage ? nameRuErrorMessage : nameRuField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);

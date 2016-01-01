@@ -15,11 +15,11 @@ Feature: User creates category
   Scenario: All fields should be mandatory
       Given As administrator
        When I open create category page
-        And I fill field "Name (on English)" with value "" in create category form
-        And I fill field "Name (on Russian)" with value "" in create category form
+        And I fill field "Name (in English)" with value "" in create category form
+        And I fill field "Name (in Russian)" with value "" in create category form
         And I submit create category form
-       Then I see that field "Name (on English)" has error "Value must not be empty" in create category form
-       And  I see that field "Name (on Russian)" has error "Value must not be empty" in create category form
+       Then I see that field "Name (in English)" has error "Value must not be empty" in create category form
+       And  I see that field "Name (in Russian)" has error "Value must not be empty" in create category form
 
   Scenario Outline: Category name should not be too short
       Given As administrator
@@ -30,8 +30,8 @@ Feature: User creates category
        Then I see that field "<fieldName>" has error "Value is less than allowable minimum of 3 characters" in create category form
   Examples:
           | fieldName         | value |
-          | Name (on English) | ee    |
-          | Name (on Russian) | яя    |
+          | Name (in English) | ee    |
+          | Name (in Russian) | яя    |
 
   Scenario Outline: Category name should not be too long
       Given As administrator
@@ -42,8 +42,8 @@ Feature: User creates category
        Then I see that field "<fieldName>" has error "Value is greater than allowable maximum of 50 characters" in create category form
   Examples:
           | fieldName         | value                                               |
-          | Name (on English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
-          | Name (on Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
+          | Name (in English) | eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee |
+          | Name (in Russian) | яяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя |
 
   Scenario Outline: Category name should be unique
       Given As administrator
@@ -54,8 +54,8 @@ Feature: User creates category
        Then I see that field "<fieldName>" has error "Category already exists" in create category form
     Examples:
           | fieldName         | value    |
-          | Name (on English) | Animals  |
-          | Name (on Russian) | Животные |
+          | Name (in English) | Animals  |
+          | Name (in Russian) | Животные |
 
   Scenario Outline: Category name should accept all valid characters
       Given As administrator
@@ -66,8 +66,8 @@ Feature: User creates category
        Then I see that field "<fieldName>" has no error in create category form
     Examples:
             | fieldName         | value               |
-            | Name (on English) | Valid-Name Category |
-            | Name (on Russian) | Категория Ё-ё       |
+            | Name (in English) | Valid-Name Category |
+            | Name (in Russian) | Категория Ё-ё       |
 
   Scenario Outline: Category name should reject forbidden characters
       Given As administrator
@@ -78,8 +78,8 @@ Feature: User creates category
        Then I see that field "<fieldName>" has error "<errorMessage>" in create category form
     Examples:
           | fieldName         | value              | errorMessage                                                      |
-          | Name (on English) | S0m3+CategoryN_ame | Category name must consist only latin letters, hyphen or spaces   |
-          | Name (on Russian) | Категория+1_2_3    | Category name must consist only Russian letters, hyphen or spaces |
+          | Name (in English) | S0m3+CategoryN_ame | Category name must consist only latin letters, hyphen or spaces   |
+          | Name (in Russian) | Категория+1_2_3    | Category name must consist only Russian letters, hyphen or spaces |
 
   Scenario Outline: Category name should not start or end with hyphen
       Given As administrator
@@ -90,10 +90,10 @@ Feature: User creates category
        Then I see that field "<fieldName>" has error "Value must not start or end with hyphen" in create category form
     Examples:
           | fieldName         | value |
-          | Name (on English) | -test |
-          | Name (on English) | test- |
-          | Name (on Russian) | -тест |
-          | Name (on Russian) | тест- |
+          | Name (in English) | -test |
+          | Name (in English) | test- |
+          | Name (in Russian) | -тест |
+          | Name (in Russian) | тест- |
 
   Scenario Outline: Category name should be stripped from leading and trailing spaces
       Given As administrator
@@ -104,14 +104,14 @@ Feature: User creates category
        Then I see that field "<fieldName>" has value "<value>" in create category form
     Examples:
           | fieldName         | value |
-          | Name (on English) | t3st  |
-          | Name (on Russian) | т3ст  |
+          | Name (in English) | t3st  |
+          | Name (in Russian) | т3ст  |
 
   Scenario: Administrator creates a category
       Given As administrator
        When I open create category page
-        And I fill field "Name (on English)" with value "Mushrooms" in create category form
-        And I fill field "Name (on Russian)" with value "Грибы" in create category form
+        And I fill field "Name (in English)" with value "Mushrooms" in create category form
+        And I fill field "Name (in Russian)" with value "Грибы" in create category form
         And I submit create category form
        Then I'm on a category info page
         And I see a header "Mushrooms" on category info page
@@ -119,8 +119,8 @@ Feature: User creates category
   Scenario: Category should be available for choosing after its creation
       Given As administrator
        When I open create category page
-        And I fill field "Name (on English)" with value "Flowers" in create category form
-        And I fill field "Name (on Russian)" with value "Цветы" in create category form
+        And I fill field "Name (in English)" with value "Flowers" in create category form
+        And I fill field "Name (in Russian)" with value "Цветы" in create category form
         And I submit create category form
        Then I open add series page
         And Field "Category" in create series form contains "Flowers"
