@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +38,8 @@ public class JdbcMichelCatalogDaoImpl extends JdbcCatalogDao implements MichelCa
 	}
 	
 	@Override
-	public void add(Set<String> michelNumbers) {
-		add(michelNumbers, addMichelNumberSql);
+	public List<String> add(Set<String> michelNumbers) {
+		return add(michelNumbers, addMichelNumberSql);
 	}
 	
 	@Override

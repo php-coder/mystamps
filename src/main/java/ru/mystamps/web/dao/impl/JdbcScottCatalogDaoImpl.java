@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +38,8 @@ public class JdbcScottCatalogDaoImpl extends JdbcCatalogDao implements ScottCata
 	}
 	
 	@Override
-	public void add(Set<String> scottNumbers) {
-		add(scottNumbers, addScottNumberSql);
+	public List<String> add(Set<String> scottNumbers) {
+		return add(scottNumbers, addScottNumberSql);
 	}
 	
 	@Override

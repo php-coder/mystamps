@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -45,7 +46,9 @@ public class MichelCatalogServiceImpl implements MichelCatalogService {
 		Validate.isTrue(michelNumbers != null, "Michel numbers must be non null");
 		Validate.isTrue(!michelNumbers.isEmpty(), "Michel numbers must be non empty");
 		
-		michelCatalogDao.add(michelNumbers);
+		List<String> insertedNumbers = michelCatalogDao.add(michelNumbers);
+		
+		LOG.info("Michel numbers {} were created", insertedNumbers);
 	}
 	
 	@Override

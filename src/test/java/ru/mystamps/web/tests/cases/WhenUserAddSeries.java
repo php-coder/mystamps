@@ -279,54 +279,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void michelNumbersShouldRejectExistingValues() {
-		page.showCatalogNumbers();
-		page.fillMichelNumbers(existingMichelNumber);
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("michelNumbers")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueMichelNumbers.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void scottNumbersShouldRejectExistingValues() {
-		page.showCatalogNumbers();
-		page.fillScottNumbers(existingScottNumber);
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("scottNumbers")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueScottNumbers.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void yvertNumbersShouldRejectExistingValues() {
-		page.showCatalogNumbers();
-		page.fillYvertNumbers(existingYvertNumber);
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("yvertNumbers")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueYvertNumbers.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void gibbonsNumbersShouldRejectExistingValues() {
-		page.showCatalogNumbers();
-		page.fillGibbonsNumbers(existingGibbonsNumber);
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("gibbonsNumbers")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueGibbonsNumbers.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void imageSizeMustBeGreaterThanZero() {
 		page.fillImage(EMPTY_IMAGE_PATH);
 		
@@ -531,6 +483,27 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#34, 35");
+	}
+	
+	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	public void shouldAllowExistingCatalogNumbers() {
+		page.fillCategory(validCategoryName);
+		page.fillQuantity("2");
+		page.fillImage(SAMPLE_IMAGE_PATH);
+		page.showCatalogNumbers();
+		page.fillMichelNumbers(existingMichelNumber);
+		page.fillScottNumbers(existingScottNumber);
+		page.fillYvertNumbers(existingYvertNumber);
+		page.fillGibbonsNumbers(existingGibbonsNumber);
+		
+		AbstractPage next = page.submit();
+		assertThat(next).isInstanceOf(InfoSeriesPage.class);
+		
+		InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#" + existingMichelNumber);
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
+		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
 	}
 	
 	@DataProvider(name = "validCatalogNumbers")

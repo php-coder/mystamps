@@ -17,9 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.List;
 import java.util.Set;
 
 public interface YvertCatalogDao {
-	void add(Set<String> yvertNumbers);
+	List<String> add(Set<String> yvertNumbers);
 	void addToSeries(Integer seriesId, Set<String> yvertNumbers);
 }

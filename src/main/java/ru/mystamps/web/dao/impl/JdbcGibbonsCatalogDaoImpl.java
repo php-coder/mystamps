@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +38,8 @@ public class JdbcGibbonsCatalogDaoImpl extends JdbcCatalogDao implements Gibbons
 	}
 	
 	@Override
-	public void add(Set<String> gibbonsNumbers) {
-		add(gibbonsNumbers, addGibbonsNumberSql);
+	public List<String> add(Set<String> gibbonsNumbers) {
+		return add(gibbonsNumbers, addGibbonsNumberSql);
 	}
 	
 	@Override

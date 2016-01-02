@@ -17,9 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.List;
 import java.util.Set;
 
 public interface GibbonsCatalogDao {
-	void add(Set<String> gibbonsNumbers);
+	List<String> add(Set<String> gibbonsNumbers);
 	void addToSeries(Integer seriesId, Set<String> gibbonsNumbers);
 }

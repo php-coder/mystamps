@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -45,7 +46,9 @@ public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 		Validate.isTrue(gibbonsNumbers != null, "Gibbons numbers must be non null");
 		Validate.isTrue(!gibbonsNumbers.isEmpty(), "Gibbons numbers must be non empty");
 		
-		gibbonsCatalogDao.add(gibbonsNumbers);
+		List<String> insertedNumbers = gibbonsCatalogDao.add(gibbonsNumbers);
+		
+		LOG.info("Gibbons numbers {} were created", insertedNumbers);
 	}
 	
 	@Override

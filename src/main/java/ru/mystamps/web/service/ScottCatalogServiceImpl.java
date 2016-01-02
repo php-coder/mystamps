@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -45,7 +46,9 @@ public class ScottCatalogServiceImpl implements ScottCatalogService {
 		Validate.isTrue(scottNumbers != null, "Scott numbers must be non null");
 		Validate.isTrue(!scottNumbers.isEmpty(), "Scott numbers must be non empty");
 		
-		scottCatalogDao.add(scottNumbers);
+		List<String> insertedNumbers = scottCatalogDao.add(scottNumbers);
+		
+		LOG.info("Scott numbers {} were created", insertedNumbers);
 	}
 	
 	@Override

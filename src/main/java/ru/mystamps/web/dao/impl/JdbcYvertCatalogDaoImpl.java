@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -37,8 +38,8 @@ public class JdbcYvertCatalogDaoImpl extends JdbcCatalogDao implements YvertCata
 	}
 	
 	@Override
-	public void add(Set<String> yvertNumbers) {
-		add(yvertNumbers, addYvertNumberSql);
+	public List<String> add(Set<String> yvertNumbers) {
+		return add(yvertNumbers, addYvertNumberSql);
 	}
 	
 	@Override

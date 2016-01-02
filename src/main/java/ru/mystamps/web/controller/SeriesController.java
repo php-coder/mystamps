@@ -52,10 +52,6 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
-import ru.mystamps.web.model.AddSeriesForm.GibbonsCatalogChecks;
-import ru.mystamps.web.model.AddSeriesForm.MichelCatalogChecks;
-import ru.mystamps.web.model.AddSeriesForm.ScottCatalogChecks;
-import ru.mystamps.web.model.AddSeriesForm.YvertCatalogChecks;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -155,10 +151,7 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
 	public String processInput(
-		@Validated({
-			Default.class, MichelCatalogChecks.class, ScottCatalogChecks.class,
-			YvertCatalogChecks.class, GibbonsCatalogChecks.class, AddSeriesForm.ImageChecks.class
-		}) AddSeriesForm form,
+		@Validated({ Default.class, AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
 		HttpServletRequest request,
 		User currentUser) {

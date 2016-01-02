@@ -34,11 +34,6 @@ public interface SeriesService {
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
 	
-	long countByMichelNumber(String michelNumberCode);
-	long countByScottNumber(String scottNumberCode);
-	long countByYvertNumber(String yvertNumberCode);
-	long countByGibbonsNumber(String gibbonsNumberCode);
-	
 	Optional<Integer> findSeriesIdByMichelNumber(String michelNumberCode);
 	Optional<Integer> findSeriesIdByScottNumber(String scottNumberCode);
 	Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode);

@@ -17,9 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.List;
 import java.util.Set;
 
 public interface MichelCatalogDao {
-	void add(Set<String> michelNumbers);
+	List<String> add(Set<String> michelNumbers);
 	void addToSeries(Integer seriesId, Set<String> michelNumbers);
 }

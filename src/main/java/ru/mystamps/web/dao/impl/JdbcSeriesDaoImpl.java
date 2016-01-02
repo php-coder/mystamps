@@ -39,7 +39,7 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 @RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
@@ -74,18 +74,6 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.count_stamps_of_collection}")
 	private String countStampsOfCollectionSql;
-	
-	@Value("${series.count_stamps_by_michel_number}")
-	private String countStampsByMichelNumberSql;
-	
-	@Value("${series.count_stamps_by_scott_number}")
-	private String countStampsByScottNumberSql;
-	
-	@Value("${series.count_stamps_by_yvert_number}")
-	private String countStampsByYvertNumberSql;
-	
-	@Value("${series.count_stamps_by_gibbons_number}")
-	private String countStampsByGibbonsNumberSql;
 	
 	@Value("${series.find_series_id_by_michel_number}")
 	private String findSeriesIdByMichelNumberSql;
@@ -218,42 +206,6 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		return jdbcTemplate.queryForObject(
 			countStampsOfCollectionSql,
 			Collections.singletonMap("collection_id", collectionId),
-			Long.class
-		);
-	}
-	
-	@Override
-	public long countByMichelNumberCode(String michelNumber) {
-		return jdbcTemplate.queryForObject(
-			countStampsByMichelNumberSql,
-			Collections.singletonMap("michel_number", michelNumber),
-			Long.class
-		);
-	}
-	
-	@Override
-	public long countByScottNumberCode(String scottNumber) {
-		return jdbcTemplate.queryForObject(
-			countStampsByScottNumberSql,
-			Collections.singletonMap("scott_number", scottNumber),
-			Long.class
-		);
-	}
-	
-	@Override
-	public long countByYvertNumberCode(String yvertNumber) {
-		return jdbcTemplate.queryForObject(
-			countStampsByYvertNumberSql,
-			Collections.singletonMap("yvert_number", yvertNumber),
-			Long.class
-		);
-	}
-	
-	@Override
-	public long countByGibbonsNumberCode(String gibbonsNumber) {
-		return jdbcTemplate.queryForObject(
-			countStampsByGibbonsNumberSql,
-			Collections.singletonMap("gibbons_number", gibbonsNumber),
 			Long.class
 		);
 	}

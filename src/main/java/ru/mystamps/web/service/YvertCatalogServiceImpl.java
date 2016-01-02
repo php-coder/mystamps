@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -45,7 +46,9 @@ public class YvertCatalogServiceImpl implements YvertCatalogService {
 		Validate.isTrue(yvertNumbers != null, "Yvert numbers must be non null");
 		Validate.isTrue(!yvertNumbers.isEmpty(), "Yvert numbers must be non empty");
 		
-		yvertCatalogDao.add(yvertNumbers);
+		List<String> insertedNumbers = yvertCatalogDao.add(yvertNumbers);
+		
+		LOG.info("Yvert numbers {} were created", insertedNumbers);
 	}
 	
 	@Override

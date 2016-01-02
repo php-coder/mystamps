@@ -17,13 +17,15 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.AccessLevel;
@@ -34,15 +36,21 @@ class JdbcCatalogDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
-	// Inserts all values with  multirow INSERT expression
-	protected void add(Set<String> numbers, String addNumberSql) {
-		Validate.validState(!numbers.isEmpty(), "Numbers must be non empty");
+	protected List<String> add(Set<String> numbers, String addNumberSql) {
 		Validate.validState(!"".equals(addNumberSql), "Query must be non empty");
 		
-		Map<String, Object> params = prepareNumberedParamsWithBaseName("code", numbers);
-		String sql = prepareMultirowQueryWithSingleValue(addNumberSql, "code", numbers);
+		List<String> inserted = new ArrayList<>();
+		for (String number : numbers) {
+			int affected = jdbcTemplate.update(
+				addNumberSql,
+				Collections.singletonMap("code", number)
+			);
+			if (affected > 0) {
+				inserted.add(number);
+			}
+		}
 		
-		jdbcTemplate.update(sql, new MapSqlParameterSource(params));
+		return inserted;
 	}
 	
 	// CheckStyle: ignore LineLength for next 1 line
@@ -56,43 +64,6 @@ class JdbcCatalogDao {
 		params.put("numbers", numbers);
 		
 		jdbcTemplate.update(addNumbersToSeriesSql, params);
-	}
-	
-	// func("code", [10, 20, 30]) -> { "code1":"10", "code2":"20", "code3":"30" }
-	private static Map<String, Object> prepareNumberedParamsWithBaseName(
-		String paramBaseName,
-		Set<String> values) {
-		
-		Map<String, Object> params = new HashMap<>();
-		int paramNum = 1;
-		for (String value : values) {
-			String key = paramBaseName + Integer.valueOf(paramNum);
-			params.put(key, value);
-			paramNum++;
-		}
-		return params;
-	}
-	
-	// "INSERT INTO t(code) VALUES(:code1)" ->
-	// "INSERT INTO t(code) VALUES(:code1),(:code2),(:code3)"
-	private static String prepareMultirowQueryWithSingleValue(
-		String sql,
-		String paramBaseName,
-		Set<String> values) {
-		
-		// don't modify query with single parameter
-		if (values.size() == 1) { // NOPMD: AvoidLiteralsInIfCondition
-			return sql;
-		}
-		
-		StringBuilder sb = new StringBuilder(sql);
-		
-		// start from 2 to skip first parameter (it's already in SQL query)
-		for (int paramNum = 2; paramNum <= values.size(); paramNum++) {
-			sb.append(",(:").append(paramBaseName).append(paramNum).append(')');
-		}
-		
-		return sb.toString();
 	}
 	
 }

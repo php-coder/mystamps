@@ -17,9 +17,10 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ScottCatalogDao {
-	void add(Set<String> scottNumbers);
+	List<String> add(Set<String> scottNumbers);
 	void addToSeries(Integer seriesId, Set<String> scottNumbers);
 }

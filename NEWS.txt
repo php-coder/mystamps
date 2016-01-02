@@ -3,6 +3,7 @@
 - (user interface) ported to Bootstrap 3
 - (infrastructure) ported to Spring Boot
 - (functionality)  implemented possibility to user to add additional images to series
+- (functionality)  allow to different series to have the same catalog numbers
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
