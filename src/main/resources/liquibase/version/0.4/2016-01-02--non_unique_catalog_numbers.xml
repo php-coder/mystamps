@@ -5,12 +5,101 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 	
+	<!-- Workaround for http://www.xaprb.com/blog/2006/08/22/mysqls-error-1025-explained/ -->
+	<changeSet id="temporary-drop-catalog-numbers-foreign-keys" author="php-coder" context="scheme" dbms="mysql">
+		
+		<dropForeignKeyConstraint
+			baseTableName="series_michel_catalog"
+			constraintName="fk_series_michel_catalog_series_id" />
+		<dropForeignKeyConstraint
+			baseTableName="series_michel_catalog"
+			constraintName="fk_series_michel_catalog_michel_id" />
+		
+		<dropForeignKeyConstraint
+			baseTableName="series_scott_catalog"
+			constraintName="fk_series_scott_catalog_series_id" />
+		<dropForeignKeyConstraint
+			baseTableName="series_scott_catalog"
+			constraintName="fk_series_scott_catalog_scott_id" />
+		
+		<dropForeignKeyConstraint
+			baseTableName="series_yvert_catalog"
+			constraintName="fk_series_yvert_catalog_series_id" />
+		<dropForeignKeyConstraint
+			baseTableName="series_yvert_catalog"
+			constraintName="fk_series_yvert_catalog_yvert_id" />
+		
+		<dropForeignKeyConstraint
+			baseTableName="series_gibbons_catalog"
+			constraintName="fk_series_gibbons_catalog_series_id" />
+		<dropForeignKeyConstraint
+			baseTableName="series_gibbons_catalog"
+			constraintName="fk_series_gibbons_catalog_gibbons_id" />
+		
+	</changeSet>
+	
 	<changeSet id="allow-to-series-to-have-the-same-catalog-numbers" author="php-coder" context="scheme">
 		
 		<dropPrimaryKey tableName="series_michel_catalog" />
 		<dropPrimaryKey tableName="series_scott_catalog" />
 		<dropPrimaryKey tableName="series_yvert_catalog" />
 		<dropPrimaryKey tableName="series_gibbons_catalog" />
+		
+	</changeSet>
+	
+	<changeSet id="return-catalog-numbers-foreign-keys" author="php-coder" context="scheme" dbms="mysql">
+		
+		<addForeignKeyConstraint
+			baseTableName="series_michel_catalog"
+			baseColumnNames="series_id"
+			constraintName="fk_series_michel_catalog_series_id"
+			referencedTableName="series"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint
+			baseTableName="series_michel_catalog"
+			baseColumnNames="michel_id"
+			constraintName="fk_series_michel_catalog_michel_id"
+			referencedTableName="michel_catalog"
+			referencedColumnNames="id" />
+		
+		<addForeignKeyConstraint
+			baseTableName="series_scott_catalog"
+			baseColumnNames="series_id"
+			constraintName="fk_series_scott_catalog_series_id"
+			referencedTableName="series"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint
+			baseTableName="series_scott_catalog"
+			baseColumnNames="scott_id"
+			constraintName="fk_series_scott_catalog_scott_id"
+			referencedTableName="scott_catalog"
+			referencedColumnNames="id" />
+		
+		<addForeignKeyConstraint
+			baseTableName="series_yvert_catalog"
+			baseColumnNames="series_id"
+			constraintName="fk_series_yvert_catalog_series_id"
+			referencedTableName="series"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint
+			baseTableName="series_yvert_catalog"
+			baseColumnNames="yvert_id"
+			constraintName="fk_series_yvert_catalog_yvert_id"
+			referencedTableName="yvert_catalog"
+			referencedColumnNames="id" />
+		
+		<addForeignKeyConstraint
+			baseTableName="series_gibbons_catalog"
+			baseColumnNames="series_id"
+			constraintName="fk_series_gibbons_catalog_series_id"
+			referencedTableName="series"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint
+			baseTableName="series_gibbons_catalog"
+			baseColumnNames="gibbons_id"
+			constraintName="fk_series_gibbons_catalog_gibbons_id"
+			referencedTableName="gibbons_catalog"
+			referencedColumnNames="id" />
 		
 	</changeSet>
 	
