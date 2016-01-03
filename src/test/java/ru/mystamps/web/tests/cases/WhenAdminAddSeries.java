@@ -245,42 +245,19 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void michelNumbersShouldBeStripedFromSpaces() {
+	public void catalogNumbersShouldBeStripedFromSpaces() {
 		page.showCatalogNumbers();
+		
 		page.fillMichelNumbers(" 1 , 2 ");
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasValue("1,2");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void scottNumbersShouldBeStripedFromSpaces() {
-		page.showCatalogNumbers();
 		page.fillScottNumbers(" 3 , 4 ");
-		
-		page.submit();
-		
-		assertThat(page).field("scottNumbers").hasValue("3,4");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void yvertNumbersShouldBeStripedFromSpaces() {
-		page.showCatalogNumbers();
 		page.fillYvertNumbers(" 5 , 6 ");
-		
-		page.submit();
-		
-		assertThat(page).field("yvertNumbers").hasValue("5,6");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void gibbonsNumbersShouldBeStripedFromSpaces() {
-		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(" 7 , 8 ");
 		
 		page.submit();
 		
+		assertThat(page).field("michelNumbers").hasValue("1,2");
+		assertThat(page).field("scottNumbers").hasValue("3,4");
+		assertThat(page).field("yvertNumbers").hasValue("5,6");
 		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
 	}
 	
