@@ -128,42 +128,19 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void michelNumbersShouldAcceptValidValues(String numbers, Object whatever) {
+	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.showCatalogNumbers();
+		
 		page.fillMichelNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void scottNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
 		page.fillScottNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("scottNumbers").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void yvertNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
 		page.fillYvertNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("yvertNumbers").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void gibbonsNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
 		
+		assertThat(page).field("michelNumbers").hasNoError();
+		assertThat(page).field("scottNumbers").hasNoError();
+		assertThat(page).field("yvertNumbers").hasNoError();
 		assertThat(page).field("gibbonsNumbers").hasNoError();
 	}
 	
