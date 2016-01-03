@@ -334,62 +334,24 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldIgnoreDuplicatedMichelNumbers() {
+	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
 		page.fillImage(SAMPLE_IMAGE_PATH);
 		page.showCatalogNumbers();
+		
 		page.fillMichelNumbers("4,5,4");
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#4, 5");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldIgnoreDuplicatedScottNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
 		page.fillScottNumbers("14,15,14");
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#14, 15");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldIgnoreDuplicatedYvertNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
 		page.fillYvertNumbers("24,25,24");
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#24, 25");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldIgnoreDuplicatedGibbonsNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
 		page.fillGibbonsNumbers("34,35,34");
 		
 		AbstractPage next = page.submit();
 		assertThat(next).isInstanceOf(InfoSeriesPage.class);
 		
 		InfoSeriesPage nextPage = (InfoSeriesPage)next;
+		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#4, 5");
+		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#14, 15");
+		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#24, 25");
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#34, 35");
 	}
 	
