@@ -181,42 +181,19 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void michelNumbersShouldRejectInvalidValues(String numbers, String msg) {
+	public void catalogNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.showCatalogNumbers();
+		
 		page.fillMichelNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void scottNumbersShouldRejectInvalidValues(String numbers, String msg) {
-		page.showCatalogNumbers();
 		page.fillScottNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("scottNumbers").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void yvertNumbersShouldRejectInvalidValues(String numbers, String msg) {
-		page.showCatalogNumbers();
 		page.fillYvertNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("yvertNumbers").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void gibbonsNumbersShouldRejectInvalidValues(String numbers, String msg) {
-		page.showCatalogNumbers();
 		page.fillGibbonsNumbers(numbers);
 		
 		page.submit();
 		
+		assertThat(page).field("michelNumbers").hasError(msg);
+		assertThat(page).field("scottNumbers").hasError(msg);
+		assertThat(page).field("yvertNumbers").hasError(msg);
 		assertThat(page).field("gibbonsNumbers").hasError(msg);
 	}
 	
