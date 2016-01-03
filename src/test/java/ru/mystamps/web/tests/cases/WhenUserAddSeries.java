@@ -193,42 +193,19 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void michelPriceShouldRejectInvalidValues(String price, String msg) {
+	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
 		page.showCatalogNumbers();
+		
 		page.fillMichelPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("michelPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void scottPriceShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
 		page.fillScottPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("scottPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void yvertPriceShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
 		page.fillYvertPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("yvertPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void gibbonsPriceShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
 		page.fillGibbonsPrice(price);
 		
 		page.submit();
 		
+		assertThat(page).field("michelPrice").hasError(msg);
+		assertThat(page).field("scottPrice").hasError(msg);
+		assertThat(page).field("yvertPrice").hasError(msg);
 		assertThat(page).field("gibbonsPrice").hasError(msg);
 	}
 	
