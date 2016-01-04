@@ -53,6 +53,11 @@ public class AddSeriesSteps {
 		page.fillFieldByName(fieldName, value);
 	}
 	
+	@And("^I show up \"([^\"]*)\" section at add series page$")
+	public void showUpSection(String section) {
+		page.showSection(section);
+	}
+	
 	@And("^I submit add series form$")
 	public void submitForm() {
 		page.submitForm();
@@ -61,6 +66,11 @@ public class AddSeriesSteps {
 	@Then("^I see that field \"([^\"]*)\" has error \"([^\"]*)\" in add series form$")
 	public void fieldShouldHaveAnError(String fieldName, String errorMessage) {
 		assertThat(page.getErrorByFieldName(fieldName), is(equalTo(errorMessage)));
+	}
+	
+	@Then("^I see that field \"([^\"]*)\" has no error in add series form$")
+	public void fieldShouldNotHaveAnError(String fieldName) {
+		assertThat(page.fieldHasError(fieldName), is(false));
 	}
 	
 }

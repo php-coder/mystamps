@@ -19,7 +19,10 @@ package ru.mystamps.web.it.page;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -69,6 +72,33 @@ public class AddSeriesPage {
 	@FindBy(id = "image.errors")
 	private WebElement imageErrorMessage;
 	
+	@FindBy(id = "add-catalog-numbers-link")
+	private WebElement catalogNumbersLink;
+	
+	@FindBy(id = "michelNumbers")
+	private WebElement michelNumbersField;
+	
+	@FindBy(id = "michelNumbers.errors")
+	private WebElement michelNumbersErrorMessage;
+	
+	@FindBy(id = "scottNumbers")
+	private WebElement scottNumbersField;
+	
+	@FindBy(id = "scottNumbers.errors")
+	private WebElement scottNumbersErrorMessage;
+	
+	@FindBy(id = "yvertNumbers")
+	private WebElement yvertNumbersField;
+	
+	@FindBy(id = "yvertNumbers.errors")
+	private WebElement yvertNumbersErrorMessage;
+	
+	@FindBy(id = "gibbonsNumbers")
+	private WebElement gibbonsNumbersField;
+	
+	@FindBy(id = "gibbonsNumbers.errors")
+	private WebElement gibbonsNumbersErrorMessage;
+	
 	@FindBy(id = "add-series-btn")
 	private WebElement addSeriesButton;
 	
@@ -81,8 +111,26 @@ public class AddSeriesPage {
 		clearAndTypeIntoField(fieldNameToField(fieldName), value);
 	}
 	
+	public void showSection(String section) {
+		switch (section) {
+			case "Add information from stamps catalogues":
+				catalogNumbersLink.click();
+				break;
+			default:
+				throw new IllegalStateException("Unknown section name: " + section);
+		}
+	}
+	
 	public void submitForm() {
 		addSeriesButton.submit();
+	}
+	
+	public boolean fieldHasError(String fieldName) {
+		try {
+			return StringUtils.isNotEmpty(getErrorByFieldName(fieldName));
+		} catch (NoSuchElementException ex) {
+			return false;
+		}
 	}
 	
 	public String getErrorByFieldName(String fieldName) {
@@ -141,6 +189,14 @@ public class AddSeriesPage {
 				return toErrorMessage ? quantityErrorMessage : quantityField;
 			case "Image":
 				return toErrorMessage ? imageErrorMessage : imageField;
+			case "Michel":
+				return toErrorMessage ? michelNumbersErrorMessage : michelNumbersField;
+			case "Scott":
+				return toErrorMessage ? scottNumbersErrorMessage : scottNumbersField;
+			case "Yvert":
+				return toErrorMessage ? yvertNumbersErrorMessage : yvertNumbersField;
+			case "Gibbons":
+				return toErrorMessage ? gibbonsNumbersErrorMessage : gibbonsNumbersField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);
 		}

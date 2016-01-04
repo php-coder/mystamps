@@ -132,23 +132,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasNoError();
-		assertThat(page).field("scottNumbers").hasNoError();
-		assertThat(page).field("yvertNumbers").hasNoError();
-		assertThat(page).field("gibbonsNumbers").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void quantityShouldBeANumber() {
 		page.fillQuantity("NaN");
@@ -407,16 +390,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "validCatalogNumbers")
-	public Object[][] getValidCatalogNumbers() {
-		return new Object[][] {
-			{"7", null},
-			{"7,8", null},
-			{"71, 81, 91", null},
-			{"1000", null}
-		};
 	}
 	
 	@DataProvider(name = "invalidCatalogNumbers")

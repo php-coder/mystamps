@@ -22,3 +22,23 @@ Feature: User or admin add series
        Then I see that field "Category" has error "Value must not be empty" in add series form
         And I see that field "Quantity" has error "Value must not be empty" in add series form
         And I see that field "Image" has error "Value must not be empty" in add series form
+
+  Scenario Outline: Catalog numbers should accept valid values
+      Given As administrator
+       When I open add series page
+        And I show up "Add information from stamps catalogues" section at add series page
+        And I fill field "Michel" with value "<catalogNumbers>" in add series form
+        And I fill field "Scott" with value "<catalogNumbers>" in add series form
+        And I fill field "Yvert" with value "<catalogNumbers>" in add series form
+        And I fill field "Gibbons" with value "<catalogNumbers>" in add series form
+        And I submit add series form
+       Then I see that field "Michel" has no error in add series form
+       Then I see that field "Scott" has no error in add series form
+       Then I see that field "Yvert" has no error in add series form
+       Then I see that field "Gibbons" has no error in add series form
+    Examples:
+          | catalogNumbers |
+          | 7              |
+          | 7,8            |
+          | 71, 81, 91     |
+          | 1000           |
