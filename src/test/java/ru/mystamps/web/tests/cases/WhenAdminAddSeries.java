@@ -42,8 +42,6 @@ import ru.mystamps.web.tests.page.InfoSeriesPage;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
-import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -130,28 +128,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldBeNotLessThanLimit() {
-		page.fillQuantity(String.valueOf(MIN_STAMPS_IN_SERIES - 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Min.message", MIN_STAMPS_IN_SERIES));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldNotBeGreaterThanLimit() {
-		page.fillQuantity(String.valueOf(MAX_STAMPS_IN_SERIES + 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Max.message", MAX_STAMPS_IN_SERIES));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
