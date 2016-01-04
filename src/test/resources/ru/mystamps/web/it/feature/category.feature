@@ -19,7 +19,7 @@ Feature: User creates category
         And I fill field "Name (in Russian)" with value "" in create category form
         And I submit create category form
        Then I see that field "Name (in English)" has error "Value must not be empty" in create category form
-       And  I see that field "Name (in Russian)" has error "Value must not be empty" in create category form
+        And I see that field "Name (in Russian)" has error "Value must not be empty" in create category form
 
   Scenario Outline: Category name should not be too short
       Given As administrator
@@ -65,9 +65,9 @@ Feature: User creates category
         And I submit create category form
        Then I see that field "<fieldName>" has no error in create category form
     Examples:
-            | fieldName         | value               |
-            | Name (in English) | Valid-Name Category |
-            | Name (in Russian) | Категория Ё-ё       |
+          | fieldName         | value               |
+          | Name (in English) | Valid-Name Category |
+          | Name (in Russian) | Категория Ё-ё       |
 
   Scenario Outline: Category name should reject forbidden characters
       Given As administrator
