@@ -31,7 +31,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.Url;
@@ -128,23 +127,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelPrice(price);
-		page.fillScottPrice(price);
-		page.fillYvertPrice(price);
-		page.fillGibbonsPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("michelPrice").hasError(msg);
-		assertThat(page).field("scottPrice").hasError(msg);
-		assertThat(page).field("yvertPrice").hasError(msg);
-		assertThat(page).field("gibbonsPrice").hasError(msg);
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -340,17 +322,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "invalidCatalogPrices")
-	public Object[][] getInvalidCatalogPrices() {
-		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Price.message");
-		
-		return new Object[][] {
-			{"0", expectedErrorMessage},
-			{"-1", expectedErrorMessage},
-			{"NaN", expectedErrorMessage}
-		};
 	}
 	
 	@Override

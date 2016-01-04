@@ -79,3 +79,22 @@ Feature: User or admin add series
           | 05             |
           | 1,09           |
           | 10000          |
+
+  Scenario Outline: Catalog prices should reject invalid values
+      Given As administrator
+       When I open add series page
+        And I show up "Add information from stamps catalogues" section at add series page
+        And I fill field "Michel price" with value "<catalogPrice>" in add series form
+        And I fill field "Scott price" with value "<catalogPrice>" in add series form
+        And I fill field "Yvert price" with value "<catalogPrice>" in add series form
+        And I fill field "Gibbons price" with value "<catalogPrice>" in add series form
+        And I submit add series form
+       Then I see that field "Michel price" has error "Invalid value" in add series form
+       Then I see that field "Scott price" has error "Invalid value" in add series form
+       Then I see that field "Yvert price" has error "Invalid value" in add series form
+       Then I see that field "Gibbons price" has error "Invalid value" in add series form
+    Examples:
+          | catalogPrice |
+          | 0            |
+          | -1           |
+          | NaN          |

@@ -81,11 +81,23 @@ public class AddSeriesPage {
 	@FindBy(id = "michelNumbers.errors")
 	private WebElement michelNumbersErrorMessage;
 	
+	@FindBy(id = "michelPrice")
+	private WebElement michelPriceField;
+	
+	@FindBy(id = "michelPrice.errors")
+	private WebElement michelPriceErrorMessage;
+	
 	@FindBy(id = "scottNumbers")
 	private WebElement scottNumbersField;
 	
 	@FindBy(id = "scottNumbers.errors")
 	private WebElement scottNumbersErrorMessage;
+	
+	@FindBy(id = "scottPrice")
+	private WebElement scottPriceField;
+	
+	@FindBy(id = "scottPrice.errors")
+	private WebElement scottPriceErrorMessage;
 	
 	@FindBy(id = "yvertNumbers")
 	private WebElement yvertNumbersField;
@@ -93,11 +105,23 @@ public class AddSeriesPage {
 	@FindBy(id = "yvertNumbers.errors")
 	private WebElement yvertNumbersErrorMessage;
 	
+	@FindBy(id = "yvertPrice")
+	private WebElement yvertPriceField;
+	
+	@FindBy(id = "yvertPrice.errors")
+	private WebElement yvertPriceErrorMessage;
+	
 	@FindBy(id = "gibbonsNumbers")
 	private WebElement gibbonsNumbersField;
 	
 	@FindBy(id = "gibbonsNumbers.errors")
 	private WebElement gibbonsNumbersErrorMessage;
+	
+	@FindBy(id = "gibbonsPrice")
+	private WebElement gibbonsPriceField;
+	
+	@FindBy(id = "gibbonsPrice.errors")
+	private WebElement gibbonsPriceErrorMessage;
 	
 	@FindBy(id = "add-series-btn")
 	private WebElement addSeriesButton;
@@ -191,12 +215,20 @@ public class AddSeriesPage {
 				return toErrorMessage ? imageErrorMessage : imageField;
 			case "Michel":
 				return toErrorMessage ? michelNumbersErrorMessage : michelNumbersField;
+			case "Michel price":
+				return toErrorMessage ? michelPriceErrorMessage : michelPriceField;
 			case "Scott":
 				return toErrorMessage ? scottNumbersErrorMessage : scottNumbersField;
+			case "Scott price":
+				return toErrorMessage ? scottPriceErrorMessage : scottPriceField;
 			case "Yvert":
 				return toErrorMessage ? yvertNumbersErrorMessage : yvertNumbersField;
+			case "Yvert price":
+				return toErrorMessage ? yvertPriceErrorMessage : yvertPriceField;
 			case "Gibbons":
 				return toErrorMessage ? gibbonsNumbersErrorMessage : gibbonsNumbersField;
+			case "Gibbons price":
+				return toErrorMessage ? gibbonsPriceErrorMessage : gibbonsPriceField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);
 		}
