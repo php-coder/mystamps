@@ -130,23 +130,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void catalogNumbersShouldRejectInvalidValues(String numbers, String msg) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasError(msg);
-		assertThat(page).field("scottNumbers").hasError(msg);
-		assertThat(page).field("yvertNumbers").hasError(msg);
-		assertThat(page).field("gibbonsNumbers").hasError(msg);
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
 	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
 		page.showCatalogNumbers();
@@ -357,24 +340,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "invalidCatalogNumbers")
-	public Object[][] getInvalidCatalogNumbers() {
-		String expectedErrorMessage =
-			tr("ru.mystamps.web.validation.jsr303.CatalogNumbers.message");
-		
-		return new Object[][] {
-			{"t", expectedErrorMessage},
-			{"t,t", expectedErrorMessage},
-			{",1", expectedErrorMessage},
-			{"1,", expectedErrorMessage},
-			{"1,,2", expectedErrorMessage},
-			{"0", expectedErrorMessage},
-			{"05", expectedErrorMessage},
-			{"1,09", expectedErrorMessage},
-			{"10000", expectedErrorMessage}
-		};
 	}
 	
 	@DataProvider(name = "invalidCatalogPrices")

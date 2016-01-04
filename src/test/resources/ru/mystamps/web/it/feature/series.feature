@@ -54,3 +54,28 @@ Feature: User or admin add series
           | 7,8            |
           | 71, 81, 91     |
           | 1000           |
+
+  Scenario Outline: Catalog numbers should reject invalid values
+      Given As administrator
+       When I open add series page
+        And I show up "Add information from stamps catalogues" section at add series page
+        And I fill field "Michel" with value "<catalogNumbers>" in add series form
+        And I fill field "Scott" with value "<catalogNumbers>" in add series form
+        And I fill field "Yvert" with value "<catalogNumbers>" in add series form
+        And I fill field "Gibbons" with value "<catalogNumbers>" in add series form
+        And I submit add series form
+       Then I see that field "Michel" has error "Value must be comma delimited numbers" in add series form
+       Then I see that field "Scott" has error "Value must be comma delimited numbers" in add series form
+       Then I see that field "Yvert" has error "Value must be comma delimited numbers" in add series form
+       Then I see that field "Gibbons" has error "Value must be comma delimited numbers" in add series form
+    Examples:
+          | catalogNumbers |
+          | t              |
+          | t,t            |
+          | ,1             |
+          | 1,             |
+          | 1,,2           |
+          | 0              |
+          | 05             |
+          | 1,09           |
+          | 10000          |
