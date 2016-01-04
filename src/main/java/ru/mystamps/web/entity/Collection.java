@@ -53,7 +53,7 @@ public class Collection {
 	
 	@ManyToMany
 	@JoinTable(
-		joinColumns = @JoinColumn(name = "collection_id"), 
+		joinColumns = @JoinColumn(name = "collection_id"),
 		inverseJoinColumns = @JoinColumn(name = "series_id"),
 		uniqueConstraints = @UniqueConstraint(
 			name = "uc_collections_series_collection_id_series_id",
