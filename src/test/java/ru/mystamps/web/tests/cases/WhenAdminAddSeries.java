@@ -133,15 +133,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldBeANumber() {
-		page.fillQuantity("NaN");
-		
-		page.submit();
-		
-		assertThat(page).field("quantity").hasError(tr("typeMismatch"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void quantityShouldBeNotLessThanLimit() {
 		page.fillQuantity(String.valueOf(MIN_STAMPS_IN_SERIES - 1));
 		

@@ -23,6 +23,13 @@ Feature: User or admin add series
         And I see that field "Quantity" has error "Value must not be empty" in add series form
         And I see that field "Image" has error "Value must not be empty" in add series form
 
+  Scenario: Quantity should be a number
+      Given As administrator
+       When I open add series page
+        And I fill field "Quantity" with value "NaN" in add series form
+        And I submit add series form
+       And  I see that field "Quantity" has error "Invalid value" in add series form
+
   Scenario Outline: Catalog numbers should accept valid values
       Given As administrator
        When I open add series page
