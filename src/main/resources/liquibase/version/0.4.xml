@@ -11,5 +11,6 @@
 	<include file="0.4/2015-10-14--http-method.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2015-11-13--nullable_columns.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-01-02--non_unique_catalog_numbers.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-01-04--unique_series_in_collection.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

@@ -28,6 +28,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +52,14 @@ public class Collection {
 	private User owner;
 	
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "collection_id"))
+	@JoinTable(
+		joinColumns = @JoinColumn(name = "collection_id"), 
+		inverseJoinColumns = @JoinColumn(name = "series_id"),
+		uniqueConstraints = @UniqueConstraint(
+			name = "uc_collections_series_collection_id_series_id",
+			columnNames = { "collection_id", "series_id" }
+		)
+	)
 	private Set<Series> series;
 	
 	@Column(length = SLUG_LENGTH, nullable = false)
