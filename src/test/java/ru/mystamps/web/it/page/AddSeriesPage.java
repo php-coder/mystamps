@@ -173,6 +173,10 @@ public class AddSeriesPage {
 		return fieldNameToErrorMessage(fieldName).getText();
 	}
 	
+	public String getValueByFieldName(String fieldName) {
+		return fieldNameToField(fieldName).getAttribute("value");
+	}
+	
 	public List<String> getValuesByFieldName(String fieldName) {
 		if ("Country".equals(fieldName)) {
 			return getCountryFieldValues();

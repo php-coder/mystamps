@@ -163,16 +163,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void commentShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.showComment();
-		page.fillComment(" example comment ");
-		
-		page.submit();
-		
-		assertThat(page).field("comment").hasValue("example comment");
-	}
-	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
 		String expectedCategoryName = validCategoryName;
