@@ -123,6 +123,15 @@ public class AddSeriesPage {
 	@FindBy(id = "gibbonsPrice.errors")
 	private WebElement gibbonsPriceErrorMessage;
 	
+	@FindBy(id = "add-comment-link")
+	private WebElement commentLink;
+	
+	@FindBy(id = "comment")
+	private WebElement commentField;
+	
+	@FindBy(id = "comment.errors")
+	private WebElement commentErrorMessage;
+	
 	@FindBy(id = "add-series-btn")
 	private WebElement addSeriesButton;
 	
@@ -139,6 +148,9 @@ public class AddSeriesPage {
 		switch (section) {
 			case "Add information from stamps catalogues":
 				catalogNumbersLink.click();
+				break;
+			case "Add comment":
+				commentLink.click();
 				break;
 			default:
 				throw new IllegalStateException("Unknown section name: " + section);
@@ -229,6 +241,8 @@ public class AddSeriesPage {
 				return toErrorMessage ? gibbonsNumbersErrorMessage : gibbonsNumbersField;
 			case "Gibbons price":
 				return toErrorMessage ? gibbonsPriceErrorMessage : gibbonsPriceField;
+			case "Comment":
+				return toErrorMessage ? commentErrorMessage : commentField;
 			default:
 				throw new IllegalStateException("Unknown field name: " + fieldName);
 		}

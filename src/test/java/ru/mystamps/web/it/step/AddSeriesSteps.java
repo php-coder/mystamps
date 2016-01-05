@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.it.step;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.java.en.And;
@@ -28,6 +30,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 
 public class AddSeriesSteps {
 	
@@ -51,6 +55,16 @@ public class AddSeriesSteps {
 	@And("^I fill field \"([^\"]*)\" with value \"([^\"]*)\" in add series form$")
 	public void fillField(String fieldName, String value) {
 		page.fillFieldByName(fieldName, value);
+	}
+	
+	@And("^I fill field \"([^\"]*)\" with too long text in add series form$")
+	public void fillFieldWithLongText(String fieldName) {
+		if (!"Comment".equals(fieldName)) {
+			throw new IllegalStateException("Unknown field " + fieldName);
+		}
+		
+		String veryLongText = StringUtils.repeat("x", MAX_SERIES_COMMENT_LENGTH + 1);
+		page.fillFieldByName(fieldName, veryLongText);
 	}
 	
 	@And("^I show up \"([^\"]*)\" section at add series page$")

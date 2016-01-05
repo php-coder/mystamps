@@ -98,3 +98,11 @@ Feature: User or admin add series
           | 0            |
           | -1           |
           | NaN          |
+
+  Scenario: Comment should not be too long
+      Given As administrator
+       When I open add series page
+        And I show up "Add comment" section at add series page
+        And I fill field "Comment" with too long text in add series form
+        And I submit add series form
+        And I see that field "Comment" has error "Value is greater than allowable maximum of 255 characters" in add series form
