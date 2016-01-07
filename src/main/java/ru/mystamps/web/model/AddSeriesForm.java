@@ -38,12 +38,15 @@ import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.ImageFile;
+import ru.mystamps.web.validation.jsr303.MaxFileSize;
+import ru.mystamps.web.validation.jsr303.MaxFileSize.Unit;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 import ru.mystamps.web.validation.jsr303.NotNullIfFirstField;
 import ru.mystamps.web.validation.jsr303.Price;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
+import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 import static ru.mystamps.web.validation.ValidationRules.MAX_MONTHS_IN_YEAR;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
@@ -118,6 +121,7 @@ public class AddSeriesForm implements AddSeriesDto {
 	@NotNull
 	@NotEmptyFilename(groups = Image1Checks.class)
 	@NotEmptyFile(groups = Image2Checks.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kb, groups = Image3Checks.class)
 	@ImageFile(groups = Image3Checks.class)
 	private MultipartFile image;
 	
