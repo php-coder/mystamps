@@ -55,6 +55,9 @@ public final class ValidationRules {
 	public static final int MAX_SERIES_COMMENT_LENGTH = Series.COMMENT_LENGTH;
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	
+	/** Maximum uploading image size in kilobytes. */
+	public static final long MAX_IMAGE_SIZE = 500;
+	
 	public static final int MAX_DAYS_IN_MONTH = 31;
 	public static final int MAX_MONTHS_IN_YEAR = 12;
 	

@@ -27,8 +27,12 @@ import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.validation.jsr303.ImageFile;
+import ru.mystamps.web.validation.jsr303.MaxFileSize;
+import ru.mystamps.web.validation.jsr303.MaxFileSize.Unit;
 import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
+
+import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 
 @Getter
 @Setter
@@ -37,6 +41,7 @@ public class AddImageForm implements AddImageDto {
 	@NotNull
 	@NotEmptyFilename(groups = Image1Checks.class)
 	@NotEmptyFile(groups = Image2Checks.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Image3Checks.class)
 	@ImageFile(groups = Image3Checks.class)
 	private MultipartFile image;
 	
