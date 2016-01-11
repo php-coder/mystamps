@@ -30,7 +30,7 @@ import ru.mystamps.web.service.dto.AddSeriesDto;
  * @author Sergey Chechenev
  */
 public class ReleaseDateIsNotInFutureValidator
-		implements ConstraintValidator<ReleaseDateIsNotInFuture, AddSeriesDto> {
+	implements ConstraintValidator<ReleaseDateIsNotInFuture, AddSeriesDto> {
 	
 	@Override
 	public void initialize(ReleaseDateIsNotInFuture annotation) {

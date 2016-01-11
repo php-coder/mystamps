@@ -67,7 +67,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 		groups = AddSeriesForm.ReleaseDate1Checks.class
 	)
 })
-@ReleaseDateIsNotInFuture (groups = AddSeriesForm.ReleaseDate2Checks.class)
+@ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate2Checks.class)
 public class AddSeriesForm implements AddSeriesDto {
 	
 	// FIXME: change type to SelectEntityDto or plain Integer
