@@ -1,15 +1,13 @@
 language: java
+
 before_script:
   - npm install -g bootlint
+
 script:
-  - mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning | egrep -v '^\[INFO\] Download(ing|ed):' | tee cs.log; ! fgrep -qs '[ERROR]' cs.log
-  - mvn --batch-mode pmd:check | egrep -v '^\[INFO\] Download(ing|ed):' | tee pmd.log; ! fgrep -qs '[ERROR]' pmd.log
-  - mvn --batch-mode license:check | egrep -v '^\[INFO\] Download(ing|ed):' | tee licence.log; ! fgrep -qs '[ERROR]' licence.log
-  - find src -type f -name '*.html' | xargs bootlint
-  - mvn --batch-mode verify | egrep -v '^\[INFO\] Download(ing|ed):' | tee verify.log; ! fgrep -qs '[ERROR]' verify.log
-  - mvn --batch-mode jasmine:test | egrep -v '^\[INFO\] Download(ing|ed):' | tee jasmine.log; ! fgrep -qs '[ERROR]' jasmine.log
+  - ./src/main/scripts/ci/check-build-and-verify.sh
+
 after_success:
-  - mvn --batch-mode jacoco:prepare-agent test jacoco:report coveralls:jacoco | egrep -v '^\[INFO\] Download(ing|ed):' | tee jacoco.log; ! fgrep -qs '[ERROR]' jacoco.log
+  - ./src/main/scripts/ci/publish-code-coverage.sh
 
 jdk:
   - oraclejdk8
