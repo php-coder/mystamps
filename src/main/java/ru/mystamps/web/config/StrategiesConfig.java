@@ -34,7 +34,7 @@ public interface StrategiesConfig {
 	ImagePersistenceStrategy getImagePersistenceStrategy();
 	
 	@Profile("test")
-	class TestStrategiesConfig implements StrategiesConfig {
+	class DbStrategiesConfig implements StrategiesConfig {
 		
 		@Autowired
 		private ImageDataDao imageDataDao;
@@ -47,8 +47,8 @@ public interface StrategiesConfig {
 		
 	}
 	
-	@Profile("prod")
-	class ProdStrategiesConfig implements StrategiesConfig {
+	@Profile({ "prod", "travis" })
+	class FsStrategiesConfig implements StrategiesConfig {
 		
 		@Autowired
 		private Environment env;
