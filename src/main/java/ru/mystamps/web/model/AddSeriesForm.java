@@ -44,6 +44,7 @@ import ru.mystamps.web.validation.jsr303.NotEmptyFile;
 import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
 import ru.mystamps.web.validation.jsr303.NotNullIfFirstField;
 import ru.mystamps.web.validation.jsr303.Price;
+import ru.mystamps.web.validation.jsr303.ReleaseDateIsNotInFuture;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
@@ -58,12 +59,15 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @SuppressWarnings({"PMD.TooManyFields", "PMD.AvoidDuplicateLiterals"})
 @NotNullIfFirstField.List({
 	@NotNullIfFirstField(
-		first = "month", second = "year", message = "{month.requires.year}"
+		first = "month", second = "year", message = "{month.requires.year}",
+		groups = AddSeriesForm.ReleaseDate1Checks.class
 	),
 	@NotNullIfFirstField(
-		first = "day", second = "month", message = "{day.requires.month}"
+		first = "day", second = "month", message = "{day.requires.month}",
+		groups = AddSeriesForm.ReleaseDate1Checks.class
 	)
 })
+@ReleaseDateIsNotInFuture (groups = AddSeriesForm.ReleaseDate2Checks.class)
 public class AddSeriesForm implements AddSeriesDto {
 	
 	// FIXME: change type to SelectEntityDto or plain Integer
@@ -125,6 +129,19 @@ public class AddSeriesForm implements AddSeriesDto {
 	@ImageFile(groups = Image3Checks.class)
 	private MultipartFile image;
 	
+	
+	@GroupSequence({
+		ReleaseDate1Checks.class,
+		ReleaseDate2Checks.class
+	})
+	public interface ReleaseDateChecks {
+	}
+	
+	public interface ReleaseDate1Checks {
+	}
+	
+	public interface ReleaseDate2Checks {
+	}
 	
 	@GroupSequence({
 		Image1Checks.class,

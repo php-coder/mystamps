@@ -151,7 +151,9 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
 	public String processInput(
-		@Validated({ Default.class, AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
+		@Validated({ Default.class,
+			AddSeriesForm.ReleaseDateChecks.class,
+			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
 		HttpServletRequest request,
 		User currentUser) {
