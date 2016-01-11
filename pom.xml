@@ -63,8 +63,6 @@
 		<javadoc.plugin.version>2.10.3</javadoc.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		
-		<skipTests>false</skipTests>
-		
 		<!--
 			Definitions and redefinitions of default values from spring-boot-dependencies:
 			https://github.com/spring-projects/spring-boot/blob/v1.3.0.RELEASE/spring-boot-dependencies/pom.xml
@@ -590,7 +588,6 @@
 				<configuration>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
-					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
 			
@@ -643,7 +640,6 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<skipTests>${skipTests}</skipTests>
 				</configuration>
 				<executions>
 					<execution>
