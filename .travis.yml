@@ -10,7 +10,11 @@ before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;'; fi
 
 script:
-  - ./src/main/scripts/ci/check-build-and-verify.sh
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
+    else
+      ./src/main/scripts/ci/check-build-and-verify.sh;
+    fi
 
 after_success:
   - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
