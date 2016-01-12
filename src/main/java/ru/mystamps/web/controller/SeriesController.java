@@ -63,12 +63,13 @@ import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
+import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
+
 @Controller
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 public class SeriesController {
 	
-	private static final Integer SINCE_YEAR     = 1840;
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
 	
 	private static final Map<Integer, Integer> YEARS;
@@ -80,7 +81,7 @@ public class SeriesController {
 	
 	static {
 		YEARS = new LinkedHashMap<>();
-		for (Integer i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
+		for (Integer i = CURRENT_YEAR; i >= MIN_RELEASE_YEAR; i--) {
 			YEARS.put(i, i);
 		}
 	}

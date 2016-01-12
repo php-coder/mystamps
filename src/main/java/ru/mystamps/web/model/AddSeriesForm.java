@@ -51,6 +51,7 @@ import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 import static ru.mystamps.web.validation.ValidationRules.MAX_MONTHS_IN_YEAR;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
+import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
 @Getter
@@ -67,7 +68,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 		groups = AddSeriesForm.ReleaseDate1Checks.class
 	)
 })
-@ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate2Checks.class)
+@ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
 public class AddSeriesForm implements AddSeriesDto {
 	
 	// FIXME: change type to SelectEntityDto or plain Integer
@@ -85,6 +86,11 @@ public class AddSeriesForm implements AddSeriesDto {
 	@Range(min = 1, max = MAX_MONTHS_IN_YEAR, message = "{month.invalid}")
 	private Integer month;
 	
+	@Min(
+		value = MIN_RELEASE_YEAR,
+		message = "{series.too-early-release-year}",
+		groups = ReleaseDate2Checks.class
+	)
 	private Integer year;
 	
 	@NotNull
@@ -132,7 +138,8 @@ public class AddSeriesForm implements AddSeriesDto {
 	
 	@GroupSequence({
 		ReleaseDate1Checks.class,
-		ReleaseDate2Checks.class
+		ReleaseDate2Checks.class,
+		ReleaseDate3Checks.class
 	})
 	public interface ReleaseDateChecks {
 	}
@@ -141,6 +148,9 @@ public class AddSeriesForm implements AddSeriesDto {
 	}
 	
 	public interface ReleaseDate2Checks {
+	}
+	
+	public interface ReleaseDate3Checks {
 	}
 	
 	@GroupSequence({
