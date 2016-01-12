@@ -19,7 +19,7 @@ script:
     fi
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
+  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' -a "$SPRING_PROFILES_ACTIVE" = 'test' ]; then
       ./src/main/scripts/ci/publish-code-coverage.sh;
     fi
 
