@@ -7,7 +7,9 @@ env:
 
 before_script:
   - npm install -g bootlint
-  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;'; fi
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+      mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
+    fi
 
 script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
