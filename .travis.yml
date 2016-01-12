@@ -13,7 +13,9 @@ script:
   - ./src/main/scripts/ci/check-build-and-verify.sh
 
 after_success:
-  - ./src/main/scripts/ci/publish-code-coverage.sh
+  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
+      ./src/main/scripts/ci/publish-code-coverage.sh;
+    fi
 
 jdk:
   - oraclejdk8
