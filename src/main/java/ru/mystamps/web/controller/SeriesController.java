@@ -19,11 +19,12 @@ package ru.mystamps.web.controller;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +59,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
@@ -308,81 +310,81 @@ public class SeriesController {
 	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
 	public String findSeriesByMichel(
 		@PathVariable("num") String michelNumberCode,
+		Model model,
+		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (michelNumberCode == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		Optional<Integer> seriesId = seriesService.findSeriesIdByMichelNumber(michelNumberCode);
-		if (!seriesId.isPresent()) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+		return findSeriesByCatalogNumber(michelNumberCode, "michel", model, userLocale, response);
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
 	public String findSeriesByScott(
 		@PathVariable("num") String scottNumberCode,
+		Model model,
+		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (scottNumberCode == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		Optional<Integer> seriesId = seriesService.findSeriesIdByScottNumber(scottNumberCode);
-		if (!seriesId.isPresent()) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+		return findSeriesByCatalogNumber(scottNumberCode, "scott", model, userLocale, response);
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
 	public String findSeriesByYvert(
 		@PathVariable("num") String yvertNumberCode,
+		Model model,
+		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (yvertNumberCode == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		Optional<Integer> seriesId = seriesService.findSeriesIdByYvertNumber(yvertNumberCode);
-		if (!seriesId.isPresent()) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+		return findSeriesByCatalogNumber(yvertNumberCode, "yvert", model, userLocale, response);
 	}
 	
 	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
 	public String findSeriesByGibbons(
 		@PathVariable("num") String gibbonsNumberCode,
+		Model model,
+		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (gibbonsNumberCode == null) {
+		return findSeriesByCatalogNumber(gibbonsNumberCode, "gibbons", model, userLocale, response);
+	}
+	
+	private String findSeriesByCatalogNumber(
+			String catalogNumber,
+			String catalogName,
+			Model model,
+			Locale userLocale,
+			HttpServletResponse response)
+			throws IOException {
+		
+		if (catalogNumber == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		Optional<Integer> seriesId = seriesService.findSeriesIdByGibbonsNumber(gibbonsNumberCode);
-		if (!seriesId.isPresent()) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		List<SeriesInfoDto> series;
+		switch (catalogName) {
+			case "michel":
+				series = seriesService.findByMichelNumber(catalogNumber, lang);
+				break;
+			case "scott":
+				series = seriesService.findByScottNumber(catalogNumber, lang);
+				break;
+			case "yvert":
+				series = seriesService.findByYvertNumber(catalogNumber, lang);
+				break;
+			case "gibbons":
+				series = seriesService.findByGibbonsNumber(catalogNumber, lang);
+				break;
+			default:
+				series = Collections.emptyList();
 		}
+		model.addAttribute("searchResults", series);
 		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId.get());
+		return "series/search_result";
 	}
 	
 	private static boolean isAllowedToAddingImages(Series series) {
