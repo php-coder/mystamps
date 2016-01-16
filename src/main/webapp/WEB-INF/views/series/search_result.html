@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="robots" content="noindex" />
+		<title th:text="|MyStamps: #{t_search_results}|">MyStamps: search results</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div id="logo" class="col-sm-9 vcenter">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div><!--
+				--><div class="col-sm-1 vcenter">
+					<div class="dropdown">
+						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
+							English
+						</a>
+						
+						<!--/*/
+						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
+							Russian
+						</a>
+						/*/-->
+						
+						<span class="caret"></span>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="dropdown-entry-lang">
+									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
+								</div>
+							</li>
+							<!--/*/
+							<li>
+								<div class="dropdown-entry-lang">
+									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
+									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+								</div>
+							</li>
+							/*/-->
+						</ul>
+					</div>
+				</div><!--
+				--><div id="user_bar" class="col-sm-2 vcenter">
+					<ul class="list-unstyled">
+						
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="glyphicon glyphicon-user"></i>
+							<a sec:authentication="principal.user.name"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
+									John Doe
+							</a>
+						</li>
+						/*/-->
+						
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+							</form>
+						</li>
+						/*/-->
+						
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12" th:with="search_results=#{t_search_results}">
+					<h3 class="text-center" th:text="${#strings.capitalize(search_results)}">
+						Search results
+					</h3>
+					<div class="row">
+						<div class="col-sm-4">
+							<!--/*/
+							<div th:if="${#lists.isEmpty(searchResults)}" th:text="#{t_no_series_found}" th:remove="tag">
+								No series found
+							</div>
+							/*/-->
+							<ul th:if="${not #lists.isEmpty(searchResults)}" th:remove="all-but-first">
+								<li th:each="series : ${searchResults}">
+									<span th:if="${series.category.id != null}" th:remove="tag">
+										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+									</span>
+									<span th:if="${series.country.id != null}" th:remove="tag">
+										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+									</span>
+									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>
+										<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
+										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+									</a>
+								</li>
+								<li>
+									<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+									<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+									<a href="../series/info.html">
+										22&nbsp;item(s)
+									</a>
+								</li>
+								<li>
+									<a href="../category/info.html">Animals</a>&nbsp;&raquo;
+									<a href="../country/info.html">Italy</a>&nbsp;&raquo;
+									<a href="../series/info.html">
+										1983, 5&nbsp;item(s)
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<footer class="col-sm-12 text-right">
+					<i class="glyphicon glyphicon-envelope"></i>
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2016
+				</footer>
+			</div>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>

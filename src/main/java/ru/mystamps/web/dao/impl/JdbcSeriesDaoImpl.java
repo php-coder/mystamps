@@ -19,13 +19,12 @@ package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -39,7 +38,12 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({
+	"PMD.AvoidDuplicateLiterals",
+	"PMD.TooManyMethods",
+	"PMD.TooManyFields",
+	"PMD.LongVariable"
+})
 @RequiredArgsConstructor
 public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
@@ -53,6 +57,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.find_last_added}")
 	private String findLastAddedSeriesSql;
+	
+	@Value("${series.find_by_ids}")
+	private String findByIdsSql;
 	
 	@Value("${series.find_by_category_id}")
 	private String findByCategoryIdSql;
@@ -75,17 +82,17 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.count_stamps_of_collection}")
 	private String countStampsOfCollectionSql;
 	
-	@Value("${series.find_series_id_by_michel_number}")
-	private String findSeriesIdByMichelNumberSql;
+	@Value("${series.find_series_ids_by_michel_number}")
+	private String findSeriesIdsByMichelNumberSql;
 	
-	@Value("${series.find_series_id_by_scott_number}")
-	private String findSeriesIdByScottNumberSql;
+	@Value("${series.find_series_ids_by_scott_number}")
+	private String findSeriesIdsByScottNumberSql;
 	
-	@Value("${series.find_series_id_by_yvert_number}")
-	private String findSeriesIdByYvertNumberSql;
+	@Value("${series.find_series_ids_by_yvert_number}")
+	private String findSeriesIdsByYvertNumberSql;
 	
-	@Value("${series.find_series_id_by_gibbons_number}")
-	private String findSeriesIdByGibbonsNumberSql;
+	@Value("${series.find_series_ids_by_gibbons_number}")
+	private String findSeriesIdsByGibbonsNumberSql;
 	
 	@Override
 	public Integer add(AddSeriesDbDto series) {
@@ -146,6 +153,18 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	public List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_ids", seriesIds);
+		params.put("lang", lang);
+
+		return jdbcTemplate.query(findByIdsSql, params, RowMappers::forSeriesInfoDto);
+	}
+
 	@Override
 	public Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang) {
 		Map<String, Object> params = new HashMap<>();
@@ -211,63 +230,39 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	}
 	
 	@Override
-	public Optional<Integer> findSeriesIdByMichelNumberCode(String michelNumber) {
-		try {
-			Integer seriesId = jdbcTemplate.queryForObject(
-				findSeriesIdByMichelNumberSql,
-				Collections.singletonMap("michel_number", michelNumber),
-				Integer.class
-			);
-			return Optional.of(seriesId);
-			
-		} catch (EmptyResultDataAccessException ignored) {
-			return Optional.empty();
-		}
+	public List<Integer> findSeriesIdsByMichelNumberCode(String michelNumber) {
+		return jdbcTemplate.queryForList(
+			findSeriesIdsByMichelNumberSql,
+			Collections.singletonMap("michel_number", michelNumber),
+			Integer.class
+		);
 	}
 	
 	@Override
-	public Optional<Integer> findSeriesIdByScottNumberCode(String scottNumber) {
-		try {
-			Integer seriesId = jdbcTemplate.queryForObject(
-				findSeriesIdByScottNumberSql,
-				Collections.singletonMap("scott_number", scottNumber),
-				Integer.class
-			);
-			return Optional.of(seriesId);
-			
-		} catch (EmptyResultDataAccessException ignored) {
-			return Optional.empty();
-		}
+	public List<Integer> findSeriesIdsByScottNumberCode(String scottNumber) {
+		return jdbcTemplate.queryForList(
+			findSeriesIdsByScottNumberSql,
+			Collections.singletonMap("scott_number", scottNumber),
+			Integer.class
+		);
 	}
 	
 	@Override
-	public Optional<Integer> findSeriesIdByYvertNumberCode(String yvertNumber) {
-		try {
-			Integer seriesId = jdbcTemplate.queryForObject(
-				findSeriesIdByYvertNumberSql,
-				Collections.singletonMap("yvert_number", yvertNumber),
-				Integer.class
-			);
-			return Optional.of(seriesId);
-			
-		} catch (EmptyResultDataAccessException ignored) {
-			return Optional.empty();
-		}
+	public List<Integer> findSeriesIdsByYvertNumberCode(String yvertNumber) {
+		return jdbcTemplate.queryForList(
+			findSeriesIdsByYvertNumberSql,
+			Collections.singletonMap("yvert_number", yvertNumber),
+			Integer.class
+		);
 	}
 	
 	@Override
-	public Optional<Integer> findSeriesIdByGibbonsNumberCode(String gibbonsNumber) {
-		try {
-			Integer seriesId = jdbcTemplate.queryForObject(
-				findSeriesIdByGibbonsNumberSql,
-				Collections.singletonMap("gibbons_number", gibbonsNumber),
-				Integer.class
-			);
-			return Optional.of(seriesId);
-			
-		} catch (EmptyResultDataAccessException ignored) {
-			return Optional.empty();
-		}
+	public List<Integer> findSeriesIdsByGibbonsNumberCode(String gibbonsNumber) {
+		return jdbcTemplate.queryForList(
+			findSeriesIdsByGibbonsNumberSql,
+			Collections.singletonMap("gibbons_number", gibbonsNumber),
+			Integer.class
+		);
 	}
 	
 }

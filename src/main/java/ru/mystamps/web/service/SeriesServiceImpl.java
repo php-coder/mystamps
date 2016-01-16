@@ -17,8 +17,9 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Collections;
 import java.util.Date;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
@@ -201,41 +202,61 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Integer> findSeriesIdByMichelNumber(String michelNumberCode) {
+	public List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang) {
 		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
 		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
 		
-		return seriesDao.findSeriesIdByMichelNumberCode(michelNumberCode);
+		List<Integer> seriesIds = seriesDao.findSeriesIdsByMichelNumberCode(michelNumberCode);
+		if (seriesIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Integer> findSeriesIdByScottNumber(String scottNumberCode) {
+	public List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang) {
 		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
 		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
 		
-		return seriesDao.findSeriesIdByScottNumberCode(scottNumberCode);
+		List<Integer> seriesIds = seriesDao.findSeriesIdsByScottNumberCode(scottNumberCode);
+		if (seriesIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode) {
+	public List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang) {
 		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
 		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
 		
-		return seriesDao.findSeriesIdByYvertNumberCode(yvertNumberCode);
+		List<Integer> seriesIds = seriesDao.findSeriesIdsByYvertNumberCode(yvertNumberCode);
+		if (seriesIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode) {
+	public List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang) {
 		Validate.isTrue(gibbonsNumberCode != null, "Gibbons number code must be non null");
 		Validate.isTrue(
 			!gibbonsNumberCode.trim().isEmpty(),
 			"Gibbons number code must be non empty"
 		);
 		
-		return seriesDao.findSeriesIdByGibbonsNumberCode(gibbonsNumberCode);
+		List<Integer> seriesIds = seriesDao.findSeriesIdsByGibbonsNumberCode(gibbonsNumberCode);
+		if (seriesIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
 	}
 	
 	@Override
