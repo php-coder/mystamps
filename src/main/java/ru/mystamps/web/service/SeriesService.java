@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -34,10 +34,10 @@ public interface SeriesService {
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
 	
-	Optional<Integer> findSeriesIdByMichelNumber(String michelNumberCode);
-	Optional<Integer> findSeriesIdByScottNumber(String scottNumberCode);
-	Optional<Integer> findSeriesIdByYvertNumber(String yvertNumberCode);
-	Optional<Integer> findSeriesIdByGibbonsNumber(String gibbonsNumberCode);
+	List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang);
+	List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang);
+	List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang);
+	List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang);
 	
 	Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang);
