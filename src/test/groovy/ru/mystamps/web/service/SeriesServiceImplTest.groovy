@@ -646,13 +646,13 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findSeriesIdByMichelNumber()
+	// Tests for findByMichelNumber()
 	//
 	
 	@Unroll
-	def "findSeriesIdByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
+	def "findByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
 		when:
-			service.findSeriesIdByMichelNumber(michelNumberCode)
+			service.findByMichelNumber(michelNumberCode, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
@@ -662,14 +662,46 @@ class SeriesServiceImplTest extends Specification {
 			' '              | _
 	}
 	
-	def "findSeriesIdByMichelNumber() should pass argument to dao and return result"() {
+	def "findByMichelNumber() should find series ids"() {
 		given:
-			Optional<Integer> expectedResult = Optional.of(1);
+			String expectedMichelNumber = '5'
 		when:
-			Optional<Integer> result = service.findSeriesIdByMichelNumber('5');
+			service.findByMichelNumber(expectedMichelNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdByMichelNumberCode({ String code ->
-				assert code == '5'
+			1 * seriesDao.findSeriesIdsByMichelNumberCode({ String michelNumber ->
+				assert michelNumber == expectedMichelNumber
+				return true
+			}) >> []
+	}
+	
+	def "findByMichelNumber() shouldn't try to find series info if there are no series"() {
+		given:
+			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findByMichelNumber('5', 'en')
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def "findByMichelNumber() should find and return series info"() {
+		given:
+			String expectedLang = 'en'
+		and:
+			List<Integer> expectedSeriesIds = [ 1 ] as List
+		and:
+			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> expectedSeriesIds
+		and:
+			List<SeriesInfoDto> expectedResult = [] as List
+		when:
+			List<SeriesInfoDto> result = service.findByMichelNumber('5', expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
+				return true
+			}, { String lang ->
+				assert lang == expectedLang
 				return true
 			}) >> expectedResult
 		and:
@@ -677,13 +709,13 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findSeriesIdByScottNumber()
+	// Tests for findByScottNumber()
 	//
 	
 	@Unroll
-	def "findSeriesIdByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
+	def "findByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
 		when:
-			service.findSeriesIdByScottNumber(scottNumberCode)
+			service.findByScottNumber(scottNumberCode, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
@@ -693,14 +725,46 @@ class SeriesServiceImplTest extends Specification {
 			' '             | _
 	}
 	
-	def "findSeriesIdByScottNumber() should pass argument to dao and return result"() {
+	def "findByScottNumber() should find series ids"() {
 		given:
-			Optional<Integer> expectedResult = Optional.of(1);
+			String expectedScottNumber = '5'
 		when:
-			Optional<Integer> result = service.findSeriesIdByScottNumber('5');
+			service.findByScottNumber(expectedScottNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdByScottNumberCode({ String code ->
-				assert code == '5'
+			1 * seriesDao.findSeriesIdsByScottNumberCode({ String scottNumber ->
+				assert scottNumber == expectedScottNumber
+				return true
+			}) >> []
+	}
+	
+	def "findByScottNumber() shouldn't try to find series info if there are no series"() {
+		given:
+			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findByScottNumber('5', 'en')
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def "findByScottNumber() should find and return series info"() {
+		given:
+			String expectedLang = 'en'
+		and:
+			List<Integer> expectedSeriesIds = [ 1 ] as List
+		and:
+			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> expectedSeriesIds
+		and:
+			List<SeriesInfoDto> expectedResult = [] as List
+		when:
+			List<SeriesInfoDto> result = service.findByScottNumber('5', expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
+				return true
+			}, { String lang ->
+				assert lang == expectedLang
 				return true
 			}) >> expectedResult
 		and:
@@ -708,13 +772,13 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findSeriesIdByYvertNumber()
+	// Tests for findByYvertNumber()
 	//
 	
 	@Unroll
-	def "findSeriesIdByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
+	def "findByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
 		when:
-			service.findSeriesIdByYvertNumber(yvertNumberCode)
+			service.findByYvertNumber(yvertNumberCode, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
@@ -724,14 +788,46 @@ class SeriesServiceImplTest extends Specification {
 			' '             | _
 	}
 	
-	def "findSeriesIdByYvertNumber() should pass argument to dao and return result"() {
+	def "findByYvertNumber() should find series ids"() {
 		given:
-			Optional<Integer> expectedResult = Optional.of(1);
+			String expectedYvertNumber = '5'
 		when:
-			Optional<Integer> result = service.findSeriesIdByYvertNumber('5');
+			service.findByYvertNumber(expectedYvertNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdByYvertNumberCode({ String code ->
-				assert code == '5'
+			1 * seriesDao.findSeriesIdsByYvertNumberCode({ String yvertNumber ->
+				assert yvertNumber == expectedYvertNumber
+				return true
+			}) >> []
+	}
+	
+	def "findByYvertNumber() shouldn't try to find series info if there are no series"() {
+		given:
+			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findByYvertNumber('5', 'en')
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def "findByYvertNumber() should find and return series info"() {
+		given:
+			String expectedLang = 'en'
+		and:
+			List<Integer> expectedSeriesIds = [ 1 ] as List
+		and:
+			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> expectedSeriesIds
+		and:
+			List<SeriesInfoDto> expectedResult = [] as List
+		when:
+			List<SeriesInfoDto> result = service.findByYvertNumber('5', expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
+				return true
+			}, { String lang ->
+				assert lang == expectedLang
 				return true
 			}) >> expectedResult
 		and:
@@ -739,13 +835,13 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findSeriesIdByGibbonsNumber()
+	// Tests for findByGibbonsNumber()
 	//
 	
 	@Unroll
-	def "findSeriesIdByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
+	def "findByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
 		when:
-			service.findSeriesIdByGibbonsNumber(gibbonsNumberCode)
+			service.findByGibbonsNumber(gibbonsNumberCode, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
@@ -755,14 +851,46 @@ class SeriesServiceImplTest extends Specification {
 			' '               | _
 	}
 	
-	def "findSeriesIdByGibbonsNumber() should pass argument to dao and return result"() {
+	def "findByGibbonsNumber() should find series ids"() {
 		given:
-			Optional<Integer> expectedResult = Optional.of(1);
+			String expectedGibbonsNumber = '5'
 		when:
-			Optional<Integer> result = service.findSeriesIdByGibbonsNumber('5');
+			service.findByGibbonsNumber(expectedGibbonsNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdByGibbonsNumberCode({ String code ->
-				assert code == '5'
+			1 * seriesDao.findSeriesIdsByGibbonsNumberCode({ String gibbonsNumber ->
+				assert gibbonsNumber == expectedGibbonsNumber
+				return true
+			}) >> []
+	}
+	
+	def "findByGibbonsNumber() shouldn't try to find series info if there are no series"() {
+		given:
+			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', 'en')
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def "findByGibbonsNumber() should find and return series info"() {
+		given:
+			String expectedLang = 'en'
+		and:
+			List<Integer> expectedSeriesIds = [ 1 ] as List
+		and:
+			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> expectedSeriesIds
+		and:
+			List<SeriesInfoDto> expectedResult = [] as List
+		when:
+			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
+				return true
+			}, { String lang ->
+				assert lang == expectedLang
 				return true
 			}) >> expectedResult
 		and:
