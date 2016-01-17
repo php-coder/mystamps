@@ -664,29 +664,25 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByMichelNumber() should find series ids"() {
 		given:
-			String michelNumberCode = '5'
+			String expectedMichelNumber = '5'
 		when:
-			service.findByMichelNumber(michelNumberCode, 'en')
+			service.findByMichelNumber(expectedMichelNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByMichelNumberCode({ String code ->
-				assert code == michelNumberCode
+			1 * seriesDao.findSeriesIdsByMichelNumberCode({ String michelNumber ->
+				assert michelNumber == expectedMichelNumber
 				return true
 			}) >> []
 	}
 	
 	def "findByMichelNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			List<SeriesInfoDto> expectedResult = [] as List
-		and:
-			List<Integer> expectedSeriesIds = [] as List
-		and:
-			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> expectedSeriesIds
+			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByMichelNumber('5', 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
-			result == expectedResult
+			result == []
 	}
 	
 	def "findByMichelNumber() should find and return series info"() {
@@ -701,8 +697,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByMichelNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> ids ->
-				assert ids == expectedSeriesIds
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
 				return true
 			}, { String lang ->
 				assert lang == expectedLang
@@ -731,29 +727,25 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByScottNumber() should find series ids"() {
 		given:
-			String scottNumberCode = '5'
+			String expectedScottNumber = '5'
 		when:
-			service.findByScottNumber(scottNumberCode, 'en')
+			service.findByScottNumber(expectedScottNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByScottNumberCode({ String code ->
-				assert code == scottNumberCode
+			1 * seriesDao.findSeriesIdsByScottNumberCode({ String scottNumber ->
+				assert scottNumber == expectedScottNumber
 				return true
 			}) >> []
 	}
 	
 	def "findByScottNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			List<SeriesInfoDto> expectedResult = [] as List
-		and:
-			List<Integer> expectedSeriesIds = [] as List
-		and:
-			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> expectedSeriesIds
+			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByScottNumber('5', 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
-			result == expectedResult
+			result == []
 	}
 	
 	def "findByScottNumber() should find and return series info"() {
@@ -768,8 +760,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByScottNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> ids ->
-				assert ids == expectedSeriesIds
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
 				return true
 			}, { String lang ->
 				assert lang == expectedLang
@@ -798,29 +790,25 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByYvertNumber() should find series ids"() {
 		given:
-			String yvertNumberCode = '5'
+			String expectedYvertNumber = '5'
 		when:
-			service.findByYvertNumber(yvertNumberCode, 'en')
+			service.findByYvertNumber(expectedYvertNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByYvertNumberCode({ String code ->
-				assert code == yvertNumberCode
+			1 * seriesDao.findSeriesIdsByYvertNumberCode({ String yvertNumber ->
+				assert yvertNumber == expectedYvertNumber
 				return true
 			}) >> []
 	}
 	
 	def "findByYvertNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			List<SeriesInfoDto> expectedResult = [] as List
-		and:
-			List<Integer> expectedSeriesIds = [] as List
-		and:
-			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> expectedSeriesIds
+			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByYvertNumber('5', 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
-			result == expectedResult
+			result == []
 	}
 	
 	def "findByYvertNumber() should find and return series info"() {
@@ -835,8 +823,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByYvertNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> ids ->
-				assert ids == expectedSeriesIds
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
 				return true
 			}, { String lang ->
 				assert lang == expectedLang
@@ -865,29 +853,25 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
-			String gibbonsNumberCode = '5'
+			String expectedGibbonsNumber = '5'
 		when:
-			service.findByGibbonsNumber(gibbonsNumberCode, 'en')
+			service.findByGibbonsNumber(expectedGibbonsNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByGibbonsNumberCode({ String code ->
-				assert code == gibbonsNumberCode
+			1 * seriesDao.findSeriesIdsByGibbonsNumberCode({ String gibbonsNumber ->
+				assert gibbonsNumber == expectedGibbonsNumber
 				return true
 			}) >> []
 	}
 	
 	def "findByGibbonsNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			List<SeriesInfoDto> expectedResult = [] as List
-		and:
-			List<Integer> expectedSeriesIds = [] as List
-		and:
-			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> expectedSeriesIds
+			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
-			result == expectedResult
+			result == []
 	}
 	
 	def "findByGibbonsNumber() should find and return series info"() {
@@ -902,8 +886,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> ids ->
-				assert ids == expectedSeriesIds
+			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
+				assert seriesIds == expectedSeriesIds
 				return true
 			}, { String lang ->
 				assert lang == expectedLang
