@@ -6,7 +6,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 	
 	<!-- Workaround for http://www.xaprb.com/blog/2006/08/22/mysqls-error-1025-explained/ -->
-	<changeSet id="temporary-drop-catalog-numbers-foreign-keys" author="php-coder" context="scheme" dbms="mysql">
+	<changeSet id="temporary-drop-catalog-numbers-foreign-keys" author="php-coder" context="scheme">
 		
 		<dropForeignKeyConstraint
 			baseTableName="series_michel_catalog"
@@ -47,7 +47,7 @@
 		
 	</changeSet>
 	
-	<changeSet id="return-catalog-numbers-foreign-keys" author="php-coder" context="scheme" dbms="mysql">
+	<changeSet id="return-catalog-numbers-foreign-keys" author="php-coder" context="scheme">
 		
 		<addForeignKeyConstraint
 			baseTableName="series_michel_catalog"

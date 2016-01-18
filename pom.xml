@@ -67,7 +67,6 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<commons-pool.version>1.5.4</commons-pool.version>
 		<groovy.version>2.0.8</groovy.version>
-		<h2.version>1.4.187</h2.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<javax-mail.version>1.5.4</javax-mail.version>
 		<jetty.version>9.2.11.v20150529</jetty.version>
