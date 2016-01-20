@@ -267,7 +267,7 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-spring-core</artifactId>
+			<artifactId>togglz-spring-web</artifactId>
 			<version>${togglz.version}</version>
 			<scope>runtime</scope>
 		</dependency>
