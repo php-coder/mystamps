@@ -35,6 +35,10 @@ public enum Features implements Feature {
 	@Label("Show list of recently created collections on index page")
 	@EnabledByDefault
 	SHOW_RECENT_COLLECTIONS_ON_INDEX_PAGE,
+
+	@Label("Show search panel on index page")
+	@EnabledByDefault
+	SHOW_SEARCH_PANEL_ON_INDEX_PAGE,
 	
 	@Label("Show statistics of collection on collection page")
 	@EnabledByDefault

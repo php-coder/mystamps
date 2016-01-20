@@ -48,17 +48,12 @@ public final class Url {
 	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
-	public static final String ADD_SERIES_PAGE       = "/series/add";
+	public static final String ADD_SERIES_PAGE               = "/series/add";
 	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{id}";
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{id}";
-	public static final String INFO_SERIES_PAGE      = "/series/{id}";
-	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
-	
-	// CheckStyle: ignore WhitespaceAroundCheck for next 4 lines
-	public static final String FIND_SERIES_BY_MICHEL = "/series/michel/{num}";
-	public static final String FIND_SERIES_BY_SCOTT  = "/series/scott/{num}";
-	public static final String FIND_SERIES_BY_YVERT  = "/series/yvert/{num}";
-	public static final String FIND_SERIES_BY_GIBBONS= "/series/gibbons/{num}";
+	public static final String INFO_SERIES_PAGE              = "/series/{id}";
+	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
+	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{id}/{slug}";
@@ -121,6 +116,7 @@ public final class Url {
 		map.put("ADD_SERIES_WITH_COUNTRY_PAGE", ADD_SERIES_WITH_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
+		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		map.put("LIST_CATEGORIES_PAGE", LIST_CATEGORIES_PAGE);
