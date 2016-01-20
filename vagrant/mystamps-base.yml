@@ -1,0 +1,9 @@
+- hosts: mystamps-devel
+  user: vagrant
+  sudo: true
+
+  vars_files:
+    - vars/all
+
+  roles:
+    - role: common
