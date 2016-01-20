@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -338,53 +339,10 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
 	
-	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
-	public String findSeriesByMichel(
-		@PathVariable("num") String michelNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(michelNumberCode, "michel", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
-	public String findSeriesByScott(
-		@PathVariable("num") String scottNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(scottNumberCode, "scott", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
-	public String findSeriesByYvert(
-		@PathVariable("num") String yvertNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(yvertNumberCode, "yvert", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
-	public String findSeriesByGibbons(
-		@PathVariable("num") String gibbonsNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(gibbonsNumberCode, "gibbons", model, userLocale, response);
-	}
-	
-	private String findSeriesByCatalogNumber(
-		String catalogNumber,
-		String catalogName,
+	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)
+	public String searchSeriesByCatalog(
+		@RequestParam("catalogNumber") String catalogNumber,
+		@RequestParam("catalogName") String catalogName,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)

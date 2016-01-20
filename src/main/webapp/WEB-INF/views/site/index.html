@@ -2,7 +2,8 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -238,6 +239,32 @@
 							<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 22</p>
 							<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 84</p>
 							<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Amount of collections: 3</p>
+						</div>
+					</div>
+					<div togglz:active="SHOW_SEARCH_PANEL_ON_INDEX_PAGE" class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
+						</div>
+						<div class="panel-body">
+							<form method="post" action="../series/search_result.html"
+								th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
+								<div class="form-group">
+									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
+									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control" required="required" />
+								</div>
+								<div class="form-group">
+									<label for="catalogName" th:text="|#{t_catalog}:|">Catalog:</label>
+									<select id="catalogName" name="catalogName" class="form-control">
+										<option value="michel" th:text="#{t_michel}">Michel</option>
+										<option value="scott" th:text="#{t_scott}">Scott</option>
+										<option value="yvert" th:text="#{t_yvert}">Yvert</option>
+										<option value="gibbons" th:text="#{t_sg}">Gibbons</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="Search" th:value="#{t_search}" class="btn btn-primary" />
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
