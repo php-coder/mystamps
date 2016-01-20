@@ -23,16 +23,12 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
-
-import org.togglz.core.context.StaticFeatureManagerProvider;
-import org.togglz.core.manager.FeatureManager;
 
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
@@ -51,11 +47,7 @@ public class ApplicationBootstrap {
 		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
 		System.setProperty("slf4j.detectLoggerNameMismatch", "true");
 		
-		ConfigurableApplicationContext context =
-			SpringApplication.run(ApplicationBootstrap.class, args);
-		
-		FeatureManager featureManager = context.getBean(FeatureManager.class);
-		StaticFeatureManagerProvider.setFeatureManager(featureManager);
+		SpringApplication.run(ApplicationBootstrap.class, args);
 	}
 	
 	// TODO: remove @Qualifier and inject by type
