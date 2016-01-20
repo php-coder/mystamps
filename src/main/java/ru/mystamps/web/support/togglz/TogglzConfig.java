@@ -24,8 +24,6 @@ import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.togglz.core.manager.EnumBasedFeatureProvider;
 import org.togglz.core.spi.FeatureProvider;
 
-import ru.mystamps.web.Url;
-
 @Configuration
 public class TogglzConfig {
 	
