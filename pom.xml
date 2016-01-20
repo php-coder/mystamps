@@ -27,7 +27,7 @@
 		<commons.lang.version>3.4</commons.lang.version>
 		<commons.io.version>2.4</commons.io.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<togglz.version>2.2.0.Final</togglz.version>
+		<togglz.version>2.3.0-SNAPSHOT</togglz.version>
 		
 		<!--
 			Also don't forget to change version in:
@@ -267,7 +267,7 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-spring-web</artifactId>
+			<artifactId>togglz-spring-core</artifactId>
 			<version>${togglz.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -761,6 +761,16 @@
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
+		</repository>
+		<repository>
+			<id>sonatype-oss-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	
