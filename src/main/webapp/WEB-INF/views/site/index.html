@@ -240,6 +240,31 @@
 							<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Amount of collections: 3</p>
 						</div>
 					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" th:text="#{t_in_db}">Find by catalog</h4>
+						</div>
+						<div class="panel-body">
+							<form id="searchForm">
+								<div class="form-group">
+									<label for="catalogNumber">Number:</label>
+									<input id="catalogNumber" type="number" class="form-control" required="true" />
+								</div>
+								<div class="form-group">
+									<label for="catalogName">Catalog:</label>
+									<select id="catalogName" class="form-control" >
+										<option value="michel">Michel</option>
+										<option value="scott">Scott</option>
+										<option value="yvert">Yvert</option>
+										<option value="gibbons">Gibbons</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input id="startSearch" type="submit" value="Find" class="btn btn-success form-control" />
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -253,5 +278,30 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		<script>
+			(function($, undefined) {
+				$("#searchForm").on("submit", function(event) {
+					var number = $("#catalogNumber").prop("value");
+					var searchUrl;
+					switch ($("#catalogName").prop("value")) {
+						case "michel":
+    						searchUrl = "/series/michel/";
+    						break;
+						case "scott":
+    						searchUrl = "/series/scott/";
+    						break;
+						case "yvert":
+    						searchUrl = "/series/yvert/";
+    						break;
+						case "gibbons":
+    						searchUrl = "/series/gibbons/";
+    						break;
+					}
+
+					$("#searchForm").attr("action", searchUrl + number);
+					return true;
+				});
+			})(jQuery);
+		</script>
 	</body>
 </html>
