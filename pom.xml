@@ -292,9 +292,15 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>${bootstrap.version}</version>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-console</artifactId>
+			<version>${togglz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.marceloverdijk</groupId>
+			<artifactId>togglz-spring-boot</artifactId>
+			<version>ef28d0d3d3ff73c4a328303ef574939acd2eccc6</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -756,6 +762,13 @@
 		</plugins>
 		
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 	
 	<name>My Stamps</name>
 	<description>Site about post stamps</description>
