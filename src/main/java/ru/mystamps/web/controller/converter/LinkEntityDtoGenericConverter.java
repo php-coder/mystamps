@@ -68,6 +68,11 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 				return null;
 			}
 			
+			String lang = LocaleUtils.getCurrentLanguageOrNull();
+			if (hasCountryAnnotation(targetType)) {
+				return countryService.findOneAsLinkEntity(string, lang);
+			}
+			
 			try {
 				Integer id = Integer.valueOf(string);
 				if (id <= 0) {
@@ -75,14 +80,8 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 					return null;
 				}
 				
-				String lang = LocaleUtils.getCurrentLanguageOrNull();
-				
 				if (hasCategoryAnnotation(targetType)) {
 					return categoryService.findOneAsLinkEntity(id, lang);
-				}
-				
-				if (hasCountryAnnotation(targetType)) {
-					return countryService.findOneAsLinkEntity(id, lang);
 				}
 				
 				LOG.warn(

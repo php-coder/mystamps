@@ -68,8 +68,8 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	@Value("${country.find_all_countries_names_with_slug}")
 	private String findCountriesNamesWithSlugSql;
 	
-	@Value("${country.find_country_link_info_by_id}")
-	private String findCountryLinkEntityByIdSql;
+	@Value("${country.find_country_link_info_by_slug}")
+	private String findCountryLinkEntityBySlugSql;
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
@@ -175,14 +175,14 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	}
 	
 	@Override
-	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("country_id", countryId);
+		params.put("slug", slug);
 		params.put("lang", lang);
 		
 		try {
 			return jdbcTemplate.queryForObject(
-				findCountryLinkEntityByIdSql,
+				findCountryLinkEntityBySlugSql,
 				params,
 				RowMappers::forLinkEntityDto
 			);
