@@ -105,7 +105,7 @@
 										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
 									</span>
 									<span th:if="${series.country.id != null}" th:remove="tag">
-										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
 									</span>
 									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
 										<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>

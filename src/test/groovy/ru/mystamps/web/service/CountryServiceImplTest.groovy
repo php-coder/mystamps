@@ -262,27 +262,32 @@ class CountryServiceImplTest extends Specification {
 	//
 	// Tests for findOneAsLinkEntity()
 	//
-	
-	def "findOneAsLinkEntity() should throw exception when country id is null"() {
+	@Unroll
+	def "findOneAsLinkEntity() should throw exception when country slug is '#slug'"(String slug) {
 		when:
-			service.findOneAsLinkEntity(null, 'ru')
+			service.findOneAsLinkEntity(slug, 'ru')
 		then:
 			thrown IllegalArgumentException
+		where:
+			slug | _
+			' '  | _
+			''   | _
+			null | _
 	}
 	
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
-			Integer expectedCountryId = 15
+			String expectedSlug = 'france'
 		and:
 			String expectedLang = 'fr'
 		and:
 			LinkEntityDto expectedDto = TestObjects.createLinkEntityDto()
 		when:
-			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedCountryId, expectedLang)
+			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, 'fr')
 		then:
 			1 * countryDao.findOneAsLinkEntity(
-				{ Integer countryId ->
-					assert expectedCountryId == countryId
+				{ String countrySlug ->
+					assert expectedSlug == countrySlug
 					return true
 				},
 				{ String lang ->
