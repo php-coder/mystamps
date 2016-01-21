@@ -29,6 +29,7 @@ public interface CountryService {
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCountriesOf(Integer collectionId);
 	long countByName(String name);

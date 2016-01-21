@@ -67,6 +67,10 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 			if (string.isEmpty()) {
 				return null;
 			}
+			String lang = LocaleUtils.getCurrentLanguageOrNull();
+			if (hasCountryAnnotation(targetType)) {
+				return countryService.findOneAsLinkEntity(string, lang);
+			}
 			
 			try {
 				Integer id = Integer.valueOf(string);
@@ -75,16 +79,10 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 					return null;
 				}
 				
-				String lang = LocaleUtils.getCurrentLanguageOrNull();
-				
 				if (hasCategoryAnnotation(targetType)) {
 					return categoryService.findOneAsLinkEntity(id, lang);
 				}
-				
-				if (hasCountryAnnotation(targetType)) {
-					return countryService.findOneAsLinkEntity(id, lang);
-				}
-				
+
 				LOG.warn(
 					"Can't convert type '{}' because it doesn't contain supported annotations",
 					targetType

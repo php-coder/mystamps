@@ -52,7 +52,7 @@ public class Country implements LocalizedEntity {
 	@Column(name = "name_ru", length = NAME_LENGTH, nullable = false, unique = true)
 	private String nameRu;
 	
-	@Column(length = SLUG_LENGTH, nullable = false)
+	@Column(length = SLUG_LENGTH, unique = true, nullable = false)
 	private String slug;
 	
 	@Embedded

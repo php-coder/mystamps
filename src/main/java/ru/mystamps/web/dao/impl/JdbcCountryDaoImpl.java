@@ -70,6 +70,9 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 	
 	@Value("${country.find_country_link_info_by_id}")
 	private String findCountryLinkEntityByIdSql;
+
+	@Value("${country.find_country_link_info_by_slug}")
+	private String findCountryLinkEntityBySlugSql;
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
@@ -185,6 +188,23 @@ public class JdbcCountryDaoImpl implements JdbcCountryDao {
 				findCountryLinkEntityByIdSql,
 				params,
 				RowMappers::forLinkEntityDto
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
+	}
+
+	@Override
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("slug", slug);
+		params.put("lang", lang);
+
+		try {
+			return jdbcTemplate.queryForObject(
+					findCountryLinkEntityBySlugSql,
+					params,
+					RowMappers::forLinkEntityDto
 			);
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;

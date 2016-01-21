@@ -90,12 +90,12 @@ public class CountryController {
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)
 	public String showInfo(
-		@Country @PathVariable("id") LinkEntityDto country,
+		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
-		
+
 		if (country == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -111,7 +111,31 @@ public class CountryController {
 		
 		return "country/info";
 	}
-	
+
+	@RequestMapping(Url.INFO_COUNTRY_PAGE_OLD_STYLE)
+	public String oldShowInfo(
+			@Country @PathVariable("slug") LinkEntityDto country,
+			Model model,
+			Locale userLocale,
+			HttpServletResponse response)
+			throws IOException {
+
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+
+		model.addAttribute("countryId", country.getId());
+		model.addAttribute("countrySlug", country.getSlug());
+		model.addAttribute("countryName", country.getName());
+
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		Integer countryId = country.getId();
+		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
+
+		return "country/info";
+	}
+
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
