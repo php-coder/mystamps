@@ -18,18 +18,13 @@
 	
 	<properties>
 		<lombok.version>1.16.6</lombok.version>
-		<selenium.version>2.47.1</selenium.version>
-		<!--
-			We require 2.18 because of http://sourceforge.net/p/htmlunit/bugs/1692/
-			Dependency can be safely removed when Selenium will require this version.
-		-->
-		<htmlunit.version>2.18</htmlunit.version>
+		<selenium.version>2.49.0</selenium.version>
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<javax.persistence.version>1.0.0.Final</javax.persistence.version>
 		<servlet.api.version>3.0.20100224</servlet.api.version>
-		<commons.lang.version>3.3.2</commons.lang.version>
+		<commons.lang.version>3.4</commons.lang.version>
 		<commons.io.version>2.4</commons.io.version>
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
 		<togglz.version>2.2.0.Final</togglz.version>
@@ -72,11 +67,9 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<commons-pool.version>1.5.4</commons-pool.version>
 		<groovy.version>2.0.8</groovy.version>
-		<h2.version>1.4.187</h2.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<javax-mail.version>1.5.4</javax-mail.version>
 		<jetty.version>9.2.11.v20150529</jetty.version>
-		<mysql.version>5.1.36</mysql.version>
 		<spock.version>1.0-groovy-2.0</spock.version>
 		<spring-data-releasetrain.version>Dijkstra-SR4</spring-data-releasetrain.version>
 		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
@@ -414,20 +407,6 @@
 				<exclusion>
 					<groupId>org.seleniumhq.selenium</groupId>
 					<artifactId>selenium-safari-driver</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>net.sourceforge.htmlunit</groupId>
-			<artifactId>htmlunit</artifactId>
-			<version>${htmlunit.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<!-- Because we use jcl-over-slf4j instead -->
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

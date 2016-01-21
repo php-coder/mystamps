@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
-import java.util.Optional;
+import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -29,6 +29,7 @@ public interface JdbcSeriesDao {
 	Integer add(AddSeriesDbDto series);
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
 	Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
@@ -37,8 +38,8 @@ public interface JdbcSeriesDao {
 	long countSeriesOfCollection(Integer collectionId);
 	long countStampsOfCollection(Integer collectionId);
 	
-	Optional<Integer> findSeriesIdByMichelNumberCode(String michelNumber);
-	Optional<Integer> findSeriesIdByScottNumberCode(String scottNumber);
-	Optional<Integer> findSeriesIdByYvertNumberCode(String yvertNumber);
-	Optional<Integer> findSeriesIdByGibbonsNumberCode(String gibbonsNumber);
+	List<Integer> findSeriesIdsByMichelNumberCode(String michelNumber);
+	List<Integer> findSeriesIdsByScottNumberCode(String scottNumber);
+	List<Integer> findSeriesIdsByYvertNumberCode(String yvertNumber);
+	List<Integer> findSeriesIdsByGibbonsNumberCode(String gibbonsNumber);
 }
