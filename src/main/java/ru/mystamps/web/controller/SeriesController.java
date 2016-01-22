@@ -52,6 +52,7 @@ import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
+import ru.mystamps.web.model.SearchSeriesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -96,6 +97,13 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
+	}
+	
+	@InitBinder("searchSeriesForm")
+	protected void initSearchBinder(WebDataBinder binder) {
+		StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
+		binder.registerCustomEditor(String.class, "catalogNumber", editor);
+		binder.registerCustomEditor(String.class, "catalogName", editor);
 	}
 	
 	@ModelAttribute("years")
@@ -338,48 +346,29 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
 	
-	@RequestMapping(Url.FIND_SERIES_BY_MICHEL)
-	public String findSeriesByMichel(
-		@PathVariable("num") String michelNumberCode,
+	@RequestMapping(value = Url.FIND_SERIES_BY_CATALOG, method = RequestMethod.POST)
+	public String findSeriesByCatalog(
+		@Validated @ModelAttribute SearchSeriesForm searchSeriesForm,
+		BindingResult result,
 		Model model,
+		RedirectAttributes attrs,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		return findSeriesByCatalogNumber(michelNumberCode, "michel", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_SCOTT)
-	public String findSeriesByScott(
-		@PathVariable("num") String scottNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
+		if (result.hasErrors()) {
+			attrs.addFlashAttribute("org.springframework.validation.BindingResult.searchSeriesForm", result);
+			attrs.addFlashAttribute("searchSeriesForm", searchSeriesForm);
+			return "redirect:" + Url.INDEX_PAGE;
+		}
 		
-		return findSeriesByCatalogNumber(scottNumberCode, "scott", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_YVERT)
-	public String findSeriesByYvert(
-		@PathVariable("num") String yvertNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(yvertNumberCode, "yvert", model, userLocale, response);
-	}
-	
-	@RequestMapping(Url.FIND_SERIES_BY_GIBBONS)
-	public String findSeriesByGibbons(
-		@PathVariable("num") String gibbonsNumberCode,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		return findSeriesByCatalogNumber(gibbonsNumberCode, "gibbons", model, userLocale, response);
+		return findSeriesByCatalogNumber(
+			searchSeriesForm.getCatalogNumber(),
+			searchSeriesForm.getCatalogName(),
+			model,
+			userLocale,
+			response
+		);
 	}
 	
 	private String findSeriesByCatalogNumber(

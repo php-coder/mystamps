@@ -55,10 +55,7 @@ public final class Url {
 	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
 	
 	// CheckStyle: ignore WhitespaceAroundCheck for next 4 lines
-	public static final String FIND_SERIES_BY_MICHEL = "/series/michel/{num}";
-	public static final String FIND_SERIES_BY_SCOTT  = "/series/scott/{num}";
-	public static final String FIND_SERIES_BY_YVERT  = "/series/yvert/{num}";
-	public static final String FIND_SERIES_BY_GIBBONS= "/series/gibbons/{num}";
+	public static final String FIND_SERIES_BY_CATALOG = "/series/search";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{id}/{slug}";
