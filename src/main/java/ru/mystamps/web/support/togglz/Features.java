@@ -58,7 +58,11 @@ public enum Features implements Feature {
 	
 	@Label("Show link to list of countries on index page")
 	@EnabledByDefault
-	LIST_COUNTRIES;
+	LIST_COUNTRIES,
+	
+	@Label("Show search panel on index page")
+	@EnabledByDefault
+	SHOW_SEARCH_PANEL;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);

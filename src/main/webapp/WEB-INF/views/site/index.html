@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:togglz="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -240,27 +240,31 @@
 							<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Amount of collections: 3</p>
 						</div>
 					</div>
-					<div class="panel panel-default">
+					<div togglz:active="SHOW_SEARCH_PANEL" class="panel panel-default">
 						<div class="panel-heading">
-							<h4 class="panel-title" th:text="#{t_in_db}">Find by catalog</h4>
+							<h4 class="panel-title" th:text="#{t_find_by_catalog}">Search by catalog</h4>
 						</div>
 						<div class="panel-body">
-							<form id="searchForm">
+							<form method="post" action="info.html"
+								th:action="@{'/series/search'}"
+								th:object="${searchSeriesForm}">
 								<div class="form-group">
-									<label for="catalogNumber">Number:</label>
-									<input id="catalogNumber" type="number" class="form-control" required="true" />
+									<label for="catalogNumber" th:text="#{t_number_in_catalog}">Number:</label>
+									<input id="catalogNumber" type="search" class="form-control" required="true" th:field="*{catalogNumber}"/>
+									<span class="help-block" th:if="${#fields.hasErrors('catalogNumber')}" th:each="error : ${#fields.errors('catalogNumber')}" th:text="${error}"></span>
 								</div>
 								<div class="form-group">
-									<label for="catalogName">Catalog:</label>
-									<select id="catalogName" class="form-control" >
-										<option value="michel">Michel</option>
-										<option value="scott">Scott</option>
-										<option value="yvert">Yvert</option>
-										<option value="gibbons">Gibbons</option>
+									<label for="catalogName" th:text="#{t_catalog_name}">Catalogue name:</label>
+									<select id="catalogName" class="form-control" th:field="*{catalogName}">
+										<option value="michel" th:text="#{t_michel}">Michel</option>
+										<option value="scott" th:text="#{t_scott}">Scott</option>
+										<option value="yvert" th:text="#{t_yvert}">Yvert</option>
+										<option value="gibbons" th:text="#{t_sg}">Gibbons</option>
 									</select>
+									<span class="help-block" th:if="${#fields.hasErrors('catalogName')}" th:each="error : ${#fields.errors('catalogName')}" th:text="${error}"></span>
 								</div>
 								<div class="form-group">
-									<input id="startSearch" type="submit" value="Find" class="btn btn-success form-control" />
+									<input type="submit" value="Find" class="btn btn-primary form-control" />
 								</div>
 							</form>
 						</div>
@@ -278,30 +282,5 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
-		<script>
-			(function($, undefined) {
-				$("#searchForm").on("submit", function(event) {
-					var number = $("#catalogNumber").prop("value");
-					var searchUrl;
-					switch ($("#catalogName").prop("value")) {
-						case "michel":
-    						searchUrl = "/series/michel/";
-    						break;
-						case "scott":
-    						searchUrl = "/series/scott/";
-    						break;
-						case "yvert":
-    						searchUrl = "/series/yvert/";
-    						break;
-						case "gibbons":
-    						searchUrl = "/series/gibbons/";
-    						break;
-					}
-
-					$("#searchForm").attr("action", searchUrl + number);
-					return true;
-				});
-			})(jQuery);
-		</script>
 	</body>
 </html>
