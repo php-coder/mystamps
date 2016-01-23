@@ -21,7 +21,6 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.entity.LocalizedEntity
-import ru.mystamps.web.service.TestObjects
 
 class LocaleUtilsTest extends Specification {
 	
