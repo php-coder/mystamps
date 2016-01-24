@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -163,6 +164,13 @@ final class RowMappers {
 		Date createdAt = rs.getTimestamp("created_at");
 		
 		return new UsersActivationDto(email, createdAt);
+	}
+	
+	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int i) throws SQLException {
+		return new CollectionInfoDto(
+			rs.getInt("id"),
+			rs.getString("name")
+		);
 	}
 	
 }

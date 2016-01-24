@@ -32,8 +32,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -44,45 +45,50 @@ import ru.mystamps.web.util.LocaleUtils;
 public class CollectionController {
 	
 	private final CategoryService categoryService;
+	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
 	@RequestMapping(Url.INFO_COLLECTION_PAGE)
 	public String showInfo(
-		@PathVariable("id") Collection collection,
+		@PathVariable("id") Integer collectionId,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
+		if (collectionId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		CollectionInfoDto collection = collectionService.findById(collectionId);
 		if (collection == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		model.addAttribute("ownerName", collection.getOwner().getName());
+		model.addAttribute("ownerName", collection.getOwnerName());
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer collectionId = collection.getId();
 		Iterable<SeriesInfoDto> seriesOfCollection =
 			seriesService.findByCollectionId(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {
-			// CheckStyle: ignore LineLength for next 2 line
-			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collection.getId()));
-			model.addAttribute("countryCounter", countryService.countCountriesOf(collection.getId()));
+			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collectionId));
+			model.addAttribute("countryCounter", countryService.countCountriesOf(collectionId));
 			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
 			model.addAttribute("stampsCounter", seriesService.countStampsOf(collectionId));
 			
 			model.addAttribute(
 				"statOfCollectionByCategories",
-				categoryService.getStatisticsOf(collection.getId(), lang)
+				categoryService.getStatisticsOf(collectionId, lang)
 			);
 			model.addAttribute(
 				"statOfCollectionByCountries",
-				getCountriesStatistics(collection.getId(), lang)
+				getCountriesStatistics(collectionId, lang)
 			);
 		}
 		

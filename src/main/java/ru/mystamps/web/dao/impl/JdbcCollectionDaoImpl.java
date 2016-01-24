@@ -36,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
@@ -67,6 +68,9 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 	
 	@Value("${collection.remove_series_from_collection}")
 	private String removeSeriesFromCollectionSql;
+	
+	@Value("${collection.find_info_by_id}")
+	private String findCollectionInfoByIdSql;
 	
 	@Override
 	public Iterable<LinkEntityDto> findLastCreated(int quantity) {
@@ -164,6 +168,15 @@ public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
 				affected
 			);
 		}
+	}
+	
+	@Override
+	public CollectionInfoDto findCollectionInfoById(Integer collectionId) {
+		return jdbcTemplate.queryForObject(
+			findCollectionInfoByIdSql,
+			Collections.singletonMap("collection_id", collectionId),
+			RowMappers::forCollectionInfoDto
+		);
 	}
 	
 }

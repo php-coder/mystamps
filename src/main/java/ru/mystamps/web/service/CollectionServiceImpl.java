@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
@@ -139,6 +140,14 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
 		return collectionDao.findLastCreated(quantity);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public CollectionInfoDto findById(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
+		
+		return collectionDao.findCollectionInfoById(collectionId);
 	}
 	
 }

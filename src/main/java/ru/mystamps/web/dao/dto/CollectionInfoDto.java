@@ -15,18 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface CollectionService {
-	void createCollection(Integer ownerId, String ownerLogin);
-	UrlEntityDto addToCollection(Integer userId, Integer seriesId);
-	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
-	boolean isSeriesInCollection(Integer userId, Integer seriesId);
-	long countCollectionsOfUsers();
-	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
-	CollectionInfoDto findById(Integer collectionId);
+@Getter
+@RequiredArgsConstructor
+public class CollectionInfoDto {
+	private final Integer id;
+	private final String ownerName;
 }

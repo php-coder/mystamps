@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao;
 
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
@@ -29,4 +30,5 @@ public interface JdbcCollectionDao {
 	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
 	void addSeriesToCollection(Integer collectionId, Integer seriesId);
 	void removeSeriesFromCollection(Integer collectionId, Integer seriesId);
+	CollectionInfoDto findCollectionInfoById(Integer collectionId);
 }

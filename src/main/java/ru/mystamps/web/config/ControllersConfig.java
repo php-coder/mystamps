@@ -62,6 +62,7 @@ public class ControllersConfig {
 	public CollectionController getCollectionController() {
 		return new CollectionController(
 			servicesConfig.getCategoryService(),
+			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
 			messageSource
