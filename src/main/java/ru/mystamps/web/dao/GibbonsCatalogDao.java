@@ -23,4 +23,5 @@ import java.util.Set;
 public interface GibbonsCatalogDao {
 	List<String> add(Set<String> gibbonsNumbers);
 	void addToSeries(Integer seriesId, Set<String> gibbonsNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

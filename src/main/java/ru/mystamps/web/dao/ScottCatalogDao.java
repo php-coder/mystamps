@@ -23,4 +23,5 @@ import java.util.Set;
 public interface ScottCatalogDao {
 	List<String> add(Set<String> scottNumbers);
 	void addToSeries(Integer seriesId, Set<String> scottNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

@@ -33,6 +33,9 @@ public class JdbcMichelCatalogDaoImpl extends JdbcCatalogDao implements MichelCa
 	@Value("${series_michel.add}")
 	private String addMichelNumbersToSeriesSql;
 	
+	@Value("${series_michel.find_by_series_id}")
+	private String findBySeriesIdSql;
+	
 	public JdbcMichelCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
@@ -45,6 +48,11 @@ public class JdbcMichelCatalogDaoImpl extends JdbcCatalogDao implements MichelCa
 	@Override
 	public void addToSeries(Integer seriesId, Set<String> michelNumbers) {
 		addToSeries(seriesId, michelNumbers, addMichelNumbersToSeriesSql);
+	}
+	
+	@Override
+	public List<String> findBySeriesId(Integer seriesId) {
+		return findBySeriesId(seriesId, findBySeriesIdSql);
 	}
 	
 }

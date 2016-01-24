@@ -17,7 +17,9 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +37,9 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 	@Value("${series_image.add}")
 	private String addImageToSeriesSql;
 	
+	@Value("${series_image.find_by_series_id}")
+	private String findBySeriesIdSql;
+	
 	@Override
 	public void addToSeries(Integer seriesId, Integer imageId) {
 		Map<String, Object> params = new HashMap<>();
@@ -42,6 +47,15 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 		params.put("image_id", imageId);
 		
 		jdbcTemplate.update(addImageToSeriesSql, params);
+	}
+	
+	@Override
+	public List<Integer> findBySeriesId(Integer seriesId) {
+		return jdbcTemplate.queryForList(
+			findBySeriesIdSql,
+			Collections.singletonMap("series_id", seriesId),
+			Integer.class
+		);
 	}
 	
 }

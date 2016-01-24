@@ -17,10 +17,12 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
@@ -97,6 +99,61 @@ final class RowMappers {
 			releaseYear,
 			quantity,
 			perforated
+		);
+	}
+	
+	public static SeriesFullInfoDto forSeriesFullInfoDto(ResultSet rs, int i) throws SQLException {
+		Integer seriesId     = rs.getInt("id");
+		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
+		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
+		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity     = rs.getInt("quantity");
+		Boolean perforated   = rs.getBoolean("perforated");
+		String comment       = rs.getString("comment");
+		
+		BigDecimal michelPrice = rs.getBigDecimal("michel_price");
+		String michelCurrency  = rs.getString("michel_currency");
+		
+		BigDecimal scottPrice = rs.getBigDecimal("scott_price");
+		String scottCurrency  = rs.getString("scott_currency");
+		
+		BigDecimal yvertPrice = rs.getBigDecimal("yvert_price");
+		String yvertCurrency  = rs.getString("yvert_currency");
+		
+		BigDecimal gibbonsPrice = rs.getBigDecimal("gibbons_price");
+		String gibbonsCurrency  = rs.getString("gibbons_currency");
+		
+		Integer categoryId     = rs.getInt("category_id");
+		String categorySlug    = rs.getString("category_slug");
+		String categoryName    = rs.getString("category_name");
+		LinkEntityDto category = new LinkEntityDto(categoryId, categorySlug, categoryName);
+		
+		Integer countryId     = JdbcUtils.getInteger(rs, "country_id");
+		LinkEntityDto country = null;
+		if (countryId != null) {
+			String countrySlug = rs.getString("country_slug");
+			String countryName = rs.getString("country_name");
+			country = new LinkEntityDto(countryId, countrySlug, countryName);
+		}
+		
+		return new SeriesFullInfoDto(
+			seriesId,
+			category,
+			country,
+			releaseDay,
+			releaseMonth,
+			releaseYear,
+			quantity,
+			perforated,
+			comment,
+			michelPrice,
+			michelCurrency,
+			scottPrice,
+			scottCurrency,
+			yvertPrice,
+			yvertCurrency,
+			gibbonsPrice,
+			gibbonsCurrency
 		);
 	}
 	

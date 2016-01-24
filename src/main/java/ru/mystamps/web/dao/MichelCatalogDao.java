@@ -23,4 +23,5 @@ import java.util.Set;
 public interface MichelCatalogDao {
 	List<String> add(Set<String> michelNumbers);
 	void addToSeries(Integer seriesId, Set<String> michelNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

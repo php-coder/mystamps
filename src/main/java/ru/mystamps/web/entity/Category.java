@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.entity;
 
-import java.util.Locale;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -30,14 +28,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.util.LocaleUtils;
-
 @Entity
 @Table(name = "categories")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = "metaInfo")
-public class Category implements LocalizedEntity {
+public class Category {
 	
 	public static final int NAME_LENGTH = 50;
 	public static final int SLUG_LENGTH = NAME_LENGTH;
@@ -65,11 +61,6 @@ public class Category implements LocalizedEntity {
 	@Override
 	public String toString() {
 		return String.valueOf(id);
-	}
-	
-	@Override
-	public String getLocalizedName(Locale locale) {
-		return LocaleUtils.getLocalizedName(locale, this);
 	}
 	
 }

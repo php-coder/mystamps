@@ -33,6 +33,9 @@ public class JdbcYvertCatalogDaoImpl extends JdbcCatalogDao implements YvertCata
 	@Value("${series_yvert.add}")
 	private String addYvertNumbersToSeriesSql;
 	
+	@Value("${series_yvert.find_by_series_id}")
+	private String findBySeriesIdSql;
+	
 	public JdbcYvertCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
@@ -45,6 +48,11 @@ public class JdbcYvertCatalogDaoImpl extends JdbcCatalogDao implements YvertCata
 	@Override
 	public void addToSeries(Integer seriesId, Set<String> yvertNumbers) {
 		addToSeries(seriesId, yvertNumbers, addYvertNumbersToSeriesSql);
+	}
+	
+	@Override
+	public List<String> findBySeriesId(Integer seriesId) {
+		return findBySeriesId(seriesId, findBySeriesIdSql);
 	}
 	
 }

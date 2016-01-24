@@ -20,8 +20,6 @@ package ru.mystamps.web.util
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.entity.LocalizedEntity
-
 class LocaleUtilsTest extends Specification {
 	
 	//
@@ -57,45 +55,6 @@ class LocaleUtilsTest extends Specification {
 			null           | "en"  || "en"
 			Locale.ENGLISH | "ru"  || "en"
 			Locale.ENGLISH | null  || "en"
-	}
-	
-	//
-	// Tests for getLocalizedName()
-	//
-	
-	def "getLocalizedName() should throw exception when entity is null"() {
-		when:
-			LocaleUtils.getLocalizedName(Locale.ENGLISH, null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	@Unroll
-	def "getLocalizedName() should returns '#expectedName' for locale '#locale'"(Locale locale, String expectedName) {
-		when:
-			LocalizedEntity entity = new LocalizedEntity() {
-				@Override String getName() {
-					return 'Canada'
-				}
-
-				@Override String getNameRu() {
-					return 'Канада'
-				}
-
-				@Override String getLocalizedName(Locale unused) {
-					throw new UnsupportedOperationException()
-				}
-			}
-		and:
-			String name = LocaleUtils.getLocalizedName(locale, entity)
-		then:
-			name == expectedName
-		where:
-			locale                 || expectedName
-			null                   || 'Canada'
-			Locale.ENGLISH         || 'Canada'
-			Locale.FRENCH          || 'Canada'
-			new Locale('ru', 'RU') || 'Канада'
 	}
 	
 }

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.entity.Image;
@@ -26,4 +28,5 @@ public interface ImageService {
 	Image save(MultipartFile file);
 	ImageDto get(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);
+	List<Integer> findBySeriesId(Integer seriesId);
 }

@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class ScottCatalog implements StampsCatalog {
+public class ScottCatalog {
 	
 	public static final int CODE_LENGTH = 4;
 	

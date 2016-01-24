@@ -20,6 +20,7 @@ package ru.mystamps.web.dao;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
@@ -29,6 +30,7 @@ public interface JdbcSeriesDao {
 	Integer add(AddSeriesDbDto series);
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);

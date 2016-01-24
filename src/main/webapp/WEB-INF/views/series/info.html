@@ -98,10 +98,10 @@
 					<div class="row">
 						
 						<div class="col-sm-4">
-							<div class="row" th:each="image : ${series.images}">
+							<div class="row" th:each="imageId : ${series.imageIds}">
 								<div class="col-sm-12">
-									<a target="_blank" href="../../../../../test/resources/test.png" th:href="@{${GET_IMAGE_PAGE}(id=${image.id})}">
-										<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${image.id})}" />
+									<a target="_blank" href="../../../../../test/resources/test.png" th:href="@{${GET_IMAGE_PAGE}(id=${imageId})}">
+										<img src="../../../../../test/resources/test.png" class="img-responsive series-images" th:src="@{${GET_IMAGE_PAGE}(id=${imageId})}" />
 									</a>
 								</div>
 							</div>
@@ -115,7 +115,7 @@
 								<dd id="category_name">
 									<a href="../category/info.html"
 									   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}"
-									   th:text="${series.category.getLocalizedName(#locale)}">
+									   th:text="${series.category.name}">
 										Animals
 									</a>
 								</dd>
@@ -127,7 +127,7 @@
 									<dd id="country_name">
 										<a href="../country/info.html"
 										   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}"
-										   th:text="${series.country.getLocalizedName(#locale)}">
+										   th:text="${series.country.name}">
 											Italy
 										</a>
 									</dd>
@@ -176,70 +176,70 @@
 										/*/-->
 									</dd>
 								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michelPrice != null}"> /*/-->
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michel.price != null}"> /*/-->
 									<dt th:text="#{t_michel}">
 										Michel
 									</dt>
 									<dd id="michel_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michelPrice != null}">
+										th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michel.price != null}">
 										<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
 											#101-104
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.michelPrice.formattedValue} + ' ' + ${series.michelPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.michel.formattedPrice} + ' ' + ${series.michel.currency} + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											(10 EUR)
 										</span>
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scottPrice != null}"> /*/-->
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scott.price != null}"> /*/-->
 									<dt th:text="#{t_scott}">
 										Scott
 									</dt>
 									<dd id="scott_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scottPrice != null}">
+										th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scott.price != null}">
 										<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
 										<span th:if="${showPrice}"
-											  th:with="price=${#numbers.formatDecimal(series.scottPrice.value, 1, 1)},showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.scottPrice.formattedValue} + ' ' + ${series.scottPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:with="price=${#numbers.formatDecimal(series.scott.price, 1, 1)},showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.scott.formattedPrice} + ' ' + ${series.scott.currency} + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											12 USD
 										</span>
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvertPrice != null}"> /*/-->
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvert.price != null}"> /*/-->
 									<dt th:text="#{t_yvert}">
 										Yvert
 									</dt>
 									<dd id="yvert_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvertPrice != null}">
+										th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvert.price != null}">
 										<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
 											#13, 17, 20
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.yvertPrice.formattedValue} + ' ' + ${series.yvertPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.yvert.formattedPrice} + ' ' + ${series.yvert.currency} + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											(7 EUR)
 										</span>
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbonsPrice != null}"> /*/-->
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbons.price != null}"> /*/-->
 									<dt th:text="#{t_sg}">
 										Gibbons
 									</dt>
 									<dd id="gibbons_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbonsPrice != null}">
+										th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbons.price != null}">
 										<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
 											#77, 79-83
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.gibbonsPrice.formattedValue} + ' ' + ${series.gibbonsPrice.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.gibbons.formattedPrice} + ' ' + ${series.gibbons.currency} + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 										</span>
 									</dd>

@@ -66,4 +66,12 @@ class JdbcCatalogDao {
 		jdbcTemplate.update(addNumbersToSeriesSql, params);
 	}
 	
+	protected List<String> findBySeriesId(Integer seriesId, String findBySeriesIdSql) {
+		return jdbcTemplate.queryForList(
+			findBySeriesIdSql,
+			Collections.singletonMap("series_id", seriesId),
+			String.class
+		);
+	}
+	
 }

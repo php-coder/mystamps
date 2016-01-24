@@ -28,8 +28,6 @@ import java.util.TreeSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
-import ru.mystamps.web.entity.StampsCatalog;
-
 /**
  * Helpers for dealing with stamps catalog numbers.
  **/
@@ -60,7 +58,7 @@ public final class CatalogUtils {
 	/**
 	 * Converts set of catalog numbers to comma-delimited string with range of numbers.
 	 **/
-	public static String toShortForm(Set<? extends StampsCatalog> catalogNumbers) {
+	public static String toShortForm(List<String> catalogNumbers) {
 		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
 		
 		if (catalogNumbers.isEmpty()) {
@@ -68,9 +66,7 @@ public final class CatalogUtils {
 		}
 		
 		Set<String> numbers = new TreeSet<>(STR_AFTER_INT);
-		for (StampsCatalog catalog : catalogNumbers) {
-			numbers.add(catalog.getCode());
-		}
+		numbers.addAll(catalogNumbers);
 		
 		List<String> groups = new ArrayList<>();
 		List<String> currentBuffer = new ArrayList<>();

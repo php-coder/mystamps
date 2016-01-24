@@ -59,6 +59,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
@@ -176,12 +177,20 @@ public class SeriesController {
 	
 	@RequestMapping(Url.INFO_SERIES_PAGE)
 	public String showInfo(
-		@PathVariable("id") Series series,
+		@PathVariable("id") Integer seriesId,
 		Model model,
 		User currentUser,
+		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -189,10 +198,12 @@ public class SeriesController {
 		
 		model.addAttribute("addImageForm", new AddImageForm());
 		model.addAttribute("series", series);
-		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
-		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
-		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert()));
-		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons()));
+		
+		// CheckStyle: ignore LineLength for next 4 lines
+		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel().getNumbers()));
+		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott().getNumbers()));
+		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert().getNumbers()));
+		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons().getNumbers()));
 		
 		model.addAttribute(
 			"isSeriesInCollection",
@@ -215,22 +226,32 @@ public class SeriesController {
 	public String processImage(
 			@Validated({ Default.class, AddImageForm.ImageChecks.class }) AddImageForm form,
 			BindingResult result,
-			@PathVariable("id") Series series,
+			@PathVariable("id") Integer seriesId,
 			Model model,
 			User currentUser,
+			Locale userLocale,
 			HttpServletResponse response)
 			throws IOException {
 		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
 		model.addAttribute("series", series);
-		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel()));
-		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott()));
-		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert()));
-		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons()));
+		
+		// CheckStyle: ignore LineLength for next 4 lines
+		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel().getNumbers()));
+		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott().getNumbers()));
+		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert().getNumbers()));
+		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons().getNumbers()));
 		
 		model.addAttribute(
 			"isSeriesInCollection",
@@ -388,8 +409,8 @@ public class SeriesController {
 		return "series/search_result";
 	}
 	
-	private static boolean isAllowedToAddingImages(Series series) {
-		return series.getImages().size() <= series.getQuantity();
+	private static boolean isAllowedToAddingImages(SeriesDto series) {
+		return series.getImageIds().size() <= series.getQuantity();
 	}
 	
 	private static String redirectTo(String url, Object... args) {

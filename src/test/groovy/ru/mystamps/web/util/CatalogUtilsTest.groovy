@@ -19,8 +19,6 @@ package ru.mystamps.web.util
 
 import spock.lang.Specification
 
-import ru.mystamps.web.entity.MichelCatalog
-
 class CatalogUtilsTest extends Specification {
 	
 	//
@@ -36,7 +34,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return empty string for empty numbers"() {
 		given:
-			Set<MichelCatalog> empty = [] as Set
+			List<String> empty = [] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(empty)
 		then:
@@ -45,7 +43,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return single number as is"() {
 		given:
-			Set<MichelCatalog> singleNumber = [ new MichelCatalog('1') ] as Set
+			List<String> singleNumber = [ '1' ] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(singleNumber)
 		then:
@@ -54,10 +52,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return pair of numbers as comma separated"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog('1'),
-				new MichelCatalog('2')
-			] as Set
+			List<String> setOfNumbers = [ '1', '2' ] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -66,11 +61,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce range for sequence"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog('1'),
-				new MichelCatalog('2'),
-				new MichelCatalog('3')
-			] as Set
+			List<String> setOfNumbers = [ '1', '2', '3' ] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -79,12 +70,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return comma separated numbers if they are not a sequence"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog('1'),
-				new MichelCatalog('2'),
-				new MichelCatalog('4'),
-				new MichelCatalog('5')
-			] as Set
+			List<String> setOfNumbers = [ '1', '2', '4', '5' ] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -93,15 +79,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce two ranges for two sequences"() {
 		given:
-			Set<MichelCatalog> setOfNumbers = [
-				new MichelCatalog('1'),
-				new MichelCatalog('2'),
-				new MichelCatalog('3'),
-				new MichelCatalog('10'),
-				new MichelCatalog('19'),
-				new MichelCatalog('20'),
-				new MichelCatalog('21')
-			] as Set
+			List<String> setOfNumbers = [ '1', '2', '3', '10', '19', '20', '21' ] as List
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:

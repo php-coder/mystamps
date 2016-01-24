@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -34,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
@@ -57,6 +59,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.find_last_added}")
 	private String findLastAddedSeriesSql;
+	
+	@Value("${series.find_full_info_by_id}")
+	private String findFullInfoByIdSql;
 	
 	@Value("${series.find_by_ids}")
 	private String findByIdsSql;
@@ -151,6 +156,23 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesInfoDto);
+	}
+	
+	@Override
+	public SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("lang", lang);
+		
+		try {
+			return jdbcTemplate.queryForObject(
+				findFullInfoByIdSql,
+				params,
+				RowMappers::forSeriesFullInfoDto
+			);
+		} catch (EmptyResultDataAccessException ex) {
+			return null;
+		}
 	}
 	
 	/**

@@ -64,4 +64,12 @@ public class YvertCatalogServiceImpl implements YvertCatalogService {
 		LOG.info("Series #{}: yvert numbers {} were added", seriesId, yvertNumbers);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<String> findBySeriesId(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return yvertCatalogDao.findBySeriesId(seriesId);
+	}
+	
 }

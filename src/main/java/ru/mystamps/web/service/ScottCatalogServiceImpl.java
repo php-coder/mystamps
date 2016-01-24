@@ -64,4 +64,12 @@ public class ScottCatalogServiceImpl implements ScottCatalogService {
 		LOG.info("Series #{}: scoot numbers {} were added", seriesId, scottNumbers);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<String> findBySeriesId(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return scottCatalogDao.findBySeriesId(seriesId);
+	}
+	
 }

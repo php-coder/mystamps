@@ -23,4 +23,5 @@ import java.util.Set;
 public interface YvertCatalogDao {
 	List<String> add(Set<String> yvertNumbers);
 	void addToSeries(Integer seriesId, Set<String> yvertNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

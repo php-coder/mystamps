@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 public interface GibbonsCatalogService {
 	void add(Set<String> gibbonsNumbers);
 	void addToSeries(Integer seriesId, Set<String> gibbonsNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

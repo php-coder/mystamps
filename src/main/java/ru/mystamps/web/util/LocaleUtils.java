@@ -19,12 +19,8 @@ package ru.mystamps.web.util;
 
 import java.util.Locale;
 
-import org.apache.commons.lang3.Validate;
-
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
-
-import ru.mystamps.web.entity.LocalizedEntity;
 
 public final class LocaleUtils {
 	
@@ -53,17 +49,6 @@ public final class LocaleUtils {
 		}
 		
 		return getLanguageOrNull(localeContext.getLocale());
-	}
-	
-	public static String getLocalizedName(Locale locale, LocalizedEntity entity) {
-		Validate.isTrue(entity != null, "LocalizedEntity must be non null");
-		
-		String lang = getLanguageOrNull(locale);
-		if ("ru".equals(lang)) {
-			return entity.getNameRu();
-		}
-		
-		return entity.getName();
 	}
 	
 }

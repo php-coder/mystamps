@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.Validate;
@@ -103,6 +104,14 @@ public class ImageServiceImpl implements ImageService {
 		jdbcImageDao.addToSeries(seriesId, imageId);
 		
 		LOG.info("Series #{}: image #{} was added", seriesId, imageId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Integer> findBySeriesId(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return jdbcImageDao.findBySeriesId(seriesId);
 	}
 	
 	private static String extractExtensionFromContentType(String contentType) {

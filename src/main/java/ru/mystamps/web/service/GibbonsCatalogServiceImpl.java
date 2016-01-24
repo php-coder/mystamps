@@ -64,4 +64,12 @@ public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 		LOG.info("Series #{}: gibbons numbers {} were added", seriesId, gibbonsNumbers);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<String> findBySeriesId(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return gibbonsCatalogDao.findBySeriesId(seriesId);
+	}
+	
 }

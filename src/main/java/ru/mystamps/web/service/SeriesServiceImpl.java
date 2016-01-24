@@ -35,10 +35,12 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.Currency;
+import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.util.CatalogUtils;
@@ -198,6 +200,33 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return seriesDao.countStampsOfCollection(collectionId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public SeriesDto findFullInfoById(Integer seriesId, String lang) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		SeriesFullInfoDto seriesBaseInfo = seriesDao.findByIdAsSeriesFullInfo(seriesId, lang);
+		if (seriesBaseInfo == null) {
+			return null;
+		}
+		
+		List<String> michelNumbers  = michelCatalogService.findBySeriesId(seriesId);
+		List<String> scootNumbers   = scottCatalogService.findBySeriesId(seriesId);
+		List<String> yvertNumbers   = yvertCatalogService.findBySeriesId(seriesId);
+		List<String> gibbonsNumbers = gibbonsCatalogService.findBySeriesId(seriesId);
+		
+		List<Integer> imageIds = imageService.findBySeriesId(seriesId);
+		
+		return new SeriesDto(
+			seriesBaseInfo,
+			michelNumbers,
+			scootNumbers,
+			yvertNumbers,
+			gibbonsNumbers,
+			imageIds
+		);
 	}
 	
 	@Override

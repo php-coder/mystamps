@@ -64,4 +64,12 @@ public class MichelCatalogServiceImpl implements MichelCatalogService {
 		LOG.info("Series #{}: michel numbers {} were added", seriesId, michelNumbers);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public List<String> findBySeriesId(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return michelCatalogDao.findBySeriesId(seriesId);
+	}
+	
 }

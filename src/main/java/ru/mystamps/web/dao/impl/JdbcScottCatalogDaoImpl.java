@@ -33,6 +33,9 @@ public class JdbcScottCatalogDaoImpl extends JdbcCatalogDao implements ScottCata
 	@Value("${series_scott.add}")
 	private String addScottNumbersToSeriesSql;
 	
+	@Value("${series_scott.find_by_series_id}")
+	private String findBySeriesIdSql;
+	
 	public JdbcScottCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
@@ -45,6 +48,11 @@ public class JdbcScottCatalogDaoImpl extends JdbcCatalogDao implements ScottCata
 	@Override
 	public void addToSeries(Integer seriesId, Set<String> scottNumbers) {
 		addToSeries(seriesId, scottNumbers, addScottNumbersToSeriesSql);
+	}
+	
+	@Override
+	public List<String> findBySeriesId(Integer seriesId) {
+		return findBySeriesId(seriesId, findBySeriesIdSql);
 	}
 	
 }

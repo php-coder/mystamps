@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class YvertCatalog implements StampsCatalog {
+public class YvertCatalog {
 	
 	public static final int CODE_LENGTH = 4;
 	

@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 public interface YvertCatalogService {
 	void add(Set<String> yvertNumbers);
 	void addToSeries(Integer seriesId, Set<String> yvertNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

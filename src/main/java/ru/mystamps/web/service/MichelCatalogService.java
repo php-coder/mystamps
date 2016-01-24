@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 public interface MichelCatalogService {
 	void add(Set<String> michelNumbers);
 	void addToSeries(Integer seriesId, Set<String> michelNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

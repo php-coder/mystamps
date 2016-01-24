@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class GibbonsCatalog implements StampsCatalog {
+public class GibbonsCatalog {
 	
 	public static final int CODE_LENGTH = 4;
 	

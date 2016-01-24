@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ScottCatalogService {
 	void add(Set<String> scottNumbers);
 	void addToSeries(Integer seriesId, Set<String> scottNumbers);
+	List<String> findBySeriesId(Integer seriesId);
 }

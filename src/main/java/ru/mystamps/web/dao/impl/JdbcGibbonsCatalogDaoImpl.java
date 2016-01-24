@@ -33,6 +33,9 @@ public class JdbcGibbonsCatalogDaoImpl extends JdbcCatalogDao implements Gibbons
 	@Value("${series_gibbons.add}")
 	private String addGibbonsNumbersToSeriesSql;
 	
+	@Value("${series_gibbons.find_by_series_id}")
+	private String findBySeriesIdSql;
+	
 	public JdbcGibbonsCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
@@ -45,6 +48,11 @@ public class JdbcGibbonsCatalogDaoImpl extends JdbcCatalogDao implements Gibbons
 	@Override
 	public void addToSeries(Integer seriesId, Set<String> gibbonsNumbers) {
 		addToSeries(seriesId, gibbonsNumbers, addGibbonsNumbersToSeriesSql);
+	}
+	
+	@Override
+	public List<String> findBySeriesId(Integer seriesId) {
+		return findBySeriesId(seriesId, findBySeriesIdSql);
 	}
 	
 }

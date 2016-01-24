@@ -21,6 +21,7 @@ import java.util.List;
 
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 
@@ -33,6 +34,8 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
+	
+	SeriesDto findFullInfoById(Integer seriesId, String lang);
 	
 	List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang);
 	List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang);
