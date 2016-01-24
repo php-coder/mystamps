@@ -17,17 +17,25 @@
  */
 package ru.mystamps.web.support.togglz;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.heneke.thymeleaf.togglz.TogglzDialect;
+import org.togglz.core.repository.StateRepository;
+import org.togglz.core.repository.jdbc.JDBCStateRepository;
+
 
 @Configuration
 public class TogglzConfig {
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	@Bean
-	public TogglzDialect getTogglzDialect() {
-		return new TogglzDialect();
+	public StateRepository getStateRepository() {
+		return new JDBCStateRepository(dataSource);
 	}
 	
 }
