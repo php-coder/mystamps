@@ -21,16 +21,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.github.heneke.thymeleaf.togglz.TogglzDialect;
-import org.togglz.core.manager.EnumBasedFeatureProvider;
-import org.togglz.core.spi.FeatureProvider;
 
 @Configuration
 public class TogglzConfig {
-	
-	@Bean
-	public FeatureProvider getFeatureProvider() {
-		return new EnumBasedFeatureProvider(Features.class);
-	}
 	
 	@Bean
 	public TogglzDialect getTogglzDialect() {
