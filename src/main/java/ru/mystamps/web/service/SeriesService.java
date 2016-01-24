@@ -34,6 +34,7 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
+	boolean isSeriesExist(Integer seriesId);
 	
 	SeriesDto findFullInfoById(Integer seriesId, String lang);
 	

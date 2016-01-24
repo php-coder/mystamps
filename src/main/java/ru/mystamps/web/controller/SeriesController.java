@@ -49,7 +49,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
-import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
@@ -283,22 +282,27 @@ public class SeriesController {
 		params = "action=ADD"
 	)
 	public String addToCollection(
-		@PathVariable("id") Series series,
+		@PathVariable("id") Integer seriesId,
 		User currentUser,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (series == null) {
+		if (seriesId == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		UrlEntityDto collection =
-			collectionService.addToCollection(currentUser.getId(), series.getId());
+		boolean seriesExists = seriesService.isSeriesExist(seriesId);
+		if (!seriesExists) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		UrlEntityDto collection = collectionService.addToCollection(currentUser.getId(), seriesId);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
-		redirectAttributes.addFlashAttribute("justAddedSeriesId", series.getId());
+		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
 		
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
@@ -309,19 +313,25 @@ public class SeriesController {
 		params = "action=REMOVE"
 	)
 	public String removeFromCollection(
-		@PathVariable("id") Series series,
+		@PathVariable("id") Integer seriesId,
 		User currentUser,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (series == null) {
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		boolean seriesExists = seriesService.isSeriesExist(seriesId);
+		if (!seriesExists) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
 		UrlEntityDto collection =
-			collectionService.removeFromCollection(currentUser.getId(), series.getId());
+			collectionService.removeFromCollection(currentUser.getId(), seriesId);
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		

@@ -204,6 +204,14 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public boolean isSeriesExist(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return seriesDao.countSeriesById(seriesId) > 0;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public SeriesDto findFullInfoById(Integer seriesId, String lang) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		

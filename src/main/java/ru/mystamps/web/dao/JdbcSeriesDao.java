@@ -39,6 +39,7 @@ public interface JdbcSeriesDao {
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);
 	long countStampsOfCollection(Integer collectionId);
+	long countSeriesById(Integer seriesId);
 	
 	List<Integer> findSeriesIdsByMichelNumberCode(String michelNumber);
 	List<Integer> findSeriesIdsByScottNumberCode(String scottNumber);
