@@ -89,7 +89,7 @@ public class CountryController {
 	}
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)
-	public String showInfo(
+	public String showInfoBySlug(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
 		Locale userLocale,
@@ -112,8 +112,8 @@ public class CountryController {
 		return "country/info";
 	}
 
-	@RequestMapping(Url.INFO_COUNTRY_PAGE_OLD_STYLE)
-	public String oldShowInfo(
+	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
+	public String showInfoById(
 			@Country @PathVariable("slug") LinkEntityDto country,
 			Model model,
 			Locale userLocale,

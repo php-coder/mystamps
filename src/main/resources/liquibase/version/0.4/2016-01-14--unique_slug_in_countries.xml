@@ -7,6 +7,10 @@
 
 	<changeSet id="add-unique-constraint-to-slug-in-countries-table" author="AleksSPb" context="scheme">
 
+		<preConditions>
+			<sqlCheck expectedResult="0">SELECT COUNT(*) FROM countries GROUP BY slug WHERE COUNT(slug) > 1</sqlCheck>
+		</preConditions>
+
 		<addUniqueConstraint
 			tableName="countries"
 			columnNames="slug"

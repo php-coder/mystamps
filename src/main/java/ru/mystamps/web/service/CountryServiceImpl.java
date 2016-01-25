@@ -91,19 +91,12 @@ public class CountryServiceImpl implements CountryService {
 	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return countryDao.findAllAsLinkEntities(lang);
 	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
-		Validate.isTrue(countryId != null, "Country id must be non null");
-		
-		return countryDao.findOneAsLinkEntity(countryId, lang);
-	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
 		Validate.isTrue(slug != null, "Country slug must be non null");
+		Validate.isTrue(!slug.trim().isEmpty(), "Country slug must be non empty");
 
 		return countryDao.findOneAsLinkEntity(slug, lang);
 	}
