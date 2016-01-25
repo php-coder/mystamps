@@ -10,6 +10,7 @@ before_script:
       mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
     else
       npm install -g bootlint;
+      pip install --user html5validator;
     fi
 
 script:
