@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -113,27 +116,17 @@ public class CountryController {
 	}
 
 	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
-	public String showInfoById(
+	public RedirectView showInfoById(
 			@Country @PathVariable("slug") LinkEntityDto country,
 			Model model,
 			Locale userLocale,
 			HttpServletResponse response)
 			throws IOException {
+		RedirectView redirectView = new RedirectView();
+		redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		redirectView.setUrl(Url.INFO_COUNTRY_PAGE);
 
-		if (country == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-
-		model.addAttribute("countryId", country.getId());
-		model.addAttribute("countrySlug", country.getSlug());
-		model.addAttribute("countryName", country.getName());
-
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer countryId = country.getId();
-		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
-
-		return "country/info";
+		return redirectView;
 	}
 
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
