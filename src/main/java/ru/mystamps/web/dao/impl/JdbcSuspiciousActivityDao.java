@@ -28,7 +28,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.entity.SuspiciousActivity;
+import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 
 @RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
@@ -39,15 +39,12 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	private String addSuspiciousActivitySql;
 	
 	@Override
-	public void add(SuspiciousActivity activity) {
+	public void add(AddSuspiciousActivityDbDto activity) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("type", activity.getType().getName());
+		params.put("type", activity.getType());
 		params.put("occurred_at", activity.getOccurredAt());
 		params.put("page", activity.getPage());
-		Integer userId = activity.getUser() != null // NOPMD
-			? activity.getUser().getId()
-			: null;
-		params.put("user_id", userId);
+		params.put("user_id", activity.getUserId());
 		params.put("ip", activity.getIp());
 		params.put("method", activity.getMethod());
 		params.put("referer_page", activity.getRefererPage());

@@ -15,28 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web;
 
-import java.util.Date;
-
-public interface SiteService {
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	void logAboutAbsentPage(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent
-	);
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	void logAboutFailedAuthentication(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent,
-		Date date
-	);
+public final class Db {
+	
+	public static final class SuspiciousActivity {
+		public static final int PAGE_URL_LENGTH     = 100;
+		public static final int REFERER_PAGE_LENGTH = 255;
+		public static final int USER_AGENT_LENGTH   = 255;
+	}
+	
 }

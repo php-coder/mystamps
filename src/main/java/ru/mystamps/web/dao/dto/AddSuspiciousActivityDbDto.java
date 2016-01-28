@@ -15,28 +15,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao.dto;
 
 import java.util.Date;
 
-public interface SiteService {
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	void logAboutAbsentPage(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent
-	);
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	void logAboutFailedAuthentication(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent,
-		Date date
-	);
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class AddSuspiciousActivityDbDto {
+	private String type;
+	private Date occurredAt;
+	private String page;
+	private String method;
+	private Integer userId;
+	private String ip;
+	private String refererPage;
+	private String userAgent;
 }

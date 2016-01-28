@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.dao;
 
-import ru.mystamps.web.entity.SuspiciousActivity;
+import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 
 public interface SuspiciousActivityDao {
-	void add(SuspiciousActivity activity);
+	void add(AddSuspiciousActivityDbDto activity);
 }

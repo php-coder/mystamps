@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
@@ -52,12 +51,12 @@ public class ErrorController {
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
-		User currentUser = null;
+		Integer userId = null;
 		if (userDetails != null) {
-			currentUser = userDetails.getUser();
+			userId = userDetails.getUser().getId();
 		}
 		
-		siteService.logAboutAbsentPage(page, method, currentUser, ip, referer, agent);
+		siteService.logAboutAbsentPage(page, method, userId, ip, referer, agent);
 	}
 	
 	@RequestMapping(Url.INTERNAL_ERROR_PAGE)

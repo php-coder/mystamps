@@ -30,10 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.entity.SuspiciousActivity;
-import ru.mystamps.web.entity.SuspiciousActivityType;
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
@@ -54,12 +53,12 @@ public class SiteServiceImpl implements SiteService {
 	public void logAboutAbsentPage(
 			String page,
 			String method,
-			User user,
+			Integer userId,
 			String ip,
 			String referer,
 			String agent) {
 		
-		logEvent(PAGE_NOT_FOUND, page, method, user, ip, referer, agent, new Date());
+		logEvent(PAGE_NOT_FOUND, page, method, userId, ip, referer, agent, new Date());
 	}
 	
 	@Override
@@ -68,13 +67,13 @@ public class SiteServiceImpl implements SiteService {
 	public void logAboutFailedAuthentication(
 			String page,
 			String method,
-			User user,
+			Integer userId,
 			String ip,
 			String referer,
 			String agent,
 			Date date) {
 		
-		logEvent(AUTHENTICATION_FAILED, page, method, user, ip, referer, agent, date);
+		logEvent(AUTHENTICATION_FAILED, page, method, userId, ip, referer, agent, date);
 	}
 	
 	@SuppressWarnings({"PMD.UseObjectForClearerAPI", "checkstyle:parameternumber"})
@@ -82,7 +81,7 @@ public class SiteServiceImpl implements SiteService {
 			String type,
 			String page,
 			String method,
-			User user,
+			Integer userId,
 			String ip,
 			String referer,
 			String agent,
@@ -91,19 +90,13 @@ public class SiteServiceImpl implements SiteService {
 		Validate.isTrue(type != null, "Type of suspicious activity was not set");
 		Validate.isTrue(page != null, "Page should be non null");
 		
-		SuspiciousActivity activity = new SuspiciousActivity();
+		AddSuspiciousActivityDbDto activity = new AddSuspiciousActivityDbDto();
 		
-		// TODO: replace entity with DTO and replace SuspiciousActivityType by String
-		SuspiciousActivityType activityType = new SuspiciousActivityType();
-		activityType.setName(type);
-		activity.setType(activityType);
-		
+		activity.setType(type);
 		activity.setOccurredAt(date == null ? new Date() : date);
 		activity.setPage(abbreviatePage(page));
 		activity.setMethod(method);
-		
-		activity.setUser(user);
-		
+		activity.setUserId(userId);
 		activity.setIp(StringUtils.defaultString(ip));
 		activity.setRefererPage(StringUtils.stripToNull(abbreviateRefererPage(referer)));
 		activity.setUserAgent(StringUtils.stripToNull(abbreviateUserAgent(agent)));
@@ -112,17 +105,23 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	private static String abbreviatePage(String page) {
-		return abbreviateIfLengthGreaterThan(page, SuspiciousActivity.PAGE_URL_LENGTH, "page");
+		return abbreviateIfLengthGreaterThan(page, Db.SuspiciousActivity.PAGE_URL_LENGTH, "page");
 	}
 	
 	private static String abbreviateRefererPage(String referer) {
-		// CheckStyle: ignore LineLength for next 1 lines
-		return abbreviateIfLengthGreaterThan(referer, SuspiciousActivity.REFERER_PAGE_LENGTH, "referer_page");
+		return abbreviateIfLengthGreaterThan(
+			referer,
+			Db.SuspiciousActivity.REFERER_PAGE_LENGTH,
+			"referer_page"
+		);
 	}
 	
 	private static String abbreviateUserAgent(String agent) {
-		// CheckStyle: ignore LineLength for next 1 lines
-		return abbreviateIfLengthGreaterThan(agent, SuspiciousActivity.USER_AGENT_LENGTH, "user_agent");
+		return abbreviateIfLengthGreaterThan(
+			agent,
+			Db.SuspiciousActivity.USER_AGENT_LENGTH,
+			"user_agent"
+		);
 	}
 	
 	// CheckStyle: ignore LineLength for next 1 lines

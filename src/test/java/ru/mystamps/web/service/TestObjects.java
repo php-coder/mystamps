@@ -22,7 +22,6 @@ import java.util.Date;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
-import ru.mystamps.web.entity.SuspiciousActivityType;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
@@ -83,20 +82,6 @@ final class TestObjects {
 		user.setHash(TEST_HASH);
 
 		return user;
-	}
-	
-	public static SuspiciousActivityType createPageNotFoundActivityType() {
-		SuspiciousActivityType type = new SuspiciousActivityType();
-		type.setId(1);
-		type.setName("PageNotFound");
-		return type;
-	}
-	
-	public static SuspiciousActivityType createAuthFailedActivityType() {
-		SuspiciousActivityType type = new SuspiciousActivityType();
-		type.setId(2);
-		type.setName("AuthenticationFailed");
-		return type;
 	}
 	
 	public static Image createImage() {

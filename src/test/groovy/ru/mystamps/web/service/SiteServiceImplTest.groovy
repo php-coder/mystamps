@@ -20,10 +20,9 @@ package ru.mystamps.web.service
 import spock.lang.Unroll
 import spock.lang.Specification
 
+import ru.mystamps.web.Db
 import ru.mystamps.web.dao.SuspiciousActivityDao
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.SuspiciousActivity
-import ru.mystamps.web.entity.SuspiciousActivityType
+import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
 import ru.mystamps.web.tests.DateUtils
 
 class SiteServiceImplTest extends Specification {
@@ -48,17 +47,15 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add(_ as SuspiciousActivity)
+			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
 	}
 	
 	def "logAboutAbsentPage() should pass activity type to dao"() {
-		given:
-			SuspiciousActivityType expectedType = TestObjects.createPageNotFoundActivityType()
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.type?.name == expectedType.name
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.type == 'PageNotFound'
 				return true
 			})
 	}
@@ -67,7 +64,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
@@ -84,7 +81,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == TEST_PAGE
 				return true
 			})
@@ -92,13 +89,13 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
 		given:
-			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
+			String longPageUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.PAGE_URL_LENGTH)
 		and:
-			String expectedPageUrl = longPageUrl.take(SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
+			String expectedPageUrl = longPageUrl.take(Db.SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
 		when:
 			service.logAboutAbsentPage(longPageUrl, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == expectedPageUrl
 				return true
 			})
@@ -109,7 +106,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, expectedMethod, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.method == expectedMethod
 				return true
 			})
@@ -122,20 +119,20 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.user == null
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.userId == null
 				return true
 			})
 	}
 	
 	def "logAboutAbsentPage() should pass user to dao"() {
 		given:
-			User user = TestObjects.createUser()
+			Integer expectedUserId = 20
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, user, null, null, null)
+			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.user == user
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.userId == expectedUserId
 				return true
 			})
 	}
@@ -144,7 +141,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip == TEST_IP
 				return true
 			})
@@ -154,7 +151,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip?.empty
 				return true
 			})
@@ -164,20 +161,20 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
 	}
 	def "logAboutAbsentPage() should pass abbreviated referer when it's too long"() {
 		given:
-			String longRefererUrl = '/long/url/' + ('x' * SuspiciousActivity.REFERER_PAGE_LENGTH)
+			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
 		and:
-			String expectedRefererUrl = longRefererUrl.take(SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
+			String expectedRefererUrl = longRefererUrl.take(Db.SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == expectedRefererUrl
 				return true
 			})
@@ -187,7 +184,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, refererPage, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == null
 				return true
 			})
@@ -201,20 +198,20 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
 				return true
 			})
 	}
 	def "logAboutAbsentPage() should pass abbreviated user agent when it's too long"() {
 		given:
-			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
 		and:
-			String expectedUserAgent = longUserAgent.take(SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
+			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == expectedUserAgent
 				return true
 			})
@@ -224,7 +221,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, userAgent)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == null
 				return true
 			})
@@ -242,17 +239,15 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add(_ as SuspiciousActivity)
+			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
 	}
 	
 	def "logAboutFailedAuthentication() should pass activity type to dao"() {
-		given:
-			SuspiciousActivityType expectedType = TestObjects.createAuthFailedActivityType()
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.type?.name == expectedType.name
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.type == 'AuthenticationFailed'
 				return true
 			})
 	}
@@ -263,7 +258,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, expectedDate)
 				return true
 			})
@@ -273,7 +268,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
 				return true
 			})
@@ -290,20 +285,20 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == TEST_PAGE
 				return true
 			})
 	}
 	def "logAboutFailedAuthentication() should pass abbreviated page when it's too long"() {
 		given:
-			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
+			String longPageUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.PAGE_URL_LENGTH)
 		and:
-			String expectedPageUrl = longPageUrl.take(SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
+			String expectedPageUrl = longPageUrl.take(Db.SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
 		when:
 			service.logAboutFailedAuthentication(longPageUrl, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == expectedPageUrl
 				return true
 			})
@@ -313,20 +308,20 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.user == null
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.userId == null
 				return true
 			})
 	}
 	
 	def "logAboutFailedAuthentication() should pass user to dao"() {
 		given:
-			User user = TestObjects.createUser()
+			Integer expectedUserId = 30
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, user, null, null, null, null)
+			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
-				assert activity?.user == user
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.userId == expectedUserId
 				return true
 			})
 	}
@@ -335,7 +330,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip == TEST_IP
 				return true
 			})
@@ -345,7 +340,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip?.empty
 				return true
 			})
@@ -355,7 +350,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
@@ -365,7 +360,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == null
 				return true
 			})
@@ -377,13 +372,13 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass abbreviated referer when it's too long"() {
 		given:
-			String longRefererUrl = '/long/url/' + ('x' * SuspiciousActivity.REFERER_PAGE_LENGTH)
+			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
 		and:
-			String expectedRefererUrl = longRefererUrl.take(SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
+			String expectedRefererUrl = longRefererUrl.take(Db.SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == expectedRefererUrl
 				return true
 			})
@@ -393,7 +388,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
 				return true
 			})
@@ -403,7 +398,7 @@ class SiteServiceImplTest extends Specification {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == null
 				return true
 			})
@@ -415,13 +410,13 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logAboutFailedAuthentication() should pass abbreviated user agent when it's too long"() {
 		given:
-			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
 		and:
-			String expectedUserAgent = longUserAgent.take(SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
+			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent, null)
 		then:
-			1 * suspiciousActivityDao.add({ SuspiciousActivity activity ->
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == expectedUserAgent
 				return true
 			})
