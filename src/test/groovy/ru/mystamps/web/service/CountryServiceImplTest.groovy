@@ -263,7 +263,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for findOneAsLinkEntity()
 	//
 	
-	def "findOneAsLinkEntity() should throw exception when country id is null"() {
+	def "findOneAsLinkEntity() should throw exception when country slug is null"() {
 		when:
 			service.findOneAsLinkEntity(null, 'ru')
 		then:

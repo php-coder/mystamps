@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -116,17 +117,17 @@ public class CountryController {
 	}
 
 	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
-	public RedirectView showInfoById(
+	public View showInfoById(
 			@Country @PathVariable("slug") LinkEntityDto country,
 			Model model,
 			Locale userLocale,
 			HttpServletResponse response)
 			throws IOException {
-		RedirectView redirectView = new RedirectView();
-		redirectView.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		redirectView.setUrl(Url.INFO_COUNTRY_PAGE);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_COUNTRY_PAGE);
 
-		return redirectView;
+		return view;
 	}
 
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
