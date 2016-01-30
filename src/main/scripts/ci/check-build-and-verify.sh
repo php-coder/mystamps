@@ -14,11 +14,13 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || touch BOOTLINT_FAIL
 	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || touch JASMINE_FAIL
 	# FIXME: add check for src/main/config/nginx/503.*html
+	# TODO: remove ignoring of error about alt attribute after resolving #314
 	html5validator \
 		--root src/main/webapp/WEB-INF/views \
 		--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
 			'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
 			'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
+			'An "img" element must have an "alt" attribute' \
 		--show-warnings \
 		>validator.log 2>&1 || touch HTML_FAIL
 fi
