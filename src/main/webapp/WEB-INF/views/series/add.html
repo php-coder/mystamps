@@ -124,7 +124,7 @@
 							</label>
 							<div class="col-sm-5">
 								<select id="category" class="form-control" required="required" th:field="*{category}">
-									<option value=""></option>
+									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
 									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
 									/*/-->
@@ -146,7 +146,7 @@
 							</label>
 							<div class="col-sm-5">
 								<select id="country" class="form-control" th:field="*{country}">
-									<option value=""></option>
+									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
 									<option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
 									/*/-->
