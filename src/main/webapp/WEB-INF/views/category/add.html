@@ -102,27 +102,27 @@
 					<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_CATEGORY_PAGE}}" th:object="${addCategoryForm}">
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
-							<label path="name" class="control-label col-sm-4">
+							<label for="name" class="control-label col-sm-4">
 								<span class="field-label" th:text="#{t_name_on_english}">
 									Name (in English)
 								</span>
 								<span id="name.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" required="required" th:field="*{name}" />
+								<input id="name" type="text" class="form-control" required="required" th:field="*{name}" />
 								<span id="name.errors" class="help-block" th:if="${#fields.hasErrors('name')}" th:each="error : ${#fields.errors('name')}" th:text="${error}"></span>
 							</div>
 						</div>
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('nameRu') ? 'has-error' : ''}">
-							<label path="nameRu" class="control-label col-sm-4">
+							<label for="nameRu" class="control-label col-sm-4">
 								<span class="field-label" th:text="#{t_name_on_russian}">
 									Name (in Russian)
 								</span>
 								<span id="nameRu.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" required="required" th:field="*{nameRu}" />
+								<input id="nameRu" type="text" class="form-control" required="required" th:field="*{nameRu}" />
 								<span id="nameRu.errors" class="help-block" th:if="${#fields.hasErrors('nameRu')}" th:each="error : ${#fields.errors('nameRu')}" th:text="${error}"></span>
 							</div>
 						</div>
