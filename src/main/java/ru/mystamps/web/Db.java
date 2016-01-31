@@ -19,6 +19,10 @@ package ru.mystamps.web;
 
 public final class Db {
 	
+	public static final class Country {
+		public static final int NAME_LENGTH = 50;
+	}
+	
 	public static final class Series {
 		public static final int COMMENT_LENGTH = 255;
 	}
