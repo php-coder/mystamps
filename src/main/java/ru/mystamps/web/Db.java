@@ -25,4 +25,9 @@ public final class Db {
 		public static final int USER_AGENT_LENGTH   = 255;
 	}
 	
+	public static final class UsersActivation {
+		public static final int ACTIVATION_KEY_LENGTH = 10;
+		public static final int EMAIL_LENGTH          = 255;
+	}
+	
 }

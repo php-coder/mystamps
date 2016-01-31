@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.validation;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.UsersActivation;
 
 public final class ValidationRules {
 	
@@ -32,9 +32,9 @@ public final class ValidationRules {
 	
 	public static final int PASSWORD_MIN_LENGTH = 4;
 	
-	public static final int EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;
+	public static final int EMAIL_MAX_LENGTH = Db.UsersActivation.EMAIL_LENGTH;
 	
-	public static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
+	public static final int ACT_KEY_LENGTH = Db.UsersActivation.ACTIVATION_KEY_LENGTH;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
 	
 	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
