@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -53,7 +54,6 @@ import ru.mystamps.web.entity.Series;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
-import ru.mystamps.web.model.SearchSeriesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -97,13 +97,6 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
-	}
-	
-	@InitBinder("searchSeriesForm")
-	protected void initSearchBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
-		binder.registerCustomEditor(String.class, "catalogNumber", editor);
-		binder.registerCustomEditor(String.class, "catalogName", editor);
 	}
 	
 	@ModelAttribute("years")
@@ -315,25 +308,18 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
 	}
 	
-	@RequestMapping(value = Url.FIND_SERIES_BY_CATALOG, method = RequestMethod.POST)
-	public String findSeriesByCatalog(
-		@Validated @ModelAttribute SearchSeriesForm searchSeriesForm,
-		BindingResult result,
+	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)
+	public String searchSeriesByCatalog(
+		@RequestParam("catalogNumber") String catalogNumber,
+		@RequestParam("catalogName") String catalogName,
 		Model model,
-		RedirectAttributes attrs,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (result.hasErrors()) {
-			attrs.addFlashAttribute("org.springframework.validation.BindingResult.searchSeriesForm", result);
-			attrs.addFlashAttribute("searchSeriesForm", searchSeriesForm);
-			return "redirect:" + Url.INDEX_PAGE;
-		}
-		
 		return findSeriesByCatalogNumber(
-			searchSeriesForm.getCatalogNumber(),
-			searchSeriesForm.getCatalogName(),
+			catalogNumber,
+			catalogName,
 			model,
 			userLocale,
 			response

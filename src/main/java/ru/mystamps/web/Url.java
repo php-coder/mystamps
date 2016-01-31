@@ -55,7 +55,7 @@ public final class Url {
 	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
 	
 	// CheckStyle: ignore WhitespaceAroundCheck for next 4 lines
-	public static final String FIND_SERIES_BY_CATALOG = "/series/search";
+	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{id}/{slug}";
