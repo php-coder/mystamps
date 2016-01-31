@@ -20,7 +20,6 @@ package ru.mystamps.web.dao.impl;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
@@ -160,10 +159,10 @@ final class RowMappers {
 	
 	// CheckStyle: ignore LineLength for next 1 line
 	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int i) throws SQLException {
-		String email   = rs.getString("email");
-		Date createdAt = rs.getTimestamp("created_at");
-		
-		return new UsersActivationDto(email, createdAt);
+		return new UsersActivationDto(
+			rs.getString("email"),
+			rs.getTimestamp("created_at")
+		);
 	}
 	
 	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int i) throws SQLException {
