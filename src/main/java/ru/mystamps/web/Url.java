@@ -53,8 +53,6 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{id}";
 	public static final String INFO_SERIES_PAGE      = "/series/{id}";
 	public static final String ADD_IMAGE_SERIES_PAGE = "/series/{id}/image";
-	
-	// CheckStyle: ignore WhitespaceAroundCheck for next 4 lines
 	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";

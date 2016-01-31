@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	  xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -245,15 +245,15 @@
 						<div class="panel-heading">
 							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
-						<div class="panel-body" th:with="number=#{t_number}, catalog=#{t_catalog}, search=#{t_search}">
-							<form method="post" action="@{${SEARCH_SERIES_BY_CATALOG}}"
-								th:action="@{'/series/search/by_catalog'}">
+						<div class="panel-body">
+							<form method="post" action="search_result.html"
+								th:action="@{${T(ru.mystamps.web.Url).SEARCH_SERIES_BY_CATALOG}}">
 								<div class="form-group">
-									<label for="catalogNumber" th:text="${#strings.capitalize(number)+':'}">Number:</label>
-									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control" required="true" />
+									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
+									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control" required="required" />
 								</div>
 								<div class="form-group">
-									<label for="catalogName" th:text="${#strings.capitalize(catalog)+':'}">Catalog name:</label>
+									<label for="catalogName" th:text="|#{t_catalog}:|">Catalog name:</label>
 									<select id="catalogName" name="catalogName" class="form-control">
 										<option value="michel" th:text="#{t_michel}">Michel</option>
 										<option value="scott" th:text="#{t_scott}">Scott</option>
@@ -262,7 +262,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="submit" value="Search" th:value="${#strings.capitalize(search)}" class="btn btn-primary form-control" />
+									<input type="submit" value="Search" th:value="|#{t_search}:|" class="btn btn-primary form-control" />
 								</div>
 							</form>
 						</div>

@@ -348,23 +348,6 @@ public class SeriesController {
 		HttpServletResponse response)
 		throws IOException {
 		
-		return findSeriesByCatalogNumber(
-			catalogNumber,
-			catalogName,
-			model,
-			userLocale,
-			response
-		);
-	}
-	
-	private String findSeriesByCatalogNumber(
-		String catalogNumber,
-		String catalogName,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
 		if (catalogNumber == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
