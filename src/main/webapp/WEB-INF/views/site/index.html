@@ -2,7 +2,8 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	  xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:togglz="http://www.w3.org/1999/xhtml">
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -240,31 +241,28 @@
 							<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Amount of collections: 3</p>
 						</div>
 					</div>
-					<div togglz:active="SHOW_SEARCH_PANEL" class="panel panel-default">
+					<div togglz:active="SHOW_SEARCH_PANEL_ON_INDEX_PAGE" class="panel panel-default">
 						<div class="panel-heading">
-							<h4 class="panel-title" th:text="#{t_find_by_catalog}">Search by catalog</h4>
+							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
-						<div class="panel-body">
-							<form method="post" action="info.html"
-								th:action="@{'/series/search'}"
-								th:object="${searchSeriesForm}">
+						<div class="panel-body" th:with="number=#{t_number}, catalog=#{t_catalog}, search=#{t_search}">
+							<form method="post" action="@{${SEARCH_SERIES_BY_CATALOG}}"
+								th:action="@{'/series/search/by_catalog'}">
 								<div class="form-group">
-									<label for="catalogNumber" th:text="#{t_number_in_catalog}">Number:</label>
-									<input id="catalogNumber" type="search" class="form-control" required="true" th:field="*{catalogNumber}"/>
-									<span class="help-block" th:if="${#fields.hasErrors('catalogNumber')}" th:each="error : ${#fields.errors('catalogNumber')}" th:text="${error}"></span>
+									<label for="catalogNumber" th:text="${#strings.capitalize(number)+':'}">Number:</label>
+									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control" required="true" />
 								</div>
 								<div class="form-group">
-									<label for="catalogName" th:text="#{t_catalog_name}">Catalogue name:</label>
-									<select id="catalogName" class="form-control" th:field="*{catalogName}">
+									<label for="catalogName" th:text="${#strings.capitalize(catalog)+':'}">Catalog name:</label>
+									<select id="catalogName" name="catalogName" class="form-control">
 										<option value="michel" th:text="#{t_michel}">Michel</option>
 										<option value="scott" th:text="#{t_scott}">Scott</option>
 										<option value="yvert" th:text="#{t_yvert}">Yvert</option>
 										<option value="gibbons" th:text="#{t_sg}">Gibbons</option>
 									</select>
-									<span class="help-block" th:if="${#fields.hasErrors('catalogName')}" th:each="error : ${#fields.errors('catalogName')}" th:text="${error}"></span>
 								</div>
 								<div class="form-group">
-									<input type="submit" value="Find" class="btn btn-primary form-control" />
+									<input type="submit" value="Search" th:value="${#strings.capitalize(search)}" class="btn btn-primary form-control" />
 								</div>
 							</form>
 						</div>

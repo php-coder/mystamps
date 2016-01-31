@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.model.SearchSeriesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -52,10 +51,6 @@ public class SiteController {
 		model.addAttribute("seriesCounter", seriesService.countAll());
 		model.addAttribute("stampsCounter", seriesService.countAllStamps());
 		model.addAttribute("collectionsCounter", collectionService.countCollectionsOfUsers());
-		
-		if (!model.containsAttribute("searchSeriesForm")) {
-			model.addAttribute("searchSeriesForm", new SearchSeriesForm());
-		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		model.addAttribute(
