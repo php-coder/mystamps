@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -160,6 +161,15 @@ final class RowMappers {
 	// CheckStyle: ignore LineLength for next 1 line
 	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int i) throws SQLException {
 		return new UsersActivationDto(
+			rs.getString("email"),
+			rs.getTimestamp("created_at")
+		);
+	}
+	
+	// CheckStyle: ignore LineLength for next 1 line
+	public static UsersActivationFullDto forUsersActivationFullDto(ResultSet rs, int i) throws SQLException {
+		return new UsersActivationFullDto(
+			rs.getString("activation_key"),
 			rs.getString("email"),
 			rs.getTimestamp("created_at")
 		);

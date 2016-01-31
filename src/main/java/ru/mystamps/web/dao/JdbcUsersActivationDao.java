@@ -17,12 +17,17 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Date;
+import java.util.List;
+
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 public interface JdbcUsersActivationDao {
 	long countByActivationKey(String activationKey);
 	void removeByActivationKey(String activationKey);
 	void add(AddUsersActivationDbDto activation);
 	UsersActivationDto findByActivationKey(String activationKey);
+	List<UsersActivationFullDto> findOlderThan(Date date);
 }

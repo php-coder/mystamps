@@ -20,10 +20,10 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.entity.User;
-import ru.mystamps.web.entity.UsersActivation;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -49,11 +49,12 @@ final class TestObjects {
 	private TestObjects() {
 	}
 	
-	public static UsersActivation createUsersActivation() {
-		UsersActivation activation = new UsersActivation();
-		activation.setActivationKey(TEST_ACTIVATION_KEY);
-		activation.setEmail(TEST_EMAIL);
-		activation.setCreatedAt(new Date());
+	public static UsersActivationFullDto createUsersActivationFullDto() {
+		UsersActivationFullDto activation = new UsersActivationFullDto(
+			TEST_ACTIVATION_KEY,
+			TEST_EMAIL,
+			new Date()
+		);
 		return activation;
 	}
 	

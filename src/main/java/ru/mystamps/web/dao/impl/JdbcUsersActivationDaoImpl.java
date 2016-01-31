@@ -18,7 +18,9 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -31,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
@@ -40,6 +43,9 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 	
 	@Value("${users_activation.find_by_activation_key}")
 	private String findByActivationKeySql;
+	
+	@Value("${users_activation.find_older_than}")
+	private String findOlderThanDateSql;
 	
 	@Value("${users_activation.count_by_activation_key}")
 	private String countByActivationKeySql;
@@ -56,6 +62,15 @@ public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
 			findByActivationKeySql,
 			Collections.singletonMap("activation_key", activationKey),
 			RowMappers::forUsersActivationDto
+		);
+	}
+	
+	@Override
+	public List<UsersActivationFullDto> findOlderThan(Date date) {
+		return jdbcTemplate.query(
+			findOlderThanDateSql,
+			Collections.singletonMap("date", date),
+			RowMappers::forUsersActivationFullDto
 		);
 	}
 	

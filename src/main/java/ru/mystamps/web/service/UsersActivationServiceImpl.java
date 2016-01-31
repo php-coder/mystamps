@@ -18,10 +18,12 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DateUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcUsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.support.togglz.Features;
@@ -83,6 +86,16 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
 		return usersActivationDao.findByActivationKey(activationKey);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<UsersActivationFullDto> findOlderThan(int days) {
+		Validate.isTrue(days > 0, "Days must be greater than zero");
+		
+		Date expiredSince = DateUtils.addDays(new Date(), -days);
+		
+		return usersActivationDao.findOlderThan(expiredSince);
 	}
 	
 	@Override

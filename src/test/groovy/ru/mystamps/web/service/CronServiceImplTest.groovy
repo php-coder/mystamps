@@ -19,43 +19,40 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.UsersActivationDao
-import ru.mystamps.web.entity.UsersActivation
-import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.dao.dto.UsersActivationFullDto
 
 class CronServiceImplTest extends Specification {
 	
-	private UsersActivationDao usersActivationDao = Mock()
 	private UsersActivationService usersActivationService = Mock()
 	
-	private CronService service = new CronServiceImpl(usersActivationDao, usersActivationService)
+	private CronService service = new CronServiceImpl(usersActivationService)
 	
 	//
 	// Tests for purgeUsersActivations()
 	//
 	
-	def "purgeUsersActivations() should get expired activations from dao"() {
+	def "purgeUsersActivations() should get expired activations from service"() {
 		when:
 			service.purgeUsersActivations()
 		then:
-			1 * usersActivationDao.findByCreatedAtLessThan(_ as Date) >> []
+			1 * usersActivationService.findOlderThan(_ as Integer) >> []
 	}
 	
-	def "purgeUsersActivations() should pass expired date to dao"() {
+	def "purgeUsersActivations() should pass days to service"() {
 		given:
-			Date expectedDate = new Date() - CronService.PURGE_AFTER_DAYS
+			int expectedDays = CronService.PURGE_AFTER_DAYS
 		when:
 			service.purgeUsersActivations()
 		then:
-			1 * usersActivationDao.findByCreatedAtLessThan({ Date passedDate ->
-				assert DateUtils.roughlyEqual(passedDate, expectedDate)
+			1 * usersActivationService.findOlderThan({ int days ->
+				assert days == expectedDays
 				return true
 			}) >> []
 	}
 	
-	def "purgeUsersActivations() should throw exception when null activations was returned"() {
+	def "purgeUsersActivations() should throw exception when null activations were returned"() {
 		given:
-			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> null
+			usersActivationService.findOlderThan(_ as Integer) >> null
 		when:
 			service.purgeUsersActivations()
 		then:
@@ -64,8 +61,8 @@ class CronServiceImplTest extends Specification {
 	
 	def "purgeUsersActivations() should delete expired activations"() {
 		given:
-			List<UsersActivation> expectedActivations = [ TestObjects.createUsersActivation() ]
-			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> expectedActivations
+			List<UsersActivationFullDto> expectedActivations = [ TestObjects.createUsersActivationFullDto() ]
+			usersActivationService.findOlderThan(_ as Integer) >> expectedActivations
 		when:
 			service.purgeUsersActivations()
 		then:
@@ -74,7 +71,7 @@ class CronServiceImplTest extends Specification {
 	
 	def "purgeUsersActivations() should do nothing if no activations"() {
 		given:
-			usersActivationDao.findByCreatedAtLessThan(_ as Date) >> []
+			usersActivationService.findOlderThan(_ as Integer) >> []
 		when:		
 			service.purgeUsersActivations()
 		then:

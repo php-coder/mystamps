@@ -44,9 +44,6 @@ public class ServicesConfig {
 	private UserDao userDao;
 	
 	@Autowired
-	private UsersActivationDao usersActivationDao;
-	
-	@Autowired
 	private StrategiesConfig strategiesConfig;
 	
 	@Autowired
@@ -78,7 +75,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CronService getCronService() {
-		return new CronServiceImpl(usersActivationDao, getUsersActivationService());
+		return new CronServiceImpl(getUsersActivationService());
 	}
 	
 	@Bean

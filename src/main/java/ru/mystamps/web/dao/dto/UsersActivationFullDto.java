@@ -15,19 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.dao.dto;
 
-import java.util.List;
-import java.util.Locale;
+import java.util.Date;
 
-import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.service.dto.RegisterAccountDto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface UsersActivationService {
-	void add(RegisterAccountDto dto, Locale lang);
-	void remove(String activationKey);
-	UsersActivationDto findByActivationKey(String activationKey);
-	List<UsersActivationFullDto> findOlderThan(int days);
-	long countByActivationKey(String activationKey);
+@Getter
+@RequiredArgsConstructor
+public class UsersActivationFullDto {
+	private final String activationKey;
+	private final String email;
+	private final Date createdAt;
 }

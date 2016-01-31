@@ -17,11 +17,9 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.time.DateUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.UsersActivationDao;
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
@@ -40,17 +37,14 @@ public class CronServiceImpl implements CronService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
-	private final UsersActivationDao usersActivationDao;
 	private final UsersActivationService usersActivationService;
 	
 	@Override
 	@Scheduled(cron = EVERY_DAY_AT_00_30)
 	@Transactional
 	public void purgeUsersActivations() {
-		Date expiredSince = DateUtils.addDays(new Date(), -PURGE_AFTER_DAYS);
-		
-		List<UsersActivation> expiredActivations =
-			usersActivationDao.findByCreatedAtLessThan(expiredSince);
+		List<UsersActivationFullDto> expiredActivations =
+			usersActivationService.findOlderThan(PURGE_AFTER_DAYS);
 		
 		Validate.validState(expiredActivations != null, "Expired activations should be non null");
 		
@@ -59,7 +53,7 @@ public class CronServiceImpl implements CronService {
 			return;
 		}
 		
-		for (UsersActivation activation : expiredActivations) {
+		for (UsersActivationFullDto activation : expiredActivations) {
 			LOG.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				activation.getActivationKey(),
