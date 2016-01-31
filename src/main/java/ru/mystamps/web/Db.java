@@ -19,6 +19,10 @@ package ru.mystamps.web;
 
 public final class Db {
 	
+	public static final class Series {
+		public static final int COMMENT_LENGTH = 255;
+	}
+	
 	public static final class SuspiciousActivity {
 		public static final int PAGE_URL_LENGTH     = 100;
 		public static final int REFERER_PAGE_LENGTH = 255;
