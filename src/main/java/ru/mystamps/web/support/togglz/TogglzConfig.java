@@ -17,25 +17,15 @@
  */
 package ru.mystamps.web.support.togglz;
 
-import java.util.Collections;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
-
-import com.github.heneke.thymeleaf.togglz.TogglzDialect;
-import org.togglz.console.TogglzConsoleServlet;
-import org.togglz.core.manager.FeatureManager;
-import org.togglz.core.manager.FeatureManagerBuilder;
-import org.togglz.core.repository.cache.CachingStateRepository;
+import org.togglz.core.repository.StateRepository;
 import org.togglz.core.repository.jdbc.JDBCStateRepository;
-import org.togglz.spring.security.SpringSecurityUserProvider;
 
-import ru.mystamps.web.Url;
 
 @Configuration
 public class TogglzConfig {
@@ -44,33 +34,8 @@ public class TogglzConfig {
 	private DataSource dataSource;
 	
 	@Bean
-	public FeatureManager getFeatureManager() {
-		return new FeatureManagerBuilder()
-			.stateRepository(new CachingStateRepository(new JDBCStateRepository(dataSource)))
-			.featureEnum(Features.class)
-			.userProvider(new SpringSecurityUserProvider("CHANGE_FEATURES"))
-			.build();
-	}
-	
-	/* Web console for managing Togglz.
-	 *
-	 * Access it via http://127.0.0.1:8080/togglz after authentication as "admin" user.
-	 *
-	 * @see http://www.togglz.org/documentation/admin-console.html
-	 */
-	@Bean
-	public ServletRegistrationBean getTogglzConsole() {
-		ServletRegistrationBean servlet = new ServletRegistrationBean();
-		servlet.setName("TogglzConsole");
-		servlet.setServlet(new TogglzConsoleServlet());
-		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
-		servlet.setUrlMappings(Collections.singletonList(Url.TOGGLZ_CONSOLE_PAGE + "/*"));
-		return servlet;
-	}
-	
-	@Bean
-	public TogglzDialect getTogglzDialect() {
-		return new TogglzDialect();
+	public StateRepository getStateRepository() {
+		return new JDBCStateRepository(dataSource);
 	}
 	
 }
