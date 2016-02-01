@@ -293,8 +293,8 @@
 		
 		<dependency>
 			<groupId>com.github.marceloverdijk</groupId>
-			<artifactId>togglz-spring-boot</artifactId>
-			<version>ef28d0d3d3ff73c4a328303ef574939acd2eccc6</version>
+			<artifactId>togglz-spring-boot-starter</artifactId>
+			<version>0.0.1.BUILD-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 		
