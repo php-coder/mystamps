@@ -84,7 +84,7 @@ public class CountryController {
 		UrlEntityDto countryUrl = countryService.add(form, currentUser.getId());
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())
+			.buildAndExpand(countryUrl.getSlug())
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
@@ -123,6 +123,12 @@ public class CountryController {
 			Locale userLocale,
 			HttpServletResponse response)
 			throws IOException {
+
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
 		view.setUrl(Url.INFO_COUNTRY_PAGE);

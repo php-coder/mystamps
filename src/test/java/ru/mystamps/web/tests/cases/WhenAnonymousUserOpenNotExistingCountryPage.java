@@ -39,10 +39,9 @@ public class WhenAnonymousUserOpenNotExistingCountryPage
 	
 	@Test(groups = "logic")
 	public void shouldShow404Page() {
-		String absentCountryId = "999";
+		String absentCountrySlug = "test";
 		String url = Url.INFO_COUNTRY_PAGE
-			.replace("{id}", absentCountryId)
-			.replace("{slug}", "country-404-error-test");
+			.replace("{slug}", absentCountrySlug);
 		page.open(url);
 		
 		checkStandardStructure();

@@ -8,7 +8,8 @@
 	<changeSet id="add-unique-constraint-to-slug-in-countries-table" author="AleksSPb" context="scheme">
 
 		<preConditions>
-			<sqlCheck expectedResult="0">SELECT COUNT(slug) as num
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(slug) as num
 				FROM countries
 				GROUP BY slug
 				HAVING num > 1
