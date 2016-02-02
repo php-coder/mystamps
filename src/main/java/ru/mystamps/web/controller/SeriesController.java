@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -345,12 +347,12 @@ public class SeriesController {
 		@RequestParam("catalogName") String catalogName,
 		Model model,
 		Locale userLocale,
-		HttpServletResponse response)
+		RedirectAttributes attrs)
 		throws IOException {
 		
-		if (catalogNumber == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+		if (StringUtils.isBlank(catalogNumber)) {
+			attrs.addFlashAttribute("numberIsEmpty", true);
+			return "redirect:" + Url.INDEX_PAGE;
 		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
