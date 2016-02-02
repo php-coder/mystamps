@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -341,32 +342,32 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)
 	public String searchSeriesByCatalog(
-		@RequestParam("catalogNumber") String catalogNumber,
+		@RequestParam("catalogNumber") Optional<String> catalogNumber,
 		@RequestParam("catalogName") String catalogName,
 		Model model,
 		Locale userLocale,
-		HttpServletResponse response)
+		RedirectAttributes attrs)
 		throws IOException {
 		
-		if (catalogNumber == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
+		if (catalogNumber.orElse("").trim().isEmpty()) {
+			attrs.addFlashAttribute("numberIsEmpty", true);
+			return "redirect:" + Url.INDEX_PAGE;
 		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
 			case "michel":
-				series = seriesService.findByMichelNumber(catalogNumber, lang);
+				series = seriesService.findByMichelNumber(catalogNumber.get(), lang);
 				break;
 			case "scott":
-				series = seriesService.findByScottNumber(catalogNumber, lang);
+				series = seriesService.findByScottNumber(catalogNumber.get(), lang);
 				break;
 			case "yvert":
-				series = seriesService.findByYvertNumber(catalogNumber, lang);
+				series = seriesService.findByYvertNumber(catalogNumber.get(), lang);
 				break;
 			case "gibbons":
-				series = seriesService.findByGibbonsNumber(catalogNumber, lang);
+				series = seriesService.findByGibbonsNumber(catalogNumber.get(), lang);
 				break;
 			default:
 				series = Collections.emptyList();
