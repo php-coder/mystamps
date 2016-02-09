@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -342,14 +343,14 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)
 	public String searchSeriesByCatalog(
-		@RequestParam("catalogNumber") Optional<String> catalogNumber,
+		@RequestParam("catalogNumber") String catalogNumber,
 		@RequestParam("catalogName") String catalogName,
 		Model model,
 		Locale userLocale,
 		RedirectAttributes attrs)
 		throws IOException {
 		
-		if (catalogNumber.orElse("").trim().isEmpty()) {
+		if (StringUtils.isBlank(catalogNumber)) {
 			attrs.addFlashAttribute("numberIsEmpty", true);
 			return "redirect:" + Url.INDEX_PAGE;
 		}
@@ -358,16 +359,16 @@ public class SeriesController {
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
 			case "michel":
-				series = seriesService.findByMichelNumber(catalogNumber.get(), lang);
+				series = seriesService.findByMichelNumber(catalogNumber, lang);
 				break;
 			case "scott":
-				series = seriesService.findByScottNumber(catalogNumber.get(), lang);
+				series = seriesService.findByScottNumber(catalogNumber, lang);
 				break;
 			case "yvert":
-				series = seriesService.findByYvertNumber(catalogNumber.get(), lang);
+				series = seriesService.findByYvertNumber(catalogNumber, lang);
 				break;
 			case "gibbons":
-				series = seriesService.findByGibbonsNumber(catalogNumber.get(), lang);
+				series = seriesService.findByGibbonsNumber(catalogNumber, lang);
 				break;
 			default:
 				series = Collections.emptyList();
