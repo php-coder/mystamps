@@ -19,6 +19,8 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	void logAboutAbsentPage(
@@ -39,4 +41,6 @@ public interface SiteService {
 		String agent,
 		Date date
 	);
+	void logAboutMissingCsrfToken(HttpServletRequest request);
+	void logAboutInvalidCsrfToken(HttpServletRequest request);
 }
