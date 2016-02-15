@@ -1,0 +1,6 @@
+---
+- name: Change the default hostname
+  hostname: name=mystamps-devel
+
+- name: Update cache
+  apt: update_cache=yes upgrade=dist
