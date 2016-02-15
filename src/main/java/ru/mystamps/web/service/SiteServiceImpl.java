@@ -19,6 +19,8 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -33,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
@@ -43,6 +46,11 @@ public class SiteServiceImpl implements SiteService {
 	// in src/main/resources/liquibase/initial-state.xml
 	private static final String PAGE_NOT_FOUND = "PageNotFound";
 	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+	
+	// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
+	// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
+	private static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+	private static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	
@@ -74,6 +82,40 @@ public class SiteServiceImpl implements SiteService {
 			Date date) {
 		
 		logEvent(AUTHENTICATION_FAILED, page, method, userId, ip, referer, agent, date);
+	}
+	
+	@Override
+	@Transactional
+	public void logAboutMissingCsrfToken(HttpServletRequest request) {
+		
+		logEvent(
+			MISSING_CSRF_TOKEN,
+			request.getRequestURI(),
+			request.getMethod(),
+			SecurityContextUtils.getUserId(),
+			request.getRemoteAddr(),
+			request.getHeader("referer"),
+			request.getHeader("user-agent"),
+			new Date()
+		);
+		
+	}
+	
+	@Override
+	@Transactional
+	public void logAboutInvalidCsrfToken(HttpServletRequest request) {
+		
+		logEvent(
+			INVALID_CSRF_TOKEN,
+			request.getRequestURI(),
+			request.getMethod(),
+			SecurityContextUtils.getUserId(),
+			request.getRemoteAddr(),
+			request.getHeader("referer"),
+			request.getHeader("user-agent"),
+			new Date()
+		);
+		
 	}
 	
 	@SuppressWarnings({"PMD.UseObjectForClearerAPI", "checkstyle:parameternumber"})
