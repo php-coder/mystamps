@@ -39,4 +39,12 @@ public interface SiteService {
 		String agent,
 		Date date
 	);
+	void logAboutWrongCsrfToken(
+			String page,
+			String method,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent
+	);
 }

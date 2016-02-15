@@ -43,6 +43,7 @@ public class SiteServiceImpl implements SiteService {
 	// in src/main/resources/liquibase/initial-state.xml
 	private static final String PAGE_NOT_FOUND = "PageNotFound";
 	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+	private static final String WRONG_CSRF_TOKEN = "WrongCsrfToken";
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	
@@ -74,6 +75,20 @@ public class SiteServiceImpl implements SiteService {
 			Date date) {
 		
 		logEvent(AUTHENTICATION_FAILED, page, method, userId, ip, referer, agent, date);
+	}
+	
+	@Override
+	@Transactional
+	public void logAboutWrongCsrfToken(
+			String page,
+			String method,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent) {
+	
+		logEvent(WRONG_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
+		
 	}
 	
 	@SuppressWarnings({"PMD.UseObjectForClearerAPI", "checkstyle:parameternumber"})

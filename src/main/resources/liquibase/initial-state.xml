@@ -410,6 +410,9 @@
 		<insert tableName="suspicious_activities_types">
 			<column name="name" value="AuthenticationFailed" />
 		</insert>
+		<insert tableName="suspicious_activities_types">
+			<column name="name" value="WrongCsrfToken" />
+		</insert>
 	</changeSet>
 
 	<changeSet id="create-user-admin" author="php-coder" context="test-data">

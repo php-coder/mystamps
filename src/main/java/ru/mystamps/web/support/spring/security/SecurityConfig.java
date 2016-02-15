@@ -39,6 +39,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.Url;
@@ -88,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.exceptionHandling()
-				.accessDeniedPage(Url.UNAUTHORIZED_PAGE)
+				.accessDeniedHandler(accessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
 				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
 				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
@@ -120,6 +121,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
 		return new AuthenticationFailureListener();
 	}
+	
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		CustomAccessDeniedHandler accessDeniedHandler = new CustomAccessDeniedHandler();
+		accessDeniedHandler.setErrorPage(Url.UNAUTHORIZED_PAGE);
+		return accessDeniedHandler;
+	} 
 	
 	private UserDetailsService getUserDetailsService() {
 		return new CustomUserDetailsService(servicesConfig.getUserService());
