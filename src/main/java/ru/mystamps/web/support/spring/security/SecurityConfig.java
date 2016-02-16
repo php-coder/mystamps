@@ -44,6 +44,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
+import ru.mystamps.web.service.SiteService;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -54,6 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private ServicesConfig servicesConfig;
+	
+	@Autowired
+	private SiteService siteService;
 	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
@@ -124,9 +128,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
-		CustomAccessDeniedHandler accessDeniedHandler = new CustomAccessDeniedHandler();
-		accessDeniedHandler.setErrorPage(Url.UNAUTHORIZED_PAGE);
-		return accessDeniedHandler;
+		return new LogCsrfEventAndShow401PageForAccessDenied(siteService, Url.UNAUTHORIZED_PAGE);
 	} 
 	
 	private UserDetailsService getUserDetailsService() {

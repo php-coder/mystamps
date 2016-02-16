@@ -43,7 +43,8 @@ public class SiteServiceImpl implements SiteService {
 	// in src/main/resources/liquibase/initial-state.xml
 	private static final String PAGE_NOT_FOUND = "PageNotFound";
 	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
-	private static final String WRONG_CSRF_TOKEN = "WrongCsrfToken";
+	private static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+	private static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	
@@ -79,7 +80,7 @@ public class SiteServiceImpl implements SiteService {
 	
 	@Override
 	@Transactional
-	public void logAboutWrongCsrfToken(
+	public void logAboutMissingCsrfToken(
 			String page,
 			String method,
 			Integer userId,
@@ -87,7 +88,21 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 	
-		logEvent(WRONG_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
+		logEvent(MISSING_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
+		
+	}
+	
+	@Override
+	@Transactional
+	public void logAboutInvalidCsrfToken(
+			String page,
+			String method,
+			Integer userId,
+			String ip,
+			String referer,
+			String agent) {
+		
+		logEvent(INVALID_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
 		
 	}
 	
