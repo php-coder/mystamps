@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public interface SiteService {
@@ -39,20 +40,6 @@ public interface SiteService {
 		String agent,
 		Date date
 	);
-	void logAboutMissingCsrfToken(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent
-	);
-	void logAboutInvalidCsrfToken(
-		String page,
-		String method,
-		Integer userId,
-		String ip,
-		String referer,
-		String agent
-	);
+	void logAboutMissingCsrfToken(HttpServletRequest request);
+	void logAboutInvalidCsrfToken(HttpServletRequest request);
 }

@@ -56,9 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ServicesConfig servicesConfig;
 	
-	@Autowired
-	private SiteService siteService;
-	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
@@ -93,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 			.exceptionHandling()
-				.accessDeniedHandler(accessDeniedHandler())
+				.accessDeniedHandler(getAccessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
 				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
 				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
@@ -127,8 +124,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public AccessDeniedHandler accessDeniedHandler() {
-		return new LogCsrfEventAndShow401PageForAccessDenied(siteService, Url.UNAUTHORIZED_PAGE);
+	public AccessDeniedHandler getAccessDeniedHandler() {
+		return new LogCsrfEventAndShow401PageForAccessDenied(
+			servicesConfig.getSiteService(),
+			Url.UNAUTHORIZED_PAGE
+		);
 	} 
 	
 	private UserDetailsService getUserDetailsService() {

@@ -33,6 +33,9 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
@@ -44,6 +47,9 @@ public class SiteServiceImpl implements SiteService {
 	private static final String PAGE_NOT_FOUND = "PageNotFound";
 	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
 	private static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+	
+	// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
+	// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
 	private static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	
 	private final SuspiciousActivityDao suspiciousActivities;
@@ -80,29 +86,35 @@ public class SiteServiceImpl implements SiteService {
 	
 	@Override
 	@Transactional
-	public void logAboutMissingCsrfToken(
-			String page,
-			String method,
-			Integer userId,
-			String ip,
-			String referer,
-			String agent) {
-	
-		logEvent(MISSING_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
+	public void logAboutMissingCsrfToken(HttpServletRequest request) {
+		
+		logEvent(
+			MISSING_CSRF_TOKEN,
+			request.getRequestURI(),
+			request.getMethod(),
+			SecurityContextUtils.getUserId(),
+			request.getRemoteAddr(),
+			request.getHeader("referer"),
+			request.getHeader("user-agent"),
+			new Date()
+		);
 		
 	}
 	
 	@Override
 	@Transactional
-	public void logAboutInvalidCsrfToken(
-			String page,
-			String method,
-			Integer userId,
-			String ip,
-			String referer,
-			String agent) {
+	public void logAboutInvalidCsrfToken(HttpServletRequest request) {
 		
-		logEvent(INVALID_CSRF_TOKEN, page, method, userId, ip, referer, agent, new Date());
+		logEvent(
+			INVALID_CSRF_TOKEN,
+			request.getRequestURI(),
+			request.getMethod(),
+			SecurityContextUtils.getUserId(),
+			request.getRemoteAddr(),
+			request.getHeader("referer"),
+			request.getHeader("user-agent"),
+			new Date()
+		);
 		
 	}
 	
