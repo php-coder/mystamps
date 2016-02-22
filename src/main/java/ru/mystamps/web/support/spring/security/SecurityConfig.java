@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -40,7 +38,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
@@ -108,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
-				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/console"))
+				.ignoringAntMatchers("/console/**")
 			.and()
 			.rememberMe()
 				// TODO: GH #27
@@ -152,40 +149,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
-	}
-	
-	private static class AllExceptUrlsStartedWith implements RequestMatcher {
-		
-		private static final String[] ALLOWED_METHODS =
-			new String[] {"GET", "HEAD", "TRACE", "OPTIONS"};
-		
-		private final String[] allowedUrls;
-		
-		AllExceptUrlsStartedWith(String... allowedUrls) {
-			this.allowedUrls = allowedUrls;
-		}
-		
-		@Override
-		public boolean matches(HttpServletRequest request) {
-			// replicate default behavior (see CsrfFilter.DefaultRequiresCsrfMatcher class)
-			String method = request.getMethod();
-			for (String allowedMethod : ALLOWED_METHODS) {
-				if (allowedMethod.equals(method)) {
-					return false;
-				}
-			}
-			
-			// apply our own exceptions
-			String uri = request.getRequestURI();
-			for (String allowedUrl : allowedUrls) {
-				if (uri.startsWith(allowedUrl)) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
-		
 	}
 	
 }
