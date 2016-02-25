@@ -203,6 +203,14 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countAddedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return seriesDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public boolean isSeriesExist(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		

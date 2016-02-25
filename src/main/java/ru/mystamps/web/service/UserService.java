@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
+
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
@@ -24,4 +26,5 @@ public interface UserService {
 	void registerUser(ActivateAccountDto dto);
 	UserDetails findUserDetailsByLogin(String login);
 	long countByLogin(String login);
+	long countRegisteredSince(Date yesterday);
 }

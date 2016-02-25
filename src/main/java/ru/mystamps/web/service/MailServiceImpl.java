@@ -17,13 +17,17 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrSubstitutor;
+import org.apache.commons.lang3.time.DatePrinter;
+import org.apache.commons.lang3.time.FastDateFormat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,20 +39,42 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
+import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
-@RequiredArgsConstructor
 public class MailServiceImpl implements MailService {
 	private static final Logger LOG = LoggerFactory.getLogger(MailServiceImpl.class);
 	
 	private final JavaMailSender mailer;
 	private final MessageSource messageSource;
+	private final String adminEmail;
+	private final Locale adminLang;
 	private final String robotEmail;
 	private final boolean testMode;
+	
+	private final DatePrinter shortDatePrinter;
+	private final DatePrinter fullDatePrinter;
+	
+	public MailServiceImpl(
+		JavaMailSender mailer,
+		MessageSource messageSource,
+		String adminEmail,
+		Locale adminLang,
+		String robotEmail,
+		boolean testMode) {
+		
+		this.mailer = mailer;
+		this.messageSource = messageSource;
+		this.adminEmail = adminEmail;
+		this.adminLang = adminLang;
+		this.robotEmail = robotEmail;
+		this.testMode = testMode;
+		
+		this.shortDatePrinter = FastDateFormat.getInstance("dd.MM.yyyy", adminLang);
+		this.fullDatePrinter  = FastDateFormat.getInstance("dd.MM.yyyy HH:mm:ss", adminLang);
+	}
 	
 	@Override
 	@Async
@@ -72,6 +98,28 @@ public class MailServiceImpl implements MailService {
 		);
 	}
 	
+	@Override
+	@Async
+	public void sendDailyStatisticsToAdmin(AdminDailyReport report) {
+		sendMail(
+			adminEmail,
+			getSubjectOfDailyStatisticsMail(report),
+			getTextOfDailyStatisticsMail(report),
+			"daily_statistics"
+		);
+		
+		String fromDate = fullDatePrinter.format(report.getStartDate());
+		String tillDate = fullDatePrinter.format(report.getEndDate());
+		
+		LOG.info(
+			"E-mail with daily statistics (from {} to {}) has been sent to {} (lang: {})",
+			fromDate,
+			tillDate,
+			adminEmail,
+			adminLang
+		);
+	}
+
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void sendMail(
 		final String email,
@@ -122,6 +170,42 @@ public class MailServiceImpl implements MailService {
 	
 	private String getSubjectOfActivationMail(SendUsersActivationDto activation) {
 		return messageSource.getMessage("activation.subject", null, activation.getLocale());
+	}
+	
+	public String getSubjectOfDailyStatisticsMail(AdminDailyReport report) {
+		String template = messageSource.getMessage("daily_stat.subject", null, adminLang);
+		
+		String fromDate = shortDatePrinter.format(report.getStartDate());
+		Map<String, String> ctx = Collections.singletonMap("date", fromDate);
+		
+		StrSubstitutor substitutor = new StrSubstitutor(ctx);
+		return substitutor.replace(template);
+	}
+	
+	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
+		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
+		String fromDate = shortDatePrinter.format(report.getStartDate());
+		String tillDate = shortDatePrinter.format(report.getEndDate());
+		
+		Map<String, String> ctx = new HashMap<>();
+		ctx.put("from_date", fromDate);
+		ctx.put("to_date", tillDate);
+		ctx.put("added_countries_cnt", String.valueOf(report.getAddedCountriesCounter()));
+		ctx.put("added_categories_cnt", String.valueOf(report.getAddedCategoriesCounter()));
+		ctx.put("added_series_cnt", String.valueOf(report.getAddedSeriesCounter()));
+		ctx.put("updated_series_cnt", "-1");
+		ctx.put("updated_collections_cnt", "-1"); // TODO: #357
+		// CheckStyle: ignore LineLength for next 1 line
+		ctx.put("registration_requests_cnt", String.valueOf(report.getRegistrationRequestsCounter()));
+		ctx.put("registered_users_cnt", String.valueOf(report.getRegisteredUsersCounter()));
+		ctx.put("events_cnt", "-1");
+		ctx.put("not_found_cnt", "-1");
+		ctx.put("failed_auth_cnt", "-1");
+		ctx.put("missing_csrf_cnt", "-1");
+		ctx.put("invalid_csrf_cnt", "-1");
+		ctx.put("bad_request_cnt", "-1");  // TODO: #122
+
+		return new StrSubstitutor(ctx).replace(template);
 	}
 	
 }

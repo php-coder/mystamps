@@ -393,6 +393,33 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countAddedSince()
+	//
+	
+	def "countAddedSince() should throw exception when date is null"() {
+		when:
+			service.countAddedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 33
+		when:
+			long result = service.countAddedSince(expectedDate)
+		then:
+			1 * categoryDao.countAddedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for getStatisticsOf()
 	//
 

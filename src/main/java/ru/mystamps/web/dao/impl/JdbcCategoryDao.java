@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,9 @@ public class JdbcCategoryDao implements CategoryDao {
 	
 	@Value("${category.count_categories_of_collection}")
 	private String countCategoriesOfCollectionSql;
+	
+	@Value("${category.count_categories_added_since}")
+	private String countCategoriesAddedSinceSql;
 	
 	@Value("${category.count_stamps_by_categories}")
 	private String countStampsByCategoriesSql;
@@ -131,6 +135,15 @@ public class JdbcCategoryDao implements CategoryDao {
 		return jdbcTemplate.queryForObject(
 			countCategoriesOfCollectionSql,
 			Collections.singletonMap("collection_id", collectionId),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countAddedSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countCategoriesAddedSinceSql,
+			Collections.singletonMap("date", date),
 			Long.class
 		);
 	}

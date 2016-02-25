@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
@@ -28,6 +29,7 @@ public interface CountryDao {
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countCountriesOfCollection(Integer collectionId);
+	long countAddedSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);

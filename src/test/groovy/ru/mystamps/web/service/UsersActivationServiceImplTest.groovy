@@ -185,6 +185,33 @@ class UsersActivationServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countCreatedSince()
+	//
+	
+	def "countCreatedSince() should throw exception when date is null"() {
+		when:
+			service.countCreatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countCreatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 31
+		when:
+			long result = service.countCreatedSince(expectedDate)
+		then:
+			1 * usersActivationDao.countCreatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByActivationKey()
 	//
 

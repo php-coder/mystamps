@@ -325,4 +325,31 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.countByLogin('john')
 	}
 	
+	//
+	// Tests for countRegisteredSince()
+	//
+	
+	def "countRegisteredSince() should throw exception when date is null"() {
+		when:
+			service.countRegisteredSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countRegisteredSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 32
+		when:
+			long result = service.countRegisteredSince(expectedDate)
+		then:
+			1 * userDao.countActivatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
 }

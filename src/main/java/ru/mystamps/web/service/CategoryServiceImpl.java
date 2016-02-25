@@ -130,6 +130,14 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countAddedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return categoryDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		

@@ -115,4 +115,12 @@ public class UserServiceImpl implements UserService {
 		return userDao.countByLogin(login);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public long countRegisteredSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return userDao.countActivatedSince(date);
+	}
+	
 }

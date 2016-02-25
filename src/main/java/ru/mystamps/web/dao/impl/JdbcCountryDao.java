@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,9 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Value("${country.count_countries_of_collection}")
 	private String countCountriesOfCollectionSql;
+	
+	@Value("${country.count_countries_added_since}")
+	private String countCountriesAddedSinceSql;
 	
 	@Value("${country.count_stamps_by_countries}")
 	private String countStampsByCountriesSql;
@@ -127,6 +131,15 @@ public class JdbcCountryDao implements CountryDao {
 		return jdbcTemplate.queryForObject(
 			countCountriesOfCollectionSql,
 			Collections.singletonMap("collection_id", collectionId),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countAddedSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countCountriesAddedSinceSql,
+			Collections.singletonMap("date", date),
 			Long.class
 		);
 	}

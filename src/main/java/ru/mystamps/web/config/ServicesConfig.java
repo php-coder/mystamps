@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.config;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -73,7 +75,14 @@ public class ServicesConfig {
 	
 	@Bean
 	public CronService getCronService() {
-		return new CronServiceImpl(getUsersActivationService());
+		return new CronServiceImpl(
+			getCategoryService(),
+			getCountryService(),
+			getSeriesService(),
+			getUserService(),
+			getUsersActivationService(),
+			getMailService()
+		);
 	}
 	
 	@Bean
@@ -92,6 +101,8 @@ public class ServicesConfig {
 		return new MailServiceImpl(
 			mailSender,
 			messageSource,
+			env.getProperty("app.mail.admin.email", "root@localhost"),
+			new Locale(env.getProperty("app.mail.admin.lang", "en")),
 			env.getRequiredProperty("app.mail.robot.email"),
 			enableTestMode);
 	}

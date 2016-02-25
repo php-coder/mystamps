@@ -17,9 +17,12 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.time.DateUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +33,40 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+import ru.mystamps.web.service.dto.AdminDailyReport;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
+	private static final String EVERY_DAY_AT_00_00 = "0 0 0 * * *";
 	private static final String EVERY_DAY_AT_00_30 = "0 30 0 * * *";
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
 	
+	private final CategoryService categoryService;
+	private final CountryService countryService;
+	private final SeriesService seriesService;
+	private final UserService userService;
 	private final UsersActivationService usersActivationService;
+	private final MailService mailService;
+
+	@Override
+	@Scheduled(cron = EVERY_DAY_AT_00_00)
+	@Transactional(readOnly = true)
+	public void sendDailyStatistics() {
+		Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+		Date yesterday = DateUtils.addDays(today, -1);
+		
+		AdminDailyReport report = new AdminDailyReport();
+		report.setStartDate(yesterday);
+		report.setEndDate(today);
+		report.setAddedCategoriesCounter(categoryService.countAddedSince(yesterday));
+		report.setAddedCountriesCounter(countryService.countAddedSince(yesterday));
+		report.setAddedSeriesCounter(seriesService.countAddedSince(yesterday));
+		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));
+		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
+		
+		mailService.sendDailyStatisticsToAdmin(report);
+	}
 	
 	@Override
 	@Scheduled(cron = EVERY_DAY_AT_00_30)

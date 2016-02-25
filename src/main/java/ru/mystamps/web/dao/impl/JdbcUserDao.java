@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,9 @@ public class JdbcUserDao implements UserDao {
 	@Value("${user.count_users_by_login}")
 	private String countByLoginSql;
 	
+	@Value("${user.count_activated_since}")
+	private String countActivatedSinceSql;
+	
 	@Value("${user.find_user_details_by_login}")
 	private String findUserDetailsByLoginSql;
 	
@@ -55,6 +59,15 @@ public class JdbcUserDao implements UserDao {
 		return jdbcTemplate.queryForObject(
 			countByLoginSql,
 			Collections.singletonMap("login", login),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countActivatedSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countActivatedSinceSql,
+			Collections.singletonMap("date", date),
 			Long.class
 		);
 	}

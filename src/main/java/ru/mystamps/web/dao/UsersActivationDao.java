@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 public interface UsersActivationDao {
 	long countByActivationKey(String activationKey);
+	long countCreatedSince(Date date);
 	void removeByActivationKey(String activationKey);
 	void add(AddUsersActivationDbDto activation);
 	UsersActivationDto findByActivationKey(String activationKey);

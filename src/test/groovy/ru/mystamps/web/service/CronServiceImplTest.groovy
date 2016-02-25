@@ -23,9 +23,21 @@ import ru.mystamps.web.dao.dto.UsersActivationFullDto
 
 class CronServiceImplTest extends Specification {
 	
+	private CategoryService categoryService = Mock()
+	private CountryService countryService = Mock()
+	private SeriesService seriesService = Mock()
+	private MailService mailService = Mock()
+	private UserService userService = Mock()
 	private UsersActivationService usersActivationService = Mock()
 	
-	private CronService service = new CronServiceImpl(usersActivationService)
+	private CronService service = new CronServiceImpl(
+		categoryService,
+		countryService,
+		seriesService,
+		userService,
+		usersActivationService,
+		mailService
+	)
 	
 	//
 	// Tests for purgeUsersActivations()

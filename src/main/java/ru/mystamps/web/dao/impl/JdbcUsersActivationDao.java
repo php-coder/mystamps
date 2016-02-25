@@ -50,6 +50,9 @@ public class JdbcUsersActivationDao implements UsersActivationDao {
 	@Value("${users_activation.count_by_activation_key}")
 	private String countByActivationKeySql;
 	
+	@Value("${users_activation.count_created_since}")
+	private String countCreatedSinceSql;
+	
 	@Value("${users_activation.remove_by_activation_key}")
 	private String removeByActivationKeySql;
 	
@@ -79,6 +82,15 @@ public class JdbcUsersActivationDao implements UsersActivationDao {
 		return jdbcTemplate.queryForObject(
 			countByActivationKeySql,
 			Collections.singletonMap("activation_key", activationKey),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countCreatedSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countCreatedSinceSql,
+			Collections.singletonMap("date", date),
 			Long.class
 		);
 	}

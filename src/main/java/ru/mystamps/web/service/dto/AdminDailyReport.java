@@ -15,16 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service.dto;
 
 import java.util.Date;
 
-import ru.mystamps.web.dao.dto.AddUserDbDto;
-import ru.mystamps.web.dao.dto.UserDetails;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface UserDao {
-    long countByLogin(String login);
-	long countActivatedSince(Date date);
-    UserDetails findUserDetailsByLogin(String login);
-	Integer add(AddUserDbDto user);
+@Getter
+@Setter
+public class AdminDailyReport {
+	private Date startDate;
+	private Date endDate;
+	private long addedCategoriesCounter;
+	private long addedCountriesCounter;
+	private long addedSeriesCounter;
+	private long registrationRequestsCounter;
+	private long registeredUsersCounter;
 }

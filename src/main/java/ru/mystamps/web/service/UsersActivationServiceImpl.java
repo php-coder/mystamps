@@ -106,6 +106,14 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		return usersActivationDao.countByActivationKey(activationKey);
 	}
 	
+	@Override
+	@Transactional(readOnly = true)
+	public long countCreatedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return usersActivationDao.countCreatedSince(date);
+	}
+	
 	/**
 	 * Generates activation key.
 	 * @return string which contains numbers and letters in lower case

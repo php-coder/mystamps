@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -34,6 +35,7 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
+	long countAddedSince(Date date);
 	boolean isSeriesExist(Integer seriesId);
 	
 	SeriesDto findFullInfoById(Integer seriesId, String lang);
