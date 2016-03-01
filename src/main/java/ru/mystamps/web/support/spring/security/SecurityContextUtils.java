@@ -40,7 +40,7 @@ public final class SecurityContextUtils {
 	 * @author Sergey Chechenev
 	 */
 	public static Integer getUserId() {
-			return Optional
+		return Optional
 			.ofNullable(SecurityContextHolder.getContext().getAuthentication())
 			.map(Authentication::getPrincipal)
 			.filter(CustomUserDetails.class::isInstance)
