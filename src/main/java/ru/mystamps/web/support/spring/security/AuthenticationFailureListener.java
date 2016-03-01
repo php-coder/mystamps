@@ -61,7 +61,7 @@ public class AuthenticationFailureListener
 		siteService.logAboutFailedAuthentication(page, method, null, ip, referer, agent, date);
 	}
 	
-	private HttpServletRequest getRequest() {
+	private static HttpServletRequest getRequest() {
 		ServletRequestAttributes attrs =
 			(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
 		if (attrs == null) {
