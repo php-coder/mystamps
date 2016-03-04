@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
 import ru.mystamps.web.tests.DateUtils
 
 class SiteServiceImplTest extends Specification {
+	private static final String TEST_TYPE         = 'EventType'
 	private static final String TEST_PAGE         = 'http://example.org/some/page'
 	private static final String TEST_IP           = '127.0.0.1'
 	private static final String TEST_METHOD       = 'GET'
@@ -34,35 +35,128 @@ class SiteServiceImplTest extends Specification {
 	
 	private SuspiciousActivityDao suspiciousActivityDao = Mock()
 	private SiteService service
+	private SiteServiceImpl serviceImpl
 	
 	def setup() {
 		service = new SiteServiceImpl(suspiciousActivityDao)
+		serviceImpl = Spy(SiteServiceImpl, constructorArgs: [suspiciousActivityDao])
 	}
 	
 	//
 	// Tests for logAboutAbsentPage()
 	//
 	
-	def "logAboutAbsentPage() should call dao"() {
+	def "logAboutAbsentPage() should pass arguments to logEvent()"() {
+		given:
+			Integer expectedUserId = 17
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logAboutAbsentPage(
+				TEST_PAGE,
+				TEST_METHOD,
+				expectedUserId,
+				TEST_IP,
+				TEST_REFERER_PAGE,
+				TEST_USER_AGENT
+			)
+		then:
+			1 * serviceImpl.logEvent(
+				SiteServiceImpl.PAGE_NOT_FOUND,
+				TEST_PAGE,
+				TEST_METHOD,
+				expectedUserId,
+				TEST_IP,
+				TEST_REFERER_PAGE,
+				TEST_USER_AGENT,
+				{ Date date ->
+					assert DateUtils.roughlyEqual(date, new Date())
+					return true
+				}
+			)
+	}
+	
+	//
+	// Tests for logAboutFailedAuthentication()
+	//
+	
+	def "logAboutFailedAuthentication() should pass arguments to logEvent()"() {
+		given:
+			Integer expectedUserId = 18
+			Date expectedDate      = new Date()
+		when:
+			serviceImpl.logAboutFailedAuthentication(
+				TEST_PAGE,
+				TEST_METHOD,
+				expectedUserId,
+				TEST_IP,
+				TEST_REFERER_PAGE,
+				TEST_USER_AGENT,
+				expectedDate
+			)
+		then:
+			1 * serviceImpl.logEvent(
+				SiteServiceImpl.AUTHENTICATION_FAILED,
+				TEST_PAGE,
+				TEST_METHOD,
+				expectedUserId,
+				TEST_IP,
+				TEST_REFERER_PAGE,
+				TEST_USER_AGENT,
+				expectedDate
+			)
+	}
+	
+	//
+	// Tests for logEvent()
+	//
+	
+	def "logEvent() should throw exception when type is null"() {
+		when:
+			serviceImpl.logEvent(null, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "logEvent() should throw exception when page is null"() {
+		when:
+			serviceImpl.logEvent(TEST_TYPE, null, TEST_METHOD, null, null, null, null, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "logEvent() should call dao"() {
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
 	}
 	
-	def "logAboutAbsentPage() should pass activity type to dao"() {
+	def "logEvent() should pass activity type to dao"() {
+		given:
+			String expectedType = 'expectedType'
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(expectedType, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.type == 'PageNotFound'
+				assert activity?.type == expectedType
 				return true
 			})
 	}
 	
-	def "logAboutAbsentPage() should assign occurred at to current date"() {
+	def "logEvent() should assign occurred at to specified date when date was provided"() {
+		given:
+			Date expectedDate = new Date() - 100;
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert DateUtils.roughlyEqual(activity?.occurredAt, expectedDate)
+				return true
+			})
+	}
+	
+	def "logEvent() should assign occurred at to current date when date wasn't provided"() {
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
@@ -70,16 +164,9 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should throw exception when page is null"() {
+	def "logEvent() should pass page to dao"() {
 		when:
-			service.logAboutAbsentPage(null, null, null, null, null, null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "logAboutAbsentPage() should pass page to dao"() {
-		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == TEST_PAGE
@@ -93,7 +180,7 @@ class SiteServiceImplTest extends Specification {
 		and:
 			String expectedPageUrl = longPageUrl.take(Db.SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
 		when:
-			service.logAboutAbsentPage(longPageUrl, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, longPageUrl, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.page == expectedPageUrl
@@ -102,9 +189,9 @@ class SiteServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	def "logAboutAbsentPage() should pass method to dao"(String expectedMethod) {
+	def "logEvent() should pass method to dao"(String expectedMethod) {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, expectedMethod, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, expectedMethod, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.method == expectedMethod
@@ -115,9 +202,9 @@ class SiteServiceImplTest extends Specification {
 			null              | _
 	}
 	
-	def "logAboutAbsentPage() should pass null to dao for unknown user id"() {
+	def "logEvent() should pass null to dao for unknown user id"() {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userId == null
@@ -125,11 +212,11 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass user id to dao"() {
+	def "logEvent() should pass user id to dao"() {
 		given:
 			Integer expectedUserId = 20
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userId == expectedUserId
@@ -137,9 +224,9 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass ip to dao"() {
+	def "logEvent() should pass ip to dao"() {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip == TEST_IP
@@ -147,9 +234,9 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass empty string to dao for unknown ip"() {
+	def "logEvent() should pass empty string to dao for unknown ip"() {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.ip?.empty
@@ -157,22 +244,23 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass referer to dao"() {
+	def "logEvent() should pass referer to dao"() {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == TEST_REFERER_PAGE
 				return true
 			})
 	}
-	def "logAboutAbsentPage() should pass abbreviated referer when it's too long"() {
+	
+	def "logEvent() should pass abbreviated referer when it's too long"() {
 		given:
 			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
 		and:
 			String expectedRefererUrl = longRefererUrl.take(Db.SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == expectedRefererUrl
@@ -180,9 +268,9 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass null to dao for unknown referer"(String refererPage) {
+	def "logEvent() should pass null to dao for unknown referer"(String refererPage) {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, refererPage, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.refererPage == null
@@ -194,213 +282,9 @@ class SiteServiceImplTest extends Specification {
 			null           | _
 	}
 	
-	def "logAboutAbsentPage() should pass user agent to dao"() {
+	def "logEvent() should pass user agent to dao"() {
 		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == TEST_USER_AGENT
-				return true
-			})
-	}
-	def "logAboutAbsentPage() should pass abbreviated user agent when it's too long"() {
-		given:
-			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
-		and:
-			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
-		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == expectedUserAgent
-				return true
-			})
-	}
-	
-	def "logAboutAbsentPage() should pass null to dao for unknown user agent"(String userAgent) {
-		when:
-			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, userAgent)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == null
-				return true
-			})
-		where: userAgent | _
-			'  '         | _
-			''           | _
-			null         | _
-	}
-	
-	//
-	// Tests for logAboutFailedAuthentication()
-	//
-	
-	def "logAboutFailedAuthentication() should call dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
-	}
-	
-	def "logAboutFailedAuthentication() should pass activity type to dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.type == 'AuthenticationFailed'
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should assign occurred at to specified date when date was provided"() {
-		given:
-			Date expectedDate = new Date() - 100;
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert DateUtils.roughlyEqual(activity?.occurredAt, expectedDate)
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should assign occurred at to current date when date wasn't provided"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert DateUtils.roughlyEqual(activity?.occurredAt, new Date())
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should throw exception when page is null"() {
-		when:
-			service.logAboutFailedAuthentication(null, null, null, null, null, null, null)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "logAboutFailedAuthentication() should pass page to dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.page == TEST_PAGE
-				return true
-			})
-	}
-	def "logAboutFailedAuthentication() should pass abbreviated page when it's too long"() {
-		given:
-			String longPageUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.PAGE_URL_LENGTH)
-		and:
-			String expectedPageUrl = longPageUrl.take(Db.SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
-		when:
-			service.logAboutFailedAuthentication(longPageUrl, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.page == expectedPageUrl
-				return true
-			})
-	}
-	
-	@Unroll
-	def "logAboutFailedAuthentication() should pass method to dao"(String expectedMethod) {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, expectedMethod, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.method == expectedMethod
-				return true
-			})
-		where: expectedMethod | _
-			'OPTIONS'         | _
-			null              | _
-	}
-	
-	def "logAboutFailedAuthentication() should pass null to dao for unknown user id"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userId == null
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass user id to dao"() {
-		given:
-			Integer expectedUserId = 30
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, expectedUserId, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userId == expectedUserId
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass ip to dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.ip == TEST_IP
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass empty string to dao for unknown ip"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.ip?.empty
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass referer to dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.refererPage == TEST_REFERER_PAGE
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass null to dao for unknown referer"(String refererPage) {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.refererPage == null
-				return true
-			})
-		where: refererPage | _
-			'  '           | _
-			''             | _
-			null           | _
-	}
-	
-	def "logAboutFailedAuthentication() should pass abbreviated referer when it's too long"() {
-		given:
-			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
-		and:
-			String expectedRefererUrl = longRefererUrl.take(Db.SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.refererPage == expectedRefererUrl
-				return true
-			})
-	}
-	
-	def "logAboutFailedAuthentication() should pass user agent to dao"() {
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == TEST_USER_AGENT
@@ -408,32 +292,32 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should pass null to dao for unknown user agent"(String userAgent) {
+	def "logEvent() should pass abbreviated user agent when it's too long"() {
+		given:
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
+		and:
+			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
 		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.userAgent == expectedUserAgent
+				return true
+			})
+	}
+	
+	def "logEvent() should pass null to dao for unknown user agent"(String userAgent) {
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)
 		then:
 			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
 				assert activity?.userAgent == null
 				return true
 			})
 		where: userAgent | _
-			'  '         | _
-			''           | _
-			null         | _
-	}
-	
-	def "logAboutFailedAuthentication() should pass abbreviated user agent when it's too long"() {
-		given:
-			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
-		and:
-			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
-		when:
-			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent, null)
-		then:
-			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
-				assert activity?.userAgent == expectedUserAgent
-				return true
-			})
+			'  '     | _
+			''       | _
+			null     | _
 	}
 	
 }
