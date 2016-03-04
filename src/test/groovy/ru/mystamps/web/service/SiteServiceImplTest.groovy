@@ -304,6 +304,20 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@Unroll
+	def "logAboutFailedAuthentication() should pass method to dao"(String expectedMethod) {
+		when:
+			service.logAboutFailedAuthentication(TEST_PAGE, expectedMethod, null, null, null, null, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.method == expectedMethod
+				return true
+			})
+		where: expectedMethod | _
+			'OPTIONS'         | _
+			null              | _
+	}
+	
 	def "logAboutFailedAuthentication() should pass null to dao for unknown user"() {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
