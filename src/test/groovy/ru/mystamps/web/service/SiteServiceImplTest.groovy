@@ -115,7 +115,7 @@ class SiteServiceImplTest extends Specification {
 			null              | _
 	}
 	
-	def "logAboutAbsentPage() should pass null to dao for unknown user"() {
+	def "logAboutAbsentPage() should pass null to dao for unknown user id"() {
 		when:
 			service.logAboutAbsentPage(TEST_PAGE, TEST_METHOD, null, null, null, null)
 		then:
@@ -125,7 +125,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutAbsentPage() should pass user to dao"() {
+	def "logAboutAbsentPage() should pass user id to dao"() {
 		given:
 			Integer expectedUserId = 20
 		when:
@@ -318,7 +318,7 @@ class SiteServiceImplTest extends Specification {
 			null              | _
 	}
 	
-	def "logAboutFailedAuthentication() should pass null to dao for unknown user"() {
+	def "logAboutFailedAuthentication() should pass null to dao for unknown user id"() {
 		when:
 			service.logAboutFailedAuthentication(TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
@@ -328,7 +328,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should pass user to dao"() {
+	def "logAboutFailedAuthentication() should pass user id to dao"() {
 		given:
 			Integer expectedUserId = 30
 		when:
