@@ -226,9 +226,9 @@ class SiteServiceImplTest extends Specification {
 				return true
 			})
 		where: userAgent | _
-		'  '             | _
-		''               | _
-		null             | _
+			'  '         | _
+			''           | _
+			null         | _
 	}
 	
 	//
