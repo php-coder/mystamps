@@ -252,7 +252,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
-	def "logAboutFailedAuthentication() should assign occurred at to current date when date was provided"() {
+	def "logAboutFailedAuthentication() should assign occurred at to specified date when date was provided"() {
 		given:
 			Date expectedDate = new Date() - 100;
 		when:
