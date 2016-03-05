@@ -1,9 +1,9 @@
 print_status() {
-	local FAIL_FILE="$1"
-	local MSG="$2"
+	local fail_file="$1"
+	local msg="$2"
 	
-	printf "* $MSG... "
-	if [ -f "$FAIL_FILE" ]; then
+	printf "* $msg... "
+	if [ -f "$fail_file" ]; then
 		echo "\033[1;31mFAIL\033[0m"
 	else
 		echo "\033[1;32mSUCCESS\033[0m"
@@ -11,11 +11,11 @@ print_status() {
 }
 
 print_log() {
-	local LOG_FILE="$1"
-	local MSG="$2"
+	local log_file="$1"
+	local msg="$2"
 	
 	echo
-	echo "=====> \033[1;33m$MSG\033[0m"
+	echo "=====> \033[1;33m$msg\033[0m"
 	echo
-	egrep -v '^\[INFO\] Download(ing|ed):' "$LOG_FILE"
+	egrep -v '^\[INFO\] Download(ing|ed):' "$log_file"
 }
