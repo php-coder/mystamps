@@ -17,7 +17,9 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import ru.mystamps.web.service.dto.SuspiciousActivityDto;
 
 @RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
@@ -37,6 +40,9 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
+	
+	@Value("${suspicious_activity.get_all}")
+	private String getAllSuspiciousActivitiesSql;
 	
 	@Override
 	public void add(AddSuspiciousActivityDbDto activity) {
@@ -59,6 +65,18 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 			affected == 1,
 			"Unexpected number of affected rows after creation of suspicious activity: %d",
 			affected
+		);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	public List<SuspiciousActivityDto> findAll() {
+		return jdbcTemplate.query(
+			getAllSuspiciousActivitiesSql,
+			Collections.emptyMap(),
+			RowMappers::forSuspiciousActivityDto
 		);
 	}
 	

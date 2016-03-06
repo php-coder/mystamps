@@ -15,14 +15,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service;
 
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import ru.mystamps.web.service.dto.SuspiciousActivityDto;
 
-public interface SuspiciousActivityDao {
-	void add(AddSuspiciousActivityDbDto activity);
-	List<SuspiciousActivityDto> findAll();
+/**
+ * @author Sergey Chechenev
+ */
+public interface AdminService {
+	
+	@PreAuthorize("hasAuthority('READ_SUSPICIOUS_ACTIVITIES')")
+	List<SuspiciousActivityDto> findSuspiciousActivities();
 }

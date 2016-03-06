@@ -15,14 +15,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.controller;
 
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.Url;
+import ru.mystamps.web.service.AdminService;
 import ru.mystamps.web.service.dto.SuspiciousActivityDto;
 
-public interface SuspiciousActivityDao {
-	void add(AddSuspiciousActivityDbDto activity);
-	List<SuspiciousActivityDto> findAll();
+/**
+ * @author Sergey Chechenev
+ */
+@Controller
+@RequiredArgsConstructor
+public class AdminController {
+	
+	private final AdminService adminService;
+	
+	@RequestMapping(Url.SUSPICIOUS_ACTIVITY_PAGE)
+	public String showSuspiciousActivity(Model model) {
+		List<SuspiciousActivityDto> activities = adminService.findSuspiciousActivities();
+		model.addAttribute("activities", activities);
+		
+		return "admin/suspicious";
+	}
+	
 }

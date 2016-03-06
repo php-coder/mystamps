@@ -59,6 +59,11 @@ public class ServicesConfig {
 	private MessageSource messageSource;
 	
 	@Bean
+	public AdminService getAdminService() {
+		return new AdminServiceImpl(daoConfig.getSuspiciousActivityDao());
+	}
+
+	@Bean
 	public CountryService getCountryService() {
 		return new CountryServiceImpl(daoConfig.getJdbcCountryDao());
 	}
