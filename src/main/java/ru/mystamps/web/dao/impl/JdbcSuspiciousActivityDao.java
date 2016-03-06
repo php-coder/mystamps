@@ -41,8 +41,8 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
 	
-	@Value("${suspicious_activity.get_all}")
-	private String getAllSuspiciousActivitiesSql;
+	@Value("${suspicious_activity.find_all}")
+	private String findAllSuspiciousActivitiesSql;
 	
 	@Override
 	public void add(AddSuspiciousActivityDbDto activity) {
@@ -74,7 +74,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Override
 	public List<SuspiciousActivityDto> findAll() {
 		return jdbcTemplate.query(
-			getAllSuspiciousActivitiesSql,
+			findAllSuspiciousActivitiesSql,
 			Collections.emptyMap(),
 			RowMappers::forSuspiciousActivityDto
 		);

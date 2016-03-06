@@ -15,35 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller;
+package ru.mystamps.web.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.Url;
-import ru.mystamps.web.service.AdminService;
+import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.service.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev
  */
-@Controller
 @RequiredArgsConstructor
-public class AdminController {
+public class SuspiciousActivityServiceImpl implements SuspiciousActivityService {
+	private final SuspiciousActivityDao suspiciousActivityDao;
 	
-	private final AdminService adminService;
-	
-	@RequestMapping(Url.SUSPICIOUS_ACTIVITY_PAGE)
-	public String showSuspiciousActivity(Model model) {
-		List<SuspiciousActivityDto> activities = adminService.findSuspiciousActivities();
-		model.addAttribute("activities", activities);
-		
-		return "admin/suspicious";
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize("hasAuthority('BROWSE_SITE_EVENTS')")
+	public List<SuspiciousActivityDto> findSuspiciousActivities() {
+		return suspiciousActivityDao.findAll();
 	}
-	
 }

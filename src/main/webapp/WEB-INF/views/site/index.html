@@ -105,8 +105,8 @@
 							<li sec:authorize="hasAuthority('CREATE_COUNTRY')">
 								<a th:href="@{${ADD_COUNTRY_PAGE}}" th:text="#{t_add_country}" href="../country/add.html">add country</a>
 							</li>
-							<li togglz:active="SHOW_LINK_TO_SUSPICIOUS_ACTIVITIES_PAGE" sec:authorize="hasAuthority('READ_SUSPICIOUS_ACTIVITIES')">
-								<a th:href="@{${SUSPICIOUS_ACTIVITY_PAGE}}" th:text="#{t_suspicious_activities}" href="../admin/suspicious.html">suspicious activities</a>
+							<li togglz:active="BROWSE_SITE_EVENTS" sec:authorize="hasAuthority('BROWSE_SITE_EVENTS')">
+								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_watch_suspicious_activities}" href="events.html">watch suspicious activities</a>
 							</li>
 						</ul>
 					</nav>

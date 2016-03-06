@@ -59,8 +59,8 @@ public class ServicesConfig {
 	private MessageSource messageSource;
 	
 	@Bean
-	public AdminService getAdminService() {
-		return new AdminServiceImpl(daoConfig.getSuspiciousActivityDao());
+	public SuspiciousActivityService getSuspiciousActivityService() {
+		return new SuspiciousActivityServiceImpl(daoConfig.getSuspiciousActivityDao());
 	}
 
 	@Bean

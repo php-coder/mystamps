@@ -30,6 +30,7 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -43,6 +44,7 @@ public class SiteController {
 	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
+	private final SuspiciousActivityService suspiciousActivityService;
 	
 	@RequestMapping(Url.INDEX_PAGE)
 	public String showIndexPage(Model model, Locale userLocale) {
@@ -64,6 +66,19 @@ public class SiteController {
 		);
 		
 		return "site/index";
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@RequestMapping(Url.SITE_EVENTS_PAGE)
+	public Model browseSiteEvents(Model model) {
+		model.addAttribute(
+			"activities",
+			suspiciousActivityService.findSuspiciousActivities()
+		);
+		
+		return model;
 	}
 	
 }

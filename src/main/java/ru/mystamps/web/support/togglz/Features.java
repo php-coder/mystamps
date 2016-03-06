@@ -40,9 +40,9 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SHOW_SEARCH_PANEL_ON_INDEX_PAGE,
 	
-	@Label("Show link to suspicious activities page on index page")
+	@Label("Browse site events")
 	@EnabledByDefault
-	SHOW_LINK_TO_SUSPICIOUS_ACTIVITIES_PAGE,
+	BROWSE_SITE_EVENTS,
 	
 	@Label("Show statistics of collection on collection page")
 	@EnabledByDefault

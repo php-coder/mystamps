@@ -35,13 +35,6 @@ public class ControllersConfig {
 	private MessageSource messageSource;
 	
 	@Bean
-	public AdminController getAdminController() {
-		return new AdminController(
-			servicesConfig.getAdminService()
-		);
-	}
-
-	@Bean
 	public AccountController getAccountController() {
 		return new AccountController(
 			servicesConfig.getUserService(),
@@ -107,7 +100,8 @@ public class ControllersConfig {
 			servicesConfig.getCategoryService(),
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
-			servicesConfig.getSeriesService()
+			servicesConfig.getSeriesService(),
+			servicesConfig.getSuspiciousActivityService()
 		);
 	}
 	

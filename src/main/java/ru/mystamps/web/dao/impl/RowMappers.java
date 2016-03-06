@@ -165,14 +165,14 @@ final class RowMappers {
 	 */
 	// CheckStyle: ignore LineLength for next 1 line
 	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int i) throws SQLException {
-		String typeName = rs.getString("activity_name");
-		Date occurredAt = rs.getDate("occurred_at");
-		String page = rs.getString("page");
-		String method = rs.getString("method");
-		String userLogin = rs.getString("user_login");
-		String ip = rs.getString("ip");
+		String typeName    = rs.getString("activity_name");
+		Date occurredAt    = rs.getDate("occurred_at");
+		String page        = rs.getString("page");
+		String method      = rs.getString("method");
+		String userLogin   = rs.getString("user_login");
+		String ip          = rs.getString("ip");
 		String refererPage = rs.getString("referer_page");
-		String userAgent = rs.getString("user_agent");
+		String userAgent   = rs.getString("user_agent");
 		
 		return new SuspiciousActivityDto(
 			typeName,

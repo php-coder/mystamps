@@ -19,20 +19,11 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.service.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev
  */
-@RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService {
-	private final SuspiciousActivityDao suspiciousActivityDao;
-	
-	@Override
-	public List<SuspiciousActivityDto> findSuspiciousActivities() {
-		return suspiciousActivityDao.findAll();
-	}
+public interface SuspiciousActivityService {
+	List<SuspiciousActivityDto> findSuspiciousActivities();
 }

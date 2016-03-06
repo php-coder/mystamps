@@ -19,21 +19,21 @@ package ru.mystamps.web.service.dto;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author Sergey Chechenev
  */
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SuspiciousActivityDto {
-	private String typeName;
-	private Date occurredAt;
-	private String page;
-	private String method;
-	private String userLogin;
-	private String ip;
-	private String refererPage;
-	private String userAgent;
+	private final String type;
+	private final Date occurredAt;
+	private final String page;
+	private final String method;
+	private final String userLogin;
+	private final String ip;
+	private final String refererPage;
+	private final String userAgent;
 }
