@@ -69,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority("CREATE_CATEGORY")
 				.antMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority("CREATE_COUNTRY")
 				.antMatchers(Url.ADD_SERIES_PAGE).hasAuthority("CREATE_SERIES")
+				.antMatchers(Url.SITE_EVENTS_PAGE).hasAuthority("VIEW_SITE_EVENTS")
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority("UPDATE_COLLECTION", "ADD_IMAGES_TO_SERIES")
 				.anyRequest().permitAll()

@@ -20,9 +20,11 @@ package ru.mystamps.web.dao.impl;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -31,7 +33,7 @@ import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 final class RowMappers {
 	
 	private RowMappers() {
@@ -158,7 +160,33 @@ final class RowMappers {
 		);
 	}
 	
+	/**
+	 * @author Sergey Chechenev
+	 */
 	// CheckStyle: ignore LineLength for next 1 line
+	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int i) throws SQLException {
+		String type        = rs.getString("activity_name");
+		Date occurredAt    = rs.getTimestamp("occurred_at");
+		String page        = rs.getString("page");
+		String method      = rs.getString("method");
+		String userLogin   = rs.getString("user_login");
+		String ip          = rs.getString("ip");
+		String refererPage = rs.getString("referer_page");
+		String userAgent   = rs.getString("user_agent");
+		
+		return new SuspiciousActivityDto(
+			type,
+			occurredAt,
+			page,
+			method,
+			userLogin,
+			ip,
+			refererPage,
+			userAgent
+		);
+	}
+		
+		// CheckStyle: ignore LineLength for next 1 line
 	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int i) throws SQLException {
 		return new UsersActivationDto(
 			rs.getString("email"),

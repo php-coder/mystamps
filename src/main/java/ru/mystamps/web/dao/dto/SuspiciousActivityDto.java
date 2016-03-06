@@ -15,14 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import java.util.List;
+import java.util.Date;
 
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface SuspiciousActivityDao {
-	void add(AddSuspiciousActivityDbDto activity);
-	List<SuspiciousActivityDto> findAll();
+/**
+ * @author Sergey Chechenev
+ */
+@Getter
+@RequiredArgsConstructor
+public class SuspiciousActivityDto {
+	private final String type;
+	private final Date occurredAt;
+	private final String page;
+	private final String method;
+	private final String userLogin;
+	private final String ip;
+	private final String refererPage;
+	private final String userAgent;
 }

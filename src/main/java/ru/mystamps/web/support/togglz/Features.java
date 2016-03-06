@@ -40,6 +40,10 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SHOW_SEARCH_PANEL_ON_INDEX_PAGE,
 	
+	@Label("View site events")
+	@EnabledByDefault
+	VIEW_SITE_EVENTS,
+	
 	@Label("Show statistics of collection on collection page")
 	@EnabledByDefault
 	SHOW_COLLECTION_STATISTICS,

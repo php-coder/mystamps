@@ -15,14 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service;
 
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
-public interface SuspiciousActivityDao {
-	void add(AddSuspiciousActivityDbDto activity);
-	List<SuspiciousActivityDto> findAll();
+/**
+ * @author Sergey Chechenev
+ */
+@RequiredArgsConstructor
+public class SuspiciousActivityServiceImpl implements SuspiciousActivityService {
+	private final SuspiciousActivityDao suspiciousActivityDao;
+	
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize("hasAuthority('VIEW_SITE_EVENTS')")
+	public List<SuspiciousActivityDto> findSuspiciousActivities() {
+		return suspiciousActivityDao.findAll();
+	}
 }
