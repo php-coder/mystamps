@@ -1,0 +1,62 @@
+---
+
+- hosts: all
+  gather_facts: no
+  remote_user: mystamps
+  vars:
+    remote_war_dir: /data/mystamps
+    uptimerobot:
+      monitorid: 'MyStamps'
+      apikey: "{{ lookup('env', 'UPTIMEROBOT_APIKEY') }}"
+  tasks:
+
+  - name: Getting info about WAR file
+    stat:
+      path: 'target/mystamps.war'
+      get_checksum: no
+      get_md5: no
+    register: war_file
+    become: no
+    delegate_to: 127.0.0.1
+
+  - name: Ensuring that WAR file exists
+    assert:
+      that:
+        war_file.stat.exists
+    become: no
+    delegate_to: 127.0.0.1
+
+  - name: Stopping monitoring
+    uptimerobot:
+      monitorid: "{{ uptimerobot.monitorid }}"
+      apikey: "{{ uptimerobot.apikey }}"
+      state: paused
+    when: uptimerobot is defined and uptimerobot.monitorid != '' and uptimerobot.apikey != ''
+
+  - name: Stopping service
+    service:
+      name: mystamps
+      state: stopped
+
+  - name: Copying WAR file
+    copy:
+      src: '../../../../../target/mystamps.war'
+      dest: "{{ remote_war_dir }}/mystamps.war"
+      owner: mystamps
+      group: mystamps
+      mode: '0755'
+      backup: yes
+
+  - name: Starting service
+    service:
+      name: mystamps
+      enabled: yes
+      state: started
+
+  - name: Starting monitoring
+    uptimerobot:
+      monitorid: "{{ uptimerobot.monitorid }}"
+      apikey: "{{ uptimerobot.apikey }}"
+      state: started
+    when: uptimerobot is defined and uptimerobot.monitorid != '' and uptimerobot.apikey != ''
+
