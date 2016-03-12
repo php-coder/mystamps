@@ -20,20 +20,21 @@
 				<div id="logo" class="col-sm-9 vcenter">
 					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
 				</div><!--
+					
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
 						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
 							English
 						</a>
-						
+					
 						<!--/*/
 						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
 							Russian
 						</a>
 						/*/-->
-						
+					
 						<span class="caret"></span>
 						<ul class="dropdown-menu">
 							<li>
@@ -53,10 +54,9 @@
 						</ul>
 					</div>
 				</div><!--
+					
 				--><div id="user_bar" class="col-sm-2 vcenter">
 					<ul class="list-unstyled">
-						
-						<!--/*/
 						<li sec:authorize="isAuthenticated()">
 							<i class="glyphicon glyphicon-user"></i>
 							<a sec:authentication="principal.user.name"
@@ -64,16 +64,24 @@
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
 								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
-									John Doe
+								John Doe
 							</a>
 						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
 						/*/-->
-						
 						<li sec:authorize="isAuthenticated()">
 							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+						/*/-->
 					</ul>
 				</div>
 			</div>
@@ -82,29 +90,34 @@
 					<h3 class="text-center" th:text="${#strings.capitalize(suspicious_activities)}">
 						Suspicious activities
 					</h3>
-					<div class="row">
-						<div class="col-sm-offset-1 col-sm-10">
-							<!--/*/
-							<div th:if="${#lists.isEmpty(activities)}" th:text="#{t_no_suspicious_activities_found}" th:remove="tag">
-								No suspicious activities found
-							</div>
-							/*/-->
-							<table class="table table-bordered table-condensed" th:if="${not #lists.isEmpty(activities)}">
+					<!--/*/
+					<div th:if="${#lists.isEmpty(activities)}" th:text="#{t_no_suspicious_activities_found}" th:remove="tag">
+						No suspicious activities found
+					</div>
+					/*/-->
+					<div th:if="${not #lists.isEmpty(activities)}" class="row">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th th:text="#{t_type}" class="warning">Type</th>
-										<th th:text="#{t_occurred}">Occurred at</th>
-										<th th:text="#{t_method}">Method</th>
-										<th th:text="#{t_page}">Page</th>
-										<th th:text="#{t_user_login}">User login</th>
-										<th th:text="#{t_ip}">IP address</th>
-										<th th:text="#{t_referer_page}">Referer page</th>
-										<th th:text="#{t_user_agent}">User agent</th>
+										<th th:text="#{t_type}" class="text-nowrap">Type</th>
+										<th th:text="#{t_occurred}" class="text-nowrap">Occurred at</th>
+										<th th:text="#{t_method}" class="text-nowrap">Method</th>
+										<th th:text="#{t_page}" class="text-nowrap">Page</th>
+										<th th:text="#{t_user_login}" class="text-nowrap">User login</th>
+										<th th:text="#{t_ip}" class="text-nowrap">IP address</th>
+										<th th:text="#{t_referer_page}" class="text-nowrap">Referer page</th>
+										<th th:text="#{t_user_agent}" class="text-nowrap">User agent</th>
 									</tr>
 								</thead>
 								<tbody th:remove="all-but-first">
 									<tr th:each="activity : ${activities}">
-										<td th:text="${activity.type}" class="warning">InvalidCsrfToken</td>
+										<td th:text="#{t_invalid_csrf_token}" th:if="${activity.type == 'InvalidCsrfToken'}">Invalid CSRF token</td>
+										<!--
+										<td th:text="#{t_missing_csrf_token}" th:if="${activity.type == 'MissingCsrfToken'}">Missing CSRF token</td>
+										<td th:text="#{t_page_not_found}" th:if="${activity.type == 'PageNotFound'}">Page not found</td>
+										<td th:text="#{t_auth_failed}" th:if="${activity.type == 'AuthenticationFailed'}">Authentication failed</td>
+										-->
 										<td th:text="${#dates.format(activity.occurredAt, 'dd.MM.yyyy HH:mm')}">15.02.2016 00:00</td>
 										<td th:text="${activity.method}">POST</td>
 										<td th:text="${activity.page}">/series/search/by_catalog</td>
@@ -114,17 +127,17 @@
 										<td th:text="${activity.userAgent}">Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36</td>
 									</tr>
 									<tr>
-										<td class="warning">InvalidCsrfToken</td>
+										<td>Invalid CSRF token</td>
 										<td>20.02.2016 00:00</td>
 										<td>POST</td>
 										<td>/series/search/by_catalog</td>
 										<td></td>
 										<td>127.0.0.1</td>
-										<td>/series/search/by_catalog</td>
+										<td>http://127.0.0.1:8080/series/search/by_catalog</td>
 										<td>Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36</td>
 									</tr>
 									<tr>
-										<td class="warning">MissingCsrfToken</td>
+										<td>Missing CSRF token</td>
 										<td>15.02.2016 00:00</td>
 										<td>POST</td>
 										<td>/series/add</td>
@@ -134,7 +147,7 @@
 										<td>Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36</td>
 									</tr>
 									<tr>
-										<td class="warning">PageNotFound</td>
+										<td>Page not found</td>
 										<td>15.02.2016 00:00</td>
 										<td>GET</td>
 										<td>/site/eventss</td>
@@ -144,7 +157,7 @@
 										<td>Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36</td>
 									</tr>
 									<tr>
-										<td class="warning">PageNotFound</td>
+										<td>Page not found</td>
 										<td>15.02.2016 00:00</td>
 										<td>POST</td>
 										<td>/series/search/by_catalogd</td>
@@ -154,7 +167,7 @@
 										<td>Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36</td>
 									</tr>
 									<tr>
-										<td class="warning">AuthenticationFailed</td>
+										<td>Authentication failed</td>
 										<td>15.02.2016 00:00</td>
 										<td>POST</td>
 										<td>/account/login</td>

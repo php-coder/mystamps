@@ -19,7 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
-import ru.mystamps.web.service.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev

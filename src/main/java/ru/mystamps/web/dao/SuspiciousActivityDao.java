@@ -20,7 +20,7 @@ package ru.mystamps.web.dao;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
-import ru.mystamps.web.service.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 public interface SuspiciousActivityDao {
 	void add(AddSuspiciousActivityDbDto activity);

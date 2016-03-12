@@ -26,7 +26,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.service.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev
@@ -37,7 +37,7 @@ public class SuspiciousActivityServiceImpl implements SuspiciousActivityService 
 	
 	@Override
 	@Transactional(readOnly = true)
-	@PreAuthorize("hasAuthority('BROWSE_SITE_EVENTS')")
+	@PreAuthorize("hasAuthority('VIEW_SITE_EVENTS')")
 	public List<SuspiciousActivityDto> findSuspiciousActivities() {
 		return suspiciousActivityDao.findAll();
 	}

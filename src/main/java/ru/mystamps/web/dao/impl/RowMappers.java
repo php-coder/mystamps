@@ -30,7 +30,7 @@ import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
-import ru.mystamps.web.service.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
@@ -165,8 +165,8 @@ final class RowMappers {
 	 */
 	// CheckStyle: ignore LineLength for next 1 line
 	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int i) throws SQLException {
-		String typeName    = rs.getString("activity_name");
-		Date occurredAt    = rs.getDate("occurred_at");
+		String type        = rs.getString("activity_name");
+		Date occurredAt    = rs.getTimestamp("occurred_at");
 		String page        = rs.getString("page");
 		String method      = rs.getString("method");
 		String userLogin   = rs.getString("user_login");
@@ -175,7 +175,7 @@ final class RowMappers {
 		String userAgent   = rs.getString("user_agent");
 		
 		return new SuspiciousActivityDto(
-			typeName,
+			type,
 			occurredAt,
 			page,
 			method,

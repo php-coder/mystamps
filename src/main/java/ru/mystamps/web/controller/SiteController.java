@@ -72,13 +72,11 @@ public class SiteController {
 	 * @author Sergey Chechenev
 	 */
 	@RequestMapping(Url.SITE_EVENTS_PAGE)
-	public Model browseSiteEvents(Model model) {
+	public void viewSiteEvents(Model model) {
 		model.addAttribute(
 			"activities",
 			suspiciousActivityService.findSuspiciousActivities()
 		);
-		
-		return model;
 	}
 	
 }
