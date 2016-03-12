@@ -134,6 +134,11 @@
 									<option value="3">Sport</option>
 									<!--*/-->
 								</select>
+								<small sec:authorize="hasAuthority('CREATE_CATEGORY')">
+									<span class="hint-block" th:utext="#{t_create_category_hint(@{${ADD_CATEGORY_PAGE}})}">
+										You can also <a href="../category/add.html">add a new category</a>
+									</span>
+								</small>
 								<span id="category.errors" class="help-block" th:if="${#fields.hasErrors('category')}" th:each="error : ${#fields.errors('category')}" th:text="${error}"></span>
 							</div>
 						</div>
@@ -156,6 +161,11 @@
 									<option value="3">Italy</option>
 									<!--*/-->
 								</select>
+								<small sec:authorize="hasAuthority('CREATE_COUNTRY')">
+									<span class="hint-block" th:utext="#{t_create_country_hint(@{${ADD_COUNTRY_PAGE}})}">
+										You can also <a href="../country/add.html">add a new country</a>
+									</span>
+								</small>
 								<span id="country.errors" class="help-block" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
 							</div>
 						</div>
