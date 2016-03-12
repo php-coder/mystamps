@@ -114,6 +114,11 @@
 								</label>
 								<div class="col-sm-5">
 									<input class="form-control" type="email" id="email" required="required" autofocus="autofocus" th:field="*{email}" />
+									<small>
+										<span class="hint-block" th:text="#{t_email_hint}">
+											To this address we will send activation code
+										</span>
+									</small>
 									<span id="email.errors" class="help-block" th:if="${#fields.hasErrors('email')}" th:each="error : ${#fields.errors('email')}" th:text="${error}"></span>
 								</div>
 							</div>
