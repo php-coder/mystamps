@@ -249,7 +249,8 @@
 							<form method="post" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
 								<div class="form-group" th:classappend="${numberIsEmpty != null ? 'has-error' : ''}">
 									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
-									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control" required="required" />
+									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control"
+										required="required" placeholder="Example: 999" th:placeholder="|#{t_example}: 999|" />
 									<!--/*/
 									<span th:if="${numberIsEmpty != null}" th:text="#{value.empty}" class="help-block">
 										Value must not be empty
