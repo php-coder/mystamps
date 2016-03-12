@@ -17,17 +17,11 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
 import org.apache.commons.lang3.Validate;
-
-import static org.apache.commons.collections.CollectionUtils.exists;
-import static org.apache.commons.collections.PredicateUtils.notNullPredicate;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -65,10 +59,8 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	}
 	
 	public void authorizeUser(String login, String password) {
-		Collection<String> fieldNames = Arrays.asList(login, password);
-		
 		Validate.validState(
-			exists(fieldNames, notNullPredicate()),
+			login != null || password != null,
 			"Login and password should not be a null"
 		);
 		

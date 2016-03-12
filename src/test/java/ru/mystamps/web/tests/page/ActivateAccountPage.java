@@ -17,17 +17,11 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.openqa.selenium.WebDriver;
 
 import ru.mystamps.web.Url;
 
 import org.apache.commons.lang3.Validate;
-
-import static org.apache.commons.collections.CollectionUtils.exists;
-import static org.apache.commons.collections.PredicateUtils.notNullPredicate;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.page.element.Form.with;
@@ -80,12 +74,12 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 			String passwordConfirmation,
 			String activationKey) {
 		
-		Collection<String> fieldNames = Arrays.asList(
-			login, name, password, passwordConfirmation, activationKey
-		);
-		
 		Validate.validState(
-			exists(fieldNames, notNullPredicate()),
+			login != null
+			|| name != null
+			|| password != null
+			|| passwordConfirmation != null
+			|| activationKey != null,
 			"Login, name, password with confirmation and activation key should not be null"
 		);
 		
