@@ -63,7 +63,7 @@
 			https://github.com/spring-projects/spring-boot/blob/v1.3.0.RELEASE/spring-boot-dependencies/pom.xml
 		-->
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
-		<commons-collections.version>3.2.1</commons-collections.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<commons-pool.version>1.5.4</commons-pool.version>
 		<groovy.version>2.0.8</groovy.version>
