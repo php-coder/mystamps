@@ -66,7 +66,7 @@ public class MailServiceImpl implements MailService {
 		);
 		
 		LOG.info(
-			"E-mail with activation code has been sent to {} (lang: {})",
+			"Email with activation code has been sent to {} (lang: {})",
 			activation.getEmail(),
 			activation.getLang()
 		);
