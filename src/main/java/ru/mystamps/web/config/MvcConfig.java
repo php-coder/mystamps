@@ -43,7 +43,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
-import ru.mystamps.web.support.spring.security.CustomUserDetailsArgumentResolver;
 import ru.mystamps.web.support.spring.security.UserArgumentResolver;
 
 @Configuration
@@ -94,11 +93,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		CustomUserDetailsArgumentResolver userDetailsArgumentResolver =
-			new CustomUserDetailsArgumentResolver();
-		
-		argumentResolvers.add(userDetailsArgumentResolver);
-		argumentResolvers.add(new UserArgumentResolver(userDetailsArgumentResolver));
+		argumentResolvers.add(new UserArgumentResolver());
 	}
 	
 	@Override

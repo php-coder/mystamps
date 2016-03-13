@@ -23,14 +23,9 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.entity.User;
 
-@RequiredArgsConstructor
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
-	
-	private final CustomUserDetailsArgumentResolver userDetailsResolver;
 	
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -44,18 +39,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 		NativeWebRequest webRequest,
 		WebDataBinderFactory binderFactory) {
 		
-		CustomUserDetails userDetails = (CustomUserDetails)userDetailsResolver.resolveArgument(
-			parameter,
-			mavContainer,
-			webRequest,
-			binderFactory
-		);
-		
-		if (userDetails != null) {
-			return userDetails.getUser();
-		}
-		
-		return null;
+		return SecurityContextUtils.getUser();
 	}
 	
 }

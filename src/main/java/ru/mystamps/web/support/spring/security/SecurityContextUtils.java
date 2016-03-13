@@ -36,12 +36,13 @@ public final class SecurityContextUtils {
 		return new SecurityContextHolderAwareRequestWrapper(request, null).isUserInRole(authority);
 	}
 	
-	public static CustomUserDetails getCustomUserDetails() {
+	public static User getUser() {
 		return Optional
 			.ofNullable(SecurityContextHolder.getContext().getAuthentication())
 			.map(Authentication::getPrincipal)
 			.filter(CustomUserDetails.class::isInstance)
 			.map(CustomUserDetails.class::cast)
+			.map(CustomUserDetails::getUser)
 			.orElse(null);
 	}
 	
@@ -50,8 +51,7 @@ public final class SecurityContextUtils {
 	 * @author Slava Semushin
 	 */
 	public static Integer getUserId() {
-		return Optional.ofNullable(getCustomUserDetails())
-			.map(CustomUserDetails::getUser)
+		return Optional.ofNullable(getUser())
 			.map(User::getId)
 			.orElse(null);
 	}
