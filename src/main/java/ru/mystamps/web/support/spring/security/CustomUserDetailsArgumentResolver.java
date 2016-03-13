@@ -17,23 +17,17 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import org.apache.commons.lang3.Validate;
-
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentResolver {
 	
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return isSupportedType(parameter.getParameterType());
+		return CustomUserDetails.class.isAssignableFrom(parameter.getParameterType());
 	}
 	
 	@Override
@@ -43,28 +37,7 @@ public class CustomUserDetailsArgumentResolver implements HandlerMethodArgumentR
 		NativeWebRequest webRequest,
 		WebDataBinderFactory binderFactory) {
 		
-		SecurityContext ctx = SecurityContextHolder.getContext();
-		Validate.validState(ctx != null, "Security context must be non null");
-		
-		Authentication auth = ctx.getAuthentication();
-		if (auth == null) {
-			return null;
-		}
-		
-		Object principal = auth.getPrincipal();
-		if (principal == null) {
-			return null;
-		}
-		
-		if (isSupportedType(principal.getClass())) {
-			return principal;
-		}
-		
-		return null;
-	}
-	
-	private static boolean isSupportedType(Class<?> clazz) {
-		return CustomUserDetails.class.isAssignableFrom(clazz);
+		return SecurityContextUtils.getCustomUserDetails();
 	}
 	
 }
