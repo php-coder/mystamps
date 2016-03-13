@@ -21,11 +21,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 
 public interface ImageService {
-	Image save(MultipartFile file);
+	Integer save(MultipartFile file);
 	ImageDto get(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);
 	List<Integer> findBySeriesId(Integer seriesId);

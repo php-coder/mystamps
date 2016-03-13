@@ -143,11 +143,11 @@ class ImageServiceImplTest extends Specification {
 		given:
 			Image expectedImage = TestObjects.createImage()
 		when:
-			Image actualImage = service.save(multipartFile)
+			Integer actualImageId = service.save(multipartFile)
 		then:
 			imageDao.save(_ as Image) >> expectedImage
 		and:
-			actualImage == expectedImage
+			actualImageId == expectedImage.getId()
 	}
 	
 	//

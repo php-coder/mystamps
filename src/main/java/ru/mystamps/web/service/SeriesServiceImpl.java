@@ -36,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.Currency;
@@ -124,8 +123,8 @@ public class SeriesServiceImpl implements SeriesService {
 		Integer id = seriesDao.add(series);
 		LOG.info("Series #{} has been created ({})", id, series);
 		
-		Image image = imageService.save(dto.getImage());
-		imageService.addToSeries(id, image.getId());
+		Integer imageId = imageService.save(dto.getImage());
+		imageService.addToSeries(id, imageId);
 		
 		Set<String> michelNumbers = CatalogUtils.parseCatalogNumbers(dto.getMichelNumbers());
 		if (!michelNumbers.isEmpty()) {
@@ -162,13 +161,12 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
-		Image image = imageService.save(dto.getImage());
-		
-		imageService.addToSeries(seriesId, image.getId());
+		Integer imageId = imageService.save(dto.getImage());
+		imageService.addToSeries(seriesId, imageId);
 		
 		LOG.info(
 			"Image #{} was added to series #{} by user #{}",
-			image.getId(),
+			imageId,
 			seriesId,
 			userId
 		);

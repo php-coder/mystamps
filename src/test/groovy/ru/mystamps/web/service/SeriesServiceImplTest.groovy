@@ -24,7 +24,6 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
-import ru.mystamps.web.entity.Image
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SeriesInfoDto
@@ -34,6 +33,7 @@ import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
+	private static final Integer ANY_IMAGE_ID = 18
 	
 	private ImageService imageService = Mock()
 	private JdbcSeriesDao seriesDao = Mock()
@@ -55,7 +55,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		userId = TestObjects.createUser().getId()
 		
-		imageService.save(_) >> TestObjects.createImage()
+		imageService.save(_) >> ANY_IMAGE_ID
 		
 		service = new SeriesServiceImpl(
 			seriesDao,
@@ -373,7 +373,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}) >> TestObjects.createImage()
+			}) >> ANY_IMAGE_ID
 	}
 	
 	def "add() should add image to the series"() {
@@ -383,14 +383,11 @@ class SeriesServiceImplTest extends Specification {
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		and:
 			Integer expectedImageId = 456
-		and:
-			Image image = TestObjects.createImage()
-			image.setId(expectedImageId)
 		when:
 			service.add(form, userId, false)
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
-			imageService.save(_) >> image
+			imageService.save(_) >> expectedImageId
 		and:
 			1 * imageService.addToSeries({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
