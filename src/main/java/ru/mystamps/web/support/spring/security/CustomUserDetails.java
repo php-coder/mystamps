@@ -31,9 +31,23 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	// used in controllers for getting current user
+	@Deprecated
 	public User getUser() {
 		return user;
+	}
+	
+	// used in controllers for getting info about current user
+	
+	public String getUserName() {
+		return user.getName();
+	}
+	
+	public Integer getUserCollectionId() {
+		return user.getCollection().getId();
+	}
+	
+	public String getUserCollectionSlug() {
+		return user.getCollection().getSlug();
 	}
 	
 }

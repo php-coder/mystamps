@@ -59,11 +59,11 @@
 						<!--/*/
 						<li sec:authorize="isAuthenticated()">
 							<i class="glyphicon glyphicon-user"></i>
-							<a sec:authentication="principal.user.name"
+							<a sec:authentication="principal.userName"
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.user.collection.id},slug=${#authentication.principal.user.collection.slug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
