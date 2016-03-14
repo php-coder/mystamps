@@ -39,7 +39,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Country;
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
@@ -70,14 +70,14 @@ public class CountryController {
 	public String processInput(
 		@Valid AddCountryForm form,
 		BindingResult result,
-		User currentUser,
+		@CurrentUser Integer currentUserId,
 		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		UrlEntityDto countryUrl = countryService.add(form, currentUser.getId());
+		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
 			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())

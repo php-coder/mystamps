@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.service.SiteService;
 
 @Controller
@@ -42,7 +42,7 @@ public class ErrorController {
 	@RequestMapping(Url.NOT_FOUND_PAGE)
 	public void notFound(
 			HttpServletRequest request,
-			User currentUser,
+			@CurrentUser Integer currentUserId,
 			@RequestHeader(value = "referer", required = false) String referer,
 			@RequestHeader(value = "user-agent", required = false) String agent) {
 		
@@ -51,12 +51,7 @@ public class ErrorController {
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
-		Integer userId = null;
-		if (currentUser != null) {
-			userId = currentUser.getId();
-		}
-		
-		siteService.logAboutAbsentPage(page, method, userId, ip, referer, agent);
+		siteService.logAboutAbsentPage(page, method, currentUserId, ip, referer, agent);
 	}
 	
 	@RequestMapping(Url.INTERNAL_ERROR_PAGE)

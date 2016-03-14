@@ -36,22 +36,17 @@ public final class SecurityContextUtils {
 		return new SecurityContextHolderAwareRequestWrapper(request, null).isUserInRole(authority);
 	}
 	
-	public static User getUser() {
+	/**
+	 * @author Sergey Chechenev
+	 * @author Slava Semushin
+	 */
+	public static Integer getUserId() {
 		return Optional
 			.ofNullable(SecurityContextHolder.getContext().getAuthentication())
 			.map(Authentication::getPrincipal)
 			.filter(CustomUserDetails.class::isInstance)
 			.map(CustomUserDetails.class::cast)
 			.map(CustomUserDetails::getUser)
-			.orElse(null);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 * @author Slava Semushin
-	 */
-	public static Integer getUserId() {
-		return Optional.ofNullable(getUser())
 			.map(User::getId)
 			.orElse(null);
 	}

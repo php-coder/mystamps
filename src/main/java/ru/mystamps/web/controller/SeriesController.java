@@ -52,7 +52,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.service.CategoryService;
@@ -162,7 +162,7 @@ public class SeriesController {
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
 		HttpServletRequest request,
-		User currentUser) {
+		@CurrentUser Integer currentUserId) {
 		
 		if (result.hasErrors()) {
 			// don't try to re-display file upload field
@@ -172,7 +172,7 @@ public class SeriesController {
 		
 		boolean userCanAddComments =
 			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
-		Integer seriesId = seriesService.add(form, currentUser.getId(), userCanAddComments);
+		Integer seriesId = seriesService.add(form, currentUserId, userCanAddComments);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
@@ -181,7 +181,7 @@ public class SeriesController {
 	public String showInfo(
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		User currentUser,
+		@CurrentUser Integer currentUserId,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
@@ -209,9 +209,9 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"isSeriesInCollection",
-			currentUser == null
+			currentUserId == null
 			? false
-			: collectionService.isSeriesInCollection(currentUser.getId(), series.getId())
+			: collectionService.isSeriesInCollection(currentUserId, series.getId())
 		);
 		
 		model.addAttribute(
@@ -230,7 +230,7 @@ public class SeriesController {
 			BindingResult result,
 			@PathVariable("id") Integer seriesId,
 			Model model,
-			User currentUser,
+			@CurrentUser Integer currentUserId,
 			Locale userLocale,
 			HttpServletResponse response)
 			throws IOException {
@@ -257,7 +257,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"isSeriesInCollection",
-			collectionService.isSeriesInCollection(currentUser.getId(), series.getId())
+			collectionService.isSeriesInCollection(currentUserId, series.getId())
 		);
 		
 		model.addAttribute(
@@ -274,7 +274,7 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		seriesService.addImageToSeries(form, series.getId(), currentUser.getId());
+		seriesService.addImageToSeries(form, series.getId(), currentUserId);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
@@ -286,7 +286,7 @@ public class SeriesController {
 	)
 	public String addToCollection(
 		@PathVariable("id") Integer seriesId,
-		User currentUser,
+		@CurrentUser Integer currentUserId,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
@@ -302,7 +302,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		UrlEntityDto collection = collectionService.addToCollection(currentUser.getId(), seriesId);
+		UrlEntityDto collection = collectionService.addToCollection(currentUserId, seriesId);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
@@ -317,7 +317,7 @@ public class SeriesController {
 	)
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
-		User currentUser,
+		@CurrentUser Integer currentUserId,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
@@ -333,8 +333,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		UrlEntityDto collection =
-			collectionService.removeFromCollection(currentUser.getId(), seriesId);
+		UrlEntityDto collection = collectionService.removeFromCollection(currentUserId, seriesId);
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		

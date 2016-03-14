@@ -23,13 +23,14 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 
-public class UserArgumentResolver implements HandlerMethodArgumentResolver {
+public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {
 	
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return User.class.isAssignableFrom(parameter.getParameterType());
+		return parameter.getParameterType().isAssignableFrom(Integer.class)
+			&& parameter.hasParameterAnnotation(CurrentUser.class);
 	}
 	
 	@Override
@@ -39,8 +40,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 		NativeWebRequest webRequest,
 		WebDataBinderFactory binderFactory) {
 		
-		return SecurityContextUtils.getUser();
+		return SecurityContextUtils.getUserId();
 	}
 	
 }
-

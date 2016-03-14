@@ -39,7 +39,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
@@ -70,14 +70,14 @@ public class CategoryController {
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
-		User currentUser,
+		@CurrentUser Integer currentUserId,
 		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		UrlEntityDto categoryUrl = categoryService.add(form, currentUser.getId());
+		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
 			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())

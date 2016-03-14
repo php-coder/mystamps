@@ -43,7 +43,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
-import ru.mystamps.web.support.spring.security.UserArgumentResolver;
+import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 @Configuration
 @EnableScheduling
@@ -93,7 +93,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new UserArgumentResolver());
+		argumentResolvers.add(new CurrentUserArgumentResolver());
 	}
 	
 	@Override
