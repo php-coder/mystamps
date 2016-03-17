@@ -68,6 +68,7 @@
 		<commons-pool.version>1.5.4</commons-pool.version>
 		<groovy.version>2.0.8</groovy.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
+		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		<javax-mail.version>1.5.4</javax-mail.version>
 		<jetty.version>9.2.11.v20150529</jetty.version>
 		<h2.version>1.4.191</h2.version>
@@ -409,7 +410,14 @@
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<version>${hibernate-validator.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
