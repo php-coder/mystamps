@@ -5,6 +5,7 @@
 - (functionality)  implemented possibility to user to add additional images to series
 - (functionality)  allow to different series to have the same catalog numbers
 - (functionality)  add possibility for search series by catalog number
+- (functionality)  add interface for viewing suspicious activity
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
