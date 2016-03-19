@@ -332,13 +332,11 @@
 									<div class="col-xs-6">
 										<input type="text" id="michelNumbers" class="form-control js-catalog-numbers" th:field="*{michelNumbers}" />
 									</div>
-									<div class="col-xs-3">
-										<input type="text" class="form-control" size="5" th:field="*{michelPrice}" />
-									</div>
-									<div class="col-xs-3">
-										<select class="form-control" disabled="disabled">
-											<option value="EUR">EUR</option>
-										</select>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">&euro;</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="EUR" th:field="*{michelPrice}" />
+										</div>
 									</div>
 								</div>
 								<span id="michelNumbers.errors" class="help-block" th:if="${#fields.hasErrors('michelNumbers')}" th:each="error : ${#fields.errors('michelNumbers')}" th:text="${error}"></span>
@@ -357,13 +355,11 @@
 									<div class="col-xs-6">
 										<input type="text" id="scottNumbers" class="form-control js-catalog-numbers" th:field="*{scottNumbers}" />
 									</div>
-									<div class="col-xs-3">
-										<input type="text" class="form-control" size="5" th:field="*{scottPrice}" />
-									</div>
-									<div class="col-xs-3">
-										<select class="form-control" disabled="disabled">
-											<option value="USD">USD</option>
-										</select>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">$</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="USD" th:field="*{scottPrice}" />
+										</div>
 									</div>
 								</div>
 								<span id="scottNumbers.errors" class="help-block" th:if="${#fields.hasErrors('scottNumbers')}" th:each="error : ${#fields.errors('scottNumbers')}" th:text="${error}"></span>
@@ -382,13 +378,11 @@
 									<div class="col-xs-6">
 										<input type="text" id="yvertNumbers" class="form-control js-catalog-numbers" th:field="*{yvertNumbers}" />
 									</div>
-									<div class="col-xs-3">
-										<input type="text" class="form-control" size="5" th:field="*{yvertPrice}" />
-									</div>
-									<div class="col-xs-3">
-										<select class="form-control" disabled="disabled">
-											<option value="EUR">EUR</option>
-										</select>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">&euro;</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="EUR" th:field="*{yvertPrice}" />
+										</div>
 									</div>
 								</div>
 								<span id="yvertNumbers.errors" class="help-block" th:if="${#fields.hasErrors('yvertNumbers')}" th:each="error : ${#fields.errors('yvertNumbers')}" th:text="${error}"></span>
@@ -407,13 +401,11 @@
 									<div class="col-xs-6">
 										<input type="text" id="gibbonsNumbers" class="form-control js-catalog-numbers" th:field="*{gibbonsNumbers}" />
 									</div>
-									<div class="col-xs-3">
-										<input type="text" class="form-control" size="5" th:field="*{gibbonsPrice}" />
-									</div>
-									<div class="col-xs-3">
-										<select class="form-control" disabled="disabled">
-											<option value="GBP">GBP</option>
-										</select>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">&pound;</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="GBP" th:field="*{gibbonsPrice}" />
+										</div>
 									</div>
 								</div>
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
@@ -480,6 +472,10 @@
 						.prev('.js-collapse-toggle-header')
 						.find('.glyphicon')
 						.toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+				});
+				
+				$('.js-with-tooltip').tooltip({
+					'placement': 'right'
 				});
 			});
 		</script>
