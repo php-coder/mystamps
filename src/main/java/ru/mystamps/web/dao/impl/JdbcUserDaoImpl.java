@@ -20,11 +20,13 @@ package ru.mystamps.web.dao.impl;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUserDao;
+import ru.mystamps.web.dao.dto.UserDetails;
 
 @RequiredArgsConstructor
 public class JdbcUserDaoImpl implements JdbcUserDao {
@@ -34,6 +36,9 @@ public class JdbcUserDaoImpl implements JdbcUserDao {
 	@Value("${user.count_users_by_login}")
 	private String countByLoginSql;
 	
+	@Value("${user.find_user_details_by_login}")
+	private String findUserDetailsByLoginSql;
+	
 	@Override
 	public long countByLogin(String login) {
 		return jdbcTemplate.queryForObject(
@@ -41,6 +46,19 @@ public class JdbcUserDaoImpl implements JdbcUserDao {
 			Collections.singletonMap("login", login),
 			Long.class
 		);
+	}
+	
+	@Override
+	public UserDetails findUserDetailsByLogin(String login) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findUserDetailsByLoginSql,
+				Collections.singletonMap("login", login),
+				RowMappers::forUserDetails
+			);
+		} catch (EmptyResultDataAccessException ex) {
+			return null;
+		}
 	}
 	
 }

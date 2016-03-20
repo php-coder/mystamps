@@ -25,8 +25,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 
-import ru.mystamps.web.entity.User;
-
 public final class SecurityContextUtils {
 	
 	private SecurityContextUtils() {
@@ -46,8 +44,7 @@ public final class SecurityContextUtils {
 			.map(Authentication::getPrincipal)
 			.filter(CustomUserDetails.class::isInstance)
 			.map(CustomUserDetails.class::cast)
-			.map(CustomUserDetails::getUser)
-			.map(User::getId)
+			.map(CustomUserDetails::getUserId)
 			.orElse(null);
 	}
 	

@@ -15,11 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.UserDetails;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-public interface JdbcUserDao {
-    long countByLogin(String login);
-    UserDetails findUserDetailsByLogin(String login);
+@Getter
+@RequiredArgsConstructor
+@ToString(exclude = "hash")
+public class UserDetails {
+	private final Integer id;
+	private final String login;
+	private final String name;
+	private final String hash;
+	private final Role role;
+	private final Integer collectionId;
+	private final String collectionSlug;
+	
+	public enum Role {
+		USER, ADMIN
+	};
+	
+	public boolean isAdmin() {
+		return role == Role.ADMIN;
+	}
+	
 }

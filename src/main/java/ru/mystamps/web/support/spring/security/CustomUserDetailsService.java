@@ -30,13 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.service.UserService;
 
 /**
@@ -49,31 +48,32 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private final UserService userService;
 	
+	// CheckStyle: ignore LineLength for next 3 lines
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String login) {
+	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
 		LOG.debug("Find user by login '{}'", login);
 		
-		User user = userService.findByLogin(login);
-		if (user == null) {
+		UserDetails userDetails = userService.findUserDetailsByLogin(login);
+		if (userDetails == null) {
 			LOG.debug("User '{}' not found", login);
 			throw new UsernameNotFoundException("User not found");
 		}
 		
 		LOG.debug("User '{}' found", login);
 		
-		return new CustomUserDetails(user, getAuthorities(user));
+		return new CustomUserDetails(userDetails, getAuthorities(userDetails));
 	}
 	
-	private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
+	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
 		List<SimpleGrantedAuthority> authorities = new LinkedList<>();
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		authorities.add(new SimpleGrantedAuthority("UPDATE_COLLECTION"));
 		authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
 		
-		if (user.isAdmin()) {
+		if (userDetails.isAdmin()) {
 			authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
 			authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));

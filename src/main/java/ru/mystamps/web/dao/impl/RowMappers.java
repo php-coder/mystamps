@@ -25,6 +25,7 @@ import java.util.Date;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -207,6 +208,18 @@ final class RowMappers {
 		return new CollectionInfoDto(
 			rs.getInt("id"),
 			rs.getString("name")
+		);
+	}
+	
+	public static UserDetails forUserDetails(ResultSet rs, int i) throws SQLException {
+		return new UserDetails(
+			rs.getInt("id"),
+			rs.getString("login"),
+			rs.getString("name"),
+			rs.getString("hash"),
+			UserDetails.Role.valueOf(rs.getString("role")),
+			rs.getInt("collection_id"),
+			rs.getString("collection_slug")
 		);
 	}
 	

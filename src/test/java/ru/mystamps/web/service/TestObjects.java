@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.entity.Image;
@@ -83,6 +84,22 @@ final class TestObjects {
 		user.setHash(TEST_HASH);
 
 		return user;
+	}
+	
+	public static UserDetails createUserDetails() {
+		final Integer anyId = 777;
+		Integer collectionId = anyId;
+		String collectionSlug = TEST_LOGIN;
+		
+		return new UserDetails(
+			anyId,
+			TEST_LOGIN,
+			TEST_NAME,
+			TEST_HASH,
+			UserDetails.Role.USER,
+			collectionId,
+			collectionSlug
+		);
 	}
 	
 	public static Image createImage() {

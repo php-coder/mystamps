@@ -75,10 +75,6 @@ public class User {
 	@OneToOne(mappedBy = "owner", optional = false, fetch = FetchType.LAZY)
 	private Collection collection;
 	
-	public boolean isAdmin() {
-		return role == Role.ADMIN;
-	}
-	
 	public enum Role {
 		USER, ADMIN
 	};

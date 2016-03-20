@@ -21,33 +21,30 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import ru.mystamps.web.entity.User;
+import lombok.Getter;
 
+import ru.mystamps.web.dao.dto.UserDetails;
+
+@Getter
+@SuppressWarnings("PMD.SingularField")
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
-	private final User user;
 	
-	public CustomUserDetails(User user, Collection<? extends GrantedAuthority> authorities) {
-		super(user.getLogin(), user.getHash(), authorities);
-		this.user = user;
-	}
-	
-	@Deprecated
-	public User getUser() {
-		return user;
-	}
+	private final Integer userId;
 	
 	// used in controllers for getting info about current user
+	private final String userName;
+	private final Integer userCollectionId;
+	private final String userCollectionSlug;
 	
-	public String getUserName() {
-		return user.getName();
-	}
-	
-	public Integer getUserCollectionId() {
-		return user.getCollection().getId();
-	}
-	
-	public String getUserCollectionSlug() {
-		return user.getCollection().getSlug();
+	public CustomUserDetails(
+		UserDetails userDetails,
+		Collection<? extends GrantedAuthority> authorities) {
+		
+		super(userDetails.getLogin(), userDetails.getHash(), authorities);
+		this.userId = userDetails.getId();
+		this.userName = userDetails.getName();
+		this.userCollectionId = userDetails.getCollectionId();
+		this.userCollectionSlug = userDetails.getCollectionSlug();
 	}
 	
 }

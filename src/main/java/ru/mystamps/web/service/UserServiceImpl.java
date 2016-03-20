@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
+import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
@@ -102,10 +103,10 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public User findByLogin(String login) {
-		Validate.isTrue(login != null, "Login should be non null");
+	public UserDetails findUserDetailsByLogin(String login) {
+		Validate.isTrue(login != null, "Login must be non null");
 		
-		return userDao.findByLogin(login);
+		return jdbcUserDao.findUserDetailsByLogin(login);
 	}
 	
 	@Override

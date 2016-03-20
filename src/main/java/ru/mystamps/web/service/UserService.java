@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
 public interface UserService {
 	void registerUser(ActivateAccountDto dto);
-	User findByLogin(String login);
+	UserDetails findUserDetailsByLogin(String login);
 	long countByLogin(String login);
 }

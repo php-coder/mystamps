@@ -23,6 +23,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.JdbcUserDao
 import ru.mystamps.web.dao.UserDao
+import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.entity.User
 import ru.mystamps.web.entity.User.Role
@@ -275,31 +276,31 @@ class UserServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findByLogin()
+	// Tests for findUserDetailsByLogin()
 	//
 	
-	def "findByLogin() should throw exception when login is null"() {
+	def "findUserDetailsByLogin() should throw exception when login is null"() {
 		when:
-			service.findByLogin(null)
+			service.findUserDetailsByLogin(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByLogin() should call dao"() {
+	def "findUserDetailsByLogin() should call dao"() {
 		given:
-			User expectedUser = TestObjects.createUser()
-			userDao.findByLogin(_ as String) >> expectedUser
+			UserDetails expectedUserDetails = TestObjects.createUserDetails()
+			jdbcUserDao.findUserDetailsByLogin(_ as String) >> expectedUserDetails
 		when:
-			User user = service.findByLogin('any-login')
+			UserDetails userDetails = service.findUserDetailsByLogin('any-login')
 		then:
-			user == expectedUser
+			userDetails == expectedUserDetails
 	}
 	
-	def "findByLogin() should pass login to dao"() {
+	def "findUserDetailsByLogin() should pass login to dao"() {
 		when:
-			service.findByLogin('john')
+			service.findUserDetailsByLogin('john')
 		then:
-			1 * userDao.findByLogin('john')
+			1 * jdbcUserDao.findUserDetailsByLogin('john')
 	}
 	
 	//
