@@ -104,4 +104,9 @@ public class IndexPageSteps {
 		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_add_country"))));
 	}
 	
+	@And("^I see link for viewing suspicious activities$")
+	public void shouldSeeLinkForViewingSuspiciousActivities() {
+		assertThat(page.getNavigationLinks(), hasItem(tr("t_watch_suspicious_activities")));
+	}
+	
 }
