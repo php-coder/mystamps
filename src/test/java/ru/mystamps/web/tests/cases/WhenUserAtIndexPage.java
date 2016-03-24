@@ -71,10 +71,10 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void linkForAddingCategoriesShouldBeAbsent() {
+	public void shouldExistLinkForAddingCategories() {
 		assertThat(page.linkWithLabelExists(tr("t_create_category")))
-			.overridingErrorMessage("should absent link to page for adding categories")
-			.isFalse();
+			.overridingErrorMessage("should exist link to page for adding categories")
+			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
@@ -85,10 +85,10 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
-	public void linkForAddingCountriesShouldBeAbsent() {
+	public void shouldExistLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			.overridingErrorMessage("should absent link to page for adding countries")
-			.isFalse();
+			.overridingErrorMessage("should exist link to page for adding countries")
+			.isTrue();
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

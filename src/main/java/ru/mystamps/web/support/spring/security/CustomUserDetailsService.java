@@ -69,13 +69,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
 		List<SimpleGrantedAuthority> authorities = new LinkedList<>();
+		authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
+		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		authorities.add(new SimpleGrantedAuthority("UPDATE_COLLECTION"));
 		authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
 		
 		if (userDetails.isAdmin()) {
-			authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
-			authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
 			authorities.add(new SimpleGrantedAuthority("VIEW_SITE_EVENTS"));
 			

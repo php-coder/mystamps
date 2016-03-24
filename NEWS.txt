@@ -6,6 +6,7 @@
 - (functionality)  allow to different series to have the same catalog numbers
 - (functionality)  add possibility for search series by catalog number (contributed by Sergey Chechenev)
 - (functionality)  add interface for viewing suspicious activity (contributed by Sergey Chechenev)
+- (functionality)  allow to users to add categories and countries
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
