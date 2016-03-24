@@ -13,20 +13,19 @@ before_script:
       if [ "$TRAVIS_BRANCH" = 'prod' ]; then
         pip install --user ansible;
       fi;
-    else
       npm install -g bootlint;
       pip install --user html5validator;
     fi
 
 script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
-    else
       ./src/main/scripts/ci/check-build-and-verify.sh;
+    else
+      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
     fi
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' -a "$SPRING_PROFILES_ACTIVE" = 'test' ]; then
+  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' -a "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       ./src/main/scripts/ci/publish-code-coverage.sh;
     fi
 
