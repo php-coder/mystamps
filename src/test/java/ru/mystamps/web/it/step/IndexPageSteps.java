@@ -22,7 +22,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.But;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -32,7 +31,6 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -79,29 +77,14 @@ public class IndexPageSteps {
 		assertThat(page.getNavigationLinks(), hasItem(tr("t_add_series")));
 	}
 	
-	@But("^I don't see link for adding series$")
-	public void shouldNotSeeLinkForAddingSeries() {
-		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_add_series"))));
-	}
-	
 	@And("^I see link for adding categories$")
 	public void shouldSeeLinkForAddingCategories() {
 		assertThat(page.getNavigationLinks(), hasItem(tr("t_create_category")));
 	}
 	
-	@But("^I don't see link for adding categories$")
-	public void shouldNotSeeLinkForAddingCategories() {
-		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_create_category"))));
-	}
-	
 	@And("^I see link for adding countries$")
 	public void shouldSeeLinkForAddingCountries() {
 		assertThat(page.getNavigationLinks(), hasItem(tr("t_add_country")));
-	}
-	
-	@But("^I don't see link for adding countries$")
-	public void shouldNotSeeLinkForAddingCountries() {
-		assertThat(page.getNavigationLinks(), not(hasItem(tr("t_add_country"))));
 	}
 	
 	@And("^I see link for viewing suspicious activities$")
