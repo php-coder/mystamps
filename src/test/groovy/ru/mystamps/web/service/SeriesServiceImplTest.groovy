@@ -24,6 +24,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
+import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.service.dto.LinkEntityDto
 import ru.mystamps.web.service.dto.SeriesInfoDto
@@ -45,6 +46,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	private SeriesService service
 	private AddSeriesForm form
+	private AddImageForm imageForm
 	private Integer userId
 	
 	def setup() {
@@ -52,6 +54,8 @@ class SeriesServiceImplTest extends Specification {
 		form.setQuantity(2)
 		form.setPerforated(false)
 		form.setCategory(TestObjects.createLinkEntityDto())
+		
+		imageForm = new AddImageForm()
 		
 		userId = TestObjects.createUser().getId()
 		
@@ -562,6 +566,30 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}, { Set<String> numbers ->
 				assert numbers == expectedNumbers
+				return true
+			})
+	}
+
+	//
+	// Tests for addImageToSeries()
+	//
+	
+	def "addImageToSeries() should call dao and pass series id, current date and user id to it"() {
+		given:
+			Integer expectedSeriesId = 123
+		and:
+			Integer expectedUserId = 321
+		when:
+			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
+		then:
+			1 * seriesDao.markAsModified({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
+				return true
+			}, { Integer userId ->
+				assert userId == expectedUserId
 				return true
 			})
 	}

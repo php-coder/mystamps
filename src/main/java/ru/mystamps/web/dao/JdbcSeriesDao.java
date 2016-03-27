@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
@@ -28,6 +29,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface JdbcSeriesDao {
 	Integer add(AddSeriesDbDto series);
+	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
