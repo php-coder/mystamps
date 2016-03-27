@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,9 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	
 	@Value("${series.create}")
 	private String createSeriesSql;
+	
+	@Value("${series.set_updated}")
+	private String setSeriesUpdatedSql;
 	
 	@Value("${series.find_all_for_sitemap}")
 	private String findAllForSitemapSql;
@@ -141,6 +145,28 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	public void setUpdated(Integer seriesId, Date updatedAt, Integer updatedBy) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("updated_at", updatedAt);
+		params.put("updated_by", updatedBy);
+		
+		int affected = jdbcTemplate.update(
+			setSeriesUpdatedSql,
+			params
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after updating of series: %d",
+			affected
+		);
 	}
 	
 	@Override
