@@ -163,6 +163,7 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		Integer imageId = imageService.save(dto.getImage());
 		imageService.addToSeries(seriesId, imageId);
+		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
 		LOG.info(
 			"Image #{} was added to series #{} by user #{}",
