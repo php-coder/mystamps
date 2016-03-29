@@ -55,8 +55,8 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	@Value("${series.create}")
 	private String createSeriesSql;
 	
-	@Value("${series.set_updated}")
-	private String setSeriesUpdatedSql;
+	@Value("${series.mark_as_modified}")
+	private String markAsModifiedSql;
 	
 	@Value("${series.find_all_for_sitemap}")
 	private String findAllForSitemapSql;
@@ -151,20 +151,20 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 	 * @author Sergey Chechenev
 	 */
 	@Override
-	public void setUpdated(Integer seriesId, Date updatedAt, Integer updatedBy) {
+	public void markAsModified(Integer seriesId, Date updatedAt, Integer updatedBy) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("series_id", seriesId);
 		params.put("updated_at", updatedAt);
 		params.put("updated_by", updatedBy);
 		
 		int affected = jdbcTemplate.update(
-			setSeriesUpdatedSql,
+			markAsModifiedSql,
 			params
 		);
 		
 		Validate.validState(
 			affected == 1,
-			"Unexpected number of affected rows after updating of series: %d",
+			"Unexpected number of affected rows after updating series: %d",
 			affected
 		);
 	}

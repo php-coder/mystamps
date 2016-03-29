@@ -18,7 +18,7 @@
 package ru.mystamps.web.service
 
 import org.springframework.web.multipart.MultipartFile
-
+import ru.mystamps.web.model.AddImageForm
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -45,6 +45,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	private SeriesService service
 	private AddSeriesForm form
+	private AddImageForm imageForm
 	private Integer userId
 	
 	def setup() {
@@ -52,6 +53,8 @@ class SeriesServiceImplTest extends Specification {
 		form.setQuantity(2)
 		form.setPerforated(false)
 		form.setCategory(TestObjects.createLinkEntityDto())
+		
+		imageForm = new AddImageForm()
 		
 		userId = TestObjects.createUser().getId()
 		
@@ -562,6 +565,30 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}, { Set<String> numbers ->
 				assert numbers == expectedNumbers
+				return true
+			})
+	}
+
+	//
+	// Tests for addImageToSeries()
+	//
+	
+	def "addImageToSeries() should call dao and pass seriesId, current date and userId to it"() {
+		given:
+			Integer expectedSeriesId = 123
+		and:
+			Integer expectedUserId = 321
+		when:
+			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
+		then:
+			1 * seriesDao.markAsModified({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
+				return true				
+			}, { Integer userId ->
+				assert userId == expectedUserId
 				return true
 			})
 	}

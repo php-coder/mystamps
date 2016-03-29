@@ -29,7 +29,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface JdbcSeriesDao {
 	Integer add(AddSeriesDbDto series);
-	void setUpdated(Integer seriesId, Date updateAt, Integer updatedBy);
+	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	Iterable<SitemapInfoDto> findAllForSitemap();
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
