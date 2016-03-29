@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body>
+	<body onload="initPage()">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
@@ -456,28 +456,6 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
-		
-		<script>
-			$(function() {
-				$('#country').selectize();
-				
-				$('.js-catalog-numbers').on('blur', function() {
-					$(this).val(function(idx, val) {
-						return CatalogUtils.expandNumbers(val);
-					});
-				});
-				
-				$('.collapse').on('show.bs.collapse hide.bs.collapse', function toggleChevron() {
-					$(this)
-						.prev('.js-collapse-toggle-header')
-						.find('.glyphicon')
-						.toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
-				});
-				
-				$('.js-with-tooltip').tooltip({
-					'placement': 'right'
-				});
-			});
-		</script>
+		<script src="../../../../javascript/series/add.js" th:src="${SERIES_ADD_JS}"></script>
 	</body>
 </html>

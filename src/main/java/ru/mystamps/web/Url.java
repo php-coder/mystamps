@@ -78,6 +78,7 @@ public final class Url {
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	public static final String MAIN_CSS               = "/static/styles/main.css";
 	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
+	public static final String SERIES_ADD_JS          = "/public/js/series/add.js";
 	
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
@@ -139,12 +140,14 @@ public final class Url {
 			map.put("FAVICON_ICO", FAVICON_ICO);
 			map.put("MAIN_CSS", MAIN_CSS);
 			map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
+			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
 		} else {
 			// Use separate domain for our own resources
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
+			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
 			
 			// Use CDN for external resources like frameworks
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
