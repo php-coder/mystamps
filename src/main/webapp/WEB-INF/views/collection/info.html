@@ -239,13 +239,6 @@
 					return table;
 				};
 				
-				var drawCategoriesChart = function() {
-					drawChart(
-						'categories-chart',
-						createCategoriesDataTable()
-					);
-				};
-				
 				var createCountriesDataTable = function() {
 					var table = new google.visualization.DataTable();
 					table.addColumn('string', 'Country');
@@ -272,17 +265,10 @@
 					return table;
 				};
 				
-				var drawCountriesChart = function() {
-					drawChart(
-						'countries-chart',
-						createCountriesDataTable()
-					);
-				};
-				
 				google.charts.load('44', {'packages':['corechart']});
 				google.charts.setOnLoadCallback(function() {
-					drawCategoriesChart();
-					drawCountriesChart();
+					drawChart('categories-chart', createCategoriesDataTable());
+					drawChart('countries-chart', createCountriesDataTable());
 				});
 				
 				/*]]>*/
