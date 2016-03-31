@@ -207,7 +207,7 @@
 		<th:block togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 		/*/-->
 			<!-- Charts -->
-			<script src="https://www.google.com/jsapi"></script>
+			<script src="https://www.gstatic.com/charts/loader.js"></script>
 			<script th:inline="javascript">
 				/*<![CDATA[*/
 				
@@ -285,8 +285,8 @@
 					);
 				};
 				
-				google.load("visualization", "1", {packages:["corechart"]});
-				google.setOnLoadCallback(function() {
+				google.charts.load('44', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(function() {
 					drawCategoriesChart();
 					drawCountriesChart();
 				});
