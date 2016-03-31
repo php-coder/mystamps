@@ -1,17 +1,18 @@
 function initPage(statByCategories, statByCountries) {
-	google.charts.load('44', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(function() {
+	var chartsVersion = '44';
+	google.charts.load(chartsVersion, {'packages':['corechart']});
+	google.charts.setOnLoadCallback(function drawCharts() {
 		drawChart('categories-chart', createCategoriesDataTable(statByCategories));
 		drawChart('countries-chart', createCountriesDataTable(statByCountries));
 	});
 }
 
-function drawChart(containerId, table) {
+function drawChart(containerId, dataTable) {
 	var options = {
 		pieHole: 0.3
 	};
 	var chart = new google.visualization.PieChart(document.getElementById(containerId));
-	chart.draw(table, options);
+	chart.draw(dataTable, options);
 };
 
 function createCategoriesDataTable(stat) {
