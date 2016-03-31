@@ -2,8 +2,8 @@ function initPage(statByCategories, statByCountries) {
 	var chartsVersion = '44';
 	google.charts.load(chartsVersion, {'packages':['corechart']});
 	google.charts.setOnLoadCallback(function drawCharts() {
-		drawChart('categories-chart', createCategoriesDataTable(statByCategories));
-		drawChart('countries-chart', createCountriesDataTable(statByCountries));
+		drawChart('categories-chart', createDataTable(statByCategories));
+		drawChart('countries-chart', createDataTable(statByCountries));
 	});
 }
 
@@ -15,17 +15,9 @@ function drawChart(containerId, dataTable) {
 	chart.draw(dataTable, options);
 };
 
-function createCategoriesDataTable(stat) {
+function createDataTable(stat) {
 	var table = new google.visualization.DataTable();
-	table.addColumn('string', 'Category');
-	table.addColumn('number', 'Quantity of stamps');
-	table.addRows(stat);
-	return table;
-};
-
-function createCountriesDataTable(stat) {
-	var table = new google.visualization.DataTable();
-	table.addColumn('string', 'Country');
+	table.addColumn('string', 'Category/Country');
 	table.addColumn('number', 'Quantity of stamps');
 	table.addRows(stat);
 	return table;
