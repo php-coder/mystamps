@@ -95,8 +95,6 @@ public class CollectionController {
 		return "collection/info";
 	}
 
-	// false positive
-	@SuppressWarnings("PMD.UnusedPrivateMethod")
 	private Map<String, Integer> getCountriesStatistics(Integer collectionId, String lang) {
 		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collectionId, lang);
 		
