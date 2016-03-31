@@ -18,7 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -129,7 +129,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return categoryDao.getStatisticsOf(collectionId, lang);

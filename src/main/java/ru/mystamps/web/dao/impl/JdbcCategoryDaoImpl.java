@@ -136,24 +136,16 @@ public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
 	}
 	
 	@Override
-	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);
 		
-		// TODO: find a better way of extracting results
-		List<Pair<String, Integer>> rawResult = jdbcTemplate.query(
+		return jdbcTemplate.query(
 			countStampsByCategoriesSql,
 			params,
 			RowMappers::forNameAndCounter
 		);
-		
-		Map<String, Integer> result = new HashMap<>(rawResult.size(), 1.0f);
-		for (Pair<String, Integer> pair : rawResult) {
-			result.put(pair.getFirst(), pair.getSecond());
-		}
-		
-		return result;
 	}
 	
 	@Override

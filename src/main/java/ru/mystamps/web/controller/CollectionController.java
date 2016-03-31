@@ -18,8 +18,8 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -82,27 +82,26 @@ public class CollectionController {
 			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
 			model.addAttribute("stampsCounter", seriesService.countStampsOf(collectionId));
 			
-			model.addAttribute(
-				"statOfCollectionByCategories",
-				categoryService.getStatisticsOf(collectionId, lang)
-			);
-			model.addAttribute(
-				"statOfCollectionByCountries",
-				getCountriesStatistics(collectionId, lang)
-			);
+			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);
+			model.addAttribute("statOfCollectionByCategories", categoriesStat);
+			
+			List<Object[]> countriesStat = getCountriesStatistics(collectionId, lang);
+			model.addAttribute("statOfCollectionByCountries", countriesStat);
 		}
 		
 		return "collection/info";
 	}
 
-	private Map<String, Integer> getCountriesStatistics(Integer collectionId, String lang) {
-		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collectionId, lang);
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	private List<Object[]> getCountriesStatistics(Integer collectionId, String lang) {
+		List<Object[]> countriesStat = countryService.getStatisticsOf(collectionId, lang);
 		
-		// manually localize "Unknown" country's name
-		if (countriesStat.containsKey("Unknown")) {
-			String message = messageSource.getMessage("t_unspecified", null, new Locale(lang));
-			countriesStat.put(message, countriesStat.get("Unknown"));
-			countriesStat.remove("Unknown");
+		for (Object[] countryStat : countriesStat) {
+			// manually localize "Unknown" country's name
+			Object name = countryStat[0];
+			if ("Unknown".equals(name)) {
+				countryStat[0] = messageSource.getMessage("t_unspecified", null, new Locale(lang));
+			}
 		}
 		
 		return countriesStat;

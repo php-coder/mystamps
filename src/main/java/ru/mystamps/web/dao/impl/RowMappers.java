@@ -55,11 +55,11 @@ final class RowMappers {
 		);
 	}
 	
-	public static Pair<String, Integer> forNameAndCounter(ResultSet rs, int i) throws SQLException {
-		return new Pair<>(
+	public static Object[] forNameAndCounter(ResultSet rs, int i) throws SQLException {
+		return new Object[]{
 			rs.getString("name"),
 			JdbcUtils.getInteger(rs, "counter")
-		);
+		};
 	}
 	
 	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int i) throws SQLException {
