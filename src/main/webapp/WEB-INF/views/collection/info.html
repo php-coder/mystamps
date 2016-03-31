@@ -208,48 +208,23 @@
 		/*/-->
 			<!-- Charts -->
 			<script src="https://www.gstatic.com/charts/loader.js"></script>
+			<script src="../../../../javascript/collection/info.js" th:src="${COLLECTION_INFO_JS}"></script>
 			<script th:inline="javascript">
 				/*<![CDATA[*/
-				
-				var drawChart = function(containerId, table) {
-					var options = {
-						pieHole: 0.3
-					};
-					var chart = new google.visualization.PieChart(document.getElementById(containerId));
-					chart.draw(table, options);
-				};
-				
-				var createCategoriesDataTable = function() {
-					var table = new google.visualization.DataTable();
-					table.addColumn('string', 'Category');
-					table.addColumn('number', 'Quantity of stamps');
-					
+				$(function() {
 					/*[+
-					table.addRows([[${statOfCollectionByCategories}]]);
+					initPage(
+						[[${statOfCollectionByCategories}]],
+						[[${statOfCollectionByCountries}]]
+					);
 					+]*/
 					
 					/*[- */
-					table.addRows([
+					initPage([
 						['Animals', 94],
 						['Prehistoric animals', 37],
 						['Sport', 1]
-					]);
-					/* -]*/
-					
-					return table;
-				};
-				
-				var createCountriesDataTable = function() {
-					var table = new google.visualization.DataTable();
-					table.addColumn('string', 'Country');
-					table.addColumn('number', 'Quantity of stamps');
-					
-					/*[+
-					table.addRows([[${statOfCollectionByCountries}]]);
-					+]*/
-					
-					/*[- */
-					table.addRows([
+					], [
 						['Russia', 5],
 						['USA', 2],
 						['Australia', 11],
@@ -261,14 +236,6 @@
 						['Korea', 2]
 					]);
 					/* -]*/
-					
-					return table;
-				};
-				
-				google.charts.load('44', {'packages':['corechart']});
-				google.charts.setOnLoadCallback(function() {
-					drawChart('categories-chart', createCategoriesDataTable());
-					drawChart('countries-chart', createCountriesDataTable());
 				});
 				
 				/*]]>*/
