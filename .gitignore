@@ -12,3 +12,6 @@ mystamps.iml
 # jasmine-maven-plugin uses phantomjs-maven-plugin.
 # phantomjs-maven-plugin creates this log file.
 phantomjsdriver.log
+
+# minified resources
+src/main/webapp/WEB-INF/static/styles/*.min.css
