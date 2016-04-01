@@ -15,3 +15,5 @@ phantomjsdriver.log
 
 # minified resources
 src/main/webapp/WEB-INF/static/styles/*.min.css
+src/main/javascript/*.min.js
+src/main/javascript/*/*.min.js

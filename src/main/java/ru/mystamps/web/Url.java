@@ -77,9 +77,9 @@ public final class Url {
 	// resources
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	public static final String MAIN_CSS               = "/static/styles/main.min.css";
-	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.js";
-	public static final String SERIES_ADD_JS          = "/public/js/series/add.js";
-	public static final String COLLECTION_INFO_JS     = "/public/js/collection/info.js";
+	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.min.js";
+	public static final String SERIES_ADD_JS          = "/public/js/series/add.min.js";
+	public static final String COLLECTION_INFO_JS     = "/public/js/collection/info.min.js";
 	
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";

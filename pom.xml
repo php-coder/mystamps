@@ -628,6 +628,13 @@
 					<cssSourceFiles>
 						<cssSourceFile>main.css</cssSourceFile>
 					</cssSourceFiles>
+					<jsSourceDir>../javascript</jsSourceDir>
+					<jsSourceIncludes>
+						<jsSourceInclude>**/*.js</jsSourceInclude>
+					</jsSourceIncludes>
+					<jsSourceExcludes>
+						<jsSourceExclude>**/*.min.js</jsSourceExclude>
+					</jsSourceExcludes>
 					<skipMerge>true</skipMerge>
 				</configuration>
 				<executions>
