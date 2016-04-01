@@ -86,3 +86,8 @@ label {
 .dropdown-entry-lang {
 	padding-left: 5px;
 }
+
+/* fix unreadable tooltip on Google Charts (see #367) */
+.goog-tooltip {
+	color: white;
+}
