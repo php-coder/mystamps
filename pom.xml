@@ -471,6 +471,9 @@
 			</resource>
 			<resource>
 				<directory>${basedir}/src/main/javascript</directory>
+				<includes>
+					<include>**/*.min.js</include>
+				</includes>
 			</resource>
 		</resources>
 		
