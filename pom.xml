@@ -664,6 +664,7 @@
 				<executions>
 					<execution>
 						<id>minify-resources</id>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>minify</goal>
 						</goals>
