@@ -1,0 +1,21 @@
+# Universal configuration for most of the editors.
+# http://EditorConfig.org
+
+# For descriptions of the options see:
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+# top-most EditorConfig file
+root = true
+
+[*.{sh,js,sql,css,xml,html,java,groovy,properties}]
+indent_style = tab
+indent_size = 4
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = false
+
+[*.{yml,json,conf}]
+indent_style = space
+indent_size = 2
+
