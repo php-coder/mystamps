@@ -18,14 +18,22 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUserDao;
+import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 
 @RequiredArgsConstructor
@@ -38,6 +46,9 @@ public class JdbcUserDaoImpl implements JdbcUserDao {
 	
 	@Value("${user.find_user_details_by_login}")
 	private String findUserDetailsByLoginSql;
+	
+	@Value("${user.create}")
+	private String addUserSql;
 	
 	@Override
 	public long countByLogin(String login) {
@@ -59,6 +70,34 @@ public class JdbcUserDaoImpl implements JdbcUserDao {
 		} catch (EmptyResultDataAccessException ex) {
 			return null;
 		}
+	}
+	
+	@Override
+	public Integer add(AddUserDbDto user) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("login", user.getLogin());
+		params.put("role", String.valueOf(user.getRole()));
+		params.put("name", user.getName());
+		params.put("email", user.getEmail());
+		params.put("registered_at", user.getRegisteredAt());
+		params.put("activated_at", user.getActivatedAt());
+		params.put("hash", user.getHash());
+		
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addUserSql,
+			new MapSqlParameterSource(params),
+			holder
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of user: %d",
+			affected
+		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
 	}
 	
 }

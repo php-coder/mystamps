@@ -19,12 +19,12 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 
+import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -32,6 +32,7 @@ import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 
 final class TestObjects {
+	public static final Integer TEST_USER_ID        = 777;
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
 	
@@ -71,12 +72,10 @@ final class TestObjects {
 		return new LinkEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
 	}
 	
-	public static User createUser() {
-		final Integer anyId = 777;
-		User user = new User();
-		user.setId(anyId);
+	public static AddUserDbDto createAddUserDbDto() {
+		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(TEST_LOGIN);
-		user.setRole(User.Role.USER);
+		user.setRole(UserDetails.Role.USER);
 		user.setName(TEST_NAME);
 		user.setEmail(TEST_EMAIL);
 		user.setRegisteredAt(new Date());

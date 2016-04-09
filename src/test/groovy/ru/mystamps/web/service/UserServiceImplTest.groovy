@@ -22,17 +22,16 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.JdbcUserDao
-import ru.mystamps.web.dao.UserDao
+import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.User.Role
 import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.tests.DateUtils
 
 class UserServiceImplTest extends Specification {
 	
-	private UserDao userDao = Mock()
+	private static Integer ANY_USER_ID = TestObjects.TEST_USER_ID
+	
 	private JdbcUserDao jdbcUserDao = Mock()
 	private UsersActivationService usersActivationService = Mock()
 	private CollectionService collectionService = Mock()
@@ -42,7 +41,7 @@ class UserServiceImplTest extends Specification {
 	private ActivateAccountForm activationForm
 	
 	def setup() {
-		User user = TestObjects.createUser()
+		AddUserDbDto user = TestObjects.createAddUserDbDto()
 		
 		encoder.encode(_ as String) >> user.getHash()
 		
@@ -55,7 +54,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
-		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationService, collectionService, encoder)
+		service = new UserServiceImpl(jdbcUserDao, usersActivationService, collectionService, encoder)
 	}
 	
 	//
@@ -73,7 +72,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save(_ as User) >> TestObjects.createUser()
+			1 * jdbcUserDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should delete registration request"() {
@@ -87,7 +86,7 @@ class UserServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			userDao.save(_ as User) >> TestObjects.createUser()
+			jdbcUserDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should throw exception when activation key is null"() {
@@ -105,7 +104,7 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> null
 		and:
-			0 * userDao.save(_ as User)
+			0 * jdbcUserDao.add(_ as AddUserDbDto)
 		and:
 			0 * usersActivationService.remove(_ as String)
 	}
@@ -116,10 +115,10 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserName
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should pass login instead of name when name is null"() {
@@ -129,10 +128,10 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should pass login instead of name when name is empty"() {
@@ -143,20 +142,20 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should fill role field"() {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
-				assert user?.role == Role.USER
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
+				assert user?.role == UserDetails.Role.USER
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should use email from registration request"() {
@@ -167,10 +166,10 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.email == activation.email
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should use registration date from registration request"() {
@@ -181,10 +180,10 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		and:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.registeredAt == activation.createdAt
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should throw exception when password is null"() {
@@ -198,14 +197,14 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should gets hash from encoder"() {
 		given:
-			String expectedHash = TestObjects.createUser().getHash()
+			String expectedHash = TestObjects.createAddUserDbDto().getHash()
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.hash == expectedHash
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 		and:
 			1 * encoder.encode({ String password ->
 				assert password == TestObjects.TEST_PASSWORD
@@ -237,32 +236,28 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert user?.login == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should assign activated at to current date"() {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * jdbcUserDao.add({ AddUserDbDto user ->
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should create collection for user"() {
 		given:
 			Integer expectedId = 909;
-			String expectedLogin = "foobar"
+			String expectedLogin = activationForm.getLogin()
 		and:
-			User user = TestObjects.createUser();
-			user.setId(expectedId)
-			user.setLogin(expectedLogin)
-		and:
-			userDao.save(_ as User) >> user
+			jdbcUserDao.add(_ as AddUserDbDto) >> expectedId
 		when:
 			service.registerUser(activationForm)
 		then:

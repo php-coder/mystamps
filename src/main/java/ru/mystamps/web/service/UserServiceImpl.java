@@ -32,20 +32,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcUserDao;
-import ru.mystamps.web.dao.UserDao;
+import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
-import static ru.mystamps.web.entity.User.Role.USER;
+import static ru.mystamps.web.dao.dto.UserDetails.Role.USER;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
-	private final UserDao userDao;
 	private final JdbcUserDao jdbcUserDao;
 	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
@@ -84,7 +82,7 @@ public class UserServiceImpl implements UserService {
 		
 		Date now = new Date();
 		
-		User user = new User();
+		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(login);
 		user.setRole(USER);
 		user.setName(finalName);
@@ -93,12 +91,12 @@ public class UserServiceImpl implements UserService {
 		user.setActivatedAt(now);
 		user.setHash(hash);
 		
-		user = userDao.save(user);
+		Integer id = jdbcUserDao.add(user);
 		usersActivationService.remove(activationKey);
 		
-		LOG.info("User has been created ({})", user);
+		LOG.info("User #{} has been created ({})", id, user);
 		
-		collectionService.createCollection(user.getId(), user.getLogin());
+		collectionService.createCollection(id, user.getLogin());
 	}
 	
 	@Override

@@ -15,13 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import ru.mystamps.web.dao.dto.AddUserDbDto;
-import ru.mystamps.web.dao.dto.UserDetails;
+import java.util.Date;
 
-public interface JdbcUserDao {
-    long countByLogin(String login);
-    UserDetails findUserDetailsByLogin(String login);
-	Integer add(AddUserDbDto user);
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import static ru.mystamps.web.dao.dto.UserDetails.Role;
+
+@Getter
+@Setter
+@ToString(exclude = {"registeredAt", "activatedAt", "hash"})
+public class AddUserDbDto {
+	private String login;
+	private Role role;
+	private String name;
+	private String email;
+	private Date registeredAt;
+	private Date activatedAt;
+	private String hash;
 }

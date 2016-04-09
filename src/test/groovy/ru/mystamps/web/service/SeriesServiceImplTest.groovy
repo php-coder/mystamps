@@ -57,7 +57,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		imageForm = new AddImageForm()
 		
-		userId = TestObjects.createUser().getId()
+		userId = TestObjects.TEST_USER_ID
 		
 		imageService.save(_) >> ANY_IMAGE_ID
 		
