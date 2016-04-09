@@ -42,4 +42,9 @@ public final class Db {
 		public static final int EMAIL_LENGTH          = 255;
 	}
 	
+	public static final class User {
+		public static final int LOGIN_LENGTH = 15;
+		public static final int NAME_LENGTH  = 100;
+	}
+	
 }
