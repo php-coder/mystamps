@@ -39,10 +39,16 @@ public interface StrategiesConfig {
 		@Autowired
 		private ImageDataDao imageDataDao;
 		
+		@Autowired
+		private DaoConfig daoConfig;
+		
 		@Bean
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
-			return new DatabaseImagePersistenceStrategy(imageDataDao);
+			return new DatabaseImagePersistenceStrategy(
+				imageDataDao,
+				daoConfig.getJdbcImageDataDao()
+			);
 		}
 		
 	}

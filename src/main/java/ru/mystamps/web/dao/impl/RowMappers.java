@@ -28,6 +28,7 @@ import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -220,6 +221,13 @@ final class RowMappers {
 			UserDetails.Role.valueOf(rs.getString("role")),
 			rs.getInt("collection_id"),
 			rs.getString("collection_slug")
+		);
+	}
+	
+	public static DbImageDto forDbImageDto(ResultSet rs, int i) throws SQLException {
+		return new DbImageDto(
+			rs.getString("type"),
+			rs.getBytes("data")
 		);
 	}
 	

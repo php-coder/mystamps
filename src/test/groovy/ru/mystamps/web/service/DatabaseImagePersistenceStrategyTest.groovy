@@ -22,19 +22,21 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.ImageDataDao
+import ru.mystamps.web.dao.JdbcImageDataDao
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.entity.ImageData
-import ru.mystamps.web.service.dto.DbImageDto
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private ImageDataDao imageDataDao = Mock()
+	private JdbcImageDataDao jdbcImageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
 	
-	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
+	private ImagePersistenceStrategy strategy =
+		new DatabaseImagePersistenceStrategy(imageDataDao, jdbcImageDataDao)
 	
 	//
 	// Tests for save()
@@ -82,19 +84,22 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should pass image to image data dao"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = image.getId()
+		and:
+			Image image = TestObjects.createImage()
+			image.setId(expectedImageId)
 		when:
-			strategy.get(expectedImage)
+			strategy.get(image)
 		then:
-			1 * imageDataDao.findByImage({ Image image ->
-				assert image == expectedImage
+			1 * jdbcImageDataDao.findByImageId({ Integer imageId ->
+				assert imageId == expectedImageId
 				return true
 			})
 	}
 	
 	def "get() should return null when image data dao returned null"() {
 		given:
-			imageDataDao.findByImage(_ as Image) >> null
+			jdbcImageDataDao.findByImageId(_ as Integer) >> null
 		when:
 			ImageDto result = strategy.get(image)
 		then:
@@ -103,15 +108,13 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should return result from image data dao"() {
 		given:
-			ImageData expectedImageData = TestObjects.createImageData()
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		and:
-			ImageDto expectedImage = new DbImageDto(expectedImageData)
-		and:
-			imageDataDao.findByImage(_ as Image) >> expectedImageData
+			jdbcImageDataDao.findByImageId(_ as Integer) >> expectedImageDto
 		when:
 			ImageDto result = strategy.get(image)
 		then:
-			result == expectedImage
+			result == expectedImageDto
 	}
 	
 }

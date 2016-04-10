@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDataDao;
+import ru.mystamps.web.dao.JdbcImageDataDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.service.dto.DbImageDto;
@@ -41,6 +42,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
 	private final ImageDataDao imageDataDao;
+	private final JdbcImageDataDao jdbcImageDataDao;
 	
 	@PostConstruct
 	public void init() {
@@ -65,13 +67,13 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	
 	@Override
 	public ImageDto get(Image image) {
-		ImageData imageData = imageDataDao.findByImage(image);
-		if (imageData == null) {
+		DbImageDto imageDto = jdbcImageDataDao.findByImageId(image.getId());
+		if (imageDto == null) {
 			LOG.warn("Found image without content: #{}", image.getId());
 			return null;
 		}
 		
-		return new DbImageDto(imageData);
+		return imageDto;
 	}
 	
 }

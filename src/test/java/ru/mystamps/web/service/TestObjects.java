@@ -24,7 +24,6 @@ import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -108,15 +107,8 @@ final class TestObjects {
 		return image;
 	}
 	
-	public static ImageData createImageData() {
-		ImageData imageData = new ImageData();
-		imageData.setContent("test".getBytes());
-		imageData.setImage(createImage());
-		return imageData;
-	}
-	
 	public static DbImageDto createDbImageDto() {
-		return new DbImageDto(createImageData());
+		return new DbImageDto("PNG", "test".getBytes());
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {

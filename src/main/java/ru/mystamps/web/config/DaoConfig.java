@@ -58,6 +58,11 @@ public class DaoConfig {
 	}
 	
 	@Bean
+	public JdbcImageDataDao getJdbcImageDataDao() {
+		return new JdbcImageDataDaoImpl(jdbcTemplate);
+	}
+	
+	@Bean
 	public MichelCatalogDao getMichelCatalogDao() {
 		return new JdbcMichelCatalogDaoImpl(jdbcTemplate);
 	}
