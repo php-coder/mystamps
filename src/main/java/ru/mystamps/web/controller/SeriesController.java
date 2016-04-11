@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +47,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import org.springframework.security.access.AccessDeniedException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -216,7 +219,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
@@ -247,6 +250,12 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (!isUserCanAddImagesToSeries(series)) {
+			throw new AccessDeniedException(
+				String.format("User has no rights to add images to series %d", seriesId)
+			);
+		}
+		
 		model.addAttribute("series", series);
 		
 		// CheckStyle: ignore LineLength for next 4 lines
@@ -262,7 +271,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
 		boolean maxQuantityOfImagesExceeded = !isAllowedToAddingImages(series);
@@ -379,7 +388,7 @@ public class SeriesController {
 	}
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {
-		return series.getImageIds().size() <= series.getQuantity();
+		return series.getImageIds().size() < series.getQuantity();
 	}
 	
 	private static String redirectTo(String url, Object... args) {
@@ -388,6 +397,25 @@ public class SeriesController {
 			.toString();
 		
 		return "redirect:" + dstUrl;
+	}
+	
+	private boolean isUserCanAddImagesToSeries(SeriesDto series) {
+		if (SecurityContextUtils.hasAuthority("ADD_IMAGES_TO_SERIES")) {
+			return true;
+		}
+		
+		if (isOwner(series) && isAllowedToAddingImages(series)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean isOwner(SeriesDto series) {
+		return Objects.equals(
+			series.getCreatedBy(),
+			SecurityContextUtils.getUserId()
+		);
 	}
 	
 }
