@@ -17,11 +17,13 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 
@@ -32,6 +34,17 @@ public final class SecurityContextUtils {
 	
 	public static boolean hasAuthority(HttpServletRequest request, String authority) {
 		return new SecurityContextHolderAwareRequestWrapper(request, null).isUserInRole(authority);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	public static boolean hasAuthority(GrantedAuthority authority) {
+		return Optional
+			.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+			.map(Authentication::getAuthorities)
+			.orElse(Collections.emptyList())
+			.contains(authority);
 	}
 	
 	/**

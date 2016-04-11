@@ -73,10 +73,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
 		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
 		authorities.add(new SimpleGrantedAuthority("UPDATE_COLLECTION"));
-		authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
 		
 		if (userDetails.isAdmin()) {
 			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
+			authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
 			authorities.add(new SimpleGrantedAuthority("VIEW_SITE_EVENTS"));
 			
 			// gives access to Togglz web console

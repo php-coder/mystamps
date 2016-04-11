@@ -83,6 +83,10 @@ public class SeriesDto {
 		return info.getComment();
 	}
 	
+	public Integer getCreatedBy() {
+		return info.getCreatedBy();
+	}
+	
 	public CatalogInfoDto getYvert() {
 		return yvert;
 	}
