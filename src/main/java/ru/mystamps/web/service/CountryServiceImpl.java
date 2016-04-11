@@ -36,7 +36,6 @@ import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -78,12 +77,6 @@ public class CountryServiceImpl implements CountryService {
 		LOG.info("Country #{} has been created ({})", id, country);
 		
 		return new UrlEntityDto(id, slug);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return countryDao.findAllAsSelectEntities(lang);
 	}
 	
 	@Override
