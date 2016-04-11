@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -80,7 +83,7 @@ public class CountryController {
 		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())
+			.buildAndExpand(countryUrl.getSlug())
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
@@ -89,8 +92,8 @@ public class CountryController {
 	}
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)
-	public String showInfo(
-		@Country @PathVariable("id") LinkEntityDto country,
+	public String showInfoBySlug(
+		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -110,6 +113,27 @@ public class CountryController {
 		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
 		
 		return "country/info";
+	}
+	
+	/**
+	 * @author Aleksander Parkhomenko
+	 */
+	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
+	public View showInfoById(
+		@Country @PathVariable("slug") LinkEntityDto country,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_COUNTRY_PAGE);
+		
+		return view;
 	}
 	
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)

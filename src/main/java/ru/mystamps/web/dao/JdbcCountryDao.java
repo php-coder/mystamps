@@ -32,5 +32,5 @@ public interface JdbcCountryDao {
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

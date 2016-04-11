@@ -153,12 +153,12 @@
 								<select id="country" class="form-control" th:field="*{country}">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+									<option th:each="country : ${countries}" th:value="${country.slug}" th:text="${country.name}"></option>
 									/*/-->
 									<!--/*-->
-									<option value="1">Russia</option>
-									<option value="2">Canada</option>
-									<option value="3">Italy</option>
+									<option value="russia">Russia</option>
+									<option value="canada">Canada</option>
+									<option value="italy">Italy</option>
 									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('CREATE_COUNTRY')">

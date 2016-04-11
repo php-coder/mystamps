@@ -36,7 +36,6 @@ import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -82,22 +81,17 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return countryDao.findAllAsSelectEntities(lang);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
 	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return countryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
-		Validate.isTrue(countryId != null, "Country id must be non null");
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
+		Validate.isTrue(slug != null, "Country slug must be non null");
+		Validate.isTrue(!slug.trim().isEmpty(), "Country slug must be non empty");
 		
-		return countryDao.findOneAsLinkEntity(countryId, lang);
+		return countryDao.findOneAsLinkEntity(slug, lang);
 	}
 	
 	@Override
