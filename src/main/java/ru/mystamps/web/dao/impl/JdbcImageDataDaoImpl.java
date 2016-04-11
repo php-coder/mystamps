@@ -44,7 +44,7 @@ public class JdbcImageDataDaoImpl implements JdbcImageDataDao {
 				Collections.singletonMap("image_id", imageId),
 				RowMappers::forDbImageDto
 			);
-		} catch (EmptyResultDataAccessException ex) {
+		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
 	}

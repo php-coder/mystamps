@@ -199,7 +199,7 @@ public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
 				params,
 				RowMappers::forSeriesFullInfoDto
 			);
-		} catch (EmptyResultDataAccessException ex) {
+		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
 	}

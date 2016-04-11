@@ -67,7 +67,7 @@ public class JdbcUserDaoImpl implements JdbcUserDao {
 				Collections.singletonMap("login", login),
 				RowMappers::forUserDetails
 			);
-		} catch (EmptyResultDataAccessException ex) {
+		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
 	}
