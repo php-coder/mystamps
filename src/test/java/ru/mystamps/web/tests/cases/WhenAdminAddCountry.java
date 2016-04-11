@@ -231,7 +231,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 			.replace("{slug}", TEST_COUNTRY_NAME_EN.toLowerCase());
 		
 		assertThat(page.getCurrentUrl()).matches(expectedUrl);
-		assertThat(page.getHeader()).isEqualTo(TEST_COUNTRY_NAME_EN);
+		assertThat(page.getHeader()).isEqualTo("Stamps of " + TEST_COUNTRY_NAME_EN);
 	}
 	
 	@Test(
