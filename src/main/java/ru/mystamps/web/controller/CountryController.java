@@ -115,6 +115,9 @@ public class CountryController {
 		return "country/info";
 	}
 	
+	/**
+	 * @author Aleksander Parkhomenko
+	 */
 	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
 	public View showInfoById(
 		@Country @PathVariable("slug") LinkEntityDto country,
