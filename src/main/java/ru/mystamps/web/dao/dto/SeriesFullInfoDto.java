@@ -37,6 +37,7 @@ public class SeriesFullInfoDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	private final String  comment;
+	private final Integer createdBy;
 	
 	private final BigDecimal michelPrice;
 	private final String michelCurrency;

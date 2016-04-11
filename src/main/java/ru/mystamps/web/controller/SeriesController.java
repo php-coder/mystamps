@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ import javax.validation.groups.Default;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -216,7 +218,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
@@ -247,6 +249,11 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (!isUserCanAddImagesToSeries(series)) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		
 		model.addAttribute("series", series);
 		
 		// CheckStyle: ignore LineLength for next 4 lines
@@ -262,7 +269,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
 		boolean maxQuantityOfImagesExceeded = !isAllowedToAddingImages(series);
@@ -388,6 +395,27 @@ public class SeriesController {
 			.toString();
 		
 		return "redirect:" + dstUrl;
+	}
+	
+	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {
+		if (SecurityContextUtils.hasAuthority(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"))) {
+			return true;
+		}
+		
+		if (isOwner(series) && isAllowedToAddingImages(series)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private static boolean isOwner(SeriesDto series) {
+		Integer userId = SecurityContextUtils.getUserId();
+		return userId != null
+			&& Objects.equals(
+				series.getCreatedBy(),
+				userId
+			);
 	}
 	
 }
