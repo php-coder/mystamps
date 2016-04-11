@@ -115,6 +115,7 @@ final class RowMappers {
 		Integer quantity     = rs.getInt("quantity");
 		Boolean perforated   = rs.getBoolean("perforated");
 		String comment       = rs.getString("comment");
+		Integer createdBy    = rs.getInt("created_by");
 		
 		BigDecimal michelPrice = rs.getBigDecimal("michel_price");
 		String michelCurrency  = rs.getString("michel_currency");
@@ -151,6 +152,7 @@ final class RowMappers {
 			quantity,
 			perforated,
 			comment,
+			createdBy,
 			michelPrice,
 			michelCurrency,
 			scottPrice,

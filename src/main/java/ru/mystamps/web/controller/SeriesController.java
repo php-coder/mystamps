@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +47,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import lombok.RequiredArgsConstructor;
 
@@ -216,7 +219,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
@@ -247,6 +250,11 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (!isUserCanAddImagesToSeries(series)) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		
 		model.addAttribute("series", series);
 		
 		// CheckStyle: ignore LineLength for next 4 lines
@@ -262,10 +270,10 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"allowAddingImages",
-			isAllowedToAddingImages(series)
+			isUserCanAddImagesToSeries(series)
 		);
 		
-		boolean maxQuantityOfImagesExceeded = !isAllowedToAddingImages(series);
+		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
@@ -388,6 +396,27 @@ public class SeriesController {
 			.toString();
 		
 		return "redirect:" + dstUrl;
+	}
+	
+	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {
+		return isAdmin()
+			|| isOwner(series) && isAllowedToAddingImages(series);
+	}
+	
+	private static boolean isAdmin() {
+		return SecurityContextUtils.hasAuthority(
+			new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES")
+		);
+	}
+	
+	@SuppressWarnings("PMD.UnusedNullCheckInEquals")
+	private static boolean isOwner(SeriesDto series) {
+		Integer userId = SecurityContextUtils.getUserId();
+		return userId != null
+			&& Objects.equals(
+				series.getCreatedBy(),
+				userId
+			);
 	}
 	
 }
