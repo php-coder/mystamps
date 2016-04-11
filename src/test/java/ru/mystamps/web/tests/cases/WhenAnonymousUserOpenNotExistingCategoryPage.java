@@ -26,8 +26,6 @@ import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 public class WhenAnonymousUserOpenNotExistingCategoryPage
 	extends WhenAnyUserAtAnyPage<NotFoundErrorPage> {
 	
@@ -46,9 +44,6 @@ public class WhenAnonymousUserOpenNotExistingCategoryPage
 		page.open(url);
 		
 		checkStandardStructure();
-		
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
-		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
 }

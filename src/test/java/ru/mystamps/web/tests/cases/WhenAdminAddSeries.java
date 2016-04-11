@@ -31,7 +31,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.Url;
@@ -41,9 +40,6 @@ import ru.mystamps.web.tests.page.InfoSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
-import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -132,100 +128,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasNoError();
-		assertThat(page).field("scottNumbers").hasNoError();
-		assertThat(page).field("yvertNumbers").hasNoError();
-		assertThat(page).field("gibbonsNumbers").hasNoError();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldBeANumber() {
-		page.fillQuantity("NaN");
-		
-		page.submit();
-		
-		assertThat(page).field("quantity").hasError(tr("typeMismatch"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldBeNotLessThanLimit() {
-		page.fillQuantity(String.valueOf(MIN_STAMPS_IN_SERIES - 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Min.message", MIN_STAMPS_IN_SERIES));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldNotBeGreaterThanLimit() {
-		page.fillQuantity(String.valueOf(MAX_STAMPS_IN_SERIES + 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Max.message", MAX_STAMPS_IN_SERIES));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void catalogNumbersShouldRejectInvalidValues(String numbers, String msg) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasError(msg);
-		assertThat(page).field("scottNumbers").hasError(msg);
-		assertThat(page).field("yvertNumbers").hasError(msg);
-		assertThat(page).field("gibbonsNumbers").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelPrice(price);
-		page.fillScottPrice(price);
-		page.fillYvertPrice(price);
-		page.fillGibbonsPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("michelPrice").hasError(msg);
-		assertThat(page).field("scottPrice").hasError(msg);
-		assertThat(page).field("yvertPrice").hasError(msg);
-		assertThat(page).field("gibbonsPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void commentShouldNotBeTooLong() {
-		page.showComment();
-		page.fillComment(StringUtils.repeat("x", MAX_SERIES_COMMENT_LENGTH + 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("comment")
-			.hasError(tr("value.too-long", MAX_SERIES_COMMENT_LENGTH));
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void imageSizeMustBeGreaterThanZero() {
 		page.fillImage(EMPTY_IMAGE_PATH);
@@ -259,16 +161,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("scottNumbers").hasValue("3,4");
 		assertThat(page).field("yvertNumbers").hasValue("5,6");
 		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void commentShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.showComment();
-		page.fillComment(" example comment ");
-		
-		page.submit();
-		
-		assertThat(page).field("comment").hasValue("example comment");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
@@ -407,45 +299,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "validCatalogNumbers")
-	public Object[][] getValidCatalogNumbers() {
-		return new Object[][] {
-			{"7", null},
-			{"7,8", null},
-			{"71, 81, 91", null},
-			{"1000", null}
-		};
-	}
-	
-	@DataProvider(name = "invalidCatalogNumbers")
-	public Object[][] getInvalidCatalogNumbers() {
-		String expectedErrorMessage =
-			tr("ru.mystamps.web.validation.jsr303.CatalogNumbers.message");
-		
-		return new Object[][] {
-			{"t", expectedErrorMessage},
-			{"t,t", expectedErrorMessage},
-			{",1", expectedErrorMessage},
-			{"1,", expectedErrorMessage},
-			{"1,,2", expectedErrorMessage},
-			{"0", expectedErrorMessage},
-			{"05", expectedErrorMessage},
-			{"1,09", expectedErrorMessage},
-			{"10000", expectedErrorMessage}
-		};
-	}
-	
-	@DataProvider(name = "invalidCatalogPrices")
-	public Object[][] getInvalidCatalogPrices() {
-		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Price.message");
-		
-		return new Object[][] {
-			{"0", expectedErrorMessage},
-			{"-1", expectedErrorMessage},
-			{"NaN", expectedErrorMessage}
-		};
 	}
 	
 	@Override

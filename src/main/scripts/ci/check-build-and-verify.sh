@@ -25,7 +25,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		>validator.log 2>&1 || touch HTML_FAIL
 fi
 
-mvn --batch-mode verify >verify.log 2>&1 || touch VERIFY_FAIL
+mvn --batch-mode verify -Dcucumber.options="--plugin pretty --monochrome" >verify.log 2>&1 || touch VERIFY_FAIL
 
 echo
 echo 'Build summary:'

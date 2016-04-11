@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.testng.annotations.AfterClass;
@@ -56,46 +54,6 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsWelcomeText() {
-		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsLinkForAddingSeries() {
-		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			.overridingErrorMessage("should exists link to page for adding series of stamps")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistLinkForAddingCategories() {
-		assertThat(page.linkWithLabelExists(tr("t_create_category")))
-			.overridingErrorMessage("should exist link to page for adding categories")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsLinkForListingCategories() {
-		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
-			.overridingErrorMessage("should exists link to page for listing categories")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistLinkForAddingCountries() {
-		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			.overridingErrorMessage("should exist link to page for adding countries")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void shouldExistsLinkForListingCountries() {
-		assertThat(page.linkWithLabelExists(tr("t_show_countries_list")))
-			.overridingErrorMessage("should exists link to page for listing countries")
-			.isTrue();
 	}
 	
 	@Override
