@@ -48,7 +48,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	/**
 	 * Prefix of page's title  which will be prepend by hasTitle().
 	 */
-	private static final String TITLE_PREFIX = "MyStamps: ";
+	private static final String TITLE_PREFIX = "My stamps: ";
 	
 	protected final T page;
 	
