@@ -117,9 +117,9 @@ public class CountryController {
 	
 	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
 	public View showInfoById(
-			@Country @PathVariable("slug") LinkEntityDto country,
-			HttpServletResponse response)
-			throws IOException {
+		@Country @PathVariable("slug") LinkEntityDto country,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (country == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
