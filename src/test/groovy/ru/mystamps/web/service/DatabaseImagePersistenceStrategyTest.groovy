@@ -29,12 +29,11 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private JdbcImageDataDao jdbcImageDataDao = Mock()
+	private JdbcImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
 	
-	private ImagePersistenceStrategy strategy =
-		new DatabaseImagePersistenceStrategy(jdbcImageDataDao)
+	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
 	
 	//
 	// Tests for save()
@@ -58,7 +57,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * jdbcImageDataDao.add({ AddImageDataDbDto imageData ->
+			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.content == expected
 				return true
 			})
@@ -70,7 +69,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * jdbcImageDataDao.add({ AddImageDataDbDto imageData ->
+			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.imageId == expectedImageId
 				return true
 			})
@@ -89,7 +88,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.get(image)
 		then:
-			1 * jdbcImageDataDao.findByImageId({ Integer imageId ->
+			1 * imageDataDao.findByImageId({ Integer imageId ->
 				assert imageId == expectedImageId
 				return true
 			})
@@ -97,7 +96,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should return null when image data dao returned null"() {
 		given:
-			jdbcImageDataDao.findByImageId(_ as Integer) >> null
+			imageDataDao.findByImageId(_ as Integer) >> null
 		when:
 			ImageDto result = strategy.get(image)
 		then:
@@ -108,7 +107,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		and:
-			jdbcImageDataDao.findByImageId(_ as Integer) >> expectedImageDto
+			imageDataDao.findByImageId(_ as Integer) >> expectedImageDto
 		when:
 			ImageDto result = strategy.get(image)
 		then:

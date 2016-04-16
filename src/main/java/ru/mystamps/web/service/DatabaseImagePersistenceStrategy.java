@@ -40,7 +40,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	private static final Logger LOG =
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
-	private final JdbcImageDataDao jdbcImageDataDao;
+	private final JdbcImageDataDao imageDataDao;
 	
 	@PostConstruct
 	public void init() {
@@ -54,7 +54,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			imageData.setImageId(image.getId());
 			imageData.setContent(file.getBytes());
 			
-			Integer id = jdbcImageDataDao.add(imageData);
+			Integer id = imageDataDao.add(imageData);
 			LOG.info("Image's data #{} for image #{} have been saved", id, image.getId());
 
 		} catch (IOException e) {
@@ -65,7 +65,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	
 	@Override
 	public ImageDto get(Image image) {
-		DbImageDto imageDto = jdbcImageDataDao.findByImageId(image.getId());
+		DbImageDto imageDto = imageDataDao.findByImageId(image.getId());
 		if (imageDto == null) {
 			LOG.warn("Found image without content: #{}", image.getId());
 			return null;
