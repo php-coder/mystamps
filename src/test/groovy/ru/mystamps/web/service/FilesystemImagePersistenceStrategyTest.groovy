@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
@@ -93,7 +92,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			strategy.exists(_ as Path) >> false
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:
@@ -104,7 +103,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			strategy.exists(_ as Path) >> true
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		and:
 			strategy.toByteArray(_ as Path) >> { throw new IOException() }
 		when:
@@ -123,7 +122,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			strategy.exists(_ as Path) >> true
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		and:
 			strategy.toByteArray(_ as Path) >> expectedData
 		when:
