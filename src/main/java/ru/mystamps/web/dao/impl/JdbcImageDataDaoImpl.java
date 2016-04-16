@@ -18,14 +18,22 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDataDao;
+import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.service.dto.DbImageDto;
 
 @RequiredArgsConstructor
@@ -35,6 +43,9 @@ public class JdbcImageDataDaoImpl implements JdbcImageDataDao {
 	
 	@Value("${image_data.find_by_image_id}")
 	private String findByImageIdSql;
+	
+	@Value("${image_data.add}")
+	private String addImageDataSql;
 	
 	@Override
 	public DbImageDto findByImageId(Integer imageId) {
@@ -47,6 +58,29 @@ public class JdbcImageDataDaoImpl implements JdbcImageDataDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public Integer add(AddImageDataDbDto imageData) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("image_id", imageData.getImageId());
+		params.put("content", imageData.getContent());
+		
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addImageDataSql,
+			new MapSqlParameterSource(params),
+			holder
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of image's data: %d",
+			affected
+		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
 	}
 	
 }

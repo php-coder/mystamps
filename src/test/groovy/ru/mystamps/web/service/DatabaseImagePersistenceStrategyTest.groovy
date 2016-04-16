@@ -21,22 +21,20 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.ImageDataDao
 import ru.mystamps.web.dao.JdbcImageDataDao
+import ru.mystamps.web.dao.dto.AddImageDataDbDto
 import ru.mystamps.web.entity.Image
-import ru.mystamps.web.entity.ImageData
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private ImageDataDao imageDataDao = Mock()
 	private JdbcImageDataDao jdbcImageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
 	
 	private ImagePersistenceStrategy strategy =
-		new DatabaseImagePersistenceStrategy(imageDataDao, jdbcImageDataDao)
+		new DatabaseImagePersistenceStrategy(jdbcImageDataDao)
 	
 	//
 	// Tests for save()
@@ -60,7 +58,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, image)
 		then:
-			1 * imageDataDao.save({ ImageData imageData ->
+			1 * jdbcImageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.content == expected
 				return true
 			})
@@ -68,12 +66,12 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should pass image to image data dao"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = image.getId()
 		when:
-			strategy.save(multipartFile, expectedImage)
+			strategy.save(multipartFile, image)
 		then:
-			1 * imageDataDao.save({ ImageData imageData ->
-				assert imageData?.image == expectedImage
+			1 * jdbcImageDataDao.add({ AddImageDataDbDto imageData ->
+				assert imageData?.imageId == expectedImageId
 				return true
 			})
 	}

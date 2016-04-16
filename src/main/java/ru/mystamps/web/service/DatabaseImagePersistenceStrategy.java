@@ -28,10 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.dao.JdbcImageDataDao;
+import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.ImageData;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
@@ -41,7 +40,6 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	private static final Logger LOG =
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
-	private final ImageDataDao imageDataDao;
 	private final JdbcImageDataDao jdbcImageDataDao;
 	
 	@PostConstruct
@@ -52,12 +50,12 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	@Override
 	public void save(MultipartFile file, Image image) {
 		try {
-			ImageData imageData = new ImageData();
-			imageData.setImage(image);
+			AddImageDataDbDto imageData = new AddImageDataDbDto();
+			imageData.setImageId(image.getId());
 			imageData.setContent(file.getBytes());
 			
-			ImageData entity = imageDataDao.save(imageData);
-			LOG.info("Image's data entity saved to database ({})", entity);
+			Integer id = jdbcImageDataDao.add(imageData);
+			LOG.info("Image's data #{} for image #{} have been saved", id, image.getId());
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction

@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
-import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.service.DatabaseImagePersistenceStrategy;
 import ru.mystamps.web.service.FilesystemImagePersistenceStrategy;
 import ru.mystamps.web.service.ImagePersistenceStrategy;
@@ -37,16 +36,12 @@ public interface StrategiesConfig {
 	class DbStrategiesConfig implements StrategiesConfig {
 		
 		@Autowired
-		private ImageDataDao imageDataDao;
-		
-		@Autowired
 		private DaoConfig daoConfig;
 		
 		@Bean
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
 			return new DatabaseImagePersistenceStrategy(
-				imageDataDao,
 				daoConfig.getJdbcImageDataDao()
 			);
 		}
