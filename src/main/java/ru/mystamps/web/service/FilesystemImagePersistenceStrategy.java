@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.FsImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
@@ -76,13 +75,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	}
 	
 	@Override
-	public ImageDto get(Image image) {
-		Path dest = createFile(
-			new ImageInfoDto(
-				image.getId(),
-				image.getType().toString()
-			)
-		);
+	public ImageDto get(ImageInfoDto image) {
+		Path dest = createFile(image);
 		if (!exists(dest)) {
 			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
 			return null;

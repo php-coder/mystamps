@@ -95,7 +95,9 @@ public class ImageServiceImpl implements ImageService {
 			return null;
 		}
 		
-		return imagePersistenceStrategy.get(image);
+		return imagePersistenceStrategy.get(
+			new ImageInfoDto(image.getId(), image.getType().toString())
+		);
 	}
 	
 	@Override

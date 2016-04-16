@@ -200,8 +200,9 @@ class ImageServiceImplTest extends Specification {
 		when:
 			ImageDto actualImageDto = service.get(7)
 		then:
-			1 * imagePersistenceStrategy.get({ Image passedImage ->
-				assert passedImage == expectedImage
+			1 * imagePersistenceStrategy.get({ ImageInfoDto passedImage ->
+				assert passedImage?.id == expectedImage.id
+				assert passedImage?.type == expectedImage.type.toString()
 				return true
 			}) >> expectedImageDto
 		and:

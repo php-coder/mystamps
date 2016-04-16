@@ -19,11 +19,10 @@ package ru.mystamps.web.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
 
 public interface ImagePersistenceStrategy {
 	void save(MultipartFile file, ImageInfoDto image);
-	ImageDto get(Image image);
+	ImageDto get(ImageInfoDto image);
 }

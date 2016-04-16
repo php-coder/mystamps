@@ -32,7 +32,6 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	
 	private MultipartFile multipartFile = Mock()
-	private Image image = TestObjects.createImage()
 	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private Path mockFile = Mock(Path)
 	
@@ -96,7 +95,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			strategy.createFile(_ as Image) >> mockFile
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result == null
 	}
@@ -109,7 +108,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			strategy.toByteArray(_ as Path) >> { throw new IOException() }
 		when:
-			strategy.get(image)
+			strategy.get(imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
@@ -118,7 +117,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should return result with correct type and content"() {
 		given:
-			String expectedType = image.type
+			String expectedType = imageInfoDto.type
 		and:
 			byte[] expectedData = 'any data'.bytes
 		and:
@@ -128,7 +127,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			strategy.toByteArray(_ as Path) >> expectedData
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result.type == expectedType
 			result.data == expectedData

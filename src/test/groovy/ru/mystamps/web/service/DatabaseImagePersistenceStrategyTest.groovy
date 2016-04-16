@@ -23,7 +23,6 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.JdbcImageDataDao
 import ru.mystamps.web.dao.dto.AddImageDataDbDto
-import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
@@ -32,7 +31,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private JdbcImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
-	private Image image = TestObjects.createImage()
 	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
 	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
@@ -83,12 +81,9 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should pass image to image data dao"() {
 		given:
-			Integer expectedImageId = image.getId()
-		and:
-			Image image = TestObjects.createImage()
-			image.setId(expectedImageId)
+			Integer expectedImageId = imageInfoDto.id
 		when:
-			strategy.get(image)
+			strategy.get(imageInfoDto)
 		then:
 			1 * imageDataDao.findByImageId({ Integer imageId ->
 				assert imageId == expectedImageId
@@ -100,7 +95,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			imageDataDao.findByImageId(_ as Integer) >> null
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result == null
 	}
@@ -111,7 +106,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		and:
 			imageDataDao.findByImageId(_ as Integer) >> expectedImageDto
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result == expectedImageDto
 	}

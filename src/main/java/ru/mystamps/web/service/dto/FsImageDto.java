@@ -20,17 +20,15 @@ package ru.mystamps.web.service.dto;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.entity.Image;
-
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class FsImageDto implements ImageDto {
-	private final Image image;
+	private final ImageInfoDto image;
 	private final byte[] data;
 	
 	@Override
 	public String getType() {
-		return image.getType().toString();
+		return image.getType();
 	}
 	
 	@Override

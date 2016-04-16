@@ -30,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
@@ -65,7 +64,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public ImageDto get(Image image) {
+	public ImageDto get(ImageInfoDto image) {
 		DbImageDto imageDto = imageDataDao.findByImageId(image.getId());
 		if (imageDto == null) {
 			LOG.warn("Found image without content: #{}", image.getId());
