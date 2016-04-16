@@ -706,7 +706,7 @@
 				<version>${liquibase.version}</version>
 				<configuration>
 					<changeLogFile>
-						${basedir}/src/main/resources/liquibase/changelog.xml
+						/liquibase/changelog.xml
 					</changeLogFile>
 					<propertyFile>
 						${basedir}/src/main/resources/liquibase/liquibase.properties
