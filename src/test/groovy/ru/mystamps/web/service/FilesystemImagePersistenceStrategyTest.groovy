@@ -23,6 +23,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 import java.nio.file.Path
@@ -32,6 +33,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
+	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private Path mockFile = Mock(Path)
 	
 	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
@@ -42,7 +44,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should saves file onto the filesystem"() {
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
 	}
@@ -51,7 +53,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.parent.toString() == expectedDirectoryName
@@ -61,11 +63,11 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should gives proper name to the file"() {
 		given:
-			String expectedExtension = image.type.toString().toLowerCase()
-			String expectedName = image.id
+			String expectedExtension = imageInfoDto.type.toLowerCase()
+			String expectedName = imageInfoDto.id
 			String expectedFileName = expectedName + '.' + expectedExtension
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.fileName.toString() == expectedFileName
@@ -77,7 +79,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException() }
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:

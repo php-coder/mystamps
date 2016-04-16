@@ -15,15 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import org.springframework.web.multipart.MultipartFile;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
-import ru.mystamps.web.service.dto.ImageInfoDto;
-
-public interface ImagePersistenceStrategy {
-	void save(MultipartFile file, ImageInfoDto image);
-	ImageDto get(Image image);
+@Getter
+@RequiredArgsConstructor
+public class ImageInfoDto {
+	private final Integer id;
+	private final String type;
 }

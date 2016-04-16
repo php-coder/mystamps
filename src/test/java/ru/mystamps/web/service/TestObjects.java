@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
@@ -105,6 +106,10 @@ final class TestObjects {
 		image.setId(1);
 		image.setType(Image.Type.PNG);
 		return image;
+	}
+	
+	public static ImageInfoDto createImageInfoDto() {
+		return new ImageInfoDto(1, "PNG");
 	}
 	
 	public static DbImageDto createDbImageDto() {

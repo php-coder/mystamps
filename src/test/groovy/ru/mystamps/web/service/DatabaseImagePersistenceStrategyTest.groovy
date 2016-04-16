@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.JdbcImageDataDao
 import ru.mystamps.web.dao.dto.AddImageDataDbDto
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
@@ -32,6 +33,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private JdbcImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private Image image = TestObjects.createImage()
+	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
 	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
 	
@@ -43,7 +45,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			multipartFile.getBytes() >> { throw new IOException() }
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
@@ -55,7 +57,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			byte[] expected = 'test'.getBytes()
 			multipartFile.getBytes() >> expected
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.content == expected
@@ -65,9 +67,9 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should pass image to image data dao"() {
 		given:
-			Integer expectedImageId = image.getId()
+			Integer expectedImageId = imageInfoDto.getId()
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.imageId == expectedImageId

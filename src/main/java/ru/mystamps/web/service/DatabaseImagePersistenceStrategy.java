@@ -33,6 +33,7 @@ import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public void save(MultipartFile file, Image image) {
+	public void save(MultipartFile file, ImageInfoDto image) {
 		try {
 			AddImageDataDbDto imageData = new AddImageDataDbDto();
 			imageData.setImageId(image.getId());

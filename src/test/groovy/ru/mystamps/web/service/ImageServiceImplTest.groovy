@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.JdbcImageDao
 import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class ImageServiceImplTest extends Specification {
@@ -124,17 +125,18 @@ class ImageServiceImplTest extends Specification {
 	
 	def "save() should call strategy"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Image image = TestObjects.createImage()
 		when:
 			String url = service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
+			imageDao.save(_ as Image) >> image
 		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}, { Image passedImage ->
-				assert passedImage == expectedImage
+			}, { ImageInfoDto passedImage ->
+				assert passedImage?.id == image.id
+				assert passedImage?.type == image.type.toString()
 				return true
 			})
 	}

@@ -36,6 +36,7 @@ import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.JdbcImageDao;
 import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
@@ -75,7 +76,10 @@ public class ImageServiceImpl implements ImageService {
 		
 		LOG.info("Image entity was saved to database ({})", entity);
 		
-		imagePersistenceStrategy.save(file, entity);
+		imagePersistenceStrategy.save(
+			file,
+			new ImageInfoDto(entity.getId(), image.getType().toString())
+		);
 		
 		return entity.getId();
 	}
