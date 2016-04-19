@@ -23,9 +23,10 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'An "img" element must have an "alt" attribute' \
 		--show-warnings \
 		>validator.log 2>&1 || touch HTML_FAIL
+	mvn --batch-mode test -Denforcer.skip=true -DskipMinify=true >test.log 2>&1 || touch TEST_FAIL
 fi
 
-mvn --batch-mode verify >verify.log 2>&1 || touch VERIFY_FAIL
+mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify.log 2>&1 || touch VERIFY_FAIL
 
 echo
 echo 'Build summary:'
@@ -38,9 +39,10 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status BOOTLINT_FAIL 'Run bootlint'
 	print_status JASMINE_FAIL  'Run JavaScript unit tests'
 	print_status HTML_FAIL     'Run html5validator'
+	print_status TEST_FAIL     'Run unit tests'
 fi
 
-print_status VERIFY_FAIL   'Compile and run unit/integration tests'
+print_status VERIFY_FAIL   'Run integration tests'
 
 echo
 
@@ -51,13 +53,14 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_log bootlint.log  'Run bootlint'
 	print_log jasmine.log   'Run JavaScript unit tests'
 	print_log validator.log 'Run html5validator'
+	print_log test.log      'Run unit tests'
 fi
 
-print_log verify.log   'Compile and run unit/integration tests'
+print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log license.log bootlint.log jasmine.log validator.log verify.log
+rm -f cs.log pmd.log license.log bootlint.log jasmine.log validator.log test.log verify.log
 
 if [ -n "$(ls *_FAIL 2>/dev/null)" ]; then
-	rm -f CS_FAIL PMD_FAIL LICENSE_FAIL BOOTLINT_FAIL JASMINE_FAIL HTML_FAIL VERIFY_FAIL
+	rm -f CS_FAIL PMD_FAIL LICENSE_FAIL BOOTLINT_FAIL JASMINE_FAIL HTML_FAIL TEST_FAIL VERIFY_FAIL
 	exit 1
 fi
