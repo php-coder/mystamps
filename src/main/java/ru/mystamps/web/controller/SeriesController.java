@@ -27,7 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
 
@@ -164,7 +163,6 @@ public class SeriesController {
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
-		HttpServletRequest request,
 		@CurrentUser Integer currentUserId) {
 		
 		if (result.hasErrors()) {
@@ -173,8 +171,9 @@ public class SeriesController {
 			return null;
 		}
 		
-		boolean userCanAddComments =
-			SecurityContextUtils.hasAuthority(request, "ADD_COMMENTS_TO_SERIES");
+		boolean userCanAddComments = SecurityContextUtils.hasAuthority(
+			new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES")
+		);
 		Integer seriesId = seriesService.add(form, currentUserId, userCanAddComments);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
