@@ -1,9 +1,9 @@
 print_status() {
-	local fail_file="$1"
+	local we_failed="$1"
 	local msg="$2"
 	
 	printf "* $msg... "
-	if [ -f "$fail_file" ]; then
+	if [ -n "$we_failed" ]; then
 		echo "\033[1;31mFAIL\033[0m"
 	else
 		echo "\033[1;32mSUCCESS\033[0m"
