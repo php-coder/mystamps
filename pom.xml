@@ -604,6 +604,7 @@
 				<version>${surefire.plugin.version}</version>
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
+					<disableXmlReport>true</disableXmlReport>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
