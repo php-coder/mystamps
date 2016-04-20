@@ -250,6 +250,11 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (!isUserCanAddImagesToSeries(series)) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+		
 		model.addAttribute("series", series);
 		
 		// CheckStyle: ignore LineLength for next 4 lines
