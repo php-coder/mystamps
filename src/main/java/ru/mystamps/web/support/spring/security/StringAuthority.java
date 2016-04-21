@@ -20,7 +20,7 @@ package ru.mystamps.web.support.spring.security;
 public final class StringAuthority {
 	public static final String ADD_COMMENTS_TO_SERIES = "ADD_COMMENTS_TO_SERIES";
 	public static final String ADD_IMAGES_TO_SERIES   = "ADD_IMAGES_TO_SERIES";
-	public static final String CHANGE_FEATURES        = "CHANGE_FEATURES";
+	public static final String MANAGE_TOGGLZ          = "MANAGE_TOGGLZ";
 	public static final String CREATE_CATEGORY        = "CREATE_CATEGORY";
 	public static final String CREATE_COUNTRY         = "CREATE_COUNTRY";
 	public static final String CREATE_SERIES          = "CREATE_SERIES";

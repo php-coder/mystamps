@@ -77,9 +77,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
 			authorities.add(Authority.VIEW_SITE_EVENTS);
-			
-			// gives access to Togglz web console
-			authorities.add(Authority.CHANGE_FEATURES);
+			authorities.add(Authority.MANAGE_TOGGLZ);
 		}
 		
 		return authorities;

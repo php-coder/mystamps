@@ -49,7 +49,7 @@ public class TogglzConfig {
 		return new FeatureManagerBuilder()
 			.stateRepository(new CachingStateRepository(new JDBCStateRepository(dataSource)))
 			.featureEnum(Features.class)
-			.userProvider(new SpringSecurityUserProvider(StringAuthority.CHANGE_FEATURES))
+			.userProvider(new SpringSecurityUserProvider(StringAuthority.MANAGE_TOGGLZ))
 			.build();
 	}
 	
