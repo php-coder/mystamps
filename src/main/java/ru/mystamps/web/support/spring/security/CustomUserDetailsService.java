@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -68,19 +67,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
-		List<SimpleGrantedAuthority> authorities = new LinkedList<>();
-		authorities.add(new SimpleGrantedAuthority("CREATE_CATEGORY"));
-		authorities.add(new SimpleGrantedAuthority("CREATE_COUNTRY"));
-		authorities.add(new SimpleGrantedAuthority("CREATE_SERIES"));
-		authorities.add(new SimpleGrantedAuthority("UPDATE_COLLECTION"));
+		List<GrantedAuthority> authorities = new LinkedList<>();
+		authorities.add(Authority.CREATE_CATEGORY);
+		authorities.add(Authority.CREATE_COUNTRY);
+		authorities.add(Authority.CREATE_SERIES);
+		authorities.add(Authority.UPDATE_COLLECTION);
 		
 		if (userDetails.isAdmin()) {
-			authorities.add(new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES"));
-			authorities.add(new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES"));
-			authorities.add(new SimpleGrantedAuthority("VIEW_SITE_EVENTS"));
+			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
+			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
+			authorities.add(Authority.VIEW_SITE_EVENTS);
 			
 			// gives access to Togglz web console
-			authorities.add(new SimpleGrantedAuthority("CHANGE_FEATURES"));
+			authorities.add(Authority.CHANGE_FEATURES);
 		}
 		
 		return authorities;

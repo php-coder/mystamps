@@ -47,8 +47,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
@@ -66,6 +64,7 @@ import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
@@ -172,7 +171,7 @@ public class SeriesController {
 		}
 		
 		boolean userCanAddComments = SecurityContextUtils.hasAuthority(
-			new SimpleGrantedAuthority("ADD_COMMENTS_TO_SERIES")
+			Authority.ADD_COMMENTS_TO_SERIES
 		);
 		Integer seriesId = seriesService.add(form, currentUserId, userCanAddComments);
 		
@@ -398,9 +397,7 @@ public class SeriesController {
 	}
 	
 	private static boolean isAdmin() {
-		return SecurityContextUtils.hasAuthority(
-			new SimpleGrantedAuthority("ADD_IMAGES_TO_SERIES")
-		);
+		return SecurityContextUtils.hasAuthority(Authority.ADD_IMAGES_TO_SERIES);
 	}
 	
 	@SuppressWarnings("PMD.UnusedNullCheckInEquals")
