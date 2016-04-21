@@ -42,6 +42,7 @@ import ru.mystamps.web.service.dto.Currency;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 
 // TODO: move stamps related methods to separate interface (#88)
@@ -59,7 +60,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");

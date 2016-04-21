@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -47,7 +48,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
+	@PreAuthorize(HasAuthority.CREATE_COUNTRY)
 	public UrlEntityDto add(AddCountryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "Country name in English should be non null");

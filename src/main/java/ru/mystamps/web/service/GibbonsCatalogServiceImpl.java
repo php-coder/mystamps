@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.GibbonsCatalogDao;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
@@ -41,7 +42,7 @@ public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void add(Set<String> gibbonsNumbers) {
 		Validate.isTrue(gibbonsNumbers != null, "Gibbons numbers must be non null");
 		Validate.isTrue(!gibbonsNumbers.isEmpty(), "Gibbons numbers must be non empty");
@@ -53,7 +54,7 @@ public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Set<String> gibbonsNumbers) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(gibbonsNumbers != null, "Gibbons numbers must be non null");

@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.YvertCatalogDao;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class YvertCatalogServiceImpl implements YvertCatalogService {
@@ -41,7 +42,7 @@ public class YvertCatalogServiceImpl implements YvertCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void add(Set<String> yvertNumbers) {
 		Validate.isTrue(yvertNumbers != null, "Yvert numbers must be non null");
 		Validate.isTrue(!yvertNumbers.isEmpty(), "Yvert numbers must be non empty");
@@ -53,7 +54,7 @@ public class YvertCatalogServiceImpl implements YvertCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Set<String> yvertNumbers) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(yvertNumbers != null, "Yvert numbers must be non null");

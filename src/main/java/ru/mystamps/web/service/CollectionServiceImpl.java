@@ -34,6 +34,7 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -65,7 +66,7 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
+	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
 	public UrlEntityDto addToCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
@@ -87,7 +88,7 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
+	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
 	public UrlEntityDto removeFromCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");

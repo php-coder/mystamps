@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ScottCatalogDao;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class ScottCatalogServiceImpl implements ScottCatalogService {
@@ -41,7 +42,7 @@ public class ScottCatalogServiceImpl implements ScottCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void add(Set<String> scottNumbers) {
 		Validate.isTrue(scottNumbers != null, "Scott numbers must be non null");
 		Validate.isTrue(!scottNumbers.isEmpty(), "Scott numbers must be non empty");
@@ -53,7 +54,7 @@ public class ScottCatalogServiceImpl implements ScottCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Set<String> scottNumbers) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(scottNumbers != null, "Scott numbers must be non null");

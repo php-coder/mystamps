@@ -38,6 +38,7 @@ import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
@@ -102,7 +103,7 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Integer imageId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(imageId != null, "Image id must be non null");

@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.MichelCatalogDao;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class MichelCatalogServiceImpl implements MichelCatalogService {
@@ -41,7 +42,7 @@ public class MichelCatalogServiceImpl implements MichelCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void add(Set<String> michelNumbers) {
 		Validate.isTrue(michelNumbers != null, "Michel numbers must be non null");
 		Validate.isTrue(!michelNumbers.isEmpty(), "Michel numbers must be non empty");
@@ -53,7 +54,7 @@ public class MichelCatalogServiceImpl implements MichelCatalogService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Set<String> michelNumbers) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(michelNumbers != null, "Michel numbers must be non null");

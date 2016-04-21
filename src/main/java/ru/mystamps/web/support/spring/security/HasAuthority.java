@@ -15,31 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.support.spring.security;
 
-import java.util.List;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.support.spring.security.HasAuthority;
-
-/**
- * @author Sergey Chechenev
- */
-@RequiredArgsConstructor
-public class SuspiciousActivityServiceImpl implements SuspiciousActivityService {
-	private final SuspiciousActivityDao suspiciousActivityDao;
+@SuppressWarnings({ "checkstyle:linelength", "PMD.AvoidDuplicateLiterals" })
+public final class HasAuthority {
+	public static final String CREATE_SERIES = "hasAuthority('" + StringAuthority.CREATE_SERIES + "')";
+	public static final String CREATE_CATEGORY = "hasAuthority('" + StringAuthority.CREATE_CATEGORY + "')";
+	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";
+	public static final String UPDATE_COLLECTION = "hasAuthority('" + StringAuthority.UPDATE_COLLECTION + "')";
+	public static final String VIEW_SITE_EVENTS = "hasAuthority('" + StringAuthority.VIEW_SITE_EVENTS + "')";
 	
-	@Override
-	@Transactional(readOnly = true)
-	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
-	public List<SuspiciousActivityDto> findSuspiciousActivities() {
-		return suspiciousActivityDao.findAll();
+	private HasAuthority() {
 	}
+	
 }

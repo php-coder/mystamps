@@ -38,6 +38,7 @@ import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_CATEGORY')")
+	@PreAuthorize(HasAuthority.CREATE_CATEGORY)
 	public UrlEntityDto add(AddCategoryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO should be non null");
 		Validate.isTrue(dto.getName() != null, "English category name should be non null");
