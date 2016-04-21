@@ -66,12 +66,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority("CREATE_CATEGORY")
-				.antMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority("CREATE_COUNTRY")
-				.antMatchers(Url.ADD_SERIES_PAGE).hasAuthority("CREATE_SERIES")
-				.antMatchers(Url.SITE_EVENTS_PAGE).hasAuthority("VIEW_SITE_EVENTS")
+				.antMatchers(Url.ADD_CATEGORY_PAGE)
+					.hasAuthority(StringAuthority.CREATE_CATEGORY)
+				.antMatchers(Url.ADD_COUNTRY_PAGE)
+					.hasAuthority(StringAuthority.CREATE_COUNTRY)
+				.antMatchers(Url.ADD_SERIES_PAGE)
+					.hasAuthority(StringAuthority.CREATE_SERIES)
+				.antMatchers(Url.SITE_EVENTS_PAGE)
+					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
-					.hasAnyAuthority("UPDATE_COLLECTION", "ADD_IMAGES_TO_SERIES")
+					.hasAnyAuthority(
+						StringAuthority.UPDATE_COLLECTION,
+						StringAuthority.ADD_IMAGES_TO_SERIES
+					)
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()

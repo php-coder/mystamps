@@ -36,6 +36,7 @@ import org.togglz.core.repository.jdbc.JDBCStateRepository;
 import org.togglz.spring.security.SpringSecurityUserProvider;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.support.spring.security.StringAuthority;
 
 @Configuration
 public class TogglzConfig {
@@ -48,7 +49,7 @@ public class TogglzConfig {
 		return new FeatureManagerBuilder()
 			.stateRepository(new CachingStateRepository(new JDBCStateRepository(dataSource)))
 			.featureEnum(Features.class)
-			.userProvider(new SpringSecurityUserProvider("CHANGE_FEATURES"))
+			.userProvider(new SpringSecurityUserProvider(StringAuthority.CHANGE_FEATURES))
 			.build();
 	}
 	
