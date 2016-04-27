@@ -49,7 +49,9 @@ public class ScottCatalogServiceImpl implements ScottCatalogService {
 		
 		List<String> insertedNumbers = scottCatalogDao.add(scottNumbers);
 		
-		LOG.info("Scott numbers {} were created", insertedNumbers);
+		if (!insertedNumbers.isEmpty()) {
+			LOG.info("Scott numbers {} were created", insertedNumbers);
+		}
 	}
 	
 	@Override
