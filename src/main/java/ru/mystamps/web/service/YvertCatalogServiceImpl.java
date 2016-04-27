@@ -49,7 +49,9 @@ public class YvertCatalogServiceImpl implements YvertCatalogService {
 		
 		List<String> insertedNumbers = yvertCatalogDao.add(yvertNumbers);
 		
-		LOG.info("Yvert numbers {} were created", insertedNumbers);
+		if (!insertedNumbers.isEmpty()) {
+			LOG.info("Yvert numbers {} were created", insertedNumbers);
+		}
 	}
 	
 	@Override

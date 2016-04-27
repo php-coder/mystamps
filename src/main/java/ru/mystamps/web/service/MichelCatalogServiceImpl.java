@@ -49,7 +49,9 @@ public class MichelCatalogServiceImpl implements MichelCatalogService {
 		
 		List<String> insertedNumbers = michelCatalogDao.add(michelNumbers);
 		
-		LOG.info("Michel numbers {} were created", insertedNumbers);
+		if (insertedNumbers.isEmpty()) {
+			LOG.info("Michel numbers {} were created", insertedNumbers);
+		}
 	}
 	
 	@Override

@@ -49,7 +49,9 @@ public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 		
 		List<String> insertedNumbers = gibbonsCatalogDao.add(gibbonsNumbers);
 		
-		LOG.info("Gibbons numbers {} were created", insertedNumbers);
+		if (!insertedNumbers.isEmpty()) {
+			LOG.info("Gibbons numbers {} were created", insertedNumbers);
+		}
 	}
 	
 	@Override
