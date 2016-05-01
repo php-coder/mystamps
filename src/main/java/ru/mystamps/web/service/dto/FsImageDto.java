@@ -23,12 +23,18 @@ import lombok.RequiredArgsConstructor;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class FsImageDto implements ImageDto {
-	private final ImageInfoDto image;
+	private final String type;
 	private final byte[] data;
+	
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
+	public FsImageDto(ImageInfoDto imageInfo, byte[] data) {
+		this.type = imageInfo.getType();
+		this.data = data;
+	}
 	
 	@Override
 	public String getType() {
-		return image.getType();
+		return type;
 	}
 	
 	@Override
