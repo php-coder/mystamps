@@ -18,7 +18,6 @@
 package ru.mystamps.web.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -26,6 +25,5 @@ import org.springframework.boot.orm.jpa.EntityScan;
 @Configuration
 @EnableTransactionManagement
 @EntityScan("ru.mystamps.web.entity")
-@EnableJpaRepositories("ru.mystamps.web.dao")
 public class DbConfig {
 }
