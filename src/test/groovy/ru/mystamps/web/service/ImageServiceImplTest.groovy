@@ -118,7 +118,7 @@ class ImageServiceImplTest extends Specification {
 		then:
 			imageDao.save(_ as Image) >> null
 		and:
-			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as Image)
+			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
 			thrown ImagePersistenceException
 	}
