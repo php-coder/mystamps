@@ -22,30 +22,26 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.JdbcImageDao
-import ru.mystamps.web.entity.Image
 import ru.mystamps.web.service.dto.ImageDto
 import ru.mystamps.web.service.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class ImageServiceImplTest extends Specification {
 
-	private ImageDao imageDao = Mock()
 	private JdbcImageDao jdbcImageDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
 	private ImageService service = new ImageServiceImpl(
 		imagePersistenceStrategy,
-		imageDao,
 		jdbcImageDao
 	)
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L
 		multipartFile.getContentType() >> 'image/png'
-		imageDao.save(_ as Image) >> new Image()
+		jdbcImageDao.add(_ as String) >> 17
 	}
 	
 	//
@@ -90,33 +86,33 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			1 * imageDao.save(_ as Image) >> new Image()
+			1 * jdbcImageDao.add(_ as String) >> 18
 	}
 	
 	@Unroll
-	def "save() should pass content type '#contentType' to image dao"(String contentType, Image.Type expectedType) {
+	def "save() should pass content type '#contentType' to image dao"(String contentType, String expectedType) {
 		when:
 			service.save(multipartFile)
 		then:
 			multipartFile.getContentType() >> contentType
 		and:
-			1 * imageDao.save({ Image image ->
-				assert image?.type == expectedType
+			1 * jdbcImageDao.add({ String type ->
+				assert type == expectedType
 				return true
-			}) >> new Image()
+			}) >> 19
 		where:
 			contentType                 || expectedType
-			'image/jpeg'                || Image.Type.JPEG
-			'image/jpeg; charset=UTF-8' || Image.Type.JPEG
-			'image/png'                 || Image.Type.PNG
-			'image/png; charset=UTF8'   || Image.Type.PNG
+			'image/jpeg'                || 'JPEG'
+			'image/jpeg; charset=UTF-8' || 'JPEG'
+			'image/png'                 || 'PNG'
+			'image/png; charset=UTF8'   || 'PNG'
 	}
 	
 	def "save() should throw exception when image dao returned null"() {
 		when:
 			service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> null
+			jdbcImageDao.add(_ as String) >> null
 		and:
 			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
@@ -125,11 +121,11 @@ class ImageServiceImplTest extends Specification {
 	
 	def "save() should call strategy"() {
 		given:
-			Image image = TestObjects.createImage()
+			ImageInfoDto image = TestObjects.createImageInfoDto()
 		when:
 			String url = service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> image
+			jdbcImageDao.add(_ as String) >> image.id
 		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -143,13 +139,13 @@ class ImageServiceImplTest extends Specification {
 	
 	def "save() should return saved image"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = 20
 		when:
 			Integer actualImageId = service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
+			jdbcImageDao.add(_ as String) >> expectedImageId
 		and:
-			actualImageId == expectedImage.getId()
+			actualImageId == expectedImageId
 	}
 	
 	//

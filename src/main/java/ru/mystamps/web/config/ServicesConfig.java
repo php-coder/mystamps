@@ -25,7 +25,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import ru.mystamps.web.dao.ImageDao;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
@@ -42,9 +41,6 @@ public class ServicesConfig {
 	
 	@Autowired
 	private StrategiesConfig strategiesConfig;
-	
-	@Autowired
-	private ImageDao imageDao;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -84,7 +80,6 @@ public class ServicesConfig {
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			strategiesConfig.getImagePersistenceStrategy(),
-			imageDao,
 			daoConfig.getJdbcImageDao()
 		);
 	}

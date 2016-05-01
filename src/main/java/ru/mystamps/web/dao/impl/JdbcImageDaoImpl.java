@@ -22,9 +22,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +41,9 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
+	@Value("${image.add}")
+	private String addImageSql;
+	
 	@Value("${series_image.add}")
 	private String addImageToSeriesSql;
 	
@@ -44,6 +52,27 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 	
 	@Value("${series_image.find_by_series_id}")
 	private String findBySeriesIdSql;
+	
+	@Override
+	public Integer add(String type) {
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addImageSql,
+			new MapSqlParameterSource(
+				Collections.singletonMap("type", type)
+			),
+			holder
+		);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after adding image: %d",
+			affected
+		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
+	}
 	
 	@Override
 	public void addToSeries(Integer seriesId, Integer imageId) {

@@ -19,9 +19,11 @@ package ru.mystamps.web.service.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @RequiredArgsConstructor
+@ToString
 public class ImageInfoDto {
 	private final Integer id;
 	private final String type;

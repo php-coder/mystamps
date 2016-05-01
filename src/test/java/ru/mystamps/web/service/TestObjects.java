@@ -23,7 +23,6 @@ import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.DbImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
@@ -99,13 +98,6 @@ final class TestObjects {
 			collectionId,
 			collectionSlug
 		);
-	}
-	
-	public static Image createImage() {
-		Image image = new Image();
-		image.setId(1);
-		image.setType(Image.Type.PNG);
-		return image;
 	}
 	
 	public static ImageInfoDto createImageInfoDto() {

@@ -32,9 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.JdbcImageDao;
-import ru.mystamps.web.entity.Image;
 import ru.mystamps.web.service.dto.ImageDto;
 import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
@@ -48,7 +46,6 @@ public class ImageServiceImpl implements ImageService {
 	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
-	private final ImageDao imageDao;
 	private final JdbcImageDao jdbcImageDao;
 	
 	@Override
@@ -67,22 +64,19 @@ public class ImageServiceImpl implements ImageService {
 				contentType, extension
 		);
 		
-		Image image = new Image();
-		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
+		String imageType = extension.toUpperCase(Locale.US);
 		
-		Image entity = imageDao.save(image);
-		if (entity == null) {
+		Integer id = jdbcImageDao.add(imageType);
+		if (id == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		LOG.info("Image entity was saved to database ({})", entity);
+		ImageInfoDto image = new ImageInfoDto(id, imageType);
+		LOG.info("Image was saved to database ({})", image);
 		
-		imagePersistenceStrategy.save(
-			file,
-			new ImageInfoDto(entity.getId(), image.getType().toString())
-		);
+		imagePersistenceStrategy.save(file, image);
 		
-		return entity.getId();
+		return image.getId();
 	}
 	
 	@Override
