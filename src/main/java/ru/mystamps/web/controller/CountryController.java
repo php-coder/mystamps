@@ -43,11 +43,11 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller

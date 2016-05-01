@@ -35,8 +35,8 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcCountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")

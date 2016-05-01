@@ -30,9 +30,9 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
-import ru.mystamps.web.service.dto.DbImageDto;
-import ru.mystamps.web.service.dto.ImageDto;
-import ru.mystamps.web.service.dto.ImageInfoDto;
+import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 @RequiredArgsConstructor

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageDto;
 
 public interface ImageService {
 	Integer save(MultipartFile file);

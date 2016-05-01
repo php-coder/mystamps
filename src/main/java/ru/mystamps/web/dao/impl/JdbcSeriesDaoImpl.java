@@ -37,8 +37,8 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings({

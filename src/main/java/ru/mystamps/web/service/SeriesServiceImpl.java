@@ -36,12 +36,12 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcSeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.Currency;
 import ru.mystamps.web.service.dto.SeriesDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 

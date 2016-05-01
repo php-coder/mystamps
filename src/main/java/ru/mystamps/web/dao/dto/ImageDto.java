@@ -15,16 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.dao.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@Getter
-@EqualsAndHashCode
-@RequiredArgsConstructor
-public class DbImageDto implements ImageDto {
-	private final String type;
-	private final byte[] data;
+public interface ImageDto {
+	String getType();
+	byte[] getData();
 }

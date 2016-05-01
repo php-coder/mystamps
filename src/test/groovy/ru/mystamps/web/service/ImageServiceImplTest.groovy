@@ -23,8 +23,8 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.JdbcImageDao
-import ru.mystamps.web.service.dto.ImageDto
-import ru.mystamps.web.service.dto.ImageInfoDto
+import ru.mystamps.web.dao.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class ImageServiceImplTest extends Specification {

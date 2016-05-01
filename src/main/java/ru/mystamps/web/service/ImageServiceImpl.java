@@ -33,8 +33,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDao;
-import ru.mystamps.web.service.dto.ImageDto;
-import ru.mystamps.web.service.dto.ImageInfoDto;
+import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 

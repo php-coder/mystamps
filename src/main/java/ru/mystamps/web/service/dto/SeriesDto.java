@@ -19,6 +19,7 @@ package ru.mystamps.web.service.dto;
 
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 
 public class SeriesDto {

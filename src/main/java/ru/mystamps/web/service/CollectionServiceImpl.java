@@ -32,8 +32,8 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.JdbcCollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 

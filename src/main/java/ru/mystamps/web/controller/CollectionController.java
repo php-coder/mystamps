@@ -33,11 +33,11 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller

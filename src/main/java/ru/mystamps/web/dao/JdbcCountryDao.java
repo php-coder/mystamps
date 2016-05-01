@@ -20,8 +20,8 @@ package ru.mystamps.web.dao;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 public interface JdbcCountryDao {
 	Integer add(AddCountryDbDto country);

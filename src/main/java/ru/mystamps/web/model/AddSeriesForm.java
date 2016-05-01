@@ -34,8 +34,8 @@ import lombok.Setter;
 
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.ImageFile;
 import ru.mystamps.web.validation.jsr303.MaxFileSize;

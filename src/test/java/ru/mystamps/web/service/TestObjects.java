@@ -20,15 +20,15 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.AddUserDbDto;
+import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.service.dto.DbImageDto;
-import ru.mystamps.web.service.dto.ImageInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 
 final class TestObjects {
 	public static final Integer TEST_USER_ID        = 777;

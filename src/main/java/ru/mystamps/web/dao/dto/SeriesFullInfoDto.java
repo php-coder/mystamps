@@ -22,8 +22,6 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.dto.LinkEntityDto;
-
 @Getter
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.TooManyFields")

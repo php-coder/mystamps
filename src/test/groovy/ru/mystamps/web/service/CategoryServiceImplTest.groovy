@@ -23,9 +23,9 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.JdbcCategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.model.AddCategoryForm
-import ru.mystamps.web.service.dto.LinkEntityDto
-import ru.mystamps.web.service.dto.SelectEntityDto
-import ru.mystamps.web.service.dto.UrlEntityDto
+import ru.mystamps.web.dao.dto.LinkEntityDto
+import ru.mystamps.web.dao.dto.SelectEntityDto
+import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 

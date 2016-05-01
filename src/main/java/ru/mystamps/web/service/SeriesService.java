@@ -19,11 +19,11 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")

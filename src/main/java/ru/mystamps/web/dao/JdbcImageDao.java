@@ -19,7 +19,7 @@ package ru.mystamps.web.dao;
 
 import java.util.List;
 
-import ru.mystamps.web.service.dto.ImageInfoDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 
 public interface JdbcImageDao {
 	Integer add(String type);

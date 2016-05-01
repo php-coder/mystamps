@@ -19,10 +19,10 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SelectEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface CategoryService {
 	UrlEntityDto add(AddCategoryDto dto, Integer userId);

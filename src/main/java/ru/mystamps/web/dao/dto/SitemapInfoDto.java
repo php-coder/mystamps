@@ -15,18 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.dao.dto;
 
-import lombok.EqualsAndHashCode;
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
-@EqualsAndHashCode
 @RequiredArgsConstructor
-public class UrlEntityDto {
+public class SitemapInfoDto {
 	private final Integer id;
-	private final String slug;
+	private final Date updatedAt;
 }

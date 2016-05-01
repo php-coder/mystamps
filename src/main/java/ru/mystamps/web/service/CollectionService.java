@@ -18,8 +18,8 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);

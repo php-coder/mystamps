@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.dao.dto.ImageDto;
 import ru.mystamps.web.service.ImageService;
-import ru.mystamps.web.service.dto.ImageDto;
 
 @Controller
 @RequiredArgsConstructor

@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
-import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.dao.dto.DbImageDto;
 
 @RequiredArgsConstructor
 public class JdbcImageDataDaoImpl implements JdbcImageDataDao {

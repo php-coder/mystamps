@@ -26,9 +26,9 @@ import ru.mystamps.web.dao.JdbcSeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
-import ru.mystamps.web.service.dto.LinkEntityDto
-import ru.mystamps.web.service.dto.SeriesInfoDto
-import ru.mystamps.web.service.dto.SitemapInfoDto
+import ru.mystamps.web.dao.dto.LinkEntityDto
+import ru.mystamps.web.dao.dto.SeriesInfoDto
+import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.Currency
 import ru.mystamps.web.tests.DateUtils
 
