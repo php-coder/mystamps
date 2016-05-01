@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.JdbcImageDao;
+import ru.mystamps.web.service.dto.ImageInfoDto;
 
 @RequiredArgsConstructor
 public class JdbcImageDaoImpl implements JdbcImageDao {
@@ -36,6 +38,9 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 	
 	@Value("${series_image.add}")
 	private String addImageToSeriesSql;
+	
+	@Value("${image.find_by_id}")
+	private String findByIdSql;
 	
 	@Value("${series_image.find_by_series_id}")
 	private String findBySeriesIdSql;
@@ -47,6 +52,19 @@ public class JdbcImageDaoImpl implements JdbcImageDao {
 		params.put("image_id", imageId);
 		
 		jdbcTemplate.update(addImageToSeriesSql, params);
+	}
+	
+	@Override
+	public ImageInfoDto findById(Integer imageId) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findByIdSql,
+				Collections.singletonMap("id", imageId),
+				RowMappers::forImageInfoDto
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 	@Override

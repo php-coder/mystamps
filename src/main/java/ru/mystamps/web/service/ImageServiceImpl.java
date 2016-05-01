@@ -91,14 +91,12 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
 		
-		Image image = imageDao.findOne(imageId);
+		ImageInfoDto image = jdbcImageDao.findById(imageId);
 		if (image == null) {
 			return null;
 		}
 		
-		return imagePersistenceStrategy.get(
-			new ImageInfoDto(image.getId(), image.getType().toString())
-		);
+		return imagePersistenceStrategy.get(image);
 	}
 	
 	@Override

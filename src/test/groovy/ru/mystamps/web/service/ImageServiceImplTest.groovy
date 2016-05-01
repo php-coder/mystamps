@@ -173,7 +173,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.get(7)
 		then:
-			1 * imageDao.findOne({ Integer imageId ->
+			1 * jdbcImageDao.findById({ Integer imageId ->
 				assert imageId == 7
 				return true
 			})
@@ -183,7 +183,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			ImageDto image = service.get(9)
 		then:
-			imageDao.findOne(_ as Integer) >> null
+			jdbcImageDao.findById(_ as Integer) >> null
 		and:
 			0 * imagePersistenceStrategy.get(_ as ImageInfoDto)
 		and:
@@ -192,9 +192,9 @@ class ImageServiceImplTest extends Specification {
 	
 	def "get() should pass argument to strategy and return result from it"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
 		and:
-			imageDao.findOne(_ as Integer) >> expectedImage
+			jdbcImageDao.findById(_ as Integer) >> expectedImage
 		and:
 			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		when:
@@ -211,7 +211,7 @@ class ImageServiceImplTest extends Specification {
 	
 	def "get() should return null when strategy returned null"() {
 		given:
-			imageDao.findOne(_ as Integer) >> TestObjects.createImage()
+			jdbcImageDao.findById(_ as Integer) >> TestObjects.createImageInfoDto()
 		and:
 			imagePersistenceStrategy.get(_ as ImageInfoDto) >> null
 		when:

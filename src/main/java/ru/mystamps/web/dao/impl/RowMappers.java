@@ -29,6 +29,7 @@ import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.DbImageDto;
+import ru.mystamps.web.service.dto.ImageInfoDto;
 import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.SelectEntityDto;
 import ru.mystamps.web.service.dto.SeriesInfoDto;
@@ -230,6 +231,13 @@ final class RowMappers {
 		return new DbImageDto(
 			rs.getString("type"),
 			rs.getBytes("data")
+		);
+	}
+	
+	public static ImageInfoDto forImageInfoDto(ResultSet rs, int i) throws SQLException {
+		return new ImageInfoDto(
+			rs.getInt("id"),
+			rs.getString("type")
 		);
 	}
 	
