@@ -185,7 +185,7 @@ class ImageServiceImplTest extends Specification {
 		then:
 			imageDao.findOne(_ as Integer) >> null
 		and:
-			0 * imagePersistenceStrategy.get(_ as Integer)
+			0 * imagePersistenceStrategy.get(_ as ImageInfoDto)
 		and:
 			image == null
 	}
@@ -213,7 +213,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			imageDao.findOne(_ as Integer) >> TestObjects.createImage()
 		and:
-			imagePersistenceStrategy.get(_ as Integer) >> null
+			imagePersistenceStrategy.get(_ as ImageInfoDto) >> null
 		when:
 			ImageDto image = service.get(8)
 		then:
