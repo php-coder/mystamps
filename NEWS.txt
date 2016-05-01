@@ -7,6 +7,7 @@
 - (functionality)  add possibility for search series by catalog number (contributed by Sergey Chechenev)
 - (functionality)  add interface for viewing suspicious activity (contributed by Sergey Chechenev)
 - (functionality)  allow to users to add categories and countries
+- (infrastructure) ported to Spring's JdbcTemplate (get rid of Spring-Data-JPA and Hibernate)
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

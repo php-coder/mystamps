@@ -25,9 +25,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -122,12 +120,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(Locale.ENGLISH);
 		return resolver;
-	}
-	
-	@Bean
-	@Autowired
-	public DomainClassConverter<?> getDomainClassConverter(FormattingConversionService service) {
-		return new DomainClassConverter<FormattingConversionService>(service);
 	}
 	
 }

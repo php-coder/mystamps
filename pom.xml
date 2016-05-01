@@ -23,7 +23,6 @@
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
-		<javax.persistence.version>1.0.0.Final</javax.persistence.version>
 		<servlet.api.version>3.0.20100224</servlet.api.version>
 		<commons.lang.version>3.4</commons.lang.version>
 		<commons.io.version>2.4</commons.io.version>
@@ -70,7 +69,6 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<commons-pool.version>1.5.4</commons-pool.version>
 		<groovy.version>2.0.8</groovy.version>
-		<hibernate.version>4.3.6.Final</hibernate.version>
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		<javax-mail.version>1.5.4</javax-mail.version>
 		<jetty.version>9.2.11.v20150529</jetty.version>
@@ -185,12 +183,6 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.0.RELEASE/spring-boot-starters/spring-boot-starter-data-jpa/pom.xml -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -205,22 +197,10 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>${javax.persistence.version}</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<!-- Required in compiled scope for customized version of MySQL5InnoDBDialect -->
 		</dependency>
 		
 		<dependency>
@@ -400,17 +380,6 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		
-		<!--
-			Hibernate 4.3.x has dependency on 1.0.b2 version but htmlunit
-			doesn't work with this version, so we need specify it manually.
-		-->
-		<dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
-			<version>1.4.01</version>
-			<scope>test</scope>
 		</dependency>
 		
 		<dependency>
