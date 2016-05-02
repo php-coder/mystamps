@@ -80,7 +80,7 @@ public class ServicesConfig {
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			strategiesConfig.getImagePersistenceStrategy(),
-			daoConfig.getJdbcImageDao()
+			daoConfig.getImageDao()
 		);
 	}
 	

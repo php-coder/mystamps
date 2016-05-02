@@ -32,7 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcImageDao;
+import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.dto.ImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
@@ -46,7 +46,7 @@ public class ImageServiceImpl implements ImageService {
 	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
-	private final JdbcImageDao jdbcImageDao;
+	private final ImageDao imageDao;
 	
 	@Override
 	@Transactional
@@ -66,7 +66,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		String imageType = extension.toUpperCase(Locale.US);
 		
-		Integer id = jdbcImageDao.add(imageType);
+		Integer id = imageDao.add(imageType);
 		if (id == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}
@@ -85,7 +85,7 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
 		
-		ImageInfoDto image = jdbcImageDao.findById(imageId);
+		ImageInfoDto image = imageDao.findById(imageId);
 		if (image == null) {
 			return null;
 		}
@@ -100,7 +100,7 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		
-		jdbcImageDao.addToSeries(seriesId, imageId);
+		imageDao.addToSeries(seriesId, imageId);
 		
 		LOG.info("Series #{}: image #{} was added", seriesId, imageId);
 	}
@@ -110,7 +110,7 @@ public class ImageServiceImpl implements ImageService {
 	public List<Integer> findBySeriesId(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		return jdbcImageDao.findBySeriesId(seriesId);
+		return imageDao.findBySeriesId(seriesId);
 	}
 	
 	private static String extractExtensionFromContentType(String contentType) {

@@ -22,26 +22,23 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcImageDao
+import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class ImageServiceImplTest extends Specification {
 
-	private JdbcImageDao jdbcImageDao = Mock()
+	private ImageDao imageDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(
-		imagePersistenceStrategy,
-		jdbcImageDao
-	)
+	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
 	
 	def setup() {
 		multipartFile.getSize() >> 1024L
 		multipartFile.getContentType() >> 'image/png'
-		jdbcImageDao.add(_ as String) >> 17
+		imageDao.add(_ as String) >> 17
 	}
 	
 	//
@@ -86,7 +83,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			1 * jdbcImageDao.add(_ as String) >> 18
+			1 * imageDao.add(_ as String) >> 18
 	}
 	
 	@Unroll
@@ -96,7 +93,7 @@ class ImageServiceImplTest extends Specification {
 		then:
 			multipartFile.getContentType() >> contentType
 		and:
-			1 * jdbcImageDao.add({ String type ->
+			1 * imageDao.add({ String type ->
 				assert type == expectedType
 				return true
 			}) >> 19
@@ -112,7 +109,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			jdbcImageDao.add(_ as String) >> null
+			imageDao.add(_ as String) >> null
 		and:
 			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
@@ -125,7 +122,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			String url = service.save(multipartFile)
 		then:
-			jdbcImageDao.add(_ as String) >> image.id
+			imageDao.add(_ as String) >> image.id
 		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -143,7 +140,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			Integer actualImageId = service.save(multipartFile)
 		then:
-			jdbcImageDao.add(_ as String) >> expectedImageId
+			imageDao.add(_ as String) >> expectedImageId
 		and:
 			actualImageId == expectedImageId
 	}
@@ -169,7 +166,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.get(7)
 		then:
-			1 * jdbcImageDao.findById({ Integer imageId ->
+			1 * imageDao.findById({ Integer imageId ->
 				assert imageId == 7
 				return true
 			})
@@ -179,7 +176,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			ImageDto image = service.get(9)
 		then:
-			jdbcImageDao.findById(_ as Integer) >> null
+			imageDao.findById(_ as Integer) >> null
 		and:
 			0 * imagePersistenceStrategy.get(_ as ImageInfoDto)
 		and:
@@ -190,7 +187,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
 		and:
-			jdbcImageDao.findById(_ as Integer) >> expectedImage
+			imageDao.findById(_ as Integer) >> expectedImage
 		and:
 			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		when:
@@ -207,7 +204,7 @@ class ImageServiceImplTest extends Specification {
 	
 	def "get() should return null when strategy returned null"() {
 		given:
-			jdbcImageDao.findById(_ as Integer) >> TestObjects.createImageInfoDto()
+			imageDao.findById(_ as Integer) >> TestObjects.createImageInfoDto()
 		and:
 			imagePersistenceStrategy.get(_ as ImageInfoDto) >> null
 		when:

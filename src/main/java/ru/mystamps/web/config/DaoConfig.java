@@ -53,8 +53,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcImageDao getJdbcImageDao() {
-		return new JdbcImageDaoImpl(jdbcTemplate);
+	public ImageDao getImageDao() {
+		return new JdbcImageDao(jdbcTemplate);
 	}
 	
 	@Bean

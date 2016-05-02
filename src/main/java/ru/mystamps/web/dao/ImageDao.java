@@ -21,7 +21,7 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 
-public interface JdbcImageDao {
+public interface ImageDao {
 	Integer add(String type);
 	void addToSeries(Integer seriesId, Integer imageId);
 	ImageInfoDto findById(Integer imageId);
