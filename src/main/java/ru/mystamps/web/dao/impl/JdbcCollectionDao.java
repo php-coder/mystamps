@@ -34,7 +34,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCollectionDao;
+import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -42,8 +42,8 @@ import ru.mystamps.web.dao.dto.UrlEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class JdbcCollectionDaoImpl implements JdbcCollectionDao {
-	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDaoImpl.class);
+public class JdbcCollectionDao implements CollectionDao {
+	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

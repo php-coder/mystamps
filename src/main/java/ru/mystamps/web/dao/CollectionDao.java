@@ -22,7 +22,7 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 
-public interface JdbcCollectionDao {
+public interface CollectionDao {
 	Iterable<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
 	Integer add(AddCollectionDbDto collection);

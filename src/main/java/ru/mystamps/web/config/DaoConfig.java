@@ -43,8 +43,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcCollectionDao getJdbcCollectionDao() {
-		return new JdbcCollectionDaoImpl(jdbcTemplate);
+	public CollectionDao getCollectionDao() {
+		return new JdbcCollectionDao(jdbcTemplate);
 	}
 	
 	@Bean

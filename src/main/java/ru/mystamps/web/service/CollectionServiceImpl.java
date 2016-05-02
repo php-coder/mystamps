@@ -29,7 +29,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCollectionDao;
+import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -41,7 +41,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CollectionServiceImpl implements CollectionService {
 	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
-	private final JdbcCollectionDao collectionDao;
+	private final CollectionDao collectionDao;
 	
 	@Override
 	@Transactional

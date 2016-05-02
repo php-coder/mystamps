@@ -20,13 +20,13 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcCollectionDao
+import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.util.SlugUtils
 
 class CollectionServiceImplTest extends Specification {
-	private JdbcCollectionDao collectionDao = Mock()
+	private CollectionDao collectionDao = Mock()
 	
 	private CollectionService service
 	
