@@ -124,7 +124,7 @@ public class ServicesConfig {
 	@Bean
 	public UserService getUserService() {
 		return new UserServiceImpl(
-			daoConfig.getJdbcUserDao(),
+			daoConfig.getUserDao(),
 			getUsersActivationService(),
 			getCollectionService(),
 			securityConfig.getPasswordEncoder()

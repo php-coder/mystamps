@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.JdbcUserDao
+import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
@@ -32,7 +32,7 @@ class UserServiceImplTest extends Specification {
 	
 	private static Integer ANY_USER_ID = TestObjects.TEST_USER_ID
 	
-	private JdbcUserDao jdbcUserDao = Mock()
+	private UserDao userDao = Mock()
 	private UsersActivationService usersActivationService = Mock()
 	private CollectionService collectionService = Mock()
 	private PasswordEncoder encoder = Mock()
@@ -54,7 +54,7 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.getName())
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
-		service = new UserServiceImpl(jdbcUserDao, usersActivationService, collectionService, encoder)
+		service = new UserServiceImpl(userDao, usersActivationService, collectionService, encoder)
 	}
 	
 	//
@@ -72,7 +72,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add(_ as AddUserDbDto) >> ANY_USER_ID
+			1 * userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should delete registration request"() {
@@ -86,7 +86,7 @@ class UserServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			jdbcUserDao.add(_ as AddUserDbDto) >> ANY_USER_ID
+			userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should throw exception when activation key is null"() {
@@ -104,7 +104,7 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> null
 		and:
-			0 * jdbcUserDao.add(_ as AddUserDbDto)
+			0 * userDao.add(_ as AddUserDbDto)
 		and:
 			0 * usersActivationService.remove(_ as String)
 	}
@@ -115,7 +115,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserName
 				return true
 			}) >> ANY_USER_ID
@@ -128,7 +128,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
 			}) >> ANY_USER_ID
@@ -142,7 +142,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
 			}) >> ANY_USER_ID
@@ -152,7 +152,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.role == UserDetails.Role.USER
 				return true
 			}) >> ANY_USER_ID
@@ -166,7 +166,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.email == activation.email
 				return true
 			}) >> ANY_USER_ID
@@ -180,7 +180,7 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		and:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.registeredAt == activation.createdAt
 				return true
 			}) >> ANY_USER_ID
@@ -201,7 +201,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.hash == expectedHash
 				return true
 			}) >> ANY_USER_ID
@@ -236,7 +236,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.login == expectedUserLogin
 				return true
 			}) >> ANY_USER_ID
@@ -246,7 +246,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * jdbcUserDao.add({ AddUserDbDto user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				return true
 			}) >> ANY_USER_ID
@@ -257,7 +257,7 @@ class UserServiceImplTest extends Specification {
 			Integer expectedId = 909;
 			String expectedLogin = activationForm.getLogin()
 		and:
-			jdbcUserDao.add(_ as AddUserDbDto) >> expectedId
+			userDao.add(_ as AddUserDbDto) >> expectedId
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -284,7 +284,7 @@ class UserServiceImplTest extends Specification {
 	def "findUserDetailsByLogin() should call dao"() {
 		given:
 			UserDetails expectedUserDetails = TestObjects.createUserDetails()
-			jdbcUserDao.findUserDetailsByLogin(_ as String) >> expectedUserDetails
+			userDao.findUserDetailsByLogin(_ as String) >> expectedUserDetails
 		when:
 			UserDetails userDetails = service.findUserDetailsByLogin('any-login')
 		then:
@@ -295,7 +295,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.findUserDetailsByLogin('john')
 		then:
-			1 * jdbcUserDao.findUserDetailsByLogin('john')
+			1 * userDao.findUserDetailsByLogin('john')
 	}
 	
 	//
@@ -311,7 +311,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "countByLogin() should call dao"() {
 		given:
-			jdbcUserDao.countByLogin(_ as String) >> 2L
+			userDao.countByLogin(_ as String) >> 2L
 		when:
 			long result = service.countByLogin('any-login')
 		then:
@@ -322,7 +322,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.countByLogin('john')
 		then:
-			1 * jdbcUserDao.countByLogin('john')
+			1 * userDao.countByLogin('john')
 	}
 	
 }

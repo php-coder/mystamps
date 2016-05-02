@@ -78,8 +78,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcUserDao getJdbcUserDao() {
-		return new JdbcUserDaoImpl(jdbcTemplate);
+	public UserDao getUserDao() {
+		return new JdbcUserDao(jdbcTemplate);
 	}
 	
 	@Bean

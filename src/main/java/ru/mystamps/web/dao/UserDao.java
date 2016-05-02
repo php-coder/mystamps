@@ -20,7 +20,7 @@ package ru.mystamps.web.dao;
 import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 
-public interface JdbcUserDao {
+public interface UserDao {
     long countByLogin(String login);
     UserDetails findUserDetailsByLogin(String login);
 	Integer add(AddUserDbDto user);

@@ -31,7 +31,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUserDao;
+import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
-	private final JdbcUserDao jdbcUserDao;
+	private final UserDao userDao;
 	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
 	private final PasswordEncoder encoder;
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		user.setActivatedAt(now);
 		user.setHash(hash);
 		
-		Integer id = jdbcUserDao.add(user);
+		Integer id = userDao.add(user);
 		usersActivationService.remove(activationKey);
 		
 		LOG.info("User #{} has been created ({})", id, user);
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
 	public UserDetails findUserDetailsByLogin(String login) {
 		Validate.isTrue(login != null, "Login must be non null");
 		
-		return jdbcUserDao.findUserDetailsByLogin(login);
+		return userDao.findUserDetailsByLogin(login);
 	}
 	
 	@Override
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
 	public long countByLogin(String login) {
 		Validate.isTrue(login != null, "Login should be non null");
 		
-		return jdbcUserDao.countByLogin(login);
+		return userDao.countByLogin(login);
 	}
 	
 }

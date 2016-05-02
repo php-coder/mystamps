@@ -32,12 +32,12 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUserDao;
+import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 
 @RequiredArgsConstructor
-public class JdbcUserDaoImpl implements JdbcUserDao {
+public class JdbcUserDao implements UserDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
