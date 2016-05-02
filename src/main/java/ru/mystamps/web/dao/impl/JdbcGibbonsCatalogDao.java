@@ -25,7 +25,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.GibbonsCatalogDao;
 
-public class JdbcGibbonsCatalogDaoImpl extends JdbcCatalogDao implements GibbonsCatalogDao {
+public class JdbcGibbonsCatalogDao extends JdbcCatalogDao implements GibbonsCatalogDao {
 	
 	@Value("${gibbons.create}")
 	private String addGibbonsNumberSql;
@@ -36,7 +36,7 @@ public class JdbcGibbonsCatalogDaoImpl extends JdbcCatalogDao implements Gibbons
 	@Value("${series_gibbons.find_by_series_id}")
 	private String findBySeriesIdSql;
 	
-	public JdbcGibbonsCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+	public JdbcGibbonsCatalogDao(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
 	

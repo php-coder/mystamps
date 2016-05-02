@@ -49,7 +49,7 @@ public class DaoConfig {
 	
 	@Bean
 	public GibbonsCatalogDao getGibbonsCatalogDao() {
-		return new JdbcGibbonsCatalogDaoImpl(jdbcTemplate);
+		return new JdbcGibbonsCatalogDao(jdbcTemplate);
 	}
 	
 	@Bean
@@ -64,12 +64,12 @@ public class DaoConfig {
 	
 	@Bean
 	public MichelCatalogDao getMichelCatalogDao() {
-		return new JdbcMichelCatalogDaoImpl(jdbcTemplate);
+		return new JdbcMichelCatalogDao(jdbcTemplate);
 	}
 	
 	@Bean
 	public ScottCatalogDao getScottCatalogDao() {
-		return new JdbcScottCatalogDaoImpl(jdbcTemplate);
+		return new JdbcScottCatalogDao(jdbcTemplate);
 	}
 	
 	@Bean
@@ -94,7 +94,7 @@ public class DaoConfig {
 	
 	@Bean
 	public YvertCatalogDao getYvertCatalogDao() {
-		return new JdbcYvertCatalogDaoImpl(jdbcTemplate);
+		return new JdbcYvertCatalogDao(jdbcTemplate);
 	}
 	
 }

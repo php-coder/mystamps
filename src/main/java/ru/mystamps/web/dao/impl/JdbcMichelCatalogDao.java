@@ -25,7 +25,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.MichelCatalogDao;
 
-public class JdbcMichelCatalogDaoImpl extends JdbcCatalogDao implements MichelCatalogDao {
+public class JdbcMichelCatalogDao extends JdbcCatalogDao implements MichelCatalogDao {
 	
 	@Value("${michel.create}")
 	private String addMichelNumberSql;
@@ -36,7 +36,7 @@ public class JdbcMichelCatalogDaoImpl extends JdbcCatalogDao implements MichelCa
 	@Value("${series_michel.find_by_series_id}")
 	private String findBySeriesIdSql;
 	
-	public JdbcMichelCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+	public JdbcMichelCatalogDao(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
 	

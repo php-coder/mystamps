@@ -23,31 +23,31 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import ru.mystamps.web.dao.ScottCatalogDao;
+import ru.mystamps.web.dao.YvertCatalogDao;
 
-public class JdbcScottCatalogDaoImpl extends JdbcCatalogDao implements ScottCatalogDao {
+public class JdbcYvertCatalogDao extends JdbcCatalogDao implements YvertCatalogDao {
 	
-	@Value("${scott.create}")
-	private String addScottNumberSql;
+	@Value("${yvert.create}")
+	private String addYvertNumberSql;
 	
-	@Value("${series_scott.add}")
-	private String addScottNumbersToSeriesSql;
+	@Value("${series_yvert.add}")
+	private String addYvertNumbersToSeriesSql;
 	
-	@Value("${series_scott.find_by_series_id}")
+	@Value("${series_yvert.find_by_series_id}")
 	private String findBySeriesIdSql;
 	
-	public JdbcScottCatalogDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+	public JdbcYvertCatalogDao(NamedParameterJdbcTemplate jdbcTemplate) {
 		super(jdbcTemplate);
 	}
 	
 	@Override
-	public List<String> add(Set<String> scottNumbers) {
-		return add(scottNumbers, addScottNumberSql);
+	public List<String> add(Set<String> yvertNumbers) {
+		return add(yvertNumbers, addYvertNumberSql);
 	}
 	
 	@Override
-	public void addToSeries(Integer seriesId, Set<String> scottNumbers) {
-		addToSeries(seriesId, scottNumbers, addScottNumbersToSeriesSql);
+	public void addToSeries(Integer seriesId, Set<String> yvertNumbers) {
+		addToSeries(seriesId, yvertNumbers, addYvertNumbersToSeriesSql);
 	}
 	
 	@Override
