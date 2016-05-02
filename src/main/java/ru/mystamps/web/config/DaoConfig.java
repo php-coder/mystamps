@@ -83,8 +83,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcUsersActivationDao getJdbcUsersActivationDao() {
-		return new JdbcUsersActivationDaoImpl(jdbcTemplate);
+	public UsersActivationDao getUsersActivationDao() {
+		return new JdbcUsersActivationDao(jdbcTemplate);
 	}
 	
 	@Bean

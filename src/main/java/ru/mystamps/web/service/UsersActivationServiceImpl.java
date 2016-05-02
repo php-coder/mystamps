@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
@@ -46,7 +46,7 @@ import ru.mystamps.web.validation.ValidationRules;
 public class UsersActivationServiceImpl implements UsersActivationService {
 	private static final Logger LOG = LoggerFactory.getLogger(UsersActivationServiceImpl.class);
 	
-	private final JdbcUsersActivationDao usersActivationDao;
+	private final UsersActivationDao usersActivationDao;
 	private final MailService mailService;
 	
 	@Override

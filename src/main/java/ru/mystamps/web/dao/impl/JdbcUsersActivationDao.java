@@ -30,14 +30,14 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
-public class JdbcUsersActivationDaoImpl implements JdbcUsersActivationDao {
+public class JdbcUsersActivationDao implements UsersActivationDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

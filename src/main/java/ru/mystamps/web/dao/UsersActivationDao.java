@@ -24,7 +24,7 @@ import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
-public interface JdbcUsersActivationDao {
+public interface UsersActivationDao {
 	long countByActivationKey(String activationKey);
 	void removeByActivationKey(String activationKey);
 	void add(AddUsersActivationDbDto activation);
