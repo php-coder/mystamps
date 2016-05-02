@@ -27,7 +27,7 @@ import ru.mystamps.web.dao.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
-public interface JdbcSeriesDao {
+public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	Iterable<SitemapInfoDto> findAllForSitemap();

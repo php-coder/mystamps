@@ -33,7 +33,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcSeriesDao;
+import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -51,7 +51,7 @@ import ru.mystamps.web.util.CatalogUtils;
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
-	private final JdbcSeriesDao seriesDao;
+	private final SeriesDao seriesDao;
 	private final ImageService imageService;
 	private final MichelCatalogService michelCatalogService;
 	private final ScottCatalogService scottCatalogService;

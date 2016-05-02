@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcSeriesDao
+import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
@@ -37,7 +37,7 @@ class SeriesServiceImplTest extends Specification {
 	private static final Integer ANY_IMAGE_ID = 18
 	
 	private ImageService imageService = Mock()
-	private JdbcSeriesDao seriesDao = Mock()
+	private SeriesDao seriesDao = Mock()
 	private MichelCatalogService michelCatalogService = Mock()
 	private ScottCatalogService scottCatalogService = Mock()
 	private YvertCatalogService yvertCatalogService = Mock()

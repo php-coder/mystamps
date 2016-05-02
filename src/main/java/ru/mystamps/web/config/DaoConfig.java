@@ -73,8 +73,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcSeriesDao getSeriesDao() {
-		return new JdbcSeriesDaoImpl(jdbcTemplate);
+	public SeriesDao getSeriesDao() {
+		return new JdbcSeriesDao(jdbcTemplate);
 	}
 	
 	@Bean

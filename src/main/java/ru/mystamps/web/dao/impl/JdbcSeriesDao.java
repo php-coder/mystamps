@@ -34,7 +34,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcSeriesDao;
+import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -48,7 +48,7 @@ import ru.mystamps.web.dao.dto.SitemapInfoDto;
 	"PMD.LongVariable"
 })
 @RequiredArgsConstructor
-public class JdbcSeriesDaoImpl implements JdbcSeriesDao {
+public class JdbcSeriesDao implements SeriesDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
