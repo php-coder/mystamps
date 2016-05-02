@@ -63,7 +63,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public CategoryService getCategoryService() {
-		return new CategoryServiceImpl(daoConfig.getJdbcCategoryDao());
+		return new CategoryServiceImpl(daoConfig.getCategoryDao());
 	}
 	
 	@Bean

@@ -33,8 +33,8 @@ public class DaoConfig {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Bean
-	public JdbcCategoryDao getJdbcCategoryDao() {
-		return new JdbcCategoryDaoImpl(jdbcTemplate);
+	public CategoryDao getCategoryDao() {
+		return new JdbcCategoryDao(jdbcTemplate);
 	}
 	
 	@Bean

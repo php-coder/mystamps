@@ -33,14 +33,14 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class JdbcCategoryDaoImpl implements JdbcCategoryDao {
+public class JdbcCategoryDao implements CategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

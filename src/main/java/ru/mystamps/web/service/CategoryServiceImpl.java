@@ -32,7 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
@@ -45,7 +45,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
-	private final JdbcCategoryDao categoryDao;
+	private final CategoryDao categoryDao;
 	
 	@Override
 	@Transactional

@@ -20,7 +20,7 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcCategoryDao
+import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
@@ -34,7 +34,7 @@ class CategoryServiceImplTest extends Specification {
 	private AddCategoryForm form
 	private Integer userId = 123
 	
-	private JdbcCategoryDao categoryDao = Mock()
+	private CategoryDao categoryDao = Mock()
 	private CategoryService service = new CategoryServiceImpl(categoryDao)
 	
 	def setup() {

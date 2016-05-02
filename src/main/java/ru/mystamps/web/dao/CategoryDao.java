@@ -23,7 +23,7 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 
-public interface JdbcCategoryDao {
+public interface CategoryDao {
 	Integer add(AddCategoryDbDto category);
 	long countAll();
 	long countByName(String name);
