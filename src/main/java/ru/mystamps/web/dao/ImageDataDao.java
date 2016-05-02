@@ -20,7 +20,7 @@ package ru.mystamps.web.dao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 
-public interface JdbcImageDataDao {
+public interface ImageDataDao {
 	DbImageDto findByImageId(Integer imageId);
 	Integer add(AddImageDataDbDto imageData);
 }

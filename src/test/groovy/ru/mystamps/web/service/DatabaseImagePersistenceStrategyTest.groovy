@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.JdbcImageDataDao
+import ru.mystamps.web.dao.ImageDataDao
 import ru.mystamps.web.dao.dto.AddImageDataDbDto
 import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
@@ -29,7 +29,7 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private JdbcImageDataDao imageDataDao = Mock()
+	private ImageDataDao imageDataDao = Mock()
 	private MultipartFile multipartFile = Mock()
 	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	

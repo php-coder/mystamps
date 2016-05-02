@@ -32,12 +32,12 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcImageDataDao;
+import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 
 @RequiredArgsConstructor
-public class JdbcImageDataDaoImpl implements JdbcImageDataDao {
+public class JdbcImageDataDao implements ImageDataDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

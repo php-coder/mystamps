@@ -41,9 +41,7 @@ public interface StrategiesConfig {
 		@Bean
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
-			return new DatabaseImagePersistenceStrategy(
-				daoConfig.getJdbcImageDataDao()
-			);
+			return new DatabaseImagePersistenceStrategy(daoConfig.getImageDataDao());
 		}
 		
 	}

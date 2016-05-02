@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcImageDataDao;
+import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageDto;
@@ -40,7 +40,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	private static final Logger LOG =
 		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
-	private final JdbcImageDataDao imageDataDao;
+	private final ImageDataDao imageDataDao;
 	
 	@PostConstruct
 	public void init() {
