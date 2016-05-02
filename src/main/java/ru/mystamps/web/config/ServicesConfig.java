@@ -58,7 +58,7 @@ public class ServicesConfig {
 
 	@Bean
 	public CountryService getCountryService() {
-		return new CountryServiceImpl(daoConfig.getJdbcCountryDao());
+		return new CountryServiceImpl(daoConfig.getCountryDao());
 	}
 	
 	@Bean

@@ -20,7 +20,7 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcCountryDao
+import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
@@ -33,7 +33,7 @@ class CountryServiceImplTest extends Specification {
 	private AddCountryForm form
 	private Integer userId = 321
 	
-	private JdbcCountryDao countryDao = Mock()
+	private CountryDao countryDao = Mock()
 	private CountryService service = new CountryServiceImpl(countryDao)
 	
 	def setup() {

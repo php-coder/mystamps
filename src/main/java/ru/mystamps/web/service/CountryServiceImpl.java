@@ -32,7 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
@@ -44,7 +44,7 @@ import ru.mystamps.web.util.SlugUtils;
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
-	private final JdbcCountryDao countryDao;
+	private final CountryDao countryDao;
 	
 	@Override
 	@Transactional

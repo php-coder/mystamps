@@ -33,14 +33,14 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class JdbcCountryDaoImpl implements JdbcCountryDao {
+public class JdbcCountryDao implements CountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

@@ -38,8 +38,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public JdbcCountryDao getJdbcCountryDao() {
-		return new JdbcCountryDaoImpl(jdbcTemplate);
+	public CountryDao getCountryDao() {
+		return new JdbcCountryDao(jdbcTemplate);
 	}
 	
 	@Bean

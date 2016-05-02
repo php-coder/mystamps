@@ -23,7 +23,7 @@ import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 
-public interface JdbcCountryDao {
+public interface CountryDao {
 	Integer add(AddCountryDbDto country);
 	long countAll();
 	long countByName(String name);
