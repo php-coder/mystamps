@@ -15,20 +15,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.spring.security;
+package ru.mystamps.web.dao.dto;
 
-public final class StringAuthority {
-	public static final String ADD_COMMENTS_TO_SERIES = "ADD_COMMENTS_TO_SERIES";
-	public static final String ADD_IMAGES_TO_SERIES   = "ADD_IMAGES_TO_SERIES";
-	public static final String MANAGE_TOGGLZ          = "MANAGE_TOGGLZ";
-	public static final String CREATE_CATEGORY        = "CREATE_CATEGORY";
-	public static final String CREATE_COUNTRY         = "CREATE_COUNTRY";
-	public static final String CREATE_SERIES          = "CREATE_SERIES";
-	public static final String UPDATE_COLLECTION      = "UPDATE_COLLECTION";
-	public static final String VIEW_SITE_EVENTS       = "VIEW_SITE_EVENTS";
-	public static final String VIEW_SERIES_SALES      = "VIEW_SERIES_SALES";
-	
-	private StringAuthority() {
-	}
-	
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.service.dto.Currency;
+
+import java.util.Date;
+
+/**
+ * @author Sergey Chechenev
+ */
+@Getter
+@RequiredArgsConstructor
+public class PurchaseAndSaleDto {
+	private final Date date;
+	private final String sellerName;
+	private final String sellerUrl;
+	private final String buyerName;
+	private final String buyerUrl;
+	private final String transactionUrl;
+	private final Double transactionPrice;
+	private final Currency transactionCurrency;
+	private final Double localPrice;
+	private final Currency localCurrency;
 }

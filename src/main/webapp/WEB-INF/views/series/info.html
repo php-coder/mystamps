@@ -270,6 +270,41 @@
 									</p>
 								</form>
 							</div>
+							<div class="col-sm-4" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+								<h5>Who was selling/buying these series:</h5>
+								<ul th:remove="all-but-first">
+									<li th:each="transaction : ${purchasesAndSalesList}">
+										<!--/*/
+										<span th:if="${transaction.date != null}" th:text="${#dates.format(transaction.date, 'dd.MM.yyyy')}"></span>
+										/*/-->
+										<a href="http://example.com/james-alan-hetfield" th:href="${transaction.sellerUrl}" th:text="${transaction.sellerName}">James Alan Hetfield</a>
+										<span th:if="${transaction.buyerName == null}">was selling for</span>
+										<!--/*/
+										<span th:if="${transaction.buyerName != null}">sold to</span>
+										<a href="http://example.com/eicca-toppinen" th:if="${transaction.buyerName != null}" th:href="${transaction.buyerUrl}" th:text="${transaction.buyerName}">Eicca Toppinen</a>
+										<span th:if="${transaction.buyerName != null}">for</span>
+										/*/-->
+										<a href="http://example.com/james-alan-hetfield/selling-stamps"
+										   th:href="${transaction.transactionUrl}"
+										   th:text="${#numbers.formatDecimal(transaction.transactionPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.transactionCurrency + (transaction.localPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.localPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.localCurrency + ')') : '')}">100 USD</a>
+									</li>
+									<li>
+										<a href="http://example.com/james-alan-hetfield">James Alan Hetfield</a> was selling for <a href="http://example.com/james-alan-hetfield/selling-stamps">100 USD (650 RUB)</a>
+									</li>
+									<li>
+										02.02.2002 <a href="http://example.com/tommy-lee-jones">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps">200 USD</a>
+									</li>
+									<li>
+										02.02.2002 <a href="http://example.com/tommy-lee-jones">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps">200 USD (1300 RUB)</a>
+									</li>
+									<li>
+										03.03.2003 <a href="http://example.com/eicca-toppinen">Eicca Toppinen</a> sold to <a href="http://example.com/kurt-cobain">Kurt Cobain</a> for <a href="http://example.com/eicca-toppinen/selling-stamps">300 USD</a>
+									</li>
+									<li>
+										03.03.2003 <a href="http://example.com/eicca-toppinen">Eicca Toppinen</a> sold to <a href="http://example.com/kurt-cobain">Kurt Cobain</a> for <a href="http://example.com/eicca-toppinen/selling-stamps">300 USD (1560 RUB)</a>
+									</li>
+								</ul>
+							</div>
 							
 						<!--/*/
 							<div class="col-sm-4" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">

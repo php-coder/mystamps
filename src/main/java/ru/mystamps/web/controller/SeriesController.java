@@ -221,6 +221,11 @@ public class SeriesController {
 		);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
+
+		model.addAttribute(
+			"purchasesAndSalesList",
+			seriesService.findPurchasesAndSales(series.getId())
+		);
 		
 		return "series/info";
 	}

@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -332,7 +334,15 @@ public class SeriesServiceImpl implements SeriesService {
 	public Iterable<SitemapInfoDto> findAllForSitemap() {
 		return seriesDao.findAllForSitemap();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 
+		return seriesDao.findPurchasesAndSales(seriesId);
+	}
+	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {
 		if (dto.getYear() == null) {
 			return;

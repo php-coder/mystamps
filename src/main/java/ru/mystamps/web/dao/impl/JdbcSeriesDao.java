@@ -20,6 +20,7 @@ package ru.mystamps.web.dao.impl;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +37,11 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
+import ru.mystamps.web.service.dto.Currency;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings({
@@ -242,6 +245,41 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers::forSeriesInfoDto);
+	}
+	
+	@Override
+	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
+		//TODO do not forget to replace this fake code by real code
+		List<PurchaseAndSaleDto> result = new LinkedList<>();
+		PurchaseAndSaleDto dtoOne = new PurchaseAndSaleDto(
+			new Date(),
+			"Test Seller One",
+			"http://example.com/seller-one",
+			"Test Buyer One",
+			"http://example.com/buyer-one",
+			"http://example.com/stamps-selling-one",
+			100.50,
+			Currency.USD,
+			1590.95,
+			Currency.RUB
+		);
+		result.add(dtoOne);
+		
+		PurchaseAndSaleDto dtoTwo = new PurchaseAndSaleDto(
+			null,
+			"Test Seller Two",
+			"http://example.com/seller-two",
+			null,
+			null,
+			"http://example.com/stamps-selling-two",
+			100.50,
+			Currency.USD,
+			null,
+			null
+		);
+		result.add(dtoTwo);
+		
+		return result;
 	}
 	
 	@Override
