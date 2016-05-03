@@ -24,6 +24,7 @@ public final class HasAuthority {
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";
 	public static final String UPDATE_COLLECTION = "hasAuthority('" + StringAuthority.UPDATE_COLLECTION + "')";
 	public static final String VIEW_SITE_EVENTS = "hasAuthority('" + StringAuthority.VIEW_SITE_EVENTS + "')";
+	public static final String VIEW_SERIES_SALES = "hasAuthority('" + StringAuthority.VIEW_SERIES_SALES + "')";
 	
 	private HasAuthority() {
 	}

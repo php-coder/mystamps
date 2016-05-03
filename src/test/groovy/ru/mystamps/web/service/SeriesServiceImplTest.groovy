@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.Currency
@@ -1133,6 +1134,33 @@ class SeriesServiceImplTest extends Specification {
 			List<SitemapInfoDto> result = service.findAllForSitemap()
 		then:
 			1 * seriesDao.findAllForSitemap() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findPurchasesAndSales()
+	//
+	
+	def "findPurchasesAndSales() should throw exception when series id is null"() {
+		when:
+			service.findPurchasesAndSales(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 88
+		and:
+			List<PurchaseAndSaleDto> expectedResult = [ TestObjects.createPurchaseAndSaleDto() ]
+		when:
+			List<PurchaseAndSaleDto> result = service.findPurchasesAndSales(expectedSeriesId)
+		then:
+			1 * seriesDao.findPurchasesAndSales({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
 		and:
 			result == expectedResult
 	}

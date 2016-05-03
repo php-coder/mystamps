@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Date;
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
@@ -51,4 +52,6 @@ public interface SeriesService {
 	List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
 	List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
+	
+	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
 }

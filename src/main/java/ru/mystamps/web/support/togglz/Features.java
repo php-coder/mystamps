@@ -66,7 +66,11 @@ public enum Features implements Feature {
 	
 	@Label("Show link to list of countries on index page")
 	@EnabledByDefault
-	LIST_COUNTRIES;
+	LIST_COUNTRIES,
+	
+	@Label("Show series purchases and sales on series info page")
+	@EnabledByDefault
+	PURCHASES_AND_SALES;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
