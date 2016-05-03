@@ -54,6 +54,7 @@ import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddImageForm;
@@ -220,6 +221,12 @@ public class SeriesController {
 		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
+		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+			// CheckStyle: ignore LineLength for next 1 line
+			List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
+			model.addAttribute("purchasesAndSales", purchasesAndSales);
+		}
+		
 		return "series/info";
 	}
 	
@@ -270,6 +277,13 @@ public class SeriesController {
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			// don't try to re-display file upload field
 			form.setImage(null);
+			
+			if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+				// CheckStyle: ignore LineLength for next 1 line
+				List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
+				model.addAttribute("purchasesAndSales", purchasesAndSales);
+			}
+
 			return "series/info";
 		}
 		

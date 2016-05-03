@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.AddUserDbDto;
@@ -24,6 +25,7 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
@@ -31,6 +33,7 @@ import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+import ru.mystamps.web.service.dto.Currency;
 
 final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -49,6 +52,9 @@ final class TestObjects {
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
+	
+	private static final String TEST_URL            = "test.example.org";
+	private static final BigDecimal TEST_PRICE      = new BigDecimal("100.99");
 	
 	private static final Integer TEST_ENTITY_ID     = 456;
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
@@ -147,6 +153,24 @@ final class TestObjects {
 			TEST_ACTIVITY_IP,
 			TEST_ACTIVITY_REFERER,
 			TEST_ACTIVITY_AGENT
+		);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	public static PurchaseAndSaleDto createPurchaseAndSaleDto() {
+		return new PurchaseAndSaleDto(
+			new Date(),
+			TEST_NAME,
+			TEST_URL,
+			TEST_NAME,
+			TEST_URL,
+			TEST_URL,
+			TEST_PRICE,
+			Currency.RUB,
+			TEST_PRICE,
+			Currency.USD
 		);
 	}
 	

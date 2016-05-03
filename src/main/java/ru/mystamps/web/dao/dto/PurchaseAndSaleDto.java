@@ -15,39 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.dao.dto;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.util.Date;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.dto.Currency;
 
-public final class JdbcUtils {
-	
-	private JdbcUtils() {
-	}
-	
-	// @see http://stackoverflow.com/q/2920364/checking-for-a-null-int-value-from-a-java-resultset
-	@SuppressWarnings("PMD.PrematureDeclaration")
-	public static Integer getInteger(ResultSet resultSet, String fieldName) throws SQLException {
-		int value = resultSet.getInt(fieldName);
-		if (resultSet.wasNull()) {
-			return null;
-		}
-		
-		return Integer.valueOf(value);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	@SuppressWarnings("PMD.PrematureDeclaration")
-	public static Currency getCurrency(ResultSet resultSet, String fieldName) throws SQLException {
-		String value = resultSet.getString(fieldName);
-		if (resultSet.wasNull()) {
-			return null;
-		}
-		
-		return Currency.valueOf(value);
-	}
+/**
+ * @author Sergey Chechenev
+ */
+@Getter
+@RequiredArgsConstructor
+public class PurchaseAndSaleDto {
+	private final Date date;
+	private final String sellerName;
+	private final String sellerUrl;
+	private final String buyerName;
+	private final String buyerUrl;
+	private final String transactionUrl;
+	private final BigDecimal firstPrice;
+	private final Currency firstCurrency;
+	private final BigDecimal secondPrice;
+	private final Currency secondCurrency;
 }

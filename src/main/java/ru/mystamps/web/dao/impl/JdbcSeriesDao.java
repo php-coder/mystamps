@@ -36,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -78,6 +79,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	
 	@Value("${series.find_by_collection_id}")
 	private String findByCollectionIdSql;
+	
+	@Value("${series.find_purchases_and_sales_by_series_id}")
+	private String findPurchasesAndSalesBySeriesIdSql;
 	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
@@ -247,6 +251,18 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers::forSeriesInfoDto);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
+		return jdbcTemplate.query(
+			findPurchasesAndSalesBySeriesIdSql,
+			Collections.singletonMap("series_id", seriesId),
+			RowMappers::forPurchaseAndSaleDto
+		);
 	}
 	
 	@Override

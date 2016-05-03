@@ -35,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -46,7 +47,9 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings("PMD.TooManyMethods")
+// The String literal "Series id must be non null" appears N times in this file
+// and we think that it's OK.
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
@@ -348,7 +351,19 @@ public class SeriesServiceImpl implements SeriesService {
 	public List<SitemapInfoDto> findAllForSitemap() {
 		return seriesDao.findAllForSitemap();
 	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
+	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 
+		return seriesDao.findPurchasesAndSales(seriesId);
+	}
+	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {
 		if (dto.getYear() == null) {
 			return;
