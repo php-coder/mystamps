@@ -18,5 +18,5 @@
 package ru.mystamps.web.service.dto;
 
 public enum Currency {
-	EUR, USD, GBP
+	EUR, USD, GBP, RUB
 }

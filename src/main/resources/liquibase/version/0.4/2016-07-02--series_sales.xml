@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-transaction_participants-table" author="cssru" context="scheme">
+		<comment>Creates table containing transaction participants (sellers and buyers) data</comment>
+		
+		<createTable tableName="transaction_participants">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="url" type="VARCHAR(255)"/>
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="create-series_sales-table" author="cssru" context="scheme">
+		<comment>Creates table containing sales and purchases of series</comment>
+		
+		<createTable tableName="series_sales">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)"
+				             foreignKeyName="fk_series_sales_series_id"/>
+			</column>
+			<column name="date" type="DATETIME"/>
+			<column name="seller_id" type="INTEGER">
+				<constraints nullable="false" references="transaction_participants(id)"
+				             foreignKeyName="fk_seller_id_transaction_patricipants_id"/>
+			</column>
+			<column name="buyer_id" type="INTEGER">
+				<constraints references="transaction_participants(id)"
+				             foreignKeyName="fk_buyer_id_transaction_patricipants_id"/>
+			</column>
+			<column name="transaction_url" type="VARCHAR(255)"/>
+			<column name="first_price" type="DECIMAL"/>
+			<column name="first_currency" type="VARCHAR(3)"/>
+			<column name="second_price" type="DECIMAL"/>
+			<column name="second_currency" type="VARCHAR(3)"/>
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="initiate-transaction_participants-table" author="cssru" context="test-data">
+		<comment>Creates buyers and sellers examples</comment>
+		
+		<insert tableName="transaction_participants">
+			<column name="id" value="1"/>
+			<column name="name" value="Eicca Toppinen"/>
+			<column name="url" value="http://example.com/eicca-toppinen"/>
+		</insert>
+		
+		<insert tableName="transaction_participants">
+			<column name="id" value="2"/>
+			<column name="name" value="John Connor"/>
+			<column name="url" value="http://example.com/john-connor"/>
+		</insert>
+		
+		<insert tableName="transaction_participants">
+			<column name="id" value="3"/>
+			<column name="name" value="Duncan MacLeod"/>
+			<column name="url" value="http://example.com/duncan-macleod"/>
+		</insert>
+	</changeSet>
+	
+	<changeSet id="initiate-series_sales-table" author="cssru" context="test-data">
+		<comment>Creates series sales and purchases examples</comment>
+		
+		<insert tableName="series_sales">
+			<column name="id" value="1"/>
+			<column name="series_id" value="1"/>
+			<column name="date" valueComputed="${NOW}"/>
+			<column name="seller_id" value="1"/>
+			<column name="buyer_id" value="2"/>
+			<column name="transaction_url" value="http://example.com/eicca-toppinen/sell-stamps"/>
+			<column name="first_price" value="100.55"/>
+			<column name="first_currency" value="USD"/>
+			<column name="second_price" value="6500.89"/>
+			<column name="second_currency" value="RUB"/>
+		</insert>
+		
+		<insert tableName="series_sales">
+			<column name="id" value="2"/>
+			<column name="series_id" value="1"/>
+			<column name="seller_id" value="3"/>
+			<column name="transaction_url" value="http://example.com/teresa-palmer/sell-stamps"/>
+			<column name="first_price" value="500.00"/>
+			<column name="first_currency" value="USD"/>
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>

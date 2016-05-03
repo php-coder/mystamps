@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -37,6 +38,7 @@ public interface SeriesDao {
 	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
 	Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
+	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);

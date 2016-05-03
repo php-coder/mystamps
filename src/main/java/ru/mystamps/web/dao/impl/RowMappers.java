@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -35,6 +36,7 @@ import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+import ru.mystamps.web.service.dto.Currency;
 
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 final class RowMappers {
@@ -105,6 +107,32 @@ final class RowMappers {
 			releaseYear,
 			quantity,
 			perforated
+		);
+	}
+	
+	public static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int i) throws SQLException {
+		Date date               = rs.getDate("date");
+		String sellerName       = rs.getString("seller_name");
+		String sellerUrl        = rs.getString("seller_url");
+		String buyerName        = rs.getString("buyer_name");
+		String buyerUrl         = rs.getString("buyer_url");
+		String transactionUrl   = rs.getString("transaction_url");
+		BigDecimal firstPrice   = rs.getBigDecimal("first_price");
+		Currency firstCurrency  = JdbcUtils.getCurrency(rs, "first_currency");
+		BigDecimal secondPrice  = rs.getBigDecimal("second_price");
+		Currency secondCurrency = JdbcUtils.getCurrency(rs, "second_currency");
+		
+		return new PurchaseAndSaleDto(
+			date,
+			sellerName,
+			sellerUrl,
+			buyerName,
+			buyerUrl,
+			transactionUrl,
+			firstPrice,
+			firstCurrency,
+			secondPrice,
+			secondCurrency
 		);
 	}
 	
