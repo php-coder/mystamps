@@ -21,7 +21,6 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 public interface CountryDao {
 	Integer add(AddCountryDbDto country);
@@ -30,7 +29,6 @@ public interface CountryDao {
 	long countByNameRu(String name);
 	long countCountriesOfCollection(Integer collectionId);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

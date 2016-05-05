@@ -36,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -61,9 +60,6 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Value("${country.count_stamps_by_countries}")
 	private String countStampsByCountriesSql;
-	
-	@Value("${country.find_all_countries_names_with_ids}")
-	private String findCountriesNamesWithIdsSql;
 	
 	@Value("${country.find_all_countries_names_with_slug}")
 	private String findCountriesNamesWithSlugSql;
@@ -145,15 +141,6 @@ public class JdbcCountryDao implements CountryDao {
 			countStampsByCountriesSql,
 			params,
 			RowMappers::forNameAndCounter
-		);
-	}
-	
-	@Override
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return jdbcTemplate.query(
-			findCountriesNamesWithIdsSql,
-			Collections.singletonMap("lang", lang),
-			RowMappers::forSelectEntityDto
 		);
 	}
 	
