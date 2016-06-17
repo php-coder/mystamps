@@ -20,3 +20,4 @@ src/main/javascript/*/*.min.js
 
 # Vagrant related files
 .vagrant/
+vagrant/provisioning/vagrant.retry
