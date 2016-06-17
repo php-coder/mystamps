@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# To be able to set hostname on Ubuntu 16.04. we need to have vagrant at least
+# of version 1.8.3 See also: https://github.com/mitchellh/vagrant/issues/7288
+Vagrant.require_version ">= 1.8.3"
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -13,6 +17,9 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/xenial64"
+
+  # Set VM hostname
+  config.vm.hostname = "my-stamps.local"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
