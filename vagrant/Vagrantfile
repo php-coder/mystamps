@@ -34,6 +34,9 @@ Vagrant.configure(2) do |config|
 
     # Customize the amount of memory on the VM:
     vb.memory = "512"
+
+    # Set the name that appears in the VirtualBox GUI
+    vb.name = "my-stamps"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as
