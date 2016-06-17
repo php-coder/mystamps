@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  gather_facts: no
   vars:
     # required for Ubuntu 16.04. which installs Python 2.x to a non-standard path
     ansible_python_interpreter: "/usr/bin/python2.7"
