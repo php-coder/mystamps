@@ -9,6 +9,11 @@
   - name: Bootstrapping server
     include: bootstrap.yml
 
+  roles:
+  - role: php-coder.oraclejdk
+    become: yes
+    become_method: sudo
+
   tasks:
   - name: show greeting message
     debug:
