@@ -46,16 +46,6 @@ Vagrant.configure(2) do |config|
     vb.name = "my-stamps"
   end
 
-  # Enable provisioning with a shell script.
-  # See documentation for more details:
-  # https://www.vagrantup.com/docs/provisioning/shell.html
-  config.vm.provision "shell", inline: <<-SHELL
-    # Ubuntu 16.04. doesn't install python 2.x anymore and we have to install
-    # it manually to be able to run Ansible playbooks.
-    sudo apt-get update
-    sudo apt-get install -y python2.7-minimal
-  SHELL
-
   # Enable provisioning with Ansible from the Vagrant host.
   # See documentation for more details:
   # https://www.vagrantup.com/docs/provisioning/ansible_intro.html
