@@ -3,12 +3,21 @@
 # Ubuntu 16.04. doesn't install python 2.x anymore and we have to install
 # it manually to be able to run Ansible playbooks.
 
+- name: Determining whether python 2.7 is installed
+  stat:
+    path: /usr/bin/python2.7
+    get_md5: no
+    get_checksum: no
+  register: python27
+
 - name: Updating packages cache
   raw: apt-get update
   become: yes
   become_method: sudo
+  when: not python27.stat.exists
 
 - name: Installing python
   raw: apt-get install -y python2.7-minimal
   become: yes
   become_method: sudo
+  when: not python27.stat.exists
