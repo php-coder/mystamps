@@ -1,0 +1,26 @@
+---
+
+- name: Uploading mystamps.war to a server
+  copy:
+    src: ../../target/mystamps.war
+    dest: /data/mystamps/mystamps.war
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0700'
+  notify:
+    - Restarting service
+
+- name: Creating init-script
+  file:
+    src: /data/mystamps/mystamps.war
+    dest: /etc/init.d/mystamps
+    state: link
+
+- name: Running service
+  service:
+    name: mystamps
+    enabled: yes
+    state: started
+

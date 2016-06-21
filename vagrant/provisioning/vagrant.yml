@@ -6,15 +6,29 @@
     ansible_python_interpreter: "/usr/bin/python2.7"
 
   pre_tasks:
+
   - name: Bootstrapping server
     include: bootstrap.yml
+
+  - name: Creating /data directory
+    file:
+      path: /data
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+    become: yes
+    become_method: sudo
 
   roles:
   - role: php-coder.oraclejdk
     become: yes
     become_method: sudo
 
-  tasks:
-  - name: show greeting message
-    debug:
-      msg: "Hello"
+  - role: mystamps-user
+    become: yes
+    become_method: sudo
+
+  - role: mystamps-app
+    become: yes
+    become_method: sudo

@@ -1,0 +1,6 @@
+---
+
+- name: Restarting service
+  service:
+    name: mystamps
+    state: restarted
