@@ -4,11 +4,11 @@
 # it manually to be able to run Ansible playbooks.
 
 - name: Updating packages cache
-  raw: apt-get update
+  raw: '[ -x /usr/bin/python2.7 ] || apt-get update'
   become: yes
   become_method: sudo
 
 - name: Installing python
-  raw: apt-get install -y python2.7-minimal
+  raw: '[ -x /usr/bin/python2.7 ] || apt-get install -y python2.7-minimal'
   become: yes
   become_method: sudo
