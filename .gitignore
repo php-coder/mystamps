@@ -21,3 +21,4 @@ src/main/javascript/*/*.min.js
 # Vagrant related files
 .vagrant/
 vagrant/provisioning/vagrant.retry
+vagrant/provisioning/roles/php-coder.oraclejdk/
