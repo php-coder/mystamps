@@ -22,3 +22,4 @@ src/main/javascript/*/*.min.js
 .vagrant/
 vagrant/provisioning/vagrant.retry
 vagrant/provisioning/roles/php-coder.oraclejdk/
+vagrant/provisioning/roles/php-coder.nginx/
