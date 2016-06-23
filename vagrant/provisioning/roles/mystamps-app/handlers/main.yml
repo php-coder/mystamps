@@ -1,6 +1,6 @@
 ---
 
-- name: Restarting service
+- name: Restarting mystamps service
   service:
     name: mystamps
     state: restarted

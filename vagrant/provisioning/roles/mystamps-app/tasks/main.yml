@@ -10,7 +10,7 @@
     group: mystamps
     mode: '0700'
   notify:
-    - Restarting service
+  - Restarting mystamps service
 
 - name: Creating init-script
   file:
