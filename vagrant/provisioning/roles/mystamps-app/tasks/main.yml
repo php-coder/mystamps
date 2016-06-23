@@ -18,6 +18,14 @@
     dest: /etc/init.d/mystamps
     state: link
 
+- name: Creating /data/logs
+  file:
+    path: /data/logs
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+
 - name: Running service
   service:
     name: mystamps

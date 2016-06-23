@@ -32,3 +32,11 @@
   - role: mystamps-app
     become: yes
     become_method: sudo
+
+  - role: php-coder.nginx
+    become: yes
+    become_method: sudo
+
+  - role: mystamps-nginx
+    become: yes
+    become_method: sudo

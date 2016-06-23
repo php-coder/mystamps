@@ -1,0 +1,83 @@
+---
+
+- name: Removing default nginx configuration
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+  notify:
+  - Restarting nginx service
+
+- name: Updating permissions on /data/logs
+  file:
+    path: /data/logs
+    group: nginx
+    mode: '0775'
+    state: directory
+
+- name: Creating /data/nginx
+  file:
+    path: /data/nginx
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+
+- name: Uploading configuration files
+  copy:
+    src: "../../src/main/config/nginx/{{ item }}"
+    dest: "/etc/nginx/conf.d/{{ item }}"
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+  - mystamps-http.conf
+  - mystamps-ssl.conf
+  notify:
+  - Restarting nginx service
+
+- name: Uploading data files
+  copy:
+    src: "../../src/main/config/nginx/{{ item }}"
+    dest: "/data/nginx/{{ item }}"
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0644'
+  with_items:
+  - 503.en.html
+  - 503.ru.html
+  notify:
+  - Restarting nginx service
+
+- name: Uploading certificate (.key file)
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/ssl/{{ item | basename }}"
+    force: yes
+    backup: no
+    owner: root
+    group: nginx
+    mode: '0640'
+  with_first_found:
+  - prod/my-stamps.ru.key
+  - my-stamps.ru.key
+  notify:
+  - Restarting nginx service
+
+- name: Uploading certificate (.crt file)
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/ssl/{{ item | basename }}"
+    force: yes
+    backup: no
+    owner: root
+    group: nginx
+    mode: '0640'
+  with_first_found:
+  - prod/my-stamps.ru.crt
+  - my-stamps.ru.key
+  notify:
+  - Restarting nginx service
