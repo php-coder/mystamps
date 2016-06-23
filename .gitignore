@@ -23,3 +23,5 @@ src/main/javascript/*/*.min.js
 vagrant/provisioning/vagrant.retry
 vagrant/provisioning/roles/php-coder.oraclejdk/
 vagrant/provisioning/roles/php-coder.nginx/
+vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
+vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
