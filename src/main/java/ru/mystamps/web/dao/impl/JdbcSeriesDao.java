@@ -82,6 +82,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.find_by_collection_id}")
 	private String findByCollectionIdSql;
 	
+	@Value("${series.find_purchases_and_sales_by_series_id}")
+	private String findPurchasesAndSalesSql;
+	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
 	
@@ -249,37 +252,10 @@ public class JdbcSeriesDao implements SeriesDao {
 	
 	@Override
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
-		//TODO do not forget to replace this fake code by real code
-		List<PurchaseAndSaleDto> result = new LinkedList<>();
-		PurchaseAndSaleDto dtoOne = new PurchaseAndSaleDto(
-			new Date(),
-			"Test Seller One",
-			"http://example.com/seller-one",
-			"Test Buyer One",
-			"http://example.com/buyer-one",
-			"http://example.com/stamps-selling-one",
-			100.50,
-			Currency.USD,
-			1590.95,
-			Currency.RUB
-		);
-		result.add(dtoOne);
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
 		
-		PurchaseAndSaleDto dtoTwo = new PurchaseAndSaleDto(
-			null,
-			"Test Seller Two",
-			"http://example.com/seller-two",
-			null,
-			null,
-			"http://example.com/stamps-selling-two",
-			100.50,
-			Currency.USD,
-			null,
-			null
-		);
-		result.add(dtoTwo);
-		
-		return result;
+		return jdbcTemplate.query(findPurchasesAndSalesSql, params, RowMappers::forPurchaseAndSaleDto);
 	}
 	
 	@Override

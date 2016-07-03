@@ -29,14 +29,15 @@ import java.util.Date;
 @Getter
 @RequiredArgsConstructor
 public class PurchaseAndSaleDto {
+	private final Long id;
 	private final Date date;
 	private final String sellerName;
 	private final String sellerUrl;
 	private final String buyerName;
 	private final String buyerUrl;
 	private final String transactionUrl;
-	private final Double transactionPrice;
-	private final Currency transactionCurrency;
-	private final Double localPrice;
-	private final Currency localCurrency;
+	private final Double firstPrice;
+	private final Currency firstCurrency;
+	private final Double secondPrice;
+	private final Currency secondCurrency;
 }

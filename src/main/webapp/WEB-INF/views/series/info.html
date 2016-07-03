@@ -286,7 +286,7 @@
 										/*/-->
 										<a href="http://example.com/james-alan-hetfield/selling-stamps"
 										   th:href="${transaction.transactionUrl}"
-										   th:text="${#numbers.formatDecimal(transaction.transactionPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.transactionCurrency + (transaction.localPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.localPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.localCurrency + ')') : '')}">100 USD</a>
+										   th:text="${#numbers.formatDecimal(transaction.firstPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.firstCurrency + (transaction.secondPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.secondPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.secondCurrency + ')') : '')}">100 USD</a>
 									</li>
 									<li>
 										<a href="http://example.com/james-alan-hetfield">James Alan Hetfield</a> was selling for <a href="http://example.com/james-alan-hetfield/selling-stamps">100 USD (650 RUB)</a>
