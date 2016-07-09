@@ -671,6 +671,36 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for isSeriesExist()
+	//
+	
+	def "isSeriesExist() should throw exception when series id is null"() {
+		when:
+			service.isSeriesExist(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@Unroll
+	def "isSeriesExist() should invoke dao, pass argument and return result from dao"(Integer daoReturnValue, boolean expectedResult) {
+		given:
+			Integer expectedSeriesId = 13
+		when:
+			boolean result = service.isSeriesExist(expectedSeriesId)
+		then:
+			1 * seriesDao.countSeriesById({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> daoReturnValue
+		and:
+			result == expectedResult
+		where:
+			daoReturnValue || expectedResult
+			0              || false
+			2              || true
+	}
+	
+	//
 	// Tests for findByMichelNumber()
 	//
 	
