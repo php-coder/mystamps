@@ -213,4 +213,31 @@ class ImageServiceImplTest extends Specification {
 			image == null
 	}
 	
+	//
+	// Tests for findBySeriesId()
+	//
+	
+	def "findBySeriesId() should throw exception when series id is null"() {
+		when:
+			service.findBySeriesId(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 14
+		and:
+			List<Integer> expectedResult = [ 1, 2 ] as List
+		when:
+			List<Integer> result = service.findBySeriesId(expectedSeriesId)
+		then:
+			1 * imageDao.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
 }
