@@ -214,6 +214,40 @@ class ImageServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for addToSeries()
+	//
+	
+	def "addToSeries() should throw exception when series id is null"() {
+		when:
+			service.addToSeries(null, 1)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addToSeries() should throw exception when image id is null"() {
+		when:
+			service.addToSeries(1, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addToSeries() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 14
+			Integer expectedImageId  = 15
+		when:
+			service.addToSeries(expectedSeriesId, expectedImageId)
+		then:
+			1 * imageDao.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			})
+	}
+	
+	//
 	// Tests for findBySeriesId()
 	//
 	
