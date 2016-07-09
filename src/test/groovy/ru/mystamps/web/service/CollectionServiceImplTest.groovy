@@ -22,6 +22,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
+import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.util.SlugUtils
 
@@ -294,6 +295,33 @@ class CollectionServiceImplTest extends Specification {
 				assert expectedQuantity == quantity
 				return true
 			}) >> []
+	}
+	
+	//
+	// Tests for findById()
+	//
+	
+	def "findById() should throw exception when collection id is null"() {
+		when:
+			service.findById(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findById() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedCollectionId = 12
+		and:
+			CollectionInfoDto expectedResult = TestObjects.createCollectionInfoDto()
+		when:
+			CollectionInfoDto result = service.findById(expectedCollectionId)
+		then:
+			1 * collectionDao.findCollectionInfoById({ Integer collectionId ->
+				assert collectionId == expectedCollectionId
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

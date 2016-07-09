@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.AddUserDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -122,6 +123,10 @@ final class TestObjects {
 			16,
 			true
 		);
+	}
+	
+	public static CollectionInfoDto createCollectionInfoDto() {
+		return new CollectionInfoDto(101, "Test User");
 	}
 	
 }
