@@ -26,12 +26,12 @@ import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
 import ru.mystamps.web.tests.DateUtils
 
 class SiteServiceImplTest extends Specification {
-	private static final String TEST_TYPE         = 'EventType'
-	private static final String TEST_PAGE         = 'http://example.org/some/page'
-	private static final String TEST_IP           = '127.0.0.1'
-	private static final String TEST_METHOD       = 'GET'
-	private static final String TEST_REFERER_PAGE = 'http://example.org/referer'
-	private static final String TEST_USER_AGENT   = 'Some browser'
+	private static final String TEST_TYPE         = TestObjects.TEST_ACTIVITY_TYPE
+	private static final String TEST_PAGE         = TestObjects.TEST_ACTIVITY_PAGE
+	private static final String TEST_IP           = TestObjects.TEST_ACTIVITY_IP
+	private static final String TEST_METHOD       = TestObjects.TEST_ACTIVITY_METHOD
+	private static final String TEST_REFERER_PAGE = TestObjects.TEST_ACTIVITY_REFERER
+	private static final String TEST_USER_AGENT   = TestObjects.TEST_ACTIVITY_AGENT
 	
 	private SuspiciousActivityDao suspiciousActivityDao = Mock()
 	private SiteService service

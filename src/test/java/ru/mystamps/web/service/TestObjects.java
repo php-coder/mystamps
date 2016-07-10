@@ -26,12 +26,21 @@ import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 final class TestObjects {
+	public static final String TEST_ACTIVITY_TYPE    = "EventType";
+	public static final String TEST_ACTIVITY_PAGE    = "http://example.org/some/page";
+	public static final String TEST_ACTIVITY_METHOD  = "GET";
+	public static final String TEST_ACTIVITY_LOGIN   = "zebra";
+	public static final String TEST_ACTIVITY_IP      = "127.0.0.1";
+	public static final String TEST_ACTIVITY_REFERER = "http://example.org/referer";
+	public static final String TEST_ACTIVITY_AGENT   = "Some browser";
+	
 	public static final Integer TEST_USER_ID        = 777;
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
@@ -127,6 +136,19 @@ final class TestObjects {
 	
 	public static CollectionInfoDto createCollectionInfoDto() {
 		return new CollectionInfoDto(101, "Test User");
+	}
+	
+	public static SuspiciousActivityDto createSuspiciousActivityDto() {
+		return new SuspiciousActivityDto(
+			TEST_ACTIVITY_TYPE,
+			new Date(),
+			TEST_ACTIVITY_PAGE,
+			TEST_ACTIVITY_METHOD,
+			TEST_ACTIVITY_LOGIN,
+			TEST_ACTIVITY_IP,
+			TEST_ACTIVITY_REFERER,
+			TEST_ACTIVITY_AGENT
+		);
 	}
 	
 }
