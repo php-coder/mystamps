@@ -134,6 +134,7 @@ final class TestObjects {
 		);
 	}
 	
+	@SuppressWarnings("checkstyle:magicnumber")
 	public static CollectionInfoDto createCollectionInfoDto() {
 		return new CollectionInfoDto(101, "Test User");
 	}
