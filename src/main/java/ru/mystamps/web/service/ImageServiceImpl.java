@@ -51,7 +51,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	@Transactional
 	public Integer save(MultipartFile file) {
-		Validate.isTrue(file != null, "File should be non null");
+		Validate.isTrue(file != null, "File must be non null");
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
 		String contentType = file.getContentType();

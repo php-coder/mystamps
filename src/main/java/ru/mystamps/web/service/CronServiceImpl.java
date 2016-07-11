@@ -46,7 +46,7 @@ public class CronServiceImpl implements CronService {
 		List<UsersActivationFullDto> expiredActivations =
 			usersActivationService.findOlderThan(PURGE_AFTER_DAYS);
 		
-		Validate.validState(expiredActivations != null, "Expired activations should be non null");
+		Validate.validState(expiredActivations != null, "Expired activations must be non null");
 		
 		if (expiredActivations.isEmpty()) {
 			LOG.info("Expired activations was not found.");

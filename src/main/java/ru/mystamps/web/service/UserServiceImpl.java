@@ -52,10 +52,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void registerUser(ActivateAccountDto dto) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getLogin() != null, "Login should be non null");
-		Validate.isTrue(dto.getPassword() != null, "Password should be non null");
-		Validate.isTrue(dto.getActivationKey() != null, "Activation key should be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getLogin() != null, "Login must be non null");
+		Validate.isTrue(dto.getPassword() != null, "Password must be non null");
+		Validate.isTrue(dto.getActivationKey() != null, "Activation key must be non null");
 		
 		String login = dto.getLogin();
 		
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByLogin(String login) {
-		Validate.isTrue(login != null, "Login should be non null");
+		Validate.isTrue(login != null, "Login must be non null");
 		
 		return userDao.countByLogin(login);
 	}

@@ -52,8 +52,8 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	@Override
 	@Transactional
 	public void add(RegisterAccountDto dto, Locale lang) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getEmail() != null, "Email must be non null");
 		
 		AddUsersActivationDbDto activation = new AddUsersActivationDbDto();
 		
@@ -101,7 +101,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByActivationKey(String activationKey) {
-		Validate.isTrue(activationKey != null, "Activation key should be non null");
+		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
 		return usersActivationDao.countByActivationKey(activationKey);
 	}

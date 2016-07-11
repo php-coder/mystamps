@@ -51,9 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_CATEGORY)
 	public UrlEntityDto add(AddCategoryDto dto, Integer userId) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "English category name should be non null");
-		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getName() != null, "Category name in English must be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Category name in Russian must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCategoryDbDto category = new AddCategoryDbDto();
@@ -117,14 +117,14 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
-		Validate.isTrue(name != null, "Name should be non null");
+		Validate.isTrue(name != null, "Name must be non null");
 		return categoryDao.countByName(name);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
-		Validate.isTrue(name != null, "Name in Russian should be non null");
+		Validate.isTrue(name != null, "Name in Russian must be non null");
 		return categoryDao.countByNameRu(name);
 	}
 	

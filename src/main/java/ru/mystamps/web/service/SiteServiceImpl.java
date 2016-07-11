@@ -136,8 +136,8 @@ public class SiteServiceImpl implements SiteService {
 			String agent,
 			Date date) {
 		
-		Validate.isTrue(type != null, "Type of suspicious activity was not set");
-		Validate.isTrue(page != null, "Page should be non null");
+		Validate.isTrue(type != null, "Type of suspicious activity must be non null");
+		Validate.isTrue(page != null, "Page must be non null");
 		
 		AddSuspiciousActivityDbDto activity = new AddSuspiciousActivityDbDto();
 		

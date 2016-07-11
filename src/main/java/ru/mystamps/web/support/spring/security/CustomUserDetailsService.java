@@ -51,7 +51,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String login) {
-		Validate.isTrue(login != null, "Login should be non null");
+		Validate.isTrue(login != null, "Login must be non null");
 		
 		LOG.debug("Find user by login '{}'", login);
 		
