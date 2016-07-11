@@ -28,11 +28,13 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -113,6 +115,21 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		interceptor.setParamName("lang");
 		
 		registry.addInterceptor(interceptor);
+	}
+	
+	@Override
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		// This is a temporary guard against CVE-2016-5007.
+		// Should be removed after upgrading to Spring MVC 4.3.1+ and Spring Security 4.1.1+.
+		// See also: http://pivotal.io/security/cve-2016-5007
+		AntPathMatcher pathMatcher = new AntPathMatcher();
+		pathMatcher.setTrimTokens(false);
+		configurer.setPathMatcher(pathMatcher);
+		
+		// If enabled a method mapped to "/users" also matches to "/users/"
+		configurer.setUseTrailingSlashMatch(false);
+		// If enabled a method mapped to "/users" also matches to "/users.*"
+		configurer.setUseSuffixPatternMatch(false);
 	}
 	
 	@Bean(name = "localeResolver")
