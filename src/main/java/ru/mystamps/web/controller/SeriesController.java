@@ -210,9 +210,7 @@ public class SeriesController {
 		
 		model.addAttribute(
 			"isSeriesInCollection",
-			currentUserId == null
-			? false
-			: collectionService.isSeriesInCollection(currentUserId, series.getId())
+			collectionService.isSeriesInCollection(currentUserId, series.getId())
 		);
 		
 		model.addAttribute(
