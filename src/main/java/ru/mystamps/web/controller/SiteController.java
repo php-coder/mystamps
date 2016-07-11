@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -48,35 +52,40 @@ public class SiteController {
 	
 	@RequestMapping(Url.INDEX_PAGE)
 	public String showIndexPage(Model model, Locale userLocale) {
-		model.addAttribute("categoryCounter", categoryService.countAll());
-		model.addAttribute("countryCounter", countryService.countAll());
-		model.addAttribute("seriesCounter", seriesService.countAll());
-		model.addAttribute("stampsCounter", seriesService.countAllStamps());
-		model.addAttribute("collectionsCounter", collectionService.countCollectionsOfUsers());
+		long categoryCounter    = categoryService.countAll();
+		long countryCounter     = countryService.countAll();
+		long seriesCounter      = seriesService.countAll();
+		long stampsCounter      = seriesService.countAllStamps();
+		long collectionsCounter = collectionService.countCollectionsOfUsers();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute(
-			"recentlyAddedSeries",
-			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang)
-		);
+		Iterable<SeriesInfoDto> recentlyAdded =
+			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang);
 		
-		model.addAttribute(
-			"recentlyAddedCollections",
-			collectionService.findRecentlyCreated(AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS)
-		);
+		Iterable<LinkEntityDto> recentlyCreated =
+			collectionService.findRecentlyCreated(AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS);
+		
+		model.addAttribute("categoryCounter", categoryCounter);
+		model.addAttribute("countryCounter", countryCounter);
+		model.addAttribute("seriesCounter", seriesCounter);
+		model.addAttribute("stampsCounter", stampsCounter);
+		model.addAttribute("collectionsCounter", collectionsCounter);
+		model.addAttribute("recentlyAddedSeries", recentlyAdded);
+		model.addAttribute("recentlyAddedCollections", recentlyCreated);
 		
 		return "site/index";
 	}
 	
 	/**
 	 * @author Sergey Chechenev
+	 * @author Slava Semushin
 	 */
 	@RequestMapping(Url.SITE_EVENTS_PAGE)
 	public void viewSiteEvents(Model model) {
-		model.addAttribute(
-			"activities",
-			suspiciousActivityService.findSuspiciousActivities()
-		);
+		List<SuspiciousActivityDto> activities =
+			suspiciousActivityService.findSuspiciousActivities();
+		
+		model.addAttribute("activities", activities);
 	}
 	
 }

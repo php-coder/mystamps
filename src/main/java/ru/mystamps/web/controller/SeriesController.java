@@ -199,25 +199,26 @@ public class SeriesController {
 			return null;
 		}
 		
-		model.addAttribute("addImageForm", new AddImageForm());
+		String michelNumbers  = CatalogUtils.toShortForm(series.getMichel().getNumbers());
+		String scottNumbers   = CatalogUtils.toShortForm(series.getScott().getNumbers());
+		String yvertNumbers   = CatalogUtils.toShortForm(series.getYvert().getNumbers());
+		String gibbonsNumbers = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
+		
+		// CheckStyle: ignore LineLength for next 1 lines
+		boolean isSeriesInCollection = collectionService.isSeriesInCollection(currentUserId, series.getId());
+		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
+		AddImageForm form = new AddImageForm();
+		
 		model.addAttribute("series", series);
+		model.addAttribute("addImageForm", form);
 		
-		// CheckStyle: ignore LineLength for next 4 lines
-		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel().getNumbers()));
-		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott().getNumbers()));
-		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert().getNumbers()));
-		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons().getNumbers()));
+		model.addAttribute("michelNumbers", michelNumbers);
+		model.addAttribute("scottNumbers", scottNumbers);
+		model.addAttribute("yvertNumbers", yvertNumbers);
+		model.addAttribute("gibbonsNumbers", gibbonsNumbers);
 		
-		model.addAttribute(
-			"isSeriesInCollection",
-			collectionService.isSeriesInCollection(currentUserId, series.getId())
-		);
-		
-		model.addAttribute(
-			"allowAddingImages",
-			isUserCanAddImagesToSeries(series)
-		);
-		
+		model.addAttribute("isSeriesInCollection", isSeriesInCollection);
+		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
 		return "series/info";
@@ -246,25 +247,25 @@ public class SeriesController {
 			return null;
 		}
 		
+		String michelNumbers  = CatalogUtils.toShortForm(series.getMichel().getNumbers());
+		String scottNumbers   = CatalogUtils.toShortForm(series.getScott().getNumbers());
+		String yvertNumbers   = CatalogUtils.toShortForm(series.getYvert().getNumbers());
+		String gibbonsNumbers = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
+		
+		// CheckStyle: ignore LineLength for next 1 lines
+		boolean isSeriesInCollection = collectionService.isSeriesInCollection(currentUserId, series.getId());
+		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
+		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
+		
 		model.addAttribute("series", series);
 		
-		// CheckStyle: ignore LineLength for next 4 lines
-		model.addAttribute("michelNumbers", CatalogUtils.toShortForm(series.getMichel().getNumbers()));
-		model.addAttribute("scottNumbers", CatalogUtils.toShortForm(series.getScott().getNumbers()));
-		model.addAttribute("yvertNumbers", CatalogUtils.toShortForm(series.getYvert().getNumbers()));
-		model.addAttribute("gibbonsNumbers", CatalogUtils.toShortForm(series.getGibbons().getNumbers()));
+		model.addAttribute("michelNumbers", michelNumbers);
+		model.addAttribute("scottNumbers", scottNumbers);
+		model.addAttribute("yvertNumbers", yvertNumbers);
+		model.addAttribute("gibbonsNumbers", gibbonsNumbers);
 		
-		model.addAttribute(
-			"isSeriesInCollection",
-			collectionService.isSeriesInCollection(currentUserId, series.getId())
-		);
-		
-		model.addAttribute(
-			"allowAddingImages",
-			isUserCanAddImagesToSeries(series)
-		);
-		
-		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
+		model.addAttribute("isSeriesInCollection", isSeriesInCollection);
+		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {

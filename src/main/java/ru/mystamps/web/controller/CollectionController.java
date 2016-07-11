@@ -69,7 +69,8 @@ public class CollectionController {
 			return null;
 		}
 		
-		model.addAttribute("ownerName", collection.getOwnerName());
+		String owner = collection.getOwnerName();
+		model.addAttribute("ownerName", owner);
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		Iterable<SeriesInfoDto> seriesOfCollection =
@@ -77,15 +78,20 @@ public class CollectionController {
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {
-			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collectionId));
-			model.addAttribute("countryCounter", countryService.countCountriesOf(collectionId));
-			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
-			model.addAttribute("stampsCounter", seriesService.countStampsOf(collectionId));
+			long categoryCounter = categoryService.countCategoriesOf(collectionId);
+			long countryCounter  = countryService.countCountriesOf(collectionId);
+			long seriesCounter   = seriesService.countSeriesOf(collectionId);
+			long stampsCounter   = seriesService.countStampsOf(collectionId);
 			
 			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);
-			model.addAttribute("statOfCollectionByCategories", categoriesStat);
+			List<Object[]> countriesStat  = getCountriesStatistics(collectionId, lang);
 			
-			List<Object[]> countriesStat = getCountriesStatistics(collectionId, lang);
+			model.addAttribute("categoryCounter", categoryCounter);
+			model.addAttribute("countryCounter", countryCounter);
+			model.addAttribute("seriesCounter", seriesCounter);
+			model.addAttribute("stampsCounter", stampsCounter);
+			
+			model.addAttribute("statOfCollectionByCategories", categoriesStat);
 			model.addAttribute("statOfCollectionByCountries", countriesStat);
 		}
 		

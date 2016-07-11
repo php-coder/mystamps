@@ -44,6 +44,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
@@ -104,13 +105,17 @@ public class CountryController {
 			return null;
 		}
 		
-		model.addAttribute("countryId", country.getId());
-		model.addAttribute("countrySlug", country.getSlug());
-		model.addAttribute("countryName", country.getName());
+		Integer id  = country.getId();
+		String slug = country.getSlug();
+		String name = country.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer countryId = country.getId();
-		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
+		Iterable<SeriesInfoDto> series = seriesService.findByCountryId(id, lang);
+		
+		model.addAttribute("countryId", id);
+		model.addAttribute("countrySlug", slug);
+		model.addAttribute("countryName", name);
+		model.addAttribute("seriesOfCountry", series);
 		
 		return "country/info";
 	}
@@ -139,7 +144,9 @@ public class CountryController {
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("countries", countryService.findAllAsLinkEntities(lang));
+		Iterable<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		
+		model.addAttribute("countries", countries);
 	}
 	
 }

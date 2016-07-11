@@ -41,6 +41,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
@@ -101,13 +102,17 @@ public class CategoryController {
 			return null;
 		}
 		
-		model.addAttribute("categoryId", category.getId());
-		model.addAttribute("categorySlug", category.getSlug());
-		model.addAttribute("categoryName", category.getName());
+		Integer id  = category.getId();
+		String slug = category.getSlug();
+		String name = category.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer categoryId = category.getId();
-		model.addAttribute("seriesOfCategory", seriesService.findByCategoryId(categoryId, lang));
+		Iterable<SeriesInfoDto> series = seriesService.findByCategoryId(id, lang);
+		
+		model.addAttribute("categoryId", id);
+		model.addAttribute("categorySlug", slug);
+		model.addAttribute("categoryName", name);
+		model.addAttribute("seriesOfCategory", series);
 		
 		return "category/info";
 	}
@@ -115,7 +120,9 @@ public class CategoryController {
 	@RequestMapping(Url.LIST_CATEGORIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("categories", categoryService.findAllAsLinkEntities(lang));
+		Iterable<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
+		
+		model.addAttribute("categories", categories);
 	}
 	
 }
