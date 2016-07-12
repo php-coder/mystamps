@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.service.dto.Currency;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -29,15 +30,14 @@ import java.util.Date;
 @Getter
 @RequiredArgsConstructor
 public class PurchaseAndSaleDto {
-	private final Long id;
 	private final Date date;
 	private final String sellerName;
 	private final String sellerUrl;
 	private final String buyerName;
 	private final String buyerUrl;
 	private final String transactionUrl;
-	private final Double firstPrice;
+	private final BigDecimal firstPrice;
 	private final Currency firstCurrency;
-	private final Double secondPrice;
+	private final BigDecimal secondPrice;
 	private final Currency secondCurrency;
 }

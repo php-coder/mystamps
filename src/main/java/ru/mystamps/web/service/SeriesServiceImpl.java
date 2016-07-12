@@ -335,6 +335,9 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.findAllForSitemap();
 	}
 	
+	/**
+	 * @author Sergey Chechenev
+	 */
 	@Override
 	@Transactional(readOnly = true)
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {

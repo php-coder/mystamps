@@ -54,6 +54,7 @@ import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SelectEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
@@ -221,10 +222,11 @@ public class SeriesController {
 		);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
-
+		
+		List<PurchaseAndSaleDto> salesList = seriesService.findPurchasesAndSales(series.getId());
 		model.addAttribute(
 			"purchasesAndSalesList",
-			seriesService.findPurchasesAndSales(series.getId())
+			salesList
 		);
 		
 		return "series/info";

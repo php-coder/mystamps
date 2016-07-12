@@ -111,20 +111,34 @@ final class RowMappers {
 	}
 	
 	public static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int i) throws SQLException {
-		Long id                 = rs.getLong("id");
 		Date date               = rs.getDate("date");
 		String sellerName       = rs.getString("seller_name");
 		String sellerUrl        = rs.getString("seller_url");
 		String buyerName        = rs.getString("buyer_name");
 		String buyerUrl         = rs.getString("buyer_url");
 		String transactionUrl   = rs.getString("transaction_url");
-		Double firstPrice       = rs.getDouble("first_price");
-		Currency firstCurrency  = Currency.valueOf(rs.getString("first_currency")); 
-		Double secondPrice      = rs.getDouble("second_price");
-		Currency secondCurrency = Currency.valueOf(rs.getString("second_currency"));
+		
+		String firstPriceStr    = rs.getString("first_price");
+		BigDecimal firstPrice   = firstPriceStr != null
+			? new BigDecimal(firstPriceStr)
+			: null;
+		
+		String firstCurrencyStr = rs.getString("first_currency");
+		Currency firstCurrency  = firstCurrencyStr != null
+			? Currency.valueOf(firstCurrencyStr)
+			: null;
+		
+		String secondPriceStr   = rs.getString("second_price");
+		BigDecimal secondPrice  = secondPriceStr != null
+			? new BigDecimal(secondPriceStr)
+			: null;
+		
+		String secondCurrencyStr = rs.getString("second_currency");
+		Currency secondCurrency  = secondCurrencyStr != null
+			? Currency.valueOf(secondCurrencyStr)
+			: null;
 		
 		return new PurchaseAndSaleDto(
-			id,
 			date,
 			sellerName,
 			sellerUrl,

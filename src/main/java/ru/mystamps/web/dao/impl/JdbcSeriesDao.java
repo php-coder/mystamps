@@ -250,6 +250,9 @@ public class JdbcSeriesDao implements SeriesDao {
 		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
+	/**
+	 * @author Sergey Chechenev
+	 */
 	@Override
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
 		Map<String, Object> params = new HashMap<>();
