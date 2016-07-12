@@ -57,7 +57,7 @@
 		<pmd.plugin.version>3.6</pmd.plugin.version>
 		<jacoco.plugin.version>0.7.5.201505241946</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
-		<javadoc.plugin.version>2.10.3</javadoc.plugin.version>
+		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		
 		<!--
