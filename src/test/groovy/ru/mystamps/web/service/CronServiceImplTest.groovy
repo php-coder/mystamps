@@ -20,6 +20,7 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
+import ru.mystamps.web.service.dto.AdminDailyReport
 
 class CronServiceImplTest extends Specification {
 	
@@ -38,6 +39,84 @@ class CronServiceImplTest extends Specification {
 		usersActivationService,
 		mailService
 	)
+	
+	private static def assertMidnight(Date date) {
+		assert date[Calendar.HOUR_OF_DAY] == 0
+		assert date[Calendar.MINUTE]      == 0
+		assert date[Calendar.SECOND]      == 0
+		assert date[Calendar.MILLISECOND] == 0
+	}
+	
+	private static def assertDatesEqual(Date first, Date second) {
+		assert first[Calendar.YEAR]         == second[Calendar.YEAR]
+		assert first[Calendar.MONTH]        == second[Calendar.MONTH]
+		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
+	}
+	
+	private static def assertMidnightOfYesterday(Date date) {
+		assert date != null
+		assertDatesEqual(date, new Date().previous())
+		assertMidnight(date)
+	}
+	
+	private static def assertMidnightOfToday(Date date) {
+		assert date != null
+		assertDatesEqual(date, new Date())
+		assertMidnight(date)
+	}
+	
+	//
+	// Tests for sendDailyStatistics()
+	//
+	
+	def "sendDailyStatistics() should invoke services and pass start date to them"() {
+		when:
+			service.sendDailyStatistics()
+		then:
+			1 * categoryService.countAddedSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * countryService.countAddedSince( { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * seriesService.countAddedSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * usersActivationService.countCreatedSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * userService.countRegisteredSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+	}
+	
+	def "sendDailyStatistics() should prepare report and pass it to mail service"() {
+		given:
+			categoryService.countAddedSince(_ as Date) >> 1
+			countryService.countAddedSince(_ as Date) >> 2
+			seriesService.countAddedSince(_ as Date) >> 3
+			usersActivationService.countCreatedSince(_ as Date) >> 4
+			userService.countRegisteredSince(_ as Date) >> 5
+		when:
+			service.sendDailyStatistics()
+		then:
+			1 * mailService.sendDailyStatisticsToAdmin({ AdminDailyReport report ->
+				assert report != null
+				assertMidnightOfYesterday(report.startDate)
+				assertMidnightOfToday(report.endDate)
+				assert report.addedCategoriesCounter == 1
+				assert report.addedCountriesCounter == 2
+				assert report.addedSeriesCounter == 3
+				assert report.registrationRequestsCounter == 4
+				assert report.registeredUsersCounter == 5
+				return true
+			})
+	}
 	
 	//
 	// Tests for purgeUsersActivations()
