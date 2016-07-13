@@ -743,6 +743,12 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.plugin.version}</version>
+				<configuration>
+					<includes>
+						<include>**/mystamps/web/service/*</include>
+						<include>**/mystamps/web/util/*</include>
+					</includes>
+				</configuration>
 			</plugin>
 			
 			<plugin>
