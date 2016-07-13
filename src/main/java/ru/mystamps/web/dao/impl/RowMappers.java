@@ -117,26 +117,10 @@ final class RowMappers {
 		String buyerName        = rs.getString("buyer_name");
 		String buyerUrl         = rs.getString("buyer_url");
 		String transactionUrl   = rs.getString("transaction_url");
-		
-		String firstPriceStr    = rs.getString("first_price");
-		BigDecimal firstPrice   = firstPriceStr != null
-			? new BigDecimal(firstPriceStr)
-			: null;
-		
-		String firstCurrencyStr = rs.getString("first_currency");
-		Currency firstCurrency  = firstCurrencyStr != null
-			? Currency.valueOf(firstCurrencyStr)
-			: null;
-		
-		String secondPriceStr   = rs.getString("second_price");
-		BigDecimal secondPrice  = secondPriceStr != null
-			? new BigDecimal(secondPriceStr)
-			: null;
-		
-		String secondCurrencyStr = rs.getString("second_currency");
-		Currency secondCurrency  = secondCurrencyStr != null
-			? Currency.valueOf(secondCurrencyStr)
-			: null;
+		BigDecimal firstPrice   = rs.getBigDecimal("first_price");
+		Currency firstCurrency  = JdbcUtils.getCurrency(rs, "first_currency");
+		BigDecimal secondPrice  = rs.getBigDecimal("second_price");
+		Currency secondCurrency = JdbcUtils.getCurrency(rs, "second_currency");
 		
 		return new PurchaseAndSaleDto(
 			date,

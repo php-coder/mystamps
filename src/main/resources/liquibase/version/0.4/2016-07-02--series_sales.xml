@@ -40,9 +40,9 @@
 				             foreignKeyName="fk_buyer_id_transaction_patricipants_id"/>
 			</column>
 			<column name="transaction_url" type="VARCHAR(255)"/>
-			<column name="first_price" type="VARCHAR(12)"/>
+			<column name="first_price" type="DECIMAL"/>
 			<column name="first_currency" type="VARCHAR(3)"/>
-			<column name="second_price" type="VARCHAR(12)"/>
+			<column name="second_price" type="DECIMAL"/>
 			<column name="second_currency" type="VARCHAR(3)"/>
 		</createTable>
 	</changeSet>

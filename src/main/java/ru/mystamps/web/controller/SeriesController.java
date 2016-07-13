@@ -223,11 +223,8 @@ public class SeriesController {
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
-		List<PurchaseAndSaleDto> salesList = seriesService.findPurchasesAndSales(series.getId());
-		model.addAttribute(
-			"purchasesAndSalesList",
-			salesList
-		);
+		List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
+		model.addAttribute("purchasesAndSalesList", purchasesAndSales);
 		
 		return "series/info";
 	}

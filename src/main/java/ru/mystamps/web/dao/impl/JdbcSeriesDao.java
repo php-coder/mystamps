@@ -255,8 +255,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	 */
 	@Override
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("series_id", seriesId);
+		Map<String, Object> params = Collections.singletonMap("series_id", seriesId);
 		
 		return jdbcTemplate.query(findPurchasesAndSalesSql, params, RowMappers::forPurchaseAndSaleDto);
 	}
