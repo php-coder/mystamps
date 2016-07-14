@@ -85,6 +85,10 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
+			1 * seriesService.countUpdatedSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
 			1 * usersActivationService.countCreatedSince({ Date date ->
 				assertMidnightOfYesterday(date)
 				return true
@@ -100,8 +104,9 @@ class CronServiceImplTest extends Specification {
 			categoryService.countAddedSince(_ as Date) >> 1
 			countryService.countAddedSince(_ as Date) >> 2
 			seriesService.countAddedSince(_ as Date) >> 3
-			usersActivationService.countCreatedSince(_ as Date) >> 4
-			userService.countRegisteredSince(_ as Date) >> 5
+			seriesService.countUpdatedSince(_ as Date) >> 4
+			usersActivationService.countCreatedSince(_ as Date) >> 5
+			userService.countRegisteredSince(_ as Date) >> 6
 		when:
 			service.sendDailyStatistics()
 		then:
@@ -112,8 +117,9 @@ class CronServiceImplTest extends Specification {
 				assert report.addedCategoriesCounter == 1
 				assert report.addedCountriesCounter == 2
 				assert report.addedSeriesCounter == 3
-				assert report.registrationRequestsCounter == 4
-				assert report.registeredUsersCounter == 5
+				assert report.updatedSeriesCounter == 4
+				assert report.registrationRequestsCounter == 5
+				assert report.registeredUsersCounter == 6
 				return true
 			})
 	}

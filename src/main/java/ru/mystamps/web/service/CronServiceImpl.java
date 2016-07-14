@@ -62,6 +62,7 @@ public class CronServiceImpl implements CronService {
 		report.setAddedCategoriesCounter(categoryService.countAddedSince(yesterday));
 		report.setAddedCountriesCounter(countryService.countAddedSince(yesterday));
 		report.setAddedSeriesCounter(seriesService.countAddedSince(yesterday));
+		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));
 		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
 		

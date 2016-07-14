@@ -193,7 +193,7 @@ public class MailServiceImpl implements MailService {
 		ctx.put("added_countries_cnt", String.valueOf(report.getAddedCountriesCounter()));
 		ctx.put("added_categories_cnt", String.valueOf(report.getAddedCategoriesCounter()));
 		ctx.put("added_series_cnt", String.valueOf(report.getAddedSeriesCounter()));
-		ctx.put("updated_series_cnt", "-1");
+		ctx.put("updated_series_cnt", String.valueOf(report.getUpdatedSeriesCounter()));
 		ctx.put("updated_collections_cnt", "-1"); // TODO: #357
 		// CheckStyle: ignore LineLength for next 1 line
 		ctx.put("registration_requests_cnt", String.valueOf(report.getRegistrationRequestsCounter()));

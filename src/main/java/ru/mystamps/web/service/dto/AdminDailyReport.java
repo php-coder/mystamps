@@ -30,6 +30,7 @@ public class AdminDailyReport {
 	private long addedCategoriesCounter;
 	private long addedCountriesCounter;
 	private long addedSeriesCounter;
+	private long updatedSeriesCounter;
 	private long registrationRequestsCounter;
 	private long registeredUsersCounter;
 }

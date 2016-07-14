@@ -698,6 +698,33 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countUpdatedSince()
+	//
+	
+	def "countUpdatedSince() should throw exception when date is null"() {
+		when:
+			service.countUpdatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 45
+		when:
+			long result = service.countUpdatedSince(expectedDate)
+		then:
+			1 * seriesDao.countUpdatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for isSeriesExist()
 	//
 	
