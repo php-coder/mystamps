@@ -118,7 +118,7 @@
 										<td th:text="#{t_page_not_found}" th:case=" 'PageNotFound' ">Page not found</td>
 										<td th:text="#{t_auth_failed}" th:case=" 'AuthenticationFailed' ">Authentication failed</td>
 										/*/-->
-										<td th:text="${#dates.format(activity.occurredAt, 'dd.MM.yyyy HH:mm')}">15.02.2016 00:00</td>
+										<td th:text="${#dates.format(activity.occurredAt, 'dd.MM.yyyy HH:mm:ss')}">15.02.2016 00:00:00</td>
 										<td th:text="${activity.method}">POST</td>
 										<td th:text="${activity.page}">/series/search/by_catalog</td>
 										<td th:text="${activity.userLogin}">coder</td>
@@ -128,7 +128,7 @@
 									</tr>
 									<tr>
 										<td>Invalid CSRF token</td>
-										<td>20.02.2016 00:00</td>
+										<td>20.02.2016 00:00:00</td>
 										<td>POST</td>
 										<td>/series/search/by_catalog</td>
 										<td></td>
@@ -138,7 +138,7 @@
 									</tr>
 									<tr>
 										<td>Missing CSRF token</td>
-										<td>15.02.2016 00:00</td>
+										<td>15.02.2016 00:00:01</td>
 										<td>POST</td>
 										<td>/series/add</td>
 										<td></td>
@@ -148,7 +148,7 @@
 									</tr>
 									<tr>
 										<td>Page not found</td>
-										<td>15.02.2016 00:00</td>
+										<td>15.02.2016 00:00:02</td>
 										<td>GET</td>
 										<td>/site/eventss</td>
 										<td>admin</td>
@@ -158,7 +158,7 @@
 									</tr>
 									<tr>
 										<td>Page not found</td>
-										<td>15.02.2016 00:00</td>
+										<td>15.02.2016 00:00:03</td>
 										<td>POST</td>
 										<td>/series/search/by_catalogd</td>
 										<td></td>
@@ -168,7 +168,7 @@
 									</tr>
 									<tr>
 										<td>Authentication failed</td>
-										<td>15.02.2016 00:00</td>
+										<td>15.02.2016 00:00:04</td>
 										<td>POST</td>
 										<td>/account/login</td>
 										<td></td>
