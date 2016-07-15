@@ -24,5 +24,6 @@ import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 public interface SuspiciousActivityDao {
 	void add(AddSuspiciousActivityDbDto activity);
-	List<SuspiciousActivityDto> findAll();
+	long countAll();
+	List<SuspiciousActivityDto> findAll(int page, int recordsPerPage);
 }

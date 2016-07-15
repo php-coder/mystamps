@@ -19,6 +19,8 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +33,7 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 @RequiredArgsConstructor
 public class SuspiciousActivityServiceImpl implements SuspiciousActivityService {
@@ -39,7 +42,18 @@ public class SuspiciousActivityServiceImpl implements SuspiciousActivityService 
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
-	public List<SuspiciousActivityDto> findSuspiciousActivities() {
-		return suspiciousActivityDao.findAll();
+	public long countAll() {
+		return suspiciousActivityDao.countAll();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
+	public List<SuspiciousActivityDto> findSuspiciousActivities(int page, int recordsPerPage) {
+		Validate.isTrue(page > 0, "Page must be greater than zero");
+		Validate.isTrue(recordsPerPage > 0, "RecordsPerPage must be greater than zero");
+		
+		return suspiciousActivityDao.findAll(page, recordsPerPage);
+	}
+	
 }

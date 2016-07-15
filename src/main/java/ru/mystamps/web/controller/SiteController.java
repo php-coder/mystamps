@@ -23,6 +23,7 @@ import java.util.Locale;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +37,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.util.LocaleUtils;
+import ru.mystamps.web.util.Pager;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,6 +45,7 @@ public class SiteController {
 	
 	private static final int AMOUNT_OF_RECENTLY_ADDED_SERIES = 10; // NOPMD: LongVariable
 	private static final int AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS = 10; // NOPMD: LongVariable
+	private static final int RECORDS_PER_PAGE = 50;
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
@@ -81,10 +84,17 @@ public class SiteController {
 	 * @author Slava Semushin
 	 */
 	@RequestMapping(Url.SITE_EVENTS_PAGE)
-	public void viewSiteEvents(Model model) {
-		List<SuspiciousActivityDto> activities =
-			suspiciousActivityService.findSuspiciousActivities();
+	public void viewSiteEvents(
+		@RequestParam(value = "page", defaultValue = "1") int pageNum,
+		Model model) {
 		
+		int page = Math.max(1, pageNum);
+		long activitiesRecords = suspiciousActivityService.countAll();
+		List<SuspiciousActivityDto> activities =
+			suspiciousActivityService.findSuspiciousActivities(page, RECORDS_PER_PAGE);
+		Pager pager = new Pager(activitiesRecords, RECORDS_PER_PAGE, page);
+		
+		model.addAttribute("pager", pager);
 		model.addAttribute("activities", activities);
 	}
 	

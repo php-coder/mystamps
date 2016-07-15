@@ -18,6 +18,7 @@
 package ru.mystamps.web.service
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto
@@ -29,16 +30,64 @@ class SuspiciousActivityServiceImplTest extends Specification {
 	private SuspiciousActivityService service = new SuspiciousActivityServiceImpl(suspiciousActivityDao)
 	
 	//
+	// Tests for countAll()
+	//
+	
+	def "countAll() should invoke dao and return its result"() {
+			given:
+				long expectedResult = 21
+			when:
+				long result = service.countAll()
+			then:
+				1 * suspiciousActivityDao.countAll() >> expectedResult
+			and:
+				result == expectedResult
+		}
+	
+	//
 	// Tests for findSuspiciousActivities()
 	//
 	
+	@Unroll
+	def "findSuspiciousActivities() should throw exception when page = #page"(int page) {
+		when:
+			service.findSuspiciousActivities(page, 10)
+		then:
+			thrown IllegalArgumentException
+		where:
+			page | _
+			-1   | _
+			0    | _
+	}
+	
+	@Unroll
+	def "findSuspiciousActivities() should throw exception when recordsPerPage = #recordsPerPage"(int recordsPerPage) {
+		when:
+			service.findSuspiciousActivities(1, recordsPerPage)
+		then:
+			thrown IllegalArgumentException
+		where:
+			recordsPerPage | _
+			-1             | _
+			0              | _
+	}
+	
 	def "findSuspiciousActivities() should invoke dao and return result from dao"() {
 		given:
+			int expectedPage = 5
+			int expectedRecordsPerPage = 10
 			List<SuspiciousActivityDto> expectedResult = [ TestObjects.createSuspiciousActivityDto() ] as List
 		when:
-			List<SuspiciousActivityDto> result = service.findSuspiciousActivities()
+			List<SuspiciousActivityDto> result =
+				service.findSuspiciousActivities(expectedPage, expectedRecordsPerPage)
 		then:
-			1 * suspiciousActivityDao.findAll() >> expectedResult
+			1 * suspiciousActivityDao.findAll({ int page ->
+				assert page == expectedPage
+				return true
+			}, { int recordsPerPage ->
+				assert recordsPerPage == expectedRecordsPerPage
+				return true
+			}) >> expectedResult
 		and:
 			result == expectedResult
 	}

@@ -23,7 +23,9 @@ import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 public interface SuspiciousActivityService {
-	List<SuspiciousActivityDto> findSuspiciousActivities();
+	long countAll();
+	List<SuspiciousActivityDto> findSuspiciousActivities(int page, int recordsPerPage);
 }

@@ -41,6 +41,10 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
 	
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${suspicious_activity.count_all}")
+	private String countAllSuspiciousActivitiesSql;
+	
 	@Value("${suspicious_activity.find_all}")
 	private String findAllSuspiciousActivitiesSql;
 	
@@ -68,14 +72,28 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 		);
 	}
 	
+	@Override
+	public long countAll() {
+		return jdbcTemplate.queryForObject(
+			countAllSuspiciousActivitiesSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
 	/**
 	 * @author Sergey Chechenev
+	 * @author Slava Semushin
 	 */
 	@Override
-	public List<SuspiciousActivityDto> findAll() {
+	public List<SuspiciousActivityDto> findAll(int page, int recordsPerPage) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("limit", recordsPerPage);
+		params.put("offset", (page - 1) * recordsPerPage);
+		
 		return jdbcTemplate.query(
 			findAllSuspiciousActivitiesSql,
-			Collections.emptyMap(),
+			params,
 			RowMappers::forSuspiciousActivityDto
 		);
 	}
