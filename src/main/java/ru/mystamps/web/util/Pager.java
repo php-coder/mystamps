@@ -112,7 +112,7 @@ public class Pager {
 	}
 	
 	// I hope that we'll fix these one day
-	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
+	@SuppressWarnings("PMD.NPathComplexity")
 	private static List<Integer> createItems(
 		int totalRecords,
 		int recordsPerPage,
