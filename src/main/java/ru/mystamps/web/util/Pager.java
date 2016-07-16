@@ -124,19 +124,21 @@ public class Pager {
 		}
 		
 		int prevItemsCnt = 0;
-		for (int i = MAX_ITEMS_BEFORE_CURRENT; i >= 1; i--) {
+		for (int i = 1; i <= MAX_ITEMS_BEFORE_CURRENT; i++) {
 			int page = currentPage - i;
-			if (page >= FIRST_PAGE) {
-				prevItemsCnt++;
+			if (page < FIRST_PAGE) {
+				break;
 			}
+			prevItemsCnt++;
 		}
 		
 		int nextItemsCnt = 0;
 		for (int i = 1; i <= MAX_ITEMS_AFTER_CURRENT; i++) {
 			int page = currentPage + i;
-			if (page <= totalPages) {
-				nextItemsCnt++;
+			if (page > totalPages) {
+				break;
 			}
+			nextItemsCnt++;
 		}
 		
 		// we've added too much to a both sides
