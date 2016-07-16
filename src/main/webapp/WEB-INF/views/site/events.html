@@ -182,36 +182,38 @@
 					</div>
 					
 					<div th:if="${not #lists.isEmpty(activities)}" class="row text-center">
-						<nav>
-							<ul class="pagination">
-								<li class="disabled" th:class="${pager.prev == null}? 'disabled'">
-									<span aria-hidden="true" th:if="${pager.prev == null}">&laquo;</span>
-									<!--/*/
-									<a href="#" aria-label="Previous"
-										th:if="${pager.prev != null}"
-										th:href="@{${SITE_EVENTS_PAGE}(page=${pager.prev})}">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-									/*/-->
-								</li>
-								<li class="active" th:each="item : ${pager.items}" th:class="${item == pager.currentPage}? 'active'">
-									<a href="#" th:href="@{${SITE_EVENTS_PAGE}(page=${item})}"
-										th:utext="|${item} &lt;span class='sr-only'&gt;(current)&lt;/span&gt;|">
-										1 <span class="sr-only">(current)</span>
-									</a>
-								</li>
-								<li class="disabled" th:class="${pager.next == null}? 'disabled'">
-									<span aria-hidden="true" th:if="${pager.next == null}">&raquo;</span>
-									<!--/*/
-									<a href="#" aria-label="Next"
-										th:if="${pager.next != null}"
-										th:href="@{${SITE_EVENTS_PAGE}(page=${pager.next})}">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-									/*/-->
-								</li>
-							</ul>
-						</nav>
+						<div class="col-sm-12">
+							<nav>
+								<ul class="pagination">
+									<li class="disabled" th:class="${pager.prev == null}? 'disabled'">
+										<span aria-hidden="true" th:if="${pager.prev == null}">&laquo;</span>
+										<!--/*/
+										<a href="#" aria-label="Previous"
+											th:if="${pager.prev != null}"
+											th:href="@{${SITE_EVENTS_PAGE}(page=${pager.prev})}">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+										/*/-->
+									</li>
+									<li class="active" th:each="item : ${pager.items}" th:class="${item == pager.currentPage}? 'active'">
+										<a href="#" th:href="@{${SITE_EVENTS_PAGE}(page=${item})}"
+											th:utext="|${item} &lt;span class='sr-only'&gt;(current)&lt;/span&gt;|">
+											1 <span class="sr-only">(current)</span>
+										</a>
+									</li>
+									<li class="disabled" th:class="${pager.next == null}? 'disabled'">
+										<span aria-hidden="true" th:if="${pager.next == null}">&raquo;</span>
+										<!--/*/
+										<a href="#" aria-label="Next"
+											th:if="${pager.next != null}"
+											th:href="@{${SITE_EVENTS_PAGE}(page=${pager.next})}">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+										/*/-->
+									</li>
+								</ul>
+							</nav>
+						</div>
 					</div>
 				</div>
 			</div>
