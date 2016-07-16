@@ -68,3 +68,7 @@ fi
 print_log verify.log   'Run integration tests'
 
 rm -f cs.log pmd.log license.log bootlint.log jasmine.log validator.log test.log verify.log
+
+if [ -n "$CS_FAIL$PMD_FAIL$LICENSE_FAIL$BOOTLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$VERIFY_FAIL" ]; then
+	exit 1
+fi

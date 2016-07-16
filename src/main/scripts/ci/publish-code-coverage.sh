@@ -11,3 +11,7 @@ print_status "$JACOCO_FAIL" 'Publish code coverage'
 print_log jacoco.log 'Publish code coverage'
 
 rm -f jacoco.log
+
+if [ -n "$JACOCO_FAIL" ]; then
+	exit 1
+fi
