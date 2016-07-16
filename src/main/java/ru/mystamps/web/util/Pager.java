@@ -88,7 +88,11 @@ public class Pager {
 	}
 	
 	private static int countTotalPages(int totalRecords, int recordsPerPage) {
-		return (int)Math.ceil(totalRecords / recordsPerPage);
+		int totalPages = totalRecords / recordsPerPage;
+		if (totalRecords % recordsPerPage > 0) {
+			totalPages++;
+		}
+		return totalPages;
 	}
 	
 	private static Integer findPrev(int currentPage) {

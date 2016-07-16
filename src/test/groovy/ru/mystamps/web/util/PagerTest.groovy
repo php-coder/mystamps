@@ -216,4 +216,11 @@ class PagerTest extends Specification {
 			3           || null
 	}
 	
+	def "getNext() should return null when total records less than records per page"() {
+		when:
+			Pager pager = new Pager(2, 25, 1)
+		then:
+			pager.next == null
+	}
+	
 }
