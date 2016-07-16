@@ -26,8 +26,8 @@ public final class ValidationRules {
 	public static final String LOGIN_REGEXP = "[-_\\.a-zA-Z0-9]+";
 	
 	public static final int NAME_MAX_LENGTH = Db.User.NAME_LENGTH;
-	public static final String NAME_REGEXP1 = "[- \\p{L}]+";
-	public static final String NAME_REGEXP2 = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
+	public static final String NAME_REGEXP = "[- \\p{L}]+";
+	public static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final int PASSWORD_MIN_LENGTH = 4;
 	

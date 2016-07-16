@@ -77,12 +77,12 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	)
 	@Pattern.List({
 		@Pattern(
-			regexp = ValidationRules.NAME_REGEXP1,
+			regexp = ValidationRules.NAME_REGEXP,
 			message = "{name.invalid}",
 			groups = Name2Checks.class
 		),
 		@Pattern(
-			regexp = ValidationRules.NAME_REGEXP2,
+			regexp = ValidationRules.NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Name3Checks.class
 		)
