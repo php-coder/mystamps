@@ -17,19 +17,11 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
 import org.togglz.core.manager.FeatureManager;
@@ -56,18 +48,6 @@ public class ApplicationBootstrap {
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
-	}
-	
-	// TODO: remove @Qualifier and inject by type
-	// See for details: https://github.com/spring-projects/spring-boot/issues/2774
-	@Bean
-	public FilterRegistrationBean getSpringSecurityFilterChainBindedToError(
-			@Qualifier("springSecurityFilterChain") Filter springSecurityFilterChain) {
-		
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(springSecurityFilterChain);
-		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
-		return registration;
 	}
 	
 }
