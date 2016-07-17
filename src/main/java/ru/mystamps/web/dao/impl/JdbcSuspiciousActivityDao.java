@@ -42,9 +42,8 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
 	
-	@SuppressWarnings("PMD.LongVariable")
 	@Value("${suspicious_activity.count_all}")
-	private String countAllSuspiciousActivitiesSql;
+	private String countAllSql;
 	
 	@Value("${suspicious_activity.count_by_type_since}")
 	private String countByTypeSinceSql;
@@ -79,7 +78,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Override
 	public long countAll() {
 		return jdbcTemplate.queryForObject(
-			countAllSuspiciousActivitiesSql,
+			countAllSql,
 			Collections.<String, Object>emptyMap(),
 			Long.class
 		);
