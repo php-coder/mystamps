@@ -27,6 +27,7 @@ class CronServiceImplTest extends Specification {
 	private CategoryService categoryService = Mock()
 	private CountryService countryService = Mock()
 	private SeriesService seriesService = Mock()
+	private SuspiciousActivityService suspiciousActivityService = Mock()
 	private MailService mailService = Mock()
 	private UserService userService = Mock()
 	private UsersActivationService usersActivationService = Mock()
@@ -35,6 +36,7 @@ class CronServiceImplTest extends Specification {
 		categoryService,
 		countryService,
 		seriesService,
+		suspiciousActivityService,
 		userService,
 		usersActivationService,
 		mailService
@@ -97,6 +99,22 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
+			1 * suspiciousActivityService.countByTypeSince("PageNotFound", { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * suspiciousActivityService.countByTypeSince("AuthenticationFailed", { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * suspiciousActivityService.countByTypeSince("MissingCsrfToken", { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * suspiciousActivityService.countByTypeSince("InvalidCsrfToken", { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
 	}
 	
 	def "sendDailyStatistics() should prepare report and pass it to mail service"() {
@@ -107,6 +125,12 @@ class CronServiceImplTest extends Specification {
 			seriesService.countUpdatedSince(_ as Date) >> 4
 			usersActivationService.countCreatedSince(_ as Date) >> 5
 			userService.countRegisteredSince(_ as Date) >> 6
+		and:
+			long expectedEvents = 7 + 8 + 9 + 10
+			suspiciousActivityService.countByTypeSince("PageNotFound", _ as Date) >> 7
+			suspiciousActivityService.countByTypeSince("AuthenticationFailed", _ as Date) >> 8
+			suspiciousActivityService.countByTypeSince("MissingCsrfToken", _ as Date) >> 9
+			suspiciousActivityService.countByTypeSince("InvalidCsrfToken", _ as Date) >> 10
 		when:
 			service.sendDailyStatistics()
 		then:
@@ -120,6 +144,11 @@ class CronServiceImplTest extends Specification {
 				assert report.updatedSeriesCounter == 4
 				assert report.registrationRequestsCounter == 5
 				assert report.registeredUsersCounter == 6
+				assert report.notFoundCounter == 7
+				assert report.failedAuthCounter == 8
+				assert report.missingCsrfCounter == 9
+				assert report.invalidCsrfCounter == 10
+				assert report.countEvents() == expectedEvents
 				return true
 			})
 	}

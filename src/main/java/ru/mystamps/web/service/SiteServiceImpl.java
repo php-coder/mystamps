@@ -40,17 +40,17 @@ import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
-	
 	// see initiate-suspicious_activities_types-table changeset
 	// in src/main/resources/liquibase/initial-state.xml
-	private static final String PAGE_NOT_FOUND = "PageNotFound";
-	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+	public static final String PAGE_NOT_FOUND = "PageNotFound";
+	public static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
 	
 	// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
 	// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
-	private static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
-	private static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
+	public static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+	public static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
+	
+	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	

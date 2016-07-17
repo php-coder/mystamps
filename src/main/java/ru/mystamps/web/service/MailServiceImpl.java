@@ -190,22 +190,30 @@ public class MailServiceImpl implements MailService {
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("from_date", fromDate);
 		ctx.put("to_date", tillDate);
-		ctx.put("added_countries_cnt", String.valueOf(report.getAddedCountriesCounter()));
-		ctx.put("added_categories_cnt", String.valueOf(report.getAddedCategoriesCounter()));
-		ctx.put("added_series_cnt", String.valueOf(report.getAddedSeriesCounter()));
-		ctx.put("updated_series_cnt", String.valueOf(report.getUpdatedSeriesCounter()));
-		ctx.put("updated_collections_cnt", "-1"); // TODO: #357
-		// CheckStyle: ignore LineLength for next 1 line
-		ctx.put("registration_requests_cnt", String.valueOf(report.getRegistrationRequestsCounter()));
-		ctx.put("registered_users_cnt", String.valueOf(report.getRegisteredUsersCounter()));
-		ctx.put("events_cnt", "-1");
-		ctx.put("not_found_cnt", "-1");
-		ctx.put("failed_auth_cnt", "-1");
-		ctx.put("missing_csrf_cnt", "-1");
-		ctx.put("invalid_csrf_cnt", "-1");
-		ctx.put("bad_request_cnt", "-1");  // TODO: #122
-
+		
+		put(ctx, "added_countries_cnt", report.getAddedCountriesCounter());
+		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
+		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
+		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
+		put(ctx, "updated_collections_cnt", "-1"); // TODO: #357
+		put(ctx, "registration_requests_cnt", report.getRegistrationRequestsCounter());
+		put(ctx, "registered_users_cnt", report.getRegisteredUsersCounter());
+		put(ctx, "events_cnt", report.countEvents());
+		put(ctx, "not_found_cnt", report.getNotFoundCounter());
+		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
+		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
+		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
+		put(ctx, "bad_request_cnt", "-1");  // TODO: #122
+		
 		return new StrSubstitutor(ctx).replace(template);
+	}
+	
+	private static void put(Map<String, String> ctx, String key, String value) {
+		ctx.put(key, value);
+	}
+	
+	private static void put(Map<String, String> ctx, String key, long value) {
+		ctx.put(key, String.valueOf(value));
 	}
 	
 }

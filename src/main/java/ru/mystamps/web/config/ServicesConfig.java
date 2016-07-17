@@ -79,6 +79,7 @@ public class ServicesConfig {
 			getCategoryService(),
 			getCountryService(),
 			getSeriesService(),
+			getSuspiciousActivityService(),
 			getUserService(),
 			getUsersActivationService(),
 			getMailService()

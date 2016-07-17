@@ -45,6 +45,7 @@ public class CronServiceImpl implements CronService {
 	private final CategoryService categoryService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
+	private final SuspiciousActivityService suspiciousActivityService;
 	private final UserService userService;
 	private final UsersActivationService usersActivationService;
 	private final MailService mailService;
@@ -65,6 +66,30 @@ public class CronServiceImpl implements CronService {
 		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));
 		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
+		
+		long notFoundCounter = suspiciousActivityService.countByTypeSince(
+			SiteServiceImpl.PAGE_NOT_FOUND,
+			yesterday
+		);
+		report.setNotFoundCounter(notFoundCounter);
+		
+		long failedAuthCounter = suspiciousActivityService.countByTypeSince(
+			SiteServiceImpl.AUTHENTICATION_FAILED,
+			yesterday
+		);
+		report.setFailedAuthCounter(failedAuthCounter);
+		
+		long missingCsrfCounter = suspiciousActivityService.countByTypeSince(
+			SiteServiceImpl.MISSING_CSRF_TOKEN,
+			yesterday
+		);
+		report.setMissingCsrfCounter(missingCsrfCounter);
+		
+		long invalidCsrfCounter = suspiciousActivityService.countByTypeSince(
+			SiteServiceImpl.INVALID_CSRF_TOKEN,
+			yesterday
+		);
+		report.setInvalidCsrfCounter(invalidCsrfCounter);
 		
 		mailService.sendDailyStatisticsToAdmin(report);
 	}

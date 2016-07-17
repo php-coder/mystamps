@@ -33,4 +33,18 @@ public class AdminDailyReport {
 	private long updatedSeriesCounter;
 	private long registrationRequestsCounter;
 	private long registeredUsersCounter;
+	private long notFoundCounter;
+	private long failedAuthCounter;
+	private long missingCsrfCounter;
+	private long invalidCsrfCounter;
+	
+	public long countEvents() {
+		long eventsCounter = 0L;
+		eventsCounter = Math.addExact(eventsCounter, notFoundCounter);
+		eventsCounter = Math.addExact(eventsCounter, failedAuthCounter);
+		eventsCounter = Math.addExact(eventsCounter, missingCsrfCounter);
+		eventsCounter = Math.addExact(eventsCounter, invalidCsrfCounter);
+		return eventsCounter;
+	}
+	
 }

@@ -17,8 +17,10 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,15 @@ public class SuspiciousActivityServiceImpl implements SuspiciousActivityService 
 	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
 	public long countAll() {
 		return suspiciousActivityDao.countAll();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countByTypeSince(String type, Date date) {
+		Validate.isTrue(StringUtils.isNotBlank(type), "Type must be non-blank");
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return suspiciousActivityDao.countByTypeSince(type, date);
 	}
 	
 	@Override

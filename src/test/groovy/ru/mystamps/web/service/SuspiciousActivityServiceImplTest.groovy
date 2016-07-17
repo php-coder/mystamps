@@ -45,6 +45,49 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		}
 	
 	//
+	// Tests for countByTypeSince()
+	//
+	
+	@Unroll
+	def "countByTypeSince() should throw exception when type = '#type'"(String type) {
+		when:
+			service.countByTypeSince(type, new Date())
+		then:
+			thrown IllegalArgumentException
+		where:
+			type | _
+			null | _
+			''   | _
+			'  ' | _
+	}
+	
+	def "countByTypeSince() should throw exception when date is null"() {
+		when:
+			service.countByTypeSince("AnyType", null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
+		given:
+			String expectedType = "ExpectedType"
+			Date expectedDate = new Date().plus(1)
+			long expectedResult = 47
+		when:
+			long result = service.countByTypeSince(expectedType, expectedDate)
+		then:
+			1 * suspiciousActivityDao.countByTypeSince({ String type ->
+				assert type == expectedType
+				return true
+			}, { Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findSuspiciousActivities()
 	//
 	

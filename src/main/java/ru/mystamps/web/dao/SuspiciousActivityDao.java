@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
@@ -25,5 +26,6 @@ import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 public interface SuspiciousActivityDao {
 	void add(AddSuspiciousActivityDbDto activity);
 	long countAll();
+	long countByTypeSince(String type, Date date);
 	List<SuspiciousActivityDto> findAll(int page, int recordsPerPage);
 }

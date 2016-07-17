@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,9 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${suspicious_activity.count_all}")
 	private String countAllSuspiciousActivitiesSql;
+	
+	@Value("${suspicious_activity.count_by_type_since}")
+	private String countByTypeSinceSql;
 	
 	@Value("${suspicious_activity.find_all}")
 	private String findAllSuspiciousActivitiesSql;
@@ -77,6 +81,19 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 		return jdbcTemplate.queryForObject(
 			countAllSuspiciousActivitiesSql,
 			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByTypeSince(String type, Date date) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("date", date);
+		
+		return jdbcTemplate.queryForObject(
+			countByTypeSinceSql,
+			params,
 			Long.class
 		);
 	}
