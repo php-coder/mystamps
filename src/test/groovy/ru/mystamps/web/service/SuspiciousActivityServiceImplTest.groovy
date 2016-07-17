@@ -34,15 +34,15 @@ class SuspiciousActivityServiceImplTest extends Specification {
 	//
 	
 	def "countAll() should invoke dao and return its result"() {
-			given:
-				long expectedResult = 21
-			when:
-				long result = service.countAll()
-			then:
-				1 * suspiciousActivityDao.countAll() >> expectedResult
-			and:
-				result == expectedResult
-		}
+		given:
+			long expectedResult = 21
+		when:
+			long result = service.countAll()
+		then:
+			1 * suspiciousActivityDao.countAll() >> expectedResult
+		and:
+			result == expectedResult
+	}
 	
 	//
 	// Tests for countByTypeSince()
