@@ -26,13 +26,12 @@ public final class JdbcUtils {
 	}
 	
 	// @see http://stackoverflow.com/q/2920364/checking-for-a-null-int-value-from-a-java-resultset
-	@SuppressWarnings("PMD.PrematureDeclaration")
 	public static Integer getInteger(ResultSet resultSet, String fieldName) throws SQLException {
-		int value = resultSet.getInt(fieldName);
 		if (resultSet.wasNull()) {
 			return null;
 		}
 		
+		int value = resultSet.getInt(fieldName);
 		return Integer.valueOf(value);
 	}
 	
