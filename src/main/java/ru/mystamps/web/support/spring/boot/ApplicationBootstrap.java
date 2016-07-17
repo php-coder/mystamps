@@ -29,6 +29,9 @@ import org.togglz.core.manager.FeatureManager;
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 
+// PMD: "All methods are static" here because it's a program entry point.
+// CheckStyle: I cannot declare the constructor as private because app won't start.
+@SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
 @EnableAutoConfiguration
 @Import({
 	ApplicationContext.class,
