@@ -49,7 +49,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	private String countByTypeSinceSql;
 	
 	@Value("${suspicious_activity.find_all}")
-	private String findAllSuspiciousActivitiesSql;
+	private String findAllSql;
 	
 	@Override
 	public void add(AddSuspiciousActivityDbDto activity) {
@@ -108,7 +108,7 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 		params.put("offset", (page - 1) * recordsPerPage);
 		
 		return jdbcTemplate.query(
-			findAllSuspiciousActivitiesSql,
+			findAllSql,
 			params,
 			RowMappers::forSuspiciousActivityDto
 		);
