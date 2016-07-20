@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+  <changeSet id="change field method of table suspicious_activities" author="a.zorin" context="scheme">
+    <!-- Field size set to fit the longest name of HTTP method ("PROPFIND") -->
+   <modifyDataType tableName="suspicious_activities" columnName="method" newDataType="VARCHAR(8)"/>
+  </changeSet>
+
+</databaseChangeLog>

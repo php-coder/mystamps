@@ -320,4 +320,29 @@ class SiteServiceImplTest extends Specification {
 			null     | _
 	}
 	
+	def "logEvent() should abbreviate method when pass argument greater than 8 symbols"() {
+		given:
+			String method = "PROPFIND" + "."
+		and:
+			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH-3) + '...'
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+			assert activity?.method == exceptedMethod
+			return true
+			})
+	}
+
+	def "logEvent() should pass method to dao when it is length equal or less than 8 symbols"() {
+		given:
+			String method = "PROPFIND"
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.method == method
+				return true
+			})
+	}
 }
