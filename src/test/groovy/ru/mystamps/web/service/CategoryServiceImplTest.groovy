@@ -24,7 +24,6 @@ import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
-import ru.mystamps.web.dao.dto.SelectEntityDto
 import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
@@ -192,40 +191,6 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAllAsSelectEntities(String)
-	//
-	
-	def "findAllAsSelectEntities(String) should call dao"() {
-		given:
-			SelectEntityDto category1 = new SelectEntityDto(1, 'First Category')
-		and:
-			SelectEntityDto category2 = new SelectEntityDto(2, 'Second Category')
-		and:
-			List<SelectEntityDto> expectedCategories = [ category1, category2 ]
-		and:
-			categoryDao.findAllAsSelectEntities(_ as String) >> expectedCategories
-		when:
-			Iterable<SelectEntityDto> resultCategories = service.findAllAsSelectEntities('fr')
-		then:
-			resultCategories == expectedCategories
-	}
-	
-	@Unroll
-	def "findAllAsSelectEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
-		when:
-			service.findAllAsSelectEntities(expectedLanguage)
-		then:
-			1 * categoryDao.findAllAsSelectEntities({ String language ->
-				assert language == expectedLanguage
-				return true
-			})
-		where:
-			expectedLanguage | _
-			'ru'             | _
-			null             | _
-	}
-	
-	//
 	// Tests for findAllAsLinkEntities(String)
 	//
 	
@@ -263,26 +228,32 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for findOneAsLinkEntity()
 	//
 	
-	def "findOneAsLinkEntity() should throw exception when category id is null"() {
+	@Unroll
+	def "findOneAsLinkEntity() should throw exception when category slug is '#slug'"(String slug) {
 		when:
-			service.findOneAsLinkEntity(null, 'ru')
+			service.findOneAsLinkEntity(slug, 'ru')
 		then:
 			thrown IllegalArgumentException
+		where:
+			slug | _
+			' '  | _
+			''   | _
+			null | _
 	}
 	
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
-			Integer expectedCategoryId = 15
+			String expectedSlug = 'people'
 		and:
 			String expectedLang = 'fr'
 		and:
 			LinkEntityDto expectedDto = TestObjects.createLinkEntityDto()
 		when:
-			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedCategoryId, expectedLang)
+			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, expectedLang)
 		then:
 			1 * categoryDao.findOneAsLinkEntity(
-				{ Integer categoryId ->
-					assert expectedCategoryId == categoryId
+				{ String slug ->
+					assert expectedSlug == slug
 					return true
 				},
 				{ String lang ->

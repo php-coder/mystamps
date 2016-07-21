@@ -105,7 +105,7 @@
 					<ul th:if="${not #lists.isEmpty(seriesOfCountry)}" th:remove="all-but-first">
 						<li th:each="series : ${seriesOfCountry}">
 							<span th:if="${series.category.id != null}" th:remove="tag">
-								<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+								<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
 							</span>
 							
 							<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">

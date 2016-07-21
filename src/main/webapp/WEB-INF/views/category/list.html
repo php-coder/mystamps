@@ -92,7 +92,7 @@
 					
 					<ul th:if="${not #lists.isEmpty(categories)}">
 						<li th:each="category: ${categories}">
-							<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${category.id},slug=${category.slug})}" th:text="${category.name}">Animals</a>
+							<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${category.slug})}" th:text="${category.name}">Animals</a>
 						</li>
 					</ul>
 				</div>

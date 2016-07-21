@@ -123,15 +123,19 @@
 								<span id="category.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<select id="category" class="form-control" required="required" th:field="*{category}">
+								<select id="category" name="category" class="form-control" required="required">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+									<option th:each="category : ${categories}"
+										th:value="${category.slug}"
+										th:text="${category.name}"
+										th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.slug}">
+									</option>
 									/*/-->
 									<!--/*-->
-									<option value="1">Animals</option>
-									<option value="2">Music</option>
-									<option value="3">Sport</option>
+									<option value="animals">Animals</option>
+									<option value="music">Music</option>
+									<option value="sport">Sport</option>
 									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('CREATE_CATEGORY')">

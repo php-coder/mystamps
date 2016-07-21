@@ -35,7 +35,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
@@ -82,22 +81,17 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return categoryDao.findAllAsSelectEntities(lang);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang) {
-		Validate.isTrue(categoryId != null, "Category id must be non null");
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
+		Validate.isTrue(slug != null, "Category slug must be non null");
+		Validate.isTrue(!slug.trim().isEmpty(), "Category slug must be non empty");
 		
-		return categoryDao.findOneAsLinkEntity(categoryId, lang);
+		return categoryDao.findOneAsLinkEntity(slug, lang);
 	}
 	
 	@Override

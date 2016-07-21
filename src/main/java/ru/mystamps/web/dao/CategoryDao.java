@@ -22,7 +22,6 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 public interface CategoryDao {
 	Integer add(AddCategoryDbDto category);
@@ -32,7 +31,6 @@ public interface CategoryDao {
 	long countCategoriesOfCollection(Integer collectionId);
 	long countAddedSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

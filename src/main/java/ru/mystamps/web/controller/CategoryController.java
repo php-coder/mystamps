@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,7 +34,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -82,7 +85,7 @@ public class CategoryController {
 		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
 		
 		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())
+			.buildAndExpand(categoryUrl.getSlug())
 			.toString();
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
@@ -91,8 +94,8 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)
-	public String showInfo(
-		@Category @PathVariable("id") LinkEntityDto category,
+	public String showInfoBySlug(
+		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -110,12 +113,29 @@ public class CategoryController {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series = seriesService.findByCategoryId(id, lang);
 		
-		model.addAttribute("categoryId", id);
 		model.addAttribute("categorySlug", slug);
 		model.addAttribute("categoryName", name);
 		model.addAttribute("seriesOfCategory", series);
 		
 		return "category/info";
+	}
+	
+	@RequestMapping(Url.INFO_CATEGORY_BY_ID_PAGE)
+	public View showInfoById(
+		@Category @PathVariable("slug") LinkEntityDto country,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_CATEGORY_PAGE);
+		
+		return view;
 	}
 	
 	@RequestMapping(Url.LIST_CATEGORIES_PAGE)

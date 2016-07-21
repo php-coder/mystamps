@@ -54,7 +54,6 @@ import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddImageForm;
@@ -108,9 +107,9 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("categories")
-	public Iterable<SelectEntityDto> getCategories(Locale userLocale) {
+	public List<LinkEntityDto> getCategories(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findAllAsSelectEntities(lang);
+		return categoryService.findAllAsLinkEntities(lang);
 	}
 	
 	@ModelAttribute("countries")
@@ -130,7 +129,7 @@ public class SeriesController {
 	
 	@RequestMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
 	public String showFormWithCategory(
-		@Category @PathVariable("id") LinkEntityDto category,
+		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model) {
 		
 		AddSeriesForm form = new AddSeriesForm();

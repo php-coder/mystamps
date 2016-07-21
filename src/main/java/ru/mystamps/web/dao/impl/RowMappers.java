@@ -26,7 +26,6 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -68,13 +67,6 @@ final class RowMappers {
 		return new SitemapInfoDto(
 			rs.getInt("id"),
 			rs.getTimestamp("updated_at")
-		);
-	}
-	
-	public static SelectEntityDto forSelectEntityDto(ResultSet rs, int i) throws SQLException {
-		return new SelectEntityDto(
-			rs.getInt("id"),
-			rs.getString("name")
 		);
 	}
 	

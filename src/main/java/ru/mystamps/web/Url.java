@@ -51,15 +51,17 @@ public final class Url {
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String ADD_SERIES_PAGE               = "/series/add";
-	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{id}";
+	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{slug}";
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
 	public static final String INFO_SERIES_PAGE              = "/series/{id}";
 	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
 	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
-	public static final String INFO_CATEGORY_PAGE    = "/category/{id}/{slug}";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
+	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
+	// For backward compatibility
+	public static final String INFO_CATEGORY_BY_ID_PAGE = "/category/{id}/{slug}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String LIST_COUNTRIES_PAGE   = "/country/list";

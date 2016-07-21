@@ -37,7 +37,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SelectEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -66,14 +65,11 @@ public class JdbcCategoryDao implements CategoryDao {
 	@Value("${category.count_stamps_by_categories}")
 	private String countStampsByCategoriesSql;
 	
-	@Value("${category.find_all_categories_names_with_ids}")
-	private String findCategoriesNamesWithIdsSql;
-	
 	@Value("${category.find_all_categories_names_with_slug}")
 	private String findCategoriesNamesWithSlugSql;
 	
-	@Value("${category.find_category_link_info_by_id}")
-	private String findCategoryLinkEntityByIdSql;
+	@Value("${category.find_category_link_info_by_slug}")
+	private String findLinkEntityBySlugSql;
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
@@ -162,15 +158,6 @@ public class JdbcCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return jdbcTemplate.query(
-			findCategoriesNamesWithIdsSql,
-			Collections.singletonMap("lang", lang),
-			RowMappers::forSelectEntityDto
-		);
-	}
-	
-	@Override
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return jdbcTemplate.query(
 			findCategoriesNamesWithSlugSql,
@@ -180,14 +167,14 @@ public class JdbcCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang) {
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("category_id", categoryId);
+		params.put("slug", slug);
 		params.put("lang", lang);
 		
 		try {
 			return jdbcTemplate.queryForObject(
-				findCategoryLinkEntityByIdSql,
+				findLinkEntityBySlugSql,
 				params,
 				RowMappers::forLinkEntityDto
 			);

@@ -149,7 +149,7 @@
 							<div class="panel-body" th:remove="all-but-first">
 								<p th:each="series : ${recentlyAddedSeries}">
 									<span th:if="${series.category.id != null}" th:remove="tag">
-										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
 									</span>
 									
 									<span th:if="${series.country.id != null}" th:remove="tag">

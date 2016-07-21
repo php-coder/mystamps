@@ -39,10 +39,7 @@ public class WhenAnonymousUserOpenNotExistingCategoryPage
 	
 	@Test(groups = "logic")
 	public void shouldShow404Page() {
-		String absentCategoryId = "888";
-		String url = Url.INFO_CATEGORY_PAGE
-			.replace("{id}", absentCategoryId)
-			.replace("{slug}", "category-404-error-test");
+		String url = Url.INFO_CATEGORY_PAGE.replace("{slug}", "category-404-error-test");
 		page.open(url);
 		
 		checkStandardStructure();

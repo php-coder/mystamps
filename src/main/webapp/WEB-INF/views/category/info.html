@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<!--/*/
-		<link rel="canonical" th:href="@{${PUBLIC_URL} + ${INFO_CATEGORY_PAGE}(id=${categoryId},slug=${categorySlug})}" />
+		<link rel="canonical" th:href="@{${PUBLIC_URL} + ${INFO_CATEGORY_PAGE}(slug=${categorySlug})}" />
 		/*/-->
 	</head>
 	<body>
@@ -95,7 +95,7 @@
 					
 					<!--/*/
 					<div class="row" th:if="${justAddedCategory}">
-						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_category_just_added(@{${ADD_SERIES_WITH_CATEGORY_PAGE}(id=${categoryId})})}">
+						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_category_just_added(@{${ADD_SERIES_WITH_CATEGORY_PAGE}(slug=${categorySlug})})}">
 							Category has been added.<br />
 							Now you could <a href="../series/add.html" class="alert-link">proceed with creating series</a>.
 						</div>

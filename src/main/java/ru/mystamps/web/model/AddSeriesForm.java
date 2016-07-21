@@ -71,12 +71,12 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
 public class AddSeriesForm implements AddSeriesDto {
 	
-	// FIXME: change type to SelectEntityDto or plain Integer
+	// FIXME: change type to plain Integer
 	@NotNull
 	@Category
 	private LinkEntityDto category;
 	
-	// FIXME: change type to SelectEntityDto or plain Integer
+	// FIXME: change type to plain Integer
 	@Country
 	private LinkEntityDto country;
 	
