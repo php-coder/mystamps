@@ -83,6 +83,6 @@
     mode: '0640'
   with_first_found:
   - prod/my-stamps.ru.crt
-  - my-stamps.ru.key
+  - my-stamps.ru.crt
   notify:
   - Restarting nginx service
