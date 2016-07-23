@@ -2,6 +2,7 @@
 - hosts: all
   gather_facts: no
   vars:
+    profile: 'test'
     # required for Ubuntu 16.04. which installs Python 2.x to a non-standard path
     ansible_python_interpreter: "/usr/bin/python2.7"
 
@@ -44,3 +45,11 @@
   - role: mystamps-nginx
     become: yes
     become_method: sudo
+
+  - {
+      role: mystamps-backup,
+      user_db_password: 'q1',
+      when: profile == 'prod',
+      become: yes,
+      become_method: sudo
+    }
