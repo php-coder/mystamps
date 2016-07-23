@@ -1,12 +1,5 @@
 ---
 
-- name: Removing default nginx configuration
-  file:
-    path: /etc/nginx/conf.d/default.conf
-    state: absent
-  notify:
-  - Restarting nginx service
-
 - name: Updating permissions on /data/logs
   file:
     path: /data/logs
@@ -86,3 +79,8 @@
   - my-stamps.ru.crt
   notify:
   - Restarting nginx service
+
+- name: Running nginx
+  service:
+    name: nginx
+    state: started
