@@ -35,6 +35,26 @@
     state: directory
   when: profile == 'prod'
 
+- name: Creating /data/mystamps/config
+  file:
+    path: /data/mystamps/config
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
+- name: Creating application-prod.properties
+  template:
+    src: application-prod.properties
+    dest: /data/mystamps/config/application-prod.properties
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0600'
+  when: profile == 'prod'
+
 - name: Running service
   service:
     name: mystamps
