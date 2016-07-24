@@ -35,6 +35,15 @@
     state: directory
   when: profile == 'prod'
 
+- name: Creating /data/heap-dumps
+  file:
+    path: /data/heap-dumps
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
 - name: Creating /data/mystamps/config
   file:
     path: /data/mystamps/config
@@ -53,6 +62,17 @@
     owner: mystamps
     group: mystamps
     mode: '0600'
+  notify:
+  - Restarting mystamps service
+  when: profile == 'prod'
+
+- name: Creating mystamps.conf
+  copy:
+    src: mystamps.conf
+    dest: /data/mystamps/mystamps.conf
+    mode: '0644'
+  notify:
+  - Restarting mystamps service
   when: profile == 'prod'
 
 - name: Running service
