@@ -50,32 +50,17 @@
 # openssl req -new -x509 -key my-stamps.ru.key -out my-stamps.ru.crt -days 3650 -subj /CN=my-stamps.ru
 #
 # For uploading production certificate put the files into mystamps-nginx/files/prod directory.
-- name: Uploading certificate (.key file)
+- name: Uploading certificates
   copy:
-    src: "{{ item }}"
-    dest: "/etc/ssl/{{ item | basename }}"
+    src: "{{ profile }}/{{ item }}"
+    dest: "/etc/ssl/{{ item }}"
     force: yes
     backup: no
     owner: root
     group: nginx
     mode: '0640'
-  with_first_found:
-  - prod/my-stamps.ru.key
+  with_items:
   - my-stamps.ru.key
-  notify:
-  - Restarting nginx service
-
-- name: Uploading certificate (.crt file)
-  copy:
-    src: "{{ item }}"
-    dest: "/etc/ssl/{{ item | basename }}"
-    force: yes
-    backup: no
-    owner: root
-    group: nginx
-    mode: '0640'
-  with_first_found:
-  - prod/my-stamps.ru.crt
   - my-stamps.ru.crt
   notify:
   - Restarting nginx service
