@@ -26,6 +26,15 @@
     mode: '0755'
     state: directory
 
+- name: Creating /data/uploads
+  file:
+    path: /data/uploads
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
 - name: Running service
   service:
     name: mystamps
