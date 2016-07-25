@@ -75,6 +75,15 @@
   - Restarting mystamps service
   when: profile == 'prod'
 
+- name: Creating /var/log/mystamps
+  file:
+    path: /var/log/mystamps
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
 - name: Running service
   service:
     name: mystamps
