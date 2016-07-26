@@ -152,7 +152,12 @@ public class SiteServiceImpl implements SiteService {
 		
 		suspiciousActivities.add(activity);
 	}
-	
+
+	/**
+	 * @param method name of method's http
+	 * @return abbreviated name of method with three point at the end
+	 * @author Aleksandr Zorin
+   */
 	private static String abbreviateMethod(String method){
 		return abbreviateIfLengthGreaterThan(method, Db.SuspiciousActivity.METHOD_LENGTH, "method");
 	}

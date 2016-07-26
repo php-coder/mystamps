@@ -32,10 +32,10 @@ public final class Db {
 	}
 	
 	public static final class SuspiciousActivity {
+		public static final int METHOD_LENGTH 		= 7;
 		public static final int PAGE_URL_LENGTH     = 100;
 		public static final int REFERER_PAGE_LENGTH = 255;
 		public static final int USER_AGENT_LENGTH   = 255;
-		public static final int METHOD_LENGTH = 8;
 	}
 	
 	public static final class UsersActivation {

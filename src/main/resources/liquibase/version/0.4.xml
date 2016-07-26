@@ -14,6 +14,5 @@
 	<include file="0.4/2016-01-04--unique_series_in_collection.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-02-19--csrf_events.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-01-14--unique_slug_in_countries.xml" relativeToChangelogFile="true" />
-	<include file="0.4/2016-07-20--change-length-field-method.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
