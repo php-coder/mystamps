@@ -1,6 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
 	
@@ -9,84 +8,49 @@
 	<version>0.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
-	<parent>
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.6.RELEASE</version>
-	</parent>
-	
-	<properties>
-		<lombok.version>1.16.8</lombok.version>
-		<selenium.version>2.53.1</selenium.version>
-		<selenium.htmlunit.version>2.20</selenium.htmlunit.version>
-		<subethasmtp.version>3.1.7</subethasmtp.version>
-		<aspectj.version>1.8.5</aspectj.version>
-		<javax.validation.version>1.1.0.Final</javax.validation.version>
-		<commons.lang.version>3.4</commons.lang.version>
-		<commons.io.version>2.4</commons.io.version>
-		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
-		<togglz.version>2.2.0.Final</togglz.version>
-		
-		<!--
-			Also don't forget to change version in:
-			src/main/java/ru/mystamps/web/config/MvcConfig.java
-			src/main/java/ru/mystamps/web/Url.java
-		-->
-		<bootstrap.version>3.3.6</bootstrap.version>
-		<jquery.version>1.9.1</jquery.version>
-		<selectizejs.version>0.12.1</selectizejs.version>
-		
-		<testng.version>6.8.8</testng.version>
-		<cglib.version>2.2.2</cglib.version>
-		<fest.assert.version>2.0M8</fest.assert.version>
-		
-		<compiler.plugin.version>3.5.1</compiler.plugin.version>
-		<resources.plugin.version>2.7</resources.plugin.version>
-		<clean.plugin.version>3.0.0</clean.plugin.version>
-		<war.plugin.version>2.6</war.plugin.version>
-		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
-		<surefire.plugin.version>2.19.1</surefire.plugin.version>
-		<gmaven.plugin.version>1.4</gmaven.plugin.version>
-		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
-		<jasmine.plugin.version>2.1</jasmine.plugin.version>
-		<minify.plugin.version>1.7.4</minify.plugin.version>
-		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
-		<license.plugin.version>1.9.0</license.plugin.version>
-		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-		<pmd.plugin.version>3.6</pmd.plugin.version>
-		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
-		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
-		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
-		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
-		
-		<!--
-			Definitions and redefinitions of default values from spring-boot-dependencies:
-			https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-dependencies/pom.xml
-		-->
-		<commons-beanutils.version>1.9.2</commons-beanutils.version>
-		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<commons-pool.version>1.5.4</commons-pool.version>
-		<groovy.version>2.0.8</groovy.version>
-		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-		<javax-mail.version>1.5.4</javax-mail.version>
-		<jetty.version>9.2.17.v20160517</jetty.version>
-		<h2.version>1.4.192</h2.version>
-		<mysql.version>5.1.39</mysql.version>
-		<servlet-api.version>3.1.0</servlet-api.version>
-		<slf4j.version>1.7.21</slf4j.version>
-		<spock.version>1.0-groovy-2.0</spock.version>
-		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
-		<thymeleaf-extras-springsecurity4.version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4.version>
-		
-		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
-		<java.version>1.8</java.version>
-		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
-		
-		<skipUnitTests>false</skipUnitTests>
-	</properties>
-	
 	<dependencies>
+		
+		<dependency>
+			<groupId>com.github.heneke.thymeleaf</groupId>
+			<artifactId>thymeleaf-extras-togglz</artifactId>
+			<version>${thymeleaf.togglz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		
+		<!-- Needed for IOUtils -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter/pom.xml -->
 		<dependency>
@@ -105,23 +69,16 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 			<exclusions>
 				<exclusion>
-					<!-- In favour of spring-boot-starter-jetty -->
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.apache.tomcat</groupId>
+					<artifactId>tomcat-jdbc</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-validation/pom.xml -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
@@ -146,6 +103,12 @@
 			<artifactId>spring-boot-starter-log4j</artifactId>
 		</dependency>
 		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-security/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -164,79 +127,29 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-validation/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>org.apache.tomcat</groupId>
-					<artifactId>tomcat-jdbc</artifactId>
+					<!-- In favour of spring-boot-starter-jetty -->
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${servlet-api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${javax.validation.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons.lang.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
-		
-		<!-- Needed for IOUtils -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.github.heneke.thymeleaf</groupId>
-			<artifactId>thymeleaf-extras-togglz</artifactId>
-			<version>${thymeleaf.togglz.version}</version>
-		</dependency>
-		
-		<!-- For running database migration during application's startup time -->
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-console</artifactId>
+			<version>${togglz.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -247,15 +160,70 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-spring-core</artifactId>
+			<artifactId>togglz-spring-security</artifactId>
 			<version>${togglz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+			<version>${hibernate-validator.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Dependencies which used only in test environment -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- Dependencies which used only in prod environment -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.togglz</groupId>
-			<artifactId>togglz-spring-security</artifactId>
-			<version>${togglz.version}</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- For running database migration during application's startup time -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -267,8 +235,9 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-console</artifactId>
+			<artifactId>togglz-spring-core</artifactId>
 			<version>${togglz.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
@@ -292,32 +261,6 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.spockframework</groupId>
-			<artifactId>spock-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<!-- For mocking of non-interface types -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -327,43 +270,15 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>${fest.assert.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.togglz</groupId>
-			<artifactId>togglz-testing</artifactId>
-			<version>${togglz.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.subethamail</groupId>
-			<artifactId>subethasmtp</artifactId>
-			<version>${subethasmtp.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-api</artifactId>
-			<version>${selenium.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-support</artifactId>
-			<version>${selenium.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -382,54 +297,178 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-annotation-processor</artifactId>
-			<version>${hibernate-validator.version}</version>
-			<scope>provided</scope>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<scope>test</scope>
 		</dependency>
 		
-		<!-- Dependencies which used only in prod environment -->
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-			<scope>runtime</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		
-		<!-- Dependencies which used only in test environment -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-			<scope>runtime</scope>
+			<groupId>org.subethamail</groupId>
+			<artifactId>subethasmtp</artifactId>
+			<version>${subethasmtp.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-testing</artifactId>
+			<version>${togglz.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 	</dependencies>
 	
+	<parent>
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.6.RELEASE</version>
+	</parent>
+	
+	<properties>
+		<aspectj.version>1.8.5</aspectj.version>
+		
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<bootstrap.version>3.3.6</bootstrap.version>
+		
+		<cglib.version>2.2.2</cglib.version>
+		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+		<clean.plugin.version>3.0.0</clean.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<commons-pool.version>1.5.4</commons-pool.version>
+		
+		<commons.io.version>2.4</commons.io.version>
+		<commons.lang.version>3.4</commons.lang.version>
+		<compiler.plugin.version>3.5.1</compiler.plugin.version>
+		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
+		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
+		<fest.assert.version>2.0M8</fest.assert.version>
+		<gmaven.plugin.version>1.4</gmaven.plugin.version>
+		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<groovy.version>2.0.8</groovy.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<h2.version>1.4.192</h2.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+		
+		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
+		<jasmine.plugin.version>2.1</jasmine.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-starter-parent (https://git.io/vKFmR) -->
+		<java.version>1.8</java.version>
+		
+		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<javax-mail.version>1.5.4</javax-mail.version>
+		
+		<javax.validation.version>1.1.0.Final</javax.validation.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<jetty.version>9.2.17.v20160517</jetty.version>
+		
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<jquery.version>1.9.1</jquery.version>
+		
+		<license.plugin.version>1.9.0</license.plugin.version>
+		<lombok.version>1.16.8</lombok.version>
+		<minify.plugin.version>1.7.4</minify.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<mysql.version>5.1.39</mysql.version>
+		
+		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
+		<pmd.plugin.version>3.6</pmd.plugin.version>
+		<resources.plugin.version>2.7</resources.plugin.version>
+		
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<selectizejs.version>0.12.1</selectizejs.version>
+		
+		<selenium.htmlunit.version>2.20</selenium.htmlunit.version>
+		<selenium.version>2.53.1</selenium.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<servlet-api.version>3.1.0</servlet-api.version>
+		
+		<skipUnitTests>false</skipUnitTests>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<slf4j.version>1.7.21</slf4j.version>
+		
+		<sortpom.plugin.version>2.4.0</sortpom.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<spock.version>1.0-groovy-2.0</spock.version>
+		
+		<!-- Define default value for spring-boot-starter-parent (https://git.io/vKFmR) -->
+		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
+		
+		<subethasmtp.version>3.1.7</subethasmtp.version>
+		<surefire.plugin.version>2.19.1</surefire.plugin.version>
+		<testng.version>6.8.8</testng.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<thymeleaf-extras-springsecurity4.version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+		
+		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		
+		<togglz.version>2.2.0.Final</togglz.version>
+		<war.plugin.version>2.6</war.plugin.version>
+	</properties>
+	
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		
+		<filters>
+			<filter>${basedir}/src/main/resources/test/spring/test-data.properties</filter>
+		</filters>
+		
 		<resources>
 			<resource>
-				<directory>${basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory>
 				<includes>
 					<include>liquibase/sql/test-*.sql</include>
 				</includes>
@@ -441,21 +480,325 @@
 				</excludes>
 			</resource>
 			<resource>
-				<directory>${basedir}/src/main/javascript</directory>
 				<targetPath>js</targetPath>
+				<directory>${basedir}/src/main/javascript</directory>
 				<includes>
 					<include>**/*.min.js</include>
 				</includes>
 			</resource>
 		</resources>
 		
-		<filters>
-			<filter>
-				${basedir}/src/main/resources/test/spring/test-data.properties
-			</filter>
-		</filters>
-		
 		<plugins>
+			
+			<plugin>
+				<groupId>com.github.ekryd.sortpom</groupId>
+				<artifactId>sortpom-maven-plugin</artifactId>
+				<version>${sortpom.plugin.version}</version>
+				<configuration>
+					<lineSeparator>\n</lineSeparator>
+					<predefinedSortOrder>default_0_4_0</predefinedSortOrder>
+					<keepBlankLines>true</keepBlankLines>
+					<indentBlankLines>true</indentBlankLines>
+					<sortDependencies>scope,groupId,artifactId</sortDependencies>
+					<sortPlugins>groupId,artifactId</sortPlugins>
+					<sortProperties>true</sortProperties>
+					<!-- Use tabs instead of spaces for indentation -->
+					<nrOfIndentSpace>-1</nrOfIndentSpace>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>${jasmine.plugin.version}</version>
+				<configuration>
+					<!--
+						Remove explicit specifying of version when phantomjs will be available for Linux
+						https://github.com/searls/jasmine-maven-plugin/issues/278
+					-->
+					<phantomjs>
+						<version>1.9.8</version>
+					</phantomjs>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>${license.plugin.version}</version>
+				<configuration>
+					<basedir>src</basedir>
+					<header>src/main/config/license_header.txt</header>
+					<strictCheck>true</strictCheck>
+					<includes>
+						<include>**/*.java</include>
+						<include>**/*.groovy</include>
+					</includes>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<copyright.years>${project.inceptionYear}-2016</copyright.years>
+						<author.name>${project.developers[0].name}</author.name>
+						<author.email>${project.developers[0].email}</author.email>
+					</properties>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>${minify.plugin.version}</version>
+				<configuration>
+					<!-- Put minified versions to the same directory so that spring-boot:run can pick it -->
+					<webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
+					<webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
+					<cssSourceDir>WEB-INF/static/styles</cssSourceDir>
+					<cssSourceFiles>
+						<cssSourceFile>main.css</cssSourceFile>
+					</cssSourceFiles>
+					<jsSourceDir>../javascript</jsSourceDir>
+					<jsSourceIncludes>
+						<jsSourceInclude>**/*.js</jsSourceInclude>
+					</jsSourceIncludes>
+					<jsSourceExcludes>
+						<jsSourceExclude>**/*.min.js</jsSourceExclude>
+					</jsSourceExcludes>
+					<skipMerge>true</skipMerge>
+				</configuration>
+				<executions>
+					<execution>
+						<id>minify-resources</id>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin.version}</version>
+				<configuration>
+					<enableRSS>false</enableRSS>
+					<consoleOutput>true</consoleOutput>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<linkXRef>false</linkXRef>
+					<configLocation>${basedir}/src/main/config/checkstyle.xml</configLocation>
+					<suppressionsLocation>${basedir}/src/main/config/checkstyle-suppressions.xml</suppressionsLocation>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${clean.plugin.version}</version>
+				<configuration>
+					<!-- Remove minified resources -->
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/WEB-INF/static/styles</directory>
+							<includes>
+								<include>*.min.css</include>
+							</includes>
+						</fileset>
+						<fileset>
+							<directory>src/main/javascript</directory>
+							<includes>
+								<include>**/*.min.js</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<debug>false</debug>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${enforcer.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-banned-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<bannedDependencies>
+									<excludes>
+										<!-- Because we use jcl-over-slf4j instead -->
+										<exclude>commons-logging</exclude>
+										<exclude>junit:*:*:*:compile</exclude>
+									</excludes>
+								</bannedDependencies>
+								<requireJavaVersion>
+									<version>${java.version}</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${failsafe.plugin.version}</version>
+				<configuration>
+					<useFile>false</useFile>
+					<disableXmlReport>true</disableXmlReport>
+					<suiteXmlFiles>
+						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.plugin.version}</version>
+				<configuration>
+					<nohelp>true</nohelp>
+					<nodeprecatedlist>true</nodeprecatedlist>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${pmd.plugin.version}</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+					<verbose>true</verbose>
+					<targetJdk>${java.version}</targetJdk>
+					<rulesets>
+						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${resources.plugin.version}</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.plugin.version}</version>
+				<configuration>
+					<skipTests>${skipUnitTests}</skipTests>
+					<disableXmlReport>true</disableXmlReport>
+					<!-- Run junit tests only (see #SUREFIRE-377) -->
+					<testNGArtifactName>none:none</testNGArtifactName>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${war.plugin.version}</version>
+				<configuration>
+					<!-- Exclude non-minified versions of resources -->
+					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>${gmaven.plugin.version}</version>
+				<configuration>
+					<providerSelection>2.0</providerSelection>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.gmaven.runtime</groupId>
+						<artifactId>gmaven-runtime-2.0</artifactId>
+						<version>${gmaven.runtime.plugin.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>${native2ascii.plugin.version}</version>
+				<configuration>
+					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>${coveralls.plugin.version}</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.plugin.version}</version>
+				<configuration>
+					<includes>
+						<include>**/mystamps/web/service/*</include>
+						<include>**/mystamps/web/util/*</include>
+					</includes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<changeLogFile>/liquibase/changelog.xml</changeLogFile>
+					<propertyFile>${basedir}/src/main/resources/liquibase/liquibase.properties</propertyFile>
+					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
+					<!-- See also application-prod.properties -->
+					<contexts>scheme,init-data,prod-data</contexts>
+				</configuration>
+			</plugin>
 			
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -494,307 +837,6 @@
 				</executions>
 			</plugin>
 			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.plugin.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<debug>false</debug>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>${resources.plugin.version}</version>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>${clean.plugin.version}</version>
-				<configuration>
-					<!-- Remove minified resources -->
-					<filesets>
-						<fileset>
-							<directory>src/main/webapp/WEB-INF/static/styles</directory>
-							<includes>
-								<include>*.min.css</include>
-							</includes>
-						</fileset>
-						<fileset>
-							<directory>src/main/javascript</directory>
-							<includes>
-								<include>**/*.min.js</include>
-							</includes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.plugin.version}</version>
-				<configuration>
-					<!-- Exclude non-minified versions of resources -->
-					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<version>${native2ascii.plugin.version}</version>
-				<configuration>
-					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire.plugin.version}</version>
-				<configuration>
-					<skipTests>${skipUnitTests}</skipTests>
-					<disableXmlReport>true</disableXmlReport>
-					<!-- Run junit tests only (see #SUREFIRE-377) -->
-					<testNGArtifactName>none:none</testNGArtifactName>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>${gmaven.plugin.version}</version>
-				<configuration>
-					<providerSelection>2.0</providerSelection>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.gmaven.runtime</groupId>
-						<artifactId>gmaven-runtime-2.0</artifactId>
-						<version>${gmaven.runtime.plugin.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.github.searls</groupId>
-				<artifactId>jasmine-maven-plugin</artifactId>
-				<version>${jasmine.plugin.version}</version>
-				<configuration>
-					<!--
-						Remove explicit specifying of version when phantomjs will be available for Linux
-						https://github.com/searls/jasmine-maven-plugin/issues/278
-					-->
-					<phantomjs>
-						<version>1.9.8</version>
-					</phantomjs>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.samaxes.maven</groupId>
-				<artifactId>minify-maven-plugin</artifactId>
-				<version>${minify.plugin.version}</version>
-				<configuration>
-					<!-- Put minified versions to the same directory so that spring-boot:run can pick it -->
-					<webappSourceDir>${basedir}/src/main/webapp</webappSourceDir>
-					<webappTargetDir>${basedir}/src/main/webapp</webappTargetDir>
-					<cssSourceDir>WEB-INF/static/styles</cssSourceDir>
-					<cssSourceFiles>
-						<cssSourceFile>main.css</cssSourceFile>
-					</cssSourceFiles>
-					<jsSourceDir>../javascript</jsSourceDir>
-					<jsSourceIncludes>
-						<jsSourceInclude>**/*.js</jsSourceInclude>
-					</jsSourceIncludes>
-					<jsSourceExcludes>
-						<jsSourceExclude>**/*.min.js</jsSourceExclude>
-					</jsSourceExcludes>
-					<skipMerge>true</skipMerge>
-				</configuration>
-				<executions>
-					<execution>
-						<id>minify-resources</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>minify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${failsafe.plugin.version}</version>
-				<configuration>
-					<useFile>false</useFile>
-					<disableXmlReport>true</disableXmlReport>
-					<suiteXmlFiles>
-						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.version}</version>
-				<configuration>
-					<changeLogFile>
-						/liquibase/changelog.xml
-					</changeLogFile>
-					<propertyFile>
-						${basedir}/src/main/resources/liquibase/liquibase.properties
-					</propertyFile>
-					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also application-prod.properties -->
-					<contexts>scheme,init-data,prod-data</contexts>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<version>${license.plugin.version}</version>
-				<configuration>
-					<basedir>src</basedir>
-					<header>src/main/config/license_header.txt</header>
-					<strictCheck>true</strictCheck>
-					<includes>
-						<include>**/*.java</include>
-						<include>**/*.groovy</include>
-					</includes>
-					<mapping>
-						<java>SLASHSTAR_STYLE</java>
-					</mapping>
-					<properties>
-						<copyright.years>${project.inceptionYear}-2016</copyright.years>
-						<author.name>${project.developers[0].name}</author.name>
-						<author.email>${project.developers[0].email}</author.email>
-					</properties>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${checkstyle.plugin.version}</version>
-				<configuration>
-					<enableRSS>false</enableRSS>
-					<consoleOutput>true</consoleOutput>
-					<includeTestSourceDirectory>true</includeTestSourceDirectory>
-					<linkXRef>false</linkXRef>
-					<configLocation>
-						${basedir}/src/main/config/checkstyle.xml
-					</configLocation>
-					<suppressionsLocation>
-						${basedir}/src/main/config/checkstyle-suppressions.xml
-					</suppressionsLocation>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.plugin.version}</version>
-				<configuration>
-					<linkXRef>false</linkXRef>
-					<verbose>true</verbose>
-					<targetJdk>${java.version}</targetJdk>
-					<rulesets>
-						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
-					</rulesets>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.plugin.version}</version>
-				<configuration>
-					<includes>
-						<include>**/mystamps/web/service/*</include>
-						<include>**/mystamps/web/util/*</include>
-					</includes>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eluder.coveralls</groupId>
-				<artifactId>coveralls-maven-plugin</artifactId>
-				<version>${coveralls.plugin.version}</version>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc.plugin.version}</version>
-				<configuration>
-					<nohelp>true</nohelp>
-					<nodeprecatedlist>true</nodeprecatedlist>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>${enforcer.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>enforce-banned-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<bannedDependencies>
-									<excludes>
-										<!-- Because we use jcl-over-slf4j instead -->
-										<exclude>commons-logging</exclude>
-										<exclude>junit:*:*:*:compile</exclude>
-									</excludes>
-								</bannedDependencies>
-								<requireJavaVersion>
-									<version>${java.version}</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			
 		</plugins>
 		
 	</build>
@@ -803,6 +845,14 @@
 	<description>Site about post stamps</description>
 	<url>https://my-stamps.ru</url>
 	<inceptionYear>2009</inceptionYear>
+	
+	<licenses>
+		<license>
+			<name>GNU GPL v2</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	
 	<developers>
 		<developer>
@@ -826,23 +876,6 @@
 		</developer>
 	</developers>
 	
-	<licenses>
-		<license>
-			<name>GNU GPL v2</name>
-			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	
-	<prerequisites>
-		<maven>3.2.1</maven>
-	</prerequisites>
-	
-	<scm>
-		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
-		<url>https://github.com/php-coder/mystamps</url>
-	</scm>
-	
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/php-coder/mystamps/issues</url>
@@ -852,5 +885,14 @@
 		<system>Travis CI</system>
 		<url>https://travis-ci.org/php-coder/mystamps</url>
 	</ciManagement>
+	
+	<scm>
+		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
+		<url>https://github.com/php-coder/mystamps</url>
+	</scm>
+	
+	<prerequisites>
+		<maven>3.2.1</maven>
+	</prerequisites>
 	
 </project>
