@@ -355,32 +355,38 @@
 	<properties>
 		<lombok.version>1.16.8</lombok.version>
 		<selenium.version>2.53.1</selenium.version>
+		
 		<selenium.htmlunit.version>2.20</selenium.htmlunit.version>
+		
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<aspectj.version>1.8.5</aspectj.version>
+		
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		<commons.lang.version>3.4</commons.lang.version>
+		
 		<commons.io.version>2.4</commons.io.version>
+		
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
+		
 		<togglz.version>2.2.0.Final</togglz.version>
 		
-		<!--
-			Also don't forget to change version in:
-			src/main/java/ru/mystamps/web/config/MvcConfig.java
-			src/main/java/ru/mystamps/web/Url.java
-		-->
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
 		<bootstrap.version>3.3.6</bootstrap.version>
-		<jquery.version>1.9.1</jquery.version>
-		<selectizejs.version>0.12.1</selectizejs.version>
 		
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<jquery.version>1.9.1</jquery.version>
+		
+		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<selectizejs.version>0.12.1</selectizejs.version>
 		<testng.version>6.8.8</testng.version>
+		
 		<cglib.version>2.2.2</cglib.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
-		
 		<compiler.plugin.version>3.5.1</compiler.plugin.version>
 		<resources.plugin.version>2.7</resources.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
 		<war.plugin.version>2.6</war.plugin.version>
+		
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
@@ -388,36 +394,65 @@
 		<jasmine.plugin.version>2.1</jasmine.plugin.version>
 		<minify.plugin.version>1.7.4</minify.plugin.version>
 		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
+		
 		<license.plugin.version>1.9.0</license.plugin.version>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<pmd.plugin.version>3.6</pmd.plugin.version>
+		
 		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
+		
 		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+		
 		<sortpom.plugin.version>2.4.0</sortpom.plugin.version>
 		
-		<!--
-			Definitions and redefinitions of default values from spring-boot-dependencies:
-			https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-dependencies/pom.xml
-		-->
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<commons-pool.version>1.5.4</commons-pool.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<groovy.version>2.0.8</groovy.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<javax-mail.version>1.5.4</javax-mail.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<jetty.version>9.2.17.v20160517</jetty.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<h2.version>1.4.192</h2.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<mysql.version>5.1.39</mysql.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<slf4j.version>1.7.21</slf4j.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<spock.version>1.0-groovy-2.0</spock.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKFmk) -->
 		<thymeleaf-extras-springsecurity4.version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
-		<!-- Definitions and redefinitions of default values from spring-boot-starter-parent -->
+		<!-- Redefine default value from spring-boot-starter-parent (https://git.io/vKFmR) -->
 		<java.version>1.8</java.version>
+		
+		<!-- Define default value for spring-boot-starter-parent (https://git.io/vKFmR) -->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<skipUnitTests>false</skipUnitTests>
