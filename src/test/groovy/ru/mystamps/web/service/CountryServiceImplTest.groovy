@@ -130,7 +130,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should pass slug to dao"() {
 		given:
-			String name = "-foo123 test_"
+			String name = '-foo123 test_'
 		and:
 			String slug = SlugUtils.slugify(name)
 		and:

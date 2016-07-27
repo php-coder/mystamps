@@ -63,14 +63,14 @@ class SuspiciousActivityServiceImplTest extends Specification {
 	
 	def "countByTypeSince() should throw exception when date is null"() {
 		when:
-			service.countByTypeSince("AnyType", null)
+			service.countByTypeSince('AnyType', null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
 		given:
-			String expectedType = "ExpectedType"
+			String expectedType = 'ExpectedType'
 			Date expectedDate = new Date().plus(1)
 			long expectedResult = 47
 		when:

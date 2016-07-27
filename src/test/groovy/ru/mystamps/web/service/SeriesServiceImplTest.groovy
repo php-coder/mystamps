@@ -34,7 +34,7 @@ import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {
-	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
+	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
 	private static final Integer ANY_IMAGE_ID = 18
 	
 	private ImageService imageService = Mock()
@@ -415,7 +415,7 @@ class SeriesServiceImplTest extends Specification {
 			0 * michelCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
@@ -457,7 +457,7 @@ class SeriesServiceImplTest extends Specification {
 			0 * scottCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
@@ -499,7 +499,7 @@ class SeriesServiceImplTest extends Specification {
 			0 * yvertCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
@@ -541,7 +541,7 @@ class SeriesServiceImplTest extends Specification {
 			0 * gibbonsCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	

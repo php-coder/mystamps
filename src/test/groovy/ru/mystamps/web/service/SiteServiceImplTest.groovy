@@ -204,7 +204,7 @@ class SiteServiceImplTest extends Specification {
 
 	def "logEvent() should pass abbreviated method when it's too long"() {
 		given:
-			String method = "PROPFIND"
+			String method = 'PROPFIND'
 		and:
 			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH-3) + '...'
 		when:

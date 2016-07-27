@@ -99,19 +99,19 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("PageNotFound", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('PageNotFound', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("AuthenticationFailed", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('AuthenticationFailed', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("MissingCsrfToken", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('MissingCsrfToken', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("InvalidCsrfToken", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('InvalidCsrfToken', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
@@ -127,10 +127,10 @@ class CronServiceImplTest extends Specification {
 			userService.countRegisteredSince(_ as Date) >> 6
 		and:
 			long expectedEvents = 7 + 8 + 9 + 10
-			suspiciousActivityService.countByTypeSince("PageNotFound", _ as Date) >> 7
-			suspiciousActivityService.countByTypeSince("AuthenticationFailed", _ as Date) >> 8
-			suspiciousActivityService.countByTypeSince("MissingCsrfToken", _ as Date) >> 9
-			suspiciousActivityService.countByTypeSince("InvalidCsrfToken", _ as Date) >> 10
+			suspiciousActivityService.countByTypeSince('PageNotFound', _ as Date) >> 7
+			suspiciousActivityService.countByTypeSince('AuthenticationFailed', _ as Date) >> 8
+			suspiciousActivityService.countByTypeSince('MissingCsrfToken', _ as Date) >> 9
+			suspiciousActivityService.countByTypeSince('InvalidCsrfToken', _ as Date) >> 10
 		when:
 			service.sendDailyStatistics()
 		then:

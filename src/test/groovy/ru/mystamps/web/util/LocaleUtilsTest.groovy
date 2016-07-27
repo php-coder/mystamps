@@ -52,9 +52,9 @@ class LocaleUtilsTest extends Specification {
 		where:
 			locale         | value || expected
 			null           | null  || null
-			null           | "en"  || "en"
-			Locale.ENGLISH | "ru"  || "en"
-			Locale.ENGLISH | null  || "en"
+			null           | 'en'  || 'en'
+			Locale.ENGLISH | 'ru'  || 'en'
+			Locale.ENGLISH | null  || 'en'
 	}
 	
 }
