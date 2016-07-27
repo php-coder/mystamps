@@ -41,17 +41,17 @@ class SlugUtilsTest extends Specification {
 			result == output
 		where:
 			input      || output
-			""         || ""
-			"-_"       || ""
-			"тест"     || ""
-			"test"     || "test"
-			"TEST"     || "test"
-			"test!"    || "test"
-			"_test_"   || "test"
-			"foo3"     || "foo3"
-			"one two"  || "one-two"
-			"one+two"  || "one-two"
-			"one||two" || "one-two"
+			''         || ''
+			'-_'       || ''
+			'тест'     || ''
+			'test'     || 'test'
+			'TEST'     || 'test'
+			'test!'    || 'test'
+			'_test_'   || 'test'
+			'foo3'     || 'foo3'
+			'one two'  || 'one-two'
+			'one+two'  || 'one-two'
+			'one||two' || 'one-two'
 	}
 	
 }

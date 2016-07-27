@@ -160,7 +160,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should use email from registration request"() {
 		given:
-			UsersActivationDto activation = new UsersActivationDto("test@example.org", new Date())
+			UsersActivationDto activation = new UsersActivationDto('test@example.org', new Date())
 		and:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		when:

@@ -152,7 +152,7 @@ class UsersActivationServiceImplTest extends Specification {
 				assert activation != null
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
-				assert activation.locale == new Locale("fr")
+				assert activation.locale == new Locale('fr')
 				return true;
 			})
 	}
@@ -226,9 +226,9 @@ class UsersActivationServiceImplTest extends Specification {
 		given:
 			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto();
 		when:
-			UsersActivationDto result = service.findByActivationKey("0987654321")
+			UsersActivationDto result = service.findByActivationKey('0987654321')
 		then:
-			1 * usersActivationDao.findByActivationKey("0987654321") >> expectedResult
+			1 * usersActivationDao.findByActivationKey('0987654321') >> expectedResult
 		and:
 			result == expectedResult
 	}
