@@ -59,6 +59,7 @@
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+		<sortpom.plugin.version>2.4.0</sortpom.plugin.version>
 		
 		<!--
 			Definitions and redefinitions of default values from spring-boot-dependencies:
@@ -793,6 +794,20 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.github.ekryd.sortpom</groupId>
+				<artifactId>sortpom-maven-plugin</artifactId>
+				<version>${sortpom.plugin.version}</version>
+				<configuration>
+					<lineSeparator>\n</lineSeparator>
+					<predefinedSortOrder>default_0_4_0</predefinedSortOrder>
+					<keepBlankLines>true</keepBlankLines>
+					<indentBlankLines>true</indentBlankLines>
+					<!-- Use tabs instead of spaces for indentation -->
+					<nrOfIndentSpace>-1</nrOfIndentSpace>
+				</configuration>
 			</plugin>
 			
 		</plugins>
