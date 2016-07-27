@@ -491,144 +491,20 @@
 		<plugins>
 			
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>com.github.ekryd.sortpom</groupId>
+				<artifactId>sortpom-maven-plugin</artifactId>
+				<version>${sortpom.plugin.version}</version>
 				<configuration>
-					<executable>true</executable>
-					<!--
-						Exclude provided artifacts from resulted WAR.
-						@see https://github.com/spring-projects/spring-boot/issues/649
-						@see https://github.com/spring-projects/spring-boot/issues/650
-					-->
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-						<exclude>
-							<groupId>org.hibernate</groupId>
-							<artifactId>hibernate-validator-annotation-processor</artifactId>
-						</exclude>
-					</excludes>
+					<lineSeparator>\n</lineSeparator>
+					<predefinedSortOrder>default_0_4_0</predefinedSortOrder>
+					<keepBlankLines>true</keepBlankLines>
+					<indentBlankLines>true</indentBlankLines>
+					<sortDependencies>scope,groupId,artifactId</sortDependencies>
+					<sortPlugins>groupId,artifactId</sortPlugins>
+					<sortProperties>true</sortProperties>
+					<!-- Use tabs instead of spaces for indentation -->
+					<nrOfIndentSpace>-1</nrOfIndentSpace>
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-application</id>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-application</id>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler.plugin.version}</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<debug>false</debug>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>${resources.plugin.version}</version>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>${clean.plugin.version}</version>
-				<configuration>
-					<!-- Remove minified resources -->
-					<filesets>
-						<fileset>
-							<directory>src/main/webapp/WEB-INF/static/styles</directory>
-							<includes>
-								<include>*.min.css</include>
-							</includes>
-						</fileset>
-						<fileset>
-							<directory>src/main/javascript</directory>
-							<includes>
-								<include>**/*.min.js</include>
-							</includes>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.plugin.version}</version>
-				<configuration>
-					<!-- Exclude non-minified versions of resources -->
-					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<version>${native2ascii.plugin.version}</version>
-				<configuration>
-					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire.plugin.version}</version>
-				<configuration>
-					<skipTests>${skipUnitTests}</skipTests>
-					<disableXmlReport>true</disableXmlReport>
-					<!-- Run junit tests only (see #SUREFIRE-377) -->
-					<testNGArtifactName>none:none</testNGArtifactName>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>${gmaven.plugin.version}</version>
-				<configuration>
-					<providerSelection>2.0</providerSelection>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.gmaven.runtime</groupId>
-						<artifactId>gmaven-runtime-2.0</artifactId>
-						<version>${gmaven.runtime.plugin.version}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<plugin>
@@ -643,6 +519,29 @@
 					<phantomjs>
 						<version>1.9.8</version>
 					</phantomjs>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>${license.plugin.version}</version>
+				<configuration>
+					<basedir>src</basedir>
+					<header>src/main/config/license_header.txt</header>
+					<strictCheck>true</strictCheck>
+					<includes>
+						<include>**/*.java</include>
+						<include>**/*.groovy</include>
+					</includes>
+					<mapping>
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<copyright.years>${project.inceptionYear}-2016</copyright.years>
+						<author.name>${project.developers[0].name}</author.name>
+						<author.email>${project.developers[0].email}</author.email>
+					</properties>
 				</configuration>
 			</plugin>
 			
@@ -680,64 +579,6 @@
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${failsafe.plugin.version}</version>
-				<configuration>
-					<useFile>false</useFile>
-					<disableXmlReport>true</disableXmlReport>
-					<suiteXmlFiles>
-						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.version}</version>
-				<configuration>
-					<changeLogFile>/liquibase/changelog.xml</changeLogFile>
-					<propertyFile>${basedir}/src/main/resources/liquibase/liquibase.properties</propertyFile>
-					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
-					<!-- See also application-prod.properties -->
-					<contexts>scheme,init-data,prod-data</contexts>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
-				<version>${license.plugin.version}</version>
-				<configuration>
-					<basedir>src</basedir>
-					<header>src/main/config/license_header.txt</header>
-					<strictCheck>true</strictCheck>
-					<includes>
-						<include>**/*.java</include>
-						<include>**/*.groovy</include>
-					</includes>
-					<mapping>
-						<java>SLASHSTAR_STYLE</java>
-					</mapping>
-					<properties>
-						<copyright.years>${project.inceptionYear}-2016</copyright.years>
-						<author.name>${project.developers[0].name}</author.name>
-						<author.email>${project.developers[0].email}</author.email>
-					</properties>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${checkstyle.plugin.version}</version>
 				<configuration>
@@ -752,43 +593,37 @@
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${pmd.plugin.version}</version>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${clean.plugin.version}</version>
 				<configuration>
-					<linkXRef>false</linkXRef>
-					<verbose>true</verbose>
-					<targetJdk>${java.version}</targetJdk>
-					<rulesets>
-						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
-					</rulesets>
+					<!-- Remove minified resources -->
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/WEB-INF/static/styles</directory>
+							<includes>
+								<include>*.min.css</include>
+							</includes>
+						</fileset>
+						<fileset>
+							<directory>src/main/javascript</directory>
+							<includes>
+								<include>**/*.min.js</include>
+							</includes>
+						</fileset>
+					</filesets>
 				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.plugin.version}</version>
-				<configuration>
-					<includes>
-						<include>**/mystamps/web/service/*</include>
-						<include>**/mystamps/web/util/*</include>
-					</includes>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eluder.coveralls</groupId>
-				<artifactId>coveralls-maven-plugin</artifactId>
-				<version>${coveralls.plugin.version}</version>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${javadoc.plugin.version}</version>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler.plugin.version}</version>
 				<configuration>
-					<nohelp>true</nohelp>
-					<nodeprecatedlist>true</nodeprecatedlist>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<debug>false</debug>
 				</configuration>
 			</plugin>
 			
@@ -821,19 +656,185 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>com.github.ekryd.sortpom</groupId>
-				<artifactId>sortpom-maven-plugin</artifactId>
-				<version>${sortpom.plugin.version}</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${failsafe.plugin.version}</version>
 				<configuration>
-					<lineSeparator>\n</lineSeparator>
-					<predefinedSortOrder>default_0_4_0</predefinedSortOrder>
-					<keepBlankLines>true</keepBlankLines>
-					<indentBlankLines>true</indentBlankLines>
-					<sortDependencies>scope,groupId,artifactId</sortDependencies>
-					<sortProperties>true</sortProperties>
-					<!-- Use tabs instead of spaces for indentation -->
-					<nrOfIndentSpace>-1</nrOfIndentSpace>
+					<useFile>false</useFile>
+					<disableXmlReport>true</disableXmlReport>
+					<suiteXmlFiles>
+						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
 				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc.plugin.version}</version>
+				<configuration>
+					<nohelp>true</nohelp>
+					<nodeprecatedlist>true</nodeprecatedlist>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${pmd.plugin.version}</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+					<verbose>true</verbose>
+					<targetJdk>${java.version}</targetJdk>
+					<rulesets>
+						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${resources.plugin.version}</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.plugin.version}</version>
+				<configuration>
+					<skipTests>${skipUnitTests}</skipTests>
+					<disableXmlReport>true</disableXmlReport>
+					<!-- Run junit tests only (see #SUREFIRE-377) -->
+					<testNGArtifactName>none:none</testNGArtifactName>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${war.plugin.version}</version>
+				<configuration>
+					<!-- Exclude non-minified versions of resources -->
+					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<version>${gmaven.plugin.version}</version>
+				<configuration>
+					<providerSelection>2.0</providerSelection>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.gmaven.runtime</groupId>
+						<artifactId>gmaven-runtime-2.0</artifactId>
+						<version>${gmaven.runtime.plugin.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>native2ascii-maven-plugin</artifactId>
+				<version>${native2ascii.plugin.version}</version>
+				<configuration>
+					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>native2ascii</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>${coveralls.plugin.version}</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.plugin.version}</version>
+				<configuration>
+					<includes>
+						<include>**/mystamps/web/service/*</include>
+						<include>**/mystamps/web/util/*</include>
+					</includes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<changeLogFile>/liquibase/changelog.xml</changeLogFile>
+					<propertyFile>${basedir}/src/main/resources/liquibase/liquibase.properties</propertyFile>
+					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
+					<!-- See also application-prod.properties -->
+					<contexts>scheme,init-data,prod-data</contexts>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+					<!--
+						Exclude provided artifacts from resulted WAR.
+						@see https://github.com/spring-projects/spring-boot/issues/649
+						@see https://github.com/spring-projects/spring-boot/issues/650
+					-->
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+						<exclude>
+							<groupId>org.hibernate</groupId>
+							<artifactId>hibernate-validator-annotation-processor</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-application</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-application</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 		</plugins>
