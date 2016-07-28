@@ -42,7 +42,7 @@ class GibbonsCatalogServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 53
 		and:
-			List<String> expectedResult = [ '80', '81' ] as List
+			List<String> expectedResult = [ '80', '81' ]
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:

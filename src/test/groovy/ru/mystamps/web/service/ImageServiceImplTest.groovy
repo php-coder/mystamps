@@ -262,7 +262,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 14
 		and:
-			List<Integer> expectedResult = [ 1, 2 ] as List
+			List<Integer> expectedResult = [ 1, 2 ]
 		when:
 			List<Integer> result = service.findBySeriesId(expectedSeriesId)
 		then:

@@ -42,7 +42,7 @@ class ScottCatalogServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 52
 		and:
-			List<String> expectedResult = [ '79', '80' ] as List
+			List<String> expectedResult = [ '79', '80' ]
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:

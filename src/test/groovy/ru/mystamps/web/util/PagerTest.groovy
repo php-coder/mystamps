@@ -89,7 +89,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(totalRecords, 10, 1)
 		then:
-			pager.items == [ 1 ] as List
+			pager.items == [ 1 ]
 		where:
 			totalRecords | _
 			0            | _
@@ -103,7 +103,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(20, 10, currentPage)
 		then:
-			pager.items == [ 1, 2 ] as List
+			pager.items == [ 1, 2 ]
 		where:
 			currentPage | _
 			1           | _
@@ -115,7 +115,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(30, 10, currentPage)
 		then:
-			pager.items == [ 1, 2, 3 ] as List
+			pager.items == [ 1, 2, 3 ]
 		where:
 			currentPage | _
 			1           | _
@@ -128,7 +128,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(40, 10, currentPage)
 		then:
-			pager.items == [ 1, 2, 3, 4 ] as List
+			pager.items == [ 1, 2, 3, 4 ]
 		where:
 			currentPage | _
 			1           | _
@@ -142,7 +142,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(50, 10, currentPage)
 		then:
-			pager.items == [ 1, 2, 3, 4, 5 ] as List
+			pager.items == [ 1, 2, 3, 4, 5 ]
 		where:
 			currentPage | _
 			1           | _
@@ -157,7 +157,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(51, 10, currentPage)
 		then:
-			pager.items == [ 1, 2, 3, 4, 5 ] as List
+			pager.items == [ 1, 2, 3, 4, 5 ]
 		where:
 			currentPage | _
 			1           | _
@@ -169,7 +169,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(90, 10, 4)
 		then:
-			pager.items == [ 2, 3, 4, 5, 6 ] as List
+			pager.items == [ 2, 3, 4, 5, 6 ]
 	}
 	
 	@Unroll
@@ -177,7 +177,7 @@ class PagerTest extends Specification {
 		when:
 			Pager pager = new Pager(60, 10, currentPage)
 		then:
-			pager.items == [ 2, 3, 4, 5, 6 ] as List
+			pager.items == [ 2, 3, 4, 5, 6 ]
 		where:
 			currentPage | _
 			6           | _
