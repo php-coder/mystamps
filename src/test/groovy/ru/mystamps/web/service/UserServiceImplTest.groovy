@@ -43,15 +43,15 @@ class UserServiceImplTest extends Specification {
 	def setup() {
 		AddUserDbDto user = TestObjects.createAddUserDbDto()
 		
-		encoder.encode(_ as String) >> user.getHash()
+		encoder.encode(_ as String) >> user.hash
 		
 		UsersActivationDto activation = TestObjects.createUsersActivationDto()
 		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
-		activationForm.setLogin(user.getLogin())
+		activationForm.setLogin(user.login)
 		activationForm.setPassword(TestObjects.TEST_PASSWORD)
-		activationForm.setName(user.getName())
+		activationForm.setName(user.name)
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
 		service = new UserServiceImpl(userDao, usersActivationService, collectionService, encoder)
@@ -77,7 +77,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should delete registration request"() {
 		given:
-			String expectedActivationKey = activationForm.getActivationKey()
+			String expectedActivationKey = activationForm.activationKey
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -111,7 +111,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should pass name to dao"() {
 		given:
-			String expectedUserName = activationForm.getName()
+			String expectedUserName = activationForm.name
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -123,7 +123,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should pass login instead of name when name is null"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 			activationForm.setName(null)
 		when:
 			service.registerUser(activationForm)
@@ -136,7 +136,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should pass login instead of name when name is empty"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		and:
 			activationForm.setName('')
 		when:
@@ -197,7 +197,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should gets hash from encoder"() {
 		given:
-			String expectedHash = TestObjects.createAddUserDbDto().getHash()
+			String expectedHash = TestObjects.createAddUserDbDto().hash
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -232,7 +232,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should pass login to dao"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -255,7 +255,7 @@ class UserServiceImplTest extends Specification {
 	def "registerUser() should create collection for user"() {
 		given:
 			Integer expectedId = 909;
-			String expectedLogin = activationForm.getLogin()
+			String expectedLogin = activationForm.login
 		and:
 			userDao.add(_ as AddUserDbDto) >> expectedId
 		when:

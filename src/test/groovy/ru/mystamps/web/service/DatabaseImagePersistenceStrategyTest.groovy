@@ -41,7 +41,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
-			multipartFile.getBytes() >> { throw new IOException() }
+			multipartFile.bytes >> { throw new IOException() }
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -52,8 +52,8 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should pass file content to image data dao"() {
 		given:
-			byte[] expected = 'test'.getBytes()
-			multipartFile.getBytes() >> expected
+			byte[] expected = 'test'.bytes
+			multipartFile.bytes >> expected
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -65,7 +65,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should pass image to image data dao"() {
 		given:
-			Integer expectedImageId = imageInfoDto.getId()
+			Integer expectedImageId = imageInfoDto.id
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:

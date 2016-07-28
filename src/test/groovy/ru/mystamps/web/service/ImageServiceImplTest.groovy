@@ -36,8 +36,8 @@ class ImageServiceImplTest extends Specification {
 	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
 	
 	def setup() {
-		multipartFile.getSize() >> 1024L
-		multipartFile.getContentType() >> 'image/png'
+		multipartFile.size >> 1024L
+		multipartFile.contentType >> 'image/png'
 		imageDao.add(_ as String) >> 17
 	}
 	
@@ -56,7 +56,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getSize() >> 0L
+			multipartFile.size >> 0L
 		and:
 			thrown IllegalArgumentException
 	}
@@ -65,7 +65,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> null
+			multipartFile.contentType >> null
 		and:
 			thrown IllegalArgumentException
 	}
@@ -74,7 +74,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> 'image/tiff'
+			multipartFile.contentType >> 'image/tiff'
 		and:
 			thrown IllegalStateException
 	}
@@ -91,7 +91,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> contentType
+			multipartFile.contentType >> contentType
 		and:
 			1 * imageDao.add({ String type ->
 				assert type == expectedType
