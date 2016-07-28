@@ -34,7 +34,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return empty string for empty numbers"() {
 		given:
-			List<String> empty = [] as List
+			List<String> empty = []
 		when:
 			String numbers = CatalogUtils.toShortForm(empty)
 		then:
@@ -43,7 +43,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return single number as is"() {
 		given:
-			List<String> singleNumber = [ '1' ] as List
+			List<String> singleNumber = [ '1' ]
 		when:
 			String numbers = CatalogUtils.toShortForm(singleNumber)
 		then:
@@ -52,7 +52,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return pair of numbers as comma separated"() {
 		given:
-			List<String> setOfNumbers = [ '1', '2' ] as List
+			List<String> setOfNumbers = [ '1', '2' ]
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -61,7 +61,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce range for sequence"() {
 		given:
-			List<String> setOfNumbers = [ '1', '2', '3' ] as List
+			List<String> setOfNumbers = [ '1', '2', '3' ]
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -70,7 +70,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should return comma separated numbers if they are not a sequence"() {
 		given:
-			List<String> setOfNumbers = [ '1', '2', '4', '5' ] as List
+			List<String> setOfNumbers = [ '1', '2', '4', '5' ]
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:
@@ -79,7 +79,7 @@ class CatalogUtilsTest extends Specification {
 	
 	def "toShortForm() should produce two ranges for two sequences"() {
 		given:
-			List<String> setOfNumbers = [ '1', '2', '3', '10', '19', '20', '21' ] as List
+			List<String> setOfNumbers = [ '1', '2', '3', '10', '19', '20', '21' ]
 		when:
 			String numbers = CatalogUtils.toShortForm(setOfNumbers)
 		then:

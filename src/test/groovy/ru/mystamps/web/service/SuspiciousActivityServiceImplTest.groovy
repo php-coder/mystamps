@@ -119,7 +119,7 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		given:
 			int expectedPage = 5
 			int expectedRecordsPerPage = 10
-			List<SuspiciousActivityDto> expectedResult = [ TestObjects.createSuspiciousActivityDto() ] as List
+			List<SuspiciousActivityDto> expectedResult = [ TestObjects.createSuspiciousActivityDto() ]
 		when:
 			List<SuspiciousActivityDto> result =
 				service.findSuspiciousActivities(expectedPage, expectedRecordsPerPage)

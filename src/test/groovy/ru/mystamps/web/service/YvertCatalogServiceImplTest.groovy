@@ -42,7 +42,7 @@ class YvertCatalogServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 51
 		and:
-			List<String> expectedResult = [ '77', '78' ] as List
+			List<String> expectedResult = [ '77', '78' ]
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:

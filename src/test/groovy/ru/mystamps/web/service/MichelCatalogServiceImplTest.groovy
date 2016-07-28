@@ -42,7 +42,7 @@ class MichelCatalogServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 50
 		and:
-			List<String> expectedResult = [ '75', '76' ] as List
+			List<String> expectedResult = [ '75', '76' ]
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:
