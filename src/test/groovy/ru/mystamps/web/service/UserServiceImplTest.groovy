@@ -254,7 +254,7 @@ class UserServiceImplTest extends Specification {
 	
 	def "registerUser() should create collection for user"() {
 		given:
-			Integer expectedId = 909;
+			Integer expectedId = 909
 			String expectedLogin = activationForm.login
 		and:
 			userDao.add(_ as AddUserDbDto) >> expectedId

@@ -144,7 +144,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def "logEvent() should assign occurred at to specified date when date was provided"() {
 		given:
-			Date expectedDate = new Date() - 100;
+			Date expectedDate = new Date() - 100
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
 		then:
