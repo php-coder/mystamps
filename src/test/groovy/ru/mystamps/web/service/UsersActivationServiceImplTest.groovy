@@ -36,7 +36,7 @@ class UsersActivationServiceImplTest extends Specification {
 	private UsersActivationService service
 	private RegisterAccountForm registrationForm
 	
-	private static final Locale ANY_LOCALE = Locale.ENGLISH;
+	private static final Locale ANY_LOCALE = Locale.ENGLISH
 	
 	def setup() {
 		registrationForm = new RegisterAccountForm()
@@ -153,7 +153,7 @@ class UsersActivationServiceImplTest extends Specification {
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
 				assert activation.locale == new Locale('fr')
-				return true;
+				return true
 			})
 	}
 	
@@ -224,7 +224,7 @@ class UsersActivationServiceImplTest extends Specification {
 
 	def "findByActivationKey() should call dao, pass argument to it and return result"() {
 		given:
-			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto();
+			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto()
 		when:
 			UsersActivationDto result = service.findByActivationKey('0987654321')
 		then:
