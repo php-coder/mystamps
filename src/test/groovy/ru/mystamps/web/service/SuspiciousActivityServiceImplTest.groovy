@@ -71,7 +71,7 @@ class SuspiciousActivityServiceImplTest extends Specification {
 	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
 		given:
 			String expectedType = 'ExpectedType'
-			Date expectedDate = new Date().plus(1)
+			Date expectedDate = new Date() + 1
 			long expectedResult = 47
 		when:
 			long result = service.countByTypeSince(expectedType, expectedDate)
