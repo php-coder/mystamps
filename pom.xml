@@ -452,7 +452,7 @@
 		<thymeleaf.togglz.version>1.0.1.RELEASE</thymeleaf.togglz.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
-		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		<thymeleaf.version>2.1.5.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.2.0.Final</togglz.version>
 		<war.plugin.version>2.6</war.plugin.version>
