@@ -19,6 +19,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
 		</dependency>
 		
 		<!-- Needed for IOUtils -->
@@ -197,6 +198,7 @@
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -217,12 +219,14 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>${thymeleaf-extras-springsecurity4.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -272,6 +276,7 @@
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
+			<version>${groovy.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -410,6 +415,10 @@
 		<jquery.version>1.9.1</jquery.version>
 		
 		<license.plugin.version>1.9.0</license.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
+		<liquibase.version>3.4.2</liquibase.version>
+		
 		<lombok.version>1.16.8</lombok.version>
 		<minify.plugin.version>1.7.4</minify.plugin.version>
 		
