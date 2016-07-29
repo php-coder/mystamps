@@ -208,13 +208,6 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectj.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		
 		<!-- For running database migration during application's startup time -->
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -358,8 +351,6 @@
 	</parent>
 	
 	<properties>
-		<aspectj.version>1.8.5</aspectj.version>
-		
 		<!-- Don't forget to update version in MvcConfig and Url classes -->
 		<bootstrap.version>3.3.6</bootstrap.version>
 		
