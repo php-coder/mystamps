@@ -16,12 +16,6 @@
 			<version>${thymeleaf.togglz.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>${commons-beanutils.version}</version>
-		</dependency>
-		
 		<!-- Needed for IOUtils -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -357,9 +351,6 @@
 		<cglib.version>2.2.2</cglib.version>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
-		<commons-beanutils.version>1.9.2</commons-beanutils.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
