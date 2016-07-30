@@ -13,6 +13,11 @@
   - name: Bootstrapping server
     include: bootstrap.yml
 
+  - name: Removing nano
+    apt:
+      package: nano
+      state: absent
+
   - name: Creating /data directory
     file:
       path: /data
