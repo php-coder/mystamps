@@ -795,7 +795,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<executable>true</executable>
 					<!--
 						Exclude provided artifacts from resulted WAR.
 						@see https://github.com/spring-projects/spring-boot/issues/649
