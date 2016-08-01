@@ -19,6 +19,7 @@ package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -73,7 +74,7 @@ public class JdbcCollectionDao implements CollectionDao {
 	private String findCollectionInfoByIdSql;
 	
 	@Override
-	public Iterable<LinkEntityDto> findLastCreated(int quantity) {
+	public List<LinkEntityDto> findLastCreated(int quantity) {
 		return jdbcTemplate.query(
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),

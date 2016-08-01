@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
@@ -27,6 +29,6 @@ public interface CollectionService {
 	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
-	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
+	List<LinkEntityDto> findRecentlyCreated(int quantity);
 	CollectionInfoDto findById(Integer collectionId);
 }

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -137,7 +139,7 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findRecentlyCreated(int quantity) {
+	public List<LinkEntityDto> findRecentlyCreated(int quantity) {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
 		return collectionDao.findLastCreated(quantity);

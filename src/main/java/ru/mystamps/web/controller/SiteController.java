@@ -69,7 +69,7 @@ public class SiteController {
 		Iterable<SeriesInfoDto> recentlyAdded =
 			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang);
 		
-		Iterable<LinkEntityDto> recentlyCreated =
+		List<LinkEntityDto> recentlyCreated =
 			collectionService.findRecentlyCreated(AMOUNT_OF_RECENTLY_CREATED_COLLECTIONS);
 		
 		model.addAttribute("categoryCounter", categoryCounter);
