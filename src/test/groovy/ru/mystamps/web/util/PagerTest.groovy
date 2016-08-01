@@ -68,6 +68,7 @@ class PagerTest extends Specification {
 	// Tests for getCurrentPage()
 	//
 	
+	@Unroll
 	def "getCurrentPage() should return #currentPage"(int currentPage) {
 		when:
 			Pager pager = new Pager(10, 1, currentPage)
@@ -188,6 +189,7 @@ class PagerTest extends Specification {
 	// Tests for getPrev()
 	//
 	
+	@Unroll
 	def "getPrev() should return #prev for when page = #currentPage"(int currentPage, Integer prev) {
 		when:
 			Pager pager = new Pager(3, 1, currentPage)
@@ -204,6 +206,7 @@ class PagerTest extends Specification {
 	// Tests for getNext()
 	//
 	
+	@Unroll
 	def "getNext() should return #next for when page = #currentPage"(int currentPage, Integer next) {
 		when:
 			Pager pager = new Pager(3, 1, currentPage)
