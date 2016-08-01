@@ -42,26 +42,26 @@ class CronServiceImplTest extends Specification {
 		mailService
 	)
 	
-	private static def assertMidnight(Date date) {
+	private static void assertMidnight(Date date) {
 		assert date[Calendar.HOUR_OF_DAY] == 0
 		assert date[Calendar.MINUTE]      == 0
 		assert date[Calendar.SECOND]      == 0
 		assert date[Calendar.MILLISECOND] == 0
 	}
 	
-	private static def assertDatesEqual(Date first, Date second) {
+	private static void assertDatesEqual(Date first, Date second) {
 		assert first[Calendar.YEAR]         == second[Calendar.YEAR]
 		assert first[Calendar.MONTH]        == second[Calendar.MONTH]
 		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
 	}
 	
-	private static def assertMidnightOfYesterday(Date date) {
+	private static void assertMidnightOfYesterday(Date date) {
 		assert date != null
 		assertDatesEqual(date, new Date().previous())
 		assertMidnight(date)
 	}
 	
-	private static def assertMidnightOfToday(Date date) {
+	private static void assertMidnightOfToday(Date date) {
 		assert date != null
 		assertDatesEqual(date, new Date())
 		assertMidnight(date)
