@@ -138,7 +138,6 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	
 	def "removeFromCollection() should find collection by user id"() {
 		given:
 			Integer expectedUserId = 123
