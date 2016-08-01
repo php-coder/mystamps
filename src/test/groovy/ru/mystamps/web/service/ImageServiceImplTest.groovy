@@ -120,7 +120,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			ImageInfoDto image = TestObjects.createImageInfoDto()
 		when:
-			String url = service.save(multipartFile)
+			service.save(multipartFile)
 		then:
 			imageDao.add(_ as String) >> image.id
 		and:
