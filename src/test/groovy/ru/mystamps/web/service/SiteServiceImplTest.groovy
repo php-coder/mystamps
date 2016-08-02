@@ -201,6 +201,20 @@ class SiteServiceImplTest extends Specification {
 			'OPTIONS'         | _
 			null              | _
 	}
+
+	def "logEvent() should pass abbreviated method when it's too long"() {
+		given:
+			String method = "PROPFIND"
+		and:
+			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH-3) + '...'
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+			assert activity?.method == exceptedMethod
+			return true
+		})
+	}
 	
 	def "logEvent() should pass null to dao for unknown user id"() {
 		when:
@@ -319,5 +333,5 @@ class SiteServiceImplTest extends Specification {
 			''       | _
 			null     | _
 	}
-	
+
 }
