@@ -241,8 +241,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	// CheckStyle: ignore LineLength for next 1 line
-	public Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang) {
+	public List<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);

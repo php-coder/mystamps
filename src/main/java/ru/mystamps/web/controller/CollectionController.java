@@ -73,7 +73,7 @@ public class CollectionController {
 		model.addAttribute("ownerName", owner);
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<SeriesInfoDto> seriesOfCollection =
+		List<SeriesInfoDto> seriesOfCollection =
 			seriesService.findByCollectionId(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		

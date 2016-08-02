@@ -48,7 +48,7 @@ public interface SeriesService {
 	
 	List<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang);
 	List<SeriesInfoDto> findByCountryId(Integer countryId, String lang);
-	Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
+	List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
 	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
 	Iterable<SitemapInfoDto> findAllForSitemap();
 }

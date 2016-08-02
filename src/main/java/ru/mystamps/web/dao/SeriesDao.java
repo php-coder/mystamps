@@ -36,7 +36,7 @@ public interface SeriesDao {
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	List<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
-	Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
+	List<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
 	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);

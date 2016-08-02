@@ -329,7 +329,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
+	public List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return seriesDao.findByCollectionIdAsSeriesInfo(collectionId, lang);
