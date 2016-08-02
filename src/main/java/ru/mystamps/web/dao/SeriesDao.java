@@ -34,7 +34,7 @@ public interface SeriesDao {
 	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
-	Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
+	List<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
 	Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang);
 	Iterable<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang);
 	long countAll();

@@ -223,7 +223,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 
 	@Override
-	public Iterable<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang) {
+	public List<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("category_id", categoryId);
 		params.put("lang", lang);

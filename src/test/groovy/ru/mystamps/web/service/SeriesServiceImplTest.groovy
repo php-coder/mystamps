@@ -1021,11 +1021,11 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
-			Iterable<SeriesInfoDto> expectedResult = [ series ]
+			List<SeriesInfoDto> expectedResult = [ series ]
 		and:
 			seriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
 		when:
-			Iterable<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
+			List<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
 		then:
 			result == expectedResult
 	}

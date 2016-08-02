@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -107,7 +108,7 @@ public class CategoryController {
 		String name = category.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<SeriesInfoDto> series = seriesService.findByCategoryId(id, lang);
+		List<SeriesInfoDto> series = seriesService.findByCategoryId(id, lang);
 		
 		model.addAttribute("categoryId", id);
 		model.addAttribute("categorySlug", slug);
