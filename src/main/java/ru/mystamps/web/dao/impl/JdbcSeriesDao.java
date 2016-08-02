@@ -232,7 +232,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public Iterable<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang) {
+	public List<SeriesInfoDto> findByCountryIdAsSeriesInfo(Integer countryId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("country_id", countryId);
 		params.put("lang", lang);

@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -110,7 +111,7 @@ public class CountryController {
 		String name = country.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<SeriesInfoDto> series = seriesService.findByCountryId(id, lang);
+		List<SeriesInfoDto> series = seriesService.findByCountryId(id, lang);
 		
 		model.addAttribute("countryId", id);
 		model.addAttribute("countrySlug", slug);

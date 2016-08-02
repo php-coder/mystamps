@@ -321,7 +321,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang) {
+	public List<SeriesInfoDto> findByCountryId(Integer countryId, String lang) {
 		Validate.isTrue(countryId != null, "Country id must be non null");
 		
 		return seriesDao.findByCountryIdAsSeriesInfo(countryId, lang);
