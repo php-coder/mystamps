@@ -144,13 +144,23 @@ public class SiteServiceImpl implements SiteService {
 		activity.setType(type);
 		activity.setOccurredAt(date == null ? new Date() : date);
 		activity.setPage(abbreviatePage(page));
-		activity.setMethod(method);
+		activity.setMethod(abbreviateMethod(method));
 		activity.setUserId(userId);
 		activity.setIp(StringUtils.defaultString(ip));
 		activity.setRefererPage(StringUtils.stripToNull(abbreviateRefererPage(referer)));
 		activity.setUserAgent(StringUtils.stripToNull(abbreviateUserAgent(agent)));
 		
 		suspiciousActivities.add(activity);
+	}
+	
+	/**
+	 * Abbreviate name of HTTP method.
+	 * @param method name of HTTP method
+	 * @return name of the method as-is or its abbreviation with three points at the end
+	 * @author Aleksandr Zorin
+	 */
+	private static String abbreviateMethod(String method) {
+		return abbreviateIfLengthGreaterThan(method, Db.SuspiciousActivity.METHOD_LENGTH, "method");
 	}
 	
 	private static String abbreviatePage(String page) {
