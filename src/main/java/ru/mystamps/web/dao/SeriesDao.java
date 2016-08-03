@@ -30,7 +30,7 @@ import ru.mystamps.web.dao.dto.SitemapInfoDto;
 public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
-	Iterable<SitemapInfoDto> findAllForSitemap();
+	List<SitemapInfoDto> findAllForSitemap();
 	List<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);

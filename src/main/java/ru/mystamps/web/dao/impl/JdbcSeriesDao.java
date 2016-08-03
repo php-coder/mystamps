@@ -176,7 +176,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public Iterable<SitemapInfoDto> findAllForSitemap() {
+	public List<SitemapInfoDto> findAllForSitemap() {
 		return jdbcTemplate.query(
 			findAllForSitemapSql,
 			Collections.<String, Object>emptyMap(),

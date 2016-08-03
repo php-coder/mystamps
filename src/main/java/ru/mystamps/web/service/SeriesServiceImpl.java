@@ -345,7 +345,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SitemapInfoDto> findAllForSitemap() {
+	public List<SitemapInfoDto> findAllForSitemap() {
 		return seriesDao.findAllForSitemap();
 	}
 

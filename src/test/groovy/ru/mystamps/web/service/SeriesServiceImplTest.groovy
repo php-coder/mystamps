@@ -1127,10 +1127,10 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findAllForSitemap() should call dao and returns result"() {
 		given:
-			Iterable<SitemapInfoDto> expectedResult =
+			List<SitemapInfoDto> expectedResult =
 				Collections.singletonList(TestObjects.createSitemapInfoDto())
 		when:
-			Iterable<SitemapInfoDto> result = service.findAllForSitemap()
+			List<SitemapInfoDto> result = service.findAllForSitemap()
 		then:
 			1 * seriesDao.findAllForSitemap() >> expectedResult
 		and:
