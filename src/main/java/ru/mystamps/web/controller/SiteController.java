@@ -66,7 +66,7 @@ public class SiteController {
 		long collectionsCounter = collectionService.countCollectionsOfUsers();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<SeriesInfoDto> recentlyAdded =
+		List<SeriesInfoDto> recentlyAdded =
 			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang);
 		
 		List<LinkEntityDto> recentlyCreated =

@@ -185,7 +185,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang) {
+	public List<SeriesInfoDto> findLastAdded(int quantity, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("quantity", quantity);
 		params.put("lang", lang);

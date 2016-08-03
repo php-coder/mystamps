@@ -337,7 +337,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
+	public List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
 		Validate.isTrue(quantity > 0, "Quantity of recently added series must be greater than 0");
 		
 		return seriesDao.findLastAdded(quantity, lang);

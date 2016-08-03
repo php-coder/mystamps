@@ -31,7 +31,7 @@ public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	Iterable<SitemapInfoDto> findAllForSitemap();
-	Iterable<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	List<SeriesInfoDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang);
