@@ -23,9 +23,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import ru.mystamps.web.dao.GibbonsCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 
-public class JdbcGibbonsCatalogDao extends JdbcCatalogDao implements GibbonsCatalogDao {
+public class JdbcGibbonsCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
 	
 	@Value("${gibbons.create}")
 	private String addGibbonsNumberSql;

@@ -19,11 +19,11 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.GibbonsCatalogDao
+import ru.mystamps.web.dao.StampsCatalogDao
 
 class GibbonsCatalogServiceImplTest extends Specification {
 	
-	private GibbonsCatalogDao gibbonsCatalogDao = Mock()
+	private StampsCatalogDao gibbonsCatalogDao = Mock()
 	
 	private GibbonsCatalogService service = new GibbonsCatalogServiceImpl(gibbonsCatalogDao)
 	

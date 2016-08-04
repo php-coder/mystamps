@@ -31,14 +31,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.GibbonsCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(GibbonsCatalogServiceImpl.class);
 	
-	private final GibbonsCatalogDao gibbonsCatalogDao;
+	private final StampsCatalogDao gibbonsCatalogDao;
 	
 	@Override
 	@Transactional

@@ -48,7 +48,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public GibbonsCatalogDao getGibbonsCatalogDao() {
+	public StampsCatalogDao getGibbonsCatalogDao() {
 		return new JdbcGibbonsCatalogDao(jdbcTemplate);
 	}
 	
