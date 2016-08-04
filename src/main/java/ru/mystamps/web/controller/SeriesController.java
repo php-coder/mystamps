@@ -114,7 +114,7 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("countries")
-	public Iterable<LinkEntityDto> getCountries(Locale userLocale) {
+	public List<LinkEntityDto> getCountries(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		return countryService.findAllAsLinkEntities(lang);
 	}

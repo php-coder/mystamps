@@ -31,6 +31,6 @@ public interface CountryDao {
 	long countCountriesOfCollection(Integer collectionId);
 	long countAddedSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

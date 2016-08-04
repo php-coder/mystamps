@@ -26,7 +26,7 @@ import ru.mystamps.web.service.dto.AddCountryDto;
 
 public interface CountryService {
 	UrlEntityDto add(AddCountryDto dto, Integer userId);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCountriesOf(Integer collectionId);

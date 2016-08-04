@@ -204,7 +204,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			countryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
 		when:
-			Iterable<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
+			List<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
 		then:
 			resultCountries == expectedCountries
 	}

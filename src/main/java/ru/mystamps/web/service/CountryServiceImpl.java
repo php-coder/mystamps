@@ -82,7 +82,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return countryDao.findAllAsLinkEntities(lang);
 	}
 	

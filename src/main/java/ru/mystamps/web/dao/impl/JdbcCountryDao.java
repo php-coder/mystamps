@@ -158,7 +158,7 @@ public class JdbcCountryDao implements CountryDao {
 	}
 	
 	@Override
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return jdbcTemplate.query(
 			findCountriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),

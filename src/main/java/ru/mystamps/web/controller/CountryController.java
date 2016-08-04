@@ -145,7 +145,7 @@ public class CountryController {
 	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 		
 		model.addAttribute("countries", countries);
 	}
