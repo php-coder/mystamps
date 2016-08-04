@@ -20,8 +20,8 @@ package ru.mystamps.web.dao;
 import java.util.List;
 import java.util.Set;
 
-public interface MichelCatalogDao {
-	List<String> add(Set<String> michelNumbers);
-	void addToSeries(Integer seriesId, Set<String> michelNumbers);
+public interface StampsCatalogDao {
+	List<String> add(Set<String> catalogNumbers);
+	void addToSeries(Integer seriesId, Set<String> catalogNumbers);
 	List<String> findBySeriesId(Integer seriesId);
 }

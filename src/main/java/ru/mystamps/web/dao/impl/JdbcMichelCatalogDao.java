@@ -23,9 +23,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import ru.mystamps.web.dao.MichelCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 
-public class JdbcMichelCatalogDao extends JdbcCatalogDao implements MichelCatalogDao {
+public class JdbcMichelCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
 	
 	@Value("${michel.create}")
 	private String addMichelNumberSql;

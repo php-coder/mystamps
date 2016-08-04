@@ -19,11 +19,11 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.MichelCatalogDao
+import ru.mystamps.web.dao.StampsCatalogDao
 
 class MichelCatalogServiceImplTest extends Specification {
 	
-	private MichelCatalogDao michelCatalogDao = Mock()
+	private StampsCatalogDao michelCatalogDao = Mock()
 	
 	private MichelCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
 	

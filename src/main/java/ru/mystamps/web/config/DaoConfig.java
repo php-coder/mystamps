@@ -63,7 +63,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public MichelCatalogDao getMichelCatalogDao() {
+	public StampsCatalogDao getMichelCatalogDao() {
 		return new JdbcMichelCatalogDao(jdbcTemplate);
 	}
 	
