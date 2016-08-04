@@ -93,7 +93,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public YvertCatalogDao getYvertCatalogDao() {
+	public StampsCatalogDao getYvertCatalogDao() {
 		return new JdbcYvertCatalogDao(jdbcTemplate);
 	}
 	

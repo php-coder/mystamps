@@ -31,14 +31,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.YvertCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class YvertCatalogServiceImpl implements YvertCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(YvertCatalogServiceImpl.class);
 	
-	private final YvertCatalogDao yvertCatalogDao;
+	private final StampsCatalogDao yvertCatalogDao;
 	
 	@Override
 	@Transactional

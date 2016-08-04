@@ -19,11 +19,11 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.YvertCatalogDao
+import ru.mystamps.web.dao.StampsCatalogDao
 
 class YvertCatalogServiceImplTest extends Specification {
 	
-	private YvertCatalogDao yvertCatalogDao = Mock()
+	private StampsCatalogDao yvertCatalogDao = Mock()
 	
 	private YvertCatalogService service = new YvertCatalogServiceImpl(yvertCatalogDao)
 	
