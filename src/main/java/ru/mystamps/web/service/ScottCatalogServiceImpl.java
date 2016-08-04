@@ -31,14 +31,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ScottCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class ScottCatalogServiceImpl implements ScottCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(ScottCatalogServiceImpl.class);
 	
-	private final ScottCatalogDao scottCatalogDao;
+	private final StampsCatalogDao scottCatalogDao;
 	
 	@Override
 	@Transactional

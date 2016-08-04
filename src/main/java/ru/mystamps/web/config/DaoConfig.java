@@ -68,7 +68,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public ScottCatalogDao getScottCatalogDao() {
+	public StampsCatalogDao getScottCatalogDao() {
 		return new JdbcScottCatalogDao(jdbcTemplate);
 	}
 	

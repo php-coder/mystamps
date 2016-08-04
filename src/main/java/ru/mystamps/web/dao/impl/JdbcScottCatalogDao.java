@@ -23,9 +23,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import ru.mystamps.web.dao.ScottCatalogDao;
+import ru.mystamps.web.dao.StampsCatalogDao;
 
-public class JdbcScottCatalogDao extends JdbcCatalogDao implements ScottCatalogDao {
+public class JdbcScottCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
 	
 	@Value("${scott.create}")
 	private String addScottNumberSql;

@@ -19,11 +19,11 @@ package ru.mystamps.web.service
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.ScottCatalogDao
+import ru.mystamps.web.dao.StampsCatalogDao
 
 class ScottCatalogServiceImplTest extends Specification {
 	
-	private ScottCatalogDao scottCatalogDao = Mock()
+	private StampsCatalogDao scottCatalogDao = Mock()
 	
 	private ScottCatalogService service = new ScottCatalogServiceImpl(scottCatalogDao)
 	
