@@ -33,6 +33,6 @@ public interface CategoryDao {
 	long countAddedSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang);
 }

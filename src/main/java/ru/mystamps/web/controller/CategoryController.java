@@ -121,7 +121,7 @@ public class CategoryController {
 	@RequestMapping(Url.LIST_CATEGORIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
+		List<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
 		
 		model.addAttribute("categories", categories);
 	}

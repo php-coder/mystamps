@@ -28,7 +28,7 @@ import ru.mystamps.web.service.dto.AddCategoryDto;
 public interface CategoryService {
 	UrlEntityDto add(AddCategoryDto dto, Integer userId);
 	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang);
 	long countAll();
 	long countCategoriesOf(Integer collectionId);

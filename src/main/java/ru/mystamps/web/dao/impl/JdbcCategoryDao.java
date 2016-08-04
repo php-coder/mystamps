@@ -171,7 +171,7 @@ public class JdbcCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return jdbcTemplate.query(
 			findCategoriesNamesWithSlugSql,
 			Collections.singletonMap("lang", lang),

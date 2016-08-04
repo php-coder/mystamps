@@ -88,7 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
 	}
 	

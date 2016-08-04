@@ -239,7 +239,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			categoryDao.findAllAsLinkEntities(_ as String) >> expectedCategories
 		when:
-			Iterable<LinkEntityDto> resultCategories = service.findAllAsLinkEntities('fr')
+			List<LinkEntityDto> resultCategories = service.findAllAsLinkEntities('fr')
 		then:
 			resultCategories == expectedCategories
 	}
