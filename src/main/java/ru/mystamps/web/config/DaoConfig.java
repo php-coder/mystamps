@@ -55,7 +55,12 @@ public class DaoConfig {
 	
 	@Bean
 	public StampsCatalogDao getGibbonsCatalogDao() {
-		return new JdbcGibbonsCatalogDao(jdbcTemplate);
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("gibbons.create"),
+			env.getRequiredProperty("series_gibbons.add"),
+			env.getRequiredProperty("series_gibbons.find_by_series_id")
+		);
 	}
 	
 	@Bean
