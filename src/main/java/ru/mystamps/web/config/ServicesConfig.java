@@ -156,7 +156,7 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public GibbonsCatalogService getGibbonsCatalogService() {
+	public StampsCatalogService getGibbonsCatalogService() {
 		return new GibbonsCatalogServiceImpl(daoConfig.getGibbonsCatalogDao());
 	}
 	

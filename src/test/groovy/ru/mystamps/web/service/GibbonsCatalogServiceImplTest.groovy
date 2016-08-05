@@ -25,7 +25,7 @@ class GibbonsCatalogServiceImplTest extends Specification {
 	
 	private StampsCatalogDao gibbonsCatalogDao = Mock()
 	
-	private GibbonsCatalogService service = new GibbonsCatalogServiceImpl(gibbonsCatalogDao)
+	private StampsCatalogService service = new GibbonsCatalogServiceImpl(gibbonsCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

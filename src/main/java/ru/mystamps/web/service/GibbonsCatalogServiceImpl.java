@@ -35,7 +35,7 @@ import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class GibbonsCatalogServiceImpl implements GibbonsCatalogService {
+public class GibbonsCatalogServiceImpl implements StampsCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(GibbonsCatalogServiceImpl.class);
 	
 	private final StampsCatalogDao gibbonsCatalogDao;

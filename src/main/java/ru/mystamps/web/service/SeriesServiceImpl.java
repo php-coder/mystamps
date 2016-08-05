@@ -56,7 +56,7 @@ public class SeriesServiceImpl implements SeriesService {
 	private final StampsCatalogService michelCatalogService;
 	private final StampsCatalogService scottCatalogService;
 	private final YvertCatalogService yvertCatalogService;
-	private final GibbonsCatalogService gibbonsCatalogService;
+	private final StampsCatalogService gibbonsCatalogService;
 	
 	@Override
 	@Transactional
