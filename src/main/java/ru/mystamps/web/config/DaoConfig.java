@@ -115,7 +115,13 @@ public class DaoConfig {
 	
 	@Bean
 	public StampsCatalogDao getYvertCatalogDao() {
-		return new JdbcYvertCatalogDao(jdbcTemplate);
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("yvert.create"),
+			env.getRequiredProperty("series_yvert.add"),
+			env.getRequiredProperty("series_yvert.find_by_series_id")
+		);
+		
 	}
 	
 }
