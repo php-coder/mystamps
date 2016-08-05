@@ -17,43 +17,64 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.dao.StampsCatalogDao;
 
-public class JdbcStampsCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
+@RequiredArgsConstructor
+public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	
+	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final String addCatalogNumberSql;
 	private final String addCatalogNumbersToSeriesSql;
 	private final String findBySeriesIdSql;
 	
-	public JdbcStampsCatalogDao(
-		NamedParameterJdbcTemplate jdbcTemplate,
-		String addCatalogNumberSql,
-		String addCatalogNumbersToSeriesSql,
-		String findBySeriesIdSql) {
-		super(jdbcTemplate);
-		this.addCatalogNumberSql = addCatalogNumberSql;
-		this.addCatalogNumbersToSeriesSql = addCatalogNumbersToSeriesSql;
-		this.findBySeriesIdSql = findBySeriesIdSql;
-	}
-	
-	@Override
 	public List<String> add(Set<String> catalogNumbers) {
-		return add(catalogNumbers, addCatalogNumberSql);
+		Validate.validState(!"".equals(addCatalogNumberSql), "Query must be non empty");
+		
+		List<String> inserted = new ArrayList<>();
+		for (String number : catalogNumbers) {
+			int affected = jdbcTemplate.update(
+				addCatalogNumberSql,
+				Collections.singletonMap("code", number)
+			);
+			if (affected > 0) {
+				inserted.add(number);
+			}
+		}
+		
+		return inserted;
 	}
 	
-	@Override
 	public void addToSeries(Integer seriesId, Set<String> catalogNumbers) {
-		addToSeries(seriesId, catalogNumbers, addCatalogNumbersToSeriesSql);
+		Validate.validState(seriesId != null, "Series id must be non null");
+		Validate.validState(!catalogNumbers.isEmpty(), "Catalog numbers must be non empty");
+		Validate.validState(!"".equals(addCatalogNumbersToSeriesSql), "Query must be non empty");
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("numbers", catalogNumbers);
+		
+		jdbcTemplate.update(addCatalogNumbersToSeriesSql, params);
 	}
 	
-	@Override
 	public List<String> findBySeriesId(Integer seriesId) {
-		return findBySeriesId(seriesId, findBySeriesIdSql);
+		return jdbcTemplate.queryForList(
+			findBySeriesIdSql,
+			Collections.singletonMap("series_id", seriesId),
+			String.class
+		);
 	}
 	
 }
