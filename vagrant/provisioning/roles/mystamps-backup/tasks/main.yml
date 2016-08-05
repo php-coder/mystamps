@@ -5,7 +5,7 @@
     path: /data/backups
     owner: mystamps
     group: mystamps
-    mode: '0755'
+    mode: '0750'
     state: directory
 
 - name: Granting access to the database to mystamps user
