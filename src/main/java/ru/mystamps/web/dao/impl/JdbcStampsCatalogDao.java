@@ -20,34 +20,35 @@ package ru.mystamps.web.dao.impl;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import ru.mystamps.web.dao.StampsCatalogDao;
 
-public class JdbcMichelCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
+public class JdbcStampsCatalogDao extends JdbcCatalogDao implements StampsCatalogDao {
 	
-	@Value("${michel.create}")
-	private String addMichelNumberSql;
+	private final String addCatalogNumberSql;
+	private final String addCatalogNumbersToSeriesSql;
+	private final String findBySeriesIdSql;
 	
-	@Value("${series_michel.add}")
-	private String addMichelNumbersToSeriesSql;
-	
-	@Value("${series_michel.find_by_series_id}")
-	private String findBySeriesIdSql;
-	
-	public JdbcMichelCatalogDao(NamedParameterJdbcTemplate jdbcTemplate) {
+	public JdbcStampsCatalogDao(
+		NamedParameterJdbcTemplate jdbcTemplate,
+		String addCatalogNumberSql,
+		String addCatalogNumbersToSeriesSql,
+		String findBySeriesIdSql) {
 		super(jdbcTemplate);
+		this.addCatalogNumberSql = addCatalogNumberSql;
+		this.addCatalogNumbersToSeriesSql = addCatalogNumbersToSeriesSql;
+		this.findBySeriesIdSql = findBySeriesIdSql;
 	}
 	
 	@Override
-	public List<String> add(Set<String> michelNumbers) {
-		return add(michelNumbers, addMichelNumberSql);
+	public List<String> add(Set<String> catalogNumbers) {
+		return add(catalogNumbers, addCatalogNumberSql);
 	}
 	
 	@Override
-	public void addToSeries(Integer seriesId, Set<String> michelNumbers) {
-		addToSeries(seriesId, michelNumbers, addMichelNumbersToSeriesSql);
+	public void addToSeries(Integer seriesId, Set<String> catalogNumbers) {
+		addToSeries(seriesId, catalogNumbers, addCatalogNumbersToSeriesSql);
 	}
 	
 	@Override
