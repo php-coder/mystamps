@@ -53,7 +53,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	private final SeriesDao seriesDao;
 	private final ImageService imageService;
-	private final MichelCatalogService michelCatalogService;
+	private final StampsCatalogService michelCatalogService;
 	private final ScottCatalogService scottCatalogService;
 	private final YvertCatalogService yvertCatalogService;
 	private final GibbonsCatalogService gibbonsCatalogService;

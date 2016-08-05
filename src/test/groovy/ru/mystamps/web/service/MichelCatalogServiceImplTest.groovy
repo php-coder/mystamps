@@ -25,7 +25,7 @@ class MichelCatalogServiceImplTest extends Specification {
 	
 	private StampsCatalogDao michelCatalogDao = Mock()
 	
-	private MichelCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
+	private StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

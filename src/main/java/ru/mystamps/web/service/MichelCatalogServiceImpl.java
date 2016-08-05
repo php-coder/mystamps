@@ -35,7 +35,7 @@ import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class MichelCatalogServiceImpl implements MichelCatalogService {
+public class MichelCatalogServiceImpl implements StampsCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(MichelCatalogServiceImpl.class);
 	
 	private final StampsCatalogDao michelCatalogDao;
