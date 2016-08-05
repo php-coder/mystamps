@@ -146,7 +146,7 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public ScottCatalogService getScottCatalogService() {
+	public StampsCatalogService getScottCatalogService() {
 		return new ScottCatalogServiceImpl(daoConfig.getScottCatalogDao());
 	}
 	

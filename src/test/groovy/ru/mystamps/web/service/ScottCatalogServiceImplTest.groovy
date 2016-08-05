@@ -25,7 +25,7 @@ class ScottCatalogServiceImplTest extends Specification {
 	
 	private StampsCatalogDao scottCatalogDao = Mock()
 	
-	private ScottCatalogService service = new ScottCatalogServiceImpl(scottCatalogDao)
+	private StampsCatalogService service = new ScottCatalogServiceImpl(scottCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

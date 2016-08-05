@@ -35,7 +35,7 @@ import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class ScottCatalogServiceImpl implements ScottCatalogService {
+public class ScottCatalogServiceImpl implements StampsCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(ScottCatalogServiceImpl.class);
 	
 	private final StampsCatalogDao scottCatalogDao;
