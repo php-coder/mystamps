@@ -55,7 +55,7 @@ public class SeriesServiceImpl implements SeriesService {
 	private final ImageService imageService;
 	private final StampsCatalogService michelCatalogService;
 	private final StampsCatalogService scottCatalogService;
-	private final YvertCatalogService yvertCatalogService;
+	private final StampsCatalogService yvertCatalogService;
 	private final StampsCatalogService gibbonsCatalogService;
 	
 	@Override

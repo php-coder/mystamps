@@ -40,7 +40,7 @@ class SeriesServiceImplTest extends Specification {
 	private SeriesDao seriesDao = Mock()
 	private StampsCatalogService michelCatalogService = Mock()
 	private StampsCatalogService scottCatalogService = Mock()
-	private YvertCatalogService yvertCatalogService = Mock()
+	private StampsCatalogService yvertCatalogService = Mock()
 	private StampsCatalogService gibbonsCatalogService = Mock()
 	private MultipartFile multipartFile = Mock()
 	

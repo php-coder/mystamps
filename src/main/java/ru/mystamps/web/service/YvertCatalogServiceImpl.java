@@ -35,7 +35,7 @@ import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class YvertCatalogServiceImpl implements YvertCatalogService {
+public class YvertCatalogServiceImpl implements StampsCatalogService {
 	private static final Logger LOG = LoggerFactory.getLogger(YvertCatalogServiceImpl.class);
 	
 	private final StampsCatalogDao yvertCatalogDao;

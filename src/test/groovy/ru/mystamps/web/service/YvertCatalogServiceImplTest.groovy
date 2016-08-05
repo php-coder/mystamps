@@ -25,7 +25,7 @@ class YvertCatalogServiceImplTest extends Specification {
 	
 	private StampsCatalogDao yvertCatalogDao = Mock()
 	
-	private YvertCatalogService service = new YvertCatalogServiceImpl(yvertCatalogDao)
+	private StampsCatalogService service = new YvertCatalogServiceImpl(yvertCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()
