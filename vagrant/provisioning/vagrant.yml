@@ -17,6 +17,8 @@
     apt:
       package: nano
       state: absent
+    become: yes
+    become_method: sudo
 
   - name: Creating /data directory
     file:
