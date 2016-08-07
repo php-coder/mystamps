@@ -1,5 +1,13 @@
 ---
 
+- name: Granting to mystamps to manage the service
+  copy:
+    content: "mystamps my-stamps.ru=(root) NOPASSWD: /bin/systemctl stop mystamps,/bin/systemctl start mystamps,/bin/systemctl restart mystamps\n"
+    dest: /etc/sudoers.d/10_mystamps
+    owner: root
+    group: root
+    mode: '0440'
+
 - name: Uploading mystamps.war to a server
   copy:
     src: ../../target/mystamps.war

@@ -37,6 +37,9 @@
     service:
       name: mystamps
       state: stopped
+    become: yes
+    become_user: root
+    become_method: sudo
 
   - name: Copying WAR file
     copy:
@@ -50,8 +53,10 @@
   - name: Starting service
     service:
       name: mystamps
-      enabled: yes
       state: started
+    become: yes
+    become_user: root
+    become_method: sudo
 
   - name: Starting monitoring
     uptimerobot:
