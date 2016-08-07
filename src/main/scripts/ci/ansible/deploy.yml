@@ -33,13 +33,10 @@
       state: paused
     when: uptimerobot is defined and uptimerobot.monitorid != '' and uptimerobot.apikey != ''
 
+  # we can't use service module here because our sudoers allows to execute only exact commands
   - name: Stopping service
-    service:
-      name: mystamps
-      state: stopped
-    become: yes
-    become_user: root
-    become_method: sudo
+    raw:
+      sudo systemctl stop mystamps
 
   - name: Copying WAR file
     copy:
@@ -50,13 +47,10 @@
       mode: '0755'
       backup: yes
 
+  # we can't use service module here because our sudoers allows to execute only exact commands
   - name: Starting service
-    service:
-      name: mystamps
-      state: started
-    become: yes
-    become_user: root
-    become_method: sudo
+    raw:
+      sudo systemctl start mystamps
 
   - name: Starting monitoring
     uptimerobot:
