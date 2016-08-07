@@ -1,6 +1,8 @@
 ---
 - hosts: all
   gather_facts: no
+  become: yes
+  become_method: sudo
   vars:
     profile: 'test'
     user_db_password: 'q1'
@@ -17,8 +19,6 @@
     apt:
       package: nano
       state: absent
-    become: yes
-    become_method: sudo
 
   - name: Creating /data directory
     file:
@@ -27,37 +27,18 @@
       owner: root
       group: root
       mode: '0755'
-    become: yes
-    become_method: sudo
 
   roles:
   - role: php-coder.oraclejdk
-    become: yes
-    become_method: sudo
-
   - role: mystamps-user
-    become: yes
-    become_method: sudo
-
   - role: mystamps-app
-    become: yes
-    become_method: sudo
-
   - {
       role: php-coder.nginx,
       remove_default_vhost: yes,
-      state: stopped,
-      become: yes,
-      become_method: sudo
+      state: stopped
     }
-
   - role: mystamps-nginx
-    become: yes
-    become_method: sudo
-
   - {
       role: mystamps-backup,
-      when: profile == 'prod',
-      become: yes,
-      become_method: sudo
+      when: profile == 'prod'
     }
