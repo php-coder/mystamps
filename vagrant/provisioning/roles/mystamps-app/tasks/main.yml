@@ -12,11 +12,28 @@
   notify:
   - Restarting mystamps service
 
-- name: Creating init-script
-  file:
-    src: /data/mystamps/mystamps.war
-    dest: /etc/init.d/mystamps
-    state: link
+- name: Creating mystamps.conf
+  template:
+    src: mystamps.conf
+    dest: /data/mystamps/mystamps.conf
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0644'
+  notify:
+  - Restarting mystamps service
+
+- name: Creating mystamps.service
+  copy:
+    src: mystamps.service
+    dest: /etc/systemd/system/mystamps.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Reloading systemd service
+  - Restarting mystamps service
 
 - name: Creating /data/logs
   file:
@@ -26,18 +43,17 @@
     mode: '0755'
     state: directory
 
-- name: Creating /data/uploads
+- name: Creating /data/heap-dumps
   file:
-    path: /data/uploads
+    path: /data/heap-dumps
     owner: mystamps
     group: mystamps
     mode: '0755'
     state: directory
-  when: profile == 'prod'
 
-- name: Creating /data/heap-dumps
+- name: Creating /data/uploads
   file:
-    path: /data/heap-dumps
+    path: /data/uploads
     owner: mystamps
     group: mystamps
     mode: '0755'
@@ -64,24 +80,6 @@
     mode: '0600'
   notify:
   - Restarting mystamps service
-  when: profile == 'prod'
-
-- name: Creating mystamps.conf
-  copy:
-    src: mystamps.conf
-    dest: /data/mystamps/mystamps.conf
-    mode: '0644'
-  notify:
-  - Restarting mystamps service
-  when: profile == 'prod'
-
-- name: Creating /var/log/mystamps
-  file:
-    path: /var/log/mystamps
-    owner: mystamps
-    group: mystamps
-    mode: '0755'
-    state: directory
   when: profile == 'prod'
 
 - name: Running service

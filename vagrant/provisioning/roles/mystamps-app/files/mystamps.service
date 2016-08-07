@@ -1,0 +1,13 @@
+[Unit]
+Description = MyStamps site
+After = syslog.target
+
+[Service]
+User = mystamps
+WorkingDirectory = /data/mystamps
+EnvironmentFile = /data/mystamps/mystamps.conf
+ExecStart = /usr/bin/java $JAVA_OPTS -jar /data/mystamps/mystamps.war
+SuccessExitStatus = 143
+
+[Install]
+WantedBy = multi-user.target
