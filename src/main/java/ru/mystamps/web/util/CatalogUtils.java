@@ -95,7 +95,7 @@ public final class CatalogUtils {
 		
 		addBufferToGroups(currentBuffer, groups);
 		
-		return StringUtils.join(groups, ", ");
+		return String.join(", ", groups);
 	}
 	
 	/**
