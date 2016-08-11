@@ -150,10 +150,14 @@
 								</span>
 							</label>
 							<div class="col-sm-5">
-								<select id="country" class="form-control" th:field="*{country}">
+								<select id="country" name="country" class="form-control">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="country : ${countries}" th:value="${country.slug}" th:text="${country.name}"></option>
+									<option th:each="country : ${countries}"
+										th:value="${country.slug}"
+										th:text="${country.name}"
+										th:selected="${addSeriesForm.country != null and addSeriesForm.country.slug == country.slug}">
+									</option>
 									/*/-->
 									<!--/*-->
 									<option value="russia">Russia</option>
