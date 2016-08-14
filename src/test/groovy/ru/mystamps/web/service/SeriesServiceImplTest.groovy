@@ -1031,25 +1031,25 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findByCountryId()
+	// Tests for findByCountrySlug()
 	//
 	
-	def "findByCountryId() should throw exception if country id is null"() {
+	def "findByCountrySlug() should throw exception if country slug is null"() {
 		when:
-			service.findByCountryId(null, 'any')
+			service.findByCountrySlug(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByCountryId() should call dao and return result"() {
+	def "findByCountrySlug() should call dao and return result"() {
 		given:
 			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
 			List<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			seriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCountrySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			List<SeriesInfoDto> result = service.findByCountryId(20, 'any')
+			List<SeriesInfoDto> result = service.findByCountrySlug('germany', 'any')
 		then:
 			result == expectedResult
 	}

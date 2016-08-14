@@ -106,12 +106,11 @@ public class CountryController {
 			return null;
 		}
 		
-		Integer id  = country.getId();
 		String slug = country.getSlug();
 		String name = country.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> series = seriesService.findByCountryId(id, lang);
+		List<SeriesInfoDto> series = seriesService.findByCountrySlug(slug, lang);
 		
 		model.addAttribute("countrySlug", slug);
 		model.addAttribute("countryName", name);
