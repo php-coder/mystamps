@@ -144,7 +144,7 @@ public class SeriesController {
 	
 	@RequestMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
 	public String showFormWithCountry(
-		@Country @PathVariable("id") LinkEntityDto country,
+		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model) {
 		
 		AddSeriesForm form = new AddSeriesForm();

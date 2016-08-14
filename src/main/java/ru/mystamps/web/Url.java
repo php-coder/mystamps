@@ -52,7 +52,7 @@ public final class Url {
 	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String ADD_SERIES_PAGE               = "/series/add";
 	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{id}";
-	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{id}";
+	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
 	public static final String INFO_SERIES_PAGE              = "/series/{id}";
 	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
 	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
