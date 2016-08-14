@@ -106,12 +106,11 @@ public class CategoryController {
 			return null;
 		}
 		
-		Integer id  = category.getId();
 		String slug = category.getSlug();
 		String name = category.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> series = seriesService.findByCategoryId(id, lang);
+		List<SeriesInfoDto> series = seriesService.findByCategorySlug(slug, lang);
 		
 		model.addAttribute("categorySlug", slug);
 		model.addAttribute("categoryName", name);

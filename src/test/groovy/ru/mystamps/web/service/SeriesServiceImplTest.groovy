@@ -1007,25 +1007,25 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findByCategoryId()
+	// Tests for findByCategorySlug()
 	//
 	
-	def "findByCategoryId() should throw exception if category id is null"() {
+	def "findByCategorySlug() should throw exception if category slug is null"() {
 		when:
-			service.findByCategoryId(null, 'any')
+			service.findByCategorySlug(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByCategoryId() should call dao and return result"() {
+	def "findByCategorySlug() should call dao and return result"() {
 		given:
 			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
 			List<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			seriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCategorySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			List<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
+			List<SeriesInfoDto> result = service.findByCategorySlug('iceland', 'any')
 		then:
 			result == expectedResult
 	}

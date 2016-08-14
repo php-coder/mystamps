@@ -70,8 +70,8 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.find_by_ids}")
 	private String findByIdsSql;
 	
-	@Value("${series.find_by_category_id}")
-	private String findByCategoryIdSql;
+	@Value("${series.find_by_category_slug}")
+	private String findByCategorySlugSql;
 	
 	@Value("${series.find_by_country_slug}")
 	private String findByCountrySlugSql;
@@ -223,12 +223,12 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 
 	@Override
-	public List<SeriesInfoDto> findByCategoryIdAsSeriesInfo(Integer categoryId, String lang) {
+	public List<SeriesInfoDto> findByCategorySlugAsSeriesInfo(String slug, String lang) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("category_id", categoryId);
+		params.put("slug", slug);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCategoryIdSql, params, RowMappers::forSeriesInfoDto);
+		return jdbcTemplate.query(findByCategorySlugSql, params, RowMappers::forSeriesInfoDto);
 	}
 	
 	@Override
