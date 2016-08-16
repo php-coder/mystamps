@@ -223,9 +223,11 @@ public class SeriesController {
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
-		// CheckStyle: ignore LineLength for next 1 line
-		List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
-		model.addAttribute("purchasesAndSales", purchasesAndSales);
+		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+			// CheckStyle: ignore LineLength for next 1 line
+			List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
+			model.addAttribute("purchasesAndSales", purchasesAndSales);
+		}
 		
 		return "series/info";
 	}
@@ -277,6 +279,13 @@ public class SeriesController {
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			// don't try to re-display file upload field
 			form.setImage(null);
+			
+			if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+				// CheckStyle: ignore LineLength for next 1 line
+				List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
+				model.addAttribute("purchasesAndSales", purchasesAndSales);
+			}
+
 			return "series/info";
 		}
 		

@@ -47,7 +47,9 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings("PMD.TooManyMethods")
+// The String literal "Series id must be non null" appears N times in this file
+// and we think that it's OK.
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
@@ -339,6 +341,7 @@ public class SeriesServiceImpl implements SeriesService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 

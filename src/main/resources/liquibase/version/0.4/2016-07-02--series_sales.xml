@@ -28,21 +28,21 @@
 			</column>
 			<column name="series_id" type="INTEGER">
 				<constraints nullable="false" references="series(id)"
-				             foreignKeyName="fk_series_sales_series_id"/>
+					foreignKeyName="fk_series_sales_series_id"/>
 			</column>
 			<column name="date" type="DATETIME"/>
 			<column name="seller_id" type="INTEGER">
 				<constraints nullable="false" references="transaction_participants(id)"
-				             foreignKeyName="fk_seller_id_transaction_patricipants_id"/>
+					foreignKeyName="fk_seller_id_transaction_participants_id"/>
 			</column>
 			<column name="buyer_id" type="INTEGER">
 				<constraints references="transaction_participants(id)"
-				             foreignKeyName="fk_buyer_id_transaction_patricipants_id"/>
+					foreignKeyName="fk_buyer_id_transaction_participants_id"/>
 			</column>
 			<column name="transaction_url" type="VARCHAR(255)"/>
-			<column name="first_price" type="DECIMAL"/>
+			<column name="first_price" type="CURRENCY"/>
 			<column name="first_currency" type="VARCHAR(3)"/>
-			<column name="second_price" type="DECIMAL"/>
+			<column name="second_price" type="CURRENCY"/>
 			<column name="second_currency" type="VARCHAR(3)"/>
 		</createTable>
 	</changeSet>

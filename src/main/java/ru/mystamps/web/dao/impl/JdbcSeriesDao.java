@@ -81,7 +81,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	private String findByCollectionIdSql;
 	
 	@Value("${series.find_purchases_and_sales_by_series_id}")
-	private String findPurchasesAndSalesSql;
+	private String findPurchasesAndSalesBySeriesIdSql;
 	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
@@ -254,7 +254,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Override
 	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
 		return jdbcTemplate.query(
-			findPurchasesAndSalesSql,
+			findPurchasesAndSalesBySeriesIdSql,
 			Collections.singletonMap("series_id", seriesId),
 			RowMappers::forPurchaseAndSaleDto
 		);

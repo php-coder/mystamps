@@ -18,7 +18,7 @@
 package ru.mystamps.web.service
 
 import org.springframework.web.multipart.MultipartFile
-
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -1049,6 +1049,33 @@ class SeriesServiceImplTest extends Specification {
 			Iterable<SitemapInfoDto> result = service.findAllForSitemap()
 		then:
 			1 * seriesDao.findAllForSitemap() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findPurchasesAndSales()
+	//
+	
+	def "findPurchasesAndSales() should throw exception when series id is null"() {
+		when:
+			service.findPurchasesAndSales(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 88
+		and:
+			List<PurchaseAndSaleDto> expectedResult = [ TestObjects.createPurchaseAndSaleDto() ]
+		when:
+			List<PurchaseAndSaleDto> result = service.findPurchasesAndSales(expectedSeriesId)
+		then:
+			1 * seriesDao.findPurchasesAndSales({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
 		and:
 			result == expectedResult
 	}

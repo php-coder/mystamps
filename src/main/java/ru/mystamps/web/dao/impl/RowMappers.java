@@ -110,6 +110,7 @@ final class RowMappers {
 		);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
 	public static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int i) throws SQLException {
 		Date date               = rs.getDate("date");
 		String sellerName       = rs.getString("seller_name");
