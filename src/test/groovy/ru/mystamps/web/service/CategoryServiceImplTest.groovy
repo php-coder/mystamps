@@ -323,12 +323,12 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByName() should pass category name to dao"() {
+	def "countByName() should pass category name to dao in lowercase"() {
 		when:
 			service.countByName('Sport')
 		then:
 			1 * categoryDao.countByName({ String name ->
-				assert name == 'Sport'
+				assert name == 'sport'
 				return true
 			})
 	}
@@ -353,12 +353,12 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByNameRu() should pass category name to dao"() {
+	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Спорт')
 		then:
 			1 * categoryDao.countByNameRu({ String name ->
-				assert name == 'Спорт'
+				assert name == 'спорт'
 				return true
 			})
 	}

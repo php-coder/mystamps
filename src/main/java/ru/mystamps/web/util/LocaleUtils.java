@@ -24,6 +24,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 public final class LocaleUtils {
 	
+	public static final Locale RUSSIAN = new Locale("ru", "RU");
+	
 	private LocaleUtils() {
 	}
 	
