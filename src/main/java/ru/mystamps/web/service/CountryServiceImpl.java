@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -38,6 +39,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
@@ -113,14 +115,22 @@ public class CountryServiceImpl implements CountryService {
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name must be non null");
-		return countryDao.countByName(name);
+		
+		// converting to lowercase to do a case-insensitive search
+		String countryName = name.toLowerCase(Locale.ENGLISH);
+		
+		return countryDao.countByName(countryName);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
 		Validate.isTrue(name != null, "Name in Russian must be non null");
-		return countryDao.countByNameRu(name);
+		
+		// converting to lowercase to do a case-insensitive search
+		String countryName = name.toLowerCase(LocaleUtils.RUSSIAN);
+		
+		return countryDao.countByNameRu(countryName);
 	}
 	
 	@Override

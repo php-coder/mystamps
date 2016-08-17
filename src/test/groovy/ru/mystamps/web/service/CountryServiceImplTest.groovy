@@ -322,12 +322,12 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByName() should pass country name to dao"() {
+	def "countByName() should pass country name to dao in lowercase"() {
 		when:
 			service.countByName('Canada')
 		then:
 			1 * countryDao.countByName({ String name ->
-				assert name == 'Canada'
+				assert name == 'canada'
 				return true
 			})
 	}
@@ -352,12 +352,12 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByNameRu() should pass category name to dao"() {
+	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Канада')
 		then:
 			1 * countryDao.countByNameRu({ String name ->
-				assert name == 'Канада'
+				assert name == 'канада'
 				return true
 			})
 	}
