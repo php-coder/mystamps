@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -112,7 +113,10 @@ public class UserServiceImpl implements UserService {
 	public long countByLogin(String login) {
 		Validate.isTrue(login != null, "Login must be non null");
 		
-		return userDao.countByLogin(login);
+		// converting to lowercase to do a case-insensitive search
+		String userLogin = login.toLowerCase(Locale.ENGLISH);
+		
+		return userDao.countByLogin(userLogin);
 	}
 	
 	@Override

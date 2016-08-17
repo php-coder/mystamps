@@ -318,9 +318,9 @@ class UserServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByLogin() should pass login to dao"() {
+	def "countByLogin() should pass login to dao in lowercase"() {
 		when:
-			service.countByLogin('john')
+			service.countByLogin('John')
 		then:
 			1 * userDao.countByLogin('john')
 	}
