@@ -15,5 +15,6 @@
 	<include file="0.4/2016-02-19--csrf_events.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-01-14--unique_slug_in_countries.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-07-22--unique_slug_in_categories.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-08-18--unique_slug_in_collections.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

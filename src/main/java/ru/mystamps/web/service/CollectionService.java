@@ -30,5 +30,5 @@ public interface CollectionService {
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
-	CollectionInfoDto findById(Integer collectionId);
+	CollectionInfoDto findBySlug(String slug);
 }

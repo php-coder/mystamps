@@ -32,5 +32,5 @@ public interface CollectionDao {
 	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
 	void addSeriesToCollection(Integer collectionId, Integer seriesId);
 	void removeSeriesFromCollection(Integer collectionId, Integer seriesId);
-	CollectionInfoDto findCollectionInfoById(Integer collectionId);
+	CollectionInfoDto findCollectionInfoBySlug(String slug);
 }

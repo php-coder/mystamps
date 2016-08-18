@@ -298,26 +298,26 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findById()
+	// Tests for findBySlug()
 	//
 	
-	def "findById() should throw exception when collection id is null"() {
+	def "findBySlug() should throw exception when collection slug is null"() {
 		when:
-			service.findById(null)
+			service.findBySlug(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findById() should invoke dao, pass argument and return result from dao"() {
+	def "findBySlug() should invoke dao, pass argument and return result from dao"() {
 		given:
-			Integer expectedCollectionId = 12
+			String expectedSlug = 'cuba'
 		and:
 			CollectionInfoDto expectedResult = TestObjects.createCollectionInfoDto()
 		when:
-			CollectionInfoDto result = service.findById(expectedCollectionId)
+			CollectionInfoDto result = service.findBySlug(expectedSlug)
 		then:
-			1 * collectionDao.findCollectionInfoById({ Integer collectionId ->
-				assert collectionId == expectedCollectionId
+			1 * collectionDao.findCollectionInfoBySlug({ String slug ->
+				assert slug == expectedSlug
 				return true
 			}) >> expectedResult
 		and:

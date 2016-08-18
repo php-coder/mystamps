@@ -96,7 +96,6 @@ final class TestObjects {
 	
 	public static UserDetails createUserDetails() {
 		final Integer anyId = 777;
-		Integer collectionId = anyId;
 		String collectionSlug = TEST_LOGIN;
 		
 		return new UserDetails(
@@ -105,7 +104,6 @@ final class TestObjects {
 			TEST_NAME,
 			TEST_HASH,
 			UserDetails.Role.USER,
-			collectionId,
 			collectionSlug
 		);
 	}
@@ -136,7 +134,7 @@ final class TestObjects {
 	
 	@SuppressWarnings("checkstyle:magicnumber")
 	public static CollectionInfoDto createCollectionInfoDto() {
-		return new CollectionInfoDto(101, "Test User");
+		return new CollectionInfoDto(101, "test-user", "Test User");
 	}
 	
 	public static SuspiciousActivityDto createSuspiciousActivityDto() {

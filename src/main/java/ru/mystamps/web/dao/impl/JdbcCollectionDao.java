@@ -70,8 +70,8 @@ public class JdbcCollectionDao implements CollectionDao {
 	@Value("${collection.remove_series_from_collection}")
 	private String removeSeriesFromCollectionSql;
 	
-	@Value("${collection.find_info_by_id}")
-	private String findCollectionInfoByIdSql;
+	@Value("${collection.find_info_by_slug}")
+	private String findCollectionInfoBySlugSql;
 	
 	@Override
 	public List<LinkEntityDto> findLastCreated(int quantity) {
@@ -172,10 +172,10 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
-	public CollectionInfoDto findCollectionInfoById(Integer collectionId) {
+	public CollectionInfoDto findCollectionInfoBySlug(String slug) {
 		return jdbcTemplate.queryForObject(
-			findCollectionInfoByIdSql,
-			Collections.singletonMap("collection_id", collectionId),
+			findCollectionInfoBySlugSql,
+			Collections.singletonMap("slug", slug),
 			RowMappers::forCollectionInfoDto
 		);
 	}

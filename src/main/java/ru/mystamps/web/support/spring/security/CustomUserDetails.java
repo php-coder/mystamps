@@ -33,7 +33,6 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 	
 	// used in controllers for getting info about current user
 	private final String userName;
-	private final Integer userCollectionId;
 	private final String userCollectionSlug;
 	
 	public CustomUserDetails(
@@ -43,7 +42,6 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
 		super(userDetails.getLogin(), userDetails.getHash(), authorities);
 		this.userId = userDetails.getId();
 		this.userName = userDetails.getName();
-		this.userCollectionId = userDetails.getCollectionId();
 		this.userCollectionSlug = userDetails.getCollectionSlug();
 	}
 	

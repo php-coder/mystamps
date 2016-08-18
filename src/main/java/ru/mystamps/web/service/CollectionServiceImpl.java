@@ -147,10 +147,10 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public CollectionInfoDto findById(Integer collectionId) {
-		Validate.isTrue(collectionId != null, "Collection id must be non null");
+	public CollectionInfoDto findBySlug(String slug) {
+		Validate.isTrue(slug != null, "Collection slug must be non null");
 		
-		return collectionDao.findCollectionInfoById(collectionId);
+		return collectionDao.findCollectionInfoBySlug(slug);
 	}
 	
 }

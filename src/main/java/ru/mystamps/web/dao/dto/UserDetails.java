@@ -30,7 +30,6 @@ public class UserDetails {
 	private final String name;
 	private final String hash;
 	private final Role role;
-	private final Integer collectionId;
 	private final String collectionSlug;
 	
 	public enum Role {

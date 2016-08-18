@@ -69,7 +69,9 @@ public final class Url {
 	// For backward compatibility
 	public static final String INFO_COUNTRY_BY_ID_PAGE = "/country/{id}/{slug}";
 	
-	public static final String INFO_COLLECTION_PAGE  = "/collection/{id}/{slug}";
+	public static final String INFO_COLLECTION_PAGE  = "/collection/{slug}";
+	// For backward compatibility
+	public static final String INFO_COLLECTION_BY_ID_PAGE  = "/collection/{id}/{slug}";
 	
 	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	

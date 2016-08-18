@@ -306,7 +306,7 @@ public class SeriesController {
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
 		
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getSlug());
 	}
 	
 	@RequestMapping(
@@ -336,7 +336,7 @@ public class SeriesController {
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getId(), collection.getSlug());
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getSlug());
 	}
 	
 	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)

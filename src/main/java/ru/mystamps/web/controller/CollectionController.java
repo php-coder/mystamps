@@ -24,10 +24,13 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,19 +54,19 @@ public class CollectionController {
 	private final MessageSource messageSource;
 	
 	@RequestMapping(Url.INFO_COLLECTION_PAGE)
-	public String showInfo(
-		@PathVariable("id") Integer collectionId,
+	public String showInfoBySlug(
+		@PathVariable("slug") String slug,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (collectionId == null) {
+		if (slug == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		CollectionInfoDto collection = collectionService.findById(collectionId);
+		CollectionInfoDto collection = collectionService.findBySlug(slug);
 		if (collection == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -72,6 +75,7 @@ public class CollectionController {
 		String owner = collection.getOwnerName();
 		model.addAttribute("ownerName", owner);
 		
+		Integer collectionId = collection.getId();
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> seriesOfCollection =
 			seriesService.findByCollectionId(collectionId, lang);
@@ -98,6 +102,30 @@ public class CollectionController {
 		return "collection/info";
 	}
 
+	@RequestMapping(Url.INFO_COLLECTION_BY_ID_PAGE)
+	public View showInfoById(
+		@PathVariable("slug") String slug,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (slug == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		CollectionInfoDto collection = collectionService.findBySlug(slug);
+		if (collection == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_COLLECTION_PAGE);
+		
+		return view;
+	}
+	
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	private List<Object[]> getCountriesStatistics(Integer collectionId, String lang) {
 		List<Object[]> countriesStat = countryService.getStatisticsOf(collectionId, lang);

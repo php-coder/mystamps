@@ -24,5 +24,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CollectionInfoDto {
 	private final Integer id;
+	private final String slug;
 	private final String ownerName;
 }

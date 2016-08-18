@@ -203,6 +203,7 @@ final class RowMappers {
 	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int i) throws SQLException {
 		return new CollectionInfoDto(
 			rs.getInt("id"),
+			rs.getString("slug"),
 			rs.getString("name")
 		);
 	}
@@ -214,7 +215,6 @@ final class RowMappers {
 			rs.getString("name"),
 			rs.getString("hash"),
 			UserDetails.Role.valueOf(rs.getString("role")),
-			rs.getInt("collection_id"),
 			rs.getString("collection_slug")
 		);
 	}
