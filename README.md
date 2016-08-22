@@ -44,7 +44,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 * *Database access*: Spring's `JdbcTemplate`
 * *Database migrations*: Liquibase
 * *Validation*: JSR-303 (Hibernate Validator)
-* *Logging*: Slf4j (log4j)
+* *Logging*: Slf4j (Logback)
 * *Unit tests*: Groovy and Spock Framework (for Java code), jasmine (for JavaScript code)
 * *Integration tests*: Selenium2, TestNG and fest-assert
 * *Others*: Lombok, Togglz, WebJars

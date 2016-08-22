@@ -53,11 +53,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 			<exclusions>
 				<exclusion>
-					<!-- In favour of spring-boot-starter-log4j -->
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>org.yaml</groupId>
 					<artifactId>snakeyaml</artifactId>
 				</exclusion>
@@ -92,10 +87,10 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.7.RELEASE/spring-boot-starters/spring-boot-starter-log4j/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.7.RELEASE/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j</artifactId>
+			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.3.7.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->

@@ -9,6 +9,7 @@
 - (functionality)  allow to users to add categories and countries
 - (infrastructure) ported to Spring's JdbcTemplate (get rid of Spring-Data-JPA and Hibernate)
 - (functionality)  send daily reports to admin by e-mail
+- (infrastructure) use logback (instead of log4j) for logging
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
