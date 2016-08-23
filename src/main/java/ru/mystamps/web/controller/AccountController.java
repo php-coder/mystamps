@@ -61,6 +61,7 @@ public class AccountController {
 	
 	@InitBinder("activateAccountForm")
 	protected void activationInitBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "login", new StringTrimmerEditor(true));
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
