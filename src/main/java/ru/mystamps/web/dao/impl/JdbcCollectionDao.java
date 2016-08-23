@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -174,15 +173,11 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@Override
 	public CollectionInfoDto findCollectionInfoBySlug(String slug) {
-		try {
-			return jdbcTemplate.queryForObject(
-				findCollectionInfoBySlugSql,
-				Collections.singletonMap("slug", slug),
-				RowMappers::forCollectionInfoDto
-			);
-		} catch (EmptyResultDataAccessException ignored){
-			return null;
-		}
+		return jdbcTemplate.queryForObject(
+			findCollectionInfoBySlugSql,
+			Collections.singletonMap("slug", slug),
+			RowMappers::forCollectionInfoDto
+		);
 	}
 	
 }
