@@ -45,7 +45,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -69,6 +68,7 @@ import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
+import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 
 @Controller
@@ -393,14 +393,6 @@ public class SeriesController {
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {
 		return series.getImageIds().size() <= series.getQuantity();
-	}
-	
-	private static String redirectTo(String url, Object... args) {
-		String dstUrl = UriComponentsBuilder.fromUriString(url)
-			.buildAndExpand(args)
-			.toString();
-		
-		return "redirect:" + dstUrl;
 	}
 	
 	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {

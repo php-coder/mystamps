@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,6 +50,8 @@ import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
+
+import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
@@ -84,13 +85,9 @@ public class CountryController {
 		
 		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(countryUrl.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_COUNTRY_PAGE, countryUrl.getSlug());
 	}
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)
