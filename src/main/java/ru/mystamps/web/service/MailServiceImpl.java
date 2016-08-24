@@ -53,9 +53,7 @@ public class MailServiceImpl implements MailService {
 	private final Locale adminLang;
 	private final String robotEmail;
 	private final boolean testMode;
-	
 	private final DatePrinter shortDatePrinter;
-	private final DatePrinter fullDatePrinter;
 	
 	public MailServiceImpl(
 		JavaMailSender mailer,
@@ -73,7 +71,6 @@ public class MailServiceImpl implements MailService {
 		this.testMode = testMode;
 		
 		this.shortDatePrinter = FastDateFormat.getInstance("dd.MM.yyyy", adminLang);
-		this.fullDatePrinter  = FastDateFormat.getInstance("dd.MM.yyyy HH:mm:ss", adminLang);
 	}
 	
 	@Override
@@ -108,13 +105,11 @@ public class MailServiceImpl implements MailService {
 			"daily_statistics"
 		);
 		
-		String fromDate = fullDatePrinter.format(report.getStartDate());
-		String tillDate = fullDatePrinter.format(report.getEndDate());
+		String date = shortDatePrinter.format(report.getStartDate());
 		
 		LOG.info(
-			"E-mail with daily statistics (from {} to {}) has been sent to {} (lang: {})",
-			fromDate,
-			tillDate,
+			"E-mail with daily statistics for {} has been sent to {} (lang: {})",
+			date,
 			adminEmail,
 			adminLang
 		);
