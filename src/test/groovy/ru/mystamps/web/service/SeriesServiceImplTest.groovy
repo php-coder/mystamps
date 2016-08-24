@@ -24,13 +24,13 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
+import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
-import ru.mystamps.web.service.dto.Currency
 import ru.mystamps.web.tests.DateUtils
 
 class SeriesServiceImplTest extends Specification {

@@ -20,7 +20,7 @@ package ru.mystamps.web.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ru.mystamps.web.service.dto.Currency;
+import ru.mystamps.web.dao.dto.Currency;
 
 public final class JdbcUtils {
 	

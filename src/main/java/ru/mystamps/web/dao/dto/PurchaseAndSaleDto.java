@@ -23,8 +23,6 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.dto.Currency;
-
 /**
  * @author Sergey Chechenev
  */
