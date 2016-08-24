@@ -69,6 +69,7 @@ import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
+import static ru.mystamps.web.controller.ControllerUtils.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -379,14 +380,6 @@ public class SeriesController {
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {
 		return series.getImageIds().size() <= series.getQuantity();
-	}
-	
-	private static String redirectTo(String url, Object... args) {
-		String dstUrl = UriComponentsBuilder.fromUriString(url)
-			.buildAndExpand(args)
-			.toString();
-		
-		return "redirect:" + dstUrl;
 	}
 	
 	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {

@@ -52,6 +52,8 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 
+import static ru.mystamps.web.controller.ControllerUtils.*;
+
 @Controller
 @RequiredArgsConstructor
 public class CountryController {
@@ -83,14 +85,9 @@ public class CountryController {
 		}
 		
 		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
-		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(countryUrl.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_COUNTRY_PAGE, countryUrl.getSlug());
 	}
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)

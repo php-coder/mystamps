@@ -52,6 +52,8 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 
+import static ru.mystamps.web.controller.ControllerUtils.*;
+
 @Controller
 @RequiredArgsConstructor
 public class CategoryController {
@@ -83,14 +85,9 @@ public class CategoryController {
 		}
 		
 		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
-		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(categoryUrl.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_CATEGORY_PAGE,categoryUrl.getSlug());
 	}
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)
