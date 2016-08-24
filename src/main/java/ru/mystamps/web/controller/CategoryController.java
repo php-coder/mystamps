@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,6 +50,8 @@ import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
+
+import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
@@ -84,13 +85,9 @@ public class CategoryController {
 		
 		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
 		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(categoryUrl.getSlug())
-			.toString();
-		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_CATEGORY_PAGE, categoryUrl.getSlug());
 	}
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)
