@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
+import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -35,7 +36,6 @@ import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.service.dto.Currency;
 
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 final class RowMappers {
