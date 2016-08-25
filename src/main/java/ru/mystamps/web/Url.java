@@ -86,17 +86,18 @@ public final class Url {
 	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.min.js";
 	public static final String SERIES_ADD_JS          = "/public/js/series/add.min.js";
 	public static final String COLLECTION_INFO_JS     = "/public/js/collection/info.min.js";
-	
-	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS           = "/public/bootstrap/js/bootstrap.min.js";
-	public static final String JQUERY_JS              = "/public/jquery/jquery.min.js";
+
+	// CheckStyle: ignore LineLength for next 2 lines
+	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.6/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.3.6/js/bootstrap.min.js";
+	public static final String JQUERY_JS              = "/public/jquery/1.9.1/jquery.min.js";
 	// CheckStyle: ignore LineLength for next 1 lines
 	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	// TODO: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
-	public static final String SELECTIZE_CSS          = "/public/selectize/css/selectize.bootstrap3.css";
-	public static final String SELECTIZE_JS           = "/public/selectize/js/standalone/selectize.min.js";
+	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.1/css/selectize.bootstrap3.css";
+	public static final String SELECTIZE_JS           = "/public/selectize/0.12.1/js/standalone/selectize.min.js";
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
