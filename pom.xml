@@ -345,7 +345,7 @@
 	</parent>
 	
 	<properties>
-		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<!-- Don't forget to update version in the Url class -->
 		<bootstrap.version>3.3.6</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
@@ -393,7 +393,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
 		<jetty.version>9.2.18.v20160721</jetty.version>
 		
-		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<!-- Don't forget to update version in the Url class -->
 		<jquery.version>1.9.1</jquery.version>
 		
 		<license.plugin.version>1.9.0</license.plugin.version>
@@ -411,7 +411,7 @@
 		<pmd.plugin.version>3.6</pmd.plugin.version>
 		<resources.plugin.version>2.7</resources.plugin.version>
 		
-		<!-- Don't forget to update version in MvcConfig and Url classes -->
+		<!-- Don't forget to update version in the Url class -->
 		<selectizejs.version>0.12.1</selectizejs.version>
 		
 		<selenium.htmlunit.version>2.20</selenium.htmlunit.version>
