@@ -152,6 +152,15 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void loginShouldNotContainsRepeatCharacters() {
+		page.activateAccount("te__st", null, null, null, null);
+		
+		assertThat(page)
+			.field("login")
+			.hasError(tr("login.repetitionChars"));
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void nameShouldNotBeTooLong() {
 		page.activateAccount(null, StringUtils.repeat("0", NAME_MAX_LENGTH + 1), null, null, null);
 		
