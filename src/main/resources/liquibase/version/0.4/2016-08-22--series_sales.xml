@@ -65,7 +65,7 @@
 		<insert tableName="transaction_participants">
 			<column name="id" value="3"/>
 			<column name="name" value="Duncan MacLeod"/>
-			<column name="url" value="http://example.com/duncan-macleod"/>
+			<column name="url" value="NULL"/>
 		</insert>
 	</changeSet>
 	
