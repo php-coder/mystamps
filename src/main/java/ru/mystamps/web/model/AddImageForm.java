@@ -39,27 +39,18 @@ import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 public class AddImageForm implements AddImageDto {
 	
 	@NotNull
-	@NotEmptyFilename(groups = Image1Checks.class)
-	@NotEmptyFile(groups = Image2Checks.class)
-	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Image3Checks.class)
-	@ImageFile(groups = Image3Checks.class)
+	@NotEmptyFilename(groups = Group.Level1.class)
+	@NotEmptyFile(groups = Group.Level2.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level3.class)
+	@ImageFile(groups = Group.Level3.class)
 	private MultipartFile image;
 	
 	@GroupSequence({
-		Image1Checks.class,
-		Image2Checks.class,
-		Image3Checks.class
+		Group.Level1.class,
+		Group.Level2.class,
+		Group.Level3.class
 	})
 	public interface ImageChecks {
-	}
-	
-	public interface Image1Checks {
-	}
-	
-	public interface Image2Checks {
-	}
-	
-	public interface Image3Checks {
 	}
 	
 }

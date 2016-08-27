@@ -40,83 +40,68 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP
 @Setter
 @GroupSequence({
 	AddCategoryForm.class,
-	AddCategoryForm.Level1Checks.class,
-	AddCategoryForm.Level2Checks.class,
-	AddCategoryForm.Level3Checks.class,
-	AddCategoryForm.Level4Checks.class,
-	AddCategoryForm.Level5Checks.class
+	Group.Level1.class,
+	Group.Level2.class,
+	Group.Level3.class,
+	Group.Level4.class,
+	Group.Level5.class
 })
 public class AddCategoryForm implements AddCategoryDto {
 	
-	@NotEmpty(groups = Level1Checks.class)
+	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = CATEGORY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		),
 		@Size(
 			max = CATEGORY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
 			regexp = CATEGORY_NAME_EN_REGEXP,
 			message = "{category-name-en.invalid}",
-			groups = Level3Checks.class
+			groups = Group.Level3.class
 		),
 		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Level4Checks.class
+			groups = Group.Level4.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.EN, groups = Level5Checks.class)
+	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level5.class)
 	private String name;
 	
-	@NotEmpty(groups = Level1Checks.class)
+	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = CATEGORY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		),
 		@Size(
 			max = CATEGORY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
 			regexp = CATEGORY_NAME_RU_REGEXP,
 			message = "{category-name-ru.invalid}",
-			groups = Level3Checks.class
+			groups = Group.Level3.class
 		),
 		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Level4Checks.class
+			groups = Group.Level4.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.RU, groups = Level5Checks.class)
+	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level5.class)
 	private String nameRu;
-	
-	public interface Level1Checks {
-	}
-	
-	public interface Level2Checks {
-	}
-	
-	public interface Level3Checks {
-	}
-	
-	public interface Level4Checks {
-	}
-	
-	public interface Level5Checks {
-	}
 	
 }
