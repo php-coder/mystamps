@@ -65,6 +65,8 @@ public class CategoryController {
 		StringTrimmerEditor editor = new StringTrimmerEditor(false);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
+		binder.registerCustomEditor(String.class, "name", new CustomCategoryNameEditor());
+		binder.registerCustomEditor(String.class, "nameRu", new CustomCategoryNameEditor());
 	}
 	
 	@RequestMapping(Url.ADD_CATEGORY_PAGE)

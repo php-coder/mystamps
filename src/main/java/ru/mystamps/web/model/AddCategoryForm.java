@@ -36,6 +36,7 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGT
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
 
+
 @Getter
 @Setter
 @GroupSequence({
