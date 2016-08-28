@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -43,17 +46,11 @@ public @interface MaxFileSize {
 	long value();
 	Unit unit();
 	
+	@Getter
+	@RequiredArgsConstructor
 	enum Unit {
 		bytes(1), Kbytes(1024), Mbytes(1024 * 1024);
 		
-		private long size;
-		
-		Unit(long size) {
-			this.size = size;
-		}
-		
-		public long getSize() {
-			return size;
-		}
+		private final long size;
 	}
 }
