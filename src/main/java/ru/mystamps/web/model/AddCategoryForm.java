@@ -35,6 +35,7 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGT
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_REPEATS_HYPHENS;
 
 @Getter
 @Setter
@@ -71,9 +72,14 @@ public class AddCategoryForm implements AddCategoryDto {
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Level4Checks.class
+		),
+		@Pattern(
+			regexp = CATEGORY_NAME_NO_REPEATS_HYPHENS,
+			message = "{value.hyphen_repeat_en}",
+			groups = Level5Checks.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.EN, groups = Level5Checks.class)
+	@UniqueCategoryName(lang = Lang.EN, groups = Level6Checks.class)
 	private String name;
 	
 	@NotEmpty(groups = Level1Checks.class)
@@ -99,9 +105,14 @@ public class AddCategoryForm implements AddCategoryDto {
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Level4Checks.class
+		),
+		@Pattern(
+		regexp = CATEGORY_NAME_NO_REPEATS_HYPHENS,
+		message = "{value.hyphen_repeat_ru}",
+		groups = Level5Checks.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.RU, groups = Level5Checks.class)
+	@UniqueCategoryName(lang = Lang.RU, groups = Level6Checks.class)
 	private String nameRu;
 	
 	public interface Level1Checks {
@@ -117,6 +128,9 @@ public class AddCategoryForm implements AddCategoryDto {
 	}
 	
 	public interface Level5Checks {
+	}
+	
+	public interface Level6Checks {
 	}
 	
 }

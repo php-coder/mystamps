@@ -43,6 +43,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.editor.CustomCategoryNameEditor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.UrlEntityDto;
@@ -62,9 +63,9 @@ public class CategoryController {
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(false);
-		binder.registerCustomEditor(String.class, "name", editor);
-		binder.registerCustomEditor(String.class, "nameRu", editor);
+		CustomCategoryNameEditor nameEditor = new CustomCategoryNameEditor();
+		binder.registerCustomEditor(String.class, "name", nameEditor);
+		binder.registerCustomEditor(String.class, "nameRu", nameEditor);
 	}
 	
 	@RequestMapping(Url.ADD_CATEGORY_PAGE)
