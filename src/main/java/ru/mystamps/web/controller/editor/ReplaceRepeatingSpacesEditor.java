@@ -19,16 +19,29 @@ package ru.mystamps.web.controller.editor;
 
 import java.beans.PropertyEditorSupport;
 
-public class CustomCategoryNameEditor extends PropertyEditorSupport {
+import lombok.RequiredArgsConstructor;
+
+/**
+ *@author Maxim Shestakov
+ */
+@RequiredArgsConstructor
+public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 	private static final String REPEATING_SPACES_REGEXP = "[ ]{2,}";
-	
+	private final boolean performTrimming;
+
 	@Override
 	public void setAsText(String name) throws IllegalArgumentException {
-		if (name.contains("  ")) {
-			setValue(name.replaceAll(REPEATING_SPACES_REGEXP, " "));
-		} else {
-			setValue(name);
+		String text = name;
+
+		if (performTrimming) {
+			text = name.trim();
 		}
+
+		if (text.contains("  ")) {
+			text = text.replaceAll(REPEATING_SPACES_REGEXP, " ");
+		}
+
+		setValue(text);
 	}
 	
 }
