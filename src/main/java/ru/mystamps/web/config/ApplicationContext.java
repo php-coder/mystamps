@@ -33,6 +33,7 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 	DaoConfig.class,
 	ServicesConfig.class,
 	StrategiesConfig.class,
+	TaskExecutorConfig.class,
 	TogglzConfig.class
 })
 @SuppressWarnings({"checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass"})
