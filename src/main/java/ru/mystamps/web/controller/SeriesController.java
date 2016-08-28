@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -200,33 +201,13 @@ public class SeriesController {
 			return null;
 		}
 		
-		String michelNumbers  = CatalogUtils.toShortForm(series.getMichel().getNumbers());
-		String scottNumbers   = CatalogUtils.toShortForm(series.getScott().getNumbers());
-		String yvertNumbers   = CatalogUtils.toShortForm(series.getYvert().getNumbers());
-		String gibbonsNumbers = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
+		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+		model.addAllAttributes(commonAttrs);
 		
-		// CheckStyle: ignore LineLength for next 1 lines
-		boolean isSeriesInCollection = collectionService.isSeriesInCollection(currentUserId, series.getId());
-		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
 		AddImageForm form = new AddImageForm();
-		
-		model.addAttribute("series", series);
 		model.addAttribute("addImageForm", form);
 		
-		model.addAttribute("michelNumbers", michelNumbers);
-		model.addAttribute("scottNumbers", scottNumbers);
-		model.addAttribute("yvertNumbers", yvertNumbers);
-		model.addAttribute("gibbonsNumbers", gibbonsNumbers);
-		
-		model.addAttribute("isSeriesInCollection", isSeriesInCollection);
-		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
-		
-		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
-			// CheckStyle: ignore LineLength for next 1 line
-			List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
-			model.addAttribute("purchasesAndSales", purchasesAndSales);
-		}
 		
 		return "series/info";
 	}
@@ -254,37 +235,15 @@ public class SeriesController {
 			return null;
 		}
 		
-		String michelNumbers  = CatalogUtils.toShortForm(series.getMichel().getNumbers());
-		String scottNumbers   = CatalogUtils.toShortForm(series.getScott().getNumbers());
-		String yvertNumbers   = CatalogUtils.toShortForm(series.getYvert().getNumbers());
-		String gibbonsNumbers = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
-		
-		// CheckStyle: ignore LineLength for next 1 lines
-		boolean isSeriesInCollection = collectionService.isSeriesInCollection(currentUserId, series.getId());
-		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
 		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
-		
-		model.addAttribute("series", series);
-		
-		model.addAttribute("michelNumbers", michelNumbers);
-		model.addAttribute("scottNumbers", scottNumbers);
-		model.addAttribute("yvertNumbers", yvertNumbers);
-		model.addAttribute("gibbonsNumbers", gibbonsNumbers);
-		
-		model.addAttribute("isSeriesInCollection", isSeriesInCollection);
-		model.addAttribute("allowAddingImages", userCanAddImagesToSeries);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
+		
+		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+		model.addAllAttributes(commonAttrs);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			// don't try to re-display file upload field
 			form.setImage(null);
-			
-			if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
-				// CheckStyle: ignore LineLength for next 1 line
-				List<PurchaseAndSaleDto> purchasesAndSales = seriesService.findPurchasesAndSales(series.getId());
-				model.addAttribute("purchasesAndSales", purchasesAndSales);
-			}
-
 			return "series/info";
 		}
 		
@@ -390,6 +349,38 @@ public class SeriesController {
 		model.addAttribute("searchResults", series);
 		
 		return "series/search_result";
+	}
+	
+	private Map<String, ?> prepareCommonAttrsForSeriesInfo(SeriesDto series, Integer currentUserId) {
+		Map<String, Object> model = new HashMap<>();
+		
+		model.put("series", series);
+		
+		String michelNumbers  = CatalogUtils.toShortForm(series.getMichel().getNumbers());
+		String scottNumbers   = CatalogUtils.toShortForm(series.getScott().getNumbers());
+		String yvertNumbers   = CatalogUtils.toShortForm(series.getYvert().getNumbers());
+		String gibbonsNumbers = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
+		model.put("michelNumbers", michelNumbers);
+		model.put("scottNumbers", scottNumbers);
+		model.put("yvertNumbers", yvertNumbers);
+		model.put("gibbonsNumbers", gibbonsNumbers);
+		
+		boolean isSeriesInCollection =
+			collectionService.isSeriesInCollection(currentUserId, series.getId());
+		
+		boolean userCanAddImagesToSeries =
+			isUserCanAddImagesToSeries(series);
+
+		model.put("isSeriesInCollection", isSeriesInCollection);
+		model.put("allowAddingImages", userCanAddImagesToSeries);
+		
+		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+			List<PurchaseAndSaleDto> purchasesAndSales =
+				seriesService.findPurchasesAndSales(series.getId());
+			model.put("purchasesAndSales", purchasesAndSales);
+		}
+		
+		return model;
 	}
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {
