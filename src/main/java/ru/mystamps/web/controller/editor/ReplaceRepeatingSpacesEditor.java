@@ -18,17 +18,32 @@
 package ru.mystamps.web.controller.editor;
 
 import java.beans.PropertyEditorSupport;
+import java.util.regex.Pattern;
 
-public class CustomCategoryNameEditor extends PropertyEditorSupport {
+import lombok.RequiredArgsConstructor;
+
+/**
+ * @author Maxim Shestakov
+ */
+@RequiredArgsConstructor
+public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 	private static final String REPEATING_SPACES_REGEXP = "[ ]{2,}";
+	private static final Pattern REP_SPACES = Pattern.compile(REPEATING_SPACES_REGEXP);
+	private final boolean performTrimming;
 	
 	@Override
 	public void setAsText(String name) throws IllegalArgumentException {
-		if (name.contains("  ")) {
-			setValue(name.replaceAll(REPEATING_SPACES_REGEXP, " "));
-		} else {
-			setValue(name);
+		String text = name;
+
+		if (performTrimming) {
+			text = name.trim();
 		}
+
+		if (text.contains("  ")) {
+			text = text.replaceAll(String.valueOf(REP_SPACES), " ");
+		}
+
+		setValue(text);
 	}
 	
 }

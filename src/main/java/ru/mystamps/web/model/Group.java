@@ -17,32 +17,24 @@
  */
 package ru.mystamps.web.model;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-import lombok.Getter;
-import lombok.Setter;
-
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.validation.jsr303.Email;
-
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
-
-@Getter
-@Setter
-@GroupSequence({
-	RegisterAccountForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class
-})
-public class RegisterAccountForm implements RegisterAccountDto {
+final class Group {
 	
-	@NotEmpty(groups = Group.Level1.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
-	private String email;
+	interface Level1 {
+	}
+	
+	interface Level2 {
+	}
+	
+	interface Level3 {
+	}
+	
+	interface Level4 {
+	}
+	
+	interface Level5 {
+	}
+
+	interface Level6 {
+	}
 	
 }

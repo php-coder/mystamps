@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 import org.apache.commons.lang3.StringUtils;
@@ -232,7 +233,7 @@ public class SeriesController {
 	
 	@RequestMapping(value = Url.ADD_IMAGE_SERIES_PAGE, method = RequestMethod.POST)
 	public String processImage(
-			@Validated({ Default.class, AddImageForm.ImageChecks.class }) AddImageForm form,
+			@Valid AddImageForm form,
 			BindingResult result,
 			@PathVariable("id") Integer seriesId,
 			Model model,
