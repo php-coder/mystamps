@@ -238,12 +238,13 @@ public class SeriesController {
 		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
-		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
-		model.addAllAttributes(commonAttrs);
-		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+			model.addAllAttributes(commonAttrs);
+			
 			// don't try to re-display file upload field
 			form.setImage(null);
+			
 			return "series/info";
 		}
 		
