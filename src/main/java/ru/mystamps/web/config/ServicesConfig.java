@@ -24,6 +24,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -84,6 +86,11 @@ public class ServicesConfig {
 			getUsersActivationService(),
 			getMailService()
 		);
+	}
+	
+	@Bean(name = "taskExecutor")
+	public TaskExecutor getTaskExecutor() {
+		return new SimpleAsyncTaskExecutor();
 	}
 	
 	@Bean
