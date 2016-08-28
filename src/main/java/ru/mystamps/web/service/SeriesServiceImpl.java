@@ -159,6 +159,7 @@ public class SeriesServiceImpl implements SeriesService {
 
 	@Override
 	@Transactional
+	@PreAuthorize("isAuthenticated()")
 	public void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
