@@ -187,14 +187,14 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameEnShouldNotContainRepeatHyphen() {
-		page.addCategory("t3--st", TEST_CATEGORY_NAME_RU);
+		page.addCategory("te--st", TEST_CATEGORY_NAME_RU);
 
 		assertThat(page).field("name").hasError(tr("value.hyphen_repeat_en"));
 	}
 
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameRuShouldNotContainRepeatHyphen() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "т3--ст");
+		page.addCategory(TEST_CATEGORY_NAME_EN, "те--ст");
 
 		assertThat(page).field("nameRu").hasError(tr("value.hyphen_repeat_ru"));
 	}

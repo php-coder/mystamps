@@ -19,13 +19,23 @@ package ru.mystamps.web.controller.editor;
 
 import java.beans.PropertyEditorSupport;
 
-public class CustomCategoryNameEditor extends PropertyEditorSupport {
+public class CustomNameEditor extends PropertyEditorSupport {
 	private static final String REPEATING_SPACES_REGEXP = "[ ]{2,}";
-	
+	private final boolean trimEditor;
+
+	@SuppressWarnings("PMD")
+	public CustomNameEditor(boolean trimEditor) {
+		this.trimEditor = trimEditor;
+	}
+
 	@Override
 	public void setAsText(String name) throws IllegalArgumentException {
-		if (name.contains("  ")) {
+		if (name.contains("  ") && trimEditor) {
+			setValue(name.replaceAll(REPEATING_SPACES_REGEXP, " ").trim());
+		} else if (name.contains("  ")) {
 			setValue(name.replaceAll(REPEATING_SPACES_REGEXP, " "));
+		} else if (trimEditor) {
+			setValue(name.trim());
 		} else {
 			setValue(name);
 		}
