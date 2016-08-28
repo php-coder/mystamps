@@ -198,6 +198,20 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		
 		assertThat(page).field("nameRu").hasValue("т3ст");
 	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryEnRemoveRepeatHyphen() {
+		page.addCategory("t3--st", TEST_CATEGORY_NAME_RU);
+
+		assertThat(page).field("name").hasValue("t3-st");
+	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryRuRemoveRepeatHyphen() {
+		page.addCategory(TEST_CATEGORY_NAME_EN, "т3--ст");
+
+		assertThat(page).field("nameRu").hasValue("т3-ст");
+	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation() {
