@@ -87,12 +87,10 @@ class CountryServiceImplTest extends Specification {
 			String expectedSlug = 'example-country'
 		and:
 			countryDao.add(_ as AddCountryDbDto) >> expectedId
-		and:
-			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
-			UrlEntityDto actual = service.add(form, userId)
+			String actualSlug = service.add(form, userId)
 		then:
-			actual == expected
+			actualSlug == expectedSlug
 	}
 	
 	def "add() should pass country name in English to dao"() {

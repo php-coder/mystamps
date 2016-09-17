@@ -36,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
@@ -51,7 +50,7 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_COUNTRY)
-	public UrlEntityDto add(AddCountryDto dto, Integer userId) {
+	public String add(AddCountryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getName() != null, "Country name in English must be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Country name in Russian must be non null");
@@ -79,7 +78,7 @@ public class CountryServiceImpl implements CountryService {
 		
 		LOG.info("Country #{} has been created ({})", id, country);
 		
-		return new UrlEntityDto(id, slug);
+		return slug;
 	}
 	
 	@Override
