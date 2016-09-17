@@ -45,7 +45,6 @@ import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
@@ -83,11 +82,11 @@ public class CategoryController {
 			return null;
 		}
 		
-		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
+		String slug = categoryService.add(form, currentUserId);
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return redirectTo(Url.INFO_CATEGORY_PAGE, categoryUrl.getSlug());
+		return redirectTo(Url.INFO_CATEGORY_PAGE, slug);
 	}
 	
 	@RequestMapping(Url.INFO_CATEGORY_PAGE)

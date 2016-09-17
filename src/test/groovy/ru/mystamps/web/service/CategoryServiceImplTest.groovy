@@ -24,7 +24,6 @@ import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.model.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
-import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
@@ -87,12 +86,10 @@ class CategoryServiceImplTest extends Specification {
 			String expectedSlug = 'example-category'
 		and:
 			categoryDao.add(_ as AddCategoryDbDto) >> expectedId
-		and:
-			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
-			UrlEntityDto actual = service.add(form, userId)
+			String actualSlug = service.add(form, userId)
 		then:
-			actual == expected
+			actualSlug == expectedSlug
 	}
 	
 	def "add() should pass English category name to dao"() {
