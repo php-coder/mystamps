@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_CATEGORY)
-	public UrlEntityDto add(AddCategoryDto dto, Integer userId) {
+	public String add(AddCategoryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getName() != null, "Category name in English must be non null");
 		Validate.isTrue(dto.getNameRu() != null, "Category name in Russian must be non null");
@@ -78,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Integer id = categoryDao.add(category);
 		LOG.info("Category #{} has been created ({})", id, category);
 		
-		return new UrlEntityDto(id, slug);
+		return slug;
 	}
 	
 	@Override
