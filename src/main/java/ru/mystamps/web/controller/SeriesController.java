@@ -352,6 +352,7 @@ public class SeriesController {
 		return "series/search_result";
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
 	private Map<String, ?> prepareCommonAttrsForSeriesInfo(SeriesDto series, Integer currentUserId) {
 		Map<String, Object> model = new HashMap<>();
 		
