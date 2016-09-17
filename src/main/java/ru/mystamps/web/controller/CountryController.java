@@ -45,7 +45,6 @@ import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
@@ -83,11 +82,11 @@ public class CountryController {
 			return null;
 		}
 		
-		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
+		String slug = countryService.add(form, currentUserId);
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return redirectTo(Url.INFO_COUNTRY_PAGE, countryUrl.getSlug());
+		return redirectTo(Url.INFO_COUNTRY_PAGE, slug);
 	}
 	
 	@RequestMapping(Url.INFO_COUNTRY_PAGE)

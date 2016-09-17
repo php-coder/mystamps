@@ -21,11 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
 
 public interface CountryService {
-	UrlEntityDto add(AddCountryDto dto, Integer userId);
+	String add(AddCountryDto dto, Integer userId);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
