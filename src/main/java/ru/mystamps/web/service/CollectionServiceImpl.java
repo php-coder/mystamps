@@ -74,14 +74,13 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
-		Integer collectionId = url.getId();
+		String collectionSlug = url.getSlug();
 		
-		collectionDao.addSeriesToCollection(collectionId, seriesId);
+		collectionDao.addSeriesToCollection(collectionSlug, seriesId);
 		
 		LOG.info(
-			"Series #{} has been added to collection #{} of user #{}",
+			"Series #{} has been added to collection of user #{}",
 			seriesId,
-			collectionId,
 			userId
 		);
 		

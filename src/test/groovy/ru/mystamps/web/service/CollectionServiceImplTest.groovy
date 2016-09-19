@@ -122,14 +122,14 @@ class CollectionServiceImplTest extends Specification {
 		and:
 			UrlEntityDto url = TestObjects.createUrlEntityDto()
 		and:
-			Integer expectedCollectionId = url.getId()
+			String expectedCollectionSlug = url.getSlug()
 		and:
 			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
 		when:
 			service.addToCollection(123, expectedSeriesId)
 		then:
-			1 * collectionDao.addSeriesToCollection({ Integer collectionId ->
-				assert collectionId == expectedCollectionId
+			1 * collectionDao.addSeriesToCollection({ String collectionSlug ->
+				assert collectionSlug == expectedCollectionSlug
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
