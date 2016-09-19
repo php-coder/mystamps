@@ -138,17 +138,19 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
-	public void addSeriesToCollection(String collectionSlug, Integer seriesId) {
+	public void addSeriesToUserCollection(Integer userId, Integer seriesId) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("collection_slug", collectionSlug);
+		params.put("user_id", userId);
 		params.put("series_id", seriesId);
 		
 		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
+		
+		// CheckStyle: ignore LineLength for next 3 lines
 		Validate.validState(
 			affected == 1,
-			"Unexpected number of affected rows after adding series #%d to collection '%s': %d",
+			"Unexpected number of affected rows after adding series #%d to collection of user #%d: %d",
 			seriesId,
-			collectionSlug,
+			userId,
 			affected
 		);
 	}

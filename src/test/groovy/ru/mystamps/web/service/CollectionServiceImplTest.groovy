@@ -104,48 +104,20 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "addToCollection() should find collection by user id"() {
+	def "addToCollection() should pass arguments to dao"() {
 		given:
 			Integer expectedUserId = 123
-		when:
-			service.addToCollection(expectedUserId, 321)
-		then:
-			1 * collectionDao.findCollectionUrlEntityByUserId({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}) >> TestObjects.createUrlEntityDto()
-	}
-	
-	def "addToCollection() should add series to collection"() {
-		given:
 			Integer expectedSeriesId = 456
-		and:
-			UrlEntityDto url = TestObjects.createUrlEntityDto()
-		and:
-			String expectedCollectionSlug = url.getSlug()
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
 		when:
-			service.addToCollection(123, expectedSeriesId)
+			service.addToCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.addSeriesToCollection({ String collectionSlug ->
-				assert collectionSlug == expectedCollectionSlug
+			1 * collectionDao.addSeriesToUserCollection({ Integer userId ->
+				assert userId == expectedUserId
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
 				return true
 			})
-	}
-	
-	def "addToCollection() should return result from dao"() {
-		given:
-			UrlEntityDto expectedUrl = TestObjects.createUrlEntityDto()
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> expectedUrl
-		when:
-			UrlEntityDto serviceResult = service.addToCollection(123, 456)
-		then:
-			serviceResult == expectedUrl
 	}
 	
 	//

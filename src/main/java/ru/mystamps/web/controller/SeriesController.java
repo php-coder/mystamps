@@ -48,6 +48,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
@@ -66,6 +68,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
@@ -260,7 +263,7 @@ public class SeriesController {
 	)
 	public String addToCollection(
 		@PathVariable("id") Integer seriesId,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
@@ -276,12 +279,14 @@ public class SeriesController {
 			return null;
 		}
 		
-		UrlEntityDto collection = collectionService.addToCollection(currentUserId, seriesId);
+		Integer userId = currentUserDetails.getUserId();
+		collectionService.addToCollection(userId, seriesId);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
-		
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getSlug());
+
+		String collectionSlug = currentUserDetails.getUserCollectionSlug();
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
 	@RequestMapping(
