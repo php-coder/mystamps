@@ -69,22 +69,13 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public UrlEntityDto addToCollection(Integer userId, Integer seriesId) {
+	public void addToCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
-		String collectionSlug = url.getSlug();
+		collectionDao.addSeriesToUserCollection(userId, seriesId);
 		
-		collectionDao.addSeriesToCollection(collectionSlug, seriesId);
-		
-		LOG.info(
-			"Series #{} has been added to collection of user #{}",
-			seriesId,
-			userId
-		);
-		
-		return url;
+		LOG.info("Series #{} has been added to collection of user #{}", seriesId, userId);
 	}
 	
 	@Override

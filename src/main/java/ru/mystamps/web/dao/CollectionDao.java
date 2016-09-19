@@ -30,7 +30,7 @@ public interface CollectionDao {
 	Integer add(AddCollectionDbDto collection);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
 	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
-	void addSeriesToCollection(String collectionSlug, Integer seriesId);
+	void addSeriesToUserCollection(Integer userId, Integer seriesId);
 	void removeSeriesFromCollection(Integer collectionId, Integer seriesId);
 	CollectionInfoDto findCollectionInfoBySlug(String slug);
 }
