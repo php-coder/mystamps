@@ -130,7 +130,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
-		return new AuthenticationFailureListener();
+		return new AuthenticationFailureListener(servicesConfig.getSiteService());
 	}
 	
 	@Bean
