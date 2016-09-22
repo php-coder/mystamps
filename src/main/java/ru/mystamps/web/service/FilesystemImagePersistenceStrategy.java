@@ -99,7 +99,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	// protected to allow spying
 	protected void writeToFile(MultipartFile file, Path dest) throws IOException {
 		// we can't use file.transferTo(dest) there because it creates file
-		// relatively to directory from multipart.location in application.properties
+		// relatively to directory from spring.http.multipart.location
+		// in application.properties
 		// See for details: https://jira.spring.io/browse/SPR-12650
 		Files.copy(file.getInputStream(), dest);
 	}

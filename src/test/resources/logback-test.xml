@@ -3,7 +3,7 @@
 	
 	<!--
 		See for details:
-		http://docs.spring.io/spring-boot/docs/1.3.7.RELEASE/reference/html/howto-logging.html#howto-configure-logback-for-logging
+		http://docs.spring.io/spring-boot/docs/1.4.x/reference/html/howto-logging.html#howto-configure-logback-for-logging
 	-->
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 	
