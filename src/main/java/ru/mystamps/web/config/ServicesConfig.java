@@ -19,7 +19,6 @@ package ru.mystamps.web.config;
 
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,31 +26,23 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableAsync;
 
+import lombok.RequiredArgsConstructor;
+
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
 @EnableAsync
+@RequiredArgsConstructor
 public class ServicesConfig {
 	
-	@Autowired
-	private DaoConfig daoConfig;
-	
-	@Autowired
-	private SecurityConfig securityConfig;
-	
-	@Autowired
-	private StrategiesConfig strategiesConfig;
-	
-	@Autowired
-	private JavaMailSender mailSender;
-	
-	@Autowired
-	private Environment env;
-	
-	@Autowired
-	private MessageSource messageSource;
+	private final DaoConfig daoConfig;
+	private final SecurityConfig securityConfig;
+	private final StrategiesConfig strategiesConfig;
+	private final JavaMailSender mailSender;
+	private final Environment env;
+	private final MessageSource messageSource;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {

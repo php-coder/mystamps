@@ -20,14 +20,14 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.UserService;
 
+@RequiredArgsConstructor
 public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, String> {
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	@Override
 	public void initialize(UniqueLogin annotation) {

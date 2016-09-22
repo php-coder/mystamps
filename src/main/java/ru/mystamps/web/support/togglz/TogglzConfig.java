@@ -21,7 +21,6 @@ import java.util.Collections;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,14 +34,15 @@ import org.togglz.core.repository.cache.CachingStateRepository;
 import org.togglz.core.repository.jdbc.JDBCStateRepository;
 import org.togglz.spring.security.SpringSecurityUserProvider;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.StringAuthority;
 
 @Configuration
+@RequiredArgsConstructor
 public class TogglzConfig {
-	
-	@Autowired
-	private DataSource dataSource;
+	private final DataSource dataSource;
 	
 	@Bean
 	public FeatureManager getFeatureManager() {
