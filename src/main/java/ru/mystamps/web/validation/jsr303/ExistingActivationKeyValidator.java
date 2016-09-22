@@ -20,15 +20,15 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.UsersActivationService;
 
+@RequiredArgsConstructor
 public class ExistingActivationKeyValidator
 	implements ConstraintValidator<ExistingActivationKey, String> {
 	
-	@Autowired
-	private UsersActivationService usersActivationService;
+	private final UsersActivationService usersActivationService;
 	
 	@Override
 	public void initialize(ExistingActivationKey annotation) {

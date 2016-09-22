@@ -17,22 +17,21 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 
 @Configuration
+@RequiredArgsConstructor
 public class ControllersConfig {
 	
-	@Autowired
-	private ServicesConfig servicesConfig;
-	
-	@Autowired
-	private MessageSource messageSource;
+	private final ServicesConfig servicesConfig;
+	private final MessageSource messageSource;
 	
 	@Bean
 	public AccountController getAccountController() {

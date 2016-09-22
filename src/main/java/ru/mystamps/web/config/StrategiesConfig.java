@@ -17,11 +17,12 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
+
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.DatabaseImagePersistenceStrategy;
 import ru.mystamps.web.service.FilesystemImagePersistenceStrategy;
@@ -33,10 +34,10 @@ public interface StrategiesConfig {
 	ImagePersistenceStrategy getImagePersistenceStrategy();
 	
 	@Profile("test")
+	@RequiredArgsConstructor
 	class DbStrategiesConfig implements StrategiesConfig {
 		
-		@Autowired
-		private DaoConfig daoConfig;
+		private final DaoConfig daoConfig;
 		
 		@Bean
 		@Override
@@ -47,10 +48,10 @@ public interface StrategiesConfig {
 	}
 	
 	@Profile({ "prod", "travis" })
+	@RequiredArgsConstructor
 	class FsStrategiesConfig implements StrategiesConfig {
 		
-		@Autowired
-		private Environment env;
+		private final Environment env;
 		
 		@Bean
 		@Override

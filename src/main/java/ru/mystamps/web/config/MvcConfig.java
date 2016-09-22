@@ -20,7 +20,6 @@ package ru.mystamps.web.config;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -41,6 +40,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
@@ -48,10 +49,10 @@ import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 @Configuration
 @EnableScheduling
 @Import(ControllersConfig.class)
+@RequiredArgsConstructor
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
-	@Autowired
-	private ServicesConfig servicesConfig;
+	private final ServicesConfig servicesConfig;
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
