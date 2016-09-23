@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/static/**");
+		web.ignoring().antMatchers("/static/**", "/public/**");
 	}
 	
 	@Override
