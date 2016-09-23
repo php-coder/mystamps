@@ -22,7 +22,7 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -57,7 +57,7 @@ public class SiteController {
 	private final SeriesService seriesService;
 	private final SuspiciousActivityService suspiciousActivityService;
 	
-	@RequestMapping(Url.INDEX_PAGE)
+	@GetMapping(Url.INDEX_PAGE)
 	public String showIndexPage(Model model, Locale userLocale) {
 		long categoryCounter    = categoryService.countAll();
 		long countryCounter     = countryService.countAll();
@@ -87,7 +87,7 @@ public class SiteController {
 	 * @author Sergey Chechenev
 	 * @author Slava Semushin
 	 */
-	@RequestMapping(Url.SITE_EVENTS_PAGE)
+	@GetMapping(Url.SITE_EVENTS_PAGE)
 	public void viewSiteEvents(
 		@RequestParam(value = "page", defaultValue = "1") int pageNum,
 		Model model) {
