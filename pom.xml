@@ -271,7 +271,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
-			<version>${selenium.htmlunit.version}</version>
+			<version>${htmlunit.version}</version>
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
@@ -380,6 +380,9 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<htmlunit.version>2.20</htmlunit.version>
+		
 		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
@@ -404,7 +407,9 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<liquibase.version>3.5.1</liquibase.version>
 		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<lombok.version>1.16.10</lombok.version>
+		
 		<minify.plugin.version>1.7.4</minify.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -417,7 +422,7 @@
 		<!-- Don't forget to update version in the Url class -->
 		<selectizejs.version>0.12.3</selectizejs.version>
 		
-		<selenium.htmlunit.version>2.21</selenium.htmlunit.version>
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<selenium.version>2.53.1</selenium.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
