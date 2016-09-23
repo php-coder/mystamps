@@ -27,8 +27,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -53,7 +53,7 @@ public class CollectionController {
 	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
-	@RequestMapping(Url.INFO_COLLECTION_PAGE)
+	@GetMapping(Url.INFO_COLLECTION_PAGE)
 	public String showInfoBySlug(
 		@PathVariable("slug") String slug,
 		Model model,
@@ -102,7 +102,7 @@ public class CollectionController {
 		return "collection/info";
 	}
 
-	@RequestMapping(Url.INFO_COLLECTION_BY_ID_PAGE)
+	@GetMapping(Url.INFO_COLLECTION_BY_ID_PAGE)
 	public View showInfoById(
 		@PathVariable("slug") String slug,
 		HttpServletResponse response)

@@ -40,11 +40,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -124,7 +124,7 @@ public class SeriesController {
 		return countryService.findAllAsLinkEntities(lang);
 	}
 	
-	@RequestMapping(Url.ADD_SERIES_PAGE)
+	@GetMapping(Url.ADD_SERIES_PAGE)
 	public AddSeriesForm showForm() {
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
@@ -133,7 +133,7 @@ public class SeriesController {
 		return addSeriesForm;
 	}
 	
-	@RequestMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
+	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
 	public String showFormWithCategory(
 		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model) {
@@ -147,7 +147,7 @@ public class SeriesController {
 		return "series/add";
 	}
 	
-	@RequestMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
+	@GetMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
 	public String showFormWithCountry(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model) {
@@ -161,7 +161,7 @@ public class SeriesController {
 		return "series/add";
 	}
 	
-	@RequestMapping(value = Url.ADD_SERIES_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_SERIES_PAGE)
 	public String processInput(
 		@Validated({ Default.class,
 			AddSeriesForm.ReleaseDateChecks.class,
@@ -183,7 +183,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
 	
-	@RequestMapping(Url.INFO_SERIES_PAGE)
+	@GetMapping(Url.INFO_SERIES_PAGE)
 	public String showInfo(
 		@PathVariable("id") Integer seriesId,
 		Model model,
@@ -215,7 +215,7 @@ public class SeriesController {
 		return "series/info";
 	}
 	
-	@RequestMapping(value = Url.ADD_IMAGE_SERIES_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_IMAGE_SERIES_PAGE)
 	public String processImage(
 			@Valid AddImageForm form,
 			BindingResult result,
@@ -256,11 +256,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
 	
-	@RequestMapping(
-		value = Url.INFO_SERIES_PAGE,
-		method = RequestMethod.POST,
-		params = "action=ADD"
-	)
+	@PostMapping(value = Url.INFO_SERIES_PAGE, params = "action=ADD")
 	public String addToCollection(
 		@PathVariable("id") Integer seriesId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
@@ -289,11 +285,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
-	@RequestMapping(
-		value = Url.INFO_SERIES_PAGE,
-		method = RequestMethod.POST,
-		params = "action=REMOVE"
-	)
+	@PostMapping(value = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
 		@CurrentUser Integer currentUserId,
@@ -319,7 +311,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getSlug());
 	}
 	
-	@RequestMapping(value = Url.SEARCH_SERIES_BY_CATALOG, method = RequestMethod.POST)
+	@PostMapping(Url.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
 		@RequestParam("catalogNumber") String catalogNumber,
 		@RequestParam("catalogName") String catalogName,

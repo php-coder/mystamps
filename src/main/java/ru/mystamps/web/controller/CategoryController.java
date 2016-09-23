@@ -29,10 +29,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -68,12 +68,12 @@ public class CategoryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(Url.ADD_CATEGORY_PAGE)
+	@GetMapping(Url.ADD_CATEGORY_PAGE)
 	public AddCategoryForm showForm() {
 		return new AddCategoryForm();
 	}
 	
-	@RequestMapping(value = Url.ADD_CATEGORY_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_CATEGORY_PAGE)
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
@@ -91,7 +91,7 @@ public class CategoryController {
 		return redirectTo(Url.INFO_CATEGORY_PAGE, slug);
 	}
 	
-	@RequestMapping(Url.INFO_CATEGORY_PAGE)
+	@GetMapping(Url.INFO_CATEGORY_PAGE)
 	public String showInfoBySlug(
 		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model,
@@ -117,7 +117,7 @@ public class CategoryController {
 		return "category/info";
 	}
 	
-	@RequestMapping(Url.INFO_CATEGORY_BY_ID_PAGE)
+	@GetMapping(Url.INFO_CATEGORY_BY_ID_PAGE)
 	public View showInfoById(
 		@Category @PathVariable("slug") LinkEntityDto country,
 		HttpServletResponse response)
@@ -135,7 +135,7 @@ public class CategoryController {
 		return view;
 	}
 	
-	@RequestMapping(Url.LIST_CATEGORIES_PAGE)
+	@GetMapping(Url.LIST_CATEGORIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
