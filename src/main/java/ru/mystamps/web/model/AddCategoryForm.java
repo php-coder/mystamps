@@ -34,6 +34,7 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
 
 @Getter
@@ -44,7 +45,8 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP
 	Group.Level2.class,
 	Group.Level3.class,
 	Group.Level4.class,
-	Group.Level5.class
+	Group.Level5.class,
+	Group.Level6.class
 })
 public class AddCategoryForm implements AddCategoryDto {
 	
@@ -68,12 +70,17 @@ public class AddCategoryForm implements AddCategoryDto {
 			groups = Group.Level3.class
 		),
 		@Pattern(
+			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
+		),
+		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Group.Level4.class
+			groups = Group.Level5.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level5.class)
+	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level6.class)
 	private String name;
 	
 	@NotEmpty(groups = Group.Level1.class)
@@ -96,12 +103,17 @@ public class AddCategoryForm implements AddCategoryDto {
 			groups = Group.Level3.class
 		),
 		@Pattern(
+			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
+		),
+		@Pattern(
 			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Group.Level4.class
+			groups = Group.Level5.class
 		)
 	})
-	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level5.class)
+	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level6.class)
 	private String nameRu;
 	
 }
