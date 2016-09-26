@@ -69,7 +69,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 			groups = Login3Checks.class
 		),
 		@Pattern(
-			regexp = ValidationRules.LOGIN_REPEATING_CHARS_REGEXP,
+			regexp = ValidationRules.LOGIN_NO_REPEATING_CHARS_REGEXP,
 			message = "{login.repetition_chars}",
 			groups = Login4Checks.class
 		)
