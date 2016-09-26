@@ -184,6 +184,20 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		
 		assertThat(page).field("nameRu").hasError(tr("value.hyphen"));
 	}
+
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void categoryNameEnShouldNotContainRepeatedHyphens() {
+		page.addCategory("te--st", TEST_CATEGORY_NAME_RU);
+
+		assertThat(page).field("name").hasError(tr("value.repeating_hyphen"));
+	}
+
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void categoryNameRuShouldNotContainRepeatedHyphens() {
+		page.addCategory(TEST_CATEGORY_NAME_EN, "те--ст");
+
+		assertThat(page).field("nameRu").hasError(tr("value.repeating_hyphen"));
+	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void categoryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
@@ -197,6 +211,20 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		page.addCategory(TEST_CATEGORY_NAME_EN, " т3ст ");
 		
 		assertThat(page).field("nameRu").hasValue("т3ст");
+	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryNameEnShouldReplaceRepeatedSpacesByOne() {
+		page.addCategory("t3  st", TEST_CATEGORY_NAME_RU);
+
+		assertThat(page).field("name").hasValue("t3 st");
+	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryNameRuShouldReplaceRepeatedSpacesByOne() {
+		page.addCategory(TEST_CATEGORY_NAME_EN, "т3  ст");
+
+		assertThat(page).field("nameRu").hasValue("т3 ст");
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })

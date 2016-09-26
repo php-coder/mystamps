@@ -24,7 +24,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +42,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.model.AddCategoryForm;
@@ -61,7 +61,9 @@ public class CategoryController {
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(false);
+		// CheckStyle: ignore LineLength for next 1 line
+		// We can't use StringTrimmerEditor here because "only one single registered custom editor per property path is supported".
+		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
