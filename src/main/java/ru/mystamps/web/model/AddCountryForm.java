@@ -34,6 +34,7 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 
 @Getter
@@ -68,9 +69,14 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level3.class
 		),
 		@Pattern(
+			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
+		),
+		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Group.Level4.class
+			groups = Group.Level5.class
 		)
 	})
 	@UniqueCountryName(lang = Lang.EN, groups = Group.Level5.class)
@@ -96,9 +102,14 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level3.class
 		),
 		@Pattern(
+			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
+		),
+		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Group.Level4.class
+			groups = Group.Level5.class
 		)
 	})
 	@UniqueCountryName(lang = Lang.RU, groups = Group.Level5.class)

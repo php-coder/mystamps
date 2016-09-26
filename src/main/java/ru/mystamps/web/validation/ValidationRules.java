@@ -51,6 +51,8 @@ public final class ValidationRules {
 	public static final String COUNTRY_NAME_EN_REGEXP = "[- a-zA-Z]+";
 	public static final String COUNTRY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
 	public static final String COUNTRY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
+	@SuppressWarnings({"PMD.LongVariable", "checkstyle:linelength"})
+	public static final String COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
 	
 	public static final int MIN_STAMPS_IN_SERIES = 1;
 	public static final int MAX_STAMPS_IN_SERIES = 50;
