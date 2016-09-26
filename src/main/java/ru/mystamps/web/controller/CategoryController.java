@@ -61,8 +61,8 @@ public class CategoryController {
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {
-		// CheckStyle: ignore LineLength for next 1 line
-		// We can't use StringTrimmerEditor here because "only one single registered custom editor per property path is supported".
+		// We can't use StringTrimmerEditor here because "only one single registered custom
+		// editor per property path is supported".
 		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
