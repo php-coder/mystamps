@@ -63,17 +63,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers(Url.ADD_CATEGORY_PAGE)
+				.mvcMatchers(Url.ADD_CATEGORY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_CATEGORY)
-				.antMatchers(Url.ADD_COUNTRY_PAGE)
+				.mvcMatchers(Url.ADD_COUNTRY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.antMatchers(
+				.mvcMatchers(
 					Url.ADD_SERIES_PAGE,
 					Url.ADD_SERIES_WITH_CATEGORY_PAGE.replace("{slug}", "**"),
 					Url.ADD_SERIES_WITH_COUNTRY_PAGE.replace("{slug}", "**")
 				)
 					.hasAuthority(StringAuthority.CREATE_SERIES)
-				.antMatchers(Url.SITE_EVENTS_PAGE)
+				.mvcMatchers(Url.SITE_EVENTS_PAGE)
 					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority(
