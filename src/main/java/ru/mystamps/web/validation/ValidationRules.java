@@ -42,6 +42,8 @@ public final class ValidationRules {
 	public static final String CATEGORY_NAME_EN_REGEXP = "[- a-zA-Z]+";
 	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
 	public static final String CATEGORY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
+	@SuppressWarnings({"PMD.LongVariable", "checkstyle:linelength"})
+	public static final String CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
 	
 	public static final int COUNTRY_NAME_MIN_LENGTH = 3;
 	public static final int COUNTRY_NAME_MAX_LENGTH = Db.Country.NAME_LENGTH;

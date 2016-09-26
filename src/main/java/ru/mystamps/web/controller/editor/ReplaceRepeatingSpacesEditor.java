@@ -15,26 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller.editor;
 
-final class Group {
-	
-	interface Level1 {
-	}
-	
-	interface Level2 {
-	}
-	
-	interface Level3 {
-	}
-	
-	interface Level4 {
-	}
-	
-	interface Level5 {
-	}
+import java.beans.PropertyEditorSupport;
+import java.util.regex.Pattern;
 
-	interface Level6 {
+import lombok.RequiredArgsConstructor;
+
+/**
+ * @author Maxim Shestakov
+ */
+@RequiredArgsConstructor
+public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
+	private static final Pattern REPEATING_SPACES = Pattern.compile("[ ]{2,}");
+	private final boolean performTrimming;
+	
+	@Override
+	public void setAsText(String name) throws IllegalArgumentException {
+		String text = name;
+
+		if (performTrimming) {
+			text = name.trim();
+		}
+
+		if (text.contains("  ")) {
+			text = REPEATING_SPACES.matcher(text).replaceAll(" ");
+		}
+
+		setValue(text);
 	}
 	
 }
