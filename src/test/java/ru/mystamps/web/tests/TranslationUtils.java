@@ -25,8 +25,6 @@ import java.text.MessageFormat;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-import org.apache.commons.io.IOUtils;
-
 public final class TranslationUtils {
 	
 	private static final String [] PROPERTIES_FILE_NAMES = new String[] {
@@ -49,19 +47,19 @@ public final class TranslationUtils {
 	}
 	
 	private static ResourceBundle getResourceBundleForFile(String filename) {
-		FileInputStream stream = null;
+		File file;
 		try {
-			File file = new File(
+			file = new File(
 				TranslationUtils.class.getClassLoader().getResource(filename).toURI()
 			);
-			stream = new FileInputStream(file);
+		} catch (URISyntaxException ex) {
+			throw new RuntimeException(ex);
+		}
+		try (FileInputStream stream = new FileInputStream(file)) {
 			return new PropertyResourceBundle(stream);
 		
-		} catch (IOException | URISyntaxException ex) {
+		} catch (IOException ex) {
 			throw new RuntimeException(ex);
-		
-		} finally {
-			IOUtils.closeQuietly(stream);
 		}
 	}
 	
