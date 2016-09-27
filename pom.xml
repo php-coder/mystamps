@@ -396,7 +396,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
 		<liquibase.version>3.4.2</liquibase.version>
 		
-		<lombok.version>1.16.8</lombok.version>
+		<lombok.version>1.16.10</lombok.version>
 		<minify.plugin.version>1.7.4</minify.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
