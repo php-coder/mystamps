@@ -16,13 +16,6 @@
 			<version>${thymeleaf.togglz.version}</version>
 		</dependency>
 		
-		<!-- Needed for IOUtils -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -353,7 +346,6 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://git.io/vKAiK) -->
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
-		<commons.io.version>2.4</commons.io.version>
 		<commons.lang.version>3.4</commons.lang.version>
 		<compiler.plugin.version>3.5.1</compiler.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
