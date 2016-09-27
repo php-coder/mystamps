@@ -441,7 +441,7 @@
 		<thymeleaf.version>2.1.5.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.2.0.Final</togglz.version>
-		<war.plugin.version>2.6</war.plugin.version>
+		<war.plugin.version>3.0.0</war.plugin.version>
 	</properties>
 	
 	<build>
