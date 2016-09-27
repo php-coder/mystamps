@@ -96,16 +96,16 @@ public final class Url {
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	// TODO: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
-	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.1/css/selectize.bootstrap3.css";
-	public static final String SELECTIZE_JS           = "/public/selectize/0.12.1/js/standalone/selectize.min.js";
+	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.3/css/selectize.bootstrap3.css";
+	public static final String SELECTIZE_JS           = "/public/selectize/0.12.3/js/standalone/selectize.min.js";
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
 	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js";
 	public static final String JQUERY_JS_CDN         = "https://yandex.st/jquery/1.9.1/jquery.min.js";
-	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css";
-	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js";
+	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css";
+	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js";
 	
 	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
