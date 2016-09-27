@@ -407,7 +407,7 @@
 		<resources.plugin.version>2.7</resources.plugin.version>
 		
 		<!-- Don't forget to update version in the Url class -->
-		<selectizejs.version>0.12.1</selectizejs.version>
+		<selectizejs.version>0.12.3</selectizejs.version>
 		
 		<selenium.htmlunit.version>2.21</selenium.htmlunit.version>
 		<selenium.version>2.53.1</selenium.version>
