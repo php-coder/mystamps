@@ -373,7 +373,7 @@
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		
 		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
-		<jasmine.plugin.version>2.1</jasmine.plugin.version>
+		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-starter-parent (https://git.io/vKAiy) -->
 		<java.version>1.8</java.version>
