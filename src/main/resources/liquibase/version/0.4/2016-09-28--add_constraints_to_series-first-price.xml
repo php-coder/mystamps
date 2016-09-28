@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="add-not_null_constraints-to-first-price" author="cssru" context="scheme">
+		
+		<addNotNullConstraint columnDataType="DECIMAL(19,2)"
+			columnName="first_price"
+			tableName="series_sales" />
+		
+		<addNotNullConstraint columnDataType="VARCHAR(3)"
+			columnName="first_currency"
+			tableName="series_sales" />
+		
+	</changeSet>
+
+</databaseChangeLog>
