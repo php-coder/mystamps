@@ -196,6 +196,12 @@
 			<artifactId>liquibase-core</artifactId>
 			<version>${liquibase.version}</version>
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
