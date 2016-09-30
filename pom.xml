@@ -628,6 +628,7 @@
 										<!-- Because we use jcl-over-slf4j instead -->
 										<exclude>commons-logging</exclude>
 										<exclude>junit:*:*:*:compile</exclude>
+										<exclude>org.yaml:snakeyaml</exclude>
 									</excludes>
 								</bannedDependencies>
 								<requireJavaVersion>
