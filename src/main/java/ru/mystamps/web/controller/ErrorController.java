@@ -43,8 +43,8 @@ public class ErrorController {
 	public void notFound(
 			HttpServletRequest request,
 			@CurrentUser Integer currentUserId,
-			@RequestHeader(value = "referer", required = false) String referer,
-			@RequestHeader(value = "user-agent", required = false) String agent) {
+			@RequestHeader(name = "referer", required = false) String referer,
+			@RequestHeader(name = "user-agent", required = false) String agent) {
 		
 		// TODO: sanitize all user's values (#60)
 		String page   = (String)request.getAttribute("javax.servlet.error.request_uri");

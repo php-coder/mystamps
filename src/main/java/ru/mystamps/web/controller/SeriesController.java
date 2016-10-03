@@ -256,7 +256,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
 	
-	@PostMapping(value = Url.INFO_SERIES_PAGE, params = "action=ADD")
+	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=ADD")
 	public String addToCollection(
 		@PathVariable("id") Integer seriesId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
@@ -285,7 +285,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
-	@PostMapping(value = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
+	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
 		@CurrentUser Integer currentUserId,
