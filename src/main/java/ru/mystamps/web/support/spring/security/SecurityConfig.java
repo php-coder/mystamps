@@ -26,8 +26,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
-// CheckStyle: ignore LineLength for next 2 lines
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -63,17 +62,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers(Url.ADD_CATEGORY_PAGE)
+				.mvcMatchers(Url.ADD_CATEGORY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_CATEGORY)
-				.antMatchers(Url.ADD_COUNTRY_PAGE)
+				.mvcMatchers(Url.ADD_COUNTRY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.antMatchers(
+				.mvcMatchers(
 					Url.ADD_SERIES_PAGE,
 					Url.ADD_SERIES_WITH_CATEGORY_PAGE.replace("{slug}", "**"),
 					Url.ADD_SERIES_WITH_COUNTRY_PAGE.replace("{slug}", "**")
 				)
 					.hasAuthority(StringAuthority.CREATE_SERIES)
-				.antMatchers(Url.SITE_EVENTS_PAGE)
+				.mvcMatchers(Url.SITE_EVENTS_PAGE)
 					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority(
@@ -115,12 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 	}
 	
-	@Autowired
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) {
-		auth.authenticationProvider(getAuthenticationProvider());
-	}
-
 	// Used in ServicesConfig.getUserService()
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -139,16 +132,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		);
 	}
 	
-	private UserDetailsService getUserDetailsService() {
-		return new CustomUserDetailsService(servicesConfig.getUserService());
-	}
-	
-	private AuthenticationProvider getAuthenticationProvider() {
+	@Bean
+	public AuthenticationProvider getAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(getPasswordEncoder());
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
+	}
+	
+	private UserDetailsService getUserDetailsService() {
+		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
 }

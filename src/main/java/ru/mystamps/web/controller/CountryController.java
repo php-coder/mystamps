@@ -29,10 +29,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -66,12 +66,12 @@ public class CountryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(Url.ADD_COUNTRY_PAGE)
+	@GetMapping(Url.ADD_COUNTRY_PAGE)
 	public AddCountryForm showForm() {
 		return new AddCountryForm();
 	}
 	
-	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_COUNTRY_PAGE)
 	public String processInput(
 		@Valid AddCountryForm form,
 		BindingResult result,
@@ -89,7 +89,7 @@ public class CountryController {
 		return redirectTo(Url.INFO_COUNTRY_PAGE, slug);
 	}
 	
-	@RequestMapping(Url.INFO_COUNTRY_PAGE)
+	@GetMapping(Url.INFO_COUNTRY_PAGE)
 	public String showInfoBySlug(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
@@ -118,7 +118,7 @@ public class CountryController {
 	/**
 	 * @author Aleksander Parkhomenko
 	 */
-	@RequestMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
+	@GetMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
 	public View showInfoById(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		HttpServletResponse response)
@@ -136,7 +136,7 @@ public class CountryController {
 		return view;
 	}
 	
-	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
+	@GetMapping(Url.LIST_COUNTRIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);

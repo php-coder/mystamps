@@ -20,14 +20,12 @@ package ru.mystamps.web.config;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -41,6 +39,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
@@ -48,10 +48,10 @@ import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 @Configuration
 @EnableScheduling
 @Import(ControllersConfig.class)
+@RequiredArgsConstructor
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
-	@Autowired
-	private ServicesConfig servicesConfig;
+	private final ServicesConfig servicesConfig;
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
@@ -119,13 +119,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
-		// This is a temporary guard against CVE-2016-5007.
-		// Should be removed after upgrading to Spring MVC 4.3.1+ and Spring Security 4.1.1+.
-		// See also: http://pivotal.io/security/cve-2016-5007
-		AntPathMatcher pathMatcher = new AntPathMatcher();
-		pathMatcher.setTrimTokens(false);
-		configurer.setPathMatcher(pathMatcher);
-		
 		// If enabled a method mapped to "/users" also matches to "/users/"
 		configurer.setUseTrailingSlashMatch(false);
 		// If enabled a method mapped to "/users" also matches to "/users.*"
