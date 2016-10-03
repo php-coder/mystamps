@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class ErrorController {
 			HttpServletRequest request,
 			@CurrentUser Integer currentUserId,
 			// CheckStyle: ignore LineLength for next 1 line
-			@RequestAttribute(name = "javax.servlet.error.request_uri", required = false) String page,
+			@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page,
 			@RequestHeader(name = "referer", required = false) String referer,
 			@RequestHeader(name = "user-agent", required = false) String agent) {
 		
@@ -58,10 +59,10 @@ public class ErrorController {
 	
 	@RequestMapping(Url.INTERNAL_ERROR_PAGE)
 	public void internalError(
-		// CheckStyle: ignore LineLength for next 2 lines
-		@RequestAttribute(name = "javax.servlet.error.exception_type", required = false) Class<?> exceptionType,
-		@RequestAttribute(name = "javax.servlet.error.exception", required = false) Exception exception,
-		@RequestAttribute(name = "javax.servlet.error.request_uri", required = false) String page) {
+		// CheckStyle: ignore LineLength for next 3 lines
+		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION_TYPE, required = false) Class<?> exceptionType,
+		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION, required = false) Exception exception,
+		@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page) {
 		
 		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
