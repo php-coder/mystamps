@@ -89,7 +89,7 @@ public class SiteController {
 	 */
 	@GetMapping(Url.SITE_EVENTS_PAGE)
 	public void viewSiteEvents(
-		@RequestParam(value = "page", defaultValue = "1") int pageNum,
+		@RequestParam(name = "page", defaultValue = "1") int pageNum,
 		Model model) {
 		
 		int page = Math.max(1, pageNum);
