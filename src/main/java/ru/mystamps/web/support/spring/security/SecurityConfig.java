@@ -26,8 +26,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
-// CheckStyle: ignore LineLength for next 2 lines
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -115,12 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 	}
 	
-	@Autowired
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) {
-		auth.authenticationProvider(getAuthenticationProvider());
-	}
-
 	// Used in ServicesConfig.getUserService()
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -139,16 +132,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		);
 	}
 	
-	private UserDetailsService getUserDetailsService() {
-		return new CustomUserDetailsService(servicesConfig.getUserService());
-	}
-	
-	private AuthenticationProvider getAuthenticationProvider() {
+	@Bean
+	public AuthenticationProvider getAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(getPasswordEncoder());
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
+	}
+	
+	private UserDetailsService getUserDetailsService() {
+		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
 }
