@@ -469,12 +469,12 @@
 		<testng.version>6.8.8</testng.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<thymeleaf-extras-springsecurity4.version>2.1.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+		<thymeleaf-extras-springsecurity4.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
-		<thymeleaf.togglz.version>1.1.0.RELEASE</thymeleaf.togglz.version>
+		<thymeleaf.togglz.version>2.0.0-SNAPSHOT</thymeleaf.togglz.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<thymeleaf.version>2.1.5.RELEASE</thymeleaf.version>
+		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.3.0.Final</togglz.version>
 		<war.plugin.version>3.0.0</war.plugin.version>
@@ -918,5 +918,20 @@
 	<prerequisites>
 		<maven>3.2.1</maven>
 	</prerequisites>
+	
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+			<id>oss-sonatype</id>
+			<name>oss-sonatype</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
 	
 </project>
