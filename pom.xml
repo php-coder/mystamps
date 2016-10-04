@@ -114,6 +114,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+			<exclusions>
+				<exclusion>
+					<!-- In favour of org.mortbay.jasper:apache-el -->
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-el</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
@@ -642,6 +649,8 @@
 									<excludes>
 										<!-- Because we use jcl-over-slf4j instead -->
 										<exclude>commons-logging</exclude>
+										<!-- Because we use org.mortbay.jasper:apache-el instead -->
+										<exclude>org.apache.tomcat.embed:tomcat-embed-el</exclude>
 										<exclude>junit:*:*:*:compile</exclude>
 										<exclude>org.yaml:snakeyaml</exclude>
 									</excludes>
