@@ -381,7 +381,7 @@
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<htmlunit.version>2.20</htmlunit.version>
+		<htmlunit.version>2.21</htmlunit.version>
 		
 		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
