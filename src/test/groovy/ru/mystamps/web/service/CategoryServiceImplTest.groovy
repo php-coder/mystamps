@@ -30,11 +30,11 @@ import ru.mystamps.web.util.SlugUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CategoryServiceImplTest extends Specification {
 	
-	private AddCategoryForm form
-	private Integer userId = 123
+	private final Integer userId = 123
+	private final CategoryDao categoryDao = Mock()
+	private final CategoryService service = new CategoryServiceImpl(categoryDao)
 	
-	private CategoryDao categoryDao = Mock()
-	private CategoryService service = new CategoryServiceImpl(categoryDao)
+	private AddCategoryForm form
 	
 	def setup() {
 		form = new AddCategoryForm()

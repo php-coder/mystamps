@@ -24,9 +24,9 @@ import ru.mystamps.web.dao.StampsCatalogDao
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class GibbonsCatalogServiceImplTest extends Specification {
 	
-	private StampsCatalogDao gibbonsCatalogDao = Mock()
+	private final StampsCatalogDao gibbonsCatalogDao = Mock()
 	
-	private StampsCatalogService service = new GibbonsCatalogServiceImpl(gibbonsCatalogDao)
+	private final StampsCatalogService service = new GibbonsCatalogServiceImpl(gibbonsCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

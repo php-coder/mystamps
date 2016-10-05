@@ -28,7 +28,8 @@ import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CollectionServiceImplTest extends Specification {
-	private CollectionDao collectionDao = Mock()
+	
+	private final CollectionDao collectionDao = Mock()
 	
 	private CollectionService service
 	
