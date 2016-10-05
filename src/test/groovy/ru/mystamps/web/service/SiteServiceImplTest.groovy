@@ -35,11 +35,9 @@ class SiteServiceImplTest extends Specification {
 	private static final String TEST_USER_AGENT   = TestObjects.TEST_ACTIVITY_AGENT
 	
 	private SuspiciousActivityDao suspiciousActivityDao = Mock()
-	private SiteService service
 	private SiteServiceImpl serviceImpl
 	
 	def setup() {
-		service = new SiteServiceImpl(suspiciousActivityDao)
 		serviceImpl = Spy(SiteServiceImpl, constructorArgs:[suspiciousActivityDao])
 	}
 	
