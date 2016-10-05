@@ -9,6 +9,7 @@ fi
 
 CS_FAIL=
 PMD_FAIL=
+CODENARC_FAIL=
 LICENSE_FAIL=
 POM_FAIL=
 BOOTLINT_FAIL=
@@ -20,6 +21,11 @@ VERIFY_FAIL=
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning >cs.log 2>&1 || CS_FAIL=yes
 	mvn --batch-mode pmd:check >pmd.log 2>&1 || PMD_FAIL=yes
+	mvn --batch-mode codenarc:codenarc \
+		-Dcodenarc.maxPriority1Violations=0 \
+		-Dcodenarc.maxPriority2Violations=0 \
+		-Dcodenarc.maxPriority3Violations=0 \
+		>codenarc.log 2>&1 || CODENARC_FAIL=yes
 	mvn --batch-mode license:check >license.log 2>&1 || LICENSE_FAIL=yes
 	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop >pom.log || POM_FAIL=yes
 	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || BOOTLINT_FAIL=yes
@@ -46,6 +52,7 @@ echo
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$CS_FAIL"       'Run CheckStyle'
 	print_status "$PMD_FAIL"      'Run PMD'
+	print_status "$CODENARC_FAIL" 'Run CodeNarc'
 	print_status "$LICENSE_FAIL"  'Check license headers'
 	print_status "$POM_FAIL"      'Check sorting of pom.xml'
 	print_status "$BOOTLINT_FAIL" 'Run bootlint'
@@ -61,6 +68,7 @@ echo
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_log cs.log        'Run CheckStyle'
 	print_log pmd.log       'Run PMD'
+	print_log codenarc.log  'Run CodeNarc'
 	print_log license.log   'Check license headers'
 	print_log pom.log       'Check sorting of pom.xml'
 	print_log bootlint.log  'Run bootlint'
@@ -71,8 +79,8 @@ fi
 
 print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log license.log bootlint.log jasmine.log validator.log test.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log bootlint.log jasmine.log validator.log test.log verify.log
 
-if [ -n "$CS_FAIL$PMD_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$VERIFY_FAIL" ]; then
+if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$VERIFY_FAIL" ]; then
 	exit 1
 fi

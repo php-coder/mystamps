@@ -22,17 +22,18 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.service.dto.AdminDailyReport
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CronServiceImplTest extends Specification {
 	
-	private CategoryService categoryService = Mock()
-	private CountryService countryService = Mock()
-	private SeriesService seriesService = Mock()
-	private SuspiciousActivityService suspiciousActivityService = Mock()
-	private MailService mailService = Mock()
-	private UserService userService = Mock()
-	private UsersActivationService usersActivationService = Mock()
+	private final CategoryService categoryService = Mock()
+	private final CountryService countryService = Mock()
+	private final SeriesService seriesService = Mock()
+	private final SuspiciousActivityService suspiciousActivityService = Mock()
+	private final MailService mailService = Mock()
+	private final UserService userService = Mock()
+	private final UsersActivationService usersActivationService = Mock()
 	
-	private CronService service = new CronServiceImpl(
+	private final CronService service = new CronServiceImpl(
 		categoryService,
 		countryService,
 		seriesService,
@@ -42,26 +43,26 @@ class CronServiceImplTest extends Specification {
 		mailService
 	)
 	
-	private static def assertMidnight(Date date) {
+	private static void assertMidnight(Date date) {
 		assert date[Calendar.HOUR_OF_DAY] == 0
 		assert date[Calendar.MINUTE]      == 0
 		assert date[Calendar.SECOND]      == 0
 		assert date[Calendar.MILLISECOND] == 0
 	}
 	
-	private static def assertDatesEqual(Date first, Date second) {
+	private static void assertDatesEqual(Date first, Date second) {
 		assert first[Calendar.YEAR]         == second[Calendar.YEAR]
 		assert first[Calendar.MONTH]        == second[Calendar.MONTH]
 		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
 	}
 	
-	private static def assertMidnightOfYesterday(Date date) {
+	private static void assertMidnightOfYesterday(Date date) {
 		assert date != null
 		assertDatesEqual(date, new Date().previous())
 		assertMidnight(date)
 	}
 	
-	private static def assertMidnightOfToday(Date date) {
+	private static void assertMidnightOfToday(Date date) {
 		assert date != null
 		assertDatesEqual(date, new Date())
 		assertMidnight(date)
@@ -71,6 +72,7 @@ class CronServiceImplTest extends Specification {
 	// Tests for sendDailyStatistics()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "sendDailyStatistics() should invoke services and pass start date to them"() {
 		when:
 			service.sendDailyStatistics()
@@ -99,24 +101,25 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("PageNotFound", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('PageNotFound', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("AuthenticationFailed", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('AuthenticationFailed', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("MissingCsrfToken", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('MissingCsrfToken', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
-			1 * suspiciousActivityService.countByTypeSince("InvalidCsrfToken", { Date date ->
+			1 * suspiciousActivityService.countByTypeSince('InvalidCsrfToken', { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "sendDailyStatistics() should prepare report and pass it to mail service"() {
 		given:
 			categoryService.countAddedSince(_ as Date) >> 1
@@ -127,10 +130,10 @@ class CronServiceImplTest extends Specification {
 			userService.countRegisteredSince(_ as Date) >> 6
 		and:
 			long expectedEvents = 7 + 8 + 9 + 10
-			suspiciousActivityService.countByTypeSince("PageNotFound", _ as Date) >> 7
-			suspiciousActivityService.countByTypeSince("AuthenticationFailed", _ as Date) >> 8
-			suspiciousActivityService.countByTypeSince("MissingCsrfToken", _ as Date) >> 9
-			suspiciousActivityService.countByTypeSince("InvalidCsrfToken", _ as Date) >> 10
+			suspiciousActivityService.countByTypeSince('PageNotFound', _ as Date) >> 7
+			suspiciousActivityService.countByTypeSince('AuthenticationFailed', _ as Date) >> 8
+			suspiciousActivityService.countByTypeSince('MissingCsrfToken', _ as Date) >> 9
+			suspiciousActivityService.countByTypeSince('InvalidCsrfToken', _ as Date) >> 10
 		when:
 			service.sendDailyStatistics()
 		then:
@@ -164,6 +167,7 @@ class CronServiceImplTest extends Specification {
 			1 * usersActivationService.findOlderThan(_ as Integer) >> []
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "purgeUsersActivations() should pass days to service"() {
 		given:
 			int expectedDays = CronService.PURGE_AFTER_DAYS

@@ -27,17 +27,18 @@ import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
 
-	private ImageDao imageDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
+	private final ImageDao imageDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
+	private final ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
 	
 	def setup() {
-		multipartFile.getSize() >> 1024L
-		multipartFile.getContentType() >> 'image/png'
+		multipartFile.size >> 1024L
+		multipartFile.contentType >> 'image/png'
 		imageDao.add(_ as String) >> 17
 	}
 	
@@ -56,7 +57,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getSize() >> 0L
+			multipartFile.size >> 0L
 		and:
 			thrown IllegalArgumentException
 	}
@@ -65,7 +66,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> null
+			multipartFile.contentType >> null
 		and:
 			thrown IllegalArgumentException
 	}
@@ -74,7 +75,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> 'image/tiff'
+			multipartFile.contentType >> 'image/tiff'
 		and:
 			thrown IllegalStateException
 	}
@@ -87,11 +88,16 @@ class ImageServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "save() should pass content type '#contentType' to image dao"(String contentType, String expectedType) {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> contentType
+			multipartFile.contentType >> contentType
 		and:
 			1 * imageDao.add({ String type ->
 				assert type == expectedType
@@ -116,11 +122,12 @@ class ImageServiceImplTest extends Specification {
 			thrown ImagePersistenceException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should call strategy"() {
 		given:
 			ImageInfoDto image = TestObjects.createImageInfoDto()
 		when:
-			String url = service.save(multipartFile)
+			service.save(multipartFile)
 		then:
 			imageDao.add(_ as String) >> image.id
 		and:
@@ -162,6 +169,7 @@ class ImageServiceImplTest extends Specification {
 			0       | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to image dao"() {
 		when:
 			service.get(7)
@@ -183,6 +191,7 @@ class ImageServiceImplTest extends Specification {
 			image == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to strategy and return result from it"() {
 		given:
 			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
@@ -231,6 +240,7 @@ class ImageServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addToSeries() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
@@ -258,11 +268,12 @@ class ImageServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
 		and:
-			List<Integer> expectedResult = [ 1, 2 ] as List
+			List<Integer> expectedResult = [ 1, 2 ]
 		when:
 			List<Integer> result = service.findBySeriesId(expectedSeriesId)
 		then:

@@ -21,11 +21,12 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.StampsCatalogDao
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class MichelCatalogServiceImplTest extends Specification {
 	
-	private StampsCatalogDao michelCatalogDao = Mock()
+	private final StampsCatalogDao michelCatalogDao = Mock()
 	
-	private StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
+	private final StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()
@@ -38,11 +39,12 @@ class MichelCatalogServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 50
 		and:
-			List<String> expectedResult = [ '75', '76' ] as List
+			List<String> expectedResult = [ '75', '76' ]
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:

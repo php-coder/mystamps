@@ -23,11 +23,12 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SuspiciousActivityServiceImplTest extends Specification {
 	
-	private SuspiciousActivityDao suspiciousActivityDao = Mock()
+	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
 	
-	private SuspiciousActivityService service = new SuspiciousActivityServiceImpl(suspiciousActivityDao)
+	private final SuspiciousActivityService service = new SuspiciousActivityServiceImpl(suspiciousActivityDao)
 	
 	//
 	// Tests for countAll()
@@ -63,15 +64,16 @@ class SuspiciousActivityServiceImplTest extends Specification {
 	
 	def "countByTypeSince() should throw exception when date is null"() {
 		when:
-			service.countByTypeSince("AnyType", null)
+			service.countByTypeSince('AnyType', null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
 		given:
-			String expectedType = "ExpectedType"
-			Date expectedDate = new Date().plus(1)
+			String expectedType = 'ExpectedType'
+			Date expectedDate = new Date() + 1
 			long expectedResult = 47
 		when:
 			long result = service.countByTypeSince(expectedType, expectedDate)
@@ -115,11 +117,12 @@ class SuspiciousActivityServiceImplTest extends Specification {
 			0              | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findSuspiciousActivities() should invoke dao and return result from dao"() {
 		given:
 			int expectedPage = 5
 			int expectedRecordsPerPage = 10
-			List<SuspiciousActivityDto> expectedResult = [ TestObjects.createSuspiciousActivityDto() ] as List
+			List<SuspiciousActivityDto> expectedResult = [ TestObjects.createSuspiciousActivityDto() ]
 		when:
 			List<SuspiciousActivityDto> result =
 				service.findSuspiciousActivities(expectedPage, expectedRecordsPerPage)

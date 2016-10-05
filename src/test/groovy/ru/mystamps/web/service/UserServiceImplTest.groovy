@@ -28,14 +28,15 @@ import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.tests.DateUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
 	
-	private static Integer ANY_USER_ID = TestObjects.TEST_USER_ID
+	private static final Integer ANY_USER_ID = TestObjects.TEST_USER_ID
 	
-	private UserDao userDao = Mock()
-	private UsersActivationService usersActivationService = Mock()
-	private CollectionService collectionService = Mock()
-	private PasswordEncoder encoder = Mock()
+	private final UserDao userDao = Mock()
+	private final UsersActivationService usersActivationService = Mock()
+	private final CollectionService collectionService = Mock()
+	private final PasswordEncoder encoder = Mock()
 	
 	private UserService service
 	private ActivateAccountForm activationForm
@@ -43,15 +44,15 @@ class UserServiceImplTest extends Specification {
 	def setup() {
 		AddUserDbDto user = TestObjects.createAddUserDbDto()
 		
-		encoder.encode(_ as String) >> user.getHash()
+		encoder.encode(_ as String) >> user.hash
 		
 		UsersActivationDto activation = TestObjects.createUsersActivationDto()
 		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
-		activationForm.setLogin(user.getLogin())
+		activationForm.setLogin(user.login)
 		activationForm.setPassword(TestObjects.TEST_PASSWORD)
-		activationForm.setName(user.getName())
+		activationForm.setName(user.name)
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
 		service = new UserServiceImpl(userDao, usersActivationService, collectionService, encoder)
@@ -75,9 +76,10 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should delete registration request"() {
 		given:
-			String expectedActivationKey = activationForm.getActivationKey()
+			String expectedActivationKey = activationForm.activationKey
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -109,9 +111,10 @@ class UserServiceImplTest extends Specification {
 			0 * usersActivationService.remove(_ as String)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass name to dao"() {
 		given:
-			String expectedUserName = activationForm.getName()
+			String expectedUserName = activationForm.name
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -121,9 +124,10 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is null"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 			activationForm.setName(null)
 		when:
 			service.registerUser(activationForm)
@@ -134,9 +138,10 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is empty"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		and:
 			activationForm.setName('')
 		when:
@@ -148,6 +153,7 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should fill role field"() {
 		when:
 			service.registerUser(activationForm)
@@ -158,9 +164,10 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use email from registration request"() {
 		given:
-			UsersActivationDto activation = new UsersActivationDto("test@example.org", new Date())
+			UsersActivationDto activation = new UsersActivationDto('test@example.org', new Date())
 		and:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		when:
@@ -172,6 +179,7 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use registration date from registration request"() {
 		given:
 			UsersActivationDto activation = new UsersActivationDto(TestObjects.TEST_EMAIL, new Date(86, 8, 12))
@@ -195,9 +203,10 @@ class UserServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should gets hash from encoder"() {
 		given:
-			String expectedHash = TestObjects.createAddUserDbDto().getHash()
+			String expectedHash = TestObjects.createAddUserDbDto().hash
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -230,9 +239,10 @@ class UserServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login to dao"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -242,6 +252,7 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should assign activated at to current date"() {
 		when:
 			service.registerUser(activationForm)
@@ -252,10 +263,11 @@ class UserServiceImplTest extends Specification {
 			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should create collection for user"() {
 		given:
-			Integer expectedId = 909;
-			String expectedLogin = activationForm.getLogin()
+			Integer expectedId = 909
+			String expectedLogin = activationForm.login
 		and:
 			userDao.add(_ as AddUserDbDto) >> expectedId
 		when:
@@ -336,6 +348,7 @@ class UserServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countRegisteredSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()

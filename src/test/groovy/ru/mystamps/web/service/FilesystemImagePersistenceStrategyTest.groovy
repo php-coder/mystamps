@@ -27,14 +27,16 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 
 import java.nio.file.Path
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	
-	private MultipartFile multipartFile = Mock()
-	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
-	private Path mockFile = Mock(Path)
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
+	private final Path mockFile = Mock(Path)
 	
-	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
+	private final ImagePersistenceStrategy strategy =
+		Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
 	
 	//
 	// Tests for save()
@@ -44,9 +46,10 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
+			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> { }
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should saves file onto the configured directory"() {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
@@ -56,9 +59,10 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.parent.toString() == expectedDirectoryName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should gives proper name to the file"() {
 		given:
 			String expectedExtension = imageInfoDto.type.toLowerCase()
@@ -70,7 +74,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.fileName.toString() == expectedFileName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
 	def "save() should converts IOException to ImagePersistenceException"() {

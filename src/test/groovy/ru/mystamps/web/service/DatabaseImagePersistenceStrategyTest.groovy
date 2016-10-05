@@ -27,13 +27,14 @@ import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private ImageDataDao imageDataDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
+	private final ImageDataDao imageDataDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
-	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
+	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
 	
 	//
 	// Tests for save()
@@ -41,7 +42,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
-			multipartFile.getBytes() >> { throw new IOException() }
+			multipartFile.bytes >> { throw new IOException() }
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -50,10 +51,11 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			ex.cause instanceof IOException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass file content to image data dao"() {
 		given:
-			byte[] expected = 'test'.getBytes()
-			multipartFile.getBytes() >> expected
+			byte[] expected = 'test'.bytes
+			multipartFile.bytes >> expected
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -63,9 +65,10 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass image to image data dao"() {
 		given:
-			Integer expectedImageId = imageInfoDto.getId()
+			Integer expectedImageId = imageInfoDto.id
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -79,6 +82,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass image to image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
