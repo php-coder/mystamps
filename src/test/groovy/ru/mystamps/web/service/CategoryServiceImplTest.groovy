@@ -30,7 +30,8 @@ import ru.mystamps.web.util.SlugUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CategoryServiceImplTest extends Specification {
 	
-	private final Integer userId = 123
+	private static final Integer userId = 123
+	
 	private final CategoryDao categoryDao = Mock()
 	private final CategoryService service = new CategoryServiceImpl(categoryDao)
 	

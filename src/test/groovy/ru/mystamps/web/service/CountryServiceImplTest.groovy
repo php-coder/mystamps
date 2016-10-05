@@ -30,7 +30,8 @@ import ru.mystamps.web.util.SlugUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CountryServiceImplTest extends Specification {
 	
-	private final Integer userId = 321
+	private static final Integer userId = 321
+	
 	private final CountryDao countryDao = Mock()
 	private final CountryService service = new CountryServiceImpl(countryDao)
 	
