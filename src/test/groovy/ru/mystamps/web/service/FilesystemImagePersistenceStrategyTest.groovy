@@ -27,6 +27,7 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 
 import java.nio.file.Path
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	
@@ -47,6 +48,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should saves file onto the configured directory"() {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
@@ -59,6 +61,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			}) >> {}
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should gives proper name to the file"() {
 		given:
 			String expectedExtension = imageInfoDto.type.toLowerCase()

@@ -20,6 +20,7 @@ package ru.mystamps.web.util
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class PagerTest extends Specification {
 	
 	//
@@ -190,6 +191,7 @@ class PagerTest extends Specification {
 	//
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def "getPrev() should return #prev for when page = #currentPage"(int currentPage, Integer prev) {
 		when:
 			Pager pager = new Pager(3, 1, currentPage)
@@ -207,6 +209,7 @@ class PagerTest extends Specification {
 	//
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def "getNext() should return #next for when page = #currentPage"(int currentPage, Integer next) {
 		when:
 			Pager pager = new Pager(3, 1, currentPage)

@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private ImageDataDao imageDataDao = Mock()
@@ -50,6 +51,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			ex.cause instanceof IOException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass file content to image data dao"() {
 		given:
 			byte[] expected = 'test'.bytes
@@ -63,6 +65,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass image to image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
@@ -79,6 +82,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass image to image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
