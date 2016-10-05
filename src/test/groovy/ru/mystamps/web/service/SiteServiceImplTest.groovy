@@ -40,7 +40,7 @@ class SiteServiceImplTest extends Specification {
 	
 	def setup() {
 		service = new SiteServiceImpl(suspiciousActivityDao)
-		serviceImpl = Spy(SiteServiceImpl, constructorArgs: [suspiciousActivityDao])
+		serviceImpl = Spy(SiteServiceImpl, constructorArgs:[suspiciousActivityDao])
 	}
 	
 	//

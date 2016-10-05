@@ -35,7 +35,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private Path mockFile = Mock(Path)
 	
-	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
+	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
 	
 	//
 	// Tests for save()
