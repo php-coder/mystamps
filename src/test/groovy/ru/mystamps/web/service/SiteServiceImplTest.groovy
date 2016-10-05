@@ -215,7 +215,7 @@ class SiteServiceImplTest extends Specification {
 		given:
 			String method = 'PROPFIND'
 		and:
-			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH-3) + '...'
+			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH - 3) + '...'
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
 		then:
