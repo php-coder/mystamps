@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CategoryServiceImplTest extends Specification {
 	
 	private AddCategoryForm form
@@ -92,6 +93,7 @@ class CategoryServiceImplTest extends Specification {
 			actualSlug == expectedSlug
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass English category name to dao"() {
 		given:
 			String expectedCategoryName = 'Animals'
@@ -105,6 +107,7 @@ class CategoryServiceImplTest extends Specification {
 			}) >> 20
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass Russian category name to dao"() {
 		given:
 			String expectedCategoryName = 'Животные'
@@ -127,6 +130,7 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass slug to dao"() {
 		given:
 			String name = '-foo123 test_'
@@ -143,6 +147,7 @@ class CategoryServiceImplTest extends Specification {
 			}) >> 40
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, userId)
@@ -153,6 +158,7 @@ class CategoryServiceImplTest extends Specification {
 			}) >> 50
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, userId)
@@ -163,6 +169,7 @@ class CategoryServiceImplTest extends Specification {
 			}) >> 60
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created by to user"() {
 		given:
 			Integer expectedUserId = 10
@@ -175,6 +182,7 @@ class CategoryServiceImplTest extends Specification {
 			}) >> 70
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated by to user"() {
 		given:
 			Integer expectedUserId = 20
@@ -207,6 +215,7 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
@@ -238,6 +247,7 @@ class CategoryServiceImplTest extends Specification {
 			null | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
 			String expectedSlug = 'people'
@@ -288,6 +298,7 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countCategoriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 10
@@ -320,6 +331,7 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByName() should pass category name to dao in lowercase"() {
 		when:
 			service.countByName('Sport')
@@ -350,6 +362,7 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Спорт')
@@ -371,6 +384,7 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -398,6 +412,7 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "getStatisticsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 15

@@ -33,6 +33,7 @@ import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.tests.DateUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
 	private static final Integer ANY_IMAGE_ID = 18
@@ -126,6 +127,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should load and pass country to series dao if country present"() {
 		given:
 			LinkEntityDto country = TestObjects.createLinkEntityDto()
@@ -143,6 +145,7 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass date of release (#expectedDay/#expectedMonth/#expectedYear) when it's #day/#month/#year"(
 		Integer day, Integer month, Integer year,
 		Integer expectedDay, Integer expectedMonth, Integer expectedYear) {
@@ -172,6 +175,7 @@ class SeriesServiceImplTest extends Specification {
 			null | 6     | null || null        | null          | null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass category to series dao"() {
 		given:
 			LinkEntityDto category = TestObjects.createLinkEntityDto()
@@ -188,6 +192,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass quantity to series dao"() {
 		given:
 			Integer expectedQuantity = 3
@@ -201,6 +206,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass perforated to series dao"() {
 		given:
 			Boolean expectedResult = true
@@ -215,6 +221,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		'LineLength',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass michel price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setMichelPrice(price)
@@ -233,6 +245,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass scott price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setScottPrice(price)
@@ -251,6 +269,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass yvert price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setYvertPrice(price)
@@ -269,6 +293,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass gibbons price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setGibbonsPrice(price)
@@ -296,6 +326,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass '#expectedComment' as comment to series dao if user can add comment is #canAddComment"(boolean canAddComment, String comment, String expectedComment) {
 		given:
 			form.setComment(comment)
@@ -314,6 +350,7 @@ class SeriesServiceImplTest extends Specification {
 			true          | 'Some text' || 'Some text'
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, userId, false)
@@ -324,6 +361,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, userId, false)
@@ -334,6 +372,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created by to user"() {
 		given:
 			Integer expectedUserId = 456
@@ -346,6 +385,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated by to user"() {
 		given:
 			Integer expectedUserId = 789
@@ -369,6 +409,7 @@ class SeriesServiceImplTest extends Specification {
 			actual == expected
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass image to image service"() {
 		given:
 			form.setImage(multipartFile)
@@ -381,6 +422,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> ANY_IMAGE_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add image to the series"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -419,6 +461,7 @@ class SeriesServiceImplTest extends Specification {
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add michel numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -461,6 +504,7 @@ class SeriesServiceImplTest extends Specification {
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add scott numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -503,6 +547,7 @@ class SeriesServiceImplTest extends Specification {
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add yvert numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -545,6 +590,7 @@ class SeriesServiceImplTest extends Specification {
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add gibbons numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -575,6 +621,7 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for addImageToSeries()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addImageToSeries() should call dao and pass series id, current date and user id to it"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -636,6 +683,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countSeriesOf() should pass argument to dao"() {
 		given:
 			Integer expectedCollectionId = 7
@@ -659,6 +707,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countStampsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 8
@@ -682,6 +731,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -709,6 +759,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -737,6 +788,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		'LineLength',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "isSeriesExist() should invoke dao, pass argument and return result from dao"(Integer daoReturnValue, boolean expectedResult) {
 		given:
 			Integer expectedSeriesId = 13
@@ -772,6 +829,7 @@ class SeriesServiceImplTest extends Specification {
 			' '              | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find series ids"() {
 		given:
 			String expectedMichelNumber = '5'
@@ -795,6 +853,7 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -835,6 +894,7 @@ class SeriesServiceImplTest extends Specification {
 			' '             | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find series ids"() {
 		given:
 			String expectedScottNumber = '5'
@@ -858,6 +918,7 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -898,6 +959,7 @@ class SeriesServiceImplTest extends Specification {
 			' '             | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find series ids"() {
 		given:
 			String expectedYvertNumber = '5'
@@ -921,6 +983,7 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -961,6 +1024,7 @@ class SeriesServiceImplTest extends Specification {
 			' '               | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
 			String expectedGibbonsNumber = '5'
@@ -984,6 +1048,7 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -1066,6 +1131,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByCollectionId() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 16
@@ -1102,6 +1168,7 @@ class SeriesServiceImplTest extends Specification {
 			0        | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findRecentlyAdded should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 3
@@ -1149,6 +1216,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 88

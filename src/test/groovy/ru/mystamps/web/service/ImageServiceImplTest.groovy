@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
 
 	private ImageDao imageDao = Mock()
@@ -87,6 +88,11 @@ class ImageServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "save() should pass content type '#contentType' to image dao"(String contentType, String expectedType) {
 		when:
 			service.save(multipartFile)
@@ -116,6 +122,7 @@ class ImageServiceImplTest extends Specification {
 			thrown ImagePersistenceException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should call strategy"() {
 		given:
 			ImageInfoDto image = TestObjects.createImageInfoDto()
@@ -162,6 +169,7 @@ class ImageServiceImplTest extends Specification {
 			0       | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to image dao"() {
 		when:
 			service.get(7)
@@ -183,6 +191,7 @@ class ImageServiceImplTest extends Specification {
 			image == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to strategy and return result from it"() {
 		given:
 			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
@@ -231,6 +240,7 @@ class ImageServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addToSeries() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
@@ -258,6 +268,7 @@ class ImageServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14

@@ -23,6 +23,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SuspiciousActivityServiceImplTest extends Specification {
 	
 	private SuspiciousActivityDao suspiciousActivityDao = Mock()
@@ -68,6 +69,7 @@ class SuspiciousActivityServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByTypeSince() should invoke dao, pass arguments and return result from dao"() {
 		given:
 			String expectedType = 'ExpectedType'
@@ -115,6 +117,7 @@ class SuspiciousActivityServiceImplTest extends Specification {
 			0              | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findSuspiciousActivities() should invoke dao and return result from dao"() {
 		given:
 			int expectedPage = 5

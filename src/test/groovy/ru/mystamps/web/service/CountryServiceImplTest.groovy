@@ -28,6 +28,7 @@ import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CountryServiceImplTest extends Specification {
 	
 	private AddCountryForm form
@@ -93,6 +94,7 @@ class CountryServiceImplTest extends Specification {
 			actualSlug == expectedSlug
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass country name in English to dao"() {
 		given:
 			String expectedCountryName = 'Italy'
@@ -106,6 +108,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 20
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass country name in Russian to dao"() {
 		given:
 			String expectedCountryName = 'Италия'
@@ -128,6 +131,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass slug to dao"() {
 		given:
 			String name = '-foo123 test_'
@@ -144,6 +148,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 40
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, userId)
@@ -154,6 +159,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 50
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, userId)
@@ -164,6 +170,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 60
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created by to user"() {
 		given:
 			Integer expectedUserId = 10
@@ -176,6 +183,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 70
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated by to user"() {
 		given:
 			Integer expectedUserId = 10
@@ -208,6 +216,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
@@ -238,6 +247,7 @@ class CountryServiceImplTest extends Specification {
 			null | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
 			String expectedSlug = 'france'
@@ -288,6 +298,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countCountriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 9
@@ -320,6 +331,7 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByName() should pass country name to dao in lowercase"() {
 		when:
 			service.countByName('Canada')
@@ -350,6 +362,7 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Канада')
@@ -371,6 +384,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -398,6 +412,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "getStatisticsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 17

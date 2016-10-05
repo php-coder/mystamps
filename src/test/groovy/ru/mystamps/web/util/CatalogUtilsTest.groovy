@@ -19,6 +19,7 @@ package ru.mystamps.web.util
 
 import spock.lang.Specification
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CatalogUtilsTest extends Specification {
 	
 	//

@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.util.SlugUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CollectionServiceImplTest extends Specification {
 	private CollectionDao collectionDao = Mock()
 	
@@ -39,6 +40,7 @@ class CollectionServiceImplTest extends Specification {
 	// Tests for createCollection()
 	//
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner id is null"() {
 		when:
 			service.createCollection(null, 'test-owner-login')
@@ -46,6 +48,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner login is null"() {
 		when:
 			service.createCollection(123, null)
@@ -53,6 +56,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner login can't be converted to slug"() {
 		when:
 			service.createCollection(123, '')
@@ -60,6 +64,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def "createCollection() should pass owner id to dao"() {
 		given:
 			Integer expectedOwnerId = 123
@@ -72,6 +77,7 @@ class CollectionServiceImplTest extends Specification {
 			}) >> 100
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def "createCollection() should pass slugified owner login to dao"() {
 		given:
 			String ownerLogin = 'Test User'
@@ -104,6 +110,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addToCollection() should pass arguments to dao"() {
 		given:
 			Integer expectedUserId = 123
@@ -138,6 +145,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeFromCollection() should find collection by user id"() {
 		given:
 			Integer expectedUserId = 123
@@ -150,6 +158,7 @@ class CollectionServiceImplTest extends Specification {
 			}) >> TestObjects.createUrlEntityDto()
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeFromCollection() should remove series from collection"() {
 		given:
 			Integer expectedSeriesId = 456
@@ -204,6 +213,7 @@ class CollectionServiceImplTest extends Specification {
 			0 * collectionDao.isSeriesInUserCollection(_ as Integer, _ as Integer)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "isSeriesInCollection() should pass arguments to dao"() {
 		given:
 			Integer expectedUserId = 123
@@ -256,6 +266,7 @@ class CollectionServiceImplTest extends Specification {
 			0        | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findRecentlyCreated() should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 4
@@ -279,6 +290,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findBySlug() should invoke dao, pass argument and return result from dao"() {
 		given:
 			String expectedSlug = 'cuba'
