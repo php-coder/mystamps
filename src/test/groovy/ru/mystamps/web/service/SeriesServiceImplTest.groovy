@@ -38,13 +38,13 @@ class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
 	private static final Integer ANY_IMAGE_ID = 18
 	
-	private ImageService imageService = Mock()
-	private SeriesDao seriesDao = Mock()
-	private StampsCatalogService michelCatalogService = Mock()
-	private StampsCatalogService scottCatalogService = Mock()
-	private StampsCatalogService yvertCatalogService = Mock()
-	private StampsCatalogService gibbonsCatalogService = Mock()
-	private MultipartFile multipartFile = Mock()
+	private final ImageService imageService = Mock()
+	private final SeriesDao seriesDao = Mock()
+	private final StampsCatalogService michelCatalogService = Mock()
+	private final StampsCatalogService scottCatalogService = Mock()
+	private final StampsCatalogService yvertCatalogService = Mock()
+	private final StampsCatalogService gibbonsCatalogService = Mock()
+	private final MultipartFile multipartFile = Mock()
 	
 	private SeriesService service
 	private AddSeriesForm form

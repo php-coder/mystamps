@@ -31,11 +31,12 @@ import java.nio.file.Path
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	
-	private MultipartFile multipartFile = Mock()
-	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
-	private Path mockFile = Mock(Path)
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
+	private final Path mockFile = Mock(Path)
 	
-	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
+	private final ImagePersistenceStrategy strategy =
+		Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
 	
 	//
 	// Tests for save()

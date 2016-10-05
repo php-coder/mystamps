@@ -31,8 +31,8 @@ import ru.mystamps.web.validation.ValidationRules
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UsersActivationServiceImplTest extends Specification {
 	
-	private UsersActivationDao usersActivationDao = Mock()
-	private MailService mailService = Mock()
+	private final UsersActivationDao usersActivationDao = Mock()
+	private final MailService mailService = Mock()
 	
 	private UsersActivationService service
 	private RegisterAccountForm registrationForm

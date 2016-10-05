@@ -26,9 +26,9 @@ import ru.mystamps.web.dao.dto.SuspiciousActivityDto
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SuspiciousActivityServiceImplTest extends Specification {
 	
-	private SuspiciousActivityDao suspiciousActivityDao = Mock()
+	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
 	
-	private SuspiciousActivityService service = new SuspiciousActivityServiceImpl(suspiciousActivityDao)
+	private final SuspiciousActivityService service = new SuspiciousActivityServiceImpl(suspiciousActivityDao)
 	
 	//
 	// Tests for countAll()

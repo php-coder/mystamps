@@ -34,7 +34,8 @@ class SiteServiceImplTest extends Specification {
 	private static final String TEST_REFERER_PAGE = TestObjects.TEST_ACTIVITY_REFERER
 	private static final String TEST_USER_AGENT   = TestObjects.TEST_ACTIVITY_AGENT
 	
-	private SuspiciousActivityDao suspiciousActivityDao = Mock()
+	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
+	
 	private SiteServiceImpl serviceImpl
 	
 	def setup() {

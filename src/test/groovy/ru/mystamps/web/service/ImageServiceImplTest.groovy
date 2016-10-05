@@ -30,11 +30,11 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
 
-	private ImageDao imageDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
+	private final ImageDao imageDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
+	private final ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
 	
 	def setup() {
 		multipartFile.size >> 1024L

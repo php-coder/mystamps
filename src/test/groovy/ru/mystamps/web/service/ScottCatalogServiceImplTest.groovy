@@ -24,9 +24,9 @@ import ru.mystamps.web.dao.StampsCatalogDao
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ScottCatalogServiceImplTest extends Specification {
 	
-	private StampsCatalogDao scottCatalogDao = Mock()
+	private final StampsCatalogDao scottCatalogDao = Mock()
 	
-	private StampsCatalogService service = new ScottCatalogServiceImpl(scottCatalogDao)
+	private final StampsCatalogService service = new ScottCatalogServiceImpl(scottCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

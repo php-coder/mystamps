@@ -30,11 +30,11 @@ import ru.mystamps.web.service.exception.ImagePersistenceException
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private ImageDataDao imageDataDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
+	private final ImageDataDao imageDataDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
-	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
+	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
 	
 	//
 	// Tests for save()

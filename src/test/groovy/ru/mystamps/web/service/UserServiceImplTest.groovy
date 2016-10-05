@@ -31,12 +31,12 @@ import ru.mystamps.web.tests.DateUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
 	
-	private static Integer ANY_USER_ID = TestObjects.TEST_USER_ID
+	private static final Integer ANY_USER_ID = TestObjects.TEST_USER_ID
 	
-	private UserDao userDao = Mock()
-	private UsersActivationService usersActivationService = Mock()
-	private CollectionService collectionService = Mock()
-	private PasswordEncoder encoder = Mock()
+	private final UserDao userDao = Mock()
+	private final UsersActivationService usersActivationService = Mock()
+	private final CollectionService collectionService = Mock()
+	private final PasswordEncoder encoder = Mock()
 	
 	private UserService service
 	private ActivateAccountForm activationForm

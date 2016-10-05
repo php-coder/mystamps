@@ -25,15 +25,15 @@ import ru.mystamps.web.service.dto.AdminDailyReport
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CronServiceImplTest extends Specification {
 	
-	private CategoryService categoryService = Mock()
-	private CountryService countryService = Mock()
-	private SeriesService seriesService = Mock()
-	private SuspiciousActivityService suspiciousActivityService = Mock()
-	private MailService mailService = Mock()
-	private UserService userService = Mock()
-	private UsersActivationService usersActivationService = Mock()
+	private final CategoryService categoryService = Mock()
+	private final CountryService countryService = Mock()
+	private final SeriesService seriesService = Mock()
+	private final SuspiciousActivityService suspiciousActivityService = Mock()
+	private final MailService mailService = Mock()
+	private final UserService userService = Mock()
+	private final UsersActivationService usersActivationService = Mock()
 	
-	private CronService service = new CronServiceImpl(
+	private final CronService service = new CronServiceImpl(
 		categoryService,
 		countryService,
 		seriesService,

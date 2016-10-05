@@ -24,9 +24,8 @@ import ru.mystamps.web.dao.StampsCatalogDao
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class YvertCatalogServiceImplTest extends Specification {
 	
-	private StampsCatalogDao yvertCatalogDao = Mock()
-	
-	private StampsCatalogService service = new YvertCatalogServiceImpl(yvertCatalogDao)
+	private final StampsCatalogDao yvertCatalogDao = Mock()
+	private final StampsCatalogService service = new YvertCatalogServiceImpl(yvertCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()

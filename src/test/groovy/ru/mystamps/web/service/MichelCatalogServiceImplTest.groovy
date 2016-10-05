@@ -24,9 +24,9 @@ import ru.mystamps.web.dao.StampsCatalogDao
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class MichelCatalogServiceImplTest extends Specification {
 	
-	private StampsCatalogDao michelCatalogDao = Mock()
+	private final StampsCatalogDao michelCatalogDao = Mock()
 	
-	private StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
+	private final StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()
