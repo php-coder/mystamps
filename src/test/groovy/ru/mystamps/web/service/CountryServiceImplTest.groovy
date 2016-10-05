@@ -24,7 +24,6 @@ import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.model.AddCountryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
-import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
