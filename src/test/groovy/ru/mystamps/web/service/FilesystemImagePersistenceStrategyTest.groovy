@@ -45,7 +45,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
+			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> { }
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -58,7 +58,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.parent.toString() == expectedDirectoryName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -73,7 +73,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.fileName.toString() == expectedFileName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
 	def "save() should converts IOException to ImagePersistenceException"() {
