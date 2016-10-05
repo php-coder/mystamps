@@ -817,16 +817,16 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
+	def "findByMichelNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByMichelNumber(michelNumberCode, 'en')
+			service.findByMichelNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			michelNumberCode | _
-			null             | _
-			''               | _
-			' '              | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -882,16 +882,16 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
+	def "findByScottNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByScottNumber(scottNumberCode, 'en')
+			service.findByScottNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			scottNumberCode | _
-			null            | _
-			''              | _
-			' '             | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -947,16 +947,16 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
+	def "findByYvertNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByYvertNumber(yvertNumberCode, 'en')
+			service.findByYvertNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			yvertNumberCode | _
-			null            | _
-			''              | _
-			' '             | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -1012,16 +1012,16 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
+	def "findByGibbonsNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByGibbonsNumber(gibbonsNumberCode, 'en')
+			service.findByGibbonsNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			gibbonsNumberCode | _
-			null              | _
-			''                | _
-			' '               | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
