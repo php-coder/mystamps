@@ -22,11 +22,14 @@ import java.util.concurrent.Executor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 @Configuration
+@EnableAsync
 public class TaskExecutorConfig extends AsyncConfigurerSupport {
 	
 	@Override
