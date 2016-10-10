@@ -30,7 +30,7 @@ import ru.mystamps.web.util.SlugUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CategoryServiceImplTest extends Specification {
 	
-	private static final Integer userId = 123
+	private static final Integer USER_ID = 123
 	
 	private final CategoryDao categoryDao = Mock()
 	private final CategoryService service = new CategoryServiceImpl(categoryDao)
@@ -49,7 +49,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, userId)
+			service.add(null, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -58,7 +58,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -67,7 +67,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setNameRu(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -89,7 +89,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			categoryDao.add(_ as AddCategoryDbDto) >> expectedId
 		when:
-			String actualSlug = service.add(form, userId)
+			String actualSlug = service.add(form, USER_ID)
 		then:
 			actualSlug == expectedSlug
 	}
@@ -100,7 +100,7 @@ class CategoryServiceImplTest extends Specification {
 			String expectedCategoryName = 'Animals'
 			form.setName(expectedCategoryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.name == expectedCategoryName
@@ -114,7 +114,7 @@ class CategoryServiceImplTest extends Specification {
 			String expectedCategoryName = 'Животные'
 			form.setNameRu(expectedCategoryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.nameRu == expectedCategoryName
@@ -126,7 +126,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -140,7 +140,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			form.setName(name)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.slug == slug
@@ -151,7 +151,7 @@ class CategoryServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
@@ -162,7 +162,7 @@ class CategoryServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())

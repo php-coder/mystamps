@@ -30,7 +30,7 @@ import ru.mystamps.web.util.SlugUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CountryServiceImplTest extends Specification {
 	
-	private static final Integer userId = 321
+	private static final Integer USER_ID = 321
 	
 	private final CountryDao countryDao = Mock()
 	private final CountryService service = new CountryServiceImpl(countryDao)
@@ -49,7 +49,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, userId)
+			service.add(null, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -58,7 +58,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -67,7 +67,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setNameRu(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -89,7 +89,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			countryDao.add(_ as AddCountryDbDto) >> expectedId
 		when:
-			String actualSlug = service.add(form, userId)
+			String actualSlug = service.add(form, USER_ID)
 		then:
 			actualSlug == expectedSlug
 	}
@@ -100,7 +100,7 @@ class CountryServiceImplTest extends Specification {
 			String expectedCountryName = 'Italy'
 			form.setName(expectedCountryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
@@ -114,7 +114,7 @@ class CountryServiceImplTest extends Specification {
 			String expectedCountryName = 'Италия'
 			form.setNameRu(expectedCountryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
@@ -126,7 +126,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -140,7 +140,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			form.setName(name)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
@@ -151,7 +151,7 @@ class CountryServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
@@ -162,7 +162,7 @@ class CountryServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
