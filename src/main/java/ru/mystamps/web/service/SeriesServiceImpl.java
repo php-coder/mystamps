@@ -240,7 +240,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 		
 		List<String> michelNumbers  = michelCatalogService.findBySeriesId(seriesId);
-		List<String> scootNumbers   = scottCatalogService.findBySeriesId(seriesId);
+		List<String> scottNumbers   = scottCatalogService.findBySeriesId(seriesId);
 		List<String> yvertNumbers   = yvertCatalogService.findBySeriesId(seriesId);
 		List<String> gibbonsNumbers = gibbonsCatalogService.findBySeriesId(seriesId);
 		
@@ -249,7 +249,7 @@ public class SeriesServiceImpl implements SeriesService {
 		return new SeriesDto(
 			seriesBaseInfo,
 			michelNumbers,
-			scootNumbers,
+			scottNumbers,
 			yvertNumbers,
 			gibbonsNumbers,
 			imageIds
