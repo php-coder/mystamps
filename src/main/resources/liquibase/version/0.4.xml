@@ -20,5 +20,6 @@
 	<include file="0.4/2016-08-27--fix_series_sales_price.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-09-28--add_creator_data_to_series_sales.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-09-28--add_constraints_to_series-first-price.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-10-10--change_series_sales_date_type.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
