@@ -141,7 +141,7 @@ public class ServicesConfig {
 	
 	@Bean
 	public StampsCatalogService getYvertCatalogService() {
-		return new YvertCatalogServiceImpl(daoConfig.getYvertCatalogDao());
+		return new StampsCatalogServiceImpl("Yvert", daoConfig.getYvertCatalogDao());
 	}
 	
 	@Bean
