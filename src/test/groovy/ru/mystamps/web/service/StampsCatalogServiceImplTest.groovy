@@ -26,7 +26,7 @@ class StampsCatalogServiceImplTest extends Specification {
 	
 	private final StampsCatalogDao stampsCatalogDao = Mock()
 	
-	private final StampsCatalogService service = new StampsCatalogServiceImpl("TestCatalog", stampsCatalogDao)
+	private final StampsCatalogService service = new StampsCatalogServiceImpl('TestCatalog', stampsCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()
