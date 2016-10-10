@@ -22,11 +22,11 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.StampsCatalogDao
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class MichelCatalogServiceImplTest extends Specification {
+class StampsCatalogServiceImplTest extends Specification {
 	
-	private final StampsCatalogDao michelCatalogDao = Mock()
+	private final StampsCatalogDao stampsCatalogDao = Mock()
 	
-	private final StampsCatalogService service = new MichelCatalogServiceImpl(michelCatalogDao)
+	private final StampsCatalogService service = new StampsCatalogServiceImpl("TestCatalog", stampsCatalogDao)
 	
 	//
 	// Tests for findBySeriesId()
@@ -48,7 +48,7 @@ class MichelCatalogServiceImplTest extends Specification {
 		when:
 			List<String> result = service.findBySeriesId(expectedSeriesId)
 		then:
-			1 * michelCatalogDao.findBySeriesId({ Integer seriesId ->
+			1 * stampsCatalogDao.findBySeriesId({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
 				return true
 			}) >> expectedResult
