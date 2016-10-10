@@ -35,36 +35,37 @@ import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class MichelCatalogServiceImpl implements StampsCatalogService {
-	private static final Logger LOG = LoggerFactory.getLogger(MichelCatalogServiceImpl.class);
+public class StampsCatalogServiceImpl implements StampsCatalogService {
+	private static final Logger LOG = LoggerFactory.getLogger(StampsCatalogServiceImpl.class);
 	
-	private final StampsCatalogDao michelCatalogDao;
+	private final String catalogName;
+	private final StampsCatalogDao stampsCatalogDao;
 	
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	public void add(Set<String> michelNumbers) {
-		Validate.isTrue(michelNumbers != null, "Michel numbers must be non null");
-		Validate.isTrue(!michelNumbers.isEmpty(), "Michel numbers must be non empty");
+	public void add(Set<String> catalogNumbers) {
+		Validate.isTrue(catalogNumbers != null, "%s numbers must be non null", catalogName);
+		Validate.isTrue(!catalogNumbers.isEmpty(), "%s numbers must be non empty", catalogName);
 		
-		List<String> insertedNumbers = michelCatalogDao.add(michelNumbers);
+		List<String> insertedNumbers = stampsCatalogDao.add(catalogNumbers);
 		
 		if (!insertedNumbers.isEmpty()) {
-			LOG.info("Michel numbers {} were created", insertedNumbers);
+			LOG.info("{} numbers {} were created", catalogName, insertedNumbers);
 		}
 	}
 	
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	public void addToSeries(Integer seriesId, Set<String> michelNumbers) {
+	public void addToSeries(Integer seriesId, Set<String> catalogNumbers) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
-		Validate.isTrue(michelNumbers != null, "Michel numbers must be non null");
-		Validate.isTrue(!michelNumbers.isEmpty(), "Michel numbers must be non empty");
+		Validate.isTrue(catalogNumbers != null, "%s numbers must be non null", catalogName);
+		Validate.isTrue(!catalogNumbers.isEmpty(), "%s numbers must be non empty", catalogName);
 		
-		michelCatalogDao.addToSeries(seriesId, michelNumbers);
+		stampsCatalogDao.addToSeries(seriesId, catalogNumbers);
 		
-		LOG.info("Series #{}: michel numbers {} were added", seriesId, michelNumbers);
+		LOG.info("Series #{}: {} numbers {} were added", seriesId, catalogName, catalogNumbers);
 	}
 	
 	@Override
@@ -72,7 +73,7 @@ public class MichelCatalogServiceImpl implements StampsCatalogService {
 	public List<String> findBySeriesId(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		return michelCatalogDao.findBySeriesId(seriesId);
+		return stampsCatalogDao.findBySeriesId(seriesId);
 	}
 	
 }
