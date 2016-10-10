@@ -64,7 +64,7 @@ public class ScottCatalogServiceImpl implements StampsCatalogService {
 		
 		scottCatalogDao.addToSeries(seriesId, scottNumbers);
 		
-		LOG.info("Series #{}: scoot numbers {} were added", seriesId, scottNumbers);
+		LOG.info("Series #{}: scott numbers {} were added", seriesId, scottNumbers);
 	}
 	
 	@Override
