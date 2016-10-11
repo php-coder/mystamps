@@ -393,6 +393,8 @@
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
+		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
+		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		
@@ -753,6 +755,19 @@
 				<configuration>
 					<!-- Exclude non-minified versions of resources -->
 					<warSourceExcludes>WEB-INF/static/styles/main.css</warSourceExcludes>
+				</configuration>
+			</plugin>
+			
+			<!--
+			     Usage:
+			     mvn findbugs:check (checks the sources and produces report to the console)
+			-->
+			<plugin>
+				<groupId>org.codehaus.gmaven</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.plugin.version}</version>
+				<configuration>
+					<includeTests>true</includeTests>
 				</configuration>
 			</plugin>
 			
