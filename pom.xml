@@ -782,7 +782,7 @@
 			
 			<!--
 			     Usage:
-			     mvn codenarc:codenarc (checks the sources and generates report in target/site/codenarc.html
+			     mvn codenarc:codenarc (checks the sources and generates report in target/site/codenarc.html)
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
