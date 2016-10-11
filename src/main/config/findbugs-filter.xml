@@ -8,4 +8,11 @@
 		<Class name="~.*\.dto\..*" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
+	<Match>
+		<!--
+			It's ok, that we're don't override parent's equals() method.
+		-->
+		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />
+		<Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS" />
+	</Match>
 </FindBugsFilter>
