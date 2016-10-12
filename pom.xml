@@ -39,7 +39,7 @@
 		<jquery.version>1.9.1</jquery.version>
 		<selectizejs.version>0.12.1</selectizejs.version>
 		
-		<cucumber.version>1.2.4</cucumber.version>
+		<cucumber.version>1.2.5</cucumber.version>
 		<testng.version>6.8.8</testng.version>
 		<cglib.version>2.2.2</cglib.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
