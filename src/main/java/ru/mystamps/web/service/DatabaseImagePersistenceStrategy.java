@@ -29,10 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDataDao;
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.ImageData;
-import ru.mystamps.web.service.dto.DbImageDto;
-import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.dao.dto.AddImageDataDbDto;
+import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 @RequiredArgsConstructor
@@ -48,14 +48,14 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public void save(MultipartFile file, Image image) {
+	public void save(MultipartFile file, ImageInfoDto image) {
 		try {
-			ImageData imageData = new ImageData();
-			imageData.setImage(image);
+			AddImageDataDbDto imageData = new AddImageDataDbDto();
+			imageData.setImageId(image.getId());
 			imageData.setContent(file.getBytes());
 			
-			ImageData entity = imageDataDao.save(imageData);
-			LOG.info("Image's data entity saved to database ({})", entity);
+			Integer id = imageDataDao.add(imageData);
+			LOG.info("Image's data #{} for image #{} have been saved", id, image.getId());
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
@@ -64,14 +64,14 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
-	public ImageDto get(Image image) {
-		ImageData imageData = imageDataDao.findByImage(image);
-		if (imageData == null) {
+	public ImageDto get(ImageInfoDto image) {
+		DbImageDto imageDto = imageDataDao.findByImageId(image.getId());
+		if (imageDto == null) {
 			LOG.warn("Found image without content: #{}", image.getId());
 			return null;
 		}
 		
-		return new DbImageDto(imageData);
+		return imageDto;
 	}
 	
 }

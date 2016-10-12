@@ -21,6 +21,8 @@ import java.math.BigDecimal;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+
 public interface AddSeriesDto {
 	LinkEntityDto getCategory();
 	LinkEntityDto getCountry();

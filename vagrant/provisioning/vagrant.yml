@@ -1,0 +1,44 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  vars:
+    profile: 'test'
+    user_db_password: 'q1'
+    user_mail_password: 'q2'
+    # required for Ubuntu 16.04. which installs Python 2.x to a non-standard path
+    ansible_python_interpreter: "/usr/bin/python2.7"
+
+  pre_tasks:
+
+  - name: Bootstrapping server
+    include: bootstrap.yml
+
+  - name: Removing nano
+    apt:
+      package: nano
+      state: absent
+
+  - name: Creating /data directory
+    file:
+      path: /data
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+
+  roles:
+  - role: php-coder.oraclejdk
+  - role: mystamps-user
+  - role: mystamps-app
+  - {
+      role: php-coder.nginx,
+      remove_default_vhost: yes,
+      state: stopped
+    }
+  - role: mystamps-nginx
+  - {
+      role: mystamps-backup,
+      when: profile == 'prod'
+    }

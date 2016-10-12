@@ -17,12 +17,14 @@
  */
 package ru.mystamps.web.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,11 +45,12 @@ public class ErrorController {
 	public void notFound(
 			HttpServletRequest request,
 			@CurrentUser Integer currentUserId,
-			@RequestHeader(value = "referer", required = false) String referer,
-			@RequestHeader(value = "user-agent", required = false) String agent) {
+			// CheckStyle: ignore LineLength for next 1 line
+			@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page,
+			@RequestHeader(name = "referer", required = false) String referer,
+			@RequestHeader(name = "user-agent", required = false) String agent) {
 		
 		// TODO: sanitize all user's values (#60)
-		String page   = (String)request.getAttribute("javax.servlet.error.request_uri");
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
@@ -55,13 +58,13 @@ public class ErrorController {
 	}
 	
 	@RequestMapping(Url.INTERNAL_ERROR_PAGE)
-	public void internalError(HttpServletRequest request) {
-		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
+	public void internalError(
+		// CheckStyle: ignore LineLength for next 3 lines
+		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION_TYPE, required = false) Class<?> exceptionType,
+		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION, required = false) Exception exception,
+		@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page) {
 		
-		// CheckStyle: ignore LineLength for next 1 line
-		Class<?> exceptionType = (Class<?>)request.getAttribute("javax.servlet.error.exception_type");
-		Exception exception    = (Exception)request.getAttribute("javax.servlet.error.exception");
-		String page            = (String)request.getAttribute("javax.servlet.error.request_uri");
+		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
 		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
 			String msg = String.format(

@@ -21,41 +21,41 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.JdbcUserDao
 import ru.mystamps.web.dao.UserDao
+import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
-import ru.mystamps.web.entity.User
-import ru.mystamps.web.entity.User.Role
 import ru.mystamps.web.model.ActivateAccountForm
 import ru.mystamps.web.tests.DateUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
 	
-	private UserDao userDao = Mock()
-	private JdbcUserDao jdbcUserDao = Mock()
-	private UsersActivationService usersActivationService = Mock()
-	private CollectionService collectionService = Mock()
-	private PasswordEncoder encoder = Mock()
+	private static final Integer ANY_USER_ID = TestObjects.TEST_USER_ID
+	
+	private final UserDao userDao = Mock()
+	private final UsersActivationService usersActivationService = Mock()
+	private final CollectionService collectionService = Mock()
+	private final PasswordEncoder encoder = Mock()
 	
 	private UserService service
 	private ActivateAccountForm activationForm
 	
 	def setup() {
-		User user = TestObjects.createUser()
+		AddUserDbDto user = TestObjects.createAddUserDbDto()
 		
-		encoder.encode(_ as String) >> user.getHash()
+		encoder.encode(_ as String) >> user.hash
 		
 		UsersActivationDto activation = TestObjects.createUsersActivationDto()
 		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
-		activationForm.setLogin(user.getLogin())
+		activationForm.setLogin(user.login)
 		activationForm.setPassword(TestObjects.TEST_PASSWORD)
-		activationForm.setName(user.getName())
+		activationForm.setName(user.name)
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
-		service = new UserServiceImpl(userDao, jdbcUserDao, usersActivationService, collectionService, encoder)
+		service = new UserServiceImpl(userDao, usersActivationService, collectionService, encoder)
 	}
 	
 	//
@@ -73,12 +73,13 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save(_ as User) >> TestObjects.createUser()
+			1 * userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should delete registration request"() {
 		given:
-			String expectedActivationKey = activationForm.getActivationKey()
+			String expectedActivationKey = activationForm.activationKey
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -87,7 +88,7 @@ class UserServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			userDao.save(_ as User) >> TestObjects.createUser()
+			userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should throw exception when activation key is null"() {
@@ -105,74 +106,80 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> null
 		and:
-			0 * userDao.save(_ as User)
+			0 * userDao.add(_ as AddUserDbDto)
 		and:
 			0 * usersActivationService.remove(_ as String)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass name to dao"() {
 		given:
-			String expectedUserName = activationForm.getName()
+			String expectedUserName = activationForm.name
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserName
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is null"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 			activationForm.setName(null)
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login instead of name when name is empty"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		and:
 			activationForm.setName('')
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should fill role field"() {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
-				assert user?.role == Role.USER
+			1 * userDao.add({ AddUserDbDto user ->
+				assert user?.role == UserDetails.Role.USER
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use email from registration request"() {
 		given:
-			UsersActivationDto activation = new UsersActivationDto("test@example.org", new Date())
+			UsersActivationDto activation = new UsersActivationDto('test@example.org', new Date())
 		and:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.email == activation.email
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should use registration date from registration request"() {
 		given:
 			UsersActivationDto activation = new UsersActivationDto(TestObjects.TEST_EMAIL, new Date(86, 8, 12))
@@ -181,10 +188,10 @@ class UserServiceImplTest extends Specification {
 		then:
 			usersActivationService.findByActivationKey(_ as String) >> activation
 		and:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.registeredAt == activation.createdAt
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
 	def "registerUser() should throw exception when password is null"() {
@@ -196,16 +203,17 @@ class UserServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should gets hash from encoder"() {
 		given:
-			String expectedHash = TestObjects.createUser().getHash()
+			String expectedHash = TestObjects.createAddUserDbDto().hash
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.hash == expectedHash
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 		and:
 			1 * encoder.encode({ String password ->
 				assert password == TestObjects.TEST_PASSWORD
@@ -231,38 +239,37 @@ class UserServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should pass login to dao"() {
 		given:
-			String expectedUserLogin = activationForm.getLogin()
+			String expectedUserLogin = activationForm.login
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.login == expectedUserLogin
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should assign activated at to current date"() {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.save({ User user ->
+			1 * userDao.add({ AddUserDbDto user ->
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				return true
-			}) >> TestObjects.createUser()
+			}) >> ANY_USER_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "registerUser() should create collection for user"() {
 		given:
-			Integer expectedId = 909;
-			String expectedLogin = "foobar"
+			Integer expectedId = 909
+			String expectedLogin = activationForm.login
 		and:
-			User user = TestObjects.createUser();
-			user.setId(expectedId)
-			user.setLogin(expectedLogin)
-		and:
-			userDao.save(_ as User) >> user
+			userDao.add(_ as AddUserDbDto) >> expectedId
 		when:
 			service.registerUser(activationForm)
 		then:
@@ -289,7 +296,7 @@ class UserServiceImplTest extends Specification {
 	def "findUserDetailsByLogin() should call dao"() {
 		given:
 			UserDetails expectedUserDetails = TestObjects.createUserDetails()
-			jdbcUserDao.findUserDetailsByLogin(_ as String) >> expectedUserDetails
+			userDao.findUserDetailsByLogin(_ as String) >> expectedUserDetails
 		when:
 			UserDetails userDetails = service.findUserDetailsByLogin('any-login')
 		then:
@@ -300,7 +307,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.findUserDetailsByLogin('john')
 		then:
-			1 * jdbcUserDao.findUserDetailsByLogin('john')
+			1 * userDao.findUserDetailsByLogin('john')
 	}
 	
 	//
@@ -316,18 +323,46 @@ class UserServiceImplTest extends Specification {
 	
 	def "countByLogin() should call dao"() {
 		given:
-			jdbcUserDao.countByLogin(_ as String) >> 2L
+			userDao.countByLogin(_ as String) >> 2L
 		when:
 			long result = service.countByLogin('any-login')
 		then:
 			result == 2L
 	}
 	
-	def "countByLogin() should pass login to dao"() {
+	def "countByLogin() should pass login to dao in lowercase"() {
 		when:
-			service.countByLogin('john')
+			service.countByLogin('John')
 		then:
-			1 * jdbcUserDao.countByLogin('john')
+			1 * userDao.countByLogin('john')
+	}
+	
+	//
+	// Tests for countRegisteredSince()
+	//
+	
+	def "countRegisteredSince() should throw exception when date is null"() {
+		when:
+			service.countRegisteredSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countRegisteredSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 32
+		when:
+			long result = service.countRegisteredSince(expectedDate)
+		then:
+			1 * userDao.countActivatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

@@ -20,6 +20,7 @@ package ru.mystamps.web.util
 import spock.lang.Specification
 import spock.lang.Unroll
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SlugUtilsTest extends Specification {
 	
 	//
@@ -34,6 +35,7 @@ class SlugUtilsTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def "slugify() should transform text '#input' to '#output'"(String input, String output) {
 		when:
 			String result = SlugUtils.slugify(input)
@@ -41,17 +43,17 @@ class SlugUtilsTest extends Specification {
 			result == output
 		where:
 			input      || output
-			""         || ""
-			"-_"       || ""
-			"тест"     || ""
-			"test"     || "test"
-			"TEST"     || "test"
-			"test!"    || "test"
-			"_test_"   || "test"
-			"foo3"     || "foo3"
-			"one two"  || "one-two"
-			"one+two"  || "one-two"
-			"one||two" || "one-two"
+			''         || ''
+			'-_'       || ''
+			'тест'     || ''
+			'test'     || 'test'
+			'TEST'     || 'test'
+			'test!'    || 'test'
+			'_test_'   || 'test'
+			'foo3'     || 'foo3'
+			'one two'  || 'one-two'
+			'one+two'  || 'one-two'
+			'one||two' || 'one-two'
 	}
 	
 }

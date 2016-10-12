@@ -8,7 +8,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title th:text="|MyStamps: #{t_index_title}|">MyStamps: create your own virtual collection!</title>
+		<title th:text="|#{t_my_stamps}: #{t_index_title}|">My stamps: create your own virtual collection!</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -64,7 +64,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
@@ -121,7 +121,7 @@
 							</div>
 							<div class="panel-body" th:remove="all-but-first">
 								<p th:each="collection : ${recentlyAddedCollections}">
-									<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(id=${collection.id},slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
+									<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
 								</p>
 								<p>
 									<a href="../collection/info.html">Edith Roberts</a>
@@ -149,11 +149,11 @@
 							<div class="panel-body" th:remove="all-but-first">
 								<p th:each="series : ${recentlyAddedSeries}">
 									<span th:if="${series.category.id != null}" th:remove="tag">
-										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
 									</span>
 									
 									<span th:if="${series.country.id != null}" th:remove="tag">
-										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
 									</span>
 									
 									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">

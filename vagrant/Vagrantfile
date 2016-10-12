@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# To be able to set hostname on Ubuntu 16.04. we need to have vagrant at least
+# of version 1.8.3 See also: https://github.com/mitchellh/vagrant/issues/7288
+Vagrant.require_version ">= 1.8.3"
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "ubuntu/xenial64"
+
+  # Set VM hostname
+  config.vm.hostname = "my-stamps.local"
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 443, host: 8443
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    #vb.gui = true
+
+    # Customize the amount of memory on the VM:
+    vb.memory = "512"
+
+    # Set the name that appears in the VirtualBox GUI
+    vb.name = "my-stamps"
+  end
+
+  # Enable provisioning with Ansible from the Vagrant host.
+  # See documentation for more details:
+  # https://www.vagrantup.com/docs/provisioning/ansible_intro.html
+  # https://www.vagrantup.com/docs/provisioning/ansible.html
+  # https://www.vagrantup.com/docs/provisioning/ansible_common.html
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/vagrant.yml"
+    ansible.galaxy_role_file = "requirements.yml"
+  end
+
+end

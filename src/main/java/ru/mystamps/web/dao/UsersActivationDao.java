@@ -17,9 +17,18 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
+import java.util.List;
 
-import ru.mystamps.web.entity.UsersActivation;
+import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
-public interface UsersActivationDao extends CrudRepository<UsersActivation, String> {
+public interface UsersActivationDao {
+	long countByActivationKey(String activationKey);
+	long countCreatedSince(Date date);
+	void removeByActivationKey(String activationKey);
+	void add(AddUsersActivationDbDto activation);
+	UsersActivationDto findByActivationKey(String activationKey);
+	List<UsersActivationFullDto> findOlderThan(Date date);
 }

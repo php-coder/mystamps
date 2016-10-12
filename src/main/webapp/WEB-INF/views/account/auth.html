@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
-		<title th:text="|MyStamps: #{t_auth_title}|">MyStamps: authentication</title>
+		<title th:text="|#{t_my_stamps}: #{t_auth_title}|">My stamps: authentication</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -64,7 +64,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>

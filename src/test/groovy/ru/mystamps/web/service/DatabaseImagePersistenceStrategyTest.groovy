@@ -22,19 +22,19 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.ImageDataDao
-import ru.mystamps.web.entity.Image
-import ru.mystamps.web.entity.ImageData
-import ru.mystamps.web.service.dto.DbImageDto
-import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.dao.dto.AddImageDataDbDto
+import ru.mystamps.web.dao.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {
 	
-	private ImageDataDao imageDataDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private Image image = TestObjects.createImage()
+	private final ImageDataDao imageDataDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
-	private ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
+	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
 	
 	//
 	// Tests for save()
@@ -42,36 +42,38 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
-			multipartFile.getBytes() >> { throw new IOException() }
+			multipartFile.bytes >> { throw new IOException() }
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass file content to image data dao"() {
 		given:
-			byte[] expected = 'test'.getBytes()
-			multipartFile.getBytes() >> expected
+			byte[] expected = 'test'.bytes
+			multipartFile.bytes >> expected
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
-			1 * imageDataDao.save({ ImageData imageData ->
+			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.content == expected
 				return true
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should pass image to image data dao"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = imageInfoDto.id
 		when:
-			strategy.save(multipartFile, expectedImage)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
-			1 * imageDataDao.save({ ImageData imageData ->
-				assert imageData?.image == expectedImage
+			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
+				assert imageData?.imageId == expectedImageId
 				return true
 			})
 	}
@@ -80,38 +82,37 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass image to image data dao"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = imageInfoDto.id
 		when:
-			strategy.get(expectedImage)
+			strategy.get(imageInfoDto)
 		then:
-			1 * imageDataDao.findByImage({ Image image ->
-				assert image == expectedImage
+			1 * imageDataDao.findByImageId({ Integer imageId ->
+				assert imageId == expectedImageId
 				return true
 			})
 	}
 	
 	def "get() should return null when image data dao returned null"() {
 		given:
-			imageDataDao.findByImage(_ as Image) >> null
+			imageDataDao.findByImageId(_ as Integer) >> null
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result == null
 	}
 	
 	def "get() should return result from image data dao"() {
 		given:
-			ImageData expectedImageData = TestObjects.createImageData()
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		and:
-			ImageDto expectedImage = new DbImageDto(expectedImageData)
-		and:
-			imageDataDao.findByImage(_ as Image) >> expectedImageData
+			imageDataDao.findByImageId(_ as Integer) >> expectedImageDto
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
-			result == expectedImage
+			result == expectedImageDto
 	}
 	
 }

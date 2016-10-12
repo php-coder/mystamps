@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -28,8 +26,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
-// CheckStyle: ignore LineLength for next 2 lines
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -40,7 +37,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
@@ -58,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/static/**");
+		web.ignoring().antMatchers("/static/**", "/public/**");
 	}
 	
 	@Override
@@ -66,12 +62,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority("CREATE_CATEGORY")
-				.antMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority("CREATE_COUNTRY")
-				.antMatchers(Url.ADD_SERIES_PAGE).hasAuthority("CREATE_SERIES")
-				.antMatchers(Url.SITE_EVENTS_PAGE).hasAuthority("VIEW_SITE_EVENTS")
+				.mvcMatchers(Url.ADD_CATEGORY_PAGE)
+					.hasAuthority(StringAuthority.CREATE_CATEGORY)
+				.mvcMatchers(Url.ADD_COUNTRY_PAGE)
+					.hasAuthority(StringAuthority.CREATE_COUNTRY)
+				.mvcMatchers(
+					Url.ADD_SERIES_PAGE,
+					Url.ADD_SERIES_WITH_CATEGORY_PAGE.replace("{slug}", "**"),
+					Url.ADD_SERIES_WITH_COUNTRY_PAGE.replace("{slug}", "**")
+				)
+					.hasAuthority(StringAuthority.CREATE_SERIES)
+				.mvcMatchers(Url.SITE_EVENTS_PAGE)
+					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
-					.hasAnyAuthority("UPDATE_COLLECTION", "ADD_IMAGES_TO_SERIES")
+					.hasAnyAuthority(
+						StringAuthority.UPDATE_COLLECTION,
+						StringAuthority.ADD_IMAGES_TO_SERIES
+					)
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()
@@ -97,7 +104,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
-				.requireCsrfProtectionMatcher(new AllExceptUrlsStartedWith("/console"))
+				.ignoringAntMatchers("/console/**")
 			.and()
 			.rememberMe()
 				// TODO: GH #27
@@ -107,12 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 	}
 	
-	@Autowired
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) {
-		auth.authenticationProvider(getAuthenticationProvider());
-	}
-
 	// Used in ServicesConfig.getUserService()
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -120,7 +121,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
-		return new AuthenticationFailureListener();
+		return new AuthenticationFailureListener(servicesConfig.getSiteService());
 	}
 	
 	@Bean
@@ -131,11 +132,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		);
 	}
 	
-	private UserDetailsService getUserDetailsService() {
-		return new CustomUserDetailsService(servicesConfig.getUserService());
-	}
-	
-	private AuthenticationProvider getAuthenticationProvider() {
+	@Bean
+	public AuthenticationProvider getAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(getPasswordEncoder());
 		provider.setUserDetailsService(getUserDetailsService());
@@ -143,38 +141,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return provider;
 	}
 	
-	private static class AllExceptUrlsStartedWith implements RequestMatcher {
-		
-		private static final String[] ALLOWED_METHODS =
-			new String[] {"GET", "HEAD", "TRACE", "OPTIONS"};
-		
-		private final String[] allowedUrls;
-		
-		AllExceptUrlsStartedWith(String... allowedUrls) {
-			this.allowedUrls = allowedUrls;
-		}
-		
-		@Override
-		public boolean matches(HttpServletRequest request) {
-			// replicate default behavior (see CsrfFilter.DefaultRequiresCsrfMatcher class)
-			String method = request.getMethod();
-			for (String allowedMethod : ALLOWED_METHODS) {
-				if (allowedMethod.equals(method)) {
-					return false;
-				}
-			}
-			
-			// apply our own exceptions
-			String uri = request.getRequestURI();
-			for (String allowedUrl : allowedUrls) {
-				if (uri.startsWith(allowedUrl)) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
-		
+	private UserDetailsService getUserDetailsService() {
+		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
 }

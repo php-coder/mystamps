@@ -17,7 +17,11 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +31,11 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 @RequiredArgsConstructor
 public class SuspiciousActivityServiceImpl implements SuspiciousActivityService {
@@ -37,8 +43,28 @@ public class SuspiciousActivityServiceImpl implements SuspiciousActivityService 
 	
 	@Override
 	@Transactional(readOnly = true)
-	@PreAuthorize("hasAuthority('VIEW_SITE_EVENTS')")
-	public List<SuspiciousActivityDto> findSuspiciousActivities() {
-		return suspiciousActivityDao.findAll();
+	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
+	public long countAll() {
+		return suspiciousActivityDao.countAll();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countByTypeSince(String type, Date date) {
+		Validate.isTrue(StringUtils.isNotBlank(type), "Type must be non-blank");
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return suspiciousActivityDao.countByTypeSince(type, date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SITE_EVENTS)
+	public List<SuspiciousActivityDto> findSuspiciousActivities(int page, int recordsPerPage) {
+		Validate.isTrue(page > 0, "Page must be greater than zero");
+		Validate.isTrue(recordsPerPage > 0, "RecordsPerPage must be greater than zero");
+		
+		return suspiciousActivityDao.findAll(page, recordsPerPage);
+	}
+	
 }

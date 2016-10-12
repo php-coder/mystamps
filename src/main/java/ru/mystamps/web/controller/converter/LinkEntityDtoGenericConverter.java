@@ -30,9 +30,9 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CountryService;
-import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @RequiredArgsConstructor
@@ -63,39 +63,26 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 		}
 		
 		if (isString(sourceType) && isDto(targetType)) {
-			String string = value.toString();
-			if (string.isEmpty()) {
+			String slug = value.toString();
+			if (slug.isEmpty()) {
 				return null;
 			}
 			
-			try {
-				Integer id = Integer.valueOf(string);
-				if (id <= 0) {
-					LOG.warn("Attempt to convert non positive number ({})", id);
-					return null;
-				}
-				
-				String lang = LocaleUtils.getCurrentLanguageOrNull();
-				
-				if (hasCategoryAnnotation(targetType)) {
-					return categoryService.findOneAsLinkEntity(id, lang);
-				}
-				
-				if (hasCountryAnnotation(targetType)) {
-					return countryService.findOneAsLinkEntity(id, lang);
-				}
-				
-				LOG.warn(
-					"Can't convert type '{}' because it doesn't contain supported annotations",
-					targetType
-				);
-				return null;
-				
-			} catch (NumberFormatException ex) {
-				// CheckStyle: ignore LineLength for next 1 line
-				LOG.warn("Can't convert value '{}' from string to integer: {}", value, ex.getMessage());
-				return null;
+			String lang = LocaleUtils.getCurrentLanguageOrNull();
+			if (hasCountryAnnotation(targetType)) {
+				return countryService.findOneAsLinkEntity(slug, lang);
 			}
+			
+			if (hasCategoryAnnotation(targetType)) {
+				return categoryService.findOneAsLinkEntity(slug, lang);
+			}
+			
+			LOG.warn(
+				"Can't convert type '{}' because it doesn't contain supported annotations",
+				targetType
+			);
+			
+			return null;
 		}
 		
 		LOG.warn("Attempt to convert unsupported types: from {} to {}", sourceType, targetType);

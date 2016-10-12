@@ -22,8 +22,6 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.dto.LinkEntityDto;
-
 @Getter
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.TooManyFields")
@@ -37,6 +35,7 @@ public class SeriesFullInfoDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	private final String  comment;
+	private final Integer createdBy;
 	
 	private final BigDecimal michelPrice;
 	private final String michelCurrency;

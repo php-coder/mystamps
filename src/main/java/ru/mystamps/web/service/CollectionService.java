@@ -17,16 +17,18 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
-	UrlEntityDto addToCollection(Integer userId, Integer seriesId);
+	void addToCollection(Integer userId, Integer seriesId);
 	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
-	Iterable<LinkEntityDto> findRecentlyCreated(int quantity);
-	CollectionInfoDto findById(Integer collectionId);
+	List<LinkEntityDto> findRecentlyCreated(int quantity);
+	CollectionInfoDto findBySlug(String slug);
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<!--
+		See for details:
+		http://docs.spring.io/spring-boot/docs/1.4.x/reference/html/howto-logging.html#howto-configure-logback-for-logging
+	-->
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+	<!-- HtmlUnit classes -->
+	<logger name="com.gargoylesoftware.htmlunit.html.InputElementFactory" level="WARN">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	<logger name="com.gargoylesoftware.htmlunit.DefaultCssErrorHandler" level="ERROR">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	<logger name="com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter" level="OFF">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.springframework.test.context.support.DefaultTestContextBootstrapper" level="WARN">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+</configuration>

@@ -20,14 +20,11 @@ package ru.mystamps.web.config;
 import java.util.List;
 import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.data.repository.support.DomainClassConverter;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.format.support.FormattingConversionService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -35,11 +32,14 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
@@ -48,10 +48,10 @@ import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 @Configuration
 @EnableScheduling
 @Import(ControllersConfig.class)
+@RequiredArgsConstructor
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
-	@Autowired
-	private ServicesConfig servicesConfig;
+	private final ServicesConfig servicesConfig;
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
@@ -79,16 +79,16 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**")
 			.addResourceLocations("/WEB-INF/static/");
-		registry.addResourceHandler("/public/js/*.js")
-			.addResourceLocations("classpath:/");
+		registry.addResourceHandler("/public/js/**")
+			.addResourceLocations("classpath:/js/");
 		
 		// For WebJars:
 		registry.addResourceHandler("/public/bootstrap/**")
-			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/3.3.6/");
+			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/");
 		registry.addResourceHandler("/public/jquery/**")
-			.addResourceLocations("classpath:/META-INF/resources/webjars/jquery/1.9.1/");
+			.addResourceLocations("classpath:/META-INF/resources/webjars/jquery/");
 		registry.addResourceHandler("/public/selectize/**")
-			.addResourceLocations("classpath:/META-INF/resources/webjars/selectize.js/0.12.1/");
+			.addResourceLocations("classpath:/META-INF/resources/webjars/selectize.js/");
 	}
 	
 	@Override
@@ -117,17 +117,19 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(interceptor);
 	}
 	
+	@Override
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		// If enabled a method mapped to "/users" also matches to "/users/"
+		configurer.setUseTrailingSlashMatch(false);
+		// If enabled a method mapped to "/users" also matches to "/users.*"
+		configurer.setUseSuffixPatternMatch(false);
+	}
+	
 	@Bean(name = "localeResolver")
 	public LocaleResolver getLocaleResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(Locale.ENGLISH);
 		return resolver;
-	}
-	
-	@Bean
-	@Autowired
-	public DomainClassConverter<?> getDomainClassConverter(FormattingConversionService service) {
-		return new DomainClassConverter<FormattingConversionService>(service);
 	}
 	
 }

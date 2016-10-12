@@ -33,6 +33,7 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 	DaoConfig.class,
 	ServicesConfig.class,
 	StrategiesConfig.class,
+	TaskExecutorConfig.class,
 	TogglzConfig.class
 })
 @SuppressWarnings({"checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass"})
@@ -46,15 +47,11 @@ public class ApplicationContext {
 			new ClassPathResource("sql/category_dao_queries.properties"),
 			new ClassPathResource("sql/country_dao_queries.properties"),
 			new ClassPathResource("sql/collection_dao_queries.properties"),
-			new ClassPathResource("sql/gibbons_catalog_dao_queries.properties"),
 			new ClassPathResource("sql/image_dao_queries.properties"),
-			new ClassPathResource("sql/michel_catalog_dao_queries.properties"),
-			new ClassPathResource("sql/scott_catalog_dao_queries.properties"),
 			new ClassPathResource("sql/user_dao_queries.properties"),
 			new ClassPathResource("sql/users_activation_dao_queries.properties"),
 			new ClassPathResource("sql/series_dao_queries.properties"),
-			new ClassPathResource("sql/suspicious_activity_dao_queries.properties"),
-			new ClassPathResource("sql/yvert_catalog_dao_queries.properties")
+			new ClassPathResource("sql/suspicious_activity_dao_queries.properties")
 		);
 		return configurer;
 	}

@@ -25,27 +25,28 @@ import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
 import ru.mystamps.web.tests.DateUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SiteServiceImplTest extends Specification {
-	private static final String TEST_TYPE         = 'EventType'
-	private static final String TEST_PAGE         = 'http://example.org/some/page'
-	private static final String TEST_IP           = '127.0.0.1'
-	private static final String TEST_METHOD       = 'GET'
-	private static final String TEST_REFERER_PAGE = 'http://example.org/referer'
-	private static final String TEST_USER_AGENT   = 'Some browser'
+	private static final String TEST_TYPE         = TestObjects.TEST_ACTIVITY_TYPE
+	private static final String TEST_PAGE         = TestObjects.TEST_ACTIVITY_PAGE
+	private static final String TEST_IP           = TestObjects.TEST_ACTIVITY_IP
+	private static final String TEST_METHOD       = TestObjects.TEST_ACTIVITY_METHOD
+	private static final String TEST_REFERER_PAGE = TestObjects.TEST_ACTIVITY_REFERER
+	private static final String TEST_USER_AGENT   = TestObjects.TEST_ACTIVITY_AGENT
 	
-	private SuspiciousActivityDao suspiciousActivityDao = Mock()
-	private SiteService service
+	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
+	
 	private SiteServiceImpl serviceImpl
 	
 	def setup() {
-		service = new SiteServiceImpl(suspiciousActivityDao)
-		serviceImpl = Spy(SiteServiceImpl, constructorArgs: [suspiciousActivityDao])
+		serviceImpl = Spy(SiteServiceImpl, constructorArgs:[suspiciousActivityDao])
 	}
 	
 	//
 	// Tests for logAboutAbsentPage()
 	//
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logAboutAbsentPage() should pass arguments to logEvent()"() {
 		given:
 			Integer expectedUserId = 17
@@ -130,6 +131,7 @@ class SiteServiceImplTest extends Specification {
 			1 * suspiciousActivityDao.add(_ as AddSuspiciousActivityDbDto)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass activity type to dao"() {
 		given:
 			String expectedType = 'expectedType'
@@ -142,9 +144,10 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should assign occurred at to specified date when date was provided"() {
 		given:
-			Date expectedDate = new Date() - 100;
+			Date expectedDate = new Date() - 100
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, expectedDate)
 		then:
@@ -154,6 +157,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should assign occurred at to current date when date wasn't provided"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
@@ -164,6 +168,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass page to dao"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
@@ -174,6 +179,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
 		given:
 			String longPageUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.PAGE_URL_LENGTH)
@@ -189,6 +195,7 @@ class SiteServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass method to dao"(String expectedMethod) {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, expectedMethod, null, null, null, null, null)
@@ -201,7 +208,23 @@ class SiteServiceImplTest extends Specification {
 			'OPTIONS'         | _
 			null              | _
 	}
+
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "logEvent() should pass abbreviated method when it's too long"() {
+		given:
+			String method = 'PROPFIND'
+		and:
+			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH - 3) + '...'
+		when:
+			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
+		then:
+			1 * suspiciousActivityDao.add({ AddSuspiciousActivityDbDto activity ->
+				assert activity?.method == exceptedMethod
+				return true
+			})
+	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass null to dao for unknown user id"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
@@ -212,6 +235,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass user id to dao"() {
 		given:
 			Integer expectedUserId = 20
@@ -224,6 +248,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass ip to dao"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, TEST_IP, null, null, null)
@@ -234,6 +259,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass empty string to dao for unknown ip"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
@@ -244,6 +270,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass referer to dao"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, TEST_REFERER_PAGE, null, null)
@@ -254,6 +281,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass abbreviated referer when it's too long"() {
 		given:
 			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
@@ -268,6 +296,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass null to dao for unknown referer"(String refererPage) {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, refererPage, null, null)
@@ -282,6 +311,7 @@ class SiteServiceImplTest extends Specification {
 			null           | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass user agent to dao"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, TEST_USER_AGENT, null)
@@ -292,6 +322,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass abbreviated user agent when it's too long"() {
 		given:
 			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
@@ -306,6 +337,7 @@ class SiteServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass null to dao for unknown user agent"(String userAgent) {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, userAgent, null)

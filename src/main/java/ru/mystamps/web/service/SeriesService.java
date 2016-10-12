@@ -17,13 +17,15 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
@@ -34,6 +36,8 @@ public interface SeriesService {
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
+	long countAddedSince(Date date);
+	long countUpdatedSince(Date date);
 	boolean isSeriesExist(Integer seriesId);
 	
 	SeriesDto findFullInfoById(Integer seriesId, String lang);
@@ -43,9 +47,11 @@ public interface SeriesService {
 	List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang);
 	List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang);
 	
-	Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang);
-	Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang);
-	Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
-	Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
-	Iterable<SitemapInfoDto> findAllForSitemap();
+	List<SeriesInfoDto> findByCategorySlug(String slug, String lang);
+	List<SeriesInfoDto> findByCountrySlug(String slug, String lang);
+	List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
+	List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
+	List<SitemapInfoDto> findAllForSitemap();
+	
+	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
 }

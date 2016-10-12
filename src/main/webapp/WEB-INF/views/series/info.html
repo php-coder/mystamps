@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title th:text="|MyStamps: #{t_series_info}|">MyStamps: Info about series</title>
+		<title th:text="|#{t_my_stamps}: #{t_series_info}|">My stamps: Info about series</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -62,7 +62,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
@@ -114,7 +114,7 @@
 								</dt>
 								<dd id="category_name">
 									<a href="../category/info.html"
-									   th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}"
+									   th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}"
 									   th:text="${series.category.name}">
 										Animals
 									</a>
@@ -126,7 +126,7 @@
 									</dt>
 									<dd id="country_name">
 										<a href="../country/info.html"
-										   th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}"
+										   th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}"
 										   th:text="${series.country.name}">
 											Italy
 										</a>
@@ -256,6 +256,47 @@
 							</dl>
 						</div>
 						
+						<div class="col-sm-4" th:if="${not #lists.isEmpty(purchasesAndSales)}" togglz:active="PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+							<h5 th:text="#{t_who_selling_series}">Who was selling/buying this series:</h5>
+							<ul th:remove="all-but-first">
+								<li th:each="transaction : ${purchasesAndSales}"
+									th:with="firstPrice=${#numbers.formatDecimal(transaction.firstPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.firstCurrency},
+									             optionalSecondPrice=${transaction.secondPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.secondPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.secondCurrency + ')') : ''}">
+									<!--/*/
+									<span th:if="${transaction.date != null}" th:remove="tag" th:text="${#dates.format(transaction.date, 'dd.MM.yyyy')}"></span>
+									/*/-->
+									<a href="http://example.com/james-alan-hetfield" rel="nofollow" th:remove="${transaction.sellerUrl == null} ? tag" th:href="${transaction.sellerUrl}" th:text="${transaction.sellerName}">James Alan Hetfield</a>
+									<span th:if="${transaction.buyerName == null}" th:remove="tag" th:text="#{t_was_selling_for}">was selling for</span>
+									<!--/*/
+									<th:block th:if="${transaction.buyerName != null}">
+										<span th:text="#{t_sold_to}" th:remove="tag">sold to</span>
+										<a href="http://example.com/eicca-toppinen" rel="nofollow" th:remove="${transaction.buyerUrl == null} ? tag" th:href="${transaction.buyerUrl}" th:text="${transaction.buyerName}">Eicca Toppinen</a>
+										<span th:text="#{t_sold_for}" th:remove="tag">for</span>
+									</th:block>
+									/*/-->
+									<a href="http://example.com/james-alan-hetfield/selling-stamps" rel="nofollow"
+									   th:remove="${transaction.transactionUrl == null} ? tag"
+									   th:href="${transaction.transactionUrl}"
+									   th:text="${firstPrice + optionalSecondPrice}">100 USD</a>
+								</li>
+								<li>
+									<a href="http://example.com/james-alan-hetfield" rel="nofollow">James Alan Hetfield</a> was selling for <a href="http://example.com/james-alan-hetfield/selling-stamps" rel="nofollow">100 USD (650 RUB)</a>
+								</li>
+								<li>
+									02.02.2002 <a href="http://example.com/tommy-lee-jones" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" rel="nofollow">200 USD</a>
+								</li>
+								<li>
+									02.02.2002 <a href="http://example.com/tommy-lee-jones" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" rel="nofollow">200 USD (1300 RUB)</a>
+								</li>
+								<li>
+									03.03.2003 <a href="http://example.com/eicca-toppinen" rel="nofollow">Eicca Toppinen</a> sold to <a href="http://example.com/kurt-cobain" rel="nofollow">Kurt Cobain</a> for <a href="http://example.com/eicca-toppinen/selling-stamps" rel="nofollow">300 USD</a>
+								</li>
+								<li>
+									03.03.2003 <a href="http://example.com/eicca-toppinen" rel="nofollow">Eicca Toppinen</a> sold to Michael Jackson for <a href="http://example.com/eicca-toppinen/selling-stamps" rel="nofollow">300 USD (1560 RUB)</a>
+								</li>
+							</ul>
+						</div>
+						
 						<!--/*/
 						<th:block togglz:active="ADD_SERIES_TO_COLLECTION">
 						/*/-->
@@ -295,7 +336,7 @@
 							
 					</div>
 					
-					<div class="row" th:if="${allowAddingImages}" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
+					<div class="row" th:if="${allowAddingImages}" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES">
 						<div class="col-sm-4">
 							<div class="row">
 								<div class="col-sm-6 col-sm-offset-3">

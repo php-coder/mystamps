@@ -11,7 +11,7 @@ before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       if [ "$TRAVIS_BRANCH" = 'prod' ]; then
-        pip install --user ansible;
+        pip install --user ansible==2.1.1.0;
       fi;
       npm install -g bootlint;
       pip install --user html5validator;
@@ -25,7 +25,7 @@ script:
     fi
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = 'master' -a "$TRAVIS_PULL_REQUEST" = 'false' -a "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       ./src/main/scripts/ci/publish-code-coverage.sh;
     fi
 

@@ -29,13 +29,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,7 +48,7 @@ public class SitemapController {
 	
 	private final SeriesService seriesService;
 	
-	@RequestMapping(Url.SITEMAP_XML)
+	@GetMapping(Url.SITEMAP_XML)
 	public void getSitemapXml(HttpServletResponse response) {
 		response.setContentType("application/xml");
 		response.setCharacterEncoding("UTF-8");

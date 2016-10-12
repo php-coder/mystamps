@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -31,14 +32,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUserDao;
 import ru.mystamps.web.dao.UserDao;
+import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.entity.User;
 import ru.mystamps.web.service.dto.ActivateAccountDto;
 
-import static ru.mystamps.web.entity.User.Role.USER;
+import static ru.mystamps.web.dao.dto.UserDetails.Role.USER;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
 	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	private final UserDao userDao;
-	private final JdbcUserDao jdbcUserDao;
 	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
 	private final PasswordEncoder encoder;
@@ -54,10 +53,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void registerUser(ActivateAccountDto dto) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getLogin() != null, "Login should be non null");
-		Validate.isTrue(dto.getPassword() != null, "Password should be non null");
-		Validate.isTrue(dto.getActivationKey() != null, "Activation key should be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getLogin() != null, "Login must be non null");
+		Validate.isTrue(dto.getPassword() != null, "Password must be non null");
+		Validate.isTrue(dto.getActivationKey() != null, "Activation key must be non null");
 		
 		String login = dto.getLogin();
 		
@@ -84,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		
 		Date now = new Date();
 		
-		User user = new User();
+		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(login);
 		user.setRole(USER);
 		user.setName(finalName);
@@ -93,12 +92,12 @@ public class UserServiceImpl implements UserService {
 		user.setActivatedAt(now);
 		user.setHash(hash);
 		
-		user = userDao.save(user);
+		Integer id = userDao.add(user);
 		usersActivationService.remove(activationKey);
 		
-		LOG.info("User has been created ({})", user);
+		LOG.info("User #{} has been created ({})", id, user);
 		
-		collectionService.createCollection(user.getId(), user.getLogin());
+		collectionService.createCollection(id, user.getLogin());
 	}
 	
 	@Override
@@ -106,15 +105,26 @@ public class UserServiceImpl implements UserService {
 	public UserDetails findUserDetailsByLogin(String login) {
 		Validate.isTrue(login != null, "Login must be non null");
 		
-		return jdbcUserDao.findUserDetailsByLogin(login);
+		return userDao.findUserDetailsByLogin(login);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByLogin(String login) {
-		Validate.isTrue(login != null, "Login should be non null");
+		Validate.isTrue(login != null, "Login must be non null");
 		
-		return jdbcUserDao.countByLogin(login);
+		// converting to lowercase to do a case-insensitive search
+		String userLogin = login.toLowerCase(Locale.ENGLISH);
+		
+		return userDao.countByLogin(userLogin);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countRegisteredSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return userDao.countActivatedSince(date);
 	}
 	
 }

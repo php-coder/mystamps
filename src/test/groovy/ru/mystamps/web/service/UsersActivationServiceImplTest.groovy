@@ -20,7 +20,7 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcUsersActivationDao
+import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.model.RegisterAccountForm
@@ -28,15 +28,16 @@ import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.validation.ValidationRules
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UsersActivationServiceImplTest extends Specification {
 	
-	private JdbcUsersActivationDao usersActivationDao = Mock()
-	private MailService mailService = Mock()
+	private final UsersActivationDao usersActivationDao = Mock()
+	private final MailService mailService = Mock()
 	
 	private UsersActivationService service
 	private RegisterAccountForm registrationForm
 	
-	private static final Locale ANY_LOCALE = Locale.ENGLISH;
+	private static final Locale ANY_LOCALE = Locale.ENGLISH
 	
 	def setup() {
 		registrationForm = new RegisterAccountForm()
@@ -63,6 +64,7 @@ class UsersActivationServiceImplTest extends Specification {
 			1 * usersActivationDao.add(_ as AddUsersActivationDbDto)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should generate activation key"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -74,6 +76,7 @@ class UsersActivationServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should generate unique activation key"() {
 		given:
 			List<String> passedArguments = []
@@ -106,6 +109,7 @@ class UsersActivationServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass email to dao"() {
 		given:
 			String expectedEmail = 'somename@example.org'
@@ -120,6 +124,11 @@ class UsersActivationServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass language '#expectedLang' to dao"(Locale lang, String expectedLang) {
 		when:
 			service.add(registrationForm, lang)
@@ -134,6 +143,7 @@ class UsersActivationServiceImplTest extends Specification {
 			Locale.FRENCH || 'fr'
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
@@ -144,6 +154,7 @@ class UsersActivationServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass user's activation request to mail service"() {
 		when:
 			service.add(registrationForm, Locale.FRANCE)
@@ -152,8 +163,8 @@ class UsersActivationServiceImplTest extends Specification {
 				assert activation != null
 				assert activation.activationKey != null
 				assert activation.email == registrationForm.email
-				assert activation.locale == new Locale("fr")
-				return true;
+				assert activation.locale == new Locale('fr')
+				return true
 			})
 	}
 	
@@ -185,6 +196,34 @@ class UsersActivationServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countCreatedSince()
+	//
+	
+	def "countCreatedSince() should throw exception when date is null"() {
+		when:
+			service.countCreatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countCreatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 31
+		when:
+			long result = service.countCreatedSince(expectedDate)
+		then:
+			1 * usersActivationDao.countCreatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByActivationKey()
 	//
 
@@ -197,11 +236,11 @@ class UsersActivationServiceImplTest extends Specification {
 
 	def "findByActivationKey() should call dao, pass argument to it and return result"() {
 		given:
-			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto();
+			UsersActivationDto expectedResult = TestObjects.createUsersActivationDto()
 		when:
-			UsersActivationDto result = service.findByActivationKey("0987654321")
+			UsersActivationDto result = service.findByActivationKey('0987654321')
 		then:
-			1 * usersActivationDao.findByActivationKey("0987654321") >> expectedResult
+			1 * usersActivationDao.findByActivationKey('0987654321') >> expectedResult
 		and:
 			result == expectedResult
 	}

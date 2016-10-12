@@ -23,28 +23,23 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.ImageDao
-import ru.mystamps.web.dao.JdbcImageDao
-import ru.mystamps.web.entity.Image
-import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
 
-	private ImageDao imageDao = Mock()
-	private JdbcImageDao jdbcImageDao = Mock()
-	private MultipartFile multipartFile = Mock()
-	private ImagePersistenceStrategy imagePersistenceStrategy = Mock()
+	private final ImageDao imageDao = Mock()
+	private final MultipartFile multipartFile = Mock()
+	private final ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private ImageService service = new ImageServiceImpl(
-		imagePersistenceStrategy,
-		imageDao,
-		jdbcImageDao
-	)
+	private final ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
 	
 	def setup() {
-		multipartFile.getSize() >> 1024L
-		multipartFile.getContentType() >> 'image/png'
-		imageDao.save(_ as Image) >> new Image()
+		multipartFile.size >> 1024L
+		multipartFile.contentType >> 'image/png'
+		imageDao.add(_ as String) >> 17
 	}
 	
 	//
@@ -62,7 +57,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getSize() >> 0L
+			multipartFile.size >> 0L
 		and:
 			thrown IllegalArgumentException
 	}
@@ -71,7 +66,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> null
+			multipartFile.contentType >> null
 		and:
 			thrown IllegalArgumentException
 	}
@@ -80,7 +75,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> 'image/tiff'
+			multipartFile.contentType >> 'image/tiff'
 		and:
 			thrown IllegalStateException
 	}
@@ -89,65 +84,72 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			1 * imageDao.save(_ as Image) >> new Image()
+			1 * imageDao.add(_ as String) >> 18
 	}
 	
 	@Unroll
-	def "save() should pass content type '#contentType' to image dao"(String contentType, Image.Type expectedType) {
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
+	def "save() should pass content type '#contentType' to image dao"(String contentType, String expectedType) {
 		when:
 			service.save(multipartFile)
 		then:
-			multipartFile.getContentType() >> contentType
+			multipartFile.contentType >> contentType
 		and:
-			1 * imageDao.save({ Image image ->
-				assert image?.type == expectedType
+			1 * imageDao.add({ String type ->
+				assert type == expectedType
 				return true
-			}) >> new Image()
+			}) >> 19
 		where:
 			contentType                 || expectedType
-			'image/jpeg'                || Image.Type.JPEG
-			'image/jpeg; charset=UTF-8' || Image.Type.JPEG
-			'image/png'                 || Image.Type.PNG
-			'image/png; charset=UTF8'   || Image.Type.PNG
+			'image/jpeg'                || 'JPEG'
+			'image/jpeg; charset=UTF-8' || 'JPEG'
+			'image/png'                 || 'PNG'
+			'image/png; charset=UTF8'   || 'PNG'
 	}
 	
 	def "save() should throw exception when image dao returned null"() {
 		when:
 			service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> null
+			imageDao.add(_ as String) >> null
 		and:
-			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as Image)
+			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
 			thrown ImagePersistenceException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should call strategy"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			ImageInfoDto image = TestObjects.createImageInfoDto()
 		when:
-			String url = service.save(multipartFile)
+			service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
+			imageDao.add(_ as String) >> image.id
 		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}, { Image passedImage ->
-				assert passedImage == expectedImage
+			}, { ImageInfoDto passedImage ->
+				assert passedImage?.id == image.id
+				assert passedImage?.type == image.type.toString()
 				return true
 			})
 	}
 	
 	def "save() should return saved image"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			Integer expectedImageId = 20
 		when:
 			Integer actualImageId = service.save(multipartFile)
 		then:
-			imageDao.save(_ as Image) >> expectedImage
+			imageDao.add(_ as String) >> expectedImageId
 		and:
-			actualImageId == expectedImage.getId()
+			actualImageId == expectedImageId
 	}
 	
 	//
@@ -167,11 +169,12 @@ class ImageServiceImplTest extends Specification {
 			0       | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to image dao"() {
 		when:
 			service.get(7)
 		then:
-			1 * imageDao.findOne({ Integer imageId ->
+			1 * imageDao.findById({ Integer imageId ->
 				assert imageId == 7
 				return true
 			})
@@ -181,25 +184,27 @@ class ImageServiceImplTest extends Specification {
 		when:
 			ImageDto image = service.get(9)
 		then:
-			imageDao.findOne(_ as Integer) >> null
+			imageDao.findById(_ as Integer) >> null
 		and:
-			0 * imagePersistenceStrategy.get(_ as Integer)
+			0 * imagePersistenceStrategy.get(_ as ImageInfoDto)
 		and:
 			image == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should pass argument to strategy and return result from it"() {
 		given:
-			Image expectedImage = TestObjects.createImage()
+			ImageInfoDto expectedImage = TestObjects.createImageInfoDto()
 		and:
-			imageDao.findOne(_ as Integer) >> expectedImage
+			imageDao.findById(_ as Integer) >> expectedImage
 		and:
 			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		when:
 			ImageDto actualImageDto = service.get(7)
 		then:
-			1 * imagePersistenceStrategy.get({ Image passedImage ->
-				assert passedImage == expectedImage
+			1 * imagePersistenceStrategy.get({ ImageInfoDto passedImage ->
+				assert passedImage?.id == expectedImage.id
+				assert passedImage?.type == expectedImage.type.toString()
 				return true
 			}) >> expectedImageDto
 		and:
@@ -208,13 +213,76 @@ class ImageServiceImplTest extends Specification {
 	
 	def "get() should return null when strategy returned null"() {
 		given:
-			imageDao.findOne(_ as Integer) >> TestObjects.createImage()
+			imageDao.findById(_ as Integer) >> TestObjects.createImageInfoDto()
 		and:
-			imagePersistenceStrategy.get(_ as Integer) >> null
+			imagePersistenceStrategy.get(_ as ImageInfoDto) >> null
 		when:
 			ImageDto image = service.get(8)
 		then:
 			image == null
+	}
+	
+	//
+	// Tests for addToSeries()
+	//
+	
+	def "addToSeries() should throw exception when series id is null"() {
+		when:
+			service.addToSeries(null, 1)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addToSeries() should throw exception when image id is null"() {
+		when:
+			service.addToSeries(1, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addToSeries() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 14
+			Integer expectedImageId  = 15
+		when:
+			service.addToSeries(expectedSeriesId, expectedImageId)
+		then:
+			1 * imageDao.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			})
+	}
+	
+	//
+	// Tests for findBySeriesId()
+	//
+	
+	def "findBySeriesId() should throw exception when series id is null"() {
+		when:
+			service.findBySeriesId(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 14
+		and:
+			List<Integer> expectedResult = [ 1, 2 ]
+		when:
+			List<Integer> result = service.findBySeriesId(expectedSeriesId)
+		then:
+			1 * imageDao.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

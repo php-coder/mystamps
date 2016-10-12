@@ -20,17 +20,24 @@ package ru.mystamps.web.service.dto;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class FsImageDto implements ImageDto {
-	private final Image image;
+	private final String type;
 	private final byte[] data;
+	
+	@SuppressWarnings("PMD.ArrayIsStoredDirectly")
+	public FsImageDto(ImageInfoDto imageInfo, byte[] data) {
+		this.type = imageInfo.getType();
+		this.data = data;
+	}
 	
 	@Override
 	public String getType() {
-		return image.getType().toString();
+		return type;
 	}
 	
 	@Override

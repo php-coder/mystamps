@@ -17,9 +17,13 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-import ru.mystamps.web.entity.Image;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 
-public interface ImageDao extends CrudRepository<Image, Integer> {
+public interface ImageDao {
+	Integer add(String type);
+	void addToSeries(Integer seriesId, Integer imageId);
+	ImageInfoDto findById(Integer imageId);
+	List<Integer> findBySeriesId(Integer seriesId);
 }

@@ -33,10 +33,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDao;
-import ru.mystamps.web.dao.JdbcImageDao;
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.service.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
@@ -47,12 +47,12 @@ public class ImageServiceImpl implements ImageService {
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImageDao imageDao;
-	private final JdbcImageDao jdbcImageDao;
 	
 	@Override
 	@Transactional
+	@PreAuthorize("isAuthenticated()")
 	public Integer save(MultipartFile file) {
-		Validate.isTrue(file != null, "File should be non null");
+		Validate.isTrue(file != null, "File must be non null");
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
 		String contentType = file.getContentType();
@@ -65,19 +65,19 @@ public class ImageServiceImpl implements ImageService {
 				contentType, extension
 		);
 		
-		Image image = new Image();
-		image.setType(Image.Type.valueOf(extension.toUpperCase(Locale.US)));
+		String imageType = extension.toUpperCase(Locale.US);
 		
-		Image entity = imageDao.save(image);
-		if (entity == null) {
+		Integer id = imageDao.add(imageType);
+		if (id == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		LOG.info("Image entity was saved to database ({})", entity);
+		ImageInfoDto image = new ImageInfoDto(id, imageType);
+		LOG.info("Image was saved to database ({})", image);
 		
-		imagePersistenceStrategy.save(file, entity);
+		imagePersistenceStrategy.save(file, image);
 		
-		return entity.getId();
+		return image.getId();
 	}
 	
 	@Override
@@ -86,7 +86,7 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
 		
-		Image image = imageDao.findOne(imageId);
+		ImageInfoDto image = imageDao.findById(imageId);
 		if (image == null) {
 			return null;
 		}
@@ -96,12 +96,12 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Integer imageId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		
-		jdbcImageDao.addToSeries(seriesId, imageId);
+		imageDao.addToSeries(seriesId, imageId);
 		
 		LOG.info("Series #{}: image #{} was added", seriesId, imageId);
 	}
@@ -111,7 +111,7 @@ public class ImageServiceImpl implements ImageService {
 	public List<Integer> findBySeriesId(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		return jdbcImageDao.findBySeriesId(seriesId);
+		return imageDao.findBySeriesId(seriesId);
 	}
 	
 	private static String extractExtensionFromContentType(String contentType) {

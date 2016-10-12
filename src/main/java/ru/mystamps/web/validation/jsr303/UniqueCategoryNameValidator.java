@@ -20,16 +20,16 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
 
+@RequiredArgsConstructor
 public class UniqueCategoryNameValidator
 	implements ConstraintValidator<UniqueCategoryName, String> {
 	
-	@Autowired
-	private CategoryService categoryService;
+	private final CategoryService categoryService;
 	
 	private Lang lang;
 	

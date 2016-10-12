@@ -17,13 +17,17 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 public interface SuspiciousActivityService {
-	List<SuspiciousActivityDto> findSuspiciousActivities();
+	long countAll();
+	long countByTypeSince(String type, Date date);
+	List<SuspiciousActivityDto> findSuspiciousActivities(int page, int recordsPerPage);
 }

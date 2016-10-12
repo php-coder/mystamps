@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcUsersActivationDao;
+import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
@@ -46,14 +46,14 @@ import ru.mystamps.web.validation.ValidationRules;
 public class UsersActivationServiceImpl implements UsersActivationService {
 	private static final Logger LOG = LoggerFactory.getLogger(UsersActivationServiceImpl.class);
 	
-	private final JdbcUsersActivationDao usersActivationDao;
+	private final UsersActivationDao usersActivationDao;
 	private final MailService mailService;
 	
 	@Override
 	@Transactional
 	public void add(RegisterAccountDto dto, Locale lang) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getEmail() != null, "Email should be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getEmail() != null, "Email must be non null");
 		
 		AddUsersActivationDbDto activation = new AddUsersActivationDbDto();
 		
@@ -101,9 +101,17 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByActivationKey(String activationKey) {
-		Validate.isTrue(activationKey != null, "Activation key should be non null");
+		Validate.isTrue(activationKey != null, "Activation key must be non null");
 		
 		return usersActivationDao.countByActivationKey(activationKey);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countCreatedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return usersActivationDao.countCreatedSince(date);
 	}
 	
 	/**

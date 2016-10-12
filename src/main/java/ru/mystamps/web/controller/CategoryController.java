@@ -18,34 +18,39 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.model.AddCategoryForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.LocaleUtils;
+
+import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
@@ -56,17 +61,19 @@ public class CategoryController {
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(false);
+		// We can't use StringTrimmerEditor here because "only one single registered custom
+		// editor per property path is supported".
+		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(Url.ADD_CATEGORY_PAGE)
+	@GetMapping(Url.ADD_CATEGORY_PAGE)
 	public AddCategoryForm showForm() {
 		return new AddCategoryForm();
 	}
 	
-	@RequestMapping(value = Url.ADD_CATEGORY_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_CATEGORY_PAGE)
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
@@ -77,20 +84,16 @@ public class CategoryController {
 			return null;
 		}
 		
-		UrlEntityDto categoryUrl = categoryService.add(form, currentUserId);
-		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_CATEGORY_PAGE)
-			.buildAndExpand(categoryUrl.getId(), categoryUrl.getSlug())
-			.toString();
+		String slug = categoryService.add(form, currentUserId);
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_CATEGORY_PAGE, slug);
 	}
 	
-	@RequestMapping(Url.INFO_CATEGORY_PAGE)
-	public String showInfo(
-		@Category @PathVariable("id") LinkEntityDto category,
+	@GetMapping(Url.INFO_CATEGORY_PAGE)
+	public String showInfoBySlug(
+		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -101,21 +104,43 @@ public class CategoryController {
 			return null;
 		}
 		
-		model.addAttribute("categoryId", category.getId());
-		model.addAttribute("categorySlug", category.getSlug());
-		model.addAttribute("categoryName", category.getName());
+		String slug = category.getSlug();
+		String name = category.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer categoryId = category.getId();
-		model.addAttribute("seriesOfCategory", seriesService.findByCategoryId(categoryId, lang));
+		List<SeriesInfoDto> series = seriesService.findByCategorySlug(slug, lang);
+		
+		model.addAttribute("categorySlug", slug);
+		model.addAttribute("categoryName", name);
+		model.addAttribute("seriesOfCategory", series);
 		
 		return "category/info";
 	}
 	
-	@RequestMapping(Url.LIST_CATEGORIES_PAGE)
+	@GetMapping(Url.INFO_CATEGORY_BY_ID_PAGE)
+	public View showInfoById(
+		@Category @PathVariable("slug") LinkEntityDto country,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_CATEGORY_PAGE);
+		
+		return view;
+	}
+	
+	@GetMapping(Url.LIST_CATEGORIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("categories", categoryService.findAllAsLinkEntities(lang));
+		List<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
+		
+		model.addAttribute("categories", categories);
 	}
 	
 }

@@ -17,21 +17,34 @@
  */
 package ru.mystamps.web.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
+import ru.mystamps.web.dao.dto.AddUserDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.entity.Image;
-import ru.mystamps.web.entity.ImageData;
-import ru.mystamps.web.entity.User;
-import ru.mystamps.web.service.dto.DbImageDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 
 final class TestObjects {
+	public static final String TEST_ACTIVITY_TYPE    = "EventType";
+	public static final String TEST_ACTIVITY_PAGE    = "http://example.org/some/page";
+	public static final String TEST_ACTIVITY_METHOD  = "GET";
+	public static final String TEST_ACTIVITY_LOGIN   = "zebra";
+	public static final String TEST_ACTIVITY_IP      = "127.0.0.1";
+	public static final String TEST_ACTIVITY_REFERER = "http://example.org/referer";
+	public static final String TEST_ACTIVITY_AGENT   = "Some browser";
+	
+	public static final Integer TEST_USER_ID        = 777;
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
 	
@@ -39,6 +52,9 @@ final class TestObjects {
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_LOGIN          = "test";
+	
+	private static final String TEST_URL            = "test.example.org";
+	private static final BigDecimal TEST_PRICE      = new BigDecimal("100.99");
 	
 	private static final Integer TEST_ENTITY_ID     = 456;
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
@@ -71,12 +87,10 @@ final class TestObjects {
 		return new LinkEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
 	}
 	
-	public static User createUser() {
-		final Integer anyId = 777;
-		User user = new User();
-		user.setId(anyId);
+	public static AddUserDbDto createAddUserDbDto() {
+		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(TEST_LOGIN);
-		user.setRole(User.Role.USER);
+		user.setRole(UserDetails.Role.USER);
 		user.setName(TEST_NAME);
 		user.setEmail(TEST_EMAIL);
 		user.setRegisteredAt(new Date());
@@ -88,7 +102,6 @@ final class TestObjects {
 	
 	public static UserDetails createUserDetails() {
 		final Integer anyId = 777;
-		Integer collectionId = anyId;
 		String collectionSlug = TEST_LOGIN;
 		
 		return new UserDetails(
@@ -97,27 +110,16 @@ final class TestObjects {
 			TEST_NAME,
 			TEST_HASH,
 			UserDetails.Role.USER,
-			collectionId,
 			collectionSlug
 		);
 	}
 	
-	public static Image createImage() {
-		Image image = new Image();
-		image.setId(1);
-		image.setType(Image.Type.PNG);
-		return image;
-	}
-	
-	public static ImageData createImageData() {
-		ImageData imageData = new ImageData();
-		imageData.setContent("test".getBytes());
-		imageData.setImage(createImage());
-		return imageData;
+	public static ImageInfoDto createImageInfoDto() {
+		return new ImageInfoDto(1, "PNG");
 	}
 	
 	public static DbImageDto createDbImageDto() {
-		return new DbImageDto(createImageData());
+		return new DbImageDto("PNG", "test".getBytes());
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
@@ -133,6 +135,42 @@ final class TestObjects {
 			15, 10, 2000,
 			16,
 			true
+		);
+	}
+	
+	@SuppressWarnings("checkstyle:magicnumber")
+	public static CollectionInfoDto createCollectionInfoDto() {
+		return new CollectionInfoDto(101, "test-user", "Test User");
+	}
+	
+	public static SuspiciousActivityDto createSuspiciousActivityDto() {
+		return new SuspiciousActivityDto(
+			TEST_ACTIVITY_TYPE,
+			new Date(),
+			TEST_ACTIVITY_PAGE,
+			TEST_ACTIVITY_METHOD,
+			TEST_ACTIVITY_LOGIN,
+			TEST_ACTIVITY_IP,
+			TEST_ACTIVITY_REFERER,
+			TEST_ACTIVITY_AGENT
+		);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	public static PurchaseAndSaleDto createPurchaseAndSaleDto() {
+		return new PurchaseAndSaleDto(
+			new Date(),
+			TEST_NAME,
+			TEST_URL,
+			TEST_NAME,
+			TEST_URL,
+			TEST_URL,
+			TEST_PRICE,
+			Currency.RUB,
+			TEST_PRICE,
+			Currency.USD
 		);
 	}
 	

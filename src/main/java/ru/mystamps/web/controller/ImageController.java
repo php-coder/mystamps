@@ -22,14 +22,14 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
+import ru.mystamps.web.dao.dto.ImageDto;
 import ru.mystamps.web.service.ImageService;
-import ru.mystamps.web.service.dto.ImageDto;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,7 +37,7 @@ public class ImageController {
 	
 	private final ImageService imageService;
 	
-	@RequestMapping(Url.GET_IMAGE_PAGE)
+	@GetMapping(Url.GET_IMAGE_PAGE)
 	public void getImage(@PathVariable("id") Integer imageId, HttpServletResponse response)
 		throws IOException {
 		

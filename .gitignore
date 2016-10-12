@@ -12,3 +12,16 @@ mystamps.iml
 # jasmine-maven-plugin uses phantomjs-maven-plugin.
 # phantomjs-maven-plugin creates this log file.
 phantomjsdriver.log
+
+# minified resources
+src/main/webapp/WEB-INF/static/styles/*.min.css
+src/main/javascript/*.min.js
+src/main/javascript/*/*.min.js
+
+# Vagrant related files
+.vagrant/
+vagrant/provisioning/vagrant.retry
+vagrant/provisioning/roles/php-coder.oraclejdk/
+vagrant/provisioning/roles/php-coder.nginx/
+vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
+vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt

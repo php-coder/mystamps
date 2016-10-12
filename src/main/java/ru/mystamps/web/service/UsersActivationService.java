@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,4 +31,5 @@ public interface UsersActivationService {
 	UsersActivationDto findByActivationKey(String activationKey);
 	List<UsersActivationFullDto> findOlderThan(int days);
 	long countByActivationKey(String activationKey);
+	long countCreatedSince(Date yesterday);
 }

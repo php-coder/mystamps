@@ -20,22 +20,22 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcCountryDao
+import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.model.AddCountryForm
-import ru.mystamps.web.service.dto.LinkEntityDto
-import ru.mystamps.web.service.dto.SelectEntityDto
-import ru.mystamps.web.service.dto.UrlEntityDto
+import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CountryServiceImplTest extends Specification {
 	
-	private AddCountryForm form
-	private Integer userId = 321
+	private static final Integer USER_ID = 321
 	
-	private JdbcCountryDao countryDao = Mock()
-	private CountryService service = new CountryServiceImpl(countryDao)
+	private final CountryDao countryDao = Mock()
+	private final CountryService service = new CountryServiceImpl(countryDao)
+	
+	private AddCountryForm form
 	
 	def setup() {
 		form = new AddCountryForm()
@@ -49,7 +49,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, userId)
+			service.add(null, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -58,7 +58,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -67,7 +67,7 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setNameRu(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -88,20 +88,19 @@ class CountryServiceImplTest extends Specification {
 			String expectedSlug = 'example-country'
 		and:
 			countryDao.add(_ as AddCountryDbDto) >> expectedId
-		and:
-			UrlEntityDto expected = new UrlEntityDto(expectedId, expectedSlug)
 		when:
-			UrlEntityDto actual = service.add(form, userId)
+			String actualSlug = service.add(form, USER_ID)
 		then:
-			actual == expected
+			actualSlug == expectedSlug
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass country name in English to dao"() {
 		given:
 			String expectedCountryName = 'Italy'
 			form.setName(expectedCountryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.name == expectedCountryName
@@ -109,12 +108,13 @@ class CountryServiceImplTest extends Specification {
 			}) >> 20
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass country name in Russian to dao"() {
 		given:
 			String expectedCountryName = 'Италия'
 			form.setNameRu(expectedCountryName)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.nameRu == expectedCountryName
@@ -126,20 +126,21 @@ class CountryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass slug to dao"() {
 		given:
-			String name = "-foo123 test_"
+			String name = '-foo123 test_'
 		and:
 			String slug = SlugUtils.slugify(name)
 		and:
 			form.setName(name)
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.slug == slug
@@ -147,9 +148,10 @@ class CountryServiceImplTest extends Specification {
 			}) >> 40
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
@@ -157,9 +159,10 @@ class CountryServiceImplTest extends Specification {
 			}) >> 50
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
-			service.add(form, userId)
+			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
@@ -167,6 +170,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 60
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created by to user"() {
 		given:
 			Integer expectedUserId = 10
@@ -179,6 +183,7 @@ class CountryServiceImplTest extends Specification {
 			}) >> 70
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated by to user"() {
 		given:
 			Integer expectedUserId = 10
@@ -189,40 +194,6 @@ class CountryServiceImplTest extends Specification {
 				assert country?.updatedBy == expectedUserId
 				return true
 			}) >> 80
-	}
-	
-	//
-	// Tests for findAllAsSelectEntities(String)
-	//
-	
-	def "findAllAsSelectEntities(String) should call dao"() {
-		given:
-			SelectEntityDto country1 = new SelectEntityDto(1, 'First Country')
-		and:
-			SelectEntityDto country2 = new SelectEntityDto(2, 'Second Country')
-		and:
-			List<SelectEntityDto> expectedCountries = [ country1, country2 ]
-		and:
-			countryDao.findAllAsSelectEntities(_ as String) >> expectedCountries
-		when:
-			Iterable<SelectEntityDto> resultCountries = service.findAllAsSelectEntities('de')
-		then:
-			resultCountries == expectedCountries
-	}
-	
-	@Unroll
-	def "findAllAsSelectEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
-		when:
-			service.findAllAsSelectEntities(expectedLanguage)
-		then:
-			1 * countryDao.findAllAsSelectEntities({ String language ->
-				assert language == expectedLanguage
-				return true
-			})
-		where:
-			expectedLanguage | _
-			'ru'             | _
-			null             | _
 	}
 	
 	//
@@ -239,12 +210,13 @@ class CountryServiceImplTest extends Specification {
 		and:
 			countryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
 		when:
-			Iterable<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
+			List<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
 		then:
 			resultCountries == expectedCountries
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
@@ -262,27 +234,33 @@ class CountryServiceImplTest extends Specification {
 	//
 	// Tests for findOneAsLinkEntity()
 	//
-	
-	def "findOneAsLinkEntity() should throw exception when country id is null"() {
+	@Unroll
+	def "findOneAsLinkEntity() should throw exception when country slug is '#slug'"(String slug) {
 		when:
-			service.findOneAsLinkEntity(null, 'ru')
+			service.findOneAsLinkEntity(slug, 'ru')
 		then:
 			thrown IllegalArgumentException
+		where:
+			slug | _
+			' '  | _
+			''   | _
+			null | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
-			Integer expectedCountryId = 15
+			String expectedSlug = 'france'
 		and:
 			String expectedLang = 'fr'
 		and:
 			LinkEntityDto expectedDto = TestObjects.createLinkEntityDto()
 		when:
-			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedCountryId, expectedLang)
+			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, 'fr')
 		then:
 			1 * countryDao.findOneAsLinkEntity(
-				{ Integer countryId ->
-					assert expectedCountryId == countryId
+				{ String countrySlug ->
+					assert expectedSlug == countrySlug
 					return true
 				},
 				{ String lang ->
@@ -320,6 +298,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countCountriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 9
@@ -352,12 +331,13 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByName() should pass country name to dao"() {
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countByName() should pass country name to dao in lowercase"() {
 		when:
 			service.countByName('Canada')
 		then:
 			1 * countryDao.countByName({ String name ->
-				assert name == 'Canada'
+				assert name == 'canada'
 				return true
 			})
 	}
@@ -382,14 +362,43 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByNameRu() should pass category name to dao"() {
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Канада')
 		then:
 			1 * countryDao.countByNameRu({ String name ->
-				assert name == 'Канада'
+				assert name == 'канада'
 				return true
 			})
+	}
+	
+	//
+	// Tests for countAddedSince()
+	//
+	
+	def "countAddedSince() should throw exception when date is null"() {
+		when:
+			service.countAddedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 34
+		when:
+			long result = service.countAddedSince(expectedDate)
+		then:
+			1 * countryDao.countAddedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//
@@ -403,6 +412,7 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "getStatisticsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 17

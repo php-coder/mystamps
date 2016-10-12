@@ -17,13 +17,15 @@
  */
 package ru.mystamps.web.validation.jsr303;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.PropertyAccessor;
 
 public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Object> {
 	
@@ -43,31 +45,30 @@ public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Ob
 			return true;
 		}
 		
-		try {
-			String firstFieldValue  = BeanUtils.getProperty(value, firstFieldName);
-			if (StringUtils.isEmpty(firstFieldValue)) {
-				return true;
-			}
-			
-			String secondFieldValue = BeanUtils.getProperty(value, secondFieldName);
-			if (StringUtils.isEmpty(secondFieldValue)) {
-				return true;
-			}
-			
-			// TODO: check fields only when both fields are equals
-			
-			if (!firstFieldValue.equals(secondFieldValue)) {
-				// bind error message to 2nd field
-				ConstraintViolationUtils.recreate(
-					ctx,
-					secondFieldName,
-					ctx.getDefaultConstraintMessageTemplate()
-				);
-				return false;
-			}
+		PropertyAccessor bean = new BeanWrapperImpl(value);
 		
-		} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-			throw new RuntimeException(ex); // NOPMD
+		Object firstField      = bean.getPropertyValue(firstFieldName);
+		String firstFieldValue = Objects.toString(firstField, "");
+		if (StringUtils.isEmpty(firstFieldValue)) {
+			return true;
+		}
+		
+		Object secondField      = bean.getPropertyValue(secondFieldName);
+		String secondFieldValue = Objects.toString(secondField, "");
+		if (StringUtils.isEmpty(secondFieldValue)) {
+			return true;
+		}
+		
+		// TODO: check fields only when both fields are equals
+		
+		if (!firstFieldValue.equals(secondFieldValue)) {
+			// bind error message to 2nd field
+			ConstraintViolationUtils.recreate(
+				ctx,
+				secondFieldName,
+				ctx.getDefaultConstraintMessageTemplate()
+			);
+			return false;
 		}
 		
 		return true;

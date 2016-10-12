@@ -17,19 +17,11 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 
 import org.togglz.core.context.StaticFeatureManagerProvider;
 import org.togglz.core.manager.FeatureManager;
@@ -37,6 +29,9 @@ import org.togglz.core.manager.FeatureManager;
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
 
+// PMD: "All methods are static" here because it's a program entry point.
+// CheckStyle: I cannot declare the constructor as private because app won't start.
+@SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
 @EnableAutoConfiguration
 @Import({
 	ApplicationContext.class,
@@ -48,6 +43,8 @@ import ru.mystamps.web.config.DispatcherServletContext;
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) {
+		System.setProperty("java.awt.headless", "true");
+		
 		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
 		System.setProperty("slf4j.detectLoggerNameMismatch", "true");
 		
@@ -56,18 +53,6 @@ public class ApplicationBootstrap {
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
-	}
-	
-	// TODO: remove @Qualifier and inject by type
-	// See for details: https://github.com/spring-projects/spring-boot/issues/2774
-	@Bean
-	public FilterRegistrationBean getSpringSecurityFilterChainBindedToError(
-			@Qualifier("springSecurityFilterChain") Filter springSecurityFilterChain) {
-		
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(springSecurityFilterChain);
-		registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
-		return registration;
 	}
 	
 }

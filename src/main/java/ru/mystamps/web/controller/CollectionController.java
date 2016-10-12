@@ -18,26 +18,29 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -50,61 +53,89 @@ public class CollectionController {
 	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
-	@RequestMapping(Url.INFO_COLLECTION_PAGE)
-	public String showInfo(
-		@PathVariable("id") Integer collectionId,
+	@GetMapping(Url.INFO_COLLECTION_PAGE)
+	public String showInfoBySlug(
+		@PathVariable("slug") String slug,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
 		
-		if (collectionId == null) {
+		if (slug == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		CollectionInfoDto collection = collectionService.findById(collectionId);
+		CollectionInfoDto collection = collectionService.findBySlug(slug);
 		if (collection == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
-		model.addAttribute("ownerName", collection.getOwnerName());
+		String owner = collection.getOwnerName();
+		model.addAttribute("ownerName", owner);
 		
+		Integer collectionId = collection.getId();
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Iterable<SeriesInfoDto> seriesOfCollection =
+		List<SeriesInfoDto> seriesOfCollection =
 			seriesService.findByCollectionId(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {
-			model.addAttribute("categoryCounter", categoryService.countCategoriesOf(collectionId));
-			model.addAttribute("countryCounter", countryService.countCountriesOf(collectionId));
-			model.addAttribute("seriesCounter", seriesService.countSeriesOf(collectionId));
-			model.addAttribute("stampsCounter", seriesService.countStampsOf(collectionId));
+			long categoryCounter = categoryService.countCategoriesOf(collectionId);
+			long countryCounter  = countryService.countCountriesOf(collectionId);
+			long seriesCounter   = seriesService.countSeriesOf(collectionId);
+			long stampsCounter   = seriesService.countStampsOf(collectionId);
 			
-			model.addAttribute(
-				"statOfCollectionByCategories",
-				categoryService.getStatisticsOf(collectionId, lang)
-			);
-			model.addAttribute(
-				"statOfCollectionByCountries",
-				getCountriesStatistics(collectionId, lang)
-			);
+			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);
+			List<Object[]> countriesStat  = getCountriesStatistics(collectionId, lang);
+			
+			model.addAttribute("categoryCounter", categoryCounter);
+			model.addAttribute("countryCounter", countryCounter);
+			model.addAttribute("seriesCounter", seriesCounter);
+			model.addAttribute("stampsCounter", stampsCounter);
+			
+			model.addAttribute("statOfCollectionByCategories", categoriesStat);
+			model.addAttribute("statOfCollectionByCountries", countriesStat);
 		}
 		
 		return "collection/info";
 	}
 
-	// false positive
-	@SuppressWarnings("PMD.UnusedPrivateMethod")
-	private Map<String, Integer> getCountriesStatistics(Integer collectionId, String lang) {
-		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collectionId, lang);
+	@GetMapping(Url.INFO_COLLECTION_BY_ID_PAGE)
+	public View showInfoById(
+		@PathVariable("slug") String slug,
+		HttpServletResponse response)
+		throws IOException {
 		
-		// manually localize "Unknown" country's name
-		if (countriesStat.containsKey("Unknown")) {
-			String message = messageSource.getMessage("t_unspecified", null, new Locale(lang));
-			countriesStat.put(message, countriesStat.get("Unknown"));
-			countriesStat.remove("Unknown");
+		if (slug == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		CollectionInfoDto collection = collectionService.findBySlug(slug);
+		if (collection == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_COLLECTION_PAGE);
+		
+		return view;
+	}
+	
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	private List<Object[]> getCountriesStatistics(Integer collectionId, String lang) {
+		List<Object[]> countriesStat = countryService.getStatisticsOf(collectionId, lang);
+		
+		for (Object[] countryStat : countriesStat) {
+			// manually localize "Unknown" country's name
+			Object name = countryStat[0];
+			if ("Unknown".equals(name)) {
+				countryStat[0] = messageSource.getMessage("t_unspecified", null, new Locale(lang));
+			}
 		}
 		
 		return countriesStat;

@@ -34,8 +34,8 @@ import lombok.Setter;
 
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
 import ru.mystamps.web.validation.jsr303.CatalogNumbers;
 import ru.mystamps.web.validation.jsr303.ImageFile;
 import ru.mystamps.web.validation.jsr303.MaxFileSize;
@@ -71,12 +71,12 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
 public class AddSeriesForm implements AddSeriesDto {
 	
-	// FIXME: change type to SelectEntityDto or plain Integer
+	// FIXME: change type to plain Integer
 	@NotNull
 	@Category
 	private LinkEntityDto category;
 	
-	// FIXME: change type to SelectEntityDto or plain Integer
+	// FIXME: change type to plain Integer
 	@Country
 	private LinkEntityDto country;
 	

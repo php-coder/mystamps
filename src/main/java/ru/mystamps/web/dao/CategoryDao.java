@@ -17,9 +17,20 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import java.util.Date;
+import java.util.List;
 
-import ru.mystamps.web.entity.Category;
+import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 
-public interface CategoryDao extends PagingAndSortingRepository<Category, Integer> {
+public interface CategoryDao {
+	Integer add(AddCategoryDbDto category);
+	long countAll();
+	long countByName(String name);
+	long countByNameRu(String name);
+	long countCategoriesOfCollection(Integer collectionId);
+	long countAddedSince(Date date);
+	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

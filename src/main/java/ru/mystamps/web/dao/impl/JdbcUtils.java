@@ -20,6 +20,8 @@ package ru.mystamps.web.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ru.mystamps.web.dao.dto.Currency;
+
 public final class JdbcUtils {
 	
 	private JdbcUtils() {
@@ -36,4 +38,16 @@ public final class JdbcUtils {
 		return Integer.valueOf(value);
 	}
 	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@SuppressWarnings("PMD.PrematureDeclaration")
+	public static Currency getCurrency(ResultSet resultSet, String fieldName) throws SQLException {
+		String value = resultSet.getString(fieldName);
+		if (resultSet.wasNull()) {
+			return null;
+		}
+		
+		return Currency.valueOf(value);
+	}
 }

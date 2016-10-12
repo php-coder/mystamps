@@ -34,25 +34,15 @@ import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 @Setter
 @GroupSequence({
 	RegisterAccountForm.class,
-	RegisterAccountForm.Level1Checks.class,
-	RegisterAccountForm.Level2Checks.class,
-	RegisterAccountForm.Level3Checks.class
+	Group.Level1.class,
+	Group.Level2.class,
+	Group.Level3.class
 })
 public class RegisterAccountForm implements RegisterAccountDto {
 	
-	@NotEmpty(groups = Level1Checks.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Level2Checks.class)
-	@Email(groups = Level3Checks.class)
+	@NotEmpty(groups = Group.Level1.class)
+	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
+	@Email(groups = Group.Level3.class)
 	private String email;
-	
-	
-	public interface Level1Checks {
-	}
-	
-	public interface Level2Checks {
-	}
-	
-	public interface Level3Checks {
-	}
 	
 }

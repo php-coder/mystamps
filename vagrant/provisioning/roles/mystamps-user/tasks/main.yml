@@ -1,0 +1,16 @@
+---
+
+- name: Creating group
+  group:
+    name: mystamps
+    state: present
+
+- name: Creating user
+  user:
+    name: mystamps
+    group: mystamps
+    home: /data/mystamps
+    createhome: yes
+    comment: 'MyStamps'
+    state: present
+

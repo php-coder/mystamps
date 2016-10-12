@@ -8,14 +8,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
-		<title th:text="|MyStamps: #{t_add_series}|">MyStamps: add stamp series</title>
+		<title th:text="|#{t_my_stamps}: #{t_add_series}|">My stamps: add stamp series</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body>
+	<body onload="initPage()">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
@@ -64,7 +64,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
@@ -117,21 +117,25 @@
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 							<label for="category" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_category}">
-										Category
-									</span>
+								<span class="field-label" th:text="#{t_category}">
+									Category
+								</span>
 								<span id="category.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<select id="category" class="form-control" required="required" th:field="*{category}">
+								<select id="category" name="category" class="form-control" required="required">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+									<option th:each="category : ${categories}"
+										th:value="${category.slug}"
+										th:text="${category.name}"
+										th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.slug}">
+									</option>
 									/*/-->
 									<!--/*-->
-									<option value="1">Animals</option>
-									<option value="2">Music</option>
-									<option value="3">Sport</option>
+									<option value="animals">Animals</option>
+									<option value="music">Music</option>
+									<option value="sport">Sport</option>
 									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('CREATE_CATEGORY')">
@@ -150,15 +154,19 @@
 								</span>
 							</label>
 							<div class="col-sm-5">
-								<select id="country" class="form-control" th:field="*{country}">
+								<select id="country" name="country" class="form-control">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="country : ${countries}" th:value="${country.id}" th:text="${country.name}"></option>
+									<option th:each="country : ${countries}"
+										th:value="${country.slug}"
+										th:text="${country.name}"
+										th:selected="${addSeriesForm.country != null and addSeriesForm.country.slug == country.slug}">
+									</option>
 									/*/-->
 									<!--/*-->
-									<option value="1">Russia</option>
-									<option value="2">Canada</option>
-									<option value="3">Italy</option>
+									<option value="russia">Russia</option>
+									<option value="canada">Canada</option>
+									<option value="italy">Italy</option>
 									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('CREATE_COUNTRY')">
@@ -453,31 +461,9 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
-		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
-		
-		<script>
-			$(function() {
-				$('#country').selectize();
-				
-				$('.js-catalog-numbers').on('blur', function() {
-					$(this).val(function(idx, val) {
-						return CatalogUtils.expandNumbers(val);
-					});
-				});
-				
-				$('.collapse').on('show.bs.collapse hide.bs.collapse', function toggleChevron() {
-					$(this)
-						.prev('.js-collapse-toggle-header')
-						.find('.glyphicon')
-						.toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
-				});
-				
-				$('.js-with-tooltip').tooltip({
-					'placement': 'right'
-				});
-			});
-		</script>
+		<script src="../../../../javascript/CatalogUtils.min.js" th:src="${CATALOG_UTILS_JS}"></script>
+		<script src="../../../../javascript/series/add.min.js" th:src="${SERIES_ADD_JS}"></script>
 	</body>
 </html>

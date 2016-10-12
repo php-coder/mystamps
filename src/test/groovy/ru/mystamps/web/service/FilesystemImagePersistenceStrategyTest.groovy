@@ -21,20 +21,22 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.entity.Image
-import ru.mystamps.web.service.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageDto
+import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
 
 import java.nio.file.Path
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
 	
-	private MultipartFile multipartFile = Mock()
-	private Image image = TestObjects.createImage()
-	private Path mockFile = Mock(Path)
+	private final MultipartFile multipartFile = Mock()
+	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
+	private final Path mockFile = Mock(Path)
 	
-	private ImagePersistenceStrategy strategy = Spy(FilesystemImagePersistenceStrategy, constructorArgs: [STORAGE_DIR])
+	private final ImagePersistenceStrategy strategy =
+		Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
 	
 	//
 	// Tests for save()
@@ -42,42 +44,44 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should saves file onto the filesystem"() {
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
-			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> {}
+			1 * strategy.writeToFile(_ as MultipartFile, _ as Path) >> { }
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should saves file onto the configured directory"() {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.parent.toString() == expectedDirectoryName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "save() should gives proper name to the file"() {
 		given:
-			String expectedExtension = image.type.toString().toLowerCase()
-			String expectedName = image.id
+			String expectedExtension = imageInfoDto.type.toLowerCase()
+			String expectedName = imageInfoDto.id
 			String expectedFileName = expectedName + '.' + expectedExtension
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
 				assert path.fileName.toString() == expectedFileName
 				return true
-			}) >> {}
+			}) >> { }
 	}
 	
 	def "save() should converts IOException to ImagePersistenceException"() {
 		given:
 			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException() }
 		when:
-			strategy.save(multipartFile, image)
+			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
@@ -92,9 +96,9 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			strategy.exists(_ as Path) >> false
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result == null
 	}
@@ -103,11 +107,11 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		given:
 			strategy.exists(_ as Path) >> true
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		and:
 			strategy.toByteArray(_ as Path) >> { throw new IOException() }
 		when:
-			strategy.get(image)
+			strategy.get(imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
@@ -116,17 +120,17 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should return result with correct type and content"() {
 		given:
-			String expectedType = image.type
+			String expectedType = imageInfoDto.type
 		and:
 			byte[] expectedData = 'any data'.bytes
 		and:
 			strategy.exists(_ as Path) >> true
 		and:
-			strategy.createFile(_ as Image) >> mockFile
+			strategy.createFile(_ as ImageInfoDto) >> mockFile
 		and:
 			strategy.toByteArray(_ as Path) >> expectedData
 		when:
-			ImageDto result = strategy.get(image)
+			ImageDto result = strategy.get(imageInfoDto)
 		then:
 			result.type == expectedType
 			result.data == expectedData

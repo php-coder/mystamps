@@ -17,9 +17,20 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import java.util.Date;
+import java.util.List;
 
-import ru.mystamps.web.entity.Country;
+import ru.mystamps.web.dao.dto.AddCountryDbDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 
-public interface CountryDao extends PagingAndSortingRepository<Country, Integer> {
+public interface CountryDao {
+	Integer add(AddCountryDbDto country);
+	long countAll();
+	long countByName(String name);
+	long countByNameRu(String name);
+	long countCountriesOfCollection(Integer collectionId);
+	long countAddedSince(Date date);
+	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 }

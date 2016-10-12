@@ -1,8 +1,8 @@
 # My Stamps
 
-[![Build Status](https://api.travis-ci.org/php-coder/mystamps.png?branch=master)](https://travis-ci.org/php-coder/mystamps)
+[![Build Status](https://travis-ci.org/php-coder/mystamps.svg?branch=master)](https://travis-ci.org/php-coder/mystamps)
 [![Dependency Status](https://www.versioneye.com/user/projects/55b783256537620017001225/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55b783256537620017001225)
-[![Coverage Status](https://coveralls.io/repos/php-coder/mystamps/badge.png)](https://coveralls.io/r/php-coder/mystamps)
+[![Coverage Status](https://coveralls.io/repos/php-coder/mystamps/badge.svg?branch=master)](https://coveralls.io/r/php-coder/mystamps)
 [![Stories in Ready](https://badge.waffle.io/php-coder/mystamps.png?label=ready)](https://waffle.io/php-coder/mystamps)
 
 ## What's it?
@@ -41,10 +41,10 @@ If you are programmer/sysadmin or you just feeling that you are able to run loca
 * *UI*: HTML, Bootstrap and a bit of JavaScript with JQuery
 * *Security*: Spring Security
 * *Databases*: H2 or MySQL
-* *Database access*: Spring Data JPA (and Hibernate as JPA provider) or Spring's `JdbcTemplate`
+* *Database access*: Spring's `JdbcTemplate`
 * *Database migrations*: Liquibase
 * *Validation*: JSR-303 (Hibernate Validator)
-* *Logging*: Slf4j (log4j)
+* *Logging*: Slf4j (Logback)
 * *Unit tests*: Groovy and Spock Framework (for Java code), jasmine (for JavaScript code)
 * *Integration tests*: Selenium2, TestNG and fest-assert
 * *Others*: Lombok, Togglz, WebJars

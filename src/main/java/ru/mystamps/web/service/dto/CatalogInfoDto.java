@@ -25,6 +25,8 @@ import java.util.Locale;
 
 import lombok.Getter;
 
+import ru.mystamps.web.dao.dto.Currency;
+
 @Getter
 @SuppressWarnings("PMD.SingularField")
 public class CatalogInfoDto {

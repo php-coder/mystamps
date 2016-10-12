@@ -29,8 +29,12 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.AddCategoryPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
+import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
+	
+	private static final String TEST_CATEGORY_NAME_EN = "Space";
+	private static final String TEST_CATEGORY_NAME_RU = "Космос";
 	
 	@Value("${valid_admin_login}")
 	private String validAdminLogin;
@@ -62,6 +66,34 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
+	}
+	
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void categoryNameEnShouldNotContainRepeatedHyphens() {
+		page.addCategory("te--st", TEST_CATEGORY_NAME_RU);
+
+		assertThat(page).field("name").hasError(tr("value.repeating_hyphen"));
+	}
+
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void categoryNameRuShouldNotContainRepeatedHyphens() {
+		page.addCategory(TEST_CATEGORY_NAME_EN, "те--ст");
+
+		assertThat(page).field("nameRu").hasError(tr("value.repeating_hyphen"));
+	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryNameEnShouldReplaceRepeatedSpacesByOne() {
+		page.addCategory("t3  st", TEST_CATEGORY_NAME_RU);
+
+		assertThat(page).field("name").hasValue("t3 st");
+	}
+
+	@Test(groups = "misc", dependsOnGroups = "std")
+	public void categoryNameRuShouldReplaceRepeatedSpacesByOne() {
+		page.addCategory(TEST_CATEGORY_NAME_EN, "т3  ст");
+
+		assertThat(page).field("nameRu").hasValue("т3 ст");
 	}
 	
 	@Override

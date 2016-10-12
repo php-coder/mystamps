@@ -34,89 +34,85 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 
 @Getter
 @Setter
 @GroupSequence({
 	AddCountryForm.class,
-	AddCountryForm.Level1Checks.class,
-	AddCountryForm.Level2Checks.class,
-	AddCountryForm.Level3Checks.class,
-	AddCountryForm.Level4Checks.class,
-	AddCountryForm.Level5Checks.class
+	Group.Level1.class,
+	Group.Level2.class,
+	Group.Level3.class,
+	Group.Level4.class,
+	Group.Level5.class
 })
 public class AddCountryForm implements AddCountryDto {
 	
-	@NotEmpty(groups = Level1Checks.class)
+	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = COUNTRY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		),
 		@Size(
 			max = COUNTRY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
 			regexp = COUNTRY_NAME_EN_REGEXP,
 			message = "{country-name-en.invalid}",
-			groups = Level3Checks.class
+			groups = Group.Level3.class
+		),
+		@Pattern(
+			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Level4Checks.class
+			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.EN, groups = Level5Checks.class)
+	@UniqueCountryName(lang = Lang.EN, groups = Group.Level5.class)
 	private String name;
 	
-	@NotEmpty(groups = Level1Checks.class)
+	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = COUNTRY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		),
 		@Size(
 			max = COUNTRY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
-			groups = Level2Checks.class
+			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
 			regexp = COUNTRY_NAME_RU_REGEXP,
 			message = "{country-name-ru.invalid}",
-			groups = Level3Checks.class
+			groups = Group.Level3.class
+		),
+		@Pattern(
+			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			message = "{value.repeating_hyphen}",
+			groups = Group.Level4.class
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
-			groups = Level4Checks.class
+			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.RU, groups = Level5Checks.class)
+	@UniqueCountryName(lang = Lang.RU, groups = Group.Level5.class)
 	private String nameRu;
-	
-	public interface Level1Checks {
-	}
-	
-	public interface Level2Checks {
-	}
-	
-	public interface Level3Checks {
-	}
-	
-	public interface Level4Checks {
-	}
-	
-	public interface Level5Checks {
-	}
 	
 }

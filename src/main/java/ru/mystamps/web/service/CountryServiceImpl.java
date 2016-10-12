@@ -18,7 +18,8 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -32,27 +33,27 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCountryDao;
+import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
+import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
-	private final JdbcCountryDao countryDao;
+	private final CountryDao countryDao;
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_COUNTRY')")
-	public UrlEntityDto add(AddCountryDto dto, Integer userId) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "Country name in English should be non null");
-		Validate.isTrue(dto.getNameRu() != null, "Country name in Russian should be non null");
+	@PreAuthorize(HasAuthority.CREATE_COUNTRY)
+	public String add(AddCountryDto dto, Integer userId) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getName() != null, "Country name in English must be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Country name in Russian must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCountryDbDto country = new AddCountryDbDto();
@@ -77,27 +78,22 @@ public class CountryServiceImpl implements CountryService {
 		
 		LOG.info("Country #{} has been created ({})", id, country);
 		
-		return new UrlEntityDto(id, slug);
+		return slug;
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return countryDao.findAllAsSelectEntities(lang);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return countryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public LinkEntityDto findOneAsLinkEntity(Integer countryId, String lang) {
-		Validate.isTrue(countryId != null, "Country id must be non null");
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
+		Validate.isTrue(slug != null, "Country slug must be non null");
+		Validate.isTrue(!slug.trim().isEmpty(), "Country slug must be non empty");
 		
-		return countryDao.findOneAsLinkEntity(countryId, lang);
+		return countryDao.findOneAsLinkEntity(slug, lang);
 	}
 	
 	@Override
@@ -117,20 +113,36 @@ public class CountryServiceImpl implements CountryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
-		Validate.isTrue(name != null, "Name should be non null");
-		return countryDao.countByName(name);
+		Validate.isTrue(name != null, "Name must be non null");
+		
+		// converting to lowercase to do a case-insensitive search
+		String countryName = name.toLowerCase(Locale.ENGLISH);
+		
+		return countryDao.countByName(countryName);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
-		Validate.isTrue(name != null, "Name in Russian should be non null");
-		return countryDao.countByNameRu(name);
+		Validate.isTrue(name != null, "Name in Russian must be non null");
+		
+		// converting to lowercase to do a case-insensitive search
+		String countryName = name.toLowerCase(LocaleUtils.RUSSIAN);
+		
+		return countryDao.countByNameRu(countryName);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+	public long countAddedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return countryDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return countryDao.getStatisticsOf(collectionId, lang);

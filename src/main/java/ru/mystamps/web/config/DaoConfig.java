@@ -17,69 +17,94 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
 
 @Configuration
+@PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
+@RequiredArgsConstructor
 public class DaoConfig {
 	
-	@Autowired
-	private NamedParameterJdbcTemplate jdbcTemplate;
+	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final Environment env;
 	
 	@Bean
-	public JdbcCategoryDao getJdbcCategoryDao() {
-		return new JdbcCategoryDaoImpl(jdbcTemplate);
+	public CategoryDao getCategoryDao() {
+		return new JdbcCategoryDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public JdbcCountryDao getJdbcCountryDao() {
-		return new JdbcCountryDaoImpl(jdbcTemplate);
+	public CountryDao getCountryDao() {
+		return new JdbcCountryDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public JdbcCollectionDao getJdbcCollectionDao() {
-		return new JdbcCollectionDaoImpl(jdbcTemplate);
+	public CollectionDao getCollectionDao() {
+		return new JdbcCollectionDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public GibbonsCatalogDao getGibbonsCatalogDao() {
-		return new JdbcGibbonsCatalogDaoImpl(jdbcTemplate);
+	public StampsCatalogDao getGibbonsCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("gibbons.create"),
+			env.getRequiredProperty("series_gibbons.add"),
+			env.getRequiredProperty("series_gibbons.find_by_series_id")
+		);
 	}
 	
 	@Bean
-	public JdbcImageDao getJdbcImageDao() {
-		return new JdbcImageDaoImpl(jdbcTemplate);
+	public ImageDao getImageDao() {
+		return new JdbcImageDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public MichelCatalogDao getMichelCatalogDao() {
-		return new JdbcMichelCatalogDaoImpl(jdbcTemplate);
+	public ImageDataDao getImageDataDao() {
+		return new JdbcImageDataDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public ScottCatalogDao getScottCatalogDao() {
-		return new JdbcScottCatalogDaoImpl(jdbcTemplate);
+	public StampsCatalogDao getMichelCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("michel.create"),
+			env.getRequiredProperty("series_michel.add"),
+			env.getRequiredProperty("series_michel.find_by_series_id")
+		);
 	}
 	
 	@Bean
-	public JdbcSeriesDao getSeriesDao() {
-		return new JdbcSeriesDaoImpl(jdbcTemplate);
+	public StampsCatalogDao getScottCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("scott.create"),
+			env.getRequiredProperty("series_scott.add"),
+			env.getRequiredProperty("series_scott.find_by_series_id")
+		);
 	}
 	
 	@Bean
-	public JdbcUserDao getJdbcUserDao() {
-		return new JdbcUserDaoImpl(jdbcTemplate);
+	public SeriesDao getSeriesDao() {
+		return new JdbcSeriesDao(jdbcTemplate);
 	}
 	
 	@Bean
-	public JdbcUsersActivationDao getJdbcUsersActivationDao() {
-		return new JdbcUsersActivationDaoImpl(jdbcTemplate);
+	public UserDao getUserDao() {
+		return new JdbcUserDao(jdbcTemplate);
+	}
+	
+	@Bean
+	public UsersActivationDao getUsersActivationDao() {
+		return new JdbcUsersActivationDao(jdbcTemplate);
 	}
 	
 	@Bean
@@ -88,8 +113,14 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public YvertCatalogDao getYvertCatalogDao() {
-		return new JdbcYvertCatalogDaoImpl(jdbcTemplate);
+	public StampsCatalogDao getYvertCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("yvert.create"),
+			env.getRequiredProperty("series_yvert.add"),
+			env.getRequiredProperty("series_yvert.find_by_series_id")
+		);
+		
 	}
 	
 }

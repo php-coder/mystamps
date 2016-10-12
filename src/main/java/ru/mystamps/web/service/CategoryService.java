@@ -17,21 +17,20 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Map;
+import java.util.Date;
+import java.util.List;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 
 public interface CategoryService {
-	UrlEntityDto add(AddCategoryDto dto, Integer userId);
-	Iterable<SelectEntityDto> findAllAsSelectEntities(String lang);
-	Iterable<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang);
+	String add(AddCategoryDto dto, Integer userId);
+	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCategoriesOf(Integer collectionId);
 	long countByName(String name);
 	long countByNameRu(String name);
-	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
+	long countAddedSince(Date date);
+	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 }

@@ -17,46 +17,30 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Locale;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.EnableAsync;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
-import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
+import lombok.RequiredArgsConstructor;
+
+// CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
-@EnableAsync
+@RequiredArgsConstructor
 public class ServicesConfig {
 	
-	@Autowired
-	private DaoConfig daoConfig;
-	
-	@Autowired
-	private SecurityConfig securityConfig;
-	
-	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private StrategiesConfig strategiesConfig;
-	
-	@Autowired
-	private ImageDao imageDao;
-	
-	@Autowired
-	private JavaMailSender mailSender;
-	
-	@Autowired
-	private Environment env;
-	
-	@Autowired
-	private MessageSource messageSource;
+	private final DaoConfig daoConfig;
+	private final SecurityConfig securityConfig;
+	private final StrategiesConfig strategiesConfig;
+	private final JavaMailSender mailSender;
+	private final Environment env;
+	private final MessageSource messageSource;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
@@ -65,30 +49,37 @@ public class ServicesConfig {
 
 	@Bean
 	public CountryService getCountryService() {
-		return new CountryServiceImpl(daoConfig.getJdbcCountryDao());
+		return new CountryServiceImpl(daoConfig.getCountryDao());
 	}
 	
 	@Bean
 	public CategoryService getCategoryService() {
-		return new CategoryServiceImpl(daoConfig.getJdbcCategoryDao());
+		return new CategoryServiceImpl(daoConfig.getCategoryDao());
 	}
 	
 	@Bean
 	public CollectionService getCollectionService() {
-		return new CollectionServiceImpl(daoConfig.getJdbcCollectionDao());
+		return new CollectionServiceImpl(daoConfig.getCollectionDao());
 	}
 	
 	@Bean
 	public CronService getCronService() {
-		return new CronServiceImpl(getUsersActivationService());
+		return new CronServiceImpl(
+			getCategoryService(),
+			getCountryService(),
+			getSeriesService(),
+			getSuspiciousActivityService(),
+			getUserService(),
+			getUsersActivationService(),
+			getMailService()
+		);
 	}
 	
 	@Bean
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			strategiesConfig.getImagePersistenceStrategy(),
-			imageDao,
-			daoConfig.getJdbcImageDao()
+			daoConfig.getImageDao()
 		);
 	}
 	
@@ -100,16 +91,15 @@ public class ServicesConfig {
 		return new MailServiceImpl(
 			mailSender,
 			messageSource,
+			env.getProperty("app.mail.admin.email", "root@localhost"),
+			new Locale(env.getProperty("app.mail.admin.lang", "en")),
 			env.getRequiredProperty("app.mail.robot.email"),
 			enableTestMode);
 	}
 	
 	@Bean
 	public UsersActivationService getUsersActivationService() {
-		return new UsersActivationServiceImpl(
-			daoConfig.getJdbcUsersActivationDao(),
-			getMailService()
-		);
+		return new UsersActivationServiceImpl(daoConfig.getUsersActivationDao(), getMailService());
 	}
 	
 	@Bean
@@ -132,8 +122,7 @@ public class ServicesConfig {
 	@Bean
 	public UserService getUserService() {
 		return new UserServiceImpl(
-			userDao,
-			daoConfig.getJdbcUserDao(),
+			daoConfig.getUserDao(),
 			getUsersActivationService(),
 			getCollectionService(),
 			securityConfig.getPasswordEncoder()
@@ -141,23 +130,23 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public MichelCatalogService getMichelCatalogService() {
-		return new MichelCatalogServiceImpl(daoConfig.getMichelCatalogDao());
+	public StampsCatalogService getMichelCatalogService() {
+		return new StampsCatalogServiceImpl("Michel", daoConfig.getMichelCatalogDao());
 	}
 	
 	@Bean
-	public ScottCatalogService getScottCatalogService() {
-		return new ScottCatalogServiceImpl(daoConfig.getScottCatalogDao());
+	public StampsCatalogService getScottCatalogService() {
+		return new StampsCatalogServiceImpl("Scott", daoConfig.getScottCatalogDao());
 	}
 	
 	@Bean
-	public YvertCatalogService getYvertCatalogService() {
-		return new YvertCatalogServiceImpl(daoConfig.getYvertCatalogDao());
+	public StampsCatalogService getYvertCatalogService() {
+		return new StampsCatalogServiceImpl("Yvert", daoConfig.getYvertCatalogDao());
 	}
 	
 	@Bean
-	public GibbonsCatalogService getGibbonsCatalogService() {
-		return new GibbonsCatalogServiceImpl(daoConfig.getGibbonsCatalogDao());
+	public StampsCatalogService getGibbonsCatalogService() {
+		return new StampsCatalogServiceImpl("Gibbons", daoConfig.getGibbonsCatalogDao());
 	}
 	
 }

@@ -7,7 +7,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title th:text="|MyStamps: #{t_collection_of(${ownerName})}|">MyStamps: John Doe's collection</title>
+		<title th:text="|#{t_my_stamps}: #{t_collection_of(${ownerName})}|">My stamps: John Doe's collection</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -63,7 +63,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
@@ -119,11 +119,11 @@
 							<ul th:if="${not #lists.isEmpty(seriesOfCollection)}" th:remove="all-but-first">
 								<li th:each="series : ${seriesOfCollection}">
 									<span th:if="${series.category.id != null}" th:remove="tag">
-										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(id=${series.category.id},slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
+										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;
 									</span>
 									
 									<span th:if="${series.country.id != null}" th:remove="tag">
-										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+										<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
 									</span>
 									
 									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
@@ -207,91 +207,35 @@
 		<th:block togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 		/*/-->
 			<!-- Charts -->
-			<script src="https://www.google.com/jsapi"></script>
+			<script src="https://www.gstatic.com/charts/loader.js"></script>
+			<script src="../../../../javascript/collection/info.min.js" th:src="${COLLECTION_INFO_JS}"></script>
 			<script th:inline="javascript">
-				/*<![CDATA[*/
-				
-				var drawChart = function(containerId, table) {
-					var options = {
-						pieHole: 0.3
-					};
-					var chart = new google.visualization.PieChart(document.getElementById(containerId));
-					chart.draw(table, options);
-				};
-				
-				var createCategoriesDataTable = function() {
-					var table = new google.visualization.DataTable();
-					table.addColumn('string', 'Category');
-					table.addColumn('number', 'Quantity of stamps');
-					
+				$(document).ready(function() {
 					/*[+
-					var obj = [[${statOfCollectionByCategories}]];
-					for (field in obj) {
-						table.addRow([field, obj[field]]);
-					}
+					initPage(
+						[[${statOfCollectionByCategories}]],
+						[[${statOfCollectionByCountries}]]
+					);
 					+]*/
 					
 					/*[- */
-					table.addRows([
+					initPage([
 						['Animals', 94],
 						['Prehistoric animals', 37],
 						['Sport', 1]
-					]);
-					/* -]*/
-					
-					return table;
-				};
-				
-				var drawCategoriesChart = function() {
-					drawChart(
-						'categories-chart',
-						createCategoriesDataTable()
-					);
-				};
-				
-				var createCountriesDataTable = function() {
-					var table = new google.visualization.DataTable();
-					table.addColumn('string', 'Country');
-					table.addColumn('number', 'Quantity of stamps');
-					
-					/*[+
-					var obj = [[${statOfCollectionByCountries}]];
-					for (field in obj) {
-						table.addRow([field, obj[field]]);
-					}
-					+]*/
-					
-					/*[- */
-					table.addRows([
+					], [
 						['Russia', 5],
 						['USA', 2],
 						['Australia', 11],
 						['Canada', 3],
-						['Germany', 2],
+						['Sahrawi Arab Democratic Republic', 2],
 						['China', 1],
 						['Congo', 20],
 						['Brazil', 4],
 						['Korea', 2]
 					]);
 					/* -]*/
-					
-					return table;
-				};
-				
-				var drawCountriesChart = function() {
-					drawChart(
-						'countries-chart',
-						createCountriesDataTable()
-					);
-				};
-				
-				google.load("visualization", "1", {packages:["corechart"]});
-				google.setOnLoadCallback(function() {
-					drawCategoriesChart();
-					drawCountriesChart();
 				});
-				
-				/*]]>*/
 			</script>
 		<!--/*/
 		</th:block>

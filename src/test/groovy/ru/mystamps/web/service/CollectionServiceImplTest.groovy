@@ -20,13 +20,16 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcCollectionDao
+import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
-import ru.mystamps.web.service.dto.UrlEntityDto
+import ru.mystamps.web.dao.dto.CollectionInfoDto
+import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.util.SlugUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CollectionServiceImplTest extends Specification {
-	private JdbcCollectionDao collectionDao = Mock()
+	
+	private final CollectionDao collectionDao = Mock()
 	
 	private CollectionService service
 	
@@ -38,6 +41,7 @@ class CollectionServiceImplTest extends Specification {
 	// Tests for createCollection()
 	//
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner id is null"() {
 		when:
 			service.createCollection(null, 'test-owner-login')
@@ -45,6 +49,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner login is null"() {
 		when:
 			service.createCollection(123, null)
@@ -52,6 +57,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings('FactoryMethodName')
 	def "createCollection() should throw exception when owner login can't be converted to slug"() {
 		when:
 			service.createCollection(123, '')
@@ -59,6 +65,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def "createCollection() should pass owner id to dao"() {
 		given:
 			Integer expectedOwnerId = 123
@@ -71,6 +78,7 @@ class CollectionServiceImplTest extends Specification {
 			}) >> 100
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def "createCollection() should pass slugified owner login to dao"() {
 		given:
 			String ownerLogin = 'Test User'
@@ -103,48 +111,21 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "addToCollection() should find collection by user id"() {
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addToCollection() should pass arguments to dao"() {
 		given:
 			Integer expectedUserId = 123
-		when:
-			service.addToCollection(expectedUserId, 321)
-		then:
-			1 * collectionDao.findCollectionUrlEntityByUserId({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}) >> TestObjects.createUrlEntityDto()
-	}
-	
-	def "addToCollection() should add series to collection"() {
-		given:
 			Integer expectedSeriesId = 456
-		and:
-			UrlEntityDto url = TestObjects.createUrlEntityDto()
-		and:
-			Integer expectedCollectionId = url.getId()
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
 		when:
-			service.addToCollection(123, expectedSeriesId)
+			service.addToCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.addSeriesToCollection({ Integer collectionId ->
-				assert collectionId == expectedCollectionId
+			1 * collectionDao.addSeriesToUserCollection({ Integer userId ->
+				assert userId == expectedUserId
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
 				return true
 			})
-	}
-	
-	def "addToCollection() should return result from dao"() {
-		given:
-			UrlEntityDto expectedUrl = TestObjects.createUrlEntityDto()
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> expectedUrl
-		when:
-			UrlEntityDto serviceResult = service.addToCollection(123, 456)
-		then:
-			serviceResult == expectedUrl
 	}
 	
 	//
@@ -165,7 +146,7 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeFromCollection() should find collection by user id"() {
 		given:
 			Integer expectedUserId = 123
@@ -178,13 +159,14 @@ class CollectionServiceImplTest extends Specification {
 			}) >> TestObjects.createUrlEntityDto()
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeFromCollection() should remove series from collection"() {
 		given:
 			Integer expectedSeriesId = 456
 		and:
 			UrlEntityDto url = TestObjects.createUrlEntityDto()
 		and:
-			Integer expectedCollectionId = url.getId()
+			Integer expectedCollectionId = url.id
 		and:
 			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
 		when:
@@ -232,6 +214,7 @@ class CollectionServiceImplTest extends Specification {
 			0 * collectionDao.isSeriesInUserCollection(_ as Integer, _ as Integer)
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "isSeriesInCollection() should pass arguments to dao"() {
 		given:
 			Integer expectedUserId = 123
@@ -284,6 +267,7 @@ class CollectionServiceImplTest extends Specification {
 			0        | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findRecentlyCreated() should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 4
@@ -294,6 +278,34 @@ class CollectionServiceImplTest extends Specification {
 				assert expectedQuantity == quantity
 				return true
 			}) >> []
+	}
+	
+	//
+	// Tests for findBySlug()
+	//
+	
+	def "findBySlug() should throw exception when collection slug is null"() {
+		when:
+			service.findBySlug(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "findBySlug() should invoke dao, pass argument and return result from dao"() {
+		given:
+			String expectedSlug = 'cuba'
+		and:
+			CollectionInfoDto expectedResult = TestObjects.createCollectionInfoDto()
+		when:
+			CollectionInfoDto result = service.findBySlug(expectedSlug)
+		then:
+			1 * collectionDao.findCollectionInfoBySlug({ String slug ->
+				assert slug == expectedSlug
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

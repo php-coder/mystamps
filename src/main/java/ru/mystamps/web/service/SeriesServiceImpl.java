@@ -33,33 +33,37 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcSeriesDao;
+import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
-import ru.mystamps.web.service.dto.Currency;
 import ru.mystamps.web.service.dto.SeriesDto;
-import ru.mystamps.web.service.dto.SeriesInfoDto;
-import ru.mystamps.web.service.dto.SitemapInfoDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 
 // TODO: move stamps related methods to separate interface (#88)
-@SuppressWarnings("PMD.TooManyMethods")
+// The String literal "Series id must be non null" appears N times in this file
+// and we think that it's OK.
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
 	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
-	private final JdbcSeriesDao seriesDao;
+	private final SeriesDao seriesDao;
 	private final ImageService imageService;
-	private final MichelCatalogService michelCatalogService;
-	private final ScottCatalogService scottCatalogService;
-	private final YvertCatalogService yvertCatalogService;
-	private final GibbonsCatalogService gibbonsCatalogService;
+	private final StampsCatalogService michelCatalogService;
+	private final StampsCatalogService scottCatalogService;
+	private final StampsCatalogService yvertCatalogService;
+	private final StampsCatalogService gibbonsCatalogService;
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_SERIES')")
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
@@ -155,7 +159,7 @@ public class SeriesServiceImpl implements SeriesService {
 
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('ADD_IMAGES_TO_SERIES')")
+	@PreAuthorize("isAuthenticated()")
 	public void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
@@ -163,6 +167,7 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		Integer imageId = imageService.save(dto.getImage());
 		imageService.addToSeries(seriesId, imageId);
+		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
 		LOG.info(
 			"Image #{} was added to series #{} by user #{}",
@@ -202,6 +207,22 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countAddedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return seriesDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countUpdatedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return seriesDao.countUpdatedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public boolean isSeriesExist(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
@@ -219,7 +240,7 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 		
 		List<String> michelNumbers  = michelCatalogService.findBySeriesId(seriesId);
-		List<String> scootNumbers   = scottCatalogService.findBySeriesId(seriesId);
+		List<String> scottNumbers   = scottCatalogService.findBySeriesId(seriesId);
 		List<String> yvertNumbers   = yvertCatalogService.findBySeriesId(seriesId);
 		List<String> gibbonsNumbers = gibbonsCatalogService.findBySeriesId(seriesId);
 		
@@ -228,7 +249,7 @@ public class SeriesServiceImpl implements SeriesService {
 		return new SeriesDto(
 			seriesBaseInfo,
 			michelNumbers,
-			scootNumbers,
+			scottNumbers,
 			yvertNumbers,
 			gibbonsNumbers,
 			imageIds
@@ -296,23 +317,23 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findByCategoryId(Integer categoryId, String lang) {
-		Validate.isTrue(categoryId != null, "Category id must be non null");
+	public List<SeriesInfoDto> findByCategorySlug(String slug, String lang) {
+		Validate.isTrue(slug != null, "Category slug must be non null");
 		
-		return seriesDao.findByCategoryIdAsSeriesInfo(categoryId, lang);
+		return seriesDao.findByCategorySlugAsSeriesInfo(slug, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findByCountryId(Integer countryId, String lang) {
-		Validate.isTrue(countryId != null, "Country id must be non null");
+	public List<SeriesInfoDto> findByCountrySlug(String slug, String lang) {
+		Validate.isTrue(slug != null, "Country slug must be non null");
 		
-		return seriesDao.findByCountryIdAsSeriesInfo(countryId, lang);
+		return seriesDao.findByCountrySlugAsSeriesInfo(slug, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
+	public List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return seriesDao.findByCollectionIdAsSeriesInfo(collectionId, lang);
@@ -320,7 +341,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
+	public List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
 		Validate.isTrue(quantity > 0, "Quantity of recently added series must be greater than 0");
 		
 		return seriesDao.findLastAdded(quantity, lang);
@@ -328,10 +349,22 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SitemapInfoDto> findAllForSitemap() {
+	public List<SitemapInfoDto> findAllForSitemap() {
 		return seriesDao.findAllForSitemap();
 	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
+	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
 
+		return seriesDao.findPurchasesAndSales(seriesId);
+	}
+	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {
 		if (dto.getYear() == null) {
 			return;

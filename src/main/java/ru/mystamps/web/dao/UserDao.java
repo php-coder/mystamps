@@ -17,10 +17,14 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Date;
 
-import ru.mystamps.web.entity.User;
+import ru.mystamps.web.dao.dto.AddUserDbDto;
+import ru.mystamps.web.dao.dto.UserDetails;
 
-public interface UserDao extends CrudRepository<User, Integer> {
-	User findByLogin(String login);
+public interface UserDao {
+    long countByLogin(String login);
+	long countActivatedSince(Date date);
+    UserDetails findUserDetailsByLogin(String login);
+	Integer add(AddUserDbDto user);
 }

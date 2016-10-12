@@ -20,5 +20,6 @@ package ru.mystamps.web.service;
 public interface CronService {
 	int PURGE_AFTER_DAYS = 3;
 	
+	void sendDailyStatistics();
 	void purgeUsersActivations();
 }

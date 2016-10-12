@@ -18,7 +18,8 @@
 package ru.mystamps.web.service;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -32,27 +33,27 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCategoryDao;
+import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.SelectEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
+import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
-	private final JdbcCategoryDao categoryDao;
+	private final CategoryDao categoryDao;
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('CREATE_CATEGORY')")
-	public UrlEntityDto add(AddCategoryDto dto, Integer userId) {
-		Validate.isTrue(dto != null, "DTO should be non null");
-		Validate.isTrue(dto.getName() != null, "English category name should be non null");
-		Validate.isTrue(dto.getNameRu() != null, "Russian category name should be non null");
+	@PreAuthorize(HasAuthority.CREATE_CATEGORY)
+	public String add(AddCategoryDto dto, Integer userId) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getName() != null, "Category name in English must be non null");
+		Validate.isTrue(dto.getNameRu() != null, "Category name in Russian must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCategoryDbDto category = new AddCategoryDbDto();
@@ -76,27 +77,22 @@ public class CategoryServiceImpl implements CategoryService {
 		Integer id = categoryDao.add(category);
 		LOG.info("Category #{} has been created ({})", id, category);
 		
-		return new UrlEntityDto(id, slug);
+		return slug;
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<SelectEntityDto> findAllAsSelectEntities(String lang) {
-		return categoryDao.findAllAsSelectEntities(lang);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findAllAsLinkEntities(String lang) {
+	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public LinkEntityDto findOneAsLinkEntity(Integer categoryId, String lang) {
-		Validate.isTrue(categoryId != null, "Category id must be non null");
+	public LinkEntityDto findOneAsLinkEntity(String slug, String lang) {
+		Validate.isTrue(slug != null, "Category slug must be non null");
+		Validate.isTrue(!slug.trim().isEmpty(), "Category slug must be non empty");
 		
-		return categoryDao.findOneAsLinkEntity(categoryId, lang);
+		return categoryDao.findOneAsLinkEntity(slug, lang);
 	}
 	
 	@Override
@@ -116,20 +112,36 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	public long countByName(String name) {
-		Validate.isTrue(name != null, "Name should be non null");
-		return categoryDao.countByName(name);
+		Validate.isTrue(name != null, "Name must be non null");
+		
+		// converting to lowercase to do a case-insensitive search
+		String categoryName = name.toLowerCase(Locale.ENGLISH);
+		
+		return categoryDao.countByName(categoryName);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public long countByNameRu(String name) {
-		Validate.isTrue(name != null, "Name in Russian should be non null");
-		return categoryDao.countByNameRu(name);
+		Validate.isTrue(name != null, "Name in Russian must be non null");
+		
+		// converting to lowercase to do a case-insensitive search
+		String categoryName = name.toLowerCase(LocaleUtils.RUSSIAN);
+		
+		return categoryDao.countByNameRu(categoryName);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
+	public long countAddedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return categoryDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return categoryDao.getStatisticsOf(collectionId, lang);

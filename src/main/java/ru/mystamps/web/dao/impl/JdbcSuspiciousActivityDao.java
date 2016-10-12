@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,14 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	@Value("${suspicious_activity.create}")
 	private String addSuspiciousActivitySql;
 	
+	@Value("${suspicious_activity.count_all}")
+	private String countAllSql;
+	
+	@Value("${suspicious_activity.count_by_type_since}")
+	private String countByTypeSinceSql;
+	
 	@Value("${suspicious_activity.find_all}")
-	private String findAllSuspiciousActivitiesSql;
+	private String findAllSql;
 	
 	@Override
 	public void add(AddSuspiciousActivityDbDto activity) {
@@ -68,14 +75,41 @@ public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 		);
 	}
 	
+	@Override
+	public long countAll() {
+		return jdbcTemplate.queryForObject(
+			countAllSql,
+			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countByTypeSince(String type, Date date) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("date", date);
+		
+		return jdbcTemplate.queryForObject(
+			countByTypeSinceSql,
+			params,
+			Long.class
+		);
+	}
+	
 	/**
 	 * @author Sergey Chechenev
+	 * @author Slava Semushin
 	 */
 	@Override
-	public List<SuspiciousActivityDto> findAll() {
+	public List<SuspiciousActivityDto> findAll(int page, int recordsPerPage) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("limit", recordsPerPage);
+		params.put("offset", (page - 1) * recordsPerPage);
+		
 		return jdbcTemplate.query(
-			findAllSuspiciousActivitiesSql,
-			Collections.emptyMap(),
+			findAllSql,
+			params,
 			RowMappers::forSuspiciousActivityDto
 		);
 	}

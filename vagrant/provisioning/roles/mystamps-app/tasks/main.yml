@@ -1,0 +1,98 @@
+---
+
+- name: Granting to mystamps to manage the service
+  copy:
+    content: "mystamps my-stamps.ru=(root) NOPASSWD: /bin/systemctl stop mystamps,/bin/systemctl start mystamps,/bin/systemctl restart mystamps\n"
+    dest: /etc/sudoers.d/10_mystamps
+    owner: root
+    group: root
+    mode: '0440'
+
+- name: Uploading mystamps.war to a server
+  copy:
+    src: ../../target/mystamps.war
+    dest: /data/mystamps/mystamps.war
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0700'
+  notify:
+  - Restarting mystamps service
+
+- name: Creating mystamps.conf
+  template:
+    src: mystamps.conf
+    dest: /data/mystamps/mystamps.conf
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0644'
+  notify:
+  - Restarting mystamps service
+
+- name: Creating mystamps.service
+  copy:
+    src: mystamps.service
+    dest: /etc/systemd/system/mystamps.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+  - Reloading systemd service
+  - Restarting mystamps service
+
+- name: Creating /data/logs
+  file:
+    path: /data/logs
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+
+- name: Creating /data/heap-dumps
+  file:
+    path: /data/heap-dumps
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+
+- name: Creating /data/uploads
+  file:
+    path: /data/uploads
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
+- name: Creating /data/mystamps/config
+  file:
+    path: /data/mystamps/config
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
+- name: Creating application-prod.properties
+  template:
+    src: application-prod.properties
+    dest: /data/mystamps/config/application-prod.properties
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0600'
+  notify:
+  - Restarting mystamps service
+  when: profile == 'prod'
+
+- name: Running service
+  service:
+    name: mystamps
+    enabled: yes
+    state: started
+

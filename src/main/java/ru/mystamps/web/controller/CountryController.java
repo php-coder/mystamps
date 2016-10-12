@@ -18,34 +18,39 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.model.AddCountryForm;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
 import ru.mystamps.web.util.LocaleUtils;
+
+import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
@@ -56,17 +61,17 @@ public class CountryController {
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(false);
+		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@RequestMapping(Url.ADD_COUNTRY_PAGE)
+	@GetMapping(Url.ADD_COUNTRY_PAGE)
 	public AddCountryForm showForm() {
 		return new AddCountryForm();
 	}
 	
-	@RequestMapping(value = Url.ADD_COUNTRY_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ADD_COUNTRY_PAGE)
 	public String processInput(
 		@Valid AddCountryForm form,
 		BindingResult result,
@@ -77,20 +82,16 @@ public class CountryController {
 			return null;
 		}
 		
-		UrlEntityDto countryUrl = countryService.add(form, currentUserId);
-		
-		String dstUrl = UriComponentsBuilder.fromUriString(Url.INFO_COUNTRY_PAGE)
-			.buildAndExpand(countryUrl.getId(), countryUrl.getSlug())
-			.toString();
+		String slug = countryService.add(form, currentUserId);
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return "redirect:" + dstUrl;
+		return redirectTo(Url.INFO_COUNTRY_PAGE, slug);
 	}
 	
-	@RequestMapping(Url.INFO_COUNTRY_PAGE)
-	public String showInfo(
-		@Country @PathVariable("id") LinkEntityDto country,
+	@GetMapping(Url.INFO_COUNTRY_PAGE)
+	public String showInfoBySlug(
+		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
 		Locale userLocale,
 		HttpServletResponse response)
@@ -101,21 +102,46 @@ public class CountryController {
 			return null;
 		}
 		
-		model.addAttribute("countryId", country.getId());
-		model.addAttribute("countrySlug", country.getSlug());
-		model.addAttribute("countryName", country.getName());
+		String slug = country.getSlug();
+		String name = country.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		Integer countryId = country.getId();
-		model.addAttribute("seriesOfCountry", seriesService.findByCountryId(countryId, lang));
+		List<SeriesInfoDto> series = seriesService.findByCountrySlug(slug, lang);
+		
+		model.addAttribute("countrySlug", slug);
+		model.addAttribute("countryName", name);
+		model.addAttribute("seriesOfCountry", series);
 		
 		return "country/info";
 	}
 	
-	@RequestMapping(Url.LIST_COUNTRIES_PAGE)
+	/**
+	 * @author Aleksander Parkhomenko
+	 */
+	@GetMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
+	public View showInfoById(
+		@Country @PathVariable("slug") LinkEntityDto country,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (country == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.INFO_COUNTRY_PAGE);
+		
+		return view;
+	}
+	
+	@GetMapping(Url.LIST_COUNTRIES_PAGE)
 	public void list(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		model.addAttribute("countries", countryService.findAllAsLinkEntities(lang));
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		
+		model.addAttribute("countries", countries);
 	}
 	
 }

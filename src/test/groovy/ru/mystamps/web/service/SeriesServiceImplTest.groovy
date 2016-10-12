@@ -22,29 +22,33 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.JdbcSeriesDao
+import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
+import ru.mystamps.web.dao.dto.Currency
+import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
-import ru.mystamps.web.service.dto.LinkEntityDto
-import ru.mystamps.web.service.dto.SeriesInfoDto
-import ru.mystamps.web.service.dto.SitemapInfoDto
-import ru.mystamps.web.service.dto.Currency
+import ru.mystamps.web.dao.dto.LinkEntityDto
+import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
+import ru.mystamps.web.dao.dto.SeriesInfoDto
+import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.tests.DateUtils
 
+@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesServiceImplTest extends Specification {
-	private static final BigDecimal ANY_PRICE = new BigDecimal("17")
+	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
 	private static final Integer ANY_IMAGE_ID = 18
 	
-	private ImageService imageService = Mock()
-	private JdbcSeriesDao seriesDao = Mock()
-	private MichelCatalogService michelCatalogService = Mock()
-	private ScottCatalogService scottCatalogService = Mock()
-	private YvertCatalogService yvertCatalogService = Mock()
-	private GibbonsCatalogService gibbonsCatalogService = Mock()
-	private MultipartFile multipartFile = Mock()
+	private final ImageService imageService = Mock()
+	private final SeriesDao seriesDao = Mock()
+	private final StampsCatalogService michelCatalogService = Mock()
+	private final StampsCatalogService scottCatalogService = Mock()
+	private final StampsCatalogService yvertCatalogService = Mock()
+	private final StampsCatalogService gibbonsCatalogService = Mock()
+	private final MultipartFile multipartFile = Mock()
 	
 	private SeriesService service
 	private AddSeriesForm form
+	private AddImageForm imageForm
 	private Integer userId
 	
 	def setup() {
@@ -53,7 +57,9 @@ class SeriesServiceImplTest extends Specification {
 		form.setPerforated(false)
 		form.setCategory(TestObjects.createLinkEntityDto())
 		
-		userId = TestObjects.createUser().getId()
+		imageForm = new AddImageForm()
+		
+		userId = TestObjects.TEST_USER_ID
 		
 		imageService.save(_) >> ANY_IMAGE_ID
 		
@@ -121,11 +127,12 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should load and pass country to series dao if country present"() {
 		given:
 			LinkEntityDto country = TestObjects.createLinkEntityDto()
 		and:
-			Integer expectedCountryId = country.getId()
+			Integer expectedCountryId = country.id
 		and:
 			form.setCountry(country)
 		when:
@@ -138,6 +145,7 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass date of release (#expectedDay/#expectedMonth/#expectedYear) when it's #day/#month/#year"(
 		Integer day, Integer month, Integer year,
 		Integer expectedDay, Integer expectedMonth, Integer expectedYear) {
@@ -167,11 +175,12 @@ class SeriesServiceImplTest extends Specification {
 			null | 6     | null || null        | null          | null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass category to series dao"() {
 		given:
 			LinkEntityDto category = TestObjects.createLinkEntityDto()
 		and:
-			Integer expectedCategoryId = category.getId()
+			Integer expectedCategoryId = category.id
 		and:
 			form.setCategory(category)
 		when:
@@ -183,6 +192,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass quantity to series dao"() {
 		given:
 			Integer expectedQuantity = 3
@@ -196,6 +206,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass perforated to series dao"() {
 		given:
 			Boolean expectedResult = true
@@ -210,6 +221,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		'LineLength',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass michel price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setMichelPrice(price)
@@ -228,6 +245,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass scott price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setScottPrice(price)
@@ -246,6 +269,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass yvert price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setYvertPrice(price)
@@ -264,6 +293,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass gibbons price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setGibbonsPrice(price)
@@ -291,6 +326,12 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
 	def "add() should pass '#expectedComment' as comment to series dao if user can add comment is #canAddComment"(boolean canAddComment, String comment, String expectedComment) {
 		given:
 			form.setComment(comment)
@@ -309,6 +350,7 @@ class SeriesServiceImplTest extends Specification {
 			true          | 'Some text' || 'Some text'
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created at to current date"() {
 		when:
 			service.add(form, userId, false)
@@ -319,6 +361,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated at to current date"() {
 		when:
 			service.add(form, userId, false)
@@ -329,6 +372,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created by to user"() {
 		given:
 			Integer expectedUserId = 456
@@ -341,6 +385,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign updated by to user"() {
 		given:
 			Integer expectedUserId = 789
@@ -364,6 +409,7 @@ class SeriesServiceImplTest extends Specification {
 			actual == expected
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass image to image service"() {
 		given:
 			form.setImage(multipartFile)
@@ -376,6 +422,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> ANY_IMAGE_ID
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add image to the series"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -410,10 +457,11 @@ class SeriesServiceImplTest extends Specification {
 			0 * michelCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add michel numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -452,10 +500,11 @@ class SeriesServiceImplTest extends Specification {
 			0 * scottCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add scott numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -494,10 +543,11 @@ class SeriesServiceImplTest extends Specification {
 			0 * yvertCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add yvert numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -536,10 +586,11 @@ class SeriesServiceImplTest extends Specification {
 			0 * gibbonsCatalogService.addToSeries(_ as Integer, _ as Set<String>)
 		where:
 			numbers | _
-			""      | _
+			''      | _
 			null    | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add gibbons numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -562,6 +613,31 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}, { Set<String> numbers ->
 				assert numbers == expectedNumbers
+				return true
+			})
+	}
+
+	//
+	// Tests for addImageToSeries()
+	//
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addImageToSeries() should call dao and pass series id, current date and user id to it"() {
+		given:
+			Integer expectedSeriesId = 123
+		and:
+			Integer expectedUserId = 321
+		when:
+			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
+		then:
+			1 * seriesDao.markAsModified({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
+				return true
+			}, { Integer userId ->
+				assert userId == expectedUserId
 				return true
 			})
 	}
@@ -607,6 +683,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countSeriesOf() should pass argument to dao"() {
 		given:
 			Integer expectedCollectionId = 7
@@ -630,6 +707,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countStampsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 8
@@ -643,22 +721,115 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countAddedSince()
+	//
+	
+	def "countAddedSince() should throw exception when date is null"() {
+		when:
+			service.countAddedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 35
+		when:
+			long result = service.countAddedSince(expectedDate)
+		then:
+			1 * seriesDao.countAddedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for countUpdatedSince()
+	//
+	
+	def "countUpdatedSince() should throw exception when date is null"() {
+		when:
+			service.countUpdatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 45
+		when:
+			long result = service.countUpdatedSince(expectedDate)
+		then:
+			1 * seriesDao.countUpdatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for isSeriesExist()
+	//
+	
+	def "isSeriesExist() should throw exception when series id is null"() {
+		when:
+			service.isSeriesExist(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		'LineLength',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
+	def "isSeriesExist() should invoke dao, pass argument and return result from dao"(Integer daoReturnValue, boolean expectedResult) {
+		given:
+			Integer expectedSeriesId = 13
+		when:
+			boolean result = service.isSeriesExist(expectedSeriesId)
+		then:
+			1 * seriesDao.countSeriesById({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> daoReturnValue
+		and:
+			result == expectedResult
+		where:
+			daoReturnValue || expectedResult
+			0              || false
+			2              || true
+	}
+	
+	//
 	// Tests for findByMichelNumber()
 	//
 	
 	@Unroll
-	def "findByMichelNumber() should throw exception for invalid argument '#michelNumberCode'"(String michelNumberCode) {
+	def "findByMichelNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByMichelNumber(michelNumberCode, 'en')
+			service.findByMichelNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			michelNumberCode | _
-			null             | _
-			''               | _
-			' '              | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find series ids"() {
 		given:
 			String expectedMichelNumber = '5'
@@ -682,15 +853,16 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
 		and:
-			List<Integer> expectedSeriesIds = [ 1 ] as List
+			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
 			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> expectedSeriesIds
 		and:
-			List<SeriesInfoDto> expectedResult = [] as List
+			List<SeriesInfoDto> expectedResult = []
 		when:
 			List<SeriesInfoDto> result = service.findByMichelNumber('5', expectedLang)
 		then:
@@ -710,18 +882,19 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByScottNumber() should throw exception for invalid argument '#scottNumberCode'"(String scottNumberCode) {
+	def "findByScottNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByScottNumber(scottNumberCode, 'en')
+			service.findByScottNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			scottNumberCode | _
-			null            | _
-			''              | _
-			' '             | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find series ids"() {
 		given:
 			String expectedScottNumber = '5'
@@ -745,15 +918,16 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
 		and:
-			List<Integer> expectedSeriesIds = [ 1 ] as List
+			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
 			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> expectedSeriesIds
 		and:
-			List<SeriesInfoDto> expectedResult = [] as List
+			List<SeriesInfoDto> expectedResult = []
 		when:
 			List<SeriesInfoDto> result = service.findByScottNumber('5', expectedLang)
 		then:
@@ -773,18 +947,19 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByYvertNumber() should throw exception for invalid argument '#yvertNumberCode'"(String yvertNumberCode) {
+	def "findByYvertNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByYvertNumber(yvertNumberCode, 'en')
+			service.findByYvertNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			yvertNumberCode | _
-			null            | _
-			''              | _
-			' '             | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find series ids"() {
 		given:
 			String expectedYvertNumber = '5'
@@ -808,15 +983,16 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
 		and:
-			List<Integer> expectedSeriesIds = [ 1 ] as List
+			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
 			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> expectedSeriesIds
 		and:
-			List<SeriesInfoDto> expectedResult = [] as List
+			List<SeriesInfoDto> expectedResult = []
 		when:
 			List<SeriesInfoDto> result = service.findByYvertNumber('5', expectedLang)
 		then:
@@ -836,18 +1012,19 @@ class SeriesServiceImplTest extends Specification {
 	//
 	
 	@Unroll
-	def "findByGibbonsNumber() should throw exception for invalid argument '#gibbonsNumberCode'"(String gibbonsNumberCode) {
+	def "findByGibbonsNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
 		when:
-			service.findByGibbonsNumber(gibbonsNumberCode, 'en')
+			service.findByGibbonsNumber(catalogNumber, 'en')
 		then:
 			thrown IllegalArgumentException
 		where:
-			gibbonsNumberCode | _
-			null              | _
-			''                | _
-			' '               | _
+			catalogNumber | _
+			null          | _
+			''            | _
+			' '           | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
 			String expectedGibbonsNumber = '5'
@@ -871,15 +1048,16 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
 		and:
-			List<Integer> expectedSeriesIds = [ 1 ] as List
+			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
 			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> expectedSeriesIds
 		and:
-			List<SeriesInfoDto> expectedResult = [] as List
+			List<SeriesInfoDto> expectedResult = []
 		when:
 			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', expectedLang)
 		then:
@@ -895,49 +1073,49 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findByCategoryId()
+	// Tests for findByCategorySlug()
 	//
 	
-	def "findByCategoryId() should throw exception if category id is null"() {
+	def "findByCategorySlug() should throw exception if category slug is null"() {
 		when:
-			service.findByCategoryId(null, 'any')
+			service.findByCategorySlug(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByCategoryId() should call dao and return result"() {
+	def "findByCategorySlug() should call dao and return result"() {
 		given:
 			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
-			Iterable<SeriesInfoDto> expectedResult = [ series ]
+			List<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			seriesDao.findByCategoryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCategorySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			Iterable<SeriesInfoDto> result = service.findByCategoryId(10, 'any')
+			List<SeriesInfoDto> result = service.findByCategorySlug('iceland', 'any')
 		then:
 			result == expectedResult
 	}
 	
 	//
-	// Tests for findByCountryId()
+	// Tests for findByCountrySlug()
 	//
 	
-	def "findByCountryId() should throw exception if country id is null"() {
+	def "findByCountrySlug() should throw exception if country slug is null"() {
 		when:
-			service.findByCountryId(null, 'any')
+			service.findByCountrySlug(null, 'any')
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "findByCountryId() should call dao and return result"() {
+	def "findByCountrySlug() should call dao and return result"() {
 		given:
 			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
 		and:
-			Iterable<SeriesInfoDto> expectedResult = [ series ]
+			List<SeriesInfoDto> expectedResult = [ series ]
 		and:
-			seriesDao.findByCountryIdAsSeriesInfo(_ as Integer, _ as String) >> expectedResult
+			seriesDao.findByCountrySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			Iterable<SeriesInfoDto> result = service.findByCountryId(20, 'any')
+			List<SeriesInfoDto> result = service.findByCountrySlug('germany', 'any')
 		then:
 			result == expectedResult
 	}
@@ -953,6 +1131,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByCollectionId() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 16
@@ -989,6 +1168,7 @@ class SeriesServiceImplTest extends Specification {
 			0        | _
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findRecentlyAdded should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 3
@@ -1015,12 +1195,40 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findAllForSitemap() should call dao and returns result"() {
 		given:
-			Iterable<SitemapInfoDto> expectedResult =
+			List<SitemapInfoDto> expectedResult =
 				Collections.singletonList(TestObjects.createSitemapInfoDto())
 		when:
-			Iterable<SitemapInfoDto> result = service.findAllForSitemap()
+			List<SitemapInfoDto> result = service.findAllForSitemap()
 		then:
 			1 * seriesDao.findAllForSitemap() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findPurchasesAndSales()
+	//
+	
+	def "findPurchasesAndSales() should throw exception when series id is null"() {
+		when:
+			service.findPurchasesAndSales(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Integer expectedSeriesId = 88
+		and:
+			List<PurchaseAndSaleDto> expectedResult = [ TestObjects.createPurchaseAndSaleDto() ]
+		when:
+			List<PurchaseAndSaleDto> result = service.findPurchasesAndSales(expectedSeriesId)
+		then:
+			1 * seriesDao.findPurchasesAndSales({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedResult
 		and:
 			result == expectedResult
 	}

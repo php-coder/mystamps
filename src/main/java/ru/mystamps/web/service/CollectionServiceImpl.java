@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -29,18 +31,19 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.JdbcCollectionDao;
+import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.service.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.UrlEntityDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CollectionServiceImpl implements CollectionService {
 	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
-	private final JdbcCollectionDao collectionDao;
+	private final CollectionDao collectionDao;
 	
 	@Override
 	@Transactional
@@ -65,29 +68,19 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
-	public UrlEntityDto addToCollection(Integer userId, Integer seriesId) {
+	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
+	public void addToCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
-		Integer collectionId = url.getId();
+		collectionDao.addSeriesToUserCollection(userId, seriesId);
 		
-		collectionDao.addSeriesToCollection(collectionId, seriesId);
-		
-		LOG.info(
-			"Series #{} has been added to collection #{} of user #{}",
-			seriesId,
-			collectionId,
-			userId
-		);
-		
-		return url;
+		LOG.info("Series #{} has been added to collection of user #{}", seriesId, userId);
 	}
 	
 	@Override
 	@Transactional
-	@PreAuthorize("hasAuthority('UPDATE_COLLECTION')")
+	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
 	public UrlEntityDto removeFromCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
@@ -136,7 +129,7 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<LinkEntityDto> findRecentlyCreated(int quantity) {
+	public List<LinkEntityDto> findRecentlyCreated(int quantity) {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
 		return collectionDao.findLastCreated(quantity);
@@ -144,10 +137,10 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public CollectionInfoDto findById(Integer collectionId) {
-		Validate.isTrue(collectionId != null, "Collection id must be non null");
+	public CollectionInfoDto findBySlug(String slug) {
+		Validate.isTrue(slug != null, "Collection slug must be non null");
 		
-		return collectionDao.findCollectionInfoById(collectionId);
+		return collectionDao.findCollectionInfoBySlug(slug);
 	}
 	
 }

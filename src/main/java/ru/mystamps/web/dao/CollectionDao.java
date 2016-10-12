@@ -17,9 +17,20 @@
  */
 package ru.mystamps.web.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-import ru.mystamps.web.entity.Collection;
+import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.CollectionInfoDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.UrlEntityDto;
 
-public interface CollectionDao extends CrudRepository<Collection, Integer> {
+public interface CollectionDao {
+	List<LinkEntityDto> findLastCreated(int quantity);
+	long countCollectionsOfUsers();
+	Integer add(AddCollectionDbDto collection);
+	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
+	UrlEntityDto findCollectionUrlEntityByUserId(Integer userId);
+	void addSeriesToUserCollection(Integer userId, Integer seriesId);
+	void removeSeriesFromCollection(Integer collectionId, Integer seriesId);
+	CollectionInfoDto findCollectionInfoBySlug(String slug);
 }

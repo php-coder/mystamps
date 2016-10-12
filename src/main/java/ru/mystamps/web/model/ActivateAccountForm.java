@@ -62,12 +62,19 @@ public class ActivateAccountForm implements ActivateAccountDto {
 			groups = Login2Checks.class
 		)
 	})
-	@Pattern(
-		regexp = ValidationRules.LOGIN_REGEXP,
-		message = "{login.invalid}",
-		groups = Login3Checks.class
-	)
-	@UniqueLogin(groups = Login4Checks.class)
+	@Pattern.List({
+		@Pattern(
+			regexp = ValidationRules.LOGIN_REGEXP,
+			message = "{login.invalid}",
+			groups = Login3Checks.class
+		),
+		@Pattern(
+			regexp = ValidationRules.LOGIN_NO_REPEATING_CHARS_REGEXP,
+			message = "{login.repetition_chars}",
+			groups = Login4Checks.class
+		)
+	})
+	@UniqueLogin(groups = Login5Checks.class)
 	private String login;
 	
 	@Size(
@@ -77,12 +84,12 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	)
 	@Pattern.List({
 		@Pattern(
-			regexp = ValidationRules.NAME_REGEXP1,
+			regexp = ValidationRules.NAME_REGEXP,
 			message = "{name.invalid}",
 			groups = Name2Checks.class
 		),
 		@Pattern(
-			regexp = ValidationRules.NAME_REGEXP2,
+			regexp = ValidationRules.NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Name3Checks.class
 		)
@@ -120,7 +127,8 @@ public class ActivateAccountForm implements ActivateAccountDto {
 		Login1Checks.class,
 		Login2Checks.class,
 		Login3Checks.class,
-		Login4Checks.class
+		Login4Checks.class,
+		Login5Checks.class
 	})
 	public interface LoginChecks {
 	}
@@ -135,6 +143,9 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	}
 	
 	public interface Login4Checks {
+	}
+	
+	public interface Login5Checks {
 	}
 	
 	@GroupSequence({

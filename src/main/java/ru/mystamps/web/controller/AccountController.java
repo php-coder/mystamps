@@ -27,10 +27,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
@@ -61,15 +61,16 @@ public class AccountController {
 	
 	@InitBinder("activateAccountForm")
 	protected void activationInitBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "login", new StringTrimmerEditor(true));
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
-	@RequestMapping(Url.REGISTRATION_PAGE)
+	@GetMapping(Url.REGISTRATION_PAGE)
 	public RegisterAccountForm showRegistrationForm() {
 		return new RegisterAccountForm();
 	}
 	
-	@RequestMapping(value = Url.REGISTRATION_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.REGISTRATION_PAGE)
 	public String processRegistrationForm(
 		@Valid RegisterAccountForm form,
 		BindingResult result,
@@ -87,12 +88,12 @@ public class AccountController {
 		return "redirect:" + Url.ACTIVATE_ACCOUNT_PAGE;
 	}
 	
-	@RequestMapping(Url.ACTIVATE_ACCOUNT_PAGE)
+	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE)
 	public ActivateAccountForm showActivationForm() {
 		return new ActivateAccountForm();
 	}
 	
-	@RequestMapping(Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
+	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
 	public String showActivationFormWithKey(
 		@PathVariable("key") String activationKey,
 		Model model) {
@@ -104,7 +105,7 @@ public class AccountController {
 		return "account/activate";
 	}
 	
-	@RequestMapping(value = Url.ACTIVATE_ACCOUNT_PAGE, method = RequestMethod.POST)
+	@PostMapping(Url.ACTIVATE_ACCOUNT_PAGE)
 	public String processActivationForm(
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,

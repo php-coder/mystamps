@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="add-creator-columns-to-series_sales_table" author="cssru" context="scheme">
+		<!-- Since MySQL 5.6.5 it's possible to use `NOW()` as default value for a column
+			but we're doing the same in 3 steps to support also old versions. -->
+		<addColumn tableName="series_sales">
+			<column name="created_at" type="DATETIME" />
+			<column name="created_by" type="INTEGER" />
+		</addColumn>
+		
+		<update tableName="series_sales">
+			<column name="created_at" type="DATETIME" valueComputed="${NOW}" />
+		</update>
+		
+		<update tableName="series_sales">
+			<column name="created_by"
+				type="INTEGER"
+				valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER BY id LIMIT 1)" />
+		</update>
+		
+		<addNotNullConstraint columnName="created_at" columnDataType="DATETIME" tableName="series_sales" />
+		
+		<addNotNullConstraint columnName="created_by" columnDataType="INTEGER" tableName="series_sales" />
+		
+		<addForeignKeyConstraint
+			baseColumnNames="created_by"
+			baseTableName="series_sales"
+			constraintName="fk_series_sales_users_id"
+			referencedColumnNames="id"
+			referencedTableName="users" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

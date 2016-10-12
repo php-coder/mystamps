@@ -40,17 +40,17 @@ import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
-	
 	// see initiate-suspicious_activities_types-table changeset
 	// in src/main/resources/liquibase/initial-state.xml
-	private static final String PAGE_NOT_FOUND = "PageNotFound";
-	private static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+	public static final String PAGE_NOT_FOUND = "PageNotFound";
+	public static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
 	
 	// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
 	// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
-	private static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
-	private static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
+	public static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+	public static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
+	
+	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
 	
 	private final SuspiciousActivityDao suspiciousActivities;
 	
@@ -136,21 +136,31 @@ public class SiteServiceImpl implements SiteService {
 			String agent,
 			Date date) {
 		
-		Validate.isTrue(type != null, "Type of suspicious activity was not set");
-		Validate.isTrue(page != null, "Page should be non null");
+		Validate.isTrue(type != null, "Type of suspicious activity must be non null");
+		Validate.isTrue(page != null, "Page must be non null");
 		
 		AddSuspiciousActivityDbDto activity = new AddSuspiciousActivityDbDto();
 		
 		activity.setType(type);
 		activity.setOccurredAt(date == null ? new Date() : date);
 		activity.setPage(abbreviatePage(page));
-		activity.setMethod(method);
+		activity.setMethod(abbreviateMethod(method));
 		activity.setUserId(userId);
 		activity.setIp(StringUtils.defaultString(ip));
 		activity.setRefererPage(StringUtils.stripToNull(abbreviateRefererPage(referer)));
 		activity.setUserAgent(StringUtils.stripToNull(abbreviateUserAgent(agent)));
 		
 		suspiciousActivities.add(activity);
+	}
+	
+	/**
+	 * Abbreviate name of HTTP method.
+	 * @param method name of HTTP method
+	 * @return name of the method as-is or its abbreviation with three points at the end
+	 * @author Aleksandr Zorin
+	 */
+	private static String abbreviateMethod(String method) {
+		return abbreviateIfLengthGreaterThan(method, Db.SuspiciousActivity.METHOD_LENGTH, "method");
 	}
 	
 	private static String abbreviatePage(String page) {

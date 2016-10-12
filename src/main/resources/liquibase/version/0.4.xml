@@ -13,5 +13,13 @@
 	<include file="0.4/2016-01-02--non_unique_catalog_numbers.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-01-04--unique_series_in_collection.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-02-19--csrf_events.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-01-14--unique_slug_in_countries.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-07-22--unique_slug_in_categories.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-08-18--unique_slug_in_collections.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-08-22--series_sales.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-08-27--fix_series_sales_price.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-09-28--add_creator_data_to_series_sales.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-09-28--add_constraints_to_series-first-price.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-10-10--change_series_sales_date_type.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

@@ -7,13 +7,13 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title th:text="|MyStamps: #{t_category_info}|">MyStamps: Category info</title>
+		<title th:text="|#{t_my_stamps}: #{t_category_info}|">My stamps: Category info</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<!--/*/
-		<link rel="canonical" th:href="@{${PUBLIC_URL} + ${INFO_CATEGORY_PAGE}(id=${categoryId},slug=${categorySlug})}" />
+		<link rel="canonical" th:href="@{${PUBLIC_URL} + ${INFO_CATEGORY_PAGE}(slug=${categorySlug})}" />
 		/*/-->
 	</head>
 	<body>
@@ -66,7 +66,7 @@
 								href="../collection/info.html"
 								title="Open my collection"
 								th:title="#{t_open_my_collection}"
-								th:href="@{${INFO_COLLECTION_PAGE}(id=${#authentication.principal.userCollectionId},slug=${#authentication.principal.userCollectionSlug})}">
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
 								John Doe
 							</a>
 						</li>
@@ -95,7 +95,7 @@
 					
 					<!--/*/
 					<div class="row" th:if="${justAddedCategory}">
-						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_category_just_added(@{${ADD_SERIES_WITH_CATEGORY_PAGE}(id=${categoryId})})}">
+						<div class="alert alert-success text-center col-sm-4 col-sm-offset-4" th:utext="#{t_category_just_added(@{${ADD_SERIES_WITH_CATEGORY_PAGE}(slug=${categorySlug})})}">
 							Category has been added.<br />
 							Now you could <a href="../series/add.html" class="alert-link">proceed with creating series</a>.
 						</div>
@@ -105,7 +105,7 @@
 					<ul th:if="${not #lists.isEmpty(seriesOfCategory)}" th:remove="all-but-first">
 						<li th:each="series: ${seriesOfCategory}">
 							<span th:if="${series.country.id != null}" th:remove="tag">
-								<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(id=${series.country.id},slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
+								<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
 							</span>
 							
 							<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
