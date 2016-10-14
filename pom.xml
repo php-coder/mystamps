@@ -114,19 +114,6 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-starters/spring-boot-starter-validation/pom.xml -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-			<exclusions>
-				<exclusion>
-					<!-- In favour of org.mortbay.jasper:apache-el -->
-					<groupId>org.apache.tomcat.embed</groupId>
-					<artifactId>tomcat-embed-el</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.1.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
