@@ -45,7 +45,8 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 	Group.Level2.class,
 	Group.Level3.class,
 	Group.Level4.class,
-	Group.Level5.class
+	Group.Level5.class,
+	Group.Level6.class
 })
 public class AddCountryForm implements AddCountryDto {
 	
@@ -79,7 +80,7 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.EN, groups = Group.Level5.class)
+	@UniqueCountryName(lang = Lang.EN, groups = Group.Level6.class)
 	private String name;
 	
 	@NotEmpty(groups = Group.Level1.class)
