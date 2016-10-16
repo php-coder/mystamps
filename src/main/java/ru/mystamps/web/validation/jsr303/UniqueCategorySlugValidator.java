@@ -15,29 +15,37 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.validation.jsr303;
 
-final class Group {
-	
-	interface Level1 {
-	}
-	
-	interface Level2 {
-	}
-	
-	interface Level3 {
-	}
-	
-	interface Level4 {
-	}
-	
-	interface Level5 {
-	}
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-	interface Level6 {
+import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.util.SlugUtils;
+
+@RequiredArgsConstructor
+public class UniqueCategorySlugValidator
+	implements ConstraintValidator<UniqueCategorySlug, String> {
+	
+	private final CategoryService categoryService;
+	
+	@Override
+	public void initialize(UniqueCategorySlug annotation) {
+		// Intentionally empty: nothing to initialize
 	}
 	
-	interface Level7 {
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
+		
+		if (value == null) {
+			return true;
+		}
+		
+		String slug = SlugUtils.slugify(value);
+		
+		return categoryService.countBySlug(slug) == 0;
 	}
 	
 }

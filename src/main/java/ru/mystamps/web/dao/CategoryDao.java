@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 public interface CategoryDao {
 	Integer add(AddCategoryDbDto category);
 	long countAll();
+	long countBySlug(String slug);
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countCategoriesOfCollection(Integer collectionId);
