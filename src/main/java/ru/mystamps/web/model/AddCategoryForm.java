@@ -29,6 +29,7 @@ import lombok.Setter;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
+import ru.mystamps.web.validation.jsr303.UniqueCategorySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
@@ -46,7 +47,8 @@ import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP
 	Group.Level3.class,
 	Group.Level4.class,
 	Group.Level5.class,
-	Group.Level6.class
+	Group.Level6.class,
+	Group.Level7.class
 })
 public class AddCategoryForm implements AddCategoryDto {
 	
@@ -81,6 +83,7 @@ public class AddCategoryForm implements AddCategoryDto {
 		)
 	})
 	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level6.class)
+	@UniqueCategorySlug(groups = Group.Level7.class)
 	private String name;
 	
 	@NotEmpty(groups = Group.Level1.class)

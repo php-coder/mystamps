@@ -29,6 +29,7 @@ public interface CategoryService {
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCategoriesOf(Integer collectionId);
+	long countBySlug(String slug);
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countAddedSince(Date date);

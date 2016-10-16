@@ -50,6 +50,9 @@ public class JdbcCategoryDao implements CategoryDao {
 	@Value("${category.count_all_categories}")
 	private String countAllSql;
 	
+	@Value("${category.count_categories_by_slug}")
+	private String countBySlugSql;
+	
 	@Value("${category.count_categories_by_name}")
 	private String countByNameSql;
 	
@@ -104,6 +107,15 @@ public class JdbcCategoryDao implements CategoryDao {
 		return jdbcTemplate.queryForObject(
 			countAllSql,
 			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countBySlug(String slug) {
+		return jdbcTemplate.queryForObject(
+			countBySlugSql,
+			Collections.singletonMap("slug", slug),
 			Long.class
 		);
 	}

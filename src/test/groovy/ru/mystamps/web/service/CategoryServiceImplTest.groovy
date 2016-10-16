@@ -313,6 +313,26 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countBySlug()
+	//
+	
+	def "countBySlug() should throw exception when slug is null"() {
+		when:
+			service.countBySlug(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "countBySlug() should call dao"() {
+		given:
+			categoryDao.countBySlug(_ as String) >> 3L
+		when:
+			long result = service.countBySlug('any-slug')
+		then:
+			result == 3L
+	}
+	
+	//
 	// Tests for countByName()
 	//
 	

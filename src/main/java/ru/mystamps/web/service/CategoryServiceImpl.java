@@ -111,6 +111,14 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countBySlug(String slug) {
+		Validate.isTrue(slug != null, "Category slug must be non null");
+		
+		return categoryDao.countBySlug(slug);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name must be non null");
 		
