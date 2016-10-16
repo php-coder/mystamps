@@ -112,6 +112,14 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countBySlug(String slug) {
+		Validate.isTrue(slug != null, "Country slug must be non null");
+		
+		return countryDao.countBySlug(slug);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countByName(String name) {
 		Validate.isTrue(name != null, "Name must be non null");
 		

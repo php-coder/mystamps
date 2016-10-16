@@ -29,6 +29,7 @@ import lombok.Setter;
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
+import ru.mystamps.web.validation.jsr303.UniqueCountrySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
@@ -46,7 +47,8 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 	Group.Level3.class,
 	Group.Level4.class,
 	Group.Level5.class,
-	Group.Level6.class
+	Group.Level6.class,
+	Group.Level7.class
 })
 public class AddCountryForm implements AddCountryDto {
 	
@@ -81,6 +83,7 @@ public class AddCountryForm implements AddCountryDto {
 		)
 	})
 	@UniqueCountryName(lang = Lang.EN, groups = Group.Level6.class)
+	@UniqueCountrySlug(groups = Group.Level7.class)
 	private String name;
 	
 	@NotEmpty(groups = Group.Level1.class)

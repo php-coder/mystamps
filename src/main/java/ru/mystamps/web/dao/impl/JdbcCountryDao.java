@@ -50,6 +50,9 @@ public class JdbcCountryDao implements CountryDao {
 	@Value("${country.count_all_countries}")
 	private String countAllSql;
 	
+	@Value("${country.count_countries_by_slug}")
+	private String countBySlugSql;
+	
 	@Value("${country.count_countries_by_name}")
 	private String countByNameSql;
 	
@@ -104,6 +107,15 @@ public class JdbcCountryDao implements CountryDao {
 		return jdbcTemplate.queryForObject(
 			countAllSql,
 			Collections.<String, Object>emptyMap(),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countBySlug(String slug) {
+		return jdbcTemplate.queryForObject(
+			countBySlugSql,
+			Collections.singletonMap("slug", slug),
 			Long.class
 		);
 	}

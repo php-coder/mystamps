@@ -15,23 +15,36 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.validation.jsr303;
 
-import java.util.Date;
-import java.util.List;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
+import lombok.RequiredArgsConstructor;
 
-public interface CountryService {
-	String add(AddCountryDto dto, Integer userId);
-	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	long countAll();
-	long countCountriesOf(Integer collectionId);
-	long countBySlug(String slug);
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countAddedSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.util.SlugUtils;
+
+@RequiredArgsConstructor
+public class UniqueCountrySlugValidator implements ConstraintValidator<UniqueCountrySlug, String> {
+	
+	private final CountryService countryService;
+	
+	@Override
+	public void initialize(UniqueCountrySlug annotation) {
+		// Intentionally empty: nothing to initialize
+	}
+	
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
+		
+		if (value == null) {
+			return true;
+		}
+		
+		String slug = SlugUtils.slugify(value);
+		
+		return countryService.countBySlug(slug) == 0;
+	}
+	
 }
