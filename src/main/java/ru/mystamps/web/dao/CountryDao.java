@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 public interface CountryDao {
 	Integer add(AddCountryDbDto country);
 	long countAll();
+	long countBySlug(String slug);
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countCountriesOfCollection(Integer collectionId);
