@@ -19,12 +19,14 @@ package ru.mystamps.web.config;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.CacheControl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -38,6 +40,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 
 import lombok.RequiredArgsConstructor;
 
@@ -77,10 +80,21 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		VersionResourceResolver resourceResolver = new VersionResourceResolver()
+			.addFixedVersionStrategy(Url.RESOURCES_VERSION, "/**");
+		
+		@SuppressWarnings("checkstyle:magicnumber")
+		CacheControl cacheControl = CacheControl.maxAge(7, TimeUnit.DAYS);
+		
 		registry.addResourceHandler("/static/**")
-			.addResourceLocations("/WEB-INF/static/");
+			.addResourceLocations("/WEB-INF/static/")
+			.setCacheControl(cacheControl)
+			.resourceChain(true)
+			.addResolver(resourceResolver);
 		registry.addResourceHandler("/public/js/**")
-			.addResourceLocations("classpath:/js/");
+			.addResourceLocations("classpath:/js/")
+			.resourceChain(true)
+			.addResolver(resourceResolver);
 		
 		// For WebJars:
 		registry.addResourceHandler("/public/bootstrap/**")
