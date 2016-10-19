@@ -30,7 +30,6 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
@@ -77,10 +76,6 @@ final class TestObjects {
 	
 	public static UsersActivationDto createUsersActivationDto() {
 		return new UsersActivationDto(TEST_EMAIL, new Date());
-	}
-	
-	public static UrlEntityDto createUrlEntityDto() {
-		return new UrlEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG);
 	}
 	
 	public static LinkEntityDto createLinkEntityDto() {

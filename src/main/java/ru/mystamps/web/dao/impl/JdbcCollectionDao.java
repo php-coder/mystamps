@@ -40,7 +40,6 @@ import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -60,10 +59,6 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@Value("${collection.is_series_in_collection}")
 	private String isSeriesInUserCollectionSql;
-	
-	@SuppressWarnings("PMD.LongVariable")
-	@Value("${collection.find_id_and_slug_by_user_id}")
-	private String findCollectionIdAndSlugByUserIdSql;
 	
 	@Value("${collection.add_series_to_collection}")
 	private String addSeriesToCollectionSql;
@@ -129,15 +124,6 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
-	public UrlEntityDto findCollectionUrlEntityByUserId(Integer userId) {
-		return jdbcTemplate.queryForObject(
-			findCollectionIdAndSlugByUserIdSql,
-			Collections.singletonMap("user_id", userId),
-			RowMappers::forUrlEntityDto
-		);
-	}
-	
-	@Override
 	public void addSeriesToUserCollection(Integer userId, Integer seriesId) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", userId);
@@ -157,18 +143,18 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
 	@Override
-	public void removeSeriesFromCollection(Integer collectionId, Integer seriesId) {
+	public void removeSeriesFromUserCollection(Integer userId, Integer seriesId) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("collection_id", collectionId);
+		params.put("user_id", userId);
 		params.put("series_id", seriesId);
 		
 		int affected = jdbcTemplate.update(removeSeriesFromCollectionSql, params);
 		if (affected != 1) {
 			// CheckStyle: ignore LineLength for next 2 lines
 			LOG.warn(
-				"Unexpected number of affected rows after removing series #{} from collection #{}: %{}",
+				"Unexpected number of affected rows after removing series #{} from collection of user #{}: %{}",
 				seriesId,
-				collectionId,
+				userId,
 				affected
 			);
 		}
