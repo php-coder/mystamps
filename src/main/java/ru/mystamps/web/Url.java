@@ -80,12 +80,15 @@ public final class Url {
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
-	// resources
+	// MUST be updated when any of our resources were modified
+	public static final String RESOURCES_VERSION      = "v0.3.0";
+	
+	// CheckStyle: ignore LineLength for next 4 lines
+	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
+	public static final String CATALOG_UTILS_JS       = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
+	public static final String SERIES_ADD_JS          = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";
+	public static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	public static final String FAVICON_ICO            = "/favicon.ico";
-	public static final String MAIN_CSS               = "/static/styles/main.min.css";
-	public static final String CATALOG_UTILS_JS       = "/public/js/CatalogUtils.min.js";
-	public static final String SERIES_ADD_JS          = "/public/js/series/add.min.js";
-	public static final String COLLECTION_INFO_JS     = "/public/js/collection/info.min.js";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.6/css/bootstrap.min.css";
