@@ -299,44 +299,43 @@
 									</ul>
 								</div>
 							</div>
+							
+							<div class="row" togglz:active="ADD_SERIES_TO_COLLECTION">
+								<div class="col-sm-12" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
+									<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<p th:text="#{t_series_not_in_collection}">
+											Series isn't part of your collection
+										</p>
+										<p>
+											<input type="hidden" name="action" value="ADD" />
+											<input type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
+										</p>
+									</form>
+								</div>
+								
+								<!--/*/
+								<div class="col-sm-12" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
+									<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<p th:text="#{t_series_in_collection}">
+											Series is part of your collection
+										</p>
+										<p>
+											<input type="hidden" name="action" value="REMOVE" />
+											<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
+										</p>
+									</form>
+								</div>
+								
+								<div class="col-sm-12" sec:authorize="isAnonymous()">
+									<p th:utext="#{t_need_authentication_to_add_series_to_collection(@{${REGISTRATION_PAGE}}, @{${AUTHENTICATION_PAGE}})}">
+										In order to add this series to your collection you should <a href="../account/register.html">register</a>
+										or <a href="../account/auth.html">pass authentication</a>.
+									</p>
+								</div>
+								/*/-->
+							</div>
+							
 						</div>
-						
-						<!--/*/
-						<th:block togglz:active="ADD_SERIES_TO_COLLECTION">
-						/*/-->
-							<div class="col-sm-4" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-								<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-									<p th:text="#{t_series_not_in_collection}">
-										Series isn't part of your collection
-									</p>
-									<p>
-										<input type="hidden" name="action" value="ADD" />
-										<input type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
-									</p>
-								</form>
-							</div>
-							
-						<!--/*/
-							<div class="col-sm-4" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-								<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-									<p th:text="#{t_series_in_collection}">
-										Series is part of your collection
-									</p>
-									<p>
-										<input type="hidden" name="action" value="REMOVE" />
-										<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
-									</p>
-								</form>
-							</div>
-							
-							<div class="col-sm-4" sec:authorize="isAnonymous()">
-								<p th:utext="#{t_need_authentication_to_add_series_to_collection(@{${REGISTRATION_PAGE}}, @{${AUTHENTICATION_PAGE}})}">
-									In order to add this series to your collection you should <a href="../account/register.html">register</a>
-									or <a href="../account/auth.html">pass authentication</a>.
-								</p>
-							</div>
-						</th:block>
-						/*/-->
 						
 					</div>
 					
