@@ -61,6 +61,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
+import ru.mystamps.web.model.AddSeriesSalesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -381,6 +382,12 @@ public class SeriesController {
 			List<PurchaseAndSaleDto> purchasesAndSales =
 				seriesService.findPurchasesAndSales(series.getId());
 			model.put("purchasesAndSales", purchasesAndSales);
+		}
+		
+		if (Features.ADD_PURCHASES_AND_SALES.isActive()
+			&& SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES)) {
+			
+			model.put("addSeriesSalesForm", new AddSeriesSalesForm());
 		}
 		
 		return model;

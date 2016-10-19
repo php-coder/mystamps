@@ -72,6 +72,10 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SHOW_PURCHASES_AND_SALES;
 	
+	@Label("Possibility of user to add series purchases and sales on series info page")
+	@EnabledByDefault
+	ADD_PURCHASES_AND_SALES;
+	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
 	}

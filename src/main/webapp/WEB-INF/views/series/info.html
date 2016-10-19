@@ -351,6 +351,136 @@
 								</div>
 							</div>
 							
+							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
+								<div class="col-sm-12">
+									<h5 th:text="|#{t_add_info_who_selling_series}:|">Add info about selling/buying this series:</h5>
+									<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_SALES_PAGE}}" th:object="${addSeriesSalesForm}">
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
+											<label for="date" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_date}">
+													Date
+												</span>
+											</label>
+											<div class="col-sm-4">
+												<input type="text" id="date" class="form-control" th:field="*{date}" />
+												<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
+											<label for="seller" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_seller}">
+													Seller
+												</span>
+												<span id="seller.required" class="required_field">*</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="seller" name="sellerId" class="form-control" required="required">
+													<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+													<!--/*-->
+													<option value="1">James Alan Hetfield</option>
+													<option value="2">Tommy Lee Jones</option>
+													<option value="3">Eicca Toppinen</option>
+													<!--*/-->
+												</select>
+												<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('sellerId')}" th:each="error : ${#fields.errors('sellerId')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
+											<label for="url" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_url}">
+													URL
+												</span>
+											</label>
+											<div class="col-sm-6">
+												<input type="url" id="url" class="form-control" th:field="*{url}" />
+												<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
+											<label for="price" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_price}">
+													Price
+												</span>
+												<span id="price.required" class="required_field">*</span>
+											</label>
+											<div class="col-sm-6">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" id="price" class="form-control" size="5" required="required" th:field="*{price}" />
+													</div>
+													<div class="col-xs-4 no-padding">
+														<select id="currency" class="form-control" required="required" th:field="*{currency}">
+															<option value=""></option>
+															<option value="USD">USD</option>
+															<option value="EUR">EUR</option>
+															<option value="GBP">GBP</option>
+															<option value="RUB">RUB</option>
+														</select>
+													</div>
+												</div>
+												<span id="price.errors" class="help-block" th:if="${#fields.hasErrors('price')}" th:each="error : ${#fields.errors('price')}" th:text="${error}"></span>
+												<span id="currency.errors" class="help-block" th:if="${#fields.hasErrors('currency')}" th:each="error : ${#fields.errors('currency')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
+											<label for="price" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_alternative_price}">
+													Alternative price
+												</span>
+											</label>
+											<div class="col-sm-6">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" id="alt-price" class="form-control" size="5" th:field="*{altPrice}" />
+													</div>
+													<div class="col-xs-4 no-padding">
+														<select id="alt-currency" class="form-control" th:field="*{altCurrency}">
+															<option value=""></option>
+															<option value="USD">USD</option>
+															<option value="EUR">EUR</option>
+															<option value="GBP">GBP</option>
+															<option value="RUB">RUB</option>
+														</select>
+													</div>
+												</div>
+												<span id="alt-price.errors" class="help-block" th:if="${#fields.hasErrors('altPrice')}" th:each="error : ${#fields.errors('altPrice')}" th:text="${error}"></span>
+												<span id="alt-currency.errors" class="help-block" th:if="${#fields.hasErrors('altCurrency')}" th:each="error : ${#fields.errors('altCurrency')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
+											<label for="buyer" class="control-label col-sm-2">
+												<span class="field-label" th:text="#{t_buyer}">
+													Buyer
+												</span>
+											</label>
+											<div class="col-sm-6">
+												<select id="buyer" name="buyerId" class="form-control">
+													<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+													<!--/*-->
+													<option value="1">Kurt Cobain</option>
+													<option value="2">Michael Jackson</option>
+													<!--*/-->
+												</select>
+												<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyerId')}" th:each="error : ${#fields.errors('buyerId')}" th:text="${error}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group form-group-sm">
+											<div class="col-sm-offset-2 col-sm-4">
+												<input type="submit" class="btn btn-primary" value="Add info" th:value="#{t_add_info}" />
+											</div>
+										</div>
+										
+									</form>
+								</div>
+							</div>
+							
 						</div>
 						
 					</div>
