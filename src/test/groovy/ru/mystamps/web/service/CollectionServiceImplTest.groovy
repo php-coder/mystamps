@@ -23,7 +23,6 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
-import ru.mystamps.web.dao.dto.UrlEntityDto
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
@@ -147,49 +146,20 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "removeFromCollection() should find collection by user id"() {
-		given:
-			Integer expectedUserId = 123
-		when:
-			service.removeFromCollection(expectedUserId, 321)
-		then:
-			1 * collectionDao.findCollectionUrlEntityByUserId({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}) >> TestObjects.createUrlEntityDto()
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "removeFromCollection() should remove series from collection"() {
 		given:
+			Integer expectedUserId = 123
 			Integer expectedSeriesId = 456
-		and:
-			UrlEntityDto url = TestObjects.createUrlEntityDto()
-		and:
-			Integer expectedCollectionId = url.id
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> url
 		when:
-			service.removeFromCollection(123, expectedSeriesId)
+			service.removeFromCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.removeSeriesFromCollection({ Integer collectionId ->
-				assert collectionId == expectedCollectionId
+			1 * collectionDao.removeSeriesFromUserCollection({ Integer userId ->
+				assert userId == expectedUserId
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
 				return true
 			})
-	}
-	
-	def "removeFromCollection() should return result from dao"() {
-		given:
-			UrlEntityDto expectedResult = TestObjects.createUrlEntityDto()
-		and:
-			collectionDao.findCollectionUrlEntityByUserId(_ as Integer) >> expectedResult
-		when:
-			UrlEntityDto serviceResult = service.removeFromCollection(123, 456)
-		then:
-			serviceResult == expectedResult
 	}
 	
 	//

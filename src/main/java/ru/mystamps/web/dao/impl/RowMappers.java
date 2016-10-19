@@ -32,7 +32,6 @@ import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
@@ -48,13 +47,6 @@ final class RowMappers {
 			rs.getInt("id"),
 			rs.getString("slug"),
 			rs.getString("name")
-		);
-	}
-	
-	public static UrlEntityDto forUrlEntityDto(ResultSet rs, int i) throws SQLException {
-		return new UrlEntityDto(
-			rs.getInt("id"),
-			rs.getString("slug")
 		);
 	}
 	

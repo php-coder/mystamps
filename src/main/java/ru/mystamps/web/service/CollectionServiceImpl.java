@@ -35,7 +35,6 @@ import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -81,22 +80,13 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public UrlEntityDto removeFromCollection(Integer userId, Integer seriesId) {
+	public void removeFromCollection(Integer userId, Integer seriesId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		UrlEntityDto url = collectionDao.findCollectionUrlEntityByUserId(userId);
-		Integer collectionId = url.getId();
+		collectionDao.removeSeriesFromUserCollection(userId, seriesId);
 		
-		collectionDao.removeSeriesFromCollection(collectionId, seriesId);
-		
-		LOG.info(
-			"Series #{} has been removed from collection of user #{}",
-			seriesId,
-			userId
-		);
-		
-		return url;
+		LOG.info("Series #{} has been removed from collection of user #{}", seriesId, userId);
 	}
 	
 	@Override

@@ -59,7 +59,6 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 import ru.mystamps.web.model.AddImageForm;
 import ru.mystamps.web.model.AddSeriesForm;
 import ru.mystamps.web.service.CategoryService;
@@ -288,7 +287,7 @@ public class SeriesController {
 	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
 		throws IOException {
@@ -304,11 +303,13 @@ public class SeriesController {
 			return null;
 		}
 		
-		UrlEntityDto collection = collectionService.removeFromCollection(currentUserId, seriesId);
+		Integer userId = currentUserDetails.getUserId();
+		collectionService.removeFromCollection(userId, seriesId);
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collection.getSlug());
+		String collectionSlug = currentUserDetails.getUserCollectionSlug();
+		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
 	@PostMapping(Url.SEARCH_SERIES_BY_CATALOG)

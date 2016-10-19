@@ -21,12 +21,11 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.UrlEntityDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
 	void addToCollection(Integer userId, Integer seriesId);
-	UrlEntityDto removeFromCollection(Integer userId, Integer seriesId);
+	void removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
