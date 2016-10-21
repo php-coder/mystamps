@@ -274,7 +274,7 @@
 						<div class="col-sm-4">
 							<div class="row" th:if="${not #lists.isEmpty(purchasesAndSales)}" togglz:active="PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
 								<div class="col-sm-12">
-									<h5 th:text="#{t_who_selling_series}">Who was selling/buying this series:</h5>
+									<h5 th:text="|#{t_who_selling_series}:|">Who was selling/buying this series:</h5>
 									<ul th:remove="all-but-first">
 										<li th:each="transaction : ${purchasesAndSales}"
 											th:with="firstPrice=${#numbers.formatDecimal(transaction.firstPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.firstCurrency},
