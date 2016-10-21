@@ -69,6 +69,7 @@ import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
@@ -374,7 +375,9 @@ public class SeriesController {
 		model.put("isSeriesInCollection", isSeriesInCollection);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
 		
-		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+		if (Features.SHOW_PURCHASES_AND_SALES.isActive()
+			&& SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+			
 			List<PurchaseAndSaleDto> purchasesAndSales =
 				seriesService.findPurchasesAndSales(series.getId());
 			model.put("purchasesAndSales", purchasesAndSales);
