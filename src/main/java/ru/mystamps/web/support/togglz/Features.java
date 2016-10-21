@@ -70,7 +70,7 @@ public enum Features implements Feature {
 	
 	@Label("Show series purchases and sales on series info page")
 	@EnabledByDefault
-	PURCHASES_AND_SALES;
+	SHOW_PURCHASES_AND_SALES;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
