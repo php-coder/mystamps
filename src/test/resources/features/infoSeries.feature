@@ -1,6 +1,6 @@
 Feature: User opens series info page, he should see a button for adding series to collection.
 
-  @in1
+  @in12
 Scenario:
 Given user opens series info page
 Then user should see a button for adding series to collection
