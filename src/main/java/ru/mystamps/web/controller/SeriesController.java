@@ -384,11 +384,11 @@ public class SeriesController {
 			model.put("purchasesAndSales", purchasesAndSales);
 		}
 		
-		if (Features.ADD_PURCHASES_AND_SALES.isActive()
+/*		if (Features.ADD_PURCHASES_AND_SALES.isActive()
 			&& SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES)) {
 			
 			model.put("addSeriesSalesForm", new AddSeriesSalesForm());
-		}
+		}*/
 		
 		return model;
 	}
