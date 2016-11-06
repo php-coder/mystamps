@@ -12,33 +12,24 @@
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>1.2.5</version>
+			<version>${cucumber-java.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.5</version>
+			<version>${cucumber-junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/findbugs-maven-plugin -->
-		<dependency>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>findbugs-maven-plugin</artifactId>
-			<version>3.0.4</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>com.github.heneke.thymeleaf</groupId>
@@ -390,6 +381,9 @@
 	
 	<properties>
 		<!-- Don't forget to update version in the Url class -->
+		
+		<cucumber-java.version>1.2.5</cucumber-java.version>
+		<cucumber-junit.version>1.2.5</cucumber-junit.version>
 		<bootstrap.version>3.3.6</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
