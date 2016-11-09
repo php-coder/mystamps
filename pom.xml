@@ -283,13 +283,6 @@
 			<artifactId>htmlunit-driver</artifactId>
 			<version>${htmlunit.version}</version>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<!-- Because we use jcl-over-slf4j instead -->
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<dependency>
