@@ -412,7 +412,7 @@
 		<license.plugin.version>1.9.0</license.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<liquibase.version>3.5.1</liquibase.version>
+		<liquibase.version>3.5.3</liquibase.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<lombok.version>1.16.10</lombok.version>
