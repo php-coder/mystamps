@@ -114,7 +114,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@BeforeClass
 	public void login() {
-		page.login(validAdminLogin, validAdminPassword);
+		page.login(validAdminPassword, validAdminLogin);
 	}
 	
 	@BeforeMethod
