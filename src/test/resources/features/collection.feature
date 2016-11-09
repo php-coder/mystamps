@@ -2,8 +2,7 @@ Feature: User opens series info page, he should see a button for adding series t
 
   @in12
 Scenario:
-Given user opens series info page
-Then user should see a button for adding series to collection
-When user clicks on the button for adding series to collection
-Then user should be redirected to collection page
-And  series on info page should be listed.
+    Given as a user
+    When I add series to my collection
+    Then I am on the page with my collection
+    And I see that this series have been added to the collection
