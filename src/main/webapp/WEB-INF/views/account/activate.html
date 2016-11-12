@@ -116,7 +116,9 @@
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="login" class="form-control" required="required" th:field="*{login}" />
+									<!--/*/
 									<span id="login.errors" class="help-block" th:if="${#fields.hasErrors('login')}" th:each="error : ${#fields.errors('login')}" th:text="${error}"></span>
+									/*/-->
 								</div>
 							</div>
 							
@@ -126,7 +128,9 @@
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="name" class="form-control" th:field="*{name}" />
+									<!--/*/
 									<span id="name.errors" class="help-block" th:if="${#fields.hasErrors('name')}" th:each="error : ${#fields.errors('name')}" th:text="${error}"></span>
+									/*/-->
 								</div>
 							</div>
 							
@@ -137,7 +141,9 @@
 								</label>
 								<div class="col-sm-5">
 									<input type="password" id="password" class="form-control" required="required" th:field="*{password}" />
+									<!--/*/
 									<span id="password.errors" class="help-block" th:if="${#fields.hasErrors('password')}" th:each="error : ${#fields.errors('password')}" th:text="${error}"></span>
+									/*/-->
 								</div>
 							</div>
 							
@@ -148,7 +154,9 @@
 								</label>
 								<div class="col-sm-5">
 									<input type="password" id="passwordConfirmation" class="form-control" required="required" th:field="*{passwordConfirmation}" />
+									<!--/*/
 									<span id="passwordConfirmation.errors" class="help-block" th:if="${#fields.hasErrors('passwordConfirmation')}" th:each="error : ${#fields.errors('passwordConfirmation')}" th:text="${error}"></span>
+									/*/-->
 								</div>
 							</div>
 							
@@ -159,7 +167,9 @@
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="activationKey" class="form-control" required="required" th:field="*{activationKey}" />
+									<!--/*/
 									<span id="activationKey.errors" class="help-block" th:if="${#fields.hasErrors('activationKey')}" th:each="error : ${#fields.errors('activationKey')}" th:text="${error}"></span>
+									/*/-->
 								</div>
 							</div>
 							
