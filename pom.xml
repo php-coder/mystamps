@@ -455,7 +455,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf-extras-springsecurity4.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
-		<thymeleaf.togglz.version>2.0.0-SNAPSHOT</thymeleaf.togglz.version>
+		<thymeleaf.togglz.version>2.0.0.RELEASE</thymeleaf.togglz.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
@@ -934,20 +934,5 @@
 	<prerequisites>
 		<maven>3.2.1</maven>
 	</prerequisites>
-	
-	<repositories>
-		<repository>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-			<id>oss-sonatype</id>
-			<name>oss-sonatype</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
 	
 </project>
