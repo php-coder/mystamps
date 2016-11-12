@@ -143,7 +143,9 @@
 										You can also <a href="../category/add.html">add a new category</a>
 									</span>
 								</small>
+								<!--/*/
 								<span id="category.errors" class="help-block" th:if="${#fields.hasErrors('category')}" th:each="error : ${#fields.errors('category')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 		
@@ -174,7 +176,9 @@
 										You can also <a href="../country/add.html">add a new country</a>
 									</span>
 								</small>
+								<!--/*/
 								<span id="country.errors" class="help-block" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -195,7 +199,9 @@
 										min="1"
 										max="50"
 										th:field="*{quantity}" />
+								<!--/*/
 								<span id="quantity.errors" class="help-block" th:if="${#fields.hasErrors('quantity')}" th:each="error : ${#fields.errors('quantity')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -207,7 +213,9 @@
 							</label>
 							<div class="col-sm-1">
 								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
+								<!--/*/
 								<span id="perforated.errors" class="help-block" th:if="${#fields.hasErrors('perforated')}" th:each="error : ${#fields.errors('perforated')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -225,15 +233,15 @@
 										You will be able to add additional images on the series page
 									</span>
 								</small>
+								<!--/*/
 								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
-									Specify date of release
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">Specify date of release</a>
 							</div>
 						</div>
 						
@@ -315,17 +323,17 @@
 										</select>
 									</div>
 								</div>
+								<!--/*/
 								<span id="day.errors" class="help-block" th:if="${#fields.hasErrors('day')}" th:each="error : ${#fields.errors('day')}" th:text="${error}"></span>
 								<span id="year.errors" class="help-block" th:if="${#fields.hasErrors('year')}" th:each="error : ${#fields.errors('year')}" th:text="${error}"></span>
 								<span id="month.errors" class="help-block" th:if="${#fields.hasErrors('month')}" th:each="error : ${#fields.errors('month')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-7">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">
-									Add information from stamps catalogues
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">Add information from stamps catalogues</a>
 							</div>
 						</div>
 						
@@ -347,8 +355,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="michelNumbers.errors" class="help-block" th:if="${#fields.hasErrors('michelNumbers')}" th:each="error : ${#fields.errors('michelNumbers')}" th:text="${error}"></span>
 								<span id="michelPrice.errors" class="help-block" th:if="${#fields.hasErrors('michelPrice')}" th:each="error : ${#fields.errors('michelPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -370,8 +380,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="scottNumbers.errors" class="help-block" th:if="${#fields.hasErrors('scottNumbers')}" th:each="error : ${#fields.errors('scottNumbers')}" th:text="${error}"></span>
 								<span id="scottPrice.errors" class="help-block" th:if="${#fields.hasErrors('scottPrice')}" th:each="error : ${#fields.errors('scottPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -393,8 +405,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="yvertNumbers.errors" class="help-block" th:if="${#fields.hasErrors('yvertNumbers')}" th:each="error : ${#fields.errors('yvertNumbers')}" th:text="${error}"></span>
 								<span id="yvertPrice.errors" class="help-block" th:if="${#fields.hasErrors('yvertPrice')}" th:each="error : ${#fields.errors('yvertPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -416,16 +430,16 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
 								<span id="gibbonsPrice.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
-									Add comment
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">Add comment</a>
 							</div>
 						</div>
 						
@@ -437,7 +451,9 @@
 							</label>
 							<div class="col-sm-5">
 								<textarea id="comment" class="form-control" cols="22" rows="3" th:field="*{comment}"></textarea>
+								<!--/*/
 								<span id="comment.errors" class="help-block" th:if="${#fields.hasErrors('comment')}" th:each="error : ${#fields.errors('comment')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
