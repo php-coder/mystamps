@@ -10,6 +10,15 @@
 	</Match>
 	<Match>
 		<!--
+			Our DTO classes expose it's internal representation.
+			Most of the time because they're using Date class and
+			storing data in byte[].
+		-->
+		<Class name="~.*\.model\..*" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<!--
 			It's ok, that we're don't override parent's equals() method.
 		-->
 		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />

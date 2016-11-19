@@ -81,6 +81,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						StringAuthority.UPDATE_COLLECTION,
 						StringAuthority.ADD_IMAGES_TO_SERIES
 					)
+				.regexMatchers(HttpMethod.POST, Url.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
+					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()

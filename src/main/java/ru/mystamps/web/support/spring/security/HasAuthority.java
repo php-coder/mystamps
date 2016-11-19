@@ -19,6 +19,7 @@ package ru.mystamps.web.support.spring.security;
 
 @SuppressWarnings({ "checkstyle:linelength", "PMD.AvoidDuplicateLiterals" })
 public final class HasAuthority {
+	public static final String ADD_SERIES_SALES = "hasAuthority('" + StringAuthority.ADD_SERIES_SALES + "')";
 	public static final String CREATE_SERIES = "hasAuthority('" + StringAuthority.CREATE_SERIES + "')";
 	public static final String CREATE_CATEGORY = "hasAuthority('" + StringAuthority.CREATE_CATEGORY + "')";
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";

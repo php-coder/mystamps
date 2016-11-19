@@ -24,6 +24,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 public final class Authority {
 	public static final GrantedAuthority ADD_COMMENTS_TO_SERIES = new SimpleGrantedAuthority(StringAuthority.ADD_COMMENTS_TO_SERIES);
 	public static final GrantedAuthority ADD_IMAGES_TO_SERIES   = new SimpleGrantedAuthority(StringAuthority.ADD_IMAGES_TO_SERIES);
+	public static final GrantedAuthority ADD_SERIES_SALES       = new SimpleGrantedAuthority(StringAuthority.ADD_SERIES_SALES);
 	public static final GrantedAuthority MANAGE_TOGGLZ          = new SimpleGrantedAuthority(StringAuthority.MANAGE_TOGGLZ);
 	public static final GrantedAuthority CREATE_CATEGORY        = new SimpleGrantedAuthority(StringAuthority.CREATE_CATEGORY);
 	public static final GrantedAuthority CREATE_COUNTRY         = new SimpleGrantedAuthority(StringAuthority.CREATE_COUNTRY);
