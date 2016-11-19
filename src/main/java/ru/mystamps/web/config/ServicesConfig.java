@@ -115,6 +115,11 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public SeriesSalesService getSeriesSalesService() {
+		return new SeriesSalesServiceImpl(daoConfig.getSeriesSalesDao());
+	}
+	
+	@Bean
 	public SiteService getSiteService() {
 		return new SiteServiceImpl(daoConfig.getSuspiciousActivityDao());
 	}
@@ -147,6 +152,11 @@ public class ServicesConfig {
 	@Bean
 	public StampsCatalogService getGibbonsCatalogService() {
 		return new StampsCatalogServiceImpl("Gibbons", daoConfig.getGibbonsCatalogDao());
+	}
+	
+	@Bean
+	public TransactionParticipantService getTransactionParticipantService() {
+		return new TransactionParticipantServiceImpl(daoConfig.getTransactionParticipantDao());
 	}
 	
 }

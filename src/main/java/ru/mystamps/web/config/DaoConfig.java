@@ -98,6 +98,11 @@ public class DaoConfig {
 	}
 	
 	@Bean
+	public SeriesSalesDao getSeriesSalesDao() {
+		return new JdbcSeriesSalesDao(jdbcTemplate);
+	}
+	
+	@Bean
 	public UserDao getUserDao() {
 		return new JdbcUserDao(jdbcTemplate);
 	}
@@ -110,6 +115,11 @@ public class DaoConfig {
 	@Bean
 	public SuspiciousActivityDao getSuspiciousActivityDao() {
 		return new JdbcSuspiciousActivityDao(jdbcTemplate);
+	}
+	
+	@Bean
+	public TransactionParticipantDao getTransactionParticipantDao() {
+		return new JdbcTransactionParticipantDao(jdbcTemplate);
 	}
 	
 	@Bean

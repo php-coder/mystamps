@@ -89,7 +89,9 @@ public class ControllersConfig {
 			servicesConfig.getCategoryService(),
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
-			servicesConfig.getSeriesService()
+			servicesConfig.getSeriesService(),
+			servicesConfig.getSeriesSalesService(),
+			servicesConfig.getTransactionParticipantService()
 		);
 	}
 	
