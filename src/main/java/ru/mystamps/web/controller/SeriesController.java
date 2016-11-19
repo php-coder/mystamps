@@ -215,9 +215,7 @@ public class SeriesController {
 		model.addAllAttributes(commonAttrs);
 		
 		addSeriesSalesFormToModel(model);
-		
-		AddImageForm form = new AddImageForm();
-		model.addAttribute("addImageForm", form);
+		addImageFormToModel(model);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
@@ -350,14 +348,12 @@ public class SeriesController {
 		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
-		AddImageForm addImageForm = new AddImageForm();
-		model.addAttribute("addImageForm", addImageForm);
-		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
+			addImageFormToModel(model);
 			
 			return "series/info";
 		}
@@ -457,6 +453,11 @@ public class SeriesController {
 		
 		List<EntityWithIdDto> buyers = transactionParticipantService.findAllBuyers();
 		model.addAttribute("buyers", buyers);
+	}
+	
+	private static void addImageFormToModel(Model model) {
+		AddImageForm form = new AddImageForm();
+		model.addAttribute("addImageForm", form);
 	}
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {
