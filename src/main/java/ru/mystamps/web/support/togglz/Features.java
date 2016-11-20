@@ -24,57 +24,57 @@ import org.togglz.core.context.FeatureContext;
 
 public enum Features implements Feature {
 	
-	@Label("Send mail with activation key to user")
-	@EnabledByDefault
-	SEND_ACTIVATION_MAIL,
-	
-	@Label("Show list of recently added series on index page")
+	@Label("/site/index: show list of recently added series")
 	@EnabledByDefault
 	SHOW_RECENT_SERIES_ON_INDEX_PAGE,
 	
-	@Label("Show list of recently created collections on index page")
+	@Label("/site/index: show list of recently created collections")
 	@EnabledByDefault
 	SHOW_RECENT_COLLECTIONS_ON_INDEX_PAGE,
 
-	@Label("Show search panel on index page")
+	@Label("/site/index: show search panel")
 	@EnabledByDefault
 	SHOW_SEARCH_PANEL_ON_INDEX_PAGE,
 	
-	@Label("View site events")
-	@EnabledByDefault
-	VIEW_SITE_EVENTS,
-	
-	@Label("Show statistics of collection on collection page")
-	@EnabledByDefault
-	SHOW_COLLECTION_STATISTICS,
-	
-	@Label("Show charts on collection page")
-	@EnabledByDefault
-	SHOW_COLLECTION_CHARTS,
-	
-	@Label("Possibility to user to add series to collection")
-	@EnabledByDefault
-	ADD_SERIES_TO_COLLECTION,
-	
-	@Label("Possibility of user to add additional images to series")
-	@EnabledByDefault
-	ADD_ADDITIONAL_IMAGES_TO_SERIES,
-	
-	@Label("Show link to list of categories on index page")
+	@Label("/site/index: show link to list of categories")
 	@EnabledByDefault
 	LIST_CATEGORIES,
 	
-	@Label("Show link to list of countries on index page")
+	@Label("/site/index: show link to list of countries")
 	@EnabledByDefault
 	LIST_COUNTRIES,
 	
-	@Label("Show series purchases and sales on series info page")
+	@Label("/series/{id}: possibility to user to add series to collection")
+	@EnabledByDefault
+	ADD_SERIES_TO_COLLECTION,
+	
+	@Label("/series/{id}: possibility of user to add additional images to series")
+	@EnabledByDefault
+	ADD_ADDITIONAL_IMAGES_TO_SERIES,
+	
+	@Label("/series/{id}: show series purchases and sales")
 	@EnabledByDefault
 	SHOW_PURCHASES_AND_SALES,
 	
 	@Label("/series/{id}: possibility of user to add series purchases and sales")
 	@EnabledByDefault
-	ADD_PURCHASES_AND_SALES;
+	ADD_PURCHASES_AND_SALES,
+	
+	@Label("/collection/{slug}: show statistics of collection")
+	@EnabledByDefault
+	SHOW_COLLECTION_STATISTICS,
+	
+	@Label("/collection/{slug}: show charts on collection page")
+	@EnabledByDefault
+	SHOW_COLLECTION_CHARTS,
+	
+	@Label("Send mail with activation key to user")
+	@EnabledByDefault
+	SEND_ACTIVATION_MAIL,
+	
+	@Label("View site events")
+	@EnabledByDefault
+	VIEW_SITE_EVENTS;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
