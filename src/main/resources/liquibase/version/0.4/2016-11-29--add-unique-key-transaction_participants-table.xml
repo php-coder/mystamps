@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="add-unique-key-transaction_participants-table" author="john" context="scheme">
+
+		<addUniqueConstraint
+			tableName="transaction_participants"
+			columnNames="name, url"
+			constraintName="uc_transaction_participants_name_url"/>
+	</changeSet>
+
+</databaseChangeLog>
