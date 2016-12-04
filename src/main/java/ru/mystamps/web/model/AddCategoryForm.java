@@ -86,7 +86,6 @@ public class AddCategoryForm implements AddCategoryDto {
 	@UniqueCategorySlug(groups = Group.Level7.class)
 	private String name;
 	
-	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = CATEGORY_NAME_MIN_LENGTH,

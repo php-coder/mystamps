@@ -62,6 +62,13 @@ public class CronServiceImpl implements CronService {
 		report.setEndDate(today);
 		report.setAddedCategoriesCounter(categoryService.countAddedSince(yesterday));
 		report.setAddedCountriesCounter(countryService.countAddedSince(yesterday));
+		
+		long untranslatedCategories = categoryService.countUntranslatedNamesSince(yesterday);
+		report.setUntranslatedCategoriesCounter(untranslatedCategories);
+		
+		long untranslatedCountries = countryService.countUntranslatedNamesSince(yesterday);
+		report.setUntranslatedCountriesCounter(untranslatedCountries);
+		
 		report.setAddedSeriesCounter(seriesService.countAddedSince(yesterday));
 		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));

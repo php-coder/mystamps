@@ -63,15 +63,6 @@ class CountryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception when country name in Russian is null"() {
-		given:
-			form.setNameRu(null)
-		when:
-			service.add(form, USER_ID)
-		then:
-			thrown IllegalArgumentException
-	}
-	
 	def "add() should throw exception when user is null"() {
 		when:
 			service.add(form, null)
@@ -414,6 +405,34 @@ class CountryServiceImplTest extends Specification {
 			long result = service.countAddedSince(expectedDate)
 		then:
 			1 * countryDao.countAddedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for countUntranslatedNamesSince()
+	//
+	
+	def "countUntranslatedNamesSince() should throw exception when date is null"() {
+		when:
+			service.countUntranslatedNamesSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 18
+		when:
+			long result = service.countUntranslatedNamesSince(expectedDate)
+		then:
+			1 * countryDao.countUntranslatedNamesSince({ Date date ->
 				assert date == expectedDate
 				return true
 			}) >> expectedResult

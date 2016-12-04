@@ -121,10 +121,9 @@
 								<span class="field-label" th:text="#{t_name_on_russian}">
 									Name (in Russian)
 								</span>
-								<span id="nameRu.required" class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
-								<input id="nameRu" type="text" class="form-control" required="required" th:field="*{nameRu}" />
+								<input id="nameRu" type="text" class="form-control" th:field="*{nameRu}" />
 								<!--/*/
 								<span id="nameRu.errors" class="help-block" th:if="${#fields.hasErrors('nameRu')}" th:each="error : ${#fields.errors('nameRu')}" th:text="${error}"></span>
 								/*/-->

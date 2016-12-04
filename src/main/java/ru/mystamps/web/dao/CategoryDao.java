@@ -31,6 +31,7 @@ public interface CategoryDao {
 	long countByNameRu(String name);
 	long countCategoriesOfCollection(Integer collectionId);
 	long countAddedSince(Date date);
+	long countUntranslatedNamesSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);

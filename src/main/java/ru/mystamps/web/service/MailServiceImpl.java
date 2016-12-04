@@ -188,7 +188,9 @@ public class MailServiceImpl implements MailService {
 		ctx.put("to_date", tillDate);
 		
 		put(ctx, "added_countries_cnt", report.getAddedCountriesCounter());
+		put(ctx, "untranslated_countries_cnt", report.getUntranslatedCountriesCounter());
 		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
+		put(ctx, "untranslated_categories_cnt", report.getUntranslatedCategoriesCounter());
 		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
 		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
 		put(ctx, "updated_collections_cnt", -1L); // TODO: #357

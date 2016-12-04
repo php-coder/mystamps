@@ -33,5 +33,6 @@ public interface CategoryService {
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countAddedSince(Date date);
+	long countUntranslatedNamesSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 }

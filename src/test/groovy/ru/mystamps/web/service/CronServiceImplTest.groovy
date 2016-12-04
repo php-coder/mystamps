@@ -81,7 +81,15 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
+			1 * categoryService.countUntranslatedNamesSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
 			1 * countryService.countAddedSince( { Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
+			1 * countryService.countUntranslatedNamesSince( { Date date ->
 				assertMidnightOfYesterday(date)
 				return true
 			})
@@ -123,7 +131,9 @@ class CronServiceImplTest extends Specification {
 	def "sendDailyStatistics() should prepare report and pass it to mail service"() {
 		given:
 			categoryService.countAddedSince(_ as Date) >> 1
+			categoryService.countUntranslatedNamesSince(_ as Date) >> 11
 			countryService.countAddedSince(_ as Date) >> 2
+			countryService.countUntranslatedNamesSince(_ as Date) >> 12
 			seriesService.countAddedSince(_ as Date) >> 3
 			seriesService.countUpdatedSince(_ as Date) >> 4
 			usersActivationService.countCreatedSince(_ as Date) >> 5
@@ -142,7 +152,9 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(report.startDate)
 				assertMidnightOfToday(report.endDate)
 				assert report.addedCategoriesCounter == 1
+				assert report.untranslatedCategoriesCounter == 11
 				assert report.addedCountriesCounter == 2
+				assert report.untranslatedCountriesCounter == 12
 				assert report.addedSeriesCounter == 3
 				assert report.updatedSeriesCounter == 4
 				assert report.registrationRequestsCounter == 5

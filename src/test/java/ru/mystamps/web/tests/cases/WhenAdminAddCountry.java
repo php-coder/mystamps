@@ -251,7 +251,17 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation() {
+	public void shouldCreateCountryWithNameInEnglishOnly() {
+		page.addCountry("Germany", null);
+		
+		String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{slug}", "germany");
+		
+		assertThat(page.getCurrentUrl()).matches(expectedUrl);
+		assertThat(page.getHeader()).isEqualTo("Stamps of Germany");
+	}
+	
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
+	public void shouldCreateCountryWithNameInTwoLanguages() {
 		page.addCountry(TEST_COUNTRY_NAME_EN, TEST_COUNTRY_NAME_RU);
 		
 		String expectedUrl = Url.INFO_COUNTRY_PAGE
@@ -261,10 +271,7 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		assertThat(page.getHeader()).isEqualTo("Stamps of " + TEST_COUNTRY_NAME_EN);
 	}
 	
-	@Test(
-		groups = "logic",
-		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCountryAfterCreation"
-	)
+	@Test(groups = "logic", dependsOnMethods = "shouldCreateCountryWithNameInTwoLanguages")
 	public void countryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(Url.ADD_SERIES_PAGE);
 		

@@ -65,6 +65,9 @@ public class JdbcCategoryDao implements CategoryDao {
 	@Value("${category.count_categories_added_since}")
 	private String countCategoriesAddedSinceSql;
 	
+	@Value("${category.count_untranslated_names_since}")
+	private String countUntranslatedNamesSinceSql;
+	
 	@Value("${category.count_stamps_by_categories}")
 	private String countStampsByCategoriesSql;
 	
@@ -151,6 +154,15 @@ public class JdbcCategoryDao implements CategoryDao {
 	public long countAddedSince(Date date) {
 		return jdbcTemplate.queryForObject(
 			countCategoriesAddedSinceSql,
+			Collections.singletonMap("date", date),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countUntranslatedNamesSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countUntranslatedNamesSinceSql,
 			Collections.singletonMap("date", date),
 			Long.class
 		);
