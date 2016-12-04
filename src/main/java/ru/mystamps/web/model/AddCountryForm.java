@@ -116,7 +116,7 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.RU, groups = Group.Level5.class)
+	@UniqueCountryName(lang = Lang.RU, groups = Group.Level6.class)
 	private String nameRu;
 	
 }
