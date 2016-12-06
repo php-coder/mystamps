@@ -166,7 +166,7 @@ public class MailServiceImpl implements MailService {
 		return messageSource.getMessage("activation.subject", null, activation.getLocale());
 	}
 	
-	public String getSubjectOfDailyStatisticsMail(AdminDailyReport report) {
+	private String getSubjectOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.subject", null, adminLang);
 		
 		String fromDate = shortDatePrinter.format(report.getStartDate());
@@ -178,7 +178,7 @@ public class MailServiceImpl implements MailService {
 		return substitutor.replace(template);
 	}
 
-	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
+	private String getTextOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
 		String fromDate = shortDatePrinter.format(report.getStartDate());
 		String tillDate = shortDatePrinter.format(report.getEndDate());
