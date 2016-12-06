@@ -47,4 +47,16 @@ public class AdminDailyReport {
 		return eventsCounter;
 	}
 	
+	public long countTotalChanges() {
+		long totalChanges = 0L;
+		totalChanges = Math.addExact(totalChanges, addedCategoriesCounter);
+		totalChanges = Math.addExact(totalChanges, addedCountriesCounter);
+		totalChanges = Math.addExact(totalChanges, addedSeriesCounter);
+		totalChanges = Math.addExact(totalChanges, updatedSeriesCounter);
+		totalChanges = Math.addExact(totalChanges, registrationRequestsCounter);
+		totalChanges = Math.addExact(totalChanges, registeredUsersCounter);
+		totalChanges = Math.addExact(totalChanges, countEvents());
+		return totalChanges;
+	}
+	
 }
