@@ -172,26 +172,12 @@ public class MailServiceImpl implements MailService {
 		String fromDate = shortDatePrinter.format(report.getStartDate());
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("date", fromDate);
-		ctx.put("total_changes", calculateTotalChanges(report));
+		put(ctx, "total_changes", report.countTotalChanges());
 		
 		StrSubstitutor substitutor = new StrSubstitutor(ctx);
 		return substitutor.replace(template);
 	}
 
-	private String calculateTotalChanges(AdminDailyReport report) {
-		long totalChanges = report.getAddedCategoriesCounter();
-		totalChanges += report.getAddedCountriesCounter();
-		totalChanges += report.getAddedSeriesCounter();
-		totalChanges += report.getFailedAuthCounter();
-		totalChanges += report.getInvalidCsrfCounter();
-		totalChanges += report.getMissingCsrfCounter();
-		totalChanges += report.getNotFoundCounter();
-		totalChanges += report.getRegisteredUsersCounter();
-		totalChanges += report.getRegistrationRequestsCounter();
-		totalChanges += report.getUpdatedSeriesCounter();
-		return totalChanges == 0 ? "no" : String.valueOf(totalChanges);
-	}
-	
 	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
 		String fromDate = shortDatePrinter.format(report.getStartDate());
