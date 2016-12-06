@@ -191,7 +191,7 @@ public class MailServiceImpl implements MailService {
 		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
 		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
 		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
-		put(ctx, "updated_collections_cnt", "-1"); // TODO: #357
+		put(ctx, "updated_collections_cnt", -1L); // TODO: #357
 		put(ctx, "registration_requests_cnt", report.getRegistrationRequestsCounter());
 		put(ctx, "registered_users_cnt", report.getRegisteredUsersCounter());
 		put(ctx, "events_cnt", report.countEvents());
@@ -199,13 +199,9 @@ public class MailServiceImpl implements MailService {
 		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
 		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
 		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
-		put(ctx, "bad_request_cnt", "-1");  // TODO: #122
+		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
 		
 		return new StrSubstitutor(ctx).replace(template);
-	}
-	
-	private static void put(Map<String, String> ctx, String key, String value) {
-		ctx.put(key, value);
 	}
 	
 	private static void put(Map<String, String> ctx, String key, long value) {
