@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -171,12 +170,14 @@ public class MailServiceImpl implements MailService {
 		String template = messageSource.getMessage("daily_stat.subject", null, adminLang);
 		
 		String fromDate = shortDatePrinter.format(report.getStartDate());
-		Map<String, String> ctx = Collections.singletonMap("date", fromDate);
+		Map<String, String> ctx = new HashMap<>();
+		ctx.put("date", fromDate);
+		put(ctx, "total_changes", report.countTotalChanges());
 		
 		StrSubstitutor substitutor = new StrSubstitutor(ctx);
 		return substitutor.replace(template);
 	}
-	
+
 	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
 		String fromDate = shortDatePrinter.format(report.getStartDate());
