@@ -61,6 +61,8 @@ public class CountryController {
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {
+		// We can't use StringTrimmerEditor here because "only one single registered custom
+		// editor per property path is supported".
 		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);
