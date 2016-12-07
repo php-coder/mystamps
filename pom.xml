@@ -540,6 +540,9 @@
 						<include>**/*.java</include>
 						<include>**/*.groovy</include>
 					</includes>
+					<excludes>
+						<exclude>**/package-info.java</exclude>
+					</excludes>
 					<mapping>
 						<java>SLASHSTAR_STYLE</java>
 					</mapping>
