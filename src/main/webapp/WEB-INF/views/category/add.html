@@ -136,6 +136,39 @@
 							</div>
 						</div>
 						
+						<div class="form-group" th:classappend="${#fields.hasErrors('parent') ? 'has-error' : ''}">
+							<label for="parent" class="control-label col-sm-4">
+								<span class="field-label" th:text="#{t_parent_category}">
+									Parent category
+								</span>
+							</label>
+							<div class="col-sm-5">
+								<select id="parent" name="parent" class="form-control">
+									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+									<!--/*/
+										<option th:each="category : ${categories}"
+											th:value="${category.slug}"
+											th:text="${category.name}"
+											th:selected="${addCategoryForm.parent != null and addCategoryForm.parent.slug == category.slug}">
+										</option>
+									/*/-->
+									<!--/*-->
+									<option value="art">Art</option>
+									<option value="fauna">Fauna</option>
+									<option value="sport">Sport</option>
+									<!--*/-->
+								</select>
+								<small>
+									<span class="hint-block" th:text="#{t_parent_category_hint}">
+										Leave field empty if you want to create top-level category
+									</span>
+								</small>
+								<!--/*/
+								<span id="parent.errors" class="help-block" th:if="${#fields.hasErrors('parent')}" th:each="error : ${#fields.errors('parent')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-5">
 								<input type="submit" class="btn btn-primary" value="Add" th:value="#{t_add}" />

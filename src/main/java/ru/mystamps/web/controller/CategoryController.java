@@ -43,6 +43,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.model.AddCategoryForm;
@@ -69,8 +70,13 @@ public class CategoryController {
 	}
 	
 	@GetMapping(Url.ADD_CATEGORY_PAGE)
-	public AddCategoryForm showForm() {
-		return new AddCategoryForm();
+	public void showForm(Model model, Locale userLocale) {
+		AddCategoryForm form = new AddCategoryForm();
+		model.addAttribute("addCategoryForm", form);
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		List<CategoryDto> categories = categoryService.findTopLevelCategories(lang);
+		model.addAttribute("categories", categories);
 	}
 	
 	@PostMapping(Url.ADD_CATEGORY_PAGE)
@@ -78,7 +84,13 @@ public class CategoryController {
 		@Valid AddCategoryForm form,
 		BindingResult result,
 		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		Model model,
 		RedirectAttributes redirectAttributes) {
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		List<CategoryDto> categories = categoryService.findTopLevelCategories(lang);
+		model.addAttribute("categories", categories);
 		
 		if (result.hasErrors()) {
 			return null;

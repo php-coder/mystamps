@@ -17,7 +17,10 @@
  */
 package ru.mystamps.web.service.dto;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+
 public interface AddCategoryDto {
 	String getName();
 	String getNameRu();
+	LinkEntityDto getParent();
 }

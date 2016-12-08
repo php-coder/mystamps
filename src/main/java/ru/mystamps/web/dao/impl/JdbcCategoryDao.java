@@ -90,6 +90,7 @@ public class JdbcCategoryDao implements CategoryDao {
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", category.getName());
 		params.put("name_ru", category.getNameRu());
+		params.put("parent", category.getParent());
 		params.put("slug", category.getSlug());
 		params.put("created_at", category.getCreatedAt());
 		params.put("created_by", category.getCreatedBy());

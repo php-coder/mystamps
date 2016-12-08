@@ -26,6 +26,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.controller.converter.annotation.Category;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName;
 import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
@@ -117,5 +119,8 @@ public class AddCategoryForm implements AddCategoryDto {
 	})
 	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level6.class)
 	private String nameRu;
+	
+	@Category
+	private LinkEntityDto parent;
 	
 }

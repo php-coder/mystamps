@@ -67,6 +67,10 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setName(dto.getName());
 		category.setNameRu(dto.getNameRu());
 		
+		if (dto.getParent() != null) {
+			category.setParent(dto.getParent().getSlug());
+		}
+		
 		String slug = SlugUtils.slugify(dto.getName());
 		Validate.isTrue(
 			StringUtils.isNotEmpty(slug),

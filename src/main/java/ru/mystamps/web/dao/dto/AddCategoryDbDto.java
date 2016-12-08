@@ -29,6 +29,7 @@ import lombok.ToString;
 public class AddCategoryDbDto {
 	private String name;
 	private String nameRu;
+	private String parent;
 	private String slug;
 	private Date createdAt;
 	private Integer createdBy;
