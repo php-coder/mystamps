@@ -409,7 +409,7 @@
 		<!-- Don't forget to update version in the Url class -->
 		<jquery.version>1.9.1</jquery.version>
 		
-		<license.plugin.version>1.9.0</license.plugin.version>
+		<license.plugin.version>3.0</license.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<liquibase.version>3.5.3</liquibase.version>
@@ -529,13 +529,12 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>com.mycila.maven-license-plugin</groupId>
-				<artifactId>maven-license-plugin</artifactId>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
 				<version>${license.plugin.version}</version>
 				<configuration>
 					<basedir>src</basedir>
 					<header>src/main/config/license_header.txt</header>
-					<strictCheck>true</strictCheck>
 					<includes>
 						<include>**/*.java</include>
 						<include>**/*.groovy</include>
