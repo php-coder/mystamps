@@ -92,8 +92,8 @@ public final class Url {
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
-	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.6/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.3.6/js/bootstrap.min.js";
+	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.7/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.3.7/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/1.9.1/jquery.min.js";
 	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
@@ -104,8 +104,8 @@ public final class Url {
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
-	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js";
+	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
 	public static final String JQUERY_JS_CDN         = "https://yandex.st/jquery/1.9.1/jquery.min.js";
 	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css";
 	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js";
