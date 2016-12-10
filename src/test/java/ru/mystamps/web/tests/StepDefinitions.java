@@ -3,6 +3,7 @@ package ru.mystamps.web.tests;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -37,6 +38,15 @@ public class StepDefinitions {
 		
 	@Then("^I see that this series have been added to the collection$")
 	public void i_see_that_this_series_have_been_added_to_the_collection() throws Exception {
-		//assert that list contains our series.
+		driver.get("http://127.0.0.1:8080/series/1");
+		Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div/div/div[3]/div/div/form/p[1]")).getText().equals("Series is part of your collection"));
+		if(driver.getPageSource().contains("Series is part of your collection"))
+		{
+			System.out.println("Series is part of your collection");
+		}
+		else
+		{
+			System.out.println("Series isn't part of your collection");
+		}
 	}
 }
