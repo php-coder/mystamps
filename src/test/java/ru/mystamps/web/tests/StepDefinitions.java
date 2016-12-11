@@ -44,14 +44,6 @@ public class StepDefinitions {
 	@Then("^I see that this series have been added to the collection$")
 	public void i_see_that_this_series_have_been_added_to_the_collection() throws Exception {
 		driver.get("http://127.0.0.1:8080/series/1");
-		Assert.assertTrue(driver.findElement(By.xpath(".//*[@class='btn btn-success']//ancestor::form/p[1]")).getText().equals("Series is part of your collection"));
-		if(driver.getPageSource().contains("Series is part of your collection"))
-		{
-			System.out.println("Series is part of your collection");
-		}
-		else
-		{
-			System.out.println("Series isn't part of your collection");
-		}
+		Assert.assertTrue(driver.findElement(By.xpath(".//*[@class='btn btn-danger']//ancestor::form/p[1]")).getText().equals("Series is part of your collection"));
 	}
 }
