@@ -29,6 +29,7 @@ public class StepDefinitions {
 		driver.get("http://127.0.0.1:8080/");
 		driver.findElement(By.linkText("1 item(s)")).click();
 		driver.findElement(By.cssSelector("input.btn.btn-success")).click();
+		
 	}
 
 	@Then("^I am on the page with my collection$")
@@ -39,7 +40,7 @@ public class StepDefinitions {
 	@Then("^I see that this series have been added to the collection$")
 	public void i_see_that_this_series_have_been_added_to_the_collection() throws Exception {
 		driver.get("http://127.0.0.1:8080/series/1");
-		Assert.assertTrue(driver.findElement(By.xpath(".//*[@id='content']/div/div/div[3]/div/div/form/p[1]")).getText().equals("Series is part of your collection"));
+		Assert.assertTrue(driver.findElement(By.xpath(".//*[@class='btn btn-success']//ancestor::form/p[1]")).getText().equals("Series is part of your collection"));
 		if(driver.getPageSource().contains("Series is part of your collection"))
 		{
 			System.out.println("Series is part of your collection");
