@@ -26,7 +26,6 @@ import lombok.Getter;
 import ru.mystamps.web.dao.dto.UserDetails;
 
 @Getter
-@SuppressWarnings("PMD.SingularField")
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
 	
 	private final Integer userId;

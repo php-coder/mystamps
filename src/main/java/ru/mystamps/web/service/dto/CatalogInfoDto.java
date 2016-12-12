@@ -28,7 +28,6 @@ import lombok.Getter;
 import ru.mystamps.web.dao.dto.Currency;
 
 @Getter
-@SuppressWarnings("PMD.SingularField")
 public class CatalogInfoDto {
 	private final List<String> numbers;
 	private final BigDecimal price;
