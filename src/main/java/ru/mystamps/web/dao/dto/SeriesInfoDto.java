@@ -20,7 +20,6 @@ package ru.mystamps.web.dao.dto;
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("PMD.SingularField")
 public class SeriesInfoDto {
 	private final Integer id;
 	private final LinkEntityDto category;

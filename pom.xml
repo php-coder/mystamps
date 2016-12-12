@@ -423,7 +423,10 @@
 		<mysql.version>5.1.40</mysql.version>
 		
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
-		<pmd.plugin.version>3.6</pmd.plugin.version>
+		<!-- TODO: enable InvalidSlf4jMessageFormat rule again when NPE and false positives will be fixed -->
+		<pmd.plugin.version>3.7</pmd.plugin.version>
+		<!-- Dependency can be safely removed when pmd plugin will require this version -->
+		<pmd.version>5.5.2</pmd.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
 		
 		<!-- Don't forget to update version in the Url class -->
@@ -711,6 +714,13 @@
 						<ruleset>${basedir}/src/main/config/pmd.xml</ruleset>
 					</rulesets>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-java</artifactId>
+						<version>${pmd.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>
