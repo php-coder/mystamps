@@ -53,7 +53,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		}
 		
 		if (!storageDir.canWrite()) {
-			LOG.warn(// NOPMD: GuardLogStatement
+			LOG.warn(
 				"Directory '{}' exists but doesn't writable for current user! "
 				+ "Image uploading won't work.",
 				storageDir

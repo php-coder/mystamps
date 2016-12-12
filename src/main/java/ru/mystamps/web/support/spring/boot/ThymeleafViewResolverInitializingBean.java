@@ -55,7 +55,7 @@ public class ThymeleafViewResolverInitializingBean
 		ThymeleafViewResolver viewResolver =
 			applicationContext.getBean(ThymeleafViewResolver.class);
 		if (viewResolver == null) {
-			LOG.warn(// NOPMD: GuardLogStatement
+			LOG.warn(
 				"Cannot adjust ThymeleafViewResolver: "
 				+ "bean of this type wasn't found in application context"
 			);
