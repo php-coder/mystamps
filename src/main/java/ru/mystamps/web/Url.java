@@ -61,18 +61,12 @@ public final class Url {
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
-	// For backward compatibility
-	public static final String INFO_CATEGORY_BY_ID_PAGE = "/category/{id}/{slug}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String LIST_COUNTRIES_PAGE   = "/country/list";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{slug}";
-	// For backward compatibility
-	public static final String INFO_COUNTRY_BY_ID_PAGE = "/country/{id}/{slug}";
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{slug}";
-	// For backward compatibility
-	public static final String INFO_COLLECTION_BY_ID_PAGE  = "/collection/{id}/{slug}";
 	
 	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
@@ -80,6 +74,11 @@ public final class Url {
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
+	
+	// For backward compatibility
+	public static final String INFO_CATEGORY_BY_ID_PAGE      = "/category/{id}/{slug}";
+	public static final String INFO_COUNTRY_BY_ID_PAGE       = "/country/{id}/{slug}";
+	public static final String INFO_COLLECTION_BY_ID_PAGE    = "/collection/{id}/{slug}";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.0";
