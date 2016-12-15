@@ -1,5 +1,6 @@
 language: java
 
+sudo: required
 env:
   matrix:
     - SPRING_PROFILES_ACTIVE=test
@@ -54,3 +55,4 @@ notifications:
 
 # We don't want to run `mvn install -DskipTests=true` for downloading project's dependencies
 install: true
+
