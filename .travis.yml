@@ -1,6 +1,5 @@
 language: java
 
-sudo: required
 env:
   matrix:
     - SPRING_PROFILES_ACTIVE=test
