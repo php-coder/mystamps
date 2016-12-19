@@ -1,7 +1,55 @@
 language: java
 
 sudo: required
-jdk:
- - oraclejdk8
+env:
+  matrix:
+    - SPRING_PROFILES_ACTIVE=test
+    - SPRING_PROFILES_ACTIVE=travis
+
+before_script:
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+      mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
+      if [ "$TRAVIS_BRANCH" = 'prod' ]; then
+        pip install --user ansible==2.1.1.0;
+      fi;
+      npm install -g bootlint;
+      pip install --user html5validator;
+    fi
+
+script:
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+      ./src/main/scripts/ci/check-build-and-verify.sh;
+    else
+      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
+    fi
+
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+      ./src/main/scripts/ci/publish-code-coverage.sh;
+    fi
+
+deploy:
+  provider: script
+  script: ./src/main/scripts/ci/deploy.sh
+  on:
+    branch: prod
+    condition: $SPRING_PROFILES_ACTIVE = 'travis'
+  skip_cleanup: true
+
+jdk:
+  - oraclejdk8
+
+services:
+  - mysql
+
+branches:
+  except:
+  - /^(re|old)_.*$/
+
+notifications:
+  email:
+    on_success: always # default: change
+    on_failure: always # default: always
+
+# We don't want to run `mvn install -DskipTests=true` for downloading project's dependencies
+install: true
