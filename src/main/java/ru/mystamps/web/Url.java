@@ -41,17 +41,16 @@ public final class Url {
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
-	
 	public static final String AUTHENTICATION_PAGE   = "/account/auth";
 	public static final String LOGIN_PAGE            = "/account/login";
 	public static final String LOGOUT_PAGE           = "/account/logout";
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
 	
-	public static final String ADD_SERIES_PAGE               = "/series/add";
-	public static final String ADD_SERIES_ASK_PAGE           = "/series/{id}/ask";
-	public static final String INFO_SERIES_PAGE              = "/series/{id}";
-	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
-	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
+	public static final String ADD_SERIES_PAGE          = "/series/add";
+	public static final String ADD_SERIES_ASK_PAGE      = "/series/{id}/ask";
+	public static final String INFO_SERIES_PAGE         = "/series/{id}";
+	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
+	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
