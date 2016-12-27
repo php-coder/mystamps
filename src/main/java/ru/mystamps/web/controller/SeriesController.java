@@ -363,7 +363,7 @@ public class SeriesController {
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
 	
-	@PostMapping(Url.SEARCH_SERIES_BY_CATALOG)
+	@GetMapping(Url.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
 		@RequestParam("catalogNumber") String catalogNumber,
 		@RequestParam("catalogName") String catalogName,

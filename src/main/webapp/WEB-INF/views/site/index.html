@@ -252,7 +252,7 @@
 							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
 						<div class="panel-body">
-							<form method="post" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
+							<form method="get" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
 								<div class="form-group" th:classappend="${numberIsEmpty != null ? 'has-error' : ''}">
 									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
 									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control"
