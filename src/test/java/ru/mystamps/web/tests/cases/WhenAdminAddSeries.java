@@ -450,7 +450,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Override
 	protected void checkServerResponseCode() {
-		// Ignore this check because server always returns 401 for anonymous user and our test suite
+		// Ignore this check because server always returns 403 for anonymous user and our test suite
 		// lack ability to check response code after authentication.
 	}
 	

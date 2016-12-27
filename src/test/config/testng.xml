@@ -133,12 +133,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user at unauthorized page">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtUnauthorizedPage" />
-		</classes>
-	</test>
-	
 	<test name="When anonymous user at forbidden page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtForbiddenPage" />

@@ -37,6 +37,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
@@ -103,8 +104,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling()
 				.accessDeniedHandler(getAccessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
-				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
-				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
+				// not yet authenticated
+				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
