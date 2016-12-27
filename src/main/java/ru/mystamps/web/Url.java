@@ -46,9 +46,7 @@ public final class Url {
 	public static final String AUTHENTICATION_PAGE   = "/account/auth";
 	public static final String LOGIN_PAGE            = "/account/login";
 	public static final String LOGOUT_PAGE           = "/account/logout";
-	
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
-	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String ADD_SERIES_PAGE               = "/series/add";
@@ -77,9 +75,10 @@ public final class Url {
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
 	// For backward compatibility
-	public static final String INFO_CATEGORY_BY_ID_PAGE      = "/category/{id}/{slug}";
-	public static final String INFO_COUNTRY_BY_ID_PAGE       = "/country/{id}/{slug}";
-	public static final String INFO_COLLECTION_BY_ID_PAGE    = "/collection/{id}/{slug}";
+	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
+	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
+	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
+	public static final String INFO_COLLECTION_BY_ID_PAGE     = "/collection/{id}/{slug}";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.0";

@@ -151,7 +151,7 @@ public class MailServiceImpl implements MailService {
 		String template = messageSource.getMessage("activation.text", null, activation.getLocale());
 		
 		String activationUrl =
-			Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", activation.getActivationKey());
+			String.format("%s?key=%s", Url.ACTIVATE_ACCOUNT_PAGE, activation.getActivationKey());
 		
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL);
