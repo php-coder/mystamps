@@ -70,7 +70,7 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void activationKeyShouldBeAutoFilledFromURL() {
 		String key = "7777744444";
-		String url = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", key);
+		String url = Url.ACTIVATE_ACCOUNT_PAGE + "?key=" + key;
 		
 		page.open(url);
 		assertThat(page).field("activationKey").hasValue(key);

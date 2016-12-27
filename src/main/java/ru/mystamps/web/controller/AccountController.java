@@ -21,9 +21,11 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,7 +33,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import lombok.RequiredArgsConstructor;
 
@@ -89,20 +94,29 @@ public class AccountController {
 	}
 	
 	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE)
-	public ActivateAccountForm showActivationForm() {
-		return new ActivateAccountForm();
+	public ActivateAccountForm showActivationForm(
+		@RequestParam(name = "key", required = false) String activationKey) {
+		
+		ActivateAccountForm form = new ActivateAccountForm();
+		if (StringUtils.isNotEmpty(activationKey)) {
+			form.setActivationKey(activationKey);
+		}
+		
+		return form;
 	}
 	
 	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
-	public String showActivationFormWithKey(
+	public View showActivationFormWithKey(
 		@PathVariable("key") String activationKey,
-		Model model) {
+		RedirectAttributes redirectAttributes) {
 		
-		ActivateAccountForm form = new ActivateAccountForm();
-		form.setActivationKey(activationKey);
-		model.addAttribute("activateAccountForm", form);
+		redirectAttributes.addAttribute("key", activationKey);
 		
-		return "account/activate";
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ACTIVATE_ACCOUNT_PAGE);
+		
+		return view;
 	}
 	
 	@PostMapping(Url.ACTIVATE_ACCOUNT_PAGE)
