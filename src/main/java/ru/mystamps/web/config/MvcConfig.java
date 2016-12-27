@@ -74,7 +74,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
-		registry.addViewController(Url.UNAUTHORIZED_PAGE);
 		registry.addViewController(Url.FORBIDDEN_PAGE);
 	}
 	
