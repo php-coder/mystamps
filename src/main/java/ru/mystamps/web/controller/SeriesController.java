@@ -36,6 +36,7 @@ import javax.validation.groups.Default;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +48,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
@@ -132,40 +135,50 @@ public class SeriesController {
 	}
 	
 	@GetMapping(Url.ADD_SERIES_PAGE)
-	public AddSeriesForm showForm() {
+	public AddSeriesForm showForm(
+		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
+		@Country @RequestParam(name = "country", required = false) LinkEntityDto country) {
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
+		
+		if (category != null) {
+			addSeriesForm.setCategory(category);
+		}
+		
+		if (country != null) {
+			addSeriesForm.setCountry(country);
+		}
 		
 		return addSeriesForm;
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
-	public String showFormWithCategory(
-		@Category @PathVariable("slug") LinkEntityDto category,
-		Model model) {
+	public View showFormWithCategory(
+		@PathVariable("slug") String category,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCategory(category);
+		redirectAttributes.addAttribute("category", category);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
-	public String showFormWithCountry(
-		@Country @PathVariable("slug") LinkEntityDto country,
-		Model model) {
+	public View showFormWithCountry(
+		@PathVariable("slug") String country,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCountry(country);
+		redirectAttributes.addAttribute("country", country);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@PostMapping(Url.ADD_SERIES_PAGE)

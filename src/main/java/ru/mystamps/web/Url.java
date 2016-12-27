@@ -47,10 +47,7 @@ public final class Url {
 	public static final String LOGOUT_PAGE           = "/account/logout";
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
 	
-	// CheckStyle: ignore LineLength for next 3 lines
 	public static final String ADD_SERIES_PAGE               = "/series/add";
-	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{slug}";
-	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
 	public static final String ADD_SERIES_ASK_PAGE           = "/series/{id}/ask";
 	public static final String INFO_SERIES_PAGE              = "/series/{id}";
 	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
@@ -78,6 +75,8 @@ public final class Url {
 	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
 	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
 	public static final String INFO_COLLECTION_BY_ID_PAGE     = "/collection/{id}/{slug}";
+	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
+	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.0";
@@ -124,8 +123,6 @@ public final class Url {
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
-		map.put("ADD_SERIES_WITH_CATEGORY_PAGE", ADD_SERIES_WITH_CATEGORY_PAGE);
-		map.put("ADD_SERIES_WITH_COUNTRY_PAGE", ADD_SERIES_WITH_COUNTRY_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);

@@ -66,11 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(Url.ADD_COUNTRY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.mvcMatchers(
-					Url.ADD_SERIES_PAGE,
-					Url.ADD_SERIES_WITH_CATEGORY_PAGE.replace("{slug}", "**"),
-					Url.ADD_SERIES_WITH_COUNTRY_PAGE.replace("{slug}", "**")
-				)
+				.mvcMatchers(Url.ADD_SERIES_PAGE)
 					.hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE)
 					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
