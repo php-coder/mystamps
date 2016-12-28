@@ -25,34 +25,40 @@
 				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
-						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
-							English
-						</a>
-						
 						<!--/*/
-						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
-							Russian
-						</a>
+						<th:block th:switch="${#locale.language}">
+							<th:block th:case="'ru'">
+								<span class="lang-xs" lang="ru"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}">
+									Russian
+								</a>
+							</th:block>
+							<th:block th:case="*">
 						/*/-->
-						
+								<span class="lang-xs" lang="en"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}">
+									English
+								</a>
+						<!--/*/
+							</th:block>
+						</th:block>
+						/*/-->
 						<span class="caret"></span>
-						<ul class="dropdown-menu">
-							<li>
-								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
-								</div>
-							</li>
+						<ul class="dropdown-menu" th:switch="${#locale.language}">
 							<!--/*/
-							<li>
+							<li th:case="'ru'">
 								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
-									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+									<span class="lang-xs" lang="en"></span>
+									<a href="?lang=en" hreflang="en" th:text="#{t_english}">English</a>
 								</div>
 							</li>
 							/*/-->
+							<li th:case="*">
+								<div class="dropdown-entry-lang">
+									<span class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}">Russian</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div><!--
