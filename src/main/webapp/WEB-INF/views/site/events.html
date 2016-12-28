@@ -20,21 +20,21 @@
 				<div id="logo" class="col-sm-9 vcenter">
 					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
 				</div><!--
-					
+				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
 						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
 							English
 						</a>
-					
+						
 						<!--/*/
 						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
 							Russian
 						</a>
 						/*/-->
-					
+						
 						<span class="caret"></span>
 						<ul class="dropdown-menu">
 							<li>
@@ -54,7 +54,7 @@
 						</ul>
 					</div>
 				</div><!--
-					
+				
 				--><div id="user_bar" class="col-sm-2 vcenter">
 					<ul class="list-unstyled">
 						<li sec:authorize="isAuthenticated()">
