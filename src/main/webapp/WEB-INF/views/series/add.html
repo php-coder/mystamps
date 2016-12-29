@@ -80,7 +80,7 @@
 						</li>
 						/*/-->
 						<li sec:authorize="isAuthenticated()">
-							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>

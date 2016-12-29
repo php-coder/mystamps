@@ -41,7 +41,7 @@ import static lombok.AccessLevel.PROTECTED;
 public abstract class AbstractPage {
 	
 	// CheckStyle: ignore LineLength for next 2 lines
-	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"LogoutForm\"]/input[@type=\"submit\"]";
+	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"logout-form\"]/input[@type=\"submit\"]";
 	private static final String USER_BAR_ENTRIES_LOCATOR = "//*[@id=\"user_bar\"]//li/a | //*[@id=\"user_bar\"]//li//input[not(@type=\"hidden\")]";
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
 	
