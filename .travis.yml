@@ -5,6 +5,8 @@ env:
   matrix:
     - SPRING_PROFILES_ACTIVE=test
     - SPRING_PROFILES_ACTIVE=travis
+  global:
+    - secure: "fBav56BzY+A+Vs1g9YSfo1oLDCO1rFrXl49lJkOA5/XpnsKEEs4lI2RcOzz0wiJKXFNgcliiAJWoYMI8Esqz+lkyFWan4ij5Co0UzJcytDuY+2o+jaqwx45DuDYPogABzT+hWjLCxQLLG46gUkChzT8kcvOOn6JxC7Ff8q5MnoM="
 
 before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
