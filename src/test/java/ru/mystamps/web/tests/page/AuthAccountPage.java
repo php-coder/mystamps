@@ -55,7 +55,7 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	
 	public boolean authenticationFormExists() {
 		// TODO: probably better to check for form tag presence?
-		return elementWithIdExists("authAccountForm");
+		return elementWithIdExists("auth-account-form");
 	}
 	
 	public void authorizeUser(String login, String password) {
