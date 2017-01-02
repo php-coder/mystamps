@@ -378,8 +378,8 @@ public class SeriesController {
 	
 	@GetMapping(Url.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
-		@RequestParam("catalogNumber") String catalogNumber,
-		@RequestParam("catalogName") String catalogName,
+		@RequestParam(name = "catalogNumber", defaultValue = "") String catalogNumber,
+		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,
 		Model model,
 		Locale userLocale,
 		RedirectAttributes redirectAttributes)
