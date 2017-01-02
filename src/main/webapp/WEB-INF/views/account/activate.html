@@ -47,14 +47,20 @@
 							<li th:case="'ru'">
 								<div class="dropdown-entry-lang">
 									<span class="lang-xs" lang="en"></span>
-									<a href="?lang=en" hreflang="en" th:text="#{t_english}">English</a>
+									<a href="?lang=en"
+										hreflang="en"
+										th:href="@{${ACTIVATE_ACCOUNT_PAGE}(key=${param.key},lang=en)}"
+										th:text="#{t_english}">English</a>
 								</div>
 							</li>
 							/*/-->
 							<li th:case="*">
 								<div class="dropdown-entry-lang">
 									<span class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}">Russian</a>
+									<a href="?lang=ru"
+										hreflang="ru"
+										th:href="@{${ACTIVATE_ACCOUNT_PAGE}(key=${param.key},lang=ru)}"
+										th:text="#{t_russian}">Russian</a>
 								</div>
 							</li>
 						</ul>
