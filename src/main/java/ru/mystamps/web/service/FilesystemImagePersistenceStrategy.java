@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		}
 		
 		if (!storageDir.canWrite()) {
-			LOG.warn(// NOPMD: GuardLogStatement
+			LOG.warn(
 				"Directory '{}' exists but doesn't writable for current user! "
 				+ "Image uploading won't work.",
 				storageDir

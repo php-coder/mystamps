@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,6 +61,8 @@ public class CountryController {
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {
+		// We can't use StringTrimmerEditor here because "only one single registered custom
+		// editor per property path is supported".
 		ReplaceRepeatingSpacesEditor editor = new ReplaceRepeatingSpacesEditor(true);
 		binder.registerCustomEditor(String.class, "name", editor);
 		binder.registerCustomEditor(String.class, "nameRu", editor);

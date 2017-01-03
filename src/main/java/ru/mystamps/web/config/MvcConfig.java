@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -74,7 +74,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController(Url.AUTHENTICATION_PAGE);
-		registry.addViewController(Url.UNAUTHORIZED_PAGE);
 		registry.addViewController(Url.FORBIDDEN_PAGE);
 	}
 	

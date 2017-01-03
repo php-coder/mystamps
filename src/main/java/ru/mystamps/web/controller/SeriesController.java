@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@ package ru.mystamps.web.controller;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -35,6 +36,7 @@ import javax.validation.groups.Default;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,7 +48,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
@@ -56,6 +60,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -65,7 +70,9 @@ import ru.mystamps.web.model.AddSeriesSalesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.service.TransactionParticipantService;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
@@ -79,7 +86,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 
 @Controller
 @RequiredArgsConstructor
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 	
 	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
@@ -90,6 +97,8 @@ public class SeriesController {
 	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
+	private final SeriesSalesService seriesSalesService;
+	private final TransactionParticipantService transactionParticipantService;
 	
 	static {
 		YEARS = new LinkedHashMap<>();
@@ -126,40 +135,50 @@ public class SeriesController {
 	}
 	
 	@GetMapping(Url.ADD_SERIES_PAGE)
-	public AddSeriesForm showForm() {
+	public AddSeriesForm showForm(
+		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
+		@Country @RequestParam(name = "country", required = false) LinkEntityDto country) {
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
+		
+		if (category != null) {
+			addSeriesForm.setCategory(category);
+		}
+		
+		if (country != null) {
+			addSeriesForm.setCountry(country);
+		}
 		
 		return addSeriesForm;
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
-	public String showFormWithCategory(
-		@Category @PathVariable("slug") LinkEntityDto category,
-		Model model) {
+	public View showFormWithCategory(
+		@PathVariable("slug") String category,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCategory(category);
+		redirectAttributes.addAttribute("category", category);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
-	public String showFormWithCountry(
-		@Country @PathVariable("slug") LinkEntityDto country,
-		Model model) {
+	public View showFormWithCountry(
+		@PathVariable("slug") String country,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCountry(country);
+		redirectAttributes.addAttribute("country", country);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@PostMapping(Url.ADD_SERIES_PAGE)
@@ -208,8 +227,8 @@ public class SeriesController {
 		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
 		model.addAllAttributes(commonAttrs);
 		
-		AddImageForm form = new AddImageForm();
-		model.addAttribute("addImageForm", form);
+		addSeriesSalesFormToModel(model);
+		addImageFormToModel(model);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
@@ -245,6 +264,8 @@ public class SeriesController {
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
 			model.addAllAttributes(commonAttrs);
+			
+			addSeriesSalesFormToModel(model);
 			
 			// don't try to re-display file upload field
 			form.setImage(null);
@@ -314,10 +335,51 @@ public class SeriesController {
 		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
-	@PostMapping(Url.SEARCH_SERIES_BY_CATALOG)
+	@PostMapping(Url.ADD_SERIES_ASK_PAGE)
+	public String processAskForm(
+			@Valid AddSeriesSalesForm form,
+			BindingResult result,
+			@PathVariable("id") Integer seriesId,
+			Model model,
+			@CurrentUser Integer currentUserId,
+			Locale userLocale,
+			HttpServletResponse response)
+			throws IOException {
+		
+		if (seriesId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+		if (series == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
+		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
+		
+		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+			model.addAllAttributes(commonAttrs);
+			
+			addSeriesSalesFormToModel(model);
+			addImageFormToModel(model);
+			
+			return "series/info";
+		}
+		
+		seriesSalesService.add(form, series.getId(), currentUserId);
+		
+		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
+	}
+	
+	@GetMapping(Url.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
-		@RequestParam("catalogNumber") String catalogNumber,
-		@RequestParam("catalogName") String catalogName,
+		@RequestParam(name = "catalogNumber", defaultValue = "") String catalogNumber,
+		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,
 		Model model,
 		Locale userLocale,
 		RedirectAttributes redirectAttributes)
@@ -391,6 +453,30 @@ public class SeriesController {
 		}*/
 		
 		return model;
+	}
+	
+	private void addSeriesSalesFormToModel(Model model) {
+		if (!(Features.ADD_PURCHASES_AND_SALES.isActive()
+			&& SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES))) {
+			return;
+		}
+		
+		if (!model.containsAttribute("addSeriesSalesForm")) {
+			AddSeriesSalesForm addSeriesSalesForm = new AddSeriesSalesForm();
+			addSeriesSalesForm.setDate(new Date());
+			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
+		}
+		
+		List<EntityWithIdDto> sellers = transactionParticipantService.findAllSellers();
+		model.addAttribute("sellers", sellers);
+		
+		List<EntityWithIdDto> buyers = transactionParticipantService.findAllBuyers();
+		model.addAttribute("buyers", buyers);
+	}
+	
+	private static void addImageFormToModel(Model model) {
+		AddImageForm form = new AddImageForm();
+		model.addAttribute("addImageForm", form);
 	}
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {

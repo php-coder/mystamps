@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@ public class ErrorPagesServletContainerCustomizer implements EmbeddedServletCont
 	
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer container) {
-		container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, Url.UNAUTHORIZED_PAGE));
 		container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, Url.FORBIDDEN_PAGE));
 		container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, Url.NOT_FOUND_PAGE));
 		container.addErrorPages(new ErrorPage(Exception.class, Url.INTERNAL_ERROR_PAGE));

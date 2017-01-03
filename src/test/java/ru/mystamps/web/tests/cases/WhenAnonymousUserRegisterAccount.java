@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ public class WhenAnonymousUserRegisterAccount
 	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
 	
 	private static final Pattern ACTIVATION_LINK_REGEXP =
-		Pattern.compile(".*/account/activate/key/[0-9a-z]{10}.*", Pattern.DOTALL);
+		Pattern.compile(".*/account/activate\\?key=[0-9a-z]{10}.*", Pattern.DOTALL);
 	
 	private static final int MAX_TIME_TO_WAIT_EMAIL_IN_SECONDS = 5;
 	

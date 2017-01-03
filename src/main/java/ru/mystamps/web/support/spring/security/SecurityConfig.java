@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
@@ -66,11 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(Url.ADD_COUNTRY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.mvcMatchers(
-					Url.ADD_SERIES_PAGE,
-					Url.ADD_SERIES_WITH_CATEGORY_PAGE.replace("{slug}", "**"),
-					Url.ADD_SERIES_WITH_COUNTRY_PAGE.replace("{slug}", "**")
-				)
+				.mvcMatchers(Url.ADD_SERIES_PAGE)
 					.hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE)
 					.hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
@@ -79,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						StringAuthority.UPDATE_COLLECTION,
 						StringAuthority.ADD_IMAGES_TO_SERIES
 					)
+				.regexMatchers(HttpMethod.POST, Url.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
+					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()
@@ -99,13 +98,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling()
 				.accessDeniedHandler(getAccessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
-				// not yet authenticated (defaults to Http403ForbiddenEntryPoint)
-				.authenticationEntryPoint(new Http401UnauthorizedEntryPoint())
+				// not yet authenticated
+				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
 				.ignoringAntMatchers("/console/**")
-			.and()
+				.and()
 			.rememberMe()
 				// TODO: GH #27
 				.disable()

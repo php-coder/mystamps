@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,6 @@ public class RobotsTxtController {
 			writer.println("Disallow: " + Url.ADD_COUNTRY_PAGE);
 			writer.println("Disallow: " + Url.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + Url.ADD_CATEGORY_PAGE);
-			writer.println("Disallow: " + Url.UNAUTHORIZED_PAGE);
 			writer.println("Disallow: " + Url.FORBIDDEN_PAGE);
 			writer.println("Disallow: " + Url.NOT_FOUND_PAGE);
 			writer.println("Disallow: " + Url.INTERNAL_ERROR_PAGE);

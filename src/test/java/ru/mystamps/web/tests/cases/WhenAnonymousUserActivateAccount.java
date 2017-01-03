@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,7 +70,7 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void activationKeyShouldBeAutoFilledFromURL() {
 		String key = "7777744444";
-		String url = Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", key);
+		String url = Url.ACTIVATE_ACCOUNT_PAGE + "?key=" + key;
 		
 		page.open(url);
 		assertThat(page).field("activationKey").hasValue(key);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -152,7 +151,7 @@ public class MailServiceImpl implements MailService {
 		String template = messageSource.getMessage("activation.text", null, activation.getLocale());
 		
 		String activationUrl =
-			Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY.replace("{key}", activation.getActivationKey());
+			String.format("%s?key=%s", Url.ACTIVATE_ACCOUNT_PAGE, activation.getActivationKey());
 		
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL);
@@ -167,17 +166,19 @@ public class MailServiceImpl implements MailService {
 		return messageSource.getMessage("activation.subject", null, activation.getLocale());
 	}
 	
-	public String getSubjectOfDailyStatisticsMail(AdminDailyReport report) {
+	private String getSubjectOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.subject", null, adminLang);
 		
 		String fromDate = shortDatePrinter.format(report.getStartDate());
-		Map<String, String> ctx = Collections.singletonMap("date", fromDate);
+		Map<String, String> ctx = new HashMap<>();
+		ctx.put("date", fromDate);
+		put(ctx, "total_changes", report.countTotalChanges());
 		
 		StrSubstitutor substitutor = new StrSubstitutor(ctx);
 		return substitutor.replace(template);
 	}
-	
-	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
+
+	private String getTextOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
 		String fromDate = shortDatePrinter.format(report.getStartDate());
 		String tillDate = shortDatePrinter.format(report.getEndDate());
@@ -187,10 +188,12 @@ public class MailServiceImpl implements MailService {
 		ctx.put("to_date", tillDate);
 		
 		put(ctx, "added_countries_cnt", report.getAddedCountriesCounter());
+		put(ctx, "untranslated_countries_cnt", report.getUntranslatedCountriesCounter());
 		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
+		put(ctx, "untranslated_categories_cnt", report.getUntranslatedCategoriesCounter());
 		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
 		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
-		put(ctx, "updated_collections_cnt", "-1"); // TODO: #357
+		put(ctx, "updated_collections_cnt", -1L); // TODO: #357
 		put(ctx, "registration_requests_cnt", report.getRegistrationRequestsCounter());
 		put(ctx, "registered_users_cnt", report.getRegisteredUsersCounter());
 		put(ctx, "events_cnt", report.countEvents());
@@ -198,13 +201,9 @@ public class MailServiceImpl implements MailService {
 		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
 		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
 		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
-		put(ctx, "bad_request_cnt", "-1");  // TODO: #122
+		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
 		
 		return new StrSubstitutor(ctx).replace(template);
-	}
-	
-	private static void put(Map<String, String> ctx, String key, String value) {
-		ctx.put(key, value);
 	}
 	
 	private static void put(Map<String, String> ctx, String key, long value) {

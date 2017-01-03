@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,6 +62,13 @@ public class CronServiceImpl implements CronService {
 		report.setEndDate(today);
 		report.setAddedCategoriesCounter(categoryService.countAddedSince(yesterday));
 		report.setAddedCountriesCounter(countryService.countAddedSince(yesterday));
+		
+		long untranslatedCategories = categoryService.countUntranslatedNamesSince(yesterday);
+		report.setUntranslatedCategoriesCounter(untranslatedCategories);
+		
+		long untranslatedCountries = countryService.countUntranslatedNamesSince(yesterday);
+		report.setUntranslatedCountriesCounter(untranslatedCountries);
+		
 		report.setAddedSeriesCounter(seriesService.countAddedSince(yesterday));
 		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));

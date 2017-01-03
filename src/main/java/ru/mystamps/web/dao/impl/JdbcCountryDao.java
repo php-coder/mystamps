@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,6 +64,9 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Value("${country.count_countries_added_since}")
 	private String countCountriesAddedSinceSql;
+	
+	@Value("${country.count_untranslated_names_since}")
+	private String countUntranslatedNamesSinceSql;
 	
 	@Value("${country.count_stamps_by_countries}")
 	private String countStampsByCountriesSql;
@@ -151,6 +154,15 @@ public class JdbcCountryDao implements CountryDao {
 	public long countAddedSince(Date date) {
 		return jdbcTemplate.queryForObject(
 			countCountriesAddedSinceSql,
+			Collections.singletonMap("date", date),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countUntranslatedNamesSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countUntranslatedNamesSinceSql,
 			Collections.singletonMap("date", date),
 			Long.class
 		);

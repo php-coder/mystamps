@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public final class Url {
 	public static final String PUBLIC_URL            = "https://my-stamps.ru";
-	public static final String STATIC_RESOURCES_URL  = PUBLIC_URL;
+	public static final String STATIC_RESOURCES_URL  = "https://stamps.filezz.ru";
 	
 	// defined at pom.xml (and used by functional tests only)
 	public static final String SITE                  = "http://127.0.0.1:8080";
@@ -41,44 +41,40 @@ public final class Url {
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
-	
 	public static final String AUTHENTICATION_PAGE   = "/account/auth";
 	public static final String LOGIN_PAGE            = "/account/login";
 	public static final String LOGOUT_PAGE           = "/account/logout";
-	
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
-	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
-	// CheckStyle: ignore LineLength for next 3 lines
-	public static final String ADD_SERIES_PAGE               = "/series/add";
-	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{slug}";
-	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
-	public static final String INFO_SERIES_PAGE              = "/series/{id}";
-	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
-	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
+	public static final String ADD_SERIES_PAGE          = "/series/add";
+	public static final String ADD_SERIES_ASK_PAGE      = "/series/{id}/ask";
+	public static final String INFO_SERIES_PAGE         = "/series/{id}";
+	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
+	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
-	// For backward compatibility
-	public static final String INFO_CATEGORY_BY_ID_PAGE = "/category/{id}/{slug}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String LIST_COUNTRIES_PAGE   = "/country/list";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{slug}";
-	// For backward compatibility
-	public static final String INFO_COUNTRY_BY_ID_PAGE = "/country/{id}/{slug}";
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{slug}";
-	// For backward compatibility
-	public static final String INFO_COLLECTION_BY_ID_PAGE  = "/collection/{id}/{slug}";
 	
 	public static final String GET_IMAGE_PAGE        = "/image/{id}";
 	
-	public static final String UNAUTHORIZED_PAGE     = "/error/401";
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
+	
+	// For backward compatibility
+	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
+	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
+	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
+	public static final String INFO_COLLECTION_BY_ID_PAGE     = "/collection/{id}/{slug}";
+	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
+	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.0";
@@ -91,8 +87,8 @@ public final class Url {
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
-	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.6/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.3.6/js/bootstrap.min.js";
+	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.3.7/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.3.7/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/1.9.1/jquery.min.js";
 	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
@@ -103,8 +99,8 @@ public final class Url {
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
-	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
-	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js";
+	public static final String BOOTSTRAP_CSS_CDN     = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
+	public static final String BOOTSTRAP_JS_CDN      = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js";
 	public static final String JQUERY_JS_CDN         = "https://yandex.st/jquery/1.9.1/jquery.min.js";
 	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css";
 	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js";
@@ -125,8 +121,7 @@ public final class Url {
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
-		map.put("ADD_SERIES_WITH_CATEGORY_PAGE", ADD_SERIES_WITH_CATEGORY_PAGE);
-		map.put("ADD_SERIES_WITH_COUNTRY_PAGE", ADD_SERIES_WITH_COUNTRY_PAGE);
+		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);

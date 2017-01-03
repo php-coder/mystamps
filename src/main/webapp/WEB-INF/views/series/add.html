@@ -10,7 +10,7 @@
 		<meta name="robots" content="noindex" />
 		<title th:text="|#{t_my_stamps}: #{t_add_series}|">My stamps: add stamp series</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
@@ -24,34 +24,46 @@
 				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
-						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
-							English
-						</a>
-						
 						<!--/*/
-						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
-							Russian
-						</a>
+						<th:block th:switch="${#locale.language}">
+							<th:block th:case="'ru'">
+								<span class="lang-xs" lang="ru"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}">
+									Russian
+								</a>
+							</th:block>
+							<th:block th:case="*">
 						/*/-->
-						
+								<span class="lang-xs" lang="en"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}">
+									English
+								</a>
+						<!--/*/
+							</th:block>
+						</th:block>
+						/*/-->
 						<span class="caret"></span>
-						<ul class="dropdown-menu">
-							<li>
-								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
-								</div>
-							</li>
+						<ul class="dropdown-menu" th:switch="${#locale.language}">
 							<!--/*/
-							<li>
+							<li th:case="'ru'">
 								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
-									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+									<span class="lang-xs" lang="en"></span>
+									<a href="?lang=en"
+										hreflang="en"
+										th:href="@{${ADD_SERIES_PAGE}(category=${param.category},country=${param.country},lang=en)}"
+										th:text="#{t_english}">English</a>
 								</div>
 							</li>
 							/*/-->
+							<li th:case="*">
+								<div class="dropdown-entry-lang">
+									<span class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru"
+										hreflang="ru"
+										th:href="@{${ADD_SERIES_PAGE}(category=${param.category},country=${param.country},lang=ru)}"
+										th:text="#{t_russian}">Russian</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div><!--
@@ -74,7 +86,7 @@
 						</li>
 						/*/-->
 						<li sec:authorize="isAuthenticated()">
-							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
@@ -143,7 +155,9 @@
 										You can also <a href="../category/add.html">add a new category</a>
 									</span>
 								</small>
+								<!--/*/
 								<span id="category.errors" class="help-block" th:if="${#fields.hasErrors('category')}" th:each="error : ${#fields.errors('category')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 		
@@ -174,7 +188,9 @@
 										You can also <a href="../country/add.html">add a new country</a>
 									</span>
 								</small>
+								<!--/*/
 								<span id="country.errors" class="help-block" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -195,7 +211,9 @@
 										min="1"
 										max="50"
 										th:field="*{quantity}" />
+								<!--/*/
 								<span id="quantity.errors" class="help-block" th:if="${#fields.hasErrors('quantity')}" th:each="error : ${#fields.errors('quantity')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -207,7 +225,9 @@
 							</label>
 							<div class="col-sm-1">
 								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
+								<!--/*/
 								<span id="perforated.errors" class="help-block" th:if="${#fields.hasErrors('perforated')}" th:each="error : ${#fields.errors('perforated')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -222,18 +242,18 @@
 								<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
 								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 									<span class="hint-block" th:text="#{t_add_more_images_hint}">
-										You will be able to add additional images on the series page
+										Later you will be able to add additional images
 									</span>
 								</small>
+								<!--/*/
 								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">
-									Specify date of release
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">Specify date of release</a>
 							</div>
 						</div>
 						
@@ -315,17 +335,17 @@
 										</select>
 									</div>
 								</div>
+								<!--/*/
 								<span id="day.errors" class="help-block" th:if="${#fields.hasErrors('day')}" th:each="error : ${#fields.errors('day')}" th:text="${error}"></span>
 								<span id="year.errors" class="help-block" th:if="${#fields.hasErrors('year')}" th:each="error : ${#fields.errors('year')}" th:text="${error}"></span>
 								<span id="month.errors" class="help-block" th:if="${#fields.hasErrors('month')}" th:each="error : ${#fields.errors('month')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-7">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">
-									Add information from stamps catalogues
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">Add information from stamps catalogues</a>
 							</div>
 						</div>
 						
@@ -347,8 +367,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="michelNumbers.errors" class="help-block" th:if="${#fields.hasErrors('michelNumbers')}" th:each="error : ${#fields.errors('michelNumbers')}" th:text="${error}"></span>
 								<span id="michelPrice.errors" class="help-block" th:if="${#fields.hasErrors('michelPrice')}" th:each="error : ${#fields.errors('michelPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -370,8 +392,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="scottNumbers.errors" class="help-block" th:if="${#fields.hasErrors('scottNumbers')}" th:each="error : ${#fields.errors('scottNumbers')}" th:text="${error}"></span>
 								<span id="scottPrice.errors" class="help-block" th:if="${#fields.hasErrors('scottPrice')}" th:each="error : ${#fields.errors('scottPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -393,8 +417,10 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="yvertNumbers.errors" class="help-block" th:if="${#fields.hasErrors('yvertNumbers')}" th:each="error : ${#fields.errors('yvertNumbers')}" th:text="${error}"></span>
 								<span id="yvertPrice.errors" class="help-block" th:if="${#fields.hasErrors('yvertPrice')}" th:each="error : ${#fields.errors('yvertPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -416,16 +442,16 @@
 										</div>
 									</div>
 								</div>
+								<!--/*/
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
 								<span id="gibbonsPrice.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
 						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">
-									Add comment
-								</a>
+								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">Add comment</a>
 							</div>
 						</div>
 						
@@ -437,7 +463,9 @@
 							</label>
 							<div class="col-sm-5">
 								<textarea id="comment" class="form-control" cols="22" rows="3" th:field="*{comment}"></textarea>
+								<!--/*/
 								<span id="comment.errors" class="help-block" th:if="${#fields.hasErrors('comment')}" th:each="error : ${#fields.errors('comment')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
 						
@@ -453,14 +481,14 @@
 			<div class="row">
 				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
-					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2016
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2017
 				</footer>
 			</div>
 		</div>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
 		<script src="../../../../javascript/CatalogUtils.min.js" th:src="${CATALOG_UTILS_JS}"></script>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,7 +51,9 @@ public class ApplicationContext {
 			new ClassPathResource("sql/user_dao_queries.properties"),
 			new ClassPathResource("sql/users_activation_dao_queries.properties"),
 			new ClassPathResource("sql/series_dao_queries.properties"),
-			new ClassPathResource("sql/suspicious_activity_dao_queries.properties")
+			new ClassPathResource("sql/series_sales_dao_queries.properties"),
+			new ClassPathResource("sql/suspicious_activity_dao_queries.properties"),
+			new ClassPathResource("sql/transaction_participants_dao_queries.properties")
 		);
 		return configurer;
 	}

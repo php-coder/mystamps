@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -86,7 +86,6 @@ public class AddCountryForm implements AddCountryDto {
 	@UniqueCountrySlug(groups = Group.Level7.class)
 	private String name;
 	
-	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = COUNTRY_NAME_MIN_LENGTH,
@@ -116,7 +115,7 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.RU, groups = Group.Level5.class)
+	@UniqueCountryName(lang = Lang.RU, groups = Group.Level6.class)
 	private String nameRu;
 	
 }

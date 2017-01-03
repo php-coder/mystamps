@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -417,7 +417,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@Override
 	protected void checkServerResponseCode() {
-		// Ignore this check because server always returns 401 for anonymous user and our test suite
+		// Ignore this check because server always returns 403 for anonymous user and our test suite
 		// lack ability to check response code after authentication.
 	}
 	

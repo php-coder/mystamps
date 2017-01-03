@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ import org.apache.commons.lang3.Validate;
 import lombok.Getter;
 import lombok.ToString;
 
-// too many "PMD.SingularField" here and yes, I know that it's too complex :-(
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.ModifiedCyclomaticComplexity" })
+// yes, I know that it's too complex :-(
+@SuppressWarnings("PMD.ModifiedCyclomaticComplexity")
 @ToString
 public class Pager {
 	// be very careful when you're changing this value
@@ -54,22 +54,18 @@ public class Pager {
 	private final int recordsPerPage;
 	
 	// this field is using in the view (hence its getter)
-	@SuppressWarnings("PMD.SingularField")
 	@Getter
 	private final int currentPage;
 	
 	// this field is using in the view (hence its getter)
-	@SuppressWarnings("PMD.SingularField")
 	@Getter
 	private final List<Integer> items;
 	
 	// this field is using in the view (hence its getter)
-	@SuppressWarnings("PMD.SingularField")
 	@Getter
 	private final Integer prev;
 	
 	// this field is using in the view (hence its getter)
-	@SuppressWarnings("PMD.SingularField")
 	@Getter
 	private final Integer next;
 	

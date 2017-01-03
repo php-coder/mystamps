@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,5 +33,6 @@ public interface CountryService {
 	long countByName(String name);
 	long countByNameRu(String name);
 	long countAddedSince(Date date);
+	long countUntranslatedNamesSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 }

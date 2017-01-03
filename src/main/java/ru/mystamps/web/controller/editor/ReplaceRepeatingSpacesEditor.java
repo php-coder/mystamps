@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,22 +24,25 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * @author Maxim Shestakov
+ * @author Slava Semushin
  */
 @RequiredArgsConstructor
 public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 	private static final Pattern REPEATING_SPACES = Pattern.compile("[ ]{2,}");
-	private final boolean performTrimming;
+	private final boolean emptyAsNull;
 	
 	@Override
 	public void setAsText(String name) throws IllegalArgumentException {
 		String text = name;
 
-		if (performTrimming) {
-			text = name.trim();
-		}
+		text = name.trim();
 
 		if (text.contains("  ")) {
 			text = REPEATING_SPACES.matcher(text).replaceAll(" ");
+		}
+
+		if (emptyAsNull && "".equals(text)) { // NOPMD: AvoidLiteralsInIfCondition (it's ok for me)
+			text = null; // NOPMD: NullAssignment (we need it)
 		}
 
 		setValue(text);

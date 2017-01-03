@@ -10,7 +10,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title th:text="|#{t_my_stamps}: #{t_index_title}|">My stamps: create your own virtual collection!</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 	</head>
@@ -23,34 +23,40 @@
 				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
-						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
-							English
-						</a>
-						
 						<!--/*/
-						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
-							Russian
-						</a>
+						<th:block th:switch="${#locale.language}">
+							<th:block th:case="'ru'">
+								<span class="lang-xs" lang="ru"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}">
+									Russian
+								</a>
+							</th:block>
+							<th:block th:case="*">
 						/*/-->
-						
+								<span class="lang-xs" lang="en"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}">
+									English
+								</a>
+						<!--/*/
+							</th:block>
+						</th:block>
+						/*/-->
 						<span class="caret"></span>
-						<ul class="dropdown-menu">
-							<li>
-								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
-								</div>
-							</li>
+						<ul class="dropdown-menu" th:switch="${#locale.language}">
 							<!--/*/
-							<li>
+							<li th:case="'ru'">
 								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
-									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+									<span class="lang-xs" lang="en"></span>
+									<a href="?lang=en" hreflang="en" th:text="#{t_english}">English</a>
 								</div>
 							</li>
 							/*/-->
+							<li th:case="*">
+								<div class="dropdown-entry-lang">
+									<span class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}">Russian</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div><!--
@@ -74,7 +80,7 @@
 						</li>
 						<!--/*/
 						<li sec:authorize="isAuthenticated()">
-							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
@@ -88,7 +94,7 @@
 			<div class="row" id="content">
 				<div class="col-sm-3">
 					<nav>
-						<p th:text="|#{t_you_may}:|">You may</p>
+						<p th:text="|#{t_you_may}:|">You may:</p>
 						<ul>
 							<li togglz:active="LIST_CATEGORIES">
 								<a th:href="@{${LIST_CATEGORIES_PAGE}}" th:text="#{t_show_categories_list}" href="../category/list.html">show list of categories</a>
@@ -106,7 +112,7 @@
 								<a th:href="@{${ADD_COUNTRY_PAGE}}" th:text="#{t_add_country}" href="../country/add.html">add country</a>
 							</li>
 							<li togglz:active="VIEW_SITE_EVENTS" sec:authorize="hasAuthority('VIEW_SITE_EVENTS')">
-								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_watch_suspicious_activities}" href="events.html">view suspicious activities</a>
+								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_view_suspicious_activities}" href="events.html">view suspicious activities</a>
 							</li>
 						</ul>
 					</nav>
@@ -249,7 +255,7 @@
 							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
 						<div class="panel-body">
-							<form method="post" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
+							<form method="get" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
 								<div class="form-group" th:classappend="${numberIsEmpty != null ? 'has-error' : ''}">
 									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
 									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control"
@@ -280,13 +286,13 @@
 			<div class="row">
 				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
-					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2016
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2017
 				</footer>
 			</div>
 		</div>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 	</body>
 </html>

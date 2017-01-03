@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,25 +19,25 @@ package ru.mystamps.web.model;
 
 final class Group {
 	
-	interface Level1 {
+	/* default */ interface Level1 {
 	}
 	
-	interface Level2 {
+	/* default */ interface Level2 {
 	}
 	
-	interface Level3 {
+	/* default */ interface Level3 {
 	}
 	
-	interface Level4 {
+	/* default */ interface Level4 {
 	}
 	
-	interface Level5 {
+	/* default */ interface Level5 {
 	}
 
-	interface Level6 {
+	/* default */ interface Level6 {
 	}
 	
-	interface Level7 {
+	/* default */ interface Level7 {
 	}
 	
 }

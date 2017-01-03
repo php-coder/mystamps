@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<title th:text="|#{t_my_stamps}: #{t_series_info}|">My stamps: Info about series</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 	</head>
@@ -22,34 +22,40 @@
 				
 				--><div class="col-sm-1 vcenter">
 					<div class="dropdown">
-						<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="en"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}" th:if="${#locale.language == 'en'}">
-							English
-						</a>
-						
 						<!--/*/
-						<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="ru"></span>
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}" th:if="${#locale.language == 'ru'}">
-							Russian
-						</a>
+						<th:block th:switch="${#locale.language}">
+							<th:block th:case="'ru'">
+								<span class="lang-xs" lang="ru"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}">
+									Russian
+								</a>
+							</th:block>
+							<th:block th:case="*">
 						/*/-->
-						
+								<span class="lang-xs" lang="en"></span>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}">
+									English
+								</a>
+						<!--/*/
+							</th:block>
+						</th:block>
+						/*/-->
 						<span class="caret"></span>
-						<ul class="dropdown-menu">
-							<li>
-								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'en'}" class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}" th:if="${#locale.language == 'en'}">Russian</a>
-								</div>
-							</li>
+						<ul class="dropdown-menu" th:switch="${#locale.language}">
 							<!--/*/
-							<li>
+							<li th:case="'ru'">
 								<div class="dropdown-entry-lang">
-									<span th:if="${#locale.language == 'ru'}" class="lang-xs" lang="en"></span>
-									<a href="?lang=en" hreflang="en" th:text="#{t_english}" th:if="${#locale.language == 'ru'}">English</a>
+									<span class="lang-xs" lang="en"></span>
+									<a href="?lang=en" hreflang="en" th:text="#{t_english}">English</a>
 								</div>
 							</li>
 							/*/-->
+							<li th:case="*">
+								<div class="dropdown-entry-lang">
+									<span class="lang-xs" lang="ru"></span>
+									<a href="?lang=ru" hreflang="ru" th:text="#{t_russian}">Russian</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div><!--
@@ -72,7 +78,7 @@
 						</li>
 						/*/-->
 						<li sec:authorize="isAuthenticated()">
-							<form id="LogoutForm" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
@@ -111,7 +117,9 @@
 									<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}" th:object="${addImageForm}">
 										<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
 											<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+											<!--/*/
 											<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+											/*/-->
 										</div>
 										<div class="from-group-sm">
 											<input type="submit" class="btn btn-primary" value="Add image" th:value="#{t_add_image}" />
@@ -354,7 +362,9 @@
 							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
 								<div class="col-sm-12">
 									<h5 th:text="|#{t_add_info_who_selling_series}:|">Add info about selling/buying this series:</h5>
-									<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_SALES_PAGE}}" th:object="${addSeriesSalesForm}">
+
+									<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}" th:object="${addSeriesSalesForm}">
+
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
 											<label for="date" class="control-label col-sm-2">
@@ -364,7 +374,11 @@
 											</label>
 											<div class="col-sm-4">
 												<input type="text" id="date" class="form-control" th:field="*{date}" />
+
+												<!--/*/
 												<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -376,15 +390,24 @@
 												<span id="seller.required" class="required_field">*</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="seller" name="sellerId" class="form-control" required="required">
-													<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+
+												<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
+													<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
+													<!--/*/
+													<option th:each="seller : ${sellers}" th:value="${seller.id}" th:text="${seller.name}"></option>
+													/*/-->
+
 													<!--/*-->
 													<option value="1">James Alan Hetfield</option>
 													<option value="2">Tommy Lee Jones</option>
 													<option value="3">Eicca Toppinen</option>
 													<!--*/-->
 												</select>
+
+												<!--/*/
 												<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('sellerId')}" th:each="error : ${#fields.errors('sellerId')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -396,7 +419,11 @@
 											</label>
 											<div class="col-sm-6">
 												<input type="url" id="url" class="form-control" th:field="*{url}" />
+
+												<!--/*/
 												<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -414,16 +441,19 @@
 													</div>
 													<div class="col-xs-4 no-padding">
 														<select id="currency" class="form-control" required="required" th:field="*{currency}">
-															<option value=""></option>
+
 															<option value="USD">USD</option>
 															<option value="EUR">EUR</option>
 															<option value="GBP">GBP</option>
-															<option value="RUB">RUB</option>
+															<option value="RUB" selected="selected">RUB</option>
 														</select>
 													</div>
 												</div>
+												<!--/*/
 												<span id="price.errors" class="help-block" th:if="${#fields.hasErrors('price')}" th:each="error : ${#fields.errors('price')}" th:text="${error}"></span>
 												<span id="currency.errors" class="help-block" th:if="${#fields.hasErrors('currency')}" th:each="error : ${#fields.errors('currency')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -440,7 +470,7 @@
 													</div>
 													<div class="col-xs-4 no-padding">
 														<select id="alt-currency" class="form-control" th:field="*{altCurrency}">
-															<option value=""></option>
+
 															<option value="USD">USD</option>
 															<option value="EUR">EUR</option>
 															<option value="GBP">GBP</option>
@@ -448,8 +478,12 @@
 														</select>
 													</div>
 												</div>
+
+												<!--/*/
 												<span id="alt-price.errors" class="help-block" th:if="${#fields.hasErrors('altPrice')}" th:each="error : ${#fields.errors('altPrice')}" th:text="${error}"></span>
 												<span id="alt-currency.errors" class="help-block" th:if="${#fields.hasErrors('altCurrency')}" th:each="error : ${#fields.errors('altCurrency')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -460,14 +494,23 @@
 												</span>
 											</label>
 											<div class="col-sm-6">
-												<select id="buyer" name="buyerId" class="form-control">
-													<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+
+												<select id="buyer" class="form-control" th:field="*{buyerId}">
+													<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
+													<!--/*/
+														<option th:each="buyer : ${buyers}" th:value="${buyer.id}" th:text="${buyer.name}"></option>
+													/*/-->
+
 													<!--/*-->
 													<option value="1">Kurt Cobain</option>
 													<option value="2">Michael Jackson</option>
 													<!--*/-->
 												</select>
+
+												<!--/*/
 												<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyerId')}" th:each="error : ${#fields.errors('buyerId')}" th:text="${error}"></span>
+												/*/-->
+
 											</div>
 										</div>
 										
@@ -491,13 +534,13 @@
 			<div class="row">
 				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>
-					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2016
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2017
 				</footer>
 			</div>
 		</div>
 		
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 	</body>
 </html>

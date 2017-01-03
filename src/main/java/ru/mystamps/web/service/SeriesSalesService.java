@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,29 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.spring.security;
+package ru.mystamps.web.service;
 
-import java.io.IOException;
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
-
-public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
-	
-	/**
-	 * Always returns a 401 error code to the client.
-	 **/
-	@Override
-	public void commence(
-		HttpServletRequest req,
-		HttpServletResponse resp,
-		AuthenticationException ex)
-		throws IOException {
-		
-		resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-	}
-	
+public interface SeriesSalesService {
+	void add(AddSeriesSalesDto dto, Integer seriesId, Integer userId);
 }

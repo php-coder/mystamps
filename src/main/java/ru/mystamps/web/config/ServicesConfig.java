@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -115,6 +115,11 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public SeriesSalesService getSeriesSalesService() {
+		return new SeriesSalesServiceImpl(daoConfig.getSeriesSalesDao());
+	}
+	
+	@Bean
 	public SiteService getSiteService() {
 		return new SiteServiceImpl(daoConfig.getSuspiciousActivityDao());
 	}
@@ -147,6 +152,11 @@ public class ServicesConfig {
 	@Bean
 	public StampsCatalogService getGibbonsCatalogService() {
 		return new StampsCatalogServiceImpl("Gibbons", daoConfig.getGibbonsCatalogDao());
+	}
+	
+	@Bean
+	public TransactionParticipantService getTransactionParticipantService() {
+		return new TransactionParticipantServiceImpl(daoConfig.getTransactionParticipantDao());
 	}
 	
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,7 +53,6 @@ public class CategoryServiceImpl implements CategoryService {
 	public String add(AddCategoryDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getName() != null, "Category name in English must be non null");
-		Validate.isTrue(dto.getNameRu() != null, "Category name in Russian must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddCategoryDbDto category = new AddCategoryDbDto();
@@ -145,6 +144,14 @@ public class CategoryServiceImpl implements CategoryService {
 		Validate.isTrue(date != null, "Date must be non null");
 		
 		return categoryDao.countAddedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countUntranslatedNamesSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return categoryDao.countUntranslatedNamesSince(date);
 	}
 	
 	@Override

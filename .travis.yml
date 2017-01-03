@@ -53,5 +53,10 @@ notifications:
     on_success: always # default: change
     on_failure: always # default: always
 
-# We don't want to run `mvn install -DskipTests=true` for downloading project's dependencies
 install: true
+
+# Clone repository with a depth of 1 commit.
+# https://docs.travis-ci.com/user/customizing-the-build/#Git-Clone-Depth
+git:
+  depth: 1 # default: 50
+

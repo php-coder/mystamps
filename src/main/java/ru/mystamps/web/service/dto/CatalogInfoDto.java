@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@ import lombok.Getter;
 import ru.mystamps.web.dao.dto.Currency;
 
 @Getter
-@SuppressWarnings("PMD.SingularField")
 public class CatalogInfoDto {
 	private final List<String> numbers;
 	private final BigDecimal price;

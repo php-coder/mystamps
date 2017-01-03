@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ public class ThymeleafViewResolverInitializingBean
 		ThymeleafViewResolver viewResolver =
 			applicationContext.getBean(ThymeleafViewResolver.class);
 		if (viewResolver == null) {
-			LOG.warn(// NOPMD: GuardLogStatement
+			LOG.warn(
 				"Cannot adjust ThymeleafViewResolver: "
 				+ "bean of this type wasn't found in application context"
 			);

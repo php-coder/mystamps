@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,19 +20,8 @@ package ru.mystamps.web.service;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import ru.mystamps.web.dao.dto.AddUserDbDto;
-import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.dao.dto.DbImageDto;
-import ru.mystamps.web.dao.dto.ImageInfoDto;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.dao.dto.SitemapInfoDto;
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.dao.dto.UserDetails;
-import ru.mystamps.web.dao.dto.UsersActivationDto;
-import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+import ru.mystamps.web.dao.dto.*;
 
 final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -167,6 +156,10 @@ final class TestObjects {
 			TEST_PRICE,
 			Currency.USD
 		);
+	}
+	
+	public static EntityWithIdDto createEntityWithIdDto() {
+		return new EntityWithIdDto(TEST_ENTITY_ID, TEST_ENTITY_NAME);
 	}
 	
 }

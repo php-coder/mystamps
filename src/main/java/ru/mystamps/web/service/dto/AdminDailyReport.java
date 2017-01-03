@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,9 @@ public class AdminDailyReport {
 	private Date startDate;
 	private Date endDate;
 	private long addedCategoriesCounter;
+	private long untranslatedCategoriesCounter;
 	private long addedCountriesCounter;
+	private long untranslatedCountriesCounter;
 	private long addedSeriesCounter;
 	private long updatedSeriesCounter;
 	private long registrationRequestsCounter;
@@ -45,6 +47,20 @@ public class AdminDailyReport {
 		eventsCounter = Math.addExact(eventsCounter, missingCsrfCounter);
 		eventsCounter = Math.addExact(eventsCounter, invalidCsrfCounter);
 		return eventsCounter;
+	}
+	
+	public long countTotalChanges() {
+		long totalChanges = 0L;
+		totalChanges = Math.addExact(totalChanges, addedCategoriesCounter);
+		totalChanges = Math.addExact(totalChanges, untranslatedCategoriesCounter);
+		totalChanges = Math.addExact(totalChanges, addedCountriesCounter);
+		totalChanges = Math.addExact(totalChanges, untranslatedCountriesCounter);
+		totalChanges = Math.addExact(totalChanges, addedSeriesCounter);
+		totalChanges = Math.addExact(totalChanges, updatedSeriesCounter);
+		totalChanges = Math.addExact(totalChanges, registrationRequestsCounter);
+		totalChanges = Math.addExact(totalChanges, registeredUsersCounter);
+		totalChanges = Math.addExact(totalChanges, countEvents());
+		return totalChanges;
 	}
 	
 }

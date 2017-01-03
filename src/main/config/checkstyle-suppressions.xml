@@ -14,4 +14,10 @@
 	<!-- These files will be removed during porting integration tests to Cucumber JVM (see #18) -->
 	<suppress checks="ImportOrder" files="src/test/java/ru/mystamps/web/tests" />
 	
+	<!-- false positives beause these files contain SQL queries -->
+	<suppress checks="Translation" files="src/main/resources/sql" />
+	
+	<!-- Too long link -->
+	<suppress checks="LineLength" files="src/main/java/ru/mystamps/web/dao/impl/package-info.java" />
+	
 </suppressions>

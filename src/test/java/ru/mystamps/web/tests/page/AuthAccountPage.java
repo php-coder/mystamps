@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	
 	public boolean authenticationFormExists() {
 		// TODO: probably better to check for form tag presence?
-		return elementWithIdExists("authAccountForm");
+		return elementWithIdExists("auth-account-form");
 	}
 	
 	public void authorizeUser(String login, String password) {

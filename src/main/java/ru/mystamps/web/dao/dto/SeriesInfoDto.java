@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ package ru.mystamps.web.dao.dto;
 import lombok.Getter;
 
 @Getter
-@SuppressWarnings("PMD.SingularField")
 public class SeriesInfoDto {
 	private final Integer id;
 	private final LinkEntityDto category;

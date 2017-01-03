@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,8 +34,8 @@ public class WhenAnonymousUserAddCountry extends WhenAnyUserAtAnyPage<Unauthoriz
 	
 	public WhenAnonymousUserAddCountry() {
 		super(UnauthorizedErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_401_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_UNAUTHORIZED);
+		hasTitleWithoutStandardPrefix(tr("t_403_title"));
+		hasResponseServerCode(HttpURLConnection.HTTP_FORBIDDEN);
 	}
 	
 	@BeforeClass
@@ -50,12 +50,12 @@ public class WhenAnonymousUserAddCountry extends WhenAnyUserAtAnyPage<Unauthoriz
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorMessage() {
-		assertThat(page.getErrorMessage()).isEqualTo(tr("t_401_description", "\n"));
+		assertThat(page.getErrorMessage()).isEqualTo(tr("t_403_description", "\n"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void shouldExistsErrorCode() {
-		assertThat(page.getErrorCode()).isEqualTo("401");
+		assertThat(page.getErrorCode()).isEqualTo("403");
 	}
 	
 }

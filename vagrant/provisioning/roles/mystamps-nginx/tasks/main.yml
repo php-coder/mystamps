@@ -27,6 +27,7 @@
   with_items:
   - mystamps-http.conf
   - mystamps-ssl.conf
+  - mystamps-static.conf
   notify:
   - Restarting nginx service
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,15 +57,6 @@ class CategoryServiceImplTest extends Specification {
 	def "add() should throw exception when English category name is null"() {
 		given:
 			form.setName(null)
-		when:
-			service.add(form, USER_ID)
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "add() should throw exception when Russian category name is null"() {
-		given:
-			form.setNameRu(null)
 		when:
 			service.add(form, USER_ID)
 		then:
@@ -415,6 +406,34 @@ class CategoryServiceImplTest extends Specification {
 			long result = service.countAddedSince(expectedDate)
 		then:
 			1 * categoryDao.countAddedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for countUntranslatedNamesSince()
+	//
+	
+	def "countUntranslatedNamesSince() should throw exception when date is null"() {
+		when:
+			service.countUntranslatedNamesSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate = new Date()
+		and:
+			long expectedResult = 17
+		when:
+			long result = service.countUntranslatedNamesSince(expectedDate)
+		then:
+			1 * categoryDao.countUntranslatedNamesSince({ Date date ->
 				assert date == expectedDate
 				return true
 			}) >> expectedResult

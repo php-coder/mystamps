@@ -1,5 +1,7 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
+
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,32 +21,39 @@ package ru.mystamps.web.model;
 
 import java.math.BigDecimal;
 
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
 
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+
 @Getter
 @Setter
-public class AddSeriesSalesForm /*implements AddSeriesSalesDto*/ {
+public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
-	// @Past
-	private String date;
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
+	private Date date;
 	
-	// @NotNull
+	@NotNull
 	private Integer sellerId;
 	
-	// @URL
 	private String url;
 	
-	// @Price
-	// @NotNull
+	@NotNull
 	private BigDecimal price;
 	
-	// @NotNull
+	@NotNull
 	private Currency currency;
 	
-	// @Price
+
 	private BigDecimal altPrice;
 	
 	private Currency altCurrency;

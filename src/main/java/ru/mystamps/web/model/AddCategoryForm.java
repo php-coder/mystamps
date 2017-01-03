@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -86,7 +86,6 @@ public class AddCategoryForm implements AddCategoryDto {
 	@UniqueCategorySlug(groups = Group.Level7.class)
 	private String name;
 	
-	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
 			min = CATEGORY_NAME_MIN_LENGTH,

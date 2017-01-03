@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -228,7 +228,17 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation() {
+	public void shouldCreateCategoryWithNameInEnglishOnly() {
+		page.addCategory("Cars", null);
+		
+		String expectedUrl = Url.INFO_CATEGORY_PAGE.replace("{slug}", "cars");
+		
+		assertThat(page.getCurrentUrl()).isEqualTo(expectedUrl);
+		assertThat(page.getHeader()).isEqualTo("Cars");
+	}
+	
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
+	public void shouldCreateCategoryWithNameInTwoLanguages() {
 		page.addCategory(TEST_CATEGORY_NAME_EN, TEST_CATEGORY_NAME_RU);
 		
 		String expectedUrl = Url.INFO_CATEGORY_PAGE
@@ -238,10 +248,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		assertThat(page.getHeader()).isEqualTo(TEST_CATEGORY_NAME_EN);
 	}
 	
-	@Test(
-		groups = "logic",
-		dependsOnMethods = "shouldBeRedirectedToPageWithInfoAboutCategoryAfterCreation"
-	)
+	@Test(groups = "logic", dependsOnMethods = "shouldCreateCategoryWithNameInTwoLanguages")
 	public void categoryShouldBeAvailableForChoosingAtPageWithSeries() {
 		page.open(Url.ADD_SERIES_PAGE);
 		
@@ -252,7 +259,7 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	@Override
 	protected void checkServerResponseCode() {
-		// Ignore this check because server always returns 401 for anonymous user and our test suite
+		// Ignore this check because server always returns 403 for anonymous user and our test suite
 		// lack ability to check response code after authentication.
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2016 Slava Semushin <slava.semushin@gmail.com>
+ * Copyright (C) 2009-2017 Slava Semushin <slava.semushin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ public class AddCountryPage extends AbstractPageWithForm {
 		hasForm(
 			with(
 				required(inputField("name")).withLabel(tr("t_country_on_english")),
-				required(inputField("nameRu")).withLabel(tr("t_country_on_russian"))
+				inputField("nameRu").withLabel(tr("t_country_on_russian"))
 			)
 			.and()
 			.with(submitButton(tr("t_add")))
@@ -46,7 +46,6 @@ public class AddCountryPage extends AbstractPageWithForm {
 	
 	public void addCountry(String nameEn, String nameRu) {
 		Validate.validState(nameEn != null, "Country name in English must be non null");
-		Validate.validState(nameRu != null, "Country name in Russian must be non null");
 		
 		fillNameEn(nameEn);
 		fillNameRu(nameRu);
