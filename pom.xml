@@ -751,19 +751,6 @@
 				</configuration>
 			</plugin>
 			
-			<!--
-			     Usage:
-			     mvn findbugs:check (checks the sources and produces report to the console)
-			-->
-			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${findbugs.plugin.version}</version>
-				<configuration>
-					<includeTests>true</includeTests>
-				</configuration>
-			</plugin>
-			
 			<plugin>
 				<groupId>org.codehaus.gmaven</groupId>
 				<artifactId>gmaven-plugin</artifactId>
@@ -803,6 +790,19 @@
 					<rulesetfiles>
 						rulesets/basic.xml,rulesets/braces.xml,rulesets/concurrency.xml,rulesets/convention.xml,rulesets/design.xml,rulesets/dry.xml,rulesets/enhanced.xml,rulesets/exceptions.xml,rulesets/formatting.xml,rulesets/generic.xml,rulesets/groovyism.xml,rulesets/imports.xml,rulesets/jdbc.xml,rulesets/logging.xml,rulesets/naming.xml,rulesets/security.xml,rulesets/serialization.xml,rulesets/unnecessary.xml,rulesets/unused.xml
 					</rulesetfiles>
+				</configuration>
+			</plugin>
+			
+			<!--
+			     Usage:
+			     mvn findbugs:check (checks the sources and produces report to the console)
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.plugin.version}</version>
+				<configuration>
+					<includeTests>true</includeTests>
 				</configuration>
 			</plugin>
 			
