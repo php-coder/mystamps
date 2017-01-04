@@ -17,11 +17,19 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import java.util.Collections;
+
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+
+import org.springframework.boot.web.filter.OrderedRequestContextFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -144,6 +152,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		provider.setUserDetailsService(getUserDetailsService());
 		provider.setMessageSource(messageSource);
 		return provider;
+	}
+	
+	// By default RequestContextFilter is created. Override it with its ordered version.
+	// Note that name is important here
+	@Bean(name = "requestContextFilter")
+	public Filter getOrderedRequestContextFilter() {
+		return new OrderedRequestContextFilter();
+	}
+	
+	// Bean name will be shown in logs
+	@Bean(name = "resetLocaleFilter")
+	public FilterRegistrationBean getResetLocaleFilter(
+		@Qualifier("requestContextFilter") Filter filter) {
+		
+		FilterRegistrationBean bean = new FilterRegistrationBean(
+			new SessionLocaleResolverAwareFilter()
+		);
+		
+		// SessionLocaleResolverAwareFilter should be invoked after RequestContextFilter
+		// to overwrite locale in LocaleContextHolder
+		OrderedRequestContextFilter requestContextFilter = (OrderedRequestContextFilter)filter;
+		bean.setOrder(requestContextFilter.getOrder() + 1);
+		
+		// url pattern should match HttpSecurity.formLogin().loginProcessingUrl()
+		bean.setUrlPatterns(Collections.singletonList(Url.LOGIN_PAGE));
+		
+		return bean;
 	}
 	
 	private UserDetailsService getUserDetailsService() {
