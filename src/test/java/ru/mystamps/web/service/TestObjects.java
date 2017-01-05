@@ -18,6 +18,7 @@
 package ru.mystamps.web.service;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
@@ -103,7 +104,7 @@ final class TestObjects {
 	}
 	
 	public static DbImageDto createDbImageDto() {
-		return new DbImageDto("PNG", "test".getBytes());
+		return new DbImageDto("PNG", "test".getBytes(StandardCharsets.UTF_8));
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
