@@ -60,6 +60,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
@@ -123,9 +124,9 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("categories")
-	public List<LinkEntityDto> getCategories(Locale userLocale) {
+	public List<CategoryDto> getCategories(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findAllAsLinkEntities(lang);
+		return categoryService.findAllAsTree(lang);
 	}
 	
 	@ModelAttribute("countries")

@@ -253,4 +253,19 @@ final class RowMappers {
 		);
 	}
 	
+	public static CategoryDto forCategoryDto(ResultSet rs, int i) throws SQLException {
+		return new CategoryDto(
+			rs.getString("slug"),
+			rs.getString("name")
+		);
+	}
+	
+	public static SubCategoryDto forSubCategoryDto(ResultSet rs, int i) throws SQLException {
+		return new SubCategoryDto(
+			rs.getString("slug"),
+			rs.getString("name"),
+			rs.getString("parent_slug")
+		);
+	}
+	
 }

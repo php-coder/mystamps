@@ -23,5 +23,6 @@
 	<include file="0.4/2016-10-10--change_series_sales_date_type.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-11-29--add-unique-key-transaction_participants-table.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-12-05--make_name_ru_optional.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2016-12-08--top_categories.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

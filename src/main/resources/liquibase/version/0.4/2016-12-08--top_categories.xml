@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-categories-parent_id-field" author="php-coder" context="scheme">
+		
+		<addColumn tableName="categories">
+			<column name="parent_id" type="INTEGER" beforeColumn="created_at">
+				<constraints references="categories(id)" foreignKeyName="fk_categories_id" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-fauna-top-level-category" author="php-coder" context="test-data, prod-data">
+		
+		<insert tableName="categories">
+			<column name="name" value="Fauna" />
+			<column name="name_ru" value="Фауна" />
+			<column name="slug" value="fauna" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+		</insert>
+	
+	</changeSet>
+	
+	<changeSet id="move-prehistoric-animals-inside-fauna" author="php-coder" context="test-data, prod-data">
+		
+		<update tableName="categories">
+			<!--
+				 We're SELECTing from a temporary table to overcome
+				 "You can't specify target table 'categories' for update in FROM clause"
+				 error in MySQL:
+				 http://stackoverflow.com/questions/4429319/you-cant-specify-target-table-for-update-in-from-clause
+			-->
+			<column name="parent_id" valueComputed="(SELECT c.id FROM (SELECT id, slug FROM categories) c WHERE c.slug = 'fauna')" />
+			<where>slug = 'prehistoric-animals'</where>
+		</update>
+		
+	</changeSet>
+	
+	<changeSet id="add-sport-top-level-category" author="php-coder" context="test-data">
+		
+		<insert tableName="categories">
+			<column name="name" value="Sport" />
+			<column name="name_ru" value="Спорт" />
+			<column name="slug" value="sport" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+		</insert>
+		
+	</changeSet>
+	
+	<changeSet id="delete-animals-category" author="php-coder" context="test-data">
+		
+		<delete tableName="categories">
+			<where>slug = 'animals'</where>
+		</delete>
+		
+	</changeSet>
+	
+</databaseChangeLog>

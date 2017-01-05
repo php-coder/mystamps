@@ -21,8 +21,11 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SubCategoryDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryDao {
 	Integer add(AddCategoryDbDto category);
 	long countAll();
@@ -35,4 +38,6 @@ public interface CategoryDao {
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
+	List<CategoryDto> findTopLevelCategories(String lang);
+	List<SubCategoryDto> findSubCategoriesOf(List<String> slugs, String lang);
 }

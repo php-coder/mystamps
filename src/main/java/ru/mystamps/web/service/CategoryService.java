@@ -20,12 +20,16 @@ package ru.mystamps.web.service;
 import java.util.Date;
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryService {
 	String add(AddCategoryDto dto, Integer userId);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
+	List<CategoryDto> findTopLevelCategories(String lang);
+	List<CategoryDto> findAllAsTree(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCategoriesOf(Integer collectionId);

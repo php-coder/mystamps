@@ -17,9 +17,13 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -35,12 +39,16 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithSlugDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SubCategoryDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
+@SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
@@ -83,6 +91,52 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<CategoryDto> findTopLevelCategories(String lang) {
+		return categoryDao.findTopLevelCategories(lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public List<CategoryDto> findAllAsTree(String lang) {
+		List<CategoryDto> categories = findTopLevelCategories(lang);
+		if (categories.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		List<String> categoriesSlugs = new ArrayList<>(categories.size());
+		Map<String, CategoryDto> categoriesIndex = new HashMap<>();
+		for (CategoryDto category : categories) {
+			categoriesSlugs.add(category.getSlug());
+			categoriesIndex.put(category.getSlug(), category);
+		}
+		
+		List<SubCategoryDto> subcategories = categoryDao.findSubCategoriesOf(categoriesSlugs, lang);
+		if (!subcategories.isEmpty()) {
+			for (SubCategoryDto subcategory : subcategories) {
+				CategoryDto parent = categoriesIndex.get(subcategory.getParentSlug());
+				if (parent == null) {
+					LOG.warn(
+						"Sub-category '{}' has parent '{}' that wasn't found in index",
+						subcategory.getSlug(),
+						subcategory.getParentSlug()
+					);
+					continue;
+				}
+				
+				EntityWithSlugDto child = new EntityWithSlugDto(
+					subcategory.getSlug(),
+					subcategory.getName()
+				);
+				parent.getChildren().add(child);
+			}
+		}
+		
+		return categories;
 	}
 	
 	@Override

@@ -36,10 +36,12 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SubCategoryDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCategoryDao implements CategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -76,6 +78,12 @@ public class JdbcCategoryDao implements CategoryDao {
 	
 	@Value("${category.find_category_link_info_by_slug}")
 	private String findLinkEntityBySlugSql;
+	
+	@Value("${category.find_top_level_categories}")
+	private String findTopLevelCategoriesSql;
+	
+	@Value("${category.find_sub_categories_by_parent_slugs}")
+	private String findSubCategoriesByParentsSql;
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
@@ -205,6 +213,28 @@ public class JdbcCategoryDao implements CategoryDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<CategoryDto> findTopLevelCategories(String lang) {
+		return jdbcTemplate.query(
+			findTopLevelCategoriesSql,
+			Collections.singletonMap("lang", lang),
+			RowMappers::forCategoryDto
+		);
+	}
+	
+	@Override
+	public List<SubCategoryDto> findSubCategoriesOf(List<String> slugs, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("parent_slugs", slugs);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(
+			findSubCategoriesByParentsSql,
+			params,
+			RowMappers::forSubCategoryDto
+		);
 	}
 	
 }
