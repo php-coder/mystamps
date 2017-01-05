@@ -138,15 +138,25 @@
 								<select id="category" name="category" class="form-control" required="required">
 									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 									<!--/*/
-									<option th:each="category : ${categories}"
-										th:value="${category.slug}"
-										th:text="${category.name}"
-										th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.slug}">
-									</option>
+									<th:block th:each="category : ${categories}">
+										<optgroup th:if="${not #lists.isEmpty(category.children)}" th:label="${category.name}">
+											<option th:each="subcategory : ${category.children}"
+												th:value="${subcategory.slug}"
+												th:text="${subcategory.name}"
+												th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == subcategory.slug}">
+											</option>
+										</optgroup>
+										<option th:if="${#lists.isEmpty(category.children)}"
+											th:value="${category.slug}"
+											th:text="${category.name}"
+											th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.slug}">
+										</option>
+									</th:block>
 									/*/-->
 									<!--/*-->
-									<option value="animals">Animals</option>
-									<option value="music">Music</option>
+									<optgroup label="Fauna">
+										<option value="prehistoric-animals">Prehistoric animals</option>
+									</optgroup>
 									<option value="sport">Sport</option>
 									<!--*/-->
 								</select>

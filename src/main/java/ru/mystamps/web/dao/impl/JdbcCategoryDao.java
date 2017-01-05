@@ -36,10 +36,11 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCategoryDao implements CategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -76,6 +77,10 @@ public class JdbcCategoryDao implements CategoryDao {
 	
 	@Value("${category.find_category_link_info_by_slug}")
 	private String findLinkEntityBySlugSql;
+	
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${category.find_categories_with_parent_names}")
+	private String findCategoriesWithParentNamesSql;
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
@@ -205,6 +210,15 @@ public class JdbcCategoryDao implements CategoryDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<CategoryDto> findCategoriesWithParents(String lang) {
+		return jdbcTemplate.query(
+			findCategoriesWithParentNamesSql,
+			Collections.singletonMap("lang", lang),
+			RowMappers::forCategoryDto
+		);
 	}
 	
 }
