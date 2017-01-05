@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -35,12 +37,16 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
+import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithSlugDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
+import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
+@SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
@@ -83,6 +89,47 @@ public class CategoryServiceImpl implements CategoryService {
 	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findAllAsLinkEntities(String lang) {
 		return categoryDao.findAllAsLinkEntities(lang);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public List<FirstLevelCategoryDto> findFirstLevelCategories(String lang) {
+		List<CategoryDto> categories = categoryDao.findCategoriesWithParents(lang);
+		if (categories.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		// Because of Thymeleaf's restrictions we can't return categories as-is and need this
+		// transformation
+		List<FirstLevelCategoryDto> items = new ArrayList<>();
+		String lastParent = null;
+		FirstLevelCategoryDto lastItem = null;
+		
+		for (CategoryDto category : categories) {
+			String name   = category.getName();
+			String slug   = category.getSlug();
+			String parent = category.getParentName();
+			
+			boolean categoryWithoutParent = parent == null;
+			boolean createNewItem = categoryWithoutParent || !parent.equals(lastParent);
+			
+			if (createNewItem) {
+				lastParent = parent;
+				if (categoryWithoutParent) {
+					lastItem = new FirstLevelCategoryDto(name, slug);
+				} else {
+					lastItem = new FirstLevelCategoryDto(parent);
+					lastItem.getChildren().add(new EntityWithSlugDto(name, slug));
+				}
+				items.add(lastItem);
+			} else {
+				lastItem.getChildren().add(new EntityWithSlugDto(name, slug));
+			}
+		}
+		
+		return items;
 	}
 	
 	@Override

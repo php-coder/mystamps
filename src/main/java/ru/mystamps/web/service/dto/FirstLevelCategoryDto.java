@@ -15,27 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service.dto;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.dao.dto.CategoryDto;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
+import lombok.Getter;
+import lombok.ToString;
 
-@SuppressWarnings("PMD.TooManyMethods")
-public interface CategoryDao {
-	Integer add(AddCategoryDbDto category);
-	long countAll();
-	long countBySlug(String slug);
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countCategoriesOfCollection(Integer collectionId);
-	long countAddedSince(Date date);
-	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	List<CategoryDto> findCategoriesWithParents(String lang);
+import ru.mystamps.web.dao.dto.EntityWithSlugDto;
+
+@Getter
+@ToString
+public class FirstLevelCategoryDto {
+	private final String name;
+	private final String slug;
+	private final List<EntityWithSlugDto> children = new ArrayList<>();
+	
+	public FirstLevelCategoryDto(String name, String slug) {
+		this.name = name;
+		this.slug = slug;
+	}
+	
+	public FirstLevelCategoryDto(String name) {
+		this(name, null);
+	}
+	
 }

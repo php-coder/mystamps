@@ -253,4 +253,12 @@ final class RowMappers {
 		);
 	}
 	
+	public static CategoryDto forCategoryDto(ResultSet rs, int i) throws SQLException {
+		return new CategoryDto(
+			rs.getString("name"),
+			rs.getString("slug"),
+			rs.getString("parent_name")
+		);
+	}
+	
 }

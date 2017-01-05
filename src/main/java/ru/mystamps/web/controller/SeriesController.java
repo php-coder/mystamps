@@ -70,6 +70,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.TransactionParticipantService;
+import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
@@ -120,9 +121,9 @@ public class SeriesController {
 	}
 	
 	@ModelAttribute("categories")
-	public List<LinkEntityDto> getCategories(Locale userLocale) {
+	public List<FirstLevelCategoryDto> getCategories(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findAllAsLinkEntities(lang);
+		return categoryService.findFirstLevelCategories(lang);
 	}
 	
 	@ModelAttribute("countries")
