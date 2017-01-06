@@ -39,5 +39,5 @@ public interface CategoryDao {
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	List<CategoryDto> findTopLevelCategories(String lang);
-	List<SubCategoryDto> findSubCategoriesOf(List<String> slugs, String lang);
+	List<SubCategoryDto> findSubCategoriesOf(List<Integer> topCategoryIds, String lang);
 }

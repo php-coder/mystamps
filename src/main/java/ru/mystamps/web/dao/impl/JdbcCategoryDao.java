@@ -79,10 +79,10 @@ public class JdbcCategoryDao implements CategoryDao {
 	@Value("${category.find_category_link_info_by_slug}")
 	private String findLinkEntityBySlugSql;
 	
-	@Value("${category.find_top_level_categories}")
+	@Value("${top_category.find_all}")
 	private String findTopLevelCategoriesSql;
 	
-	@Value("${category.find_sub_categories_by_parent_slugs}")
+	@Value("${category.find_by_top_category_ids}")
 	private String findSubCategoriesByParentsSql;
 	
 	@Override
@@ -225,9 +225,9 @@ public class JdbcCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public List<SubCategoryDto> findSubCategoriesOf(List<String> slugs, String lang) {
+	public List<SubCategoryDto> findSubCategoriesOf(List<Integer> topCategoryIds, String lang) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("parent_slugs", slugs);
+		params.put("top_category_ids", topCategoryIds);
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(
