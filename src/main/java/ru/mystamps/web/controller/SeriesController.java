@@ -123,12 +123,6 @@ public class SeriesController {
 		return YEARS;
 	}
 	
-	@ModelAttribute("categories")
-	public List<FirstLevelCategoryDto> getCategories(Locale userLocale) {
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findFirstLevelCategories(lang);
-	}
-	
 	@ModelAttribute("countries")
 	public List<LinkEntityDto> getCountries(Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
@@ -138,7 +132,14 @@ public class SeriesController {
 	@GetMapping(Url.ADD_SERIES_PAGE)
 	public AddSeriesForm showForm(
 		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
-		@Country @RequestParam(name = "country", required = false) LinkEntityDto country) {
+		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
+		Model model,
+		Locale userLocale) {
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		
+		List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
+		model.addAttribute("categories", categories);
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
@@ -188,9 +189,16 @@ public class SeriesController {
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId) {
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		Model model) {
 		
 		if (result.hasErrors()) {
+			String lang = LocaleUtils.getLanguageOrNull(userLocale);
+			
+			List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
+			model.addAttribute("categories", categories);
+			
 			// don't try to re-display file upload field
 			form.setImage(null);
 			return null;
