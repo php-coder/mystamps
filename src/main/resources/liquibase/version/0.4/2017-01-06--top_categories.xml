@@ -65,14 +65,6 @@
 		
 	</changeSet>
 	
-	<changeSet id="delete-animals-category" author="php-coder" context="test-data">
-		
-		<delete tableName="categories">
-			<where>slug = 'animals'</where>
-		</delete>
-		
-	</changeSet>
-	
 	<changeSet id="add-sport-category" author="php-coder" context="test-data">
 		
 		<insert tableName="categories">

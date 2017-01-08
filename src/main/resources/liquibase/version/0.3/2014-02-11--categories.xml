@@ -67,8 +67,4 @@
 		
 	</changeSet>
 	
-	<changeSet id="create-category-animals" author="php-coder" context="test-data">
-		<sqlFile path="../../sql/test-category-animals.sql" relativeToChangelogFile="true" />
-	</changeSet>
-	
 </databaseChangeLog>
