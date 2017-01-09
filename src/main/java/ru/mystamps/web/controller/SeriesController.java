@@ -118,19 +118,8 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
 	}
 	
-	@ModelAttribute("years")
-	public Map<Integer, Integer> getYears() {
-		return YEARS;
-	}
-	
-	@ModelAttribute("countries")
-	public List<LinkEntityDto> getCountries(Locale userLocale) {
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return countryService.findAllAsLinkEntities(lang);
-	}
-	
 	@GetMapping(Url.ADD_SERIES_PAGE)
-	public AddSeriesForm showForm(
+	public void showForm(
 		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
 		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
 		Model model,
@@ -140,6 +129,11 @@ public class SeriesController {
 		
 		List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
 		model.addAttribute("categories", categories);
+		
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		model.addAttribute("countries", countries);
+		
+		model.addAttribute("years", YEARS);
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
@@ -152,7 +146,7 @@ public class SeriesController {
 			addSeriesForm.setCountry(country);
 		}
 		
-		return addSeriesForm;
+		model.addAttribute("addSeriesForm", addSeriesForm);
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
@@ -198,6 +192,11 @@ public class SeriesController {
 			
 			List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
 			model.addAttribute("categories", categories);
+			
+			List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+			model.addAttribute("countries", countries);
+			
+			model.addAttribute("years", YEARS);
 			
 			// don't try to re-display file upload field
 			form.setImage(null);
