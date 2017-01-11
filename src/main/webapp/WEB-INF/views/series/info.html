@@ -365,7 +365,7 @@
 									<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}" th:object="${addSeriesSalesForm}">
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-											<label for="date" class="control-label col-sm-2">
+											<label for="date" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_date}">
 													Date
 												</span>
@@ -379,7 +379,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
-											<label for="seller" class="control-label col-sm-2">
+											<label for="seller" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_seller}">
 													Seller
 												</span>
@@ -404,7 +404,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-											<label for="url" class="control-label col-sm-2">
+											<label for="url" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_url}">
 													URL
 												</span>
@@ -418,7 +418,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
-											<label for="price" class="control-label col-sm-2">
+											<label for="price" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_price}">
 													Price
 												</span>
@@ -446,7 +446,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-											<label for="price" class="control-label col-sm-2">
+											<label for="price" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_alternative_price}">
 													Alternative price
 												</span>
@@ -473,7 +473,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-											<label for="buyer" class="control-label col-sm-2">
+											<label for="buyer" class="control-label col-sm-3">
 												<span class="field-label" th:text="#{t_buyer}">
 													Buyer
 												</span>
@@ -496,7 +496,7 @@
 										</div>
 										
 										<div class="form-group form-group-sm">
-											<div class="col-sm-offset-2 col-sm-4">
+											<div class="col-sm-offset-3 col-sm-4">
 												<input type="submit" class="btn btn-primary" value="Add info" th:value="#{t_add_info}" />
 											</div>
 										</div>
