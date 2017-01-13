@@ -681,15 +681,7 @@
 						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!-- Use default <execution> configuration from spring-boot-starter-parent -->
 			</plugin>
 			
 			<plugin>
