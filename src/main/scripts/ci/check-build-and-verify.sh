@@ -13,6 +13,7 @@ CODENARC_FAIL=
 LICENSE_FAIL=
 POM_FAIL=
 BOOTLINT_FAIL=
+RFLINT_FAIL=
 JASMINE_FAIL=
 HTML_FAIL=
 TEST_FAIL=
@@ -30,6 +31,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode license:check >license.log 2>&1 || LICENSE_FAIL=yes
 	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop >pom.log || POM_FAIL=yes
 	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || BOOTLINT_FAIL=yes
+	rflint --ignore TooFewKeywordStep src/test/robotframework >rflint.log 2>&1 || RFLINT_FAIL=yes
 	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || JASMINE_FAIL=yes
 	# FIXME: add check for src/main/config/nginx/503.*html
 	# TODO: remove ignoring of error about alt attribute after resolving #314
@@ -64,6 +66,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$LICENSE_FAIL"  'Check license headers'
 	print_status "$POM_FAIL"      'Check sorting of pom.xml'
 	print_status "$BOOTLINT_FAIL" 'Run bootlint'
+	print_status "$RFLINT_FAIL"   'Run robot framework lint'
 	print_status "$JASMINE_FAIL"  'Run JavaScript unit tests'
 	print_status "$HTML_FAIL"     'Run html5validator'
 	print_status "$TEST_FAIL"     'Run unit tests'
@@ -81,6 +84,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_log license.log   'Check license headers'
 	print_log pom.log       'Check sorting of pom.xml'
 	print_log bootlint.log  'Run bootlint'
+	print_log rflint.log    'Run robot framework lint'
 	print_log jasmine.log   'Run JavaScript unit tests'
 	print_log validator.log 'Run html5validator'
 	print_log test.log      'Run unit tests'
@@ -89,8 +93,8 @@ fi
 
 print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log codenarc.log license.log bootlint.log jasmine.log validator.log test.log findbugs.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log bootlint.log rflint.log jasmine.log validator.log test.log findbugs.log verify.log
 
-if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
+if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
 	exit 1
 fi

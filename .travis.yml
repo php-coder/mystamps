@@ -15,6 +15,7 @@ before_script:
       fi;
       npm install -g bootlint;
       pip install --user html5validator;
+      pip install --user robotframework-lint;
     fi
 
 script:
