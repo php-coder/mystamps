@@ -26,8 +26,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import ru.mystamps.web.tests.page.AddCategoryPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
