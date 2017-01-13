@@ -40,7 +40,7 @@ Before Test
 	Go To            ${SITE_URL}/category/add
 
 After Test Suite
-	[Documentation]  Log out and closes browser
+	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
 
