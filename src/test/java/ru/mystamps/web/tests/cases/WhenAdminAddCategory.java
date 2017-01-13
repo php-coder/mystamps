@@ -109,20 +109,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		
 		assertThat(page).field("nameRu").hasError(tr("value.hyphen"));
 	}
-
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnShouldNotContainRepeatedHyphens() {
-		page.addCategory("te--st", TEST_CATEGORY_NAME_RU);
-
-		assertThat(page).field("name").hasError(tr("value.repeating_hyphen"));
-	}
-
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuShouldNotContainRepeatedHyphens() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "те--ст");
-
-		assertThat(page).field("nameRu").hasError(tr("value.repeating_hyphen"));
-	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void categoryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
