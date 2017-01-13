@@ -31,7 +31,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode license:check >license.log 2>&1 || LICENSE_FAIL=yes
 	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop >pom.log || POM_FAIL=yes
 	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || BOOTLINT_FAIL=yes
-	rflint --ignore TooFewKeywordStep src/test/robotframework >rflint.log 2>&1 || RFLINT_FAIL=yes
+	rflint --ignore TooFewKeywordSteps src/test/robotframework >rflint.log 2>&1 || RFLINT_FAIL=yes
 	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || JASMINE_FAIL=yes
 	# FIXME: add check for src/main/config/nginx/503.*html
 	# TODO: remove ignoring of error about alt attribute after resolving #314
