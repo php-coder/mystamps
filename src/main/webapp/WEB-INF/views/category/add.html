@@ -105,7 +105,8 @@
 						</small>
 					</div>
 					
-					<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_CATEGORY_PAGE}}" th:object="${addCategoryForm}">
+					<form id="add-category-form" method="post" class="form-horizontal" action="info.html"
+						th:action="@{${ADD_CATEGORY_PAGE}}" th:object="${addCategoryForm}">
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
 							<label for="name" class="control-label col-sm-4">

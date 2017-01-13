@@ -228,16 +228,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldCreateCategoryWithNameInEnglishOnly() {
-		page.addCategory("Cars", null);
-		
-		String expectedUrl = Url.INFO_CATEGORY_PAGE.replace("{slug}", "cars");
-		
-		assertThat(page.getCurrentUrl()).isEqualTo(expectedUrl);
-		assertThat(page.getHeader()).isEqualTo("Cars");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void shouldCreateCategoryWithNameInTwoLanguages() {
 		page.addCategory(TEST_CATEGORY_NAME_EN, TEST_CATEGORY_NAME_RU);
 		

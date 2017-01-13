@@ -265,6 +265,59 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.github.markusbernhardt</groupId>
+			<artifactId>robotframework-selenium2library-java</artifactId>
+			<version>${robotframework-selenium.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.github.detro.ghostdriver</groupId>
+					<artifactId>phantomjsdriver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.opera</groupId>
+					<artifactId>operadriver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.appium</groupId>
+					<artifactId>java-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.selendroid</groupId>
+					<artifactId>selendroid-client</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-edge-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-chrome-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-ie-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-safari-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-leg-rc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-firefox-driver</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>${groovy.version}</version>
@@ -275,6 +328,13 @@
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>${fest.assert.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>robotframework</artifactId>
+			<version>${robotframework.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -428,6 +488,9 @@
 		<!-- Dependency can be safely removed when pmd plugin will require this version -->
 		<pmd.version>5.5.2</pmd.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
+		<robotframework-plugin.version>1.4.6</robotframework-plugin.version>
+		<robotframework-selenium.version>1.4.0.8</robotframework-selenium.version>
+		<robotframework.version>3.0</robotframework.version>
 		
 		<!-- Don't forget to update version in the Url class -->
 		<selectizejs.version>0.12.3</selectizejs.version>
@@ -843,6 +906,37 @@
 					<!-- See also application-prod.properties -->
 					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
+			</plugin>
+			
+			<!--
+			     Usage:
+			     mvn robotframework:run (runs tests and generates report in target/robotframework-reports/report.html)
+			-->
+			<plugin>
+				<groupId>org.robotframework</groupId>
+				<artifactId>robotframework-maven-plugin</artifactId>
+				<version>${robotframework-plugin.version}</version>
+				<configuration>
+					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
+					<xunitFile>NONE</xunitFile>
+					<!-- Handy for debugging. Log file will be created in target/ directory -->
+					<!--
+					<debugFile>${project.build.directory}/robotframework.log</debugFile>
+					<logLevel>DEBUG</logLevel>
+					-->
+					<variables>
+						<variable>BROWSER:htmlunitwithjs</variable>
+						<!-- See also ru.mystamps.web.Url.SITE constant -->
+						<variable>SITE_URL:http://127.0.0.1:8080</variable>
+					</variables>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>

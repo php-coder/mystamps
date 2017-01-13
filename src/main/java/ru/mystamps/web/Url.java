@@ -31,7 +31,7 @@ public final class Url {
 	public static final String PUBLIC_URL            = "https://my-stamps.ru";
 	public static final String STATIC_RESOURCES_URL  = "https://stamps.filezz.ru";
 	
-	// defined at pom.xml (and used by functional tests only)
+	// see also robotframework-maven-plugin configuration at pom.xml
 	public static final String SITE                  = "http://127.0.0.1:8080";
 	
 	public static final String INDEX_PAGE            = "/";
