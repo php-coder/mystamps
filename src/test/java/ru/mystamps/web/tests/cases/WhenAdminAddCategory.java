@@ -83,20 +83,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnWithForbiddenCharactersShouldBeRejected() {
-		page.addCategory("S0m3+CategoryN_ame", TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasError(tr("category-name-en.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuWithForbiddenCharactersShouldBeRejected() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "Категория123");
-		
-		assertThat(page).field("nameRu").hasError(tr("category-name-ru.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameEnShouldNotStartsFromHyphen() {
 		page.addCategory("-test", TEST_CATEGORY_NAME_RU);
 		
