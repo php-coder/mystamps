@@ -32,7 +32,6 @@ import ru.mystamps.web.tests.page.AddCategoryPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
@@ -75,22 +74,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnShouldNotBeTooLong() {
-		String longCategoryName = StringUtils.repeat("e", CATEGORY_NAME_MAX_LENGTH + 1);
-		page.addCategory(longCategoryName, TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasError(tr("value.too-long", CATEGORY_NAME_MAX_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuShouldNotBeTooLong() {
-		String longCategoryName = StringUtils.repeat("я", CATEGORY_NAME_MAX_LENGTH + 1);
-		page.addCategory(TEST_CATEGORY_NAME_EN, longCategoryName);
-		
-		assertThat(page).field("nameRu").hasError(tr("value.too-long", CATEGORY_NAME_MAX_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
