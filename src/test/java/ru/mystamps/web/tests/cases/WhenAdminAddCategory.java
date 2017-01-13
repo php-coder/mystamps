@@ -28,10 +28,7 @@ import org.testng.annotations.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.tests.page.AddCategoryPage;
-import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
@@ -225,15 +222,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		page.addCategory(TEST_CATEGORY_NAME_EN, "т3  ст");
 
 		assertThat(page).field("nameRu").hasValue("т3 ст");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void categoryShouldBeAvailableForChoosingAtPageWithSeries() {
-		page.open(Url.ADD_SERIES_PAGE);
-		
-		AddSeriesPage seriesPage = new AddSeriesPage(WebDriverFactory.getDriver());
-		
-		assertThat(seriesPage.getCategoryFieldValues()).contains(TEST_CATEGORY_NAME_EN);
 	}
 	
 	@Override

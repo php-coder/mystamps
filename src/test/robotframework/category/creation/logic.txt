@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Verify category creation scenarios
+Library          Collections
 Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
@@ -8,11 +9,14 @@ Force Tags       Category
 
 *** Test Cases ***
 Create category with name in English
-	[Documentation]         Verify creation of category by filling only mandatory fields
-	Input Text              id=name  Cars
-	Submit Form             id=add-category-form
-	Location Should Be      ${SITE_URL}/category/cars
-	Element Text Should Be  id=page-header  Cars
+	[Documentation]            Verify creation of category by filling only mandatory fields
+	Input Text                 id=name  Cars
+	Submit Form                id=add-category-form
+	Location Should Be         ${SITE_URL}/category/cars
+	Element Text Should Be     id=page-header  Cars
+	Go To                      ${SITE_URL}/series/add
+	${availableCategories}=    Get List Items  id=category
+	List Should Contain Value  ${availableCategories}  Cars
 	# TODO: verify that after changing language, header will be in English
 
 Create category with name in English and Russian
