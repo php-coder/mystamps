@@ -44,12 +44,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Value("${valid_admin_password}")
 	private String validAdminPassword;
 	
-	@Value("${valid_category_name_en}")
-	private String existingCategoryNameEn;
-	
-	@Value("${valid_category_name_ru}")
-	private String existingCategoryNameRu;
-	
 	public WhenAdminAddCategory() {
 		super(AddCategoryPage.class);
 		hasTitle(tr("t_create_category"));
@@ -74,24 +68,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnShouldBeUnique() {
-		page.addCategory(existingCategoryNameEn, TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCategoryName.message"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuShouldBeUnique() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, existingCategoryNameRu);
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueCategoryName.message"));
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
