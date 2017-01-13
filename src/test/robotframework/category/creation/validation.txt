@@ -25,6 +25,14 @@ Create category with too long name
 	Element Text Should Be  id=name.errors  Value is greater than allowable maximum of 50 characters
 	Element Text Should Be  id=nameRu.errors  Value is greater than allowable maximum of 50 characters
 
+Create category with existing name
+	[Documentation]         Verify validation of non-unique name
+	Input Text              id=name  Sport
+	Input Text              id=nameRu  Спорт
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Category already exists
+	Element Text Should Be  id=nameRu.errors  Category already exists
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
