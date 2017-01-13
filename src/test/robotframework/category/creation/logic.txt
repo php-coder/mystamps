@@ -13,6 +13,16 @@ Create category with name in English
 	Submit Form             id=add-category-form
 	Location Should Be      ${SITE_URL}/category/cars
 	Element Text Should Be  id=page-header  Cars
+	# TODO: verify that after changing language, header will be in English
+
+Create category with name in English and Russian
+	[Documentation]         Verify creation of category by specifying names in 2 languages
+	Input Text              id=name  Space
+	Input Text              id=nameRu  Космос
+	Submit Form             id=add-category-form
+	Location Should Be      ${SITE_URL}/category/space
+	Element Text Should Be  id=page-header  Space
+	# TODO: verify that after changing language, header will be in Russian
 
 *** Keywords ***
 Before Test Suite
