@@ -41,6 +41,14 @@ Create country with repeating hyphens in name
 	Element Text Should Be  id=name.errors  Value must not contain repetition of hyphen
 	Element Text Should Be  id=nameRu.errors  Value must not contain repetition of hyphen
 
+Create country with name that starts with hyphen
+	[Documentation]         Verify validation of name with leading hyphen
+	Input Text              id=name  -test
+	Input Text              id=nameRu  -тест
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
+	Element Text Should Be  id=nameRu.errors  Value must not start or end with hyphen
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
