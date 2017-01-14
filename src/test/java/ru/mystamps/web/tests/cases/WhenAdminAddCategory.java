@@ -33,9 +33,6 @@ import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
-	private static final String TEST_CATEGORY_NAME_EN = "Space";
-	private static final String TEST_CATEGORY_NAME_RU = "Космос";
-	
 	@Value("${valid_admin_login}")
 	private String validAdminLogin;
 	
@@ -80,20 +77,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		page.addCategory("НевернаяКатегорияНаАнглийском", "Категория Ёё");
 		
 		assertThat(page).field("nameRu").hasNoError();
-	}
-
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameEnShouldReplaceRepeatedSpacesByOne() {
-		page.addCategory("t3  st", TEST_CATEGORY_NAME_RU);
-
-		assertThat(page).field("name").hasValue("t3 st");
-	}
-
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameRuShouldReplaceRepeatedSpacesByOne() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "т3  ст");
-
-		assertThat(page).field("nameRu").hasValue("т3 ст");
 	}
 	
 	@Override
