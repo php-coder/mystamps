@@ -25,6 +25,14 @@ Create country with too long name
 	Element Text Should Be  id=name.errors  Value is greater than allowable maximum of 50 characters
 	Element Text Should Be  id=nameRu.errors  Value is greater than allowable maximum of 50 characters
 
+Create country with forbidden characters in name
+	[Documentation]         Verify validation of invalid name
+	Input Text              id=name  S0m3+CountryN_ame
+	Input Text              id=nameRu  Нек0торо3+наз_вание
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Country name must consist only latin letters, hyphen or spaces
+	Element Text Should Be  id=nameRu.errors  Country name must consist only Russian letters, hyphen or spaces
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
