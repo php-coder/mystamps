@@ -149,20 +149,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 			.field("nameRu")
 			.hasError(tr("value.hyphen"));
 	}
-
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldNotContainRepeatedHyphens() {
-		page.addCountry("te--st", TEST_COUNTRY_NAME_RU);
-
-		assertThat(page).field("name").hasError(tr("value.repeating_hyphen"));
-	}
-
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldNotContainRepeatedHyphens() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "те--ст");
-
-		assertThat(page).field("nameRu").hasError(tr("value.repeating_hyphen"));
-	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void countryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
