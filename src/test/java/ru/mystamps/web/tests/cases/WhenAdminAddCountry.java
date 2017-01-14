@@ -38,7 +38,6 @@ import ru.mystamps.web.tests.page.AddSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
 
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -81,26 +80,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldNotBeTooLong() {
-		String longCountryName = StringUtils.repeat("e", COUNTRY_NAME_MAX_LENGTH + 1);
-		page.addCountry(longCountryName, TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("value.too-long", COUNTRY_NAME_MAX_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldNotBeTooLong() {
-		String longCountryName = StringUtils.repeat("я", COUNTRY_NAME_MAX_LENGTH + 1);
-		page.addCountry(TEST_COUNTRY_NAME_EN, longCountryName);
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("value.too-long", COUNTRY_NAME_MAX_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
