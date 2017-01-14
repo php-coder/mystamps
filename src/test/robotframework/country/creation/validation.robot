@@ -57,6 +57,14 @@ Create country with name that ends with hyphen
 	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
 	Element Text Should Be  id=nameRu.errors  Value must not start or end with hyphen
 
+Create country with existing name
+	[Documentation]         Verify validation of non-unique name
+	Input Text              id=name  Italy
+	Input Text              id=nameRu  Италия
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Country already exists
+	Element Text Should Be  id=nameRu.errors  Country already exists
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
