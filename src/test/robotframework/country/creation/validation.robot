@@ -33,6 +33,14 @@ Create country with forbidden characters in name
 	Element Text Should Be  id=name.errors  Country name must consist only latin letters, hyphen or spaces
 	Element Text Should Be  id=nameRu.errors  Country name must consist only Russian letters, hyphen or spaces
 
+Create country with repeating hyphens in name
+	[Documentation]         Verify validation of name with repeating hyphens
+	Input Text              id=name  te--st
+	Input Text              id=nameRu  те--ст
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Value must not contain repetition of hyphen
+	Element Text Should Be  id=nameRu.errors  Value must not contain repetition of hyphen
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
