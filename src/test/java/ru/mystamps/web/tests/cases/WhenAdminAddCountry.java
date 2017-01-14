@@ -39,7 +39,6 @@ import ru.mystamps.web.tests.page.AddSeriesPage;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
 
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -82,24 +81,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnShouldNotBeTooShort() {
-		page.addCountry("ee", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("value.too-short", COUNTRY_NAME_MIN_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuShouldNotBeTooShort() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "яя");
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("value.too-short", COUNTRY_NAME_MIN_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
