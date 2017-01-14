@@ -89,20 +89,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page).field("nameRu").hasNoError();
 	}
-
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameEnShouldReplaceRepeatedSpacesByOne() {
-		page.addCountry("t3  st", TEST_COUNTRY_NAME_RU);
-
-		assertThat(page).field("name").hasValue("t3 st");
-	}
-
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameRuShouldReplaceRepeatedSpacesByOne() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "т3  ст");
-
-		assertThat(page).field("nameRu").hasValue("т3 ст");
-	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void shouldCreateCountryWithNameInEnglishOnly() {
