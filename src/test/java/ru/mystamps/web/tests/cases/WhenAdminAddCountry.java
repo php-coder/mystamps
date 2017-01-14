@@ -89,20 +89,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 		
 		assertThat(page).field("nameRu").hasNoError();
 	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCountry(" t3st ", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page).field("name").hasValue("t3st");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void countryNameRuShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, " т3ст ");
-		
-		assertThat(page).field("nameRu").hasValue("т3ст");
-	}
 
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void countryNameEnShouldReplaceRepeatedSpacesByOne() {
