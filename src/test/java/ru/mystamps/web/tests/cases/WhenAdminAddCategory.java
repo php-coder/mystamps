@@ -83,20 +83,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameEnShouldNotStartsFromHyphen() {
-		page.addCategory("-test", TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasError(tr("value.hyphen"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void categoryNameRuShouldNotStartsFromHyphen() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, "-тест");
-		
-		assertThat(page).field("nameRu").hasError(tr("value.hyphen"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void categoryNameEnShouldNotEndsWithHyphen() {
 		page.addCategory("test-", TEST_CATEGORY_NAME_RU);
 		
