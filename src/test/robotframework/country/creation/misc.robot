@@ -15,6 +15,14 @@ Country name should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id=name  t3st
 	Textfield Value Should Be  id=nameRu  т3ст
 
+Country name should be modified by replacing multiple spaces by one
+	[Documentation]            Verify replacing of repeating spaces from name
+	Input Text                 id=name  t3${SPACE * 2}st
+	Input Text                 id=nameRu  т3${SPACE * 2}ст
+	Submit Form                id=add-country-form
+	Textfield Value Should Be  id=name  t3 st
+	Textfield Value Should Be  id=nameRu  т3 ст
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browsers, register fail hook and login as admin
