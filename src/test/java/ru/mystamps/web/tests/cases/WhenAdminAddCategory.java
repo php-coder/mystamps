@@ -81,20 +81,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		
 		assertThat(page).field("nameRu").hasNoError();
 	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameEnShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCategory(" t3st ", TEST_CATEGORY_NAME_RU);
-		
-		assertThat(page).field("name").hasValue("t3st");
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void categoryNameRuShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.addCategory(TEST_CATEGORY_NAME_EN, " т3ст ");
-		
-		assertThat(page).field("nameRu").hasValue("т3ст");
-	}
 
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void categoryNameEnShouldReplaceRepeatedSpacesByOne() {
