@@ -115,24 +115,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameEnWithForbiddenCharactersShouldBeRejected() {
-		page.addCountry("S0m3+CountryN_ame", TEST_COUNTRY_NAME_RU);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("country-name-en.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void countryNameRuWithForbiddenCharactersShouldBeRejected() {
-		page.addCountry(TEST_COUNTRY_NAME_EN, "Нек0торо3+наз_вание");
-		
-		assertThat(page)
-			.field("nameRu")
-			.hasError(tr("country-name-ru.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void countryNameEnShouldNotStartsFromHyphen() {
 		page.addCountry("-test", TEST_COUNTRY_NAME_RU);
 		
