@@ -49,6 +49,14 @@ Create category with name that starts with hyphen
 	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
 	Element Text Should Be  id=nameRu.errors  Value must not start or end with hyphen
 
+Create category with name that ends with hyphen
+	[Documentation]         Verify validation of name with trailing hyphen
+	Input Text              id=name  test-
+	Input Text              id=nameRu  тест-
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
+	Element Text Should Be  id=nameRu.errors  Value must not start or end with hyphen
+
 Create category with existing name
 	[Documentation]         Verify validation of non-unique name
 	Input Text              id=name  Sport
