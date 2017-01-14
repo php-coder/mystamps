@@ -105,7 +105,8 @@
 						</small>
 					</div>
 					
-					<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_COUNTRY_PAGE}}" th:object="${addCountryForm}">
+					<form id="add-country-form" method="post" class="form-horizontal" action="info.html"
+						th:action="@{${ADD_COUNTRY_PAGE}}" th:object="${addCountryForm}">
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
 							<label for="name" class="control-label col-sm-4">
