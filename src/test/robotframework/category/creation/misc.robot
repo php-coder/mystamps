@@ -4,7 +4,7 @@ Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
-Force Tags       Category  Misc
+Force Tags       category  misc
 
 *** Test Cases ***
 Category name should be stripped from leading and trailing spaces

@@ -4,7 +4,7 @@ Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
-Force Tags       Category  Validation
+Force Tags       category  validation
 
 *** Test Cases ***
 Create category with too short name

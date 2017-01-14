@@ -4,7 +4,7 @@ Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
-Force Tags       Country  Validation
+Force Tags       country  validation
 
 *** Test Cases ***
 Create country with too short name
