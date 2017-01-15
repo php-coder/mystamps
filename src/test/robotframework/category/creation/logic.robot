@@ -5,7 +5,7 @@ Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
-Force Tags       category
+Force Tags       category  logic
 
 *** Test Cases ***
 Create category with name in English
