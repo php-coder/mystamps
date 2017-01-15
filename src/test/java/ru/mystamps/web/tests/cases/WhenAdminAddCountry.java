@@ -91,16 +91,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void shouldCreateCountryWithNameInEnglishOnly() {
-		page.addCountry("Germany", null);
-		
-		String expectedUrl = Url.INFO_COUNTRY_PAGE.replace("{slug}", "germany");
-		
-		assertThat(page.getCurrentUrl()).matches(expectedUrl);
-		assertThat(page.getHeader()).isEqualTo("Stamps of Germany");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
 	public void shouldCreateCountryWithNameInTwoLanguages() {
 		page.addCountry(TEST_COUNTRY_NAME_EN, TEST_COUNTRY_NAME_RU);
 		
