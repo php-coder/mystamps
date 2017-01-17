@@ -29,7 +29,6 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.AddCountryPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -63,13 +62,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void countryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCountry("ValidName", "Ёё Нормальное-название страны");
-		
-		assertThat(page).field("nameRu").hasNoError();
 	}
 	
 	@Override
