@@ -30,6 +30,14 @@ Category name in English should accept all allowed characters
 	Submit Form                      id=add-category-form
 	Page Should Not Contain Element  id=name.errors
 
+Category name in Russian should accept all allowed characters
+	[Documentation]                  Verify that various characters in name are allowed
+	Input Text                       id=nameRu  Категория Ёё
+	# we also type invalid name in English to stay on this page
+	Input Text                       id=name  1
+	Submit Form                      id=add-category-form
+	Page Should Not Contain Element  id=nameRu.errors
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create category page
