@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.net.HttpURLConnection;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -36,7 +34,6 @@ public class WhenAnonymousUserAtForbiddenPage
 	public WhenAnonymousUserAtForbiddenPage() {
 		super(ForbiddenErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_403_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_FORBIDDEN);
 	}
 	
 	@BeforeClass

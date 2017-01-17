@@ -17,9 +17,6 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.HttpURLConnection;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -57,30 +54,6 @@ public abstract class AbstractPage {
 	
 	public void open(String pageUrl) {
 		driver.get(Url.SITE + pageUrl);
-	}
-	
-	/**
-	 * Opens page and returns server response code.
-	 * In case of error returns -1.
-	 */
-	public int getServerResponseCode() {
-		/**
-		 * FIXME: currently we can't get access to server response from Selenium :(
-		 * @see http://code.google.com/p/selenium/issues/detail?id=141
-		 */
-		
-		try {
-			// As workaround, for a while, use HttpUrlConnection
-			// (but it leads to two connection to each page).
-			URL url = new URL(getFullUrl());
-			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-			return conn.getResponseCode();
-		
-		} catch (IOException ex) {
-			// don't throw exception because it leads to error in tests
-			// instead of failure
-			return -1;
-		}
 	}
 	
 	private String getFullUrl() {

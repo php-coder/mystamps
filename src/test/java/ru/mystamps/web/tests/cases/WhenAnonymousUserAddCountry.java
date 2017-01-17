@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.net.HttpURLConnection;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -35,7 +33,6 @@ public class WhenAnonymousUserAddCountry extends WhenAnyUserAtAnyPage<Unauthoriz
 	public WhenAnonymousUserAddCountry() {
 		super(UnauthorizedErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_403_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_FORBIDDEN);
 	}
 	
 	@BeforeClass

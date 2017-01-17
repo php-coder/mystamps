@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.net.HttpURLConnection;
-
 import org.openqa.selenium.support.PageFactory;
 
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
@@ -53,11 +51,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	protected final T page;
 	
 	/**
-	 * @see hasResponseServerCode()
-	 */
-	private int serverCode = HttpURLConnection.HTTP_OK;
-	
-	/**
 	 * @see hasTitle()
 	 * @see hasTitleWithoutStandardPrefix()
 	 */
@@ -73,10 +66,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	
-	protected void hasResponseServerCode(int serverCode) {
-		this.serverCode = serverCode;
-	}
-	
 	protected void hasTitle(String title) {
 		this.title = TITLE_PREFIX + title;
 	}
@@ -90,19 +79,12 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	}
 	
 	protected void checkStandardStructure() {
-		checkServerResponseCode();
 		shouldHaveTitle();
 		shouldHaveLogo();
 		shouldHaveUserBar();
 		shouldHaveContentArea();
 		mayHaveHeader();
 		shouldHaveFooter();
-	}
-	
-	protected void checkServerResponseCode() {
-		assertThat(page.getServerResponseCode())
-			.overridingErrorMessage("Server response code")
-			.isEqualTo(serverCode);
 	}
 	
 	private void shouldHaveTitle() {

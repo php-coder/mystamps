@@ -19,8 +19,6 @@ package ru.mystamps.web.tests.cases;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import java.net.HttpURLConnection;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -33,7 +31,6 @@ public class WhenAnonymousUserOpenNotExistingPage extends WhenAnyUserAtAnyPage<N
 	public WhenAnonymousUserOpenNotExistingPage() {
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
 	}
 	
 	@BeforeClass
