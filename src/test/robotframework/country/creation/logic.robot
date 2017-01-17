@@ -8,13 +8,13 @@ Force Tags       country  logic
 
 *** Test Cases ***
 Create country with name in English
-	[Documentation]          Verify creation of country by filling only mandatory fields
-	Input Text               id=name  Germany
-	Submit Form              id=add-country-form
-	Location Should Be       ${SITE_URL}/country/germany
-	Element Text Should Be   id=page-header  Stamps of Germany
-	Go To                    ${SITE_URL}/series/add
-	Country Field Should Be  Germany
+	[Documentation]                   Verify creation of country by filling only mandatory fields
+	Input Text                        id=name  Germany
+	Submit Form                       id=add-country-form
+	Location Should Be                ${SITE_URL}/country/germany
+	Element Text Should Be            id=page-header  Stamps of Germany
+	Go To                             ${SITE_URL}/series/add
+	Country Field Should Have Option  Germany
 
 Create country with name in English and Russian
 	[Documentation]         Verify creation of country by specifying names in 2 languages
@@ -52,7 +52,7 @@ Log Out
 	[Documentation]  Log out current user
 	Submit Form      id=logout-form
 
-Country Field Should Be
+Country Field Should Have Option
 	[Documentation]                   Verify the selection of the select list that is using selectize.js
 	[Arguments]                       ${value}
 	# We can't use "List Selection Should Be" because
