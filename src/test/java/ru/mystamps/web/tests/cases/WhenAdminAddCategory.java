@@ -29,7 +29,6 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.AddCategoryPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
@@ -63,13 +62,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void categoryNameRuWithAllowedCharactersShouldBeAccepted() {
-		page.addCategory("НевернаяКатегорияНаАнглийском", "Категория Ёё");
-		
-		assertThat(page).field("nameRu").hasNoError();
 	}
 	
 	@Override
