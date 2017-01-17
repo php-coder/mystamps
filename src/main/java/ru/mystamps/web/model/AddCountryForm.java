@@ -73,7 +73,7 @@ public class AddCountryForm implements AddCountryDto {
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
-			message = "{value.repeating_hyphen}",
+			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
@@ -106,7 +106,7 @@ public class AddCountryForm implements AddCountryDto {
 		),
 		@Pattern(
 			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
-			message = "{value.repeating_hyphen}",
+			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
