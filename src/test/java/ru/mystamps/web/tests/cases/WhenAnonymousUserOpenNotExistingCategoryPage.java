@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.net.HttpURLConnection;
-
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.Url;
@@ -34,7 +32,6 @@ public class WhenAnonymousUserOpenNotExistingCategoryPage
 	public WhenAnonymousUserOpenNotExistingCategoryPage() {
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
 	}
 	
 	@Test(groups = "logic")

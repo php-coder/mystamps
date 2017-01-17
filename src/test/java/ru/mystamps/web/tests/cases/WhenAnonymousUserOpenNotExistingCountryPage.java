@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.net.HttpURLConnection;
-
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.testng.annotations.Test;
@@ -34,7 +32,6 @@ public class WhenAnonymousUserOpenNotExistingCountryPage
 	public WhenAnonymousUserOpenNotExistingCountryPage() {
 		super(NotFoundErrorPage.class);
 		hasTitleWithoutStandardPrefix(tr("t_404_title"));
-		hasResponseServerCode(HttpURLConnection.HTTP_NOT_FOUND);
 	}
 	
 	@Test(groups = "logic")
