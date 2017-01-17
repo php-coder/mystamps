@@ -53,12 +53,12 @@ Log Out
 	Submit Form      id=logout-form
 
 Country Field Should Be
-	[Documentation]             Verify the selection of the select list that is using selectize.js
-	[Arguments]                 ${value}
+	[Documentation]                   Verify the selection of the select list that is using selectize.js
+	[Arguments]                       ${value}
 	# We can't use "List Selection Should Be" because
 	# 1) it doesn't work with invisible elements (and selectize.js makes field invisible)
 	# 2) selectize.js dynamically creates list of countries only when we're clicking on the field
-	Click Element               id=country-selectized
-	${fieldXpath}=              Set Variable
-	...                         //*[contains(@class, "selectize-dropdown-content")]/*[text() = "${value}"]
-	Xpath Should Match X Times  xpath=${fieldXpath}  expectedXpathCount=1
+	Click Element                     id=country-selectized
+	${dropdownXpath}=                 Set Variable  //*[contains(@class, "selectize-dropdown-content")]
+	Wait Until Page Contains Element  xpath=${dropdownXpath}/*[contains(@class, "option")]
+	Xpath Should Match X Times        xpath=${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
