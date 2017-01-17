@@ -3,7 +3,6 @@ Documentation    Verify miscellaneous aspects of category creation
 Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
-Test Setup       Before Test
 Force Tags       category  misc
 
 *** Test Cases ***
@@ -25,14 +24,11 @@ Category name should be modified by replacing multiple spaces by one
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browsers, register fail hook and login as admin
+	[Documentation]                     Login as admin and go to create category page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
-
-Before Test
-	[Documentation]  Open create category page
-	Go To            ${SITE_URL}/category/add
+	Go To                               ${SITE_URL}/category/add
 
 After Test Suite
 	[Documentation]  Log out and close browser

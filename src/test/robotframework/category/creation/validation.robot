@@ -3,7 +3,6 @@ Documentation    Verify category creation validation scenarios
 Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
-Test Setup       Before Test
 Force Tags       category  validation
 
 *** Test Cases ***
@@ -67,14 +66,11 @@ Create category with existing name
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browsers, register fail hook and login as admin
+	[Documentation]                     Login as admin and go to create category page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
-
-Before Test
-	[Documentation]  Open create category page
-	Go To            ${SITE_URL}/category/add
+	Go To                               ${SITE_URL}/category/add
 
 After Test Suite
 	[Documentation]  Log out and close browser
