@@ -22,6 +22,14 @@ Country name should be modified by replacing multiple spaces by one
 	Textfield Value Should Be  id=name  t3 st
 	Textfield Value Should Be  id=nameRu  т3 ст
 
+Country name in English should accept all allowed characters
+	[Documentation]                  Verify that various characters in name are allowed
+	Input Text                       id=name  Valid-Name Country
+	# we also type invalid name in Russian to stay on this page
+	Input Text                       id=nameRu  1
+	Submit Form                      id=add-country-form
+	Page Should Not Contain Element  id=name.errors
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create country page
