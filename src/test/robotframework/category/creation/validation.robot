@@ -29,8 +29,8 @@ Create category with forbidden characters in name
 	Input Text              id=name  S0m3+CategoryN_ame
 	Input Text              id=nameRu  Категория_1+23
 	Submit Form             id=add-category-form
-	Element Text Should Be  id=name.errors  Category name must consist only latin letters, hyphen or spaces
-	Element Text Should Be  id=nameRu.errors  Category name must consist only Russian letters, hyphen or spaces
+	Element Text Should Be  id=name.errors  Value must consist only latin letters, hyphen or spaces
+	Element Text Should Be  id=nameRu.errors  Value must consist only Russian letters, hyphen or spaces
 
 Create category with repeating hyphens in name
 	[Documentation]         Verify validation of name with repeating hyphens

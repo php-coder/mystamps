@@ -68,7 +68,7 @@ public class AddCountryForm implements AddCountryDto {
 	@Pattern.List({
 		@Pattern(
 			regexp = COUNTRY_NAME_EN_REGEXP,
-			message = "{country-name-en.invalid}",
+			message = "{value.invalid-en-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
@@ -101,7 +101,7 @@ public class AddCountryForm implements AddCountryDto {
 	@Pattern.List({
 		@Pattern(
 			regexp = COUNTRY_NAME_RU_REGEXP,
-			message = "{country-name-ru.invalid}",
+			message = "{value.invalid-ru-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(

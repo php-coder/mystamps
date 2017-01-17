@@ -68,7 +68,7 @@ public class AddCategoryForm implements AddCategoryDto {
 	@Pattern.List({
 		@Pattern(
 			regexp = CATEGORY_NAME_EN_REGEXP,
-			message = "{category-name-en.invalid}",
+			message = "{value.invalid-en-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
@@ -101,7 +101,7 @@ public class AddCategoryForm implements AddCategoryDto {
 	@Pattern.List({
 		@Pattern(
 			regexp = CATEGORY_NAME_RU_REGEXP,
-			message = "{category-name-ru.invalid}",
+			message = "{value.invalid-ru-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
