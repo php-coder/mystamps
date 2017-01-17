@@ -37,12 +37,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user add country">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAddCountry" />
-		</classes>
-	</test>
-	
 	<test name="When admin add country">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCountry" />
