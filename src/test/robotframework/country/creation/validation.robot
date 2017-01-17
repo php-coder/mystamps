@@ -29,8 +29,8 @@ Create country with forbidden characters in name
 	Input Text              id=name  S0m3+CountryN_ame
 	Input Text              id=nameRu  Нек0торо3+наз_вание
 	Submit Form             id=add-country-form
-	Element Text Should Be  id=name.errors  Country name must consist only latin letters, hyphen or spaces
-	Element Text Should Be  id=nameRu.errors  Country name must consist only Russian letters, hyphen or spaces
+	Element Text Should Be  id=name.errors  Value must consist only latin letters, hyphen or spaces
+	Element Text Should Be  id=nameRu.errors  Value must consist only Russian letters, hyphen or spaces
 
 Create country with repeating hyphens in name
 	[Documentation]         Verify validation of name with repeating hyphens
