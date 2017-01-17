@@ -25,12 +25,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user add category">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAddCategory" />
-		</classes>
-	</test>
-	
 	<test name="When admin add category">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCategory" />
