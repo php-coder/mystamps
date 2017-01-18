@@ -100,7 +100,8 @@
 					</h3>
 					
 					<!--/*/
-					<div class="alert alert-success text-center col-sm-4 col-sm-offset-4"
+					<div id="msg-success"
+						class="alert alert-success text-center col-sm-4 col-sm-offset-4"
 						th:if="${justAddedCountry}"
 						th:utext="#{t_country_just_added(@{${ADD_SERIES_PAGE}(country=${countrySlug})})}">
 						Country has been added.<br />

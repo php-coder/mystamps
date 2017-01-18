@@ -14,6 +14,7 @@ Create category with name in English
 	Submit Form                id=add-category-form
 	Location Should Be         ${SITE_URL}/category/cars
 	Element Text Should Be     id=page-header  Cars
+	Element Text Should Be     id=msg-success  Category has been added.${\n}Now you could proceed with creating series.
 	Go To                      ${SITE_URL}/series/add
 	${availableCategories}=    Get List Items  id=category
 	List Should Contain Value  ${availableCategories}  Cars
