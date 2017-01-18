@@ -64,6 +64,14 @@ Create category with existing name
 	Element Text Should Be  id=name.errors  Category already exists
 	Element Text Should Be  id=nameRu.errors  Category already exists
 
+Create category with existing name but in a different case
+	[Documentation]         Verify that validation of non-unique name is case insensitive
+	Input Text              id=name  sport
+	Input Text              id=nameRu  спорт
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Category already exists
+	Element Text Should Be  id=nameRu.errors  Category already exists
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create category page
