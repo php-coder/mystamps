@@ -130,6 +130,7 @@ public class MailServiceImpl implements MailService {
 				@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
+					message.setValidateAddresses(true);
 					message.setTo(email);
 					message.setFrom(new InternetAddress(robotEmail, "My Stamps", "UTF-8"));
 					message.setSubject(subject);
