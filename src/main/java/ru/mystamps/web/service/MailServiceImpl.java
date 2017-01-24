@@ -122,6 +122,8 @@ public class MailServiceImpl implements MailService {
 		final String tag) {
 		
 		try {
+			// We're using MimeMessagePreparator only because of its capability of adding headers.
+			// Otherwise we would use SimpleMailMessage class.
 			MimeMessagePreparator preparator = new MimeMessagePreparator() {
 				@Override
 				@SuppressWarnings("PMD.SignatureDeclareThrowsException")
