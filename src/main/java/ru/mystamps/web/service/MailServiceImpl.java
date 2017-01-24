@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.Validate;
@@ -130,7 +131,7 @@ public class MailServiceImpl implements MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setTo(email);
-					message.setFrom(robotEmail);
+					message.setFrom(new InternetAddress(robotEmail, "My Stamps", "UTF-8"));
 					message.setSubject(subject);
 					message.setText(text);
 					
