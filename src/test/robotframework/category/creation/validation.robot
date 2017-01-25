@@ -72,6 +72,14 @@ Create category with existing name but in a different case
 	Element Text Should Be  id=name.errors  Category already exists
 	Element Text Should Be  id=nameRu.errors  Category already exists
 
+Create category with non-existing name but existing slug
+	[Documentation]         Verify validation of non-unique slug
+	Input Text              id=name  Prehistoric - animals
+	# clear a value after a previous test to prevent its validation and looking up in database
+	Clear Element Text      id=nameRu
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Category with similar name already exists
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create category page
