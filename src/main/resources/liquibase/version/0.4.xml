@@ -24,5 +24,6 @@
 	<include file="0.4/2016-11-29--add-unique-key-transaction_participants-table.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2016-12-05--make_name_ru_optional.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2017-01-06--top_categories.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2017-01-25--united_kingdom_country.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
