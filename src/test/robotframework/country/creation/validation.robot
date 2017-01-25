@@ -72,6 +72,14 @@ Create country with existing name but in a different case
 	Element Text Should Be  id=name.errors  Country already exists
 	Element Text Should Be  id=nameRu.errors  Country already exists
 
+Create country with non-existing name but existing slug
+	[Documentation]         Verify validation of non-unique slug
+	Input Text              id=name  United - Kingdom
+	# clear a value after a previous test to prevent its validation and looking up in database
+	Clear Element Text      id=nameRu
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Country with similar name already exists
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create country page

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-united-kingdom-country" author="php-coder" context="test-data">
+		
+		<insert tableName="countries">
+			<column name="name" value="United Kingdom" />
+			<column name="name_ru" value="Великобритания" />
+			<column name="slug" value="united-kingdom" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>
