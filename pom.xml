@@ -926,6 +926,7 @@
 					-->
 					<variables>
 						<variable>BROWSER:htmlunitwithjs</variable>
+						<variable>RESOURCE_DIR:${basedir}/src/test/resources</variable>
 						<!-- See also ru.mystamps.web.Url.SITE constant -->
 						<variable>SITE_URL:http://127.0.0.1:8080</variable>
 					</variables>

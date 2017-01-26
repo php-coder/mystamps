@@ -112,7 +112,7 @@
 						</small>
 					</div>
 					
-					<form method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html"
+					<form id="add-series-form" method="post" enctype="multipart/form-data" class="form-horizontal" action="info.html"
 						th:action="@{${ADD_SERIES_PAGE}}"
 						th:object="${addSeriesForm}"
 						th:with="michelHasErrors=${#fields.hasErrors('michelNumbers') or #fields.hasErrors('michelPrice')},

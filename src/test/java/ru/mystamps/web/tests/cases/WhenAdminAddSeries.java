@@ -272,33 +272,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
-		String expectedCategoryName = validCategoryName;
-		String expectedQuantity     = "2";
-		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
-
-		page.fillCategory(expectedCategoryName);
-		page.fillQuantity(expectedQuantity);
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		
-		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
-		
-		List<String> imageUrls = nextPage.getImageUrls();
-		assertThat(imageUrls).hasSize(1);
-		assertThat(imageUrls.get(0)).matches(expectedImageUrl);
-		
-		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
-		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
-		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
 		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
