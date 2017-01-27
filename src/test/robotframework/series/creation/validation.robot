@@ -18,6 +18,12 @@ Create series with quantity that is less than 1
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Value must be greater than or equal to 1
 
+Create series with quantity that is greater than 50
+	[Documentation]         Verify validation of too large quantity
+	Input Text              id=quantity  51
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create series page
