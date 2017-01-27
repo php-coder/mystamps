@@ -34,7 +34,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
@@ -269,74 +268,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		page.submit();
 		
 		assertThat(page).field("comment").hasValue("example comment");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
-	public void shouldCreateSeriesWithAllFieldsFilled() {
-		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
-		String expectedQuantity     = "3";
-		String day                  = "4";
-		String month                = "5";
-		String year                 = "1999";
-		String expectedCountryName  = "Italy";
-		String expectedCategoryName = validCategoryName;
-		String expectedComment      = "Any text";
-
-		page.fillCategory(expectedCategoryName);
-		page.fillCountry(expectedCountryName);
-		
-		page.showDateOfRelease();
-		page.fillDay(day);
-		page.fillMonth(month);
-		page.fillYear(year);
-		
-		page.fillQuantity(expectedQuantity);
-		page.fillPerforated(false);
-		
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers("101, 102, 103");
-		page.fillMichelPrice("10.5");
-		
-		page.fillScottNumbers("110, 111, 112");
-		page.fillScottPrice("1000");
-		
-		page.fillYvertNumbers("120, 121, 122");
-		page.fillYvertPrice("8.11");
-		
-		page.fillGibbonsNumbers("130, 131, 132");
-		page.fillGibbonsPrice("400.335");
-		
-		page.showComment();
-		page.fillComment(expectedComment);
-		
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		
-		assertThat(nextPage.getCurrentUrl()).matches(expectedPageUrl);
-		
-		List<String> imageUrls = nextPage.getImageUrls();
-		assertThat(imageUrls).hasSize(1);
-		assertThat(imageUrls.get(0)).matches(expectedImageUrl);
-
-		assertThat(nextPage.getCategory()).isEqualTo(expectedCategoryName);
-		assertThat(nextPage.getCountry()).isEqualTo(expectedCountryName);
-		assertThat(nextPage.getDateOfRelease()).isEqualTo("04.05.1999");
-		assertThat(nextPage.getQuantity()).isEqualTo(expectedQuantity);
-		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_no"));
-		
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#101-103 (10.5 EUR)");
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#110-112 (1000 USD)");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#120-122 (8.11 EUR)");
-		// TODO: disable rounding mode
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#130-132 (400.34 GBP)");
-		
-		assertThat(nextPage.getComment()).isEqualTo(expectedComment);
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
