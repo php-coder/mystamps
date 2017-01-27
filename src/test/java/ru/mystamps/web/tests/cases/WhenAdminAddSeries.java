@@ -42,7 +42,6 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
-import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -146,17 +145,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("scottNumbers").hasNoError();
 		assertThat(page).field("yvertNumbers").hasNoError();
 		assertThat(page).field("gibbonsNumbers").hasNoError();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldBeNotLessThanLimit() {
-		page.fillQuantity(String.valueOf(MIN_STAMPS_IN_SERIES - 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Min.message", MIN_STAMPS_IN_SERIES));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")

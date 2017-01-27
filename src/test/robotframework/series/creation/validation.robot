@@ -12,6 +12,12 @@ Create series with non-numeric quantity
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Invalid value
 
+Create series with quantity that is less than 1
+	[Documentation]         Verify validation of too small quantity
+	Input Text              id=quantity  0
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=quantity.errors  Value must be greater than or equal to 1
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create series page
