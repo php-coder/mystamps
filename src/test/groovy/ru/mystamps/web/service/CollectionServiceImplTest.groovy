@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service
 
+import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -111,7 +112,7 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "addToCollection() should pass arguments to dao"() {
+	def "addToCollection() should add series to collection and mark it as modified"() {
 		given:
 			Integer expectedUserId = 123
 			Integer expectedSeriesId = 456
@@ -123,6 +124,14 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
+				return true
+			})
+		and:
+			1 * collectionDao.markAsModified({ Integer updatedBy ->
+				assert updatedBy == expectedUserId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
 				return true
 			})
 	}
@@ -146,7 +155,7 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "removeFromCollection() should remove series from collection"() {
+	def "removeFromCollection() should remove series from collection and mark it as modified"() {
 		given:
 			Integer expectedUserId = 123
 			Integer expectedSeriesId = 456
@@ -158,6 +167,14 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
+				return true
+			})
+		and:
+			1 * collectionDao.markAsModified({ Integer updatedBy ->
+				assert updatedBy == expectedUserId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
 				return true
 			})
 	}

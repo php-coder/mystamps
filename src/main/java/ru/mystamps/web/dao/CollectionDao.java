@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
@@ -27,6 +28,7 @@ public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
 	Integer add(AddCollectionDbDto collection);
+	void markAsModified(Integer updatedBy, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
 	void addSeriesToUserCollection(Integer userId, Integer seriesId);
 	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);
