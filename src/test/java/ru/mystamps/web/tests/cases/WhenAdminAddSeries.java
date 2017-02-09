@@ -40,7 +40,6 @@ import ru.mystamps.web.tests.page.InfoSeriesPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -178,18 +177,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("scottPrice").hasError(msg);
 		assertThat(page).field("yvertPrice").hasError(msg);
 		assertThat(page).field("gibbonsPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void commentShouldNotBeTooLong() {
-		page.showComment();
-		page.fillComment(StringUtils.repeat("x", MAX_SERIES_COMMENT_LENGTH + 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("comment")
-			.hasError(tr("value.too-long", MAX_SERIES_COMMENT_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")

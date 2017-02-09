@@ -24,6 +24,15 @@ Create series with quantity that is greater than 50
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
 
+Create series with too long comment
+	[Documentation]                Verify validation of too long comment
+	${letter}=                     Set Variable  x
+	Click Element                  id=add-comment-link
+	Wait Until Element Is Visible  id=comment
+	Input Text                     id=comment  ${letter * 256}
+	Submit Form                    id=add-series-form
+	Element Text Should Be         id=comment.errors  Value is greater than allowable maximum of 255 characters
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create series page
