@@ -24,6 +24,12 @@ Create series with quantity that is greater than 50
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
 
+Create series with empty image
+	[Documentation]         Verify validation of empty image
+	Choose File             id=image  ${RESOURCE_DIR}${/}empty.png
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image.errors  File must not be empty
+
 Create series with too long comment
 	[Documentation]                Verify validation of too long comment
 	${letter}=                     Set Variable  x
