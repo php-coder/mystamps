@@ -428,7 +428,7 @@
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
 		<commons.lang.version>3.4</commons.lang.version>
-		<compiler.plugin.version>3.6.0</compiler.plugin.version>
+		<compiler.plugin.version>3.6.1</compiler.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
