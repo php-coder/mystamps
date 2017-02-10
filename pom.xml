@@ -524,7 +524,7 @@
 		<thymeleaf.togglz.version>2.0.0.RELEASE</thymeleaf.togglz.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+		<thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.3.0.Final</togglz.version>
 		<war.plugin.version>3.0.0</war.plugin.version>
