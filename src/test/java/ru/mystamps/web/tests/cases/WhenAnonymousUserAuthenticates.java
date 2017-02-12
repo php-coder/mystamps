@@ -47,7 +47,6 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 	
 	public WhenAnonymousUserAuthenticates() {
 		super(AuthAccountPage.class);
-		hasTitle(tr("t_auth_title"));
 		hasHeader(tr("t_authentication_on_site"));
 	}
 	

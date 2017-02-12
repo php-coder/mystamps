@@ -103,7 +103,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	public WhenUserAddSeries() {
 		super(AddSeriesPage.class);
-		hasTitle(tr("t_add_series"));
 		hasHeader(StringUtils.capitalize(tr("t_add_series")));
 	}
 	

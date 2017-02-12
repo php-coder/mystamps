@@ -39,7 +39,6 @@ public class WhenAdminAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	
 	public WhenAdminAtIndexPage() {
 		super(IndexSitePage.class);
-		hasTitle(tr("t_index_title"));
 	}
 	
 	@BeforeClass

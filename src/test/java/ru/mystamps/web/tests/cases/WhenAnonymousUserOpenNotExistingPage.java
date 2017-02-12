@@ -30,7 +30,6 @@ public class WhenAnonymousUserOpenNotExistingPage extends WhenAnyUserAtAnyPage<N
 	
 	public WhenAnonymousUserOpenNotExistingPage() {
 		super(NotFoundErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_404_title"));
 	}
 	
 	@BeforeClass

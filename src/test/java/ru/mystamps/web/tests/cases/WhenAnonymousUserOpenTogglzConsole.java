@@ -31,7 +31,6 @@ public class WhenAnonymousUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<For
 	
 	public WhenAnonymousUserOpenTogglzConsole() {
 		super(ForbiddenErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_403_title"));
 	}
 	
 	@BeforeClass

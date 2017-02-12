@@ -30,7 +30,6 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 	
 	public WhenAnonymousUserAtIndexPage() {
 		super(IndexSitePage.class);
-		hasTitle(tr("t_index_title"));
 	}
 	
 	@BeforeClass

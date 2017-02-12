@@ -53,7 +53,6 @@ public class WhenAnonymousUserActivateAccount
 	
 	public WhenAnonymousUserActivateAccount() {
 		super(ActivateAccountPage.class);
-		hasTitle(tr("t_activation_title"));
 		hasHeader(tr("t_activation_on_site"));
 	}
 	
