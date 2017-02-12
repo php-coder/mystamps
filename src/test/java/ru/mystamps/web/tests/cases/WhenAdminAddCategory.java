@@ -63,9 +63,4 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 		checkStandardStructure();
 	}
 	
-	@Override
-	protected void shouldHaveUserBar() {
-		// Ignore this check because when user authenticated there is no links for login/register.
-	}
-	
 }

@@ -68,9 +68,4 @@ public class WhenUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErr
 		assertThat(page.getErrorCode()).isEqualTo("403");
 	}
 	
-	@Override
-	protected void shouldHaveUserBar() {
-		// Ignore this check because when user authenticated there is no links for login/register.
-	}
-	
 }

@@ -97,9 +97,4 @@ public class WhenUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 			.isTrue();
 	}
 	
-	@Override
-	protected void shouldHaveUserBar() {
-		// Ignore this check because when user authenticated there is no links for login/register.
-	}
-	
 }

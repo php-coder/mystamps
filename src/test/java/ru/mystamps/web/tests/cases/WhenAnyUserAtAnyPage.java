@@ -59,7 +59,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	
 	protected void checkStandardStructure() {
 		shouldHaveLogo();
-		shouldHaveUserBar();
 		shouldHaveContentArea();
 		mayHaveHeader();
 		shouldHaveFooter();
@@ -69,20 +68,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 		assertThat(page.getTextAtLogo())
 			.overridingErrorMessage("text at logo should be '" + tr("t_my_stamps") + "'")
 			.isEqualTo(tr("t_my_stamps"));
-	}
-	
-	protected void shouldHaveUserBar() {
-		assertThat(page.userBarExists())
-			.overridingErrorMessage("user bar should exists")
-			.isTrue();
-		
-		assertThat(page.linkWithLabelExists(tr("t_enter")))
-			.overridingErrorMessage("should exists link to authentication page")
-			.isTrue();
-		
-		assertThat(page.linkWithLabelExists(tr("t_register")))
-			.overridingErrorMessage("should exists link to registration page")
-			.isTrue();
 	}
 	
 	private void shouldHaveContentArea() {
