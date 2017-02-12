@@ -49,12 +49,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user open not existing series page">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingSeriesPage" />
-		</classes>
-	</test>
-	
 	<test name="When any user at any page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
