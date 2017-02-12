@@ -69,7 +69,6 @@ public class WhenAnonymousUserRegisterAccount
 	
 	public WhenAnonymousUserRegisterAccount() {
 		super(RegisterAccountPage.class);
-		hasHeader(tr("t_registration_on_site"));
 	}
 	
 	@BeforeClass

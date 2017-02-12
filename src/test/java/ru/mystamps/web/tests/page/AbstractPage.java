@@ -86,10 +86,6 @@ public abstract class AbstractPage {
 		return WebElementUtils.convertToListWithText(entries);
 	}
 	
-	public String getHeader() {
-		return getTextOfElementByTagName("h3");
-	}
-	
 	public boolean linkWithLabelExists(String label) {
 		return getLinkByText(label) != null;
 	}
@@ -120,10 +116,6 @@ public abstract class AbstractPage {
 		return driver.findElement(By.xpath(xpath));
 	}
 	
-	protected WebElement getElementByTagName(String tagName) {
-		return driver.findElement(By.tagName(tagName));
-	}
-	
 	protected List<WebElement> getElementsByClassName(String className) {
 		return driver.findElements(By.className(className));
 	}
@@ -143,11 +135,6 @@ public abstract class AbstractPage {
 	protected String getTextOfElementByXPath(String xpath) {
 		return getElementByXPath(xpath).getText();
 	}
-	
-	protected String getTextOfElementByTagName(String tagName) {
-		return getElementByTagName(tagName).getText();
-	}
-	
 	
 	//
 	// Other helpers
