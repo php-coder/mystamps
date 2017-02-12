@@ -38,8 +38,6 @@ public class WhenAnonymousUserOpenNotExistingCollectionPage
 		String url = Url.INFO_COLLECTION_PAGE.replace("{slug}", "collection-404-error-test");
 		page.open(url);
 
-		checkStandardStructure();
-
 		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
 		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
