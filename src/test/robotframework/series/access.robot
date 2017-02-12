@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify access to series related pages
+Documentation    Verify access to series related pages (including non-existing)
 Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
