@@ -35,10 +35,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		super(pageClass);
 	}
 	
-	@Override
 	protected void checkStandardStructure() {
-		super.checkStandardStructure();
-		
 		shouldHaveForm();
 		shouldHaveFields();
 		shouldHaveLabels();

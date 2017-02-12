@@ -44,7 +44,4 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	
-	protected void checkStandardStructure() {
-	}
-	
 }

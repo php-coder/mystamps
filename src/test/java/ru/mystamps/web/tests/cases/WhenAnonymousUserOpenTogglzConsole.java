@@ -38,17 +38,12 @@ public class WhenAnonymousUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<For
 		page.open(Url.TOGGLZ_CONSOLE_PAGE);
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsErrorMessage() {
 		assertThat(page.getErrorMessage()).isEqualTo(tr("t_403_description"));
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsErrorCode() {
 		assertThat(page.getErrorCode()).isEqualTo("403");
 	}

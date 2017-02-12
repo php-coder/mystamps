@@ -52,45 +52,40 @@ public class WhenAdminAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 		page.logout();
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsWelcomeText() {
 		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsLinkForAddingSeries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_series")))
 			.overridingErrorMessage("should exists link to page for adding series of stamps")
 			.isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
 			.overridingErrorMessage("should exists link to page for adding countries")
 			.isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsLinkForListingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_show_countries_list")))
 			.overridingErrorMessage("should exists link to page for listing countries")
 			.isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsLinkForAddingCategories() {
 		assertThat(page.linkWithLabelExists(tr("t_create_category")))
 			.overridingErrorMessage("should exists link to page for adding categories")
 			.isTrue();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsLinkForListingCategories() {
 		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
 			.overridingErrorMessage("should exists link to page for listing categories")

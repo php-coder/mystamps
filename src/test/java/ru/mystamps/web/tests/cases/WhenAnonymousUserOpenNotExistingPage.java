@@ -37,22 +37,17 @@ public class WhenAnonymousUserOpenNotExistingPage extends WhenAnyUserAtAnyPage<N
 		page.open();
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsErrorMessage() {
 		assertThat(page.getErrorMessage()).isEqualTo(tr("t_404_description", "\n"));
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsErrorCode() {
 		assertThat(page.getErrorCode()).isEqualTo("404");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = "std", enabled = false)
+	@Test(groups = "logic", enabled = false)
 	public void incidentShouldBeLoggedToDatabase() {
 		// TODO: check suspicious_activities table (#99)
 	}
