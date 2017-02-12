@@ -90,10 +90,6 @@ public abstract class AbstractPage {
 		return WebElementUtils.convertToListWithText(entries);
 	}
 	
-	public boolean contentAreaExists() {
-		return elementWithIdExists("content");
-	}
-	
 	public String getHeader() {
 		return getTextOfElementByTagName("h3");
 	}
