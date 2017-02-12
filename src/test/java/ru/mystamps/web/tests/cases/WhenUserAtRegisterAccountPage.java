@@ -39,7 +39,6 @@ public class WhenUserAtRegisterAccountPage
 	
 	public WhenUserAtRegisterAccountPage() {
 		super(RegisterAccountPage.class);
-		hasTitle(tr("t_registration_title"));
 	}
 	
 	@BeforeClass

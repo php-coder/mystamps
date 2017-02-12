@@ -38,7 +38,6 @@ public class WhenUserAtAuthPage extends WhenAnyUserAtAnyPageWithForm<AuthAccount
 	
 	public WhenUserAtAuthPage() {
 		super(AuthAccountPage.class);
-		hasTitle(tr("t_auth_title"));
 	}
 	
 	@BeforeClass

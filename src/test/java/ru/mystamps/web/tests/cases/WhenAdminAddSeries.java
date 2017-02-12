@@ -98,7 +98,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	public WhenAdminAddSeries() {
 		super(AddSeriesPage.class);
-		hasTitle(tr("t_add_series"));
 		hasHeader(StringUtils.capitalize(tr("t_add_series")));
 	}
 	

@@ -31,7 +31,6 @@ public class WhenAnonymousUserOpenNotExistingCollectionPage
 
 	public WhenAnonymousUserOpenNotExistingCollectionPage() {
 		super(NotFoundErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_404_title"));
 	}
 
 	@Test(groups = "logic")

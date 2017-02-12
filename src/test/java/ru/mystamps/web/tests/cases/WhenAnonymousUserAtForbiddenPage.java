@@ -33,7 +33,6 @@ public class WhenAnonymousUserAtForbiddenPage
 	
 	public WhenAnonymousUserAtForbiddenPage() {
 		super(ForbiddenErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_403_title"));
 	}
 	
 	@BeforeClass

@@ -30,8 +30,6 @@ import ru.mystamps.web.tests.page.AbstractPage;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import org.apache.commons.lang3.Validate;
-
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @ContextConfiguration(
@@ -43,18 +41,7 @@ import static ru.mystamps.web.tests.TranslationUtils.tr;
 abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	extends AbstractTestNGSpringContextTests {
 	
-	/**
-	 * Prefix of page's title  which will be prepend by hasTitle().
-	 */
-	private static final String TITLE_PREFIX = "My stamps: ";
-	
 	protected final T page;
-	
-	/**
-	 * @see hasTitle()
-	 * @see hasTitleWithoutStandardPrefix()
-	 */
-	private String title;
 	
 	/**
 	 * @see hasHeader()
@@ -66,42 +53,16 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	
-	protected void hasTitle(String title) {
-		this.title = TITLE_PREFIX + title;
-	}
-	
-	protected void hasTitleWithoutStandardPrefix(String title) {
-		this.title = title;
-	}
-	
 	protected void hasHeader(String header) {
 		this.header = header;
 	}
 	
 	protected void checkStandardStructure() {
-		shouldHaveTitle();
 		shouldHaveLogo();
 		shouldHaveUserBar();
 		shouldHaveContentArea();
 		mayHaveHeader();
 		shouldHaveFooter();
-	}
-	
-	private void shouldHaveTitle() {
-		Validate.validState(
-			title != null,
-			"Page title was not set!"
-			+ " Did you call hasTitle() or hasTitleWithoutStandardPrefix() before?"
-		);
-		
-		String msg = String.format(
-			"title should be '%s' but actual is '%s'",
-			title,
-			page.getTitle()
-		);
-		assertThat(page.getTitle())
-			.overridingErrorMessage(msg)
-			.isEqualTo(title);
 	}
 	
 	private void shouldHaveLogo() {

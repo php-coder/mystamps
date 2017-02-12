@@ -40,7 +40,6 @@ public class WhenUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErr
 	
 	public WhenUserOpenTogglzConsole() {
 		super(ForbiddenErrorPage.class);
-		hasTitleWithoutStandardPrefix(tr("t_403_title"));
 	}
 	
 	@BeforeClass

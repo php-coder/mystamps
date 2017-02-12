@@ -39,7 +39,6 @@ public class WhenUserAtActivateAccountPage
 	
 	public WhenUserAtActivateAccountPage() {
 		super(ActivateAccountPage.class);
-		hasTitle(tr("t_activation_title"));
 	}
 	
 	@BeforeClass

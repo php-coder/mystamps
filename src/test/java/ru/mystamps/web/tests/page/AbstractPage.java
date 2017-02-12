@@ -81,10 +81,6 @@ public abstract class AbstractPage {
 		return !driver.getCurrentUrl().equals(getFullUrl());
 	}
 	
-	public String getTitle() {
-		return driver.getTitle();
-	}
-	
 	public String getTextAtLogo() {
 		return getTextOfElementById("logo");
 	}
