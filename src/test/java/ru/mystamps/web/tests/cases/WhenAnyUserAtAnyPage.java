@@ -60,7 +60,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	protected void checkStandardStructure() {
 		shouldHaveLogo();
 		mayHaveHeader();
-		shouldHaveFooter();
 	}
 	
 	private void shouldHaveLogo() {
@@ -75,21 +74,6 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 				.overridingErrorMessage("header should exists")
 				.isEqualTo(header);
 		}
-	}
-	
-	private void shouldHaveFooter() {
-		assertThat(page.footerExists())
-			.overridingErrorMessage("footer should exists")
-			.isTrue();
-		
-		assertThat(
-				page.linkWithLabelAndTitleExists(
-					tr("t_site_author_name"),
-					tr("t_write_email")
-				)
-			)
-			.overridingErrorMessage("should exists link with author's email")
-			.isTrue();
 	}
 	
 }

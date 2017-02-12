@@ -94,21 +94,8 @@ public abstract class AbstractPage {
 		return getTextOfElementByTagName("h3");
 	}
 	
-	public boolean footerExists() {
-		return elementWithTagNameExists("footer");
-	}
-	
 	public boolean linkWithLabelExists(String label) {
 		return getLinkByText(label) != null;
-	}
-	
-	public boolean linkWithLabelAndTitleExists(String label, String title) {
-		WebElement link = getLinkByText(label);
-		if (link == null) {
-			return false;
-		}
-		
-		return link.getAttribute("title").equals(title);
 	}
 	
 	public boolean existsLinkTo(String relativeUrl) {
