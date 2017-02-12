@@ -30,8 +30,6 @@ import ru.mystamps.web.tests.page.AbstractPage;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
 @ContextConfiguration(
 	loader = AnnotationConfigContextLoader.class,
 	initializers = ConfigFileApplicationContextInitializer.class,
@@ -58,14 +56,7 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	}
 	
 	protected void checkStandardStructure() {
-		shouldHaveLogo();
 		mayHaveHeader();
-	}
-	
-	private void shouldHaveLogo() {
-		assertThat(page.getTextAtLogo())
-			.overridingErrorMessage("text at logo should be '" + tr("t_my_stamps") + "'")
-			.isEqualTo(tr("t_my_stamps"));
 	}
 	
 	private void mayHaveHeader() {

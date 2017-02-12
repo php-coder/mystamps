@@ -81,10 +81,6 @@ public abstract class AbstractPage {
 		return !driver.getCurrentUrl().equals(getFullUrl());
 	}
 	
-	public String getTextAtLogo() {
-		return getTextOfElementById("logo");
-	}
-	
 	public List<String> getUserBarEntries() {
 		List<WebElement> entries = getElementsByXPath(USER_BAR_ENTRIES_LOCATOR);
 		return WebElementUtils.convertToListWithText(entries);
