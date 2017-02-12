@@ -26,8 +26,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.testng.annotations.AfterClass;
@@ -103,7 +101,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	public WhenUserAddSeries() {
 		super(AddSeriesPage.class);
-		hasHeader(StringUtils.capitalize(tr("t_add_series")));
 	}
 	
 	@BeforeClass

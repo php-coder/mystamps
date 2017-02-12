@@ -28,8 +28,6 @@ import ru.mystamps.web.tests.WebDriverFactory;
 import ru.mystamps.web.config.TestContext;
 import ru.mystamps.web.tests.page.AbstractPage;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 @ContextConfiguration(
 	loader = AnnotationConfigContextLoader.class,
 	initializers = ConfigFileApplicationContextInitializer.class,
@@ -41,30 +39,12 @@ abstract class WhenAnyUserAtAnyPage<T extends AbstractPage>
 	
 	protected final T page;
 	
-	/**
-	 * @see hasHeader()
-	 */
-	private String header;
-	
 	WhenAnyUserAtAnyPage(Class<T> pageClass) {
 		super();
 		page = PageFactory.initElements(WebDriverFactory.getDriver(), pageClass);
 	}
 	
-	protected void hasHeader(String header) {
-		this.header = header;
-	}
-	
 	protected void checkStandardStructure() {
-		mayHaveHeader();
-	}
-	
-	private void mayHaveHeader() {
-		if (header != null) {
-			assertThat(page.getHeader())
-				.overridingErrorMessage("header should exists")
-				.isEqualTo(header);
-		}
 	}
 	
 }

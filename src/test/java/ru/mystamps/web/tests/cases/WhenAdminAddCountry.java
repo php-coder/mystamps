@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.testng.annotations.AfterClass;
@@ -27,8 +25,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AddCountryPage;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
@@ -40,7 +36,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	
 	public WhenAdminAddCountry() {
 		super(AddCountryPage.class);
-		hasHeader(StringUtils.capitalize(tr("t_add_country")));
 	}
 	
 	@BeforeClass

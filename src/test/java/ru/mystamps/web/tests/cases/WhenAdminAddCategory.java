@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.beans.factory.annotation.Value;
 
 import org.testng.annotations.AfterClass;
@@ -27,8 +25,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AddCategoryPage;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
@@ -40,7 +36,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	public WhenAdminAddCategory() {
 		super(AddCategoryPage.class);
-		hasHeader(StringUtils.capitalize(tr("t_create_category")));
 	}
 	
 	@BeforeClass
