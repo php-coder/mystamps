@@ -85,10 +85,6 @@ public abstract class AbstractPage {
 		return getTextOfElementById("logo");
 	}
 	
-	public boolean userBarExists() {
-		return elementWithIdExists("user_bar");
-	}
-	
 	public List<String> getUserBarEntries() {
 		List<WebElement> entries = getElementsByXPath(USER_BAR_ENTRIES_LOCATOR);
 		return WebElementUtils.convertToListWithText(entries);
