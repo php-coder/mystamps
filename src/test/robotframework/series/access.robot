@@ -12,6 +12,12 @@ Anonymous user cannot create series
 	Element Text Should Be  id=error-code  403
 	Element Text Should Be  id=error-msg  Forbidden
 
+Opening a page of non-existing series show an error
+	[Documentation]         Verify that access to non-existing series returns 404 error
+	Go To                   ${SITE_URL}/series/999
+	Element Text Should Be  id=error-code  404
+	Element Text Should Be  id=error-msg  Requested page${\n}not found
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Open browser and register fail hook
