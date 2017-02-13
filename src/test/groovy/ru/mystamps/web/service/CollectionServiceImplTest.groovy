@@ -127,8 +127,8 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			1 * collectionDao.markAsModified({ Integer updatedBy ->
-				assert updatedBy == expectedUserId
+			1 * collectionDao.markAsModified({ Integer userId ->
+				assert userId == expectedUserId
 				return true
 			}, { Date updatedAt ->
 				assert DateUtils.roughlyEqual(updatedAt, new Date())
@@ -170,8 +170,8 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			1 * collectionDao.markAsModified({ Integer updatedBy ->
-				assert updatedBy == expectedUserId
+			1 * collectionDao.markAsModified({ Integer userId ->
+				assert userId == expectedUserId
 				return true
 			}, { Date updatedAt ->
 				assert DateUtils.roughlyEqual(updatedAt, new Date())
