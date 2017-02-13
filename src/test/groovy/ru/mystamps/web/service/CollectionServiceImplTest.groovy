@@ -17,13 +17,13 @@
  */
 package ru.mystamps.web.service
 
-import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
+import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
