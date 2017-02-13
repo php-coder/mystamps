@@ -67,6 +67,7 @@ public class ServicesConfig {
 		return new CronServiceImpl(
 			getCategoryService(),
 			getCountryService(),
+			getCollectionService(),
 			getSeriesService(),
 			getSuspiciousActivityService(),
 			getUserService(),

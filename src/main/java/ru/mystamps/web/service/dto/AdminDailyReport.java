@@ -33,6 +33,7 @@ public class AdminDailyReport {
 	private long untranslatedCountriesCounter;
 	private long addedSeriesCounter;
 	private long updatedSeriesCounter;
+	private long updatedCollectionsCounter;
 	private long registrationRequestsCounter;
 	private long registeredUsersCounter;
 	private long notFoundCounter;
@@ -57,6 +58,7 @@ public class AdminDailyReport {
 		totalChanges = Math.addExact(totalChanges, untranslatedCountriesCounter);
 		totalChanges = Math.addExact(totalChanges, addedSeriesCounter);
 		totalChanges = Math.addExact(totalChanges, updatedSeriesCounter);
+		totalChanges = Math.addExact(totalChanges, updatedCollectionsCounter);
 		totalChanges = Math.addExact(totalChanges, registrationRequestsCounter);
 		totalChanges = Math.addExact(totalChanges, registeredUsersCounter);
 		totalChanges = Math.addExact(totalChanges, countEvents());

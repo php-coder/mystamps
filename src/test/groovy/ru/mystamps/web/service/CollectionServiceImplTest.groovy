@@ -23,6 +23,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
+import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
@@ -92,6 +93,17 @@ class CollectionServiceImplTest extends Specification {
 			}) >> 200
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
+	def "createCollection() should assign updated at to current date"() {
+		when:
+			service.createCollection(123, "any-login")
+		then:
+			1 * collectionDao.add({ AddCollectionDbDto collection ->
+				assert DateUtils.roughlyEqual(collection?.updatedAt, new Date())
+				return true
+			}) >> 300
+	}
+	
 	//
 	// Tests for addToCollection()
 	//
@@ -111,7 +123,7 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "addToCollection() should pass arguments to dao"() {
+	def "addToCollection() should add series to collection and mark it as modified"() {
 		given:
 			Integer expectedUserId = 123
 			Integer expectedSeriesId = 456
@@ -123,6 +135,14 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
+				return true
+			})
+		and:
+			1 * collectionDao.markAsModified({ Integer userId ->
+				assert userId == expectedUserId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
 				return true
 			})
 	}
@@ -146,7 +166,7 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "removeFromCollection() should remove series from collection"() {
+	def "removeFromCollection() should remove series from collection and mark it as modified"() {
 		given:
 			Integer expectedUserId = 123
 			Integer expectedSeriesId = 456
@@ -158,6 +178,14 @@ class CollectionServiceImplTest extends Specification {
 				return true
 			}, { Integer seriesId ->
 				assert seriesId == expectedSeriesId
+				return true
+			})
+		and:
+			1 * collectionDao.markAsModified({ Integer userId ->
+				assert userId == expectedUserId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
 				return true
 			})
 	}
@@ -219,6 +247,33 @@ class CollectionServiceImplTest extends Specification {
 			1 * collectionDao.countCollectionsOfUsers() >> expectedResult
 		and:
 			serviceResult == expectedResult
+	}
+	
+	//
+	// Tests for countUpdatedSince()
+	//
+	
+	def "countUpdatedSince() should throw exception when date is null"() {
+		when:
+			service.countUpdatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate   = new Date()
+			long expectedResult = 47
+		when:
+			long result = service.countUpdatedSince(expectedDate)
+		then:
+			1 * collectionDao.countUpdatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//

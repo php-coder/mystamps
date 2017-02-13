@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="add-updater-data-to-collections-table" author="john" context="scheme">
+		<!-- Since MySQL 5.6.5 it's possible to use `NOW()` as default value for a column
+			but we're doing the same in 3 steps to support also old versions. -->
+		<addColumn tableName="collections">
+			<column name="updated_at" type="DATETIME" />
+			<column name="updated_by" type="INTEGER" />
+		</addColumn>
+
+		<update tableName="collections">
+			<column name="updated_at" type="DATETIME" valueComputed="${NOW}" />
+		</update>
+
+		<update tableName="collections">
+			<column name="updated_by"
+				type="INTEGER"
+				valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER BY id LIMIT 1)" />
+		</update>
+		
+		<addNotNullConstraint tableName="collections" columnName="updated_at" columnDataType="DATETIME" />
+		
+		<addNotNullConstraint tableName="collections" columnName="updated_by" columnDataType="INTEGER" />
+
+		<addForeignKeyConstraint
+			baseTableName="collections"
+			baseColumnNames="updated_by"
+			constraintName="fk_collections_users_id"
+			referencedTableName="users"
+			referencedColumnNames="id" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

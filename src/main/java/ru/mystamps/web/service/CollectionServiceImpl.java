@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +60,7 @@ public class CollectionServiceImpl implements CollectionService {
 			"Slug for string '%s' must be non empty", ownerLogin
 		);
 		collection.setSlug(slug);
+		collection.setUpdatedAt(new Date());
 		
 		Integer id = collectionDao.add(collection);
 		
@@ -73,6 +75,7 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		collectionDao.addSeriesToUserCollection(userId, seriesId);
+		collectionDao.markAsModified(userId, new Date());
 		
 		LOG.info("Series #{} has been added to collection of user #{}", seriesId, userId);
 	}
@@ -85,6 +88,7 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		collectionDao.removeSeriesFromUserCollection(userId, seriesId);
+		collectionDao.markAsModified(userId, new Date());
 		
 		LOG.info("Series #{} has been removed from collection of user #{}", seriesId, userId);
 	}
@@ -115,6 +119,14 @@ public class CollectionServiceImpl implements CollectionService {
 	@Transactional(readOnly = true)
 	public long countCollectionsOfUsers() {
 		return collectionDao.countCollectionsOfUsers();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long countUpdatedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return collectionDao.countUpdatedSince(date);
 	}
 	
 	@Override

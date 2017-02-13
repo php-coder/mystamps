@@ -18,6 +18,7 @@
 package ru.mystamps.web.dao.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +55,14 @@ public class JdbcCollectionDao implements CollectionDao {
 	@Value("${collection.count_collections_of_users}")
 	private String countCollectionsOfUsersSql;
 	
+	@Value("${collection.count_updated_since}")
+	private String countUpdatedSinceSql;
+	
 	@Value("${collection.create}")
 	private String addCollectionSql;
+
+	@Value("${collection.mark_as_modified}")
+	private String markAsModifiedSql;
 	
 	@Value("${collection.is_series_in_collection}")
 	private String isSeriesInUserCollectionSql;
@@ -88,10 +95,21 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
+	public long countUpdatedSince(Date date) {
+		return jdbcTemplate.queryForObject(
+			countUpdatedSinceSql,
+			Collections.singletonMap("date", date),
+			Long.class
+		);
+	}
+	
+	@Override
 	public Integer add(AddCollectionDbDto collection) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", collection.getOwnerId());
 		params.put("slug", collection.getSlug());
+		params.put("updated_at", collection.getUpdatedAt());
+		params.put("updated_by", collection.getOwnerId());
 		
 		KeyHolder holder = new GeneratedKeyHolder();
 		
@@ -109,6 +127,29 @@ public class JdbcCollectionDao implements CollectionDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+
+	/**
+	 * @author John Shkarin
+	 * @author Slava Semushin
+	 */
+	@Override
+	public void markAsModified(Integer userId, Date updatedAt) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("user_id", userId);
+		params.put("updated_at", updatedAt);
+		params.put("updated_by", userId);
+
+		int affected = jdbcTemplate.update(
+			markAsModifiedSql,
+			params
+		);
+
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after updating collection: %d",
+			affected
+		);
 	}
 	
 	@Override
