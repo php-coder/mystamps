@@ -250,6 +250,33 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countUpdatedSince()
+	//
+	
+	def "countUpdatedSince() should throw exception when date is null"() {
+		when:
+			service.countUpdatedSince(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
+		given:
+			Date expectedDate   = new Date()
+			long expectedResult = 47
+		when:
+			long result = service.countUpdatedSince(expectedDate)
+		then:
+			1 * collectionDao.countUpdatedSince({ Date date ->
+				assert date == expectedDate
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findRecentlyCreated()
 	//
 	

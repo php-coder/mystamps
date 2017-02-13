@@ -27,6 +27,7 @@ class CronServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
+	private final CollectionService collectionService = Mock()
 	private final SeriesService seriesService = Mock()
 	private final SuspiciousActivityService suspiciousActivityService = Mock()
 	private final MailService mailService = Mock()
@@ -36,6 +37,7 @@ class CronServiceImplTest extends Specification {
 	private final CronService service = new CronServiceImpl(
 		categoryService,
 		countryService,
+		collectionService,
 		seriesService,
 		suspiciousActivityService,
 		userService,
@@ -101,6 +103,10 @@ class CronServiceImplTest extends Specification {
 				assertMidnightOfYesterday(date)
 				return true
 			})
+			1 * collectionService.countUpdatedSince({ Date date ->
+				assertMidnightOfYesterday(date)
+				return true
+			})
 			1 * usersActivationService.countCreatedSince({ Date date ->
 				assertMidnightOfYesterday(date)
 				return true
@@ -136,6 +142,7 @@ class CronServiceImplTest extends Specification {
 			countryService.countUntranslatedNamesSince(_ as Date) >> 12
 			seriesService.countAddedSince(_ as Date) >> 3
 			seriesService.countUpdatedSince(_ as Date) >> 4
+			collectionService.countUpdatedSince(_ as Date) >> 13
 			usersActivationService.countCreatedSince(_ as Date) >> 5
 			userService.countRegisteredSince(_ as Date) >> 6
 		and:
@@ -157,6 +164,7 @@ class CronServiceImplTest extends Specification {
 				assert report.untranslatedCountriesCounter == 12
 				assert report.addedSeriesCounter == 3
 				assert report.updatedSeriesCounter == 4
+				assert report.updatedCollectionsCounter == 13
 				assert report.registrationRequestsCounter == 5
 				assert report.registeredUsersCounter == 6
 				assert report.notFoundCounter == 7

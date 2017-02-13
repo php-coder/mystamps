@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
@@ -28,6 +29,7 @@ public interface CollectionService {
 	void removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
+	long countUpdatedSince(Date date);
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
 	CollectionInfoDto findBySlug(String slug);
 }

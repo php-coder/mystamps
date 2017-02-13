@@ -123,6 +123,14 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countUpdatedSince(Date date) {
+		Validate.isTrue(date != null, "Date must be non null");
+		
+		return collectionDao.countUpdatedSince(date);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findRecentlyCreated(int quantity) {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
