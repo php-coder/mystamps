@@ -28,7 +28,7 @@ public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
 	Integer add(AddCollectionDbDto collection);
-	void markAsModified(Integer updatedBy, Date updatedAt);
+	void markAsModified(Integer userId, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
 	void addSeriesToUserCollection(Integer userId, Integer seriesId);
 	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);

@@ -119,12 +119,13 @@ public class JdbcCollectionDao implements CollectionDao {
 
 	/**
 	 * @author John Shkarin
+	 * @author Slava Semushin
 	 */
 	@Override
-	public void markAsModified(Integer updatedBy, Date updatedAt) {
+	public void markAsModified(Integer userId, Date updatedAt) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("updated_at", updatedAt);
-		params.put("updated_by", updatedBy);
+		params.put("updated_by", userId);
 
 		int affected = jdbcTemplate.update(
 			markAsModifiedSql,
