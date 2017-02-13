@@ -44,6 +44,7 @@ public class CronServiceImpl implements CronService {
 	
 	private final CategoryService categoryService;
 	private final CountryService countryService;
+	private final CollectionService collectionService;
 	private final SeriesService seriesService;
 	private final SuspiciousActivityService suspiciousActivityService;
 	private final UserService userService;
@@ -78,6 +79,7 @@ public class CronServiceImpl implements CronService {
 		
 		report.setAddedSeriesCounter(seriesService.countAddedSince(yesterday));
 		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
+		report.setUpdatedCollectionsCounter(collectionService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));
 		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
 

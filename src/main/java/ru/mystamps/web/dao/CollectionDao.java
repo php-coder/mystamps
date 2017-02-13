@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
 	long countCollectionsOfUsers();
+	long countUpdatedSince(Date date);
 	Integer add(AddCollectionDbDto collection);
 	void markAsModified(Integer userId, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
