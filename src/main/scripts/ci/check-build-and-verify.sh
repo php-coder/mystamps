@@ -20,6 +20,7 @@ ENFORCER_FAIL=
 TEST_FAIL=
 FINDBUGS_FAIL=
 VERIFY_FAIL=
+DANGER_FAIL=
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning >cs.log 2>&1 || CS_FAIL=yes
@@ -105,8 +106,13 @@ fi
 
 print_log verify.log   'Run integration tests'
 
+if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+	# danger uses log files and it should be run before these files will be cleaned
+	danger || DANGER_FAIL=yes
+fi
+
 rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log
 
-if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
+if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL$DANGER_FAIL" ]; then
 	exit 1
 fi

@@ -16,6 +16,9 @@ before_script:
       npm install -g bootlint;
       pip install --user html5validator;
       pip install --user robotframework-lint;
+      if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
+        gem install danger nokogiri --no-ri --no-rdoc;
+      fi;
     fi
 
 script:
