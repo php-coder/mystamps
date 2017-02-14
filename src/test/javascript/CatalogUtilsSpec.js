@@ -13,7 +13,7 @@ describe("CatalogUtils.expandNumbers()", function() {
 	});
 	
 	it("should return string without hyphen as is", function() {
-		expect(CatalogUtils.expandNumbers("test")).toEqual("test");
+		expect(CatalogUtils.expandNumbers("test")).toEqual("2test");
 	});
 	
 	it("should return 'one-two' for 'one-two'", function() {
