@@ -28,6 +28,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import java.util.Date;
 import java.util.Locale;
 
+import static ru.mystamps.web.feature.account.UserDetails.Role.ADMIN;
 import static ru.mystamps.web.feature.account.UserDetails.Role.USER;
 
 @RequiredArgsConstructor
