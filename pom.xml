@@ -10,12 +10,6 @@
 	
 	<dependencies>
 		
-		<dependency>
-			<groupId>com.github.heneke.thymeleaf</groupId>
-			<artifactId>thymeleaf-extras-togglz</artifactId>
-			<version>${thymeleaf.togglz.version}</version>
-		</dependency>
-		
 		<!-- Required for InternetAddress class -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
@@ -33,6 +27,12 @@
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 			<version>${thumbnailator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.heneke.thymeleaf</groupId>
+			<artifactId>thymeleaf-extras-togglz</artifactId>
+			<version>${thymeleaf.togglz.version}</version>
 		</dependency>
 		
 		<dependency>
