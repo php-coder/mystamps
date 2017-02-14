@@ -62,7 +62,7 @@ Wait Until Element Value Is
 
 Select Random Option From List
 	[Documentation]            Choose a random option from a select element
-	[Arguments]                ${locator}
+	[Arguments]                ${locator}    
 	${options}=                Get List Items  ${locator}
 	${size}=                   Get Length  ${options}
 	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
