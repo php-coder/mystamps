@@ -37,7 +37,6 @@ public class SiteServiceImpl implements SiteService {
 	private final SuspiciousActivityDao suspiciousActivities;
 	
 	@Override
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Async
 	@Transactional
 	public void logAboutAbsentPage(
@@ -61,7 +60,6 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	@Transactional
 	public void logAboutFailedAuthentication(
 			String page,
