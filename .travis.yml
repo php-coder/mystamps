@@ -4,7 +4,7 @@ language: java
 # @todo #1034 Travis CI: run tests on PostgreSQL
 env:
   matrix:
-    - SPRING_PROFILES_ACTIVE=test
+    #- SPRING_PROFILES_ACTIVE=test
     - SPRING_PROFILES_ACTIVE=travis
   global:
     - MAVEN_OPTS='-Xss256k'
