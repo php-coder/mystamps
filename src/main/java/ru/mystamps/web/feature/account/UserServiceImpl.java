@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 		
 		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(login);
-		user.setRole(USER);
+		//user.setRole(USER);
 		user.setName(finalName);
 		user.setEmail(email);
 		user.setRegisteredAt(registrationDate);
