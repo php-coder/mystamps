@@ -71,3 +71,39 @@ else
 	end
 	print_errors_summary 'maven-pmd-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/pmd-cpd'
 end
+
+# Handle `mvn codenarc:codenarc` results
+#
+# Example:
+# <CodeNarc url="http://www.codenarc.org" version="0.25.2">
+#   <Project title="&quot;My Stamps&quot;">
+#     <SourceDirectory>/home/coder/mystamps/src/test/groovy</SourceDirectory>
+#   </Project>
+#   <Package path="ru/mystamps/web/service" totalFiles="14" filesWithViolations="2" priority1="0" priority2="0" priority3="4">
+#     <File name="CollectionServiceImplTest.groovy">
+#       <Violation ruleName="UnnecessaryGString" priority="3" lineNumber="99">
+#         <SourceLine><![CDATA[service.createCollection(123, "any-login")]]></SourceLine>
+#         <Message><![CDATA[The String 'any-login' can be wrapped in single quotes instead of double quotes]]></Message>
+#       </Violation>
+#     </File>
+#   </Package>
+# </CodeNarc>
+#
+codenarc_report = 'target/CodeNarc.xml'
+unless File.file?(codenarc_report)
+	warn("Couldn't find #{codenarc_report}. codenarc-maven-plugin result is unknown")
+else
+	errors_count = 0
+	doc = Nokogiri::XML(File.open(codenarc_report))
+	root_dir = doc.xpath('//SourceDirectory').first.text.sub(pwd, '')
+	doc.xpath('//Violation').each do |node|
+		errors_count += 1
+		path = node.parent.parent['path']
+		line = node['lineNumber']
+		msg  = node.xpath('./Message').first.text
+		file = node.parent['name']
+		file = github.html_link("#{root_dir}/#{path}/#{file}#L#{line}")
+		fail("codenarc-maven-plugin error in #{file}:\n#{msg}")
+	end
+	print_errors_summary 'codenarc-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/codenarc'
+end
