@@ -96,7 +96,7 @@ fi
 
 print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log codenarc.log license.log bootlint.log rflint.log jasmine.log validator.log test.log findbugs.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log test.log findbugs.log verify.log
 
 if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
 	exit 1
