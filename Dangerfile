@@ -205,6 +205,35 @@ else
 	end
 end
 
+# Handle `rflint` output
+#
+# Example:
+# + src/test/robotframework/series/creation/logic.robot
+# E: 35, 0: Too many steps (34) in test case (TooManyTestSteps)
+#
+rflint_output = 'rflint.log'
+unless File.file?(rflint_output)
+	warn("Couldn't find #{rflint_output}. Result of rflint is unknown")
+else
+	errors_count = 0
+	current_file = ''
+	File.readlines(rflint_output).each do |line|
+		if line.start_with? '+ '
+			current_file = line.sub(/^\+ /, '').rstrip
+			next
+		end
+		
+		errors_count += 1
+		
+		parsed = line.match(/[A-Z]: (?<line>\d+), [^:]+: (?<msg>.*)/)
+		msg    = parsed['msg'].sub(/ \(\w+\)$/, '')
+		lineno = parsed['line']
+		file   = github.html_link("#{current_file}#L#{lineno}")
+		fail("rflint error in #{file}:\n#{msg}")
+	end
+	print_errors_summary 'rflint', errors_count, 'https://github.com/php-coder/mystamps/wiki/rflint'
+end
+
 # Handle `mvn findbugs:check` results
 #
 # Example:
