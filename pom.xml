@@ -706,29 +706,29 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
 				<version>${enforcer.plugin.version}</version>
+				<configuration>
+					<rules>
+						<bannedDependencies>
+							<excludes>
+								<!-- Because we use jcl-over-slf4j instead -->
+								<exclude>commons-logging</exclude>
+								<!-- Because we use org.mortbay.jasper:apache-el instead -->
+								<exclude>org.apache.tomcat.embed:tomcat-embed-el</exclude>
+								<exclude>junit:*:*:*:compile</exclude>
+								<exclude>org.yaml:snakeyaml</exclude>
+							</excludes>
+						</bannedDependencies>
+						<requireJavaVersion>
+							<version>${java.version}</version>
+						</requireJavaVersion>
+					</rules>
+				</configuration>
 				<executions>
 					<execution>
 						<id>enforce-banned-dependencies</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
-						<configuration>
-							<rules>
-								<bannedDependencies>
-									<excludes>
-										<!-- Because we use jcl-over-slf4j instead -->
-										<exclude>commons-logging</exclude>
-										<!-- Because we use org.mortbay.jasper:apache-el instead -->
-										<exclude>org.apache.tomcat.embed:tomcat-embed-el</exclude>
-										<exclude>junit:*:*:*:compile</exclude>
-										<exclude>org.yaml:snakeyaml</exclude>
-									</excludes>
-								</bannedDependencies>
-								<requireJavaVersion>
-									<version>${java.version}</version>
-								</requireJavaVersion>
-							</rules>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
