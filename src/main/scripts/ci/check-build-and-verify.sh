@@ -16,6 +16,7 @@ BOOTLINT_FAIL=
 RFLINT_FAIL=
 JASMINE_FAIL=
 HTML_FAIL=
+ENFORCER_FAIL=
 TEST_FAIL=
 FINDBUGS_FAIL=
 VERIFY_FAIL=
@@ -47,6 +48,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'The first child "option" element of a "select" element with a "required" attribute' \
 		--show-warnings \
 		>validator.log 2>&1 || HTML_FAIL=yes
+	mvn --batch-mode enforcer:enforce >enforcer.log 2>&1 || ENFORCER_FAIL=yes
 	mvn --batch-mode test \
 		-Denforcer.skip=true \
 		-Dmaven.resources.skip=true \
@@ -72,6 +74,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$RFLINT_FAIL"   'Run robot framework lint'
 	print_status "$JASMINE_FAIL"  'Run JavaScript unit tests'
 	print_status "$HTML_FAIL"     'Run html5validator'
+	print_status "$ENFORCER_FAIL" 'Run maven-enforcer-plugin'
 	print_status "$TEST_FAIL"     'Run unit tests'
 	print_status "$FINDBUGS_FAIL" 'Run FindBugs'
 fi
@@ -90,14 +93,15 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_log rflint.log    'Run robot framework lint'
 	print_log jasmine.log   'Run JavaScript unit tests'
 	print_log validator.log 'Run html5validator'
+	print_log enforcer.log  'Run maven-enforcer-plugin'
 	print_log test.log      'Run unit tests'
 	print_log findbugs.log  'Run FindBugs'
 fi
 
 print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log test.log findbugs.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify.log
 
-if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
+if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
 	exit 1
 fi
