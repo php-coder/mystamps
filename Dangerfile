@@ -234,6 +234,58 @@ else
 	print_errors_summary 'rflint', errors_count, 'https://github.com/php-coder/mystamps/wiki/rflint'
 end
 
+# Handle `mvn enforcer:enforce` results
+#
+# Example:
+# [INFO] --- maven-enforcer-plugin:1.4.1:enforce (default-cli) @ mystamps ---
+# [WARNING] Rule 0: org.apache.maven.plugins.enforcer.BannedDependencies failed with message:
+# Found Banned Dependency: junit:junit:jar:4.12
+# Use 'mvn dependency:tree' to locate the source of the banned dependencies.
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+#
+enforcer_output = 'enforcer.log'
+unless File.file?(enforcer_output)
+	warn("Couldn't find #{enforcer_output}. maven-enforcer-plugin result is unknown")
+else
+	errors = []
+	plugin_output_started = false
+	File.readlines(enforcer_output).each do |line|
+		# We're interesting in everything between
+		#     [INFO] --- maven-enforcer-plugin:1.4.1:enforce (default-cli) @ mystamps ---
+		# and
+		#     [INFO] ------------------------------------------------------------------------
+		# lines
+		
+		if line.start_with? '[INFO] --- maven-enforcer-plugin:'
+			plugin_output_started = true
+			next
+		end
+		
+		unless plugin_output_started
+			next
+		end
+		
+		if line.start_with? '[INFO] -----'
+			break
+		end
+		
+		if line.start_with? '[INFO] Download'
+			next
+		end
+		
+		line.sub!('[WARNING] ', '')
+		errors << line.rstrip
+	end
+	
+	unless errors.empty?
+		error_msgs = errors.join("\n")
+		fail("maven-enforcer-plugin reported about errors. Please, fix them. "\
+			"Here is its output:\n```\n#{error_msgs}\n```")
+	end
+end
+
 # Handle `mvn findbugs:check` results
 #
 # Example:
