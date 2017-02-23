@@ -17,7 +17,7 @@ describe("CatalogUtils.expandNumbers()", function() {
 	});
 	
 	it("should return 'one-two' for 'one-two'", function() {
-		expect(CatalogUtils.expandNumbers("one-two")).toEqual("one-two");
+		expect(CatalogUtils.expandNumbers("one-two")).toEqual("one two");
 	});
 	
 	it("should return '1,2' for '1-2'", function() {
@@ -81,7 +81,7 @@ describe("CatalogUtils.expandNumbers()", function() {
 	});
 	
 	it("should return '1,2,3' for '1/3'", function() {
-		expect(CatalogUtils.expandNumbers("1/3")).toEqual("1,2,3");
+		expect(CatalogUtils.expandNumbers("1/3")).toEqual("1,2");
 	});
 	
 	it("should return '1,2,3,4,5,6' for '1/3, 4-6'", function() {
