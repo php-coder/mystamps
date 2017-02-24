@@ -17,5 +17,11 @@ print_log() {
 	echo
 	echo "=====> \033[1;33m$msg\033[0m"
 	echo
-	egrep -v '^\[INFO\] Download(ing|ed):' "$log_file"
+	# yes, it's a hard coded workaround for #538
+	if [ "$log_file" = 'verify.log' ]; then
+		# we need -z option to be able to replace new line character
+		egrep -v '^\[INFO\] Download(ing|ed):' "$log_file" | sed -z -f "$(dirname "$0")/ignore-htmlunit-messages.sed"
+	else
+		egrep -v '^\[INFO\] Download(ing|ed):' "$log_file"
+	fi
 }
