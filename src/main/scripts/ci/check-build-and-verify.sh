@@ -58,7 +58,10 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode findbugs:check >findbugs.log 2>&1 || FINDBUGS_FAIL=yes
 fi
 
-mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify.log 2>&1 || VERIFY_FAIL=yes
+mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify-raw.log 2>&1 || VERIFY_FAIL=yes
+
+# Workaround for #538
+"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
 
 echo
 echo 'Build summary:'
@@ -100,7 +103,7 @@ fi
 
 print_log verify.log   'Run integration tests'
 
-rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log
 
 if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL" ]; then
 	exit 1
