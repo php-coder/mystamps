@@ -30,6 +30,19 @@ Create series with empty image
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image.errors  File must not be empty
 
+Catalog numbers should reject invalid values
+	[Documentation]  Verify that fields with catalog numbers reject invalid values
+	[Template]       Invalid Catalog Numbers Should Be Rejected
+	t
+	t,t
+	,1
+	1,
+	1,,2
+	0
+	05
+	1,09
+	10000
+
 Create series with too long comment
 	[Documentation]                Verify validation of too long comment
 	${letter}=                     Set Variable  x
@@ -63,3 +76,17 @@ Log In As
 Log Out
 	[Documentation]  Log out current user
 	Submit Form      id=logout-form
+
+Invalid Catalog Numbers Should Be Rejected
+	[Documentation]         Test that specifying catalog numbers cause an error
+	[Arguments]             ${catalogNumbers}
+	Click Element           id=add-catalog-numbers-link
+	Input Text              id=michelNumbers  ${catalogNumbers}
+	Input Text              id=scottNumbers  ${catalogNumbers}
+	Input Text              id=yvertNumbers  ${catalogNumbers}
+	Input Text              id=gibbonsNumbers  ${catalogNumbers}
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=michelNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be  id=scottNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be  id=yvertNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be  id=gibbonsNumbers.errors  Value must be comma delimited numbers
