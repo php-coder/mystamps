@@ -29,14 +29,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -118,23 +116,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
-	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelPrice(price);
-		page.fillScottPrice(price);
-		page.fillYvertPrice(price);
-		page.fillGibbonsPrice(price);
-		
-		page.submit();
-		
-		assertThat(page).field("michelPrice").hasError(msg);
-		assertThat(page).field("scottPrice").hasError(msg);
-		assertThat(page).field("yvertPrice").hasError(msg);
-		assertThat(page).field("gibbonsPrice").hasError(msg);
-	}
-	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
 		page.showDateOfRelease();
@@ -169,7 +150,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("comment").hasValue("example comment");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "std", "misc" })
 	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -191,7 +172,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#134, 135");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "std", "misc" })
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -210,17 +191,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "invalidCatalogPrices")
-	public Object[][] getInvalidCatalogPrices() {
-		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Price.message");
-		
-		return new Object[][] {
-			{"0", expectedErrorMessage},
-			{"-1", expectedErrorMessage},
-			{"NaN", expectedErrorMessage}
-		};
 	}
 	
 }
