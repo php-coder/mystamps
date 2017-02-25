@@ -488,9 +488,9 @@
 		<!-- Dependency can be safely removed when pmd plugin will require this version -->
 		<pmd.version>5.5.2</pmd.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
-		<robotframework-plugin.version>1.4.6</robotframework-plugin.version>
+		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
 		<robotframework-selenium.version>1.4.0.8</robotframework-selenium.version>
-		<robotframework.version>3.0</robotframework.version>
+		<robotframework.version>3.0.2</robotframework.version>
 		
 		<!-- Don't forget to update version in the Url class -->
 		<selectizejs.version>0.12.3</selectizejs.version>
