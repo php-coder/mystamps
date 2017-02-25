@@ -41,12 +41,12 @@ Log Out
 
 Valid Catalog Numbers Should Be Accepted
 	[Documentation]                  Test that specifying catalog numbers don't cause an error
-	[Arguments]                      ${catalogNumber}
+	[Arguments]                      ${catalogNumbers}
 	Click Element                    id=add-catalog-numbers-link
-	Input Text                       id=michelNumbers  ${catalogNumber}
-	Input Text                       id=scottNumbers  ${catalogNumber}
-	Input Text                       id=yvertNumbers  ${catalogNumber}
-	Input Text                       id=gibbonsNumbers  ${catalogNumber}
+	Input Text                       id=michelNumbers  ${catalogNumbers}
+	Input Text                       id=scottNumbers  ${catalogNumbers}
+	Input Text                       id=yvertNumbers  ${catalogNumbers}
+	Input Text                       id=gibbonsNumbers  ${catalogNumbers}
 	Submit Form                      id=add-series-form
 	Page Should Not Contain Element  id=michelNumbers.errors
 	Page Should Not Contain Element  id=scottNumbers.errors
