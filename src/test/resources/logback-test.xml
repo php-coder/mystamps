@@ -4,8 +4,23 @@
 	<!--
 		See for details:
 		http://docs.spring.io/spring-boot/docs/1.4.x/reference/html/howto-logging.html#howto-configure-logback-for-logging
+		https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot/src/main/resources/org/springframework/boot/logging/logback/base.xml
 	-->
-	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+	<!--
+		Here, instead of including org/springframework/boot/logging/logback/base.xml we're copying&pasting its content.
+		This allows us to commenting out part of the configuration that outputs logs to a log file.
+	-->
+	<!-- Begin of org/springframework/boot/logging/logback/base.xml content -->
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<!--<property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>-->
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<!--<include resource="org/springframework/boot/logging/logback/file-appender.xml" />-->
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<!--<appender-ref ref="FILE" />-->
+	</root>
+	<!-- End of org/springframework/boot/logging/logback/base.xml content -->
 	
 	<!-- HtmlUnit classes -->
 	<logger name="com.gargoylesoftware.htmlunit.html.InputElementFactory" level="WARN">
