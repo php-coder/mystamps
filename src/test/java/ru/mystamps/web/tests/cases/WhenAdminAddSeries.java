@@ -118,23 +118,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
-	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasNoError();
-		assertThat(page).field("scottNumbers").hasNoError();
-		assertThat(page).field("yvertNumbers").hasNoError();
-		assertThat(page).field("gibbonsNumbers").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
 	public void catalogNumbersShouldRejectInvalidValues(String numbers, String msg) {
 		page.showCatalogNumbers();
@@ -203,7 +186,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(page).field("comment").hasValue("example comment");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -225,7 +208,7 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#134, 135");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -244,16 +227,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-	}
-	
-	@DataProvider(name = "validCatalogNumbers")
-	public Object[][] getValidCatalogNumbers() {
-		return new Object[][] {
-			{"7", null},
-			{"7,8", null},
-			{"71, 81, 91", null},
-			{"1000", null}
-		};
 	}
 	
 	@DataProvider(name = "invalidCatalogNumbers")
