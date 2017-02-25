@@ -9,12 +9,21 @@ require 'nokogiri'
 
 pwd = Dir.pwd + '/'
 
-def print_errors_summary(program, errors, link)
+def print_errors_summary(program, errors, link = '')
+	return if errors == 0
+	
+	msg = ''
 	if errors == 1
-		message("#{program} reports about #{errors} error. Please, fix it. See also: <a href=\"#{link}\">#{link}</a>")
+		msg = "#{program} reported about #{errors} error. Please, fix it."
 	elsif errors > 0
-		message("#{program} reports about #{errors} errors. Please, fix them. See also: <a href=\"#{link}\">#{link}</a>")
+		msg = "#{program} reported about #{errors} errors. Please, fix them."
 	end
+	
+	unless link.empty?
+		msg << " See also: <a href=\"#{link}\">#{link}</a>"
+	end
+	
+	message(msg)
 end
 
 # Handle `mvn checkstyle:check` results
@@ -203,6 +212,40 @@ else
 				"See also: <a href=\"#{link}\">#{link}</a>")
 		end
 	end
+end
+
+# Handle `bootlint` output
+#
+# Example:
+# src/main/webapp/WEB-INF/views/series/info.html:123:12 E013 Only columns (`.col-*-*`) may be children of `.row`s
+# src/main/webapp/WEB-INF/views/site/events.html:197:7 E013 Only columns (`.col-*-*`) may be children of `.row`s
+#
+# For details, look up the lint problem IDs in the Bootlint wiki:
+# https://github.com/twbs/bootlint/wiki
+# 3 lint error(s) found across 20 file(s).
+#
+bootlint_output = 'bootlint.log'
+unless File.file?(bootlint_output)
+	warn("Couldn't find #{bootlint_output}. Result of bootlint is unknown")
+else
+	errors_count = 0
+	File.readlines(bootlint_output).each do |line|
+		if line !~ /:\d+:\d+/
+			next
+		end
+		
+		errors_count += 1
+		
+		parsed = line.match(/^(?<file>[^:]+):(?<line>\d+):\d+ (?<code>[^ ]+) (?<msg>.*)/)
+		msg    = parsed['msg']
+		lineno = parsed['line']
+		file   = parsed['file']
+		code   = parsed['code']
+		file   = github.html_link("#{file}#L#{lineno}")
+		fail("bootlint error in #{file}:\n#{code}: #{msg}. ([Details](https://github.com/twbs/bootlint/wiki/#{code}))")
+	end
+	# TODO: add link to wiki page (#316)
+	print_errors_summary 'bootlint', errors_count
 end
 
 # Handle `rflint` output
