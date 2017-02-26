@@ -19,10 +19,6 @@ package ru.mystamps.web.tests.cases;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -45,22 +41,10 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
-	private static final int SINCE_YEAR     = 1840;
-	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
-	
-	private static final List<String> EXPECTED_YEARS =
-		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
-	
 	private static final String SAMPLE_IMAGE_NAME = "test.png";
 	private static final String SAMPLE_IMAGE_PATH;
 	
 	static {
-		EXPECTED_YEARS.add("Year");
-		// years in reverse order
-		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
-			EXPECTED_YEARS.add(String.valueOf(i));
-		}
-		
 		try {
 			SAMPLE_IMAGE_PATH = new File(
 				WhenAdminAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
@@ -114,13 +98,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
-		page.showDateOfRelease();
-		
-		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
