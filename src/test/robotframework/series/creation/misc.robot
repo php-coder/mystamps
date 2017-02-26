@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Verify miscellaneous aspects of series creation
+Library          Collections
 Library          Selenium2Library
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
@@ -13,6 +14,18 @@ Catalog numbers should accept valid values
 	7,8
 	71, 81, 91
 	1000
+
+Issue year should have options for range from 1840 to the current year
+	[Documentation]              Verify that field with year provides all valid values
+	Click Element                id=specify-issue-date-link
+	${availableYears}=           Get List Items  id=year
+	${currentYear}=              Get Time  year  NOW
+	${numberOfYears}=            Get Length  ${availableYears}
+	# +2 here is to include the current year and option with title
+	${expectedNumberOfYears}=    Evaluate  ${currentYear}-1840+2
+	List Should Contain Value    ${availableYears}  1840
+	List Should Contain Value    ${availableYears}  ${currentYear}
+	Should Be Equal As Integers  ${numberOfYears}  ${expectedNumberOfYears}
 
 *** Keywords ***
 Before Test Suite
