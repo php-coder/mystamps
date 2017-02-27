@@ -99,15 +99,16 @@ Invalid Catalog Numbers Should Be Rejected
 	Element Text Should Be  id=gibbonsNumbers.errors  Value must be comma delimited numbers
 
 Invalid Catalog Price Should Be Rejected
-	[Documentation]         Test that specifying catalog price cause an error
-	[Arguments]             ${catalogPrice}
-	Click Element           id=add-catalog-numbers-link
-	Input Text              id=michelPrice  ${catalogPrice}
-	Input Text              id=scottPrice  ${catalogPrice}
-	Input Text              id=yvertPrice  ${catalogPrice}
-	Input Text              id=gibbonsPrice  ${catalogPrice}
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=michelPrice.errors  Invalid value
-	Element Text Should Be  id=scottPrice.errors  Invalid value
-	Element Text Should Be  id=yvertPrice.errors  Invalid value
-	Element Text Should Be  id=gibbonsPrice.errors  Invalid value
+	[Documentation]                Test that specifying catalog price cause an error
+	[Arguments]                    ${catalogPrice}
+	Click Element                  id=add-catalog-numbers-link
+	Wait Until Element Is Visible  css=.js-catalogs-info
+	Input Text                     id=michelPrice  ${catalogPrice}
+	Input Text                     id=scottPrice  ${catalogPrice}
+	Input Text                     id=yvertPrice  ${catalogPrice}
+	Input Text                     id=gibbonsPrice  ${catalogPrice}
+	Submit Form                    id=add-series-form
+	Element Text Should Be         id=michelPrice.errors  Invalid value
+	Element Text Should Be         id=scottPrice.errors  Invalid value
+	Element Text Should Be         id=yvertPrice.errors  Invalid value
+	Element Text Should Be         id=gibbonsPrice.errors  Invalid value
