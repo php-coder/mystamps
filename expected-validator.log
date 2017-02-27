@@ -1,0 +1,3 @@
+ERROR:html5validator.validator:"file:src/main/webapp/WEB-INF/views/participant/add.html":172.3-172.12: info warning: Element name "th:block" cannot be represented as XML 1.0.
+"file:src/main/webapp/WEB-INF/views/participant/add.html":172.3-172.12: error: Element "th:block" not allowed as child of element "body" in this context. (Suppressing further errors from this subtree.)
+"file:src/main/webapp/WEB-INF/views/site/events.html":15.2-15.8: error: Element "head" is missing a required instance of child element "title".
