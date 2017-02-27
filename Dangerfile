@@ -329,6 +329,76 @@ else
 	end
 end
 
+# Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:compile` output
+#
+# Example:
+# [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
+# [INFO] Changes detected - recompiling the module!
+# [INFO] Compiling 206 source files to /home/coder/mystamps/target/classes
+# [INFO] -------------------------------------------------------------
+# [ERROR] COMPILATION ERROR :
+# [INFO] -------------------------------------------------------------
+# [ERROR] /home/coder/mystamps/src/main/java/ru/mystamps/web/service/CollectionService.java:[31,32] cannot find symbol
+#   symbol:   class Date
+#   location: interface ru.mystamps.web.service.CollectionService
+# [INFO] 1 error
+# [INFO] -------------------------------------------------------------
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+#
+# We're parsing file with `mvn test` output because compilation occurs before executing tests.
+test_output = 'test.log'
+unless File.file?(test_output)
+	warn("Couldn't find #{test_output}. Result of running unit tests is unknown")
+else
+	errors = []
+	plugin_output_started = false
+	errors_detected = false
+	File.readlines(test_output).each do |line|
+		# We're interesting in everything between
+		#     [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
+		# and
+		#     [INFO] --- gmaven-plugin:1.4:compile (default) @ mystamps ---
+		# or
+		#     [INFO] BUILD FAILURE
+		
+		if line.start_with? '[INFO] --- maven-compiler-plugin:'
+			plugin_output_started = true
+			next
+		end
+		
+		unless plugin_output_started
+			next
+		end
+		
+		if line.start_with? '[INFO] Download'
+			next
+		end
+		
+		# next plugin started its execution => no errors encountered, stop processing
+		if line.start_with? '[INFO] --- '
+			break
+		end
+		
+		# build failed => error output was collected, stop processing
+		if line =~ /BUILD FAILURE/
+			break
+		end
+		
+		errors << line.rstrip
+	end
+	
+	unless errors.empty?
+		if errors.last.start_with? '[INFO] -----'
+			errors.pop # remove last useless line
+		end
+		error_msgs = errors.join("\n")
+		fail("maven-compile-plugin has failed. Please, fix compilation errors. "\
+			"Here is its output:\n```\n#{error_msgs}\n```")
+	end
+end
+
 # Handle `mvn findbugs:check` results
 #
 # Example:
