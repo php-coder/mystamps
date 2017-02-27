@@ -108,6 +108,7 @@ Invalid Catalog Price Should Be Rejected
 	Input Text                     id=yvertPrice  ${catalogPrice}
 	Input Text                     id=gibbonsPrice  ${catalogPrice}
 	Submit Form                    id=add-series-form
+	Wait Until Element Is Visible  css=.js-catalogs-info
 	Element Text Should Be         id=michelPrice.errors  Invalid value
 	Element Text Should Be         id=scottPrice.errors  Invalid value
 	Element Text Should Be         id=yvertPrice.errors  Invalid value
