@@ -44,7 +44,6 @@ Create series by filling all fields
 	Input Text                 id=comment  Any text
 	Submit Form                id=add-series-form
 	${location}=               Get Location
-	Log Source
 	Should Match Regexp        ${location}  /series/\\d+
 	Element Text Should Be     id=category_name  Sport
 	Element Text Should Be     id=country_name  Italy
