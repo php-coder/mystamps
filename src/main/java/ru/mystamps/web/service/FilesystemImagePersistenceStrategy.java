@@ -50,9 +50,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		if (!storageDir.exists()) {
 			LOG.warn("Directory '{}' doesn't exist! Image uploading won't work.", storageDir);
-		}
 		
-		if (!storageDir.canWrite()) {
+		} else if (!storageDir.canWrite()) {
 			LOG.warn(
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image uploading won't work.",
