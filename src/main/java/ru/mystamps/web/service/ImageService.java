@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.ImageDto;
 public interface ImageService {
 	Integer save(MultipartFile file);
 	ImageDto get(Integer imageId);
+	ImageDto getOrCreatePreview(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);
 	List<Integer> findBySeriesId(Integer seriesId);
 }

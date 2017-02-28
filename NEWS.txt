@@ -13,6 +13,7 @@
 - (functionality)  add possibility for adding series sales
 - (functionality)  add interface for viewing series sales (contributed by Sergey Chechenev)
 - (functionality)  name of category/country in Russian now are optional fields
+- (functionality)  preview now is generated after uploading an image
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

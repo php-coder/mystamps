@@ -60,5 +60,27 @@ public class ImageController {
 		response.getOutputStream().write(image.getData());
 	}
 	
+	@GetMapping(Url.GET_IMAGE_PREVIEW_PAGE)
+	public void getImagePreview(@PathVariable("id") Integer imageId, HttpServletResponse response)
+		throws IOException {
+		
+		if (imageId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
+		}
+		
+		ImageDto image = imageService.getOrCreatePreview(imageId);
+		if (image == null) {
+			// return original image when error has occurred
+			getImage(imageId, response);
+			return;
+		}
+		
+		response.setContentType("image/" + image.getType().toLowerCase(Locale.ENGLISH));
+		response.setContentLength(image.getData().length);
+		
+		response.getOutputStream().write(image.getData());
+	}
+	
 }
 

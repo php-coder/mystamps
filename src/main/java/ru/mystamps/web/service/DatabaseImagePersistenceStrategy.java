@@ -53,6 +53,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			AddImageDataDbDto imageData = new AddImageDataDbDto();
 			imageData.setImageId(image.getId());
 			imageData.setContent(file.getBytes());
+			imageData.setPreview(false);
 			
 			Integer id = imageDataDao.add(imageData);
 			LOG.info("Image #{}: meta data has been saved to #{}", image.getId(), id);
@@ -64,10 +65,33 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	}
 	
 	@Override
+	public void savePreview(byte[] data, ImageInfoDto image) {
+		AddImageDataDbDto imageData = new AddImageDataDbDto();
+		imageData.setImageId(image.getId());
+		imageData.setContent(data);
+		imageData.setPreview(true);
+		
+		imageDataDao.add(imageData);
+		
+		LOG.info("Image #{}: preview has been saved", image.getId());
+	}
+	
+	@Override
 	public ImageDto get(ImageInfoDto image) {
-		DbImageDto imageDto = imageDataDao.findByImageId(image.getId());
+		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), false);
 		if (imageDto == null) {
 			LOG.warn("Image #{}: content not found", image.getId());
+			return null;
+		}
+		
+		return imageDto;
+	}
+	
+	@Override
+	public ImageDto getPreview(ImageInfoDto image) {
+		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), true);
+		if (imageDto == null) {
+			LOG.info("Image #{}: preview not found", image.getId());
 			return null;
 		}
 		
