@@ -245,7 +245,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		String expectedCategoryName = validCategoryName;
 		String expectedQuantity     = "2";
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PREVIEW_PAGE.replace("{id}", "\\d+");
 		
 		page.fillCategory(expectedCategoryName);
 		page.fillQuantity(expectedQuantity);
@@ -270,7 +270,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
-		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PAGE.replace("{id}", "\\d+");
+		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PREVIEW_PAGE.replace("{id}", "\\d+");
 		String expectedQuantity     = "3";
 		String day                  = "8";
 		String month                = "9";

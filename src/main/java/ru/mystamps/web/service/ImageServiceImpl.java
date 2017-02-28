@@ -33,10 +33,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDao;
+import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
+import ru.mystamps.web.service.exception.CreateImagePreviewException;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+import ru.mystamps.web.support.togglz.Features;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
@@ -46,6 +49,7 @@ public class ImageServiceImpl implements ImageService {
 	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
+	private final ImagePreviewStrategy imagePreviewStrategy;
 	private final ImageDao imageDao;
 	
 	@Override
@@ -96,6 +100,33 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional
+	public ImageDto getOrCreatePreview(Integer imageId) {
+		Validate.isTrue(imageId != null, "Image id must be non null");
+		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
+		
+		if (!Features.SHOW_IMAGES_PREVIEW.isActive()) {
+			return null;
+		}
+		
+		ImageInfoDto previewInfo = new ImageInfoDto(imageId, "jpeg");
+
+		// NB: the race between getPreview() and createReview() is possible.
+		// If this happens, the last request will overwrite the first.
+		ImageDto image = imagePersistenceStrategy.getPreview(previewInfo);
+		if (image != null) {
+			return image;
+		}
+		
+		image = get(imageId);
+		if (image == null) {
+			return null;
+		}
+
+		return createPreview(previewInfo, image.getData());
+	}
+	
+	@Override
+	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public void addToSeries(Integer seriesId, Integer imageId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
@@ -112,6 +143,23 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		return imageDao.findBySeriesId(seriesId);
+	}
+	
+	private ImageDto createPreview(ImageInfoDto previewInfo, byte[] image) {
+		try {
+			byte[] preview = imagePreviewStrategy.createPreview(image);
+			
+			imagePersistenceStrategy.savePreview(preview, previewInfo);
+			
+			return new DbImageDto("jpeg", preview);
+			
+		} catch (CreateImagePreviewException | ImagePersistenceException ex) {
+			LOG.warn(
+				String.format("Image #%d: couldn't create/save preview", previewInfo.getId()),
+				ex
+			);
+			return null;
+		}
 	}
 	
 	private static String extractExtensionFromContentType(String contentType) {

@@ -32,9 +32,11 @@ class ImageServiceImplTest extends Specification {
 
 	private final ImageDao imageDao = Mock()
 	private final MultipartFile multipartFile = Mock()
+	private final ImagePreviewStrategy imagePreviewStrategy = Mock()
 	private final ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private final ImageService service = new ImageServiceImpl(imagePersistenceStrategy, imageDao)
+	private final ImageService service =
+		new ImageServiceImpl(imagePersistenceStrategy, imagePreviewStrategy, imageDao)
 	
 	def setup() {
 		multipartFile.size >> 1024L
@@ -220,6 +222,42 @@ class ImageServiceImplTest extends Specification {
 			ImageDto image = service.get(8)
 		then:
 			image == null
+	}
+	
+	//
+	// Tests for getOrCreatePreview()
+	//
+	
+	@Unroll
+	def "getOrCreatePreview() should throw exception if image id is #imageId"(Integer imageId) {
+		when:
+			service.getOrCreatePreview(imageId)
+		then:
+			thrown IllegalArgumentException
+		where:
+			imageId | _
+			null    | _
+			-1      | _
+			0       | _
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "getOrCreatePreview() should pass argument to strategy and return result from it"() {
+		given:
+			Integer expectedImageId = 7
+			String expectedImageType = 'jpeg'
+		and:
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+		when:
+			ImageDto actualImageDto = service.getOrCreatePreview(expectedImageId)
+		then:
+			1 * imagePersistenceStrategy.getPreview({ ImageInfoDto passedImage ->
+				assert passedImage?.id == expectedImageId
+				assert passedImage?.type == expectedImageType
+				return true
+			}) >> expectedImageDto
+		and:
+			actualImageDto == expectedImageDto
 	}
 	
 	//

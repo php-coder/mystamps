@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-images_data-preview-field" author="php-coder" context="scheme">
+		
+		<addColumn tableName="images_data">
+			<column name="preview" type="BOOLEAN" defaultValueBoolean="false" afterColumn="content">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-unique-key-images_data-table" author="php-coder" context="scheme">
+		
+		<addUniqueConstraint
+			tableName="images_data"
+			columnNames="image_id, preview"
+			constraintName="uc_images_data_image_id_preview" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

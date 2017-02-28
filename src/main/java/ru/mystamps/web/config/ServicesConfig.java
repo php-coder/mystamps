@@ -80,6 +80,7 @@ public class ServicesConfig {
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			strategiesConfig.getImagePersistenceStrategy(),
+			new TimedImagePreviewStrategy(new ThumbnailatorImagePreviewStrategy()),
 			daoConfig.getImageDao()
 		);
 	}

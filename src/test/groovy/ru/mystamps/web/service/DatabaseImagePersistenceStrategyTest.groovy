@@ -92,12 +92,15 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			1 * imageDataDao.findByImageId({ Integer imageId ->
 				assert imageId == expectedImageId
 				return true
+			}, { Boolean preview ->
+				assert preview == false
+				return true
 			})
 	}
 	
 	def "get() should return null when image data dao returned null"() {
 		given:
-			imageDataDao.findByImageId(_ as Integer) >> null
+			imageDataDao.findByImageId(_ as Integer, _ as Boolean) >> null
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:
@@ -108,7 +111,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		and:
-			imageDataDao.findByImageId(_ as Integer) >> expectedImageDto
+			imageDataDao.findByImageId(_ as Integer, _ as Boolean) >> expectedImageDto
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:

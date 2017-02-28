@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.dao.impl;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,11 +47,15 @@ public class JdbcImageDataDao implements ImageDataDao {
 	private String addImageDataSql;
 	
 	@Override
-	public DbImageDto findByImageId(Integer imageId) {
+	public DbImageDto findByImageId(Integer imageId, boolean preview) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("image_id", imageId);
+		params.put("preview", preview);
+		
 		try {
 			return jdbcTemplate.queryForObject(
 				findByImageIdSql,
-				Collections.singletonMap("image_id", imageId),
+				params,
 				RowMappers::forDbImageDto
 			);
 		} catch (EmptyResultDataAccessException ignored) {
@@ -65,6 +68,7 @@ public class JdbcImageDataDao implements ImageDataDao {
 		Map<String, Object> params = new HashMap<>();
 		params.put("image_id", imageData.getImageId());
 		params.put("content", imageData.getContent());
+		params.put("preview", imageData.isPreview());
 		
 		KeyHolder holder = new GeneratedKeyHolder();
 		

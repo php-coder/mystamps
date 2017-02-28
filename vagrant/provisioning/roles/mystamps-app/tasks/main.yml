@@ -68,6 +68,15 @@
     state: directory
   when: profile == 'prod'
 
+- name: Creating /data/preview
+  file:
+    path: /data/preview
+    owner: mystamps
+    group: mystamps
+    mode: '0755'
+    state: directory
+  when: profile == 'prod'
+
 - name: Creating /data/mystamps/config
   file:
     path: /data/mystamps/config

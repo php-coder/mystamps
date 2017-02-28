@@ -23,6 +23,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>${thumbnailator.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons.lang.version}</version>
@@ -521,6 +527,7 @@
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 		<testng.version>6.8.8</testng.version>
+		<thumbnailator.version>0.4.8</thumbnailator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.6.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
