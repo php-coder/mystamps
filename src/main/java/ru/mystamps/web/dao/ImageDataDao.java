@@ -21,6 +21,6 @@ import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 
 public interface ImageDataDao {
-	DbImageDto findByImageId(Integer imageId);
+	DbImageDto findByImageId(Integer imageId, boolean preview);
 	Integer add(AddImageDataDbDto imageData);
 }

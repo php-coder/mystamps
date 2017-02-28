@@ -16,12 +16,12 @@ ENV SPRING_PROFILES_ACTIVE=test
 # See also: https://docs.docker.com/engine/reference/builder/#run
 RUN mkdir /data \
  && useradd mystamps --home-dir /data/mystamps --create-home --comment 'MyStamps' \
- && mkdir /data/uploads /data/heap-dumps \
- && chown mystamps:mystamps /data/uploads /data/heap-dumps
+ && mkdir /data/uploads /data/preview /data/heap-dumps \
+ && chown mystamps:mystamps /data/uploads /data/preview /data/heap-dumps
 
 # Creates mount points and marks them as holding externally mounted volumes from native host.
 # See also: https://docs.docker.com/engine/reference/builder/#volume
-VOLUME /data/uploads /data/heap-dumps
+VOLUME /data/uploads /data/preview /data/heap-dumps
 
 # Sets the user name to use when running the image and for any subsequent RUN, CMD and ENTRYPOINT instructions.
 # See also: https://docs.docker.com/engine/reference/builder/#user

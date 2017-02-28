@@ -64,7 +64,8 @@ public final class Url {
 	
 	public static final String INFO_COLLECTION_PAGE  = "/collection/{slug}";
 	
-	public static final String GET_IMAGE_PAGE        = "/image/{id}";
+	public static final String GET_IMAGE_PAGE         = "/image/{id}";
+	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
@@ -145,6 +146,7 @@ public final class Url {
 			map.put("SELECTIZE_CSS", SELECTIZE_CSS);
 			map.put("SELECTIZE_JS", SELECTIZE_JS);
 			map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
+			map.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
 			map.put("FAVICON_ICO", FAVICON_ICO);
 			map.put("MAIN_CSS", MAIN_CSS);
 			map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
@@ -153,6 +155,7 @@ public final class Url {
 		} else {
 			// Use separate domain for our own resources
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
+			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);

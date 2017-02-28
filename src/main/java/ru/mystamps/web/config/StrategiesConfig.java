@@ -57,7 +57,8 @@ public interface StrategiesConfig {
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
 			return new FilesystemImagePersistenceStrategy(
-				env.getRequiredProperty("app.upload.dir")
+				env.getRequiredProperty("app.upload.dir"),
+				env.getRequiredProperty("app.preview.dir")
 			);
 		}
 		

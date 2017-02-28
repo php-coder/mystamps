@@ -25,4 +25,5 @@ import lombok.Setter;
 public class AddImageDataDbDto {
 	private Integer imageId;
 	private byte[] content;
+	private boolean preview;
 }

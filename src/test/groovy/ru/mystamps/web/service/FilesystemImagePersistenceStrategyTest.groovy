@@ -30,13 +30,14 @@ import java.nio.file.Path
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {
 	private static final STORAGE_DIR = File.separator + 'tmp'
+	private static final PREVIEW_DIR = File.separator + 'tmp'
 	
 	private final MultipartFile multipartFile = Mock()
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private final Path mockFile = Mock(Path)
 	
 	private final ImagePersistenceStrategy strategy =
-		Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR])
+		Spy(FilesystemImagePersistenceStrategy, constructorArgs:[STORAGE_DIR, PREVIEW_DIR])
 	
 	//
 	// Tests for save()

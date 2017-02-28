@@ -15,16 +15,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.exception;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import ru.mystamps.web.dao.dto.ImageDto;
-import ru.mystamps.web.dao.dto.ImageInfoDto;
-
-public interface ImagePersistenceStrategy {
-	void save(MultipartFile file, ImageInfoDto image);
-	void savePreview(byte[] data, ImageInfoDto image);
-	ImageDto get(ImageInfoDto image);
-	ImageDto getPreview(ImageInfoDto image);
+public class CreateImagePreviewException extends RuntimeException {
+	
+	public CreateImagePreviewException(String message) {
+		super(message);
+	}
+	
+	public CreateImagePreviewException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	
+	public CreateImagePreviewException(Throwable cause) {
+		super(cause);
+	}
+	
 }

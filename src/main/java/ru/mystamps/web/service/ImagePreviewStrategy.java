@@ -17,14 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import ru.mystamps.web.dao.dto.ImageDto;
-import ru.mystamps.web.dao.dto.ImageInfoDto;
-
-public interface ImagePersistenceStrategy {
-	void save(MultipartFile file, ImageInfoDto image);
-	void savePreview(byte[] data, ImageInfoDto image);
-	ImageDto get(ImageInfoDto image);
-	ImageDto getPreview(ImageInfoDto image);
+public interface ImagePreviewStrategy {
+	byte[] createPreview(byte[] image);
 }
