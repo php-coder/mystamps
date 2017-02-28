@@ -63,7 +63,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	@Override
 	public void save(MultipartFile file, ImageInfoDto image) {
 		try {
-			Path dest = generateFilePath(image);
+			Path dest = generateFilePath(storageDir, image);
 			writeToFile(file, dest);
 			
 			LOG.info("Image's data was written into file {}", dest);
@@ -75,7 +75,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
-		Path dest = generateFilePath(image);
+		Path dest = generateFilePath(storageDir, image);
 		if (!exists(dest)) {
 			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
 			return null;
@@ -91,8 +91,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	}
 	
 	// protected to allow spying
-	protected Path generateFilePath(ImageInfoDto image) {
-		return new File(storageDir, generateFileName(image)).toPath();
+	protected Path generateFilePath(File dir, ImageInfoDto image) {
+		return new File(dir, generateFileName(image)).toPath();
 	}
 	
 	// protected to allow spying
