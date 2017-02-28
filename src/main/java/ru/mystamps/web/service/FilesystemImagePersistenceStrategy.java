@@ -40,8 +40,8 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	private final File storageDir;
 	
-	public FilesystemImagePersistenceStrategy(String directory) {
-		this.storageDir = new File(directory);
+	public FilesystemImagePersistenceStrategy(String storageDir) {
+		this.storageDir = new File(storageDir);
 	}
 	
 	@PostConstruct
