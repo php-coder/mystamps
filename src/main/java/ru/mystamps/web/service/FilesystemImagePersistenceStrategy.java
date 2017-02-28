@@ -75,19 +75,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
-		Path dest = generateFilePath(storageDir, image);
-		if (!exists(dest)) {
-			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
-			return null;
-		}
-		
-		try {
-			byte[] content = toByteArray(dest);
-			return new FsImageDto(image, content);
-		
-		} catch (IOException ex) {
-			throw new ImagePersistenceException(ex);
-		}
+		return get(storageDir, image);
 	}
 	
 	// protected to allow spying
@@ -114,6 +102,22 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		return Files.readAllBytes(dest);
 	}
 
+	private ImageDto get(File dir, ImageInfoDto image) {
+		Path dest = generateFilePath(dir, image);
+		if (!exists(dest)) {
+			LOG.warn("Found image without content: #{} ({} doesn't exist)", image.getId(), dest);
+			return null;
+		}
+		
+		try {
+			byte[] content = toByteArray(dest);
+			return new FsImageDto(image, content);
+		
+		} catch (IOException ex) {
+			throw new ImagePersistenceException(ex);
+		}
+	}
+	
 	private static String generateFileName(ImageInfoDto image) {
 		// TODO(performance): specify initial capacity explicitly
 		return new StringBuilder()
