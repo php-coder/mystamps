@@ -34,6 +34,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || BOOTLINT_FAIL=yes
 	rflint --ignore TooFewKeywordSteps \
 		--configure LineTooLong:110 \
+		--error=all \
 		src/test/robotframework \
 		>rflint.log 2>&1 || RFLINT_FAIL=yes
 	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || JASMINE_FAIL=yes
