@@ -331,8 +331,9 @@ end
 
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:compile` output
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:testCompile` output
+# Handle `mvn org.codehaus.gmaven:gmaven-plugin:testCompile` output
 #
-# Example:
+# Example for maven-compiler-plugin:
 # [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
 # [INFO] Changes detected - recompiling the module!
 # [INFO] Compiling 206 source files to /home/coder/mystamps/target/classes
@@ -348,6 +349,27 @@ end
 # [INFO] BUILD FAILURE
 # [INFO] ------------------------------------------------------------------------
 #
+# Example for gmaven-plugin:testCompile:
+# [INFO] --- gmaven-plugin:1.4:testCompile (default-cli) @ mystamps ---
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+# [INFO] Total time: 2.006 s
+# [INFO] Finished at: 2017-03-01T22:25:47+01:00
+# [INFO] Final Memory: 24M/322M
+# [INFO] ------------------------------------------------------------------------
+# [ERROR] Failed to execute goal org.codehaus.gmaven:gmaven-plugin:1.4:testCompile (default-cli) on project mystamps: startup failed:
+# [ERROR] /home/coder/mystamps/src/test/groovy/ru/mystamps/web/service/SiteServiceImplTest.groovy: 27: unable to resolve class Specification
+# [ERROR] @ line 27, column 1.
+# [ERROR] @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+# [ERROR] ^
+# [ERROR]
+# [ERROR] 1 error
+# [ERROR] -> [Help 1]
+# [ERROR]
+# [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+# [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+#
 # We're parsing file with `mvn test` output because compilation occurs before executing tests.
 # Also because goals are executing in order and the process stops if one of
 # them failed, we're using the same array to collect errors from different goals.
@@ -358,19 +380,28 @@ else
 	errors = []
 	plugin_output_started = false
 	errors_detected = false
-	goal = 'unknown'
+	plugin = 'unknown'
 	File.readlines(test_output).each do |line|
-		# We're interesting in everything between
+		# For maven-compiler-plugin we're interesting in everything between
 		#     [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
 		# and
 		#     [INFO] --- gmaven-plugin:1.4:compile (default) @ mystamps ---
 		# or
 		#     [INFO] BUILD FAILURE
-		
 		if line.start_with? '[INFO] --- maven-compiler-plugin:'
+			plugin = 'maven-compiler-plugin'
 			plugin_output_started = true
-			parsed = line.match(/:[^:]+:(?<goal>[^ ]+)/)
-			goal = parsed['goal']
+			errors << line.rstrip
+			next
+		end
+		
+		# For maven-compiler-plugin we're interesting in everything between
+		#     [ERROR] Failed to execute goal org.codehaus.gmaven:gmaven-plugin:1.4:testCompile (default-cli) on project mystamps: startup failed:
+		# and
+		#     [ERROR] -> [Help 1]
+		if line.start_with? '[ERROR] Failed to execute goal org.codehaus.gmaven:'
+			plugin = 'gmaven-plugin'
+			plugin_output_started = true
 			errors << line.rstrip
 			next
 		end
@@ -391,8 +422,18 @@ else
 			next
 		end
 		
-		# build failed => error output was collected, stop processing
 		if line =~ /BUILD FAILURE/
+			if errors.empty?
+				# when gmaven plugin fails we need to collect errors after this message
+				next
+			else
+				# build failed => error output is collected, stop processing
+				break
+			end
+		end
+		
+		# stop collecting error message for the gmaven-plugin
+		if line.start_with? '[ERROR] -> [Help'
 			break
 		end
 		
@@ -404,7 +445,7 @@ else
 			errors.pop # remove last useless line
 		end
 		error_msgs = errors.join("\n")
-		fail("maven-compiler-plugin:#{goal} has failed. Please, fix compilation errors. "\
+		fail("#{plugin} has failed. Please, fix compilation errors. "\
 			"Here is its output:\n```\n#{error_msgs}\n```")
 	end
 end
