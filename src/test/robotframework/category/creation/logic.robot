@@ -26,7 +26,7 @@ Create category with name in English and Russian
 	Input Text              id:nameRu  Космос
 	Submit Form             id:add-category-form
 	Location Should Be      ${SITE_URL}/category/space
-	Element Text Should Be  id:page-header  Space
+	Element Text Should Be  id:page-header  Space!
 	Go To                   ${SITE_URL}/category/space?lang=ru
 	Element Text Should Be  id:page-header  Космос
 
