@@ -102,13 +102,15 @@ Invalid Catalog Price Should Be Rejected
 	[Documentation]                Test that specifying catalog price cause an error
 	[Arguments]                    ${catalogPrice}
 	Click Element                  id=add-catalog-numbers-link
-	Wait Until Element Is Visible  css=.js-catalogs-info
+	# we should wait until all 4 field with class js-catalogs-info will be
+	# visible but for simplicity we just check that the last field is visible
+	Wait Until Element Is Visible  id=gibbonsPrice
 	Input Text                     id=michelPrice  ${catalogPrice}
 	Input Text                     id=scottPrice  ${catalogPrice}
 	Input Text                     id=yvertPrice  ${catalogPrice}
 	Input Text                     id=gibbonsPrice  ${catalogPrice}
 	Submit Form                    id=add-series-form
-	Wait Until Element Is Visible  css=.js-catalogs-info
+	Wait Until Element Is Visible  id=gibbonsPrice
 	Element Text Should Be         id=michelPrice.errors  Invalid value
 	Element Text Should Be         id=scottPrice.errors  Invalid value
 	Element Text Should Be         id=yvertPrice.errors  Invalid value
