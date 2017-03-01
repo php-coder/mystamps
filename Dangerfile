@@ -330,6 +330,7 @@ else
 end
 
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:compile` output
+# Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:testCompile` output
 #
 # Example:
 # [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
@@ -348,6 +349,8 @@ end
 # [INFO] ------------------------------------------------------------------------
 #
 # We're parsing file with `mvn test` output because compilation occurs before executing tests.
+# Also because goals are executing in order and the process stops if one of
+# them failed, we're using the same array to collect errors from different goals.
 test_output = 'test.log'
 unless File.file?(test_output)
 	warn("Couldn't find #{test_output}. Result of running unit tests is unknown")
@@ -355,6 +358,7 @@ else
 	errors = []
 	plugin_output_started = false
 	errors_detected = false
+	goal = 'unknown'
 	File.readlines(test_output).each do |line|
 		# We're interesting in everything between
 		#     [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
@@ -365,6 +369,9 @@ else
 		
 		if line.start_with? '[INFO] --- maven-compiler-plugin:'
 			plugin_output_started = true
+			parsed = line.match(/:[^:]+:(?<goal>[^ ]+)/)
+			goal = parsed['goal']
+			errors << line.rstrip
 			next
 		end
 		
@@ -376,9 +383,12 @@ else
 			next
 		end
 		
-		# next plugin started its execution => no errors encountered, stop processing
+		# next plugin started its execution =>
+		# no errors encountered, continue to find next compiler plugin invocation
 		if line.start_with? '[INFO] --- '
-			break
+			plugin_output_started = false
+			errors.clear()
+			next
 		end
 		
 		# build failed => error output was collected, stop processing
@@ -394,7 +404,7 @@ else
 			errors.pop # remove last useless line
 		end
 		error_msgs = errors.join("\n")
-		fail("maven-compile-plugin has failed. Please, fix compilation errors. "\
+		fail("maven-compiler-plugin:#{goal} has failed. Please, fix compilation errors. "\
 			"Here is its output:\n```\n#{error_msgs}\n```")
 	end
 end
