@@ -48,7 +48,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	public void init() {
 		LOG.info("Images will be saved into {} directory", storageDir);
 		
-		if (!storageDir.exists()) {
+		if (!storageDir.exists()) { // NOPMD: ConfusingTernary (it's ok for me)
 			LOG.warn("Directory '{}' doesn't exist! Image uploading won't work.", storageDir);
 		
 		} else if (!storageDir.canWrite()) {
