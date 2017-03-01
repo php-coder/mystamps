@@ -440,3 +440,37 @@ else
 	end
 	print_errors_summary 'findbugs-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/findbugs'
 end
+
+# Handle `mvn robotframework:run` report
+#
+# Example:
+# <suite source="/home/coder/mystamps/src/test/robotframework/category/access.robot" name="Access" id="s1-s1-s1">
+#   <test name="Create category with name in English and Russian" id="s1-s1-s2-s1-t2">
+#     <status critical="yes" endtime="20170301 20:27:07.476" starttime="20170301 20:27:06.810" status="FAIL">
+#       The text of element 'id=page-header' should have been 'Space!', but it was 'Space'.
+#     </status>
+#   </test>
+# </suite>
+rf_report = 'target/robotframework-reports/output.xml'
+unless File.file?(rf_report)
+	warn("Couldn't find #{rf_report}. robotframework-maven-plugin result is unknown")
+else
+	errors_count = 0
+	doc = Nokogiri::XML(File.open(rf_report))
+	doc.xpath('//status[@critical="yes"][@status="FAIL"]').each do |node|
+		errors_count += 1
+		# find first parent's <suite> tag
+		suite = node.parent
+		while suite.name != 'suite'
+			suite = suite.parent
+		end
+		msg  = node.text.sub(/\.$/, '')
+		file = suite['source'].sub(pwd, '')
+		file = github.html_link(file)
+		testcase = node.parent['name']
+		# TODO: try to findout the test case and use it for highlighting line numbers
+		fail("robotframework-maven-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n#{msg}")
+	end
+	# TODO: add link to wiki page (#530)
+	print_errors_summary 'robotframework-maven-plugin', errors_count
+end
