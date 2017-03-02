@@ -450,6 +450,50 @@ else
 	end
 end
 
+# Handle `mvn test` reports
+# maven-surefire-plugin generates multiple XML files (one result file per test class).
+#
+# Example:
+# <testsuite name="ru.mystamps.web.service.CronServiceImplTest" time="0.175" tests="7" errors="0" skipped="0" failures="2">
+#   <testcase name="sendDailyStatistics() should prepare report and pass it to mail service" classname="ru.mystamps.web.service.CronServiceImplTest" time="0.107">
+#     <failure message="Condition not satisfied: bla bla bla" type="org.spockframework.runtime.SpockComparisonFailure">
+#       org.spockframework.runtime.SpockComparisonFailure: bla bla bla
+#     </failure>
+#   </testcase>
+# </testsuite>
+#
+test_reports_pattern = 'target/surefire-reports/TEST-*.xml'
+test_reports = Dir.glob(test_reports_pattern)
+if test_reports.empty?
+	warn("Couldn't find #{test_reports_pattern}. maven-surefire-plugin results is unknown")
+else
+	errors_count = 0
+	test_reports.each do |file|
+		doc = Nokogiri::XML(File.open(file))
+		testsuite = doc.xpath('/testsuite').first
+		failures  = testsuite['failures'].to_i
+		if failures == 0
+			next
+		end
+		
+		testsuite.xpath('.//failure').each do |failure|
+			errors_count += 1
+			msg = failure.text
+			tc  = failure.parent
+			file = tc['classname'].gsub(/\./, '/')
+			path = "src/test/groovy/#{file}.groovy"
+			if File.file?(path)
+				file = path
+			end
+			# TODO: try to findout the test case and use it for highlighting line numbers
+			file = github.html_link(file)
+			testcase = tc['name']
+			fail("maven-surefire-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n```\n#{msg}\n```")
+		end
+	end
+	print_errors_summary 'maven-surefire-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/unit-tests'
+end
+
 # Handle `mvn findbugs:check` results
 #
 # Example:
