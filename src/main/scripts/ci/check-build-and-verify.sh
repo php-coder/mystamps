@@ -56,6 +56,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		-Denforcer.skip=true \
 		-Dmaven.resources.skip=true \
 		-DskipMinify=true \
+		-DdisableXmlReport=false \
 		>test.log 2>&1 || TEST_FAIL=yes
 	# run after tests for getting compiled sources
 	mvn --batch-mode findbugs:check >findbugs.log 2>&1 || FINDBUGS_FAIL=yes
