@@ -108,6 +108,103 @@ else
 	print_errors_summary 'codenarc-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/codenarc'
 end
 
+# Handle `mvn license:check` output
+#
+# Example:
+# [INFO] --- license-maven-plugin:3.0:check (default-cli) @ mystamps ---
+# [INFO] Checking licenses...
+# [WARNING] Missing header in: /home/coder/mystamps/src/main/java/ru/mystamps/web/Db.java
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+#
+license_output = 'license.log'
+unless File.file?(license_output)
+	warn("Couldn't find #{license_output}. license-maven-plugin result is unknown")
+else
+	errors = []
+	File.readlines(license_output)
+		.select { |line| line.start_with? '[WARNING]' }
+		.each do |line|
+			line.sub!('[WARNING] ', '')
+			line.sub!(pwd, '')
+			if line =~ /Missing header in: .*/
+				parsed = line.match(/(?<msg>Missing header in: )(?<file>.*)/)
+				msg    = parsed['msg']
+				file   = parsed['file']
+				file   = github.html_link("#{file}#L1")
+				line = "#{msg}#{file}"
+			end
+			errors << line
+		end
+	
+	unless errors.empty?
+		link = 'https://github.com/php-coder/mystamps/wiki/check-license-header'
+		errors_cnt = errors.size()
+		error_msgs = errors.join("</li>\n<li>")
+		if errors_cnt == 1
+			fail("license-maven-plugin reported about #{errors_cnt} error:\n"\
+				"<ul><li>#{error_msgs}</li></ul>\n"\
+				"Please, fix it by executing `mvn license:format`\n"\
+				"See also: <a href=\"#{link}\">#{link}</a>")
+		elsif errors_cnt > 1
+			fail("license-maven-plugin reported about #{errors_cnt} errors:\n"\
+				"<ul><li>#{error_msgs}</li></ul>\n"\
+				"Please, fix them by executing `mvn license:format`\n"\
+				"See also: <a href=\"#{link}\">#{link}</a>")
+		end
+	end
+end
+
+# Handle `mvn sortpom:verify` output
+#
+# Example:
+# [INFO] --- sortpom-maven-plugin:2.5.0:verify (default-cli) @ mystamps ---
+# [INFO] Verifying file /home/coder/mystamps/pom.xml
+# [ERROR] The xml element <groupId>com.github.heneke.thymeleaf</groupId> should be placed before <groupId>javax.validation</groupId>
+# [ERROR] The file /home/coder/mystamps/pom.xml is not sorted
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+#
+sortpom_output = 'pom.log'
+unless File.file?(sortpom_output)
+	warn("Couldn't find #{sortpom_output}. sortpom-maven-plugin result is unknown")
+else
+	errors = []
+	File.readlines(sortpom_output).each do |line|
+		# don't process lines after this message
+		if line.start_with? '[INFO] BUILD FAILURE'
+			break
+		end
+		
+		# ignore non-error messages
+		unless line.start_with? '[ERROR]'
+			next
+		end
+		
+		line.sub!('[ERROR] ', '')
+		errors << line.rstrip
+	end
+	
+	unless errors.empty?
+		link = 'https://github.com/php-coder/mystamps/wiki/sortpom'
+		errors_cnt = errors.size()
+		error_msgs = errors.join("</li>\n<li>")
+		if errors_cnt == 1
+			fail("sortpom-maven-plugin reported about #{errors_cnt} error:\n"\
+				"<ul><li>#{error_msgs}</li></ul>\n"\
+				"Please, fix it by executing `mvn sortpom:sort`\n"\
+				"See also: <a href=\"#{link}\">#{link}</a>")
+		elsif errors_cnt > 1
+			fail("sortpom-maven-plugin reported about #{errors_cnt} errors:\n"\
+				"<ul><li>#{error_msgs}</li></ul>\n"\
+				"Please, fix them by executing `mvn sortpom:sort`\n"\
+				"See also: <a href=\"#{link}\">#{link}</a>")
+		end
+	end
+end
+
 # Handle `mvn findbugs:check` results
 #
 # Example:
