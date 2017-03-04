@@ -329,6 +329,34 @@ else
 	end
 end
 
+# Handle `html5validator` output
+#
+# Example:
+# WARNING:html5validator.validator:"file:/home/coder/mystamps/src/main/webapp/WEB-INF/views/series/info.html":110.11-114.58: error: very long err msg.
+# "file:/home/coder/mystamps/src/main/webapp/WEB-INF/views/series/info.html":438.16-438.35: error: very long err msg.
+#
+validator_output = 'validator.log'
+unless File.file?(validator_output)
+	warn("Couldn't find #{validator_output}. html5validator result is unknown")
+else
+	errors_count = 0
+	File.readlines(validator_output).each do |line|
+		errors_count += 1
+		line.sub!(/^WARNING:html5validator.validator:/, '')
+		
+		parsed = line.match(/^"file:(?<file>[^"]+)":(?<line>\d+)[^:]+: error: (?<msg>.+)/)
+		msg    = parsed['msg'].sub(/\.$/, '')
+		file   = parsed['file'].sub(pwd, '')
+		lineno = parsed['line']
+		file   = github.html_link("#{file}#L#{lineno}")
+		
+		fail("html5validator error in #{file}:\n#{msg}")
+	end
+	
+	# TODO: add link to wiki page (#541)
+	print_errors_summary 'html5validator', errors_count
+end
+
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:compile` output
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:testCompile` output
 # Handle `mvn org.codehaus.gmaven:gmaven-plugin:testCompile` output
