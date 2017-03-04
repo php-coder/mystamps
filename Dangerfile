@@ -107,3 +107,45 @@ else
 	end
 	print_errors_summary 'codenarc-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/codenarc'
 end
+
+# Handle `mvn findbugs:check` results
+#
+# Example:
+# <BugCollection sequence="0" release="" analysisTimestamp="1489272156067" version="3.0.1" # timestamp="1489272147000">
+#   <Project projectName="My Stamps">
+#     <SrcDir>/home/coder/mystamps/src/main/java</SrcDir>
+#   </Project>
+#   <BugInstance instanceOccurrenceNum="0" instanceHash="70aca951e7fd81233fcdb6d19dc38a90" rank="17" abbrev="Eq" category="STYLE" priority="2" type="EQ_DOESNT_OVERRIDE_EQUALS" instanceOccurrenceMax="0">
+#     <LongMessage>ru.mystamps.web.support.spring.security.CustomUserDetails doesn't override org.springframework.security.core.userdetails.User.equals(Object)</LongMessage>
+#     <Class classname="ru.mystamps.web.support.spring.security.CustomUserDetails" primary="true">
+#       <SourceLine classname="ru.mystamps.web.support.spring.security.CustomUserDetails" start="31" end="45" sourcepath="ru/mystamps/web/support/spring/security/CustomUserDetails.java" sourcefile="CustomUserDetails.java">
+#       </SourceLine>
+#     </Class>
+#   </BugInstance>
+# </BugCollection>
+#
+findbugs_report = 'target/findbugsXml.xml'
+unless File.file?(findbugs_report)
+	warn("Couldn't find #{findbugs_report}. findbugs-maven-plugin result is unknown")
+else
+	errors_count = 0
+	doc = Nokogiri::XML(File.open(findbugs_report))
+	src_dirs = doc.xpath('//SrcDir').map { |node| node.text }
+	doc.xpath('//BugInstance').each do |node|
+		errors_count += 1
+		src  = node.xpath('./Class/SourceLine').first
+		from_line = src['start']
+		to_line = src['end']
+		line = "#L#{from_line}"
+		if to_line.to_i > from_line.to_i
+			line << '-L' << to_line
+		end
+		msg  = node.xpath('./LongMessage').first.text
+		file = src['sourcepath']
+		src_dir = src_dirs.find { |dir| File.file?("#{dir}/#{file}") }
+		src_dir = src_dir.sub(pwd, '')
+		file = github.html_link("#{src_dir}/#{file}#{line}")
+		fail("findbugs-maven-plugin error in #{file}:\n#{msg}")
+	end
+	print_errors_summary 'findbugs-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/findbugs'
+end
