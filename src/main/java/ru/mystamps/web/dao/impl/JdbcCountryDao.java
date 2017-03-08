@@ -39,7 +39,7 @@ import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 public class JdbcCountryDao implements CountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -76,6 +76,12 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Value("${country.find_country_link_info_by_slug}")
 	private String findCountryLinkEntityBySlugSql;
+
+	@Value("${country.find_last_country_by_id}")
+	private String findLastCountryByIdSql;
+
+	@Value("${country.find_popular_country}")
+	private String findPopularCountrySql;
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
@@ -206,5 +212,26 @@ public class JdbcCountryDao implements CountryDao {
 			return null;
 		}
 	}
-	
+
+	@Override
+	public String suggestCountryForUser(Integer userId) {
+		
+		try {
+			return jdbcTemplate.queryForObject(
+				findLastCountryByIdSql,
+				Collections.singletonMap("created_by", userId),
+				String.class);
+		} catch (EmptyResultDataAccessException ignored) {
+			try {
+				return jdbcTemplate.queryForObject(
+					findPopularCountrySql,
+					Collections.<String, Object>emptyMap(),
+					String.class
+				);
+
+			} catch (EmptyResultDataAccessException ex) {
+				return null;
+			}
+		}
+	}
 }

@@ -15,7 +15,7 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body onload="initPage()">
+	<body th:onload="|initPage('@{${SUGGEST_SERIES_COUNTRY}}')|" onload="initPage(null)">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
@@ -202,6 +202,10 @@
 								<span id="country.errors" class="help-block" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
 								/*/-->
 							</div>
+							
+							<small togglz:active="INFO_COUNTRY_SERIES" id="guess_country" th:style="'display: none;'">
+								<a tabindex="-1" th:text="#{t_guess_country}" href="javascript:void(0)">Guess a country</a>
+							</small>
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">

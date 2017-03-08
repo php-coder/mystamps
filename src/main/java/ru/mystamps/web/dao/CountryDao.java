@@ -23,6 +23,7 @@ import java.util.List;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface CountryDao {
 	Integer add(AddCountryDbDto country);
 	long countAll();
@@ -35,4 +36,6 @@ public interface CountryDao {
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
+
+	String suggestCountryForUser(Integer userId);
 }

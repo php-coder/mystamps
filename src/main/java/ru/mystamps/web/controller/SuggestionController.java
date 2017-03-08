@@ -15,26 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.controller;
 
-import java.util.Date;
-import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
+import lombok.RequiredArgsConstructor;
 
-@SuppressWarnings("PMD.TooManyMethods")
-public interface CountryService {
-	String add(AddCountryDto dto, Integer userId);
-	String suggestCountryForUser(Integer userId);
-	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	long countAll();
-	long countCountriesOf(Integer collectionId);
-	long countBySlug(String slug);
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countAddedSince(Date date);
-	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+import ru.mystamps.web.Url;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.service.CountryService;
+
+@Controller
+@RequiredArgsConstructor
+public class SuggestionController {
+
+	private final CountryService countryService;
+
+	/**
+	 * @author John Shkarin
+	 */
+	@ResponseBody
+	@GetMapping(Url.SUGGEST_SERIES_COUNTRY)
+	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
+		return countryService.suggestCountryForUser(currentUserId);
+	}
+
 }
+

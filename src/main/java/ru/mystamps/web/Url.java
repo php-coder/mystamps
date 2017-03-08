@@ -52,6 +52,8 @@ public final class Url {
 	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
 	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
 	
+	public static final String SUGGEST_SERIES_COUNTRY	= "/suggest/series_country";
+	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
@@ -77,7 +79,7 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.0";
+	public static final String RESOURCES_VERSION      = "v0.3.1";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
@@ -125,6 +127,7 @@ public final class Url {
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
+		map.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		map.put("LIST_CATEGORIES_PAGE", LIST_CATEGORIES_PAGE);

@@ -42,6 +42,7 @@ import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyMethods")
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
@@ -162,5 +163,16 @@ public class CountryServiceImpl implements CountryService {
 		
 		return countryDao.getStatisticsOf(collectionId, lang);
 	}
-	
+
+	/**
+	 * @author Shkarin John
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	public String suggestCountryForUser(Integer userId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+
+		return countryDao.suggestCountryForUser(userId);
+	}
 }
