@@ -74,7 +74,11 @@ public enum Features implements Feature {
 	
 	@Label("View site events")
 	@EnabledByDefault
-	VIEW_SITE_EVENTS;
+	VIEW_SITE_EVENTS,
+
+	@Label("/series/add: show link with auto-suggestions")
+	@EnabledByDefault
+	INFO_COUNTRY_SERIES;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
