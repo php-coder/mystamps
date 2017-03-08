@@ -75,6 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
 				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
+				.mvcMatchers(Url.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority(
 						StringAuthority.UPDATE_COLLECTION,
