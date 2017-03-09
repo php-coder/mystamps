@@ -329,6 +329,34 @@ else
 	end
 end
 
+# Handle `mvn jasmine:test` report
+#
+# Example:
+# <testsuite errors="0" name="jasmine.specs" tests="22" failures="3" skipped="0" hostname="localhost" time="0.0" timestamp="2017-03-09T19:52:06">
+#   <testcase classname="jasmine" name="CatalogUtils.expandNumbers() should return string without hyphen as it" time="0.0" failure="true">
+#     <error type="expect.toEqual" message="Expected 'test' to equal '2test'.">Expected 'test' to equal '2test'.</error>
+#   </testcase>
+# </testsuite>
+#
+jasmine_report = 'target/jasmine/TEST-jasmine.xml'
+unless File.file?(jasmine_report)
+	warn("Couldn't find #{jasmine_report}. jasmine-maven-plugin results is unknown")
+else
+	doc = Nokogiri::XML(File.open(jasmine_report))
+	testsuite = doc.xpath('/testsuite').first
+	failures  = testsuite['failures'].to_i
+	if failures > 0
+		testsuite.xpath('.//testcase[@failure="true"]').each do |tc|
+			# NOTE: unfortunately jasmine report doesn't contain file name
+			msg = tc.xpath('./error').first.text.sub(/\.$/, '')
+			testcase = tc['name']
+			fail("jasmine-maven-plugin error:\nTest case `#{testcase}` fails with message:\n`#{msg}`\n")
+		end
+		
+		print_errors_summary 'jasmine-maven-plugin', failures, 'https://github.com/php-coder/mystamps/wiki/unit-tests-js'
+	end
+end
+
 # Handle `html5validator` output
 #
 # Example:
