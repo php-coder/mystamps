@@ -430,6 +430,10 @@
 		<commons.lang.version>3.4</commons.lang.version>
 		<compiler.plugin.version>3.6.1</compiler.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
+		
+		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
+		<disableXmlReport>true</disableXmlReport>
+		
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
@@ -790,7 +794,7 @@
 				<version>${surefire.plugin.version}</version>
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
-					<disableXmlReport>true</disableXmlReport>
+					<disableXmlReport>${disableXmlReport}</disableXmlReport>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
