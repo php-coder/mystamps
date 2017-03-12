@@ -104,7 +104,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 			groups = Password2Checks.class
 		),
 		@Size(
-			min = ValidationRules.PASSWORD_MAX_LENGTH,
+			max = ValidationRules.PASSWORD_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Password2Checks.class
 		)
