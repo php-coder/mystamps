@@ -97,11 +97,18 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	private String name;
 	
 	@NotEmpty(groups = Password1Checks.class)
-	@Size(
-		min = ValidationRules.PASSWORD_MIN_LENGTH,
-		message = "{value.too-short}",
-		groups = Password2Checks.class
-	)
+	@Size.List({
+		@Size(
+			min = ValidationRules.PASSWORD_MIN_LENGTH,
+			message = "{value.too-short}",
+			groups = Password2Checks.class
+		),
+		@Size(
+			min = ValidationRules.PASSWORD_MAX_LENGTH,
+			message = "{value.too-long}",
+			groups = Password2Checks.class
+		)
+	})
 	private String password;
 	
 	@NotEmpty(groups = PasswordConfirmation1Checks.class)
