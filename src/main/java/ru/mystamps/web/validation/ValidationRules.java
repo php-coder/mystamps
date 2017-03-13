@@ -32,6 +32,8 @@ public final class ValidationRules {
 	public static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
 	public static final int PASSWORD_MIN_LENGTH = 4;
+	// We limit max length because bcrypt has a maximum password length.
+	// See also: http://www.mscharhag.com/software-development/bcrypt-maximum-password-length
 	public static final int PASSWORD_MAX_LENGTH = 72;
 	
 	public static final int EMAIL_MAX_LENGTH = Db.UsersActivation.EMAIL_LENGTH;
