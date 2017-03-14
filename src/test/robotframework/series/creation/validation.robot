@@ -85,18 +85,23 @@ Log Out
 	Submit Form      id=logout-form
 
 Invalid Catalog Numbers Should Be Rejected
-	[Documentation]         Test that specifying catalog numbers cause an error
-	[Arguments]             ${catalogNumbers}
-	Click Element           id=add-catalog-numbers-link
-	Input Text              id=michelNumbers  ${catalogNumbers}
-	Input Text              id=scottNumbers  ${catalogNumbers}
-	Input Text              id=yvertNumbers  ${catalogNumbers}
-	Input Text              id=gibbonsNumbers  ${catalogNumbers}
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=michelNumbers.errors  Value must be comma delimited numbers
-	Element Text Should Be  id=scottNumbers.errors  Value must be comma delimited numbers
-	Element Text Should Be  id=yvertNumbers.errors  Value must be comma delimited numbers
-	Element Text Should Be  id=gibbonsNumbers.errors  Value must be comma delimited numbers
+	[Documentation]                Test that specifying catalog numbers cause an error
+	[Arguments]                    ${catalogNumbers}
+	Click Element                  id=add-catalog-numbers-link
+	# wait until all fields with class js-catalogs-info will be visible
+	Wait Until Element Is Visible  id=michelNumbers
+	Wait Until Element Is Visible  id=scottNumbers
+	Wait Until Element Is Visible  id=yvertNumbers
+	Wait Until Element Is Visible  id=gibbonsNumbers
+	Input Text                     id=michelNumbers  ${catalogNumbers}
+	Input Text                     id=scottNumbers  ${catalogNumbers}
+	Input Text                     id=yvertNumbers  ${catalogNumbers}
+	Input Text                     id=gibbonsNumbers  ${catalogNumbers}
+	Submit Form                    id=add-series-form
+	Element Text Should Be         id=michelNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be         id=scottNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be         id=yvertNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be         id=gibbonsNumbers.errors  Value must be comma delimited numbers
 
 Invalid Catalog Price Should Be Rejected
 	[Documentation]                Test that specifying catalog price cause an error
