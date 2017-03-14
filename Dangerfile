@@ -667,3 +667,11 @@ else
 		print_errors_summary 'maven-failsafe-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/integration-tests'
 	end
 end
+
+all_checks_passed = violation_report[:errors].empty? && violation_report[:warnings].empty? && violation_report[:messages].empty?
+if all_checks_passed
+	message(
+		"@#{github.pr_author} thank you for the PR! All quality checks have been passed! "\
+		"Next step is to wait when @php-coder will review this code"
+	)
+end
