@@ -670,12 +670,20 @@ end
 
 commits = git.commits.size
 if commits > 1
-	warn(
-		"danger check: pull request contains #{commits} commits while most of the cases it should have only one.\n"\
-		"If it's not a special case you should squash commits into single one.\n"\
-		"You can read how to do it here: https://davidwalsh.name/squash-commits-git\n"\
-		"But be careful because **it can destroy** all your changes!"
-	)
+	if git.commits.any? { |c| c.message =~ /^Merge branch/ || c.message =~ /^Merge remote-tracking branch/ }
+		fail(
+			"danger check: pull request contains merge commits! "\
+			"Please, rebase your branch to get rid of them:\n"\
+			"`git rebase master #{github.branch_for_head}`"
+		)
+	else
+		warn(
+			"danger check: pull request contains #{commits} commits while most of the cases it should have only one.\n"\
+			"If it's not a special case you should squash commits into single one.\n"\
+			"You can read how to do it here: https://davidwalsh.name/squash-commits-git\n"\
+			"But be careful because **it can destroy** all your changes!"
+		)
+	end
 end
 
 all_checks_passed = violation_report[:errors].empty? && violation_report[:warnings].empty? && violation_report[:messages].empty?
