@@ -40,7 +40,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -52,7 +52,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -64,7 +64,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
@@ -84,25 +84,25 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-security/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-security/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -114,7 +114,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -373,7 +373,7 @@
 		
 		<!--
 			For ConfigFileApplicationContextInitializer class.
-			https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-test/pom.xml
+			https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-test/pom.xml
 		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -405,10 +405,10 @@
 	</dependencies>
 	
 	<parent>
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.3.RELEASE</version>
+		<version>1.4.5.RELEASE</version>
 	</parent>
 	
 	<properties>
@@ -421,10 +421,10 @@
 		<codenarc.plugin.version>0.22-1</codenarc.plugin.version>
 		<codenarc.version>0.25.2</codenarc.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
 		<commons.lang.version>3.4</commons.lang.version>
@@ -442,32 +442,32 @@
 		<gmaven.plugin.version>1.4</gmaven.plugin.version>
 		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<groovy.version>2.0.8</groovy.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<h2.version>1.4.193</h2.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<htmlunit.version>2.21</htmlunit.version>
 		
 		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
+		<!-- Redefine default value from spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
 		<java.version>1.8</java.version>
 		
 		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<javax-mail.version>1.5.4</javax-mail.version>
 		
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<jetty.version>9.2.18.v20160721</jetty.version>
 		
 		<!-- Don't forget to update version in the Url class -->
@@ -475,15 +475,15 @@
 		
 		<license.plugin.version>3.0</license.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<liquibase.version>3.5.3</liquibase.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<lombok.version>1.16.14</lombok.version>
 		
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<mysql.version>5.1.40</mysql.version>
 		
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
@@ -499,35 +499,35 @@
 		<!-- Don't forget to update version in the Url class -->
 		<selectizejs.version>0.12.3</selectizejs.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<selenium.version>2.53.1</selenium.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
 		<skipUnitTests>false</skipUnitTests>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<slf4j.version>1.7.24</slf4j.version>
 		
 		<sortpom.plugin.version>2.5.0</sortpom.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<spock.version>1.0-groovy-2.0</spock.version>
 		
-		<!-- Define default value for spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
+		<!-- Define default value for spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<surefire.plugin.version>2.19.1</surefire.plugin.version>
 		<testng.version>6.8.8</testng.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
 		<thymeleaf.togglz.version>2.0.0.RELEASE</thymeleaf.togglz.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.3.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.3.0.Final</togglz.version>
