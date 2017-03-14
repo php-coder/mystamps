@@ -686,6 +686,13 @@ if commits > 1
 	end
 end
 
+if github.branch_for_head !~ /^gh[0-9]+_/
+	warn("danger check: branch '#{github.branch_for_head}' does not comply with our best practices.\n"\
+		"Branch name should use the following scheme: `ghXXX_meaningful-name` where `XXX` is an issue number.\n"\
+		"Next time, please, use this scheme :)"
+	)
+end
+
 all_checks_passed = violation_report[:errors].empty? && violation_report[:warnings].empty? && violation_report[:messages].empty?
 if all_checks_passed
 	message(
