@@ -351,19 +351,7 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated at to current date"() {
-		when:
-			service.add(form, userId, false)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
-				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
-				return true
-			}) >> 123
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated by to user"() {
+	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = 789
 		when:
@@ -372,6 +360,8 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.createdBy == expectedUserId
 				assert series?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
 				return true
 			}) >> 123
 	}
