@@ -376,7 +376,7 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
-	def "add() should pass dto to series dao and returnds its result"() {
+	def "add() should pass dto to series dao and return its result"() {
 		given:
 			Integer expected = 456
 		when:
