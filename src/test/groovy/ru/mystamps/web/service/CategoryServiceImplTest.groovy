@@ -85,24 +85,6 @@ class CategoryServiceImplTest extends Specification {
 			actualSlug == expectedSlug
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass category names to dao"() {
-		given:
-			String expectedEnglishName = 'Animals'
-			String expectedRussianName = 'Животные'
-		and:
-			form.setName(expectedEnglishName)
-			form.setNameRu(expectedRussianName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.name == expectedEnglishName
-				assert category?.nameRu == expectedRussianName
-				return true
-			}) >> 20
-	}
-	
 	def "add() should throw exception when name can't be converted to slug"() {
 		given:
 			form.setName(null)
@@ -130,13 +112,20 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated at/by to current date/user"() {
+	def "add() should pass values to dao"() {
 		given:
 			Integer expectedUserId = 10
+			String expectedEnglishName = 'Animals'
+			String expectedRussianName = 'Животные'
+		and:
+			form.setName(expectedEnglishName)
+			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, expectedUserId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
+				assert category?.name == expectedEnglishName
+				assert category?.nameRu == expectedRussianName
 				assert category?.createdBy == expectedUserId
 				assert category?.updatedBy == expectedUserId
 				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
