@@ -86,31 +86,21 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass English category name to dao"() {
+	def "add() should pass category names to dao"() {
 		given:
-			String expectedCategoryName = 'Animals'
-			form.setName(expectedCategoryName)
+			String expectedEnglishName = 'Animals'
+			String expectedRussianName = 'Животные'
+		and:
+			form.setName(expectedEnglishName)
+			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.name == expectedCategoryName
+				assert category?.name == expectedEnglishName
+				assert category?.nameRu == expectedRussianName
 				return true
 			}) >> 20
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass Russian category name to dao"() {
-		given:
-			String expectedCategoryName = 'Животные'
-			form.setNameRu(expectedCategoryName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.nameRu == expectedCategoryName
-				return true
-			}) >> 30
 	}
 	
 	def "add() should throw exception when name can't be converted to slug"() {
