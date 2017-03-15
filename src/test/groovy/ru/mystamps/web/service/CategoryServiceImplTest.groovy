@@ -130,22 +130,12 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created at to current date"() {
+	def "add() should assign created/updated at to current date"() {
 		when:
 			service.add(form, USER_ID)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
-				return true
-			}) >> 50
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated at to current date"() {
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
 				return true
 			}) >> 60
