@@ -130,19 +130,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated at to current date"() {
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * countryDao.add({ AddCountryDbDto country ->
-				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
-				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
-				return true
-			}) >> 50
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated by to user"() {
+	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = 10
 		when:
@@ -151,6 +139,8 @@ class CountryServiceImplTest extends Specification {
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.createdBy == expectedUserId
 				assert country?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
 			}) >> 80
 	}
