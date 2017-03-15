@@ -142,7 +142,7 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created by to user"() {
+	def "add() should assign created/updated by to user"() {
 		given:
 			Integer expectedUserId = 10
 		when:
@@ -150,21 +150,9 @@ class CategoryServiceImplTest extends Specification {
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.createdBy == expectedUserId
-				return true
-			}) >> 70
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated by to user"() {
-		given:
-			Integer expectedUserId = 20
-		when:
-			service.add(form, expectedUserId)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.updatedBy == expectedUserId
 				return true
-			}) >> 80
+			}) >> 70
 	}
 	
 	//
