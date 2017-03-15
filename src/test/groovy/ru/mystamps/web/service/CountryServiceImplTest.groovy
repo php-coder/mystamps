@@ -142,7 +142,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created by to user"() {
+	def "add() should assign created/updated by to user"() {
 		given:
 			Integer expectedUserId = 10
 		when:
@@ -150,18 +150,6 @@ class CountryServiceImplTest extends Specification {
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.createdBy == expectedUserId
-				return true
-			}) >> 70
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated by to user"() {
-		given:
-			Integer expectedUserId = 10
-		when:
-			service.add(form, expectedUserId)
-		then:
-			1 * countryDao.add({ AddCountryDbDto country ->
 				assert country?.updatedBy == expectedUserId
 				return true
 			}) >> 80
