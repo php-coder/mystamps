@@ -85,24 +85,6 @@ class CountryServiceImplTest extends Specification {
 			actualSlug == expectedSlug
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass country names to dao"() {
-		given:
-			String expectedEnglishName = 'Italy'
-			String expectedRussianName = 'Италия'
-		and:
-			form.setName(expectedEnglishName)
-			form.setNameRu(expectedRussianName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * countryDao.add({ AddCountryDbDto country ->
-				assert country?.name == expectedEnglishName
-				assert country?.nameRu == expectedRussianName
-				return true
-			}) >> 20
-	}
-	
 	def "add() should throw exception when name can't be converted to slug"() {
 		given:
 			form.setName(null)
@@ -130,13 +112,20 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated at/by to current date/user"() {
+	def "add() should pass values to dao"() {
 		given:
 			Integer expectedUserId = 10
+			String expectedEnglishName = 'Italy'
+			String expectedRussianName = 'Италия'
+		and:
+			form.setName(expectedEnglishName)
+			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, expectedUserId)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
+				assert country?.name == expectedEnglishName
+				assert country?.nameRu == expectedRussianName
 				assert country?.createdBy == expectedUserId
 				assert country?.updatedBy == expectedUserId
 				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
