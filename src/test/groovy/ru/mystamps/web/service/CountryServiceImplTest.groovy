@@ -86,31 +86,21 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass country name in English to dao"() {
+	def "add() should pass country names to dao"() {
 		given:
-			String expectedCountryName = 'Italy'
-			form.setName(expectedCountryName)
+			String expectedEnglishName = 'Italy'
+			String expectedRussianName = 'Италия'
+		and:
+			form.setName(expectedEnglishName)
+			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, USER_ID)
 		then:
 			1 * countryDao.add({ AddCountryDbDto country ->
-				assert country?.name == expectedCountryName
+				assert country?.name == expectedEnglishName
+				assert country?.nameRu == expectedRussianName
 				return true
 			}) >> 20
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass country name in Russian to dao"() {
-		given:
-			String expectedCountryName = 'Италия'
-			form.setNameRu(expectedCountryName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * countryDao.add({ AddCountryDbDto country ->
-				assert country?.nameRu == expectedCountryName
-				return true
-			}) >> 30
 	}
 	
 	def "add() should throw exception when name can't be converted to slug"() {
