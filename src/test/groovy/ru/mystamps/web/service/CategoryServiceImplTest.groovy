@@ -130,19 +130,7 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated at to current date"() {
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
-				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
-				return true
-			}) >> 60
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created/updated by to user"() {
+	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = 10
 		when:
@@ -151,6 +139,8 @@ class CategoryServiceImplTest extends Specification {
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.createdBy == expectedUserId
 				assert category?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
 				return true
 			}) >> 70
 	}
