@@ -363,26 +363,14 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created by to user"() {
-		given:
-			Integer expectedUserId = 456
-		when:
-			service.add(form, expectedUserId, false)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.createdBy == expectedUserId
-				return true
-			}) >> 123
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated by to user"() {
+	def "add() should assign created/updated by to user"() {
 		given:
 			Integer expectedUserId = 789
 		when:
 			service.add(form, expectedUserId, false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
+				assert series?.createdBy == expectedUserId
 				assert series?.updatedBy == expectedUserId
 				return true
 			}) >> 123
