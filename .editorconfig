@@ -7,7 +7,7 @@
 # top-most EditorConfig file
 root = true
 
-[*.{sh,js,sql,css,xml,html,java,groovy,properties}]
+[*.{sh,js,sql,css,xml,html,java,groovy,properties,robot}]
 indent_style = tab
 indent_size = 4
 charset = utf-8
