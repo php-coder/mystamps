@@ -744,6 +744,7 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
+					<argLine>${env.MAVEN_OPTS}</argLine>
 					<suiteXmlFiles>
 						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -795,6 +796,7 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<disableXmlReport>${disableXmlReport}</disableXmlReport>
+					<argLine>${env.MAVEN_OPTS}</argLine>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
