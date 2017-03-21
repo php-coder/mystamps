@@ -667,3 +667,36 @@ else
 		print_errors_summary 'maven-failsafe-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/integration-tests'
 	end
 end
+
+commits = git.commits.size
+if commits > 1
+	if git.commits.any? { |c| c.message =~ /^Merge branch/ || c.message =~ /^Merge remote-tracking branch/ }
+		fail(
+			"danger check: pull request contains merge commits! "\
+			"Please, rebase your branch to get rid of them:\n"\
+			"`git rebase master #{github.branch_for_head}`"
+		)
+	else
+		warn(
+			"danger check: pull request contains #{commits} commits while most of the cases it should have only one.\n"\
+			"If it's not a special case you should squash commits into single one.\n"\
+			"You can read how to do it here: https://davidwalsh.name/squash-commits-git\n"\
+			"But be careful because **it can destroy** all your changes!"
+		)
+	end
+end
+
+if github.branch_for_head !~ /^gh[0-9]+_/
+	warn("danger check: branch '#{github.branch_for_head}' does not comply with our best practices.\n"\
+		"Branch name should use the following scheme: `ghXXX_meaningful-name` where `XXX` is an issue number.\n"\
+		"Next time, please, use this scheme :)"
+	)
+end
+
+all_checks_passed = violation_report[:errors].empty? && violation_report[:warnings].empty? && violation_report[:messages].empty?
+if all_checks_passed
+	message(
+		"@#{github.pr_author} thank you for the PR! All quality checks have been passed! "\
+		"Next step is to wait when @php-coder will review this code"
+	)
+end

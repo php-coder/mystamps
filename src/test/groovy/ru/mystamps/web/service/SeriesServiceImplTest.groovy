@@ -351,54 +351,22 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created at to current date"() {
-		when:
-			service.add(form, userId, false)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
-				return true
-			}) >> 123
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated at to current date"() {
-		when:
-			service.add(form, userId, false)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
-				return true
-			}) >> 123
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created by to user"() {
-		given:
-			Integer expectedUserId = 456
-		when:
-			service.add(form, expectedUserId, false)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.createdBy == expectedUserId
-				return true
-			}) >> 123
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated by to user"() {
+	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = 789
 		when:
 			service.add(form, expectedUserId, false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
+				assert series?.createdBy == expectedUserId
 				assert series?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
 				return true
 			}) >> 123
 	}
 	
-	def "add() should pass dto to series dao and returnds its result"() {
+	def "add() should pass dto to series dao and return its result"() {
 		given:
 			Integer expected = 456
 		when:

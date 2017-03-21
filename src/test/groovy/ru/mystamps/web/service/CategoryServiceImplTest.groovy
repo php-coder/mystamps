@@ -85,34 +85,6 @@ class CategoryServiceImplTest extends Specification {
 			actualSlug == expectedSlug
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass English category name to dao"() {
-		given:
-			String expectedCategoryName = 'Animals'
-			form.setName(expectedCategoryName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.name == expectedCategoryName
-				return true
-			}) >> 20
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass Russian category name to dao"() {
-		given:
-			String expectedCategoryName = 'Животные'
-			form.setNameRu(expectedCategoryName)
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.nameRu == expectedCategoryName
-				return true
-			}) >> 30
-	}
-	
 	def "add() should throw exception when name can't be converted to slug"() {
 		given:
 			form.setName(null)
@@ -140,51 +112,26 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created at to current date"() {
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
-				return true
-			}) >> 50
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated at to current date"() {
-		when:
-			service.add(form, USER_ID)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
-				return true
-			}) >> 60
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign created by to user"() {
+	def "add() should pass values to dao"() {
 		given:
 			Integer expectedUserId = 10
+			String expectedEnglishName = 'Animals'
+			String expectedRussianName = 'Животные'
+		and:
+			form.setName(expectedEnglishName)
+			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, expectedUserId)
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
+				assert category?.name == expectedEnglishName
+				assert category?.nameRu == expectedRussianName
 				assert category?.createdBy == expectedUserId
+				assert category?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
 				return true
 			}) >> 70
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should assign updated by to user"() {
-		given:
-			Integer expectedUserId = 20
-		when:
-			service.add(form, expectedUserId)
-		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.updatedBy == expectedUserId
-				return true
-			}) >> 80
 	}
 	
 	//

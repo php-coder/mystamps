@@ -112,6 +112,14 @@ if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'fals
 	danger || DANGER_FAIL=yes
 fi
 
+# In order to be able debug robot framework test flakes we need to have a report.
+# Just encode it to a binary form and dump to console.
+if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
+	echo "===== REPORT START ====="
+	base64 target/robotframework-reports/log.html
+	echo "===== REPORT END ====="
+fi
+
 rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log
 
 if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL$DANGER_FAIL" ]; then
