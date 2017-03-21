@@ -87,11 +87,15 @@ Log Out
 Invalid Catalog Numbers Should Be Rejected
 	[Documentation]                Test that specifying catalog numbers cause an error
 	[Arguments]                    ${catalogNumbers}
+	# open page each time to be sure that we're starting from the clean state.
+	# Otherwise it's possible that there errors from the previous test and when
+	# we'll click on link for adding catalog numbers then fields become
+	# invisible (because link is toggling the visibility and when there are
+	# errors, fields are visible from the begining).
+	Go To                          ${SITE_URL}/series/add
 	Click Element                  id=add-catalog-numbers-link
-	# wait until all fields with class js-catalogs-info will be visible
-	Wait Until Element Is Visible  id=michelNumbers
-	Wait Until Element Is Visible  id=scottNumbers
-	Wait Until Element Is Visible  id=yvertNumbers
+	# we should wait until all 4 fields with class js-catalogs-info will be
+	# visible but for simplicity we just check that the last field is visible
 	Wait Until Element Is Visible  id=gibbonsNumbers
 	Input Text                     id=michelNumbers  ${catalogNumbers}
 	Input Text                     id=scottNumbers  ${catalogNumbers}
