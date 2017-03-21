@@ -37,6 +37,7 @@ import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 public class WhenAnonymousUserActivateAccount
@@ -220,6 +221,16 @@ public class WhenAnonymousUserActivateAccount
 		assertThat(page)
 			.field("password")
 			.hasError(tr("value.too-short", PASSWORD_MIN_LENGTH));
+	}
+
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void passwordShouldNotBeTooLong() {
+		page.activateAccount(null, null, StringUtils.repeat("0", PASSWORD_MAX_LENGTH + 1),
+			null, null);
+
+		assertThat(page)
+			.field("password")
+			.hasError(tr("value.too-long", PASSWORD_MAX_LENGTH));
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
