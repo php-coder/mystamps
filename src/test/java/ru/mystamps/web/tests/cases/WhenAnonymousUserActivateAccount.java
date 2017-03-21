@@ -221,6 +221,15 @@ public class WhenAnonymousUserActivateAccount
 			.field("password")
 			.hasError(tr("value.too-short", PASSWORD_MIN_LENGTH));
 	}
+
+	@Test(groups = "invalid", dependsOnGroups = "std")
+	public void passwordShouldNotBeTooLong() {
+		page.activateAccount(null, null, StringUtils.repeat("0", PASSWORD_MAX_LENGTH + 1), null, null);
+
+		assertThat(page)
+			.field("password")
+			.hasError(tr("value.too-long", PASSWORD_MAX_LENGTH));
+	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
 	public void mostShortPasswordShouldBeAccepted() {
