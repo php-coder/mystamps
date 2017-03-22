@@ -673,7 +673,7 @@ if commits > 1
 	if git.commits.any? { |c| c.message =~ /^Merge branch/ || c.message =~ /^Merge remote-tracking branch/ }
 		fail(
 			"danger check: pull request contains merge commits! "\
-			"Please, rebase your branch to get rid of them:\n"\
+			"Please, rebase your branch to get rid of them: "\
 			"`git rebase master #{github.branch_for_head}`"
 		)
 	else
