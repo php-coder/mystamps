@@ -617,6 +617,7 @@ else
 			suite = suite.parent
 		end
 		msg  = node.text.sub(/\.$/, '')
+		msg  = msg.split(/\n/).delete_if {|el| el =~ /^(Build|System|Driver) info:/}.join("\n")
 		file = suite['source'].sub(pwd, '')
 		file = github.html_link(file)
 		testcase = node.parent['name']
