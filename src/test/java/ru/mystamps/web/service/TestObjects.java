@@ -123,6 +123,24 @@ final class TestObjects {
 		);
 	}
 	
+	public static SeriesFullInfoDto createSeriesFullInfoDto() {
+		SeriesInfoDto info = createSeriesInfoDto();
+		return new SeriesFullInfoDto(
+			info.getId(),
+			info.getCategory(),
+			info.getCountry(),
+			info.getReleaseDay(), info.getReleaseMonth(), info.getReleaseYear(),
+			info.getQuantity(),
+			info.getPerforated(),
+			"this is a full info",
+			TEST_USER_ID,
+			TEST_PRICE, Currency.EUR.toString(),
+			TEST_PRICE, Currency.USD.toString(),
+			TEST_PRICE, Currency.EUR.toString(),
+			TEST_PRICE, Currency.GBP.toString()
+		);
+	}
+	
 	@SuppressWarnings("checkstyle:magicnumber")
 	public static CollectionInfoDto createCollectionInfoDto() {
 		return new CollectionInfoDto(101, "test-user", "Test User");
