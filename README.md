@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/php-coder/mystamps.svg?branch=master)](https://travis-ci.org/php-coder/mystamps)
 [![Dependency Status](https://www.versioneye.com/user/projects/55b783256537620017001225/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55b783256537620017001225)
 [![Coverage Status](https://coveralls.io/repos/php-coder/mystamps/badge.svg?branch=master)](https://coveralls.io/r/php-coder/mystamps)
-[![Stories in Ready](https://badge.waffle.io/php-coder/mystamps.png?label=ready)](https://waffle.io/php-coder/mystamps)
 
 ## What's it?
 
