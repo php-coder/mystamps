@@ -25,12 +25,14 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.dao.dto.Currency
+import ru.mystamps.web.dao.dto.SeriesFullInfoDto
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
+import ru.mystamps.web.service.dto.SeriesDto
 import ru.mystamps.web.tests.DateUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
@@ -778,6 +780,111 @@ class SeriesServiceImplTest extends Specification {
 			daoReturnValue || expectedResult
 			0              || false
 			2              || true
+	}
+	
+	//
+	// Tests for findFullInfoById()
+	//
+	
+	def "findFullInfoById() should throw exception when series id is null"() {
+		when:
+			service.findFullInfoById(null, null)
+		then:
+			thrown(IllegalArgumentException)
+	}
+	
+	def "findFullInfoById() should return null when series not found"() {
+		when:
+			SeriesDto result = service.findFullInfoById(10, 'de')
+		then:
+			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as String)
+		and:
+			0 * michelCatalogService.findBySeriesId(_ as Integer)
+			0 * scottCatalogService.findBySeriesId(_ as Integer)
+			0 * yvertCatalogService.findBySeriesId(_ as Integer)
+			0 * gibbonsCatalogService.findBySeriesId(_ as Integer)
+			0 * imageService.findBySeriesId(_ as Integer)
+		and:
+			result == null
+	}
+	
+	def "findFullInfoById() should return info about series"() {
+		given:
+			Integer expectedSeriesId = 20
+			String expectedLang = 'kz'
+			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
+			List<String> expectedMichelNumbers  = [ '1', '2' ] as List
+			List<String> expectedScottNumbers   = [ '3', '4' ] as List
+			List<String> expectedYvertNumbers   = [ '5', '6' ] as List
+			List<String> expectedGibbonsNumbers = [ '7', '8' ] as List
+			List<Integer> expectedImageIds      = [ 9, 10 ] as List
+		when:
+			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
+		then:
+			1 * seriesDao.findByIdAsSeriesFullInfo({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { String lang ->
+				assert lang == expectedLang
+				return true
+			}) >> expectedInfo
+		and:
+			1 * michelCatalogService.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedMichelNumbers
+		and:
+			1 * scottCatalogService.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedScottNumbers
+		and:
+			1 * yvertCatalogService.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedYvertNumbers
+		and:
+			1 * gibbonsCatalogService.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedGibbonsNumbers
+		and:
+			1 * imageService.findBySeriesId({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}) >> expectedImageIds
+		and:
+			result != null
+			result.id           == expectedInfo.id
+			result.category     == expectedInfo.category
+			result.country      == expectedInfo.country
+			
+			result.releaseDay   == expectedInfo.releaseDay
+			result.releaseMonth == expectedInfo.releaseMonth
+			result.releaseYear  == expectedInfo.releaseYear
+			
+			result.quantity     == expectedInfo.quantity
+			result.perforated   == expectedInfo.perforated
+			result.comment      == expectedInfo.comment
+			result.createdBy    == expectedInfo.createdBy
+			
+			result.imageIds     == expectedImageIds
+
+			result.michel?.numbers   == expectedMichelNumbers
+			result.michel?.price     == expectedInfo.michelPrice
+			result.michel?.currency  == Currency.valueOf(expectedInfo.michelCurrency)
+			
+			result.scott?.numbers    == expectedScottNumbers
+			result.scott?.price      == expectedInfo.scottPrice
+			result.scott?.currency   == Currency.valueOf(expectedInfo.scottCurrency)
+			
+			result.yvert?.numbers    == expectedYvertNumbers
+			result.yvert?.price      == expectedInfo.yvertPrice
+			result.yvert?.currency   == Currency.valueOf(expectedInfo.yvertCurrency)
+			
+			result.gibbons?.numbers  == expectedGibbonsNumbers
+			result.gibbons?.price    == expectedInfo.gibbonsPrice
+			result.gibbons?.currency == Currency.valueOf(expectedInfo.gibbonsCurrency)
 	}
 	
 	//
