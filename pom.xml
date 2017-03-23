@@ -164,6 +164,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/?v=5.2#validator-annotation-processor -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
