@@ -808,16 +808,17 @@ class SeriesServiceImplTest extends Specification {
 			result == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryObjectReferences'])
 	def "findFullInfoById() should return info about series"() {
 		given:
 			Integer expectedSeriesId = 20
 			String expectedLang = 'kz'
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
-			List<String> expectedMichelNumbers  = [ '1', '2' ] as List
-			List<String> expectedScottNumbers   = [ '3', '4' ] as List
-			List<String> expectedYvertNumbers   = [ '5', '6' ] as List
-			List<String> expectedGibbonsNumbers = [ '7', '8' ] as List
-			List<Integer> expectedImageIds      = [ 9, 10 ] as List
+			List<String> expectedMichelNumbers  = [ '1', '2' ]
+			List<String> expectedScottNumbers   = [ '3', '4' ]
+			List<String> expectedYvertNumbers   = [ '5', '6' ]
+			List<String> expectedGibbonsNumbers = [ '7', '8' ]
+			List<Integer> expectedImageIds      = [ 9, 10 ]
 		when:
 			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
 		then:
