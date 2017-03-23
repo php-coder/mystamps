@@ -54,7 +54,7 @@ public class WhenAnonymousUserRegisterAccount
 	private static final Pattern ACTIVATION_LINK_REGEXP =
 		Pattern.compile(".*/account/activate\\?key=[0-9a-z]{10}.*", Pattern.DOTALL);
 	
-	private static final int MAX_TIME_TO_WAIT_EMAIL_IN_SECONDS = 5;
+	private static final int MAX_TIME_TO_WAIT_EMAIL_IN_SECONDS = 15;
 	
 	@Value("${spring.mail.host}")
 	private String mailHost;
