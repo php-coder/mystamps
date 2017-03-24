@@ -413,6 +413,9 @@
 	</parent>
 	
 	<properties>
+		<!-- Set JVM options for maven-surefire-plugin and maven-failsafe-plugin -->
+		<argLine>-Xss256k</argLine>
+		
 		<!-- Don't forget to update version in the Url class -->
 		<bootstrap.version>3.3.7</bootstrap.version>
 		
@@ -745,7 +748,6 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
-					<argLine>${env.MAVEN_OPTS}</argLine>
 					<suiteXmlFiles>
 						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -797,7 +799,6 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<disableXmlReport>${disableXmlReport}</disableXmlReport>
-					<argLine>${env.MAVEN_OPTS}</argLine>
 					<!-- Run junit tests only (see #SUREFIRE-377) -->
 					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
