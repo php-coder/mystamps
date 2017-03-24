@@ -458,7 +458,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<htmlunit.version>2.21</htmlunit.version>
 		
-		<jacoco.plugin.version>0.7.7.201606060606</jacoco.plugin.version>
+		<jacoco.plugin.version>0.7.9</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
