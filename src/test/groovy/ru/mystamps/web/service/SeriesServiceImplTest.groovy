@@ -591,11 +591,64 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for addImageToSeries()
 	//
 	
+	def "addImageToSeries() should throw exception when dto is null"() {
+		when:
+			service.addImageToSeries(null, 111, 222)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addImageToSeries() should throw exception when series id is null"() {
+		when:
+			service.addImageToSeries(imageForm, null, 222)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "addImageToSeries() should throw exception when user id is null"() {
+		when:
+			service.addImageToSeries(imageForm, 111, null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "addImageToSeries() should call dao and pass series id, current date and user id to it"() {
+	def "addImageToSeries() should save image"() {
+		given:
+			imageForm.setImage(multipartFile)
+		when:
+			service.addImageToSeries(imageForm, 111, 222)
+		then:
+			1 * imageService.save({ MultipartFile passedFile ->
+				assert passedFile == multipartFile
+				return true
+			}) >> ANY_IMAGE_ID
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addImageToSeries() should add image to series"() {
 		given:
 			Integer expectedSeriesId = 123
+			Integer expectedUserId = 321
+			Integer expectedImageId = 456
+		when:
+			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
+		then:
+			imageService.save(_) >> expectedImageId
 		and:
+			1 * imageService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			})
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addImageToSeries() should mark series as modified"() {
+		given:
+			Integer expectedSeriesId = 123
 			Integer expectedUserId = 321
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
