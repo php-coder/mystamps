@@ -47,6 +47,8 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public void add(AddSeriesSalesDto dto, Integer seriesId, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getSellerId() != null, "Seller id must be non null");
+		Validate.isTrue(dto.getPrice() != null, "Price must be non null");
 		Validate.isTrue(dto.getCurrency() != null, "Currency must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(userId != null, "Current user id must be non null");

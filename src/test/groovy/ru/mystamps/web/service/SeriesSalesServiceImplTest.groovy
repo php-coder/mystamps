@@ -36,6 +36,8 @@ class SeriesSalesServiceImplTest extends Specification {
 	
 	def setup() {
 		form = new AddSeriesSalesForm()
+		form.setSellerId(7)
+		form.setPrice(new BigDecimal('14'))
 		form.setCurrency(Currency.EUR)
 	}
 	
@@ -50,9 +52,29 @@ class SeriesSalesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	def 'add() should throw exception when currency is null'() {
+	def 'add() should throw exception when seller id is null'() {
+		given:
+			form.setSellerId(null)
 		when:
-			service.add(new AddSeriesSalesForm(), 123, 456)
+			service.add(form, 123, 456)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'add() should throw exception when price is null'() {
+		given:
+			form.setPrice(null)
+		when:
+			service.add(form, 123, 456)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'add() should throw exception when currency is null'() {
+		given:
+			form.setCurrency(null)
+		when:
+			service.add(form, 123, 456)
 		then:
 			thrown IllegalArgumentException
 	}
