@@ -29,6 +29,37 @@ class StampsCatalogServiceImplTest extends Specification {
 	private final StampsCatalogService service = new StampsCatalogServiceImpl('TestCatalog', stampsCatalogDao)
 	
 	//
+	// Tests for add()
+	//
+	
+	def "add() should throw exception when numbers is null"() {
+		when:
+			service.add(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "add() should throw exception when numbers is empty"() {
+		when:
+			service.add([] as Set)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "add() should add catalog numbers"() {
+		given:
+			Set<String> expectedNumbers = [ '8', '9' ] as Set
+		when:
+			service.add(expectedNumbers)
+		then:
+			1 * stampsCatalogDao.add({ Set<String> numbers ->
+				assert numbers == expectedNumbers
+				return true
+			}) >> [ '8' ]
+	}
+	
+	//
 	// Tests for findBySeriesId()
 	//
 	
