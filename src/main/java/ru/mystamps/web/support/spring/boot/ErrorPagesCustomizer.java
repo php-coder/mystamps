@@ -20,20 +20,22 @@ package ru.mystamps.web.support.spring.boot;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.web.servlet.ErrorPageRegistrar;
+import org.springframework.boot.web.servlet.ErrorPageRegistry;
 
 import ru.mystamps.web.Url;
 
 @Configuration
-public class ErrorPagesServletContainerCustomizer implements EmbeddedServletContainerCustomizer {
-	
+public class ErrorPagesCustomizer implements ErrorPageRegistrar {
+
 	@Override
-	public void customize(ConfigurableEmbeddedServletContainer container) {
-		container.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, Url.FORBIDDEN_PAGE));
-		container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, Url.NOT_FOUND_PAGE));
-		container.addErrorPages(new ErrorPage(Exception.class, Url.INTERNAL_ERROR_PAGE));
+	public void registerErrorPages(ErrorPageRegistry registry) {
+		registry.addErrorPages(
+			new ErrorPage(HttpStatus.FORBIDDEN, Url.FORBIDDEN_PAGE),
+			new ErrorPage(HttpStatus.NOT_FOUND, Url.NOT_FOUND_PAGE),
+			new ErrorPage(Exception.class, Url.INTERNAL_ERROR_PAGE)
+		);
 	}
 	
 }
