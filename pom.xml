@@ -488,7 +488,7 @@
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<mysql.version>5.1.40</mysql.version>
+		<mysql.version>5.1.41</mysql.version>
 		
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
 		<!-- TODO: enable InvalidSlf4jMessageFormat rule again when NPE and false positives will be fixed -->
