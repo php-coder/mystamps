@@ -120,7 +120,7 @@ public class CronServiceImpl implements CronService {
 		Validate.validState(expiredActivations != null, "Expired activations must be non null");
 		
 		if (expiredActivations.isEmpty()) {
-			LOG.info("Expired activations was not found.");
+			LOG.info("Expired activations were not found.");
 			return;
 		}
 		
