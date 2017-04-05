@@ -64,6 +64,10 @@ fi
 
 mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify-raw.log 2>&1 || VERIFY_FAIL=yes
 
+if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+	danger >danger.log 2>&1 || DANGER_FAIL=yes
+fi
+
 # Workaround for #538
 "$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
 
@@ -88,6 +92,10 @@ fi
 
 print_status "$VERIFY_FAIL" 'Run integration tests'
 
+if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+	print_status "$DANGER_FAIL" 'Run danger'
+fi
+
 echo
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
@@ -108,8 +116,7 @@ fi
 print_log verify.log   'Run integration tests'
 
 if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
-	# danger uses log files and it should be run before these files will be cleaned
-	danger || DANGER_FAIL=yes
+	print_log danger.log 'Run danger'
 fi
 
 # In order to be able debug robot framework test flakes we need to have a report.
@@ -120,7 +127,7 @@ if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
 	echo "===== REPORT END ====="
 fi
 
-rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log
+rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
 
 if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL$DANGER_FAIL" ]; then
 	exit 1
