@@ -18,7 +18,8 @@ before_script:
       pip install --user html5validator;
       pip install --user robotframework-lint;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
-        gem install danger nokogiri --no-ri --no-rdoc --version 4.3.1;
+        gem install nokogiri --no-ri --no-rdoc;
+        gem install danger --no-ri --no-rdoc --version 4.3.1;
       fi;
     fi
 
