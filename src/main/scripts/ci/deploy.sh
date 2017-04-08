@@ -4,7 +4,7 @@
 set -o nounset
 
 # Exit immediately if command returns a non-zero status
-set -e errexit
+set -o errexit
 
 # Return value of a pipeline is the value of the last command to exit with a non-zero status
 set -o pipefail
