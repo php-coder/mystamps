@@ -1,7 +1,17 @@
 #!/bin/sh
 
+# Treat unset variables and parameters as an error when performing parameter expansion
+set -o nounset
+
+# Exit immediately if command returns a non-zero status
+set -e errexit
+
+# Return value of a pipeline is the value of the last command to exit with a non-zero status
+set -o pipefail
+
+
 RUN_ONLY_INTEGRATION_TESTS=no
-if [ "$1" = '--only-integration-tests' ]; then
+if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
@@ -64,7 +74,7 @@ fi
 
 mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify-raw.log 2>&1 || VERIFY_FAIL=yes
 
-if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
 	danger >danger.log 2>&1 || DANGER_FAIL=yes
 fi
 
@@ -92,7 +102,7 @@ fi
 
 print_status "$VERIFY_FAIL" 'Run integration tests'
 
-if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
 	print_status "$DANGER_FAIL" 'Run danger'
 fi
 
@@ -115,7 +125,7 @@ fi
 
 print_log verify.log   'Run integration tests'
 
-if [ "$SPRING_PROFILES_ACTIVE" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
 	print_log danger.log 'Run danger'
 fi
 
