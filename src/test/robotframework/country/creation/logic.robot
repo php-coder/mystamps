@@ -9,6 +9,7 @@ Force Tags       country  logic
 *** Test Cases ***
 Create country with name in English
 	[Documentation]                   Verify creation of country by filling only mandatory fields
+	[Tags]                            unstable
 	Input Text                        id=name  Germany
 	Submit Form                       id=add-country-form
 	Location Should Be                ${SITE_URL}/country/germany

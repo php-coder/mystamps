@@ -22,6 +22,7 @@ Create series by filling only required fields
 
 Create series by filling all fields
 	[Documentation]            Verify creation of series by filling all fields
+	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
 	Select Country             Italy
 	Input Text                 id=quantity  3
