@@ -9,6 +9,7 @@ Force Tags       series  misc
 *** Test Cases ***
 Catalog numbers should accept valid values
 	[Documentation]  Verify that fields with catalog numbers accept valid values
+	[Tags]           unstable
 	[Template]       Valid Catalog Numbers Should Be Accepted
 	7
 	7,8

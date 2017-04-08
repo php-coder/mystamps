@@ -32,6 +32,7 @@ Create series with empty image
 
 Catalog numbers should reject invalid values
 	[Documentation]  Verify that fields with catalog numbers reject invalid values
+	[Tags]           unstable
 	[Template]       Invalid Catalog Numbers Should Be Rejected
 	t
 	t,t
