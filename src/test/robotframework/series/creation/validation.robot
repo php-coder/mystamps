@@ -46,6 +46,7 @@ Catalog numbers should reject invalid values
 
 Catalog price should reject invalid values
 	[Documentation]  Verify that fields with catalog price reject invalid values
+	[Tags]           unstable
 	[Template]       Invalid Catalog Price Should Be Rejected
 	0
 	-1
