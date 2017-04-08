@@ -1,13 +1,12 @@
 print_status() {
 	local we_failed="$1"
 	local msg="$2"
+	local status='SUCCESS'
 	
-	printf "* $msg... "
 	if [ -n "$we_failed" ]; then
-		echo "\033[1;31mFAIL\033[0m"
-	else
-		echo "\033[1;32mSUCCESS\033[0m"
+		status='FAIL'
 	fi
+	printf "* %s... \033[1;32m%s\033[0m\n" "$msg" "$status"
 }
 
 print_log() {
@@ -15,7 +14,7 @@ print_log() {
 	local msg="$2"
 	
 	echo
-	echo "=====> \033[1;33m$msg\033[0m"
+	printf "=====> \033[1;33m%s\033[0m\n" "$msg"
 	echo
 	egrep -v '^\[INFO\] Download(ing|ed):' "$log_file"
 }
