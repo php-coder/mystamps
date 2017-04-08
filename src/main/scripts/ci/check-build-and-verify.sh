@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Treat unset variables and parameters as an error when performing parameter expansion
 set -o nounset
