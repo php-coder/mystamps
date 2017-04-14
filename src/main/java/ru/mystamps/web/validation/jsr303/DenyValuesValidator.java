@@ -15,32 +15,37 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.validation.jsr303;
 
-final class Group {
-	
-	/* default */ interface Level1 {
-	}
-	
-	/* default */ interface Level2 {
-	}
-	
-	/* default */ interface Level3 {
-	}
-	
-	/* default */ interface Level4 {
-	}
-	
-	/* default */ interface Level5 {
-	}
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-	/* default */ interface Level6 {
-	}
+/**
+ * @author Benjamin Yue
+ */
+public class DenyValuesValidator
+	implements ConstraintValidator<DenyValues, String> {
 	
-	/* default */ interface Level7 {
+	private String[] forbiddenValues;
+	
+	@Override
+	public void initialize(DenyValues annotation) {
+		forbiddenValues = annotation.value();
 	}
 
-	/* default */ interface Level8 {
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
+		if (value == null) {
+			return true;
+		}
+
+		for (String forbiddenValue : forbiddenValues) {
+			if (value.equals(forbiddenValue)) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
-	
+
 }
