@@ -372,7 +372,7 @@ else
 		errors_count += 1
 		line.sub!(/^WARNING:html5validator.validator:/, '')
 		
-		parsed = line.match(/^"file:(?<file>[^"]+)":(?<line>\d+)[^:]+: error: (?<msg>.+)/)
+		parsed = line.match(/^"file:(?<file>[^"]+)":(?<line>\d+)[^:]+: (error|info warning): (?<msg>.+)/)
 		msg    = parsed['msg'].sub(/\.$/, '')
 		file   = parsed['file'].sub(pwd, '')
 		lineno = parsed['line']
