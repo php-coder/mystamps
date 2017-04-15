@@ -2,11 +2,13 @@ print_status() {
 	local we_failed="$1"
 	local msg="$2"
 	local status='SUCCESS'
+	local color=32
 	
 	if [ -n "$we_failed" ]; then
 		status='FAIL'
+		color=31
 	fi
-	printf "* %s... \033[1;32m%s\033[0m\n" "$msg" "$status"
+	printf "* %s... \033[1;%dm%s\033[0m\n" "$msg" "$color" "$status"
 }
 
 print_log() {
