@@ -60,7 +60,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 			'An "img" element must have an "alt" attribute' \
 			'The first child "option" element of a "select" element with a "required" attribute' \
-			'This document appears to be written in Danish' \
+			'This document appears to be written in (Danish|Lithuanian)' \
 		--show-warnings \
 		>validator.log 2>&1 || HTML_FAIL=yes
 	mvn --batch-mode enforcer:enforce >enforcer.log 2>&1 || ENFORCER_FAIL=yes
