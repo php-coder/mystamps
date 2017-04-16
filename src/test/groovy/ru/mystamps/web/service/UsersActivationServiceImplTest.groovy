@@ -23,6 +23,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
+import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.model.RegisterAccountForm
 import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
@@ -241,6 +242,36 @@ class UsersActivationServiceImplTest extends Specification {
 			UsersActivationDto result = service.findByActivationKey('0987654321')
 		then:
 			1 * usersActivationDao.findByActivationKey('0987654321') >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findOlderThan()
+	//
+
+	def "findOlderThan() should throw exception when days are less than zero"() {
+		when:
+			service.findOlderThan(-1)
+		then:
+			thrown IllegalArgumentException
+	}
+
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "findOlderThan() should invoke dao, pass changed date and return the result"() {
+		given:
+			int days = 4
+		and:
+			Date expectedDate = new Date() - days
+		and:
+			List<UsersActivationFullDto> expectedResult = [ TestObjects.createUsersActivationFullDto() ]
+		when:
+			List<UsersActivationFullDto> result = service.findOlderThan(days)
+		then:
+			1 * usersActivationDao.findOlderThan({ Date date ->
+				assert DateUtils.roughlyEqual(date, expectedDate)
+				return true
+			}) >> expectedResult
 		and:
 			result == expectedResult
 	}
