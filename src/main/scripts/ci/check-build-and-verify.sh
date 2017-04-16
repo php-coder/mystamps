@@ -52,6 +52,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || JASMINE_FAIL=yes
 	# FIXME: add check for src/main/config/nginx/503.*html
 	# TODO: remove ignoring of error about alt attribute after resolving #314
+	# TODO: remove ignoring of error about document language when it will be resolved in upstream
 	html5validator \
 		--root src/main/webapp/WEB-INF/views \
 		--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
@@ -59,6 +60,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 			'An "img" element must have an "alt" attribute' \
 			'The first child "option" element of a "select" element with a "required" attribute' \
+			'This document appears to be written in Danish' \
 		--show-warnings \
 		>validator.log 2>&1 || HTML_FAIL=yes
 	mvn --batch-mode enforcer:enforce >enforcer.log 2>&1 || ENFORCER_FAIL=yes
