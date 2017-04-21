@@ -441,7 +441,7 @@ else
 		# For maven-compiler-plugin we're interesting in everything between
 		#     [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
 		# and
-		#     [INFO] --- gmaven-plugin:1.4:compile (default) @ mystamps ---
+		#     [INFO] --- native2ascii-maven-plugin:1.0-beta-1:native2ascii (default) @ mystamps ---
 		# or
 		#     [INFO] BUILD FAILURE
 		if line.start_with? '[INFO] --- maven-compiler-plugin:'
