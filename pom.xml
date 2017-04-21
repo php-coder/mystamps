@@ -443,8 +443,7 @@
 		<fest.assert.version>2.0M8</fest.assert.version>
 		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
 		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
-		<gmaven.plugin.version>1.4</gmaven.plugin.version>
-		<gmaven.runtime.plugin.version>1.5</gmaven.runtime.plugin.version>
+		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.5.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<groovy.version>2.0.8</groovy.version>
@@ -815,19 +814,16 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>${gmaven.plugin.version}</version>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>${gmavenplus.plugin.version}</version>
 				<configuration>
-					<providerSelection>2.0</providerSelection>
+					<!--
+						Groovy compiler warning level. Should be one of:
+						0 (None), 1 (Likely Errors), 2 (Possible Errors), 3 (Paranoia)
+					-->
+					<warningLevel>3</warningLevel>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.gmaven.runtime</groupId>
-						<artifactId>gmaven-runtime-2.0</artifactId>
-						<version>${gmaven.runtime.plugin.version}</version>
-					</dependency>
-				</dependencies>
 				<executions>
 					<execution>
 						<goals>

@@ -387,7 +387,7 @@ end
 
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:compile` output
 # Handle `mvn org.apache.maven.plugins:maven-compiler-plugin:testCompile` output
-# Handle `mvn org.codehaus.gmaven:gmaven-plugin:testCompile` output
+# Handle `mvn org.codehaus.gmavenplus:gmavenplus-plugin:testCompile` output
 #
 # Example for maven-compiler-plugin:
 # [INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ mystamps ---
@@ -405,8 +405,9 @@ end
 # [INFO] BUILD FAILURE
 # [INFO] ------------------------------------------------------------------------
 #
-# Example for gmaven-plugin:testCompile:
-# [INFO] --- gmaven-plugin:1.4:testCompile (default-cli) @ mystamps ---
+# Example for gmavenplus-plugin:testCompile:
+# [INFO] --- gmavenplus-plugin:1.5:testCompile (default) @ mystamps ---
+# [INFO] Using Groovy 2.0.8 to perform testCompile.
 # [INFO] ------------------------------------------------------------------------
 # [INFO] BUILD FAILURE
 # [INFO] ------------------------------------------------------------------------
@@ -414,7 +415,7 @@ end
 # [INFO] Finished at: 2017-03-01T22:25:47+01:00
 # [INFO] Final Memory: 24M/322M
 # [INFO] ------------------------------------------------------------------------
-# [ERROR] Failed to execute goal org.codehaus.gmaven:gmaven-plugin:1.4:testCompile (default-cli) on project mystamps: startup failed:
+# [ERROR] Failed to execute goal org.codehaus.gmavenplus:gmavenplus-plugin:1.5:testCompile (default) on project mystamps: Error occurred while calling a method on a Groovy class from classpath. InvocationTargetException: startup failed:
 # [ERROR] /home/coder/mystamps/src/test/groovy/ru/mystamps/web/service/SiteServiceImplTest.groovy: 27: unable to resolve class Specification
 # [ERROR] @ line 27, column 1.
 # [ERROR] @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
@@ -452,11 +453,11 @@ else
 		end
 		
 		# For maven-compiler-plugin we're interesting in everything between
-		#     [ERROR] Failed to execute goal org.codehaus.gmaven:gmaven-plugin:1.4:testCompile (default-cli) on project mystamps: startup failed:
+		#     [ERROR] Failed to execute goal org.codehaus.gmavenplus:gmavenplus-plugin:1.5:testCompile (default) on project mystamps:
 		# and
 		#     [ERROR] -> [Help 1]
-		if line.start_with? '[ERROR] Failed to execute goal org.codehaus.gmaven:'
-			plugin = 'gmaven-plugin'
+		if line.start_with? '[ERROR] Failed to execute goal org.codehaus.gmavenplus:'
+			plugin = 'gmavenplus-plugin'
 			plugin_output_started = true
 			errors << line.rstrip
 			next
@@ -480,7 +481,7 @@ else
 		
 		if line =~ /BUILD FAILURE/
 			if errors.empty?
-				# when gmaven plugin fails we need to collect errors after this message
+				# when gmavenplus plugin fails we need to collect errors after this message
 				next
 			else
 				# build failed => error output is collected, stop processing
@@ -488,7 +489,7 @@ else
 			end
 		end
 		
-		# stop collecting error message for the gmaven-plugin
+		# stop collecting error message for the gmavenplus-plugin
 		if line.start_with? '[ERROR] -> [Help'
 			break
 		end
