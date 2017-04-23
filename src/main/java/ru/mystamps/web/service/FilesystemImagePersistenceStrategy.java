@@ -66,7 +66,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Path dest = generateFilePath(storageDir, image);
 			writeToFile(file, dest);
 			
-			LOG.info("Image's data was written into file {}", dest);
+			LOG.info("Image data has been written into file {}", dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);
