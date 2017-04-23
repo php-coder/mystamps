@@ -58,6 +58,8 @@ Create category with name that ends with hyphen
 
 Create category with forbidden names
 	[Documentation]         Verify validation of forbidden names
+	# Open a page again to have a clean state (nameRu field has an invalid value)
+	Go To                   ${SITE_URL}/category/add
 	# 'add' is a forbidden value
 	Input Text              id=name  add
 	Submit Form             id=add-category-form
