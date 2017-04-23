@@ -72,12 +72,12 @@ public class ImageServiceImpl implements ImageService {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		ImageInfoDto image = new ImageInfoDto(id, imageType);
-		LOG.info("Image was saved to database ({})", image);
+		ImageInfoDto imageInfo = new ImageInfoDto(id, imageType);
+		LOG.info("Image info has been saved to database ({})", imageInfo);
 		
-		imagePersistenceStrategy.save(file, image);
+		imagePersistenceStrategy.save(file, imageInfo);
 		
-		return image.getId();
+		return imageInfo.getId();
 	}
 	
 	@Override
