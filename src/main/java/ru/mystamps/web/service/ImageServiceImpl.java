@@ -67,17 +67,17 @@ public class ImageServiceImpl implements ImageService {
 		
 		String imageType = extension.toUpperCase(Locale.US);
 		
-		Integer id = imageDao.add(imageType);
-		if (id == null) {
+		Integer imageId = imageDao.add(imageType);
+		if (imageId == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}
 		
-		ImageInfoDto imageInfo = new ImageInfoDto(id, imageType);
+		ImageInfoDto imageInfo = new ImageInfoDto(imageId, imageType);
 		LOG.info("Image info has been saved to database ({})", imageInfo);
 		
 		imagePersistenceStrategy.save(file, imageInfo);
 		
-		return imageInfo.getId();
+		return imageId;
 	}
 	
 	@Override
