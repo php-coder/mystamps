@@ -56,6 +56,17 @@ Create category with name that ends with hyphen
 	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
 	Element Text Should Be  id=nameRu.errors  Value must not start or end with hyphen
 
+Create category with forbidden names
+	[Documentation]         Verify validation of forbidden names
+	# 'add' is a forbidden value
+	Input Text              id=name  add
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Invalid value
+	# 'list' is a forbidden value
+	Input Text              id=name  list
+	Submit Form             id=add-category-form
+	Element Text Should Be  id=name.errors  Invalid value
+
 Create category with existing name
 	[Documentation]         Verify validation of non-unique name
 	Input Text              id=name  Sport
