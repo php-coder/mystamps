@@ -675,7 +675,7 @@ if commits > 1
 		fail(
 			"danger check: pull request contains merge commits! "\
 			"Please, rebase your branch to get rid of them: "\
-			"`git rebase master #{github.branch_for_head}`"
+			"`git rebase master #{github.branch_for_head}` and `git push --force-with-lease`"
 		)
 	else
 		warn(
