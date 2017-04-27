@@ -55,7 +55,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			imageData.setContent(file.getBytes());
 			
 			Integer id = imageDataDao.add(imageData);
-			LOG.info("Image data #{} for image #{} has been saved", id, image.getId());
+			LOG.info("Image #{}: meta data has been saved to #{}", image.getId(), id);
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
@@ -67,7 +67,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	public ImageDto get(ImageInfoDto image) {
 		DbImageDto imageDto = imageDataDao.findByImageId(image.getId());
 		if (imageDto == null) {
-			LOG.warn("Found image without content: #{}", image.getId());
+			LOG.warn("Image #{}: content not found", image.getId());
 			return null;
 		}
 		
