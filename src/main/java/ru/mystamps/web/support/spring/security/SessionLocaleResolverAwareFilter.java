@@ -63,6 +63,8 @@ class SessionLocaleResolverAwareFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest)request;
 			LOG.debug("Handling request {} {}", req.getMethod(), req.getRequestURI());
 			
+			// NB: This won't work if the name of session attribute is
+			// modified with SessionLocaleResolver.setLocaleAttributeName() method.
 			Locale locale = (Locale)WebUtils.getSessionAttribute(
 				req,
 				SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME
