@@ -174,6 +174,7 @@ public class CountryServiceImpl implements CountryService {
 	public String suggestCountryForUser(Integer userId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 
+		// if user created a series with a country, let's suggest this country to him
 		String slug = countryDao.findCountryOfLastCreatedSeriesByUser(userId);
 		if (slug != null) {
 			LOG.info(
@@ -184,6 +185,8 @@ public class CountryServiceImpl implements CountryService {
 			return slug;
 		}
 
+		// user has never created a country but most of the series in his collection
+		// belong to a specific country, let's suggest this country to him
 		slug = countryDao.findPopularCountryInCollection(userId);
 		if (slug != null) {
 			LOG.info(
