@@ -166,6 +166,7 @@ public class CountryServiceImpl implements CountryService {
 
 	/**
 	 * @author Shkarin John
+	 * @author Slava Semushin
 	 */
 	@Override
 	@Transactional(readOnly = true)
@@ -175,7 +176,7 @@ public class CountryServiceImpl implements CountryService {
 
 		String slug = countryDao.findLastCreatedByUser(userId);
 		if (slug != null) {
-			LOG.debug(
+			LOG.info(
 				"Country {} has been suggested to user #{} as a recently created",
 				slug,
 				userId
@@ -184,7 +185,7 @@ public class CountryServiceImpl implements CountryService {
 		}
 
 		slug = countryDao.findPopularCountryInCollection(userId);
-		LOG.debug(
+		LOG.info(
 			"Country {} has been suggested to user #{} as popular in his collection",
 			slug,
 			userId
