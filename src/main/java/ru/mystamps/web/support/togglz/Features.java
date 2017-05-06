@@ -78,7 +78,7 @@ public enum Features implements Feature {
 
 	@Label("/series/add: show link with auto-suggestions")
 	@EnabledByDefault
-	INFO_COUNTRY_SERIES;
+	SHOW_SUGGESTION_LINK;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
