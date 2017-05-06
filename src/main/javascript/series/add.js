@@ -29,7 +29,6 @@ function initPage(suggestCountryUrl) {
 			}
 
 			var country = $("#js-guess-country-link");
-			country.show();
 			country.click(function chooseSuggestedCountry() {
 				$(this).hide();
 
@@ -37,6 +36,7 @@ function initPage(suggestCountryUrl) {
 				var selectize = select_country[0].selectize;
 				selectize.setValue(slug);
 			});
+			country.show();
 		});
 	}
 }
