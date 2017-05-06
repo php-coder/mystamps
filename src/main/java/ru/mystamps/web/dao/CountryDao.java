@@ -36,6 +36,6 @@ public interface CountryDao {
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	String findLastCreatedByUser(Integer userId);
+	String findCountryOfLastCreatedSeriesByUser(Integer userId);
 	String findPopularCountryInCollection(Integer userId);
 }

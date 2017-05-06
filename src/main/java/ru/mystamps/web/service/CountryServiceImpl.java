@@ -174,10 +174,10 @@ public class CountryServiceImpl implements CountryService {
 	public String suggestCountryForUser(Integer userId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 
-		String slug = countryDao.findLastCreatedByUser(userId);
+		String slug = countryDao.findCountryOfLastCreatedSeriesByUser(userId);
 		if (slug != null) {
 			LOG.info(
-				"Country {} has been suggested to user #{} as a recently created",
+				"Country {} has been suggested to user #{} from a recently created series",
 				slug,
 				userId
 			);

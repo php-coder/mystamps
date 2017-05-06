@@ -77,8 +77,9 @@ public class JdbcCountryDao implements CountryDao {
 	@Value("${country.find_country_link_info_by_slug}")
 	private String findCountryLinkEntityBySlugSql;
 
-	@Value("${country.find_last_created_by_user}")
-	private String findLastCreatedByUserSql;
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${country.find_from_last_created_series_by_user}")
+	private String findFromLastCreatedSeriesByUserSql;
 
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${country.find_popular_country_from_user_collection}")
@@ -216,12 +217,13 @@ public class JdbcCountryDao implements CountryDao {
 
 	/**
 	 * @author Shkarin John
+	 * @author Slava Semushin
 	 */
 	@Override
-	public String findLastCreatedByUser(Integer userId) {
+	public String findCountryOfLastCreatedSeriesByUser(Integer userId) {
 		try {
 			return jdbcTemplate.queryForObject(
-				findLastCreatedByUserSql,
+				findFromLastCreatedSeriesByUserSql,
 				Collections.singletonMap("created_by", userId),
 				String.class
 			);
