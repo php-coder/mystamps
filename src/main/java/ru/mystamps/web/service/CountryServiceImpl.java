@@ -185,11 +185,15 @@ public class CountryServiceImpl implements CountryService {
 		}
 
 		slug = countryDao.findPopularCountryInCollection(userId);
-		LOG.info(
-			"Country {} has been suggested to user #{} as popular in his collection",
-			slug,
-			userId
-		);
+		if (slug != null) {
+			LOG.info(
+				"Country {} has been suggested to user #{} as popular in his collection",
+				slug,
+				userId
+			);
+		}
+		
+		LOG.info("Couldn't suggest a country for user #{}", userId);
 		
 		return slug;
 	}
