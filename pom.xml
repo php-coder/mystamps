@@ -423,7 +423,7 @@
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
 		<codenarc.plugin.version>0.22-1</codenarc.plugin.version>
-		<codenarc.version>0.25.2</codenarc.version>
+		<codenarc.version>0.27.0</codenarc.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.6.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
