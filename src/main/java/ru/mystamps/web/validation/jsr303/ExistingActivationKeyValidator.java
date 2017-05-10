@@ -42,9 +42,7 @@ public class ExistingActivationKeyValidator
 			return true;
 		}
 		
-		boolean requestExists = usersActivationService.countByActivationKey(value) == 1;
-		
-		return requestExists;
+		return usersActivationService.countByActivationKey(value) == 1;
 	}
 	
 }

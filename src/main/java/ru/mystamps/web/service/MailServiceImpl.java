@@ -127,7 +127,9 @@ public class MailServiceImpl implements MailService {
 			// Otherwise we would use SimpleMailMessage class.
 			MimeMessagePreparator preparator = new MimeMessagePreparator() {
 				@Override
-				@SuppressWarnings("PMD.SignatureDeclareThrowsException")
+				@SuppressWarnings({
+					"PMD.SignatureDeclareThrowsException", "PMD.AccessorMethodGeneration"
+				})
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setValidateAddresses(true);

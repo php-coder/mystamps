@@ -18,10 +18,7 @@
 	<rule ref="rulesets/java/basic.xml" />
 	<rule ref="rulesets/java/strictexception.xml" />
 	<rule ref="rulesets/java/sunsecure.xml" />
-	<rule ref="rulesets/java/logging-java.xml">
-		<!-- Temporary exclude this rule because of NPE and many false positives -->
-		<exclude name="InvalidSlf4jMessageFormat" />
-	</rule>
+	<rule ref="rulesets/java/logging-java.xml" />
 	<rule ref="rulesets/java/controversial.xml">
 		<exclude name="AtLeastOneConstructor" />
 		<exclude name="OnlyOneReturn" />

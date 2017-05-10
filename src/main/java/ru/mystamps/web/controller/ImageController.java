@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -53,7 +54,7 @@ public class ImageController {
 		}
 
 		// TODO: set content disposition
-		response.setContentType("image/" + image.getType().toLowerCase());
+		response.setContentType("image/" + image.getType().toLowerCase(Locale.ENGLISH));
 		response.setContentLength(image.getData().length);
 		
 		response.getOutputStream().write(image.getData());
