@@ -39,9 +39,7 @@ public class NotEmptyFilenameValidator
 			return true;
 		}
 		
-		boolean emptyFilename = StringUtils.isEmpty(file.getOriginalFilename());
-		
-		return !emptyFilename;
+		return StringUtils.isNotEmpty(file.getOriginalFilename());
 	}
 	
 }

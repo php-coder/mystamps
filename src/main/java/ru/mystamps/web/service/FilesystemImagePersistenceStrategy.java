@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 
@@ -123,7 +124,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		return new StringBuilder()
 			.append(image.getId())
 			.append('.')
-			.append(image.getType().toLowerCase())
+			.append(image.getType().toLowerCase(Locale.ENGLISH))
 			.toString();
 	}
 	
