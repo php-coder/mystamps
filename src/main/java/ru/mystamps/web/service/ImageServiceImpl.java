@@ -65,7 +65,7 @@ public class ImageServiceImpl implements ImageService {
 				contentType, extension
 		);
 		
-		String imageType = extension.toUpperCase(Locale.US);
+		String imageType = extension.toUpperCase(Locale.ENGLISH);
 		
 		Integer imageId = imageDao.add(imageType);
 		if (imageId == null) {
