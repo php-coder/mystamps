@@ -9,7 +9,15 @@
 	
 	<!-- For rules description see http://pmd.github.io/pmd-5.5.2/pmd-java/rules/index.html -->
 	
-	<rule ref="rulesets/java/design.xml" />
+	<rule ref="rulesets/java/design.xml">
+		<exclude name="UnnecessaryLocalBeforeReturn" />
+	</rule>
+	<rule ref="rulesets/java/design.xml/UnnecessaryLocalBeforeReturn">
+		<properties>
+			<property name="statementOrderMatters" value="false" />
+		</properties>
+	</rule>
+
 	<rule ref="rulesets/java/coupling.xml">
 		<exclude name="LawOfDemeter" />
 		<exclude name="LoosePackageCoupling" />
