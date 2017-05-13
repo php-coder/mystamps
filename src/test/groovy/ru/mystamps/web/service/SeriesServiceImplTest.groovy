@@ -613,6 +613,26 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "addImageToSeries() should mark series as modified"() {
+		given:
+			Integer expectedSeriesId = 123
+			Integer expectedUserId = 321
+		when:
+			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
+		then:
+			1 * seriesDao.markAsModified({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Date updatedAt ->
+				assert DateUtils.roughlyEqual(updatedAt, new Date())
+				return true
+			}, { Integer userId ->
+				assert userId == expectedUserId
+				return true
+			})
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addImageToSeries() should save image"() {
 		given:
 			imageForm.setImage(multipartFile)
@@ -641,26 +661,6 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}, { Integer imageId ->
 				assert imageId == expectedImageId
-				return true
-			})
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "addImageToSeries() should mark series as modified"() {
-		given:
-			Integer expectedSeriesId = 123
-			Integer expectedUserId = 321
-		when:
-			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
-		then:
-			1 * seriesDao.markAsModified({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Date updatedAt ->
-				assert DateUtils.roughlyEqual(updatedAt, new Date())
-				return true
-			}, { Integer userId ->
-				assert userId == expectedUserId
 				return true
 			})
 	}
