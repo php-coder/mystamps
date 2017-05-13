@@ -70,6 +70,27 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	}
 	
 	//
+	// Tests for savePreview()
+	//
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "savePreview() should pass dto to image data dao"() {
+		given:
+			Integer expectedImageId = imageInfoDto.id
+		and:
+			byte[] expectedContent = 'test'.bytes
+		when:
+			strategy.savePreview(expectedContent, imageInfoDto)
+		then:
+			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
+				assert imageData?.imageId == expectedImageId
+				assert imageData?.content == expectedContent
+				assert imageData?.preview == true
+				return true
+			})
+	}
+	
+	//
 	// Tests for get()
 	//
 	
