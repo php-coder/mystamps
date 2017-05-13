@@ -379,42 +379,6 @@ class SeriesServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass image to image service"() {
-		given:
-			form.setImage(multipartFile)
-		when:
-			service.add(form, userId, false)
-		then:
-			1 * imageService.save({ MultipartFile passedFile ->
-				assert passedFile == multipartFile
-				return true
-			}) >> ANY_IMAGE_ID
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should add image to the series"() {
-		given:
-			Integer expectedSeriesId = 123
-		and:
-			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
-		and:
-			Integer expectedImageId = 456
-		when:
-			service.add(form, userId, false)
-		then:
-			// FIXME: why we can't use _ as MultipartFile here?
-			imageService.save(_) >> expectedImageId
-		and:
-			1 * imageService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			})
-	}
-	
 	@Unroll
 	def "add() should not call services if michel numbers is '#numbers'"(String numbers) {
 		given:
@@ -587,6 +551,42 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "add() should pass image to image service"() {
+		given:
+			form.setImage(multipartFile)
+		when:
+			service.add(form, userId, false)
+		then:
+			1 * imageService.save({ MultipartFile passedFile ->
+				assert passedFile == multipartFile
+				return true
+			}) >> ANY_IMAGE_ID
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "add() should add image to the series"() {
+		given:
+			Integer expectedSeriesId = 123
+		and:
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		and:
+			Integer expectedImageId = 456
+		when:
+			service.add(form, userId, false)
+		then:
+			// FIXME: why we can't use _ as MultipartFile here?
+			imageService.save(_) >> expectedImageId
+		and:
+			1 * imageService.addToSeries({ Integer seriesId ->
+				assert seriesId == expectedSeriesId
+				return true
+			}, { Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			})
+	}
+	
 	//
 	// Tests for addImageToSeries()
 	//
