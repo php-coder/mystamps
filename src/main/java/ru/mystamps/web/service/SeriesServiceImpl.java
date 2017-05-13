@@ -166,9 +166,10 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
 		
+		seriesDao.markAsModified(seriesId, new Date(), userId);
+		
 		Integer imageId = imageService.save(dto.getImage());
 		imageService.addToSeries(seriesId, imageId);
-		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
 		LOG.info(
 			"Image #{} has been added to series #{} by user #{}",
