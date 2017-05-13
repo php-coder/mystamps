@@ -171,7 +171,7 @@ public class SeriesServiceImpl implements SeriesService {
 		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
 		LOG.info(
-			"Image #{} was added to series #{} by user #{}",
+			"Image #{} has been added to series #{} by user #{}",
 			imageId,
 			seriesId,
 			userId
