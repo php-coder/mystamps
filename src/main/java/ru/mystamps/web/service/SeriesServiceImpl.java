@@ -125,7 +125,6 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setUpdatedBy(userId);
 		
 		Integer id = seriesDao.add(series);
-		LOG.info("Series #{} has been created ({})", id, series);
 		
 		Integer imageId = imageService.save(dto.getImage());
 		imageService.addToSeries(id, imageId);
@@ -153,6 +152,8 @@ public class SeriesServiceImpl implements SeriesService {
 			gibbonsCatalogService.add(gibbonsNumbers);
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
 		}
+		
+		LOG.info("Series #{} has been created ({})", id, series);
 		
 		return id;
 	}
