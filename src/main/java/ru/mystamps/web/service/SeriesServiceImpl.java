@@ -126,9 +126,6 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		Integer id = seriesDao.add(series);
 		
-		Integer imageId = imageService.save(dto.getImage());
-		imageService.addToSeries(id, imageId);
-		
 		Set<String> michelNumbers = CatalogUtils.parseCatalogNumbers(dto.getMichelNumbers());
 		if (!michelNumbers.isEmpty()) {
 			michelCatalogService.add(michelNumbers);
@@ -152,6 +149,9 @@ public class SeriesServiceImpl implements SeriesService {
 			gibbonsCatalogService.add(gibbonsNumbers);
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
 		}
+		
+		Integer imageId = imageService.save(dto.getImage());
+		imageService.addToSeries(id, imageId);
 		
 		LOG.info("Series #{} has been created ({})", id, series);
 		
