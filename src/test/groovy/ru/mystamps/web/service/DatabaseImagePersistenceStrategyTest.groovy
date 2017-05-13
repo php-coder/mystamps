@@ -56,14 +56,14 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			Integer expectedImageId = imageInfoDto.id
 		and:
-			byte[] expected = 'test'.bytes
-			multipartFile.bytes >> expected
+			byte[] expectedContent = 'test'.bytes
+			multipartFile.bytes >> expectedContent
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.imageId == expectedImageId
-				assert imageData?.content == expected
+				assert imageData?.content == expectedContent
 				assert imageData?.preview == false
 				return true
 			})
