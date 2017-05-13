@@ -64,6 +64,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.imageId == expectedImageId
 				assert imageData?.content == expected
+				assert imageData?.preview == false
 				return true
 			})
 	}
