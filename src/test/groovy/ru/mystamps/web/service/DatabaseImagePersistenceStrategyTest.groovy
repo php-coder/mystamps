@@ -52,28 +52,18 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "save() should pass file content to image data dao"() {
+	def "save() should pass dto to image data dao"() {
 		given:
+			Integer expectedImageId = imageInfoDto.id
+		and:
 			byte[] expected = 'test'.bytes
 			multipartFile.bytes >> expected
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
-				assert imageData?.content == expected
-				return true
-			})
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "save() should pass image to image data dao"() {
-		given:
-			Integer expectedImageId = imageInfoDto.id
-		when:
-			strategy.save(multipartFile, imageInfoDto)
-		then:
-			1 * imageDataDao.add({ AddImageDataDbDto imageData ->
 				assert imageData?.imageId == expectedImageId
+				assert imageData?.content == expected
 				return true
 			})
 	}
