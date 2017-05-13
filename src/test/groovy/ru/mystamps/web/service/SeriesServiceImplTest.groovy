@@ -379,22 +379,6 @@ class SeriesServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	@Unroll
-	def "add() should not call services if michel numbers is '#numbers'"(String numbers) {
-		given:
-			form.setMichelNumbers(numbers)
-		when:
-			service.add(form, userId, false)
-		then:
-			0 * michelCatalogService.add(_ as Set<String>)
-		and:
-			0 * michelCatalogService.addToSeries(_ as Integer, _ as Set<String>)
-		where:
-			numbers | _
-			''      | _
-			null    | _
-	}
-	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add michel numbers to series"() {
 		given:
@@ -420,22 +404,6 @@ class SeriesServiceImplTest extends Specification {
 				assert numbers == expectedNumbers
 				return true
 			})
-	}
-	
-	@Unroll
-	def "add() should not call services if scott numbers is '#numbers'"(String numbers) {
-		given:
-			form.setScottNumbers(numbers)
-		when:
-			service.add(form, userId, false)
-		then:
-			0 * scottCatalogService.add(_ as Set<String>)
-		and:
-			0 * scottCatalogService.addToSeries(_ as Integer, _ as Set<String>)
-		where:
-			numbers | _
-			''      | _
-			null    | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -465,22 +433,6 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 	
-	@Unroll
-	def "add() should not call services if yvert numbers is '#numbers'"(String numbers) {
-		given:
-			form.setYvertNumbers(numbers)
-		when:
-			service.add(form, userId, false)
-		then:
-			0 * yvertCatalogService.add(_ as Set<String>)
-		and:
-			0 * yvertCatalogService.addToSeries(_ as Integer, _ as Set<String>)
-		where:
-			numbers | _
-			''      | _
-			null    | _
-	}
-	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add yvert numbers to series"() {
 		given:
@@ -506,22 +458,6 @@ class SeriesServiceImplTest extends Specification {
 				assert numbers == expectedNumbers
 				return true
 			})
-	}
-	
-	@Unroll
-	def "add() should not call services if gibbons numbers is '#numbers'"(String numbers) {
-		given:
-			form.setGibbonsNumbers(numbers)
-		when:
-			service.add(form, userId, false)
-		then:
-			0 * gibbonsCatalogService.add(_ as Set<String>)
-		and:
-			0 * gibbonsCatalogService.addToSeries(_ as Integer, _ as Set<String>)
-		where:
-			numbers | _
-			''      | _
-			null    | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
