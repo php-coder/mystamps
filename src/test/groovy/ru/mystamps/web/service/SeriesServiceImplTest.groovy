@@ -512,7 +512,7 @@ class SeriesServiceImplTest extends Specification {
 			service.add(form, userId, false)
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
-			imageService.save(_) >> new ImageInfoDto(expectedImageId, "JPEG")
+			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
 		and:
 			1 * imageService.addToSeries({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
@@ -590,7 +590,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
 		then:
-			imageService.save(_) >> new ImageInfoDto(expectedImageId, "JPEG")
+			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
 		and:
 			1 * imageService.addToSeries({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
