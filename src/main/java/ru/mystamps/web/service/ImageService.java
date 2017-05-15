@@ -22,9 +22,10 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 
 public interface ImageService {
-	Integer save(MultipartFile file);
+	ImageInfoDto save(MultipartFile file);
 	ImageDto get(Integer imageId);
 	ImageDto getOrCreatePreview(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);
