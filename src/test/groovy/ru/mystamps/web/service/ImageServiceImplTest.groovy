@@ -138,13 +138,15 @@ class ImageServiceImplTest extends Specification {
 	
 	def "save() should return saved image"() {
 		given:
-			Integer expectedImageId = 20
+			Integer expectedImageId = 17
+		and:
+			ImageInfoDto expectedImageInfo = new ImageInfoDto(expectedImageId, "PNG")
 		when:
-			Integer actualImageId = service.save(multipartFile)
+			ImageInfoDto actualImageInfo = service.save(multipartFile)
 		then:
 			imageDao.add(_ as String) >> expectedImageId
 		and:
-			actualImageId == expectedImageId
+			actualImageInfo == expectedImageInfo
 	}
 	
 	//

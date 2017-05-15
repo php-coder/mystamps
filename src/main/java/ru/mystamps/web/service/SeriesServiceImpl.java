@@ -36,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -150,8 +151,8 @@ public class SeriesServiceImpl implements SeriesService {
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
 		}
 		
-		Integer imageId = imageService.save(dto.getImage());
-		imageService.addToSeries(id, imageId);
+		ImageInfoDto imageInfo = imageService.save(dto.getImage());
+		imageService.addToSeries(id, imageInfo.getId());
 		
 		LOG.info("Series #{} has been created ({})", id, series);
 		
@@ -168,7 +169,8 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		seriesDao.markAsModified(seriesId, new Date(), userId);
 		
-		Integer imageId = imageService.save(dto.getImage());
+		ImageInfoDto imageInfo = imageService.save(dto.getImage());
+		Integer imageId = imageInfo.getId();
 		imageService.addToSeries(seriesId, imageId);
 		
 		LOG.info(

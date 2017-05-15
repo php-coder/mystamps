@@ -25,6 +25,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.dao.dto.Currency
+import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto
 import ru.mystamps.web.model.AddImageForm
 import ru.mystamps.web.model.AddSeriesForm
@@ -38,7 +39,6 @@ import ru.mystamps.web.tests.DateUtils
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesServiceImplTest extends Specification {
 	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
-	private static final Integer ANY_IMAGE_ID = 18
 	
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()
@@ -63,7 +63,7 @@ class SeriesServiceImplTest extends Specification {
 		
 		userId = TestObjects.TEST_USER_ID
 		
-		imageService.save(_) >> ANY_IMAGE_ID
+		imageService.save(_) >> TestObjects.createImageInfoDto()
 		
 		service = new SeriesServiceImpl(
 			seriesDao,
@@ -497,7 +497,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}) >> ANY_IMAGE_ID
+			}) >> TestObjects.createImageInfoDto()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -512,7 +512,7 @@ class SeriesServiceImplTest extends Specification {
 			service.add(form, userId, false)
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
-			imageService.save(_) >> expectedImageId
+			imageService.save(_) >> new ImageInfoDto(expectedImageId, "JPEG")
 		and:
 			1 * imageService.addToSeries({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
@@ -578,7 +578,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
 				return true
-			}) >> ANY_IMAGE_ID
+			}) >> TestObjects.createImageInfoDto()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -590,7 +590,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
 		then:
-			imageService.save(_) >> expectedImageId
+			imageService.save(_) >> new ImageInfoDto(expectedImageId, "JPEG")
 		and:
 			1 * imageService.addToSeries({ Integer seriesId ->
 				assert seriesId == expectedSeriesId

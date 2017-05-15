@@ -55,7 +55,7 @@ public class ImageServiceImpl implements ImageService {
 	@Override
 	@Transactional
 	@PreAuthorize("isAuthenticated()")
-	public Integer save(MultipartFile file) {
+	public ImageInfoDto save(MultipartFile file) {
 		Validate.isTrue(file != null, "File must be non null");
 		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
 		
@@ -81,7 +81,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		imagePersistenceStrategy.save(file, imageInfo);
 		
-		return imageId;
+		return imageInfo;
 	}
 	
 	@Override
