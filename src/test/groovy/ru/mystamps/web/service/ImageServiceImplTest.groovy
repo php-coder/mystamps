@@ -140,7 +140,7 @@ class ImageServiceImplTest extends Specification {
 		given:
 			Integer expectedImageId = 17
 		and:
-			ImageInfoDto expectedImageInfo = new ImageInfoDto(expectedImageId, "PNG")
+			ImageInfoDto expectedImageInfo = new ImageInfoDto(expectedImageId, 'PNG')
 		when:
 			ImageInfoDto actualImageInfo = service.save(multipartFile)
 		then:
