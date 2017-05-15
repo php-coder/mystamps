@@ -82,13 +82,6 @@ class ImageServiceImplTest extends Specification {
 			thrown IllegalStateException
 	}
 	
-	def "save() should pass image to image dao"() {
-		when:
-			service.save(multipartFile)
-		then:
-			1 * imageDao.add(_ as String) >> 18
-	}
-	
 	@Unroll
 	@SuppressWarnings([
 		'ClosureAsLastMethodParameter',
