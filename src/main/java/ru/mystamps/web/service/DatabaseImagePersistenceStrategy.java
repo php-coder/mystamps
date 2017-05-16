@@ -98,4 +98,11 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		return imageDto;
 	}
 	
+	@Override
+	public void removeIfPossible(ImageInfoDto image) {
+		// It's supposed that this method will be used for removing a file when exception occurs.
+		// In such case it's impossible to modify database because a whole transaction will be
+		// rolled back.
+	}
+	
 }

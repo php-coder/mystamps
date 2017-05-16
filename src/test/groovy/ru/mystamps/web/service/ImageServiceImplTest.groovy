@@ -318,4 +318,28 @@ class ImageServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	//
+	// Tests for removeIfPossible()
+	//
+	
+	def "removeIfPossible() should throw exception when image info is null"() {
+		when:
+			service.removeIfPossible(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "removeIfPossible() should pass argument to strategy"() {
+		given:
+			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
+		when:
+			service.removeIfPossible(expectedImageInfo)
+		then:
+			1 * imagePersistenceStrategy.removeIfPossible({ ImageInfoDto imageInfo ->
+				assert imageInfo == expectedImageInfo
+				return true
+			})
+	}
+	
 }

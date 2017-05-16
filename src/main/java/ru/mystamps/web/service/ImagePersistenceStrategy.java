@@ -27,4 +27,5 @@ public interface ImagePersistenceStrategy {
 	void savePreview(byte[] data, ImageInfoDto image);
 	ImageDto get(ImageInfoDto image);
 	ImageDto getPreview(ImageInfoDto image);
+	void removeIfPossible(ImageInfoDto image);
 }

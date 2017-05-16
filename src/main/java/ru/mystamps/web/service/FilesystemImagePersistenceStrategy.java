@@ -117,6 +117,16 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		return get(previewDir, image, false);
 	}
 	
+	@Override
+	public void removeIfPossible(ImageInfoDto image) {
+		Path dest = generateFilePath(storageDir, image);
+		try {
+			Files.deleteIfExists(dest);
+		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException
+			LOG.warn("Couldn't delete file {}: {}", dest, ex.getMessage());
+		}
+	}
+	
 	// protected to allow spying
 	protected Path generateFilePath(File dir, ImageInfoDto image) {
 		return new File(dir, generateFileName(image)).toPath();

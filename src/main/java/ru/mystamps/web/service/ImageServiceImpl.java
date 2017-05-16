@@ -145,6 +145,13 @@ public class ImageServiceImpl implements ImageService {
 		return imageDao.findBySeriesId(seriesId);
 	}
 	
+	@Override
+	public void removeIfPossible(ImageInfoDto imageInfo) {
+		Validate.isTrue(imageInfo != null, "Image info must be non null");
+		
+		imagePersistenceStrategy.removeIfPossible(imageInfo);
+	}
+	
 	private ImageDto createPreview(ImageInfoDto previewInfo, byte[] image) {
 		try {
 			byte[] preview = imagePreviewStrategy.createPreview(image);
