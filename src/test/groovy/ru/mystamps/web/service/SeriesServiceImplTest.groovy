@@ -523,6 +523,25 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "add() should remove image when exception occurs"() {
+		given:
+			ImageInfoDto expectedImageInfo = new ImageInfoDto(654, 'JPEG')
+		and:
+			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
+		when:
+			service.add(form, userId, false)
+		then:
+			imageService.save(_) >> expectedImageInfo
+		and:
+			1 * imageService.removeIfPossible({ ImageInfoDto imageInfo ->
+				assert imageInfo == expectedImageInfo
+				return true
+			})
+		and:
+			thrown IllegalStateException
+	}
+	
 	//
 	// Tests for addImageToSeries()
 	//
