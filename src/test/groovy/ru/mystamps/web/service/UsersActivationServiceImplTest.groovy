@@ -296,4 +296,34 @@ class UsersActivationServiceImplTest extends Specification {
 			1 * usersActivationDao.removeByActivationKey(activationKey)
 	}
 	
+	//
+	// Tests for remove()
+	//
+	
+	def "remove() should throw exception when argument is null"() {
+		when:
+			service.remove(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "remove() should throw exception when activation key is null"() {
+		given:
+			UsersActivation activation = TestObjects.createUsersActivation()
+			activation.setActivationKey(null)
+		when:
+			service.remove(activation)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "remove() should pass argument to DAO method"() {
+		given:
+			UsersActivation activation = TestObjects.createUsersActivation()
+		when:
+			service.remove(activation)
+		then:
+			1 * jdbcUsersActivationDao.removeByActivationKey(activation.getActivationKey())
+	}
+	
 }
