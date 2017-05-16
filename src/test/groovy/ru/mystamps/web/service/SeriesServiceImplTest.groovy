@@ -528,6 +528,8 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			ImageInfoDto expectedImageInfo = new ImageInfoDto(654, 'JPEG')
 		and:
+			seriesDao.add(_ as AddSeriesDbDto) >> 111
+		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
 			service.add(form, userId, false)
