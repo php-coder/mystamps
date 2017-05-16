@@ -171,7 +171,14 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		ImageInfoDto imageInfo = imageService.save(dto.getImage());
 		Integer imageId = imageInfo.getId();
-		imageService.addToSeries(seriesId, imageId);
+		
+		try {
+			imageService.addToSeries(seriesId, imageId);
+			
+		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException
+			imageService.removeIfPossible(imageInfo);
+			throw ex;
+		}
 		
 		LOG.info(
 			"Image #{} has been added to series #{} by user #{}",
