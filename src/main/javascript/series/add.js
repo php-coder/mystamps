@@ -30,13 +30,16 @@ function initPage(suggestCountryUrl) {
 
 			var country = $("#js-guess-country-link");
 			country.click(function chooseSuggestedCountry() {
-				$(this).hide();
-
-				var select_country = $("#country").selectize();
-				var selectize = select_country[0].selectize;
-				selectize.setValue(slug);
+				chooseCountryBySlug(slug);
+				country.hide();
 			});
 			country.show();
 		});
 	}
+}
+
+function chooseCountryBySlug(slug) {
+	var select_country = $("#country").selectize();
+	var selectize = select_country[0].selectize;
+	selectize.setValue(slug);
 }
