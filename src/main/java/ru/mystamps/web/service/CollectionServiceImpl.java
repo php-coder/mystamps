@@ -103,9 +103,7 @@ public class CollectionServiceImpl implements CollectionService {
 			return false;
 		}
 		
-		boolean isSeriesInCollection = collectionDao.isSeriesInUserCollection(userId, seriesId);
-		
-		return isSeriesInCollection;
+		return collectionDao.isSeriesInUserCollection(userId, seriesId);
 	}
 	
 	@Override
