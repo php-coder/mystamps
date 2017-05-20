@@ -105,13 +105,6 @@ public class CollectionServiceImpl implements CollectionService {
 		
 		boolean isSeriesInCollection = collectionDao.isSeriesInUserCollection(userId, seriesId);
 		
-		LOG.debug(
-			"Series #{} belongs to collection of user #{}: {}",
-			seriesId,
-			userId,
-			isSeriesInCollection
-		);
-		
 		return isSeriesInCollection;
 	}
 	
