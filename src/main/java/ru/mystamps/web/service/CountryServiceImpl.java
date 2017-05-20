@@ -196,8 +196,6 @@ public class CountryServiceImpl implements CountryService {
 			);
 		}
 		
-		LOG.info("Couldn't suggest a country for user #{}", userId);
-		
 		return slug;
 	}
 }
