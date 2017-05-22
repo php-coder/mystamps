@@ -27,6 +27,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.validation.jsr303.DenyValues;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName;
 import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
 import ru.mystamps.web.validation.jsr303.UniqueCountrySlug;
@@ -48,7 +49,8 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 	Group.Level4.class,
 	Group.Level5.class,
 	Group.Level6.class,
-	Group.Level7.class
+	Group.Level7.class,
+	Group.Level8.class
 })
 public class AddCountryForm implements AddCountryDto {
 	
@@ -82,8 +84,9 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.EN, groups = Group.Level6.class)
-	@UniqueCountrySlug(groups = Group.Level7.class)
+	@DenyValues(value = {"add", "list"}, groups = Group.Level6.class)
+	@UniqueCountryName(lang = Lang.EN, groups = Group.Level7.class)
+	@UniqueCountrySlug(groups = Group.Level8.class)
 	private String name;
 	
 	@Size.List({
@@ -115,7 +118,7 @@ public class AddCountryForm implements AddCountryDto {
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.RU, groups = Group.Level6.class)
+	@UniqueCountryName(lang = Lang.RU, groups = Group.Level7.class)
 	private String nameRu;
 	
 }

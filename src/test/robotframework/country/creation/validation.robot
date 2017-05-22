@@ -79,6 +79,19 @@ Create country with non-existing name but existing slug
 	Clear Element Text      id=nameRu
 	Submit Form             id=add-country-form
 	Element Text Should Be  id=name.errors  Country with similar name already exists
+	
+Create country with forbidden names
+	[Documentation]         Verify validation of forbidden names
+	# Open a page again to have a clean state (nameRu field has an invalid value)
+	Go To                   ${SITE_URL}/country/add
+	# 'add' is a forbidden value
+	Input Text              id=name  add
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Invalid value
+	# 'list' is a forbidden value
+	Input Text              id=name  list
+	Submit Form             id=add-country-form
+	Element Text Should Be  id=name.errors  Invalid value
 
 *** Keywords ***
 Before Test Suite
