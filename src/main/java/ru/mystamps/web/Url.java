@@ -80,7 +80,7 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.1";
+	public static final String RESOURCES_VERSION      = "v0.3.2";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";

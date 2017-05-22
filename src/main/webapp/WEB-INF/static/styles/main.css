@@ -107,3 +107,7 @@ label {
 .goog-tooltip {
 	color: white;
 }
+
+.link-vcenter {
+	line-height: 34px;
+}
