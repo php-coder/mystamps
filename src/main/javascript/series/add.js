@@ -30,8 +30,8 @@ function initPage(suggestCountryUrl) {
 
 			var country = $("#js-guess-country-link");
 			country.click(function chooseSuggestedCountry() {
-				chooseCountryBySlug(slug);
 				country.hide();
+				chooseCountryBySlug(slug);
 			});
 			country.show();
 		});
