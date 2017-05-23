@@ -39,7 +39,7 @@ function initPage(suggestCountryUrl) {
 }
 
 function chooseCountryBySlug(slug) {
-	var select_country = $("#country").selectize();
-	var selectize = select_country[0].selectize;
+	var countrySelectBox = $("#country").selectize();
+	var selectize = countrySelectBox[0].selectize;
 	selectize.setValue(slug);
 }
