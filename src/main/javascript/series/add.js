@@ -28,12 +28,12 @@ function initPage(suggestCountryUrl) {
 				return;
 			}
 
-			var country = $("#js-guess-country-link");
-			country.click(function chooseSuggestedCountry() {
-				country.hide();
+			var guessCountryLink = $("#js-guess-country-link");
+			guessCountryLink.click(function chooseSuggestedCountry() {
+				guessCountryLink.hide();
 				chooseCountryBySlug(slug);
 			});
-			country.show();
+			guessCountryLink.show();
 		});
 	}
 }
