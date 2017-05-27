@@ -67,6 +67,8 @@ public final class Url {
 	public static final String GET_IMAGE_PAGE         = "/image/{id}";
 	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
+	public static final String ADD_PARTICIPANT_PAGE  = "/participant/add";
+	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
@@ -123,6 +125,7 @@ public final class Url {
 		map.put("LOGOUT_PAGE", LOGOUT_PAGE);
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
+		map.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);

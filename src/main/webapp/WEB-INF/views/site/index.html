@@ -111,6 +111,9 @@
 							<li sec:authorize="hasAuthority('CREATE_COUNTRY')">
 								<a th:href="@{${ADD_COUNTRY_PAGE}}" th:text="#{t_add_country}" href="../country/add.html">add country</a>
 							</li>
+							<li sec:authorize="hasAuthority('ADD_PARTICIPANT')">
+								<a th:href="@{${ADD_PARTICIPANT_PAGE}}" th:text="#{t_add_buyer_seller}" href="../participant/add.html">add buyer/seller</a>
+							</li>
 							<li togglz:active="VIEW_SITE_EVENTS" sec:authorize="hasAuthority('VIEW_SITE_EVENTS')">
 								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_view_suspicious_activities}" href="events.html">view suspicious activities</a>
 							</li>

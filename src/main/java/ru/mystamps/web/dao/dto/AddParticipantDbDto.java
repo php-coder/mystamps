@@ -15,14 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import ru.mystamps.web.dao.dto.AddParticipantDbDto;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
-
-public interface TransactionParticipantDao {
-	void add(AddParticipantDbDto participant);
-	List<EntityWithIdDto> findAllAsEntityWithIdDto();
+@Getter
+@Setter
+@ToString
+public class AddParticipantDbDto {
+	private String name;
+	private String url;
 }

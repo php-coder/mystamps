@@ -20,7 +20,9 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.TransactionParticipantDao
+import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
+import ru.mystamps.web.model.AddParticipantForm
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TransactionParticipantServiceImplTest extends Specification {
@@ -28,6 +30,46 @@ class TransactionParticipantServiceImplTest extends Specification {
 	private final TransactionParticipantDao transactionParticipantDao = Mock()
 	private final TransactionParticipantService service =
 		new TransactionParticipantServiceImpl(transactionParticipantDao)
+	
+	//
+	// Tests for add()
+	//
+	
+	def "add() should throw exception if dto is null"() {
+		when:
+			service.add(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def "add() should throw exception if name is null"() {
+		given:
+			AddParticipantForm form = new AddParticipantForm()
+			form.setName(null)
+		when:
+			service.add(form)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def "add() should create participant"() {
+		given:
+			String expectedName = 'test'
+			String expectedUrl  = 'http://example.org'
+		and:
+			AddParticipantForm form = new AddParticipantForm()
+			form.setName(expectedName)
+			form.setUrl(expectedUrl)
+		when:
+			service.add(form)
+		then:
+			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
+				assert participant?.name == expectedName
+				assert participant?.url  == expectedUrl
+				return true
+			})
+	}
 	
 	//
 	// Tests for findAllBuyers()

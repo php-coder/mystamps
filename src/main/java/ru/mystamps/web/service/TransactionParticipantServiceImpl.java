@@ -19,6 +19,11 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,13 +31,33 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
+import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class TransactionParticipantServiceImpl implements TransactionParticipantService {
+	private static final Logger LOG =
+		LoggerFactory.getLogger(TransactionParticipantServiceImpl.class);
 	
 	private final TransactionParticipantDao transactionParticipantDao;
+	
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.ADD_PARTICIPANT)
+	public void add(AddParticipantDto dto) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getName() != null, "Name must be non null");
+		
+		AddParticipantDbDto participant = new AddParticipantDbDto();
+		participant.setName(dto.getName());
+		participant.setUrl(dto.getUrl());
+		
+		transactionParticipantDao.add(participant);
+		
+		LOG.info("Participant with name '{}' has been created", participant.getName());
+	}
 	
 	@Override
 	@Transactional(readOnly = true)

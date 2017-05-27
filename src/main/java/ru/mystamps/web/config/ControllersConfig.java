@@ -79,6 +79,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public ParticipantController getParticipantController() {
+		return new ParticipantController(servicesConfig.getTransactionParticipantService());
+	}
+	
+	@Bean
 	public RobotsTxtController getRobotsTxtController() {
 		return new RobotsTxtController();
 	}
