@@ -79,7 +79,7 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for add()
 	//
 	
-	def "add() should throw exception argument is null"() {
+	def "add() should throw exception if dto is null"() {
 		when:
 			service.add(null, userId, false)
 		then:
