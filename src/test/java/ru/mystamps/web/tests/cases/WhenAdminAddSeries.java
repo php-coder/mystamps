@@ -41,7 +41,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
-	private static final String SAMPLE_IMAGE_NAME = "test.png";
+	private static final String SAMPLE_IMAGE_NAME = "test/test.png";
 	private static final String SAMPLE_IMAGE_PATH;
 	
 	static {

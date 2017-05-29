@@ -11,7 +11,7 @@ Create series by filling only required fields
 	[Documentation]            Verify creation of series by filling only mandatory fields
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
-	Choose File                id=image  ${RESOURCE_DIR}${/}test.png
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Submit Form                id=add-series-form
 	${location}=               Get Location
 	Should Match Regexp        ${location}  /series/\\d+
@@ -27,7 +27,7 @@ Create series by filling all fields
 	Select Country             Italy
 	Input Text                 id=quantity  3
 	Unselect Checkbox          id=perforated
-	Choose File                id=image  ${RESOURCE_DIR}${/}test.png
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Click Element              id=specify-issue-date-link
 	Select From List By Value  id=day  4
 	Select From List By Value  id=month  5
