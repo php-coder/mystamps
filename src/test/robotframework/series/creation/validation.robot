@@ -26,7 +26,7 @@ Create series with quantity that is greater than 50
 
 Create series with empty image
 	[Documentation]         Verify validation of empty image
-	Choose File             id=image  ${RESOURCE_DIR}${/}empty.png
+	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.png
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image.errors  File must not be empty
 
