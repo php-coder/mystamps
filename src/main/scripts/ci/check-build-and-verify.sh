@@ -17,46 +17,46 @@ fi
 
 . "$(dirname "$0")/common.sh"
 
-CS_FAIL=
-PMD_FAIL=
-CODENARC_FAIL=
-LICENSE_FAIL=
-POM_FAIL=
-BOOTLINT_FAIL=
-RFLINT_FAIL=
-JASMINE_FAIL=
-HTML_FAIL=
-ENFORCER_FAIL=
-TEST_FAIL=
-FINDBUGS_FAIL=
-VERIFY_FAIL=
-DANGER_FAIL=
+CS_STATUS=
+PMD_STATUS=
+CODENARC_STATUS=
+LICENSE_STATUS=
+POM_STATUS=
+BOOTLINT_STATUS=
+RFLINT_STATUS=
+JASMINE_STATUS=
+HTML_STATUS=
+ENFORCER_STATUS=
+TEST_STATUS=
+FINDBUGS_STATUS=
+VERIFY_STATUS=
+DANGER_STATUS=
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	
 	mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
-		>cs.log 2>&1 || CS_FAIL=fail
+		>cs.log 2>&1 || CS_STATUS=fail
 	
 	mvn --batch-mode pmd:check \
-		>pmd.log 2>&1 || PMD_FAIL=fail
+		>pmd.log 2>&1 || PMD_STATUS=fail
 	
 	mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
-		>codenarc.log 2>&1 || CODENARC_FAIL=fail
+		>codenarc.log 2>&1 || CODENARC_STATUS=fail
 	
 	mvn --batch-mode license:check \
-		>license.log 2>&1 || LICENSE_FAIL=fail
+		>license.log 2>&1 || LICENSE_STATUS=fail
 	
 	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
-		>pom.log || POM_FAIL=fail
+		>pom.log || POM_STATUS=fail
 	
 	find src -type f -name '*.html' | xargs bootlint \
-		>bootlint.log 2>&1 || BOOTLINT_FAIL=fail
+		>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	
 	rflint --error=all --ignore TooFewKeywordSteps --ignore TooManyTestSteps --configure LineTooLong:130 src/test/robotframework \
-		>rflint.log 2>&1 || RFLINT_FAIL=fail
+		>rflint.log 2>&1 || RFLINT_STATUS=fail
 	
 	mvn --batch-mode jasmine:test \
-		>jasmine.log 2>&1 || JASMINE_FAIL=fail
+		>jasmine.log 2>&1 || JASMINE_STATUS=fail
 	
 	# FIXME: add check for src/main/config/nginx/503.*html
 	# TODO: remove ignoring of error about alt attribute after resolving #314
@@ -70,24 +70,24 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'The first child "option" element of a "select" element with a "required" attribute' \
 			'This document appears to be written in (Danish|Lithuanian)' \
 		--show-warnings \
-		>validator.log 2>&1 || HTML_FAIL=fail
+		>validator.log 2>&1 || HTML_STATUS=fail
 	
 	mvn --batch-mode enforcer:enforce \
-		>enforcer.log 2>&1 || ENFORCER_FAIL=fail
+		>enforcer.log 2>&1 || ENFORCER_STATUS=fail
 	
 	mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
-		>test.log 2>&1 || TEST_FAIL=fail
+		>test.log 2>&1 || TEST_STATUS=fail
 	
 	# run after tests for getting compiled sources
 	mvn --batch-mode findbugs:check \
-		>findbugs.log 2>&1 || FINDBUGS_FAIL=fail
+		>findbugs.log 2>&1 || FINDBUGS_STATUS=fail
 fi
 
 mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
-	>verify-raw.log 2>&1 || VERIFY_FAIL=fail
+	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
-	danger >danger.log 2>&1 || DANGER_FAIL=fail
+	danger >danger.log 2>&1 || DANGER_STATUS=fail
 fi
 
 # Workaround for #538
@@ -98,24 +98,24 @@ echo 'Build summary:'
 echo
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	print_status "$CS_FAIL"       'Run CheckStyle'
-	print_status "$PMD_FAIL"      'Run PMD'
-	print_status "$CODENARC_FAIL" 'Run CodeNarc'
-	print_status "$LICENSE_FAIL"  'Check license headers'
-	print_status "$POM_FAIL"      'Check sorting of pom.xml'
-	print_status "$BOOTLINT_FAIL" 'Run bootlint'
-	print_status "$RFLINT_FAIL"   'Run robot framework lint'
-	print_status "$JASMINE_FAIL"  'Run JavaScript unit tests'
-	print_status "$HTML_FAIL"     'Run html5validator'
-	print_status "$ENFORCER_FAIL" 'Run maven-enforcer-plugin'
-	print_status "$TEST_FAIL"     'Run unit tests'
-	print_status "$FINDBUGS_FAIL" 'Run FindBugs'
+	print_status "$CS_STATUS"       'Run CheckStyle'
+	print_status "$PMD_STATUS"      'Run PMD'
+	print_status "$CODENARC_STATUS" 'Run CodeNarc'
+	print_status "$LICENSE_STATUS"  'Check license headers'
+	print_status "$POM_STATUS"      'Check sorting of pom.xml'
+	print_status "$BOOTLINT_STATUS" 'Run bootlint'
+	print_status "$RFLINT_STATUS"   'Run robot framework lint'
+	print_status "$JASMINE_STATUS"  'Run JavaScript unit tests'
+	print_status "$HTML_STATUS"     'Run html5validator'
+	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
+	print_status "$TEST_STATUS"     'Run unit tests'
+	print_status "$FINDBUGS_STATUS" 'Run FindBugs'
 fi
 
-print_status "$VERIFY_FAIL" 'Run integration tests'
+print_status "$VERIFY_STATUS" 'Run integration tests'
 
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
-	print_status "$DANGER_FAIL" 'Run danger'
+	print_status "$DANGER_STATUS" 'Run danger'
 fi
 
 echo
@@ -151,6 +151,6 @@ fi
 
 rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
 
-if [ -n "$CS_FAIL$PMD_FAIL$CODENARC_FAIL$LICENSE_FAIL$POM_FAIL$BOOTLINT_FAIL$RFLINT_FAIL$JASMINE_FAIL$HTML_FAIL$ENFORCER_FAIL$TEST_FAIL$FINDBUGS_FAIL$VERIFY_FAIL$DANGER_FAIL" ]; then
+if [ -n "$CS_STATUS$PMD_STATUS$CODENARC_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" ]; then
 	exit 1
 fi
