@@ -1,10 +1,13 @@
 print_status() {
-	local we_failed="$1"
+	# $1 is empty if check has succeeded
+	# $1 equals to 'fail' if check has failed
+	local result="$1"
 	local msg="$2"
+	
 	local status='SUCCESS'
 	local color=32
 	
-	if [ -n "$we_failed" ]; then
+	if [ "$result" = 'fail' ]; then
 		status='FAIL'
 		color=31
 	fi
