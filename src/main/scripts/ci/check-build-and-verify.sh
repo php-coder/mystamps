@@ -33,23 +33,31 @@ VERIFY_FAIL=
 DANGER_FAIL=
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning >cs.log 2>&1 || CS_FAIL=yes
-	mvn --batch-mode pmd:check >pmd.log 2>&1 || PMD_FAIL=yes
-	mvn --batch-mode codenarc:codenarc \
-		-Dcodenarc.maxPriority1Violations=0 \
-		-Dcodenarc.maxPriority2Violations=0 \
-		-Dcodenarc.maxPriority3Violations=0 \
+	
+	mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
+		>cs.log 2>&1 || CS_FAIL=yes
+	
+	mvn --batch-mode pmd:check \
+		>pmd.log 2>&1 || PMD_FAIL=yes
+	
+	mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
 		>codenarc.log 2>&1 || CODENARC_FAIL=yes
-	mvn --batch-mode license:check >license.log 2>&1 || LICENSE_FAIL=yes
-	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop >pom.log || POM_FAIL=yes
-	find src -type f -name '*.html' | xargs bootlint >bootlint.log 2>&1 || BOOTLINT_FAIL=yes
-	rflint --error=all \
-		--ignore TooFewKeywordSteps \
-		--ignore TooManyTestSteps \
-		--configure LineTooLong:130 \
-		src/test/robotframework \
+	
+	mvn --batch-mode license:check \
+		>license.log 2>&1 || LICENSE_FAIL=yes
+	
+	mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
+		>pom.log || POM_FAIL=yes
+	
+	find src -type f -name '*.html' | xargs bootlint \
+		>bootlint.log 2>&1 || BOOTLINT_FAIL=yes
+	
+	rflint --error=all --ignore TooFewKeywordSteps --ignore TooManyTestSteps --configure LineTooLong:130 src/test/robotframework \
 		>rflint.log 2>&1 || RFLINT_FAIL=yes
-	mvn --batch-mode jasmine:test >jasmine.log 2>&1 || JASMINE_FAIL=yes
+	
+	mvn --batch-mode jasmine:test \
+		>jasmine.log 2>&1 || JASMINE_FAIL=yes
+	
 	# FIXME: add check for src/main/config/nginx/503.*html
 	# TODO: remove ignoring of error about alt attribute after resolving #314
 	# TODO: remove ignoring of error about document language when it will be resolved in upstream
@@ -63,18 +71,20 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			'This document appears to be written in (Danish|Lithuanian)' \
 		--show-warnings \
 		>validator.log 2>&1 || HTML_FAIL=yes
-	mvn --batch-mode enforcer:enforce >enforcer.log 2>&1 || ENFORCER_FAIL=yes
-	mvn --batch-mode test \
-		-Denforcer.skip=true \
-		-Dmaven.resources.skip=true \
-		-DskipMinify=true \
-		-DdisableXmlReport=false \
+	
+	mvn --batch-mode enforcer:enforce \
+		>enforcer.log 2>&1 || ENFORCER_FAIL=yes
+	
+	mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
 		>test.log 2>&1 || TEST_FAIL=yes
+	
 	# run after tests for getting compiled sources
-	mvn --batch-mode findbugs:check >findbugs.log 2>&1 || FINDBUGS_FAIL=yes
+	mvn --batch-mode findbugs:check \
+		>findbugs.log 2>&1 || FINDBUGS_FAIL=yes
 fi
 
-mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true >verify-raw.log 2>&1 || VERIFY_FAIL=yes
+mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
+	>verify-raw.log 2>&1 || VERIFY_FAIL=yes
 
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
 	danger >danger.log 2>&1 || DANGER_FAIL=yes
