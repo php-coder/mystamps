@@ -20,6 +20,8 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, MultipartFile> {
@@ -33,6 +35,10 @@ public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, 
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {
+			return true;
+		}
+		
+		if (StringUtils.isEmpty(file.getOriginalFilename())) {
 			return true;
 		}
 		

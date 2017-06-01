@@ -20,10 +20,13 @@ package ru.mystamps.web.validation.jsr303;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Sergey Chechenev
+ * @author Slava Semushin
  */
 public class MaxFileSizeValidator implements ConstraintValidator<MaxFileSize, MultipartFile> {
 	private long maxFileSizeInBytes;
@@ -37,6 +40,10 @@ public class MaxFileSizeValidator implements ConstraintValidator<MaxFileSize, Mu
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
 		
 		if (file == null) {
+			return true;
+		}
+		
+		if (StringUtils.isEmpty(file.getOriginalFilename())) {
 			return true;
 		}
 		
