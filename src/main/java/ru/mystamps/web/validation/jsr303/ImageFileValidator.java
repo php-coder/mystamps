@@ -100,7 +100,6 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.CyclomaticComplexity")
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {
