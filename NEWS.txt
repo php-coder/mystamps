@@ -58,12 +58,12 @@
 - added checking by CheckStyle
 - added code coverage generation by Cobertura
 - added ability to generate Javadocs
-- migrated from XML configs to Java bean confiuration
+- migrated from XML configs to Java bean configuration
 - added unit tests for business logic layer
 
 0.1.2
 - use Maven2 for building project
-- rewrited functional tests for using Selenium2
+- rewrite functional tests for using Selenium2
 - use JPA (with Hibernate as its implementation)
   for access to database (instead of JDBC)
 - functional tests now runs under Jetty
@@ -71,7 +71,7 @@
 - switching to use slf4j over log4j
 
 0.1.1
-- rewrited to using Spring MVC 3
+- rewritten to use Spring MVC 3
 
 0.1
 - added initial skeleton of site (JSF 1.2 with JSP/JSTL)
