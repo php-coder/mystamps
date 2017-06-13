@@ -12,7 +12,7 @@ before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
-      if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
+      if [ "$TRAVIS_BRANCH" = 'prod' ]; then
         pip install --user ansible==2.1.1.0;
       fi;
       npm install -g bootlint;
@@ -41,7 +41,7 @@ deploy:
   script: ./src/main/scripts/ci/deploy.sh
   on:
     branch: prod
-    condition: "$SPRING_PROFILES_ACTIVE" = 'travis' -a "$TRAVIS_PULL_REQUEST" = 'false'
+    condition: $SPRING_PROFILES_ACTIVE = 'travis'
   skip_cleanup: true
 
 jdk:
