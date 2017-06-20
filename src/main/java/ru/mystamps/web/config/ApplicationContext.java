@@ -17,15 +17,11 @@
  */
 package ru.mystamps.web.config;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 import ru.mystamps.web.support.togglz.TogglzConfig;
@@ -60,28 +56,6 @@ public class ApplicationContext {
 			new ClassPathResource("sql/transaction_participants_dao_queries.properties")
 		);
 		return configurer;
-	}
-	
-	@Bean
-	@Profile("prod")
-	public CommonsRequestLoggingFilter getCommonsRequestLoggingFilter() {
-		CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter() {
-			
-			@Override
-			protected void afterRequest(HttpServletRequest request, String message) {
-				// do nothing
-			}
-			
-			@Override
-			protected boolean shouldLog(HttpServletRequest request) {
-				return true;
-			}
-			
-		};
-		filter.setIncludeHeaders(true);
-		filter.setIncludePayload(true);
-		filter.setIncludeQueryString(true);
-		return filter;
 	}
 	
 }
