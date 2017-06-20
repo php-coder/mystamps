@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
@@ -143,7 +144,10 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 
 	// protected to allow spying
 	protected void writeToFile(byte[] data, Path dest) throws IOException {
-		Files.write(dest, data);
+		// Default mode is: CREATE, WRITE, and TRUNCATE_EXISTING.
+		// To prevent unexpected rewriting of existing file, we're overriding this behavior by
+		// explicitly specifying options.
+		Files.write(dest, data, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
 	}
 	
 	// protected to allow spying
