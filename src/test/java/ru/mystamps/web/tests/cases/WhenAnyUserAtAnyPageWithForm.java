@@ -36,7 +36,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	}
 	
 	protected void checkStandardStructure() {
-		shouldHaveForm();
 		shouldHaveFields();
 		shouldHaveLabels();
 		shouldHaveSubmitButton();
@@ -46,12 +45,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		emptyValueShouldBeForbiddenForRequiredFields();
 		
 		fieldsValuesShouldBePreservedWhenErrorOccurs();
-	}
-	
-	private void shouldHaveForm() {
-		assertThat(page.formExists())
-			.overridingErrorMessage("form tag should exists")
-			.isTrue();
 	}
 	
 	private void shouldHaveFields() {

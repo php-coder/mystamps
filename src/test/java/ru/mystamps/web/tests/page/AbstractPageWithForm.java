@@ -87,15 +87,6 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		return this;
 	}
 	
-	public boolean formExists() {
-		Validate.validState(
-			form != null,
-			"You are trying to check form at page which does not has form"
-		);
-		
-		return elementWithXPathExists(form.toString());
-	}
-	
 	public String getInputLabelValue(String id) {
 		return getTextOfElementByXPath(String.format(LABEL_LOCATOR, id));
 	}
