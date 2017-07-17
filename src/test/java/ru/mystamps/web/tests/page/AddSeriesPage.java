@@ -64,22 +64,22 @@ public class AddSeriesPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				selectField("country").withLabel(tr("t_country")),
+				selectField("country"),
 				selectField("day"),
 				selectField("month"),
-				selectField("year").withLabel(tr("t_issue_date")),
-				required(inputField("quantity").withLabel(tr("t_quantity"))),
-				checkboxField("perforated").withLabel(tr("t_perforated")),
-				inputField("michelNumbers").withLabel(tr("t_michel")),
+				selectField("year"),
+				required(inputField("quantity")),
+				checkboxField("perforated"),
+				inputField("michelNumbers"),
 				inputField("michelPrice"),
-				inputField("scottNumbers").withLabel(tr("t_scott")),
+				inputField("scottNumbers"),
 				inputField("scottPrice"),
-				inputField("yvertNumbers").withLabel(tr("t_yvert")),
+				inputField("yvertNumbers"),
 				inputField("yvertPrice"),
-				inputField("gibbonsNumbers").withLabel(tr("t_sg")),
+				inputField("gibbonsNumbers"),
 				inputField("gibbonsPrice"),
-				textareaField("comment").withLabel(tr("t_comment")).accessibleByAll(false),
-				required(uploadFileField("image").withLabel(tr("t_image")))
+				textareaField("comment").accessibleByAll(false),
+				required(uploadFileField("image"))
 			)
 			.and()
 			.with(submitButton(tr("t_add")))

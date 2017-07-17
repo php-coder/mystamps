@@ -115,7 +115,7 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('email') ? 'has-error' : ''}">
 								<label class="control-label col-sm-4" for="email">
-									<span class="field-label" th:text="#{t_email}">E-mail</span>
+									<span th:remove="tag" th:text="#{t_email}">E-mail</span>
 									<span id="email.required" class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">

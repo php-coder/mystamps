@@ -110,7 +110,7 @@
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
 							<label for="name" class="control-label col-sm-4">
-								<span class="field-label" th:text="#{t_name}">
+								<span th:remove="tag" th:text="#{t_name}">
 									Name
 								</span>
 								<span id="name.required" class="required_field">*</span>
@@ -125,7 +125,7 @@
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
 							<label for="url" class="control-label col-sm-4">
-								<span class="field-label" th:text="#{t_url}">
+								<span th:remove="tag" th:text="#{t_url}">
 									URL
 								</span>
 							</label>

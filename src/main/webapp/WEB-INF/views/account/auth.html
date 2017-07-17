@@ -127,7 +127,7 @@
 							
 							<div class="form-group">
 								<label for="login" class="control-label col-sm-4">
-									<span class="field-label" th:text="#{t_login}">Login</span>
+									<span th:remove="tag" th:text="#{t_login}">Login</span>
 									<span id="login.required" class="required_field">*</span>
 								</label>
 								<div class="col-sm-4">
@@ -137,7 +137,7 @@
 							
 							<div class="form-group">
 								<label for="password" class="control-label col-sm-4">
-									<span class="field-label" th:text="#{t_password}">Password</span>
+									<span th:remove="tag" th:text="#{t_password}">Password</span>
 									<span id="password.required" class="required_field">*</span>
 								</label>
 								<div class="col-sm-4">

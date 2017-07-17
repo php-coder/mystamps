@@ -161,7 +161,6 @@ public final class Form {
 		@Getter private final String id;
 		@Getter private final String name;
 		@Setter private boolean required;
-		@Getter private String label;
 		@Getter private String invalidValue;
 		
 		private final String xpath;
@@ -191,15 +190,6 @@ public final class Form {
 		
 		public boolean isAccessibleByAll() {
 			return accessibleByAll;
-		}
-		
-		public boolean hasLabel() {
-			return label != null;
-		}
-		
-		public Field withLabel(String label) {
-			this.label = label;
-			return this;
 		}
 		
 		public boolean hasInvalidValue() {

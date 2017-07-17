@@ -38,13 +38,11 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		hasForm(
 			with(
 				required(inputField("login"))
-					.withLabel(tr("t_login"))
 					.and()
 					.invalidValue("x")
 					.preserveInvalidValue(false),
 				
 				required(passwordField("password"))
-					.withLabel(tr("t_password"))
 					.and()
 					.invalidValue("x")
 			)

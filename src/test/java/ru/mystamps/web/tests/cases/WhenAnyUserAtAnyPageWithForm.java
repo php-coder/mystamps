@@ -37,7 +37,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	protected void checkStandardStructure() {
 		shouldHaveFields();
-		shouldHaveLabels();
 		shouldHaveSubmitButton();
 		
 		requiredFieldsShouldBeMarkedByAsterisk();
@@ -54,24 +53,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.overridingErrorMessage("field with XPath '" + field + "' should exists")
 					.isTrue();
 			}
-		}
-	}
-	
-	private void shouldHaveLabels() {
-		for (Field field : page.getForm().getFields()) {
-			if (!field.isAccessibleByAll() || !field.hasLabel()) {
-				continue;
-			}
-			
-			String msg = String.format(
-				"field with id '%s' should have label '%s'",
-				field.getId(),
-				field.getLabel()
-			);
-			
-			assertThat(page.getInputLabelValue(field.getId()))
-				.overridingErrorMessage(msg)
-				.isEqualTo(field.getLabel());
 		}
 	}
 	
