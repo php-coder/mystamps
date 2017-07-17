@@ -43,7 +43,7 @@ deploy:
   script: ./src/main/scripts/ci/deploy.sh
   on:
     branch: prod
-    condition: '"$SPRING_PROFILES_ACTIVE" = "travis" -a "$TRAVIS_PULL_REQUEST" = "false"'
+    condition: '"$SPRING_PROFILES_ACTIVE" = "travis" && "$TRAVIS_PULL_REQUEST" = "false"'
   skip_cleanup: true
 
 jdk:
