@@ -56,10 +56,6 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		return elementWithXPathExists(String.format(FIELD_ERROR_LOCATOR, id));
 	}
 	
-	public boolean isSubmitButtonExists(SubmitButton button) {
-		return elementWithXPathExists(button.toString());
-	}
-	
 	public AbstractPage submit() {
 		
 		Validate.validState(

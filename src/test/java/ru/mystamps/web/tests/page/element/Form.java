@@ -137,17 +137,13 @@ public final class Form {
 	//
 	
 	public static class SubmitButton {
-		@Getter private final String value;
-		
 		private final String xpath;
 		
 		public SubmitButton() {
-			this.value = "";
 			this.xpath = SUBMIT_BUTTON_LOCATOR;
 		}
 		
 		public SubmitButton(String value) {
-			this.value = value;
 			this.xpath = String.format(SUBMIT_WITH_VALUE_LOCATOR, value);
 		}
 		
