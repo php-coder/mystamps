@@ -19,7 +19,6 @@ package ru.mystamps.web.tests.page;
 
 import java.util.List;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -35,7 +34,6 @@ import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	private static final String    FIELD_ERROR_LOCATOR = "//span[@id=\"%s.errors\"]";
-	private static final String FIELD_REQUIRED_LOCATOR = "//span[@id=\"%s.required\"]";
 	private static final String     FORM_ERROR_LOCATOR = "//div[@id=\"form.errors\"]";
 	
 	@Getter private Form form;
@@ -79,17 +77,6 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		}
 		
 		return this;
-	}
-	
-	public boolean inputHasAsterisk(String id) {
-		try {
-			String requiredFieldMark =
-				getTextOfElementByXPath(String.format(FIELD_REQUIRED_LOCATOR, id));
-			
-			return "*".equals(requiredFieldMark);
-		} catch (NoSuchElementException ex) {
-			return false;
-		}
 	}
 	
 	public String getFieldValue(String name) {

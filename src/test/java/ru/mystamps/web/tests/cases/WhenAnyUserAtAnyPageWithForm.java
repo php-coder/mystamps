@@ -37,7 +37,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	protected void checkStandardStructure() {
 		shouldHaveFields();
 		
-		requiredFieldsShouldBeMarkedByAsterisk();
 		mayExistsLegendAboutRequiredFields();
 		emptyValueShouldBeForbiddenForRequiredFields();
 		
@@ -51,18 +50,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.overridingErrorMessage("field with XPath '" + field + "' should exists")
 					.isTrue();
 			}
-		}
-	}
-	
-	private void requiredFieldsShouldBeMarkedByAsterisk() {
-		for (Field field : page.getForm().getRequiredFields()) {
-			assertThat(page.inputHasAsterisk(field.getId()))
-				.overridingErrorMessage(
-					String.format(
-						"required field with id '%s' should be marked by asterisk", field.getId()
-					)
-				)
-				.isTrue();
 		}
 	}
 	
