@@ -31,9 +31,9 @@ TEST_STATUS=
 FINDBUGS_STATUS=
 VERIFY_STATUS=
 
-DANGER_STATUS=
-if [ "${SPRING_PROFILES_ACTIVE:-}" != 'travis' -o "${TRAVIS_PULL_REQUEST:-false}" = 'false' ]; then
-	DANGER_STATUS=skip
+DANGER_STATUS=skip
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
+	DANGER_STATUS=
 fi
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
@@ -204,10 +204,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 fi
 
 print_status "$VERIFY_STATUS" 'Run integration tests'
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	print_status "$DANGER_STATUS" 'Run danger'
-fi
+print_status "$DANGER_STATUS" 'Run danger'
 
 echo
 
