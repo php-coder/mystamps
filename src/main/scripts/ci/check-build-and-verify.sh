@@ -30,7 +30,11 @@ ENFORCER_STATUS=
 TEST_STATUS=
 FINDBUGS_STATUS=
 VERIFY_STATUS=
+
 DANGER_STATUS=
+if [ "${SPRING_PROFILES_ACTIVE:-}" != 'travis' -o "${TRAVIS_PULL_REQUEST:-false}" = 'false' ]; then
+	DANGER_STATUS=skip
+fi
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	
@@ -173,7 +177,7 @@ fi
 mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "$DANGER_STATUS" != 'skip' ]; then
 	danger >danger.log 2>&1 || DANGER_STATUS=fail
 fi
 
@@ -201,7 +205,7 @@ fi
 
 print_status "$VERIFY_STATUS" 'Run integration tests'
 
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_status "$DANGER_STATUS" 'Run danger'
 fi
 
@@ -218,13 +222,13 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$JASMINE_STATUS" = 'skip' ]  || print_log jasmine.log   'Run JavaScript unit tests'
 	[ "$HTML_STATUS" = 'skip' ]     || print_log validator.log 'Run html5validator'
 	[ "$ENFORCER_STATUS" = 'skip' ] || print_log enforcer.log  'Run maven-enforcer-plugin'
-	print_log test.log      'Run unit tests'
+	[ "$TEST_STATUS" = 'skip' ]     || print_log test.log      'Run unit tests'
 	[ "$FINDBUGS_STATUS" = 'skip' ] || print_log findbugs.log  'Run FindBugs'
 fi
 
 print_log verify.log   'Run integration tests'
 
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-}" != 'false' ]; then
+if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
