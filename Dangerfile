@@ -34,9 +34,7 @@ end
 # </file>
 #
 cs_report = 'target/checkstyle-result.xml'
-unless File.file?(cs_report)
-	warn("Couldn't find #{cs_report}. maven-checkstyle-plugin result is unknown")
-else
+if File.file?(cs_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(cs_report))
 	doc.xpath('//error').each do |node|
@@ -60,9 +58,7 @@ end
 # </file>
 #
 pmd_report = 'target/pmd.xml'
-unless File.file?(pmd_report)
-	warn("Couldn't find #{pmd_report}. maven-pmd-plugin result is unknown")
-else
+if File.file?(pmd_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(pmd_report))
 	doc.xpath('//violation').each do |node|
@@ -99,9 +95,7 @@ end
 # </CodeNarc>
 #
 codenarc_report = 'target/CodeNarc.xml'
-unless File.file?(codenarc_report)
-	warn("Couldn't find #{codenarc_report}. codenarc-maven-plugin result is unknown")
-else
+if File.file?(codenarc_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(codenarc_report))
 	root_dir = doc.xpath('//SourceDirectory').first.text.sub(pwd, '')
@@ -128,9 +122,7 @@ end
 # [INFO] ------------------------------------------------------------------------
 #
 license_output = 'license.log'
-unless File.file?(license_output)
-	warn("Couldn't find #{license_output}. license-maven-plugin result is unknown")
-else
+if File.file?(license_output)
 	errors = []
 	File.readlines(license_output)
 		.select { |line| line.start_with? '[WARNING]' }
@@ -177,9 +169,7 @@ end
 # [INFO] ------------------------------------------------------------------------
 #
 sortpom_output = 'pom.log'
-unless File.file?(sortpom_output)
-	warn("Couldn't find #{sortpom_output}. sortpom-maven-plugin result is unknown")
-else
+if File.file?(sortpom_output)
 	errors = []
 	File.readlines(sortpom_output).each do |line|
 		# don't process lines after this message
@@ -225,9 +215,7 @@ end
 # 3 lint error(s) found across 20 file(s).
 #
 bootlint_output = 'bootlint.log'
-unless File.file?(bootlint_output)
-	warn("Couldn't find #{bootlint_output}. Result of bootlint is unknown")
-else
+if File.file?(bootlint_output)
 	errors_count = 0
 	File.readlines(bootlint_output).each do |line|
 		if line !~ /:\d+:\d+/
@@ -255,9 +243,7 @@ end
 # E: 35, 0: Too many steps (34) in test case (TooManyTestSteps)
 #
 rflint_output = 'rflint.log'
-unless File.file?(rflint_output)
-	warn("Couldn't find #{rflint_output}. Result of rflint is unknown")
-else
+if File.file?(rflint_output)
 	errors_count = 0
 	current_file = ''
 	File.readlines(rflint_output).each do |line|
@@ -289,9 +275,7 @@ end
 # [INFO] ------------------------------------------------------------------------
 #
 enforcer_output = 'enforcer.log'
-unless File.file?(enforcer_output)
-	warn("Couldn't find #{enforcer_output}. maven-enforcer-plugin result is unknown")
-else
+if File.file?(enforcer_output)
 	errors = []
 	plugin_output_started = false
 	File.readlines(enforcer_output).each do |line|
@@ -339,9 +323,7 @@ end
 # </testsuite>
 #
 jasmine_report = 'target/jasmine/TEST-jasmine.xml'
-unless File.file?(jasmine_report)
-	warn("Couldn't find #{jasmine_report}. jasmine-maven-plugin results is unknown")
-else
+if File.file?(jasmine_report)
 	doc = Nokogiri::XML(File.open(jasmine_report))
 	testsuite = doc.xpath('/testsuite').first
 	failures  = testsuite['failures'].to_i
@@ -364,9 +346,7 @@ end
 # "file:/home/coder/mystamps/src/main/webapp/WEB-INF/views/series/info.html":438.16-438.35: error: very long err msg.
 #
 validator_output = 'validator.log'
-unless File.file?(validator_output)
-	warn("Couldn't find #{validator_output}. html5validator result is unknown")
-else
+if File.file?(validator_output)
 	errors_count = 0
 	File.readlines(validator_output).each do |line|
 		errors_count += 1
@@ -431,9 +411,7 @@ end
 # Also because goals are executing in order and the process stops if one of
 # them failed, we're using the same array to collect errors from different goals.
 test_output = 'test.log'
-unless File.file?(test_output)
-	warn("Couldn't find #{test_output}. Result of running unit tests is unknown")
-else
+if File.file?(test_output)
 	errors = []
 	plugin_output_started = false
 	errors_detected = false
@@ -521,9 +499,7 @@ end
 #
 test_reports_pattern = 'target/surefire-reports/TEST-*.xml'
 test_reports = Dir.glob(test_reports_pattern)
-if test_reports.empty?
-	warn("Couldn't find #{test_reports_pattern}. maven-surefire-plugin results is unknown")
-else
+unless test_reports.empty?
 	errors_count = 0
 	test_reports.each do |file|
 		doc = Nokogiri::XML(File.open(file))
@@ -568,9 +544,7 @@ end
 # </BugCollection>
 #
 findbugs_report = 'target/findbugsXml.xml'
-unless File.file?(findbugs_report)
-	warn("Couldn't find #{findbugs_report}. findbugs-maven-plugin result is unknown")
-else
+if File.file?(findbugs_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(findbugs_report))
 	src_dirs = doc.xpath('//SrcDir').map { |node| node.text }
@@ -604,9 +578,7 @@ end
 #   </test>
 # </suite>
 rf_report = 'target/robotframework-reports/output.xml'
-unless File.file?(rf_report)
-	warn("Couldn't find #{rf_report}. robotframework-maven-plugin result is unknown")
-else
+if File.file?(rf_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(rf_report))
 	doc.xpath('//status[@critical="yes"][@status="FAIL"]').each do |node|
@@ -646,9 +618,7 @@ end
 #             ...
 #
 failsafe_report = 'target/failsafe-reports/testng-results.xml'
-unless File.file?(failsafe_report)
-	warn("Couldn't find #{failsafe_report}. maven-failsafe-plugin result is unknown")
-else
+if File.file?(failsafe_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(failsafe_report))
 	results  = doc.xpath('/testng-results').first
