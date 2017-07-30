@@ -455,7 +455,7 @@
 		<groovy.version>2.0.8</groovy.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.6.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<h2.version>1.4.195</h2.version>
+		<h2.version>1.4.196</h2.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.6.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.2.5.Final</hibernate-validator.version>
