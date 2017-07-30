@@ -658,7 +658,7 @@ if commits > 1
 	else
 		warn(
 			"danger check: pull request contains #{commits} commits while most of the cases it should have only one.\n"\
-			"If it's not a special case you should squash commits into single one.\n"\
+			"If it's not a special case you should **squash the commits** into single one.\n"\
 			"You can read how to do it here: https://davidwalsh.name/squash-commits-git\n"\
 			"But be careful because **it can destroy** all your changes!"
 		)
@@ -668,7 +668,7 @@ end
 if github.branch_for_head !~ /^gh[0-9]+_/
 	warn("danger check: branch `#{github.branch_for_head}` does not comply with our best practices. "\
 		"Branch name should use the following scheme: `ghXXX_meaningful-name` where `XXX` is an issue number. "\
-		"Next time, please, use this scheme :)"
+		"**Next time**, please, use this scheme :)"
 	)
 end
 
