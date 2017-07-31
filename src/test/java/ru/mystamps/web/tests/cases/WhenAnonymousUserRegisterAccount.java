@@ -182,7 +182,7 @@ public class WhenAnonymousUserRegisterAccount
 	
 	@DataProvider(name = "invalidEmails")
 	public Object[][] getInvalidEmails() {
-		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Email.message");
+		String expectedErrorMessage = tr("ru.mystamps.web.support.beanvalidation.Email.message");
 		
 		return new Object[][] {
 			{"login", expectedErrorMessage},

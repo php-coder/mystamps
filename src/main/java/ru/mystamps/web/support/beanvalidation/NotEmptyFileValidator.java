@@ -15,34 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.dto;
+package ru.mystamps.web.support.beanvalidation;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.apache.commons.lang3.StringUtils;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.support.beanvalidation.Email;
-
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
-
-@Getter
-@Setter
-@GroupSequence({
-	RegisterAccountForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class
-})
-public class RegisterAccountForm implements RegisterAccountDto {
+public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, MultipartFile> {
 	
-	@NotEmpty(groups = Group.Level1.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
-	private String email;
+	@Override
+	public void initialize(NotEmptyFile annotation) {
+		// Intentionally empty: nothing to initialize
+	}
+	
+	@Override
+	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
+		
+		if (file == null) {
+			return true;
+		}
+		
+		if (StringUtils.isEmpty(file.getOriginalFilename())) {
+			return true;
+		}
+		
+		return !file.isEmpty();
+	}
 	
 }

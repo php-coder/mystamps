@@ -147,7 +147,7 @@ public class WhenAnonymousUserActivateAccount
 		
 		assertThat(page)
 			.field("login")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.UniqueLogin.message"));
+			.hasError(tr("ru.mystamps.web.support.beanvalidation.UniqueLogin.message"));
 	}
 
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidLogins")
@@ -280,7 +280,7 @@ public class WhenAnonymousUserActivateAccount
 		
 		assertThat(page)
 			.field("activationKey")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.ExistingActivationKey.message"));
+			.hasError(tr("ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message"));
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
