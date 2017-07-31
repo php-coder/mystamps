@@ -22,7 +22,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
-import ru.mystamps.web.model.AddCategoryForm
+import ru.mystamps.web.controller.dto.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils

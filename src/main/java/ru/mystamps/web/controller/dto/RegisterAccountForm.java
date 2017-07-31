@@ -15,42 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller.dto;
 
 import javax.validation.GroupSequence;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddImageDto;
-import ru.mystamps.web.validation.jsr303.ImageFile;
-import ru.mystamps.web.validation.jsr303.MaxFileSize;
-import ru.mystamps.web.validation.jsr303.MaxFileSize.Unit;
-import ru.mystamps.web.validation.jsr303.NotEmptyFile;
-import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
+import ru.mystamps.web.service.dto.RegisterAccountDto;
+import ru.mystamps.web.validation.jsr303.Email;
 
-import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
+import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 @Getter
 @Setter
 @GroupSequence({
-	AddImageForm.class,
+	RegisterAccountForm.class,
 	Group.Level1.class,
 	Group.Level2.class,
-	Group.Level3.class,
-	Group.Level4.class,
-	Group.Level5.class
+	Group.Level3.class
 })
-public class AddImageForm implements AddImageDto {
+public class RegisterAccountForm implements RegisterAccountDto {
 	
-	@NotNull(groups = Group.Level1.class)
-	@NotEmptyFilename(groups = Group.Level2.class)
-	@NotEmptyFile(groups = Group.Level3.class)
-	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level4.class)
-	@ImageFile(groups = Group.Level5.class)
-	private MultipartFile image;
+	@NotEmpty(groups = Group.Level1.class)
+	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
+	@Email(groups = Group.Level3.class)
+	private String email;
 	
 }
