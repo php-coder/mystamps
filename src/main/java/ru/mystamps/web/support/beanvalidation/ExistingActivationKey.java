@@ -34,7 +34,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = ExistingActivationKeyValidator.class)
 @Documented
 public @interface ExistingActivationKey {
-        // CheckStyle: ignore LineLength for next 1 line
+	// CheckStyle: ignore LineLength for next 1 line
 	String message() default "{ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
