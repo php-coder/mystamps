@@ -3,4 +3,4 @@
  * classes that are representing values from site forms and being used by
  * controllers as input values.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller.dto;

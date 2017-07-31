@@ -15,35 +15,43 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller.dto;
 
-import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.util.Date;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.URL;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddParticipantDto;
-
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_URL_MAX_LENGTH;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 
 @Getter
 @Setter
-public class AddParticipantForm implements AddParticipantDto {
+public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
-	@NotEmpty
-	@Size.List({
-		@Size(min = PARTICIPANT_NAME_MIN_LENGTH, message = "{value.too-short}"),
-		@Size(max = PARTICIPANT_NAME_MAX_LENGTH, message = "{value.too-long}")
-	})
-	private String name;
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
+	private Date date;
 	
-	@URL
-	@Size(max = PARTICIPANT_URL_MAX_LENGTH, message = "{value.too-long}")
+	@NotNull
+	private Integer sellerId;
+	
 	private String url;
+	
+	@NotNull
+	private BigDecimal price;
+	
+	@NotNull
+	private Currency currency;
+	
+	private BigDecimal altPrice;
+	
+	private Currency altCurrency;
+	
+	private Integer buyerId;
 	
 }

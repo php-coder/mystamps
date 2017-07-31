@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.model.AddParticipantForm;
+import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.service.TransactionParticipantService;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;

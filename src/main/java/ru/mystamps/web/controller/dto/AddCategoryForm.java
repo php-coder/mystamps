@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller.dto;
 
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
@@ -26,23 +26,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.validation.jsr303.DenyValues;
-import ru.mystamps.web.validation.jsr303.UniqueCountryName;
-import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
-import ru.mystamps.web.validation.jsr303.UniqueCountrySlug;
+import ru.mystamps.web.validation.jsr303.UniqueCategoryName;
+import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
+import ru.mystamps.web.validation.jsr303.UniqueCategorySlug;
 
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_HYPHEN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP;
+import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
 
 @Getter
 @Setter
 @GroupSequence({
-	AddCountryForm.class,
+	AddCategoryForm.class,
 	Group.Level1.class,
 	Group.Level2.class,
 	Group.Level3.class,
@@ -52,73 +52,73 @@ import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_RU_REGEXP;
 	Group.Level7.class,
 	Group.Level8.class
 })
-public class AddCountryForm implements AddCountryDto {
+public class AddCategoryForm implements AddCategoryDto {
 	
 	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
-			min = COUNTRY_NAME_MIN_LENGTH,
+			min = CATEGORY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Group.Level2.class
 		),
 		@Size(
-			max = COUNTRY_NAME_MAX_LENGTH,
+			max = CATEGORY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = COUNTRY_NAME_EN_REGEXP,
+			regexp = CATEGORY_NAME_EN_REGEXP,
 			message = "{value.invalid-en-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
-			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
 			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
-			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
+			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Group.Level5.class
 		)
 	})
 	@DenyValues(value = {"add", "list"}, groups = Group.Level6.class)
-	@UniqueCountryName(lang = Lang.EN, groups = Group.Level7.class)
-	@UniqueCountrySlug(groups = Group.Level8.class)
+	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level7.class)
+	@UniqueCategorySlug(groups = Group.Level8.class)
 	private String name;
 	
 	@Size.List({
 		@Size(
-			min = COUNTRY_NAME_MIN_LENGTH,
+			min = CATEGORY_NAME_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Group.Level2.class
 		),
 		@Size(
-			max = COUNTRY_NAME_MAX_LENGTH,
+			max = CATEGORY_NAME_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = COUNTRY_NAME_RU_REGEXP,
+			regexp = CATEGORY_NAME_RU_REGEXP,
 			message = "{value.invalid-ru-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
-			regexp = COUNTRY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
 			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
-			regexp = COUNTRY_NAME_NO_HYPHEN_REGEXP,
+			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Group.Level5.class
 		)
 	})
-	@UniqueCountryName(lang = Lang.RU, groups = Group.Level7.class)
+	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level7.class)
 	private String nameRu;
 	
 }

@@ -6,7 +6,7 @@
 <suppressions>
 	
 	<!-- false positives due to Lombok usage -->
-	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.model" />
+	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.controller.dto" />
 	
 	<!-- I don't want to rename WebDriverFactory to AbstractWebDriverFactory -->
 	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.WebDriverFactory" />
