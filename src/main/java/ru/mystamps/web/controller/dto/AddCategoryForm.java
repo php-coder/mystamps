@@ -27,10 +27,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.validation.jsr303.DenyValues;
-import ru.mystamps.web.validation.jsr303.UniqueCategoryName;
-import ru.mystamps.web.validation.jsr303.UniqueCategoryName.Lang;
-import ru.mystamps.web.validation.jsr303.UniqueCategorySlug;
+import ru.mystamps.web.support.beanvalidation.DenyValues;
+import ru.mystamps.web.support.beanvalidation.UniqueCategoryName;
+import ru.mystamps.web.support.beanvalidation.UniqueCategoryName.Lang;
+import ru.mystamps.web.support.beanvalidation.UniqueCategorySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;

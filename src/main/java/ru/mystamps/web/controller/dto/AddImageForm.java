@@ -26,11 +26,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddImageDto;
-import ru.mystamps.web.validation.jsr303.ImageFile;
-import ru.mystamps.web.validation.jsr303.MaxFileSize;
-import ru.mystamps.web.validation.jsr303.MaxFileSize.Unit;
-import ru.mystamps.web.validation.jsr303.NotEmptyFile;
-import ru.mystamps.web.validation.jsr303.NotEmptyFilename;
+import ru.mystamps.web.support.beanvalidation.ImageFile;
+import ru.mystamps.web.support.beanvalidation.MaxFileSize;
+import ru.mystamps.web.support.beanvalidation.MaxFileSize.Unit;
+import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
+import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 
