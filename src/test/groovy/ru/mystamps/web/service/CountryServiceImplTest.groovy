@@ -22,7 +22,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
-import ru.mystamps.web.model.AddCountryForm
+import ru.mystamps.web.controller.dto.AddCountryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.util.SlugUtils
