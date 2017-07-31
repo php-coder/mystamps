@@ -15,34 +15,36 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.support.beanvalidation;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import lombok.RequiredArgsConstructor;
 
-import lombok.Getter;
-import lombok.Setter;
+import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.util.SlugUtils;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.support.beanvalidation.Email;
-
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
-
-@Getter
-@Setter
-@GroupSequence({
-	RegisterAccountForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class
-})
-public class RegisterAccountForm implements RegisterAccountDto {
+@RequiredArgsConstructor
+public class UniqueCountrySlugValidator implements ConstraintValidator<UniqueCountrySlug, String> {
 	
-	@NotEmpty(groups = Group.Level1.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
-	private String email;
+	private final CountryService countryService;
+	
+	@Override
+	public void initialize(UniqueCountrySlug annotation) {
+		// Intentionally empty: nothing to initialize
+	}
+	
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext ctx) {
+		
+		if (value == null) {
+			return true;
+		}
+		
+		String slug = SlugUtils.slugify(value);
+		
+		return countryService.countBySlug(slug) == 0;
+	}
 	
 }

@@ -15,34 +15,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.support.beanvalidation;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.Constraint;
+import javax.validation.Payload;
 
-import lombok.Getter;
-import lombok.Setter;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.support.beanvalidation.Email;
-
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
-
-@Getter
-@Setter
-@GroupSequence({
-	RegisterAccountForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class
-})
-public class RegisterAccountForm implements RegisterAccountDto {
+@Target({ TYPE, ANNOTATION_TYPE })
+@Retention(RUNTIME)
+@Constraint(validatedBy = FieldsMatchValidator.class)
+@Documented
+public @interface FieldsMatch {
+	String message() default "{ru.mystamps.web.support.beanvalidation.FieldsMatch.message}";
+	Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
 	
-	@NotEmpty(groups = Group.Level1.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
-	private String email;
-	
+	String first();
+	String second();
 }

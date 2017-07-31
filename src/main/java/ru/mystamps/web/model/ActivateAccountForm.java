@@ -27,11 +27,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.ActivateAccountDto;
+import ru.mystamps.web.support.beanvalidation.ExistingActivationKey;
+import ru.mystamps.web.support.beanvalidation.FieldsMatch;
+import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
+import ru.mystamps.web.support.beanvalidation.UniqueLogin;
 import ru.mystamps.web.validation.ValidationRules;
-import ru.mystamps.web.validation.jsr303.ExistingActivationKey;
-import ru.mystamps.web.validation.jsr303.FieldsMatch;
-import ru.mystamps.web.validation.jsr303.FieldsMismatch;
-import ru.mystamps.web.validation.jsr303.UniqueLogin;
+
 
 @Getter
 @Setter

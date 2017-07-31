@@ -213,7 +213,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		
 		assertThat(page)
 			.field("image")
-			.hasError(tr("ru.mystamps.web.validation.jsr303.NotEmptyFile.message"));
+			.hasError(tr("ru.mystamps.web.support.beanvalidation.NotEmptyFile.message"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
@@ -385,7 +385,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	@DataProvider(name = "invalidCatalogNumbers")
 	public Object[][] getInvalidCatalogNumbers() {
 		String expectedErrorMessage =
-			tr("ru.mystamps.web.validation.jsr303.CatalogNumbers.message");
+			tr("ru.mystamps.web.support.beanvalidation.CatalogNumbers.message");
 		
 		return new Object[][] {
 			{"t", expectedErrorMessage},
@@ -402,7 +402,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	
 	@DataProvider(name = "invalidCatalogPrices")
 	public Object[][] getInvalidCatalogPrices() {
-		String expectedErrorMessage = tr("ru.mystamps.web.validation.jsr303.Price.message");
+		String expectedErrorMessage = tr("ru.mystamps.web.support.beanvalidation.Price.message");
 		
 		return new Object[][] {
 			{"0", expectedErrorMessage},

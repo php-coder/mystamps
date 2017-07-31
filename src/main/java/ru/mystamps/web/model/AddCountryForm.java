@@ -27,10 +27,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCountryDto;
-import ru.mystamps.web.validation.jsr303.DenyValues;
-import ru.mystamps.web.validation.jsr303.UniqueCountryName;
-import ru.mystamps.web.validation.jsr303.UniqueCountryName.Lang;
-import ru.mystamps.web.validation.jsr303.UniqueCountrySlug;
+import ru.mystamps.web.support.beanvalidation.DenyValues;
+import ru.mystamps.web.support.beanvalidation.UniqueCountryName;
+import ru.mystamps.web.support.beanvalidation.UniqueCountryName.Lang;
+import ru.mystamps.web.support.beanvalidation.UniqueCountrySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
