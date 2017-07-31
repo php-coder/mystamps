@@ -33,7 +33,6 @@ import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.support.beanvalidation.UniqueLogin;
 import ru.mystamps.web.validation.ValidationRules;
 
-
 @Getter
 @Setter
 @FieldsMismatch(
