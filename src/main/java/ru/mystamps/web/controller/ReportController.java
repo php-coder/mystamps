@@ -18,18 +18,12 @@
 
 package ru.mystamps.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.CronService;
@@ -38,28 +32,19 @@ import ru.mystamps.web.service.MailService;
 /**
  * @author Maxim Shestakov
  */
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class ReportController {
-	private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
 	
 	private final MailService mailService;
 	private final CronService cronService;
 	
-	@RequestMapping(Url.DAILY_STATISTICS)
-	public void showDailyReport(HttpServletResponse response) {
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		
-		try {
-			PrintWriter writer = response.getWriter();
-			String stats = mailService.getTextOfDailyStatisticsMail(
-				cronService.getDailyStatistics()
-			);
-			writer.println(stats);
-		} catch (IOException ex) {
-			LOG.error("Can't get daily report", ex.getMessage());
-		}
+	@GetMapping(value = Url.DAILY_STATISTICS, produces = {"text/plain; charset=UTF-8"})
+	@ResponseBody
+	public String showDailyReport() {
+		return mailService.getTextOfDailyStatisticsMail(
+			cronService.getDailyStatistics()
+		);
 	}
 	
 }

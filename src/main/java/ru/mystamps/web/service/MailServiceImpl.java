@@ -184,7 +184,7 @@ public class MailServiceImpl implements MailService {
 		return substitutor.replace(template);
 	}
 
-	private String getTextOfDailyStatisticsMail(AdminDailyReport report) {
+	public String getTextOfDailyStatisticsMail(AdminDailyReport report) {
 		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
 		String fromDate = shortDatePrinter.format(report.getStartDate());
 		String tillDate = shortDatePrinter.format(report.getEndDate());
