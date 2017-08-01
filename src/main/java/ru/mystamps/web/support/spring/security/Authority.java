@@ -31,6 +31,7 @@ public final class Authority {
 	public static final GrantedAuthority UPDATE_COLLECTION      = new SimpleGrantedAuthority(StringAuthority.UPDATE_COLLECTION);
 	public static final GrantedAuthority VIEW_SITE_EVENTS       = new SimpleGrantedAuthority(StringAuthority.VIEW_SITE_EVENTS);
 	public static final GrantedAuthority VIEW_SERIES_SALES      = new SimpleGrantedAuthority(StringAuthority.VIEW_SERIES_SALES);
+	public static final GrantedAuthority VIEW_DAILY_STATS       = new SimpleGrantedAuthority(StringAuthority.VIEW_DAILY_STATS);
 	
 	private Authority() {
 	}

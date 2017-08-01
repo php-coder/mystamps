@@ -50,14 +50,21 @@ public class CronServiceImpl implements CronService {
 	private final UsersActivationService usersActivationService;
 	private final MailService mailService;
 
+	private AdminDailyReport report;
+
 	@Override
 	@Scheduled(cron = EVERY_DAY_AT_00_00)
 	@Transactional(readOnly = true)
 	public void sendDailyStatistics() {
+		mailService.sendDailyStatisticsToAdmin(report);
+	}
+	
+	@Override
+	public AdminDailyReport getDailyStatistics() {
 		Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
 		Date yesterday = DateUtils.addDays(today, -1);
-		
-		AdminDailyReport report = new AdminDailyReport();
+
+		report = new AdminDailyReport();
 		report.setStartDate(yesterday);
 		report.setEndDate(today);
 		report.setAddedCategoriesCounter(categoryService.countAddedSince(yesterday));
@@ -66,32 +73,32 @@ public class CronServiceImpl implements CronService {
 		report.setUpdatedSeriesCounter(seriesService.countUpdatedSince(yesterday));
 		report.setRegistrationRequestsCounter(usersActivationService.countCreatedSince(yesterday));
 		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
-		
+
 		long notFoundCounter = suspiciousActivityService.countByTypeSince(
 			SiteServiceImpl.PAGE_NOT_FOUND,
 			yesterday
 		);
 		report.setNotFoundCounter(notFoundCounter);
-		
+
 		long failedAuthCounter = suspiciousActivityService.countByTypeSince(
 			SiteServiceImpl.AUTHENTICATION_FAILED,
 			yesterday
 		);
 		report.setFailedAuthCounter(failedAuthCounter);
-		
+
 		long missingCsrfCounter = suspiciousActivityService.countByTypeSince(
 			SiteServiceImpl.MISSING_CSRF_TOKEN,
 			yesterday
 		);
 		report.setMissingCsrfCounter(missingCsrfCounter);
-		
+
 		long invalidCsrfCounter = suspiciousActivityService.countByTypeSince(
 			SiteServiceImpl.INVALID_CSRF_TOKEN,
 			yesterday
 		);
 		report.setInvalidCsrfCounter(invalidCsrfCounter);
 		
-		mailService.sendDailyStatisticsToAdmin(report);
+		return report;
 	}
 	
 	@Override

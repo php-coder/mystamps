@@ -27,6 +27,7 @@ public final class StringAuthority {
 	public static final String UPDATE_COLLECTION      = "UPDATE_COLLECTION";
 	public static final String VIEW_SITE_EVENTS       = "VIEW_SITE_EVENTS";
 	public static final String VIEW_SERIES_SALES      = "VIEW_SERIES_SALES";
+	public static final String VIEW_DAILY_STATS       = "VIEW_DAILY_STATS";
 	
 	private StringAuthority() {
 	}

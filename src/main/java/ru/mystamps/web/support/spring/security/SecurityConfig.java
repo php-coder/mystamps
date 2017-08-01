@@ -66,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
+				.antMatchers(Url.DAILY_STATISTICS)
+					.hasAuthority(StringAuthority.VIEW_DAILY_STATS)
 				.antMatchers(Url.ADD_CATEGORY_PAGE)
 					.hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.antMatchers(Url.ADD_COUNTRY_PAGE)

@@ -85,6 +85,14 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public ReportController getReportController() {
+		return new ReportController(
+			servicesConfig.getMailService(),
+			servicesConfig.getCronService()
+			);
+	}
+	
+	@Bean
 	public SeriesController getSeriesController() {
 		return new SeriesController(
 			servicesConfig.getCategoryService(),

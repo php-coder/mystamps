@@ -108,6 +108,9 @@
 							<li togglz:active="VIEW_SITE_EVENTS" sec:authorize="hasAuthority('VIEW_SITE_EVENTS')">
 								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_watch_suspicious_activities}" href="events.html">view suspicious activities</a>
 							</li>
+							<li sec:authorize="hasAuthority('VIEW_DAILY_STATS')">
+								<a th:href="@{${DAILY_STATISTICS}}" th:text="#{t_daily_statistics}" href="../report/daily">view daily statistics</a>
+							</li>
 						</ul>
 					</nav>
 				</div>

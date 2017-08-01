@@ -79,6 +79,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.VIEW_SITE_EVENTS);
 			authorities.add(Authority.VIEW_SERIES_SALES);
 			authorities.add(Authority.MANAGE_TOGGLZ);
+			authorities.add(Authority.VIEW_DAILY_STATS);
 		}
 		
 		return authorities;

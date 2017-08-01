@@ -37,7 +37,8 @@ public final class Url {
 	public static final String INDEX_PAGE            = "/";
 	public static final String ROBOTS_TXT            = "/robots.txt";
 	public static final String SITEMAP_XML           = "/sitemap.xml";
-	
+
+	public static final String DAILY_STATISTICS      = "/report/daily";
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
@@ -136,6 +137,7 @@ public final class Url {
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
+		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		
 		if (serveContentFromSingleHost) {
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
