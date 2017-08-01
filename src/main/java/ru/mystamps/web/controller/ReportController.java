@@ -41,24 +41,24 @@ import ru.mystamps.web.service.MailService;
 @Controller
 @RequiredArgsConstructor
 public class ReportController {
-	private static final Logger LOG = LoggerFactory.getLogger(RobotsTxtController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
 	
 	private final MailService mailService;
 	private final CronService cronService;
 	
 	@RequestMapping(Url.DAILY_STATISTICS)
-	public void adminDailyReport(HttpServletResponse response) {
+	public void showDailyReport(HttpServletResponse response) {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		
 		try {
-			PrintWriter printWriter = response.getWriter();
+			PrintWriter writer = response.getWriter();
 			String stats = mailService.getTextOfDailyStatisticsMail(
 				cronService.getDailyStatistics()
 			);
-			printWriter.println(stats);
-		} catch (IOException e) {
-			LOG.error("Can't get Daily Reports", e.getMessage());
+			writer.println(stats);
+		} catch (IOException ex) {
+			LOG.error("Can't get daily report", ex.getMessage());
 		}
 	}
 	

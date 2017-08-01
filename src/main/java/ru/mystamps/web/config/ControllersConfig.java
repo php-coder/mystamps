@@ -89,7 +89,7 @@ public class ControllersConfig {
 		return new ReportController(
 			servicesConfig.getMailService(),
 			servicesConfig.getCronService()
-			);
+		);
 	}
 	
 	@Bean
