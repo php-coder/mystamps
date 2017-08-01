@@ -236,7 +236,7 @@ fi
 # Just encode it to a gzipped binary form and dump to console.
 if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
 	echo "===== REPORT START ====="
-	cat target/robotframework-reports/log.html | gzip -c | base64
+	cat target/robotframework-reports/output.xml | gzip -c | base64
 	echo "===== REPORT END ====="
 fi
 
