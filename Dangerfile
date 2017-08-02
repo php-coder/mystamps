@@ -40,9 +40,14 @@ if File.file?(cs_report)
 	doc.xpath('//error').each do |node|
 		errors_count += 1
 		line = node['line']
+		if line.to_i > 0
+			line = '#L' + line
+		else
+			line = ''
+		end
 		msg  = node['message'].sub(/\.$/, '')
 		file = node.parent['name'].sub(pwd, '')
-		file = github.html_link("#{file}#L#{line}")
+		file = github.html_link("#{file}#{line}")
 		fail("maven-checkstyle-plugin error in #{file}:\n#{msg}")
 	end
 	print_errors_summary 'maven-checkstyle-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/checkstyle'
