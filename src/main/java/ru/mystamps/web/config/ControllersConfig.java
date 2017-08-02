@@ -79,6 +79,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
+	public ParticipantController getParticipantController() {
+		return new ParticipantController(servicesConfig.getTransactionParticipantService());
+	}
+	
+	@Bean
 	public RobotsTxtController getRobotsTxtController() {
 		return new RobotsTxtController();
 	}
@@ -118,5 +123,12 @@ public class ControllersConfig {
 	public SitemapController getSitemapController() {
 		return new SitemapController(servicesConfig.getSeriesService());
 	}
-	
+
+	@Bean
+	public SuggestionController getSuggestionController() {
+		return new SuggestionController(
+			servicesConfig.getCountryService()
+		);
+	}
+
 }

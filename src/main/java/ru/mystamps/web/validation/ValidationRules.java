@@ -63,6 +63,10 @@ public final class ValidationRules {
 	public static final int MAX_SERIES_COMMENT_LENGTH = Db.Series.COMMENT_LENGTH;
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	
+	public static final int PARTICIPANT_NAME_MIN_LENGTH = 3;
+	public static final int PARTICIPANT_NAME_MAX_LENGTH = Db.TransactionParticipant.NAME_LENGTH;
+	public static final int PARTICIPANT_URL_MAX_LENGTH  = Db.TransactionParticipant.URL_LENGTH;
+	
 	/** Maximum uploading image size in kilobytes. */
 	public static final long MAX_IMAGE_SIZE = 500;
 	

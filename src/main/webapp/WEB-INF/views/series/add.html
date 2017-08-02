@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body onload="initPage()">
+	<body th:onload="|initPage('@{${SUGGEST_SERIES_COUNTRY}}')|" onload="initPage(null)">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
@@ -130,10 +130,10 @@
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 							<label for="category" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_category}">
+								<span th:remove="tag" th:text="#{t_category}">
 									Category
 								</span>
-								<span id="category.required" class="required_field">*</span>
+								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
 								<select id="category" name="category" class="form-control" required="required">
@@ -174,7 +174,7 @@
 		
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('country') ? 'has-error' : ''}">
 							<label for="country" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_country}">
+								<span th:remove="tag" th:text="#{t_country}">
 									Country
 								</span>
 							</label>
@@ -203,14 +203,18 @@
 								<span id="country.errors" class="help-block" th:if="${#fields.hasErrors('country')}" th:each="error : ${#fields.errors('country')}" th:text="${error}"></span>
 								/*/-->
 							</div>
+							
+							<small togglz:active="SHOW_SUGGESTION_LINK">
+								<a tabindex="-1" th:text="#{t_guess_country}" href="javascript:$('#js-guess-country-link').hide(); chooseCountryBySlug('russia'); void(0)" th:href="'javascript:void(0)'" id="js-guess-country-link" class="link-vcenter" th:style="'display: none'">Guess a country</a>
+							</small>
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
 							<label for="quantity" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_quantity}">
+								<span th:remove="tag" th:text="#{t_quantity}">
 									Quantity
 								</span>
-								<span id="quantity.required" class="required_field">*</span>
+								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-6">
 								<div class="row">
@@ -242,7 +246,7 @@
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
 							<label for="perforated" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_perforated}">
+								<span th:remove="tag" th:text="#{t_perforated}">
 									Perforated
 								</span>
 							</label>
@@ -256,10 +260,10 @@
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
 							<label for="image" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_image}">
+								<span th:remove="tag" th:text="#{t_image}">
 									Image
 								</span>
-								<span id="image.required" class="required_field">*</span>
+								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-7">
 								<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
@@ -282,7 +286,7 @@
 						
 						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="|${issueDateHasErrors ? 'has-error in' : ''} ${issueDateHasValues ? 'in' : ''}|">
 							<label for="year" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_issue_date}">
+								<span th:remove="tag" th:text="#{t_issue_date}">
 									Date of release
 								</span>
 							</label>
@@ -374,7 +378,7 @@
 						
 						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${michelHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="michelNumbers" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_michel}">
+								<span th:remove="tag" th:text="#{t_michel}">
 									Michel
 								</span>
 							</label>
@@ -399,7 +403,7 @@
 						
 						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${scottHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="scottNumbers" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_scott}">
+								<span th:remove="tag" th:text="#{t_scott}">
 									Scott
 								</span>
 							</label>
@@ -424,7 +428,7 @@
 						
 						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${yvertHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="yvertNumbers" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_yvert}">
+								<span th:remove="tag" th:text="#{t_yvert}">
 									Yvert
 								</span>
 							</label>
@@ -449,7 +453,7 @@
 						
 						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${gibbonsHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
 							<label for="gibbonsNumbers" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_sg}">
+								<span th:remove="tag" th:text="#{t_sg}">
 									Gibbons
 								</span>
 							</label>
@@ -480,7 +484,7 @@
 						
 						<div class="form-group collapse js-comment" th:classappend="|${#fields.hasErrors('comment') ? 'has-error in' : ''} ${addSeriesForm.comment != null ? 'in' : ''}|" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<label for="comment" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_comment}">
+								<span th:remove="tag" th:text="#{t_comment}">
 									Comment
 								</span>
 							</label>

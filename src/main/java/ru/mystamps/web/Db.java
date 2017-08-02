@@ -27,6 +27,11 @@ public final class Db {
 		public static final int NAME_LENGTH = 50;
 	}
 	
+	public static final class TransactionParticipant {
+		public static final int NAME_LENGTH = 50;
+		public static final int URL_LENGTH  = 255;
+	}
+	
 	public static final class Series {
 		public static final int COMMENT_LENGTH = 255;
 	}

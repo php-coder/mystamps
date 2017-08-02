@@ -21,7 +21,6 @@ import java.util.List;
 
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 import ru.mystamps.web.tests.page.element.Form.Field;
-import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
@@ -37,10 +36,7 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	protected void checkStandardStructure() {
 		shouldHaveFields();
-		shouldHaveLabels();
-		shouldHaveSubmitButton();
 		
-		requiredFieldsShouldBeMarkedByAsterisk();
 		mayExistsLegendAboutRequiredFields();
 		emptyValueShouldBeForbiddenForRequiredFields();
 		
@@ -54,48 +50,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.overridingErrorMessage("field with XPath '" + field + "' should exists")
 					.isTrue();
 			}
-		}
-	}
-	
-	private void shouldHaveLabels() {
-		for (Field field : page.getForm().getFields()) {
-			if (!field.isAccessibleByAll() || !field.hasLabel()) {
-				continue;
-			}
-			
-			String msg = String.format(
-				"field with id '%s' should have label '%s'",
-				field.getId(),
-				field.getLabel()
-			);
-			
-			assertThat(page.getInputLabelValue(field.getId()))
-				.overridingErrorMessage(msg)
-				.isEqualTo(field.getLabel());
-		}
-	}
-	
-	private void shouldHaveSubmitButton() {
-		for (SubmitButton button : page.getForm().getSubmitButtons()) {
-			assertThat(page.isSubmitButtonExists(button))
-				.overridingErrorMessage(
-					String.format(
-						"submit button with value '%s' should exists", button.getValue()
-					)
-				)
-				.isTrue();
-		}
-	}
-	
-	private void requiredFieldsShouldBeMarkedByAsterisk() {
-		for (Field field : page.getForm().getRequiredFields()) {
-			assertThat(page.inputHasAsterisk(field.getId()))
-				.overridingErrorMessage(
-					String.format(
-						"required field with id '%s' should be marked by asterisk", field.getId()
-					)
-				)
-				.isTrue();
 		}
 	}
 	

@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
-		<title th:text="|#{t_my_stamps}: #{t_auth_title}|">My stamps: authentication</title>
+		<title th:text="|#{t_my_stamps}: #{t_add_buyer_seller}|">My stamps: add buyer/seller</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -63,7 +63,6 @@
 				
 				--><div id="user_bar" class="col-sm-2 vcenter">
 					<ul class="list-unstyled">
-						<!--/*/
 						<li sec:authorize="isAuthenticated()">
 							<i class="glyphicon glyphicon-user"></i>
 							<a sec:authentication="principal.userName"
@@ -74,94 +73,79 @@
 								John Doe
 							</a>
 						</li>
-						/*/-->
+						<!--/*/
 						<li sec:authorize="isAnonymous()">
 							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
 						</li>
-						<!--/*/
+						/*/-->
 						<li sec:authorize="isAuthenticated()">
 							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
-						/*/-->
+						<!--/*/
 						<li sec:authorize="isAnonymous()">
 							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
 						</li>
+						/*/-->
 					</ul>
 				</div>
 			</div>
 			<div class="row">
-				<div id="content" class="col-sm-6 col-sm-offset-3" th:with="requestFailed=${(#httpServletRequest.queryString ?: '') eq 'failed'}">
-					
-					<h3 th:text="#{t_authentication_on_site}">
-						Authentication on site
+				<div id="content" class="col-sm-6 col-sm-offset-3" th:with="header=#{t_add_buyer_seller}">
+					<h3 th:text="${#strings.capitalize(header)} ">
+						Add buyer/seller
 					</h3>
 					
-					<!--/*/ <th:block sec:authorize="isAnonymous()" th:with="exceptionOccurred=${session.SPRING_SECURITY_LAST_EXCEPTION != null}"> /*/-->
-						<div class="hint text-center">
-							<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
-								<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
-									All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
+					<div class="hint text-center">
+						<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
+							<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
+								All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
+							</span>
+						</small>
+					</div>
+					
+					<form id="add-participant-form" method="post" class="form-horizontal" action="../site/index.html"
+						th:action="@{${ADD_PARTICIPANT_PAGE}}" th:object="${addParticipantForm}">
+						
+						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
+							<label for="name" class="control-label col-sm-4">
+								<span th:remove="tag" th:text="#{t_name}">
+									Name
 								</span>
-							</small>
-						</div>
-						
-						<!--/*/
-						<div class="row" th:if="${requestFailed and exceptionOccurred}">
-							<div id="form.errors" class="alert alert-danger text-center col-sm-8 col-sm-offset-2" th:with="errorMessage=${session.SPRING_SECURITY_LAST_EXCEPTION.message}" th:text="${errorMessage}">
-								Wrong login or password!
+								<span class="required_field">*</span>
+							</label>
+							<div class="col-sm-5">
+								<input id="name" type="text" class="form-control" required="required" th:field="*{name}" />
+								<!--/*/
+								<span id="name.errors" class="help-block" th:if="${#fields.hasErrors('name')}" th:each="error : ${#fields.errors('name')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
-						/*/-->
 						
-						<!--/*/
-						<div class="row" th:if="${justActivatedUser}">
-							<div class="alert alert-success text-center col-sm-10 col-sm-offset-1" th:text="#{t_activation_successful}">
-								Account successfully activated! Now you can pass authentication.
+						<div class="form-group" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
+							<label for="url" class="control-label col-sm-4">
+								<span th:remove="tag" th:text="#{t_url}">
+									URL
+								</span>
+							</label>
+							<div class="col-sm-5">
+								<input id="url" type="url" class="form-control" th:field="*{url}" />
+								<!--/*/
+								<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
+								/*/-->
 							</div>
 						</div>
-						/*/-->
 						
-						<form id="auth-account-form" action="../site/index.html" th:action="@{${LOGIN_PAGE}}" method="post" class="form-horizontal">
-							
-							<div class="form-group">
-								<label for="login" class="control-label col-sm-4">
-									<span th:remove="tag" th:text="#{t_login}">Login</span>
-									<span class="required_field">*</span>
-								</label>
-								<div class="col-sm-4">
-									<input type="text" id="login" name="login" required="required" value="" class="form-control" />
-								</div>
+						<div class="form-group">
+							<div class="col-sm-offset-4 col-sm-5">
+								<input type="submit" class="btn btn-primary" value="Add" th:value="#{t_add}" />
 							</div>
-							
-							<div class="form-group">
-								<label for="password" class="control-label col-sm-4">
-									<span th:remove="tag" th:text="#{t_password}">Password</span>
-									<span class="required_field">*</span>
-								</label>
-								<div class="col-sm-4">
-									<input type="password" id="password" name="password" required="required" value="" class="form-control" />
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<div class="col-sm-offset-4 col-sm-4">
-									<input type="submit" class="btn btn-primary" value="Sign in" th:value="#{t_enter}" />
-								</div>
-							</div>
-							
-						</form>
-					<!--/*/ </th:block> /*/-->
+						</div>
+						
+					</form>
 				</div>
 			</div>
-			<!--/*/
-			<div class="row" sec:authorize="isAuthenticated()">
-				<div class="alert alert-info text-center col-sm-4 col-sm-offset-4" th:text="#{t_already_authenticated}">
-					You have already authenticated.
-				</div>
-			</div>
-			/*/-->
 			<div class="row">
 				<footer class="col-sm-12 text-right">
 					<i class="glyphicon glyphicon-envelope"></i>

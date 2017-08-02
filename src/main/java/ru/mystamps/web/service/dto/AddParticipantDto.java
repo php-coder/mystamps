@@ -15,26 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
-import java.util.Date;
-import java.util.List;
-
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
-
-@SuppressWarnings("PMD.TooManyMethods")
-public interface CountryService {
-	String add(AddCountryDto dto, Integer userId);
-	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	long countAll();
-	long countCountriesOf(Integer collectionId);
-	long countBySlug(String slug);
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countAddedSince(Date date);
-	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	String suggestCountryForUser(Integer userId);
+public interface AddParticipantDto {
+	String getName();
+	String getUrl();
 }

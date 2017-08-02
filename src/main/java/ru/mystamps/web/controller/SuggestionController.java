@@ -15,34 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.model;
+package ru.mystamps.web.controller;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import lombok.RequiredArgsConstructor;
 
-import lombok.Getter;
-import lombok.Setter;
+import ru.mystamps.web.Url;
+import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.service.CountryService;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
-import ru.mystamps.web.support.beanvalidation.Email;
+@Controller
+@RequiredArgsConstructor
+public class SuggestionController {
 
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
+	private final CountryService countryService;
 
-@Getter
-@Setter
-@GroupSequence({
-	RegisterAccountForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class
-})
-public class RegisterAccountForm implements RegisterAccountDto {
-	
-	@NotEmpty(groups = Group.Level1.class)
-	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
-	private String email;
-	
+	/**
+	 * @author John Shkarin
+	 */
+	@ResponseBody
+	@GetMapping(Url.SUGGEST_SERIES_COUNTRY)
+	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
+		return countryService.suggestCountryForUser(currentUserId);
+	}
+
 }
+

@@ -2,7 +2,7 @@
 // IMPORTANT:
 // You have to update Url.RESOURCES_VERSION each time whenever you're modified this file!
 //
-function initPage() {
+function initPage(suggestCountryUrl) {
 	$('#country').selectize();
 	
 	$('.js-catalog-numbers').on('blur', function expandCatalogNumbers() {
@@ -21,4 +21,25 @@ function initPage() {
 	$('.js-with-tooltip').tooltip({
 		'placement': 'right'
 	});
+
+	if (suggestCountryUrl != null) {
+		$.get(suggestCountryUrl, function handleSuggestedCountry(slug) {
+			if (slug == "") {
+				return;
+			}
+
+			var guessCountryLink = $("#js-guess-country-link");
+			guessCountryLink.click(function chooseSuggestedCountry() {
+				guessCountryLink.hide();
+				chooseCountryBySlug(slug);
+			});
+			guessCountryLink.show();
+		});
+	}
+}
+
+function chooseCountryBySlug(slug) {
+	var countrySelectBox = $("#country").selectize();
+	var selectize = countrySelectBox[0].selectize;
+	selectize.setValue(slug);
 }

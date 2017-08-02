@@ -18,12 +18,11 @@
 
 package ru.mystamps.web.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.CronService;
@@ -32,14 +31,14 @@ import ru.mystamps.web.service.MailService;
 /**
  * @author Maxim Shestakov
  */
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class ReportController {
 	
 	private final MailService mailService;
 	private final CronService cronService;
 	
-	@GetMapping(value = Url.DAILY_STATISTICS, produces = {"text/plain; charset=UTF-8"})
+	@GetMapping(path = Url.DAILY_STATISTICS, produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public String showDailyReport() {
 		return mailService.getTextOfDailyStatisticsMail(

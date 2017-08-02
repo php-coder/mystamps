@@ -110,10 +110,10 @@
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
 							<label for="name" class="control-label col-sm-4">
-								<span class="field-label" th:text="#{t_name_in_english}">
+								<span th:remove="tag" th:text="#{t_name_in_english}">
 									Name (in English)
 								</span>
-								<span id="name.required" class="required_field">*</span>
+								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-5">
 								<input id="name" type="text" class="form-control" required="required" th:field="*{name}" />
@@ -125,7 +125,7 @@
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('nameRu') ? 'has-error' : ''}">
 							<label for="nameRu" class="control-label col-sm-4">
-								<span class="field-label" th:text="#{t_name_in_russian}">
+								<span th:remove="tag" th:text="#{t_name_in_russian}">
 									Name (in Russian)
 								</span>
 							</label>

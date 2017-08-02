@@ -31,9 +31,9 @@ TEST_STATUS=
 FINDBUGS_STATUS=
 VERIFY_STATUS=
 
-DANGER_STATUS=
-if [ "${SPRING_PROFILES_ACTIVE:-}" != 'travis' -o "${TRAVIS_PULL_REQUEST:-false}" = 'false' ]; then
-	DANGER_STATUS=skip
+DANGER_STATUS=skip
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
+	DANGER_STATUS=
 fi
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
@@ -204,10 +204,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 fi
 
 print_status "$VERIFY_STATUS" 'Run integration tests'
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	print_status "$DANGER_STATUS" 'Run danger'
-fi
+print_status "$DANGER_STATUS" 'Run danger'
 
 echo
 
@@ -233,10 +230,10 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 fi
 
 # In order to be able debug robot framework test flakes we need to have a report.
-# Just encode it to a binary form and dump to console.
+# Just encode it to a gzipped binary form and dump to console.
 if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
 	echo "===== REPORT START ====="
-	base64 target/robotframework-reports/log.html
+	cat target/robotframework-reports/output.xml | gzip -c | base64
 	echo "===== REPORT END ====="
 fi
 

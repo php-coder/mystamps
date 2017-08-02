@@ -15,26 +15,43 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.controller.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
+import javax.validation.constraints.NotNull;
 
-@SuppressWarnings("PMD.TooManyMethods")
-public interface CountryService {
-	String add(AddCountryDto dto, Integer userId);
-	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	long countAll();
-	long countCountriesOf(Integer collectionId);
-	long countBySlug(String slug);
-	long countByName(String name);
-	long countByNameRu(String name);
-	long countAddedSince(Date date);
-	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
-	String suggestCountryForUser(Integer userId);
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+
+@Getter
+@Setter
+public class AddSeriesSalesForm implements AddSeriesSalesDto {
+	
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
+	private Date date;
+	
+	@NotNull
+	private Integer sellerId;
+	
+	private String url;
+	
+	@NotNull
+	private BigDecimal price;
+	
+	@NotNull
+	private Currency currency;
+	
+	private BigDecimal altPrice;
+	
+	private Currency altCurrency;
+	
+	private Integer buyerId;
+	
 }

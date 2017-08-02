@@ -115,8 +115,8 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('email') ? 'has-error' : ''}">
 								<label class="control-label col-sm-4" for="email">
-									<span class="field-label" th:text="#{t_email}">E-mail</span>
-									<span id="email.required" class="required_field">*</span>
+									<span th:remove="tag" th:text="#{t_email}">E-mail</span>
+									<span class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">
 									<input class="form-control" type="email" id="email" required="required" autofocus="autofocus" th:field="*{email}" />

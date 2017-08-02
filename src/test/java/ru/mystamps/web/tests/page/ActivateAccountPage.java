@@ -38,27 +38,22 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 		hasForm(
 			with(
 				required(inputField("login"))
-					.withLabel(tr("t_login"))
 					.and().
 					invalidValue("x"),
 				
 				inputField("name")
-					.withLabel(tr("t_name"))
 					.and()
 					.invalidValue("x"),
 				
 				required(passwordField("password"))
-					.withLabel(tr("t_password"))
 					.and()
 					.invalidValue("x"),
 				
 				required(passwordField("passwordConfirmation"))
-					.withLabel(tr("t_password_again"))
 					.and()
 					.invalidValue("x"),
 				
 				required(inputField("activationKey"))
-					.withLabel(tr("t_activation_key"))
 					.and()
 					.invalidValue("x")
 			)

@@ -42,6 +42,7 @@ import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyMethods")
 public class CountryServiceImpl implements CountryService {
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
@@ -162,5 +163,39 @@ public class CountryServiceImpl implements CountryService {
 		
 		return countryDao.getStatisticsOf(collectionId, lang);
 	}
-	
+
+	/**
+	 * @author Shkarin John
+	 * @author Slava Semushin
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	public String suggestCountryForUser(Integer userId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+
+		// if user created a series with a country, let's suggest this country to him
+		String slug = countryDao.findCountryOfLastCreatedSeriesByUser(userId);
+		if (slug != null) {
+			LOG.info(
+				"Country {} has been suggested to user #{} from a recently created series",
+				slug,
+				userId
+			);
+			return slug;
+		}
+
+		// user has never created a country but most of the series in his collection
+		// belong to a specific country, let's suggest this country to him
+		slug = countryDao.findPopularCountryInCollection(userId);
+		if (slug != null) {
+			LOG.info(
+				"Country {} has been suggested to user #{} as popular in his collection",
+				slug,
+				userId
+			);
+		}
+		
+		return slug;
+	}
 }

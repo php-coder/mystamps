@@ -36,8 +36,8 @@ public class AddCountryPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("name")).withLabel(tr("t_country_on_english")),
-				inputField("nameRu").withLabel(tr("t_country_on_russian"))
+				required(inputField("name")),
+				inputField("nameRu")
 			)
 			.and()
 			.with(submitButton(tr("t_add")))

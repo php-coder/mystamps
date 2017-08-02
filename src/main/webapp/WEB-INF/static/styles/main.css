@@ -103,7 +103,6 @@ label {
 	padding-left: 5px;
 }
 
-/* fix unreadable tooltip on Google Charts (see #367) */
-.goog-tooltip {
-	color: white;
+.link-vcenter {
+	line-height: 34px;
 }

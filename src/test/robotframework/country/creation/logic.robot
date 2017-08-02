@@ -14,6 +14,7 @@ Create country with name in English
 	Submit Form                       id=add-country-form
 	Location Should Be                ${SITE_URL}/country/germany
 	Element Text Should Be            id=page-header  Stamps of Germany
+	Element Text Should Be            id=msg-success  Country has been added.${\n}Now you could proceed with creating series.
 	Go To                             ${SITE_URL}/series/add
 	Country Field Should Have Option  Germany
 

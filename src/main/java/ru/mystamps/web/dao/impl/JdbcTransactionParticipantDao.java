@@ -17,7 +17,11 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -25,6 +29,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
+import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 
 @RequiredArgsConstructor
@@ -32,8 +37,26 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
+	@Value("${transaction_participant.create}")
+	private String addParticipantSql;
+	
 	@Value("${transaction_participants.find_all}")
 	private String findAllParticipantsSql;
+	
+	@Override
+	public void add(AddParticipantDbDto participant) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", participant.getName());
+		params.put("url", participant.getUrl());
+		
+		int affected = jdbcTemplate.update(addParticipantSql, params);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after creation of participant: %d",
+			affected
+		);
+	}
 	
 	@Override
 	public List<EntityWithIdDto> findAllAsEntityWithIdDto() {

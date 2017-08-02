@@ -123,8 +123,8 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('login') ? 'has-error' : ''}">
 								<label for="login" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_login}">Login</span>
-									<span id="login.required" class="required_field">*</span>
+									<span th:remove="tag" th:text="#{t_login}">Login</span>
+									<span class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="login" class="form-control" required="required" th:field="*{login}" />
@@ -136,7 +136,7 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
 								<label for="name" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_name}">Name</span>
+									<span th:remove="tag" th:text="#{t_name}">Name</span>
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="name" class="form-control" th:field="*{name}" />
@@ -148,8 +148,8 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('password') ? 'has-error' : ''}">
 								<label for="password" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_password}">Password</span>
-									<span id="password.required" class="required_field">*</span>
+									<span th:remove="tag" th:text="#{t_password}">Password</span>
+									<span class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">
 									<input type="password" id="password" class="form-control" required="required" th:field="*{password}" />
@@ -161,8 +161,8 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('passwordConfirmation') ? 'has-error' : ''}">
 								<label for="passwordConfirmation" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_password_again}">Retype password</span>
-									<span id="passwordConfirmation.required" class="required_field">*</span>
+									<span th:remove="tag" th:text="#{t_password_again}">Retype password</span>
+									<span class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">
 									<input type="password" id="passwordConfirmation" class="form-control" required="required" th:field="*{passwordConfirmation}" />
@@ -174,8 +174,8 @@
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('activationKey') ? 'has-error' : ''}">
 								<label for="activationKey" class="control-label col-sm-3">
-									<span class="field-label" th:text="#{t_activation_key}">Activation key</span>
-									<span id="activationKey.required" class="required_field">*</span>
+									<span th:remove="tag" th:text="#{t_activation_key}">Activation key</span>
+									<span class="required_field">*</span>
 								</label>
 								<div class="col-sm-5">
 									<input type="text" id="activationKey" class="form-control" required="required" th:field="*{activationKey}" />

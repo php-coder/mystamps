@@ -34,7 +34,7 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("email")).withLabel(tr("t_email")).and().invalidValue("xxx")
+				required(inputField("email")).and().invalidValue("xxx")
 			)
 			.and()
 			.with(submitButton(tr("t_register")))

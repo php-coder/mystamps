@@ -36,6 +36,7 @@ import javax.validation.groups.Default;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,7 +47,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
@@ -56,13 +59,13 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.dto.AddImageForm;
+import ru.mystamps.web.controller.dto.AddSeriesForm;
+import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.model.AddImageForm;
-import ru.mystamps.web.model.AddSeriesForm;
-import ru.mystamps.web.model.AddSeriesSalesForm;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -114,58 +117,63 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
 	}
 	
-	@ModelAttribute("years")
-	public Map<Integer, Integer> getYears() {
-		return YEARS;
-	}
-	
-	@ModelAttribute("categories")
-	public List<FirstLevelCategoryDto> getCategories(Locale userLocale) {
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return categoryService.findFirstLevelCategories(lang);
-	}
-	
-	@ModelAttribute("countries")
-	public List<LinkEntityDto> getCountries(Locale userLocale) {
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		return countryService.findAllAsLinkEntities(lang);
-	}
-	
 	@GetMapping(Url.ADD_SERIES_PAGE)
-	public AddSeriesForm showForm() {
+	public void showForm(
+		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
+		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
+		Model model,
+		Locale userLocale) {
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		
+		List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
+		model.addAttribute("categories", categories);
+		
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		model.addAttribute("countries", countries);
+		
+		model.addAttribute("years", YEARS);
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
 		
-		return addSeriesForm;
+		if (category != null) {
+			addSeriesForm.setCategory(category);
+		}
+		
+		if (country != null) {
+			addSeriesForm.setCountry(country);
+		}
+		
+		model.addAttribute("addSeriesForm", addSeriesForm);
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
-	public String showFormWithCategory(
-		@Category @PathVariable("slug") LinkEntityDto category,
-		Model model) {
+	public View showFormWithCategory(
+		@PathVariable("slug") String category,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCategory(category);
+		redirectAttributes.addAttribute("category", category);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@GetMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
-	public String showFormWithCountry(
-		@Country @PathVariable("slug") LinkEntityDto country,
-		Model model) {
+	public View showFormWithCountry(
+		@PathVariable("slug") String country,
+		RedirectAttributes redirectAttributes) {
 		
-		AddSeriesForm form = new AddSeriesForm();
-		form.setPerforated(true);
-		form.setCountry(country);
+		redirectAttributes.addAttribute("country", country);
 		
-		model.addAttribute("addSeriesForm", form);
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.ADD_SERIES_PAGE);
 		
-		return "series/add";
+		return view;
 	}
 	
 	@PostMapping(Url.ADD_SERIES_PAGE)
@@ -174,9 +182,21 @@ public class SeriesController {
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId) {
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		Model model) {
 		
 		if (result.hasErrors()) {
+			String lang = LocaleUtils.getLanguageOrNull(userLocale);
+			
+			List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
+			model.addAttribute("categories", categories);
+			
+			List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+			model.addAttribute("countries", countries);
+			
+			model.addAttribute("years", YEARS);
+			
 			// don't try to re-display file upload field
 			form.setImage(null);
 			return null;

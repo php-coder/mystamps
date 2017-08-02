@@ -10,6 +10,7 @@
 	</Match>
 	<Match>
 		<!--
+<<<<<<< HEAD
 			Our DTO classes expose it's internal representation.
 			Most of the time because they're using Date class and
 			storing data in byte[].
@@ -19,6 +20,8 @@
 	</Match>
 	<Match>
 		<!--
+=======
+>>>>>>> upstream/master
 			It's ok, that we're don't override parent's equals() method.
 		-->
 		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />

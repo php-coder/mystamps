@@ -371,7 +371,7 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
 											<label for="date" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_date}">
+												<span th:remove="tag" th:text="#{t_date}">
 													Date
 												</span>
 											</label>
@@ -385,10 +385,10 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
 											<label for="seller" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_seller}">
+												<span th:remove="tag" th:text="#{t_seller}">
 													Seller
 												</span>
-												<span id="seller.required" class="required_field">*</span>
+												<span class="required_field">*</span>
 											</label>
 											<div class="col-sm-6">
 												<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
@@ -402,6 +402,11 @@
 													<option value="3">Eicca Toppinen</option>
 													<!--*/-->
 												</select>
+												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
+													<span class="hint-block" th:utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}})}">
+														You can also <a tabindex="-1" href="../participant/add.html">add a new seller</a>
+													</span>
+												</small>
 												<!--/*/
 												<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('sellerId')}" th:each="error : ${#fields.errors('sellerId')}" th:text="${error}"></span>
 												/*/-->
@@ -410,7 +415,7 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
 											<label for="url" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_url}">
+												<span th:remove="tag" th:text="#{t_url}">
 													URL
 												</span>
 											</label>
@@ -424,10 +429,10 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
 											<label for="price" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_price}">
+												<span th:remove="tag" th:text="#{t_price}">
 													Price
 												</span>
-												<span id="price.required" class="required_field">*</span>
+												<span class="required_field">*</span>
 											</label>
 											<div class="col-sm-6">
 												<div class="row">
@@ -452,7 +457,7 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
 											<label for="price" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_alternative_price}">
+												<span th:remove="tag" th:text="#{t_alternative_price}">
 													Alternative price
 												</span>
 											</label>
@@ -479,7 +484,7 @@
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
 											<label for="buyer" class="control-label col-sm-3">
-												<span class="field-label" th:text="#{t_buyer}">
+												<span th:remove="tag" th:text="#{t_buyer}">
 													Buyer
 												</span>
 											</label>
@@ -494,6 +499,11 @@
 													<option value="2">Michael Jackson</option>
 													<!--*/-->
 												</select>
+												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
+													<span class="hint-block" th:utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}})}">
+														You can also <a tabindex="-1" href="../participant/add.html">add a new buyer</a>
+													</span>
+												</small>
 												<!--/*/
 												<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyerId')}" th:each="error : ${#fields.errors('buyerId')}" th:text="${error}"></span>
 												/*/-->

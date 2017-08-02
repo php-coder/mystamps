@@ -36,8 +36,8 @@ public class AddCategoryPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("name")).withLabel(tr("t_category_on_english")),
-				inputField("nameRu").withLabel(tr("t_category_on_russian"))
+				required(inputField("name")),
+				inputField("nameRu")
 			)
 			.and()
 			.with(submitButton(tr("t_add")))

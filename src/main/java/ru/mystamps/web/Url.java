@@ -42,20 +42,18 @@ public final class Url {
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
 	public static final String REGISTRATION_PAGE     = "/account/register";
-	
 	public static final String AUTHENTICATION_PAGE   = "/account/auth";
 	public static final String LOGIN_PAGE            = "/account/login";
 	public static final String LOGOUT_PAGE           = "/account/logout";
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
 	
-	// CheckStyle: ignore LineLength for next 3 lines
-	public static final String ADD_SERIES_PAGE               = "/series/add";
-	public static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{slug}";
-	public static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
-	public static final String ADD_SERIES_ASK_PAGE           = "/series/{id}/ask";
-	public static final String INFO_SERIES_PAGE              = "/series/{id}";
-	public static final String ADD_IMAGE_SERIES_PAGE         = "/series/{id}/image";
-	public static final String SEARCH_SERIES_BY_CATALOG      = "/series/search/by_catalog";
+	public static final String ADD_SERIES_PAGE          = "/series/add";
+	public static final String ADD_SERIES_ASK_PAGE      = "/series/{id}/ask";
+	public static final String INFO_SERIES_PAGE         = "/series/{id}";
+	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
+	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
+	
+	public static final String SUGGEST_SERIES_COUNTRY	= "/suggest/series_country";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
@@ -70,6 +68,8 @@ public final class Url {
 	public static final String GET_IMAGE_PAGE         = "/image/{id}";
 	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
+	public static final String ADD_PARTICIPANT_PAGE  = "/participant/add";
+	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
@@ -79,9 +79,11 @@ public final class Url {
 	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
 	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
 	public static final String INFO_COLLECTION_BY_ID_PAGE     = "/collection/{id}/{slug}";
+	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
+	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.0";
+	public static final String RESOURCES_VERSION      = "v0.3.3";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
@@ -124,13 +126,13 @@ public final class Url {
 		map.put("LOGOUT_PAGE", LOGOUT_PAGE);
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
+		map.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
-		map.put("ADD_SERIES_WITH_CATEGORY_PAGE", ADD_SERIES_WITH_CATEGORY_PAGE);
-		map.put("ADD_SERIES_WITH_COUNTRY_PAGE", ADD_SERIES_WITH_COUNTRY_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
+		map.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		map.put("LIST_CATEGORIES_PAGE", LIST_CATEGORIES_PAGE);
