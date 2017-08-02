@@ -39,10 +39,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.service.exception.EmailSendingException;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 public class MailServiceImpl implements MailService {
 	private static final Logger LOG = LoggerFactory.getLogger(MailServiceImpl.class);
@@ -101,7 +104,7 @@ public class MailServiceImpl implements MailService {
 		sendMail(
 			adminEmail,
 			getSubjectOfDailyStatisticsMail(report),
-			getTextOfDailyStatisticsMail(report),
+			prepareDailyStatistics(report),
 			"daily_statistics"
 		);
 		
@@ -114,7 +117,37 @@ public class MailServiceImpl implements MailService {
 			adminLang
 		);
 	}
+	
+	@Override
+	@PreAuthorize(HasAuthority.VIEW_DAILY_STATS)
+	public String prepareDailyStatistics(AdminDailyReport report) {
+		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
+		String fromDate = shortDatePrinter.format(report.getStartDate());
+		String tillDate = shortDatePrinter.format(report.getEndDate());
 
+		Map<String, String> ctx = new HashMap<>();
+		ctx.put("from_date", fromDate);
+		ctx.put("to_date", tillDate);
+
+		put(ctx, "added_countries_cnt", report.getAddedCountriesCounter());
+		put(ctx, "untranslated_countries_cnt", report.getUntranslatedCountriesCounter());
+		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
+		put(ctx, "untranslated_categories_cnt", report.getUntranslatedCategoriesCounter());
+		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
+		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
+		put(ctx, "updated_collections_cnt", report.getUpdatedCollectionsCounter());
+		put(ctx, "registration_requests_cnt", report.getRegistrationRequestsCounter());
+		put(ctx, "registered_users_cnt", report.getRegisteredUsersCounter());
+		put(ctx, "events_cnt", report.countEvents());
+		put(ctx, "not_found_cnt", report.getNotFoundCounter());
+		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
+		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
+		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
+		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
+
+		return new StrSubstitutor(ctx).replace(template);
+	}
+	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void sendMail(
 		final String email,
@@ -182,34 +215,6 @@ public class MailServiceImpl implements MailService {
 		
 		StrSubstitutor substitutor = new StrSubstitutor(ctx);
 		return substitutor.replace(template);
-	}
-
-	private String getTextOfDailyStatisticsMail(AdminDailyReport report) {
-		String template = messageSource.getMessage("daily_stat.text", null, adminLang);
-		String fromDate = shortDatePrinter.format(report.getStartDate());
-		String tillDate = shortDatePrinter.format(report.getEndDate());
-		
-		Map<String, String> ctx = new HashMap<>();
-		ctx.put("from_date", fromDate);
-		ctx.put("to_date", tillDate);
-		
-		put(ctx, "added_countries_cnt", report.getAddedCountriesCounter());
-		put(ctx, "untranslated_countries_cnt", report.getUntranslatedCountriesCounter());
-		put(ctx, "added_categories_cnt", report.getAddedCategoriesCounter());
-		put(ctx, "untranslated_categories_cnt", report.getUntranslatedCategoriesCounter());
-		put(ctx, "added_series_cnt", report.getAddedSeriesCounter());
-		put(ctx, "updated_series_cnt", report.getUpdatedSeriesCounter());
-		put(ctx, "updated_collections_cnt", report.getUpdatedCollectionsCounter());
-		put(ctx, "registration_requests_cnt", report.getRegistrationRequestsCounter());
-		put(ctx, "registered_users_cnt", report.getRegisteredUsersCounter());
-		put(ctx, "events_cnt", report.countEvents());
-		put(ctx, "not_found_cnt", report.getNotFoundCounter());
-		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
-		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
-		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
-		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
-		
-		return new StrSubstitutor(ctx).replace(template);
 	}
 	
 	private static void put(Map<String, String> ctx, String key, long value) {

@@ -30,10 +30,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.service.dto.AdminDailyReport;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {
@@ -55,6 +58,12 @@ public class CronServiceImpl implements CronService {
 	@Scheduled(cron = EVERY_DAY_AT_00_00)
 	@Transactional(readOnly = true)
 	public void sendDailyStatistics() {
+		mailService.sendDailyStatisticsToAdmin(getDailyReport());
+	}
+	
+	@Override
+	@PreAuthorize(HasAuthority.VIEW_DAILY_STATS)
+	public AdminDailyReport getDailyReport() {
 		Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
 		Date yesterday = DateUtils.addDays(today, -1);
 		
@@ -100,7 +109,7 @@ public class CronServiceImpl implements CronService {
 		);
 		report.setInvalidCsrfCounter(invalidCsrfCounter);
 		
-		mailService.sendDailyStatisticsToAdmin(report);
+		return report;
 	}
 	
 	@Override

@@ -87,6 +87,14 @@ public class ControllersConfig {
 	public RobotsTxtController getRobotsTxtController() {
 		return new RobotsTxtController();
 	}
+
+	@Bean
+	public ReportController getReportController() {
+		return new ReportController(
+			servicesConfig.getMailService(),
+			servicesConfig.getCronService()
+		);
+	}
 	
 	@Bean
 	public SeriesController getSeriesController() {
