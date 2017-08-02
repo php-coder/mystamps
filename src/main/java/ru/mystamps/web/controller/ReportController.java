@@ -15,14 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.controller;
 
-import ru.mystamps.web.service.dto.AdminDailyReport;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-public interface CronService {
-	int PURGE_AFTER_DAYS = 3;
-	
-	void sendDailyStatistics();
-	AdminDailyReport getDailyReport();
-	void purgeUsersActivations();
+import lombok.RequiredArgsConstructor;
+
+import ru.mystamps.web.Url;
+import ru.mystamps.web.service.CronService;
+import ru.mystamps.web.service.MailService;
+
+/**
+ * @author Maxim Shestakov
+ */
+@Controller
+@RequiredArgsConstructor
+public class ReportController {
+
+	private final MailService mailService;
+	private final CronService cronService;
+
+	@GetMapping(path = Url.DAILY_STATISTICS, produces = "text/plain; charset=UTF-8")
+	@ResponseBody
+	public String showDailyReport() {
+		return mailService.prepareDailyStatistics(
+			cronService.getDailyReport()
+		);
+	}
+
 }

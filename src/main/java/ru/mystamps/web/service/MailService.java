@@ -23,4 +23,5 @@ import ru.mystamps.web.service.dto.SendUsersActivationDto;
 public interface MailService {
 	void sendActivationKeyToUser(SendUsersActivationDto activation);
 	void sendDailyStatisticsToAdmin(AdminDailyReport report);
+	String prepareDailyStatistics(AdminDailyReport report);
 }
