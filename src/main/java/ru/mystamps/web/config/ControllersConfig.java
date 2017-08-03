@@ -91,7 +91,7 @@ public class ControllersConfig {
 	@Bean
 	public ReportController getReportController() {
 		return new ReportController(
-			servicesConfig.getMailService(),
+			servicesConfig.getReportService(),
 			servicesConfig.getCronService()
 		);
 	}
