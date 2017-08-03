@@ -91,17 +91,27 @@ public class ServicesConfig {
 		boolean enableTestMode = !isProductionEnvironment;
 		
 		return new MailServiceImpl(
+			getReportService(),
 			mailSender,
 			messageSource,
 			env.getProperty("app.mail.admin.email", "root@localhost"),
 			new Locale(env.getProperty("app.mail.admin.lang", "en")),
 			env.getRequiredProperty("app.mail.robot.email"),
-			enableTestMode);
+			enableTestMode
+		);
 	}
 	
 	@Bean
 	public UsersActivationService getUsersActivationService() {
 		return new UsersActivationServiceImpl(daoConfig.getUsersActivationDao(), getMailService());
+	}
+	
+	@Bean
+	public ReportService getReportService() {
+		return new ReportServiceImpl(
+			messageSource,
+			new Locale(env.getProperty("app.mail.admin.lang", "en"))
+		);
 	}
 	
 	@Bean
