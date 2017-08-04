@@ -21,50 +21,12 @@
 					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
 				</div><!--
 				
-				--><div class="col-sm-1 vcenter">
-					<div class="dropdown">
-						<!--/*/
-						<th:block th:switch="${#locale.language}">
-							<th:block th:case="'ru'">
-								<span class="lang-xs" lang="ru"></span>
-								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_russian}">
-									Russian
-								</a>
-							</th:block>
-							<th:block th:case="*">
-						/*/-->
-								<span class="lang-xs" lang="en"></span>
-								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" th:text="#{t_english}">
-									English
-								</a>
-						<!--/*/
-							</th:block>
-						</th:block>
-						/*/-->
-						<span class="caret"></span>
-						<ul class="dropdown-menu" th:switch="${#locale.language}">
-							<!--/*/
-							<li th:case="'ru'">
-								<div class="dropdown-entry-lang">
-									<span class="lang-xs" lang="en"></span>
-									<a href="?lang=en"
-										hreflang="en"
-										th:href="@{${ACTIVATE_ACCOUNT_PAGE}(key=${param.key},lang=en)}"
-										th:text="#{t_english}">English</a>
-								</div>
-							</li>
-							/*/-->
-							<li th:case="*">
-								<div class="dropdown-entry-lang">
-									<span class="lang-xs" lang="ru"></span>
-									<a href="?lang=ru"
-										hreflang="ru"
-										th:href="@{${ACTIVATE_ACCOUNT_PAGE}(key=${param.key},lang=ru)}"
-										th:text="#{t_russian}">Russian</a>
-								</div>
-							</li>
-						</ul>
-					</div>
+				--><div class="col-sm-1 vcenter"
+						th:with="lang=${#locale.language == 'en' ? 'ru' : 'en'},langName=${#locale.language == 'en' ? 'Русский' : 'English'}">
+					<span class="lang-xs" lang="ru"
+						th:lang="${lang}"></span>
+					<a href="javascript:void(0)" hreflang="ru"
+					   th:href="@{${ACTIVATE_ACCOUNT_PAGE}(key=${param.key},lang=${lang})}" th:hreflang="${lang}" th:text="${langName}">Русский</a>
 				</div><!--
 				
 				--><div id="user_bar" class="col-sm-2 vcenter">
