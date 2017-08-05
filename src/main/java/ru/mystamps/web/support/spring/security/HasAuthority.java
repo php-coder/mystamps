@@ -19,15 +19,16 @@ package ru.mystamps.web.support.spring.security;
 
 @SuppressWarnings({ "checkstyle:linelength", "PMD.AvoidDuplicateLiterals" })
 public final class HasAuthority {
+	// Constants are listed in alphabetical order.
 	public static final String ADD_PARTICIPANT = "hasAuthority('" + StringAuthority.ADD_PARTICIPANT + "')";
 	public static final String ADD_SERIES_SALES = "hasAuthority('" + StringAuthority.ADD_SERIES_SALES + "')";
-	public static final String CREATE_SERIES = "hasAuthority('" + StringAuthority.CREATE_SERIES + "')";
 	public static final String CREATE_CATEGORY = "hasAuthority('" + StringAuthority.CREATE_CATEGORY + "')";
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";
-	public static final String VIEW_DAILY_STATS = "hasAuthority('" + StringAuthority.VIEW_DAILY_STATS + "')";
+	public static final String CREATE_SERIES = "hasAuthority('" + StringAuthority.CREATE_SERIES + "')";
 	public static final String UPDATE_COLLECTION = "hasAuthority('" + StringAuthority.UPDATE_COLLECTION + "')";
-	public static final String VIEW_SITE_EVENTS = "hasAuthority('" + StringAuthority.VIEW_SITE_EVENTS + "')";
+	public static final String VIEW_DAILY_STATS = "hasAuthority('" + StringAuthority.VIEW_DAILY_STATS + "')";
 	public static final String VIEW_SERIES_SALES = "hasAuthority('" + StringAuthority.VIEW_SERIES_SALES + "')";
+	public static final String VIEW_SITE_EVENTS = "hasAuthority('" + StringAuthority.VIEW_SITE_EVENTS + "')";
 	
 	private HasAuthority() {
 	}
