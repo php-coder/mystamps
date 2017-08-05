@@ -10,6 +10,8 @@ function initPage(suggestCountryUrl) {
 			return CatalogUtils.expandNumbers(val);
 		});
 	});
+
+	$('.js-collapse-toggle-header').show();
 	
 	$('.collapse').on('show.bs.collapse hide.bs.collapse', function toggleChevron() {
 		$(this)
@@ -17,6 +19,9 @@ function initPage(suggestCountryUrl) {
 			.find('.glyphicon')
 			.toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
 	});
+
+	// emulates collapse('hide') but hides elements faster
+	$('.collapse').not('.has-error, .js-has-data').height(0).removeClass('in').trigger('hide.bs.collapse');
 	
 	$('.js-with-tooltip').tooltip({
 		'placement': 'right'
