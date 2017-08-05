@@ -244,11 +244,11 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${issueDateHasErrors or issueDateHasValues ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">Specify date of release</a>
+								<span class="glyphicon glyphicon-chevron-down"></span>&nbsp;<a href="javascript:void(0)" id="specify-issue-date-link" data-toggle="collapse" data-target=".js-issue-date" th:text="#{t_specify_issue_date}">Specify date of release</a>
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-issue-date" th:classappend="|${issueDateHasErrors ? 'has-error in' : ''} ${issueDateHasValues ? 'in' : ''}|">
+						<div class="form-group form-group-sm js-issue-date collapse in" th:classappend="|${issueDateHasErrors ? 'has-error' : ''} ${issueDateHasValues ? 'js-has-data' : ''}|">
 							<label for="year" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_issue_date}">
 									Date of release
@@ -336,11 +336,12 @@
 						
 						<div class="form-group js-collapse-toggle-header">
 							<div class="col-sm-offset-3 col-sm-7">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${showCatalogsInfo ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">Add information from stamps catalogues</a>
+								<span class="glyphicon glyphicon-chevron-down"></span>&nbsp;
+								<a href="javascript:void(0)" id="add-catalog-numbers-link" data-toggle="collapse" data-target=".js-catalogs-info" th:text="#{t_add_catalogs_info}">Add information from stamps catalogues</a>
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${michelHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${michelHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
 							<label for="michelNumbers" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_michel}">
 									Michel
@@ -365,7 +366,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${scottHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${scottHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
 							<label for="scottNumbers" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_scott}">
 									Scott
@@ -390,7 +391,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${yvertHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${yvertHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
 							<label for="yvertNumbers" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_yvert}">
 									Yvert
@@ -415,7 +416,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm collapse js-catalogs-info" th:classappend="|${gibbonsHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'in' : ''}|">
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${gibbonsHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
 							<label for="gibbonsNumbers" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_sg}">
 									Gibbons
@@ -442,11 +443,11 @@
 						
 						<div class="form-group js-collapse-toggle-header" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<div class="col-sm-offset-3 col-sm-5">
-								<span class="glyphicon glyphicon-chevron-right" th:class="${#fields.hasErrors('comment') or addSeriesForm.comment != null ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'}"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">Add comment</a>
+								<span class="glyphicon glyphicon-chevron-down"></span>&nbsp;<a href="javascript:void(0)" id="add-comment-link" data-toggle="collapse" data-target=".js-comment" th:text="#{t_add_comment}">Add comment</a>
 							</div>
 						</div>
 						
-						<div class="form-group collapse js-comment" th:classappend="|${#fields.hasErrors('comment') ? 'has-error in' : ''} ${addSeriesForm.comment != null ? 'in' : ''}|" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+						<div class="form-group js-comment collapse in" th:classappend="|${#fields.hasErrors('comment') ? 'has-error' : ''} ${addSeriesForm.comment != null ? 'js-has-data' : ''}|" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
 							<label for="comment" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_comment}">
 									Comment
