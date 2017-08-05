@@ -74,6 +74,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authorities.add(Authority.UPDATE_COLLECTION);
 		
 		if (userDetails.isAdmin()) {
+			// Listed in alphabetical order.
 			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
 			authorities.add(Authority.ADD_PARTICIPANT);

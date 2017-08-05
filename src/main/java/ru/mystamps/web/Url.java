@@ -118,7 +118,8 @@ public final class Url {
 	}
 	
 	public static Map<String, String> asMap(boolean serveContentFromSingleHost) {
-		// There is not all urls but only those which used on views
+		// There is not all urls but only those which used on views. 
+		// Listed in alphabetical order.
 		Map<String, String> map = new HashMap<>();
 		map.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
