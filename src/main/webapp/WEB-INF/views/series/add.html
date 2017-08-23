@@ -16,7 +16,9 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body th:onload="|initPage('@{${SUGGEST_SERIES_COUNTRY}}')|" onload="initPage(null)">
+	<body th:with="suggestCountryUrl=${addSeriesForm.country != null and addSeriesForm.country.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_COUNTRY}}__'''}"
+		th:onload="|initPage(${suggestCountryUrl})|"
+		onload="initPage(null)">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
