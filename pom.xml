@@ -10,10 +10,14 @@
 	
 	<dependencies>
 		
+		<!--
+			TODO: use com.github.heneke.thymeleaf from Maven Central when
+			https://github.com/heneke/thymeleaf-extras-togglz/issues/11 will be merged
+		-->
 		<dependency>
-			<groupId>com.github.heneke.thymeleaf</groupId>
+			<groupId>com.github.php-coder</groupId>
 			<artifactId>thymeleaf-extras-togglz</artifactId>
-			<version>${thymeleaf.togglz.version}</version>
+			<version>eb0cfd2833</version>
 		</dependency>
 		
 		<dependency>
@@ -532,8 +536,6 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
-		<thymeleaf.togglz.version>2.0.0.RELEASE</thymeleaf.togglz.version>
-		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<thymeleaf.version>3.0.7.RELEASE</thymeleaf.version>
 		
@@ -1038,5 +1040,12 @@
 	<prerequisites>
 		<maven>3.2.1</maven>
 	</prerequisites>
+	
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 	
 </project>
