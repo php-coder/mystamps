@@ -59,7 +59,10 @@ public class ServicesConfig {
 	
 	@Bean
 	public CategoryService getCategoryService() {
-		return new CategoryServiceImpl(daoConfig.getCategoryDao());
+		return new CategoryServiceImpl(
+			LoggerFactory.getLogger(CategoryServiceImpl.class),
+			daoConfig.getCategoryDao()
+		);
 	}
 	
 	@Bean

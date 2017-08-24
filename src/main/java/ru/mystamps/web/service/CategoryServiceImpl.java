@@ -27,7 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,8 +48,8 @@ import ru.mystamps.web.util.SlugUtils;
 @SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
-	private static final Logger LOG = LoggerFactory.getLogger(CategoryServiceImpl.class);
 	
+	private final Logger log;
 	private final CategoryDao categoryDao;
 	
 	@Override
@@ -80,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
 		category.setUpdatedBy(userId);
 
 		Integer id = categoryDao.add(category);
-		LOG.info("Category #{} has been created ({})", id, category);
+		log.info("Category #{} has been created ({})", id, category);
 		
 		return slug;
 	}

@@ -20,6 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.controller.dto.AddCategoryForm
@@ -33,7 +35,7 @@ class CategoryServiceImplTest extends Specification {
 	private static final Integer USER_ID = 123
 	
 	private final CategoryDao categoryDao = Mock()
-	private final CategoryService service = new CategoryServiceImpl(categoryDao)
+	private final CategoryService service = new CategoryServiceImpl(NOPLogger.NOP_LOGGER, categoryDao)
 	
 	private AddCategoryForm form
 	
