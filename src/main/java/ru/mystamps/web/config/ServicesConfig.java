@@ -152,6 +152,7 @@ public class ServicesConfig {
 	@Bean
 	public UserService getUserService() {
 		return new UserServiceImpl(
+			LoggerFactory.getLogger(UserServiceImpl.class),
 			daoConfig.getUserDao(),
 			getUsersActivationService(),
 			getCollectionService(),

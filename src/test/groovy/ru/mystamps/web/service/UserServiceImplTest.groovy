@@ -21,6 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 import spock.lang.Specification
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
@@ -55,7 +57,13 @@ class UserServiceImplTest extends Specification {
 		activationForm.setName(user.name)
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
-		service = new UserServiceImpl(userDao, usersActivationService, collectionService, encoder)
+		service = new UserServiceImpl(
+			NOPLogger.NOP_LOGGER,
+			userDao,
+			usersActivationService,
+			collectionService,
+			encoder
+		)
 	}
 	
 	//

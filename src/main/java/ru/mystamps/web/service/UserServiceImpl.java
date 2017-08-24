@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +42,7 @@ import static ru.mystamps.web.dao.dto.UserDetails.Role.USER;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
-	
+	private final Logger log;
 	private final UserDao userDao;
 	private final UsersActivationService usersActivationService;
 	private final CollectionService collectionService;
@@ -71,7 +69,7 @@ public class UserServiceImpl implements UserService {
 		String activationKey = dto.getActivationKey();
 		UsersActivationDto activation = usersActivationService.findByActivationKey(activationKey);
 		if (activation == null) {
-			LOG.warn("Cannot find registration request for activation key '{}'", activationKey);
+			log.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
 		}
 		
@@ -95,7 +93,7 @@ public class UserServiceImpl implements UserService {
 		Integer id = userDao.add(user);
 		usersActivationService.remove(activationKey);
 		
-		LOG.info("User #{} has been created ({})", id, user);
+		log.info("User #{} has been created ({})", id, user);
 		
 		collectionService.createCollection(id, user.getLogin());
 	}
