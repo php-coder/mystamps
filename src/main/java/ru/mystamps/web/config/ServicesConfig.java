@@ -146,7 +146,10 @@ public class ServicesConfig {
 	
 	@Bean
 	public SiteService getSiteService() {
-		return new SiteServiceImpl(daoConfig.getSuspiciousActivityDao());
+		return new SiteServiceImpl(
+			LoggerFactory.getLogger(SiteServiceImpl.class),
+			daoConfig.getSuspiciousActivityDao()
+		);
 	}
 	
 	@Bean

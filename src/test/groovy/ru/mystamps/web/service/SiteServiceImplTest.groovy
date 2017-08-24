@@ -20,6 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Unroll
 import spock.lang.Specification
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.Db
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
@@ -39,7 +41,10 @@ class SiteServiceImplTest extends Specification {
 	private SiteServiceImpl serviceImpl
 	
 	def setup() {
-		serviceImpl = Spy(SiteServiceImpl, constructorArgs:[suspiciousActivityDao])
+		serviceImpl = Spy(
+			SiteServiceImpl,
+			constructorArgs:[NOPLogger.NOP_LOGGER, suspiciousActivityDao]
+		)
 	}
 	
 	//

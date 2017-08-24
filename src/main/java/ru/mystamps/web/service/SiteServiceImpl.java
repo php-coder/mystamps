@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,8 +49,7 @@ public class SiteServiceImpl implements SiteService {
 	public static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
 	public static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	
-	private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
-	
+	private final Logger log;
 	private final SuspiciousActivityDao suspiciousActivities;
 	
 	@Override
@@ -159,15 +157,15 @@ public class SiteServiceImpl implements SiteService {
 	 * @return name of the method as-is or its abbreviation with three points at the end
 	 * @author Aleksandr Zorin
 	 */
-	private static String abbreviateMethod(String method) {
+	private String abbreviateMethod(String method) {
 		return abbreviateIfLengthGreaterThan(method, Db.SuspiciousActivity.METHOD_LENGTH, "method");
 	}
 	
-	private static String abbreviatePage(String page) {
+	private String abbreviatePage(String page) {
 		return abbreviateIfLengthGreaterThan(page, Db.SuspiciousActivity.PAGE_URL_LENGTH, "page");
 	}
 	
-	private static String abbreviateRefererPage(String referer) {
+	private String abbreviateRefererPage(String referer) {
 		return abbreviateIfLengthGreaterThan(
 			referer,
 			Db.SuspiciousActivity.REFERER_PAGE_LENGTH,
@@ -175,7 +173,7 @@ public class SiteServiceImpl implements SiteService {
 		);
 	}
 	
-	private static String abbreviateUserAgent(String agent) {
+	private String abbreviateUserAgent(String agent) {
 		return abbreviateIfLengthGreaterThan(
 			agent,
 			Db.SuspiciousActivity.USER_AGENT_LENGTH,
@@ -184,13 +182,13 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	// CheckStyle: ignore LineLength for next 1 lines
-	private static String abbreviateIfLengthGreaterThan(String text, int maxLength, String fieldName) {
+	private String abbreviateIfLengthGreaterThan(String text, int maxLength, String fieldName) {
 		if (text == null || text.length() <= maxLength) {
 			return text;
 		}
 		
 		// TODO(security): fix possible log injection
-		LOG.warn(
+		log.warn(
 				"Length of value for '{}' field ({}) exceeds max field size ({}): '{}'",
 				fieldName,
 				text.length(),
