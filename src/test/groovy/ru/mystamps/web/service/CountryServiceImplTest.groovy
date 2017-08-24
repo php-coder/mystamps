@@ -419,4 +419,61 @@ class CountryServiceImplTest extends Specification {
 			) >> null
 	}
 	
+	//
+	// Tests for suggestCountryForUser()
+	//
+	
+	def 'suggestCountryForUser() should throw exception when user id is null'() {
+		when:
+			service.suggestCountryForUser(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'suggestCountryForUser() should return country of the last created series'() {
+		given:
+			Integer expectedUserId = 18
+			String expectedSlug = 'brazil'
+		when:
+			String slug = service.suggestCountryForUser(expectedUserId)
+		then:
+			1 * countryDao.findCountryOfLastCreatedSeriesByUser(
+				{ Integer userId ->
+					assert expectedUserId == userId
+					return true
+				}
+			) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'suggestCountryForUser() should return popular country from collection'() {
+		given:
+			Integer expectedUserId = 19
+			String expectedSlug = 'mexica'
+		when:
+			String slug = service.suggestCountryForUser(expectedUserId)
+		then:
+			1 * countryDao.findPopularCountryInCollection(
+				{ Integer userId ->
+					assert expectedUserId == userId
+					return true
+				}
+			) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+	
+	def 'suggestCountryForUser() should return null when cannot suggest'() {
+		when:
+			String slug = service.suggestCountryForUser(20)
+		then:
+			1 * countryDao.findCountryOfLastCreatedSeriesByUser(_ as Integer) >> null
+			1 * countryDao.findPopularCountryInCollection(_ as Integer) >> null
+		and:
+			slug == null
+	}
+	
 }
