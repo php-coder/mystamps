@@ -20,6 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.controller.dto.AddCountryForm
@@ -33,7 +35,7 @@ class CountryServiceImplTest extends Specification {
 	private static final Integer USER_ID = 321
 	
 	private final CountryDao countryDao = Mock()
-	private final CountryService service = new CountryServiceImpl(countryDao)
+	private final CountryService service = new CountryServiceImpl(NOPLogger.NOP_LOGGER, countryDao)
 	
 	private AddCountryForm form
 	

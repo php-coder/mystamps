@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,8 +43,8 @@ import ru.mystamps.web.util.SlugUtils;
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.TooManyMethods")
 public class CountryServiceImpl implements CountryService {
-	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceImpl.class);
 	
+	private final Logger log;
 	private final CountryDao countryDao;
 	
 	@Override
@@ -76,7 +75,7 @@ public class CountryServiceImpl implements CountryService {
 		
 		Integer id = countryDao.add(country);
 		
-		LOG.info("Country #{} has been created ({})", id, country);
+		log.info("Country #{} has been created ({})", id, country);
 		
 		return slug;
 	}
@@ -177,7 +176,7 @@ public class CountryServiceImpl implements CountryService {
 		// if user created a series with a country, let's suggest this country to him
 		String slug = countryDao.findCountryOfLastCreatedSeriesByUser(userId);
 		if (slug != null) {
-			LOG.info(
+			log.info(
 				"Country {} has been suggested to user #{} from a recently created series",
 				slug,
 				userId
@@ -189,7 +188,7 @@ public class CountryServiceImpl implements CountryService {
 		// belong to a specific country, let's suggest this country to him
 		slug = countryDao.findPopularCountryInCollection(userId);
 		if (slug != null) {
-			LOG.info(
+			log.info(
 				"Country {} has been suggested to user #{} as popular in his collection",
 				slug,
 				userId
