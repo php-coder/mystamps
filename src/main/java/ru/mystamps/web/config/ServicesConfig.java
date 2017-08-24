@@ -129,6 +129,7 @@ public class ServicesConfig {
 	@Bean
 	public SeriesService getSeriesService() {
 		return new SeriesServiceImpl(
+			LoggerFactory.getLogger(SeriesServiceImpl.class),
 			daoConfig.getSeriesDao(),
 			getImageService(),
 			getMichelCatalogService(),

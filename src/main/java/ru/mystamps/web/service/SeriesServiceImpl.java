@@ -25,7 +25,6 @@ import java.util.Set;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,8 +52,8 @@ import ru.mystamps.web.util.CatalogUtils;
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
-	private static final Logger LOG = LoggerFactory.getLogger(SeriesServiceImpl.class);
 	
+	private final Logger log;
 	private final SeriesDao seriesDao;
 	private final ImageService imageService;
 	private final StampsCatalogService michelCatalogService;
@@ -162,7 +161,7 @@ public class SeriesServiceImpl implements SeriesService {
 			throw ex;
 		}
 		
-		LOG.info("Series #{} has been created ({})", id, series);
+		log.info("Series #{} has been created ({})", id, series);
 		
 		return id;
 	}
@@ -188,7 +187,7 @@ public class SeriesServiceImpl implements SeriesService {
 			throw ex;
 		}
 		
-		LOG.info(
+		log.info(
 			"Image #{} has been added to series #{} by user #{}",
 			imageId,
 			seriesId,

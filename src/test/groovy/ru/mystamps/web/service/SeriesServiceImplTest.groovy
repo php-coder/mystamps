@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.dao.dto.Currency
@@ -66,6 +68,7 @@ class SeriesServiceImplTest extends Specification {
 		imageService.save(_) >> TestObjects.createImageInfoDto()
 		
 		service = new SeriesServiceImpl(
+			NOPLogger.NOP_LOGGER,
 			seriesDao,
 			imageService,
 			michelCatalogService,
