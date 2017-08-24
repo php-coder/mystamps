@@ -35,6 +35,7 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.CouplingBetweenObjects")
 public class ServicesConfig {
 	
 	private final DaoConfig daoConfig;
