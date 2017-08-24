@@ -24,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,8 +40,8 @@ import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class CollectionServiceImpl implements CollectionService {
-	private static final Logger LOG = LoggerFactory.getLogger(CollectionServiceImpl.class);
 	
+	private final Logger log;
 	private final CollectionDao collectionDao;
 	
 	@Override
@@ -64,7 +63,7 @@ public class CollectionServiceImpl implements CollectionService {
 		
 		Integer id = collectionDao.add(collection);
 		
-		LOG.info("Collection #{} has been created ({})", id, collection);
+		log.info("Collection #{} has been created ({})", id, collection);
 	}
 	
 	@Override
@@ -77,7 +76,7 @@ public class CollectionServiceImpl implements CollectionService {
 		collectionDao.addSeriesToUserCollection(userId, seriesId);
 		collectionDao.markAsModified(userId, new Date());
 		
-		LOG.info("Series #{} has been added to collection of user #{}", seriesId, userId);
+		log.info("Series #{} has been added to collection of user #{}", seriesId, userId);
 	}
 	
 	@Override
@@ -90,7 +89,7 @@ public class CollectionServiceImpl implements CollectionService {
 		collectionDao.removeSeriesFromUserCollection(userId, seriesId);
 		collectionDao.markAsModified(userId, new Date());
 		
-		LOG.info("Series #{} has been removed from collection of user #{}", seriesId, userId);
+		log.info("Series #{} has been removed from collection of user #{}", seriesId, userId);
 	}
 	
 	@Override
