@@ -26,7 +26,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,8 +43,8 @@ import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
 public class UsersActivationServiceImpl implements UsersActivationService {
-	private static final Logger LOG = LoggerFactory.getLogger(UsersActivationServiceImpl.class);
 	
+	private final Logger log;
 	private final UsersActivationDao usersActivationDao;
 	private final MailService mailService;
 	
@@ -63,7 +62,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		activation.setCreatedAt(new Date());
 		usersActivationDao.add(activation);
 		
-		LOG.info("Users activation has been created ({})", activation);
+		log.info("Users activation has been created ({})", activation);
 		
 		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
 			mailService.sendActivationKeyToUser(new SendUsersActivationDto(activation));
@@ -77,7 +76,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		
 		usersActivationDao.removeByActivationKey(activationKey);
 		
-		LOG.info("Users activation '{}' has been deleted", activationKey);
+		log.info("Users activation '{}' has been deleted", activationKey);
 	}
 	
 	@Override

@@ -20,6 +20,8 @@ package ru.mystamps.web.service
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
@@ -44,7 +46,7 @@ class UsersActivationServiceImplTest extends Specification {
 		registrationForm = new RegisterAccountForm()
 		registrationForm.setEmail('john.dou@example.org')
 		
-		service = new UsersActivationServiceImpl(usersActivationDao, mailService)
+		service = new UsersActivationServiceImpl(NOPLogger.NOP_LOGGER, usersActivationDao, mailService)
 	}
 	
 	//
