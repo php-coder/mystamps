@@ -30,7 +30,7 @@ public class SeriesInfoDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	
-	@SuppressWarnings({"checkstyle:parameternumber", "PMD.ExcessiveParameterList"})
+	@SuppressWarnings({ "checkstyle:parameternumber", "PMD.ExcessiveParameterList" })
 	public SeriesInfoDto(
 			Integer id,
 			Integer categoryId, String categorySlug, String categoryName,

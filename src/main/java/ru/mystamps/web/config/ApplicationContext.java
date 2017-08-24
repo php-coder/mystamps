@@ -36,7 +36,7 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 	TaskExecutorConfig.class,
 	TogglzConfig.class
 })
-@SuppressWarnings({"checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass"})
+@SuppressWarnings({ "checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass" })
 public class ApplicationContext {
 	
 	@Bean

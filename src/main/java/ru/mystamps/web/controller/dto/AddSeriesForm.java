@@ -57,7 +57,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @Getter
 @Setter
 // TODO: combine price with currency to separate class
-@SuppressWarnings({"PMD.TooManyFields", "PMD.AvoidDuplicateLiterals"})
+@SuppressWarnings({ "PMD.TooManyFields", "PMD.AvoidDuplicateLiterals" })
 @NotNullIfFirstField.List({
 	@NotNullIfFirstField(
 		first = "month", second = "year", message = "{month.requires.year}",

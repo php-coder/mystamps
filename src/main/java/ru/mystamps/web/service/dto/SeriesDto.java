@@ -30,7 +30,7 @@ public class SeriesDto {
 	private final CatalogInfoDto gibbons;
 	private final List<Integer> imageIds;
 	
-	@SuppressWarnings({"checkstyle:parameternumber", "PMD.ExcessiveParameterList"})
+	@SuppressWarnings({ "checkstyle:parameternumber", "PMD.ExcessiveParameterList" })
 	public SeriesDto(
 		SeriesFullInfoDto info,
 		List<String> michelNumbers,

@@ -125,7 +125,7 @@ public class SiteServiceImpl implements SiteService {
 	}
 	
 	// protected for using in unit tests
-	@SuppressWarnings({"PMD.UseObjectForClearerAPI", "checkstyle:parameternumber"})
+	@SuppressWarnings({ "PMD.UseObjectForClearerAPI", "checkstyle:parameternumber" })
 	protected void logEvent(
 			String type,
 			String page,

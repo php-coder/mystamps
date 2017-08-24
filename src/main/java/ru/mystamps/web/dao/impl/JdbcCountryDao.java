@@ -39,7 +39,7 @@ import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCountryDao implements CountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
