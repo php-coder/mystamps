@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public abstract class WebDriverFactory {
+public final class WebDriverFactory {
 	
 	private static WebDriver driver;
 	

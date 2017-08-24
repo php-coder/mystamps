@@ -8,9 +8,6 @@
 	<!-- false positives due to Lombok usage -->
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.controller.dto" />
 	
-	<!-- I don't want to rename WebDriverFactory to AbstractWebDriverFactory -->
-	<suppress checks="AbstractClassName" files="ru.mystamps.web.tests.WebDriverFactory" />
-	
 	<!-- These files will be removed during porting integration tests to Cucumber JVM (see #18) -->
 	<suppress checks="ImportOrder" files="src/test/java/ru/mystamps/web/tests" />
 	
