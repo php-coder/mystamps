@@ -90,6 +90,7 @@ public class ServicesConfig {
 	@Bean
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
+			LoggerFactory.getLogger(ImageServiceImpl.class),
 			strategiesConfig.getImagePersistenceStrategy(),
 			new TimedImagePreviewStrategy(new ThumbnailatorImagePreviewStrategy()),
 			daoConfig.getImageDao()

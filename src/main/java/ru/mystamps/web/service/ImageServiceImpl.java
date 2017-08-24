@@ -23,7 +23,6 @@ import java.util.Locale;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,8 +45,8 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
-	private static final Logger LOG = LoggerFactory.getLogger(ImageServiceImpl.class);
 	
+	private final Logger log;
 	private final ImagePersistenceStrategy imagePersistenceStrategy;
 	private final ImagePreviewStrategy imagePreviewStrategy;
 	private final ImageDao imageDao;
@@ -77,7 +76,7 @@ public class ImageServiceImpl implements ImageService {
 		}
 		
 		ImageInfoDto imageInfo = new ImageInfoDto(imageId, imageType);
-		LOG.info("Image info has been saved to database ({})", imageInfo);
+		log.info("Image info has been saved to database ({})", imageInfo);
 		
 		imagePersistenceStrategy.save(file, imageInfo);
 		
@@ -134,7 +133,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		imageDao.addToSeries(seriesId, imageId);
 		
-		LOG.info("Series #{}: image #{} was added", seriesId, imageId);
+		log.info("Series #{}: image #{} was added", seriesId, imageId);
 	}
 	
 	@Override
@@ -161,7 +160,7 @@ public class ImageServiceImpl implements ImageService {
 			return new DbImageDto("jpeg", preview);
 			
 		} catch (CreateImagePreviewException | ImagePersistenceException ex) {
-			LOG.warn(
+			log.warn(
 				String.format("Image #%d: couldn't create/save preview", previewInfo.getId()),
 				ex
 			);

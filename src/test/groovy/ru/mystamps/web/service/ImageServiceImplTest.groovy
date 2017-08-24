@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import org.slf4j.helpers.NOPLogger
+
 import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
@@ -35,8 +37,12 @@ class ImageServiceImplTest extends Specification {
 	private final ImagePreviewStrategy imagePreviewStrategy = Mock()
 	private final ImagePersistenceStrategy imagePersistenceStrategy = Mock()
 	
-	private final ImageService service =
-		new ImageServiceImpl(imagePersistenceStrategy, imagePreviewStrategy, imageDao)
+	private final ImageService service = new ImageServiceImpl(
+		NOPLogger.NOP_LOGGER,
+		imagePersistenceStrategy,
+		imagePreviewStrategy,
+		imageDao
+	)
 	
 	def setup() {
 		multipartFile.size >> 1024L
