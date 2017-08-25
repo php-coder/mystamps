@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.slf4j.helpers.NOPLogger
+
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
@@ -35,6 +37,7 @@ class CronServiceImplTest extends Specification {
 	private final UsersActivationService usersActivationService = Mock()
 	
 	private final CronService service = new CronServiceImpl(
+		NOPLogger.NOP_LOGGER,
 		categoryService,
 		countryService,
 		collectionService,

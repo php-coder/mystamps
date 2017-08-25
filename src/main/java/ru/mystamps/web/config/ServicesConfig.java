@@ -77,6 +77,7 @@ public class ServicesConfig {
 	@Bean
 	public CronService getCronService() {
 		return new CronServiceImpl(
+			LoggerFactory.getLogger(CronServiceImpl.class),
 			getCategoryService(),
 			getCountryService(),
 			getCollectionService(),

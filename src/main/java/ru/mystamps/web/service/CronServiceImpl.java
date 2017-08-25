@@ -25,7 +25,6 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +42,7 @@ public class CronServiceImpl implements CronService {
 	private static final String EVERY_DAY_AT_00_00 = "0 0 0 * * *";
 	private static final String EVERY_DAY_AT_00_30 = "0 30 0 * * *";
 	
-	private static final Logger LOG = LoggerFactory.getLogger(CronServiceImpl.class);
-	
+	private final Logger log;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
 	private final CollectionService collectionService;
@@ -122,12 +120,12 @@ public class CronServiceImpl implements CronService {
 		Validate.validState(expiredActivations != null, "Expired activations must be non null");
 		
 		if (expiredActivations.isEmpty()) {
-			LOG.info("Expired activations were not found.");
+			log.info("Expired activations were not found.");
 			return;
 		}
 		
 		for (UsersActivationFullDto activation : expiredActivations) {
-			LOG.info(
+			log.info(
 				"Delete expired activation (key: {}, email: {}, created: {})",
 				activation.getActivationKey(),
 				activation.getEmail(),
