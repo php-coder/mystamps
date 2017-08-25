@@ -22,7 +22,6 @@ import java.util.List;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,9 +37,8 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class TransactionParticipantServiceImpl implements TransactionParticipantService {
-	private static final Logger LOG =
-		LoggerFactory.getLogger(TransactionParticipantServiceImpl.class);
 	
+	private final Logger log;
 	private final TransactionParticipantDao transactionParticipantDao;
 	
 	@Override
@@ -56,7 +54,7 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		
 		transactionParticipantDao.add(participant);
 		
-		LOG.info("Participant with name '{}' has been created", participant.getName());
+		log.info("Participant with name '{}' has been created", participant.getName());
 	}
 	
 	@Override

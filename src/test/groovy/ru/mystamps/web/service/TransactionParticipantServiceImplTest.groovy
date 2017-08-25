@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.slf4j.helpers.NOPLogger
+
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.TransactionParticipantDao
@@ -28,8 +30,10 @@ import ru.mystamps.web.controller.dto.AddParticipantForm
 class TransactionParticipantServiceImplTest extends Specification {
 	
 	private final TransactionParticipantDao transactionParticipantDao = Mock()
-	private final TransactionParticipantService service =
-		new TransactionParticipantServiceImpl(transactionParticipantDao)
+	private final TransactionParticipantService service = new TransactionParticipantServiceImpl(
+		NOPLogger.NOP_LOGGER,
+		transactionParticipantDao
+	)
 	
 	//
 	// Tests for add()

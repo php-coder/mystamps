@@ -210,7 +210,10 @@ public class ServicesConfig {
 	
 	@Bean
 	public TransactionParticipantService getTransactionParticipantService() {
-		return new TransactionParticipantServiceImpl(daoConfig.getTransactionParticipantDao());
+		return new TransactionParticipantServiceImpl(
+			LoggerFactory.getLogger(TransactionParticipantServiceImpl.class),
+			daoConfig.getTransactionParticipantDao()
+		);
 	}
 	
 }
