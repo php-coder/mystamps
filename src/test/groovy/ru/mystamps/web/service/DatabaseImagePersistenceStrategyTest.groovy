@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.slf4j.helpers.NOPLogger
+
 import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
@@ -34,7 +36,10 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private final MultipartFile multipartFile = Mock()
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
-	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(imageDataDao)
+	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(
+		NOPLogger.NOP_LOGGER,
+		imageDataDao
+	)
 	
 	//
 	// Tests for save()

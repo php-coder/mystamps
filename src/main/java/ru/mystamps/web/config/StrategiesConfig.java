@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.config;
 
+import org.slf4j.LoggerFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -42,7 +44,10 @@ public interface StrategiesConfig {
 		@Bean
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
-			return new DatabaseImagePersistenceStrategy(daoConfig.getImageDataDao());
+			return new DatabaseImagePersistenceStrategy(
+				LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class),
+				daoConfig.getImageDataDao()
+			);
 		}
 		
 	}

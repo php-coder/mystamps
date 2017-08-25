@@ -22,7 +22,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,14 +36,13 @@ import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 @RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
-	private static final Logger LOG =
-		LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class);
 	
+	private final Logger log;
 	private final ImageDataDao imageDataDao;
 	
 	@PostConstruct
 	public void init() {
-		LOG.info("Images will be saved into in-memory database");
+		log.info("Images will be saved into in-memory database");
 	}
 	
 	@Override
@@ -56,7 +54,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 			imageData.setPreview(false);
 			
 			Integer id = imageDataDao.add(imageData);
-			LOG.info("Image #{}: meta data has been saved to #{}", image.getId(), id);
+			log.info("Image #{}: meta data has been saved to #{}", image.getId(), id);
 
 		} catch (IOException e) {
 			// throw RuntimeException for rolling back transaction
@@ -73,14 +71,14 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		
 		imageDataDao.add(imageData);
 		
-		LOG.info("Image #{}: preview has been saved", image.getId());
+		log.info("Image #{}: preview has been saved", image.getId());
 	}
 	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
 		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), false);
 		if (imageDto == null) {
-			LOG.warn("Image #{}: content not found", image.getId());
+			log.warn("Image #{}: content not found", image.getId());
 			return null;
 		}
 		
@@ -91,7 +89,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	public ImageDto getPreview(ImageInfoDto image) {
 		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), true);
 		if (imageDto == null) {
-			LOG.info("Image #{}: preview not found", image.getId());
+			log.info("Image #{}: preview not found", image.getId());
 			return null;
 		}
 		
