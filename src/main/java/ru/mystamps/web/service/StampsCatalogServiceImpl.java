@@ -23,7 +23,6 @@ import java.util.Set;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +35,8 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class StampsCatalogServiceImpl implements StampsCatalogService {
-	private static final Logger LOG = LoggerFactory.getLogger(StampsCatalogServiceImpl.class);
 	
+	private final Logger log;
 	private final String catalogName;
 	private final StampsCatalogDao stampsCatalogDao;
 	
@@ -51,7 +50,7 @@ public class StampsCatalogServiceImpl implements StampsCatalogService {
 		List<String> insertedNumbers = stampsCatalogDao.add(catalogNumbers);
 		
 		if (!insertedNumbers.isEmpty()) {
-			LOG.info("{} numbers {} were created", catalogName, insertedNumbers);
+			log.info("{} numbers {} were created", catalogName, insertedNumbers);
 		}
 	}
 	
@@ -65,7 +64,7 @@ public class StampsCatalogServiceImpl implements StampsCatalogService {
 		
 		stampsCatalogDao.addToSeries(seriesId, catalogNumbers);
 		
-		LOG.info("Series #{}: {} numbers {} were added", seriesId, catalogName, catalogNumbers);
+		log.info("Series #{}: {} numbers {} were added", seriesId, catalogName, catalogNumbers);
 	}
 	
 	@Override

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.slf4j.helpers.NOPLogger
+
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.StampsCatalogDao
@@ -26,7 +28,11 @@ class StampsCatalogServiceImplTest extends Specification {
 	
 	private final StampsCatalogDao stampsCatalogDao = Mock()
 	
-	private final StampsCatalogService service = new StampsCatalogServiceImpl('TestCatalog', stampsCatalogDao)
+	private final StampsCatalogService service = new StampsCatalogServiceImpl(
+		NOPLogger.NOP_LOGGER,
+		'TestCatalog',
+		stampsCatalogDao
+	)
 	
 	//
 	// Tests for add()

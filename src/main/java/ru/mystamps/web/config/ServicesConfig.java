@@ -174,22 +174,38 @@ public class ServicesConfig {
 	
 	@Bean
 	public StampsCatalogService getMichelCatalogService() {
-		return new StampsCatalogServiceImpl("Michel", daoConfig.getMichelCatalogDao());
+		return new StampsCatalogServiceImpl(
+			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+			"Michel",
+			daoConfig.getMichelCatalogDao()
+		);
 	}
 	
 	@Bean
 	public StampsCatalogService getScottCatalogService() {
-		return new StampsCatalogServiceImpl("Scott", daoConfig.getScottCatalogDao());
+		return new StampsCatalogServiceImpl(
+			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+			"Scott",
+			daoConfig.getScottCatalogDao()
+		);
 	}
 	
 	@Bean
 	public StampsCatalogService getYvertCatalogService() {
-		return new StampsCatalogServiceImpl("Yvert", daoConfig.getYvertCatalogDao());
+		return new StampsCatalogServiceImpl(
+			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+			"Yvert",
+			daoConfig.getYvertCatalogDao()
+		);
 	}
 	
 	@Bean
 	public StampsCatalogService getGibbonsCatalogService() {
-		return new StampsCatalogServiceImpl("Gibbons", daoConfig.getGibbonsCatalogDao());
+		return new StampsCatalogServiceImpl(
+			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+			"Gibbons",
+			daoConfig.getGibbonsCatalogDao()
+		);
 	}
 	
 	@Bean
