@@ -62,6 +62,7 @@ public interface StrategiesConfig {
 		@Override
 		public ImagePersistenceStrategy getImagePersistenceStrategy() {
 			return new FilesystemImagePersistenceStrategy(
+				LoggerFactory.getLogger(FilesystemImagePersistenceStrategy.class),
 				env.getRequiredProperty("app.upload.dir"),
 				env.getRequiredProperty("app.preview.dir")
 			);

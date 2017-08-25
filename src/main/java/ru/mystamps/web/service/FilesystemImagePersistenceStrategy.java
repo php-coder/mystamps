@@ -27,7 +27,6 @@ import java.util.Locale;
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,26 +36,26 @@ import ru.mystamps.web.service.dto.FsImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
-	private static final Logger LOG =
-		LoggerFactory.getLogger(FilesystemImagePersistenceStrategy.class);
 	
+	private final Logger log;
 	private final File storageDir;
 	private final File previewDir;
 	
-	public FilesystemImagePersistenceStrategy(String storageDir, String previewDir) {
+	public FilesystemImagePersistenceStrategy(Logger logger, String storageDir, String previewDir) {
+		this.log = logger;
 		this.storageDir = new File(storageDir);
 		this.previewDir = new File(previewDir);
 	}
 	
 	@PostConstruct
 	public void init() {
-		LOG.info("Images will be saved into {} directory", storageDir);
+		log.info("Images will be saved into {} directory", storageDir);
 		
 		if (!storageDir.exists()) { // NOPMD: ConfusingTernary (it's ok for me)
-			LOG.warn("Directory '{}' doesn't exist! Image uploading won't work.", storageDir);
+			log.warn("Directory '{}' doesn't exist! Image uploading won't work.", storageDir);
 		
 		} else if (!storageDir.canWrite()) {
-			LOG.warn(
+			log.warn(
 				// TODO(java9): log also user: ProcessHandle.current().info().user()
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image uploading won't work.",
@@ -64,17 +63,17 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			);
 		}
 		
-		LOG.info("Image previews will be saved into {} directory", previewDir);
+		log.info("Image previews will be saved into {} directory", previewDir);
 		
 		if (!previewDir.exists()) { // NOPMD: ConfusingTernary (it's ok for me)
-			LOG.warn(
+			log.warn(
 				"Directory '{}' doesn't exist! Image preview generation won't work",
 				previewDir
 			);
 		
 		} else if (!previewDir.canWrite()) {
 			// TODO(java9): log also user: ProcessHandle.current().info().user()
-			LOG.warn(
+			log.warn(
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image preview generation won't work",
 				previewDir
@@ -88,7 +87,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Path dest = generateFilePath(storageDir, image);
 			writeToFile(file, dest);
 			
-			LOG.info("Image data has been written into file {}", dest);
+			log.info("Image data has been written into file {}", dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);
@@ -101,7 +100,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Path dest = generateFilePath(previewDir, image);
 			writeToFile(data, dest);
 			
-			LOG.info("Image preview data has been written into file {}", dest);
+			log.info("Image preview data has been written into file {}", dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);
@@ -124,7 +123,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		try {
 			Files.deleteIfExists(dest);
 		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException
-			LOG.warn("Couldn't delete file {}: {}", dest, ex.getMessage());
+			log.warn("Couldn't delete file {}: {}", dest, ex.getMessage());
 		}
 	}
 	
@@ -164,7 +163,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		Path dest = generateFilePath(dir, image);
 		if (!exists(dest)) {
 			if (logWarning) {
-				LOG.warn(
+				log.warn(
 					"Image #{}: content not found ({} doesn't exist)",
 					image.getId(),
 					dest
