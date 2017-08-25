@@ -147,7 +147,10 @@ public class ServicesConfig {
 	
 	@Bean
 	public SeriesSalesService getSeriesSalesService() {
-		return new SeriesSalesServiceImpl(daoConfig.getSeriesSalesDao());
+		return new SeriesSalesServiceImpl(
+			LoggerFactory.getLogger(SeriesSalesServiceImpl.class),
+			daoConfig.getSeriesSalesDao()
+		);
 	}
 	
 	@Bean

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import org.slf4j.helpers.NOPLogger
+
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -30,7 +32,10 @@ import ru.mystamps.web.tests.DateUtils
 class SeriesSalesServiceImplTest extends Specification {
 	
 	private final SeriesSalesDao seriesSalesDao = Mock()
-	private final SeriesSalesService service = new SeriesSalesServiceImpl(seriesSalesDao)
+	private final SeriesSalesService service = new SeriesSalesServiceImpl(
+		NOPLogger.NOP_LOGGER,
+		seriesSalesDao
+	)
 	
 	private AddSeriesSalesForm form
 	

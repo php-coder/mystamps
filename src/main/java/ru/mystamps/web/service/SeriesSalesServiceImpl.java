@@ -22,7 +22,6 @@ import java.util.Date;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,8 +37,7 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 @RequiredArgsConstructor
 public class SeriesSalesServiceImpl implements SeriesSalesService {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(SeriesSalesServiceImpl.class);
-	
+	private final Logger log;
 	private final SeriesSalesDao seriesSalesDao;
 	
 	@Override
@@ -73,7 +71,7 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 		
 		seriesSalesDao.add(sale);
 		
-		LOG.info("Sale for series #{} has been added by user #{}", seriesId, userId);
+		log.info("Sale for series #{} has been added by user #{}", seriesId, userId);
 	}
 	
 }
