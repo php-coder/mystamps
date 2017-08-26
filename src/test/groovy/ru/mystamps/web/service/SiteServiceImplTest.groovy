@@ -40,6 +40,7 @@ class SiteServiceImplTest extends Specification {
 	
 	private SiteServiceImpl serviceImpl
 	
+	@SuppressWarnings('SpaceAfterComma') // false positive
 	def setup() {
 		serviceImpl = Spy(
 			SiteServiceImpl,

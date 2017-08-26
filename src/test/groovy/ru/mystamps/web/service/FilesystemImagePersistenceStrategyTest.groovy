@@ -38,6 +38,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	private final Path mockFile = Mock(Path)
 	
+	@SuppressWarnings('SpaceAfterComma') // false positive
 	private final ImagePersistenceStrategy strategy = Spy(
 		FilesystemImagePersistenceStrategy,
 		constructorArgs:[NOPLogger.NOP_LOGGER, STORAGE_DIR, PREVIEW_DIR]
