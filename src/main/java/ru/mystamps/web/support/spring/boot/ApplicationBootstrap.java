@@ -45,9 +45,6 @@ public class ApplicationBootstrap {
 	public static void main(String... args) {
 		System.setProperty("java.awt.headless", "true");
 		
-		// @see http://www.slf4j.org/codes.html#loggerNameMismatch
-		System.setProperty("slf4j.detectLoggerNameMismatch", "true");
-		
 		ConfigurableApplicationContext context =
 			SpringApplication.run(ApplicationBootstrap.class, args);
 		
