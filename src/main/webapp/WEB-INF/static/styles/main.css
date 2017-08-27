@@ -102,3 +102,6 @@ label {
 .link-vcenter {
 	line-height: 34px;
 }
+.js-collapse-toggle-header {
+	display: none;
+}
