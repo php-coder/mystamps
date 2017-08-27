@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
 	<body th:with="suggestCountryUrl=${addSeriesForm.country != null and addSeriesForm.country.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_COUNTRY}}__'''}"
 		th:onload="|initPage(${suggestCountryUrl})|"
@@ -480,7 +480,7 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.3/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
 		<script src="../../../../javascript/series/add.js" th:src="${SERIES_ADD_JS}"></script>

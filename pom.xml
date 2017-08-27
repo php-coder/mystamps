@@ -502,8 +502,8 @@
 		<robotframework-selenium.version>1.4.0.8</robotframework-selenium.version>
 		<robotframework.version>3.0.2</robotframework.version>
 		
-		<!-- Don't forget to update version in the Url class -->
-		<selectizejs.version>0.12.3</selectizejs.version>
+		<!-- Don't forget to update version in the Url class and in the src/main/webapp/WEB-INF/views/series/add.html -->
+		<selectizejs.version>0.12.4</selectizejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.4.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<selenium.version>2.53.1</selenium.version>
