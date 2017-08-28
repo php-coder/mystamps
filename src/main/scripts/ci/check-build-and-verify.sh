@@ -123,7 +123,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
 		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
-			>pom.log || POM_STATUS=fail
+			>pom.log 2>&1 || POM_STATUS=fail
 	fi
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
