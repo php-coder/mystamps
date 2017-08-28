@@ -36,13 +36,14 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-false}"
 	DANGER_STATUS=
 fi
 
+echo
+
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	
 	# TRAVIS_COMMIT_RANGE: The range of commits that were included in the push or
 	# pull request. (Note that this is empty for builds triggered by the initial
 	# commit of a new branch.)
 	if [ -n "${TRAVIS_COMMIT_RANGE:-}" ]; then
-		echo
 		echo "INFO: Range of the commits to be checked: $TRAVIS_COMMIT_RANGE"
 		echo 'INFO: List of the files modified by this commits range:'
 		git --no-pager diff --name-only $TRAVIS_COMMIT_RANGE -- | sed 's|^|      |' || :
@@ -96,50 +97,59 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			echo 'INFO: All checks will be performed'
 		fi
 	else
-		echo
 		echo "INFO: Couldn't determine a range of the commits: \$TRAVIS_COMMIT_RANGE is empty."
 		echo 'INFO: All checks will be performed'
 	fi
+	
+	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
 		mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
 			>cs.log 2>&1 || CS_STATUS=fail
 	fi
+	print_status "$CS_STATUS" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
 		mvn --batch-mode pmd:check \
 			>pmd.log 2>&1 || PMD_STATUS=fail
 	fi
+	print_status "$PMD_STATUS" 'Run PMD'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
 			>codenarc.log 2>&1 || CODENARC_STATUS=fail
 	fi
+	print_status "$CODENARC_STATUS" 'Run CodeNarc'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
 		mvn --batch-mode license:check \
 			>license.log 2>&1 || LICENSE_STATUS=fail
 	fi
+	print_status "$LICENSE_STATUS" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
 		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
 			>pom.log 2>&1 || POM_STATUS=fail
 	fi
+	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
 		find src -type f -name '*.html' | xargs bootlint \
 			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
+	print_status "$BOOTLINT_STATUS" 'Run bootlint'
 	
 	if [ "$RFLINT_STATUS" != 'skip' ]; then
 		rflint --error=all --ignore TooFewKeywordSteps --ignore TooManyTestSteps --configure LineTooLong:130 src/test/robotframework \
 			>rflint.log 2>&1 || RFLINT_STATUS=fail
 	fi
+	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
 		mvn --batch-mode jasmine:test \
 			>jasmine.log 2>&1 || JASMINE_STATUS=fail
 	fi
+	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		# FIXME: add check for src/main/config/nginx/503.*html
@@ -156,57 +166,40 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--show-warnings \
 			>validator.log 2>&1 || HTML_STATUS=fail
 	fi
+	print_status "$HTML_STATUS" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
 		mvn --batch-mode enforcer:enforce \
 			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
 	fi
+	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
 		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
 			>test.log 2>&1 || TEST_STATUS=fail
 	fi
+	print_status "$TEST_STATUS" 'Run unit tests'
 	
 	if [ "$FINDBUGS_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
 		mvn --batch-mode findbugs:check \
 			>findbugs.log 2>&1 || FINDBUGS_STATUS=fail
 	fi
+	print_status "$FINDBUGS_STATUS" 'Run FindBugs'
 fi
 
 mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
+# Workaround for #538
+"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
+
+print_status "$VERIFY_STATUS" 'Run integration tests'
+
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
 	danger >danger.log 2>&1 || DANGER_STATUS=fail
 fi
-
-# Workaround for #538
-"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
-
-echo
-echo 'Build summary:'
-echo
-
-if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	print_status "$CS_STATUS"       'Run CheckStyle'
-	print_status "$PMD_STATUS"      'Run PMD'
-	print_status "$CODENARC_STATUS" 'Run CodeNarc'
-	print_status "$LICENSE_STATUS"  'Check license headers'
-	print_status "$POM_STATUS"      'Check sorting of pom.xml'
-	print_status "$BOOTLINT_STATUS" 'Run bootlint'
-	print_status "$RFLINT_STATUS"   'Run robot framework lint'
-	print_status "$JASMINE_STATUS"  'Run JavaScript unit tests'
-	print_status "$HTML_STATUS"     'Run html5validator'
-	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
-	print_status "$TEST_STATUS"     'Run unit tests'
-	print_status "$FINDBUGS_STATUS" 'Run FindBugs'
-fi
-
-print_status "$VERIFY_STATUS" 'Run integration tests'
 print_status "$DANGER_STATUS" 'Run danger'
-
-echo
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$CS_STATUS" = 'skip' ]       || print_log cs.log        'Run CheckStyle'
