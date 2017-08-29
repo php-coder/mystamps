@@ -842,8 +842,12 @@
 					<codeNarcVersion>${codenarc.version}</codeNarcVersion>
 					<groovyVersion>${groovy.version}</groovyVersion>
 					<sourceDirectory>src/test/groovy</sourceDirectory>
+					<!--
+						rulesets/enhanced.xml was excluded because of a lot of errors about failed
+						compilation: https://github.com/CodeNarc/CodeNarc/issues/123
+					-->
 					<rulesetfiles>
-						rulesets/basic.xml,rulesets/braces.xml,rulesets/concurrency.xml,rulesets/convention.xml,rulesets/design.xml,rulesets/dry.xml,rulesets/enhanced.xml,rulesets/exceptions.xml,rulesets/formatting.xml,rulesets/generic.xml,rulesets/groovyism.xml,rulesets/imports.xml,rulesets/jdbc.xml,rulesets/logging.xml,rulesets/naming.xml,rulesets/security.xml,rulesets/serialization.xml,rulesets/unnecessary.xml,rulesets/unused.xml
+						rulesets/basic.xml,rulesets/braces.xml,rulesets/concurrency.xml,rulesets/convention.xml,rulesets/design.xml,rulesets/dry.xml,rulesets/exceptions.xml,rulesets/formatting.xml,rulesets/generic.xml,rulesets/groovyism.xml,rulesets/imports.xml,rulesets/jdbc.xml,rulesets/logging.xml,rulesets/naming.xml,rulesets/security.xml,rulesets/serialization.xml,rulesets/unnecessary.xml,rulesets/unused.xml
 					</rulesetfiles>
 				</configuration>
 			</plugin>
