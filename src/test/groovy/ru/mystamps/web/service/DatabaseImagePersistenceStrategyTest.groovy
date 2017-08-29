@@ -166,4 +166,15 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == expectedImageDto
 	}
 	
+	//
+	// Tests for removeIfPossible()
+	//
+	
+	def 'removeIfPossible() should do nothing'() {
+		when:
+			strategy.removeIfPossible(null)
+		then:
+			noExceptionThrown()
+	}
+	
 }
