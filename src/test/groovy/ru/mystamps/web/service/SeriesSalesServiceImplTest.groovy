@@ -50,7 +50,7 @@ class SeriesSalesServiceImplTest extends Specification {
 	// Tests for add()
 	//
 	
-	def "add() should throw exception when dto is null"() {
+	def 'add() should throw exception when dto is null'() {
 		when:
 			service.add(null, 123, 456)
 		then:
