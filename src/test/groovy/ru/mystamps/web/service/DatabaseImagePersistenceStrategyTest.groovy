@@ -127,4 +127,36 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == expectedImageDto
 	}
 	
+	//
+	// Tests for getPreview()
+	//
+	
+	def 'getPreview() should return null when image data dao returned null'() {
+		given:
+			imageDataDao.findByImageId(_ as Integer, _ as Boolean) >> null
+		when:
+			ImageDto result = strategy.getPreview(imageInfoDto)
+		then:
+			result == null
+	}
+	
+	def 'getPreview() should return result of image data dao'() {
+		given:
+			Integer expectedImageId = imageInfoDto.id
+		and:
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+		when:
+			ImageDto result = strategy.getPreview(imageInfoDto)
+		then:
+			1 * imageDataDao.findByImageId({ Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			}, { Boolean preview ->
+				assert preview == true
+				return true
+			}) >> expectedImageDto
+		and:
+			result == expectedImageDto
+	}
+	
 }
