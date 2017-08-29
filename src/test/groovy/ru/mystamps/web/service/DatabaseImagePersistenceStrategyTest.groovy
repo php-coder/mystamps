@@ -36,10 +36,17 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private final MultipartFile multipartFile = Mock()
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
 	
-	private final ImagePersistenceStrategy strategy = new DatabaseImagePersistenceStrategy(
-		NOPLogger.NOP_LOGGER,
-		imageDataDao
-	)
+	private ImagePersistenceStrategy strategy
+	
+	def setup() {
+		strategy = new DatabaseImagePersistenceStrategy(
+			NOPLogger.NOP_LOGGER,
+			imageDataDao
+		)
+		
+		// init() does nothing except logging but by invoking it we're improving code coverage
+		strategy.init()
+	}
 	
 	//
 	// Tests for save()
