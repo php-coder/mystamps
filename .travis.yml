@@ -11,7 +11,7 @@ env:
 before_script:
   - set -o errexit # exit immediately when commands return a non-zero status
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      mysql -u travis -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
+      mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
       if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
