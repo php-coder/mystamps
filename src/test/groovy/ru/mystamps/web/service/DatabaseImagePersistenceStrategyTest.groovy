@@ -115,6 +115,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should return result from image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
@@ -147,6 +148,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == null
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'getPreview() should return result of image data dao'() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
