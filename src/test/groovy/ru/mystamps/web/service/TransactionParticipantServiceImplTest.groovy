@@ -39,14 +39,14 @@ class TransactionParticipantServiceImplTest extends Specification {
 	// Tests for add()
 	//
 	
-	def "add() should throw exception if dto is null"() {
+	def 'add() should throw exception if dto is null'() {
 		when:
 			service.add(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "add() should throw exception if name is null"() {
+	def 'add() should throw exception if name is null'() {
 		given:
 			AddParticipantForm form = new AddParticipantForm()
 			form.setName(null)
@@ -57,7 +57,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should create participant"() {
+	def 'add() should create participant'() {
 		given:
 			String expectedName = 'test'
 			String expectedUrl  = 'http://example.org'
@@ -79,7 +79,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 	// Tests for findAllBuyers()
 	//
 	
-	def "findAllBuyers() should call dao and return result"() {
+	def 'findAllBuyers() should call dao and return result'() {
 		given:
 			List<EntityWithIdDto> expectedResult = [ TestObjects.createEntityWithIdDto() ]
 		when:
@@ -94,7 +94,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 	// Tests for findAllSellers()
 	//
 	
-	def "findAllSellers() should call dao and return result"() {
+	def 'findAllSellers() should call dao and return result'() {
 		given:
 			List<EntityWithIdDto> expectedResult = [ TestObjects.createEntityWithIdDto() ]
 		when:
