@@ -99,22 +99,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "get() should pass image to image data dao"() {
-		given:
-			Integer expectedImageId = imageInfoDto.id
-		when:
-			strategy.get(imageInfoDto)
-		then:
-			1 * imageDataDao.findByImageId({ Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			}, { Boolean preview ->
-				assert preview == false
-				return true
-			})
-	}
-	
 	def "get() should return null when image data dao returned null"() {
 		given:
 			imageDataDao.findByImageId(_ as Integer, _ as Boolean) >> null
@@ -126,12 +110,20 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "get() should return result from image data dao"() {
 		given:
-			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+			Integer expectedImageId = imageInfoDto.id
 		and:
-			imageDataDao.findByImageId(_ as Integer, _ as Boolean) >> expectedImageDto
+			ImageDto expectedImageDto = TestObjects.createDbImageDto()
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:
+			1 * imageDataDao.findByImageId({ Integer imageId ->
+				assert imageId == expectedImageId
+				return true
+			}, { Boolean preview ->
+				assert preview == false
+				return true
+			}) >> expectedImageDto
+		and:
 			result == expectedImageDto
 	}
 	
