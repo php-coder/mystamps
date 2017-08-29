@@ -440,12 +440,10 @@ class CountryServiceImplTest extends Specification {
 		when:
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
-			1 * countryDao.findCountryOfLastCreatedSeriesByUser(
-				{ Integer userId ->
+			1 * countryDao.findCountryOfLastCreatedSeriesByUser({ Integer userId ->
 					assert expectedUserId == userId
 					return true
-				}
-			) >> expectedSlug
+			}) >> expectedSlug
 		and:
 			slug == expectedSlug
 	}
@@ -458,22 +456,37 @@ class CountryServiceImplTest extends Specification {
 		when:
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
-			1 * countryDao.findPopularCountryInCollection(
-				{ Integer userId ->
+			1 * countryDao.findPopularCountryInCollection({ Integer userId ->
 					assert expectedUserId == userId
 					return true
-				}
-			) >> expectedSlug
+			}) >> expectedSlug
 		and:
 			slug == expectedSlug
 	}
-	
+
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'suggestCountryForUser() should return a recently created country'() {
+		given:
+			Integer expectedUserId = 21
+			String expectedSlug = 'spain'
+		when:
+			String slug = service.suggestCountryForUser(expectedUserId)
+		then:
+			1 * countryDao.findLastCountryCreatedByUser({ Integer userId ->
+					assert expectedUserId == userId
+					return true
+			}) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+
 	def 'suggestCountryForUser() should return null when cannot suggest'() {
 		when:
 			String slug = service.suggestCountryForUser(20)
 		then:
 			1 * countryDao.findCountryOfLastCreatedSeriesByUser(_ as Integer) >> null
 			1 * countryDao.findPopularCountryInCollection(_ as Integer) >> null
+			1 * countryDao.findLastCountryCreatedByUser(_ as Integer) >> null
 		and:
 			slug == null
 	}

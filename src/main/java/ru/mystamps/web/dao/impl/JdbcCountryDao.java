@@ -84,6 +84,10 @@ public class JdbcCountryDao implements CountryDao {
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${country.find_popular_country_from_user_collection}")
 	private String findPopularCountryInCollectionSql;
+
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${country.find_last_country_created_by_user}")
+	private String findLastCountryCreatedByUserSql;
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
@@ -241,6 +245,22 @@ public class JdbcCountryDao implements CountryDao {
 			return jdbcTemplate.queryForObject(
 				findPopularCountryInCollectionSql,
 				Collections.singletonMap("user_id", userId),
+				String.class
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
+	}
+
+	/**
+	 * @author Shkarin John
+	 */
+	@Override
+	public String findLastCountryCreatedByUser(Integer userId) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findLastCountryCreatedByUserSql,
+				Collections.singletonMap("created_by", userId),
 				String.class
 			);
 		} catch (EmptyResultDataAccessException ignored) {
