@@ -38,4 +38,5 @@ public interface CountryDao {
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	String findCountryOfLastCreatedSeriesByUser(Integer userId);
 	String findPopularCountryInCollection(Integer userId);
+	String findLastCountryCreatedByUser(Integer userId);
 }

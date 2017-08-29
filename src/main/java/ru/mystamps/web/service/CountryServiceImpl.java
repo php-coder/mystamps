@@ -184,6 +184,17 @@ public class CountryServiceImpl implements CountryService {
 			return slug;
 		}
 
+		// if user created a country, let's suggest this country to him
+		slug = countryDao.findLastCountryCreatedByUser(userId);
+		if (slug != null) {
+			log.info(
+				"Country {} has been suggested to user #{} as it was created by him recently",
+				slug,
+				userId
+			);
+			return slug;
+		}
+		
 		// user has never created a country but most of the series in his collection
 		// belong to a specific country, let's suggest this country to him
 		slug = countryDao.findPopularCountryInCollection(userId);
