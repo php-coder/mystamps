@@ -55,7 +55,6 @@ class TimedImagePreviewStrategyTest extends Specification {
 			expectedData | _
 			null         | _
 			'foo'.bytes  | _
-		
 	}
 	
 }
