@@ -94,7 +94,10 @@ public class ServicesConfig {
 		return new ImageServiceImpl(
 			LoggerFactory.getLogger(ImageServiceImpl.class),
 			strategiesConfig.getImagePersistenceStrategy(),
-			new TimedImagePreviewStrategy(new ThumbnailatorImagePreviewStrategy()),
+			new TimedImagePreviewStrategy(
+				LoggerFactory.getLogger(TimedImagePreviewStrategy.class),
+				new ThumbnailatorImagePreviewStrategy()
+			),
 			daoConfig.getImageDao()
 		);
 	}

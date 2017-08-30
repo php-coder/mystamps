@@ -21,14 +21,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class TimedImagePreviewStrategy implements ImagePreviewStrategy {
-	private static final Logger LOG = LoggerFactory.getLogger(TimedImagePreviewStrategy.class);
 	
+	private final Logger log;
 	private final ImagePreviewStrategy strategy;
 	
 	@Override
@@ -46,7 +45,7 @@ public class TimedImagePreviewStrategy implements ImagePreviewStrategy {
 		byte[] result = strategy.createPreview(image);
 		timer.stop();
 		
-		LOG.debug(
+		log.debug(
 			"Image preview has been generated in {} msecs: {} -> {} bytes",
 			timer.getTime(),
 			// let's hope that it won't throw IllegalStateException :)
