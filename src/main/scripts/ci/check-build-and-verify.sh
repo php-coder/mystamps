@@ -188,18 +188,20 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$FINDBUGS_STATUS" 'Run FindBugs'
 fi
 
-mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
-	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
-# Workaround for #538
-"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
-
-print_status "$VERIFY_STATUS" 'Run integration tests'
-
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	danger >danger.log 2>&1 || DANGER_STATUS=fail
+if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'yes' ]; then
+	mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
+		>verify-raw.log 2>&1 || VERIFY_STATUS=fail
+	# Workaround for #538
+	"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
+	
+	print_status "$VERIFY_STATUS" 'Run integration tests'
+	
+	# run danger after integration tests when the results of all checks and tests are available
+	if [ "$DANGER_STATUS" != 'skip' ]; then
+		danger >danger.log 2>&1 || DANGER_STATUS=fail
+	fi
+	print_status "$DANGER_STATUS" 'Run danger'
 fi
-print_status "$DANGER_STATUS" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$CS_STATUS" = 'skip' ]       || print_log cs.log        'Run CheckStyle'
@@ -216,21 +218,25 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$FINDBUGS_STATUS" = 'skip' ] || print_log findbugs.log  'Run FindBugs'
 fi
 
-print_log verify.log   'Run integration tests'
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	print_log danger.log 'Run danger'
+if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'yes' ]; then
+	print_log verify.log 'Run integration tests'
+	
+	if [ "$DANGER_STATUS" != 'skip' ]; then
+		print_log danger.log 'Run danger'
+	fi
+	
+	# In order to be able debug robot framework test flakes we need to have a report.
+	# Just encode it to a gzipped binary form and dump to console.
+	if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
+		echo "===== REPORT START ====="
+		cat target/robotframework-reports/output.xml | gzip -c | base64
+		echo "===== REPORT END ====="
+	fi
 fi
 
-# In order to be able debug robot framework test flakes we need to have a report.
-# Just encode it to a gzipped binary form and dump to console.
-if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
-	echo "===== REPORT START ====="
-	cat target/robotframework-reports/output.xml | gzip -c | base64
-	echo "===== REPORT END ====="
-fi
-
-rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
+# We don't remove the logs to make them available to danger that may be executed later as a separate
+# script invocation
+#rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
 
 if echo "$CS_STATUS$PMD_STATUS$CODENARC_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
 	exit 1
