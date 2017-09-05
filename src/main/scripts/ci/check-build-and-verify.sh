@@ -224,14 +224,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'yes' ]; then
 	if [ "$DANGER_STATUS" != 'skip' ]; then
 		print_log danger.log 'Run danger'
 	fi
-	
-	# In order to be able debug robot framework test flakes we need to have a report.
-	# Just encode it to a gzipped binary form and dump to console.
-	if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
-		echo "===== REPORT START ====="
-		cat target/robotframework-reports/output.xml | gzip -c | base64
-		echo "===== REPORT END ====="
-	fi
 fi
 
 # We don't remove the logs to make them available to danger that may be executed later as a separate
