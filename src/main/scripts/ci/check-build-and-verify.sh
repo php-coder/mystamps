@@ -222,14 +222,6 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-# In order to be able debug robot framework test flakes we need to have a report.
-# Just encode it to a gzipped binary form and dump to console.
-if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
-	echo "===== REPORT START ====="
-	cat target/robotframework-reports/log.html | gzip -c | base64
-	echo "===== REPORT END ====="
-fi
-
 rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
 
 if echo "$CS_STATUS$PMD_STATUS$CODENARC_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
