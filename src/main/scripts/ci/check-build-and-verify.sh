@@ -155,6 +155,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		# FIXME: add check for src/main/config/nginx/503.*html
 		# TODO: remove ignoring of error about alt attribute after resolving #314
 		# TODO: remove ignoring of error about document language when it will be resolved in upstream
+		# TODO: remove ignoring of error about Picked up _JAVA_OPTIONS when it will be resolved in upstream
 		html5validator \
 			--root src/main/webapp/WEB-INF/views \
 			--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
@@ -163,6 +164,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				'An "img" element must have an "alt" attribute' \
 				'The first child "option" element of a "select" element with a "required" attribute' \
 				'This document appears to be written in (Danish|Lithuanian)' \
+				'Picked up' \
 			--show-warnings \
 			>validator.log 2>&1 || HTML_STATUS=fail
 	fi
