@@ -27,15 +27,11 @@ before_script:
     fi
 
 script:
-  # run all check analysis and unit tests only on travis profile
+  - set -o errexit # exit immediately when commands return a non-zero status
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/check-build-and-verify.sh || FAIL_BUILD=yes;
-    fi
-  # run integration tests and danger on all profiles
-  - ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests || FAIL_BUILD=yes;
-  # fail a build when one of the scripts have failed
-  - if [ -n "${FAIL_BUILD}" ]; then
-      exit 1;
+      ./src/main/scripts/ci/check-build-and-verify.sh;
+    else
+      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
     fi
 
 after_success:
