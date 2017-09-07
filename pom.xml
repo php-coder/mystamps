@@ -1039,8 +1039,4 @@
 		<url>https://github.com/php-coder/mystamps</url>
 	</scm>
 	
-	<prerequisites>
-		<maven>3.2.1</maven>
-	</prerequisites>
-	
 </project>
