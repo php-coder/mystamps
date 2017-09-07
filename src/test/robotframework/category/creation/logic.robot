@@ -27,7 +27,8 @@ Create category with name in English and Russian
 	Submit Form             id=add-category-form
 	Location Should Be      ${SITE_URL}/category/space
 	Element Text Should Be  id=page-header  Space
-	# TODO: verify that after changing language, header will be in Russian
+	Go To                   ${SITE_URL}/category/space?lang=ru
+	Element Text Should Be  id=page-header  Космос
 
 *** Keywords ***
 Before Test Suite

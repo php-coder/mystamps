@@ -20,11 +20,13 @@ Create country with name in English
 
 Create country with name in English and Russian
 	[Documentation]         Verify creation of country by specifying names in 2 languages
-	Input Text              id=name  Russia
-	Input Text              id=nameRu  Россия
+	Input Text              id=name    Czechia
+	Input Text              id=nameRu  Чехия
 	Submit Form             id=add-country-form
-	Location Should Be      ${SITE_URL}/country/russia
-	Element Text Should Be  id=page-header  Stamps of Russia
+	Location Should Be      ${SITE_URL}/country/czechia
+	Element Text Should Be  id=page-header  Stamps of Czechia
+	Go To                   ${SITE_URL}/country/czechia?lang=ru
+	Element Text Should Be  id=page-header  Марки страны Чехия
 
 *** Keywords ***
 Before Test Suite
