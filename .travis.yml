@@ -42,7 +42,7 @@ after_failure:
       echo "===== REPORT START =====";
       cat target/robotframework-reports/log.html | gzip -c | base64;
       echo "===== REPORT END =====";
-      sleep 10;
+      sleep 5;
     fi
 
 after_success:
