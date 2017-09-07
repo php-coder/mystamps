@@ -31,6 +31,9 @@ script:
     else
       ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
     fi
+  # Travis CI may miss a part of the huge output if we'll exit immediately
+  # See: https://github.com/travis-ci/travis-ci/issues/6018
+  - sleep 5
 
 after_success:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
