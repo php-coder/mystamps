@@ -38,15 +38,6 @@ script:
       exit 1;
     fi
 
-after_failure:
-  # In order to be able debug robot framework test flakes we need to have a report.
-  # Just encode it to a gzipped binary form and dump to console.
-  - if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
-          echo "===== REPORT START ====="
-          cat target/robotframework-reports/output.xml | gzip -c | base64
-          echo "===== REPORT END ====="
-  fi
-
 after_success:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       ./src/main/scripts/ci/publish-code-coverage.sh;
