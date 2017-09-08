@@ -441,8 +441,8 @@ class CountryServiceImplTest extends Specification {
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
 			1 * countryDao.findCountryOfLastCreatedSeriesByUser({ Integer userId ->
-					assert expectedUserId == userId
-					return true
+				assert expectedUserId == userId
+				return true
 			}) >> expectedSlug
 		and:
 			slug == expectedSlug
@@ -457,8 +457,8 @@ class CountryServiceImplTest extends Specification {
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
 			1 * countryDao.findPopularCountryInCollection({ Integer userId ->
-					assert expectedUserId == userId
-					return true
+				assert expectedUserId == userId
+				return true
 			}) >> expectedSlug
 		and:
 			slug == expectedSlug
@@ -473,8 +473,8 @@ class CountryServiceImplTest extends Specification {
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
 			1 * countryDao.findLastCountryCreatedByUser({ Integer userId ->
-					assert expectedUserId == userId
-					return true
+				assert expectedUserId == userId
+				return true
 			}) >> expectedSlug
 		and:
 			slug == expectedSlug
