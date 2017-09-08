@@ -13,7 +13,6 @@ env:
 before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
-      mysql -u root -e 'GRANT ALL PRIVILEGES ON mystamps@* TO travis@%;';
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
       if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
