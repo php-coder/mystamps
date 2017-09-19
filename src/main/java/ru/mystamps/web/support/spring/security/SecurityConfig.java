@@ -116,8 +116,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// TODO: GH #27
 				.disable()
 			.headers()
-				// TODO
-				.disable();
+				.defaultsDisabled() // TODO
+				.contentSecurityPolicy(
+					// default policy prevents loading resources from any source
+					"default-src 'none'; " +
+					// 'self' is required for: our own CSS files
+					// 'https://cdn.rawgit.com' is required for: languages.min.css (TODO: GH #246)
+					"style-src 'self' https://cdn.rawgit.com; " +
+					// 'self' is required for: our own JS files
+					// 'unsafe-inline' is required for: jquery.min.js (that is using code inside of event handlers.
+					// We can't use hashing algorithms because they aren't supported for handlers. In future,
+					// we should get rid of jQuery or use 'unsafe-hashed-attributes' from CSP3. Details:
+					// https://github.com/jquery/jquery/blob/d71f6a53927ad02d728503385d15539b73d21ac8/jquery.js#L1441-L1447
+					// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
+					"script-src 'self' 'unsafe-inline'; " +
+					// 'https://cdn.rawgit.com' is required for: languages.png (TODO: GH #246)
+					// 'https://raw.githubusercontent.com' is required for: languages.png (TODO: GH #246)
+					"img-src https://cdn.rawgit.com https://raw.githubusercontent.com; " +
+					// 'self' is required for: glyphicons-halflings-regular.woff2 from bootstrap
+					"font-src 'self'"
+				).reportOnly();
 	}
 	
 	// Used in ServicesConfig.getUserService()
