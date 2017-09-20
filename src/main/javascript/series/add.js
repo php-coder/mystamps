@@ -29,11 +29,11 @@ function initPage(suggestCountryUrl) {
 
 	if (suggestCountryUrl != null) {
 		$.get(suggestCountryUrl, function handleSuggestedCountry(slug) {
-			if (slug == "") {
+			if (slug == '') {
 				return;
 			}
 
-			var guessCountryLink = $("#js-guess-country-link");
+			var guessCountryLink = $('#js-guess-country-link');
 			guessCountryLink.click(function chooseSuggestedCountry() {
 				guessCountryLink.hide();
 				chooseCountryBySlug(slug);
@@ -44,7 +44,7 @@ function initPage(suggestCountryUrl) {
 }
 
 function chooseCountryBySlug(slug) {
-	var countrySelectBox = $("#country").selectize();
+	var countrySelectBox = $('#country').selectize();
 	var selectize = countrySelectBox[0].selectize;
 	selectize.setValue(slug);
 }
