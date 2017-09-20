@@ -35,10 +35,10 @@ function initPage(suggestCountryUrl) {
 
 			var guessCountryLink = $('#js-guess-country-link');
 			guessCountryLink.click(function chooseSuggestedCountry() {
-				guessCountryLink.hide();
+				guessCountryLink.addClass('hidden');
 				chooseCountryBySlug(slug);
 			});
-			guessCountryLink.show();
+			guessCountryLink.removeClass('hidden');
 		});
 	}
 }
