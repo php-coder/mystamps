@@ -131,9 +131,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// https://github.com/jquery/jquery/blob/d71f6a53927ad02d/jquery.js#L1441-L1447
 					// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
 					+ "script-src 'self' 'unsafe-inline'; "
+					// 'self' is required for: uploaded images and its previews
 					// 'https://cdn.rawgit.com' is required for: languages.png (TODO: GH #246)
 					// 'https://raw.githubusercontent.com' is required for: languages.png
-					+ "img-src https://cdn.rawgit.com https://raw.githubusercontent.com; "
+					+ "img-src 'self' https://cdn.rawgit.com https://raw.githubusercontent.com; "
 					// 'self' is required for: glyphicons-halflings-regular.woff2 from bootstrap
 					+ "font-src 'self'"
 				).reportOnly();
