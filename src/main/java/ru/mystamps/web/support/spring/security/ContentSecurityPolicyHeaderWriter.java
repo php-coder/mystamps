@@ -101,12 +101,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(request));
+		String uri = request.getRequestURI();
+		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(uri));
 	}
 
-	private static String constructDirectives(HttpServletRequest request) {
-		String uri = request.getRequestURI();
-		
+	private static String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
