@@ -122,10 +122,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					"default-src 'none'; "
 					// 'self' is required for: our own CSS files
 					// 'https://cdn.rawgit.com' is required for: languages.min.css (TODO: GH #246)
+					// 'https://www.gstatic.com' is required for: Google Charts on collection page.
 					// 'sha256-Dpm...' is required for: 'box-shadow: none; border: 0px;' inline CSS
 					// that are using on /series/add and /series/{id} pages.
-					+ "style-src 'self' https://cdn.rawgit.com "
-						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='; "
+					// 'sha256-/kX...' is required for: 'overflow: hidden;' inline CSS that is using
+					// bg Google Charts on collection page.
+					+ "style-src 'self' https://cdn.rawgit.com https://www.gstatic.com "
+						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
+						+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='; "
 					// 'self' is required for: our own JS files
 					// 'unsafe-inline' is required for: jquery.min.js (that is using code inside of
 					// event handlers. We can't use hashing algorithms because they aren't supported
@@ -133,7 +137,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// 'unsafe-hashed-attributes' from CSP3. Details:
 					// https://github.com/jquery/jquery/blob/d71f6a53927ad02d/jquery.js#L1441-L1447
 					// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
-					+ "script-src 'self' 'unsafe-inline'; "
+					// 'unsafe-eval' is required for: loader.js (for Google Charts)
+					// 'https://www.gstatic.com' is required for: Google Charts on collection page.
+					+ "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com; "
 					// 'self' is required for: AJAX requests from our scripts (country suggestions)
 					+ "connect-src 'self'; "
 					// 'self' is required for: uploaded images and its previews
