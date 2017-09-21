@@ -32,6 +32,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
 		Url.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
+	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d/(ask|image))";
+	
 	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
 	
 	// default policy prevents loading resources from any source
@@ -51,11 +53,12 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	// - 'self' is required for our own CSS files
 	// - 'https://cdn.rawgit.com' is required by languages.min.css (TODO: GH #246)
+	private static final String STYLE_SRC = "style-src 'self' https://cdn.rawgit.com";
+	
 	// - 'sha256-Dpm...' is required for 'box-shadow: none; border: 0px;' inline CSS
 	// that are using on /series/add and /series/{id} pages.
-	private static final String STYLE_SRC =
-		"style-src 'self' https://cdn.rawgit.com"
-		+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='";
+	private static final String STYLE_SERIES_ADD_IMAGE =
+		" 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='";
 	
 	// - 'https://www.gstatic.com' is required by Google Charts
 	// - 'sha256-/kX...' is required for 'overflow: hidden;' inline CSS for Google Charts.
@@ -117,6 +120,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
+		
+		} else if (uri.equals(Url.ADD_SERIES_PAGE) || uri.matches(ADD_IMAGE_PAGE_PATTERN)) {
+			sb.append(STYLE_SERIES_ADD_IMAGE);
 		
 		} else if (uri.startsWith(TOGGLZ_PAGES_PATTERN)) {
 			sb.append(STYLE_TOGGLZ);
