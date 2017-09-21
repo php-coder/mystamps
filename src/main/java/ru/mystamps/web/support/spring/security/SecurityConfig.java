@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 
 import org.springframework.boot.web.filter.OrderedRequestContextFilter;
@@ -60,6 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ServicesConfig servicesConfig;
 	
+	@Autowired
+	private Environment environment;
+	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
@@ -69,6 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	protected void configure(HttpSecurity http) throws Exception {
+		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		
 		http
 			.authorizeRequests()
 				.mvcMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
@@ -117,7 +123,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.headers()
 				.defaultsDisabled() // TODO
-				.addHeaderWriter(new ContentSecurityPolicyHeaderWriter());
+				.addHeaderWriter(new ContentSecurityPolicyHeaderWriter(useSingleHost));
 	}
 	
 	// Used in ServicesConfig.getUserService()

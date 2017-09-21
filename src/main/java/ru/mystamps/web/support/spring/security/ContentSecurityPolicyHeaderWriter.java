@@ -22,11 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.header.HeaderWriter;
 
+import lombok.RequiredArgsConstructor;
+
 import ru.mystamps.web.Url;
 
 /**
  * Implementation of {@link HeaderWriter} that is adding CSP header depending on the current URL.
  */
+@RequiredArgsConstructor
 class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
@@ -71,14 +74,22 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
 		+ " 'sha256-zQDRfdePzsm4666fPPtpna61v74bryIt2Xu5qx2rn4A='";
 	
-	// - 'self' is required for our own JS files
 	// - 'unsafe-inline' is required by jquery.min.js (that is using code inside of
 	// event handlers. We can't use hashing algorithms because they aren't supported
 	// for handlers. In future, we should get rid of jQuery or use
 	// 'unsafe-hashed-attributes' from CSP3. Details:
 	// https://github.com/jquery/jquery/blob/d71f6a53927ad02d/jquery.js#L1441-L1447
 	// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
-	private static final String SCRIPT_SRC = "script-src 'self' 'unsafe-inline'";
+	private static final String SCRIPT_SRC = "script-src 'unsafe-inline'";
+	
+	// - 'self' is required for our own JS files
+	private static final String SCRIPTS_SELF = " 'self'";
+
+	// - 'https://stamps.filezz.ru' is required for our own JS files
+	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
+	// - 'https://yandex.st' is required for jquery.min.js
+	private static final String SCRIPTS_CDN =
+		" https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com https://yandex.st";
 	
 	// - 'unsafe-eval' is required by loader.js from Google Charts
 	// - 'https://www.gstatic.com' is required by Google Charts
@@ -99,13 +110,15 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		// number of separators between directives
 		+ 5;
 	
+	private final boolean useSingleHost;
+	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		String uri = request.getRequestURI();
 		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(uri));
 	}
 
-	private static String constructDirectives(String uri) {
+	private String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
@@ -127,7 +140,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		}
 		
 		sb.append(SEPARATOR)
-		  .append(SCRIPT_SRC);
+		  .append(SCRIPT_SRC)
+		  .append(useSingleHost ? SCRIPTS_SELF : SCRIPTS_CDN);
 		
 		if (onCollectionInfoPage) {
 			sb.append(SCRIPT_COLLECTION_INFO);
