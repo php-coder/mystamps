@@ -103,8 +103,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	}
 
 	private static String constructDirectives(HttpServletRequest request) {
-		boolean onCollectionInfoPage =
-			request.getRequestURI().startsWith(COLLECTION_INFO_PAGE_PATTERN);
+		String uri = request.getRequestURI();
+		
+		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
@@ -117,7 +118,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
 		
-		} else if (request.getRequestURI().startsWith(TOGGLZ_PAGES_PATTERN)) {
+		} else if (uri.startsWith(TOGGLZ_PAGES_PATTERN)) {
 			sb.append(STYLE_TOGGLZ);
 		}
 		
