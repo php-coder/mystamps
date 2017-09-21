@@ -84,7 +84,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://www.gstatic.com' is required by Google Charts
 	private static final String SCRIPT_COLLECTION_INFO = " 'unsafe-eval' https://www.gstatic.com";
 	
-	// - 'self' is required for AJAX requests from our scripts (country suggestions)
+	// - 'self' is required for AJAX requests from our scripts (country suggestions on /series/add)
 	private static final String CONNECT_SRC = "connect-src 'self'";
 	
 	private static final char SEPARATOR = ';';
@@ -96,9 +96,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		+ REPORT_URI.length()
 		+ STYLE_SRC.length()
 		+ SCRIPT_SRC.length()
-		+ CONNECT_SRC.length()
 		// number of separators between directives
-		+ 6;
+		+ 5;
 	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
@@ -135,8 +134,10 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			sb.append(SCRIPT_COLLECTION_INFO);
 		}
 		
-		sb.append(SEPARATOR)
-		  .append(CONNECT_SRC);
+		if (uri.equals(Url.ADD_SERIES_PAGE)) {
+			sb.append(SEPARATOR)
+			  .append(CONNECT_SRC);
+		}
 		
 		return sb.toString();
 	}
