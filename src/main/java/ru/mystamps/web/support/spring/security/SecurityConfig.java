@@ -147,7 +147,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					// 'https://raw.githubusercontent.com' is required for: languages.png
 					+ "img-src 'self' https://cdn.rawgit.com https://raw.githubusercontent.com; "
 					// 'self' is required for: glyphicons-halflings-regular.woff2 from bootstrap
-					+ "font-src 'self'"
+					+ "font-src 'self'; "
+					+ "report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly"
 				).reportOnly();
 	}
 	
