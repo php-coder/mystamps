@@ -32,6 +32,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
 		Url.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
+	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
+	
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
 	
@@ -56,10 +58,15 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		+ " 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='";
 	
 	// - 'https://www.gstatic.com' is required by Google Charts
-	// - 'sha256-/kX...' is required for 'overflow: hidden;' inline CSS that is using
-	// by Google Charts.
+	// - 'sha256-/kX...' is required for 'overflow: hidden;' inline CSS for Google Charts.
 	private static final String STYLE_COLLECTION_INFO =
 		" https://www.gstatic.com 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='";
+	
+	// - 'sha256-biL...' is required for 'display: none;' inline CSS for Togglz
+	// - 'sha256-zQD...' is required for 'width: 100%; text-align: center;' inline CSS for Togglz
+	private static final String STYLE_TOGGLZ =
+		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
+		+ " 'sha256-zQDRfdePzsm4666fPPtpna61v74bryIt2Xu5qx2rn4A='";
 	
 	// - 'self' is required for our own JS files
 	// - 'unsafe-inline' is required by jquery.min.js (that is using code inside of
@@ -109,7 +116,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
+		
+		} else if (request.getRequestURI().startsWith(TOGGLZ_PAGES_PATTERN)) {
+			sb.append(STYLE_TOGGLZ);
 		}
+		
 		sb.append(SEPARATOR)
 		  .append(SCRIPT_SRC);
 		
