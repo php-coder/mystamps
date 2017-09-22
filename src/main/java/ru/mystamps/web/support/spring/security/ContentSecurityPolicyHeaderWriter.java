@@ -78,6 +78,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String STYLE_SERIES_ADD_IMAGE =
 		" 'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='";
 	
+	// - 'https://cdnjs.cloudflare.com' is required by selectize.min.js
+	private static final String STYLE_SERIES_ADD_PAGE = " https://cdnjs.cloudflare.com";
+	
 	// - 'https://www.gstatic.com' is required by Google Charts
 	// - 'sha256-/kX...' is required for 'overflow: hidden;' inline CSS for Google Charts.
 	private static final String STYLE_COLLECTION_INFO =
@@ -105,6 +108,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://yandex.st' is required for jquery.min.js
 	private static final String SCRIPTS_CDN =
 		" https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com https://yandex.st";
+	
+	// - 'https://cdnjs.cloudflare.com' is required by selectize.bootstrap3.min.css
+	private static final String SCRIPTS_SERIES_ADD_PAGE = " https://cdnjs.cloudflare.com";
 	
 	// - 'unsafe-eval' is required by loader.js from Google Charts
 	// - 'https://www.gstatic.com' is required by Google Charts
@@ -136,6 +142,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	private String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
+		boolean onAddSeriesPage = uri.equals(Url.ADD_SERIES_PAGE);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
@@ -149,8 +156,12 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
 		
-		} else if (uri.equals(Url.ADD_SERIES_PAGE) || uri.matches(ADD_IMAGE_PAGE_PATTERN)) {
+		} else if (uri.matches(ADD_IMAGE_PAGE_PATTERN)) {
 			sb.append(STYLE_SERIES_ADD_IMAGE);
+			
+			if (onAddSeriesPage) {
+				sb.append(STYLE_SERIES_ADD_PAGE);
+			}
 		
 		} else if (uri.startsWith(TOGGLZ_PAGES_PATTERN)) {
 			sb.append(STYLE_TOGGLZ);
@@ -164,8 +175,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			sb.append(SCRIPT_COLLECTION_INFO);
 		}
 		
-		if (uri.equals(Url.ADD_SERIES_PAGE)) {
-			sb.append(SEPARATOR)
+		if (onAddSeriesPage) {
+			sb.append(SCRIPTS_SERIES_ADD_PAGE)
+			  .append(SEPARATOR)
 			  .append(CONNECT_SRC);
 		}
 		
