@@ -42,11 +42,16 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
 	
-	// - 'self' is required for uploaded images and its previews
 	// - 'https://cdn.rawgit.com' is required by languages.png (TODO: GH #246)
 	// - 'https://raw.githubusercontent.com' is required by languages.png
 	// CheckStyle: ignore LineLength for next 1 line
-	private static final String IMG_SRC = "img-src 'self' https://cdn.rawgit.com https://raw.githubusercontent.com";
+	private static final String IMG_SRC = "img-src https://cdn.rawgit.com https://raw.githubusercontent.com";
+	
+	// - 'self' is required for uploaded images and its previews
+	private static final String IMG_SRC_SELF = " 'self'";
+	
+	// - 'https://stamps.filezz.ru' is required for uploaded images and its previews
+	private static final String IMG_SRC_CDN = " https://stamps.filezz.ru";
 	
 	// - 'self' is required by glyphicons-halflings-regular.woff2 from bootstrap
 	private static final String FONT_SRC_SELF = "font-src 'self'";
@@ -128,14 +133,14 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(uri));
 	}
 
-	@SuppressWarnings("PMD.NPathComplexity")
+	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	private String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
-		  .append(IMG_SRC).append(SEPARATOR)
+		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_CDN).append(SEPARATOR)
 		  .append(useSingleHost ? FONT_SRC_SELF : FONT_SRC_CDN).append(SEPARATOR)
 		  .append(REPORT_URI).append(SEPARATOR)
 		  .append(STYLE_SRC)
