@@ -29,6 +29,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.groups.Default;
@@ -62,6 +63,7 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
+import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
@@ -72,6 +74,7 @@ import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.TransactionParticipantService;
+import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
@@ -176,15 +179,34 @@ public class SeriesController {
 		return view;
 	}
 	
-	@PostMapping(Url.ADD_SERIES_PAGE)
-	public String processInput(
+	@PostMapping(path = Url.ADD_SERIES_PAGE, params = "imageUrl")
+	public String processInputWithImageUrl(
 		@Validated({ Default.class,
+			AddSeriesForm.ImageUrlChecks.class,
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
 		@CurrentUser Integer currentUserId,
 		Locale userLocale,
-		Model model) {
+		Model model,
+		HttpServletRequest request) {
+		
+		return processInput(form, result, currentUserId, userLocale, model, request);
+	}
+	
+	@PostMapping(path = Url.ADD_SERIES_PAGE, params = "!imageUrl")
+	public String processInput(
+		@Validated({ Default.class,
+			AddSeriesForm.RequireImageCheck.class,
+			AddSeriesForm.ReleaseDateChecks.class,
+			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
+		BindingResult result,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		Model model,
+		HttpServletRequest request) {
+
+		loadErrorsFromDownloadInterceptor(form, result, request);
 		
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
@@ -199,6 +221,7 @@ public class SeriesController {
 			
 			// don't try to re-display file upload field
 			form.setImage(null);
+			form.setDownloadedImage(null);
 			return null;
 		}
 		
@@ -473,6 +496,48 @@ public class SeriesController {
 		
 		List<EntityWithIdDto> buyers = transactionParticipantService.findAllBuyers();
 		model.addAttribute("buyers", buyers);
+	}
+	
+	private static void loadErrorsFromDownloadInterceptor(
+		AddSeriesForm form,
+		BindingResult result,
+		HttpServletRequest request) {
+		
+		Object downloadResultErrorCode =
+			request.getAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
+		
+		if (downloadResultErrorCode == null) {
+			return;
+		}
+		
+		if (downloadResultErrorCode instanceof DownloadResult.Code) {
+			DownloadResult.Code code = (DownloadResult.Code)downloadResultErrorCode;
+			switch (code) {
+				case INVALID_URL:
+					// Url is being validated by @URL, to avoid showing an error message
+					// twice we're skipping error from an interceptor.
+					break;
+				case INSUFFICIENT_PERMISSIONS:
+					// A user without permissions has tried to download a file. It means that he
+					// didn't specify a file but somehow provide a URL to an image. In this case,
+					// let's show an error message that file is required.
+					result.rejectValue(
+						"image",
+						"ru.mystamps.web.support.beanvalidation.NotEmptyFilename.message"
+					);
+					form.setImageUrl(null);
+					break;
+				default:
+					result.rejectValue(
+						DownloadImageInterceptor.DOWNLOADED_IMAGE_FIELD_NAME,
+						DownloadResult.class.getName() + "." + code.toString(),
+						"Could not download image"
+					);
+					break;
+			}
+		}
+		
+		request.removeAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
 	}
 	
 	private static void addImageFormToModel(Model model) {

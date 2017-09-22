@@ -55,6 +55,7 @@ class SeriesServiceImplTest extends Specification {
 	private AddImageForm imageForm
 	private Integer userId
 	
+	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
 		form = new AddSeriesForm()
 		form.setQuantity(2)
@@ -76,6 +77,8 @@ class SeriesServiceImplTest extends Specification {
 			yvertCatalogService,
 			gibbonsCatalogService
 		)
+		
+		multipartFile.getOriginalFilename() >> '/path/to/test/file.ext'
 	}
 	
 	//

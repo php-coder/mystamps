@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify series creation validation scenarios
+Documentation    Verify series creation validation scenarios from admin
 Library          Selenium2Library
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
@@ -7,6 +7,14 @@ Suite Teardown   After Test Suite
 Force Tags       series  validation
 
 *** Test Cases ***
+Create series with empty required fields
+	[Documentation]         Verify validation of mandatory fields
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=category.errors  Value must not be empty
+	Element Text Should Be  id=quantity.errors  Value must not be empty
+	Element Text Should Be  id=image.errors      Image or image URL must be specified
+	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
+
 Create series with non-numeric quantity
 	[Documentation]         Verify validation of non-numeric quantity
 	Input Text              id=quantity  NaN
@@ -30,6 +38,44 @@ Create series with empty image
 	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.png
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image.errors  File must not be empty
+
+Create series with both image and an image URL
+	[Documentation]         Verify validation of an image and an image URL provided at the same time
+	Choose File             id=image      ${MAIN_RESOURCE_DIR}${/}test.png
+	Input Text              id=image-url  ${SITE_URL}/image/1
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image.errors      Image or image URL must be specified
+	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
+
+Create series with image URL with invalid response
+	[Documentation]         Verify validation of invalid response from a server
+	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-400
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  Could not download file
+
+Create series with image URL to a file that does not exist
+	[Documentation]         Verify validation of URL to non existing file
+	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-404
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  File not found
+
+Create series with image URL that causes a redirect
+	[Documentation]         Verify validation of URL with redirect
+	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-301
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  URL must not redirect to another address
+
+Create series with image URL to an empty file
+	[Documentation]         Verify validation of URL to an empty file
+	Input Text              id=image-url  ${SITE_URL}/test/invalid/empty-jpeg-file
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  File must not be empty
+
+Create series with image URL to not an image file
+	[Documentation]         Verify validation of URL to a file of unsupported type
+	Input Text              id=image-url  ${SITE_URL}/test/invalid/not-image-file
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  Invalid file type
 
 Catalog numbers should reject invalid values
 	[Documentation]  Verify that fields with catalog numbers reject invalid values
