@@ -54,9 +54,16 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// CheckStyle: ignore LineLength for next 1 line
 	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly";
 	
-	// - 'self' is required for our own CSS files
 	// - 'https://cdn.rawgit.com' is required by languages.min.css (TODO: GH #246)
-	private static final String STYLE_SRC = "style-src 'self' https://cdn.rawgit.com";
+	private static final String STYLE_SRC = "style-src https://cdn.rawgit.com";
+	
+	// - 'self' is required for our own CSS files
+	private static final String STYLES_SELF = " 'self'";
+	
+	// - 'https://stamps.filezz.ru' is required for our own CSS files
+	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
+	private static final String STYLES_CDN =
+		" https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com";
 	
 	// - 'sha256-Dpm...' is required for 'box-shadow: none; border: 0px;' inline CSS
 	// that are using on /series/add and /series/{id} pages.
@@ -118,6 +125,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(uri));
 	}
 
+	@SuppressWarnings("PMD.NPathComplexity")
 	private String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		
@@ -127,7 +135,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		  .append(IMG_SRC).append(SEPARATOR)
 		  .append(FONT_SRC).append(SEPARATOR)
 		  .append(REPORT_URI).append(SEPARATOR)
-		  .append(STYLE_SRC);
+		  .append(STYLE_SRC)
+		  .append(useSingleHost ? STYLES_SELF : STYLES_CDN);
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
