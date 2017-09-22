@@ -49,7 +49,10 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String IMG_SRC = "img-src 'self' https://cdn.rawgit.com https://raw.githubusercontent.com";
 	
 	// - 'self' is required by glyphicons-halflings-regular.woff2 from bootstrap
-	private static final String FONT_SRC = "font-src 'self'";
+	private static final String FONT_SRC_SELF = "font-src 'self'";
+	
+	// - 'https://maxcdn.bootstrapcdn.com' is required by glyphicons-halflings-regular.woff2
+	private static final String FONT_SRC_CDN = "font-src https://maxcdn.bootstrapcdn.com";
 	
 	// CheckStyle: ignore LineLength for next 1 line
 	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly";
@@ -110,7 +113,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final int MIN_HEADER_LENGTH =
 		DEFAULT_SRC.length()
 		+ IMG_SRC.length()
-		+ FONT_SRC.length()
+		+ FONT_SRC_SELF.length()
 		+ REPORT_URI.length()
 		+ STYLE_SRC.length()
 		+ SCRIPT_SRC.length()
@@ -133,7 +136,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
 		  .append(IMG_SRC).append(SEPARATOR)
-		  .append(FONT_SRC).append(SEPARATOR)
+		  .append(useSingleHost ? FONT_SRC_SELF : FONT_SRC_CDN).append(SEPARATOR)
 		  .append(REPORT_URI).append(SEPARATOR)
 		  .append(STYLE_SRC)
 		  .append(useSingleHost ? STYLES_SELF : STYLES_CDN);
