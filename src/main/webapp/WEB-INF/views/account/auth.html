@@ -78,7 +78,7 @@
 						<!--/*/
 						<div class="row" th:if="${requestFailed and exceptionOccurred}">
 							<div id="form.errors" class="alert alert-danger text-center col-sm-8 col-sm-offset-2" th:with="errorMessage=${session.SPRING_SECURITY_LAST_EXCEPTION.message}" th:text="${errorMessage}">
-								Wrong login or password!
+								Invalid login or password
 							</div>
 						</div>
 						/*/-->
