@@ -923,6 +923,7 @@
 				<configuration>
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
+					<randomize>suite</randomize>
 					<!-- Handy for debugging. Log file will be created in target/ directory -->
 					<!--
 					<debugFile>${project.build.directory}/robotframework.log</debugFile>
