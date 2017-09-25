@@ -662,9 +662,8 @@ if commits > 1
 		)
 	else
 		warn(
-			"danger check: pull request contains #{commits} commits while most of the cases it should have only one.\n"\
-			"If it's not a special case you should **squash the commits** into single one.\n"\
-			"You can read how to do it here: https://davidwalsh.name/squash-commits-git\n"\
+			"danger check: pull request contains #{commits} commits while most of the cases it should have only one. "\
+			"If it's not a special case you should [**squash the commits**](https://davidwalsh.name/squash-commits-git) into single one.\n"\
 			"But be careful because **it can destroy** all your changes!"
 		)
 	end
