@@ -194,7 +194,7 @@ if File.file?(sortpom_output)
 	unless errors.empty?
 		link = 'https://github.com/php-coder/mystamps/wiki/sortpom'
 		errors_cnt = errors.size()
-		error_msgs = errors.join("</li>\n<li>")
+		error_msgs = errors.map { |msg| msg.sub(pwd, '') }.join("</li>\n<li>")
 		if errors_cnt == 1
 			fail("sortpom-maven-plugin reported about #{errors_cnt} error:\n"\
 				"<ul><li>#{error_msgs}</li></ul>\n"\
