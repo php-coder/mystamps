@@ -325,6 +325,27 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>${groovy.version}</version>
@@ -440,6 +461,7 @@
 		<commons.lang.version>3.4</commons.lang.version>
 		<compiler.plugin.version>3.6.1</compiler.plugin.version>
 		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
+		<cucumber.version>1.2.5</cucumber.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
@@ -481,6 +503,7 @@
 		
 		<!-- Don't forget to update version in the Url class -->
 		<jquery.version>1.9.1</jquery.version>
+		<junit.version>4.12</junit.version>
 		
 		<license.plugin.version>3.0</license.plugin.version>
 		
