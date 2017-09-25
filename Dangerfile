@@ -595,10 +595,34 @@ if File.file?(rf_report)
 		end
 		msg  = node.text.sub(/\.$/, '')
 		msg  = msg.split(/\n/).delete_if {|el| el =~ /^(Build|System|Driver) info:/}.join("\n")
-		file = suite['source'].sub(pwd, '')
-		file = github.html_link(file)
+		scenario_file = suite['source']
+		file = scenario_file.sub(pwd, '')
 		testcase = node.parent['name']
-		# TODO: try to findout the test case and use it for highlighting line numbers
+		
+		# locate the lines of a test case in a test suite
+		from_line = -1
+		to_line = -1
+		current_line = 0
+		File.readlines(scenario_file).each do |line|
+			current_line += 1
+			line.rstrip!
+			
+			if line == testcase
+				from_line = current_line
+				next
+			end
+			
+			if from_line > 0 && line == ''
+				to_line = current_line - 1
+				break
+			end
+		end
+		
+		line = ''
+		if from_line > 0 && to_line > 0
+			line = "#L#{from_line}-L#{to_line}"
+		end
+		file = github.html_link("#{file}#{line}")
 		fail("robotframework-maven-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n#{msg}")
 	end
 	# TODO: add link to wiki page (#530)
