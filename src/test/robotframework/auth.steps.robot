@@ -11,5 +11,5 @@ Log In As
 	Submit Form      id=auth-account-form
 
 Log Out
-	[Documentation]  Log out current user
+	[Documentation]  Logout the current user
 	Submit Form      id=logout-form
