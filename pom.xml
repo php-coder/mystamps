@@ -513,6 +513,8 @@
 		
 		<!-- Don't forget to update version in the Url class -->
 		<jquery.version>1.9.1</jquery.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<junit.version>4.12</junit.version>
 		
 		<license.plugin.version>3.0</license.plugin.version>
