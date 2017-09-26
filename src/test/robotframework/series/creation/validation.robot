@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Verify series creation validation scenarios
 Library          Selenium2Library
+Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       series  validation
@@ -73,18 +74,6 @@ After Test Suite
 	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
-
-Log In As
-	[Documentation]  Log in as a user
-	[Arguments]      ${login}  ${password}
-	Go To            ${SITE_URL}/account/auth
-	Input Text       id=login  ${login}
-	Input Password   id=password  ${password}
-	Submit Form      id=auth-account-form
-
-Log Out
-	[Documentation]  Log out current user
-	Submit Form      id=logout-form
 
 Invalid Catalog Numbers Should Be Rejected
 	[Documentation]                Test that specifying catalog numbers cause an error

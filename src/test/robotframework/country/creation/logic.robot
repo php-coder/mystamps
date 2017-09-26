@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Verify country creation scenarios
 Library          Selenium2Library
+Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
@@ -43,18 +44,6 @@ After Test Suite
 	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
-
-Log In As
-	[Documentation]  Log in as a user
-	[Arguments]      ${login}  ${password}
-	Go To            ${SITE_URL}/account/auth
-	Input Text       id=login  ${login}
-	Input Password   id=password  ${password}
-	Submit Form      id=auth-account-form
-
-Log Out
-	[Documentation]  Log out current user
-	Submit Form      id=logout-form
 
 Country Field Should Have Option
 	[Documentation]                   Verify the selection of the select list that is using selectize.js
