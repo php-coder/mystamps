@@ -207,9 +207,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		if (onCollectionInfoPage) {
 			sb.append(SCRIPT_COLLECTION_INFO);
-		}
 		
-		if (onAddSeriesPage) {
+		} else if (onAddSeriesPage) {
 			sb.append(SCRIPTS_SERIES_ADD_PAGE)
 			  .append(SEPARATOR)
 			  .append(CONNECT_SRC);
