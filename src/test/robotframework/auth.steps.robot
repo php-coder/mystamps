@@ -6,7 +6,7 @@ Log In As
 	[Documentation]  Log in as a user
 	[Arguments]      ${login}  ${password}
 	Go To            ${SITE_URL}/account/auth
-	Input Text       id=login  ${login}
+	Input Text       id=login     ${login}
 	Input Password   id=password  ${password}
 	Submit Form      id=auth-account-form
 
