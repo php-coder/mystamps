@@ -360,6 +360,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>${hamcrest.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.robotframework</groupId>
 			<artifactId>robotframework</artifactId>
 			<version>${robotframework.version}</version>
@@ -478,6 +485,9 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<h2.version>1.4.196</h2.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<hamcrest.version>1.3</hamcrest.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.2.5.Final</hibernate-validator.version>
@@ -918,6 +928,7 @@
 					<includes>
 						<include>**/mystamps/web/service/*</include>
 						<include>**/mystamps/web/util/*</include>
+						<include>**/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter*</include>
 					</includes>
 				</configuration>
 			</plugin>
