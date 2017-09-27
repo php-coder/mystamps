@@ -17,11 +17,18 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
 public class ContentSecurityPolicyHeaderWriterTest {
@@ -29,6 +36,28 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	private static final int NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES = 6;
 	private static final int NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE = 7;
 	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
+	
+	//
+	// Tests for writeHeaders()
+	//
+	
+	@Test
+	public void writeContentSecurityPolicyHeader() {
+		boolean anyValue = false;
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(anyValue);
+		
+		HttpServletRequest request = new MockHttpServletRequest();
+		HttpServletResponse response = new MockHttpServletResponse();
+		writer.writeHeaders(request, response);
+		
+		String header = response.getHeader("Content-Security-Policy-Report-Only");
+		assertThat(header, is(notNullValue()));
+		assertThat(header.split(";"), is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+	}
+	
+	//
+	// Tests for constructDirectives()
+	//
 	
 	@Test
 	public void onIndexPageWithLocalResources() {
