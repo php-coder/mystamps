@@ -39,6 +39,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
 	
+	private static final String H2_CONSOLE_PATTERN = "/console/";
+	
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
 	
@@ -174,6 +176,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		boolean onAddSeriesPage = uri.equals(Url.ADD_SERIES_PAGE);
+		boolean onH2ConsolePage = uri.startsWith(H2_CONSOLE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
@@ -197,7 +200,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		} else if (uri.startsWith(TOGGLZ_PAGES_PATTERN)) {
 			sb.append(STYLE_TOGGLZ);
 		
-		} else if (uri.startsWith("/console/")) {
+		} else if (onH2ConsolePage) {
 			sb.append(STYLE_H2_CONSOLE);
 		}
 		
@@ -213,7 +216,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			  .append(SEPARATOR)
 			  .append(CONNECT_SRC);
 		
-		} else if (uri.startsWith("/console/")) {
+		} else if (onH2ConsolePage) {
 			sb.append(SEPARATOR)
 			  .append(CHILD_SRC);
 		}
