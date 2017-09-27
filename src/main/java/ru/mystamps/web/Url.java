@@ -114,6 +114,9 @@ public final class Url {
 	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
 	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
 	
+	// see also src/main/resources/application-test.properties
+	public static final String H2_CONSOLE_PAGE       = "/console";
+	
 	private Url() {
 	}
 	

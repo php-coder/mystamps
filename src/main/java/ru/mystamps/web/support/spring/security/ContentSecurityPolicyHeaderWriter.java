@@ -39,7 +39,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
 	
-	private static final String H2_CONSOLE_PATTERN = "/console/";
+	private static final String H2_CONSOLE_PATTERN = Url.H2_CONSOLE_PAGE + '/';
 	
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
