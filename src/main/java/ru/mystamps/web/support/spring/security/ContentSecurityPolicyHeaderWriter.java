@@ -35,7 +35,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
 		Url.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
-	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d/(ask|image))";
+	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d+/(ask|image))";
 	
 	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
 	

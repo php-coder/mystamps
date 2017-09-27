@@ -172,7 +172,52 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, is(arrayWithSize(6)));
 	}
 	
-	// TODO: /series/(add|\d+|\d/(ask|image))
+	@Test
+	public void onSeriesAddImagePageWithLocalResources() {
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		
+		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
+			String[] directives = writer.constructDirectives(page).split(";");
+
+			// test only a directive that is differ from the index page
+			assertThat(
+				directives,
+				hasItemInArray(
+					"style-src "
+						+ "https://cdn.rawgit.com "
+						+ "'self' "
+						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+				)
+			);
+
+			// hope that all other directives are the same as on the index page
+			assertThat(directives, is(arrayWithSize(6)));
+		}
+	}
+	
+	@Test
+	public void onSeriesAddImagePageWithResourcesFromCdn() {
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		
+		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
+			String[] directives = writer.constructDirectives(page).split(";");
+
+			// test only a directive that is differ from the index page
+			assertThat(
+				directives,
+				hasItemInArray(
+					"style-src "
+						+ "https://cdn.rawgit.com "
+						+ "https://stamps.filezz.ru "
+						+ "https://maxcdn.bootstrapcdn.com "
+						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
+				)
+			);
+
+			// hope that all other directives are the same as on the index page
+			assertThat(directives, is(arrayWithSize(6)));
+		}
+	}
 	
 	// TODO: /series/add
 	
