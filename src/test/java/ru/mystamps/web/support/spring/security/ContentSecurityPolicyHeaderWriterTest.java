@@ -24,9 +24,11 @@ import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
-// 6 and 7 are number of directives and not magic numbers
-@SuppressWarnings("checkstyle:magicnumber")
 public class ContentSecurityPolicyHeaderWriterTest {
+	
+	private static final int NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES = 6;
+	private static final int NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE = 7;
+	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
 	
 	@Test
 	public void onIndexPageWithLocalResources() {
@@ -54,7 +56,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, hasItemInArray("style-src https://cdn.rawgit.com 'self'"));
 		assertThat(directives, hasItemInArray("script-src 'unsafe-inline' 'self'"));
 		
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -102,7 +104,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			)
 		);
 		
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -134,7 +136,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		);
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -169,7 +171,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		);
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -191,7 +193,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			);
 
 			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(6)));
+			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 		}
 	}
 	
@@ -215,7 +217,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			);
 
 			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(6)));
+			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 		}
 	}
 	
@@ -249,7 +251,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, hasItemInArray("connect-src 'self'"));
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(7)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE)));
 	}
 	
 	@Test
@@ -285,7 +287,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, hasItemInArray("connect-src 'self'"));
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(7)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE)));
 	}
 	
 	@Test
@@ -306,7 +308,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		);
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -328,7 +330,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		);
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(6)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 	@Test
@@ -340,7 +342,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, hasItemInArray("child-src 'self'"));
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(7)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE)));
 	}
 	
 	@Test
@@ -353,7 +355,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		assertThat(directives, hasItemInArray("child-src 'self'"));
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(7)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE)));
 	}
 	
 }
