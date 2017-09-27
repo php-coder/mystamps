@@ -219,7 +219,74 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		}
 	}
 	
-	// TODO: /series/add
+	@Test
+	public void onSeriesAddPageWithLocalResources() {
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		String[] directives = writer.constructDirectives("/series/add").split(";");
+		
+		// test only the directives that differ from the index page
+		assertThat(
+			directives,
+			hasItemInArray(
+				"style-src "
+					+ "https://cdn.rawgit.com "
+					+ "'self' "
+					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
+					+ "https://cdnjs.cloudflare.com"
+			)
+		);
+		
+		assertThat(
+			directives,
+			hasItemInArray(
+				"script-src "
+					+ "'unsafe-inline' "
+					+ "'self' "
+					+ "https://cdnjs.cloudflare.com"
+			)
+		);
+		
+		assertThat(directives, hasItemInArray("connect-src 'self'"));
+		
+		// hope that all other directives are the same as on the index page
+		assertThat(directives, is(arrayWithSize(7)));
+	}
+	
+	@Test
+	public void onSeriesAddPageWithResourcesFromCdn() {
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		String[] directives = writer.constructDirectives("/series/add").split(";");
+		
+		// test only the directives that differ from the index page
+		assertThat(
+			directives,
+			hasItemInArray(
+				"style-src "
+					+ "https://cdn.rawgit.com "
+					+ "https://stamps.filezz.ru "
+					+ "https://maxcdn.bootstrapcdn.com "
+					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
+					+ "https://cdnjs.cloudflare.com"
+			)
+		);
+		
+		assertThat(
+			directives,
+			hasItemInArray(
+				"script-src "
+					+ "'unsafe-inline' "
+					+ "https://stamps.filezz.ru "
+					+ "https://maxcdn.bootstrapcdn.com "
+					+ "https://yandex.st "
+					+ "https://cdnjs.cloudflare.com"
+			)
+		);
+		
+		assertThat(directives, hasItemInArray("connect-src 'self'"));
+		
+		// hope that all other directives are the same as on the index page
+		assertThat(directives, is(arrayWithSize(7)));
+	}
 	
 	@Test
 	public void onTogglzConsoleWithLocalResources() {
