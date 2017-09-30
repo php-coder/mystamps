@@ -266,14 +266,47 @@ public class SeriesController {
 		return "series/info";
 	}
 	
-	@PostMapping(Url.ADD_IMAGE_SERIES_PAGE)
-	public String processImage(
-		@Valid AddImageForm form,
+	@SuppressWarnings("checkstyle:parameternumber")
+	@PostMapping(path = Url.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
+	public String processImageWithImageUrl(
+		@Validated({
+			AddImageForm.ImageUrlChecks.class,
+			AddImageForm.ImageChecks.class
+		}) AddImageForm form,
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@CurrentUser Integer currentUserId,
 		Locale userLocale,
+		HttpServletRequest request,
+		HttpServletResponse response)
+		throws IOException {
+		
+		return processImage(
+			form,
+			result,
+			seriesId,
+			model,
+			currentUserId,
+			userLocale,
+			request,
+			response
+		);
+	}
+	
+	@SuppressWarnings("checkstyle:parameternumber")
+	@PostMapping(path = Url.ADD_IMAGE_SERIES_PAGE, params = "!imageUrl")
+	public String processImage(
+		@Validated({
+			AddImageForm.RequireImageCheck.class,
+			AddImageForm.ImageChecks.class })
+		AddImageForm form,
+		BindingResult result,
+		@PathVariable("id") Integer seriesId,
+		Model model,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		HttpServletRequest request,
 		HttpServletResponse response)
 		throws IOException {
 		
@@ -288,6 +321,8 @@ public class SeriesController {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
+		
+		loadErrorsFromDownloadInterceptor(form, result, request);
 		
 		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
