@@ -63,6 +63,7 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
+import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -499,7 +500,7 @@ public class SeriesController {
 	}
 	
 	private static void loadErrorsFromDownloadInterceptor(
-		AddSeriesForm form,
+		NullableImageUrl form,
 		BindingResult result,
 		HttpServletRequest request) {
 		
@@ -525,7 +526,7 @@ public class SeriesController {
 						"image",
 						"ru.mystamps.web.support.beanvalidation.NotEmptyFilename.message"
 					);
-					form.setImageUrl(null);
+					form.nullifyImageUrl();
 					break;
 				default:
 					result.rejectValue(
