@@ -75,7 +75,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 	)
 })
 @ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
-public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl {
+public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, NullableImageUrl {
 	
 	// FIXME: change type to plain Integer
 	@NotNull
