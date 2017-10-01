@@ -12,6 +12,12 @@ Add image but without filling a required field
 	Submit Form             id=add-image-form
 	Element Text Should Be  id=image.errors  Value must not be empty
 
+Add image with empty file
+	[Documentation]         Verify validation of an empty file
+	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.png
+	Submit Form             id=add-image-form
+	Element Text Should Be  id=image.errors  File must not be empty
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and open a page with a series info
