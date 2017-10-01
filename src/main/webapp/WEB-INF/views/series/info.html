@@ -87,7 +87,12 @@
 							
 							<div class="row" th:if="${allowAddingImages}" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES">
 								<div class="col-sm-8 col-sm-offset-2">
-									<form method="post" class="form-horizontal" enctype="multipart/form-data" th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}" th:object="${addImageForm}">
+									<form id="add-image-form"
+										method="post"
+										class="form-horizontal"
+										enctype="multipart/form-data"
+										th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}"
+										th:object="${addImageForm}">
 										<div class="form-group" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
 											<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
 											<!--/*/
