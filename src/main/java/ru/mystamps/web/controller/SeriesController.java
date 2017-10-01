@@ -244,14 +244,14 @@ public class SeriesController {
 	
 	@PostMapping(Url.ADD_IMAGE_SERIES_PAGE)
 	public String processImage(
-			@Valid AddImageForm form,
-			BindingResult result,
-			@PathVariable("id") Integer seriesId,
-			Model model,
-			@CurrentUser Integer currentUserId,
-			Locale userLocale,
-			HttpServletResponse response)
-			throws IOException {
+		@Valid AddImageForm form,
+		BindingResult result,
+		@PathVariable("id") Integer seriesId,
+		Model model,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (seriesId == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -344,14 +344,14 @@ public class SeriesController {
 	
 	@PostMapping(Url.ADD_SERIES_ASK_PAGE)
 	public String processAskForm(
-			@Valid AddSeriesSalesForm form,
-			BindingResult result,
-			@PathVariable("id") Integer seriesId,
-			Model model,
-			@CurrentUser Integer currentUserId,
-			Locale userLocale,
-			HttpServletResponse response)
-			throws IOException {
+		@Valid AddSeriesSalesForm form,
+		BindingResult result,
+		@PathVariable("id") Integer seriesId,
+		Model model,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
 		
 		if (seriesId == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
