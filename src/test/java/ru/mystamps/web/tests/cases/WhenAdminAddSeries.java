@@ -26,8 +26,6 @@ import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.AddSeriesPage;
 
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-
 /**
  * The main difference between this test and {@link WhenUserAddSeries} is that as admin we have
  * additional field for comment.
@@ -62,16 +60,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void commentShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.showComment();
-		page.fillComment(" example comment ");
-		
-		page.submit();
-		
-		assertThat(page).field("comment").hasValue("example comment");
 	}
 	
 }

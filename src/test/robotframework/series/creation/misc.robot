@@ -76,6 +76,13 @@ Issue year should have options for range from 1840 to the current year
 	List Should Contain Value    ${availableYears}  ${currentYear}
 	Should Be Equal As Integers  ${numberOfYears}  ${expectedNumberOfYears}
 
+Comment should be stripped from leading and trailing spaces
+	[Documentation]           Verify removing of leading and trailing spaces from a comment
+	Click Element             id=add-comment-link
+	Input Text                id=comment  ${SPACE * 2}example comment${SPACE * 2}
+	Submit Form               id=add-series-form
+	Textarea Value Should Be  id=comment  example comment
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and go to create series page
