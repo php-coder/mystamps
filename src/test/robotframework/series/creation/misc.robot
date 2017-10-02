@@ -33,6 +33,23 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id=yvert_catalog_info    \#124, 125
 	Element Text Should Be     id=gibbons_catalog_info  \#134, 135
 
+Catalog numbers should accept existing numbers
+	[Documentation]            Verify that existing catalog numbers are being accepted
+	Go To                      ${SITE_URL}/series/add
+	Select From List By Label  id=category  Sport
+	Input Text                 id=quantity  2
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	Click Element              id=add-catalog-numbers-link
+	Input Text                 id=michelNumbers   99
+	Input Text                 id=scottNumbers    99
+	Input Text                 id=yvertNumbers    99
+	Input Text                 id=gibbonsNumbers  99
+	Submit Form                id=add-series-form
+	Element Text Should Be     id=michel_catalog_info   \#99
+	Element Text Should Be     id=scott_catalog_info    \#99
+	Element Text Should Be     id=yvert_catalog_info    \#99
+	Element Text Should Be     id=gibbons_catalog_info  \#99
+
 Issue year should have options for range from 1840 to the current year
 	[Documentation]              Verify that field with year provides all valid values
 	Go To                        ${SITE_URL}/series/add
