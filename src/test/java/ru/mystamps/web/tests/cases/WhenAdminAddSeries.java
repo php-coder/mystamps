@@ -128,28 +128,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "misc" })
-	public void shouldIgnoreDuplicatedCatalogNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers("104,105,104");
-		page.fillScottNumbers("114,115,114");
-		page.fillYvertNumbers("124,125,124");
-		page.fillGibbonsNumbers("134,135,134");
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#104, 105");
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#114, 115");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#124, 125");
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#134, 135");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "misc" })
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
