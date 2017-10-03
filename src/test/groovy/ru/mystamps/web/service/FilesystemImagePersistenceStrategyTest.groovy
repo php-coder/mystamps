@@ -48,7 +48,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	// Tests for save()
 	//
 	
-	def "save() should saves file onto the filesystem"() {
+	def "save() should save a file onto the file system"() {
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
@@ -56,7 +56,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "save() should saves file onto the configured directory"() {
+	def "save() should save a file into a configured directory"() {
 		given:
 			String expectedDirectoryName = STORAGE_DIR
 		when:
@@ -69,7 +69,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "save() should gives proper name to the file"() {
+	def "save() should give a proper name to a file"() {
 		given:
 			String expectedExtension = imageInfoDto.type.toLowerCase()
 			String expectedName = imageInfoDto.id
@@ -83,7 +83,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			}) >> { }
 	}
 	
-	def "save() should converts IOException to ImagePersistenceException"() {
+	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
 			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException() }
 		when:
@@ -98,7 +98,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
-	def "get() should returns null when file doesn't exist"() {
+	def "get() should return null when file doesn't exist"() {
 		given:
 			strategy.exists(_ as Path) >> false
 		and:
@@ -109,7 +109,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			result == null
 	}
 	
-	def "get() should converts IOException to ImagePersistenceException"() {
+	def "get() should convert IOException to ImagePersistenceException"() {
 		given:
 			strategy.exists(_ as Path) >> true
 		and:
