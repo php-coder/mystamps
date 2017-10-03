@@ -25,6 +25,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import org.junit.Test;
 
+import static io.qala.datagen.RandomShortApi.bool;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.is;
@@ -43,8 +44,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void writeContentSecurityPolicyHeader() {
-		boolean anyValue = false;
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(anyValue);
+		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(bool());
 		
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
