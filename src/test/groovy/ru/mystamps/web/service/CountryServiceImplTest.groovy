@@ -196,7 +196,7 @@ class CountryServiceImplTest extends Specification {
 		and:
 			LinkEntityDto expectedDto = TestObjects.createLinkEntityDto()
 		when:
-			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, 'fr')
+			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, expectedLang)
 		then:
 			1 * countryDao.findOneAsLinkEntity(
 				{ String countrySlug ->
