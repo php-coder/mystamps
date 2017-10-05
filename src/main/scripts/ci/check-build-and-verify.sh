@@ -19,7 +19,6 @@ fi
 
 CS_STATUS=
 PMD_STATUS=
-CODENARC_STATUS=
 LICENSE_STATUS=
 POM_STATUS=
 BOOTLINT_STATUS=
@@ -28,6 +27,7 @@ JASMINE_STATUS=
 HTML_STATUS=
 ENFORCER_STATUS=
 TEST_STATUS=
+CODENARC_STATUS=
 FINDBUGS_STATUS=
 VERIFY_STATUS=
 
@@ -115,12 +115,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	print_status "$PMD_STATUS" 'Run PMD'
 	
-	if [ "$CODENARC_STATUS" != 'skip' ]; then
-		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
-			>codenarc.log 2>&1 || CODENARC_STATUS=fail
-	fi
-	print_status "$CODENARC_STATUS" 'Run CodeNarc'
-	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
 		mvn --batch-mode license:check \
 			>license.log 2>&1 || LICENSE_STATUS=fail
@@ -182,6 +176,13 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	print_status "$TEST_STATUS" 'Run unit tests'
 	
+	if [ "$CODENARC_STATUS" != 'skip' ]; then
+		# run after tests for getting compiled sources
+		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
+			>codenarc.log 2>&1 || CODENARC_STATUS=fail
+	fi
+	print_status "$CODENARC_STATUS" 'Run CodeNarc'
+	
 	if [ "$FINDBUGS_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
 		mvn --batch-mode findbugs:check \
@@ -206,7 +207,6 @@ print_status "$DANGER_STATUS" 'Run danger'
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$CS_STATUS" = 'skip' ]       || print_log cs.log        'Run CheckStyle'
 	[ "$PMD_STATUS" = 'skip' ]      || print_log pmd.log       'Run PMD'
-	[ "$CODENARC_STATUS" = 'skip' ] || print_log codenarc.log  'Run CodeNarc'
 	[ "$LICENSE_STATUS" = 'skip' ]  || print_log license.log   'Check license headers'
 	[ "$POM_STATUS" = 'skip' ]      || print_log pom.log       'Check sorting of pom.xml'
 	[ "$BOOTLINT_STATUS" = 'skip' ] || print_log bootlint.log  'Run bootlint'
@@ -215,6 +215,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$HTML_STATUS" = 'skip' ]     || print_log validator.log 'Run html5validator'
 	[ "$ENFORCER_STATUS" = 'skip' ] || print_log enforcer.log  'Run maven-enforcer-plugin'
 	[ "$TEST_STATUS" = 'skip' ]     || print_log test.log      'Run unit tests'
+	[ "$CODENARC_STATUS" = 'skip' ] || print_log codenarc.log  'Run CodeNarc'
 	[ "$FINDBUGS_STATUS" = 'skip' ] || print_log findbugs.log  'Run FindBugs'
 fi
 
@@ -224,8 +225,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log codenarc.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log findbugs.log verify-raw.log verify.log danger.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
 
-if echo "$CS_STATUS$PMD_STATUS$CODENARC_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
 	exit 1
 fi
