@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.service.dto.SeriesDto
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesServiceImplTest extends Specification {
@@ -53,7 +54,6 @@ class SeriesServiceImplTest extends Specification {
 	private SeriesService service
 	private AddSeriesForm form
 	private AddImageForm imageForm
-	private Integer userId
 	
 	def setup() {
 		form = new AddSeriesForm()
@@ -62,8 +62,6 @@ class SeriesServiceImplTest extends Specification {
 		form.setCategory(TestObjects.createLinkEntityDto())
 		
 		imageForm = new AddImageForm()
-		
-		userId = TestObjects.TEST_USER_ID
 		
 		imageService.save(_) >> TestObjects.createImageInfoDto()
 		
@@ -84,7 +82,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception if dto is null"() {
 		when:
-			service.add(null, userId, false)
+			service.add(null, Random.userId(), false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -93,7 +91,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setQuantity(null)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -102,7 +100,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setPerforated(null)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -111,7 +109,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(null)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -120,7 +118,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(new LinkEntityDto(null, 'test', 'Test'))
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -141,7 +139,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCountry(country)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
@@ -160,7 +158,7 @@ class SeriesServiceImplTest extends Specification {
 			form.setMonth(month)
 			form.setYear(year)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
@@ -189,7 +187,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCategory(category)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
@@ -203,7 +201,7 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedQuantity = 3
 			form.setQuantity(expectedQuantity)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
@@ -217,7 +215,7 @@ class SeriesServiceImplTest extends Specification {
 			Boolean expectedResult = true
 			form.setPerforated(expectedResult)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
@@ -236,7 +234,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setMichelPrice(price)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
@@ -260,7 +258,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setScottPrice(price)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.scottPrice == expectedPrice
@@ -284,7 +282,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setYvertPrice(price)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.yvertPrice == expectedPrice
@@ -308,7 +306,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setGibbonsPrice(price)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.gibbonsPrice == expectedPrice
@@ -325,7 +323,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setComment('  ')
 		when:
-			service.add(form, userId, true)
+			service.add(form, Random.userId(), true)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -341,7 +339,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setComment(comment)
 		when:
-			service.add(form, userId, canAddComment)
+			service.add(form, Random.userId(), canAddComment)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.comment == expectedComment
@@ -375,7 +373,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expected = 456
 		when:
-			Integer actual = service.add(form, userId, false)
+			Integer actual = service.add(form, Random.userId(), false)
 		then:
 			1 * seriesDao.add(_ as AddSeriesDbDto) >> expected
 		and:
@@ -393,7 +391,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * michelCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -420,7 +418,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * scottCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -447,7 +445,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * yvertCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -474,7 +472,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * gibbonsCatalogService.add({ Set<String> numbers ->
 				assert numbers == expectedNumbers
@@ -495,7 +493,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setImage(multipartFile)
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			1 * imageService.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -512,7 +510,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedImageId = 456
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
 			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
@@ -535,7 +533,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
-			service.add(form, userId, false)
+			service.add(form, Random.userId(), false)
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
