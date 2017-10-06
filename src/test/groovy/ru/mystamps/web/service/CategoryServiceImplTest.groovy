@@ -27,12 +27,11 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.controller.dto.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CategoryServiceImplTest extends Specification {
-	
-	private static final Integer USER_ID = 123
 	
 	private final CategoryDao categoryDao = Mock()
 	private final CategoryService service = new CategoryServiceImpl(NOPLogger.NOP_LOGGER, categoryDao)
@@ -51,7 +50,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when dto is null"() {
 		when:
-			service.add(null, USER_ID)
+			service.add(null, Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -60,7 +59,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, USER_ID)
+			service.add(form, Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -82,7 +81,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			categoryDao.add(_ as AddCategoryDbDto) >> expectedId
 		when:
-			String actualSlug = service.add(form, USER_ID)
+			String actualSlug = service.add(form, Random.userId())
 		then:
 			actualSlug == expectedSlug
 	}
@@ -91,7 +90,7 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			form.setName(null)
 		when:
-			service.add(form, USER_ID)
+			service.add(form, Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -105,7 +104,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			form.setName(name)
 		when:
-			service.add(form, USER_ID)
+			service.add(form, Random.userId())
 		then:
 			1 * categoryDao.add({ AddCategoryDbDto category ->
 				assert category?.slug == slug
