@@ -23,6 +23,7 @@ import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*;
+import ru.mystamps.web.tests.Random;
 
 final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -33,7 +34,6 @@ final class TestObjects {
 	public static final String TEST_ACTIVITY_REFERER = "http://example.org/referer";
 	public static final String TEST_ACTIVITY_AGENT   = "Some browser";
 	
-	public static final Integer TEST_USER_ID        = 777;
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
 	
@@ -133,7 +133,7 @@ final class TestObjects {
 			info.getQuantity(),
 			info.getPerforated(),
 			"this is a full info",
-			TEST_USER_ID,
+			Random.userId(),
 			TEST_PRICE, Currency.EUR.toString(),
 			TEST_PRICE, Currency.USD.toString(),
 			TEST_PRICE, Currency.EUR.toString(),
