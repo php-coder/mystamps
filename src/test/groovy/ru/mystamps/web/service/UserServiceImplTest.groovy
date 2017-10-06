@@ -29,11 +29,10 @@ import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.controller.dto.ActivateAccountForm
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
-	
-	private static final Integer ANY_USER_ID = TestObjects.TEST_USER_ID
 	
 	private final UserDao userDao = Mock()
 	private final UsersActivationService usersActivationService = Mock()
@@ -81,7 +80,7 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			1 * userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
+			1 * userDao.add(_ as AddUserDbDto) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -96,7 +95,7 @@ class UserServiceImplTest extends Specification {
 				return true
 			})
 		and:
-			userDao.add(_ as AddUserDbDto) >> ANY_USER_ID
+			userDao.add(_ as AddUserDbDto) >> Random.userId()
 	}
 	
 	def "registerUser() should throw exception when activation key is null"() {
@@ -129,7 +128,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserName
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -143,7 +142,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -158,7 +157,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.name == expectedUserLogin
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -169,7 +168,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.role == UserDetails.Role.USER
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -184,7 +183,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.email == activation.email
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -199,7 +198,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.registeredAt == activation.createdAt
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	def "registerUser() should throw exception when password is null"() {
@@ -221,7 +220,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.hash == expectedHash
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 		and:
 			1 * encoder.encode({ String password ->
 				assert password == TestObjects.TEST_PASSWORD
@@ -257,7 +256,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert user?.login == expectedUserLogin
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -268,7 +267,7 @@ class UserServiceImplTest extends Specification {
 			1 * userDao.add({ AddUserDbDto user ->
 				assert DateUtils.roughlyEqual(user?.activatedAt, new Date())
 				return true
-			}) >> ANY_USER_ID
+			}) >> Random.userId()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
