@@ -534,6 +534,8 @@ public class SeriesController {
 		model.addAttribute("buyers", buyers);
 	}
 	
+	// false positive on Travis CI
+	@SuppressWarnings("PMD.UnusedPrivateMethod")
 	private static void loadErrorsFromDownloadInterceptor(
 		NullableImageUrl form,
 		BindingResult result,
