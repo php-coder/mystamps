@@ -25,7 +25,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +40,7 @@ import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.support.beanvalidation.CatalogNumbers;
+import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize.Unit;
@@ -45,6 +49,7 @@ import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 import ru.mystamps.web.support.beanvalidation.NotNullIfFirstField;
 import ru.mystamps.web.support.beanvalidation.Price;
 import ru.mystamps.web.support.beanvalidation.ReleaseDateIsNotInFuture;
+import ru.mystamps.web.support.beanvalidation.RequireImageOrImageUrl;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
@@ -58,6 +63,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @Setter
 // TODO: combine price with currency to separate class
 @SuppressWarnings({ "PMD.TooManyFields", "PMD.AvoidDuplicateLiterals" })
+@RequireImageOrImageUrl(groups = AddSeriesForm.ImageUrl1Checks.class)
 @NotNullIfFirstField.List({
 	@NotNullIfFirstField(
 		first = "month", second = "year", message = "{month.requires.year}",
@@ -69,7 +75,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 	)
 })
 @ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
-public class AddSeriesForm implements AddSeriesDto {
+public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, NullableImageUrl {
 	
 	// FIXME: change type to plain Integer
 	@NotNull
@@ -128,13 +134,48 @@ public class AddSeriesForm implements AddSeriesDto {
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
 	private String comment;
 	
-	@NotNull
-	@NotEmptyFilename(groups = Image1Checks.class)
-	@NotEmptyFile(groups = Image2Checks.class)
-	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Image3Checks.class)
-	@ImageFile(groups = Image3Checks.class)
+	// Name of this field should match with the value of
+	// DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME.
+	@NotEmptyFilename(groups = RequireImageCheck.class)
+	@NotEmptyFile(groups = Image1Checks.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Image2Checks.class)
+	@ImageFile(groups = Image2Checks.class)
 	private MultipartFile image;
 	
+	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
+	@URL(groups = ImageUrl2Checks.class)
+	private String imageUrl;
+	
+	// This field holds a file that was downloaded from imageUrl.
+	// Name of this field must match with the value of
+	// DownloadImageInterceptor.DOWNLOADED_IMAGE_FIELD_NAME.
+	@NotEmptyFile(groups = Image1Checks.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Image2Checks.class)
+	@ImageFile(groups = Image2Checks.class)
+	private MultipartFile downloadedImage;
+	
+	@Override
+	public MultipartFile getImage() {
+		if (hasImage()) {
+			return image;
+		}
+		
+		return downloadedImage;
+	}
+	
+	// This method has to be implemented to satisfy HasImageOrImageUrl requirements.
+	// The latter is being used by RequireImageOrImageUrl validator.
+	@Override
+	public boolean hasImage() {
+		return image != null && StringUtils.isNotEmpty(image.getOriginalFilename());
+	}
+	
+	// This method has to be implemented to satisfy HasImageOrImageUrl requirements.
+	// The latter is being used by RequireImageOrImageUrl validator.
+	@Override
+	public boolean hasImageUrl() {
+		return StringUtils.isNotEmpty(imageUrl);
+	}
 	
 	@GroupSequence({
 		ReleaseDate1Checks.class,
@@ -153,10 +194,25 @@ public class AddSeriesForm implements AddSeriesDto {
 	public interface ReleaseDate3Checks {
 	}
 	
+	public interface RequireImageCheck {
+	}
+	
+	@GroupSequence({
+		ImageUrl1Checks.class,
+		ImageUrl2Checks.class,
+	})
+	public interface ImageUrlChecks {
+	}
+	
+	public interface ImageUrl1Checks {
+	}
+	
+	public interface ImageUrl2Checks {
+	}
+	
 	@GroupSequence({
 		Image1Checks.class,
-		Image2Checks.class,
-		Image3Checks.class
+		Image2Checks.class
 	})
 	public interface ImageChecks {
 	}
@@ -165,9 +221,6 @@ public class AddSeriesForm implements AddSeriesDto {
 	}
 	
 	public interface Image2Checks {
-	}
-	
-	public interface Image3Checks {
 	}
 	
 }

@@ -227,10 +227,17 @@
 								<span th:remove="tag" th:text="#{t_image}">
 									Image
 								</span>
-								<span class="required_field">*</span>
+								<!--/*/
+								<span class="required_field" th:if="${not #authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')')}">*</span>
+								/*/-->
 							</label>
 							<div class="col-sm-7">
-								<input type="file" id="image" style="box-shadow: none; border: 0px;" required="required" accept="image/png,image/jpeg" th:field="*{image}" />
+								<input id="image"
+									type="file"
+									style="box-shadow: none; border: 0px;"
+									accept="image/png,image/jpeg"
+									th:field="*{image}"
+									th:attr="required=${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? null : 'required'}" />
 								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 									<span class="hint-block" th:text="#{t_add_more_images_hint}">
 										Later you will be able to add additional images
@@ -238,6 +245,23 @@
 								</small>
 								<!--/*/
 								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm"
+							th:classappend="${#fields.hasErrors('imageUrl') or #fields.hasErrors('downloadedImage') ? 'has-error' : ''}"
+							sec:authorize="hasAuthority('DOWNLOAD_IMAGE')">
+							<label for="image-url" class="control-label col-sm-3">
+								<span class="field-label" th:text="#{t_image_url}">
+									Image URL
+								</span>
+							</label>
+							<div class="col-sm-5">
+								<input type="url" id="image-url" class="form-control" th:field="*{imageUrl}" />
+								<!--/*/
+								<span id="image-url.errors" class="help-block" th:if="${#fields.hasErrors('imageUrl')}" th:each="error : ${#fields.errors('imageUrl')}" th:text="${error}"></span>
+								<span id="image-url.errors" class="help-block" th:if="${#fields.hasErrors('downloadedImage')}" th:each="error : ${#fields.errors('downloadedImage')}" th:text="${error}"></span>
 								/*/-->
 							</div>
 						</div>

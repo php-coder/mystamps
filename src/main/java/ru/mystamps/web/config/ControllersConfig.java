@@ -20,6 +20,7 @@ package ru.mystamps.web.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -131,4 +132,10 @@ public class ControllersConfig {
 		);
 	}
 
+	@Bean
+	@Profile({ "test", "travis" })
+	public TestController getTestController() {
+		return new TestController();
+	}
+	
 }

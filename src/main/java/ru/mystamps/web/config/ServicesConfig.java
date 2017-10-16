@@ -90,6 +90,11 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public DownloaderService getDownloaderService() {
+		return new HttpURLConnectionDownloaderService(new String[]{"image/jpeg", "image/png"});
+	}
+	
+	@Bean
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			LoggerFactory.getLogger(ImageServiceImpl.class),
