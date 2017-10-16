@@ -10,6 +10,15 @@
 	</Match>
 	<Match>
 		<!--
+			String[] allowedContentTypes: potentially caller can modify data after passing it to the
+			constructor. I don't want to fix it because all such places are known and under our
+			control.
+		-->
+		<Class name="ru.mystamps.web.service.HttpURLConnectionDownloaderService" />
+		<Bug pattern="EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<!--
 			It's ok, that we're don't override parent's equals() method.
 		-->
 		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />

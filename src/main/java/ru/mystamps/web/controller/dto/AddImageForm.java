@@ -18,7 +18,10 @@
 package ru.mystamps.web.controller.dto;
 
 import javax.validation.GroupSequence;
-import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.StringUtils;
+
+import org.hibernate.validator.constraints.URL;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,31 +29,85 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddImageDto;
+import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize.Unit;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
+import ru.mystamps.web.support.beanvalidation.RequireImageOrImageUrl;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 
 @Getter
 @Setter
-@GroupSequence({
-	AddImageForm.class,
-	Group.Level1.class,
-	Group.Level2.class,
-	Group.Level3.class,
-	Group.Level4.class,
-	Group.Level5.class
-})
-public class AddImageForm implements AddImageDto {
+@RequireImageOrImageUrl(groups = AddImageForm.ImageUrl1Checks.class)
+public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableImageUrl {
 	
-	@NotNull(groups = Group.Level1.class)
-	@NotEmptyFilename(groups = Group.Level2.class)
-	@NotEmptyFile(groups = Group.Level3.class)
-	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level4.class)
-	@ImageFile(groups = Group.Level5.class)
+	// Name of this field should match with the value of
+	// DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME.
+	@NotEmptyFilename(groups = RequireImageCheck.class)
+	@NotEmptyFile(groups = Group.Level1.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level2.class)
+	@ImageFile(groups = Group.Level2.class)
 	private MultipartFile image;
+	
+	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
+	@URL(groups = ImageUrl2Checks.class)
+	private String imageUrl;
+	
+	// This field holds a file that was downloaded from imageUrl.
+	// Name of this field must match with the value of
+	// DownloadImageInterceptor.DOWNLOADED_IMAGE_FIELD_NAME.
+	@NotEmptyFile(groups = Group.Level1.class)
+	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level2.class)
+	@ImageFile(groups = Group.Level2.class)
+	private MultipartFile downloadedImage;
+	
+	@Override
+	public MultipartFile getImage() {
+		if (hasImage()) {
+			return image;
+		}
+		
+		return downloadedImage;
+	}
+	
+	// This method has to be implemented to satisfy HasImageOrImageUrl requirements.
+	// The latter is being used by RequireImageOrImageUrl validator.
+	@Override
+	public boolean hasImage() {
+		return image != null && StringUtils.isNotEmpty(image.getOriginalFilename());
+	}
+	
+	// This method has to be implemented to satisfy HasImageOrImageUrl requirements.
+	// The latter is being used by RequireImageOrImageUrl validator.
+	@Override
+	public boolean hasImageUrl() {
+		return StringUtils.isNotEmpty(imageUrl);
+	}
+	
+	public interface RequireImageCheck {
+	}
+	
+	@GroupSequence({
+		ImageUrl1Checks.class,
+		ImageUrl2Checks.class,
+	})
+	public interface ImageUrlChecks {
+	}
+	
+	public interface ImageUrl1Checks {
+	}
+	
+	public interface ImageUrl2Checks {
+	}
+	
+	@GroupSequence({
+		Group.Level1.class,
+		Group.Level2.class
+	})
+	public interface ImageChecks {
+	}
 	
 }
