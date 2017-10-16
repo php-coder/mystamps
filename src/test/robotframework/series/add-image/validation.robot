@@ -27,6 +27,12 @@ Add image with both image and an image URL
 	Element Text Should Be  id=image.errors      Image or image URL must be specified
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
+Add image with invalid URL
+	[Documentation]         Verify validation of invalid URL
+	Input Text              id=image-url  invalid-url
+	Submit Form             id=add-image-form
+	Element Text Should Be  id=image-url.errors  Value must be a valid URL
+
 Add image with image URL with invalid response
 	[Documentation]         Verify validation of invalid response from a server
 	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-400

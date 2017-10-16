@@ -47,6 +47,12 @@ Create series with both image and an image URL
 	Element Text Should Be  id=image.errors      Image or image URL must be specified
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
+Create series with invalid image URL
+	[Documentation]         Verify validation of invalid URL
+	Input Text              id=image-url  invalid-url
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image-url.errors  Value must be a valid URL
+
 Create series with image URL with invalid response
 	[Documentation]         Verify validation of invalid response from a server
 	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-400
