@@ -17,6 +17,11 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomValue.between
+import static io.qala.datagen.StringModifier.Impls.oneOf
+
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -133,6 +138,71 @@ class CountryServiceImplTest extends Specification {
 				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
 			}) >> 80
+	}
+	
+	//
+	// Tests for findIdsByNames()
+	//
+	
+	def 'findIdsByNames() should return empty result when no names are specified'() {
+		given:
+			Set<String> names = nullOr(Collections.emptySet())
+		expect:
+			service.findIdsByNames(names) == []
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findIdsByNames() should invoke dao, pass argument and return result from dao'() {
+		given:
+			Set<String> expectedNames = Random.setOfStrings()
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.findIdsByNames(expectedNames)
+		then:
+			1 * countryDao.findIdsByNames({ Set<String> names ->
+				assert names == expectedNames
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findIdsWhenNameStartsWith()
+	//
+	
+	def 'findIdsWhenNameStartsWith() should throw exception when name is null, empty or blank'() {
+		when:
+			service.findIdsWhenNameStartsWith(nullOrBlank())
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'findIdsWhenNameStartsWith() should throw exception when name contains percent or underscore character'() {
+		given:
+			String invalidName = between(1, 10).with(oneOf('%_')).english()
+		when:
+			service.findIdsWhenNameStartsWith(invalidName)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findIdsWhenNameStartsWith() should invoke dao, pass argument and return result from dao'() {
+		given:
+			String name = between(1, 10).english()
+			String expectedPattern = name + '%'
+		and:
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.findIdsWhenNameStartsWith(name)
+		then:
+			1 * countryDao.findIdsByNamePattern({ String pattern ->
+				assert pattern == expectedPattern
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//

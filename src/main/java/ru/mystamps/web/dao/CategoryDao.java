@@ -19,6 +19,7 @@ package ru.mystamps.web.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.CategoryDto;
@@ -35,6 +36,8 @@ public interface CategoryDao {
 	long countAddedSince(Date date);
 	long countUntranslatedNamesSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	List<Integer> findIdsByNames(Set<String> names);
+	List<Integer> findIdsByNamePattern(String pattern);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	List<CategoryDto> findCategoriesWithParents(String lang);

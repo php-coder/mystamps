@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service.dto;
 
+import java.nio.charset.StandardCharsets;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,6 +43,10 @@ public class DownloadResult {
 	
 	public boolean hasFailed() {
 		return code != Code.SUCCESS;
+	}
+	
+	public String getDataAsString() {
+		return new String(data, StandardCharsets.UTF_8);
 	}
 	
 	public enum Code {

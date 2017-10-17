@@ -16,6 +16,7 @@
 - (functionality)  preview now is generated after uploading an image
 - (functionality)  add interface for adding buyers and sellers
 - (functionality)  add capability to specify image URL (as alternative to providing a file)
+- (functionality)  admin can import a series from an external site
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

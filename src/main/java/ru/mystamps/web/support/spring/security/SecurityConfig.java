@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
+	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
 	protected void configure(HttpSecurity http) throws Exception {
 		boolean useSingleHost = !environment.acceptsProfiles("prod");
 		boolean hasH2Console = environment.acceptsProfiles("test");
@@ -85,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
 				.mvcMatchers(Url.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
 				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
+				.mvcMatchers(Url.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.mvcMatchers(Url.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)

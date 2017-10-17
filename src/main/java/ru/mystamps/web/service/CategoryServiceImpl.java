@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -82,6 +83,30 @@ public class CategoryServiceImpl implements CategoryService {
 		log.info("Category #{} has been created ({})", id, category);
 		
 		return slug;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Integer> findIdsByNames(Set<String> names) {
+		if (names == null || names.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return categoryDao.findIdsByNames(names);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Integer> findIdsWhenNameStartsWith(String name) {
+		Validate.isTrue(StringUtils.isNotBlank(name), "Name must be non-blank");
+		
+		// TODO: escape % and _ chars in name
+		Validate.isTrue(
+			!StringUtils.containsAny(name, '%', '_'),
+			"Name must not contain '%' or '_' chars"
+		);
+		
+		return categoryDao.findIdsByNamePattern(name + '%');
 	}
 	
 	@Override

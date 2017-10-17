@@ -73,6 +73,9 @@
 							<li sec:authorize="hasAuthority('CREATE_SERIES')">
 								<a th:href="@{${ADD_SERIES_PAGE}}" th:text="#{t_add_series}" href="../series/add.html">add stamp series</a>
 							</li>
+							<li sec:authorize="hasAuthority('IMPORT_SERIES')">
+								<a th:href="@{${REQUEST_IMPORT_SERIES_PAGE}}" th:text="#{t_import_series}" href="../series/import/request.html">import a series</a>
+							</li>
 							<li sec:authorize="hasAuthority('CREATE_CATEGORY')">
 								<a th:href="@{${ADD_CATEGORY_PAGE}}" th:text="#{t_create_category}" href="../category/add.html">add category</a>
 							</li>

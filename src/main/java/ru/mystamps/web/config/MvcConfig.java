@@ -52,7 +52,10 @@ import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 @Configuration
 @EnableScheduling
-@Import(ControllersConfig.class)
+@Import({
+	ControllersConfig.class,
+	EventsConfig.class,
+})
 @RequiredArgsConstructor
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	

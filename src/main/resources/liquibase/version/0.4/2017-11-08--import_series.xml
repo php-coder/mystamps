@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-series_import_request_statuses-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_import_request_statuses">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(20)">
+				<constraints
+					nullable="false"
+					unique="true"
+					uniqueConstraintName="uc_series_import_request_statuses_name" />
+			</column>
+		</createTable>
+	
+	</changeSet>
+	
+	<changeSet id="create-series_import_requests-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_import_requests">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="url" type="VARCHAR(255)">
+				<constraints
+					nullable="false"
+					unique="true"
+					uniqueConstraintName="uc_series_import_requests_url" />
+			</column>
+			<column name="status_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="series_import_request_statuses(id)"
+					foreignKeyName="fk_series_import_requests_status_id" />
+			</column>
+			<column name="requested_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="requested_by" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="users(id)"
+					foreignKeyName="fk_series_import_requests_requested_by" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_import_raw_data-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_import_raw_data">
+			<column name="request_id" type="INTEGER">
+				<constraints
+					primaryKey="true"
+					primaryKeyName="pk_series_import_raw_data_request_id"
+					references="series_import_requests(id)"
+					foreignKeyName="fk_series_import_raw_data_request_id" />
+			</column>
+			
+			<column name="page_content" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="create-series_import_parsed_data-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_import_parsed_data">
+			<column name="request_id" type="INTEGER">
+				<constraints
+					primaryKey="true"
+					primaryKeyName="pk_series_import_parsed_data_request_id"
+					references="series_import_requests(id)"
+					foreignKeyName="fk_series_import_parsed_data_request_id" />
+			</column>
+			<column name="category_id" type="INTEGER">
+				<constraints
+					references="categories(id)"
+					foreignKeyName="fk_series_import_parsed_data_category_id" />
+			</column>
+			<column name="country_id" type="INTEGER">
+				<constraints
+					references="countries(id)"
+					foreignKeyName="fk_series_import_parsed_data_country_id" />
+			</column>
+			<column name="image_url" type="VARCHAR(255)" />
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="initiate-series_import_request_statuses-table" author="php-coder" context="init-data">
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="Unprocessed" />
+		</insert>
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="DownloadingSucceeded" />
+		</insert>
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="DownloadingFailed" />
+		</insert>
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="ParsingSucceeded" />
+		</insert>
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="ParsingFailed" />
+		</insert>
+		<insert tableName="series_import_request_statuses">
+			<column name="name" value="ImportSucceeded" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="add-another-test-series" author="php-coder" context="test-data">
+		
+		<insert tableName="series">
+			<column name="id" valueNumeric="2" />
+			<column name="quantity" valueNumeric="3" />
+			<column name="perforated" valueBoolean="false" />
+			<column name="category_id" valueNumeric="1" />
+			<column name="country_id" valueNumeric="1" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'USER' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'USER' ORDER by id LIMIT 1)" />
+		</insert>
+		
+		<insert tableName="series_images">
+			<column name="series_id" valueNumeric="2" />
+			<column name="image_id" valueNumeric="1" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>

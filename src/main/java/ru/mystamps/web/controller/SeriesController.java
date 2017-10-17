@@ -130,6 +130,7 @@ public class SeriesController {
 	public void showForm(
 		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
 		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
+		@RequestParam(name = "image_url", required = false) String imageUrl,
 		Model model,
 		Locale userLocale) {
 		
@@ -152,6 +153,12 @@ public class SeriesController {
 		
 		if (country != null) {
 			addSeriesForm.setCountry(country);
+		}
+		
+		if (imageUrl != null) {
+			// in case user doesn't have permission to specify image URL,
+			// field won't be shown on the page and this value will be ignored
+			addSeriesForm.setImageUrl(imageUrl);
 		}
 		
 		model.addAttribute("addSeriesForm", addSeriesForm);

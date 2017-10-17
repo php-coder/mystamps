@@ -75,7 +75,12 @@
 						<div class="col-sm-4">
 							<div class="row" th:each="imageId,iter : ${series.imageIds}">
 								<div class="col-sm-12">
-									<a target="_blank" href="../../../../resources/test/test.png" th:href="@{${GET_IMAGE_PAGE}(id=${imageId})}">
+									<a id="series-image-link-1"
+										target="_blank"
+										href="../../../../resources/test/test.png"
+										th:id="|series-image-link-${iter.count}|"
+										th:href="@{${GET_IMAGE_PAGE}(id=${imageId})}">
+										
 										<img class="img-responsive series-images"
 											id="series-image-1"
 											src="../../../../resources/test/test.png"

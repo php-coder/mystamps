@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 
@@ -71,6 +72,12 @@ public class JdbcCategoryDao implements CategoryDao {
 	
 	@Value("${category.count_stamps_by_categories}")
 	private String countStampsByCategoriesSql;
+	
+	@Value("${category.find_ids_by_names}")
+	private String findIdsByNamesSql;
+	
+	@Value("${category.find_ids_by_name_pattern}")
+	private String findIdsByNamePatternSql;
 	
 	@Value("${category.find_all_categories_names_with_slug}")
 	private String findCategoriesNamesWithSlugSql;
@@ -183,6 +190,24 @@ public class JdbcCategoryDao implements CategoryDao {
 			countStampsByCategoriesSql,
 			params,
 			RowMappers::forNameAndCounter
+		);
+	}
+	
+	@Override
+	public List<Integer> findIdsByNames(Set<String> names) {
+		return jdbcTemplate.query(
+			findIdsByNamesSql,
+			Collections.singletonMap("names", names),
+			RowMappers::forInteger
+		);
+	}
+	
+	@Override
+	public List<Integer> findIdsByNamePattern(String pattern) {
+		return jdbcTemplate.query(
+			findIdsByNamePatternSql,
+			Collections.singletonMap("pattern", pattern),
+			RowMappers::forInteger
 		);
 	}
 	

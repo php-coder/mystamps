@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 
@@ -39,7 +40,7 @@ import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCountryDao implements CountryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -70,6 +71,12 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Value("${country.count_stamps_by_countries}")
 	private String countStampsByCountriesSql;
+	
+	@Value("${country.find_ids_by_names}")
+	private String findIdsByNamesSql;
+	
+	@Value("${country.find_ids_by_name_pattern}")
+	private String findIdsByNamePatternSql;
 	
 	@Value("${country.find_all_countries_names_with_slug}")
 	private String findCountriesNamesWithSlugSql;
@@ -190,6 +197,24 @@ public class JdbcCountryDao implements CountryDao {
 			countStampsByCountriesSql,
 			params,
 			RowMappers::forNameAndCounter
+		);
+	}
+	
+	@Override
+	public List<Integer> findIdsByNames(Set<String> names) {
+		return jdbcTemplate.query(
+			findIdsByNamesSql,
+			Collections.singletonMap("names", names),
+			RowMappers::forInteger
+		);
+	}
+	
+	@Override
+	public List<Integer> findIdsByNamePattern(String pattern) {
+		return jdbcTemplate.query(
+			findIdsByNamePatternSql,
+			Collections.singletonMap("pattern", pattern),
+			RowMappers::forInteger
 		);
 	}
 	

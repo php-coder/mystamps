@@ -95,6 +95,13 @@ public class ServicesConfig {
 	}
 	
 	@Bean
+	public DownloaderService getSeriesDownloaderService() {
+		return new HttpURLConnectionDownloaderService(
+			new String[]{"text/html", "image/jpeg", "image/png"}
+		);
+	}
+	
+	@Bean
 	public ImageService getImageService() {
 		return new ImageServiceImpl(
 			LoggerFactory.getLogger(ImageServiceImpl.class),
@@ -150,6 +157,24 @@ public class ServicesConfig {
 			getScottCatalogService(),
 			getYvertCatalogService(),
 			getGibbonsCatalogService()
+		);
+	}
+	
+	@Bean
+	public SeriesImportService getSeriesImportService() {
+		return new SeriesImportServiceImpl(
+			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
+			daoConfig.getSeriesImportDao(),
+			getSeriesInfoExtractorService()
+		);
+	}
+	
+	@Bean
+	public SeriesInfoExtractorService getSeriesInfoExtractorService() {
+		return new SeriesInfoExtractorServiceImpl(
+			LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
+			getCategoryService(),
+			getCountryService()
 		);
 	}
 	

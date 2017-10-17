@@ -27,6 +27,7 @@ public final class StringAuthority {
 	public static final String CREATE_COUNTRY         = "CREATE_COUNTRY";
 	public static final String CREATE_SERIES          = "CREATE_SERIES";
 	public static final String DOWNLOAD_IMAGE         = "DOWNLOAD_IMAGE";
+	public static final String IMPORT_SERIES          = "IMPORT_SERIES";
 	public static final String UPDATE_COLLECTION      = "UPDATE_COLLECTION";
 	public static final String VIEW_SITE_EVENTS       = "VIEW_SITE_EVENTS";
 	public static final String VIEW_SERIES_SALES      = "VIEW_SERIES_SALES";

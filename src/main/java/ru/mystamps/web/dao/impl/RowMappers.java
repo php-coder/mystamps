@@ -261,4 +261,35 @@ final class RowMappers {
 		);
 	}
 	
+	public static ImportRequestDto forImportRequestDto(ResultSet rs, int i) throws SQLException {
+		return new ImportRequestDto(
+			rs.getString("url"),
+			rs.getString("status")
+		);
+	}
+	
+	public static Integer forInteger(ResultSet rs, int i) throws SQLException {
+		return rs.getInt("id");
+	}
+	
+	public static ParsedDataDto forParsedDataDto(ResultSet rs, int i) throws SQLException {
+		EntityWithSlugDto category = null;
+		String categorySlug = rs.getString("category_slug");
+		if (categorySlug != null) {
+			String categoryName = rs.getString("category_name");
+			category = new EntityWithSlugDto(categoryName, categorySlug);
+		}
+		
+		EntityWithSlugDto country = null;
+		String countrySlug = rs.getString("country_slug");
+		if (countrySlug != null) {
+			String countryName = rs.getString("country_name");
+			country = new EntityWithSlugDto(countryName, countrySlug);
+		}
+		
+		String imageUrl = rs.getString("image_url");
+		
+		return new ParsedDataDto(category, country, imageUrl);
+	}
+	
 }

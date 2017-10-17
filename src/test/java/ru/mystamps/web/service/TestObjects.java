@@ -24,6 +24,7 @@ import java.util.Date;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.tests.Random;
+import ru.mystamps.web.util.SlugUtils;
 
 final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -179,6 +180,24 @@ final class TestObjects {
 	
 	public static EntityWithIdDto createEntityWithIdDto() {
 		return new EntityWithIdDto(TEST_ENTITY_ID, TEST_ENTITY_NAME);
+	}
+	
+	public static ImportRequestDto createImportRequestDto() {
+		return new ImportRequestDto(Random.url(), Random.importRequestStatus());
+	}
+	
+	public static ParsedDataDto createParsedDataDto() {
+		String categoryName = Random.categoryName();
+		String categorySlug = SlugUtils.slugify(categoryName);
+		
+		String countryName = Random.countryName();
+		String countrySlug = SlugUtils.slugify(countryName);
+		
+		return new ParsedDataDto(
+			new EntityWithSlugDto(categoryName, categorySlug),
+			new EntityWithSlugDto(countryName, countrySlug),
+			Random.url()
+		);
 	}
 	
 }

@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.config;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,7 @@ public class ControllersConfig {
 	
 	private final ServicesConfig servicesConfig;
 	private final MessageSource messageSource;
+	private final ApplicationEventPublisher eventPublisher;
 	
 	@Bean
 	public AccountController getAccountController() {
@@ -106,6 +108,14 @@ public class ControllersConfig {
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getTransactionParticipantService()
+		);
+	}
+	
+	@Bean
+	public SeriesImportController getSeriesImportController() {
+		return new SeriesImportController(
+			servicesConfig.getSeriesImportService(),
+			eventPublisher
 		);
 	}
 	
