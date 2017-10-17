@@ -112,13 +112,18 @@ public class SeriesController {
 	}
 	
 	@InitBinder("addSeriesForm")
-	protected void initBinder(WebDataBinder binder) {
+	protected void initSeriesFormBinder(WebDataBinder binder) {
 		StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
 		binder.registerCustomEditor(String.class, "michelNumbers", editor);
 		binder.registerCustomEditor(String.class, "scottNumbers", editor);
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
+	}
+	
+	@InitBinder("addSeriesSalesForm")
+	protected void initSeriesSalesFormBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "url", new StringTrimmerEditor(true));
 	}
 	
 	@GetMapping(Url.ADD_SERIES_PAGE)

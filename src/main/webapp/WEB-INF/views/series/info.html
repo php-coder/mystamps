@@ -370,7 +370,12 @@
 							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
 								<div class="col-sm-12">
 									<h5 th:text="|#{t_add_info_who_selling_series}:|">Add info about selling/buying this series:</h5>
-									<form method="post" class="form-horizontal" action="info.html" th:action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}" th:object="${addSeriesSalesForm}">
+									<form id="add-series-sales-form"
+										method="post"
+										class="form-horizontal"
+										action="info.html"
+										th:action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}"
+										th:object="${addSeriesSalesForm}">
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
 											<label for="date" class="control-label col-sm-3">
