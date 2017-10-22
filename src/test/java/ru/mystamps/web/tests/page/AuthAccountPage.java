@@ -37,14 +37,8 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		
 		hasForm(
 			with(
-				required(inputField("login"))
-					.and()
-					.invalidValue("x")
-					.preserveInvalidValue(false),
-				
+				required(inputField("login")),
 				required(passwordField("password"))
-					.and()
-					.invalidValue("x")
 			)
 			.and()
 			.with(submitButton(tr("t_enter")))

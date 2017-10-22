@@ -33,9 +33,7 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 		super(driver, Url.REGISTRATION_PAGE);
 		
 		hasForm(
-			with(
-				required(inputField("email")).and().invalidValue("xxx")
-			)
+			with(required(inputField("email")))
 			.and()
 			.with(submitButton(tr("t_register")))
 		);

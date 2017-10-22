@@ -23,8 +23,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.apache.commons.lang3.Validate;
-
 public final class Form {
 	private static final String              FORM_LOCATOR = "//form";
 	private static final String       INPUT_FIELD_LOCATOR = "//input[@name=\"%s\"]";
@@ -157,10 +155,8 @@ public final class Form {
 		@Getter private final String id;
 		@Getter private final String name;
 		@Setter private boolean required;
-		@Getter private String invalidValue;
 		
 		private final String xpath;
-		private boolean preserveInvalidValue = true;
 		private boolean accessibleByAll = false;
 		
 		protected Field(String name, String xpath) {
@@ -186,25 +182,6 @@ public final class Form {
 		
 		public boolean isAccessibleByAll() {
 			return accessibleByAll;
-		}
-		
-		public boolean hasInvalidValue() {
-			return invalidValue != null;
-		}
-		
-		public Field invalidValue(String invalidValue) {
-			Validate.isTrue(!"".equals(invalidValue), "Invalid value for field must be non empty");
-			this.invalidValue = invalidValue;
-			return this;
-		}
-		
-		public Field preserveInvalidValue(boolean preserveInvalidValue) {
-			this.preserveInvalidValue = preserveInvalidValue;
-			return this;
-		}
-		
-		public boolean shouldPreserveInvalidValue() {
-			return preserveInvalidValue;
 		}
 		
 		@Override
@@ -234,7 +211,6 @@ public final class Form {
 	public static class PasswordField extends Field {
 		public PasswordField(String name) {
 			super(name, PASSWORD_FIELD_LOCATOR);
-			preserveInvalidValue(false);
 		}
 	}
 	

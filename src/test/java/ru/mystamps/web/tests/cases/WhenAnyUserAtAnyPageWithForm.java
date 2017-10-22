@@ -38,8 +38,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		shouldHaveFields();
 		
 		emptyValueShouldBeForbiddenForRequiredFields();
-		
-		fieldsValuesShouldBePreservedWhenErrorOccurs();
 	}
 	
 	private void shouldHaveFields() {
@@ -68,44 +66,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					)
 				)
 				.isEqualTo(tr("org.hibernate.validator.constraints.NotEmpty.message"));
-		}
-	}
-	
-	private void fieldsValuesShouldBePreservedWhenErrorOccurs() {
-		for (Field field : page.getForm().getFields()) {
-			if (!field.hasInvalidValue()) {
-				System.err.println(
-					"NOTICE: Invalid value not defined for field '"
-					+ field.getName()
-					+ "' at page "
-					+ page.getUrl()
-				);
-				continue;
-			}
-			
-			page.fillField(field.getName(), field.getInvalidValue());
-			page.submit();
-			
-			if (field.shouldPreserveInvalidValue()) {
-				String msg = String.format(
-					"field named '%s' should preserve input value after error",
-					field.getName()
-				);
-				
-				assertThat(page.getFieldValue(field.getName()))
-					.overridingErrorMessage(msg)
-					.isEqualTo(field.getInvalidValue());
-				
-			} else {
-				String msg = String.format(
-					"field named '%s' should not preserve input value after error",
-					field.getName()
-				);
-				
-				assertThat(page.getFieldValue(field.getName()))
-					.overridingErrorMessage(msg)
-					.isEmpty();
-			}
 		}
 	}
 	
