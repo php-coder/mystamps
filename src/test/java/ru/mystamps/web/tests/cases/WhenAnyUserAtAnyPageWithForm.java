@@ -37,7 +37,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	protected void checkStandardStructure() {
 		shouldHaveFields();
 		
-		mayExistsLegendAboutRequiredFields();
 		emptyValueShouldBeForbiddenForRequiredFields();
 		
 		fieldsValuesShouldBePreservedWhenErrorOccurs();
@@ -51,16 +50,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.isTrue();
 			}
 		}
-	}
-	
-	private void mayExistsLegendAboutRequiredFields() {
-		if (page.getForm().getRequiredFields().isEmpty()) {
-			return;
-		}
-		
-		assertThat(page.getFormHints())
-			.overridingErrorMessage("legend about required fields should exists")
-			.contains(tr("t_required_fields_legend", "*"));
 	}
 	
 	protected void emptyValueShouldBeForbiddenForRequiredFields() {
