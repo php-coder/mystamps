@@ -24,6 +24,7 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
+import ru.mystamps.web.Db
 import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
@@ -141,6 +142,24 @@ class ImageServiceImplTest extends Specification {
 			'test.png'                || 'test.png'
 			' test.png '              || 'test.png'
 			'http://example/pic.jpeg' || 'http://example/pic.jpeg'
+	}
+	
+	def 'save() should pass abbreviated filename when it is too long'() {
+		given:
+			String longFilename = '/long/url/' + ('x' * Db.Images.FILENAME_LENGTH)
+			String expectedFilename = longFilename.take(Db.Images.FILENAME_LENGTH - 3) + '...'
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.originalFilename >> longFilename
+		and:
+			imageDao.add(
+				_ as String,
+				{ String actualFilename ->
+					assert actualFilename == expectedFilename
+					return true
+				}
+			) >> Random.id()
 	}
 	
 	def "save() should throw exception when image dao returned null"() {

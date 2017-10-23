@@ -32,6 +32,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageDto;
@@ -70,7 +71,10 @@ public class ImageServiceImpl implements ImageService {
 		);
 		
 		String imageType = extension.toUpperCase(Locale.ENGLISH);
+		
+		// Trim and abbreviate a filename. It shouldn't fail a process because field is optional.
 		String filename = StringUtils.trimToNull(file.getOriginalFilename());
+		filename = abbreviateIfLengthGreaterThan(filename, Db.Images.FILENAME_LENGTH);
 		
 		Integer imageId = imageDao.add(imageType, filename);
 		if (imageId == null) {
@@ -173,6 +177,22 @@ public class ImageServiceImpl implements ImageService {
 	private static String extractExtensionFromContentType(String contentType) {
 		// "image/jpeg; charset=UTF-8" -> "jpeg"
 		return substringBefore(substringAfter(contentType, "/"), ";");
+	}
+	
+	private String abbreviateIfLengthGreaterThan(String text, int maxLength) {
+		if (text == null || text.length() <= maxLength) {
+			return text;
+		}
+		
+		// TODO(security): fix possible log injection
+		log.warn(
+			"Length of value for 'filename' field ({}) exceeds max field size ({}): '{}'",
+			text.length(),
+			maxLength,
+			text
+		);
+		
+		return StringUtils.abbreviate(text, maxLength);
 	}
 	
 }
