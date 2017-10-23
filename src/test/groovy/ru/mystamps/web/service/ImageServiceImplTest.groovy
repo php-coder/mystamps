@@ -139,6 +139,7 @@ class ImageServiceImplTest extends Specification {
 			''                        || null
 			'  '                      || null
 			'test.png'                || 'test.png'
+			' test.png '              || 'test.png'
 			'http://example/pic.jpeg' || 'http://example/pic.jpeg'
 	}
 	
