@@ -144,6 +144,7 @@ class ImageServiceImplTest extends Specification {
 			'http://example/pic.jpeg' || 'http://example/pic.jpeg'
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should pass abbreviated filename when it is too long'() {
 		given:
 			String longFilename = '/long/url/' + ('x' * Db.Images.FILENAME_LENGTH)
