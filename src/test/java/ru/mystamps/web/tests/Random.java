@@ -24,6 +24,10 @@ public final class Random {
 	private Random() {
 	}
 	
+	public static Integer id() {
+		return RandomShortApi.positiveInteger();
+	}
+	
 	public static Integer userId() {
 		return RandomShortApi.positiveInteger();
 	}

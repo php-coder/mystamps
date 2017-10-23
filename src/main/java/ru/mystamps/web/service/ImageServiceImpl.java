@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -69,8 +70,9 @@ public class ImageServiceImpl implements ImageService {
 		);
 		
 		String imageType = extension.toUpperCase(Locale.ENGLISH);
+		String filename = StringUtils.trimToNull(file.getOriginalFilename());
 		
-		Integer imageId = imageDao.add(imageType);
+		Integer imageId = imageDao.add(imageType, filename);
 		if (imageId == null) {
 			throw new ImagePersistenceException("Can't save image");
 		}

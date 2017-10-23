@@ -54,16 +54,13 @@ public class JdbcImageDao implements ImageDao {
 	private String findBySeriesIdSql;
 	
 	@Override
-	public Integer add(String type) {
+	public Integer add(String type, String filename) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("type", type);
+		params.put("filename", filename);
 		KeyHolder holder = new GeneratedKeyHolder();
 		
-		int affected = jdbcTemplate.update(
-			addImageSql,
-			new MapSqlParameterSource(
-				Collections.singletonMap("type", type)
-			),
-			holder
-		);
+		int affected = jdbcTemplate.update(addImageSql, new MapSqlParameterSource(params), holder);
 		
 		Validate.validState(
 			affected == 1,

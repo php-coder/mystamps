@@ -22,7 +22,7 @@ import java.util.List;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 
 public interface ImageDao {
-	Integer add(String type);
+	Integer add(String type, String filename);
 	void addToSeries(Integer seriesId, Integer imageId);
 	ImageInfoDto findById(Integer imageId);
 	List<Integer> findBySeriesId(Integer seriesId);

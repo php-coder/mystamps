@@ -28,6 +28,7 @@ import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.dao.dto.ImageDto
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {
@@ -47,7 +48,8 @@ class ImageServiceImplTest extends Specification {
 	def setup() {
 		multipartFile.size >> 1024L
 		multipartFile.contentType >> 'image/png'
-		imageDao.add(_ as String) >> 17
+		multipartFile.originalFilename >> 'super-image.png'
+		imageDao.add(_ as String, _ as String) >> 17
 	}
 	
 	//
@@ -103,7 +105,7 @@ class ImageServiceImplTest extends Specification {
 			1 * imageDao.add({ String type ->
 				assert type == expectedType
 				return true
-			}) >> 19
+			}, _ as String) >> 19
 		where:
 			contentType                 || expectedType
 			'image/jpeg'                || 'JPEG'
@@ -112,11 +114,39 @@ class ImageServiceImplTest extends Specification {
 			'image/png; charset=UTF8'   || 'PNG'
 	}
 	
+	@Unroll
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
+	def 'save() should pass filename "#filename" to image dao'(String filename, String expectedFilename) {
+		when:
+			service.save(multipartFile)
+		then:
+			multipartFile.originalFilename >> filename
+		and:
+			1 * imageDao.add(
+				_ as String,
+				{ String actualFilename ->
+					assert actualFilename == expectedFilename
+					return true
+				}
+			) >> Random.id()
+		where:
+			filename                  || expectedFilename
+			null                      || null
+			''                        || null
+			'  '                      || null
+			'test.png'                || 'test.png'
+			'http://example/pic.jpeg' || 'http://example/pic.jpeg'
+	}
+	
 	def "save() should throw exception when image dao returned null"() {
 		when:
 			service.save(multipartFile)
 		then:
-			imageDao.add(_ as String) >> null
+			imageDao.add(_ as String, _ as String) >> null
 		and:
 			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
@@ -130,7 +160,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(multipartFile)
 		then:
-			imageDao.add(_ as String) >> image.id
+			imageDao.add(_ as String, _ as String) >> image.id
 		and:
 			1 * imagePersistenceStrategy.save({ MultipartFile passedFile ->
 				assert passedFile == multipartFile
@@ -150,7 +180,7 @@ class ImageServiceImplTest extends Specification {
 		when:
 			ImageInfoDto actualImageInfo = service.save(multipartFile)
 		then:
-			imageDao.add(_ as String) >> expectedImageId
+			imageDao.add(_ as String, _ as String) >> expectedImageId
 		and:
 			actualImageInfo == expectedImageInfo
 	}
