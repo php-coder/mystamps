@@ -74,6 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	protected void configure(HttpSecurity http) throws Exception {
 		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		boolean hasH2Console = environment.acceptsProfiles("test");
+
+		ContentSecurityPolicyHeaderWriter cspWriter =
+			new ContentSecurityPolicyHeaderWriter(useSingleHost, hasH2Console);
 		
 		http
 			.authorizeRequests()
@@ -123,7 +127,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.headers()
 				.defaultsDisabled() // TODO
-				.addHeaderWriter(new ContentSecurityPolicyHeaderWriter(useSingleHost));
+				.addHeaderWriter(cspWriter);
 	}
 	
 	// Used in ServicesConfig.getUserService()

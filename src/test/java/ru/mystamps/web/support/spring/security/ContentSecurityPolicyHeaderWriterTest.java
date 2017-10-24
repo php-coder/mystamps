@@ -29,6 +29,7 @@ import static io.qala.datagen.RandomShortApi.bool;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
@@ -44,7 +45,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void writeContentSecurityPolicyHeader() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(bool());
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(bool(), bool());
 		
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
@@ -61,7 +63,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onIndexPageWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, bool());
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives, hasItemInArray("default-src 'none'"));
@@ -91,7 +94,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onIndexPageWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer
+			= new ContentSecurityPolicyHeaderWriter(false, bool());
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives, hasItemInArray("default-src 'none'"));
@@ -139,7 +143,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onCollectionInfoPageWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, bool());
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -171,7 +176,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onCollectionInfoPageWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(false, bool());
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -206,7 +212,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onSeriesAddImagePageWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, bool());
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -229,7 +236,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onSeriesAddImagePageWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(false, bool());
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -253,7 +261,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onSeriesAddPageWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, bool());
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -286,7 +295,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onSeriesAddPageWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(false, bool());
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -322,7 +332,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onTogglzConsoleWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, bool());
 		String[] directives = writer.constructDirectives("/togglz/").split(";");
 		
 		// test only a directive that is differ from the index page
@@ -343,7 +354,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onTogglzConsoleWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(false, bool());
 		String[] directives = writer.constructDirectives("/togglz/").split(";");
 		
 		// test only a directive that is differ from the index page
@@ -365,7 +377,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onH2ConsoleWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(true, true);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		// test only the directives that are differ from the index page
@@ -399,15 +412,25 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	@Test
 	public void onH2ConsoleWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(false);
+		ContentSecurityPolicyHeaderWriter writer =
+			new ContentSecurityPolicyHeaderWriter(false, false);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
-		// TODO: it shouldn't be on prod actually
-		// test only a directive that is differ from the index page
-		assertThat(directives, hasItemInArray("child-src 'self'"));
+		// "style-src" directive should be the same as for the index page
+		assertThat(
+			directives,
+			hasItemInArray(
+				"style-src "
+					+ "https://cdn.rawgit.com "
+					+ "https://stamps.filezz.ru "
+					+ "https://maxcdn.bootstrapcdn.com"
+			)
+		);
+		
+		assertThat(directives, not(hasItemInArray("child-src 'self'")));
 		
 		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE)));
+		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
 	}
 	
 }

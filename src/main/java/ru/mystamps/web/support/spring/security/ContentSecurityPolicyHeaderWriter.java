@@ -165,6 +165,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		+ 5;
 	
 	private final boolean useSingleHost;
+	private final boolean hasH2Console;
 	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
@@ -176,7 +177,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		boolean onAddSeriesPage = uri.equals(Url.ADD_SERIES_PAGE);
-		boolean onH2ConsolePage = uri.startsWith(H2_CONSOLE_PATTERN);
+		boolean onH2ConsolePage = hasH2Console && uri.startsWith(H2_CONSOLE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
