@@ -368,7 +368,29 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(true);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
-		// test only a directive that is differ from the index page
+		// test only the directives that are differ from the index page
+		assertThat(
+			directives,
+			hasItemInArray(
+				"style-src "
+					+ "https://cdn.rawgit.com"
+					+ " 'self'"
+					+ " 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
+					+ " 'sha256-ZdHxw9eWtnxUb3mk6tBS+gIiVUPE3pGM470keHPDFlE='"
+					+ " 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='"
+					+ " 'sha256-tIs8OfjWm8MHgPJrHv7mM4wvA/FDFcra3Pd5icRMX+k='"
+					+ " 'sha256-VPm872V2JvE+vhivDg7UeH+N9a9YzzqGGow5mzY48hc='"
+					+ " 'sha256-CDs+xFw5uMoNgtE5XIrz5GXgs3O+/NFkYK2IK/vKSBE='"
+					+ " 'sha256-65mkwZPt4V1miqNM9CcVYkrpnlQigG9H6Vi9OM/JCgY='"
+					+ " 'sha256-xSKCQeN6yeCb4HCkijkjoBFHWdJFwmwDiFa3XlZZ6Bs='"
+					+ " 'sha256-JnnwE+8wsBgf/bh1qyvAsUVHBgiTioeZ1NSUKff7mOM='"
+					+ " 'sha256-yBhVF062O1IGu3ZngyEhh9l561VFLsJpdSxVtbwisRY='"
+					+ " 'sha256-eC+jXvbVSsG0J4zQfR5fWxxUCqpaa5DZLbINjWNCu48='"
+					+ " 'sha256-rqkMEwsWwrInJqctxmIaWOCFPV+Qmym3tMHH3wtq3Y0='"
+					+ " 'sha256-PGJ8tjuz2DXGgB1Sie9pW8BrxBGK6EQndbLEkXd44T8='"
+			)
+		);
+		
 		assertThat(directives, hasItemInArray("child-src 'self'"));
 		
 		// hope that all other directives are the same as on the index page
