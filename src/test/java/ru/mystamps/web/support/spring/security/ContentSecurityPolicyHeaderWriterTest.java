@@ -71,7 +71,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			hasItemInArray(
 				"img-src "
 					+ "https://cdn.rawgit.com "
-					+ "https://raw.githubusercontent.com 'self'"
+					+ "https://raw.githubusercontent.com "
+					+ "'self'"
 			)
 		);
 		
