@@ -120,7 +120,7 @@
 				</div>
 				<div class="col-sm-4">
 					<!--/*/
-					<th:block togglz:active="SHOW_RECENT_SERIES_ON_INDEX_PAGE">
+					<th:block togglz:active="SHOW_RECENT_SERIES_ON_INDEX_PAGE" th:if="${not #lists.isEmpty(recentlyAddedSeries)}">
 					/*/-->
 						<div class="panel panel-default">
 							<div class="panel-heading">
