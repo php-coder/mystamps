@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="nullify-series_sales-second_currency" author="php-coder" context="prod-data">
+		<comment>Sets to NULL the second_currency field if the second_price isn't specified</comment>
+		
+		<!-- Be caution: there is no rollback! -->
+		<sql>
+			UPDATE series_sales
+			   SET second_currency = NULL
+			 WHERE second_price IS NULL AND second_currency IS NOT NULL
+		</sql>
+		
+	</changeSet>
+	
+</databaseChangeLog>
