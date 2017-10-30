@@ -87,6 +87,51 @@ class CatalogUtilsTest extends Specification {
 			numbers == '1-3, 10, 19-21'
 	}
 	
+	def 'toShortForm() should handle single number with letters'() {
+		given:
+			List<String> setOfNumbers = [ '2317a' ]
+		when:
+			String numbers = CatalogUtils.toShortForm(setOfNumbers)
+		then:
+			numbers == '2317a'
+	}
+	
+	def 'toShortForm() should handle two numbers with letters'() {
+		given:
+			List<String> setOfNumbers = [ '2317a', '2319a' ]
+		when:
+			String numbers = CatalogUtils.toShortForm(setOfNumbers)
+		then:
+			numbers == '2317a, 2319a'
+	}
+	
+	def 'toShortForm() should handle multiple numbers with letters'() {
+		given:
+			List<String> setOfNumbers = [ '2317a', '2318a', '2319a' ]
+		when:
+			String numbers = CatalogUtils.toShortForm(setOfNumbers)
+		then:
+			numbers == '2317a, 2318a, 2319a'
+	}
+	
+	def 'toShortForm() should handle numbers with letters and a single number'() {
+		given:
+			List<String> setOfNumbers = [ '2317a', '10', '2319a' ]
+		when:
+			String numbers = CatalogUtils.toShortForm(setOfNumbers)
+		then:
+			numbers == '2317a, 10, 2319a'
+	}
+	
+	def 'toShortForm() should handle numbers with letters and multiple numbers'() {
+		given:
+			List<String> setOfNumbers = [ '2317a', '9', '10', '11', '2319a' ]
+		when:
+			String numbers = CatalogUtils.toShortForm(setOfNumbers)
+		then:
+			numbers == '2317a, 9-11, 2319a'
+	}
+	
 	//
 	// Tests for parseCatalogNumbers()
 	//

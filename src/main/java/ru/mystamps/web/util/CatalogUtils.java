@@ -27,6 +27,7 @@ import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * Helpers for dealing with stamps catalog numbers.
@@ -72,24 +73,29 @@ public final class CatalogUtils {
 		List<String> currentBuffer = new ArrayList<>();
 		for (String currentString : numbers) {
 			
-			// for first element
+			// for the first element
 			if (currentBuffer.isEmpty()) {
 				currentBuffer.add(currentString);
 				continue;
 			}
 			
-			// in range
-			Integer current = Integer.valueOf(currentString);
-			Integer previous = Integer.valueOf(currentBuffer.get(currentBuffer.size() - 1));
-			if (previous + 1 == current) {
-				currentBuffer.add(currentString);
-				continue;
+			// we can use Integer.valueOf() but it throws exception for non-numeric numbers.
+			// We prefer approach without exceptions.
+			String previousElement = currentBuffer.get(currentBuffer.size() - 1);
+			if (NumberUtils.isDigits(currentString) && NumberUtils.isDigits(previousElement)) {
+				// try to compare numbers if they're really numbers
+				Integer current = Integer.valueOf(currentString);
+				Integer previous = Integer.valueOf(previousElement);
+				if (previous + 1 == current) {
+					currentBuffer.add(currentString);
+					continue;
+				}
 			}
 			
 			addBufferToGroups(currentBuffer, groups);
 			currentBuffer.clear();
 			
-			// start new group
+			// start a new group
 			currentBuffer.add(currentString);
 		}
 		
