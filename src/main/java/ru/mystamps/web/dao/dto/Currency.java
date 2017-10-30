@@ -18,5 +18,5 @@
 package ru.mystamps.web.dao.dto;
 
 public enum Currency {
-	EUR, USD, GBP, RUB
+	EUR, USD, GBP, RUB, CZK
 }
