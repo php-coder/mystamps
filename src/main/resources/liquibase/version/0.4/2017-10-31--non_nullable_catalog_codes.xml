@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="make-michel_catalog-code-non_nullable" author="php-coder" context="scheme">
+		<addNotNullConstraint
+			tableName="michel_catalog"
+			columnName="code"
+			columnDataType="VARCHAR(4)"/>
+	</changeSet>
+	
+	<changeSet id="make-scott_catalog-code-non_nullable" author="php-coder" context="scheme">
+		<addNotNullConstraint
+			tableName="scott_catalog"
+			columnName="code"
+			columnDataType="VARCHAR(5)"/>
+	</changeSet>
+	
+	<changeSet id="make-yvert_catalog-code-non_nullable" author="php-coder" context="scheme">
+		<addNotNullConstraint
+			tableName="yvert_catalog"
+			columnName="code"
+			columnDataType="VARCHAR(4)"/>
+	</changeSet>
+	
+	<changeSet id="make-gibbons_catalog-code-non_nullable" author="php-coder" context="scheme">
+		<addNotNullConstraint
+			tableName="gibbons_catalog"
+			columnName="code"
+			columnDataType="VARCHAR(4)"/>
+	</changeSet>
+	
+</databaseChangeLog>
