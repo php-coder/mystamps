@@ -29,6 +29,7 @@ import java.net.URLConnection;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,6 +174,10 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		}
 		
 		String contentType = conn.getContentType();
+		
+		// We need only the first part from "text/html; charset=UTF-8"
+		contentType = StringUtils.substringBefore(contentType, ";");
+		
 		if (allowedContentTypes != null && !ArrayUtils.contains(allowedContentTypes, contentType)) {
 			// TODO(security): fix possible log injection
 			LOG.debug("Couldn't download file: unsupported file type '{}'", contentType);
