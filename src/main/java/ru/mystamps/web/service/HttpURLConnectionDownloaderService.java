@@ -184,10 +184,12 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 			return Code.INVALID_FILE_TYPE;
 		}
 		
-		// TODO: content length can be -1 for gzipped responses
 		// TODO: add protection against huge files
+		// When the content length is not known, methods returns -1. It also happens for gzipped
+		// response. In this case, we allow to download a file and relies to a form validation
+		// that will take place later.
 		int contentLength = conn.getContentLength();
-		if (contentLength < 0) {
+		if (contentLength == 0) {
 			// TODO(security): fix possible log injection
 			LOG.debug("Couldn't download file: invalid Content-Length: {}", contentLength);
 			return Code.INVALID_FILE_SIZE;
