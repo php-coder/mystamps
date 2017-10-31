@@ -158,6 +158,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				'An "img" element must have an "alt" attribute' \
 				'The first child "option" element of a "select" element with a "required" attribute' \
 				'This document appears to be written in (Danish|Lithuanian)' \
+				'Element "option" without attribute "label" must not be empty' \
 				'Picked up' \
 			--show-warnings \
 			>validator.log 2>&1 || HTML_STATUS=fail
