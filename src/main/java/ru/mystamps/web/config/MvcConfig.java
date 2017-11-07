@@ -155,7 +155,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	private HandlerInterceptor getDownloadImageInterceptor() {
-		return new DownloadImageInterceptor(servicesConfig.getDownloaderService());
+		return new DownloadImageInterceptor(servicesConfig.getImageDownloaderService());
 	}
 	
 }

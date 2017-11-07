@@ -90,7 +90,7 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public DownloaderService getDownloaderService() {
+	public DownloaderService getImageDownloaderService() {
 		return new HttpURLConnectionDownloaderService(new String[]{"image/jpeg", "image/png"});
 	}
 	
