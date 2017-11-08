@@ -33,5 +33,6 @@
 	<include file="0.4/2017-10-31--series_sales_null_second_currency.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2017-10-31--non_nullable_catalog_codes.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2017-11-08--import_series.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2017-11-09--series_import_requests_url_length.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

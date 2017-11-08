@@ -41,7 +41,7 @@ public final class Db {
 	}
 	
 	public static final class SeriesImportRequest {
-		public static final int URL_LENGTH = 255;
+		public static final int URL_LENGTH = 285;
 	}
 	
 	public static final class SuspiciousActivity {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="modify-series_import_requests-charset" author="php-coder" context="scheme" dbms="mysql">
+		<!--
+			Fix for "liquibase.exception.DatabaseException:
+			Specified key was too long; max key length is 767 bytes
+			[Failed SQL: ALTER TABLE mystamps.series_import_requests MODIFY url VARCHAR(285)]".
+			See also: https://stackoverflow.com/questions/1814532/1071-specified-key-was-too-long-max-key-length-is-767-bytes
+		-->
+		<comment>
+			Change character set from utf8 to ascii for a URL field to be able to have a unique
+			constraint on a field that has length greater than 255 characters.
+		</comment>
+
+		<sql>
+			ALTER TABLE series_import_requests DEFAULT CHARACTER SET ascii
+		</sql>
+
+	</changeSet>
+	
+	<changeSet id="modify-series_import_requests-url-field" author="php-coder" context="scheme">
+		<modifyDataType tableName="series_import_requests" columnName="url" newDataType="VARCHAR(285)" />
+	</changeSet>
+	
+</databaseChangeLog>
