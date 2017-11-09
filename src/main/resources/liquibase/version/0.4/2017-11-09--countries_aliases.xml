@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-countries_aliases-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="countries_aliases">
+			<column name="country_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="countries(id)"
+					foreignKeyName="fk_countries_aliases_country_id" />
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints
+					unique="true"
+					uniqueConstraintName="uc_countries_aliases_name" />
+			</column>
+			<column name="name_ru" type="VARCHAR(50)">
+				<constraints
+					unique="true"
+					uniqueConstraintName="uc_countries_aliases_name_ru" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+</databaseChangeLog>
