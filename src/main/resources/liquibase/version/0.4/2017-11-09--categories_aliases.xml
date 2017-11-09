@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-categories_aliases-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="categories_aliases">
+			<column name="category_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="categories(id)"
+					foreignKeyName="fk_categories_aliases_category_id" />
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints
+					unique="true"
+					uniqueConstraintName="uc_categories_aliases_name" />
+			</column>
+			<column name="name_ru" type="VARCHAR(50)">
+				<constraints
+					unique="true"
+					uniqueConstraintName="uc_categories_aliases_name_ru" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="add-dinosaurs-alias" author="php-coder" context="test-data">
+		
+		<insert tableName="categories_aliases">
+			<column name="category_id" valueNumeric="1" />
+			<column name="name" value="Dinosaurs" />
+			<column name="name_ru" value="Динозавры" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>
