@@ -21,8 +21,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.Year;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -47,7 +46,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
 	private static final int SINCE_YEAR     = 1840;
-	private static final int CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
+	private static final int CURRENT_YEAR   = Year.now().getValue();
 	
 	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);

@@ -18,10 +18,9 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.time.Year;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -93,7 +92,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 	
-	private static final Integer CURRENT_YEAR   = new GregorianCalendar().get(Calendar.YEAR);
+	private static final Integer CURRENT_YEAR = Integer.valueOf(Year.now().getValue());
 	
 	private static final Map<Integer, Integer> YEARS;
 	
