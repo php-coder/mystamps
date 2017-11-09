@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.tests;
 
+import java.time.Year;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +83,10 @@ public final class Random {
 			)
 			.with(oneOf(" -"))
 			.english();
+	}
+	
+	public static Integer issueYear() {
+		return between(ValidationRules.MIN_RELEASE_YEAR, Year.now().getValue()).integer();
 	}
 	
 	public static String importRequestStatus() {

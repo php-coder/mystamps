@@ -196,7 +196,8 @@ final class TestObjects {
 		return new ParsedDataDto(
 			new EntityWithSlugDto(categoryName, categorySlug),
 			new EntityWithSlugDto(countryName, countrySlug),
-			Random.url()
+			Random.url(),
+			Random.issueYear()
 		);
 	}
 	

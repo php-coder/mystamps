@@ -26,4 +26,5 @@ public class ParsedDataDto {
 	private final EntityWithSlugDto category;
 	private final EntityWithSlugDto country;
 	private final String imageUrl;
+	private final Integer issueYear;
 }

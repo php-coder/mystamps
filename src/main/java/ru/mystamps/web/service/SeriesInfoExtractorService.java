@@ -22,4 +22,5 @@ import java.util.List;
 public interface SeriesInfoExtractorService {
 	List<Integer> extractCategory(String fragment);
 	List<Integer> extractCountry(String fragment);
+	Integer extractReleaseYear(String fragment);
 }

@@ -41,6 +41,7 @@ public class SiteParser {
 	private String countryLocator;
 	private String shortDescriptionLocator;
 	private String imageUrlLocator;
+	private String issueDateLocator;
 	
 	public boolean setField(String name, String value) {
 		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-null");
@@ -80,6 +81,11 @@ public class SiteParser {
 				valid = true;
 				break;
 			
+			case "issue-date-locator":
+				setIssueDateLocator(value);
+				valid = true;
+				break;
+			
 			default:
 				break;
 		}
@@ -95,6 +101,7 @@ public class SiteParser {
 				|| countryLocator != null
 				|| shortDescriptionLocator != null
 				|| imageUrlLocator != null
+				|| issueDateLocator != null
 			);
 	}
 	
@@ -122,6 +129,7 @@ public class SiteParser {
 		info.setCategoryName(extractCategory(body));
 		info.setCountryName(extractCountry(body));
 		info.setImageUrl(extractImageUrl(body));
+		info.setIssueDate(extractIssueDate(body));
 		
 		return info;
 	}
@@ -176,6 +184,22 @@ public class SiteParser {
 		String url = imageUrls.first().attr("abs:href");
 		LOG.debug("Extracted image url: '{}'", url);
 		return StringUtils.trimToNull(url);
+	}
+	
+	private String extractIssueDate(Element body) {
+		String locator = ObjectUtils.firstNonNull(issueDateLocator, shortDescriptionLocator);
+		if (locator == null) {
+			return null;
+		}
+		
+		Elements elements = body.select(locator);
+		if (elements.isEmpty()) {
+			return null;
+		}
+		
+		String date = elements.first().text();
+		LOG.debug("Extracted issue date: '{}'", date);
+		return date;
 	}
 	
 }

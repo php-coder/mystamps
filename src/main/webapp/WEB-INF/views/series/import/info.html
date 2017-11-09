@@ -99,7 +99,7 @@
 					<form id="start-import-series-form" method="get" action="../add.html" th:action="@{${ADD_SERIES_PAGE}}">
 						<div class="table-responsive">
 							<table class="table"
-								th:with="hasCategory=${parsedData.category != null},hasCountry=${parsedData.country != null},hasImageUrl=${parsedData.imageUrl != null}">
+								th:with="hasCategory=${parsedData.category != null},hasCountry=${parsedData.country != null},hasImageUrl=${parsedData.imageUrl != null},hasIssueYear=${parsedData.issueYear != null}">
 								
 								<tr th:if="${hasCategory}">
 									<th th:text="#{t_category}">Category</th>
@@ -118,7 +118,12 @@
 									<td id="parsed-image-url" th:text="${parsedData.imageUrl}">
 										http://localhost:8080/image/1
 									</td>
-
+								</tr>
+								<tr th:if="${hasIssueYear}">
+									<th th:text="#{t_year}">Year</th>
+									<td id="parsed-issue-year" th:text="${parsedData.issueYear}">
+										1960
+									</td>
 								</tr>
 								<tr>
 									<td></td>
@@ -141,6 +146,12 @@
 											value="http://localhost:8080/image/1"
 											th:if="${hasImageUrl}"
 											th:value="${parsedData.imageUrl}" />
+										<input
+											type="hidden"
+											name="year"
+											value="1960"
+											th:if="${hasIssueYear}"
+											th:value="${parsedData.issueYear}" />
 										<input
 											type="submit"
 											class="btn btn-primary"

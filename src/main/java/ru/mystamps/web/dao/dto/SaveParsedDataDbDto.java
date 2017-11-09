@@ -30,13 +30,15 @@ public class SaveParsedDataDbDto {
 	private Integer categoryId;
 	private Integer countryId;
 	private String imageUrl;
+	private Integer releaseYear;
 	private Date createdAt;
 	private Date updatedAt;
 	
 	public boolean hasAtLeastOneFieldFilled() {
 		return categoryId != null
 			|| countryId != null
-			|| imageUrl != null;
+			|| imageUrl != null
+			|| releaseYear != null;
 	}
 	
 }

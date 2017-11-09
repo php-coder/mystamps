@@ -147,6 +147,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			processedData.setCountryId(countryIds.get(0));
 		}
 		
+		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
+		if (releaseYear != null) {
+			processedData.setReleaseYear(releaseYear);
+		}
+		
 		// TODO: handle it gracefully by publishing ParsingFailed event
 		Validate.validState(processedData.hasAtLeastOneFieldFilled(), "");
 		

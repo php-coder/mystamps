@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,6 +33,9 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
+	
+	// Regular expression matches release year of the stamps (from 1840 till 2099).
+	private static final Pattern RELEASE_YEAR_REGEXP = Pattern.compile("18[4-9][0-9]|19[0-9]{2}|20[0-9]{2}");
 	
 	private final Logger log;
 	private final CategoryService categoryService;
@@ -105,6 +109,35 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Could not extract country from a fragment");
 		
 		return Collections.emptyList();
+	}
+	
+	@Override
+	public Integer extractReleaseYear(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
+		log.debug("Determining release year from a fragment: '{}'", fragment);
+		
+		String[] candidates = StringUtils.split(fragment);
+		for (String candidate : candidates) {
+			if (!RELEASE_YEAR_REGEXP.matcher(candidate).matches()) {
+				continue;
+			}
+			
+			try {
+				Integer year = Integer.valueOf(candidate);
+				log.debug("Release year is {}", year);
+				return year;
+				
+			} catch (NumberFormatException ignored) {
+				// continue with the next element
+			}
+		}
+		
+		log.debug("Could not extract release year from a fragment");
+		
+		return null;
 	}
 	
 }

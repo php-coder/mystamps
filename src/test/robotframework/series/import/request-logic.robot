@@ -9,17 +9,18 @@ Test Setup       Before Test
 Force Tags       series  import-series  logic
 
 *** Test Cases ***
-Import series from an external site (in English, use category and country locators)
-	[Documentation]             Verify import from a page in English when category and country are parsed from separate locators
+Import series from an external site (in English, use category, country and date locators)
+	[Documentation]             Verify import from a page in English when category, country and date are parsed from separate locators
 	Input Text                  id=url  http://127.0.0.1:8080/series/2?lang=en
 	Submit Form                 id=import-series-form
 	${location}=                Get Location
 	Should Match Regexp         ${location}  /series/import/request/\\d+
-	Element Text Should Be      id=request-url       http://127.0.0.1:8080/series/2?lang=en
-	Element Text Should Be      id=request-status    ParsingSucceeded
-	Element Text Should Be      id=parsed-category   Prehistoric animals
-	Element Text Should Be      id=parsed-country    Italy
-	Element Text Should Be      id=parsed-image-url  http://127.0.0.1:8080/image/1
+	Element Text Should Be      id=request-url        http://127.0.0.1:8080/series/2?lang=en
+	Element Text Should Be      id=request-status     ParsingSucceeded
+	Element Text Should Be      id=parsed-category    Prehistoric animals
+	Element Text Should Be      id=parsed-country     Italy
+	Element Text Should Be      id=parsed-image-url   http://127.0.0.1:8080/image/1
+	Element Text Should Be      id=parsed-issue-year  2000
 	Submit Form                 id=start-import-series-form
 	${encodedUrl}=              Encode URL  http://127.0.0.1:8080/image/1
 	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}
@@ -29,18 +30,21 @@ Import series from an external site (in English, use category and country locato
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
 	${value}=                   Get Value  id=image-url
 	Should Be Equal             ${value}  http://127.0.0.1:8080/image/1
+	${year}=                    Get Selected List Label  id=year
+	Should Be Equal             ${year}  2000
 
 Import series from an external site (in Russian, use description locator)
-	[Documentation]             Verify import from a page in Russian when category and country are parsed from description
+	[Documentation]             Verify import from a page in Russian when category, country and date are parsed from description
 	Input Text                  id=url  http://localhost:8080/series/2?lang=ru
 	Submit Form                 id=import-series-form
 	${location}=                Get Location
 	Should Match Regexp         ${location}  /series/import/request/\\d+
-	Element Text Should Be      id=request-url       http://localhost:8080/series/2?lang=ru
-	Element Text Should Be      id=request-status    ParsingSucceeded
-	Element Text Should Be      id=parsed-category   Prehistoric animals
-	Element Text Should Be      id=parsed-country    Italy
-	Element Text Should Be      id=parsed-image-url  http://localhost:8080/image/1
+	Element Text Should Be      id=request-url        http://localhost:8080/series/2?lang=ru
+	Element Text Should Be      id=request-status     ParsingSucceeded
+	Element Text Should Be      id=parsed-category    Prehistoric animals
+	Element Text Should Be      id=parsed-country     Italy
+	Element Text Should Be      id=parsed-image-url   http://localhost:8080/image/1
+	Element Text Should Be      id=parsed-issue-year  2000
 	Submit Form                 id=start-import-series-form
 	${encodedUrl}=              Encode URL  http://localhost:8080/image/1
 	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}
@@ -50,6 +54,8 @@ Import series from an external site (in Russian, use description locator)
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
 	${value}=                   Get Value  id=image-url
 	Should Be Equal             ${value}  http://localhost:8080/image/1
+	${year}=                    Get Selected List Label  id=year
+	Should Be Equal             ${year}  2000
 
 Submit a request that will fail to download a file
 	[Documentation]         Verify submitting a URL with a non-existing file

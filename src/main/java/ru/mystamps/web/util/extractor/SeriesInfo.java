@@ -29,6 +29,7 @@ public class SeriesInfo {
 	private String categoryName;
 	private String countryName;
 	private String imageUrl;
+	private String issueDate;
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -36,7 +37,8 @@ public class SeriesInfo {
 	public boolean isEmpty() {
 		return categoryName == null
 			&& countryName == null
-			&& imageUrl == null;
+			&& imageUrl == null
+			&& issueDate == null;
 	}
 	
 }

@@ -139,6 +139,7 @@
 			<column name="perforated" valueBoolean="false" />
 			<column name="category_id" valueNumeric="1" />
 			<column name="country_id" valueNumeric="1" />
+			<column name="release_year" valueNumeric="2000" />
 			<column name="created_at" valueComputed="${NOW}" />
 			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'USER' ORDER by id LIMIT 1)" />
 			<column name="updated_at" valueComputed="${NOW}" />

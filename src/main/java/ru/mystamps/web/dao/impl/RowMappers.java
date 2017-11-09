@@ -288,8 +288,9 @@ final class RowMappers {
 		}
 		
 		String imageUrl = rs.getString("image_url");
+		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
 		
-		return new ParsedDataDto(category, country, imageUrl);
+		return new ParsedDataDto(category, country, imageUrl, releaseYear);
 	}
 	
 }
