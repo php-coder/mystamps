@@ -35,7 +35,8 @@ import lombok.RequiredArgsConstructor;
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
 	// Regular expression matches release year of the stamps (from 1840 till 2099).
-	private static final Pattern RELEASE_YEAR_REGEXP = Pattern.compile("18[4-9][0-9]|19[0-9]{2}|20[0-9]{2}");
+	private static final Pattern RELEASE_YEAR_REGEXP =
+		Pattern.compile("18[4-9][0-9]|19[0-9]{2}|20[0-9]{2}");
 	
 	private final Logger log;
 	private final CategoryService categoryService;
@@ -130,7 +131,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 				log.debug("Release year is {}", year);
 				return year;
 				
-			} catch (NumberFormatException ignored) {
+			} catch (NumberFormatException ignored) { // NOPMD: EmptyCatchBlock
 				// continue with the next element
 			}
 		}
