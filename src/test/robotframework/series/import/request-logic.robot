@@ -23,8 +23,9 @@ Import series from an external site (in English, use category, country and date 
 	Element Text Should Be      id=parsed-issue-year  2000
 	Submit Form                 id=start-import-series-form
 	${encodedUrl}=              Encode URL  http://127.0.0.1:8080/image/1
-	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}
-	# TODO: verify category
+	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}&year=2000
+	${category}=                Get Selected List Label  id=category
+	Should Be Equal             ${category}  Prehistoric animals
 	# TODO: verify country
 	# We can't use "Textfield Value Should Be" because it causes NPE:
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
@@ -47,8 +48,9 @@ Import series from an external site (in Russian, use description locator)
 	Element Text Should Be      id=parsed-issue-year  2000
 	Submit Form                 id=start-import-series-form
 	${encodedUrl}=              Encode URL  http://localhost:8080/image/1
-	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}
-	# TODO: verify category
+	Location Should Be          ${SITE_URL}/series/add?category=prehistoric-animals&country=italy&image_url=${encodedUrl}&year=2000
+	${category}=                Get Selected List Label  id=category
+	Should Be Equal             ${category}  Prehistoric animals
 	# TODO: verify country
 	# We can't use "Textfield Value Should Be" because it causes NPE:
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
