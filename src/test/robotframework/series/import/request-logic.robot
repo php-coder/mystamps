@@ -10,7 +10,7 @@ Force Tags       series  import-series  logic
 
 *** Test Cases ***
 Import series from an external site (in English, use category, country and date locators)
-	[Documentation]             Verify import from a page in English when category, country and date are parsed from separate locators
+	[Documentation]             Verify import from a page in English and with different locators
 	Input Text                  id=url  http://127.0.0.1:8080/series/2?lang=en
 	Submit Form                 id=import-series-form
 	${location}=                Get Location
@@ -35,7 +35,7 @@ Import series from an external site (in English, use category, country and date 
 	Should Be Equal             ${year}  2000
 
 Import series from an external site (in Russian, use description locator)
-	[Documentation]             Verify import from a page in Russian when category, country and date are parsed from description
+	[Documentation]             Verify import from a page in Russian and shared locator
 	Input Text                  id=url  http://localhost:8080/series/2?lang=ru
 	Submit Form                 id=import-series-form
 	${location}=                Get Location
