@@ -110,7 +110,7 @@
 								Buyer
 							</label>
 							<div class="col-sm-1">
-								<input id="buyer" type="checkbox" class="form-control" th:field="*{buyer}" />
+								<input id="buyer" type="checkbox" th:field="*{buyer}" />
 								<!--/*/
 								<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyer')}" th:each="error : ${#fields.errors('buyer')}" th:text="${error}"></span>
 								/*/-->
@@ -122,7 +122,7 @@
 								Seller
 							</label>
 							<div class="col-sm-1">
-								<input id="seller" type="checkbox" checked="checked" class="form-control" th:field="*{seller}" />
+								<input id="seller" type="checkbox" checked="checked" th:field="*{seller}" />
 								<!--/*/
 								<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('seller')}" th:each="error : ${#fields.errors('seller')}" th:text="${error}"></span>
 								/*/-->
