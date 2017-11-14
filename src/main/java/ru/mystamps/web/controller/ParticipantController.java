@@ -26,6 +26,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,8 +50,15 @@ public class ParticipantController {
 	}
 	
 	@GetMapping(Url.ADD_PARTICIPANT_PAGE)
-	public AddParticipantForm showForm() {
-		return new AddParticipantForm();
+	public AddParticipantForm showForm(
+		@RequestParam(name = "seller", required = false) Boolean seller,
+		@RequestParam(name = "buyer", required = false) Boolean buyer) {
+		
+		AddParticipantForm form = new AddParticipantForm();
+		form.setSeller(seller);
+		form.setBuyer(buyer);
+		
+		return form;
 	}
 	
 	@PostMapping(Url.ADD_PARTICIPANT_PAGE)

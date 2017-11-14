@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.controller.dto;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -46,4 +47,9 @@ public class AddParticipantForm implements AddParticipantDto {
 	@Size(max = PARTICIPANT_URL_MAX_LENGTH, message = "{value.too-long}")
 	private String url;
 	
+	@NotNull
+	private Boolean buyer;
+	
+	@NotNull
+	private Boolean seller;
 }

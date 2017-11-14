@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.bool
+
 import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
@@ -25,6 +27,7 @@ import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.controller.dto.AddParticipantForm
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TransactionParticipantServiceImplTest extends Specification {
@@ -50,6 +53,32 @@ class TransactionParticipantServiceImplTest extends Specification {
 		given:
 			AddParticipantForm form = new AddParticipantForm()
 			form.setName(null)
+			form.setBuyer(bool())
+			form.setSeller(bool())
+		when:
+			service.add(form)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'add() should throw exception when buyer flag is null'() {
+		given:
+			AddParticipantForm form = new AddParticipantForm()
+			form.setName(Random.participantName())
+			form.setBuyer(null)
+			form.setSeller(bool())
+		when:
+			service.add(form)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'add() should throw exception when seller flag is null'() {
+		given:
+			AddParticipantForm form = new AddParticipantForm()
+			form.setName(Random.participantName())
+			form.setBuyer(bool())
+			form.setSeller(null)
 		when:
 			service.add(form)
 		then:
@@ -59,20 +88,24 @@ class TransactionParticipantServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should create participant'() {
 		given:
-			String expectedName = 'test'
-			String expectedUrl  = 'http://example.org'
+			String expectedName    = Random.participantName()
+			String expectedUrl     = Random.url()
+			Boolean expectedBuyer  = bool()
+			Boolean expectedSeller = bool()
 		and:
 			AddParticipantForm form = new AddParticipantForm()
 			form.setName(expectedName)
 			form.setUrl(expectedUrl)
+			form.setBuyer(expectedBuyer)
+			form.setSeller(expectedSeller)
 		when:
 			service.add(form)
 		then:
 			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
 				assert participant?.name == expectedName
 				assert participant?.url  == expectedUrl
-				assert participant?.buyer
-				assert participant?.seller
+				assert participant?.buyer == expectedBuyer
+				assert participant?.seller == expectedSeller
 				return true
 			})
 	}

@@ -416,8 +416,8 @@
 													<!--*/-->
 												</select>
 												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
-													<span class="hint-block" th:utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}})}">
-														You can also <a tabindex="-1" href="../participant/add.html">add a new seller</a>
+													<span class="hint-block" th:utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
+														You can also <a tabindex="-1" href="../participant/add.html?seller=true">add a new seller</a>
 													</span>
 												</small>
 												<!--/*/
@@ -517,8 +517,8 @@
 													<!--*/-->
 												</select>
 												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
-													<span class="hint-block" th:utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}})}">
-														You can also <a tabindex="-1" href="../participant/add.html">add a new buyer</a>
+													<span class="hint-block" th:utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
+														You can also <a tabindex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
 													</span>
 												</small>
 												<!--/*/

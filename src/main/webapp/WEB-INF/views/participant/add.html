@@ -105,6 +105,30 @@
 							</div>
 						</div>
 						
+						<div class="form-group" th:classappend="${#fields.hasErrors('buyer') ? 'has-error' : ''}">
+							<label for="buyer" class="control-label col-sm-4" th:text="#{t_buyer}">
+								Buyer
+							</label>
+							<div class="col-sm-1">
+								<input id="buyer" type="checkbox" class="form-control" th:field="*{buyer}" />
+								<!--/*/
+								<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyer')}" th:each="error : ${#fields.errors('buyer')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
+						<div class="form-group" th:classappend="${#fields.hasErrors('seller') ? 'has-error' : ''}">
+							<label for="seller" class="control-label col-sm-4" th:text="#{t_seller}">
+								Seller
+							</label>
+							<div class="col-sm-1">
+								<input id="seller" type="checkbox" checked="checked" class="form-control" th:field="*{seller}" />
+								<!--/*/
+								<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('seller')}" th:each="error : ${#fields.errors('seller')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<div class="col-sm-offset-4 col-sm-5">
 								<input type="submit" class="btn btn-primary" value="Add" th:value="#{t_add}" />

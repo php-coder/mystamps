@@ -85,6 +85,13 @@ public final class Random {
 			.english();
 	}
 	
+	public static String participantName() {
+		return between(
+			ValidationRules.PARTICIPANT_NAME_MIN_LENGTH,
+			ValidationRules.PARTICIPANT_NAME_MAX_LENGTH
+		).english();
+	}
+	
 	public static Integer issueYear() {
 		return between(ValidationRules.MIN_RELEASE_YEAR, Year.now().getValue()).integer();
 	}

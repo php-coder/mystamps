@@ -47,12 +47,14 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 	public void add(AddParticipantDto dto) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getName() != null, "Name must be non null");
+		Validate.isTrue(dto.getBuyer() != null, "Buyer flag must be non null");
+		Validate.isTrue(dto.getSeller() != null, "Seller flag must be non null");
 		
 		AddParticipantDbDto participant = new AddParticipantDbDto();
 		participant.setName(dto.getName());
 		participant.setUrl(dto.getUrl());
-		participant.setBuyer(Boolean.TRUE);
-		participant.setSeller(Boolean.TRUE);
+		participant.setBuyer(dto.getBuyer());
+		participant.setSeller(dto.getSeller());
 		
 		transactionParticipantDao.add(participant);
 		

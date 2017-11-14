@@ -20,4 +20,6 @@ package ru.mystamps.web.service.dto;
 public interface AddParticipantDto {
 	String getName();
 	String getUrl();
+	Boolean getBuyer();
+	Boolean getSeller();
 }
