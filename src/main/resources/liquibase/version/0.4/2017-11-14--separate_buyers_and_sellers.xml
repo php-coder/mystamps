@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="add-is_buyer_seller-fields" author="php-coder" context="scheme">
+		
+		<addColumn tableName="transaction_participants">
+			<column name="is_buyer" type="BOOLEAN" />
+			<column name="is_seller" type="BOOLEAN" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="assign-is_buyer-column" author="php-coder" context="test-data, prod-data">
+		<comment>Find and mark all buyers</comment>
+		
+		<sql>
+			UPDATE transaction_participants p
+			   SET is_buyer = (
+			         SELECT TRUE
+			           FROM series_sales ss
+			          WHERE ss.buyer_id = p.id
+			          UNION
+			         SELECT FALSE
+			          LIMIT 1
+			       )
+		</sql>
+		
+		<rollback>
+			<sql>
+				UPDATE transaction_participants
+				SET is_buyer = NULL
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="assign-is_seller-column" author="php-coder" context="test-data, prod-data">
+		<comment>Find and mark all sellers</comment>
+		
+		<sql>
+			UPDATE transaction_participants p
+			   SET is_seller = (
+			         SELECT TRUE
+			           FROM series_sales ss
+			          WHERE ss.seller_id = p.id
+			          UNION
+			         SELECT FALSE
+			          LIMIT 1
+			       )
+		</sql>
+		
+		<rollback>
+			<sql>
+				UPDATE transaction_participants
+				SET is_seller = NULL
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="make-is_buyer-non-nullable" author="php-coder" context="scheme">
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM transaction_participants
+				 WHERE is_buyer IS FALSE
+				   AND is_seller IS FALSE
+			</sqlCheck>
+		</preConditions>
+		
+		<addNotNullConstraint
+			tableName="transaction_participants"
+			columnName="is_buyer"
+			columnDataType="BOOLEAN" />
+	</changeSet>
+	
+	<changeSet id="make-is_seller-non-nullable" author="php-coder" context="scheme">
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM transaction_participants
+				 WHERE is_buyer IS FALSE
+				   AND is_seller IS FALSE
+			</sqlCheck>
+		</preConditions>
+		
+		<addNotNullConstraint
+			tableName="transaction_participants"
+			columnName="is_seller"
+			columnDataType="BOOLEAN" />
+	</changeSet>
+	
+</databaseChangeLog>

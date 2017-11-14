@@ -51,24 +51,26 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		AddParticipantDbDto participant = new AddParticipantDbDto();
 		participant.setName(dto.getName());
 		participant.setUrl(dto.getUrl());
+		participant.setBuyer(Boolean.TRUE);
+		participant.setSeller(Boolean.TRUE);
 		
 		transactionParticipantDao.add(participant);
 		
-		log.info("Participant with name '{}' has been created", participant.getName());
+		log.info("Participant has been created ({})", participant);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public List<EntityWithIdDto> findAllBuyers() {
-		return transactionParticipantDao.findAllAsEntityWithIdDto();
+		return transactionParticipantDao.findAllBuyers();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public List<EntityWithIdDto> findAllSellers() {
-		return transactionParticipantDao.findAllAsEntityWithIdDto();
+		return transactionParticipantDao.findAllSellers();
 	}
 	
 }

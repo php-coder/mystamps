@@ -40,14 +40,19 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	@Value("${transaction_participant.create}")
 	private String addParticipantSql;
 	
-	@Value("${transaction_participants.find_all}")
-	private String findAllParticipantsSql;
+	@Value("${transaction_participants.find_all_buyers}")
+	private String findAllBuyersSql;
+	
+	@Value("${transaction_participants.find_all_sellers}")
+	private String findAllSellersSql;
 	
 	@Override
 	public void add(AddParticipantDbDto participant) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", participant.getName());
 		params.put("url", participant.getUrl());
+		params.put("buyer", participant.getBuyer());
+		params.put("seller", participant.getSeller());
 		
 		int affected = jdbcTemplate.update(addParticipantSql, params);
 		
@@ -59,8 +64,13 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	}
 	
 	@Override
-	public List<EntityWithIdDto> findAllAsEntityWithIdDto() {
-		return jdbcTemplate.query(findAllParticipantsSql, RowMappers::forEntityWithIdDto);
+	public List<EntityWithIdDto> findAllBuyers() {
+		return jdbcTemplate.query(findAllBuyersSql, RowMappers::forEntityWithIdDto);
+	}
+	
+	@Override
+	public List<EntityWithIdDto> findAllSellers() {
+		return jdbcTemplate.query(findAllSellersSql, RowMappers::forEntityWithIdDto);
 	}
 	
 }

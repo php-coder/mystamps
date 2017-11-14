@@ -24,5 +24,6 @@ import ru.mystamps.web.dao.dto.EntityWithIdDto;
 
 public interface TransactionParticipantDao {
 	void add(AddParticipantDbDto participant);
-	List<EntityWithIdDto> findAllAsEntityWithIdDto();
+	List<EntityWithIdDto> findAllBuyers();
+	List<EntityWithIdDto> findAllSellers();
 }

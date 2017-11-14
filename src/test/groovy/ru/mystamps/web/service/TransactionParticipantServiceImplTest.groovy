@@ -71,6 +71,8 @@ class TransactionParticipantServiceImplTest extends Specification {
 			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
 				assert participant?.name == expectedName
 				assert participant?.url  == expectedUrl
+				assert participant?.buyer
+				assert participant?.seller
 				return true
 			})
 	}
@@ -85,7 +87,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			List<EntityWithIdDto> result = service.findAllBuyers()
 		then:
-			1 * transactionParticipantDao.findAllAsEntityWithIdDto() >> expectedResult
+			1 * transactionParticipantDao.findAllBuyers() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -100,7 +102,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			List<EntityWithIdDto> result = service.findAllSellers()
 		then:
-			1 * transactionParticipantDao.findAllAsEntityWithIdDto() >> expectedResult
+			1 * transactionParticipantDao.findAllSellers() >> expectedResult
 		and:
 			result == expectedResult
 	}
