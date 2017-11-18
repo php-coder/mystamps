@@ -41,4 +41,8 @@ public class FirstLevelCategoryDto {
 		this(name, null);
 	}
 	
+	public void addChild(String slug, String name) {
+		children.add(new EntityWithSlugDto(name, slug));
+	}
+	
 }

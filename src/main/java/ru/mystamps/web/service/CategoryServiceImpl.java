@@ -145,11 +145,11 @@ public class CategoryServiceImpl implements CategoryService {
 					lastItem = new FirstLevelCategoryDto(name, slug);
 				} else {
 					lastItem = new FirstLevelCategoryDto(parent);
-					lastItem.getChildren().add(new EntityWithSlugDto(name, slug));
+					lastItem.addChild(slug, name);
 				}
 				items.add(lastItem);
 			} else {
-				lastItem.getChildren().add(new EntityWithSlugDto(name, slug));
+				lastItem.addChild(slug, name);
 			}
 		}
 		
