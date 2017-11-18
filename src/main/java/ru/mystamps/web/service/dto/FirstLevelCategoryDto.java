@@ -28,17 +28,17 @@ import ru.mystamps.web.dao.dto.EntityWithSlugDto;
 @Getter
 @ToString
 public class FirstLevelCategoryDto {
-	private final String name;
 	private final String slug;
+	private final String name;
 	private final List<EntityWithSlugDto> children = new ArrayList<>();
 	
-	public FirstLevelCategoryDto(String name, String slug) {
-		this.name = name;
+	public FirstLevelCategoryDto(String slug, String name) {
 		this.slug = slug;
+		this.name = name;
 	}
 	
 	public FirstLevelCategoryDto(String name) {
-		this(name, null);
+		this(null, name);
 	}
 	
 	public void addChild(String slug, String name) {

@@ -142,7 +142,7 @@ public class CategoryServiceImpl implements CategoryService {
 			if (createNewItem) {
 				lastParent = parent;
 				if (categoryWithoutParent) {
-					lastItem = new FirstLevelCategoryDto(name, slug);
+					lastItem = new FirstLevelCategoryDto(slug, name);
 				} else {
 					lastItem = new FirstLevelCategoryDto(parent);
 					lastItem.addChild(slug, name);
