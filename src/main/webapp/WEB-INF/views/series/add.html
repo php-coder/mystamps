@@ -137,10 +137,8 @@
 						</div>
 		
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('country') ? 'has-error' : ''}">
-							<label for="country" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_country}">
-									Country
-								</span>
+							<label for="country" class="control-label col-sm-3" th:text="#{t_country}">
+								Country
 							</label>
 							<div class="col-sm-5">
 								<select id="country" name="country" class="form-control">
@@ -209,10 +207,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
-							<label for="perforated" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_perforated}">
-									Perforated
-								</span>
+							<label for="perforated" class="control-label col-sm-3" th:text="#{t_perforated}">
+								Perforated
 							</label>
 							<div class="col-sm-1">
 								<input type="checkbox" id="perforated" checked="checked" th:field="*{perforated}" />
@@ -273,10 +269,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm js-issue-date collapse in" th:classappend="|${issueDateHasErrors ? 'has-error' : ''} ${issueDateHasValues ? 'js-has-data' : ''}|">
-							<label for="year" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_issue_date}">
-									Date of release
-								</span>
+							<label for="year" class="control-label col-sm-3" th:text="#{t_issue_date}">
+								Date of release
 							</label>
 							
 							<div class="col-sm-5">
@@ -366,10 +360,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${michelHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
-							<label for="michelNumbers" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_michel}">
-									Michel
-								</span>
+							<label for="michelNumbers" class="control-label col-sm-3" th:text="#{t_michel}">
+								Michel
 							</label>
 							<div class="col-sm-7">
 								<div class="row">
@@ -391,10 +383,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${scottHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
-							<label for="scottNumbers" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_scott}">
-									Scott
-								</span>
+							<label for="scottNumbers" class="control-label col-sm-3" th:text="#{t_scott}">
+								Scott
 							</label>
 							<div class="col-sm-7">
 								<div class="row">
@@ -416,10 +406,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${yvertHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
-							<label for="yvertNumbers" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_yvert}">
-									Yvert
-								</span>
+							<label for="yvertNumbers" class="control-label col-sm-3" th:text="#{t_yvert}">
+								Yvert
 							</label>
 							<div class="col-sm-7">
 								<div class="row">
@@ -441,10 +429,8 @@
 						</div>
 						
 						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${gibbonsHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
-							<label for="gibbonsNumbers" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_sg}">
-									Gibbons
-								</span>
+							<label for="gibbonsNumbers" class="control-label col-sm-3" th:text="#{t_sg}">
+								Gibbons
 							</label>
 							<div class="col-sm-7">
 								<div class="row">
@@ -472,10 +458,8 @@
 						</div>
 						
 						<div class="form-group js-comment collapse in" th:classappend="|${#fields.hasErrors('comment') ? 'has-error' : ''} ${addSeriesForm.comment != null ? 'js-has-data' : ''}|" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
-							<label for="comment" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_comment}">
-									Comment
-								</span>
+							<label for="comment" class="control-label col-sm-3" th:text="#{t_comment}">
+								Comment
 							</label>
 							<div class="col-sm-5">
 								<textarea id="comment" class="form-control" cols="22" rows="3" th:field="*{comment}"></textarea>

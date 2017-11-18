@@ -99,10 +99,8 @@
 										th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}"
 										th:object="${addImageForm}">
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
-											<label for="image" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_image}">
-													Image
-												</span>
+											<label for="image" class="control-label col-sm-3" th:text="#{t_image}">
+												Image
 											</label>
 											<div class="col-sm-9">
 												<input id="image"
@@ -383,10 +381,8 @@
 										th:object="${addSeriesSalesForm}">
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-											<label for="date" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_date}">
-													Date
-												</span>
+											<label for="date" class="control-label col-sm-3" th:text="#{t_date}">
+												Date
 											</label>
 											<div class="col-sm-4">
 												<input type="text" id="date" class="form-control" th:field="*{date}" />
@@ -427,10 +423,8 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-											<label for="url" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_url}">
-													URL
-												</span>
+											<label for="url" class="control-label col-sm-3" th:text="#{t_url}">
+												URL
 											</label>
 											<div class="col-sm-6">
 												<input type="url" id="url" class="form-control" th:field="*{url}" />
@@ -471,10 +465,8 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-											<label for="price" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_alternative_price}">
-													Alternative price
-												</span>
+											<label for="price" class="control-label col-sm-3" th:text="#{t_alternative_price}">
+												Alternative price
 											</label>
 											<div class="col-sm-6">
 												<div class="row">
@@ -500,10 +492,8 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-											<label for="buyer" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_buyer}">
-													Buyer
-												</span>
+											<label for="buyer" class="control-label col-sm-3" th:text="#{t_buyer}">
+												Buyer
 											</label>
 											<div class="col-sm-6">
 												<select id="buyer" class="form-control" th:field="*{buyerId}">
