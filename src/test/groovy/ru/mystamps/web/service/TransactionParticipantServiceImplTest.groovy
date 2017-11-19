@@ -25,7 +25,6 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
-import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.controller.dto.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
@@ -108,36 +107,6 @@ class TransactionParticipantServiceImplTest extends Specification {
 				assert participant?.seller == expectedSeller
 				return true
 			})
-	}
-	
-	//
-	// Tests for findAllBuyers()
-	//
-	
-	def 'findAllBuyers() should call dao and return result'() {
-		given:
-			List<EntityWithIdDto> expectedResult = [ TestObjects.createEntityWithIdDto() ]
-		when:
-			List<EntityWithIdDto> result = service.findAllBuyers()
-		then:
-			1 * transactionParticipantDao.findAllBuyers() >> expectedResult
-		and:
-			result == expectedResult
-	}
-	
-	//
-	// Tests for findAllSellers()
-	//
-	
-	def 'findAllSellers() should call dao and return result'() {
-		given:
-			List<EntityWithIdDto> expectedResult = [ TestObjects.createEntityWithIdDto() ]
-		when:
-			List<EntityWithIdDto> result = service.findAllSellers()
-		then:
-			1 * transactionParticipantDao.findAllSellers() >> expectedResult
-		and:
-			result == expectedResult
 	}
 	
 }

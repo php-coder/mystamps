@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 
 @RequiredArgsConstructor
 public class JdbcTransactionParticipantDao implements TransactionParticipantDao {
@@ -40,11 +40,11 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	@Value("${transaction_participant.create}")
 	private String addParticipantSql;
 	
-	@Value("${transaction_participants.find_all_buyers}")
-	private String findAllBuyersSql;
+	@Value("${transaction_participant.find_buyers_with_parent_names}")
+	private String findBuyersWithParentNamesSql;
 	
-	@Value("${transaction_participants.find_all_sellers}")
-	private String findAllSellersSql;
+	@Value("${transaction_participant.find_sellers_with_parent_names}")
+	private String findSellersWithParentNamesSql;
 	
 	@Override
 	public void add(AddParticipantDbDto participant) {
@@ -64,13 +64,19 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	}
 	
 	@Override
-	public List<EntityWithIdDto> findAllBuyers() {
-		return jdbcTemplate.query(findAllBuyersSql, RowMappers::forEntityWithIdDto);
+	public List<TransactionParticipantDto> findBuyersWithParents() {
+		return jdbcTemplate.query(
+			findBuyersWithParentNamesSql,
+			RowMappers::forTransactionParticipantDto
+		);
 	}
 	
 	@Override
-	public List<EntityWithIdDto> findAllSellers() {
-		return jdbcTemplate.query(findAllSellersSql, RowMappers::forEntityWithIdDto);
+	public List<TransactionParticipantDto> findSellersWithParents() {
+		return jdbcTemplate.query(
+			findSellersWithParentNamesSql,
+			RowMappers::forTransactionParticipantDto
+		);
 	}
 	
 }

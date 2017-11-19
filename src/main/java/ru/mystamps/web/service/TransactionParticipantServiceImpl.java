@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -31,8 +33,9 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.dto.AddParticipantDto;
+import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
@@ -64,15 +67,85 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
-	public List<EntityWithIdDto> findAllBuyers() {
-		return transactionParticipantDao.findAllBuyers();
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public List<GroupedTransactionParticipantDto> findAllBuyers() {
+		List<TransactionParticipantDto> participants =
+			transactionParticipantDao.findBuyersWithParents();
+		if (participants.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		// Because of Thymeleaf's restrictions we can't return participants as-is and need this
+		// transformation
+		List<GroupedTransactionParticipantDto> items = new ArrayList<>();
+		String lastParent = null;
+		GroupedTransactionParticipantDto lastItem = null;
+		
+		for (TransactionParticipantDto participant : participants) {
+			String name   = participant.getName();
+			Integer id    = participant.getId();
+			String parent = participant.getParentName();
+			
+			boolean participantWithoutParent = parent == null;
+			boolean createNewItem = participantWithoutParent || !parent.equals(lastParent);
+			
+			if (createNewItem) {
+				lastParent = parent;
+				if (participantWithoutParent) {
+					lastItem = new GroupedTransactionParticipantDto(id, name);
+				} else {
+					lastItem = new GroupedTransactionParticipantDto(parent);
+					lastItem.addChild(id, name);
+				}
+				items.add(lastItem);
+			} else {
+				lastItem.addChild(id, name);
+			}
+		}
+		
+		return items;
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
-	public List<EntityWithIdDto> findAllSellers() {
-		return transactionParticipantDao.findAllSellers();
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public List<GroupedTransactionParticipantDto> findAllSellers() {
+		List<TransactionParticipantDto> participants =
+			transactionParticipantDao.findSellersWithParents();
+		if (participants.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		// Because of Thymeleaf's restrictions we can't return participants as-is and need this
+		// transformation
+		List<GroupedTransactionParticipantDto> items = new ArrayList<>();
+		String lastParent = null;
+		GroupedTransactionParticipantDto lastItem = null;
+		
+		for (TransactionParticipantDto participant : participants) {
+			String name   = participant.getName();
+			Integer id    = participant.getId();
+			String parent = participant.getParentName();
+			
+			boolean participantWithoutParent = parent == null;
+			boolean createNewItem = participantWithoutParent || !parent.equals(lastParent);
+			
+			if (createNewItem) {
+				lastParent = parent;
+				if (participantWithoutParent) {
+					lastItem = new GroupedTransactionParticipantDto(id, name);
+				} else {
+					lastItem = new GroupedTransactionParticipantDto(parent);
+					lastItem.addChild(id, name);
+				}
+				items.add(lastItem);
+			} else {
+				lastItem.addChild(id, name);
+			}
+		}
+		
+		return items;
 	}
 	
 }

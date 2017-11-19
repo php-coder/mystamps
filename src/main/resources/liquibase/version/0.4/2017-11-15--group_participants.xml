@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="create-transaction_participant_groups-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="transaction_participant_groups">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(50)">
+				<constraints unique="true" uniqueConstraintName="uc_transaction_participant_groups_name" nullable="false" />
+			</column>
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="INTEGER">
+				<constraints nullable="false" references="users(id)" foreignKeyName="fk_transaction_participant_groups_created_by" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_by" type="INTEGER">
+				<constraints nullable="false" references="users(id)" foreignKeyName="fk_transaction_participant_groups_updated_by" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="add-transaction_participant-group_id-field" author="php-coder" context="scheme">
+		
+		<addColumn tableName="transaction_participants">
+			<column name="group_id" type="INTEGER">
+				<constraints references="transaction_participant_groups(id)" foreignKeyName="fk_transaction_participants_group_id" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-movies-characters-participant-group" author="php-coder" context="test-data">
+		
+		<insert tableName="transaction_participant_groups">
+			<column name="name" value="Movies characters" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+		</insert>
+		
+	</changeSet>
+	
+	<changeSet id="update-italy-country-name" author="php-coder" context="test-data">
+		
+		<update tableName="transaction_participants">
+			<column name="group_id" valueNumeric="1" />
+			<where>name = :value</where>
+			<whereParams>
+				<param value="John Connor" />
+			</whereParams>
+		</update>
+		
+		<update tableName="transaction_participants">
+			<column name="group_id" valueNumeric="1" />
+			<where>name = :value</where>
+			<whereParams>
+				<param value="Duncan MacLeod" />
+			</whereParams>
+		</update>
+		
+	</changeSet>
+	
+</databaseChangeLog>

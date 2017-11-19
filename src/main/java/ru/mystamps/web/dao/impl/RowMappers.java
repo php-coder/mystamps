@@ -261,6 +261,16 @@ final class RowMappers {
 		);
 	}
 	
+	public static TransactionParticipantDto forTransactionParticipantDto(ResultSet rs, int i)
+		throws SQLException {
+		
+		return new TransactionParticipantDto(
+			rs.getInt("id"),
+			rs.getString("name"),
+			rs.getString("parent_name")
+		);
+	}
+	
 	public static ImportRequestDto forImportRequestDto(ResultSet rs, int i) throws SQLException {
 		return new ImportRequestDto(
 			rs.getString("url"),

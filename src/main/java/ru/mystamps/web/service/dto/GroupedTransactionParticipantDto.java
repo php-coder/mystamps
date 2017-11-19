@@ -15,15 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddParticipantDbDto;
-import ru.mystamps.web.dao.dto.TransactionParticipantDto;
+import lombok.Getter;
+import lombok.ToString;
 
-public interface TransactionParticipantDao {
-	void add(AddParticipantDbDto participant);
-	List<TransactionParticipantDto> findBuyersWithParents();
-	List<TransactionParticipantDto> findSellersWithParents();
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
+
+@Getter
+@ToString
+public class GroupedTransactionParticipantDto {
+	private final Integer id;
+	private final String name;
+	private final List<EntityWithIdDto> children = new ArrayList<>();
+	
+	public GroupedTransactionParticipantDto(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	public GroupedTransactionParticipantDto(String name) {
+		this(null, name);
+	}
+	
+	public void addChild(Integer id, String name) {
+		children.add(new EntityWithIdDto(id, name));
+	}
+	
 }

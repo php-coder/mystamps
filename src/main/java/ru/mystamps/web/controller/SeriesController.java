@@ -64,7 +64,6 @@ import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -76,6 +75,7 @@ import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.TransactionParticipantService;
 import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
+import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
@@ -543,10 +543,12 @@ public class SeriesController {
 			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
 		}
 		
-		List<EntityWithIdDto> sellers = transactionParticipantService.findAllSellers();
+		List<GroupedTransactionParticipantDto> sellers =
+			transactionParticipantService.findAllSellers();
 		model.addAttribute("sellers", sellers);
 		
-		List<EntityWithIdDto> buyers = transactionParticipantService.findAllBuyers();
+		List<GroupedTransactionParticipantDto> buyers =
+			transactionParticipantService.findAllBuyers();
 		model.addAttribute("buyers", buyers);
 	}
 	

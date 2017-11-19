@@ -403,12 +403,27 @@
 												<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
 													<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
 													<!--/*/
-													<option th:each="seller : ${sellers}" th:value="${seller.id}" th:text="${seller.name}"></option>
+													<th:block th:each="item : ${sellers}">
+														<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
+															<option th:each="seller : ${item.children}"
+																th:value="${seller.id}"
+																th:text="${seller.name}"
+																th:selected="${addSeriesSalesForm.sellerId != seller.id}">
+															</option>
+														</optgroup>
+														<option th:if="${#lists.isEmpty(item.children)}"
+															th:value="${item.id}"
+															th:text="${item.name}"
+															th:selected="${addSeriesSalesForm.sellerId != item.id}">
+														</option>
+													</th:block>
 													/*/-->
 													<!--/*-->
-													<option value="1">James Alan Hetfield</option>
+													<optgroup label="Musicians">
+														<option value="3">Eicca Toppinen</option>
+														<option value="1">James Alan Hetfield</option>
+													</optgroup>
 													<option value="2">Tommy Lee Jones</option>
-													<option value="3">Eicca Toppinen</option>
 													<!--*/-->
 												</select>
 												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
@@ -499,11 +514,26 @@
 												<select id="buyer" class="form-control" th:field="*{buyerId}">
 													<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
 													<!--/*/
-														<option th:each="buyer : ${buyers}" th:value="${buyer.id}" th:text="${buyer.name}"></option>
+														<th:block th:each="item : ${buyers}">
+															<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
+																<option th:each="buyer : ${item.children}"
+																	th:value="${buyer.id}"
+																	th:text="${buyer.name}"
+																	th:selected="${addSeriesSalesForm.buyerId != buyer.id}">
+																</option>
+															</optgroup>
+															<option th:if="${#lists.isEmpty(item.children)}"
+																th:value="${item.id}"
+																th:text="${item.name}"
+																th:selected="${addSeriesSalesForm.buyerId != item.id}">
+															</option>
+														</th:block>
 													/*/-->
 													<!--/*-->
-													<option value="1">Kurt Cobain</option>
-													<option value="2">Michael Jackson</option>
+													<optgroup label="Musicians">
+														<option value="1">Kurt Cobain</option>
+														<option value="2">Michael Jackson</option>
+													</optgroup>
 													<!--*/-->
 												</select>
 												<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
