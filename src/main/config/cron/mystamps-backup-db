@@ -1,4 +1,4 @@
-# /etc/cron.d/mystamps file for backuping my-stamps.ru database
+# /etc/cron.d/mystamps-backup-db file for backuping my-stamps.ru database
 MAILTO=coder
 #
 # min	hour	dom		mon		dow		user		command

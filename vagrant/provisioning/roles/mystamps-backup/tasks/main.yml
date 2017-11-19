@@ -20,11 +20,16 @@
 
 - name: Creating a cron task for doing database backups
   copy:
-    src: ../../src/main/config/cron/mystamps
-    dest: /etc/cron.d/mystamps
+    src: ../../src/main/config/cron/mystamps-backup-db
+    dest: /etc/cron.d/mystamps-backup-db
     force: yes
     backup: no
     owner: root
     group: root
     mode: '0644'
+
+- name: Removing old cron task
+  file:
+    path: /etc/cron.d/mystamps
+    state: absent
 
