@@ -52,7 +52,7 @@
 		
 	</changeSet>
 	
-	<changeSet id="update-italy-country-name" author="php-coder" context="test-data">
+	<changeSet id="add-participants-to-movies-characters-group" author="php-coder" context="test-data">
 		
 		<update tableName="transaction_participants">
 			<column name="group_id" valueNumeric="1" />
