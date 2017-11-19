@@ -33,3 +33,33 @@
     path: /etc/cron.d/mystamps
     state: absent
 
+- name: Installing duplicity
+  apt:
+    package: duplicity
+    state: present
+
+- name: Creating /etc/duplicity directory
+  file:
+    path: /etc/duplicity
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Downloading /etc/duplicity/cacert.pem
+  command: curl https://curl.haxx.se/ca/cacert.pem -o cacert.pem
+  args:
+    chdir: /etc/duplicity
+    creates: /etc/duplicity/cacert.pem
+    warn: no
+
+- name: Creating a cron task for backup to a remote host
+  template:
+    src: ../../src/main/config/cron/mystamps-backup-remote
+    dest: /etc/cron.d/mystamps-backup-remote
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0600'
+

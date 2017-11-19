@@ -1,0 +1,6 @@
+# /etc/cron.d/mystamps-backup-remote file for backuping my-stamps.ru data to remote host
+MAILTO=coder
+#
+# min	hour	dom		mon		dow		user		command
+45	0	*		*		*		mystamps	duplicity --name=uploads --no-compression --no-encryption /data/uploads {{ uploads_target_url }} 2>&1
+50	0	*		*		*		mystamps	PASSPHRASE='{{ gpg_passphrase }}' duplicity --name=mysql-backups --no-compression /data/backups {{ mysql_backups_target_url }} 2>&1
