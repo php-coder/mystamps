@@ -88,11 +88,10 @@ public final class TestObjects {
 	}
 	
 	public static UserDetails createUserDetails() {
-		final Integer anyId = 777;
 		String collectionSlug = TEST_LOGIN;
 		
 		return new UserDetails(
-			anyId,
+			Random.userId(),
 			TEST_LOGIN,
 			TEST_NAME,
 			TEST_HASH,
