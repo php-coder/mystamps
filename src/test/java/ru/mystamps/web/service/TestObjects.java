@@ -26,6 +26,8 @@ import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
+import static io.qala.datagen.RandomShortApi.bool;
+
 public final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
 	public static final String TEST_ACTIVITY_PAGE    = "http://example.org/some/page";
@@ -119,7 +121,7 @@ public final class TestObjects {
 			Random.id(), "test-country", "Test Country",
 			15, 10, 2000,
 			16,
-			true
+			bool()
 		);
 	}
 	
