@@ -47,6 +47,10 @@ public class AddParticipantForm implements AddParticipantDto {
 	@Size(max = PARTICIPANT_URL_MAX_LENGTH, message = "{value.too-long}")
 	private String url;
 	
+	// TODO: must be positive
+	// TODO: must be existing group
+	private Integer groupId;
+	
 	@NotNull
 	private Boolean buyer;
 	

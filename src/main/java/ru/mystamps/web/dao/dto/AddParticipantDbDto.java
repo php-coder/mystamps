@@ -27,6 +27,7 @@ import lombok.ToString;
 public class AddParticipantDbDto {
 	private String name;
 	private String url;
+	private Integer groupId;
 	private Boolean buyer;
 	private Boolean seller;
 }

@@ -20,10 +20,12 @@ package ru.mystamps.web.dao;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 
 public interface TransactionParticipantDao {
 	void add(AddParticipantDbDto participant);
 	List<TransactionParticipantDto> findBuyersWithParents();
 	List<TransactionParticipantDto> findSellersWithParents();
+	List<EntityWithIdDto> findAllGroups();
 }

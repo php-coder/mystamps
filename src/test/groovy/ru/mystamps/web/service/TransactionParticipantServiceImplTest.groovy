@@ -18,6 +18,7 @@
 package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomShortApi.bool
+import static io.qala.datagen.RandomShortApi.nullOr
 
 import org.slf4j.helpers.NOPLogger
 
@@ -25,6 +26,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
+import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.controller.dto.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
@@ -87,14 +89,16 @@ class TransactionParticipantServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should create participant'() {
 		given:
-			String expectedName    = Random.participantName()
-			String expectedUrl     = Random.url()
-			Boolean expectedBuyer  = bool()
-			Boolean expectedSeller = bool()
+			String expectedName     = Random.participantName()
+			String expectedUrl      = Random.url()
+			Integer expectedGroupId = nullOr(Random.id())
+			Boolean expectedBuyer   = bool()
+			Boolean expectedSeller  = bool()
 		and:
 			AddParticipantForm form = new AddParticipantForm()
 			form.setName(expectedName)
 			form.setUrl(expectedUrl)
+			form.setGroupId(expectedGroupId)
 			form.setBuyer(expectedBuyer)
 			form.setSeller(expectedSeller)
 		when:
@@ -103,10 +107,26 @@ class TransactionParticipantServiceImplTest extends Specification {
 			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
 				assert participant?.name == expectedName
 				assert participant?.url  == expectedUrl
+				assert participant?.groupId  == expectedGroupId
 				assert participant?.buyer == expectedBuyer
 				assert participant?.seller == expectedSeller
 				return true
 			})
+	}
+	
+	//
+	// Tests for findAllGroups()
+	//
+	
+	def 'findAllGroups() should invoke dao and return its result'() {
+		given:
+			List<EntityWithIdDto> expectedResult = Random.listOfEntityWithIdDto()
+		when:
+			List<EntityWithIdDto> result = service.findAllGroups()
+		then:
+			1 * transactionParticipantDao.findAllGroups() >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

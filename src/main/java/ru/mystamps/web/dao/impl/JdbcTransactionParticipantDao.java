@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 
 @RequiredArgsConstructor
@@ -46,11 +47,15 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	@Value("${transaction_participant.find_sellers_with_parent_names}")
 	private String findSellersWithParentNamesSql;
 	
+	@Value("${transaction_participant_group.find_all}")
+	private String findAllGroupsSql;
+	
 	@Override
 	public void add(AddParticipantDbDto participant) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", participant.getName());
 		params.put("url", participant.getUrl());
+		params.put("group_id", participant.getGroupId());
 		params.put("buyer", participant.getBuyer());
 		params.put("seller", participant.getSeller());
 		
@@ -77,6 +82,11 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 			findSellersWithParentNamesSql,
 			RowMappers::forTransactionParticipantDto
 		);
+	}
+	
+	@Override
+	public List<EntityWithIdDto> findAllGroups() {
+		return jdbcTemplate.query(findAllGroupsSql, RowMappers::forEntityWithIdDto);
 	}
 	
 }

@@ -17,10 +17,13 @@
  */
 package ru.mystamps.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.dto.AddParticipantForm;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.service.TransactionParticipantService;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
@@ -51,6 +55,7 @@ public class ParticipantController {
 	
 	@GetMapping(Url.ADD_PARTICIPANT_PAGE)
 	public AddParticipantForm showForm(
+		Model model,
 		@RequestParam(name = "seller", required = false) Boolean seller,
 		@RequestParam(name = "buyer", required = false) Boolean buyer) {
 		
@@ -58,12 +63,17 @@ public class ParticipantController {
 		form.setSeller(seller);
 		form.setBuyer(buyer);
 		
+		List<EntityWithIdDto> groups = participantService.findAllGroups();
+		model.addAttribute("groups", groups);
+		
 		return form;
 	}
 	
 	@PostMapping(Url.ADD_PARTICIPANT_PAGE)
-	public String processInput(@Valid AddParticipantForm form, BindingResult result) {
+	public String processInput(Model model, @Valid AddParticipantForm form, BindingResult result) {
 		if (result.hasErrors()) {
+			List<EntityWithIdDto> groups = participantService.findAllGroups();
+			model.addAttribute("groups", groups);
 			return null;
 		}
 		

@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
@@ -56,6 +57,7 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		AddParticipantDbDto participant = new AddParticipantDbDto();
 		participant.setName(dto.getName());
 		participant.setUrl(dto.getUrl());
+		participant.setGroupId(dto.getGroupId());
 		participant.setBuyer(dto.getBuyer());
 		participant.setSeller(dto.getSeller());
 		
@@ -146,6 +148,13 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		}
 		
 		return items;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.ADD_PARTICIPANT)
+	public List<EntityWithIdDto> findAllGroups() {
+		return transactionParticipantDao.findAllGroups();
 	}
 	
 }

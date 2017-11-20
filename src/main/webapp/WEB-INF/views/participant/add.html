@@ -103,6 +103,30 @@
 							</div>
 						</div>
 						
+						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('groupId') ? 'has-error' : ''}">
+							<label for="group" class="control-label col-sm-4" th:text="#{t_group}">
+								Group
+							</label>
+							<div class="col-sm-5">
+								<select id="group" class="form-control" th:field="*{groupId}">
+									<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+									<!--/*/
+									<option th:each="group : ${groups}"
+										th:value="${group.id}"
+										th:text="${group.name}"
+										th:selected="${addParticipantForm.groupId == group.id}">
+									</option>
+									/*/-->
+									<!--/*-->
+									<option value="1">Musicians</option>
+									<!--*/-->
+								</select>
+								<!--/*/
+								<span id="group.errors" class="help-block" th:if="${#fields.hasErrors('groupId')}" th:each="error : ${#fields.errors('groupId')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
 						<div class="form-group" th:classappend="${#fields.hasErrors('buyer') ? 'has-error' : ''}">
 							<label for="buyer" class="control-label col-sm-4" th:text="#{t_buyer}">
 								Buyer

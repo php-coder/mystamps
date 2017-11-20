@@ -26,7 +26,7 @@ import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
-final class TestObjects {
+public final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
 	public static final String TEST_ACTIVITY_PAGE    = "http://example.org/some/page";
 	public static final String TEST_ACTIVITY_METHOD  = "GET";

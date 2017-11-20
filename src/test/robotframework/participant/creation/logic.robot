@@ -21,15 +21,17 @@ Create participant with name only
 	List Should Contain Value      ${availableSellers}  participant1
 	List Should Not Contain Value  ${availableBuyers}   participant1
 
-Create participant with name and url
+Create participant by filling all fields
 	[Documentation]            Verify creation of participant by filling all fields
 	Input Text                 id=name  participant2
+	Select From List By Label  id=group  Movies characters
 	Select Checkbox            id=buyer
 	Select Checkbox            id=seller
 	Input Text                 id=url   http://participant2.example.org
 	Submit Form                id=add-participant-form
 	Location Should Be         ${SITE_URL}/
 	Go To                      ${SITE_URL}/series/1
+	# TODO: check that buyer and seller listed in the "Movies characters" group
 	${availableSellers}=       Get List Items  id=seller
 	${availableBuyers}=        Get List Items  id=buyer
 	List Should Contain Value  ${availableSellers}  participant2
