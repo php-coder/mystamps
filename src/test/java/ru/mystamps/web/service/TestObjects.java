@@ -46,7 +46,6 @@ public final class TestObjects {
 	private static final String TEST_URL            = "test.example.org";
 	private static final BigDecimal TEST_PRICE      = new BigDecimal("100.99");
 	
-	private static final Integer TEST_ENTITY_ID     = 456;
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";
 	
@@ -70,7 +69,7 @@ public final class TestObjects {
 	}
 	
 	public static LinkEntityDto createLinkEntityDto() {
-		return new LinkEntityDto(TEST_ENTITY_ID, TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
+		return new LinkEntityDto(Random.id(), TEST_ENTITY_SLUG, TEST_ENTITY_NAME);
 	}
 	
 	public static AddUserDbDto createAddUserDbDto() {
@@ -101,7 +100,7 @@ public final class TestObjects {
 	}
 	
 	public static ImageInfoDto createImageInfoDto() {
-		return new ImageInfoDto(1, "PNG");
+		return new ImageInfoDto(Random.id(), "PNG");
 	}
 	
 	public static DbImageDto createDbImageDto() {
@@ -109,15 +108,15 @@ public final class TestObjects {
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
-		return new SitemapInfoDto(1, new Date());
+		return new SitemapInfoDto(Random.id(), new Date());
 	}
 	
 	@SuppressWarnings("checkstyle:magicnumber")
 	public static SeriesInfoDto createSeriesInfoDto() {
 		return new SeriesInfoDto(
-			12,
-			13, "test-category", "Test Category",
-			14, "test-country", "Test Country",
+			Random.id(),
+			Random.id(), "test-category", "Test Category",
+			Random.id(), "test-country", "Test Country",
 			15, 10, 2000,
 			16,
 			true
@@ -144,7 +143,7 @@ public final class TestObjects {
 	
 	@SuppressWarnings("checkstyle:magicnumber")
 	public static CollectionInfoDto createCollectionInfoDto() {
-		return new CollectionInfoDto(101, "test-user", "Test User");
+		return new CollectionInfoDto(Random.id(), "test-user", "Test User");
 	}
 	
 	public static SuspiciousActivityDto createSuspiciousActivityDto() {
@@ -179,7 +178,7 @@ public final class TestObjects {
 	}
 	
 	public static EntityWithIdDto createEntityWithIdDto() {
-		return new EntityWithIdDto(TEST_ENTITY_ID, TEST_ENTITY_NAME);
+		return new EntityWithIdDto(Random.id(), TEST_ENTITY_NAME);
 	}
 	
 	public static ImportRequestDto createImportRequestDto() {
