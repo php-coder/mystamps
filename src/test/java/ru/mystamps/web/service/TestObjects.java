@@ -118,7 +118,7 @@ public final class TestObjects {
 			Random.id(),
 			Random.id(), "test-category", "Test Category",
 			Random.id(), "test-country", "Test Country",
-			15, 10, 2000,
+			15, 10, Random.issueYear(),
 			16,
 			bool()
 		);
