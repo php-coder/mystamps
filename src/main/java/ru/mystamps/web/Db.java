@@ -44,6 +44,10 @@ public final class Db {
 		public static final int URL_LENGTH = 285;
 	}
 	
+	public static final class SeriesSales {
+		public static final int TRANSACTION_URL_LENGTH = 255;
+	}
+	
 	public static final class SuspiciousActivity {
 		public static final int PAGE_URL_LENGTH     = 100;
 		public static final int METHOD_LENGTH       = 7;

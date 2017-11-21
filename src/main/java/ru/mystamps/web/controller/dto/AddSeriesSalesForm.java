@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,6 +30,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.validation.ValidationRules;
 
 @Getter
 @Setter
@@ -40,6 +42,7 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	@NotNull
 	private Integer sellerId;
 	
+	@Size(max = ValidationRules.SERIES_SALES_URL_MAX_LENGTH, message = "{value.too-long}")
 	private String url;
 	
 	@NotNull

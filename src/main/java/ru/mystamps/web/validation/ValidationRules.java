@@ -67,6 +67,8 @@ public final class ValidationRules {
 	public static final int PARTICIPANT_NAME_MAX_LENGTH = Db.TransactionParticipant.NAME_LENGTH;
 	public static final int PARTICIPANT_URL_MAX_LENGTH  = Db.TransactionParticipant.URL_LENGTH;
 	
+	public static final int SERIES_SALES_URL_MAX_LENGTH = Db.SeriesSales.TRANSACTION_URL_LENGTH;
+	
 	public static final int IMPORT_REQUEST_URL_MAX_LENGTH  = Db.SeriesImportRequest.URL_LENGTH;
 	
 	/** Maximum uploading image size in kilobytes. */
