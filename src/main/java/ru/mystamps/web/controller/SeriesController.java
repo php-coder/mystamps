@@ -30,7 +30,6 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 import org.apache.commons.lang3.StringUtils;
@@ -419,7 +418,7 @@ public class SeriesController {
 	
 	@PostMapping(Url.ADD_SERIES_ASK_PAGE)
 	public String processAskForm(
-		@Valid AddSeriesSalesForm form,
+		@Validated({ Default.class, AddSeriesSalesForm.UrlChecks.class }) AddSeriesSalesForm form,
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,

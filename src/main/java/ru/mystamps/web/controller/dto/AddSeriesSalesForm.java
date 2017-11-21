@@ -20,8 +20,11 @@ package ru.mystamps.web.controller.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,7 +45,12 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	@NotNull
 	private Integer sellerId;
 	
-	@Size(max = ValidationRules.SERIES_SALES_URL_MAX_LENGTH, message = "{value.too-long}")
+	@Size(
+		max = ValidationRules.SERIES_SALES_URL_MAX_LENGTH,
+		message = "{value.too-long}",
+		groups = Group.Level1.class
+	)
+	@URL(groups = Group.Level2.class)
 	private String url;
 	
 	@NotNull
@@ -56,5 +64,12 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	private Currency altCurrency;
 	
 	private Integer buyerId;
+	
+	@GroupSequence({
+		Group.Level1.class,
+		Group.Level2.class,
+	})
+	public interface UrlChecks {
+	}
 	
 }

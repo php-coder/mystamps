@@ -14,6 +14,12 @@ Create series sales with too long url
 	Submit Form             id=add-series-sales-form
 	Element Text Should Be  id=url.errors  Value is greater than allowable maximum of 255 characters
 
+Create series sales with invalid url
+	[Documentation]         Verify validation of invalid url
+	Input Text              id=url  invalid-url
+	Submit Form             id=add-series-sales-form
+	Element Text Should Be  id=url.errors  Value must be a valid URL
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as admin and open a page with series
