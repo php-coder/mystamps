@@ -159,6 +159,7 @@ if File.file?(license_output)
 				"Please, fix them by executing `mvn license:format`\n"\
 				"See also: <a href=\"#{link}\">#{link}</a>")
 		end
+		print_errors_summary 'license-maven-plugin', 1
 	end
 end
 
@@ -206,6 +207,7 @@ if File.file?(sortpom_output)
 				"Please, fix them by executing `mvn sortpom:sort`\n"\
 				"See also: <a href=\"#{link}\">#{link}</a>")
 		end
+		print_errors_summary 'sortpom-maven-plugin', 1
 	end
 end
 
@@ -315,6 +317,7 @@ if File.file?(enforcer_output)
 		error_msgs = errors.join("\n")
 		fail("maven-enforcer-plugin reported about errors. Please, fix them. "\
 			"Here is its output:\n```\n#{error_msgs}\n```")
+		print_errors_summary 'maven-enforcer-plugin', 1
 	end
 end
 
