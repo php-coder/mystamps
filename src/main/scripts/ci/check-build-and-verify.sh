@@ -23,6 +23,7 @@ LICENSE_STATUS=
 POM_STATUS=
 BOOTLINT_STATUS=
 RFLINT_STATUS=
+SHELLCHECK_STATUS=
 JASMINE_STATUS=
 HTML_STATUS=
 ENFORCER_STATUS=
@@ -60,6 +61,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_HTML_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.html$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
 			AFFECTS_ROBOT_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.robot$' || echo 'no')"
+			AFFECTS_SHELL_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.sh$' || echo 'no')"
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
 			AFFECTS_PROPERTIES="$(echo "$MODIFIED_FILES"    |  grep -q '\.properties$' || echo 'no')"
 			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
@@ -90,6 +92,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 					HTML_STATUS=skip
 				fi
 				[ "$AFFECTS_ROBOT_FILES" != 'no' ] || RFLINT_STATUS=skip
+				[ "$AFFECTS_SHELL_FILES" != 'no' ] || SHELLCHECK_STATUS=skip
 			fi
 			echo 'INFO: Some checks could be skipped'
 		else
@@ -145,6 +148,16 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			>rflint.log 2>&1 || RFLINT_STATUS=fail
 	fi
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
+	
+	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
+		SHELL_FILES="$(find src/main/scripts -type f -name '*.sh')"
+		shellcheck \
+			--shell bash \
+			--format gcc \
+			$SHELL_FILES \
+			>shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
+	fi
+	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
 		mvn --batch-mode jasmine:test \
@@ -213,18 +226,19 @@ fi
 print_status "$DANGER_STATUS" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CS_STATUS" = 'skip' ]       || print_log cs.log        'Run CheckStyle'
-	[ "$PMD_STATUS" = 'skip' ]      || print_log pmd.log       'Run PMD'
-	[ "$LICENSE_STATUS" = 'skip' ]  || print_log license.log   'Check license headers'
-	[ "$POM_STATUS" = 'skip' ]      || print_log pom.log       'Check sorting of pom.xml'
-	[ "$BOOTLINT_STATUS" = 'skip' ] || print_log bootlint.log  'Run bootlint'
-	[ "$RFLINT_STATUS" = 'skip' ]   || print_log rflint.log    'Run robot framework lint'
-	[ "$JASMINE_STATUS" = 'skip' ]  || print_log jasmine.log   'Run JavaScript unit tests'
-	[ "$HTML_STATUS" = 'skip' ]     || print_log validator.log 'Run html5validator'
-	[ "$ENFORCER_STATUS" = 'skip' ] || print_log enforcer.log  'Run maven-enforcer-plugin'
-	[ "$TEST_STATUS" = 'skip' ]     || print_log test.log      'Run unit tests'
-	[ "$CODENARC_STATUS" = 'skip' ] || print_log codenarc.log  'Run CodeNarc'
-	[ "$FINDBUGS_STATUS" = 'skip' ] || print_log findbugs.log  'Run FindBugs'
+	[ "$CS_STATUS" = 'skip' ]         || print_log cs.log         'Run CheckStyle'
+	[ "$PMD_STATUS" = 'skip' ]        || print_log pmd.log        'Run PMD'
+	[ "$LICENSE_STATUS" = 'skip' ]    || print_log license.log    'Check license headers'
+	[ "$POM_STATUS" = 'skip' ]        || print_log pom.log        'Check sorting of pom.xml'
+	[ "$BOOTLINT_STATUS" = 'skip' ]   || print_log bootlint.log   'Run bootlint'
+	[ "$RFLINT_STATUS" = 'skip' ]     || print_log rflint.log     'Run robot framework lint'
+	[ "$SHELLCHECK_STATUS" = 'skip' ] || print_log shellcheck.log 'Run shellcheck'
+	[ "$JASMINE_STATUS" = 'skip' ]    || print_log jasmine.log    'Run JavaScript unit tests'
+	[ "$HTML_STATUS" = 'skip' ]       || print_log validator.log  'Run html5validator'
+	[ "$ENFORCER_STATUS" = 'skip' ]   || print_log enforcer.log   'Run maven-enforcer-plugin'
+	[ "$TEST_STATUS" = 'skip' ]       || print_log test.log       'Run unit tests'
+	[ "$CODENARC_STATUS" = 'skip' ]   || print_log codenarc.log   'Run CodeNarc'
+	[ "$FINDBUGS_STATUS" = 'skip' ]   || print_log findbugs.log   'Run FindBugs'
 fi
 
 print_log verify.log   'Run integration tests'
@@ -233,8 +247,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
 	exit 1
 fi

@@ -270,6 +270,32 @@ if File.file?(rflint_output)
 	print_errors_summary 'rflint', errors_count, 'https://github.com/php-coder/mystamps/wiki/rflint'
 end
 
+# Handle shellcheck output
+#
+# Example:
+# src/main/scripts/ci/deploy.sh:29:24: note: Double quote to prevent globbing and word splitting. [SC2086]
+# src/main/scripts/ci/common.sh:28:2: note: egrep is non-standard and deprecated. Use grep -E instead. [SC2196]
+#
+shellcheck_output = 'shellcheck.log'
+if File.file?(shellcheck_output)
+	errors_count = 0
+	File.readlines(shellcheck_output).each do |line|
+		errors_count += 1
+		
+		parsed = line.match(/^(?<file>[^:]+):(?<line>\d+):\d+:[^:]+: (?<msg>.+)/)
+		file   = parsed['file']
+		lineno = parsed['line']
+		msg    = parsed['msg']
+		msg, _, code = msg.rpartition('[')
+		msg    = msg.rstrip.sub(/\.$/, '')
+		code   = code.sub(/\]$/, '')
+		file   = github.html_link("#{file}#L#{lineno}")
+		fail("shellcheck error in #{file}:\n[#{code}](https://github.com/koalaman/shellcheck/wiki/#{code}): #{msg}")
+	end
+	# TODO: add link to wiki page
+	print_errors_summary 'shellcheck', errors_count
+end
+
 # Handle `mvn enforcer:enforce` results
 #
 # Example:
