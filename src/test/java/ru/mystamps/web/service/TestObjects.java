@@ -183,7 +183,7 @@ public final class TestObjects {
 	}
 	
 	public static ImportRequestDto createImportRequestDto() {
-		return new ImportRequestDto(Random.url(), Random.importRequestStatus());
+		return new ImportRequestDto(Random.url(), Random.importRequestStatus(), null);
 	}
 	
 	public static ParsedDataDto createParsedDataDto() {

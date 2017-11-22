@@ -156,7 +156,8 @@
 											type="submit"
 											class="btn btn-primary"
 											value="Proceed to series creation"
-											th:value="#{t_proceed_to_series_creation}" />
+											th:value="#{t_proceed_to_series_creation}"
+											th:disabled="${request.seriesId != null}" />
 									</td>
 								</tr>
 							</table>
@@ -164,6 +165,20 @@
 					</form>
 					
 				</div>
+				
+				<!--/*/
+				<div class="col-sm-4 col-sm-offset-4" th:if="${request.seriesId != null}">
+					<h3 th:text="#{t_imported_series}">
+						Imported series
+					</h3>
+					
+					<div class="text-center">
+						<a th:href="@{${INFO_SERIES_PAGE}(id=${request.seriesId})}"
+						   th:text="@{${PUBLIC_URL} + ${INFO_SERIES_PAGE}(id=${request.seriesId})}"></a>
+					</div>
+				</div>
+				/*/-->
+				
 			</div>
 			<div class="row">
 				<footer class="col-sm-12 text-right">

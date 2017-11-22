@@ -274,7 +274,8 @@ final class RowMappers {
 	public static ImportRequestDto forImportRequestDto(ResultSet rs, int i) throws SQLException {
 		return new ImportRequestDto(
 			rs.getString("url"),
-			rs.getString("status")
+			rs.getString("status"),
+			JdbcUtils.getInteger(rs, "series_id")
 		);
 	}
 	

@@ -27,4 +27,5 @@ import lombok.ToString;
 public class ImportRequestDto {
 	private final String url;
 	private final String status;
+	private final Integer seriesId;
 }
