@@ -25,7 +25,7 @@ trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
 # See: http://docs.ansible.com/ansible/intro_getting_started.html#host-key-checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 
-if [ -z "${encrypted_bf07cb25089f_key:-}" ] || [ -z "${encrypted_bf07cb25089f_iv:-}" ] ; then
+if [ -z ${encrypted_bf07cb25089f_key:-} ] || [ -z "${encrypted_bf07cb25089f_iv:-}" ] ; then
 	echo >&2 'ERROR: encrypted_bf07cb25089f_key or encrypted_bf07cb25089f_iv were not defined!'
 	exit 1
 fi
