@@ -15,6 +15,7 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
+# shellcheck source=src/main/scripts/ci/common.sh
 . "$(dirname "$0")/common.sh"
 
 CS_STATUS=
@@ -33,7 +34,7 @@ FINDBUGS_STATUS=
 VERIFY_STATUS=
 
 DANGER_STATUS=skip
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
 	DANGER_STATUS=
 fi
 
@@ -47,9 +48,9 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	if [ -n "${TRAVIS_COMMIT_RANGE:-}" ]; then
 		echo "INFO: Range of the commits to be checked: $TRAVIS_COMMIT_RANGE"
 		echo 'INFO: List of the files modified by this commits range:'
-		git --no-pager diff --name-only $TRAVIS_COMMIT_RANGE -- | sed 's|^|      |' || :
+		git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- | sed 's|^|      |' || :
 		
-		MODIFIED_FILES="$(git --no-pager diff --name-only $TRAVIS_COMMIT_RANGE -- 2>/dev/null || :)"
+		MODIFIED_FILES="$(git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- 2>/dev/null || :)"
 		
 		if [ -n "$MODIFIED_FILES" ]; then
 			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | fgrep -xq 'pom.xml' || echo 'no')"
@@ -72,8 +73,11 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_FB_CFG" != 'no' ] || FINDBUGS_STATUS=skip
-					[ "$AFFECTS_CS_CFG" != 'no' -o "$AFFECTS_PROPERTIES" != 'no' ] || CS_STATUS=skip
 					[ "$AFFECTS_PMD_XML" != 'no' ] || PMD_STATUS=skip
+					
+					if [ "$AFFECTS_CS_CFG" = 'no' ] && [ "$AFFECTS_PROPERTIES" = 'no' ]; then
+						CS_STATUS=skip
+					fi
 					
 					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
 						TEST_STATUS=skip
@@ -131,7 +135,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
-		find src -type f -name '*.html' | xargs bootlint \
+		find src -type f -name '*.html' -print0 | xargs -0 bootlint \
 			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
 	print_status "$BOOTLINT_STATUS" 'Run bootlint'
@@ -150,11 +154,11 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
-		SHELL_FILES="$(find src/main/scripts -type f -name '*.sh')"
+		SHELL_FILES=( $(find src/main/scripts -type f -name '*.sh') )
 		shellcheck \
 			--shell bash \
 			--format gcc \
-			$SHELL_FILES \
+			"${SHELL_FILES[@]}" \
 			>shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
 	fi
 	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
