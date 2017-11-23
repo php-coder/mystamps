@@ -41,6 +41,7 @@ public class SiteParser {
 	private String countryLocator;
 	private String shortDescriptionLocator;
 	private String imageUrlLocator;
+	private String imageUrlAttribute;
 	private String issueDateLocator;
 	
 	public boolean setField(String name, String value) {
@@ -79,6 +80,10 @@ public class SiteParser {
 			case "image-url-locator":
 				setImageUrlLocator(value);
 				valid = true;
+				break;
+			
+			case "image-url-attribute":
+				setImageUrlAttribute(value);
 				break;
 			
 			case "issue-date-locator":
@@ -181,7 +186,8 @@ public class SiteParser {
 			return null;
 		}
 		
-		String url = imageUrls.first().attr("abs:href");
+		String attrName = ObjectUtils.firstNonNull(imageUrlAttribute, "href");
+		String url = imageUrls.first().absUrl(attrName);
 		LOG.debug("Extracted image url: '{}'", url);
 		return StringUtils.trimToNull(url);
 	}
