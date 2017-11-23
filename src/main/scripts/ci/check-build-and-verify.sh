@@ -53,9 +53,9 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		MODIFIED_FILES="$(git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- 2>/dev/null || :)"
 		
 		if [ -n "$MODIFIED_FILES" ]; then
-			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | fgrep -xq 'pom.xml' || echo 'no')"
-			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | fgrep -xq '.travis.yml' || echo 'no')"
-			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | egrep -q '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
+			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
+			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
+			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | grep -Eq '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
 			AFFECTS_FB_CFG="$(echo "$MODIFIED_FILES"        |  grep -q 'findbugs-filter\.xml$' || echo 'no')"
 			AFFECTS_PMD_XML="$(echo "$MODIFIED_FILES"       |  grep -q 'pmd\.xml$' || echo 'no')"
 			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
@@ -253,6 +253,6 @@ fi
 
 rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi

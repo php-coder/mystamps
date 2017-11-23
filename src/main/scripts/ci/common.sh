@@ -25,5 +25,5 @@ print_log() {
 	echo
 	printf "=====> \033[1;33m%s\033[0m\n" "$msg"
 	echo
-	egrep -v '^\[INFO\] Download(ing|ed):' "$log_file" || :
+	grep -Ev '^\[INFO\] Download(ing|ed):' "$log_file" || :
 }
