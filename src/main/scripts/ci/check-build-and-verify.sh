@@ -15,6 +15,7 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
+# shellcheck source=src/main/scripts/ci/common.sh
 . "$(dirname "$0")/common.sh"
 
 CS_STATUS=
@@ -23,6 +24,7 @@ LICENSE_STATUS=
 POM_STATUS=
 BOOTLINT_STATUS=
 RFLINT_STATUS=
+SHELLCHECK_STATUS=
 JASMINE_STATUS=
 HTML_STATUS=
 ENFORCER_STATUS=
@@ -32,7 +34,7 @@ FINDBUGS_STATUS=
 VERIFY_STATUS=
 
 DANGER_STATUS=skip
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' -a "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
+if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
 	DANGER_STATUS=
 fi
 
@@ -46,20 +48,21 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	if [ -n "${TRAVIS_COMMIT_RANGE:-}" ]; then
 		echo "INFO: Range of the commits to be checked: $TRAVIS_COMMIT_RANGE"
 		echo 'INFO: List of the files modified by this commits range:'
-		git --no-pager diff --name-only $TRAVIS_COMMIT_RANGE -- | sed 's|^|      |' || :
+		git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- | sed 's|^|      |' || :
 		
-		MODIFIED_FILES="$(git --no-pager diff --name-only $TRAVIS_COMMIT_RANGE -- 2>/dev/null || :)"
+		MODIFIED_FILES="$(git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- 2>/dev/null || :)"
 		
 		if [ -n "$MODIFIED_FILES" ]; then
-			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | fgrep -xq 'pom.xml' || echo 'no')"
-			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | fgrep -xq '.travis.yml' || echo 'no')"
-			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | egrep -q '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
+			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
+			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
+			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | grep -Eq '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
 			AFFECTS_FB_CFG="$(echo "$MODIFIED_FILES"        |  grep -q 'findbugs-filter\.xml$' || echo 'no')"
 			AFFECTS_PMD_XML="$(echo "$MODIFIED_FILES"       |  grep -q 'pmd\.xml$' || echo 'no')"
 			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
 			AFFECTS_HTML_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.html$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
 			AFFECTS_ROBOT_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.robot$' || echo 'no')"
+			AFFECTS_SHELL_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.sh$' || echo 'no')"
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
 			AFFECTS_PROPERTIES="$(echo "$MODIFIED_FILES"    |  grep -q '\.properties$' || echo 'no')"
 			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
@@ -70,8 +73,11 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_FB_CFG" != 'no' ] || FINDBUGS_STATUS=skip
-					[ "$AFFECTS_CS_CFG" != 'no' -o "$AFFECTS_PROPERTIES" != 'no' ] || CS_STATUS=skip
 					[ "$AFFECTS_PMD_XML" != 'no' ] || PMD_STATUS=skip
+					
+					if [ "$AFFECTS_CS_CFG" = 'no' ] && [ "$AFFECTS_PROPERTIES" = 'no' ]; then
+						CS_STATUS=skip
+					fi
 					
 					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
 						TEST_STATUS=skip
@@ -90,6 +96,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 					HTML_STATUS=skip
 				fi
 				[ "$AFFECTS_ROBOT_FILES" != 'no' ] || RFLINT_STATUS=skip
+				[ "$AFFECTS_SHELL_FILES" != 'no' ] || SHELLCHECK_STATUS=skip
 			fi
 			echo 'INFO: Some checks could be skipped'
 		else
@@ -128,7 +135,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
-		find src -type f -name '*.html' | xargs bootlint \
+		find src -type f -name '*.html' -print0 | xargs -0 bootlint \
 			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
 	print_status "$BOOTLINT_STATUS" 'Run bootlint'
@@ -145,6 +152,16 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			>rflint.log 2>&1 || RFLINT_STATUS=fail
 	fi
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
+	
+	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
+		SHELL_FILES=( $(find src/main/scripts -type f -name '*.sh') )
+		shellcheck \
+			--shell bash \
+			--format gcc \
+			"${SHELL_FILES[@]}" \
+			>shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
+	fi
+	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
 		mvn --batch-mode jasmine:test \
@@ -213,18 +230,19 @@ fi
 print_status "$DANGER_STATUS" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CS_STATUS" = 'skip' ]       || print_log cs.log        'Run CheckStyle'
-	[ "$PMD_STATUS" = 'skip' ]      || print_log pmd.log       'Run PMD'
-	[ "$LICENSE_STATUS" = 'skip' ]  || print_log license.log   'Check license headers'
-	[ "$POM_STATUS" = 'skip' ]      || print_log pom.log       'Check sorting of pom.xml'
-	[ "$BOOTLINT_STATUS" = 'skip' ] || print_log bootlint.log  'Run bootlint'
-	[ "$RFLINT_STATUS" = 'skip' ]   || print_log rflint.log    'Run robot framework lint'
-	[ "$JASMINE_STATUS" = 'skip' ]  || print_log jasmine.log   'Run JavaScript unit tests'
-	[ "$HTML_STATUS" = 'skip' ]     || print_log validator.log 'Run html5validator'
-	[ "$ENFORCER_STATUS" = 'skip' ] || print_log enforcer.log  'Run maven-enforcer-plugin'
-	[ "$TEST_STATUS" = 'skip' ]     || print_log test.log      'Run unit tests'
-	[ "$CODENARC_STATUS" = 'skip' ] || print_log codenarc.log  'Run CodeNarc'
-	[ "$FINDBUGS_STATUS" = 'skip' ] || print_log findbugs.log  'Run FindBugs'
+	[ "$CS_STATUS" = 'skip' ]         || print_log cs.log         'Run CheckStyle'
+	[ "$PMD_STATUS" = 'skip' ]        || print_log pmd.log        'Run PMD'
+	[ "$LICENSE_STATUS" = 'skip' ]    || print_log license.log    'Check license headers'
+	[ "$POM_STATUS" = 'skip' ]        || print_log pom.log        'Check sorting of pom.xml'
+	[ "$BOOTLINT_STATUS" = 'skip' ]   || print_log bootlint.log   'Run bootlint'
+	[ "$RFLINT_STATUS" = 'skip' ]     || print_log rflint.log     'Run robot framework lint'
+	[ "$SHELLCHECK_STATUS" = 'skip' ] || print_log shellcheck.log 'Run shellcheck'
+	[ "$JASMINE_STATUS" = 'skip' ]    || print_log jasmine.log    'Run JavaScript unit tests'
+	[ "$HTML_STATUS" = 'skip' ]       || print_log validator.log  'Run html5validator'
+	[ "$ENFORCER_STATUS" = 'skip' ]   || print_log enforcer.log   'Run maven-enforcer-plugin'
+	[ "$TEST_STATUS" = 'skip' ]       || print_log test.log       'Run unit tests'
+	[ "$CODENARC_STATUS" = 'skip' ]   || print_log codenarc.log   'Run CodeNarc'
+	[ "$FINDBUGS_STATUS" = 'skip' ]   || print_log findbugs.log   'Run FindBugs'
 fi
 
 print_log verify.log   'Run integration tests'
@@ -233,8 +251,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log findbugs.log verify-raw.log verify.log danger.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | fgrep -qs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$FINDBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
