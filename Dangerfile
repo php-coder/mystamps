@@ -237,7 +237,7 @@ if File.file?(bootlint_output)
 		file   = parsed['file']
 		code   = parsed['code']
 		file   = github.html_link("#{file}#L#{lineno}")
-		fail("bootlint error in #{file}:\n#{code}: #{msg}. ([Details](https://github.com/twbs/bootlint/wiki/#{code}))")
+		fail("bootlint error in #{file}:\n[#{code}](https://github.com/twbs/bootlint/wiki/#{code}): #{msg}")
 	end
 	# TODO: add link to wiki page (#316)
 	print_errors_summary 'bootlint', errors_count
