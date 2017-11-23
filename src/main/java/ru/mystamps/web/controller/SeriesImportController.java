@@ -23,13 +23,16 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.WebDataBinder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,6 +53,11 @@ public class SeriesImportController {
 	
 	private final SeriesImportService seriesImportService;
 	private final ApplicationEventPublisher eventPublisher;
+	
+	@InitBinder("requestImportForm")
+	protected void initRequestImportForm(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, "url", new StringTrimmerEditor(true));
+	}
 	
 	@GetMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
 	public void showForm(Model model) {
