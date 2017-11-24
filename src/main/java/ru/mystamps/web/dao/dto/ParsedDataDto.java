@@ -23,8 +23,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class ParsedDataDto {
-	private final EntityWithSlugDto category;
-	private final EntityWithSlugDto country;
+	private final LinkEntityDto category;
+	private final LinkEntityDto country;
 	private final String imageUrl;
 	private final Integer issueYear;
 }

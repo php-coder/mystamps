@@ -94,6 +94,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		if (!(request instanceof StandardMultipartHttpServletRequest)) {
+			// It could mean that <form> tag doesn't have enctype="multipart/form-data" attribute.
 			LOG.warn(
 				"Unknown type of request ({}). "
 				+ "Downloading images from external servers won't work!",

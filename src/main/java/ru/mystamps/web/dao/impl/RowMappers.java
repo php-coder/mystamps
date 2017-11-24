@@ -284,18 +284,26 @@ final class RowMappers {
 	}
 	
 	public static ParsedDataDto forParsedDataDto(ResultSet rs, int i) throws SQLException {
-		EntityWithSlugDto category = null;
-		String categorySlug = rs.getString("category_slug");
-		if (categorySlug != null) {
-			String categoryName = rs.getString("category_name");
-			category = new EntityWithSlugDto(categoryName, categorySlug);
+		// @todo #709 RowMappers.forParsedDataDto():
+		//  extract method for constructing LinkEntityDto
+		LinkEntityDto category = null;
+		Integer categoryId = JdbcUtils.getInteger(rs, "category_id");
+		if (categoryId != null) {
+			category = new LinkEntityDto(
+				categoryId,
+				rs.getString("category_slug"),
+				rs.getString("category_name")
+			);
 		}
 		
-		EntityWithSlugDto country = null;
-		String countrySlug = rs.getString("country_slug");
-		if (countrySlug != null) {
-			String countryName = rs.getString("country_name");
-			country = new EntityWithSlugDto(countryName, countrySlug);
+		LinkEntityDto country = null;
+		Integer countryId = JdbcUtils.getInteger(rs, "country_id");
+		if (countryId != null) {
+			country = new LinkEntityDto(
+				countryId,
+				rs.getString("country_slug"),
+				rs.getString("country_name")
+			);
 		}
 		
 		String imageUrl = rs.getString("image_url");

@@ -194,8 +194,8 @@ public final class TestObjects {
 		String countrySlug = SlugUtils.slugify(countryName);
 		
 		return new ParsedDataDto(
-			new EntityWithSlugDto(categoryName, categorySlug),
-			new EntityWithSlugDto(countryName, countrySlug),
+			new LinkEntityDto(Random.id(), categorySlug, categoryName),
+			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),
 			Random.issueYear()
 		);

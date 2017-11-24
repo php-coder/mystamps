@@ -133,7 +133,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		
 		registry
 			.addInterceptor(getDownloadImageInterceptor())
-			.addPathPatterns(Url.ADD_SERIES_PAGE, Url.ADD_IMAGE_SERIES_PAGE);
+			.addPathPatterns(
+				Url.ADD_SERIES_PAGE,
+				Url.ADD_IMAGE_SERIES_PAGE,
+				Url.REQUEST_IMPORT_PAGE.replace("{id}", "*")
+			);
 	}
 	
 	@Override

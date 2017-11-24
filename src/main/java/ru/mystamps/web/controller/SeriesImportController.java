@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,11 +39,19 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
+import ru.mystamps.web.controller.dto.ImportSeriesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesImportService;
+import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.support.thymeleaf.GroupByParent;
 import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
@@ -51,6 +60,9 @@ import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 @RequiredArgsConstructor
 public class SeriesImportController {
 	
+	private final CategoryService categoryService;
+	private final CountryService countryService;
+	private final SeriesService seriesService;
 	private final SeriesImportService seriesImportService;
 	private final ApplicationEventPublisher eventPublisher;
 	
@@ -107,9 +119,96 @@ public class SeriesImportController {
 
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		ParsedDataDto parsedData = seriesImportService.getParsedData(requestId, lang);
-		model.addAttribute("parsedData", parsedData);
+		
+		ImportSeriesForm form = new ImportSeriesForm();
+		form.setPerforated(Boolean.TRUE);
+		
+		boolean hasParsedData = parsedData != null;
+		if (hasParsedData) {
+			if (parsedData.getCategory() != null) {
+				form.setCategory(parsedData.getCategory());
+			}
+			if (parsedData.getCountry() != null) {
+				form.setCountry(parsedData.getCountry());
+			}
+			if (parsedData.getImageUrl() != null) {
+				form.setImageUrl(parsedData.getImageUrl());
+			}
+			if (parsedData.getIssueYear() != null) {
+				form.setYear(parsedData.getIssueYear());
+			}
+		}
+		
+		model.addAttribute("importSeriesForm", form);
+		model.addAttribute("showForm", hasParsedData);
+		
+		// @todo #709 SeriesImportController.showRequestAndImportSeriesForm():
+		//  extract a method for adding shared attributes to the model
+		List<CategoryDto> categories =
+			categoryService.findCategoriesWithParents(lang);
+		List<FirstLevelCategoryDto> groupedCategories =
+			GroupByParent.transformCategories(categories);
+		model.addAttribute("categories", groupedCategories);
+		
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		model.addAttribute("countries", countries);
+		
+		model.addAttribute("years", SeriesController.YEARS);
 		
 		return "series/import/info";
+	}
+	
+	@PostMapping(Url.REQUEST_IMPORT_PAGE)
+	public String processImportSeriesForm(
+		@PathVariable("id") Integer requestId,
+		Model model,
+		@Valid ImportSeriesForm form,
+		BindingResult result,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (requestId == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		ImportRequestDto request = seriesImportService.findById(requestId);
+		if (request == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		// @todo #709 SeriesImportController.processImportSeriesForm():
+		//  handle errors from interceptor
+		
+		model.addAttribute("request", request);
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		
+		ParsedDataDto parsedData = seriesImportService.getParsedData(requestId, lang);
+		boolean hasParsedData = parsedData != null;
+		model.addAttribute("showForm", hasParsedData);
+		
+		List<CategoryDto> categories =
+			categoryService.findCategoriesWithParents(lang);
+		List<FirstLevelCategoryDto> groupedCategories =
+			GroupByParent.transformCategories(categories);
+		model.addAttribute("categories", groupedCategories);
+		
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		model.addAttribute("countries", countries);
+		
+		model.addAttribute("years", SeriesController.YEARS);
+
+		if (result.hasErrors()) {
+			return "series/import/info";
+		}
+		
+		Integer seriesId = seriesService.add(form, currentUserId, false);
+		
+		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
 	
 }

@@ -93,10 +93,11 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
+
+	@SuppressWarnings("PMD.DefaultPackage")
+	/* default */ static final Map<Integer, Integer> YEARS;
 	
 	private static final Integer CURRENT_YEAR = Integer.valueOf(Year.now().getValue());
-	
-	private static final Map<Integer, Integer> YEARS;
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
@@ -131,8 +132,6 @@ public class SeriesController {
 	public void showForm(
 		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
 		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
-		@RequestParam(name = "image_url", required = false) String imageUrl,
-		@RequestParam(name = "year", required = false) Integer year,
 		Model model,
 		Locale userLocale) {
 		
@@ -158,16 +157,6 @@ public class SeriesController {
 		
 		if (country != null) {
 			addSeriesForm.setCountry(country);
-		}
-		
-		if (imageUrl != null) {
-			// in case user doesn't have permission to specify image URL,
-			// field won't be shown on the page and this value will be ignored
-			addSeriesForm.setImageUrl(imageUrl);
-		}
-		
-		if (year != null) {
-			addSeriesForm.setYear(year);
 		}
 		
 		model.addAttribute("addSeriesForm", addSeriesForm);

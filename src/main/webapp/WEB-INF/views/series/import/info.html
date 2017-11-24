@@ -91,72 +91,216 @@
 					</dl>
 				</div>
 					
-				<div class="col-sm-4 col-sm-offset-4" th:if="${parsedData != null}">
+				<div class="col-sm-4 col-sm-offset-4" th:if="${showForm}">
 					<h3 th:text="#{t_gathered_data}">
 						Gathered data
 					</h3>
 					
-					<form id="start-import-series-form" method="get" action="../add.html" th:action="@{${ADD_SERIES_PAGE}}">
+					<div class="hint text-center">
+						<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
+							<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
+								All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
+							</span>
+						</small>
+					</div>
+					
+					<form id="import-series-form"
+						method="post"
+						enctype="multipart/form-data"
+						action="../info.html"
+						th:action="@{${REQUEST_IMPORT_PAGE}(id=${id})}"
+						th:object="${importSeriesForm}">
+						
 						<div class="table-responsive">
-							<table class="table"
-								th:with="hasCategory=${parsedData.category != null},hasCountry=${parsedData.country != null},hasImageUrl=${parsedData.imageUrl != null},hasIssueYear=${parsedData.issueYear != null}">
+							<table class="table">
 								
-								<tr th:if="${hasCategory}">
-									<th th:text="#{t_category}">Category</th>
-									<td id="parsed-category" th:text="${parsedData.category.name}">
-										Sport
+								<tr th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
+									<th>
+										<label for="category" class="control-label" th:text="#{t_category}">
+											Category
+										</label>
+										<span class="required_field">*</span>
+									</th>
+									<td>
+										<select id="category" name="category" class="form-control" required="required">
+											<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+											<!--/*/
+											<th:block th:each="category : ${categories}">
+												<optgroup th:if="${not #lists.isEmpty(category.children)}" th:label="${category.name}">
+													<option th:each="subcategory : ${category.children}"
+														th:value="${subcategory.slug}"
+														th:text="${subcategory.name}"
+														th:selected="${importSeriesForm.category != null and importSeriesForm.category.slug == subcategory.slug}">
+													</option>
+												</optgroup>
+												<option th:if="${#lists.isEmpty(category.children)}"
+													th:value="${category.slug}"
+													th:text="${category.name}"
+													th:selected="${importSeriesForm.category != null and importSeriesForm.category.slug == category.slug}">
+												</option>
+											</th:block>
+											/*/-->
+											<!--/*-->
+											<optgroup label="Fauna">
+												<option value="prehistoric-animals">Prehistoric animals</option>
+											</optgroup>
+											<option value="sport" selected="selected">Sport</option>
+											<!--*/-->
+										</select>
+										<!--/*/
+										<span id="category.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('category')}"
+											th:each="error : ${#fields.errors('category')}"
+											th:text="${error}"></span>
+										/*/-->
 									</td>
 								</tr>
-								<tr th:if="${hasCountry}">
-									<th th:text="#{t_country}">Country</th>
-									<td id="parsed-country" th:text="${parsedData.country.name}">
-										Italy
+								
+								<tr th:if="${importSeriesForm.country != null}" th:classappend="${#fields.hasErrors('country') ? 'has-error' : ''}">
+									<th>
+										<label for="country" class="control-label" th:text="#{t_country}">
+											Country
+										</label>
+									</th>
+									<td>
+										<select id="country" name="country" class="form-control">
+											<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+											<!--/*/
+											<option th:each="country : ${countries}"
+												th:value="${country.slug}"
+												th:text="${country.name}"
+												th:selected="${importSeriesForm.country != null and importSeriesForm.country.slug == country.slug}">
+											</option>
+											/*/-->
+											<!--/*-->
+											<option value="russia">Russia</option>
+											<option value="canada">Canada</option>
+											<option value="italy" selected="selected">Italy</option>
+											<!--*/-->
+										</select>
+										<!--/*/
+										<span id="country.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('country')}"
+											th:each="error : ${#fields.errors('country')}"
+											th:text="${error}"></span>
+										/*/-->
 									</td>
 								</tr>
-								<tr th:if="${hasImageUrl}">
-									<th th:text="#{t_image_url}">Image URL</th>
-									<td id="parsed-image-url" th:text="${parsedData.imageUrl}">
-										http://localhost:8080/image/1
+								
+								<tr th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
+									<th>
+										<label for="quantity" class="control-label" th:text="#{t_quantity}">
+											Quantity
+										</label>
+										<span class="required_field">*</span>
+									</th>
+									<td>
+										<input id="quantity"
+											type="number"
+											class="form-control"
+											required="required"
+											th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
+											th:max="${T(ru.mystamps.web.validation.ValidationRules).MAX_STAMPS_IN_SERIES}"
+											min="1"
+											max="50"
+											value="1"
+											th:field="*{quantity}" />
+										<span id="quantity.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('quantity')}"
+											th:each="error : ${#fields.errors('quantity')}"
+											th:text="${error}"></span>
 									</td>
 								</tr>
-								<tr th:if="${hasIssueYear}">
-									<th th:text="#{t_year}">Year</th>
-									<td id="parsed-issue-year" th:text="${parsedData.issueYear}">
-										1960
+								
+								<tr th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
+									<th>
+										<label for="perforated" class="control-label" th:text="#{t_perforated}">
+											Perforated
+										</label>
+									</th>
+									<td>
+										<input id="perforated"
+											type="checkbox"
+											checked="checked"
+											th:field="*{perforated}" />
+										<!--/*/
+										<span id="perforated.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('perforated')}"
+											th:each="error : ${#fields.errors('perforated')}"
+											th:text="${error}"></span>
+										/*/-->
 									</td>
 								</tr>
+								
+								<tr th:classappend="${#fields.hasErrors('imageUrl') or #fields.hasErrors('downloadedImage') ? 'has-error' : ''}">
+									<th>
+										<label for="image-url" class="control-label" th:text="#{t_image_url}">
+											Image URL
+										</label>
+										<span class="required_field">*</span>
+									</th>
+									<td>
+										<input id="image-url"
+											type="url"
+											class="form-control"
+											required="required"
+											value="http://example.com/my-first-series.jpg"
+											th:field="*{imageUrl}" />
+										<!--/*/
+										<span id="image-url.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('imageUrl')}"
+											th:each="error : ${#fields.errors('imageUrl')}"
+											th:text="${error}"></span>
+										<span id="image-url.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('downloadedImage')}"
+											th:each="error : ${#fields.errors('downloadedImage')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
+								<tr th:if="${importSeriesForm.year != null}" th:classappend="${#fields.hasErrors('year') ? 'has-error' : ''}">
+									<th>
+										<label for="year" class="control-label" th:text="#{t_year}">
+											Year
+										</label>
+									</th>
+									<td>
+										<select class="form-control" th:field="*{year}" id="year">
+											<option value="" th:text="#{t_year}">Year</option>
+											<!--/*/
+											<option th:each="year : ${years}" th:value="${year.key}" th:text="${year.value}"></option>
+											/*/-->
+											<!--/*-->
+											<option value="1960" selected="selected">1960</option>
+											<option value="2000">2000</option>
+											<option value="2010">2010</option>
+											<!--*/-->
+										</select>
+										<!--/*/
+										<span id="year.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('year')}"
+											th:each="error : ${#fields.errors('year')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
 								<tr>
 									<td></td>
 									<td>
 										<input
-											type="hidden"
-											name="category"
-											value="sport"
-											th:if="${hasCategory}"
-											th:value="${parsedData.category.slug}" />
-										<input
-											type="hidden"
-											name="country"
-											value="italy"
-											th:if="${hasCountry}"
-											th:value="${parsedData.country.slug}" />
-										<input
-											type="hidden"
-											name="image_url"
-											value="http://localhost:8080/image/1"
-											th:if="${hasImageUrl}"
-											th:value="${parsedData.imageUrl}" />
-										<input
-											type="hidden"
-											name="year"
-											value="1960"
-											th:if="${hasIssueYear}"
-											th:value="${parsedData.issueYear}" />
-										<input
 											type="submit"
 											class="btn btn-primary"
-											value="Proceed to series creation"
-											th:value="#{t_proceed_to_series_creation}"
+											value="Import"
+											th:value="#{t_import}"
 											th:disabled="${request.seriesId != null}" />
 									</td>
 								</tr>
