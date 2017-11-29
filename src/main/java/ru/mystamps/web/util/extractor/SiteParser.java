@@ -150,12 +150,12 @@ public class SiteParser {
 			return null;
 		}
 		
-		Elements categories = body.select(locator);
-		if (categories.isEmpty()) {
+		Element elem = body.selectFirst(locator);
+		if (elem == null) {
 			return null;
 		}
 		
-		String category = categories.first().text();
+		String category = elem.text();
 		LOG.debug("Extracted category: '{}'", category);
 		return category;
 	}
@@ -166,12 +166,12 @@ public class SiteParser {
 			return null;
 		}
 		
-		Elements countries = body.select(locator);
-		if (countries.isEmpty()) {
+		Element elem = body.selectFirst(locator);
+		if (elem == null) {
 			return null;
 		}
 		
-		String country = countries.first().text();
+		String country = elem.text();
 		LOG.debug("Extracted country: '{}'", country);
 		return country;
 	}
@@ -181,13 +181,13 @@ public class SiteParser {
 			return null;
 		}
 		
-		Elements imageUrls = body.select(imageUrlLocator);
-		if (imageUrls.isEmpty()) {
+		Element elem = body.selectFirst(imageUrlLocator);
+		if (elem == null) {
 			return null;
 		}
 		
 		String attrName = ObjectUtils.firstNonNull(imageUrlAttribute, "href");
-		String url = imageUrls.first().absUrl(attrName);
+		String url = elem.absUrl(attrName);
 		LOG.debug("Extracted image url: '{}'", url);
 		return StringUtils.trimToNull(url);
 	}
@@ -198,12 +198,12 @@ public class SiteParser {
 			return null;
 		}
 		
-		Elements elements = body.select(locator);
-		if (elements.isEmpty()) {
+		Element elem = body.selectFirst(locator);
+		if (elem == null) {
 			return null;
 		}
 		
-		String date = elements.first().text();
+		String date = elem.text();
 		LOG.debug("Extracted issue date: '{}'", date);
 		return date;
 	}
