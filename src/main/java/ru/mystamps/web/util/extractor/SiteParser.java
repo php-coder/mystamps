@@ -44,8 +44,8 @@ public class SiteParser {
 	private String issueDateLocator;
 	
 	public boolean setField(String name, String value) {
-		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-null");
-		Validate.validState(StringUtils.isNotBlank(value), "Field value must be non-null");
+		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-blank");
+		Validate.validState(StringUtils.isNotBlank(value), "Field value must be non-blank");
 		
 		boolean valid = false;
 		
