@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-package ru.mystamps.web.tests;
+package ru.mystamps.web.it.cucumber.step;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
