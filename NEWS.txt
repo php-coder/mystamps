@@ -17,6 +17,7 @@
 - (functionality)  add interface for adding buyers and sellers
 - (functionality)  add capability to specify image URL (as alternative to providing a file)
 - (functionality)  admin can import a series from an external site
+- (integration)    migrate from coveralls.io to codecov.io service for code coverage
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

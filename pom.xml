@@ -480,7 +480,6 @@
 		
 		<commons.lang.version>3.4</commons.lang.version>
 		<compiler.plugin.version>3.6.1</compiler.plugin.version>
-		<coveralls.plugin.version>2.2.0</coveralls.plugin.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<datagen.version>2.2.1</datagen.version>
 		
@@ -930,12 +929,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.eluder.coveralls</groupId>
-				<artifactId>coveralls-maven-plugin</artifactId>
-				<version>${coveralls.plugin.version}</version>
 			</plugin>
 			
 			<plugin>
