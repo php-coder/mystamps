@@ -66,7 +66,7 @@ public class StepDefinitions  {
 	}
 
 	@And("^I see that this series has been added to the collection$")
-	public void seriesAddedToCollection() {
+	public void seriesHasBeenAddedToCollection() {
 		driver.get("http://127.0.0.1:8080/series/1");
 		String actual = driver.findElement(
 			By.xpath("//*[@id='series-danger']//ancestor::form/p[1]")
