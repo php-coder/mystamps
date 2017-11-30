@@ -63,6 +63,7 @@ import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -137,8 +138,11 @@ public class SeriesController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		
-		List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
-		model.addAttribute("categories", categories);
+		List<CategoryDto> categories =
+			categoryService.findCategoriesWithParents(lang);
+		List<FirstLevelCategoryDto> groupedCategories =
+			GroupByParent.transformCategories(categories);
+		model.addAttribute("categories", groupedCategories);
 		
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 		model.addAttribute("countries", countries);
@@ -229,8 +233,11 @@ public class SeriesController {
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
 			
-			List<FirstLevelCategoryDto> categories = categoryService.findFirstLevelCategories(lang);
-			model.addAttribute("categories", categories);
+			List<CategoryDto> categories =
+				categoryService.findCategoriesWithParents(lang);
+			List<FirstLevelCategoryDto> groupedCategories =
+				GroupByParent.transformCategories(categories);
+			model.addAttribute("categories", groupedCategories);
 			
 			List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 			model.addAttribute("countries", countries);

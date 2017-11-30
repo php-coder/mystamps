@@ -21,9 +21,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryService {
@@ -31,7 +31,7 @@ public interface CategoryService {
 	List<Integer> findIdsByNames(Set<String> names);
 	List<Integer> findIdsWhenNameStartsWith(String name);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
-	List<FirstLevelCategoryDto> findFirstLevelCategories(String lang);
+	List<CategoryDto> findCategoriesWithParents(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	long countAll();
 	long countCategoriesOf(Integer collectionId);

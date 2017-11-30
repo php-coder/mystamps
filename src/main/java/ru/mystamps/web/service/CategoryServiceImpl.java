@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +39,6 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
-import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
@@ -117,42 +115,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public List<FirstLevelCategoryDto> findFirstLevelCategories(String lang) {
-		List<CategoryDto> categories = categoryDao.findCategoriesWithParents(lang);
-		if (categories.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		// Because of Thymeleaf's restrictions we can't return categories as-is and need this
-		// transformation
-		List<FirstLevelCategoryDto> items = new ArrayList<>();
-		String lastParent = null;
-		FirstLevelCategoryDto lastItem = null;
-		
-		for (CategoryDto category : categories) {
-			String name   = category.getName();
-			String slug   = category.getSlug();
-			String parent = category.getParentName();
-			
-			boolean categoryWithoutParent = parent == null;
-			boolean createNewItem = categoryWithoutParent || !parent.equals(lastParent);
-			
-			if (createNewItem) {
-				lastParent = parent;
-				if (categoryWithoutParent) {
-					lastItem = new FirstLevelCategoryDto(slug, name);
-				} else {
-					lastItem = new FirstLevelCategoryDto(parent);
-					lastItem.addChild(slug, name);
-				}
-				items.add(lastItem);
-			} else {
-				lastItem.addChild(slug, name);
-			}
-		}
-		
-		return items;
+	public List<CategoryDto> findCategoriesWithParents(String lang) {
+		return categoryDao.findCategoriesWithParents(lang);
 	}
 	
 	@Override

@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
+import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 
 /**
@@ -66,6 +68,41 @@ public final class GroupByParent {
 				items.add(lastItem);
 			} else {
 				lastItem.addChild(id, name);
+			}
+		}
+		
+		return items;
+	}
+	
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	public static List<FirstLevelCategoryDto> transformCategories(List<CategoryDto> categories) {
+		if (categories.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		List<FirstLevelCategoryDto> items = new ArrayList<>();
+		String lastParent = null;
+		FirstLevelCategoryDto lastItem = null;
+		
+		for (CategoryDto category : categories) {
+			String name   = category.getName();
+			String slug   = category.getSlug();
+			String parent = category.getParentName();
+			
+			boolean categoryWithoutParent = parent == null;
+			boolean createNewItem = categoryWithoutParent || !parent.equals(lastParent);
+			
+			if (createNewItem) {
+				lastParent = parent;
+				if (categoryWithoutParent) {
+					lastItem = new FirstLevelCategoryDto(slug, name);
+				} else {
+					lastItem = new FirstLevelCategoryDto(parent);
+					lastItem.addChild(slug, name);
+				}
+				items.add(lastItem);
+			} else {
+				lastItem.addChild(slug, name);
 			}
 		}
 		
