@@ -66,6 +66,7 @@ import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -79,6 +80,7 @@ import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+import ru.mystamps.web.support.thymeleaf.GroupByParent;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
@@ -542,13 +544,17 @@ public class SeriesController {
 			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
 		}
 		
-		List<GroupedTransactionParticipantDto> sellers =
-			transactionParticipantService.findAllSellers();
-		model.addAttribute("sellers", sellers);
+		List<TransactionParticipantDto> sellers =
+			transactionParticipantService.findSellersWithParents();
+		List<GroupedTransactionParticipantDto> groupedSellers =
+			GroupByParent.transformParticipants(sellers);
+		model.addAttribute("sellers", groupedSellers);
 		
-		List<GroupedTransactionParticipantDto> buyers =
-			transactionParticipantService.findAllBuyers();
-		model.addAttribute("buyers", buyers);
+		List<TransactionParticipantDto> buyers =
+			transactionParticipantService.findBuyersWithParents();
+		List<GroupedTransactionParticipantDto> groupedBuyers =
+			GroupByParent.transformParticipants(buyers);
+		model.addAttribute("buyers", groupedBuyers);
 	}
 	
 	// false positive on Travis CI

@@ -16,5 +16,6 @@
 	
 	<!-- Too long link -->
 	<suppress checks="LineLength" files="src/main/java/ru/mystamps/web/dao/impl/package-info.java" />
+	<suppress checks="LineLength" files="src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java" />
 	
 </suppressions>

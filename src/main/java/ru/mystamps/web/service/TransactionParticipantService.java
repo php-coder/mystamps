@@ -20,12 +20,12 @@ package ru.mystamps.web.service;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.dto.AddParticipantDto;
-import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 
 public interface TransactionParticipantService {
 	void add(AddParticipantDto dto);
-	List<GroupedTransactionParticipantDto> findAllBuyers();
-	List<GroupedTransactionParticipantDto> findAllSellers();
+	List<TransactionParticipantDto> findBuyersWithParents();
+	List<TransactionParticipantDto> findSellersWithParents();
 	List<EntityWithIdDto> findAllGroups();
 }
