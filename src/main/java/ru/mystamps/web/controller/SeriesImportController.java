@@ -60,13 +60,13 @@ public class SeriesImportController {
 	}
 	
 	@GetMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
-	public void showForm(Model model) {
+	public void showRequestImportForm(Model model) {
 		RequestImportForm requestImportForm = new RequestImportForm();
 		model.addAttribute("requestImportForm", requestImportForm);
 	}
 	
 	@PostMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
-	public String processInput(
+	public String processRequestImportForm(
 		@Valid RequestImportForm form,
 		BindingResult result,
 		@CurrentUser Integer currentUserId) {
@@ -85,7 +85,7 @@ public class SeriesImportController {
 	}
 	
 	@GetMapping(Url.REQUEST_IMPORT_PAGE)
-	public String showRequest(
+	public String showRequestAndImportSeriesForm(
 		@PathVariable("id") Integer requestId,
 		Model model,
 		Locale userLocale,
