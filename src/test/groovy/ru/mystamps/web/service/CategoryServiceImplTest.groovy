@@ -29,6 +29,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
+import ru.mystamps.web.dao.dto.CategoryDto
 import ru.mystamps.web.controller.dto.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
@@ -238,6 +239,26 @@ class CategoryServiceImplTest extends Specification {
 			expectedLanguage | _
 			'ru'             | _
 			null             | _
+	}
+	
+	//
+	// Tests for findCategoriesWithParents()
+	//
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findCategoriesWithParents() should invoke dao and return its result'() {
+		given:
+			String expectedLang = nullOr(Random.lang())
+			List<CategoryDto> expectedResult = Random.listOfCategoryDto()
+		when:
+			List<CategoryDto> result = service.findCategoriesWithParents(expectedLang)
+		then:
+			1 * categoryDao.findCategoriesWithParents({ String lang ->
+				assert lang == expectedLang
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//

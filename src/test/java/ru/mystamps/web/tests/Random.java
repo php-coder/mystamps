@@ -24,6 +24,7 @@ import java.util.Set;
 
 import io.qala.datagen.RandomShortApi;
 
+import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.validation.ValidationRules;
@@ -129,6 +130,18 @@ public final class Random {
 			TestObjects.createEntityWithIdDto(),
 			TestObjects.createEntityWithIdDto(),
 			TestObjects.createEntityWithIdDto()
+		);
+	}
+	
+	public static List<CategoryDto> listOfCategoryDto() {
+		final int minSize = 1;
+		final int maxSize = 3;
+		int size = integer(minSize, maxSize);
+		return sampleMultiple(
+			size,
+			TestObjects.createCategoryDto(),
+			TestObjects.createCategoryDto(),
+			TestObjects.createCategoryDto()
 		);
 	}
 	
