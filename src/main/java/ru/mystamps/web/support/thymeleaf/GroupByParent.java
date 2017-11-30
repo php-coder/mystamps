@@ -22,9 +22,9 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
+import ru.mystamps.web.controller.dto.GroupedTransactionParticipantDto;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
-import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 
 /**
  * Transforms flat list to hierarchical structure suitable for rendering a &lt;select&gt; tag
