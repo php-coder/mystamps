@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
-import ru.mystamps.web.service.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.service.dto.GroupedTransactionParticipantDto;
 
 /**
