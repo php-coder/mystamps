@@ -83,7 +83,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray("report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly")
+			hasItemInArray("report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly")
 		);
 		
 		assertThat(directives, hasItemInArray("style-src https://cdn.rawgit.com 'self'"));
@@ -114,7 +114,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray("report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly")
+			hasItemInArray("report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly")
 		);
 		
 		assertThat(

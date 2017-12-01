@@ -62,7 +62,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String FONT_SRC_CDN = "font-src https://maxcdn.bootstrapcdn.com";
 	
 	// CheckStyle: ignore LineLength for next 1 line
-	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.io/r/default/csp/reportOnly";
+	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly";
 	
 	// - 'https://cdn.rawgit.com' is required by languages.min.css (TODO: GH #246)
 	private static final String STYLE_SRC = "style-src https://cdn.rawgit.com";
