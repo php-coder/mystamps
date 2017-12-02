@@ -137,16 +137,9 @@ public class SeriesController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		
-		List<CategoryDto> categories =
-			categoryService.findCategoriesWithParents(lang);
-		List<FirstLevelCategoryDto> groupedCategories =
-			GroupByParent.transformCategories(categories);
-		model.addAttribute("categories", groupedCategories);
-		
-		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
-		model.addAttribute("countries", countries);
-		
-		model.addAttribute("years", YEARS);
+		addCategoriesToModel(model, lang);
+		addCountriesToModel(model, lang);
+		addYearToModel(model);
 		
 		AddSeriesForm addSeriesForm = new AddSeriesForm();
 		addSeriesForm.setPerforated(true);
@@ -222,16 +215,9 @@ public class SeriesController {
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
 			
-			List<CategoryDto> categories =
-				categoryService.findCategoriesWithParents(lang);
-			List<FirstLevelCategoryDto> groupedCategories =
-				GroupByParent.transformCategories(categories);
-			model.addAttribute("categories", groupedCategories);
-			
-			List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
-			model.addAttribute("countries", countries);
-			
-			model.addAttribute("years", YEARS);
+			addCategoriesToModel(model, lang);
+			addCountriesToModel(model, lang);
+			addYearToModel(model);
 			
 			// don't try to re-display file upload field
 			form.setImage(null);
@@ -491,6 +477,24 @@ public class SeriesController {
 		model.addAttribute("searchResults", series);
 		
 		return "series/search_result";
+	}
+	
+	private void addCategoriesToModel(Model model, String lang) {
+		List<CategoryDto> categories = categoryService.findCategoriesWithParents(lang);
+		
+		List<FirstLevelCategoryDto> groupedCategories =
+			GroupByParent.transformCategories(categories);
+		
+		model.addAttribute("categories", groupedCategories);
+	}
+	
+	private void addCountriesToModel(Model model, String lang) {
+		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
+		model.addAttribute("countries", countries);
+	}
+	
+	private void addYearToModel(Model model) {
+		model.addAttribute("years", YEARS);
 	}
 	
 	// CheckStyle: ignore LineLength for next 1 line
