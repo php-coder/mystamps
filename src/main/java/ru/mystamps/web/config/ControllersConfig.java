@@ -114,10 +114,9 @@ public class ControllersConfig {
 	@Bean
 	public SeriesImportController getSeriesImportController() {
 		return new SeriesImportController(
-			servicesConfig.getCategoryService(),
-			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesImportService(),
+			getSeriesController(),
 			eventPublisher
 		);
 	}

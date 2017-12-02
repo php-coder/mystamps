@@ -479,7 +479,7 @@ public class SeriesController {
 		return "series/search_result";
 	}
 	
-	private void addCategoriesToModel(Model model, String lang) {
+	protected void addCategoriesToModel(Model model, String lang) {
 		List<CategoryDto> categories = categoryService.findCategoriesWithParents(lang);
 		
 		List<FirstLevelCategoryDto> groupedCategories =
@@ -488,12 +488,12 @@ public class SeriesController {
 		model.addAttribute("categories", groupedCategories);
 	}
 	
-	private void addCountriesToModel(Model model, String lang) {
+	protected void addCountriesToModel(Model model, String lang) {
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 		model.addAttribute("countries", countries);
 	}
 	
-	private void addYearToModel(Model model) {
+	protected void addYearToModel(Model model) {
 		model.addAttribute("years", YEARS);
 	}
 	
