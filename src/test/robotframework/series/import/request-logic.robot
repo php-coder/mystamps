@@ -29,8 +29,16 @@ Import series from an external site (in English, use category, country and date 
 	Checkbox Should Be Selected  id=perforated
 	Should Be Equal              ${imageUrl}        http://127.0.0.1:8080/image/1
 	Should Be Equal              ${year}            2000
-	# @todo #709 series/import/request-logic.robot:
-	#  submit a form and check the values on the next page
+	Input Text                   id=quantity  1
+	Submit Form                  id=create-series-form
+	${location}=                 Get Location
+	Should Match Regexp          ${location}  /series/\\d+
+	Element Text Should Be       id=category_name  Prehistoric animals
+	Element Text Should Be       id=country_name   Italy
+	Element Text Should Be       id=issue_date     2000
+	Element Text Should Be       id=quantity       1
+	Element Text Should Be       id=perforated     Yes
+	Page Should Contain Image    id=series-image-1
 
 Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator
