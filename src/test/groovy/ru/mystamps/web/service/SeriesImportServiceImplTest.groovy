@@ -38,13 +38,18 @@ import ru.mystamps.web.tests.Random
 class SeriesImportServiceImplTest extends Specification {
 	
 	private final SeriesImportDao seriesImportDao = Mock()
+	private final SeriesService seriesService = Mock()
 	private final SeriesInfoExtractorService extractorService = Mock()
 	
 	private SeriesImportService service
 	private RequestImportForm form
 	
 	def setup() {
-		service = new SeriesImportServiceImpl(NOPLogger.NOP_LOGGER, seriesImportDao, extractorService)
+		service = new SeriesImportServiceImpl(
+			NOPLogger.NOP_LOGGER,
+			seriesImportDao, seriesService,
+			extractorService
+		)
 		form = new RequestImportForm()
 	}
 	

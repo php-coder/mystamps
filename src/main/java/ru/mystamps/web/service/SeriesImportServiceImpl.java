@@ -36,6 +36,7 @@ import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
+import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
@@ -53,6 +54,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	
 	private final Logger log;
 	private final SeriesImportDao seriesImportDao;
+	private final SeriesService seriesService;
 	private final SeriesInfoExtractorService extractorService;
 	
 	@Override
@@ -77,6 +79,15 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		log.info("Request #{} for importing series from '{}' has been created", id, dto.getUrl());
 		
 		return id;
+	}
+	
+	// @todo #700 SeriesImportServiceImpl.addSeries(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.IMPORT_SERIES)
+	public Integer addSeries(AddSeriesDto dto, Integer userId) {
+		Integer seriesId = seriesService.add(dto, userId, false);
+		return seriesId;
 	}
 	
 	@Override

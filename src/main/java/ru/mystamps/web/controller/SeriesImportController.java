@@ -45,7 +45,6 @@ import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
-import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
@@ -54,7 +53,6 @@ import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 @RequiredArgsConstructor
 public class SeriesImportController {
 	
-	private final SeriesService seriesService;
 	private final SeriesImportService seriesImportService;
 	private final SeriesController seriesController;
 	private final ApplicationEventPublisher eventPublisher;
@@ -184,7 +182,7 @@ public class SeriesImportController {
 			return "series/import/info";
 		}
 		
-		Integer seriesId = seriesService.add(form, currentUserId, false);
+		Integer seriesId = seriesImportService.addSeries(form, currentUserId);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}

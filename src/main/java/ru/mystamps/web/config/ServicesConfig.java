@@ -165,6 +165,7 @@ public class ServicesConfig {
 		return new SeriesImportServiceImpl(
 			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 			daoConfig.getSeriesImportDao(),
+			getSeriesService(),
 			getSeriesInfoExtractorService()
 		);
 	}

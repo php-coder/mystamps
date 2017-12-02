@@ -19,11 +19,13 @@ package ru.mystamps.web.service;
 
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
 
 public interface SeriesImportService {
 	Integer addRequest(RequestImportDto dto, Integer userId);
+	Integer addSeries(AddSeriesDto dto, Integer userId);
 	void changeStatus(Integer requestId, String oldStatus, String newStatus);
 	ImportRequestDto findById(Integer requestId);
 	void saveDownloadedContent(Integer requestId, String content);
