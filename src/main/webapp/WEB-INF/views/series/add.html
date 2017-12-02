@@ -248,10 +248,8 @@
 						<div class="form-group form-group-sm"
 							th:classappend="${#fields.hasErrors('imageUrl') or #fields.hasErrors('downloadedImage') ? 'has-error' : ''}"
 							sec:authorize="hasAuthority('DOWNLOAD_IMAGE')">
-							<label for="image-url" class="control-label col-sm-3">
-								<span class="field-label" th:text="#{t_image_url}">
-									Image URL
-								</span>
+							<label for="image-url" class="control-label col-sm-3" th:text="#{t_image_url}">
+								Image URL
 							</label>
 							<div class="col-sm-5">
 								<input type="url" id="image-url" class="form-control" th:field="*{imageUrl}" />
