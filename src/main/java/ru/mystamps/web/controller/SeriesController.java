@@ -94,10 +94,9 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 
-	@SuppressWarnings("PMD.DefaultPackage")
-	/* default */ static final Map<Integer, Integer> YEARS;
-	
 	private static final Integer CURRENT_YEAR = Integer.valueOf(Year.now().getValue());
+	
+	private static final Map<Integer, Integer> YEARS;
 	
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
