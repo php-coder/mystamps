@@ -149,17 +149,17 @@ public class SeriesImportController {
 		BindingResult result,
 		@CurrentUser Integer currentUserId,
 		Locale userLocale,
-		HttpServletResponse response)
+		HttpServletResponse httpResponse)
 		throws IOException {
 		
 		if (requestId == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
 		ImportRequestDto request = seriesImportService.findById(requestId);
 		if (request == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			httpResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 		
