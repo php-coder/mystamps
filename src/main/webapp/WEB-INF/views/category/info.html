@@ -79,7 +79,7 @@
 					
 					<ul th:if="${not #lists.isEmpty(seriesOfCategory)}" th:remove="all-but-first">
 						<li th:each="series: ${seriesOfCategory}">
-							<span th:if="${series.country.id != null}" th:remove="tag">
+							<span th:if="${series.country != null}" th:remove="tag">
 								<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}" th:text="${series.country.name}">Italy</a>&nbsp;&raquo;
 							</span>
 							
