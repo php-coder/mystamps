@@ -59,7 +59,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@Transactional
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
-	public Integer add(RequestImportDto dto, Integer userId) {
+	public Integer addRequest(RequestImportDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(userId != null, "Current user id must be non null");
 		

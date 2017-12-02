@@ -49,25 +49,25 @@ class SeriesImportServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for add()
+	// Tests for addRequest()
 	//
 	
-	def 'add() should throw exception if dto is null'() {
+	def 'addRequest() should throw exception if dto is null'() {
 		when:
-			service.add(null, Random.userId())
+			service.addRequest(null, Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def 'add() should throw exception if user id is null'() {
+	def 'addRequest() should throw exception if user id is null'() {
 		when:
-			service.add(form, null)
+			service.addRequest(form, null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'add() should pass dto to dao and return its result'() {
+	def 'addRequest() should pass dto to dao and return its result'() {
 		given:
 			String expectedUrl = Random.url()
 			form.setUrl(expectedUrl)
@@ -75,7 +75,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedUserId = Random.userId()
 			Integer expectedResult = Random.id()
 		when:
-			Integer result = service.add(form, expectedUserId)
+			Integer result = service.addRequest(form, expectedUserId)
 		then:
 			1 * seriesImportDao.add({ ImportSeriesDbDto request ->
 				assert request.url == expectedUrl

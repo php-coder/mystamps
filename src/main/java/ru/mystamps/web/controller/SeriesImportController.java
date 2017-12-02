@@ -80,7 +80,7 @@ public class SeriesImportController {
 			return null;
 		}
 		
-		Integer requestId = seriesImportService.add(form, currentUserId);
+		Integer requestId = seriesImportService.addRequest(form, currentUserId);
 		
 		ImportRequestCreated requestCreated =
 			new ImportRequestCreated(this, requestId, form.getUrl());
