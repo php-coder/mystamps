@@ -41,7 +41,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
 @Getter
 @Setter
-public class ImportSeriesForm implements AddSeriesDto {
+public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	
 	// @todo #709 /series/import/request/{id}(category): add integration test for required field
 	@NotNull

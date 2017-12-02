@@ -496,6 +496,48 @@ public class SeriesController {
 		model.addAttribute("years", YEARS);
 	}
 	
+	protected static void loadErrorsFromDownloadInterceptor(
+		NullableImageUrl form,
+		BindingResult result,
+		HttpServletRequest request) {
+		
+		Object downloadResultErrorCode =
+			request.getAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
+		
+		if (downloadResultErrorCode == null) {
+			return;
+		}
+		
+		if (downloadResultErrorCode instanceof DownloadResult.Code) {
+			DownloadResult.Code code = (DownloadResult.Code)downloadResultErrorCode;
+			switch (code) {
+				case INVALID_URL:
+					// Url is being validated by @URL, to avoid showing an error message
+					// twice we're skipping error from an interceptor.
+					break;
+				case INSUFFICIENT_PERMISSIONS:
+					// A user without permissions has tried to download a file. It means that he
+					// didn't specify a file but somehow provide a URL to an image. In this case,
+					// let's show an error message that file is required.
+					result.rejectValue(
+						"image",
+						"ru.mystamps.web.support.beanvalidation.NotEmptyFilename.message"
+					);
+					form.nullifyImageUrl();
+					break;
+				default:
+					result.rejectValue(
+						DownloadImageInterceptor.DOWNLOADED_IMAGE_FIELD_NAME,
+						DownloadResult.class.getName() + "." + code.toString(),
+						"Could not download image"
+					);
+					break;
+			}
+		}
+		
+		request.removeAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
+	}
+	
 	// CheckStyle: ignore LineLength for next 1 line
 	private Map<String, ?> prepareCommonAttrsForSeriesInfo(SeriesDto series, Integer currentUserId) {
 		Map<String, Object> model = new HashMap<>();
@@ -554,50 +596,6 @@ public class SeriesController {
 		List<GroupedTransactionParticipantDto> groupedBuyers =
 			GroupByParent.transformParticipants(buyers);
 		model.addAttribute("buyers", groupedBuyers);
-	}
-	
-	// false positive on Travis CI
-	@SuppressWarnings("PMD.UnusedPrivateMethod")
-	private static void loadErrorsFromDownloadInterceptor(
-		NullableImageUrl form,
-		BindingResult result,
-		HttpServletRequest request) {
-		
-		Object downloadResultErrorCode =
-			request.getAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
-		
-		if (downloadResultErrorCode == null) {
-			return;
-		}
-		
-		if (downloadResultErrorCode instanceof DownloadResult.Code) {
-			DownloadResult.Code code = (DownloadResult.Code)downloadResultErrorCode;
-			switch (code) {
-				case INVALID_URL:
-					// Url is being validated by @URL, to avoid showing an error message
-					// twice we're skipping error from an interceptor.
-					break;
-				case INSUFFICIENT_PERMISSIONS:
-					// A user without permissions has tried to download a file. It means that he
-					// didn't specify a file but somehow provide a URL to an image. In this case,
-					// let's show an error message that file is required.
-					result.rejectValue(
-						"image",
-						"ru.mystamps.web.support.beanvalidation.NotEmptyFilename.message"
-					);
-					form.nullifyImageUrl();
-					break;
-				default:
-					result.rejectValue(
-						DownloadImageInterceptor.DOWNLOADED_IMAGE_FIELD_NAME,
-						DownloadResult.class.getName() + "." + code.toString(),
-						"Could not download image"
-					);
-					break;
-			}
-		}
-		
-		request.removeAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
 	}
 	
 	private static void addImageFormToModel(Model model) {

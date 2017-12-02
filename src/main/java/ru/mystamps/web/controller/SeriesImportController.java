@@ -20,6 +20,7 @@ package ru.mystamps.web.controller;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -141,6 +142,7 @@ public class SeriesImportController {
 		return "series/import/info";
 	}
 	
+	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(Url.REQUEST_IMPORT_PAGE)
 	public String processImportSeriesForm(
 		@PathVariable("id") Integer requestId,
@@ -149,6 +151,7 @@ public class SeriesImportController {
 		BindingResult result,
 		@CurrentUser Integer currentUserId,
 		Locale userLocale,
+		HttpServletRequest httpRequest,
 		HttpServletResponse httpResponse)
 		throws IOException {
 		
@@ -163,8 +166,7 @@ public class SeriesImportController {
 			return null;
 		}
 		
-		// @todo #709 SeriesImportController.processImportSeriesForm():
-		//  handle errors from interceptor
+		SeriesController.loadErrorsFromDownloadInterceptor(form, result, httpRequest);
 		
 		model.addAttribute("request", request);
 		
