@@ -30,17 +30,17 @@ public class SeriesInfoDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	
-	@SuppressWarnings({ "checkstyle:parameternumber", "PMD.ExcessiveParameterList" })
+	@SuppressWarnings("checkstyle:parameternumber")
 	public SeriesInfoDto(
 			Integer id,
-			Integer categoryId, String categorySlug, String categoryName,
-			Integer countryId, String countrySlug, String countryName,
+			LinkEntityDto category,
+			LinkEntityDto country,
 			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
 			Integer quantity,
 			Boolean perforated) {
 		this.id = id;
-		this.category = new LinkEntityDto(categoryId, categorySlug, categoryName);
-		this.country = new LinkEntityDto(countryId, countrySlug, countryName);
+		this.category = category;
+		this.country = country;
 		this.releaseDay = releaseDay;
 		this.releaseMonth = releaseMonth;
 		this.releaseYear = releaseYear;

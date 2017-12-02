@@ -57,22 +57,15 @@ final class RowMappers {
 		Integer quantity     = rs.getInt("quantity");
 		Boolean perforated   = rs.getBoolean("perforated");
 		
-		// @todo #731:15min Use createLinkEntityDto() for category and country
-		Integer categoryId   = rs.getInt("category_id");
-		String categorySlug  = rs.getString("category_slug");
-		String categoryName  = rs.getString("category_name");
-		Integer countryId    = JdbcUtils.getInteger(rs, "country_id");
-		String countrySlug   = rs.getString("country_slug");
-		String countryName   = rs.getString("country_name");
+		LinkEntityDto category =
+			createLinkEntityDto(rs, "category_id", "category_slug", "category_name");
+		LinkEntityDto country =
+			createLinkEntityDto(rs, "country_id", "country_slug", "country_name");
 		
 		return new SeriesInfoDto(
 			seriesId,
-			categoryId,
-			categorySlug,
-			categoryName,
-			countryId,
-			countrySlug,
-			countryName,
+			category,
+			country,
 			releaseDay,
 			releaseMonth,
 			releaseYear,

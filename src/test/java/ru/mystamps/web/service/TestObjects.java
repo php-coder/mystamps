@@ -116,8 +116,8 @@ public final class TestObjects {
 	public static SeriesInfoDto createSeriesInfoDto() {
 		return new SeriesInfoDto(
 			Random.id(),
-			Random.id(), "test-category", "Test Category",
-			Random.id(), "test-country", "Test Country",
+			new LinkEntityDto(Random.id(), "test-category", "Test Category"),
+			new LinkEntityDto(Random.id(), "test-country", "Test Country"),
 			15, 10, Random.issueYear(),
 			16,
 			bool()
