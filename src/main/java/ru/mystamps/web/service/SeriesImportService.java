@@ -25,7 +25,7 @@ import ru.mystamps.web.service.dto.RequestImportDto;
 
 public interface SeriesImportService {
 	Integer addRequest(RequestImportDto dto, Integer userId);
-	Integer addSeries(AddSeriesDto dto, Integer userId);
+	Integer addSeries(AddSeriesDto dto, Integer requestId, Integer userId);
 	void changeStatus(Integer requestId, String oldStatus, String newStatus);
 	ImportRequestDto findById(Integer requestId);
 	void saveDownloadedContent(Integer requestId, String content);

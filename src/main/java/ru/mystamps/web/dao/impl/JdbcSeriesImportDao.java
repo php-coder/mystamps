@@ -49,6 +49,9 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	@Value("${series_import_requests.create}")
 	private String createSeriesImportRequestSql;
 	
+	@Value("${series_import_requests.set_series_id}")
+	private String setSeriesIdSql;
+	
 	@Value("${series_import_requests.change_status}")
 	private String changeStatusSql;
 	
@@ -91,6 +94,23 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+	
+	@Override
+	public void setSeriesIdOnRequest(Integer requestId, Integer seriesId, Date updatedAt) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", requestId);
+		params.put("series_id", seriesId);
+		params.put("date", updatedAt);
+		
+		int affected = jdbcTemplate.update(setSeriesIdSql, params);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after setting series id on request #%d: %d",
+			requestId,
+			affected
+		);
 	}
 	
 	// TODO: introduce dao

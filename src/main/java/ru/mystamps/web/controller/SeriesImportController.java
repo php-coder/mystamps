@@ -182,7 +182,7 @@ public class SeriesImportController {
 			return "series/import/info";
 		}
 		
-		Integer seriesId = seriesImportService.addSeries(form, currentUserId);
+		Integer seriesId = seriesImportService.addSeries(form, requestId, currentUserId);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}

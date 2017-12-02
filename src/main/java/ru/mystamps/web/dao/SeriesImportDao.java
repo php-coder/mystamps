@@ -26,6 +26,7 @@ import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
+	void setSeriesIdOnRequest(Integer requestId, Integer seriesId, Date updatedAt);
 	void changeStatus(Integer requestId, Date date, String oldStatus, String newStatus);
 	ImportRequestDto findById(Integer id);
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);

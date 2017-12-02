@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Verify scenarios of importing a series from an external site
 Library          Selenium2Library
+Library          String
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
@@ -12,8 +13,8 @@ Import series from an external site (in English, use category, country and date 
 	[Documentation]              Verify import from a page in English and with different locators
 	Input Text                   id=url  http://127.0.0.1:8080/series/2?lang=en
 	Submit Form                  id=import-series-form
-	${location}=                 Get Location
-	Should Match Regexp          ${location}  /series/import/request/\\d+
+	${requestLocation}=          Get Location
+	Should Match Regexp          ${requestLocation}  /series/import/request/\\d+
 	${category}=                 Get Selected List Label  id=category
 	${country}=                  Get Selected List Label  id=country
 	# We can't use "Textfield Value Should Be" because it causes NPE on inputs of type url/number:
@@ -31,14 +32,20 @@ Import series from an external site (in English, use category, country and date 
 	Should Be Equal              ${year}            2000
 	Input Text                   id=quantity  1
 	Submit Form                  id=create-series-form
-	${location}=                 Get Location
-	Should Match Regexp          ${location}  /series/\\d+
+	${seriesLocation}=           Get Location
+	Should Match Regexp          ${seriesLocation}  /series/\\d+
 	Element Text Should Be       id=category_name  Prehistoric animals
 	Element Text Should Be       id=country_name   Italy
 	Element Text Should Be       id=issue_date     2000
 	Element Text Should Be       id=quantity       1
 	Element Text Should Be       id=perforated     Yes
 	Page Should Contain Image    id=series-image-1
+	Go To                        ${requestLocation}
+	Element Text Should Be       id=request-status  ImportSucceeded
+	Element Should Be Disabled   id=create-series-btn
+	# @todo #700 /series/import/request/{id}: link to imported series should not use fixed domain
+	${expectedSeriesLink}=       Replace String  ${seriesLocation}  ${SITE_URL}  https://my-stamps.ru
+	Page Should Contain Link     link=${expectedSeriesLink}
 
 Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator

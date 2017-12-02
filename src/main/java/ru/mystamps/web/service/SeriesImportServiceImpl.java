@@ -51,6 +51,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private static final String UNPROCESSED = "Unprocessed";
 	private static final String DOWNLOADING_SUCCEEDED = "DownloadingSucceeded";
 	private static final String PARSING_SUCCEEDED = "ParsingSucceeded";
+	private static final String IMPORT_SUCCEEDED = "ImportSucceeded";
 	
 	private final Logger log;
 	private final SeriesImportDao seriesImportDao;
@@ -85,8 +86,17 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
-	public Integer addSeries(AddSeriesDto dto, Integer userId) {
+	public Integer addSeries(AddSeriesDto dto, Integer requestId, Integer userId) {
 		Integer seriesId = seriesService.add(dto, userId, false);
+		
+		Date now = new Date();
+		
+		// @todo #700 Reduce number of SQL queries by one.
+		//  Here we're updating series_import_requests twice: when we set series_id field
+		//  and later when we change status_id. It's possible to do this in one-shot
+		seriesImportDao.setSeriesIdOnRequest(requestId, seriesId, now);
+		changeStatus(requestId, PARSING_SUCCEEDED, IMPORT_SUCCEEDED);
+		
 		return seriesId;
 	}
 	
