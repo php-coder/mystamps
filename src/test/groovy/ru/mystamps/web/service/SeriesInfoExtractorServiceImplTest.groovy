@@ -17,11 +17,20 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomValue.between
+
+import static ru.mystamps.web.service.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
+
+import java.time.Year
 
 import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
+import spock.lang.Unroll
+
+import ru.mystamps.web.validation.ValidationRules
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesInfoExtractorServiceImplTest extends Specification {
@@ -71,6 +80,124 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			Integer year = service.extractReleaseYear(fragment)
 		then:
 			year == null
+	}
+	
+	def 'extractReleaseYear() should extract year from XIX century'() {
+		given:
+			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, 1899).integer()
+		and:
+			String fragment = String.valueOf(expectedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+	}
+	
+	def 'extractReleaseYear() should extract year from XX century'() {
+		given:
+			Integer expectedYear = between(1900, 1999).integer()
+		and:
+			String fragment = String.valueOf(expectedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+	}
+	
+	def 'extractReleaseYear() should extract year from XXI century'() {
+		given:
+			Integer expectedYear = between(2000, MAX_SUPPORTED_RELEASE_YEAR).integer()
+		and:
+			String fragment = String.valueOf(expectedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+	}
+	
+	@Unroll
+	def 'extractReleaseYear() should extract date from "#fragment"'(String fragment) {
+		given:
+			Integer expectedYear = 2010 // should be in sync with examples below
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+		where:
+			fragment                         | _
+			'italy 2010'                     | _
+			'2010 brazil'                    | _
+			'2010\t\tbrazil'                 | _
+			'2010     brazil'                | _
+			'prehistoric animals 2010 congo' | _
+	}
+	
+	@SuppressWarnings('UnnecessaryGetter')
+	def 'extractReleaseYear() should return the first year if there are many'() {
+		given:
+			Integer currentYear = Year.now().getValue()
+			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+		and:
+			Integer anotherYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+		and:
+			String fragment = String.format('%d %d', expectedYear, anotherYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+	}
+	
+	@SuppressWarnings('UnnecessaryGetter')
+	def 'extractReleaseYear() should skip invalid date'() {
+		given:
+			Integer unsupportedYearInPast = between(0, ValidationRules.MIN_RELEASE_YEAR - 1).integer()
+			Integer unsupportedYearInFuture = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
+			Integer unsupportedYear = from(unsupportedYearInPast, unsupportedYearInFuture).sample()
+		and:
+			Integer currentYear = Year.now().getValue()
+			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+		and:
+			String fragment = String.format('%d %d', unsupportedYear, expectedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == expectedYear
+	}
+	
+	def 'extractReleaseYear() shouldn\'t extract dates before 1840'() {
+		given:
+			Integer unsupportedYear = between(0, ValidationRules.MIN_RELEASE_YEAR - 1).integer()
+			String fragment = String.valueOf(unsupportedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == null
+	}
+	
+	def 'extractReleaseYear() shouldn\'t extract dates after 2099'() {
+		given:
+			Integer unsupportedYear = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
+			String fragment = String.valueOf(unsupportedYear)
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == null
+	}
+	
+	@Unroll
+	def 'extractReleaseYear() shouldn\'t extract date from "#fragment"'(String fragment) {
+		when:
+			Integer year = service.extractReleaseYear(fragment)
+		then:
+			year == null
+		where:
+			fragment           | _
+			'-2000'            | _
+			'test2000'         | _
+			'test-2000'        | _
+			'test,2000'        | _
+			'test/2000'        | _
+			'part of word2000' | _
 	}
 	
 }
