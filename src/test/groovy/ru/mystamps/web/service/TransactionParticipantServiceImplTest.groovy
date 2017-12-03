@@ -132,6 +132,22 @@ class TransactionParticipantServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSellersWithParents()
+	//
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findSellersWithParents() should invoke dao and return its result'() {
+		given:
+			List<TransactionParticipantDto> expectedResult = Random.listOfTransactionParticipantDto()
+		when:
+			List<TransactionParticipantDto> result = service.findSellersWithParents()
+		then:
+			1 * transactionParticipantDao.findSellersWithParents() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findAllGroups()
 	//
 	
