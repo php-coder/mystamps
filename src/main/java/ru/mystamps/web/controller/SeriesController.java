@@ -62,8 +62,8 @@ import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
-import ru.mystamps.web.controller.dto.GroupedTransactionParticipantDto;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
+import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -587,14 +587,12 @@ public class SeriesController {
 		
 		List<TransactionParticipantDto> sellers =
 			transactionParticipantService.findSellersWithParents();
-		List<GroupedTransactionParticipantDto> groupedSellers =
-			GroupByParent.transformParticipants(sellers);
+		List<SelectItem> groupedSellers = GroupByParent.transformParticipants(sellers);
 		model.addAttribute("sellers", groupedSellers);
 		
 		List<TransactionParticipantDto> buyers =
 			transactionParticipantService.findBuyersWithParents();
-		List<GroupedTransactionParticipantDto> groupedBuyers =
-			GroupByParent.transformParticipants(buyers);
+		List<SelectItem> groupedBuyers = GroupByParent.transformParticipants(buyers);
 		model.addAttribute("buyers", groupedBuyers);
 	}
 	

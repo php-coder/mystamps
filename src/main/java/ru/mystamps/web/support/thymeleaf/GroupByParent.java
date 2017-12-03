@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
-import ru.mystamps.web.controller.dto.GroupedTransactionParticipantDto;
+import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 
@@ -34,24 +34,27 @@ import ru.mystamps.web.dao.dto.TransactionParticipantDto;
  */
 public final class GroupByParent {
 	
+	// @todo #592 GroupByParent: add unit tests
 	private GroupByParent() {
 	}
 	
+	// @todo #592 GroupByParent.transformParticipants(): introduce unified class for representing entity with parent
+	// @todo #592 GroupByParent: merge transformCategories() and transformParticipants() methods
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<GroupedTransactionParticipantDto> transformParticipants(
+	public static List<SelectItem> transformParticipants(
 		List<TransactionParticipantDto> participants) {
 		
 		if (participants.isEmpty()) {
 			return Collections.emptyList();
 		}
 		
-		List<GroupedTransactionParticipantDto> items = new ArrayList<>();
+		List<SelectItem> items = new ArrayList<>();
 		String lastParent = null;
-		GroupedTransactionParticipantDto lastItem = null;
+		SelectItem lastItem = null;
 		
 		for (TransactionParticipantDto participant : participants) {
 			String name   = participant.getName();
-			Integer id    = participant.getId();
+			String value  = participant.getId().toString();
 			String parent = participant.getParentName();
 			
 			boolean participantWithoutParent = parent == null;
@@ -60,20 +63,22 @@ public final class GroupByParent {
 			if (createNewItem) {
 				lastParent = parent;
 				if (participantWithoutParent) {
-					lastItem = new GroupedTransactionParticipantDto(id, name);
+					lastItem = new SelectItem(name, value);
 				} else {
-					lastItem = new GroupedTransactionParticipantDto(parent);
-					lastItem.addChild(id, name);
+					lastItem = new SelectItem(parent);
+					lastItem.addChild(name, value);
 				}
 				items.add(lastItem);
 			} else {
-				lastItem.addChild(id, name);
+				lastItem.addChild(name, value);
 			}
 		}
 		
 		return items;
 	}
 	
+	// @todo #592 GroupByParent.transformCategories(): replace FirstLevelCategoryDto by SelectItem
+	// @todo #592 GroupByParent.transformCategories(): use unified class that represents entity with parent
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	public static List<FirstLevelCategoryDto> transformCategories(List<CategoryDto> categories) {
 		if (categories.isEmpty()) {

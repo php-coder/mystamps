@@ -17,32 +17,12 @@
  */
 package ru.mystamps.web.controller.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Getter;
-import lombok.ToString;
-
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@ToString
-public class GroupedTransactionParticipantDto {
-	private final Integer id;
+@RequiredArgsConstructor
+public class SelectOption {
 	private final String name;
-	private final List<EntityWithIdDto> children = new ArrayList<>();
-	
-	public GroupedTransactionParticipantDto(Integer id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	
-	public GroupedTransactionParticipantDto(String name) {
-		this(null, name);
-	}
-	
-	public void addChild(Integer id, String name) {
-		children.add(new EntityWithIdDto(id, name));
-	}
-	
+	private final String value;
 }

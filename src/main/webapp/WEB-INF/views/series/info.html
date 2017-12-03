@@ -404,15 +404,15 @@
 													<th:block th:each="item : ${sellers}">
 														<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
 															<option th:each="seller : ${item.children}"
-																th:value="${seller.id}"
+																th:value="${seller.value}"
 																th:text="${seller.name}"
-																th:selected="${addSeriesSalesForm.sellerId != seller.id}">
+																th:selected="${addSeriesSalesForm.sellerId != seller.value}">
 															</option>
 														</optgroup>
 														<option th:if="${#lists.isEmpty(item.children)}"
-															th:value="${item.id}"
+															th:value="${item.value}"
 															th:text="${item.name}"
-															th:selected="${addSeriesSalesForm.sellerId != item.id}">
+															th:selected="${addSeriesSalesForm.sellerId != item.value}">
 														</option>
 													</th:block>
 													/*/-->
@@ -515,15 +515,15 @@
 														<th:block th:each="item : ${buyers}">
 															<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
 																<option th:each="buyer : ${item.children}"
-																	th:value="${buyer.id}"
+																	th:value="${buyer.value}"
 																	th:text="${buyer.name}"
-																	th:selected="${addSeriesSalesForm.buyerId != buyer.id}">
+																	th:selected="${addSeriesSalesForm.buyerId != buyer.value}">
 																</option>
 															</optgroup>
 															<option th:if="${#lists.isEmpty(item.children)}"
-																th:value="${item.id}"
+																th:value="${item.value}"
 																th:text="${item.name}"
-																th:selected="${addSeriesSalesForm.buyerId != item.id}">
+																th:selected="${addSeriesSalesForm.buyerId != item.value}">
 															</option>
 														</th:block>
 													/*/-->
