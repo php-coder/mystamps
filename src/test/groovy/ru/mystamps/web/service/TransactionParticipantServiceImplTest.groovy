@@ -27,6 +27,7 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
+import ru.mystamps.web.dao.dto.TransactionParticipantDto
 import ru.mystamps.web.controller.dto.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
@@ -112,6 +113,22 @@ class TransactionParticipantServiceImplTest extends Specification {
 				assert participant?.seller == expectedSeller
 				return true
 			})
+	}
+	
+	//
+	// Tests for findBuyersWithParents()
+	//
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findBuyersWithParents() should invoke dao and return its result'() {
+		given:
+			List<TransactionParticipantDto> expectedResult = Random.listOfTransactionParticipantDto()
+		when:
+			List<TransactionParticipantDto> result = service.findBuyersWithParents()
+		then:
+			1 * transactionParticipantDao.findBuyersWithParents() >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//
