@@ -53,13 +53,32 @@
     creates: /etc/duplicity/cacert.pem
     warn: no
 
-- name: Creating a cron task for backup to a remote host
+- name: Creating /data/bin directory
+  file:
+    path: /data/bin
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+# @todo #705 remote-backup.sh: find a way to protect duplicity against ps
+- name: Creating a script for doing remote backup
   template:
+    src: ../../src/main/scripts/remote-backup.sh
+    dest: /data/bin/remote-backup.sh
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Creating a cron task for backup to a remote host
+  copy:
     src: ../../src/main/config/cron/mystamps-backup-remote
     dest: /etc/cron.d/mystamps-backup-remote
     force: yes
     backup: no
     owner: root
     group: root
-    mode: '0600'
+    mode: '0644'
 
