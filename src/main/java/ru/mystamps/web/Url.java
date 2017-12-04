@@ -124,7 +124,7 @@ public final class Url {
 	}
 	
 	public static Map<String, String> asMap(boolean serveContentFromSingleHost) {
-		// There is not all urls but only those which used on views
+		// Not all URLs are listed here but only those that are being used on views
 		Map<String, String> map = new HashMap<>();
 		map.put("PUBLIC_URL", PUBLIC_URL);
 		map.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
@@ -166,7 +166,7 @@ public final class Url {
 			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
 			map.put("COLLECTION_INFO_JS", COLLECTION_INFO_JS);
 		} else {
-			// Use separate domain for our own resources
+			// Use a separate domain for our own resources
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
 			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
@@ -175,7 +175,7 @@ public final class Url {
 			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);
 			
-			// Use CDN for external resources like frameworks
+			// Use CDN for the external resources like libraries
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
 			map.put("JQUERY_JS", JQUERY_JS_CDN);
