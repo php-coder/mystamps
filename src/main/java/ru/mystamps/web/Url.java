@@ -20,6 +20,8 @@ package ru.mystamps.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.core.env.Environment;
+
 /**
  * Holds path to site and all URLs.
  *
@@ -123,7 +125,9 @@ public final class Url {
 	private Url() {
 	}
 	
-	public static Map<String, String> asMap(boolean serveContentFromSingleHost) {
+	public static Map<String, String> asMap(boolean production) {
+		boolean serveContentFromSingleHost = !production;
+		
 		// Not all URLs are listed here but only those that are being used on views
 		Map<String, String> map = new HashMap<>();
 		map.put("PUBLIC_URL", PUBLIC_URL);
