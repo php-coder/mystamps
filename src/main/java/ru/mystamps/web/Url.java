@@ -130,7 +130,7 @@ public final class Url {
 		
 		// Not all URLs are listed here but only those that are being used on views
 		Map<String, String> map = new HashMap<>();
-		map.put("PUBLIC_URL", PUBLIC_URL);
+		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
 		map.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
 		map.put("LOGIN_PAGE", LOGIN_PAGE);
 		map.put("LOGOUT_PAGE", LOGOUT_PAGE);

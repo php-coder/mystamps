@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation    Verify scenarios of importing a series from an external site
 Library          Selenium2Library
-Library          String
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
@@ -43,9 +42,7 @@ Import series from an external site (in English, use category, country and date 
 	Go To                        ${requestLocation}
 	Element Text Should Be       id=request-status  ImportSucceeded
 	Element Should Be Disabled   id=create-series-btn
-	# @todo #700 /series/import/request/{id}: link to imported series should not use fixed domain
-	${expectedSeriesLink}=       Replace String  ${seriesLocation}  ${SITE_URL}  https://my-stamps.ru
-	Page Should Contain Link     link=${expectedSeriesLink}
+	Page Should Contain Link     link=${seriesLocation}
 
 Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator
