@@ -106,15 +106,15 @@
 									<th:block th:each="category : ${categories}">
 										<optgroup th:if="${not #lists.isEmpty(category.children)}" th:label="${category.name}">
 											<option th:each="subcategory : ${category.children}"
-												th:value="${subcategory.slug}"
+												th:value="${subcategory.value}"
 												th:text="${subcategory.name}"
-												th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == subcategory.slug}">
+												th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == subcategory.value}">
 											</option>
 										</optgroup>
 										<option th:if="${#lists.isEmpty(category.children)}"
-											th:value="${category.slug}"
+											th:value="${category.value}"
 											th:text="${category.name}"
-											th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.slug}">
+											th:selected="${addSeriesForm.category != null and addSeriesForm.category.slug == category.value}">
 										</option>
 									</th:block>
 									/*/-->

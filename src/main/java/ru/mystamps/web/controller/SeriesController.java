@@ -61,7 +61,6 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
-import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
@@ -481,8 +480,7 @@ public class SeriesController {
 	protected void addCategoriesToModel(Model model, String lang) {
 		List<CategoryDto> categories = categoryService.findCategoriesWithParents(lang);
 		
-		List<FirstLevelCategoryDto> groupedCategories =
-			GroupByParent.transformCategories(categories);
+		List<SelectItem> groupedCategories = GroupByParent.transformCategories(categories);
 		
 		model.addAttribute("categories", groupedCategories);
 	}

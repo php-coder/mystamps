@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ru.mystamps.web.controller.dto.FirstLevelCategoryDto;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
@@ -77,21 +76,20 @@ public final class GroupByParent {
 		return items;
 	}
 	
-	// @todo #592 GroupByParent.transformCategories(): replace FirstLevelCategoryDto by SelectItem
 	// @todo #592 GroupByParent.transformCategories(): use unified class that represents entity with parent
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<FirstLevelCategoryDto> transformCategories(List<CategoryDto> categories) {
+	public static List<SelectItem> transformCategories(List<CategoryDto> categories) {
 		if (categories.isEmpty()) {
 			return Collections.emptyList();
 		}
 		
-		List<FirstLevelCategoryDto> items = new ArrayList<>();
+		List<SelectItem> items = new ArrayList<>();
 		String lastParent = null;
-		FirstLevelCategoryDto lastItem = null;
+		SelectItem lastItem = null;
 		
 		for (CategoryDto category : categories) {
 			String name   = category.getName();
-			String slug   = category.getSlug();
+			String value  = category.getSlug();
 			String parent = category.getParentName();
 			
 			boolean categoryWithoutParent = parent == null;
@@ -100,14 +98,14 @@ public final class GroupByParent {
 			if (createNewItem) {
 				lastParent = parent;
 				if (categoryWithoutParent) {
-					lastItem = new FirstLevelCategoryDto(slug, name);
+					lastItem = new SelectItem(name, value);
 				} else {
-					lastItem = new FirstLevelCategoryDto(parent);
-					lastItem.addChild(slug, name);
+					lastItem = new SelectItem(parent);
+					lastItem.addChild(name, value);
 				}
 				items.add(lastItem);
 			} else {
-				lastItem.addChild(slug, name);
+				lastItem.addChild(name, value);
 			}
 		}
 		
