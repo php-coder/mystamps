@@ -20,8 +20,6 @@ package ru.mystamps.web;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.core.env.Environment;
-
 /**
  * Holds path to site and all URLs.
  *
