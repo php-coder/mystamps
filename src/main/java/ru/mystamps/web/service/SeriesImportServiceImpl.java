@@ -25,6 +25,7 @@ import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +33,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
+import ru.mystamps.web.controller.event.ParsingFailed;
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
@@ -51,6 +53,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private final SeriesImportDao seriesImportDao;
 	private final SeriesService seriesService;
 	private final SeriesInfoExtractorService extractorService;
+	private final ApplicationEventPublisher eventPublisher;
 	
 	@Override
 	@Transactional
@@ -175,8 +178,13 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			processedData.setReleaseYear(releaseYear);
 		}
 		
-		// TODO: handle it gracefully by publishing ParsingFailed event
-		Validate.validState(processedData.hasAtLeastOneFieldFilled(), "");
+		// IMPORTANT: don't add code that modifies database above this line!
+		// @todo #684 Series import: add integration test
+		//  for the case when parsed value don't match database
+		if (!processedData.hasAtLeastOneFieldFilled()) {
+			eventPublisher.publishEvent(new ParsingFailed(this, requestId));
+			return;
+		}
 		
 		seriesImportDao.addParsedContent(requestId, processedData);
 		
