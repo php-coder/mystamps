@@ -23,6 +23,7 @@ import org.springframework.context.ApplicationListener;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.service.SeriesImportService;
 
 /**
@@ -44,7 +45,11 @@ public class ParsingFailedEventListener
 		// TODO: more info?
 		log.info("Request #{}: parsing failed", requestId);
 		
-		importService.changeStatus(requestId, "DownloadingSucceeded", "ParsingFailed");
+		importService.changeStatus(
+			requestId,
+			SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
+			SeriesImportRequestStatus.PARSING_FAILED
+		);
 	}
 	
 }

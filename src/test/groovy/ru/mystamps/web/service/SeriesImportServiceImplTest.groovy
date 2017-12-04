@@ -27,6 +27,7 @@ import spock.lang.Specification
 import org.slf4j.helpers.NOPLogger
 
 import ru.mystamps.web.controller.dto.RequestImportForm
+import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
 import ru.mystamps.web.dao.dto.ParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
@@ -84,7 +85,7 @@ class SeriesImportServiceImplTest extends Specification {
 		then:
 			1 * seriesImportDao.add({ ImportSeriesDbDto request ->
 				assert request.url == expectedUrl
-				assert request.status == 'Unprocessed'
+				assert request.status == SeriesImportRequestStatus.UNPROCESSED
 				assert DateUtils.roughlyEqual(request?.requestedAt, new Date())
 				assert request.requestedBy == expectedUserId
 				assert DateUtils.roughlyEqual(request?.updatedAt, new Date())
@@ -243,10 +244,10 @@ class SeriesImportServiceImplTest extends Specification {
 				assert DateUtils.roughlyEqual(date, new Date())
 				return true
 			}, { String oldStatus ->
-				assert oldStatus == 'Unprocessed'
+				assert oldStatus == SeriesImportRequestStatus.UNPROCESSED
 				return true
 			}, { String newStatus ->
-				assert newStatus == 'DownloadingSucceeded'
+				assert newStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
 				return true
 			})
 	}

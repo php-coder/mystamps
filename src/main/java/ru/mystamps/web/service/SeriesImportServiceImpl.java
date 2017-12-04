@@ -31,6 +31,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
@@ -45,13 +46,6 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class SeriesImportServiceImpl implements SeriesImportService {
-	
-	// see initiate-series_import_request_statuses-table changeset
-	// in src/main/resources/liquibase/version/0.4/2017-11-08--import_series.xml
-	private static final String UNPROCESSED = "Unprocessed";
-	private static final String DOWNLOADING_SUCCEEDED = "DownloadingSucceeded";
-	private static final String PARSING_SUCCEEDED = "ParsingSucceeded";
-	private static final String IMPORT_SUCCEEDED = "ImportSucceeded";
 	
 	private final Logger log;
 	private final SeriesImportDao seriesImportDao;
@@ -68,7 +62,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		ImportSeriesDbDto importRequest = new ImportSeriesDbDto();
 		importRequest.setUrl(dto.getUrl());
-		importRequest.setStatus(UNPROCESSED);
+		importRequest.setStatus(SeriesImportRequestStatus.UNPROCESSED);
 		
 		Date now = new Date();
 		importRequest.setUpdatedAt(now);
@@ -95,7 +89,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		//  Here we're updating series_import_requests twice: when we set series_id field
 		//  and later when we change status_id. It's possible to do this in one-shot
 		seriesImportDao.setSeriesIdOnRequest(requestId, seriesId, now);
-		changeStatus(requestId, PARSING_SUCCEEDED, IMPORT_SUCCEEDED);
+		changeStatus(
+			requestId,
+			SeriesImportRequestStatus.PARSING_SUCCEEDED,
+			SeriesImportRequestStatus.IMPORT_SUCCEEDED
+		);
 		
 		return seriesId;
 	}
@@ -134,7 +132,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		log.info("Request #{}: page were downloaded ({} characters)", requestId, content.length());
 		
-		changeStatus(requestId, UNPROCESSED, DOWNLOADING_SUCCEEDED);
+		changeStatus(
+			requestId,
+			SeriesImportRequestStatus.UNPROCESSED,
+			SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
+		);
 	}
 	
 	@Override
@@ -180,7 +182,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		log.info("Request #{}: page were parsed ({})", requestId, processedData);
 		
-		changeStatus(requestId, DOWNLOADING_SUCCEEDED, PARSING_SUCCEEDED);
+		changeStatus(
+			requestId,
+			SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
+			SeriesImportRequestStatus.PARSING_SUCCEEDED
+		);
 	}
 	
 	@Override

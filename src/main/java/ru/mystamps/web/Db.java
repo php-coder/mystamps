@@ -44,6 +44,18 @@ public final class Db {
 		public static final int URL_LENGTH = 285;
 	}
 	
+	public static final class SeriesImportRequestStatus {
+		// see initiate-series_import_request_statuses-table changeset
+		// in src/main/resources/liquibase/version/0.4/2017-11-08--import_series.xml
+		// @todo #687 replace set of strings by enum
+		public static final String UNPROCESSED           = "Unprocessed";
+		public static final String DOWNLOADING_SUCCEEDED = "DownloadingSucceeded";
+		public static final String DOWNLOADING_FAILED    = "DownloadingFailed";
+		public static final String PARSING_SUCCEEDED     = "ParsingSucceeded";
+		public static final String PARSING_FAILED        = "ParsingFailed";
+		public static final String IMPORT_SUCCEEDED      = "ImportSucceeded";
+	}
+	
 	public static final class SeriesSales {
 		public static final int TRANSACTION_URL_LENGTH = 255;
 	}

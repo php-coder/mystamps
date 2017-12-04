@@ -23,6 +23,7 @@ import org.springframework.context.ApplicationListener;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.service.SeriesImportService;
 
 /**
@@ -48,7 +49,11 @@ public class DownloadingFailedEventListener
 			event.getCode()
 		);
 		
-		importService.changeStatus(requestId, "Unprocessed", "DownloadingFailed");
+		importService.changeStatus(
+			requestId,
+			Db.SeriesImportRequestStatus.UNPROCESSED,
+			Db.SeriesImportRequestStatus.DOWNLOADING_FAILED
+		);
 	}
 	
 }

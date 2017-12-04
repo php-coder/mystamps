@@ -24,6 +24,7 @@ import java.util.Set;
 
 import io.qala.datagen.RandomShortApi;
 
+import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.TransactionParticipantDto;
@@ -39,14 +40,14 @@ import static io.qala.datagen.StringModifier.Impls.oneOf;
 
 public final class Random {
 	
-	// TODO: use constants for statuses
+	// @todo #687 Random.STATUSES: reduce duplication by using EnumSet.allOf()
 	private static final String[] STATUSES = new String[] {
-		"Unprocessed",
-		"DownloadingSucceeded",
-		"DownloadingFailed",
-		"ParsingSucceeded",
-		"ParsingFailed",
-		"ImportSucceeded",
+		SeriesImportRequestStatus.UNPROCESSED,
+		SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
+		SeriesImportRequestStatus.DOWNLOADING_FAILED,
+		SeriesImportRequestStatus.PARSING_SUCCEEDED,
+		SeriesImportRequestStatus.PARSING_FAILED,
+		SeriesImportRequestStatus.IMPORT_SUCCEEDED,
 	};
 	
 	private Random() {
