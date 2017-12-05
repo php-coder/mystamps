@@ -4,3 +4,5 @@ errors:
   - slava.semushin+0pdd@gmail.com
 tags:
   - techdebt
+format:
+  - short-title
