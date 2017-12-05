@@ -26,6 +26,8 @@ import spock.lang.Specification
 
 import org.slf4j.helpers.NOPLogger
 
+import org.springframework.context.ApplicationEventPublisher
+
 import ru.mystamps.web.controller.dto.RequestImportForm
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
@@ -41,6 +43,7 @@ class SeriesImportServiceImplTest extends Specification {
 	private final SeriesImportDao seriesImportDao = Mock()
 	private final SeriesService seriesService = Mock()
 	private final SeriesInfoExtractorService extractorService = Mock()
+	private final ApplicationEventPublisher eventPublisher = Mock()
 	
 	private SeriesImportService service
 	private RequestImportForm form
@@ -49,7 +52,8 @@ class SeriesImportServiceImplTest extends Specification {
 		service = new SeriesImportServiceImpl(
 			NOPLogger.NOP_LOGGER,
 			seriesImportDao, seriesService,
-			extractorService
+			extractorService,
+			eventPublisher
 		)
 		form = new RequestImportForm()
 	}
