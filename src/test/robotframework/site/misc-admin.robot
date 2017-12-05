@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    verify required elements appearance on the main page from an admin
+Documentation    Verify required elements appearance on the main page from an admin
 Library          Selenium2Library
 Resource         ../auth.steps.robot
 Suite Setup      Before Test Suite
