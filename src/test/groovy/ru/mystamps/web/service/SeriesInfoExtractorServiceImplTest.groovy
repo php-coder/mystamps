@@ -30,6 +30,7 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import ru.mystamps.web.tests.Random
 import ru.mystamps.web.validation.ValidationRules
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
@@ -56,6 +57,24 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result.isEmpty()
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCategory() should try to search by category names'() {
+		given:
+			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
+			Set<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet,']
+		and:
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.extractCategory(fragment)
+		then:
+			1 * categoryService.findIdsByNames({ Set<String> candidates ->
+				assert candidates == expectedCandidates
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
 	//
 	// Tests for extractCountry()
 	//
@@ -67,6 +86,24 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			List<Integer> result = service.extractCountry(fragment)
 		then:
 			result.isEmpty()
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCountry() should try to search by country names'() {
+		given:
+			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
+			Set<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet,']
+		and:
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.extractCountry(fragment)
+		then:
+			1 * countryService.findIdsByNames({ Set<String> candidates ->
+				assert candidates == expectedCandidates
+				return true
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//
