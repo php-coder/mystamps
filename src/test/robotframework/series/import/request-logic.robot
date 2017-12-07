@@ -9,40 +9,46 @@ Force Tags       series  import-series  logic
 
 *** Test Cases ***
 Import series from an external site (in English, use category, country and date locators)
-	[Documentation]              Verify import from a page in English and with different locators
-	Input Text                   id=url  http://127.0.0.1:8080/series/2?lang=en
-	Submit Form                  id=import-series-form
-	${requestLocation}=          Get Location
-	Should Match Regexp          ${requestLocation}  /series/import/request/\\d+
-	${category}=                 Get Selected List Label  id=category
-	${country}=                  Get Selected List Label  id=country
+	[Documentation]                  Verify import from a page in English and with different locators
+	Input Text                       id=url  http://127.0.0.1:8080/series/2?lang=en
+	Submit Form                      id=import-series-form
+	${requestLocation}=              Get Location
+	Should Match Regexp              ${requestLocation}  /series/import/request/\\d+
+	${category}=                     Get Selected List Label  id=category
+	${country}=                      Get Selected List Label  id=country
 	# We can't use "Textfield Value Should Be" because it causes NPE on inputs of type url/number:
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
-	${quantity}=                 Get Value  id=quantity
-	${imageUrl}=                 Get Value  id=image-url
-	${year}=                     Get Selected List Label  id=year
-	Element Text Should Be       id=request-url     http://127.0.0.1:8080/series/2?lang=en
-	Element Text Should Be       id=request-status  ParsingSucceeded
-	Should Be Equal              ${category}        Prehistoric animals
-	Should Be Equal              ${country}         Italy
-	Should Be Empty              ${quantity}
-	Checkbox Should Be Selected  id=perforated
-	Should Be Equal              ${imageUrl}        http://127.0.0.1:8080/image/1
-	Should Be Equal              ${year}            2000
-	Input Text                   id=quantity  1
-	Submit Form                  id=create-series-form
-	${seriesLocation}=           Get Location
-	Should Match Regexp          ${seriesLocation}  /series/\\d+
-	Element Text Should Be       id=category_name  Prehistoric animals
-	Element Text Should Be       id=country_name   Italy
-	Element Text Should Be       id=issue_date     2000
-	Element Text Should Be       id=quantity       1
-	Element Text Should Be       id=perforated     Yes
-	Page Should Contain Image    id=series-image-1
-	Go To                        ${requestLocation}
-	Element Text Should Be       id=request-status  ImportSucceeded
-	Element Should Be Disabled   id=create-series-btn
-	Page Should Contain Link     link=${seriesLocation}
+	${quantity}=                     Get Value  id=quantity
+	${imageUrl}=                     Get Value  id=image-url
+	${year}=                         Get Selected List Label  id=year
+	Element Text Should Be           id=request-url     http://127.0.0.1:8080/series/2?lang=en
+	Element Text Should Be           id=request-status  ParsingSucceeded
+	Should Be Equal                  ${category}        Prehistoric animals
+	Should Be Equal                  ${country}         Italy
+	Should Be Empty                  ${quantity}
+	Checkbox Should Be Selected      id=perforated
+	Should Be Equal                  ${imageUrl}        http://127.0.0.1:8080/image/1
+	Should Be Equal                  ${year}            2000
+	Input Text                       id=quantity  1
+	Submit Form                      id=create-series-form
+	${seriesLocation}=               Get Location
+	Should Match Regexp              ${seriesLocation}  /series/\\d+
+	Element Text Should Be           id=category_name  Prehistoric animals
+	Element Text Should Be           id=country_name   Italy
+	Element Text Should Be           id=issue_date     2000
+	Element Text Should Be           id=quantity       1
+	Element Text Should Be           id=perforated     Yes
+	Page Should Contain Image        id=series-image-1
+	Go To                            ${requestLocation}
+	Element Text Should Be           id=request-status  ImportSucceeded
+	Element Should Be Disabled       id=category
+	Element Should Be Disabled       id=country
+	Page Should Not Contain Element  id=quantity
+	Page Should Not Contain Element  id=perforated
+	Element Should Be Disabled       id=image-url
+	Element Should Be Disabled       id=year
+	Page Should Not Contain Element  id=create-series-btn
+	Page Should Contain Link         link=${seriesLocation}
 
 Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator

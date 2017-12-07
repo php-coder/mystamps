@@ -91,12 +91,12 @@
 					</dl>
 				</div>
 					
-				<div class="col-sm-4 col-sm-offset-4" th:if="${showForm}">
+				<div class="col-sm-4 col-sm-offset-4" th:if="${showForm}" th:with="disabled=${request.seriesId != null}">
 					<h3 th:text="#{t_gathered_data}">
 						Gathered data
 					</h3>
 					
-					<div class="hint text-center">
+					<div class="hint text-center" th:unless="${disabled}">
 						<small th:with="redAsterisk='&lt;span class=&quot;required_field&quot;&gt;*&lt;/span&gt;'">
 							<span class="hint_item" th:utext="#{t_required_fields_legend(${redAsterisk})}">
 								All fields marked by asterisk (<span class="required_field">*</span>) must be filled.
@@ -119,10 +119,10 @@
 										<label for="category" class="control-label" th:text="#{t_category}">
 											Category
 										</label>
-										<span class="required_field">*</span>
+										<span class="required_field" th:unless="${disabled}">*</span>
 									</th>
 									<td>
-										<select id="category" name="category" class="form-control" required="required">
+										<select id="category" name="category" class="form-control" required="required" th:disabled="${disabled}">
 											<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 											<!--/*/
 											<th:block th:each="category : ${categories}">
@@ -164,7 +164,7 @@
 										</label>
 									</th>
 									<td>
-										<select id="country" name="country" class="form-control">
+										<select id="country" name="country" class="form-control" th:disabled="${disabled}">
 											<option value="" th:text="#{t_not_chosen}">Not chosen</option>
 											<!--/*/
 											<option th:each="country : ${countries}"
@@ -189,7 +189,7 @@
 									</td>
 								</tr>
 								
-								<tr th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
+								<tr th:unless="${disabled}" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
 									<th>
 										<label for="quantity" class="control-label" th:text="#{t_quantity}">
 											Quantity
@@ -215,7 +215,7 @@
 									</td>
 								</tr>
 								
-								<tr th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
+								<tr th:unless="${disabled}" th:classappend="${#fields.hasErrors('perforated') ? 'has-error' : ''}">
 									<th>
 										<label for="perforated" class="control-label" th:text="#{t_perforated}">
 											Perforated
@@ -241,7 +241,7 @@
 										<label for="image-url" class="control-label" th:text="#{t_image_url}">
 											Image URL
 										</label>
-										<span class="required_field">*</span>
+										<span class="required_field" th:unless="${disabled}">*</span>
 									</th>
 									<td>
 										<input id="image-url"
@@ -249,7 +249,8 @@
 											class="form-control"
 											required="required"
 											value="http://example.com/my-first-series.jpg"
-											th:field="*{imageUrl}" />
+											th:field="*{imageUrl}"
+											th:disabled="${disabled}" />
 										<!--/*/
 										<span id="image-url.errors"
 											class="help-block"
@@ -272,7 +273,7 @@
 										</label>
 									</th>
 									<td>
-										<select class="form-control" th:field="*{year}" id="year">
+										<select class="form-control" th:field="*{year}" id="year" th:disabled="${disabled}">
 											<option value="" th:text="#{t_year}">Year</option>
 											<!--/*/
 											<option th:each="year : ${years}" th:value="${year.key}" th:text="${year.value}"></option>
@@ -293,7 +294,7 @@
 									</td>
 								</tr>
 								
-								<tr>
+								<tr th:unless="${disabled}">
 									<td></td>
 									<td>
 										<input
@@ -301,8 +302,7 @@
 											type="submit"
 											class="btn btn-primary"
 											value="Import"
-											th:value="#{t_import}"
-											th:disabled="${request.seriesId != null}" />
+											th:value="#{t_import}" />
 									</td>
 								</tr>
 							</table>
