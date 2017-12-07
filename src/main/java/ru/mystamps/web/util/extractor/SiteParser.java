@@ -28,9 +28,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import lombok.AccessLevel;
 import lombok.Setter;
 
-@Setter
+@Setter(AccessLevel.PROTECTED)
 public class SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(SiteParser.class);
 	
