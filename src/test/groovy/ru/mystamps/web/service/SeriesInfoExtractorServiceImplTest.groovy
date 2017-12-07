@@ -75,6 +75,51 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCategory() should deduplicate candidates'() {
+		given:
+			String fragment = 'foo bar foo'
+			Set<String> expectedCandidates = [ 'foo', 'bar' ]
+		when:
+			service.extractCategory(fragment)
+		then:
+			1 * categoryService.findIdsByNames({ Set<String> candidates ->
+				assert candidates == expectedCandidates
+				return true
+			}) >> Random.listOfIntegers()
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCategory() should try to search category names with candidate as a prefix'() {
+		given:
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.extractCategory('foo1 foo2')
+		then:
+			// in order to search by prefix, we shouldn't find anything by name
+			1 * categoryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+		and:
+			// the first lookup will find nothing
+			1 * categoryService.findIdsWhenNameStartsWith('foo1') >> Collections.emptyList()
+		and:
+			// the second lookup will return a result
+			1 * categoryService.findIdsWhenNameStartsWith('foo2') >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCategory() should return an empty result when nothing has been found'() {
+		when:
+			List<Integer> result = service.extractCategory('foo')
+		then:
+			1 * categoryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+		and:
+			1 * categoryService.findIdsWhenNameStartsWith(_ as String) >> Collections.emptyList()
+		and:
+			result.isEmpty()
+	}
+	
 	//
 	// Tests for extractCountry()
 	//
@@ -104,6 +149,51 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			}) >> expectedResult
 		and:
 			result == expectedResult
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCountry() should deduplicate candidates'() {
+		given:
+			String fragment = 'foo bar foo'
+			Set<String> expectedCandidates = [ 'foo', 'bar' ]
+		when:
+			service.extractCountry(fragment)
+		then:
+			1 * countryService.findIdsByNames({ Set<String> candidates ->
+				assert candidates == expectedCandidates
+				return true
+			}) >> Random.listOfIntegers()
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCountry() should try to search country names with candidate as a prefix'() {
+		given:
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.extractCountry('bar1 bar2')
+		then:
+			// in order to search by prefix, we shouldn't find anything by name
+			1 * countryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+		and:
+			// the first lookup will find nothing
+			1 * countryService.findIdsWhenNameStartsWith('bar1') >> Collections.emptyList()
+		and:
+			// the second lookup will return a result
+			1 * countryService.findIdsWhenNameStartsWith('bar2') >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'extractCountry() should return an empty result when nothing has been found'() {
+		when:
+			List<Integer> result = service.extractCountry('foo')
+		then:
+			1 * countryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+		and:
+			1 * countryService.findIdsWhenNameStartsWith(_ as String) >> Collections.emptyList()
+		and:
+			result.isEmpty()
 	}
 	
 	//
