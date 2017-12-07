@@ -109,7 +109,8 @@ public class SiteParserTest {
 	@SuppressWarnings("checkstyle:magicnumber")
 	@Test
 	public void toStringShouldReturnName() {
-		// @todo #685 SiteParserTest: introduce a method for generating random string of arbitrary length
+		// @todo #685 SiteParserTest:
+		// introduce a method for generating random string of arbitrary length
 		String expectedName = nullOr(between(1, 15).unicode());
 		parser.setName(expectedName);
 		
