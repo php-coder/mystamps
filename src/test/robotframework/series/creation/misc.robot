@@ -32,6 +32,7 @@ Catalog numbers should be stripped from leading and trailing spaces
 
 Catalog numbers should ignore duplicate values
 	[Documentation]            Verify that fields with catalog numbers ignore duplicate values
+	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
