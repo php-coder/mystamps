@@ -110,7 +110,7 @@ public class SiteParserTest {
 	@Test
 	public void toStringShouldReturnName() {
 		// @todo #685 SiteParserTest:
-		// introduce a method for generating random string of arbitrary length
+		//  introduce a method for generating random string of arbitrary length
 		String expectedName = nullOr(between(1, 15).unicode());
 		parser.setName(expectedName);
 		
