@@ -51,10 +51,7 @@ public class SiteParserTest {
 		thrown.expect(IllegalStateException.class);
 		thrown.expectMessage("Field name must be non-blank");
 		
-		// @todo #685 SiteParserTest: introduce a method for generating random valid locator
-		String anyValidLocator = "#id";
-		
-		parser.setField(nullOrBlank(), anyValidLocator);
+		parser.setField(nullOrBlank(), Random.jsoupLocator());
 	}
 	
 	@Test

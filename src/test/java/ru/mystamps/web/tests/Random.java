@@ -18,6 +18,7 @@
 package ru.mystamps.web.tests;
 
 import java.time.Year;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -162,6 +163,11 @@ public final class Random {
 			TestObjects.createTransactionParticipantDto(),
 			TestObjects.createTransactionParticipantDto()
 		);
+	}
+	
+	public static String jsoupLocator() {
+		List<String> locators = Arrays.asList("#id", "a[href]", "img[src$=.png]", "div#logo");
+		return sample(locators);
 	}
 	
 }
