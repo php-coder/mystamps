@@ -72,6 +72,11 @@ public final class Random {
 		return sample("en", "de", "fr", "ru");
 	}
 	
+	public static String name() {
+		final long enoughLongLength = 15;
+		return between(1, enoughLongLength).english();
+	}
+	
 	public static String categoryName() {
 		return between(
 				ValidationRules.CATEGORY_NAME_MIN_LENGTH,
