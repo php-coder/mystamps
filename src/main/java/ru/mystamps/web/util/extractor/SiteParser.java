@@ -29,12 +29,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 
+// Getters/setters are being used in unit tests
+@Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
 public class SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(SiteParser.class);
 	
+	// When you're adding a new field don't forget to also update:
+	// - SiteParser.setField()
+	// - SiteParser.isFullyInitialized() (optionally)
+	// - SiteParserTest.describe()
 	private String name;
 	private String matchedUrl;
 	private String categoryLocator;

@@ -29,6 +29,7 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank;
 import static io.qala.datagen.RandomValue.between;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class SiteParserTest {
 	
@@ -63,6 +64,91 @@ public class SiteParserTest {
 		String anyValidFieldName = "name";
 		
 		parser.setField(anyValidFieldName, nullOrBlank());
+	}
+	
+	//
+	// Tests for isFullyInitialized()
+	//
+	
+	@Test
+	public void isFullyInitializedMayBeOnlyWhenNameIsSet() {
+		parser.setMatchedUrl(Random.url());
+		parser.setCategoryLocator(Random.jsoupLocator());
+		parser.setCountryLocator(Random.jsoupLocator());
+		parser.setShortDescriptionLocator(Random.jsoupLocator());
+		parser.setImageUrlLocator(Random.jsoupLocator());
+		parser.setImageUrlAttribute(Random.tagAttributeName());
+		parser.setIssueDateLocator(Random.jsoupLocator());
+		
+		// ensure that required field is null
+		parser.setName(null);
+
+		String msg = describe(parser) + " expected to be not fully initialized";
+		assertThat(msg, parser.isFullyInitialized(), is(false));
+	}
+	
+	@Test
+	public void isFullyInitializedMayBeOnlyWhenMatchedUrlIsSet() {
+		parser.setName(Random.name());
+		parser.setCategoryLocator(Random.jsoupLocator());
+		parser.setCountryLocator(Random.jsoupLocator());
+		parser.setShortDescriptionLocator(Random.jsoupLocator());
+		parser.setImageUrlLocator(Random.jsoupLocator());
+		parser.setImageUrlAttribute(Random.tagAttributeName());
+		parser.setIssueDateLocator(Random.jsoupLocator());
+
+		// ensure that required field is null
+		parser.setMatchedUrl(null);
+
+		String msg = describe(parser) + " expected to be not fully initialized";
+		assertThat(msg, parser.isFullyInitialized(), is(false));
+	}
+	
+	@Test
+	public void isFullyInitializedMayBeOnlyWhenOneOfLocatorIsSet() {
+		parser.setName(Random.name());
+		parser.setMatchedUrl(Random.url());
+		parser.setImageUrlAttribute(Random.tagAttributeName());
+
+		// ensure that required fields are null
+		parser.setCategoryLocator(null);
+		parser.setCountryLocator(null);
+		parser.setShortDescriptionLocator(null);
+		parser.setImageUrlLocator(null);
+		parser.setIssueDateLocator(null);
+		
+		String msg = describe(parser) + " expected to be not fully initialized";
+		assertThat(msg, parser.isFullyInitialized(), is(false));
+	}
+	
+	@Test
+	public void isFullyInitializedWhenAllMandatoryFieldsAreSet() {
+		parser.setName(Random.name());
+		parser.setMatchedUrl(Random.url());
+		
+		final int countOfFieldsWithLocator = 5;
+		String[] locators = new String[countOfFieldsWithLocator];
+		
+		for (int i = 0; i < locators.length; i++) {
+			int guaranteedSetPosition = between(0, locators.length - 1).integer();
+			if (i == guaranteedSetPosition) {
+				locators[i] = Random.jsoupLocator();
+			} else {
+				locators[i] = nullOr(Random.jsoupLocator());
+			}
+		}
+		
+		parser.setCategoryLocator(locators[0]);
+		parser.setCountryLocator(locators[1]);
+		parser.setShortDescriptionLocator(locators[2]);
+		// CheckStyle: ignore MagicNumber for next 2 lines
+		parser.setImageUrlLocator(locators[3]);
+		parser.setIssueDateLocator(locators[4]);
+		
+		parser.setImageUrlAttribute(nullOr(Random.tagAttributeName()));
+		
+		String msg = describe(parser) + " expected to be fully initialized";
+		assertThat(msg, parser.isFullyInitialized(), is(true));
 	}
 	
 	//
@@ -110,6 +196,28 @@ public class SiteParserTest {
 		parser.setName(expectedName);
 		
 		assertThat(parser.toString(), equalTo(expectedName));
+	}
+	
+	private static String describe(SiteParser parser) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SiteParser[name=")
+			.append(parser.getName())
+			.append(", matchedUrl=")
+			.append(parser.getMatchedUrl())
+			.append(", categoryLocator=")
+			.append(parser.getCountryLocator())
+			.append(", countryLocator=")
+			.append(parser.getCountryLocator())
+			.append(", shortDescriptionLocator=")
+			.append(parser.getShortDescriptionLocator())
+			.append(", imageUrlLocator=")
+			.append(parser.getImageUrlLocator())
+			.append(", imageUrlAttribute=")
+			.append(parser.getImageUrlAttribute())
+			.append(", issueDateLocator=")
+			.append(parser.getIssueDateLocator())
+			.append(']');
+		return sb.toString();
 	}
 	
 }
