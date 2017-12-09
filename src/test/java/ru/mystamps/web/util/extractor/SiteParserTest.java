@@ -66,6 +66,93 @@ public class SiteParserTest {
 		parser.setField(anyValidFieldName, nullOrBlank());
 	}
 	
+	@Test
+	public void setFieldShouldSupportSettingName() {
+		String expectedName = Random.name();
+		
+		boolean valid = parser.setField("name", expectedName);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getName(), equalTo(expectedName));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingMatchedUrl() {
+		String expectedUrl = Random.url();
+		
+		boolean valid = parser.setField("matched-url", expectedUrl);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getMatchedUrl(), equalTo(expectedUrl));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingCategoryLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("category-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getCategoryLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingCountryLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("country-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getCountryLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingShortDescriptionLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("short-description-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getShortDescriptionLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingImageUrlLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("image-url-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getImageUrlLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingImageUrlAttribute() {
+		String expectedAttributeName = Random.tagAttributeName();
+		
+		boolean valid = parser.setField("image-url-attribute", expectedAttributeName);
+		
+		assertThat(valid, is(false));
+		assertThat(parser.getImageUrlAttribute(), equalTo(expectedAttributeName));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingIssueDateLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("issue-date-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getIssueDateLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldIgnoreUnknownField() {
+		boolean valid = parser.setField("unsupported-locator", Random.jsoupLocator());
+		
+		assertThat(valid, is(false));
+	}
+	
 	//
 	// Tests for isFullyInitialized()
 	//
