@@ -202,7 +202,7 @@ public class CountryServiceImpl implements CountryService {
 		// if user created a series with a country, let's suggest this country to him
 		String slug = countryDao.findCountryOfLastCreatedSeriesByUser(userId);
 		if (slug != null) {
-			log.info(
+			log.debug(
 				"Country {} has been suggested to user #{} from a recently created series",
 				slug,
 				userId
@@ -213,7 +213,7 @@ public class CountryServiceImpl implements CountryService {
 		// if user created a country, let's suggest this country to him
 		slug = countryDao.findLastCountryCreatedByUser(userId);
 		if (slug != null) {
-			log.info(
+			log.debug(
 				"Country {} has been suggested to user #{} as it was created by him recently",
 				slug,
 				userId
@@ -225,7 +225,7 @@ public class CountryServiceImpl implements CountryService {
 		// belong to a specific country, let's suggest this country to him
 		slug = countryDao.findPopularCountryInCollection(userId);
 		if (slug != null) {
-			log.info(
+			log.debug(
 				"Country {} has been suggested to user #{} as popular in his collection",
 				slug,
 				userId
