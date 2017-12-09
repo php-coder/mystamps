@@ -399,6 +399,60 @@ public class SiteParserTest {
 		assertThat(msg, country, equalTo(expectedName));
 	}
 	
+	//
+	// Tests for extractIssueDate()
+	//
+	
+	@Test
+	public void extractIssueDateShouldReturnNullWhenLocatorsAreNotSet() {
+		parser.setIssueDateLocator(null);
+		parser.setShortDescriptionLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String date = parser.extractIssueDate(doc);
+		
+		assertThat(date, is(nullValue()));
+	}
+	
+	@Test
+	public void extractIssueDateShouldReturnNullWhenElementNotFound() {
+		parser.setIssueDateLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String date = parser.extractIssueDate(doc);
+		
+		assertThat(date, is(nullValue()));
+	}
+	
+	@Test
+	public void extractIssueDateShouldReturnTextOfIssueDateLocator() {
+		parser.setIssueDateLocator("#issue-date");
+		
+		String expectedDate = Random.issueYear().toString();
+		String html = String.format("<div id='issue-date'>%s</div>", expectedDate);
+		Element doc = createDocumentFromText(html);
+		
+		String date = parser.extractIssueDate(doc);
+		
+		String msg = String.format("couldn't extract issue date from '%s'", doc);
+		assertThat(msg, date, equalTo(expectedDate));
+	}
+	
+	@Test
+	public void extractIssueDateShouldReturnTextOfShortDescriptionLocator() {
+		parser.setIssueDateLocator(null);
+		parser.setShortDescriptionLocator("#desc");
+		
+		String expectedDate = Random.issueYear().toString();
+		String html = String.format("<div id='desc'>%s</div>", expectedDate);
+		Element doc = createDocumentFromText(html);
+		
+		String date = parser.extractIssueDate(doc);
+		
+		String msg = String.format("couldn't extract issue date from '%s'", doc);
+		assertThat(msg, date, equalTo(expectedDate));
+	}
+	
 	private static String describe(SiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SiteParser[name=")

@@ -199,7 +199,7 @@ public class SiteParser {
 		return StringUtils.trimToNull(url);
 	}
 	
-	private String extractIssueDate(Element body) {
+	protected String extractIssueDate(Element body) {
 		String locator = ObjectUtils.firstNonNull(issueDateLocator, shortDescriptionLocator);
 		if (locator == null) {
 			return null;
