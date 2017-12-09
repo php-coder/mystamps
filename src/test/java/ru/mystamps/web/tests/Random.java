@@ -23,6 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import io.qala.datagen.RandomShortApi;
 
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
@@ -79,21 +81,35 @@ public final class Random {
 	}
 	
 	public static String categoryName() {
-		return between(
+		String name = between(
 				ValidationRules.CATEGORY_NAME_MIN_LENGTH,
 				ValidationRules.CATEGORY_NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();
+		
+		if (StringUtils.startsWithAny(name, " ", "-")
+			|| StringUtils.endsWithAny(name, " ", "-")) {
+			return countryName();
+		}
+		
+		return name;
 	}
 	
 	public static String countryName() {
-		return between(
+		String name = between(
 				ValidationRules.COUNTRY_NAME_MIN_LENGTH,
 				ValidationRules.COUNTRY_NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();
+		
+		if (StringUtils.startsWithAny(name, " ", "-")
+			|| StringUtils.endsWithAny(name, " ", "-")) {
+			return countryName();
+		}
+		
+		return name;
 	}
 	
 	public static String participantName() {
