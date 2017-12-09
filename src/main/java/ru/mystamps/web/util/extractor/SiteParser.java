@@ -151,7 +151,7 @@ public class SiteParser {
 		return name;
 	}
 	
-	private String extractCategory(Element body) {
+	protected String extractCategory(Element body) {
 		String locator = ObjectUtils.firstNonNull(categoryLocator, shortDescriptionLocator);
 		if (locator == null) {
 			return null;

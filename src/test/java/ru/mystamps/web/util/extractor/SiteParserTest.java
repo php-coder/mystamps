@@ -17,6 +17,10 @@
  */
 package ru.mystamps.web.util.extractor;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,9 +31,11 @@ import ru.mystamps.web.tests.Random;
 import static io.qala.datagen.RandomShortApi.nullOr;
 import static io.qala.datagen.RandomShortApi.nullOrBlank;
 import static io.qala.datagen.RandomValue.between;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 public class SiteParserTest {
 	
@@ -285,6 +291,60 @@ public class SiteParserTest {
 		assertThat(parser.toString(), equalTo(expectedName));
 	}
 	
+	//
+	// Tests for extractCategory()
+	//
+	
+	@Test
+	public void extractCategoryShouldReturnNullWhenLocatorsAreNotSet() {
+		parser.setCategoryLocator(null);
+		parser.setShortDescriptionLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String category = parser.extractCategory(doc);
+		
+		assertThat(category, is(nullValue()));
+	}
+	
+	@Test
+	public void extractCategoryShouldReturnNullWhenElementNotFound() {
+		parser.setCategoryLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String category = parser.extractCategory(doc);
+		
+		assertThat(category, is(nullValue()));
+	}
+	
+	@Test
+	public void extractCategoryShouldReturnTextOfCategoryLocator() {
+		parser.setCategoryLocator("#category");
+		
+		String expectedName = Random.categoryName();
+		String html = String.format("<div id='category'>%s</div>", expectedName);
+		Element doc = createDocumentFromText(html);
+		
+		String category = parser.extractCategory(doc);
+		
+		String msg = String.format("couldn't extract a category from '%s'", doc);
+		assertThat(msg, category, equalTo(expectedName));
+	}
+	
+	@Test
+	public void extractCategoryShouldReturnTextOfShortDescriptionLocator() {
+		parser.setCategoryLocator(null);
+		parser.setShortDescriptionLocator("#desc");
+		
+		String expectedName = Random.categoryName();
+		String html = String.format("<div id='desc'>%s</div>", expectedName);
+		Element doc = createDocumentFromText(html);
+		
+		String category = parser.extractCategory(doc);
+		
+		String msg = String.format("couldn't extract a category from '%s'", doc);
+		assertThat(msg, category, equalTo(expectedName));
+	}
+	
 	private static String describe(SiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SiteParser[name=")
@@ -305,6 +365,15 @@ public class SiteParserTest {
 			.append(parser.getIssueDateLocator())
 			.append(']');
 		return sb.toString();
+	}
+	
+	private static Element createDocumentFromText(String html) {
+		Document doc = Jsoup.parseBodyFragment(html);
+		return doc.body();
+	}
+	
+	private static Element createEmptyDocument() {
+		return createDocumentFromText("");
 	}
 	
 }
