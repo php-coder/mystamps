@@ -167,7 +167,7 @@ public class SiteParser {
 		return category;
 	}
 	
-	private String extractCountry(Element body) {
+	protected String extractCountry(Element body) {
 		String locator = ObjectUtils.firstNonNull(countryLocator, shortDescriptionLocator);
 		if (locator == null) {
 			return null;

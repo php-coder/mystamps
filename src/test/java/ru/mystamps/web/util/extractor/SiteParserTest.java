@@ -345,6 +345,60 @@ public class SiteParserTest {
 		assertThat(msg, category, equalTo(expectedName));
 	}
 	
+	//
+	// Tests for extractCountry()
+	//
+	
+	@Test
+	public void extractCountryShouldReturnNullWhenLocatorsAreNotSet() {
+		parser.setCountryLocator(null);
+		parser.setShortDescriptionLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String country = parser.extractCountry(doc);
+		
+		assertThat(country, is(nullValue()));
+	}
+	
+	@Test
+	public void extractCountryShouldReturnNullWhenElementNotFound() {
+		parser.setCountryLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String country = parser.extractCountry(doc);
+		
+		assertThat(country, is(nullValue()));
+	}
+	
+	@Test
+	public void extractCountryShouldReturnTextOfCountryLocator() {
+		parser.setCountryLocator("#country");
+		
+		String expectedName = Random.countryName();
+		String html = String.format("<div id='country'>%s</div>", expectedName);
+		Element doc = createDocumentFromText(html);
+		
+		String country = parser.extractCountry(doc);
+		
+		String msg = String.format("couldn't extract a country from '%s'", doc);
+		assertThat(msg, country, equalTo(expectedName));
+	}
+	
+	@Test
+	public void extractCountryShouldReturnTextOfShortDescriptionLocator() {
+		parser.setCountryLocator(null);
+		parser.setShortDescriptionLocator("#desc");
+		
+		String expectedName = Random.countryName();
+		String html = String.format("<div id='desc'>%s</div>", expectedName);
+		Element doc = createDocumentFromText(html);
+		
+		String country = parser.extractCountry(doc);
+		
+		String msg = String.format("couldn't extract a country from '%s'", doc);
+		assertThat(msg, country, equalTo(expectedName));
+	}
+	
 	private static String describe(SiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SiteParser[name=")
