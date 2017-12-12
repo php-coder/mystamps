@@ -17,14 +17,18 @@
  */
 package ru.mystamps.web.util.extractor;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Representation of a series info.
  */
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 public class SeriesInfo {
 	private String categoryName;
 	private String countryName;

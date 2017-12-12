@@ -292,6 +292,101 @@ public class SiteParserTest {
 		parser.parse(nullOrBlank());
 	}
 	
+	@Test
+	public void parseShouldExtractSeriesInfo() {
+		String baseUri = "http://base.uri";
+		String expectedCategory = Random.categoryName();
+		String expectedCountry = Random.countryName();
+		String expectedIssueDate = Random.issueYear().toString();
+		String imageUrl = String.format(
+			"/%s-%s-%s.png",
+			expectedCountry.toLowerCase(),
+			expectedCategory.toLowerCase(),
+			expectedIssueDate
+		);
+		String expectedImageUrl = baseUri + imageUrl;
+		
+		parser.setMatchedUrl(baseUri);
+		parser.setCategoryLocator("#category-name");
+		parser.setCountryLocator("#country-name");
+		parser.setIssueDateLocator("#issue-date");
+		parser.setImageUrlLocator("#image-url");
+		
+		SeriesInfo expectedInfo = new SeriesInfo();
+		expectedInfo.setCategoryName(expectedCategory);
+		expectedInfo.setCountryName(expectedCountry);
+		expectedInfo.setIssueDate(expectedIssueDate);
+		expectedInfo.setImageUrl(expectedImageUrl);
+		
+		String html = String.format(
+			"<html>"
+				+ "<body>"
+					+ "<p id='category-name'>%s</p>"
+					+ "<p id='country-name'>%s</p>"
+					+ "<p id='issue-date'>%s</p>"
+					+ "<a id='image-url' href='%s'>look at image</a>"
+				+ "</body>"
+			+ "</html",
+			expectedCategory,
+			expectedCountry,
+			expectedIssueDate,
+			imageUrl
+		);
+		
+		SeriesInfo info = parser.parse(html);
+		
+		assertThat(info, is(equalTo(expectedInfo)));
+	}
+	@Test
+	public void parseShouldExtractSeriesInfoFromFirstMatchedElements() {
+		String baseUri = "http://base.uri";
+		String expectedCategory = Random.categoryName();
+		String expectedCountry = Random.countryName();
+		String expectedIssueDate = Random.issueYear().toString();
+		String imageUrl = String.format(
+			"/%s-%s-%s.png",
+			expectedCountry.toLowerCase(),
+			expectedCategory.toLowerCase(),
+			expectedIssueDate
+		);
+		String expectedImageUrl = baseUri + imageUrl;
+		
+		parser.setMatchedUrl(baseUri);
+		parser.setCategoryLocator("h1");
+		parser.setCountryLocator("p");
+		parser.setIssueDateLocator("span");
+		parser.setImageUrlLocator("a");
+		
+		SeriesInfo expectedInfo = new SeriesInfo();
+		expectedInfo.setCategoryName(expectedCategory);
+		expectedInfo.setCountryName(expectedCountry);
+		expectedInfo.setIssueDate(expectedIssueDate);
+		expectedInfo.setImageUrl(expectedImageUrl);
+		
+		String html = String.format(
+			"<html>"
+				+ "<body>"
+					+ "<h1>%s</h1>"
+					+ "<p>%s</p>"
+					+ "<span>%s</span>"
+					+ "<a href='%s'>look at image</a>"
+					+ "<h1>ignored</h1>"
+					+ "<p>ignored</p>"
+					+ "<span>ignored</span>"
+					+ "<a href='none'>look at image</a>"
+				+ "</body>"
+			+ "</html",
+			expectedCategory,
+			expectedCountry,
+			expectedIssueDate,
+			expectedImageUrl
+		);
+		
+		SeriesInfo info = parser.parse(html);
+		
+		assertThat(info, is(equalTo(expectedInfo)));
+	}
+	
 	//
 	// Tests for toString()
 	//
