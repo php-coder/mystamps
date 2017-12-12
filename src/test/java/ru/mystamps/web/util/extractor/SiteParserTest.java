@@ -414,6 +414,80 @@ public class SiteParserTest {
 	}
 	
 	//
+	// Tests for extractImageUrl()
+	//
+	
+	@Test
+	public void extractImageUrlShouldReturnNullWhenLocatorIsNotSet() {
+		parser.setImageUrlLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String imageUrl = parser.extractImageUrl(doc);
+		
+		assertThat(imageUrl, is(nullValue()));
+	}
+	
+	@Test
+	public void extractImageUrlShouldReturnNullWhenElementNotFound() {
+		parser.setImageUrlLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String imageUrl = parser.extractImageUrl(doc);
+		
+		assertThat(imageUrl, is(nullValue()));
+	}
+	
+	@Test
+	public void extractImageUrlShouldReturnValueOfImageUrlAttribute() {
+		parser.setImageUrlLocator("a");
+		parser.setImageUrlAttribute("data-full-path");
+		
+		String expectedImageUrl = Random.url();
+		String html = String.format(
+			"<a href='%s' data-full-path='%s'>test</a>",
+			Random.url(),
+			expectedImageUrl
+		);
+		Element doc = createDocumentFromText(html);
+		
+		String imageUrl = parser.extractImageUrl(doc);
+		
+		String msg = String.format("couldn't extract image url from '%s'", doc);
+		assertThat(msg, imageUrl, equalTo(expectedImageUrl));
+	}
+	
+	@Test
+	public void extractImageUrlShouldReturnValueOfHrefAttributeByDefault() {
+		parser.setImageUrlLocator("a");
+		parser.setImageUrlAttribute(null);
+		
+		String expectedImageUrl = Random.url();
+		String html = String.format(
+			"<a href='%s' data-full-path='%s'>test</a>",
+			expectedImageUrl,
+			Random.url()
+		);
+		Element doc = createDocumentFromText(html);
+		
+		String imageUrl = parser.extractImageUrl(doc);
+		
+		String msg = String.format("couldn't extract image url from '%s'", doc);
+		assertThat(msg, imageUrl, equalTo(expectedImageUrl));
+	}
+	
+	@Test
+	public void extractImageUrlShouldReturnNullInsteadOfEmptyString() {
+		parser.setImageUrlLocator("a");
+		
+		String html = "<a href=''>test</a>";
+		Element doc = createDocumentFromText(html);
+		
+		String imageUrl = parser.extractImageUrl(doc);
+		
+		assertThat(imageUrl, is(nullValue()));
+	}
+	
+	//
 	// Tests for extractIssueDate()
 	//
 	

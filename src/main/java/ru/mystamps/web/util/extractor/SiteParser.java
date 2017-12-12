@@ -183,7 +183,7 @@ public class SiteParser {
 		return country;
 	}
 	
-	private String extractImageUrl(Element body) {
+	protected String extractImageUrl(Element body) {
 		if (imageUrlLocator == null) {
 			return null;
 		}
