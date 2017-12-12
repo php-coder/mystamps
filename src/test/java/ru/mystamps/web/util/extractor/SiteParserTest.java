@@ -266,6 +266,20 @@ public class SiteParserTest {
 		parser.canParse(Random.url());
 	}
 	
+	@Test
+	public void canParseWithUnsupportedUrl() {
+		parser.setMatchedUrl("http://example.org");
+		
+		assertThat(parser.canParse("http://example.com/test/fail"), is(false));
+	}
+	
+	@Test
+	public void canParseWithSupportedUrl() {
+		parser.setMatchedUrl("http://example.org");
+		
+		assertThat(parser.canParse("http://example.org/test/success"), is(true));
+	}
+	
 	//
 	// Tests for parse()
 	//
