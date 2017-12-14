@@ -88,14 +88,12 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		Date now = new Date();
 		
-		// @todo #700 Reduce number of SQL queries by one.
-		//  Here we're updating series_import_requests twice: when we set series_id field
-		//  and later when we change status_id. It's possible to do this in one-shot
-		seriesImportDao.setSeriesIdOnRequest(requestId, seriesId, now);
-		changeStatus(
+		seriesImportDao.setSeriesIdAndChangeStatus(
 			requestId,
+			seriesId,
 			SeriesImportRequestStatus.PARSING_SUCCEEDED,
-			SeriesImportRequestStatus.IMPORT_SUCCEEDED
+			SeriesImportRequestStatus.IMPORT_SUCCEEDED,
+			now
 		);
 		
 		return seriesId;

@@ -49,8 +49,8 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	@Value("${series_import_requests.create}")
 	private String createSeriesImportRequestSql;
 	
-	@Value("${series_import_requests.set_series_id}")
-	private String setSeriesIdSql;
+	@Value("${series_import_requests.set_series_id_and_change_status}")
+	private String setSeriesIdAndChangeStatusSql;
 	
 	@Value("${series_import_requests.change_status}")
 	private String changeStatusSql;
@@ -96,14 +96,23 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		return Integer.valueOf(holder.getKey().intValue());
 	}
 	
+	// @todo #735 SeriesImportDao.setSeriesIdAndChangeStatus(): replace arguments by dto object
 	@Override
-	public void setSeriesIdOnRequest(Integer requestId, Integer seriesId, Date updatedAt) {
+	public void setSeriesIdAndChangeStatus(
+		Integer requestId,
+		Integer seriesId,
+		String oldStatus,
+		String newStatus,
+		Date updatedAt) {
+		
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", requestId);
 		params.put("series_id", seriesId);
+		params.put("old_status", oldStatus);
+		params.put("new_status", newStatus);
 		params.put("date", updatedAt);
 		
-		int affected = jdbcTemplate.update(setSeriesIdSql, params);
+		int affected = jdbcTemplate.update(setSeriesIdAndChangeStatusSql, params);
 		
 		Validate.validState(
 			affected == 1,
