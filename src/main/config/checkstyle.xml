@@ -262,7 +262,7 @@
                 <property name="severity" value="info"/>
             </module>
             <module name="TodoComment">
-                <property name="format" value="@todo"/>
+                <property name="format" value="&#x40;todo"/>
                 <property name="severity" value="info"/>
             </module>
         -->
