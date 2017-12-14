@@ -34,6 +34,7 @@ import ru.mystamps.web.dao.dto.ImportRequestDto
 import ru.mystamps.web.dao.dto.ParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
+import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
@@ -97,6 +98,46 @@ class SeriesImportServiceImplTest extends Specification {
 			}) >> expectedResult
 		and:
 			result == expectedResult
+	}
+	
+	//
+	// Tests for addSeries()
+	//
+	
+	def 'addSeries() should create series and return its id'() {
+		given:
+			AddSeriesDto expectedDto = TestObjects.createAddSeriesDto()
+			Integer expectedUserId = Random.userId()
+			Integer expectedRequestId = Random.id()
+			Integer expectedSeriesId = Random.id()
+		when:
+			Integer seriesId = service.addSeries(expectedDto, expectedRequestId, expectedUserId)
+		then:
+			1 * seriesService.add(expectedDto, expectedUserId, false) >> expectedSeriesId
+		and:
+			seriesId == expectedSeriesId
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'addSeries() should update request and set status'() {
+		given:
+			Integer expectedRequestId = Random.id()
+			Integer expectedSeriesId = Random.id()
+		and:
+			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
+		when:
+			service.addSeries(TestObjects.createAddSeriesDto(), expectedRequestId, Random.userId())
+		then:
+			1 * seriesImportDao.setSeriesIdAndChangeStatus(
+				expectedRequestId,
+				expectedSeriesId,
+				SeriesImportRequestStatus.PARSING_SUCCEEDED,
+				SeriesImportRequestStatus.IMPORT_SUCCEEDED,
+				{ Date updatedAt ->
+					assert DateUtils.roughlyEqual(updatedAt, new Date())
+					return true
+				}
+			)
 	}
 	
 	//

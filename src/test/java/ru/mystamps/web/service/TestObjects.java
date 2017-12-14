@@ -21,8 +21,10 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.dao.dto.*;
+import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -214,6 +216,11 @@ public final class TestObjects {
 		// @todo #702 TestObjects: introduce name generator for transaction participant groups
 		String parentName = Random.categoryName();
 		return new TransactionParticipantDto(Random.id(), name, parentName);
+	}
+	
+	public static AddSeriesDto createAddSeriesDto() {
+		// @todo #734 TestObjects.createAddSeriesDto(): return randomized values
+		return new AddSeriesForm();
 	}
 	
 }

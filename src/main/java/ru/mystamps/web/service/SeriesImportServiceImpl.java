@@ -79,7 +79,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		return id;
 	}
 	
-	// @todo #700 SeriesImportServiceImpl.addSeries(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
