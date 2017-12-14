@@ -6,3 +6,4 @@ tags:
   - techdebt
 format:
   - short-title
+  - title-length=100
