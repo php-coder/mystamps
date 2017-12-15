@@ -170,10 +170,10 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
-		# FIXME: add check for src/main/config/nginx/503.*html
 		# TODO: remove ignoring of error about alt attribute after resolving #314
 		# TODO: remove ignoring of error about document language when it will be resolved in upstream
 		# TODO: remove ignoring of error about Picked up _JAVA_OPTIONS when it will be resolved in upstream
+		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
 		html5validator \
 			--root src/main/webapp/WEB-INF/views \
 			--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
