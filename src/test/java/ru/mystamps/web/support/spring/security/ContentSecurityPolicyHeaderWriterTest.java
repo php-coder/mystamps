@@ -343,8 +343,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 				"style-src "
 					+ "https://cdn.rawgit.com "
 					+ "'self' "
-					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=' "
-					+ "'sha256-zQDRfdePzsm4666fPPtpna61v74bryIt2Xu5qx2rn4A='"
+					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
 			)
 		);
 		
@@ -366,8 +365,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ "https://cdn.rawgit.com "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
-					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog=' "
-					+ "'sha256-zQDRfdePzsm4666fPPtpna61v74bryIt2Xu5qx2rn4A='"
+					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
 			)
 		);
 		

@@ -89,10 +89,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		" https://www.gstatic.com 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='";
 	
 	// - 'sha256-biL...' is required for 'display: none;' inline CSS for Togglz
-	// - 'sha256-zQD...' is required for 'width: 100%; text-align: center;' inline CSS for Togglz
 	private static final String STYLE_TOGGLZ =
-		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
-		+ " 'sha256-zQDRfdePzsm4666fPPtpna61v74bryIt2Xu5qx2rn4A='";
+		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='";
 	
 	// - 'sha256-biL...' is required for 'display: none;' inline CSS
 	// - 'sha256-ZdH...' is required for 'display: none' inline CSS
