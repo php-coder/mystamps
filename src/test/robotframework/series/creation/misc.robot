@@ -19,6 +19,7 @@ Catalog numbers should accept valid values
 
 Catalog numbers should be stripped from leading and trailing spaces
 	[Documentation]            Verify removing of leading and trailing spaces from catalog numbers
+	[Tags]                     unstable
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers   ${SPACE * 2}1 , 2${SPACE * 2}
 	Input Text                 id=scottNumbers    ${SPACE * 2}3 , 4${SPACE * 2}
