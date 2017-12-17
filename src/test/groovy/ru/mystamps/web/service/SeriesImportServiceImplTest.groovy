@@ -29,12 +29,15 @@ import org.slf4j.helpers.NOPLogger
 import org.springframework.context.ApplicationEventPublisher
 
 import ru.mystamps.web.controller.dto.RequestImportForm
+import ru.mystamps.web.controller.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
 import ru.mystamps.web.dao.dto.ParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
+import ru.mystamps.web.dao.dto.SaveParsedDataDbDto
 import ru.mystamps.web.service.dto.AddSeriesDto
+import ru.mystamps.web.service.dto.RawParsedDataDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
@@ -325,6 +328,135 @@ class SeriesImportServiceImplTest extends Specification {
 			}) >> expectedResult
 		and:
 			result == expectedResult
+	}
+	
+	//
+	// Tests for saveParsedData()
+	//
+	
+	def 'saveParsedData() should throw exception when request id is null'() {
+		when:
+			service.saveParsedData(null, TestObjects.createRawParsedDataDto())
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'saveParsedData() should throw exception when parsed data is null'() {
+		when:
+			service.saveParsedData(Random.id(), null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'saveParsedData() should publish ParsingFailed event when couldn\'t associate extracted data'() {
+		given:
+			Integer expectedRequestId = Random.id()
+		and:
+			RawParsedDataDto parsedData = new RawParsedDataDto(
+				Random.categoryName(),
+				Random.countryName(),
+				null, /* imageUrl */
+				Random.issueYear().toString()
+			)
+		and:
+			extractorService.extractCategory(_ as String) >> Collections.emptyList()
+			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+		when:
+			service.saveParsedData(expectedRequestId, parsedData)
+		then:
+			1 * eventPublisher.publishEvent({ ParsingFailed event ->
+				assert event.requestId == expectedRequestId
+				return true
+			})
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'saveParsedData() should save parsed data'() {
+		given:
+			Integer expectedRequestId = Random.id()
+			String expectedImageUrl = Random.url()
+		and:
+			RawParsedDataDto parsedData = new RawParsedDataDto(
+				Random.categoryName(),
+				Random.countryName(),
+				expectedImageUrl,
+				Random.issueYear().toString()
+			)
+		and:
+			extractorService.extractCategory(_ as String) >> Collections.emptyList()
+			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+		when:
+			service.saveParsedData(expectedRequestId, parsedData)
+		then:
+			1 * seriesImportDao.addParsedContent(
+				expectedRequestId,
+				{ SaveParsedDataDbDto saveParsedData ->
+					assert saveParsedData?.imageUrl == expectedImageUrl
+					assert DateUtils.roughlyEqual(saveParsedData?.createdAt, new Date())
+					assert DateUtils.roughlyEqual(saveParsedData?.updatedAt, new Date())
+					return true
+				}
+			)
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'saveParsedData() should pass data to extractor services and save its results'() {
+		given:
+			Integer expectedRequestId = Random.id()
+			String expectedCategoryName = Random.categoryName()
+			String expectedCountryName = Random.countryName()
+			Integer expectedReleaseYear = Random.issueYear()
+			List<Integer> expectedCategoryIds = Random.listOfIntegers()
+			List<Integer> expectedCountryIds = Random.listOfIntegers()
+			Integer expectedCategoryId = expectedCategoryIds.get(0)
+			Integer expectedCountryId = expectedCountryIds.get(0)
+		and:
+			RawParsedDataDto parsedData = new RawParsedDataDto(
+				expectedCategoryName,
+				expectedCountryName,
+				Random.url(),
+				expectedReleaseYear.toString()
+			)
+		when:
+			service.saveParsedData(expectedRequestId, parsedData)
+		then:
+			1 * extractorService.extractCategory(expectedCategoryName) >> expectedCategoryIds
+		and:
+			1 * extractorService.extractCountry(expectedCountryName) >> expectedCountryIds
+		and:
+			1 * extractorService.extractReleaseYear(expectedReleaseYear.toString()) >> expectedReleaseYear
+		and:
+			1 * seriesImportDao.addParsedContent(
+				expectedRequestId,
+				{ SaveParsedDataDbDto saveParsedData ->
+					assert saveParsedData?.categoryId  == expectedCategoryId
+					assert saveParsedData?.countryId   == expectedCountryId
+					assert saveParsedData?.releaseYear == expectedReleaseYear
+					return true
+				}
+			)
+	}
+	
+	@SuppressWarnings('UnnecessaryReturnKeyword')
+	def 'saveParsedData() should change request status'() {
+		given:
+			Integer expectedRequestId = Random.id()
+		and:
+			extractorService.extractCategory(_ as String) >> Collections.emptyList()
+			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+		when:
+			service.saveParsedData(expectedRequestId, TestObjects.createRawParsedDataDto())
+		then:
+			1 * seriesImportDao.changeStatus(
+				expectedRequestId,
+				{ Date date ->
+					assert DateUtils.roughlyEqual(date, new Date())
+					return true
+				},
+				SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
+				SeriesImportRequestStatus.PARSING_SUCCEEDED
+			)
 	}
 	
 	//

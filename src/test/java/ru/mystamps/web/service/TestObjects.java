@@ -25,6 +25,7 @@ import java.util.Date;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -200,6 +201,15 @@ public final class TestObjects {
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),
 			Random.issueYear()
+		);
+	}
+	
+	public static RawParsedDataDto createRawParsedDataDto() {
+		return new RawParsedDataDto(
+			Random.categoryName(),
+			Random.countryName(),
+			Random.url(),
+			Random.issueYear().toString()
 		);
 	}
 	
