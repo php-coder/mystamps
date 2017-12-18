@@ -202,7 +202,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		return seriesImportDao.findParsedDataByRequestId(requestId, lang);
 	}
 	
-	// @todo #749 SeriesImportServiceImpl.findRequestInfo(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)

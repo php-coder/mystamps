@@ -233,4 +233,8 @@ public final class TestObjects {
 		return new AddSeriesForm();
 	}
 	
+	public static ImportRequestInfo createImportRequestInfo() {
+		return new ImportRequestInfo(Random.id(), Random.url());
+	}
+	
 }

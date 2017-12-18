@@ -34,6 +34,7 @@ import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
 import ru.mystamps.web.dao.dto.ParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
+import ru.mystamps.web.dao.dto.ImportRequestInfo
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto
 import ru.mystamps.web.service.dto.AddSeriesDto
@@ -487,6 +488,31 @@ class SeriesImportServiceImplTest extends Specification {
 				assert lang == expectedLang
 				return true
 			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findRequestInfo()
+	//
+	
+	def 'findRequestInfo() should throw exception when series id is null'() {
+		when:
+			service.findRequestInfo(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'findRequestInfo() should invoke dao and return its result'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+		and:
+			ImportRequestInfo expectedResult = TestObjects.createImportRequestInfo()
+		when:
+			ImportRequestInfo result = service.findRequestInfo(expectedSeriesId)
+		then:
+			1 * seriesImportDao.findRequestInfo(expectedSeriesId) >> expectedResult
 		and:
 			result == expectedResult
 	}
