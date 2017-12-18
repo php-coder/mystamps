@@ -106,6 +106,7 @@ public class ControllersConfig {
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
+			servicesConfig.getSeriesImportService(),
 			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getTransactionParticipantService()
 		);

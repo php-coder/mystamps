@@ -277,6 +277,15 @@
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
+								<!--/*/ <th:block th:if="${importInfo != null}"> /*/-->
+									<dt th:text="#{t_imported_from}">
+										Imported from
+									</dt>
+									<dd id="import-info">
+										<a href="./import/info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${importInfo.requestId})}" th:text="${importInfo.url}">http://example.com/my-first-series.html</a>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
 								<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
 									<dt th:text="#{t_comment}">
 										Comment

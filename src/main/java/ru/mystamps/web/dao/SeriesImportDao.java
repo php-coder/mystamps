@@ -20,6 +20,7 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
@@ -39,4 +40,5 @@ public interface SeriesImportDao {
 	String findRawContentByRequestId(Integer requestId);
 	void addParsedContent(Integer requestId, SaveParsedDataDbDto data);
 	ParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
+	ImportRequestInfo findRequestInfo(Integer seriesId);
 }

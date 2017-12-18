@@ -35,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
@@ -69,6 +70,9 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	
 	@Value("${series_import_requests.find_parsed_data_by_request_id}")
 	private String findParsedDataSql;
+	
+	@Value("${series_import_requests.find_request_info_by_series_id}")
+	private String findRequestInfoSql;
 	
 	@Override
 	public Integer add(ImportSeriesDbDto importRequest) {
@@ -232,6 +236,20 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 				RowMappers::forParsedDataDto
 			);
 			
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
+	}
+	
+	@Override
+	public ImportRequestInfo findRequestInfo(Integer seriesId) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findRequestInfoSql,
+				Collections.singletonMap("series_id", seriesId),
+				RowMappers::forImportRequestInfo
+			);
+
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}

@@ -280,6 +280,10 @@ final class RowMappers {
 		return new ParsedDataDto(category, country, imageUrl, releaseYear);
 	}
 	
+	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int i) throws SQLException {
+		return new ImportRequestInfo(rs.getInt("id"), rs.getString("url"));
+	}
+	
 	private static LinkEntityDto createLinkEntityDto(
 		ResultSet rs,
 		String idColumn,

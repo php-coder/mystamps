@@ -39,6 +39,8 @@ Import series from an external site (in English, use category, country and date 
 	Element Text Should Be           id=issue_date     2000
 	Element Text Should Be           id=quantity       1
 	Element Text Should Be           id=perforated     Yes
+	# @todo #749 /series/{id}: add integration test that import info is only visible to admin
+	Element Text Should Be           id=import-info    ${importUrl}
 	Page Should Contain Image        id=series-image-1
 	Go To                            ${requestLocation}
 	Element Text Should Be           id=request-status  ImportSucceeded

@@ -65,6 +65,7 @@ import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
@@ -72,6 +73,7 @@ import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.TransactionParticipantService;
@@ -101,6 +103,7 @@ public class SeriesController {
 	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final SeriesService seriesService;
+	private final SeriesImportService seriesImportService;
 	private final SeriesSalesService seriesSalesService;
 	private final TransactionParticipantService transactionParticipantService;
 	
@@ -566,6 +569,11 @@ public class SeriesController {
 			List<PurchaseAndSaleDto> purchasesAndSales =
 				seriesService.findPurchasesAndSales(series.getId());
 			model.put("purchasesAndSales", purchasesAndSales);
+		}
+		
+		if (SecurityContextUtils.hasAuthority(Authority.IMPORT_SERIES)) {
+			ImportRequestInfo importInfo = seriesImportService.findRequestInfo(series.getId());
+			model.put("importInfo", importInfo);
 		}
 		
 		return model;
