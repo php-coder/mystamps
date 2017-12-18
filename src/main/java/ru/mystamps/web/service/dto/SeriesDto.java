@@ -19,15 +19,27 @@ package ru.mystamps.web.service.dto;
 
 import java.util.List;
 
+import lombok.Getter;
+
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 
 public class SeriesDto {
 	private final SeriesFullInfoDto info;
+
+	@Getter
 	private final CatalogInfoDto michel;
+
+	@Getter
 	private final CatalogInfoDto scott;
+
+	@Getter
 	private final CatalogInfoDto yvert;
+
+	@Getter
 	private final CatalogInfoDto gibbons;
+	
+	@Getter
 	private final List<Integer> imageIds;
 	
 	@SuppressWarnings({ "checkstyle:parameternumber", "PMD.ExcessiveParameterList" })
@@ -86,26 +98,6 @@ public class SeriesDto {
 	
 	public Integer getCreatedBy() {
 		return info.getCreatedBy();
-	}
-	
-	public CatalogInfoDto getYvert() {
-		return yvert;
-	}
-	
-	public CatalogInfoDto getMichel() {
-		return michel;
-	}
-	
-	public CatalogInfoDto getScott() {
-		return scott;
-	}
-	
-	public CatalogInfoDto getGibbons() {
-		return gibbons;
-	}
-	
-	public List<Integer> getImageIds() {
-		return imageIds;
 	}
 	
 }
