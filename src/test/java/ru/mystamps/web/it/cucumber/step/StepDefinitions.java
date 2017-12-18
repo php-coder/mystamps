@@ -49,7 +49,7 @@ public class StepDefinitions  {
 
 	@When("^I add series to my collection$")
 	public void addSeriesToCollection() {
-		driver.get("http://127.0.0.1:8080/series/1");
+		driver.get(Url.INFO_SERIES_PAGE.replace("{id}", "1"));
 		if (driver.findElements(By.id("series-danger")).size() != 0) {
 			driver.findElement(By.id("series-danger")).click();
 			driver.get(Url.SITE);
