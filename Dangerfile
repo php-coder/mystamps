@@ -552,7 +552,7 @@ unless test_reports.empty?
 			if File.file?(path)
 				file = path
 			end
-			# TODO: try to findout the test case and use it for highlighting line numbers
+			# @todo #536 Danger: highlight a failed spock test
 			file = github.html_link(file)
 			testcase = tc['name']
 			fail("maven-surefire-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n```\n#{msg}\n```")
