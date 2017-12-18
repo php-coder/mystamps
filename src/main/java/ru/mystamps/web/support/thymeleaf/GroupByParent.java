@@ -23,7 +23,7 @@ import java.util.List;
 
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.dao.dto.CategoryDto;
-import ru.mystamps.web.dao.dto.TransactionParticipantDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 
 /**
  * Transforms flat list to hierarchical structure suitable for rendering a &lt;select&gt; tag
@@ -37,12 +37,9 @@ public final class GroupByParent {
 	private GroupByParent() {
 	}
 	
-	// @todo #592 GroupByParent.transformParticipants(): introduce unified class for representing entity with parent
 	// @todo #592 GroupByParent: merge transformCategories() and transformParticipants() methods
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<SelectItem> transformParticipants(
-		List<TransactionParticipantDto> participants) {
-		
+	public static List<SelectItem> transformParticipants(List<EntityWithParentDto> participants) {
 		if (participants.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -51,9 +48,9 @@ public final class GroupByParent {
 		String lastParent = null;
 		SelectItem lastItem = null;
 		
-		for (TransactionParticipantDto participant : participants) {
+		for (EntityWithParentDto participant : participants) {
 			String name   = participant.getName();
-			String value  = participant.getId().toString();
+			String value  = participant.getId();
 			String parent = participant.getParentName();
 			
 			boolean participantWithoutParent = parent == null;

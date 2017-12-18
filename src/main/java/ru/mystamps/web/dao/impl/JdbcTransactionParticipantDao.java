@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.dao.dto.TransactionParticipantDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 
 @RequiredArgsConstructor
 public class JdbcTransactionParticipantDao implements TransactionParticipantDao {
@@ -69,18 +69,18 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	}
 	
 	@Override
-	public List<TransactionParticipantDto> findBuyersWithParents() {
+	public List<EntityWithParentDto> findBuyersWithParents() {
 		return jdbcTemplate.query(
 			findBuyersWithParentNamesSql,
-			RowMappers::forTransactionParticipantDto
+			RowMappers::forEntityWithParentDto
 		);
 	}
 	
 	@Override
-	public List<TransactionParticipantDto> findSellersWithParents() {
+	public List<EntityWithParentDto> findSellersWithParents() {
 		return jdbcTemplate.query(
 			findSellersWithParentNamesSql,
-			RowMappers::forTransactionParticipantDto
+			RowMappers::forEntityWithParentDto
 		);
 	}
 	

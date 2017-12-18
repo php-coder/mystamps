@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.dao.dto.TransactionParticipantDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
@@ -66,14 +66,14 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
-	public List<TransactionParticipantDto> findBuyersWithParents() {
+	public List<EntityWithParentDto> findBuyersWithParents() {
 		return transactionParticipantDao.findBuyersWithParents();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
-	public List<TransactionParticipantDto> findSellersWithParents() {
+	public List<EntityWithParentDto> findSellersWithParents() {
 		return transactionParticipantDao.findSellersWithParents();
 	}
 	

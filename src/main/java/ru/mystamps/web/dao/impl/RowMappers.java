@@ -245,11 +245,11 @@ final class RowMappers {
 		);
 	}
 	
-	public static TransactionParticipantDto forTransactionParticipantDto(ResultSet rs, int i)
+	public static EntityWithParentDto forEntityWithParentDto(ResultSet rs, int i)
 		throws SQLException {
 		
-		return new TransactionParticipantDto(
-			rs.getInt("id"),
+		return new EntityWithParentDto(
+			rs.getString("id"),
 			rs.getString("name"),
 			rs.getString("parent_name")
 		);

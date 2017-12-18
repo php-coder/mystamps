@@ -65,11 +65,11 @@ import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.dao.dto.TransactionParticipantDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -591,13 +591,11 @@ public class SeriesController {
 			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
 		}
 		
-		List<TransactionParticipantDto> sellers =
-			transactionParticipantService.findSellersWithParents();
+		List<EntityWithParentDto> sellers = transactionParticipantService.findSellersWithParents();
 		List<SelectItem> groupedSellers = GroupByParent.transformParticipants(sellers);
 		model.addAttribute("sellers", groupedSellers);
 		
-		List<TransactionParticipantDto> buyers =
-			transactionParticipantService.findBuyersWithParents();
+		List<EntityWithParentDto> buyers = transactionParticipantService.findBuyersWithParents();
 		List<SelectItem> groupedBuyers = GroupByParent.transformParticipants(buyers);
 		model.addAttribute("buyers", groupedBuyers);
 	}

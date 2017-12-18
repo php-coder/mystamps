@@ -221,11 +221,11 @@ public final class TestObjects {
 		return new CategoryDto(name, slug, parentName);
 	}
 	
-	public static TransactionParticipantDto createTransactionParticipantDto() {
+	public static EntityWithParentDto createEntityWithParentDto() {
 		String name = Random.categoryName();
 		// @todo #702 TestObjects: introduce name generator for transaction participant groups
 		String parentName = Random.categoryName();
-		return new TransactionParticipantDto(Random.id(), name, parentName);
+		return new EntityWithParentDto(Random.id().toString(), name, parentName);
 	}
 	
 	public static AddSeriesDto createAddSeriesDto() {

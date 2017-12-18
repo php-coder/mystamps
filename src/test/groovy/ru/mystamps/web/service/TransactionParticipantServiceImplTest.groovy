@@ -27,7 +27,7 @@ import spock.lang.Specification
 import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
-import ru.mystamps.web.dao.dto.TransactionParticipantDto
+import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.controller.dto.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
@@ -122,9 +122,9 @@ class TransactionParticipantServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findBuyersWithParents() should invoke dao and return its result'() {
 		given:
-			List<TransactionParticipantDto> expectedResult = Random.listOfTransactionParticipantDto()
+			List<EntityWithParentDto> expectedResult = Random.listOfEntityWithParentDto()
 		when:
-			List<TransactionParticipantDto> result = service.findBuyersWithParents()
+			List<EntityWithParentDto> result = service.findBuyersWithParents()
 		then:
 			1 * transactionParticipantDao.findBuyersWithParents() >> expectedResult
 		and:
@@ -138,9 +138,9 @@ class TransactionParticipantServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findSellersWithParents() should invoke dao and return its result'() {
 		given:
-			List<TransactionParticipantDto> expectedResult = Random.listOfTransactionParticipantDto()
+			List<EntityWithParentDto> expectedResult = Random.listOfEntityWithParentDto()
 		when:
-			List<TransactionParticipantDto> result = service.findSellersWithParents()
+			List<EntityWithParentDto> result = service.findSellersWithParents()
 		then:
 			1 * transactionParticipantDao.findSellersWithParents() >> expectedResult
 		and:

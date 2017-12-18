@@ -24,8 +24,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class TransactionParticipantDto {
-	private final Integer id;
+public class EntityWithParentDto {
+	// id or slug
+	private final String id;
 	private final String name;
 	private final String parentName;
 }
