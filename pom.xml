@@ -815,6 +815,7 @@
 				<configuration>
 					<nohelp>true</nohelp>
 					<nodeprecatedlist>true</nodeprecatedlist>
+					<bottom>Copyright &#169; {inceptionYear}&#x2013;{currentYear} ${project.developers[0].name}. All rights reserved.</bottom>
 				</configuration>
 			</plugin>
 			
