@@ -36,10 +36,9 @@ public final class GroupByParent {
 	private GroupByParent() {
 	}
 	
-	// @todo #592 GroupByParent: merge transformCategories() and transformParticipants() methods
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<SelectItem> transformParticipants(List<EntityWithParentDto> participants) {
-		if (participants.isEmpty()) {
+	public static List<SelectItem> transformEntities(List<EntityWithParentDto> entities) {
+		if (entities.isEmpty()) {
 			return Collections.emptyList();
 		}
 		
@@ -47,52 +46,17 @@ public final class GroupByParent {
 		String lastParent = null;
 		SelectItem lastItem = null;
 		
-		for (EntityWithParentDto participant : participants) {
-			String name   = participant.getName();
-			String value  = participant.getId();
-			String parent = participant.getParentName();
+		for (EntityWithParentDto entity : entities) {
+			String name   = entity.getName();
+			String value  = entity.getId();
+			String parent = entity.getParentName();
 			
-			boolean participantWithoutParent = parent == null;
-			boolean createNewItem = participantWithoutParent || !parent.equals(lastParent);
-			
-			if (createNewItem) {
-				lastParent = parent;
-				if (participantWithoutParent) {
-					lastItem = new SelectItem(name, value);
-				} else {
-					lastItem = new SelectItem(parent);
-					lastItem.addChild(name, value);
-				}
-				items.add(lastItem);
-			} else {
-				lastItem.addChild(name, value);
-			}
-		}
-		
-		return items;
-	}
-	
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<SelectItem> transformCategories(List<EntityWithParentDto> categories) {
-		if (categories.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		List<SelectItem> items = new ArrayList<>();
-		String lastParent = null;
-		SelectItem lastItem = null;
-		
-		for (EntityWithParentDto category : categories) {
-			String name   = category.getName();
-			String value  = category.getId();
-			String parent = category.getParentName();
-			
-			boolean categoryWithoutParent = parent == null;
-			boolean createNewItem = categoryWithoutParent || !parent.equals(lastParent);
+			boolean entityWithoutParent = parent == null;
+			boolean createNewItem = entityWithoutParent || !parent.equals(lastParent);
 			
 			if (createNewItem) {
 				lastParent = parent;
-				if (categoryWithoutParent) {
+				if (entityWithoutParent) {
 					lastItem = new SelectItem(name, value);
 				} else {
 					lastItem = new SelectItem(parent);

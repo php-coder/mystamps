@@ -482,7 +482,7 @@ public class SeriesController {
 	protected void addCategoriesToModel(Model model, String lang) {
 		List<EntityWithParentDto> categories = categoryService.findCategoriesWithParents(lang);
 		
-		List<SelectItem> groupedCategories = GroupByParent.transformCategories(categories);
+		List<SelectItem> groupedCategories = GroupByParent.transformEntities(categories);
 		
 		model.addAttribute("categories", groupedCategories);
 	}
@@ -591,11 +591,11 @@ public class SeriesController {
 		}
 		
 		List<EntityWithParentDto> sellers = transactionParticipantService.findSellersWithParents();
-		List<SelectItem> groupedSellers = GroupByParent.transformParticipants(sellers);
+		List<SelectItem> groupedSellers = GroupByParent.transformEntities(sellers);
 		model.addAttribute("sellers", groupedSellers);
 		
 		List<EntityWithParentDto> buyers = transactionParticipantService.findBuyersWithParents();
-		List<SelectItem> groupedBuyers = GroupByParent.transformParticipants(buyers);
+		List<SelectItem> groupedBuyers = GroupByParent.transformEntities(buyers);
 		model.addAttribute("buyers", groupedBuyers);
 	}
 	
