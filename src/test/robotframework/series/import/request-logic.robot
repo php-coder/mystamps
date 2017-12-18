@@ -10,7 +10,8 @@ Force Tags       series  import-series  logic
 *** Test Cases ***
 Import series from an external site (in English, use category, country and date locators)
 	[Documentation]                  Verify import from a page in English and with different locators
-	Input Text                       id=url  http://127.0.0.1:8080/series/2?lang=en
+	${importUrl}=                    Set Variable  http://127.0.0.1:8080/series/2?lang=en
+	Input Text                       id=url  ${importUrl}
 	Submit Form                      id=import-series-form
 	${requestLocation}=              Get Location
 	Should Match Regexp              ${requestLocation}  /series/import/request/\\d+
@@ -21,7 +22,7 @@ Import series from an external site (in English, use category, country and date 
 	${quantity}=                     Get Value  id=quantity
 	${imageUrl}=                     Get Value  id=image-url
 	${year}=                         Get Selected List Label  id=year
-	Element Text Should Be           id=request-url     http://127.0.0.1:8080/series/2?lang=en
+	Element Text Should Be           id=request-url     ${importUrl}
 	Element Text Should Be           id=request-status  ParsingSucceeded
 	Should Be Equal                  ${category}        Prehistoric animals
 	Should Be Equal                  ${country}         Italy
