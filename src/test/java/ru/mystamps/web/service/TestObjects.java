@@ -213,14 +213,6 @@ public final class TestObjects {
 		);
 	}
 	
-	public static CategoryDto createCategoryDto() {
-		String name = Random.categoryName();
-		String slug = SlugUtils.slugify(name);
-		// @todo #548 Introduce name generator for top categories
-		String parentName = Random.categoryName();
-		return new CategoryDto(name, slug, parentName);
-	}
-	
 	public static EntityWithParentDto createEntityWithParentDto() {
 		String name = Random.categoryName();
 		// @todo #702 TestObjects: introduce name generator for transaction participant groups

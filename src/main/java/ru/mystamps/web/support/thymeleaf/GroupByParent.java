@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.mystamps.web.controller.dto.SelectItem;
-import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 
 /**
@@ -73,9 +72,8 @@ public final class GroupByParent {
 		return items;
 	}
 	
-	// @todo #592 GroupByParent.transformCategories(): use unified class that represents entity with parent
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public static List<SelectItem> transformCategories(List<CategoryDto> categories) {
+	public static List<SelectItem> transformCategories(List<EntityWithParentDto> categories) {
 		if (categories.isEmpty()) {
 			return Collections.emptyList();
 		}
@@ -84,9 +82,9 @@ public final class GroupByParent {
 		String lastParent = null;
 		SelectItem lastItem = null;
 		
-		for (CategoryDto category : categories) {
+		for (EntityWithParentDto category : categories) {
 			String name   = category.getName();
-			String value  = category.getSlug();
+			String value  = category.getId();
 			String parent = category.getParentName();
 			
 			boolean categoryWithoutParent = parent == null;

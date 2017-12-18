@@ -64,7 +64,6 @@ import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
-import ru.mystamps.web.dao.dto.CategoryDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
@@ -481,7 +480,7 @@ public class SeriesController {
 	}
 	
 	protected void addCategoriesToModel(Model model, String lang) {
-		List<CategoryDto> categories = categoryService.findCategoriesWithParents(lang);
+		List<EntityWithParentDto> categories = categoryService.findCategoriesWithParents(lang);
 		
 		List<SelectItem> groupedCategories = GroupByParent.transformCategories(categories);
 		

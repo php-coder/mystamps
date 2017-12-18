@@ -29,7 +29,7 @@ import spock.lang.Unroll
 
 import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.AddCategoryDbDto
-import ru.mystamps.web.dao.dto.CategoryDto
+import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.controller.dto.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.tests.DateUtils
@@ -249,9 +249,9 @@ class CategoryServiceImplTest extends Specification {
 	def 'findCategoriesWithParents() should invoke dao and return its result'() {
 		given:
 			String expectedLang = nullOr(Random.lang())
-			List<CategoryDto> expectedResult = Random.listOfCategoryDto()
+			List<EntityWithParentDto> expectedResult = Random.listOfEntityWithParentDto()
 		when:
-			List<CategoryDto> result = service.findCategoriesWithParents(expectedLang)
+			List<EntityWithParentDto> result = service.findCategoriesWithParents(expectedLang)
 		then:
 			1 * categoryDao.findCategoriesWithParents({ String lang ->
 				assert lang == expectedLang

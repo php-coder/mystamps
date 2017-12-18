@@ -37,7 +37,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @RequiredArgsConstructor
@@ -238,11 +238,11 @@ public class JdbcCategoryDao implements CategoryDao {
 	}
 	
 	@Override
-	public List<CategoryDto> findCategoriesWithParents(String lang) {
+	public List<EntityWithParentDto> findCategoriesWithParents(String lang) {
 		return jdbcTemplate.query(
 			findCategoriesWithParentNamesSql,
 			Collections.singletonMap("lang", lang),
-			RowMappers::forCategoryDto
+			RowMappers::forEntityWithParentDto
 		);
 	}
 	

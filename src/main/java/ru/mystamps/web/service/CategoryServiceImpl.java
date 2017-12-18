@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
@@ -115,7 +115,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	public List<CategoryDto> findCategoriesWithParents(String lang) {
+	public List<EntityWithParentDto> findCategoriesWithParents(String lang) {
 		return categoryDao.findCategoriesWithParents(lang);
 	}
 	

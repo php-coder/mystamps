@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import ru.mystamps.web.dao.dto.AddCategoryDbDto;
-import ru.mystamps.web.dao.dto.CategoryDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
@@ -40,5 +40,5 @@ public interface CategoryDao {
 	List<Integer> findIdsByNamePattern(String pattern);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
-	List<CategoryDto> findCategoriesWithParents(String lang);
+	List<EntityWithParentDto> findCategoriesWithParents(String lang);
 }
