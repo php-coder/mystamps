@@ -64,11 +64,13 @@
 					<h3 class="text-center" th:text="${#strings.capitalize(suspicious_activities)}">
 						Suspicious activities
 					</h3>
+					
 					<!--/*/
-					<div th:if="${#lists.isEmpty(activities)}" th:text="#{t_no_suspicious_activities_found}" th:remove="tag">
+					<p class="text-center" th:if="${#lists.isEmpty(activities)}" th:text="#{t_no_suspicious_activities_found}">
 						No suspicious activities found
-					</div>
+					</p>
 					/*/-->
+					
 					<div th:if="${not #lists.isEmpty(activities)}" class="row">
 						<div class="col-sm-12 table-responsive">
 							<table class="table table-bordered table-striped">

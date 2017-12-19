@@ -82,15 +82,14 @@
 					</div>
 					/*/-->
 					
+					<!--/*/
+					<p class="text-center" th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
+						In this collection is no stamps
+					</p>
+					/*/-->
+					
 					<div class="row">
 						<div class="col-sm-4">
-					
-							<!--/*/
-							<p th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
-								In this collection is no stamps
-							</p>
-							/*/-->
-							
 							<ul th:if="${not #lists.isEmpty(seriesOfCollection)}" th:remove="all-but-first">
 								<li th:each="series : ${seriesOfCollection}">
 									<span th:if="${series.category != null}" th:remove="tag">

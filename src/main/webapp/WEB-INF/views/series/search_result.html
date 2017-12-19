@@ -68,13 +68,15 @@
 					<h3 th:text="${#strings.capitalize(search_results)}">
 						Search results
 					</h3>
+					
+					<!--/*/
+					<p class="text-center" th:if="${#lists.isEmpty(searchResults)}" th:text="#{t_no_series_found}">
+						No series found
+					</p>
+					/*/-->
+					
 					<div class="row">
 						<div class="col-sm-4">
-							<!--/*/
-							<div th:if="${#lists.isEmpty(searchResults)}" th:text="#{t_no_series_found}" th:remove="tag">
-								No series found
-							</div>
-							/*/-->
 							<ul th:if="${not #lists.isEmpty(searchResults)}" th:remove="all-but-first">
 								<li th:each="series : ${searchResults}">
 									<span th:if="${series.category != null}" th:remove="tag">
