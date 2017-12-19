@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="robots" content="noindex" />
+		<title th:text="|#{t_my_stamps}: #{t_import_requests}|">My stamps: import requests</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
+		<link rel="stylesheet" href="../../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div id="logo" class="col-sm-9 vcenter">
+					<a href="../../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div><!--
+				
+				--><div class="col-sm-1 vcenter"
+						th:with="lang=${#locale.language == 'en' ? 'ru' : 'en'},langName=${#locale.language == 'en' ? 'Русский' : 'English'}">
+					<span class="lang-xs" lang="ru"
+						th:lang="${lang}"></span>
+					<a href="javascript:void(0)" hreflang="ru"
+						th:href="|?lang=${lang}|" th:hreflang="${lang}" th:text="${langName}">Русский</a>
+				</div><!--
+				
+				--><div id="user_bar" class="col-sm-2 vcenter">
+					<ul class="list-unstyled">
+						<li sec:authorize="isAuthenticated()">
+							<i class="glyphicon glyphicon-user"></i>
+							<a sec:authentication="principal.userName"
+								href="../../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
+								John Doe
+							</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAuthenticated()">
+							<form id="logout-form" method="get" action="../../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+							</form>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAnonymous()">
+							<a href="../../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+						/*/-->
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div id="content" class="col-sm-8 col-sm-offset-2" th:with="header=#{t_import_requests}">
+					<h3 th:text="${#strings.capitalize(header)}">
+						Import requests
+					</h3>
+					
+					<!--/*/
+					<p class="text-center" th:if="${#lists.isEmpty(requests)}" th:text="#{t_no_import_requests}">
+						No import requests
+					</p>
+					/*/-->
+					
+					<div class="col-sm-12 table-responsive" th:if="${not #lists.isEmpty(requests)}">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th th:text="#{t_date}">Date</th>
+									<th th:text="#{t_status}">Status</th>
+									<th th:text="#{t_url}">URL</th>
+								</tr>
+							</thead>
+							<tbody th:remove="all-but-first">
+								<tr th:each="request : ${requests}">
+									<td th:text="${#dates.format(request.updatedAt, 'dd.MM.yyyy HH:mm:ss')}">19.12.2017 21:57:12</td>
+									<td th:switch="${request.status}">
+										<!--/*/
+										<span class="label label-default" th:text="${request.status}" th:case=" 'Unprocessed' ">Unprocessed</span>
+										<span class="label label-info" th:text="${request.status}" th:case=" 'DownloadingSucceeded' ">DownloadingSucceeded</span>
+										<span class="label label-danger"  th:text="${request.status}" th:case=" 'DownloadingFailed' ">DownloadingFailed</span>
+										/*/-->
+										<span class="label label-info" th:text="${request.status}" th:case=" 'ParsingSucceeded' ">ParsingSucceeded</span>
+										<!--/*/
+										<span class="label label-danger"  th:text="${request.status}" th:case=" 'ParsingFailed' ">ParsingFailed</span>
+										<span class="label label-success" th:text="${request.status}" th:case=" 'ImportSucceeded' ">ImportSucceeded</span>
+										<span class="label label-warning" th:text="${request.status}" th:case="*">Unknown</span>
+										/*/-->
+									</td>
+									<td>
+										<a href="./info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${request.id})}" th:text="${request.url}">
+											http://example.com/my-first-series.html
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td>19.12.2017 21:50:01</td>
+									<td><span class="label label-success">ImportSucceeded</span></td>
+									<td><a href="./info.html">http://example.com/my-second-series.html</a></td>
+								</tr>
+								<tr>
+									<td>19.12.2017 21:47:05</td>
+									<td><span class="label label-danger">ParsingFailed</span></td>
+									<td><a href="./info.html">http://example.com/my-third-series.html</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+			<div class="row">
+				<footer class="col-sm-12 text-right">
+					<i class="glyphicon glyphicon-envelope"></i>
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2017
+				</footer>
+			</div>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>

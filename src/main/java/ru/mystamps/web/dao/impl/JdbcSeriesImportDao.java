@@ -20,6 +20,7 @@ package ru.mystamps.web.dao.impl;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -35,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
@@ -73,6 +75,9 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	
 	@Value("${series_import_requests.find_request_info_by_series_id}")
 	private String findRequestInfoSql;
+	
+	@Value("${series_import_requests.find_all}")
+	private String findAllSql;
 	
 	@Override
 	public Integer add(ImportSeriesDbDto importRequest) {
@@ -253,6 +258,15 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<ImportRequestFullInfo> findAll() {
+		return jdbcTemplate.query(
+			findAllSql,
+			Collections.emptyMap(),
+			RowMappers::forImportRequestFullInfo
+		);
 	}
 	
 }

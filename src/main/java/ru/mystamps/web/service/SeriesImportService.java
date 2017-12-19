@@ -17,7 +17,10 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.List;
+
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -34,4 +37,5 @@ public interface SeriesImportService {
 	void saveParsedData(Integer requestId, RawParsedDataDto data);
 	ParsedDataDto getParsedData(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
+	List<ImportRequestFullInfo> findAll();
 }

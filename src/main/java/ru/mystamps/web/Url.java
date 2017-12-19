@@ -55,6 +55,7 @@ public final class Url {
 	
 	public static final String REQUEST_IMPORT_SERIES_PAGE = "/series/import/request";
 	public static final String REQUEST_IMPORT_PAGE        = "/series/import/request/{id}";
+	public static final String LIST_IMPORT_REQUESTS_PAGE  = "/series/import/requests";
 	
 	public static final String SUGGEST_SERIES_COUNTRY	= "/suggest/series_country";
 	
@@ -142,6 +143,7 @@ public final class Url {
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("REQUEST_IMPORT_SERIES_PAGE", REQUEST_IMPORT_SERIES_PAGE);
 		map.put("REQUEST_IMPORT_PAGE", REQUEST_IMPORT_PAGE);
+		map.put("LIST_IMPORT_REQUESTS_PAGE", LIST_IMPORT_REQUESTS_PAGE);
 		map.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
 		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);

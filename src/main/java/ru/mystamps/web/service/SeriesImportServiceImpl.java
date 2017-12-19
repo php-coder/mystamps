@@ -36,6 +36,7 @@ import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.controller.event.ParsingFailed;
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
+import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
@@ -209,6 +210,14 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		return seriesImportDao.findRequestInfo(seriesId);
+	}
+	
+	// @todo #692 SeriesImportServiceImpl.findAll(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.IMPORT_SERIES)
+	public List<ImportRequestFullInfo> findAll() {
+		return seriesImportDao.findAll();
 	}
 	
 }

@@ -276,6 +276,17 @@ final class RowMappers {
 		return new ImportRequestInfo(rs.getInt("id"), rs.getString("url"));
 	}
 	
+	public static ImportRequestFullInfo forImportRequestFullInfo(ResultSet rs, int i)
+		throws SQLException {
+		
+		return new ImportRequestFullInfo(
+			rs.getInt("id"),
+			rs.getString("url"),
+			rs.getString("status"),
+			rs.getTimestamp("updated_at")
+		);
+	}
+	
 	private static LinkEntityDto createLinkEntityDto(
 		ResultSet rs,
 		String idColumn,

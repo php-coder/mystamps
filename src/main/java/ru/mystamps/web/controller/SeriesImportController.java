@@ -187,5 +187,12 @@ public class SeriesImportController {
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
 	
+	@GetMapping(Url.LIST_IMPORT_REQUESTS_PAGE)
+	public String showListOfImportRequests(Model model) {
+		model.addAttribute("requests", seriesImportService.findAll());
+		
+		return "series/import/list";
+	}
+	
 }
 

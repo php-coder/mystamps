@@ -12,6 +12,11 @@ User should not see a link to a page for importing a series
 	[Tags]                        import-series
 	Page Should Not Contain Link  link=import a series
 
+User should not see a link to a list of import requests
+	[Documentation]               Verify absence of a link for list of import requests
+	[Tags]                        import-series
+	Page Should Not Contain Link  link=show list of import requests
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as a user and go to the main page
