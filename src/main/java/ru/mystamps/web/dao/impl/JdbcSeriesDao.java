@@ -183,7 +183,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	public List<SitemapInfoDto> findAllForSitemap() {
 		return jdbcTemplate.query(
 			findAllForSitemapSql,
-			Collections.<String, Object>emptyMap(),
+			Collections.emptyMap(),
 			RowMappers::forSitemapInfoDto
 		);
 	}
@@ -267,20 +267,12 @@ public class JdbcSeriesDao implements SeriesDao {
 	
 	@Override
 	public long countAll() {
-		return jdbcTemplate.queryForObject(
-			countAllSql,
-			Collections.<String, Object>emptyMap(),
-			Long.class
-		);
+		return jdbcTemplate.queryForObject(countAllSql, Collections.emptyMap(), Long.class);
 	}
 	
 	@Override
 	public long countAllStamps() {
-		return jdbcTemplate.queryForObject(
-			countAllStampsSql,
-			Collections.<String, Object>emptyMap(),
-			Long.class
-		);
+		return jdbcTemplate.queryForObject(countAllStampsSql, Collections.emptyMap(), Long.class);
 	}
 	
 	@Override

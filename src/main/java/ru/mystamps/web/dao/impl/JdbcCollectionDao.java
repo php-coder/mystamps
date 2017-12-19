@@ -89,7 +89,7 @@ public class JdbcCollectionDao implements CollectionDao {
 	public long countCollectionsOfUsers() {
 		return jdbcTemplate.queryForObject(
 			countCollectionsOfUsersSql,
-			Collections.<String, Object>emptyMap(),
+			Collections.emptyMap(),
 			Long.class
 		);
 	}

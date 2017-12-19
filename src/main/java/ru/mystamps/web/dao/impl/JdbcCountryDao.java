@@ -126,11 +126,7 @@ public class JdbcCountryDao implements CountryDao {
 	
 	@Override
 	public long countAll() {
-		return jdbcTemplate.queryForObject(
-			countAllSql,
-			Collections.<String, Object>emptyMap(),
-			Long.class
-		);
+		return jdbcTemplate.queryForObject(countAllSql, Collections.emptyMap(), Long.class);
 	}
 	
 	@Override
