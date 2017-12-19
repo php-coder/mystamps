@@ -71,49 +71,51 @@
 					</p>
 					/*/-->
 					
-					<div class="col-sm-12 table-responsive" th:if="${not #lists.isEmpty(requests)}">
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th th:text="#{t_date}">Date</th>
-									<th th:text="#{t_status}">Status</th>
-									<th th:text="#{t_url}">URL</th>
-								</tr>
-							</thead>
-							<tbody th:remove="all-but-first">
-								<tr th:each="request : ${requests}">
-									<td th:text="${#dates.format(request.updatedAt, 'dd.MM.yyyy HH:mm:ss')}">19.12.2017 21:57:12</td>
-									<td th:switch="${request.status}">
-										<!--/*/
-										<span class="label label-default" th:text="${request.status}" th:case=" 'Unprocessed' ">Unprocessed</span>
-										<span class="label label-info" th:text="${request.status}" th:case=" 'DownloadingSucceeded' ">DownloadingSucceeded</span>
-										<span class="label label-danger"  th:text="${request.status}" th:case=" 'DownloadingFailed' ">DownloadingFailed</span>
-										/*/-->
-										<span class="label label-info" th:text="${request.status}" th:case=" 'ParsingSucceeded' ">ParsingSucceeded</span>
-										<!--/*/
-										<span class="label label-danger"  th:text="${request.status}" th:case=" 'ParsingFailed' ">ParsingFailed</span>
-										<span class="label label-success" th:text="${request.status}" th:case=" 'ImportSucceeded' ">ImportSucceeded</span>
-										<span class="label label-warning" th:text="${request.status}" th:case="*">Unknown</span>
-										/*/-->
-									</td>
-									<td>
-										<a href="./info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${request.id})}" th:text="${request.url}">
-											http://example.com/my-first-series.html
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td>19.12.2017 21:50:01</td>
-									<td><span class="label label-success">ImportSucceeded</span></td>
-									<td><a href="./info.html">http://example.com/my-second-series.html</a></td>
-								</tr>
-								<tr>
-									<td>19.12.2017 21:47:05</td>
-									<td><span class="label label-danger">ParsingFailed</span></td>
-									<td><a href="./info.html">http://example.com/my-third-series.html</a></td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="row" th:if="${not #lists.isEmpty(requests)}">
+						<div class="col-sm-12 table-responsive">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th th:text="#{t_date}">Date</th>
+										<th th:text="#{t_status}">Status</th>
+										<th th:text="#{t_url}">URL</th>
+									</tr>
+								</thead>
+								<tbody th:remove="all-but-first">
+									<tr th:each="request : ${requests}">
+										<td th:text="${#dates.format(request.updatedAt, 'dd.MM.yyyy HH:mm:ss')}">19.12.2017 21:57:12</td>
+										<td th:switch="${request.status}">
+											<!--/*/
+											<span class="label label-default" th:text="${request.status}" th:case=" 'Unprocessed' ">Unprocessed</span>
+											<span class="label label-info" th:text="${request.status}" th:case=" 'DownloadingSucceeded' ">DownloadingSucceeded</span>
+											<span class="label label-danger"  th:text="${request.status}" th:case=" 'DownloadingFailed' ">DownloadingFailed</span>
+											/*/-->
+											<span class="label label-info" th:text="${request.status}" th:case=" 'ParsingSucceeded' ">ParsingSucceeded</span>
+											<!--/*/
+											<span class="label label-danger"  th:text="${request.status}" th:case=" 'ParsingFailed' ">ParsingFailed</span>
+											<span class="label label-success" th:text="${request.status}" th:case=" 'ImportSucceeded' ">ImportSucceeded</span>
+											<span class="label label-warning" th:text="${request.status}" th:case="*">Unknown</span>
+											/*/-->
+										</td>
+										<td>
+											<a href="./info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${request.id})}" th:text="${request.url}">
+												http://example.com/my-first-series.html
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>19.12.2017 21:50:01</td>
+										<td><span class="label label-success">ImportSucceeded</span></td>
+										<td><a href="./info.html">http://example.com/my-second-series.html</a></td>
+									</tr>
+									<tr>
+										<td>19.12.2017 21:47:05</td>
+										<td><span class="label label-danger">ParsingFailed</span></td>
+										<td><a href="./info.html">http://example.com/my-third-series.html</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 					
 				</div>
