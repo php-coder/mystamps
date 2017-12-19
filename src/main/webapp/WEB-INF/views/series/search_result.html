@@ -64,8 +64,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12" th:with="search_results=#{t_search_results}">
-					<h3 class="text-center" th:text="${#strings.capitalize(search_results)}">
+				<div id="content" class="col-sm-12" th:with="search_results=#{t_search_results}">
+					<h3 th:text="${#strings.capitalize(search_results)}">
 						Search results
 					</h3>
 					<div class="row">
