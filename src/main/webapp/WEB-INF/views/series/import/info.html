@@ -114,7 +114,7 @@
 						<div class="table-responsive">
 							<table class="table">
 								
-								<tr th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
+								<tr th:if="${not disabled or importSeriesForm.category != null}" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 									<th>
 										<label for="category" class="control-label" th:text="#{t_category}">
 											Category
