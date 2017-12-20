@@ -229,4 +229,13 @@ public final class TestObjects {
 		return new ImportRequestInfo(Random.id(), Random.url());
 	}
 	
+	public static ImportRequestFullInfo createImportRequestFullInfo() {
+		return new ImportRequestFullInfo(
+			Random.id(),
+			Random.url(),
+			Random.importRequestStatus(),
+			Random.date()
+		);
+	}
+	
 }

@@ -36,6 +36,7 @@ import ru.mystamps.web.dao.dto.ParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
 import ru.mystamps.web.dao.dto.ImportRequestInfo
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
+import ru.mystamps.web.dao.dto.ImportRequestFullInfo
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
@@ -513,6 +514,21 @@ class SeriesImportServiceImplTest extends Specification {
 			ImportRequestInfo result = service.findRequestInfo(expectedSeriesId)
 		then:
 			1 * seriesImportDao.findRequestInfo(expectedSeriesId) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findAll()
+	//
+	
+	def 'findAll() should invoke dao and return its result'() {
+		given:
+			List<ImportRequestFullInfo> expectedResult = Random.listOfImportRequestFullInfo()
+		when:
+			List<ImportRequestFullInfo> result = service.findAll()
+		then:
+			1 * seriesImportDao.findAll() >> expectedResult
 		and:
 			result == expectedResult
 	}

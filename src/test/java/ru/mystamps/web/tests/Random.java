@@ -17,8 +17,11 @@
  */
 package ru.mystamps.web.tests;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +33,7 @@ import io.qala.datagen.RandomShortApi;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.validation.ValidationRules;
 
@@ -61,6 +65,17 @@ public final class Random {
 	
 	public static Integer userId() {
 		return RandomShortApi.positiveInteger();
+	}
+	
+	public static Date date() {
+		try {
+			
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+			return between(fmt.parse("2017-01-01"), fmt.parse("2017-21-20")).date();
+		
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public static String url() {
@@ -165,6 +180,18 @@ public final class Random {
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto()
+		);
+	}
+	
+	public static List<ImportRequestFullInfo> listOfImportRequestFullInfo() {
+		final int minSize = 1;
+		final int maxSize = 3;
+		int size = integer(minSize, maxSize);
+		return sampleMultiple(
+			size,
+			TestObjects.createImportRequestFullInfo(),
+			TestObjects.createImportRequestFullInfo(),
+			TestObjects.createImportRequestFullInfo()
 		);
 	}
 	
