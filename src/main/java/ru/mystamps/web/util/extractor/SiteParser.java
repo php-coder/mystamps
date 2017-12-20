@@ -55,38 +55,32 @@ public class SiteParser {
 		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-blank");
 		Validate.validState(StringUtils.isNotBlank(value), "Field value must be non-blank");
 		
-		boolean valid = false;
+		boolean valid = true;
 		
 		switch (name) {
 			
 			case "name":
 				setName(value);
-				valid = true;
 				break;
 			
 			case "matched-url":
 				setMatchedUrl(value);
-				valid = true;
 				break;
 			
 			case "category-locator":
 				setCategoryLocator(value);
-				valid = true;
 				break;
 			
 			case "country-locator":
 				setCountryLocator(value);
-				valid = true;
 				break;
 			
 			case "short-description-locator":
 				setShortDescriptionLocator(value);
-				valid = true;
 				break;
 			
 			case "image-url-locator":
 				setImageUrlLocator(value);
-				valid = true;
 				break;
 			
 			case "image-url-attribute":
@@ -95,10 +89,10 @@ public class SiteParser {
 			
 			case "issue-date-locator":
 				setIssueDateLocator(value);
-				valid = true;
 				break;
 			
 			default:
+				valid = false;
 				break;
 		}
 		

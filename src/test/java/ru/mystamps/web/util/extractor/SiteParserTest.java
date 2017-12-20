@@ -138,7 +138,7 @@ public class SiteParserTest {
 		
 		boolean valid = parser.setField("image-url-attribute", expectedAttributeName);
 		
-		assertThat(valid, is(false));
+		assertThat(valid, is(true));
 		assertThat(parser.getImageUrlAttribute(), equalTo(expectedAttributeName));
 	}
 	
