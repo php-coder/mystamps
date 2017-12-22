@@ -55,6 +55,8 @@ Create series by filling all fields
 	Input Text                 id=yvertPrice       8.11
 	Input Text                 id=gibbonsNumbers   130, 131, 132
 	Input Text                 id=gibbonsPrice     400.335
+	Input Text                 id=solovyovNumbers  140, 141, 142
+	Input Text                 id=solovyovPrice    200.5
 	Input Text                 id=zagorskiNumbers  150, 151, 152
 	Input Text                 id=zagorskiPrice    300.55
 	Click Element              id=add-comment-link
@@ -72,6 +74,7 @@ Create series by filling all fields
 	Element Text Should Be     id=yvert_catalog_info     \#120-122 (8.11 EUR)
 	# TODO: disable rounding mode
 	Element Text Should Be     id=gibbons_catalog_info   \#130-132 (400.34 GBP)
+	Element Text Should Be     id=solovyov_catalog_info  \#140-142 (200.5 RUB)
 	Element Text Should Be     id=zagorski_catalog_info  \#150-152 (300.55 RUB)
 	Element Text Should Be     id=comment  Any text
 	Page Should Contain Image  id=series-image-1

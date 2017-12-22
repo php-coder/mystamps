@@ -120,6 +120,7 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "scottNumbers", editor);
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
+		binder.registerCustomEditor(String.class, "solovyovNumbers", editor);
 		binder.registerCustomEditor(String.class, "zagorskiNumbers", editor);
 		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
 	}
@@ -457,6 +458,7 @@ public class SeriesController {
 		}
 		
 		// @todo #769 Support search by Zagorski number
+		// @todo #770 Support search by Solovyov number
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
@@ -550,11 +552,13 @@ public class SeriesController {
 		String scottNumbers    = CatalogUtils.toShortForm(series.getScott().getNumbers());
 		String yvertNumbers    = CatalogUtils.toShortForm(series.getYvert().getNumbers());
 		String gibbonsNumbers  = CatalogUtils.toShortForm(series.getGibbons().getNumbers());
+		String solovyovNumbers = CatalogUtils.toShortForm(series.getSolovyov().getNumbers());
 		String zagorskiNumbers = CatalogUtils.toShortForm(series.getZagorski().getNumbers());
 		model.put("michelNumbers", michelNumbers);
 		model.put("scottNumbers", scottNumbers);
 		model.put("yvertNumbers", yvertNumbers);
 		model.put("gibbonsNumbers", gibbonsNumbers);
+		model.put("solovyovNumbers", solovyovNumbers);
 		model.put("zagorskiNumbers", zagorskiNumbers);
 		
 		boolean isSeriesInCollection =

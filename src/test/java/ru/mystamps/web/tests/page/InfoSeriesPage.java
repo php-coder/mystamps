@@ -75,6 +75,10 @@ public class InfoSeriesPage extends AbstractPage {
 		return getTextOfElementById("gibbons_catalog_info");
 	}
 	
+	public String getSolovyovCatalogInfo() {
+		return getTextOfElementById("solovyov_catalog_info");
+	}
+	
 	public String getZagorskiCatalogInfo() {
 		return getTextOfElementById("zagorski_catalog_info");
 	}

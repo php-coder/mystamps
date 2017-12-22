@@ -277,6 +277,23 @@
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(solovyovNumbers) or series.solovyov.price != null}"> /*/-->
+									<dt th:text="#{t_solovyov}">
+										Solovyov
+									</dt>
+									<dd id="solovyov_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(solovyovNumbers)},showPrice=${series.solovyov.price != null}">
+										<span th:if="${showNumbers}" th:text="|#${solovyovNumbers}|" th:remove="tag">
+											#90, 93-95 (90 RUB)
+										</span>
+										<span th:if="${showPrice}"
+											  th:with="showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.solovyov.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
 								<!--/*/ <th:block th:if="${not #strings.isEmpty(zagorskiNumbers) or series.zagorski.price != null}"> /*/-->
 									<dt th:text="#{t_zagorski}">
 										Zagorski

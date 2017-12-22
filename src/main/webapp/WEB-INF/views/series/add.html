@@ -88,9 +88,11 @@
 							yvertHasValues=${addSeriesForm.yvertNumbers != null or addSeriesForm.yvertPrice != null},
 							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice')},
 							gibbonsHasValues=${addSeriesForm.gibbonsNumbers != null or addSeriesForm.gibbonsPrice != null},
+							solovyovHasErrors=${#fields.hasErrors('solovyovNumbers') or #fields.hasErrors('solovyovPrice')},
+							solovyovHasValues=${addSeriesForm.solovyovNumbers != null or addSeriesForm.solovyovPrice != null},
 							zagorskiHasErrors=${#fields.hasErrors('zagorskiNumbers') or #fields.hasErrors('zagorskiPrice')},
 							zagorskiHasValues=${addSeriesForm.zagorskiNumbers != null or addSeriesForm.zagorskiPrice != null},
-							showCatalogsInfo=${michelHasErrors or michelHasValues or scottHasErrors or scottHasValues or yvertHasErrors or yvertHasValues or gibbonsHasErrors or gibbonsHasValues or zagorskiHasErrors or zagorskiHasValues},
+							showCatalogsInfo=${michelHasErrors or michelHasValues or scottHasErrors or scottHasValues or yvertHasErrors or yvertHasValues or gibbonsHasErrors or gibbonsHasValues or solovyovHasErrors or solovyovHasValues or zagorskiHasErrors or zagorskiHasValues},
 							issueDateHasErrors=${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year')},
 							issueDateHasValues=${addSeriesForm.day != null or addSeriesForm.month != null or addSeriesForm.year != null}">
 						
@@ -447,6 +449,29 @@
 								<!--/*/
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
 								<span id="gibbonsPrice.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${solovyovHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
+							<label for="solovyovNumbers" class="control-label col-sm-3" th:text="#{t_solovyov}">
+								Solovyov
+							</label>
+							<div class="col-sm-7">
+								<div class="row">
+									<div class="col-xs-6">
+										<input type="text" id="solovyovNumbers" class="form-control js-catalog-numbers" th:field="*{solovyovNumbers}" />
+									</div>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">&#x20bd;</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="RUB" th:field="*{solovyovPrice}" />
+										</div>
+									</div>
+								</div>
+								<!--/*/
+								<span id="solovyovNumbers.errors" class="help-block" th:if="${#fields.hasErrors('solovyovNumbers')}" th:each="error : ${#fields.errors('solovyovNumbers')}" th:text="${error}"></span>
+								<span id="solovyovPrice.errors" class="help-block" th:if="${#fields.hasErrors('solovyovPrice')}" th:each="error : ${#fields.errors('solovyovPrice')}" th:text="${error}"></span>
 								/*/-->
 							</div>
 						</div>

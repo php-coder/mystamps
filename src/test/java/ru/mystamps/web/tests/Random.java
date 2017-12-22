@@ -151,6 +151,10 @@ public final class Random {
 		return sampleMultiple(numToReturn, STATUSES);
 	}
 	
+	public static Set<String> solovyovNumbers() {
+		return catalogNumbers();
+	}
+	
 	public static Set<String> zagorskiNumbers() {
 		return catalogNumbers();
 	}

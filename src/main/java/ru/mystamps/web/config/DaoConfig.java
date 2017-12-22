@@ -108,6 +108,16 @@ public class DaoConfig {
 	}
 	
 	@Bean
+	public StampsCatalogDao getSolovyovCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("solovyov.create"),
+			env.getRequiredProperty("series_solovyov.add"),
+			env.getRequiredProperty("series_solovyov.find_by_series_id")
+		);
+	}
+	
+	@Bean
 	public UserDao getUserDao() {
 		return new JdbcUserDao(jdbcTemplate);
 	}

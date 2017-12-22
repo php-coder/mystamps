@@ -78,6 +78,8 @@ public class AddSeriesPage extends AbstractPageWithForm {
 				inputField("yvertPrice"),
 				inputField("gibbonsNumbers"),
 				inputField("gibbonsPrice"),
+				inputField("solovyovNumbers"),
+				inputField("solovyovPrice"),
 				inputField("zagorskiNumbers"),
 				inputField("zagorskiPrice"),
 				textareaField("comment").accessibleByAll(false),
@@ -245,6 +247,18 @@ public class AddSeriesPage extends AbstractPageWithForm {
 	public void fillGibbonsPrice(String value) {
 		if (value != null) {
 			fillField("gibbonsPrice", value);
+		}
+	}
+	
+	public void fillSolovyovNumbers(String value) {
+		if (value != null) {
+			fillField("solovyovNumbers", value);
+		}
+	}
+	
+	public void fillSolovyovPrice(String value) {
+		if (value != null) {
+			fillField("solovyovPrice", value);
 		}
 	}
 	

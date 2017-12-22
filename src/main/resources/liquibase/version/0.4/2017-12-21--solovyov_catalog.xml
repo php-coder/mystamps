@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="create-solovyov_catalog-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="solovyov_catalog">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="code" type="VARCHAR(4)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="uc_solovyov_catalog_code" />
+			</column>
+		</createTable>
+
+	</changeSet>
+	
+	<changeSet id="create-series_solovyov_catalog-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_solovyov_catalog">
+			<column name="series_id" type="INTEGER">
+				<constraints primaryKey="true" references="series(id)" foreignKeyName="fk_series_solovyov_catalog_series_id" />
+			</column>
+			<column name="solovyov_id" type="INTEGER">
+				<constraints primaryKey="true" references="solovyov_catalog(id)" foreignKeyName="fk_series_solovyov_catalog_solovyov_id" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="add-solovyov_price-field-to-series-field" author="php-coder" context="scheme">
+		
+		<addColumn tableName="series">
+			<column name="solovyov_price" type="DECIMAL(19,2)" afterColumn="gibbons_price" />
+		</addColumn>
+		
+	</changeSet>
+	
+	<changeSet id="add-solovyov-numbers-to-series" author="php-coder" context="test-data">
+		<sqlFile path="../../sql/test-series-with-solovyov-numbers.sql" relativeToChangelogFile="true" />
+	</changeSet>
+	
+</databaseChangeLog>

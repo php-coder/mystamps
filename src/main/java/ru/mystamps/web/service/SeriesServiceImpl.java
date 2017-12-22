@@ -60,6 +60,7 @@ public class SeriesServiceImpl implements SeriesService {
 	private final StampsCatalogService scottCatalogService;
 	private final StampsCatalogService yvertCatalogService;
 	private final StampsCatalogService gibbonsCatalogService;
+	private final StampsCatalogService solovyovCatalogService;
 	private final StampsCatalogService zagorskiCatalogService;
 	
 	@Override
@@ -113,6 +114,10 @@ public class SeriesServiceImpl implements SeriesService {
 			series.setGibbonsCurrency(Currency.GBP.toString());
 		}
 
+		if (dto.getSolovyovPrice() != null) {
+			series.setSolovyovPrice(dto.getSolovyovPrice());
+		}
+
 		if (dto.getZagorskiPrice() != null) {
 			series.setZagorskiPrice(dto.getZagorskiPrice());
 		}
@@ -157,6 +162,12 @@ public class SeriesServiceImpl implements SeriesService {
 		if (!gibbonsNumbers.isEmpty()) {
 			gibbonsCatalogService.add(gibbonsNumbers);
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
+		}
+		
+		Set<String> solovyovNumbers = CatalogUtils.parseCatalogNumbers(dto.getSolovyovNumbers());
+		if (!solovyovNumbers.isEmpty()) {
+			solovyovCatalogService.add(solovyovNumbers);
+			solovyovCatalogService.addToSeries(id, solovyovNumbers);
 		}
 		
 		Set<String> zagorskiNumbers = CatalogUtils.parseCatalogNumbers(dto.getZagorskiNumbers());
@@ -276,6 +287,7 @@ public class SeriesServiceImpl implements SeriesService {
 		List<String> scottNumbers   = scottCatalogService.findBySeriesId(seriesId);
 		List<String> yvertNumbers   = yvertCatalogService.findBySeriesId(seriesId);
 		List<String> gibbonsNumbers = gibbonsCatalogService.findBySeriesId(seriesId);
+		List<String> solovyovNumbers = solovyovCatalogService.findBySeriesId(seriesId);
 		List<String> zagorskiNumbers = zagorskiCatalogService.findBySeriesId(seriesId);
 		
 		List<Integer> imageIds = imageService.findBySeriesId(seriesId);
@@ -286,6 +298,7 @@ public class SeriesServiceImpl implements SeriesService {
 			scottNumbers,
 			yvertNumbers,
 			gibbonsNumbers,
+			solovyovNumbers,
 			zagorskiNumbers,
 			imageIds
 		);

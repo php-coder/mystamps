@@ -131,6 +131,14 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	@Price
 	private BigDecimal gibbonsPrice;
 
+	// @todo #770 /series/add: validate that Solovyov numbers are specified only for stamps
+	//  from USSR/Russia
+	@CatalogNumbers
+	private String solovyovNumbers;
+
+	@Price
+	private BigDecimal solovyovPrice;
+	
 	// @todo #769 /series/add: validate that Zagorski numbers are specified only for stamps
 	//  from USSR/Russia
 	@CatalogNumbers

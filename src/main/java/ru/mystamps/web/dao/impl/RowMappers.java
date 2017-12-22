@@ -126,6 +126,7 @@ final class RowMappers {
 		BigDecimal gibbonsPrice = rs.getBigDecimal("gibbons_price");
 		String gibbonsCurrency  = rs.getString("gibbons_currency");
 		
+		BigDecimal solovyovPrice = rs.getBigDecimal("solovyov_price");
 		BigDecimal zagorskiPrice = rs.getBigDecimal("zagorski_price");
 		
 		LinkEntityDto category =
@@ -153,6 +154,7 @@ final class RowMappers {
 			yvertCurrency,
 			gibbonsPrice,
 			gibbonsCurrency,
+			solovyovPrice,
 			zagorskiPrice
 		);
 	}

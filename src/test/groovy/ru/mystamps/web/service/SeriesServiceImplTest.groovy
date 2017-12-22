@@ -51,6 +51,7 @@ class SeriesServiceImplTest extends Specification {
 	private final StampsCatalogService scottCatalogService = Mock()
 	private final StampsCatalogService yvertCatalogService = Mock()
 	private final StampsCatalogService gibbonsCatalogService = Mock()
+	private final StampsCatalogService solovyovCatalogService = Mock()
 	private final StampsCatalogService zagorskiCatalogService = Mock()
 	private final MultipartFile multipartFile = Mock()
 	
@@ -77,6 +78,7 @@ class SeriesServiceImplTest extends Specification {
 			scottCatalogService,
 			yvertCatalogService,
 			gibbonsCatalogService,
+			solovyovCatalogService,
 			zagorskiCatalogService
 		)
 		
@@ -324,6 +326,24 @@ class SeriesServiceImplTest extends Specification {
 	
 	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass solovyov price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+		given:
+			form.setSolovyovPrice(expectedPrice)
+		when:
+			service.add(form, Random.userId(), bool())
+		then:
+			1 * seriesDao.add({ AddSeriesDbDto series ->
+				assert series?.solovyovPrice == expectedPrice
+				return true
+			}) >> Random.id()
+		where:
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
+	}
+	
+	@Unroll
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
 	def 'add() should pass zagorski price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
 		given:
 			form.setZagorskiPrice(expectedPrice)
@@ -509,6 +529,24 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'add() should add solovyov numbers to series'() {
+		given:
+			Set<String> expectedNumbers = Random.solovyovNumbers()
+		and:
+			form.setSolovyovNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = Random.id()
+		and:
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, Random.userId(), bool())
+		then:
+			1 * solovyovCatalogService.add(expectedNumbers)
+		and:
+			1 * solovyovCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
+	}
+	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should add zagorski numbers to series'() {
 		given:
@@ -888,6 +926,7 @@ class SeriesServiceImplTest extends Specification {
 			List<String> expectedYvertNumbers    = [ '5', '6' ]
 			List<String> expectedGibbonsNumbers  = [ '7', '8' ]
 			List<String> expectedZagorskiNumbers = Random.zagorskiNumbers().toList()
+			List<String> expectedSolovyovNumbers = Random.solovyovNumbers().toList()
 			List<Integer> expectedImageIds       = [ 9, 10 ]
 		when:
 			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
@@ -901,6 +940,8 @@ class SeriesServiceImplTest extends Specification {
 			1 * yvertCatalogService.findBySeriesId(expectedSeriesId) >> expectedYvertNumbers
 		and:
 			1 * gibbonsCatalogService.findBySeriesId(expectedSeriesId) >> expectedGibbonsNumbers
+		and:
+			1 * solovyovCatalogService.findBySeriesId(expectedSeriesId) >> expectedSolovyovNumbers
 		and:
 			1 * zagorskiCatalogService.findBySeriesId(expectedSeriesId) >> expectedZagorskiNumbers
 		and:
@@ -937,6 +978,9 @@ class SeriesServiceImplTest extends Specification {
 			result.gibbons?.numbers  == expectedGibbonsNumbers
 			result.gibbons?.price    == expectedInfo.gibbonsPrice
 			result.gibbons?.currency == Currency.valueOf(expectedInfo.gibbonsCurrency)
+			
+			result.solovyov?.numbers  == expectedSolovyovNumbers
+			result.solovyov?.price    == expectedInfo.solovyovPrice
 			
 			result.zagorski?.numbers  == expectedZagorskiNumbers
 			result.zagorski?.price    == expectedInfo.zagorskiPrice

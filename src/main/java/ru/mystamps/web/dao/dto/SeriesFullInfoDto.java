@@ -49,5 +49,6 @@ public class SeriesFullInfoDto {
 	private final BigDecimal gibbonsPrice;
 	private final String gibbonsCurrency;
 	
+	private final BigDecimal solovyovPrice;
 	private final BigDecimal zagorskiPrice;
 }

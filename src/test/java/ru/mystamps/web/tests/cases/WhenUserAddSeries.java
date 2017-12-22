@@ -95,6 +95,9 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	@Value("${existing_gibbons_number}")
 	private String existingGibbonsNumber;
 	
+	@Value("${existing_solovyov_number}")
+	private String existingSolovyovNumber;
+	
 	@Value("${existing_zagorski_number}")
 	private String existingZagorskiNumber;
 	
@@ -133,6 +136,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottNumbers(numbers);
 		page.fillYvertNumbers(numbers);
 		page.fillGibbonsNumbers(numbers);
+		page.fillSolovyovNumbers(numbers);
 		page.fillZagorskiNumbers(numbers);
 		
 		page.submit();
@@ -141,6 +145,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("scottNumbers").hasNoError();
 		assertThat(page).field("yvertNumbers").hasNoError();
 		assertThat(page).field("gibbonsNumbers").hasNoError();
+		assertThat(page).field("solovyovNumbers").hasNoError();
 		assertThat(page).field("zagorskiNumbers").hasNoError();
 	}
 	
@@ -183,6 +188,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottNumbers(numbers);
 		page.fillYvertNumbers(numbers);
 		page.fillGibbonsNumbers(numbers);
+		page.fillSolovyovNumbers(numbers);
 		page.fillZagorskiNumbers(numbers);
 		
 		page.submit();
@@ -191,6 +197,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("scottNumbers").hasError(msg);
 		assertThat(page).field("yvertNumbers").hasError(msg);
 		assertThat(page).field("gibbonsNumbers").hasError(msg);
+		assertThat(page).field("solovyovNumbers").hasError(msg);
 		assertThat(page).field("zagorskiNumbers").hasError(msg);
 	}
 	
@@ -202,6 +209,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottPrice(price);
 		page.fillYvertPrice(price);
 		page.fillGibbonsPrice(price);
+		page.fillSolovyovPrice(price);
 		page.fillZagorskiPrice(price);
 		
 		page.submit();
@@ -210,6 +218,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("scottPrice").hasError(msg);
 		assertThat(page).field("yvertPrice").hasError(msg);
 		assertThat(page).field("gibbonsPrice").hasError(msg);
+		assertThat(page).field("solovyovPrice").hasError(msg);
 		assertThat(page).field("zagorskiPrice").hasError(msg);
 	}
 	
@@ -239,6 +248,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottNumbers(" 3 , 4 ");
 		page.fillYvertNumbers(" 5 , 6 ");
 		page.fillGibbonsNumbers(" 7 , 8 ");
+		page.fillSolovyovNumbers(" 9 , 10 ");
 		page.fillZagorskiNumbers(" 11 , 12 ");
 		
 		page.submit();
@@ -247,6 +257,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("scottNumbers").hasValue("3,4");
 		assertThat(page).field("yvertNumbers").hasValue("5,6");
 		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
+		assertThat(page).field("solovyovNumbers").hasValue("9,10");
 		assertThat(page).field("zagorskiNumbers").hasValue("11,12");
 	}
 	
@@ -313,6 +324,9 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillGibbonsNumbers("30, 31, 32");
 		page.fillGibbonsPrice("400.335");
 		
+		page.fillSolovyovNumbers("40, 41, 42");
+		page.fillSolovyovPrice("140.2");
+		
 		page.fillZagorskiNumbers("50, 51, 52");
 		page.fillZagorskiPrice("150.2");
 		
@@ -340,6 +354,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22 (8.11 EUR)");
 		// TODO: disable rounding mode
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 GBP)");
+		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#40-42 (140.2 RUB)");
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
 	}
 	
@@ -354,6 +369,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottNumbers("14,15,14");
 		page.fillYvertNumbers("24,25,24");
 		page.fillGibbonsNumbers("34,35,34");
+		page.fillSolovyovNumbers("44,45,44");
 		page.fillZagorskiNumbers("54,55,54");
 		
 		AbstractPage next = page.submit();
@@ -364,6 +380,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#14, 15");
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#24, 25");
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#34, 35");
+		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#44, 45");
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#54, 55");
 	}
 	
@@ -377,6 +394,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.fillScottNumbers(existingScottNumber);
 		page.fillYvertNumbers(existingYvertNumber);
 		page.fillGibbonsNumbers(existingGibbonsNumber);
+		page.fillSolovyovNumbers(existingSolovyovNumber);
 		page.fillZagorskiNumbers(existingZagorskiNumber);
 		
 		AbstractPage next = page.submit();
@@ -387,6 +405,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
+		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#" + existingSolovyovNumber);
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#" + existingZagorskiNumber);
 	}
 	

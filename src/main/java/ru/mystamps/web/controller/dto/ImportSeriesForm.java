@@ -145,6 +145,16 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	}
 	
 	@Override
+	public String getSolovyovNumbers() {
+		return null;
+	}
+	
+	@Override
+	public BigDecimal getSolovyovPrice() {
+		return null;
+	}
+	
+	@Override
 	public String getZagorskiNumbers() {
 		return null;
 	}
