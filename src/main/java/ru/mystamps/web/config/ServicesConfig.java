@@ -158,7 +158,8 @@ public class ServicesConfig {
 			getMichelCatalogService(),
 			getScottCatalogService(),
 			getYvertCatalogService(),
-			getGibbonsCatalogService()
+			getGibbonsCatalogService(),
+			getZagorskiCatalogService()
 		);
 	}
 	
@@ -242,6 +243,15 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 			"Gibbons",
 			daoConfig.getGibbonsCatalogDao()
+		);
+	}
+	
+	@Bean
+	public StampsCatalogService getZagorskiCatalogService() {
+		return new StampsCatalogServiceImpl(
+			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+			"Zagorski",
+			daoConfig.getZagorskiCatalogDao()
 		);
 	}
 	

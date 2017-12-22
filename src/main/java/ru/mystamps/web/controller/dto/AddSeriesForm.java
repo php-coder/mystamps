@@ -130,6 +130,14 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	
 	@Price
 	private BigDecimal gibbonsPrice;
+
+	// @todo #769 /series/add: validate that Zagorski numbers are specified only for stamps
+	//  from USSR/Russia
+	@CatalogNumbers
+	private String zagorskiNumbers;
+
+	@Price
+	private BigDecimal zagorskiPrice;
 	
 	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
 	private String comment;

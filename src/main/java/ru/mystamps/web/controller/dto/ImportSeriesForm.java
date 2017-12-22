@@ -145,6 +145,16 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	}
 	
 	@Override
+	public String getZagorskiNumbers() {
+		return null;
+	}
+	
+	@Override
+	public BigDecimal getZagorskiPrice() {
+		return null;
+	}
+	
+	@Override
 	public String getComment() {
 		return null;
 	}

@@ -277,6 +277,23 @@
 									</dd>
 								<!--/*/ </th:block> /*/-->
 								
+								<!--/*/ <th:block th:if="${not #strings.isEmpty(zagorskiNumbers) or series.zagorski.price != null}"> /*/-->
+									<dt th:text="#{t_zagorski}">
+										Zagorski
+									</dt>
+									<dd id="zagorski_catalog_info"
+										th:with="showNumbers=${not #strings.isEmpty(zagorskiNumbers)},showPrice=${series.zagorski.price != null}">
+										<span th:if="${showNumbers}" th:text="|#${zagorskiNumbers}|" th:remove="tag">
+											#102, 111-113 (100 RUB)
+										</span>
+										<span th:if="${showPrice}"
+											  th:with="showBrackets=${showNumbers and showPrice}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.zagorski.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
+											  th:remove="tag">
+										</span>
+									</dd>
+								<!--/*/ </th:block> /*/-->
+								
 								<!--/*/ <th:block th:if="${importInfo != null}"> /*/-->
 									<dt th:text="#{t_imported_from}">
 										Imported from

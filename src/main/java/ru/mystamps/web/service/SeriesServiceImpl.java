@@ -60,11 +60,16 @@ public class SeriesServiceImpl implements SeriesService {
 	private final StampsCatalogService scottCatalogService;
 	private final StampsCatalogService yvertCatalogService;
 	private final StampsCatalogService gibbonsCatalogService;
+	private final StampsCatalogService zagorskiCatalogService;
 	
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
+	@SuppressWarnings({
+		"PMD.NPathComplexity",
+		"PMD.ModifiedCyclomaticComplexity",
+		"PMD.ExcessiveMethodLength"
+	})
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
@@ -108,6 +113,10 @@ public class SeriesServiceImpl implements SeriesService {
 			series.setGibbonsCurrency(Currency.GBP.toString());
 		}
 
+		if (dto.getZagorskiPrice() != null) {
+			series.setZagorskiPrice(dto.getZagorskiPrice());
+		}
+
 		if (userCanAddComments && dto.getComment() != null) {
 			Validate.isTrue(
 				!dto.getComment().trim().isEmpty(),
@@ -148,6 +157,12 @@ public class SeriesServiceImpl implements SeriesService {
 		if (!gibbonsNumbers.isEmpty()) {
 			gibbonsCatalogService.add(gibbonsNumbers);
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
+		}
+		
+		Set<String> zagorskiNumbers = CatalogUtils.parseCatalogNumbers(dto.getZagorskiNumbers());
+		if (!zagorskiNumbers.isEmpty()) {
+			zagorskiCatalogService.add(zagorskiNumbers);
+			zagorskiCatalogService.addToSeries(id, zagorskiNumbers);
 		}
 		
 		ImageInfoDto imageInfo = imageService.save(dto.getImage());
@@ -261,6 +276,7 @@ public class SeriesServiceImpl implements SeriesService {
 		List<String> scottNumbers   = scottCatalogService.findBySeriesId(seriesId);
 		List<String> yvertNumbers   = yvertCatalogService.findBySeriesId(seriesId);
 		List<String> gibbonsNumbers = gibbonsCatalogService.findBySeriesId(seriesId);
+		List<String> zagorskiNumbers = zagorskiCatalogService.findBySeriesId(seriesId);
 		
 		List<Integer> imageIds = imageService.findBySeriesId(seriesId);
 		
@@ -270,6 +286,7 @@ public class SeriesServiceImpl implements SeriesService {
 			scottNumbers,
 			yvertNumbers,
 			gibbonsNumbers,
+			zagorskiNumbers,
 			imageIds
 		);
 	}

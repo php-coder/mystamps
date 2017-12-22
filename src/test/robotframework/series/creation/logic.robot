@@ -47,14 +47,16 @@ Create series by filling all fields
 	Select From List By Value  id=month  5
 	Select From List By Value  id=year  1999
 	Click Element              id=add-catalog-numbers-link
-	Input Text                 id=michelNumbers  101, 102, 103
-	Input Text                 id=michelPrice  10.5
-	Input Text                 id=scottNumbers  110, 111, 112
-	Input Text                 id=scottPrice  1000
-	Input Text                 id=yvertNumbers  120, 121, 122
-	Input Text                 id=yvertPrice  8.11
-	Input Text                 id=gibbonsNumbers  130, 131, 132
-	Input Text                 id=gibbonsPrice  400.335
+	Input Text                 id=michelNumbers    101, 102, 103
+	Input Text                 id=michelPrice      10.5
+	Input Text                 id=scottNumbers     110, 111, 112
+	Input Text                 id=scottPrice       1000
+	Input Text                 id=yvertNumbers     120, 121, 122
+	Input Text                 id=yvertPrice       8.11
+	Input Text                 id=gibbonsNumbers   130, 131, 132
+	Input Text                 id=gibbonsPrice     400.335
+	Input Text                 id=zagorskiNumbers  150, 151, 152
+	Input Text                 id=zagorskiPrice    300.55
 	Click Element              id=add-comment-link
 	Input Text                 id=comment  Any text
 	Submit Form                id=add-series-form
@@ -65,11 +67,12 @@ Create series by filling all fields
 	Element Text Should Be     id=issue_date  04.05.1999
 	Element Text Should Be     id=quantity  3
 	Element Text Should Be     id=perforated  No
-	Element Text Should Be     id=michel_catalog_info  \#101-103 (10.5 EUR)
-	Element Text Should Be     id=scott_catalog_info  \#110-112 (1000 USD)
-	Element Text Should Be     id=yvert_catalog_info  \#120-122 (8.11 EUR)
+	Element Text Should Be     id=michel_catalog_info    \#101-103 (10.5 EUR)
+	Element Text Should Be     id=scott_catalog_info     \#110-112 (1000 USD)
+	Element Text Should Be     id=yvert_catalog_info     \#120-122 (8.11 EUR)
 	# TODO: disable rounding mode
-	Element Text Should Be     id=gibbons_catalog_info  \#130-132 (400.34 GBP)
+	Element Text Should Be     id=gibbons_catalog_info   \#130-132 (400.34 GBP)
+	Element Text Should Be     id=zagorski_catalog_info  \#150-152 (300.55 RUB)
 	Element Text Should Be     id=comment  Any text
 	Page Should Contain Image  id=series-image-1
 

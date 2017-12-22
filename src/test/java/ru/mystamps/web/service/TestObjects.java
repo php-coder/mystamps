@@ -141,7 +141,8 @@ public final class TestObjects {
 			TEST_PRICE, Currency.EUR.toString(),
 			TEST_PRICE, Currency.USD.toString(),
 			TEST_PRICE, Currency.EUR.toString(),
-			TEST_PRICE, Currency.GBP.toString()
+			TEST_PRICE, Currency.GBP.toString(),
+			Random.price()
 		);
 	}
 	

@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.bool
+
 import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
@@ -49,6 +51,7 @@ class SeriesServiceImplTest extends Specification {
 	private final StampsCatalogService scottCatalogService = Mock()
 	private final StampsCatalogService yvertCatalogService = Mock()
 	private final StampsCatalogService gibbonsCatalogService = Mock()
+	private final StampsCatalogService zagorskiCatalogService = Mock()
 	private final MultipartFile multipartFile = Mock()
 	
 	private SeriesService service
@@ -73,7 +76,8 @@ class SeriesServiceImplTest extends Specification {
 			michelCatalogService,
 			scottCatalogService,
 			yvertCatalogService,
-			gibbonsCatalogService
+			gibbonsCatalogService,
+			zagorskiCatalogService
 		)
 		
 		multipartFile.getOriginalFilename() >> '/path/to/test/file.ext'
@@ -318,6 +322,24 @@ class SeriesServiceImplTest extends Specification {
 			null          | null
 	}
 	
+	@Unroll
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass zagorski price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+		given:
+			form.setZagorskiPrice(expectedPrice)
+		when:
+			service.add(form, Random.userId(), bool())
+		then:
+			1 * seriesDao.add({ AddSeriesDbDto series ->
+				assert series?.zagorskiPrice == expectedPrice
+				return true
+			}) >> Random.id()
+		where:
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
+	}
+	
 	def "add() should throw exception if comment is empty"() {
 		given:
 			form.setComment('  ')
@@ -487,6 +509,24 @@ class SeriesServiceImplTest extends Specification {
 			})
 	}
 
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'add() should add zagorski numbers to series'() {
+		given:
+			Set<String> expectedNumbers = Random.zagorskiNumbers()
+		and:
+			form.setZagorskiNumbers(expectedNumbers.join(','))
+		and:
+			Integer expectedSeriesId = Random.id()
+		and:
+			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
+		when:
+			service.add(form, Random.userId(), bool())
+		then:
+			1 * zagorskiCatalogService.add(expectedNumbers)
+		and:
+			1 * zagorskiCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
+	}
+	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass image to image service"() {
 		given:
@@ -843,11 +883,12 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedSeriesId = 20
 			String expectedLang = 'kz'
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
-			List<String> expectedMichelNumbers  = [ '1', '2' ]
-			List<String> expectedScottNumbers   = [ '3', '4' ]
-			List<String> expectedYvertNumbers   = [ '5', '6' ]
-			List<String> expectedGibbonsNumbers = [ '7', '8' ]
-			List<Integer> expectedImageIds      = [ 9, 10 ]
+			List<String> expectedMichelNumbers   = [ '1', '2' ]
+			List<String> expectedScottNumbers    = [ '3', '4' ]
+			List<String> expectedYvertNumbers    = [ '5', '6' ]
+			List<String> expectedGibbonsNumbers  = [ '7', '8' ]
+			List<String> expectedZagorskiNumbers = Random.zagorskiNumbers().toList()
+			List<Integer> expectedImageIds       = [ 9, 10 ]
 		when:
 			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
 		then:
@@ -860,6 +901,8 @@ class SeriesServiceImplTest extends Specification {
 			1 * yvertCatalogService.findBySeriesId(expectedSeriesId) >> expectedYvertNumbers
 		and:
 			1 * gibbonsCatalogService.findBySeriesId(expectedSeriesId) >> expectedGibbonsNumbers
+		and:
+			1 * zagorskiCatalogService.findBySeriesId(expectedSeriesId) >> expectedZagorskiNumbers
 		and:
 			1 * imageService.findBySeriesId(expectedSeriesId) >> expectedImageIds
 		and:
@@ -894,6 +937,9 @@ class SeriesServiceImplTest extends Specification {
 			result.gibbons?.numbers  == expectedGibbonsNumbers
 			result.gibbons?.price    == expectedInfo.gibbonsPrice
 			result.gibbons?.currency == Currency.valueOf(expectedInfo.gibbonsCurrency)
+			
+			result.zagorski?.numbers  == expectedZagorskiNumbers
+			result.zagorski?.price    == expectedInfo.zagorskiPrice
 	}
 	
 	//

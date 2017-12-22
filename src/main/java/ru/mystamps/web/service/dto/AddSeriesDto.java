@@ -44,6 +44,9 @@ public interface AddSeriesDto {
 	String getGibbonsNumbers();
 	BigDecimal getGibbonsPrice();
 	
+	String getZagorskiNumbers();
+	BigDecimal getZagorskiPrice();
+	
 	String getComment();
 	MultipartFile getImage();
 }

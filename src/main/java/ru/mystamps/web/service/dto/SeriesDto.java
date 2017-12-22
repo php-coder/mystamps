@@ -38,6 +38,9 @@ public class SeriesDto {
 
 	@Getter
 	private final CatalogInfoDto gibbons;
+
+	@Getter
+	private final CatalogInfoDto zagorski;
 	
 	@Getter
 	private final List<Integer> imageIds;
@@ -49,14 +52,16 @@ public class SeriesDto {
 		List<String> scottNumbers,
 		List<String> yvertNumbers,
 		List<String> gibbonsNumbers,
+		List<String> zagorskiNumbers,
 		List<Integer> imageIds) {
 		
 		this.info     = info;
-		// CheckStyle: ignore LineLength for next 4 lines
+		// CheckStyle: ignore LineLength for next 5 lines
 		this.michel   = new CatalogInfoDto(michelNumbers, info.getMichelPrice(), info.getMichelCurrency());
 		this.scott    = new CatalogInfoDto(scottNumbers, info.getScottPrice(), info.getScottCurrency());
 		this.yvert    = new CatalogInfoDto(yvertNumbers, info.getYvertPrice(), info.getYvertCurrency());
 		this.gibbons  = new CatalogInfoDto(gibbonsNumbers, info.getGibbonsPrice(), info.getGibbonsCurrency());
+		this.zagorski = new CatalogInfoDto(zagorskiNumbers, info.getZagorskiPrice(), null /* unused field currency */);
 		this.imageIds = imageIds;
 	}
 	

@@ -47,6 +47,8 @@ public class AddSeriesDbDto {
 	private BigDecimal gibbonsPrice;
 	private String gibbonsCurrency;
 	
+	private BigDecimal zagorskiPrice;
+	
 	private Integer releaseDay;
 	private Integer releaseMonth;
 	private Integer releaseYear;

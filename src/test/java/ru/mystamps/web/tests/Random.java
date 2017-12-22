@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.tests;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
@@ -76,6 +77,11 @@ public final class Random {
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public static BigDecimal price() {
+		// @todo #769 Random.price(): return randomized values
+		return new BigDecimal("17");
 	}
 	
 	public static String url() {
@@ -145,6 +151,10 @@ public final class Random {
 		return sampleMultiple(numToReturn, STATUSES);
 	}
 	
+	public static Set<String> zagorskiNumbers() {
+		return catalogNumbers();
+	}
+	
 	public static Set<String> setOfStrings() {
 		final int minSize = 1;
 		final int maxSize = 3;
@@ -203,6 +213,29 @@ public final class Random {
 	public static String tagAttributeName() {
 		List<String> attributes = Arrays.asList("href", "src", "data-dst");
 		return sample(attributes);
+	}
+	
+	private static Set<String> catalogNumbers() {
+		final int minSize = 1;
+		final int maxSize = 7;
+		int size = integer(minSize, maxSize);
+		return new HashSet<>(
+			sampleMultiple(
+				size,
+				catalogNumber(),
+				catalogNumber(),
+				catalogNumber(),
+				catalogNumber(),
+				catalogNumber(),
+				catalogNumber(),
+				catalogNumber()
+			)
+		);
+	}
+	
+	private static String catalogNumber() {
+		final long maxCatalogNumber = 1000;
+		return String.valueOf(between(1, maxCatalogNumber).integer());
 	}
 	
 }

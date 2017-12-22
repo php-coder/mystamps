@@ -88,7 +88,9 @@
 							yvertHasValues=${addSeriesForm.yvertNumbers != null or addSeriesForm.yvertPrice != null},
 							gibbonsHasErrors=${#fields.hasErrors('gibbonsNumbers') or #fields.hasErrors('gibbonsPrice')},
 							gibbonsHasValues=${addSeriesForm.gibbonsNumbers != null or addSeriesForm.gibbonsPrice != null},
-							showCatalogsInfo=${michelHasErrors or michelHasValues or scottHasErrors or scottHasValues or yvertHasErrors or yvertHasValues or gibbonsHasErrors or gibbonsHasValues},
+							zagorskiHasErrors=${#fields.hasErrors('zagorskiNumbers') or #fields.hasErrors('zagorskiPrice')},
+							zagorskiHasValues=${addSeriesForm.zagorskiNumbers != null or addSeriesForm.zagorskiPrice != null},
+							showCatalogsInfo=${michelHasErrors or michelHasValues or scottHasErrors or scottHasValues or yvertHasErrors or yvertHasValues or gibbonsHasErrors or gibbonsHasValues or zagorskiHasErrors or zagorskiHasValues},
 							issueDateHasErrors=${#fields.hasErrors('day') or #fields.hasErrors('month') or #fields.hasErrors('year')},
 							issueDateHasValues=${addSeriesForm.day != null or addSeriesForm.month != null or addSeriesForm.year != null}">
 						
@@ -445,6 +447,29 @@
 								<!--/*/
 								<span id="gibbonsNumbers.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsNumbers')}" th:each="error : ${#fields.errors('gibbonsNumbers')}" th:text="${error}"></span>
 								<span id="gibbonsPrice.errors" class="help-block" th:if="${#fields.hasErrors('gibbonsPrice')}" th:each="error : ${#fields.errors('gibbonsPrice')}" th:text="${error}"></span>
+								/*/-->
+							</div>
+						</div>
+						
+						<div class="form-group form-group-sm js-catalogs-info collapse in" th:classappend="|${zagorskiHasErrors ? 'has-error' : ''} ${showCatalogsInfo ? 'js-has-data' : ''}|">
+							<label for="zagorskiNumbers" class="control-label col-sm-3" th:text="#{t_zagorski}">
+								Zagorski
+							</label>
+							<div class="col-sm-7">
+								<div class="row">
+									<div class="col-xs-6">
+										<input type="text" id="zagorskiNumbers" class="form-control js-catalog-numbers" th:field="*{zagorskiNumbers}" />
+									</div>
+									<div class="col-xs-3 no-padding">
+										<div class="input-group">
+											<span class="input-group-addon">&#x20bd;</span>
+											<input type="text" class="form-control js-with-tooltip" size="5" title="RUB" th:field="*{zagorskiPrice}" />
+										</div>
+									</div>
+								</div>
+								<!--/*/
+								<span id="zagorskiNumbers.errors" class="help-block" th:if="${#fields.hasErrors('zagorskiNumbers')}" th:each="error : ${#fields.errors('zagorskiNumbers')}" th:text="${error}"></span>
+								<span id="zagorskiPrice.errors" class="help-block" th:if="${#fields.hasErrors('zagorskiPrice')}" th:each="error : ${#fields.errors('zagorskiPrice')}" th:text="${error}"></span>
 								/*/-->
 							</div>
 						</div>

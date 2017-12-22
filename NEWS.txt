@@ -18,6 +18,7 @@
 - (functionality)  add capability to specify image URL (as alternative to providing a file)
 - (functionality)  admin can import a series from an external site
 - (integration)    migrate from coveralls.io to codecov.io service for code coverage
+- (functionality)  add support for specifying Zagorski catalog numbers
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

@@ -41,5 +41,6 @@
 	<include file="0.4/2017-11-15--group_participants.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2017-11-22--import_request_series_id.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2017-12-18--unique_series_id_in_import_requests.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2017-12-21--zagorski_catalog.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

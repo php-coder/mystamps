@@ -135,7 +135,16 @@ public class DaoConfig {
 			env.getRequiredProperty("series_yvert.add"),
 			env.getRequiredProperty("series_yvert.find_by_series_id")
 		);
-		
+	}
+	
+	@Bean
+	public StampsCatalogDao getZagorskiCatalogDao() {
+		return new JdbcStampsCatalogDao(
+			jdbcTemplate,
+			env.getRequiredProperty("zagorski.create"),
+			env.getRequiredProperty("series_zagorski.add"),
+			env.getRequiredProperty("series_zagorski.find_by_series_id")
+		);
 	}
 	
 }
