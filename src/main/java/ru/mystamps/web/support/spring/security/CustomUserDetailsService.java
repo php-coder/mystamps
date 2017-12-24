@@ -67,6 +67,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	}
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
+		// Constants sorted in an ascending order.
 		List<GrantedAuthority> authorities = new LinkedList<>();
 		authorities.add(Authority.CREATE_CATEGORY);
 		authorities.add(Authority.CREATE_COUNTRY);
@@ -74,16 +75,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authorities.add(Authority.UPDATE_COLLECTION);
 		
 		if (userDetails.isAdmin()) {
+			// Constants sorted in an ascending order.
 			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
-			authorities.add(Authority.VIEW_SITE_EVENTS);
 			authorities.add(Authority.ADD_PARTICIPANT);
 			authorities.add(Authority.ADD_SERIES_SALES);
 			authorities.add(Authority.DOWNLOAD_IMAGE);
-			authorities.add(Authority.VIEW_SERIES_SALES);
 			authorities.add(Authority.IMPORT_SERIES);
 			authorities.add(Authority.MANAGE_TOGGLZ);
 			authorities.add(Authority.VIEW_DAILY_STATS);
+			authorities.add(Authority.VIEW_SERIES_SALES);
+			authorities.add(Authority.VIEW_SITE_EVENTS);
 		}
 		
 		return authorities;

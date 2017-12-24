@@ -22,20 +22,21 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @SuppressWarnings("checkstyle:linelength")
 public final class Authority {
+	// Constants sorted in an ascending order.
 	public static final GrantedAuthority ADD_COMMENTS_TO_SERIES = new SimpleGrantedAuthority(StringAuthority.ADD_COMMENTS_TO_SERIES);
 	public static final GrantedAuthority ADD_IMAGES_TO_SERIES   = new SimpleGrantedAuthority(StringAuthority.ADD_IMAGES_TO_SERIES);
 	public static final GrantedAuthority ADD_PARTICIPANT        = new SimpleGrantedAuthority(StringAuthority.ADD_PARTICIPANT);
 	public static final GrantedAuthority ADD_SERIES_SALES       = new SimpleGrantedAuthority(StringAuthority.ADD_SERIES_SALES);
-	public static final GrantedAuthority MANAGE_TOGGLZ          = new SimpleGrantedAuthority(StringAuthority.MANAGE_TOGGLZ);
 	public static final GrantedAuthority CREATE_CATEGORY        = new SimpleGrantedAuthority(StringAuthority.CREATE_CATEGORY);
 	public static final GrantedAuthority CREATE_COUNTRY         = new SimpleGrantedAuthority(StringAuthority.CREATE_COUNTRY);
 	public static final GrantedAuthority CREATE_SERIES          = new SimpleGrantedAuthority(StringAuthority.CREATE_SERIES);
 	public static final GrantedAuthority DOWNLOAD_IMAGE         = new SimpleGrantedAuthority(StringAuthority.DOWNLOAD_IMAGE);
 	public static final GrantedAuthority IMPORT_SERIES          = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES);
+	public static final GrantedAuthority MANAGE_TOGGLZ          = new SimpleGrantedAuthority(StringAuthority.MANAGE_TOGGLZ);
 	public static final GrantedAuthority UPDATE_COLLECTION      = new SimpleGrantedAuthority(StringAuthority.UPDATE_COLLECTION);
-	public static final GrantedAuthority VIEW_SITE_EVENTS       = new SimpleGrantedAuthority(StringAuthority.VIEW_SITE_EVENTS);
-	public static final GrantedAuthority VIEW_SERIES_SALES      = new SimpleGrantedAuthority(StringAuthority.VIEW_SERIES_SALES);
 	public static final GrantedAuthority VIEW_DAILY_STATS       = new SimpleGrantedAuthority(StringAuthority.VIEW_DAILY_STATS);
+	public static final GrantedAuthority VIEW_SERIES_SALES      = new SimpleGrantedAuthority(StringAuthority.VIEW_SERIES_SALES);
+	public static final GrantedAuthority VIEW_SITE_EVENTS       = new SimpleGrantedAuthority(StringAuthority.VIEW_SITE_EVENTS);
 	
 	private Authority() {
 	}
