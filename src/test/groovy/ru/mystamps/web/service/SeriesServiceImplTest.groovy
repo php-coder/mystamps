@@ -841,7 +841,7 @@ class SeriesServiceImplTest extends Specification {
 			result == null
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryObjectReferences'])
+	@SuppressWarnings('UnnecessaryObjectReferences')
 	def "findFullInfoById() should return info about series"() {
 		given:
 			Integer expectedSeriesId = 20
@@ -855,38 +855,17 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
 		then:
-			1 * seriesDao.findByIdAsSeriesFullInfo({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedInfo
+			1 * seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, expectedLang) >> expectedInfo
 		and:
-			1 * michelCatalogService.findBySeriesId({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedMichelNumbers
+			1 * michelCatalogService.findBySeriesId(expectedSeriesId) >> expectedMichelNumbers
 		and:
-			1 * scottCatalogService.findBySeriesId({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedScottNumbers
+			1 * scottCatalogService.findBySeriesId(expectedSeriesId) >> expectedScottNumbers
 		and:
-			1 * yvertCatalogService.findBySeriesId({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedYvertNumbers
+			1 * yvertCatalogService.findBySeriesId(expectedSeriesId) >> expectedYvertNumbers
 		and:
-			1 * gibbonsCatalogService.findBySeriesId({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedGibbonsNumbers
+			1 * gibbonsCatalogService.findBySeriesId(expectedSeriesId) >> expectedGibbonsNumbers
 		and:
-			1 * imageService.findBySeriesId({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedImageIds
+			1 * imageService.findBySeriesId(expectedSeriesId) >> expectedImageIds
 		and:
 			result != null
 			result.id           == expectedInfo.id
