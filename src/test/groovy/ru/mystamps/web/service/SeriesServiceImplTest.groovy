@@ -231,11 +231,10 @@ class SeriesServiceImplTest extends Specification {
 		'ClosureAsLastMethodParameter',
 		'UnnecessaryReturnKeyword',
 		'LineLength',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
 	])
-	def "add() should pass michel price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass michel price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			form.setMichelPrice(price)
+			form.setMichelPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), false)
 		then:
@@ -245,9 +244,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			price     || expectedPrice | expectedCurrency
-			ANY_PRICE || ANY_PRICE     | Currency.EUR.toString()
-			null      || null          | null
+			expectedPrice | expectedCurrency
+			ANY_PRICE     | Currency.EUR.toString()
+			null          | null
 	}
 	
 	@Unroll
@@ -255,11 +254,10 @@ class SeriesServiceImplTest extends Specification {
 		'ClosureAsLastMethodParameter',
 		'LineLength',
 		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
 	])
-	def "add() should pass scott price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass scott price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			form.setScottPrice(price)
+			form.setScottPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), false)
 		then:
@@ -269,9 +267,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			price     || expectedPrice | expectedCurrency
-			ANY_PRICE || ANY_PRICE     | Currency.USD.toString()
-			null      || null          | null
+			expectedPrice | expectedCurrency
+			ANY_PRICE     | Currency.USD.toString()
+			null          | null
 	}
 	
 	@Unroll
@@ -279,11 +277,10 @@ class SeriesServiceImplTest extends Specification {
 		'ClosureAsLastMethodParameter',
 		'LineLength',
 		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
 	])
-	def "add() should pass yvert price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass yvert price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			form.setYvertPrice(price)
+			form.setYvertPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), false)
 		then:
@@ -293,9 +290,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			price     || expectedPrice | expectedCurrency
-			ANY_PRICE || ANY_PRICE     | Currency.EUR.toString()
-			null      || null          | null
+			expectedPrice | expectedCurrency
+			ANY_PRICE     | Currency.EUR.toString()
+			null          | null
 	}
 	
 	@Unroll
@@ -303,11 +300,10 @@ class SeriesServiceImplTest extends Specification {
 		'ClosureAsLastMethodParameter',
 		'LineLength',
 		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
 	])
-	def "add() should pass gibbons price and currency to series dao"(BigDecimal price, BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass gibbons price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
-			form.setGibbonsPrice(price)
+			form.setGibbonsPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), false)
 		then:
@@ -317,9 +313,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			price     || expectedPrice | expectedCurrency
-			ANY_PRICE || ANY_PRICE     | Currency.GBP.toString()
-			null      || null          | null
+			expectedPrice | expectedCurrency
+			ANY_PRICE     | Currency.GBP.toString()
+			null          | null
 	}
 	
 	def "add() should throw exception if comment is empty"() {
