@@ -63,7 +63,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
-				assert path.parent.toString() == expectedDirectoryName
+				assert path?.parent?.toString() == expectedDirectoryName
 				return true
 			}) >> { }
 	}
@@ -78,7 +78,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			1 * strategy.writeToFile(_ as MultipartFile, { Path path ->
-				assert path.fileName.toString() == expectedFileName
+				assert path?.fileName?.toString() == expectedFileName
 				return true
 			}) >> { }
 	}

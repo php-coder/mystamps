@@ -94,10 +94,10 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer result = service.addRequest(form, expectedUserId)
 		then:
 			1 * seriesImportDao.add({ ImportSeriesDbDto request ->
-				assert request.url == expectedUrl
-				assert request.status == SeriesImportRequestStatus.UNPROCESSED
+				assert request?.url == expectedUrl
+				assert request?.status == SeriesImportRequestStatus.UNPROCESSED
 				assert DateUtils.roughlyEqual(request?.requestedAt, new Date())
-				assert request.requestedBy == expectedUserId
+				assert request?.requestedBy == expectedUserId
 				assert DateUtils.roughlyEqual(request?.updatedAt, new Date())
 				return true
 			}) >> expectedResult
@@ -368,7 +368,7 @@ class SeriesImportServiceImplTest extends Specification {
 			service.saveParsedData(expectedRequestId, parsedData)
 		then:
 			1 * eventPublisher.publishEvent({ ParsingFailed event ->
-				assert event.requestId == expectedRequestId
+				assert event?.requestId == expectedRequestId
 				return true
 			})
 	}
