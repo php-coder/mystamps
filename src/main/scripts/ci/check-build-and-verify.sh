@@ -181,7 +181,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 				'An "img" element must have an "alt" attribute' \
 				'The first child "option" element of a "select" element with a "required" attribute' \
-				'This document appears to be written in (Danish|Lithuanian)' \
+				'This document appears to be written in (Danish|Lithuanian|French)' \
 				'Element "option" without attribute "label" must not be empty' \
 				'Picked up' \
 			--show-warnings \
