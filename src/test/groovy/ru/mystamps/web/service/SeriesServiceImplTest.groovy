@@ -43,8 +43,6 @@ import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesServiceImplTest extends Specification {
-	private static final BigDecimal ANY_PRICE = new BigDecimal('17')
-	
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()
 	private final StampsCatalogService michelCatalogService = Mock()
@@ -250,9 +248,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			expectedPrice | expectedCurrency
-			ANY_PRICE     | Currency.EUR.toString()
-			null          | null
+			expectedPrice  | expectedCurrency
+			Random.price() | Currency.EUR.toString()
+			null           | null
 	}
 	
 	@Unroll
@@ -273,9 +271,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			expectedPrice | expectedCurrency
-			ANY_PRICE     | Currency.USD.toString()
-			null          | null
+			expectedPrice  | expectedCurrency
+			Random.price() | Currency.USD.toString()
+			null           | null
 	}
 	
 	@Unroll
@@ -296,9 +294,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			expectedPrice | expectedCurrency
-			ANY_PRICE     | Currency.EUR.toString()
-			null          | null
+			expectedPrice  | expectedCurrency
+			Random.price() | Currency.EUR.toString()
+			null           | null
 	}
 	
 	@Unroll
@@ -319,9 +317,9 @@ class SeriesServiceImplTest extends Specification {
 				return true
 			}) >> 123
 		where:
-			expectedPrice | expectedCurrency
-			ANY_PRICE     | Currency.GBP.toString()
-			null          | null
+			expectedPrice  | expectedCurrency
+			Random.price() | Currency.GBP.toString()
+			null           | null
 	}
 	
 	@Unroll
