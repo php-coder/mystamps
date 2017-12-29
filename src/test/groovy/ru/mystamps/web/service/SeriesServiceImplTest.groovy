@@ -232,7 +232,7 @@ class SeriesServiceImplTest extends Specification {
 		'UnnecessaryReturnKeyword',
 		'LineLength',
 	])
-	def "add() should pass michel price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass michel price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setMichelPrice(expectedPrice)
 		when:
@@ -255,7 +255,7 @@ class SeriesServiceImplTest extends Specification {
 		'LineLength',
 		'UnnecessaryReturnKeyword',
 	])
-	def "add() should pass scott price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass scott price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setScottPrice(expectedPrice)
 		when:
@@ -278,7 +278,7 @@ class SeriesServiceImplTest extends Specification {
 		'LineLength',
 		'UnnecessaryReturnKeyword',
 	])
-	def "add() should pass yvert price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass yvert price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setYvertPrice(expectedPrice)
 		when:
@@ -301,7 +301,7 @@ class SeriesServiceImplTest extends Specification {
 		'LineLength',
 		'UnnecessaryReturnKeyword',
 	])
-	def "add() should pass gibbons price and currency to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	def "add() should pass gibbons price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
 		given:
 			form.setGibbonsPrice(expectedPrice)
 		when:
@@ -793,7 +793,7 @@ class SeriesServiceImplTest extends Specification {
 		'LineLength',
 		/* false positive: */ 'UnnecessaryBooleanExpression',
 	])
-	def "isSeriesExist() should invoke dao, pass argument and return result from dao"(Integer daoReturnValue, boolean expectedResult) {
+	def "isSeriesExist() should return #expectedResult when dao returns #daoReturnValue"(Integer daoReturnValue, boolean expectedResult) {
 		given:
 			Integer expectedSeriesId = 13
 		when:
