@@ -240,13 +240,13 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setMichelPrice(expectedPrice)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
 				assert series?.michelCurrency == expectedCurrency
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			expectedPrice  | expectedCurrency
 			Random.price() | Currency.EUR.toString()
@@ -263,13 +263,13 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setScottPrice(expectedPrice)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.scottPrice == expectedPrice
 				assert series?.scottCurrency == expectedCurrency
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			expectedPrice  | expectedCurrency
 			Random.price() | Currency.USD.toString()
@@ -286,13 +286,13 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setYvertPrice(expectedPrice)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.yvertPrice == expectedPrice
 				assert series?.yvertCurrency == expectedCurrency
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			expectedPrice  | expectedCurrency
 			Random.price() | Currency.EUR.toString()
@@ -309,13 +309,13 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setGibbonsPrice(expectedPrice)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.gibbonsPrice == expectedPrice
 				assert series?.gibbonsCurrency == expectedCurrency
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			expectedPrice  | expectedCurrency
 			Random.price() | Currency.GBP.toString()
