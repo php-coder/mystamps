@@ -55,7 +55,7 @@ Import series from an external site (in English, use category, country and date 
 
 Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator
-	Input Text                   id=url  http://localhost:8080/series/2?lang=ru
+	Input Text                   id=url  http://localhost:8080/series/2?lang=ru&str=тест
 	Submit Form                  id=import-series-form
 	${location}=                 Get Location
 	Should Match Regexp          ${location}  /series/import/request/\\d+
@@ -66,7 +66,7 @@ Import series from an external site (in Russian, use description locator)
 	${quantity}=                 Get Value  id=quantity
 	${imageUrl}=                 Get Value  id=image-url
 	${year}=                     Get Selected List Label  id=year
-	Element Text Should Be       id=request-url     http://localhost:8080/series/2?lang=ru
+	Element Text Should Be       id=request-url     http://localhost:8080/series/2?lang=ru&str=%D1%82%D0%B5%D1%81%D1%82
 	Element Text Should Be       id=request-status  ParsingSucceeded
 	Should Be Equal              ${category}        Prehistoric animals
 	Should Be Equal              ${country}         Italy

@@ -75,11 +75,31 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	def 'addRequest() should throw exception if url is null'() {
+		given:
+			form.setUrl(null)
+		when:
+			service.addRequest(form, Random.userId())
+		then:
+			thrown IllegalArgumentException
+	}
+	
 	def 'addRequest() should throw exception if user id is null'() {
 		when:
 			service.addRequest(form, null)
 		then:
 			thrown IllegalArgumentException
+	}
+	
+	def 'addRequest() should throw exception if url is incorrect'() {
+		given:
+			form.setUrl('http://example.org/текст c пробелами')
+		when:
+			service.addRequest(form, Random.userId())
+		then:
+			RuntimeException ex = thrown()
+		and:
+			ex?.cause?.class == URISyntaxException
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -103,6 +123,37 @@ class SeriesImportServiceImplTest extends Specification {
 			}) >> expectedResult
 		and:
 			result == expectedResult
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'LineLength', 'UnnecessaryReturnKeyword'])
+	def 'addRequest() should save url in the encoded form'() {
+		given:
+			String url = 'http://example.org/текст_на_русском'
+			String expectedUrl = 'http://example.org/%D1%82%D0%B5%D0%BA%D1%81%D1%82_%D0%BD%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC'
+		and:
+			form.setUrl(url)
+		when:
+			service.addRequest(form, Random.userId())
+		then:
+			1 * seriesImportDao.add({ ImportSeriesDbDto request ->
+				assert request?.url == expectedUrl
+				return true
+			}) >> Random.id()
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'LineLength', 'UnnecessaryReturnKeyword'])
+	def 'addRequest() should not encode url if it is already encoded'() {
+		given:
+			String expectedUrl = 'http://example.org/%D1%82%D0%B5%D0%BA%D1%81%D1%82_%D0%BD%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC'
+		and:
+			form.setUrl(expectedUrl)
+		when:
+			service.addRequest(form, Random.userId())
+		then:
+			1 * seriesImportDao.add({ ImportSeriesDbDto request ->
+				assert request?.url == expectedUrl
+				return true
+			}) >> Random.id()
 	}
 	
 	//

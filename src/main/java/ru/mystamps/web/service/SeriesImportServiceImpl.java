@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 
@@ -63,11 +65,18 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer addRequest(RequestImportDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getUrl() != null, "URL must be non null");
 		Validate.isTrue(userId != null, "Current user id must be non null");
 		
 		ImportSeriesDbDto importRequest = new ImportSeriesDbDto();
-		importRequest.setUrl(dto.getUrl());
 		importRequest.setStatus(SeriesImportRequestStatus.UNPROCESSED);
+		
+		try {
+			String encodedUrl = new URI(dto.getUrl()).toASCIIString();
+			importRequest.setUrl(encodedUrl);
+		} catch (URISyntaxException ex) {
+			throw new RuntimeException(ex); // NOPMD: AvoidThrowingRawExceptionTypes
+		}
 		
 		Date now = new Date();
 		importRequest.setUpdatedAt(now);
