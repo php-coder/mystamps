@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-package ru.mystamps.web.tests;
+package ru.mystamps.web.it.cucumber.step;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -49,8 +49,7 @@ public class StepDefinitions  {
 
 	@When("^I add series to my collection$")
 	public void addSeriesToCollection() {
-		driver.get(Url.SITE);
-		driver.findElement(By.linkText("1 item(s)")).click();
+		driver.get(Url.INFO_SERIES_PAGE.replace("{id}", "1"));
 		if (driver.findElements(By.id("series-danger")).size() != 0) {
 			driver.findElement(By.id("series-danger")).click();
 			driver.get(Url.SITE);
