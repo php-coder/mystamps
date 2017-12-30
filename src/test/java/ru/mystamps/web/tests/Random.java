@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -92,7 +93,7 @@ public final class Random {
 	}
 	
 	public static String lang() {
-		return sample("en", "de", "fr", "ru");
+		return sample(Locale.getISOLanguages());
 	}
 	
 	public static String name() {
