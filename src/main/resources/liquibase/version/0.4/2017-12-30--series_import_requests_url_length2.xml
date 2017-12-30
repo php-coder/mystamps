@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="modify-series_import_requests-url-field" author="php-coder" context="scheme">
+		<!--
+			767 bytes is the maximum length for the index key prefix in MySQL 5.6 and prior versions.
+			This limit was increased up to 3072 bytes in 5.7 version because innodb_large_prefix option
+			was enabled by default and innodb_file_format was changed to use Barracuda by default.
+			
+			In other words, we can specify a value greater than 767 in production environment but
+			I decided to use this value for now because we have a different MySQL 5.6.33 on TravisCI
+			where migration fails to apply. I hope that this value will fulfill our requirements,
+			because it's enough to hold about 255 non-ascii characters.
+		-->
+		<modifyDataType tableName="series_import_requests" columnName="url" newDataType="VARCHAR(767)" />
+	</changeSet>
+	
+</databaseChangeLog>
