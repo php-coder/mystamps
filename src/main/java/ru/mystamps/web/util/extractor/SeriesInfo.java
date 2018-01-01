@@ -34,6 +34,7 @@ public class SeriesInfo {
 	private String countryName;
 	private String imageUrl;
 	private String issueDate;
+	private String quantity;
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -42,7 +43,8 @@ public class SeriesInfo {
 		return categoryName == null
 			&& countryName == null
 			&& imageUrl == null
-			&& issueDate == null;
+			&& issueDate == null
+			&& quantity == null;
 	}
 	
 }

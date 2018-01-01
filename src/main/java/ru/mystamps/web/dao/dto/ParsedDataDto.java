@@ -27,4 +27,5 @@ public class ParsedDataDto {
 	private final LinkEntityDto country;
 	private final String imageUrl;
 	private final Integer issueYear;
+	private final Integer quantity;
 }

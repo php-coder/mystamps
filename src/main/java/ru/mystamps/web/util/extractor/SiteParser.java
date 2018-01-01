@@ -136,6 +136,7 @@ public class SiteParser {
 		info.setCountryName(extractCountry(body));
 		info.setImageUrl(extractImageUrl(body));
 		info.setIssueDate(extractIssueDate(body));
+		info.setQuantity(extractQuantity(body));
 		
 		return info;
 	}
@@ -207,6 +208,22 @@ public class SiteParser {
 		String date = elem.text();
 		LOG.debug("Extracted issue date: '{}'", date);
 		return date;
+	}
+	
+	protected String extractQuantity(Element body) {
+		String locator = shortDescriptionLocator;
+		if (locator == null) {
+			return null;
+		}
+		
+		Element elem = body.selectFirst(locator);
+		if (elem == null) {
+			return null;
+		}
+		
+		String quantity = elem.text();
+		LOG.debug("Extracted quantity: '{}'", quantity);
+		return quantity;
 	}
 	
 }

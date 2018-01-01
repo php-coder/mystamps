@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +41,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Regular expression matches release year of the stamps (from 1840 till 2099).
 	private static final Pattern RELEASE_YEAR_REGEXP =
 		Pattern.compile("18[4-9][0-9]|19[0-9]{2}|20[0-9]{2}");
+	
+	// Regular expression matches number of the stamps in a series (from 1 to 99).
+	private static final Pattern NUMBER_OF_STAMPS_REGEXP =
+		Pattern.compile("([1-9][0-9]?) марок");
 	
 	private final Logger log;
 	private final CategoryService categoryService;
@@ -141,6 +146,17 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Could not extract release year from a fragment");
 		
+		return null;
+	}
+	
+	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity(): add unit tests
+	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity() respect MAX_STAMPS_IN_SERIES
+	@Override
+	public Integer extractQuantity(String fragment) {
+		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			return Integer.valueOf(matcher.group(1));
+		}
 		return null;
 	}
 	

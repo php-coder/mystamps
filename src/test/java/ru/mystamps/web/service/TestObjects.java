@@ -202,7 +202,8 @@ public final class TestObjects {
 			new LinkEntityDto(Random.id(), categorySlug, categoryName),
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),
-			Random.issueYear()
+			Random.issueYear(),
+			Random.quantity()
 		);
 	}
 	
@@ -211,7 +212,8 @@ public final class TestObjects {
 			Random.categoryName(),
 			Random.countryName(),
 			Random.url(),
-			Random.issueYear().toString()
+			Random.issueYear().toString(),
+			Random.quantity().toString()
 		);
 	}
 	

@@ -185,6 +185,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			processedData.setReleaseYear(releaseYear);
 		}
 		
+		Integer quantity = extractorService.extractQuantity(data.getQuantity());
+		if (quantity != null) {
+			processedData.setQuantity(quantity);
+		}
+		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
 		//  for the case when parsed value don't match database

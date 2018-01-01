@@ -128,6 +128,9 @@ public class SeriesImportController {
 			if (parsedData.getIssueYear() != null) {
 				form.setYear(parsedData.getIssueYear());
 			}
+			if (parsedData.getQuantity() != null) {
+				form.setQuantity(parsedData.getQuantity());
+			}
 		}
 		
 		model.addAttribute("importSeriesForm", form);

@@ -636,6 +636,44 @@ public class SiteParserTest {
 		assertThat(msg, date, equalTo(expectedDate));
 	}
 	
+	//
+	// Tests for extractQuantity()
+	//
+	
+	@Test
+	public void extractQuantityShouldReturnNullWhenShortDescriptionLocatorIsNotSet() {
+		parser.setShortDescriptionLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String quantity = parser.extractQuantity(doc);
+		
+		assertThat(quantity, is(nullValue()));
+	}
+	
+	@Test
+	public void extractQuantityShouldReturnNullWhenElementNotFound() {
+		parser.setShortDescriptionLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String quantity = parser.extractQuantity(doc);
+		
+		assertThat(quantity, is(nullValue()));
+	}
+	
+	@Test
+	public void extractQuantityShouldReturnTextOfShortDescriptionLocator() {
+		parser.setShortDescriptionLocator("#desc");
+		
+		String expectedQuantity = Random.quantity().toString();
+		String html = String.format("<div id='desc'>%s</div>", expectedQuantity);
+		Element doc = createDocumentFromText(html);
+		
+		String quantity = parser.extractQuantity(doc);
+		
+		String msg = String.format("couldn't extract quantity from '%s'", doc);
+		assertThat(msg, quantity, equalTo(expectedQuantity));
+	}
+	
 	private static String describe(SiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SiteParser[name=")

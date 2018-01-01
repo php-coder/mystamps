@@ -211,6 +211,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		params.put("release_year", data.getReleaseYear());
 		params.put("created_at", data.getCreatedAt());
 		params.put("updated_at", data.getUpdatedAt());
+		params.put("quantity", data.getQuantity());
 		
 		KeyHolder holder = new GeneratedKeyHolder();
 		

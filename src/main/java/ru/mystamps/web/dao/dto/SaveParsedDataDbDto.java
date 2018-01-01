@@ -31,6 +31,7 @@ public class SaveParsedDataDbDto {
 	private Integer countryId;
 	private String imageUrl;
 	private Integer releaseYear;
+	private Integer quantity;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -38,7 +39,8 @@ public class SaveParsedDataDbDto {
 		return categoryId != null
 			|| countryId != null
 			|| imageUrl != null
-			|| releaseYear != null;
+			|| releaseYear != null
+			|| quantity != null;
 	}
 	
 }

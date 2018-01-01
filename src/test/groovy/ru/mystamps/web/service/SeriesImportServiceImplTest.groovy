@@ -410,7 +410,8 @@ class SeriesImportServiceImplTest extends Specification {
 				Random.categoryName(),
 				Random.countryName(),
 				null, /* imageUrl */
-				Random.issueYear().toString()
+				Random.issueYear().toString(),
+				Random.quantity().toString()
 			)
 		and:
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
@@ -434,7 +435,8 @@ class SeriesImportServiceImplTest extends Specification {
 				Random.categoryName(),
 				Random.countryName(),
 				expectedImageUrl,
-				Random.issueYear().toString()
+				Random.issueYear().toString(),
+				Random.quantity().toString()
 			)
 		and:
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
@@ -464,12 +466,14 @@ class SeriesImportServiceImplTest extends Specification {
 			List<Integer> expectedCountryIds = Random.listOfIntegers()
 			Integer expectedCategoryId = expectedCategoryIds.get(0)
 			Integer expectedCountryId = expectedCountryIds.get(0)
+			Integer expectedQuantity = Random.quantity()
 		and:
 			RawParsedDataDto parsedData = new RawParsedDataDto(
 				expectedCategoryName,
 				expectedCountryName,
 				Random.url(),
-				expectedReleaseYear.toString()
+				expectedReleaseYear.toString(),
+				expectedQuantity.toString()
 			)
 		when:
 			service.saveParsedData(expectedRequestId, parsedData)
@@ -480,12 +484,15 @@ class SeriesImportServiceImplTest extends Specification {
 		and:
 			1 * extractorService.extractReleaseYear(expectedReleaseYear.toString()) >> expectedReleaseYear
 		and:
+			1 * extractorService.extractQuantity(expectedQuantity.toString()) >> expectedQuantity
+		and:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
 				{ SaveParsedDataDbDto saveParsedData ->
 					assert saveParsedData?.categoryId  == expectedCategoryId
 					assert saveParsedData?.countryId   == expectedCountryId
 					assert saveParsedData?.releaseYear == expectedReleaseYear
+					assert saveParsedData?.quantity    == expectedQuantity
 					return true
 				}
 			)

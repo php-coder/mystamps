@@ -273,8 +273,9 @@ final class RowMappers {
 		
 		String imageUrl = rs.getString("image_url");
 		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity = JdbcUtils.getInteger(rs, "quantity");
 		
-		return new ParsedDataDto(category, country, imageUrl, releaseYear);
+		return new ParsedDataDto(category, country, imageUrl, releaseYear, quantity);
 	}
 	
 	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int i) throws SQLException {

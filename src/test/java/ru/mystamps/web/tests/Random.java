@@ -144,6 +144,13 @@ public final class Random {
 		return between(ValidationRules.MIN_RELEASE_YEAR, Year.now().getValue()).integer();
 	}
 	
+	public static Integer quantity() {
+		return between(
+			ValidationRules.MIN_STAMPS_IN_SERIES,
+			ValidationRules.MAX_STAMPS_IN_SERIES
+		).integer();
+	}
+	
 	public static String importRequestStatus() {
 		return sample(STATUSES);
 	}

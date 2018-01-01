@@ -90,7 +90,8 @@ public class DownloadingSucceededEventListener
 			info.getCategoryName(),
 			info.getCountryName(),
 			info.getImageUrl(),
-			info.getIssueDate()
+			info.getIssueDate(),
+			info.getQuantity()
 		);
 		importService.saveParsedData(requestId, data);
 	}
