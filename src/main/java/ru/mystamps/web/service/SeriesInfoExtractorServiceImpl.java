@@ -157,10 +157,17 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
+		log.debug("Determining quantity from a fragment: '{}'", fragment);
+		
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
-			return Integer.valueOf(matcher.group(1));
+			String quantity = matcher.group(1);
+			log.debug("Quantity is {}", quantity);
+			return Integer.valueOf(quantity);
 		}
+		
+		log.debug("Could not extract quantity from a fragment");
+		
 		return null;
 	}
 	
