@@ -153,6 +153,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity() respect MAX_STAMPS_IN_SERIES
 	@Override
 	public Integer extractQuantity(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
 			return Integer.valueOf(matcher.group(1));
