@@ -674,6 +674,44 @@ public class SiteParserTest {
 		assertThat(msg, quantity, equalTo(expectedQuantity));
 	}
 	
+	//
+	// Tests for extractPerforated()
+	//
+	
+	@Test
+	public void extractPerforatedShouldReturnNullWhenShortDescriptionLocatorIsNotSet() {
+		parser.setShortDescriptionLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String perforated = parser.extractPerforated(doc);
+		
+		assertThat(perforated, is(nullValue()));
+	}
+	
+	@Test
+	public void extractPerforatedShouldReturnNullWhenElementNotFound() {
+		parser.setShortDescriptionLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String perforated = parser.extractPerforated(doc);
+		
+		assertThat(perforated, is(nullValue()));
+	}
+	
+	@Test
+	public void extractPerforatedShouldReturnTextOfShortDescriptionLocator() {
+		parser.setShortDescriptionLocator("#desc");
+		
+		String expectedValue = String.valueOf(Random.perforated());
+		String html = String.format("<div id='desc'>%s</div>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		
+		String perforated = parser.extractPerforated(doc);
+		
+		String msg = String.format("couldn't extract perforated flag from '%s'", doc);
+		assertThat(msg, perforated, equalTo(expectedValue));
+	}
+	
 	private static String describe(SiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SiteParser[name=")

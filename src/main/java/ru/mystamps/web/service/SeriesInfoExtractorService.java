@@ -24,4 +24,5 @@ public interface SeriesInfoExtractorService {
 	List<Integer> extractCountry(String fragment);
 	Integer extractReleaseYear(String fragment);
 	Integer extractQuantity(String fragment);
+	Boolean extractPerforated(String fragment);
 }

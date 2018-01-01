@@ -137,6 +137,7 @@ public class SiteParser {
 		info.setImageUrl(extractImageUrl(body));
 		info.setIssueDate(extractIssueDate(body));
 		info.setQuantity(extractQuantity(body));
+		info.setPerforated(extractPerforated(body));
 		
 		return info;
 	}
@@ -224,6 +225,23 @@ public class SiteParser {
 		String quantity = elem.text();
 		LOG.debug("Extracted quantity: '{}'", quantity);
 		return quantity;
+	}
+	
+	// @todo #782 SiteParser: reduce duplication between extractQuantity() and extractPerforated()
+	protected String extractPerforated(Element body) {
+		String locator = shortDescriptionLocator;
+		if (locator == null) {
+			return null;
+		}
+		
+		Element elem = body.selectFirst(locator);
+		if (elem == null) {
+			return null;
+		}
+		
+		String perforated = elem.text();
+		LOG.debug("Extracted perforated flag: '{}'", perforated);
+		return perforated;
 	}
 	
 }

@@ -203,7 +203,8 @@ public final class TestObjects {
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),
 			Random.issueYear(),
-			Random.quantity()
+			Random.quantity(),
+			Random.perforated()
 		);
 	}
 	
@@ -213,7 +214,8 @@ public final class TestObjects {
 			Random.countryName(),
 			Random.url(),
 			Random.issueYear().toString(),
-			Random.quantity().toString()
+			Random.quantity().toString(),
+			String.valueOf(Random.perforated())
 		);
 	}
 	

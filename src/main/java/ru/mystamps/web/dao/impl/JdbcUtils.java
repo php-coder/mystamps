@@ -38,6 +38,16 @@ public final class JdbcUtils {
 		return Integer.valueOf(value);
 	}
 	
+	@SuppressWarnings("PMD.PrematureDeclaration")
+	public static Boolean getBoolean(ResultSet resultSet, String fieldName) throws SQLException {
+		boolean value = resultSet.getBoolean(fieldName);
+		if (resultSet.wasNull()) {
+			return null;
+		}
+		
+		return Boolean.valueOf(value);
+	}
+	
 	/**
 	 * @author Sergey Chechenev
 	 */

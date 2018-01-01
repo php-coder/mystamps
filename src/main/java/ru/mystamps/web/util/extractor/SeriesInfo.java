@@ -35,6 +35,7 @@ public class SeriesInfo {
 	private String imageUrl;
 	private String issueDate;
 	private String quantity;
+	private String perforated;
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -44,7 +45,8 @@ public class SeriesInfo {
 			&& countryName == null
 			&& imageUrl == null
 			&& issueDate == null
-			&& quantity == null;
+			&& quantity == null
+			&& perforated == null;
 	}
 	
 }

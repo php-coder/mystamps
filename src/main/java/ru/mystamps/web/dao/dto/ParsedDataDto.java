@@ -28,4 +28,5 @@ public class ParsedDataDto {
 	private final String imageUrl;
 	private final Integer issueYear;
 	private final Integer quantity;
+	private final Boolean perforated;
 }

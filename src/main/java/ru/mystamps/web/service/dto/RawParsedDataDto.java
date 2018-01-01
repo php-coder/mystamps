@@ -28,4 +28,5 @@ public class RawParsedDataDto {
 	private final String imageUrl;
 	private final String releaseYear;
 	private final String quantity;
+	private final String perforated;
 }

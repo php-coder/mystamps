@@ -91,7 +91,8 @@ public class DownloadingSucceededEventListener
 			info.getCountryName(),
 			info.getImageUrl(),
 			info.getIssueDate(),
-			info.getQuantity()
+			info.getQuantity(),
+			info.getPerforated()
 		);
 		importService.saveParsedData(requestId, data);
 	}

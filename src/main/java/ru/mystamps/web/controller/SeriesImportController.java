@@ -87,6 +87,7 @@ public class SeriesImportController {
 		return redirectTo(Url.REQUEST_IMPORT_PAGE, requestId);
 	}
 	
+	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
 	@GetMapping(Url.REQUEST_IMPORT_PAGE)
 	public String showRequestAndImportSeriesForm(
 		@PathVariable("id") Integer requestId,
@@ -130,6 +131,9 @@ public class SeriesImportController {
 			}
 			if (parsedData.getQuantity() != null) {
 				form.setQuantity(parsedData.getQuantity());
+			}
+			if (parsedData.getPerforated() != null) {
+				form.setPerforated(parsedData.getPerforated());
 			}
 		}
 		

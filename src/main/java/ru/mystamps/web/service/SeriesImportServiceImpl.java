@@ -190,6 +190,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			processedData.setQuantity(quantity);
 		}
 		
+		Boolean perforated = extractorService.extractPerforated(data.getPerforated());
+		if (perforated != null) {
+			processedData.setPerforated(perforated);
+		}
+		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
 		//  for the case when parsed value don't match database

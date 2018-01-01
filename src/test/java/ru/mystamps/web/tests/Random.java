@@ -39,6 +39,7 @@ import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.validation.ValidationRules;
 
+import static io.qala.datagen.RandomShortApi.bool;
 import static io.qala.datagen.RandomShortApi.integer;
 import static io.qala.datagen.RandomShortApi.sample;
 import static io.qala.datagen.RandomShortApi.sampleMultiple;
@@ -149,6 +150,10 @@ public final class Random {
 			ValidationRules.MIN_STAMPS_IN_SERIES,
 			ValidationRules.MAX_STAMPS_IN_SERIES
 		).integer();
+	}
+	
+	public static boolean perforated() {
+		return bool();
 	}
 	
 	public static String importRequestStatus() {

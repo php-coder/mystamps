@@ -164,4 +164,25 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
+	// @todo #782 SeriesInfoExtractorServiceImpl.extractPerforated(): add unit tests
+	// @todo #782 Series import: add integration test for extracting perforation flag
+	@Override
+	public Boolean extractPerforated(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
+		log.debug("Determining perforation from a fragment: '{}'", fragment);
+		
+		boolean withoutPerforation = StringUtils.contains(fragment, "б/з");
+		if (withoutPerforation) {
+			log.debug("Perforation is false");
+			return Boolean.FALSE;
+		}
+		
+		log.debug("Could not extract perforation info from a fragment");
+		
+		return null;
+	}
+	
 }

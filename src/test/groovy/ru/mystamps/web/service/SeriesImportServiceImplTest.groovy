@@ -411,7 +411,8 @@ class SeriesImportServiceImplTest extends Specification {
 				Random.countryName(),
 				null, /* imageUrl */
 				Random.issueYear().toString(),
-				Random.quantity().toString()
+				Random.quantity().toString(),
+				String.valueOf(Random.perforated())
 			)
 		and:
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
@@ -436,7 +437,8 @@ class SeriesImportServiceImplTest extends Specification {
 				Random.countryName(),
 				expectedImageUrl,
 				Random.issueYear().toString(),
-				Random.quantity().toString()
+				Random.quantity().toString(),
+				String.valueOf(Random.perforated())
 			)
 		and:
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
@@ -467,13 +469,15 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedCategoryId = expectedCategoryIds.get(0)
 			Integer expectedCountryId = expectedCountryIds.get(0)
 			Integer expectedQuantity = Random.quantity()
+			Boolean expectedPerforated = Random.perforated()
 		and:
 			RawParsedDataDto parsedData = new RawParsedDataDto(
 				expectedCategoryName,
 				expectedCountryName,
 				Random.url(),
 				expectedReleaseYear.toString(),
-				expectedQuantity.toString()
+				expectedQuantity.toString(),
+				expectedPerforated.toString()
 			)
 		when:
 			service.saveParsedData(expectedRequestId, parsedData)
@@ -486,6 +490,8 @@ class SeriesImportServiceImplTest extends Specification {
 		and:
 			1 * extractorService.extractQuantity(expectedQuantity.toString()) >> expectedQuantity
 		and:
+			1 * extractorService.extractPerforated(expectedPerforated.toString()) >> expectedPerforated
+		and:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
 				{ SaveParsedDataDbDto saveParsedData ->
@@ -493,6 +499,7 @@ class SeriesImportServiceImplTest extends Specification {
 					assert saveParsedData?.countryId   == expectedCountryId
 					assert saveParsedData?.releaseYear == expectedReleaseYear
 					assert saveParsedData?.quantity    == expectedQuantity
+					assert saveParsedData?.perforated  == expectedPerforated
 					return true
 				}
 			)

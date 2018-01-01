@@ -32,6 +32,7 @@ public class SaveParsedDataDbDto {
 	private String imageUrl;
 	private Integer releaseYear;
 	private Integer quantity;
+	private Boolean perforated;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -40,7 +41,8 @@ public class SaveParsedDataDbDto {
 			|| countryId != null
 			|| imageUrl != null
 			|| releaseYear != null
-			|| quantity != null;
+			|| quantity != null
+			|| perforated != null;
 	}
 	
 }
