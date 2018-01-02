@@ -153,32 +153,24 @@ public class JsoupSiteParser implements SiteParser {
 	
 	protected String extractCategory(Element body) {
 		String locator = ObjectUtils.firstNonNull(categoryLocator, shortDescriptionLocator);
-		if (locator == null) {
+		
+		String category = getTextOfTheFirstElement(body, locator);
+		if (category == null) {
 			return null;
 		}
 		
-		Element elem = body.selectFirst(locator);
-		if (elem == null) {
-			return null;
-		}
-		
-		String category = elem.text();
 		LOG.debug("Extracted category: '{}'", category);
 		return category;
 	}
 	
 	protected String extractCountry(Element body) {
 		String locator = ObjectUtils.firstNonNull(countryLocator, shortDescriptionLocator);
-		if (locator == null) {
+		
+		String country = getTextOfTheFirstElement(body, locator);
+		if (country == null) {
 			return null;
 		}
 		
-		Element elem = body.selectFirst(locator);
-		if (elem == null) {
-			return null;
-		}
-		
-		String country = elem.text();
 		LOG.debug("Extracted country: '{}'", country);
 		return country;
 	}
@@ -201,39 +193,37 @@ public class JsoupSiteParser implements SiteParser {
 	
 	protected String extractIssueDate(Element body) {
 		String locator = ObjectUtils.firstNonNull(issueDateLocator, shortDescriptionLocator);
-		if (locator == null) {
+		
+		String date = getTextOfTheFirstElement(body, locator);
+		if (date == null) {
 			return null;
 		}
 		
-		Element elem = body.selectFirst(locator);
-		if (elem == null) {
-			return null;
-		}
-		
-		String date = elem.text();
 		LOG.debug("Extracted issue date: '{}'", date);
 		return date;
 	}
 	
 	protected String extractQuantity(Element body) {
-		String locator = shortDescriptionLocator;
-		if (locator == null) {
+		String quantity = getTextOfTheFirstElement(body, shortDescriptionLocator);
+		if (quantity == null) {
 			return null;
 		}
 		
-		Element elem = body.selectFirst(locator);
-		if (elem == null) {
-			return null;
-		}
-		
-		String quantity = elem.text();
 		LOG.debug("Extracted quantity: '{}'", quantity);
 		return quantity;
 	}
 	
-	// @todo #782 SiteParser: reduce duplication between extractQuantity() and extractPerforated()
 	protected String extractPerforated(Element body) {
-		String locator = shortDescriptionLocator;
+		String perforated = getTextOfTheFirstElement(body, shortDescriptionLocator);
+		if (perforated == null) {
+			return null;
+		}
+
+		LOG.debug("Extracted perforated flag: '{}'", perforated);
+		return perforated;
+	}
+	
+	private static String getTextOfTheFirstElement(Element body, String locator) {
 		if (locator == null) {
 			return null;
 		}
@@ -243,9 +233,7 @@ public class JsoupSiteParser implements SiteParser {
 			return null;
 		}
 		
-		String perforated = elem.text();
-		LOG.debug("Extracted perforated flag: '{}'", perforated);
-		return perforated;
+		return elem.text();
 	}
 	
 }
