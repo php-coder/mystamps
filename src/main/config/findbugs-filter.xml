@@ -38,4 +38,20 @@
 		<Method name="canParseShouldRequireNonNullUrl" />
 		<Bug pattern="NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS" />
 	</Match>
+	<Match>
+		<!--
+			No one should assign a value returned from this method to primitive boolean type.
+		-->
+		<Class name="ru.mystamps.web.dao.impl.JdbcUtils" />
+		<Method name="getBoolean" />
+		<Bug pattern="NP_BOOLEAN_RETURN_NULL" />
+	</Match>
+	<Match>
+		<!--
+			No one should assign a value returned from this method to primitive boolean type.
+		-->
+		<Class name="ru.mystamps.web.service.SeriesInfoExtractorServiceImpl" />
+		<Method name="extractPerforated" />
+		<Bug pattern="NP_BOOLEAN_RETURN_NULL" />
+	</Match>
 </FindBugsFilter>
