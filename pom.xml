@@ -514,7 +514,7 @@
 		<!-- Redefine default value from spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
 		<java.version>1.8</java.version>
 		
-		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+		<javadoc.plugin.version>3.0.0</javadoc.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<javax-mail.version>1.5.4</javax-mail.version>
