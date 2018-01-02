@@ -45,6 +45,10 @@ public class DownloadResult {
 		return code != Code.SUCCESS;
 	}
 	
+	public boolean hasSucceeded() {
+		return code == Code.SUCCESS;
+	}
+	
 	public String getDataAsString() {
 		return new String(data, StandardCharsets.UTF_8);
 	}

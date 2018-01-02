@@ -93,13 +93,21 @@ public class ServicesConfig {
 	
 	@Bean
 	public DownloaderService getImageDownloaderService() {
-		return new HttpURLConnectionDownloaderService(new String[]{"image/jpeg", "image/png"});
+		return new TimedDownloaderService(
+			LoggerFactory.getLogger(TimedDownloaderService.class),
+			new HttpURLConnectionDownloaderService(
+				new String[]{"image/jpeg", "image/png"}
+			)
+		);
 	}
 	
 	@Bean
 	public DownloaderService getSeriesDownloaderService() {
-		return new HttpURLConnectionDownloaderService(
-			new String[]{"text/html", "image/jpeg", "image/png"}
+		return new TimedDownloaderService(
+			LoggerFactory.getLogger(TimedDownloaderService.class),
+			new HttpURLConnectionDownloaderService(
+				new String[]{"text/html", "image/jpeg", "image/png"}
+			)
 		);
 	}
 	
