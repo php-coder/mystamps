@@ -34,7 +34,7 @@
 		<!--
 			Looks like a false positive.
 		-->
-		<Class name="ru.mystamps.web.util.extractor.SiteParserTest" />
+		<Class name="ru.mystamps.web.util.extractor.JsoupSiteParserTest" />
 		<Method name="canParseShouldRequireNonNullUrl" />
 		<Bug pattern="NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS" />
 	</Match>

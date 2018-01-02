@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
-public class SiteParserTest {
+public class JsoupSiteParserTest {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
