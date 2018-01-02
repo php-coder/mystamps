@@ -546,6 +546,7 @@
 		<mysql.version>5.1.45</mysql.version>
 		
 		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
+		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.8</pmd.plugin.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
 		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
@@ -957,6 +958,16 @@
 					<!-- See also application-prod.properties -->
 					<contexts>scheme,init-data,prod-data</contexts>
 				</configuration>
+			</plugin>
+			
+			<!--
+				Usage: mvn org.owasp:dependency-check-maven:check
+				(analyze dependencies for vulnerabilities and creates report in target/dependency-check-report.html)
+			-->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>${owasp-plugin.version}</version>
 			</plugin>
 			
 			<!--
