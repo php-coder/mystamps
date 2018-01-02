@@ -43,6 +43,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.controller.event.*; // NOPMD: UnusedImports (false positive)
 import ru.mystamps.web.util.extractor.JsoupSiteParser;
 import ru.mystamps.web.util.extractor.SiteParser;
+import ru.mystamps.web.util.extractor.TimedSiteParser;
 
 @Configuration
 @RequiredArgsConstructor
@@ -108,7 +109,10 @@ public class EventsConfig {
 		);
 	}
 	
-	@SuppressWarnings("PMD.ModifiedCyclomaticComplexity") // TODO: deal with it someday
+	@SuppressWarnings({
+		"PMD.AvoidInstantiatingObjectsInLoops",
+		"PMD.ModifiedCyclomaticComplexity" // TODO: deal with it someday
+	})
 	private Map<Integer, SiteParser> createSiteParsers() {
 		boolean foundSiteParserProps = false;
 		Map<Integer, SiteParser> parsers = new HashMap<>();
@@ -141,8 +145,13 @@ public class EventsConfig {
 				
 				Integer num = Integer.valueOf(strNum);
 				if (!parsers.containsKey(num)) {
+					// @todo #801 EventsConfig.createSiteParsers(): split the logic for properties
+					//  parsing and the object instantiation
 					SiteParser parser =
-						new JsoupSiteParser(); // NOPMD: AvoidInstantiatingObjectsInLoops
+						new TimedSiteParser(
+							LoggerFactory.getLogger(TimedSiteParser.class),
+							new JsoupSiteParser()
+						);
 					parsers.put(num, parser);
 				}
 				
