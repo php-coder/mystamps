@@ -35,7 +35,7 @@ import lombok.Setter;
 // Getters/setters are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
-public class JsoupSiteParser {
+public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
 	// When you're adding a new field don't forget to also update:
@@ -51,6 +51,7 @@ public class JsoupSiteParser {
 	private String imageUrlAttribute;
 	private String issueDateLocator;
 	
+	@Override
 	public boolean setField(String name, String value) {
 		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-blank");
 		Validate.validState(StringUtils.isNotBlank(value), "Field value must be non-blank");
@@ -99,6 +100,7 @@ public class JsoupSiteParser {
 		return valid;
 	}
 	
+	@Override
 	public boolean isFullyInitialized() {
 		return name != null
 			&& matchedUrl != null
@@ -111,6 +113,7 @@ public class JsoupSiteParser {
 			);
 	}
 	
+	@Override
 	public boolean canParse(String url) {
 		Validate.validState(url != null, "Site URL must be non-null");
 		Validate.validState(matchedUrl != null, "Matched URL must be set");
@@ -123,6 +126,7 @@ public class JsoupSiteParser {
 	 *
 	 * @return info about a series from the document
 	 */
+	@Override
 	public SeriesInfo parse(String htmlPage) {
 		Validate.isTrue(StringUtils.isNotBlank(htmlPage), "Page content must be non-blank");
 		

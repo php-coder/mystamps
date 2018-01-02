@@ -42,6 +42,7 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.controller.event.*; // NOPMD: UnusedImports (false positive)
 import ru.mystamps.web.util.extractor.JsoupSiteParser;
+import ru.mystamps.web.util.extractor.SiteParser;
 
 @Configuration
 @RequiredArgsConstructor
@@ -56,10 +57,10 @@ public class EventsConfig {
 	
 	@PostConstruct
 	public void init() {
-		Map<Integer, JsoupSiteParser> parsers = createSiteParsers();
-		for (Map.Entry<Integer, JsoupSiteParser> entry : parsers.entrySet()) {
+		Map<Integer, SiteParser> parsers = createSiteParsers();
+		for (Map.Entry<Integer, SiteParser> entry : parsers.entrySet()) {
 			Integer num = entry.getKey();
-			JsoupSiteParser parser = entry.getValue();
+			SiteParser parser = entry.getValue();
 			if (!parser.isFullyInitialized()) {
 				LOG.warn("Ignored non-fully initialized site parser (app.site-parser[{}])", num);
 				continue;
@@ -89,7 +90,7 @@ public class EventsConfig {
 	
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
-		List<JsoupSiteParser> siteParsers) {
+		List<SiteParser> siteParsers) {
 		
 		return new DownloadingSucceededEventListener(
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
@@ -108,9 +109,9 @@ public class EventsConfig {
 	}
 	
 	@SuppressWarnings("PMD.ModifiedCyclomaticComplexity") // TODO: deal with it someday
-	private Map<Integer, JsoupSiteParser> createSiteParsers() {
+	private Map<Integer, SiteParser> createSiteParsers() {
 		boolean foundSiteParserProps = false;
-		Map<Integer, JsoupSiteParser> parsers = new HashMap<>();
+		Map<Integer, SiteParser> parsers = new HashMap<>();
 		
 		for (PropertySource<?> source : env.getPropertySources()) {
 			// while we expect that properties will be in PropertiesPropertySource, we use
@@ -140,7 +141,7 @@ public class EventsConfig {
 				
 				Integer num = Integer.valueOf(strNum);
 				if (!parsers.containsKey(num)) {
-					JsoupSiteParser parser =
+					SiteParser parser =
 						new JsoupSiteParser(); // NOPMD: AvoidInstantiatingObjectsInLoops
 					parsers.put(num, parser);
 				}
@@ -152,7 +153,7 @@ public class EventsConfig {
 					continue;
 				}
 				
-				JsoupSiteParser parser = parsers.get(num);
+				SiteParser parser = parsers.get(num);
 				boolean validProperty = parser.setField(fieldName, propertyValue);
 				if (!validProperty) {
 					LOG.warn("Ignored property '{}': unknown or unsupported", name);

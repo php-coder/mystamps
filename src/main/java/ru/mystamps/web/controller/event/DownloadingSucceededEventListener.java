@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.util.extractor.SeriesInfo;
-import ru.mystamps.web.util.extractor.JsoupSiteParser;
+import ru.mystamps.web.util.extractor.SiteParser;
 
 /**
  * Listener of the @{link DownloadingSucceeded} event.
@@ -44,7 +44,7 @@ public class DownloadingSucceededEventListener
 	
 	private final Logger log;
 	private final SeriesImportService importService;
-	private final List<JsoupSiteParser> siteParsers;
+	private final List<SiteParser> siteParsers;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@PostConstruct
@@ -66,8 +66,8 @@ public class DownloadingSucceededEventListener
 		}
 		
 		String url = event.getUrl();
-		JsoupSiteParser parser = null;
-		for (JsoupSiteParser candidate : siteParsers) {
+		SiteParser parser = null;
+		for (SiteParser candidate : siteParsers) {
 			if (candidate.canParse(url)) {
 				parser = candidate;
 				break;
