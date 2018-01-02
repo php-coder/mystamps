@@ -490,7 +490,7 @@
 		<failsafe.plugin.version>2.19.1</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
-		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
+		<findbugs.plugin.version>3.0.5</findbugs.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.7.RELEASE/spring-boot-dependencies/pom.xml) -->
