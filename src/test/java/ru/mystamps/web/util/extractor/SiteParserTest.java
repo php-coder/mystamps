@@ -42,11 +42,11 @@ public class SiteParserTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
-	private SiteParser parser;
+	private JsoupSiteParser parser;
 	
 	@Before
 	public void init() {
-		parser = new SiteParser();
+		parser = new JsoupSiteParser();
 	}
 	
 	//
@@ -712,9 +712,9 @@ public class SiteParserTest {
 		assertThat(msg, perforated, equalTo(expectedValue));
 	}
 	
-	private static String describe(SiteParser parser) {
+	private static String describe(JsoupSiteParser parser) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SiteParser[name=")
+		sb.append("JsoupSiteParser[name=")
 			.append(parser.getName())
 			.append(", matchedUrl=")
 			.append(parser.getMatchedUrl())

@@ -35,12 +35,12 @@ import lombok.Setter;
 // Getters/setters are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
-public class SiteParser {
-	private static final Logger LOG = LoggerFactory.getLogger(SiteParser.class);
+public class JsoupSiteParser {
+	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
 	// When you're adding a new field don't forget to also update:
-	// - SiteParser.setField()
-	// - SiteParser.isFullyInitialized() (optionally)
+	// - JsoupSiteParser.setField()
+	// - JsoupSiteParser.isFullyInitialized() (optionally)
 	// - SiteParserTest.describe()
 	private String name;
 	private String matchedUrl;
