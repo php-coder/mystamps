@@ -38,10 +38,14 @@ class TimedImagePreviewStrategyTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
-	def 'createPreview() should pass #expectedData and return result of original strategy'(byte[] expectedData) {
-		given:
-			byte[] expectedResult = 'foobar'.bytes
+	@SuppressWarnings([
+		'ClosureAsLastMethodParameter',
+		'FactoryMethodName',
+		'LineLength',
+		'UnnecessaryReturnKeyword',
+		/* false positive: */ 'UnnecessaryBooleanExpression',
+	])
+	def 'createPreview() should pass #expectedData and return #expectedResult'(byte[] expectedData, byte[] expectedResult) {
 		when:
 			byte[] result = strategy.createPreview(expectedData)
 		then:
@@ -52,9 +56,9 @@ class TimedImagePreviewStrategyTest extends Specification {
 		and:
 			result == expectedResult
 		where:
-			expectedData | _
-			null         | _
-			'foo'.bytes  | _
+			expectedData || expectedResult
+			null         || null
+			'foo'.bytes  || 'foobar'.bytes
 	}
 	
 }
