@@ -479,7 +479,7 @@
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
 		<commons.lang.version>3.4</commons.lang.version>
-		<compiler.plugin.version>3.6.1</compiler.plugin.version>
+		<compiler.plugin.version>3.7.0</compiler.plugin.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<datagen.version>2.2.1</datagen.version>
 		
