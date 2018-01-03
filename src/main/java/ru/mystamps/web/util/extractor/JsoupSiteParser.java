@@ -41,7 +41,7 @@ public class JsoupSiteParser implements SiteParser {
 	// When you're adding a new field don't forget to also update:
 	// - JsoupSiteParser.setField()
 	// - JsoupSiteParser.isFullyInitialized() (optionally)
-	// - SiteParserTest.describe()
+	// - JsoupSiteParserTest.describe()
 	private String name;
 	private String matchedUrl;
 	private String categoryLocator;
