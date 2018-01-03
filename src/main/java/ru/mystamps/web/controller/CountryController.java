@@ -138,12 +138,22 @@ public class CountryController {
 		return view;
 	}
 	
-	@GetMapping(Url.LIST_COUNTRIES_PAGE)
-	public void list(Model model, Locale userLocale) {
+	@GetMapping(Url.GET_COUNTRIES_PAGE)
+	public String showCountries(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 		
 		model.addAttribute("countries", countries);
+		
+		return "country/list";
+	}
+	
+	@GetMapping(Url.LIST_COUNTRIES_PAGE)
+	public View list() {
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.GET_COUNTRIES_PAGE);
+		return view;
 	}
 	
 }
