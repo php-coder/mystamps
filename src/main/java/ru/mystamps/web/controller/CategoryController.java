@@ -135,12 +135,22 @@ public class CategoryController {
 		return view;
 	}
 	
-	@GetMapping(Url.LIST_CATEGORIES_PAGE)
-	public void list(Model model, Locale userLocale) {
+	@GetMapping(Url.GET_CATEGORIES_PAGE)
+	public String showCategories(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
 		
 		model.addAttribute("categories", categories);
+		
+		return "category/list";
+	}
+	
+	@GetMapping(Url.LIST_CATEGORIES_PAGE)
+	public View list() {
+		RedirectView view = new RedirectView();
+		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+		view.setUrl(Url.GET_CATEGORIES_PAGE);
+		return view;
 	}
 	
 }

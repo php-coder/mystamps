@@ -60,7 +60,7 @@ public final class Url {
 	public static final String SUGGEST_SERIES_COUNTRY	= "/suggest/series_country";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
-	public static final String LIST_CATEGORIES_PAGE  = "/category/list";
+	public static final String GET_CATEGORIES_PAGE   = "/categories";
 	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
 	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
@@ -80,6 +80,7 @@ public final class Url {
 	
 	// For backward compatibility
 	public static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
+	public static final String LIST_CATEGORIES_PAGE           = "/category/list";
 	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
 	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
 	public static final String INFO_COLLECTION_BY_ID_PAGE     = "/collection/{id}/{slug}";
@@ -144,7 +145,7 @@ public final class Url {
 		map.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
-		map.put("LIST_CATEGORIES_PAGE", LIST_CATEGORIES_PAGE);
+		map.put("GET_CATEGORIES_PAGE", GET_CATEGORIES_PAGE);
 		map.put("LIST_COUNTRIES_PAGE", LIST_COUNTRIES_PAGE);
 		map.put("LIST_IMPORT_REQUESTS_PAGE", LIST_IMPORT_REQUESTS_PAGE);
 		map.put("LOGIN_PAGE", LOGIN_PAGE);
