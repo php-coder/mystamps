@@ -72,4 +72,9 @@ public class TimedSiteParser implements SiteParser {
 		return result;
 	}
 	
+	@Override
+	public String toString() {
+		return parser.toString();
+	}
+	
 }
