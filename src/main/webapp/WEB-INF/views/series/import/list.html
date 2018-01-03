@@ -98,7 +98,7 @@
 											/*/-->
 										</td>
 										<td>
-											<a href="./info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${request.id})}" th:text="${request.url}">
+											<a href="./info.html" th:href="@{${REQUEST_IMPORT_PAGE}(id=${request.id})}" th:text="${#uris.unescapePath(request.url)}">
 												http://example.com/my-first-series.html
 											</a>
 										</td>

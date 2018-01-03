@@ -69,7 +69,7 @@
 						<dt th:text="#{t_url}">
 							URL
 						</dt>
-						<dd id="request-url" th:text="${request.url}">
+						<dd id="request-url" th:text="${#uris.unescapePath(request.url)}">
 							http://example.com/my-first-series.html
 						</dd>
 						<dt th:text="#{t_status}">
