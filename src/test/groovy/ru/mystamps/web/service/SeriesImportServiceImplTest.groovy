@@ -448,10 +448,10 @@ class SeriesImportServiceImplTest extends Specification {
 		then:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
-				{ AddSeriesParsedDataDbDto saveParsedData ->
-					assert saveParsedData?.imageUrl == expectedImageUrl
-					assert DateUtils.roughlyEqual(saveParsedData?.createdAt, new Date())
-					assert DateUtils.roughlyEqual(saveParsedData?.updatedAt, new Date())
+				{ AddSeriesParsedDataDbDto parsedData ->
+					assert parsedData?.imageUrl == expectedImageUrl
+					assert DateUtils.roughlyEqual(parsedData?.createdAt, new Date())
+					assert DateUtils.roughlyEqual(parsedData?.updatedAt, new Date())
 					return true
 				}
 			)
@@ -494,12 +494,12 @@ class SeriesImportServiceImplTest extends Specification {
 		and:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
-				{ AddSeriesParsedDataDbDto saveParsedData ->
-					assert saveParsedData?.categoryId  == expectedCategoryId
-					assert saveParsedData?.countryId   == expectedCountryId
-					assert saveParsedData?.releaseYear == expectedReleaseYear
-					assert saveParsedData?.quantity    == expectedQuantity
-					assert saveParsedData?.perforated  == expectedPerforated
+				{ AddSeriesParsedDataDbDto parsedData ->
+					assert parsedData?.categoryId  == expectedCategoryId
+					assert parsedData?.countryId   == expectedCountryId
+					assert parsedData?.releaseYear == expectedReleaseYear
+					assert parsedData?.quantity    == expectedQuantity
+					assert parsedData?.perforated  == expectedPerforated
 					return true
 				}
 			)
