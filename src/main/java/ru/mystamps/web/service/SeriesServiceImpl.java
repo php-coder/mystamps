@@ -158,12 +158,7 @@ public class SeriesServiceImpl implements SeriesService {
 			yvertCatalogService.addToSeries(id, yvertNumbers);
 		}
 		
-		Set<String> gibbonsNumbers = CatalogUtils.parseCatalogNumbers(dto.getGibbonsNumbers());
-		if (!gibbonsNumbers.isEmpty()) {
-			gibbonsCatalogService.add(gibbonsNumbers);
-			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
-		}
-		
+		createCatalogNumbersAndAddToSeries(id, gibbonsCatalogService, dto.getGibbonsNumbers());
 		createCatalogNumbersAndAddToSeries(id, solovyovCatalogService, dto.getSolovyovNumbers());
 		createCatalogNumbersAndAddToSeries(id, zagorskiCatalogService, dto.getZagorskiNumbers());
 		
