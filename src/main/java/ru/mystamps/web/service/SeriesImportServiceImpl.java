@@ -164,48 +164,48 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		Validate.isTrue(data != null, "Parsed data must be non null");
 		
-		AddSeriesParsedDataDbDto processedData = new AddSeriesParsedDataDbDto();
-		processedData.setImageUrl(data.getImageUrl());
+		AddSeriesParsedDataDbDto seriesParsedData = new AddSeriesParsedDataDbDto();
+		seriesParsedData.setImageUrl(data.getImageUrl());
 		Date now = new Date();
-		processedData.setCreatedAt(now);
-		processedData.setUpdatedAt(now);
+		seriesParsedData.setCreatedAt(now);
+		seriesParsedData.setUpdatedAt(now);
 		
 		List<Integer> categoryIds = extractorService.extractCategory(data.getCategoryName());
 		if (!categoryIds.isEmpty()) {
-			processedData.setCategoryId(categoryIds.get(0));
+			seriesParsedData.setCategoryId(categoryIds.get(0));
 		}
 		
 		List<Integer> countryIds = extractorService.extractCountry(data.getCountryName());
 		if (!countryIds.isEmpty()) {
-			processedData.setCountryId(countryIds.get(0));
+			seriesParsedData.setCountryId(countryIds.get(0));
 		}
 		
 		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
 		if (releaseYear != null) {
-			processedData.setReleaseYear(releaseYear);
+			seriesParsedData.setReleaseYear(releaseYear);
 		}
 		
 		Integer quantity = extractorService.extractQuantity(data.getQuantity());
 		if (quantity != null) {
-			processedData.setQuantity(quantity);
+			seriesParsedData.setQuantity(quantity);
 		}
 		
 		Boolean perforated = extractorService.extractPerforated(data.getPerforated());
 		if (perforated != null) {
-			processedData.setPerforated(perforated);
+			seriesParsedData.setPerforated(perforated);
 		}
 		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
 		//  for the case when parsed value don't match database
-		if (!processedData.hasAtLeastOneFieldFilled()) {
+		if (!seriesParsedData.hasAtLeastOneFieldFilled()) {
 			eventPublisher.publishEvent(new ParsingFailed(this, requestId));
 			return;
 		}
 		
-		seriesImportDao.addParsedContent(requestId, processedData);
+		seriesImportDao.addParsedContent(requestId, seriesParsedData);
 		
-		log.info("Request #{}: page were parsed ({})", requestId, processedData);
+		log.info("Request #{}: page were parsed ({})", requestId, seriesParsedData);
 		
 		changeStatus(
 			requestId,
