@@ -171,13 +171,15 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesParsedData.setUpdatedAt(now);
 		
 		List<Integer> categoryIds = extractorService.extractCategory(data.getCategoryName());
-		if (!categoryIds.isEmpty()) {
-			seriesParsedData.setCategoryId(categoryIds.get(0));
+		Integer categoryId = getFirstElement(categoryIds);
+		if (categoryId != null) {
+			seriesParsedData.setCategoryId(categoryId);
 		}
 		
 		List<Integer> countryIds = extractorService.extractCountry(data.getCountryName());
-		if (!countryIds.isEmpty()) {
-			seriesParsedData.setCountryId(countryIds.get(0));
+		Integer countryId = getFirstElement(countryIds);
+		if (countryId != null) {
+			seriesParsedData.setCountryId(countryId);
 		}
 		
 		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
@@ -236,6 +238,13 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
 	public List<ImportRequestFullInfo> findAll() {
 		return seriesImportDao.findAll();
+	}
+	
+	private static Integer getFirstElement(List<Integer> list) {
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
 	}
 	
 }
