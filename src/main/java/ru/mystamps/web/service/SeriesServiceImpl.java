@@ -65,7 +65,6 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
@@ -88,30 +87,12 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setCategoryId(dto.getCategory().getId());
 		series.setQuantity(dto.getQuantity());
 		series.setPerforated(dto.getPerforated());
-		
-		if (dto.getMichelPrice() != null) {
-			series.setMichelPrice(dto.getMichelPrice());
-		}
-
-		if (dto.getScottPrice() != null) {
-			series.setScottPrice(dto.getScottPrice());
-		}
-
-		if (dto.getYvertPrice() != null) {
-			series.setYvertPrice(dto.getYvertPrice());
-		}
-
-		if (dto.getGibbonsPrice() != null) {
-			series.setGibbonsPrice(dto.getGibbonsPrice());
-		}
-
-		if (dto.getSolovyovPrice() != null) {
-			series.setSolovyovPrice(dto.getSolovyovPrice());
-		}
-
-		if (dto.getZagorskiPrice() != null) {
-			series.setZagorskiPrice(dto.getZagorskiPrice());
-		}
+		series.setMichelPrice(dto.getMichelPrice());
+		series.setScottPrice(dto.getScottPrice());
+		series.setYvertPrice(dto.getYvertPrice());
+		series.setGibbonsPrice(dto.getGibbonsPrice());
+		series.setSolovyovPrice(dto.getSolovyovPrice());
+		series.setZagorskiPrice(dto.getZagorskiPrice());
 
 		if (userCanAddComments && dto.getComment() != null) {
 			Validate.isTrue(
