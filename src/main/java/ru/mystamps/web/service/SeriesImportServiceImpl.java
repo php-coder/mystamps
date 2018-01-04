@@ -164,27 +164,24 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		Validate.isTrue(data != null, "Parsed data must be non null");
 		
+		List<Integer> categoryIds = extractorService.extractCategory(data.getCategoryName());
+		List<Integer> countryIds = extractorService.extractCountry(data.getCountryName());
+		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
+		Integer quantity = extractorService.extractQuantity(data.getQuantity());
+		Boolean perforated = extractorService.extractPerforated(data.getPerforated());
+		
+		Integer categoryId = getFirstElement(categoryIds);
+		Integer countryId = getFirstElement(countryIds);
+		
 		AddSeriesParsedDataDbDto seriesParsedData = new AddSeriesParsedDataDbDto();
 		seriesParsedData.setImageUrl(data.getImageUrl());
 		Date now = new Date();
 		seriesParsedData.setCreatedAt(now);
 		seriesParsedData.setUpdatedAt(now);
-		
-		List<Integer> categoryIds = extractorService.extractCategory(data.getCategoryName());
-		Integer categoryId = getFirstElement(categoryIds);
 		seriesParsedData.setCategoryId(categoryId);
-		
-		List<Integer> countryIds = extractorService.extractCountry(data.getCountryName());
-		Integer countryId = getFirstElement(countryIds);
 		seriesParsedData.setCountryId(countryId);
-		
-		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
 		seriesParsedData.setReleaseYear(releaseYear);
-		
-		Integer quantity = extractorService.extractQuantity(data.getQuantity());
 		seriesParsedData.setQuantity(quantity);
-		
-		Boolean perforated = extractorService.extractPerforated(data.getPerforated());
 		seriesParsedData.setPerforated(perforated);
 		
 		// IMPORTANT: don't add code that modifies database above this line!
