@@ -234,7 +234,7 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'changeStatus() should pass arguments to dao'() {
 		given:
 			Integer expectedRequestId = Random.userId()
@@ -245,19 +245,15 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.changeStatus(expectedRequestId, expectedOldStatus, expectedNewStatus)
 		then:
-			1 * seriesImportDao.changeStatus({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}, { Date date ->
-				assert DateUtils.roughlyEqual(date, new Date())
-				return true
-			}, { String oldStatus ->
-				assert oldStatus == expectedOldStatus
-				return true
-			}, { String newStatus ->
-				assert newStatus == expectedNewStatus
-				return true
-			})
+			1 * seriesImportDao.changeStatus(
+				expectedRequestId,
+				{ Date date ->
+					assert DateUtils.roughlyEqual(date, new Date())
+					return true
+				},
+				expectedOldStatus,
+				expectedNewStatus
+			)
 	}
 	
 	//
@@ -271,7 +267,6 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findById() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -280,10 +275,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			ImportRequestDto result = service.findById(expectedRequestId)
 		then:
-			1 * seriesImportDao.findById({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}) >> expectedResult
+			1 * seriesImportDao.findById(expectedRequestId) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -308,7 +300,7 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'saveDownloadedContent() should pass arguments to dao'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -316,41 +308,36 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.saveDownloadedContent(expectedRequestId, expectedContent)
 		then:
-			1 * seriesImportDao.addRawContent({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}, { Date createdAt ->
-				assert DateUtils.roughlyEqual(createdAt, new Date())
-				return true
-			}, { Date updatedAt ->
-				assert DateUtils.roughlyEqual(updatedAt, new Date())
-				return true
-			}, { String content ->
-				assert content == expectedContent
-				return true
-			})
+			1 * seriesImportDao.addRawContent(
+				expectedRequestId,
+				{ Date createdAt ->
+					assert DateUtils.roughlyEqual(createdAt, new Date())
+					return true
+				},
+				{ Date updatedAt ->
+					assert DateUtils.roughlyEqual(updatedAt, new Date())
+					return true
+				},
+				expectedContent
+			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'saveDownloadedContent() should change status'() {
 		given:
 			Integer expectedRequestId = Random.id()
 		when:
 			service.saveDownloadedContent(expectedRequestId, between(1, 10).english())
 		then:
-			1 * seriesImportDao.changeStatus({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}, { Date date ->
-				assert DateUtils.roughlyEqual(date, new Date())
-				return true
-			}, { String oldStatus ->
-				assert oldStatus == SeriesImportRequestStatus.UNPROCESSED
-				return true
-			}, { String newStatus ->
-				assert newStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
-				return true
-			})
+			1 * seriesImportDao.changeStatus(
+				expectedRequestId,
+				{ Date date ->
+					assert DateUtils.roughlyEqual(date, new Date())
+					return true
+				},
+				SeriesImportRequestStatus.UNPROCESSED,
+				SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
+			)
 	}
 	
 	//
@@ -364,7 +351,6 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'getDownloadedContent() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -375,10 +361,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			String result = service.getDownloadedContent(expectedRequestId)
 		then:
-			1 * seriesImportDao.findRawContentByRequestId({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}) >> expectedResult
+			1 * seriesImportDao.findRawContentByRequestId(expectedRequestId) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -537,7 +520,6 @@ class SeriesImportServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'getParsedData() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Integer expectedRequestId = Random.id()
@@ -547,13 +529,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			ParsedDataDto result = service.getParsedData(expectedRequestId, expectedLang)
 		then:
-			1 * seriesImportDao.findParsedDataByRequestId({ Integer requestId ->
-				assert requestId == expectedRequestId
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * seriesImportDao.findParsedDataByRequestId(expectedRequestId, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
