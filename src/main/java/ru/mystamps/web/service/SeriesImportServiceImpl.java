@@ -37,12 +37,12 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.controller.event.ParsingFailed;
 import ru.mystamps.web.dao.SeriesImportDao;
+import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
-import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
@@ -164,7 +164,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		Validate.isTrue(data != null, "Parsed data must be non null");
 		
-		SaveParsedDataDbDto processedData = new SaveParsedDataDbDto();
+		AddSeriesParsedDataDbDto processedData = new AddSeriesParsedDataDbDto();
 		processedData.setImageUrl(data.getImageUrl());
 		Date now = new Date();
 		processedData.setCreatedAt(now);

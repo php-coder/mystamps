@@ -35,12 +35,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesImportDao;
+import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
-import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
 
 // it complains that "request_id" is present many times
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -202,7 +202,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	}
 	
 	@Override
-	public void addParsedContent(Integer requestId, SaveParsedDataDbDto data) {
+	public void addParsedContent(Integer requestId, AddSeriesParsedDataDbDto data) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("request_id", requestId);
 		params.put("category_id", data.getCategoryId());

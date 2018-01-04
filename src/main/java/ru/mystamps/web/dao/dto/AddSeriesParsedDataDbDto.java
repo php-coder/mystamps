@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(exclude = { "createdAt", "updatedAt" })
-public class SaveParsedDataDbDto {
+public class AddSeriesParsedDataDbDto {
 	private Integer categoryId;
 	private Integer countryId;
 	private String imageUrl;

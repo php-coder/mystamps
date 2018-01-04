@@ -20,12 +20,12 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 import java.util.List;
 
+import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.ParsedDataDto;
-import ru.mystamps.web.dao.dto.SaveParsedDataDbDto;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
@@ -40,7 +40,7 @@ public interface SeriesImportDao {
 	ImportRequestDto findById(Integer id);
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
 	String findRawContentByRequestId(Integer requestId);
-	void addParsedContent(Integer requestId, SaveParsedDataDbDto data);
+	void addParsedContent(Integer requestId, AddSeriesParsedDataDbDto data);
 	ParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
 	List<ImportRequestFullInfo> findAll();
