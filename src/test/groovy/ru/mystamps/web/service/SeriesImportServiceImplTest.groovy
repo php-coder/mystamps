@@ -406,7 +406,7 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		and:
-			RawParsedDataDto parsedData = new RawParsedDataDto(
+			RawParsedDataDto rawData = new RawParsedDataDto(
 				Random.categoryName(),
 				Random.countryName(),
 				null, /* imageUrl */
@@ -418,7 +418,7 @@ class SeriesImportServiceImplTest extends Specification {
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
 			extractorService.extractCountry(_ as String) >> Collections.emptyList()
 		when:
-			service.saveParsedData(expectedRequestId, parsedData)
+			service.saveParsedData(expectedRequestId, rawData)
 		then:
 			1 * eventPublisher.publishEvent({ ParsingFailed event ->
 				assert event?.requestId == expectedRequestId
@@ -432,7 +432,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			String expectedImageUrl = Random.url()
 		and:
-			RawParsedDataDto parsedData = new RawParsedDataDto(
+			RawParsedDataDto rawData = new RawParsedDataDto(
 				Random.categoryName(),
 				Random.countryName(),
 				expectedImageUrl,
@@ -444,7 +444,7 @@ class SeriesImportServiceImplTest extends Specification {
 			extractorService.extractCategory(_ as String) >> Collections.emptyList()
 			extractorService.extractCountry(_ as String) >> Collections.emptyList()
 		when:
-			service.saveParsedData(expectedRequestId, parsedData)
+			service.saveParsedData(expectedRequestId, rawData)
 		then:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
@@ -471,7 +471,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedQuantity = Random.quantity()
 			Boolean expectedPerforated = Random.perforated()
 		and:
-			RawParsedDataDto parsedData = new RawParsedDataDto(
+			RawParsedDataDto rawData = new RawParsedDataDto(
 				expectedCategoryName,
 				expectedCountryName,
 				Random.url(),
@@ -480,7 +480,7 @@ class SeriesImportServiceImplTest extends Specification {
 				expectedPerforated.toString()
 			)
 		when:
-			service.saveParsedData(expectedRequestId, parsedData)
+			service.saveParsedData(expectedRequestId, rawData)
 		then:
 			1 * extractorService.extractCategory(expectedCategoryName) >> expectedCategoryIds
 		and:
