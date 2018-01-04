@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Verify scenarios of importing a series from an external site
 Library          Selenium2Library
+Library          DateTime
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
@@ -75,6 +76,30 @@ Import series from an external site (in Russian, use description locator)
 	Should Be Equal              ${imageUrl}        http://localhost:8080/image/1
 	Should Be Equal              ${year}            2000
 
+Import series and series sale with existing seller from an external site
+	[Documentation]             Verify import series and sale (with existing seller)
+	Input Text                  id=url  http://localhost:8080/valid/series-info/existing-seller
+	Submit Form                 id=import-series-form
+	${requestLocation}=         Get Location
+	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
+	# sale info should be parsed and shown at the request page
+	List Selection Should Be    id=seller    Eicca Toppinen
+	Textfield Value Should Be   id=price     111
+	List Selection Should Be    id=currency  RUB
+	Submit Form                 id=create-series-form
+	${seriesLocation}=          Get Location
+	Should Match Regexp         ${seriesLocation}  /series/\\d+
+	# after importing a series, sale info should be shown at the info page
+	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
+	Element Text Should Be      id=series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB
+	Link Should Point To        id=series-sale-1-seller       http://example.com/eicca-toppinen
+	Link Should Point To        id=series-sale-1-transaction  http://localhost:8080/valid/series-info/existing-seller
+	Go To                       ${requestLocation}
+	# after importing a series, sale info at the request page should be shown as read-only
+	Element Should Be Disabled  id=seller
+	Element Should Be Disabled  id=price
+	Element Should Be Disabled  id=currency
+
 Submit a request that will fail to download a file
 	[Documentation]         Verify submitting a URL with a non-existing file
 	Input Text              id=url  ${SITE_URL}/test/invalid/response-404
@@ -103,3 +128,8 @@ After Test Suite
 	Log Out
 	Close Browser
 
+Link Should Point To
+	[Documentation]  Verify that "href" attribute of the element refers to a link
+	[Arguments]      ${locator}  ${expectedUrl}
+	${url}=          Get Element Attribute  ${locator}@href
+	Should Be Equal  ${expectedUrl}  ${url}

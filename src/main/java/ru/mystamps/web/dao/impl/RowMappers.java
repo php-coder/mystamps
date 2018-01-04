@@ -25,7 +25,11 @@ import java.util.Date;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({
+	"PMD.AvoidDuplicateLiterals",
+	"PMD.TooManyMethods",
+	"PMD.CouplingBetweenObjects"
+})
 final class RowMappers {
 	
 	private RowMappers() {
@@ -296,6 +300,16 @@ final class RowMappers {
 			quantity,
 			perforated
 		);
+	}
+	
+	public static SeriesSaleParsedDataDto forSeriesSaleParsedDataDto(ResultSet rs, int unused)
+		throws SQLException {
+		
+		Integer sellerId = JdbcUtils.getInteger(rs, "seller_id");
+		BigDecimal price = rs.getBigDecimal("price");
+		Currency currency = JdbcUtils.getCurrency(rs, "currency");
+		
+		return new SeriesSaleParsedDataDto(sellerId, price, currency);
 	}
 	
 	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int unused)

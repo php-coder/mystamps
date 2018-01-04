@@ -15,22 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.dao.dto;
+
+import java.math.BigDecimal;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class RawParsedDataDto {
-	private final String categoryName;
-	private final String countryName;
-	private final String imageUrl;
-	private final String releaseYear;
-	private final String quantity;
-	private final String perforated;
-	private final String sellerName;
-	private final String sellerUrl;
-	private final String price;
-	private final String currency;
+public class SeriesSaleParsedDataDto {
+	private final Integer sellerId;
+	private final BigDecimal price;
+	private final Currency currency;
 }

@@ -30,6 +30,7 @@ import ru.mystamps.web.tests.Random;
 
 import static io.qala.datagen.RandomShortApi.nullOr;
 import static io.qala.datagen.RandomShortApi.nullOrBlank;
+import static io.qala.datagen.RandomShortApi.positiveInteger;
 import static io.qala.datagen.RandomValue.between;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -153,6 +154,36 @@ public class JsoupSiteParserTest {
 	}
 	
 	@Test
+	public void setFieldShouldSupportSettingSellerLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("seller-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getSellerLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingPriceLocator() {
+		String expectedLocator = Random.jsoupLocator();
+		
+		boolean valid = parser.setField("price-locator", expectedLocator);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getPriceLocator(), equalTo(expectedLocator));
+	}
+	
+	@Test
+	public void setFieldShouldSupportSettingCurrencyValue() {
+		String expectedValue = Random.currency().toString();
+		
+		boolean valid = parser.setField("currency-value", expectedValue);
+		
+		assertThat(valid, is(true));
+		assertThat(parser.getCurrencyValue(), equalTo(expectedValue));
+	}
+	
+	@Test
 	public void setFieldShouldIgnoreUnknownField() {
 		boolean valid = parser.setField("unsupported-locator", Random.jsoupLocator());
 		
@@ -172,6 +203,9 @@ public class JsoupSiteParserTest {
 		parser.setImageUrlLocator(Random.jsoupLocator());
 		parser.setImageUrlAttribute(Random.tagAttributeName());
 		parser.setIssueDateLocator(Random.jsoupLocator());
+		parser.setSellerLocator(Random.jsoupLocator());
+		parser.setPriceLocator(Random.jsoupLocator());
+		parser.setCurrencyValue(Random.currency().toString());
 		
 		// ensure that required field is null
 		parser.setName(null);
@@ -189,6 +223,9 @@ public class JsoupSiteParserTest {
 		parser.setImageUrlLocator(Random.jsoupLocator());
 		parser.setImageUrlAttribute(Random.tagAttributeName());
 		parser.setIssueDateLocator(Random.jsoupLocator());
+		parser.setSellerLocator(Random.jsoupLocator());
+		parser.setPriceLocator(Random.jsoupLocator());
+		parser.setCurrencyValue(Random.currency().toString());
 
 		// ensure that required field is null
 		parser.setMatchedUrl(null);
@@ -202,6 +239,7 @@ public class JsoupSiteParserTest {
 		parser.setName(Random.name());
 		parser.setMatchedUrl(Random.url());
 		parser.setImageUrlAttribute(Random.tagAttributeName());
+		parser.setCurrencyValue(Random.currency().toString());
 
 		// ensure that required fields are null
 		parser.setCategoryLocator(null);
@@ -209,6 +247,8 @@ public class JsoupSiteParserTest {
 		parser.setShortDescriptionLocator(null);
 		parser.setImageUrlLocator(null);
 		parser.setIssueDateLocator(null);
+		parser.setSellerLocator(null);
+		parser.setPriceLocator(null);
 		
 		String msg = describe(parser) + " expected to be not fully initialized";
 		assertThat(msg, parser.isFullyInitialized(), is(false));
@@ -219,7 +259,7 @@ public class JsoupSiteParserTest {
 		parser.setName(Random.name());
 		parser.setMatchedUrl(Random.url());
 		
-		final int countOfFieldsWithLocator = 5;
+		final int countOfFieldsWithLocator = 7;
 		String[] locators = new String[countOfFieldsWithLocator];
 		
 		for (int i = 0; i < locators.length; i++) {
@@ -234,9 +274,11 @@ public class JsoupSiteParserTest {
 		parser.setCategoryLocator(locators[0]);
 		parser.setCountryLocator(locators[1]);
 		parser.setShortDescriptionLocator(locators[2]);
-		// CheckStyle: ignore MagicNumber for next 2 lines
+		// CheckStyle: ignore MagicNumber for next 4 lines
 		parser.setImageUrlLocator(locators[3]);
 		parser.setIssueDateLocator(locators[4]);
+		parser.setSellerLocator(locators[5]);
+		parser.setPriceLocator(locators[6]);
 		
 		parser.setImageUrlAttribute(nullOr(Random.tagAttributeName()));
 		
@@ -305,18 +347,29 @@ public class JsoupSiteParserTest {
 			expectedIssueDate
 		);
 		String expectedImageUrl = baseUri + imageUrl;
+		String expectedSellerName = Random.sellerName();
+		String expectedSellerUrl = Random.url();
+		String expectedPrice = Random.price().toString();
+		String expectedCurrency = Random.currency().toString();
 		
 		parser.setMatchedUrl(baseUri);
 		parser.setCategoryLocator("#category-name");
 		parser.setCountryLocator("#country-name");
 		parser.setIssueDateLocator("#issue-date");
 		parser.setImageUrlLocator("#image-url");
+		parser.setSellerLocator("#seller-info");
+		parser.setPriceLocator("#price");
+		parser.setCurrencyValue(expectedCurrency);
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
 		expectedInfo.setImageUrl(expectedImageUrl);
+		expectedInfo.setSellerName(expectedSellerName);
+		expectedInfo.setSellerUrl(expectedSellerUrl);
+		expectedInfo.setPrice(expectedPrice);
+		expectedInfo.setCurrency(expectedCurrency);
 		
 		String html = String.format(
 			"<html>"
@@ -325,18 +378,24 @@ public class JsoupSiteParserTest {
 					+ "<p id='country-name'>%s</p>"
 					+ "<p id='issue-date'>%s</p>"
 					+ "<a id='image-url' href='%s'>look at image</a>"
+					+ "<a id='seller-info' href='%s'>%s</a>"
+					+ "<p id='price'>%s</p>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
 			expectedCountry,
 			expectedIssueDate,
-			imageUrl
+			imageUrl,
+			expectedSellerUrl,
+			expectedSellerName,
+			expectedPrice
 		);
 		
 		SeriesInfo info = parser.parse(html);
 		
 		assertThat(info, is(equalTo(expectedInfo)));
 	}
+	
 	@Test
 	public void parseShouldExtractSeriesInfoFromFirstMatchedElements() {
 		String baseUri = "http://base.uri";
@@ -349,19 +408,28 @@ public class JsoupSiteParserTest {
 			expectedCategory.toLowerCase(),
 			expectedIssueDate
 		);
+		String sellerUrl = String.format("/seller/%d/info.htm", positiveInteger());
 		String expectedImageUrl = baseUri + imageUrl;
+		String expectedSellerName = Random.sellerName();
+		String expectedSellerUrl = baseUri + sellerUrl;
+		String expectedPrice = Random.price().toString();
 		
 		parser.setMatchedUrl(baseUri);
 		parser.setCategoryLocator("h1");
 		parser.setCountryLocator("p");
 		parser.setIssueDateLocator("span");
-		parser.setImageUrlLocator("a");
+		parser.setImageUrlLocator("a.image");
+		parser.setSellerLocator("a.seller");
+		parser.setPriceLocator("b");
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
 		expectedInfo.setImageUrl(expectedImageUrl);
+		expectedInfo.setSellerName(expectedSellerName);
+		expectedInfo.setSellerUrl(expectedSellerUrl);
+		expectedInfo.setPrice(expectedPrice);
 		
 		String html = String.format(
 			"<html>"
@@ -369,17 +437,24 @@ public class JsoupSiteParserTest {
 					+ "<h1>%s</h1>"
 					+ "<p>%s</p>"
 					+ "<span>%s</span>"
-					+ "<a href='%s'>look at image</a>"
+					+ "<a class='image' href='%s'>look at image</a>"
+					+ "<a class='seller' href='%s'>%s</a>"
+					+ "<b>%s</b>"
 					+ "<h1>ignored</h1>"
 					+ "<p>ignored</p>"
 					+ "<span>ignored</span>"
-					+ "<a href='none'>look at image</a>"
+					+ "<a class='image' href='none'>look at image</a>"
+					+ "<a class='seller' href='none'>seller name</a>"
+					+ "<b>ignored</b>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
 			expectedCountry,
 			expectedIssueDate,
-			expectedImageUrl
+			expectedImageUrl,
+			expectedSellerUrl,
+			expectedSellerName,
+			expectedPrice
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -712,6 +787,82 @@ public class JsoupSiteParserTest {
 		assertThat(msg, perforated, equalTo(expectedValue));
 	}
 	
+	//
+	// Tests for extractSellerName()
+	//
+	
+	@Test
+	public void extractSellerNameShouldReturnNullWhenSellerLocatorIsNotSet() {
+		parser.setSellerLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String name = parser.extractSellerName(doc);
+		
+		assertThat(name, is(nullValue()));
+	}
+	
+	@Test
+	public void extractSellerNameShouldReturnNullWhenElementNotFound() {
+		parser.setSellerLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String name = parser.extractSellerName(doc);
+		
+		assertThat(name, is(nullValue()));
+	}
+	
+	@Test
+	public void extractSellerNameShouldReturnTextOfSellerLocator() {
+		parser.setSellerLocator("#seller");
+		
+		String expectedValue = Random.sellerName();
+		String html = String.format("<a id='seller'>%s</a>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		
+		String name = parser.extractSellerName(doc);
+		
+		String msg = String.format("couldn't extract seller name from '%s'", doc);
+		assertThat(msg, name, equalTo(expectedValue));
+	}
+	
+	//
+	// Tests for extractPrice()
+	//
+	
+	@Test
+	public void extractPriceShouldReturnNullWhenPriceLocatorIsNotSet() {
+		parser.setPriceLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String price = parser.extractPrice(doc);
+		
+		assertThat(price, is(nullValue()));
+	}
+	
+	@Test
+	public void extractPriceShouldReturnNullWhenElementNotFound() {
+		parser.setPriceLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String price = parser.extractPrice(doc);
+		
+		assertThat(price, is(nullValue()));
+	}
+	
+	@Test
+	public void extractPriceShouldReturnTextOfPriceLocator() {
+		parser.setPriceLocator("#price");
+		
+		String expectedValue = String.valueOf(Random.price());
+		String html = String.format("<span id='price'>%s</span>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		
+		String price = parser.extractPrice(doc);
+		
+		String msg = String.format("couldn't extract price from '%s'", doc);
+		assertThat(msg, price, equalTo(expectedValue));
+	}
+	
 	private static String describe(JsoupSiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("JsoupSiteParser[name=")
@@ -730,6 +881,12 @@ public class JsoupSiteParserTest {
 			.append(parser.getImageUrlAttribute())
 			.append(", issueDateLocator=")
 			.append(parser.getIssueDateLocator())
+			.append(", sellerLocator=")
+			.append(parser.getSellerLocator())
+			.append(", priceLocator=")
+			.append(parser.getPriceLocator())
+			.append(", currencyValue=")
+			.append(parser.getCurrencyValue())
 			.append(']');
 		return sb.toString();
 	}

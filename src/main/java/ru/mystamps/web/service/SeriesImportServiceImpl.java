@@ -43,7 +43,9 @@ import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
@@ -57,6 +59,8 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private final Logger log;
 	private final SeriesImportDao seriesImportDao;
 	private final SeriesService seriesService;
+	private final SeriesSalesService seriesSalesService;
+	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesInfoExtractorService extractorService;
 	private final ApplicationEventPublisher eventPublisher;
 	
@@ -94,8 +98,17 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
-	public Integer addSeries(AddSeriesDto dto, Integer requestId, Integer userId) {
+	public Integer addSeries(
+		AddSeriesDto dto,
+		AddSeriesSalesDto saleDto,
+		Integer requestId,
+		Integer userId) {
+		
 		Integer seriesId = seriesService.add(dto, userId, false);
+		
+		if (saleDto != null) {
+			seriesSalesService.add(saleDto, seriesId, userId);
+		}
 		
 		Date now = new Date();
 		
@@ -180,6 +193,13 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesParsedData.setQuantity(seriesInfo.getQuantity());
 		seriesParsedData.setPerforated(seriesInfo.getPerforated());
 		
+		SeriesSalesParsedDataDbDto seriesSalesParsedData = new SeriesSalesParsedDataDbDto();
+		seriesSalesParsedData.setCreatedAt(now);
+		seriesSalesParsedData.setUpdatedAt(now);
+		seriesSalesParsedData.setSellerId(seriesInfo.getSellerId());
+		seriesSalesParsedData.setPrice(seriesInfo.getPrice());
+		seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
+		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
 		//  for the case when parsed value don't match database
@@ -190,7 +210,17 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		seriesImportDao.addParsedData(requestId, seriesParsedData);
 		
-		log.info("Request #{}: page were parsed ({})", requestId, seriesParsedData);
+		// @todo #695 Remove hasAtLeastOneFieldFilled() methods from DTOs
+		if (seriesSalesParsedData.hasAtLeastOneFieldFilled()) {
+			seriesSalesImportService.saveParsedData(requestId, seriesSalesParsedData);
+		}
+		
+		log.info(
+			"Request #{}: page were parsed ({}, {})",
+			requestId,
+			seriesParsedData,
+			seriesSalesParsedData
+		);
 		
 		changeStatus(
 			requestId,

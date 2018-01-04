@@ -22,10 +22,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+// CheckStyle: ignore AvoidStarImportCheck for next 3 lines
 import ru.mystamps.web.controller.dto.AddSeriesForm;
+import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.tests.Random;
@@ -217,7 +219,11 @@ public final class TestObjects {
 			Random.url(),
 			Random.issueYear().toString(),
 			Random.quantity().toString(),
-			String.valueOf(Random.perforated())
+			String.valueOf(Random.perforated()),
+			Random.sellerName(),
+			Random.url(),
+			String.valueOf(Random.price()),
+			Random.currency().toString()
 		);
 	}
 	
@@ -231,6 +237,14 @@ public final class TestObjects {
 	public static AddSeriesDto createAddSeriesDto() {
 		// @todo #734 TestObjects.createAddSeriesDto(): return randomized values
 		return new AddSeriesForm();
+	}
+	
+	public static AddSeriesSalesDto createAddSeriesSalesDto() {
+		ImportSeriesSalesForm form = new ImportSeriesSalesForm();
+		form.setSellerId(Random.id());
+		form.setPrice(Random.price());
+		form.setCurrency(Random.currency());
+		return form;
 	}
 	
 	public static ImportRequestInfo createImportRequestInfo() {
@@ -252,7 +266,10 @@ public final class TestObjects {
 			Random.listOfIntegers(),
 			Random.issueYear(),
 			Random.quantity(),
-			Random.perforated()
+			Random.perforated(),
+			Random.id(),
+			Random.price(),
+			Random.currency().toString()
 		);
 	}
 	
@@ -260,6 +277,9 @@ public final class TestObjects {
 		return new SeriesExtractedInfo(
 			Collections.emptyList(),
 			Collections.emptyList(),
+			null,
+			null,
+			null,
 			null,
 			null,
 			null

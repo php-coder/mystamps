@@ -33,12 +33,14 @@ import ru.mystamps.web.controller.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto
+import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto
 import ru.mystamps.web.dao.SeriesImportDao
 import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto
 import ru.mystamps.web.dao.dto.ImportRequestInfo
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo
 import ru.mystamps.web.service.dto.AddSeriesDto
+import ru.mystamps.web.service.dto.AddSeriesSalesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
 import ru.mystamps.web.service.dto.SeriesExtractedInfo
 import ru.mystamps.web.tests.DateUtils
@@ -49,6 +51,8 @@ class SeriesImportServiceImplTest extends Specification {
 	
 	private final SeriesImportDao seriesImportDao = Mock()
 	private final SeriesService seriesService = Mock()
+	private final SeriesSalesService seriesSalesService = Mock()
+	private final SeriesSalesImportService seriesSalesImportService = Mock()
 	private final SeriesInfoExtractorService extractorService = Mock()
 	private final ApplicationEventPublisher eventPublisher = Mock()
 	
@@ -58,7 +62,10 @@ class SeriesImportServiceImplTest extends Specification {
 	def setup() {
 		service = new SeriesImportServiceImpl(
 			NOPLogger.NOP_LOGGER,
-			seriesImportDao, seriesService,
+			seriesImportDao,
+			seriesService,
+			seriesSalesService,
+			seriesSalesImportService,
 			extractorService,
 			eventPublisher
 		)
@@ -168,11 +175,29 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			Integer expectedSeriesId = Random.id()
 		when:
-			Integer seriesId = service.addSeries(expectedDto, expectedRequestId, expectedUserId)
+			Integer seriesId = service.addSeries(
+				expectedDto,
+				nullOr(TestObjects.createAddSeriesSalesDto()),
+				expectedRequestId,
+				expectedUserId
+			)
 		then:
 			1 * seriesService.add(expectedDto, expectedUserId, false) >> expectedSeriesId
 		and:
 			seriesId == expectedSeriesId
+	}
+	
+	def 'addSeries() should create series sale if provided'() {
+		given:
+			AddSeriesSalesDto expectedSaleDto = TestObjects.createAddSeriesSalesDto()
+			Integer expectedSeriesId = Random.id()
+			Integer expectedUserId = Random.userId()
+		and:
+			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
+		when:
+			service.addSeries(TestObjects.createAddSeriesDto(), expectedSaleDto, Random.id(), expectedUserId)
+		then:
+			1 * seriesSalesService.add(expectedSaleDto, expectedSeriesId, expectedUserId)
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -183,7 +208,12 @@ class SeriesImportServiceImplTest extends Specification {
 		and:
 			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
 		when:
-			service.addSeries(TestObjects.createAddSeriesDto(), expectedRequestId, Random.userId())
+			service.addSeries(
+				TestObjects.createAddSeriesDto(),
+				nullOr(TestObjects.createAddSeriesSalesDto()),
+				expectedRequestId,
+				Random.userId()
+			)
 		then:
 			1 * seriesImportDao.setSeriesIdAndChangeStatus(
 				expectedRequestId,
@@ -390,13 +420,18 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		and:
+			// @todo #695 Introduce and use RawParsedDataDto.withImageUrl() method
 			RawParsedDataDto rawData = new RawParsedDataDto(
 				Random.categoryName(),
 				Random.countryName(),
 				null, /* imageUrl */
 				Random.issueYear().toString(),
 				Random.quantity().toString(),
-				String.valueOf(Random.perforated())
+				String.valueOf(Random.perforated()),
+				Random.sellerName(),
+				Random.url(),
+				String.valueOf(Random.price()),
+				Random.currency().toString()
 			)
 		and:
 			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
@@ -410,7 +445,7 @@ class SeriesImportServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'saveParsedData() should save parsed data'() {
+	def 'saveParsedData() should save series parsed data'() {
 		given:
 			Integer expectedRequestId = Random.id()
 			String expectedImageUrl = Random.url()
@@ -421,7 +456,11 @@ class SeriesImportServiceImplTest extends Specification {
 				expectedImageUrl,
 				Random.issueYear().toString(),
 				Random.quantity().toString(),
-				String.valueOf(Random.perforated())
+				String.valueOf(Random.perforated()),
+				Random.sellerName(),
+				Random.url(),
+				String.valueOf(Random.price()),
+				Random.currency().toString()
 			)
 		and:
 			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
@@ -431,7 +470,28 @@ class SeriesImportServiceImplTest extends Specification {
 			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
 				{ AddSeriesParsedDataDbDto parsedData ->
+					// other members are tested in another test
 					assert parsedData?.imageUrl == expectedImageUrl
+					assert DateUtils.roughlyEqual(parsedData?.createdAt, new Date())
+					assert DateUtils.roughlyEqual(parsedData?.updatedAt, new Date())
+					return true
+				}
+			)
+	}
+	
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'saveParsedData() should save series sale parsed data if provided'() {
+		given:
+			Integer expectedRequestId = Random.id()
+		and:
+			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createSeriesExtractedInfo()
+		when:
+			service.saveParsedData(expectedRequestId, TestObjects.createRawParsedDataDto())
+		then:
+			1 * seriesSalesImportService.saveParsedData(
+				expectedRequestId,
+				{ SeriesSalesParsedDataDbDto parsedData ->
+					// other members are tested in another test
 					assert DateUtils.roughlyEqual(parsedData?.createdAt, new Date())
 					assert DateUtils.roughlyEqual(parsedData?.updatedAt, new Date())
 					return true
@@ -450,6 +510,9 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedReleaseYear = expectedSeriesInfo.getReleaseYear()
 			Integer expectedQuantity    = expectedSeriesInfo.getQuantity()
 			Boolean expectedPerforated  = expectedSeriesInfo.getPerforated()
+			Integer expectedSellerId    = expectedSeriesInfo.getSellerId()
+			BigDecimal expectedPrice    = expectedSeriesInfo.getPrice()
+			String expectedCurrency     = expectedSeriesInfo.getCurrency()
 		when:
 			service.saveParsedData(Random.id(), expectedRawData)
 		then:
@@ -463,6 +526,16 @@ class SeriesImportServiceImplTest extends Specification {
 					assert parsedData?.releaseYear == expectedReleaseYear
 					assert parsedData?.quantity    == expectedQuantity
 					assert parsedData?.perforated  == expectedPerforated
+					return true
+				}
+			)
+		and:
+			1 * seriesSalesImportService.saveParsedData(
+				_ as Integer,
+				{ SeriesSalesParsedDataDbDto parsedData ->
+					assert parsedData?.sellerId == expectedSellerId
+					assert parsedData?.price    == expectedPrice
+					assert parsedData?.currency == expectedCurrency
 					return true
 				}
 			)

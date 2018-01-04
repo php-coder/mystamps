@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.Getter;
@@ -30,4 +31,7 @@ public class SeriesExtractedInfo {
 	private final Integer releaseYear;
 	private final Integer quantity;
 	private final Boolean perforated;
+	private final Integer sellerId;
+	private final BigDecimal price;
+	private final String currency;
 }

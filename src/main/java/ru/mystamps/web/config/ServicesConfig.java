@@ -178,6 +178,8 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 			daoConfig.getSeriesImportDao(),
 			getSeriesService(),
+			getSeriesSalesService(),
+			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
 			eventPublisher
 		);
@@ -190,7 +192,8 @@ public class ServicesConfig {
 			new SeriesInfoExtractorServiceImpl(
 				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
 				getCategoryService(),
-				getCountryService()
+				getCountryService(),
+				getTransactionParticipantService()
 			)
 		);
 	}
@@ -200,6 +203,14 @@ public class ServicesConfig {
 		return new SeriesSalesServiceImpl(
 			LoggerFactory.getLogger(SeriesSalesServiceImpl.class),
 			daoConfig.getSeriesSalesDao()
+		);
+	}
+	
+	@Bean
+	public SeriesSalesImportService getSeriesSalesImportService() {
+		return new SeriesSalesImportServiceImpl(
+			LoggerFactory.getLogger(SeriesSalesImportServiceImpl.class),
+			daoConfig.getSeriesSalesImportDao()
 		);
 	}
 	

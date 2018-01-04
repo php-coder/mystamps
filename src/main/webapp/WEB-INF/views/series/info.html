@@ -376,13 +376,21 @@
 								<div class="col-sm-12">
 									<h5 th:text="|#{t_who_selling_series}:|">Who was selling/buying this series:</h5>
 									<ul th:remove="all-but-first">
-										<li th:each="transaction : ${purchasesAndSales}"
+										<li id="series-sale-1-info"
+											th:id="|series-sale-${iter.count}-info|"
+											th:each="transaction,iter : ${purchasesAndSales}"
 											th:with="firstPrice=${#numbers.formatDecimal(transaction.firstPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.firstCurrency},
 														 optionalSecondPrice=${transaction.secondPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.secondPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.secondCurrency + ')') : ''}">
 											<!--/*/
 											<span th:if="${transaction.date != null}" th:remove="tag" th:text="${#dates.format(transaction.date, 'dd.MM.yyyy')}"></span>
 											/*/-->
-											<a href="http://example.com/james-alan-hetfield" rel="nofollow" th:remove="${transaction.sellerUrl == null} ? tag" th:href="${transaction.sellerUrl}" th:text="${transaction.sellerName}">James Alan Hetfield</a>
+											<a href="http://example.com/james-alan-hetfield"
+												id="series-sale-1-seller"
+												rel="nofollow"
+												th:id="|series-sale-${iter.count}-seller|"
+												th:remove="${transaction.sellerUrl == null} ? tag"
+												th:href="${transaction.sellerUrl}"
+												th:text="${transaction.sellerName}">James Alan Hetfield</a>
 											<span th:if="${transaction.buyerName == null}" th:remove="tag" th:text="#{t_was_selling_for}">was selling for</span>
 											<!--/*/
 											<th:block th:if="${transaction.buyerName != null}">
@@ -391,25 +399,28 @@
 												<span th:text="#{t_sold_for}" th:remove="tag">for</span>
 											</th:block>
 											/*/-->
-											<a href="http://example.com/james-alan-hetfield/selling-stamps" rel="nofollow"
-											   th:remove="${transaction.transactionUrl == null} ? tag"
-											   th:href="${transaction.transactionUrl}"
-											   th:text="${firstPrice + optionalSecondPrice}">100 USD</a>
+											<a href="http://example.com/james-alan-hetfield/selling-stamps"
+												id="series-sale-1-transaction"
+												rel="nofollow"
+												th:id="|series-sale-${iter.count}-transaction|"
+												th:remove="${transaction.transactionUrl == null} ? tag"
+												th:href="${transaction.transactionUrl}"
+												th:text="${firstPrice + optionalSecondPrice}">100 USD</a>
 										</li>
-										<li>
-											<a href="http://example.com/james-alan-hetfield" rel="nofollow">James Alan Hetfield</a> was selling for <a href="http://example.com/james-alan-hetfield/selling-stamps" rel="nofollow">100 USD (650 RUB)</a>
+										<li id="series-sale-2-info">
+											<a href="http://example.com/james-alan-hetfield" id="series-sale-2-seller" rel="nofollow">James Alan Hetfield</a> was selling for <a href="http://example.com/james-alan-hetfield/selling-stamps" id="series-sale-2-transaction" rel="nofollow">100 USD (650 RUB)</a>
 										</li>
-										<li>
-											02.02.2002 <a href="http://example.com/tommy-lee-jones" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" rel="nofollow">200 USD</a>
+										<li id="series-sale-3-info">
+											02.02.2002 <a href="http://example.com/tommy-lee-jones" id="series-sale-3-seller" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" id="series-sale-3-transaction" rel="nofollow">200 USD</a>
 										</li>
-										<li>
-											02.02.2002 <a href="http://example.com/tommy-lee-jones" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" rel="nofollow">200 USD (1300 RUB)</a>
+										<li id="series-sale-4-info">
+											02.02.2002 <a href="http://example.com/tommy-lee-jones" id="series-sale-4-seller" rel="nofollow">Tommy Lee Jones</a> was selling for <a href="http://example.com/tommy-lee-jones/selling-stamps" id="series-sale-4-transaction" rel="nofollow">200 USD (1300 RUB)</a>
 										</li>
-										<li>
-											03.03.2003 <a href="http://example.com/eicca-toppinen" rel="nofollow">Eicca Toppinen</a> sold to <a href="http://example.com/kurt-cobain" rel="nofollow">Kurt Cobain</a> for <a href="http://example.com/eicca-toppinen/selling-stamps" rel="nofollow">300 USD</a>
+										<li id="series-sale-5-info">
+											03.03.2003 <a href="http://example.com/eicca-toppinen" id="series-sale-5-seller" rel="nofollow">Eicca Toppinen</a> sold to <a href="http://example.com/kurt-cobain" rel="nofollow">Kurt Cobain</a> for <a href="http://example.com/eicca-toppinen/selling-stamps" id="series-sale-5-transaction" rel="nofollow">300 USD</a>
 										</li>
-										<li>
-											03.03.2003 <a href="http://example.com/eicca-toppinen" rel="nofollow">Eicca Toppinen</a> sold to Michael Jackson for <a href="http://example.com/eicca-toppinen/selling-stamps" rel="nofollow">300 USD (1560 RUB)</a>
+										<li id="series-sale-6-info">
+											03.03.2003 <a href="http://example.com/eicca-toppinen" id="series-sale-6-seller" rel="nofollow">Eicca Toppinen</a> sold to Michael Jackson for <a href="http://example.com/eicca-toppinen/selling-stamps" id="series-sale-6-transaction" rel="nofollow">300 USD (1560 RUB)</a>
 										</li>
 									</ul>
 								</div>

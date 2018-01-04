@@ -15,22 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service.dto;
+package ru.mystamps.web.dao.dto;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@RequiredArgsConstructor
-public class RawParsedDataDto {
-	private final String categoryName;
-	private final String countryName;
-	private final String imageUrl;
-	private final String releaseYear;
-	private final String quantity;
-	private final String perforated;
-	private final String sellerName;
-	private final String sellerUrl;
-	private final String price;
-	private final String currency;
+@Setter
+@ToString(exclude = { "createdAt", "updatedAt" })
+public class SeriesSalesParsedDataDbDto {
+	private Integer sellerId;
+	private BigDecimal price;
+	private String currency;
+	private Date createdAt;
+	private Date updatedAt;
+	
+	// they aren't useless
+	@SuppressWarnings("PMD.UselessParentheses")
+	public boolean hasAtLeastOneFieldFilled() {
+		return sellerId != null || (price != null && currency != null);
+	}
+	
 }

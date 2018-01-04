@@ -112,7 +112,7 @@
 						th:object="${importSeriesForm}">
 						
 						<div class="table-responsive">
-							<table class="table">
+							<table class="table" th:with="hasSalesInfo=${importSeriesForm.seriesSale != null}">
 								
 								<tr th:if="${not disabled or importSeriesForm.category != null}" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 									<th>
@@ -291,6 +291,103 @@
 											th:each="error : ${#fields.errors('year')}"
 											th:text="${error}"></span>
 										/*/-->
+									</td>
+								</tr>
+								
+								<tr th:if="${hasSalesInfo}" th:classappend="${#fields.hasErrors('seriesSale.sellerId') ? 'has-error' : ''}">
+									<th>
+										<label for="seller" class="control-label" th:text="#{t_seller}">
+											Seller
+										</label>
+									</th>
+									<td>
+										<select id="seller" class="form-control" th:field="*{seriesSale.sellerId}" th:disabled="${disabled}">
+											<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
+											<!--/*/
+											<th:block th:each="item : ${sellers}">
+												<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
+													<option th:each="seller : ${item.children}"
+														th:value="${seller.value}"
+														th:text="${seller.name}"
+														th:selected="${importSeriesForm.seriesSale.sellerId != seller.value}">
+													</option>
+												</optgroup>
+												<option th:if="${#lists.isEmpty(item.children)}"
+													th:value="${item.value}"
+													th:text="${item.name}"
+													th:selected="${importSeriesForm.seriesSale.sellerId != item.value}">
+												</option>
+											</th:block>
+											/*/-->
+											<!--/*-->
+											<optgroup label="Musicians">
+												<option value="3">Eicca Toppinen</option>
+												<option value="1" selected="selected">James Alan Hetfield</option>
+											</optgroup>
+											<option value="2">Tommy Lee Jones</option>
+											<!--*/-->
+										</select>
+										<!--/*/
+										<span id="seller.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('seriesSale.sellerId')}"
+											th:each="error : ${#fields.errors('seriesSale.sellerId')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
+								<tr th:if="${hasSalesInfo}" th:classappend="${#fields.hasErrors('seriesSale.price') or #fields.hasErrors('seriesSale.currency') ? 'has-error' : ''}">
+									<th>
+										<label for="price" class="control-label" th:text="#{t_price}">
+											Price
+										</label>
+									</th>
+									<td>
+										<table>
+											<tr>
+												<td width="30%">
+													<input id="price"
+														type="text"
+														class="form-control"
+														size="5"
+														value="90"
+														th:field="*{seriesSale.price}"
+														th:disabled="${disabled}" />
+												</td>
+												<td width="30%">
+													<select id="currency" class="form-control" th:field="*{seriesSale.currency}" th:disabled="${disabled}">
+														<option value=""></option>
+														<option value="USD">USD</option>
+														<option value="EUR" selected="selected">EUR</option>
+														<option value="GBP">GBP</option>
+														<option value="RUB">RUB</option>
+														<option value="CZK">CZK</option>
+													</select>
+												</td>
+												<td width="40%"></td>
+											</tr>
+											<!--/*/
+											<tr>
+												<td>
+													<span id="price.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('seriesSale.price')}"
+														th:each="error : ${#fields.errors('seriesSale.price')}"
+														th:text="${error}"></span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span id="currency.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('seriesSale.currency')}"
+														th:each="error : ${#fields.errors('seriesSale.currency')}"
+														th:text="${error}"></span>
+												</td>
+											</tr>
+											/*/-->
+										</table>
 									</td>
 								</tr>
 								

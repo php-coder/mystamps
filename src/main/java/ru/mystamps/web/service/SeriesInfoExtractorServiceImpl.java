@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,11 +33,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyMethods")
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
 	// Related to RELEASE_YEAR_REGEXP and used in unit tests.
@@ -64,6 +67,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private final Logger log;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
+	private final TransactionParticipantService transactionParticipantService;
 	
 	// @todo #803 SeriesInfoExtractorServiceImpl.extract(): add unit tests
 	@Override
@@ -74,13 +78,19 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Integer releaseYear = extractReleaseYear(data.getReleaseYear());
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
+		Integer sellerId = extractSeller(data.getSellerName(), data.getSellerUrl());
+		BigDecimal price = extractPrice(data.getPrice());
+		String currency = extractCurrency(data.getCurrency());
 		
 		return new SeriesExtractedInfo(
 			categoryIds,
 			countryIds,
 			releaseYear,
 			quantity,
-			perforated
+			perforated,
+			sellerId,
+			price,
+			currency
 		);
 	}
 	
@@ -228,6 +238,66 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Could not extract perforation info from a fragment");
 		
 		return null;
+	}
+	
+	// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): add unit tests
+	public Integer extractSeller(String name, String url) {
+		if (StringUtils.isBlank(name) || StringUtils.isBlank(url)) {
+			return null;
+		}
+		
+		// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)
+		
+		log.debug("Determining seller by name '{}' and url '{}'", name, url);
+		
+		Integer sellerId = transactionParticipantService.findSellerId(name, url);
+		if (sellerId != null) {
+			log.debug("Found seller: #{}", sellerId);
+			return sellerId;
+		}
+		
+		log.debug("Could not extract seller based on name/url");
+		
+		return null;
+	}
+	
+	// @todo #695 SeriesInfoExtractorServiceImpl.extractPrice(): add unit tests
+	public BigDecimal extractPrice(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
+		log.debug("Determining price from a fragment: '{}'", fragment);
+		
+		try {
+			BigDecimal price = new BigDecimal(fragment);
+			log.debug("Price is {}", price);
+			// @todo #695 SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0
+			return price;
+			
+		} catch (NumberFormatException ex) {
+			log.debug("Could not extract price: {}", ex.getMessage());
+			return null;
+		}
+	}
+	
+	// @todo #695 SeriesInfoExtractorServiceImpl.extractCurrency(): add unit tests
+	public String extractCurrency(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
+		log.debug("Determining currency from a fragment: '{}'", fragment);
+		
+		try {
+			Currency currency = Enum.valueOf(Currency.class, fragment);
+			log.debug("Currency is {}", currency);
+			return currency.toString();
+			
+		} catch (IllegalArgumentException ex) {
+			log.debug("Could not extract currency: {}", ex.getMessage());
+			return null;
+		}
 	}
 	
 	private static boolean validCategoryName(String name) {

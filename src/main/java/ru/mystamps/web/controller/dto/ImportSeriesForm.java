@@ -19,6 +19,7 @@ package ru.mystamps.web.controller.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -83,6 +84,9 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	// @todo #709 /series/import/request/{id}(imageUrl): add validation for file type
 	@NotNull
 	private MultipartFile downloadedImage;
+	
+	@Valid
+	private ImportSeriesSalesForm seriesSale;
 	
 	//
 	// The methods bellow required for AddSeriesDto interface.

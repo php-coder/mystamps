@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -75,6 +76,16 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public List<EntityWithParentDto> findSellersWithParents() {
 		return transactionParticipantDao.findSellersWithParents();
+	}
+	
+	// @todo #695 TransactionParticipantServiceImpl.findSellerId(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public Integer findSellerId(String name, String url) {
+		Validate.isTrue(StringUtils.isNotBlank(name), "Seller name must be non-blank");
+		Validate.isTrue(StringUtils.isNotBlank(url), "Seller url must be non-blank");
+		
+		return transactionParticipantDao.findSellerId(name, url);
 	}
 	
 	@Override

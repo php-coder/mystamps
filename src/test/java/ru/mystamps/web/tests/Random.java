@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import io.qala.datagen.RandomShortApi;
 
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
+import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
@@ -84,6 +85,10 @@ public final class Random {
 	public static BigDecimal price() {
 		// @todo #769 Random.price(): return randomized values
 		return new BigDecimal("17");
+	}
+	
+	public static Currency currency() {
+		return sample(Currency.values());
 	}
 	
 	public static String url() {
@@ -139,6 +144,10 @@ public final class Random {
 			ValidationRules.PARTICIPANT_NAME_MIN_LENGTH,
 			ValidationRules.PARTICIPANT_NAME_MAX_LENGTH
 		).english();
+	}
+	
+	public static String sellerName() {
+		return participantName();
 	}
 	
 	public static Integer issueYear() {

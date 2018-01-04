@@ -36,6 +36,10 @@ public class SeriesInfo {
 	private String issueDate;
 	private String quantity;
 	private String perforated;
+	private String sellerName;
+	private String sellerUrl;
+	private String price;
+	private String currency;
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -46,7 +50,9 @@ public class SeriesInfo {
 			&& imageUrl == null
 			&& issueDate == null
 			&& quantity == null
-			&& perforated == null;
+			&& perforated == null
+			&& sellerName == null
+			&& price == null;
 	}
 	
 }

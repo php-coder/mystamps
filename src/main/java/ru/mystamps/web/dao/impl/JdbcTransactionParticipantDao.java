@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,9 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	
 	@Value("${transaction_participant.find_sellers_with_parent_names}")
 	private String findSellersWithParentNamesSql;
+	
+	@Value("${transaction_participant.find_seller_id_by_name_and_url}")
+	private String findSellerIdSql;
 	
 	@Value("${transaction_participant_group.find_all}")
 	private String findAllGroupsSql;
@@ -82,6 +86,19 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 			findSellersWithParentNamesSql,
 			RowMappers::forEntityWithParentDto
 		);
+	}
+	
+	@Override
+	public Integer findSellerId(String name, String url) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", name);
+		params.put("url", url);
+		
+		try {
+			return jdbcTemplate.queryForObject(findSellerIdSql, params, Integer.class);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 	@Override

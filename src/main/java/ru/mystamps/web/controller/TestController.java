@@ -67,4 +67,27 @@ public class TestController {
 		);
 	}
 	
+	@GetMapping("/valid/series-info/existing-seller")
+	public void seriesInfoWithExistingSeller(HttpServletResponse response) throws IOException {
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().println(
+			"<!DOCTYPE html>"
+			+ "<html>"
+				+ "<head>"
+					+ "<title>Series info (existing seller)</title>"
+				+ "</head>"
+				+ "<body>"
+					// CheckStyle: ignore LineLength for next 2 lines
+					+ "Image:  <a id=\"series-image-link-1\" href=\"/image/1\">series image</a><br />"
+					+ "Seller: <a id=\"test-seller\" href=\"http://example.com/eicca-toppinen\">Eicca Toppinen</a><br />"
+					+ "Price:  <span id=\"test-price\">111</span> RUB<br />"
+					// this is needed to simplify an integration test
+					// (required fields "category" and "quantity" will be filled automatically)
+					+ "Info:   <span class=\"dl-horizontal\">Спорт, 3 марки</span>"
+				+ "</body>"
+			+ "</html>"
+		);
+	}
+	
 }

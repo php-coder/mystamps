@@ -35,6 +35,7 @@ import lombok.Setter;
 // Getters/setters are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
+@SuppressWarnings("PMD.TooManyMethods")
 public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
@@ -50,6 +51,9 @@ public class JsoupSiteParser implements SiteParser {
 	private String imageUrlLocator;
 	private String imageUrlAttribute;
 	private String issueDateLocator;
+	private String sellerLocator;
+	private String priceLocator;
+	private String currencyValue;
 	
 	@Override
 	public boolean setField(String name, String value) {
@@ -92,6 +96,19 @@ public class JsoupSiteParser implements SiteParser {
 				setIssueDateLocator(value);
 				break;
 			
+			case "seller-locator":
+				setSellerLocator(value);
+				break;
+			
+			case "price-locator":
+				setPriceLocator(value);
+				break;
+			
+			case "currency-value":
+				// @todo #695 Series import: validate app.site-parser[x].currency-value
+				setCurrencyValue(value);
+				break;
+			
 			default:
 				valid = false;
 				break;
@@ -110,6 +127,8 @@ public class JsoupSiteParser implements SiteParser {
 				|| shortDescriptionLocator != null
 				|| imageUrlLocator != null
 				|| issueDateLocator != null
+				|| sellerLocator != null
+				|| priceLocator != null
 			);
 	}
 	
@@ -142,6 +161,10 @@ public class JsoupSiteParser implements SiteParser {
 		info.setIssueDate(extractIssueDate(body));
 		info.setQuantity(extractQuantity(body));
 		info.setPerforated(extractPerforated(body));
+		info.setSellerName(extractSellerName(body));
+		info.setSellerUrl(extractSellerUrl(body));
+		info.setPrice(extractPrice(body));
+		info.setCurrency(extractCurrency(body));
 		
 		return info;
 	}
@@ -221,6 +244,52 @@ public class JsoupSiteParser implements SiteParser {
 
 		LOG.debug("Extracted perforated flag: '{}'", perforated);
 		return perforated;
+	}
+	
+	protected String extractSellerName(Element body) {
+		String sellerName = getTextOfTheFirstElement(body, sellerLocator);
+		if (sellerName == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted seller name: '{}'", sellerName);
+		return sellerName;
+	}
+	
+	// @todo #695 JsoupSiteParser.extractSellerUrl(): add unit tests
+	protected String extractSellerUrl(Element body) {
+		if (sellerLocator == null) {
+			return null;
+		}
+		
+		Element elem = body.selectFirst(sellerLocator);
+		if (elem == null) {
+			return null;
+		}
+		
+		String url = elem.absUrl("href");
+		LOG.debug("Extracted seller url: '{}'", url);
+		return url;
+	}
+	
+	protected String extractPrice(Element body) {
+		String price = getTextOfTheFirstElement(body, priceLocator);
+		if (price == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted price: '{}'", price);
+		return price;
+	}
+	
+	// @todo #695 JsoupSiteParser.extractCurrency(): add unit tests
+	protected String extractCurrency(Element body) {
+		if (currencyValue == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted currency: '{}'", currencyValue);
+		return currencyValue;
 	}
 	
 	private static String getTextOfTheFirstElement(Element body, String locator) {

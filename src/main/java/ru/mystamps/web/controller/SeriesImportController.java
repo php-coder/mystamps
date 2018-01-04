@@ -18,6 +18,7 @@
 package ru.mystamps.web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,11 +41,15 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.ImportSeriesForm;
+import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
+import ru.mystamps.web.service.SeriesSalesImportService;
+import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
@@ -54,6 +59,8 @@ import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
 public class SeriesImportController {
 	
 	private final SeriesImportService seriesImportService;
+	private final SeriesSalesService seriesSalesService;
+	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesController seriesController;
 	private final ApplicationEventPublisher eventPublisher;
 	
@@ -127,6 +134,20 @@ public class SeriesImportController {
 			}
 		}
 		
+		SeriesSaleParsedDataDto seriesSale = seriesSalesImportService.getParsedData(requestId);
+		if (seriesSale != null) {
+			ImportSeriesSalesForm seriesSaleForm = new ImportSeriesSalesForm();
+			seriesSaleForm.setSellerId(seriesSale.getSellerId());
+			seriesSaleForm.setPrice(seriesSale.getPrice());
+			seriesSaleForm.setCurrency(seriesSale.getCurrency());
+			
+			form.setSeriesSale(seriesSaleForm);
+			
+			if (seriesSale.getSellerId() != null) {
+				seriesController.addSellersToModel(model);
+			}
+		}
+		
 		model.addAttribute("importSeriesForm", form);
 		model.addAttribute("showForm", hasParsedData);
 		
@@ -175,11 +196,27 @@ public class SeriesImportController {
 		seriesController.addCountriesToModel(model, lang);
 		seriesController.addYearToModel(model);
 		
+		ImportSeriesSalesForm seriesSaleForm = form.getSeriesSale();
+		if (seriesSaleForm != null) {
+			seriesController.addSellersToModel(model);
+		}
+		
 		if (result.hasErrors()) {
 			return "series/import/info";
 		}
 		
-		Integer seriesId = seriesImportService.addSeries(form, requestId, currentUserId);
+		if (seriesSaleForm != null) {
+			// fill required values prior passing the form into the service.
+			seriesSaleForm.setDate(new Date());
+			seriesSaleForm.setUrl(request.getUrl());
+		}
+		
+		Integer seriesId = seriesImportService.addSeries(
+			form,
+			seriesSaleForm,
+			requestId,
+			currentUserId
+		);
 		
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}

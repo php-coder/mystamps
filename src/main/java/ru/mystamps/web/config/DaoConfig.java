@@ -106,6 +106,11 @@ public class DaoConfig {
 	}
 	
 	@Bean
+	public SeriesSalesImportDao getSeriesSalesImportDao() {
+		return new JdbcSeriesSalesImportDao(jdbcTemplate);
+	}
+	
+	@Bean
 	public SeriesSalesDao getSeriesSalesDao() {
 		return new JdbcSeriesSalesDao(jdbcTemplate);
 	}

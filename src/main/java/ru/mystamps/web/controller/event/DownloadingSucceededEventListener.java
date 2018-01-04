@@ -92,7 +92,11 @@ public class DownloadingSucceededEventListener
 			info.getImageUrl(),
 			info.getIssueDate(),
 			info.getQuantity(),
-			info.getPerforated()
+			info.getPerforated(),
+			info.getSellerName(),
+			info.getSellerUrl(),
+			info.getPrice(),
+			info.getCurrency()
 		);
 		importService.saveParsedData(requestId, data);
 	}

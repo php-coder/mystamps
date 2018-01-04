@@ -38,10 +38,12 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
+	private final TransactionParticipantService transactionParticipantService = Mock()
 	private final SeriesInfoExtractorService service = new SeriesInfoExtractorServiceImpl(
 		NOPLogger.NOP_LOGGER,
 		categoryService,
-		countryService
+		countryService,
+		transactionParticipantService
 	)
 	
 	//
