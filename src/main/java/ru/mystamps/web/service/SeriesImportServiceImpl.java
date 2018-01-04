@@ -172,30 +172,20 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		List<Integer> categoryIds = extractorService.extractCategory(data.getCategoryName());
 		Integer categoryId = getFirstElement(categoryIds);
-		if (categoryId != null) {
-			seriesParsedData.setCategoryId(categoryId);
-		}
+		seriesParsedData.setCategoryId(categoryId);
 		
 		List<Integer> countryIds = extractorService.extractCountry(data.getCountryName());
 		Integer countryId = getFirstElement(countryIds);
-		if (countryId != null) {
-			seriesParsedData.setCountryId(countryId);
-		}
+		seriesParsedData.setCountryId(countryId);
 		
 		Integer releaseYear = extractorService.extractReleaseYear(data.getReleaseYear());
-		if (releaseYear != null) {
-			seriesParsedData.setReleaseYear(releaseYear);
-		}
+		seriesParsedData.setReleaseYear(releaseYear);
 		
 		Integer quantity = extractorService.extractQuantity(data.getQuantity());
-		if (quantity != null) {
-			seriesParsedData.setQuantity(quantity);
-		}
+		seriesParsedData.setQuantity(quantity);
 		
 		Boolean perforated = extractorService.extractPerforated(data.getPerforated());
-		if (perforated != null) {
-			seriesParsedData.setPerforated(perforated);
-		}
+		seriesParsedData.setPerforated(perforated);
 		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
