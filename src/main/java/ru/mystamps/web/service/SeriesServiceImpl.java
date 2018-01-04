@@ -170,11 +170,7 @@ public class SeriesServiceImpl implements SeriesService {
 			solovyovCatalogService.addToSeries(id, solovyovNumbers);
 		}
 		
-		Set<String> zagorskiNumbers = CatalogUtils.parseCatalogNumbers(dto.getZagorskiNumbers());
-		if (!zagorskiNumbers.isEmpty()) {
-			zagorskiCatalogService.add(zagorskiNumbers);
-			zagorskiCatalogService.addToSeries(id, zagorskiNumbers);
-		}
+		createCatalogNumbersAndAddToSeries(id, zagorskiCatalogService, dto.getZagorskiNumbers());
 		
 		ImageInfoDto imageInfo = imageService.save(dto.getImage());
 		Integer imageId = imageInfo.getId();
@@ -428,6 +424,18 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		// even if day is null it won't change anything
 		series.setReleaseDay(dto.getDay());
+	}
+	
+	private static void createCatalogNumbersAndAddToSeries(
+		Integer seriesId,
+		StampsCatalogService catalogService,
+		String numbers) {
+		
+		Set<String> parsedNumbers = CatalogUtils.parseCatalogNumbers(numbers);
+		if (!parsedNumbers.isEmpty()) {
+			catalogService.add(parsedNumbers);
+			catalogService.addToSeries(seriesId, parsedNumbers);
+		}
 	}
 	
 }
