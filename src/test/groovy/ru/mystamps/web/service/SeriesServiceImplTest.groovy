@@ -231,12 +231,8 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'UnnecessaryReturnKeyword',
-		'LineLength',
-	])
-	def "add() should pass michel price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass michel price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
 		given:
 			form.setMichelPrice(expectedPrice)
 		when:
@@ -244,22 +240,17 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
-				assert series?.michelCurrency == expectedCurrency
 				return true
 			}) >> Random.id()
 		where:
-			expectedPrice  | expectedCurrency
-			Random.price() | Currency.EUR.toString()
-			null           | null
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'LineLength',
-		'UnnecessaryReturnKeyword',
-	])
-	def "add() should pass scott price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass scott price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
 		given:
 			form.setScottPrice(expectedPrice)
 		when:
@@ -267,22 +258,17 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.scottPrice == expectedPrice
-				assert series?.scottCurrency == expectedCurrency
 				return true
 			}) >> Random.id()
 		where:
-			expectedPrice  | expectedCurrency
-			Random.price() | Currency.USD.toString()
-			null           | null
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'LineLength',
-		'UnnecessaryReturnKeyword',
-	])
-	def "add() should pass yvert price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass yvert price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
 		given:
 			form.setYvertPrice(expectedPrice)
 		when:
@@ -290,22 +276,17 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.yvertPrice == expectedPrice
-				assert series?.yvertCurrency == expectedCurrency
 				return true
 			}) >> Random.id()
 		where:
-			expectedPrice  | expectedCurrency
-			Random.price() | Currency.EUR.toString()
-			null           | null
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'LineLength',
-		'UnnecessaryReturnKeyword',
-	])
-	def "add() should pass gibbons price (#expectedPrice) and currency (#expectedCurrency) to series dao"(BigDecimal expectedPrice, String expectedCurrency) {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass gibbons price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
 		given:
 			form.setGibbonsPrice(expectedPrice)
 		when:
@@ -313,13 +294,12 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.gibbonsPrice == expectedPrice
-				assert series?.gibbonsCurrency == expectedCurrency
 				return true
 			}) >> Random.id()
 		where:
-			expectedPrice  | expectedCurrency
-			Random.price() | Currency.GBP.toString()
-			null           | null
+			expectedPrice  | _
+			Random.price() | _
+			null           | _
 	}
 	
 	@Unroll

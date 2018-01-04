@@ -127,13 +127,9 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("release_month", series.getReleaseMonth());
 		params.put("release_year", series.getReleaseYear());
 		params.put("michel_price", series.getMichelPrice());
-		params.put("michel_currency", series.getMichelCurrency());
 		params.put("scott_price", series.getScottPrice());
-		params.put("scott_currency", series.getScottCurrency());
 		params.put("yvert_price", series.getYvertPrice());
-		params.put("yvert_currency", series.getYvertCurrency());
 		params.put("gibbons_price", series.getGibbonsPrice());
-		params.put("gibbons_currency", series.getGibbonsCurrency());
 		params.put("solovyov_price", series.getSolovyovPrice());
 		params.put("zagorski_price", series.getZagorskiPrice());
 		params.put("comment", series.getComment());

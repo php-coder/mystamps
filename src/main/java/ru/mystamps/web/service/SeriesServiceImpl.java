@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
-import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
@@ -92,22 +91,18 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		if (dto.getMichelPrice() != null) {
 			series.setMichelPrice(dto.getMichelPrice());
-			series.setMichelCurrency(Currency.EUR.toString());
 		}
 
 		if (dto.getScottPrice() != null) {
 			series.setScottPrice(dto.getScottPrice());
-			series.setScottCurrency(Currency.USD.toString());
 		}
 
 		if (dto.getYvertPrice() != null) {
 			series.setYvertPrice(dto.getYvertPrice());
-			series.setYvertCurrency(Currency.EUR.toString());
 		}
 
 		if (dto.getGibbonsPrice() != null) {
 			series.setGibbonsPrice(dto.getGibbonsPrice());
-			series.setGibbonsCurrency(Currency.GBP.toString());
 		}
 
 		if (dto.getSolovyovPrice() != null) {

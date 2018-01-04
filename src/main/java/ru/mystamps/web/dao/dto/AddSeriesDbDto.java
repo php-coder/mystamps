@@ -36,17 +36,9 @@ public class AddSeriesDbDto {
 	private Boolean perforated;
 	
 	private BigDecimal michelPrice;
-	private String michelCurrency;
-	
 	private BigDecimal scottPrice;
-	private String scottCurrency;
-	
 	private BigDecimal yvertPrice;
-	private String yvertCurrency;
-	
 	private BigDecimal gibbonsPrice;
-	private String gibbonsCurrency;
-	
 	private BigDecimal solovyovPrice;
 	private BigDecimal zagorskiPrice;
 	
