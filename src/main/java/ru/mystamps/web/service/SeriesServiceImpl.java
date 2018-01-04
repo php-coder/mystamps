@@ -66,11 +66,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	@SuppressWarnings({
-		"PMD.NPathComplexity",
-		"PMD.ModifiedCyclomaticComplexity",
-		"PMD.ExcessiveMethodLength"
-	})
+	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
@@ -146,12 +142,7 @@ public class SeriesServiceImpl implements SeriesService {
 			michelCatalogService.addToSeries(id, michelNumbers);
 		}
 		
-		Set<String> scottNumbers = CatalogUtils.parseCatalogNumbers(dto.getScottNumbers());
-		if (!scottNumbers.isEmpty()) {
-			scottCatalogService.add(scottNumbers);
-			scottCatalogService.addToSeries(id, scottNumbers);
-		}
-		
+		createCatalogNumbersAndAddToSeries(id, scottCatalogService, dto.getScottNumbers());
 		createCatalogNumbersAndAddToSeries(id, yvertCatalogService, dto.getYvertNumbers());
 		createCatalogNumbersAndAddToSeries(id, gibbonsCatalogService, dto.getGibbonsNumbers());
 		createCatalogNumbersAndAddToSeries(id, solovyovCatalogService, dto.getSolovyovNumbers());
