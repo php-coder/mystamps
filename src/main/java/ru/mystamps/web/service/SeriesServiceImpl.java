@@ -164,12 +164,7 @@ public class SeriesServiceImpl implements SeriesService {
 			gibbonsCatalogService.addToSeries(id, gibbonsNumbers);
 		}
 		
-		Set<String> solovyovNumbers = CatalogUtils.parseCatalogNumbers(dto.getSolovyovNumbers());
-		if (!solovyovNumbers.isEmpty()) {
-			solovyovCatalogService.add(solovyovNumbers);
-			solovyovCatalogService.addToSeries(id, solovyovNumbers);
-		}
-		
+		createCatalogNumbersAndAddToSeries(id, solovyovCatalogService, dto.getSolovyovNumbers());
 		createCatalogNumbersAndAddToSeries(id, zagorskiCatalogService, dto.getZagorskiNumbers());
 		
 		ImageInfoDto imageInfo = imageService.save(dto.getImage());
