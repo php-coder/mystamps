@@ -89,7 +89,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			}) >> Random.listOfIntegers()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCategory() should try to search category names with candidate as a prefix'() {
 		given:
 			List<Integer> expectedResult = Random.listOfIntegers()
@@ -108,7 +107,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCategory() should return an empty result when nothing has been found'() {
 		when:
 			List<Integer> result = service.extractCategory('foo')
@@ -165,7 +163,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			}) >> Random.listOfIntegers()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCountry() should try to search country names with candidate as a prefix'() {
 		given:
 			List<Integer> expectedResult = Random.listOfIntegers()
@@ -184,7 +181,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCountry() should return an empty result when nothing has been found'() {
 		when:
 			List<Integer> result = service.extractCountry('foo')
