@@ -136,12 +136,7 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		Integer id = seriesDao.add(series);
 		
-		Set<String> michelNumbers = CatalogUtils.parseCatalogNumbers(dto.getMichelNumbers());
-		if (!michelNumbers.isEmpty()) {
-			michelCatalogService.add(michelNumbers);
-			michelCatalogService.addToSeries(id, michelNumbers);
-		}
-		
+		createCatalogNumbersAndAddToSeries(id, michelCatalogService, dto.getMichelNumbers());
 		createCatalogNumbersAndAddToSeries(id, scottCatalogService, dto.getScottNumbers());
 		createCatalogNumbersAndAddToSeries(id, yvertCatalogService, dto.getYvertNumbers());
 		createCatalogNumbersAndAddToSeries(id, gibbonsCatalogService, dto.getGibbonsNumbers());
