@@ -117,24 +117,12 @@ public class SeriesImportController {
 		
 		boolean hasParsedData = parsedData != null;
 		if (hasParsedData) {
-			if (parsedData.getCategory() != null) {
-				form.setCategory(parsedData.getCategory());
-			}
-			if (parsedData.getCountry() != null) {
-				form.setCountry(parsedData.getCountry());
-			}
-			if (parsedData.getImageUrl() != null) {
-				form.setImageUrl(parsedData.getImageUrl());
-			}
-			if (parsedData.getIssueYear() != null) {
-				form.setYear(parsedData.getIssueYear());
-			}
-			if (parsedData.getQuantity() != null) {
-				form.setQuantity(parsedData.getQuantity());
-			}
-			if (parsedData.getPerforated() != null) {
-				form.setPerforated(parsedData.getPerforated());
-			}
+			form.setCategory(parsedData.getCategory());
+			form.setCountry(parsedData.getCountry());
+			form.setImageUrl(parsedData.getImageUrl());
+			form.setYear(parsedData.getIssueYear());
+			form.setQuantity(parsedData.getQuantity());
+			form.setPerforated(parsedData.getPerforated());
 		}
 		
 		model.addAttribute("importSeriesForm", form);
