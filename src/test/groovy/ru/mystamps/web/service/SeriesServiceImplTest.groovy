@@ -18,6 +18,7 @@
 package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomShortApi.bool
+import static io.qala.datagen.RandomShortApi.nullOr
 
 import org.springframework.web.multipart.MultipartFile
 
@@ -230,10 +231,10 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass michel price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass michel price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setMichelPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -242,16 +243,12 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.michelPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass scott price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass scott price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setScottPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -260,16 +257,12 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.scottPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass yvert price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass yvert price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setYvertPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -278,16 +271,12 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.yvertPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass gibbons price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass gibbons price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setGibbonsPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -296,16 +285,12 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.gibbonsPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass solovyov price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass solovyov price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setSolovyovPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -314,16 +299,12 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.solovyovPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
-	@Unroll
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass zagorski price (#expectedPrice) to series dao'(BigDecimal expectedPrice) {
+	def 'add() should pass zagorski price to series dao'() {
 		given:
+			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setZagorskiPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
@@ -332,10 +313,6 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.zagorskiPrice == expectedPrice
 				return true
 			}) >> Random.id()
-		where:
-			expectedPrice  | _
-			Random.price() | _
-			null           | _
 	}
 	
 	def "add() should throw exception if comment is empty"() {
