@@ -40,6 +40,7 @@ import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
+import ru.mystamps.web.service.dto.SeriesExtractedInfo
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
@@ -398,8 +399,7 @@ class SeriesImportServiceImplTest extends Specification {
 				String.valueOf(Random.perforated())
 			)
 		and:
-			extractorService.extractCategory(_ as String) >> Collections.emptyList()
-			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
 			service.saveParsedData(expectedRequestId, rawData)
 		then:
@@ -424,8 +424,7 @@ class SeriesImportServiceImplTest extends Specification {
 				String.valueOf(Random.perforated())
 			)
 		and:
-			extractorService.extractCategory(_ as String) >> Collections.emptyList()
-			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
 			service.saveParsedData(expectedRequestId, rawData)
 		then:
@@ -440,40 +439,22 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'saveParsedData() should pass data to extractor services and save its results'() {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryGetter' ])
+	def 'saveParsedData() should pass data to extractor service and save its results'() {
 		given:
 			Integer expectedRequestId = Random.id()
-			String expectedCategoryName = Random.categoryName()
-			String expectedCountryName = Random.countryName()
-			Integer expectedReleaseYear = Random.issueYear()
-			List<Integer> expectedCategoryIds = Random.listOfIntegers()
-			List<Integer> expectedCountryIds = Random.listOfIntegers()
-			Integer expectedCategoryId = expectedCategoryIds.get(0)
-			Integer expectedCountryId = expectedCountryIds.get(0)
-			Integer expectedQuantity = Random.quantity()
-			Boolean expectedPerforated = Random.perforated()
+			RawParsedDataDto expectedRawData = TestObjects.createRawParsedDataDto()
+			SeriesExtractedInfo expectedSeriesInfo = TestObjects.createSeriesExtractedInfo()
 		and:
-			RawParsedDataDto rawData = new RawParsedDataDto(
-				expectedCategoryName,
-				expectedCountryName,
-				Random.url(),
-				expectedReleaseYear.toString(),
-				expectedQuantity.toString(),
-				expectedPerforated.toString()
-			)
+			Integer expectedCategoryId  = expectedSeriesInfo.getCategoryIds().get(0)
+			Integer expectedCountryId   = expectedSeriesInfo.getCountryIds().get(0)
+			Integer expectedReleaseYear = expectedSeriesInfo.getReleaseYear()
+			Integer expectedQuantity    = expectedSeriesInfo.getQuantity()
+			Boolean expectedPerforated  = expectedSeriesInfo.getPerforated()
 		when:
-			service.saveParsedData(expectedRequestId, rawData)
+			service.saveParsedData(expectedRequestId, expectedRawData)
 		then:
-			1 * extractorService.extractCategory(expectedCategoryName) >> expectedCategoryIds
-		and:
-			1 * extractorService.extractCountry(expectedCountryName) >> expectedCountryIds
-		and:
-			1 * extractorService.extractReleaseYear(expectedReleaseYear.toString()) >> expectedReleaseYear
-		and:
-			1 * extractorService.extractQuantity(expectedQuantity.toString()) >> expectedQuantity
-		and:
-			1 * extractorService.extractPerforated(expectedPerforated.toString()) >> expectedPerforated
+			1 * extractorService.extract(expectedRawData) >> expectedSeriesInfo
 		and:
 			1 * seriesImportDao.addParsedContent(
 				expectedRequestId,
@@ -493,8 +474,7 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		and:
-			extractorService.extractCategory(_ as String) >> Collections.emptyList()
-			extractorService.extractCountry(_ as String) >> Collections.emptyList()
+			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
 			service.saveParsedData(expectedRequestId, TestObjects.createRawParsedDataDto())
 		then:

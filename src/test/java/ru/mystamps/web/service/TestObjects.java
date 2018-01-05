@@ -19,6 +19,7 @@ package ru.mystamps.web.service;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
@@ -26,6 +27,7 @@ import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
+import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -241,6 +243,26 @@ public final class TestObjects {
 			Random.url(),
 			Random.importRequestStatus(),
 			Random.date()
+		);
+	}
+	
+	public static SeriesExtractedInfo createSeriesExtractedInfo() {
+		return new SeriesExtractedInfo(
+			Random.listOfIntegers(),
+			Random.listOfIntegers(),
+			Random.issueYear(),
+			Random.quantity(),
+			Random.perforated()
+		);
+	}
+	
+	public static SeriesExtractedInfo createEmptySeriesExtractedInfo() {
+		return new SeriesExtractedInfo(
+			Collections.emptyList(),
+			Collections.emptyList(),
+			null,
+			null,
+			null
 		);
 	}
 	
