@@ -15,18 +15,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.service.dto;
 
 import java.util.List;
 
-import ru.mystamps.web.service.dto.RawParsedDataDto;
-import ru.mystamps.web.service.dto.SeriesExtractedInfo;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public interface SeriesInfoExtractorService {
-	SeriesExtractedInfo extract(RawParsedDataDto data);
-	List<Integer> extractCategory(String fragment);
-	List<Integer> extractCountry(String fragment);
-	Integer extractReleaseYear(String fragment);
-	Integer extractQuantity(String fragment);
-	Boolean extractPerforated(String fragment);
+@Getter
+@RequiredArgsConstructor
+public class SeriesExtractedInfo {
+	private final List<Integer> categoryIds;
+	private final List<Integer> countryIds;
+	private final Integer releaseYear;
+	private final Integer quantity;
+	private final Boolean perforated;
 }

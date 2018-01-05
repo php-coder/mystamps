@@ -46,6 +46,7 @@ import ru.mystamps.web.dao.dto.ParsedDataDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
+import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 // it complains on "Request id must be non null"

@@ -32,6 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.service.dto.RawParsedDataDto;
+import ru.mystamps.web.service.dto.SeriesExtractedInfo;
+
 @RequiredArgsConstructor
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
@@ -49,6 +52,25 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private final Logger log;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
+	
+	// @todo #803 SeriesInfoExtractorServiceImpl.extract(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public SeriesExtractedInfo extract(RawParsedDataDto data) {
+		List<Integer> categoryIds = extractCategory(data.getCategoryName());
+		List<Integer> countryIds = extractCountry(data.getCountryName());
+		Integer releaseYear = extractReleaseYear(data.getReleaseYear());
+		Integer quantity = extractQuantity(data.getQuantity());
+		Boolean perforated = extractPerforated(data.getPerforated());
+		
+		return new SeriesExtractedInfo(
+			categoryIds,
+			countryIds,
+			releaseYear,
+			quantity,
+			perforated
+		);
+	}
 	
 	@Override
 	@Transactional(readOnly = true)
