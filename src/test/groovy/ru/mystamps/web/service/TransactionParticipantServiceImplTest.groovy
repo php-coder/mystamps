@@ -119,7 +119,6 @@ class TransactionParticipantServiceImplTest extends Specification {
 	// Tests for findBuyersWithParents()
 	//
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findBuyersWithParents() should invoke dao and return its result'() {
 		given:
 			List<EntityWithParentDto> expectedResult = Random.listOfEntityWithParentDto()
