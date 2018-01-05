@@ -122,7 +122,9 @@ public class SeriesImportController {
 			form.setImageUrl(parsedData.getImageUrl());
 			form.setYear(parsedData.getIssueYear());
 			form.setQuantity(parsedData.getQuantity());
-			form.setPerforated(parsedData.getPerforated());
+			if (parsedData.getPerforated() != null) {
+				form.setPerforated(parsedData.getPerforated());
+			}
 		}
 		
 		model.addAttribute("importSeriesForm", form);
