@@ -250,45 +250,25 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang) {
-		List<Integer> seriesIds = michelCatalogService.findSeriesIdsByNumber(michelNumberCode);
-		if (seriesIds.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
+		return findByCatalogNumber(michelCatalogService, michelNumberCode, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang) {
-		List<Integer> seriesIds = scottCatalogService.findSeriesIdsByNumber(scottNumberCode);
-		if (seriesIds.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
+		return findByCatalogNumber(scottCatalogService, scottNumberCode, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang) {
-		List<Integer> seriesIds = yvertCatalogService.findSeriesIdsByNumber(yvertNumberCode);
-		if (seriesIds.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
+		return findByCatalogNumber(yvertCatalogService, yvertNumberCode, lang);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang) {
-		List<Integer> seriesIds = gibbonsCatalogService.findSeriesIdsByNumber(gibbonsNumberCode);
-		if (seriesIds.isEmpty()) {
-			return Collections.emptyList();
-		}
-		
-		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
+		return findByCatalogNumber(gibbonsCatalogService, gibbonsNumberCode, lang);
 	}
 	
 	@Override
@@ -339,6 +319,18 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 
 		return seriesDao.findPurchasesAndSales(seriesId);
+	}
+	
+	private List<SeriesInfoDto> findByCatalogNumber(
+		StampsCatalogService catalogService,
+		String number, String lang) {
+		
+		List<Integer> seriesIds = catalogService.findSeriesIdsByNumber(number);
+		if (seriesIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		return seriesDao.findByIdsAsSeriesInfo(seriesIds, lang);
 	}
 	
 	private static void setDateOfReleaseIfProvided(AddSeriesDto dto, AddSeriesDbDto series) {
