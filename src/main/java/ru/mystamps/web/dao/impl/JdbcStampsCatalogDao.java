@@ -40,6 +40,7 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	private final String addCatalogNumbersToSeriesSql;
 	private final String findBySeriesIdSql;
 	
+	@Override
 	public List<String> add(Set<String> catalogNumbers) {
 		Validate.validState(!"".equals(addCatalogNumberSql), "Query must be non empty");
 		
@@ -57,6 +58,7 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 		return inserted;
 	}
 	
+	@Override
 	public void addToSeries(Integer seriesId, Set<String> catalogNumbers) {
 		Validate.validState(seriesId != null, "Series id must be non null");
 		Validate.validState(!catalogNumbers.isEmpty(), "Catalog numbers must be non empty");
@@ -69,6 +71,7 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 		jdbcTemplate.update(addCatalogNumbersToSeriesSql, params);
 	}
 	
+	@Override
 	public List<String> findBySeriesId(Integer seriesId) {
 		return jdbcTemplate.queryForList(
 			findBySeriesIdSql,
