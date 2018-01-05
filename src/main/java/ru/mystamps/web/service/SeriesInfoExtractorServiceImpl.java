@@ -72,9 +72,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		);
 	}
 	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Integer> extractCategory(String fragment) {
+	protected List<Integer> extractCategory(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
 		}
@@ -107,9 +105,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Integer> extractCountry(String fragment) {
+	protected List<Integer> extractCountry(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
 		}
@@ -142,8 +138,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	@Override
-	public Integer extractReleaseYear(String fragment) {
+	protected Integer extractReleaseYear(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -173,8 +168,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity(): add unit tests
 	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity() respect MAX_STAMPS_IN_SERIES
-	@Override
-	public Integer extractQuantity(String fragment) {
+	protected Integer extractQuantity(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -195,8 +189,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// @todo #782 SeriesInfoExtractorServiceImpl.extractPerforated(): add unit tests
 	// @todo #782 Series import: add integration test for extracting perforation flag
-	@Override
-	public Boolean extractPerforated(String fragment) {
+	protected Boolean extractPerforated(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}

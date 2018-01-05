@@ -17,16 +17,9 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.List;
-
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 
 public interface SeriesInfoExtractorService {
 	SeriesExtractedInfo extract(RawParsedDataDto data);
-	List<Integer> extractCategory(String fragment);
-	List<Integer> extractCountry(String fragment);
-	Integer extractReleaseYear(String fragment);
-	Integer extractQuantity(String fragment);
-	Boolean extractPerforated(String fragment);
 }
