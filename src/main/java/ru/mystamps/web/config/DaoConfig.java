@@ -89,7 +89,8 @@ public class DaoConfig {
 			jdbcTemplate,
 			env.getRequiredProperty("scott.create"),
 			env.getRequiredProperty("series_scott.add"),
-			env.getRequiredProperty("series_scott.find_by_series_id")
+			env.getRequiredProperty("series_scott.find_by_series_id"),
+			env.getRequiredProperty("series_scott.find_series_ids_by_number")
 		);
 	}
 	

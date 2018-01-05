@@ -104,9 +104,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.count_series_updated_since}")
 	private String countSeriesUpdatedSinceSql;
 	
-	@Value("${series.find_series_ids_by_scott_number}")
-	private String findSeriesIdsByScottNumberSql;
-	
 	@Value("${series.find_series_ids_by_yvert_number}")
 	private String findSeriesIdsByYvertNumberSql;
 	
@@ -312,15 +309,6 @@ public class JdbcSeriesDao implements SeriesDao {
 			countSeriesUpdatedSinceSql,
 			Collections.singletonMap("date", date),
 			Long.class
-		);
-	}
-	
-	@Override
-	public List<Integer> findSeriesIdsByScottNumberCode(String scottNumber) {
-		return jdbcTemplate.queryForList(
-			findSeriesIdsByScottNumberSql,
-			Collections.singletonMap("scott_number", scottNumber),
-			Integer.class
 		);
 	}
 	

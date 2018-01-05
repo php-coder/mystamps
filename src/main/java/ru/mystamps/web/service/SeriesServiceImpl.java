@@ -261,10 +261,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang) {
-		Validate.isTrue(scottNumberCode != null, "Scott number code must be non null");
-		Validate.isTrue(!scottNumberCode.trim().isEmpty(), "Scott number code must be non empty");
-		
-		List<Integer> seriesIds = seriesDao.findSeriesIdsByScottNumberCode(scottNumberCode);
+		List<Integer> seriesIds = scottCatalogService.findSeriesIdsByNumber(scottNumberCode);
 		if (seriesIds.isEmpty()) {
 			return Collections.emptyList();
 		}

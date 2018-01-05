@@ -934,35 +934,18 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for findByScottNumber()
 	//
 	
-	@Unroll
-	def "findByScottNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
-		when:
-			service.findByScottNumber(catalogNumber, 'en')
-		then:
-			thrown IllegalArgumentException
-		where:
-			catalogNumber | _
-			null          | _
-			''            | _
-			' '           | _
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find series ids"() {
 		given:
 			String expectedScottNumber = '5'
 		when:
 			service.findByScottNumber(expectedScottNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByScottNumberCode({ String scottNumber ->
-				assert scottNumber == expectedScottNumber
-				return true
-			}) >> []
+			1 * scottCatalogService.findSeriesIdsByNumber(expectedScottNumber) >> []
 	}
 	
 	def "findByScottNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> []
+			scottCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByScottNumber('5', 'en')
 		then:
@@ -978,7 +961,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
-			seriesDao.findSeriesIdsByScottNumberCode(_ as String) >> expectedSeriesIds
+			scottCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
