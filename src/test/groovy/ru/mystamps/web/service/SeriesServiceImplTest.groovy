@@ -982,35 +982,18 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for findByYvertNumber()
 	//
 	
-	@Unroll
-	def "findByYvertNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
-		when:
-			service.findByYvertNumber(catalogNumber, 'en')
-		then:
-			thrown IllegalArgumentException
-		where:
-			catalogNumber | _
-			null          | _
-			''            | _
-			' '           | _
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find series ids"() {
 		given:
 			String expectedYvertNumber = '5'
 		when:
 			service.findByYvertNumber(expectedYvertNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByYvertNumberCode({ String yvertNumber ->
-				assert yvertNumber == expectedYvertNumber
-				return true
-			}) >> []
+			1 * yvertCatalogService.findSeriesIdsByNumber(expectedYvertNumber) >> []
 	}
 	
 	def "findByYvertNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> []
+			yvertCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByYvertNumber('5', 'en')
 		then:
@@ -1026,7 +1009,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
-			seriesDao.findSeriesIdsByYvertNumberCode(_ as String) >> expectedSeriesIds
+			yvertCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:

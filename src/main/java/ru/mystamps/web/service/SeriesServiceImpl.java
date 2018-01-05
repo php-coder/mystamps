@@ -272,10 +272,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang) {
-		Validate.isTrue(yvertNumberCode != null, "Yvert number code must be non null");
-		Validate.isTrue(!yvertNumberCode.trim().isEmpty(), "Yvert number code must be non empty");
-		
-		List<Integer> seriesIds = seriesDao.findSeriesIdsByYvertNumberCode(yvertNumberCode);
+		List<Integer> seriesIds = yvertCatalogService.findSeriesIdsByNumber(yvertNumberCode);
 		if (seriesIds.isEmpty()) {
 			return Collections.emptyList();
 		}
