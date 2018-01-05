@@ -231,85 +231,26 @@ class SeriesServiceImplTest extends Specification {
 			}) >> 123
 	}
 	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass michel price to series dao'() {
+	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryObjectReferences', 'UnnecessaryReturnKeyword' ])
+	def 'add() should pass catalog prices to series dao'() {
 		given:
 			BigDecimal expectedPrice = nullOr(Random.price())
+		and:
 			form.setMichelPrice(expectedPrice)
-		when:
-			service.add(form, Random.userId(), bool())
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.michelPrice == expectedPrice
-				return true
-			}) >> Random.id()
-	}
-	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass scott price to series dao'() {
-		given:
-			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setScottPrice(expectedPrice)
-		when:
-			service.add(form, Random.userId(), bool())
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.scottPrice == expectedPrice
-				return true
-			}) >> Random.id()
-	}
-	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass yvert price to series dao'() {
-		given:
-			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setYvertPrice(expectedPrice)
-		when:
-			service.add(form, Random.userId(), bool())
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.yvertPrice == expectedPrice
-				return true
-			}) >> Random.id()
-	}
-	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass gibbons price to series dao'() {
-		given:
-			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setGibbonsPrice(expectedPrice)
-		when:
-			service.add(form, Random.userId(), bool())
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.gibbonsPrice == expectedPrice
-				return true
-			}) >> Random.id()
-	}
-	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass solovyov price to series dao'() {
-		given:
-			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setSolovyovPrice(expectedPrice)
-		when:
-			service.add(form, Random.userId(), bool())
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.solovyovPrice == expectedPrice
-				return true
-			}) >> Random.id()
-	}
-	
-	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword' ])
-	def 'add() should pass zagorski price to series dao'() {
-		given:
-			BigDecimal expectedPrice = nullOr(Random.price())
 			form.setZagorskiPrice(expectedPrice)
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
+				assert series?.michelPrice == expectedPrice
+				assert series?.scottPrice == expectedPrice
+				assert series?.yvertPrice == expectedPrice
+				assert series?.gibbonsPrice == expectedPrice
+				assert series?.solovyovPrice == expectedPrice
 				assert series?.zagorskiPrice == expectedPrice
 				return true
 			}) >> Random.id()
