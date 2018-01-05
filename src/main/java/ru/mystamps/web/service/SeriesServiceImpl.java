@@ -250,10 +250,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang) {
-		Validate.isTrue(michelNumberCode != null, "Michel number code must be non null");
-		Validate.isTrue(!michelNumberCode.trim().isEmpty(), "Michel number code must be non empty");
-		
-		List<Integer> seriesIds = seriesDao.findSeriesIdsByMichelNumberCode(michelNumberCode);
+		List<Integer> seriesIds = michelCatalogService.findSeriesIdsByNumber(michelNumberCode);
 		if (seriesIds.isEmpty()) {
 			return Collections.emptyList();
 		}

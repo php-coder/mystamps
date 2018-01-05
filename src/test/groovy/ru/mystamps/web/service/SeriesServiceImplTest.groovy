@@ -886,35 +886,18 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for findByMichelNumber()
 	//
 	
-	@Unroll
-	def "findByMichelNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
-		when:
-			service.findByMichelNumber(catalogNumber, 'en')
-		then:
-			thrown IllegalArgumentException
-		where:
-			catalogNumber | _
-			null          | _
-			''            | _
-			' '           | _
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find series ids"() {
 		given:
 			String expectedMichelNumber = '5'
 		when:
 			service.findByMichelNumber(expectedMichelNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByMichelNumberCode({ String michelNumber ->
-				assert michelNumber == expectedMichelNumber
-				return true
-			}) >> []
+			1 * michelCatalogService.findSeriesIdsByNumber(expectedMichelNumber) >> []
 	}
 	
 	def "findByMichelNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> []
+			michelCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByMichelNumber('5', 'en')
 		then:
@@ -930,7 +913,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
-			seriesDao.findSeriesIdsByMichelNumberCode(_ as String) >> expectedSeriesIds
+			michelCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
