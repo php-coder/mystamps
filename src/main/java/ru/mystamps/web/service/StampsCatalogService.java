@@ -24,4 +24,5 @@ public interface StampsCatalogService {
 	void add(Set<String> catalogNumbers);
 	void addToSeries(Integer seriesId, Set<String> catalogNumbers);
 	List<String> findBySeriesId(Integer seriesId);
+	List<Integer> findSeriesIdsByNumber(String catalogNumber);
 }

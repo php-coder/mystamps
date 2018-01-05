@@ -17,11 +17,14 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.nullOrBlank
+
 import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.StampsCatalogDao
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class StampsCatalogServiceImplTest extends Specification {
@@ -131,6 +134,29 @@ class StampsCatalogServiceImplTest extends Specification {
 				assert seriesId == expectedSeriesId
 				return true
 			}) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSeriesIdsByNumber()
+	//
+	
+	def 'findSeriesIdsByNumber() should throw exception when argument is null, empty or blank'() {
+		when:
+			service.findSeriesIdsByNumber(nullOrBlank())
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'findSeriesIdsByNumber() should invoke dao and return its result'() {
+		given:
+			String expectedCatalogNumber = Random.catalogNumber()
+			List<Integer> expectedResult = Random.listOfIntegers()
+		when:
+			List<Integer> result = service.findSeriesIdsByNumber(expectedCatalogNumber)
+		then:
+			1 * stampsCatalogDao.findSeriesIdsByNumber(expectedCatalogNumber) >> expectedResult
 		and:
 			result == expectedResult
 	}

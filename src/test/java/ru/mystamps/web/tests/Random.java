@@ -172,6 +172,11 @@ public final class Random {
 		return catalogNumbers();
 	}
 	
+	public static String catalogNumber() {
+		final long maxCatalogNumber = 1000;
+		return String.valueOf(between(1, maxCatalogNumber).integer());
+	}
+	
 	public static Set<String> setOfStrings() {
 		final int minSize = 1;
 		final int maxSize = 3;
@@ -248,11 +253,6 @@ public final class Random {
 				catalogNumber()
 			)
 		);
-	}
-	
-	private static String catalogNumber() {
-		final long maxCatalogNumber = 1000;
-		return String.valueOf(between(1, maxCatalogNumber).integer());
 	}
 	
 }

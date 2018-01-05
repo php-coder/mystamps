@@ -28,17 +28,20 @@ import org.apache.commons.lang3.Validate;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.StampsCatalogDao;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final String addCatalogNumberSql;
 	private final String addCatalogNumbersToSeriesSql;
 	private final String findBySeriesIdSql;
+	private String findSeriesIdsByNumberSql;
 	
 	@Override
 	public List<String> add(Set<String> catalogNumbers) {
@@ -77,6 +80,15 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 			findBySeriesIdSql,
 			Collections.singletonMap("series_id", seriesId),
 			String.class
+		);
+	}
+	
+	@Override
+	public List<Integer> findSeriesIdsByNumber(String catalogNumber) {
+		return jdbcTemplate.queryForList(
+			findSeriesIdsByNumberSql,
+			Collections.singletonMap("number", catalogNumber),
+			Integer.class
 		);
 	}
 	

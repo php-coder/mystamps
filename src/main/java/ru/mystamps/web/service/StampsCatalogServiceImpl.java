@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import org.slf4j.Logger;
@@ -73,6 +74,19 @@ public class StampsCatalogServiceImpl implements StampsCatalogService {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		return stampsCatalogDao.findBySeriesId(seriesId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Integer> findSeriesIdsByNumber(String catalogNumber) {
+		Validate.isTrue(catalogNumber != null, "%s number must be non null", catalogName);
+		Validate.isTrue(
+			StringUtils.isNotBlank(catalogNumber),
+			"%s number must be non-blank",
+			catalogName
+		);
+		
+		return stampsCatalogDao.findSeriesIdsByNumber(catalogNumber);
 	}
 	
 }
