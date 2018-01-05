@@ -185,10 +185,13 @@ public class ServicesConfig {
 	
 	@Bean
 	public SeriesInfoExtractorService getSeriesInfoExtractorService() {
-		return new SeriesInfoExtractorServiceImpl(
-			LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
-			getCategoryService(),
-			getCountryService()
+		return new TimedSeriesInfoExtractorService(
+			LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
+			new SeriesInfoExtractorServiceImpl(
+				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
+				getCategoryService(),
+				getCountryService()
+			)
 		);
 	}
 	
