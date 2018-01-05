@@ -104,9 +104,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.count_series_updated_since}")
 	private String countSeriesUpdatedSinceSql;
 	
-	@Value("${series.find_series_ids_by_gibbons_number}")
-	private String findSeriesIdsByGibbonsNumberSql;
-	
 	@Override
 	public Integer add(AddSeriesDbDto series) {
 		Map<String, Object> params = new HashMap<>();
@@ -306,15 +303,6 @@ public class JdbcSeriesDao implements SeriesDao {
 			countSeriesUpdatedSinceSql,
 			Collections.singletonMap("date", date),
 			Long.class
-		);
-	}
-	
-	@Override
-	public List<Integer> findSeriesIdsByGibbonsNumberCode(String gibbonsNumber) {
-		return jdbcTemplate.queryForList(
-			findSeriesIdsByGibbonsNumberSql,
-			Collections.singletonMap("gibbons_number", gibbonsNumber),
-			Integer.class
 		);
 	}
 	

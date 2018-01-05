@@ -58,7 +58,8 @@ public class DaoConfig {
 			jdbcTemplate,
 			env.getRequiredProperty("gibbons.create"),
 			env.getRequiredProperty("series_gibbons.add"),
-			env.getRequiredProperty("series_gibbons.find_by_series_id")
+			env.getRequiredProperty("series_gibbons.find_by_series_id"),
+			env.getRequiredProperty("series_gibbons.find_series_ids_by_number")
 		);
 	}
 	

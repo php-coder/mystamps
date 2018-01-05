@@ -283,13 +283,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang) {
-		Validate.isTrue(gibbonsNumberCode != null, "Gibbons number code must be non null");
-		Validate.isTrue(
-			!gibbonsNumberCode.trim().isEmpty(),
-			"Gibbons number code must be non empty"
-		);
-		
-		List<Integer> seriesIds = seriesDao.findSeriesIdsByGibbonsNumberCode(gibbonsNumberCode);
+		List<Integer> seriesIds = gibbonsCatalogService.findSeriesIdsByNumber(gibbonsNumberCode);
 		if (seriesIds.isEmpty()) {
 			return Collections.emptyList();
 		}

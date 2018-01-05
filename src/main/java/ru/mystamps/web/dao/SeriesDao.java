@@ -47,6 +47,4 @@ public interface SeriesDao {
 	long countSeriesById(Integer seriesId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
-	
-	List<Integer> findSeriesIdsByGibbonsNumberCode(String gibbonsNumber);
 }

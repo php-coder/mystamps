@@ -1030,35 +1030,18 @@ class SeriesServiceImplTest extends Specification {
 	// Tests for findByGibbonsNumber()
 	//
 	
-	@Unroll
-	def "findByGibbonsNumber() should throw exception for invalid argument '#catalogNumber'"(String catalogNumber) {
-		when:
-			service.findByGibbonsNumber(catalogNumber, 'en')
-		then:
-			thrown IllegalArgumentException
-		where:
-			catalogNumber | _
-			null          | _
-			''            | _
-			' '           | _
-	}
-	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
 			String expectedGibbonsNumber = '5'
 		when:
 			service.findByGibbonsNumber(expectedGibbonsNumber, 'en')
 		then:
-			1 * seriesDao.findSeriesIdsByGibbonsNumberCode({ String gibbonsNumber ->
-				assert gibbonsNumber == expectedGibbonsNumber
-				return true
-			}) >> []
+			1 * gibbonsCatalogService.findSeriesIdsByNumber(expectedGibbonsNumber) >> []
 	}
 	
 	def "findByGibbonsNumber() shouldn't try to find series info if there are no series"() {
 		given:
-			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> []
+			gibbonsCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
 			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', 'en')
 		then:
@@ -1074,7 +1057,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
-			seriesDao.findSeriesIdsByGibbonsNumberCode(_ as String) >> expectedSeriesIds
+			gibbonsCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
