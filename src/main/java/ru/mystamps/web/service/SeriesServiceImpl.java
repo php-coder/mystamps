@@ -271,6 +271,13 @@ public class SeriesServiceImpl implements SeriesService {
 		return findByCatalogNumber(gibbonsCatalogService, gibbonsNumberCode, lang);
 	}
 	
+	// @todo #776 SeriesServiceImpl.findByZagorskiNumber(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public List<SeriesInfoDto> findByZagorskiNumber(String zagorskiNumberCode, String lang) {
+		return findByCatalogNumber(zagorskiCatalogService, zagorskiNumberCode, lang);
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByCategorySlug(String slug, String lang) {

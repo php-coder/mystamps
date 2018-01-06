@@ -457,7 +457,7 @@ public class SeriesController {
 			return "redirect:" + Url.INDEX_PAGE;
 		}
 		
-		// @todo #769 Support search by Zagorski number
+		// @todo #776 Add integration tests for search series by Zagorski number
 		// @todo #770 Support search by Solovyov number
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
@@ -473,6 +473,9 @@ public class SeriesController {
 				break;
 			case "gibbons":
 				series = seriesService.findByGibbonsNumber(catalogNumber, lang);
+				break;
+			case "zagorski":
+				series = seriesService.findByZagorskiNumber(catalogNumber, lang);
 				break;
 			default:
 				series = Collections.emptyList();

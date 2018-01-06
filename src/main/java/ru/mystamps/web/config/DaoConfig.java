@@ -157,7 +157,8 @@ public class DaoConfig {
 			jdbcTemplate,
 			env.getRequiredProperty("zagorski.create"),
 			env.getRequiredProperty("series_zagorski.add"),
-			env.getRequiredProperty("series_zagorski.find_by_series_id")
+			env.getRequiredProperty("series_zagorski.find_by_series_id"),
+			env.getRequiredProperty("series_zagorski.find_series_ids_by_number")
 		);
 	}
 	
