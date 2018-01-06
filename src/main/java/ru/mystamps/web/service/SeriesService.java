@@ -46,6 +46,7 @@ public interface SeriesService {
 	List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang);
 	List<SeriesInfoDto> findByYvertNumber(String yvertNumberCode, String lang);
 	List<SeriesInfoDto> findByGibbonsNumber(String gibbonsNumberCode, String lang);
+	List<SeriesInfoDto> findBySolovyovNumber(String solovyovCatalogNumber, String lang);
 	List<SeriesInfoDto> findByZagorskiNumber(String zagorskiCatalogNumber, String lang);
 	
 	List<SeriesInfoDto> findByCategorySlug(String slug, String lang);

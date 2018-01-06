@@ -458,7 +458,7 @@ public class SeriesController {
 		}
 		
 		// @todo #776 Add integration tests for search series by Zagorski number
-		// @todo #770 Support search by Solovyov number
+		// @todo #777 Add integration tests for search series by Solovyov number
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
@@ -473,6 +473,9 @@ public class SeriesController {
 				break;
 			case "gibbons":
 				series = seriesService.findByGibbonsNumber(catalogNumber, lang);
+				break;
+			case "solovyov":
+				series = seriesService.findBySolovyovNumber(catalogNumber, lang);
 				break;
 			case "zagorski":
 				series = seriesService.findByZagorskiNumber(catalogNumber, lang);

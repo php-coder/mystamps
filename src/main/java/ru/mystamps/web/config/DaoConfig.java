@@ -116,7 +116,8 @@ public class DaoConfig {
 			jdbcTemplate,
 			env.getRequiredProperty("solovyov.create"),
 			env.getRequiredProperty("series_solovyov.add"),
-			env.getRequiredProperty("series_solovyov.find_by_series_id")
+			env.getRequiredProperty("series_solovyov.find_by_series_id"),
+			env.getRequiredProperty("series_solovyov.find_series_ids_by_number")
 		);
 	}
 	
