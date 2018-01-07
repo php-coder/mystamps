@@ -273,23 +273,27 @@
 										</label>
 									</th>
 									<td>
-										<select class="form-control" th:field="*{year}" id="year" th:disabled="${disabled}">
-											<option value="" th:text="#{t_year}">Year</option>
-											<!--/*/
-											<option th:each="year : ${years}" th:value="${year.key}" th:text="${year.value}"></option>
-											/*/-->
-											<!--/*-->
-											<option value="1960" selected="selected">1960</option>
-											<option value="2000">2000</option>
-											<option value="2010">2010</option>
-											<!--*/-->
-										</select>
+										<div class="col-xs-4 no-padding">
+											<select class="form-control" th:field="*{year}" id="year" th:disabled="${disabled}">
+												<option value="" th:text="#{t_year}">Year</option>
+												<!--/*/
+												<option th:each="year : ${years}" th:value="${year.key}" th:text="${year.value}"></option>
+												/*/-->
+												<!--/*-->
+												<option value="1960" selected="selected">1960</option>
+												<option value="2000">2000</option>
+												<option value="2010">2010</option>
+												<!--*/-->
+											</select>
+										</div>
 										<!--/*/
-										<span id="year.errors"
-											class="help-block"
-											th:if="${#fields.hasErrors('year')}"
-											th:each="error : ${#fields.errors('year')}"
-											th:text="${error}"></span>
+										<div class="col-xs-12 no-padding">
+											<span id="year.errors"
+												class="help-block"
+												th:if="${#fields.hasErrors('year')}"
+												th:each="error : ${#fields.errors('year')}"
+												th:text="${error}">Invalid year</span>
+											</div>
 										/*/-->
 									</td>
 								</tr>
