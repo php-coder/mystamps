@@ -115,7 +115,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == null
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "get() should return result from image data dao"() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
@@ -124,13 +123,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:
-			1 * imageDataDao.findByImageId({ Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			}, { Boolean preview ->
-				assert preview == false
-				return true
-			}) >> expectedImageDto
+			1 * imageDataDao.findByImageId(expectedImageId, false) >> expectedImageDto
 		and:
 			result == expectedImageDto
 	}
@@ -148,7 +141,6 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 			result == null
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'getPreview() should return result of image data dao'() {
 		given:
 			Integer expectedImageId = imageInfoDto.id
@@ -157,13 +149,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		when:
 			ImageDto result = strategy.getPreview(imageInfoDto)
 		then:
-			1 * imageDataDao.findByImageId({ Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			}, { Boolean preview ->
-				assert preview == true
-				return true
-			}) >> expectedImageDto
+			1 * imageDataDao.findByImageId(expectedImageId, true) >> expectedImageDto
 		and:
 			result == expectedImageDto
 	}
