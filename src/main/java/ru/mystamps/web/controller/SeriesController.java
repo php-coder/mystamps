@@ -506,6 +506,12 @@ public class SeriesController {
 		model.addAttribute("years", YEARS);
 	}
 	
+	protected void addSellersToModel(Model model) {
+		List<EntityWithParentDto> sellers = transactionParticipantService.findSellersWithParents();
+		List<SelectItem> groupedSellers = GroupByParent.transformEntities(sellers);
+		model.addAttribute("sellers", groupedSellers);
+	}
+	
 	protected static void loadErrorsFromDownloadInterceptor(
 		NullableImageUrl form,
 		BindingResult result,
@@ -604,9 +610,7 @@ public class SeriesController {
 			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
 		}
 		
-		List<EntityWithParentDto> sellers = transactionParticipantService.findSellersWithParents();
-		List<SelectItem> groupedSellers = GroupByParent.transformEntities(sellers);
-		model.addAttribute("sellers", groupedSellers);
+		addSellersToModel(model);
 		
 		List<EntityWithParentDto> buyers = transactionParticipantService.findBuyersWithParents();
 		List<SelectItem> groupedBuyers = GroupByParent.transformEntities(buyers);
