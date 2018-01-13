@@ -79,7 +79,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining category from a fragment: '{}'", fragment);
 		
-		String[] candidates = StringUtils.split(fragment);
+		String[] candidates = StringUtils.split(fragment, "\n\t ,");
 		Set<String> uniqueCandidates = new HashSet<>();
 		Collections.addAll(uniqueCandidates, candidates);
 		
@@ -112,7 +112,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
-		String[] candidates = StringUtils.split(fragment);
+		String[] candidates = StringUtils.split(fragment, "\n\t ,");
 		Set<String> uniqueCandidates = new HashSet<>();
 		Collections.addAll(uniqueCandidates, candidates);
 		
