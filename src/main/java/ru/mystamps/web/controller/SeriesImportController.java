@@ -43,7 +43,7 @@ import ru.mystamps.web.controller.dto.ImportSeriesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
-import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.util.LocaleUtils;
 
@@ -110,20 +110,20 @@ public class SeriesImportController {
 		model.addAttribute("request", request);
 
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		ParsedDataDto parsedData = seriesImportService.getParsedData(requestId, lang);
+		SeriesParsedDataDto series = seriesImportService.getParsedData(requestId, lang);
 		
 		ImportSeriesForm form = new ImportSeriesForm();
 		form.setPerforated(Boolean.TRUE);
 		
-		boolean hasParsedData = parsedData != null;
+		boolean hasParsedData = series != null;
 		if (hasParsedData) {
-			form.setCategory(parsedData.getCategory());
-			form.setCountry(parsedData.getCountry());
-			form.setImageUrl(parsedData.getImageUrl());
-			form.setYear(parsedData.getIssueYear());
-			form.setQuantity(parsedData.getQuantity());
-			if (parsedData.getPerforated() != null) {
-				form.setPerforated(parsedData.getPerforated());
+			form.setCategory(series.getCategory());
+			form.setCountry(series.getCountry());
+			form.setImageUrl(series.getImageUrl());
+			form.setYear(series.getIssueYear());
+			form.setQuantity(series.getQuantity());
+			if (series.getPerforated() != null) {
+				form.setPerforated(series.getPerforated());
 			}
 		}
 		
@@ -167,8 +167,8 @@ public class SeriesImportController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		
-		ParsedDataDto parsedData = seriesImportService.getParsedData(requestId, lang);
-		boolean hasParsedData = parsedData != null;
+		SeriesParsedDataDto series = seriesImportService.getParsedData(requestId, lang);
+		boolean hasParsedData = series != null;
 		model.addAttribute("showForm", hasParsedData);
 		
 		seriesController.addCategoriesToModel(model, lang);

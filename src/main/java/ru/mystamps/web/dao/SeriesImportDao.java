@@ -25,7 +25,7 @@ import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
-import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
@@ -41,7 +41,7 @@ public interface SeriesImportDao {
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
 	String findRawContentByRequestId(Integer requestId);
 	void addParsedContent(Integer requestId, AddSeriesParsedDataDbDto data);
-	ParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
+	SeriesParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
 	List<ImportRequestFullInfo> findAll();
 }

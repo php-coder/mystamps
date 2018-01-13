@@ -264,7 +264,9 @@ final class RowMappers {
 		return rs.getInt("id");
 	}
 	
-	public static ParsedDataDto forParsedDataDto(ResultSet rs, int i) throws SQLException {
+	public static SeriesParsedDataDto forSeriesParsedDataDto(ResultSet rs, int i)
+		throws SQLException {
+		
 		LinkEntityDto category =
 			createLinkEntityDto(rs, "category_id", "category_slug", "category_name");
 		
@@ -276,7 +278,14 @@ final class RowMappers {
 		Integer quantity = JdbcUtils.getInteger(rs, "quantity");
 		Boolean perforated = JdbcUtils.getBoolean(rs, "perforated");
 		
-		return new ParsedDataDto(category, country, imageUrl, releaseYear, quantity, perforated);
+		return new SeriesParsedDataDto(
+			category,
+			country,
+			imageUrl,
+			releaseYear,
+			quantity,
+			perforated
+		);
 	}
 	
 	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int i) throws SQLException {

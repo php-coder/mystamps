@@ -32,7 +32,7 @@ import ru.mystamps.web.controller.dto.RequestImportForm
 import ru.mystamps.web.controller.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
-import ru.mystamps.web.dao.dto.ParsedDataDto
+import ru.mystamps.web.dao.dto.SeriesParsedDataDto
 import ru.mystamps.web.dao.SeriesImportDao
 import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto
 import ru.mystamps.web.dao.dto.ImportRequestInfo
@@ -505,9 +505,9 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			String expectedLang = nullOr(Random.lang())
 		and:
-			ParsedDataDto expectedResult = TestObjects.createParsedDataDto()
+			SeriesParsedDataDto expectedResult = TestObjects.createSeriesParsedDataDto()
 		when:
-			ParsedDataDto result = service.getParsedData(expectedRequestId, expectedLang)
+			SeriesParsedDataDto result = service.getParsedData(expectedRequestId, expectedLang)
 		then:
 			1 * seriesImportDao.findParsedDataByRequestId(expectedRequestId, expectedLang) >> expectedResult
 		and:

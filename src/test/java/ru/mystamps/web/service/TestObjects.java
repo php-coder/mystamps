@@ -193,14 +193,14 @@ public final class TestObjects {
 		return new ImportRequestDto(Random.url(), Random.importRequestStatus(), null);
 	}
 	
-	public static ParsedDataDto createParsedDataDto() {
+	public static SeriesParsedDataDto createSeriesParsedDataDto() {
 		String categoryName = Random.categoryName();
 		String categorySlug = SlugUtils.slugify(categoryName);
 		
 		String countryName = Random.countryName();
 		String countrySlug = SlugUtils.slugify(countryName);
 		
-		return new ParsedDataDto(
+		return new SeriesParsedDataDto(
 			new LinkEntityDto(Random.id(), categorySlug, categoryName),
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),

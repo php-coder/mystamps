@@ -42,7 +42,7 @@ import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
-import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
@@ -201,7 +201,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public ParsedDataDto getParsedData(Integer requestId, String lang) {
+	public SeriesParsedDataDto getParsedData(Integer requestId, String lang) {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		
 		return seriesImportDao.findParsedDataByRequestId(requestId, lang);

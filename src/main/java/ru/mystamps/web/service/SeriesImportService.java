@@ -22,7 +22,7 @@ import java.util.List;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
-import ru.mystamps.web.dao.dto.ParsedDataDto;
+import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
@@ -35,7 +35,7 @@ public interface SeriesImportService {
 	void saveDownloadedContent(Integer requestId, String content);
 	String getDownloadedContent(Integer requestId);
 	void saveParsedData(Integer requestId, RawParsedDataDto data);
-	ParsedDataDto getParsedData(Integer requestId, String lang);
+	SeriesParsedDataDto getParsedData(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
 	List<ImportRequestFullInfo> findAll();
 }

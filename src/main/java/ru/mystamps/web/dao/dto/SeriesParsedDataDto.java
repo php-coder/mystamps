@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class ParsedDataDto {
+public class SeriesParsedDataDto {
 	private final LinkEntityDto category;
 	private final LinkEntityDto country;
 	private final String imageUrl;
