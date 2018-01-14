@@ -171,17 +171,16 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		# TODO: remove ignoring of error about alt attribute after resolving #314
-		# TODO: remove ignoring of error about document language when it will be resolved in upstream
 		# TODO: remove ignoring of error about Picked up _JAVA_OPTIONS when it will be resolved in upstream
 		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
 		html5validator \
 			--root src/main/webapp/WEB-INF/views \
+			--no-langdetect \
 			--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
 				'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
 				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 				'An "img" element must have an "alt" attribute' \
 				'The first child "option" element of a "select" element with a "required" attribute' \
-				'This document appears to be written in (Danish|Lithuanian|French)' \
 				'Element "option" without attribute "label" must not be empty' \
 				'Picked up' \
 			--show-warnings \
