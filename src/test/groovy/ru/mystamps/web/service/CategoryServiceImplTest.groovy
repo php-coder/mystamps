@@ -152,7 +152,6 @@ class CategoryServiceImplTest extends Specification {
 			service.findIdsByNames(names) == []
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findIdsByNames() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Set<String> expectedNames = Random.setOfStrings()
@@ -160,10 +159,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.findIdsByNames(expectedNames)
 		then:
-			1 * categoryDao.findIdsByNames({ Set<String> names ->
-				assert names == expectedNames
-				return true
-			}) >> expectedResult
+			1 * categoryDao.findIdsByNames(expectedNames) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -188,7 +184,6 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findIdsWhenNameStartsWith() should invoke dao, pass argument and return result from dao'() {
 		given:
 			String name = between(1, 10).english()
@@ -198,10 +193,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.findIdsWhenNameStartsWith(name)
 		then:
-			1 * categoryDao.findIdsByNamePattern({ String pattern ->
-				assert pattern == expectedPattern
-				return true
-			}) >> expectedResult
+			1 * categoryDao.findIdsByNamePattern(expectedPattern) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -226,15 +218,11 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
 		then:
-			1 * categoryDao.findAllAsLinkEntities({ String language ->
-				assert language == expectedLanguage
-				return true
-			})
+			1 * categoryDao.findAllAsLinkEntities(expectedLanguage)
 		where:
 			expectedLanguage | _
 			'ru'             | _
@@ -245,7 +233,6 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for findCategoriesWithParents()
 	//
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findCategoriesWithParents() should invoke dao and return its result'() {
 		given:
 			String expectedLang = nullOr(Random.lang())
@@ -253,10 +240,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			List<EntityWithParentDto> result = service.findCategoriesWithParents(expectedLang)
 		then:
-			1 * categoryDao.findCategoriesWithParents({ String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * categoryDao.findCategoriesWithParents(expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -278,7 +262,6 @@ class CategoryServiceImplTest extends Specification {
 			null | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
 		given:
 			String expectedSlug = 'people'
@@ -289,16 +272,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, expectedLang)
 		then:
-			1 * categoryDao.findOneAsLinkEntity(
-				{ String slug ->
-					assert expectedSlug == slug
-					return true
-				},
-				{ String lang ->
-					assert expectedLang == lang
-					return true
-				}
-			) >> expectedDto
+			1 * categoryDao.findOneAsLinkEntity(expectedSlug, expectedLang) >> expectedDto
 		and:
 			actualDto == expectedDto
 	}
@@ -329,17 +303,13 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countCategoriesOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 10
 		when:
 			service.countCategoriesOf(expectedCollectionId)
 		then:
-			1 * categoryDao.countCategoriesOfCollection({ Integer collectionId ->
-				assert expectedCollectionId == collectionId
-				return true
-			}) >> 0L
+			1 * categoryDao.countCategoriesOfCollection(expectedCollectionId) >> 0L
 	}
 	
 	//
@@ -382,15 +352,11 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByName() should pass category name to dao in lowercase"() {
 		when:
 			service.countByName('Sport')
 		then:
-			1 * categoryDao.countByName({ String name ->
-				assert name == 'sport'
-				return true
-			})
+			1 * categoryDao.countByName('sport')
 	}
 	
 	//
@@ -413,15 +379,11 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countByNameRu() should pass category name to dao in lowercase"() {
 		when:
 			service.countByNameRu('Спорт')
 		then:
-			1 * categoryDao.countByNameRu({ String name ->
-				assert name == 'спорт'
-				return true
-			})
+			1 * categoryDao.countByNameRu('спорт')
 	}
 	
 	//
@@ -435,7 +397,6 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -444,10 +405,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			long result = service.countAddedSince(expectedDate)
 		then:
-			1 * categoryDao.countAddedSince({ Date date ->
-				assert date == expectedDate
-				return true
-			}) >> expectedResult
+			1 * categoryDao.countAddedSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -463,7 +421,6 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -472,10 +429,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			long result = service.countUntranslatedNamesSince(expectedDate)
 		then:
-			1 * categoryDao.countUntranslatedNamesSince({ Date date ->
-				assert date == expectedDate
-				return true
-			}) >> expectedResult
+			1 * categoryDao.countUntranslatedNamesSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -491,7 +445,6 @@ class CategoryServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "getStatisticsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 15
@@ -500,16 +453,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
-			1 * categoryDao.getStatisticsOf(
-				{ Integer collectionId ->
-					assert expectedCollectionId == collectionId
-					return true
-				},
-				{ String lang ->
-					assert expectedLang == lang
-					return true
-				}
-			) >> null
+			1 * categoryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> null
 	}
 
 }
