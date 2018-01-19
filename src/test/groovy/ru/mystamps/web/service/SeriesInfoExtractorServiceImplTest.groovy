@@ -57,7 +57,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result.isEmpty()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCategory() should try to search by category names'() {
 		given:
 			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
@@ -67,15 +66,11 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.extractCategory(fragment)
 		then:
-			1 * categoryService.findIdsByNames({ Set<String> candidates ->
-				assert candidates == expectedCandidates
-				return true
-			}) >> expectedResult
+			1 * categoryService.findIdsByNames(expectedCandidates) >> expectedResult
 		and:
 			result == expectedResult
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCategory() should deduplicate candidates'() {
 		given:
 			String fragment = 'foo bar foo'
@@ -83,10 +78,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			service.extractCategory(fragment)
 		then:
-			1 * categoryService.findIdsByNames({ Set<String> candidates ->
-				assert candidates == expectedCandidates
-				return true
-			}) >> Random.listOfIntegers()
+			1 * categoryService.findIdsByNames(expectedCandidates) >> Random.listOfIntegers()
 	}
 	
 	def 'extractCategory() should try to search category names with candidate as a prefix'() {
@@ -131,7 +123,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result.isEmpty()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCountry() should try to search by country names'() {
 		given:
 			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
@@ -141,15 +132,11 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.extractCountry(fragment)
 		then:
-			1 * countryService.findIdsByNames({ Set<String> candidates ->
-				assert candidates == expectedCandidates
-				return true
-			}) >> expectedResult
+			1 * countryService.findIdsByNames(expectedCandidates) >> expectedResult
 		and:
 			result == expectedResult
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'extractCountry() should deduplicate candidates'() {
 		given:
 			String fragment = 'foo bar foo'
@@ -157,10 +144,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			service.extractCountry(fragment)
 		then:
-			1 * countryService.findIdsByNames({ Set<String> candidates ->
-				assert candidates == expectedCandidates
-				return true
-			}) >> Random.listOfIntegers()
+			1 * countryService.findIdsByNames(expectedCandidates) >> Random.listOfIntegers()
 	}
 	
 	def 'extractCountry() should try to search country names with candidate as a prefix'() {
