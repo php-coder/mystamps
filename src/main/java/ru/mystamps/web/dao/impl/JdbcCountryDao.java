@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 
@@ -197,7 +196,7 @@ public class JdbcCountryDao implements CountryDao {
 	}
 	
 	@Override
-	public List<Integer> findIdsByNames(Set<String> names) {
+	public List<Integer> findIdsByNames(List<String> names) {
 		return jdbcTemplate.query(
 			findIdsByNamesSql,
 			Collections.singletonMap("names", names),

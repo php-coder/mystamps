@@ -146,14 +146,14 @@ class CountryServiceImplTest extends Specification {
 	
 	def 'findIdsByNames() should return empty result when no names are specified'() {
 		given:
-			Set<String> names = nullOr(Collections.emptySet())
+			List<String> names = nullOr(Collections.emptyList())
 		expect:
 			service.findIdsByNames(names) == []
 	}
 	
 	def 'findIdsByNames() should invoke dao, pass argument and return result from dao'() {
 		given:
-			Set<String> expectedNames = Random.setOfStrings()
+			List<String> expectedNames = Random.listOfStrings()
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
 			List<Integer> result = service.findIdsByNames(expectedNames)

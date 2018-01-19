@@ -20,7 +20,6 @@ package ru.mystamps.web.service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -117,9 +116,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		Set<String> uniqueCandidates = Arrays.stream(candidates)
+		List<String> uniqueCandidates = Arrays.stream(candidates)
 			.distinct()
-			.collect(Collectors.toSet());
+			.collect(Collectors.toList());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
 		

@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -84,7 +83,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Integer> findIdsByNames(Set<String> names) {
+	public List<Integer> findIdsByNames(List<String> names) {
 		if (names == null || names.isEmpty()) {
 			return Collections.emptyList();
 		}

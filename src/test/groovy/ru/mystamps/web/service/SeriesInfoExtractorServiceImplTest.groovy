@@ -126,7 +126,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCountry() should try to search by country names'() {
 		given:
 			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
-			Set<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
+			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
@@ -140,7 +140,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCountry() should deduplicate candidates'() {
 		given:
 			String fragment = 'foo bar foo'
-			Set<String> expectedCandidates = [ 'foo', 'bar' ]
+			List<String> expectedCandidates = [ 'foo', 'bar' ]
 		when:
 			service.extractCountry(fragment)
 		then:
@@ -154,7 +154,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			List<Integer> result = service.extractCountry('bar1 bar2')
 		then:
 			// in order to search by prefix, we shouldn't find anything by name
-			1 * countryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+			1 * countryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			// the first lookup will find nothing
 			1 * countryService.findIdsWhenNameStartsWith('bar1') >> Collections.emptyList()
@@ -169,7 +169,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.extractCountry('foo')
 		then:
-			1 * countryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+			1 * countryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			1 * countryService.findIdsWhenNameStartsWith(_ as String) >> Collections.emptyList()
 		and:

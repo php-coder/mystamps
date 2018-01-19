@@ -184,13 +184,6 @@ public final class Random {
 		return sampleMultiple(size, "foo", "bar", "baz");
 	}
 	
-	public static Set<String> setOfStrings() {
-		final int minSize = 1;
-		final int maxSize = 3;
-		int size = integer(minSize, maxSize);
-		return new HashSet<>(sampleMultiple(size, "foo", "bar", "baz"));
-	}
-	
 	public static List<Integer> listOfIntegers() {
 		final int minSize = 1;
 		final int maxSize = 3;
