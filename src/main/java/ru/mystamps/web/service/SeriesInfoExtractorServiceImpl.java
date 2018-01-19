@@ -114,7 +114,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining category from a fragment: '{}'", fragment);
 		
 		String[] names = StringUtils.split(fragment, "\n\t ,");
-		List<String> uniqueCandidates = Arrays.stream(names)
+		List<String> candidates = Arrays.stream(names)
 			.filter(tooShortCategoryName)
 			.filter(tooLongCategoryName)
 			.filter(invalidCategoryName)
@@ -122,15 +122,15 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			.limit(MAX_CANDIDATES_FOR_LOOKUP)
 			.collect(Collectors.toList());
 		
-		log.debug("Possible candidates: {}", uniqueCandidates);
+		log.debug("Possible candidates: {}", candidates);
 		
-		List<Integer> categories = categoryService.findIdsByNames(uniqueCandidates);
+		List<Integer> categories = categoryService.findIdsByNames(candidates);
 		log.debug("Found categories: {}", categories);
 		if (!categories.isEmpty()) {
 			return categories;
 		}
 		
-		for (String candidate : uniqueCandidates) {
+		for (String candidate : candidates) {
 			log.debug("Possible candidate: '{}%'", candidate);
 			categories = categoryService.findIdsWhenNameStartsWith(candidate);
 			if (!categories.isEmpty()) {
@@ -154,7 +154,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
 		String[] names = StringUtils.split(fragment, "\n\t ,");
-		List<String> uniqueCandidates = Arrays.stream(names)
+		List<String> candidates = Arrays.stream(names)
 			.filter(tooShortCountryName)
 			.filter(tooLongCountryName)
 			.filter(invalidCountryName)
@@ -162,15 +162,15 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			.limit(MAX_CANDIDATES_FOR_LOOKUP)
 			.collect(Collectors.toList());
 		
-		log.debug("Possible candidates: {}", uniqueCandidates);
+		log.debug("Possible candidates: {}", candidates);
 		
-		List<Integer> countries = countryService.findIdsByNames(uniqueCandidates);
+		List<Integer> countries = countryService.findIdsByNames(candidates);
 		log.debug("Found countries: {}", countries);
 		if (!countries.isEmpty()) {
 			return countries;
 		}
 		
-		for (String candidate : uniqueCandidates) {
+		for (String candidate : candidates) {
 			log.debug("Possible candidate: '{}%'", candidate);
 			countries = countryService.findIdsWhenNameStartsWith(candidate);
 			if (!countries.isEmpty()) {
