@@ -15,9 +15,9 @@ Submit request with blank required field
 Submit request with too long url
 	[Documentation]         Verify validation of too long url
 	${letter}=              Set Variable  j
-	Input Text              id=url  http://${letter * 285}
+	Input Text              id=url  http://${letter * 767}
 	Submit Form             id=import-series-form
-	Element Text Should Be  id=url.errors  Value is greater than allowable maximum of 285 characters
+	Element Text Should Be  id=url.errors  Value is greater than allowable maximum of 767 characters
 
 Submit request with invalid url
 	[Documentation]         Verify validation of invalid url
