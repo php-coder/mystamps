@@ -17,12 +17,13 @@
  */
 package ru.mystamps.web.service;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -82,8 +83,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining category from a fragment: '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		Set<String> uniqueCandidates = new HashSet<>();
-		Collections.addAll(uniqueCandidates, candidates);
+		Set<String> uniqueCandidates = Arrays.stream(candidates)
+			.distinct()
+			.collect(Collectors.toSet());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
 		
@@ -115,8 +117,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		Set<String> uniqueCandidates = new HashSet<>();
-		Collections.addAll(uniqueCandidates, candidates);
+		Set<String> uniqueCandidates = Arrays.stream(candidates)
+			.distinct()
+			.collect(Collectors.toSet());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
 		
