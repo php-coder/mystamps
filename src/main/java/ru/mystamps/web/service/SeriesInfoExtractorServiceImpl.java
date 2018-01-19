@@ -113,8 +113,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining category from a fragment: '{}'", fragment);
 		
-		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		List<String> uniqueCandidates = Arrays.stream(candidates)
+		String[] names = StringUtils.split(fragment, "\n\t ,");
+		List<String> uniqueCandidates = Arrays.stream(names)
 			.filter(tooShortCategoryName)
 			.filter(tooLongCategoryName)
 			.filter(invalidCategoryName)
@@ -153,8 +153,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
-		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		List<String> uniqueCandidates = Arrays.stream(candidates)
+		String[] names = StringUtils.split(fragment, "\n\t ,");
+		List<String> uniqueCandidates = Arrays.stream(names)
 			.filter(tooShortCountryName)
 			.filter(tooLongCountryName)
 			.filter(invalidCountryName)
