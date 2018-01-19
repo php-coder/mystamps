@@ -46,8 +46,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Pattern.compile("18[4-9][0-9]|19[0-9]{2}|20[0-9]{2}");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 99).
-	private static final Pattern NUMBER_OF_STAMPS_REGEXP =
-		Pattern.compile("([1-9][0-9]?) марок");
+	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
+		"([1-9][0-9]?)( беззубцовые)? мар(ок|ки)",
+		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
+	);
 	
 	private final Logger log;
 	private final CategoryService categoryService;
@@ -196,7 +198,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining perforation from a fragment: '{}'", fragment);
 		
-		boolean withoutPerforation = StringUtils.contains(fragment, "б/з");
+		boolean withoutPerforation = StringUtils.contains(fragment, "б/з")
+			|| StringUtils.containsIgnoreCase(fragment, "беззубцовые");
 		if (withoutPerforation) {
 			log.debug("Perforation is false");
 			return Boolean.FALSE;
