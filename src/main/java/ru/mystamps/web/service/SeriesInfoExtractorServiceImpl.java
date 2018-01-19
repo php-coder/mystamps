@@ -83,9 +83,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Determining category from a fragment: '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
-		Set<String> uniqueCandidates = Arrays.stream(candidates)
+		List<String> uniqueCandidates = Arrays.stream(candidates)
 			.distinct()
-			.collect(Collectors.toSet());
+			.collect(Collectors.toList());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
 		

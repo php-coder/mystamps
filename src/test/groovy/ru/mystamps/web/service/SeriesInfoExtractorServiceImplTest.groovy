@@ -60,7 +60,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCategory() should try to search by category names'() {
 		given:
 			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
-			Set<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
+			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
@@ -74,7 +74,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCategory() should deduplicate candidates'() {
 		given:
 			String fragment = 'foo bar foo'
-			Set<String> expectedCandidates = [ 'foo', 'bar' ]
+			List<String> expectedCandidates = [ 'foo', 'bar' ]
 		when:
 			service.extractCategory(fragment)
 		then:
@@ -88,7 +88,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			List<Integer> result = service.extractCategory('foo1 foo2')
 		then:
 			// in order to search by prefix, we shouldn't find anything by name
-			1 * categoryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+			1 * categoryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			// the first lookup will find nothing
 			1 * categoryService.findIdsWhenNameStartsWith('foo1') >> Collections.emptyList()
@@ -103,7 +103,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.extractCategory('foo')
 		then:
-			1 * categoryService.findIdsByNames(_ as Set<String>) >> Collections.emptyList()
+			1 * categoryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			1 * categoryService.findIdsWhenNameStartsWith(_ as String) >> Collections.emptyList()
 		and:
