@@ -85,16 +85,16 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		given:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
-			List<Integer> result = service.extractCategory('foo1 foo2')
+			List<Integer> result = service.extractCategory('Sport Space')
 		then:
 			// in order to search by prefix, we shouldn't find anything by name
 			1 * categoryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			// the first lookup will find nothing
-			1 * categoryService.findIdsWhenNameStartsWith('foo1') >> Collections.emptyList()
+			1 * categoryService.findIdsWhenNameStartsWith('Sport') >> Collections.emptyList()
 		and:
 			// the second lookup will return a result
-			1 * categoryService.findIdsWhenNameStartsWith('foo2') >> expectedResult
+			1 * categoryService.findIdsWhenNameStartsWith('Space') >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -151,16 +151,16 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		given:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
-			List<Integer> result = service.extractCountry('bar1 bar2')
+			List<Integer> result = service.extractCountry('Sweden Norway')
 		then:
 			// in order to search by prefix, we shouldn't find anything by name
 			1 * countryService.findIdsByNames(_ as List<String>) >> Collections.emptyList()
 		and:
 			// the first lookup will find nothing
-			1 * countryService.findIdsWhenNameStartsWith('bar1') >> Collections.emptyList()
+			1 * countryService.findIdsWhenNameStartsWith('Sweden') >> Collections.emptyList()
 		and:
 			// the second lookup will return a result
-			1 * countryService.findIdsWhenNameStartsWith('bar2') >> expectedResult
+			1 * countryService.findIdsWhenNameStartsWith('Norway') >> expectedResult
 		and:
 			result == expectedResult
 	}

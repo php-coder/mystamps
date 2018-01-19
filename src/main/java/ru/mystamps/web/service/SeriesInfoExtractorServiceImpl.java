@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -34,8 +35,15 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
+import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
+@SuppressWarnings({
+	// predicate names in camel case more readable than in uppercase
+	"PMD.VariableNamingConventions", "checkstyle:constantname",
+	// these "||" on the same line because it's more readable
+	"checkstyle:operatorwrap"
+})
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
 	// Related to RELEASE_YEAR_REGEXP and used in unit tests.
@@ -50,6 +58,28 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		"([1-9][0-9]?)( беззубцовые)? мар(ок|ки)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
+	
+	// CheckStyle: ignore LineLength for next 9 lines
+	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(ValidationRules.CATEGORY_NAME_EN_REGEXP);
+	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(ValidationRules.CATEGORY_NAME_RU_REGEXP);
+	private static final Pattern VALID_COUNTRY_NAME_EN  = Pattern.compile(ValidationRules.COUNTRY_NAME_EN_REGEXP);
+	private static final Pattern VALID_COUNTRY_NAME_RU  = Pattern.compile(ValidationRules.COUNTRY_NAME_RU_REGEXP);
+	
+	private static final Predicate<String> tooShortCategoryName = name -> name.length() >= ValidationRules.CATEGORY_NAME_MIN_LENGTH;
+	private static final Predicate<String> tooLongCategoryName  = name -> name.length() <= ValidationRules.CATEGORY_NAME_MAX_LENGTH;
+	private static final Predicate<String> tooShortCountryName  = name -> name.length() >= ValidationRules.COUNTRY_NAME_MIN_LENGTH;
+	private static final Predicate<String> tooLongCountryName   = name -> name.length() <= ValidationRules.COUNTRY_NAME_MAX_LENGTH;
+	
+	private static final Predicate<String> invalidCategoryName = name ->
+		VALID_CATEGORY_NAME_EN.matcher(name).matches() ||
+		VALID_CATEGORY_NAME_RU.matcher(name).matches();
+	
+	private static final Predicate<String> invalidCountryName = name ->
+		VALID_COUNTRY_NAME_EN.matcher(name).matches() ||
+		VALID_COUNTRY_NAME_RU.matcher(name).matches();
+	
+	// Max number of candidates that will be used in the SQL query within IN() statement.
+	private static final long MAX_CANDIDATES_FOR_LOOKUP = 50;
 	
 	private final Logger log;
 	private final CategoryService categoryService;
@@ -74,6 +104,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #821 SeriesInfoExtractorServiceImpl.extractCategory(): add unit tests for filtering invalid names
 	protected List<Integer> extractCategory(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
@@ -83,7 +115,11 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
 		List<String> uniqueCandidates = Arrays.stream(candidates)
+			.filter(tooShortCategoryName)
+			.filter(tooLongCategoryName)
+			.filter(invalidCategoryName)
 			.distinct()
+			.limit(MAX_CANDIDATES_FOR_LOOKUP)
 			.collect(Collectors.toList());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
@@ -108,6 +144,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #821 SeriesInfoExtractorServiceImpl.extractCountry(): add unit tests for filtering invalid names
 	protected List<Integer> extractCountry(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
@@ -117,7 +155,11 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		String[] candidates = StringUtils.split(fragment, "\n\t ,");
 		List<String> uniqueCandidates = Arrays.stream(candidates)
+			.filter(tooShortCountryName)
+			.filter(tooLongCountryName)
+			.filter(invalidCountryName)
 			.distinct()
+			.limit(MAX_CANDIDATES_FOR_LOOKUP)
 			.collect(Collectors.toList());
 		
 		log.debug("Possible candidates: {}", uniqueCandidates);
