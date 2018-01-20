@@ -59,8 +59,8 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractCategory() should try to search by category names'() {
 		given:
-			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
-			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
+			String fragment = 'Lorem ipsum   dolor\tsit\namet, consectetur.'
+			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur' ]
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
@@ -125,8 +125,8 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractCountry() should try to search by country names'() {
 		given:
-			String fragment = 'Lorem ipsum   dolor\tsit\namet,'
-			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet' ]
+			String fragment = 'Lorem ipsum   dolor\tsit\namet, consectetur.'
+			List<String> expectedCandidates = [ 'Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur' ]
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()
 		when:
