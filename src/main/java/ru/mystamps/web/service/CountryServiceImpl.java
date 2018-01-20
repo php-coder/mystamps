@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -81,6 +82,7 @@ public class CountryServiceImpl implements CountryService {
 		return slug;
 	}
 	
+	// @todo #819 CountryServiceImpl.findIdsByNames(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsByNames(List<String> names) {
@@ -88,9 +90,17 @@ public class CountryServiceImpl implements CountryService {
 			return Collections.emptyList();
 		}
 		
-		return countryDao.findIdsByNames(names);
+		// converting to lowercase to perform a case-insensitive search
+		List<String> lowerCasesNames = names
+			.stream()
+			.map(name -> name.toLowerCase(Locale.ENGLISH))
+			.collect(Collectors.toList());
+		
+		return countryDao.findIdsByNames(lowerCasesNames);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #819 CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsWhenNameStartsWith(String name) {
@@ -102,7 +112,10 @@ public class CountryServiceImpl implements CountryService {
 			"Name must not contain '%' or '_' chars"
 		);
 		
-		return countryDao.findIdsByNamePattern(name + '%');
+		// converting to lowercase to perform a case-insensitive search
+		String pattern = name.toLowerCase(Locale.ENGLISH) + '%';
+		
+		return countryDao.findIdsByNamePattern(pattern);
 	}
 	
 	@Override

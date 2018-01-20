@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -81,6 +82,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return slug;
 	}
 	
+	// @todo #819 CategoryServiceImpl.findIdsByNames(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsByNames(List<String> names) {
@@ -88,9 +90,17 @@ public class CategoryServiceImpl implements CategoryService {
 			return Collections.emptyList();
 		}
 		
-		return categoryDao.findIdsByNames(names);
+		// converting to lowercase to perform a case-insensitive search
+		List<String> lowerCasesNames = names
+			.stream()
+			.map(name -> name.toLowerCase(Locale.ENGLISH))
+			.collect(Collectors.toList());
+		
+		return categoryDao.findIdsByNames(lowerCasesNames);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #819 CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsWhenNameStartsWith(String name) {
@@ -102,7 +112,10 @@ public class CategoryServiceImpl implements CategoryService {
 			"Name must not contain '%' or '_' chars"
 		);
 		
-		return categoryDao.findIdsByNamePattern(name + '%');
+		// converting to lowercase to perform a case-insensitive search
+		String pattern = name.toLowerCase(Locale.ENGLISH) + '%';
+		
+		return categoryDao.findIdsByNamePattern(pattern);
 	}
 	
 	@Override
