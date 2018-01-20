@@ -186,7 +186,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'findIdsWhenNameStartsWith() should invoke dao, pass argument and return result from dao'() {
 		given:
-			String name = between(1, 10).english()
+			String name = between(1, 10).english().toLowerCase()
 			String expectedPattern = name + '%'
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()
