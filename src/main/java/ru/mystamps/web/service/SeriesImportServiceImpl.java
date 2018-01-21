@@ -188,7 +188,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			return;
 		}
 		
-		seriesImportDao.addParsedContent(requestId, seriesParsedData);
+		seriesImportDao.addParsedData(requestId, seriesParsedData);
 		
 		log.info("Request #{}: page were parsed ({})", requestId, seriesParsedData);
 		

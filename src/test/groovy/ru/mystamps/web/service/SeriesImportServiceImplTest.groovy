@@ -428,7 +428,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.saveParsedData(expectedRequestId, rawData)
 		then:
-			1 * seriesImportDao.addParsedContent(
+			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
 				{ AddSeriesParsedDataDbDto parsedData ->
 					assert parsedData?.imageUrl == expectedImageUrl
@@ -456,7 +456,7 @@ class SeriesImportServiceImplTest extends Specification {
 		then:
 			1 * extractorService.extract(expectedRawData) >> expectedSeriesInfo
 		and:
-			1 * seriesImportDao.addParsedContent(
+			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
 				{ AddSeriesParsedDataDbDto parsedData ->
 					assert parsedData?.categoryId  == expectedCategoryId

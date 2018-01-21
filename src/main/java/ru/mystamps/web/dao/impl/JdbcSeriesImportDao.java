@@ -67,8 +67,8 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	@Value("${series_import_requests.find_raw_content_by_request_id}")
 	private String findRawContentSql;
 	
-	@Value("${series_import_requests.add_parsed_content}")
-	private String addParsedContentSql;
+	@Value("${series_import_requests.add_series_parsed_data}")
+	private String addParsedDataSql;
 	
 	@Value("${series_import_requests.find_series_parsed_data_by_request_id}")
 	private String findSeriesParsedDataSql;
@@ -202,7 +202,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	}
 	
 	@Override
-	public void addParsedContent(Integer requestId, AddSeriesParsedDataDbDto data) {
+	public void addParsedData(Integer requestId, AddSeriesParsedDataDbDto data) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("request_id", requestId);
 		params.put("category_id", data.getCategoryId());
@@ -217,7 +217,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		KeyHolder holder = new GeneratedKeyHolder();
 		
 		int affected = jdbcTemplate.update(
-			addParsedContentSql,
+			addParsedDataSql,
 			new MapSqlParameterSource(params),
 			holder
 		);

@@ -40,7 +40,7 @@ public interface SeriesImportDao {
 	ImportRequestDto findById(Integer id);
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
 	String findRawContentByRequestId(Integer requestId);
-	void addParsedContent(Integer requestId, AddSeriesParsedDataDbDto data);
+	void addParsedData(Integer requestId, AddSeriesParsedDataDbDto data);
 	SeriesParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
 	List<ImportRequestFullInfo> findAll();
