@@ -31,25 +31,25 @@ final class RowMappers {
 	private RowMappers() {
 	}
 	
-	public static LinkEntityDto forLinkEntityDto(ResultSet rs, int i) throws SQLException {
+	public static LinkEntityDto forLinkEntityDto(ResultSet rs, int unused) throws SQLException {
 		return createLinkEntityDto(rs, "id", "slug", "name");
 	}
 	
-	public static Object[] forNameAndCounter(ResultSet rs, int i) throws SQLException {
+	public static Object[] forNameAndCounter(ResultSet rs, int unused) throws SQLException {
 		return new Object[]{
 			rs.getString("name"),
 			JdbcUtils.getInteger(rs, "counter")
 		};
 	}
 	
-	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int i) throws SQLException {
+	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int unused) throws SQLException {
 		return new SitemapInfoDto(
 			rs.getInt("id"),
 			rs.getTimestamp("updated_at")
 		);
 	}
 	
-	public static SeriesInfoDto forSeriesInfoDto(ResultSet rs, int i) throws SQLException {
+	public static SeriesInfoDto forSeriesInfoDto(ResultSet rs, int unused) throws SQLException {
 		Integer seriesId     = rs.getInt("id");
 		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
 		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
@@ -77,8 +77,9 @@ final class RowMappers {
 	/**
 	 * @author Sergey Chechenev
 	 */
-	// CheckStyle: ignore LineLength for next 1 line
-	public static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int i) throws SQLException {
+	public static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		Date date               = rs.getDate("date");
 		String sellerName       = rs.getString("seller_name");
 		String sellerUrl        = rs.getString("seller_url");
@@ -104,7 +105,9 @@ final class RowMappers {
 		);
 	}
 	
-	public static SeriesFullInfoDto forSeriesFullInfoDto(ResultSet rs, int i) throws SQLException {
+	public static SeriesFullInfoDto forSeriesFullInfoDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		Integer seriesId     = rs.getInt("id");
 		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
 		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
@@ -162,8 +165,9 @@ final class RowMappers {
 	/**
 	 * @author Sergey Chechenev
 	 */
-	// CheckStyle: ignore LineLength for next 1 line
-	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int i) throws SQLException {
+	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		String type        = rs.getString("activity_name");
 		Date occurredAt    = rs.getTimestamp("occurred_at");
 		String page        = rs.getString("page");
@@ -185,16 +189,18 @@ final class RowMappers {
 		);
 	}
 		
-		// CheckStyle: ignore LineLength for next 1 line
-	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int i) throws SQLException {
+	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		return new UsersActivationDto(
 			rs.getString("email"),
 			rs.getTimestamp("created_at")
 		);
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	public static UsersActivationFullDto forUsersActivationFullDto(ResultSet rs, int i) throws SQLException {
+	public static UsersActivationFullDto forUsersActivationFullDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		return new UsersActivationFullDto(
 			rs.getString("activation_key"),
 			rs.getString("email"),
@@ -202,7 +208,9 @@ final class RowMappers {
 		);
 	}
 	
-	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int i) throws SQLException {
+	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		return new CollectionInfoDto(
 			rs.getInt("id"),
 			rs.getString("slug"),
@@ -210,7 +218,7 @@ final class RowMappers {
 		);
 	}
 	
-	public static UserDetails forUserDetails(ResultSet rs, int i) throws SQLException {
+	public static UserDetails forUserDetails(ResultSet rs, int unused) throws SQLException {
 		return new UserDetails(
 			rs.getInt("id"),
 			rs.getString("login"),
@@ -221,28 +229,28 @@ final class RowMappers {
 		);
 	}
 	
-	public static DbImageDto forDbImageDto(ResultSet rs, int i) throws SQLException {
+	public static DbImageDto forDbImageDto(ResultSet rs, int unused) throws SQLException {
 		return new DbImageDto(
 			rs.getString("type"),
 			rs.getBytes("data")
 		);
 	}
 	
-	public static ImageInfoDto forImageInfoDto(ResultSet rs, int i) throws SQLException {
+	public static ImageInfoDto forImageInfoDto(ResultSet rs, int unused) throws SQLException {
 		return new ImageInfoDto(
 			rs.getInt("id"),
 			rs.getString("type")
 		);
 	}
 	
-	public static EntityWithIdDto forEntityWithIdDto(ResultSet rs, int i) throws SQLException {
+	public static EntityWithIdDto forEntityWithIdDto(ResultSet rs, int unused) throws SQLException {
 		return new EntityWithIdDto(
 			rs.getInt("id"),
 			rs.getString("name")
 		);
 	}
 	
-	public static EntityWithParentDto forEntityWithParentDto(ResultSet rs, int i)
+	public static EntityWithParentDto forEntityWithParentDto(ResultSet rs, int unused)
 		throws SQLException {
 		
 		return new EntityWithParentDto(
@@ -252,7 +260,9 @@ final class RowMappers {
 		);
 	}
 	
-	public static ImportRequestDto forImportRequestDto(ResultSet rs, int i) throws SQLException {
+	public static ImportRequestDto forImportRequestDto(ResultSet rs, int unused)
+		throws SQLException {
+		
 		return new ImportRequestDto(
 			rs.getString("url"),
 			rs.getString("status"),
@@ -260,11 +270,11 @@ final class RowMappers {
 		);
 	}
 	
-	public static Integer forInteger(ResultSet rs, int i) throws SQLException {
+	public static Integer forInteger(ResultSet rs, int unused) throws SQLException {
 		return rs.getInt("id");
 	}
 	
-	public static SeriesParsedDataDto forSeriesParsedDataDto(ResultSet rs, int i)
+	public static SeriesParsedDataDto forSeriesParsedDataDto(ResultSet rs, int unused)
 		throws SQLException {
 		
 		LinkEntityDto category =
@@ -288,11 +298,13 @@ final class RowMappers {
 		);
 	}
 	
-	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int i) throws SQLException {
+	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int unused)
+		throws SQLException {
+		
 		return new ImportRequestInfo(rs.getInt("id"), rs.getString("url"));
 	}
 	
-	public static ImportRequestFullInfo forImportRequestFullInfo(ResultSet rs, int i)
+	public static ImportRequestFullInfo forImportRequestFullInfo(ResultSet rs, int unused)
 		throws SQLException {
 		
 		return new ImportRequestFullInfo(
