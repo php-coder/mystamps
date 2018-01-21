@@ -71,7 +71,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	private String addParsedDataSql;
 	
 	@Value("${series_import_requests.find_series_parsed_data_by_request_id}")
-	private String findSeriesParsedDataSql;
+	private String findParsedDataSql;
 	
 	@Value("${series_import_requests.find_request_info_by_series_id}")
 	private String findRequestInfoSql;
@@ -238,7 +238,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 			params.put("lang", lang);
 			
 			return jdbcTemplate.queryForObject(
-				findSeriesParsedDataSql,
+				findParsedDataSql,
 				params,
 				RowMappers::forSeriesParsedDataDto
 			);
