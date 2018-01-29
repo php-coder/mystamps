@@ -442,7 +442,6 @@ class SeriesImportServiceImplTest extends Specification {
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryGetter' ])
 	def 'saveParsedData() should pass data to extractor service and save its results'() {
 		given:
-			Integer expectedRequestId = Random.id()
 			RawParsedDataDto expectedRawData = TestObjects.createRawParsedDataDto()
 			SeriesExtractedInfo expectedSeriesInfo = TestObjects.createSeriesExtractedInfo()
 		and:
@@ -452,12 +451,12 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedQuantity    = expectedSeriesInfo.getQuantity()
 			Boolean expectedPerforated  = expectedSeriesInfo.getPerforated()
 		when:
-			service.saveParsedData(expectedRequestId, expectedRawData)
+			service.saveParsedData(Random.id(), expectedRawData)
 		then:
 			1 * extractorService.extract(expectedRawData) >> expectedSeriesInfo
 		and:
 			1 * seriesImportDao.addParsedData(
-				expectedRequestId,
+				_ as Integer,
 				{ AddSeriesParsedDataDbDto parsedData ->
 					assert parsedData?.categoryId  == expectedCategoryId
 					assert parsedData?.countryId   == expectedCountryId
@@ -472,14 +471,12 @@ class SeriesImportServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'saveParsedData() should change request status'() {
 		given:
-			Integer expectedRequestId = Random.id()
-		and:
 			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
-			service.saveParsedData(expectedRequestId, TestObjects.createRawParsedDataDto())
+			service.saveParsedData(Random.id(), TestObjects.createRawParsedDataDto())
 		then:
 			1 * seriesImportDao.changeStatus(
-				expectedRequestId,
+				_ as Integer,
 				{ Date date ->
 					assert DateUtils.roughlyEqual(date, new Date())
 					return true
