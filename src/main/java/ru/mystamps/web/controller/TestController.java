@@ -67,7 +67,7 @@ public class TestController {
 		);
 	}
 	
-	@GetMapping("/valid/series-info/existing-seller")
+	@GetMapping("/test/valid/series-info/existing-seller")
 	public void seriesInfoWithExistingSeller(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");

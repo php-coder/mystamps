@@ -78,7 +78,7 @@ Import series from an external site (in Russian, use description locator)
 
 Import series and series sale with existing seller from an external site
 	[Documentation]             Verify import series and sale (with existing seller)
-	Input Text                  id=url  http://localhost:8080/valid/series-info/existing-seller
+	Input Text                  id=url  http://localhost:8080/test/valid/series-info/existing-seller
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
 	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
@@ -93,7 +93,7 @@ Import series and series sale with existing seller from an external site
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
 	Element Text Should Be      id=series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB
 	Link Should Point To        id=series-sale-1-seller       http://example.com/eicca-toppinen
-	Link Should Point To        id=series-sale-1-transaction  http://localhost:8080/valid/series-info/existing-seller
+	Link Should Point To        id=series-sale-1-transaction  http://localhost:8080/test/valid/series-info/existing-seller
 	Go To                       ${requestLocation}
 	# after importing a series, sale info at the request page should be shown as read-only
 	Element Should Be Disabled  id=seller
