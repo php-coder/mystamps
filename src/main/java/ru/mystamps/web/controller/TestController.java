@@ -58,7 +58,7 @@ public class TestController {
 		return "test";
 	}
 	
-	@GetMapping(path = "/test/invalid/simple-html")
+	@GetMapping("/test/invalid/simple-html")
 	public void simpleHtml(HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
