@@ -863,6 +863,29 @@ public class JsoupSiteParserTest {
 		assertThat(msg, price, equalTo(expectedValue));
 	}
 	
+	//
+	// Tests for extractCurrency()
+	//
+	
+	@Test
+	public void extractCurrencyShouldReturnNullWhenCurrencyValueIsNotSet() {
+		parser.setCurrencyValue(null);
+		
+		String currency = parser.extractCurrency(null);
+		
+		assertThat(currency, is(nullValue()));
+	}
+	
+	@Test
+	public void extractCurrencyShouldReturnCurrencyValue() {
+		String expectedCurrency = Random.currency().toString();
+		parser.setCurrencyValue(expectedCurrency);
+		
+		String currency = parser.extractCurrency(null);
+		
+		assertThat(currency, equalTo(expectedCurrency));
+	}
+	
 	private static String describe(JsoupSiteParser parser) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("JsoupSiteParser[name=")

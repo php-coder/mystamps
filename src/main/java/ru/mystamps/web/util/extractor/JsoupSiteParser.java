@@ -282,7 +282,6 @@ public class JsoupSiteParser implements SiteParser {
 		return price;
 	}
 	
-	// @todo #695 JsoupSiteParser.extractCurrency(): add unit tests
 	protected String extractCurrency(Element body) {
 		if (currencyValue == null) {
 			return null;
