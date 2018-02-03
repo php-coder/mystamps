@@ -826,6 +826,44 @@ public class JsoupSiteParserTest {
 	}
 	
 	//
+	// Tests for extractSellerUrl()
+	//
+	
+	@Test
+	public void extractSellerUrlShouldReturnNullWhenSellerLocatorIsNotSet() {
+		parser.setSellerLocator(null);
+		Element doc = createEmptyDocument();
+		
+		String url = parser.extractSellerUrl(doc);
+		
+		assertThat(url, is(nullValue()));
+	}
+	
+	@Test
+	public void extractSellerUrlShouldReturnNullWhenElementNotFound() {
+		parser.setSellerLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		
+		String url = parser.extractSellerUrl(doc);
+		
+		assertThat(url, is(nullValue()));
+	}
+	
+	@Test
+	public void extractSellerUrlShouldReturnValueOfHrefAttribute() {
+		parser.setSellerLocator("a");
+		
+		String expectedUrl = Random.url();
+		String html = String.format("<a href='%s'>test</a>", expectedUrl);
+		Element doc = createDocumentFromText(html);
+		
+		String url = parser.extractSellerUrl(doc);
+		
+		String msg = String.format("couldn't extract seller url from '%s'", doc);
+		assertThat(msg, url, equalTo(expectedUrl));
+	}
+	
+	//
 	// Tests for extractPrice()
 	//
 	

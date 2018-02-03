@@ -256,7 +256,6 @@ public class JsoupSiteParser implements SiteParser {
 		return sellerName;
 	}
 	
-	// @todo #695 JsoupSiteParser.extractSellerUrl(): add unit tests
 	protected String extractSellerUrl(Element body) {
 		if (sellerLocator == null) {
 			return null;
