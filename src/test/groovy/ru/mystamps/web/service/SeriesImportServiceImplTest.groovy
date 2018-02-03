@@ -420,19 +420,7 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		and:
-			// @todo #695 Introduce and use RawParsedDataDto.withImageUrl() method
-			RawParsedDataDto rawData = new RawParsedDataDto(
-				Random.categoryName(),
-				Random.countryName(),
-				null, /* imageUrl */
-				Random.issueYear().toString(),
-				Random.quantity().toString(),
-				String.valueOf(Random.perforated()),
-				Random.sellerName(),
-				Random.url(),
-				String.valueOf(Random.price()),
-				Random.currency().toString()
-			)
+			RawParsedDataDto rawData = TestObjects.createRawParsedDataDto().withImageUrl(null)
 		and:
 			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
@@ -450,18 +438,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			String expectedImageUrl = Random.url()
 		and:
-			RawParsedDataDto rawData = new RawParsedDataDto(
-				Random.categoryName(),
-				Random.countryName(),
-				expectedImageUrl,
-				Random.issueYear().toString(),
-				Random.quantity().toString(),
-				String.valueOf(Random.perforated()),
-				Random.sellerName(),
-				Random.url(),
-				String.valueOf(Random.price()),
-				Random.currency().toString()
-			)
+			RawParsedDataDto rawData = TestObjects.createRawParsedDataDto().withImageUrl(expectedImageUrl)
 		and:
 			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
