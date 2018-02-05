@@ -19,6 +19,7 @@ package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.nullOrBlank
 
 import org.slf4j.helpers.NOPLogger
 
@@ -141,6 +142,39 @@ class TransactionParticipantServiceImplTest extends Specification {
 			List<EntityWithParentDto> result = service.findSellersWithParents()
 		then:
 			1 * transactionParticipantDao.findSellersWithParents() >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSellerId()
+	//
+	
+	def 'findSellerId() should throw exception when name is null, empty or blank'() {
+		when:
+			service.findSellerId(nullOrBlank(), Random.url())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Seller name must be non-blank'
+	}
+	
+	def 'findSellerId() should throw exception when url is null, empty or blank'() {
+		when:
+			service.findSellerId(Random.sellerName(), nullOrBlank())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Seller url must be non-blank'
+	}
+	
+	def 'findSellerId() should invoke dao and return its result'() {
+		given:
+			String expectedName = Random.sellerName()
+			String expectedUrl = Random.url()
+			Integer expectedResult = Random.id()
+		when:
+			Integer result = service.findSellerId(expectedName, expectedUrl)
+		then:
+			1 * transactionParticipantDao.findSellerId(expectedName, expectedUrl) >> expectedResult
 		and:
 			result == expectedResult
 	}

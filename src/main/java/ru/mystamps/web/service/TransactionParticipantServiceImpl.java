@@ -78,7 +78,6 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		return transactionParticipantDao.findSellersWithParents();
 	}
 	
-	// @todo #695 TransactionParticipantServiceImpl.findSellerId(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public Integer findSellerId(String name, String url) {
