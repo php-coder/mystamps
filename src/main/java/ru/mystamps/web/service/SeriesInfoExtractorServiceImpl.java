@@ -281,7 +281,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 	}
 	
-	// @todo #695 SeriesInfoExtractorServiceImpl.extractCurrency(): add unit tests
 	public String extractCurrency(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;

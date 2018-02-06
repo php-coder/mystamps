@@ -309,4 +309,33 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'part of word2000' | _
 	}
 	
+	//
+	// Tests for extractCurrency()
+	//
+	
+	def 'extractCurrency() should return null when fragment is null, empty or blank'() {
+		when:
+			String result = service.extractCurrency(nullOrBlank())
+		then:
+			result == null
+	}
+	
+	def 'extractCurrency() should return null for unknown currency'() {
+		given:
+			String invalidCurrency = 'CAD'
+		when:
+			String result = service.extractCurrency(invalidCurrency)
+		then:
+			result == null
+	}
+	
+	def 'extractCurrency() should extract currency from a fragment'() {
+		given:
+			String validCurrency = Random.currency()
+		when:
+			String result = service.extractCurrency(validCurrency)
+		then:
+			result == validCurrency
+	}
+	
 }
