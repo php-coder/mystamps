@@ -261,7 +261,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #695 SeriesInfoExtractorServiceImpl.extractPrice(): add unit tests
 	public BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;

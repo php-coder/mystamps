@@ -310,6 +310,35 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for extractPrice()
+	//
+	
+	def 'extractPrice() should return null when fragment is null, empty or blank'() {
+		when:
+			BigDecimal result = service.extractPrice(nullOrBlank())
+		then:
+			result == null
+	}
+	
+	def 'extractPrice() should return null for invalid price'() {
+		given:
+			String invalidPrice = '20x'
+		when:
+			BigDecimal result = service.extractPrice(invalidPrice)
+		then:
+			result == null
+	}
+
+	def 'extractPrice() should extract price from a fragment'() {
+		given:
+			BigDecimal expectedPrice = Random.price()
+		when:
+			BigDecimal result = service.extractPrice(expectedPrice.toString())
+		then:
+			result == expectedPrice
+	}
+	
+	//
 	// Tests for extractCurrency()
 	//
 	
