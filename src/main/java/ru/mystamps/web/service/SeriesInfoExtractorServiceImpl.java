@@ -240,7 +240,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): add unit tests
 	public Integer extractSeller(String name, String url) {
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(url)) {
 			return null;

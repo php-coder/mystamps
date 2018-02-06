@@ -308,6 +308,41 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'test/2000'        | _
 			'part of word2000' | _
 	}
+
+	//
+	// Tests for extractSeller()
+	//
+	
+	def 'extractSeller() should return null when name is null, empty or blank'() {
+		when:
+			String result = service.extractSeller(nullOrBlank(), Random.url())
+		then:
+			result == null
+	}
+	
+	def 'extractSeller() should return null when url is null, empty or blank'() {
+		when:
+			String result = service.extractSeller(Random.sellerName(), nullOrBlank())
+		then:
+			result == null
+	}
+	
+	@Unroll
+	def 'extractSeller() should invoke dao and return its result (#expectedResult)'(Integer expectedResult) {
+		given:
+			String expectedName = Random.sellerName()
+			String expectedUrl = Random.url()
+		when:
+			Integer result = service.extractSeller(expectedName, expectedUrl)
+		then:
+			1 * transactionParticipantService.findSellerId(expectedName, expectedUrl) >> expectedResult
+		and:
+			result == expectedResult
+		where:
+			expectedResult | _
+			null           | _
+			Random.id()    | _
+	}
 	
 	//
 	// Tests for extractPrice()
