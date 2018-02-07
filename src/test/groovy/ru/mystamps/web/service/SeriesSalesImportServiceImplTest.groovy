@@ -56,7 +56,7 @@ class SeriesSalesImportServiceImplTest extends Specification {
 			ex.message == 'Parsed data must be non null'
 	}
 	
-	def 'saveParsedData() should save series parsed data'() {
+	def 'saveParsedData() should save series sales parsed data'() {
 		given:
 			Integer expectedRequestId = Random.id()
 			SeriesSalesParsedDataDbDto expectedParsedData = TestObjects.createSeriesSalesParsedDataDbDto()
