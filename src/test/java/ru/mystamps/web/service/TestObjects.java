@@ -286,4 +286,14 @@ public final class TestObjects {
 		);
 	}
 	
+	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {
+		SeriesSalesParsedDataDbDto dto = new SeriesSalesParsedDataDbDto();
+		dto.setSellerId(Random.id());
+		dto.setPrice(Random.price());
+		dto.setCurrency(Random.currency().toString());
+		dto.setCreatedAt(Random.date());
+		dto.setUpdatedAt(Random.date());
+		return dto;
+	}
+	
 }

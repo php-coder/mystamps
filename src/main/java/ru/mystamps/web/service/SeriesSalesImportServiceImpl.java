@@ -35,7 +35,7 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 	private final Logger log;
 	private final SeriesSalesImportDao seriesSalesImportDao;
 	
-	// @todo #695 SeriesSalesImportServiceImpl.saveParsedData(): add unit tests
+	// @todo #834 SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates
 	@Override
 	@Transactional
 	public void saveParsedData(Integer requestId, SeriesSalesParsedDataDbDto data) {
