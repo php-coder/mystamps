@@ -45,7 +45,6 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 		seriesSalesImportDao.addParsedData(requestId, data);
 	}
 	
-	// @todo #695 SeriesSalesImportServiceImpl.getParsedData(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public SeriesSaleParsedDataDto getParsedData(Integer requestId) {

@@ -296,4 +296,8 @@ public final class TestObjects {
 		return dto;
 	}
 	
+	public static SeriesSaleParsedDataDto createSeriesSaleParsedDataDto() {
+		return new SeriesSaleParsedDataDto(Random.id(), Random.price(), Random.currency());
+	}
+	
 }

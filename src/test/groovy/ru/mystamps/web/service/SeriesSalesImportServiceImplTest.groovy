@@ -22,6 +22,7 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.SeriesSalesImportDao
+import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto
 import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto
 import ru.mystamps.web.tests.Random
 
@@ -64,6 +65,30 @@ class SeriesSalesImportServiceImplTest extends Specification {
 			service.saveParsedData(expectedRequestId, expectedParsedData)
 		then:
 			1 * seriesSalesImportDao.addParsedData(expectedRequestId, expectedParsedData)
+	}
+	
+	//
+	// Tests for getParsedData()
+	//
+	
+	def 'getParsedData() should throw exception when request id is null'() {
+		when:
+			service.getParsedData(null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
+	}
+	
+	def 'getParsedData() should invoke dao and return its result'() {
+		given:
+			Integer expectedRequestId = Random.id()
+			SeriesSaleParsedDataDto expectedResult = TestObjects.createSeriesSaleParsedDataDto()
+		when:
+			SeriesSaleParsedDataDto result = service.getParsedData(expectedRequestId)
+		then:
+			1 * seriesSalesImportDao.findParsedDataByRequestId(expectedRequestId) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }
