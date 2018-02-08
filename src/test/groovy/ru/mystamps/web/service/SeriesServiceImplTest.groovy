@@ -317,7 +317,6 @@ class SeriesServiceImplTest extends Specification {
 			actual == expected
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add michel numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -330,21 +329,11 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), false)
 		then:
-			1 * michelCatalogService.add({ Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * michelCatalogService.add(expectedNumbers)
 		and:
-			1 * michelCatalogService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * michelCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add scott numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -357,21 +346,11 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), false)
 		then:
-			1 * scottCatalogService.add({ Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * scottCatalogService.add(expectedNumbers)
 		and:
-			1 * scottCatalogService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * scottCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add yvert numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -384,21 +363,11 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), false)
 		then:
-			1 * yvertCatalogService.add({ Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * yvertCatalogService.add(expectedNumbers)
 		and:
-			1 * yvertCatalogService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * yvertCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add gibbons numbers to series"() {
 		given:
 			Set<String> expectedNumbers = [ '1', '2' ] as Set
@@ -411,21 +380,11 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), false)
 		then:
-			1 * gibbonsCatalogService.add({ Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * gibbonsCatalogService.add(expectedNumbers)
 		and:
-			1 * gibbonsCatalogService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Set<String> numbers ->
-				assert numbers == expectedNumbers
-				return true
-			})
+			1 * gibbonsCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should add solovyov numbers to series'() {
 		given:
 			Set<String> expectedNumbers = Random.solovyovNumbers()
@@ -443,7 +402,6 @@ class SeriesServiceImplTest extends Specification {
 			1 * solovyovCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'add() should add zagorski numbers to series'() {
 		given:
 			Set<String> expectedNumbers = Random.zagorskiNumbers()
@@ -461,20 +419,15 @@ class SeriesServiceImplTest extends Specification {
 			1 * zagorskiCatalogService.addToSeries(expectedSeriesId, expectedNumbers)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass image to image service"() {
 		given:
 			form.setImage(multipartFile)
 		when:
 			service.add(form, Random.userId(), false)
 		then:
-			1 * imageService.save({ MultipartFile passedFile ->
-				assert passedFile == multipartFile
-				return true
-			}) >> TestObjects.createImageInfoDto()
+			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should add image to the series"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -488,16 +441,9 @@ class SeriesServiceImplTest extends Specification {
 			// FIXME: why we can't use _ as MultipartFile here?
 			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
 		and:
-			1 * imageService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			})
+			1 * imageService.addToSeries(expectedSeriesId, expectedImageId)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should remove image when exception occurs"() {
 		given:
 			ImageInfoDto expectedImageInfo = new ImageInfoDto(654, 'JPEG')
@@ -510,10 +456,7 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
-			1 * imageService.removeIfPossible({ ImageInfoDto imageInfo ->
-				assert imageInfo == expectedImageInfo
-				return true
-			})
+			1 * imageService.removeIfPossible(expectedImageInfo)
 		and:
 			thrown IllegalStateException
 	}
@@ -543,7 +486,7 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def "addImageToSeries() should mark series as modified"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -551,32 +494,25 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
 		then:
-			1 * seriesDao.markAsModified({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Date updatedAt ->
-				assert DateUtils.roughlyEqual(updatedAt, new Date())
-				return true
-			}, { Integer userId ->
-				assert userId == expectedUserId
-				return true
-			})
+			1 * seriesDao.markAsModified(
+				expectedSeriesId,
+				{ Date updatedAt ->
+					assert DateUtils.roughlyEqual(updatedAt, new Date())
+					return true
+				},
+				expectedUserId
+			)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addImageToSeries() should save image"() {
 		given:
 			imageForm.setImage(multipartFile)
 		when:
 			service.addImageToSeries(imageForm, 111, 222)
 		then:
-			1 * imageService.save({ MultipartFile passedFile ->
-				assert passedFile == multipartFile
-				return true
-			}) >> TestObjects.createImageInfoDto()
+			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addImageToSeries() should add image to series"() {
 		given:
 			Integer expectedSeriesId = 123
@@ -587,16 +523,9 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
 		and:
-			1 * imageService.addToSeries({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}, { Integer imageId ->
-				assert imageId == expectedImageId
-				return true
-			})
+			1 * imageService.addToSeries(expectedSeriesId, expectedImageId)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "addImageToSeries() should remove image when exception occurs"() {
 		given:
 			ImageInfoDto expectedImageInfo = new ImageInfoDto(456, 'JPEG')
@@ -607,10 +536,7 @@ class SeriesServiceImplTest extends Specification {
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
-			1 * imageService.removeIfPossible({ ImageInfoDto imageInfo ->
-				assert imageInfo == expectedImageInfo
-				return true
-			})
+			1 * imageService.removeIfPossible(expectedImageInfo)
 		and:
 			thrown IllegalStateException
 	}
@@ -656,17 +582,13 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countSeriesOf() should pass argument to dao"() {
 		given:
 			Integer expectedCollectionId = 7
 		when:
 			service.countSeriesOf(expectedCollectionId)
 		then:
-			1 * seriesDao.countSeriesOfCollection({ Integer collectionId ->
-				assert expectedCollectionId == collectionId
-				return true
-			}) >> 0L
+			1 * seriesDao.countSeriesOfCollection(expectedCollectionId) >> 0L
 	}
 	
 	//
@@ -680,17 +602,13 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countStampsOf() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 8
 		when:
 			service.countStampsOf(expectedCollectionId)
 		then:
-			1 * seriesDao.countStampsOfCollection({ Integer collectionId ->
-				assert expectedCollectionId == collectionId
-				return true
-			}) >> 0L
+			1 * seriesDao.countStampsOfCollection(expectedCollectionId) >> 0L
 	}
 	
 	//
@@ -704,7 +622,6 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -713,10 +630,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countAddedSince(expectedDate)
 		then:
-			1 * seriesDao.countAddedSince({ Date date ->
-				assert date == expectedDate
-				return true
-			}) >> expectedResult
+			1 * seriesDao.countAddedSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -732,7 +646,6 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Date expectedDate = new Date()
@@ -741,10 +654,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			long result = service.countUpdatedSince(expectedDate)
 		then:
-			1 * seriesDao.countUpdatedSince({ Date date ->
-				assert date == expectedDate
-				return true
-			}) >> expectedResult
+			1 * seriesDao.countUpdatedSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -761,22 +671,14 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'UnnecessaryReturnKeyword',
-		'LineLength',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
+	@SuppressWarnings([ 'LineLength', /* false positive: */ 'UnnecessaryBooleanExpression' ])
 	def "isSeriesExist() should return #expectedResult when dao returns #daoReturnValue"(Integer daoReturnValue, boolean expectedResult) {
 		given:
 			Integer expectedSeriesId = 13
 		when:
 			boolean result = service.isSeriesExist(expectedSeriesId)
 		then:
-			1 * seriesDao.countSeriesById({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> daoReturnValue
+			1 * seriesDao.countSeriesById(expectedSeriesId) >> daoReturnValue
 		and:
 			result == expectedResult
 		where:
@@ -906,7 +808,6 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByMichelNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -919,13 +820,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByMichelNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
-				assert seriesIds == expectedSeriesIds
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -954,7 +849,6 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByScottNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -967,13 +861,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByScottNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
-				assert seriesIds == expectedSeriesIds
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -1002,7 +890,6 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByYvertNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -1015,13 +902,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByYvertNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
-				assert seriesIds == expectedSeriesIds
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -1050,7 +931,6 @@ class SeriesServiceImplTest extends Specification {
 			result.empty
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByGibbonsNumber() should find and return series info"() {
 		given:
 			String expectedLang = 'en'
@@ -1063,13 +943,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', expectedLang)
 		then:
-			1 * seriesDao.findByIdsAsSeriesInfo({ List<Integer> seriesIds ->
-				assert seriesIds == expectedSeriesIds
-				return true
-			}, { String lang ->
-				assert lang == expectedLang
-				return true
-			}) >> expectedResult
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -1211,7 +1085,6 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findByCollectionId() should pass arguments to dao"() {
 		given:
 			Integer expectedCollectionId = 16
@@ -1220,16 +1093,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findByCollectionId(expectedCollectionId, expectedLang)
 		then:
-			1 * seriesDao.findByCollectionIdAsSeriesInfo(
-				{ Integer collectionId ->
-					assert expectedCollectionId == collectionId
-					return true
-				},
-				{ String lang ->
-					assert expectedLang == lang
-					return true
-				}
-			) >> []
+			1 * seriesDao.findByCollectionIdAsSeriesInfo(expectedCollectionId, expectedLang) >> []
 	}
 	
 	//
@@ -1248,7 +1112,6 @@ class SeriesServiceImplTest extends Specification {
 			0        | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findRecentlyAdded should pass arguments to dao"() {
 		given:
 			int expectedQuantity = 3
@@ -1257,16 +1120,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findRecentlyAdded(expectedQuantity, expectedLang)
 		then:
-			1 * seriesDao.findLastAdded(
-				{ int quantity ->
-					assert expectedQuantity == quantity
-					return true
-				},
-				{ String lang ->
-					assert expectedLang == lang
-					return true
-				}
-			) >> []
+			1 * seriesDao.findLastAdded(expectedQuantity, expectedLang) >> []
 	}
 	
 	//
@@ -1296,7 +1150,6 @@ class SeriesServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 88
@@ -1305,10 +1158,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			List<PurchaseAndSaleDto> result = service.findPurchasesAndSales(expectedSeriesId)
 		then:
-			1 * seriesDao.findPurchasesAndSales({ Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedResult
+			1 * seriesDao.findPurchasesAndSales(expectedSeriesId) >> expectedResult
 		and:
 			result == expectedResult
 	}
