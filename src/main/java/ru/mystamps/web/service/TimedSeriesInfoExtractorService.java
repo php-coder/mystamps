@@ -26,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 
-// @todo #802 TimedSeriesInfoExtractorService: add unit tests
 @RequiredArgsConstructor
 public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorService {
 	
