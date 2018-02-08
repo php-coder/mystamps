@@ -38,21 +38,12 @@ class TimedImagePreviewStrategyTest extends Specification {
 	//
 	
 	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'FactoryMethodName',
-		'LineLength',
-		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
+	@SuppressWarnings([ 'FactoryMethodName', 'LineLength', /* false positive: */ 'UnnecessaryBooleanExpression' ])
 	def 'createPreview() should pass #expectedData and return #expectedResult'(byte[] expectedData, byte[] expectedResult) {
 		when:
 			byte[] result = strategy.createPreview(expectedData)
 		then:
-			1 * origStrategy.createPreview({ byte[] image ->
-				image == expectedData
-			return true
-			}) >> expectedResult
+			1 * origStrategy.createPreview(expectedData) >> expectedResult
 		and:
 			result == expectedResult
 		where:
