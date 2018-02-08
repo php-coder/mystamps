@@ -61,7 +61,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
 		form = new AddSeriesForm()
-		form.setQuantity(2)
+		form.setQuantity(Random.quantity())
 		form.setPerforated(false)
 		form.setCategory(TestObjects.createLinkEntityDto())
 		
@@ -206,7 +206,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass quantity to series dao"() {
 		given:
-			Integer expectedQuantity = 3
+			Integer expectedQuantity = Random.quantity()
 			form.setQuantity(expectedQuantity)
 		when:
 			service.add(form, Random.userId(), bool())
