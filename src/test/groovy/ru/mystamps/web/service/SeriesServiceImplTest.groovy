@@ -19,6 +19,7 @@ package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.positiveLong
 
 import org.springframework.web.multipart.MultipartFile
 
@@ -547,7 +548,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countAll() should call dao and returns result"() {
 		given:
-			long expectedResult = 20
+			long expectedResult = positiveLong()
 		when:
 			long result = service.countAll()
 		then:
@@ -562,7 +563,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countAllStamps() should call dao and returns result"() {
 		given:
-			long expectedResult = 30
+			long expectedResult = positiveLong()
 		when:
 			long result = service.countAllStamps()
 		then:
@@ -588,7 +589,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countSeriesOf(expectedCollectionId)
 		then:
-			1 * seriesDao.countSeriesOfCollection(expectedCollectionId) >> 0L
+			1 * seriesDao.countSeriesOfCollection(expectedCollectionId) >> positiveLong()
 	}
 	
 	//
@@ -608,7 +609,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countStampsOf(expectedCollectionId)
 		then:
-			1 * seriesDao.countStampsOfCollection(expectedCollectionId) >> 0L
+			1 * seriesDao.countStampsOfCollection(expectedCollectionId) >> positiveLong()
 	}
 	
 	//
@@ -626,7 +627,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Date expectedDate = new Date()
 		and:
-			long expectedResult = 35
+			long expectedResult = positiveLong()
 		when:
 			long result = service.countAddedSince(expectedDate)
 		then:
@@ -650,7 +651,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Date expectedDate = new Date()
 		and:
-			long expectedResult = 45
+			long expectedResult = positiveLong()
 		when:
 			long result = service.countUpdatedSince(expectedDate)
 		then:
