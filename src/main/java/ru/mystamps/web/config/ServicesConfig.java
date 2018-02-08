@@ -181,6 +181,7 @@ public class ServicesConfig {
 			getSeriesSalesService(),
 			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
+			getTransactionParticipantService(),
 			eventPublisher
 		);
 	}

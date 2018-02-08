@@ -86,6 +86,9 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	private MultipartFile downloadedImage;
 	
 	@Valid
+	private ImportSellerForm seller;
+	
+	@Valid
 	private ImportSeriesSalesForm seriesSale;
 	
 	//

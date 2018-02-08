@@ -79,6 +79,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
 		Integer sellerId = extractSeller(data.getSellerName(), data.getSellerUrl());
+		String sellerName = extractSellerName(sellerId, data.getSellerName());
+		String sellerUrl = extractSellerUrl(sellerId, data.getSellerUrl());
 		BigDecimal price = extractPrice(data.getPrice());
 		String currency = extractCurrency(data.getCurrency());
 		
@@ -89,6 +91,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			quantity,
 			perforated,
 			sellerId,
+			sellerName,
+			sellerUrl,
 			price,
 			currency
 		);
@@ -256,6 +260,32 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Could not extract seller based on name/url");
 		
 		return null;
+	}
+	
+	// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): add unit tests
+	protected String extractSellerName(Integer id, String name) {
+		if (id != null) {
+			return null;
+		}
+		
+		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names
+		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names
+		
+		// we need a name ony if we couldn't find a seller in database (id == null)
+		return name;
+	}
+	
+	// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): add unit tests
+	protected String extractSellerUrl(Integer id, String url) {
+		if (id != null) {
+			return null;
+		}
+
+		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls
+		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls
+		
+		// we need a url ony if we couldn't find a seller in database (id == null)
+		return url;
 	}
 	
 	public BigDecimal extractPrice(String fragment) {

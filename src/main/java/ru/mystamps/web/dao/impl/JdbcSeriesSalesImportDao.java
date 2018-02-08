@@ -52,6 +52,8 @@ public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {
 		Map<String, Object> params = new HashMap<>();
 		params.put("request_id", requestId);
 		params.put("seller_id", data.getSellerId());
+		params.put("seller_name", data.getSellerName());
+		params.put("seller_url", data.getSellerUrl());
 		params.put("price", data.getPrice());
 		params.put("currency", data.getCurrency());
 		params.put("created_at", data.getCreatedAt());

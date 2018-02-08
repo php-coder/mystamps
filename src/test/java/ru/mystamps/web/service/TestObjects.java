@@ -22,10 +22,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 3 lines
+// CheckStyle: ignore AvoidStarImportCheck for next 4 lines
+import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
+import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
@@ -240,8 +242,12 @@ public final class TestObjects {
 	}
 	
 	public static AddSeriesSalesDto createAddSeriesSalesDto() {
+		return createAddSeriesSalesDtoWithSellerId(Random.id());
+	}
+	
+	public static AddSeriesSalesDto createAddSeriesSalesDtoWithSellerId(Integer sellerId) {
 		ImportSeriesSalesForm form = new ImportSeriesSalesForm();
-		form.setSellerId(Random.id());
+		form.setSellerId(sellerId);
 		form.setPrice(Random.price());
 		form.setCurrency(Random.currency());
 		return form;
@@ -261,13 +267,27 @@ public final class TestObjects {
 	}
 	
 	public static SeriesExtractedInfo createSeriesExtractedInfo() {
+		Integer sellerId = null;
+		String sellerName = null;
+		String sellerUrl = null;
+		
+		boolean existingSeller = bool();
+		if (existingSeller) {
+			sellerId = Random.id();
+		} else {
+			sellerName = Random.sellerName();
+			sellerUrl = Random.url();
+		}
+		
 		return new SeriesExtractedInfo(
 			Random.listOfIntegers(),
 			Random.listOfIntegers(),
 			Random.issueYear(),
 			Random.quantity(),
 			Random.perforated(),
-			Random.id(),
+			sellerId,
+			sellerName,
+			sellerUrl,
 			Random.price(),
 			Random.currency().toString()
 		);
@@ -282,13 +302,23 @@ public final class TestObjects {
 			null,
 			null,
 			null,
+			null,
+			null,
 			null
 		);
 	}
 	
 	public static SeriesSalesParsedDataDbDto createSeriesSalesParsedDataDbDto() {
 		SeriesSalesParsedDataDbDto dto = new SeriesSalesParsedDataDbDto();
-		dto.setSellerId(Random.id());
+		
+		boolean existingSeller = bool();
+		if (existingSeller) {
+			dto.setSellerId(Random.id());
+		} else {
+			dto.setSellerName(Random.sellerName());
+			dto.setSellerUrl(Random.url());
+		}
+		
 		dto.setPrice(Random.price());
 		dto.setCurrency(Random.currency().toString());
 		dto.setCreatedAt(Random.date());
@@ -297,7 +327,34 @@ public final class TestObjects {
 	}
 	
 	public static SeriesSaleParsedDataDto createSeriesSaleParsedDataDto() {
-		return new SeriesSaleParsedDataDto(Random.id(), Random.price(), Random.currency());
+		Integer sellerId = null;
+		String sellerName = null;
+		String sellerUrl = null;
+		
+		boolean existingSeller = bool();
+		if (existingSeller) {
+			sellerId = Random.id();
+		} else {
+			sellerName = Random.sellerName();
+			sellerUrl = Random.url();
+		}
+		
+		return new SeriesSaleParsedDataDto(
+			sellerId,
+			sellerName,
+			sellerUrl,
+			Random.price(),
+			Random.currency()
+		);
 	}
 	
+	public static AddParticipantDto createAddParticipantDto() {
+		AddParticipantForm dto = new AddParticipantForm();
+		dto.setName(Random.participantName());
+		dto.setUrl(Random.url());
+		dto.setGroupId(Random.id());
+		dto.setBuyer(bool());
+		dto.setSeller(bool());
+		return dto;
+	}
 }

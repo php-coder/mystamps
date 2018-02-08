@@ -30,13 +30,13 @@ import lombok.Setter;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 
+// @todo #695 /series/import/request/{id}: seller's name and url are required when sellerId is empty
 // @todo #695 /series/import/request/{id}(seriesSale):
 //  add integration test for validation of required fields
 @Getter
 @Setter
 public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	
-	@NotNull
 	private Integer sellerId;
 	
 	@NotNull

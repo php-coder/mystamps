@@ -39,6 +39,7 @@ import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto
 import ru.mystamps.web.dao.dto.ImportRequestInfo
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo
+import ru.mystamps.web.service.dto.AddParticipantDto
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.service.dto.AddSeriesSalesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
@@ -54,6 +55,7 @@ class SeriesImportServiceImplTest extends Specification {
 	private final SeriesSalesService seriesSalesService = Mock()
 	private final SeriesSalesImportService seriesSalesImportService = Mock()
 	private final SeriesInfoExtractorService extractorService = Mock()
+	private final TransactionParticipantService transactionParticipantService = Mock()
 	private final ApplicationEventPublisher eventPublisher = Mock()
 	
 	private SeriesImportService service
@@ -67,6 +69,7 @@ class SeriesImportServiceImplTest extends Specification {
 			seriesSalesService,
 			seriesSalesImportService,
 			extractorService,
+			transactionParticipantService,
 			eventPublisher
 		)
 		form = new RequestImportForm()
@@ -177,6 +180,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			Integer seriesId = service.addSeries(
 				expectedDto,
+				nullOr(TestObjects.createAddParticipantDto()),
 				nullOr(TestObjects.createAddSeriesSalesDto()),
 				expectedRequestId,
 				expectedUserId
@@ -195,9 +199,43 @@ class SeriesImportServiceImplTest extends Specification {
 		and:
 			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
 		when:
-			service.addSeries(TestObjects.createAddSeriesDto(), expectedSaleDto, Random.id(), expectedUserId)
+			service.addSeries(
+				TestObjects.createAddSeriesDto(),
+				nullOr(TestObjects.createAddParticipantDto()),
+				expectedSaleDto,
+				Random.id(),
+				expectedUserId
+			)
 		then:
 			1 * seriesSalesService.add(expectedSaleDto, expectedSeriesId, expectedUserId)
+	}
+
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'addSeries() should create a new seller if needed and use it during series sale creation'() {
+		given:
+			Integer expectedSellerId = Random.id()
+			AddParticipantDto expectedSellerDto = TestObjects.createAddParticipantDto()
+		and:
+			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> Random.id()
+		when:
+			service.addSeries(
+				TestObjects.createAddSeriesDto(),
+				expectedSellerDto,
+				TestObjects.createAddSeriesSalesDtoWithSellerId(null),
+				Random.id(),
+				Random.userId()
+			)
+		then:
+			1 * transactionParticipantService.add(expectedSellerDto) >> expectedSellerId
+		and:
+			1 * seriesSalesService.add(
+				{ AddSeriesSalesDto saleDto ->
+					assert saleDto?.sellerId == expectedSellerId
+					return true
+				},
+				_ as Integer,
+				_ as Integer
+			)
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -210,6 +248,7 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.addSeries(
 				TestObjects.createAddSeriesDto(),
+				nullOr(TestObjects.createAddParticipantDto()),
 				nullOr(TestObjects.createAddSeriesSalesDto()),
 				expectedRequestId,
 				Random.userId()
@@ -488,6 +527,8 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedQuantity    = expectedSeriesInfo.getQuantity()
 			Boolean expectedPerforated  = expectedSeriesInfo.getPerforated()
 			Integer expectedSellerId    = expectedSeriesInfo.getSellerId()
+			String expectedSellerName   = expectedSeriesInfo.getSellerName()
+			String expectedSellerUrl    = expectedSeriesInfo.getSellerUrl()
 			BigDecimal expectedPrice    = expectedSeriesInfo.getPrice()
 			String expectedCurrency     = expectedSeriesInfo.getCurrency()
 		when:
@@ -510,9 +551,12 @@ class SeriesImportServiceImplTest extends Specification {
 			1 * seriesSalesImportService.saveParsedData(
 				_ as Integer,
 				{ SeriesSalesParsedDataDbDto parsedData ->
-					assert parsedData?.sellerId == expectedSellerId
-					assert parsedData?.price    == expectedPrice
-					assert parsedData?.currency == expectedCurrency
+					assert parsedData != null
+					assert parsedData.sellerId   == expectedSellerId
+					assert parsedData.sellerName == expectedSellerName
+					assert parsedData.sellerUrl  == expectedSellerUrl
+					assert parsedData.price      == expectedPrice
+					assert parsedData.currency   == expectedCurrency
 					return true
 				}
 			)

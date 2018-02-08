@@ -32,6 +32,8 @@ public class SeriesExtractedInfo {
 	private final Integer quantity;
 	private final Boolean perforated;
 	private final Integer sellerId;
+	private final String sellerName;
+	private final String sellerUrl;
 	private final BigDecimal price;
 	private final String currency;
 }

@@ -23,6 +23,7 @@ import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
+import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
@@ -30,7 +31,14 @@ import ru.mystamps.web.service.dto.RequestImportDto;
 
 public interface SeriesImportService {
 	Integer addRequest(RequestImportDto dto, Integer userId);
-	Integer addSeries(AddSeriesDto dto, AddSeriesSalesDto sale, Integer requestId, Integer userId);
+	// @todo #695 SeriesImportService.addSeries(): introduce DTO object
+	Integer addSeries(
+		AddSeriesDto dto,
+		AddParticipantDto sellerDto,
+		AddSeriesSalesDto sale,
+		Integer requestId,
+		Integer userId
+	);
 	void changeStatus(Integer requestId, String oldStatus, String newStatus);
 	ImportRequestDto findById(Integer requestId);
 	void saveDownloadedContent(Integer requestId, String content);

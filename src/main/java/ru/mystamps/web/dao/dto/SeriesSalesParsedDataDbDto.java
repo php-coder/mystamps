@@ -29,6 +29,8 @@ import lombok.ToString;
 @ToString(exclude = { "createdAt", "updatedAt" })
 public class SeriesSalesParsedDataDbDto {
 	private Integer sellerId;
+	private String sellerName;
+	private String sellerUrl;
 	private BigDecimal price;
 	private String currency;
 	private Date createdAt;
@@ -37,7 +39,9 @@ public class SeriesSalesParsedDataDbDto {
 	// they aren't useless
 	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
-		return sellerId != null || (price != null && currency != null);
+		return sellerId != null
+			|| (sellerName != null && sellerUrl != null)
+			|| (price != null && currency != null);
 	}
 	
 }

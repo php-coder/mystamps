@@ -112,7 +112,7 @@
 						th:object="${importSeriesForm}">
 						
 						<div class="table-responsive">
-							<table class="table" th:with="hasSalesInfo=${importSeriesForm.seriesSale != null}">
+							<table class="table" th:with="hasSalesInfo=${importSeriesForm.seriesSale != null},hasSellerInfo=${importSeriesForm.seller != null}">
 								
 								<tr th:if="${not disabled or importSeriesForm.category != null}" th:classappend="${#fields.hasErrors('category') ? 'has-error' : ''}">
 									<th>
@@ -294,7 +294,8 @@
 									</td>
 								</tr>
 								
-								<tr th:if="${hasSalesInfo}" th:classappend="${#fields.hasErrors('seriesSale.sellerId') ? 'has-error' : ''}">
+								<!--/*/
+								<tr th:if="${hasSalesInfo and importSeriesForm.seriesSale.sellerId != null}" th:classappend="${#fields.hasErrors('seriesSale.sellerId') ? 'has-error' : ''}">
 									<th>
 										<label for="seller" class="control-label" th:text="#{t_seller}">
 											Seller
@@ -303,7 +304,6 @@
 									<td>
 										<select id="seller" class="form-control" th:field="*{seriesSale.sellerId}" th:disabled="${disabled}">
 											<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
-											<!--/*/
 											<th:block th:each="item : ${sellers}">
 												<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
 													<option th:each="seller : ${item.children}"
@@ -318,20 +318,57 @@
 													th:selected="${importSeriesForm.seriesSale.sellerId != item.value}">
 												</option>
 											</th:block>
-											/*/-->
-											<!--/*-->
-											<optgroup label="Musicians">
-												<option value="3">Eicca Toppinen</option>
-												<option value="1" selected="selected">James Alan Hetfield</option>
-											</optgroup>
-											<option value="2">Tommy Lee Jones</option>
-											<!--*/-->
 										</select>
-										<!--/*/
 										<span id="seller.errors"
 											class="help-block"
 											th:if="${#fields.hasErrors('seriesSale.sellerId')}"
 											th:each="error : ${#fields.errors('seriesSale.sellerId')}"
+											th:text="${error}"></span>
+									</td>
+								</tr>
+								/*/-->
+								
+								<tr th:if="${hasSellerInfo and importSeriesForm.seller.name != null}" th:classappend="${#fields.hasErrors('seller.name') ? 'has-error' : ''}">
+									<th>
+										<label for="seller-name" class="control-label" th:text="#{t_seller_name}">
+											Seller name
+										</label>
+									</th>
+									<td>
+										<input id="seller-name"
+											type="text"
+											class="form-control"
+											value="Lando Livianus"
+											th:field="*{seller.name}"
+											th:disabled="${disabled}" />
+										<!--/*/
+										<span id="seller-name.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('seller.name')}"
+											th:each="error : ${#fields.errors('seller.name')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
+								<tr th:if="${hasSellerInfo and importSeriesForm.seller.url != null}" th:classappend="${#fields.hasErrors('seller.url') ? 'has-error' : ''}">
+									<th>
+										<label for="seller-url" class="control-label" th:text="#{t_seller_url}">
+											Seller URL
+										</label>
+									</th>
+									<td>
+										<input id="seller-url"
+											type="url"
+											class="form-control"
+											value="http://example.com/lando-livianus"
+											th:field="*{seller.url}"
+											th:disabled="${disabled}" />
+										<!--/*/
+										<span id="seller-url.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('seller.url')}"
+											th:each="error : ${#fields.errors('seller.url')}"
 											th:text="${error}"></span>
 										/*/-->
 									</td>

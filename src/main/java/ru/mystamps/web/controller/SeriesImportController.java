@@ -40,6 +40,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.controller.dto.ImportSellerForm;
 import ru.mystamps.web.controller.dto.ImportSeriesForm;
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
@@ -141,6 +142,11 @@ public class SeriesImportController {
 			seriesSaleForm.setPrice(seriesSale.getPrice());
 			seriesSaleForm.setCurrency(seriesSale.getCurrency());
 			
+			ImportSellerForm sellerForm = new ImportSellerForm();
+			sellerForm.setName(seriesSale.getSellerName());
+			sellerForm.setUrl(seriesSale.getSellerUrl());
+			
+			form.setSeller(sellerForm);
 			form.setSeriesSale(seriesSaleForm);
 			
 			if (seriesSale.getSellerId() != null) {
@@ -213,6 +219,7 @@ public class SeriesImportController {
 		
 		Integer seriesId = seriesImportService.addSeries(
 			form,
+			form.getSeller(),
 			seriesSaleForm,
 			requestId,
 			currentUserId

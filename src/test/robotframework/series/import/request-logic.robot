@@ -100,6 +100,30 @@ Import series and series sale with existing seller from an external site
 	Element Should Be Disabled  id=price
 	Element Should Be Disabled  id=currency
 
+Import series and series sale with a new seller from an external site
+	[Documentation]             Verify import series and sale (with a new seller)
+	Input Text                  id=url  http://localhost:8080/test/valid/series-info/new-seller
+	Submit Form                 id=import-series-form
+	${requestLocation}=         Get Location
+	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
+	# seller info should be parsed and shown at the request page
+	Textfield Value Should Be   id=seller-name  Lando Livianus
+	# We can't use "Textfield Value Should Be" because it causes NPE:
+	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
+	${sellerUrl}=               Get Value     id=seller-url
+	Should Be Equal             ${sellerUrl}  http://example.com/lando-livianus
+	Submit Form                 id=create-series-form
+	${seriesLocation}=          Get Location
+	Should Match Regexp         ${seriesLocation}  /series/\\d+
+	# after importing a series, sale info should contain a new seller
+	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
+	Element Text Should Be      id=series-sale-1-info    ${currentDate} Lando Livianus was selling for 320.50 RUB
+	Link Should Point To        id=series-sale-1-seller  http://example.com/lando-livianus
+	Go To                       ${requestLocation}
+	# after importing a series, sale info at the request page should be shown as read-only
+	Element Should Be Disabled  id=seller-name
+	Element Should Be Disabled  id=seller-url
+
 Submit a request that will fail to download a file
 	[Documentation]         Verify submitting a URL with a non-existing file
 	Input Text              id=url  ${SITE_URL}/test/invalid/response-404

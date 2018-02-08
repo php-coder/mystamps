@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-seller-info-fields-to-series_sales_import_parsed_data" author="php-coder" context="scheme">
+		
+		<addColumn tableName="series_sales_import_parsed_data">
+			
+			<column name="seller_name" type="VARCHAR(50)" afterColumn="seller_id"
+				remarks="Must match to the transaction_participants.name field" />
+			
+			<column name="seller_url" type="VARCHAR(255)" afterColumn="seller_name"
+				remarks="Must match to the transaction_participants.url field" />
+			
+		</addColumn>
+		
+	</changeSet>
+	
+</databaseChangeLog>

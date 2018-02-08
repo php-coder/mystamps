@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.dto.Currency;
 public interface AddSeriesSalesDto {
 	Date getDate();
 	Integer getSellerId();
+	void setSellerId(Integer id);
 	String getUrl();
 	BigDecimal getPrice();
 	Currency getCurrency();

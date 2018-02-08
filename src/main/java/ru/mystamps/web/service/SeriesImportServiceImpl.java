@@ -44,6 +44,7 @@ import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
+import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
@@ -62,6 +63,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesInfoExtractorService extractorService;
+	private final TransactionParticipantService transactionParticipantService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@Override
@@ -100,6 +102,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	@PreAuthorize(HasAuthority.IMPORT_SERIES)
 	public Integer addSeries(
 		AddSeriesDto dto,
+		AddParticipantDto sellerDto,
 		AddSeriesSalesDto saleDto,
 		Integer requestId,
 		Integer userId) {
@@ -107,6 +110,10 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Integer seriesId = seriesService.add(dto, userId, false);
 		
 		if (saleDto != null) {
+			if (saleDto.getSellerId() == null && sellerDto != null) {
+				Integer sellerId = transactionParticipantService.add(sellerDto);
+				saleDto.setSellerId(sellerId);
+			}
 			seriesSalesService.add(saleDto, seriesId, userId);
 		}
 		
@@ -197,6 +204,8 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesSalesParsedData.setCreatedAt(now);
 		seriesSalesParsedData.setUpdatedAt(now);
 		seriesSalesParsedData.setSellerId(seriesInfo.getSellerId());
+		seriesSalesParsedData.setSellerName(seriesInfo.getSellerName());
+		seriesSalesParsedData.setSellerUrl(seriesInfo.getSellerUrl());
 		seriesSalesParsedData.setPrice(seriesInfo.getPrice());
 		seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
 		
