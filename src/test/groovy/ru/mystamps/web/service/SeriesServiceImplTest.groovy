@@ -700,7 +700,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findFullInfoById() should return null when series not found"() {
 		when:
-			SeriesDto result = service.findFullInfoById(Random.id(), 'de')
+			SeriesDto result = service.findFullInfoById(Random.id(), Random.lang())
 		then:
 			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as String)
 		and:
@@ -717,7 +717,7 @@ class SeriesServiceImplTest extends Specification {
 	def "findFullInfoById() should return info about series"() {
 		given:
 			Integer expectedSeriesId = Random.id()
-			String expectedLang = 'kz'
+			String expectedLang = Random.lang()
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
 			List<String> expectedMichelNumbers   = [ '1', '2' ]
 			List<String> expectedScottNumbers    = [ '3', '4' ]
@@ -792,7 +792,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			String expectedNumber = Random.catalogNumber()
 		when:
-			service.findByMichelNumber(expectedNumber, 'en')
+			service.findByMichelNumber(expectedNumber, Random.lang())
 		then:
 			1 * michelCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
@@ -801,7 +801,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			michelCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByMichelNumber(Random.catalogNumber(), 'en')
+			List<SeriesInfoDto> result = service.findByMichelNumber(Random.catalogNumber(), Random.lang())
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -810,7 +810,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByMichelNumber() should find and return series info"() {
 		given:
-			String expectedLang = 'en'
+			String expectedLang = Random.lang()
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
@@ -833,7 +833,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			String expectedNumber = Random.catalogNumber()
 		when:
-			service.findByScottNumber(expectedNumber, 'en')
+			service.findByScottNumber(expectedNumber, Random.lang())
 		then:
 			1 * scottCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
@@ -842,7 +842,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			scottCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByScottNumber(Random.catalogNumber(), 'en')
+			List<SeriesInfoDto> result = service.findByScottNumber(Random.catalogNumber(), Random.lang())
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -851,7 +851,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByScottNumber() should find and return series info"() {
 		given:
-			String expectedLang = 'en'
+			String expectedLang = Random.lang()
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
@@ -874,7 +874,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			String expectedNumber = Random.catalogNumber()
 		when:
-			service.findByYvertNumber(expectedNumber, 'en')
+			service.findByYvertNumber(expectedNumber, Random.lang())
 		then:
 			1 * yvertCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
@@ -883,7 +883,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			yvertCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByYvertNumber(Random.catalogNumber(), 'en')
+			List<SeriesInfoDto> result = service.findByYvertNumber(Random.catalogNumber(), Random.lang())
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -892,7 +892,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByYvertNumber() should find and return series info"() {
 		given:
-			String expectedLang = 'en'
+			String expectedLang = Random.lang()
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
@@ -915,7 +915,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			String expectedNumber = Random.catalogNumber()
 		when:
-			service.findByGibbonsNumber(expectedNumber, 'en')
+			service.findByGibbonsNumber(expectedNumber, Random.lang())
 		then:
 			1 * gibbonsCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
@@ -924,7 +924,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			gibbonsCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByGibbonsNumber(Random.catalogNumber(), 'en')
+			List<SeriesInfoDto> result = service.findByGibbonsNumber(Random.catalogNumber(), Random.lang())
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -933,7 +933,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByGibbonsNumber() should find and return series info"() {
 		given:
-			String expectedLang = 'en'
+			String expectedLang = Random.lang()
 		and:
 			List<Integer> expectedSeriesIds = [ 1 ]
 		and:
@@ -1032,7 +1032,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCategorySlug() should throw exception if category slug is null"() {
 		when:
-			service.findByCategorySlug(null, 'any')
+			service.findByCategorySlug(null, Random.lang())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -1045,7 +1045,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.findByCategorySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			List<SeriesInfoDto> result = service.findByCategorySlug('iceland', 'any')
+			List<SeriesInfoDto> result = service.findByCategorySlug('iceland', Random.lang())
 		then:
 			result == expectedResult
 	}
@@ -1056,7 +1056,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCountrySlug() should throw exception if country slug is null"() {
 		when:
-			service.findByCountrySlug(null, 'any')
+			service.findByCountrySlug(null, Random.lang())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -1069,7 +1069,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.findByCountrySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
 		when:
-			List<SeriesInfoDto> result = service.findByCountrySlug('germany', 'any')
+			List<SeriesInfoDto> result = service.findByCountrySlug('germany', Random.lang())
 		then:
 			result == expectedResult
 	}
@@ -1080,7 +1080,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCollectionId() should throw exception when collection id is null"() {
 		when:
-			service.findByCollectionId(null, 'whatever')
+			service.findByCollectionId(null, Random.lang())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -1089,7 +1089,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expectedCollectionId = Random.id()
 		and:
-			String expectedLang = 'expected'
+			String expectedLang = Random.lang()
 		when:
 			service.findByCollectionId(expectedCollectionId, expectedLang)
 		then:
@@ -1116,7 +1116,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			int expectedQuantity = 3
 		and:
-			String expectedLang = 'expected'
+			String expectedLang = Random.lang()
 		when:
 			service.findRecentlyAdded(expectedQuantity, expectedLang)
 		then:
