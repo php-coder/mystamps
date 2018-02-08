@@ -1114,6 +1114,45 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findByZagorskiNumber()
+	//
+	
+	def 'findByZagorskiNumber() should find series ids'() {
+		given:
+			String expectedNumber = Random.catalogNumber()
+		when:
+			service.findByZagorskiNumber(expectedNumber, Random.lang())
+		then:
+			1 * zagorskiCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
+	}
+	
+	def 'findByZagorskiNumber() shouldn\'t try to find series info if there are no series'() {
+		given:
+			zagorskiCatalogService.findSeriesIdsByNumber(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findByZagorskiNumber(Random.catalogNumber(), Random.lang())
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def 'findByZagorskiNumber() should find and return series info'() {
+		given:
+			String expectedLang = Random.lang()
+			List<Integer> expectedSeriesIds = Random.listOfIntegers()
+			List<SeriesInfoDto> expectedResult = Random.listOfSeriesInfoDto()
+		and:
+			zagorskiCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
+		when:
+			List<SeriesInfoDto> result = service.findByZagorskiNumber(Random.catalogNumber(), expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategorySlug()
 	//
 	

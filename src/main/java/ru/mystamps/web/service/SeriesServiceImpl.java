@@ -277,7 +277,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return findByCatalogNumber(solovyovCatalogService, solovyovNumberCode, lang);
 	}
 	
-	// @todo #776 SeriesServiceImpl.findByZagorskiNumber(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findByZagorskiNumber(String zagorskiNumberCode, String lang) {
