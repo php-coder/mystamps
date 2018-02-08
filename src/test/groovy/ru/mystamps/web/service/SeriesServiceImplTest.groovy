@@ -62,7 +62,7 @@ class SeriesServiceImplTest extends Specification {
 	def setup() {
 		form = new AddSeriesForm()
 		form.setQuantity(Random.quantity())
-		form.setPerforated(false)
+		form.setPerforated(Random.perforated())
 		form.setCategory(TestObjects.createLinkEntityDto())
 		
 		imageForm = new AddImageForm()
@@ -220,13 +220,13 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should pass perforated to series dao"() {
 		given:
-			Boolean expectedResult = true
-			form.setPerforated(expectedResult)
+			Boolean expectedPerforated = Random.perforated()
+			form.setPerforated(expectedPerforated)
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.perforated == expectedResult
+				assert series?.perforated == expectedPerforated
 				return true
 			}) >> Random.id()
 	}
