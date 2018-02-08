@@ -152,7 +152,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
 				return true
-			}) >> 123
+			}) >> Random.id()
 	}
 	
 	@Unroll
@@ -173,7 +173,7 @@ class SeriesServiceImplTest extends Specification {
 				assert series?.releaseMonth == expectedMonth
 				assert series?.releaseYear == expectedYear
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			day  | month | year || expectedDay | expectedMonth | expectedYear
 			null | null  | null || null        | null          | null
@@ -200,7 +200,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
 				return true
-			}) >> 123
+			}) >> Random.id()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -214,7 +214,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
 				return true
-			}) >> 123
+			}) >> Random.id()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -228,7 +228,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
 				return true
-			}) >> 123
+			}) >> Random.id()
 	}
 	
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryObjectReferences', 'UnnecessaryReturnKeyword' ])
@@ -281,7 +281,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.comment == expectedComment
 				return true
-			}) >> 123
+			}) >> Random.id()
 		where:
 			canAddComment | comment     || expectedComment
 			false         | null        || null
@@ -303,12 +303,12 @@ class SeriesServiceImplTest extends Specification {
 				assert DateUtils.roughlyEqual(series?.createdAt, new Date())
 				assert DateUtils.roughlyEqual(series?.updatedAt, new Date())
 				return true
-			}) >> 123
+			}) >> Random.id()
 	}
 	
 	def "add() should pass dto to series dao and return its result"() {
 		given:
-			Integer expected = 456
+			Integer expected = Random.id()
 		when:
 			Integer actual = service.add(form, Random.userId(), false)
 		then:
@@ -323,7 +323,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setMichelNumbers(expectedNumbers.join(','))
 		and:
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
@@ -340,7 +340,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setScottNumbers(expectedNumbers.join(','))
 		and:
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
@@ -357,7 +357,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setYvertNumbers(expectedNumbers.join(','))
 		and:
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
@@ -374,7 +374,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setGibbonsNumbers(expectedNumbers.join(','))
 		and:
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
@@ -430,11 +430,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should add image to the series"() {
 		given:
-			Integer expectedSeriesId = 123
+			Integer expectedSeriesId = Random.id()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		and:
-			Integer expectedImageId = 456
+			Integer expectedImageId = Random.id()
 		when:
 			service.add(form, Random.userId(), false)
 		then:
@@ -448,7 +448,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			ImageInfoDto expectedImageInfo = new ImageInfoDto(654, 'JPEG')
 		and:
-			seriesDao.add(_ as AddSeriesDbDto) >> 111
+			seriesDao.add(_ as AddSeriesDbDto) >> Random.id()
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
@@ -467,7 +467,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should throw exception when dto is null"() {
 		when:
-			service.addImageToSeries(null, 111, 222)
+			service.addImageToSeries(null, Random.id(), 222)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -481,7 +481,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should throw exception when user id is null"() {
 		when:
-			service.addImageToSeries(imageForm, 111, null)
+			service.addImageToSeries(imageForm, Random.id(), null)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -489,7 +489,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def "addImageToSeries() should mark series as modified"() {
 		given:
-			Integer expectedSeriesId = 123
+			Integer expectedSeriesId = Random.id()
 			Integer expectedUserId = 321
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
@@ -508,16 +508,16 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			imageForm.setImage(multipartFile)
 		when:
-			service.addImageToSeries(imageForm, 111, 222)
+			service.addImageToSeries(imageForm, Random.id(), 222)
 		then:
 			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
 	
 	def "addImageToSeries() should add image to series"() {
 		given:
-			Integer expectedSeriesId = 123
+			Integer expectedSeriesId = Random.id()
 			Integer expectedUserId = 321
-			Integer expectedImageId = 456
+			Integer expectedImageId = Random.id()
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
 		then:
@@ -532,7 +532,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
-			service.addImageToSeries(imageForm, 111, 222)
+			service.addImageToSeries(imageForm, Random.id(), 222)
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
@@ -584,7 +584,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countSeriesOf() should pass argument to dao"() {
 		given:
-			Integer expectedCollectionId = 7
+			Integer expectedCollectionId = Random.id()
 		when:
 			service.countSeriesOf(expectedCollectionId)
 		then:
@@ -604,7 +604,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countStampsOf() should pass arguments to dao"() {
 		given:
-			Integer expectedCollectionId = 8
+			Integer expectedCollectionId = Random.id()
 		when:
 			service.countStampsOf(expectedCollectionId)
 		then:
@@ -674,7 +674,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings([ 'LineLength', /* false positive: */ 'UnnecessaryBooleanExpression' ])
 	def "isSeriesExist() should return #expectedResult when dao returns #daoReturnValue"(Integer daoReturnValue, boolean expectedResult) {
 		given:
-			Integer expectedSeriesId = 13
+			Integer expectedSeriesId = Random.id()
 		when:
 			boolean result = service.isSeriesExist(expectedSeriesId)
 		then:
@@ -700,7 +700,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findFullInfoById() should return null when series not found"() {
 		when:
-			SeriesDto result = service.findFullInfoById(10, 'de')
+			SeriesDto result = service.findFullInfoById(Random.id(), 'de')
 		then:
 			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as String)
 		and:
@@ -716,7 +716,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryObjectReferences')
 	def "findFullInfoById() should return info about series"() {
 		given:
-			Integer expectedSeriesId = 20
+			Integer expectedSeriesId = Random.id()
 			String expectedLang = 'kz'
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
 			List<String> expectedMichelNumbers   = [ '1', '2' ]
@@ -1087,7 +1087,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCollectionId() should pass arguments to dao"() {
 		given:
-			Integer expectedCollectionId = 16
+			Integer expectedCollectionId = Random.id()
 		and:
 			String expectedLang = 'expected'
 		when:
@@ -1152,7 +1152,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
 		given:
-			Integer expectedSeriesId = 88
+			Integer expectedSeriesId = Random.id()
 		and:
 			List<PurchaseAndSaleDto> expectedResult = [ TestObjects.createPurchaseAndSaleDto() ]
 		when:
