@@ -1075,6 +1075,45 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findBySolovyovNumber()
+	//
+	
+	def 'findBySolovyovNumber() should find series ids'() {
+		given:
+			String expectedNumber = Random.catalogNumber()
+		when:
+			service.findBySolovyovNumber(expectedNumber, Random.lang())
+		then:
+			1 * solovyovCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
+	}
+	
+	def 'findBySolovyovNumber() shouldn\'t try to find series info if there are no series'() {
+		given:
+			solovyovCatalogService.findSeriesIdsByNumber(_ as String) >> []
+		when:
+			List<SeriesInfoDto> result = service.findBySolovyovNumber(Random.catalogNumber(), Random.lang())
+		then:
+			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
+		and:
+			result.empty
+	}
+	
+	def 'findBySolovyovNumber() should find and return series info'() {
+		given:
+			String expectedLang = Random.lang()
+			List<Integer> expectedSeriesIds = Random.listOfIntegers()
+			List<SeriesInfoDto> expectedResult = Random.listOfSeriesInfoDto()
+		and:
+			solovyovCatalogService.findSeriesIdsByNumber(_ as String) >> expectedSeriesIds
+		when:
+			List<SeriesInfoDto> result = service.findBySolovyovNumber(Random.catalogNumber(), expectedLang)
+		then:
+			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findByCategorySlug()
 	//
 	

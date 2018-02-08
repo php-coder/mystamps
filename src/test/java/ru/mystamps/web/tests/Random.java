@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
+import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.validation.ValidationRules;
 
@@ -221,6 +222,18 @@ public final class Random {
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto(),
 			TestObjects.createEntityWithParentDto()
+		);
+	}
+	
+	public static List<SeriesInfoDto> listOfSeriesInfoDto() {
+		final int minSize = 1;
+		final int maxSize = 3;
+		int size = integer(minSize, maxSize);
+		return sampleMultiple(
+			size,
+			TestObjects.createSeriesInfoDto(),
+			TestObjects.createSeriesInfoDto(),
+			TestObjects.createSeriesInfoDto()
 		);
 	}
 	

@@ -271,7 +271,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return findByCatalogNumber(gibbonsCatalogService, gibbonsNumberCode, lang);
 	}
 	
-	// @todo #777 SeriesServiceImpl.findBySolovyovNumber(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public List<SeriesInfoDto> findBySolovyovNumber(String solovyovNumberCode, String lang) {
