@@ -90,7 +90,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception if dto is null"() {
 		when:
-			service.add(null, Random.userId(), false)
+			service.add(null, Random.userId(), bool())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -99,7 +99,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setQuantity(null)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -108,7 +108,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setPerforated(null)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -117,7 +117,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(null)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -126,14 +126,14 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(new LinkEntityDto(null, 'test', 'Test'))
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "add() should throw exception when user is null"() {
 		when:
-			service.add(form, null, false)
+			service.add(form, null, bool())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -147,7 +147,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCountry(country)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
@@ -166,7 +166,7 @@ class SeriesServiceImplTest extends Specification {
 			form.setMonth(month)
 			form.setYear(year)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
@@ -195,7 +195,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCategory(category)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
@@ -209,7 +209,7 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedQuantity = 3
 			form.setQuantity(expectedQuantity)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
@@ -223,7 +223,7 @@ class SeriesServiceImplTest extends Specification {
 			Boolean expectedResult = true
 			form.setPerforated(expectedResult)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedResult
@@ -295,7 +295,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expectedUserId = Random.userId()
 		when:
-			service.add(form, expectedUserId, false)
+			service.add(form, expectedUserId, bool())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.createdBy == expectedUserId
@@ -310,7 +310,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expected = Random.id()
 		when:
-			Integer actual = service.add(form, Random.userId(), false)
+			Integer actual = service.add(form, Random.userId(), bool())
 		then:
 			1 * seriesDao.add(_ as AddSeriesDbDto) >> expected
 		and:
@@ -327,7 +327,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * michelCatalogService.add(expectedNumbers)
 		and:
@@ -344,7 +344,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * scottCatalogService.add(expectedNumbers)
 		and:
@@ -361,7 +361,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * yvertCatalogService.add(expectedNumbers)
 		and:
@@ -378,7 +378,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * gibbonsCatalogService.add(expectedNumbers)
 		and:
@@ -423,7 +423,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setImage(multipartFile)
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
@@ -436,7 +436,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedImageId = Random.id()
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
 			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
@@ -452,7 +452,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
-			service.add(form, Random.userId(), false)
+			service.add(form, Random.userId(), bool())
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
