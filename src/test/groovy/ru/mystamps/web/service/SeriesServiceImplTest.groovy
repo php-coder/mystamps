@@ -626,7 +626,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
 		given:
-			Date expectedDate = new Date()
+			Date expectedDate = Random.date()
 		and:
 			long expectedResult = positiveLong()
 		when:
