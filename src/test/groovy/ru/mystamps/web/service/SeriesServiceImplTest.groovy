@@ -790,7 +790,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByMichelNumber() should find series ids"() {
 		given:
-			String expectedNumber = '5'
+			String expectedNumber = Random.catalogNumber()
 		when:
 			service.findByMichelNumber(expectedNumber, 'en')
 		then:
@@ -801,7 +801,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			michelCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByMichelNumber('5', 'en')
+			List<SeriesInfoDto> result = service.findByMichelNumber(Random.catalogNumber(), 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -818,7 +818,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
-			List<SeriesInfoDto> result = service.findByMichelNumber('5', expectedLang)
+			List<SeriesInfoDto> result = service.findByMichelNumber(Random.catalogNumber(), expectedLang)
 		then:
 			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
@@ -831,7 +831,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByScottNumber() should find series ids"() {
 		given:
-			String expectedNumber = '5'
+			String expectedNumber = Random.catalogNumber()
 		when:
 			service.findByScottNumber(expectedNumber, 'en')
 		then:
@@ -842,7 +842,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			scottCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByScottNumber('5', 'en')
+			List<SeriesInfoDto> result = service.findByScottNumber(Random.catalogNumber(), 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -859,7 +859,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
-			List<SeriesInfoDto> result = service.findByScottNumber('5', expectedLang)
+			List<SeriesInfoDto> result = service.findByScottNumber(Random.catalogNumber(), expectedLang)
 		then:
 			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
@@ -872,7 +872,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByYvertNumber() should find series ids"() {
 		given:
-			String expectedNumber = '5'
+			String expectedNumber = Random.catalogNumber()
 		when:
 			service.findByYvertNumber(expectedNumber, 'en')
 		then:
@@ -883,7 +883,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			yvertCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByYvertNumber('5', 'en')
+			List<SeriesInfoDto> result = service.findByYvertNumber(Random.catalogNumber(), 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -900,7 +900,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
-			List<SeriesInfoDto> result = service.findByYvertNumber('5', expectedLang)
+			List<SeriesInfoDto> result = service.findByYvertNumber(Random.catalogNumber(), expectedLang)
 		then:
 			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
@@ -913,7 +913,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
-			String expectedNumber = '5'
+			String expectedNumber = Random.catalogNumber()
 		when:
 			service.findByGibbonsNumber(expectedNumber, 'en')
 		then:
@@ -924,7 +924,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			gibbonsCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
-			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', 'en')
+			List<SeriesInfoDto> result = service.findByGibbonsNumber(Random.catalogNumber(), 'en')
 		then:
 			0 * seriesDao.findByIdsAsSeriesInfo(_ as List, _ as String)
 		and:
@@ -941,7 +941,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			List<SeriesInfoDto> expectedResult = []
 		when:
-			List<SeriesInfoDto> result = service.findByGibbonsNumber('5', expectedLang)
+			List<SeriesInfoDto> result = service.findByGibbonsNumber(Random.catalogNumber(), expectedLang)
 		then:
 			1 * seriesDao.findByIdsAsSeriesInfo(expectedSeriesIds, expectedLang) >> expectedResult
 		and:
