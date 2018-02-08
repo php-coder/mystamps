@@ -448,7 +448,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should remove image when exception occurs"() {
 		given:
-			ImageInfoDto expectedImageInfo = new ImageInfoDto(654, 'JPEG')
+			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> Random.id()
 		and:
@@ -530,7 +530,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should remove image when exception occurs"() {
 		given:
-			ImageInfoDto expectedImageInfo = new ImageInfoDto(456, 'JPEG')
+			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
