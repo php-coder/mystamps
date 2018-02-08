@@ -888,11 +888,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByMichelNumber() should find series ids"() {
 		given:
-			String expectedMichelNumber = '5'
+			String expectedNumber = '5'
 		when:
-			service.findByMichelNumber(expectedMichelNumber, 'en')
+			service.findByMichelNumber(expectedNumber, 'en')
 		then:
-			1 * michelCatalogService.findSeriesIdsByNumber(expectedMichelNumber) >> []
+			1 * michelCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
 	def "findByMichelNumber() shouldn't try to find series info if there are no series"() {
@@ -936,11 +936,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByScottNumber() should find series ids"() {
 		given:
-			String expectedScottNumber = '5'
+			String expectedNumber = '5'
 		when:
-			service.findByScottNumber(expectedScottNumber, 'en')
+			service.findByScottNumber(expectedNumber, 'en')
 		then:
-			1 * scottCatalogService.findSeriesIdsByNumber(expectedScottNumber) >> []
+			1 * scottCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
 	def "findByScottNumber() shouldn't try to find series info if there are no series"() {
@@ -984,11 +984,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByYvertNumber() should find series ids"() {
 		given:
-			String expectedYvertNumber = '5'
+			String expectedNumber = '5'
 		when:
-			service.findByYvertNumber(expectedYvertNumber, 'en')
+			service.findByYvertNumber(expectedNumber, 'en')
 		then:
-			1 * yvertCatalogService.findSeriesIdsByNumber(expectedYvertNumber) >> []
+			1 * yvertCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
 	def "findByYvertNumber() shouldn't try to find series info if there are no series"() {
@@ -1032,11 +1032,11 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByGibbonsNumber() should find series ids"() {
 		given:
-			String expectedGibbonsNumber = '5'
+			String expectedNumber = '5'
 		when:
-			service.findByGibbonsNumber(expectedGibbonsNumber, 'en')
+			service.findByGibbonsNumber(expectedNumber, 'en')
 		then:
-			1 * gibbonsCatalogService.findSeriesIdsByNumber(expectedGibbonsNumber) >> []
+			1 * gibbonsCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
 	def "findByGibbonsNumber() shouldn't try to find series info if there are no series"() {
