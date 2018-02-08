@@ -19,6 +19,7 @@ package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomShortApi.positiveLong
 
 import org.springframework.web.multipart.MultipartFile
@@ -1115,7 +1116,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findRecentlyAdded should pass arguments to dao"() {
 		given:
-			int expectedQuantity = 3
+			int expectedQuantity = positiveInteger()
 		and:
 			String expectedLang = Random.lang()
 		when:
