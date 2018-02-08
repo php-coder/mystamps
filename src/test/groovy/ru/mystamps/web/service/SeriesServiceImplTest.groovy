@@ -293,7 +293,7 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created/updated at/by to current date/user"() {
 		given:
-			Integer expectedUserId = 789
+			Integer expectedUserId = Random.userId()
 		when:
 			service.add(form, expectedUserId, false)
 		then:
@@ -467,14 +467,14 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should throw exception when dto is null"() {
 		when:
-			service.addImageToSeries(null, Random.id(), 222)
+			service.addImageToSeries(null, Random.id(), Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def "addImageToSeries() should throw exception when series id is null"() {
 		when:
-			service.addImageToSeries(imageForm, null, 222)
+			service.addImageToSeries(imageForm, null, Random.userId())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -490,7 +490,7 @@ class SeriesServiceImplTest extends Specification {
 	def "addImageToSeries() should mark series as modified"() {
 		given:
 			Integer expectedSeriesId = Random.id()
-			Integer expectedUserId = 321
+			Integer expectedUserId = Random.userId()
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
 		then:
@@ -508,7 +508,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			imageForm.setImage(multipartFile)
 		when:
-			service.addImageToSeries(imageForm, Random.id(), 222)
+			service.addImageToSeries(imageForm, Random.id(), Random.userId())
 		then:
 			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
@@ -516,7 +516,7 @@ class SeriesServiceImplTest extends Specification {
 	def "addImageToSeries() should add image to series"() {
 		given:
 			Integer expectedSeriesId = Random.id()
-			Integer expectedUserId = 321
+			Integer expectedUserId = Random.userId()
 			Integer expectedImageId = Random.id()
 		when:
 			service.addImageToSeries(imageForm, expectedSeriesId, expectedUserId)
@@ -532,7 +532,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
 		when:
-			service.addImageToSeries(imageForm, Random.id(), 222)
+			service.addImageToSeries(imageForm, Random.id(), Random.userId())
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
