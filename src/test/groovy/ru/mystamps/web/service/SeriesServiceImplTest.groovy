@@ -727,7 +727,7 @@ class SeriesServiceImplTest extends Specification {
 			List<String> expectedGibbonsNumbers  = [ '7', '8' ]
 			List<String> expectedZagorskiNumbers = Random.zagorskiNumbers().toList()
 			List<String> expectedSolovyovNumbers = Random.solovyovNumbers().toList()
-			List<Integer> expectedImageIds       = [ 9, 10 ]
+			List<Integer> expectedImageIds       = Random.listOfIntegers()
 		when:
 			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
 		then:
