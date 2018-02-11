@@ -337,6 +337,32 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'4 беззубцовые марки'  ||  4
 			'32 БЕЗЗУБЦОВЫЕ МАРКИ' || 32
 	}
+
+	//
+	// Tests for extractPerforated()
+	//
+	
+	def 'extractPerforated() should return null when fragment is null, empty or blank'() {
+		expect:
+			service.extractPerforated(nullOrBlank()) == null
+	}
+	
+	def 'extractPerforated() should return null when nothing to extract'() {
+		expect:
+			service.extractPerforated('10 марок') == null
+	}
+	
+	@Unroll
+	def 'extractPerforated() should extract perforated from "#fragment"'(String fragment) {
+		expect:
+			service.extractPerforated(fragment) == false
+		where:
+			fragment      | _
+			'б/з'         | _
+			'Б/З'         | _
+			'беззубцовые' | _
+			'БЕЗЗУБЦОВЫЕ' | _
+	}
 	
 	//
 	// Tests for extractSeller()

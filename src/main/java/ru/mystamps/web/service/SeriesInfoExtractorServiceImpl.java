@@ -218,7 +218,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #782 SeriesInfoExtractorServiceImpl.extractPerforated(): add unit tests
 	// @todo #782 Series import: add integration test for extracting perforation flag
 	protected Boolean extractPerforated(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
