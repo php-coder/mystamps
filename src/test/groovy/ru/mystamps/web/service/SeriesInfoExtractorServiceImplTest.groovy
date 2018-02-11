@@ -315,7 +315,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractQuantity() should return null when fragment is null, empty or blank'() {
 		expect:
-			service.extractQuantity(nullOrBlank()) ==  null
+			service.extractQuantity(nullOrBlank()) == null
 	}
 	
 	def 'extractQuantity() should return null for invalid price'() {
@@ -324,6 +324,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression')
 	def 'extractQuantity() should extract quantity from "#fragment"'(String fragment, Integer expectedQuantity) {
 		expect:
 			service.extractQuantity(fragment) == expectedQuantity
