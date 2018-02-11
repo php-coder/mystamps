@@ -310,6 +310,34 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 
 	//
+	// Tests for extractQuantity()
+	//
+	
+	def 'extractQuantity() should return null when fragment is null, empty or blank'() {
+		expect:
+			service.extractQuantity(nullOrBlank()) ==  null
+	}
+	
+	def 'extractQuantity() should return null for invalid price'() {
+		expect:
+			service.extractQuantity('0 марок') == null
+	}
+	
+	@Unroll
+	def 'extractQuantity() should extract quantity from "#fragment"'(String fragment, Integer expectedQuantity) {
+		expect:
+			service.extractQuantity(fragment) == expectedQuantity
+		where:
+			fragment               || expectedQuantity
+			'5 марок'              ||  5
+			'5 МАРОК'              ||  5
+			'22 марки'             || 22
+			'13 беззубцовые марок' || 13
+			'4 беззубцовые марки'  ||  4
+			'32 БЕЗЗУБЦОВЫЕ МАРКИ' || 32
+	}
+	
+	//
 	// Tests for extractSeller()
 	//
 	

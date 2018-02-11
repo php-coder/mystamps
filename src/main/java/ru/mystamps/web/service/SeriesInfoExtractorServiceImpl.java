@@ -198,7 +198,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity(): add unit tests
 	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity() respect MAX_STAMPS_IN_SERIES
 	protected Integer extractQuantity(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
