@@ -116,7 +116,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 			LOG.warn(
 				"Couldn't open connection: "
 				+ "unknown type of connection class ({}). "
-				+ "Downloading images from external servers won't work!",
+				+ "Downloading files from external servers won't work!",
 				connection
 			);
 			return null;
