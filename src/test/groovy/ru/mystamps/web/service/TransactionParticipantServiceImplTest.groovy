@@ -96,6 +96,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 			Integer expectedGroupId = nullOr(Random.id())
 			Boolean expectedBuyer   = bool()
 			Boolean expectedSeller  = bool()
+			Integer expectedResult  = Random.id()
 		and:
 			AddParticipantForm form = new AddParticipantForm()
 			form.setName(expectedName)
@@ -104,7 +105,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 			form.setBuyer(expectedBuyer)
 			form.setSeller(expectedSeller)
 		when:
-			service.add(form)
+			Integer result = service.add(form)
 		then:
 			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
 				assert participant?.name == expectedName
@@ -113,7 +114,9 @@ class TransactionParticipantServiceImplTest extends Specification {
 				assert participant?.buyer == expectedBuyer
 				assert participant?.seller == expectedSeller
 				return true
-			})
+			}) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//

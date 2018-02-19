@@ -46,7 +46,7 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.ADD_PARTICIPANT)
-	public void add(AddParticipantDto dto) {
+	public Integer add(AddParticipantDto dto) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getName() != null, "Name must be non null");
 		Validate.isTrue(dto.getBuyer() != null, "Buyer flag must be non null");
@@ -59,9 +59,11 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		participant.setBuyer(dto.getBuyer());
 		participant.setSeller(dto.getSeller());
 		
-		transactionParticipantDao.add(participant);
+		Integer id = transactionParticipantDao.add(participant);
 		
-		log.info("Participant has been created ({})", participant);
+		log.info("Participant #{} has been created ({})", id, participant);
+		
+		return id;
 	}
 	
 	@Override

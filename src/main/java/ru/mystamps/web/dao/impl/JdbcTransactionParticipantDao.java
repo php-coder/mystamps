@@ -25,7 +25,10 @@ import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -55,7 +58,7 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	private String findAllGroupsSql;
 	
 	@Override
-	public void add(AddParticipantDbDto participant) {
+	public Integer add(AddParticipantDbDto participant) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", participant.getName());
 		params.put("url", participant.getUrl());
@@ -63,13 +66,21 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 		params.put("buyer", participant.getBuyer());
 		params.put("seller", participant.getSeller());
 		
-		int affected = jdbcTemplate.update(addParticipantSql, params);
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addParticipantSql,
+			new MapSqlParameterSource(params),
+			holder
+		);
 		
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after creation of participant: %d",
 			affected
 		);
+		
+		return Integer.valueOf(holder.getKey().intValue());
 	}
 	
 	@Override

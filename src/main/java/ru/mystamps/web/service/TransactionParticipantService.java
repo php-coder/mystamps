@@ -24,7 +24,7 @@ import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.service.dto.AddParticipantDto;
 
 public interface TransactionParticipantService {
-	void add(AddParticipantDto dto);
+	Integer add(AddParticipantDto dto);
 	List<EntityWithParentDto> findBuyersWithParents();
 	List<EntityWithParentDto> findSellersWithParents();
 	Integer findSellerId(String name, String url);
