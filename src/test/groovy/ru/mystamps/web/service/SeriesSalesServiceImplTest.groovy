@@ -26,7 +26,7 @@ import ru.mystamps.web.dao.SeriesSalesDao
 import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm
-import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.test.DateUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesSalesServiceImplTest extends Specification {

@@ -26,7 +26,7 @@ import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
-import ru.mystamps.web.tests.Random;
+import ru.mystamps.web.test.Random;
 import ru.mystamps.web.util.SlugUtils;
 
 import static io.qala.datagen.RandomShortApi.bool;

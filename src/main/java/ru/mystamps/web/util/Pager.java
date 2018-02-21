@@ -41,15 +41,15 @@ public class Pager {
 	
 	private static final int FIRST_PAGE = 1;
 	
-	// this field is shown in toString() and useful when debugging unit tests
+	// this field is shown in toString() and useful when debugging unit test
 	@SuppressWarnings("PMD.SingularField")
 	private final int totalRecords;
 	
-	// this field is shown in toString() and useful when debugging unit tests
+	// this field is shown in toString() and useful when debugging unit test
 	@SuppressWarnings("PMD.SingularField")
 	private final int totalPages;
 	
-	// this field is shown in toString() and useful when debugging unit tests
+	// this field is shown in toString() and useful when debugging unit test
 	@SuppressWarnings({ "PMD.SingularField", "PMD.UnusedPrivateField" })
 	private final int recordsPerPage;
 	

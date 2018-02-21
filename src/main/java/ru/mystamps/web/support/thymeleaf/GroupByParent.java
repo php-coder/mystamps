@@ -33,7 +33,7 @@ import ru.mystamps.web.dao.dto.TransactionParticipantDto;
  */
 public final class GroupByParent {
 	
-	// @todo #592 GroupByParent: add unit tests
+	// @todo #592 GroupByParent: add unit test
 	private GroupByParent() {
 	}
 	

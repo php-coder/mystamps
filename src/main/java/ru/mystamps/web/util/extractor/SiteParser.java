@@ -32,7 +32,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-// Getters/setters are being used in unit tests
+// Getters/setters are being used in unit test
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
 public class SiteParser {

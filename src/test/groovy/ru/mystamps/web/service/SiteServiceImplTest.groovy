@@ -25,7 +25,7 @@ import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.Db
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
-import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.test.DateUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SiteServiceImplTest extends Specification {

@@ -38,8 +38,8 @@ import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.SaveParsedDataDbDto
 import ru.mystamps.web.service.dto.AddSeriesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
-import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.tests.Random
+import ru.mystamps.web.test.DateUtils
+import ru.mystamps.web.test.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesImportServiceImplTest extends Specification {

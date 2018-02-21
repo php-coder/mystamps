@@ -31,8 +31,8 @@ import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.AddCountryDbDto
 import ru.mystamps.web.controller.dto.AddCountryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
-import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.tests.Random
+import ru.mystamps.web.test.DateUtils
+import ru.mystamps.web.test.Random
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

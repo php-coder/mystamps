@@ -3,127 +3,127 @@
 	
 	<test name="When user at register account page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtRegisterAccountPage" />
+			<class name="ru.mystamps.web.test.cases.WhenUserAtRegisterAccountPage" />
 		</classes>
 	</test>
 	
 	<test name="When user at auth page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtAuthPage" />
+			<class name="ru.mystamps.web.test.cases.WhenUserAtAuthPage" />
 		</classes>
 	</test>
 	
 	<test name="When user at activate account page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtActivateAccountPage" />
+			<class name="ru.mystamps.web.test.cases.WhenUserAtActivateAccountPage" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user activate account">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserActivateAccount" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserActivateAccount" />
 		</classes>
 	</test>
 	
 	<test name="When admin add category">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCategory" />
+			<class name="ru.mystamps.web.test.cases.WhenAdminAddCategory" />
 		</classes>
 	</test>
 	
 	<test name="When admin add country">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCountry" />
+			<class name="ru.mystamps.web.test.cases.WhenAdminAddCountry" />
 		</classes>
 	</test>
 	
 	<test name="When admin add series">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddSeries" />
+			<class name="ru.mystamps.web.test.cases.WhenAdminAddSeries" />
 		</classes>
 	</test>
 	
 	<test name="When user add series">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAddSeries" />
+			<class name="ru.mystamps.web.test.cases.WhenUserAddSeries" />
 		</classes>
 	</test>
 	
 	<test name="When any user at any page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAnyUserAtAnyPage" />
 		</classes>
 	</test>
 	
 	<test name="When any user at any page with form">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
+			<class name="ru.mystamps.web.test.cases.WhenAnyUserAtAnyPageWithForm" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user at index page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtIndexPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserAtIndexPage" />
 		</classes>
 	</test>
 	
 	<test name="When user at index page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtIndexPage" />
+			<class name="ru.mystamps.web.test.cases.WhenUserAtIndexPage" />
 		</classes>
 	</test>
 	
 	<test name="When admin at index page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAtIndexPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAdminAtIndexPage" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user authenticates">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAuthenticates" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserAuthenticates" />
 		</classes>
 	</test>
 	
 	<test name="When user logs out">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserLogsOut" />
+			<class name="ru.mystamps.web.test.cases.WhenUserLogsOut" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user open not existing page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserOpenNotExistingPage" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user at forbidden page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtForbiddenPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserAtForbiddenPage" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user open Togglz console">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenTogglzConsole" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserOpenTogglzConsole" />
 		</classes>
 	</test>
 	
 	<test name="When user open Togglz console">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserOpenTogglzConsole" />
+			<class name="ru.mystamps.web.test.cases.WhenUserOpenTogglzConsole" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user register account">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserRegisterAccount" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserRegisterAccount" />
 		</classes>
 	</test>
 	
 	<test name="When anonymous user open not existing collection page">
 		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingCollectionPage" />
+			<class name="ru.mystamps.web.test.cases.WhenAnonymousUserOpenNotExistingCollectionPage" />
 		</classes>
 	</test>
 	

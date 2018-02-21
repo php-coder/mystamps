@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
-	// Related to RELEASE_YEAR_REGEXP and used in unit tests.
+	// Related to RELEASE_YEAR_REGEXP and used in unit test.
 	protected static final int MAX_SUPPORTED_RELEASE_YEAR = 2099;
 	
 	// Regular expression matches release year of the stamps (from 1840 till 2099).

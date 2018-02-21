@@ -25,7 +25,7 @@ import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
-import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.test.DateUtils
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

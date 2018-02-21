@@ -30,7 +30,7 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.tests.Random
+import ru.mystamps.web.test.Random
 import ru.mystamps.web.validation.ValidationRules
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

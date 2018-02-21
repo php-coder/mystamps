@@ -28,7 +28,7 @@ import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.controller.dto.RegisterAccountForm
 import ru.mystamps.web.service.dto.SendUsersActivationDto
-import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.test.DateUtils
 import ru.mystamps.web.validation.ValidationRules
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

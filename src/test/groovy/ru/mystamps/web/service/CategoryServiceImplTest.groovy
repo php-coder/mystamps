@@ -32,8 +32,8 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.dao.dto.CategoryDto
 import ru.mystamps.web.controller.dto.AddCategoryForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
-import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.tests.Random
+import ru.mystamps.web.test.DateUtils
+import ru.mystamps.web.test.Random
 import ru.mystamps.web.util.SlugUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

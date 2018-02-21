@@ -28,8 +28,8 @@ import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.controller.dto.ActivateAccountForm
-import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.tests.Random
+import ru.mystamps.web.test.DateUtils
+import ru.mystamps.web.test.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {
