@@ -76,6 +76,7 @@ public final class Random {
 		try {
 			
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+			fmt.setLenient(false);
 			return between(fmt.parse("2017-01-01"), fmt.parse("2017-12-20")).date();
 		
 		} catch (ParseException e) {

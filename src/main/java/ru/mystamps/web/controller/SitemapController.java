@@ -54,6 +54,7 @@ public class SitemapController {
 		response.setCharacterEncoding("UTF-8");
 		
 		DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
+		dateFormatter.setLenient(false);
 		
 		try {
 			PrintWriter writer = response.getWriter();
