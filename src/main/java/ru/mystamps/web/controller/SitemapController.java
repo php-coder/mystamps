@@ -62,10 +62,10 @@ public class SitemapController {
 			writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			writer.println("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 			
-			writer.print("\t<url>\t\t<loc>");
+			writer.print("\t<url>\n\t\t<loc>");
 			writer.print(Url.PUBLIC_URL);
 			writer.print(Url.INDEX_PAGE);
-			writer.println("</loc>\t</url>");
+			writer.println("</loc>\n\t</url>");
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
 				writer.println("\t<url>");
