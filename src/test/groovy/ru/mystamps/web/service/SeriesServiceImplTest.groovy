@@ -31,7 +31,6 @@ import org.slf4j.helpers.NOPLogger
 
 import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
-import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.dao.dto.ImageInfoDto
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto
 import ru.mystamps.web.controller.dto.AddImageForm
