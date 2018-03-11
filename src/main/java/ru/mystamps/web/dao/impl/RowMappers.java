@@ -121,18 +121,10 @@ final class RowMappers {
 		String comment       = rs.getString("comment");
 		Integer createdBy    = rs.getInt("created_by");
 		
-		BigDecimal michelPrice = rs.getBigDecimal("michel_price");
-		String michelCurrency  = rs.getString("michel_currency");
-		
-		BigDecimal scottPrice = rs.getBigDecimal("scott_price");
-		String scottCurrency  = rs.getString("scott_currency");
-		
-		BigDecimal yvertPrice = rs.getBigDecimal("yvert_price");
-		String yvertCurrency  = rs.getString("yvert_currency");
-		
-		BigDecimal gibbonsPrice = rs.getBigDecimal("gibbons_price");
-		String gibbonsCurrency  = rs.getString("gibbons_currency");
-		
+		BigDecimal michelPrice   = rs.getBigDecimal("michel_price");
+		BigDecimal scottPrice    = rs.getBigDecimal("scott_price");
+		BigDecimal yvertPrice    = rs.getBigDecimal("yvert_price");
+		BigDecimal gibbonsPrice  = rs.getBigDecimal("gibbons_price");
 		BigDecimal solovyovPrice = rs.getBigDecimal("solovyov_price");
 		BigDecimal zagorskiPrice = rs.getBigDecimal("zagorski_price");
 		
@@ -154,13 +146,9 @@ final class RowMappers {
 			comment,
 			createdBy,
 			michelPrice,
-			michelCurrency,
 			scottPrice,
-			scottCurrency,
 			yvertPrice,
-			yvertCurrency,
 			gibbonsPrice,
-			gibbonsCurrency,
 			solovyovPrice,
 			zagorskiPrice
 		);

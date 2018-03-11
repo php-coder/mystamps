@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="drop-michel_currency-column-from-series-table" author="php-coder" context="scheme">
+		
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM series
+				 WHERE michel_currency IS NOT NULL
+				   AND michel_currency != 'EUR'
+			</sqlCheck>
+		</preConditions>
+		
+		<dropColumn tableName="series" columnName="michel_currency" />
+		
+		<rollback>
+			<addColumn tableName="series">
+				<column name="michel_currency" type="VARCHAR(3)" afterColumn="michel_price" />
+			</addColumn>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="drop-scott_currency-column-from-series-table" author="php-coder" context="scheme">
+		
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM series
+				 WHERE scott_currency IS NOT NULL
+				   AND scott_currency != 'USD'
+			</sqlCheck>
+		</preConditions>
+		
+		<dropColumn tableName="series" columnName="scott_currency" />
+		
+		<rollback>
+			<addColumn tableName="series">
+				<column name="scott_currency" type="VARCHAR(3)" afterColumn="scott_price" />
+			</addColumn>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="drop-gibbons_currency-column-from-series-table" author="php-coder" context="scheme">
+		
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM series
+				 WHERE gibbons_currency IS NOT NULL
+				   AND gibbons_currency != 'GBP'
+			</sqlCheck>
+		</preConditions>
+		
+		<dropColumn tableName="series" columnName="gibbons_currency" />
+		
+		<rollback>
+			<addColumn tableName="series">
+				<column name="gibbons_currency" type="VARCHAR(3)" afterColumn="gibbons_price" />
+			</addColumn>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="drop-yvert_currency-column-from-series-table" author="php-coder" context="scheme">
+		
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM series
+				 WHERE yvert_currency IS NOT NULL
+				   AND yvert_currency != 'EUR'
+			</sqlCheck>
+		</preConditions>
+		
+		<dropColumn tableName="series" columnName="yvert_currency" />
+		
+		<rollback>
+			<addColumn tableName="series">
+				<column name="yvert_currency" type="VARCHAR(3)" afterColumn="yvert_price" />
+			</addColumn>
+		</rollback>
+		
+	</changeSet>
+	
+</databaseChangeLog>

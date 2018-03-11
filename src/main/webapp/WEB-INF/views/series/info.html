@@ -219,7 +219,7 @@
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.michel.formattedPrice} + ' ' + ${series.michel.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.michel.formattedPrice} + ' EUR' +${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											(10 EUR)
 										</span>
@@ -235,7 +235,7 @@
 										<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
 										<span th:if="${showPrice}"
 											  th:with="price=${#numbers.formatDecimal(series.scott.price, 1, 1)},showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.scott.formattedPrice} + ' ' + ${series.scott.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.scott.formattedPrice} + ' USD' + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											12 USD
 										</span>
@@ -253,7 +253,7 @@
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.yvert.formattedPrice} + ' ' + ${series.yvert.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.yvert.formattedPrice} + ' EUR' + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 											(7 EUR)
 										</span>
@@ -271,7 +271,7 @@
 										</span>
 										<span th:if="${showPrice}"
 											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.gibbons.formattedPrice} + ' ' + ${series.gibbons.currency} + ${showBrackets ? ')' : ''}"
+											  th:text="${showBrackets ? '(' : ''} + ${series.gibbons.formattedPrice} + ' GBP' + ${showBrackets ? ')' : ''}"
 											  th:remove="tag">
 										</span>
 									</dd>

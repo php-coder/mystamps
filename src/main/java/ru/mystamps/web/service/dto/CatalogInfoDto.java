@@ -24,20 +24,13 @@ import java.util.List;
 import java.util.Locale;
 
 import lombok.Getter;
-
-import ru.mystamps.web.dao.dto.Currency;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class CatalogInfoDto {
 	private final List<String> numbers;
 	private final BigDecimal price;
-	private final Currency currency;
-	
-	public CatalogInfoDto(List<String> numbers, BigDecimal price, String currency) {
-		this.numbers = numbers;
-		this.price = price;
-		this.currency = currency == null ? null : Currency.valueOf(currency);
-	}
 	
 	// used to emulate <fmt:formatNumber pattern="###.##" />
 	public String getFormattedPrice() {

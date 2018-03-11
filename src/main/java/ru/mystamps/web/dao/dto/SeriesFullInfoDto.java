@@ -36,19 +36,10 @@ public class SeriesFullInfoDto {
 	private final Boolean perforated;
 	private final String  comment;
 	private final Integer createdBy;
-	
 	private final BigDecimal michelPrice;
-	private final String michelCurrency;
-	
 	private final BigDecimal scottPrice;
-	private final String scottCurrency;
-	
 	private final BigDecimal yvertPrice;
-	private final String yvertCurrency;
-	
 	private final BigDecimal gibbonsPrice;
-	private final String gibbonsCurrency;
-	
 	private final BigDecimal solovyovPrice;
 	private final BigDecimal zagorskiPrice;
 }

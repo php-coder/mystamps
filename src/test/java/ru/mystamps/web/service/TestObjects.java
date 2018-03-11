@@ -144,10 +144,10 @@ public final class TestObjects {
 			info.getPerforated(),
 			"this is a full info",
 			Random.userId(),
-			TEST_PRICE, Currency.EUR.toString(),
-			TEST_PRICE, Currency.USD.toString(),
-			TEST_PRICE, Currency.EUR.toString(),
-			TEST_PRICE, Currency.GBP.toString(),
+			TEST_PRICE,
+			TEST_PRICE,
+			TEST_PRICE,
+			TEST_PRICE,
 			Random.price(),
 			Random.price()
 		);

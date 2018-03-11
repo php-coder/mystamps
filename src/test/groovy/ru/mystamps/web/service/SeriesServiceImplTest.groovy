@@ -765,19 +765,15 @@ class SeriesServiceImplTest extends Specification {
 
 			result.michel?.numbers   == expectedMichelNumbers
 			result.michel?.price     == expectedInfo.michelPrice
-			result.michel?.currency  == Currency.valueOf(expectedInfo.michelCurrency)
 			
 			result.scott?.numbers    == expectedScottNumbers
 			result.scott?.price      == expectedInfo.scottPrice
-			result.scott?.currency   == Currency.valueOf(expectedInfo.scottCurrency)
 			
 			result.yvert?.numbers    == expectedYvertNumbers
 			result.yvert?.price      == expectedInfo.yvertPrice
-			result.yvert?.currency   == Currency.valueOf(expectedInfo.yvertCurrency)
 			
 			result.gibbons?.numbers  == expectedGibbonsNumbers
 			result.gibbons?.price    == expectedInfo.gibbonsPrice
-			result.gibbons?.currency == Currency.valueOf(expectedInfo.gibbonsCurrency)
 			
 			result.solovyov?.numbers  == expectedSolovyovNumbers
 			result.solovyov?.price    == expectedInfo.solovyovPrice

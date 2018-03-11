@@ -48,5 +48,6 @@
 	<include file="0.4/2018-01-01--add_perforated_to_parsed_data.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-01-04--series_sales_import_parsed_data.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-02-09--add_seller_info_to_parsed_data.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2018-03-11--series_remove_currency_fields.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
