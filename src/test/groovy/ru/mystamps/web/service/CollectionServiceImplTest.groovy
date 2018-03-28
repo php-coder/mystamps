@@ -249,7 +249,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'countUpdatedSince() should invoke dao, pass argument and return result from dao'() {
 		given:
-			Date expectedDate   = new Date()
+			Date expectedDate   = Random.date()
 			long expectedResult = positiveLong()
 		when:
 			long result = service.countUpdatedSince(expectedDate)
