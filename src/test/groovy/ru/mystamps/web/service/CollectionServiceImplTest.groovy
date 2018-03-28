@@ -133,21 +133,15 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.addSeriesToUserCollection({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}, { Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			})
+			1 * collectionDao.addSeriesToUserCollection(expectedUserId, expectedSeriesId)
 		and:
-			1 * collectionDao.markAsModified({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}, { Date updatedAt ->
-				assert DateUtils.roughlyEqual(updatedAt, new Date())
-				return true
-			})
+			1 * collectionDao.markAsModified(
+				expectedUserId,
+				{ Date updatedAt ->
+					assert DateUtils.roughlyEqual(updatedAt, new Date())
+					return true
+				}
+			)
 	}
 	
 	//
@@ -176,21 +170,15 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.removeFromCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.removeSeriesFromUserCollection({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}, { Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			})
+			1 * collectionDao.removeSeriesFromUserCollection(expectedUserId, expectedSeriesId)
 		and:
-			1 * collectionDao.markAsModified({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}, { Date updatedAt ->
-				assert DateUtils.roughlyEqual(updatedAt, new Date())
-				return true
-			})
+			1 * collectionDao.markAsModified(
+				expectedUserId,
+				{ Date updatedAt ->
+					assert DateUtils.roughlyEqual(updatedAt, new Date())
+					return true
+				}
+			)
 	}
 	
 	//
@@ -215,7 +203,6 @@ class CollectionServiceImplTest extends Specification {
 			0 * collectionDao.isSeriesInUserCollection(_ as Integer, _ as Integer)
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'isSeriesInCollection() should pass arguments to dao'() {
 		given:
 			Integer expectedUserId = Random.userId()
@@ -226,13 +213,7 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			boolean serviceResult = service.isSeriesInCollection(expectedUserId, expectedSeriesId)
 		then:
-			1 * collectionDao.isSeriesInUserCollection({ Integer userId ->
-				assert userId == expectedUserId
-				return true
-			}, { Integer seriesId ->
-				assert seriesId == expectedSeriesId
-				return true
-			}) >> expectedResult
+			1 * collectionDao.isSeriesInUserCollection(expectedUserId, expectedSeriesId) >> expectedResult
 		and:
 			serviceResult == expectedResult
 	}
@@ -263,7 +244,6 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'countUpdatedSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate   = new Date()
@@ -271,10 +251,7 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			long result = service.countUpdatedSince(expectedDate)
 		then:
-			1 * collectionDao.countUpdatedSince({ Date date ->
-				assert date == expectedDate
-				return true
-			}) >> expectedResult
+			1 * collectionDao.countUpdatedSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -295,17 +272,13 @@ class CollectionServiceImplTest extends Specification {
 			0        | _
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findRecentlyCreated() should pass arguments to dao'() {
 		given:
 			int expectedQuantity = 4
 		when:
 			service.findRecentlyCreated(expectedQuantity)
 		then:
-			1 * collectionDao.findLastCreated({ int quantity ->
-				assert expectedQuantity == quantity
-				return true
-			}) >> []
+			1 * collectionDao.findLastCreated(expectedQuantity) >> []
 	}
 	
 	//
@@ -319,7 +292,6 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
-	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'findBySlug() should invoke dao, pass argument and return result from dao'() {
 		given:
 			String expectedSlug = 'cuba'
@@ -328,10 +300,7 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			CollectionInfoDto result = service.findBySlug(expectedSlug)
 		then:
-			1 * collectionDao.findCollectionInfoBySlug({ String slug ->
-				assert slug == expectedSlug
-				return true
-			}) >> expectedResult
+			1 * collectionDao.findCollectionInfoBySlug(expectedSlug) >> expectedResult
 		and:
 			result == expectedResult
 	}
