@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.positiveLong
 
 import spock.lang.Specification
@@ -211,7 +212,7 @@ class CollectionServiceImplTest extends Specification {
 		and:
 			Integer expectedSeriesId = Random.id()
 		and:
-			boolean expectedResult = true
+			boolean expectedResult = bool()
 		when:
 			boolean serviceResult = service.isSeriesInCollection(expectedUserId, expectedSeriesId)
 		then:
