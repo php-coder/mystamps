@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.service
 
+import static io.qala.datagen.RandomShortApi.positiveLong
+
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -224,7 +226,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'countCollectionsOfUsers() should call dao and return result'() {
 		given:
-			long expectedResult = Long.MAX_VALUE
+			long expectedResult = positiveLong()
 		when:
 			long serviceResult = service.countCollectionsOfUsers()
 		then:
@@ -247,7 +249,7 @@ class CollectionServiceImplTest extends Specification {
 	def 'countUpdatedSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate   = new Date()
-			long expectedResult = 47
+			long expectedResult = positiveLong()
 		when:
 			long result = service.countUpdatedSince(expectedDate)
 		then:
