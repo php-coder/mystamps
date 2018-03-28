@@ -78,7 +78,7 @@ class CollectionServiceImplTest extends Specification {
 			1 * collectionDao.add({ AddCollectionDbDto collection ->
 				assert collection?.ownerId == expectedOwnerId
 				return true
-			}) >> 100
+			}) >> Random.id()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
@@ -93,7 +93,7 @@ class CollectionServiceImplTest extends Specification {
 			1 * collectionDao.add({ AddCollectionDbDto collection ->
 				assert collection?.slug == expectedSlug
 				return true
-			}) >> 200
+			}) >> Random.id()
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
@@ -104,7 +104,7 @@ class CollectionServiceImplTest extends Specification {
 			1 * collectionDao.add({ AddCollectionDbDto collection ->
 				assert DateUtils.roughlyEqual(collection?.updatedAt, new Date())
 				return true
-			}) >> 300
+			}) >> Random.id()
 	}
 	
 	//
@@ -113,7 +113,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'addToCollection() should throw exception when user id is null'() {
 		when:
-			service.addToCollection(null, 456)
+			service.addToCollection(null, Random.id())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -129,7 +129,7 @@ class CollectionServiceImplTest extends Specification {
 	def 'addToCollection() should add series to collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		when:
 			service.addToCollection(expectedUserId, expectedSeriesId)
 		then:
@@ -156,7 +156,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'removeFromCollection() should throw exception when user id is null'() {
 		when:
-			service.removeFromCollection(null, 123)
+			service.removeFromCollection(null, Random.id())
 		then:
 			thrown IllegalArgumentException
 	}
@@ -172,7 +172,7 @@ class CollectionServiceImplTest extends Specification {
 	def 'removeFromCollection() should remove series from collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		when:
 			service.removeFromCollection(expectedUserId, expectedSeriesId)
 		then:
@@ -208,7 +208,7 @@ class CollectionServiceImplTest extends Specification {
 		given:
 			Integer anonymousUserId = null
 		when:
-			boolean serviceResult = service.isSeriesInCollection(anonymousUserId, 456)
+			boolean serviceResult = service.isSeriesInCollection(anonymousUserId, Random.id())
 		then:
 			serviceResult == false
 		and:
@@ -220,7 +220,7 @@ class CollectionServiceImplTest extends Specification {
 		given:
 			Integer expectedUserId = Random.userId()
 		and:
-			Integer expectedSeriesId = 456
+			Integer expectedSeriesId = Random.id()
 		and:
 			boolean expectedResult = true
 		when:
