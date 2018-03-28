@@ -277,7 +277,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'findRecentlyCreated() should pass arguments to dao'() {
 		given:
-			int expectedQuantity = 4
+			int expectedQuantity = Random.quantity()
 		when:
 			service.findRecentlyCreated(expectedQuantity)
 		then:
