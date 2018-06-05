@@ -1,7 +1,6 @@
 # My Stamps
 
 [![Build Status](https://travis-ci.org/php-coder/mystamps.svg?branch=master)](https://travis-ci.org/php-coder/mystamps)
-[![Dependency Status](https://www.versioneye.com/user/projects/55b783256537620017001225/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55b783256537620017001225)
 [![Coverage Status](https://codecov.io/gh/php-coder/mystamps/branch/master/graph/badge.svg)](https://codecov.io/gh/php-coder/mystamps)
 [![PDD Status](http://www.0pdd.com/svg?name=php-coder/mystamps)](http://www.0pdd.com/p?name=php-coder/mystamps)
 
