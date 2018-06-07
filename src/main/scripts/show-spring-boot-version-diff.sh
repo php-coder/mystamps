@@ -11,7 +11,7 @@ set -o pipefail
 
 CURRENT_DIR="$(dirname "$0")"
 PROJECT_POM="$CURRENT_DIR/../../../pom.xml"
-SPRING_VERSION="$(grep -FA1 '<artifactId>spring-boot-starter-parent' "$PROJECT_POM" | sed -n '/<version>/s|.*>\([^<]\+\)<.*|\1|p')"
+SPRING_VERSION="$(grep -FA1 '<artifactId>spring-boot-starter-parent' "$PROJECT_POM" | awk -F'[<>]' '/<version>/{print $3}')"
 SPRING_POM="https://raw.githubusercontent.com/spring-projects/spring-boot/v$SPRING_VERSION/spring-boot-dependencies/pom.xml"
 
 printf "Comparing with Spring Boot %s (project vs spring versions)\\n\\n" "$SPRING_VERSION"
@@ -19,8 +19,8 @@ printf "Comparing with Spring Boot %s (project vs spring versions)\\n\\n" "$SPRI
 # I know about useless cat below, but it's here for better readability.
 # shellcheck disable=SC2002
 join \
-	<(cat    "$PROJECT_POM" | sed -n '/\.version>/s|<\([^>]\+\)>\([^<]\+\)<.*|\1\t\2|p' | sort) \
-	<(curl -s "$SPRING_POM" | sed -n '/\.version>/s|<\([^>]\+\)>\([^<]\+\)<.*|\1\t\2|p' | sort) \
+	<(cat    "$PROJECT_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version/{print $2, $3}' | sort) \
+	<(curl -s "$SPRING_POM" | awk -F'[<>]' -v OFS='\t' '$2~/\.version/{print $2, $3}' | sort) \
 	| awk '
 			{
 				if ($2 != $3){
