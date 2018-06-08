@@ -30,7 +30,6 @@ join \
 				}
 			}
 			END {
-				printf("\nTotal:\t%d dependencies differ by versions\n", cnt);
-				exit cnt
+				printf("\nTotal:\t%d dependencies differ by versions\n", cnt)
 			}'
 
