@@ -605,9 +605,9 @@ public class SeriesController {
 		}
 		
 		if (!model.containsAttribute("addSeriesSalesForm")) {
-			AddSeriesSalesForm addSeriesSalesForm = new AddSeriesSalesForm();
-			addSeriesSalesForm.setDate(new Date());
-			model.addAttribute("addSeriesSalesForm", addSeriesSalesForm);
+			AddSeriesSalesForm form = new AddSeriesSalesForm();
+			form.setDate(new Date());
+			model.addAttribute("addSeriesSalesForm", form);
 		}
 		
 		addSellersToModel(model);
