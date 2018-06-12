@@ -1,7 +1,8 @@
 //
 // IMPORTANT:
-// You have to update Url.RESOURCES_VERSION each time whenever you're modified this file!
+// You must update Url.RESOURCES_VERSION each time whenever you're modified this file!
 //
+
 function initPage(suggestCountryUrl) {
 	$('#country').selectize();
 	
