@@ -17,7 +17,7 @@ function drawChart(containerId, dataTable) {
 	};
 	var chart = new google.visualization.PieChart(document.getElementById(containerId));
 	chart.draw(dataTable, options);
-};
+}
 
 function createDataTable(stat) {
 	var table = new google.visualization.DataTable();
@@ -25,4 +25,4 @@ function createDataTable(stat) {
 	table.addColumn('number', 'Quantity of stamps');
 	table.addRows(stat);
 	return table;
-};
+}
