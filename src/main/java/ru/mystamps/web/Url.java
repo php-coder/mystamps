@@ -180,10 +180,10 @@ public final class Url {
 		} else {
 			// Use a separate domain for our own resources
 			// Constants sorted in an ascending order.
-			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);
 			map.put("DATE_UTILS_JS", STATIC_RESOURCES_URL + DATE_UTILS_JS);
+			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
 			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
