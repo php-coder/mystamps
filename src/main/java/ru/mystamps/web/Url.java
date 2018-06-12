@@ -89,13 +89,15 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.6";
+	public static final String RESOURCES_VERSION      = "v0.3.7";
 	
-	// CheckStyle: ignore LineLength for next 4 lines
+	// CheckStyle: ignore LineLength for next 6 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
-	public static final String CATALOG_UTILS_JS       = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
-	public static final String SERIES_ADD_JS          = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";
-	public static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
+	public static final String CATALOG_UTILS_JS       = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";    // NOPMD: AvoidDuplicateLiterals
+	public static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";       // NOPMD: AvoidDuplicateLiterals
+	public static final String SERIES_ADD_JS          = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";      // NOPMD: AvoidDuplicateLiterals
+	public static final String SERIES_INFO_JS         = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";     // NOPMD: AvoidDuplicateLiterals
+	public static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js"; // NOPMD: AvoidDuplicateLiterals
 	public static final String FAVICON_ICO            = "/favicon.ico";
 	
 	// CheckStyle: ignore LineLength for next 4 lines
@@ -165,6 +167,7 @@ public final class Url {
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
 			map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", COLLECTION_INFO_JS);
+			map.put("DATE_UTILS_JS", DATE_UTILS_JS);
 			map.put("FAVICON_ICO", FAVICON_ICO);
 			map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
 			map.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
@@ -173,16 +176,19 @@ public final class Url {
 			map.put("SELECTIZE_CSS", SELECTIZE_CSS);
 			map.put("SELECTIZE_JS", SELECTIZE_JS);
 			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
+			map.put("SERIES_INFO_JS", SERIES_INFO_JS);
 		} else {
 			// Use a separate domain for our own resources
 			// Constants sorted in an ascending order.
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);
+			map.put("DATE_UTILS_JS", STATIC_RESOURCES_URL + DATE_UTILS_JS);
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
 			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
 			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
+			map.put("SERIES_INFO_JS", STATIC_RESOURCES_URL + SERIES_INFO_JS);
 			
 			// Use CDN for the external resources like libraries
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);

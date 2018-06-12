@@ -20,7 +20,6 @@ package ru.mystamps.web.controller;
 import java.io.IOException;
 import java.time.Year;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -606,7 +605,6 @@ public class SeriesController {
 		
 		if (!model.containsAttribute("addSeriesSalesForm")) {
 			AddSeriesSalesForm form = new AddSeriesSalesForm();
-			form.setDate(new Date());
 			model.addAttribute("addSeriesSalesForm", form);
 		}
 		

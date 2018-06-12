@@ -441,11 +441,17 @@
 												Date
 											</label>
 											<div class="col-sm-4">
-												<input type="text" id="date" class="form-control" th:field="*{date}" />
+												<input type="text" id="date" class="form-control" th:field="*{date}" th:placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
 												<!--/*/
 												<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
 												/*/-->
 											</div>
+											<small>
+												<a class="link-vcenter"
+													href="javascript:populateTransactionDateWithTodayDate(); void(0);" th:text="#{t_today}">
+													Today
+												</a>
+											</small>
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
@@ -631,5 +637,14 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+		
+		<!--/*/
+		<th:block togglz:active="SHOW_PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+		/*/-->
+		<script src="../../../../javascript/DateUtils.js" th:src="${DATE_UTILS_JS}"></script>
+		<script src="../../../../javascript/series/info.js" th:src="${SERIES_INFO_JS}"></script>
+		<!--/*/
+		</th:block>
+		/*/-->
 	</body>
 </html>
