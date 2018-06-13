@@ -116,14 +116,21 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'addToCollection() should throw exception when user id is null'() {
 		when:
-			service.addToCollection(null, Random.id())
+			service.addToCollection(null, Random.id(), Random.quantity())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def 'addToCollection() should throw exception when series id is null'() {
 		when:
-			service.addToCollection(Random.userId(), null)
+			service.addToCollection(Random.userId(), null, Random.quantity())
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'addToCollection() should throw exception when quantity is null'() {
+		when:
+			service.addToCollection(Random.userId(), Random.id(), null)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -133,10 +140,11 @@ class CollectionServiceImplTest extends Specification {
 		given:
 			Integer expectedUserId = Random.userId()
 			Integer expectedSeriesId = Random.id()
+			Integer expectedQuantity = Random.quantity()
 		when:
-			service.addToCollection(expectedUserId, expectedSeriesId)
+			service.addToCollection(expectedUserId, expectedSeriesId, expectedQuantity)
 		then:
-			1 * collectionDao.addSeriesToUserCollection(expectedUserId, expectedSeriesId)
+			1 * collectionDao.addSeriesToUserCollection(expectedUserId, expectedSeriesId, expectedQuantity)
 		and:
 			1 * collectionDao.markAsModified(
 				expectedUserId,

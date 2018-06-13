@@ -1090,7 +1090,7 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findByCollectionId(expectedCollectionId, expectedLang)
 		then:
-			1 * seriesDao.findByCollectionIdAsSeriesInfo(expectedCollectionId, expectedLang) >> []
+			1 * seriesDao.findByCollectionId(expectedCollectionId, expectedLang) >> []
 	}
 	
 	//

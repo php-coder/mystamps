@@ -15,23 +15,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.dao.dto;
 
-import java.util.Date;
-import java.util.List;
+import lombok.Getter;
 
-import ru.mystamps.web.dao.dto.AddCollectionDbDto;
-import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-
-public interface CollectionDao {
-	List<LinkEntityDto> findLastCreated(int quantity);
-	long countCollectionsOfUsers();
-	long countUpdatedSince(Date date);
-	Integer add(AddCollectionDbDto collection);
-	void markAsModified(Integer userId, Date updatedAt);
-	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
-	void addSeriesToUserCollection(Integer userId, Integer seriesId, Integer quantity);
-	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);
-	CollectionInfoDto findCollectionInfoBySlug(String slug);
+@Getter
+public class SeriesInCollectionDto extends SeriesInfoDto {
+	// SeriesInfoDto.quantity holds number of stamps in a series, while user may
+	// have less stamps in his collection
+	private final Integer numberOfStamps;
+	
+	@SuppressWarnings("checkstyle:parameternumber")
+	public SeriesInCollectionDto(
+			Integer id,
+			LinkEntityDto category,
+			LinkEntityDto country,
+			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
+			Integer quantity,
+			Boolean perforated,
+			Integer numberOfStamps) {
+		super(id, category, country, releaseDay, releaseMonth, releaseYear, quantity, perforated);
+		this.numberOfStamps = numberOfStamps;
+	}
+	
 }

@@ -78,6 +78,37 @@ final class RowMappers {
 		);
 	}
 	
+	// The only one difference from forSeriesInfoDto() is that
+	// SeriesInCollectionDto has numberOfStamps member.
+	public static SeriesInCollectionDto forSeriesInCollectionDto(ResultSet rs, int unused)
+		throws SQLException {
+		
+		Integer seriesId     = rs.getInt("id");
+		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
+		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
+		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity     = rs.getInt("quantity");
+		Boolean perforated   = rs.getBoolean("perforated");
+		Integer numberOfStamps = rs.getInt("number_of_stamps");
+		
+		LinkEntityDto category =
+			createLinkEntityDto(rs, "category_id", "category_slug", "category_name");
+		LinkEntityDto country =
+			createLinkEntityDto(rs, "country_id", "country_slug", "country_name");
+		
+		return new SeriesInCollectionDto(
+			seriesId,
+			category,
+			country,
+			releaseDay,
+			releaseMonth,
+			releaseYear,
+			quantity,
+			perforated,
+			numberOfStamps
+		);
+	}
+	
 	/**
 	 * @author Sergey Chechenev
 	 */

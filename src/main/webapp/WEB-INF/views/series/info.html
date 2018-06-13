@@ -339,12 +339,38 @@
 							
 							<div class="row" togglz:active="ADD_SERIES_TO_COLLECTION">
 								<div class="col-sm-12" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-									<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+									<form method="post" action="../collection/info.html"
+										th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}"
+										th:object="${addToCollectionForm}">
 										<p th:text="#{t_series_not_in_collection}">
 											Series isn't part of your collection
 										</p>
+										<p th:if="${series.quantity != 1}">
+											<span th:text="#{t_i_have}" th:remove="tag">I have</span>
+											<input type="number"
+												class="number-input"
+												required="required"
+												min="1"
+												max="7"
+												value="7"
+												th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
+												th:max="${series.quantity}"
+												th:field="*{quantity}"
+												/>
+											<span th:text="#{t_out_of_n_stamps(${series.quantity})}" th:remove="tag">out of 7 stamps</span>
+										</p>
+										<!--/*/
+										<p th:if="${#fields.hasErrors('quantity')}"
+											th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
+											<span id="quantity.errors"
+												class="help-block"
+												th:each="error : ${#fields.errors('quantity')}"
+												th:text="${error}"></span>
+										</p>
+										/*/-->
 										<p>
 											<input type="hidden" name="action" value="ADD" />
+											<input type="hidden" name="quantity" value="1" th:if="${series.quantity == 1}" />
 											<input id="series-success" type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
 										</p>
 									</form>

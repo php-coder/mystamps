@@ -105,6 +105,11 @@
 										<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
 										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
 									</a>
+									<!--/*/
+									<span class="label label-default"
+										th:if="${series.quantity != series.numberOfStamps}"
+										th:text="#{t_m_out_of_n(${series.numberOfStamps}, ${series.quantity})}"></span>
+									/*/-->
 									<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id}" class="label label-success">New</span>
 								</li>
 								<li>
@@ -115,6 +120,7 @@
 									<a href="../series/info.html">
 										22&nbsp;item(s)
 									</a>
+									<span class="label label-default">20 out of 22</span>
 								</li>
 								<li>
 									<a href="../category/info.html">Animals</a>&nbsp;&raquo;

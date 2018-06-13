@@ -66,16 +66,19 @@ public class CollectionServiceImpl implements CollectionService {
 		log.info("Collection #{} has been created ({})", id, collection);
 	}
 	
+	// @todo #477 CollectionService.addToCollection(): introduce DTO object
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public void addToCollection(Integer userId, Integer seriesId) {
+	public void addToCollection(Integer userId, Integer seriesId, Integer quantity) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(quantity != null, "Quantity of stamps must be non null");
 		
-		collectionDao.addSeriesToUserCollection(userId, seriesId);
+		collectionDao.addSeriesToUserCollection(userId, seriesId, quantity);
 		collectionDao.markAsModified(userId, new Date());
 		
+		// TODO: it would be good to include number of stamps in series vs in collection
 		log.info("Series #{} has been added to collection of user #{}", seriesId, userId);
 	}
 	

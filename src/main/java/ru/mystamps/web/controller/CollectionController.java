@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -77,7 +77,7 @@ public class CollectionController {
 		
 		Integer collectionId = collection.getId();
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> seriesOfCollection =
+		List<SeriesInCollectionDto> seriesOfCollection =
 			seriesService.findByCollectionId(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		

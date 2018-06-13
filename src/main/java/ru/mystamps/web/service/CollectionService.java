@@ -25,7 +25,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
-	void addToCollection(Integer userId, Integer seriesId);
+	void addToCollection(Integer userId, Integer seriesId, Integer quantity);
 	void removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();

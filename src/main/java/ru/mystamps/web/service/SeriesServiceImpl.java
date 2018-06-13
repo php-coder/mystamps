@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
@@ -301,10 +302,10 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang) {
+	public List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
-		return seriesDao.findByCollectionIdAsSeriesInfo(collectionId, lang);
+		return seriesDao.findByCollectionId(collectionId, lang);
 	}
 	
 	@Override

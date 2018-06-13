@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
@@ -35,6 +36,7 @@ public interface SeriesService {
 	long countAll();
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
+	// @todo #477 SeriesService.countStampsOf(): rename to CollectionService.countStampsOf()
 	long countStampsOf(Integer collectionId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
@@ -51,7 +53,9 @@ public interface SeriesService {
 	
 	List<SeriesInfoDto> findByCategorySlug(String slug, String lang);
 	List<SeriesInfoDto> findByCountrySlug(String slug, String lang);
-	List<SeriesInfoDto> findByCollectionId(Integer collectionId, String lang);
+	// @todo #477 SeriesService.findByCollectionId():
+	//  rename to CollectionService.findSeriesInCollection()
+	List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang);
 	List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
 	

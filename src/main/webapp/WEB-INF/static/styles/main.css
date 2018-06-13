@@ -105,3 +105,7 @@ label {
 .js-collapse-toggle-header {
 	display: none;
 }
+
+.number-input {
+	width: 4em;
+}

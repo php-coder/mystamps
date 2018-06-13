@@ -165,10 +165,11 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
-	public void addSeriesToUserCollection(Integer userId, Integer seriesId) {
+	public void addSeriesToUserCollection(Integer userId, Integer seriesId, Integer quantity) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", userId);
 		params.put("series_id", seriesId);
+		params.put("number_of_stamps", quantity);
 		
 		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
 		

@@ -29,6 +29,7 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +61,7 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
+import ru.mystamps.web.controller.dto.AddToCollectionForm;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
@@ -260,6 +262,7 @@ public class SeriesController {
 		
 		addSeriesSalesFormToModel(model);
 		addImageFormToModel(model);
+		addStampsToCollectionForm(model, series);
 		
 		model.addAttribute("maxQuantityOfImagesExceeded", false);
 		
@@ -332,6 +335,7 @@ public class SeriesController {
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
+			addStampsToCollectionForm(model, series);
 			
 			// don't try to re-display file upload field
 			form.setImage(null);
@@ -344,12 +348,18 @@ public class SeriesController {
 		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
 	}
 	
+	// many method parameters are OK here
+	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=ADD")
 	public String addToCollection(
+		@Valid AddToCollectionForm form,
+		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
+		Locale userLocale,
 		RedirectAttributes redirectAttributes,
-		HttpServletResponse response)
+		HttpServletResponse response,
+		Model model)
 		throws IOException {
 		
 		if (seriesId == null) {
@@ -364,7 +374,26 @@ public class SeriesController {
 		}
 		
 		Integer userId = currentUserDetails.getUserId();
-		collectionService.addToCollection(userId, seriesId);
+		
+		if (result.hasErrors()) {
+			String lang = LocaleUtils.getLanguageOrNull(userLocale);
+			SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+			if (series == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return null;
+			}
+			
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, userId);
+			model.addAllAttributes(commonAttrs);
+			
+			addSeriesSalesFormToModel(model);
+			addImageFormToModel(model);
+			addStampsToCollectionForm(model, series);
+			
+			return "series/info";
+		}
+		
+		collectionService.addToCollection(userId, seriesId, form.getQuantity());
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
@@ -433,6 +462,7 @@ public class SeriesController {
 			
 			addSeriesSalesFormToModel(model);
 			addImageFormToModel(model);
+			addStampsToCollectionForm(model, series);
 			
 			return "series/info";
 		}
@@ -618,6 +648,17 @@ public class SeriesController {
 	private static void addImageFormToModel(Model model) {
 		AddImageForm form = new AddImageForm();
 		model.addAttribute("addImageForm", form);
+	}
+	
+	private static void addStampsToCollectionForm(Model model, SeriesDto series) {
+		// TODO: only add when isSeriesInCollection
+		if (model.containsAttribute("addToCollectionForm")) {
+			return;
+		}
+		
+		AddToCollectionForm form = new AddToCollectionForm();
+		form.setQuantity(series.getQuantity());
+		model.addAttribute("addToCollectionForm", form);
 	}
 	
 	private static boolean isAllowedToAddingImages(SeriesDto series) {

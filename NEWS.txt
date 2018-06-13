@@ -20,6 +20,7 @@
 - (integration)    migrate from coveralls.io to codecov.io service for code coverage
 - (functionality)  add support for specifying Solovyov catalog numbers
 - (functionality)  add support for specifying Zagorski catalog numbers
+- (functionality)  user may specify how many stamps from a series in his/her collection
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

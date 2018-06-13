@@ -15,23 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.service.dto;
 
-import java.util.Date;
-import java.util.List;
-
-import ru.mystamps.web.dao.dto.AddCollectionDbDto;
-import ru.mystamps.web.dao.dto.CollectionInfoDto;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-
-public interface CollectionDao {
-	List<LinkEntityDto> findLastCreated(int quantity);
-	long countCollectionsOfUsers();
-	long countUpdatedSince(Date date);
-	Integer add(AddCollectionDbDto collection);
-	void markAsModified(Integer userId, Date updatedAt);
-	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
-	void addSeriesToUserCollection(Integer userId, Integer seriesId, Integer quantity);
-	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);
-	CollectionInfoDto findCollectionInfoBySlug(String slug);
+public interface AddToCollectionDto {
+	Integer getQuantity();
 }

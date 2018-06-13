@@ -38,6 +38,7 @@ import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 
@@ -231,12 +232,16 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public List<SeriesInfoDto> findByCollectionIdAsSeriesInfo(Integer collectionId, String lang) {
+	public List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCollectionIdSql, params, RowMappers::forSeriesInfoDto);
+		return jdbcTemplate.query(
+			findByCollectionIdSql,
+			params,
+			RowMappers::forSeriesInCollectionDto
+		);
 	}
 	
 	/**
