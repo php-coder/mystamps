@@ -89,12 +89,13 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.7";
+	public static final String RESOURCES_VERSION      = "v0.3.8";
 	
-	// CheckStyle: ignore LineLength for next 6 lines
+	// CheckStyle: ignore LineLength for next 7 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
 	public static final String CATALOG_UTILS_JS       = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";    // NOPMD: AvoidDuplicateLiterals
 	public static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";       // NOPMD: AvoidDuplicateLiterals
+	public static final String PARTICIPANT_ADD_JS     = "/public/js/" + RESOURCES_VERSION + "/participant/add.min.js"; // NOPMD: AvoidDuplicateLiterals
 	public static final String SERIES_ADD_JS          = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";      // NOPMD: AvoidDuplicateLiterals
 	public static final String SERIES_INFO_JS         = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";     // NOPMD: AvoidDuplicateLiterals
 	public static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js"; // NOPMD: AvoidDuplicateLiterals
@@ -173,6 +174,7 @@ public final class Url {
 			map.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
 			map.put("JQUERY_JS", JQUERY_JS);
 			map.put("MAIN_CSS", MAIN_CSS);
+			map.put("PARTICIPANT_ADD_JS", PARTICIPANT_ADD_JS);
 			map.put("SELECTIZE_CSS", SELECTIZE_CSS);
 			map.put("SELECTIZE_JS", SELECTIZE_JS);
 			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
@@ -187,6 +189,7 @@ public final class Url {
 			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
 			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
+			map.put("PARTICIPANT_ADD_JS", STATIC_RESOURCES_URL + PARTICIPANT_ADD_JS);
 			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
 			map.put("SERIES_INFO_JS", STATIC_RESOURCES_URL + SERIES_INFO_JS);
 			
