@@ -380,13 +380,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.robotframework</groupId>
-			<artifactId>robotframework</artifactId>
-			<version>${robotframework.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
 			<version>${htmlunit.version}</version>
@@ -551,7 +544,7 @@
 		<resources.plugin.version>3.0.2</resources.plugin.version>
 		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
 		<robotframework-selenium.version>1.4.0.8</robotframework-selenium.version>
-		<robotframework.version>3.0.2</robotframework.version>
+		<robotframework.version>3.0.4</robotframework.version>
 		
 		<!-- Don't forget to update version in the Url class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.4</selectizejs.version>
@@ -1006,6 +999,13 @@
 						</goals>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.robotframework</groupId>
+						<artifactId>robotframework</artifactId>
+						<version>${robotframework.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>
