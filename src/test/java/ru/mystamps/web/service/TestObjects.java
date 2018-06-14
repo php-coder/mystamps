@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 4 lines
+// CheckStyle: ignore AvoidStarImportCheck for next 5 lines
 import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
 import ru.mystamps.web.controller.dto.AddToCollectionForm;
