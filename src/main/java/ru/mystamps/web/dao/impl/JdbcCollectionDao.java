@@ -164,6 +164,7 @@ public class JdbcCollectionDao implements CollectionDao {
 		return result > 0;
 	}
 	
+	// @todo #880 JdbcCollectionDao.addSeriesToUserCollection(): introduce DTO object
 	@Override
 	public void addSeriesToUserCollection(Integer userId, Integer seriesId, Integer quantity) {
 		Map<String, Object> params = new HashMap<>();

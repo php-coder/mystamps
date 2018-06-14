@@ -25,11 +25,13 @@ import java.util.Date;
 // CheckStyle: ignore AvoidStarImportCheck for next 4 lines
 import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
+import ru.mystamps.web.controller.dto.AddToCollectionForm;
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.service.dto.AddParticipantDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.service.dto.AddToCollectionDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.tests.Random;
@@ -357,4 +359,11 @@ public final class TestObjects {
 		dto.setSeller(bool());
 		return dto;
 	}
+	
+	public static AddToCollectionDto createAddToCollectionDto() {
+		AddToCollectionForm dto = new AddToCollectionForm();
+		dto.setQuantity(Random.quantity());
+		return dto;
+	}
+	
 }

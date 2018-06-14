@@ -393,7 +393,7 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		collectionService.addToCollection(userId, seriesId, form.getQuantity());
+		collectionService.addToCollection(userId, seriesId, form);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);

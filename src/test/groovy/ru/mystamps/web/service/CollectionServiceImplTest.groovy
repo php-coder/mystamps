@@ -25,6 +25,7 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
+import ru.mystamps.web.controller.dto.AddToCollectionForm
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
@@ -116,21 +117,31 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'addToCollection() should throw exception when user id is null'() {
 		when:
-			service.addToCollection(null, Random.id(), Random.quantity())
+			service.addToCollection(null, Random.id(), TestObjects.createAddToCollectionDto())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def 'addToCollection() should throw exception when series id is null'() {
 		when:
-			service.addToCollection(Random.userId(), null, Random.quantity())
+			service.addToCollection(Random.userId(), null, TestObjects.createAddToCollectionDto())
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def 'addToCollection() should throw exception when quantity is null'() {
+	def 'addToCollection() should throw exception when dto is null'() {
 		when:
 			service.addToCollection(Random.userId(), Random.id(), null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'addToCollection() should throw exception when number of stamps is null'() {
+		given:
+			AddToCollectionForm dto = new AddToCollectionForm()
+			dto.setQuantity(null)
+		when:
+			service.addToCollection(Random.userId(), Random.id(), dto)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -141,8 +152,11 @@ class CollectionServiceImplTest extends Specification {
 			Integer expectedUserId = Random.userId()
 			Integer expectedSeriesId = Random.id()
 			Integer expectedQuantity = Random.quantity()
+		and:
+			AddToCollectionForm form = new AddToCollectionForm()
+			form.setQuantity(expectedQuantity)
 		when:
-			service.addToCollection(expectedUserId, expectedSeriesId, expectedQuantity)
+			service.addToCollection(expectedUserId, expectedSeriesId, form)
 		then:
 			1 * collectionDao.addSeriesToUserCollection(expectedUserId, expectedSeriesId, expectedQuantity)
 		and:

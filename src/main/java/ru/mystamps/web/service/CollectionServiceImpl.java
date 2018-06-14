@@ -35,6 +35,7 @@ import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.service.dto.AddToCollectionDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
@@ -66,16 +67,16 @@ public class CollectionServiceImpl implements CollectionService {
 		log.info("Collection #{} has been created ({})", id, collection);
 	}
 	
-	// @todo #477 CollectionService.addToCollection(): introduce DTO object
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public void addToCollection(Integer userId, Integer seriesId, Integer quantity) {
+	public void addToCollection(Integer userId, Integer seriesId, AddToCollectionDto dto) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
-		Validate.isTrue(quantity != null, "Quantity of stamps must be non null");
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(dto.getQuantity() != null, "Quantity of stamps must be non null");
 		
-		collectionDao.addSeriesToUserCollection(userId, seriesId, quantity);
+		collectionDao.addSeriesToUserCollection(userId, seriesId, dto.getQuantity());
 		collectionDao.markAsModified(userId, new Date());
 		
 		// TODO: it would be good to include number of stamps in series vs in collection
