@@ -28,6 +28,7 @@ import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.controller.dto.AddToCollectionForm
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
+import ru.mystamps.web.dao.dto.AddToCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
@@ -158,7 +159,13 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(expectedUserId, expectedSeriesId, form)
 		then:
-			1 * collectionDao.addSeriesToUserCollection(expectedUserId, expectedSeriesId, expectedQuantity)
+			1 * collectionDao.addSeriesToUserCollection({ AddToCollectionDbDto dto ->
+				assert dto != null
+				assert dto.ownerId == expectedUserId
+				assert dto.seriesId == expectedSeriesId
+				assert dto.numberOfStamps == expectedQuantity
+				return true
+			})
 		and:
 			1 * collectionDao.markAsModified(
 				expectedUserId,

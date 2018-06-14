@@ -39,6 +39,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
@@ -164,13 +165,12 @@ public class JdbcCollectionDao implements CollectionDao {
 		return result > 0;
 	}
 	
-	// @todo #880 JdbcCollectionDao.addSeriesToUserCollection(): introduce DTO object
 	@Override
-	public void addSeriesToUserCollection(Integer userId, Integer seriesId, Integer quantity) {
+	public void addSeriesToUserCollection(AddToCollectionDbDto dto) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("user_id", userId);
-		params.put("series_id", seriesId);
-		params.put("number_of_stamps", quantity);
+		params.put("user_id", dto.getOwnerId());
+		params.put("series_id", dto.getSeriesId());
+		params.put("number_of_stamps", dto.getNumberOfStamps());
 		
 		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
 		
@@ -178,8 +178,8 @@ public class JdbcCollectionDao implements CollectionDao {
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after adding series #%d to collection of user #%d: %d",
-			seriesId,
-			userId,
+			dto.getSeriesId(),
+			dto.getOwnerId(),
 			affected
 		);
 	}

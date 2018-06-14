@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
 import ru.mystamps.web.dao.dto.AddCollectionDbDto;
+import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
@@ -76,7 +77,12 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Quantity of stamps must be non null");
 		
-		collectionDao.addSeriesToUserCollection(userId, seriesId, dto.getQuantity());
+		AddToCollectionDbDto collectionDto = new AddToCollectionDbDto();
+		collectionDto.setOwnerId(userId);
+		collectionDto.setSeriesId(seriesId);
+		collectionDto.setNumberOfStamps(dto.getQuantity());
+		
+		collectionDao.addSeriesToUserCollection(collectionDto);
 		collectionDao.markAsModified(userId, new Date());
 		
 		// TODO: it would be good to include number of stamps in series vs in collection
