@@ -339,7 +339,7 @@
 							
 							<div class="row" togglz:active="ADD_SERIES_TO_COLLECTION">
 								<div class="col-sm-12" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-									<form method="post" action="../collection/info.html"
+									<form id="add-series-form" method="post" action="../collection/info.html"
 										th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}"
 										th:object="${addToCollectionForm}">
 										<p th:text="#{t_series_not_in_collection}">
@@ -347,7 +347,8 @@
 										</p>
 										<p th:if="${series.quantity != 1}">
 											<span th:text="#{t_i_have}" th:remove="tag">I have</span>
-											<input type="number"
+											<input id="number-of-stamps"
+												type="number"
 												class="number-input"
 												required="required"
 												min="1"
