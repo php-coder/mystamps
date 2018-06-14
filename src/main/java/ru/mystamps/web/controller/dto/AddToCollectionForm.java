@@ -35,7 +35,6 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 public class AddToCollectionForm implements AddToCollectionDto {
 	
 	// @todo #477 /series/{id}(quantity): add validation for max value
-	// @todo #477 /series/{id}(quantity): add integration test for min value
 	@NotNull
 	@Min(MIN_STAMPS_IN_SERIES)
 	private Integer quantity;
