@@ -262,8 +262,8 @@ public class JsoupSiteParserTest {
 		final int countOfFieldsWithLocator = 7;
 		String[] locators = new String[countOfFieldsWithLocator];
 		
+		int guaranteedSetPosition = between(0, locators.length - 1).integer();
 		for (int i = 0; i < locators.length; i++) {
-			int guaranteedSetPosition = between(0, locators.length - 1).integer();
 			if (i == guaranteedSetPosition) {
 				locators[i] = Random.jsoupLocator();
 			} else {
