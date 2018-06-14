@@ -657,7 +657,7 @@ public class SeriesController {
 		}
 		
 		AddToCollectionForm form = new AddToCollectionForm();
-		form.setQuantity(series.getQuantity());
+		form.setNumberOfStamps(series.getQuantity());
 		model.addAttribute("addToCollectionForm", form);
 	}
 	

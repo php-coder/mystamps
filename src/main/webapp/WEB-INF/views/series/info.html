@@ -356,7 +356,7 @@
 												value="7"
 												th:min="${T(ru.mystamps.web.validation.ValidationRules).MIN_STAMPS_IN_SERIES}"
 												th:max="${series.quantity}"
-												th:field="*{quantity}"
+												th:field="*{numberOfStamps}"
 												/>
 											<span th:text="#{t_out_of_n_stamps(${series.quantity})}" th:remove="tag">out of 7 stamps</span>
 										</p>

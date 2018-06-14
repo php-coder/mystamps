@@ -140,7 +140,7 @@ class CollectionServiceImplTest extends Specification {
 	def 'addToCollection() should throw exception when number of stamps is null'() {
 		given:
 			AddToCollectionForm dto = new AddToCollectionForm()
-			dto.setQuantity(null)
+			dto.setNumberOfStamps(null)
 		when:
 			service.addToCollection(Random.userId(), Random.id(), dto)
 		then:
@@ -152,10 +152,10 @@ class CollectionServiceImplTest extends Specification {
 		given:
 			Integer expectedUserId = Random.userId()
 			Integer expectedSeriesId = Random.id()
-			Integer expectedQuantity = Random.quantity()
+			Integer expectedNumberOfStamps = Random.quantity()
 		and:
 			AddToCollectionForm form = new AddToCollectionForm()
-			form.setQuantity(expectedQuantity)
+			form.setNumberOfStamps(expectedNumberOfStamps)
 		when:
 			service.addToCollection(expectedUserId, expectedSeriesId, form)
 		then:
@@ -163,7 +163,7 @@ class CollectionServiceImplTest extends Specification {
 				assert dto != null
 				assert dto.ownerId == expectedUserId
 				assert dto.seriesId == expectedSeriesId
-				assert dto.numberOfStamps == expectedQuantity
+				assert dto.numberOfStamps == expectedNumberOfStamps
 				return true
 			})
 		and:

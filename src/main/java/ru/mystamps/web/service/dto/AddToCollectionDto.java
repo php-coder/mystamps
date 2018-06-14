@@ -18,5 +18,5 @@
 package ru.mystamps.web.service.dto;
 
 public interface AddToCollectionDto {
-	Integer getQuantity();
+	Integer getNumberOfStamps();
 }

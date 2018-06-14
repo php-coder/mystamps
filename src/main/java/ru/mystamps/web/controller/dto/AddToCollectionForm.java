@@ -37,6 +37,6 @@ public class AddToCollectionForm implements AddToCollectionDto {
 	// @todo #477 /series/{id}(quantity): add validation for max value
 	@NotNull
 	@Min(MIN_STAMPS_IN_SERIES)
-	private Integer quantity;
+	private Integer numberOfStamps;
 	
 }

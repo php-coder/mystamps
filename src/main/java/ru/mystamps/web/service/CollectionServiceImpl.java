@@ -75,12 +75,12 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(dto != null, "DTO must be non null");
-		Validate.isTrue(dto.getQuantity() != null, "Quantity of stamps must be non null");
+		Validate.isTrue(dto.getNumberOfStamps() != null, "Number of stamps must be non null");
 		
 		AddToCollectionDbDto collectionDto = new AddToCollectionDbDto();
 		collectionDto.setOwnerId(userId);
 		collectionDto.setSeriesId(seriesId);
-		collectionDto.setNumberOfStamps(dto.getQuantity());
+		collectionDto.setNumberOfStamps(dto.getNumberOfStamps());
 		
 		collectionDao.addSeriesToUserCollection(collectionDto);
 		collectionDao.markAsModified(userId, new Date());
