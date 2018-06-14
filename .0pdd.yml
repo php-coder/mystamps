@@ -2,9 +2,6 @@
 # See for details: https://github.com/yegor256/0pdd
 errors:
   - slava.semushin+0pdd@gmail.com
-alerts:
-  suppress:
-  - on-scope
 tags:
   - techdebt
 format:
