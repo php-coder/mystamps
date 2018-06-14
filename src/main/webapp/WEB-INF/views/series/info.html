@@ -361,17 +361,17 @@
 											<span th:text="#{t_out_of_n_stamps(${series.quantity})}" th:remove="tag">out of 7 stamps</span>
 										</p>
 										<!--/*/
-										<p th:if="${#fields.hasErrors('quantity')}"
-											th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
-											<span id="quantity.errors"
+										<p th:if="${#fields.hasErrors('numberOfStamps')}"
+											th:classappend="${#fields.hasErrors('numberOfStamps') ? 'has-error' : ''}">
+											<span id="number-of-stamps.errors"
 												class="help-block"
-												th:each="error : ${#fields.errors('quantity')}"
+												th:each="error : ${#fields.errors('numberOfStamps')}"
 												th:text="${error}"></span>
 										</p>
 										/*/-->
 										<p>
 											<input type="hidden" name="action" value="ADD" />
-											<input type="hidden" name="quantity" value="1" th:if="${series.quantity == 1}" />
+											<input type="hidden" name="numberOfStamps" value="1" th:if="${series.quantity == 1}" />
 											<input id="series-success" type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
 										</p>
 									</form>

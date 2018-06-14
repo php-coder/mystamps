@@ -11,13 +11,13 @@ Add a series without required field
 	[Documentation]         Verify validation of required fields
 	Input Text              id=number-of-stamps  ${EMPTY}
 	Submit Form             id=add-series-form
-	Element Text Should Be  id=quantity.errors   Value must not be empty
+	Element Text Should Be  id=number-of-stamps.errors  Value must not be empty
 
 Add a series with too few number of stamps
 	[Documentation]         Verify validation of the minimal number of stamps
 	Input Text              id=number-of-stamps  0
 	Submit Form             id=add-series-form
-	Element Text Should Be  id=quantity.errors   Value must be greater than or equal to 1
+	Element Text Should Be  id=number-of-stamps.errors  Value must be greater than or equal to 1
 
 *** Keywords ***
 Before Test Suite
