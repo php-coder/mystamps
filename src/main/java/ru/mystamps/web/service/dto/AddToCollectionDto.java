@@ -17,6 +17,12 @@
  */
 package ru.mystamps.web.service.dto;
 
+import java.math.BigDecimal;
+
+import ru.mystamps.web.dao.dto.Currency;
+
 public interface AddToCollectionDto {
 	Integer getNumberOfStamps();
+	BigDecimal getPrice();
+	Currency getCurrency();
 }

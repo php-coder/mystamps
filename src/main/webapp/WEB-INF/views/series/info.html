@@ -369,6 +369,35 @@
 												th:text="${error}"></span>
 										</p>
 										/*/-->
+										<p th:with="price_msg=#{t_price}">
+											<span th:text="#{t_i_bought_for}" th:remove="tag">I bought for</span>
+											<input id="paid-price"
+												type="text"
+												size="5"
+												placeholder="price"
+												th:placeholder="${#strings.unCapitalize(price_msg)}"
+												th:field="*{price}"
+												/>
+											<select id="paid-currency" th:field="*{currency}">
+												<option value=""></option>
+												<option value="USD">USD</option>
+												<option value="EUR">EUR</option>
+												<option value="RUB">RUB</option>
+												<option value="CZK">CZK</option>
+											</select>
+										</p>
+										<!--/*/
+										<p th:if="${#fields.hasErrors('price') or #fields.hasErrors('currency')}" th:classappend="has-error">
+											<span id="paid-price.errors"
+												class="help-block"
+												th:each="error : ${#fields.errors('price')}"
+												th:text="${error}"></span>
+											<span id="paid-currency.errors"
+												class="help-block"
+												th:each="error : ${#fields.errors('currency')}"
+												th:text="${error}"></span>
+										</p>
+										/*/-->
 										<p>
 											<input type="hidden" name="action" value="ADD" />
 											<input type="hidden" name="numberOfStamps" value="1" th:if="${series.quantity == 1}" />

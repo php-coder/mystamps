@@ -82,11 +82,24 @@ public class CollectionServiceImpl implements CollectionService {
 		collectionDto.setSeriesId(seriesId);
 		collectionDto.setNumberOfStamps(dto.getNumberOfStamps());
 		
+		if (dto.getPrice() != null) {
+			Validate.validState(
+				dto.getCurrency() != null,
+				"Currency must be non null when price is specified"
+			);
+			collectionDto.setPrice(dto.getPrice());
+			collectionDto.setCurrency(dto.getCurrency().toString());
+		}
+		
 		collectionDao.addSeriesToUserCollection(collectionDto);
 		collectionDao.markAsModified(userId, new Date());
 		
-		// TODO: it would be good to include number of stamps in series vs in collection
-		log.info("Series #{} has been added to collection of user #{}", seriesId, userId);
+		log.info(
+			"Series #{} ({}) has been added to collection of user #{}",
+			seriesId,
+			formatSeriesInfo(collectionDto),
+			userId
+		);
 	}
 	
 	@Override
@@ -143,6 +156,23 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(slug != null, "Collection slug must be non null");
 		
 		return collectionDao.findCollectionInfoBySlug(slug);
+	}
+	
+	private static String formatSeriesInfo(AddToCollectionDbDto collectionDto) {
+		StringBuilder sb = new StringBuilder();
+
+		// TODO: it would be good to include number of stamps in series vs in collection
+		sb.append("stamps=")
+			.append(collectionDto.getNumberOfStamps());
+
+		if (collectionDto.getPrice() != null) {
+			sb.append(", price=")
+				.append(collectionDto.getPrice())
+				.append(' ')
+				.append(collectionDto.getCurrency());
+		}
+
+		return sb.toString();
 	}
 	
 }

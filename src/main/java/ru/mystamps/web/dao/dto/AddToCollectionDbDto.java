@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.dao.dto;
 
+import java.math.BigDecimal;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +28,6 @@ public class AddToCollectionDbDto {
 	private Integer ownerId;
 	private Integer seriesId;
 	private Integer numberOfStamps;
+	private BigDecimal price;
+	private String currency;
 }

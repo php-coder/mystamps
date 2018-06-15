@@ -21,6 +21,7 @@
 - (functionality)  add support for specifying Solovyov catalog numbers
 - (functionality)  add support for specifying Zagorski catalog numbers
 - (functionality)  user may specify how many stamps from a series in his/her collection
+- (functionality)  user may specify a price that he/she paid for a series
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

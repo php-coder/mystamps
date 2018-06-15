@@ -17,12 +17,15 @@
  */
 package ru.mystamps.web.controller.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
 
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
@@ -30,6 +33,8 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 // @todo #477 Add to collection: integration test for invisible quantity for a series with 1 stamp
 // @todo #477 Add to collection: series quantity should be specified by default
 // @todo #477 Add to collection: add integration test for custom number of stamps
+// @todo #663 Add to collection: add integration test for specifying a price
+// @todo #663 Add a page with a list of series, their prices and total cost
 @Getter
 @Setter
 public class AddToCollectionForm implements AddToCollectionDto {
@@ -39,4 +44,9 @@ public class AddToCollectionForm implements AddToCollectionDto {
 	@Min(MIN_STAMPS_IN_SERIES)
 	private Integer numberOfStamps;
 	
+	// @todo #663 /series/{id}(price): must be greater than zero
+	private BigDecimal price;
+	
+	// @todo #663 /series/{id}(currency): must be required when price is specified
+	private Currency currency;
 }

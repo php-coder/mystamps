@@ -30,6 +30,7 @@ import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
+import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils
@@ -147,15 +148,31 @@ class CollectionServiceImplTest extends Specification {
 			thrown IllegalArgumentException
 	}
 	
+	def 'addToCollection() should throw exception when price is specified without currency'() {
+		given:
+			AddToCollectionForm dto = new AddToCollectionForm()
+			dto.setPrice(Random.price())
+			dto.setNumberOfStamps(Random.quantity())
+			dto.setCurrency(null)
+		when:
+			service.addToCollection(Random.userId(), Random.id(), dto)
+		then:
+			thrown IllegalStateException
+	}
+	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'addToCollection() should add series to collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()
 			Integer expectedSeriesId = Random.id()
 			Integer expectedNumberOfStamps = Random.quantity()
+			BigDecimal expectedPrice = Random.price()
+			Currency expectedCurrency = Random.currency()
 		and:
 			AddToCollectionForm form = new AddToCollectionForm()
 			form.setNumberOfStamps(expectedNumberOfStamps)
+			form.setPrice(expectedPrice)
+			form.setCurrency(expectedCurrency)
 		when:
 			service.addToCollection(expectedUserId, expectedSeriesId, form)
 		then:

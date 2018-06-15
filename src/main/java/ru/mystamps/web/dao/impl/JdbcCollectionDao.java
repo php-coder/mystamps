@@ -171,6 +171,8 @@ public class JdbcCollectionDao implements CollectionDao {
 		params.put("user_id", dto.getOwnerId());
 		params.put("series_id", dto.getSeriesId());
 		params.put("number_of_stamps", dto.getNumberOfStamps());
+		params.put("price", dto.getPrice());
+		params.put("currency", dto.getCurrency());
 		
 		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
 		
