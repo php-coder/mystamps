@@ -363,6 +363,8 @@ public final class TestObjects {
 	public static AddToCollectionDto createAddToCollectionDto() {
 		AddToCollectionForm dto = new AddToCollectionForm();
 		dto.setNumberOfStamps(Random.quantity());
+		dto.setPrice(Random.price());
+		dto.setCurrency(Random.currency());
 		return dto;
 	}
 	
