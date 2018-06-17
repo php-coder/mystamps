@@ -71,15 +71,15 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public void addToCollection(Integer userId, Integer seriesId, AddToCollectionDto dto) {
+	public void addToCollection(Integer userId, AddToCollectionDto dto) {
 		Validate.isTrue(userId != null, "User id must be non null");
-		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getNumberOfStamps() != null, "Number of stamps must be non null");
+		Validate.isTrue(dto.getSeriesId() != null, "Series id must be non null");
 		
 		AddToCollectionDbDto collectionDto = new AddToCollectionDbDto();
 		collectionDto.setOwnerId(userId);
-		collectionDto.setSeriesId(seriesId);
+		collectionDto.setSeriesId(dto.getSeriesId());
 		collectionDto.setNumberOfStamps(dto.getNumberOfStamps());
 		
 		if (dto.getPrice() != null) {
@@ -96,7 +96,7 @@ public class CollectionServiceImpl implements CollectionService {
 		
 		log.info(
 			"Series #{} ({}) has been added to collection of user #{}",
-			seriesId,
+			dto.getSeriesId(),
 			formatSeriesInfo(collectionDto),
 			userId
 		);

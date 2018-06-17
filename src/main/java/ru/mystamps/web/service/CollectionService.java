@@ -26,7 +26,7 @@ import ru.mystamps.web.service.dto.AddToCollectionDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
-	void addToCollection(Integer userId, Integer seriesId, AddToCollectionDto dto);
+	void addToCollection(Integer userId, AddToCollectionDto dto);
 	void removeFromCollection(Integer userId, Integer seriesId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();

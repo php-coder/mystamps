@@ -369,6 +369,7 @@ public final class TestObjects {
 		dto.setNumberOfStamps(Random.quantity());
 		dto.setPrice(Random.price());
 		dto.setCurrency(Random.currency());
+		dto.setSeriesId(Random.id());
 		return dto;
 	}
 	

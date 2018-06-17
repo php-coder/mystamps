@@ -119,21 +119,14 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'addToCollection() should throw exception when user id is null'() {
 		when:
-			service.addToCollection(null, Random.id(), TestObjects.createAddToCollectionDto())
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def 'addToCollection() should throw exception when series id is null'() {
-		when:
-			service.addToCollection(Random.userId(), null, TestObjects.createAddToCollectionDto())
+			service.addToCollection(null, TestObjects.createAddToCollectionDto())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def 'addToCollection() should throw exception when dto is null'() {
 		when:
-			service.addToCollection(Random.userId(), Random.id(), null)
+			service.addToCollection(Random.userId(), null)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -143,7 +136,17 @@ class CollectionServiceImplTest extends Specification {
 			AddToCollectionForm form = TestObjects.createAddToCollectionForm()
 			form.setNumberOfStamps(null)
 		when:
-			service.addToCollection(Random.userId(), Random.id(), form)
+			service.addToCollection(Random.userId(), form)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'addToCollection() should throw exception when series id is null'() {
+		given:
+			AddToCollectionForm form = TestObjects.createAddToCollectionForm()
+			form.setSeriesId(null)
+		when:
+			service.addToCollection(Random.userId(), form)
 		then:
 			thrown IllegalArgumentException
 	}
@@ -154,7 +157,7 @@ class CollectionServiceImplTest extends Specification {
 			form.setPrice(Random.price())
 			form.setCurrency(null)
 		when:
-			service.addToCollection(Random.userId(), Random.id(), form)
+			service.addToCollection(Random.userId(), form)
 		then:
 			thrown IllegalStateException
 	}
@@ -172,8 +175,9 @@ class CollectionServiceImplTest extends Specification {
 			form.setNumberOfStamps(expectedNumberOfStamps)
 			form.setPrice(expectedPrice)
 			form.setCurrency(expectedCurrency)
+			form.setSeriesId(expectedSeriesId)
 		when:
-			service.addToCollection(expectedUserId, expectedSeriesId, form)
+			service.addToCollection(expectedUserId, form)
 		then:
 			1 * collectionDao.addSeriesToUserCollection({ AddToCollectionDbDto dto ->
 				assert dto != null

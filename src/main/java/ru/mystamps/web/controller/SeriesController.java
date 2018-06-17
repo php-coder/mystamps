@@ -400,7 +400,7 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		collectionService.addToCollection(userId, seriesId, form);
+		collectionService.addToCollection(userId, form);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
