@@ -400,6 +400,7 @@
 										/*/-->
 										<p>
 											<input type="hidden" name="action" value="ADD" />
+											<input type="hidden" name="seriesId" value="1" th:value="${series.id}" />
 											<input type="hidden" name="numberOfStamps" value="1" th:if="${series.quantity == 1}" />
 											<input id="series-success" type="submit" class="btn btn-success" value="Add to collection" th:value="#{t_add_to_collection}" />
 										</p>

@@ -19,13 +19,20 @@ Add a series with too few number of stamps
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=number-of-stamps.errors  Value must be greater than or equal to 1
 
+Add a series with too many number of stamps
+	[Documentation]         Verify validation of the maximum number of stamps
+	Input Text              id=number-of-stamps  5
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=number-of-stamps.errors  Number of stamps must be less than or equal to a stamps quantity in the series
+
 *** Keywords ***
 Before Test Suite
 	[Documentation]                     Login as user and open series info page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
-	# We need a series with more than 1 stamp, so the number-of-stamps field won't be hidden
+	# We need a series with more than 1 stamp, so the number-of-stamps field won't be hidden.
+	# We also need a series with no more than 4 stamps, so the 5 stamps will lead to an error.
 	Go To                               ${SITE_URL}/series/2
 
 After Test Suite

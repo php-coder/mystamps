@@ -25,4 +25,5 @@ public interface AddToCollectionDto {
 	Integer getNumberOfStamps();
 	BigDecimal getPrice();
 	Currency getCurrency();
+	Integer getSeriesId();
 }

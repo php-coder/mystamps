@@ -48,4 +48,6 @@ public interface SeriesDao {
 	long countSeriesById(Integer seriesId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
+	
+	Integer findQuantityById(Integer seriesId);
 }

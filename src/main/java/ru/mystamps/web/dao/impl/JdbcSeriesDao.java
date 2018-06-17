@@ -105,6 +105,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.count_series_updated_since}")
 	private String countSeriesUpdatedSinceSql;
 	
+	@Value("${series.find_quantity_by_id}")
+	private String findQuantityByIdSql;
+	
 	@Override
 	public Integer add(AddSeriesDbDto series) {
 		Map<String, Object> params = new HashMap<>();
@@ -309,6 +312,19 @@ public class JdbcSeriesDao implements SeriesDao {
 			Collections.singletonMap("date", date),
 			Long.class
 		);
+	}
+	
+	@Override
+	public Integer findQuantityById(Integer seriesId) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findQuantityByIdSql,
+				Collections.singletonMap("series_id", seriesId),
+				Integer.class
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 }

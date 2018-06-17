@@ -373,6 +373,13 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (form.getSeriesId() == null || !form.getSeriesId().equals(seriesId)) {
+			// series id in the URL doesn't match id from a hidden field:
+			// looks like user has faked a hidden field to bypass the validation
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		
 		Integer userId = currentUserDetails.getUserId();
 		
 		if (result.hasErrors()) {

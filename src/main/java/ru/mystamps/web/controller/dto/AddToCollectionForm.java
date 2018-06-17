@@ -27,6 +27,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
+import ru.mystamps.web.support.beanvalidation.MaxNumberOfStamps;
 
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
@@ -37,9 +38,9 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 // @todo #663 Add a page with a list of series, their prices and total cost
 @Getter
 @Setter
+@MaxNumberOfStamps
 public class AddToCollectionForm implements AddToCollectionDto {
 	
-	// @todo #477 /series/{id}(quantity): add validation for max value
 	@NotNull
 	@Min(MIN_STAMPS_IN_SERIES)
 	private Integer numberOfStamps;
@@ -49,4 +50,10 @@ public class AddToCollectionForm implements AddToCollectionDto {
 	
 	// @todo #663 /series/{id}(currency): must be required when price is specified
 	private Currency currency;
+	
+	// In order to ensure that numberOfStamps <= series.quantity,
+	// @MaxNumberOfStamps need to have a series id. We hold series id in the
+	// hidden input and also validates in the controller that this id wasn't
+	// faked and represents an appropriate series.
+	private Integer seriesId;
 }

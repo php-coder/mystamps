@@ -41,6 +41,7 @@ public interface SeriesService {
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
 	boolean isSeriesExist(Integer seriesId);
+	Integer findQuantityById(Integer seriesId);
 	
 	SeriesDto findFullInfoById(Integer seriesId, String lang);
 	
