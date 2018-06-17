@@ -140,22 +140,21 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'addToCollection() should throw exception when number of stamps is null'() {
 		given:
-			AddToCollectionForm dto = new AddToCollectionForm()
-			dto.setNumberOfStamps(null)
+			AddToCollectionForm form = TestObjects.createAddToCollectionForm()
+			form.setNumberOfStamps(null)
 		when:
-			service.addToCollection(Random.userId(), Random.id(), dto)
+			service.addToCollection(Random.userId(), Random.id(), form)
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	def 'addToCollection() should throw exception when price is specified without currency'() {
 		given:
-			AddToCollectionForm dto = new AddToCollectionForm()
-			dto.setPrice(Random.price())
-			dto.setNumberOfStamps(Random.quantity())
-			dto.setCurrency(null)
+			AddToCollectionForm form = TestObjects.createAddToCollectionForm()
+			form.setPrice(Random.price())
+			form.setCurrency(null)
 		when:
-			service.addToCollection(Random.userId(), Random.id(), dto)
+			service.addToCollection(Random.userId(), Random.id(), form)
 		then:
 			thrown IllegalStateException
 	}
