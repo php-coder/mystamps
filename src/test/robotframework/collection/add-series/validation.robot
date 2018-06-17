@@ -23,7 +23,8 @@ Add a series with too many number of stamps
 	[Documentation]         Verify validation of the maximum number of stamps
 	Input Text              id=number-of-stamps  5
 	Submit Form             id=add-series-form
-	Element Text Should Be  id=number-of-stamps.errors  Number of stamps must be less than or equal to a stamps quantity in the series
+	${msg}=                 Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
+	Element Text Should Be  id=number-of-stamps.errors  ${msg}
 
 *** Keywords ***
 Before Test Suite
