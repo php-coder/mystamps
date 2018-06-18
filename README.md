@@ -28,7 +28,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run a lo
 * clone this project
 * from the console inside the directory with source code, execute the command `mvn spring-boot:run`
 * open up `http://127.0.0.1:8080` in a browser
-* browse the site or log in as one of the pre-created users: `admin` / `test` or `coder` / `test`
+* browse the site or log in as one of the pre-created users: `admin`, `paid`, or `coder` with password `test`
 * press `Ctrl-C` to stop the server
 
 **Caution!** The purpose of that version is a preview of the site and its capabilities. Because of that, the **changes** that you can make on the site **will be lost after stopping the server**!

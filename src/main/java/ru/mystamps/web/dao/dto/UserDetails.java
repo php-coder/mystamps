@@ -33,11 +33,15 @@ public class UserDetails {
 	private final String collectionSlug;
 	
 	public enum Role {
-		USER, ADMIN
+		USER, ADMIN, PAID
 	};
 	
 	public boolean isAdmin() {
 		return role == Role.ADMIN;
+	}
+	
+	public boolean isPaidUser() {
+		return role == Role.PAID;
 	}
 	
 }
