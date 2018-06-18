@@ -689,6 +689,30 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findQuantityById()
+	//
+	
+	def 'findQuantityById() should throw exception when series id is null'() {
+		when:
+			service.findQuantityById(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'findQuantityById() should invoke dao, pass argument and return result from dao'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+		and:
+			Integer expectedResult = nullOr(positiveInteger())
+		when:
+			Integer result = service.findQuantityById(expectedSeriesId)
+		then:
+			1 * seriesDao.findQuantityById(expectedSeriesId) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findFullInfoById()
 	//
 	

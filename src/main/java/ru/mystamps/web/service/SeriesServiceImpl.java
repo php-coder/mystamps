@@ -217,7 +217,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.countSeriesById(seriesId) > 0;
 	}
 	
-	// @todo #875 SeriesService.findQuantityById(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	public Integer findQuantityById(Integer seriesId) {
