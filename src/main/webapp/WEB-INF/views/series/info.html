@@ -369,7 +369,9 @@
 												th:text="${error}"></span>
 										</p>
 										/*/-->
-										<p th:with="price_msg=#{t_price}">
+										<p th:with="price_msg=#{t_price},paidUser=${#authorization.expression('hasAuthority(''ADD_SERIES_PRICE'')')}"
+											th:attrappend="title=${paidUser ? null : '__#{t_only_for_paid_users}__'}">
+											
 											<span th:text="#{t_i_bought_for}" th:remove="tag">I bought for</span>
 											<input id="paid-price"
 												type="text"
@@ -377,8 +379,11 @@
 												placeholder="price"
 												th:placeholder="${#strings.unCapitalize(price_msg)}"
 												th:field="*{price}"
+												th:disabled="${paidUser ? null : 'disabled'}"
 												/>
-											<select id="paid-currency" th:field="*{currency}">
+											<select id="paid-currency"
+												th:field="*{currency}"
+												th:disabled="${paidUser ? null : 'disabled'}">
 												<option value=""></option>
 												<option value="USD">USD</option>
 												<option value="EUR">EUR</option>

@@ -26,6 +26,7 @@ public final class Authority {
 	public static final GrantedAuthority ADD_COMMENTS_TO_SERIES = new SimpleGrantedAuthority(StringAuthority.ADD_COMMENTS_TO_SERIES);
 	public static final GrantedAuthority ADD_IMAGES_TO_SERIES   = new SimpleGrantedAuthority(StringAuthority.ADD_IMAGES_TO_SERIES);
 	public static final GrantedAuthority ADD_PARTICIPANT        = new SimpleGrantedAuthority(StringAuthority.ADD_PARTICIPANT);
+	public static final GrantedAuthority ADD_SERIES_PRICE       = new SimpleGrantedAuthority(StringAuthority.ADD_SERIES_PRICE);
 	public static final GrantedAuthority ADD_SERIES_SALES       = new SimpleGrantedAuthority(StringAuthority.ADD_SERIES_SALES);
 	public static final GrantedAuthority CREATE_CATEGORY        = new SimpleGrantedAuthority(StringAuthority.CREATE_CATEGORY);
 	public static final GrantedAuthority CREATE_COUNTRY         = new SimpleGrantedAuthority(StringAuthority.CREATE_COUNTRY);

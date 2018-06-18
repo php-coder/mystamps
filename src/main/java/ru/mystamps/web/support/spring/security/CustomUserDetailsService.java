@@ -79,6 +79,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
 			authorities.add(Authority.ADD_PARTICIPANT);
+			authorities.add(Authority.ADD_SERIES_PRICE);
 			authorities.add(Authority.ADD_SERIES_SALES);
 			authorities.add(Authority.DOWNLOAD_IMAGE);
 			authorities.add(Authority.IMPORT_SERIES);
@@ -86,6 +87,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.VIEW_DAILY_STATS);
 			authorities.add(Authority.VIEW_SERIES_SALES);
 			authorities.add(Authority.VIEW_SITE_EVENTS);
+		
+		} else if (userDetails.isPaidUser()) {
+			authorities.add(Authority.ADD_SERIES_PRICE);
 		}
 		
 		return authorities;

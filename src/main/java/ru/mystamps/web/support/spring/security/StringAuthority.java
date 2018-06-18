@@ -22,6 +22,7 @@ public final class StringAuthority {
 	public static final String ADD_COMMENTS_TO_SERIES = "ADD_COMMENTS_TO_SERIES";
 	public static final String ADD_IMAGES_TO_SERIES   = "ADD_IMAGES_TO_SERIES";
 	public static final String ADD_PARTICIPANT        = "ADD_PARTICIPANT";
+	public static final String ADD_SERIES_PRICE       = "ADD_SERIES_PRICE";
 	public static final String ADD_SERIES_SALES       = "ADD_SERIES_SALES";
 	public static final String CREATE_CATEGORY        = "CREATE_CATEGORY";
 	public static final String CREATE_COUNTRY         = "CREATE_COUNTRY";
