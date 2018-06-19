@@ -57,7 +57,7 @@ public final class Url {
 	public static final String REQUEST_IMPORT_PAGE        = "/series/import/request/{id}";
 	public static final String LIST_IMPORT_REQUESTS_PAGE  = "/series/import/requests";
 	
-	public static final String SUGGEST_SERIES_COUNTRY	= "/suggest/series_country";
+	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
 	public static final String GET_CATEGORIES_PAGE   = "/categories";
