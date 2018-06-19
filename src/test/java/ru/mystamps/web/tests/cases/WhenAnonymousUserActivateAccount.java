@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +28,6 @@ import org.testng.annotations.Test;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.LOGIN_MIN_LENGTH;
@@ -45,9 +42,6 @@ public class WhenAnonymousUserActivateAccount
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;
-	
-	@Value("${not_activated_user2_act_key}")
-	private String secondNotActivatedUserActKey;
 	
 	public WhenAnonymousUserActivateAccount() {
 		super(ActivateAccountPage.class);
@@ -278,21 +272,6 @@ public class WhenAnonymousUserActivateAccount
 		assertThat(page)
 			.field("activationKey")
 			.hasError(tr("ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message"));
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void activationShouldPassWhenUserProvidedEmptyName() {
-		page.activateAccount(
-			"2nd-test-login",
-			"",
-			"test-password",
-			"test-password",
-			secondNotActivatedUserActKey
-		);
-		
-		assertThat(page.getCurrentUrl()).isEqualTo(Url.AUTHENTICATION_PAGE);
-		
-		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 	}
 	
 	@DataProvider(name = "validNames")
