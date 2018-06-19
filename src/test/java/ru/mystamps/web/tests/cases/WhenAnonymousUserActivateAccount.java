@@ -46,9 +46,6 @@ public class WhenAnonymousUserActivateAccount
 	@Value("${valid_user_login}")
 	private String validUserLogin;
 	
-	@Value("${not_activated_user1_act_key}")
-	private String firstNotActivatedUserActKey;
-	
 	@Value("${not_activated_user2_act_key}")
 	private String secondNotActivatedUserActKey;
 	
@@ -281,21 +278,6 @@ public class WhenAnonymousUserActivateAccount
 		assertThat(page)
 			.field("activationKey")
 			.hasError(tr("ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message"));
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
-	public void afterActivationShouldExistsMessageWithLinkForAuthentication() {
-		page.activateAccount(
-			"1st-test-login",
-			"Test Suite",
-			"test-password",
-			"test-password",
-			firstNotActivatedUserActKey
-		);
-		
-		assertThat(page.getCurrentUrl()).isEqualTo(Url.AUTHENTICATION_PAGE);
-		
-		assertThat(page.textPresent(stripHtmlTags(tr("t_activation_successful")))).isTrue();
 	}
 	
 	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "valid", "misc" })
