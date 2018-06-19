@@ -67,15 +67,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginAndPasswordShouldBeDifferent() {
-		page.activateAccount("admin", null, "admin", null, null);
-		
-		assertThat(page)
-			.field("password")
-			.hasError(tr("password.login.match"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void passwordAndConfirmationShouldMatch() {
 		page.activateAccount(null, null, "password123", "password321", null);
 		
