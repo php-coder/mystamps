@@ -81,7 +81,12 @@
 							</div>
 						</div>
 						
-						<form method="post" class="form-horizontal" action="auth.html" th:action="@{${ACTIVATE_ACCOUNT_PAGE}}" th:object="${activateAccountForm}">
+						<form id="activate-account-form"
+							method="post"
+							class="form-horizontal"
+							action="auth.html"
+							th:action="@{${ACTIVATE_ACCOUNT_PAGE}}"
+							th:object="${activateAccountForm}">
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('login') ? 'has-error' : ''}">
 								<label for="login" class="control-label col-sm-3">

@@ -73,7 +73,7 @@ public class ActivateAccountPage extends AbstractPageWithForm {
 	}
 	
 	public boolean activationFormExists() {
-		return elementWithIdExists("activateAccountForm");
+		return elementWithIdExists("activate-account-form");
 	}
 	
 	private void fillLogin(String login) {
