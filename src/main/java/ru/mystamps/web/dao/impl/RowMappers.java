@@ -109,6 +109,32 @@ final class RowMappers {
 		);
 	}
 	
+	public static SeriesInCollectionWithPriceDto forSeriesInCollectionWithPriceDto(
+		ResultSet rs,
+		int unused)
+		throws SQLException {
+
+		Integer id             = rs.getInt("id");
+		Integer releaseYear    = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity       = rs.getInt("quantity");
+		Boolean perforated     = rs.getBoolean("perforated");
+		Integer numberOfStamps = rs.getInt("number_of_stamps");
+		String country         = rs.getString("country_name");
+		BigDecimal price       = rs.getBigDecimal("price");
+		Currency currency      = JdbcUtils.getCurrency(rs, "currency");
+		
+		return new SeriesInCollectionWithPriceDto(
+			id,
+			releaseYear,
+			quantity,
+			numberOfStamps,
+			perforated,
+			country,
+			price,
+			currency
+		);
+	}
+	
 	/**
 	 * @author Sergey Chechenev
 	 */

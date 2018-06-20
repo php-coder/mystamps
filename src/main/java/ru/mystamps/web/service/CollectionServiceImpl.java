@@ -36,6 +36,7 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
@@ -148,6 +149,20 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
 		return collectionDao.findLastCreated(quantity);
+	}
+	
+	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): add unit tests
+	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): restrict access by only an owner
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.ADD_SERIES_PRICE)
+	public List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(
+		String slug,
+		String lang) {
+		
+		Validate.isTrue(slug != null, "Collection slug must be non null");
+		
+		return collectionDao.findSeriesWithPricesBySlug(slug, lang);
 	}
 	
 	@Override

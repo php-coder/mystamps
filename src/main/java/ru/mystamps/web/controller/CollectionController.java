@@ -37,6 +37,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
@@ -53,6 +54,7 @@ public class CollectionController {
 	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
+	// @todo #884 /collection/{slug}: add a link to collection estimation page
 	@GetMapping(Url.INFO_COLLECTION_PAGE)
 	public String showInfoBySlug(
 		@PathVariable("slug") String slug,
@@ -100,6 +102,38 @@ public class CollectionController {
 		}
 		
 		return "collection/info";
+	}
+	
+	// @todo #884 Add integration tests for collection estimation page
+	@GetMapping(Url.ESTIMATION_COLLECTION_PAGE)
+	public String showPrices(
+		@PathVariable("slug") String slug,
+		Model model,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (slug == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		// TODO: we need only ownerName, without id and slug
+		CollectionInfoDto collection = collectionService.findBySlug(slug);
+		if (collection == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		String owner = collection.getOwnerName();
+		model.addAttribute("ownerName", owner);
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		List<SeriesInCollectionWithPriceDto> seriesOfCollection =
+			collectionService.findSeriesWithPricesBySlug(slug, lang);
+		model.addAttribute("seriesOfCollection", seriesOfCollection);
+		
+		return "collection/estimation";
 	}
 
 	@GetMapping(Url.INFO_COLLECTION_BY_ID_PAGE)

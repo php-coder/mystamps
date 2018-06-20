@@ -22,6 +22,7 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
 
 public interface CollectionService {
@@ -32,5 +33,6 @@ public interface CollectionService {
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
+	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
 	CollectionInfoDto findBySlug(String slug);
 }

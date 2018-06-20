@@ -35,7 +35,6 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 // @todo #477 Add to collection: series quantity should be specified by default
 // @todo #477 Add to collection: add integration test for custom number of stamps
 // @todo #663 Add to collection: add integration test for specifying a price
-// @todo #663 Add a page with a list of series, their prices and total cost
 @Getter
 @Setter
 @MaxNumberOfStamps

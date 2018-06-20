@@ -42,6 +42,7 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -52,6 +53,9 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@Value("${collection.find_last_created}")
 	private String findLastCreatedCollectionsSql;
+	
+	@Value("${collection.find_series_with_prices_by_slug}")
+	private String findSeriesWithPricesBySlugSql;
 	
 	@Value("${collection.count_collections_of_users}")
 	private String countCollectionsOfUsersSql;
@@ -83,6 +87,22 @@ public class JdbcCollectionDao implements CollectionDao {
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
 			RowMappers::forLinkEntityDto
+		);
+	}
+	
+	@Override
+	public List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(
+		String slug,
+		String lang) {
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("slug", slug);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(
+			findSeriesWithPricesBySlugSql,
+			params,
+			RowMappers::forSeriesInCollectionWithPriceDto
 		);
 	}
 	

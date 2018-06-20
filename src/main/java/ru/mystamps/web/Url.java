@@ -67,7 +67,8 @@ public final class Url {
 	public static final String GET_COUNTRIES_PAGE    = "/countries";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{slug}";
 	
-	public static final String INFO_COLLECTION_PAGE  = "/collection/{slug}";
+	public static final String INFO_COLLECTION_PAGE       = "/collection/{slug}";
+	public static final String ESTIMATION_COLLECTION_PAGE = "/collection/{slug}/estimation";
 	
 	public static final String GET_IMAGE_PAGE         = "/image/{id}";
 	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
@@ -145,6 +146,7 @@ public final class Url {
 		map.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
+		map.put("ESTIMATION_COLLECTION_PAGE", ESTIMATION_COLLECTION_PAGE);
 		map.put("GET_CATEGORIES_PAGE", GET_CATEGORIES_PAGE);
 		map.put("GET_COUNTRIES_PAGE", GET_COUNTRIES_PAGE);
 		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);

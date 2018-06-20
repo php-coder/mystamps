@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="robots" content="noindex" />
+		<title th:text="|#{t_my_stamps}: #{t_collection_of(${ownerName})}|">My stamps: John Doe's collection</title>
+		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
+		<link rel="stylesheet" href="https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
+		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row" id="header">
+				<div id="logo" class="col-sm-9 vcenter">
+					<a href="../site/index.html" th:href="'/'" th:text="#{t_my_stamps}">My stamps</a>
+				</div><!--
+				
+				--><div class="col-sm-1 vcenter"
+						th:with="lang=${#locale.language == 'en' ? 'ru' : 'en'},langName=${#locale.language == 'en' ? 'Русский' : 'English'}">
+					<span class="lang-xs" lang="ru"
+						th:lang="${lang}"></span>
+					<a href="javascript:void(0)" hreflang="ru"
+						th:href="|?lang=${lang}|" th:hreflang="${lang}" th:text="${langName}">Русский</a>
+				</div><!--
+				
+				--><div id="user_bar" class="col-sm-2 vcenter">
+					<ul class="list-unstyled">
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<i class="glyphicon glyphicon-user"></i>
+							<a sec:authentication="principal.userName"
+								href="../collection/info.html"
+								title="Open my collection"
+								th:title="#{t_open_my_collection}"
+								th:href="@{${INFO_COLLECTION_PAGE}(slug=${#authentication.principal.userCollectionSlug})}">
+								John Doe
+							</a>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
+						</li>
+						<!--/*/
+						<li sec:authorize="isAuthenticated()">
+							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
+								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
+							</form>
+						</li>
+						/*/-->
+						<li sec:authorize="isAnonymous()">
+							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-5 col-sm-offset-3">
+					
+					<h3 class="text-center" th:text="#{t_collection_of(${ownerName})}">
+						John Doe's collection
+					</h3>
+					
+					<!--/*/
+					<p class="text-center" th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
+						In this collection is no stamps
+					</p>
+					/*/-->
+					
+					<table class="table table-hover" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+						<thead>
+							<tr class="active">
+								<th th:text="#{t_series}">Series</th>
+								<th th:text="#{t_you_paid}">You paid</th>
+							</tr>
+						</thead>
+						<tbody th:remove="all-but-first">
+							<tr th:each="series : ${seriesOfCollection}">
+								<td>
+									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<span th:remove="tag" th:if="${series.countryName != null}" th:text="|${series.countryName}, |">Italy, </span>
+										<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>
+										<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">7&nbsp;item(s)</span>
+										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+									</a>
+									<!--/*/
+									<span class="label label-default"
+										th:if="${series.quantity != series.numberOfStamps}"
+										th:text="#{t_m_out_of_n(${series.numberOfStamps}, ${series.quantity})}"></span>
+									/*/-->
+								</td>
+								<td>
+									<span th:remove="tag" th:if="${series.price != null}" th:text="|${series.price} ${series.currency}|">
+										7 EUR
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="../series/info.html">Italy, 22&nbsp;item(s)</a>
+									<span class="label label-default">20 out of 22</span>
+								</td>
+								<td>14.4 RUB</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="../series/info.html">Italy, 1983, 5&nbsp;item(s)</a>
+								</td>
+								<td>2 USD</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<!--/*/
+							@todo #884 /collection/{slug}/estimation: optimize summing of prices
+							/*/-->
+							<tr class="info" th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])}">
+								<th th:text="|#{t_total}:|">Total:</th>
+								<th>
+									<span th:text="|${totalRub} RUB|" th:if="${totalRub != null}" th:remove="tag">14.4 RUB</span>
+									<br th:if="${totalUsd != null and totalRub != null}" />
+									<span th:text="|${totalUsd} USD|" th:if="${totalUsd != null}" th:remove="tag">2 USD</span>
+									<br th:if="${totalEur != null and (totalRub != null or totalUsd != null)}" />
+									<span th:text="|${totalEur} EUR|" th:if="${totalEur != null}" th:remove="tag">7 EUR</span>
+								</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<footer class="col-sm-12 text-right">
+					<i class="glyphicon glyphicon-envelope"></i>
+					<a href="mailto:slava.semushin@gmail.com" title="Write e-mail" th:href="|mailto:#{t_site_author_email}|" th:title="#{t_write_email}" th:text="#{t_site_author_name}">Slava Semushin</a>, 2009-2018
+				</footer>
+			</div>
+		</div>
+		
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
+	</body>
+</html>
