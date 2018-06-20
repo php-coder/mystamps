@@ -147,6 +147,8 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--ignore TooManyTestSteps \
 			--ignore TooFewKeywordSteps \
 			--ignore TooManyTestCases \
+			--ignore RequireTestDocumentation \
+			--ignore RequireKeywordDocumentation \
 			--configure LineTooLong:130 \
 			src/test/robotframework \
 			>rflint.log 2>&1 || RFLINT_STATUS=fail
