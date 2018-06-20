@@ -8,7 +8,6 @@ Force Tags       series  sales  misc
 
 *** Test Cases ***
 Url should be stripped from leading and trailing spaces
-	[Documentation]  Verify removing of leading and trailing spaces from a URL
 	Input Text       id=url  ${SPACE * 2}bad-value${SPACE * 2}
 	Submit Form      id=add-series-sales-form
 	# We can't use "Textfield Value Should Be" because it causes NPE:
@@ -18,13 +17,11 @@ Url should be stripped from leading and trailing spaces
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Login as admin and open a page with series
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/1
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser

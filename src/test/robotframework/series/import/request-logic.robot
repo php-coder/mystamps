@@ -125,7 +125,6 @@ Import series and series sale with a new seller from an external site
 	Element Should Be Disabled  id=seller-url
 
 Submit a request that will fail to download a file
-	[Documentation]         Verify submitting a URL with a non-existing file
 	Input Text              id=url  ${SITE_URL}/test/invalid/response-404
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=request-status  DownloadingFailed
@@ -138,17 +137,14 @@ Submit a request with a document that couldn't be parsed
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browser, register fail hook and login as admin
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 
 Before Test
-	[Documentation]  Open a page for requesting a series import
-	Go To            ${SITE_URL}/series/import/request
+	Go To  ${SITE_URL}/series/import/request
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
 

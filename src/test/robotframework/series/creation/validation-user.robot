@@ -8,7 +8,6 @@ Force Tags       series  validation
 
 *** Test Cases ***
 Create series with empty required fields
-	[Documentation]                  Verify validation of mandatory fields
 	Submit Form                      id=add-series-form
 	Element Text Should Be           id=category.errors  Value must not be empty
 	Element Text Should Be           id=quantity.errors  Value must not be empty
@@ -17,13 +16,11 @@ Create series with empty required fields
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Login as a user and go to create series page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser

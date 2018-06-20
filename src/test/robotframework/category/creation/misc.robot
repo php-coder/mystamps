@@ -8,7 +8,6 @@ Force Tags       category  misc
 
 *** Test Cases ***
 Category name should be stripped from leading and trailing spaces
-	[Documentation]            Verify removing of leading and trailing spaces from name
 	Input Text                 id=name  ${SPACE * 2}t3st${SPACE * 2}
 	Input Text                 id=nameRu  ${SPACE * 2}т3ст${SPACE * 2}
 	Submit Form                id=add-category-form
@@ -16,7 +15,6 @@ Category name should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id=nameRu  т3ст
 
 Category name should be modified by replacing multiple spaces by one
-	[Documentation]            Verify replacing of repeating spaces from name
 	Input Text                 id=name  t3${SPACE * 2}st
 	Input Text                 id=nameRu  т3${SPACE * 2}ст
 	Submit Form                id=add-category-form
@@ -24,7 +22,6 @@ Category name should be modified by replacing multiple spaces by one
 	Textfield Value Should Be  id=nameRu  т3 ст
 
 Category name in English should accept all allowed characters
-	[Documentation]                  Verify that various characters in name are allowed
 	Input Text                       id=name  Valid-Name Category
 	# we also type invalid name in Russian to stay on this page
 	Input Text                       id=nameRu  1
@@ -32,7 +29,6 @@ Category name in English should accept all allowed characters
 	Page Should Not Contain Element  id=name.errors
 
 Category name in Russian should accept all allowed characters
-	[Documentation]                  Verify that various characters in name are allowed
 	Input Text                       id=nameRu  Категория Ёё
 	# we also type invalid name in English to stay on this page
 	Input Text                       id=name  1
@@ -41,13 +37,11 @@ Category name in Russian should accept all allowed characters
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Login as admin and go to create category page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/category/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser

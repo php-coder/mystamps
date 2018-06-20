@@ -9,7 +9,6 @@ Force Tags       series  logic
 
 *** Test Cases ***
 Create series by filling only required fields and providing an image
-	[Documentation]            Verify creation of series by filling only mandatory fields (with image)
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
@@ -22,7 +21,6 @@ Create series by filling only required fields and providing an image
 	Page Should Contain Image  id=series-image-1
 
 Create series by filling only required fields and providing a URL to image
-	[Documentation]            Verify creation of series by filling only mandatory fields (with an image URL)
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  1
 	Input Text                 id=image-url  ${SITE_URL}/image/1
@@ -35,7 +33,6 @@ Create series by filling only required fields and providing a URL to image
 	Page Should Contain Image  id=series-image-1
 
 Create series by filling all fields
-	[Documentation]            Verify creation of series by filling all fields
 	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
 	Select Country             Italy
@@ -81,17 +78,14 @@ Create series by filling all fields
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browser, register fail hook and login as admin
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 
 Before Test
-	[Documentation]  Open create series page
-	Go To            ${SITE_URL}/series/add
+	Go To  ${SITE_URL}/series/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
 

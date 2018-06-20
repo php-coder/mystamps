@@ -8,8 +8,7 @@ Test Setup       Before Test
 Force Tags       country  logic
 
 *** Test Cases ***
-Create country with name in English
-	[Documentation]                   Verify creation of country by filling only mandatory fields
+Create country with name in English (fill only mandatory fields)
 	[Tags]                            unstable
 	Input Text                        id=name  Germany
 	Submit Form                       id=add-country-form
@@ -20,7 +19,6 @@ Create country with name in English
 	Country Field Should Have Option  Germany
 
 Create country with name in English and Russian
-	[Documentation]         Verify creation of country by specifying names in 2 languages
 	Input Text              id=name    Czechia
 	Input Text              id=nameRu  Чехия
 	Submit Form             id=add-country-form
@@ -31,17 +29,14 @@ Create country with name in English and Russian
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browser, register fail hook and login as admin
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 
 Before Test
-	[Documentation]  Open create country page
-	Go To            ${SITE_URL}/country/add
+	Go To  ${SITE_URL}/country/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
 

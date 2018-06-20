@@ -7,8 +7,7 @@ Test Setup      Before Test
 Force Tags      account  activation  logic
 
 *** Test Cases ***
-Activate account with full info
-	[Documentation]         Verify account activation by filling all fields
+Activate account with full info (fill all fields)
 	Input Text              id=login                 1st-test-login
 	Input Text              id=name                  Test Suite
 	Input Text              id=password              test-password
@@ -18,8 +17,7 @@ Activate account with full info
 	Location Should Be      ${SITE_URL}/account/auth
 	Element Text Should Be  id=msg-success           Account successfully activated! Now you can pass authentication.
 
-Activate account with only required info
-	[Documentation]         Verify account activation by filling only mandatory fields
+Activate account with only required info (fill only mandatory fields)
 	Input Text              id=login                 2nd-test-login
 	Input Text              id=name                  ${EMPTY}
 	Input Text              id=password              test-password
@@ -31,14 +29,11 @@ Activate account with only required info
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browser and register fail hook
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
 Before Test
-	[Documentation]  Open activate account page
-	Go To            ${SITE_URL}/account/activate
+	Go To  ${SITE_URL}/account/activate
 
 After Test Suite
-	[Documentation]  Close browser
 	Close Browser

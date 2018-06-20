@@ -9,8 +9,7 @@ Test Setup       Before Test
 Force Tags       participant  logic
 
 *** Test Cases ***
-Create participant with name only
-	[Documentation]                Verify creation of participant by filling only mandatory fields
+Create participant with name only (fill only mandatory fields)
 	Input Text                     id=name  participant1
 	Select Checkbox                id=seller
 	Submit Form                    id=add-participant-form
@@ -21,8 +20,7 @@ Create participant with name only
 	List Should Contain Value      ${availableSellers}  participant1
 	List Should Not Contain Value  ${availableBuyers}   participant1
 
-Create participant by filling all fields
-	[Documentation]            Verify creation of participant by filling all fields
+Create participant with full info (fill all fields)
 	Input Text                 id=name  participant2
 	Select From List By Label  id=group  Movies characters
 	Select Checkbox            id=buyer
@@ -39,16 +37,13 @@ Create participant by filling all fields
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Open browser, register fail hook and login as admin
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 
 Before Test
-	[Documentation]  Open add participant page
-	Go To            ${SITE_URL}/participant/add
+	Go To  ${SITE_URL}/participant/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser

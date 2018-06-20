@@ -9,16 +9,14 @@ Force Tags       series  misc
 
 *** Test Cases ***
 Catalog numbers should accept valid values
-	[Documentation]  Verify that fields with catalog numbers accept valid values
-	[Tags]           unstable
-	[Template]       Valid Catalog Numbers Should Be Accepted
+	[Tags]      unstable
+	[Template]  Valid Catalog Numbers Should Be Accepted
 	7
 	7,8
 	71, 81, 91
 	1000
 
 Catalog numbers should be stripped from leading and trailing spaces
-	[Documentation]            Verify removing of leading and trailing spaces from catalog numbers
 	[Tags]                     unstable
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    ${SPACE * 2}1 , 2${SPACE * 2}
@@ -36,7 +34,6 @@ Catalog numbers should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id=zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
-	[Documentation]            Verify that fields with catalog numbers ignore duplicate values
 	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
@@ -57,7 +54,6 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id=zagorski_catalog_info  \#154, 155
 
 Catalog numbers should accept existing numbers
-	[Documentation]            Verify that existing catalog numbers are being accepted
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
@@ -78,7 +74,6 @@ Catalog numbers should accept existing numbers
 	Element Text Should Be     id=zagorski_catalog_info  \#83
 
 Issue year should have options for range from 1840 to the current year
-	[Documentation]              Verify that field with year provides all valid values
 	Go To                        ${SITE_URL}/series/add
 	Click Element                id=specify-issue-date-link
 	${availableYears}=           Get List Items  id=year
@@ -91,7 +86,6 @@ Issue year should have options for range from 1840 to the current year
 	Should Be Equal As Integers  ${numberOfYears}  ${expectedNumberOfYears}
 
 Comment should be stripped from leading and trailing spaces
-	[Documentation]           Verify removing of leading and trailing spaces from a comment
 	Click Element             id=add-comment-link
 	Input Text                id=comment  ${SPACE * 2}example comment${SPACE * 2}
 	Submit Form               id=add-series-form
@@ -99,19 +93,16 @@ Comment should be stripped from leading and trailing spaces
 
 *** Keywords ***
 Before Test Suite
-	[Documentation]                     Login as admin and go to create series page
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
 
 After Test Suite
-	[Documentation]  Log out and close browser
 	Log Out
 	Close Browser
 
 Valid Catalog Numbers Should Be Accepted
-	[Documentation]                  Test that specifying catalog numbers don't cause an error
 	[Arguments]                      ${catalogNumbers}
 	Click Element                    id=add-catalog-numbers-link
 	Input Text                       id=michelNumbers  ${catalogNumbers}
