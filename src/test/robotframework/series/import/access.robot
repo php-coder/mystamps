@@ -16,7 +16,7 @@ Anonymous user cannot access the status of the series import
 	Element Text Should Be  id=error-code  403
 	Element Text Should Be  id=error-msg   Forbidden
 
-Anonymous user cannot see a lise of import requests
+Anonymous user cannot see a list of import requests
 	Go To                   ${SITE_URL}/series/import/requests
 	Element Text Should Be  id=error-code  403
 	Element Text Should Be  id=error-msg   Forbidden
