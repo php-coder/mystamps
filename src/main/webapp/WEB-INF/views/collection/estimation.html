@@ -115,9 +115,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<!--/*/
-							@todo #884 /collection/{slug}/estimation: optimize summing of prices
-							/*/-->
+							<!--/* @todo #884 /collection/{slug}/estimation: optimize summing of prices */-->
 							<tr class="info" th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])}">
 								<th th:text="|#{t_total}:|">Total:</th>
 								<th>
