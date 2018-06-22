@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
@@ -33,7 +34,7 @@ public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	List<SitemapInfoDto> findAllForSitemap();
-	List<SeriesInfoDto> findLastAdded(int quantity, String lang);
+	List<SeriesLinkDto> findLastAdded(int quantity, String lang);
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategorySlugAsSeriesInfo(String slug, String lang);

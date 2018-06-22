@@ -53,6 +53,16 @@ final class RowMappers {
 		);
 	}
 	
+	public static SeriesLinkDto forSeriesLinkDto(ResultSet rs, int unused) throws SQLException {
+		Integer id         = rs.getInt("id");
+		Integer year       = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity   = rs.getInt("quantity");
+		Boolean perforated = rs.getBoolean("perforated");
+		String country     = rs.getString("country_name");
+		
+		return new SeriesLinkDto(id, year, quantity, perforated, country);
+	}
+	
 	public static SeriesInfoDto forSeriesInfoDto(ResultSet rs, int unused) throws SQLException {
 		Integer seriesId     = rs.getInt("id");
 		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");

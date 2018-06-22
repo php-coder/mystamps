@@ -40,6 +40,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
@@ -179,12 +180,12 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public List<SeriesInfoDto> findLastAdded(int quantity, String lang) {
+	public List<SeriesLinkDto> findLastAdded(int quantity, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("quantity", quantity);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesInfoDto);
+		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesLinkDto);
 	}
 	
 	@Override

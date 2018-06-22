@@ -23,6 +23,7 @@ import java.util.List;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -57,7 +58,7 @@ public interface SeriesService {
 	// @todo #477 SeriesService.findByCollectionId():
 	//  rename to CollectionService.findSeriesInCollection()
 	List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang);
-	List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang);
+	List<SeriesLinkDto> findRecentlyAdded(int quantity, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
 	
 	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);

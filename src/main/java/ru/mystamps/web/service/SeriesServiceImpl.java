@@ -39,6 +39,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
@@ -318,7 +319,7 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<SeriesInfoDto> findRecentlyAdded(int quantity, String lang) {
+	public List<SeriesLinkDto> findRecentlyAdded(int quantity, String lang) {
 		Validate.isTrue(quantity > 0, "Quantity of recently added series must be greater than 0");
 		
 		return seriesDao.findLastAdded(quantity, lang);

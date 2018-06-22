@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.CollectionService;
@@ -66,7 +66,7 @@ public class SiteController {
 		long collectionsCounter = collectionService.countCollectionsOfUsers();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> recentlyAdded =
+		List<SeriesLinkDto> recentlyAdded =
 			seriesService.findRecentlyAdded(AMOUNT_OF_RECENTLY_ADDED_SERIES, lang);
 		
 		List<LinkEntityDto> recentlyCreated =
