@@ -50,11 +50,11 @@ public class StepDefinitions  {
 	@When("^I add series to my collection$")
 	public void addSeriesToCollection() {
 		driver.get(Url.SITE);
-		driver.findElement(By.linkText("1 item(s)")).click();
+		driver.findElement(By.linkText("1 stamp")).click();
 		if (driver.findElements(By.id("series-danger")).size() != 0) {
 			driver.findElement(By.id("series-danger")).click();
 			driver.get(Url.SITE);
-			driver.findElement(By.linkText("1 item(s)")).click();
+			driver.findElement(By.linkText("1 stamp")).click();
 		}
 		driver.findElement(By.id("series-success")).click();
 	}

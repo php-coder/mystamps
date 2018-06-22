@@ -85,7 +85,7 @@
 							
 							<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
 								<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1980, </span>
-								<span th:remove="tag" th:text="|${series.quantity}&nbsp;#{t_items}|">10&nbsp;item(s)</span>
+								<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">10&nbsp;stamps</span>
 								<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
 							</a>
 						</li>
@@ -93,14 +93,14 @@
 							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
 							
 							<a href="../series/info.html">
-								22&nbsp;item(s)
+								22&nbsp;stamps
 							</a>
 						</li>
 						<li>
 							<a href="../category/info.html">Animals</a>&nbsp;&raquo;
 							
 							<a href="../series/info.html">
-								1983, 5&nbsp;item(s)
+								1983, 5&nbsp;stamps
 							</a>
 						</li>
 					</ul>
