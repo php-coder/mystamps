@@ -176,9 +176,12 @@ for filepath in glob.glob('%s/*.java' % basedir):
     print('Processing %s' % filename, file=sys.stderr)
     inside_test_method = 0
     test_method_body = []
+    inside_test_method_num = 0
     for line in fileinput.input(filepath, inplace=True):
         if string.find(line, '@Test') > 0:
             inside_test_method = 1
+            inside_test_method_num += 1
+            test_method_body.append(line.strip())
         else:
             if string.find(line, '{') > 0 and not string.find(line, '}') > 0:
                 if inside_test_method == 1:
@@ -206,6 +209,7 @@ for filepath in glob.glob('%s/*.java' % basedir):
                 if curline != '' and not curline.startswith("//"):
                     test_method_body.append(curline)
 
-        if string.find(line, '///') < 0:
+        # skip body of the 2nd test method (the first one is usually shouldHaveStandardStructure())
+        if string.find(line, '///') < 0 and inside_test_method_num != 2:
             print(line, end='')
 
