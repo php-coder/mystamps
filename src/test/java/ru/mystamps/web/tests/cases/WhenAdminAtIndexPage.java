@@ -58,13 +58,6 @@ public class WhenAdminAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc")
-	public void shouldExistsLinkForAddingSeries() {
-		assertThat(page.linkWithLabelExists(tr("t_add_series")))
-			.overridingErrorMessage("should exists link to page for adding series of stamps")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc")
 	public void shouldExistsLinkForAddingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_add_country")))
 			.overridingErrorMessage("should exists link to page for adding countries")
