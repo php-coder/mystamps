@@ -21,7 +21,9 @@ package ru.mystamps.web.support.spring.security;
 public final class HasAuthority {
 	// Constants sorted in an ascending order.
 	public static final String ADD_PARTICIPANT = "hasAuthority('" + StringAuthority.ADD_PARTICIPANT + "')";
-	public static final String ADD_SERIES_PRICE = "hasAuthority('" + StringAuthority.ADD_SERIES_PRICE + "')";
+	@SuppressWarnings("PMD.LongVariable")
+	public static final String ADD_SERIES_PRICE_AND_COLLECTION_OWNER
+		= "hasAuthority('" + StringAuthority.ADD_SERIES_PRICE + "') and principal?.userCollectionSlug == #slug";
 	public static final String ADD_SERIES_SALES = "hasAuthority('" + StringAuthority.ADD_SERIES_SALES + "')";
 	public static final String CREATE_CATEGORY = "hasAuthority('" + StringAuthority.CREATE_CATEGORY + "')";
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";

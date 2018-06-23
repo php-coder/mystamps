@@ -754,6 +754,8 @@
 					<showWarnings>true</showWarnings>
 					<debug>false</debug>
 					<failOnWarning>true</failOnWarning>
+					<!-- Required for using method's parameters inside of @PreAuthorize expressions -->
+					<parameters>true</parameters>
 				</configuration>
 			</plugin>
 			

@@ -152,10 +152,9 @@ public class CollectionServiceImpl implements CollectionService {
 	}
 	
 	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): add unit tests
-	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): restrict access by only an owner
 	@Override
 	@Transactional(readOnly = true)
-	@PreAuthorize(HasAuthority.ADD_SERIES_PRICE)
+	@PreAuthorize(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER)
 	public List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(
 		String slug,
 		String lang) {
