@@ -96,7 +96,8 @@ public class ServicesConfig {
 		return new TimedDownloaderService(
 			LoggerFactory.getLogger(TimedDownloaderService.class),
 			new HttpURLConnectionDownloaderService(
-				new String[]{"image/jpeg", "image/png"}
+				new String[]{"image/jpeg", "image/png"},
+				env.getRequiredProperty("app.downloader.timeout", Integer.class)
 			)
 		);
 	}
@@ -106,7 +107,8 @@ public class ServicesConfig {
 		return new TimedDownloaderService(
 			LoggerFactory.getLogger(TimedDownloaderService.class),
 			new HttpURLConnectionDownloaderService(
-				new String[]{"text/html", "image/jpeg", "image/png"}
+				new String[]{"text/html", "image/jpeg", "image/png"},
+				env.getRequiredProperty("app.downloader.timeout", Integer.class)
 			)
 		);
 	}

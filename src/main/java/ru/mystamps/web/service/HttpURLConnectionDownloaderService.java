@@ -26,7 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +58,11 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	// will be returned. An empty array (or null) means that all types are allowed.
 	// TODO: at this moment we do a case sensitive comparison. Should we change it?
 	private final String[] allowedContentTypes;
+	
+	// Max time to wait during opening a connection to a resource (in milliseconds).
+	// Also is used for setting a max time for reading data from it. A timeout
+	// of zero is interpreted as an infinite timeout.
+	private final int timeout;
 	
 	@Override
 	@PreAuthorize(HasAuthority.DOWNLOAD_IMAGE)
@@ -133,9 +137,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		);
 	}
 	
-	private static void configureTimeouts(URLConnection conn) {
-		// TODO: make it configurable
-		int timeout = Math.toIntExact(TimeUnit.SECONDS.toMillis(1));
+	private void configureTimeouts(URLConnection conn) {
 		conn.setConnectTimeout(timeout);
 		conn.setReadTimeout(timeout);
 	}
