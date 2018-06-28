@@ -19,6 +19,10 @@ Admin should see a link for adding series
 	[Tags]                    series
 	Page Should Contain Link  link=add stamp series
 
+Admin should see a link for adding countries
+	[Tags]                    country
+	Page Should Contain Link  link=add country
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
