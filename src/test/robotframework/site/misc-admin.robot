@@ -23,6 +23,10 @@ Admin should see a link for adding countries
 	[Tags]                    country
 	Page Should Contain Link  link=add country
 
+Admin should see a link for listing countries
+	[Tags]                    country
+	Page Should Contain Link  link=show list of countries
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
