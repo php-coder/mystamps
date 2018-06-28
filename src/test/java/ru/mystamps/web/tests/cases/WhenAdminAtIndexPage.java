@@ -58,13 +58,6 @@ public class WhenAdminAtIndexPage extends WhenAnyUserAtAnyPage<IndexSitePage> {
 	}
 	
 	@Test(groups = "misc")
-	public void shouldExistsLinkForAddingCategories() {
-		assertThat(page.linkWithLabelExists(tr("t_create_category")))
-			.overridingErrorMessage("should exists link to page for adding categories")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc")
 	public void shouldExistsLinkForListingCategories() {
 		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
 			.overridingErrorMessage("should exists link to page for listing categories")
