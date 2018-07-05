@@ -17,6 +17,10 @@
  */
 package ru.mystamps.web.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
 final class ControllerUtils {
@@ -30,6 +34,12 @@ final class ControllerUtils {
 			.toString();
 
 		return "redirect:" + dstUrl;
+	}
+	
+	public static void printHtml(HttpServletResponse response, String html) throws IOException {
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().println(html);
 	}
 	
 }

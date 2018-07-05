@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.mystamps.web.Url;
 
+import static ru.mystamps.web.controller.ControllerUtils.printHtml;
+
 @Controller
 public class TestController {
 	
@@ -60,18 +62,16 @@ public class TestController {
 	
 	@GetMapping("/test/invalid/simple-html")
 	public void simpleHtml(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println(
+		printHtml(
+			response,
 			"<html><head><title>test</title></head><body>test</body></html>"
 		);
 	}
 	
 	@GetMapping("/test/valid/series-info/existing-seller")
 	public void seriesInfoWithExistingSeller(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println(
+		printHtml(
+			response,
 			"<!DOCTYPE html>"
 			+ "<html>"
 				+ "<head>"
@@ -92,9 +92,8 @@ public class TestController {
 	
 	@GetMapping("/test/valid/series-info/new-seller")
 	public void seriesInfoWithNewSeller(HttpServletResponse response) throws IOException {
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println(
+		printHtml(
+			response,
 			"<!DOCTYPE html>"
 			+ "<html>"
 				+ "<head>"
