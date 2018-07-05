@@ -131,7 +131,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		);
 	}
 	
-	// TODO: introduce dao
+	// @todo #660 JdbcSeriesImportDao.changeStatus(): introduce dao
 	@Override
 	public void changeStatus(Integer requestId, Date date, String oldStatus, String newStatus) {
 		Map<String, Object> params = new HashMap<>();
@@ -163,7 +163,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		}
 	}
 	
-	// TODO: introduce dao
+	// @todo #660 JdbcSeriesImportDao.addRawContent(): introduce dao
 	@Override
 	public void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content) {
 		Map<String, Object> params = new HashMap<>();
