@@ -63,7 +63,7 @@ public final class CatalogUtils {
 		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
 		
 		if (catalogNumbers.isEmpty()) {
-			return "";
+			return StringUtils.EMPTY;
 		}
 		
 		Set<String> numbers = new TreeSet<>(STR_AFTER_INT);
