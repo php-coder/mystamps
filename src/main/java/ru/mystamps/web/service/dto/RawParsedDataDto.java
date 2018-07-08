@@ -29,6 +29,7 @@ public class RawParsedDataDto {
 	private final String releaseYear;
 	private final String quantity;
 	private final String perforated;
+	private final String michelNumbers;
 	private final String sellerName;
 	private final String sellerUrl;
 	private final String price;
@@ -42,6 +43,7 @@ public class RawParsedDataDto {
 			releaseYear,
 			quantity,
 			perforated,
+			michelNumbers,
 			sellerName,
 			sellerUrl,
 			price,

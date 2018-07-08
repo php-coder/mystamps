@@ -56,6 +56,12 @@ public final class Db {
 		public static final String IMPORT_SUCCEEDED      = "ImportSucceeded";
 	}
 	
+	public static final class SeriesImportParsedData {
+		// see the following migration:
+		// 2018-07-05--series_import_parsed_data_michel_numbers_field.xml
+		public static final int MICHEL_NUMBERS_LENGTH = 19;
+	}
+	
 	public static final class SeriesSales {
 		public static final int TRANSACTION_URL_LENGTH = 255;
 	}

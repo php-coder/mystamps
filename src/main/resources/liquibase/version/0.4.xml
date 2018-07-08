@@ -52,5 +52,6 @@
 	<include file="0.4/2018-06-09--add_number_of_stamps_to_collections_series.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-06-15--add_price_to_collections_series.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-06-18--test_paid_user.xml" relativeToChangelogFile="true" />
+	<include file="0.4/2018-07-05--series_import_parsed_data_michel_numbers_field.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

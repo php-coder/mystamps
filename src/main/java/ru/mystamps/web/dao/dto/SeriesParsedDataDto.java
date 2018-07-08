@@ -29,4 +29,5 @@ public class SeriesParsedDataDto {
 	private final Integer issueYear;
 	private final Integer quantity;
 	private final Boolean perforated;
+	private final String michelNumbers;
 }

@@ -76,6 +76,16 @@ Import series from an external site (in Russian, use description locator)
 	Should Be Equal              ${imageUrl}        http://localhost:8080/image/1
 	Should Be Equal              ${year}            2000
 
+Import series from external site with catalog numbers (use description locator)
+	[Documentation]             Verify import of catalog numbers by extracting them from a description
+	Input Text                  id=url  http://localhost:8080/test/valid/series-info/catalog-numbers-in-description
+	Submit Form                 id=import-series-form
+	Textfield Value Should Be   id=michel-numbers   2242-2246
+	Submit Form                 id=create-series-form
+	Element Text Should Be      id=michel_catalog_info  \#2242-2246
+	Click Link                  id=import-request-link
+	Element Should Be Disabled  id=michel-numbers
+
 Import series and series sale with existing seller from an external site
 	[Documentation]             Verify import series and sale (with existing seller)
 	Input Text                  id=url  http://localhost:8080/test/valid/series-info/existing-seller

@@ -36,6 +36,7 @@ public class SeriesInfo {
 	private String issueDate;
 	private String quantity;
 	private String perforated;
+	private String michelNumbers;
 	private String sellerName;
 	private String sellerUrl;
 	private String price;
@@ -51,6 +52,7 @@ public class SeriesInfo {
 			&& issueDate == null
 			&& quantity == null
 			&& perforated == null
+			&& michelNumbers == null
 			&& sellerName == null
 			&& price == null;
 	}

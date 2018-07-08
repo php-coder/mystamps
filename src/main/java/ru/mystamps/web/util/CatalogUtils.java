@@ -18,6 +18,7 @@
 package ru.mystamps.web.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -57,10 +58,18 @@ public final class CatalogUtils {
 	private CatalogUtils() {
 	}
 	
+	// @todo #694 CatalogUtils.toShortForm(): add unit tests
+	/**
+	 * Converts a string with catalog numbers to comma-delimited string with a range of numbers.
+	 **/
+	public static String toShortForm(String catalogNumbers) {
+		return toShortForm(parseCatalogNumbers(catalogNumbers));
+	}
+	
 	/**
 	 * Converts set of catalog numbers to comma-delimited string with range of numbers.
 	 **/
-	public static String toShortForm(List<String> catalogNumbers) {
+	public static String toShortForm(Collection<String> catalogNumbers) {
 		Validate.isTrue(catalogNumbers != null, "Catalog numbers must be non null");
 		
 		if (catalogNumbers.isEmpty()) {
@@ -116,7 +125,7 @@ public final class CatalogUtils {
 		
 		Set<String> result = new LinkedHashSet<>();
 		for (String number : catalogNumbers.split(",")) {
-			Validate.validState(!number.trim().isEmpty(), "Catalog number must be non empty");
+			Validate.isTrue(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
 			String[] range = StringUtils.split(number, '-');
 			switch (range.length) {

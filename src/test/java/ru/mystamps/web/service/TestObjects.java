@@ -212,7 +212,8 @@ public final class TestObjects {
 			Random.url(),
 			Random.issueYear(),
 			Random.quantity(),
-			Random.perforated()
+			Random.perforated(),
+			String.join(",", Random.michelNumbers())
 		);
 	}
 	
@@ -224,6 +225,7 @@ public final class TestObjects {
 			Random.issueYear().toString(),
 			Random.quantity().toString(),
 			String.valueOf(Random.perforated()),
+			Random.michelNumbers().toString(),
 			Random.sellerName(),
 			Random.url(),
 			String.valueOf(Random.price()),
@@ -287,6 +289,7 @@ public final class TestObjects {
 			Random.issueYear(),
 			Random.quantity(),
 			Random.perforated(),
+			Random.michelNumbers(),
 			sellerId,
 			sellerName,
 			sellerUrl,
@@ -302,6 +305,7 @@ public final class TestObjects {
 			null,
 			null,
 			null,
+			Collections.emptySet(),
 			null,
 			null,
 			null,

@@ -35,6 +35,7 @@ import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.support.beanvalidation.CatalogNumbers;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
@@ -85,6 +86,15 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	@NotNull
 	private MultipartFile downloadedImage;
 	
+	// @todo #694 Import series: add support for Scott catalog numbers
+	// @todo #694 Import series: add support for Yvert catalog numbers
+	// @todo #694 Import series: add support for Gibbons catalog numbers
+	// @todo #694 Import series: add support for Zagorski catalog numbers
+	// @todo #694 Import series: add support for Solovyov catalog numbers
+	// @todo #694 /series/import/request/{id}(michelNumbers): add integration test for validation
+	@CatalogNumbers
+	private String michelNumbers;
+	
 	@Valid
 	private ImportSellerForm seller;
 	
@@ -108,11 +118,6 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	
 	@Override
 	public Integer getMonth() {
-		return null;
-	}
-	
-	@Override
-	public String getMichelNumbers() {
 		return null;
 	}
 	

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-michel_numbers-column-to-series_import_parsed_data-table" author="php-coder" context="scheme">
+		
+		<!--
+			19 characters are enough for holding 2 ranges of catalog numbers
+			(for example: 1001-1003,2200-2210). While it's possible that a series
+			will have more catalog numbers, it should be enough for most of the cases.
+			
+			Must be in sync with ru.mystamps.web.Db.SeriesImportRequestStatus.MICHEL_NUMBERS_LENGTH constant.
+		-->
+		<addColumn tableName="series_import_parsed_data">
+			<column name="michel_numbers"
+				type="VARCHAR(19)"
+				beforeColumn="created_at" />
+		</addColumn>
+		
+	</changeSet>
+	
+</databaseChangeLog>

@@ -93,6 +93,7 @@ public class DownloadingSucceededEventListener
 			info.getIssueDate(),
 			info.getQuantity(),
 			info.getPerforated(),
+			info.getMichelNumbers(),
 			info.getSellerName(),
 			info.getSellerUrl(),
 			info.getPrice(),

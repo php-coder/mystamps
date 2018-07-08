@@ -316,7 +316,8 @@
 										Imported from
 									</dt>
 									<dd id="import-info">
-										<a href="./import/info.html"
+										<a id="import-request-link"
+											href="./import/info.html"
 											th:href="@{${REQUEST_IMPORT_PAGE}(id=${importInfo.requestId})}"
 											th:text="${#uris.unescapePath(importInfo.url)}">
 											http://example.com/my-first-series.html

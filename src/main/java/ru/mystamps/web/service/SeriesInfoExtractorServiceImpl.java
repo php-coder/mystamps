@@ -20,10 +20,13 @@ package ru.mystamps.web.service;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +43,7 @@ import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
 	// Related to RELEASE_YEAR_REGEXP and used in unit tests.
@@ -55,6 +58,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		"([1-9][0-9]?)( беззубцовые)? мар(ок|ки)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
+	
+	// Regular expression matches range of Michel catalog numbers (from 1 to 9999).
+	private static final Pattern MICHEL_NUMBERS_REGEXP =
+		Pattern.compile("#[ ]?([1-9][0-9]{0,3})-([1-9][0-9]{0,3})");
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(ValidationRules.CATEGORY_NAME_EN_REGEXP);
@@ -79,6 +86,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Integer releaseYear = extractReleaseYear(data.getReleaseYear());
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
+		Set<String> michelNumbers = extractMichelNumbers(data.getMichelNumbers());
 		Integer sellerId = extractSeller(data.getSellerName(), data.getSellerUrl());
 		String sellerName = extractSellerName(sellerId, data.getSellerName());
 		String sellerUrl = extractSellerUrl(sellerId, data.getSellerUrl());
@@ -91,6 +99,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			releaseYear,
 			quantity,
 			perforated,
+			michelNumbers,
 			sellerId,
 			sellerName,
 			sellerUrl,
@@ -252,6 +261,34 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Could not extract perforation info from a fragment");
 		
 		return null;
+	}
+	
+	// @todo #694 SeriesInfoExtractorServiceImpl.extractMichelNumbers(): add unit tests
+	// @todo #694 SeriesInfoExtractorServiceImpl: support for a single Michel number
+	// @todo #694 SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers
+	protected Set<String> extractMichelNumbers(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return Collections.emptySet();
+		}
+		
+		log.debug("Determining michel numbers from a fragment: '{}'", fragment);
+		
+		Matcher matcher = MICHEL_NUMBERS_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			Integer begin = Integer.valueOf(matcher.group(1));
+			Integer end = Integer.valueOf(matcher.group(2));
+			if (begin < end) {
+				Set<String> numbers = IntStream.rangeClosed(begin, end)
+					.mapToObj(String::valueOf)
+					.collect(Collectors.toCollection(LinkedHashSet::new));
+				log.debug("Extracted michel numbers: {}", numbers);
+				return numbers;
+			}
+		}
+		
+		log.debug("Could not extract michel numbers from a fragment");
+		
+		return Collections.emptySet();
 	}
 	
 	public Integer extractSeller(String name, String url) {

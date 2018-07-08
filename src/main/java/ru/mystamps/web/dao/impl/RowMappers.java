@@ -346,6 +346,7 @@ final class RowMappers {
 		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
 		Integer quantity = JdbcUtils.getInteger(rs, "quantity");
 		Boolean perforated = JdbcUtils.getBoolean(rs, "perforated");
+		String michelNumbers = rs.getString("michel_numbers");
 		
 		return new SeriesParsedDataDto(
 			category,
@@ -353,7 +354,8 @@ final class RowMappers {
 			imageUrl,
 			releaseYear,
 			quantity,
-			perforated
+			perforated,
+			michelNumbers
 		);
 	}
 	

@@ -161,6 +161,7 @@ public class JsoupSiteParser implements SiteParser {
 		info.setIssueDate(extractIssueDate(body));
 		info.setQuantity(extractQuantity(body));
 		info.setPerforated(extractPerforated(body));
+		info.setMichelNumbers(extractMichelNumbers(body));
 		info.setSellerName(extractSellerName(body));
 		info.setSellerUrl(extractSellerUrl(body));
 		info.setPrice(extractPrice(body));
@@ -244,6 +245,18 @@ public class JsoupSiteParser implements SiteParser {
 
 		LOG.debug("Extracted perforated flag: '{}'", perforated);
 		return perforated;
+	}
+	
+	// @todo #694 Support for a separate locator for a field with michel numbers
+	protected String extractMichelNumbers(Element body) {
+		String description = getTextOfTheFirstElement(body, shortDescriptionLocator);
+		if (description == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted michel numbers: '{}'", description);
+		return description;
+		
 	}
 	
 	protected String extractSellerName(Element body) {

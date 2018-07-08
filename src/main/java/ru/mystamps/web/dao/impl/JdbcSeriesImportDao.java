@@ -213,6 +213,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		params.put("updated_at", data.getUpdatedAt());
 		params.put("quantity", data.getQuantity());
 		params.put("perforated", data.getPerforated());
+		params.put("michel_numbers", data.getMichelNumbers());
 		
 		KeyHolder holder = new GeneratedKeyHolder();
 		

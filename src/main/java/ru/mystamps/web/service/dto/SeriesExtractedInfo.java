@@ -19,6 +19,7 @@ package ru.mystamps.web.service.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class SeriesExtractedInfo {
 	private final Integer releaseYear;
 	private final Integer quantity;
 	private final Boolean perforated;
+	private final Set<String> michelNumbers;
 	private final Integer sellerId;
 	private final String sellerName;
 	private final String sellerUrl;

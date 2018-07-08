@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -34,6 +35,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.controller.event.ParsingFailed;
 import ru.mystamps.web.dao.SeriesImportDao;
@@ -51,6 +53,7 @@ import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+import ru.mystamps.web.util.CatalogUtils;
 
 // it complains on "Request id must be non null"
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -199,6 +202,19 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesParsedData.setReleaseYear(seriesInfo.getReleaseYear());
 		seriesParsedData.setQuantity(seriesInfo.getQuantity());
 		seriesParsedData.setPerforated(seriesInfo.getPerforated());
+		
+		// @todo #694 SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers
+		Set<String> michelNumbers = seriesInfo.getMichelNumbers();
+		if (!michelNumbers.isEmpty()) {
+			String shortenedNumbers = CatalogUtils.toShortForm(michelNumbers);
+			Validate.validState(
+				shortenedNumbers.length() <= Db.SeriesImportParsedData.MICHEL_NUMBERS_LENGTH,
+				"Michel numbers (%s) length exceeds max length of the field (%d)",
+				shortenedNumbers,
+				Db.SeriesImportParsedData.MICHEL_NUMBERS_LENGTH
+			);
+			seriesParsedData.setMichelNumbers(shortenedNumbers);
+		}
 		
 		SeriesSalesParsedDataDbDto seriesSalesParsedData = new SeriesSalesParsedDataDbDto();
 		seriesSalesParsedData.setCreatedAt(now);

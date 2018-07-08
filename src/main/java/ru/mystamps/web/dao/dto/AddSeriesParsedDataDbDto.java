@@ -33,16 +33,20 @@ public class AddSeriesParsedDataDbDto {
 	private Integer releaseYear;
 	private Integer quantity;
 	private Boolean perforated;
+	private String michelNumbers;
 	private Date createdAt;
 	private Date updatedAt;
 	
+	// I like parentheses around catalog number check
+	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
 		return categoryId != null
 			|| countryId != null
 			|| imageUrl != null
 			|| releaseYear != null
 			|| quantity != null
-			|| perforated != null;
+			|| perforated != null
+			|| michelNumbers != null;
 	}
 	
 }

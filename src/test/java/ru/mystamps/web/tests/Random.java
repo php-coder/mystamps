@@ -175,6 +175,10 @@ public final class Random {
 		return sampleMultiple(numToReturn, STATUSES);
 	}
 	
+	public static Set<String> michelNumbers() {
+		return catalogNumbers();
+	}
+	
 	public static Set<String> solovyovNumbers() {
 		return catalogNumbers();
 	}

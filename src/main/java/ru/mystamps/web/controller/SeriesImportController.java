@@ -44,6 +44,7 @@ import ru.mystamps.web.controller.dto.ImportSellerForm;
 import ru.mystamps.web.controller.dto.ImportSeriesForm;
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
+import ru.mystamps.web.controller.editor.ExpandCatalogNumbersEditor;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
@@ -51,6 +52,7 @@ import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
+import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
 import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
@@ -68,6 +70,12 @@ public class SeriesImportController {
 	@InitBinder("requestImportForm")
 	protected void initRequestImportForm(WebDataBinder binder) {
 		binder.registerCustomEditor(String.class, "url", new StringTrimmerEditor(true));
+	}
+	
+	@InitBinder("importSeriesForm")
+	protected void initImportSeriesForm(WebDataBinder binder) {
+		// CheckStyle: ignore LineLength for next 1 line
+		binder.registerCustomEditor(String.class, "michelNumbers", new ExpandCatalogNumbersEditor());
 	}
 	
 	@GetMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
@@ -133,6 +141,7 @@ public class SeriesImportController {
 			if (series.getPerforated() != null) {
 				form.setPerforated(series.getPerforated());
 			}
+			form.setMichelNumbers(CatalogUtils.toShortForm(series.getMichelNumbers()));
 		}
 		
 		SeriesSaleParsedDataDto seriesSale = seriesSalesImportService.getParsedData(requestId);
