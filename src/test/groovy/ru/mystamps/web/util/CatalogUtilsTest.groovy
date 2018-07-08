@@ -27,14 +27,14 @@ class CatalogUtilsTest extends Specification {
 	// Tests for toShortForm()
 	//
 	
-	def "toShortForm() should throw exception if numbers is null"() {
+	def 'toShortForm() should throw exception if numbers is null'() {
 		when:
 			CatalogUtils.toShortForm(null)
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def "toShortForm() should return empty string for empty numbers"() {
+	def 'toShortForm() should return empty string for empty numbers'() {
 		given:
 			List<String> empty = []
 		when:
@@ -43,7 +43,7 @@ class CatalogUtilsTest extends Specification {
 			numbers == ''
 	}
 	
-	def "toShortForm() should return single number as is"() {
+	def 'toShortForm() should return single number as is'() {
 		given:
 			List<String> singleNumber = [ '1' ]
 		when:
@@ -52,7 +52,7 @@ class CatalogUtilsTest extends Specification {
 			numbers == '1'
 	}
 	
-	def "toShortForm() should return pair of numbers as comma separated"() {
+	def 'toShortForm() should return pair of numbers as comma separated'() {
 		given:
 			List<String> setOfNumbers = [ '1', '2' ]
 		when:
@@ -61,7 +61,7 @@ class CatalogUtilsTest extends Specification {
 			numbers == '1, 2'
 	}
 	
-	def "toShortForm() should produce range for sequence"() {
+	def 'toShortForm() should produce range for sequence'() {
 		given:
 			List<String> setOfNumbers = [ '1', '2', '3' ]
 		when:
@@ -70,7 +70,7 @@ class CatalogUtilsTest extends Specification {
 			numbers == '1-3'
 	}
 	
-	def "toShortForm() should return comma separated numbers if they are not a sequence"() {
+	def 'toShortForm() should return comma separated numbers if they are not a sequence'() {
 		given:
 			List<String> setOfNumbers = [ '1', '2', '4', '5' ]
 		when:
@@ -79,7 +79,7 @@ class CatalogUtilsTest extends Specification {
 			numbers == '1, 2, 4, 5'
 	}
 	
-	def "toShortForm() should produce two ranges for two sequences"() {
+	def 'toShortForm() should produce two ranges for two sequences'() {
 		given:
 			List<String> setOfNumbers = [ '1', '2', '3', '10', '19', '20', '21' ]
 		when:
@@ -137,42 +137,42 @@ class CatalogUtilsTest extends Specification {
 	// Tests for parseCatalogNumbers()
 	//
 	
-	def "parseCatalogNumbers() should return empty collection if catalog numbers is null"() {
+	def 'parseCatalogNumbers() should return empty collection if catalog numbers is null'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers(null)
 		then:
 			numbers.isEmpty()
 	}
 	
-	def "parseCatalogNumbers() should return empty collection if catalog numbers is empty"() {
+	def 'parseCatalogNumbers() should return empty collection if catalog numbers is empty'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('')
 		then:
 			numbers.isEmpty()
 	}
 	
-	def "parseCatalogNumbers() should return one element if catalog numbers contains one number"() {
+	def 'parseCatalogNumbers() should return one element if catalog numbers contains one number'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1')
 		then:
 			numbers.size() == 1
 	}
 	
-	def "parseCatalogNumbers() should return one element if catalog numbers contains extra comma"() {
+	def 'parseCatalogNumbers() should return one element if catalog numbers contains extra comma'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,')
 		then:
 			numbers.size() == 1
 	}
 	
-	def "parseCatalogNumbers() should return two elements if catalog numbers contains two numbers"() {
+	def 'parseCatalogNumbers() should return two elements if catalog numbers contains two numbers'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,2')
 		then:
 			numbers.size() == 2
 	}
 	
-	def "parseCatalogNumbers() should throw exception if one of catalog numbers is a blank string"() {
+	def 'parseCatalogNumbers() should throw exception if one of catalog numbers is a blank string'() {
 		when:
 			CatalogUtils.parseCatalogNumbers('1, ')
 		then:
