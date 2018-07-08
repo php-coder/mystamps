@@ -18,6 +18,7 @@
 package ru.mystamps.web.util
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CatalogUtilsTest extends Specification {
@@ -176,6 +177,32 @@ class CatalogUtilsTest extends Specification {
 			CatalogUtils.parseCatalogNumbers('1, ')
 		then:
 			thrown IllegalStateException
+	}
+	
+	def 'parseCatalogNumbers() should return two elements for a range with two numbers'() {
+		when:
+			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1-2')
+		then:
+			numbers == [ '1', '2' ] as Set
+	}
+	
+	@Unroll
+	def 'parseCatalogNumbers() should throw exception for an invalid value (#numbers)'(
+		String numbers, String message) {
+		
+		when:
+			CatalogUtils.parseCatalogNumbers(numbers)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == message
+		where:
+			numbers   | message
+			'1-2-3'   | 'Unexpected number of separators found: expected to have only one'
+			'1-z'     | 'Unexpected a non-numeric range found'
+			'z-2'     | 'Unexpected a non-numeric range found'
+			' 1 - 2 ' | 'Unexpected a non-numeric range found'
+			'1-1'     | 'Range must be in an ascending order'
+			'2-1'     | 'Range must be in an ascending order'
 	}
 	
 }

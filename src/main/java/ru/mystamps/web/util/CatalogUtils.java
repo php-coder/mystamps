@@ -24,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -117,9 +118,34 @@ public final class CatalogUtils {
 		for (String number : catalogNumbers.split(",")) {
 			Validate.validState(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
-			// TODO: parse range of numbers
-			
-			result.add(number);
+			String[] range = StringUtils.split(number, '-');
+			switch (range.length) {
+				case 1:
+					result.add(number);
+					break;
+				case 2:
+					try {
+						Integer begin = Integer.valueOf(range[0]);
+						Integer end   = Integer.valueOf(range[1]);
+						Validate.isTrue(begin < end, "Range must be in an ascending order");
+						
+						// [ 1,2 ] => [ 1,2] => [ "1","2" ]
+						IntStream.rangeClosed(begin, end)
+							.mapToObj(String::valueOf)
+							.forEach(result::add);
+						
+					} catch (NumberFormatException ex) {
+						throw new IllegalArgumentException(
+							"Unexpected a non-numeric range found",
+							ex
+						);
+					}
+					break;
+				default:
+					throw new IllegalArgumentException(
+						"Unexpected number of separators found: expected to have only one"
+					);
+			}
 		}
 		
 		return result;
