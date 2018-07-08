@@ -155,28 +155,29 @@ class CatalogUtilsTest extends Specification {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1')
 		then:
-			numbers.size() == 1
+			numbers == [ '1' ] as Set
 	}
 	
 	def 'parseCatalogNumbers() should return one element if catalog numbers contains extra comma'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,')
 		then:
-			numbers.size() == 1
+			numbers == [ '1' ] as Set
 	}
 	
 	def 'parseCatalogNumbers() should return two elements if catalog numbers contains two numbers'() {
 		when:
 			Set<String> numbers = CatalogUtils.parseCatalogNumbers('1,2')
 		then:
-			numbers.size() == 2
+			numbers == [ '1', '2' ] as Set
 	}
 	
 	def 'parseCatalogNumbers() should throw exception if one of catalog numbers is a blank string'() {
 		when:
 			CatalogUtils.parseCatalogNumbers('1, ')
 		then:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'Catalog number must be non empty'
 	}
 	
 	def 'parseCatalogNumbers() should return two elements for a range with two numbers'() {
