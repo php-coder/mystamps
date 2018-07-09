@@ -57,15 +57,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void passwordAndConfirmationShouldMatch() {
-		page.activateAccount(null, null, "password123", "password321", null);
-		
-		assertThat(page)
-			.field("passwordConfirmation")
-			.hasError(tr("password.mismatch"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginShouldNotBeTooShort() {
 		page.activateAccount("a", null, null, null, null);
 		

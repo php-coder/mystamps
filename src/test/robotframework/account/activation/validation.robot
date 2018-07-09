@@ -12,6 +12,12 @@ Activate account with matching login and password
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=password.errors  Password and login must be different
 
+Activate account with mismatching password and password confirmation
+	Input Text              id=password                     password123
+	Input Text              id=passwordConfirmation         password321
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=passwordConfirmation.errors  Password mismatch
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
