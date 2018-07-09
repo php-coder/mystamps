@@ -247,8 +247,8 @@ for filepath in sorted(glob.glob('%s/*.java' % basedir)):
                 if inside_test_method == 1:
                     inside_test_method = 2
             elif string.find(line, '}') > 0 and not string.find(line, '{') > 0:
+                inside_test_method = 0
                 if inside_test_method == 2:
-                    inside_test_method = 0
                     line_indent_count = line.count('\t') + 1
                     indent = '\t' * line_indent_count
                     test_method = filter(None, ''.join(test_method_body).replace(') {', ') {;').split(';'))
