@@ -176,14 +176,14 @@ def handleLinkWithLabelExist(line):
     link = props[res.group(1)]
     return { 'name': 'Page Should Contain Link', 'args': 'link=%s' % link }
 
-def write_robot_test(filename, test_method):
+def write_robot_test(filename, test_method, tag_name):
     suggested_list = handleTestMethod(test_method)
     if len(suggested_list) <= 1:
         return False
-    if not filename in javaFiles2robot:
+    robotFilename = javaFile2robot(filename, tag_name)
+    if robotFilename is None:
         print('ERROR: could not find a corresponding robot file for %s' % filename, file=sys.stderr)
         sys.exit(1)
-    robotFilename = javaFiles2robot[filename]
     robotFile = os.path.join(robotdir, robotFilename)
     print('Updating %s' % robotFile, file=sys.stderr)
     inside_test_cases_block = False
@@ -209,6 +209,8 @@ def write_robot_test(filename, test_method):
         print(line, end='')
     return True
 
+def javaFile2robot(javaFile, tag_name):
+    return javaFiles2robot[javaFile].replace('{tag}', tag_name)
 
 print('Scanning %s' % basedir, file=sys.stderr)
 
@@ -223,8 +225,9 @@ processed_java_file = ''
 processed_robot_file = ''
 
 javaFiles2robot = {
-    'WhenAdminAtIndexPage.java' : 'site/misc-admin.robot',
-    'WhenUserAtIndexPage.java'  : 'site/misc-user.robot',
+    'WhenAdminAtIndexPage.java'             : 'site/misc-admin.robot',
+    'WhenUserAtIndexPage.java'              : 'site/misc-user.robot',
+    'WhenAnonymousUserActivateAccount.java' : 'account/activation/{tag}.robot',
 }
 
 for filepath in sorted(glob.glob('%s/*.java' % basedir)):
@@ -234,6 +237,7 @@ for filepath in sorted(glob.glob('%s/*.java' % basedir)):
     inside_test_method = 0
     test_method_body = []
     inside_test_method_num = 0
+    current_tag_name = ''
     for line in fileinput.FileInput(filepath, inplace=True):
         if string.find(line, '@Test') > 0:
             inside_test_method = 1
@@ -242,6 +246,9 @@ for filepath in sorted(glob.glob('%s/*.java' % basedir)):
             if inside_test_method_num == 2:
                 first_test_method_proccessed = True
             test_method_body.append(line.strip())
+            res = re.search(r'@Test\(groups = "([^"]+)"', line);
+            if not res is None:
+                current_tag_name = res.group(1)
         else:
             if string.find(line, '{') > 0 and not string.find(line, '}') > 0:
                 if inside_test_method == 1:
@@ -255,9 +262,9 @@ for filepath in sorted(glob.glob('%s/*.java' % basedir)):
                     #print('%s/// BODY: "%s"' % (indent, test_method), file=sys.stderr)
                     # the 2nd because the first test is usually shouldHaveStandardStructure()
                     if inside_test_method_num == 2:
-                        if write_robot_test(filename, test_method):
+                        if write_robot_test(filename, test_method, current_tag_name):
                             processed_java_file = filename
-                            processed_robot_file = javaFiles2robot[filename]
+                            processed_robot_file = javaFile2robot(filename, current_tag_name)
                             processed_java_method = 'XXX'
                             res = re.search(r'void ([^\(]+)\(', test_method[0])
                             if res != None:
