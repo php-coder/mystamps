@@ -25,7 +25,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
@@ -55,15 +54,6 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void activationKeyShouldBeAutoFilledFromURL() {
-		String key = "7777744444";
-		String url = Url.ACTIVATE_ACCOUNT_PAGE + "?key=" + key;
-		
-		page.open(url);
-		assertThat(page).field("activationKey").hasValue(key);
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
