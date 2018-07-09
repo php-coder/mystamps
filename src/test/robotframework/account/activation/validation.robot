@@ -33,6 +33,11 @@ Activate account with forbidden characters in login
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=login.errors  Login must consist only latin letters, digits, dot, hyphen or underscore
 
+Activate account with existing login
+	Input Text              id=login         coder
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=login.errors  Login already exists
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

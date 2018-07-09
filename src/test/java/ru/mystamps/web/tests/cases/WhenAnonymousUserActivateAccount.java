@@ -19,8 +19,6 @@ package ru.mystamps.web.tests.cases;
 
 import org.apache.commons.lang3.StringUtils;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -37,9 +35,6 @@ import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 public class WhenAnonymousUserActivateAccount
 	extends WhenAnyUserAtAnyPageWithForm<ActivateAccountPage> {
 	
-	@Value("${valid_user_login}")
-	private String validUserLogin;
-	
 	public WhenAnonymousUserActivateAccount() {
 		super(ActivateAccountPage.class);
 	}
@@ -54,15 +49,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginShouldBeUnique() {
-		page.activateAccount(validUserLogin, null, null, null, null);
-		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("ru.mystamps.web.support.beanvalidation.UniqueLogin.message"));
-	}
-
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidLogins")
 	public void loginShouldNotContainRepetitionSpecialCharacters(String login, Object whatever) {
 		page.activateAccount(login, null, null, null, null);
