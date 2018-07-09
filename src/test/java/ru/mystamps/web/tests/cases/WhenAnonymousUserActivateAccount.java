@@ -55,15 +55,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginWithForbiddenCharactersShouldBeRejected() {
-		page.activateAccount("'t@$t'", null, null, null, null);
-		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("login.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginShouldBeUnique() {
 		page.activateAccount(validUserLogin, null, null, null, null);
 		

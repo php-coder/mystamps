@@ -28,6 +28,11 @@ Activate account with too long login
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=login.errors  Value is greater than allowable maximum of 15 characters
 
+Activate account with forbidden characters in login
+	Input Text              id=login         't@$t'
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=login.errors  Login must consist only latin letters, digits, dot, hyphen or underscore
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
