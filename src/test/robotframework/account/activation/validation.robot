@@ -18,6 +18,11 @@ Activate account with mismatching password and password confirmation
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=passwordConfirmation.errors  Password mismatch
 
+Activate account with too short login
+	Input Text              id=login         a
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=login.errors  Value is less than allowable minimum of 2 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
