@@ -210,7 +210,10 @@ def write_robot_test(filename, test_method, tag_name):
     return True
 
 def javaFile2robot(javaFile, tag_name):
-    return javaFiles2robot[javaFile].replace('{tag}', tag_name)
+    tag = tag_name
+    if tag_name in testng2robotTags:
+        tag = testng2robotTags[tag_name]
+    return javaFiles2robot[javaFile].replace('{tag}', tag)
 
 print('Scanning %s' % basedir, file=sys.stderr)
 
@@ -228,6 +231,10 @@ javaFiles2robot = {
     'WhenAdminAtIndexPage.java'             : 'site/misc-admin.robot',
     'WhenUserAtIndexPage.java'              : 'site/misc-user.robot',
     'WhenAnonymousUserActivateAccount.java' : 'account/activation/{tag}.robot',
+}
+
+testng2robotTags = {
+    'invalid' : 'validation',
 }
 
 for filepath in sorted(glob.glob('%s/*.java' % basedir)):
