@@ -235,6 +235,7 @@ javaFiles2robot = {
 
 testng2robotTags = {
     'invalid' : 'validation',
+    'valid'   : 'misc',
 }
 
 for filepath in sorted(glob.glob('%s/*.java' % basedir)):
