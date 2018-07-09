@@ -23,6 +23,11 @@ Activate account with too short login
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=login.errors  Value is less than allowable minimum of 2 characters
 
+Activate account with too long login
+	Input Text              id=login         abcde12345fghkl6
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=login.errors  Value is greater than allowable maximum of 15 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

@@ -29,7 +29,6 @@ import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.LOGIN_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PASSWORD_MAX_LENGTH;
@@ -53,15 +52,6 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void loginShouldNotBeTooLong() {
-		page.activateAccount("abcde12345fghkl6", null, null, null, null);
-		
-		assertThat(page)
-			.field("login")
-			.hasError(tr("value.too-long", LOGIN_MAX_LENGTH));
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
