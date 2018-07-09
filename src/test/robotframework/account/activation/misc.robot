@@ -15,6 +15,11 @@ Most short login should be accepted
 	Submit Form                      id=activate-account-form
 	Page Should Not Contain Element  id=login.errors
 
+Most long login should be accepted
+	Input Text                       id=login  abcde1234567890
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=login.errors
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

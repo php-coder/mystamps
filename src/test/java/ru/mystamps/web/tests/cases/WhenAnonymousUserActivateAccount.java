@@ -55,13 +55,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
-	public void mostLongLoginShouldBeAccepted() {
-		page.activateAccount("abcde1234567890", null, null, null, null);
-		
-		assertThat(page).field("login").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
 	public void loginWithAllowedCharactersShouldBeAccepted() {
 		page.activateAccount("t.3.s.7-T_E_S_T", null, null, null, null);
 		
