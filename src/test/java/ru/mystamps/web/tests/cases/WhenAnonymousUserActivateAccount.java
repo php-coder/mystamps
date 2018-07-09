@@ -55,13 +55,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void mostShortLoginShouldBeAccepted() {
-		page.activateAccount("ab", null, null, null, null);
-		
-		assertThat(page).field("login").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginShouldNotBeTooLong() {
 		page.activateAccount("abcde12345fghkl6", null, null, null, null);

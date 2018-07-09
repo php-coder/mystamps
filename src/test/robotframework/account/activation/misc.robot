@@ -10,6 +10,11 @@ Activation key should be auto filled from url
 	Go To                      ${SITE_URL}/account/activate?key=7777744444
 	Textfield Value Should Be  id=activationKey  7777744444
 
+Most short login should be accepted
+	Input Text                       id=login  ab
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=login.errors
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
