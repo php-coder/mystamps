@@ -54,13 +54,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void loginWithAllowedCharactersShouldBeAccepted() {
-		page.activateAccount("t.3.s.7-T_E_S_T", null, null, null, null);
-		
-		assertThat(page).field("login").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void loginWithForbiddenCharactersShouldBeRejected() {
 		page.activateAccount("'t@$t'", null, null, null, null);

@@ -20,6 +20,11 @@ Most long login should be accepted
 	Submit Form                      id=activate-account-form
 	Page Should Not Contain Element  id=login.errors
 
+Login with allowed characters should be accepted
+	Input Text                       id=login  t.3.s.7-T_E_S_T
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=login.errors
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
