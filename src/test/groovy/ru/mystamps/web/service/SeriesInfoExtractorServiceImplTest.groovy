@@ -149,6 +149,16 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			1 * countryService.findIdsByNames(expectedCandidates) >> Random.listOfIntegers()
 	}
 	
+	def 'extractCountry() should generate additional candidates by split words by a hyphen'() {
+		given:
+			String fragment = 'foo-bar'
+			List<String> expectedCandidates = [ 'foo-bar', 'foo', 'bar' ]
+		when:
+			service.extractCountry(fragment)
+		then:
+			1 * countryService.findIdsByNames(expectedCandidates) >> Random.listOfIntegers()
+	}
+	
 	def 'extractCountry() should try to search country names with candidate as a prefix'() {
 		given:
 			List<Integer> expectedResult = Random.listOfIntegers()

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -145,8 +146,18 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining country from a fragment: '{}'", fragment);
 		
-		String[] names = StringUtils.split(fragment, "\n\t ,.");
-		List<String> candidates = Arrays.stream(names)
+		String[] words = StringUtils.split(fragment, "\n\t ,.");
+		
+		Stream<String> names = Arrays.stream(words);
+		
+		// Generate more candidates by split their names by a hyphen.
+		// For example: "Minerals-Maldives" becomes [ "Minerals", "Maldives" ]
+		Stream<String> additionalNames = Arrays.stream(words)
+			.filter(el -> el.contains("-"))
+			.map(el -> StringUtils.split(el, '-'))
+			.flatMap(Arrays::stream);
+		
+		List<String> candidates = Stream.concat(names, additionalNames)
 			.filter(SeriesInfoExtractorServiceImpl::validCountryName)
 			.distinct()
 			.limit(MAX_CANDIDATES_FOR_LOOKUP)
