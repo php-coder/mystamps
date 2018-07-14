@@ -33,7 +33,7 @@
 				
 				--><div id="user_bar" class="col-sm-2 vcenter">
 					<ul class="list-unstyled">
-						<!--/*/
+						
 						<li sec:authorize="isAuthenticated()">
 							<i class="glyphicon glyphicon-user"></i>
 							<a sec:authentication="principal.userName"
@@ -44,20 +44,21 @@
 								John Doe
 							</a>
 						</li>
-						/*/-->
+						<!--/*/
 						<li sec:authorize="isAnonymous()">
 							<a href="../account/auth.html" th:href="@{${AUTHENTICATION_PAGE}}" th:text="#{t_enter}">Sign in</a>
 						</li>
-						<!--/*/
+						/*/-->
 						<li sec:authorize="isAuthenticated()">
 							<form id="logout-form" method="get" action="../site/index.html" class="no-margin" th:method="post" th:action="@{${LOGOUT_PAGE}}">
 								<i class="glyphicon glyphicon-share"></i>&nbsp;<input type="submit" value="Sign out" class="btn btn-link no-padding" th:value="#{t_logout}" />
 							</form>
 						</li>
-						/*/-->
+						<!--/*/
 						<li sec:authorize="isAnonymous()">
 							<a href="../account/register.html" th:href="@{${REGISTRATION_PAGE}}" th:text="#{t_register}">Register</a>
 						</li>
+						/*/-->
 					</ul>
 				</div>
 			</div>
@@ -66,6 +67,16 @@
 					<h3 id="page-header" th:text="${categoryName}">
 						Animals
 					</h3>
+					
+					<div class="text-center" sec:authorize="hasAuthority('CREATE_CATEGORY')">
+						<a href="../series/add.html"
+							class="btn btn-default btn-xs"
+							th:unless="${justAddedCategory}"
+							th:href="@{${ADD_SERIES_PAGE}(category=${categorySlug})}"
+							th:text="${#strings.capitalize('__#{t_add_series}__')}">
+							Add a stamp series
+						</a>
+					</div>
 					
 					<!--/*/
 					<div id="msg-success"
