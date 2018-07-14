@@ -17,7 +17,7 @@ Admin should see a link to a list of import requests
 
 Admin should see a link for adding series
 	[Tags]                    series
-	Page Should Contain Link  link=add stamp series
+	Page Should Contain Link  link=add a stamp series
 
 Admin should see a link for adding countries
 	[Tags]                    country
