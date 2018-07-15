@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SeriesSaleParsedDataDto {
 	private final Integer sellerId;
+	private final Integer sellerGroupId;
 	private final String sellerName;
 	private final String sellerUrl;
 	private final BigDecimal price;

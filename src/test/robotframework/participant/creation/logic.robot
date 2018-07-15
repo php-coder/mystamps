@@ -22,14 +22,14 @@ Create participant with name only (fill only mandatory fields)
 
 Create participant with full info (fill all fields)
 	Input Text                 id=name  participant2
-	Select From List By Label  id=group  Movies characters
+	Select From List By Label  id=group  example.com
 	Select Checkbox            id=buyer
 	Select Checkbox            id=seller
 	Input Text                 id=url   http://participant2.example.org
 	Submit Form                id=add-participant-form
 	Location Should Be         ${SITE_URL}/
 	Go To                      ${SITE_URL}/series/1
-	# TODO: check that buyer and seller listed in the "Movies characters" group
+	# TODO: check that buyer and seller listed in the "example.com" group
 	${availableSellers}=       Get List Items  id=seller
 	${availableBuyers}=        Get List Items  id=buyer
 	List Should Contain Value  ${availableSellers}  participant2

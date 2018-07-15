@@ -119,6 +119,7 @@ public class ControllersConfig {
 			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getSeriesSalesImportService(),
 			getSeriesController(),
+			servicesConfig.getTransactionParticipantService(),
 			eventPublisher
 		);
 	}

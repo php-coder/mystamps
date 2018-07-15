@@ -19,6 +19,7 @@ package ru.mystamps.web.controller;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,12 +47,14 @@ import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.dto.RequestImportForm;
 import ru.mystamps.web.controller.editor.ExpandCatalogNumbersEditor;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
+import ru.mystamps.web.service.TransactionParticipantService;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
@@ -65,6 +68,7 @@ public class SeriesImportController {
 	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesController seriesController;
+	private final TransactionParticipantService participantService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@InitBinder("requestImportForm")
@@ -154,12 +158,17 @@ public class SeriesImportController {
 			ImportSellerForm sellerForm = new ImportSellerForm();
 			sellerForm.setName(seriesSale.getSellerName());
 			sellerForm.setUrl(seriesSale.getSellerUrl());
+			sellerForm.setGroupId(seriesSale.getSellerGroupId());
 			
 			form.setSeller(sellerForm);
 			form.setSeriesSale(seriesSaleForm);
 			
 			if (seriesSale.getSellerId() != null) {
 				seriesController.addSellersToModel(model);
+			} else {
+				// required for displaying seller group
+				List<EntityWithIdDto> groups = participantService.findAllGroups();
+				model.addAttribute("groups", groups);
 			}
 		}
 		
@@ -214,6 +223,10 @@ public class SeriesImportController {
 		ImportSeriesSalesForm seriesSaleForm = form.getSeriesSale();
 		if (seriesSaleForm != null) {
 			seriesController.addSellersToModel(model);
+			
+			// required for displaying seller group
+			List<EntityWithIdDto> groups = participantService.findAllGroups();
+			model.addAttribute("groups", groups);
 		}
 		
 		if (result.hasErrors()) {

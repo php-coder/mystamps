@@ -18,6 +18,8 @@
 package ru.mystamps.web.service;
 
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -88,6 +90,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Boolean perforated = extractPerforated(data.getPerforated());
 		Set<String> michelNumbers = extractMichelNumbers(data.getMichelNumbers());
 		Integer sellerId = extractSeller(data.getSellerName(), data.getSellerUrl());
+		Integer sellerGroupId = extractSellerGroup(sellerId, data.getSellerUrl());
 		String sellerName = extractSellerName(sellerId, data.getSellerName());
 		String sellerUrl = extractSellerUrl(sellerId, data.getSellerUrl());
 		BigDecimal price = extractPrice(data.getPrice());
@@ -101,6 +104,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			perforated,
 			michelNumbers,
 			sellerId,
+			sellerGroupId,
 			sellerName,
 			sellerUrl,
 			price,
@@ -309,6 +313,31 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		log.debug("Could not extract seller based on name/url");
 		
 		return null;
+	}
+	
+	// @todo #857 SeriesInfoExtractorServiceImpl.extractSellerGroup(): add unit tests
+	public Integer extractSellerGroup(Integer id, String sellerUrl) {
+		// we need a group ony for a new seller (id == null)
+		if (id != null) {
+			return null;
+		}
+		
+		log.debug("Determining seller group by seller url '{}'", sellerUrl);
+		
+		try {
+			String name = new URL(sellerUrl).getHost();
+			log.debug("Determining seller group: looking for a group named '{}'", name);
+			
+			Integer groupId = transactionParticipantService.findGroupIdByName(name);
+			if (groupId != null) {
+				log.debug("Found seller group: #{}", groupId);
+			}
+			return groupId;
+			
+		} catch (MalformedURLException ex) {
+			log.debug("Could not extract seller group: {}", ex.getMessage());
+			return null;
+		}
 	}
 	
 	// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): add unit tests

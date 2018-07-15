@@ -29,6 +29,7 @@ import lombok.ToString;
 @ToString(exclude = { "createdAt", "updatedAt" })
 public class SeriesSalesParsedDataDbDto {
 	private Integer sellerId;
+	private Integer sellerGroupId;
 	private String sellerName;
 	private String sellerUrl;
 	private BigDecimal price;

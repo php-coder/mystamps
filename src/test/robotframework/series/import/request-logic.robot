@@ -117,6 +117,8 @@ Import series and series sale with a new seller from an external site
 	${requestLocation}=         Get Location
 	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
 	# seller info should be parsed and shown at the request page
+	${group}=                   Get Selected List Label  id=seller-group
+	Should Be Equal             ${group}  example.com
 	Textfield Value Should Be   id=seller-name  Lando Livianus
 	# We can't use "Textfield Value Should Be" because it causes NPE:
 	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
@@ -129,8 +131,10 @@ Import series and series sale with a new seller from an external site
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
 	Element Text Should Be      id=series-sale-1-info    ${currentDate} Lando Livianus was selling for 320.50 RUB
 	Link Should Point To        id=series-sale-1-seller  http://example.com/lando-livianus
+	# @todo #857 Check that a just created seller belongs to the "example.com" group
 	Go To                       ${requestLocation}
 	# after importing a series, sale info at the request page should be shown as read-only
+	Element Should Be Disabled  id=seller-group
 	Element Should Be Disabled  id=seller-name
 	Element Should Be Disabled  id=seller-url
 

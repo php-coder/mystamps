@@ -216,10 +216,12 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			seriesParsedData.setMichelNumbers(shortenedNumbers);
 		}
 		
+		// @todo #857 SeriesImportServiceImpl.saveParsedData(): add unit test for seller group
 		SeriesSalesParsedDataDbDto seriesSalesParsedData = new SeriesSalesParsedDataDbDto();
 		seriesSalesParsedData.setCreatedAt(now);
 		seriesSalesParsedData.setUpdatedAt(now);
 		seriesSalesParsedData.setSellerId(seriesInfo.getSellerId());
+		seriesSalesParsedData.setSellerGroupId(seriesInfo.getSellerGroupId());
 		seriesSalesParsedData.setSellerName(seriesInfo.getSellerName());
 		seriesSalesParsedData.setSellerUrl(seriesInfo.getSellerUrl());
 		seriesSalesParsedData.setPrice(seriesInfo.getPrice());

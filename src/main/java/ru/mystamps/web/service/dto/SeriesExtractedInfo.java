@@ -34,6 +34,7 @@ public class SeriesExtractedInfo {
 	private final Boolean perforated;
 	private final Set<String> michelNumbers;
 	private final Integer sellerId;
+	private final Integer sellerGroupId;
 	private final String sellerName;
 	private final String sellerUrl;
 	private final BigDecimal price;

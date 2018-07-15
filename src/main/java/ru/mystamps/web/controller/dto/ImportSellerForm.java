@@ -36,10 +36,9 @@ public class ImportSellerForm implements AddParticipantDto {
 	// @todo #695 /series/import/request/{id}(seller.url): add validation against long values
 	private String url;
 	
-	@Override
-	public Integer getGroupId() {
-		return null;
-	}
+	// @todo #857 /series/import/request/{id}(seller.group): add validation against negative values
+	// @todo #857 /series/import/request/{id}(seller.group): add validation for existing group
+	private Integer groupId;
 	
 	@Override
 	public Boolean getBuyer() {

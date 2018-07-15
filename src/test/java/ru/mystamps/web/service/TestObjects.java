@@ -272,6 +272,7 @@ public final class TestObjects {
 	
 	public static SeriesExtractedInfo createSeriesExtractedInfo() {
 		Integer sellerId = null;
+		Integer sellerGroupId = null;
 		String sellerName = null;
 		String sellerUrl = null;
 		
@@ -279,6 +280,7 @@ public final class TestObjects {
 		if (existingSeller) {
 			sellerId = Random.id();
 		} else {
+			sellerGroupId = Random.id();
 			sellerName = Random.sellerName();
 			sellerUrl = Random.url();
 		}
@@ -291,6 +293,7 @@ public final class TestObjects {
 			Random.perforated(),
 			Random.michelNumbers(),
 			sellerId,
+			sellerGroupId,
 			sellerName,
 			sellerUrl,
 			Random.price(),
@@ -306,6 +309,7 @@ public final class TestObjects {
 			null,
 			null,
 			Collections.emptySet(),
+			null,
 			null,
 			null,
 			null,
@@ -334,6 +338,7 @@ public final class TestObjects {
 	
 	public static SeriesSaleParsedDataDto createSeriesSaleParsedDataDto() {
 		Integer sellerId = null;
+		Integer sellerGroupId = null;
 		String sellerName = null;
 		String sellerUrl = null;
 		
@@ -341,12 +346,14 @@ public final class TestObjects {
 		if (existingSeller) {
 			sellerId = Random.id();
 		} else {
+			sellerGroupId = Random.id();
 			sellerName = Random.sellerName();
 			sellerUrl = Random.url();
 		}
 		
 		return new SeriesSaleParsedDataDto(
 			sellerId,
+			sellerGroupId,
 			sellerName,
 			sellerUrl,
 			Random.price(),

@@ -363,12 +363,20 @@ final class RowMappers {
 		throws SQLException {
 		
 		Integer sellerId = JdbcUtils.getInteger(rs, "seller_id");
+		Integer sellerGroupId = JdbcUtils.getInteger(rs, "seller_group_id");
 		String sellerName = rs.getString("seller_name");
 		String sellerUrl = rs.getString("seller_url");
 		BigDecimal price = rs.getBigDecimal("price");
 		Currency currency = JdbcUtils.getCurrency(rs, "currency");
 		
-		return new SeriesSaleParsedDataDto(sellerId, sellerName, sellerUrl, price, currency);
+		return new SeriesSaleParsedDataDto(
+			sellerId,
+			sellerGroupId,
+			sellerName,
+			sellerUrl,
+			price,
+			currency
+		);
 	}
 	
 	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int unused)

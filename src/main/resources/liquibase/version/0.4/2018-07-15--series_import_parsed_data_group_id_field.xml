@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-seller_group_id-column-to-series_sales_import_parsed_data-table" author="php-coder" context="scheme">
+		
+		<addColumn tableName="series_sales_import_parsed_data">
+			<column name="seller_group_id"
+				type="INTEGER"
+				beforeColumn="seller_name">
+				
+				<constraints references="transaction_participant_groups(id)"
+					foreignKeyName="fk_series_sales_import_parsed_data_seller_group_id" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
+	
+</databaseChangeLog>

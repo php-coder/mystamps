@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,9 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	
 	@Value("${transaction_participant_group.find_all}")
 	private String findAllGroupsSql;
+	
+	@Value("${transaction_participant_group.find_id_by_name}")
+	private String findGroupIdByNameSql;
 	
 	@Override
 	public Integer add(AddParticipantDbDto participant) {
@@ -115,6 +119,20 @@ public class JdbcTransactionParticipantDao implements TransactionParticipantDao 
 	@Override
 	public List<EntityWithIdDto> findAllGroups() {
 		return jdbcTemplate.query(findAllGroupsSql, RowMappers::forEntityWithIdDto);
+	}
+	
+	@Override
+	public Integer findGroupIdByName(String name) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findGroupIdByNameSql,
+				Collections.singletonMap("name", name),
+				Integer.class
+			);
+			
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 }

@@ -351,6 +351,36 @@
 								</tr>
 								/*/-->
 								
+								<tr th:if="${hasSellerInfo and importSeriesForm.seller.groupId != null}" th:classappend="${#fields.hasErrors('seller.groupId') ? 'has-error' : ''}">
+									<th>
+										<label for="seller-group" class="control-label" th:text="#{t_seller_group}">
+											Seller group
+										</label>
+									</th>
+									<td>
+										<select id="seller-group" class="form-control" th:field="*{seller.groupId}" th:disabled="${disabled}">
+											<option value="" th:text="#{t_not_chosen}">Not chosen</option>
+											<!--/*/
+											<option th:each="group : ${groups}"
+												th:value="${group.id}"
+												th:text="${group.name}"
+												th:selected="${importSeriesForm.seller.groupId == group.id}">
+											</option>
+											/*/-->
+											<!--/*-->
+											<option value="1" selected="selected">example.com</option>
+											<!--*/-->
+										</select>
+										<!--/*/
+										<span id="seller-group.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('seller.groupId')}"
+											th:each="error : ${#fields.errors('seller.groupId')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
 								<tr th:if="${hasSellerInfo and importSeriesForm.seller.name != null}" th:classappend="${#fields.hasErrors('seller.name') ? 'has-error' : ''}">
 									<th>
 										<label for="seller-name" class="control-label" th:text="#{t_seller_name}">

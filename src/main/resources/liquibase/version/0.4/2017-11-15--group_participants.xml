@@ -43,7 +43,7 @@
 	<changeSet id="add-movies-characters-participant-group" author="php-coder" context="test-data">
 		
 		<insert tableName="transaction_participant_groups">
-			<column name="name" value="Movies characters" />
+			<column name="name" value="example.com" />
 			<column name="created_at" valueComputed="${NOW}" />
 			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
 			<column name="updated_at" valueComputed="${NOW}" />
