@@ -23,10 +23,11 @@ import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -267,19 +268,13 @@ public final class Random {
 	private static Set<String> catalogNumbers() {
 		final int minSize = 1;
 		final int maxSize = 7;
+		final int maxCatalogNumber = 9999;
 		int size = integer(minSize, maxSize);
-		return new HashSet<>(
-			sampleMultiple(
-				size,
-				catalogNumber(),
-				catalogNumber(),
-				catalogNumber(),
-				catalogNumber(),
-				catalogNumber(),
-				catalogNumber(),
-				catalogNumber()
-			)
-		);
+		int from = integer(1, maxCatalogNumber - maxSize + 1);
+		
+		return IntStream.rangeClosed(from, from + size)
+			.mapToObj(String::valueOf)
+			.collect(Collectors.toSet());
 	}
 	
 }
