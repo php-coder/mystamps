@@ -189,7 +189,7 @@ public final class Random {
 	}
 	
 	public static String catalogNumber() {
-		final long maxCatalogNumber = 1000;
+		final long maxCatalogNumber = 9999;
 		return String.valueOf(between(1, maxCatalogNumber).integer());
 	}
 	
