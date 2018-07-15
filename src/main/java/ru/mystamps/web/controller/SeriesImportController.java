@@ -163,12 +163,12 @@ public class SeriesImportController {
 			form.setSeller(sellerForm);
 			form.setSeriesSale(seriesSaleForm);
 			
-			if (seriesSale.getSellerId() != null) {
-				seriesController.addSellersToModel(model);
-			} else {
+			if (seriesSale.getSellerId() == null) {
 				// required for displaying seller group
 				List<EntityWithIdDto> groups = participantService.findAllGroups();
 				model.addAttribute("groups", groups);
+			} else {
+				seriesController.addSellersToModel(model);
 			}
 		}
 		
