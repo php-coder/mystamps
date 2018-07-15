@@ -57,7 +57,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 99).
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
-		"([1-9][0-9]?)( беззубцовые)? мар(ок|ки)",
+		"([1-9][0-9]?)( (беззубцовые|зубцовых))? (мар(ок|ки)|блоков)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
 	
