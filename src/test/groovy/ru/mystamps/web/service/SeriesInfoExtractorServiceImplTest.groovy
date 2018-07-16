@@ -329,7 +329,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractQuantity(nullOrBlank()) == null
 	}
 	
-	def 'extractQuantity() should return null for invalid price'() {
+	def 'extractQuantity() should return null for invalid quantity'() {
 		expect:
 			service.extractQuantity('0 марок') == null
 	}
