@@ -1,4 +1,5 @@
 ---
+admin_email: coder
 user_db_password: p@ssword
 # Target urls should be in a format that is supported by duplicity(1):
 # http://www.nongnu.org/duplicity/duplicity.1.html#sect7

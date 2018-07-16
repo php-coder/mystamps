@@ -1,5 +1,5 @@
 # /etc/cron.d/mystamps-backup-remote file for backuping my-stamps.ru data to remote host
-MAILTO=coder
+MAILTO='{{ admin_email }}'
 #
 # min  hour  dom  mon  dow  user  command
 45     0     *    *    *    root  /data/bin/remote-backup.sh uploads 2>&1

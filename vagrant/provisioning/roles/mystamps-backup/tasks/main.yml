@@ -73,8 +73,8 @@
     mode: '0700'
 
 - name: Creating a cron task for backup to a remote host
-  copy:
-    src: ../../src/main/config/cron/mystamps-backup-remote
+  template:
+    src: mystamps-backup-remote
     dest: /etc/cron.d/mystamps-backup-remote
     force: yes
     backup: no
