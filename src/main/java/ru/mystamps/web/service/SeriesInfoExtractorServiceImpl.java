@@ -267,7 +267,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #694 SeriesInfoExtractorServiceImpl.extractMichelNumbers(): add unit tests
 	// @todo #694 SeriesInfoExtractorServiceImpl: support for a single Michel number
 	// @todo #694 SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers
 	protected Set<String> extractMichelNumbers(String fragment) {

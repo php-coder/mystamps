@@ -378,6 +378,23 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for extractMichelNumbers()
+	//
+	
+	@Unroll
+	def 'extractMichelNumbers() should extract "#expected" from "#fragment"'(String fragment, Set<String> expected) {
+		expect:
+			service.extractMichelNumbers(fragment) == expected
+		where:
+			fragment      || expected
+			nullOrBlank() || []
+			'# 1-3'       || [ '1', '2', '3' ]
+			'#9997-9999'  || [ '9997', '9998', '9999' ]
+			'#9999-9997'  || []
+			'#0997-0999'  || []
+	}
+	
+	//
 	// Tests for extractSeller()
 	//
 	
