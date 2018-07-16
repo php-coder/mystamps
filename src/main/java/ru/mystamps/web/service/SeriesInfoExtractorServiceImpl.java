@@ -351,7 +351,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return name;
 	}
 	
-	// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): add unit tests
 	protected String extractSellerUrl(Integer id, String url) {
 		if (id != null) {
 			return null;

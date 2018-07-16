@@ -446,6 +446,21 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for extractSellerUrl()
+	//
+	
+	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
+	def 'extractSellerUrl() should return "#expected" for id=#id/url=#url'(Integer id, String url, String expected) {
+		expect:
+			service.extractSellerUrl(id, url) == expected
+		where:
+			id          | url                  || expected
+			Random.id() | Random.url()         || null
+			null        | 'http://example.com' || 'http://example.com'
+	}
+	
+	//
 	// Tests for extractPrice()
 	//
 	
