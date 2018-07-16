@@ -1,5 +1,5 @@
 # /etc/cron.d/mystamps-backup-db file for backuping my-stamps.ru database
-MAILTO=coder
+MAILTO='{{ admin_email }}'
 #
 # min	hour	dom		mon		dow		user		command
 30		0		*		*		*		mystamps	umask 027; mysqldump --single-transaction mystamps | bzip2 >/data/backups/mysql_backup_mystamps_$(date +\%Y\%m\%d-\%H\%M\%S).sql.bz2 2>&1

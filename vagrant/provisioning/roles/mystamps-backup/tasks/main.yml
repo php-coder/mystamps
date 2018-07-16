@@ -19,8 +19,8 @@
     mode: '0600'
 
 - name: Creating a cron task for doing database backups
-  copy:
-    src: ../../src/main/config/cron/mystamps-backup-db
+  template:
+    src: mystamps-backup-db
     dest: /etc/cron.d/mystamps-backup-db
     force: yes
     backup: no
