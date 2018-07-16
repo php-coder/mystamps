@@ -53,17 +53,17 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// Regular expression matches release year of the stamps (from 1840 till 2099).
 	private static final Pattern RELEASE_YEAR_REGEXP =
-		Pattern.compile("(18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})г?");
+		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})г?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 99).
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
-		"([1-9][0-9]?)( (беззубцовые|зубцовых))? (мар(ок|ки)|блоков)",
+		"(?<quantity>[1-9][0-9]?)( (беззубцовые|зубцовых))? (мар(ок|ки)|блоков)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
 	
 	// Regular expression matches range of Michel catalog numbers (from 1 to 9999).
 	private static final Pattern MICHEL_NUMBERS_REGEXP =
-		Pattern.compile("#[ ]?([1-9][0-9]{0,3})-([1-9][0-9]{0,3})");
+		Pattern.compile("#[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(ValidationRules.CATEGORY_NAME_EN_REGEXP);
@@ -213,7 +213,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			}
 			
 			try {
-				Integer year = Integer.valueOf(matcher.group(1));
+				Integer year = Integer.valueOf(matcher.group("year"));
 				log.debug("Release year is {}", year);
 				return year;
 				
@@ -237,7 +237,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
-			String quantity = matcher.group(1);
+			String quantity = matcher.group("quantity");
 			log.debug("Quantity is {}", quantity);
 			return Integer.valueOf(quantity);
 		}
@@ -278,8 +278,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		Matcher matcher = MICHEL_NUMBERS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
-			Integer begin = Integer.valueOf(matcher.group(1));
-			Integer end = Integer.valueOf(matcher.group(2));
+			Integer begin = Integer.valueOf(matcher.group("begin"));
+			Integer end = Integer.valueOf(matcher.group("end"));
 			if (begin < end) {
 				Set<String> numbers = IntStream.rangeClosed(begin, end)
 					.mapToObj(String::valueOf)
