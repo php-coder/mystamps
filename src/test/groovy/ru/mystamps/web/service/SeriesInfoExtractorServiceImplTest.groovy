@@ -382,6 +382,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	//
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
 	def 'extractMichelNumbers() should extract "#expected" from "#fragment"'(String fragment, Set<String> expected) {
 		expect:
 			service.extractMichelNumbers(fragment) == expected
