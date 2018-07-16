@@ -431,6 +431,21 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for extractSellerName()
+	//
+	
+	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression') // false positive
+	def 'extractSellerName() should return "#expected" for id=#id/name=#name'(Integer id, String name, String expected) {
+		expect:
+			service.extractSellerName(id, name) == expected
+		where:
+			id          | name                || expected
+			Random.id() | Random.sellerName() || null
+			null        | 'Seller Name'       || 'Seller Name'
+	}
+	
+	//
 	// Tests for extractPrice()
 	//
 	
