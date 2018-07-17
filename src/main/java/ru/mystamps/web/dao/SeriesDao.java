@@ -45,7 +45,6 @@ public interface SeriesDao {
 	long countAll();
 	long countAllStamps();
 	long countSeriesOfCollection(Integer collectionId);
-	long countStampsOfCollection(Integer collectionId);
 	long countSeriesById(Integer seriesId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);

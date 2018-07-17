@@ -309,6 +309,26 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countStampsOf()
+	//
+	
+	def 'countStampsOf() should throw exception when argument is null'() {
+		when:
+			service.countStampsOf(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'countStampsOf() should pass arguments to dao'() {
+		given:
+			Integer expectedCollectionId = Random.id()
+		when:
+			service.countStampsOf(expectedCollectionId)
+		then:
+			1 * collectionDao.countStampsOfCollection(expectedCollectionId) >> positiveLong()
+	}
+	
+	//
 	// Tests for findRecentlyCreated()
 	//
 	

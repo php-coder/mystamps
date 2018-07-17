@@ -87,7 +87,7 @@ public class CollectionController {
 			long categoryCounter = categoryService.countCategoriesOf(collectionId);
 			long countryCounter  = countryService.countCountriesOf(collectionId);
 			long seriesCounter   = seriesService.countSeriesOf(collectionId);
-			long stampsCounter   = seriesService.countStampsOf(collectionId);
+			long stampsCounter   = collectionService.countStampsOf(collectionId);
 			
 			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);
 			List<Object[]> countriesStat  = getCountriesStatistics(collectionId, lang);

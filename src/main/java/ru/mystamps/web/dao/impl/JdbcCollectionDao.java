@@ -63,6 +63,9 @@ public class JdbcCollectionDao implements CollectionDao {
 	@Value("${collection.count_updated_since}")
 	private String countUpdatedSinceSql;
 	
+	@Value("${collection.count_stamps_of_collection}")
+	private String countStampsOfCollectionSql;
+	
 	@Value("${collection.create}")
 	private String addCollectionSql;
 
@@ -120,6 +123,15 @@ public class JdbcCollectionDao implements CollectionDao {
 		return jdbcTemplate.queryForObject(
 			countUpdatedSinceSql,
 			Collections.singletonMap("date", date),
+			Long.class
+		);
+	}
+	
+	@Override
+	public long countStampsOfCollection(Integer collectionId) {
+		return jdbcTemplate.queryForObject(
+			countStampsOfCollectionSql,
+			Collections.singletonMap("collection_id", collectionId),
 			Long.class
 		);
 	}

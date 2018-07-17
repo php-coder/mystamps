@@ -145,6 +145,14 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countStampsOf(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
+		
+		return collectionDao.countStampsOfCollection(collectionId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public List<LinkEntityDto> findRecentlyCreated(int quantity) {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		

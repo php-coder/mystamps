@@ -31,6 +31,7 @@ public interface CollectionDao {
 	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
+	long countStampsOfCollection(Integer collectionId);
 	Integer add(AddCollectionDbDto collection);
 	void markAsModified(Integer userId, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);

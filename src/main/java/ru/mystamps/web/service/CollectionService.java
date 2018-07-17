@@ -32,6 +32,7 @@ public interface CollectionService {
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
+	long countStampsOf(Integer collectionId);
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
 	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
 	CollectionInfoDto findBySlug(String slug);

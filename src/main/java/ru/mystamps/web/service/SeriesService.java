@@ -37,8 +37,6 @@ public interface SeriesService {
 	long countAll();
 	long countAllStamps();
 	long countSeriesOf(Integer collectionId);
-	// @todo #477 SeriesService.countStampsOf(): rename to CollectionService.countStampsOf()
-	long countStampsOf(Integer collectionId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
 	boolean isSeriesExist(Integer seriesId);
