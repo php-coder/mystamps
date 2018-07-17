@@ -105,3 +105,12 @@
     enabled: yes
     state: started
 
+- name: Creating a cron task for sending service logs to admin
+  template:
+    src: mystamps-send-logs
+    dest: /etc/cron.d/mystamps-send-logs
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0644'

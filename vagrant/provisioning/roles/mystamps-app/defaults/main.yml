@@ -1,3 +1,4 @@
 ---
+admin_email: coder
 # possible values: test and prod
 profile: test

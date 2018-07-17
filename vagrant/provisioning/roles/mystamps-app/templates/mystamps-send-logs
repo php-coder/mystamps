@@ -1,0 +1,5 @@
+# /etc/cron.d/mystamps-send-logs file for sending some useful logs to admin
+MAILTO='{{ admin_email }}'
+#
+# min	hour	dom	mon	dow	user		command
+0	5	*	*	*	mystamps	journalctl --unit mystamps --since yesterday --until today --output cat
