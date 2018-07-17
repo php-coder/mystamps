@@ -124,7 +124,7 @@ public final class CatalogUtils {
 		}
 		
 		Set<String> result = new LinkedHashSet<>();
-		for (String number : catalogNumbers.split(",")) {
+		for (String number : StringUtils.split(catalogNumbers, ',')) {
 			Validate.isTrue(!number.trim().isEmpty(), "Catalog number must be non empty");
 			
 			String[] range = StringUtils.split(number, '-');
