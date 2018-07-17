@@ -80,7 +80,7 @@ public class CollectionController {
 		Integer collectionId = collection.getId();
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInCollectionDto> seriesOfCollection =
-			seriesService.findByCollectionId(collectionId, lang);
+			collectionService.findSeriesInCollection(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		if (seriesOfCollection.iterator().hasNext()) {

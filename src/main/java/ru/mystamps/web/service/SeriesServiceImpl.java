@@ -37,7 +37,6 @@ import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -299,14 +298,6 @@ public class SeriesServiceImpl implements SeriesService {
 		Validate.isTrue(slug != null, "Country slug must be non null");
 		
 		return seriesDao.findByCountrySlugAsSeriesInfo(slug, lang);
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang) {
-		Validate.isTrue(collectionId != null, "Collection id must be non null");
-		
-		return seriesDao.findByCollectionId(collectionId, lang);
 	}
 	
 	@Override

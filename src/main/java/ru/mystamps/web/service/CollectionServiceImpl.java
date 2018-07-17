@@ -36,12 +36,14 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.service.dto.AddToCollectionDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyMethods")
 public class CollectionServiceImpl implements CollectionService {
 	
 	private final Logger log;
@@ -157,6 +159,14 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(quantity > 0, "Quantity must be greater than 0");
 		
 		return collectionDao.findLastCreated(quantity);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<SeriesInCollectionDto> findSeriesInCollection(Integer collectionId, String lang) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
+		
+		return collectionDao.findSeriesByCollectionId(collectionId, lang);
 	}
 	
 	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): add unit tests

@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -53,9 +52,6 @@ public interface SeriesService {
 	
 	List<SeriesInfoDto> findByCategorySlug(String slug, String lang);
 	List<SeriesInfoDto> findByCountrySlug(String slug, String lang);
-	// @todo #477 SeriesService.findByCollectionId():
-	//  rename to CollectionService.findSeriesInCollection()
-	List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang);
 	List<SeriesLinkDto> findRecentlyAdded(int quantity, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
 	

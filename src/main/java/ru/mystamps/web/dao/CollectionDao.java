@@ -24,10 +24,13 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
+	List<SeriesInCollectionDto> findSeriesByCollectionId(Integer collectionId, String lang);
 	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);

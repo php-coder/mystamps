@@ -42,10 +42,11 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCollectionDao implements CollectionDao {
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
 	
@@ -53,6 +54,9 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@Value("${collection.find_last_created}")
 	private String findLastCreatedCollectionsSql;
+	
+	@Value("${collection.find_series_by_collection_id}")
+	private String findSeriesByCollectionIdSql;
 	
 	@Value("${collection.find_series_with_prices_by_slug}")
 	private String findSeriesWithPricesBySlugSql;
@@ -90,6 +94,19 @@ public class JdbcCollectionDao implements CollectionDao {
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
 			RowMappers::forLinkEntityDto
+		);
+	}
+	
+	@Override
+	public List<SeriesInCollectionDto> findSeriesByCollectionId(Integer collectionId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("collection_id", collectionId);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(
+			findSeriesByCollectionIdSql,
+			params,
+			RowMappers::forSeriesInCollectionDto
 		);
 	}
 	

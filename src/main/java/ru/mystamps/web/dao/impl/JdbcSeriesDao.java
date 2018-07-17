@@ -38,7 +38,6 @@ import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.dao.dto.AddSeriesDbDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
@@ -78,9 +77,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	
 	@Value("${series.find_by_country_slug}")
 	private String findByCountrySlugSql;
-	
-	@Value("${series.find_by_collection_id}")
-	private String findByCollectionIdSql;
 	
 	@Value("${series.find_purchases_and_sales_by_series_id}")
 	private String findPurchasesAndSalesBySeriesIdSql;
@@ -230,19 +226,6 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCountrySlugSql, params, RowMappers::forSeriesInfoDto);
-	}
-	
-	@Override
-	public List<SeriesInCollectionDto> findByCollectionId(Integer collectionId, String lang) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("collection_id", collectionId);
-		params.put("lang", lang);
-		
-		return jdbcTemplate.query(
-			findByCollectionIdSql,
-			params,
-			RowMappers::forSeriesInCollectionDto
-		);
 	}
 	
 	/**

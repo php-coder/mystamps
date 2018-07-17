@@ -1076,28 +1076,6 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findByCollectionId()
-	//
-	
-	def "findByCollectionId() should throw exception when collection id is null"() {
-		when:
-			service.findByCollectionId(null, Random.lang())
-		then:
-			thrown IllegalArgumentException
-	}
-	
-	def "findByCollectionId() should pass arguments to dao"() {
-		given:
-			Integer expectedCollectionId = Random.id()
-		and:
-			String expectedLang = Random.lang()
-		when:
-			service.findByCollectionId(expectedCollectionId, expectedLang)
-		then:
-			1 * seriesDao.findByCollectionId(expectedCollectionId, expectedLang) >> []
-	}
-	
-	//
 	// Tests for findRecentlyAdded
 	//
 	
