@@ -197,4 +197,28 @@ class TransactionParticipantServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	//
+	// Tests for findGroupIdByName()
+	//
+	
+	def 'findGroupIdByName() should throw exception when name is null, empty or blank'() {
+		when:
+			service.findGroupIdByName(nullOrBlank())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Group name must be non-blank'
+	}
+	
+	def 'findGroupIdByName() should invoke dao and return its result'() {
+		given:
+			String expectedName = 'Some Group'
+			Integer expectedResult = Random.id()
+		when:
+			Integer result = service.findGroupIdByName(expectedName)
+		then:
+			1 * transactionParticipantDao.findGroupIdByName(expectedName) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
 }

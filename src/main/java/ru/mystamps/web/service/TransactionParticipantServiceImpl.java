@@ -96,7 +96,6 @@ public class TransactionParticipantServiceImpl implements TransactionParticipant
 		return transactionParticipantDao.findAllGroups();
 	}
 	
-	// @todo #857 TransactionParticipantServiceImpl.findGroupIdByName(): add unit tests
 	// @todo #857 TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service
 	@Override
 	@Transactional(readOnly = true)
