@@ -21,7 +21,7 @@ Admin should see a link for adding series
 
 Admin should see a link for adding countries
 	[Tags]                    country
-	Page Should Contain Link  link=add country
+	Page Should Contain Link  link=add a country
 
 Admin should see a link for listing countries
 	[Tags]                    country
@@ -29,7 +29,7 @@ Admin should see a link for listing countries
 
 Admin should see a link for adding categories
 	[Tags]                    category
-	Page Should Contain Link  link=add category
+	Page Should Contain Link  link=add a category
 
 Admin should see a link for listing categories
 	[Tags]                    category

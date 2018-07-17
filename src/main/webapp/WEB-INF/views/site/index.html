@@ -80,10 +80,10 @@
 								<a th:href="@{${REQUEST_IMPORT_SERIES_PAGE}}" th:text="#{t_import_series}" href="../series/import/request.html">import a series</a>
 							</li>
 							<li sec:authorize="hasAuthority('CREATE_CATEGORY')">
-								<a th:href="@{${ADD_CATEGORY_PAGE}}" th:text="#{t_create_category}" href="../category/add.html">add category</a>
+								<a th:href="@{${ADD_CATEGORY_PAGE}}" th:text="#{t_create_category}" href="../category/add.html">add a category</a>
 							</li>
 							<li sec:authorize="hasAuthority('CREATE_COUNTRY')">
-								<a th:href="@{${ADD_COUNTRY_PAGE}}" th:text="#{t_add_country}" href="../country/add.html">add country</a>
+								<a th:href="@{${ADD_COUNTRY_PAGE}}" th:text="#{t_add_country}" href="../country/add.html">add a country</a>
 							</li>
 							<li sec:authorize="hasAuthority('ADD_PARTICIPANT')">
 								<a th:href="@{${ADD_PARTICIPANT_PAGE}}" th:text="#{t_add_buyer_seller}" href="../participant/add.html">add buyer/seller</a>
