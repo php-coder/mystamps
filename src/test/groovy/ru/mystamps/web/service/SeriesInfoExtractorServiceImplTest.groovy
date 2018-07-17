@@ -329,9 +329,13 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractQuantity(nullOrBlank()) == null
 	}
 	
-	def 'extractQuantity() should return null for invalid quantity'() {
+	@Unroll
+	def 'extractQuantity() should return null for invalid quantity (#fragment)'(String fragment) {
 		expect:
-			service.extractQuantity('0 марок') == null
+			service.extractQuantity(fragment) == null
+		where:
+			fragment  | _
+			'0 марок' | _
 	}
 	
 	@Unroll
