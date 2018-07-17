@@ -22,6 +22,7 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 
 import static ru.mystamps.web.service.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
+import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES
 
 import java.time.Year
 
@@ -334,8 +335,9 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		expect:
 			service.extractQuantity(fragment) == null
 		where:
-			fragment  | _
-			'0 марок' | _
+			fragment                              | _
+			'0 марок'                             | _
+			(MAX_STAMPS_IN_SERIES + 1) + ' марок' | _
 	}
 	
 	@Unroll

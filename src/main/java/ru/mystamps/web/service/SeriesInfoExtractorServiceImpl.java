@@ -227,7 +227,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #781 SeriesInfoExtractorServiceImpl.extractQuantity() respect MAX_STAMPS_IN_SERIES
 	protected Integer extractQuantity(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
@@ -237,9 +236,11 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
-			String quantity = matcher.group("quantity");
-			log.debug("Quantity is {}", quantity);
-			return Integer.valueOf(quantity);
+			Integer quantity = Integer.valueOf(matcher.group("quantity"));
+			if (quantity <= ValidationRules.MAX_STAMPS_IN_SERIES) {
+				log.debug("Quantity is {}", quantity);
+				return quantity;
+			}
 		}
 		
 		log.debug("Could not extract quantity from a fragment");
