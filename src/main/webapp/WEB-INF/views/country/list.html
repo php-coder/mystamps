@@ -65,11 +65,11 @@
 					</h3>
 					
 					<div class="text-center" sec:authorize="hasAuthority('CREATE_COUNTRY')">
-						<a href="../series/add.html"
+						<a href="../country/add.html"
 							class="btn btn-default btn-xs"
-							th:href="@{${ADD_SERIES_PAGE}}"
-							th:text="${#strings.capitalize('__#{t_add_series}__')}">
-							Add a stamp series
+							th:href="@{${ADD_COUNTRY_PAGE}}"
+							th:text="${#strings.capitalize('__#{t_add_country}__')}">
+							Add a country
 						</a>
 					</div>
 					
