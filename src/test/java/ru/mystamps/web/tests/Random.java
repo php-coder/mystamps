@@ -149,6 +149,12 @@ public final class Random {
 		).english();
 	}
 	
+	// @todo #738 Random.participantGroupName(): make the generated names conform to
+	//  the validation rules (when they will appear)
+	public static String participantGroupName() {
+		return name();
+	}
+	
 	public static String sellerName() {
 		return participantName();
 	}

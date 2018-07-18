@@ -211,7 +211,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 	
 	def 'findGroupIdByName() should invoke dao and return its result'() {
 		given:
-			String expectedName = 'Some Group'
+			String expectedName = Random.participantGroupName()
 			Integer expectedResult = Random.id()
 		when:
 			Integer result = service.findGroupIdByName(expectedName)

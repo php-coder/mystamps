@@ -235,8 +235,7 @@ public final class TestObjects {
 	
 	public static EntityWithParentDto createEntityWithParentDto() {
 		String name = Random.categoryName();
-		// @todo #702 TestObjects: introduce name generator for transaction participant groups
-		String parentName = Random.categoryName();
+		String parentName = Random.participantGroupName();
 		return new EntityWithParentDto(Random.id().toString(), name, parentName);
 	}
 	
