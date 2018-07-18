@@ -46,7 +46,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def setup() {
 		form = new AddCategoryForm()
-		form.setName('Any category name')
+		form.setName(Random.categoryName())
 		form.setNameRu('Любое название категории')
 	}
 	

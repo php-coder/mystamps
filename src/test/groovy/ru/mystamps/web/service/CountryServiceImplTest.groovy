@@ -45,7 +45,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def setup() {
 		form = new AddCountryForm()
-		form.setName('Any country name')
+		form.setName(Random.countryName())
 		form.setNameRu('Любое название страны')
 	}
 	
