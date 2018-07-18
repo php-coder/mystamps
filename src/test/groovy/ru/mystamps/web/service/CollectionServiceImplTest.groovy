@@ -55,7 +55,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.createCollection(null, 'test-owner-login')
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Owner id must be non null'
 	}
 	
 	@SuppressWarnings('FactoryMethodName')
@@ -63,7 +64,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.createCollection(Random.userId(), null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Owner login must be non null'
 	}
 	
 	@SuppressWarnings('FactoryMethodName')
@@ -71,7 +73,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.createCollection(Random.userId(), '')
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Slug for string \'\' must be non empty'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
@@ -121,14 +124,16 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(null, TestObjects.createAddToCollectionDto())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	def 'addToCollection() should throw exception when dto is null'() {
 		when:
 			service.addToCollection(Random.userId(), null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def 'addToCollection() should throw exception when number of stamps is null'() {
@@ -138,7 +143,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(Random.userId(), form)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Number of stamps must be non null'
 	}
 	
 	def 'addToCollection() should throw exception when series id is null'() {
@@ -148,7 +154,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(Random.userId(), form)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def 'addToCollection() should throw exception when price is specified without currency'() {
@@ -159,7 +166,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.addToCollection(Random.userId(), form)
 		then:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'Currency must be non null when price is specified'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -204,14 +212,16 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.removeFromCollection(null, Random.id())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	def 'removeFromCollection() should throw exception when series id is null'() {
 		when:
 			service.removeFromCollection(Random.userId(), null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -241,7 +251,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.isSeriesInCollection(Random.userId(), null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def 'isSeriesInCollection() should return false for anonymous'() {
@@ -293,7 +304,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.countUpdatedSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	def 'countUpdatedSince() should invoke dao, pass argument and return result from dao'() {
@@ -316,7 +328,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.countStampsOf(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection id must be non null'
 	}
 	
 	def 'countStampsOf() should pass arguments to dao'() {
@@ -337,7 +350,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.findRecentlyCreated(quantity)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Quantity must be greater than 0'
 		where:
 			quantity | _
 			-1       | _
@@ -361,7 +375,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.findSeriesInCollection(null, Random.lang())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection id must be non null'
 	}
 	
 	def 'findSeriesInCollection() should pass arguments to dao'() {
@@ -383,7 +398,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.findBySlug(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection slug must be non null'
 	}
 	
 	def 'findBySlug() should invoke dao, pass argument and return result from dao'() {
