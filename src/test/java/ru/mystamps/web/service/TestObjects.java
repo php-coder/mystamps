@@ -38,6 +38,7 @@ import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
 import static io.qala.datagen.RandomShortApi.bool;
+import static io.qala.datagen.RandomShortApi.nullOr;
 
 public final class TestObjects {
 	public static final String TEST_ACTIVITY_TYPE    = "EventType";
@@ -54,8 +55,6 @@ public final class TestObjects {
 	protected static final String TEST_PASSWORD     = "secret";
 	
 	private static final String TEST_NAME           = "Test Name";
-	private static final String TEST_LOGIN          = "test";
-	
 	private static final String TEST_URL            = "test.example.org";
 	private static final BigDecimal TEST_PRICE      = new BigDecimal("100.99");
 	
@@ -72,7 +71,7 @@ public final class TestObjects {
 		UsersActivationFullDto activation = new UsersActivationFullDto(
 			TEST_ACTIVATION_KEY,
 			TEST_EMAIL,
-			new Date()
+			Random.date()
 		);
 		return activation;
 	}
@@ -87,27 +86,25 @@ public final class TestObjects {
 	
 	public static AddUserDbDto createAddUserDbDto() {
 		AddUserDbDto user = new AddUserDbDto();
-		user.setLogin(TEST_LOGIN);
+		user.setLogin(Random.login());
 		user.setRole(UserDetails.Role.USER);
 		user.setName(TEST_NAME);
 		user.setEmail(TEST_EMAIL);
-		user.setRegisteredAt(new Date());
-		user.setActivatedAt(new Date());
+		user.setRegisteredAt(Random.date());
+		user.setActivatedAt(Random.date());
 		user.setHash(TEST_HASH);
 
 		return user;
 	}
 	
 	public static UserDetails createUserDetails() {
-		String collectionSlug = TEST_LOGIN;
-		
 		return new UserDetails(
 			Random.userId(),
-			TEST_LOGIN,
+			Random.login(),
 			TEST_NAME,
 			TEST_HASH,
 			UserDetails.Role.USER,
-			collectionSlug
+			Random.collectionSlug()
 		);
 	}
 	
@@ -120,18 +117,21 @@ public final class TestObjects {
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
-		return new SitemapInfoDto(Random.id(), new Date());
+		return new SitemapInfoDto(Random.id(), Random.date());
 	}
 	
 	@SuppressWarnings("checkstyle:magicnumber")
 	public static SeriesInfoDto createSeriesInfoDto() {
+		String category = Random.categoryName();
+		String country = Random.countryName();
+		
 		return new SeriesInfoDto(
 			Random.id(),
-			new LinkEntityDto(Random.id(), "test-category", "Test Category"),
-			new LinkEntityDto(Random.id(), "test-country", "Test Country"),
+			new LinkEntityDto(Random.id(), SlugUtils.slugify(category), category),
+			new LinkEntityDto(Random.id(), SlugUtils.slugify(country), country),
 			15, 10, Random.issueYear(),
 			16,
-			bool()
+			Random.perforated()
 		);
 	}
 	
@@ -146,17 +146,17 @@ public final class TestObjects {
 			info.getPerforated(),
 			"this is a full info",
 			Random.userId(),
-			TEST_PRICE,
-			TEST_PRICE,
-			TEST_PRICE,
-			TEST_PRICE,
-			Random.price(),
-			Random.price()
+			nullOr(Random.price()),
+			nullOr(Random.price()),
+			nullOr(Random.price()),
+			nullOr(Random.price()),
+			nullOr(Random.price()),
+			nullOr(Random.price())
 		);
 	}
 	
 	public static CollectionInfoDto createCollectionInfoDto() {
-		return new CollectionInfoDto(Random.id(), "test-user", "Test User");
+		return new CollectionInfoDto(Random.id(), Random.collectionSlug(), "Test User");
 	}
 	
 	public static SeriesInCollectionWithPriceDto createSeriesInCollectionWithPriceDto() {
@@ -190,16 +190,16 @@ public final class TestObjects {
 	 */
 	public static PurchaseAndSaleDto createPurchaseAndSaleDto() {
 		return new PurchaseAndSaleDto(
-			new Date(),
+			Random.date(),
 			TEST_NAME,
 			TEST_URL,
 			TEST_NAME,
 			TEST_URL,
 			TEST_URL,
-			TEST_PRICE,
-			Currency.RUB,
-			TEST_PRICE,
-			Currency.USD
+			Random.price(),
+			Random.currency(),
+			Random.price(),
+			Random.currency()
 		);
 	}
 	
@@ -208,7 +208,7 @@ public final class TestObjects {
 	}
 	
 	public static ImportRequestDto createImportRequestDto() {
-		return new ImportRequestDto(Random.url(), Random.importRequestStatus(), null);
+		return new ImportRequestDto(Random.url(), Random.importRequestStatus(), Random.id());
 	}
 	
 	public static SeriesParsedDataDto createSeriesParsedDataDto() {
