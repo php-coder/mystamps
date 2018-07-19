@@ -40,7 +40,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;

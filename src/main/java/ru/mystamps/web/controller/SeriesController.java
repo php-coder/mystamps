@@ -55,7 +55,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesForm;
@@ -71,6 +70,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesImportService;

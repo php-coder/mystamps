@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.converter.annotation;
+package ru.mystamps.web.feature.country;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
