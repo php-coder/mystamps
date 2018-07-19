@@ -26,7 +26,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.UniqueCategoryName;
