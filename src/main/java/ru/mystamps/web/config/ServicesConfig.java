@@ -25,18 +25,20 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import lombok.RequiredArgsConstructor;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 3 lines
+import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.category.CategoryServiceImpl;
+// CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
+@Import(CategoryConfig.Services.class)
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
 public class ServicesConfig {
@@ -48,6 +50,7 @@ public class ServicesConfig {
 	private final Environment env;
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
+	private final CategoryService categoryService;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
@@ -63,14 +66,6 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public CategoryService getCategoryService() {
-		return new CategoryServiceImpl(
-			LoggerFactory.getLogger(CategoryServiceImpl.class),
-			daoConfig.getCategoryDao()
-		);
-	}
-	
-	@Bean
 	public CollectionService getCollectionService() {
 		return new CollectionServiceImpl(
 			LoggerFactory.getLogger(CollectionServiceImpl.class),
@@ -82,7 +77,7 @@ public class ServicesConfig {
 	public CronService getCronService() {
 		return new CronServiceImpl(
 			LoggerFactory.getLogger(CronServiceImpl.class),
-			getCategoryService(),
+			categoryService,
 			getCountryService(),
 			getCollectionService(),
 			getSeriesService(),
@@ -196,7 +191,7 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
 			new SeriesInfoExtractorServiceImpl(
 				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
-				getCategoryService(),
+				categoryService,
 				getCountryService(),
 				getTransactionParticipantService()
 			)

@@ -48,6 +48,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 @Configuration
@@ -60,12 +61,13 @@ import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	private final ServicesConfig servicesConfig;
+	private final CategoryService categoryService;
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(
 			new LinkEntityDtoGenericConverter(
-				servicesConfig.getCategoryService(),
+				categoryService,
 				servicesConfig.getCountryService()
 			)
 		);

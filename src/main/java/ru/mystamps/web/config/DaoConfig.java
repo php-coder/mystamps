@@ -28,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.category.CategoryDao;
-import ru.mystamps.web.feature.category.JdbcCategoryDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
@@ -38,11 +36,6 @@ public class DaoConfig {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final Environment env;
-	
-	@Bean
-	public CategoryDao getCategoryDao() {
-		return new JdbcCategoryDao(jdbcTemplate);
-	}
 	
 	@Bean
 	public CountryDao getCountryDao() {

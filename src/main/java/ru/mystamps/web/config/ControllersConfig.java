@@ -21,35 +21,31 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.category.CategoryController;
+import ru.mystamps.web.feature.category.CategoryConfig;
+import ru.mystamps.web.feature.category.CategoryService;
 
 @Configuration
 @RequiredArgsConstructor
+@Import(CategoryConfig.Controllers.class)
 public class ControllersConfig {
 	
 	private final ServicesConfig servicesConfig;
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
+	private final CategoryService categoryService;
 	
 	@Bean
 	public AccountController getAccountController() {
 		return new AccountController(
 			servicesConfig.getUserService(),
 			servicesConfig.getUsersActivationService()
-		);
-	}
-	
-	@Bean
-	public CategoryController getCategoryController() {
-		return new CategoryController(
-			servicesConfig.getCategoryService(),
-			servicesConfig.getSeriesService()
 		);
 	}
 	
@@ -64,7 +60,7 @@ public class ControllersConfig {
 	@Bean
 	public CollectionController getCollectionController() {
 		return new CollectionController(
-			servicesConfig.getCategoryService(),
+			categoryService,
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
@@ -103,7 +99,7 @@ public class ControllersConfig {
 	@Bean
 	public SeriesController getSeriesController() {
 		return new SeriesController(
-			servicesConfig.getCategoryService(),
+			categoryService,
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
@@ -128,7 +124,7 @@ public class ControllersConfig {
 	@Bean
 	public SiteController getSiteController() {
 		return new SiteController(
-			servicesConfig.getCategoryService(),
+			categoryService,
 			servicesConfig.getCollectionService(),
 			servicesConfig.getCountryService(),
 			servicesConfig.getSeriesService(),
