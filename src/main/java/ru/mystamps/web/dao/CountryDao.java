@@ -20,8 +20,8 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.feature.country.AddCountryDbDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CountryDao {

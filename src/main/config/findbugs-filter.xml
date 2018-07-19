@@ -65,5 +65,16 @@
 		</Or>
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
+	<Match>
+		<!-- @todo #493 AddCountryDbDto: port to a new datetime API -->
+		<Class name="ru.mystamps.web.feature.country.AddCountryDbDto" />
+		<Or>
+			<Method name="getCreatedAt" />
+			<Method name="setCreatedAt" />
+			<Method name="getUpdatedAt" />
+			<Method name="setUpdatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
 	
 </FindBugsFilter>
