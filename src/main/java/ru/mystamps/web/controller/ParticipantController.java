@@ -38,7 +38,7 @@ import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.service.TransactionParticipantService;
 
-import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
+import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor

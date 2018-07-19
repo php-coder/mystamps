@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ru.mystamps.web.Url;
 
-import static ru.mystamps.web.controller.ControllerUtils.printHtml;
+import static ru.mystamps.web.util.ControllerUtils.printHtml;
 
 @Controller
 public class TestController {

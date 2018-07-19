@@ -50,7 +50,7 @@ import ru.mystamps.web.service.CategoryService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 
-import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
+import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor

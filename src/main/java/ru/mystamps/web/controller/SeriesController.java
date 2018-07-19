@@ -87,7 +87,7 @@ import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
-import static ru.mystamps.web.controller.ControllerUtils.redirectTo;
+import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 
 @Controller
