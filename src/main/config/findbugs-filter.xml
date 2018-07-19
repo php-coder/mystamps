@@ -42,7 +42,7 @@
 		<!--
 			No one should assign a value returned from this method to primitive boolean type.
 		-->
-		<Class name="ru.mystamps.web.dao.impl.JdbcUtils" />
+		<Class name="ru.mystamps.web.support.jdbc.JdbcUtils" />
 		<Method name="getBoolean" />
 		<Bug pattern="NP_BOOLEAN_RETURN_NULL" />
 	</Match>

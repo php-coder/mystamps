@@ -24,7 +24,6 @@ import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
-import ru.mystamps.web.dao.impl.JdbcUtils;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
