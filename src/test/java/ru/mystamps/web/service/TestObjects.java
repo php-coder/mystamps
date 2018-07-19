@@ -160,6 +160,19 @@ public final class TestObjects {
 		return new CollectionInfoDto(Random.id(), "test-user", "Test User");
 	}
 	
+	public static SeriesInCollectionWithPriceDto createSeriesInCollectionWithPriceDto() {
+		return new SeriesInCollectionWithPriceDto(
+			Random.id(),
+			Random.issueYear(),
+			Random.quantity(),
+			Random.quantity(),
+			Random.perforated(),
+			Random.countryName(),
+			Random.price(),
+			Random.currency()
+		);
+	}
+	
 	public static SuspiciousActivityDto createSuspiciousActivityDto() {
 		return new SuspiciousActivityDto(
 			TEST_ACTIVITY_TYPE,

@@ -31,6 +31,7 @@ import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.dao.dto.Currency
+import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils
@@ -388,6 +389,34 @@ class CollectionServiceImplTest extends Specification {
 			service.findSeriesInCollection(expectedCollectionId, expectedLang)
 		then:
 			1 * collectionDao.findSeriesByCollectionId(expectedCollectionId, expectedLang) >> []
+	}
+	
+	//
+	// Tests for findSeriesWithPricesBySlug()
+	//
+	
+	def 'findSeriesWithPricesBySlug() should throw exception when collection slug is null'() {
+		when:
+			service.findSeriesWithPricesBySlug(null, Random.lang())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection slug must be non null'
+	}
+	
+	def 'findSeriesWithPricesBySlug() should invoke dao, pass argument and return result from dao'() {
+		given:
+			String expectedSlug = Random.collectionSlug()
+			String expectedLang = Random.lang()
+		and:
+			List<SeriesInCollectionWithPriceDto> expectedResult = [
+				TestObjects.createSeriesInCollectionWithPriceDto(),
+			]
+		when:
+			List<SeriesInCollectionWithPriceDto> result = service.findSeriesWithPricesBySlug(expectedSlug, expectedLang)
+		then:
+			1 * collectionDao.findSeriesWithPricesBySlug(expectedSlug, expectedLang) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//

@@ -169,7 +169,6 @@ public class CollectionServiceImpl implements CollectionService {
 		return collectionDao.findSeriesByCollectionId(collectionId, lang);
 	}
 	
-	// @todo #884 CollectionService.findSeriesWithPricesBySlug(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER)

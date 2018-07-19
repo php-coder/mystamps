@@ -40,6 +40,7 @@ import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.service.TestObjects;
+import ru.mystamps.web.util.SlugUtils;
 import ru.mystamps.web.validation.ValidationRules;
 
 import static io.qala.datagen.RandomShortApi.bool;
@@ -88,6 +89,25 @@ public final class Random {
 	public static BigDecimal price() {
 		// @todo #769 Random.price(): return randomized values
 		return new BigDecimal("17");
+	}
+	
+	public static String login() {
+		String login = between(
+			ValidationRules.LOGIN_MIN_LENGTH,
+			ValidationRules.LOGIN_MAX_LENGTH
+		)
+			.with(multipleOf(" -_"))
+			.alphanumeric();
+		
+		if (StringUtils.containsAny(login, "  ", "--", "__")) {
+			return login();
+		}
+		
+		return login;
+	}
+	
+	public static String collectionSlug() {
+		return SlugUtils.slugify(login());
 	}
 	
 	public static Currency currency() {
