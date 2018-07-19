@@ -35,9 +35,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CategoryDao;
-import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.feature.category.AddCategoryDbDto;
 
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })

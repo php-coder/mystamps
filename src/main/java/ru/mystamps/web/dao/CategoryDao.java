@@ -20,9 +20,9 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.feature.category.AddCategoryDbDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryDao {
