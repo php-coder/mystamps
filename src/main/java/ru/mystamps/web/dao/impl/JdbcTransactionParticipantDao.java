@@ -37,6 +37,7 @@ import ru.mystamps.web.dao.TransactionParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 public class JdbcTransactionParticipantDao implements TransactionParticipantDao {

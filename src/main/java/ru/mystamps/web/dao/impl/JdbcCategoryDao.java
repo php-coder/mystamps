@@ -38,6 +38,7 @@ import ru.mystamps.web.dao.CategoryDao;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.AddCategoryDbDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })

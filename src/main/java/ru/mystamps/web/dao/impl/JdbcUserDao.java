@@ -36,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 public class JdbcUserDao implements UserDao {

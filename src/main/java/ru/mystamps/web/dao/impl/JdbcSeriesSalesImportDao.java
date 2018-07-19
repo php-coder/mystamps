@@ -35,6 +35,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.SeriesSalesImportDao;
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {

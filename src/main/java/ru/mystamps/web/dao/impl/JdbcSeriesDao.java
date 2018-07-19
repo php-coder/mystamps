@@ -41,6 +41,7 @@ import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings({

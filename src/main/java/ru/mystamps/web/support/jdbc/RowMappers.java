@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.support.jdbc;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -24,13 +24,14 @@ import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
+import ru.mystamps.web.dao.impl.JdbcUtils;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
 	"PMD.TooManyMethods",
 	"PMD.CouplingBetweenObjects"
 })
-final class RowMappers {
+public final class RowMappers {
 	
 	private RowMappers() {
 	}

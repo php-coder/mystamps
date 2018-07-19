@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
