@@ -41,6 +41,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.validation.ValidationRules;

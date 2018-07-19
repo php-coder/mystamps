@@ -32,7 +32,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.Country;
-import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.util.LocaleUtils;
 
 @RequiredArgsConstructor

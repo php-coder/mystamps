@@ -22,7 +22,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor

@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
-import ru.mystamps.web.service.CountryService;
+import ru.mystamps.web.feature.country.CountryService;
 
 @Controller
 @RequiredArgsConstructor
