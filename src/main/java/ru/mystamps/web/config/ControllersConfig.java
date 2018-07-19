@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
+import ru.mystamps.web.feature.category.CategoryController;
 
 @Configuration
 @RequiredArgsConstructor
