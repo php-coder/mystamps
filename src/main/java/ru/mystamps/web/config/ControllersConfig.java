@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryController;
 
 @Configuration
 @RequiredArgsConstructor
