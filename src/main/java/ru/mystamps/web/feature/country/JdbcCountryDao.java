@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.feature.country;
 
 import java.util.Collections;
 import java.util.Date;
@@ -36,7 +36,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.feature.country.AddCountryDbDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
