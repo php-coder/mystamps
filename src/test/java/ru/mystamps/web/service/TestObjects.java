@@ -155,7 +155,6 @@ public final class TestObjects {
 		);
 	}
 	
-	@SuppressWarnings("checkstyle:magicnumber")
 	public static CollectionInfoDto createCollectionInfoDto() {
 		return new CollectionInfoDto(Random.id(), "test-user", "Test User");
 	}
