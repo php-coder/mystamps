@@ -42,7 +42,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
-import ru.mystamps.web.controller.dto.AddCategoryForm;
 import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
