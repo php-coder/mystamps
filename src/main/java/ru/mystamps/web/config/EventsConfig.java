@@ -17,9 +17,11 @@
  */
 package ru.mystamps.web.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -91,12 +93,12 @@ public class EventsConfig {
 	
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
-		List<SiteParser> siteParsers) {
+		Optional<List<SiteParser>> siteParsers) {
 		
 		return new DownloadingSucceededEventListener(
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
 			servicesConfig.getSeriesImportService(),
-			siteParsers,
+			siteParsers.orElse(Collections.emptyList()),
 			eventPublisher
 		);
 	}
