@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.feature.country.AddCountryDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CountryService {

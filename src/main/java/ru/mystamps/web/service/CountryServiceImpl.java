@@ -37,7 +37,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.CountryDao;
 import ru.mystamps.web.dao.dto.AddCountryDbDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.dto.AddCountryDto;
+import ru.mystamps.web.feature.country.AddCountryDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
