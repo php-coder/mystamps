@@ -70,7 +70,7 @@ import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
-import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesImportService;

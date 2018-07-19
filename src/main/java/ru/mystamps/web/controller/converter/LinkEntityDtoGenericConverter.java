@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.controller.converter.annotation.Category;
 import ru.mystamps.web.controller.converter.annotation.Country;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.util.LocaleUtils;
 

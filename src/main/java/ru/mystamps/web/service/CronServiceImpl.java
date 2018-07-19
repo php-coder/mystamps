@@ -34,6 +34,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 

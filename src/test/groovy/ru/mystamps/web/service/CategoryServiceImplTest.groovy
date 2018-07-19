@@ -32,6 +32,7 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto
 import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.feature.category.AddCategoryForm
+import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils

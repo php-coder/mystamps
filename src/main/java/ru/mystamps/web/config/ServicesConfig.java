@@ -30,7 +30,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import lombok.RequiredArgsConstructor;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 

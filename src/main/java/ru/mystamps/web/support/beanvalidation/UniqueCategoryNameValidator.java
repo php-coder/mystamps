@@ -22,7 +22,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.support.beanvalidation.UniqueCategoryName.Lang;
 
 @RequiredArgsConstructor

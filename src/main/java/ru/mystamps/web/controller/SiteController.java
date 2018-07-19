@@ -31,7 +31,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.service.CategoryService;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.service.CollectionService;
 import ru.mystamps.web.service.CountryService;
 import ru.mystamps.web.service.SeriesService;

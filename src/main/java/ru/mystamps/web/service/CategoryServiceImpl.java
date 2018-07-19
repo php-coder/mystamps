@@ -39,6 +39,7 @@ import ru.mystamps.web.dao.dto.AddCategoryDbDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.AddCategoryDto;
+import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
