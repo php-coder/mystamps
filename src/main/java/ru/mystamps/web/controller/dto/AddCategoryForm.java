@@ -28,6 +28,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCategoryDto;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
+import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.UniqueCategoryName;
 import ru.mystamps.web.support.beanvalidation.UniqueCategoryName.Lang;
 import ru.mystamps.web.support.beanvalidation.UniqueCategorySlug;

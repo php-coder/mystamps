@@ -27,6 +27,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.beanvalidation.Email;
+import ru.mystamps.web.support.beanvalidation.Group;
 
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 

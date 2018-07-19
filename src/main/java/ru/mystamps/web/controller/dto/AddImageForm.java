@@ -29,6 +29,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddImageDto;
+import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize;

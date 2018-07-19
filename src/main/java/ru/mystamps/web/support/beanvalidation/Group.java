@@ -15,32 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.dto;
+package ru.mystamps.web.support.beanvalidation;
 
-final class Group {
+public final class Group {
 	
-	/* default */ interface Level1 {
+	public interface Level1 {
 	}
 	
-	/* default */ interface Level2 {
+	public interface Level2 {
 	}
 	
-	/* default */ interface Level3 {
+	public interface Level3 {
 	}
 	
-	/* default */ interface Level4 {
+	public interface Level4 {
 	}
 	
-	/* default */ interface Level5 {
-	}
-
-	/* default */ interface Level6 {
-	}
-	
-	/* default */ interface Level7 {
+	public interface Level5 {
 	}
 
-	/* default */ interface Level8 {
+	public interface Level6 {
+	}
+	
+	public interface Level7 {
+	}
+
+	public interface Level8 {
 	}
 	
 }

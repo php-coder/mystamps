@@ -28,6 +28,7 @@ import lombok.Setter;
 
 import ru.mystamps.web.service.dto.AddCountryDto;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
+import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.UniqueCountryName;
 import ru.mystamps.web.support.beanvalidation.UniqueCountryName.Lang;
 import ru.mystamps.web.support.beanvalidation.UniqueCountrySlug;
