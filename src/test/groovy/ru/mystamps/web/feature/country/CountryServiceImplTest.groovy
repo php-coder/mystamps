@@ -27,7 +27,6 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
-import ru.mystamps.web.dao.CountryDao
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
