@@ -29,7 +29,6 @@ import lombok.Setter;
 import ru.mystamps.web.feature.category.UniqueCategoryName.Lang;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
 import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.support.beanvalidation.UniqueCategorySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
