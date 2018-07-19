@@ -55,10 +55,10 @@ public class CategoryConfig {
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
-		public CategoryService categoryService() {
+		public CategoryService categoryService(CategoryDao categoryDao) {
 			return new CategoryServiceImpl(
 				LoggerFactory.getLogger(CategoryServiceImpl.class),
-				categoryDao()
+				categoryDao
 			);
 		}
 		
