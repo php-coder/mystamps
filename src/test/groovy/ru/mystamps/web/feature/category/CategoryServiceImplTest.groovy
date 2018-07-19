@@ -27,7 +27,6 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import ru.mystamps.web.dao.CategoryDao
 import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.service.TestObjects
