@@ -26,10 +26,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.feature.category.UniqueCategoryName.Lang;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
 import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.support.beanvalidation.UniqueCategoryName;
-import ru.mystamps.web.support.beanvalidation.UniqueCategoryName.Lang;
 import ru.mystamps.web.support.beanvalidation.UniqueCategorySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
