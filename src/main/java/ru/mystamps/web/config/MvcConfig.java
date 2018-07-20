@@ -49,6 +49,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 @Configuration
@@ -62,15 +63,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	private final ServicesConfig servicesConfig;
 	private final CategoryService categoryService;
+	private final CountryService countryService;
 	
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
-		registry.addConverter(
-			new LinkEntityDtoGenericConverter(
-				categoryService,
-				servicesConfig.getCountryService()
-			)
-		);
+		registry.addConverter(new LinkEntityDtoGenericConverter(categoryService, countryService));
 	}
 	
 	@Override

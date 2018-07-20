@@ -33,14 +33,17 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.feature.country.CountryServiceImpl;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
-@Import(CategoryConfig.Services.class)
+@Import({
+	CategoryConfig.Services.class,
+	CountryConfig.Services.class
+})
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
 public class ServicesConfig {
@@ -53,20 +56,13 @@ public class ServicesConfig {
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
+	private final CountryService countryService;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
 		return new SuspiciousActivityServiceImpl(daoConfig.getSuspiciousActivityDao());
 	}
 
-	@Bean
-	public CountryService getCountryService() {
-		return new CountryServiceImpl(
-			LoggerFactory.getLogger(CountryServiceImpl.class),
-			daoConfig.getCountryDao()
-		);
-	}
-	
 	@Bean
 	public CollectionService getCollectionService() {
 		return new CollectionServiceImpl(
@@ -80,7 +76,7 @@ public class ServicesConfig {
 		return new CronServiceImpl(
 			LoggerFactory.getLogger(CronServiceImpl.class),
 			categoryService,
-			getCountryService(),
+			countryService,
 			getCollectionService(),
 			getSeriesService(),
 			getSuspiciousActivityService(),
@@ -194,7 +190,7 @@ public class ServicesConfig {
 			new SeriesInfoExtractorServiceImpl(
 				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
 				categoryService,
-				getCountryService(),
+				countryService,
 				getTransactionParticipantService()
 			)
 		);

@@ -30,17 +30,22 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.country.CountryController;
+import ru.mystamps.web.feature.country.CountryConfig;
+import ru.mystamps.web.feature.country.CountryService;
 
 @Configuration
 @RequiredArgsConstructor
-@Import(CategoryConfig.Controllers.class)
+@Import({
+	CategoryConfig.Controllers.class,
+	CountryConfig.Controllers.class
+})
 public class ControllersConfig {
 	
 	private final ServicesConfig servicesConfig;
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
+	private final CountryService countryService;
 	
 	@Bean
 	public AccountController getAccountController() {
@@ -51,19 +56,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
-	public CountryController getCountryController() {
-		return new CountryController(
-			servicesConfig.getCountryService(),
-			servicesConfig.getSeriesService()
-		);
-	}
-	
-	@Bean
 	public CollectionController getCollectionController() {
 		return new CollectionController(
 			categoryService,
 			servicesConfig.getCollectionService(),
-			servicesConfig.getCountryService(),
+			countryService,
 			servicesConfig.getSeriesService(),
 			messageSource
 		);
@@ -102,7 +99,7 @@ public class ControllersConfig {
 		return new SeriesController(
 			categoryService,
 			servicesConfig.getCollectionService(),
-			servicesConfig.getCountryService(),
+			countryService,
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesImportService(),
 			servicesConfig.getSeriesSalesService(),
@@ -127,7 +124,7 @@ public class ControllersConfig {
 		return new SiteController(
 			categoryService,
 			servicesConfig.getCollectionService(),
-			servicesConfig.getCountryService(),
+			countryService,
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSuspiciousActivityService()
 		);
@@ -140,9 +137,7 @@ public class ControllersConfig {
 
 	@Bean
 	public SuggestionController getSuggestionController() {
-		return new SuggestionController(
-			servicesConfig.getCountryService()
-		);
+		return new SuggestionController(countryService);
 	}
 
 	@Bean
