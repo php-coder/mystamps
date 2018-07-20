@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.dto.AddParticipantForm;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.service.TransactionParticipantService;
 

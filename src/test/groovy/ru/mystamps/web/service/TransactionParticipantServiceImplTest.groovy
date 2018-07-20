@@ -29,7 +29,7 @@ import ru.mystamps.web.dao.TransactionParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.dao.dto.EntityWithParentDto
-import ru.mystamps.web.controller.dto.AddParticipantForm
+import ru.mystamps.web.feature.participant.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
