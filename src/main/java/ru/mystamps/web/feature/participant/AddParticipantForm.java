@@ -26,8 +26,6 @@ import org.hibernate.validator.constraints.URL;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddParticipantDto;
-
 import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MAX_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MIN_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_URL_MAX_LENGTH;

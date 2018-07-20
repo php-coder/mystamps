@@ -21,7 +21,7 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
-import ru.mystamps.web.service.dto.AddParticipantDto;
+import ru.mystamps.web.feature.participant.AddParticipantDto;
 
 public interface TransactionParticipantService {
 	Integer add(AddParticipantDto dto);

@@ -20,7 +20,7 @@ package ru.mystamps.web.controller.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.AddParticipantDto;
+import ru.mystamps.web.feature.participant.AddParticipantDto;
 
 @Getter
 @Setter
