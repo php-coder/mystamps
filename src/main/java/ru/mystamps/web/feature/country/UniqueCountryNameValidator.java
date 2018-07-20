@@ -15,15 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.beanvalidation;
+package ru.mystamps.web.feature.country;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.support.beanvalidation.UniqueCountryName.Lang;
+import ru.mystamps.web.feature.country.UniqueCountryName.Lang;
 
 @RequiredArgsConstructor
 public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCountryName, String> {

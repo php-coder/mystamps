@@ -26,10 +26,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.feature.country.UniqueCountryName.Lang;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
 import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.support.beanvalidation.UniqueCountryName;
-import ru.mystamps.web.support.beanvalidation.UniqueCountryName.Lang;
 import ru.mystamps.web.support.beanvalidation.UniqueCountrySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
