@@ -29,7 +29,6 @@ import lombok.Setter;
 import ru.mystamps.web.feature.country.UniqueCountryName.Lang;
 import ru.mystamps.web.support.beanvalidation.DenyValues;
 import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.support.beanvalidation.UniqueCountrySlug;
 
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_EN_REGEXP;
 import static ru.mystamps.web.validation.ValidationRules.COUNTRY_NAME_MAX_LENGTH;
