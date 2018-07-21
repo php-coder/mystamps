@@ -287,8 +287,8 @@ public class ServicesConfig {
 	
 	@Bean
 	public ParticipantService getParticipantService() {
-		return new TransactionParticipantServiceImpl(
-			LoggerFactory.getLogger(TransactionParticipantServiceImpl.class),
+		return new ParticipantServiceImpl(
+			LoggerFactory.getLogger(ParticipantServiceImpl.class),
 			daoConfig.getParticipantDao()
 		);
 	}

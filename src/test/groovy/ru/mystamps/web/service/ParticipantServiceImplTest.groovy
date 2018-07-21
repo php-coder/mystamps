@@ -33,10 +33,10 @@ import ru.mystamps.web.feature.participant.AddParticipantForm
 import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class TransactionParticipantServiceImplTest extends Specification {
+class ParticipantServiceImplTest extends Specification {
 	
 	private final ParticipantDao participantDao = Mock()
-	private final ParticipantService service = new TransactionParticipantServiceImpl(
+	private final ParticipantService service = new ParticipantServiceImpl(
 		NOPLogger.NOP_LOGGER,
 		participantDao
 	)
