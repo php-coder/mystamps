@@ -26,7 +26,6 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.ParticipantDao
-import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.tests.Random

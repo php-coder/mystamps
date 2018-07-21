@@ -19,9 +19,9 @@ package ru.mystamps.web.dao;
 
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.feature.participant.AddParticipantDbDto;
 
 public interface ParticipantDao {
 	Integer add(AddParticipantDbDto participant);
