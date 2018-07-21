@@ -30,7 +30,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.TransactionParticipantDao;
+import ru.mystamps.web.dao.ParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
@@ -41,7 +41,7 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 public class TransactionParticipantServiceImpl implements ParticipantService {
 	
 	private final Logger log;
-	private final TransactionParticipantDao transactionParticipantDao;
+	private final ParticipantDao participantDao;
 	
 	@Override
 	@Transactional
@@ -59,7 +59,7 @@ public class TransactionParticipantServiceImpl implements ParticipantService {
 		participant.setBuyer(dto.getBuyer());
 		participant.setSeller(dto.getSeller());
 		
-		Integer id = transactionParticipantDao.add(participant);
+		Integer id = participantDao.add(participant);
 		
 		log.info("Participant #{} has been created ({})", id, participant);
 		
@@ -70,14 +70,14 @@ public class TransactionParticipantServiceImpl implements ParticipantService {
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public List<EntityWithParentDto> findBuyersWithParents() {
-		return transactionParticipantDao.findBuyersWithParents();
+		return participantDao.findBuyersWithParents();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_SERIES_SALES)
 	public List<EntityWithParentDto> findSellersWithParents() {
-		return transactionParticipantDao.findSellersWithParents();
+		return participantDao.findSellersWithParents();
 	}
 	
 	@Override
@@ -86,14 +86,14 @@ public class TransactionParticipantServiceImpl implements ParticipantService {
 		Validate.isTrue(StringUtils.isNotBlank(name), "Seller name must be non-blank");
 		Validate.isTrue(StringUtils.isNotBlank(url), "Seller url must be non-blank");
 		
-		return transactionParticipantDao.findSellerId(name, url);
+		return participantDao.findSellerId(name, url);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.ADD_PARTICIPANT)
 	public List<EntityWithIdDto> findAllGroups() {
-		return transactionParticipantDao.findAllGroups();
+		return participantDao.findAllGroups();
 	}
 	
 	// @todo #857 TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service
@@ -102,7 +102,7 @@ public class TransactionParticipantServiceImpl implements ParticipantService {
 	public Integer findGroupIdByName(String name) {
 		Validate.isTrue(StringUtils.isNotBlank(name), "Group name must be non-blank");
 		
-		return transactionParticipantDao.findGroupIdByName(name);
+		return participantDao.findGroupIdByName(name);
 	}
 	
 }

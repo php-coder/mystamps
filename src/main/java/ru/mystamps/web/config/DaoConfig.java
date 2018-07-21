@@ -132,7 +132,7 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public TransactionParticipantDao getTransactionParticipantDao() {
+	public ParticipantDao getParticipantDao() {
 		return new JdbcTransactionParticipantDao(jdbcTemplate);
 	}
 	

@@ -25,7 +25,7 @@ import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.TransactionParticipantDao
+import ru.mystamps.web.dao.ParticipantDao
 import ru.mystamps.web.dao.dto.AddParticipantDbDto
 import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.dao.dto.EntityWithParentDto
@@ -35,10 +35,10 @@ import ru.mystamps.web.tests.Random
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TransactionParticipantServiceImplTest extends Specification {
 	
-	private final TransactionParticipantDao transactionParticipantDao = Mock()
+	private final ParticipantDao participantDao = Mock()
 	private final ParticipantService service = new TransactionParticipantServiceImpl(
 		NOPLogger.NOP_LOGGER,
-		transactionParticipantDao
+		participantDao
 	)
 	
 	//
@@ -107,7 +107,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			Integer result = service.add(form)
 		then:
-			1 * transactionParticipantDao.add({ AddParticipantDbDto participant ->
+			1 * participantDao.add({ AddParticipantDbDto participant ->
 				assert participant?.name == expectedName
 				assert participant?.url  == expectedUrl
 				assert participant?.groupId  == expectedGroupId
@@ -129,7 +129,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			List<EntityWithParentDto> result = service.findBuyersWithParents()
 		then:
-			1 * transactionParticipantDao.findBuyersWithParents() >> expectedResult
+			1 * participantDao.findBuyersWithParents() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -144,7 +144,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			List<EntityWithParentDto> result = service.findSellersWithParents()
 		then:
-			1 * transactionParticipantDao.findSellersWithParents() >> expectedResult
+			1 * participantDao.findSellersWithParents() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -177,7 +177,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			Integer result = service.findSellerId(expectedName, expectedUrl)
 		then:
-			1 * transactionParticipantDao.findSellerId(expectedName, expectedUrl) >> expectedResult
+			1 * participantDao.findSellerId(expectedName, expectedUrl) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -192,7 +192,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			List<EntityWithIdDto> result = service.findAllGroups()
 		then:
-			1 * transactionParticipantDao.findAllGroups() >> expectedResult
+			1 * participantDao.findAllGroups() >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -216,7 +216,7 @@ class TransactionParticipantServiceImplTest extends Specification {
 		when:
 			Integer result = service.findGroupIdByName(expectedName)
 		then:
-			1 * transactionParticipantDao.findGroupIdByName(expectedName) >> expectedResult
+			1 * participantDao.findGroupIdByName(expectedName) >> expectedResult
 		and:
 			result == expectedResult
 	}

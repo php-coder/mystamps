@@ -33,14 +33,14 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.TransactionParticipantDao;
+import ru.mystamps.web.dao.ParticipantDao;
 import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
-public class JdbcTransactionParticipantDao implements TransactionParticipantDao {
+public class JdbcTransactionParticipantDao implements ParticipantDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
