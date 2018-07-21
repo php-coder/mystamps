@@ -35,6 +35,7 @@ import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.participant.ParticipantService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;

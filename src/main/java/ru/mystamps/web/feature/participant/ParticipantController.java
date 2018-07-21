@@ -35,7 +35,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.service.ParticipantService;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 

@@ -51,7 +51,7 @@ import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
-import ru.mystamps.web.service.ParticipantService;
+import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.service.SeriesSalesService;

@@ -35,6 +35,7 @@ import ru.mystamps.web.dao.dto.AddParticipantDbDto;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
+import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor

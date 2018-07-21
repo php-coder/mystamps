@@ -15,13 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.participant;
 
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
-import ru.mystamps.web.feature.participant.AddParticipantDto;
 
 public interface ParticipantService {
 	Integer add(AddParticipantDto dto);
