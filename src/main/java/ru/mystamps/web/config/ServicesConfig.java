@@ -289,7 +289,7 @@ public class ServicesConfig {
 	public ParticipantService getParticipantService() {
 		return new TransactionParticipantServiceImpl(
 			LoggerFactory.getLogger(TransactionParticipantServiceImpl.class),
-			daoConfig.getTransactionParticipantDao()
+			daoConfig.getParticipantDao()
 		);
 	}
 	

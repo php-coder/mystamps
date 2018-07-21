@@ -40,7 +40,7 @@ import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
-public class JdbcTransactionParticipantDao implements ParticipantDao {
+public class JdbcParticipantDao implements ParticipantDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
