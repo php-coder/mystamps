@@ -178,7 +178,7 @@ public class ServicesConfig {
 			getSeriesSalesService(),
 			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
-			getTransactionParticipantService(),
+			getParticipantService(),
 			eventPublisher
 		);
 	}
@@ -191,7 +191,7 @@ public class ServicesConfig {
 				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
 				categoryService,
 				countryService,
-				getTransactionParticipantService()
+				getParticipantService()
 			)
 		);
 	}
@@ -286,7 +286,7 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public TransactionParticipantService getTransactionParticipantService() {
+	public ParticipantService getParticipantService() {
 		return new TransactionParticipantServiceImpl(
 			LoggerFactory.getLogger(TransactionParticipantServiceImpl.class),
 			daoConfig.getTransactionParticipantDao()

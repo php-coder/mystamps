@@ -23,7 +23,7 @@ import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 
-public interface TransactionParticipantService {
+public interface ParticipantService {
 	Integer add(AddParticipantDto dto);
 	List<EntityWithParentDto> findBuyersWithParents();
 	List<EntityWithParentDto> findSellersWithParents();

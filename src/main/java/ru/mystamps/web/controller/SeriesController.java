@@ -73,10 +73,10 @@ import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.service.CollectionService;
+import ru.mystamps.web.service.ParticipantService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.TransactionParticipantService;
 import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
@@ -105,7 +105,7 @@ public class SeriesController {
 	private final SeriesService seriesService;
 	private final SeriesImportService seriesImportService;
 	private final SeriesSalesService seriesSalesService;
-	private final TransactionParticipantService transactionParticipantService;
+	private final ParticipantService participantService;
 	
 	static {
 		YEARS = new LinkedHashMap<>();
@@ -543,7 +543,7 @@ public class SeriesController {
 	}
 	
 	protected void addSellersToModel(Model model) {
-		List<EntityWithParentDto> sellers = transactionParticipantService.findSellersWithParents();
+		List<EntityWithParentDto> sellers = participantService.findSellersWithParents();
 		List<SelectItem> groupedSellers = GroupByParent.transformEntities(sellers);
 		model.addAttribute("sellers", groupedSellers);
 	}
@@ -647,7 +647,7 @@ public class SeriesController {
 		
 		addSellersToModel(model);
 		
-		List<EntityWithParentDto> buyers = transactionParticipantService.findBuyersWithParents();
+		List<EntityWithParentDto> buyers = participantService.findBuyersWithParents();
 		List<SelectItem> groupedBuyers = GroupByParent.transformEntities(buyers);
 		model.addAttribute("buyers", groupedBuyers);
 	}

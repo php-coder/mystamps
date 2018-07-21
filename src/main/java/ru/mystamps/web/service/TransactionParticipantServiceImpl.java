@@ -38,7 +38,7 @@ import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
-public class TransactionParticipantServiceImpl implements TransactionParticipantService {
+public class TransactionParticipantServiceImpl implements ParticipantService {
 	
 	private final Logger log;
 	private final TransactionParticipantDao transactionParticipantDao;

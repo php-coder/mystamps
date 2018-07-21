@@ -51,10 +51,10 @@ import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
+import ru.mystamps.web.service.ParticipantService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
-import ru.mystamps.web.service.TransactionParticipantService;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
@@ -68,7 +68,7 @@ public class SeriesImportController {
 	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesController seriesController;
-	private final TransactionParticipantService participantService;
+	private final ParticipantService participantService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@InitBinder("requestImportForm")

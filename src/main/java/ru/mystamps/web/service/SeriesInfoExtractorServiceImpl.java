@@ -79,7 +79,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private final Logger log;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
-	private final TransactionParticipantService transactionParticipantService;
+	private final ParticipantService participantService;
 	
 	// @todo #803 SeriesInfoExtractorServiceImpl.extract(): add unit tests
 	@Override
@@ -306,7 +306,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining seller by name '{}' and url '{}'", name, url);
 		
-		Integer sellerId = transactionParticipantService.findSellerId(name, url);
+		Integer sellerId = participantService.findSellerId(name, url);
 		if (sellerId != null) {
 			log.debug("Found seller: #{}", sellerId);
 			return sellerId;
@@ -330,7 +330,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			String name = new URL(sellerUrl).getHost();
 			log.debug("Determining seller group: looking for a group named '{}'", name);
 			
-			Integer groupId = transactionParticipantService.findGroupIdByName(name);
+			Integer groupId = participantService.findGroupIdByName(name);
 			if (groupId != null) {
 				log.debug("Found seller group: #{}", groupId);
 			}

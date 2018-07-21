@@ -41,12 +41,12 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
-	private final TransactionParticipantService transactionParticipantService = Mock()
+	private final ParticipantService participantService = Mock()
 	private final SeriesInfoExtractorService service = new SeriesInfoExtractorServiceImpl(
 		NOPLogger.NOP_LOGGER,
 		categoryService,
 		countryService,
-		transactionParticipantService
+		participantService
 	)
 	
 	//
@@ -429,7 +429,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		when:
 			Integer result = service.extractSeller(expectedName, expectedUrl)
 		then:
-			1 * transactionParticipantService.findSellerId(expectedName, expectedUrl) >> expectedResult
+			1 * participantService.findSellerId(expectedName, expectedUrl) >> expectedResult
 		and:
 			result == expectedResult
 		where:

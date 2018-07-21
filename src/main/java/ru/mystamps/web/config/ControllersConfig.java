@@ -79,7 +79,7 @@ public class ControllersConfig {
 	
 	@Bean
 	public ParticipantController getParticipantController() {
-		return new ParticipantController(servicesConfig.getTransactionParticipantService());
+		return new ParticipantController(servicesConfig.getParticipantService());
 	}
 	
 	@Bean
@@ -104,7 +104,7 @@ public class ControllersConfig {
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesImportService(),
 			servicesConfig.getSeriesSalesService(),
-			servicesConfig.getTransactionParticipantService()
+			servicesConfig.getParticipantService()
 		);
 	}
 	
@@ -115,7 +115,7 @@ public class ControllersConfig {
 			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getSeriesSalesImportService(),
 			getSeriesController(),
-			servicesConfig.getTransactionParticipantService(),
+			servicesConfig.getParticipantService(),
 			eventPublisher
 		);
 	}

@@ -36,7 +36,7 @@ import ru.mystamps.web.tests.Random
 class TransactionParticipantServiceImplTest extends Specification {
 	
 	private final TransactionParticipantDao transactionParticipantDao = Mock()
-	private final TransactionParticipantService service = new TransactionParticipantServiceImpl(
+	private final ParticipantService service = new TransactionParticipantServiceImpl(
 		NOPLogger.NOP_LOGGER,
 		transactionParticipantDao
 	)

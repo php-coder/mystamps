@@ -55,7 +55,7 @@ class SeriesImportServiceImplTest extends Specification {
 	private final SeriesSalesService seriesSalesService = Mock()
 	private final SeriesSalesImportService seriesSalesImportService = Mock()
 	private final SeriesInfoExtractorService extractorService = Mock()
-	private final TransactionParticipantService transactionParticipantService = Mock()
+	private final ParticipantService participantService = Mock()
 	private final ApplicationEventPublisher eventPublisher = Mock()
 	
 	private SeriesImportService service
@@ -69,7 +69,7 @@ class SeriesImportServiceImplTest extends Specification {
 			seriesSalesService,
 			seriesSalesImportService,
 			extractorService,
-			transactionParticipantService,
+			participantService,
 			eventPublisher
 		)
 		form = new RequestImportForm()
@@ -226,7 +226,7 @@ class SeriesImportServiceImplTest extends Specification {
 				Random.userId()
 			)
 		then:
-			1 * transactionParticipantService.add(expectedSellerDto) >> expectedSellerId
+			1 * participantService.add(expectedSellerDto) >> expectedSellerId
 		and:
 			1 * seriesSalesService.add(
 				{ AddSeriesSalesDto saleDto ->

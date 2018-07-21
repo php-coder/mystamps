@@ -35,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.service.TransactionParticipantService;
+import ru.mystamps.web.service.ParticipantService;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 
@@ -43,7 +43,7 @@ import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 @RequiredArgsConstructor
 public class ParticipantController {
 	
-	private final TransactionParticipantService participantService;
+	private final ParticipantService participantService;
 	
 	@InitBinder("addParticipantForm")
 	protected void initBinder(WebDataBinder binder) {

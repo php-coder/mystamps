@@ -66,7 +66,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesInfoExtractorService extractorService;
-	private final TransactionParticipantService transactionParticipantService;
+	private final ParticipantService participantService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@Override
@@ -114,7 +114,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		if (saleDto != null) {
 			if (saleDto.getSellerId() == null && sellerDto != null) {
-				Integer sellerId = transactionParticipantService.add(sellerDto);
+				Integer sellerId = participantService.add(sellerDto);
 				saleDto.setSellerId(sellerId);
 			}
 			seriesSalesService.add(saleDto, seriesId, userId);
