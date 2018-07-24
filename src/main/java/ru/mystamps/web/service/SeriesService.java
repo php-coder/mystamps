@@ -35,6 +35,7 @@ public interface SeriesService {
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
 	long countAll();
 	long countAllStamps();
+	// @todo #927 SeriesService.countSeriesOf(): move to CollectionService
 	long countSeriesOf(Integer collectionId);
 	long countAddedSince(Date date);
 	long countUpdatedSince(Date date);
