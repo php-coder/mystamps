@@ -28,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.participant.JdbcParticipantDao;
-import ru.mystamps.web.feature.participant.ParticipantDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
@@ -131,11 +129,6 @@ public class DaoConfig {
 	@Bean
 	public SuspiciousActivityDao getSuspiciousActivityDao() {
 		return new JdbcSuspiciousActivityDao(jdbcTemplate);
-	}
-	
-	@Bean
-	public ParticipantDao getParticipantDao() {
-		return new JdbcParticipantDao(jdbcTemplate);
 	}
 	
 	@Bean

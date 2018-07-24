@@ -35,8 +35,8 @@ import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
-import ru.mystamps.web.feature.participant.ParticipantServiceImpl;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
@@ -44,7 +44,8 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 @Configuration
 @Import({
 	CategoryConfig.Services.class,
-	CountryConfig.Services.class
+	CountryConfig.Services.class,
+	ParticipantConfig.Services.class
 })
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
@@ -59,6 +60,7 @@ public class ServicesConfig {
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
+	private final ParticipantService participantService;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
@@ -180,7 +182,7 @@ public class ServicesConfig {
 			getSeriesSalesService(),
 			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
-			getParticipantService(),
+			participantService,
 			eventPublisher
 		);
 	}
@@ -193,7 +195,7 @@ public class ServicesConfig {
 				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
 				categoryService,
 				countryService,
-				getParticipantService()
+				participantService
 			)
 		);
 	}
@@ -284,14 +286,6 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 			"Zagorski",
 			daoConfig.getZagorskiCatalogDao()
-		);
-	}
-	
-	@Bean
-	public ParticipantService getParticipantService() {
-		return new ParticipantServiceImpl(
-			LoggerFactory.getLogger(ParticipantServiceImpl.class),
-			daoConfig.getParticipantDao()
 		);
 	}
 	

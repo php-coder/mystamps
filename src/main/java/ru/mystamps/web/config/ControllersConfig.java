@@ -32,13 +32,15 @@ import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.feature.participant.ParticipantController;
+import ru.mystamps.web.feature.participant.ParticipantConfig;
+import ru.mystamps.web.feature.participant.ParticipantService;
 
 @Configuration
 @RequiredArgsConstructor
 @Import({
 	CategoryConfig.Controllers.class,
-	CountryConfig.Controllers.class
+	CountryConfig.Controllers.class,
+	ParticipantConfig.Controllers.class
 })
 public class ControllersConfig {
 	
@@ -47,6 +49,7 @@ public class ControllersConfig {
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
 	private final CountryService countryService;
+	private final ParticipantService participantService;
 	
 	@Bean
 	public AccountController getAccountController() {
@@ -78,11 +81,6 @@ public class ControllersConfig {
 	}
 	
 	@Bean
-	public ParticipantController getParticipantController() {
-		return new ParticipantController(servicesConfig.getParticipantService());
-	}
-	
-	@Bean
 	public RobotsTxtController getRobotsTxtController() {
 		return new RobotsTxtController();
 	}
@@ -104,7 +102,7 @@ public class ControllersConfig {
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesImportService(),
 			servicesConfig.getSeriesSalesService(),
-			servicesConfig.getParticipantService()
+			participantService
 		);
 	}
 	
@@ -115,7 +113,7 @@ public class ControllersConfig {
 			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getSeriesSalesImportService(),
 			getSeriesController(),
-			servicesConfig.getParticipantService(),
+			participantService,
 			eventPublisher
 		);
 	}
