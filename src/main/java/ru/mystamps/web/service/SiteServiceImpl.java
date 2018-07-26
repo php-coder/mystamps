@@ -189,11 +189,11 @@ public class SiteServiceImpl implements SiteService {
 		
 		// TODO(security): fix possible log injection
 		log.warn(
-				"Length of value for '{}' field ({}) exceeds max field size ({}): '{}'",
+				"Length of '{}' exceeds max length for '{}' field: {} > {}",
+				text,
 				fieldName,
 				text.length(),
-				maxLength,
-				text
+				maxLength
 		);
 		
 		return StringUtils.abbreviate(text, maxLength);
