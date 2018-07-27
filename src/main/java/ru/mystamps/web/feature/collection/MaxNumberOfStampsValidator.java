@@ -15,15 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.beanvalidation;
+package ru.mystamps.web.feature.collection;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
 
 /**
  * Implementation of the {@link MaxNumberOfStamps} validator.

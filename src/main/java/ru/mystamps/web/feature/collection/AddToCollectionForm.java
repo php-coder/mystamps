@@ -26,7 +26,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.support.beanvalidation.MaxNumberOfStamps;
 
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 
