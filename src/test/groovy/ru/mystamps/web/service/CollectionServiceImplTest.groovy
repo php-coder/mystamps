@@ -32,6 +32,7 @@ import ru.mystamps.web.dao.dto.AddToCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto
+import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils

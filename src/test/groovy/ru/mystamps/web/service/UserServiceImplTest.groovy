@@ -28,6 +28,7 @@ import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.controller.dto.ActivateAccountForm
+import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
