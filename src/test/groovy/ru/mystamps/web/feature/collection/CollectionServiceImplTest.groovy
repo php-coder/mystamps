@@ -25,7 +25,6 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
-import ru.mystamps.web.controller.dto.AddToCollectionForm
 import ru.mystamps.web.dao.CollectionDao
 import ru.mystamps.web.dao.dto.AddCollectionDbDto
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto
