@@ -32,7 +32,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
-import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;

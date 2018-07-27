@@ -26,7 +26,6 @@ import spock.lang.Unroll
 import org.slf4j.helpers.NOPLogger
 
 import ru.mystamps.web.dao.CollectionDao
-import ru.mystamps.web.dao.dto.AddToCollectionDbDto
 import ru.mystamps.web.dao.dto.CollectionInfoDto
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto
