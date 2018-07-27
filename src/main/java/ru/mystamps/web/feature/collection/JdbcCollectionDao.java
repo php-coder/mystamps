@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.feature.collection;
 
 import java.util.Collections;
 import java.util.Date;
@@ -42,8 +42,6 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
-import ru.mystamps.web.feature.collection.AddCollectionDbDto;
-import ru.mystamps.web.feature.collection.AddToCollectionDbDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
