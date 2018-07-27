@@ -34,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
+import ru.mystamps.web.feature.collection.CollectionServiceImpl;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
