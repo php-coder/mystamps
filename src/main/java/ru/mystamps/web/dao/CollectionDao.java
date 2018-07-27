@@ -20,12 +20,12 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
+import ru.mystamps.web.feature.collection.AddCollectionDbDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {

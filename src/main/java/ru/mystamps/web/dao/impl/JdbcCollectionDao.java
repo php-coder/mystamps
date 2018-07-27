@@ -38,12 +38,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.CollectionDao;
-import ru.mystamps.web.dao.dto.AddCollectionDbDto;
 import ru.mystamps.web.dao.dto.AddToCollectionDbDto;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
+import ru.mystamps.web.feature.collection.AddCollectionDbDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
