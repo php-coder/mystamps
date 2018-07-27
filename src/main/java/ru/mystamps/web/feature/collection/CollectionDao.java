@@ -23,7 +23,6 @@ import java.util.List;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {

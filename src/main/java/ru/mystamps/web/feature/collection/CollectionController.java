@@ -37,7 +37,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.service.SeriesService;

@@ -28,6 +28,7 @@ import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
+import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;
 import ru.mystamps.web.service.dto.AddSeriesDto;

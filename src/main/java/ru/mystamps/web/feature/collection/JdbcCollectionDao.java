@@ -40,7 +40,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
-import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
