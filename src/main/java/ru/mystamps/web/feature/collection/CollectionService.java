@@ -24,7 +24,6 @@ import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionWithPriceDto;
-import ru.mystamps.web.service.dto.AddToCollectionDto;
 
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);

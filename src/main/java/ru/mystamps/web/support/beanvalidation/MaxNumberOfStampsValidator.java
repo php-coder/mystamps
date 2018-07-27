@@ -22,8 +22,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.service.SeriesService;
-import ru.mystamps.web.service.dto.AddToCollectionDto;
 
 /**
  * Implementation of the {@link MaxNumberOfStamps} validator.
