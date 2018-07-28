@@ -116,7 +116,7 @@
 						</tbody>
 						<tfoot>
 							<!--/* @todo #884 /collection/{slug}/estimation: optimize summing of prices */-->
-							<tr class="info" th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])}">
+							<tr class="info" th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])},totalCzk=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'CZK'].![price])}">
 								<th th:text="|#{t_total}:|">Total:</th>
 								<th>
 									<span th:text="|${totalRub} RUB|" th:if="${totalRub != null}" th:remove="tag">14.4 RUB</span>
@@ -124,6 +124,8 @@
 									<span th:text="|${totalUsd} USD|" th:if="${totalUsd != null}" th:remove="tag">2 USD</span>
 									<br th:if="${totalEur != null and (totalRub != null or totalUsd != null)}" />
 									<span th:text="|${totalEur} EUR|" th:if="${totalEur != null}" th:remove="tag">7 EUR</span>
+									<br th:if="${totalCzk != null and (totalRub != null or totalUsd != null or totalEur != null)}" />
+									<span th:text="|${totalCzk} CZK|" th:if="${totalCzk != null}" th:remove="tag">707 CZK</span>
 								</th>
 							</tr>
 						</tfoot>
