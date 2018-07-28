@@ -28,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.collection.CollectionDao;
-import ru.mystamps.web.feature.collection.JdbcCollectionDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
@@ -38,11 +36,6 @@ public class DaoConfig {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final Environment env;
-	
-	@Bean
-	public CollectionDao getCollectionDao() {
-		return new JdbcCollectionDao(jdbcTemplate);
-	}
 	
 	@Bean
 	public StampsCatalogDao getGibbonsCatalogDao() {

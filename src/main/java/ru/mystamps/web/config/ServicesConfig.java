@@ -33,8 +33,8 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.collection.CollectionConfig;
 import ru.mystamps.web.feature.collection.CollectionService;
-import ru.mystamps.web.feature.collection.CollectionServiceImpl;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
@@ -46,6 +46,7 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 @Configuration
 @Import({
 	CategoryConfig.Services.class,
+	CollectionConfig.Services.class,
 	CountryConfig.Services.class,
 	ParticipantConfig.Services.class
 })
@@ -61,6 +62,7 @@ public class ServicesConfig {
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
+	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final ParticipantService participantService;
 	
@@ -70,20 +72,12 @@ public class ServicesConfig {
 	}
 
 	@Bean
-	public CollectionService getCollectionService() {
-		return new CollectionServiceImpl(
-			LoggerFactory.getLogger(CollectionServiceImpl.class),
-			daoConfig.getCollectionDao()
-		);
-	}
-	
-	@Bean
 	public CronService getCronService() {
 		return new CronServiceImpl(
 			LoggerFactory.getLogger(CronServiceImpl.class),
 			categoryService,
 			countryService,
-			getCollectionService(),
+			collectionService,
 			getSeriesService(),
 			getSuspiciousActivityService(),
 			getUserService(),
@@ -232,7 +226,7 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(UserServiceImpl.class),
 			daoConfig.getUserDao(),
 			getUsersActivationService(),
-			getCollectionService(),
+			collectionService,
 			securityConfig.getPasswordEncoder()
 		);
 	}

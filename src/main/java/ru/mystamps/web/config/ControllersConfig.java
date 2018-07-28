@@ -30,7 +30,8 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.collection.CollectionController;
+import ru.mystamps.web.feature.collection.CollectionConfig;
+import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
@@ -40,6 +41,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 @RequiredArgsConstructor
 @Import({
 	CategoryConfig.Controllers.class,
+	CollectionConfig.Controllers.class,
 	CountryConfig.Controllers.class,
 	ParticipantConfig.Controllers.class
 })
@@ -49,6 +51,7 @@ public class ControllersConfig {
 	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
+	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final ParticipantService participantService;
 	
@@ -57,17 +60,6 @@ public class ControllersConfig {
 		return new AccountController(
 			servicesConfig.getUserService(),
 			servicesConfig.getUsersActivationService()
-		);
-	}
-	
-	@Bean
-	public CollectionController getCollectionController() {
-		return new CollectionController(
-			categoryService,
-			servicesConfig.getCollectionService(),
-			countryService,
-			servicesConfig.getSeriesService(),
-			messageSource
 		);
 	}
 	
@@ -98,7 +90,7 @@ public class ControllersConfig {
 	public SeriesController getSeriesController() {
 		return new SeriesController(
 			categoryService,
-			servicesConfig.getCollectionService(),
+			collectionService,
 			countryService,
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSeriesImportService(),
@@ -123,7 +115,7 @@ public class ControllersConfig {
 	public SiteController getSiteController() {
 		return new SiteController(
 			categoryService,
-			servicesConfig.getCollectionService(),
+			collectionService,
 			countryService,
 			servicesConfig.getSeriesService(),
 			servicesConfig.getSuspiciousActivityService()
