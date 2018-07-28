@@ -76,5 +76,14 @@
 		</Or>
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
+	<Match>
+		<!-- @todo #493 AddCollectionDbDto: port to a new datetime API -->
+		<Class name="ru.mystamps.web.feature.collection.AddCollectionDbDto" />
+		<Or>
+			<Method name="getUpdatedAt" />
+			<Method name="setUpdatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
 	
 </FindBugsFilter>
