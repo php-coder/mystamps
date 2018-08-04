@@ -47,6 +47,11 @@
     <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
         <property name="severity" value="warning"/>
+        <!--
+            Explicitly specify line separator that matches separator of the files.
+            We don't want to use a system-dependent separator because it won't work on Windows.
+        -->
+        <property name="lineSeparator" value="lf"/>
     </module>
 
     <!-- Checks that property files contain the same keys.                  -->
