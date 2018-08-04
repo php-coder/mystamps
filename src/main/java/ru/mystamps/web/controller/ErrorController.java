@@ -67,12 +67,12 @@ public class ErrorController {
 		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
 		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
-			String msg = String.format(
-				"Exception '%s' occurred at page %s",
+			LOG.error(
+				"Exception '{}' occurred on page {}",
 				getNameOrAsIs(exceptionType),
-				page
+				page,
+				exception
 			);
-			LOG.error(msg, exception);
 		}
 	}
 	

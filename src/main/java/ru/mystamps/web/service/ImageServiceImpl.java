@@ -166,10 +166,7 @@ public class ImageServiceImpl implements ImageService {
 			return new DbImageDto("jpeg", preview);
 			
 		} catch (CreateImagePreviewException | ImagePersistenceException ex) {
-			log.warn(
-				String.format("Image #%d: couldn't create/save preview", previewInfo.getId()),
-				ex
-			);
+			log.warn("Image #{}: couldn't create/save preview", previewInfo.getId(), ex);
 			return null;
 		}
 	}
