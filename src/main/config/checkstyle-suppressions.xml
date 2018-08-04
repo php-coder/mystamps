@@ -9,16 +9,16 @@
 	<suppress checks="HideUtilityClassConstructor" files="ru.mystamps.web.controller.dto" />
 	
 	<!-- These files will be removed during porting integration tests to Cucumber JVM (see #18) -->
-	<suppress checks="ImportOrder" files="src/test/java/ru/mystamps/web/tests" />
+	<suppress checks="ImportOrder" files="ru.mystamps.web.tests" />
 	
 	<!-- false positives because these files contain SQL queries -->
-	<suppress checks="Translation" files="src/main/resources/sql" />
+	<suppress checks="Translation" files="src[/\\]main[/\\]resources[/\\]sql" />
 	
 	<!-- Too long link -->
-	<suppress checks="LineLength" files="src/main/java/ru/mystamps/web/dao/impl/package-info.java" />
-	<suppress checks="LineLength" files="src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java" />
+	<suppress checks="LineLength" files="src[/\\]main[/\\]java[/\\]ru[/\\]mystamps[/\\]web[/\\]dao[/\\]impl[/\\]package-info.java" />
+	<suppress checks="LineLength" files="ru.mystamps.web.support.thymeleaf.GroupByParent" />
 	
 	<!-- Packages in the tests don't need javadocs as they don't appear in the generated API docs -->
-	<suppress checks="JavadocPackageCheck" files="src/test/java" />
+	<suppress checks="JavadocPackageCheck" files="src[/\\]test[/\\]java" />
 	
 </suppressions>
