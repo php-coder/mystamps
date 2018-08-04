@@ -30,8 +30,8 @@ import ru.mystamps.web.util.CatalogUtils;
  * Expands range of catalog numbers (1-3) into a comma-separated list (1,2,3).
  *
  * @author Slava Semushin
- * @todo #694 ExpandCatalogNumbersEditor: add unit tests
  */
+// @todo #694 ExpandCatalogNumbersEditor: add unit tests
 @RequiredArgsConstructor
 public class ExpandCatalogNumbersEditor extends PropertyEditorSupport {
 	
