@@ -583,6 +583,7 @@
 		
 		<togglz.version>2.5.0.Final</togglz.version>
 		<war.plugin.version>3.2.0</war.plugin.version>
+		<wiremock.plugin.version>2.13.0</wiremock.plugin.version>
 	</properties>
 	
 	<build>
@@ -1041,6 +1042,36 @@
 						<id>stop-application</id>
 						<goals>
 							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!--
+				Usage:
+				mvn wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
+			-->
+			<plugin>
+				<groupId>uk.co.automatictester</groupId>
+				<artifactId>wiremock-maven-plugin</artifactId>
+				<version>${wiremock.plugin.version}</version>
+				<configuration>
+					<!-- Handy for manual debugging -->
+					<!--
+					<keepRunning>true</keepRunning>
+					-->
+					<dir>${basedir}/src/test/wiremock</dir>
+					<!--
+						The list of available options:
+						http://wiremock.org/docs/running-standalone/
+					-->
+					<!-- Handy for debugging: add &#45;&#45;verbose option -->
+					<params>--port=8888 --disable-banner --no-request-journal</params>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
