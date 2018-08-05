@@ -47,7 +47,7 @@ Create series with invalid image URL
 	Element Text Should Be  id=image-url.errors  Value must be a valid URL
 
 Create series with image URL with invalid response
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-400
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-400
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  Could not download file
 
