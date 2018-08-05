@@ -145,7 +145,7 @@ Submit a request that will fail to download a file
 
 Submit a request with a document that couldn't be parsed
 	[Documentation]         Verify submitting a URL with an empty HTML document
-	Input Text              id=url  ${SITE_URL}/test/invalid/simple-html
+	Input Text              id=url  ${MOCK_SERVER}/series/import/request-logic/simple.html
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=request-status  ParsingFailed
 

@@ -60,14 +60,6 @@ public class TestController {
 		return "test";
 	}
 	
-	@GetMapping("/test/invalid/simple-html")
-	public void simpleHtml(HttpServletResponse response) throws IOException {
-		printHtml(
-			response,
-			"<!DOCTYPE html><html><head><title>test</title></head><body>test</body></html>"
-		);
-	}
-	
 	@GetMapping("/test/valid/series-info/existing-seller")
 	public void seriesInfoWithExistingSeller(HttpServletResponse response) throws IOException {
 		printHtml(

@@ -987,6 +987,7 @@
 						<variable>BROWSER:htmlunitwithjs</variable>
 						<variable>MAIN_RESOURCE_DIR:${basedir}/src/main/resources/test</variable>
 						<variable>TEST_RESOURCE_DIR:${basedir}/src/test/resources</variable>
+						<variable>MOCK_SERVER:http://127.0.0.1:8888</variable>
 						<!-- See also ru.mystamps.web.Url.SITE constant -->
 						<variable>SITE_URL:http://127.0.0.1:8080</variable>
 					</variables>
