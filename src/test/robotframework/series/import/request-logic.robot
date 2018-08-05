@@ -139,7 +139,7 @@ Import series and series sale with a new seller from an external site
 	Element Should Be Disabled  id=seller-url
 
 Submit a request that will fail to download a file
-	Input Text              id=url  ${SITE_URL}/test/invalid/response-404
+	Input Text              id=url  ${MOCK_SERVER}/series/response-404
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=request-status  DownloadingFailed
 

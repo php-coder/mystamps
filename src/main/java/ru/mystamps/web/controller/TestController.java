@@ -30,11 +30,6 @@ import static ru.mystamps.web.util.ControllerUtils.printHtml;
 @Controller
 public class TestController {
 	
-	@GetMapping("/test/invalid/response-404")
-	public void notFound(HttpServletResponse response) throws IOException {
-		response.sendError(HttpServletResponse.SC_NOT_FOUND);
-	}
-	
 	@GetMapping("/test/invalid/empty-jpeg-file")
 	public void emptyJpegFile(HttpServletResponse response) {
 		response.setContentType("image/jpeg");

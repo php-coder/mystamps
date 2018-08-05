@@ -52,7 +52,7 @@ Create series with image URL with invalid response
 	Element Text Should Be  id=image-url.errors  Could not download file
 
 Create series with image URL to a file that does not exist
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-404
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-404
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  File not found
 

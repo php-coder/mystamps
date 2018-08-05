@@ -35,7 +35,7 @@ Add image with URL with invalid response
 	Element Text Should Be  id=image-url.errors  Could not download file
 
 Add image with URL to a file that does not exist
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-404
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-404
 	Submit Form             id=add-image-form
 	Element Text Should Be  id=image-url.errors  File not found
 
