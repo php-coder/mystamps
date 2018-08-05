@@ -67,7 +67,7 @@ Create series with image URL to an empty file
 	Element Text Should Be  id=image-url.errors  File must not be empty
 
 Create series with image URL to a file of unsupported type (not an image)
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/not-image-file
+	Input Text              id=image-url  ${MOCK_SERVER}/series/not-image-file
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  Invalid file type
 

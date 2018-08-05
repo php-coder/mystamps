@@ -23,18 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import static ru.mystamps.web.util.ControllerUtils.printHtml;
 
 @Controller
 public class TestController {
-	
-	@GetMapping(path = "/test/invalid/not-image-file", produces = "application/json")
-	@ResponseBody
-	public String simpleJson() {
-		return "test";
-	}
 	
 	@GetMapping("/test/valid/series-info/existing-seller")
 	public void seriesInfoWithExistingSeller(HttpServletResponse response) throws IOException {
