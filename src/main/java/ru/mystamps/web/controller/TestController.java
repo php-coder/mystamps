@@ -30,12 +30,6 @@ import static ru.mystamps.web.util.ControllerUtils.printHtml;
 @Controller
 public class TestController {
 	
-	@GetMapping("/test/invalid/empty-jpeg-file")
-	public void emptyJpegFile(HttpServletResponse response) {
-		response.setContentType("image/jpeg");
-		response.setContentLength(0);
-	}
-	
 	@GetMapping(path = "/test/invalid/not-image-file", produces = "application/json")
 	@ResponseBody
 	public String simpleJson() {

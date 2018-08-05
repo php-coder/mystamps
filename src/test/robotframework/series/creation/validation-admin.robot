@@ -62,7 +62,7 @@ Create series with image URL that causes a redirect
 	Element Text Should Be  id=image-url.errors  URL must not redirect to another address
 
 Create series with image URL to an empty file
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/empty-jpeg-file
+	Input Text              id=image-url  ${MOCK_SERVER}/series/empty-jpeg-file
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  File must not be empty
 
