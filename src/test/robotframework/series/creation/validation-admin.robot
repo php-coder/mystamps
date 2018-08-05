@@ -57,7 +57,7 @@ Create series with image URL to a file that does not exist
 	Element Text Should Be  id=image-url.errors  File not found
 
 Create series with image URL that causes a redirect
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-301
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-301
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  URL must not redirect to another address
 

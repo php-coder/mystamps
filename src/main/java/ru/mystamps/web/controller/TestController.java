@@ -25,18 +25,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ru.mystamps.web.Url;
-
 import static ru.mystamps.web.util.ControllerUtils.printHtml;
 
 @Controller
 public class TestController {
-	
-	@GetMapping("/test/invalid/response-301")
-	public void redirect(HttpServletResponse response) {
-		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-		response.setHeader("Location", Url.SITE);
-	}
 	
 	@GetMapping("/test/invalid/response-400")
 	public void badRequest(HttpServletResponse response) throws IOException {

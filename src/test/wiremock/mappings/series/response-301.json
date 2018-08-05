@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/series/response-301"
+  },
+  "response": {
+    "status": 301,
+    "headers": {
+      "Location": "http://127.0.0.1:8080"
+    }
+  }
+}
