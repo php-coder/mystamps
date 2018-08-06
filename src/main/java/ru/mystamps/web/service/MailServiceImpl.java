@@ -87,7 +87,8 @@ public class MailServiceImpl implements MailService {
 			"My Stamps",
 			getSubjectOfActivationMail(activation),
 			getTextOfActivationMail(activation),
-			"activation_key"
+			"activation_key",
+			testMode
 		);
 		
 		LOG.info(
@@ -106,7 +107,8 @@ public class MailServiceImpl implements MailService {
 			"My Stamps",
 			getSubjectOfDailyStatisticsMail(report),
 			reportService.prepareDailyStatistics(report),
-			"daily_statistics"
+			"daily_statistics",
+			testMode
 		);
 		
 		String date = shortDatePrinter.format(report.getStartDate());
@@ -126,7 +128,8 @@ public class MailServiceImpl implements MailService {
 		final String fromName,
 		final String subject,
 		final String text,
-		final String tag) {
+		final String tag,
+		final boolean testMode) {
 		
 		try {
 			// We're using MimeMessagePreparator only because of its capability of adding headers.
