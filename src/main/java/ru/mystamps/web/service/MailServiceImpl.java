@@ -83,6 +83,7 @@ public class MailServiceImpl implements MailService {
 		
 		sendMail(
 			activation.getEmail(),
+			robotEmail,
 			getSubjectOfActivationMail(activation),
 			getTextOfActivationMail(activation),
 			"activation_key"
@@ -100,6 +101,7 @@ public class MailServiceImpl implements MailService {
 	public void sendDailyStatisticsToAdmin(AdminDailyReport report) {
 		sendMail(
 			adminEmail,
+			robotEmail,
 			getSubjectOfDailyStatisticsMail(report),
 			reportService.prepareDailyStatistics(report),
 			"daily_statistics"
@@ -118,6 +120,7 @@ public class MailServiceImpl implements MailService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void sendMail(
 		final String toEmail,
+		final String fromEmail,
 		final String subject,
 		final String text,
 		final String tag) {
@@ -134,7 +137,7 @@ public class MailServiceImpl implements MailService {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setValidateAddresses(true);
 					message.setTo(toEmail);
-					message.setFrom(new InternetAddress(robotEmail, "My Stamps", "UTF-8"));
+					message.setFrom(new InternetAddress(fromEmail, "My Stamps", "UTF-8"));
 					message.setSubject(subject);
 					message.setText(text);
 					
