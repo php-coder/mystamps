@@ -84,6 +84,7 @@ public class MailServiceImpl implements MailService {
 		sendMail(
 			activation.getEmail(),
 			robotEmail,
+			"My Stamps",
 			getSubjectOfActivationMail(activation),
 			getTextOfActivationMail(activation),
 			"activation_key"
@@ -102,6 +103,7 @@ public class MailServiceImpl implements MailService {
 		sendMail(
 			adminEmail,
 			robotEmail,
+			"My Stamps",
 			getSubjectOfDailyStatisticsMail(report),
 			reportService.prepareDailyStatistics(report),
 			"daily_statistics"
@@ -121,6 +123,7 @@ public class MailServiceImpl implements MailService {
 	private void sendMail(
 		final String toEmail,
 		final String fromEmail,
+		final String fromName,
 		final String subject,
 		final String text,
 		final String tag) {
@@ -137,7 +140,7 @@ public class MailServiceImpl implements MailService {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setValidateAddresses(true);
 					message.setTo(toEmail);
-					message.setFrom(new InternetAddress(fromEmail, "My Stamps", "UTF-8"));
+					message.setFrom(new InternetAddress(fromEmail, fromName, "UTF-8"));
 					message.setSubject(subject);
 					message.setText(text);
 					
