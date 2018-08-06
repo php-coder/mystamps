@@ -117,7 +117,7 @@ public class MailServiceImpl implements MailService {
 	
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")
 	private void sendMail(
-		final String email,
+		final String toEmail,
 		final String subject,
 		final String text,
 		final String tag) {
@@ -133,7 +133,7 @@ public class MailServiceImpl implements MailService {
 				public void prepare(MimeMessage mimeMessage) throws Exception {
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setValidateAddresses(true);
-					message.setTo(email);
+					message.setTo(toEmail);
 					message.setFrom(new InternetAddress(robotEmail, "My Stamps", "UTF-8"));
 					message.setSubject(subject);
 					message.setText(text);
@@ -149,7 +149,7 @@ public class MailServiceImpl implements MailService {
 			mailer.send(preparator);
 			
 		} catch (MailException ex) {
-			throw new EmailSendingException("Can't send mail to e-mail " + email, ex);
+			throw new EmailSendingException("Can't send mail to e-mail " + toEmail, ex);
 		}
 	}
 	
