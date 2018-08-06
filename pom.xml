@@ -1067,7 +1067,7 @@
 						http://wiremock.org/docs/running-standalone/
 					-->
 					<!-- Handy for debugging: add &#45;&#45;verbose option -->
-					<params>--port=8888 --disable-banner --no-request-journal</params>
+					<params>--port=8888 --disable-banner --no-request-journal --container-threads=4 --jetty-acceptor-threads=1</params>
 				</configuration>
 				<executions>
 					<execution>
