@@ -73,24 +73,4 @@ public class TestController {
 		);
 	}
 	
-	@GetMapping("/test/valid/series-info/catalog-numbers-in-description")
-	public void seriesInfoWithCatalogNumbersInDescription(HttpServletResponse response)
-		throws IOException {
-		
-		printHtml(
-			response,
-			"<!DOCTYPE html>"
-			+ "<html>"
-				+ "<head>"
-					+ "<title>Series info (catalog numbers in description)</title>"
-				+ "</head>"
-				+ "<body>"
-					+ "Image: <a id=\"series-image-link-1\" href=\"/image/1\">series image</a>"
-					+ "<br />"
-					+ "Info:  <span class=\"dl-horizontal\">Спорт, 17 марок, Mi# 2242-2246</span>"
-				+ "</body>"
-			+ "</html>"
-		);
-	}
-	
 }
