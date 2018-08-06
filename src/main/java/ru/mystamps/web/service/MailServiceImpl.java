@@ -138,7 +138,7 @@ public class MailServiceImpl implements MailService {
 					message.setSubject(subject);
 					message.setText(text);
 					
-					// see: http://documentation.mailgun.com/user_manual.html#sending-via-smtp
+					// see: https://documentation.mailgun.com/en/latest/user_manual.html#sending-via-smtp
 					message.getMimeMessage().addHeader("X-Mailgun-Tag", tag);
 					if (testMode) {
 						message.getMimeMessage().addHeader("X-Mailgun-Drop-Message", "yes");
