@@ -112,7 +112,7 @@ Import series and series sale with existing seller from an external site
 
 Import series and series sale with a new seller from an external site
 	[Documentation]             Verify import series and sale (with a new seller)
-	Input Text                  id=url  http://localhost:8080/test/valid/series-info/new-seller
+	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/new-seller.html
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
 	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
