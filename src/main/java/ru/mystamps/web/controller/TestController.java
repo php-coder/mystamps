@@ -64,7 +64,7 @@ public class TestController {
 	public void simpleHtml(HttpServletResponse response) throws IOException {
 		printHtml(
 			response,
-			"<html><head><title>test</title></head><body>test</body></html>"
+			"<!DOCTYPE html><html><head><title>test</title></head><body>test</body></html>"
 		);
 	}
 	
