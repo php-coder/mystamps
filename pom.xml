@@ -583,7 +583,7 @@
 		
 		<togglz.version>2.5.0.Final</togglz.version>
 		<war.plugin.version>3.2.0</war.plugin.version>
-		<wiremock.plugin.version>2.13.0</wiremock.plugin.version>
+		<wiremock.plugin.version>2.13.1</wiremock.plugin.version>
 	</properties>
 	
 	<build>
