@@ -583,6 +583,7 @@
 		
 		<togglz.version>2.5.0.Final</togglz.version>
 		<war.plugin.version>3.2.0</war.plugin.version>
+		<wiremock.plugin.version>2.13.1</wiremock.plugin.version>
 	</properties>
 	
 	<build>
@@ -986,6 +987,7 @@
 						<variable>BROWSER:htmlunitwithjs</variable>
 						<variable>MAIN_RESOURCE_DIR:${basedir}/src/main/resources/test</variable>
 						<variable>TEST_RESOURCE_DIR:${basedir}/src/test/resources</variable>
+						<variable>MOCK_SERVER:http://127.0.0.1:8888</variable>
 						<!-- See also ru.mystamps.web.Url.SITE constant -->
 						<variable>SITE_URL:http://127.0.0.1:8080</variable>
 					</variables>
@@ -1041,6 +1043,36 @@
 						<id>stop-application</id>
 						<goals>
 							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!--
+				Usage:
+				mvn wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
+			-->
+			<plugin>
+				<groupId>uk.co.automatictester</groupId>
+				<artifactId>wiremock-maven-plugin</artifactId>
+				<version>${wiremock.plugin.version}</version>
+				<configuration>
+					<!-- Handy for manual debugging -->
+					<!--
+					<keepRunning>true</keepRunning>
+					-->
+					<dir>${basedir}/src/test/wiremock</dir>
+					<!--
+						The list of available options:
+						http://wiremock.org/docs/running-standalone/
+					-->
+					<!-- Handy for debugging: add &#45;&#45;verbose option -->
+					<params>--port=8888 --disable-banner --no-request-journal --container-threads=4 --jetty-acceptor-threads=1</params>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>

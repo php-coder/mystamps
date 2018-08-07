@@ -47,27 +47,27 @@ Create series with invalid image URL
 	Element Text Should Be  id=image-url.errors  Value must be a valid URL
 
 Create series with image URL with invalid response
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-400
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-400
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  Could not download file
 
 Create series with image URL to a file that does not exist
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-404
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-404
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  File not found
 
 Create series with image URL that causes a redirect
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/response-301
+	Input Text              id=image-url  ${MOCK_SERVER}/series/response-301
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  URL must not redirect to another address
 
 Create series with image URL to an empty file
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/empty-jpeg-file
+	Input Text              id=image-url  ${MOCK_SERVER}/series/empty-jpeg-file
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  File must not be empty
 
 Create series with image URL to a file of unsupported type (not an image)
-	Input Text              id=image-url  ${SITE_URL}/test/invalid/not-image-file
+	Input Text              id=image-url  ${MOCK_SERVER}/series/not-image-file
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=image-url.errors  Invalid file type
 

@@ -78,7 +78,7 @@ Import series from an external site (in Russian, use description locator)
 
 Import series from external site with catalog numbers (use description locator)
 	[Documentation]             Verify import of catalog numbers by extracting them from a description
-	Input Text                  id=url  http://localhost:8080/test/valid/series-info/catalog-numbers-in-description
+	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/catalog-numbers-in-description.html
 	Submit Form                 id=import-series-form
 	Textfield Value Should Be   id=michel-numbers   2242-2246
 	Submit Form                 id=create-series-form
@@ -88,7 +88,7 @@ Import series from external site with catalog numbers (use description locator)
 
 Import series and series sale with existing seller from an external site
 	[Documentation]             Verify import series and sale (with existing seller)
-	Input Text                  id=url  http://localhost:8080/test/valid/series-info/existing-seller
+	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
 	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
@@ -103,7 +103,7 @@ Import series and series sale with existing seller from an external site
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
 	Element Text Should Be      id=series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB
 	Link Should Point To        id=series-sale-1-seller       http://example.com/eicca-toppinen
-	Link Should Point To        id=series-sale-1-transaction  http://localhost:8080/test/valid/series-info/existing-seller
+	Link Should Point To        id=series-sale-1-transaction  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html
 	Go To                       ${requestLocation}
 	# after importing a series, sale info at the request page should be shown as read-only
 	Element Should Be Disabled  id=seller
@@ -112,7 +112,7 @@ Import series and series sale with existing seller from an external site
 
 Import series and series sale with a new seller from an external site
 	[Documentation]             Verify import series and sale (with a new seller)
-	Input Text                  id=url  http://localhost:8080/test/valid/series-info/new-seller
+	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/new-seller.html
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
 	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
@@ -139,13 +139,13 @@ Import series and series sale with a new seller from an external site
 	Element Should Be Disabled  id=seller-url
 
 Submit a request that will fail to download a file
-	Input Text              id=url  ${SITE_URL}/test/invalid/response-404
+	Input Text              id=url  ${MOCK_SERVER}/series/response-404
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=request-status  DownloadingFailed
 
 Submit a request with a document that couldn't be parsed
 	[Documentation]         Verify submitting a URL with an empty HTML document
-	Input Text              id=url  ${SITE_URL}/test/invalid/simple-html
+	Input Text              id=url  ${MOCK_SERVER}/series/import/request-logic/simple.html
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=request-status  ParsingFailed
 

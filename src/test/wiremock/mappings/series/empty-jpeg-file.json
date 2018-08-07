@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/series/empty-jpeg-file"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "image/jpeg",
+      "Content-Length": "0"
+    }
+  }
+}
