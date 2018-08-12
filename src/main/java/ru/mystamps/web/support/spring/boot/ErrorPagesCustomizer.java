@@ -24,6 +24,8 @@ import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.ErrorPageRegistrar;
 import org.springframework.boot.web.servlet.ErrorPageRegistry;
 
+import org.springframework.security.web.firewall.RequestRejectedException;
+
 import ru.mystamps.web.Url;
 
 @Configuration
@@ -34,6 +36,7 @@ public class ErrorPagesCustomizer implements ErrorPageRegistrar {
 		registry.addErrorPages(
 			new ErrorPage(HttpStatus.FORBIDDEN, Url.FORBIDDEN_PAGE),
 			new ErrorPage(HttpStatus.NOT_FOUND, Url.NOT_FOUND_PAGE),
+			new ErrorPage(RequestRejectedException.class, Url.NOT_FOUND_PAGE),
 			new ErrorPage(Exception.class, Url.INTERNAL_ERROR_PAGE)
 		);
 	}
