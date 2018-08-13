@@ -2,6 +2,7 @@
 Documentation    Verify country creation scenarios
 Library          Selenium2Library
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
@@ -14,7 +15,7 @@ Create country with name in English (fill only mandatory fields)
 	Submit Form                       id=add-country-form
 	Location Should Be                ${SITE_URL}/country/germany
 	Element Text Should Be            id=page-header  Stamps of Germany
-	Element Text Should Be            id=msg-success  Country has been added.${\n}Now you could proceed with creating series.
+	Element Text Should Match Regexp  id=msg-success  Country has been added\.[\\n\\r]+Now you could proceed with creating series\.
 	Go To                             ${SITE_URL}/series/add
 	Country Field Should Have Option  Germany
 

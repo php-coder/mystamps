@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Verify access to series related pages (including non-existing)
 Library          Selenium2Library
+Resource         ../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       series  access
@@ -12,9 +13,9 @@ Anonymous user cannot create series
 	Element Text Should Be  id=error-msg  Forbidden
 
 Opening a page of non-existing series show an error
-	Go To                   ${SITE_URL}/series/999
-	Element Text Should Be  id=error-code  404
-	Element Text Should Be  id=error-msg  Requested page${\n}not found
+	Go To                             ${SITE_URL}/series/999
+	Element Text Should Be            id=error-code  404
+	Element Text Should Match Regexp  id=error-msg   Requested page[\\n\\r]+not found
 
 *** Keywords ***
 Before Test Suite
