@@ -2,6 +2,7 @@
 Documentation    Verify miscellaneous aspects of participant creation
 Library          Selenium2Library
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       participant  misc
@@ -12,10 +13,7 @@ Name and url should be stripped from leading and trailing spaces
 	Input Text                 id=url   ${SPACE * 2}url${SPACE * 2}
 	Submit Form                id=add-participant-form
 	Textfield Value Should Be  id=name  f
-	# We can't use "Textfield Value Should Be" because it causes NPE:
-	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
-	${value}=                  Get Value  id=url
-	Should Be Equal            ${value}   url
+	Urlfield Value Should Be   id=url   url
 
 *** Keywords ***
 Before Test Suite

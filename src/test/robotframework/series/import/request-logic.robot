@@ -3,6 +3,7 @@ Documentation    Verify scenarios of importing a series from an external site
 Library          Selenium2Library
 Library          DateTime
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Test Setup       Before Test
@@ -18,10 +19,7 @@ Import series from an external site (in English, use category, country and date 
 	Should Match Regexp              ${requestLocation}  /series/import/request/\\d+
 	${category}=                     Get Selected List Label  id=category
 	${country}=                      Get Selected List Label  id=country
-	# We can't use "Textfield Value Should Be" because it causes NPE on inputs of type url/number:
-	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
 	${quantity}=                     Get Value  id=quantity
-	${imageUrl}=                     Get Value  id=image-url
 	${year}=                         Get Selected List Label  id=year
 	Element Text Should Be           id=request-url     ${importUrl}
 	Element Text Should Be           id=request-status  ParsingSucceeded
@@ -29,7 +27,7 @@ Import series from an external site (in English, use category, country and date 
 	Should Be Equal                  ${country}         Italy
 	Should Be Empty                  ${quantity}
 	Checkbox Should Be Selected      id=perforated
-	Should Be Equal                  ${imageUrl}        http://127.0.0.1:8080/image/1
+	Urlfield Value Should Be         id=image-url       http://127.0.0.1:8080/image/1
 	Should Be Equal                  ${year}            2000
 	Input Text                       id=quantity  1
 	Submit Form                      id=create-series-form
@@ -62,10 +60,7 @@ Import series from an external site (in Russian, use description locator)
 	Should Match Regexp          ${location}  /series/import/request/\\d+
 	${category}=                 Get Selected List Label  id=category
 	${country}=                  Get Selected List Label  id=country
-	# We can't use "Textfield Value Should Be" because it causes NPE on inputs of type url/number:
-	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
 	${quantity}=                 Get Value  id=quantity
-	${imageUrl}=                 Get Value  id=image-url
 	${year}=                     Get Selected List Label  id=year
 	Element Text Should Be       id=request-url     http://localhost:8080/series/2?lang=ru&str=тест
 	Element Text Should Be       id=request-status  ParsingSucceeded
@@ -73,7 +68,7 @@ Import series from an external site (in Russian, use description locator)
 	Should Be Equal              ${country}         Italy
 	Should Be Empty              ${quantity}
 	Checkbox Should Be Selected  id=perforated
-	Should Be Equal              ${imageUrl}        http://localhost:8080/image/1
+	Urlfield Value Should Be     id=image-url       http://localhost:8080/image/1
 	Should Be Equal              ${year}            2000
 
 Import series from external site with catalog numbers (use description locator)
@@ -120,10 +115,7 @@ Import series and series sale with a new seller from an external site
 	${group}=                   Get Selected List Label  id=seller-group
 	Should Be Equal             ${group}  example.com
 	Textfield Value Should Be   id=seller-name  Lando Livianus
-	# We can't use "Textfield Value Should Be" because it causes NPE:
-	# https://github.com/MarkusBernhardt/robotframework-selenium2library-java/issues/92
-	${sellerUrl}=               Get Value     id=seller-url
-	Should Be Equal             ${sellerUrl}  http://example.com/lando-livianus
+	Urlfield Value Should Be    id=seller-url   http://example.com/lando-livianus
 	Submit Form                 id=create-series-form
 	${seriesLocation}=          Get Location
 	Should Match Regexp         ${seriesLocation}  /series/\\d+
