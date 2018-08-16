@@ -698,7 +698,10 @@ if File.file?(failsafe_report)
 	end
 end
 
-if github.pr_body !~ /Addressed to #\d+/
+# Don't show some warnings/messages to a bot, it doesn't read them
+prFromRealUser = github.pr_author != 'dependabot'
+
+if prFromRealUser && github.pr_body !~ /Addressed to #\d+/
 	warn(
 		"danger check: pull request description doesn't contain a link to original issue.\n"\
 		"Consider adding a comment in the following format: `Addressed to #XXX` where `XXX` is an issue number"
@@ -706,7 +709,7 @@ if github.pr_body !~ /Addressed to #\d+/
 end
 
 commits = git.commits.size
-if commits > 1
+if prFromRealUser && commits > 1
 	if git.commits.any? { |c| c.message =~ /^Merge branch/ || c.message =~ /^Merge remote-tracking branch/ }
 		fail(
 			"danger check: pull request contains merge commits! "\
@@ -722,7 +725,7 @@ if commits > 1
 	end
 end
 
-if github.branch_for_head !~ /^gh[0-9]+_/
+if prFromRealUser && github.branch_for_head !~ /^gh[0-9]+_/
 	warn("danger check: branch `#{github.branch_for_head}` does not comply with our best practices. "\
 		"Branch name should use the following scheme: `ghXXX_meaningful-name` where `XXX` is an issue number. "\
 		"**Next time**, please, use this scheme :)"
@@ -738,7 +741,7 @@ if modified_resources && !updated_url
 end
 
 all_checks_passed = violation_report[:errors].empty? && violation_report[:warnings].empty? && violation_report[:messages].empty?
-if all_checks_passed
+if prFromRealUser && all_checks_passed
 	message(
 		"@#{github.pr_author} thank you for the PR! All quality checks have been passed! "\
 		"Next step is to wait when @php-coder will review this code"
