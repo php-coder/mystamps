@@ -538,7 +538,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.15.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<mysql.version>5.1.46</mysql.version>
 		
-		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
+		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.8</pmd.plugin.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
