@@ -918,12 +918,14 @@
 				<artifactId>native2ascii-maven-plugin</artifactId>
 				<version>${native2ascii.plugin.version}</version>
 				<configuration>
-					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
+					<srcDir>${basedir}/src/main/resources/ru/mystamps/i18n</srcDir>
+					<targetDir>${project.build.outputDirectory}/classes/ru/mystamps/i18n</targetDir>
 				</configuration>
 				<executions>
 					<execution>
+						<id>utf8-to-latin1</id>
 						<goals>
-							<goal>native2ascii</goal>
+							<goal>resources</goal>
 						</goals>
 					</execution>
 				</executions>
