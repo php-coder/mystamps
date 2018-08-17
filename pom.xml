@@ -538,7 +538,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.15.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<mysql.version>5.1.46</mysql.version>
 		
-		<native2ascii.plugin.version>1.0-beta-1</native2ascii.plugin.version>
+		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.8</pmd.plugin.version>
 		<resources.plugin.version>3.0.2</resources.plugin.version>
@@ -918,12 +918,14 @@
 				<artifactId>native2ascii-maven-plugin</artifactId>
 				<version>${native2ascii.plugin.version}</version>
 				<configuration>
-					<workDir>${project.build.directory}/classes/ru/mystamps/i18n</workDir>
+					<srcDir>${basedir}/src/main/resources/ru/mystamps/i18n</srcDir>
+					<targetDir>${project.build.outputDirectory}/classes/ru/mystamps/i18n</targetDir>
 				</configuration>
 				<executions>
 					<execution>
+						<id>utf8-to-latin1</id>
 						<goals>
-							<goal>native2ascii</goal>
+							<goal>resources</goal>
 						</goals>
 					</execution>
 				</executions>
