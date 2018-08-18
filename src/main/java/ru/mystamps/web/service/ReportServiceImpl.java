@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.text.StrSubstitutor;
 import org.apache.commons.lang3.time.DatePrinter;
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.apache.commons.text.StringSubstitutor;
 
 import org.springframework.context.MessageSource;
 
@@ -76,7 +76,7 @@ public class ReportServiceImpl implements ReportService {
 		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
 		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
 
-		return new StrSubstitutor(ctx).replace(template);
+		return new StringSubstitutor(ctx).replace(template);
 	}
 
 	private static void put(Map<String, String> ctx, String key, long value) {
