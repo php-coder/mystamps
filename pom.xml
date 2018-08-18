@@ -35,6 +35,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>${commons.text.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
@@ -472,6 +478,7 @@
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
 		<commons.lang.version>3.7</commons.lang.version>
+		<commons.text.version>1.4</commons.text.version>
 		<compiler.plugin.version>3.7.0</compiler.plugin.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<datagen.version>2.2.1</datagen.version>
