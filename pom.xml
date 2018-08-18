@@ -34,6 +34,13 @@
 			<version>${commons.lang.version}</version>
 		</dependency>
 		
+		<!-- Required for StringSubstitutor -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>${commons.text.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -471,7 +478,8 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.15.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
-		<commons.lang.version>3.4</commons.lang.version>
+		<commons.lang.version>3.7</commons.lang.version>
+		<commons.text.version>1.4</commons.text.version>
 		<compiler.plugin.version>3.7.0</compiler.plugin.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<datagen.version>2.2.1</datagen.version>

@@ -25,9 +25,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.text.StrSubstitutor;
 import org.apache.commons.lang3.time.DatePrinter;
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.apache.commons.text.StringSubstitutor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,7 +167,7 @@ public class MailServiceImpl implements MailService {
 		ctx.put("activation_url_with_key", activationUrl);
 		ctx.put("expire_after_days", String.valueOf(CronService.PURGE_AFTER_DAYS));
 		
-		StrSubstitutor substitutor = new StrSubstitutor(ctx);
+		StringSubstitutor substitutor = new StringSubstitutor(ctx);
 		return substitutor.replace(template);
 	}
 	
@@ -183,7 +183,7 @@ public class MailServiceImpl implements MailService {
 		ctx.put("date", fromDate);
 		put(ctx, "total_changes", report.countTotalChanges());
 		
-		StrSubstitutor substitutor = new StrSubstitutor(ctx);
+		StringSubstitutor substitutor = new StringSubstitutor(ctx);
 		return substitutor.replace(template);
 	}
 	
