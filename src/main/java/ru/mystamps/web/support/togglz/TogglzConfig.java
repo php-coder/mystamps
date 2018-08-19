@@ -28,6 +28,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 
 import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.togglz.console.TogglzConsoleServlet;
+import org.togglz.core.logging.LoggingStateRepository;
 import org.togglz.core.manager.FeatureManager;
 import org.togglz.core.manager.FeatureManagerBuilder;
 import org.togglz.core.repository.cache.CachingStateRepository;
@@ -47,7 +48,13 @@ public class TogglzConfig {
 	@Bean
 	public FeatureManager getFeatureManager() {
 		return new FeatureManagerBuilder()
-			.stateRepository(new CachingStateRepository(new JDBCStateRepository(dataSource)))
+			.stateRepository(
+				new LoggingStateRepository(
+					new CachingStateRepository(
+						new JDBCStateRepository(dataSource)
+					)
+				)
+			)
 			.featureEnum(Features.class)
 			.userProvider(new SpringSecurityUserProvider(StringAuthority.MANAGE_TOGGLZ))
 			.build();

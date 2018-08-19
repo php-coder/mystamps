@@ -331,49 +331,6 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	}
 	
 	@Test
-	public void onTogglzConsoleWithLocalResources() {
-		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, bool());
-		String[] directives = writer.constructDirectives("/togglz/").split(";");
-		
-		// test only a directive that is differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
-				"style-src "
-					+ "https://cdn.rawgit.com "
-					+ "'self' "
-					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
-			)
-		);
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
-	}
-	
-	@Test
-	public void onTogglzConsoleWithResourcesFromCdn() {
-		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, bool());
-		String[] directives = writer.constructDirectives("/togglz/").split(";");
-		
-		// test only a directive that is differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
-				"style-src "
-					+ "https://cdn.rawgit.com "
-					+ "https://stamps.filezz.ru "
-					+ "https://maxcdn.bootstrapcdn.com "
-					+ "'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
-			)
-		);
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
-	}
-	
-	@Test
 	public void onH2ConsoleWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
 			new ContentSecurityPolicyHeaderWriter(true, true);
