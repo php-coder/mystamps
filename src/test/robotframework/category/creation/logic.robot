@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Verify category creation scenarios
 Library          Collections
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite

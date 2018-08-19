@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify validation scenarios for adding series sales
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify country creation scenarios
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite

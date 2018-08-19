@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify validation scenarios during adding additional image to a series
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

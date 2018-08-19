@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Verify miscellaneous aspects of series creation
 Library          Collections
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

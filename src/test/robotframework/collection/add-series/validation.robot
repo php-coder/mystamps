@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify validation of adding a series to collection
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

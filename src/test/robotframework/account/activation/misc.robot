@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify miscellaneous aspects of account activation
-Library          Selenium2Library
+Library          SeleniumLibrary
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       account  activation  misc

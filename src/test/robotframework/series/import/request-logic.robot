@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify scenarios of importing a series from an external site
-Library          Selenium2Library
+Library          SeleniumLibrary
 Library          DateTime
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify required elements appearance on the main page from an admin
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

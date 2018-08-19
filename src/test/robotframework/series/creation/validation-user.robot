@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify series creation validation scenarios from a user
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

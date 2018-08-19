@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify miscellaneous aspects of adding series sales
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite

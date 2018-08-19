@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify access to import series related pages
-Library          Selenium2Library
+Library          SeleniumLibrary
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       series  import-series  access

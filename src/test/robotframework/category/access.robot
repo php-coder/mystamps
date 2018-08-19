@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Verify access to category related pages (including non-existing)
-Library          Selenium2Library
+Library          SeleniumLibrary
 Resource         ../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
