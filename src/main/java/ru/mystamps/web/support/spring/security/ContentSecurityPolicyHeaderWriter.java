@@ -37,8 +37,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d+/(ask|image))";
 	
-	private static final String TOGGLZ_PAGES_PATTERN = Url.TOGGLZ_CONSOLE_PAGE + '/';
-	
 	private static final String H2_CONSOLE_PATTERN = Url.H2_CONSOLE_PAGE + '/';
 	
 	// default policy prevents loading resources from any source
@@ -87,10 +85,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'sha256-/kX...' is required for 'overflow: hidden;' inline CSS for Google Charts.
 	private static final String STYLE_COLLECTION_INFO =
 		" https://www.gstatic.com 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='";
-	
-	// - 'sha256-biL...' is required for 'display: none;' inline CSS for Togglz
-	private static final String STYLE_TOGGLZ =
-		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='";
 	
 	// - 'sha256-biL...' is required for 'display: none;' inline CSS
 	// - 'sha256-ZdH...' is required for 'display: none' inline CSS
@@ -195,9 +189,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			if (onAddSeriesPage) {
 				sb.append(STYLE_SERIES_ADD_PAGE);
 			}
-		
-		} else if (uri.startsWith(TOGGLZ_PAGES_PATTERN)) {
-			sb.append(STYLE_TOGGLZ);
 		
 		} else if (onH2ConsolePage) {
 			sb.append(STYLE_H2_CONSOLE);
