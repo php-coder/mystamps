@@ -927,7 +927,7 @@
 				<version>${native2ascii.plugin.version}</version>
 				<configuration>
 					<srcDir>${basedir}/src/main/resources/ru/mystamps/i18n</srcDir>
-					<targetDir>${project.build.outputDirectory}/classes/ru/mystamps/i18n</targetDir>
+					<targetDir>${project.build.outputDirectory}/ru/mystamps/i18n</targetDir>
 				</configuration>
 				<executions>
 					<execution>
