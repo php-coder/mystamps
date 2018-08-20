@@ -1087,6 +1087,7 @@
 					<execution>
 						<goals>
 							<goal>run</goal>
+							<goal>stop</goal>
 						</goals>
 					</execution>
 				</executions>
