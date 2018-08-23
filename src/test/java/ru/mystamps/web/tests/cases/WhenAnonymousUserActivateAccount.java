@@ -49,13 +49,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidLogins")
-	public void loginShouldNotContainRepetitionSpecialCharacters(String login, Object whatever) {
-		page.activateAccount(login, null, null, null, null);
-
-		assertThat(page).field("login").hasError(tr("login.repetition_chars"));
-	}
-	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void loginShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.activateAccount(" testLogin ", null, null, null, null);
@@ -188,17 +181,6 @@ public class WhenAnonymousUserActivateAccount
 			{"x", null},
 			{"Slava Se-mushin", null},
 			{"Семён Якушев", null}
-		};
-	}
-
-	@DataProvider(name = "invalidLogins")
-	public Object[][] getInvalidLogins() {
-		return new Object[][] {
-			{"te__st", null},
-			{"te--st", null},
-			{"te..st", null},
-			{"te_-st", null},
-			{"te-._st", null}
 		};
 	}
 	

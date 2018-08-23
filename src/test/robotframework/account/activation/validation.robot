@@ -38,6 +38,14 @@ Activate account with existing login
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=login.errors  Login already exists
 
+Activate account with repetition of the special characters
+	[Template]  Login should not contain repeated special characters
+	te__st
+	te--st
+	te..st
+	te_-st
+	te-._st
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
@@ -46,3 +54,9 @@ Before Test Suite
 
 After Test Suite
 	Close Browser
+
+Login should not contain repeated special characters
+	[Arguments]             ${login}
+	Input Text              id=login         ${login}
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=login.errors  Login must not contain repetition of hyphen, dot or underscore
