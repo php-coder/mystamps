@@ -25,6 +25,11 @@ Login with allowed characters should be accepted
 	Submit Form                      id=activate-account-form
 	Page Should Not Contain Element  id=login.errors
 
+Login should be striped from leading and trailing spaces
+	Input Text                 id=login  ${SPACE * 2}testLogin${SPACE * 2}
+	Submit Form                id=activate-account-form
+	Textfield Value Should Be  id=login  testLogin
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
