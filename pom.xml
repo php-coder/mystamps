@@ -470,7 +470,7 @@
 		<!-- Don't forget to update version in the Url class -->
 		<bootstrap.version>3.3.7</bootstrap.version>
 		
-		<cglib.version>2.2.2</cglib.version>
+		<cglib.version>3.2.7</cglib.version>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<clean.plugin.version>3.0.0</clean.plugin.version>
 		<codenarc.plugin.version>0.22-1</codenarc.plugin.version>
