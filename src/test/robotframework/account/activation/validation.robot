@@ -46,6 +46,12 @@ Activate account with repetition of the special characters
 	te_-st
 	te-._st
 
+Activate account with too long name
+	${letter}=              Set Variable    j
+	Input Text              id=name         ${letter * 101}
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=name.errors  Value is greater than allowable maximum of 100 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
