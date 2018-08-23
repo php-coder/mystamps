@@ -30,6 +30,12 @@ Login should be striped from leading and trailing spaces
 	Submit Form                id=activate-account-form
 	Textfield Value Should Be  id=login  testLogin
 
+Name with allowed characters should be accepted
+	[Template]  Name should not cause an error
+	x
+	Slava Se-mushin
+	Семён Якушев
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
@@ -38,3 +44,9 @@ Before Test Suite
 
 After Test Suite
 	Close Browser
+
+Name should not cause an error
+	[Arguments]                      ${name}
+	Input Text                       id=name  ${name}
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=name.errors

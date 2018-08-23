@@ -20,7 +20,6 @@ package ru.mystamps.web.tests.cases;
 import org.apache.commons.lang3.StringUtils;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.ActivateAccountPage;
@@ -46,13 +45,6 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validNames")
-	public void nameWithAllowedCharactersShouldBeAccepted(String name, Object whatever) {
-		page.activateAccount(null, name, null, null, null);
-		
-		assertThat(page).field("name").hasNoError();
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
@@ -156,15 +148,6 @@ public class WhenAnonymousUserActivateAccount
 		assertThat(page)
 			.field("activationKey")
 			.hasError(tr("ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message"));
-	}
-	
-	@DataProvider(name = "validNames")
-	public Object[][] getValidNames() {
-		return new Object[][] {
-			{"x", null},
-			{"Slava Se-mushin", null},
-			{"Семён Якушев", null}
-		};
 	}
 	
 }
