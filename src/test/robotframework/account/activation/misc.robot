@@ -36,6 +36,11 @@ Name with allowed characters should be accepted
 	Slava Se-mushin
 	Семён Якушев
 
+Name should be striped from leading and trailing spaces
+	Input Text                 id=name  ${SPACE * 2}test${SPACE * 2}
+	Submit Form                id=activate-account-form
+	Textfield Value Should Be  id=name  test
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

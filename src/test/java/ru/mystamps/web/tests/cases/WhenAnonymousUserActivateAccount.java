@@ -47,13 +47,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void nameShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.activateAccount(null, " test ", null, null, null);
-		
-		assertThat(page).field("name").hasValue("test");
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void passwordShouldNotBeTooShort() {
 		page.activateAccount(null, null, "123", null, null);
