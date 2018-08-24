@@ -57,6 +57,11 @@ Activate account with with forbidden characters in name
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=name.errors  Name must consist only letters, hyphen or spaces
 
+Activate account with name that starts with hyphen
+	Input Text              id=name         -test
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
