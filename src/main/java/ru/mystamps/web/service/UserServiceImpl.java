@@ -57,17 +57,17 @@ public class UserServiceImpl implements UserService {
 		Validate.isTrue(dto.getPassword() != null, "Password must be non null");
 		Validate.isTrue(dto.getActivationKey() != null, "Activation key must be non null");
 		
-		String login = dto.getLogin();
-		
-		// use login as name if name is not provided
-		String finalName = StringUtils.firstNonEmpty(dto.getName(), login);
-		
 		String activationKey = dto.getActivationKey();
 		UsersActivationDto activation = usersActivationService.findByActivationKey(activationKey);
 		if (activation == null) {
 			log.warn("Cannot find registration request for activation key '{}'", activationKey);
 			return;
 		}
+
+		String login = dto.getLogin();
+
+		// use login as name if name is not provided
+		String finalName = StringUtils.firstNonEmpty(dto.getName(), login);
 		
 		String email = activation.getEmail();
 		Date registrationDate = activation.getCreatedAt();
