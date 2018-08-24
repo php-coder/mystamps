@@ -45,13 +45,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "valid", dependsOnGroups = "std")
-	public void passwordWithAllowedCharactersShouldBeAccepted() {
-		page.activateAccount(null, null, "t3s7-T_E_S_T", null, null);
-		
-		assertThat(page).field("password").hasNoError();
-	}
-	
 	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void activationKeyShouldNotBeTooShort() {
 		page.activateAccount(null, null, null, null, "12345");

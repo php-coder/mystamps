@@ -46,6 +46,11 @@ Most short password should be accepted
 	Submit Form                      id=activate-account-form
 	Page Should Not Contain Element  id=password.errors
 
+Password with allowed characters should be accepted
+	Input Text                       id=password  t3s7-T_E_S_T
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=password.errors
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
