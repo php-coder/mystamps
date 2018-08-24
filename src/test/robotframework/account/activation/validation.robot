@@ -72,6 +72,12 @@ Activate account with too short password
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=password.errors  Value is less than allowable minimum of 4 characters
 
+Activate account with too long password
+	${letter}=              Set Variable        j
+	Input Text              id=password         ${letter * 73}
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=password.errors  Value is greater than allowable maximum of 72 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
