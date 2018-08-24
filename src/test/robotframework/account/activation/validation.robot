@@ -67,6 +67,11 @@ Activate account with name that ends with hyphen
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=name.errors  Value must not start or end with hyphen
 
+Activate account with too short password
+	Input Text              id=password         123
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=password.errors  Value is less than allowable minimum of 4 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
