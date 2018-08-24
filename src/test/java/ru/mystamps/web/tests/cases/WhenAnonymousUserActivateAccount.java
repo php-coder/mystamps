@@ -46,15 +46,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void activationKeyShouldNotBeTooShort() {
-		page.activateAccount(null, null, null, null, "12345");
-		
-		assertThat(page)
-			.field("activationKey")
-			.hasError(tr("value.invalid-length", ACT_KEY_LENGTH));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void activationKeyShouldNotBeTooLong() {
 		page.activateAccount(null, null, null, null, "1234567890123");
 		

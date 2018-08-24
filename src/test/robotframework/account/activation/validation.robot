@@ -78,6 +78,11 @@ Activate account with too long password
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=password.errors  Value is greater than allowable maximum of 72 characters
 
+Activate account with too short activation key
+	Input Text              id=activationKey         12345
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=activationKey.errors  Value length must be equal to 10 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
