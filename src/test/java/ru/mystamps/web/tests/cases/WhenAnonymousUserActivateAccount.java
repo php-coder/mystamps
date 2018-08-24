@@ -46,13 +46,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "valid", dependsOnGroups = "std")
-	public void mostShortPasswordShouldBeAccepted() {
-		page.activateAccount(null, null, "1234", null, null);
-		
-		assertThat(page).field("password").hasNoError();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std")
 	public void passwordWithAllowedCharactersShouldBeAccepted() {
 		page.activateAccount(null, null, "t3s7-T_E_S_T", null, null);
 		

@@ -41,6 +41,11 @@ Name should be striped from leading and trailing spaces
 	Submit Form                id=activate-account-form
 	Textfield Value Should Be  id=name  test
 
+Most short password should be accepted
+	Input Text                       id=password  1234
+	Submit Form                      id=activate-account-form
+	Page Should Not Contain Element  id=password.errors
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
