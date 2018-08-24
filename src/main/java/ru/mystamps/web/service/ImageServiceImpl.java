@@ -65,7 +65,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		String extension = extractExtensionFromContentType(contentType);
 		Validate.validState(
-				"png".equals(extension) || "jpeg".equals(extension),
+				StringUtils.equalsAny(extension, "png", "jpeg"),
 				"File type must be PNG or JPEG image, but '%s' (%s) were passed",
 				contentType, extension
 		);

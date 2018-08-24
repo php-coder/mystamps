@@ -119,7 +119,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		}
 
 		String contentType = file.getContentType();
-		if (!PNG_CONTENT_TYPE.equals(contentType) && !JPEG_CONTENT_TYPE.equals(contentType)) {
+		if (!StringUtils.equalsAny(contentType, PNG_CONTENT_TYPE, JPEG_CONTENT_TYPE)) {
 			LOG.debug("Reject file with content type '{}'", contentType);
 			return false;
 		}
