@@ -88,6 +88,11 @@ Activate account with too long activation key
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=activationKey.errors  Value length must be equal to 10 characters
 
+Activate account with forbidden characters in activation key
+	Input Text              id=activationKey         A123=+TEST
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=activationKey.errors  Key must consist only latin letters in lower case or digits
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

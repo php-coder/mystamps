@@ -46,15 +46,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void activationKeyWithForbiddenCharactersShouldBeRejected() {
-		page.activateAccount(null, null, null, null, "A123=+TEST");
-		
-		assertThat(page)
-			.field("activationKey")
-			.hasError(tr("key.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void wrongActivationKeyShouldBeRejected() {
 		page.activateAccount(null, null, null, null, StringUtils.repeat("1", ACT_KEY_LENGTH));
 		
