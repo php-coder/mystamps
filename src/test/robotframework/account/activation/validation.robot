@@ -52,6 +52,11 @@ Activate account with too long name
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=name.errors  Value is greater than allowable maximum of 100 characters
 
+Activate account with with forbidden characters in name
+	Input Text              id=name         M@st3r_
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=name.errors  Name must consist only letters, hyphen or spaces
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}

@@ -48,15 +48,6 @@ public class WhenAnonymousUserActivateAccount
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void nameWithForbiddenCharactersShouldBeRejected() {
-		page.activateAccount(null, "M@st3r_", null, null, null);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("name.invalid"));
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
 	public void nameShouldNotStartsFromHyphen() {
 		page.activateAccount(null, "-test", null, null, null);
 		
