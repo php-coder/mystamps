@@ -83,6 +83,11 @@ Activate account with too short activation key
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=activationKey.errors  Value length must be equal to 10 characters
 
+Activate account with too long activation key
+	Input Text              id=activationKey         1234567890123
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=activationKey.errors  Value length must be equal to 10 characters
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
