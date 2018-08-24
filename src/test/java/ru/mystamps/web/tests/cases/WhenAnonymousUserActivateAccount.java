@@ -47,15 +47,6 @@ public class WhenAnonymousUserActivateAccount
 		checkStandardStructure();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void nameShouldNotEndsWithHyphen() {
-		page.activateAccount(null, "test-", null, null, null);
-		
-		assertThat(page)
-			.field("name")
-			.hasError(tr("value.hyphen"));
-	}
-	
 	@Test(groups = "misc", dependsOnGroups = "std")
 	public void nameShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.activateAccount(null, " test ", null, null, null);
