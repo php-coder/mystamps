@@ -60,12 +60,7 @@ public class UserServiceImpl implements UserService {
 		String login = dto.getLogin();
 		
 		// use login as name if name is not provided
-		String finalName;
-		if (StringUtils.isEmpty(dto.getName())) {
-			finalName = login;
-		} else {
-			finalName = dto.getName();
-		}
+		String finalName = StringUtils.firstNonEmpty(dto.getName(), login);
 		
 		String activationKey = dto.getActivationKey();
 		UsersActivationDto activation = usersActivationService.findByActivationKey(activationKey);
