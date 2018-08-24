@@ -17,16 +17,10 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import org.apache.commons.lang3.StringUtils;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import ru.mystamps.web.tests.page.ActivateAccountPage;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.ACT_KEY_LENGTH;
 
 public class WhenAnonymousUserActivateAccount
 	extends WhenAnyUserAtAnyPageWithForm<ActivateAccountPage> {
@@ -43,15 +37,6 @@ public class WhenAnonymousUserActivateAccount
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
 		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void wrongActivationKeyShouldBeRejected() {
-		page.activateAccount(null, null, null, null, StringUtils.repeat("1", ACT_KEY_LENGTH));
-		
-		assertThat(page)
-			.field("activationKey")
-			.hasError(tr("ru.mystamps.web.support.beanvalidation.ExistingActivationKey.message"));
 	}
 	
 }

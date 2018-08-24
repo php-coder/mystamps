@@ -93,6 +93,11 @@ Activate account with forbidden characters in activation key
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=activationKey.errors  Key must consist only latin letters in lower case or digits
 
+Activate account with wrong activation key
+	Input Text              id=activationKey         1112223334
+	Submit Form             id=activate-account-form
+	Element Text Should Be  id=activationKey.errors  Invalid activation key
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
