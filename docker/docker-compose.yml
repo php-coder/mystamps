@@ -3,4 +3,5 @@ version: '3'
 services:
   web:
     build: ./
+    cap_drop: [ "ALL" ]
     ports: [ "8080:8080" ]
