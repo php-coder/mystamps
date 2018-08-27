@@ -3,5 +3,6 @@ version: '3'
 services:
   web:
     build: ./
+    image: mystamps:latest
     cap_drop: [ "ALL" ]
     ports: [ "8080:8080" ]
