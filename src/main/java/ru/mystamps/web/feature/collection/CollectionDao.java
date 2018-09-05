@@ -20,7 +20,6 @@ package ru.mystamps.web.feature.collection;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.CollectionInfoDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesInCollectionDto;
 
