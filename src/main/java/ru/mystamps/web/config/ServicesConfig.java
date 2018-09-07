@@ -38,6 +38,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageService;
+import ru.mystamps.web.feature.image.ImageServiceImpl;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line

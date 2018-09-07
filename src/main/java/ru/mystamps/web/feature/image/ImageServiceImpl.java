@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.image;
 
 import java.util.List;
 import java.util.Locale;
@@ -37,7 +37,8 @@ import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageDto;
 import ru.mystamps.web.dao.dto.ImageInfoDto;
-import ru.mystamps.web.feature.image.ImageService;
+import ru.mystamps.web.service.ImagePersistenceStrategy;
+import ru.mystamps.web.service.ImagePreviewStrategy;
 import ru.mystamps.web.service.exception.CreateImagePreviewException;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 import ru.mystamps.web.support.spring.security.HasAuthority;
