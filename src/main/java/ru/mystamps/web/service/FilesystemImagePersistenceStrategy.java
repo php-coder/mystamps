@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.service.dto.FsImageDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;

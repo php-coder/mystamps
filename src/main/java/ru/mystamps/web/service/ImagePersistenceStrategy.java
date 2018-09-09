@@ -19,7 +19,7 @@ package ru.mystamps.web.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.dao.dto.ImageDto;
+import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 
 public interface ImagePersistenceStrategy {

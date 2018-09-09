@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.dao.dto.ImageDto;
 
 @Controller
 @RequiredArgsConstructor

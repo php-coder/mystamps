@@ -21,6 +21,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.feature.image.ImageDto;
+
 @Getter
 @EqualsAndHashCode
 @RequiredArgsConstructor
