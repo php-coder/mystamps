@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile
 import spock.lang.Specification
 
 import ru.mystamps.web.dao.ImageDataDao
-import ru.mystamps.web.dao.dto.AddImageDataDbDto
+import ru.mystamps.web.feature.image.AddImageDataDbDto
 import ru.mystamps.web.feature.image.ImageDto
 import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.service.exception.ImagePersistenceException
