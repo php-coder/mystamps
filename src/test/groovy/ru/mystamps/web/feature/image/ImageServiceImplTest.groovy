@@ -25,7 +25,6 @@ import spock.lang.Unroll
 import org.slf4j.helpers.NOPLogger
 
 import ru.mystamps.web.Db
-import ru.mystamps.web.dao.ImageDao
 import ru.mystamps.web.service.ImagePersistenceStrategy
 import ru.mystamps.web.service.ImagePreviewStrategy
 import ru.mystamps.web.service.TestObjects

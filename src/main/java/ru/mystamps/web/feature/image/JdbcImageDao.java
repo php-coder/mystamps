@@ -33,7 +33,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ImageDao;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
