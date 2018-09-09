@@ -25,7 +25,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.feature.image.ImageDto
 import ru.mystamps.web.feature.image.ImageInfoDto
-import ru.mystamps.web.service.exception.ImagePersistenceException
+import ru.mystamps.web.feature.image.ImagePersistenceException
 
 import java.nio.file.Path
 

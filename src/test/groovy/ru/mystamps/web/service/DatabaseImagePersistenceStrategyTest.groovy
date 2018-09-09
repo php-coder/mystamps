@@ -27,7 +27,7 @@ import ru.mystamps.web.feature.image.ImageDataDao
 import ru.mystamps.web.feature.image.AddImageDataDbDto
 import ru.mystamps.web.feature.image.ImageDto
 import ru.mystamps.web.feature.image.ImageInfoDto
-import ru.mystamps.web.service.exception.ImagePersistenceException
+import ru.mystamps.web.feature.image.ImagePersistenceException
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {

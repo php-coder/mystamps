@@ -32,7 +32,7 @@ import ru.mystamps.web.feature.image.DbImageDto;
 import ru.mystamps.web.feature.image.ImageDataDao;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
-import ru.mystamps.web.service.exception.ImagePersistenceException;
+import ru.mystamps.web.feature.image.ImagePersistenceException;
 
 @RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {

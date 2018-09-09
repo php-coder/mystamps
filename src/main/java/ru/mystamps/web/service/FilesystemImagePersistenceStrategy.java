@@ -32,8 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
+import ru.mystamps.web.feature.image.ImagePersistenceException;
 import ru.mystamps.web.service.dto.FsImageDto;
-import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
