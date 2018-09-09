@@ -31,7 +31,7 @@ import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
 import ru.mystamps.web.dao.dto.DbImageDto;
 import ru.mystamps.web.dao.dto.ImageDto;
-import ru.mystamps.web.dao.dto.ImageInfoDto;
+import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
 
 @RequiredArgsConstructor
