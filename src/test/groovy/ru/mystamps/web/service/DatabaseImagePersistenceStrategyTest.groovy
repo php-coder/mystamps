@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.dao.ImageDataDao
+import ru.mystamps.web.feature.image.ImageDataDao
 import ru.mystamps.web.feature.image.AddImageDataDbDto
 import ru.mystamps.web.feature.image.ImageDto
 import ru.mystamps.web.feature.image.ImageInfoDto

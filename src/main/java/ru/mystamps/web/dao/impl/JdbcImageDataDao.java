@@ -31,9 +31,9 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.feature.image.AddImageDataDbDto;
 import ru.mystamps.web.feature.image.DbImageDto;
+import ru.mystamps.web.feature.image.ImageDataDao;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor

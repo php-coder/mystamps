@@ -29,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.image.ImageDao;
+import ru.mystamps.web.feature.image.ImageDataDao;
 import ru.mystamps.web.feature.image.JdbcImageDao;
 
 @Configuration

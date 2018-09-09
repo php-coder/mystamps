@@ -27,9 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.feature.image.AddImageDataDbDto;
 import ru.mystamps.web.feature.image.DbImageDto;
+import ru.mystamps.web.feature.image.ImageDataDao;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.service.exception.ImagePersistenceException;
