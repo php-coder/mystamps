@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.ImageDataDao;
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
-import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.feature.image.DbImageDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor

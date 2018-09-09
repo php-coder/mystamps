@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
+import ru.mystamps.web.feature.image.DbImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 
 @SuppressWarnings({

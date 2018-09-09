@@ -30,6 +30,7 @@ import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
+import ru.mystamps.web.feature.image.DbImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;

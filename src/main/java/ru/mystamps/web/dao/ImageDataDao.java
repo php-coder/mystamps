@@ -18,7 +18,7 @@
 package ru.mystamps.web.dao;
 
 import ru.mystamps.web.dao.dto.AddImageDataDbDto;
-import ru.mystamps.web.dao.dto.DbImageDto;
+import ru.mystamps.web.feature.image.DbImageDto;
 
 public interface ImageDataDao {
 	DbImageDto findByImageId(Integer imageId, boolean preview);
