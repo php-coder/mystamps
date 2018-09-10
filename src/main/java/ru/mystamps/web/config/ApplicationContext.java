@@ -32,7 +32,6 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 	SecurityConfig.class,
 	DaoConfig.class,
 	ServicesConfig.class,
-	StrategiesConfig.class,
 	TaskExecutorConfig.class,
 	TogglzConfig.class
 })

@@ -21,11 +21,12 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.config.StrategiesConfig;
 
 /**
  * Spring configuration that is required for using images in an application.
@@ -49,16 +50,17 @@ public class ImageConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@Import({ DbStrategyConfig.class, FsStrategyConfig.class })
 	public static class Services {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
-		private final StrategiesConfig strategiesConfig;
+		private final ImagePersistenceStrategy imagePersistenceStrategy;
 		
 		@Bean
 		public ImageService getImageService(ImageDao imageDao) {
 			return new ImageServiceImpl(
 				LoggerFactory.getLogger(ImageServiceImpl.class),
-				strategiesConfig.getImagePersistenceStrategy(),
+				imagePersistenceStrategy,
 				new TimedImagePreviewStrategy(
 					LoggerFactory.getLogger(TimedImagePreviewStrategy.class),
 					new ThumbnailatorImagePreviewStrategy()
@@ -70,6 +72,44 @@ public class ImageConfig {
 		@Bean
 		public ImageDao imageDao() {
 			return new JdbcImageDao(jdbcTemplate);
+		}
+		
+	}
+	
+	@Profile("test")
+	@RequiredArgsConstructor
+	public static class DbStrategyConfig {
+		
+		private final NamedParameterJdbcTemplate jdbcTemplate;
+		
+		@Bean
+		public ImagePersistenceStrategy getImagePersistenceStrategy(ImageDataDao imageDataDao) {
+			return new DatabaseImagePersistenceStrategy(
+				LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class),
+				imageDataDao
+			);
+		}
+		
+		@Bean
+		public ImageDataDao imageDataDao() {
+			return new JdbcImageDataDao(jdbcTemplate);
+		}
+		
+	}
+	
+	@Profile({ "prod", "travis" })
+	@RequiredArgsConstructor
+	public static class FsStrategyConfig {
+		
+		private final Environment env;
+		
+		@Bean
+		public ImagePersistenceStrategy getImagePersistenceStrategy() {
+			return new FilesystemImagePersistenceStrategy(
+				LoggerFactory.getLogger(FilesystemImagePersistenceStrategy.class),
+				env.getRequiredProperty("app.upload.dir"),
+				env.getRequiredProperty("app.preview.dir")
+			);
 		}
 		
 	}
