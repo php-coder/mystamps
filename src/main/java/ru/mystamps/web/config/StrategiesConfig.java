@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.image.DatabaseImagePersistenceStrategy;
 import ru.mystamps.web.feature.image.FilesystemImagePersistenceStrategy;
-import ru.mystamps.web.service.ImagePersistenceStrategy;
+import ru.mystamps.web.feature.image.ImagePersistenceStrategy;
 
 @Configuration
 public interface StrategiesConfig {

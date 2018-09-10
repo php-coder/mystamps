@@ -27,8 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.ImagePersistenceStrategy;
-
 @RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
 	

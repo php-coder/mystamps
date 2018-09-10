@@ -30,8 +30,6 @@ import org.slf4j.Logger;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.mystamps.web.service.ImagePersistenceStrategy;
-
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
 	private final Logger log;

@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile
 
 import spock.lang.Specification
 
-import ru.mystamps.web.service.ImagePersistenceStrategy
 import ru.mystamps.web.service.TestObjects
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

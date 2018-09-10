@@ -25,7 +25,6 @@ import spock.lang.Specification
 
 import java.nio.file.Path
 
-import ru.mystamps.web.service.ImagePersistenceStrategy
 import ru.mystamps.web.service.TestObjects
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
