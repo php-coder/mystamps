@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.image;
 
 import java.io.IOException;
 
@@ -27,12 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.feature.image.AddImageDataDbDto;
-import ru.mystamps.web.feature.image.DbImageDto;
-import ru.mystamps.web.feature.image.ImageDataDao;
-import ru.mystamps.web.feature.image.ImageDto;
-import ru.mystamps.web.feature.image.ImageInfoDto;
-import ru.mystamps.web.feature.image.ImagePersistenceException;
+import ru.mystamps.web.service.ImagePersistenceStrategy;
 
 @RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {
