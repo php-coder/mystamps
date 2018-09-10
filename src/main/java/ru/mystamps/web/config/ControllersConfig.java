@@ -33,7 +33,7 @@ import ru.mystamps.web.feature.collection.CollectionConfig;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.feature.image.ImageController;
+import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
 
@@ -43,6 +43,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 	CategoryConfig.Controllers.class,
 	CollectionConfig.Controllers.class,
 	CountryConfig.Controllers.class,
+	ImageConfig.Controllers.class,
 	ParticipantConfig.Controllers.class
 })
 public class ControllersConfig {
@@ -61,11 +62,6 @@ public class ControllersConfig {
 			servicesConfig.getUserService(),
 			servicesConfig.getUsersActivationService()
 		);
-	}
-	
-	@Bean
-	public ImageController getImageController() {
-		return new ImageController(servicesConfig.getImageService());
 	}
 	
 	@Bean

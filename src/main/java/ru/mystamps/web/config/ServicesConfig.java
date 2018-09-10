@@ -37,10 +37,8 @@ import ru.mystamps.web.feature.collection.CollectionConfig;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.image.ImageService;
-import ru.mystamps.web.feature.image.ImageServiceImpl;
-import ru.mystamps.web.feature.image.ThumbnailatorImagePreviewStrategy;
-import ru.mystamps.web.feature.image.TimedImagePreviewStrategy;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
@@ -52,6 +50,7 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 	CategoryConfig.Services.class,
 	CollectionConfig.Services.class,
 	CountryConfig.Services.class,
+	ImageConfig.Services.class,
 	ParticipantConfig.Services.class
 })
 @RequiredArgsConstructor
@@ -60,7 +59,6 @@ public class ServicesConfig {
 	
 	private final DaoConfig daoConfig;
 	private final SecurityConfig securityConfig;
-	private final StrategiesConfig strategiesConfig;
 	private final JavaMailSender mailSender;
 	private final Environment env;
 	private final MessageSource messageSource;
@@ -68,6 +66,7 @@ public class ServicesConfig {
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
+	private final ImageService imageService;
 	private final ParticipantService participantService;
 	
 	@Bean
@@ -113,19 +112,6 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public ImageService getImageService() {
-		return new ImageServiceImpl(
-			LoggerFactory.getLogger(ImageServiceImpl.class),
-			strategiesConfig.getImagePersistenceStrategy(),
-			new TimedImagePreviewStrategy(
-				LoggerFactory.getLogger(TimedImagePreviewStrategy.class),
-				new ThumbnailatorImagePreviewStrategy()
-			),
-			daoConfig.getImageDao()
-		);
-	}
-	
-	@Bean
 	public MailService getMailService() {
 		boolean isProductionEnvironment = env.acceptsProfiles("prod");
 		boolean enableTestMode = !isProductionEnvironment;
@@ -163,7 +149,7 @@ public class ServicesConfig {
 		return new SeriesServiceImpl(
 			LoggerFactory.getLogger(SeriesServiceImpl.class),
 			daoConfig.getSeriesDao(),
-			getImageService(),
+			imageService,
 			getMichelCatalogService(),
 			getScottCatalogService(),
 			getYvertCatalogService(),
