@@ -30,10 +30,10 @@ import org.slf4j.Logger;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.mystamps.web.feature.image.FsImageDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImagePersistenceException;
-import ru.mystamps.web.service.dto.FsImageDto;
 
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
