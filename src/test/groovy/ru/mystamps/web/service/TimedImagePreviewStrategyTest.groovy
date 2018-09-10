@@ -22,6 +22,8 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import ru.mystamps.web.feature.image.ImagePreviewStrategy
+
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TimedImagePreviewStrategyTest extends Specification {
 	

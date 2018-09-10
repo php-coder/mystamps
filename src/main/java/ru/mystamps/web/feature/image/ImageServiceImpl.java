@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Db;
 import ru.mystamps.web.service.ImagePersistenceStrategy;
-import ru.mystamps.web.service.ImagePreviewStrategy;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.support.togglz.Features;
 
