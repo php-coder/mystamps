@@ -15,16 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.image;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import net.coobird.thumbnailator.Thumbnails;
-
-import ru.mystamps.web.feature.image.CreateImagePreviewException;
-import ru.mystamps.web.feature.image.ImagePreviewStrategy;
 
 public class ThumbnailatorImagePreviewStrategy implements ImagePreviewStrategy {
 	
