@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import net.coobird.thumbnailator.Thumbnails;
 
-import ru.mystamps.web.service.exception.CreateImagePreviewException;
+import ru.mystamps.web.feature.image.CreateImagePreviewException;
 
 public class ThumbnailatorImagePreviewStrategy implements ImagePreviewStrategy {
 	
