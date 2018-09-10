@@ -27,7 +27,7 @@ import org.springframework.core.env.Environment;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.image.DatabaseImagePersistenceStrategy;
-import ru.mystamps.web.service.FilesystemImagePersistenceStrategy;
+import ru.mystamps.web.feature.image.FilesystemImagePersistenceStrategy;
 import ru.mystamps.web.service.ImagePersistenceStrategy;
 
 @Configuration
