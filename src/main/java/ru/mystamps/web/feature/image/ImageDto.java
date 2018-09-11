@@ -17,7 +17,12 @@
  */
 package ru.mystamps.web.feature.image;
 
-public interface ImageDto {
-	String getType();
-	byte[] getData();
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public class ImageDto {
+	private final String type;
+	private final byte[] data;
 }

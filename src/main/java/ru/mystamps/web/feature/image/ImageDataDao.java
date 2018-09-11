@@ -18,6 +18,6 @@
 package ru.mystamps.web.feature.image;
 
 public interface ImageDataDao {
-	DbImageDto findByImageId(Integer imageId, boolean preview);
+	ImageDto findByImageId(Integer imageId, boolean preview);
 	Integer add(AddImageDataDbDto imageData);
 }

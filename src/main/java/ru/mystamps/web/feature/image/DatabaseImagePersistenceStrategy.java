@@ -69,7 +69,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
-		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), false);
+		ImageDto imageDto = imageDataDao.findByImageId(image.getId(), false);
 		if (imageDto == null) {
 			log.warn("Image #{}: content not found", image.getId());
 			return null;
@@ -80,7 +80,7 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 	
 	@Override
 	public ImageDto getPreview(ImageInfoDto image) {
-		DbImageDto imageDto = imageDataDao.findByImageId(image.getId(), true);
+		ImageDto imageDto = imageDataDao.findByImageId(image.getId(), true);
 		if (imageDto == null) {
 			log.info("Image #{}: preview not found", image.getId());
 			return null;

@@ -115,7 +115,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			Integer expectedImageId = imageInfoDto.id
 		and:
-			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+			ImageDto expectedImageDto = TestObjects.createImageDto()
 		when:
 			ImageDto result = strategy.get(imageInfoDto)
 		then:
@@ -141,7 +141,7 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 		given:
 			Integer expectedImageId = imageInfoDto.id
 		and:
-			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+			ImageDto expectedImageDto = TestObjects.createImageDto()
 		when:
 			ImageDto result = strategy.getPreview(imageInfoDto)
 		then:

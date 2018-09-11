@@ -249,7 +249,7 @@ class ImageServiceImplTest extends Specification {
 		and:
 			imageDao.findById(_ as Integer) >> expectedImage
 		and:
-			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+			ImageDto expectedImageDto = TestObjects.createImageDto()
 		when:
 			ImageDto actualImageDto = service.get(7)
 		then:
@@ -296,7 +296,7 @@ class ImageServiceImplTest extends Specification {
 			Integer expectedImageId = 7
 			String expectedImageType = 'jpeg'
 		and:
-			ImageDto expectedImageDto = TestObjects.createDbImageDto()
+			ImageDto expectedImageDto = TestObjects.createImageDto()
 		when:
 			ImageDto actualImageDto = service.getOrCreatePreview(expectedImageId)
 		then:

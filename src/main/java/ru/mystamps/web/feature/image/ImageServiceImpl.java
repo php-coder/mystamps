@@ -157,7 +157,7 @@ public class ImageServiceImpl implements ImageService {
 			
 			imagePersistenceStrategy.savePreview(preview, previewInfo);
 			
-			return new DbImageDto("jpeg", preview);
+			return new ImageDto("jpeg", preview);
 			
 		} catch (CreateImagePreviewException | ImagePersistenceException ex) {
 			log.warn("Image #{}: couldn't create/save preview", previewInfo.getId(), ex);

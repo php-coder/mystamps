@@ -27,7 +27,7 @@ import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
-import ru.mystamps.web.feature.image.DbImageDto;
+import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 
 @SuppressWarnings({
@@ -293,8 +293,8 @@ public final class RowMappers {
 		);
 	}
 	
-	public static DbImageDto forDbImageDto(ResultSet rs, int unused) throws SQLException {
-		return new DbImageDto(
+	public static ImageDto forImageDto(ResultSet rs, int unused) throws SQLException {
+		return new ImageDto(
 			rs.getString("type"),
 			rs.getBytes("data")
 		);

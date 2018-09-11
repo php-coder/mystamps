@@ -17,11 +17,7 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
-		<Class name="ru.mystamps.web.feature.image.DbImageDto" />
-		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
-	</Match>
-	<Match>
-		<Class name="ru.mystamps.web.feature.image.FsImageDto" />
+		<Class name="ru.mystamps.web.feature.image.ImageDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>

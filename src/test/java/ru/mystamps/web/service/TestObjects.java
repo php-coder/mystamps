@@ -30,7 +30,7 @@ import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
-import ru.mystamps.web.feature.image.DbImageDto;
+import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;
@@ -116,8 +116,8 @@ public final class TestObjects {
 		return new ImageInfoDto(Random.id(), "PNG");
 	}
 	
-	public static DbImageDto createDbImageDto() {
-		return new DbImageDto("PNG", "test".getBytes(StandardCharsets.UTF_8));
+	public static ImageDto createImageDto() {
+		return new ImageDto("PNG", "test".getBytes(StandardCharsets.UTF_8));
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {

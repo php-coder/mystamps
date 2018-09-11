@@ -169,7 +169,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		try {
 			byte[] content = toByteArray(dest);
-			return new FsImageDto(image, content);
+			return new ImageDto(image.getType(), content);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);

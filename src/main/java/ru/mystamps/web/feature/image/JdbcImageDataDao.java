@@ -45,7 +45,7 @@ public class JdbcImageDataDao implements ImageDataDao {
 	private String addImageDataSql;
 	
 	@Override
-	public DbImageDto findByImageId(Integer imageId, boolean preview) {
+	public ImageDto findByImageId(Integer imageId, boolean preview) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("image_id", imageId);
 		params.put("preview", preview);
@@ -54,7 +54,7 @@ public class JdbcImageDataDao implements ImageDataDao {
 			return jdbcTemplate.queryForObject(
 				findByImageIdSql,
 				params,
-				RowMappers::forDbImageDto
+				RowMappers::forImageDto
 			);
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
