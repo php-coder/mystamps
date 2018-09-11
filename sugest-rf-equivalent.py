@@ -289,6 +289,6 @@ for filepath in sorted(glob.glob('%s/*.java' % basedir)):
 
     if first_test_method_proccessed == True:
         print('Processed %s' % filename, file=sys.stderr)
-        print("\nUse the following command to commit results:\n\ngit commit -m '%s.%s(): port to Robot Framework.\n\nAddressed to #530\n\nNo functional changes.' %s %s" % (processed_java_file.rstrip('.java'), processed_java_method, os.path.join(basedir, processed_java_file), os.path.join(robotdir, processed_robot_file)), file=sys.stderr)
+        print("\nUse the following command to commit results:\n\ngit commit -m 'refactor(%s): port %s() to Robot Framework.\n\nAddressed to #530\n\nNo functional changes.' %s %s" % (processed_java_file.rstrip('.java'), processed_java_method, os.path.join(basedir, processed_java_file), os.path.join(robotdir, processed_robot_file)), file=sys.stderr)
     else:
         print('Skipped %s' % filename, file=sys.stderr)
