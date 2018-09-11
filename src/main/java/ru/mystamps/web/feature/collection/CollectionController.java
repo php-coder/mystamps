@@ -37,7 +37,6 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 
 @Controller
@@ -47,7 +46,6 @@ public class CollectionController {
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
-	private final SeriesService seriesService;
 	private final MessageSource messageSource;
 	
 	// @todo #884 /collection/{slug}: add a link to collection estimation page
@@ -82,7 +80,7 @@ public class CollectionController {
 		if (seriesOfCollection.iterator().hasNext()) {
 			long categoryCounter = categoryService.countCategoriesOf(collectionId);
 			long countryCounter  = countryService.countCountriesOf(collectionId);
-			long seriesCounter   = seriesService.countSeriesOf(collectionId);
+			long seriesCounter   = collectionService.countSeriesOf(collectionId);
 			long stampsCounter   = collectionService.countStampsOf(collectionId);
 			
 			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);

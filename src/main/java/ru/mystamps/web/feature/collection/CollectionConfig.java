@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.service.SeriesService;
 
 /**
  * Spring configuration that is required for using collections in an application.
@@ -45,7 +44,6 @@ public class CollectionConfig {
 		private final CategoryService categoryService;
 		private final CollectionService collectionService;
 		private final CountryService countryService;
-		private final SeriesService seriesService;
 		private final MessageSource messageSource;
 		
 		@Bean
@@ -54,7 +52,6 @@ public class CollectionConfig {
 				categoryService,
 				collectionService,
 				countryService,
-				seriesService,
 				messageSource
 			);
 		}

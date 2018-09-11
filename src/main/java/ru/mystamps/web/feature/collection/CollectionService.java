@@ -22,6 +22,7 @@ import java.util.List;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
 	void addToCollection(Integer userId, AddToCollectionDto dto);
@@ -29,6 +30,7 @@ public interface CollectionService {
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
+	long countSeriesOf(Integer collectionId);
 	long countStampsOf(Integer collectionId);
 	List<LinkEntityDto> findRecentlyCreated(int quantity);
 	List<SeriesInCollectionDto> findSeriesInCollection(Integer collectionId, String lang);

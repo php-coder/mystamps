@@ -317,6 +317,26 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for countSeriesOf()
+	//
+	
+	def 'countSeriesOf() should throw exception when argument is null'() {
+		when:
+			service.countSeriesOf(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'countSeriesOf() should pass argument to dao'() {
+		given:
+			Integer expectedCollectionId = Random.id()
+		when:
+			service.countSeriesOf(expectedCollectionId)
+		then:
+			1 * collectionDao.countSeriesOfCollection(expectedCollectionId) >> positiveLong()
+	}
+	
+	//
 	// Tests for countStampsOf()
 	//
 	

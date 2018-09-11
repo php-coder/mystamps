@@ -88,9 +88,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.count_all_stamps}")
 	private String countAllStampsSql;
 	
-	@Value("${series.count_series_of_collection}")
-	private String countSeriesOfCollectionSql;
-	
 	@Value("${series.count_series_by_id}")
 	private String countSeriesByIdSql;
 	
@@ -249,15 +246,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Override
 	public long countAllStamps() {
 		return jdbcTemplate.queryForObject(countAllStampsSql, Collections.emptyMap(), Long.class);
-	}
-	
-	@Override
-	public long countSeriesOfCollection(Integer collectionId) {
-		return jdbcTemplate.queryForObject(
-			countSeriesOfCollectionSql,
-			Collections.singletonMap("collection_id", collectionId),
-			Long.class
-		);
 	}
 	
 	@Override

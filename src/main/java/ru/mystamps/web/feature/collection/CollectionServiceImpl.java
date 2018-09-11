@@ -140,6 +140,14 @@ public class CollectionServiceImpl implements CollectionService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public long countSeriesOf(Integer collectionId) {
+		Validate.isTrue(collectionId != null, "Collection id must be non null");
+		
+		return collectionDao.countSeriesOfCollection(collectionId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public long countStampsOf(Integer collectionId) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
