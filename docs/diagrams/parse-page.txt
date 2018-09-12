@@ -1,0 +1,29 @@
+title Series import flow: stage 3 (parse page)
+
+participant DownloadingSucceededEventListener
+participant SeriesImportService
+participant SiteParser
+participant ExtractorService
+participant SeriesSalesImportService
+participant EventPublisher
+
+DownloadingSucceededEventListener->+SeriesImportService: requestId
+SeriesImportService->-DownloadingSucceededEventListener: content of downloaded page
+DownloadingSucceededEventListener->+SiteParser: content of downloaded page
+SiteParser->-DownloadingSucceededEventListener: SeriesInfo
+alt
+DownloadingSucceededEventListener->+SeriesImportService: RawParsedDataDto
+SeriesImportService->+ExtractorService: RawParsedDataDto
+ExtractorService->-SeriesImportService: SeriesExtractedInfo
+alt
+SeriesImportService-->+SeriesSalesImportService: SeriesSalesParsedDataDbDto
+SeriesSalesImportService-->-SeriesImportService:
+SeriesImportService->SeriesImportService:
+note right of SeriesImportService: DownloadingSucceeded -> ParsingSucceeded
+else
+SeriesImportService->EventPublisher: ParsingFailed
+end
+SeriesImportService->-DownloadingSucceededEventListener:
+else
+DownloadingSucceededEventListener->EventPublisher: ParsingFailed
+end

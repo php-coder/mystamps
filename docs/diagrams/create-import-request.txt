@@ -1,0 +1,22 @@
+title Series import flow: stage 1 (create import request)
+
+participant Browser
+participant SeriesImportController
+participant SeriesImportService
+participant EventPublisher
+
+note over Browser,SeriesImportController: request import series form
+opt GET /series/import/request
+Browser->+SeriesImportController:
+SeriesImportController->-Browser: RequestImportForm
+end
+
+note over Browser,SeriesImportController: submit request for importing a series
+opt POST /series/import/request
+Browser->+SeriesImportController: RequestImportForm
+SeriesImportController->+SeriesImportService: RequestImportForm
+SeriesImportService->-SeriesImportController: requestId
+note right of SeriesImportService: Unprocessed
+SeriesImportController->EventPublisher: ImportRequestCreated
+SeriesImportController->-Browser: redirect to /series/import/request/{id}
+end

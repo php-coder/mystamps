@@ -1,0 +1,41 @@
+title Series import flow: stage 4 (import a series)
+
+participant Browser
+participant SeriesImportController
+participant SeriesImportService
+participant SeriesSalesImportService
+participant SeriesService
+participant ParticipantService
+
+note over Browser,SeriesImportController: show info about import request
+opt GET /series/import/request/{id}
+Browser->+SeriesImportController:
+SeriesImportController->+SeriesImportService: requestId
+SeriesImportService->-SeriesImportController: ImportRequestDto
+SeriesImportController->+SeriesImportService: requestId
+SeriesImportService->-SeriesImportController: SeriesParsedDataDto
+SeriesImportController->+SeriesSalesImportService: requestId
+SeriesSalesImportService->-SeriesImportController: SeriesSaleParsedDataDto
+SeriesImportController->-Browser: "ImportRequestDto\nImportSeriesForm\nImportSellerForm\nImportSeriesSalesForm"
+end
+
+note over Browser,SeriesImportController: import a series
+opt POST /series/import/request/{id}
+Browser->+SeriesImportController: ImportSeriesForm
+SeriesImportController->+SeriesImportService: "AddSeriesDto\nAddParticipantDto\nAddSeriesSalesDto"
+opt Create a series
+SeriesImportService->+SeriesService: AddSeriesDto
+SeriesService->-SeriesImportService: seriesId
+end
+opt Create a seller (optional)
+SeriesImportService-->+ParticipantService: AddParticipantDto
+ParticipantService-->-SeriesImportService: sellerId
+end
+opt Create a series sale (optional)
+SeriesImportService-->+SeriesSalesImportService: AddSeriesSalesDto
+SeriesSalesImportService-->-SeriesImportService:
+end
+SeriesImportService->-SeriesImportController: seriesId
+note right of SeriesImportService: ParsingSucceeded -> ImportSucceeded
+SeriesImportController->-Browser: redirect to /series/{id}
+end

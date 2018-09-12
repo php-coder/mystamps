@@ -1,0 +1,8 @@
+title Series import flow: stage 3a (handle error of parsing page)
+
+participant ParsingFailedEventListener
+participant SeriesImportService
+
+ParsingFailedEventListener->+SeriesImportService:
+SeriesImportService->-ParsingFailedEventListener:
+note right of SeriesImportService: ParsingSucceeded -> ParsingFailed

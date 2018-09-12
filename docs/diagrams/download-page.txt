@@ -1,0 +1,20 @@
+title Series import flow: stage 2 (download page)
+
+participant ImportRequestCreatedEventListener
+participant DownloaderService
+participant SeriesImportService
+participant EventPublisher
+
+ImportRequestCreatedEventListener->+DownloaderService: url
+DownloaderService->-ImportRequestCreatedEventListener:
+alt
+ImportRequestCreatedEventListener->+SeriesImportService: content of downloaded page
+SeriesImportService->SeriesImportService:
+SeriesImportService->-ImportRequestCreatedEventListener:
+note right of SeriesImportService: Unprocessed -> DownloadingSucceeded
+ImportRequestCreatedEventListener->EventPublisher: DownloadingSucceeded
+else
+ImportRequestCreatedEventListener->+SeriesImportService:
+SeriesImportService->-ImportRequestCreatedEventListener:
+note right of SeriesImportService: Unprocessed -> DownloadingFailed
+end
