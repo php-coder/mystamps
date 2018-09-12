@@ -54,7 +54,6 @@ import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesImportService;
-import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
@@ -65,7 +64,6 @@ import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 public class SeriesImportController {
 	
 	private final SeriesImportService seriesImportService;
-	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
 	private final SeriesController seriesController;
 	private final ParticipantService participantService;

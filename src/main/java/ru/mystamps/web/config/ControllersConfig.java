@@ -99,7 +99,6 @@ public class ControllersConfig {
 	public SeriesImportController getSeriesImportController() {
 		return new SeriesImportController(
 			servicesConfig.getSeriesImportService(),
-			servicesConfig.getSeriesSalesService(),
 			servicesConfig.getSeriesSalesImportService(),
 			getSeriesController(),
 			participantService,
