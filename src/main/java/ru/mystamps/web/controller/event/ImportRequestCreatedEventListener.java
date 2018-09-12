@@ -24,6 +24,7 @@ import org.springframework.context.ApplicationListener;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.Db;
 import ru.mystamps.web.service.DownloaderService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.dto.DownloadResult;
@@ -32,7 +33,7 @@ import ru.mystamps.web.service.dto.DownloadResult;
  * Listener of the @{link ImportRequestCreated} event.
  *
  * Downloads a file, saves it to database and publish the @{link DownloadingSucceeded} event.
- * In case of failure, it publishes the @{link DownloadingFailed} event.
+ * When downloading of a file fails, it changes request status to 'DownloadingFailed'.
  */
 @RequiredArgsConstructor
 public class ImportRequestCreatedEventListener
@@ -52,13 +53,14 @@ public class ImportRequestCreatedEventListener
 		
 		DownloadResult result = downloaderService.download(url);
 		if (result.hasFailed()) {
-			DownloadingFailed downloadingFailed = new DownloadingFailed(
-				this,
+			// CheckStyle: ignore LineLength for next 1 line
+			log.info("Request #{}: downloading of '{}' failed: {}", requestId, url, result.getCode());
+
+			seriesImportService.changeStatus(
 				requestId,
-				url,
-				result.getCode()
+				Db.SeriesImportRequestStatus.UNPROCESSED,
+				Db.SeriesImportRequestStatus.DOWNLOADING_FAILED
 			);
-			eventPublisher.publishEvent(downloadingFailed);
 			return;
 		}
 		

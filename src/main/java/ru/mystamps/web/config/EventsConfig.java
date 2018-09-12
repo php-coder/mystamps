@@ -84,14 +84,6 @@ public class EventsConfig {
 	}
 	
 	@Bean
-	public ApplicationListener<DownloadingFailed> getDownloadingFailedEventListener() {
-		return new DownloadingFailedEventListener(
-			LoggerFactory.getLogger(DownloadingFailedEventListener.class),
-			servicesConfig.getSeriesImportService()
-		);
-	}
-	
-	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
 		Optional<List<SiteParser>> siteParsers) {
 		
