@@ -36,7 +36,7 @@ public class ParsingFailedEventListener
 	implements ApplicationListener<ParsingFailed> {
 	
 	private final Logger log;
-	private final SeriesImportService importService;
+	private final SeriesImportService seriesImportService;
 	
 	@Override
 	public void onApplicationEvent(ParsingFailed event) {
@@ -45,7 +45,7 @@ public class ParsingFailedEventListener
 		// TODO: more info?
 		log.info("Request #{}: parsing failed", requestId);
 		
-		importService.changeStatus(
+		seriesImportService.changeStatus(
 			requestId,
 			SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
 			SeriesImportRequestStatus.PARSING_FAILED

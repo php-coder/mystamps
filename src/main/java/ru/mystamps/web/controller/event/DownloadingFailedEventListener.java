@@ -36,7 +36,7 @@ public class DownloadingFailedEventListener
 	implements ApplicationListener<DownloadingFailed> {
 	
 	private final Logger log;
-	private final SeriesImportService importService;
+	private final SeriesImportService seriesImportService;
 	
 	@Override
 	public void onApplicationEvent(DownloadingFailed event) {
@@ -49,7 +49,7 @@ public class DownloadingFailedEventListener
 			event.getCode()
 		);
 		
-		importService.changeStatus(
+		seriesImportService.changeStatus(
 			requestId,
 			Db.SeriesImportRequestStatus.UNPROCESSED,
 			Db.SeriesImportRequestStatus.DOWNLOADING_FAILED

@@ -40,7 +40,7 @@ public class ImportRequestCreatedEventListener
 	
 	private final Logger log;
 	private final DownloaderService downloaderService;
-	private final SeriesImportService importService;
+	private final SeriesImportService seriesImportService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@Override
@@ -62,7 +62,7 @@ public class ImportRequestCreatedEventListener
 			return;
 		}
 		
-		importService.saveDownloadedContent(requestId, result.getDataAsString());
+		seriesImportService.saveDownloadedContent(requestId, result.getDataAsString());
 		
 		eventPublisher.publishEvent(new DownloadingSucceeded(this, requestId, url));
 	}

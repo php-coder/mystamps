@@ -43,7 +43,7 @@ public class DownloadingSucceededEventListener
 	implements ApplicationListener<DownloadingSucceeded> {
 	
 	private final Logger log;
-	private final SeriesImportService importService;
+	private final SeriesImportService seriesImportService;
 	private final List<SiteParser> siteParsers;
 	private final ApplicationEventPublisher eventPublisher;
 	
@@ -58,7 +58,7 @@ public class DownloadingSucceededEventListener
 		
 		log.info("Request #{}: downloading succeeded", requestId);
 		
-		String content = importService.getDownloadedContent(requestId);
+		String content = seriesImportService.getDownloadedContent(requestId);
 		if (content == null) {
 			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
 			log.error("Request #{}: could not load a content from database", requestId);
@@ -99,7 +99,7 @@ public class DownloadingSucceededEventListener
 			info.getPrice(),
 			info.getCurrency()
 		);
-		importService.saveParsedData(requestId, data);
+		seriesImportService.saveParsedData(requestId, data);
 	}
 	
 }
