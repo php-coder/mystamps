@@ -24,7 +24,7 @@ import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
-import ru.mystamps.web.service.dto.AddImageDto;
+import ru.mystamps.web.feature.series.AddImageDto;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.SeriesDto;
 
