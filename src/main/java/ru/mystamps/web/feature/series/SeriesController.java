@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller;
+package ru.mystamps.web.feature.series;
 
 import java.io.IOException;
 import java.time.Year;
@@ -525,7 +525,8 @@ public class SeriesController {
 		return "series/search_result";
 	}
 	
-	protected void addCategoriesToModel(Model model, String lang) {
+	// "public" in order to be accessible from SeriesImportController
+	public void addCategoriesToModel(Model model, String lang) {
 		List<EntityWithParentDto> categories = categoryService.findCategoriesWithParents(lang);
 		
 		List<SelectItem> groupedCategories = GroupByParent.transformEntities(categories);
@@ -533,22 +534,26 @@ public class SeriesController {
 		model.addAttribute("categories", groupedCategories);
 	}
 	
-	protected void addCountriesToModel(Model model, String lang) {
+	// "public" in order to be accessible from SeriesImportController
+	public void addCountriesToModel(Model model, String lang) {
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
 		model.addAttribute("countries", countries);
 	}
 	
-	protected void addYearToModel(Model model) {
+	// "public" in order to be accessible from SeriesImportController
+	public void addYearToModel(Model model) {
 		model.addAttribute("years", YEARS);
 	}
 	
-	protected void addSellersToModel(Model model) {
+	// "public" in order to be accessible from SeriesImportController
+	public void addSellersToModel(Model model) {
 		List<EntityWithParentDto> sellers = participantService.findSellersWithParents();
 		List<SelectItem> groupedSellers = GroupByParent.transformEntities(sellers);
 		model.addAttribute("sellers", groupedSellers);
 	}
 	
-	protected static void loadErrorsFromDownloadInterceptor(
+	// "public" in order to be accessible from SeriesImportController
+	public static void loadErrorsFromDownloadInterceptor(
 		NullableImageUrl form,
 		BindingResult result,
 		HttpServletRequest request) {

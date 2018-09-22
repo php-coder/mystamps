@@ -36,6 +36,7 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.feature.series.SeriesController;
 
 @Configuration
 @RequiredArgsConstructor
