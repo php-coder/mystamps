@@ -25,7 +25,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.dao.SeriesSalesDao
 import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto
 import ru.mystamps.web.dao.dto.Currency
-import ru.mystamps.web.controller.dto.AddSeriesSalesForm
+import ru.mystamps.web.feature.series.AddSeriesSalesForm
 import ru.mystamps.web.tests.DateUtils
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
