@@ -35,7 +35,7 @@ import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.AddSeriesForm;
-import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.tests.Random;

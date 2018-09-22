@@ -28,7 +28,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.AddSeriesSalesDto;
 
 // @todo #695 /series/import/request/{id}: seller's name and url are required when sellerId is empty
 // @todo #695 /series/import/request/{id}(seriesSale):

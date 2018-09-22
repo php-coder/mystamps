@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.AddSeriesSalesDto;
 
 public interface SeriesSalesService {
 	void add(AddSeriesSalesDto dto, Integer seriesId, Integer userId);

@@ -49,7 +49,7 @@ import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.service.dto.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.service.dto.RequestImportDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
