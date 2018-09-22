@@ -21,6 +21,14 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.AddSeriesSalesForm" />
+		<Or>
+			<Method name="getDate" />
+			<Method name="setDate" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<!--
 			String[] allowedContentTypes: potentially caller can modify data after passing it to the
 			constructor. I don't want to fix it because all such places are known and under our
