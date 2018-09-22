@@ -56,7 +56,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
-import ru.mystamps.web.controller.dto.AddImageForm;
 import ru.mystamps.web.controller.dto.AddSeriesSalesForm;
 import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.controller.dto.SelectItem;

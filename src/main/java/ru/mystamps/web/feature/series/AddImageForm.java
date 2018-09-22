@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.dto;
+package ru.mystamps.web.feature.series;
 
 import javax.validation.GroupSequence;
 
@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
