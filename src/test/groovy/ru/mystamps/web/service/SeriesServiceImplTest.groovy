@@ -34,7 +34,7 @@ import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto
 import ru.mystamps.web.controller.dto.AddImageForm
-import ru.mystamps.web.controller.dto.AddSeriesForm
+import ru.mystamps.web.feature.series.AddSeriesForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import ru.mystamps.web.dao.dto.SeriesInfoDto

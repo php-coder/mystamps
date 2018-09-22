@@ -22,8 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 3 lines
-import ru.mystamps.web.controller.dto.AddSeriesForm;
+// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.feature.collection.AddToCollectionDto;
@@ -34,6 +33,7 @@ import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;
+import ru.mystamps.web.feature.series.AddSeriesForm;
 import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.service.dto.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.RawParsedDataDto;
