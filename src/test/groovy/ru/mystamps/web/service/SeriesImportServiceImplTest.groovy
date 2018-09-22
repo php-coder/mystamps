@@ -41,7 +41,7 @@ import ru.mystamps.web.dao.dto.ImportSeriesDbDto
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo
 import ru.mystamps.web.feature.participant.AddParticipantDto
 import ru.mystamps.web.feature.participant.ParticipantService
-import ru.mystamps.web.service.dto.AddSeriesDto
+import ru.mystamps.web.feature.series.AddSeriesDto
 import ru.mystamps.web.service.dto.AddSeriesSalesDto
 import ru.mystamps.web.service.dto.RawParsedDataDto
 import ru.mystamps.web.service.dto.SeriesExtractedInfo

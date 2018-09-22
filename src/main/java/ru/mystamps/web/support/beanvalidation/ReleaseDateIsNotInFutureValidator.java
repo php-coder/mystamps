@@ -24,7 +24,7 @@ import java.time.YearMonth;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import ru.mystamps.web.service.dto.AddSeriesDto;
+import ru.mystamps.web.feature.series.AddSeriesDto;
 
 /**
  * @author Sergey Chechenev

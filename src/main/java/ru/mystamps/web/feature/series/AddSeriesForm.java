@@ -38,7 +38,6 @@ import lombok.Setter;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;
-import ru.mystamps.web.service.dto.AddSeriesDto;
 import ru.mystamps.web.support.beanvalidation.CatalogNumbers;
 import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
