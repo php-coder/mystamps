@@ -28,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.controller.dto.NullableImageUrl;
 import ru.mystamps.web.service.dto.AddImageDto;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.HasImageOrImageUrl;
