@@ -20,7 +20,6 @@ package ru.mystamps.web.feature.series;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;

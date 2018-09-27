@@ -61,7 +61,6 @@ import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.PurchaseAndSaleDto;
 import ru.mystamps.web.dao.dto.SeriesInfoDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.category.CategoryService;
