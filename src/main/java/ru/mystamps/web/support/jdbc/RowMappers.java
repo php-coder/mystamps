@@ -33,6 +33,7 @@ import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
+import ru.mystamps.web.feature.series.SitemapInfoDto;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",

@@ -34,8 +34,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.SitemapInfoDto;
 
 @Controller
 @RequiredArgsConstructor
