@@ -23,6 +23,7 @@ import lombok.Getter;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
+import ru.mystamps.web.feature.series.CatalogInfoDto;
 
 public class SeriesDto {
 	private final SeriesFullInfoDto info;
