@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.feature.series;
 
 import java.util.Collections;
 import java.util.Date;
@@ -35,12 +35,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesDao;
-import ru.mystamps.web.feature.series.AddSeriesDbDto;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
-import ru.mystamps.web.feature.series.SeriesFullInfoDto;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.SeriesLinkDto;
-import ru.mystamps.web.feature.series.SitemapInfoDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 // TODO: move stamps related methods to separate interface (#88)
