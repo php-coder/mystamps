@@ -22,7 +22,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
 
 /**

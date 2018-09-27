@@ -72,7 +72,6 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
-import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;

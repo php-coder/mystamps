@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService
+import ru.mystamps.web.feature.series.SeriesService
 import ru.mystamps.web.service.dto.AdminDailyReport
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

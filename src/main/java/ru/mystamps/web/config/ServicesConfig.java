@@ -41,6 +41,7 @@ import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.feature.series.SeriesService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;

@@ -41,6 +41,7 @@ import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.feature.image.ImageService
 import ru.mystamps.web.feature.series.SeriesDto
+import ru.mystamps.web.feature.series.SeriesService
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 

@@ -35,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
-import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.feature.series.SeriesService;
 
 @Controller
 @RequiredArgsConstructor

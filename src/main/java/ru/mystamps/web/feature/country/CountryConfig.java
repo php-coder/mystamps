@@ -25,7 +25,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.SeriesService;
+import ru.mystamps.web.feature.series.SeriesService;
 
 /**
  * Spring configuration that is required for using countries in an application.
