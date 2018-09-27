@@ -30,6 +30,7 @@ import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
+import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",

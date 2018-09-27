@@ -22,7 +22,6 @@ import java.util.List;
 import lombok.Getter;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SeriesFullInfoDto;
 
 public class SeriesDto {
 	private final SeriesFullInfoDto info;
