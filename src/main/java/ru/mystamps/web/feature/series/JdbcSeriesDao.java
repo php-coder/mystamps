@@ -34,7 +34,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.SeriesDao;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 // TODO: move stamps related methods to separate interface (#88)

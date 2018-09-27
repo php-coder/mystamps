@@ -15,17 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.feature.series;
 
 import java.util.Date;
 import java.util.List;
-
-import ru.mystamps.web.feature.series.AddSeriesDbDto;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
-import ru.mystamps.web.feature.series.SeriesFullInfoDto;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.SeriesLinkDto;
-import ru.mystamps.web.feature.series.SitemapInfoDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")

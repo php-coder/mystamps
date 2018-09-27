@@ -29,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.series.JdbcSeriesDao;
+import ru.mystamps.web.feature.series.SeriesDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")

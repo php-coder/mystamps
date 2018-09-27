@@ -29,7 +29,6 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
-import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.feature.image.ImageService
