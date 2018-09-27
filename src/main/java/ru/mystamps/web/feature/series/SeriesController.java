@@ -74,7 +74,6 @@ import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.SeriesService;
 import ru.mystamps.web.service.dto.DownloadResult;
-import ru.mystamps.web.service.dto.SeriesDto;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;

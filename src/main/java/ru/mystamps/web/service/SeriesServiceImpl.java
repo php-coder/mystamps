@@ -43,7 +43,7 @@ import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.feature.series.AddImageDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.service.dto.SeriesDto;
+import ru.mystamps.web.feature.series.SeriesDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 

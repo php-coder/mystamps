@@ -26,7 +26,7 @@ import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.feature.series.AddImageDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.service.dto.SeriesDto;
+import ru.mystamps.web.feature.series.SeriesDto;
 
 // TODO: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
