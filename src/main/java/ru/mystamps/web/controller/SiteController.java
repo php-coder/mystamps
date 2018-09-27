@@ -29,11 +29,11 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.util.LocaleUtils;
