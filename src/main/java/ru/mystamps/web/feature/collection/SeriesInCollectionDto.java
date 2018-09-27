@@ -20,7 +20,7 @@ package ru.mystamps.web.feature.collection;
 import lombok.Getter;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.feature.series.SeriesInfoDto;
 
 @Getter
 public class SeriesInCollectionDto extends SeriesInfoDto {

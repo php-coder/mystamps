@@ -43,7 +43,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
 

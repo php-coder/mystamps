@@ -38,7 +38,7 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
-import ru.mystamps.web.dao.dto.SeriesInfoDto;
+import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.util.SlugUtils;
 import ru.mystamps.web.validation.ValidationRules;
