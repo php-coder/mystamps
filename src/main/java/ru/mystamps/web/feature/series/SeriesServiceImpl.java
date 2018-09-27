@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series;
 
 import java.util.Collections;
 import java.util.Date;
@@ -41,10 +41,7 @@ import ru.mystamps.web.dao.dto.SeriesLinkDto;
 import ru.mystamps.web.dao.dto.SitemapInfoDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImageService;
-import ru.mystamps.web.feature.series.AddImageDto;
-import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.feature.series.SeriesDto;
-import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.service.StampsCatalogService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 

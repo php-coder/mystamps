@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.series
 
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
@@ -33,15 +33,13 @@ import ru.mystamps.web.dao.SeriesDao
 import ru.mystamps.web.dao.dto.AddSeriesDbDto
 import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.dao.dto.SeriesFullInfoDto
-import ru.mystamps.web.feature.series.AddImageForm
-import ru.mystamps.web.feature.series.AddSeriesForm
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.dao.dto.PurchaseAndSaleDto
 import ru.mystamps.web.dao.dto.SeriesInfoDto
 import ru.mystamps.web.dao.dto.SitemapInfoDto
 import ru.mystamps.web.feature.image.ImageService
-import ru.mystamps.web.feature.series.SeriesDto
-import ru.mystamps.web.feature.series.SeriesService
+import ru.mystamps.web.service.StampsCatalogService
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
