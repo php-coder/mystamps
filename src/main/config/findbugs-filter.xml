@@ -29,6 +29,24 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.AddSeriesDbDto" />
+		<Or>
+			<Method name="getCreatedAt" />
+			<Method name="setCreatedAt" />
+			<Method name="getUpdatedAt" />
+			<Method name="setUpdatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<Class name="ru.mystamps.web.feature.series.PurchaseAndSaleDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<Class name="ru.mystamps.web.feature.series.SitemapInfoDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<!--
 			String[] allowedContentTypes: potentially caller can modify data after passing it to the
 			constructor. I don't want to fix it because all such places are known and under our
