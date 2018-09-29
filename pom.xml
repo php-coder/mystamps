@@ -565,7 +565,7 @@
 		<selenium.version>2.53.1</selenium.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<servlet-api.version>3.1.0</servlet-api.version>
+		<servlet-api.version>4.0.1</servlet-api.version>
 		
 		<skipUnitTests>false</skipUnitTests>
 		
