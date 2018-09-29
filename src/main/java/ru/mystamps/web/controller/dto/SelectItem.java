@@ -23,6 +23,8 @@ import java.util.List;
 
 import lombok.Getter;
 
+import ru.mystamps.web.feature.series.SelectOption;
+
 @Getter
 public class SelectItem {
 	private final String name;
