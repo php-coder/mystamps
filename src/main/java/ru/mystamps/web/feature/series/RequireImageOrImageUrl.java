@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.beanvalidation;
+package ru.mystamps.web.feature.series;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -39,8 +39,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = RequireImageOrImageUrlValidator.class)
 @Documented
 public @interface RequireImageOrImageUrl {
-	// CheckStyle: ignore LineLength for next 1 line
-	String message() default "{ru.mystamps.web.support.beanvalidation.RequireImageOrImageUrl.message}";
+	String message() default "{ru.mystamps.web.feature.series.RequireImageOrImageUrl.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 }

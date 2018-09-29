@@ -34,7 +34,6 @@ import ru.mystamps.web.support.beanvalidation.MaxFileSize;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize.Unit;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
-import ru.mystamps.web.support.beanvalidation.RequireImageOrImageUrl;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 

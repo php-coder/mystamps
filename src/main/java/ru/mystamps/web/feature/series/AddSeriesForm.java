@@ -46,7 +46,6 @@ import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 import ru.mystamps.web.support.beanvalidation.NotNullIfFirstField;
 import ru.mystamps.web.support.beanvalidation.Price;
-import ru.mystamps.web.support.beanvalidation.RequireImageOrImageUrl;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
