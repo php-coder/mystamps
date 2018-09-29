@@ -57,7 +57,7 @@ public class ImageConfig {
 		private final ImagePersistenceStrategy imagePersistenceStrategy;
 		
 		@Bean
-		public ImageService getImageService(ImageDao imageDao) {
+		public ImageService imageService(ImageDao imageDao) {
 			return new ImageServiceImpl(
 				LoggerFactory.getLogger(ImageServiceImpl.class),
 				imagePersistenceStrategy,
@@ -83,7 +83,7 @@ public class ImageConfig {
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
-		public ImagePersistenceStrategy getImagePersistenceStrategy(ImageDataDao imageDataDao) {
+		public ImagePersistenceStrategy imagePersistenceStrategy(ImageDataDao imageDataDao) {
 			return new DatabaseImagePersistenceStrategy(
 				LoggerFactory.getLogger(DatabaseImagePersistenceStrategy.class),
 				imageDataDao
@@ -104,7 +104,7 @@ public class ImageConfig {
 		private final Environment env;
 		
 		@Bean
-		public ImagePersistenceStrategy getImagePersistenceStrategy() {
+		public ImagePersistenceStrategy imagePersistenceStrategy() {
 			return new FilesystemImagePersistenceStrategy(
 				LoggerFactory.getLogger(FilesystemImagePersistenceStrategy.class),
 				env.getRequiredProperty("app.upload.dir"),
