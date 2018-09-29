@@ -393,7 +393,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
-			<version>${htmlunit.version}</version>
+			<version>${selenium-htmlunit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -510,9 +510,6 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.3.6.Final</hibernate-validator.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<htmlunit.version>2.21</htmlunit.version>
-		
 		<jacoco.plugin.version>0.8.2</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
@@ -560,6 +557,9 @@
 		
 		<!-- Don't forget to update version in the Url class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.4</selectizejs.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<selenium-htmlunit.version>2.21</selenium-htmlunit.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<selenium.version>2.53.1</selenium.version>
