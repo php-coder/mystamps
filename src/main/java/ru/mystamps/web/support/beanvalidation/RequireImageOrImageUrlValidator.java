@@ -20,6 +20,8 @@ package ru.mystamps.web.support.beanvalidation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import ru.mystamps.web.feature.series.HasImageOrImageUrl;
+
 /**
  * Implementation of the {@link RequireImageOrImageUrl} validator.
  *
