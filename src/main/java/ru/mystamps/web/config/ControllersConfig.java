@@ -122,10 +122,5 @@ public class ControllersConfig {
 	public SitemapController getSitemapController() {
 		return new SitemapController(servicesConfig.getSeriesService());
 	}
-
-	@Bean
-	public SuggestionController getSuggestionController() {
-		return new SuggestionController(countryService);
-	}
 	
 }

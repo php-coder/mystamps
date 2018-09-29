@@ -47,6 +47,11 @@ public class CountryConfig {
 			return new CountryController(countryService, seriesService);
 		}
 		
+		@Bean
+		public SuggestionController suggestionController() {
+			return new SuggestionController(countryService);
+		}
+		
 	}
 	
 	@RequiredArgsConstructor
