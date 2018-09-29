@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ru.mystamps.web.controller.dto.SelectItem;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.feature.series.SelectItem;
 
 /**
  * Transforms flat list to hierarchical structure suitable for rendering a &lt;select&gt; tag
