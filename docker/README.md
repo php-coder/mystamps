@@ -7,7 +7,7 @@ possible configurations, we support only those that are typically used:
   In this mode, it also runs in-memory database H2. This is roughly the same as
   executing `mvn spring-boot:run` command but inside a Docker container.
 
-  * Build a WAR file that will be used in container building:
+  * Create a WAR file that will be used for building an image:
     ```console
     $ mvn package
     $ cd docker
