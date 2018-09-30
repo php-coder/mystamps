@@ -38,11 +38,10 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
-import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.series.SeriesServiceImpl;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 import ru.mystamps.web.support.spring.security.SecurityConfig;
@@ -53,7 +52,8 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 	CollectionConfig.Services.class,
 	CountryConfig.Services.class,
 	ImageConfig.Services.class,
-	ParticipantConfig.Services.class
+	ParticipantConfig.Services.class,
+	SeriesConfig.Services.class
 })
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
@@ -68,8 +68,8 @@ public class ServicesConfig {
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
-	private final ImageService imageService;
 	private final ParticipantService participantService;
+	private final SeriesService seriesService;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
@@ -83,7 +83,7 @@ public class ServicesConfig {
 			categoryService,
 			countryService,
 			collectionService,
-			getSeriesService(),
+			seriesService,
 			getSuspiciousActivityService(),
 			getUserService(),
 			getUsersActivationService(),
@@ -147,26 +147,11 @@ public class ServicesConfig {
 	}
 	
 	@Bean
-	public SeriesService getSeriesService() {
-		return new SeriesServiceImpl(
-			LoggerFactory.getLogger(SeriesServiceImpl.class),
-			daoConfig.getSeriesDao(),
-			imageService,
-			getMichelCatalogService(),
-			getScottCatalogService(),
-			getYvertCatalogService(),
-			getGibbonsCatalogService(),
-			getSolovyovCatalogService(),
-			getZagorskiCatalogService()
-		);
-	}
-	
-	@Bean
 	public SeriesImportService getSeriesImportService() {
 		return new SeriesImportServiceImpl(
 			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 			daoConfig.getSeriesImportDao(),
-			getSeriesService(),
+			seriesService,
 			getSeriesSalesService(),
 			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
@@ -223,7 +208,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "michelCatalog")
 	public StampsCatalogService getMichelCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
@@ -232,7 +217,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "scottCatalog")
 	public StampsCatalogService getScottCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
@@ -241,7 +226,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "yvertCatalog")
 	public StampsCatalogService getYvertCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
@@ -250,7 +235,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "gibbonsCatalog")
 	public StampsCatalogService getGibbonsCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
@@ -259,7 +244,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "solovyovCatalog")
 	public StampsCatalogService getSolovyovCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
@@ -268,7 +253,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "zagorskiCatalog")
 	public StampsCatalogService getZagorskiCatalogService() {
 		return new StampsCatalogServiceImpl(
 			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),

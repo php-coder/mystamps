@@ -36,7 +36,9 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesController;
+import ru.mystamps.web.feature.series.SeriesService;
 
 @Configuration
 @RequiredArgsConstructor
@@ -45,7 +47,8 @@ import ru.mystamps.web.feature.series.SeriesController;
 	CollectionConfig.Controllers.class,
 	CountryConfig.Controllers.class,
 	ImageConfig.Controllers.class,
-	ParticipantConfig.Controllers.class
+	ParticipantConfig.Controllers.class,
+	SeriesConfig.Controllers.class
 })
 public class ControllersConfig {
 	
@@ -56,6 +59,8 @@ public class ControllersConfig {
 	private final CollectionService collectionService;
 	private final CountryService countryService;
 	private final ParticipantService participantService;
+	private final SeriesService seriesService;
+	private final SeriesController seriesController;
 	
 	@Bean
 	public AccountController getAccountController() {
@@ -84,24 +89,11 @@ public class ControllersConfig {
 	}
 	
 	@Bean
-	public SeriesController getSeriesController() {
-		return new SeriesController(
-			categoryService,
-			collectionService,
-			countryService,
-			servicesConfig.getSeriesService(),
-			servicesConfig.getSeriesImportService(),
-			servicesConfig.getSeriesSalesService(),
-			participantService
-		);
-	}
-	
-	@Bean
 	public SeriesImportController getSeriesImportController() {
 		return new SeriesImportController(
 			servicesConfig.getSeriesImportService(),
 			servicesConfig.getSeriesSalesImportService(),
-			getSeriesController(),
+			seriesController,
 			participantService,
 			eventPublisher
 		);
@@ -113,14 +105,14 @@ public class ControllersConfig {
 			categoryService,
 			collectionService,
 			countryService,
-			servicesConfig.getSeriesService(),
+			seriesService,
 			servicesConfig.getSuspiciousActivityService()
 		);
 	}
 	
 	@Bean
 	public SitemapController getSitemapController() {
-		return new SitemapController(servicesConfig.getSeriesService());
+		return new SitemapController(seriesService);
 	}
 	
 }
