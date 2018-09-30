@@ -47,6 +47,8 @@ CMD [ "java" \
 	, "-Xmx128m" \
 	, "-Xss256k" \
 	, "-Dserver.address=0.0.0.0" \
+	# used only in "test" profile, other profiles don't enable H2 database
+	, "-Dspring.h2.console.settings.webAllowOthers=true" \
 	, "-jar" \
 	, "mystamps.war" \
 ]
