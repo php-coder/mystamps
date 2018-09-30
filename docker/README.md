@@ -11,7 +11,7 @@ possible configurations, we support only those that are typically used:
     ```console
     $ mvn package
     $ cd docker
-    $ ln -v ../target/mystamps.war mystamps.war
+    $ ln -fv ../target/mystamps.war mystamps.war
     ```
     By the way, don't forget to remove this hard link after using.
   * Build an image and run a container with `docker-compose`:
