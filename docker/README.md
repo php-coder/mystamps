@@ -21,6 +21,6 @@ possible configurations, we support only those that are typically used:
   * The same but with a plain Docker:
     ```console
     $ docker build -t mystamps:latest .
-    $ docker run -d -p 8080:8080 mystamps:latest
+    $ docker run -d -p 8080:8080 --cap-drop all mystamps:latest
     ```
 
