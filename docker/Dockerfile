@@ -14,6 +14,8 @@ ENV SPRING_PROFILES_ACTIVE=test
 
 # Creates base directories and unprivileged user.
 # See also: https://docs.docker.com/engine/reference/builder/#run
+#
+# /data/uploads and /data/preview are being used only in "prod" profile
 RUN mkdir /data \
  && useradd mystamps --home-dir /data/mystamps --create-home --comment 'MyStamps' \
  && mkdir /data/uploads /data/preview /data/heap-dumps \
