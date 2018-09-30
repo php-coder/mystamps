@@ -18,7 +18,6 @@
 package ru.mystamps.web.config;
 
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -53,7 +52,6 @@ import ru.mystamps.web.feature.series.SeriesService;
 public class ControllersConfig {
 	
 	private final ServicesConfig servicesConfig;
-	private final MessageSource messageSource;
 	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
