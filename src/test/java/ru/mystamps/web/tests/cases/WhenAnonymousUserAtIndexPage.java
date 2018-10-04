@@ -43,13 +43,6 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 	}
 	
 	@Test(groups = "misc")
-	public void shouldExistsLinkForListingCategories() {
-		assertThat(page.linkWithLabelExists(tr("t_show_categories_list")))
-			.overridingErrorMessage("should exists link to page for listing categories")
-			.isTrue();
-	}
-	
-	@Test(groups = "misc")
 	public void shouldExistsLinkForListingCountries() {
 		assertThat(page.linkWithLabelExists(tr("t_show_countries_list")))
 			.overridingErrorMessage("should exists link to page for listing countries")
