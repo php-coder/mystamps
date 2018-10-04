@@ -48,7 +48,6 @@ import ru.mystamps.web.controller.dto.ActivateAccountForm.LoginChecks;
 import ru.mystamps.web.controller.dto.ActivateAccountForm.NameChecks;
 import ru.mystamps.web.controller.dto.ActivateAccountForm.PasswordChecks;
 import ru.mystamps.web.controller.dto.ActivateAccountForm.PasswordConfirmationChecks;
-import ru.mystamps.web.controller.dto.RegisterAccountForm;
 import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.service.UsersActivationService;
 
