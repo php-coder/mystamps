@@ -230,6 +230,7 @@ processed_robot_file = ''
 javaFiles2robot = {
     'WhenAdminAtIndexPage.java'             : 'site/misc-admin.robot',
     'WhenUserAtIndexPage.java'              : 'site/misc-user.robot',
+    'WhenAnonymousUserAtIndexPage.java'     : 'site/misc-anonymous.robot',
     'WhenAnonymousUserActivateAccount.java' : 'account/activation/{tag}.robot',
 }
 
@@ -240,6 +241,9 @@ testng2robotTags = {
 
 for filepath in sorted(glob.glob('%s/*.java' % basedir)):
     filename = os.path.basename(filepath)
+    if filename == 'WhenAnonymousUserAtForbiddenPage.java':
+        print('Ignoring %s' % filename, file=sys.stderr)
+        continue
     if first_test_method_proccessed:
         break
     inside_test_method = 0
