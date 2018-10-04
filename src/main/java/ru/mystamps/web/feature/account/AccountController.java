@@ -41,13 +41,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.dto.ActivateAccountForm;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.ActKeyChecks;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.FormChecks;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.LoginChecks;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.NameChecks;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.PasswordChecks;
-import ru.mystamps.web.controller.dto.ActivateAccountForm.PasswordConfirmationChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.ActKeyChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.FormChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.LoginChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.NameChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordChecks;
+import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordConfirmationChecks;
 import ru.mystamps.web.service.UserService;
 import ru.mystamps.web.service.UsersActivationService;
 
