@@ -10,6 +10,10 @@ Anonymous should see a link for listing categories
 	[Tags]                    category
 	Page Should Contain Link  link=show list of categories
 
+Anonymous should not see a link for adding categories
+	[Tags]                        category
+	Page Should Not Contain Link  link=add a category
+
 Anonymous should see a link for listing countries
 	[Tags]                    country
 	Page Should Contain Link  link=show list of countries
