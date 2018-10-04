@@ -42,11 +42,4 @@ public class WhenAnonymousUserAtIndexPage extends WhenAnyUserAtAnyPage<IndexSite
 		assertThat(page.textPresent(tr("t_you_may"))).isTrue();
 	}
 	
-	@Test(groups = "misc")
-	public void linkForAddingCountriesShouldBeAbsent() {
-		assertThat(page.linkWithLabelExists(tr("t_add_country")))
-			.overridingErrorMessage("should absent link to page for adding countries")
-			.isFalse();
-	}
-	
 }
