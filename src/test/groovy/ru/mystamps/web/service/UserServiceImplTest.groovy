@@ -29,6 +29,7 @@ import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.feature.account.ActivateAccountForm
 import ru.mystamps.web.feature.account.UserService
+import ru.mystamps.web.feature.account.UsersActivationService
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random

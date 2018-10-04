@@ -22,7 +22,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.UsersActivationService;
+import ru.mystamps.web.feature.account.UsersActivationService;
 
 @RequiredArgsConstructor
 public class ExistingActivationKeyValidator

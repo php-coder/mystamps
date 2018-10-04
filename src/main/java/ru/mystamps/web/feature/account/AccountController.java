@@ -47,7 +47,6 @@ import ru.mystamps.web.feature.account.ActivateAccountForm.LoginChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.NameChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordConfirmationChecks;
-import ru.mystamps.web.service.UsersActivationService;
 
 @Controller
 @RequiredArgsConstructor

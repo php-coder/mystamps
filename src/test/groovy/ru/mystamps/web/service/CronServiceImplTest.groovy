@@ -23,6 +23,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.feature.account.UserService
+import ru.mystamps.web.feature.account.UsersActivationService
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService

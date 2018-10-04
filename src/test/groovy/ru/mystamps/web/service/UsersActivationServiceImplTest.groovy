@@ -27,6 +27,7 @@ import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
 import ru.mystamps.web.feature.account.RegisterAccountForm
+import ru.mystamps.web.feature.account.UsersActivationService
 import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.validation.ValidationRules

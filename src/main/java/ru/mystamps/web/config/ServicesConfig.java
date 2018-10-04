@@ -32,6 +32,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.account.UserService;
+import ru.mystamps.web.feature.account.UsersActivationService;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionConfig;
