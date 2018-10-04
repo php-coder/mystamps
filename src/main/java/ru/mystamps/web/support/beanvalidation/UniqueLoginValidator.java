@@ -22,7 +22,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.UserService;
+import ru.mystamps.web.feature.account.UserService;
 
 @RequiredArgsConstructor
 public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, String> {

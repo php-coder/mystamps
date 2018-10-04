@@ -35,7 +35,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.UserDetails;
-import ru.mystamps.web.service.UserService;
+import ru.mystamps.web.feature.account.UserService;
 
 /**
  * Implementation of Spring's {@link UserDetailsService} which uses our DAO to load user.
