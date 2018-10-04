@@ -20,7 +20,7 @@ package ru.mystamps.web.service;
 import java.util.Date;
 
 import ru.mystamps.web.dao.dto.UserDetails;
-import ru.mystamps.web.service.dto.ActivateAccountDto;
+import ru.mystamps.web.feature.account.ActivateAccountDto;
 
 public interface UserService {
 	void registerUser(ActivateAccountDto dto);

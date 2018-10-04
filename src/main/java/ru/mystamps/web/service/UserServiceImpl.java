@@ -35,8 +35,8 @@ import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
+import ru.mystamps.web.feature.account.ActivateAccountDto;
 import ru.mystamps.web.feature.collection.CollectionService;
-import ru.mystamps.web.service.dto.ActivateAccountDto;
 
 import static ru.mystamps.web.dao.dto.UserDetails.Role.USER;
 
