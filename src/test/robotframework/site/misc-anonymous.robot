@@ -14,6 +14,10 @@ Anonymous should see a link for listing countries
 	[Tags]                    country
 	Page Should Contain Link  link=show list of countries
 
+Anonymous should not see a link for adding series
+	[Tags]                        series
+	Page Should Not Contain Link  link=add a stamp series
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
