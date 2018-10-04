@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-import ru.mystamps.web.service.dto.RegisterAccountDto;
+import ru.mystamps.web.feature.account.RegisterAccountDto;
 
 public interface UsersActivationService {
 	void add(RegisterAccountDto dto, Locale lang);

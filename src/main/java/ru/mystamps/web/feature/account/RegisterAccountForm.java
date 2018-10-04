@@ -25,7 +25,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.RegisterAccountDto;
 import ru.mystamps.web.support.beanvalidation.Email;
 import ru.mystamps.web.support.beanvalidation.Group;
 
