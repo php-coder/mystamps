@@ -500,7 +500,7 @@
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<groovy.version>2.0.8</groovy.version>
+		<groovy.version>2.4.15</groovy.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<h2.version>1.4.197</h2.version>
