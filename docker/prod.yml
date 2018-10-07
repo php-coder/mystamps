@@ -1,0 +1,45 @@
+# Customize configuration from docker-compose.yml to run the application with
+# the "prod" profile.
+#
+# In order to get the effective configuration, run
+#   $ docker-compose -f docker-compose.yml -f prod.yml config
+#
+version: '3'
+
+services:
+  web:
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      # localhost -> db
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/mystamps?logger=com.mysql.jdbc.log.Slf4JLogger&useSSL=false&logSlowQueries=true&slowQueryThresholdMillis=250&autoSlowLog=false&characterEncoding=UTF-8
+      # override password from application-prod.properties to be the same as in db
+      - SPRING_DATASOURCE_PASSWORD=secret
+      # only for testing locally. See also: https://github.com/php-coder/mystamps/issues/670
+      - SERVER_SESSION_COOKIE_SECURE=false
+    volumes:
+      - ./application-prod.properties:/data/mystamps/application-prod.properties:ro
+    networks:
+      - internal-network
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7.20
+    command: --character-set-server=utf8
+    environment:
+      # the generated root password will be printed to stdout (GENERATED ROOT PASSWORD: ...)
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_USER=mystamps
+      # TODO: try to use a secret
+      - MYSQL_PASSWORD=secret
+      # the user specified above will be granted superuser access automatically
+      - MYSQL_DATABASE=mystamps
+    ports:
+      - "3306:3306"
+    # only for testing locally
+    #volumes:
+    #  - ./mysql_backup_mystamps_20180901-003001.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
+    networks:
+      - internal-network
+
+networks:
+  internal-network:
