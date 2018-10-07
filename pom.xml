@@ -497,7 +497,7 @@
 		<fest.assert.version>2.0M8</fest.assert.version>
 		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
 		<findbugs.plugin.version>3.0.5</findbugs.plugin.version>
-		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
+		<gmavenplus.plugin.version>1.6.1</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.16.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<groovy.version>2.0.8</groovy.version>
