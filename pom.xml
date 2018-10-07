@@ -491,6 +491,7 @@
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
 		
+		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
@@ -720,6 +721,17 @@
 			</plugin>
 			
 			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile.plugin.version}</version>
+				<configuration>
+					<repository>phpcoder/mystamps</repository>
+					<!-- TODO: set it to docker/ after https://github.com/spotify/dockerfile-maven/pull/89 will be merged -->
+					<contextDirectory>target</contextDirectory>
+				</configuration>
+			</plugin>
+			
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${checkstyle.plugin.version}</version>
@@ -846,6 +858,28 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${resources.plugin.version}</version>
+				<executions>
+					<!-- TODO: remove this workaround after merging https://github.com/spotify/dockerfile-maven/pull/89 -->
+					<execution>
+						<id>copy-docker-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<!-- copy docker/Dockerfile to target/ -->
+							<outputDirectory>target</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/docker</directory>
+									<includes>
+										<include>Dockerfile</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<plugin>
