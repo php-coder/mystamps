@@ -2,14 +2,16 @@
 Documentation    Verify participant creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       participant  validation
 
 *** Test Cases ***
 Create participant with blank required fields
-	Submit Form             id=add-participant-form
-	Element Text Should Be  id=name.errors  Value must not be empty
+	Remove Element Attribute  name  required
+	Submit Form               id=add-participant-form
+	Element Text Should Be    id=name.errors  Value must not be empty
 
 Create participant with too short name
 	Input Text              id=name  xx

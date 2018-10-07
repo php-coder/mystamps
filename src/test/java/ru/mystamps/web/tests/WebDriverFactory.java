@@ -31,7 +31,7 @@ public final class WebDriverFactory {
 	public static WebDriver getDriver() {
 		if (driver == null) {
 			boolean enableJavascript = true;
-			driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38, enableJavascript);
+			driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_52, enableJavascript);
 		}
 		
 		return driver;

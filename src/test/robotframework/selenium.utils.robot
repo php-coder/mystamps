@@ -15,3 +15,14 @@ Urlfield Value Should Be
 	[Arguments]      ${locator}  ${expected}
 	${value}=        Get Value  ${locator}
 	Should Be Equal  ${expected}  ${value}
+
+Remove Element Attribute
+	[Documentation]     Removes an attribute with a specified name from the element identified by its id
+	[Arguments]         ${id}  ${attributeName}
+	${removeAttr}=      Catenate  SEPARATOR=
+	...                 return window.document.getElementById("
+	...                 ${id}
+	...                 ").removeAttribute("
+	...                 ${attributeName}
+	...                 ");
+	Execute Javascript  ${removeAttr}

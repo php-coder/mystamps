@@ -1,8 +1,10 @@
 *** Settings ***
 Documentation   Verify account activation validation scenarios
 Library         SeleniumLibrary
+Resource         ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  After Test Suite
+Test Setup      Before Test
 Force Tags      account  activation  validation
 
 *** Test Cases ***
@@ -105,6 +107,13 @@ Before Test Suite
 
 After Test Suite
 	Close Browser
+
+# remove "required" attributes from mandatory fields to be able to test server validation
+Before Test
+	Remove Element Attribute  login                 required
+	Remove Element Attribute  password              required
+	Remove Element Attribute  passwordConfirmation  required
+	Remove Element Attribute  activationKey         required
 
 Login should not contain repeated special characters
 	[Arguments]             ${login}

@@ -2,15 +2,17 @@
 Documentation    Verify validation of adding a series to collection
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite
 Force Tags       collection  validation
 
 *** Test Cases ***
 Add a series without required field
-	Input Text              id=number-of-stamps  ${EMPTY}
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=number-of-stamps.errors  Value must not be empty
+	Remove Element Attribute  number-of-stamps  required
+	Input Text                id=number-of-stamps  ${EMPTY}
+	Submit Form               id=add-series-form
+	Element Text Should Be    id=number-of-stamps.errors  Value must not be empty
 
 Add a series with too few number of stamps
 	Input Text              id=number-of-stamps  0
