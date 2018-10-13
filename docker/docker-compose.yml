@@ -4,6 +4,6 @@ services:
   web:
     image: phpcoder/mystamps:latest
     cap_drop:
-      - "ALL"
+      - 'ALL'
     ports:
-      - "8080:8080"
+      - '8080:8080'

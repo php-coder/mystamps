@@ -34,7 +34,7 @@ services:
       # the user specified above will be granted superuser access automatically
       - MYSQL_DATABASE=mystamps
     ports:
-      - "3306:3306"
+      - '3306:3306'
     # only for testing locally
     #volumes:
     #  - ./mysql_backup_mystamps_20180901-003001.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
