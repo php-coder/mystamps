@@ -43,6 +43,36 @@
 		
 	</changeSet>
 	
+	<changeSet id="create-admin-user-if-does-not-exist" author="php-coder" context="test-data, prod-data">
+		<!--
+			Creates user with role ADMIN if it doesn't exist.
+			Required by the add-fauna-top-level-category change set.
+		-->
+		<preConditions onFail="MARK_RAN">
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				  FROM users
+				 WHERE role = 'ADMIN'
+			</sqlCheck>
+		</preConditions>
+		
+		<insert tableName="users">
+			<column name="login" value="admin" />
+			<column name="role" value="ADMIN" />
+			<column name="name" value="Admin" />
+			<column name="email" value="root@localhost" />
+			<column name="hash" value="no-password" />
+			<column name="registered_at" valueComputed="${NOW}" />
+			<column name="activated_at" valueComputed="${NOW}" />
+		</insert>
+		
+		<insert tableName="collections">
+			<column name="user_id" valueComputed="(SELECT id FROM users WHERE login = 'admin')" />
+			<column name="slug" value="admin" />
+		</insert>
+		
+	</changeSet>
+	
 	<changeSet id="add-fauna-top-level-category" author="php-coder" context="test-data, prod-data">
 		
 		<insert tableName="top_categories">
