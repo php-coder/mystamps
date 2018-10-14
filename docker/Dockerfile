@@ -12,14 +12,17 @@ EXPOSE 8080
 # See also: https://docs.docker.com/engine/reference/builder/#env
 ENV SPRING_PROFILES_ACTIVE=test
 
-# Creates base directories and unprivileged user.
-# See also: https://docs.docker.com/engine/reference/builder/#run
-#
-# /data/uploads and /data/preview are being used only in "prod" profile
+# - Creates base directories and unprivileged user.
+#   See also: https://docs.docker.com/engine/reference/builder/#run
+#   NOTE: /data/uploads and /data/preview are being used only in "prod" profile.
+# - Setting up a timezone to Moscow time.
+#   TODO: remove when #76 will be resolved and application will use UTC timezone.
 RUN mkdir /data \
  && useradd mystamps --home-dir /data/mystamps --create-home --comment 'MyStamps' \
  && mkdir /data/uploads /data/preview /data/heap-dumps \
- && chown mystamps:mystamps /data/uploads /data/preview /data/heap-dumps
+ && chown mystamps:mystamps /data/uploads /data/preview /data/heap-dumps \
+ && ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
+ && dpkg-reconfigure -f noninteractive tzdata
 
 # Creates mount points and marks them as holding externally mounted volumes from native host.
 # See also: https://docs.docker.com/engine/reference/builder/#volume
