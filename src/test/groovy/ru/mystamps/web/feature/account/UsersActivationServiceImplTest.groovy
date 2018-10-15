@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.account
 
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -26,8 +26,8 @@ import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.dao.dto.AddUsersActivationDbDto
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.dao.dto.UsersActivationFullDto
-import ru.mystamps.web.feature.account.RegisterAccountForm
-import ru.mystamps.web.feature.account.UsersActivationService
+import ru.mystamps.web.service.MailService
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.validation.ValidationRules
