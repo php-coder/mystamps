@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import static ru.mystamps.web.dao.dto.UserDetails.Role;
+import static ru.mystamps.web.feature.account.UserDetails.Role;
 
 @Getter
 @Setter

@@ -32,11 +32,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.UserDao;
-import ru.mystamps.web.dao.dto.UserDetails;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.feature.collection.CollectionService;
 
-import static ru.mystamps.web.dao.dto.UserDetails.Role.USER;
+import static ru.mystamps.web.feature.account.UserDetails.Role.USER;
 
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {

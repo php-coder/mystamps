@@ -19,8 +19,6 @@ package ru.mystamps.web.feature.account;
 
 import java.util.Date;
 
-import ru.mystamps.web.dao.dto.UserDetails;
-
 public interface UserService {
 	void registerUser(ActivateAccountDto dto);
 	UserDetails findUserDetailsByLogin(String login);

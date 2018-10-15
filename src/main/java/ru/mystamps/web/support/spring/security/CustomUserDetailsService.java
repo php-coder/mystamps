@@ -34,7 +34,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.dto.UserDetails;
+import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UserService;
 
 /**

@@ -23,7 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Getter;
 
-import ru.mystamps.web.dao.dto.UserDetails;
+import ru.mystamps.web.feature.account.UserDetails;
 
 @Getter
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {
