@@ -21,7 +21,7 @@ import java.util.Locale;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.dto.AddUsersActivationDbDto;
+import ru.mystamps.web.feature.account.AddUsersActivationDbDto;
 
 @RequiredArgsConstructor
 public class SendUsersActivationDto {
