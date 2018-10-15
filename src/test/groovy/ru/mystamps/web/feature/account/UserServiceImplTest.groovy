@@ -23,7 +23,6 @@ import spock.lang.Specification
 
 import org.slf4j.helpers.NOPLogger
 
-import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.dto.UsersActivationDto
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.service.TestObjects

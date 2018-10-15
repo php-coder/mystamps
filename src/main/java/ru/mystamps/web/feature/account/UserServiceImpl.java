@@ -31,7 +31,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.UserDao;
 import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.feature.collection.CollectionService;
 
