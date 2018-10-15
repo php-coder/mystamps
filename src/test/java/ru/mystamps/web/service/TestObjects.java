@@ -25,6 +25,7 @@ import java.util.Date;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.*;
+import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;

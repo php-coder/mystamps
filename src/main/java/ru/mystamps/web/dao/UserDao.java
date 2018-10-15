@@ -19,8 +19,8 @@ package ru.mystamps.web.dao;
 
 import java.util.Date;
 
-import ru.mystamps.web.dao.dto.AddUserDbDto;
 import ru.mystamps.web.dao.dto.UserDetails;
+import ru.mystamps.web.feature.account.AddUserDbDto;
 
 public interface UserDao {
     long countByLogin(String login);
