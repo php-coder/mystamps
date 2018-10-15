@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.account
 
 import org.springframework.security.crypto.password.PasswordEncoder
 
@@ -27,10 +27,8 @@ import ru.mystamps.web.dao.UserDao
 import ru.mystamps.web.dao.dto.AddUserDbDto
 import ru.mystamps.web.dao.dto.UserDetails
 import ru.mystamps.web.dao.dto.UsersActivationDto
-import ru.mystamps.web.feature.account.ActivateAccountForm
-import ru.mystamps.web.feature.account.UserService
-import ru.mystamps.web.feature.account.UsersActivationService
 import ru.mystamps.web.feature.collection.CollectionService
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 
