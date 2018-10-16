@@ -9,6 +9,24 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.account.AddUserDbDto" />
+		<Or>
+			<Method name="getActivatedAt" />
+			<Method name="setActivatedAt" />
+			<Method name="getRegisteredAt" />
+			<Method name="setRegisteredAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<Class name="ru.mystamps.web.feature.account.AddUsersActivationDbDto" />
+		<Or>
+			<Method name="getCreatedAt" />
+			<Method name="setCreatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<Class name="ru.mystamps.web.feature.image.AddImageDataDbDto" />
 		<Or>
 			<Method name="getContent" />
