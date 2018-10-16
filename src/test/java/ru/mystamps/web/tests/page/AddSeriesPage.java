@@ -286,7 +286,7 @@ public class AddSeriesPage extends AbstractPageWithForm {
 	
 	public void fillImage(String value) {
 		if (value != null) {
-			fillField("image", value);
+			fillField("uploadedImage", value);
 		}
 	}
 	
