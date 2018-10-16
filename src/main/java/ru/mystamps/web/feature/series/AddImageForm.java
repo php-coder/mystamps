@@ -48,7 +48,7 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	@NotEmptyFile(groups = Group.Level1.class)
 	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level2.class)
 	@ImageFile(groups = Group.Level2.class)
-	private MultipartFile image;
+	private MultipartFile uploadedImage;
 	
 	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
 	@URL(groups = ImageUrl2Checks.class)
@@ -65,7 +65,7 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	@Override
 	public MultipartFile getImage() {
 		if (hasImage()) {
-			return image;
+			return uploadedImage;
 		}
 		
 		return downloadedImage;
@@ -75,7 +75,7 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	// The latter is being used by RequireImageOrImageUrl validator.
 	@Override
 	public boolean hasImage() {
-		return image != null && StringUtils.isNotEmpty(image.getOriginalFilename());
+		return uploadedImage != null && StringUtils.isNotEmpty(uploadedImage.getOriginalFilename());
 	}
 	
 	// This method has to be implemented to satisfy HasImageOrImageUrl requirements.

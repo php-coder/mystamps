@@ -416,7 +416,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should pass image to image service"() {
 		given:
-			form.setImage(multipartFile)
+			form.setUploadedImage(multipartFile)
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
@@ -501,7 +501,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "addImageToSeries() should save image"() {
 		given:
-			imageForm.setImage(multipartFile)
+			imageForm.setUploadedImage(multipartFile)
 		when:
 			service.addImageToSeries(imageForm, Random.id(), Random.userId())
 		then:

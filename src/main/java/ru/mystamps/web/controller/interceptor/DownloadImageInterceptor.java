@@ -61,7 +61,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 	 * When it's present, we won't download an image from URL because a user should choose only one
 	 * image source.
 	 */
-	public static final String UPLOADED_IMAGE_FIELD_NAME = "image";
+	public static final String UPLOADED_IMAGE_FIELD_NAME = "uploadedImage";
 	
 	/**
 	 * Name of request attribute, that will be used for storing an error code.

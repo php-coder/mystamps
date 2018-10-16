@@ -214,7 +214,7 @@ public class SeriesController {
 			addYearToModel(model);
 			
 			// don't try to re-display file upload field
-			form.setImage(null);
+			form.setUploadedImage(null);
 			form.setDownloadedImage(null);
 			return null;
 		}
@@ -329,7 +329,7 @@ public class SeriesController {
 			addStampsToCollectionForm(model, series);
 			
 			// don't try to re-display file upload field
-			form.setImage(null);
+			form.setUploadedImage(null);
 			
 			return "series/info";
 		}

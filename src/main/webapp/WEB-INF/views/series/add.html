@@ -222,7 +222,7 @@
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
+						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('uploadedImage') ? 'has-error' : ''}">
 							<label for="image" class="control-label col-sm-3">
 								<span th:remove="tag" th:text="#{t_image}">
 									Image
@@ -236,7 +236,7 @@
 									type="file"
 									style="box-shadow: none; border: 0px;"
 									accept="image/png,image/jpeg"
-									th:field="*{image}"
+									th:field="*{uploadedImage}"
 									th:attr="required=${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? null : 'required'}" />
 								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 									<span class="hint-block" th:text="#{t_add_more_images_hint}">
@@ -244,7 +244,7 @@
 									</span>
 								</small>
 								<!--/*/
-								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+								<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('uploadedImage')}" th:each="error : ${#fields.errors('uploadedImage')}" th:text="${error}"></span>
 								/*/-->
 							</div>
 						</div>

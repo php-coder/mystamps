@@ -98,7 +98,7 @@
 										enctype="multipart/form-data"
 										th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}"
 										th:object="${addImageForm}">
-										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('image') ? 'has-error' : ''}">
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('uploadedImage') ? 'has-error' : ''}">
 											<label for="image" class="control-label col-sm-3" th:text="#{t_image}">
 												Image
 											</label>
@@ -107,10 +107,10 @@
 													type="file"
 													style="box-shadow: none; border: 0px;"
 													accept="image/png,image/jpeg"
-													th:field="*{image}"
+													th:field="*{uploadedImage}"
 													th:attr="required=${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? null : 'required'}" />
 												<!--/*/
-												<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('image')}" th:each="error : ${#fields.errors('image')}" th:text="${error}"></span>
+												<span id="image.errors" class="help-block" th:if="${#fields.hasErrors('uploadedImage')}" th:each="error : ${#fields.errors('uploadedImage')}" th:text="${error}"></span>
 												/*/-->
 											</div>
 										</div>
