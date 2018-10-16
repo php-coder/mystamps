@@ -318,7 +318,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	// @todo #857 SeriesInfoExtractorServiceImpl.extractSellerGroup(): add unit tests
 	public Integer extractSellerGroup(Integer id, String sellerUrl) {
 		// we need a group ony for a new seller (id == null)
 		if (id != null) {

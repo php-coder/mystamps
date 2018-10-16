@@ -19,6 +19,7 @@ package ru.mystamps.web.service
 
 import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomValue.between
 
 import static ru.mystamps.web.service.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
@@ -437,6 +438,39 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			expectedResult | _
 			null           | _
 			Random.id()    | _
+	}
+	
+	//
+	// Tests for extractSellerGroup()
+	//
+	
+	def 'extractSellerGroup() should return null when id is not null'() {
+		expect:
+			service.extractSellerGroup(positiveInteger(), Random.url()) == null
+	}
+	
+	@Unroll
+	def 'extractSellerGroup() should return null for invalid url or unknown group (#sellerUrl)'(String sellerUrl) {
+		when:
+			Integer groupId = service.extractSellerGroup(null, sellerUrl)
+		then:
+			groupId == null
+		where:
+			sellerUrl             | _
+			nullOrBlank()         | _
+			'localhost'           | _
+			'https://example.org' | _
+	}
+	
+	def 'extractSellerGroup() should return seller group id'() {
+		given:
+			Integer expectedGroupId = positiveInteger()
+		when:
+			Integer groupId = service.extractSellerGroup(null, 'https://test.ru/about/me')
+		then:
+			1 * participantService.findGroupIdByName('test.ru') >> expectedGroupId
+		and:
+			groupId == expectedGroupId
 	}
 	
 	//
