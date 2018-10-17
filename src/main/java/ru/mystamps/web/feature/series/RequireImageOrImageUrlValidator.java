@@ -55,9 +55,9 @@ public class RequireImageOrImageUrlValidator
 		}
 
 		// mark both fields as having an error
-		// CheckStyle: ignore LineLength for next 1 line
+		// CheckStyle: ignore LineLength for next 2 lines
 		ConstraintViolationUtils.recreate(ctx, "imageUrl", ctx.getDefaultConstraintMessageTemplate());
-		ConstraintViolationUtils.recreate(ctx, "image", ctx.getDefaultConstraintMessageTemplate());
+		ConstraintViolationUtils.recreate(ctx, "uploadedImage", ctx.getDefaultConstraintMessageTemplate());
 		
 		return false;
 	}
