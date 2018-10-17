@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize;
@@ -39,7 +40,11 @@ import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 
 @Getter
 @Setter
-@RequireImageOrImageUrl(groups = AddImageForm.ImageUrl1Checks.class)
+@RequireImageOrImageUrl(
+	imageFieldName = DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME,
+	imageUrlFieldName = DownloadImageInterceptor.IMAGE_URL_FIELD_NAME,
+	groups = AddImageForm.ImageUrl1Checks.class
+)
 public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableImageUrl {
 	
 	// Name of this field should match with the value of

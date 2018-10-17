@@ -31,9 +31,13 @@ import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
 public class RequireImageOrImageUrlValidator
 	implements ConstraintValidator<RequireImageOrImageUrl, HasImageOrImageUrl> {
 	
+	private String imageFieldName;
+	private String imageUrlFieldName;
+	
 	@Override
 	public void initialize(RequireImageOrImageUrl annotation) {
-		// Intentionally empty: nothing to initialize
+		imageFieldName    = annotation.imageFieldName();
+		imageUrlFieldName = annotation.imageUrlFieldName();
 	}
 	
 	@Override
@@ -55,9 +59,17 @@ public class RequireImageOrImageUrlValidator
 		}
 
 		// mark both fields as having an error
-		// CheckStyle: ignore LineLength for next 2 lines
-		ConstraintViolationUtils.recreate(ctx, "imageUrl", ctx.getDefaultConstraintMessageTemplate());
-		ConstraintViolationUtils.recreate(ctx, "uploadedImage", ctx.getDefaultConstraintMessageTemplate());
+		ConstraintViolationUtils.recreate(
+			ctx,
+			imageFieldName,
+			ctx.getDefaultConstraintMessageTemplate()
+		);
+		
+		ConstraintViolationUtils.recreate(
+			ctx,
+			imageUrlFieldName,
+			ctx.getDefaultConstraintMessageTemplate()
+		);
 		
 		return false;
 	}

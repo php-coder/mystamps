@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
+import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;
@@ -58,7 +59,11 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 @Getter
 @Setter
 @SuppressWarnings({ "PMD.TooManyFields", "PMD.AvoidDuplicateLiterals" })
-@RequireImageOrImageUrl(groups = AddSeriesForm.ImageUrl1Checks.class)
+@RequireImageOrImageUrl(
+	imageFieldName = DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME,
+	imageUrlFieldName = DownloadImageInterceptor.IMAGE_URL_FIELD_NAME,
+	groups = AddSeriesForm.ImageUrl1Checks.class
+)
 @NotNullIfFirstField.List({
 	@NotNullIfFirstField(
 		first = "month", second = "year", message = "{month.requires.year}",

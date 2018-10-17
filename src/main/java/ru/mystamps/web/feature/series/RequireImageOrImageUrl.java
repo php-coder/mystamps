@@ -42,4 +42,7 @@ public @interface RequireImageOrImageUrl {
 	String message() default "{ru.mystamps.web.feature.series.RequireImageOrImageUrl.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
+	
+	String imageFieldName();
+	String imageUrlFieldName();
 }
