@@ -568,7 +568,7 @@ public class SeriesController {
 					// didn't specify a file but somehow provide a URL to an image. In this case,
 					// let's show an error message that file is required.
 					result.rejectValue(
-						"image",
+						DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME,
 						"ru.mystamps.web.support.beanvalidation.NotEmptyFilename.message"
 					);
 					form.nullifyImageUrl();
