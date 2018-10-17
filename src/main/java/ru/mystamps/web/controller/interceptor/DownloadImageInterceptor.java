@@ -116,7 +116,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 		if (!SecurityContextUtils.hasAuthority(Authority.DOWNLOAD_IMAGE)) {
 			// TODO(security): fix possible log injection
 			LOG.warn(
-				"A user #{} without permissions has tried to download a file from '{}'",
+				"User #{} without permissions has tried to download a file from '{}'",
 				SecurityContextUtils.getUserId(),
 				imageUrl
 			);
