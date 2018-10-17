@@ -48,7 +48,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 	/**
 	 * Field name that contains image URL.
 	 */
-	public static final String URL_PARAMETER_NAME = "imageUrl";
+	public static final String IMAGE_URL_FIELD_NAME = "imageUrl";
 	
 	/**
 	 * Field name to which a downloaded image will be bound.
@@ -88,7 +88,7 @@ public class DownloadImageInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		// If the field doesn't have a value, then nothing to do here.
-		String imageUrl = StringUtils.trimToEmpty(request.getParameter(URL_PARAMETER_NAME));
+		String imageUrl = StringUtils.trimToEmpty(request.getParameter(IMAGE_URL_FIELD_NAME));
 		if (StringUtils.isEmpty(imageUrl)) {
 			return true;
 		}

@@ -153,7 +153,7 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	@ImageFile(groups = Image2Checks.class)
 	private MultipartFile uploadedImage;
 	
-	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
+	// Name of this field must match with the value of DownloadImageInterceptor.IMAGE_URL_FIELD_NAME
 	@URL(groups = ImageUrl2Checks.class)
 	private String imageUrl;
 	

@@ -66,7 +66,7 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	@NotNull
 	private Boolean perforated;
 	
-	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
+	// Name of this field must match with the value of DownloadImageInterceptor.IMAGE_URL_FIELD_NAME
 	// @todo #709 /series/import/request/{id}(imageUrl): add validation for valid url
 	@NotNull
 	@URL

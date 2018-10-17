@@ -50,7 +50,7 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	@ImageFile(groups = Group.Level2.class)
 	private MultipartFile uploadedImage;
 	
-	// Name of this field must match with the value of DownloadImageInterceptor.URL_PARAMETER_NAME.
+	// Name of this field must match with the value of DownloadImageInterceptor.IMAGE_URL_FIELD_NAME
 	@URL(groups = ImageUrl2Checks.class)
 	private String imageUrl;
 	
