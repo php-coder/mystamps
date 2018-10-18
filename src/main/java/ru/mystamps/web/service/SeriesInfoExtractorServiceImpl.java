@@ -151,8 +151,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	// @todo #821 SeriesInfoExtractorServiceImpl.extractCountry(): add unit tests for filtering invalid names
 	protected List<Integer> extractCountry(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
