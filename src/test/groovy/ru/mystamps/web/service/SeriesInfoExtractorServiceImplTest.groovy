@@ -78,6 +78,22 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	def 'extractCategory() should filter out invalid candidates'() {
+		given:
+			String shortName = 'ok'
+			String longName = 'x' * (ValidationRules.CATEGORY_NAME_MAX_LENGTH + 1)
+			String invalidEnName = 't3st_'
+			String invalidRuName = 'т_е_с_т'
+			String validEnName = 'valid'
+			String validRuName = 'норм'
+			List<String> expectedCandidates = [ validEnName, validRuName ]
+			String fragment = [ shortName, longName, invalidEnName, invalidRuName, validEnName, validRuName ].join(' ')
+		when:
+			service.extractCategory(fragment)
+		then:
+			1 * categoryService.findIdsByNames(expectedCandidates) >> Random.listOfIntegers()
+	}
+	
 	def 'extractCategory() should deduplicate candidates'() {
 		given:
 			String fragment = 'foo bar foo'
