@@ -26,7 +26,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.support.beanvalidation.ExistingActivationKey;
 import ru.mystamps.web.support.beanvalidation.FieldsMatch;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.validation.ValidationRules;
