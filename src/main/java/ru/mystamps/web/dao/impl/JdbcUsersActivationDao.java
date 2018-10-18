@@ -31,9 +31,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.UsersActivationDao;
-import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.feature.account.AddUsersActivationDbDto;
+import ru.mystamps.web.feature.account.UsersActivationDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")

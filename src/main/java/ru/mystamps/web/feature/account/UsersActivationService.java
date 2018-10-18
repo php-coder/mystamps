@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import ru.mystamps.web.dao.dto.UsersActivationDto;
 import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 
 public interface UsersActivationService {
