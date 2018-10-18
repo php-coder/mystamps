@@ -26,6 +26,7 @@ import java.util.Date;
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
+import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;

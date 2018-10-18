@@ -28,6 +28,7 @@ import ru.mystamps.web.dao.dto.*;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
+import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.collection.AddToCollectionDto;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;

@@ -33,8 +33,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.feature.account.UserService;
+import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.account.UsersActivationService;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;

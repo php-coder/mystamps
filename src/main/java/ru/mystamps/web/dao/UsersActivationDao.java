@@ -20,9 +20,9 @@ package ru.mystamps.web.dao;
 import java.util.Date;
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.UsersActivationFullDto;
 import ru.mystamps.web.feature.account.AddUsersActivationDbDto;
 import ru.mystamps.web.feature.account.UsersActivationDto;
+import ru.mystamps.web.feature.account.UsersActivationFullDto;
 
 public interface UsersActivationDao {
 	long countByActivationKey(String activationKey);

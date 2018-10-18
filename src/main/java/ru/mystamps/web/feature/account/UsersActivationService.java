@@ -21,8 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import ru.mystamps.web.dao.dto.UsersActivationFullDto;
-
 public interface UsersActivationService {
 	void add(RegisterAccountDto dto, Locale lang);
 	void remove(String activationKey);
