@@ -22,7 +22,6 @@ import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
-import ru.mystamps.web.dao.UsersActivationDao
 import ru.mystamps.web.service.MailService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.service.dto.SendUsersActivationDto

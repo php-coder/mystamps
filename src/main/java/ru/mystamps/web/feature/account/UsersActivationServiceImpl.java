@@ -31,7 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.UsersActivationDao;
 import ru.mystamps.web.service.MailService;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.support.togglz.Features;
