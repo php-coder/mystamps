@@ -27,6 +27,14 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.account.UsersActivationDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<Class name="ru.mystamps.web.feature.account.UsersActivationFullDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<Class name="ru.mystamps.web.feature.image.AddImageDataDbDto" />
 		<Or>
 			<Method name="getContent" />
