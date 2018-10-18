@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="similar-series-create-table" author="azorin" context="scheme">
+		<createTable tableName="similar_series">
+			<column name="series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)" foreignKeyName="fk_similar_series_series_id"/>
+			</column>
+			<column name="similar_series_id" type="INTEGER">
+				<constraints nullable="false" references="series(id)" foreignKeyName="fk_similar_series_similar_series_id"/>
+			</column>
+		</createTable>
+		<addUniqueConstraint
+			tableName="similar_series"
+			columnNames="series_id, similar_series_id"
+			constraintName="uc_similar_series_series_id_similar_series_id"/>
+	</changeSet>
+</databaseChangeLog>
