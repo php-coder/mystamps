@@ -15,33 +15,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.beanvalidation;
+package ru.mystamps.web.feature.account;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import lombok.RequiredArgsConstructor;
+import javax.validation.Constraint;
+import javax.validation.Payload;
 
-import ru.mystamps.web.feature.account.UserService;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@RequiredArgsConstructor
-public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, String> {
-	
-	private final UserService userService;
-	
-	@Override
-	public void initialize(UniqueLogin annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
-	public boolean isValid(String value, ConstraintValidatorContext ctx) {
-		
-		if (value == null) {
-			return true;
-		}
-		
-		return userService.countByLogin(value) == 0;
-	}
-	
+@Target({ METHOD, FIELD, ANNOTATION_TYPE })
+@Retention(RUNTIME)
+@Constraint(validatedBy = UniqueLoginValidator.class)
+@Documented
+public @interface UniqueLogin {
+	String message() default "{ru.mystamps.web.feature.account.UniqueLogin.message}";
+	Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
 }
