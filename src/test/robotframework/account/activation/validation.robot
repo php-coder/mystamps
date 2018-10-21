@@ -38,7 +38,7 @@ Activate account with existing login
 	Submit Form             id=activate-account-form
 	Element Text Should Be  id=login.errors  Login already exists
 
-Activate account with repetition of the special characters
+Activate account with repetition of the special characters in login
 	[Template]  Login should not contain repeated special characters
 	te__st
 	te--st
