@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.account.AccountController;
+import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionConfig;
@@ -43,6 +43,7 @@ import ru.mystamps.web.feature.series.SeriesService;
 @Configuration
 @RequiredArgsConstructor
 @Import({
+	AccountConfig.Controllers.class,
 	CategoryConfig.Controllers.class,
 	CollectionConfig.Controllers.class,
 	CountryConfig.Controllers.class,
@@ -60,14 +61,6 @@ public class ControllersConfig {
 	private final ParticipantService participantService;
 	private final SeriesService seriesService;
 	private final SeriesController seriesController;
-	
-	@Bean
-	public AccountController getAccountController() {
-		return new AccountController(
-			servicesConfig.getUserService(),
-			servicesConfig.getUsersActivationService()
-		);
-	}
 	
 	@Bean
 	public ErrorController getErrorController() {

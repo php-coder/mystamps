@@ -26,15 +26,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.account.UserService;
-import ru.mystamps.web.feature.account.UserServiceImpl;
 import ru.mystamps.web.feature.account.UsersActivationService;
-import ru.mystamps.web.feature.account.UsersActivationServiceImpl;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionConfig;
@@ -48,10 +48,10 @@ import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
-import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 @Configuration
 @Import({
+	AccountConfig.Services.class,
 	CategoryConfig.Services.class,
 	CollectionConfig.Services.class,
 	CountryConfig.Services.class,
@@ -64,7 +64,6 @@ import ru.mystamps.web.support.spring.security.SecurityConfig;
 public class ServicesConfig {
 	
 	private final DaoConfig daoConfig;
-	private final SecurityConfig securityConfig;
 	private final JavaMailSender mailSender;
 	private final Environment env;
 	private final MessageSource messageSource;
@@ -74,6 +73,10 @@ public class ServicesConfig {
 	private final CountryService countryService;
 	private final ParticipantService participantService;
 	private final SeriesService seriesService;
+	private final UserService userService;
+	
+	@Lazy
+	private final UsersActivationService usersActivationService;
 	
 	@Bean
 	public SuspiciousActivityService getSuspiciousActivityService() {
@@ -89,8 +92,8 @@ public class ServicesConfig {
 			collectionService,
 			seriesService,
 			getSuspiciousActivityService(),
-			getUserService(),
-			getUsersActivationService(),
+			userService,
+			usersActivationService,
 			getMailService()
 		);
 	}
@@ -130,15 +133,6 @@ public class ServicesConfig {
 			new Locale(env.getProperty("app.mail.admin.lang", "en")),
 			env.getRequiredProperty("app.mail.robot.email"),
 			enableTestMode
-		);
-	}
-	
-	@Bean
-	public UsersActivationService getUsersActivationService() {
-		return new UsersActivationServiceImpl(
-			LoggerFactory.getLogger(UsersActivationServiceImpl.class),
-			daoConfig.getUsersActivationDao(),
-			getMailService()
 		);
 	}
 	
@@ -198,17 +192,6 @@ public class ServicesConfig {
 		return new SiteServiceImpl(
 			LoggerFactory.getLogger(SiteServiceImpl.class),
 			daoConfig.getSuspiciousActivityDao()
-		);
-	}
-	
-	@Bean
-	public UserService getUserService() {
-		return new UserServiceImpl(
-			LoggerFactory.getLogger(UserServiceImpl.class),
-			daoConfig.getUserDao(),
-			getUsersActivationService(),
-			collectionService,
-			securityConfig.getPasswordEncoder()
 		);
 	}
 	

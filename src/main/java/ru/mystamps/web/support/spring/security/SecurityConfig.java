@@ -42,7 +42,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 // CheckStyle: ignore LineLength for next 1 line
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -50,6 +49,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
+import ru.mystamps.web.feature.account.UserService;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -133,7 +133,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(cspWriter);
 	}
 	
-	// Used in ServicesConfig.getUserService()
+	// Used in AccountConfig.Services.userService()
+	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -152,10 +153,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public AuthenticationProvider getAuthenticationProvider() {
+	public AuthenticationProvider getAuthenticationProvider(UserService userService) {
+		
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setPasswordEncoder(getPasswordEncoder());
-		provider.setUserDetailsService(getUserDetailsService());
+		provider.setUserDetailsService(new CustomUserDetailsService(userService));
 		provider.setMessageSource(messageSource);
 		return provider;
 	}
@@ -185,10 +187,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		bean.setUrlPatterns(Collections.singletonList(Url.LOGIN_PAGE));
 		
 		return bean;
-	}
-	
-	private UserDetailsService getUserDetailsService() {
-		return new CustomUserDetailsService(servicesConfig.getUserService());
 	}
 	
 }

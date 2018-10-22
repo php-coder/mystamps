@@ -28,10 +28,6 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.account.JdbcUserDao;
-import ru.mystamps.web.feature.account.JdbcUsersActivationDao;
-import ru.mystamps.web.feature.account.UserDao;
-import ru.mystamps.web.feature.account.UsersActivationDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
@@ -98,16 +94,6 @@ public class DaoConfig {
 			env.getRequiredProperty("series_solovyov.find_by_series_id"),
 			env.getRequiredProperty("series_solovyov.find_series_ids_by_number")
 		);
-	}
-	
-	@Bean
-	public UserDao getUserDao() {
-		return new JdbcUserDao(jdbcTemplate);
-	}
-	
-	@Bean
-	public UsersActivationDao getUsersActivationDao() {
-		return new JdbcUsersActivationDao(jdbcTemplate);
 	}
 	
 	@Bean
