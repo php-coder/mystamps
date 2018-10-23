@@ -55,6 +55,16 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.sale.AddSeriesSalesDbDto" />
+		<Or>
+			<Method name="getDate" />
+			<Method name="setDate" />
+			<Method name="getCreatedAt" />
+			<Method name="setCreatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<Class name="ru.mystamps.web.feature.series.AddSeriesDbDto" />
 		<Or>
 			<Method name="getCreatedAt" />

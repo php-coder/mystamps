@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.dao;
 
-import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto;
+import ru.mystamps.web.feature.series.sale.AddSeriesSalesDbDto;
 
 public interface SeriesSalesDao {
 	void add(AddSeriesSalesDbDto dto);

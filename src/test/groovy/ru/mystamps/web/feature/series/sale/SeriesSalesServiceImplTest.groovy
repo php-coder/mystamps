@@ -23,7 +23,6 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 import ru.mystamps.web.dao.SeriesSalesDao
-import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.tests.DateUtils
 

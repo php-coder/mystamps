@@ -28,7 +28,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesSalesDao;
-import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto;
+import ru.mystamps.web.feature.series.sale.AddSeriesSalesDbDto;
 
 @RequiredArgsConstructor
 public class JdbcSeriesSalesDao implements SeriesSalesDao {
