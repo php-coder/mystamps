@@ -32,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.dao.SeriesSalesDao;
 import ru.mystamps.web.dao.dto.AddSeriesSalesDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
