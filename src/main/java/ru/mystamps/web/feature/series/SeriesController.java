@@ -67,6 +67,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.feature.series.sale.AddSeriesSalesForm;
 import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.SeriesSalesService;
 import ru.mystamps.web.service.dto.DownloadResult;

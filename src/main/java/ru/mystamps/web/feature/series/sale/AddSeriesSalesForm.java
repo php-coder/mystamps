@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series;
+package ru.mystamps.web.feature.series.sale;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,7 +32,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.validation.ValidationRules;
 
