@@ -29,7 +29,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.dao.SeriesSalesDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
