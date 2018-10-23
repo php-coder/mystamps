@@ -32,6 +32,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.validation.ValidationRules;
 
