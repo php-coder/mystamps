@@ -28,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 // CheckStyle: ignore AvoidStarImportCheck for next 2 lines
 import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
 import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.series.sale.JdbcSeriesSalesDao;
-import ru.mystamps.web.feature.series.sale.SeriesSalesDao;
 
 @Configuration
 @PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
@@ -80,11 +78,6 @@ public class DaoConfig {
 	@Bean
 	public SeriesSalesImportDao getSeriesSalesImportDao() {
 		return new JdbcSeriesSalesImportDao(jdbcTemplate);
-	}
-	
-	@Bean
-	public SeriesSalesDao getSeriesSalesDao() {
-		return new JdbcSeriesSalesDao(jdbcTemplate);
 	}
 	
 	@Bean

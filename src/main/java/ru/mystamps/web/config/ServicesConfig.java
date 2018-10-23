@@ -46,8 +46,8 @@ import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-import ru.mystamps.web.feature.series.sale.SeriesSalesServiceImpl;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 
@@ -59,7 +59,8 @@ import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 	CountryConfig.Services.class,
 	ImageConfig.Services.class,
 	ParticipantConfig.Services.class,
-	SeriesConfig.Services.class
+	SeriesConfig.Services.class,
+	SeriesSalesConfig.Services.class
 })
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
@@ -75,6 +76,7 @@ public class ServicesConfig {
 	private final CountryService countryService;
 	private final ParticipantService participantService;
 	private final SeriesService seriesService;
+	private final SeriesSalesService seriesSalesService;
 	private final UserService userService;
 	
 	@Lazy
@@ -152,7 +154,7 @@ public class ServicesConfig {
 			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 			daoConfig.getSeriesImportDao(),
 			seriesService,
-			getSeriesSalesService(),
+			seriesSalesService,
 			getSeriesSalesImportService(),
 			getSeriesInfoExtractorService(),
 			participantService,
@@ -170,14 +172,6 @@ public class ServicesConfig {
 				countryService,
 				participantService
 			)
-		);
-	}
-	
-	@Bean
-	public SeriesSalesService getSeriesSalesService() {
-		return new SeriesSalesServiceImpl(
-			LoggerFactory.getLogger(SeriesSalesServiceImpl.class),
-			daoConfig.getSeriesSalesDao()
 		);
 	}
 	
