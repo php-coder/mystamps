@@ -47,6 +47,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
+import ru.mystamps.web.feature.series.sale.SeriesSalesServiceImpl;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 
