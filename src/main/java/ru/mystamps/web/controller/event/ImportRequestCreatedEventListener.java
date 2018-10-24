@@ -25,8 +25,8 @@ import org.springframework.context.ApplicationListener;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.service.DownloaderService;
-import ru.mystamps.web.service.SeriesImportService;
 import ru.mystamps.web.service.dto.DownloadResult;
 
 /**

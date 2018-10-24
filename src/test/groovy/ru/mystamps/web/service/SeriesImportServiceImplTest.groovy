@@ -29,6 +29,7 @@ import org.slf4j.helpers.NOPLogger
 import org.springframework.context.ApplicationEventPublisher
 
 import ru.mystamps.web.feature.series.importing.RequestImportForm
+import ru.mystamps.web.feature.series.importing.SeriesImportService
 import ru.mystamps.web.controller.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto

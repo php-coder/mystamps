@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series.importing;
 
 import java.util.List;
 
@@ -25,8 +25,6 @@ import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
-import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
-import ru.mystamps.web.feature.series.importing.RequestImportDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 
 public interface SeriesImportService {

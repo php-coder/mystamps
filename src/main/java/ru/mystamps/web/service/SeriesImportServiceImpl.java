@@ -52,6 +52,7 @@ import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.RequestImportDto;
+import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
