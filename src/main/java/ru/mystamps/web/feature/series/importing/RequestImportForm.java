@@ -26,7 +26,6 @@ import org.hibernate.validator.constraints.URL;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.service.dto.RequestImportDto;
 import ru.mystamps.web.support.beanvalidation.Group;
 
 import static ru.mystamps.web.validation.ValidationRules.IMPORT_REQUEST_URL_MAX_LENGTH;
