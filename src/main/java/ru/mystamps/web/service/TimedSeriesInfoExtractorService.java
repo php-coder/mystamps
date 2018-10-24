@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.dto.RawParsedDataDto;
+import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 
 @RequiredArgsConstructor

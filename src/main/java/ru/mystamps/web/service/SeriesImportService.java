@@ -25,9 +25,9 @@ import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
+import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.RequestImportDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
-import ru.mystamps.web.service.dto.RawParsedDataDto;
 
 public interface SeriesImportService {
 	Integer addRequest(RequestImportDto dto, Integer userId);

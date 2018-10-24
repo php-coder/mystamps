@@ -28,8 +28,8 @@ import org.springframework.context.ApplicationListener;
 
 import lombok.RequiredArgsConstructor;
 
+import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.service.SeriesImportService;
-import ru.mystamps.web.service.dto.RawParsedDataDto;
 import ru.mystamps.web.util.extractor.SeriesInfo;
 import ru.mystamps.web.util.extractor.SiteParser;
 

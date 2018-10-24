@@ -23,7 +23,7 @@ import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
 
-import ru.mystamps.web.service.dto.RawParsedDataDto
+import ru.mystamps.web.feature.series.importing.RawParsedDataDto
 import ru.mystamps.web.service.dto.SeriesExtractedInfo
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
