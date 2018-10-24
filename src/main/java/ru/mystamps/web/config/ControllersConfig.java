@@ -39,6 +39,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.importing.SeriesImportController;
 
 @Configuration
 @RequiredArgsConstructor
