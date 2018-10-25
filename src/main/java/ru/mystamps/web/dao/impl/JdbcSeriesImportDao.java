@@ -35,8 +35,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesImportDao;
-import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
+import ru.mystamps.web.feature.series.importing.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.ImportRequestInfo;

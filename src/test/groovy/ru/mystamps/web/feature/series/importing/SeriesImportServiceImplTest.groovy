@@ -33,7 +33,6 @@ import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto
 import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto
 import ru.mystamps.web.dao.SeriesImportDao
-import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto
 import ru.mystamps.web.feature.participant.AddParticipantDto
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.feature.series.AddSeriesDto
