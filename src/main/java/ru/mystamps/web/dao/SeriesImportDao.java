@@ -24,8 +24,8 @@ import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
-import ru.mystamps.web.dao.dto.ImportSeriesDbDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
+import ru.mystamps.web.feature.series.importing.ImportSeriesDbDto;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
