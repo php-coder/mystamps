@@ -15,17 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao;
+package ru.mystamps.web.feature.series.importing;
 
 import java.util.Date;
 import java.util.List;
-
-import ru.mystamps.web.feature.series.importing.AddSeriesParsedDataDbDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
-import ru.mystamps.web.feature.series.importing.ImportSeriesDbDto;
-import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
