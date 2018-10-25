@@ -21,9 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
-import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestDto;
+import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
 import ru.mystamps.web.feature.series.importing.ImportSeriesDbDto;
 
