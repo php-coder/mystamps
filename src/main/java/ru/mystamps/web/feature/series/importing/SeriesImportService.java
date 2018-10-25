@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing;
 
 import java.util.List;
 
-import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;

@@ -35,12 +35,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.SeriesImportDao;
-import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.feature.series.importing.AddSeriesParsedDataDbDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
 import ru.mystamps.web.feature.series.importing.ImportSeriesDbDto;
+import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 // it complains that "request_id" is present many times

@@ -40,6 +40,7 @@ import ru.mystamps.web.feature.series.SitemapInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
+import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
