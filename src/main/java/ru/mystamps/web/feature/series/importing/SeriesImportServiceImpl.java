@@ -40,7 +40,6 @@ import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.controller.event.ParsingFailed;
 import ru.mystamps.web.dao.SeriesImportDao;
 import ru.mystamps.web.dao.dto.AddSeriesParsedDataDbDto;
-import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.ImportRequestFullInfo;
 import ru.mystamps.web.dao.dto.ImportRequestInfo;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;

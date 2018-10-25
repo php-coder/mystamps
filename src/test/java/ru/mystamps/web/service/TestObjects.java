@@ -43,6 +43,7 @@ import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
+import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;

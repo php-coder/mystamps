@@ -46,7 +46,6 @@ import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.editor.ExpandCatalogNumbersEditor;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.dao.dto.ImportRequestDto;
 import ru.mystamps.web.dao.dto.SeriesParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
