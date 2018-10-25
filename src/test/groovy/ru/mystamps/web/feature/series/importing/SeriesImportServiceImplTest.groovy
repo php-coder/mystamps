@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.series.importing
 
 import static io.qala.datagen.RandomShortApi.english
 import static io.qala.datagen.RandomShortApi.nullOr
@@ -28,8 +28,6 @@ import org.slf4j.helpers.NOPLogger
 
 import org.springframework.context.ApplicationEventPublisher
 
-import ru.mystamps.web.feature.series.importing.RequestImportForm
-import ru.mystamps.web.feature.series.importing.SeriesImportService
 import ru.mystamps.web.controller.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.dao.dto.ImportRequestDto
@@ -46,8 +44,10 @@ import ru.mystamps.web.feature.series.AddSeriesDto
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto
 import ru.mystamps.web.feature.series.sale.SeriesSalesService
 import ru.mystamps.web.feature.series.SeriesService
-import ru.mystamps.web.feature.series.importing.RawParsedDataDto
 import ru.mystamps.web.service.dto.SeriesExtractedInfo
+import ru.mystamps.web.service.SeriesInfoExtractorService
+import ru.mystamps.web.service.SeriesSalesImportService
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 

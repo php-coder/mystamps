@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series.importing;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -50,11 +50,10 @@ import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
-import ru.mystamps.web.feature.series.importing.RequestImportDto;
-import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
+import ru.mystamps.web.service.SeriesInfoExtractorService;
+import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.service.dto.SeriesExtractedInfo;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
