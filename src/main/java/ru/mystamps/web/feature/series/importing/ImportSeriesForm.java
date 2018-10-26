@@ -31,7 +31,6 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Getter;
 import lombok.Setter;
 
-import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;

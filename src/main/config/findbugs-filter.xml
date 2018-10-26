@@ -106,6 +106,13 @@
 		</Or>
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.importing.ImportSeriesSalesForm" />
+		<Or>
+			<Method name="getDate" />
+			<Method name="setDate" />
+		</Or>
+	</Match>
+	<Match>
 		<!--
 			String[] allowedContentTypes: potentially caller can modify data after passing it to the
 			constructor. I don't want to fix it because all such places are known and under our
