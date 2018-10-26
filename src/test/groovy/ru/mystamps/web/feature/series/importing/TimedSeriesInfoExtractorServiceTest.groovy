@@ -23,7 +23,6 @@ import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
 
-import ru.mystamps.web.service.SeriesInfoExtractorService
 import ru.mystamps.web.service.TestObjects
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

@@ -35,7 +35,6 @@ import spock.lang.Unroll
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.participant.ParticipantService
-import ru.mystamps.web.service.SeriesInfoExtractorService
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.validation.ValidationRules
 

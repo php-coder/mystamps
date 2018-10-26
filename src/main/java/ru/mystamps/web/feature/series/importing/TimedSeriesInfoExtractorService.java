@@ -23,8 +23,6 @@ import org.slf4j.Logger;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.service.SeriesInfoExtractorService;
-
 @RequiredArgsConstructor
 public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorService {
 	
