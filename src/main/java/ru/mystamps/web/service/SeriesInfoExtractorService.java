@@ -18,7 +18,7 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
-import ru.mystamps.web.service.dto.SeriesExtractedInfo;
+import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
 
 public interface SeriesInfoExtractorService {
 	SeriesExtractedInfo extract(RawParsedDataDto data);
