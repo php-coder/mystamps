@@ -41,7 +41,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
-import ru.mystamps.web.controller.dto.ImportSellerForm;
 import ru.mystamps.web.controller.dto.ImportSeriesSalesForm;
 import ru.mystamps.web.controller.event.ImportRequestCreated;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
