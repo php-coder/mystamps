@@ -147,7 +147,7 @@
 		<!--
 			No one should assign a value returned from this method to primitive boolean type.
 		-->
-		<Class name="ru.mystamps.web.service.SeriesInfoExtractorServiceImpl" />
+		<Class name="ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl" />
 		<Method name="extractPerforated" />
 		<Bug pattern="NP_BOOLEAN_RETURN_NULL" />
 	</Match>

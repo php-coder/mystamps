@@ -15,14 +15,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.series.importing
 
 import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomValue.between
 
-import static ru.mystamps.web.service.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
+import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES
 
 import java.time.Year
@@ -35,6 +35,7 @@ import spock.lang.Unroll
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.participant.ParticipantService
+import ru.mystamps.web.service.SeriesInfoExtractorService
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.validation.ValidationRules
 

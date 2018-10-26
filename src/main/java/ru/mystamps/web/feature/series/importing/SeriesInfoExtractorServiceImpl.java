@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series.importing;
 
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -43,8 +43,7 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
-import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
-import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
+import ru.mystamps.web.service.SeriesInfoExtractorService;
 import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
