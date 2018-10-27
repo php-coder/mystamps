@@ -30,8 +30,6 @@ import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
-import ru.mystamps.web.feature.image.ImageDto;
-import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -302,20 +300,6 @@ public final class RowMappers {
 			rs.getString("hash"),
 			UserDetails.Role.valueOf(rs.getString("role")),
 			rs.getString("collection_slug")
-		);
-	}
-	
-	public static ImageDto forImageDto(ResultSet rs, int unused) throws SQLException {
-		return new ImageDto(
-			rs.getString("type"),
-			rs.getBytes("data")
-		);
-	}
-	
-	public static ImageInfoDto forImageInfoDto(ResultSet rs, int unused) throws SQLException {
-		return new ImageInfoDto(
-			rs.getInt("id"),
-			rs.getString("type")
 		);
 	}
 	
