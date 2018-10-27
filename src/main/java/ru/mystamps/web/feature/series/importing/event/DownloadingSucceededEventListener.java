@@ -30,8 +30,8 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
-import ru.mystamps.web.util.extractor.SeriesInfo;
-import ru.mystamps.web.util.extractor.SiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 
 /**
  * Listener of the @{link DownloadingSucceeded} event.

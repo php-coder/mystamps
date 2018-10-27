@@ -43,9 +43,9 @@ import lombok.RequiredArgsConstructor;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.feature.series.importing.event.*; // NOPMD: UnusedImports (false positive)
-import ru.mystamps.web.util.extractor.JsoupSiteParser;
-import ru.mystamps.web.util.extractor.SiteParser;
-import ru.mystamps.web.util.extractor.TimedSiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.TimedSiteParser;
 
 @Configuration
 @RequiredArgsConstructor

@@ -138,7 +138,7 @@
 		<!--
 			Looks like a false positive.
 		-->
-		<Class name="ru.mystamps.web.util.extractor.JsoupSiteParserTest" />
+		<Class name="ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParserTest" />
 		<Method name="canParseShouldRequireNonNullUrl" />
 		<Bug pattern="NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS" />
 	</Match>
