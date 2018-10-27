@@ -24,9 +24,6 @@ import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.account.UserDetails;
-import ru.mystamps.web.feature.account.UsersActivationDto;
-import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.collection.CollectionInfoDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
 import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
@@ -262,25 +259,6 @@ public final class RowMappers {
 			userAgent
 		);
 	}
-		
-	public static UsersActivationDto forUsersActivationDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new UsersActivationDto(
-			rs.getString("email"),
-			rs.getTimestamp("created_at")
-		);
-	}
-	
-	public static UsersActivationFullDto forUsersActivationFullDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new UsersActivationFullDto(
-			rs.getString("activation_key"),
-			rs.getString("email"),
-			rs.getTimestamp("created_at")
-		);
-	}
 	
 	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int unused)
 		throws SQLException {
@@ -289,17 +267,6 @@ public final class RowMappers {
 			rs.getInt("id"),
 			rs.getString("slug"),
 			rs.getString("name")
-		);
-	}
-	
-	public static UserDetails forUserDetails(ResultSet rs, int unused) throws SQLException {
-		return new UserDetails(
-			rs.getInt("id"),
-			rs.getString("login"),
-			rs.getString("name"),
-			rs.getString("hash"),
-			UserDetails.Role.valueOf(rs.getString("role")),
-			rs.getString("collection_slug")
 		);
 	}
 	

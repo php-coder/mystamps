@@ -33,8 +33,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.support.jdbc.RowMappers;
-
 @RequiredArgsConstructor
 public class JdbcUserDao implements UserDao {
 	

@@ -30,8 +30,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.support.jdbc.RowMappers;
-
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class JdbcUsersActivationDao implements UsersActivationDao {
