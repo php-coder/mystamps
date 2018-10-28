@@ -30,7 +30,7 @@ Create country with name in English and Russian
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 

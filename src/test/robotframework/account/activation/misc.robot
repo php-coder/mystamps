@@ -53,9 +53,8 @@ Password with allowed characters should be accepted
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        ${SITE_URL}/account/activate  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-	Go To                               ${SITE_URL}/account/activate
 
 After Test Suite
 	Close Browser

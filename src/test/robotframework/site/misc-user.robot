@@ -17,7 +17,7 @@ User should not see a link to a list of import requests
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/
