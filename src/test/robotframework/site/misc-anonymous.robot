@@ -28,9 +28,8 @@ Anonymous should not see a link for adding series
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        ${SITE_URL}/  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-	Go To                               ${SITE_URL}/
 
 After Test Suite
 	Close Browser
