@@ -20,9 +20,31 @@ Remove Element Attribute
 	[Documentation]     Removes an attribute with a specified name from the element identified by its id
 	[Arguments]         ${id}  ${attributeName}
 	${removeAttr}=      Catenate  SEPARATOR=
-	...                 return window.document.getElementById("
+	...                 return window.document.getElementById('
 	...                 ${id}
-	...                 ").removeAttribute("
+	...                 ').removeAttribute('
 	...                 ${attributeName}
-	...                 ");
+	...                 ');
 	Execute Javascript  ${removeAttr}
+
+Set Input Type
+	[Documentation]     Changes a type of the input element with a specified id
+	[Arguments]         ${id}  ${type}
+	${setType}=         Catenate  SEPARATOR=
+	...                 return window.document.getElementById('
+	...                 ${id}
+	...                 ').type = '
+	...                 ${type}
+	...                 ';
+	Execute Javascript  ${setType}
+
+Wait Until Element Text Is
+	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Element Text Should Be" keywords
+	[Arguments]         ${id}  ${text}
+	${elemHasText}=     Catenate  SEPARATOR=
+	...                 var el = window.document.getElementById('
+	...                 ${id}
+	...                 '); return el != null && el.textContent == '
+	...                 ${text}
+	...                 ';
+	Wait For Condition  ${elemHasText}
