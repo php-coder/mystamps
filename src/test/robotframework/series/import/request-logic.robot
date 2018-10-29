@@ -16,7 +16,6 @@ Import series from an external site (in English, use category, country and date 
 	Input Text                       id=url  ${importUrl}
 	Submit Form                      id=import-series-form
 	${requestLocation}=              Get Location
-	Should Match Regexp              ${requestLocation}  /series/import/request/\\d+
 	${category}=                     Get Selected List Label  id=category
 	${country}=                      Get Selected List Label  id=country
 	${quantity}=                     Get Value  id=quantity
@@ -32,7 +31,6 @@ Import series from an external site (in English, use category, country and date 
 	Input Text                       id=quantity  1
 	Submit Form                      id=create-series-form
 	${seriesLocation}=               Get Location
-	Should Match Regexp              ${seriesLocation}  /series/\\d+
 	Element Text Should Be           id=category_name  Prehistoric animals
 	Element Text Should Be           id=country_name   Italy
 	Element Text Should Be           id=issue_date     2000
@@ -56,8 +54,6 @@ Import series from an external site (in Russian, use description locator)
 	[Documentation]              Verify import from a page in Russian and shared locator
 	Input Text                   id=url  http://localhost:8080/series/2?lang=ru&str=тест
 	Submit Form                  id=import-series-form
-	${location}=                 Get Location
-	Should Match Regexp          ${location}  /series/import/request/\\d+
 	${category}=                 Get Selected List Label  id=category
 	${country}=                  Get Selected List Label  id=country
 	${quantity}=                 Get Value  id=quantity
@@ -86,14 +82,11 @@ Import series and series sale with existing seller from an external site
 	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
-	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
 	# sale info should be parsed and shown at the request page
 	List Selection Should Be    id=seller    Eicca Toppinen
 	Textfield Value Should Be   id=price     111
 	List Selection Should Be    id=currency  RUB
 	Submit Form                 id=create-series-form
-	${seriesLocation}=          Get Location
-	Should Match Regexp         ${seriesLocation}  /series/\\d+
 	# after importing a series, sale info should be shown at the info page
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
 	Element Text Should Be      id=series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB
@@ -110,15 +103,12 @@ Import series and series sale with a new seller from an external site
 	Input Text                  id=url  ${MOCK_SERVER}/series/import/request-logic/new-seller.html
 	Submit Form                 id=import-series-form
 	${requestLocation}=         Get Location
-	Should Match Regexp         ${requestLocation}  /series/import/request/\\d+
 	# seller info should be parsed and shown at the request page
 	${group}=                   Get Selected List Label  id=seller-group
 	Should Be Equal             ${group}  example.com
 	Textfield Value Should Be   id=seller-name  Lando Livianus
 	Urlfield Value Should Be    id=seller-url   http://example.com/lando-livianus
 	Submit Form                 id=create-series-form
-	${seriesLocation}=          Get Location
-	Should Match Regexp         ${seriesLocation}  /series/\\d+
 	# after importing a series, sale info should contain a new seller
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
 	Element Text Should Be      id=series-sale-1-info    ${currentDate} Lando Livianus was selling for 320.50 RUB
