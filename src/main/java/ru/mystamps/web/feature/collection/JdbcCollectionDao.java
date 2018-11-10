@@ -38,7 +38,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
@@ -91,7 +90,7 @@ public class JdbcCollectionDao implements CollectionDao {
 		return jdbcTemplate.query(
 			findLastCreatedCollectionsSql,
 			Collections.singletonMap("quantity", quantity),
-			RowMappers::forLinkEntityDto
+			ru.mystamps.web.support.jdbc.RowMappers::forLinkEntityDto
 		);
 	}
 	

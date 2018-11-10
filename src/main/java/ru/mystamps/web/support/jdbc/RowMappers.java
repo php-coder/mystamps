@@ -24,9 +24,6 @@ import java.util.Date;
 
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
 import ru.mystamps.web.dao.dto.*; // NOPMD: UnusedImports
-import ru.mystamps.web.feature.collection.CollectionInfoDto;
-import ru.mystamps.web.feature.collection.SeriesInCollectionDto;
-import ru.mystamps.web.feature.collection.SeriesInCollectionWithPriceDto;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -93,63 +90,6 @@ public final class RowMappers {
 			releaseYear,
 			quantity,
 			perforated
-		);
-	}
-	
-	// The only one difference from forSeriesInfoDto() is that
-	// SeriesInCollectionDto has numberOfStamps member.
-	public static SeriesInCollectionDto forSeriesInCollectionDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		Integer seriesId     = rs.getInt("id");
-		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
-		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
-		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
-		Integer quantity     = rs.getInt("quantity");
-		Boolean perforated   = rs.getBoolean("perforated");
-		Integer numberOfStamps = rs.getInt("number_of_stamps");
-		
-		LinkEntityDto category =
-			createLinkEntityDto(rs, "category_id", "category_slug", "category_name");
-		LinkEntityDto country =
-			createLinkEntityDto(rs, "country_id", "country_slug", "country_name");
-		
-		return new SeriesInCollectionDto(
-			seriesId,
-			category,
-			country,
-			releaseDay,
-			releaseMonth,
-			releaseYear,
-			quantity,
-			perforated,
-			numberOfStamps
-		);
-	}
-	
-	public static SeriesInCollectionWithPriceDto forSeriesInCollectionWithPriceDto(
-		ResultSet rs,
-		int unused)
-		throws SQLException {
-
-		Integer id             = rs.getInt("id");
-		Integer releaseYear    = JdbcUtils.getInteger(rs, "release_year");
-		Integer quantity       = rs.getInt("quantity");
-		Boolean perforated     = rs.getBoolean("perforated");
-		Integer numberOfStamps = rs.getInt("number_of_stamps");
-		String country         = rs.getString("country_name");
-		BigDecimal price       = rs.getBigDecimal("price");
-		Currency currency      = JdbcUtils.getCurrency(rs, "currency");
-		
-		return new SeriesInCollectionWithPriceDto(
-			id,
-			releaseYear,
-			quantity,
-			numberOfStamps,
-			perforated,
-			country,
-			price,
-			currency
 		);
 	}
 	
@@ -253,16 +193,6 @@ public final class RowMappers {
 			ip,
 			refererPage,
 			userAgent
-		);
-	}
-	
-	public static CollectionInfoDto forCollectionInfoDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new CollectionInfoDto(
-			rs.getInt("id"),
-			rs.getString("slug"),
-			rs.getString("name")
 		);
 	}
 	
