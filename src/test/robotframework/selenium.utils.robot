@@ -48,3 +48,14 @@ Wait Until Element Text Is
 	...                 ${text}
 	...                 ';
 	Wait For Condition  ${elemHasText}
+
+Wait Until Element Value Is
+	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Urlfield Value Should Be" keywords
+	[Arguments]         ${id}  ${text}
+	${elemHasValue}=    Catenate  SEPARATOR=
+	...                 var el = window.document.getElementById('
+	...                 ${id}
+	...                 '); return el != null && el.value == '
+	...                 ${text}
+	...                 ';
+	Wait For Condition  ${elemHasValue}
