@@ -34,8 +34,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.support.jdbc.RowMappers;
-
 // it complains that "request_id" is present many times
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor

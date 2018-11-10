@@ -32,10 +32,6 @@ import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
-import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
@@ -287,44 +283,8 @@ public final class RowMappers {
 		);
 	}
 	
-	public static ImportRequestDto forImportRequestDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new ImportRequestDto(
-			rs.getString("url"),
-			rs.getString("status"),
-			JdbcUtils.getInteger(rs, "series_id")
-		);
-	}
-	
 	public static Integer forInteger(ResultSet rs, int unused) throws SQLException {
 		return rs.getInt("id");
-	}
-	
-	public static SeriesParsedDataDto forSeriesParsedDataDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		LinkEntityDto category =
-			createLinkEntityDto(rs, "category_id", "category_slug", "category_name");
-		
-		LinkEntityDto country =
-			createLinkEntityDto(rs, "country_id", "country_slug", "country_name");
-		
-		String imageUrl = rs.getString("image_url");
-		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
-		Integer quantity = JdbcUtils.getInteger(rs, "quantity");
-		Boolean perforated = JdbcUtils.getBoolean(rs, "perforated");
-		String michelNumbers = rs.getString("michel_numbers");
-		
-		return new SeriesParsedDataDto(
-			category,
-			country,
-			imageUrl,
-			releaseYear,
-			quantity,
-			perforated,
-			michelNumbers
-		);
 	}
 	
 	public static SeriesSaleParsedDataDto forSeriesSaleParsedDataDto(ResultSet rs, int unused)
@@ -347,24 +307,7 @@ public final class RowMappers {
 		);
 	}
 	
-	public static ImportRequestInfo forImportRequestInfo(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new ImportRequestInfo(rs.getInt("id"), rs.getString("url"));
-	}
-	
-	public static ImportRequestFullInfo forImportRequestFullInfo(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new ImportRequestFullInfo(
-			rs.getInt("id"),
-			rs.getString("url"),
-			rs.getString("status"),
-			rs.getTimestamp("updated_at")
-		);
-	}
-	
-	private static LinkEntityDto createLinkEntityDto(
+	public static LinkEntityDto createLinkEntityDto(
 		ResultSet rs,
 		String idColumn,
 		String slugColumn,
