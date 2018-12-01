@@ -27,7 +27,7 @@ import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 
 /**
- * Listener of the @{link ParsingFailed} event.
+ * Listener of the {@link ParsingFailed} event.
  *
  * Changes request status to 'ParsingFailed'.
  */

@@ -34,7 +34,7 @@ import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 
 /**
- * Listener of the @{link DownloadingSucceeded} event.
+ * Listener of the {@link DownloadingSucceeded} event.
  *
  * TODO: javadoc
  */

@@ -30,9 +30,9 @@ import ru.mystamps.web.service.DownloaderService;
 import ru.mystamps.web.service.dto.DownloadResult;
 
 /**
- * Listener of the @{link ImportRequestCreated} event.
+ * Listener of the {@link ImportRequestCreated} event.
  *
- * Downloads a file, saves it to database and publish the @{link DownloadingSucceeded} event.
+ * Downloads a file, saves it to database and publish the {@link DownloadingSucceeded} event.
  * When downloading of a file fails, it changes request status to 'DownloadingFailed'.
  */
 @RequiredArgsConstructor
