@@ -17,24 +17,30 @@
  */
 package ru.mystamps.web.support.beanvalidation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.util.regex.Pattern;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import ru.mystamps.web.validation.ValidationRules;
 
-@Target({ METHOD, FIELD, ANNOTATION_TYPE })
-@Retention(RUNTIME)
-@Constraint(validatedBy = CatalogNumbersValidator.class)
-@Documented
-public @interface CatalogNumbers {
-	String message() default "{ru.mystamps.web.support.beanvalidation.CatalogNumbers.message}";
-	Class<?>[] groups() default {};
-	Class<? extends Payload>[] payload() default {};
+public class CatalogNumbersValidator implements ConstraintValidator<CatalogNumbers, String> {
+	
+	private static final Pattern CATALOG_NUMBERS =
+		Pattern.compile(ValidationRules.CATALOG_NUMBERS_REGEXP);
+	
+	@Override
+	public void initialize(CatalogNumbers catalogNumbers) {
+		// Intentionally empty: nothing to initialize
+	}
+	
+	@Override
+	public boolean isValid(String catalogNumbers, ConstraintValidatorContext ctx) {
+		if (catalogNumbers == null) {
+			return true;
+		}
+
+		return CATALOG_NUMBERS.matcher(catalogNumbers).matches();
+	}
+	
 }
