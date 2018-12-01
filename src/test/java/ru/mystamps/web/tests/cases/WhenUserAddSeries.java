@@ -181,7 +181,12 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
-	public void catalogNumbersShouldRejectInvalidValues(String numbers, String msg) {
+	public void catalogNumbersShouldRejectInvalidValues(
+		String numbers,
+		String msg,
+		String alnumMsg
+	) {
+		
 		page.showCatalogNumbers();
 		
 		page.fillMichelNumbers(numbers);
@@ -194,7 +199,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.submit();
 		
 		assertThat(page).field("michelNumbers").hasError(msg);
-		assertThat(page).field("scottNumbers").hasError(msg);
+		assertThat(page).field("scottNumbers").hasError(alnumMsg);
 		assertThat(page).field("yvertNumbers").hasError(msg);
 		assertThat(page).field("gibbonsNumbers").hasError(msg);
 		assertThat(page).field("solovyovNumbers").hasError(msg);
@@ -424,16 +429,19 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		String expectedErrorMessage =
 			tr("ru.mystamps.web.support.beanvalidation.CatalogNumbers.message");
 		
+		String expectedAlnumErrorMessage =
+			tr("ru.mystamps.web.support.beanvalidation.CatalogNumbers.Alnum.message");
+		
 		return new Object[][] {
-			{"t", expectedErrorMessage},
-			{"t,t", expectedErrorMessage},
-			{",1", expectedErrorMessage},
-			{"1,", expectedErrorMessage},
-			{"1,,2", expectedErrorMessage},
-			{"0", expectedErrorMessage},
-			{"05", expectedErrorMessage},
-			{"1,09", expectedErrorMessage},
-			{"10000", expectedErrorMessage}
+			{"t", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"t,t", expectedErrorMessage, expectedAlnumErrorMessage},
+			{",1", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"1,", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"1,,2", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"0", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"05", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"1,09", expectedErrorMessage, expectedAlnumErrorMessage},
+			{"10000", expectedErrorMessage, expectedAlnumErrorMessage}
 		};
 	}
 	

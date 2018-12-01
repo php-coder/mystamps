@@ -39,7 +39,7 @@ public final class ConstraintViolationUtils {
 	}
 	
 	/**
-	 * Bind error {@code msgTemplate} to whole form.
+	 * Bind error {@code msgTemplate} to a currently validated object.
 	 */
 	public static void recreate(ConstraintValidatorContext ctx, String msgTemplate) {
 		ctx.disableDefaultConstraintViolation();

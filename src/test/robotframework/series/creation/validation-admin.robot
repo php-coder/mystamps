@@ -128,7 +128,7 @@ Invalid Catalog Numbers Should Be Rejected
 	Input Text                     id=gibbonsNumbers  ${catalogNumbers}
 	Submit Form                    id=add-series-form
 	Element Text Should Be         id=michelNumbers.errors  Value must be comma delimited numbers
-	Element Text Should Be         id=scottNumbers.errors  Value must be comma delimited numbers
+	Element Text Should Be         id=scottNumbers.errors    Value must be a list of numbers separated by comma. Any number may end with a latin letter in lower case
 	Element Text Should Be         id=yvertNumbers.errors  Value must be comma delimited numbers
 	Element Text Should Be         id=gibbonsNumbers.errors  Value must be comma delimited numbers
 

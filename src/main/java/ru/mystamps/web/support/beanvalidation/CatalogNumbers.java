@@ -37,4 +37,6 @@ public @interface CatalogNumbers {
 	String message() default "{ru.mystamps.web.support.beanvalidation.CatalogNumbers.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
+	
+	boolean allowLetters() default false;
 }

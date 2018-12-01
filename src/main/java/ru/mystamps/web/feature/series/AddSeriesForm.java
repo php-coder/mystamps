@@ -113,7 +113,9 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	@Price
 	private BigDecimal michelPrice;
 	
-	@CatalogNumbers
+	// @todo #671 /series/add: add integration test to check that Scott numbers may contain letters
+	// @todo #671 /series/add: add integration test for Scott numbers error message
+	@CatalogNumbers(allowLetters = true)
 	private String scottNumbers;
 	
 	@Price

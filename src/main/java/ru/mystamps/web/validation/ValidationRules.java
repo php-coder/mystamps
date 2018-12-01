@@ -19,6 +19,8 @@ package ru.mystamps.web.validation;
 
 import ru.mystamps.web.Db;
 
+// it complains on "PMD.LongVariable"
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class ValidationRules {
 	
 	public static final int LOGIN_MIN_LENGTH = 2;
@@ -62,6 +64,8 @@ public final class ValidationRules {
 	public static final int MIN_RELEASE_YEAR     = 1840;
 	public static final int MAX_SERIES_COMMENT_LENGTH = Db.Series.COMMENT_LENGTH;
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
+	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
+	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
 	
 	public static final int PARTICIPANT_NAME_MIN_LENGTH = 3;
 	public static final int PARTICIPANT_NAME_MAX_LENGTH = Db.TransactionParticipant.NAME_LENGTH;

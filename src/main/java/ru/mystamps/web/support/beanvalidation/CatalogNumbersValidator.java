@@ -29,9 +29,14 @@ public class CatalogNumbersValidator implements ConstraintValidator<CatalogNumbe
 	private static final Pattern CATALOG_NUMBERS =
 		Pattern.compile(ValidationRules.CATALOG_NUMBERS_REGEXP);
 	
+	private static final Pattern CATALOG_NUMBERS_WITH_LETTERS =
+		Pattern.compile(ValidationRules.CATALOG_NUMBERS_AND_LETTERS_REGEXP);
+	
+	private boolean allowLetters;
+	
 	@Override
 	public void initialize(CatalogNumbers catalogNumbers) {
-		// Intentionally empty: nothing to initialize
+		allowLetters = catalogNumbers.allowLetters();
 	}
 	
 	@Override
@@ -39,8 +44,22 @@ public class CatalogNumbersValidator implements ConstraintValidator<CatalogNumbe
 		if (catalogNumbers == null) {
 			return true;
 		}
-
-		return CATALOG_NUMBERS.matcher(catalogNumbers).matches();
+		
+		if (!allowLetters) {
+			return CATALOG_NUMBERS.matcher(catalogNumbers).matches();
+		}
+		
+		boolean matches = CATALOG_NUMBERS_WITH_LETTERS.matcher(catalogNumbers).matches();
+		if (matches) {
+			return true;
+		}
+		
+		ConstraintViolationUtils.recreate(
+			ctx,
+			"{ru.mystamps.web.support.beanvalidation.CatalogNumbers.Alnum.message}"
+		);
+		
+		return false;
 	}
 	
 }
