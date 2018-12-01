@@ -27,7 +27,7 @@ import lombok.Getter;
  * It could occurs by 2 reasons:
  * - when we couldn't extract anything meaningful
  *   (elements specified by locators don't contain info)
- * - when we extract information but were unable to match it with database
+ * - when we extracted information but were unable to match it with database
  *   (for example, we extracted country named "Italy" but it doesn't exist in database)
  */
 @Getter
