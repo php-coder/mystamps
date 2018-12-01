@@ -5,4 +5,4 @@ participant SeriesImportService
 
 ParsingFailedEventListener->+SeriesImportService:
 SeriesImportService->-ParsingFailedEventListener:
-note right of SeriesImportService: ParsingSucceeded -> ParsingFailed
+note right of SeriesImportService: DownloadingSucceeded -> ParsingFailed
