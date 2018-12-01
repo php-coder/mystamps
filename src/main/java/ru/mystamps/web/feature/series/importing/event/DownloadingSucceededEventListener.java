@@ -36,7 +36,12 @@ import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 /**
  * Listener of the {@link DownloadingSucceeded} event.
  *
- * TODO: javadoc
+ * Gets the content of a downloaded file from database, finds appropriate site parser and passes
+ * the content to that parser. When it couldn't extract meaningful data from page content,
+ * the listener publishes {@link ParsingFailed} event. Otherwise the extracted information is saved
+ * to database and the listeners changes request status to 'ParsingSucceeded'.
+ *
+ * @see ParsingFailedEventListener
  */
 @RequiredArgsConstructor
 public class DownloadingSucceededEventListener

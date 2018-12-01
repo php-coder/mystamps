@@ -34,6 +34,8 @@ import ru.mystamps.web.service.dto.DownloadResult;
  *
  * Downloads a file, saves it to database and publish the {@link DownloadingSucceeded} event.
  * When downloading of a file fails, it changes request status to 'DownloadingFailed'.
+ *
+ * @see DownloadingSucceededEventListener
  */
 @RequiredArgsConstructor
 public class ImportRequestCreatedEventListener
