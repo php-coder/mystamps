@@ -46,11 +46,7 @@ import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.series.importing.SeriesImportService;
-import ru.mystamps.web.feature.series.importing.SeriesImportServiceImpl;
-import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
-import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl;
-import ru.mystamps.web.feature.series.importing.TimedSeriesInfoExtractorService;
+import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line
@@ -65,6 +61,7 @@ import ru.mystamps.web.service.*; // NOPMD: UnusedImports
 	ImageConfig.Services.class,
 	ParticipantConfig.Services.class,
 	SeriesConfig.Services.class,
+	SeriesImportConfig.Services.class,
 	SeriesSalesConfig.Services.class
 })
 @RequiredArgsConstructor
@@ -150,33 +147,6 @@ public class ServicesConfig {
 		return new ReportServiceImpl(
 			messageSource,
 			new Locale(env.getProperty("app.mail.admin.lang", "en"))
-		);
-	}
-	
-	@Bean
-	public SeriesImportService getSeriesImportService() {
-		return new SeriesImportServiceImpl(
-			LoggerFactory.getLogger(SeriesImportServiceImpl.class),
-			daoConfig.getSeriesImportDao(),
-			seriesService,
-			seriesSalesService,
-			getSeriesSalesImportService(),
-			getSeriesInfoExtractorService(),
-			participantService,
-			eventPublisher
-		);
-	}
-	
-	@Bean
-	public SeriesInfoExtractorService getSeriesInfoExtractorService() {
-		return new TimedSeriesInfoExtractorService(
-			LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
-			new SeriesInfoExtractorServiceImpl(
-				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
-				categoryService,
-				countryService,
-				participantService
-			)
 		);
 	}
 	

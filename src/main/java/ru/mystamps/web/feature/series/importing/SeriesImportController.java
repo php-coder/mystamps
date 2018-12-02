@@ -91,6 +91,7 @@ public class SeriesImportController {
 		
 		Integer requestId = seriesImportService.addRequest(form, currentUserId);
 		
+		// @todo #927 Extract logic to a separate method or add to SeriesImportService.addRequest()
 		ImportRequestCreated requestCreated =
 			new ImportRequestCreated(this, requestId, form.getUrl());
 		eventPublisher.publishEvent(requestCreated);

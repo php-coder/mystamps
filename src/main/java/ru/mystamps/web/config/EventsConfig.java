@@ -41,7 +41,8 @@ import org.springframework.core.env.PropertySource;
 
 import lombok.RequiredArgsConstructor;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
+// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.importing.event.*; // NOPMD: UnusedImports (false positive)
 import ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
@@ -53,6 +54,7 @@ public class EventsConfig {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(EventsConfig.class);
 	
+	private final SeriesImportService seriesImportService;
 	private final ServicesConfig servicesConfig;
 	private final ApplicationEventPublisher eventPublisher;
 	private final ConfigurableBeanFactory beanFactory;
@@ -78,7 +80,7 @@ public class EventsConfig {
 		return new ImportRequestCreatedEventListener(
 			LoggerFactory.getLogger(ImportRequestCreatedEventListener.class),
 			servicesConfig.getSeriesDownloaderService(),
-			servicesConfig.getSeriesImportService(),
+			seriesImportService,
 			eventPublisher
 		);
 	}
@@ -89,7 +91,7 @@ public class EventsConfig {
 		
 		return new DownloadingSucceededEventListener(
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
-			servicesConfig.getSeriesImportService(),
+			seriesImportService,
 			siteParsers.orElse(Collections.emptyList()),
 			eventPublisher
 		);
@@ -99,7 +101,7 @@ public class EventsConfig {
 	public ApplicationListener<ParsingFailed> getParsingFailedEventListener() {
 		return new ParsingFailedEventListener(
 			LoggerFactory.getLogger(ParsingFailedEventListener.class),
-			servicesConfig.getSeriesImportService()
+			seriesImportService
 		);
 	}
 	

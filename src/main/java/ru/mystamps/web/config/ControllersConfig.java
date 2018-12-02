@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -35,11 +34,9 @@ import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
-import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesConfig;
-import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.series.importing.SeriesImportController;
+import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 
 @Configuration
 @RequiredArgsConstructor
@@ -50,18 +47,16 @@ import ru.mystamps.web.feature.series.importing.SeriesImportController;
 	CountryConfig.Controllers.class,
 	ImageConfig.Controllers.class,
 	ParticipantConfig.Controllers.class,
-	SeriesConfig.Controllers.class
+	SeriesConfig.Controllers.class,
+	SeriesImportConfig.Controllers.class
 })
 public class ControllersConfig {
 	
 	private final ServicesConfig servicesConfig;
-	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
-	private final ParticipantService participantService;
 	private final SeriesService seriesService;
-	private final SeriesController seriesController;
 	
 	@Bean
 	public ErrorController getErrorController() {
@@ -78,17 +73,6 @@ public class ControllersConfig {
 		return new ReportController(
 			servicesConfig.getReportService(),
 			servicesConfig.getCronService()
-		);
-	}
-	
-	@Bean
-	public SeriesImportController getSeriesImportController() {
-		return new SeriesImportController(
-			servicesConfig.getSeriesImportService(),
-			servicesConfig.getSeriesSalesImportService(),
-			seriesController,
-			participantService,
-			eventPublisher
 		);
 	}
 	
