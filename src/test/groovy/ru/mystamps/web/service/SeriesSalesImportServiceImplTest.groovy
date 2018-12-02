@@ -23,7 +23,7 @@ import spock.lang.Specification
 
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto
-import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService
 import ru.mystamps.web.tests.Random
 

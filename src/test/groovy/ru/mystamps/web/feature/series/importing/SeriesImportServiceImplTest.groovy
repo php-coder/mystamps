@@ -30,7 +30,7 @@ import org.springframework.context.ApplicationEventPublisher
 
 import ru.mystamps.web.feature.series.importing.event.ParsingFailed
 import ru.mystamps.web.Db.SeriesImportRequestStatus
-import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto
 import ru.mystamps.web.feature.participant.AddParticipantDto
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.feature.series.AddSeriesDto

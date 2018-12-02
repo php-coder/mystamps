@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.series.importing.sale;
 
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
-import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
 
 public interface SeriesSalesImportService {
 	void saveParsedData(Integer requestId, SeriesSalesParsedDataDbDto seriesSalesParsedData);
