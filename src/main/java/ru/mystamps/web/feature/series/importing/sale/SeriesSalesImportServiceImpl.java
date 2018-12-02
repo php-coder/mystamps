@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series.importing.sale;
 
 import org.apache.commons.lang3.Validate;
 
@@ -24,11 +24,6 @@ import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 
 @RequiredArgsConstructor
 public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {

@@ -48,6 +48,7 @@ import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportServiceImpl;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 // CheckStyle: ignore AvoidStarImportCheck for next 1 line

@@ -15,16 +15,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.series.importing.sale
 
 import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
 
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
