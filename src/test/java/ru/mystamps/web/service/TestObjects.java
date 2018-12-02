@@ -49,6 +49,7 @@ import ru.mystamps.web.feature.series.importing.ImportSeriesSalesForm;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
 import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.tests.Random;
