@@ -288,6 +288,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'prehistoric animals 2010 congo' | _
 			'2010г'                          | _
 			'Палау 2010, 2 малых листа'      | _
+			'test,2010'                      | _
 	}
 	
 	@SuppressWarnings('UnnecessaryGetter')
@@ -353,7 +354,6 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'-2000'            | _
 			'test2000'         | _
 			'test-2000'        | _
-			'test,2000'        | _
 			'test/2000'        | _
 			'part of word2000' | _
 	}
