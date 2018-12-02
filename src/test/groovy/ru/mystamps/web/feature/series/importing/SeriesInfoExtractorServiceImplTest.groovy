@@ -287,6 +287,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'2010     brazil'                | _
 			'prehistoric animals 2010 congo' | _
 			'2010г'                          | _
+			'Палау 2010, 2 малых листа'      | _
 	}
 	
 	@SuppressWarnings('UnnecessaryGetter')

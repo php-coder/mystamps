@@ -202,7 +202,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining release year from a fragment: '{}'", fragment);
 		
-		String[] candidates = StringUtils.split(fragment);
+		String[] candidates = StringUtils.split(fragment, " \t,");
 		for (String candidate : candidates) {
 			Matcher matcher = RELEASE_YEAR_REGEXP.matcher(candidate);
 			if (!matcher.matches()) {
