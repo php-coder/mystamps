@@ -43,9 +43,9 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.event.ParsingFailed;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-import ru.mystamps.web.service.SeriesSalesImportService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 

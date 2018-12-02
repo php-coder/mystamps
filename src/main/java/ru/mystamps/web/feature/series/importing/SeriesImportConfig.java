@@ -31,8 +31,8 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-import ru.mystamps.web.service.SeriesSalesImportService;
 
 /**
  * Spring configuration that is required for importing series in an application.
