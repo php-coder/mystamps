@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.dao.impl;
+package ru.mystamps.web.feature.series.importing.sale;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.dao.dto.SeriesSaleParsedDataDto;
 import ru.mystamps.web.dao.dto.SeriesSalesParsedDataDbDto;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
