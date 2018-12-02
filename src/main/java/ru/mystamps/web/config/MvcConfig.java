@@ -50,6 +50,7 @@ import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.series.importing.event.EventsConfig;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 @Configuration

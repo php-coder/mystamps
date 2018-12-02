@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.feature.series.importing.event;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -41,9 +41,8 @@ import org.springframework.core.env.PropertySource;
 
 import lombok.RequiredArgsConstructor;
 
-// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
+import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
-import ru.mystamps.web.feature.series.importing.event.*; // NOPMD: UnusedImports (false positive)
 import ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.TimedSiteParser;
