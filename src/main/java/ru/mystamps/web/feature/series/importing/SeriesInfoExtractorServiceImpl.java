@@ -314,7 +314,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	public Integer extractSellerGroup(Integer id, String sellerUrl) {
 		// we need a group ony for a new seller (id == null)
-		if (id != null) {
+		if (id != null || StringUtils.isBlank(sellerUrl)) {
 			return null;
 		}
 		
