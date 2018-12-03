@@ -55,5 +55,6 @@
 	<include file="0.4/2018-07-05--series_import_parsed_data_michel_numbers_field.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-07-15--series_import_parsed_data_group_id_field.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-10-16--similar_series.xml" relativeToChangelogFile="true"/>
+	<include file="0.4/2018-12-03--site_parsers.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="create-site_parsers-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="site_parsers">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="name" type="VARCHAR(25)">
+				<constraints unique="true" uniqueConstraintName="uc_site_parsers_name" nullable="false" />
+			</column>
+		</createTable>
+		
+	</changeSet>
+	
+	<changeSet id="create-site_parser_params-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="site_parser_params">
+			<column name="parser_id" type="INTEGER">
+				<constraints references="site_parsers(id)" foreignKeyName="fk_site_parsers_parser_id" />
+			</column>
+			<column name="name" type="VARCHAR(25)">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addUniqueConstraint
+			tableName="site_parser_params"
+			columnNames="parser_id, name"
+			constraintName="uc_site_parser_params_parser_id_name" />
+		
+	</changeSet>
+	
+</databaseChangeLog>
