@@ -20,7 +20,7 @@ package ru.mystamps.web.service;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 
 /**
- *@author Maxim Shestakov
+ * @author Maxim Shestakov
  */
 public interface ReportService {
 	String prepareDailyStatistics(AdminDailyReport report);
