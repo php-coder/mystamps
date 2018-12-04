@@ -34,6 +34,8 @@
 		<exclude name="OnlyOneReturn" />
 		<exclude name="DataflowAnomalyAnalysis" />
 		<exclude name="UseConcurrentHashMap" />
+		<!-- conflicts with CommentDefaultAccessModifier -->
+		<exclude name="DefaultPackage" />
 	</rule>
 	
 	<rule ref="rulesets/java/comments.xml">

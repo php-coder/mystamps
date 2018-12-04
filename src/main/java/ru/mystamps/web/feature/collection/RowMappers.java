@@ -25,8 +25,6 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.support.jdbc.JdbcUtils;
 
-// this class only for this package
-@SuppressWarnings("PMD.DefaultPackage")
 final class RowMappers {
 	
 	private RowMappers() {

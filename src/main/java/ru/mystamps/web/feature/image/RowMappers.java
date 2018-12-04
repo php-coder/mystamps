@@ -20,8 +20,6 @@ package ru.mystamps.web.feature.image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// this class only for this package
-@SuppressWarnings("PMD.DefaultPackage")
 final class RowMappers {
 	
 	private RowMappers() {
