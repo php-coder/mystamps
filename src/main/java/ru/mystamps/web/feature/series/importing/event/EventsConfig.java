@@ -35,16 +35,22 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.PropertySource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
+import ru.mystamps.web.feature.series.importing.extractor.JdbcSiteParserDao;
 import ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserDao;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserServiceImpl;
 import ru.mystamps.web.feature.series.importing.extractor.TimedSiteParser;
 
 @Configuration
@@ -58,6 +64,7 @@ public class EventsConfig {
 	private final ApplicationEventPublisher eventPublisher;
 	private final ConfigurableBeanFactory beanFactory;
 	private final ConfigurableEnvironment env;
+	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@PostConstruct
 	public void init() {
@@ -75,6 +82,19 @@ public class EventsConfig {
 	}
 	
 	@Bean
+	public SiteParserService siteParserService(SiteParserDao siteParserDao) {
+		return new SiteParserServiceImpl(
+			LoggerFactory.getLogger(SiteParserServiceImpl.class),
+			siteParserDao
+		);
+	}
+	
+	@Bean
+	public SiteParserDao siteParserDao() {
+		return new JdbcSiteParserDao(jdbcTemplate);
+	}
+	
+	@Bean
 	public ApplicationListener<ImportRequestCreated> getImportRequestCreatedEventListener() {
 		return new ImportRequestCreatedEventListener(
 			LoggerFactory.getLogger(ImportRequestCreatedEventListener.class),
@@ -84,13 +104,20 @@ public class EventsConfig {
 		);
 	}
 	
+	// This bean has logic that modifies database. To ensure that all migrations have been applied
+	// we need this dependency. This annotation shouldn't be needed in Spring Boot 2.
+	// TODO: remove this annotation when migration will be completed
+	@DependsOn("liquibase")
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
-		Optional<List<SiteParser>> siteParsers) {
+		Optional<List<SiteParser>> siteParsers,
+		SiteParserService siteParserService
+		) {
 		
 		return new DownloadingSucceededEventListener(
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
 			seriesImportService,
+			siteParserService,
 			siteParsers.orElse(Collections.emptyList()),
 			eventPublisher
 		);

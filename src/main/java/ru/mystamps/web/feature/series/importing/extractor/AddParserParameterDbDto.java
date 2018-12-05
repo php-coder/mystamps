@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-public interface SiteParser {
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean setField(String name, String value);
-	
-	boolean isFullyInitialized();
-	
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean canParse(String url);
-	
-	SeriesInfo parse(String htmlPage);
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public class AddParserParameterDbDto {
+	private final Integer parserId;
+	private final String name;
+	private final String value;
 }

@@ -17,14 +17,33 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-public interface SiteParser {
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean setField(String name, String value);
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+class MapResultSetExtractor implements ResultSetExtractor<Map<String, String>> {
 	
-	boolean isFullyInitialized();
+	private final String keyFieldName;
+	private final String valueFieldName;
 	
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean canParse(String url);
+	@Override
+	public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {
+		Map<String, String> result = new HashMap<>();
+		
+		while (rs.next()) {
+			String key = rs.getString(keyFieldName);
+			String value = rs.getString(valueFieldName);
+			result.put(key, value);
+		}
+		
+		return result;
+	}
 	
-	SeriesInfo parse(String htmlPage);
 }

@@ -52,6 +52,7 @@ public class ApplicationContext {
 			new ClassPathResource("sql/series_dao_queries.properties"),
 			new ClassPathResource("sql/series_import_request_dao_queries.properties"),
 			new ClassPathResource("sql/series_sales_dao_queries.properties"),
+			new ClassPathResource("sql/site_parser_dao_queries.properties"),
 			new ClassPathResource("sql/suspicious_activity_dao_queries.properties"),
 			new ClassPathResource("sql/transaction_participants_dao_queries.properties")
 		);

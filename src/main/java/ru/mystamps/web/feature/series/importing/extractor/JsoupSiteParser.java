@@ -35,7 +35,12 @@ import lombok.Setter;
 // Getters/setters are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({
+	"PMD.GodClass",
+	"PMD.TooManyMethods",
+	// false positive because setField() modifies the fields
+	"PMD.ImmutableField"
+})
 public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
@@ -43,6 +48,7 @@ public class JsoupSiteParser implements SiteParser {
 	// - JsoupSiteParser.setField()
 	// - JsoupSiteParser.isFullyInitialized() (optionally)
 	// - JsoupSiteParserTest.describe()
+	// - SiteParserConfiguration
 	private String name;
 	private String matchedUrl;
 	private String categoryLocator;
@@ -54,6 +60,21 @@ public class JsoupSiteParser implements SiteParser {
 	private String sellerLocator;
 	private String priceLocator;
 	private String currencyValue;
+	
+	// TODO: remove because it's only needed for migrating configuration from file to database
+	public SiteParserConfiguration toConfiguration() {
+		SiteParserConfiguration cfg = new SiteParserConfiguration(name, matchedUrl);
+		cfg.setCategoryLocator(categoryLocator);
+		cfg.setCountryLocator(countryLocator);
+		cfg.setShortDescriptionLocator(shortDescriptionLocator);
+		cfg.setImageUrlLocator(imageUrlLocator);
+		cfg.setImageUrlAttribute(imageUrlAttribute);
+		cfg.setIssueDateLocator(issueDateLocator);
+		cfg.setSellerLocator(sellerLocator);
+		cfg.setPriceLocator(priceLocator);
+		cfg.setCurrencyValue(currencyValue);
+		return cfg;
+	}
 	
 	@Override
 	public boolean setField(String name, String value) {

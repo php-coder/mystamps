@@ -17,14 +17,9 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-public interface SiteParser {
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean setField(String name, String value);
-	
-	boolean isFullyInitialized();
-	
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean canParse(String url);
-	
-	SeriesInfo parse(String htmlPage);
+public interface SiteParserDao {
+	Integer addParser(String name);
+	void addParserParameter(AddParserParameterDbDto param);
+	Integer findParserIdForUrl(String url);
+	SiteParserConfiguration findConfigurationForParser(Integer parserId);
 }

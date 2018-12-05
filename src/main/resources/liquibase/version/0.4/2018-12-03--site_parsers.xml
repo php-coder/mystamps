@@ -39,4 +39,43 @@
 		
 	</changeSet>
 	
+	<changeSet id="add-localhost-by-ip-site-parser" author="php-coder" context="test-data">
+		
+		<insert tableName="site_parsers">
+			<column name="id" valueNumeric="1" />
+			<column name="name" value="localhost-by-ip" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueNumeric="1" />
+			<column name="name" value="matched-url" />
+			<column name="value" value="http://127.0.0.1:8080" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueNumeric="1" />
+			<column name="name" value="category-locator" />
+			<column name="value" value="#category_name" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueNumeric="1" />
+			<column name="name" value="country-locator" />
+			<column name="value" value="#country_name" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueNumeric="1" />
+			<column name="name" value="image-url-locator" />
+			<column name="value" value="#series-image-link-1" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueNumeric="1" />
+			<column name="name" value="issue-date-locator" />
+			<column name="value" value="#issue_date" />
+		</insert>
+		
+	</changeSet>
+	
 </databaseChangeLog>
