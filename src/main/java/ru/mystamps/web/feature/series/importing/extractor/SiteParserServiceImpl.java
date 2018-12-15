@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -78,6 +79,13 @@ public class SiteParserServiceImpl implements SiteParserService {
 		}
 		
 		return new JsoupSiteParser(cfg);
+	}
+	
+	// @todo #975 SiteParserServiceImpl.findParserNames(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public List<String> findParserNames() {
+		return siteParserDao.findParserNames();
 	}
 	
 }

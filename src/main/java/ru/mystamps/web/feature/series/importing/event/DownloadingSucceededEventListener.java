@@ -59,11 +59,10 @@ public class DownloadingSucceededEventListener
 	
 	@PostConstruct
 	public void init() {
-		// TODO: get all parser names from database
-		log.info("Registered site parsers: {}", siteParsers);
-		
 		// TODO: remove migration logic after finishing migration
 		siteParsers.forEach(this::migrateParser);
+		
+		log.info("Registered site parsers: {}", siteParserService.findParserNames());
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing.extractor;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
@@ -49,6 +50,9 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	
 	@Value("${site_parser.find_like_matched_url}")
 	private String findParserIdByMatchedUrl;
+	
+	@Value("${site_parser.find_names}")
+	private String findParserNamesSql;
 	
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${site_parser_param.find_all_with_parser_name}")
@@ -100,6 +104,15 @@ public class JdbcSiteParserDao implements SiteParserDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<String> findParserNames() {
+		return jdbcTemplate.queryForList(
+			findParserNamesSql,
+			Collections.emptyMap(),
+			String.class
+		);
 	}
 	
 	@Override
