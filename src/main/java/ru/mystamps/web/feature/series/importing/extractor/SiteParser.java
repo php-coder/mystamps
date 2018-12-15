@@ -23,8 +23,5 @@ public interface SiteParser {
 	
 	boolean isFullyInitialized();
 	
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean canParse(String url);
-	
 	SeriesInfo parse(String htmlPage);
 }

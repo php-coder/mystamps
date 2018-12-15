@@ -47,11 +47,6 @@ public class TimedSiteParser implements SiteParser {
 	}
 	
 	@Override
-	public boolean canParse(String url) {
-		return parser.canParse(url);
-	}
-	
-	@Override
 	public SeriesInfo parse(String htmlPage) {
 		// Why we don't use Spring's StopWatch?
 		// 1) because its javadoc says that it's not intended for production

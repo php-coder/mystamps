@@ -287,42 +287,6 @@ public class JsoupSiteParserTest {
 	}
 	
 	//
-	// Tests for canParse()
-	//
-	
-	@Test
-	public void canParseShouldRequireNonNullUrl() {
-		thrown.expect(IllegalStateException.class);
-		thrown.expectMessage("Site URL must be non-null");
-		
-		parser.canParse(null);
-	}
-	
-	@Test
-	public void canParseShouldRequireNonNullMatchedUrl() {
-		parser.setMatchedUrl(null);
-		
-		thrown.expect(IllegalStateException.class);
-		thrown.expectMessage("Matched URL must be set");
-		
-		parser.canParse(Random.url());
-	}
-	
-	@Test
-	public void canParseWithUnsupportedUrl() {
-		parser.setMatchedUrl("http://example.org");
-		
-		assertThat(parser.canParse("http://example.com/test/fail"), is(false));
-	}
-	
-	@Test
-	public void canParseWithSupportedUrl() {
-		parser.setMatchedUrl("http://example.org");
-		
-		assertThat(parser.canParse("http://example.org/test/success"), is(true));
-	}
-	
-	//
 	// Tests for parse()
 	//
 	

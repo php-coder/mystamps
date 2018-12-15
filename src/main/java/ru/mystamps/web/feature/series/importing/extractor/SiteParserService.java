@@ -19,5 +19,5 @@ package ru.mystamps.web.feature.series.importing.extractor;
 
 public interface SiteParserService {
 	void add(SiteParserConfiguration cfg);
-	SiteParserConfiguration findForUrl(String url);
+	SiteParser findForUrl(String url);
 }

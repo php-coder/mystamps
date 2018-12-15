@@ -1,12 +1,15 @@
 title Series import flow: stage 3 (parse page)
 
 participant DownloadingSucceededEventListener
+participant SiteParserService
 participant SeriesImportService
 participant SiteParser
 participant ExtractorService
 participant SeriesSalesImportService
 participant EventPublisher
 
+DownloadingSucceededEventListener->+SiteParserService: page URL
+SiteParserService->-DownloadingSucceededEventListener: site parser
 DownloadingSucceededEventListener->+SeriesImportService: requestId
 SeriesImportService->-DownloadingSucceededEventListener: content of downloaded page
 DownloadingSucceededEventListener->+SiteParser: content of downloaded page

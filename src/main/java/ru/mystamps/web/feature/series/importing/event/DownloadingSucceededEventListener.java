@@ -59,6 +59,7 @@ public class DownloadingSucceededEventListener
 	
 	@PostConstruct
 	public void init() {
+		// TODO: get all parser names from database
 		log.info("Registered site parsers: {}", siteParsers);
 		
 		// TODO: remove migration logic after finishing migration
@@ -71,26 +72,17 @@ public class DownloadingSucceededEventListener
 		
 		log.info("Request #{}: downloading succeeded", requestId);
 		
+		SiteParser parser = siteParserService.findForUrl(event.getUrl());
+		if (parser == null) {
+			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
+			log.error("Request #{}: could not find appropriate parser", requestId);
+			return;
+		}
+		
 		String content = seriesImportService.getDownloadedContent(requestId);
 		if (content == null) {
 			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
 			log.error("Request #{}: could not load a content from database", requestId);
-			return;
-		}
-		
-		// TODO: replace with siteParserService.findForUrl(url) and update diagrams
-		String url = event.getUrl();
-		SiteParser parser = null;
-		for (SiteParser candidate : siteParsers) {
-			if (candidate.canParse(url)) {
-				parser = candidate;
-				break;
-			}
-		}
-		
-		if (parser == null) {
-			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
-			log.error("Request #{}: could not find appropriate parser", requestId);
 			return;
 		}
 		

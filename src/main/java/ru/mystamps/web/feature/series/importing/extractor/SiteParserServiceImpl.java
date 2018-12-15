@@ -62,7 +62,7 @@ public class SiteParserServiceImpl implements SiteParserService {
 	// @todo #975 SiteParserServiceImpl.findForUrl(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
-	public SiteParserConfiguration findForUrl(String url) {
+	public SiteParser findForUrl(String url) {
 		Validate.isTrue(url != null, "Url must be non null");
 		
 		Integer parserId = siteParserDao.findParserIdForUrl(url);
@@ -71,7 +71,13 @@ public class SiteParserServiceImpl implements SiteParserService {
 			return null;
 		}
 		
-		return siteParserDao.findConfigurationForParser(parserId);
+		SiteParserConfiguration cfg = siteParserDao.findConfigurationForParser(parserId);
+		if (cfg == null) {
+			log.warn("Could not find configuration for parser #{}", parserId);
+			return null;
+		}
+		
+		return new JsoupSiteParser(cfg);
 	}
 	
 }

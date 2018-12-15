@@ -30,6 +30,7 @@ import org.jsoup.nodes.Element;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 // Getters/setters are being used in unit tests
@@ -41,6 +42,8 @@ import lombok.Setter;
 	// false positive because setField() modifies the fields
 	"PMD.ImmutableField"
 })
+// TODO: consider to remove no-arg constructor after removing code for creating parsers from file
+@NoArgsConstructor
 public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
@@ -48,6 +51,7 @@ public class JsoupSiteParser implements SiteParser {
 	// - JsoupSiteParser.setField()
 	// - JsoupSiteParser.isFullyInitialized() (optionally)
 	// - JsoupSiteParserTest.describe()
+	// - JsoupSiteParser constructor
 	// - SiteParserConfiguration
 	private String name;
 	private String matchedUrl;
@@ -60,6 +64,21 @@ public class JsoupSiteParser implements SiteParser {
 	private String sellerLocator;
 	private String priceLocator;
 	private String currencyValue;
+	
+	// @todo #975 SiteParserServiceImpl: add unit tests for constructor
+	public JsoupSiteParser(SiteParserConfiguration cfg) {
+		name                    = cfg.getName();
+		matchedUrl              = cfg.getMatchedUrl();
+		categoryLocator         = cfg.getCategoryLocator();
+		countryLocator          = cfg.getCountryLocator();
+		shortDescriptionLocator = cfg.getShortDescriptionLocator();
+		imageUrlLocator         = cfg.getImageUrlLocator();
+		imageUrlAttribute       = cfg.getImageUrlAttribute();
+		issueDateLocator        = cfg.getIssueDateLocator();
+		sellerLocator           = cfg.getSellerLocator();
+		priceLocator            = cfg.getPriceLocator();
+		currencyValue           = cfg.getCurrencyValue();
+	}
 	
 	// TODO: remove because it's only needed for migrating configuration from file to database
 	public SiteParserConfiguration toConfiguration() {
@@ -151,14 +170,6 @@ public class JsoupSiteParser implements SiteParser {
 				|| sellerLocator != null
 				|| priceLocator != null
 			);
-	}
-	
-	@Override
-	public boolean canParse(String url) {
-		Validate.validState(url != null, "Site URL must be non-null");
-		Validate.validState(matchedUrl != null, "Matched URL must be set");
-		
-		return url.startsWith(matchedUrl);
 	}
 	
 	/**
