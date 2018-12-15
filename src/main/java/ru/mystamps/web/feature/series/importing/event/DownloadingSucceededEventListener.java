@@ -35,6 +35,7 @@ import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserConfiguration;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
+import ru.mystamps.web.feature.series.importing.extractor.TimedSiteParser;
 
 /**
  * Listener of the {@link DownloadingSucceeded} event.
@@ -115,13 +116,23 @@ public class DownloadingSucceededEventListener
 		seriesImportService.saveParsedData(requestId, data);
 	}
 	
+	@SuppressWarnings({ "PMD.AvoidReassigningParameters", "checkstyle:parameterassignment" })
 	private void migrateParser(SiteParser parser) {
+		if (parser instanceof TimedSiteParser) {
+			parser = ((TimedSiteParser)parser).getOrigin();
+		}
+		
 		if (!(parser instanceof JsoupSiteParser)) {
-			log.warn("Could not migrate unknown (non-Jsoup based) parser: {}", parser);
+			log.warn(
+				"Could not migrate unknown (non-Jsoup based) parser: {}",
+				parser.getClass().getName()
+			);
 			return;
 		}
 		
-		SiteParserConfiguration cfg = ((JsoupSiteParser)parser).toConfiguration();
+		JsoupSiteParser jsoupParser = (JsoupSiteParser)parser;
+		
+		SiteParserConfiguration cfg = jsoupParser.toConfiguration();
 		String url = cfg.getMatchedUrl();
 		String name = cfg.getName();
 		if (siteParserService.findForUrl(url) != null) {
