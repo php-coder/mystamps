@@ -49,7 +49,7 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	private String addParserParameterSql;
 	
 	@Value("${site_parser.find_like_matched_url}")
-	private String findParserIdByMatchedUrl;
+	private String findParserIdByMatchedUrlSql;
 	
 	@Value("${site_parser.find_names}")
 	private String findParserNamesSql;
@@ -97,7 +97,7 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	public Integer findParserIdForUrl(String url) {
 		try {
 			return jdbcTemplate.queryForObject(
-				findParserIdByMatchedUrl,
+				findParserIdByMatchedUrlSql,
 				Collections.singletonMap("url", url),
 				Integer.class
 			);
