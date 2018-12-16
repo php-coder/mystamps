@@ -232,11 +232,7 @@ public class JsoupSiteParser implements SiteParser {
 	}
 	
 	protected String extractImageUrl(Element body) {
-		if (imageUrlLocator == null) {
-			return null;
-		}
-		
-		Element elem = body.selectFirst(imageUrlLocator);
+		Element elem = getFirstElement(body, imageUrlLocator);
 		if (elem == null) {
 			return null;
 		}
@@ -302,11 +298,7 @@ public class JsoupSiteParser implements SiteParser {
 	}
 	
 	protected String extractSellerUrl(Element body) {
-		if (sellerLocator == null) {
-			return null;
-		}
-		
-		Element elem = body.selectFirst(sellerLocator);
+		Element elem = getFirstElement(body, sellerLocator);
 		if (elem == null) {
 			return null;
 		}
@@ -335,12 +327,16 @@ public class JsoupSiteParser implements SiteParser {
 		return currencyValue;
 	}
 	
-	private static String getTextOfTheFirstElement(Element body, String locator) {
+	private static Element getFirstElement(Element body, String locator) {
 		if (locator == null) {
 			return null;
 		}
 		
-		Element elem = body.selectFirst(locator);
+		return body.selectFirst(locator);
+	}
+	
+	private static String getTextOfTheFirstElement(Element body, String locator) {
+		Element elem = getFirstElement(body, locator);
 		if (elem == null) {
 			return null;
 		}
