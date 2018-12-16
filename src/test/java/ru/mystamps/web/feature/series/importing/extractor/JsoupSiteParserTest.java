@@ -865,6 +865,23 @@ public class JsoupSiteParserTest {
 		assertThat(msg, price, equalTo(expectedValue));
 	}
 	
+	@Test
+	public void extractPriceShouldIgnoreTextOfChildrenTags() {
+		parser.setPriceLocator("#price");
+		
+		String expectedValue = String.valueOf(Random.price());
+		String html = String.format(
+			"<span id='price'>%s<span class='currency'>RUB</span</span>",
+			expectedValue
+		);
+		Element doc = createDocumentFromText(html);
+		
+		String price = parser.extractPrice(doc);
+		
+		String msg = String.format("couldn't extract price from '%s'", doc);
+		assertThat(msg, price, equalTo(expectedValue));
+	}
+	
 	//
 	// Tests for extractCurrency()
 	//

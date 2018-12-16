@@ -309,11 +309,12 @@ public class JsoupSiteParser implements SiteParser {
 	}
 	
 	protected String extractPrice(Element body) {
-		String price = getTextOfTheFirstElement(body, priceLocator);
-		if (price == null) {
+		Element elem = getFirstElement(body, priceLocator);
+		if (elem == null) {
 			return null;
 		}
 		
+		String price = elem.ownText();
 		LOG.debug("Extracted price: '{}'", price);
 		return price;
 	}
