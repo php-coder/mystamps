@@ -253,8 +253,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determining perforation from a fragment: '{}'", fragment);
 		
-		boolean withoutPerforation = StringUtils.containsIgnoreCase(fragment, "б/з")
-			|| StringUtils.containsIgnoreCase(fragment, "беззубцовые");
+		boolean withoutPerforation =
+			StringUtils.containsIgnoreCase(fragment, "б/з")
+			|| StringUtils.containsIgnoreCase(fragment, "беззубцовые")
+			|| StringUtils.containsIgnoreCase(fragment, "б/перфорации");
 		if (withoutPerforation) {
 			log.debug("Perforation is false");
 			return Boolean.FALSE;
