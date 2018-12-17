@@ -80,21 +80,6 @@ public class JsoupSiteParser implements SiteParser {
 		currencyValue           = cfg.getCurrencyValue();
 	}
 	
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	public SiteParserConfiguration toConfiguration() {
-		SiteParserConfiguration cfg = new SiteParserConfiguration(name, matchedUrl);
-		cfg.setCategoryLocator(categoryLocator);
-		cfg.setCountryLocator(countryLocator);
-		cfg.setShortDescriptionLocator(shortDescriptionLocator);
-		cfg.setImageUrlLocator(imageUrlLocator);
-		cfg.setImageUrlAttribute(imageUrlAttribute);
-		cfg.setIssueDateLocator(issueDateLocator);
-		cfg.setSellerLocator(sellerLocator);
-		cfg.setPriceLocator(priceLocator);
-		cfg.setCurrencyValue(currencyValue);
-		return cfg;
-	}
-	
 	@Override
 	public boolean setField(String name, String value) {
 		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-blank");

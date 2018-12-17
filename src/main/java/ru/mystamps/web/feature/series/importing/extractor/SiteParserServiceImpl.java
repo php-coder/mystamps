@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.series.importing.extractor;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.Validate;
 
@@ -33,32 +32,6 @@ public class SiteParserServiceImpl implements SiteParserService {
 	
 	private final Logger log;
 	private final SiteParserDao siteParserDao;
-	
-	// TODO: remove after finishing migration
-	@Override
-	@Transactional
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	public void add(SiteParserConfiguration cfg) {
-		Validate.isTrue(cfg != null, "Site parser configuration must be non null");
-		
-		Integer id = siteParserDao.addParser(cfg.getName());
-		log.info("Site parser #{} ({}) has been created", id, cfg.getName());
-		
-		for (Map.Entry<String, String> param : cfg.toMap().entrySet()) {
-			String name  = param.getKey();
-			if ("name".equals(name)) {
-				// "name" belongs to the parser itself and has been already saved above
-				continue;
-			}
-
-			String value = param.getValue();
-			AddParserParameterDbDto paramDto = new AddParserParameterDbDto(id, name, value);
-			
-			siteParserDao.addParserParameter(paramDto);
-			
-			log.info("Site parser #{}: parameter '{}' has been added", id, name);
-		}
-	}
 	
 	// @todo #975 SiteParserServiceImpl.findForUrl(): add unit tests
 	@Override

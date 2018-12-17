@@ -20,7 +20,6 @@ package ru.mystamps.web.feature.series.importing.extractor;
 import java.util.List;
 
 public interface SiteParserService {
-	void add(SiteParserConfiguration cfg);
 	SiteParser findForUrl(String url);
 	List<String> findParserNames();
 }

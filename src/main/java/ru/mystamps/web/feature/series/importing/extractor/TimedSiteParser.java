@@ -31,11 +31,6 @@ public class TimedSiteParser implements SiteParser {
 	private final Logger log;
 	private final SiteParser parser;
 	
-	// TODO: remove after finishing migration of the site parsers
-	public SiteParser getOrigin() {
-		return parser;
-	}
-	
 	@Override
 	public boolean setField(String name, String value) {
 		return parser.setField(name, value);

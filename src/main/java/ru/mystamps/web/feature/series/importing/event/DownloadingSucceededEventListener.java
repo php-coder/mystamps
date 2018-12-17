@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -30,12 +28,9 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
-import ru.mystamps.web.feature.series.importing.extractor.JsoupSiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
-import ru.mystamps.web.feature.series.importing.extractor.SiteParserConfiguration;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
-import ru.mystamps.web.feature.series.importing.extractor.TimedSiteParser;
 
 /**
  * Listener of the {@link DownloadingSucceeded} event.
@@ -54,14 +49,10 @@ public class DownloadingSucceededEventListener
 	private final Logger log;
 	private final SeriesImportService seriesImportService;
 	private final SiteParserService siteParserService;
-	private final List<SiteParser> siteParsers;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@PostConstruct
 	public void init() {
-		// TODO: remove migration logic after finishing migration
-		siteParsers.forEach(this::migrateParser);
-		
 		log.info("Registered site parsers: {}", siteParserService.findParserNames());
 	}
 	
@@ -105,45 +96,6 @@ public class DownloadingSucceededEventListener
 			info.getCurrency()
 		);
 		seriesImportService.saveParsedData(requestId, data);
-	}
-	
-	@SuppressWarnings({ "PMD.AvoidReassigningParameters", "checkstyle:parameterassignment" })
-	private void migrateParser(SiteParser parser) {
-		if (parser instanceof TimedSiteParser) {
-			parser = ((TimedSiteParser)parser).getOrigin();
-		}
-		
-		if (!(parser instanceof JsoupSiteParser)) {
-			log.warn(
-				"Could not migrate unknown (non-Jsoup based) parser: {}",
-				parser.getClass().getName()
-			);
-			return;
-		}
-		
-		JsoupSiteParser jsoupParser = (JsoupSiteParser)parser;
-		
-		SiteParserConfiguration cfg = jsoupParser.toConfiguration();
-		String url = cfg.getMatchedUrl();
-		String name = cfg.getName();
-		if (siteParserService.findForUrl(url) != null) {
-			log.warn(
-				"Parser '{}': already exist in database and "
-				+ "can be removed from application*.properties file",
-				name
-			);
-			return;
-		}
-		
-		log.info("Parser '{}': migrating to database", name);
-		
-		siteParserService.add(cfg);
-		
-		log.warn(
-			"Parser '{}': successfully migrated and "
-			+ "can be removed from application*.properties file",
-			name
-		);
 	}
 	
 }

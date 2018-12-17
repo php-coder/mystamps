@@ -18,19 +18,13 @@
 package ru.mystamps.web.feature.series.importing.extractor;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.Validate;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,12 +36,6 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
-	@Value("${site_parser.create}")
-	private String addParserSql;
-	
-	@Value("${site_parser_param.create}")
-	private String addParserParameterSql;
-	
 	@Value("${site_parser.find_like_matched_url}")
 	private String findParserIdByMatchedUrlSql;
 	
@@ -57,41 +45,6 @@ public class JdbcSiteParserDao implements SiteParserDao {
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${site_parser_param.find_all_with_parser_name}")
 	private String findParametersWithParserNameSql;
-	
-	@Override
-	public Integer addParser(String name) {
-		KeyHolder holder = new GeneratedKeyHolder();
-		
-		int affected = jdbcTemplate.update(
-			addParserSql,
-			new MapSqlParameterSource("name", name),
-			holder
-		);
-		
-		Validate.validState(
-			affected == 1,
-			"Unexpected number of affected rows after creation of site parser: %d",
-			affected
-		);
-		
-		return holder.getKey().intValue();
-	}
-
-	@Override
-	public void addParserParameter(AddParserParameterDbDto param) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("parser_id", param.getParserId());
-		params.put("name", param.getName());
-		params.put("value", param.getValue());
-		
-		int affected = jdbcTemplate.update(addParserParameterSql, params);
-		
-		Validate.validState(
-			affected == 1,
-			"Unexpected number of affected rows after adding parser parameter: %d",
-			affected
-		);
-	}
 	
 	@Override
 	public Integer findParserIdForUrl(String url) {

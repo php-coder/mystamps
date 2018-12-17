@@ -20,8 +20,6 @@ package ru.mystamps.web.feature.series.importing.extractor;
 import java.util.List;
 
 public interface SiteParserDao {
-	Integer addParser(String name);
-	void addParserParameter(AddParserParameterDbDto param);
 	Integer findParserIdForUrl(String url);
 	List<String> findParserNames();
 	SiteParserConfiguration findConfigurationForParser(Integer parserId);

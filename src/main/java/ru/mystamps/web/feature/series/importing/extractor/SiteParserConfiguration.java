@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -62,26 +61,4 @@ public class SiteParserConfiguration {
 		currencyValue           = params.get("currency-value");
 	}
 	
-	/* default */ Map<String, String> toMap() {
-		Map<String, String> map = new HashMap<>();
-		addIfNotNull(map, "name", name);
-		addIfNotNull(map, "matched-url", matchedUrl);
-		addIfNotNull(map, "category-locator", categoryLocator);
-		addIfNotNull(map, "country-locator", countryLocator);
-		addIfNotNull(map, "short-description-locator", shortDescriptionLocator);
-		addIfNotNull(map, "image-url-locator", imageUrlLocator);
-		addIfNotNull(map, "image-url-attribute", imageUrlAttribute);
-		addIfNotNull(map, "issue-date-locator", issueDateLocator);
-		addIfNotNull(map, "seller-locator", sellerLocator);
-		addIfNotNull(map, "price-locator", priceLocator);
-		addIfNotNull(map, "currency-value", currencyValue);
-		return map;
-	}
-
-	private static void addIfNotNull(Map<String, String> map, String name, String value) {
-		if (value != null) {
-			map.put(name, value);
-		}
-	}
-
 }

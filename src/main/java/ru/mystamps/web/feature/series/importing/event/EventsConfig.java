@@ -17,11 +17,8 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -35,7 +32,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.PropertySource;
@@ -104,13 +100,8 @@ public class EventsConfig {
 		);
 	}
 	
-	// This bean has logic that modifies database. To ensure that all migrations have been applied
-	// we need this dependency. This annotation shouldn't be needed in Spring Boot 2.
-	// TODO: remove this annotation when migration will be completed
-	@DependsOn("liquibase")
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
-		Optional<List<SiteParser>> siteParsers,
 		SiteParserService siteParserService
 		) {
 		
@@ -118,7 +109,6 @@ public class EventsConfig {
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
 			seriesImportService,
 			siteParserService,
-			siteParsers.orElse(Collections.emptyList()),
 			eventPublisher
 		);
 	}
