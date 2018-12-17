@@ -287,11 +287,6 @@ public final class Random {
 		return sample(locators);
 	}
 	
-	public static String tagAttributeName() {
-		List<String> attributes = Arrays.asList("href", "src", "data-dst");
-		return sample(attributes);
-	}
-	
 	private static Set<String> catalogNumbers() {
 		final int minSize = 1;
 		final int maxSize = 7;

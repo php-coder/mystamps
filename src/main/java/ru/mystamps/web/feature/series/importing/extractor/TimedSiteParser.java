@@ -32,16 +32,6 @@ public class TimedSiteParser implements SiteParser {
 	private final SiteParser parser;
 	
 	@Override
-	public boolean setField(String name, String value) {
-		return parser.setField(name, value);
-	}
-	
-	@Override
-	public boolean isFullyInitialized() {
-		return parser.isFullyInitialized();
-	}
-	
-	@Override
 	public SeriesInfo parse(String htmlPage) {
 		// Why we don't use Spring's StopWatch?
 		// 1) because its javadoc says that it's not intended for production

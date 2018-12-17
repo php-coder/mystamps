@@ -18,10 +18,5 @@
 package ru.mystamps.web.feature.series.importing.extractor;
 
 public interface SiteParser {
-	// TODO: remove because it's only needed for migrating configuration from file to database
-	boolean setField(String name, String value);
-	
-	boolean isFullyInitialized();
-	
 	SeriesInfo parse(String htmlPage);
 }

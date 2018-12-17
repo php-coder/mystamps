@@ -30,29 +30,23 @@ import org.jsoup.nodes.Element;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-// Getters/setters are being used in unit tests
+// Getters/setters/no-arg constructor are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @SuppressWarnings({
 	"PMD.GodClass",
 	"PMD.TooManyMethods",
-	// false positive because setField() modifies the fields
+	// the fields are effectively final but I keep them non-final to simplify testing
 	"PMD.ImmutableField"
 })
-// TODO: consider to remove no-arg constructor after removing code for creating parsers from file
-@NoArgsConstructor
 public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
-	// When you're adding a new field don't forget to also update:
-	// - JsoupSiteParser.setField()
-	// - JsoupSiteParser.isFullyInitialized() (optionally)
-	// - JsoupSiteParserTest.describe()
-	// - JsoupSiteParser constructor
-	// - SiteParserConfiguration
+	// When you add a new field, don't forget to also update SiteParserConfiguration.
 	private String name;
 	private String matchedUrl;
 	private String categoryLocator;
@@ -78,83 +72,6 @@ public class JsoupSiteParser implements SiteParser {
 		sellerLocator           = cfg.getSellerLocator();
 		priceLocator            = cfg.getPriceLocator();
 		currencyValue           = cfg.getCurrencyValue();
-	}
-	
-	@Override
-	public boolean setField(String name, String value) {
-		Validate.validState(StringUtils.isNotBlank(name), "Field name must be non-blank");
-		Validate.validState(StringUtils.isNotBlank(value), "Field value must be non-blank");
-		
-		boolean valid = true;
-		
-		switch (name) {
-			
-			case "name":
-				setName(value);
-				break;
-			
-			case "matched-url":
-				setMatchedUrl(value);
-				break;
-			
-			case "category-locator":
-				setCategoryLocator(value);
-				break;
-			
-			case "country-locator":
-				setCountryLocator(value);
-				break;
-			
-			case "short-description-locator":
-				setShortDescriptionLocator(value);
-				break;
-			
-			case "image-url-locator":
-				setImageUrlLocator(value);
-				break;
-			
-			case "image-url-attribute":
-				setImageUrlAttribute(value);
-				break;
-			
-			case "issue-date-locator":
-				setIssueDateLocator(value);
-				break;
-			
-			case "seller-locator":
-				setSellerLocator(value);
-				break;
-			
-			case "price-locator":
-				setPriceLocator(value);
-				break;
-			
-			case "currency-value":
-				// @todo #695 Series import: validate app.site-parser[x].currency-value
-				setCurrencyValue(value);
-				break;
-			
-			default:
-				valid = false;
-				break;
-		}
-		
-		return valid;
-	}
-	
-	@Override
-	public boolean isFullyInitialized() {
-		return name != null
-			&& matchedUrl != null
-			&& (
-				categoryLocator != null
-				|| countryLocator != null
-				|| shortDescriptionLocator != null
-				|| imageUrlLocator != null
-				|| issueDateLocator != null
-				|| sellerLocator != null
-				|| priceLocator != null
-			);
 	}
 	
 	/**
