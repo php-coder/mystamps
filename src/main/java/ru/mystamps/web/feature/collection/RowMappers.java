@@ -22,7 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 final class RowMappers {
@@ -40,32 +39,18 @@ final class RowMappers {
 		);
 	}
 	
-	// The only one difference from forSeriesInfoDto() is that
-	// SeriesInCollectionDto has numberOfStamps member.
 	/* default */ static SeriesInCollectionDto forSeriesInCollectionDto(ResultSet rs, int unused)
 		throws SQLException {
 		
 		Integer seriesId     = rs.getInt("id");
+		String category      = rs.getString("category");
+		String country       = rs.getString("country");
 		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
 		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
 		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
 		Integer quantity     = rs.getInt("quantity");
 		Boolean perforated   = rs.getBoolean("perforated");
 		Integer numberOfStamps = rs.getInt("number_of_stamps");
-		
-		LinkEntityDto category = ru.mystamps.web.support.jdbc.RowMappers.createLinkEntityDto(
-			rs,
-			"category_id",
-			"category_slug",
-			"category_name"
-		);
-		
-		LinkEntityDto country = ru.mystamps.web.support.jdbc.RowMappers.createLinkEntityDto(
-			rs,
-			"country_id",
-			"country_slug",
-			"country_name"
-		);
 		
 		return new SeriesInCollectionDto(
 			seriesId,
@@ -74,8 +59,8 @@ final class RowMappers {
 			releaseDay,
 			releaseMonth,
 			releaseYear,
-			quantity,
 			perforated,
+			quantity,
 			numberOfStamps
 		);
 	}

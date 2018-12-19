@@ -18,27 +18,20 @@
 package ru.mystamps.web.feature.collection;
 
 import lombok.Getter;
-
-import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-public class SeriesInCollectionDto extends SeriesInfoDto {
-	// SeriesInfoDto.quantity holds number of stamps in a series, while user may
+@RequiredArgsConstructor
+public class SeriesInCollectionDto {
+	private final Integer id;
+	private final String category;
+	private final String country;
+	private final Integer releaseDay;
+	private final Integer releaseMonth;
+	private final Integer releaseYear;
+	private final Boolean perforated;
+	private final Integer quantity;
+	// quantity holds number of stamps in a series, while user may
 	// have less stamps in his collection
 	private final Integer numberOfStamps;
-	
-	@SuppressWarnings("checkstyle:parameternumber")
-	public SeriesInCollectionDto(
-			Integer id,
-			LinkEntityDto category,
-			LinkEntityDto country,
-			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
-			Integer quantity,
-			Boolean perforated,
-			Integer numberOfStamps) {
-		super(id, category, country, releaseDay, releaseMonth, releaseYear, quantity, perforated);
-		this.numberOfStamps = numberOfStamps;
-	}
-	
 }
