@@ -39,6 +39,11 @@ function initPage(suggestCountryUrl) {
 				suggestCountryLink.addClass('hidden');
 				chooseCountryBySlug(slug);
 			});
+			
+			var countryName = getCountryNameBySlug(slug);
+			var newText = suggestCountryLink.text().replace('%name%', countryName);
+			suggestCountryLink.text(newText);
+			
 			suggestCountryLink.removeClass('hidden');
 		});
 	}
@@ -48,4 +53,10 @@ function chooseCountryBySlug(slug) {
 	var countrySelectBox = $('#country').selectize();
 	var selectize = countrySelectBox[0].selectize;
 	selectize.setValue(slug);
+}
+
+function getCountryNameBySlug(slug) {
+	var countrySelectBox = $('#country').selectize();
+	var selectize = countrySelectBox[0].selectize;
+	return selectize.options[slug].text;
 }
