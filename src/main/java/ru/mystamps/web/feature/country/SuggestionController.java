@@ -27,7 +27,7 @@ import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 
 @RestController
 @RequiredArgsConstructor
-public class SuggestionController {
+class SuggestionController {
 
 	private final CountryService countryService;
 
