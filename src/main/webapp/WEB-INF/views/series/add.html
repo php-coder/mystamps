@@ -171,7 +171,13 @@
 							</div>
 							
 							<small togglz:active="SHOW_SUGGESTION_LINK">
-								<a tabindex="-1" th:text="#{t_guess_country}" href="javascript:$('#js-guess-country-link').hide(); chooseCountryBySlug('russia'); void(0)" th:href="'javascript:void(0)'" id="js-guess-country-link" class="link-vcenter" th:classappend="hidden">Guess a country</a>
+								<a tabindex="-1"
+									th:text="#{t_guess_country}"
+									href="javascript:$('#js-suggest-country-link').hide(); chooseCountryBySlug('russia'); void(0)"
+									th:href="'javascript:void(0)'"
+									id="js-suggest-country-link"
+									class="link-vcenter"
+									th:classappend="hidden">Guess a country</a>
 							</small>
 						</div>
 						

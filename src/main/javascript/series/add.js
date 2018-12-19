@@ -34,12 +34,12 @@ function initPage(suggestCountryUrl) {
 				return;
 			}
 
-			var guessCountryLink = $('#js-guess-country-link');
-			guessCountryLink.click(function chooseSuggestedCountry() {
-				guessCountryLink.addClass('hidden');
+			var suggestCountryLink = $('#js-suggest-country-link');
+			suggestCountryLink.click(function chooseSuggestedCountry() {
+				suggestCountryLink.addClass('hidden');
 				chooseCountryBySlug(slug);
 			});
-			guessCountryLink.removeClass('hidden');
+			suggestCountryLink.removeClass('hidden');
 		});
 	}
 }
