@@ -167,6 +167,10 @@ public final class Random {
 		return name;
 	}
 	
+	public static String countrySlug() {
+		return SlugUtils.slugify(countryName());
+	}
+	
 	public static String participantName() {
 		return between(
 			ValidationRules.PARTICIPANT_NAME_MIN_LENGTH,

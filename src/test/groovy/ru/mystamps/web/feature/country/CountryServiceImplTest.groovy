@@ -449,8 +449,8 @@ class CountryServiceImplTest extends Specification {
 	
 	def 'suggestCountryForUser() should return country of the last created series'() {
 		given:
-			Integer expectedUserId = 18
-			String expectedSlug = 'brazil'
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.countrySlug()
 		when:
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
@@ -461,8 +461,8 @@ class CountryServiceImplTest extends Specification {
 	
 	def 'suggestCountryForUser() should return popular country from collection'() {
 		given:
-			Integer expectedUserId = 19
-			String expectedSlug = 'mexica'
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.countrySlug()
 		when:
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
@@ -473,8 +473,8 @@ class CountryServiceImplTest extends Specification {
 
 	def 'suggestCountryForUser() should return a recently created country'() {
 		given:
-			Integer expectedUserId = 21
-			String expectedSlug = 'spain'
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.countrySlug()
 		when:
 			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
@@ -485,7 +485,7 @@ class CountryServiceImplTest extends Specification {
 
 	def 'suggestCountryForUser() should return null when cannot suggest'() {
 		when:
-			String slug = service.suggestCountryForUser(20)
+			String slug = service.suggestCountryForUser(Random.userId())
 		then:
 			1 * countryDao.findCountryOfLastCreatedSeriesByUser(_ as Integer) >> null
 			1 * countryDao.findPopularCountryInCollection(_ as Integer) >> null
