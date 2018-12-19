@@ -17,16 +17,15 @@
  */
 package ru.mystamps.web.feature.country;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class SuggestionController {
 
@@ -35,7 +34,6 @@ public class SuggestionController {
 	/**
 	 * @author John Shkarin
 	 */
-	@ResponseBody
 	@GetMapping(Url.SUGGEST_SERIES_COUNTRY)
 	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
 		return countryService.suggestCountryForUser(currentUserId);
