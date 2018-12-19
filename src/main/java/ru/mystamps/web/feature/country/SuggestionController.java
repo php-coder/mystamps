@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.country;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,10 +35,14 @@ class SuggestionController {
 
 	/**
 	 * @author John Shkarin
+	 * @author Slava Semushin
 	 */
 	@GetMapping(Url.SUGGEST_SERIES_COUNTRY)
 	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
-		return countryService.suggestCountryForUser(currentUserId);
+		return StringUtils.defaultString(
+			countryService.suggestCountryForUser(currentUserId),
+			StringUtils.EMPTY
+		);
 	}
 
 }
