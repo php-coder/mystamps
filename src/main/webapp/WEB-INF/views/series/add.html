@@ -16,9 +16,9 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body th:with="suggestCountryUrl=${addSeriesForm.country != null and addSeriesForm.country.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_COUNTRY}}__'''}"
-		th:onload="|initPage(${suggestCountryUrl})|"
-		onload="initPage(null)">
+	<body th:with="suggestCountryUrl=${addSeriesForm.country != null and addSeriesForm.country.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_COUNTRY}}__'''},suggestCategoryUrl=${addSeriesForm.category != null and addSeriesForm.category.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_CATEGORY}}__'''}"
+		th:onload="|initPage(${suggestCategoryUrl}, ${suggestCountryUrl})|"
+		onload="initPage(null, null)">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
@@ -138,6 +138,16 @@
 								<span id="category.errors" class="help-block" th:if="${#fields.hasErrors('category')}" th:each="error : ${#fields.errors('category')}" th:text="${error}"></span>
 								/*/-->
 							</div>
+							
+							<small togglz:active="SHOW_SUGGESTION_LINK">
+								<a tabindex="-1"
+									th:text="#{t_pick_percent_name}"
+									href="javascript:$('#js-suggest-category-link').hide(); chooseCategoryBySlug('sport'); void(0)"
+									th:href="'javascript:void(0)'"
+									id="js-suggest-category-link"
+									class="link-vcenter"
+									th:classappend="hidden">Pick "Sport"</a>
+							</small>
 						</div>
 		
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('country') ? 'has-error' : ''}">

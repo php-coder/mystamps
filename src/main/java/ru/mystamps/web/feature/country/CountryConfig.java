@@ -48,7 +48,7 @@ public class CountryConfig {
 		}
 		
 		@Bean
-		public SuggestionController suggestionController() {
+		public SuggestionController suggestionCountryController() {
 			return new SuggestionController(countryService);
 		}
 		

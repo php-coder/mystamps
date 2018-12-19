@@ -39,7 +39,7 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCategoryDao implements CategoryDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -86,6 +86,10 @@ public class JdbcCategoryDao implements CategoryDao {
 	@SuppressWarnings("PMD.LongVariable")
 	@Value("${category.find_categories_with_parent_names}")
 	private String findCategoriesWithParentNamesSql;
+	
+	@SuppressWarnings("PMD.LongVariable")
+	@Value("${category.find_from_last_created_series_by_user}")
+	private String findFromLastCreatedSeriesByUserSql;
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
@@ -238,6 +242,19 @@ public class JdbcCategoryDao implements CategoryDao {
 			Collections.singletonMap("lang", lang),
 			RowMappers::forEntityWithParentDto
 		);
+	}
+	
+	@Override
+	public String findCategoryOfLastCreatedSeriesByUser(Integer userId) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findFromLastCreatedSeriesByUserSql,
+				Collections.singletonMap("created_by", userId),
+				String.class
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 }

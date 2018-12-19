@@ -39,4 +39,5 @@ public interface CategoryDao {
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);
 	LinkEntityDto findOneAsLinkEntity(String slug, String lang);
 	List<EntityWithParentDto> findCategoriesWithParents(String lang);
+	String findCategoryOfLastCreatedSeriesByUser(Integer userId);
 }

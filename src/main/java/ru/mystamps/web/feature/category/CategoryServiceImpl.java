@@ -205,4 +205,28 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.getStatisticsOf(collectionId, lang);
 	}
 	
+	// @todo #517 Add integration tests for category suggestion
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	public String suggestCategoryForUser(Integer userId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+		
+		// if user created a series with a category, let's suggest this category to him
+		String slug = categoryDao.findCategoryOfLastCreatedSeriesByUser(userId);
+		if (slug != null) {
+			log.debug(
+				"Category {} has been suggested to user #{} from a recently created series",
+				slug,
+				userId
+			);
+			return slug;
+		}
+		
+		// @todo #517: CategoryService.suggestCategoryForUser(): suggest a last created category
+		// @todo #517: CategoryService.suggestCategoryForUser(): suggest the most popular category
+		
+		return null;
+	}
+	
 }

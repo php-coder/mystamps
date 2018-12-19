@@ -23,6 +23,8 @@
 - (functionality)  user may specify how many stamps from a series in his/her collection
 - (functionality)  paid users may specify a price that he/she paid for a series
 - (infrastructure) use WireMock in integration tests for mocking external services
+- (functionality)  suggest a possible country on a series creation page (contributed by John Shkarin)
+- (functionality)  suggest a possible category on a series creation page
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

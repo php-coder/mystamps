@@ -453,5 +453,37 @@ class CategoryServiceImplTest extends Specification {
 		then:
 			1 * categoryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> null
 	}
+	
+	//
+	// Tests for suggestCategoryForUser()
+	//
+	
+	def 'suggestCategoryForUser() should throw exception when user id is null'() {
+		when:
+			service.suggestCategoryForUser(null)
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'suggestCategoryForUser() should return category of the last created series'() {
+		given:
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.categorySlug()
+		when:
+			String slug = service.suggestCategoryForUser(expectedUserId)
+		then:
+			1 * categoryDao.findCategoryOfLastCreatedSeriesByUser(expectedUserId) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+	
+	def 'suggestCategoryForUser() should return null when cannot suggest'() {
+		when:
+			String slug = service.suggestCategoryForUser(Random.userId())
+		then:
+			1 * categoryDao.findCategoryOfLastCreatedSeriesByUser(_ as Integer) >> null
+		and:
+			slug == null
+	}
 
 }

@@ -3,7 +3,7 @@
 // You must update Url.RESOURCES_VERSION each time whenever you're modified this file!
 //
 
-function initPage(suggestCountryUrl) {
+function initPage(suggestCategoryUrl, suggestCountryUrl) {
 	$('#country').selectize();
 	
 	$('.js-catalog-numbers').on('blur', function expandCatalogNumbers() {
@@ -28,6 +28,26 @@ function initPage(suggestCountryUrl) {
 		'placement': 'right'
 	});
 
+	if (suggestCategoryUrl != null) {
+		$.get(suggestCategoryUrl, function handleSuggestedCategory(slug) {
+			if (slug == '') {
+				return;
+			}
+
+			var suggestCategoryLink = $('#js-suggest-category-link');
+			suggestCategoryLink.click(function chooseSuggestedCategory() {
+				suggestCategoryLink.addClass('hidden');
+				chooseCategoryBySlug(slug);
+			});
+			
+			var categoryName = getCategoryNameBySlug(slug);
+			var newText = suggestCategoryLink.text().replace('%name%', categoryName);
+			suggestCategoryLink.text(newText);
+			
+			suggestCategoryLink.removeClass('hidden');
+		});
+	}
+
 	if (suggestCountryUrl != null) {
 		$.get(suggestCountryUrl, function handleSuggestedCountry(slug) {
 			if (slug == '') {
@@ -47,6 +67,15 @@ function initPage(suggestCountryUrl) {
 			suggestCountryLink.removeClass('hidden');
 		});
 	}
+}
+
+
+function chooseCategoryBySlug(slug) {
+	$('#category').val(slug);
+}
+
+function getCategoryNameBySlug(slug) {
+	return $('#category option[value="' + slug + '"]').text();
 }
 
 function chooseCountryBySlug(slug) {

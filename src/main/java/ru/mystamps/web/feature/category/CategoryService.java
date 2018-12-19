@@ -39,4 +39,5 @@ public interface CategoryService {
 	long countAddedSince(Date date);
 	long countUntranslatedNamesSince(Date date);
 	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	String suggestCategoryForUser(Integer userId);
 }

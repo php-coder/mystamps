@@ -57,6 +57,7 @@ public final class Url {
 	public static final String REQUEST_IMPORT_PAGE        = "/series/import/request/{id}";
 	public static final String LIST_IMPORT_REQUESTS_PAGE  = "/series/import/requests";
 	
+	public static final String SUGGEST_SERIES_CATEGORY    = "/suggest/series_category";
 	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
 	
 	public static final String ADD_CATEGORY_PAGE     = "/category/add";
@@ -90,7 +91,7 @@ public final class Url {
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION      = "v0.3.10";
+	public static final String RESOURCES_VERSION      = "v0.3.11";
 	
 	// CheckStyle: ignore LineLength for next 7 lines
 	public static final String MAIN_CSS               = "/static/" + RESOURCES_VERSION + "/styles/main.min.css";
@@ -163,6 +164,7 @@ public final class Url {
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
 		map.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
+		map.put("SUGGEST_SERIES_CATEGORY", SUGGEST_SERIES_CATEGORY);
 		
 		if (serveContentFromSingleHost) {
 			// Constants sorted in an ascending order.

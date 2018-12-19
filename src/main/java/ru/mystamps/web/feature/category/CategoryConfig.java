@@ -47,6 +47,11 @@ public class CategoryConfig {
 			return new CategoryController(categoryService, seriesService);
 		}
 		
+		@Bean
+		public SuggestionController suggestionCategoryController() {
+			return new SuggestionController(categoryService);
+		}
+		
 	}
 	
 	@RequiredArgsConstructor

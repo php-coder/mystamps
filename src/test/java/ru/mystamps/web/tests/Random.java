@@ -147,6 +147,10 @@ public final class Random {
 		return name;
 	}
 	
+	public static String categorySlug() {
+		return SlugUtils.slugify(categoryName());
+	}
+	
 	public static String countryName() {
 		String name = between(
 				ValidationRules.COUNTRY_NAME_MIN_LENGTH,
