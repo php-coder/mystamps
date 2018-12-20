@@ -89,7 +89,42 @@
 					/*/-->
 					
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-sm-2 col-md-push-4">
+							<!--/*/
+							<th:block togglz:active="SHOW_COLLECTION_STATISTICS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							/*/-->
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
+									</div>
+									<div class="panel-body">
+										<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
+										<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
+										<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
+										<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
+									</div>
+								</div>
+							<!--/*/
+							</th:block>
+							/*/-->
+						</div>
+						<div class="col-sm-3 col-md-push-4">
+							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+								<div class="panel-heading">
+									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
+								</div>
+								<div id="countries-chart" class="panel-body no-padding"></div>
+							</div>
+						</div>
+						<div class="col-sm-3 col-md-push-4">
+							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+								<div class="panel-heading">
+									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
+								</div>
+								<div id="categories-chart" class="panel-body no-padding"></div>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-pull-8">
 							<ul th:if="${not #lists.isEmpty(seriesOfCollection)}" th:remove="all-but-first">
 								<li th:each="series : ${seriesOfCollection}">
 									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
@@ -114,41 +149,6 @@
 									<a href="../category/info.html">Animals, Italy, 1983, 5&nbsp;stamps</a>
 								</li>
 							</ul>
-						</div>
-						<div class="col-sm-2">
-							<!--/*/
-							<th:block togglz:active="SHOW_COLLECTION_STATISTICS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-							/*/-->
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
-									</div>
-									<div class="panel-body">
-										<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
-										<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
-										<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
-										<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
-									</div>
-								</div>
-							<!--/*/
-							</th:block>
-							/*/-->
-						</div>
-						<div class="col-sm-3">
-							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-								<div class="panel-heading">
-									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
-								</div>
-								<div id="countries-chart" class="panel-body no-padding"></div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-								<div class="panel-heading">
-									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
-								</div>
-								<div id="categories-chart" class="panel-body no-padding"></div>
-							</div>
 						</div>
 					</div>
 				</div>
