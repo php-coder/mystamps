@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -218,8 +219,12 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesSalesParsedData.setSellerGroupId(seriesInfo.getSellerGroupId());
 		seriesSalesParsedData.setSellerName(seriesInfo.getSellerName());
 		seriesSalesParsedData.setSellerUrl(seriesInfo.getSellerUrl());
-		seriesSalesParsedData.setPrice(seriesInfo.getPrice());
-		seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
+		
+		BigDecimal price = seriesInfo.getPrice();
+		if (price != null) {
+			seriesSalesParsedData.setPrice(price);
+			seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
+		}
 		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test

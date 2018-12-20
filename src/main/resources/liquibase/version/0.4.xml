@@ -56,5 +56,6 @@
 	<include file="0.4/2018-07-15--series_import_parsed_data_group_id_field.xml" relativeToChangelogFile="true" />
 	<include file="0.4/2018-10-16--similar_series.xml" relativeToChangelogFile="true"/>
 	<include file="0.4/2018-12-03--site_parsers.xml" relativeToChangelogFile="true"/>
+	<include file="0.4/2018-12-20--nullify_currency_without_price.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

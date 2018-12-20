@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="nullify-prices-with-currency-only" author="php-coder" context="test-data, prod-data">
+		
+		<!-- Be caution: there is no rollback! -->
+		<sql>
+			UPDATE series_sales_import_parsed_data
+			   SET currency = NULL
+			 WHERE currency IS NOT NULL AND price IS NULL
+		</sql>
+		
+	</changeSet>
+	
+</databaseChangeLog>
+

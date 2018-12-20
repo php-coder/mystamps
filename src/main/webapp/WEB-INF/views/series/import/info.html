@@ -427,7 +427,7 @@
 									</td>
 								</tr>
 								
-								<tr th:if="${hasSalesInfo}" th:classappend="${#fields.hasErrors('seriesSale.price') or #fields.hasErrors('seriesSale.currency') ? 'has-error' : ''}">
+								<tr th:if="${hasSalesInfo and (importSeriesForm.seriesSale.price != null or !disabled)}" th:classappend="${#fields.hasErrors('seriesSale.price') or #fields.hasErrors('seriesSale.currency') ? 'has-error' : ''}">
 									<th>
 										<label for="price" class="control-label" th:text="#{t_price}">
 											Price
