@@ -590,6 +590,7 @@ public class SeriesController {
 	// CheckStyle: ignore LineLength for next 1 line
 	private Map<String, ?> prepareCommonAttrsForSeriesInfo(SeriesDto series, Integer currentUserId) {
 		Map<String, Object> model = new HashMap<>();
+		Integer seriesId = series.getId();
 		
 		model.put("series", series);
 		
@@ -607,7 +608,7 @@ public class SeriesController {
 		model.put("zagorskiNumbers", zagorskiNumbers);
 		
 		boolean isSeriesInCollection =
-			collectionService.isSeriesInCollection(currentUserId, series.getId());
+			collectionService.isSeriesInCollection(currentUserId, seriesId);
 		
 		boolean userCanAddImagesToSeries =
 			isUserCanAddImagesToSeries(series);
@@ -619,12 +620,12 @@ public class SeriesController {
 			&& SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
 			
 			List<PurchaseAndSaleDto> purchasesAndSales =
-				seriesService.findPurchasesAndSales(series.getId());
+				seriesService.findPurchasesAndSales(seriesId);
 			model.put("purchasesAndSales", purchasesAndSales);
 		}
 		
 		if (SecurityContextUtils.hasAuthority(Authority.IMPORT_SERIES)) {
-			ImportRequestInfo importInfo = seriesImportService.findRequestInfo(series.getId());
+			ImportRequestInfo importInfo = seriesImportService.findRequestInfo(seriesId);
 			model.put("importInfo", importInfo);
 		}
 		
