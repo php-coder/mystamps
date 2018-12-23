@@ -338,6 +338,27 @@
 									</dl>
 								</div>
 							</div>
+							<!--/*-->
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-2">
+									<h5 class="text-center" th:text="#{t_similar_series}">
+										Similar series
+									</h5>
+									<ul>
+										<li th:each="series : ${similarSeries}">
+											<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+												<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
+												<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
+												<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
+												<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+											</a>
+										</li>
+										<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
+										<li><a href="../series/info.html">12&nbsp;stamps</a></li>
+									</ul>
+								</div>
+							</div>
+							<!--*/-->
 						</div>
 						
 						<div class="col-sm-4">
