@@ -57,6 +57,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.find_all_for_sitemap}")
 	private String findAllForSitemapSql;
 	
+	@Value("${series.find_similar_series}")
+	private String findSimilarSeriesSql;
+	
 	@Value("${series.find_last_added}")
 	private String findLastAddedSeriesSql;
 	
@@ -161,6 +164,15 @@ public class JdbcSeriesDao implements SeriesDao {
 			Collections.emptyMap(),
 			RowMappers::forSitemapInfoDto
 		);
+	}
+	
+	@Override
+	public List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", seriesId);
+		params.put("lang", lang);
+		
+		return jdbcTemplate.query(findSimilarSeriesSql, params, RowMappers::forSeriesLinkDto);
 	}
 	
 	@Override

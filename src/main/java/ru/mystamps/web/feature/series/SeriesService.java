@@ -44,6 +44,7 @@ public interface SeriesService {
 	List<SeriesInfoDto> findByCategorySlug(String slug, String lang);
 	List<SeriesInfoDto> findByCountrySlug(String slug, String lang);
 	List<SeriesLinkDto> findRecentlyAdded(int quantity, String lang);
+	List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
 	
 	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);

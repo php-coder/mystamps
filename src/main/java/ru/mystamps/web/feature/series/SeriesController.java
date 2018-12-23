@@ -249,7 +249,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
 		model.addAllAttributes(commonAttrs);
 		
 		addSeriesSalesFormToModel(model);
@@ -323,7 +323,8 @@ public class SeriesController {
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+			Map<String, ?> commonAttrs =
+				prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
@@ -382,7 +383,7 @@ public class SeriesController {
 				return null;
 			}
 			
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, userId);
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, userId, lang);
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
@@ -456,7 +457,8 @@ public class SeriesController {
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId);
+			Map<String, ?> commonAttrs =
+				prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
@@ -587,12 +589,18 @@ public class SeriesController {
 		request.removeAttribute(DownloadImageInterceptor.ERROR_CODE_ATTR_NAME);
 	}
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	private Map<String, ?> prepareCommonAttrsForSeriesInfo(SeriesDto series, Integer currentUserId) {
+	private Map<String, ?> prepareCommonAttrsForSeriesInfo(
+		SeriesDto series,
+		Integer currentUserId,
+		String lang) {
+		
 		Map<String, Object> model = new HashMap<>();
 		Integer seriesId = series.getId();
 		
 		model.put("series", series);
+		
+		List<SeriesLinkDto> similarSeries = seriesService.findSimilarSeries(seriesId, lang);
+		model.put("similarSeries", similarSeries);
 		
 		String michelNumbers   = CatalogUtils.toShortForm(series.getMichel().getNumbers());
 		String scottNumbers    = CatalogUtils.toShortForm(series.getScott().getNumbers());

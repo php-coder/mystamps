@@ -292,6 +292,15 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.findLastAdded(quantity, lang);
 	}
 	
+	// @todo #967 SeriesServiceImpl.findSimilarSeries(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return seriesDao.findSimilarSeries(seriesId, lang);
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<SitemapInfoDto> findAllForSitemap() {

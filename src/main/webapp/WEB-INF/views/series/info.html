@@ -338,13 +338,13 @@
 									</dl>
 								</div>
 							</div>
-							<!--/*-->
-							<div class="row">
+							<div class="row" th:if="${not #lists.isEmpty(similarSeries)}">
+								<!--/* @todo #967 Add integration tests for showing similar series */-->
 								<div class="col-sm-10 col-sm-offset-2">
 									<h5 class="text-center" th:text="#{t_similar_series}">
 										Similar series
 									</h5>
-									<ul>
+									<ul th:remove="all-but-first">
 										<li th:each="series : ${similarSeries}">
 											<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
 												<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
@@ -358,7 +358,6 @@
 									</ul>
 								</div>
 							</div>
-							<!--*/-->
 						</div>
 						
 						<div class="col-sm-4">
