@@ -105,19 +105,15 @@
 							<div class="panel-heading">
 								<h4 class="panel-title" th:text="#{t_recently_added_collections}">Recently created collections</h4>
 							</div>
-							<div class="panel-body" th:remove="all-but-first">
-								<p th:each="collection : ${recentlyAddedCollections}">
-									<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
-								</p>
-								<p>
-									<a href="../collection/info.html">Edith Roberts</a>
-								</p>
-								<p>
-									<a href="../collection/info.html">Tyler Dean</a>
-								</p>
-								<p>
-									<a href="../collection/info.html">Gwen Schultz</a>
-								</p>
+							<div class="panel-body">
+								<ul class="list-unstyled" th:remove="all-but-first">
+									<li th:each="collection : ${recentlyAddedCollections}">
+										<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
+									</li>
+									<li><a href="../collection/info.html">Edith Roberts</a></li>
+									<li><a href="../collection/info.html">Tyler Dean</a></li>
+									<li><a href="../collection/info.html">Gwen Schultz</a></li>
+								</ul>
 							</div>
 						</div>
 					<!--/*/
@@ -132,60 +128,26 @@
 							<div class="panel-heading">
 								<h4 class="panel-title" th:text="#{t_recently_added_series}">Recently added series</h4>
 							</div>
-							<div class="panel-body" th:remove="all-but-first">
-								<p th:each="series : ${recentlyAddedSeries}">
-									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-										<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
-										<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
-										<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
-										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 1997, 8&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 2009, 10&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 4&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 2002, 12&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 1993, 19&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 4&nbsp;stamps
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 11&nbsp;stamps (without perforation)
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 2014, 1&nbsp;stamp
-									</a>
-								</p>
-								<p>
-									<a href="../series/info.html">
-										Italy, 1996, 16&nbsp;stamps (without perforation)
-									</a>
-								</p>
+							<div class="panel-body">
+								<ul class="list-unstyled" th:remove="all-but-first">
+									<li th:each="series : ${recentlyAddedSeries}">
+										<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+											<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
+											<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
+											<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
+											<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+										</a>
+									</li>
+									<li><a href="../series/info.html">Italy, 1997, 8&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 2009, 10&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 2002, 12&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 1993, 19&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
+									<li><a href="../series/info.html">Italy, 11&nbsp;stamps (without perforation)</a></li>
+									<li><a href="../series/info.html">Italy, 2014, 1&nbsp;stamp</a></li>
+									<li><a href="../series/info.html">Italy, 1996, 16&nbsp;stamps (without perforation)</a></li>
+								</ul>
 							</div>
 						</div>
 					<!--/*/
