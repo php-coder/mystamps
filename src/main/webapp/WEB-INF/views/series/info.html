@@ -140,200 +140,204 @@
 						</div>
 						
 						<div class="col-sm-4">
-							<dl class="dl-horizontal">
-								<dt th:text="#{t_category}">
-									Category
-								</dt>
-								<dd id="category_name">
-									<a href="../category/info.html"
-									   th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}"
-									   th:text="${series.category.name}">
-										Animals
-									</a>
-								</dd>
-								
-								<!--/*/ <th:block th:if="${series.country != null}"> /*/-->
-									<dt th:text="#{t_country}">
-										Country
-									</dt>
-									<dd id="country_name">
-										<a href="../country/info.html"
-										   th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}"
-										   th:text="${series.country.name}">
-											Italy
-										</a>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${series.releaseYear != null}"> /*/-->
-									<dt th:text="#{t_issue_date}">
-										Date of release
-									</dt>
-									<dd id="issue_date">
-										<span th:if="${series.releaseDay != null}"
-											  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
-											  th:remove="tag">
-											01.
-										</span><span th:if="${series.releaseMonth != null}"
-											  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
-											  th:remove="tag">
-											02.
-										</span><span th:if="${series.releaseYear != null}"
-											  th:text="${series.releaseYear}"
-											  th:remove="tag">
-											1999
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-									
-									<dt th:text="#{t_quantity}">
-										Quantity
-									</dt>
-									<dd id="quantity" th:text="${series.quantity}">
-										7
-									</dd>
-									
-									<dt th:text="#{t_perforated}">
-										Perforated
-									</dt>
-									<dd id="perforated">
-										<!--/*/ <th:block th:if="${series.perforated}"> /*/-->
-											<span th:text="#{t_yes}">Yes</span> <i class="glyphicon glyphicon-ok"></i>
+							<div class="row">
+								<div class="col-sm-12">
+									<dl class="dl-horizontal">
+										<dt th:text="#{t_category}">
+											Category
+										</dt>
+										<dd id="category_name">
+											<a href="../category/info.html"
+											   th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}"
+											   th:text="${series.category.name}">
+												Animals
+											</a>
+										</dd>
+										
+										<!--/*/ <th:block th:if="${series.country != null}"> /*/-->
+											<dt th:text="#{t_country}">
+												Country
+											</dt>
+											<dd id="country_name">
+												<a href="../country/info.html"
+												   th:href="@{${INFO_COUNTRY_PAGE}(slug=${series.country.slug})}"
+												   th:text="${series.country.name}">
+													Italy
+												</a>
+											</dd>
 										<!--/*/ </th:block> /*/-->
 										
-										<!--/*/
-										<th:block th:if="${not series.perforated}">
-											<span th:text="#{t_no}">No</span> <i class="glyphicon glyphicon-remove"></i>
-										</th:block>
-										/*/-->
-									</dd>
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michel.price != null}"> /*/-->
-									<dt th:text="#{t_michel}">
-										Michel
-									</dt>
-									<dd id="michel_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michel.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
-											#101-104
-										</span>
-										<span th:if="${showPrice}"
-											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.michel.formattedPrice} + ' EUR' +${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-											(10 EUR)
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scott.price != null}"> /*/-->
-									<dt th:text="#{t_scott}">
-										Scott
-									</dt>
-									<dd id="scott_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scott.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
-										<span th:if="${showPrice}"
-											  th:with="price=${#numbers.formatDecimal(series.scott.price, 1, 1)},showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.scott.formattedPrice} + ' USD' + ${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-											12 USD
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvert.price != null}"> /*/-->
-									<dt th:text="#{t_yvert}">
-										Yvert
-									</dt>
-									<dd id="yvert_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvert.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
-											#13, 17, 20
-										</span>
-										<span th:if="${showPrice}"
-											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.yvert.formattedPrice} + ' EUR' + ${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-											(7 EUR)
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbons.price != null}"> /*/-->
-									<dt th:text="#{t_sg}">
-										Gibbons
-									</dt>
-									<dd id="gibbons_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbons.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
-											#77, 79-83
-										</span>
-										<span th:if="${showPrice}"
-											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.gibbons.formattedPrice} + ' GBP' + ${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(solovyovNumbers) or series.solovyov.price != null}"> /*/-->
-									<dt th:text="#{t_solovyov}">
-										Solovyov
-									</dt>
-									<dd id="solovyov_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(solovyovNumbers)},showPrice=${series.solovyov.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${solovyovNumbers}|" th:remove="tag">
-											#90, 93-95 (90 RUB)
-										</span>
-										<span th:if="${showPrice}"
-											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.solovyov.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${not #strings.isEmpty(zagorskiNumbers) or series.zagorski.price != null}"> /*/-->
-									<dt th:text="#{t_zagorski}">
-										Zagorski
-									</dt>
-									<dd id="zagorski_catalog_info"
-										th:with="showNumbers=${not #strings.isEmpty(zagorskiNumbers)},showPrice=${series.zagorski.price != null}">
-										<span th:if="${showNumbers}" th:text="|#${zagorskiNumbers}|" th:remove="tag">
-											#102, 111-113 (100 RUB)
-										</span>
-										<span th:if="${showPrice}"
-											  th:with="showBrackets=${showNumbers and showPrice}"
-											  th:text="${showBrackets ? '(' : ''} + ${series.zagorski.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
-											  th:remove="tag">
-										</span>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${importInfo != null}"> /*/-->
-									<dt th:text="#{t_imported_from}">
-										Imported from
-									</dt>
-									<dd id="import-info">
-										<a id="import-request-link"
-											href="./import/info.html"
-											th:href="@{${REQUEST_IMPORT_PAGE}(id=${importInfo.requestId})}"
-											th:text="${#uris.unescapePath(importInfo.url)}">
-											http://example.com/my-first-series.html
-										</a>
-									</dd>
-								<!--/*/ </th:block> /*/-->
-								
-								<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
-									<dt th:text="#{t_comment}">
-										Comment
-									</dt>
-									<dd id="comment" th:utext="${#strings.replace(#strings.escapeXml(series.comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
-										My favorite series.
-									</dd>
-								<!--/*/ </th:block> /*/-->
-							</dl>
+										<!--/*/ <th:block th:if="${series.releaseYear != null}"> /*/-->
+											<dt th:text="#{t_issue_date}">
+												Date of release
+											</dt>
+											<dd id="issue_date">
+												<span th:if="${series.releaseDay != null}"
+													  th:text="|${#numbers.formatInteger(series.releaseDay, 2)}.|"
+													  th:remove="tag">
+													01.
+												</span><span th:if="${series.releaseMonth != null}"
+													  th:text="|${#numbers.formatInteger(series.releaseMonth, 2)}.|"
+													  th:remove="tag">
+													02.
+												</span><span th:if="${series.releaseYear != null}"
+													  th:text="${series.releaseYear}"
+													  th:remove="tag">
+													1999
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+											
+											<dt th:text="#{t_quantity}">
+												Quantity
+											</dt>
+											<dd id="quantity" th:text="${series.quantity}">
+												7
+											</dd>
+											
+											<dt th:text="#{t_perforated}">
+												Perforated
+											</dt>
+											<dd id="perforated">
+												<!--/*/ <th:block th:if="${series.perforated}"> /*/-->
+													<span th:text="#{t_yes}">Yes</span> <i class="glyphicon glyphicon-ok"></i>
+												<!--/*/ </th:block> /*/-->
+												
+												<!--/*/
+												<th:block th:if="${not series.perforated}">
+													<span th:text="#{t_no}">No</span> <i class="glyphicon glyphicon-remove"></i>
+												</th:block>
+												/*/-->
+											</dd>
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(michelNumbers) or series.michel.price != null}"> /*/-->
+											<dt th:text="#{t_michel}">
+												Michel
+											</dt>
+											<dd id="michel_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(michelNumbers)},showPrice=${series.michel.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${michelNumbers}|" th:remove="tag">
+													#101-104
+												</span>
+												<span th:if="${showPrice}"
+													  th:with="showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.michel.formattedPrice} + ' EUR' +${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+													(10 EUR)
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(scottNumbers) or series.scott.price != null}"> /*/-->
+											<dt th:text="#{t_scott}">
+												Scott
+											</dt>
+											<dd id="scott_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(scottNumbers)},showPrice=${series.scott.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${scottNumbers}|" th:remove="tag"></span>
+												<span th:if="${showPrice}"
+													  th:with="price=${#numbers.formatDecimal(series.scott.price, 1, 1)},showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.scott.formattedPrice} + ' USD' + ${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+													12 USD
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(yvertNumbers) or series.yvert.price != null}"> /*/-->
+											<dt th:text="#{t_yvert}">
+												Yvert
+											</dt>
+											<dd id="yvert_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(yvertNumbers)},showPrice=${series.yvert.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${yvertNumbers}|" th:remove="tag">
+													#13, 17, 20
+												</span>
+												<span th:if="${showPrice}"
+													  th:with="showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.yvert.formattedPrice} + ' EUR' + ${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+													(7 EUR)
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(gibbonsNumbers) or series.gibbons.price != null}"> /*/-->
+											<dt th:text="#{t_sg}">
+												Gibbons
+											</dt>
+											<dd id="gibbons_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(gibbonsNumbers)},showPrice=${series.gibbons.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${gibbonsNumbers}|" th:remove="tag">
+													#77, 79-83
+												</span>
+												<span th:if="${showPrice}"
+													  th:with="showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.gibbons.formattedPrice} + ' GBP' + ${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(solovyovNumbers) or series.solovyov.price != null}"> /*/-->
+											<dt th:text="#{t_solovyov}">
+												Solovyov
+											</dt>
+											<dd id="solovyov_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(solovyovNumbers)},showPrice=${series.solovyov.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${solovyovNumbers}|" th:remove="tag">
+													#90, 93-95 (90 RUB)
+												</span>
+												<span th:if="${showPrice}"
+													  th:with="showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.solovyov.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${not #strings.isEmpty(zagorskiNumbers) or series.zagorski.price != null}"> /*/-->
+											<dt th:text="#{t_zagorski}">
+												Zagorski
+											</dt>
+											<dd id="zagorski_catalog_info"
+												th:with="showNumbers=${not #strings.isEmpty(zagorskiNumbers)},showPrice=${series.zagorski.price != null}">
+												<span th:if="${showNumbers}" th:text="|#${zagorskiNumbers}|" th:remove="tag">
+													#102, 111-113 (100 RUB)
+												</span>
+												<span th:if="${showPrice}"
+													  th:with="showBrackets=${showNumbers and showPrice}"
+													  th:text="${showBrackets ? '(' : ''} + ${series.zagorski.formattedPrice} + ' RUB' + ${showBrackets ? ')' : ''}"
+													  th:remove="tag">
+												</span>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${importInfo != null}"> /*/-->
+											<dt th:text="#{t_imported_from}">
+												Imported from
+											</dt>
+											<dd id="import-info">
+												<a id="import-request-link"
+													href="./import/info.html"
+													th:href="@{${REQUEST_IMPORT_PAGE}(id=${importInfo.requestId})}"
+													th:text="${#uris.unescapePath(importInfo.url)}">
+													http://example.com/my-first-series.html
+												</a>
+											</dd>
+										<!--/*/ </th:block> /*/-->
+										
+										<!--/*/ <th:block th:if="${series.comment != null and #authorization.expression('hasAuthority(''ADD_COMMENTS_TO_SERIES'')')}"> /*/-->
+											<dt th:text="#{t_comment}">
+												Comment
+											</dt>
+											<dd id="comment" th:utext="${#strings.replace(#strings.escapeXml(series.comment), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt;')}">
+												My favorite series.
+											</dd>
+										<!--/*/ </th:block> /*/-->
+									</dl>
+								</div>
+							</div>
 						</div>
 						
 						<div class="col-sm-4">
