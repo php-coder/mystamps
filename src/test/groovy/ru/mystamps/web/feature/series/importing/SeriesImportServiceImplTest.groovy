@@ -49,7 +49,6 @@ class SeriesImportServiceImplTest extends Specification {
 	private final SeriesService seriesService = Mock()
 	private final SeriesSalesService seriesSalesService = Mock()
 	private final SeriesSalesImportService seriesSalesImportService = Mock()
-	private final SeriesInfoExtractorService extractorService = Mock()
 	private final ParticipantService participantService = Mock()
 	private final ApplicationEventPublisher eventPublisher = Mock()
 	
@@ -63,7 +62,6 @@ class SeriesImportServiceImplTest extends Specification {
 			seriesService,
 			seriesSalesService,
 			seriesSalesImportService,
-			extractorService,
 			participantService,
 			eventPublisher
 		)
@@ -437,28 +435,24 @@ class SeriesImportServiceImplTest extends Specification {
 	
 	def 'saveParsedData() should throw exception when request id is null'() {
 		when:
-			service.saveParsedData(null, TestObjects.createRawParsedDataDto())
+			service.saveParsedData(null, TestObjects.createEmptySeriesExtractedInfo(), Random.url())
 		then:
 			thrown IllegalArgumentException
 	}
 	
-	def 'saveParsedData() should throw exception when parsed data is null'() {
+	def 'saveParsedData() should throw exception when series info is null'() {
 		when:
-			service.saveParsedData(Random.id(), null)
+			service.saveParsedData(Random.id(), null, Random.url())
 		then:
 			thrown IllegalArgumentException
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'saveParsedData() should publish ParsingFailed event when couldn\'t associate extracted data'() {
+	def 'saveParsedData() should publish ParsingFailed event when all series fields are empty'() {
 		given:
 			Integer expectedRequestId = Random.id()
-		and:
-			RawParsedDataDto rawData = TestObjects.createRawParsedDataDto().withImageUrl(null)
-		and:
-			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
-			service.saveParsedData(expectedRequestId, rawData)
+			service.saveParsedData(expectedRequestId, TestObjects.createEmptySeriesExtractedInfo(), null)
 		then:
 			1 * eventPublisher.publishEvent({ ParsingFailed event ->
 				assert event?.requestId == expectedRequestId
@@ -471,12 +465,8 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 			String expectedImageUrl = Random.url()
-		and:
-			RawParsedDataDto rawData = TestObjects.createRawParsedDataDto().withImageUrl(expectedImageUrl)
-		and:
-			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
-			service.saveParsedData(expectedRequestId, rawData)
+			service.saveParsedData(expectedRequestId, TestObjects.createSeriesExtractedInfo(), expectedImageUrl)
 		then:
 			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
@@ -494,10 +484,8 @@ class SeriesImportServiceImplTest extends Specification {
 	def 'saveParsedData() should save series sale parsed data if provided'() {
 		given:
 			Integer expectedRequestId = Random.id()
-		and:
-			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createSeriesExtractedInfo()
 		when:
-			service.saveParsedData(expectedRequestId, TestObjects.createRawParsedDataDto())
+			service.saveParsedData(expectedRequestId, TestObjects.createSeriesExtractedInfo(), Random.url())
 		then:
 			1 * seriesSalesImportService.saveParsedData(
 				expectedRequestId,
@@ -511,9 +499,8 @@ class SeriesImportServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings([ 'ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword', 'UnnecessaryGetter' ])
-	def 'saveParsedData() should pass data to extractor service and save its results'() {
+	def 'saveParsedData() should save series info'() {
 		given:
-			RawParsedDataDto expectedRawData = TestObjects.createRawParsedDataDto()
 			SeriesExtractedInfo expectedSeriesInfo = TestObjects.createSeriesExtractedInfo()
 		and:
 			Integer expectedCategoryId  = expectedSeriesInfo.getCategoryIds().get(0)
@@ -527,10 +514,8 @@ class SeriesImportServiceImplTest extends Specification {
 			BigDecimal expectedPrice    = expectedSeriesInfo.getPrice()
 			String expectedCurrency     = expectedSeriesInfo.getCurrency()
 		when:
-			service.saveParsedData(Random.id(), expectedRawData)
+			service.saveParsedData(Random.id(), expectedSeriesInfo, Random.url())
 		then:
-			1 * extractorService.extract(expectedRawData) >> expectedSeriesInfo
-		and:
 			1 * seriesImportDao.addParsedData(
 				_ as Integer,
 				{ AddSeriesParsedDataDbDto parsedData ->
@@ -559,10 +544,8 @@ class SeriesImportServiceImplTest extends Specification {
 	
 	@SuppressWarnings('UnnecessaryReturnKeyword')
 	def 'saveParsedData() should change request status'() {
-		given:
-			extractorService.extract(_ as RawParsedDataDto) >> TestObjects.createEmptySeriesExtractedInfo()
 		when:
-			service.saveParsedData(Random.id(), TestObjects.createRawParsedDataDto())
+			service.saveParsedData(Random.id(), TestObjects.createEmptySeriesExtractedInfo(), Random.url())
 		then:
 			1 * seriesImportDao.changeStatus(
 				_ as Integer,

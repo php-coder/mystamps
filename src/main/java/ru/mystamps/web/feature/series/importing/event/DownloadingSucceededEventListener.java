@@ -27,7 +27,9 @@ import org.springframework.context.ApplicationListener;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
+import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
 import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
@@ -49,6 +51,7 @@ public class DownloadingSucceededEventListener
 	private final Logger log;
 	private final SeriesImportService seriesImportService;
 	private final SiteParserService siteParserService;
+	private final SeriesInfoExtractorService extractorService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@PostConstruct
@@ -95,7 +98,10 @@ public class DownloadingSucceededEventListener
 			info.getPrice(),
 			info.getCurrency()
 		);
-		seriesImportService.saveParsedData(requestId, data);
+		
+		SeriesExtractedInfo seriesInfo = extractorService.extract(data);
+		
+		seriesImportService.saveParsedData(requestId, seriesInfo, data.getImageUrl());
 	}
 	
 }

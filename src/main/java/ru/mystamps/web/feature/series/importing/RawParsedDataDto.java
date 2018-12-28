@@ -34,21 +34,4 @@ public class RawParsedDataDto {
 	private final String sellerUrl;
 	private final String price;
 	private final String currency;
-	
-	public RawParsedDataDto withImageUrl(String url) {
-		return new RawParsedDataDto(
-			categoryName,
-			countryName,
-			url,
-			releaseYear,
-			quantity,
-			perforated,
-			michelNumbers,
-			sellerName,
-			sellerUrl,
-			price,
-			currency
-		);
-	}
-	
 }

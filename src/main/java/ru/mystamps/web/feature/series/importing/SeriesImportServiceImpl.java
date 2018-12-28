@@ -60,7 +60,6 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	private final SeriesService seriesService;
 	private final SeriesSalesService seriesSalesService;
 	private final SeriesSalesImportService seriesSalesImportService;
-	private final SeriesInfoExtractorService extractorService;
 	private final ParticipantService participantService;
 	private final ApplicationEventPublisher eventPublisher;
 	
@@ -179,16 +178,15 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	
 	@Override
 	@Transactional
-	public void saveParsedData(Integer requestId, RawParsedDataDto data) {
+	public void saveParsedData(Integer requestId, SeriesExtractedInfo seriesInfo, String imageUrl) {
 		Validate.isTrue(requestId != null, "Request id must be non null");
-		Validate.isTrue(data != null, "Parsed data must be non null");
+		Validate.isTrue(seriesInfo != null, "Series info must be non null");
 		
-		SeriesExtractedInfo seriesInfo = extractorService.extract(data);
 		Integer categoryId = getFirstElement(seriesInfo.getCategoryIds());
 		Integer countryId = getFirstElement(seriesInfo.getCountryIds());
 		
 		AddSeriesParsedDataDbDto seriesParsedData = new AddSeriesParsedDataDbDto();
-		seriesParsedData.setImageUrl(data.getImageUrl());
+		seriesParsedData.setImageUrl(imageUrl);
 		Date now = new Date();
 		seriesParsedData.setCreatedAt(now);
 		seriesParsedData.setUpdatedAt(now);

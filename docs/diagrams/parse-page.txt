@@ -14,10 +14,10 @@ DownloadingSucceededEventListener->+SeriesImportService: requestId
 SeriesImportService->-DownloadingSucceededEventListener: content of downloaded page
 DownloadingSucceededEventListener->+SiteParser: content of downloaded page
 SiteParser->-DownloadingSucceededEventListener: SeriesInfo
+DownloadingSucceededEventListener->+ExtractorService: RawParsedDataDto
+ExtractorService->-DownloadingSucceededEventListener: SeriesExtractedInfo
 alt
-DownloadingSucceededEventListener->+SeriesImportService: RawParsedDataDto
-SeriesImportService->+ExtractorService: RawParsedDataDto
-ExtractorService->-SeriesImportService: SeriesExtractedInfo
+DownloadingSucceededEventListener->+SeriesImportService: SeriesExtractedInfo
 alt
 SeriesImportService-->+SeriesSalesImportService: SeriesSalesParsedDataDbDto
 SeriesSalesImportService-->-SeriesImportService:

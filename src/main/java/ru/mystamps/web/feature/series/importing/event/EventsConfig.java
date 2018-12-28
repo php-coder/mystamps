@@ -30,7 +30,13 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.config.ServicesConfig;
+import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl;
+import ru.mystamps.web.feature.series.importing.TimedSeriesInfoExtractorService;
 import ru.mystamps.web.feature.series.importing.extractor.JdbcSiteParserDao;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserDao;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
@@ -42,6 +48,9 @@ public class EventsConfig {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(EventsConfig.class);
 	
+	private final CategoryService categoryService;
+	private final CountryService countryService;
+	private final ParticipantService participantService;
 	private final SeriesImportService seriesImportService;
 	private final ServicesConfig servicesConfig;
 	private final ApplicationEventPublisher eventPublisher;
@@ -52,6 +61,19 @@ public class EventsConfig {
 		return new SiteParserServiceImpl(
 			LoggerFactory.getLogger(SiteParserServiceImpl.class),
 			siteParserDao
+		);
+	}
+	
+	@Bean
+	public SeriesInfoExtractorService getSeriesInfoExtractorService() {
+		return new TimedSeriesInfoExtractorService(
+			LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
+			new SeriesInfoExtractorServiceImpl(
+				LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
+				categoryService,
+				countryService,
+				participantService
+			)
 		);
 	}
 	
@@ -75,13 +97,15 @@ public class EventsConfig {
 	@DependsOn("liquibase")
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
-		SiteParserService siteParserService
+		SiteParserService siteParserService,
+		SeriesInfoExtractorService extractorService
 		) {
 		
 		return new DownloadingSucceededEventListener(
 			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
 			seriesImportService,
 			siteParserService,
+			extractorService,
 			eventPublisher
 		);
 	}

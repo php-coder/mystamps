@@ -26,8 +26,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import lombok.RequiredArgsConstructor;
 
-import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesService;
@@ -69,8 +67,6 @@ public class SeriesImportConfig {
 	public static class Services {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
-		private final CategoryService categoryService;
-		private final CountryService countryService;
 		private final ParticipantService participantService;
 		private final SeriesService seriesService;
 		private final SeriesSalesService seriesSalesService;
@@ -78,32 +74,15 @@ public class SeriesImportConfig {
 		private final ApplicationEventPublisher eventPublisher;
 		
 		@Bean
-		public SeriesImportService seriesImportService(
-			SeriesImportDao seriesImportDao,
-			SeriesInfoExtractorService extractorService) {
-			
+		public SeriesImportService seriesImportService(SeriesImportDao seriesImportDao) {
 			return new SeriesImportServiceImpl(
 				LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 				seriesImportDao,
 				seriesService,
 				seriesSalesService,
 				seriesSalesImportService,
-				extractorService,
 				participantService,
 				eventPublisher
-			);
-		}
-		
-		@Bean
-		public SeriesInfoExtractorService getSeriesInfoExtractorService() {
-			return new TimedSeriesInfoExtractorService(
-				LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
-				new SeriesInfoExtractorServiceImpl(
-					LoggerFactory.getLogger(SeriesInfoExtractorServiceImpl.class),
-					categoryService,
-					countryService,
-					participantService
-				)
 			);
 		}
 		
