@@ -75,13 +75,11 @@ public final class TranslationUtils {
 		return msg;
 	}
 	
-	// TODO: add simple unit tests (#93)
 	public static String stripHtmlTags(String msg) {
 		return msg.replaceAll("\\<.*?>", "");
 	}
 	
 	public static String tr(String key, Object... args) {
-		// TODO: replace this hack to something less ugly
 		String messageFormat = tr(key).replaceAll("\\{[^\\}]+\\}", "{0}");
 		return MessageFormat.format(messageFormat, args);
 	}
