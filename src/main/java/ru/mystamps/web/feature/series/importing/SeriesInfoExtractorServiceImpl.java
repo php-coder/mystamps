@@ -113,7 +113,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		);
 	}
 	
-	protected List<Integer> extractCategory(String fragment) {
+	/* default */ List<Integer> extractCategory(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
 		}
@@ -149,7 +149,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	protected List<Integer> extractCountry(String fragment) {
+	/* default */ List<Integer> extractCountry(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyList();
 		}
@@ -195,7 +195,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	protected Integer extractReleaseYear(String fragment) {
+	/* default */ Integer extractReleaseYear(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -224,7 +224,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	protected Integer extractQuantity(String fragment) {
+	/* default */ Integer extractQuantity(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -246,7 +246,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	// @todo #782 Series import: add integration test for extracting perforation flag
-	protected Boolean extractPerforated(String fragment) {
+	/* default */ Boolean extractPerforated(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -269,7 +269,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// @todo #694 SeriesInfoExtractorServiceImpl: support for a single Michel number
 	// @todo #694 SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers
-	protected Set<String> extractMichelNumbers(String fragment) {
+	/* default */ Set<String> extractMichelNumbers(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptySet();
 		}
@@ -294,7 +294,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptySet();
 	}
 	
-	public Integer extractSeller(String name, String url) {
+	/* default */ Integer extractSeller(String name, String url) {
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(url)) {
 			return null;
 		}
@@ -314,7 +314,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return null;
 	}
 	
-	public Integer extractSellerGroup(Integer id, String sellerUrl) {
+	/* default */ Integer extractSellerGroup(Integer id, String sellerUrl) {
 		// we need a group ony for a new seller (id == null)
 		if (id != null || StringUtils.isBlank(sellerUrl)) {
 			return null;
@@ -338,7 +338,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 	}
 	
-	protected String extractSellerName(Integer id, String name) {
+	/* default */ String extractSellerName(Integer id, String name) {
 		if (id != null) {
 			return null;
 		}
@@ -350,7 +350,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return name;
 	}
 	
-	protected String extractSellerUrl(Integer id, String url) {
+	/* default */ String extractSellerUrl(Integer id, String url) {
 		if (id != null) {
 			return null;
 		}
@@ -362,7 +362,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return url;
 	}
 	
-	public BigDecimal extractPrice(String fragment) {
+	/* default */ BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
@@ -381,7 +381,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 	}
 	
-	public String extractCurrency(String fragment) {
+	/* default */ String extractCurrency(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
