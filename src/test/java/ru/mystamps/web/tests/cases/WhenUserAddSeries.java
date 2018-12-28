@@ -357,7 +357,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#1-3 (10.5 EUR)");
 		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#10-12 (1000 USD)");
 		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#20-22 (8.11 EUR)");
-		// TODO: disable rounding mode
+		// FIXME: disable rounding mode
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 GBP)");
 		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#40-42 (140.2 RUB)");
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
