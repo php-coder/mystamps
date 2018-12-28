@@ -985,8 +985,16 @@
 					<includes>
 						<include>**/mystamps/web/service/*</include>
 						<include>**/mystamps/web/util/*</include>
-						<include>**/mystamps/web/util/extractor/JsoupSiteParser*</include>
+						<include>**/mystamps/web/feature/**/*ServiceImpl*</include>
+						<include>**/mystamps/web/feature/image/*PreviewStrategy*</include>
+						<include>**/mystamps/web/feature/image/*PersistenceStrategy*</include>
+						<include>**/mystamps/web/feature/series/importing/TimedSeriesInfoExtractorService*</include>
+						<include>**/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor*</include>
+						<include>**/mystamps/web/feature/series/importing/extractor/JsoupSiteParser*</include>
+						<include>**/mystamps/web/feature/series/importing/extractor/TimedSiteParser*</include>
+						<include>**/mystamps/web/controller/editor/ReplaceRepeatingSpacesEditor*</include>
 						<include>**/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter*</include>
+						<include>**/mystamps/web/support/thymeleaf/GroupByParent*</include>
 					</includes>
 				</configuration>
 			</plugin>
