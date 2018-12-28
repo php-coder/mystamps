@@ -1,6 +1,7 @@
 ---
 
-# TODO: use systemd module (requires ansible 2.2+)
+# @todo #399 mystamps-app: use systemd module
+# (requires ansible 2.2+)
 - name: Reloading systemd service
   command:
     systemctl daemon-reload
