@@ -37,8 +37,6 @@ public class AddSeriesParsedDataDbDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	// I like parentheses around catalog number check
-	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
 		return categoryId != null
 			|| countryId != null
