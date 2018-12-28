@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.context.ApplicationEventPublisher;
@@ -45,8 +44,6 @@ import ru.mystamps.web.feature.series.importing.extractor.SiteParserServiceImpl;
 @Configuration
 @RequiredArgsConstructor
 public class EventsConfig {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(EventsConfig.class);
 	
 	private final CategoryService categoryService;
 	private final CountryService countryService;
