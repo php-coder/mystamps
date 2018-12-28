@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing
 
 import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
-import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomValue.between
 
 import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
@@ -480,7 +479,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractSellerGroup() should return null when id is not null'() {
 		expect:
-			service.extractSellerGroup(positiveInteger(), Random.url()) == null
+			service.extractSellerGroup(Random.id(), Random.url()) == null
 	}
 	
 	@Unroll
@@ -498,7 +497,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractSellerGroup() should return seller group id'() {
 		given:
-			Integer expectedGroupId = positiveInteger()
+			Integer expectedGroupId = Random.id()
 		when:
 			Integer groupId = service.extractSellerGroup(null, 'https://test.ru/about/me')
 		then:
