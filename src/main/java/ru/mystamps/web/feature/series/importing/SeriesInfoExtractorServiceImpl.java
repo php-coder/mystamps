@@ -83,14 +83,14 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// @todo #803 SeriesInfoExtractorServiceImpl.extract(): add unit tests
 	@Override
 	@Transactional(readOnly = true)
-	public SeriesExtractedInfo extract(RawParsedDataDto data) {
+	public SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data) {
 		List<Integer> categoryIds = extractCategory(data.getCategoryName());
 		List<Integer> countryIds = extractCountry(data.getCountryName());
 		Integer releaseYear = extractReleaseYear(data.getReleaseYear());
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
 		Set<String> michelNumbers = extractMichelNumbers(data.getMichelNumbers());
-		Integer sellerId = extractSeller(data.getSellerName(), data.getSellerUrl());
+		Integer sellerId = extractSeller(pageUrl, data.getSellerName(), data.getSellerUrl());
 		Integer sellerGroupId = extractSellerGroup(sellerId, data.getSellerUrl());
 		String sellerName = extractSellerName(sellerId, data.getSellerName());
 		String sellerUrl = extractSellerUrl(sellerId, data.getSellerUrl());
@@ -294,11 +294,24 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptySet();
 	}
 	
-	/* default */ Integer extractSeller(String name, String url) {
+	/* default */ Integer extractSeller(String pageUrl, String name, String url) {
 		if (StringUtils.isNotBlank(name) && StringUtils.isNotBlank(url)) {
 			// CheckStyle: ignore LineLength for next 1 line
 			// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)
 			return extractSellerByNameAndUrl(name, url);
+		}
+		
+		if (StringUtils.isNotBlank(pageUrl)) {
+			log.debug("Determining seller by site, page URL = '{}'", pageUrl);
+			try {
+				String siteUrl = new URL(pageUrl).getHost();
+				// @todo #978 SeriesInfoExtractorServiceImpl.extractSeller(): validate name
+				return extractSellerBySiteName(siteUrl);
+
+			} catch (MalformedURLException ex) {
+				log.debug("Could not extract seller: {}", ex.getMessage());
+				return null;
+			}
 		}
 		
 		return null;
@@ -395,6 +408,19 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Integer sellerId = participantService.findSellerId(name, url);
 		if (sellerId == null) {
 			log.debug("Could not extract seller based on name/url");
+		} else {
+			log.debug("Found seller: #{}", sellerId);
+		}
+		
+		return sellerId;
+	}
+	
+	private Integer extractSellerBySiteName(String name) {
+		log.debug("Determining seller by site name '{}'", name);
+		
+		Integer sellerId = participantService.findSellerId(name);
+		if (sellerId == null) {
+			log.debug("Could not extract seller based on site name");
 		} else {
 			log.debug("Found seller: #{}", sellerId);
 		}

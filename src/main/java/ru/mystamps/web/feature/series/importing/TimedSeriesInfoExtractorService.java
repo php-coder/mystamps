@@ -32,7 +32,7 @@ public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorServi
 	// false positive
 	@SuppressWarnings("PMD.UnnecessaryLocalBeforeReturn")
 	@Override
-	public SeriesExtractedInfo extract(RawParsedDataDto data) {
+	public SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data) {
 		// Why we don't use Spring's StopWatch?
 		// 1) because its javadoc says that it's not intended for production
 		// 2) because we don't want to have strong dependencies on the Spring Framework
@@ -43,7 +43,7 @@ public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorServi
 		// make method body too complicated by adding many try/catches and I believe that such
 		// exception will never happen because it would mean that we're using API in a wrong way.
 		timer.start();
-		SeriesExtractedInfo result = extractorService.extract(data);
+		SeriesExtractedInfo result = extractorService.extract(pageUrl, data);
 		timer.stop();
 		
 		log.debug("Series info was extracted from raw data in {} msecs", timer.getTime());

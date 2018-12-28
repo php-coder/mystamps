@@ -147,10 +147,34 @@ class ParticipantServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findSellerId()
+	// Tests for findSellerId(String)
 	//
 	
-	def 'findSellerId() should throw exception when name is null, empty or blank'() {
+	def 'findSellerId(String) should throw exception when name is null, empty or blank'() {
+		when:
+			service.findSellerId(nullOrBlank())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Seller name must be non-blank'
+	}
+	
+	def 'findSellerId(String) should invoke dao and return its result'() {
+		given:
+			String expectedName = Random.sellerName()
+			Integer expectedResult = Random.id()
+		when:
+			Integer result = service.findSellerId(expectedName)
+		then:
+			1 * participantDao.findSellerId(expectedName) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
+	// Tests for findSellerId(String, String)
+	//
+	
+	def 'findSellerId(String, String) should throw exception when name is null, empty or blank'() {
 		when:
 			service.findSellerId(nullOrBlank(), Random.url())
 		then:
@@ -158,7 +182,7 @@ class ParticipantServiceImplTest extends Specification {
 			ex.message == 'Seller name must be non-blank'
 	}
 	
-	def 'findSellerId() should throw exception when url is null, empty or blank'() {
+	def 'findSellerId(String, String) should throw exception when url is null, empty or blank'() {
 		when:
 			service.findSellerId(Random.sellerName(), nullOrBlank())
 		then:
@@ -166,7 +190,7 @@ class ParticipantServiceImplTest extends Specification {
 			ex.message == 'Seller url must be non-blank'
 	}
 	
-	def 'findSellerId() should invoke dao and return its result'() {
+	def 'findSellerId(String, String) should invoke dao and return its result'() {
 		given:
 			String expectedName = Random.sellerName()
 			String expectedUrl = Random.url()

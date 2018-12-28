@@ -442,27 +442,34 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	// Tests for extractSeller()
 	//
 	
-	def 'extractSeller() should return null when name is null, empty or blank'() {
+	def 'extractSeller() should return null when seller name is null, empty or blank'() {
 		when:
-			String result = service.extractSeller(nullOrBlank(), Random.url())
+			String result = service.extractSeller(null, nullOrBlank(), Random.url())
 		then:
 			result == null
 	}
 	
-	def 'extractSeller() should return null when url is null, empty or blank'() {
+	def 'extractSeller() should return null when seller url is null, empty or blank'() {
 		when:
-			String result = service.extractSeller(Random.sellerName(), nullOrBlank())
+			String result = service.extractSeller(null, Random.sellerName(), nullOrBlank())
+		then:
+			result == null
+	}
+	
+	def 'extractSeller() should return null when page url is null, empty or blank'() {
+		when:
+			String result = service.extractSeller(nullOrBlank(), nullOrBlank(), nullOrBlank())
 		then:
 			result == null
 	}
 	
 	@Unroll
-	def 'extractSeller() should invoke dao and return its result (#expectedResult)'(Integer expectedResult) {
+	def 'extractSeller() should find by name/url and return (#expectedResult)'(Integer expectedResult) {
 		given:
 			String expectedName = Random.sellerName()
 			String expectedUrl = Random.url()
 		when:
-			Integer result = service.extractSeller(expectedName, expectedUrl)
+			Integer result = service.extractSeller(null, expectedName, expectedUrl)
 		then:
 			1 * participantService.findSellerId(expectedName, expectedUrl) >> expectedResult
 		and:
@@ -471,6 +478,29 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			expectedResult | _
 			null           | _
 			Random.id()    | _
+	}
+	
+	@Unroll
+	def 'extractSeller() should return null for invalid or unknown page (#pageUrl)'(String pageUrl) {
+		when:
+			Integer sellerId = service.extractSeller(pageUrl, nullOrBlank(), nullOrBlank())
+		then:
+			sellerId == null
+		where:
+			pageUrl               | _
+			'localhost'           | _
+			'https://example.org' | _
+	}
+	
+	def 'extractSeller() should find by site name'() {
+		given:
+			Integer expectedSellerId = Random.id()
+		when:
+			Integer sellerId = service.extractSeller('https://test.ru/some/page', nullOrBlank(), nullOrBlank())
+		then:
+			1 * participantService.findSellerId('test.ru') >> expectedSellerId
+		and:
+			sellerId == expectedSellerId
 	}
 	
 	//

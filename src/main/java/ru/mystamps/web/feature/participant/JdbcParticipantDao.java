@@ -37,6 +37,8 @@ import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
+// The String literal "name" appears 4 times in this file
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class JdbcParticipantDao implements ParticipantDao {
 	
@@ -50,6 +52,9 @@ public class JdbcParticipantDao implements ParticipantDao {
 	
 	@Value("${transaction_participant.find_sellers_with_parent_names}")
 	private String findSellersWithParentNamesSql;
+	
+	@Value("${transaction_participant.find_seller_id_by_name}")
+	private String findSellerIdByNameSql;
 	
 	@Value("${transaction_participant.find_seller_id_by_name_and_url}")
 	private String findSellerIdByNameAndUrlSql;
@@ -100,6 +105,19 @@ public class JdbcParticipantDao implements ParticipantDao {
 			findSellersWithParentNamesSql,
 			RowMappers::forEntityWithParentDto
 		);
+	}
+	
+	@Override
+	public Integer findSellerId(String name) {
+		try {
+			return jdbcTemplate.queryForObject(
+				findSellerIdByNameSql,
+				Collections.singletonMap("name", name),
+				Integer.class
+			);
+		} catch (EmptyResultDataAccessException ignored) {
+			return null;
+		}
 	}
 	
 	@Override

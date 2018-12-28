@@ -26,6 +26,7 @@ public interface ParticipantDao {
 	Integer add(AddParticipantDbDto participant);
 	List<EntityWithParentDto> findBuyersWithParents();
 	List<EntityWithParentDto> findSellersWithParents();
+	Integer findSellerId(String name);
 	Integer findSellerId(String name, String url);
 	List<EntityWithIdDto> findAllGroups();
 	Integer findGroupIdByName(String name);

@@ -79,6 +79,14 @@ public class ParticipantServiceImpl implements ParticipantService {
 	
 	@Override
 	@Transactional(readOnly = true)
+	public Integer findSellerId(String name) {
+		Validate.isTrue(StringUtils.isNotBlank(name), "Seller name must be non-blank");
+		
+		return participantDao.findSellerId(name);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
 	public Integer findSellerId(String name, String url) {
 		Validate.isTrue(StringUtils.isNotBlank(name), "Seller name must be non-blank");
 		Validate.isTrue(StringUtils.isNotBlank(url), "Seller url must be non-blank");

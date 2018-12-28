@@ -18,5 +18,5 @@
 package ru.mystamps.web.feature.series.importing;
 
 public interface SeriesInfoExtractorService {
-	SeriesExtractedInfo extract(RawParsedDataDto data);
+	SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data);
 }

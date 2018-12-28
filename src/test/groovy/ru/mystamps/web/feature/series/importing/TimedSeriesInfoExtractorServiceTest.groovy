@@ -24,6 +24,7 @@ import org.slf4j.helpers.NOPLogger
 import spock.lang.Specification
 
 import ru.mystamps.web.service.TestObjects
+import ru.mystamps.web.tests.Random
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class TimedSeriesInfoExtractorServiceTest extends Specification {
@@ -42,12 +43,13 @@ class TimedSeriesInfoExtractorServiceTest extends Specification {
 	
 	def 'extract() should invoke original service and return its result'() {
 		given:
+			String expectedPageUrl = Random.url()
 			RawParsedDataDto expectedParsedData = TestObjects.createRawParsedDataDto()
 			SeriesExtractedInfo expectedResult = nullOr(TestObjects.createSeriesExtractedInfo())
 		when:
-			SeriesExtractedInfo result = service.extract(expectedParsedData)
+			SeriesExtractedInfo result = service.extract(expectedPageUrl, expectedParsedData)
 		then:
-			1 * origService.extract(expectedParsedData) >> expectedResult
+			1 * origService.extract(expectedPageUrl, expectedParsedData) >> expectedResult
 		and:
 			result == expectedResult
 	}

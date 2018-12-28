@@ -99,7 +99,7 @@ public class DownloadingSucceededEventListener
 			info.getCurrency()
 		);
 		
-		SeriesExtractedInfo seriesInfo = extractorService.extract(data);
+		SeriesExtractedInfo seriesInfo = extractorService.extract(event.getUrl(), data);
 		
 		seriesImportService.saveParsedData(requestId, seriesInfo, data.getImageUrl());
 	}
