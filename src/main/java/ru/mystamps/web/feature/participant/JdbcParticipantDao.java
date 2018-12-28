@@ -52,7 +52,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 	private String findSellersWithParentNamesSql;
 	
 	@Value("${transaction_participant.find_seller_id_by_name_and_url}")
-	private String findSellerIdSql;
+	private String findSellerIdByNameAndUrlSql;
 	
 	@Value("${transaction_participant_group.find_all}")
 	private String findAllGroupsSql;
@@ -109,7 +109,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 		params.put("url", url);
 		
 		try {
-			return jdbcTemplate.queryForObject(findSellerIdSql, params, Integer.class);
+			return jdbcTemplate.queryForObject(findSellerIdByNameAndUrlSql, params, Integer.class);
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
