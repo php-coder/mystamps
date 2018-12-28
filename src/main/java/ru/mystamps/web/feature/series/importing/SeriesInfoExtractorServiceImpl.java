@@ -295,21 +295,11 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	/* default */ Integer extractSeller(String name, String url) {
-		if (StringUtils.isBlank(name) || StringUtils.isBlank(url)) {
-			return null;
+		if (StringUtils.isNotBlank(name) && StringUtils.isNotBlank(url)) {
+			// CheckStyle: ignore LineLength for next 1 line
+			// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)
+			return extractSellerByNameAndUrl(name, url);
 		}
-		
-		// @todo #695 SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)
-		
-		log.debug("Determining seller by name '{}' and url '{}'", name, url);
-		
-		Integer sellerId = participantService.findSellerId(name, url);
-		if (sellerId != null) {
-			log.debug("Found seller: #{}", sellerId);
-			return sellerId;
-		}
-		
-		log.debug("Could not extract seller based on name/url");
 		
 		return null;
 	}
@@ -397,6 +387,19 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			log.debug("Could not extract currency: {}", ex.getMessage());
 			return null;
 		}
+	}
+	
+	private Integer extractSellerByNameAndUrl(String name, String url) {
+		log.debug("Determining seller by name '{}' and url '{}'", name, url);
+		
+		Integer sellerId = participantService.findSellerId(name, url);
+		if (sellerId == null) {
+			log.debug("Could not extract seller based on name/url");
+		} else {
+			log.debug("Found seller: #{}", sellerId);
+		}
+		
+		return sellerId;
 	}
 	
 	private static boolean validCategoryName(String name) {
