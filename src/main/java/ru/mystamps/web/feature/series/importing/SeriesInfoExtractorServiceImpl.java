@@ -318,7 +318,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	/* default */ Integer extractSellerGroup(Integer id, String sellerUrl) {
-		// we need a group ony for a new seller (id == null)
+		// we need a group only for a new seller (id == null)
 		if (id != null || StringUtils.isBlank(sellerUrl)) {
 			return null;
 		}
@@ -349,7 +349,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names
 		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names
 		
-		// we need a name ony if we couldn't find a seller in database (id == null)
+		// we need a name only if we couldn't find a seller in database (id == null)
 		return name;
 	}
 	
@@ -361,7 +361,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls
 		// @todo #695 SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls
 		
-		// we need a url ony if we couldn't find a seller in database (id == null)
+		// we need a url only if we couldn't find a seller in database (id == null)
 		return url;
 	}
 	
