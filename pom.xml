@@ -1161,7 +1161,7 @@
 				<role>founder</role>
 				<role>developer</role>
 			</roles>
-			<timezone>+1</timezone>
+			<timezone>0</timezone>
 		</developer>
 		<developer>
 			<name>Sergey Chechenev</name>
