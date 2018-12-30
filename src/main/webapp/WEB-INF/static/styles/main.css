@@ -82,10 +82,9 @@ label {
 .hint-block {
 	color: #808080;
 	font-style: italic;
-	/* copy&paste .help-block properties (except color) */
+	/* copy&paste .help-block properties (except color and margin-bottom) */
 	display: block;
 	margin-top: 5px;
-	margin-bottom: 10px;
 }
 
 .row .series-images {
