@@ -699,7 +699,7 @@ if File.file?(failsafe_report)
 end
 
 # Don't show some warnings/messages to a bot, it doesn't read them
-prFromRealUser = github.pr_author != 'dependabot[bot]'
+prFromRealUser = github.pr_author != 'dependabot'
 
 if prFromRealUser && github.pr_body !~ /Addressed to #\d+/
 	warn(
