@@ -172,7 +172,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
-		# TODO: remove ignoring of error about alt attribute after resolving #314
+		# FIXME: remove ignoring of error about alt attribute after resolving #314
 		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
 		# @todo #695 /series/import/request/{id}: use divs instead of table for elements aligning
 		html5validator \

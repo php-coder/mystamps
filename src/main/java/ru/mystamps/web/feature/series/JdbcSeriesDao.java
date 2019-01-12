@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 
 import ru.mystamps.web.support.jdbc.RowMappers;
 
-// TODO: move stamps related methods to separate interface (#88)
+// FIXME: move stamps related methods to separate interface (#88)
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
 	"PMD.TooManyMethods",

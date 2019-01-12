@@ -69,7 +69,7 @@ Create series by filling all fields
 	Element Text Should Be     id=michel_catalog_info    \#101-103 (10.5 EUR)
 	Element Text Should Be     id=scott_catalog_info     \#110-112 (1000 USD)
 	Element Text Should Be     id=yvert_catalog_info     \#120-122 (8.11 EUR)
-	# TODO: disable rounding mode
+	# FIXME: disable rounding mode
 	Element Text Should Be     id=gibbons_catalog_info   \#130-132 (400.34 GBP)
 	Element Text Should Be     id=solovyov_catalog_info  \#140-142 (200.5 RUB)
 	Element Text Should Be     id=zagorski_catalog_info  \#150-152 (300.55 RUB)

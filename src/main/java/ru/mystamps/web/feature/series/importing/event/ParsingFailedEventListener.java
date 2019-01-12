@@ -42,7 +42,7 @@ public class ParsingFailedEventListener
 	public void onApplicationEvent(ParsingFailed event) {
 		Integer requestId = event.getRequestId();
 		
-		// TODO: more info?
+		// FIXME: more info?
 		log.info("Request #{}: parsing failed", requestId);
 		
 		seriesImportService.changeStatus(

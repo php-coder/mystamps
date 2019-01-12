@@ -59,7 +59,7 @@ public class FieldsMatchValidator implements ConstraintValidator<FieldsMatch, Ob
 			return true;
 		}
 		
-		// TODO: check fields only when both fields are equals
+		// FIXME: check fields only when both fields are equals
 		
 		if (!firstFieldValue.equals(secondFieldValue)) {
 			// bind error message to 2nd field

@@ -29,7 +29,7 @@ Create participant with full info (fill all fields)
 	Submit Form                id=add-participant-form
 	Location Should Be         ${SITE_URL}/
 	Go To                      ${SITE_URL}/series/1
-	# TODO: check that buyer and seller listed in the "example.com" group
+	# FIXME: check that buyer and seller listed in the "example.com" group
 	${availableSellers}=       Get List Items  id=seller
 	${availableBuyers}=        Get List Items  id=buyer
 	List Should Contain Value  ${availableSellers}  participant2

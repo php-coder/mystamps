@@ -168,25 +168,25 @@ public abstract class AbstractPage {
 		Validate.isTrue(!"".equals(login), "login must be not null and not empty");
 		Validate.isTrue(!"".equals(password), "password must be not null and not empty");
 		
-		// TODO: check than we already authenticated and do nothing
+		// FIXME: check than we already authenticated and do nothing
 		AuthAccountPage authPage = new AuthAccountPage(driver);
 		authPage.open();
 		authPage.authorizeUser(login, password);
 		
 		// return to current page
 		open();
-		// TODO: test for presence link with text "Sign out" to ensure than all right?
+		// FIXME: test for presence link with text "Sign out" to ensure than all right?
 	}
 	
 	public void logout() {
-		// TODO: check than we not authenticated and do nothing
+		// FIXME: check than we not authenticated and do nothing
 		
 		WebElement logoutButton = getElementByXPath(LOGOUT_BUTTON_LOCATOR);
 		logoutButton.submit();
 		
 		// return to current page
 		open();
-		// TODO: test for presence link with text "Sign in" to ensure than all right?
+		// FIXME: test for presence link with text "Sign in" to ensure than all right?
 	}
 	
 }

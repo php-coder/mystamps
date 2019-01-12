@@ -239,7 +239,7 @@ if File.file?(bootlint_output)
 		file   = github.html_link("#{file}#L#{lineno}")
 		fail("bootlint error in #{file}:\n[#{code}](https://github.com/twbs/bootlint/wiki/#{code}): #{msg}")
 	end
-	# TODO: add link to wiki page (#316)
+	# FIXME: add link to wiki page (#316)
 	print_errors_summary 'bootlint', errors_count
 end
 
@@ -292,7 +292,7 @@ if File.file?(shellcheck_output)
 		file   = github.html_link("#{file}#L#{lineno}")
 		fail("shellcheck error in #{file}:\n[#{code}](https://github.com/koalaman/shellcheck/wiki/#{code}): #{msg}")
 	end
-	# TODO: add link to wiki page
+	# FIXME: add link to wiki page
 	print_errors_summary 'shellcheck', errors_count
 end
 
@@ -395,7 +395,7 @@ if File.file?(validator_output)
 		fail("html5validator error in #{file}:\n#{msg}")
 	end
 	
-	# TODO: add link to wiki page (#541)
+	# FIXME: add link to wiki page (#541)
 	print_errors_summary 'html5validator', errors_count
 end
 
@@ -654,7 +654,7 @@ if File.file?(rf_report)
 		file = github.html_link("#{file}#{line}")
 		fail("robotframework-maven-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n#{msg}")
 	end
-	# TODO: add link to wiki page (#530)
+	# FIXME: add link to wiki page (#530)
 	print_errors_summary 'robotframework-maven-plugin', errors_count
 end
 
@@ -690,7 +690,7 @@ if File.file?(failsafe_report)
 			file = github.html_link(file)
 			testcase = clazz.split('.')[-1] + '.' + node['name']
 			msg = node.xpath('./exception/message').text.strip
-			# TODO: highlight line number
+			# FIXME: highlight line number
 			fail("maven-failsafe-plugin error in #{file}:\nTest case `#{testcase}` fails with error:\n#{msg}")
 		end
 		

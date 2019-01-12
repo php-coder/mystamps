@@ -29,7 +29,7 @@ services:
       # the generated root password will be printed to stdout (GENERATED ROOT PASSWORD: ...)
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=mystamps
-      # TODO: try to use a secret
+      # FIXME: try to use a secret
       - MYSQL_PASSWORD=secret
       # the user specified above will be granted superuser access automatically
       - MYSQL_DATABASE=mystamps

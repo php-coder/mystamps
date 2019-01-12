@@ -112,7 +112,7 @@ public class CollectionController {
 			return null;
 		}
 		
-		// TODO: we need only ownerName, without id and slug
+		// FIXME: we need only ownerName, without id and slug
 		CollectionInfoDto collection = collectionService.findBySlug(slug);
 		if (collection == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

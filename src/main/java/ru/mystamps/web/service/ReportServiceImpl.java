@@ -74,7 +74,7 @@ public class ReportServiceImpl implements ReportService {
 		put(ctx, "failed_auth_cnt", report.getFailedAuthCounter());
 		put(ctx, "missing_csrf_cnt", report.getMissingCsrfCounter());
 		put(ctx, "invalid_csrf_cnt", report.getInvalidCsrfCounter());
-		put(ctx, "bad_request_cnt", -1L);  // TODO: #122
+		put(ctx, "bad_request_cnt", -1L);  // FIXME: #122
 
 		return new StringSubstitutor(ctx).replace(template);
 	}

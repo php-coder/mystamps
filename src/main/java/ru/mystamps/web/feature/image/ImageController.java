@@ -51,7 +51,7 @@ public class ImageController {
 			return;
 		}
 
-		// TODO: set content disposition
+		// FIXME: set content disposition
 		response.setContentType("image/" + image.getType().toLowerCase(Locale.ENGLISH));
 		response.setContentLength(image.getData().length);
 		

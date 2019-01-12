@@ -193,7 +193,7 @@ public class CollectionServiceImpl implements CollectionService {
 	private static String formatSeriesInfo(AddToCollectionDbDto collectionDto) {
 		StringBuilder sb = new StringBuilder();
 
-		// TODO: it would be good to include number of stamps in series vs in collection
+		// FIXME: it would be good to include number of stamps in series vs in collection
 		sb.append("stamps=")
 			.append(collectionDto.getNumberOfStamps());
 

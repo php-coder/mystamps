@@ -49,7 +49,7 @@ public class WhenAnonymousUserOpenNotExistingPage extends WhenAnyUserAtAnyPage<N
 	
 	@Test(groups = "logic", enabled = false)
 	public void incidentShouldBeLoggedToDatabase() {
-		// TODO: check suspicious_activities table (#99)
+		// FIXME: check suspicious_activities table (#99)
 	}
 	
 }

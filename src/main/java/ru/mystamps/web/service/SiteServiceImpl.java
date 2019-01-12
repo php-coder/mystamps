@@ -187,7 +187,7 @@ public class SiteServiceImpl implements SiteService {
 			return text;
 		}
 		
-		// TODO(security): fix possible log injection
+		// FIXME(security): fix possible log injection
 		log.warn(
 				"Length of '{}' exceeds max length for '{}' field: {} > {}",
 				text,

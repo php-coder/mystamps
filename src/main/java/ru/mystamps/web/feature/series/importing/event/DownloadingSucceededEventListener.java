@@ -67,14 +67,14 @@ public class DownloadingSucceededEventListener
 		
 		SiteParser parser = siteParserService.findForUrl(event.getUrl());
 		if (parser == null) {
-			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
+			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
 			log.error("Request #{}: could not find appropriate parser", requestId);
 			return;
 		}
 		
 		String content = seriesImportService.getDownloadedContent(requestId);
 		if (content == null) {
-			// TODO: how to handle error? maybe publish UnexpectedErrorEvent?
+			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
 			log.error("Request #{}: could not load a content from database", requestId);
 			return;
 		}

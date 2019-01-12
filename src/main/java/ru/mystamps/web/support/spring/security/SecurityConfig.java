@@ -126,10 +126,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers(Url.H2_CONSOLE_PAGE + "/**")
 				.and()
 			.rememberMe()
-				// TODO: GH #27
+				// FIXME: GH #27
 				.disable()
 			.headers()
-				.defaultsDisabled() // TODO
+				.defaultsDisabled() // FIXME
 				.addHeaderWriter(cspWriter);
 	}
 	

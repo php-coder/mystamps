@@ -38,7 +38,7 @@ import ru.mystamps.web.service.StampsCatalogService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
 
-// TODO: move stamps related methods to separate interface (#88)
+// FIXME: move stamps related methods to separate interface (#88)
 // The String literal "Series id must be non null" appears N times in this file
 // and we think that it's OK.
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })

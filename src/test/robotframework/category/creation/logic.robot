@@ -19,7 +19,7 @@ Create category with name in English (fill only mandatory fields)
 	Go To                             ${SITE_URL}/series/add
 	${availableCategories}=           Get List Items  id=category
 	List Should Contain Value         ${availableCategories}  Cars
-	# TODO: verify that after changing language, header will be in English
+	# FIXME: verify that after changing language, header will be in English
 
 Create category with name in English and Russian
 	Input Text              id=name  Space

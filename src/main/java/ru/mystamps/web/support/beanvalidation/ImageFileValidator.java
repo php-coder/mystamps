@@ -55,7 +55,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	};
 	
 	private static boolean isJpeg(byte[] bytes) {
-		// TODO: also check that last 2 bytes are FF D9 (use RandomAccessFile)
+		// FIXME: also check that last 2 bytes are FF D9 (use RandomAccessFile)
 		
 		for (byte[] signature: JPEG_SIGNATURES) {
 			if (Arrays.equals(bytes, signature)) {

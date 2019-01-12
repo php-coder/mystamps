@@ -175,7 +175,7 @@ public class ImageServiceImpl implements ImageService {
 			return text;
 		}
 		
-		// TODO(security): fix possible log injection
+		// FIXME(security): fix possible log injection
 		log.warn(
 			"Length of value for 'filename' field ({}) exceeds max field size ({}): '{}'",
 			text.length(),

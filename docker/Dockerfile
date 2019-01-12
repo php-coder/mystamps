@@ -16,7 +16,7 @@ ENV SPRING_PROFILES_ACTIVE=test
 #   See also: https://docs.docker.com/engine/reference/builder/#run
 #   NOTE: /data/uploads and /data/preview are being used only in "prod" profile.
 # - Setting up a timezone to Moscow time.
-#   TODO: remove when #76 will be resolved and application will use UTC timezone.
+#   FIXME: remove when #76 will be resolved and application will use UTC timezone.
 RUN mkdir /data \
  && useradd mystamps --home-dir /data/mystamps --create-home --comment 'MyStamps' \
  && mkdir /data/uploads /data/preview /data/heap-dumps \

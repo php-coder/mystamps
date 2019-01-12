@@ -51,7 +51,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		
 		} else if (!storageDir.canWrite()) {
 			log.warn(
-				// TODO(java9): log also user: ProcessHandle.current().info().user()
+				// FIXME(java9): log also user: ProcessHandle.current().info().user()
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image uploading won't work.",
 				storageDir
@@ -67,7 +67,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			);
 		
 		} else if (!previewDir.canWrite()) {
-			// TODO(java9): log also user: ProcessHandle.current().info().user()
+			// FIXME(java9): log also user: ProcessHandle.current().info().user()
 			log.warn(
 				"Directory '{}' exists but isn't writable for the current user! "
 				+ "Image preview generation won't work",
@@ -177,7 +177,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 	}
 	
 	private static String generateFileName(ImageInfoDto image) {
-		// TODO(performance): specify initial capacity explicitly
+		// FIXME(performance): specify initial capacity explicitly
 		return new StringBuilder()
 			.append(image.getId())
 			.append('.')

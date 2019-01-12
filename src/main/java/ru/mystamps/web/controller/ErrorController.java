@@ -50,7 +50,7 @@ public class ErrorController {
 			@RequestHeader(name = "referer", required = false) String referer,
 			@RequestHeader(name = "user-agent", required = false) String agent) {
 		
-		// TODO: sanitize all user's values (#60)
+		// FIXME: sanitize all user's values (#60)
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
@@ -64,7 +64,7 @@ public class ErrorController {
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION, required = false) Exception exception,
 		@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page) {
 		
-		// TODO: log to database (with *.status_code, *.message, *.servlet_name and user details)
+		// FIXME: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
 		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
 			LOG.error(

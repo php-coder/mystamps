@@ -110,7 +110,7 @@ public final class Url {
 	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
-	// TODO: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
+	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
 	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.4/css/selectize.bootstrap3.css";
 	public static final String SELECTIZE_JS           = "/public/selectize/0.12.4/js/standalone/selectize.min.js";
 	

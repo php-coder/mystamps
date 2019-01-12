@@ -46,7 +46,7 @@ public class AuthAccountPage extends AbstractPageWithForm {
 	}
 	
 	public boolean authenticationFormExists() {
-		// TODO: probably better to check for form tag presence?
+		// FIXME: probably better to check for form tag presence?
 		return elementWithIdExists("auth-account-form");
 	}
 	

@@ -40,7 +40,7 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 	}
 	
 	public boolean registrationFormExists() {
-		// TODO: probably better to check for form tag presence?
+		// FIXME: probably better to check for form tag presence?
 		return elementWithIdExists("registerAccountForm");
 	}
 	

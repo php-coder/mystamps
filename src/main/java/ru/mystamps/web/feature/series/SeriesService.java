@@ -20,7 +20,7 @@ package ru.mystamps.web.feature.series;
 import java.util.Date;
 import java.util.List;
 
-// TODO: move stamps related methods to separate interface (#88)
+// FIXME: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);

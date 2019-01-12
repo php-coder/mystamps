@@ -664,7 +664,7 @@ public class SeriesController {
 	}
 	
 	private static void addStampsToCollectionForm(Model model, SeriesDto series) {
-		// TODO: only add when isSeriesInCollection
+		// FIXME: only add when isSeriesInCollection
 		if (model.containsAttribute("addToCollectionForm")) {
 			return;
 		}

@@ -50,13 +50,13 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		LoggerFactory.getLogger(HttpURLConnectionDownloaderService.class);
 	
 	// We don't support redirects because they allow to bypass some of our validations.
-	// TODO: How exactly redirects can harm?
+	// FIXME: How exactly redirects can harm?
 	@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.ImmutableField"})
 	private boolean followRedirects = false;
 	
 	// Only types listed here will be downloaded. For other types, INVALID_FILE_TYPE error
 	// will be returned. An empty array (or null) means that all types are allowed.
-	// TODO: at this moment we do a case sensitive comparison. Should we change it?
+	// FIXME: at this moment we do a case sensitive comparison. Should we change it?
 	private final String[] allowedContentTypes;
 	
 	// Max time to wait during opening a connection to a resource (in milliseconds).
@@ -67,7 +67,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	@Override
 	@PreAuthorize(HasAuthority.DOWNLOAD_IMAGE)
 	public DownloadResult download(String fileUrl) {
-		// TODO(security): fix possible log injection
+		// FIXME(security): fix possible log injection
 		LOG.debug("Downloading '{}'", fileUrl);
 		
 		try {
@@ -93,7 +93,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 					return DownloadResult.failed(validationResult);
 				}
 				
-				// TODO(java9): use InputStream.readAllBytes()
+				// FIXME(java9): use InputStream.readAllBytes()
 				byte[] data = StreamUtils.copyToByteArray(stream);
 				String contentType = conn.getContentType();
 				return DownloadResult.succeeded(data, contentType);
@@ -130,7 +130,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	}
 	
 	private static void configureUserAgent(URLConnection conn) {
-		// TODO: make it configurable
+		// FIXME: make it configurable
 		conn.setRequestProperty(
 			"User-Agent",
 			"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0"
@@ -181,7 +181,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		contentType = StringUtils.substringBefore(contentType, ";");
 		
 		if (allowedContentTypes != null && !ArrayUtils.contains(allowedContentTypes, contentType)) {
-			// TODO(security): fix possible log injection
+			// FIXME(security): fix possible log injection
 			LOG.debug("Couldn't download file: unsupported file type '{}'", contentType);
 			return Code.INVALID_FILE_TYPE;
 		}

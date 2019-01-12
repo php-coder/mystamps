@@ -42,7 +42,7 @@ import ru.mystamps.web.feature.series.SitemapInfoDto;
 public class SitemapController {
 	private static final Logger LOG = LoggerFactory.getLogger(SitemapController.class);
 	
-	// TODO: convert dates to UTC and omit server-specific timezone part
+	// FIXME: convert dates to UTC and omit server-specific timezone part
 	// According to http://www.w3.org/TR/NOTE-datetime
 	private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mmXXX";
 	

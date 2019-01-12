@@ -726,7 +726,7 @@
 				<version>${dockerfile.plugin.version}</version>
 				<configuration>
 					<repository>phpcoder/mystamps</repository>
-					<!-- TODO: set it to docker/ after https://github.com/spotify/dockerfile-maven/pull/89 will be merged -->
+					<!-- FIXME: set it to docker/ after https://github.com/spotify/dockerfile-maven/pull/89 will be merged -->
 					<contextDirectory>target</contextDirectory>
 				</configuration>
 			</plugin>
@@ -859,7 +859,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${resources.plugin.version}</version>
 				<executions>
-					<!-- TODO: remove this workaround after merging https://github.com/spotify/dockerfile-maven/pull/89 -->
+					<!-- FIXME: remove this workaround after merging https://github.com/spotify/dockerfile-maven/pull/89 -->
 					<execution>
 						<id>copy-docker-resources</id>
 						<goals>

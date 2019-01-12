@@ -103,7 +103,7 @@ public class CountryServiceImpl implements CountryService {
 	public List<Integer> findIdsWhenNameStartsWith(String name) {
 		Validate.isTrue(StringUtils.isNotBlank(name), "Name must be non-blank");
 		
-		// TODO: escape % and _ chars in name
+		// FIXME: escape % and _ chars in name
 		Validate.isTrue(
 			!StringUtils.containsAny(name, '%', '_'),
 			"Name must not contain '%' or '_' chars"
