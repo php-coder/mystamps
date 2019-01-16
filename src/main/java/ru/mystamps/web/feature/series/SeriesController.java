@@ -678,6 +678,8 @@ public class SeriesController {
 		return series.getImageIds().size() <= series.getQuantity();
 	}
 	
+	// I like these parentheses and also ErrorProne suggests to have an explicit order
+	@SuppressWarnings("PMD.UselessParentheses")
 	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {
 		return isAdmin()
 			|| (isOwner(series) && isAllowedToAddingImages(series));

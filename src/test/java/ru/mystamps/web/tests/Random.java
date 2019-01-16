@@ -31,6 +31,7 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.qala.datagen.RandomElements;
 import io.qala.datagen.RandomShortApi;
 
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
@@ -43,7 +44,6 @@ import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.util.SlugUtils;
 import ru.mystamps.web.validation.ValidationRules;
 
-import static io.qala.datagen.RandomElements.from;
 import static io.qala.datagen.RandomShortApi.bool;
 import static io.qala.datagen.RandomShortApi.integer;
 import static io.qala.datagen.RandomShortApi.sample;
@@ -89,7 +89,7 @@ public final class Random {
 	
 	public static BigDecimal price() {
 		// @todo #769 Random.price(): return randomized values
-		return from(new BigDecimal("17"), new BigDecimal("100.99")).sample();
+		return RandomElements.from(new BigDecimal("17"), new BigDecimal("100.99")).sample();
 	}
 	
 	public static String login() {

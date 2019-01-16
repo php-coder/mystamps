@@ -62,7 +62,7 @@ public class StepDefinitions  {
 	@Then("^I am on the page with my collection$")
 	public void onPageMyCollection() {
 		String actualTitle = driver.getTitle();
-		assertEquals(actualTitle, "My stamps: Test Suite's collection");
+		assertEquals("My stamps: Test Suite's collection", actualTitle);
 	}
 
 	@And("^I see that this series has been added to the collection$")
