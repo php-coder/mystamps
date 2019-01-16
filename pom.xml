@@ -493,6 +493,8 @@
 		
 		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
+		<error-prone.version>2.3.2</error-prone.version>
 		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
@@ -781,6 +783,29 @@
 					<failOnWarning>true</failOnWarning>
 					<!-- Required for using method's parameters inside of @PreAuthorize expressions -->
 					<parameters>true</parameters>
+					<!-- Required for ErrorProne -->
+					<!-- @todo #971 Document ErrorProne tool -->
+					<compilerArgs>
+						<compilerArg>-XDcompilePolicy=simple</compilerArg>
+						<!--
+							The following checks have been disabled:
+							- MissingOverride: produce false positives with @Getter from Lombok
+							- ParameterName: workaround for https://github.com/google/error-prone/issues/780
+						-->
+						<compilerArg>-Xplugin:ErrorProne -Xep:MissingOverride:OFF -Xep:ParameterName:OFF</compilerArg>
+					</compilerArgs>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>com.google.errorprone</groupId>
+							<artifactId>error_prone_core</artifactId>
+							<version>${error-prone.version}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 			
@@ -1188,5 +1213,31 @@
 		<connection>scm:git:git://github.com/php-coder/mystamps.git</connection>
 		<url>https://github.com/php-coder/mystamps</url>
 	</scm>
+	
+	<profiles>
+		<profile>
+			<id>jdk8</id>
+			<activation>
+				<jdk>1.8</jdk>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Required for ErrorProne -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<fork>true</fork>
+							<compilerArgs combine.children="append">
+								<compilerArg>
+									-J-Xbootclasspath/p:${settings.localRepository}/com/google/errorprone/javac/${error-prone-javac.version}/javac-${error-prone-javac.version}.jar
+								</compilerArg>
+							</compilerArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	
 </project>

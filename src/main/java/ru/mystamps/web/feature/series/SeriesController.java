@@ -680,7 +680,7 @@ public class SeriesController {
 	
 	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {
 		return isAdmin()
-			|| isOwner(series) && isAllowedToAddingImages(series);
+			|| (isOwner(series) && isAllowedToAddingImages(series));
 	}
 	
 	private static boolean isAdmin() {

@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
@@ -68,7 +68,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
 		// Constants sorted in an ascending order.
-		List<GrantedAuthority> authorities = new LinkedList<>();
+		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(Authority.CREATE_CATEGORY);
 		authorities.add(Authority.CREATE_COUNTRY);
 		authorities.add(Authority.CREATE_SERIES);
