@@ -671,7 +671,7 @@
 				<version>${license.plugin.version}</version>
 				<configuration>
 					<basedir>src</basedir>
-					<header>src/main/config/license_header.txt</header>
+					<header>${basedir}/src/main/config/license_header.txt</header>
 					<includes>
 						<include>**/*.java</include>
 						<include>**/*.groovy</include>
