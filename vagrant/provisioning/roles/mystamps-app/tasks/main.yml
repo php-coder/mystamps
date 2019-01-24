@@ -10,7 +10,7 @@
 
 - name: Uploading mystamps.war to a server
   copy:
-    src: ../../target/mystamps.war
+    src: ../../web/target/mystamps.war
     dest: /data/mystamps/mystamps.war
     force: yes
     backup: no

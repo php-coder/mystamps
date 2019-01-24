@@ -15,7 +15,7 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-# shellcheck source=src/main/scripts/ci/common.sh
+# shellcheck source=web/src/main/scripts/ci/common.sh
 . "$(dirname "$0")/common.sh"
 
 CS_STATUS=
@@ -53,7 +53,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		MODIFIED_FILES="$(git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- 2>/dev/null || :)"
 		
 		if [ -n "$MODIFIED_FILES" ]; then
-			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
+			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"       | grep -Fq 'pom.xml' || echo 'no')"
 			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
 			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | grep -Eq '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
 			AFFECTS_FB_CFG="$(echo "$MODIFIED_FILES"        |  grep -q 'findbugs-filter\.xml$' || echo 'no')"
@@ -111,31 +111,31 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
-		mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
+		mvn --batch-mode --file web/pom.xml checkstyle:check -Dcheckstyle.violationSeverity=warning \
 			>cs.log 2>&1 || CS_STATUS=fail
 	fi
 	print_status "$CS_STATUS" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
-		mvn --batch-mode pmd:check \
+		mvn --batch-mode --file web/pom.xml pmd:check \
 			>pmd.log 2>&1 || PMD_STATUS=fail
 	fi
 	print_status "$PMD_STATUS" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
-		mvn --batch-mode license:check \
+		mvn --batch-mode --file web/pom.xml license:check \
 			>license.log 2>&1 || LICENSE_STATUS=fail
 	fi
 	print_status "$LICENSE_STATUS" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
-		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
+		mvn --batch-mode --file web/pom.xml sortpom:verify -Dsort.verifyFail=stop \
 			>pom.log 2>&1 || POM_STATUS=fail
 	fi
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
-		find src/main -type f -name '*.html' -print0 | xargs -0 bootlint \
+		find web/src/main -type f -name '*.html' -print0 | xargs -0 bootlint \
 			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
 	print_status "$BOOTLINT_STATUS" 'Run bootlint'
@@ -150,13 +150,13 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--ignore RequireTestDocumentation \
 			--ignore RequireKeywordDocumentation \
 			--configure LineTooLong:130 \
-			src/test/robotframework \
+			web/src/test/robotframework \
 			>rflint.log 2>&1 || RFLINT_STATUS=fail
 	fi
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
-		SHELL_FILES=( $(find src/main/scripts -type f -name '*.sh') )
+		SHELL_FILES=( $(find web/src/main/scripts -type f -name '*.sh') )
 		shellcheck \
 			--shell bash \
 			--format gcc \
@@ -166,7 +166,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
-		mvn --batch-mode jasmine:test \
+		mvn --batch-mode --file web/pom.xml jasmine:test \
 			>jasmine.log 2>&1 || JASMINE_STATUS=fail
 	fi
 	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
@@ -176,7 +176,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
 		# @todo #695 /series/import/request/{id}: use divs instead of table for elements aligning
 		html5validator \
-			--root src/main/webapp/WEB-INF/views \
+			--root web/src/main/webapp/WEB-INF/views \
 			--no-langdetect \
 			--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
 				'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
@@ -191,33 +191,33 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$HTML_STATUS" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
-		mvn --batch-mode enforcer:enforce \
+		mvn --batch-mode --file web/pom.xml enforcer:enforce \
 			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
 	fi
 	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
-		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
+		mvn --batch-mode --file web/pom.xml test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
 			>test.log 2>&1 || TEST_STATUS=fail
 	fi
 	print_status "$TEST_STATUS" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
+		mvn --batch-mode --file web/pom.xml codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
 			>codenarc.log 2>&1 || CODENARC_STATUS=fail
 	fi
 	print_status "$CODENARC_STATUS" 'Run CodeNarc'
 	
 	if [ "$FINDBUGS_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode findbugs:check \
+		mvn --batch-mode --file web/pom.xml findbugs:check \
 			>findbugs.log 2>&1 || FINDBUGS_STATUS=fail
 	fi
 	print_status "$FINDBUGS_STATUS" 'Run FindBugs'
 fi
 
-mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
+mvn --batch-mode --file web/pom.xml verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 # Workaround for #538
 "$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log

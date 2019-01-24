@@ -10,7 +10,7 @@ set -o errexit
 set -o pipefail
 
 
-# shellcheck source=src/main/scripts/ci/common.sh
+# shellcheck source=web/src/main/scripts/ci/common.sh
 . "$(dirname "$0")/common.sh"
 
 JACOCO_FAIL=

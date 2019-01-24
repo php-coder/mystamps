@@ -13,7 +13,7 @@ before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
-      cp src/main/resources/test/test.png /tmp/uploads/1.png;
+      cp web/src/main/resources/test/test.png /tmp/uploads/1.png;
       if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
         pip install --user ansible==2.1.1.0;
       fi;
@@ -29,9 +29,9 @@ before_script:
 
 script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/check-build-and-verify.sh;
+      ./web/src/main/scripts/ci/check-build-and-verify.sh;
     else
-      ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
+      ./web/src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
     fi
   # Travis CI may miss a part of the huge output if we'll exit immediately
   # See: https://github.com/travis-ci/travis-ci/issues/6018
@@ -40,25 +40,25 @@ script:
 after_failure:
   # In order to be able debug robot framework test flakes we need to have a report.
   # Just encode it to a gzipped binary form and dump to console.
-  - if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
+  - if fgrep -qs 'status="FAIL"' web/target/robotframework-reports/output.xml; then
       echo '===== REPORT START =====';
-      cat target/robotframework-reports/output.xml | gzip -c | base64;
+      cat web/target/robotframework-reports/output.xml | gzip -c | base64;
       echo '===== REPORT END =====';
       sleep 5;
     fi
 
 after_success:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/show-spring-boot-version-diff.sh;
+      ./web/src/main/scripts/show-spring-boot-version-diff.sh;
     fi
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/publish-code-coverage.sh;
+      ./web/src/main/scripts/ci/publish-code-coverage.sh;
       sleep 5;
     fi
 
 deploy:
   provider: script
-  script: ./src/main/scripts/ci/deploy.sh
+  script: ./web/src/main/scripts/ci/deploy.sh
   on:
     branch: prod
     condition: '"$SPRING_PROFILES_ACTIVE" = "travis" && "$TRAVIS_PULL_REQUEST" = "false"'

@@ -14,9 +14,9 @@ target/
 phantomjsdriver.log
 
 # minified resources
-src/main/webapp/WEB-INF/static/styles/*.min.css
-src/main/javascript/*.min.js
-src/main/javascript/*/*.min.js
+web/src/main/webapp/WEB-INF/static/styles/*.min.css
+web/src/main/javascript/*.min.js
+web/src/main/javascript/*/*.min.js
 
 # Vagrant related files
 .vagrant/

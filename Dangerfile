@@ -33,7 +33,7 @@ end
 #   <error line="64" severity="warning" message="Line is longer than 100 characters (found 131)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
 # </file>
 #
-cs_report = 'target/checkstyle-result.xml'
+cs_report = 'web/target/checkstyle-result.xml'
 if File.file?(cs_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(cs_report))
@@ -62,7 +62,7 @@ end
 #   </violation>
 # </file>
 #
-pmd_report = 'target/pmd.xml'
+pmd_report = 'web/target/pmd.xml'
 if File.file?(pmd_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(pmd_report))
@@ -99,7 +99,7 @@ end
 #   </Package>
 # </CodeNarc>
 #
-codenarc_report = 'target/CodeNarc.xml'
+codenarc_report = 'web/target/CodeNarc.xml'
 if File.file?(codenarc_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(codenarc_report))
@@ -356,7 +356,7 @@ end
 #   </testcase>
 # </testsuite>
 #
-jasmine_report = 'target/jasmine/TEST-jasmine.xml'
+jasmine_report = 'web/target/jasmine/TEST-jasmine.xml'
 if File.file?(jasmine_report)
 	doc = Nokogiri::XML(File.open(jasmine_report))
 	testsuite = doc.xpath('/testsuite').first
@@ -531,7 +531,7 @@ end
 #   </testcase>
 # </testsuite>
 #
-test_reports_pattern = 'target/surefire-reports/TEST-*.xml'
+test_reports_pattern = 'web/target/surefire-reports/TEST-*.xml'
 test_reports = Dir.glob(test_reports_pattern)
 unless test_reports.empty?
 	errors_count = 0
@@ -548,7 +548,7 @@ unless test_reports.empty?
 			msg = failure.text
 			tc  = failure.parent
 			file = tc['classname'].gsub(/\./, '/')
-			path = "src/test/groovy/#{file}.groovy"
+			path = "web/src/test/groovy/#{file}.groovy"
 			if File.file?(path)
 				file = path
 			end
@@ -577,7 +577,7 @@ end
 #   </BugInstance>
 # </BugCollection>
 #
-findbugs_report = 'target/findbugsXml.xml'
+findbugs_report = 'web/target/findbugsXml.xml'
 if File.file?(findbugs_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(findbugs_report))
@@ -611,7 +611,7 @@ end
 #     </status>
 #   </test>
 # </suite>
-rf_report = 'target/robotframework-reports/output.xml'
+rf_report = 'web/target/robotframework-reports/output.xml'
 if File.file?(rf_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(rf_report))
@@ -675,7 +675,7 @@ end
 #             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 #             ...
 #
-failsafe_report = 'target/failsafe-reports/testng-results.xml'
+failsafe_report = 'web/target/failsafe-reports/testng-results.xml'
 if File.file?(failsafe_report)
 	errors_count = 0
 	doc = Nokogiri::XML(File.open(failsafe_report))
@@ -686,7 +686,7 @@ if File.file?(failsafe_report)
 			errors_count += 1
 			
 			clazz = node.parent['name']
-			file = 'src/test/java/' + clazz.gsub(/\./, '/') + '.java'
+			file = 'web/src/test/java/' + clazz.gsub(/\./, '/') + '.java'
 			file = github.html_link(file)
 			testcase = clazz.split('.')[-1] + '.' + node['name']
 			msg = node.xpath('./exception/message').text.strip
@@ -729,10 +729,10 @@ if github.branch_for_head !~ /^gh[0-9]+_/
 	)
 end
 
-js_file  = %r{^src/main/javascript/.*\.js$}
-css_file = %r{^src/main/webapp/.*\.css$}
+js_file  = %r{^web/src/main/javascript/.*\.js$}
+css_file = %r{^web/src/main/webapp/.*\.css$}
 modified_resources = git.modified_files.any? { |file| file =~ js_file || file =~ css_file }
-updated_url = git.modified_files.include? 'src/main/java/ru/mystamps/web/Url.java'
+updated_url = git.modified_files.include? 'web/src/main/java/ru/mystamps/web/Url.java'
 if modified_resources && !updated_url
 	warn("danger check: looks like you forgot to update `Url.RESOURCES_VERSION` after modifying JS/CSS file(s)")
 end

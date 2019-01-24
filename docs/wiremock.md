@@ -25,14 +25,14 @@ WireMock is fully configured by the `wiremock-maven-plugin` in the `pom.xml` fil
 * the server is listening on `8888` port
 * you can refer to the mock server from within RobotFramework test cases by using `${MOCK_SERVER}`
   variable.
-* static files are reside inside the `src/test/wiremock/__files` directory
-* mocks and stubs are reside inside the `src/test/wiremock/mappings` directory
+* static files are reside inside the `web/src/test/wiremock/__files` directory
+* mocks and stubs are reside inside the `web/src/test/wiremock/mappings` directory
 
 By our convention the files in these directories should have the same hierarchy as their
 RobotFramework test cases. For instance, the mocks/files used solely by
 `category/creation/logic.robot` test case, should be placed into
-`src/test/wiremock/__files/category/creation/logic` and
-`src/test/wiremock/mappings/category/creation/logic` directories.
+`web/src/test/wiremock/__files/category/creation/logic` and
+`web/src/test/wiremock/mappings/category/creation/logic` directories.
 
 In the case, mocks/files are being used by the different test cases, they should reside in a
 directory that is the base for all such test cases.

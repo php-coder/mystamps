@@ -12,7 +12,7 @@
 
   - name: Getting info about WAR file
     stat:
-      path: 'target/mystamps.war'
+      path: 'web/target/mystamps.war'
       get_checksum: no
       get_md5: no
     register: war_file
@@ -40,7 +40,7 @@
 
   - name: Copying WAR file
     copy:
-      src: '../../../../../target/mystamps.war'
+      src: '../../../../../web/target/mystamps.war'
       dest: "{{ remote_war_dir }}/mystamps.war"
       owner: mystamps
       group: mystamps
