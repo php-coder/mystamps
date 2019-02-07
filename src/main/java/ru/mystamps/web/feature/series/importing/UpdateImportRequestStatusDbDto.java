@@ -18,23 +18,17 @@
 package ru.mystamps.web.feature.series.importing;
 
 import java.util.Date;
-import java.util.List;
 
-public interface SeriesImportDao {
-	Integer add(ImportSeriesDbDto importRequest);
-	void setSeriesIdAndChangeStatus(
-		Integer requestId,
-		Integer seriesId,
-		String oldStatus,
-		String newStatus,
-		Date updatedAt
-	);
-	void changeStatus(UpdateImportRequestStatusDbDto requestStatus);
-	ImportRequestDto findById(Integer id);
-	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
-	String findRawContentByRequestId(Integer requestId);
-	void addParsedData(Integer requestId, AddSeriesParsedDataDbDto data);
-	SeriesParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
-	ImportRequestInfo findRequestInfo(Integer seriesId);
-	List<ImportRequestFullInfo> findAll();
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@RequiredArgsConstructor
+public class UpdateImportRequestStatusDbDto {
+	private final Integer requestId;
+	private final Date date;
+	private final String oldStatus;
+	private final String newStatus;
 }

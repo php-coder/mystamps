@@ -30,6 +30,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 
 import org.springframework.context.ApplicationEventPublisher;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -136,8 +137,10 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Validate.isTrue(!oldStatus.equals(newStatus), "Statuses must be different");
 		
 		Date now = new Date();
+		UpdateImportRequestStatusDbDto status =
+			new UpdateImportRequestStatusDbDto(requestId, now, oldStatus, newStatus);
 		
-		seriesImportDao.changeStatus(requestId, now, oldStatus, newStatus);
+		seriesImportDao.changeStatus(status);
 	}
 	
 	@Override

@@ -123,21 +123,20 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		);
 	}
 	
-	// @todo #660 JdbcSeriesImportDao.changeStatus(): introduce dao
 	@Override
-	public void changeStatus(Integer requestId, Date date, String oldStatus, String newStatus) {
+	public void changeStatus(UpdateImportRequestStatusDbDto requestStatus) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("id", requestId);
-		params.put("date", date);
-		params.put("old_status", oldStatus);
-		params.put("new_status", newStatus);
+		params.put("id", requestStatus.getRequestId());
+		params.put("date", requestStatus.getDate());
+		params.put("old_status", requestStatus.getOldStatus());
+		params.put("new_status", requestStatus.getNewStatus());
 		
 		int affected = jdbcTemplate.update(changeStatusSql, params);
 		
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after updating status of request #%d: %d",
-			requestId,
+			requestStatus.getRequestId(),
 			affected
 		);
 	}

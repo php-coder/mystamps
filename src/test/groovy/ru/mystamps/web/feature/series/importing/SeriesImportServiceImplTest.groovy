@@ -307,7 +307,7 @@ class SeriesImportServiceImplTest extends Specification {
 			ex.message == 'Statuses must be different'
 	}
 	
-	@SuppressWarnings('UnnecessaryReturnKeyword')
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'changeStatus() should pass arguments to dao'() {
 		given:
 			Integer expectedRequestId = Random.userId()
@@ -318,15 +318,14 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.changeStatus(expectedRequestId, expectedOldStatus, expectedNewStatus)
 		then:
-			1 * seriesImportDao.changeStatus(
-				expectedRequestId,
-				{ Date date ->
-					assert DateUtils.roughlyEqual(date, new Date())
-					return true
-				},
-				expectedOldStatus,
-				expectedNewStatus
-			)
+			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
+				assert status?.requestId == expectedRequestId
+				assert DateUtils.roughlyEqual(status.date, new Date())
+				assert status?.oldStatus == expectedOldStatus
+				assert status?.newStatus == expectedNewStatus
+				return true
+			})
+	
 	}
 	
 	//
@@ -367,7 +366,7 @@ class SeriesImportServiceImplTest extends Specification {
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Request id must be non null'
 	}
-	
+
 	@Unroll
 	def "saveDownloadedContent() should throw exception when content is '#content'"(String content) {
 		when:
@@ -403,22 +402,20 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings('UnnecessaryReturnKeyword')
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveDownloadedContent() should change status'() {
 		given:
 			Integer expectedRequestId = Random.id()
 		when:
 			service.saveDownloadedContent(expectedRequestId, between(1, 10).english())
 		then:
-			1 * seriesImportDao.changeStatus(
-				expectedRequestId,
-				{ Date date ->
-					assert DateUtils.roughlyEqual(date, new Date())
+			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
+					assert status?.requestId == expectedRequestId
+					assert DateUtils.roughlyEqual(status.date, new Date())
+					assert status?.oldStatus == SeriesImportRequestStatus.UNPROCESSED
+					assert status?.newStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
 					return true
-				},
-				SeriesImportRequestStatus.UNPROCESSED,
-				SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
-			)
+			})
 	}
 	
 	//
@@ -563,20 +560,17 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 	}
 	
-	@SuppressWarnings('UnnecessaryReturnKeyword')
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveParsedData() should change request status'() {
 		when:
 			service.saveParsedData(Random.id(), TestObjects.createEmptySeriesExtractedInfo(), Random.url())
 		then:
-			1 * seriesImportDao.changeStatus(
-				_ as Integer,
-				{ Date date ->
-					assert DateUtils.roughlyEqual(date, new Date())
+			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
+					assert DateUtils.roughlyEqual(status.date, new Date())
+					assert status?.oldStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
+					assert status?.newStatus == SeriesImportRequestStatus.PARSING_SUCCEEDED
 					return true
-				},
-				SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED,
-				SeriesImportRequestStatus.PARSING_SUCCEEDED
-			)
+			})
 	}
 	
 	//

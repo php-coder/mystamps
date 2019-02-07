@@ -83,6 +83,10 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.importing.UpdateImportRequestStatusDbDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<Class name="ru.mystamps.web.feature.series.importing.ImportSeriesDbDto" />
 		<Or>
 			<Method name="getRequestedAt" />
