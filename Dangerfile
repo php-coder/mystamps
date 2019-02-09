@@ -108,7 +108,13 @@ if File.file?(codenarc_report)
 		errors_count += 1
 		path = node.parent.parent['path']
 		line = node['lineNumber']
-		msg  = node.xpath('./Message').first.text
+		msgNode = node.xpath('./Message').first
+		if msgNode != nil
+			msg  = msgNode.text
+		else
+			# in rare cases, a message maybe abent and we use a rule name instead
+			msg = node['ruleName']
+		end
 		file = node.parent['name']
 		file = github.html_link("#{root_dir}/#{path}/#{file}#L#{line}")
 		fail("codenarc-maven-plugin error in #{file}:\n#{msg}")
