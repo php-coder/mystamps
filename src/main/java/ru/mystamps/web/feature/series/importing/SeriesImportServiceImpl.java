@@ -70,7 +70,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	public Integer addRequest(RequestImportDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getUrl() != null, "URL must be non null");
-		Validate.isTrue(userId != null, "Current user id must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
 		ImportSeriesDbDto importRequest = new ImportSeriesDbDto();
 		importRequest.setStatus(SeriesImportRequestStatus.UNPROCESSED);
