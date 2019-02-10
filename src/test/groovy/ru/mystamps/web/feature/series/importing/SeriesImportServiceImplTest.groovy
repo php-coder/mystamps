@@ -23,6 +23,7 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import org.slf4j.helpers.NOPLogger
 
@@ -76,7 +77,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.addRequest(null, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def 'addRequest() should throw exception if url is null'() {
@@ -85,14 +87,18 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.addRequest(form, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'URL must be non null'
 	}
 	
 	def 'addRequest() should throw exception if user id is null'() {
+		given:
+			form.setUrl(Random.url())
 		when:
 			service.addRequest(form, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	def 'addRequest() should throw exception if url is incorrect'() {
@@ -271,21 +277,24 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.changeStatus(null, oldStatus, newStatus)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
 	def 'changeStatus() should throw exception when old status is blank'() {
 		when:
 			service.changeStatus(Random.id(), nullOrBlank(), Random.importRequestStatus())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Old status must be non-blank'
 	}
 	
 	def 'changeStatus() should throw exception when new status is blank'() {
 		when:
 			service.changeStatus(Random.id(), Random.importRequestStatus(), nullOrBlank())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'New status must be non-blank'
 	}
 	
 	def 'changeStatus() should throw exception when statuses are equal'() {
@@ -294,7 +303,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.changeStatus(Random.id(), status, status)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Statuses must be different'
 	}
 	
 	@SuppressWarnings('UnnecessaryReturnKeyword')
@@ -327,7 +337,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.findById(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
 	def 'findById() should invoke dao, pass argument and return result from dao'() {
@@ -353,14 +364,21 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.saveDownloadedContent(null, content)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
-	def 'saveDownloadedContent() should throw exception when content is blank'() {
+	@Unroll
+	def "saveDownloadedContent() should throw exception when content is '#content'"(String content) {
 		when:
-			service.saveDownloadedContent(Random.id(), nullOrBlank())
+			service.saveDownloadedContent(Random.id(), content)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Content must be non-blank'
+		where:
+			content | _
+			''      | _
+			'  '    | _
 	}
 	
 	@SuppressWarnings('UnnecessaryReturnKeyword')
@@ -411,7 +429,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.getDownloadedContent(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
 	def 'getDownloadedContent() should invoke dao, pass argument and return result from dao'() {
@@ -437,14 +456,16 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.saveParsedData(null, TestObjects.createEmptySeriesExtractedInfo(), Random.url())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
 	def 'saveParsedData() should throw exception when series info is null'() {
 		when:
 			service.saveParsedData(Random.id(), null, Random.url())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series info must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -566,7 +587,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.getParsedData(null, Random.lang())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Request id must be non null'
 	}
 	
 	def 'getParsedData() should invoke dao, pass argument and return result from dao'() {
@@ -591,7 +613,8 @@ class SeriesImportServiceImplTest extends Specification {
 		when:
 			service.findRequestInfo(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
