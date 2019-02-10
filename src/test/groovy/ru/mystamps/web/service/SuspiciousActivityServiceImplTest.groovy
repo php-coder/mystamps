@@ -54,7 +54,8 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		when:
 			service.countByTypeSince(type, new Date())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Type must be non-blank'
 		where:
 			type | _
 			null | _
@@ -66,7 +67,8 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		when:
 			service.countByTypeSince('AnyType', null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -98,7 +100,8 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		when:
 			service.findSuspiciousActivities(page, 10)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Page must be greater than zero'
 		where:
 			page | _
 			-1   | _
@@ -110,7 +113,8 @@ class SuspiciousActivityServiceImplTest extends Specification {
 		when:
 			service.findSuspiciousActivities(1, recordsPerPage)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'RecordsPerPage must be greater than zero'
 		where:
 			recordsPerPage | _
 			-1             | _

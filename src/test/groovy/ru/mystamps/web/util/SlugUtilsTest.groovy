@@ -31,7 +31,8 @@ class SlugUtilsTest extends Specification {
 		when:
 			SlugUtils.slugify(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Text must be non null'
 	}
 	
 	@Unroll

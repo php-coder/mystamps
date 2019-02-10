@@ -215,7 +215,8 @@ class CronServiceImplTest extends Specification {
 		when:
 			service.purgeUsersActivations()
 		then:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'Expired activations must be non null'
 	}
 	
 	def "purgeUsersActivations() should delete expired activations"() {

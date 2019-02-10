@@ -31,14 +31,16 @@ class PagerTest extends Specification {
 		when:
 			new Pager(Long.MAX_VALUE, 10, 1)
 		then:
-			thrown ArithmeticException
+			ArithmeticException ex = thrown()
+			ex.message == 'integer overflow'
 	}
 	
 	def "Pager() should throw exception when total records is less than 0"() {
 		when:
 			new Pager(-1, 10, 1)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Total records must be greater than or equal to zero'
 	}
 	
 	@Unroll
@@ -46,7 +48,8 @@ class PagerTest extends Specification {
 		when:
 			new Pager(10, recordsPerPage, 1)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Records per page must be greater than zero'
 		where:
 			recordsPerPage | _
 			-1             | _
@@ -58,7 +61,8 @@ class PagerTest extends Specification {
 		when:
 			new Pager(10, 10, currentPage)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Current page must be greater than zero'
 		where:
 			currentPage | _
 			-1          | _

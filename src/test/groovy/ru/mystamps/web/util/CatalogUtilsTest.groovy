@@ -31,7 +31,8 @@ class CatalogUtilsTest extends Specification {
 		when:
 			CatalogUtils.toShortForm(null as List)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Catalog numbers must be non null'
 	}
 	
 	def 'toShortForm() should return empty string for empty numbers'() {

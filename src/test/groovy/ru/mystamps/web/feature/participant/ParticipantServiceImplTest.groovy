@@ -46,7 +46,8 @@ class ParticipantServiceImplTest extends Specification {
 		when:
 			service.add(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def 'add() should throw exception if name is null'() {
@@ -58,7 +59,8 @@ class ParticipantServiceImplTest extends Specification {
 		when:
 			service.add(form)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Name must be non null'
 	}
 	
 	def 'add() should throw exception when buyer flag is null'() {
@@ -70,7 +72,8 @@ class ParticipantServiceImplTest extends Specification {
 		when:
 			service.add(form)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Buyer flag must be non null'
 	}
 	
 	def 'add() should throw exception when seller flag is null'() {
@@ -82,7 +85,8 @@ class ParticipantServiceImplTest extends Specification {
 		when:
 			service.add(form)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Seller flag must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])

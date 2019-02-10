@@ -324,7 +324,8 @@ class CollectionServiceImplTest extends Specification {
 		when:
 			service.countSeriesOf(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection id must be non null'
 	}
 	
 	def 'countSeriesOf() should pass argument to dao'() {

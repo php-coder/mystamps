@@ -51,7 +51,8 @@ class SeriesSalesServiceImplTest extends Specification {
 		when:
 			service.add(null, 123, 456)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def 'add() should throw exception when seller id is null'() {
@@ -60,7 +61,8 @@ class SeriesSalesServiceImplTest extends Specification {
 		when:
 			service.add(form, 123, 456)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Seller id must be non null'
 	}
 	
 	def 'add() should throw exception when price is null'() {
@@ -69,7 +71,8 @@ class SeriesSalesServiceImplTest extends Specification {
 		when:
 			service.add(form, 123, 456)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Price must be non null'
 	}
 	
 	def 'add() should throw exception when currency is null'() {
@@ -78,21 +81,24 @@ class SeriesSalesServiceImplTest extends Specification {
 		when:
 			service.add(form, 123, 456)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Currency must be non null'
 	}
 	
 	def 'add() should throw exception when series id is null'() {
 		when:
 			service.add(form, null, 456)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def 'add() should throw exception when user id is null'() {
 		when:
 			service.add(form, 123, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Current user id must be non null'
 	}
 	
 	@Unroll

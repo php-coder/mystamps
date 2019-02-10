@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.service
 
-import static io.qala.datagen.RandomShortApi.nullOrBlank
-
 import org.slf4j.helpers.NOPLogger
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import ru.mystamps.web.dao.StampsCatalogDao
 import ru.mystamps.web.tests.Random
@@ -45,14 +44,16 @@ class StampsCatalogServiceImplTest extends Specification {
 		when:
 			service.add(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog numbers must be non null'
 	}
 	
 	def "add() should throw exception when numbers is empty"() {
 		when:
 			service.add([] as Set)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog numbers must be non empty'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -76,21 +77,24 @@ class StampsCatalogServiceImplTest extends Specification {
 		when:
 			service.addToSeries(null, [ '1', '2' ] as Set)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def "addToSeries() should throw exception when numbers is null"() {
 		when:
 			service.addToSeries(123, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog numbers must be non null'
 	}
 	
 	def "addToSeries() should throw exception when numbers is empty"() {
 		when:
 			service.addToSeries(123, [] as Set)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog numbers must be non empty'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -118,7 +122,8 @@ class StampsCatalogServiceImplTest extends Specification {
 		when:
 			service.findBySeriesId(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -142,11 +147,25 @@ class StampsCatalogServiceImplTest extends Specification {
 	// Tests for findSeriesIdsByNumber()
 	//
 	
-	def 'findSeriesIdsByNumber() should throw exception when argument is null, empty or blank'() {
+	def 'findSeriesIdsByNumber() should throw exception when argument is null'() {
 		when:
-			service.findSeriesIdsByNumber(nullOrBlank())
+			service.findSeriesIdsByNumber(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog number must be non null'
+	}
+	
+	@Unroll
+	def "findSeriesIdsByNumber() should throw exception when argument is '#catalogNumber'"(String catalogNumber) {
+		when:
+			service.findSeriesIdsByNumber(catalogNumber)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'TestCatalog number must be non-blank'
+		where:
+			catalogNumber | _
+			''            | _
+			'  '          | _
 	}
 	
 	def 'findSeriesIdsByNumber() should invoke dao and return its result'() {

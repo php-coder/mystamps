@@ -120,14 +120,16 @@ class SiteServiceImplTest extends Specification {
 		when:
 			serviceImpl.logEvent(null, TEST_PAGE, TEST_METHOD, null, null, null, null, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Type of suspicious activity must be non null'
 	}
 	
 	def "logEvent() should throw exception when page is null"() {
 		when:
 			serviceImpl.logEvent(TEST_TYPE, null, TEST_METHOD, null, null, null, null, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Page must be non null'
 	}
 	
 	def "logEvent() should call dao"() {
