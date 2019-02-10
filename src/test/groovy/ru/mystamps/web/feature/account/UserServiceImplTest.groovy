@@ -70,7 +70,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def "registerUser() should create user"() {
@@ -101,7 +102,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Activation key must be non null'
 	}
 	
 	def "registerUser() should do nothing when registration request not found"() {
@@ -204,7 +206,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Password must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -231,7 +234,8 @@ class UserServiceImplTest extends Specification {
 		then:
 			encoder.encode(_ as String) >> null
 		and:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'Generated hash must be non null'
 	}
 	
 	def "registerUser() should throw exception when login is null"() {
@@ -240,7 +244,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.registerUser(activationForm)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Login must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -294,7 +299,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.findUserDetailsByLogin(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Login must be non null'
 	}
 	
 	def "findUserDetailsByLogin() should call dao"() {
@@ -322,7 +328,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.countByLogin(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Login must be non null'
 	}
 	
 	def "countByLogin() should call dao"() {
@@ -349,7 +356,8 @@ class UserServiceImplTest extends Specification {
 		when:
 			service.countRegisteredSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])

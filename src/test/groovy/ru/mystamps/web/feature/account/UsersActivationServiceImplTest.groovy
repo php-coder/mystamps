@@ -54,7 +54,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(null, ANY_LOCALE)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def "add() should call dao"() {
@@ -106,7 +107,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.add(registrationForm, ANY_LOCALE)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Email must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -176,7 +178,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.countByActivationKey(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Activation key must be non null'
 	}
 	
 	def "countByActivationKey() should call dao"() {
@@ -203,7 +206,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.countCreatedSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -231,7 +235,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.findByActivationKey(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Activation key must be non null'
 	}
 
 	def "findByActivationKey() should call dao, pass argument to it and return result"() {
@@ -253,7 +258,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.findOlderThan(-1)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Days must be greater than zero'
 	}
 
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -283,7 +289,8 @@ class UsersActivationServiceImplTest extends Specification {
 		when:
 			service.remove(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Activation key must be non null'
 	}
 	
 	def "remove() should pass argument to DAO method"() {

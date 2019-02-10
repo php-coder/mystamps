@@ -58,7 +58,8 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.save(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'File must be non null'
 	}
 	
 	def "save() should throw exception if file has zero size"() {
@@ -67,7 +68,8 @@ class ImageServiceImplTest extends Specification {
 		then:
 			multipartFile.size >> 0L
 		and:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image size must be greater than zero'
 	}
 	
 	def "save() should throw exception if content type is null"() {
@@ -76,7 +78,8 @@ class ImageServiceImplTest extends Specification {
 		then:
 			multipartFile.contentType >> null
 		and:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'File type must be non null'
 	}
 	
 	def "save() should throw exception for unsupported content type"() {
@@ -85,7 +88,8 @@ class ImageServiceImplTest extends Specification {
 		then:
 			multipartFile.contentType >> 'image/tiff'
 		and:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == "File type must be PNG or JPEG image, but 'image/tiff' (tiff) were passed"
 	}
 	
 	@Unroll
@@ -168,7 +172,8 @@ class ImageServiceImplTest extends Specification {
 		and:
 			0 * imagePersistenceStrategy.save(_ as MultipartFile, _ as ImageInfoDto)
 		and:
-			thrown ImagePersistenceException
+			ImagePersistenceException ex = thrown()
+			ex.message == "Can't save image"
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -207,15 +212,23 @@ class ImageServiceImplTest extends Specification {
 	// Tests for get()
 	//
 	
+	def 'get() should throw exception if image id is null'() {
+		when:
+			service.get(null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image id must be non null'
+	}
+	
 	@Unroll
 	def "get() should throw exception if image id is #imageId"(Integer imageId) {
 		when:
 			service.get(imageId)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image id must be greater than zero'
 		where:
 			imageId | _
-			null    | _
 			-1      | _
 			0       | _
 	}
@@ -277,15 +290,23 @@ class ImageServiceImplTest extends Specification {
 	// Tests for getOrCreatePreview()
 	//
 	
+	def 'getOrCreatePreview() should throw exception if image id is null'() {
+		when:
+			service.getOrCreatePreview(null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image id must be non null'
+	}
+	
 	@Unroll
 	def "getOrCreatePreview() should throw exception if image id is #imageId"(Integer imageId) {
 		when:
 			service.getOrCreatePreview(imageId)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image id must be greater than zero'
 		where:
 			imageId | _
-			null    | _
 			-1      | _
 			0       | _
 	}
@@ -317,14 +338,16 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.addToSeries(null, 1)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def "addToSeries() should throw exception when image id is null"() {
 		when:
 			service.addToSeries(1, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -352,7 +375,8 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.findBySeriesId(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -380,7 +404,8 @@ class ImageServiceImplTest extends Specification {
 		when:
 			service.removeIfPossible(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image info must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
