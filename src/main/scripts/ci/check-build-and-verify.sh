@@ -135,7 +135,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
-		find src/main -type f -name '*.html' -print0 | xargs -0 bootlint \
+		find src/main -type f -name '*.html' -print0 | xargs -0 bootlint --disable W013 \
 			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
 	print_status "$BOOTLINT_STATUS" 'Run bootlint'
