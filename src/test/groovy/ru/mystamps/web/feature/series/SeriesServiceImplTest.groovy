@@ -87,7 +87,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(null, Random.userId(), bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def "add() should throw exception if quantity is null"() {
@@ -96,7 +97,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Quantity must be non null'
 	}
 	
 	def "add() should throw exception if perforated is null"() {
@@ -105,7 +107,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Perforated property must be non null'
 	}
 	
 	def "add() should throw exception if category is null"() {
@@ -114,7 +117,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category must be non null'
 	}
 	
 	def "add() should throw exception if category id is null"() {
@@ -123,14 +127,16 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category id must be non null'
 	}
 	
 	def "add() should throw exception when user is null"() {
 		when:
 			service.add(form, null, bool())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -257,7 +263,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId(), true)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Comment must be non empty'
 	}
 	
 	@Unroll
@@ -445,7 +452,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> Random.id()
 		and:
-			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
+			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException('oops') }
 		when:
 			service.add(form, Random.userId(), bool())
 		then:
@@ -453,7 +460,8 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			1 * imageService.removeIfPossible(expectedImageInfo)
 		and:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'oops'
 	}
 	
 	//
@@ -464,21 +472,24 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.addImageToSeries(null, Random.id(), Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def "addImageToSeries() should throw exception when series id is null"() {
 		when:
 			service.addImageToSeries(imageForm, null, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def "addImageToSeries() should throw exception when user id is null"() {
 		when:
 			service.addImageToSeries(imageForm, Random.id(), null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	@SuppressWarnings('UnnecessaryReturnKeyword')
@@ -525,7 +536,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			ImageInfoDto expectedImageInfo = TestObjects.createImageInfoDto()
 		and:
-			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException() }
+			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException('oops') }
 		when:
 			service.addImageToSeries(imageForm, Random.id(), Random.userId())
 		then:
@@ -533,7 +544,8 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			1 * imageService.removeIfPossible(expectedImageInfo)
 		and:
-			thrown IllegalStateException
+			IllegalStateException ex = thrown()
+			ex.message == 'oops'
 	}
 	
 	//
@@ -574,7 +586,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countAddedSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
@@ -598,7 +611,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.countUpdatedSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	def "countUpdatedSince() should invoke dao, pass argument and return result from dao"() {
@@ -622,7 +636,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.isSeriesExist(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	@Unroll
@@ -650,7 +665,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findQuantityById(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def 'findQuantityById() should invoke dao, pass argument and return result from dao'() {
@@ -1009,7 +1025,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findByCategorySlug(null, Random.lang())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category slug must be non null'
 	}
 	
 	def "findByCategorySlug() should call dao and return result"() {
@@ -1033,7 +1050,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findByCountrySlug(null, Random.lang())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Country slug must be non null'
 	}
 	
 	def "findByCountrySlug() should call dao and return result"() {
@@ -1058,7 +1076,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findRecentlyAdded(quantity, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Quantity of recently added series must be greater than 0'
 		where:
 			quantity | _
 			-1       | _
@@ -1100,7 +1119,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findPurchasesAndSales(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
