@@ -60,14 +60,11 @@ public class SeriesServiceImpl implements SeriesService {
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
 		Validate.isTrue(dto != null, "DTO must be non null");
-		Validate.isTrue(dto.getQuantity() != null, "Stamps quantity must be non null");
-		Validate.isTrue(
-			dto.getPerforated() != null,
-			"Stamps perforated property must be non null"
-		);
+		Validate.isTrue(dto.getQuantity() != null, "Quantity must be non null");
+		Validate.isTrue(dto.getPerforated() != null, "Perforated property must be non null");
 		Validate.isTrue(dto.getCategory() != null, "Category must be non null");
 		Validate.isTrue(dto.getCategory().getId() != null, "Category id must be non null");
-		Validate.isTrue(userId != null, "Current user id must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
 		AddSeriesDbDto series = new AddSeriesDbDto();
 		
