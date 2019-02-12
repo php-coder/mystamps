@@ -56,7 +56,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(null, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'DTO must be non null'
 	}
 	
 	def "add() should throw exception when English category name is null"() {
@@ -65,14 +66,16 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category name in English must be non null'
 	}
 	
 	def "add() should throw exception when user is null"() {
 		when:
 			service.add(form, null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	def "add() should call dao"() {
@@ -92,11 +95,12 @@ class CategoryServiceImplTest extends Specification {
 	
 	def "add() should throw exception when name can't be converted to slug"() {
 		given:
-			form.setName(null)
+			form.setName('-')
 		when:
 			service.add(form, Random.userId())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == "Slug for string '-' must be non empty"
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -170,7 +174,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findIdsWhenNameStartsWith(nullOrBlank())
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Name must be non-blank'
 	}
 	
 	def 'findIdsWhenNameStartsWith() should throw exception when name contains percent or underscore character'() {
@@ -179,7 +184,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findIdsWhenNameStartsWith(invalidName)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == "Name must not contain '%' or '_' chars"
 	}
 	
 	def 'findIdsWhenNameStartsWith() should invoke dao, pass argument and return result from dao'() {
@@ -247,17 +253,25 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for findOneAsLinkEntity()
 	//
 	
+	def 'findOneAsLinkEntity() should throw exception when category slug is null'() {
+		when:
+			service.findOneAsLinkEntity(null, Random.lang())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category slug must be non null'
+	}
+	
 	@Unroll
 	def "findOneAsLinkEntity() should throw exception when category slug is '#slug'"(String slug) {
 		when:
 			service.findOneAsLinkEntity(slug, 'ru')
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category slug must be non empty'
 		where:
 			slug | _
 			' '  | _
 			''   | _
-			null | _
 	}
 	
 	def "findOneAsLinkEntity() should pass arguments to dao"() {
@@ -298,7 +312,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countCategoriesOf(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection id must be non null'
 	}
 	
 	def "countCategoriesOf() should pass arguments to dao"() {
@@ -318,7 +333,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countBySlug(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Category slug must be non null'
 	}
 	
 	def "countBySlug() should call dao"() {
@@ -338,7 +354,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByName(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Name must be non null'
 	}
 	
 	def "countByName() should call dao"() {
@@ -365,7 +382,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countByNameRu(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Name in Russian must be non null'
 	}
 	
 	def "countByNameRu() should call dao"() {
@@ -392,7 +410,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countAddedSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
@@ -416,7 +435,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.countUntranslatedNamesSince(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Date must be non null'
 	}
 	
 	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
@@ -440,7 +460,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.getStatisticsOf(null, 'whatever')
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Collection id must be non null'
 	}
 
 	def "getStatisticsOf() should pass arguments to dao"() {
@@ -462,7 +483,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.suggestCategoryForUser(null)
 		then:
-			thrown IllegalArgumentException
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
 	}
 	
 	def 'suggestCategoryForUser() should return category of the last created series'() {
