@@ -13,8 +13,6 @@ Create series by filling only required fields and providing an image
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Submit Form                id=add-series-form
-	${location}=               Get Location
-	Should Match Regexp        ${location}  /series/\\d+
 	Element Text Should Be     id=category_name  Sport
 	Element Text Should Be     id=quantity  2
 	Element Text Should Be     id=perforated  Yes
@@ -25,8 +23,6 @@ Create series by filling only required fields and providing a URL to image
 	Input Text                 id=quantity  1
 	Input Text                 id=image-url  ${SITE_URL}/image/1
 	Submit Form                id=add-series-form
-	${location}=               Get Location
-	Should Match Regexp        ${location}  /series/\\d+
 	Element Text Should Be     id=category_name  Sport
 	Element Text Should Be     id=quantity  1
 	Element Text Should Be     id=perforated  Yes
@@ -59,8 +55,6 @@ Create series by filling all fields
 	Click Element              id=add-comment-link
 	Input Text                 id=comment  Any text
 	Submit Form                id=add-series-form
-	${location}=               Get Location
-	Should Match Regexp        ${location}  /series/\\d+
 	Element Text Should Be     id=category_name  Sport
 	Element Text Should Be     id=country_name  Italy
 	Element Text Should Be     id=issue_date  04.05.1999
