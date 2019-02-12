@@ -106,7 +106,7 @@ public class CountryServiceImpl implements CountryService {
 		// FIXME: escape % and _ chars in name
 		Validate.isTrue(
 			!StringUtils.containsAny(name, '%', '_'),
-			"Name must not contain '%' or '_' chars"
+			"Name must not contain '%%' or '_' chars"
 		);
 		
 		// converting to lowercase to perform a case-insensitive search
