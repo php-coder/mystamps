@@ -24,7 +24,7 @@ WireMock is fully configured by the `wiremock-maven-plugin` in the `pom.xml` fil
 
 * the server is listening on `8888` port
 * you can refer to the mock server from within RobotFramework test cases by using `${MOCK_SERVER}`
-  variable.
+  variable
 * static files are reside inside the `src/test/wiremock/__files` directory
 * mocks and stubs are reside inside the `src/test/wiremock/mappings` directory
 
