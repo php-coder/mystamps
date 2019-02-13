@@ -1096,6 +1096,32 @@ class SeriesServiceImplTest extends Specification {
 	}
 	
 	//
+	// Tests for findSimilarSeries()
+	//
+	
+	def 'findSimilarSeries() should throw exception when series id is null'() {
+		when:
+			service.findSimilarSeries(null, Random.lang())
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
+	}
+	
+	def 'findSimilarSeries() should invoke dao, pass arguments and return result from dao'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+			String expectedLang = Random.lang()
+		and:
+			List<SeriesLinkDto> expectedResult = [ TestObjects.createSeriesLinkDto() ]
+		when:
+			List<SeriesLinkDto> result = service.findSimilarSeries(expectedSeriesId, expectedLang)
+		then:
+			1 * seriesDao.findSimilarSeries(expectedSeriesId, expectedLang) >> expectedResult
+		and:
+			result == expectedResult
+	}
+	
+	//
 	// Tests for findAllForSitemap()
 	//
 	

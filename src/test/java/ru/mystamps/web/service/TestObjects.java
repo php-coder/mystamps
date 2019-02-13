@@ -41,6 +41,7 @@ import ru.mystamps.web.feature.series.AddSeriesForm;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
+import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
@@ -411,6 +412,16 @@ public final class TestObjects {
 		dto.setCurrency(Random.currency());
 		dto.setSeriesId(Random.id());
 		return dto;
+	}
+	
+	public static SeriesLinkDto createSeriesLinkDto() {
+		return new SeriesLinkDto(
+			Random.id(),
+			Random.issueYear(),
+			Random.quantity(),
+			Random.perforated(),
+			Random.countryName()
+		);
 	}
 	
 }
