@@ -83,13 +83,14 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	
 	def 'save() should convert IOException to ImagePersistenceException'() {
 		given:
-			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException() }
+			strategy.writeToFile(_ as MultipartFile, _ as Path) >> { throw new IOException('oops') }
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
+			ex.cause?.message == 'oops'
 	}
 	
 	//
@@ -113,13 +114,14 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 		and:
 			strategy.generateFilePath(_ as File, _ as ImageInfoDto) >> mockFile
 		and:
-			strategy.toByteArray(_ as Path) >> { throw new IOException() }
+			strategy.toByteArray(_ as Path) >> { throw new IOException('oops') }
 		when:
 			strategy.get(imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
+			ex.cause?.message == 'oops'
 	}
 	
 	def 'get() should return result with correct type and content'() {

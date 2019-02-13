@@ -50,13 +50,14 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	
 	def "save() should convert IOException to ImagePersistenceException"() {
 		given:
-			multipartFile.bytes >> { throw new IOException() }
+			multipartFile.bytes >> { throw new IOException('oops') }
 		when:
 			strategy.save(multipartFile, imageInfoDto)
 		then:
 			ImagePersistenceException ex = thrown()
 		and:
 			ex.cause instanceof IOException
+			ex.cause?.message == 'oops'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
