@@ -17,27 +17,31 @@
  */
 package ru.mystamps.web.feature.series.importing
 
-import static io.qala.datagen.RandomElements.from
-import static io.qala.datagen.RandomShortApi.nullOrBlank
-import static io.qala.datagen.RandomValue.between
-
-import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES
-
-import java.time.Year
-
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.validation.ValidationRules
+import spock.lang.Specification
+import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+import java.time.Year
+
+import static io.qala.datagen.RandomElements.from
+import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomValue.between
+import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
+import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES
+
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()

@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.image
 
 import org.slf4j.helpers.NOPLogger
-
 import spock.lang.Specification
 import spock.lang.Unroll
 

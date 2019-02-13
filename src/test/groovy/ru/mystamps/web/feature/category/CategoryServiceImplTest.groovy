@@ -17,24 +17,29 @@
  */
 package ru.mystamps.web.feature.category
 
-import static io.qala.datagen.RandomShortApi.nullOr
-import static io.qala.datagen.RandomShortApi.nullOrBlank
-import static io.qala.datagen.RandomValue.between
-import static io.qala.datagen.StringModifier.Impls.oneOf
-
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils
+import spock.lang.Specification
+import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomValue.between
+import static io.qala.datagen.StringModifier.Impls.oneOf
+
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class CategoryServiceImplTest extends Specification {
 	
 	private final CategoryDao categoryDao = Mock()

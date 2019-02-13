@@ -17,21 +17,26 @@
  */
 package ru.mystamps.web.feature.collection
 
-import static io.qala.datagen.RandomShortApi.bool
-import static io.qala.datagen.RandomShortApi.positiveLong
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import org.slf4j.helpers.NOPLogger
-
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.util.SlugUtils
+import spock.lang.Specification
+import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+import static io.qala.datagen.RandomShortApi.bool
+import static io.qala.datagen.RandomShortApi.positiveLong
+
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class CollectionServiceImplTest extends Specification {
 	
 	private final CollectionDao collectionDao = Mock()

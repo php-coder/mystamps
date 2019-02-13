@@ -17,27 +17,31 @@
  */
 package ru.mystamps.web.feature.series
 
-import static io.qala.datagen.RandomShortApi.bool
-import static io.qala.datagen.RandomShortApi.nullOr
-import static io.qala.datagen.RandomShortApi.positiveInteger
-import static io.qala.datagen.RandomShortApi.positiveLong
-
-import org.springframework.web.multipart.MultipartFile
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import org.slf4j.helpers.NOPLogger
-
-import ru.mystamps.web.feature.image.ImageInfoDto
+import org.springframework.web.multipart.MultipartFile
 import ru.mystamps.web.dao.dto.LinkEntityDto
+import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.feature.image.ImageService
 import ru.mystamps.web.service.StampsCatalogService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
+import spock.lang.Unroll
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+import static io.qala.datagen.RandomShortApi.bool
+import static io.qala.datagen.RandomShortApi.nullOr
+import static io.qala.datagen.RandomShortApi.positiveInteger
+import static io.qala.datagen.RandomShortApi.positiveLong
+
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class SeriesServiceImplTest extends Specification {
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()

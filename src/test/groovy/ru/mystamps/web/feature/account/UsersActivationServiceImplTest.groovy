@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.feature.account
 
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import org.slf4j.helpers.NOPLogger
-
 import ru.mystamps.web.service.MailService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.service.dto.SendUsersActivationDto
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.validation.ValidationRules
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UsersActivationServiceImplTest extends Specification {

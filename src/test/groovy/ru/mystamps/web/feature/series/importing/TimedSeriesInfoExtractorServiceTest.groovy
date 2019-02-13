@@ -17,16 +17,21 @@
  */
 package ru.mystamps.web.feature.series.importing
 
-import static io.qala.datagen.RandomShortApi.nullOr
-
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
 
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+import static io.qala.datagen.RandomShortApi.nullOr
+
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class TimedSeriesInfoExtractorServiceTest extends Specification {
 	
 	private final SeriesInfoExtractorService origService = Mock()

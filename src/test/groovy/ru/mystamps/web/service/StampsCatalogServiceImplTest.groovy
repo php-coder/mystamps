@@ -18,12 +18,10 @@
 package ru.mystamps.web.service
 
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.dao.StampsCatalogDao
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class StampsCatalogServiceImplTest extends Specification {

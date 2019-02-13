@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.service
 
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SuspiciousActivityServiceImplTest extends Specification {

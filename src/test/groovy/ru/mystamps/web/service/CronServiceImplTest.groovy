@@ -18,9 +18,6 @@
 package ru.mystamps.web.service
 
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-
 import ru.mystamps.web.feature.account.UserService
 import ru.mystamps.web.feature.account.UsersActivationFullDto
 import ru.mystamps.web.feature.account.UsersActivationService
@@ -29,6 +26,7 @@ import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.series.SeriesService
 import ru.mystamps.web.service.dto.AdminDailyReport
+import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class CronServiceImplTest extends Specification {

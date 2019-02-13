@@ -18,12 +18,10 @@
 package ru.mystamps.web.feature.series.sale
 
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.tests.DateUtils
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesSalesServiceImplTest extends Specification {

@@ -17,33 +17,37 @@
  */
 package ru.mystamps.web.feature.series.importing
 
+import org.slf4j.helpers.NOPLogger
+import org.springframework.context.ApplicationEventPublisher
+import ru.mystamps.web.Db.SeriesImportRequestStatus
+import ru.mystamps.web.feature.participant.AddParticipantDto
+import ru.mystamps.web.feature.participant.ParticipantService
+import ru.mystamps.web.feature.series.AddSeriesDto
+import ru.mystamps.web.feature.series.SeriesService
+import ru.mystamps.web.feature.series.importing.event.ParsingFailed
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto
+import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto
+import ru.mystamps.web.feature.series.sale.SeriesSalesService
+import ru.mystamps.web.service.TestObjects
+import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.tests.Random
+import spock.lang.Specification
+import spock.lang.Unroll
+
 import static io.qala.datagen.RandomShortApi.english
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 
-import spock.lang.Specification
-import spock.lang.Unroll
-
-import org.slf4j.helpers.NOPLogger
-
-import org.springframework.context.ApplicationEventPublisher
-
-import ru.mystamps.web.feature.series.importing.event.ParsingFailed
-import ru.mystamps.web.Db.SeriesImportRequestStatus
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto
-import ru.mystamps.web.feature.participant.AddParticipantDto
-import ru.mystamps.web.feature.participant.ParticipantService
-import ru.mystamps.web.feature.series.AddSeriesDto
-import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto
-import ru.mystamps.web.feature.series.sale.SeriesSalesService
-import ru.mystamps.web.feature.series.SeriesService
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService
-import ru.mystamps.web.service.TestObjects
-import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.tests.Random
-
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class SeriesImportServiceImplTest extends Specification {
 	
 	private final SeriesImportDao seriesImportDao = Mock()

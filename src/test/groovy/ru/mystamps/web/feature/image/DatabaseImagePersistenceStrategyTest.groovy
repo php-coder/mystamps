@@ -18,12 +18,9 @@
 package ru.mystamps.web.feature.image
 
 import org.slf4j.helpers.NOPLogger
-
 import org.springframework.web.multipart.MultipartFile
-
-import spock.lang.Specification
-
 import ru.mystamps.web.service.TestObjects
+import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class DatabaseImagePersistenceStrategyTest extends Specification {

@@ -17,16 +17,13 @@
  */
 package ru.mystamps.web.feature.image
 
-import org.springframework.web.multipart.MultipartFile
-
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import org.slf4j.helpers.NOPLogger
-
+import org.springframework.web.multipart.MultipartFile
 import ru.mystamps.web.Db
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class ImageServiceImplTest extends Specification {

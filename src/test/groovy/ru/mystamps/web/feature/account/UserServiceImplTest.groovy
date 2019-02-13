@@ -17,16 +17,13 @@
  */
 package ru.mystamps.web.feature.account
 
-import org.springframework.security.crypto.password.PasswordEncoder
-
-import spock.lang.Specification
-
 import org.slf4j.helpers.NOPLogger
-
+import org.springframework.security.crypto.password.PasswordEncoder
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class UserServiceImplTest extends Specification {

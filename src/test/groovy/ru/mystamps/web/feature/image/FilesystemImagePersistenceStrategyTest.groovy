@@ -18,14 +18,11 @@
 package ru.mystamps.web.feature.image
 
 import org.slf4j.helpers.NOPLogger
-
 import org.springframework.web.multipart.MultipartFile
-
+import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 import java.nio.file.Path
-
-import ru.mystamps.web.service.TestObjects
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class FilesystemImagePersistenceStrategyTest extends Specification {

@@ -17,15 +17,13 @@
  */
 package ru.mystamps.web.service
 
-import spock.lang.Unroll
-import spock.lang.Specification
-
 import org.slf4j.helpers.NOPLogger
-
 import ru.mystamps.web.Db
 import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto
 import ru.mystamps.web.tests.DateUtils
+import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SiteServiceImplTest extends Specification {

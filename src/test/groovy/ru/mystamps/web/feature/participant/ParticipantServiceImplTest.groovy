@@ -17,19 +17,24 @@
  */
 package ru.mystamps.web.feature.participant
 
+import org.slf4j.helpers.NOPLogger
+import ru.mystamps.web.dao.dto.EntityWithIdDto
+import ru.mystamps.web.dao.dto.EntityWithParentDto
+import ru.mystamps.web.tests.Random
+import spock.lang.Specification
+
 import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 
-import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-
-import ru.mystamps.web.dao.dto.EntityWithIdDto
-import ru.mystamps.web.dao.dto.EntityWithParentDto
-import ru.mystamps.web.tests.Random
-
-@SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
+@SuppressWarnings([
+	'ClassJavadoc',
+	'MethodName',
+	'MisorderedStaticImports',
+	'NoDef',
+	'NoTabCharacter',
+	'TrailingWhitespace',
+])
 class ParticipantServiceImplTest extends Specification {
 	
 	private final ParticipantDao participantDao = Mock()

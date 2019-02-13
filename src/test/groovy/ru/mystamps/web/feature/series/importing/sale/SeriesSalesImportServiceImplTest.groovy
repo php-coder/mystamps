@@ -18,11 +18,9 @@
 package ru.mystamps.web.feature.series.importing.sale
 
 import org.slf4j.helpers.NOPLogger
-
-import spock.lang.Specification
-
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
+import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class SeriesSalesImportServiceImplTest extends Specification {
