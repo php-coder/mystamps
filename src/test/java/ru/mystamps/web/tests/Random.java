@@ -17,6 +17,19 @@
  */
 package ru.mystamps.web.tests;
 
+import io.qala.datagen.RandomElements;
+import io.qala.datagen.RandomShortApi;
+import org.apache.commons.lang3.StringUtils;
+import ru.mystamps.web.Db.SeriesImportRequestStatus;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.feature.series.SeriesInfoDto;
+import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
+import ru.mystamps.web.service.TestObjects;
+import ru.mystamps.web.util.SlugUtils;
+import ru.mystamps.web.validation.ValidationRules;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,21 +41,6 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import org.apache.commons.lang3.StringUtils;
-
-import io.qala.datagen.RandomElements;
-import io.qala.datagen.RandomShortApi;
-
-import ru.mystamps.web.Db.SeriesImportRequestStatus;
-import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
-import ru.mystamps.web.dao.dto.EntityWithParentDto;
-import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.service.TestObjects;
-import ru.mystamps.web.util.SlugUtils;
-import ru.mystamps.web.validation.ValidationRules;
 
 import static io.qala.datagen.RandomShortApi.bool;
 import static io.qala.datagen.RandomShortApi.integer;

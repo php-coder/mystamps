@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.util;
 
+import lombok.Getter;
+import lombok.ToString;
+import org.apache.commons.lang3.Validate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.lang3.Validate;
-
-import lombok.Getter;
-import lombok.ToString;
 
 // yes, I know that it's too complex :-(
 @SuppressWarnings("PMD.ModifiedCyclomaticComplexity")

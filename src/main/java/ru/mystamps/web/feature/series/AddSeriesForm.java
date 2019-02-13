@@ -17,24 +17,12 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.math.BigDecimal;
-
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
@@ -47,6 +35,13 @@ import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 import ru.mystamps.web.support.beanvalidation.NotNullIfFirstField;
 import ru.mystamps.web.support.beanvalidation.Price;
+
+import javax.validation.GroupSequence;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;

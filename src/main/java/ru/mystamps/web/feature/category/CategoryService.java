@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.category;
 
-import java.util.Date;
-import java.util.List;
-
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+
+import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryService {

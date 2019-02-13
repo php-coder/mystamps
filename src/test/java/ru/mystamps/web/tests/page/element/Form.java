@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.tests.page.element;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Form {
 	private static final String              FORM_LOCATOR = "//form";

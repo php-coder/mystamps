@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.feature.country;
 
+import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.feature.country.UniqueCountryName.Lang;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.feature.country.UniqueCountryName.Lang;
 
 @RequiredArgsConstructor
 public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCountryName, String> {

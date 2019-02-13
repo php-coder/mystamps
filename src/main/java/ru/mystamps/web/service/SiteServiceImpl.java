@@ -17,24 +17,19 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {

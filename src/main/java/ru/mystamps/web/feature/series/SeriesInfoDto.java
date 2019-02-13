@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.series;
 
 import lombok.Getter;
-
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @Getter

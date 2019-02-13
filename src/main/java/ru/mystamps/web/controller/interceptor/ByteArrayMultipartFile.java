@@ -17,16 +17,15 @@
  */
 package ru.mystamps.web.controller.interceptor;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 class ByteArrayMultipartFile implements MultipartFile {

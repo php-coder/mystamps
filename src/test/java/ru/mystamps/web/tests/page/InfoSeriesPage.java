@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import ru.mystamps.web.Url;
+
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 

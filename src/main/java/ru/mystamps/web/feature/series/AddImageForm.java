@@ -17,17 +17,11 @@
  */
 package ru.mystamps.web.feature.series;
 
-import javax.validation.GroupSequence;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.hibernate.validator.constraints.URL;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.support.beanvalidation.ImageFile;
@@ -35,6 +29,8 @@ import ru.mystamps.web.support.beanvalidation.MaxFileSize;
 import ru.mystamps.web.support.beanvalidation.MaxFileSize.Unit;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
+
+import javax.validation.GroupSequence;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 

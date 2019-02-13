@@ -17,11 +17,9 @@
  */
 package ru.mystamps.web.tests.fest;
 
+import org.apache.commons.lang3.Validate;
 import org.fest.assertions.api.AbstractAssert;
 import org.fest.assertions.api.Assertions;
-
-import org.apache.commons.lang3.Validate;
-
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 
 /**

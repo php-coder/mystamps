@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.math.BigDecimal;
-
 import org.springframework.web.multipart.MultipartFile;
-
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+
+import java.math.BigDecimal;
 
 public interface AddSeriesDto {
 	LinkEntityDto getCategory();

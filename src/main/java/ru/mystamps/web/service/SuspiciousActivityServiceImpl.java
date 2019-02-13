@@ -17,21 +17,17 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Sergey Chechenev

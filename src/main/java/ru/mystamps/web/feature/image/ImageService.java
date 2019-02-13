@@ -17,9 +17,9 @@
  */
 package ru.mystamps.web.feature.image;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface ImageService {
 	ImageInfoDto save(MultipartFile file);

@@ -17,16 +17,11 @@
  */
 package ru.mystamps.web.controller;
 
-import java.util.List;
-import java.util.Locale;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
@@ -38,6 +33,9 @@ import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.Pager;
+
+import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor

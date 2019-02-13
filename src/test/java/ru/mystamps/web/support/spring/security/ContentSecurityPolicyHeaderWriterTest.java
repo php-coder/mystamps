@@ -17,13 +17,12 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import org.junit.Test;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static io.qala.datagen.RandomShortApi.bool;
 import static org.hamcrest.MatcherAssert.assertThat;

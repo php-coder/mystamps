@@ -17,16 +17,11 @@
  */
 package ru.mystamps.web.support.togglz;
 
-import java.util.Collections;
-
-import javax.sql.DataSource;
-
+import com.github.heneke.thymeleaf.togglz.TogglzDialect;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-
-import com.github.heneke.thymeleaf.togglz.TogglzDialect;
 import org.togglz.console.TogglzConsoleServlet;
 import org.togglz.core.logging.LoggingStateRepository;
 import org.togglz.core.manager.FeatureManager;
@@ -34,11 +29,11 @@ import org.togglz.core.manager.FeatureManagerBuilder;
 import org.togglz.core.repository.cache.CachingStateRepository;
 import org.togglz.core.repository.jdbc.JDBCStateRepository;
 import org.togglz.spring.security.SpringSecurityUserProvider;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.StringAuthority;
+
+import javax.sql.DataSource;
+import java.util.Collections;
 
 @Configuration
 @RequiredArgsConstructor

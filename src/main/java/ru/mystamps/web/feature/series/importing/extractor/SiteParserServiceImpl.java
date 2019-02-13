@@ -17,15 +17,12 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class SiteParserServiceImpl implements SiteParserService {

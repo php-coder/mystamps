@@ -17,13 +17,10 @@
  */
 package ru.mystamps.web.service;
 
-import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Date;
-
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
-import ru.mystamps.web.dao.dto.*;
+import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UsersActivationDto;
@@ -55,6 +52,11 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
+
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Date;
 
 import static io.qala.datagen.RandomShortApi.bool;
 import static io.qala.datagen.RandomShortApi.nullOr;

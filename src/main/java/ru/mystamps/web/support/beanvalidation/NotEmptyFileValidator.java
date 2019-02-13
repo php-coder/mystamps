@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.support.beanvalidation;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.springframework.web.multipart.MultipartFile;
 
 public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, MultipartFile> {
 	

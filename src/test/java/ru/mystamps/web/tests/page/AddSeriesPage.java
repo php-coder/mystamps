@@ -17,30 +17,27 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.util.List;
-
 import org.apache.commons.lang3.Validate;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import ru.mystamps.web.Url;
 
-import static java.util.stream.Collectors.toList;
+import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.page.element.Form.with;
-import static ru.mystamps.web.tests.page.element.Form.inputField;
 import static ru.mystamps.web.tests.page.element.Form.checkboxField;
+import static ru.mystamps.web.tests.page.element.Form.inputField;
 import static ru.mystamps.web.tests.page.element.Form.required;
 import static ru.mystamps.web.tests.page.element.Form.selectField;
+import static ru.mystamps.web.tests.page.element.Form.submitButton;
 import static ru.mystamps.web.tests.page.element.Form.textareaField;
 import static ru.mystamps.web.tests.page.element.Form.uploadFileField;
-import static ru.mystamps.web.tests.page.element.Form.submitButton;
+import static ru.mystamps.web.tests.page.element.Form.with;
 
 public class AddSeriesPage extends AbstractPageWithForm {
 	

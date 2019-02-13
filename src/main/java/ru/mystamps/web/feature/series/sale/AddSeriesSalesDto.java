@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
+import ru.mystamps.web.dao.dto.Currency;
+
 import java.math.BigDecimal;
 import java.util.Date;
-
-import ru.mystamps.web.dao.dto.Currency;
 
 public interface AddSeriesSalesDto {
 	Date getDate();

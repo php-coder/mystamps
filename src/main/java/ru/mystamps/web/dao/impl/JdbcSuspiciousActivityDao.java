@@ -17,23 +17,20 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.dao.SuspiciousActivityDao;
+import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.support.jdbc.RowMappers;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.Validate;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
-import ru.mystamps.web.support.jdbc.RowMappers;
 
 @RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {

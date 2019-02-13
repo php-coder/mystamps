@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.tests.page.AuthAccountPage;
+
+import static org.fest.assertions.api.Assertions.assertThat;
+import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAtAuthPage extends WhenAnyUserAtAnyPageWithForm<AuthAccountPage> {
 	

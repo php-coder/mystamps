@@ -17,18 +17,16 @@
  */
 package ru.mystamps.web.tests.page;
 
+import org.apache.commons.lang3.Validate;
 import org.openqa.selenium.WebDriver;
-
 import ru.mystamps.web.Url;
 
-import org.apache.commons.lang3.Validate;
-
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-import static ru.mystamps.web.tests.page.element.Form.with;
-import static ru.mystamps.web.tests.page.element.Form.required;
 import static ru.mystamps.web.tests.page.element.Form.inputField;
 import static ru.mystamps.web.tests.page.element.Form.passwordField;
+import static ru.mystamps.web.tests.page.element.Form.required;
 import static ru.mystamps.web.tests.page.element.Form.submitButton;
+import static ru.mystamps.web.tests.page.element.Form.with;
 
 public class ActivateAccountPage extends AbstractPageWithForm {
 	

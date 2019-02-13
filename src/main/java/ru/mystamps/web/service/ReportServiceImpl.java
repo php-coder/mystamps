@@ -17,17 +17,15 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import org.apache.commons.lang3.time.DatePrinter;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.text.StringSubstitutor;
-
 import org.springframework.context.MessageSource;
-
 import ru.mystamps.web.service.dto.AdminDailyReport;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Maxim Shestakov

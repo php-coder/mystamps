@@ -17,20 +17,17 @@
  */
 package ru.mystamps.web.dao.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.dao.StampsCatalogDao;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang3.Validate;
-
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.dao.StampsCatalogDao;
 
 @RequiredArgsConstructor
 public class JdbcStampsCatalogDao implements StampsCatalogDao {

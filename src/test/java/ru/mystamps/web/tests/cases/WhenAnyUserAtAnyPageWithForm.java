@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import java.util.List;
-
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 import ru.mystamps.web.tests.page.element.Form.Field;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
+import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @SuppressWarnings("checkstyle:abstractclassname")
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>

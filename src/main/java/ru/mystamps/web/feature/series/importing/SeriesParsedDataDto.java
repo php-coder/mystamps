@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @Getter

@@ -17,21 +17,16 @@
  */
 package ru.mystamps.web.feature.account;
 
-import java.util.Date;
-import java.util.Locale;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.collection.CollectionService;
+
+import java.util.Date;
+import java.util.Locale;
 
 import static ru.mystamps.web.feature.account.UserDetails.Role.USER;
 

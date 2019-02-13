@@ -17,20 +17,17 @@
  */
 package ru.mystamps.web.tests.page;
 
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import org.apache.commons.lang3.Validate;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.WebElementUtils;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
 

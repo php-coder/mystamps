@@ -17,25 +17,20 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.account.UserDetails;
 import ru.mystamps.web.feature.account.UserService;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Implementation of Spring's {@link UserDetailsService} which uses our DAO to load user.

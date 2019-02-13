@@ -17,15 +17,13 @@
  */
 package ru.mystamps.web.feature.collection;
 
-import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
+import ru.mystamps.web.dao.dto.Currency;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import lombok.Getter;
-import lombok.Setter;
-
-import ru.mystamps.web.dao.dto.Currency;
+import java.math.BigDecimal;
 
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 

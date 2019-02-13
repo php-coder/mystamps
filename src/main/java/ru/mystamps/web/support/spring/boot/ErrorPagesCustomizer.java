@@ -17,15 +17,12 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.ErrorPageRegistrar;
 import org.springframework.boot.web.servlet.ErrorPageRegistry;
-
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.web.firewall.RequestRejectedException;
-
 import ru.mystamps.web.Url;
 
 @Configuration

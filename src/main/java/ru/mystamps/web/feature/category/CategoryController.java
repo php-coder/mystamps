@@ -17,13 +17,7 @@
  */
 package ru.mystamps.web.feature.category;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +30,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.editor.ReplaceRepeatingSpacesEditor;
@@ -46,6 +37,12 @@ import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.util.LocaleUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 

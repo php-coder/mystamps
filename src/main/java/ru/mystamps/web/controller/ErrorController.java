@@ -17,22 +17,19 @@
  */
 package ru.mystamps.web.controller;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.service.SiteService;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor

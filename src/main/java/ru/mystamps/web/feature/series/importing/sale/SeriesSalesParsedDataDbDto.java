@@ -17,12 +17,12 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter

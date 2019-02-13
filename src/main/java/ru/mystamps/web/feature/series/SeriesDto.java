@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.util.List;
-
 import lombok.Getter;
-
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+
+import java.util.List;
 
 public class SeriesDto {
 	private final SeriesFullInfoDto info;

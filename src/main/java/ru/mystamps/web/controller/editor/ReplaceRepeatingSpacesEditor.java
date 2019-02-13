@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.controller.editor;
 
+import lombok.RequiredArgsConstructor;
+
 import java.beans.PropertyEditorSupport;
 import java.util.regex.Pattern;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * @author Maxim Shestakov

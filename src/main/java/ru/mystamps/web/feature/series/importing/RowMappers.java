@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.support.jdbc.JdbcUtils;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 final class RowMappers {
 	

@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 public interface SiteService {
 	@SuppressWarnings("PMD.UseObjectForClearerAPI")

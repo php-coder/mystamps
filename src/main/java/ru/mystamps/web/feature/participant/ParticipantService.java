@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.participant;
 
-import java.util.List;
-
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+
+import java.util.List;
 
 public interface ParticipantService {
 	Integer add(AddParticipantDto dto);

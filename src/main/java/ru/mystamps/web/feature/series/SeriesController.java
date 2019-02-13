@@ -17,25 +17,11 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.io.IOException;
-import java.time.Year;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import javax.validation.groups.Default;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,11 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.controller.interceptor.DownloadImageInterceptor;
@@ -78,6 +59,20 @@ import ru.mystamps.web.support.thymeleaf.GroupByParent;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.validation.groups.Default;
+import java.io.IOException;
+import java.time.Year;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;

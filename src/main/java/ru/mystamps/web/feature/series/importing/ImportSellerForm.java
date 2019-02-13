@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 
 @Getter

@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.support.jdbc;
 
+import ru.mystamps.web.dao.dto.Currency;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import ru.mystamps.web.dao.dto.Currency;
 
 public final class JdbcUtils {
 	

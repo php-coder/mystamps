@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.support.beanvalidation;
 
-import java.util.regex.Pattern;
+import ru.mystamps.web.validation.ValidationRules;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import ru.mystamps.web.validation.ValidationRules;
+import java.util.regex.Pattern;
 
 public class CatalogNumbersValidator implements ConstraintValidator<CatalogNumbers, String> {
 	

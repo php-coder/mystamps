@@ -17,28 +17,23 @@
  */
 package ru.mystamps.web.feature.category;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.SlugUtils;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("PMD.TooManyMethods")
 @RequiredArgsConstructor

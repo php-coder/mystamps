@@ -17,29 +17,26 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import java.io.File;
-import java.net.URISyntaxException;
-import java.time.Year;
-import java.util.List;
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Value;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AbstractPage;
 import ru.mystamps.web.tests.page.AddSeriesPage;
 import ru.mystamps.web.tests.page.InfoSeriesPage;
-import ru.mystamps.web.Url;
 
-import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
+import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
 

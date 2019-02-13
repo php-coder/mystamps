@@ -19,13 +19,11 @@ package ru.mystamps.web.tests.cases;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ForbiddenErrorPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
 import static org.fest.assertions.api.Assertions.assertThat;
+import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAnonymousUserOpenTogglzConsole extends WhenAnyUserAtAnyPage<ForbiddenErrorPage> {
 	

@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.tests;
 
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.openqa.selenium.WebElement;
 
 public final class WebElementUtils {
 	

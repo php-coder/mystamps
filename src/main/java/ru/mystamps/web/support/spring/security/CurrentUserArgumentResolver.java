@@ -22,7 +22,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 
 public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolver {

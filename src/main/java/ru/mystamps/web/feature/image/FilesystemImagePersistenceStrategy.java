@@ -17,18 +17,16 @@
  */
 package ru.mystamps.web.feature.image;
 
+import org.slf4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Locale;
-
-import javax.annotation.PostConstruct;
-
-import org.slf4j.Logger;
-
-import org.springframework.web.multipart.MultipartFile;
 
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	

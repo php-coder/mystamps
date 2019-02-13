@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.series;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import lombok.Getter;
 
 @Getter
 public class SelectItem {

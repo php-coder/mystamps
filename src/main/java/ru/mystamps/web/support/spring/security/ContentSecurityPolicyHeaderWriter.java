@@ -17,14 +17,12 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.web.header.HeaderWriter;
+import ru.mystamps.web.Url;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.web.header.HeaderWriter;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.Url;
 
 /**
  * Implementation of {@link HeaderWriter} that is adding CSP header depending on the current URL.

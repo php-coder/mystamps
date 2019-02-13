@@ -18,13 +18,11 @@
 package ru.mystamps.web.tests.cases;
 
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.NotFoundErrorPage;
 
-import static ru.mystamps.web.tests.TranslationUtils.tr;
-
 import static org.fest.assertions.api.Assertions.assertThat;
+import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAnonymousUserOpenNotExistingCollectionPage
 	extends WhenAnyUserAtAnyPage<NotFoundErrorPage> {

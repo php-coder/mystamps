@@ -17,14 +17,15 @@
  */
 package ru.mystamps.web.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import lombok.RequiredArgsConstructor;
-
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
-import ru.mystamps.web.controller.*; // NOPMD: UnusedImports
+import ru.mystamps.web.controller.ErrorController;
+import ru.mystamps.web.controller.ReportController;
+import ru.mystamps.web.controller.RobotsTxtController;
+import ru.mystamps.web.controller.SiteController;
+import ru.mystamps.web.controller.SitemapController;
 import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;

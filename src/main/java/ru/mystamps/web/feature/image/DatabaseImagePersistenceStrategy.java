@@ -17,15 +17,12 @@
  */
 package ru.mystamps.web.feature.image;
 
-import java.io.IOException;
-
-import javax.annotation.PostConstruct;
-
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.RequiredArgsConstructor;
+import javax.annotation.PostConstruct;
+import java.io.IOException;
 
 @RequiredArgsConstructor
 public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrategy {

@@ -17,26 +17,13 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.math.BigDecimal;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
 import org.springframework.context.ApplicationEventPublisher;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.Db;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
@@ -50,6 +37,13 @@ import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.util.CatalogUtils;
+
+import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 // it complains on "Request id must be non null"
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")

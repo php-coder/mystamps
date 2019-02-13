@@ -17,36 +17,30 @@
  */
 package ru.mystamps.web.tests.cases;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.subethamail.wiser.Wiser;
+import org.subethamail.wiser.WiserMessage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+import ru.mystamps.web.Url;
+import ru.mystamps.web.tests.page.RegisterAccountPage;
+
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-import javax.mail.MessagingException;
-
 import static org.fest.assertions.api.Assertions.assertThat;
-
-import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
+import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.springframework.beans.factory.annotation.Value;
-
-import org.subethamail.wiser.Wiser;
-import org.subethamail.wiser.WiserMessage;
-
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 public class WhenAnonymousUserRegisterAccount
 	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {

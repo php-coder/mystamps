@@ -17,12 +17,9 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import org.slf4j.Logger;
-
-import org.springframework.context.ApplicationListener;
-
 import lombok.RequiredArgsConstructor;
-
+import org.slf4j.Logger;
+import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 

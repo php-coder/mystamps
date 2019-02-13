@@ -17,13 +17,10 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-import org.apache.commons.lang3.Validate;
-
-import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {

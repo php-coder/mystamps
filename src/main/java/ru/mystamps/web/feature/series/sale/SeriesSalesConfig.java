@@ -17,13 +17,11 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * Spring configuration that is required for using series sales/purchases in an application.

@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.service.dto;
 
-import java.nio.charset.StandardCharsets;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.nio.charset.StandardCharsets;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)

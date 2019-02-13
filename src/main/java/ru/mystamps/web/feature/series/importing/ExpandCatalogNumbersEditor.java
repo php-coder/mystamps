@@ -17,14 +17,12 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.util.StringUtils;
+import ru.mystamps.web.util.CatalogUtils;
+
 import java.beans.PropertyEditorSupport;
 import java.util.Set;
-
-import org.springframework.util.StringUtils;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.util.CatalogUtils;
 
 /**
  * Expands range of catalog numbers (1-3) into a comma-separated list (1,2,3).

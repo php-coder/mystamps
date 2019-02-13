@@ -17,6 +17,16 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.participant.ParticipantService;
+import ru.mystamps.web.validation.ValidationRules;
+
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,20 +40,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.feature.participant.ParticipantService;
-import ru.mystamps.web.validation.ValidationRules;
 
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.GodClass" })

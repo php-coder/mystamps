@@ -17,8 +17,11 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import java.io.IOException;
-import java.util.Locale;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,13 +30,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.util.WebUtils;
+import java.io.IOException;
+import java.util.Locale;
 
 /**
  * Filter sets locale by looking up in the session or uses English as a fallback.

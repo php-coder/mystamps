@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.series;
 
+import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
 
 /**
  * Implementation of the {@link RequireImageOrImageUrl} validator.

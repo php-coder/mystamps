@@ -17,13 +17,10 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Db;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.service.DownloaderService;

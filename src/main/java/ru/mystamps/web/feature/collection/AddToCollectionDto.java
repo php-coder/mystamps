@@ -17,9 +17,9 @@
  */
 package ru.mystamps.web.feature.collection;
 
-import java.math.BigDecimal;
-
 import ru.mystamps.web.dao.dto.Currency;
+
+import java.math.BigDecimal;
 
 public interface AddToCollectionDto {
 	Integer getNumberOfStamps();

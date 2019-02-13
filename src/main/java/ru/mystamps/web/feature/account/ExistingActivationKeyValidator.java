@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.account;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ExistingActivationKeyValidator

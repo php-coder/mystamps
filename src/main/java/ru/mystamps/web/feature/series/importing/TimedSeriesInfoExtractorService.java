@@ -17,11 +17,9 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import org.apache.commons.lang3.time.StopWatch;
-
-import org.slf4j.Logger;
-
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.time.StopWatch;
+import org.slf4j.Logger;
 
 @RequiredArgsConstructor
 public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorService {

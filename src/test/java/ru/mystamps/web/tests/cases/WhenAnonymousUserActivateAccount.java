@@ -19,7 +19,6 @@ package ru.mystamps.web.tests.cases;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
 public class WhenAnonymousUserActivateAccount

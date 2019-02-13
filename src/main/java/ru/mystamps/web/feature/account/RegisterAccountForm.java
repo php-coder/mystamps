@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.feature.account;
 
-import javax.validation.GroupSequence;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.hibernate.validator.constraints.NotEmpty;
 import ru.mystamps.web.support.beanvalidation.Email;
 import ru.mystamps.web.support.beanvalidation.Group;
+
+import javax.validation.GroupSequence;
+import javax.validation.constraints.Size;
 
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 

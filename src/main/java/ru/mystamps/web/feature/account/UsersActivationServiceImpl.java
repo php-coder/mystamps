@@ -17,25 +17,21 @@
  */
 package ru.mystamps.web.feature.account;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
-
 import org.slf4j.Logger;
-
 import org.springframework.transaction.annotation.Transactional;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.service.MailService;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.validation.ValidationRules;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 @RequiredArgsConstructor
 public class UsersActivationServiceImpl implements UsersActivationService {

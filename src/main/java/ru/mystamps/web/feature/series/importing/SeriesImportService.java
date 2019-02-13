@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.util.List;
-
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+
+import java.util.List;
 
 public interface SeriesImportService {
 	Integer addRequest(RequestImportDto dto, Integer userId);

@@ -17,19 +17,14 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.Validate;
-
-import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import org.springframework.security.access.prepost.PreAuthorize;
-
 import lombok.RequiredArgsConstructor;
-
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+
+import java.util.Date;
 
 @RequiredArgsConstructor
 public class SeriesSalesServiceImpl implements SeriesSalesService {

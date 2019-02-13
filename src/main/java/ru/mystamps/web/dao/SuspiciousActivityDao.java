@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.dao;
 
-import java.util.Date;
-import java.util.List;
-
 import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+
+import java.util.Date;
+import java.util.List;
 
 public interface SuspiciousActivityDao {
 	void add(AddSuspiciousActivityDbDto activity);

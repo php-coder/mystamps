@@ -17,14 +17,14 @@
  */
 package ru.mystamps.web.feature.series;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
-
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor

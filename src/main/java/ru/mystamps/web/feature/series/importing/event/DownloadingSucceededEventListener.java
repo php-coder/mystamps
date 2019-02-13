@@ -17,15 +17,10 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import javax.annotation.PostConstruct;
-
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
 import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
@@ -33,6 +28,8 @@ import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
 import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
 import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Listener of the {@link DownloadingSucceeded} event.

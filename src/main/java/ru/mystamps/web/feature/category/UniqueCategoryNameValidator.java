@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.feature.category;
 
+import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.feature.category.UniqueCategoryName.Lang;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.feature.category.UniqueCategoryName.Lang;
 
 @RequiredArgsConstructor
 public class UniqueCategoryNameValidator

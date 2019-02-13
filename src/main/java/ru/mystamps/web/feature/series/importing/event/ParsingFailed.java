@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import org.springframework.context.ApplicationEvent;
-
 import lombok.Getter;
+import org.springframework.context.ApplicationEvent;
 
 /**
  * Event occurs when parsing of a file from import request has been failed.

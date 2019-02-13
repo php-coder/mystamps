@@ -19,13 +19,10 @@ package ru.mystamps.web.tests.cases;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.ForbiddenErrorPage;
 
-import ru.mystamps.web.Url;
-
+import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAnonymousUserAtForbiddenPage

@@ -17,12 +17,10 @@
  */
 package ru.mystamps.web.feature.image;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.time.StopWatch;
-
 import org.slf4j.Logger;
-
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class TimedImagePreviewStrategy implements ImagePreviewStrategy {

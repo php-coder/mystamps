@@ -17,6 +17,17 @@
  */
 package ru.mystamps.web.service;
 
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StreamUtils;
+import ru.mystamps.web.service.dto.DownloadResult;
+import ru.mystamps.web.service.dto.DownloadResult.Code;
+import ru.mystamps.web.support.spring.security.HasAuthority;
+
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,22 +37,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.util.StreamUtils;
-
-import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.service.dto.DownloadResult;
-import ru.mystamps.web.service.dto.DownloadResult.Code;
-import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class HttpURLConnectionDownloaderService implements DownloaderService {

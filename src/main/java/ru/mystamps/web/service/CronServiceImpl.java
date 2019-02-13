@@ -17,22 +17,13 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
-
 import org.slf4j.Logger;
-
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.account.UsersActivationFullDto;
 import ru.mystamps.web.feature.account.UsersActivationService;
@@ -42,6 +33,10 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class CronServiceImpl implements CronService {

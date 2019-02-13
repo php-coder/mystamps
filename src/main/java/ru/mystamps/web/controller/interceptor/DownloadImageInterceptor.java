@@ -17,25 +17,21 @@
  */
 package ru.mystamps.web.controller.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.http.HttpMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.service.DownloaderService;
 import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Converts image URL to an image by downloading it from a server and binding to a form field.

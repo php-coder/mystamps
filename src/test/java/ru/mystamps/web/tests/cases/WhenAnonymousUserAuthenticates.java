@@ -17,15 +17,13 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AuthAccountPage;
 
+import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm<AuthAccountPage> {

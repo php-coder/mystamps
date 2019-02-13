@@ -17,23 +17,19 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.support.beanvalidation.Group;
+import ru.mystamps.web.validation.ValidationRules;
 
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.URL;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Getter;
-import lombok.Setter;
-
-import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.validation.ValidationRules;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Getter
 @Setter

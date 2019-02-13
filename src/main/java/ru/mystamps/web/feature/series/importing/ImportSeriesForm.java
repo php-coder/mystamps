@@ -17,26 +17,22 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.math.BigDecimal;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.URL;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.NullableImageUrl;
 import ru.mystamps.web.support.beanvalidation.CatalogNumbers;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;

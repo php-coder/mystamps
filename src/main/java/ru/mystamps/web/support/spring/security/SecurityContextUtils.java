@@ -17,12 +17,12 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import java.util.Collections;
-import java.util.Optional;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Collections;
+import java.util.Optional;
 
 public final class SecurityContextUtils {
 	

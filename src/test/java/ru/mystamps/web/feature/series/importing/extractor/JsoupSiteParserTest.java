@@ -20,18 +20,15 @@ package ru.mystamps.web.feature.series.importing.extractor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import ru.mystamps.web.tests.Random;
 
 import static io.qala.datagen.RandomShortApi.nullOr;
 import static io.qala.datagen.RandomShortApi.nullOrBlank;
 import static io.qala.datagen.RandomShortApi.positiveInteger;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

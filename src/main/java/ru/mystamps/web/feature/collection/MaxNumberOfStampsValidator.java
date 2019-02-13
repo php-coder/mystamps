@@ -17,13 +17,12 @@
  */
 package ru.mystamps.web.feature.collection;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
 import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 /**
  * Implementation of the {@link MaxNumberOfStamps} validator.

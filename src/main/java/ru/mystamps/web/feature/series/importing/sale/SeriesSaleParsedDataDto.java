@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-import java.math.BigDecimal;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.dao.dto.Currency;
+
+import java.math.BigDecimal;
 
 @Getter
 @RequiredArgsConstructor

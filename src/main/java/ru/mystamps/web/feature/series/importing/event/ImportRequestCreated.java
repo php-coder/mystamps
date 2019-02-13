@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series.importing.event;
 
-import org.springframework.context.ApplicationEvent;
-
 import lombok.Getter;
+import org.springframework.context.ApplicationEvent;
 
 /**
  * Event occurs after a series import request has been saved to database.

@@ -17,18 +17,15 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.NumberFormat;
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.springframework.format.annotation.NumberFormat;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Date;
 
 // @todo #695 /series/import/request/{id}: seller's name and url are required when sellerId is empty
 // @todo #695 /series/import/request/{id}(seriesSale):

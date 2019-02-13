@@ -18,12 +18,10 @@
 package ru.mystamps.web.tests.cases;
 
 import org.springframework.beans.factory.annotation.Value;
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import ru.mystamps.web.tests.page.AddCategoryPage;
 
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {

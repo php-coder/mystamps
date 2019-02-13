@@ -17,12 +17,10 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
-
 import org.slf4j.Logger;
-
-import lombok.RequiredArgsConstructor;
 
 // @todo #801 TimedSiteParser: add unit tests
 @RequiredArgsConstructor

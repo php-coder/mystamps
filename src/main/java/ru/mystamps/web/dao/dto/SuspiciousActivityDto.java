@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.dao.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Date;
 
 /**
  * @author Sergey Chechenev

@@ -17,15 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -36,9 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
@@ -49,6 +38,14 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 

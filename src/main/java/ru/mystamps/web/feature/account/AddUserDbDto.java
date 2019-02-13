@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.account;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Date;
 
 import static ru.mystamps.web.feature.account.UserDetails.Role;
 

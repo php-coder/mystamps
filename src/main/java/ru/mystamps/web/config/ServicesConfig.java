@@ -17,10 +17,8 @@
  */
 package ru.mystamps.web.config;
 
-import java.util.Locale;
-
+import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -29,9 +27,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.account.UsersActivationService;
@@ -51,8 +46,23 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportServiceImpl;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-// CheckStyle: ignore AvoidStarImportCheck for next 1 line
-import ru.mystamps.web.service.*; // NOPMD: UnusedImports
+import ru.mystamps.web.service.CronService;
+import ru.mystamps.web.service.CronServiceImpl;
+import ru.mystamps.web.service.DownloaderService;
+import ru.mystamps.web.service.HttpURLConnectionDownloaderService;
+import ru.mystamps.web.service.MailService;
+import ru.mystamps.web.service.MailServiceImpl;
+import ru.mystamps.web.service.ReportService;
+import ru.mystamps.web.service.ReportServiceImpl;
+import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.service.SiteServiceImpl;
+import ru.mystamps.web.service.StampsCatalogService;
+import ru.mystamps.web.service.StampsCatalogServiceImpl;
+import ru.mystamps.web.service.SuspiciousActivityService;
+import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
+import ru.mystamps.web.service.TimedDownloaderService;
+
+import java.util.Locale;
 
 @Configuration
 @Import({

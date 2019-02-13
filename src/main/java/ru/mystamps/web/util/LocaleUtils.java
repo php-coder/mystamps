@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.util;
 
-import java.util.Locale;
-
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
+
+import java.util.Locale;
 
 public final class LocaleUtils {
 	

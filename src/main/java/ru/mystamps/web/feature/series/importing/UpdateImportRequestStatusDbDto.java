@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+
+import java.util.Date;
 
 @Getter
 @ToString

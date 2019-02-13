@@ -17,17 +17,16 @@
  */
 package ru.mystamps.web.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import lombok.RequiredArgsConstructor;
-
-// CheckStyle: ignore AvoidStarImportCheck for next 2 lines
-import ru.mystamps.web.dao.*; // NOPMD: UnusedImports
-import ru.mystamps.web.dao.impl.*; // NOPMD: UnusedImports
+import ru.mystamps.web.dao.StampsCatalogDao;
+import ru.mystamps.web.dao.SuspiciousActivityDao;
+import ru.mystamps.web.dao.impl.JdbcStampsCatalogDao;
+import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
 import ru.mystamps.web.feature.series.importing.sale.JdbcSeriesSalesImportDao;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao;
 

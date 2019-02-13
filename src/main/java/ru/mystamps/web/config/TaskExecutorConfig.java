@@ -17,12 +17,12 @@
  */
 package ru.mystamps.web.config;
 
-import java.util.concurrent.Executor;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
+
+import java.util.concurrent.Executor;
 
 /**
  * @author Sergey Chechenev

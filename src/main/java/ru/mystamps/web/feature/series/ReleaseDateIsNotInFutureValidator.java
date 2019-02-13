@@ -17,14 +17,13 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.time.LocalDate;
-import java.time.Year;
-import java.time.YearMonth;
+import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import ru.mystamps.web.support.beanvalidation.ConstraintViolationUtils;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
 
 /**
  * @author Sergey Chechenev

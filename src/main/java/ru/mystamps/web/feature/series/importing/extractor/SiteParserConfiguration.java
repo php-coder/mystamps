@@ -17,13 +17,13 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Map;
 
 @Getter
 @Setter

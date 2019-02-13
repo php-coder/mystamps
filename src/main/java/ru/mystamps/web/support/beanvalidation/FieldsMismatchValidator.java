@@ -17,15 +17,13 @@
  */
 package ru.mystamps.web.support.beanvalidation;
 
-import java.util.Objects;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.PropertyAccessor;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.apache.commons.lang3.StringUtils;
-
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.PropertyAccessor;
+import java.util.Objects;
 
 public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismatch, Object> {
 	

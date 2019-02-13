@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.service.dto;
 
-import java.util.Locale;
-
 import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.feature.account.AddUsersActivationDbDto;
+
+import java.util.Locale;
 
 @RequiredArgsConstructor
 public class SendUsersActivationDto {

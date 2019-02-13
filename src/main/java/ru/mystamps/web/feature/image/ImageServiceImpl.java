@@ -17,24 +17,19 @@
  */
 package ru.mystamps.web.feature.image;
 
-import java.util.List;
-import java.util.Locale;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Db;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.support.togglz.Features;
+
+import java.util.List;
+import java.util.Locale;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;

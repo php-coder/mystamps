@@ -21,12 +21,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-
 import static ru.mystamps.web.tests.TranslationUtils.tr;
-
-import ru.mystamps.web.tests.page.RegisterAccountPage;
 
 public class WhenUserAtRegisterAccountPage
 	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {

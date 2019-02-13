@@ -17,12 +17,8 @@
  */
 package ru.mystamps.web.feature.account;
 
-import java.util.Locale;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -37,9 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.FormChecks;
@@ -47,6 +40,9 @@ import ru.mystamps.web.feature.account.ActivateAccountForm.LoginChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.NameChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.PasswordConfirmationChecks;
+
+import javax.validation.Valid;
+import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor

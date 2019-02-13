@@ -17,12 +17,12 @@
  */
 package ru.mystamps.web.feature.collection;
 
+import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
+
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 final class RowMappers {
 	

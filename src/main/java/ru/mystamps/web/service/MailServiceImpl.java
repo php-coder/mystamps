@@ -17,32 +17,28 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DatePrinter;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.text.StringSubstitutor;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.context.MessageSource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.service.dto.SendUsersActivationDto;
 import ru.mystamps.web.service.exception.EmailSendingException;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class MailServiceImpl implements MailService {
 	private static final Logger LOG = LoggerFactory.getLogger(MailServiceImpl.class);

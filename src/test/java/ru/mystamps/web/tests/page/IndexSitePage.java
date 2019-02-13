@@ -18,7 +18,6 @@
 package ru.mystamps.web.tests.page;
 
 import org.openqa.selenium.WebDriver;
-
 import ru.mystamps.web.Url;
 
 public class IndexSitePage extends AbstractPage {

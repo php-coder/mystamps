@@ -17,13 +17,11 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.Getter;
-
+import org.springframework.security.core.GrantedAuthority;
 import ru.mystamps.web.feature.account.UserDetails;
+
+import java.util.Collection;
 
 @Getter
 public class CustomUserDetails extends org.springframework.security.core.userdetails.User {

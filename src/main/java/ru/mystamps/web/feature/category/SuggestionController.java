@@ -17,13 +17,10 @@
  */
 package ru.mystamps.web.feature.category;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 

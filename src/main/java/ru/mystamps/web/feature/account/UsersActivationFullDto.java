@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.account;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Date;
 
 @Getter
 @RequiredArgsConstructor

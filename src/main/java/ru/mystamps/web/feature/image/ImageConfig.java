@@ -17,16 +17,14 @@
  */
 package ru.mystamps.web.feature.image;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * Spring configuration that is required for using images in an application.

@@ -17,12 +17,11 @@
  */
 package ru.mystamps.web.feature.country;
 
+import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.util.SlugUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import lombok.RequiredArgsConstructor;
-
-import ru.mystamps.web.util.SlugUtils;
 
 @RequiredArgsConstructor
 public class UniqueCountrySlugValidator implements ConstraintValidator<UniqueCountrySlug, String> {

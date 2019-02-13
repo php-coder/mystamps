@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.feature.collection;
 
+import ru.mystamps.web.dao.dto.LinkEntityDto;
+
 import java.util.Date;
 import java.util.List;
-
-import ru.mystamps.web.dao.dto.LinkEntityDto;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {

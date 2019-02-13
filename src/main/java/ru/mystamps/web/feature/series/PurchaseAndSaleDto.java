@@ -17,13 +17,12 @@
  */
 package ru.mystamps.web.feature.series;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.dao.dto.Currency;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author Sergey Chechenev

@@ -17,10 +17,7 @@
  */
 package ru.mystamps.web.feature.participant;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,11 +27,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.EntityWithIdDto;
+
+import javax.validation.Valid;
+import java.util.List;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
 

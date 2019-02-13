@@ -17,10 +17,10 @@
  */
 package ru.mystamps.web.dao.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter

@@ -17,9 +17,9 @@
  */
 package ru.mystamps.web.util;
 
-import java.util.Locale;
-
 import org.apache.commons.lang3.Validate;
+
+import java.util.Locale;
 
 public final class SlugUtils {
 	

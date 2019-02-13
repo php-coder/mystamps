@@ -18,9 +18,7 @@
 package ru.mystamps.web.tests.page;
 
 import org.apache.commons.lang3.Validate;
-
 import org.openqa.selenium.WebDriver;
-
 import ru.mystamps.web.Url;
 
 import static ru.mystamps.web.tests.TranslationUtils.tr;

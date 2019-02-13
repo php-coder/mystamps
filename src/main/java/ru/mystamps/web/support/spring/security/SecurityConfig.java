@@ -17,21 +17,15 @@
  */
 package ru.mystamps.web.support.spring.security;
 
-import java.util.Collections;
-
-import javax.servlet.Filter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.filter.OrderedRequestContextFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
-
-import org.springframework.boot.web.filter.OrderedRequestContextFilter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
@@ -46,10 +40,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.account.UserService;
+
+import javax.servlet.Filter;
+import java.util.Collections;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

@@ -17,22 +17,17 @@
  */
 package ru.mystamps.web.service;
 
-import java.util.List;
-import java.util.Set;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-
 import org.slf4j.Logger;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import lombok.RequiredArgsConstructor;
-
+import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.support.spring.security.HasAuthority;
+
+import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class StampsCatalogServiceImpl implements StampsCatalogService {

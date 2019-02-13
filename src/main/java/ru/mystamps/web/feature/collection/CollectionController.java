@@ -17,12 +17,7 @@
  */
 package ru.mystamps.web.feature.collection;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletResponse;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -31,13 +26,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-
-import lombok.RequiredArgsConstructor;
-
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.util.LocaleUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor

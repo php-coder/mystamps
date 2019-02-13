@@ -17,11 +17,11 @@
  */
 package ru.mystamps.web.feature.image;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-import net.coobird.thumbnailator.Thumbnails;
 
 public class ThumbnailatorImagePreviewStrategy implements ImagePreviewStrategy {
 	
