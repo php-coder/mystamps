@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.series;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.StampsCatalogDao;
-import ru.mystamps.web.feature.series.StampsCatalogService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.List;
