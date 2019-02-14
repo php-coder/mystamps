@@ -25,7 +25,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import ru.mystamps.web.controller.interceptor.ByteArrayMultipartFile;
 import ru.mystamps.web.service.DownloaderService;
 import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.support.spring.security.Authority;

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.interceptor;
+package ru.mystamps.web.feature.series;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 @RequiredArgsConstructor
-public class ByteArrayMultipartFile implements MultipartFile {
+class ByteArrayMultipartFile implements MultipartFile {
 	private final byte[] content;
 	private final String contentType;
 	private final String link;
