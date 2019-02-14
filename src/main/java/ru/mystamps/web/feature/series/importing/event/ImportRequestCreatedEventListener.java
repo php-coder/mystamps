@@ -22,9 +22,9 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.series.DownloadResult;
 import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
-import ru.mystamps.web.service.dto.DownloadResult;
 
 /**
  * Listener of the {@link ImportRequestCreated} event.

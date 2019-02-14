@@ -50,7 +50,6 @@ import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesForm;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-import ru.mystamps.web.service.dto.DownloadResult;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;

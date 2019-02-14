@@ -136,6 +136,13 @@
 	</Match>
 	<Match>
 		<!--
+			DTO class exposes its internal representation and it's ok to me.
+		-->
+		<Class name="ru.mystamps.web.feature.series.DownloadResult" />
+		<Bug pattern="EI_EXPOSE_REP" />
+	</Match>
+	<Match>
+		<!--
 			It's ok, that we're don't override parent's equals() method.
 		-->
 		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />

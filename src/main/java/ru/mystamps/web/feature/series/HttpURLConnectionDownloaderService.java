@@ -24,8 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StreamUtils;
-import ru.mystamps.web.service.dto.DownloadResult;
-import ru.mystamps.web.service.dto.DownloadResult.Code;
+import ru.mystamps.web.feature.series.DownloadResult.Code;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.io.BufferedInputStream;

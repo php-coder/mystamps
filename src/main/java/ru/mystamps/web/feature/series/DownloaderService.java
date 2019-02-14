@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.feature.series;
 
-import ru.mystamps.web.service.dto.DownloadResult;
-
 public interface DownloaderService {
 	DownloadResult download(String url);
 }
