@@ -42,6 +42,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportServiceImpl;
@@ -60,7 +61,6 @@ import ru.mystamps.web.service.StampsCatalogService;
 import ru.mystamps.web.service.StampsCatalogServiceImpl;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
-import ru.mystamps.web.service.TimedDownloaderService;
 
 import java.util.Locale;
 
