@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.series
 
 import org.slf4j.helpers.NOPLogger
-import ru.mystamps.web.dao.StampsCatalogDao
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll

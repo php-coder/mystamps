@@ -20,7 +20,7 @@ package ru.mystamps.web.dao.impl;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.dao.StampsCatalogDao;
+import ru.mystamps.web.feature.series.StampsCatalogDao;
 
 import java.util.ArrayList;
 import java.util.Collections;

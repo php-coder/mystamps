@@ -23,10 +23,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.dao.StampsCatalogDao;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.impl.JdbcStampsCatalogDao;
 import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
+import ru.mystamps.web.feature.series.StampsCatalogDao;
 import ru.mystamps.web.feature.series.importing.sale.JdbcSeriesSalesImportDao;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao;
 
