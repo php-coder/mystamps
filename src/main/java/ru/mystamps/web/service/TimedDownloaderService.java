@@ -20,6 +20,7 @@ package ru.mystamps.web.service;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
+import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.service.dto.DownloadResult;
 
 @RequiredArgsConstructor
