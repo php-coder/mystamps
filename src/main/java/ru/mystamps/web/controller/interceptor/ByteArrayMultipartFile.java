@@ -28,7 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 @RequiredArgsConstructor
-class ByteArrayMultipartFile implements MultipartFile {
+public class ByteArrayMultipartFile implements MultipartFile {
 	private final byte[] content;
 	private final String contentType;
 	private final String link;
