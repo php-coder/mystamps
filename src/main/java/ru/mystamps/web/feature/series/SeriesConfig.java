@@ -31,7 +31,6 @@ import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
-import ru.mystamps.web.service.StampsCatalogService;
 
 /**
  * Spring configuration that is required for using series in an application.

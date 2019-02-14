@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.StampsCatalogDao;
+import ru.mystamps.web.feature.series.StampsCatalogService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.List;
