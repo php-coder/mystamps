@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -35,7 +36,7 @@ import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 /**
  * Spring configuration that is required for using series in an application.
  *
- * The beans are grouped into two classes to make possible to register a controller
+ * The beans are grouped into separate classes to make possible to register a controller
  * and the services in the separated application contexts.
  */
 @Configuration
@@ -67,6 +68,7 @@ public class SeriesConfig {
 		
 	}
 	
+	@Import(Daos.class)
 	public static class Services {
 		
 		private final ImageService imageService;
@@ -76,7 +78,6 @@ public class SeriesConfig {
 		private final StampsCatalogService gibbonsCatalogService;
 		private final StampsCatalogService solovyovCatalogService;
 		private final StampsCatalogService zagorskiCatalogService;
-		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@SuppressWarnings("checkstyle:parameternumber")
 		public Services(
@@ -86,8 +87,7 @@ public class SeriesConfig {
 			@Lazy @Qualifier("yvertCatalog") StampsCatalogService yvertCatalogService,
 			@Lazy @Qualifier("gibbonsCatalog") StampsCatalogService gibbonsCatalogService,
 			@Lazy @Qualifier("solovyovCatalog") StampsCatalogService solovyovCatalogService,
-			@Lazy @Qualifier("zagorskiCatalog") StampsCatalogService zagorskiCatalogService,
-			NamedParameterJdbcTemplate jdbcTemplate
+			@Lazy @Qualifier("zagorskiCatalog") StampsCatalogService zagorskiCatalogService
 		) {
 			this.imageService = imageService;
 			this.michelCatalogService = michelCatalogService;
@@ -96,7 +96,6 @@ public class SeriesConfig {
 			this.gibbonsCatalogService = gibbonsCatalogService;
 			this.solovyovCatalogService = solovyovCatalogService;
 			this.zagorskiCatalogService = zagorskiCatalogService;
-			this.jdbcTemplate = jdbcTemplate;
 		}
 		
 		@Bean
@@ -113,6 +112,13 @@ public class SeriesConfig {
 				zagorskiCatalogService
 			);
 		}
+		
+	}
+	
+	@RequiredArgsConstructor
+	static class Daos {
+		
+		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
 		public SeriesDao seriesDao() {
