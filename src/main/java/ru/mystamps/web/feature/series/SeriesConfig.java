@@ -34,6 +34,8 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 
+import java.util.Map;
+
 /**
  * Spring configuration that is required for using series in an application.
  *
@@ -74,6 +76,7 @@ public class SeriesConfig {
 	public static class Services {
 		
 		private final ImageService imageService;
+		private final Map<String, StampsCatalogDao> stampsCatalogDaos;
 		
 		@Bean
 		public SeriesService seriesService(
@@ -99,68 +102,56 @@ public class SeriesConfig {
 		}
 		
 		@Bean(name = "michelCatalog")
-		public StampsCatalogService michelCatalogService(
-			@Qualifier("michelCatalogDao") StampsCatalogDao michelCatalogDao) {
-			
+		public StampsCatalogService michelCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Michel",
-				michelCatalogDao
+				stampsCatalogDaos.get("michelCatalogDao")
 			);
 		}
 		
 		@Bean(name = "scottCatalog")
-		public StampsCatalogService scottCatalogService(
-			@Qualifier("scottCatalogDao") StampsCatalogDao scottCatalogDao) {
-			
+		public StampsCatalogService scottCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Scott",
-				scottCatalogDao
+				stampsCatalogDaos.get("scottCatalogDao")
 			);
 		}
 		
 		@Bean(name = "yvertCatalog")
-		public StampsCatalogService yvertCatalogService(
-			@Qualifier("yvertCatalogDao") StampsCatalogDao yvertCatalogDao) {
-			
+		public StampsCatalogService yvertCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Yvert",
-				yvertCatalogDao
+				stampsCatalogDaos.get("yvertCatalogDao")
 			);
 		}
 		
 		@Bean(name = "gibbonsCatalog")
-		public StampsCatalogService gibbonsCatalogService(
-			@Qualifier("gibbonsCatalogDao") StampsCatalogDao gibbonsCatalogDao) {
-			
+		public StampsCatalogService gibbonsCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Gibbons",
-				gibbonsCatalogDao
+				stampsCatalogDaos.get("gibbonsCatalogDao")
 			);
 		}
 		
 		@Bean(name = "solovyovCatalog")
-		public StampsCatalogService solovyovCatalogService(
-			@Qualifier("solovyovCatalogDao") StampsCatalogDao solovyovCatalogDao) {
-			
+		public StampsCatalogService solovyovCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Solovyov",
-				solovyovCatalogDao
+				stampsCatalogDaos.get("solovyovCatalogDao")
 			);
 		}
 		
 		@Bean(name = "zagorskiCatalog")
-		public StampsCatalogService zagorskiCatalogService(
-			@Qualifier("zagorskiCatalogDao") StampsCatalogDao zagorskiCatalogDao) {
-			
+		public StampsCatalogService zagorskiCatalogService() {
 			return new StampsCatalogServiceImpl(
 				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
 				"Zagorski",
-				zagorskiCatalogDao
+				stampsCatalogDaos.get("zagorskiCatalogDao")
 			);
 		}
 		
