@@ -39,6 +39,7 @@ Create series with an empty image
 	Wait Until Element Text Is  image.errors  File must not be empty
 
 Create series with both image and an image URL
+	[Tags]                      todo
 	Choose File                 id=image      ${MAIN_RESOURCE_DIR}${/}test.png
 	Input Text                  id=image-url  ${SITE_URL}/image/1
 	Submit Form                 id=add-series-form
@@ -76,7 +77,7 @@ Create series with image URL to a file of unsupported type (not an image)
 	Wait Until Element Text Is  image-url.errors  Invalid file type
 
 Catalog numbers should reject invalid values
-	[Tags]      unstable
+	[Tags]      unstable  todo
 	[Template]  Invalid Catalog Numbers Should Be Rejected
 	t
 	t,t
@@ -89,7 +90,7 @@ Catalog numbers should reject invalid values
 	10000
 
 Catalog price should reject invalid values
-	[Tags]      unstable
+	[Tags]      unstable  todo
 	[Template]  Invalid Catalog Price Should Be Rejected
 	0
 	-1

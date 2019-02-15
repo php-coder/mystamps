@@ -9,6 +9,7 @@ Force Tags       series  import-series  validation
 
 *** Test Cases ***
 Submit request with blank required field
+	[Tags]                      todo
 	Submit Form                 id=import-series-form
 	Wait Until Element Text Is  url.errors  Value must not be empty
 

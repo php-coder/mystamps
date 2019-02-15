@@ -9,7 +9,7 @@ Force Tags       series  misc
 
 *** Test Cases ***
 Catalog numbers should accept valid values
-	[Tags]      unstable
+	[Tags]      unstable  todo
 	[Template]  Valid Catalog Numbers Should Be Accepted
 	7
 	7,8
@@ -17,7 +17,7 @@ Catalog numbers should accept valid values
 	1000
 
 Catalog numbers should be stripped from leading and trailing spaces
-	[Tags]                     unstable
+	[Tags]                     unstable  todo
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    ${SPACE * 2}1 , 2${SPACE * 2}
 	Input Text                 id=scottNumbers     ${SPACE * 2}3 , 4${SPACE * 2}
@@ -34,7 +34,7 @@ Catalog numbers should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id=zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
-	[Tags]                     unstable
+	[Tags]                     unstable  todo
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
@@ -54,6 +54,7 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id=zagorski_catalog_info  \#154, 155
 
 Catalog numbers should accept existing numbers
+	[Tags]                     todo
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2

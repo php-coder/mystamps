@@ -1072,6 +1072,7 @@
 					<nonCriticalTags>
 						<!-- Allow to tests with this tag to fail without changing final status -->
 						<nonCriticalTag>unstable</nonCriticalTag>
+						<nonCriticalTag>todo</nonCriticalTag>
 					</nonCriticalTags>
 				</configuration>
 				<executions>
