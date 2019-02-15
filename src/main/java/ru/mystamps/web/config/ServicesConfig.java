@@ -19,7 +19,6 @@ package ru.mystamps.web.config;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +37,6 @@ import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
-import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.HttpURLConnectionDownloaderService;
 import ru.mystamps.web.feature.series.SeriesConfig;
@@ -50,7 +48,6 @@ import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportServiceImpl;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
-import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.service.CronService;
 import ru.mystamps.web.service.CronServiceImpl;
 import ru.mystamps.web.service.MailService;
@@ -84,13 +81,10 @@ public class ServicesConfig {
 	private final JavaMailSender mailSender;
 	private final Environment env;
 	private final MessageSource messageSource;
-	private final ApplicationEventPublisher eventPublisher;
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
-	private final ParticipantService participantService;
 	private final SeriesService seriesService;
-	private final SeriesSalesService seriesSalesService;
 	private final UserService userService;
 	
 	@Lazy
