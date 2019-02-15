@@ -41,8 +41,6 @@ import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.HttpURLConnectionDownloaderService;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.series.StampsCatalogService;
-import ru.mystamps.web.feature.series.StampsCatalogServiceImpl;
 import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
@@ -169,60 +167,6 @@ public class ServicesConfig {
 		return new SiteServiceImpl(
 			LoggerFactory.getLogger(SiteServiceImpl.class),
 			daoConfig.getSuspiciousActivityDao()
-		);
-	}
-	
-	@Bean(name = "michelCatalog")
-	public StampsCatalogService getMichelCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Michel",
-			daoConfig.getMichelCatalogDao()
-		);
-	}
-	
-	@Bean(name = "scottCatalog")
-	public StampsCatalogService getScottCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Scott",
-			daoConfig.getScottCatalogDao()
-		);
-	}
-	
-	@Bean(name = "yvertCatalog")
-	public StampsCatalogService getYvertCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Yvert",
-			daoConfig.getYvertCatalogDao()
-		);
-	}
-	
-	@Bean(name = "gibbonsCatalog")
-	public StampsCatalogService getGibbonsCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Gibbons",
-			daoConfig.getGibbonsCatalogDao()
-		);
-	}
-	
-	@Bean(name = "solovyovCatalog")
-	public StampsCatalogService getSolovyovCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Solovyov",
-			daoConfig.getSolovyovCatalogDao()
-		);
-	}
-	
-	@Bean(name = "zagorskiCatalog")
-	public StampsCatalogService getZagorskiCatalogService() {
-		return new StampsCatalogServiceImpl(
-			LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
-			"Zagorski",
-			daoConfig.getZagorskiCatalogDao()
 		);
 	}
 	

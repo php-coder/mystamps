@@ -20,56 +20,18 @@ package ru.mystamps.web.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
 import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
-import ru.mystamps.web.feature.series.JdbcStampsCatalogDao;
-import ru.mystamps.web.feature.series.StampsCatalogDao;
 import ru.mystamps.web.feature.series.importing.sale.JdbcSeriesSalesImportDao;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportDao;
 
 @Configuration
-@PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
 @RequiredArgsConstructor
 public class DaoConfig {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
-	private final Environment env;
 	
-	@Bean
-	public StampsCatalogDao getGibbonsCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("gibbons.create"),
-			env.getRequiredProperty("series_gibbons.add"),
-			env.getRequiredProperty("series_gibbons.find_by_series_id"),
-			env.getRequiredProperty("series_gibbons.find_series_ids_by_number")
-		);
-	}
-	
-	@Bean
-	public StampsCatalogDao getMichelCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("michel.create"),
-			env.getRequiredProperty("series_michel.add"),
-			env.getRequiredProperty("series_michel.find_by_series_id"),
-			env.getRequiredProperty("series_michel.find_series_ids_by_number")
-		);
-	}
-	
-	@Bean
-	public StampsCatalogDao getScottCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("scott.create"),
-			env.getRequiredProperty("series_scott.add"),
-			env.getRequiredProperty("series_scott.find_by_series_id"),
-			env.getRequiredProperty("series_scott.find_series_ids_by_number")
-		);
-	}
 	
 	@Bean
 	public SeriesSalesImportDao getSeriesSalesImportDao() {
@@ -77,41 +39,8 @@ public class DaoConfig {
 	}
 	
 	@Bean
-	public StampsCatalogDao getSolovyovCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("solovyov.create"),
-			env.getRequiredProperty("series_solovyov.add"),
-			env.getRequiredProperty("series_solovyov.find_by_series_id"),
-			env.getRequiredProperty("series_solovyov.find_series_ids_by_number")
-		);
-	}
-	
-	@Bean
 	public SuspiciousActivityDao getSuspiciousActivityDao() {
 		return new JdbcSuspiciousActivityDao(jdbcTemplate);
-	}
-	
-	@Bean
-	public StampsCatalogDao getYvertCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("yvert.create"),
-			env.getRequiredProperty("series_yvert.add"),
-			env.getRequiredProperty("series_yvert.find_by_series_id"),
-			env.getRequiredProperty("series_yvert.find_series_ids_by_number")
-		);
-	}
-	
-	@Bean
-	public StampsCatalogDao getZagorskiCatalogDao() {
-		return new JdbcStampsCatalogDao(
-			jdbcTemplate,
-			env.getRequiredProperty("zagorski.create"),
-			env.getRequiredProperty("series_zagorski.add"),
-			env.getRequiredProperty("series_zagorski.find_by_series_id"),
-			env.getRequiredProperty("series_zagorski.find_series_ids_by_number")
-		);
 	}
 	
 }

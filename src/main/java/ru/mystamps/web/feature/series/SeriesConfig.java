@@ -23,7 +23,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
@@ -69,37 +70,21 @@ public class SeriesConfig {
 	}
 	
 	@Import(Daos.class)
+	@RequiredArgsConstructor
 	public static class Services {
 		
 		private final ImageService imageService;
-		private final StampsCatalogService michelCatalogService;
-		private final StampsCatalogService scottCatalogService;
-		private final StampsCatalogService yvertCatalogService;
-		private final StampsCatalogService gibbonsCatalogService;
-		private final StampsCatalogService solovyovCatalogService;
-		private final StampsCatalogService zagorskiCatalogService;
-		
-		@SuppressWarnings("checkstyle:parameternumber")
-		public Services(
-			ImageService imageService,
-			@Lazy @Qualifier("michelCatalog") StampsCatalogService michelCatalogService,
-			@Lazy @Qualifier("scottCatalog") StampsCatalogService scottCatalogService,
-			@Lazy @Qualifier("yvertCatalog") StampsCatalogService yvertCatalogService,
-			@Lazy @Qualifier("gibbonsCatalog") StampsCatalogService gibbonsCatalogService,
-			@Lazy @Qualifier("solovyovCatalog") StampsCatalogService solovyovCatalogService,
-			@Lazy @Qualifier("zagorskiCatalog") StampsCatalogService zagorskiCatalogService
-		) {
-			this.imageService = imageService;
-			this.michelCatalogService = michelCatalogService;
-			this.scottCatalogService = scottCatalogService;
-			this.yvertCatalogService = yvertCatalogService;
-			this.gibbonsCatalogService = gibbonsCatalogService;
-			this.solovyovCatalogService = solovyovCatalogService;
-			this.zagorskiCatalogService = zagorskiCatalogService;
-		}
 		
 		@Bean
-		public SeriesService seriesService(SeriesDao seriesDao) {
+		public SeriesService seriesService(
+			SeriesDao seriesDao,
+			@Qualifier("michelCatalog") StampsCatalogService michelCatalogService,
+			@Qualifier("scottCatalog") StampsCatalogService scottCatalogService,
+			@Qualifier("yvertCatalog") StampsCatalogService yvertCatalogService,
+			@Qualifier("gibbonsCatalog") StampsCatalogService gibbonsCatalogService,
+			@Qualifier("solovyovCatalog") StampsCatalogService solovyovCatalogService,
+			@Qualifier("zagorskiCatalog") StampsCatalogService zagorskiCatalogService) {
+			
 			return new SeriesServiceImpl(
 				LoggerFactory.getLogger(SeriesServiceImpl.class),
 				seriesDao,
@@ -113,16 +98,150 @@ public class SeriesConfig {
 			);
 		}
 		
+		@Bean(name = "michelCatalog")
+		public StampsCatalogService michelCatalogService(
+			@Qualifier("michelCatalogDao") StampsCatalogDao michelCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Michel",
+				michelCatalogDao
+			);
+		}
+		
+		@Bean(name = "scottCatalog")
+		public StampsCatalogService scottCatalogService(
+			@Qualifier("scottCatalogDao") StampsCatalogDao scottCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Scott",
+				scottCatalogDao
+			);
+		}
+		
+		@Bean(name = "yvertCatalog")
+		public StampsCatalogService yvertCatalogService(
+			@Qualifier("yvertCatalogDao") StampsCatalogDao yvertCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Yvert",
+				yvertCatalogDao
+			);
+		}
+		
+		@Bean(name = "gibbonsCatalog")
+		public StampsCatalogService gibbonsCatalogService(
+			@Qualifier("gibbonsCatalogDao") StampsCatalogDao gibbonsCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Gibbons",
+				gibbonsCatalogDao
+			);
+		}
+		
+		@Bean(name = "solovyovCatalog")
+		public StampsCatalogService solovyovCatalogService(
+			@Qualifier("solovyovCatalogDao") StampsCatalogDao solovyovCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Solovyov",
+				solovyovCatalogDao
+			);
+		}
+		
+		@Bean(name = "zagorskiCatalog")
+		public StampsCatalogService zagorskiCatalogService(
+			@Qualifier("zagorskiCatalogDao") StampsCatalogDao zagorskiCatalogDao) {
+			
+			return new StampsCatalogServiceImpl(
+				LoggerFactory.getLogger(StampsCatalogServiceImpl.class),
+				"Zagorski",
+				zagorskiCatalogDao
+			);
+		}
+		
 	}
 	
 	@RequiredArgsConstructor
-	static class Daos {
+	@PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
+	/* default */ static class Daos {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final Environment env;
 		
 		@Bean
 		public SeriesDao seriesDao() {
 			return new JdbcSeriesDao(jdbcTemplate);
+		}
+		
+		@Bean
+		public StampsCatalogDao michelCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("michel.create"),
+				env.getRequiredProperty("series_michel.add"),
+				env.getRequiredProperty("series_michel.find_by_series_id"),
+				env.getRequiredProperty("series_michel.find_series_ids_by_number")
+			);
+		}
+		
+		@Bean
+		public StampsCatalogDao scottCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("scott.create"),
+				env.getRequiredProperty("series_scott.add"),
+				env.getRequiredProperty("series_scott.find_by_series_id"),
+				env.getRequiredProperty("series_scott.find_series_ids_by_number")
+			);
+		}
+		
+		@Bean
+		public StampsCatalogDao yvertCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("yvert.create"),
+				env.getRequiredProperty("series_yvert.add"),
+				env.getRequiredProperty("series_yvert.find_by_series_id"),
+				env.getRequiredProperty("series_yvert.find_series_ids_by_number")
+			);
+		}
+		
+		@Bean
+		public StampsCatalogDao gibbonsCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("gibbons.create"),
+				env.getRequiredProperty("series_gibbons.add"),
+				env.getRequiredProperty("series_gibbons.find_by_series_id"),
+				env.getRequiredProperty("series_gibbons.find_series_ids_by_number")
+			);
+		}
+		
+		@Bean
+		public StampsCatalogDao solovyovCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("solovyov.create"),
+				env.getRequiredProperty("series_solovyov.add"),
+				env.getRequiredProperty("series_solovyov.find_by_series_id"),
+				env.getRequiredProperty("series_solovyov.find_series_ids_by_number")
+			);
+		}
+		
+		@Bean
+		public StampsCatalogDao zagorskiCatalogDao() {
+			return new JdbcStampsCatalogDao(
+				jdbcTemplate,
+				env.getRequiredProperty("zagorski.create"),
+				env.getRequiredProperty("series_zagorski.add"),
+				env.getRequiredProperty("series_zagorski.find_by_series_id"),
+				env.getRequiredProperty("series_zagorski.find_series_ids_by_number")
+			);
 		}
 		
 	}
