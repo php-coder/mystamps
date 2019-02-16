@@ -94,29 +94,24 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		
 		return Integer.valueOf(holder.getKey().intValue());
 	}
-	
-	// @todo #735 SeriesImportDao.setSeriesIdAndChangeStatus(): replace arguments by dto object
+
+	// Use SuppressWarnings to avoid complains about length of line with params
+	@SuppressWarnings("linelength")
 	@Override
-	public void setSeriesIdAndChangeStatus(
-		Integer requestId,
-		Integer seriesId,
-		String oldStatus,
-		String newStatus,
-		Date updatedAt) {
-		
+	public void setSeriesIdAndChangeStatus(Integer seriesId, UpdateImportRequestStatusDbDto requestStatus) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("id", requestId);
+		params.put("id", requestStatus.getRequestId());
 		params.put("series_id", seriesId);
-		params.put("old_status", oldStatus);
-		params.put("new_status", newStatus);
-		params.put("date", updatedAt);
+		params.put("old_status", requestStatus.getOldStatus());
+		params.put("new_status", requestStatus.getNewStatus());
+		params.put("date", requestStatus.getDate());
 		
 		int affected = jdbcTemplate.update(setSeriesIdAndChangeStatusSql, params);
 		
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after setting series id on request #%d: %d",
-			requestId,
+			requestStatus.getRequestId(),
 			affected
 		);
 	}

@@ -258,12 +258,12 @@ class SeriesImportServiceImplTest extends Specification {
 			)
 		then:
 			1 * seriesImportDao.setSeriesIdAndChangeStatus(
-				expectedRequestId,
 				expectedSeriesId,
-				SeriesImportRequestStatus.PARSING_SUCCEEDED,
-				SeriesImportRequestStatus.IMPORT_SUCCEEDED,
-				{ Date updatedAt ->
-					assert DateUtils.roughlyEqual(updatedAt, new Date())
+				{ UpdateImportRequestStatusDbDto status ->
+					assert status?.requestId == expectedRequestId
+					assert DateUtils.roughlyEqual(status?.date, new Date())
+					assert status?.oldStatus == SeriesImportRequestStatus.PARSING_SUCCEEDED 
+					assert status?.newStatus == SeriesImportRequestStatus.IMPORT_SUCCEEDED
 					return true
 				}
 			)

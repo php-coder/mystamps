@@ -110,14 +110,14 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		}
 		
 		Date now = new Date();
-		
-		seriesImportDao.setSeriesIdAndChangeStatus(
+		UpdateImportRequestStatusDbDto status = new UpdateImportRequestStatusDbDto(
 			requestId,
-			seriesId,
+			now,
 			SeriesImportRequestStatus.PARSING_SUCCEEDED,
-			SeriesImportRequestStatus.IMPORT_SUCCEEDED,
-			now
+			SeriesImportRequestStatus.IMPORT_SUCCEEDED
 		);
+		
+		seriesImportDao.setSeriesIdAndChangeStatus(seriesId, status);
 		
 		return seriesId;
 	}

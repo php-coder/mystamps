@@ -22,13 +22,7 @@ import java.util.List;
 
 public interface SeriesImportDao {
 	Integer add(ImportSeriesDbDto importRequest);
-	void setSeriesIdAndChangeStatus(
-		Integer requestId,
-		Integer seriesId,
-		String oldStatus,
-		String newStatus,
-		Date updatedAt
-	);
+	void setSeriesIdAndChangeStatus(Integer seriesId, UpdateImportRequestStatusDbDto requestStatus);
 	void changeStatus(UpdateImportRequestStatusDbDto requestStatus);
 	ImportRequestDto findById(Integer id);
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
