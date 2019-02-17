@@ -95,8 +95,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		return Integer.valueOf(holder.getKey().intValue());
 	}
 
-	// Use SuppressWarnings to avoid complains about length of line with params
-	@SuppressWarnings("linelength")
+	// CheckStyle: ignore LineLength for next 2 lines
 	@Override
 	public void setSeriesIdAndChangeStatus(Integer seriesId, UpdateImportRequestStatusDbDto requestStatus) {
 		Map<String, Object> params = new HashMap<>();
