@@ -19,13 +19,11 @@ package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 	
-	private final Logger log;
 	private final SeriesSalesImportDao seriesSalesImportDao;
 	
 	// @todo #834 SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates

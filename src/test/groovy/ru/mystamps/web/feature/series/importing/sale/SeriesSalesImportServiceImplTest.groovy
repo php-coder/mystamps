@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.feature.series.importing.sale
 
-import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
@@ -30,7 +29,7 @@ class SeriesSalesImportServiceImplTest extends Specification {
 	private SeriesSalesImportService service
 	
 	def setup() {
-		service = new SeriesSalesImportServiceImpl(NOPLogger.NOP_LOGGER, seriesSalesImportDao)
+		service = new SeriesSalesImportServiceImpl(seriesSalesImportDao)
 	}
 	
 	//

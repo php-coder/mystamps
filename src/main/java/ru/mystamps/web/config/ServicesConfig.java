@@ -157,7 +157,6 @@ public class ServicesConfig {
 	@Bean
 	public SeriesSalesImportService getSeriesSalesImportService() {
 		return new SeriesSalesImportServiceImpl(
-			LoggerFactory.getLogger(SeriesSalesImportServiceImpl.class),
 			daoConfig.getSeriesSalesImportDao()
 		);
 	}
