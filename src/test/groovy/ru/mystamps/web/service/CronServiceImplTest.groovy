@@ -25,7 +25,7 @@ import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.series.SeriesService
-import ru.mystamps.web.service.dto.AdminDailyReport
+import ru.mystamps.web.feature.report.AdminDailyReport
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])

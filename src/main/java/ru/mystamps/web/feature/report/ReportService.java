@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.feature.report;
 
-import ru.mystamps.web.service.dto.AdminDailyReport;
-
 /**
  * @author Maxim Shestakov
  */

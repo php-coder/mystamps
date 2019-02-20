@@ -18,7 +18,7 @@
 package ru.mystamps.web.service;
 
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
-import ru.mystamps.web.service.dto.AdminDailyReport;
+import ru.mystamps.web.feature.report.AdminDailyReport;
 
 public interface MailService {
 	void sendActivationKeyToUser(SendUsersActivationDto activation);

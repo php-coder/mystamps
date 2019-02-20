@@ -21,8 +21,8 @@ import org.apache.commons.lang3.time.DatePrinter;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.context.MessageSource;
+import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.report.ReportService;
-import ru.mystamps.web.service.dto.AdminDailyReport;
 
 import java.util.HashMap;
 import java.util.Locale;
