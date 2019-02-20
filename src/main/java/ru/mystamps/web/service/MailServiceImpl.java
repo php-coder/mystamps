@@ -31,6 +31,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
+import ru.mystamps.web.feature.report.ReportService;
 import ru.mystamps.web.service.dto.AdminDailyReport;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
