@@ -37,8 +37,8 @@ import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
+import ru.mystamps.web.feature.report.ReportConfig;
 import ru.mystamps.web.feature.report.ReportService;
-import ru.mystamps.web.feature.report.ReportServiceImpl;
 import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.HttpURLConnectionDownloaderService;
 import ru.mystamps.web.feature.series.SeriesConfig;
@@ -66,6 +66,7 @@ import java.util.Locale;
 	CountryConfig.Services.class,
 	ImageConfig.Services.class,
 	ParticipantConfig.Services.class,
+	ReportConfig.Services.class,
 	SeriesConfig.Services.class,
 	SeriesImportConfig.Services.class,
 	SeriesSalesConfig.Services.class,
@@ -82,6 +83,7 @@ public class ServicesConfig {
 	private final CategoryService categoryService;
 	private final CollectionService collectionService;
 	private final CountryService countryService;
+	private final ReportService reportService;
 	private final SeriesService seriesService;
 	private final UserService userService;
 	
@@ -136,21 +138,13 @@ public class ServicesConfig {
 		boolean enableTestMode = !isProductionEnvironment;
 		
 		return new MailServiceImpl(
-			getReportService(),
+			reportService,
 			mailSender,
 			messageSource,
 			env.getProperty("app.mail.admin.email", "root@localhost"),
 			new Locale(env.getProperty("app.mail.admin.lang", "en")),
 			env.getRequiredProperty("app.mail.robot.email"),
 			enableTestMode
-		);
-	}
-	
-	@Bean
-	public ReportService getReportService() {
-		return new ReportServiceImpl(
-			messageSource,
-			new Locale(env.getProperty("app.mail.admin.lang", "en"))
 		);
 	}
 	

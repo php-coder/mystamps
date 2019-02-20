@@ -34,7 +34,7 @@ import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.image.ImageConfig;
 import ru.mystamps.web.feature.participant.ParticipantConfig;
-import ru.mystamps.web.feature.report.ReportController;
+import ru.mystamps.web.feature.report.ReportConfig;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
@@ -48,6 +48,7 @@ import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 	CountryConfig.Controllers.class,
 	ImageConfig.Controllers.class,
 	ParticipantConfig.Controllers.class,
+	ReportConfig.Controllers.class,
 	SeriesConfig.Controllers.class,
 	SeriesImportConfig.Controllers.class
 })
@@ -67,14 +68,6 @@ public class ControllersConfig {
 	@Bean
 	public RobotsTxtController getRobotsTxtController() {
 		return new RobotsTxtController();
-	}
-
-	@Bean
-	public ReportController getReportController() {
-		return new ReportController(
-			servicesConfig.getReportService(),
-			servicesConfig.getCronService()
-		);
 	}
 	
 	@Bean
