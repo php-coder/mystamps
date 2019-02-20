@@ -34,7 +34,9 @@ public class SeriesSalesImportConfig {
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
-		public SeriesSalesImportService seriesSalesImportService(SeriesSalesImportDao seriesSalesImportDao) {
+		public SeriesSalesImportService seriesSalesImportService(
+			SeriesSalesImportDao seriesSalesImportDao) {
+			
 			return new SeriesSalesImportServiceImpl(seriesSalesImportDao);
 		}
 		
