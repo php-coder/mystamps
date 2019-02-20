@@ -43,8 +43,7 @@ import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportServiceImpl;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
 import ru.mystamps.web.service.CronService;
 import ru.mystamps.web.service.CronServiceImpl;
@@ -69,7 +68,8 @@ import java.util.Locale;
 	ParticipantConfig.Services.class,
 	SeriesConfig.Services.class,
 	SeriesImportConfig.Services.class,
-	SeriesSalesConfig.Services.class
+	SeriesSalesConfig.Services.class,
+	SeriesSalesImportConfig.Services.class
 })
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.CouplingBetweenObjects")
@@ -151,13 +151,6 @@ public class ServicesConfig {
 		return new ReportServiceImpl(
 			messageSource,
 			new Locale(env.getProperty("app.mail.admin.lang", "en"))
-		);
-	}
-	
-	@Bean
-	public SeriesSalesImportService getSeriesSalesImportService() {
-		return new SeriesSalesImportServiceImpl(
-			daoConfig.getSeriesSalesImportDao()
 		);
 	}
 	

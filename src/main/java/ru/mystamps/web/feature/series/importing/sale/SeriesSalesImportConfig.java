@@ -15,24 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.config;
+package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
 
+/**
+ * Spring configuration that is required for importing series sale in an application.
+ */
 @Configuration
-@RequiredArgsConstructor
-public class DaoConfig {
+public class SeriesSalesImportConfig {
 	
-	private final NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@Bean
-	public SuspiciousActivityDao getSuspiciousActivityDao() {
-		return new JdbcSuspiciousActivityDao(jdbcTemplate);
+	@RequiredArgsConstructor
+	public static class Services {
+		
+		private final NamedParameterJdbcTemplate jdbcTemplate;
+		
+		@Bean
+		public SeriesSalesImportService seriesSalesImportService(SeriesSalesImportDao seriesSalesImportDao) {
+			return new SeriesSalesImportServiceImpl(seriesSalesImportDao);
+		}
+		
+		@Bean
+		public SeriesSalesImportDao seriesSalesImportDao() {
+			return new JdbcSeriesSalesImportDao(jdbcTemplate);
+		}
+		
 	}
 	
 }
