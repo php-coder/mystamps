@@ -59,7 +59,7 @@ public class EventsConfig {
 	}
 	
 	@Bean
-	public SeriesInfoExtractorService getSeriesInfoExtractorService() {
+	public SeriesInfoExtractorService seriesInfoExtractorService() {
 		return new TimedSeriesInfoExtractorService(
 			LoggerFactory.getLogger(TimedSeriesInfoExtractorService.class),
 			new SeriesInfoExtractorServiceImpl(
@@ -77,7 +77,7 @@ public class EventsConfig {
 	}
 	
 	@Bean
-	public ApplicationListener<ImportRequestCreated> getImportRequestCreatedEventListener() {
+	public ApplicationListener<ImportRequestCreated> importRequestCreatedEventListener() {
 		return new ImportRequestCreatedEventListener(
 			LoggerFactory.getLogger(ImportRequestCreatedEventListener.class),
 			servicesConfig.getSeriesDownloaderService(),
@@ -90,7 +90,7 @@ public class EventsConfig {
 	// we need this dependency. This annotation shouldn't be needed in Spring Boot 2.
 	@DependsOn("liquibase")
 	@Bean
-	public ApplicationListener<DownloadingSucceeded> getDownloadingSucceededEventListener(
+	public ApplicationListener<DownloadingSucceeded> downloadingSucceededEventListener(
 		SiteParserService siteParserService,
 		SeriesInfoExtractorService extractorService
 		) {
@@ -105,7 +105,7 @@ public class EventsConfig {
 	}
 	
 	@Bean
-	public ApplicationListener<ParsingFailed> getParsingFailedEventListener() {
+	public ApplicationListener<ParsingFailed> parsingFailedEventListener() {
 		return new ParsingFailedEventListener(
 			LoggerFactory.getLogger(ParsingFailedEventListener.class),
 			seriesImportService
