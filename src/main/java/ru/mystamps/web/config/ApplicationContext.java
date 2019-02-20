@@ -22,18 +22,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 import ru.mystamps.web.support.togglz.TogglzConfig;
 
 @Configuration
 @Import({
-	DbConfig.class,
 	SecurityConfig.class,
 	DaoConfig.class,
 	ServicesConfig.class,
 	TaskExecutorConfig.class,
 	TogglzConfig.class
 })
+@EnableTransactionManagement
 @SuppressWarnings({ "checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass" })
 public class ApplicationContext {
 	
