@@ -27,18 +27,13 @@ import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-@SuppressWarnings({
-	"PMD.AvoidDuplicateLiterals",
-	"PMD.TooManyMethods",
-	"PMD.CouplingBetweenObjects"
-})
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public final class RowMappers {
 	
 	private RowMappers() {
@@ -219,26 +214,6 @@ public final class RowMappers {
 	
 	public static Integer forInteger(ResultSet rs, int unused) throws SQLException {
 		return rs.getInt("id");
-	}
-	
-	public static SeriesSaleParsedDataDto forSeriesSaleParsedDataDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		Integer sellerId = JdbcUtils.getInteger(rs, "seller_id");
-		Integer sellerGroupId = JdbcUtils.getInteger(rs, "seller_group_id");
-		String sellerName = rs.getString("seller_name");
-		String sellerUrl = rs.getString("seller_url");
-		BigDecimal price = rs.getBigDecimal("price");
-		Currency currency = JdbcUtils.getCurrency(rs, "currency");
-		
-		return new SeriesSaleParsedDataDto(
-			sellerId,
-			sellerGroupId,
-			sellerName,
-			sellerUrl,
-			price,
-			currency
-		);
 	}
 	
 	public static LinkEntityDto createLinkEntityDto(

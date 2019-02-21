@@ -25,7 +25,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import ru.mystamps.web.support.jdbc.RowMappers;
 
 import java.util.Collections;
 import java.util.HashMap;
