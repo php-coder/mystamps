@@ -22,6 +22,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.validation.ValidationRules;
 
@@ -31,8 +32,10 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
+// @todo #503 Add integration test to ensure that seller and buyer are different
 @Getter
 @Setter
+@FieldsMismatch(first = "sellerId", second = "buyerId", message = "{seller.buyer.match}")
 public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
