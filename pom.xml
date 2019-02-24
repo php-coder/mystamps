@@ -468,7 +468,7 @@
 		<argLine>-Xss256k</argLine>
 		
 		<!-- Don't forget to update version in the Url class -->
-		<bootstrap.version>3.3.7</bootstrap.version>
+		<bootstrap.version>3.4.1</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
 		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>

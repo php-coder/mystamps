@@ -8,10 +8,10 @@ use strict;
 use warnings;
 
 my @regexps = (
-	# [WARNING] CSS error: 'http://127.0.0.1:8081/public/bootstrap/3.3.7/css/bootstrap.min.css' [5:56298] Error in expression; ':' found after identifier "progid".
+	# [WARNING] CSS error: 'http://127.0.0.1:8081/public/bootstrap/3.4.1/css/bootstrap.min.css' [5:56298] Error in expression; ':' found after identifier "progid".
 	qr/\[WARNING\] CSS error: '[^']+' \[[^]]+\] Error in expression; [^\.]+\.\n/,
 	
-	# [WARNING] CSS error: 'http://127.0.0.1:8081/public/bootstrap/3.3.7/css/bootstrap.min.css' [5:115558] Invalid color "#000\9".
+	# [WARNING] CSS error: 'http://127.0.0.1:8081/public/bootstrap/3.4.1/css/bootstrap.min.css' [5:115558] Invalid color "#000\9".
 	qr/\[WARNING\] CSS error: '[^']+' \[[^]]+\] Invalid color "[^"]+"\.\n/,
 	
 	# [WARNING] CSS error: 'http://127.0.0.1:8081/public/selectize/0.12.3/css/selectize.bootstrap3.css' [176:3] Error in declaration. '*' is not allowed as first char of a property.
