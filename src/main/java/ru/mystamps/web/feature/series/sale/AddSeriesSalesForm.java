@@ -33,9 +33,17 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 // @todo #503 Add integration test to ensure that seller and buyer are different
+// @todo #504 Add integration test to ensure that price and alternative price are different
 @Getter
 @Setter
-@FieldsMismatch(first = "sellerId", second = "buyerId", message = "{seller.buyer.match}")
+@FieldsMismatch.List({
+	@FieldsMismatch(
+		first = "sellerId", second = "buyerId", message = "{seller.buyer.match}"
+	),
+	@FieldsMismatch(
+		first = "currency", second = "altCurrency", message = "{currencies.prices.match}"
+	)
+})
 public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
@@ -70,5 +78,5 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	})
 	public interface UrlChecks {
 	}
-	
+
 }
