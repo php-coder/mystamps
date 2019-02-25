@@ -38,4 +38,15 @@ public @interface FieldsMismatch {
 	
 	String first();
 	String second();
+
+	/**
+	 * Allow to place several {@code @FieldsMismatch} annotations on the same element.
+	 */
+	@Target({TYPE, ANNOTATION_TYPE })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		FieldsMismatch[] value();
+	}
+	
 }
