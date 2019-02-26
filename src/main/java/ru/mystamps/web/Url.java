@@ -111,8 +111,8 @@ public final class Url {
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
-	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.4/css/selectize.bootstrap3.css";
-	public static final String SELECTIZE_JS           = "/public/selectize/0.12.4/js/standalone/selectize.min.js";
+	public static final String SELECTIZE_CSS          = "/public/selectize/0.12.5/css/selectize.bootstrap3.css";
+	public static final String SELECTIZE_JS           = "/public/selectize/0.12.5/js/standalone/selectize.min.js";
 	
 	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
 	// CheckStyle: ignore LineLength for next 5 lines
