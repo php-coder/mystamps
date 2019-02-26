@@ -42,7 +42,7 @@ public @interface FieldsMismatch {
 	/**
 	 * Allow to place several {@code @FieldsMismatch} annotations on the same element.
 	 */
-	@Target({TYPE, ANNOTATION_TYPE })
+	@Target({ TYPE, ANNOTATION_TYPE })
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {
