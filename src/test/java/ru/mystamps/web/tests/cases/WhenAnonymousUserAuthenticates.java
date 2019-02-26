@@ -92,11 +92,4 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 		page.logout();
 	}
 	
-	@Override
-	protected void emptyValueShouldBeForbiddenForRequiredFields() {
-		// Ignore this check entirely because login page has another behavior:
-		// message about invalid credentials displayed for all type of errors.
-		// See also test emptyValuesShouldBeConsideredAsInvalidCredentials()
-	}
-	
 }
