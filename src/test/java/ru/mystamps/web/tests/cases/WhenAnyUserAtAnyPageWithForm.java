@@ -20,10 +20,7 @@ package ru.mystamps.web.tests.cases;
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
 import ru.mystamps.web.tests.page.element.Form.Field;
 
-import java.util.List;
-
 import static org.fest.assertions.api.Assertions.assertThat;
-import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 @SuppressWarnings("checkstyle:abstractclassname")
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
@@ -35,8 +32,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	
 	protected void checkStandardStructure() {
 		shouldHaveFields();
-		
-		emptyValueShouldBeForbiddenForRequiredFields();
 	}
 	
 	private void shouldHaveFields() {
@@ -46,25 +41,6 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 					.overridingErrorMessage("field with XPath '" + field + "' should exists")
 					.isTrue();
 			}
-		}
-	}
-	
-	protected void emptyValueShouldBeForbiddenForRequiredFields() {
-		List<Field> requiredFields = page.getForm().getRequiredFields();
-		if (requiredFields.isEmpty()) {
-			return;
-		}
-		
-		page.submit();
-		
-		for (Field field : requiredFields) {
-			assertThat(page.getFieldError(field.getId()))
-				.overridingErrorMessage(
-					String.format(
-						"required field with id '%s' should not accept empty value", field.getId()
-					)
-				)
-				.isEqualTo(tr("org.hibernate.validator.constraints.NotEmpty.message"));
 		}
 	}
 	

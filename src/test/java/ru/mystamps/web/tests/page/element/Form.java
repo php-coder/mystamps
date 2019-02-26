@@ -18,7 +18,6 @@
 package ru.mystamps.web.tests.page.element;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,18 +68,6 @@ public final class Form {
 		return this;
 	}
 	
-	public List<Field> getRequiredFields() {
-		List<Field> requiredFields = new ArrayList<>();
-		
-		for (Field field : fields) {
-			if (field.isRequired()) {
-				requiredFields.add(field);
-			}
-		}
-		
-		return requiredFields;
-	}
-	
 	public Field getField(String name) {
 		for (Field field : fields) {
 			if (field.getName().equals(name)) {
@@ -98,7 +85,7 @@ public final class Form {
 	}
 	
 	public static Field required(Field field) {
-		field.setRequired(true);
+		// it's no-op now and there is no code that uses that property
 		return field;
 	}
 	
@@ -154,7 +141,6 @@ public final class Form {
 	public static class Field {
 		@Getter private final String id;
 		@Getter private final String name;
-		@Setter private boolean required;
 		
 		private final String xpath;
 		private boolean accessibleByAll = false;
@@ -169,10 +155,6 @@ public final class Form {
 		
 		public Field and() {
 			return this;
-		}
-		
-		public boolean isRequired() {
-			return required;
 		}
 		
 		public Field accessibleByAll(boolean visible) {
