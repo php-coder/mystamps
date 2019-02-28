@@ -12,14 +12,12 @@ Add additional image by uploading a file
 	Page Should Not Contain Image  id=series-image-2
 	Choose File                    id=image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Submit Form                    id=add-image-form
-	Location Should Be             ${SITE_URL}/series/1
 	Page Should Contain Image      id=series-image-2
 
 Add additional image by downloading a file from URL
 	Page Should Not Contain Image  id=series-image-3
 	Input Text                     id=image-url  ${SITE_URL}/image/1
 	Submit Form                    id=add-image-form
-	Location Should Be             ${SITE_URL}/series/1
 	Page Should Contain Image      id=series-image-3
 
 *** Keywords ***
