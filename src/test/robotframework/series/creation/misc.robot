@@ -34,7 +34,7 @@ Catalog numbers should be stripped from leading and trailing spaces
 	Textfield Value Should Be  id=zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
-	[Tags]                     unstable  todo
+	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.jpg
@@ -54,7 +54,6 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id=zagorski_catalog_info  \#154, 155
 
 Catalog numbers should accept existing numbers
-	[Tags]                     todo
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
