@@ -48,7 +48,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 	private static final List<String> EXPECTED_YEARS =
 		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
-	private static final String SAMPLE_IMAGE_NAME = "test/test.png";
+	private static final String SAMPLE_IMAGE_NAME = "test/test.jpg";
 	private static final String EMPTY_IMAGE_NAME  = "empty.jpg";
 	private static final String SAMPLE_IMAGE_PATH;
 	private static final String EMPTY_IMAGE_PATH;

@@ -40,7 +40,7 @@ Create series with an empty image
 
 Create series with both image and an image URL
 	[Tags]                      todo
-	Choose File                 id=image      ${MAIN_RESOURCE_DIR}${/}test.png
+	Choose File                 id=image      ${MAIN_RESOURCE_DIR}${/}test.jpg
 	Input Text                  id=image-url  ${SITE_URL}/image/1
 	Submit Form                 id=add-series-form
 	Wait Until Element Text Is  image.errors  Image or image URL must be specified

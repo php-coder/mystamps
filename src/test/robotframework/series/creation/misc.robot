@@ -37,7 +37,7 @@ Catalog numbers should ignore duplicate values
 	[Tags]                     unstable  todo
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
-	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.jpg
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    104,105,104
 	Input Text                 id=scottNumbers     114,115,114
@@ -58,7 +58,7 @@ Catalog numbers should accept existing numbers
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
-	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.jpg
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    99
 	Input Text                 id=scottNumbers     99
