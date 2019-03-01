@@ -107,7 +107,7 @@ public final class Url {
 	public static final String BOOTSTRAP_CSS          = "/public/bootstrap/3.4.1/css/bootstrap.min.css";
 	public static final String BOOTSTRAP_JS           = "/public/bootstrap/3.4.1/js/bootstrap.min.js";
 	public static final String JQUERY_JS              = "/public/jquery/1.9.1/jquery.min.js";
-	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.rawgit.com/usrz/bootstrap-languages/3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
+	public static final String BOOTSTRAP_LANGUAGE     = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
 	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)

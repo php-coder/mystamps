@@ -40,10 +40,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
 	
-	// - 'https://cdn.rawgit.com' is required by languages.png (FIXME: GH #246)
-	// - 'https://raw.githubusercontent.com' is required by languages.png
-	// CheckStyle: ignore LineLength for next 1 line
-	private static final String IMG_SRC = "img-src https://cdn.rawgit.com https://raw.githubusercontent.com";
+	// - 'https://cdn.jsdelivr.net' is required by languages.png (FIXME: GH #246)
+	private static final String IMG_SRC = "img-src https://cdn.jsdelivr.net";
 	
 	// - 'self' is required for uploaded images and its previews
 	private static final String IMG_SRC_SELF = " 'self'";
@@ -60,8 +58,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// CheckStyle: ignore LineLength for next 1 line
 	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly";
 	
-	// - 'https://cdn.rawgit.com' is required by languages.min.css (FIXME: GH #246)
-	private static final String STYLE_SRC = "style-src https://cdn.rawgit.com";
+	// - 'https://cdn.jsdelivr.net' is required by languages.min.css (FIXME: GH #246)
+	private static final String STYLE_SRC = "style-src https://cdn.jsdelivr.net";
 	
 	// - 'self' is required for our own CSS files
 	private static final String STYLES_SELF = " 'self'";

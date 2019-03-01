@@ -70,12 +70,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray(
-				"img-src "
-					+ "https://cdn.rawgit.com "
-					+ "https://raw.githubusercontent.com "
-					+ "'self'"
-			)
+			hasItemInArray("img-src https://cdn.jsdelivr.net 'self'")
 		);
 		
 		assertThat(directives, hasItemInArray("font-src 'self'"));
@@ -85,7 +80,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			hasItemInArray("report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly")
 		);
 		
-		assertThat(directives, hasItemInArray("style-src https://cdn.rawgit.com 'self'"));
+		assertThat(directives, hasItemInArray("style-src https://cdn.jsdelivr.net 'self'"));
 		assertThat(directives, hasItemInArray("script-src 'unsafe-inline' 'self'"));
 		
 		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
@@ -101,12 +96,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray(
-				"img-src "
-					+ "https://cdn.rawgit.com "
-					+ "https://raw.githubusercontent.com "
-					+ "https://stamps.filezz.ru"
-			)
+			hasItemInArray("img-src https://cdn.jsdelivr.net https://stamps.filezz.ru")
 		);
 		
 		assertThat(directives, hasItemInArray("font-src https://maxcdn.bootstrapcdn.com"));
@@ -120,7 +110,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
 			)
@@ -151,7 +141,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "https://www.gstatic.com "
 					+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
@@ -184,7 +174,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
 					+ "https://www.gstatic.com "
@@ -222,7 +212,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 				directives,
 				hasItemInArray(
 					"style-src "
-						+ "https://cdn.rawgit.com "
+						+ "https://cdn.jsdelivr.net "
 						+ "'self' "
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
@@ -246,7 +236,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 				directives,
 				hasItemInArray(
 					"style-src "
-						+ "https://cdn.rawgit.com "
+						+ "https://cdn.jsdelivr.net "
 						+ "https://stamps.filezz.ru "
 						+ "https://maxcdn.bootstrapcdn.com "
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
@@ -269,7 +259,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
 					+ "https://cdnjs.cloudflare.com"
@@ -303,7 +293,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
 					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
@@ -340,7 +330,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com"
+					+ "https://cdn.jsdelivr.net"
 					+ " 'self'"
 					+ " 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
 					+ " 'sha256-ZdHxw9eWtnxUb3mk6tBS+gIiVUPE3pGM470keHPDFlE='"
@@ -375,7 +365,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			directives,
 			hasItemInArray(
 				"style-src "
-					+ "https://cdn.rawgit.com "
+					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
 			)
