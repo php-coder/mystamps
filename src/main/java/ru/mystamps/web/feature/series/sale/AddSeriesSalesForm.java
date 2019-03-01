@@ -22,6 +22,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.support.beanvalidation.BothOrNoneRequired;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.support.beanvalidation.Group;
 import ru.mystamps.web.validation.ValidationRules;
@@ -34,6 +35,7 @@ import java.util.Date;
 
 // @todo #503 Add integration test to ensure that seller and buyer are different
 // @todo #504 Add integration test to ensure that price and alternative price are different
+// @todo #678 Add integration tests for price and alternative price: both or none are required
 @Getter
 @Setter
 @FieldsMismatch.List({
@@ -44,6 +46,11 @@ import java.util.Date;
 		first = "currency", second = "altCurrency", message = "{currencies.prices.match}"
 	)
 })
+@BothOrNoneRequired(
+	first = "altPrice",
+	second = "altCurrency",
+	message = "{altprice.altcurrency.both-required}"
+)
 public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
 	@DateTimeFormat(pattern = "dd.MM.yyyy")

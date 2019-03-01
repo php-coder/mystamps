@@ -54,11 +54,13 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	// They are no-op methods because we don't support all values during series import.
 	//
 	
+	// For future: altPrice is required when altCurrency is specified
 	@Override
 	public BigDecimal getAltPrice() {
 		return null;
 	}
 	
+	// For future: altCurrency is required when altPrice is specified
 	@Override
 	public Currency getAltCurrency() {
 		return null;
