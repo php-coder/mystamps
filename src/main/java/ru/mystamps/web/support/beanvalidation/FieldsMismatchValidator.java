@@ -46,13 +46,13 @@ public class FieldsMismatchValidator implements ConstraintValidator<FieldsMismat
 		PropertyAccessor bean = new BeanWrapperImpl(value);
 		
 		Object firstField      = bean.getPropertyValue(firstFieldName);
-		String firstFieldValue = Objects.toString(firstField, "");
+		String firstFieldValue = Objects.toString(firstField, null);
 		if (StringUtils.isEmpty(firstFieldValue)) {
 			return true;
 		}
 		
 		Object secondField      = bean.getPropertyValue(secondFieldName);
-		String secondFieldValue = Objects.toString(secondField, "");
+		String secondFieldValue = Objects.toString(secondField, null);
 		if (StringUtils.isEmpty(secondFieldValue)) {
 			return true;
 		}
