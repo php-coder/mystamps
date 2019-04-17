@@ -156,6 +156,9 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
+		# Shellcheck doesn't support recursive scanning: https://github.com/koalaman/shellcheck/issues/143
+		# Also I don't want to invoke it many times (slower, more code for handling failures), so I prefer this way.
+		# shellcheck disable=SC2207
 		SHELL_FILES=( $(find src/main/scripts -type f -name '*.sh') )
 		shellcheck \
 			--shell bash \

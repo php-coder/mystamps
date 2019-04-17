@@ -1,4 +1,4 @@
-dist: trusty
+dist: xenial
 language: java
 
 env:
@@ -65,7 +65,7 @@ deploy:
   skip_cleanup: true
 
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 services:
   - mysql
