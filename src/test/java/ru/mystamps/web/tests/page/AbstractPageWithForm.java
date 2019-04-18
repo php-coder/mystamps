@@ -26,6 +26,7 @@ import ru.mystamps.web.tests.page.element.Form;
 import ru.mystamps.web.tests.page.element.Form.Field;
 import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
+import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 public abstract class AbstractPageWithForm extends AbstractPage {
@@ -69,6 +70,13 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		
 		getElementByXPath(xpathOfFirstSubmitButton).submit();
 		
+		// HACK: updating a lot of tests takes a lot of time. As these tests will be ported
+		// to Robot Framework soon, this hack keep them green for awhile.
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException ignored) {
+		}
+
 		if (pageUrlChanged()) {
 			return null;
 		}
