@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="modify-series_sales-transaction_url-field" author="mihnayan" context="scheme">
+		<!--
+			Fix DataIntegrityViolationException when we import a series with a URL longer than 255 characters.
+			The size of the column is made to correspond the size of the `series_import_requests.url` column.
+		-->
+		<modifyDataType tableName="series_sales" columnName="transaction_url" newDataType="VARCHAR(767)" />
+	</changeSet>
+	
+</databaseChangeLog>
