@@ -74,7 +74,6 @@ public class CountryServiceImpl implements CountryService {
 		return slug;
 	}
 	
-	// @todo #819 CountryServiceImpl.findIdsByNames(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsByNames(List<String> names) {

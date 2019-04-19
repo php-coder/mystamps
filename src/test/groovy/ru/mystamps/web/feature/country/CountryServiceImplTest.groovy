@@ -170,6 +170,16 @@ class CountryServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	def 'findIdsByNames() should pass names to dao in lower case'() {
+		given:
+			List<String> names = [ 'Foo', 'BAR' ]
+			List<String> expectedNames = [ 'foo', 'bar' ]
+		when:
+			service.findIdsByNames(names)
+		then:
+			1 * countryDao.findIdsByNames(expectedNames) >> Random.listOfIntegers()
+	}
+	
 	//
 	// Tests for findIdsWhenNameStartsWith()
 	//
