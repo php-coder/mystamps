@@ -74,7 +74,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return slug;
 	}
 	
-	// @todo #819 CategoryServiceImpl.findIdsByNames(): add unit test for converting to lower case
 	@Override
 	@Transactional(readOnly = true)
 	public List<Integer> findIdsByNames(List<String> names) {

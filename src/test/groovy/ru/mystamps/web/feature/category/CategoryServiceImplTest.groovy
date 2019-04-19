@@ -171,6 +171,16 @@ class CategoryServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
+	def 'findIdsByNames() should pass names to dao in lower case'() {
+		given:
+			List<String> names = [ 'Foo', 'BAR' ]
+			List<String> expectedNames = [ 'foo', 'bar' ]
+		when:
+			service.findIdsByNames(names)
+		then:
+			1 * categoryDao.findIdsByNames(expectedNames) >> Random.listOfIntegers()
+	}
+	
 	//
 	// Tests for findIdsWhenNameStartsWith()
 	//
