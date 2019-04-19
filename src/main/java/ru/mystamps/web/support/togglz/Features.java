@@ -24,26 +24,6 @@ import org.togglz.core.context.FeatureContext;
 
 public enum Features implements Feature {
 	
-	@Label("/site/index: show list of recently added series")
-	@EnabledByDefault
-	SHOW_RECENT_SERIES_ON_INDEX_PAGE,
-	
-	@Label("/site/index: show list of recently created collections")
-	@EnabledByDefault
-	SHOW_RECENT_COLLECTIONS_ON_INDEX_PAGE,
-
-	@Label("/site/index: show search panel")
-	@EnabledByDefault
-	SHOW_SEARCH_PANEL_ON_INDEX_PAGE,
-	
-	@Label("/site/index: show link to list of categories")
-	@EnabledByDefault
-	LIST_CATEGORIES,
-	
-	@Label("/site/index: show link to list of countries")
-	@EnabledByDefault
-	LIST_COUNTRIES,
-	
 	@Label("/series/{id}: possibility to user to add series to collection")
 	@EnabledByDefault
 	ADD_SERIES_TO_COLLECTION,
@@ -76,10 +56,6 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SEND_ACTIVATION_MAIL,
 	
-	@Label("View site events")
-	@EnabledByDefault
-	VIEW_SITE_EVENTS,
-
 	@Label("/series/add: show link with auto-suggestions")
 	@EnabledByDefault
 	SHOW_SUGGESTION_LINK;

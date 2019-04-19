@@ -2,8 +2,7 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,10 +63,10 @@
 					<nav>
 						<p th:text="|#{t_you_may}:|">You may:</p>
 						<ul>
-							<li togglz:active="LIST_CATEGORIES">
+							<li>
 								<a th:href="@{${GET_CATEGORIES_PAGE}}" th:text="#{t_show_categories_list}" href="../category/list.html">show list of categories</a>
 							</li>
-							<li togglz:active="LIST_COUNTRIES">
+							<li>
 								<a th:href="@{${GET_COUNTRIES_PAGE}}" th:text="#{t_show_countries_list}" href="../country/list.html">show list of countries</a>
 							</li>
 							<li sec:authorize="hasAuthority('IMPORT_SERIES')">
@@ -88,7 +87,7 @@
 							<li sec:authorize="hasAuthority('ADD_PARTICIPANT')">
 								<a th:href="@{${ADD_PARTICIPANT_PAGE}}" th:text="#{t_add_buyer_seller}" href="../participant/add.html">add buyer/seller</a>
 							</li>
-							<li togglz:active="VIEW_SITE_EVENTS" sec:authorize="hasAuthority('VIEW_SITE_EVENTS')">
+							<li sec:authorize="hasAuthority('VIEW_SITE_EVENTS')">
 								<a th:href="@{${SITE_EVENTS_PAGE}}" th:text="#{t_view_suspicious_activities}" href="events.html">view suspicious activities</a>
 							</li>
 							<li sec:authorize="hasAuthority('VIEW_DAILY_STATS')">
@@ -98,61 +97,49 @@
 					</nav>
 				</div>
 				<div class="col-sm-3">
-					<!--/*/
-					<th:block togglz:active="SHOW_RECENT_COLLECTIONS_ON_INDEX_PAGE" th:if="${not #lists.isEmpty(recentlyAddedCollections)}">
-					/*/-->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title" th:text="#{t_recently_added_collections}">Recently created collections</h4>
-							</div>
-							<div class="panel-body">
-								<ul class="list-unstyled" th:remove="all-but-first">
-									<li th:each="collection : ${recentlyAddedCollections}">
-										<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
-									</li>
-									<li><a href="../collection/info.html">Edith Roberts</a></li>
-									<li><a href="../collection/info.html">Tyler Dean</a></li>
-									<li><a href="../collection/info.html">Gwen Schultz</a></li>
-								</ul>
-							</div>
+					<div class="panel panel-default" th:if="${not #lists.isEmpty(recentlyAddedCollections)}">
+						<div class="panel-heading">
+							<h4 class="panel-title" th:text="#{t_recently_added_collections}">Recently created collections</h4>
 						</div>
-					<!--/*/
-					</th:block>
-					/*/-->
+						<div class="panel-body">
+							<ul class="list-unstyled" th:remove="all-but-first">
+								<li th:each="collection : ${recentlyAddedCollections}">
+									<a href="../collection/info.html" th:href="@{${INFO_COLLECTION_PAGE}(slug=${collection.slug})}" th:text="${collection.name}">John Doe</a>
+								</li>
+								<li><a href="../collection/info.html">Edith Roberts</a></li>
+								<li><a href="../collection/info.html">Tyler Dean</a></li>
+								<li><a href="../collection/info.html">Gwen Schultz</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-4">
-					<!--/*/
-					<th:block togglz:active="SHOW_RECENT_SERIES_ON_INDEX_PAGE" th:if="${not #lists.isEmpty(recentlyAddedSeries)}">
-					/*/-->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title" th:text="#{t_recently_added_series}">Recently added series</h4>
-							</div>
-							<div class="panel-body">
-								<ul class="list-unstyled" th:remove="all-but-first">
-									<li th:each="series : ${recentlyAddedSeries}">
-										<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-											<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
-											<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
-											<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
-											<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
-										</a>
-									</li>
-									<li><a href="../series/info.html">Italy, 1997, 8&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 2009, 10&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 2002, 12&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 1993, 19&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
-									<li><a href="../series/info.html">Italy, 11&nbsp;stamps (without perforation)</a></li>
-									<li><a href="../series/info.html">Italy, 2014, 1&nbsp;stamp</a></li>
-									<li><a href="../series/info.html">Italy, 1996, 16&nbsp;stamps (without perforation)</a></li>
-								</ul>
-							</div>
+					<div class="panel panel-default" th:if="${not #lists.isEmpty(recentlyAddedSeries)}">
+						<div class="panel-heading">
+							<h4 class="panel-title" th:text="#{t_recently_added_series}">Recently added series</h4>
 						</div>
-					<!--/*/
-					</th:block>
-					/*/-->
+						<div class="panel-body">
+							<ul class="list-unstyled" th:remove="all-but-first">
+								<li th:each="series : ${recentlyAddedSeries}">
+									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
+										<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
+										<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
+										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+									</a>
+								</li>
+								<li><a href="../series/info.html">Italy, 1997, 8&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 2009, 10&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 2002, 12&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 1993, 19&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>
+								<li><a href="../series/info.html">Italy, 11&nbsp;stamps (without perforation)</a></li>
+								<li><a href="../series/info.html">Italy, 2014, 1&nbsp;stamp</a></li>
+								<li><a href="../series/info.html">Italy, 1996, 16&nbsp;stamps (without perforation)</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-2">
 					<div class="panel panel-default">
@@ -167,7 +154,7 @@
 							<p th:text="|#{t_collections_amount}: ${collectionsCounter}|">Collections: 3</p>
 						</div>
 					</div>
-					<div togglz:active="SHOW_SEARCH_PANEL_ON_INDEX_PAGE" class="panel panel-default">
+					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
