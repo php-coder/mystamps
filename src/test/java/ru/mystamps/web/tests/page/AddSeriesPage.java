@@ -149,10 +149,6 @@ public class AddSeriesPage extends AbstractPageWithForm {
 			.click();
 	}
 	
-	public List<String> getYearFieldValues() {
-		return getSelectOptions("year");
-	}
-	
 	public void fillDay(String value) {
 		if (value != null) {
 			new Select(getElementByName("day")).selectByVisibleText(value);

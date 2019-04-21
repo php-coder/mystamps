@@ -30,8 +30,6 @@ import ru.mystamps.web.tests.page.InfoSeriesPage;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -40,22 +38,10 @@ import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
 public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
-	private static final int SINCE_YEAR     = 1840;
-	private static final int CURRENT_YEAR   = Year.now().getValue();
-	
-	private static final List<String> EXPECTED_YEARS =
-		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
-	
 	private static final String SAMPLE_IMAGE_NAME = "test/test.png";
 	private static final String SAMPLE_IMAGE_PATH;
 	
 	static {
-		EXPECTED_YEARS.add("Year");
-		// years in reverse order
-		for (int i = CURRENT_YEAR; i >= SINCE_YEAR; i--) {
-			EXPECTED_YEARS.add(String.valueOf(i));
-		}
-		
 		try {
 			SAMPLE_IMAGE_PATH = new File(
 				WhenUserAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
@@ -183,13 +169,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("gibbonsPrice").hasError(msg);
 		assertThat(page).field("solovyovPrice").hasError(msg);
 		assertThat(page).field("zagorskiPrice").hasError(msg);
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
-	public void issueYearFieldShouldHaveOptionsForRangeFrom1840ToCurrentYear() {
-		page.showDateOfRelease();
-		
-		assertThat(page.getYearFieldValues()).isEqualTo(EXPECTED_YEARS);
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")

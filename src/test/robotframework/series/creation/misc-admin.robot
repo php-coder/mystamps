@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation    Verify miscellaneous aspects of series creation
-Library          Collections
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
@@ -72,18 +71,6 @@ Catalog numbers should accept existing numbers
 	Element Text Should Be     id=gibbons_catalog_info   \#99
 	Element Text Should Be     id=solovyov_catalog_info  \#77
 	Element Text Should Be     id=zagorski_catalog_info  \#83
-
-Issue year should have options for range from 1840 to the current year
-	Go To                        ${SITE_URL}/series/add
-	Click Element                id=specify-issue-date-link
-	${availableYears}=           Get List Items  id=year
-	${currentYear}=              Get Time  year  NOW
-	${numberOfYears}=            Get Length  ${availableYears}
-	# +2 here is to include the current year and option with title
-	${expectedNumberOfYears}=    Evaluate  ${currentYear}-1840+2
-	List Should Contain Value    ${availableYears}  1840
-	List Should Contain Value    ${availableYears}  ${currentYear}
-	Should Be Equal As Integers  ${numberOfYears}  ${expectedNumberOfYears}
 
 Comment should be stripped from leading and trailing spaces
 	Click Element             id=add-comment-link
