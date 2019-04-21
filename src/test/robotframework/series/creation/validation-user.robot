@@ -14,6 +14,11 @@ Create series with empty required fields
 	Element Text Should Be           id=image.errors     Value must not be empty
 	Page Should Not Contain Element  id=image-url.errors
 
+Create series with non-numeric quantity
+	Input Text              id=quantity  NaN
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=quantity.errors  Invalid value
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

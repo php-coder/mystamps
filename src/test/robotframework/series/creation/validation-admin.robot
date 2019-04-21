@@ -14,11 +14,6 @@ Create series with empty required fields
 	Element Text Should Be  id=image.errors      Image or image URL must be specified
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
-Create series with non-numeric quantity
-	Input Text              id=quantity  NaN
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=quantity.errors  Invalid value
-
 Create series with too small quantity
 	Input Text              id=quantity  0
 	Submit Form             id=add-series-form
