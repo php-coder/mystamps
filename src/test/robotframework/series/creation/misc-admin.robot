@@ -73,6 +73,7 @@ Catalog numbers should accept existing numbers
 	Element Text Should Be     id=zagorski_catalog_info  \#83
 
 Comment should be stripped from leading and trailing spaces
+	Go To                     ${SITE_URL}/series/add
 	Click Element             id=add-comment-link
 	Input Text                id=comment  ${SPACE * 2}example comment${SPACE * 2}
 	Submit Form               id=add-series-form
