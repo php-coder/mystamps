@@ -14,11 +14,6 @@ Create series with empty required fields
 	Element Text Should Be  id=image.errors      Image or image URL must be specified
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
-Create series with too large quantity
-	Input Text              id=quantity  51
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
-
 Create series with an empty image
 	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.png
 	Submit Form             id=add-series-form

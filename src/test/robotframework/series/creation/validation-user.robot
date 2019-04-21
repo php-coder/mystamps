@@ -24,6 +24,11 @@ Create series with too small quantity
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Value must be greater than or equal to 1
 
+Create series with too large quantity
+	Input Text              id=quantity  51
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

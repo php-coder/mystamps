@@ -37,7 +37,6 @@ import java.util.List;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
 
 public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
@@ -143,17 +142,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("gibbonsNumbers").hasNoError();
 		assertThat(page).field("solovyovNumbers").hasNoError();
 		assertThat(page).field("zagorskiNumbers").hasNoError();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void quantityShouldNotBeGreaterThanLimit() {
-		page.fillQuantity(String.valueOf(MAX_STAMPS_IN_SERIES + 1));
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("quantity")
-			.hasError(tr("javax.validation.constraints.Max.message", MAX_STAMPS_IN_SERIES));
 	}
 	
 	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
