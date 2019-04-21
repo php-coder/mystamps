@@ -52,12 +52,7 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 		page.open();
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
+	@Test(groups = "invalid")
 	public void emptyValuesShouldBeConsideredAsInvalidCredentials() {
 		page.authorizeUser("", "");
 		
@@ -65,7 +60,7 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
+	@Test(groups = "invalid")
 	public void invalidCredentialsShouldBeRejected() {
 		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
@@ -73,7 +68,7 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm
 			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = "std")
+	@Test(groups = "logic")
 	public void validCredentialsShouldAuthenticateUserOnSite() {
 		page.authorizeUser(validUserLogin, validUserPassword);
 		

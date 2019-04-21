@@ -21,6 +21,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.ActivateAccountPage;
 
+@Deprecated
 public class WhenAnonymousUserActivateAccount
 	extends WhenAnyUserAtAnyPageWithForm<ActivateAccountPage> {
 	
@@ -35,7 +36,6 @@ public class WhenAnonymousUserActivateAccount
 	
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
 	}
 	
 }

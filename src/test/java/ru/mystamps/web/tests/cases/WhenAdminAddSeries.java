@@ -28,6 +28,7 @@ import ru.mystamps.web.tests.page.AddSeriesPage;
  * The main difference between this test and {@link WhenUserAddSeries} is that as admin we have
  * additional field for comment.
  */
+@Deprecated
 public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
 	
 	@Value("${valid_admin_login}")
@@ -57,7 +58,6 @@ public class WhenAdminAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPa
 	
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
 	}
 	
 }

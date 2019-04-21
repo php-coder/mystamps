@@ -24,6 +24,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.AddCategoryPage;
 
+@Deprecated
 public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCategoryPage> {
 	
 	@Value("${valid_admin_login}")
@@ -53,7 +54,6 @@ public class WhenAdminAddCategory extends WhenAnyUserAtAnyPageWithForm<AddCatego
 	
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
 	}
 	
 }

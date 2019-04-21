@@ -98,12 +98,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		page.logout();
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "valid", dependsOnGroups = "std", dataProvider = "validCatalogNumbers")
+	@Test(groups = "valid", dataProvider = "validCatalogNumbers")
 	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
 		page.showCatalogNumbers();
 		
@@ -124,7 +119,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("zagorskiNumbers").hasNoError();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogNumbers")
+	@Test(groups = "invalid", dataProvider = "invalidCatalogNumbers")
 	public void catalogNumbersShouldRejectInvalidValues(
 		String numbers,
 		String msg,
@@ -150,7 +145,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("zagorskiNumbers").hasError(msg);
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidCatalogPrices")
+	@Test(groups = "invalid", dataProvider = "invalidCatalogPrices")
 	public void catalogPricesShouldRejectInvalidValues(String price, String msg) {
 		page.showCatalogNumbers();
 		
@@ -171,7 +166,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("zagorskiPrice").hasError(msg);
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void catalogNumbersShouldBeStripedFromSpaces() {
 		page.showCatalogNumbers();
 		
@@ -192,7 +187,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("zagorskiNumbers").hasValue("11,12");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
 		String expectedCategoryName = validCategoryName;
 		String expectedQuantity     = "2";
@@ -219,7 +214,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "valid", "invalid", "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
 		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PREVIEW_PAGE.replace("{id}", "\\d+");
@@ -289,7 +284,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "valid", "invalid", "misc" })
 	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -315,7 +310,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#54, 55");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "valid", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "valid", "invalid", "misc" })
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");

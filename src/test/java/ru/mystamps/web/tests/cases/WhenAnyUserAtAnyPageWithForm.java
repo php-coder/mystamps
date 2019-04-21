@@ -28,8 +28,4 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		super(pageClass);
 	}
 	
-	@Deprecated
-	protected void checkStandardStructure() {
-	}
-	
 }

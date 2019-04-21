@@ -83,12 +83,7 @@ public class WhenAnonymousUserRegisterAccount
 		page.open();
 	}
 	
-	@Test(groups = "std")
-	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
-	}
-	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void shouldExistsMessageWithLinkToAuthenticationPage() {
 		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
 		
@@ -97,7 +92,7 @@ public class WhenAnonymousUserRegisterAccount
 			.isTrue();
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std")
+	@Test(groups = "invalid")
 	public void emailShouldNotBeTooLong() {
 		page.registerUser(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
 		
@@ -106,21 +101,21 @@ public class WhenAnonymousUserRegisterAccount
 			.hasError(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
-	@Test(groups = "invalid", dependsOnGroups = "std", dataProvider = "invalidEmails")
+	@Test(groups = "invalid", dataProvider = "invalidEmails")
 	public void emailShouldBeValid(String invalidEmail, String expectedMessage) {
 		page.registerUser(invalidEmail);
 		
 		assertThat(page).field("email").hasError(expectedMessage);
 	}
 	
-	@Test(groups = "misc", dependsOnGroups = "std")
+	@Test(groups = "misc")
 	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.registerUser(" test ");
 		
 		assertThat(page).field("email").hasValue("test");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "std", "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "invalid", "misc" })
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		

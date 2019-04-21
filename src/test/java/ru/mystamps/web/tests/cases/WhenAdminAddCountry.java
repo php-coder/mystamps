@@ -24,6 +24,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.mystamps.web.tests.page.AddCountryPage;
 
+@Deprecated
 public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountryPage> {
 	
 	@Value("${valid_admin_login}")
@@ -53,7 +54,6 @@ public class WhenAdminAddCountry extends WhenAnyUserAtAnyPageWithForm<AddCountry
 	
 	@Test(groups = "std")
 	public void shouldHaveStandardStructure() {
-		checkStandardStructure();
 	}
 	
 }
