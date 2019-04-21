@@ -14,11 +14,6 @@ Create series with empty required fields
 	Element Text Should Be  id=image.errors      Image or image URL must be specified
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
-Create series with an empty image
-	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.jpg
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=image.errors  File must not be empty
-
 Create series with both image and an image URL
 	Choose File             id=image      ${MAIN_RESOURCE_DIR}${/}test.png
 	Input Text              id=image-url  ${SITE_URL}/image/1

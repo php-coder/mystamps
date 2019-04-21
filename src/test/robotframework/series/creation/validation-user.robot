@@ -29,6 +29,11 @@ Create series with too large quantity
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=quantity.errors  Value must be less than or equal to 50
 
+Create series with an empty image
+	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.jpg
+	Submit Form             id=add-series-form
+	Element Text Should Be  id=image.errors  File must not be empty
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

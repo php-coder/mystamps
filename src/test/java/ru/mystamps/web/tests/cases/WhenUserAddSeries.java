@@ -47,9 +47,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		new ArrayList<>(CURRENT_YEAR - SINCE_YEAR + 1);
 	
 	private static final String SAMPLE_IMAGE_NAME = "test/test.png";
-	private static final String EMPTY_IMAGE_NAME  = "empty.jpg";
 	private static final String SAMPLE_IMAGE_PATH;
-	private static final String EMPTY_IMAGE_PATH;
 	
 	static {
 		EXPECTED_YEARS.add("Year");
@@ -63,10 +61,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 				WhenUserAddSeries.class.getClassLoader().getResource(SAMPLE_IMAGE_NAME).toURI()
 			).getAbsolutePath();
 			
-			EMPTY_IMAGE_PATH = new File(
-				WhenUserAddSeries.class.getClassLoader().getResource(EMPTY_IMAGE_NAME).toURI()
-			).getAbsolutePath();
-		
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
@@ -189,17 +183,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPag
 		assertThat(page).field("gibbonsPrice").hasError(msg);
 		assertThat(page).field("solovyovPrice").hasError(msg);
 		assertThat(page).field("zagorskiPrice").hasError(msg);
-	}
-	
-	@Test(groups = "invalid", dependsOnGroups = "std")
-	public void imageSizeMustBeGreaterThanZero() {
-		page.fillImage(EMPTY_IMAGE_PATH);
-		
-		page.submit();
-		
-		assertThat(page)
-			.field("image")
-			.hasError(tr("ru.mystamps.web.support.beanvalidation.NotEmptyFile.message"));
 	}
 	
 	@Test(groups = "misc", dependsOnGroups = "std")
