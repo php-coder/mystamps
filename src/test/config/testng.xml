@@ -31,12 +31,6 @@
 		</classes>
 	</test>
 	
-	<test name="When any user at any page with form">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPageWithForm" />
-		</classes>
-	</test>
-	
 	<test name="When anonymous user at index page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAtIndexPage" />

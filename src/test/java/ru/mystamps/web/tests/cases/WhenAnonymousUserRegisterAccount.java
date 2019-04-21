@@ -43,7 +43,7 @@ import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 public class WhenAnonymousUserRegisterAccount
-	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
+	extends WhenAnyUserAtAnyPage<RegisterAccountPage> {
 	
 	private static final Pattern ACTIVATION_LINK_REGEXP =
 		Pattern.compile(".*/account/activate\\?key=[0-9a-z]{10}.*", Pattern.DOTALL);

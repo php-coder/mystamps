@@ -27,7 +27,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
 public class WhenUserAtRegisterAccountPage
-	extends WhenAnyUserAtAnyPageWithForm<RegisterAccountPage> {
+	extends WhenAnyUserAtAnyPage<RegisterAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

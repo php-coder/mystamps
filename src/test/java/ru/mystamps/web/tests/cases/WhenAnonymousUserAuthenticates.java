@@ -26,7 +26,7 @@ import ru.mystamps.web.tests.page.AuthAccountPage;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 
-public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPageWithForm<AuthAccountPage> {
+public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPage<AuthAccountPage> {
 	
 	@Value("${valid_user_login}")
 	private String validUserLogin;

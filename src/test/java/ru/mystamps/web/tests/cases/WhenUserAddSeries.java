@@ -36,7 +36,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
-public class WhenUserAddSeries extends WhenAnyUserAtAnyPageWithForm<AddSeriesPage> {
+public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 	
 	private static final String SAMPLE_IMAGE_NAME = "test/test.png";
 	private static final String SAMPLE_IMAGE_PATH;
