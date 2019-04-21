@@ -35,7 +35,7 @@ public final class Form {
 	// CheckStyle: ignore LineLength for next 1 line
 	private static final String SUBMIT_WITH_VALUE_LOCATOR = "//input[@type=\"submit\"][@value=\"%s\"]";
 	
-	@Getter private List<Field> fields;
+	private List<Field> fields;
 	@Getter private List<SubmitButton> submitButtons;
 	
 	private Form() {
@@ -143,7 +143,6 @@ public final class Form {
 		@Getter private final String name;
 		
 		private final String xpath;
-		private boolean accessibleByAll = false;
 		
 		protected Field(String name, String xpath) {
 			this.name = name;
@@ -155,15 +154,6 @@ public final class Form {
 		
 		public Field and() {
 			return this;
-		}
-		
-		public Field accessibleByAll(boolean visible) {
-			accessibleByAll = visible;
-			return this;
-		}
-		
-		public boolean isAccessibleByAll() {
-			return accessibleByAll;
 		}
 		
 		@Override

@@ -23,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import ru.mystamps.web.tests.WebElementUtils;
 import ru.mystamps.web.tests.page.element.Form;
-import ru.mystamps.web.tests.page.element.Form.Field;
 import ru.mystamps.web.tests.page.element.Form.SubmitButton;
 
 import java.util.List;
@@ -41,10 +40,6 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 	
 	protected void hasForm(Form form) {
 		this.form = form;
-	}
-	
-	public boolean isFieldExists(Field field) {
-		return elementWithXPathExists(field.toString());
 	}
 	
 	public boolean isFieldHasError(String id) {

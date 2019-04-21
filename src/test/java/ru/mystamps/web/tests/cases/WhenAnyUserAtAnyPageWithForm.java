@@ -18,11 +18,9 @@
 package ru.mystamps.web.tests.cases;
 
 import ru.mystamps.web.tests.page.AbstractPageWithForm;
-import ru.mystamps.web.tests.page.element.Form.Field;
-
-import static org.fest.assertions.api.Assertions.assertThat;
 
 @SuppressWarnings("checkstyle:abstractclassname")
+@Deprecated
 abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 	extends WhenAnyUserAtAnyPage<T> {
 	
@@ -30,18 +28,8 @@ abstract class WhenAnyUserAtAnyPageWithForm<T extends AbstractPageWithForm>
 		super(pageClass);
 	}
 	
+	@Deprecated
 	protected void checkStandardStructure() {
-		shouldHaveFields();
-	}
-	
-	private void shouldHaveFields() {
-		for (Field field : page.getForm().getFields()) {
-			if (field.isAccessibleByAll()) {
-				assertThat(page.isFieldExists(field))
-					.overridingErrorMessage("field with XPath '" + field + "' should exists")
-					.isTrue();
-			}
-		}
 	}
 	
 }
