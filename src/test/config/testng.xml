@@ -19,30 +19,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user activate account">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserActivateAccount" />
-		</classes>
-	</test>
-	
-	<test name="When admin add category">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCategory" />
-		</classes>
-	</test>
-	
-	<test name="When admin add country">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddCountry" />
-		</classes>
-	</test>
-	
-	<test name="When admin add series">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAdminAddSeries" />
-		</classes>
-	</test>
-	
 	<test name="When user add series">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserAddSeries" />
