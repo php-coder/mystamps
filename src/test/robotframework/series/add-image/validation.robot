@@ -13,7 +13,7 @@ Add image with empty required fields
 	Element Text Should Be  id=image-url.errors  Image or image URL must be specified
 
 Add image with an empty file
-	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.png
+	Choose File             id=image  ${TEST_RESOURCE_DIR}${/}empty.jpg
 	Submit Form             id=add-image-form
 	Element Text Should Be  id=image.errors  File must not be empty
 
