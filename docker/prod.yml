@@ -37,7 +37,7 @@ services:
       - '3306:3306'
     # only for testing locally
     #volumes:
-    #  - ./mysql_backup_mystamps_20180901-003001.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
+    #  - ./mysql_backup_mystamps.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:ro
     networks:
       - internal-network
 
