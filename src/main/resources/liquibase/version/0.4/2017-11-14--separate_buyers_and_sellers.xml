@@ -15,16 +15,16 @@
 	</changeSet>
 	
 	<changeSet id="assign-is_buyer-column" author="php-coder" context="test-data, prod-data">
+		<validCheckSum>7:9ab3c2a79a25db0059decdf20dbf2b3a</validCheckSum>
+		
 		<comment>Find and mark all buyers</comment>
 		
 		<sql>
 			UPDATE transaction_participants p
-			   SET is_buyer = (
-			         SELECT TRUE
+			   SET is_buyer = EXISTS(
+			         SELECT ss.id
 			           FROM series_sales ss
 			          WHERE ss.buyer_id = p.id
-			          UNION
-			         SELECT FALSE
 			          LIMIT 1
 			       )
 		</sql>
@@ -39,16 +39,16 @@
 	</changeSet>
 	
 	<changeSet id="assign-is_seller-column" author="php-coder" context="test-data, prod-data">
+		<validCheckSum>7:c02e49c0b7fbd12b06feb50f2bdef680</validCheckSum>
+		
 		<comment>Find and mark all sellers</comment>
 		
 		<sql>
 			UPDATE transaction_participants p
-			   SET is_seller = (
-			         SELECT TRUE
+			   SET is_seller = EXISTS(
+			         SELECT ss.id
 			           FROM series_sales ss
 			          WHERE ss.seller_id = p.id
-			          UNION
-			         SELECT FALSE
 			          LIMIT 1
 			       )
 		</sql>
