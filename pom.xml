@@ -573,7 +573,7 @@
 		<skipUnitTests>false</skipUnitTests>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<slf4j.version>1.7.25</slf4j.version>
+		<slf4j.version>1.7.26</slf4j.version>
 		
 		<sortpom.plugin.version>2.5.0</sortpom.plugin.version>
 		
