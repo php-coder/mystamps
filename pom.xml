@@ -543,7 +543,7 @@
 		<liquibase.version>3.5.5</liquibase.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<lombok.version>1.18.2</lombok.version>
+		<lombok.version>1.18.6</lombok.version>
 		
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
