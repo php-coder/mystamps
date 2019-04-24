@@ -7,8 +7,8 @@ Force Tags       account  activation  misc
 
 *** Test Cases ***
 Activation key should be auto filled from url
-	Go To                      ${SITE_URL}/account/activate?key=7777744444
-	Textfield Value Should Be  id=activationKey  7777744444
+	Go To                      ${SITE_URL}/account/activate?key=7777755555
+	Textfield Value Should Be  id=activationKey  7777755555
 
 Most short login should be accepted
 	Input Text                       id=login  ab
