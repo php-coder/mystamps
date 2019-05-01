@@ -128,7 +128,7 @@
 	<!--<rule ref="rulesets/java/logging-java.xml/LoggerIsNotStaticFinal" />-->
 	<rule ref="rulesets/java/logging-java.xml/SystemPrintln" />
 	<rule ref="rulesets/java/logging-java.xml/AvoidPrintStackTrace" />
-	<rule ref="rulesets/java/logging-java.xml/GuardLogStatementJavaUtil" />
+	<!--<rule ref="rulesets/java/logging-java.xml/GuardLogStatementJavaUtil" />-->
 	<rule ref="rulesets/java/logging-java.xml/InvalidSlf4jMessageFormat" />
 	
 	<!-- rulesets/java/controversial.xml -->
@@ -240,13 +240,13 @@
 	
 	<!-- rulesets/java/j2ee.xml -->
 	<rule ref="rulesets/java/j2ee.xml/UseProperClassLoader" />
-	<rule ref="rulesets/java/j2ee.xml/MDBAndSessionBeanNamingConvention" />
-	<rule ref="rulesets/java/j2ee.xml/RemoteSessionInterfaceNamingConvention" />
-	<rule ref="rulesets/java/j2ee.xml/LocalInterfaceSessionNamingConvention" />
-	<rule ref="rulesets/java/j2ee.xml/LocalHomeNamingConvention" />
-	<rule ref="rulesets/java/j2ee.xml/RemoteInterfaceNamingConvention" />
+	<!--<rule ref="rulesets/java/j2ee.xml/MDBAndSessionBeanNamingConvention" />-->
+	<!--<rule ref="rulesets/java/j2ee.xml/RemoteSessionInterfaceNamingConvention" />-->
+	<!--<rule ref="rulesets/java/j2ee.xml/LocalInterfaceSessionNamingConvention" />-->
+	<!--<rule ref="rulesets/java/j2ee.xml/LocalHomeNamingConvention" />-->
+	<!--<rule ref="rulesets/java/j2ee.xml/RemoteInterfaceNamingConvention" />-->
 	<rule ref="rulesets/java/j2ee.xml/DoNotCallSystemExit" />
-	<rule ref="rulesets/java/j2ee.xml/StaticEJBFieldShouldBeFinal" />
+	<!--<rule ref="rulesets/java/j2ee.xml/StaticEJBFieldShouldBeFinal" />-->
 	<rule ref="rulesets/java/j2ee.xml/DoNotUseThreads" />
 	
 	<!-- rulesets/java/javabeans.xml -->
