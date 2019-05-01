@@ -27,8 +27,6 @@ public class TimedSeriesInfoExtractorService implements SeriesInfoExtractorServi
 	private final Logger log;
 	private final SeriesInfoExtractorService extractorService;
 	
-	// false positive
-	@SuppressWarnings("PMD.UnnecessaryLocalBeforeReturn")
 	@Override
 	public SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data) {
 		// Why we don't use Spring's StopWatch?
