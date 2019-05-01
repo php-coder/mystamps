@@ -79,7 +79,6 @@ public class EventsConfig {
 	@Bean
 	public ApplicationListener<ImportRequestCreated> importRequestCreatedEventListener() {
 		return new ImportRequestCreatedEventListener(
-			LoggerFactory.getLogger(ImportRequestCreatedEventListener.class),
 			servicesConfig.getSeriesDownloaderService(),
 			seriesImportService,
 			eventPublisher
@@ -96,7 +95,6 @@ public class EventsConfig {
 		) {
 		
 		return new DownloadingSucceededEventListener(
-			LoggerFactory.getLogger(DownloadingSucceededEventListener.class),
 			seriesImportService,
 			siteParserService,
 			extractorService,
@@ -106,10 +104,7 @@ public class EventsConfig {
 	
 	@Bean
 	public ApplicationListener<ParsingFailed> parsingFailedEventListener() {
-		return new ParsingFailedEventListener(
-			LoggerFactory.getLogger(ParsingFailedEventListener.class),
-			seriesImportService
-		);
+		return new ParsingFailedEventListener(seriesImportService);
 	}
 	
 }

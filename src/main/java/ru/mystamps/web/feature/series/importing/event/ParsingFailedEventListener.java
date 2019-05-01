@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing.event;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
@@ -32,7 +33,8 @@ import ru.mystamps.web.feature.series.importing.SeriesImportService;
 public class ParsingFailedEventListener
 	implements ApplicationListener<ParsingFailed> {
 	
-	private final Logger log;
+	private static final Logger LOG = LoggerFactory.getLogger(ParsingFailedEventListener.class);
+	
 	private final SeriesImportService seriesImportService;
 	
 	@Override
@@ -40,7 +42,7 @@ public class ParsingFailedEventListener
 		Integer requestId = event.getRequestId();
 		
 		// FIXME: more info?
-		log.info("Request #{}: parsing failed", requestId);
+		LOG.info("Request #{}: parsing failed", requestId);
 		
 		seriesImportService.changeStatus(
 			requestId,

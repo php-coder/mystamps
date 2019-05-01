@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing.event;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.Db;
@@ -38,7 +39,9 @@ import ru.mystamps.web.feature.series.importing.SeriesImportService;
 public class ImportRequestCreatedEventListener
 	implements ApplicationListener<ImportRequestCreated> {
 	
-	private final Logger log;
+	// CheckStyle: ignore LineLength for next 1 line
+	private static final Logger LOG = LoggerFactory.getLogger(ImportRequestCreatedEventListener.class);
+	
 	private final DownloaderService downloaderService;
 	private final SeriesImportService seriesImportService;
 	private final ApplicationEventPublisher eventPublisher;
@@ -48,12 +51,12 @@ public class ImportRequestCreatedEventListener
 		String url = event.getUrl();
 		Integer requestId = event.getRequestId();
 		
-		log.info("Request #{}: start downloading '{}'", requestId, url);
+		LOG.info("Request #{}: start downloading '{}'", requestId, url);
 		
 		DownloadResult result = downloaderService.download(url);
 		if (result.hasFailed()) {
 			// CheckStyle: ignore LineLength for next 1 line
-			log.info("Request #{}: downloading of '{}' failed: {}", requestId, url, result.getCode());
+			LOG.info("Request #{}: downloading of '{}' failed: {}", requestId, url, result.getCode());
 
 			seriesImportService.changeStatus(
 				requestId,

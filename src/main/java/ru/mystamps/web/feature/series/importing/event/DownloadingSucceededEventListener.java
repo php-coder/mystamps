@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing.event;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
@@ -45,7 +46,9 @@ import javax.annotation.PostConstruct;
 public class DownloadingSucceededEventListener
 	implements ApplicationListener<DownloadingSucceeded> {
 	
-	private final Logger log;
+	// CheckStyle: ignore LineLength for next 1 line
+	private static final Logger LOG = LoggerFactory.getLogger(DownloadingSucceededEventListener.class);
+	
 	private final SeriesImportService seriesImportService;
 	private final SiteParserService siteParserService;
 	private final SeriesInfoExtractorService extractorService;
@@ -53,26 +56,26 @@ public class DownloadingSucceededEventListener
 	
 	@PostConstruct
 	public void init() {
-		log.info("Registered site parsers: {}", siteParserService.findParserNames());
+		LOG.info("Registered site parsers: {}", siteParserService.findParserNames());
 	}
 	
 	@Override
 	public void onApplicationEvent(DownloadingSucceeded event) {
 		Integer requestId = event.getRequestId();
 		
-		log.info("Request #{}: downloading succeeded", requestId);
+		LOG.info("Request #{}: downloading succeeded", requestId);
 		
 		SiteParser parser = siteParserService.findForUrl(event.getUrl());
 		if (parser == null) {
 			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
-			log.error("Request #{}: could not find appropriate parser", requestId);
+			LOG.error("Request #{}: could not find appropriate parser", requestId);
 			return;
 		}
 		
 		String content = seriesImportService.getDownloadedContent(requestId);
 		if (content == null) {
 			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
-			log.error("Request #{}: could not load a content from database", requestId);
+			LOG.error("Request #{}: could not load a content from database", requestId);
 			return;
 		}
 		
