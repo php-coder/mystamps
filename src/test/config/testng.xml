@@ -61,10 +61,4 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user open not existing collection page">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingCollectionPage" />
-		</classes>
-	</test>
-	
 </suite>
