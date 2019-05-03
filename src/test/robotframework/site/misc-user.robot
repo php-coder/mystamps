@@ -15,6 +15,10 @@ User should not see a link to a list of import requests
 	[Tags]                        import-series
 	Page Should Not Contain Link  link=show list of import requests
 
+User should see a link for adding series
+	[Tags]                        series
+	Page Should Contain Link      link=add a stamp series
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
