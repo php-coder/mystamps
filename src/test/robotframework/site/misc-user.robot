@@ -27,6 +27,10 @@ User should see a link for listing countries
 	[Tags]                        country
 	Page Should Contain Link      link=show list of countries
 
+User should see a link for adding categories
+	[Tags]                        category
+	Page Should Contain Link      link=add a category
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
