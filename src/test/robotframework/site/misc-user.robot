@@ -31,6 +31,10 @@ User should see a link for adding categories
 	[Tags]                        category
 	Page Should Contain Link      link=add a category
 
+User should see a link for listing categories
+	[Tags]                        category
+	Page Should Contain Link      link=show list of categories
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
