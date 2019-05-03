@@ -55,12 +55,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user open Togglz console">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenTogglzConsole" />
-		</classes>
-	</test>
-	
 	<test name="When user open Togglz console">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserOpenTogglzConsole" />
