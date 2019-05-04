@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify miscellaneous aspects of account activation
+Documentation    Verify miscellaneous aspects of account activation from anonymous user
 Library          SeleniumLibrary
 Suite Setup      Before Test Suite
 Suite Teardown   After Test Suite

@@ -7,12 +7,6 @@
 		</classes>
 	</test>
 	
-	<test name="When user at activate account page">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAtActivateAccountPage" />
-		</classes>
-	</test>
-	
 	<test name="When user add series">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserAddSeries" />
