@@ -47,6 +47,13 @@ Catalog numbers should reject invalid values
 	1,09
 	10000
 
+Catalog price should reject invalid values
+	[Tags]      unstable
+	[Template]  Invalid Catalog Price Should Be Rejected
+	0
+	-1
+	NaN
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
@@ -86,3 +93,29 @@ Invalid Catalog Numbers Should Be Rejected
 	Element Text Should Be         id=gibbonsNumbers.errors   Value must be a list of numbers separated by comma
 	Element Text Should Be         id=solovyovNumbers.errors  Value must be a list of numbers separated by comma
 	Element Text Should Be         id=zagorskiNumbers.errors  Value must be a list of numbers separated by comma
+
+Invalid Catalog Price Should Be Rejected
+	[Arguments]                    ${catalogPrice}
+	# open page each time to be sure that we're starting from the clean state.
+	# Otherwise it's possible that there errors from the previous test and when
+	# we'll click on link for adding catalog numbers then fields become
+	# invisible (because link is toggling the visibility and when there are
+	# errors, fields are visible from the begining).
+	Go To                          ${SITE_URL}/series/add
+	Click Element                  id=add-catalog-numbers-link
+	# we should wait until all 4 fields with class js-catalogs-info will be
+	# visible but for simplicity we just check that the last field is visible
+	Wait Until Element Is Visible  id=gibbonsPrice
+	Input Text                     id=michelPrice    ${catalogPrice}
+	Input Text                     id=scottPrice     ${catalogPrice}
+	Input Text                     id=yvertPrice     ${catalogPrice}
+	Input Text                     id=gibbonsPrice   ${catalogPrice}
+	Input Text                     id=solovyovPrice  ${catalogPrice}
+	Input Text                     id=zagorskiPrice  ${catalogPrice}
+	Submit Form                    id=add-series-form
+	Element Text Should Be         id=michelPrice.errors    Invalid value
+	Element Text Should Be         id=scottPrice.errors     Invalid value
+	Element Text Should Be         id=yvertPrice.errors     Invalid value
+	Element Text Should Be         id=gibbonsPrice.errors   Invalid value
+	Element Text Should Be         id=solovyovPrice.errors  Invalid value
+	Element Text Should Be         id=zagorskiPrice.errors  Invalid value
