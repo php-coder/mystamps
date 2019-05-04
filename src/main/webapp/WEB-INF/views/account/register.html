@@ -79,7 +79,12 @@
 							</small>
 						</div>
 						
-						<form method="post" action="../account/activate.html" class="form-horizontal" th:action="@{${REGISTRATION_PAGE}}" th:object="${registerAccountForm}">
+						<form id="register-account-form"
+							method="post"
+							class="form-horizontal"
+							action="../account/activate.html"
+							th:action="@{${REGISTRATION_PAGE}}"
+							th:object="${registerAccountForm}">
 							
 							<div class="form-group" th:classappend="${#fields.hasErrors('email') ? 'has-error' : ''}">
 								<label class="control-label col-sm-4" for="email">
