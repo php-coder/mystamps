@@ -43,11 +43,6 @@ public class AuthAccountPage extends AbstractPageWithForm {
 		);
 	}
 	
-	public boolean authenticationFormExists() {
-		// FIXME: probably better to check for form tag presence?
-		return elementWithIdExists("auth-account-form");
-	}
-	
 	public void authorizeUser(String login, String password) {
 		Validate.validState(
 			login != null || password != null,
