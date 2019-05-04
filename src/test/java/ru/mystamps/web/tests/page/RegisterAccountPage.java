@@ -38,11 +38,6 @@ public class RegisterAccountPage extends AbstractPageWithForm {
 		);
 	}
 	
-	public boolean registrationFormExists() {
-		// FIXME: probably better to check for form tag presence?
-		return elementWithIdExists("register-account-form");
-	}
-	
 	public void registerUser(String email) {
 		fillEmail(email);
 		submit();
