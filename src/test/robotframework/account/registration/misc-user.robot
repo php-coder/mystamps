@@ -5,7 +5,7 @@ Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  After Test Suite
 Test Setup      Before Test
-Force Tags      account  registration  logic
+Force Tags      account  registration  misc
 
 *** Test Cases ***
 User cannot register account again
