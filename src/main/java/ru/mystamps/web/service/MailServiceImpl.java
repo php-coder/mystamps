@@ -140,14 +140,10 @@ public class MailServiceImpl implements MailService {
 		String fromDate = shortDatePrinter.format(report.getStartDate());
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("date", fromDate);
-		put(ctx, "total_changes", report.countTotalChanges());
+		ctx.put("total_changes", String.valueOf(report.countTotalChanges()));
 		
 		StringSubstitutor substitutor = new StringSubstitutor(ctx);
 		return substitutor.replace(template);
-	}
-	
-	private static void put(Map<String, String> ctx, String key, long value) {
-		ctx.put(key, String.valueOf(value));
 	}
 	
 }
