@@ -19,12 +19,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user open not existing page">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserOpenNotExistingPage" />
-		</classes>
-	</test>
-	
 	<test name="When anonymous user register account">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserRegisterAccount" />
