@@ -1,7 +1,6 @@
 *** Settings ***
 Documentation   Verify account authentication scenarios
 Library         SeleniumLibrary
-Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  After Test Suite
 Force Tags      account  authentication  logic
@@ -15,11 +14,17 @@ Successful authentication
 	Page Should Contain Link    Test Suite
 	Page Should Contain Button  value=Sign out
 
+Log out
+	Go To                     ${SITE_URL}/account/auth
+	Submit Form               id=logout-form
+	Location Should Be        ${SITE_URL}/
+	Page Should Contain Link  link=Sign in
+	Page Should Contain Link  link=Register
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
 After Test Suite
-	Log Out
 	Close Browser

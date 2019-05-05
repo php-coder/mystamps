@@ -76,10 +76,6 @@ public abstract class AbstractPage {
 		return !driver.getCurrentUrl().equals(getFullUrl());
 	}
 	
-	public boolean linkWithLabelExists(String label) {
-		return getLinkByText(label) != null;
-	}
-	
 	public boolean existsLinkTo(String relativeUrl) {
 		Validate.isTrue(!"".equals(relativeUrl));
 		return elementWithXPathExists(String.format(A_HREF_LOCATOR, relativeUrl));
@@ -140,10 +136,6 @@ public abstract class AbstractPage {
 	
 	protected boolean elementWithTagNameExists(String tagName) {
 		return getElement(By.tagName(tagName)) != null;
-	}
-	
-	protected WebElement getLinkByText(String linkText) {
-		return getElement(By.linkText(linkText));
 	}
 	
 	private WebElement getElement(By byMethod) {
