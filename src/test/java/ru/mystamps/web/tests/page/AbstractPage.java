@@ -34,9 +34,8 @@ import static lombok.AccessLevel.PROTECTED;
 @RequiredArgsConstructor(access = PROTECTED)
 public abstract class AbstractPage {
 	
-	// CheckStyle: ignore LineLength for next 2 lines
+	// CheckStyle: ignore LineLength for next 1 line
 	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"logout-form\"]/input[@type=\"submit\"]";
-	private static final String USER_BAR_ENTRIES_LOCATOR = "//*[@id=\"user_bar\"]//li/a | //*[@id=\"user_bar\"]//li//input[not(@type=\"hidden\")]";
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
 	
 	protected final WebDriver driver;
@@ -76,11 +75,6 @@ public abstract class AbstractPage {
 	 **/
 	protected boolean pageUrlChanged() {
 		return !driver.getCurrentUrl().equals(getFullUrl());
-	}
-	
-	public List<String> getUserBarEntries() {
-		List<WebElement> entries = getElementsByXPath(USER_BAR_ENTRIES_LOCATOR);
-		return WebElementUtils.convertToListWithText(entries);
 	}
 	
 	public boolean linkWithLabelExists(String label) {

@@ -13,12 +13,6 @@
 		</classes>
 	</test>
 	
-	<test name="When anonymous user authenticates">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenAnonymousUserAuthenticates" />
-		</classes>
-	</test>
-	
 	<test name="When user logs out">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenUserLogsOut" />
