@@ -37,12 +37,6 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPage<AuthAcc
 	@Value("${valid_user_name}")
 	private String validUserName;
 	
-	@Value("${invalid_user_login}")
-	private String invalidUserLogin;
-	
-	@Value("${invalid_user_password}")
-	private String invalidUserPassword;
-	
 	public WhenAnonymousUserAuthenticates() {
 		super(AuthAccountPage.class);
 	}
@@ -50,14 +44,6 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPage<AuthAcc
 	@BeforeMethod
 	public void openPage() {
 		page.open();
-	}
-	
-	@Test(groups = "invalid")
-	public void invalidCredentialsShouldBeRejected() {
-		page.authorizeUser(invalidUserLogin, invalidUserPassword);
-		
-		assertThat(page.getFormError())
-			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
 	}
 	
 	@Test(groups = "logic")

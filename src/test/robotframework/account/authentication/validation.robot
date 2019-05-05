@@ -12,6 +12,12 @@ Authenticate with empty credentials
 	Submit Form             id=auth-account-form
 	Element Text Should Be  id=form.errors  Invalid login or password
 
+Authenticate with invalid credentials
+	Input Text              id=login        test
+	Input Text              id=password     test
+	Submit Form             id=auth-account-form
+	Element Text Should Be  id=form.errors  Invalid login or password
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
