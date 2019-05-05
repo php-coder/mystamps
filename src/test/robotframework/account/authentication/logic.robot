@@ -11,7 +11,7 @@ Successful authentication
 	Input Text                  id=password  test
 	Submit Form                 id=auth-account-form
 	Location Should Be          ${SITE_URL}/
-	Page Should Contain Link    Test Suite
+	Page Should Contain Link    link=Test Suite
 	Page Should Contain Button  value=Sign out
 
 Log out
