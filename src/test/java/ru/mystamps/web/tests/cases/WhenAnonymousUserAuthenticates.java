@@ -53,14 +53,6 @@ public class WhenAnonymousUserAuthenticates extends WhenAnyUserAtAnyPage<AuthAcc
 	}
 	
 	@Test(groups = "invalid")
-	public void emptyValuesShouldBeConsideredAsInvalidCredentials() {
-		page.authorizeUser("", "");
-		
-		assertThat(page.getFormError())
-			.isEqualTo(tr("AbstractUserDetailsAuthenticationProvider.badCredentials"));
-	}
-	
-	@Test(groups = "invalid")
 	public void invalidCredentialsShouldBeRejected() {
 		page.authorizeUser(invalidUserLogin, invalidUserPassword);
 		
