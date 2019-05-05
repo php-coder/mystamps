@@ -25,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.tests.WebElementUtils;
 
 import java.util.List;
 
