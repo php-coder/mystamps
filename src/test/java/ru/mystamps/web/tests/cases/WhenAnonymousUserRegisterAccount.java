@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.tests.cases;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
@@ -40,7 +39,6 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
 
 public class WhenAnonymousUserRegisterAccount
 	extends WhenAnyUserAtAnyPage<RegisterAccountPage> {
@@ -90,15 +88,6 @@ public class WhenAnonymousUserRegisterAccount
 		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
 			.overridingErrorMessage("should exists link to authentication page")
 			.isTrue();
-	}
-	
-	@Test(groups = "invalid")
-	public void emailShouldNotBeTooLong() {
-		page.registerUser(StringUtils.repeat("0", EMAIL_MAX_LENGTH) + "@mail.ru");
-		
-		assertThat(page)
-			.field("email")
-			.hasError(tr("value.too-long", EMAIL_MAX_LENGTH));
 	}
 	
 	@Test(groups = "invalid", dataProvider = "invalidEmails")
