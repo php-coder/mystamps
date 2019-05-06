@@ -97,28 +97,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		page.logout();
 	}
 	
-	@Test(groups = "misc")
-	public void catalogNumbersShouldBeStripedFromSpaces() {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(" 1 , 2 ");
-		page.fillScottNumbers(" 3 , 4 ");
-		page.fillYvertNumbers(" 5 , 6 ");
-		page.fillGibbonsNumbers(" 7 , 8 ");
-		page.fillSolovyovNumbers(" 9 , 10 ");
-		page.fillZagorskiNumbers(" 11 , 12 ");
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasValue("1,2");
-		assertThat(page).field("scottNumbers").hasValue("3,4");
-		assertThat(page).field("yvertNumbers").hasValue("5,6");
-		assertThat(page).field("gibbonsNumbers").hasValue("7,8");
-		assertThat(page).field("solovyovNumbers").hasValue("9,10");
-		assertThat(page).field("zagorskiNumbers").hasValue("11,12");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "misc" })
+	@Test(groups = "logic")
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
 		String expectedCategoryName = validCategoryName;
 		String expectedQuantity     = "2";
@@ -145,7 +124,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "misc" })
+	@Test(groups = "logic")
 	public void shouldCreateSeriesWithAllFieldsFilled() {
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
 		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PREVIEW_PAGE.replace("{id}", "\\d+");
@@ -215,7 +194,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "misc" })
+	@Test(groups = "logic")
 	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -241,7 +220,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#54, 55");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "misc" })
+	@Test(groups = "logic")
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");

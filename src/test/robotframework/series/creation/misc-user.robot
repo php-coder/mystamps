@@ -27,6 +27,23 @@ Catalog numbers should accept valid values
 	71, 81, 91
 	1000
 
+Catalog numbers should be stripped from any spaces
+	[Tags]                     unstable
+	Click Element              id=add-catalog-numbers-link
+	Input Text                 id=michelNumbers    ${SPACE * 2}1 , 2${SPACE * 2}
+	Input Text                 id=scottNumbers     ${SPACE * 2}3 , 4${SPACE * 2}
+	Input Text                 id=yvertNumbers     ${SPACE * 2}5 , 6${SPACE * 2}
+	Input Text                 id=gibbonsNumbers   ${SPACE * 2}7 , 8${SPACE * 2}
+	Input Text                 id=solovyovNumbers  ${SPACE * 2}9 , 10${SPACE * 2}
+	Input Text                 id=zagorskiNumbers  ${SPACE * 2}11 , 12${SPACE * 2}
+	Submit Form                id=add-series-form
+	Textfield Value Should Be  id=michelNumbers    1,2
+	Textfield Value Should Be  id=scottNumbers     3,4
+	Textfield Value Should Be  id=yvertNumbers     5,6
+	Textfield Value Should Be  id=gibbonsNumbers   7,8
+	Textfield Value Should Be  id=solovyovNumbers  9,10
+	Textfield Value Should Be  id=zagorskiNumbers  11,12
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
