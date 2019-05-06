@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.AbstractPage;
@@ -98,27 +97,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		page.logout();
 	}
 	
-	@Test(groups = "valid", dataProvider = "validCatalogNumbers")
-	public void catalogNumbersShouldAcceptValidValues(String numbers, Object whatever) {
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers(numbers);
-		page.fillScottNumbers(numbers);
-		page.fillYvertNumbers(numbers);
-		page.fillGibbonsNumbers(numbers);
-		page.fillSolovyovNumbers(numbers);
-		page.fillZagorskiNumbers(numbers);
-		
-		page.submit();
-		
-		assertThat(page).field("michelNumbers").hasNoError();
-		assertThat(page).field("scottNumbers").hasNoError();
-		assertThat(page).field("yvertNumbers").hasNoError();
-		assertThat(page).field("gibbonsNumbers").hasNoError();
-		assertThat(page).field("solovyovNumbers").hasNoError();
-		assertThat(page).field("zagorskiNumbers").hasNoError();
-	}
-	
 	@Test(groups = "misc")
 	public void catalogNumbersShouldBeStripedFromSpaces() {
 		page.showCatalogNumbers();
@@ -140,7 +118,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(page).field("zagorskiNumbers").hasValue("11,12");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "valid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "misc" })
 	public void shouldCreateSeriesWithOnlyRequiredFieldsFilled() {
 		String expectedCategoryName = validCategoryName;
 		String expectedQuantity     = "2";
@@ -167,7 +145,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getPerforated()).isEqualTo(tr("t_yes"));
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "valid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "misc" })
 	public void shouldCreateSeriesWithAllFieldsFilled() {
 		String expectedPageUrl      = Url.INFO_SERIES_PAGE.replace("{id}", "\\d+");
 		String expectedImageUrl     = Url.SITE + Url.GET_IMAGE_PREVIEW_PAGE.replace("{id}", "\\d+");
@@ -237,7 +215,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "valid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "misc" })
 	public void shouldIgnoreDuplicatedCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -263,7 +241,7 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#54, 55");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "valid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "misc" })
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
@@ -286,16 +264,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
 		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#" + existingSolovyovNumber);
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#" + existingZagorskiNumber);
-	}
-	
-	@DataProvider(name = "validCatalogNumbers")
-	public Object[][] getValidCatalogNumbers() {
-		return new Object[][] {
-			{"7", null},
-			{"7,8", null},
-			{"71, 81, 91", null},
-			{"1000", null}
-		};
 	}
 	
 }

@@ -19,6 +19,14 @@ Issue year should have options for range from 1840 to the current year
 	List Should Contain Value    ${availableYears}  ${currentYear}
 	Should Be Equal As Integers  ${numberOfYears}   ${expectedNumberOfYears}
 
+Catalog numbers should accept valid values
+	[Tags]      unstable
+	[Template]  Valid Catalog Numbers Should Be Accepted
+	7
+	7,8
+	71, 81, 91
+	1000
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
@@ -29,3 +37,20 @@ Before Test Suite
 After Test Suite
 	Log Out
 	Close Browser
+
+Valid Catalog Numbers Should Be Accepted
+	[Arguments]                      ${catalogNumbers}
+	Click Element                    id=add-catalog-numbers-link
+	Input Text                       id=michelNumbers    ${catalogNumbers}
+	Input Text                       id=scottNumbers     ${catalogNumbers}
+	Input Text                       id=yvertNumbers     ${catalogNumbers}
+	Input Text                       id=gibbonsNumbers   ${catalogNumbers}
+	Input Text                       id=solovyovNumbers  ${catalogNumbers}
+	Input Text                       id=zagorskiNumbers  ${catalogNumbers}
+	Submit Form                      id=add-series-form
+	Page Should Not Contain Element  id=michelNumbers.errors
+	Page Should Not Contain Element  id=scottNumbers.errors
+	Page Should Not Contain Element  id=yvertNumbers.errors
+	Page Should Not Contain Element  id=gibbonsNumbers.errors
+	Page Should Not Contain Element  id=solovyovNumbers.errors
+	Page Should Not Contain Element  id=zagorskiNumbers.errors

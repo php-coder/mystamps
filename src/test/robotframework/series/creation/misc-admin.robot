@@ -7,14 +7,6 @@ Suite Teardown   After Test Suite
 Force Tags       series  misc
 
 *** Test Cases ***
-Catalog numbers should accept valid values
-	[Tags]      unstable
-	[Template]  Valid Catalog Numbers Should Be Accepted
-	7
-	7,8
-	71, 81, 91
-	1000
-
 Catalog numbers should be stripped from leading and trailing spaces
 	[Tags]                     unstable
 	Click Element              id=add-catalog-numbers-link
@@ -89,20 +81,3 @@ Before Test Suite
 After Test Suite
 	Log Out
 	Close Browser
-
-Valid Catalog Numbers Should Be Accepted
-	[Arguments]                      ${catalogNumbers}
-	Click Element                    id=add-catalog-numbers-link
-	Input Text                       id=michelNumbers  ${catalogNumbers}
-	Input Text                       id=scottNumbers  ${catalogNumbers}
-	Input Text                       id=yvertNumbers  ${catalogNumbers}
-	Input Text                       id=gibbonsNumbers  ${catalogNumbers}
-	Input Text                       id=solovyovNumbers  ${catalogNumbers}
-	Input Text                       id=zagorskiNumbers  ${catalogNumbers}
-	Submit Form                      id=add-series-form
-	Page Should Not Contain Element  id=michelNumbers.errors
-	Page Should Not Contain Element  id=scottNumbers.errors
-	Page Should Not Contain Element  id=yvertNumbers.errors
-	Page Should Not Contain Element  id=gibbonsNumbers.errors
-	Page Should Not Contain Element  id=solovyovNumbers.errors
-	Page Should Not Contain Element  id=zagorskiNumbers.errors
