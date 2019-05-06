@@ -97,6 +97,8 @@ Valid Catalog Numbers Should Be Accepted
 	Input Text                       id=scottNumbers  ${catalogNumbers}
 	Input Text                       id=yvertNumbers  ${catalogNumbers}
 	Input Text                       id=gibbonsNumbers  ${catalogNumbers}
+	Input Text                       id=solovyovNumbers  ${catalogNumbers}
+	Input Text                       id=zagorskiNumbers  ${catalogNumbers}
 	Submit Form                      id=add-series-form
 	Page Should Not Contain Element  id=michelNumbers.errors
 	Page Should Not Contain Element  id=scottNumbers.errors
