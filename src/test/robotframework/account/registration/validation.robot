@@ -12,6 +12,11 @@ Register account with too long email
 	Submit Form             id=register-account-form
 	Element Text Should Be  id=email.errors  Value is greater than allowable maximum of 255 characters
 
+Register account with invalid email
+	[Template]  Invalid Email Should Be Rejected
+	login
+	login@domain
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/register  ${BROWSER}
@@ -19,3 +24,9 @@ Before Test Suite
 
 After Test Suite
 	Close Browser
+
+Invalid Email Should Be Rejected
+	[Arguments]             ${email}
+	Input Text              id=email  ${email}
+	Submit Form             id=register-account-form
+	Element Text Should Be  id=email.errors  Invalid e-mail address

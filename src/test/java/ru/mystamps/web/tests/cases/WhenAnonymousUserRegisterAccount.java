@@ -23,7 +23,6 @@ import org.subethamail.wiser.WiserMessage;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.tests.page.RegisterAccountPage;
@@ -90,13 +89,6 @@ public class WhenAnonymousUserRegisterAccount
 			.isTrue();
 	}
 	
-	@Test(groups = "invalid", dataProvider = "invalidEmails")
-	public void emailShouldBeValid(String invalidEmail, String expectedMessage) {
-		page.registerUser(invalidEmail);
-		
-		assertThat(page).field("email").hasError(expectedMessage);
-	}
-	
 	@Test(groups = "misc")
 	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
 		page.registerUser(" test ");
@@ -104,7 +96,7 @@ public class WhenAnonymousUserRegisterAccount
 		assertThat(page).field("email").hasValue("test");
 	}
 	
-	@Test(groups = "logic", dependsOnGroups = { "invalid", "misc" })
+	@Test(groups = "logic", dependsOnGroups = { "misc" })
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		
@@ -156,16 +148,6 @@ public class WhenAnonymousUserRegisterAccount
 				"Messages with subject '" + subjectOfActivationMail + "' not found"
 			)
 			.isTrue();
-	}
-	
-	@DataProvider(name = "invalidEmails")
-	public Object[][] getInvalidEmails() {
-		String expectedErrorMessage = tr("ru.mystamps.web.support.beanvalidation.Email.message");
-		
-		return new Object[][] {
-			{"login", expectedErrorMessage},
-			{"login@domain", expectedErrorMessage}
-		};
 	}
 	
 }
