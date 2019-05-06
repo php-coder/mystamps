@@ -79,14 +79,7 @@ public class WhenAnonymousUserRegisterAccount
 		page.open();
 	}
 	
-	@Test(groups = "misc")
-	public void emailShouldBeStripedFromLeadingAndTrailingSpaces() {
-		page.registerUser(" test ");
-		
-		assertThat(page).field("email").hasValue("test");
-	}
-	
-	@Test(groups = "logic", dependsOnGroups = { "misc" })
+	@Test(groups = "logic")
 	public void successfulMessageShouldBeShownAfterRegistration() {
 		page.registerUser("coder@rock.home");
 		

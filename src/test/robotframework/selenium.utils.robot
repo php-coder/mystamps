@@ -15,3 +15,11 @@ Urlfield Value Should Be
 	[Arguments]      ${locator}  ${expected}
 	${value}=        Get Value  ${locator}
 	Should Be Equal  ${expected}  ${value}
+
+# Workaround for "Textfield Value Should Be" that causes NPE with <input type="email">:
+# https://github.com/Hi-Fi/robotframework-seleniumlibrary-java/issues/52
+Emailfield Value Should Be
+	[Documentation]  Verifies text field locator has exactly text expected
+	[Arguments]      ${locator}  ${expected}
+	${value}=        Get Value  ${locator}
+	Should Be Equal  ${expected}  ${value}

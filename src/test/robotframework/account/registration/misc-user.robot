@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Verify account registration scenarios
+Documentation   Verify miscellaneous aspects of account registration from user
 Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
