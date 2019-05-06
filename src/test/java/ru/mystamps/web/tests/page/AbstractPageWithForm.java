@@ -90,12 +90,6 @@ public abstract class AbstractPageWithForm extends AbstractPage {
 		return getTextOfElementByXPath(FORM_ERROR_LOCATOR);
 	}
 	
-	public List<String> getFormHints() {
-		return WebElementUtils.convertToListWithText(
-			getElementsByClassName("hint_item")
-		);
-	}
-	
 	public List<String> getSelectOptions(String id) {
 		return WebElementUtils.convertToListWithText(
 			new Select(getElementById(id)).getOptions()

@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static ru.mystamps.web.tests.TranslationUtils.stripHtmlTags;
 import static ru.mystamps.web.tests.TranslationUtils.tr;
 import static ru.mystamps.web.tests.fest.PageWithFormAssert.assertThat;
 
@@ -78,15 +77,6 @@ public class WhenAnonymousUserRegisterAccount
 	@BeforeMethod
 	public void openPage() {
 		page.open();
-	}
-	
-	@Test(groups = "misc")
-	public void shouldExistsMessageWithLinkToAuthenticationPage() {
-		assertThat(page.getFormHints()).contains(stripHtmlTags(tr("t_if_you_already_registered")));
-		
-		assertThat(page.existsLinkTo(Url.AUTHENTICATION_PAGE))
-			.overridingErrorMessage("should exists link to authentication page")
-			.isTrue();
 	}
 	
 	@Test(groups = "misc")

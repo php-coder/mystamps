@@ -75,10 +75,6 @@ public final class TranslationUtils {
 		return msg;
 	}
 	
-	public static String stripHtmlTags(String msg) {
-		return msg.replaceAll("\\<.*?>", "");
-	}
-	
 	public static String tr(String key, Object... args) {
 		String messageFormat = tr(key).replaceAll("\\{[^\\}]+\\}", "{0}");
 		return MessageFormat.format(messageFormat, args);
