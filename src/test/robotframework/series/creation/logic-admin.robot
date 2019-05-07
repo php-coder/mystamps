@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify series creation scenarios
+Documentation    Verify series creation scenarios from admin
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
