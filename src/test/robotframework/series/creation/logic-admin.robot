@@ -37,9 +37,9 @@ Create series by filling all fields
 	Unselect Checkbox          id=perforated
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
 	Click Element              id=specify-issue-date-link
-	Select From List By Value  id=day  4
+	Select From List By Value  id=day    4
 	Select From List By Value  id=month  5
-	Select From List By Value  id=year  1999
+	Select From List By Value  id=year   1999
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    101, 102, 103
 	Input Text                 id=michelPrice      10.5
@@ -57,10 +57,10 @@ Create series by filling all fields
 	Input Text                 id=comment  Any text
 	Submit Form                id=add-series-form
 	Element Text Should Be     id=category_name  Sport
-	Element Text Should Be     id=country_name  Italy
-	Element Text Should Be     id=issue_date  04.05.1999
-	Element Text Should Be     id=quantity  3
-	Element Text Should Be     id=perforated  No
+	Element Text Should Be     id=country_name   Italy
+	Element Text Should Be     id=issue_date     04.05.1999
+	Element Text Should Be     id=quantity       3
+	Element Text Should Be     id=perforated     No
 	Element Text Should Be     id=michel_catalog_info    \#101-103 (10.5 EUR)
 	Element Text Should Be     id=scott_catalog_info     \#110-112 (1000 USD)
 	Element Text Should Be     id=yvert_catalog_info     \#120-122 (8.11 EUR)
@@ -68,7 +68,7 @@ Create series by filling all fields
 	Element Text Should Be     id=gibbons_catalog_info   \#130-132 (400.34 GBP)
 	Element Text Should Be     id=solovyov_catalog_info  \#140-142 (200.5 RUB)
 	Element Text Should Be     id=zagorski_catalog_info  \#150-152 (300.55 RUB)
-	Element Text Should Be     id=comment  Any text
+	Element Text Should Be     id=comment                Any text
 	Page Should Contain Image  id=series-image-1
 
 *** Keywords ***
