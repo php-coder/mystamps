@@ -48,6 +48,10 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SEND_ACTIVATION_MAIL,
 	
+	@Label("Send mail via HTTP API and fallback to SMTP as the last resort")
+	@EnabledByDefault
+	SEND_MAIL_VIA_HTTP_API,
+	
 	@Label("/series/add: show link with auto-suggestions")
 	@EnabledByDefault
 	SHOW_SUGGESTION_LINK;

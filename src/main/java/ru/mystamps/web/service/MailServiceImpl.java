@@ -24,7 +24,6 @@ import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
@@ -49,7 +48,7 @@ public class MailServiceImpl implements MailService {
 	
 	public MailServiceImpl(
 		ReportService reportService,
-		JavaMailSender mailer,
+		MailgunEmailSendingStrategy mailer,
 		MessageSource messageSource,
 		String adminEmail,
 		Locale adminLang,
@@ -57,7 +56,7 @@ public class MailServiceImpl implements MailService {
 		boolean testMode) {
 		
 		this.reportService = reportService;
-		this.mailer = new SmtpMailgunEmailSendingStrategy(mailer);
+		this.mailer = mailer;
 		this.messageSource = messageSource;
 		this.adminEmail = adminEmail;
 		this.adminLang = adminLang;

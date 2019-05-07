@@ -19,6 +19,7 @@ package ru.mystamps.web.config;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,12 +48,16 @@ import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
+import ru.mystamps.web.service.ApiMailgunEmailSendingStrategy;
 import ru.mystamps.web.service.CronService;
 import ru.mystamps.web.service.CronServiceImpl;
+import ru.mystamps.web.service.FallbackMailgunEmailSendingStrategy;
 import ru.mystamps.web.service.MailService;
 import ru.mystamps.web.service.MailServiceImpl;
+import ru.mystamps.web.service.MailgunEmailSendingStrategy;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.service.SiteServiceImpl;
+import ru.mystamps.web.service.SmtpMailgunEmailSendingStrategy;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
 
@@ -86,6 +91,7 @@ public class ServicesConfig {
 	private final ReportService reportService;
 	private final SeriesService seriesService;
 	private final UserService userService;
+	private final RestTemplateBuilder restTemplateBuilder;
 	
 	@Lazy
 	private final UsersActivationService usersActivationService;
@@ -137,9 +143,18 @@ public class ServicesConfig {
 		boolean isProductionEnvironment = env.acceptsProfiles("prod");
 		boolean enableTestMode = !isProductionEnvironment;
 		
+		String user = "api";
+		String password = env.getRequiredProperty("mailgun.password");
+		String endpoint = env.getRequiredProperty("mailgun.endpoint");
+		
+		MailgunEmailSendingStrategy mailStrategy = new FallbackMailgunEmailSendingStrategy(
+			new ApiMailgunEmailSendingStrategy(restTemplateBuilder, endpoint, user, password),
+			new SmtpMailgunEmailSendingStrategy(mailSender)
+		);
+		
 		return new MailServiceImpl(
 			reportService,
-			mailSender,
+			mailStrategy,
 			messageSource,
 			env.getProperty("app.mail.admin.email", "root@localhost"),
 			new Locale(env.getProperty("app.mail.admin.lang", "en")),
