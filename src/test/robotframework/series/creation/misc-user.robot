@@ -64,6 +64,26 @@ Catalog numbers should ignore duplicate values
 	Element Text Should Be     id=solovyov_catalog_info  \#144, 145
 	Element Text Should Be     id=zagorski_catalog_info  \#154, 155
 
+Catalog numbers should accept existing numbers
+	Go To                      ${SITE_URL}/series/add
+	Select From List By Label  id=category  Sport
+	Input Text                 id=quantity  2
+	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	Click Element              id=add-catalog-numbers-link
+	Input Text                 id=michelNumbers    99
+	Input Text                 id=scottNumbers     99
+	Input Text                 id=yvertNumbers     99
+	Input Text                 id=gibbonsNumbers   99
+	Input Text                 id=solovyovNumbers  77
+	Input Text                 id=zagorskiNumbers  83
+	Submit Form                id=add-series-form
+	Element Text Should Be     id=michel_catalog_info    \#99
+	Element Text Should Be     id=scott_catalog_info     \#99
+	Element Text Should Be     id=yvert_catalog_info     \#99
+	Element Text Should Be     id=gibbons_catalog_info   \#99
+	Element Text Should Be     id=solovyov_catalog_info  \#77
+	Element Text Should Be     id=zagorski_catalog_info  \#83
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

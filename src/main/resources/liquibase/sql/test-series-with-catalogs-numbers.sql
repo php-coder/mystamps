@@ -6,19 +6,19 @@
 INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt, email) VALUES
 	(4, 'test1', 'USER', 'Series Owner', NOW(), NOW(), '@old_valid_user_password_hash@', '@old_valid_user_password_salt@', 'test1@example.org');
 
--- Used only in WhenUserAddSeries and src/test/robotframework/series/creation/misc.robot
+-- Used only in src/test/robotframework/series/creation/misc-user.robot
 INSERT INTO images(id, type) VALUES(1, 'PNG');
 INSERT INTO series(id, quantity, perforated, image_url, created_at, created_by, updated_at, updated_by) VALUES
 	(1, 1, TRUE, '/image/1', NOW(), 4, NOW(), 4);
 
-INSERT INTO michel_catalog(id, code) VALUES(1, '@existing_michel_number@');
+INSERT INTO michel_catalog(id, code) VALUES(1, '99');
 INSERT INTO series_michel_catalog(series_id, michel_id) VALUES(1, 1);
 
-INSERT INTO scott_catalog(id, code) VALUES(1, '@existing_scott_number@');
+INSERT INTO scott_catalog(id, code) VALUES(1, '99');
 INSERT INTO series_scott_catalog(series_id, scott_id) VALUES(1, 1);
 
-INSERT INTO yvert_catalog(id, code) VALUES(1, '@existing_yvert_number@');
+INSERT INTO yvert_catalog(id, code) VALUES(1, '99');
 INSERT INTO series_yvert_catalog(series_id, yvert_id) VALUES(1, 1);
 
-INSERT INTO gibbons_catalog(id, code) VALUES(1, '@existing_gibbons_number@');
+INSERT INTO gibbons_catalog(id, code) VALUES(1, '99');
 INSERT INTO series_gibbons_catalog(series_id, gibbons_id) VALUES(1, 1);

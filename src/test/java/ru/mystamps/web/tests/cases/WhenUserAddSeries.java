@@ -57,24 +57,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 	@Value("${valid_user_password}")
 	private String validUserPassword;
 	
-	@Value("${existing_michel_number}")
-	private String existingMichelNumber;
-	
-	@Value("${existing_scott_number}")
-	private String existingScottNumber;
-	
-	@Value("${existing_yvert_number}")
-	private String existingYvertNumber;
-	
-	@Value("${existing_gibbons_number}")
-	private String existingGibbonsNumber;
-	
-	@Value("${existing_solovyov_number}")
-	private String existingSolovyovNumber;
-	
-	@Value("${existing_zagorski_number}")
-	private String existingZagorskiNumber;
-	
 	@Value("${valid_category_name_en}")
 	private String validCategoryName;
 	
@@ -192,31 +174,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#30-32 (400.34 GBP)");
 		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#40-42 (140.2 RUB)");
 		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#50-52 (150.2 RUB)");
-	}
-	
-	@Test(groups = "logic")
-	public void shouldAllowExistingCatalogNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
-		page.fillMichelNumbers(existingMichelNumber);
-		page.fillScottNumbers(existingScottNumber);
-		page.fillYvertNumbers(existingYvertNumber);
-		page.fillGibbonsNumbers(existingGibbonsNumber);
-		page.fillSolovyovNumbers(existingSolovyovNumber);
-		page.fillZagorskiNumbers(existingZagorskiNumber);
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#" + existingMichelNumber);
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#" + existingScottNumber);
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#" + existingYvertNumber);
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#" + existingGibbonsNumber);
-		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#" + existingSolovyovNumber);
-		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#" + existingZagorskiNumber);
 	}
 	
 }
