@@ -7,26 +7,6 @@ Suite Teardown   After Test Suite
 Force Tags       series  misc
 
 *** Test Cases ***
-Catalog numbers should ignore duplicate values
-	[Tags]                     unstable
-	Select From List By Label  id=category  Sport
-	Input Text                 id=quantity  2
-	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
-	Click Element              id=add-catalog-numbers-link
-	Input Text                 id=michelNumbers    104,105,104
-	Input Text                 id=scottNumbers     114,115,114
-	Input Text                 id=yvertNumbers     124,125,124
-	Input Text                 id=gibbonsNumbers   134,135,134
-	Input Text                 id=solovyovNumbers  144,145,144
-	Input Text                 id=zagorskiNumbers  154,155,154
-	Submit Form                id=add-series-form
-	Element Text Should Be     id=michel_catalog_info    \#104, 105
-	Element Text Should Be     id=scott_catalog_info     \#114, 115
-	Element Text Should Be     id=yvert_catalog_info     \#124, 125
-	Element Text Should Be     id=gibbons_catalog_info   \#134, 135
-	Element Text Should Be     id=solovyov_catalog_info  \#144, 145
-	Element Text Should Be     id=zagorski_catalog_info  \#154, 155
-
 Catalog numbers should accept existing numbers
 	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport

@@ -195,32 +195,6 @@ public class WhenUserAddSeries extends WhenAnyUserAtAnyPage<AddSeriesPage> {
 	}
 	
 	@Test(groups = "logic")
-	public void shouldIgnoreDuplicatedCatalogNumbers() {
-		page.fillCategory(validCategoryName);
-		page.fillQuantity("2");
-		page.fillImage(SAMPLE_IMAGE_PATH);
-		page.showCatalogNumbers();
-		
-		page.fillMichelNumbers("4,5,4");
-		page.fillScottNumbers("14,15,14");
-		page.fillYvertNumbers("24,25,24");
-		page.fillGibbonsNumbers("34,35,34");
-		page.fillSolovyovNumbers("44,45,44");
-		page.fillZagorskiNumbers("54,55,54");
-		
-		AbstractPage next = page.submit();
-		assertThat(next).isInstanceOf(InfoSeriesPage.class);
-		
-		InfoSeriesPage nextPage = (InfoSeriesPage)next;
-		assertThat(nextPage.getMichelCatalogInfo()).isEqualTo("#4, 5");
-		assertThat(nextPage.getScottCatalogInfo()).isEqualTo("#14, 15");
-		assertThat(nextPage.getYvertCatalogInfo()).isEqualTo("#24, 25");
-		assertThat(nextPage.getGibbonsCatalogInfo()).isEqualTo("#34, 35");
-		assertThat(nextPage.getSolovyovCatalogInfo()).isEqualTo("#44, 45");
-		assertThat(nextPage.getZagorskiCatalogInfo()).isEqualTo("#54, 55");
-	}
-	
-	@Test(groups = "logic")
 	public void shouldAllowExistingCatalogNumbers() {
 		page.fillCategory(validCategoryName);
 		page.fillQuantity("2");
