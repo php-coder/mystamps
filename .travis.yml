@@ -14,12 +14,12 @@ before_script:
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
-      if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
-        pip install --user ansible==2.1.1.0;
-      fi;
       npm install -g bootlint;
       pip install --user html5validator;
       pip install --user robotframework-lint;
+      if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
+        pip install --user ansible==2.1.1.0;
+      fi;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
         gem install danger nokogiri --no-ri --no-rdoc;
       fi;
