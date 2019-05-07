@@ -1,12 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Functional tests on Selenium">
 	
-	<test name="When user add series">
-		<classes>
-			<class name="ru.mystamps.web.tests.cases.WhenUserAddSeries" />
-		</classes>
-	</test>
-	
 	<test name="When any user at any page">
 		<classes>
 			<class name="ru.mystamps.web.tests.cases.WhenAnyUserAtAnyPage" />

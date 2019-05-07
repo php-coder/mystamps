@@ -33,8 +33,6 @@ import static lombok.AccessLevel.PROTECTED;
 @RequiredArgsConstructor(access = PROTECTED)
 public abstract class AbstractPage {
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	private static final String LOGOUT_BUTTON_LOCATOR = "//form[@id=\"logout-form\"]/input[@type=\"submit\"]";
 	private static final String A_HREF_LOCATOR = "//a[@href=\"%s\"]";
 	
 	protected final WebDriver driver;
@@ -144,31 +142,6 @@ public abstract class AbstractPage {
 		} catch (NoSuchElementException ex) {
 			return null;
 		}
-	}
-	
-	public void login(String login, String password) {
-		Validate.isTrue(!"".equals(login), "login must be not null and not empty");
-		Validate.isTrue(!"".equals(password), "password must be not null and not empty");
-		
-		// FIXME: check than we already authenticated and do nothing
-		AuthAccountPage authPage = new AuthAccountPage(driver);
-		authPage.open();
-		authPage.authorizeUser(login, password);
-		
-		// return to current page
-		open();
-		// FIXME: test for presence link with text "Sign out" to ensure than all right?
-	}
-	
-	public void logout() {
-		// FIXME: check than we not authenticated and do nothing
-		
-		WebElement logoutButton = getElementByXPath(LOGOUT_BUTTON_LOCATOR);
-		logoutButton.submit();
-		
-		// return to current page
-		open();
-		// FIXME: test for presence link with text "Sign in" to ensure than all right?
 	}
 	
 }
