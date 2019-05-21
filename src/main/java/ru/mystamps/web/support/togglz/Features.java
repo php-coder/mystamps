@@ -44,14 +44,6 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	ADD_PURCHASES_AND_SALES,
 	
-	@Label("/collection/{slug}: show statistics of collection")
-	@EnabledByDefault
-	SHOW_COLLECTION_STATISTICS,
-	
-	@Label("/collection/{slug}: show charts on collection page")
-	@EnabledByDefault
-	SHOW_COLLECTION_CHARTS,
-	
 	@Label("Send mail with activation key to user")
 	@EnabledByDefault
 	SEND_ACTIVATION_MAIL,

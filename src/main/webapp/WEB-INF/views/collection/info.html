@@ -2,8 +2,7 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,26 +89,20 @@
 					
 					<div class="row">
 						<div class="col-sm-2 col-md-push-4">
-							<!--/*/
-							<th:block togglz:active="SHOW_COLLECTION_STATISTICS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
-							/*/-->
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
-									</div>
-									<div class="panel-body">
-										<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
-										<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
-										<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
-										<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
-									</div>
+							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+								<div class="panel-heading">
+									<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
 								</div>
-							<!--/*/
-							</th:block>
-							/*/-->
+								<div class="panel-body">
+									<p th:text="|#{t_categories_amount}: ${categoryCounter}|">Amount of categories: 1</p>
+									<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
+									<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
+									<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-3 col-md-push-4">
-							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
 								</div>
@@ -117,7 +110,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3 col-md-push-4">
-							<div class="panel panel-default" togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
 								</div>
@@ -166,7 +159,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		
 		<!--/*/
-		<th:block togglz:active="SHOW_COLLECTION_CHARTS" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+		<th:block th:if="${not #lists.isEmpty(seriesOfCollection)}">
 		/*/-->
 			<!-- Charts -->
 			<script src="https://www.gstatic.com/charts/loader.js"></script>
