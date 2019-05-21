@@ -17,21 +17,24 @@
  */
 package ru.mystamps.web.service;
 
-/**
- * Sending e-mails with Mailgun service.
- */
-// Links in javadoc are long
-@SuppressWarnings("checkstyle:linelength")
-public interface MailgunEmailSendingStrategy {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-	/**
-	 * Send an e-mail.
-	 *
-	 * @param email data and meta-data for sending an e-mail
-	 * @throws ru.mystamps.web.service.exception.EmailSendingException when any error occurs
-	 * @see SmtpMailgunEmailSendingStrategy
-	 * @see <a href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging">Tagging</a>
-	 * @see <a href="https://documentation.mailgun.com/en/latest/user_manual.html#sending-in-test-mode">Sending in Test Mode</a>
-	 */
-	void send(MailgunEmail email);
+@Accessors(fluent = true)
+@Getter
+@Setter
+class MailgunEmail {
+	private String recipientAddress;
+	private String senderAddress;
+	private String senderName;
+	private String subject;
+	private String text;
+
+	// There fields are fully Mailgun-specific.
+	//
+	// a tag for messages categorization
+	private String tag;
+	// tells Mailgun to accept a message but don't send it
+	private boolean testMode;
 }

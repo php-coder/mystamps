@@ -39,15 +39,7 @@ public class SmtpMailgunEmailSendingStrategy implements MailgunEmailSendingStrat
 	private final JavaMailSender mailer;
 	
 	@Override
-	@SuppressWarnings("PMD.UseObjectForClearerAPI")
-	public void send(
-		String toEmail,
-		String fromEmail,
-		String fromName,
-		String subject,
-		String text,
-		String tag,
-		boolean testMode) {
+	public void send(MailgunEmail email) {
 		
 		try {
 			// We're using MimeMessagePreparator only because of its capability of adding headers.
@@ -55,15 +47,18 @@ public class SmtpMailgunEmailSendingStrategy implements MailgunEmailSendingStrat
 			MimeMessagePreparator preparator = new MimeMessagePreparator() {
 				@Override
 				public void prepare(MimeMessage mimeMessage) throws Exception {
+					InternetAddress from =
+						new InternetAddress(email.senderAddress(), email.senderName(), "UTF-8");
+					
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
 					message.setValidateAddresses(true);
-					message.setTo(toEmail);
-					message.setFrom(new InternetAddress(fromEmail, fromName, "UTF-8"));
-					message.setSubject(subject);
-					message.setText(text);
+					message.setTo(email.recipientAddress());
+					message.setFrom(from);
+					message.setSubject(email.subject());
+					message.setText(email.text());
 					
-					message.getMimeMessage().addHeader("X-Mailgun-Tag", tag);
-					if (testMode) {
+					message.getMimeMessage().addHeader("X-Mailgun-Tag", email.tag());
+					if (email.testMode()) {
 						message.getMimeMessage().addHeader("X-Mailgun-Drop-Message", "yes");
 					}
 				}
@@ -72,7 +67,7 @@ public class SmtpMailgunEmailSendingStrategy implements MailgunEmailSendingStrat
 			mailer.send(preparator);
 			
 		} catch (MailException ex) {
-			throw new EmailSendingException("Can't send mail to e-mail " + toEmail, ex);
+			throw new EmailSendingException("Can't send mail to " + email.recipientAddress(), ex);
 		}
 	}
 	

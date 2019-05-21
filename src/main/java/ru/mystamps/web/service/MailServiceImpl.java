@@ -75,15 +75,13 @@ public class MailServiceImpl implements MailService {
 		Validate.isTrue(activation.getLang() != null, "Language must be non null");
 		Validate.isTrue(activation.getActivationKey() != null, "Activation key must be non null");
 		
-		mailer.send(
-			activation.getEmail(),
-			robotEmail,
-			"My Stamps",
-			getSubjectOfActivationMail(activation),
-			getTextOfActivationMail(activation),
-			"activation_key",
-			testMode
-		);
+		MailgunEmail email = prepareEmail()
+			.recipientAddress(activation.getEmail())
+			.subject(getSubjectOfActivationMail(activation))
+			.text(getTextOfActivationMail(activation))
+			.tag("activation_key");
+		
+		mailer.send(email);
 		
 		LOG.info(
 			"Email with activation code has been sent to {} (lang: {})",
@@ -95,15 +93,14 @@ public class MailServiceImpl implements MailService {
 	@Override
 	@Async
 	public void sendDailyStatisticsToAdmin(AdminDailyReport report) {
-		mailer.send(
-			adminEmail,
-			robotEmail,
-			"My Stamps",
-			getSubjectOfDailyStatisticsMail(report),
-			reportService.prepareDailyStatistics(report),
-			"daily_statistics",
-			testMode
-		);
+		
+		MailgunEmail email = prepareEmail()
+			.recipientAddress(adminEmail)
+			.subject(getSubjectOfDailyStatisticsMail(report))
+			.text(reportService.prepareDailyStatistics(report))
+			.tag("daily_statistics");
+		
+		mailer.send(email);
 		
 		String date = shortDatePrinter.format(report.getStartDate());
 		
@@ -113,6 +110,13 @@ public class MailServiceImpl implements MailService {
 			adminEmail,
 			adminLang
 		);
+	}
+	
+	private MailgunEmail prepareEmail() {
+		return new MailgunEmail()
+			.senderAddress(robotEmail)
+			.senderName("My Stamps")
+			.testMode(testMode);
 	}
 	
 	private String getTextOfActivationMail(SendUsersActivationDto activation) {
