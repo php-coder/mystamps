@@ -567,7 +567,7 @@ unless test_reports.empty?
 	print_errors_summary 'maven-surefire-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/unit-tests'
 end
 
-# Handle `mvn findbugs:check` results
+# Handle `mvn spotbugs:check` results
 #
 # Example:
 # <BugCollection sequence="0" release="" analysisTimestamp="1489272156067" version="3.0.1" # timestamp="1489272147000">
@@ -583,10 +583,10 @@ end
 #   </BugInstance>
 # </BugCollection>
 #
-findbugs_report = 'target/findbugsXml.xml'
-if File.file?(findbugs_report)
+spotbugs_report = 'target/spotbugsXml.xml'
+if File.file?(spotbugs_report)
 	errors_count = 0
-	doc = Nokogiri::XML(File.open(findbugs_report))
+	doc = Nokogiri::XML(File.open(spotbugs_report))
 	src_dirs = doc.xpath('//SrcDir').map { |node| node.text }
 	doc.xpath('//BugInstance').each do |node|
 		errors_count += 1
@@ -602,9 +602,10 @@ if File.file?(findbugs_report)
 		src_dir = src_dirs.find { |dir| File.file?("#{dir}/#{file}") }
 		src_dir = src_dir.sub(pwd, '')
 		file = github.html_link("#{src_dir}/#{file}#{line}")
-		fail("findbugs-maven-plugin error in #{file}:\n#{msg}")
+		fail("spotbugs-maven-plugin error in #{file}:\n#{msg}")
 	end
-	print_errors_summary 'findbugs-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/findbugs'
+	# FIXME: add a link to the SpotBugs documentation
+	print_errors_summary 'spotbugs-maven-plugin', errors_count
 end
 
 # Handle `mvn robotframework:run` report

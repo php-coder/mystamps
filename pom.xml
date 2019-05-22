@@ -497,8 +497,6 @@
 		<error-prone.version>2.3.2</error-prone.version>
 		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
-		<findbugs.excludeFilterFile>src/main/config/findbugs-filter.xml</findbugs.excludeFilterFile>
-		<findbugs.plugin.version>3.0.5</findbugs.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -579,6 +577,8 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<spock.version>1.0-groovy-2.0</spock.version>
+		
+		<spotbugs.plugin.version>3.1.11</spotbugs.plugin.version>
 		
 		<!-- Define default value for spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
@@ -662,6 +662,20 @@
 					<phantomjs>
 						<version>1.9.8</version>
 					</phantomjs>
+				</configuration>
+			</plugin>
+			
+			<!--
+			     Usage:
+			     mvn spotbugs:check (checks the sources and produces report to the console)
+			-->
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>${spotbugs.plugin.version}</version>
+				<configuration>
+					<includeTests>true</includeTests>
+					<excludeFilterFile>src/main/config/spotbugs-filter.xml</excludeFilterFile>
 				</configuration>
 			</plugin>
 			
@@ -968,19 +982,6 @@
 					<rulesetfiles>
 						rulesets/basic.xml,rulesets/braces.xml,rulesets/concurrency.xml,rulesets/convention.xml,rulesets/design.xml,rulesets/dry.xml,rulesets/exceptions.xml,rulesets/formatting.xml,rulesets/generic.xml,rulesets/groovyism.xml,rulesets/imports.xml,rulesets/jdbc.xml,rulesets/logging.xml,rulesets/naming.xml,rulesets/security.xml,rulesets/serialization.xml,rulesets/unnecessary.xml,rulesets/unused.xml
 					</rulesetfiles>
-				</configuration>
-			</plugin>
-			
-			<!--
-			     Usage:
-			     mvn findbugs:check (checks the sources and produces report to the console)
-			-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${findbugs.plugin.version}</version>
-				<configuration>
-					<includeTests>true</includeTests>
 				</configuration>
 			</plugin>
 			
