@@ -38,6 +38,7 @@ import java.util.Map;
 public class MailServiceImpl implements MailService {
 	private static final Logger LOG = LoggerFactory.getLogger(MailServiceImpl.class);
 	
+	private final ReportService reportService;
 	private final MailgunEmailSendingStrategy mailer;
 	private final MessageSource messageSource;
 	private final String adminEmail;
@@ -45,7 +46,6 @@ public class MailServiceImpl implements MailService {
 	private final String robotEmail;
 	private final boolean testMode;
 	private final DatePrinter shortDatePrinter;
-	private final ReportService reportService;
 	
 	public MailServiceImpl(
 		ReportService reportService,
