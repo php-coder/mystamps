@@ -18,6 +18,12 @@ Create series sale with invalid url
 	Submit Form             id=add-series-sales-form
 	Element Text Should Be  id=url.errors  Value must be a valid URL
 
+Create series sale with the prices in the same currency
+	Select From List By Label  id=currency             USD
+	Select From List By Label  id=alt-currency         USD
+	Submit Form                id=add-series-sales-form
+	Element Text Should Be     id=alt-currency.errors  Price and alternative price must be in a different currencies
+
 Create series sale with the same seller and buyer
 	Select From List By Label  id=seller        Tommy Lee Jones
 	Select From List By Label  id=buyer         Tommy Lee Jones
