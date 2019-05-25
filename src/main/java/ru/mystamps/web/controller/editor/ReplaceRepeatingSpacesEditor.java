@@ -33,9 +33,7 @@ public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 	
 	@Override
 	public void setAsText(String name) throws IllegalArgumentException {
-		String text = name;
-
-		text = name.trim();
+		String text = name.trim();
 
 		if (text.contains("  ")) {
 			text = REPEATING_SPACES.matcher(text).replaceAll(" ");

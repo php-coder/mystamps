@@ -53,7 +53,6 @@ import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.tests.Random;
 import ru.mystamps.web.util.SlugUtils;
 
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Date;
@@ -77,7 +76,6 @@ public final class TestObjects {
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_URL            = "test.example.org";
-	private static final BigDecimal TEST_PRICE      = new BigDecimal("100.99");
 	
 	private static final String TEST_ENTITY_NAME    = TEST_NAME;
 	private static final String TEST_ENTITY_SLUG    = "test-slug";

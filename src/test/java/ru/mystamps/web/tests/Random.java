@@ -34,6 +34,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -187,7 +188,10 @@ public final class Random {
 	}
 	
 	public static Integer issueYear() {
-		return between(ValidationRules.MIN_RELEASE_YEAR, Year.now().getValue()).integer();
+		return between(
+			ValidationRules.MIN_RELEASE_YEAR,
+			Year.now(ZoneOffset.UTC).getValue()
+		).integer();
 	}
 	
 	public static Integer quantity() {

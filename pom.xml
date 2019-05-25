@@ -494,7 +494,7 @@
 		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
-		<error-prone.version>2.3.2</error-prone.version>
+		<error-prone.version>2.3.3</error-prone.version>
 		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
 		<fest.assert.version>2.0M8</fest.assert.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
@@ -804,9 +804,9 @@
 						<!--
 							The following checks have been disabled:
 							- MissingOverride: produce false positives with @Getter from Lombok
-							- ParameterName: workaround for https://github.com/google/error-prone/issues/780
+							- MixedMutabilityReturnType: because I like to use Collections.empty*() methods
 						-->
-						<compilerArg>-Xplugin:ErrorProne -Xep:MissingOverride:OFF -Xep:ParameterName:OFF</compilerArg>
+						<compilerArg>-Xplugin:ErrorProne -Xep:MissingOverride:OFF -Xep:MixedMutabilityReturnType:OFF</compilerArg>
 					</compilerArgs>
 					<annotationProcessorPaths>
 						<path>

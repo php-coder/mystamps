@@ -24,6 +24,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
+import java.time.ZoneOffset;
 
 /**
  * @author Sergey Chechenev
@@ -73,7 +74,7 @@ public class ReleaseDateIsNotInFutureValidator
 		}
 		
 		return Year.of(dto.getYear())
-			.isAfter(Year.now());
+			.isAfter(Year.now(ZoneOffset.UTC));
 	}
 	
 	private static boolean yearAndMonthInFuture(AddSeriesDto dto) {
@@ -82,7 +83,7 @@ public class ReleaseDateIsNotInFutureValidator
 		}
 		
 		return YearMonth.of(dto.getYear(), dto.getMonth())
-			.isAfter(YearMonth.now());
+			.isAfter(YearMonth.now(ZoneOffset.UTC));
 	}
 	
 	private static boolean dateInFuture(AddSeriesDto dto) {
@@ -91,7 +92,7 @@ public class ReleaseDateIsNotInFutureValidator
 		}
 		
 		return LocalDate.of(dto.getYear(), dto.getMonth(), dto.getDay())
-			.isAfter(LocalDate.now());
+			.isAfter(LocalDate.now(ZoneOffset.UTC));
 	}
 	
 }

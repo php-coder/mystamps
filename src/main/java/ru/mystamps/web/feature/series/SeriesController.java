@@ -64,6 +64,7 @@ import javax.validation.Valid;
 import javax.validation.groups.Default;
 import java.io.IOException;
 import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -80,8 +81,7 @@ import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 
-	private static final Integer CURRENT_YEAR = Integer.valueOf(Year.now().getValue());
-	
+	private static final Integer CURRENT_YEAR;
 	private static final Map<Integer, Integer> YEARS;
 	
 	private final CategoryService categoryService;
@@ -93,6 +93,7 @@ public class SeriesController {
 	private final ParticipantService participantService;
 	
 	static {
+		CURRENT_YEAR = Integer.valueOf(Year.now(ZoneOffset.UTC).getValue());
 		YEARS = new LinkedHashMap<>();
 		for (Integer i = CURRENT_YEAR; i >= MIN_RELEASE_YEAR; i--) {
 			YEARS.put(i, i);
