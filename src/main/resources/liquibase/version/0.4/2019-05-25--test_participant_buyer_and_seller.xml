@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<changeSet id="create-participant-that-is-buyer-and-seller" author="php-coder" context="test-data">
+		<comment>Creates buyers and sellers examples</comment>
+		
+		<insert tableName="transaction_participants">
+			<column name="id" value="4" />
+			<column name="name" value="Tommy Lee Jones" />
+			<column name="url" value="http://example.com/tommy-lee-jones" />
+			<column name="is_buyer" valueBoolean="true" />
+			<column name="is_seller" valueBoolean="true" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>

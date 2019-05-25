@@ -33,7 +33,6 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
-// @todo #503 Add integration test to ensure that seller and buyer are different
 // @todo #504 Add integration test to ensure that price and alternative price are different
 // @todo #678 Add integration tests for price and alternative price: both or none are required
 @Getter

@@ -18,6 +18,12 @@ Create series sales with invalid url
 	Submit Form             id=add-series-sales-form
 	Element Text Should Be  id=url.errors  Value must be a valid URL
 
+Create series sale with the same seller and buyer
+	Select From List By Label  id=seller        Tommy Lee Jones
+	Select From List By Label  id=buyer         Tommy Lee Jones
+	Submit Form                id=add-series-sales-form
+	Element Text Should Be     id=buyer.errors  Seller and buyer must be different
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
