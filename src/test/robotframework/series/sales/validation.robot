@@ -19,7 +19,9 @@ Create series sale with invalid url
 	Element Text Should Be  id=url.errors  Value must be a valid URL
 
 Create series sale with the prices in the same currency
+	Input Text                 id=price                100
 	Select From List By Label  id=currency             USD
+	Input Text                 id=alt-price            200
 	Select From List By Label  id=alt-currency         USD
 	Submit Form                id=add-series-sales-form
 	Element Text Should Be     id=alt-currency.errors  Price and alternative price must be in a different currencies
