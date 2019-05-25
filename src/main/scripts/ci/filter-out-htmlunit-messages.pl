@@ -24,7 +24,8 @@ my @regexps = (
 	qr/\[ERROR\] runtimeError: message=\[[^\(]+\(selector: '\[id='sizzle-[^']+'\] \[data-selectable\]:first' error: Invalid selector: \[id="sizzle-[^"]+"\] \[data-selectable\]:first\)\.\] sourceName=\[[^]]+\] line=\[[^]]+\] lineSource=\[[^]]+\] lineOffset=\[[^]]+\]\n/,
 	
 	# [INFO] Bad input type: "url", creating a text input
-	qr/\[INFO\] Bad input type: "url", creating a text input\n/
+	# [INFO] Bad input type: "select-one", creating a text input
+	qr/\[INFO\] Bad input type: "[^"]+", creating a text input\n/
 );
 
 foreach my $line (<STDIN>) {
