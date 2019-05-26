@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/mailgun/send-message"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "id": "<20190507194211.0.B96DD98C0E6AAA9A@wiremock.localhost>",
+      "message": "Queued. Thank you."
+    }
+  }
+}

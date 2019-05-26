@@ -284,6 +284,20 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Required for src/test/robotframework/account/registration/logic.robot -->
+		<dependency>
+			<groupId>com.github.hi-fi</groupId>
+			<artifactId>robotframework-httprequestlibrary</artifactId>
+			<version>${robotframework-httprequest.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.github.hi-fi</groupId>
 			<artifactId>robotframework-seleniumlibrary</artifactId>
@@ -434,13 +448,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.subethamail</groupId>
-			<artifactId>subethasmtp</artifactId>
-			<version>${subethasmtp.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>${testng.version}</version>
@@ -552,6 +559,7 @@
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
 		<resources.plugin.version>3.1.0</resources.plugin.version>
+		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>
 		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
 		<robotframework-selenium.version>2.53.1.1</robotframework-selenium.version>
 		<robotframework.version>3.0.4</robotframework.version>
@@ -583,7 +591,6 @@
 		<!-- Define default value for spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
-		<subethasmtp.version>3.1.7</subethasmtp.version>
 		<surefire.plugin.version>2.22.0</surefire.plugin.version>
 		<testng.version>6.8.8</testng.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
@@ -1154,7 +1161,7 @@
 						http://wiremock.org/docs/running-standalone/
 					-->
 					<!-- Handy for debugging: add &#45;&#45;verbose option -->
-					<params>--port=8888 --disable-banner --no-request-journal --container-threads=4 --jetty-acceptor-threads=1</params>
+					<params>--port=8888 --disable-banner --container-threads=4 --jetty-acceptor-threads=1</params>
 				</configuration>
 				<executions>
 					<execution>
