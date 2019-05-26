@@ -457,7 +457,7 @@
 	</parent>
 	
 	<properties>
-		<!-- Set JVM options for maven-surefire-plugin and maven-failsafe-plugin -->
+		<!-- Set JVM options for maven-surefire-plugin -->
 		<argLine>-Xss256k</argLine>
 		
 		<!-- Don't forget to update version in the Url class -->
@@ -488,7 +488,6 @@
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
 		<error-prone.version>2.3.3</error-prone.version>
-		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -843,17 +842,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${failsafe.plugin.version}</version>
-				<configuration>
-					<useFile>false</useFile>
-					<disableXmlReport>true</disableXmlReport>
-				</configuration>
-				<!-- Use default <execution> configuration from spring-boot-starter-parent -->
 			</plugin>
 			
 			<plugin>
