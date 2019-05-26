@@ -5,9 +5,6 @@
 
 <suppressions>
 	
-	<!-- These files will be removed during porting integration tests to Cucumber JVM (see #18) -->
-	<suppress checks="ImportOrder" files="ru.mystamps.web.tests" />
-	
 	<!-- false positives because these files contain SQL queries -->
 	<suppress checks="Translation" files="src[/\\]main[/\\]resources[/\\]sql" />
 	

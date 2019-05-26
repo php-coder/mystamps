@@ -391,13 +391,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert-core</artifactId>
-			<version>${fest.assert.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-library</artifactId>
 			<version>${hamcrest.version}</version>
@@ -444,13 +437,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -503,7 +489,6 @@
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
 		<error-prone.version>2.3.3</error-prone.version>
 		<failsafe.plugin.version>2.22.0</failsafe.plugin.version>
-		<fest.assert.version>2.0M8</fest.assert.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -592,7 +577,6 @@
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<surefire.plugin.version>2.22.0</surefire.plugin.version>
-		<testng.version>6.8.8</testng.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -868,9 +852,6 @@
 				<configuration>
 					<useFile>false</useFile>
 					<disableXmlReport>true</disableXmlReport>
-					<suiteXmlFiles>
-						<suiteXmlFile>${basedir}/src/test/config/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
 				</configuration>
 				<!-- Use default <execution> configuration from spring-boot-starter-parent -->
 			</plugin>
@@ -935,8 +916,6 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<disableXmlReport>${disableXmlReport}</disableXmlReport>
-					<!-- Run junit tests only (see #SUREFIRE-377) -->
-					<testNGArtifactName>none:none</testNGArtifactName>
 				</configuration>
 			</plugin>
 			

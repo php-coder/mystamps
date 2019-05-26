@@ -608,7 +608,7 @@ if File.file?(spotbugs_report)
 	print_errors_summary 'spotbugs-maven-plugin', errors_count
 end
 
-# Handle `mvn robotframework:run` report
+# Handle `mvn robotframework:run` (`mvn verify`) report
 #
 # Example:
 # <suite source="/home/coder/mystamps/src/test/robotframework/category/access.robot" name="Access" id="s1-s1-s1">
@@ -661,48 +661,7 @@ if File.file?(rf_report)
 		file = github.html_link("#{file}#{line}")
 		fail("robotframework-maven-plugin error in #{file}:\nTest case `#{testcase}` fails with message:\n#{msg}")
 	end
-	# FIXME: add link to wiki page (#530)
-	print_errors_summary 'robotframework-maven-plugin', errors_count
-end
-
-# Handle `mvn verify`
-#
-# Example:
-# <testng-results skipped="0" failed="1" total="114" passed="113">
-#   <test name="When user at index page" duration-ms="559" started-at="2017-03-05T19:34:06Z" finished-at="2017-03-05T19:34:06Z">
-#     <class name="ru.mystamps.web.tests.cases.WhenUserAtIndexPage">
-#       <test-method status="FAIL" signature="shouldExistsLinkForListingCategories()[pri:0, instance:ru.mystamps.web.tests.cases.WhenUserAtIndexPage@2187fff7]" name="shouldExistsLinkForListingCategories" duration-ms="3" started-at="2017-03-05T20:34:06Z" finished-at="2017-03-05T20:34:06Z">
-#         <exception class="java.lang.AssertionError">
-#           <message>
-#             <![CDATA[should exists link to page for listing categories]]>
-#           </message>
-#           <full-stacktrace>
-#             <![CDATA[java.lang.AssertionError: should exists link to page for listing categories
-#             at ru.mystamps.web.tests.cases.WhenUserAtIndexPage.shouldExistsLinkForListingCategories(WhenUserAtIndexPage.java:78)
-#             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-#             ...
-#
-failsafe_report = 'target/failsafe-reports/testng-results.xml'
-if File.file?(failsafe_report)
-	errors_count = 0
-	doc = Nokogiri::XML(File.open(failsafe_report))
-	results  = doc.xpath('/testng-results').first
-	failures = results['failed'].to_i
-	if failures > 0
-		doc.xpath('//test-method[@status="FAIL"]').each do |node|
-			errors_count += 1
-			
-			clazz = node.parent['name']
-			file = 'src/test/java/' + clazz.gsub(/\./, '/') + '.java'
-			file = github.html_link(file)
-			testcase = clazz.split('.')[-1] + '.' + node['name']
-			msg = node.xpath('./exception/message').text.strip
-			# FIXME: highlight line number
-			fail("maven-failsafe-plugin error in #{file}:\nTest case `#{testcase}` fails with error:\n#{msg}")
-		end
-		
-		print_errors_summary 'maven-failsafe-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/integration-tests'
-	end
+	print_errors_summary 'robotframework-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/integration-tests'
 end
 
 if github.pr_body !~ /Addressed to #\d+/
