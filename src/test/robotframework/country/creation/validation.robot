@@ -88,7 +88,7 @@ Create country with forbidden names
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-	Log In As                           login=admin  password=test
+	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/country/add
 
 After Test Suite
