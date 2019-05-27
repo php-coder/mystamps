@@ -3,7 +3,7 @@ Documentation    Verify series creation validation scenarios from admin
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -66,5 +66,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
 
-After Test Suite
-	Close Browser

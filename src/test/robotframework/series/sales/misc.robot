@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  sales  misc
 
 *** Test Cases ***
@@ -20,5 +20,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/1
 
-After Test Suite
-	Close Browser

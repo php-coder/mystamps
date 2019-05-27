@@ -2,7 +2,7 @@
 Documentation    Verify access to Togglz console from anonymous user
 Library          SeleniumLibrary
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       togglz  access
 
 *** Test Cases ***
@@ -16,5 +16,3 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
-After Test Suite
-	Close Browser

@@ -3,7 +3,7 @@ Documentation    Verify required elements appearance on the main page from a use
 Library          SeleniumLibrary
 Resource         ../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       misc  main-page
 
 *** Test Cases ***
@@ -42,5 +42,3 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/
 
-After Test Suite
-	Close Browser

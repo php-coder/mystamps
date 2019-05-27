@@ -3,7 +3,7 @@ Documentation    Verify access to category related pages (including non-existing
 Library          SeleniumLibrary
 Resource         ../selenium.utils.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       category  access
 
 *** Test Cases ***
@@ -22,5 +22,3 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
-After Test Suite
-	Close Browser

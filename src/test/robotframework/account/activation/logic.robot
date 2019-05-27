@@ -2,7 +2,7 @@
 Documentation   Verify account activation scenarios
 Library         SeleniumLibrary
 Suite Setup     Before Test Suite
-Suite Teardown  After Test Suite
+Suite Teardown  Close Browser
 Test Setup      Before Test
 Force Tags      account  activation  logic
 
@@ -35,5 +35,3 @@ Before Test Suite
 Before Test
 	Go To  ${SITE_URL}/account/activate
 
-After Test Suite
-	Close Browser

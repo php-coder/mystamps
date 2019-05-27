@@ -3,7 +3,7 @@ Documentation    Verify participant creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       participant  validation
 
 *** Test Cases ***
@@ -36,5 +36,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/participant/add
 
-After Test Suite
-	Close Browser

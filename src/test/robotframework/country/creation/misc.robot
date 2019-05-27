@@ -3,7 +3,7 @@ Documentation    Verify miscellaneous aspects of country creation
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       country  misc
 
 *** Test Cases ***
@@ -42,5 +42,3 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/country/add
 
-After Test Suite
-	Close Browser

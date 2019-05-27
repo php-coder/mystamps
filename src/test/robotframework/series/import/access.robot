@@ -2,7 +2,7 @@
 Documentation    Verify access to import series related pages
 Library          SeleniumLibrary
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  import-series  access
 
 *** Test Cases ***
@@ -26,5 +26,3 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
-After Test Suite
-	Close Browser

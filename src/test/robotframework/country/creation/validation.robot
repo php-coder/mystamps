@@ -3,7 +3,7 @@ Documentation    Verify country creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       country  validation
 
 *** Test Cases ***
@@ -91,5 +91,3 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/country/add
 
-After Test Suite
-	Close Browser

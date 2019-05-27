@@ -3,7 +3,7 @@ Documentation    Verify scenarios of adding additional image to a series
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Test Setup       Before Test
 Force Tags       series  add-image  logic
 
@@ -29,5 +29,3 @@ Before Test Suite
 Before Test
 	Go To  ${SITE_URL}/series/1
 
-After Test Suite
-	Close Browser

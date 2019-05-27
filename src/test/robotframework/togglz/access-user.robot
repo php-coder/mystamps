@@ -3,7 +3,7 @@ Documentation    Verify access to Togglz console from user
 Library          SeleniumLibrary
 Resource         ../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       togglz  access
 
 *** Test Cases ***
@@ -18,5 +18,3 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
 
-After Test Suite
-	Close Browser

@@ -3,7 +3,7 @@ Documentation   Verify miscellaneous aspects of account registration from user
 Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
 Suite Setup     Before Test Suite
-Suite Teardown  After Test Suite
+Suite Teardown  Close Browser
 Test Setup      Before Test
 Force Tags      account  registration  misc
 
@@ -21,5 +21,3 @@ Before Test Suite
 Before Test
 	Go To  ${SITE_URL}/account/register
 
-After Test Suite
-	Close Browser

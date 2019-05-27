@@ -3,7 +3,7 @@ Documentation    Verify category creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       category  validation
 
 *** Test Cases ***
@@ -91,5 +91,3 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/category/add
 
-After Test Suite
-	Close Browser

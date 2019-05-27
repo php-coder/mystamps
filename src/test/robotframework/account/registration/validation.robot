@@ -2,7 +2,7 @@
 Documentation   Verify account registration validation scenarios
 Library         SeleniumLibrary
 Suite Setup     Before Test Suite
-Suite Teardown  After Test Suite
+Suite Teardown  Close Browser
 Force Tags      account  registration  validation
 
 *** Test Cases ***
@@ -21,9 +21,6 @@ Register account with invalid email
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/register  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-
-After Test Suite
-	Close Browser
 
 Invalid Email Should Be Rejected
 	[Arguments]             ${email}

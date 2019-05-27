@@ -3,7 +3,7 @@ Documentation    Verify series creation validation scenarios from a user
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -60,9 +60,6 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
-
-After Test Suite
-	Close Browser
 
 Invalid Catalog Numbers Should Be Rejected
 	[Arguments]                    ${catalogNumbers}

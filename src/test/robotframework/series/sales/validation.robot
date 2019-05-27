@@ -3,7 +3,7 @@ Documentation    Verify validation scenarios for adding series sales
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  sales  validation
 
 *** Test Cases ***
@@ -39,5 +39,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/1
 
-After Test Suite
-	Close Browser

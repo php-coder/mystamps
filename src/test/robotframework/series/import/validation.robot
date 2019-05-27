@@ -3,7 +3,7 @@ Documentation    Verify import series validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  import-series  validation
 
 *** Test Cases ***
@@ -29,5 +29,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/import/request
 
-After Test Suite
-	Close Browser

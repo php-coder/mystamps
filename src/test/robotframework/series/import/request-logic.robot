@@ -5,7 +5,7 @@ Library          DateTime
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Test Setup       Before Test
 Force Tags       series  import-series  logic
 
@@ -139,9 +139,6 @@ Before Test Suite
 
 Before Test
 	Go To  ${SITE_URL}/series/import/request
-
-After Test Suite
-	Close Browser
 
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link

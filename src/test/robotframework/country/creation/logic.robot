@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Test Setup       Before Test
 Force Tags       country  logic
 
@@ -36,9 +36,6 @@ Before Test Suite
 
 Before Test
 	Go To  ${SITE_URL}/country/add
-
-After Test Suite
-	Close Browser
 
 Country Field Should Have Option
 	[Documentation]                   Verify the selection of the select list that is using selectize.js

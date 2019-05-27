@@ -3,7 +3,7 @@ Documentation    Verify validation scenarios during adding additional image to a
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  add-image  validation
 
 *** Test Cases ***
@@ -61,5 +61,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/1
 
-After Test Suite
-	Close Browser

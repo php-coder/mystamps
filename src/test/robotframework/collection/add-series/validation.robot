@@ -3,7 +3,7 @@ Documentation    Verify validation of adding a series to collection
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       collection  validation
 
 *** Test Cases ***
@@ -32,5 +32,3 @@ Before Test Suite
 	# We also need a series with no more than 4 stamps, so the 5 stamps will lead to an error.
 	Go To                               ${SITE_URL}/series/2
 
-After Test Suite
-	Close Browser

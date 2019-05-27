@@ -2,7 +2,7 @@
 Documentation    Verify miscellaneous aspects of account activation from anonymous user
 Library          SeleniumLibrary
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       account  activation  misc
 
 *** Test Cases ***
@@ -55,9 +55,6 @@ Password with allowed characters should be accepted
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/activate  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-
-After Test Suite
-	Close Browser
 
 Name should not cause an error
 	[Arguments]                      ${name}

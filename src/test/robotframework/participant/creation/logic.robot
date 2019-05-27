@@ -4,7 +4,7 @@ Library          Collections
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Test Setup       Before Test
 Force Tags       participant  logic
 
@@ -44,5 +44,3 @@ Before Test Suite
 Before Test
 	Go To  ${SITE_URL}/participant/add
 
-After Test Suite
-	Close Browser

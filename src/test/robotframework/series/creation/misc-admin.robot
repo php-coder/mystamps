@@ -3,7 +3,7 @@ Documentation    Verify miscellaneous aspects of series creation
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
-Suite Teardown   After Test Suite
+Suite Teardown   Close Browser
 Force Tags       series  misc
 
 *** Test Cases ***
@@ -20,5 +20,3 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
 
-After Test Suite
-	Close Browser
