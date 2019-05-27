@@ -22,5 +22,4 @@ Before Test
 	Go To  ${SITE_URL}/account/auth
 
 After Test Suite
-	Log Out
 	Close Browser

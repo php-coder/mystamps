@@ -30,5 +30,4 @@ Before Test Suite
 	Go To                               ${SITE_URL}/series/import/request
 
 After Test Suite
-	Log Out
 	Close Browser

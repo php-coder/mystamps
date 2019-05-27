@@ -62,7 +62,6 @@ Before Test Suite
 	Go To                               ${SITE_URL}/series/add
 
 After Test Suite
-	Log Out
 	Close Browser
 
 Invalid Catalog Numbers Should Be Rejected

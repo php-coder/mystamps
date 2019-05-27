@@ -43,5 +43,4 @@ Before Test Suite
 	Go To                               ${SITE_URL}/
 
 After Test Suite
-	Log Out
 	Close Browser

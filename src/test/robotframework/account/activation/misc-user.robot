@@ -22,5 +22,4 @@ Before Test
 	Go To  ${SITE_URL}/account/activate
 
 After Test Suite
-	Log Out
 	Close Browser

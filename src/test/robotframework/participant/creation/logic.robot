@@ -45,5 +45,4 @@ Before Test
 	Go To  ${SITE_URL}/participant/add
 
 After Test Suite
-	Log Out
 	Close Browser

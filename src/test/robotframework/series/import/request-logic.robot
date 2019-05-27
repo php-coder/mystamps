@@ -141,7 +141,6 @@ Before Test
 	Go To  ${SITE_URL}/series/import/request
 
 After Test Suite
-	Log Out
 	Close Browser
 
 Link Should Point To

@@ -81,5 +81,4 @@ Before Test
 	Go To  ${SITE_URL}/series/add
 
 After Test Suite
-	Log Out
 	Close Browser

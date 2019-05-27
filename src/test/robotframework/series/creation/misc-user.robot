@@ -92,7 +92,6 @@ Before Test Suite
 	Go To                               ${SITE_URL}/series/add
 
 After Test Suite
-	Log Out
 	Close Browser
 
 Valid Catalog Numbers Should Be Accepted

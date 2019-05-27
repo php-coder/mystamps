@@ -43,5 +43,4 @@ Before Test Suite
 	Go To                               ${SITE_URL}/category/add
 
 After Test Suite
-	Log Out
 	Close Browser

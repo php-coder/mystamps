@@ -38,7 +38,6 @@ Before Test
 	Go To  ${SITE_URL}/country/add
 
 After Test Suite
-	Log Out
 	Close Browser
 
 Country Field Should Have Option

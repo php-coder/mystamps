@@ -62,5 +62,4 @@ Before Test Suite
 	Go To                               ${SITE_URL}/series/1
 
 After Test Suite
-	Log Out
 	Close Browser

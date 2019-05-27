@@ -92,5 +92,4 @@ Before Test Suite
 	Go To                               ${SITE_URL}/country/add
 
 After Test Suite
-	Log Out
 	Close Browser

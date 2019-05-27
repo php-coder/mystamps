@@ -19,5 +19,4 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 
 After Test Suite
-	Log Out
 	Close Browser
