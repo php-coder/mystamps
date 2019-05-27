@@ -38,3 +38,9 @@ Select Country
 	...                               *[contains(@class, "option") and text()="${value}"]
 	Wait Until Page Contains Element  xpath=${countryOption}
 	Click Element                     xpath=${countryOption}
+
+Link Should Point To
+	[Documentation]  Verify that "href" attribute of the element refers to a link
+	[Arguments]      ${locator}  ${expectedUrl}
+	${url}=          Get Element Attribute  ${locator}@href
+	Should Be Equal  ${expectedUrl}  ${url}

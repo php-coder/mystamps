@@ -139,9 +139,3 @@ Before Test Suite
 
 Before Test
 	Go To  ${SITE_URL}/series/import/request
-
-Link Should Point To
-	[Documentation]  Verify that "href" attribute of the element refers to a link
-	[Arguments]      ${locator}  ${expectedUrl}
-	${url}=          Get Element Attribute  ${locator}@href
-	Should Be Equal  ${expectedUrl}  ${url}
