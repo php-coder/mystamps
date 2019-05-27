@@ -6,18 +6,19 @@ set -o errexit
 UPLOADS_DST='{{ uploads_target_url }}'
 MYSQL_BACKUPS_DST='{{ mysql_backups_target_url }}'
 PASSPHRASE='{{ gpg_passphrase }}'
+DUPLICITY_CMD='duplicity --no-compression'
 
 case "${1:-}" in
 	'uploads')
 		su \
 			mystamps \
-			-c "duplicity --name=uploads --no-compression --no-encryption /data/uploads ${UPLOADS_DST}" \
+			-c "${DUPLICITY_CMD} --name=uploads --no-encryption /data/uploads ${UPLOADS_DST}" \
 			2>&1
 		;;
 	'mysql-backups')
 		PASSPHRASE="$PASSPHRASE" su \
 			mystamps \
-			-c "duplicity --name=mysql-backups --no-compression /data/backups ${MYSQL_BACKUPS_DST}" \
+			-c "${DUPLICITY_CMD} --name=mysql-backups /data/backups ${MYSQL_BACKUPS_DST}" \
 			2>&1
 		;;
 	*)
