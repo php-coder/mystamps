@@ -45,7 +45,6 @@ public class CollectionController {
 	private final CountryService countryService;
 	private final MessageSource messageSource;
 	
-	// @todo #884 /collection/{slug}: add a link to collection estimation page
 	@GetMapping(Url.INFO_COLLECTION_PAGE)
 	public String showInfoBySlug(
 		@PathVariable("slug") String slug,

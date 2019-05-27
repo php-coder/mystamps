@@ -98,6 +98,15 @@
 									<p th:text="|#{t_countries_amount}: ${countryCounter}|">Amount of countries: 1</p>
 									<p th:text="|#{t_series_amount}: ${seriesCounter}|">Amount of series: 3</p>
 									<p th:text="|#{t_stamps_amount}: ${stampsCounter}|">Amount of stamps: 34</p>
+									<!--/* @todo #892 Add integration tests for showing a link to collection estimation page */-->
+									<p sec:authorize="hasAuthority('ADD_SERIES_PRICE')">
+										<span th:text="#{t_cost}">The cost</span>:
+										<a href="estimation.html"
+											th:href="@{${ESTIMATION_COLLECTION_PAGE}(slug=${slug})}"
+											th:text="#{t_how_much}">
+											how much?
+										</a>
+									</p>
 								</div>
 							</div>
 						</div>
