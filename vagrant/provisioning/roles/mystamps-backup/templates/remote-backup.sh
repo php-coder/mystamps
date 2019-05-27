@@ -10,16 +10,12 @@ DUPLICITY_CMD='duplicity --no-compression'
 
 case "${1:-}" in
 	'uploads')
-		su \
-			mystamps \
-			-c "${DUPLICITY_CMD} --name=uploads --no-encryption /data/uploads ${UPLOADS_DST}" \
-			2>&1
+		su mystamps 2>&1 \
+			-c "${DUPLICITY_CMD} --name=uploads --no-encryption /data/uploads ${UPLOADS_DST}"
 		;;
 	'mysql-backups')
-		PASSPHRASE="$PASSPHRASE" su \
-			mystamps \
-			-c "${DUPLICITY_CMD} --name=mysql-backups /data/backups ${MYSQL_BACKUPS_DST}" \
-			2>&1
+		PASSPHRASE="$PASSPHRASE" su mystamps 2>&1 \
+			-c "${DUPLICITY_CMD} --name=mysql-backups /data/backups ${MYSQL_BACKUPS_DST}"
 		;;
 	*)
 		echo 2>&1 "Usage: $(dirname "$0") (uploads|mysql-backups)"
