@@ -4,7 +4,7 @@
 	<!--
 		See for details:
 		http://docs.spring.io/spring-boot/docs/1.5.x/reference/html/howto-logging.html#howto-configure-logback-for-logging
-		https://github.com/spring-projects/spring-boot/blob/v1.5.20.RELEASE/spring-boot/src/main/resources/org/springframework/boot/logging/logback/base.xml
+		https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot/src/main/resources/org/springframework/boot/logging/logback/base.xml
 	-->
 	
 	<!--
