@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.converter.annotation.CurrentUser;
+import ru.mystamps.web.support.spring.security.CurrentUser;
 
 @RestController
 @RequiredArgsConstructor

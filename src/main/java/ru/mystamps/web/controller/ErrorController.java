@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.controller.converter.annotation.CurrentUser;
 import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.support.spring.security.CurrentUser;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
