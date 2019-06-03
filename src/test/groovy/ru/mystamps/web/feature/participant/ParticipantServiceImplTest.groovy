@@ -18,7 +18,6 @@
 package ru.mystamps.web.feature.participant
 
 import org.slf4j.helpers.NOPLogger
-import ru.mystamps.web.dao.dto.EntityWithIdDto
 import ru.mystamps.web.dao.dto.EntityWithParentDto
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification

@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
+import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.importing.event.ImportRequestCreated;

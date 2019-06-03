@@ -17,7 +17,6 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
@@ -33,6 +32,7 @@ import ru.mystamps.web.feature.image.ImageDto;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.AddParticipantForm;
+import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.AddSeriesForm;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;

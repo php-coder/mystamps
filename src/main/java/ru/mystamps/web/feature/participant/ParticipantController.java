@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.dao.dto.EntityWithIdDto;
 
 import javax.validation.Valid;
 import java.util.List;
