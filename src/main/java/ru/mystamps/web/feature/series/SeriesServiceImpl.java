@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
-import ru.mystamps.web.util.CatalogUtils;
 
 import java.util.Collections;
 import java.util.Date;

@@ -19,7 +19,7 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
-import ru.mystamps.web.util.CatalogUtils;
+import ru.mystamps.web.feature.series.CatalogUtils;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Set;

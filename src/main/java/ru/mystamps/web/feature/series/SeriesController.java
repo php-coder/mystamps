@@ -55,7 +55,6 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.support.thymeleaf.GroupByParent;
 import ru.mystamps.web.support.togglz.Features;
-import ru.mystamps.web.util.CatalogUtils;
 import ru.mystamps.web.util.LocaleUtils;
 
 import javax.servlet.http.HttpServletRequest;
