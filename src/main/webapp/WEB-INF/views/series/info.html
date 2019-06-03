@@ -706,6 +706,54 @@
 									</form>
 								</div>
 							</div>
+
+							<!--/* @todo #995 Series sale import: add support for new sellers */-->
+							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
+								<div class="col-sm-12">
+									<div class="row">
+										<div class="col-sm-12">
+											<h5 th:text="|#{t_import_info_who_selling_series}|">
+												Import info about selling this series
+											</h5>
+										</div>
+									</div>
+									<div class="row">
+										<div id="import-series-sale-failed-msg"
+											class="alert alert-danger text-center col-sm-8 col-sm-offset-2 hidden"
+											th:text="#{t_could_not_import_info}">
+											Could not import information from this page
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<form id="import-series-sale-form" class="form-horizontal">
+												
+												<div class="form-group form-group-sm">
+													<label for="series-sale-url" class="control-label col-sm-3">
+														<span th:remove="tag" th:text="#{t_url}">
+															URL
+														</span>
+														<span class="required_field">*</span>
+													</label>
+													<div class="col-sm-6">
+														<input type="url" id="series-sale-url" class="form-control" required="required" />
+														<span id="series-sale-url.errors" class="help-block hidden"></span>
+													</div>
+												</div>
+												
+												<div class="form-group form-group-sm">
+													<div class="col-sm-offset-3 col-sm-4">
+														<button id="series-sale-submit-btn" type="submit" class="btn btn-primary" th:text="#{t_import_info}">
+															Import info
+														</button>
+													</div>
+												</div>
+												
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
 							
 						</div>
 						
@@ -734,5 +782,52 @@
 		<!--/*/
 		</th:block>
 		/*/-->
+
+		<!--/*
+			NOTE: It won't work properly, if user can import a sale but can't view it because
+			initPage() is came from series/info.js file.
+		*/-->
+		<script th:inline="javascript" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
+			$(document).ready(function() {
+				/*[+
+				initPage(
+					$.ajax,
+					[['__@{${IMPORT_SERIES_SALES}}__']],
+					[[${_csrf.headerName}]],
+					[[${_csrf.token}]]
+				);
+				+]*/
+				
+				/*[- */
+				var stubResponse = {
+					'sellerId':  3,
+					'price':     3.5,
+					'currency' : 'USD'
+				};
+				var errorStubResponse = {
+					status: 400,
+					responseText: '{ "fieldErrors": { "url": [ "Invalid value" ] } }'
+				};
+				var stubAjax = function() {
+					var that = {
+						done: function stubDone(callback) {
+							setTimeout(callback, 500 /* 0.5 second */, stubResponse);
+							return that;
+						},
+						fail: function stubFail(callback) {
+							//callback(errorStubResponse);
+							return that;
+						},
+						always: function stubAlways(callback) {
+							callback();
+							return that;
+						}
+					};
+					return that;
+				};
+				initPage(stubAjax);
+				/* -]*/
+			});
+		</script>
 	</body>
 </html>

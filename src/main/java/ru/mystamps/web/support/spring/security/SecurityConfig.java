@@ -94,6 +94,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					)
 				.regexMatchers(HttpMethod.POST, Url.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
 					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
+				.mvcMatchers(HttpMethod.POST, Url.IMPORT_SERIES_SALES)
+					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()

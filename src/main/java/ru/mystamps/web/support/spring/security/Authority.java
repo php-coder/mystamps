@@ -33,6 +33,7 @@ public final class Authority {
 	public static final GrantedAuthority CREATE_SERIES          = new SimpleGrantedAuthority(StringAuthority.CREATE_SERIES);
 	public static final GrantedAuthority DOWNLOAD_IMAGE         = new SimpleGrantedAuthority(StringAuthority.DOWNLOAD_IMAGE);
 	public static final GrantedAuthority IMPORT_SERIES          = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES);
+	public static final GrantedAuthority IMPORT_SERIES_SALES    = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES_SALES);
 	public static final GrantedAuthority MANAGE_TOGGLZ          = new SimpleGrantedAuthority(StringAuthority.MANAGE_TOGGLZ);
 	public static final GrantedAuthority UPDATE_COLLECTION      = new SimpleGrantedAuthority(StringAuthority.UPDATE_COLLECTION);
 	public static final GrantedAuthority VIEW_DAILY_STATS       = new SimpleGrantedAuthority(StringAuthority.VIEW_DAILY_STATS);

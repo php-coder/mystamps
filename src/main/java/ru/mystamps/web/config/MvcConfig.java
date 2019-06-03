@@ -45,6 +45,7 @@ import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.series.DownloadImageInterceptor;
 import ru.mystamps.web.feature.series.importing.event.EventsConfig;
+import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
 import java.util.List;
@@ -151,6 +152,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(Locale.ENGLISH);
 		return resolver;
+	}
+	
+	@Bean
+	public RestExceptionHandler restExceptionHandler() {
+		return new RestExceptionHandler();
 	}
 	
 	private static HandlerInterceptor getLocaleChangeInterceptor() {

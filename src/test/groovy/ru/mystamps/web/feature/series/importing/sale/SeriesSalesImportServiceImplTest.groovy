@@ -17,6 +17,9 @@
  */
 package ru.mystamps.web.feature.series.importing.sale
 
+import ru.mystamps.web.feature.series.DownloaderService
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
@@ -25,11 +28,19 @@ import spock.lang.Specification
 class SeriesSalesImportServiceImplTest extends Specification {
 	
 	private final SeriesSalesImportDao seriesSalesImportDao = Mock()
+	private final DownloaderService downloaderService = Mock()
+	private final SiteParserService siteParserService = Mock()
+	private final SeriesInfoExtractorService extractorService = Mock()
 	
 	private SeriesSalesImportService service
 	
 	def setup() {
-		service = new SeriesSalesImportServiceImpl(seriesSalesImportDao)
+		service = new SeriesSalesImportServiceImpl(
+			seriesSalesImportDao,
+			downloaderService,
+			siteParserService,
+			extractorService
+		)
 	}
 	
 	//

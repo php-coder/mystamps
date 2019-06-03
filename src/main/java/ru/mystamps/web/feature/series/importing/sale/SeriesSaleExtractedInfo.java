@@ -17,8 +17,15 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-public interface SeriesSalesImportService {
-	SeriesSaleExtractedInfo downloadAndParse(String url);
-	void saveParsedData(Integer requestId, SeriesSalesParsedDataDbDto seriesSalesParsedData);
-	SeriesSaleParsedDataDto getParsedData(Integer requestId);
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Getter
+@RequiredArgsConstructor
+public class SeriesSaleExtractedInfo {
+	private final Integer sellerId;
+	private final BigDecimal price;
+	private final String currency;
 }

@@ -36,6 +36,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	
 	private static final int NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES = 6;
 	private static final int NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE = 7;
+	private static final int NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE = 7;
 	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
 	
 	//
@@ -207,7 +208,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
 
-			// test only a directive that is differ from the index page
+			// test only the directives that are differ from the index page
 			assertThat(
 				directives,
 				hasItemInArray(
@@ -218,8 +219,10 @@ public class ContentSecurityPolicyHeaderWriterTest {
 				)
 			);
 
+			assertThat(directives, hasItemInArray("connect-src 'self'"));
+			
 			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE)));
 		}
 	}
 	
@@ -231,7 +234,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
 
-			// test only a directive that is differ from the index page
+			// test only the directives that are differ from the index page
 			assertThat(
 				directives,
 				hasItemInArray(
@@ -242,9 +245,11 @@ public class ContentSecurityPolicyHeaderWriterTest {
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
 			);
+			
+			assertThat(directives, hasItemInArray("connect-src 'self'"));
 
 			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE)));
 		}
 	}
 	

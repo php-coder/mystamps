@@ -19,12 +19,75 @@ package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
+import ru.mystamps.web.feature.series.DownloadResult;
+import ru.mystamps.web.feature.series.DownloaderService;
+import ru.mystamps.web.feature.series.importing.RawParsedDataDto;
+import ru.mystamps.web.feature.series.importing.SeriesExtractedInfo;
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
+import ru.mystamps.web.feature.series.importing.extractor.SeriesInfo;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParser;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
+import ru.mystamps.web.support.spring.security.HasAuthority;
 
 @RequiredArgsConstructor
 public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 	
 	private final SeriesSalesImportDao seriesSalesImportDao;
+	private final DownloaderService downloaderService;
+	private final SiteParserService siteParserService;
+	private final SeriesInfoExtractorService extractorService;
+	
+	// @todo #995 SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.IMPORT_SERIES)
+	@SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
+	public SeriesSaleExtractedInfo downloadAndParse(String url) {
+		SiteParser parser = siteParserService.findForUrl(url);
+		if (parser == null) {
+			throw new RuntimeException("could not find an appropriate parser");
+		}
+		
+		DownloadResult result = downloaderService.download(url);
+		if (result.hasFailed()) {
+			String message = "could not download: " + result.getCode();
+			throw new RuntimeException(message);
+		}
+		
+		String content = result.getDataAsString();
+		
+		// @todo #995 SiteParser: introduce a method for parsing only sales-related info
+		SeriesInfo info = parser.parse(content);
+		if (info.isEmpty()) {
+			throw new RuntimeException("could not parse the page");
+		}
+		
+		RawParsedDataDto data = new RawParsedDataDto(
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			info.getSellerName(),
+			info.getSellerUrl(),
+			info.getPrice(),
+			info.getCurrency()
+		);
+		
+		// CheckStyle: ignore LineLength for next 1 line
+		// @todo #995 SeriesInfoExtractorService: introduce a method for parsing only sales-related info
+		SeriesExtractedInfo seriesInfo = extractorService.extract(url, data);
+		
+		return new SeriesSaleExtractedInfo(
+			seriesInfo.getSellerId(),
+			seriesInfo.getPrice(),
+			seriesInfo.getCurrency()
+		);
+	}
 	
 	// @todo #834 SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates
 	@Override

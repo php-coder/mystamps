@@ -55,3 +55,14 @@ Link Should Point To
 	[Arguments]      ${locator}  ${expectedUrl}
 	${url}=          Get Element Attribute  ${locator}@href
 	Should Be Equal  ${expectedUrl}  ${url}
+
+Wait Until Element Value Is
+	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Textfield Value Should Be" keywords
+	[Arguments]         ${id}  ${text}
+	${elemHasValue}=    Catenate  SEPARATOR=
+	...                 var el = window.document.getElementById('
+	...                 ${id}
+	...                 '); return el != null && el.value == '
+	...                 ${text}
+	...                 ';
+	Wait For Condition  ${elemHasValue}

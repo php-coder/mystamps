@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesController;
@@ -67,11 +68,13 @@ public class SeriesImportConfig {
 		private final ParticipantService participantService;
 		private final SeriesService seriesService;
 		private final SeriesSalesService seriesSalesService;
-		private final SeriesSalesImportService seriesSalesImportService;
 		private final ApplicationEventPublisher eventPublisher;
 		
 		@Bean
-		public SeriesImportService seriesImportService(SeriesImportDao seriesImportDao) {
+		public SeriesImportService seriesImportService(
+			SeriesImportDao seriesImportDao,
+			@Lazy SeriesSalesImportService seriesSalesImportService) {
+			
 			return new SeriesImportServiceImpl(
 				LoggerFactory.getLogger(SeriesImportServiceImpl.class),
 				seriesImportDao,

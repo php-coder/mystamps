@@ -18,26 +18,53 @@
 package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.feature.series.DownloaderService;
+import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
+import ru.mystamps.web.feature.series.importing.extractor.SiteParserService;
 
 /**
  * Spring configuration that is required for importing series sale in an application.
+ *
+ *  The beans are grouped into two classes to make possible to register a controller
+ *  and the services in the separated application contexts.
  */
 @Configuration
 public class SeriesSalesImportConfig {
 	
 	@RequiredArgsConstructor
+	public static class Controllers {
+		
+		private final SeriesSalesImportService seriesSalesImportService;
+		
+		@Bean
+		public SeriesSaleImportController seriesSaleImportController() {
+			return new SeriesSaleImportController(seriesSalesImportService);
+		}
+		
+	}
+	
+	@RequiredArgsConstructor
 	public static class Services {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final SiteParserService siteParserService;
+		private final SeriesInfoExtractorService extractorService;
 		
 		@Bean
 		public SeriesSalesImportService seriesSalesImportService(
-			SeriesSalesImportDao seriesSalesImportDao) {
+			SeriesSalesImportDao seriesSalesImportDao,
+			@Qualifier("seriesDownloaderService") DownloaderService seriesDownloaderService) {
 			
-			return new SeriesSalesImportServiceImpl(seriesSalesImportDao);
+			return new SeriesSalesImportServiceImpl(
+				seriesSalesImportDao,
+				seriesDownloaderService,
+				siteParserService,
+				extractorService
+			);
 		}
 		
 		@Bean

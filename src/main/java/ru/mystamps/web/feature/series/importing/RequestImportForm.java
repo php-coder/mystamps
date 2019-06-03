@@ -38,8 +38,14 @@ import static ru.mystamps.web.validation.ValidationRules.IMPORT_REQUEST_URL_MAX_
 })
 public class RequestImportForm implements RequestImportDto {
 	
+	// @todo #995 Series sale import: use its own interface and form
+	// @todo #995 /series/sales/import: validate that we have a parser for this url
 	@NotEmpty(groups = Group.Level1.class)
 	@Size(
+		// For series sales a max length is SERIES_SALES_URL_MAX_LENGTH but since they are equal,
+		// we use IMPORT_REQUEST_URL_MAX_LENGTH here.
+		// Also, as the import saves nothing, this check actually isn't required. Perhaps,
+		// we shouldn't validate on this stage and let it fail later, during a sale creation.
 		max = IMPORT_REQUEST_URL_MAX_LENGTH,
 		message = "{value.too-long}",
 		groups = Group.Level2.class

@@ -38,6 +38,7 @@ import ru.mystamps.web.feature.report.ReportConfig;
 import ru.mystamps.web.feature.series.SeriesConfig;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 
 @Configuration
 @RequiredArgsConstructor
@@ -50,7 +51,8 @@ import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 	ParticipantConfig.Controllers.class,
 	ReportConfig.Controllers.class,
 	SeriesConfig.Controllers.class,
-	SeriesImportConfig.Controllers.class
+	SeriesImportConfig.Controllers.class,
+	SeriesSalesImportConfig.Controllers.class
 })
 public class ControllersConfig {
 	

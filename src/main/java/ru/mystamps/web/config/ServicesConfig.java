@@ -127,7 +127,7 @@ public class ServicesConfig {
 		);
 	}
 	
-	@Bean
+	@Bean(name = "seriesDownloaderService")
 	public DownloaderService getSeriesDownloaderService() {
 		return new TimedDownloaderService(
 			LoggerFactory.getLogger(TimedDownloaderService.class),
