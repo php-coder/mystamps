@@ -22,7 +22,6 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import ru.mystamps.web.service.MailgunEmail;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
 import javax.mail.internet.InternetAddress;

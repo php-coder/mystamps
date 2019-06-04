@@ -17,8 +17,6 @@
  */
 package ru.mystamps.web.support.mailgun;
 
-import ru.mystamps.web.service.MailgunEmail;
-
 /**
  * Sending e-mails with Mailgun service.
  */
