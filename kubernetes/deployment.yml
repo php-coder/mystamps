@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mystamps
+  name: mystamps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mystamps
+  template:
+    metadata:
+      labels:
+        app: mystamps
+    spec:
+      containers:
+      - image: phpcoder/mystamps:latest
+        name: mystamps
