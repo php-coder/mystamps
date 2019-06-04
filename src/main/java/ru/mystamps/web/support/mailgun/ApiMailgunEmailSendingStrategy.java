@@ -31,7 +31,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import ru.mystamps.web.service.MailgunEmail;
-import ru.mystamps.web.service.MailgunEmailSendingStrategy;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
 import javax.mail.internet.InternetAddress;

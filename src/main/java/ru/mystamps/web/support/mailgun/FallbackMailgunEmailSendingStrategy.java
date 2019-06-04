@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.mystamps.web.service.MailgunEmail;
-import ru.mystamps.web.service.MailgunEmailSendingStrategy;
 import ru.mystamps.web.support.togglz.Features;
 
 @RequiredArgsConstructor

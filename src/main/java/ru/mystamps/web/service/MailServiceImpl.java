@@ -29,6 +29,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.report.ReportService;
+import ru.mystamps.web.support.mailgun.MailgunEmailSendingStrategy;
 
 import java.util.HashMap;
 import java.util.Locale;
