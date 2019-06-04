@@ -28,7 +28,7 @@ public interface MailgunEmailSendingStrategy {
 	 * Send an e-mail.
 	 *
 	 * @param email data and meta-data for sending an e-mail
-	 * @throws ru.mystamps.web.service.exception.EmailSendingException when any error occurs
+	 * @throws EmailSendingException when any error occurs
 	 * @see ApiMailgunEmailSendingStrategy
 	 * @see SmtpMailgunEmailSendingStrategy
 	 * @see <a href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging">Tagging</a>
