@@ -48,7 +48,6 @@ import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
-import ru.mystamps.web.service.ApiMailgunEmailSendingStrategy;
 import ru.mystamps.web.service.CronService;
 import ru.mystamps.web.service.CronServiceImpl;
 import ru.mystamps.web.service.FallbackMailgunEmailSendingStrategy;
@@ -59,6 +58,7 @@ import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.service.SiteServiceImpl;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
+import ru.mystamps.web.support.mailgun.ApiMailgunEmailSendingStrategy;
 import ru.mystamps.web.support.mailgun.SmtpMailgunEmailSendingStrategy;
 
 import java.util.Locale;
