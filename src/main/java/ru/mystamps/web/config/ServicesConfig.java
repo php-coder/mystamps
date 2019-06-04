@@ -57,9 +57,9 @@ import ru.mystamps.web.service.MailServiceImpl;
 import ru.mystamps.web.service.MailgunEmailSendingStrategy;
 import ru.mystamps.web.service.SiteService;
 import ru.mystamps.web.service.SiteServiceImpl;
-import ru.mystamps.web.service.SmtpMailgunEmailSendingStrategy;
 import ru.mystamps.web.service.SuspiciousActivityService;
 import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
+import ru.mystamps.web.support.mailgun.SmtpMailgunEmailSendingStrategy;
 
 import java.util.Locale;
 

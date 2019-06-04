@@ -15,13 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.support.mailgun;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import ru.mystamps.web.service.MailgunEmail;
+import ru.mystamps.web.service.MailgunEmailSendingStrategy;
 import ru.mystamps.web.service.exception.EmailSendingException;
 
 import javax.mail.internet.InternetAddress;

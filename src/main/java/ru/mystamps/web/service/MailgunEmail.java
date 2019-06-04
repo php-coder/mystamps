@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Getter
 @Setter
-class MailgunEmail {
+public class MailgunEmail {
 	private String recipientAddress;
 	private String senderAddress;
 	private String senderName;
