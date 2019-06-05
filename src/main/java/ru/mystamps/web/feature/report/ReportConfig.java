@@ -22,7 +22,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import ru.mystamps.web.service.CronService;
+import ru.mystamps.web.feature.site.CronService;
 
 import java.util.Locale;
 

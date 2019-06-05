@@ -22,7 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.service.CronService;
+import ru.mystamps.web.feature.site.CronService;
 
 /**
  * @author Maxim Shestakov

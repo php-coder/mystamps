@@ -48,7 +48,7 @@ import ru.mystamps.web.feature.series.TimedDownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.series.sale.SeriesSalesConfig;
-import ru.mystamps.web.service.CronService;
+import ru.mystamps.web.feature.site.CronService;
 import ru.mystamps.web.service.CronServiceImpl;
 import ru.mystamps.web.service.MailService;
 import ru.mystamps.web.service.MailServiceImpl;
