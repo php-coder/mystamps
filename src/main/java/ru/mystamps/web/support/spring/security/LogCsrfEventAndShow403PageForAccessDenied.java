@@ -21,7 +21,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.csrf.InvalidCsrfTokenException;
 import org.springframework.security.web.csrf.MissingCsrfTokenException;
-import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.feature.site.SiteService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

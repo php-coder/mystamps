@@ -24,7 +24,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import ru.mystamps.web.service.SiteService;
+import ru.mystamps.web.feature.site.SiteService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
