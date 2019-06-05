@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.dao.impl.JdbcSuspiciousActivityDao;
+import ru.mystamps.web.feature.site.JdbcSuspiciousActivityDao;
 import ru.mystamps.web.feature.site.SuspiciousActivityDao;
 
 @Configuration
