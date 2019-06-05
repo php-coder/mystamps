@@ -9,7 +9,6 @@
 	<suppress checks="Translation" files="src[/\\]main[/\\]resources[/\\]sql" />
 	
 	<!-- Too long link -->
-	<suppress checks="LineLength" files="src[/\\]main[/\\]java[/\\]ru[/\\]mystamps[/\\]web[/\\]dao[/\\]impl[/\\]package-info.java" />
 	<suppress checks="LineLength" files="ru.mystamps.web.support.thymeleaf.GroupByParent" />
 	
 	<!-- Packages in the tests don't need javadocs as they don't appear in the generated API docs -->
