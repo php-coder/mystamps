@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import ru.mystamps.web.controller.SitemapController;
 import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -39,6 +38,7 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.site.ErrorController;
 import ru.mystamps.web.feature.site.RobotsTxtController;
 import ru.mystamps.web.feature.site.SiteController;
+import ru.mystamps.web.feature.site.SitemapController;
 
 @Configuration
 @RequiredArgsConstructor
