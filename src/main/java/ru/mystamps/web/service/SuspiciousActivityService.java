@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service;
 
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 
 import java.util.Date;
 import java.util.List;

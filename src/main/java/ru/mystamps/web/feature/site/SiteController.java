@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
-import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryService;
