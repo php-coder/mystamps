@@ -19,8 +19,8 @@ package ru.mystamps.web.service
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.Db
-import ru.mystamps.web.dao.SuspiciousActivityDao
 import ru.mystamps.web.feature.site.AddSuspiciousActivityDbDto
+import ru.mystamps.web.feature.site.SuspiciousActivityDao
 import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
 import spock.lang.Unroll

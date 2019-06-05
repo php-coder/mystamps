@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.service
 
-import ru.mystamps.web.dao.SuspiciousActivityDao
+import ru.mystamps.web.feature.site.SuspiciousActivityDao
 import ru.mystamps.web.feature.site.SuspiciousActivityDto
 import spock.lang.Specification
 import spock.lang.Unroll
