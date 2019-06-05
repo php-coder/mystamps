@@ -22,8 +22,8 @@ import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.dao.dto.SuspiciousActivityDto;
+import ru.mystamps.web.feature.site.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 import java.util.Collections;

@@ -25,7 +25,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.Db;
 import ru.mystamps.web.dao.SuspiciousActivityDao;
-import ru.mystamps.web.dao.dto.AddSuspiciousActivityDbDto;
+import ru.mystamps.web.feature.site.AddSuspiciousActivityDbDto;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
