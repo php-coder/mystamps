@@ -222,6 +222,20 @@
 			</exclusions>
 		</dependency>
 		
+		<!--
+			Isn't being used by default but can be activated by overriding the following properties:
+			- spring.datasource.url (jdbc:postgresql://localhost:5432/mystamps)
+			- spring.datasource.username
+			- spring.datasource.password
+			- spring.datasource.driver-class-name (org.postgresql.Driver)
+		-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
@@ -530,6 +544,10 @@
 		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<postgresql.version>9.4.1212.jre7</postgresql.version>
+		
 		<resources.plugin.version>3.1.0</resources.plugin.version>
 		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>
 		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
