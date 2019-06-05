@@ -24,6 +24,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.site.SuspiciousActivityDao;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
+import ru.mystamps.web.feature.site.SuspiciousActivityService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Date;

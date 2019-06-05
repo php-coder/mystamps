@@ -24,9 +24,10 @@ import ru.mystamps.web.feature.account.UsersActivationService
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService
+import ru.mystamps.web.feature.report.AdminDailyReport
 import ru.mystamps.web.feature.series.SeriesService
 import ru.mystamps.web.feature.site.CronService
-import ru.mystamps.web.feature.report.AdminDailyReport
+import ru.mystamps.web.feature.site.SuspiciousActivityService
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
