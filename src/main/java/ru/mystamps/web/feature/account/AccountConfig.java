@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.mystamps.web.feature.collection.CollectionService;
-import ru.mystamps.web.service.MailService;
+import ru.mystamps.web.feature.site.MailService;
 
 /**
  * Spring configuration that is required for having user accounts in an application.

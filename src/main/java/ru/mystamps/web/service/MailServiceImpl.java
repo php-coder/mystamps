@@ -30,6 +30,7 @@ import ru.mystamps.web.feature.account.SendUsersActivationDto;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.report.ReportService;
 import ru.mystamps.web.feature.site.CronService;
+import ru.mystamps.web.feature.site.MailService;
 import ru.mystamps.web.support.mailgun.MailgunEmail;
 import ru.mystamps.web.support.mailgun.MailgunEmailSendingStrategy;
 

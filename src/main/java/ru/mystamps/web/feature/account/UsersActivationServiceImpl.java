@@ -23,7 +23,7 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mystamps.web.service.MailService;
+import ru.mystamps.web.feature.site.MailService;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.validation.ValidationRules;
