@@ -5,15 +5,6 @@
 	xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
 	
 	<Match>
-		<!--
-			Our DTO classes expose it's internal representation.
-			Most of the time because they're using Date class and
-			storing data in byte[].
-		-->
-		<Class name="~.*\.dto\..*" />
-		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
-	</Match>
-	<Match>
 		<Class name="ru.mystamps.web.feature.account.AddUserDbDto" />
 		<Or>
 			<Method name="getActivatedAt" />
@@ -222,6 +213,16 @@
 			<Method name="getUpdatedAt" />
 			<Method name="setUpdatedAt" />
 		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<!-- @todo #493 AddSuspiciousActivityDbDto: port to a new datetime API -->
+		<Class name="ru.mystamps.web.feature.site.AddSuspiciousActivityDbDto" />
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
+		<!-- @todo #493 SuspiciousActivityDto: port to a new datetime API -->
+		<Class name="ru.mystamps.web.feature.site.SuspiciousActivityDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	
