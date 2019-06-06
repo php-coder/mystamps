@@ -9,10 +9,10 @@
 		
 		<preConditions>
 			<sqlCheck expectedResult="0">
-				SELECT COUNT(*) as num
+				SELECT COUNT(*)
 				FROM categories
 				GROUP BY slug
-				HAVING num > 1
+				HAVING COUNT(*) > 1
 				UNION SELECT 0
 			</sqlCheck>
 		</preConditions>
