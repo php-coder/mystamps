@@ -19,9 +19,15 @@
 			We can't use modifyDataType because it looses not null setting:
 			http://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
 		-->
-		<sql>
+		<sql dbms="mysql,h2">
 			ALTER TABLE users
 			MODIFY COLUMN hash VARCHAR(60) NOT NULL
+		</sql>
+		
+		<sql dbms="postgresql">
+			ALTER TABLE users
+			ALTER COLUMN hash
+			TYPE VARCHAR(60)
 		</sql>
 		
 	</changeSet>
