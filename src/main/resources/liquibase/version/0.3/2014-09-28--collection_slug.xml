@@ -18,9 +18,19 @@
 		<comment>Sets value of slug field to transformed collection's owner's name</comment>
 		
 		<!-- Unfortunately, H2 doesn't support UPDATE with JOIN -->
-		<sql>
+		<sql dbms="mysql,h2">
 			UPDATE collections c
 			SET c.slug = (
+				SELECT LOWER(REPLACE(u.login, ' ', '-'))
+				FROM users u
+				WHERE u.id = c.user_id
+			);
+		</sql>
+		
+		<!-- In PostgreSQL it is illegal to prefix columns with table alias in the SET clause -->
+		<sql dbms="postgresql">
+			UPDATE collections c
+			SET slug = (
 				SELECT LOWER(REPLACE(u.login, ' ', '-'))
 				FROM users u
 				WHERE u.id = c.user_id
