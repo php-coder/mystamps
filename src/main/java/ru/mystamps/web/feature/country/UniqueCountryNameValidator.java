@@ -44,8 +44,9 @@ public class UniqueCountryNameValidator implements ConstraintValidator<UniqueCou
 		
 		if (lang == Lang.EN && countryService.countByName(value) > 0) {
 			return false;
+		}
 		
-		} else if (lang == Lang.RU && countryService.countByNameRu(value) > 0) {
+		if (lang == Lang.RU && countryService.countByNameRu(value) > 0) {
 			return false;
 		}
 		

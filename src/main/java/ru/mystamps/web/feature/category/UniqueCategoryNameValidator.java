@@ -45,8 +45,9 @@ public class UniqueCategoryNameValidator
 		
 		if (lang == Lang.EN && categoryService.countByName(value) > 0) {
 			return false;
+		}
 		
-		} else if (lang == Lang.RU && categoryService.countByNameRu(value) > 0) {
+		if (lang == Lang.RU && categoryService.countByNameRu(value) > 0) {
 			return false;
 		}
 		
