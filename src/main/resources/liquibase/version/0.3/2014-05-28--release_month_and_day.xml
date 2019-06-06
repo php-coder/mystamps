@@ -35,9 +35,15 @@
 	<changeSet id="fill-release_year-column-based-on-values-from-released_at" author="php-coder" context="test-data, prod-data">
 		<comment>Migrates data from series.released_at to series.release_year</comment>
 		
-		<sql>
+		<sql dbms="mysql,h2">
 			UPDATE series
 			SET release_year=YEAR(released_at)
+			WHERE released_at IS NOT NULL
+		</sql>
+		
+		<sql dbms="postgresql">
+			UPDATE series
+			SET release_year=EXTRACT(YEAR FROM released_at)
 			WHERE released_at IS NOT NULL
 		</sql>
 		
