@@ -34,9 +34,16 @@
 		
 		<comment>Migrates data from series.image_url to series_images</comment>
 		
-		<sql>
+		<sql dbms="mysql,h2">
 			INSERT INTO series_images(series_id, image_id)
 			SELECT id AS series_id, REPLACE(image_url, '/image/', '') AS image_id
+			FROM series
+		</sql>
+		
+		<!-- PostgreSQL requires us to cast a string to an integer explicitly -->
+		<sql dbms="postgresql">
+			INSERT INTO series_images(series_id, image_id)
+			SELECT id AS series_id, CAST(REPLACE(image_url, '/image/', '') AS INT) AS image_id
 			FROM series
 		</sql>
 		
