@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.site
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity
+import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivityType
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
@@ -64,7 +65,7 @@ class SiteServiceImplTest extends Specification {
 			)
 		then:
 			1 * serviceImpl.logEvent(
-				SiteServiceImpl.PAGE_NOT_FOUND,
+				SuspiciousActivityType.PAGE_NOT_FOUND,
 				TEST_PAGE,
 				TEST_METHOD,
 				expectedUserId,
@@ -98,7 +99,7 @@ class SiteServiceImplTest extends Specification {
 			)
 		then:
 			1 * serviceImpl.logEvent(
-				SiteServiceImpl.AUTHENTICATION_FAILED,
+				SuspiciousActivityType.AUTHENTICATION_FAILED,
 				TEST_PAGE,
 				TEST_METHOD,
 				expectedUserId,

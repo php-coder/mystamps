@@ -32,6 +32,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivityType;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Calendar;
@@ -85,25 +86,25 @@ public class CronServiceImpl implements CronService {
 		report.setRegisteredUsersCounter(userService.countRegisteredSince(yesterday));
 		
 		long notFoundCounter = suspiciousActivityService.countByTypeSince(
-			SiteServiceImpl.PAGE_NOT_FOUND,
+			SuspiciousActivityType.PAGE_NOT_FOUND,
 			yesterday
 		);
 		report.setNotFoundCounter(notFoundCounter);
 		
 		long failedAuthCounter = suspiciousActivityService.countByTypeSince(
-			SiteServiceImpl.AUTHENTICATION_FAILED,
+			SuspiciousActivityType.AUTHENTICATION_FAILED,
 			yesterday
 		);
 		report.setFailedAuthCounter(failedAuthCounter);
 		
 		long missingCsrfCounter = suspiciousActivityService.countByTypeSince(
-			SiteServiceImpl.MISSING_CSRF_TOKEN,
+			SuspiciousActivityType.MISSING_CSRF_TOKEN,
 			yesterday
 		);
 		report.setMissingCsrfCounter(missingCsrfCounter);
 		
 		long invalidCsrfCounter = suspiciousActivityService.countByTypeSince(
-			SiteServiceImpl.INVALID_CSRF_TOKEN,
+			SuspiciousActivityType.INVALID_CSRF_TOKEN,
 			yesterday
 		);
 		report.setInvalidCsrfCounter(invalidCsrfCounter);

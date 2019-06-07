@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity;
+import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivityType;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,16 +32,6 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
-	
-	// see initiate-suspicious_activities_types-table changeset
-	// in src/main/resources/liquibase/initial-state.xml
-	public static final String PAGE_NOT_FOUND = "PageNotFound";
-	public static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
-	
-	// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
-	// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
-	public static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
-	public static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	
 	private final Logger log;
 	private final SuspiciousActivityDao suspiciousActivities;
@@ -57,7 +48,16 @@ public class SiteServiceImpl implements SiteService {
 			String referer,
 			String agent) {
 		
-		logEvent(PAGE_NOT_FOUND, page, method, userId, ip, referer, agent, new Date());
+		logEvent(
+			SuspiciousActivityType.PAGE_NOT_FOUND,
+			page,
+			method,
+			userId,
+			ip,
+			referer,
+			agent,
+			new Date()
+		);
 	}
 	
 	@Override
@@ -72,7 +72,16 @@ public class SiteServiceImpl implements SiteService {
 			String agent,
 			Date date) {
 		
-		logEvent(AUTHENTICATION_FAILED, page, method, userId, ip, referer, agent, date);
+		logEvent(
+			SuspiciousActivityType.AUTHENTICATION_FAILED,
+			page,
+			method,
+			userId,
+			ip,
+			referer,
+			agent,
+			date
+		);
 	}
 	
 	/**
@@ -83,7 +92,7 @@ public class SiteServiceImpl implements SiteService {
 	public void logAboutMissingCsrfToken(HttpServletRequest request) {
 		
 		logEvent(
-			MISSING_CSRF_TOKEN,
+			SuspiciousActivityType.MISSING_CSRF_TOKEN,
 			request.getRequestURI(),
 			request.getMethod(),
 			SecurityContextUtils.getUserId(),
@@ -103,7 +112,7 @@ public class SiteServiceImpl implements SiteService {
 	public void logAboutInvalidCsrfToken(HttpServletRequest request) {
 		
 		logEvent(
-			INVALID_CSRF_TOKEN,
+			SuspiciousActivityType.INVALID_CSRF_TOKEN,
 			request.getRequestURI(),
 			request.getMethod(),
 			SecurityContextUtils.getUserId(),

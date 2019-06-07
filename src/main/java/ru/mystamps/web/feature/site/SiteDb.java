@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.site;
 
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 final class SiteDb {
 	
 	static final class SuspiciousActivity {
@@ -24,6 +25,18 @@ final class SiteDb {
 		static final int METHOD_LENGTH       = 7;
 		static final int REFERER_PAGE_LENGTH = 255;
 		static final int USER_AGENT_LENGTH   = 255;
+	}
+	
+	static final class SuspiciousActivityType {
+		// see initiate-suspicious_activities_types-table changeset
+		// in src/main/resources/liquibase/initial-state.xml
+		static final String PAGE_NOT_FOUND        = "PageNotFound";
+		static final String AUTHENTICATION_FAILED = "AuthenticationFailed";
+		
+		// see add-types-for-csrf-tokens-to-suspicious_activities_types-table changeset
+		// in src/main/resources/liquibase/version/0.4/2016-02-19--csrf_events.xml
+		static final String MISSING_CSRF_TOKEN = "MissingCsrfToken";
+		static final String INVALID_CSRF_TOKEN = "InvalidCsrfToken";
 	}
 	
 }
