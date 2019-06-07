@@ -18,6 +18,8 @@
 package ru.mystamps.web.validation;
 
 import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.account.AccountDb.User;
+import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
@@ -27,12 +29,12 @@ import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
 public final class ValidationRules {
 	
 	public static final int LOGIN_MIN_LENGTH = 2;
-	public static final int LOGIN_MAX_LENGTH = Db.User.LOGIN_LENGTH;
+	public static final int LOGIN_MAX_LENGTH = User.LOGIN_LENGTH;
 	public static final String LOGIN_REGEXP = "[-_\\.a-zA-Z0-9]+";
 	@SuppressWarnings("PMD.LongVariable")
 	public static final String LOGIN_NO_REPEATING_CHARS_REGEXP = "(?!.+[-_.]{2,}).+";
 	
-	public static final int NAME_MAX_LENGTH = Db.User.NAME_LENGTH;
+	public static final int NAME_MAX_LENGTH = User.NAME_LENGTH;
 	public static final String NAME_REGEXP = "[- \\p{L}]+";
 	public static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	
@@ -41,9 +43,9 @@ public final class ValidationRules {
 	// See also: http://www.mscharhag.com/software-development/bcrypt-maximum-password-length
 	public static final int PASSWORD_MAX_LENGTH = 72;
 	
-	public static final int EMAIL_MAX_LENGTH = Db.UsersActivation.EMAIL_LENGTH;
+	public static final int EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;
 	
-	public static final int ACT_KEY_LENGTH = Db.UsersActivation.ACTIVATION_KEY_LENGTH;
+	public static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
 	
 	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
