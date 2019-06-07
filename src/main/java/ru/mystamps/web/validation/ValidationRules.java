@@ -18,6 +18,7 @@
 package ru.mystamps.web.validation;
 
 import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
 
 // it complains on "PMD.LongVariable"
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -68,8 +69,8 @@ public final class ValidationRules {
 	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
 	
 	public static final int PARTICIPANT_NAME_MIN_LENGTH = 3;
-	public static final int PARTICIPANT_NAME_MAX_LENGTH = Db.TransactionParticipant.NAME_LENGTH;
-	public static final int PARTICIPANT_URL_MAX_LENGTH  = Db.TransactionParticipant.URL_LENGTH;
+	public static final int PARTICIPANT_NAME_MAX_LENGTH = TransactionParticipant.NAME_LENGTH;
+	public static final int PARTICIPANT_URL_MAX_LENGTH  = TransactionParticipant.URL_LENGTH;
 	
 	public static final int SERIES_SALES_URL_MAX_LENGTH = Db.SeriesSales.TRANSACTION_URL_LENGTH;
 	
