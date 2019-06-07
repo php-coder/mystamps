@@ -41,10 +41,21 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.controller.converter.LinkEntityDtoGenericConverter;
+import ru.mystamps.web.feature.account.AccountConfig;
+import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.collection.CollectionConfig;
+import ru.mystamps.web.feature.country.CountryConfig;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.image.ImageConfig;
+import ru.mystamps.web.feature.participant.ParticipantConfig;
+import ru.mystamps.web.feature.report.ReportConfig;
 import ru.mystamps.web.feature.series.DownloadImageInterceptor;
+import ru.mystamps.web.feature.series.SeriesConfig;
+import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.event.EventsConfig;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
+import ru.mystamps.web.feature.site.SiteConfig;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
@@ -55,7 +66,17 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableScheduling
 @Import({
-	ControllersConfig.class,
+	AccountConfig.Controllers.class,
+	CategoryConfig.Controllers.class,
+	CollectionConfig.Controllers.class,
+	CountryConfig.Controllers.class,
+	ImageConfig.Controllers.class,
+	ParticipantConfig.Controllers.class,
+	ReportConfig.Controllers.class,
+	SeriesConfig.Controllers.class,
+	SeriesImportConfig.Controllers.class,
+	SeriesSalesImportConfig.Controllers.class,
+	SiteConfig.Controllers.class,
 	EventsConfig.class,
 })
 @RequiredArgsConstructor

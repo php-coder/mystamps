@@ -24,6 +24,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -41,8 +42,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import ru.mystamps.web.Url;
-import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.account.UserService;
+import ru.mystamps.web.feature.site.SiteService;
 
 import javax.servlet.Filter;
 import java.util.Collections;
@@ -55,10 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private MessageSource messageSource;
 	
 	@Autowired
-	private ServicesConfig servicesConfig;
-	
-	@Autowired
 	private Environment environment;
+	
+	@Lazy
+	@Autowired
+	private SiteService siteService;
 	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
@@ -139,15 +141,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public ApplicationListener<AuthenticationFailureBadCredentialsEvent> getApplicationListener() {
-		return new AuthenticationFailureListener(servicesConfig.getSiteService());
+		return new AuthenticationFailureListener(siteService);
 	}
 	
 	@Bean
 	public AccessDeniedHandler getAccessDeniedHandler() {
-		return new LogCsrfEventAndShow403PageForAccessDenied(
-			servicesConfig.getSiteService(),
-			Url.FORBIDDEN_PAGE
-		);
+		return new LogCsrfEventAndShow403PageForAccessDenied(siteService, Url.FORBIDDEN_PAGE);
 	}
 	
 	@Bean
