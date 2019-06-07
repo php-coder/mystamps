@@ -55,7 +55,7 @@ import ru.mystamps.web.feature.site.MailServiceImpl;
 import ru.mystamps.web.feature.site.SiteService;
 import ru.mystamps.web.feature.site.SiteServiceImpl;
 import ru.mystamps.web.feature.site.SuspiciousActivityService;
-import ru.mystamps.web.service.SuspiciousActivityServiceImpl;
+import ru.mystamps.web.feature.site.SuspiciousActivityServiceImpl;
 import ru.mystamps.web.support.mailgun.ApiMailgunEmailSendingStrategy;
 import ru.mystamps.web.support.mailgun.FallbackMailgunEmailSendingStrategy;
 import ru.mystamps.web.support.mailgun.MailgunEmailSendingStrategy;
