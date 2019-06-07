@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.site;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DatePrinter;
@@ -29,8 +29,6 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.report.ReportService;
-import ru.mystamps.web.feature.site.CronService;
-import ru.mystamps.web.feature.site.MailService;
 import ru.mystamps.web.support.mailgun.MailgunEmail;
 import ru.mystamps.web.support.mailgun.MailgunEmailSendingStrategy;
 
