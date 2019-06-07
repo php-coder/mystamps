@@ -23,7 +23,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -151,17 +151,25 @@ public class SiteServiceImpl implements SiteService {
 	 * @author Aleksandr Zorin
 	 */
 	private String abbreviateMethod(String method) {
-		return abbreviateIfLengthGreaterThan(method, Db.SuspiciousActivity.METHOD_LENGTH, "method");
+		return abbreviateIfLengthGreaterThan(
+			method,
+			SuspiciousActivity.METHOD_LENGTH,
+			"method"
+		);
 	}
 	
 	private String abbreviatePage(String page) {
-		return abbreviateIfLengthGreaterThan(page, Db.SuspiciousActivity.PAGE_URL_LENGTH, "page");
+		return abbreviateIfLengthGreaterThan(
+			page,
+			SuspiciousActivity.PAGE_URL_LENGTH,
+			"page"
+		);
 	}
 	
 	private String abbreviateRefererPage(String referer) {
 		return abbreviateIfLengthGreaterThan(
 			referer,
-			Db.SuspiciousActivity.REFERER_PAGE_LENGTH,
+			SuspiciousActivity.REFERER_PAGE_LENGTH,
 			"referer_page"
 		);
 	}
@@ -169,7 +177,7 @@ public class SiteServiceImpl implements SiteService {
 	private String abbreviateUserAgent(String agent) {
 		return abbreviateIfLengthGreaterThan(
 			agent,
-			Db.SuspiciousActivity.USER_AGENT_LENGTH,
+			SuspiciousActivity.USER_AGENT_LENGTH,
 			"user_agent"
 		);
 	}

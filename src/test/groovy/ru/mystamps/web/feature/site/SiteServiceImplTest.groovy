@@ -18,7 +18,7 @@
 package ru.mystamps.web.feature.site
 
 import org.slf4j.helpers.NOPLogger
-import ru.mystamps.web.Db
+import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import spock.lang.Specification
@@ -187,9 +187,9 @@ class SiteServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logAboutAbsentPage() should pass abbreviated page when it's too long"() {
 		given:
-			String longPageUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.PAGE_URL_LENGTH)
+			String longPageUrl = '/long/url/' + ('x' * SuspiciousActivity.PAGE_URL_LENGTH)
 		and:
-			String expectedPageUrl = longPageUrl.take(Db.SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
+			String expectedPageUrl = longPageUrl.take(SuspiciousActivity.PAGE_URL_LENGTH - 3) + '...'
 		when:
 			serviceImpl.logEvent(TEST_TYPE, longPageUrl, TEST_METHOD, null, null, null, null, null)
 		then:
@@ -219,7 +219,7 @@ class SiteServiceImplTest extends Specification {
 		given:
 			String method = 'PROPFIND'
 		and:
-			String exceptedMethod = method.take(Db.SuspiciousActivity.METHOD_LENGTH - 3) + '...'
+			String exceptedMethod = method.take(SuspiciousActivity.METHOD_LENGTH - 3) + '...'
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, method, null, null, null, TEST_USER_AGENT, null)
 		then:
@@ -289,9 +289,9 @@ class SiteServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass abbreviated referer when it's too long"() {
 		given:
-			String longRefererUrl = '/long/url/' + ('x' * Db.SuspiciousActivity.REFERER_PAGE_LENGTH)
+			String longRefererUrl = '/long/url/' + ('x' * SuspiciousActivity.REFERER_PAGE_LENGTH)
 		and:
-			String expectedRefererUrl = longRefererUrl.take(Db.SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
+			String expectedRefererUrl = longRefererUrl.take(SuspiciousActivity.REFERER_PAGE_LENGTH - 3) + '...'
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, longRefererUrl, null, null)
 		then:
@@ -330,9 +330,9 @@ class SiteServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "logEvent() should pass abbreviated user agent when it's too long"() {
 		given:
-			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * Db.SuspiciousActivity.USER_AGENT_LENGTH)
+			String longUserAgent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/' + ('x' * SuspiciousActivity.USER_AGENT_LENGTH)
 		and:
-			String expectedUserAgent = longUserAgent.take(Db.SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
+			String expectedUserAgent = longUserAgent.take(SuspiciousActivity.USER_AGENT_LENGTH - 3) + '...'
 		when:
 			serviceImpl.logEvent(TEST_TYPE, TEST_PAGE, TEST_METHOD, null, null, null, longUserAgent, null)
 		then:
