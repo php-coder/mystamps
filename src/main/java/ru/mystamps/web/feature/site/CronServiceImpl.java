@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service;
+package ru.mystamps.web.feature.site;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
@@ -32,9 +32,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.feature.site.CronService;
-import ru.mystamps.web.feature.site.MailService;
-import ru.mystamps.web.feature.site.SuspiciousActivityService;
+import ru.mystamps.web.service.SiteServiceImpl;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Calendar;

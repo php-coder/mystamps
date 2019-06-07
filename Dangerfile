@@ -529,8 +529,8 @@ end
 # maven-surefire-plugin generates multiple XML files (one result file per test class).
 #
 # Example:
-# <testsuite name="ru.mystamps.web.service.CronServiceImplTest" time="0.175" tests="7" errors="0" skipped="0" failures="2">
-#   <testcase name="sendDailyStatistics() should prepare report and pass it to mail service" classname="ru.mystamps.web.service.CronServiceImplTest" time="0.107">
+# <testsuite name="ru.mystamps.web.feature.site.CronServiceImplTest" time="0.175" tests="7" errors="0" skipped="0" failures="2">
+#   <testcase name="sendDailyStatistics() should prepare report and pass it to mail service" classname="ru.mystamps.web.feature.site.CronServiceImplTest" time="0.107">
 #     <failure message="Condition not satisfied: bla bla bla" type="org.spockframework.runtime.SpockComparisonFailure">
 #       org.spockframework.runtime.SpockComparisonFailure: bla bla bla
 #     </failure>

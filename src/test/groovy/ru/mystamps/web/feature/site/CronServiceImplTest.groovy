@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.service
+package ru.mystamps.web.feature.site
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.account.UserService
@@ -26,9 +26,7 @@ import ru.mystamps.web.feature.collection.CollectionService
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.report.AdminDailyReport
 import ru.mystamps.web.feature.series.SeriesService
-import ru.mystamps.web.feature.site.CronService
-import ru.mystamps.web.feature.site.MailService
-import ru.mystamps.web.feature.site.SuspiciousActivityService
+import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
