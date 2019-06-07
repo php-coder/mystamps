@@ -27,10 +27,6 @@ public final class Db {
 		public static final int NAME_LENGTH = 50;
 	}
 	
-	public static final class Images {
-		public static final int FILENAME_LENGTH = 255;
-	}
-	
 	public static final class TransactionParticipant {
 		public static final int NAME_LENGTH = 50;
 		public static final int URL_LENGTH  = 255;

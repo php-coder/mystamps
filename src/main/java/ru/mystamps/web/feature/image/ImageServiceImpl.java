@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.mystamps.web.Db;
+import ru.mystamps.web.feature.image.ImageDb.Images;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 import ru.mystamps.web.support.togglz.Features;
 
@@ -63,7 +63,7 @@ public class ImageServiceImpl implements ImageService {
 		
 		// Trim and abbreviate a filename. It shouldn't fail a process because field is optional.
 		String filename = StringUtils.trimToNull(file.getOriginalFilename());
-		filename = abbreviateIfLengthGreaterThan(filename, Db.Images.FILENAME_LENGTH);
+		filename = abbreviateIfLengthGreaterThan(filename, Images.FILENAME_LENGTH);
 		
 		Integer imageId = imageDao.add(imageType, filename);
 		if (imageId == null) {

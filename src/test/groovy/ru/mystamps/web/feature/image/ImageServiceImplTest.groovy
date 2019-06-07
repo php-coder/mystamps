@@ -19,7 +19,7 @@ package ru.mystamps.web.feature.image
 
 import org.slf4j.helpers.NOPLogger
 import org.springframework.web.multipart.MultipartFile
-import ru.mystamps.web.Db
+import ru.mystamps.web.feature.image.ImageDb.Images
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
@@ -145,8 +145,8 @@ class ImageServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should pass abbreviated filename when it is too long'() {
 		given:
-			String longFilename = '/long/url/' + ('x' * Db.Images.FILENAME_LENGTH)
-			String expectedFilename = longFilename.take(Db.Images.FILENAME_LENGTH - 3) + '...'
+			String longFilename = '/long/url/' + ('x' * Images.FILENAME_LENGTH)
+			String expectedFilename = longFilename.take(Images.FILENAME_LENGTH - 3) + '...'
 		when:
 			service.save(multipartFile)
 		then:
