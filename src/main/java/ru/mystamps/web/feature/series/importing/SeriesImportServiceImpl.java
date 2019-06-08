@@ -24,13 +24,13 @@ import org.slf4j.Logger;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mystamps.web.Db;
-import ru.mystamps.web.Db.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.participant.AddParticipantDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.CatalogUtils;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportParsedData;
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.event.ParsingFailed;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
@@ -198,10 +198,10 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		if (!michelNumbers.isEmpty()) {
 			String shortenedNumbers = CatalogUtils.toShortForm(michelNumbers);
 			Validate.validState(
-				shortenedNumbers.length() <= Db.SeriesImportParsedData.MICHEL_NUMBERS_LENGTH,
+				shortenedNumbers.length() <= SeriesImportParsedData.MICHEL_NUMBERS_LENGTH,
 				"Michel numbers (%s) length exceeds max length of the field (%d)",
 				shortenedNumbers,
-				Db.SeriesImportParsedData.MICHEL_NUMBERS_LENGTH
+				SeriesImportParsedData.MICHEL_NUMBERS_LENGTH
 			);
 			seriesParsedData.setMichelNumbers(shortenedNumbers);
 		}

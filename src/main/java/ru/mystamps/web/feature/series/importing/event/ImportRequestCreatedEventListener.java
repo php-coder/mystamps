@@ -22,9 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
-import ru.mystamps.web.Db;
 import ru.mystamps.web.feature.series.DownloadResult;
 import ru.mystamps.web.feature.series.DownloaderService;
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 
 /**
@@ -60,8 +60,8 @@ public class ImportRequestCreatedEventListener
 
 			seriesImportService.changeStatus(
 				requestId,
-				Db.SeriesImportRequestStatus.UNPROCESSED,
-				Db.SeriesImportRequestStatus.DOWNLOADING_FAILED
+				SeriesImportRequestStatus.UNPROCESSED,
+				SeriesImportRequestStatus.DOWNLOADING_FAILED
 			);
 			return;
 		}

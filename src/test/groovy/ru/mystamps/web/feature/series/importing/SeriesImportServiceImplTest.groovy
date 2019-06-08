@@ -19,11 +19,11 @@ package ru.mystamps.web.feature.series.importing
 
 import org.slf4j.helpers.NOPLogger
 import org.springframework.context.ApplicationEventPublisher
-import ru.mystamps.web.Db.SeriesImportRequestStatus
 import ru.mystamps.web.feature.participant.AddParticipantDto
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.feature.series.AddSeriesDto
 import ru.mystamps.web.feature.series.SeriesService
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus
 import ru.mystamps.web.feature.series.importing.event.ParsingFailed
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto

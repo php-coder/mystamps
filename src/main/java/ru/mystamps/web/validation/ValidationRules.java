@@ -23,6 +23,7 @@ import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
 import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
 // it complains on "PMD.LongVariable"
@@ -79,7 +80,7 @@ public final class ValidationRules {
 	
 	public static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
 	
-	public static final int IMPORT_REQUEST_URL_MAX_LENGTH  = Db.SeriesImportRequest.URL_LENGTH;
+	public static final int IMPORT_REQUEST_URL_MAX_LENGTH  = SeriesImportRequest.URL_LENGTH;
 	
 	/** Maximum uploading image size in kilobytes. */
 	public static final long MAX_IMAGE_SIZE = 500;

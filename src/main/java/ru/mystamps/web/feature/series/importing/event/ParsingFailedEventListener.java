@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
-import ru.mystamps.web.Db.SeriesImportRequestStatus;
+import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 
 /**

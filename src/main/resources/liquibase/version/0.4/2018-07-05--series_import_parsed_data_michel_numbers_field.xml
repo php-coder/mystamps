@@ -12,7 +12,7 @@
 			(for example: 1001-1003,2200-2210). While it's possible that a series
 			will have more catalog numbers, it should be enough for most of the cases.
 			
-			Must be in sync with ru.mystamps.web.Db.SeriesImportRequestStatus.MICHEL_NUMBERS_LENGTH constant.
+			Must be in sync with ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportParsedData.MICHEL_NUMBERS_LENGTH constant.
 		-->
 		<addColumn tableName="series_import_parsed_data">
 			<column name="michel_numbers"
