@@ -26,8 +26,6 @@ import ru.mystamps.web.support.beanvalidation.Group;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.validation.ValidationRules.IMPORT_REQUEST_URL_MAX_LENGTH;
-
 @Getter
 @Setter
 @GroupSequence({
@@ -46,7 +44,7 @@ public class RequestImportForm implements RequestImportDto {
 		// we use IMPORT_REQUEST_URL_MAX_LENGTH here.
 		// Also, as the import saves nothing, this check actually isn't required. Perhaps,
 		// we shouldn't validate on this stage and let it fail later, during a sale creation.
-		max = IMPORT_REQUEST_URL_MAX_LENGTH,
+		max = SeriesImportValidation.IMPORT_REQUEST_URL_MAX_LENGTH,
 		message = "{value.too-long}",
 		groups = Group.Level2.class
 	)
