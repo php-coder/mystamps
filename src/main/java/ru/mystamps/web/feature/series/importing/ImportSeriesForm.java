@@ -34,9 +34,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;
-import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
-import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
+import static ru.mystamps.web.feature.series.SeriesValidation.MAX_STAMPS_IN_SERIES;
+import static ru.mystamps.web.feature.series.SeriesValidation.MIN_RELEASE_YEAR;
+import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERIES;
 
 @Getter
 @Setter

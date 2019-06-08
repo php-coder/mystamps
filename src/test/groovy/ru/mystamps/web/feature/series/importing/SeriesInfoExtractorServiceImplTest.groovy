@@ -24,7 +24,7 @@ import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.country.CountryValidation
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.tests.Random
-import ru.mystamps.web.validation.ValidationRules
+import ru.mystamps.web.feature.series.SeriesValidation
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -34,7 +34,6 @@ import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
 import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServiceImpl.MAX_SUPPORTED_RELEASE_YEAR
-import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES
 
 @SuppressWarnings([
 	'ClassJavadoc',
@@ -245,7 +244,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractReleaseYear() should extract year from XIX century'() {
 		given:
-			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, 1899).integer()
+			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, 1899).integer()
 		and:
 			String fragment = String.valueOf(expectedYear)
 		when:
@@ -300,9 +299,9 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractReleaseYear() should return the first year if there are many'() {
 		given:
 			Integer currentYear = Year.now().getValue()
-			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
 		and:
-			Integer anotherYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer anotherYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
 		and:
 			String fragment = String.format('%d %d', expectedYear, anotherYear)
 		when:
@@ -314,12 +313,12 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryGetter')
 	def 'extractReleaseYear() should skip invalid date'() {
 		given:
-			Integer unsupportedYearInPast = between(0, ValidationRules.MIN_RELEASE_YEAR - 1).integer()
+			Integer unsupportedYearInPast = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
 			Integer unsupportedYearInFuture = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
 			Integer unsupportedYear = from(unsupportedYearInPast, unsupportedYearInFuture).sample()
 		and:
 			Integer currentYear = Year.now().getValue()
-			Integer expectedYear = between(ValidationRules.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
 		and:
 			String fragment = String.format('%d %d', unsupportedYear, expectedYear)
 		when:
@@ -330,7 +329,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	
 	def 'extractReleaseYear() shouldn\'t extract dates before 1840'() {
 		given:
-			Integer unsupportedYear = between(0, ValidationRules.MIN_RELEASE_YEAR - 1).integer()
+			Integer unsupportedYear = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
 			String fragment = String.valueOf(unsupportedYear)
 		when:
 			Integer year = service.extractReleaseYear(fragment)
@@ -377,9 +376,9 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		expect:
 			service.extractQuantity(fragment) == null
 		where:
-			fragment                              | _
-			'0 марок'                             | _
-			(MAX_STAMPS_IN_SERIES + 1) + ' марок' | _
+			fragment                                               | _
+			'0 марок'                                              | _
+			(SeriesValidation.MAX_STAMPS_IN_SERIES + 1) + ' марок' | _
 	}
 	
 	@Unroll

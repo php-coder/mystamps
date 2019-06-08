@@ -25,7 +25,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-import static ru.mystamps.web.validation.ValidationRules.MIN_STAMPS_IN_SERIES;
+import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERIES;
 
 // @todo #477 Add to collection: integration test for invisible quantity for a series with 1 stamp
 // @todo #477 Add to collection: series quantity should be specified by default

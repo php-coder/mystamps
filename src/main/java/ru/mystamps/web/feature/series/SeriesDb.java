@@ -17,10 +17,11 @@
  */
 package ru.mystamps.web.feature.series;
 
-public final class SeriesDb {
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+final class SeriesDb {
 	
-	public static final class Series {
-		public static final int COMMENT_LENGTH = 255;
+	static final class Series {
+		static final int COMMENT_LENGTH = 255;
 	}
 	
 }

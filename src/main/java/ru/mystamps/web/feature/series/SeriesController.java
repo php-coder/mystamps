@@ -73,7 +73,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import static ru.mystamps.web.util.ControllerUtils.redirectTo;
-import static ru.mystamps.web.validation.ValidationRules.MIN_RELEASE_YEAR;
 
 @Controller
 @RequiredArgsConstructor
@@ -94,7 +93,7 @@ public class SeriesController {
 	static {
 		CURRENT_YEAR = Integer.valueOf(Year.now(ZoneOffset.UTC).getValue());
 		YEARS = new LinkedHashMap<>();
-		for (Integer i = CURRENT_YEAR; i >= MIN_RELEASE_YEAR; i--) {
+		for (Integer i = CURRENT_YEAR; i >= SeriesValidation.MIN_RELEASE_YEAR; i--) {
 			YEARS.put(i, i);
 		}
 	}

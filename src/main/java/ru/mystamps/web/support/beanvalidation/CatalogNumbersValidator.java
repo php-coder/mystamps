@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.support.beanvalidation;
 
-import ru.mystamps.web.validation.ValidationRules;
+import ru.mystamps.web.feature.series.SeriesValidation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -26,10 +26,10 @@ import java.util.regex.Pattern;
 public class CatalogNumbersValidator implements ConstraintValidator<CatalogNumbers, String> {
 	
 	private static final Pattern CATALOG_NUMBERS =
-		Pattern.compile(ValidationRules.CATALOG_NUMBERS_REGEXP);
+		Pattern.compile(SeriesValidation.CATALOG_NUMBERS_REGEXP);
 	
 	private static final Pattern CATALOG_NUMBERS_WITH_LETTERS =
-		Pattern.compile(ValidationRules.CATALOG_NUMBERS_AND_LETTERS_REGEXP);
+		Pattern.compile(SeriesValidation.CATALOG_NUMBERS_AND_LETTERS_REGEXP);
 	
 	private boolean allowLetters;
 	

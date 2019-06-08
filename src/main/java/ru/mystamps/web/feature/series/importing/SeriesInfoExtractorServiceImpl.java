@@ -27,7 +27,7 @@ import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.ParticipantService;
-import ru.mystamps.web.validation.ValidationRules;
+import ru.mystamps.web.feature.series.SeriesValidation;
 
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -232,7 +232,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
 			Integer quantity = Integer.valueOf(matcher.group("quantity"));
-			if (quantity <= ValidationRules.MAX_STAMPS_IN_SERIES) {
+			if (quantity <= SeriesValidation.MAX_STAMPS_IN_SERIES) {
 				log.debug("Quantity is {}", quantity);
 				return quantity;
 			}

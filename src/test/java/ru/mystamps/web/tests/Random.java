@@ -28,11 +28,11 @@ import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
+import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.service.TestObjects;
 import ru.mystamps.web.util.SlugUtils;
-import ru.mystamps.web.validation.ValidationRules;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -193,15 +193,15 @@ public final class Random {
 	
 	public static Integer issueYear() {
 		return between(
-			ValidationRules.MIN_RELEASE_YEAR,
+			SeriesValidation.MIN_RELEASE_YEAR,
 			Year.now(ZoneOffset.UTC).getValue()
 		).integer();
 	}
 	
 	public static Integer quantity() {
 		return between(
-			ValidationRules.MIN_STAMPS_IN_SERIES,
-			ValidationRules.MAX_STAMPS_IN_SERIES
+			SeriesValidation.MIN_STAMPS_IN_SERIES,
+			SeriesValidation.MAX_STAMPS_IN_SERIES
 		).integer();
 	}
 	
