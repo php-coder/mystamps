@@ -23,6 +23,7 @@ import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
+import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
 // it complains on "PMD.LongVariable"
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -76,7 +77,7 @@ public final class ValidationRules {
 	public static final int PARTICIPANT_NAME_MAX_LENGTH = TransactionParticipant.NAME_LENGTH;
 	public static final int PARTICIPANT_URL_MAX_LENGTH  = TransactionParticipant.URL_LENGTH;
 	
-	public static final int SERIES_SALES_URL_MAX_LENGTH = Db.SeriesSales.TRANSACTION_URL_LENGTH;
+	public static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
 	
 	public static final int IMPORT_REQUEST_URL_MAX_LENGTH  = Db.SeriesImportRequest.URL_LENGTH;
 	

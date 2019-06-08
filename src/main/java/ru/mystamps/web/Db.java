@@ -45,8 +45,4 @@ public final class Db {
 		public static final int MICHEL_NUMBERS_LENGTH = 19;
 	}
 	
-	public static final class SeriesSales {
-		public static final int TRANSACTION_URL_LENGTH = 255;
-	}
-	
 }
