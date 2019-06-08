@@ -42,8 +42,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
+import static ru.mystamps.web.feature.image.ImageValidation.MAX_IMAGE_SIZE;
 import static ru.mystamps.web.validation.ValidationRules.MAX_DAYS_IN_MONTH;
-import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
 import static ru.mystamps.web.validation.ValidationRules.MAX_MONTHS_IN_YEAR;
 import static ru.mystamps.web.validation.ValidationRules.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.validation.ValidationRules.MAX_STAMPS_IN_SERIES;

@@ -31,7 +31,7 @@ import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 
 import javax.validation.GroupSequence;
 
-import static ru.mystamps.web.validation.ValidationRules.MAX_IMAGE_SIZE;
+import static ru.mystamps.web.feature.image.ImageValidation.MAX_IMAGE_SIZE;
 
 @Getter
 @Setter
