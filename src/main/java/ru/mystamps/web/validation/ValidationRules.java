@@ -17,33 +17,11 @@
  */
 package ru.mystamps.web.validation;
 
-import ru.mystamps.web.feature.account.AccountDb.User;
-import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.series.SeriesDb.Series;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
 import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
 public final class ValidationRules {
-	
-	public static final int LOGIN_MIN_LENGTH = 2;
-	public static final int LOGIN_MAX_LENGTH = User.LOGIN_LENGTH;
-	public static final String LOGIN_REGEXP = "[-_\\.a-zA-Z0-9]+";
-	@SuppressWarnings("PMD.LongVariable")
-	public static final String LOGIN_NO_REPEATING_CHARS_REGEXP = "(?!.+[-_.]{2,}).+";
-	
-	public static final int NAME_MAX_LENGTH = User.NAME_LENGTH;
-	public static final String NAME_REGEXP = "[- \\p{L}]+";
-	public static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
-	
-	public static final int PASSWORD_MIN_LENGTH = 4;
-	// We limit max length because bcrypt has a maximum password length.
-	// See also: http://www.mscharhag.com/software-development/bcrypt-maximum-password-length
-	public static final int PASSWORD_MAX_LENGTH = 72;
-	
-	public static final int EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;
-	
-	public static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
-	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
 	
 	public static final int MIN_STAMPS_IN_SERIES = 1;
 	public static final int MAX_STAMPS_IN_SERIES = 50;

@@ -26,7 +26,7 @@ import ru.mystamps.web.support.beanvalidation.Group;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.validation.ValidationRules.EMAIL_MAX_LENGTH;
+import static ru.mystamps.web.feature.account.AccountValidation.EMAIL_MAX_LENGTH;
 
 @Getter
 @Setter

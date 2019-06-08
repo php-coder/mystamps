@@ -22,7 +22,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import ru.mystamps.web.support.beanvalidation.FieldsMatch;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
-import ru.mystamps.web.validation.ValidationRules;
 
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
@@ -47,24 +46,24 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	@NotEmpty(groups = Login1Checks.class)
 	@Size.List({
 		@Size(
-			min = ValidationRules.LOGIN_MIN_LENGTH,
+			min = AccountValidation.LOGIN_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Login2Checks.class
 		),
 		@Size(
-			max = ValidationRules.LOGIN_MAX_LENGTH,
+			max = AccountValidation.LOGIN_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Login2Checks.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = ValidationRules.LOGIN_REGEXP,
+			regexp = AccountValidation.LOGIN_REGEXP,
 			message = "{login.invalid}",
 			groups = Login3Checks.class
 		),
 		@Pattern(
-			regexp = ValidationRules.LOGIN_NO_REPEATING_CHARS_REGEXP,
+			regexp = AccountValidation.LOGIN_NO_REPEATING_CHARS_REGEXP,
 			message = "{login.repetition_chars}",
 			groups = Login4Checks.class
 		)
@@ -73,18 +72,18 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	private String login;
 	
 	@Size(
-		max = ValidationRules.NAME_MAX_LENGTH,
+		max = AccountValidation.NAME_MAX_LENGTH,
 		message = "{value.too-long}",
 		groups = Name1Checks.class
 	)
 	@Pattern.List({
 		@Pattern(
-			regexp = ValidationRules.NAME_REGEXP,
+			regexp = AccountValidation.NAME_REGEXP,
 			message = "{name.invalid}",
 			groups = Name2Checks.class
 		),
 		@Pattern(
-			regexp = ValidationRules.NAME_NO_HYPHEN_REGEXP,
+			regexp = AccountValidation.NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Name3Checks.class
 		)
@@ -94,12 +93,12 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	@NotEmpty(groups = Password1Checks.class)
 	@Size.List({
 		@Size(
-			min = ValidationRules.PASSWORD_MIN_LENGTH,
+			min = AccountValidation.PASSWORD_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Password2Checks.class
 		),
 		@Size(
-			max = ValidationRules.PASSWORD_MAX_LENGTH,
+			max = AccountValidation.PASSWORD_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Password2Checks.class
 		)
@@ -111,13 +110,13 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	
 	@NotEmpty(groups = ActKey1Checks.class)
 	@Size(
-		min = ValidationRules.ACT_KEY_LENGTH,
-		max = ValidationRules.ACT_KEY_LENGTH,
+		min = AccountValidation.ACT_KEY_LENGTH,
+		max = AccountValidation.ACT_KEY_LENGTH,
 		message = "{value.invalid-length}",
 		groups = ActKey2Checks.class
 	)
 	@Pattern(
-		regexp = ValidationRules.ACT_KEY_REGEXP,
+		regexp = AccountValidation.ACT_KEY_REGEXP,
 		message = "{key.invalid}",
 		groups = ActKey3Checks.class
 	)

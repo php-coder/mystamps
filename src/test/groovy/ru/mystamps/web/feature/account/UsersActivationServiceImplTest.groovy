@@ -21,7 +21,6 @@ import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.site.MailService
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
-import ru.mystamps.web.validation.ValidationRules
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -68,7 +67,7 @@ class UsersActivationServiceImplTest extends Specification {
 			service.add(registrationForm, ANY_LOCALE)
 		then:
 			1 * usersActivationDao.add({ AddUsersActivationDbDto activation ->
-				assert activation?.activationKey?.length() == ValidationRules.ACT_KEY_LENGTH
+				assert activation?.activationKey?.length() == AccountValidation.ACT_KEY_LENGTH
 				assert activation?.activationKey ==~ /^[\p{Lower}\p{Digit}]+$/
 				return true
 			})

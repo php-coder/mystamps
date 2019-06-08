@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.site.MailService;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.util.LocaleUtils;
-import ru.mystamps.web.validation.ValidationRules;
 
 import java.util.Date;
 import java.util.List;
@@ -110,7 +109,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 	 *         in 10 characters length
 	 **/
 	private static String generateActivationKey() {
-		int actKeyLength = ValidationRules.ACT_KEY_LENGTH;
+		int actKeyLength = AccountValidation.ACT_KEY_LENGTH;
 		return RandomStringUtils.randomAlphanumeric(actKeyLength).toLowerCase(Locale.ENGLISH);
 	}
 	

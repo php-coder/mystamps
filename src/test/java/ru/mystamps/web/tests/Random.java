@@ -22,6 +22,7 @@ import io.qala.datagen.RandomShortApi;
 import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.feature.account.AccountValidation;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
@@ -96,8 +97,8 @@ public final class Random {
 	
 	public static String login() {
 		String login = between(
-			ValidationRules.LOGIN_MIN_LENGTH,
-			ValidationRules.LOGIN_MAX_LENGTH
+			AccountValidation.LOGIN_MIN_LENGTH,
+			AccountValidation.LOGIN_MAX_LENGTH
 		)
 			.with(multipleOf(" -_"))
 			.alphanumeric();
