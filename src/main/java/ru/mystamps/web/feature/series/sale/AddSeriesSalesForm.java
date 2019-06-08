@@ -25,7 +25,6 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.support.beanvalidation.BothOrNoneRequired;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.support.beanvalidation.Group;
-import ru.mystamps.web.validation.ValidationRules;
 
 import javax.validation.GroupSequence;
 import javax.validation.constraints.NotNull;
@@ -58,7 +57,7 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	private Integer sellerId;
 	
 	@Size(
-		max = ValidationRules.SERIES_SALES_URL_MAX_LENGTH,
+		max = SeriesSalesValidation.SERIES_SALES_URL_MAX_LENGTH,
 		message = "{value.too-long}",
 		groups = Group.Level1.class
 	)

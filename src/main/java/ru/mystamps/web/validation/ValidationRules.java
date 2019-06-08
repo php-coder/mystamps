@@ -19,7 +19,6 @@ package ru.mystamps.web.validation;
 
 import ru.mystamps.web.feature.series.SeriesDb.Series;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
-import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
 public final class ValidationRules {
 	
@@ -30,8 +29,6 @@ public final class ValidationRules {
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
 	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
-	
-	public static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
 	
 	public static final int IMPORT_REQUEST_URL_MAX_LENGTH  = SeriesImportRequest.URL_LENGTH;
 	
