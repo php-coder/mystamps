@@ -19,7 +19,6 @@ package ru.mystamps.web.validation;
 
 import ru.mystamps.web.feature.account.AccountDb.User;
 import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
-import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
 import ru.mystamps.web.feature.series.SeriesDb.Series;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
@@ -48,14 +47,6 @@ public final class ValidationRules {
 	
 	public static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
 	public static final String ACT_KEY_REGEXP = "[0-9a-z]+";
-	
-	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
-	public static final int CATEGORY_NAME_MAX_LENGTH = Category.NAME_LENGTH;
-	public static final String CATEGORY_NAME_EN_REGEXP = "[- a-zA-Z]+";
-	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
-	public static final String CATEGORY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
-	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
-	public static final String CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
 	
 	public static final int COUNTRY_NAME_MIN_LENGTH = 3;
 	public static final int COUNTRY_NAME_MAX_LENGTH = Country.NAME_LENGTH;

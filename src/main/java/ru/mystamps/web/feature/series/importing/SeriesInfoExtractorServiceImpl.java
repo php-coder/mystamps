@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.feature.category.CategoryService;
+import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.validation.ValidationRules;
@@ -63,8 +64,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Pattern.compile("#[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
 	
 	// CheckStyle: ignore LineLength for next 4 lines
-	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(ValidationRules.CATEGORY_NAME_EN_REGEXP);
-	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(ValidationRules.CATEGORY_NAME_RU_REGEXP);
+	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.CATEGORY_NAME_EN_REGEXP);
+	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.CATEGORY_NAME_RU_REGEXP);
 	private static final Pattern VALID_COUNTRY_NAME_EN  = Pattern.compile(ValidationRules.COUNTRY_NAME_EN_REGEXP);
 	private static final Pattern VALID_COUNTRY_NAME_RU  = Pattern.compile(ValidationRules.COUNTRY_NAME_RU_REGEXP);
 	
@@ -425,10 +426,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	private static boolean validCategoryName(String name) {
-		if (name.length() < ValidationRules.CATEGORY_NAME_MIN_LENGTH) {
+		if (name.length() < CategoryValidation.CATEGORY_NAME_MIN_LENGTH) {
 			return false;
 		}
-		if (name.length() > ValidationRules.CATEGORY_NAME_MAX_LENGTH) {
+		if (name.length() > CategoryValidation.CATEGORY_NAME_MAX_LENGTH) {
 			return false;
 		}
 		return VALID_CATEGORY_NAME_EN.matcher(name).matches()

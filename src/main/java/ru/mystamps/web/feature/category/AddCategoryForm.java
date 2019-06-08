@@ -28,12 +28,13 @@ import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_EN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_HYPHEN_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP;
-import static ru.mystamps.web.validation.ValidationRules.CATEGORY_NAME_RU_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_EN_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_MAX_LENGTH;
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_MIN_LENGTH;
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_NO_HYPHEN_REGEXP;
+// CheckStyle: ignore LineLength for next 1 line
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_RU_REGEXP;
 
 @Getter
 @Setter

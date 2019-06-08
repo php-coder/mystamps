@@ -22,6 +22,7 @@ import io.qala.datagen.RandomShortApi;
 import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -133,8 +134,8 @@ public final class Random {
 	
 	public static String categoryName() {
 		String name = between(
-				ValidationRules.CATEGORY_NAME_MIN_LENGTH,
-				ValidationRules.CATEGORY_NAME_MAX_LENGTH
+				CategoryValidation.CATEGORY_NAME_MIN_LENGTH,
+				CategoryValidation.CATEGORY_NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();

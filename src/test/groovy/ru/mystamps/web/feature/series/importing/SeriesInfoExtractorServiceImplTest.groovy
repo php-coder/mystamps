@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.category.CategoryService
+import ru.mystamps.web.feature.category.CategoryValidation
 import ru.mystamps.web.feature.country.CountryService
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.tests.Random
@@ -84,7 +85,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCategory() should filter out invalid candidates'() {
 		given:
 			String shortName = 'ok'
-			String longName = 'x' * (ValidationRules.CATEGORY_NAME_MAX_LENGTH + 1)
+			String longName = 'x' * (CategoryValidation.CATEGORY_NAME_MAX_LENGTH + 1)
 			String invalidEnName = 't3st_'
 			String invalidRuName = 'т_е_с_т'
 			String validEnName = 'valid'
