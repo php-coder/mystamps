@@ -17,12 +17,12 @@
  */
 package ru.mystamps.web.validation;
 
-import ru.mystamps.web.Db;
 import ru.mystamps.web.feature.account.AccountDb.User;
 import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
+import ru.mystamps.web.feature.series.SeriesDb.Series;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
 import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
@@ -69,7 +69,7 @@ public final class ValidationRules {
 	public static final int MIN_STAMPS_IN_SERIES = 1;
 	public static final int MAX_STAMPS_IN_SERIES = 50;
 	public static final int MIN_RELEASE_YEAR     = 1840;
-	public static final int MAX_SERIES_COMMENT_LENGTH = Db.Series.COMMENT_LENGTH;
+	public static final int MAX_SERIES_COMMENT_LENGTH = Series.COMMENT_LENGTH;
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
 	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";

@@ -15,9 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web;
+package ru.mystamps.web.feature.series;
 
-public final class Db {
+public final class SeriesDb {
 	
 	public static final class Series {
 		public static final int COMMENT_LENGTH = 255;
