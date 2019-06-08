@@ -25,9 +25,9 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MAX_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_NAME_MIN_LENGTH;
-import static ru.mystamps.web.validation.ValidationRules.PARTICIPANT_URL_MAX_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_NAME_MAX_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_NAME_MIN_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_URL_MAX_LENGTH;
 
 @Getter
 @Setter

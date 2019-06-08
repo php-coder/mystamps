@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
+import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
@@ -172,8 +173,8 @@ public final class Random {
 	
 	public static String participantName() {
 		return between(
-			ValidationRules.PARTICIPANT_NAME_MIN_LENGTH,
-			ValidationRules.PARTICIPANT_NAME_MAX_LENGTH
+			ParticipantValidation.PARTICIPANT_NAME_MIN_LENGTH,
+			ParticipantValidation.PARTICIPANT_NAME_MAX_LENGTH
 		).english();
 	}
 	

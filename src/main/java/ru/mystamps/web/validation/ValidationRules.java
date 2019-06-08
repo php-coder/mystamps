@@ -21,7 +21,6 @@ import ru.mystamps.web.feature.account.AccountDb.User;
 import ru.mystamps.web.feature.account.AccountDb.UsersActivation;
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 import ru.mystamps.web.feature.country.CountryDb.Country;
-import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
 import ru.mystamps.web.feature.series.SeriesDb.Series;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequest;
 import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
@@ -73,10 +72,6 @@ public final class ValidationRules {
 	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
 	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
-	
-	public static final int PARTICIPANT_NAME_MIN_LENGTH = 3;
-	public static final int PARTICIPANT_NAME_MAX_LENGTH = TransactionParticipant.NAME_LENGTH;
-	public static final int PARTICIPANT_URL_MAX_LENGTH  = TransactionParticipant.URL_LENGTH;
 	
 	public static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
 	
