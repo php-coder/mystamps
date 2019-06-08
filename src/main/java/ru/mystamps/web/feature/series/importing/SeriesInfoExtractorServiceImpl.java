@@ -25,6 +25,7 @@ import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryService;
+import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.validation.ValidationRules;
 
@@ -66,8 +67,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.CATEGORY_NAME_EN_REGEXP);
 	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.CATEGORY_NAME_RU_REGEXP);
-	private static final Pattern VALID_COUNTRY_NAME_EN  = Pattern.compile(ValidationRules.COUNTRY_NAME_EN_REGEXP);
-	private static final Pattern VALID_COUNTRY_NAME_RU  = Pattern.compile(ValidationRules.COUNTRY_NAME_RU_REGEXP);
+	private static final Pattern VALID_COUNTRY_NAME_EN  = Pattern.compile(CountryValidation.COUNTRY_NAME_EN_REGEXP);
+	private static final Pattern VALID_COUNTRY_NAME_RU  = Pattern.compile(CountryValidation.COUNTRY_NAME_RU_REGEXP);
 	
 	// Max number of candidates that will be used in the SQL query within IN() statement.
 	private static final long MAX_CANDIDATES_FOR_LOOKUP = 50;
@@ -437,10 +438,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	private static boolean validCountryName(String name) {
-		if (name.length() < ValidationRules.COUNTRY_NAME_MIN_LENGTH) {
+		if (name.length() < CountryValidation.COUNTRY_NAME_MIN_LENGTH) {
 			return false;
 		}
-		if (name.length() > ValidationRules.COUNTRY_NAME_MAX_LENGTH) {
+		if (name.length() > CountryValidation.COUNTRY_NAME_MAX_LENGTH) {
 			return false;
 		}
 		return VALID_COUNTRY_NAME_EN.matcher(name).matches()

@@ -21,6 +21,7 @@ import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.category.CategoryService
 import ru.mystamps.web.feature.category.CategoryValidation
 import ru.mystamps.web.feature.country.CountryService
+import ru.mystamps.web.feature.country.CountryValidation
 import ru.mystamps.web.feature.participant.ParticipantService
 import ru.mystamps.web.tests.Random
 import ru.mystamps.web.validation.ValidationRules
@@ -167,7 +168,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCountry() should filter out invalid candidates'() {
 		given:
 			String shortName = 'ok'
-			String longName = 'x' * (ValidationRules.COUNTRY_NAME_MAX_LENGTH + 1)
+			String longName = 'x' * (CountryValidation.COUNTRY_NAME_MAX_LENGTH + 1)
 			String invalidEnName = 't3st_'
 			String invalidRuName = 'т_е_с_т'
 			String validEnName = 'valid'

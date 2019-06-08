@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.feature.category.CategoryValidation;
+import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantValidation;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -154,8 +155,8 @@ public final class Random {
 	
 	public static String countryName() {
 		String name = between(
-				ValidationRules.COUNTRY_NAME_MIN_LENGTH,
-				ValidationRules.COUNTRY_NAME_MAX_LENGTH
+				CountryValidation.COUNTRY_NAME_MIN_LENGTH,
+				CountryValidation.COUNTRY_NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();
