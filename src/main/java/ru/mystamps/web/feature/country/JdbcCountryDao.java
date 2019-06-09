@@ -26,6 +26,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
 import ru.mystamps.web.support.jdbc.RowMappers;
 
 import java.util.Collections;
@@ -107,7 +108,8 @@ public class JdbcCountryDao implements CountryDao {
 		int affected = jdbcTemplate.update(
 			addCountrySql,
 			new MapSqlParameterSource(params),
-			holder
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
 		);
 		
 		Validate.validState(

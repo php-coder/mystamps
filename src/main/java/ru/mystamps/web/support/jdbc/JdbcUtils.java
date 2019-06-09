@@ -24,6 +24,8 @@ import java.sql.SQLException;
 
 public final class JdbcUtils {
 	
+	public static final String[] ID_KEY_COLUMN = new String[]{"id"};
+	
 	private JdbcUtils() {
 	}
 	

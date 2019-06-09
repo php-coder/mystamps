@@ -28,6 +28,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -168,7 +169,8 @@ public class JdbcCollectionDao implements CollectionDao {
 		int affected = jdbcTemplate.update(
 			addCollectionSql,
 			new MapSqlParameterSource(params),
-			holder
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
 		);
 		
 		Validate.validState(

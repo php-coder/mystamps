@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -83,7 +84,8 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		int affected = jdbcTemplate.update(
 			createSeriesImportRequestSql,
 			new MapSqlParameterSource(params),
-			holder
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
 		);
 		
 		Validate.validState(

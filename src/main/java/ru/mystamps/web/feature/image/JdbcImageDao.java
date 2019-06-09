@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,7 +56,12 @@ public class JdbcImageDao implements ImageDao {
 		params.put("filename", filename);
 		KeyHolder holder = new GeneratedKeyHolder();
 		
-		int affected = jdbcTemplate.update(addImageSql, new MapSqlParameterSource(params), holder);
+		int affected = jdbcTemplate.update(
+			addImageSql,
+			new MapSqlParameterSource(params),
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
+		);
 		
 		Validate.validState(
 			affected == 1,

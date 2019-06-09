@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -95,7 +96,8 @@ public class JdbcUserDao implements UserDao {
 		int affected = jdbcTemplate.update(
 			addUserSql,
 			new MapSqlParameterSource(params),
-			holder
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
 		);
 		
 		Validate.validState(
