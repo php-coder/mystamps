@@ -177,6 +177,11 @@
 		<Bug pattern="NP_BOOLEAN_RETURN_NULL" />
 	</Match>
 	<Match>
+		<!-- I hope that JdbcTemplate.update() method won't modify the list of generated keys -->
+		<Class name="ru.mystamps.web.support.jdbc.JdbcUtils" />
+		<Bug pattern="MS_MUTABLE_ARRAY" />
+	</Match>
+	<Match>
 		<!--
 			No one should assign a value returned from this method to primitive boolean type.
 		-->
