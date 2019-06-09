@@ -21,10 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -54,13 +51,7 @@ public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {
 		params.put("created_at", data.getCreatedAt());
 		params.put("updated_at", data.getUpdatedAt());
 		
-		KeyHolder holder = new GeneratedKeyHolder();
-		
-		int affected = jdbcTemplate.update(
-			addParsedDataSql,
-			new MapSqlParameterSource(params),
-			holder
-		);
+		int affected = jdbcTemplate.update(addParsedDataSql, params);
 		
 		Validate.validState(
 			affected == 1,

@@ -198,13 +198,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		params.put("perforated", data.getPerforated());
 		params.put("michel_numbers", data.getMichelNumbers());
 		
-		KeyHolder holder = new GeneratedKeyHolder();
-		
-		int affected = jdbcTemplate.update(
-			addParsedDataSql,
-			new MapSqlParameterSource(params),
-			holder
-		);
+		int affected = jdbcTemplate.update(addParsedDataSql, params);
 		
 		Validate.validState(
 			affected == 1,
