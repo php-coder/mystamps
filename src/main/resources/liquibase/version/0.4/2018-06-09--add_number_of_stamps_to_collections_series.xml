@@ -16,9 +16,19 @@
 	<changeSet id="fill-collections_series-number_of_stamps-field" author="php-coder" context="prod-data">
 		<comment>Sets value of number_of_stamps field to number of stamps in a series</comment>
 		
-		<sql>
+		<sql dbms="mysql,h2">
 			UPDATE collections_series cs
 			SET cs.number_of_stamps = (
+				SELECT s.quantity
+				FROM series s
+				WHERE s.id = cs.series_id
+			)
+		</sql>
+		
+		<!-- In PostgreSQL it is illegal to prefix columns with table alias in the SET clause -->
+		<sql dbms="postgresql">
+			UPDATE collections_series cs
+			SET number_of_stamps = (
 				SELECT s.quantity
 				FROM series s
 				WHERE s.id = cs.series_id
