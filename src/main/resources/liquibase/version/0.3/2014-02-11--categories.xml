@@ -38,7 +38,6 @@
 		<comment>Creates category for Prehistoric animals</comment>
 		
 		<insert tableName="categories">
-			<column name="id" value="1" />
 			<column name="name" value="Prehistoric animals" />
 			<column name="name_ru" value="Доисторические животные" />
 			<column name="created_at" valueComputed="${NOW}" />
