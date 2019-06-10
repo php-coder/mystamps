@@ -18,7 +18,7 @@
 package ru.mystamps.web.feature.series;
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.common.LinkEntityDto;
 
 import java.math.BigDecimal;
 

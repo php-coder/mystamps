@@ -18,7 +18,7 @@
 package ru.mystamps.web.feature.category;
 
 import ru.mystamps.web.common.EntityWithParentDto;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;

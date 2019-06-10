@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.web.multipart.MultipartFile;
-import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.support.beanvalidation.CatalogNumbers;

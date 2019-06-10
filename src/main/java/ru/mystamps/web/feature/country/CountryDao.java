@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.feature.country;
 
-import ru.mystamps.web.dao.dto.LinkEntityDto;
+import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;

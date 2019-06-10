@@ -18,8 +18,8 @@
 package ru.mystamps.web.feature.country
 
 import org.slf4j.helpers.NOPLogger
+import ru.mystamps.web.common.LinkEntityDto
 import ru.mystamps.web.common.SlugUtils
-import ru.mystamps.web.dao.dto.LinkEntityDto
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
