@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.service;
 
+import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.SlugUtils;
-import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.account.AddUserDbDto;
 import ru.mystamps.web.feature.account.UserDetails;

@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.support.thymeleaf;
 
-import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.feature.series.SelectItem;
 
 import java.util.ArrayList;

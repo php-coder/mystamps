@@ -17,8 +17,8 @@
  */
 package ru.mystamps.web.support.jdbc;
 
+import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.Currency;
-import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;

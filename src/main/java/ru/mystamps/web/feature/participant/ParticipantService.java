@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.feature.participant;
 
-import ru.mystamps.web.dao.dto.EntityWithParentDto;
+import ru.mystamps.web.common.EntityWithParentDto;
 
 import java.util.List;
 
