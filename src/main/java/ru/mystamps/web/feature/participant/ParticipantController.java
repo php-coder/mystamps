@@ -32,7 +32,7 @@ import ru.mystamps.web.Url;
 import javax.validation.Valid;
 import java.util.List;
 
-import static ru.mystamps.web.util.ControllerUtils.redirectTo;
+import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor

@@ -44,7 +44,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import static ru.mystamps.web.util.ControllerUtils.redirectTo;
+import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 
 @Controller
 @RequiredArgsConstructor
