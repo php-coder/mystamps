@@ -18,11 +18,11 @@
 package ru.mystamps.web.feature.collection
 
 import org.slf4j.helpers.NOPLogger
+import ru.mystamps.web.common.SlugUtils
 import ru.mystamps.web.dao.dto.Currency
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
-import ru.mystamps.web.util.SlugUtils
 import spock.lang.Specification
 import spock.lang.Unroll
 

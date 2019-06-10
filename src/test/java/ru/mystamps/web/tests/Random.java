@@ -20,6 +20,7 @@ package ru.mystamps.web.tests;
 import io.qala.datagen.RandomElements;
 import io.qala.datagen.RandomShortApi;
 import org.apache.commons.lang3.StringUtils;
+import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.dao.dto.Currency;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.feature.account.AccountValidation;
@@ -32,7 +33,6 @@ import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.service.TestObjects;
-import ru.mystamps.web.util.SlugUtils;
 
 import java.math.BigDecimal;
 import java.text.ParseException;

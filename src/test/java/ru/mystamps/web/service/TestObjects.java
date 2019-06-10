@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.service;
 
+import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.account.AddUserDbDto;
@@ -51,7 +52,6 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
-import ru.mystamps.web.util.SlugUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;

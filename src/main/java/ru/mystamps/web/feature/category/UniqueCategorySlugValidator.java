@@ -18,7 +18,7 @@
 package ru.mystamps.web.feature.category;
 
 import lombok.RequiredArgsConstructor;
-import ru.mystamps.web.util.SlugUtils;
+import ru.mystamps.web.common.SlugUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
