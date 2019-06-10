@@ -36,6 +36,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.dao.dto.EntityWithParentDto;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
@@ -55,7 +56,6 @@ import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.support.thymeleaf.GroupByParent;
 import ru.mystamps.web.support.togglz.Features;
-import ru.mystamps.web.util.LocaleUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

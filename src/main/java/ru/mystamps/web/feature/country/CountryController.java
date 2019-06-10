@@ -31,12 +31,12 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.support.spring.security.CurrentUser;
-import ru.mystamps.web.util.LocaleUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;

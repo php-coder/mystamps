@@ -22,12 +22,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.util.LocaleUtils;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
-import ru.mystamps.web.util.LocaleUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

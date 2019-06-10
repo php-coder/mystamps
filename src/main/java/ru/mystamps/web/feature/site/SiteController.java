@@ -23,13 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.dao.dto.LinkEntityDto;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.CollectionService;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SeriesService;
-import ru.mystamps.web.util.LocaleUtils;
 import ru.mystamps.web.util.Pager;
 
 import java.util.List;
