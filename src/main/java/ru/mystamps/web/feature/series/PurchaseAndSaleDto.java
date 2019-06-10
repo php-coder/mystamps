@@ -19,7 +19,7 @@ package ru.mystamps.web.feature.series;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 
 import java.math.BigDecimal;
 import java.util.Date;

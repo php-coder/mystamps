@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryService;

@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.support.beanvalidation.BothOrNoneRequired;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 import ru.mystamps.web.support.beanvalidation.Group;

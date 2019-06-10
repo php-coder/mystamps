@@ -17,7 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.support.jdbc.JdbcUtils;
 
 import java.math.BigDecimal;

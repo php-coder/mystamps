@@ -20,7 +20,7 @@ package ru.mystamps.web.feature.series.importing;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.NumberFormat;
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
 
 import javax.validation.constraints.NotNull;

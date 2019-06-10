@@ -19,7 +19,7 @@ package ru.mystamps.web.feature.collection;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.mystamps.web.dao.dto.Currency;
+import ru.mystamps.web.common.Currency;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
