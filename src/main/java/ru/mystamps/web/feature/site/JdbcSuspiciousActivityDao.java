@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.support.jdbc.RowMappers;
 
 import java.util.Collections;
 import java.util.Date;

@@ -27,7 +27,6 @@ import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
-import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -166,33 +165,6 @@ public final class RowMappers {
 			gibbonsPrice,
 			solovyovPrice,
 			zagorskiPrice
-		);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	public static SuspiciousActivityDto forSuspiciousActivityDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		String type        = rs.getString("activity_name");
-		Date occurredAt    = rs.getTimestamp("occurred_at");
-		String page        = rs.getString("page");
-		String method      = rs.getString("method");
-		String userLogin   = rs.getString("user_login");
-		String ip          = rs.getString("ip");
-		String refererPage = rs.getString("referer_page");
-		String userAgent   = rs.getString("user_agent");
-		
-		return new SuspiciousActivityDto(
-			type,
-			occurredAt,
-			page,
-			method,
-			userLogin,
-			ip,
-			refererPage,
-			userAgent
 		);
 	}
 	
