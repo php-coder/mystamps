@@ -18,7 +18,7 @@
 package ru.mystamps.web.feature.collection;
 
 import ru.mystamps.web.common.Currency;
-import ru.mystamps.web.support.jdbc.JdbcUtils;
+import ru.mystamps.web.common.JdbcUtils;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
