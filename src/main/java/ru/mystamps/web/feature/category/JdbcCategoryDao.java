@@ -28,7 +28,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.support.jdbc.RowMappers;
+import ru.mystamps.web.common.RowMappers;
 
 import java.util.Collections;
 import java.util.Date;

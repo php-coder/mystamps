@@ -15,11 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.jdbc;
-
-import ru.mystamps.web.common.EntityWithParentDto;
-import ru.mystamps.web.common.JdbcUtils;
-import ru.mystamps.web.common.LinkEntityDto;
+package ru.mystamps.web.common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

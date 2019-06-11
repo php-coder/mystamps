@@ -92,7 +92,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 	public List<EntityWithParentDto> findBuyersWithParents() {
 		return jdbcTemplate.query(
 			findBuyersWithParentNamesSql,
-			ru.mystamps.web.support.jdbc.RowMappers::forEntityWithParentDto
+			ru.mystamps.web.common.RowMappers::forEntityWithParentDto
 		);
 	}
 	
@@ -100,7 +100,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 	public List<EntityWithParentDto> findSellersWithParents() {
 		return jdbcTemplate.query(
 			findSellersWithParentNamesSql,
-			ru.mystamps.web.support.jdbc.RowMappers::forEntityWithParentDto
+			ru.mystamps.web.common.RowMappers::forEntityWithParentDto
 		);
 	}
 	

@@ -23,6 +23,8 @@ import ru.mystamps.web.common.LinkEntityDto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static ru.mystamps.web.common.RowMappers.createLinkEntityDto;
+
 final class RowMappers {
 	
 	private RowMappers() {
@@ -41,14 +43,14 @@ final class RowMappers {
 	/* default */ static SeriesParsedDataDto forSeriesParsedDataDto(ResultSet rs, int unused)
 		throws SQLException {
 		
-		LinkEntityDto category = ru.mystamps.web.support.jdbc.RowMappers.createLinkEntityDto(
+		LinkEntityDto category = createLinkEntityDto(
 			rs,
 			"category_id",
 			"category_slug",
 			"category_name"
 		);
 		
-		LinkEntityDto country = ru.mystamps.web.support.jdbc.RowMappers.createLinkEntityDto(
+		LinkEntityDto country = createLinkEntityDto(
 			rs,
 			"country_id",
 			"country_slug",

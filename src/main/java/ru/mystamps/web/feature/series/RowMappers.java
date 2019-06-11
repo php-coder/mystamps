@@ -26,7 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static ru.mystamps.web.support.jdbc.RowMappers.createLinkEntityDto;
+import static ru.mystamps.web.common.RowMappers.createLinkEntityDto;
 
 final class RowMappers {
 	
