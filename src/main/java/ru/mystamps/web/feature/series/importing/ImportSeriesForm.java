@@ -25,8 +25,8 @@ import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.series.AddSeriesDto;
+import ru.mystamps.web.feature.series.CatalogNumbers;
 import ru.mystamps.web.feature.series.NullableImageUrl;
-import ru.mystamps.web.support.beanvalidation.CatalogNumbers;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;

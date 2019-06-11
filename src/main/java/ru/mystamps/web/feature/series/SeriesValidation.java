@@ -25,9 +25,9 @@ public final class SeriesValidation {
 	public static final int MIN_STAMPS_IN_SERIES = 1;
 	public static final int MAX_STAMPS_IN_SERIES = 50;
 	public static final int MIN_RELEASE_YEAR     = 1840;
-	public static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
+	static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
-	public static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
+	static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
 	static final int MAX_SERIES_COMMENT_LENGTH = Series.COMMENT_LENGTH;
 	
 	static final int MAX_DAYS_IN_MONTH = 31;

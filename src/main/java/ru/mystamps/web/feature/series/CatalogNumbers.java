@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.support.beanvalidation;
+package ru.mystamps.web.feature.series;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -33,7 +33,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = CatalogNumbersValidator.class)
 @Documented
 public @interface CatalogNumbers {
-	String message() default "{ru.mystamps.web.support.beanvalidation.CatalogNumbers.message}";
+	String message() default "{ru.mystamps.web.feature.series.CatalogNumbers.message}";
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 	
