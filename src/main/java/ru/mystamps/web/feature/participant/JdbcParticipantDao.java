@@ -27,7 +27,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.JdbcUtils;
-import ru.mystamps.web.support.jdbc.RowMappers;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -93,7 +92,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 	public List<EntityWithParentDto> findBuyersWithParents() {
 		return jdbcTemplate.query(
 			findBuyersWithParentNamesSql,
-			RowMappers::forEntityWithParentDto
+			ru.mystamps.web.support.jdbc.RowMappers::forEntityWithParentDto
 		);
 	}
 	
@@ -101,7 +100,7 @@ public class JdbcParticipantDao implements ParticipantDao {
 	public List<EntityWithParentDto> findSellersWithParents() {
 		return jdbcTemplate.query(
 			findSellersWithParentNamesSql,
-			RowMappers::forEntityWithParentDto
+			ru.mystamps.web.support.jdbc.RowMappers::forEntityWithParentDto
 		);
 	}
 	

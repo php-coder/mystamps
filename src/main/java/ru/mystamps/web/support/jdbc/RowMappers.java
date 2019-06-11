@@ -21,7 +21,6 @@ import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -33,7 +32,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public final class RowMappers {
 	
 	private RowMappers() {
@@ -165,13 +163,6 @@ public final class RowMappers {
 			gibbonsPrice,
 			solovyovPrice,
 			zagorskiPrice
-		);
-	}
-	
-	public static EntityWithIdDto forEntityWithIdDto(ResultSet rs, int unused) throws SQLException {
-		return new EntityWithIdDto(
-			rs.getInt("id"),
-			rs.getString("name")
 		);
 	}
 	
