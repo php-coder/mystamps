@@ -1,0 +1,32 @@
+# Customize configuration from docker-compose.yml to run the application with
+# PostgreSQL database.
+#
+# In order to get the effective configuration, run
+#   $ docker-compose -f docker-compose.yml -f postgres.yml config
+#
+# @todo #1034 Document how to run with PostgreSQL and docker-compose
+#
+version: '3'
+
+services:
+  web:
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mystamps
+      - SPRING_DATASOURCE_USERNAME=mystamps
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+    networks:
+      - internal-network
+    depends_on:
+      - db
+  db:
+    image: postgres:11.3
+    environment:
+      - POSTGRES_USER=mystamps
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DATABASE=mystamps
+    networks:
+      - internal-network
+
+networks:
+  internal-network:
