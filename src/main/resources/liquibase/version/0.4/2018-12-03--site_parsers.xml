@@ -42,118 +42,115 @@
 	<changeSet id="add-localhost-by-ip-site-parser" author="php-coder" context="test-data">
 		
 		<insert tableName="site_parsers">
-			<column name="id" valueNumeric="1" />
 			<column name="name" value="localhost-by-ip" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="1" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-ip')" />
 			<column name="name" value="matched-url" />
 			<column name="value" value="http://127.0.0.1:8080" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="1" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-ip')" />
 			<column name="name" value="category-locator" />
 			<column name="value" value="#category_name" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="1" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-ip')" />
 			<column name="name" value="country-locator" />
 			<column name="value" value="#country_name" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="1" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-ip')" />
 			<column name="name" value="image-url-locator" />
 			<column name="value" value="#series-image-link-1" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="1" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-ip')" />
 			<column name="name" value="issue-date-locator" />
 			<column name="value" value="#issue_date" />
 		</insert>
 		
 		<insert tableName="site_parsers">
-			<column name="id" valueNumeric="2" />
 			<column name="name" value="localhost-by-name" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="matched-url" />
 			<column name="value" value="http://localhost:8080" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="image-url-locator" />
 			<column name="value" value="#series-image-link-1" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="short-description-locator" />
 			<column name="value" value=".dl-horizontal" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="seller-locator" />
 			<column name="value" value="#test-seller" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="price-locator" />
 			<column name="value" value="#test-price" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="2" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'localhost-by-name')" />
 			<column name="name" value="currency-value" />
 			<column name="value" value="RUB" />
 		</insert>
 		
 		<insert tableName="site_parsers">
-			<column name="id" valueNumeric="3" />
 			<column name="name" value="mockserver" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="matched-url" />
 			<column name="value" value="http://127.0.0.1:8888" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="image-url-locator" />
 			<column name="value" value="#test-image" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="short-description-locator" />
 			<column name="value" value="#test-description" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="seller-locator" />
 			<column name="value" value="#test-seller" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="price-locator" />
 			<column name="value" value="#test-price" />
 		</insert>
 		
 		<insert tableName="site_parser_params">
-			<column name="parser_id" valueNumeric="3" />
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
 			<column name="name" value="currency-value" />
 			<column name="value" value="RUB" />
 		</insert>
