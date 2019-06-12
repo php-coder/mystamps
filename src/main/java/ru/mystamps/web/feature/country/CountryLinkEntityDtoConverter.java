@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.controller.converter;
+package ru.mystamps.web.feature.country;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,20 +24,15 @@ import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
-import ru.mystamps.web.feature.category.Category;
-import ru.mystamps.web.feature.category.CategoryService;
-import ru.mystamps.web.feature.country.Country;
-import ru.mystamps.web.feature.country.CountryService;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class LinkEntityDtoGenericConverter implements ConditionalGenericConverter {
+public class CountryLinkEntityDtoConverter implements ConditionalGenericConverter {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(LinkEntityDtoGenericConverter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CountryLinkEntityDtoConverter.class);
 	
-	private final CategoryService categoryService;
 	private final CountryService countryService;
 	
 	@Override
@@ -65,17 +60,13 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 				return null;
 			}
 			
-			String lang = LocaleUtils.getCurrentLanguageOrNull();
 			if (hasCountryAnnotation(targetType)) {
+				String lang = LocaleUtils.getCurrentLanguageOrNull();
 				return countryService.findOneAsLinkEntity(slug, lang);
 			}
 			
-			if (hasCategoryAnnotation(targetType)) {
-				return categoryService.findOneAsLinkEntity(slug, lang);
-			}
-			
 			LOG.warn(
-				"Can't convert type '{}' because it doesn't contain supported annotations",
+				"Can't convert type '{}' because it doesn't contain @Country annotation",
 				targetType
 			);
 			
@@ -97,10 +88,8 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 			return true;
 		}
 		
-		// String -> @Category/@Country LinkEntityDto
-		return isString(sourceType)
-			&& isDto(targetType)
-			&& (hasCategoryAnnotation(targetType) || hasCountryAnnotation(targetType));
+		// String -> @Country LinkEntityDto
+		return isString(sourceType) && isDto(targetType) && hasCountryAnnotation(targetType);
 	}
 	
 	private static boolean isString(TypeDescriptor type) {
@@ -109,10 +98,6 @@ public class LinkEntityDtoGenericConverter implements ConditionalGenericConverte
 	
 	private static boolean isDto(TypeDescriptor type) {
 		return LinkEntityDto.class.equals(type.getType());
-	}
-	
-	private static boolean hasCategoryAnnotation(TypeDescriptor type) {
-		return type.hasAnnotation(Category.class);
 	}
 	
 	private static boolean hasCountryAnnotation(TypeDescriptor type) {
