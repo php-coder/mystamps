@@ -11,14 +11,14 @@ INSERT INTO images(id, type) VALUES(1, 'PNG');
 INSERT INTO series(id, quantity, perforated, image_url, created_at, created_by, updated_at, updated_by) VALUES
 	(1, 1, TRUE, '/image/1', NOW(), 4, NOW(), 4);
 
-INSERT INTO michel_catalog(id, code) VALUES(1, '99');
-INSERT INTO series_michel_catalog(series_id, michel_id) VALUES(1, 1);
+INSERT INTO michel_catalog(code) VALUES('99');
+INSERT INTO series_michel_catalog(series_id, michel_id) SELECT 1, id FROM michel_catalog WHERE code = '99';
 
-INSERT INTO scott_catalog(id, code) VALUES(1, '99');
-INSERT INTO series_scott_catalog(series_id, scott_id) VALUES(1, 1);
+INSERT INTO scott_catalog(code) VALUES('99');
+INSERT INTO series_scott_catalog(series_id, scott_id) SELECT 1, id FROM scott_catalog WHERE code = '99';
 
-INSERT INTO yvert_catalog(id, code) VALUES(1, '99');
-INSERT INTO series_yvert_catalog(series_id, yvert_id) VALUES(1, 1);
+INSERT INTO yvert_catalog(code) VALUES('99');
+INSERT INTO series_yvert_catalog(series_id, yvert_id) SELECT 1, id FROM yvert_catalog WHERE code = '99';
 
-INSERT INTO gibbons_catalog(id, code) VALUES(1, '99');
-INSERT INTO series_gibbons_catalog(series_id, gibbons_id) VALUES(1, 1);
+INSERT INTO gibbons_catalog(code) VALUES('99');
+INSERT INTO series_gibbons_catalog(series_id, gibbons_id) SELECT 1, id FROM gibbons_catalog WHERE code = '99';
