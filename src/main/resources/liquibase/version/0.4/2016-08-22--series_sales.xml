@@ -72,7 +72,6 @@
 		<comment>Creates series sales and purchases examples</comment>
 		
 		<insert tableName="series_sales">
-			<column name="id" value="1"/>
 			<column name="series_id" value="1"/>
 			<column name="date" valueComputed="${NOW}"/>
 			<column name="seller_id" value="1"/>
@@ -85,7 +84,6 @@
 		</insert>
 		
 		<insert tableName="series_sales">
-			<column name="id" value="2"/>
 			<column name="series_id" value="1"/>
 			<column name="seller_id" value="3"/>
 			<column name="transaction_url" value="http://example.com/teresa-palmer/sell-stamps"/>
