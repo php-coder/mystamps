@@ -51,19 +51,16 @@
 		<comment>Creates buyers and sellers examples</comment>
 		
 		<insert tableName="transaction_participants">
-			<column name="id" value="1"/>
 			<column name="name" value="Eicca Toppinen"/>
 			<column name="url" value="http://example.com/eicca-toppinen"/>
 		</insert>
 		
 		<insert tableName="transaction_participants">
-			<column name="id" value="2"/>
 			<column name="name" value="John Connor"/>
 			<column name="url" value="http://example.com/john-connor"/>
 		</insert>
 		
 		<insert tableName="transaction_participants">
-			<column name="id" value="3"/>
 			<column name="name" value="Duncan MacLeod"/>
 		</insert>
 	</changeSet>
@@ -74,8 +71,8 @@
 		<insert tableName="series_sales">
 			<column name="series_id" value="1"/>
 			<column name="date" valueComputed="${NOW}"/>
-			<column name="seller_id" value="1"/>
-			<column name="buyer_id" value="2"/>
+			<column name="seller_id" valueComputed="(SELECT id FROM transaction_participants WHERE name = 'Eicca Toppinen')"/>
+			<column name="buyer_id" valueComputed="(SELECT id FROM transaction_participants WHERE name = 'John Connor')"/>
 			<column name="transaction_url" value="http://example.com/eicca-toppinen/sell-stamps"/>
 			<column name="first_price" value="100.55"/>
 			<column name="first_currency" value="USD"/>
@@ -85,7 +82,7 @@
 		
 		<insert tableName="series_sales">
 			<column name="series_id" value="1"/>
-			<column name="seller_id" value="3"/>
+			<column name="seller_id" valueComputed="(SELECT id FROM transaction_participants WHERE name = 'Duncan MacLeod')"/>
 			<column name="transaction_url" value="http://example.com/teresa-palmer/sell-stamps"/>
 			<column name="first_price" value="500.00"/>
 			<column name="first_currency" value="USD"/>

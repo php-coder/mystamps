@@ -9,7 +9,6 @@
 		<comment>Creates buyers and sellers examples</comment>
 		
 		<insert tableName="transaction_participants">
-			<column name="id" value="4" />
 			<column name="name" value="Tommy Lee Jones" />
 			<column name="url" value="http://example.com/tommy-lee-jones" />
 			<column name="is_buyer" valueBoolean="true" />
