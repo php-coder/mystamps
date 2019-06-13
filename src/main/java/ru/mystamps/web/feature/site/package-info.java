@@ -1,3 +1,4 @@
+// @todo #927 Move site package to one level up
 /**
  * Assorted site-specific things.
  *

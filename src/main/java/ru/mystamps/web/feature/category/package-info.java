@@ -1,3 +1,4 @@
+// @todo #927 Move category package one level up
 /**
  * Categories of the stamp series.
  */
