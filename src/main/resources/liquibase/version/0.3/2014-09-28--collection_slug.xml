@@ -14,11 +14,11 @@
 		
 	</changeSet>
 	
-	<changeSet id="update-collections-slug" author="php-coder" context="test-data,prod-data">
+	<changeSet id="update-collections-slug" author="php-coder" context="test-data,prod-data" dbms="mysql,h2">
 		<comment>Sets value of slug field to transformed collection's owner's name</comment>
 		
 		<!-- Unfortunately, H2 doesn't support UPDATE with JOIN -->
-		<sql dbms="mysql,h2">
+		<sql>
 			UPDATE collections c
 			SET c.slug = (
 				SELECT LOWER(REPLACE(u.login, ' ', '-'))
@@ -27,8 +27,13 @@
 			);
 		</sql>
 		
+	</changeSet>
+	
+	<changeSet id="update-collections-slug" author="php-coder" context="test-data,prod-data" dbms="postgresql">
+		<comment>Sets value of slug field to transformed collection's owner's name</comment>
+		
 		<!-- In PostgreSQL it is illegal to prefix columns with table alias in the SET clause -->
-		<sql dbms="postgresql">
+		<sql>
 			UPDATE collections c
 			SET slug = (
 				SELECT LOWER(REPLACE(u.login, ' ', '-'))

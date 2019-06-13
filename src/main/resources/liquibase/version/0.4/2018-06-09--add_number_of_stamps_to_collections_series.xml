@@ -13,10 +13,10 @@
 		
 	</changeSet>
 	
-	<changeSet id="fill-collections_series-number_of_stamps-field" author="php-coder" context="prod-data">
+	<changeSet id="fill-collections_series-number_of_stamps-field" author="php-coder" context="prod-data" dbms="mysql,h2">
 		<comment>Sets value of number_of_stamps field to number of stamps in a series</comment>
 		
-		<sql dbms="mysql,h2">
+		<sql>
 			UPDATE collections_series cs
 			SET cs.number_of_stamps = (
 				SELECT s.quantity
@@ -25,8 +25,20 @@
 			)
 		</sql>
 		
+		<rollback>
+			<sql>
+				UPDATE collections_series
+				SET number_of_stamps = NULL
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="fill-collections_series-number_of_stamps-field" author="php-coder" context="prod-data" dbms="postgresql">
+		<comment>Sets value of number_of_stamps field to number of stamps in a series</comment>
+		
 		<!-- In PostgreSQL it is illegal to prefix columns with table alias in the SET clause -->
-		<sql dbms="postgresql">
+		<sql>
 			UPDATE collections_series cs
 			SET number_of_stamps = (
 				SELECT s.quantity

@@ -23,7 +23,7 @@
 		
 	</changeSet>
 	
-	<changeSet id="fill-series_images-table-based-on-values-from-image_url" author="php-coder" context="test-data, prod-data">
+	<changeSet id="fill-series_images-table-based-on-values-from-image_url" author="php-coder" context="test-data, prod-data" dbms="mysql,h2">
 		<preConditions>
 			<sqlCheck expectedResult="0">
 				SELECT COUNT(*)
@@ -34,14 +34,27 @@
 		
 		<comment>Migrates data from series.image_url to series_images</comment>
 		
-		<sql dbms="mysql,h2">
+		<sql>
 			INSERT INTO series_images(series_id, image_id)
 			SELECT id AS series_id, REPLACE(image_url, '/image/', '') AS image_id
 			FROM series
 		</sql>
 		
+	</changeSet>
+	
+	<changeSet id="fill-series_images-table-based-on-values-from-image_url" author="php-coder" context="test-data, prod-data" dbms="postgresql">
+		<preConditions>
+			<sqlCheck expectedResult="0">
+				SELECT COUNT(*)
+				FROM series
+				WHERE image_url IS NULL
+			</sqlCheck>
+		</preConditions>
+		
+		<comment>Migrates data from series.image_url to series_images</comment>
+		
 		<!-- PostgreSQL requires us to cast a string to an integer explicitly -->
-		<sql dbms="postgresql">
+		<sql>
 			INSERT INTO series_images(series_id, image_id)
 			SELECT id AS series_id, CAST(REPLACE(image_url, '/image/', '') AS INT) AS image_id
 			FROM series
