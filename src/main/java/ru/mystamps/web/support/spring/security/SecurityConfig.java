@@ -90,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
-				.mvcMatchers(Url.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
+				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
 				// @todo #884 /collection/{slug}/estimation: only owner should have access to estimation page
 				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE).hasAuthority(StringAuthority.ADD_SERIES_PRICE)

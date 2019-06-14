@@ -61,8 +61,6 @@ public final class Url {
 	
 	public static final String IMPORT_SERIES_SALES        = "/series/sales/import";
 	
-	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
-	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
@@ -136,7 +134,6 @@ public final class Url {
 		map.put("REQUEST_IMPORT_SERIES_PAGE", REQUEST_IMPORT_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
-		map.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
 		
 		if (serveContentFromSingleHost) {
 			ImageUrl.exposeResourcesToView(map);

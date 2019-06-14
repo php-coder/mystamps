@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
 @RestController
@@ -34,7 +33,7 @@ class SuggestionController {
 	 * @author John Shkarin
 	 * @author Slava Semushin
 	 */
-	@GetMapping(Url.SUGGEST_SERIES_COUNTRY)
+	@GetMapping(CountryUrl.SUGGEST_SERIES_COUNTRY)
 	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
 		return StringUtils.defaultString(
 			countryService.suggestCountryForUser(currentUserId),
