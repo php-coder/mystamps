@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.image;
 
+import java.util.Map;
+
 /**
  * Image-related URLs.
  *
@@ -24,12 +26,18 @@ package ru.mystamps.web.feature.image;
  *
  * @author Slava Semushin
  */
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class ImageUrl {
 	
-	public static final String GET_IMAGE_PAGE         = "/image/{id}";
-	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
+	static final String GET_IMAGE_PAGE         = "/image/{id}";
+	static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
 	private ImageUrl() {
+	}
+	
+	public static void exposeResourcesToView(Map<String, String> resources) {
+		resources.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
+		resources.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
 	}
 	
 }

@@ -141,15 +141,14 @@ public final class Url {
 		map.put("SUGGEST_SERIES_CATEGORY", SUGGEST_SERIES_CATEGORY);
 		
 		if (serveContentFromSingleHost) {
-			// Constants sorted in an ascending order.
+			ImageUrl.exposeResourcesToView(map);
+			
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
 			map.put("CATALOG_UTILS_JS", CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", COLLECTION_INFO_JS);
 			map.put("DATE_UTILS_JS", DATE_UTILS_JS);
 			map.put("FAVICON_ICO", FAVICON_ICO);
-			map.put("GET_IMAGE_PAGE", ImageUrl.GET_IMAGE_PAGE);
-			map.put("GET_IMAGE_PREVIEW_PAGE", ImageUrl.GET_IMAGE_PREVIEW_PAGE);
 			map.put("JQUERY_JS", JQUERY_JS);
 			map.put("MAIN_CSS", MAIN_CSS);
 			map.put("PARTICIPANT_ADD_JS", PARTICIPANT_ADD_JS);
@@ -158,15 +157,29 @@ public final class Url {
 			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
 			map.put("SERIES_INFO_JS", SERIES_INFO_JS);
 		} else {
-			// Use a separate domain for our own resources
-			// Constants sorted in an ascending order.
+			// This is a simplest decorator around Map that modifies inserted URLs by prepending
+			// a host for static resources to them.
+			//
+			// I don't want to use ForwardingMap (Guava) or TransformedMap (commons-collections)
+			// as we don't have them in dependencies and I don't want to add them either just for
+			// a few lines of code.
+			//
+			// NOTE: this implementation won't work as expected when a caller uses putAll(),
+			// putIfAbsent() or modifies a map by other ways.
+			Map<String, String> resourcesMap = new HashMap<String, String>(map) {
+				@Override
+				public String put(String key, String value) {
+					// Use a separate domain for our own resources
+					return map.put(STATIC_RESOURCES_URL + key, value);
+				}
+			};
+			
+			ImageUrl.exposeResourcesToView(resourcesMap);
+			
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);
 			map.put("DATE_UTILS_JS", STATIC_RESOURCES_URL + DATE_UTILS_JS);
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
-			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + ImageUrl.GET_IMAGE_PAGE);
-			// CheckStyle: ignore LineLength for next 1 line
-			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + ImageUrl.GET_IMAGE_PREVIEW_PAGE);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
 			map.put("PARTICIPANT_ADD_JS", STATIC_RESOURCES_URL + PARTICIPANT_ADD_JS);
 			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
