@@ -117,16 +117,15 @@ public final class Url {
 		boolean serveContentFromSingleHost = !production;
 		
 		// Not all URLs are listed here but only those that are being used on views
-		// Constants sorted in an ascending order.
 		Map<String, String> map = new HashMap<>();
-		map.put("ACTIVATE_ACCOUNT_PAGE", AccountUrl.ACTIVATE_ACCOUNT_PAGE);
+		AccountUrl.exposeUrlsToView(map);
+		
 		map.put("ADD_CATEGORY_PAGE", CategoryUrl.ADD_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", CountryUrl.ADD_COUNTRY_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_PARTICIPANT_PAGE", ParticipantUrl.ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
-		map.put("AUTHENTICATION_PAGE", AccountUrl.AUTHENTICATION_PAGE);
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("ESTIMATION_COLLECTION_PAGE", CollectionUrl.ESTIMATION_COLLECTION_PAGE);
@@ -138,10 +137,7 @@ public final class Url {
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("LIST_IMPORT_REQUESTS_PAGE", LIST_IMPORT_REQUESTS_PAGE);
 		map.put("IMPORT_SERIES_SALES", IMPORT_SERIES_SALES);
-		map.put("LOGIN_PAGE", AccountUrl.LOGIN_PAGE);
-		map.put("LOGOUT_PAGE", AccountUrl.LOGOUT_PAGE);
 		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
-		map.put("REGISTRATION_PAGE", AccountUrl.REGISTRATION_PAGE);
 		map.put("REQUEST_IMPORT_PAGE", REQUEST_IMPORT_PAGE);
 		map.put("REQUEST_IMPORT_SERIES_PAGE", REQUEST_IMPORT_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);

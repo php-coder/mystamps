@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.account;
 
+import java.util.Map;
+
 /**
  * Account-related URLs.
  *
@@ -37,6 +39,14 @@ public final class AccountUrl {
 	static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
 	
 	private AccountUrl() {
+	}
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("ACTIVATE_ACCOUNT_PAGE", ACTIVATE_ACCOUNT_PAGE);
+		urls.put("AUTHENTICATION_PAGE", AUTHENTICATION_PAGE);
+		urls.put("LOGIN_PAGE", LOGIN_PAGE);
+		urls.put("LOGOUT_PAGE", LOGOUT_PAGE);
+		urls.put("REGISTRATION_PAGE", REGISTRATION_PAGE);
 	}
 	
 }
