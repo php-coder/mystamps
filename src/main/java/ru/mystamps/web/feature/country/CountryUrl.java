@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.country;
 
+import java.util.Map;
+
 /**
  * Country-related URLs.
  *
@@ -28,14 +30,20 @@ package ru.mystamps.web.feature.country;
 public final class CountryUrl {
 	
 	public static final String ADD_COUNTRY_PAGE   = "/country/add";
-	public static final String GET_COUNTRIES_PAGE = "/countries";
-	public static final String INFO_COUNTRY_PAGE  = "/country/{slug}";
+	static final String GET_COUNTRIES_PAGE        = "/countries";
+	static final String INFO_COUNTRY_PAGE         = "/country/{slug}";
 	
 	// For backward compatibility
 	static final String LIST_COUNTRIES_PAGE     = "/country/list";
 	static final String INFO_COUNTRY_BY_ID_PAGE = "/country/{id}/{slug}";
 	
 	private CountryUrl() {
+	}
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
+		urls.put("GET_COUNTRIES_PAGE", GET_COUNTRIES_PAGE);
+		urls.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 	}
 	
 }
