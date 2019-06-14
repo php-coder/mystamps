@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
 @RestController
@@ -30,7 +29,7 @@ class SuggestionController {
 
 	private final CategoryService categoryService;
 	
-	@GetMapping(Url.SUGGEST_SERIES_CATEGORY)
+	@GetMapping(CategoryUrl.SUGGEST_SERIES_CATEGORY)
 	public String suggestCategoryForUser(@CurrentUser Integer currentUserId) {
 		return StringUtils.defaultString(
 			categoryService.suggestCategoryForUser(currentUserId),

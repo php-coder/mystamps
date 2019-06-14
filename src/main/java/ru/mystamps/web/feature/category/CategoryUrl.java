@@ -32,6 +32,7 @@ public final class CategoryUrl {
 	public static final String ADD_CATEGORY_PAGE   = "/category/add";
 	static final String GET_CATEGORIES_PAGE        = "/categories";
 	static final String INFO_CATEGORY_PAGE         = "/category/{slug}";
+	static final String SUGGEST_SERIES_CATEGORY    = "/suggest/series_category";
 	
 	// For backward compatibility
 	static final String LIST_CATEGORIES_PAGE       = "/category/list";
@@ -44,6 +45,7 @@ public final class CategoryUrl {
 		urls.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
 		urls.put("GET_CATEGORIES_PAGE", GET_CATEGORIES_PAGE);
 		urls.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
+		urls.put("SUGGEST_SERIES_CATEGORY", SUGGEST_SERIES_CATEGORY);
 	}
 	
 }
