@@ -47,6 +47,7 @@ import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
+import ru.mystamps.web.feature.participant.ParticipantUrl;
 import ru.mystamps.web.feature.site.SiteService;
 
 import javax.servlet.Filter;
@@ -85,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.mvcMatchers(Url.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
+				.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
 				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)

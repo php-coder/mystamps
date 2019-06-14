@@ -21,6 +21,7 @@ import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
+import ru.mystamps.web.feature.participant.ParticipantUrl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,8 +65,6 @@ public final class Url {
 	
 	public static final String GET_IMAGE_PAGE         = "/image/{id}";
 	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
-	
-	public static final String ADD_PARTICIPANT_PAGE  = "/participant/add";
 	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
@@ -126,7 +125,7 @@ public final class Url {
 		map.put("ADD_CATEGORY_PAGE", CategoryUrl.ADD_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", CountryUrl.ADD_COUNTRY_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
-		map.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
+		map.put("ADD_PARTICIPANT_PAGE", ParticipantUrl.ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
 		map.put("AUTHENTICATION_PAGE", AccountUrl.AUTHENTICATION_PAGE);

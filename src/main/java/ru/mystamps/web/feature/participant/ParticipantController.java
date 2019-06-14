@@ -47,7 +47,7 @@ public class ParticipantController {
 		binder.registerCustomEditor(String.class, "url", editor);
 	}
 	
-	@GetMapping(Url.ADD_PARTICIPANT_PAGE)
+	@GetMapping(ParticipantUrl.ADD_PARTICIPANT_PAGE)
 	public AddParticipantForm showForm(
 		Model model,
 		@RequestParam(name = "seller", required = false) Boolean seller,
@@ -63,7 +63,7 @@ public class ParticipantController {
 		return form;
 	}
 	
-	@PostMapping(Url.ADD_PARTICIPANT_PAGE)
+	@PostMapping(ParticipantUrl.ADD_PARTICIPANT_PAGE)
 	public String processInput(Model model, @Valid AddParticipantForm form, BindingResult result) {
 		if (result.hasErrors()) {
 			List<EntityWithIdDto> groups = participantService.findAllGroups();
