@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
+import ru.mystamps.web.feature.country.CountryUrl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class RobotsTxtController {
 			writer.println("Disallow: " + AccountUrl.ACTIVATE_ACCOUNT_PAGE);
 			writer.println("Disallow: " + AccountUrl.AUTHENTICATION_PAGE);
 			writer.println("Disallow: " + AccountUrl.LOGIN_PAGE);
-			writer.println("Disallow: " + Url.ADD_COUNTRY_PAGE);
+			writer.println("Disallow: " + CountryUrl.ADD_COUNTRY_PAGE);
 			writer.println("Disallow: " + Url.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + CategoryUrl.ADD_CATEGORY_PAGE);
 			writer.println("Disallow: " + Url.FORBIDDEN_PAGE);

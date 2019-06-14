@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -62,12 +61,12 @@ public class CountryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@GetMapping(Url.ADD_COUNTRY_PAGE)
+	@GetMapping(CountryUrl.ADD_COUNTRY_PAGE)
 	public AddCountryForm showForm() {
 		return new AddCountryForm();
 	}
 	
-	@PostMapping(Url.ADD_COUNTRY_PAGE)
+	@PostMapping(CountryUrl.ADD_COUNTRY_PAGE)
 	public String processInput(
 		@Valid AddCountryForm form,
 		BindingResult result,
@@ -82,10 +81,10 @@ public class CountryController {
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return redirectTo(Url.INFO_COUNTRY_PAGE, slug);
+		return redirectTo(CountryUrl.INFO_COUNTRY_PAGE, slug);
 	}
 	
-	@GetMapping(Url.INFO_COUNTRY_PAGE)
+	@GetMapping(CountryUrl.INFO_COUNTRY_PAGE)
 	public String showInfoBySlug(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		Model model,
@@ -114,7 +113,7 @@ public class CountryController {
 	/**
 	 * @author Aleksander Parkhomenko
 	 */
-	@GetMapping(Url.INFO_COUNTRY_BY_ID_PAGE)
+	@GetMapping(CountryUrl.INFO_COUNTRY_BY_ID_PAGE)
 	public View showInfoById(
 		@Country @PathVariable("slug") LinkEntityDto country,
 		HttpServletResponse response)
@@ -127,12 +126,12 @@ public class CountryController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.INFO_COUNTRY_PAGE);
+		view.setUrl(CountryUrl.INFO_COUNTRY_PAGE);
 		
 		return view;
 	}
 	
-	@GetMapping(Url.GET_COUNTRIES_PAGE)
+	@GetMapping(CountryUrl.GET_COUNTRIES_PAGE)
 	public String showCountries(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> countries = countryService.findAllAsLinkEntities(lang);
@@ -142,11 +141,11 @@ public class CountryController {
 		return "country/list";
 	}
 	
-	@GetMapping(Url.LIST_COUNTRIES_PAGE)
+	@GetMapping(CountryUrl.LIST_COUNTRIES_PAGE)
 	public View list() {
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.GET_COUNTRIES_PAGE);
+		view.setUrl(CountryUrl.GET_COUNTRIES_PAGE);
 		return view;
 	}
 	

@@ -20,6 +20,7 @@ package ru.mystamps.web;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
+import ru.mystamps.web.feature.country.CountryUrl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,10 +62,6 @@ public final class Url {
 	public static final String SUGGEST_SERIES_CATEGORY    = "/suggest/series_category";
 	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
 	
-	public static final String ADD_COUNTRY_PAGE      = "/country/add";
-	public static final String GET_COUNTRIES_PAGE    = "/countries";
-	public static final String INFO_COUNTRY_PAGE     = "/country/{slug}";
-	
 	public static final String GET_IMAGE_PAGE         = "/image/{id}";
 	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
@@ -75,8 +72,6 @@ public final class Url {
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
 	// For backward compatibility
-	public static final String LIST_COUNTRIES_PAGE            = "/country/list";
-	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
 	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
@@ -129,7 +124,7 @@ public final class Url {
 		Map<String, String> map = new HashMap<>();
 		map.put("ACTIVATE_ACCOUNT_PAGE", AccountUrl.ACTIVATE_ACCOUNT_PAGE);
 		map.put("ADD_CATEGORY_PAGE", CategoryUrl.ADD_CATEGORY_PAGE);
-		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
+		map.put("ADD_COUNTRY_PAGE", CountryUrl.ADD_COUNTRY_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
@@ -139,10 +134,10 @@ public final class Url {
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("ESTIMATION_COLLECTION_PAGE", CollectionUrl.ESTIMATION_COLLECTION_PAGE);
 		map.put("GET_CATEGORIES_PAGE", CategoryUrl.GET_CATEGORIES_PAGE);
-		map.put("GET_COUNTRIES_PAGE", GET_COUNTRIES_PAGE);
+		map.put("GET_COUNTRIES_PAGE", CountryUrl.GET_COUNTRIES_PAGE);
 		map.put("INFO_CATEGORY_PAGE", CategoryUrl.INFO_CATEGORY_PAGE);
 		map.put("INFO_COLLECTION_PAGE", CollectionUrl.INFO_COLLECTION_PAGE);
-		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
+		map.put("INFO_COUNTRY_PAGE", CountryUrl.INFO_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("LIST_IMPORT_REQUESTS_PAGE", LIST_IMPORT_REQUESTS_PAGE);
 		map.put("IMPORT_SERIES_SALES", IMPORT_SERIES_SALES);
