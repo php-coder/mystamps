@@ -42,6 +42,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.site.SiteService;
 
@@ -101,16 +102,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().permitAll()
 				.and()
 			.formLogin()
-				.loginPage(Url.AUTHENTICATION_PAGE)
+				.loginPage(AccountUrl.AUTHENTICATION_PAGE)
 				.usernameParameter("login")
 				.passwordParameter("password")
-				.loginProcessingUrl(Url.LOGIN_PAGE)
-				.failureUrl(Url.AUTHENTICATION_PAGE + "?failed")
+				.loginProcessingUrl(AccountUrl.LOGIN_PAGE)
+				.failureUrl(AccountUrl.AUTHENTICATION_PAGE + "?failed")
 				.defaultSuccessUrl(Url.INDEX_PAGE, true)
 				.permitAll()
 				.and()
 			.logout()
-				.logoutUrl(Url.LOGOUT_PAGE)
+				.logoutUrl(AccountUrl.LOGOUT_PAGE)
 				.logoutSuccessUrl(Url.INDEX_PAGE)
 				.invalidateHttpSession(true)
 				.permitAll()
@@ -181,7 +182,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		bean.setOrder(requestContextFilter.getOrder() + 1);
 		
 		// url pattern should match HttpSecurity.formLogin().loginProcessingUrl()
-		bean.setUrlPatterns(Collections.singletonList(Url.LOGIN_PAGE));
+		bean.setUrlPatterns(Collections.singletonList(AccountUrl.LOGIN_PAGE));
 		
 		return bean;
 	}

@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.account.AccountUrl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,10 +43,10 @@ public class RobotsTxtController {
 			
 			writer.println("# robots.txt for " + Url.PUBLIC_URL);
 			writer.println("User-Agent: *");
-			writer.println("Disallow: " + Url.REGISTRATION_PAGE);
-			writer.println("Disallow: " + Url.ACTIVATE_ACCOUNT_PAGE);
-			writer.println("Disallow: " + Url.AUTHENTICATION_PAGE);
-			writer.println("Disallow: " + Url.LOGIN_PAGE);
+			writer.println("Disallow: " + AccountUrl.REGISTRATION_PAGE);
+			writer.println("Disallow: " + AccountUrl.ACTIVATE_ACCOUNT_PAGE);
+			writer.println("Disallow: " + AccountUrl.AUTHENTICATION_PAGE);
+			writer.println("Disallow: " + AccountUrl.LOGIN_PAGE);
 			writer.println("Disallow: " + Url.ADD_COUNTRY_PAGE);
 			writer.println("Disallow: " + Url.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + Url.ADD_CATEGORY_PAGE);

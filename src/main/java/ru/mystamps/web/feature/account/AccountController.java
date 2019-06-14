@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.LoginChecks;
@@ -62,12 +61,12 @@ public class AccountController {
 		binder.registerCustomEditor(String.class, "name", new StringTrimmerEditor(true));
 	}
 	
-	@GetMapping(Url.REGISTRATION_PAGE)
+	@GetMapping(AccountUrl.REGISTRATION_PAGE)
 	public RegisterAccountForm showRegistrationForm() {
 		return new RegisterAccountForm();
 	}
 	
-	@PostMapping(Url.REGISTRATION_PAGE)
+	@PostMapping(AccountUrl.REGISTRATION_PAGE)
 	public String processRegistrationForm(
 		@Valid RegisterAccountForm form,
 		BindingResult result,
@@ -82,10 +81,10 @@ public class AccountController {
 		
 		redirectAttributes.addFlashAttribute("justRegisteredUser", true);
 		
-		return "redirect:" + Url.ACTIVATE_ACCOUNT_PAGE;
+		return "redirect:" + AccountUrl.ACTIVATE_ACCOUNT_PAGE;
 	}
 	
-	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE)
+	@GetMapping(AccountUrl.ACTIVATE_ACCOUNT_PAGE)
 	public ActivateAccountForm showActivationForm(
 		@RequestParam(name = "key", required = false) String activationKey) {
 		
@@ -97,7 +96,7 @@ public class AccountController {
 		return form;
 	}
 	
-	@GetMapping(Url.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
+	@GetMapping(AccountUrl.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
 	public View showActivationFormWithKey(
 		@PathVariable("key") String activationKey,
 		RedirectAttributes redirectAttributes) {
@@ -106,12 +105,12 @@ public class AccountController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.ACTIVATE_ACCOUNT_PAGE);
+		view.setUrl(AccountUrl.ACTIVATE_ACCOUNT_PAGE);
 		
 		return view;
 	}
 	
-	@PostMapping(Url.ACTIVATE_ACCOUNT_PAGE)
+	@PostMapping(AccountUrl.ACTIVATE_ACCOUNT_PAGE)
 	public String processActivationForm(
 		@Validated({
 			LoginChecks.class, NameChecks.class, PasswordChecks.class,
@@ -126,7 +125,7 @@ public class AccountController {
 		
 		redirectAttributes.addFlashAttribute("justActivatedUser", true);
 		
-		return "redirect:" + Url.AUTHENTICATION_PAGE;
+		return "redirect:" + AccountUrl.AUTHENTICATION_PAGE;
 	}
 	
 }

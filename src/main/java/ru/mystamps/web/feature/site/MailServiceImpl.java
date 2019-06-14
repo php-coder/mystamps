@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.scheduling.annotation.Async;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
 import ru.mystamps.web.feature.report.AdminDailyReport;
 import ru.mystamps.web.feature.report.ReportService;
@@ -123,8 +124,11 @@ public class MailServiceImpl implements MailService {
 	private String getTextOfActivationMail(SendUsersActivationDto activation) {
 		String template = messageSource.getMessage("activation.text", null, activation.getLocale());
 		
-		String activationUrl =
-			String.format("%s?key=%s", Url.ACTIVATE_ACCOUNT_PAGE, activation.getActivationKey());
+		String activationUrl = String.format(
+			"%s?key=%s",
+			AccountUrl.ACTIVATE_ACCOUNT_PAGE,
+			activation.getActivationKey()
+		);
 		
 		Map<String, String> ctx = new HashMap<>();
 		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL);

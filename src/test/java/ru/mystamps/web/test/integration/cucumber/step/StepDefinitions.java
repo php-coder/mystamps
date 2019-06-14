@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.account.AccountUrl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,7 +37,7 @@ public class StepDefinitions  {
 
 	@Given("^as a user$")
 	public void loginAsUser() {
-		driver.get(Url.SITE + Url.AUTHENTICATION_PAGE);
+		driver.get(Url.SITE + AccountUrl.AUTHENTICATION_PAGE);
 		driver.findElement(By.id("login")).click();
 		driver.findElement(By.id("login")).clear();
 		driver.findElement(By.id("login")).sendKeys("coder");

@@ -41,6 +41,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountConfig;
+import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.category.CategoryLinkEntityDtoConverter;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -100,7 +101,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController(Url.AUTHENTICATION_PAGE);
+		registry.addViewController(AccountUrl.AUTHENTICATION_PAGE);
 		registry.addViewController(Url.FORBIDDEN_PAGE);
 	}
 	
