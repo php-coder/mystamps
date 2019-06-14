@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.category;
 
+import java.util.Map;
+
 /**
  * Category-related URLs.
  *
@@ -28,14 +30,20 @@ package ru.mystamps.web.feature.category;
 public final class CategoryUrl {
 	
 	public static final String ADD_CATEGORY_PAGE   = "/category/add";
-	public static final String GET_CATEGORIES_PAGE = "/categories";
-	public static final String INFO_CATEGORY_PAGE  = "/category/{slug}";
+	static final String GET_CATEGORIES_PAGE        = "/categories";
+	static final String INFO_CATEGORY_PAGE         = "/category/{slug}";
 	
 	// For backward compatibility
 	static final String LIST_CATEGORIES_PAGE       = "/category/list";
 	static final String INFO_CATEGORY_BY_ID_PAGE   = "/category/{id}/{slug}";
 	
 	private CategoryUrl() {
+	}
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
+		urls.put("GET_CATEGORIES_PAGE", GET_CATEGORIES_PAGE);
+		urls.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 	}
 	
 }

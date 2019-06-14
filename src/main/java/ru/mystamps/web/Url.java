@@ -119,8 +119,8 @@ public final class Url {
 		// Not all URLs are listed here but only those that are being used on views
 		Map<String, String> map = new HashMap<>();
 		AccountUrl.exposeUrlsToView(map);
+		CategoryUrl.exposeUrlsToView(map);
 		
-		map.put("ADD_CATEGORY_PAGE", CategoryUrl.ADD_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", CountryUrl.ADD_COUNTRY_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_PARTICIPANT_PAGE", ParticipantUrl.ADD_PARTICIPANT_PAGE);
@@ -129,9 +129,7 @@ public final class Url {
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("ESTIMATION_COLLECTION_PAGE", CollectionUrl.ESTIMATION_COLLECTION_PAGE);
-		map.put("GET_CATEGORIES_PAGE", CategoryUrl.GET_CATEGORIES_PAGE);
 		map.put("GET_COUNTRIES_PAGE", CountryUrl.GET_COUNTRIES_PAGE);
-		map.put("INFO_CATEGORY_PAGE", CategoryUrl.INFO_CATEGORY_PAGE);
 		map.put("INFO_COLLECTION_PAGE", CollectionUrl.INFO_COLLECTION_PAGE);
 		map.put("INFO_COUNTRY_PAGE", CountryUrl.INFO_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
