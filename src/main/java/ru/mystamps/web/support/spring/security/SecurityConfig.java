@@ -44,6 +44,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.UserService;
+import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.site.SiteService;
 
@@ -81,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
-				.mvcMatchers(Url.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
+				.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(Url.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
 				.mvcMatchers(Url.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
 				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)

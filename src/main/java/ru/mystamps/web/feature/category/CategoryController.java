@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -62,12 +61,12 @@ public class CategoryController {
 		binder.registerCustomEditor(String.class, "nameRu", editor);
 	}
 	
-	@GetMapping(Url.ADD_CATEGORY_PAGE)
+	@GetMapping(CategoryUrl.ADD_CATEGORY_PAGE)
 	public AddCategoryForm showForm() {
 		return new AddCategoryForm();
 	}
 	
-	@PostMapping(Url.ADD_CATEGORY_PAGE)
+	@PostMapping(CategoryUrl.ADD_CATEGORY_PAGE)
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
@@ -82,10 +81,10 @@ public class CategoryController {
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return redirectTo(Url.INFO_CATEGORY_PAGE, slug);
+		return redirectTo(CategoryUrl.INFO_CATEGORY_PAGE, slug);
 	}
 	
-	@GetMapping(Url.INFO_CATEGORY_PAGE)
+	@GetMapping(CategoryUrl.INFO_CATEGORY_PAGE)
 	public String showInfoBySlug(
 		@Category @PathVariable("slug") LinkEntityDto category,
 		Model model,
@@ -111,7 +110,7 @@ public class CategoryController {
 		return "category/info";
 	}
 	
-	@GetMapping(Url.INFO_CATEGORY_BY_ID_PAGE)
+	@GetMapping(CategoryUrl.INFO_CATEGORY_BY_ID_PAGE)
 	public View showInfoById(
 		@Category @PathVariable("slug") LinkEntityDto country,
 		HttpServletResponse response)
@@ -124,12 +123,12 @@ public class CategoryController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.INFO_CATEGORY_PAGE);
+		view.setUrl(CategoryUrl.INFO_CATEGORY_PAGE);
 		
 		return view;
 	}
 	
-	@GetMapping(Url.GET_CATEGORIES_PAGE)
+	@GetMapping(CategoryUrl.GET_CATEGORIES_PAGE)
 	public String showCategories(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<LinkEntityDto> categories = categoryService.findAllAsLinkEntities(lang);
@@ -139,11 +138,11 @@ public class CategoryController {
 		return "category/list";
 	}
 	
-	@GetMapping(Url.LIST_CATEGORIES_PAGE)
+	@GetMapping(CategoryUrl.LIST_CATEGORIES_PAGE)
 	public View list() {
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.GET_CATEGORIES_PAGE);
+		view.setUrl(CategoryUrl.GET_CATEGORIES_PAGE);
 		return view;
 	}
 	

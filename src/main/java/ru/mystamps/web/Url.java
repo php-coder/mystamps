@@ -18,6 +18,7 @@
 package ru.mystamps.web;
 
 import ru.mystamps.web.feature.account.AccountUrl;
+import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 
 import java.util.HashMap;
@@ -60,10 +61,6 @@ public final class Url {
 	public static final String SUGGEST_SERIES_CATEGORY    = "/suggest/series_category";
 	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
 	
-	public static final String ADD_CATEGORY_PAGE     = "/category/add";
-	public static final String GET_CATEGORIES_PAGE   = "/categories";
-	public static final String INFO_CATEGORY_PAGE    = "/category/{slug}";
-	
 	public static final String ADD_COUNTRY_PAGE      = "/country/add";
 	public static final String GET_COUNTRIES_PAGE    = "/countries";
 	public static final String INFO_COUNTRY_PAGE     = "/country/{slug}";
@@ -78,9 +75,7 @@ public final class Url {
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
 	// For backward compatibility
-	public static final String LIST_CATEGORIES_PAGE           = "/category/list";
 	public static final String LIST_COUNTRIES_PAGE            = "/country/list";
-	public static final String INFO_CATEGORY_BY_ID_PAGE       = "/category/{id}/{slug}";
 	public static final String INFO_COUNTRY_BY_ID_PAGE        = "/country/{id}/{slug}";
 	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
 	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
@@ -133,7 +128,7 @@ public final class Url {
 		// Constants sorted in an ascending order.
 		Map<String, String> map = new HashMap<>();
 		map.put("ACTIVATE_ACCOUNT_PAGE", AccountUrl.ACTIVATE_ACCOUNT_PAGE);
-		map.put("ADD_CATEGORY_PAGE", ADD_CATEGORY_PAGE);
+		map.put("ADD_CATEGORY_PAGE", CategoryUrl.ADD_CATEGORY_PAGE);
 		map.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		map.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
@@ -143,9 +138,9 @@ public final class Url {
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("ESTIMATION_COLLECTION_PAGE", CollectionUrl.ESTIMATION_COLLECTION_PAGE);
-		map.put("GET_CATEGORIES_PAGE", GET_CATEGORIES_PAGE);
+		map.put("GET_CATEGORIES_PAGE", CategoryUrl.GET_CATEGORIES_PAGE);
 		map.put("GET_COUNTRIES_PAGE", GET_COUNTRIES_PAGE);
-		map.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
+		map.put("INFO_CATEGORY_PAGE", CategoryUrl.INFO_CATEGORY_PAGE);
 		map.put("INFO_COLLECTION_PAGE", CollectionUrl.INFO_COLLECTION_PAGE);
 		map.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
