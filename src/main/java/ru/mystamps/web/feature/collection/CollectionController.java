@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
@@ -45,7 +44,7 @@ public class CollectionController {
 	private final CountryService countryService;
 	private final MessageSource messageSource;
 	
-	@GetMapping(Url.INFO_COLLECTION_PAGE)
+	@GetMapping(CollectionUrl.INFO_COLLECTION_PAGE)
 	public String showInfoBySlug(
 		@PathVariable("slug") String slug,
 		Model model,
@@ -95,7 +94,7 @@ public class CollectionController {
 	}
 	
 	// @todo #884 Add integration tests for collection estimation page
-	@GetMapping(Url.ESTIMATION_COLLECTION_PAGE)
+	@GetMapping(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
 	public String showPrices(
 		@PathVariable("slug") String slug,
 		Model model,
@@ -126,7 +125,7 @@ public class CollectionController {
 		return "collection/estimation";
 	}
 
-	@GetMapping(Url.INFO_COLLECTION_BY_ID_PAGE)
+	@GetMapping(CollectionUrl.INFO_COLLECTION_BY_ID_PAGE)
 	public View showInfoById(
 		@PathVariable("slug") String slug,
 		HttpServletResponse response)
@@ -145,7 +144,7 @@ public class CollectionController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.INFO_COLLECTION_PAGE);
+		view.setUrl(CollectionUrl.INFO_COLLECTION_PAGE);
 		
 		return view;
 	}

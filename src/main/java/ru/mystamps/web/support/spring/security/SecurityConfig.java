@@ -44,6 +44,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.UserService;
+import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.site.SiteService;
 
 import javax.servlet.Filter;
@@ -89,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(Url.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
 				// @todo #884 /collection/{slug}/estimation: only owner should have access to estimation page
-				.mvcMatchers(Url.ESTIMATION_COLLECTION_PAGE).hasAuthority(StringAuthority.ADD_SERIES_PRICE)
+				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE).hasAuthority(StringAuthority.ADD_SERIES_PRICE)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority(
 						StringAuthority.UPDATE_COLLECTION,

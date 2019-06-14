@@ -20,6 +20,7 @@ package ru.mystamps.web.support.spring.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.header.HeaderWriter;
 import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.collection.CollectionUrl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +34,7 @@ import java.util.regex.Pattern;
 class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
-		Url.INFO_COLLECTION_PAGE.replace("{slug}", "");
+		CollectionUrl.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
 	private static final Pattern SERIES_INFO_PAGE_PATTERN =
 		Pattern.compile(Url.SERIES_INFO_PAGE_REGEXP);

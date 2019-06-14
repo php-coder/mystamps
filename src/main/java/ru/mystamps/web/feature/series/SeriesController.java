@@ -43,6 +43,7 @@ import ru.mystamps.web.feature.category.Category;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.collection.AddToCollectionForm;
 import ru.mystamps.web.feature.collection.CollectionService;
+import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.Country;
 import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.participant.ParticipantService;
@@ -391,7 +392,7 @@ public class SeriesController {
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
 
 		String collectionSlug = currentUserDetails.getUserCollectionSlug();
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
+		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
 	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
@@ -419,7 +420,7 @@ public class SeriesController {
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
 		String collectionSlug = currentUserDetails.getUserCollectionSlug();
-		return redirectTo(Url.INFO_COLLECTION_PAGE, collectionSlug);
+		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
 	@PostMapping(Url.ADD_SERIES_ASK_PAGE)
