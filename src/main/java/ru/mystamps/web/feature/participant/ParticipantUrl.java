@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.participant;
 
+import java.util.Map;
+
 /**
  * Participant-related URLs.
  *
@@ -29,6 +31,10 @@ public final class ParticipantUrl {
 	public static final String ADD_PARTICIPANT_PAGE = "/participant/add";
 	
 	private ParticipantUrl() {
+	}
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("ADD_PARTICIPANT_PAGE", ADD_PARTICIPANT_PAGE);
 	}
 	
 }

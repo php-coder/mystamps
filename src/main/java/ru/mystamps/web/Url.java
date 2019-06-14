@@ -122,9 +122,9 @@ public final class Url {
 		CategoryUrl.exposeUrlsToView(map);
 		CountryUrl.exposeUrlsToView(map);
 		CollectionUrl.exposeUrlsToView(map);
+		ParticipantUrl.exposeUrlsToView(map);
 		
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
-		map.put("ADD_PARTICIPANT_PAGE", ParticipantUrl.ADD_PARTICIPANT_PAGE);
 		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
