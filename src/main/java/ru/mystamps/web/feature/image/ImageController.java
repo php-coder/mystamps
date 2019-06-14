@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import ru.mystamps.web.Url;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class ImageController {
 	
 	private final ImageService imageService;
 	
-	@GetMapping(Url.GET_IMAGE_PAGE)
+	@GetMapping(ImageUrl.GET_IMAGE_PAGE)
 	public void getImage(@PathVariable("id") Integer imageId, HttpServletResponse response)
 		throws IOException {
 		
@@ -55,7 +54,7 @@ public class ImageController {
 		response.getOutputStream().write(image.getData());
 	}
 	
-	@GetMapping(Url.GET_IMAGE_PREVIEW_PAGE)
+	@GetMapping(ImageUrl.GET_IMAGE_PREVIEW_PAGE)
 	public void getImagePreview(@PathVariable("id") Integer imageId, HttpServletResponse response)
 		throws IOException {
 		

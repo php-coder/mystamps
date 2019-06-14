@@ -21,6 +21,7 @@ import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
+import ru.mystamps.web.feature.image.ImageUrl;
 import ru.mystamps.web.feature.participant.ParticipantUrl;
 
 import java.util.HashMap;
@@ -62,9 +63,6 @@ public final class Url {
 	
 	public static final String SUGGEST_SERIES_CATEGORY    = "/suggest/series_category";
 	public static final String SUGGEST_SERIES_COUNTRY     = "/suggest/series_country";
-	
-	public static final String GET_IMAGE_PAGE         = "/image/{id}";
-	public static final String GET_IMAGE_PREVIEW_PAGE = "/image/preview/{id}";
 	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
@@ -159,8 +157,8 @@ public final class Url {
 			map.put("COLLECTION_INFO_JS", COLLECTION_INFO_JS);
 			map.put("DATE_UTILS_JS", DATE_UTILS_JS);
 			map.put("FAVICON_ICO", FAVICON_ICO);
-			map.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
-			map.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
+			map.put("GET_IMAGE_PAGE", ImageUrl.GET_IMAGE_PAGE);
+			map.put("GET_IMAGE_PREVIEW_PAGE", ImageUrl.GET_IMAGE_PREVIEW_PAGE);
 			map.put("JQUERY_JS", JQUERY_JS);
 			map.put("MAIN_CSS", MAIN_CSS);
 			map.put("PARTICIPANT_ADD_JS", PARTICIPANT_ADD_JS);
@@ -175,8 +173,9 @@ public final class Url {
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);
 			map.put("DATE_UTILS_JS", STATIC_RESOURCES_URL + DATE_UTILS_JS);
 			map.put("FAVICON_ICO", STATIC_RESOURCES_URL + FAVICON_ICO);
-			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PAGE);
-			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + GET_IMAGE_PREVIEW_PAGE);
+			map.put("GET_IMAGE_PAGE", STATIC_RESOURCES_URL + ImageUrl.GET_IMAGE_PAGE);
+			// CheckStyle: ignore LineLength for next 1 line
+			map.put("GET_IMAGE_PREVIEW_PAGE", STATIC_RESOURCES_URL + ImageUrl.GET_IMAGE_PREVIEW_PAGE);
 			map.put("MAIN_CSS", STATIC_RESOURCES_URL + MAIN_CSS);
 			map.put("PARTICIPANT_ADD_JS", STATIC_RESOURCES_URL + PARTICIPANT_ADD_JS);
 			map.put("SERIES_ADD_JS", STATIC_RESOURCES_URL + SERIES_ADD_JS);
