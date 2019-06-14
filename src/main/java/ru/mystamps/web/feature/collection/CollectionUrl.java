@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.collection;
 
+import java.util.Map;
+
 /**
  * Collection-related URLs.
  *
@@ -34,6 +36,11 @@ public final class CollectionUrl {
 	static final String INFO_COLLECTION_BY_ID_PAGE = "/collection/{id}/{slug}";
 	
 	private CollectionUrl() {
+	}
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("ESTIMATION_COLLECTION_PAGE", ESTIMATION_COLLECTION_PAGE);
+		urls.put("INFO_COLLECTION_PAGE", INFO_COLLECTION_PAGE);
 	}
 	
 }
