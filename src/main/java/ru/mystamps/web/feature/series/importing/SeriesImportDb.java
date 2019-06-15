@@ -20,8 +20,8 @@ package ru.mystamps.web.feature.series.importing;
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SeriesImportDb {
 	
-	public static final class SeriesImportRequest {
-		public static final int URL_LENGTH = 767;
+	static final class SeriesImportRequest {
+		static final int URL_LENGTH = 767;
 	}
 	
 	public static final class SeriesImportRequestStatus {
@@ -39,7 +39,7 @@ public final class SeriesImportDb {
 	static final class SeriesImportParsedData {
 		// see the following migration:
 		// 2018-07-05--series_import_parsed_data_michel_numbers_field.xml
-		public static final int MICHEL_NUMBERS_LENGTH = 19;
+		static final int MICHEL_NUMBERS_LENGTH = 19;
 	}
 	
 }

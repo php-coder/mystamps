@@ -17,10 +17,11 @@
  */
 package ru.mystamps.web.feature.country;
 
-public final class CountryDb {
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+final class CountryDb {
 	
-	public static final class Country {
-		public static final int NAME_LENGTH = 50;
+	static final class Country {
+		static final int NAME_LENGTH = 50;
 	}
 	
 }

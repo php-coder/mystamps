@@ -17,16 +17,17 @@
  */
 package ru.mystamps.web.feature.account;
 
-public final class AccountDb {
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+final class AccountDb {
 	
-	public static final class UsersActivation {
-		public static final int ACTIVATION_KEY_LENGTH = 10;
-		public static final int EMAIL_LENGTH          = 255;
+	static final class UsersActivation {
+		static final int ACTIVATION_KEY_LENGTH = 10;
+		static final int EMAIL_LENGTH          = 255;
 	}
 	
-	public static final class User {
-		public static final int LOGIN_LENGTH = 15;
-		public static final int NAME_LENGTH  = 100;
+	static final class User {
+		static final int LOGIN_LENGTH = 15;
+		static final int NAME_LENGTH  = 100;
 	}
 	
 }

@@ -17,10 +17,11 @@
  */
 package ru.mystamps.web.feature.category;
 
-public final class CategoryDb {
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+final class CategoryDb {
 	
-	public static final class Category {
-		public static final int NAME_LENGTH = 50;
+	static final class Category {
+		static final int NAME_LENGTH = 50;
 	}
 	
 }

@@ -17,10 +17,11 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
-public final class SeriesSalesDb {
+@SuppressWarnings("PMD.CommentDefaultAccessModifier")
+final class SeriesSalesDb {
 	
-	public static final class SeriesSales {
-		public static final int TRANSACTION_URL_LENGTH = 255;
+	static final class SeriesSales {
+		static final int TRANSACTION_URL_LENGTH = 255;
 	}
 	
 }
