@@ -23,6 +23,7 @@ import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
 import ru.mystamps.web.feature.image.ImageUrl;
 import ru.mystamps.web.feature.participant.ParticipantUrl;
+import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
 
 import java.util.HashMap;
@@ -55,10 +56,6 @@ public final class Url {
 	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
 	public static final String SERIES_INFO_PAGE_REGEXP  = "/series/(\\d+|\\d+/(ask|image))";
 	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
-	
-	public static final String REQUEST_IMPORT_SERIES_PAGE = "/series/import/request";
-	public static final String REQUEST_IMPORT_PAGE        = "/series/import/request/{id}";
-	public static final String LIST_IMPORT_REQUESTS_PAGE  = "/series/import/requests";
 	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
@@ -119,6 +116,7 @@ public final class Url {
 		CountryUrl.exposeUrlsToView(map);
 		CollectionUrl.exposeUrlsToView(map);
 		ParticipantUrl.exposeUrlsToView(map);
+		SeriesImportUrl.exposeUrlsToView(map);
 		SeriesSalesImportUrl.exposeUrlsToView(map);
 		
 		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
@@ -127,10 +125,7 @@ public final class Url {
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
-		map.put("LIST_IMPORT_REQUESTS_PAGE", LIST_IMPORT_REQUESTS_PAGE);
 		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
-		map.put("REQUEST_IMPORT_PAGE", REQUEST_IMPORT_PAGE);
-		map.put("REQUEST_IMPORT_SERIES_PAGE", REQUEST_IMPORT_SERIES_PAGE);
 		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
 		

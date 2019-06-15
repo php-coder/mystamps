@@ -70,13 +70,13 @@ public class SeriesImportController {
 		binder.registerCustomEditor(String.class, "michelNumbers", new ExpandCatalogNumbersEditor());
 	}
 	
-	@GetMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
+	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)
 	public void showRequestImportForm(Model model) {
 		RequestImportForm requestImportForm = new RequestImportForm();
 		model.addAttribute("requestImportForm", requestImportForm);
 	}
 	
-	@PostMapping(Url.REQUEST_IMPORT_SERIES_PAGE)
+	@PostMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)
 	public String processRequestImportForm(
 		@Valid RequestImportForm form,
 		BindingResult result,
@@ -93,11 +93,11 @@ public class SeriesImportController {
 			new ImportRequestCreated(this, requestId, form.getUrl());
 		eventPublisher.publishEvent(requestCreated);
 		
-		return redirectTo(Url.REQUEST_IMPORT_PAGE, requestId);
+		return redirectTo(SeriesImportUrl.REQUEST_IMPORT_PAGE, requestId);
 	}
 	
 	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
-	@GetMapping(Url.REQUEST_IMPORT_PAGE)
+	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_PAGE)
 	public String showRequestAndImportSeriesForm(
 		@PathVariable("id") Integer requestId,
 		Model model,
@@ -172,7 +172,7 @@ public class SeriesImportController {
 	}
 	
 	@SuppressWarnings("checkstyle:parameternumber")
-	@PostMapping(Url.REQUEST_IMPORT_PAGE)
+	@PostMapping(SeriesImportUrl.REQUEST_IMPORT_PAGE)
 	public String processImportSeriesForm(
 		@PathVariable("id") Integer requestId,
 		Model model,
@@ -239,7 +239,7 @@ public class SeriesImportController {
 		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
 	}
 	
-	@GetMapping(Url.LIST_IMPORT_REQUESTS_PAGE)
+	@GetMapping(SeriesImportUrl.LIST_IMPORT_REQUESTS_PAGE)
 	public String showListOfImportRequests(Model model) {
 		model.addAttribute("requests", seriesImportService.findAll());
 		
