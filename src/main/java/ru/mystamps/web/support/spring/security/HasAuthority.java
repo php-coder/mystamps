@@ -22,8 +22,14 @@ public final class HasAuthority {
 	// Constants sorted in an ascending order.
 	public static final String ADD_PARTICIPANT = "hasAuthority('" + StringAuthority.ADD_PARTICIPANT + "')";
 	@SuppressWarnings("PMD.LongVariable")
-	public static final String ADD_SERIES_PRICE_AND_COLLECTION_OWNER
-		= "hasAuthority('" + StringAuthority.ADD_SERIES_PRICE + "') and principal?.userCollectionSlug == #slug";
+	public static final String ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION =
+		"("
+			+ "hasAuthority('" + StringAuthority.ADD_SERIES_PRICE + "') "
+			+ "and "
+			+ "principal?.userCollectionSlug == #slug"
+		+ ") "
+		+ "or "
+		+ "hasAuthority('" + StringAuthority.VIEW_ANY_ESTIMATION + "')";
 	public static final String ADD_SERIES_SALES = "hasAuthority('" + StringAuthority.ADD_SERIES_SALES + "')";
 	public static final String CREATE_CATEGORY = "hasAuthority('" + StringAuthority.CREATE_CATEGORY + "')";
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";

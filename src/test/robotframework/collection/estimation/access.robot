@@ -28,7 +28,7 @@ Paid user has access only to its own estimation page
 Admin has access only to its own estimation page
 	Log In As               login=admin  password=test  openPage=${true}
 	Go To                   ${SITE_URL}/collection/paid/estimation
-	Element Text Should Be  id=error-msg  Forbidden
+	Element Text Should Be  tag=h3  Paid User's collection
 	Go To                   ${SITE_URL}/collection/admin/estimation
 	Element Text Should Be  tag=h3  Site Admin's collection
 	# No need to log out as a browser will be closed after the test

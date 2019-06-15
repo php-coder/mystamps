@@ -92,8 +92,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(Url.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
-				// @todo #884 /collection/{slug}/estimation: only owner should have access to estimation page
-				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE).hasAuthority(StringAuthority.ADD_SERIES_PRICE)
+				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
+					.access(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION)
 				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
 					.hasAnyAuthority(
 						StringAuthority.UPDATE_COLLECTION,

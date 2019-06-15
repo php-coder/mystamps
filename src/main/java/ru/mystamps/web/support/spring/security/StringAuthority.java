@@ -32,6 +32,7 @@ public final class StringAuthority {
 	public static final String IMPORT_SERIES_SALES    = "IMPORT_SERIES_SALES";
 	public static final String MANAGE_TOGGLZ          = "MANAGE_TOGGLZ";
 	public static final String UPDATE_COLLECTION      = "UPDATE_COLLECTION";
+	public static final String VIEW_ANY_ESTIMATION    = "VIEW_ANY_ESTIMATION";
 	public static final String VIEW_DAILY_STATS       = "VIEW_DAILY_STATS";
 	public static final String VIEW_SERIES_SALES      = "VIEW_SERIES_SALES";
 	public static final String VIEW_SITE_EVENTS       = "VIEW_SITE_EVENTS";
