@@ -9,3 +9,7 @@ Log In As
 	Input Text       id=login     ${login}
 	Input Password   id=password  ${password}
 	Submit Form      id=auth-account-form
+
+Log Out
+	[Documentation]  Logout the current user
+	Submit Form      id=logout-form
