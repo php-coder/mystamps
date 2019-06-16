@@ -8,8 +8,8 @@ INSERT INTO users(id, login, role, name, registered_at, activated_at, hash, salt
 
 -- Used only in src/test/robotframework/series/creation/misc-user.robot
 INSERT INTO images(type) VALUES('PNG');
-INSERT INTO series(id, quantity, perforated, image_url, created_at, created_by, updated_at, updated_by) VALUES
-	(1, 1, TRUE, '/image/1', NOW(), 4, NOW(), 4);
+INSERT INTO series(quantity, perforated, image_url, created_at, created_by, updated_at, updated_by) VALUES
+	(1, TRUE, '/image/1', NOW(), 4, NOW(), 4);
 
 INSERT INTO michel_catalog(code) VALUES('99');
 INSERT INTO series_michel_catalog(series_id, michel_id) SELECT 1, id FROM michel_catalog WHERE code = '99';
