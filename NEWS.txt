@@ -29,6 +29,7 @@
 - (infrastructure) add ability to send e-mails via Mailgun API
 - (infrastructure) port the integration tests to Robot Framework. Also remove TestNG and FEST assertions
 - (functionality)  implement import of a series sales by URL
+- (infrastructure) add support for PostgreSQL
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection

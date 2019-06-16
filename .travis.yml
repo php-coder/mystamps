@@ -1,6 +1,7 @@
 dist: xenial
 language: java
 
+# @todo #1034 Travis CI: run tests on PostgreSQL
 env:
   matrix:
     - SPRING_PROFILES_ACTIVE=test
