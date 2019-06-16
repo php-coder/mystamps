@@ -84,6 +84,8 @@ public class CountryController {
 		return redirectTo(CountryUrl.INFO_COUNTRY_PAGE, slug);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #927 CountryController: remove dependency on SeriesService by moving showInfoBySlug() method
 	@GetMapping(CountryUrl.INFO_COUNTRY_PAGE)
 	public String showInfoBySlug(
 		@Country @PathVariable("slug") LinkEntityDto country,

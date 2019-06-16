@@ -84,6 +84,8 @@ public class CategoryController {
 		return redirectTo(CategoryUrl.INFO_CATEGORY_PAGE, slug);
 	}
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #927 CategoryController: remove dependency on SeriesService by moving showInfoBySlug() method
 	@GetMapping(CategoryUrl.INFO_CATEGORY_PAGE)
 	public String showInfoBySlug(
 		@Category @PathVariable("slug") LinkEntityDto category,

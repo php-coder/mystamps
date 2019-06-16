@@ -24,6 +24,7 @@ import ru.mystamps.web.common.Currency;
 import java.math.BigDecimal;
 import java.util.Date;
 
+// @todo #927 PurchaseAndSaleDto: move with related classes to series.sale package
 /**
  * @author Sergey Chechenev
  */
