@@ -134,7 +134,6 @@
 	<changeSet id="add-another-test-series" author="php-coder" context="test-data">
 		
 		<insert tableName="series">
-			<column name="id" valueNumeric="2" />
 			<column name="quantity" valueNumeric="3" />
 			<column name="perforated" valueBoolean="false" />
 			<column name="category_id" valueNumeric="1" />

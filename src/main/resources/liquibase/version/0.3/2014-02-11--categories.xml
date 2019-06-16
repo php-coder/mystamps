@@ -41,9 +41,9 @@
 			<column name="name" value="Prehistoric animals" />
 			<column name="name_ru" value="Доисторические животные" />
 			<column name="created_at" valueComputed="${NOW}" />
-			<column name="created_by" value="2" /><!-- it's admin -->
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
 			<column name="updated_at"  valueComputed="${NOW}" />
-			<column name="updated_by" value="2" /><!-- it's admin -->
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
 		</insert>
 	</changeSet>
 	
