@@ -116,7 +116,7 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "url", new StringTrimmerEditor(true));
 	}
 	
-	@GetMapping(Url.ADD_SERIES_PAGE)
+	@GetMapping(SeriesUrl.ADD_SERIES_PAGE)
 	public void showForm(
 		@Category @RequestParam(name = "category", required = false) LinkEntityDto category,
 		@Country @RequestParam(name = "country", required = false) LinkEntityDto country,
@@ -143,7 +143,7 @@ public class SeriesController {
 		model.addAttribute("addSeriesForm", addSeriesForm);
 	}
 	
-	@GetMapping(Url.ADD_SERIES_WITH_CATEGORY_PAGE)
+	@GetMapping(SeriesUrl.ADD_SERIES_WITH_CATEGORY_PAGE)
 	public View showFormWithCategory(
 		@PathVariable("slug") String category,
 		RedirectAttributes redirectAttributes) {
@@ -152,12 +152,12 @@ public class SeriesController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.ADD_SERIES_PAGE);
+		view.setUrl(SeriesUrl.ADD_SERIES_PAGE);
 		
 		return view;
 	}
 	
-	@GetMapping(Url.ADD_SERIES_WITH_COUNTRY_PAGE)
+	@GetMapping(SeriesUrl.ADD_SERIES_WITH_COUNTRY_PAGE)
 	public View showFormWithCountry(
 		@PathVariable("slug") String country,
 		RedirectAttributes redirectAttributes) {
@@ -166,12 +166,12 @@ public class SeriesController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(Url.ADD_SERIES_PAGE);
+		view.setUrl(SeriesUrl.ADD_SERIES_PAGE);
 		
 		return view;
 	}
 	
-	@PostMapping(path = Url.ADD_SERIES_PAGE, params = "imageUrl")
+	@PostMapping(path = SeriesUrl.ADD_SERIES_PAGE, params = "imageUrl")
 	public String processInputWithImageUrl(
 		@Validated({ Default.class,
 			AddSeriesForm.ImageUrlChecks.class,
@@ -186,7 +186,7 @@ public class SeriesController {
 		return processInput(form, result, currentUserId, userLocale, model, request);
 	}
 	
-	@PostMapping(path = Url.ADD_SERIES_PAGE, params = "!imageUrl")
+	@PostMapping(path = SeriesUrl.ADD_SERIES_PAGE, params = "!imageUrl")
 	public String processInput(
 		@Validated({ Default.class,
 			AddSeriesForm.RequireImageCheck.class,
@@ -218,10 +218,10 @@ public class SeriesController {
 		);
 		Integer seriesId = seriesService.add(form, currentUserId, userCanAddComments);
 		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
+		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, seriesId);
 	}
 	
-	@GetMapping(Url.INFO_SERIES_PAGE)
+	@GetMapping(SeriesUrl.INFO_SERIES_PAGE)
 	public String showInfo(
 		@PathVariable("id") Integer seriesId,
 		Model model,
@@ -255,7 +255,7 @@ public class SeriesController {
 	}
 	
 	@SuppressWarnings("checkstyle:parameternumber")
-	@PostMapping(path = Url.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
+	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
 	public String processImageWithImageUrl(
 		@Validated({
 			AddImageForm.ImageUrlChecks.class,
@@ -283,7 +283,7 @@ public class SeriesController {
 	}
 	
 	@SuppressWarnings("checkstyle:parameternumber")
-	@PostMapping(path = Url.ADD_IMAGE_SERIES_PAGE, params = "!imageUrl")
+	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "!imageUrl")
 	public String processImage(
 		@Validated({
 			AddImageForm.RequireImageCheck.class,
@@ -331,12 +331,12 @@ public class SeriesController {
 		
 		seriesService.addImageToSeries(form, series.getId(), currentUserId);
 		
-		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
+		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, series.getId());
 	}
 	
 	// many method parameters are OK here
 	@SuppressWarnings("checkstyle:parameternumber")
-	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=ADD")
+	@PostMapping(path = SeriesUrl.INFO_SERIES_PAGE, params = "action=ADD")
 	public String addToCollection(
 		@Valid AddToCollectionForm form,
 		BindingResult result,
@@ -395,7 +395,7 @@ public class SeriesController {
 		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
-	@PostMapping(path = Url.INFO_SERIES_PAGE, params = "action=REMOVE")
+	@PostMapping(path = SeriesUrl.INFO_SERIES_PAGE, params = "action=REMOVE")
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
@@ -423,7 +423,7 @@ public class SeriesController {
 		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
 	
-	@PostMapping(Url.ADD_SERIES_ASK_PAGE)
+	@PostMapping(SeriesUrl.ADD_SERIES_ASK_PAGE)
 	public String processAskForm(
 		@Validated({ Default.class, AddSeriesSalesForm.UrlChecks.class }) AddSeriesSalesForm form,
 		BindingResult result,
@@ -463,10 +463,10 @@ public class SeriesController {
 		
 		seriesSalesService.add(form, series.getId(), currentUserId);
 		
-		return redirectTo(Url.INFO_SERIES_PAGE, series.getId());
+		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, series.getId());
 	}
 	
-	@GetMapping(Url.SEARCH_SERIES_BY_CATALOG)
+	@GetMapping(SeriesUrl.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
 		@RequestParam(name = "catalogNumber", defaultValue = "") String catalogNumber,
 		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,

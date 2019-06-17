@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.header.HeaderWriter;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.collection.CollectionUrl;
+import ru.mystamps.web.feature.series.SeriesUrl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +38,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		CollectionUrl.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
 	private static final Pattern SERIES_INFO_PAGE_PATTERN =
-		Pattern.compile(Url.SERIES_INFO_PAGE_REGEXP);
+		Pattern.compile(SeriesUrl.SERIES_INFO_PAGE_REGEXP);
 	
 	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d+/(ask|image))";
 	
@@ -171,7 +172,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
-		boolean onAddSeriesPage = uri.equals(Url.ADD_SERIES_PAGE);
+		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);
 		boolean onH2ConsolePage = hasH2Console && uri.startsWith(H2_CONSOLE_PATTERN);
 		
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
 
 import javax.servlet.http.HttpServletResponse;
@@ -84,7 +85,8 @@ public class SitemapController {
 	}
 	
 	private static String createLocEntry(SitemapInfoDto item) {
-		return Url.PUBLIC_URL + Url.INFO_SERIES_PAGE.replace("{id}", String.valueOf(item.getId()));
+		return Url.PUBLIC_URL
+			+ SeriesUrl.INFO_SERIES_PAGE.replace("{id}", String.valueOf(item.getId()));
 	}
 	
 	private static String createLastModEntry(DateFormat dateFormatter, SitemapInfoDto item) {

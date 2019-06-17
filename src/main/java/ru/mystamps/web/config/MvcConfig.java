@@ -54,6 +54,7 @@ import ru.mystamps.web.feature.participant.ParticipantConfig;
 import ru.mystamps.web.feature.report.ReportConfig;
 import ru.mystamps.web.feature.series.DownloadImageInterceptor;
 import ru.mystamps.web.feature.series.SeriesConfig;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.event.EventsConfig;
@@ -158,8 +159,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry
 			.addInterceptor(getDownloadImageInterceptor())
 			.addPathPatterns(
-				Url.ADD_SERIES_PAGE,
-				Url.ADD_IMAGE_SERIES_PAGE,
+				SeriesUrl.ADD_SERIES_PAGE,
+				SeriesUrl.ADD_IMAGE_SERIES_PAGE,
 				SeriesImportUrl.REQUEST_IMPORT_PAGE.replace("{id}", "*")
 			);
 	}

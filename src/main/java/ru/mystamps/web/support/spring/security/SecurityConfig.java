@@ -48,6 +48,7 @@ import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
 import ru.mystamps.web.feature.participant.ParticipantUrl;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
 import ru.mystamps.web.feature.site.SiteService;
@@ -89,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
 				.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
-				.mvcMatchers(Url.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
+				.mvcMatchers(SeriesUrl.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
 				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
@@ -101,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						StringAuthority.UPDATE_COLLECTION,
 						StringAuthority.ADD_IMAGES_TO_SERIES
 					)
-				.regexMatchers(HttpMethod.POST, Url.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
+				.regexMatchers(HttpMethod.POST, SeriesUrl.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
 					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
 				.mvcMatchers(HttpMethod.POST, SeriesSalesImportUrl.IMPORT_SERIES_SALES)
 					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)

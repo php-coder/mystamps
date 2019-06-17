@@ -28,12 +28,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.CatalogUtils;
 import ru.mystamps.web.feature.series.SeriesController;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.event.ImportRequestCreated;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
@@ -236,7 +236,7 @@ public class SeriesImportController {
 			currentUserId
 		);
 		
-		return redirectTo(Url.INFO_SERIES_PAGE, seriesId);
+		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, seriesId);
 	}
 	
 	@GetMapping(SeriesImportUrl.LIST_IMPORT_REQUESTS_PAGE)

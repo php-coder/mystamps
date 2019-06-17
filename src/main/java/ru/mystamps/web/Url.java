@@ -23,6 +23,7 @@ import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
 import ru.mystamps.web.feature.image.ImageUrl;
 import ru.mystamps.web.feature.participant.ParticipantUrl;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
 
@@ -50,20 +51,9 @@ public final class Url {
 	public static final String DAILY_STATISTICS      = "/report/daily";
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
-	public static final String ADD_SERIES_PAGE          = "/series/add";
-	public static final String ADD_SERIES_ASK_PAGE      = "/series/{id}/ask";
-	public static final String INFO_SERIES_PAGE         = "/series/{id}";
-	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
-	public static final String SERIES_INFO_PAGE_REGEXP  = "/series/(\\d+|\\d+/(ask|image))";
-	public static final String SEARCH_SERIES_BY_CATALOG = "/series/search/by_catalog";
-	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
 	public static final String NOT_FOUND_PAGE        = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
-	
-	// For backward compatibility
-	public static final String ADD_SERIES_WITH_CATEGORY_PAGE  = "/series/add/category/{slug}";
-	public static final String ADD_SERIES_WITH_COUNTRY_PAGE   = "/series/add/country/{slug}";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.13";
@@ -116,17 +106,13 @@ public final class Url {
 		CountryUrl.exposeUrlsToView(map);
 		CollectionUrl.exposeUrlsToView(map);
 		ParticipantUrl.exposeUrlsToView(map);
+		SeriesUrl.exposeUrlsToView(map);
 		SeriesImportUrl.exposeUrlsToView(map);
 		SeriesSalesImportUrl.exposeUrlsToView(map);
 		
-		map.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
-		map.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
-		map.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
 		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
-		map.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
-		map.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
 		
 		if (serveContentFromSingleHost) {

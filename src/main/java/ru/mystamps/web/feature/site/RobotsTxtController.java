@@ -25,6 +25,7 @@ import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
+import ru.mystamps.web.feature.series.SeriesUrl;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,9 +50,9 @@ public class RobotsTxtController {
 			writer.println("Disallow: " + AccountUrl.ACTIVATE_ACCOUNT_PAGE);
 			writer.println("Disallow: " + AccountUrl.AUTHENTICATION_PAGE);
 			writer.println("Disallow: " + AccountUrl.LOGIN_PAGE);
-			writer.println("Disallow: " + CountryUrl.ADD_COUNTRY_PAGE);
-			writer.println("Disallow: " + Url.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + CategoryUrl.ADD_CATEGORY_PAGE);
+			writer.println("Disallow: " + CountryUrl.ADD_COUNTRY_PAGE);
+			writer.println("Disallow: " + SeriesUrl.ADD_SERIES_PAGE);
 			writer.println("Disallow: " + Url.FORBIDDEN_PAGE);
 			writer.println("Disallow: " + Url.NOT_FOUND_PAGE);
 			writer.println("Disallow: " + Url.INTERNAL_ERROR_PAGE);
