@@ -23,6 +23,7 @@ import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
 import ru.mystamps.web.feature.image.ImageUrl;
 import ru.mystamps.web.feature.participant.ParticipantUrl;
+import ru.mystamps.web.feature.report.ReportUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
@@ -48,7 +49,6 @@ public final class Url {
 	public static final String ROBOTS_TXT            = "/robots.txt";
 	public static final String SITEMAP_XML           = "/sitemap.xml";
 
-	public static final String DAILY_STATISTICS      = "/report/daily";
 	public static final String SITE_EVENTS_PAGE      = "/site/events";
 	
 	public static final String FORBIDDEN_PAGE        = "/error/403";
@@ -106,12 +106,12 @@ public final class Url {
 		CountryUrl.exposeUrlsToView(map);
 		CollectionUrl.exposeUrlsToView(map);
 		ParticipantUrl.exposeUrlsToView(map);
+		ReportUrl.exposeUrlsToView(map);
 		SeriesUrl.exposeUrlsToView(map);
 		SeriesImportUrl.exposeUrlsToView(map);
 		SeriesSalesImportUrl.exposeUrlsToView(map);
 		
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
-		map.put("DAILY_STATISTICS", DAILY_STATISTICS);
 		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
 		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
 		

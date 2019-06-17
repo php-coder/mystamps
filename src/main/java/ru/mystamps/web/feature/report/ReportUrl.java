@@ -17,28 +17,24 @@
  */
 package ru.mystamps.web.feature.report;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import ru.mystamps.web.feature.site.CronService;
+import java.util.Map;
 
 /**
- * @author Maxim Shestakov
+ * Report-related URLs.
+ *
+ * Should be used everywhere instead of hard-coded paths.
+ *
+ * @author Slava Semushin
  */
-@Controller
-@RequiredArgsConstructor
-public class ReportController {
-
-	private final ReportService reportService;
-	private final CronService cronService;
-
-	@GetMapping(path = ReportUrl.DAILY_STATISTICS, produces = "text/plain; charset=UTF-8")
-	@ResponseBody
-	public String showDailyReport() {
-		return reportService.prepareDailyStatistics(
-			cronService.getDailyReport()
-		);
+public final class ReportUrl {
+	
+	public static final String DAILY_STATISTICS = "/report/daily";
+	
+	private ReportUrl() {
 	}
-
+	
+	public static void exposeUrlsToView(Map<String, String> urls) {
+		urls.put("DAILY_STATISTICS", DAILY_STATISTICS);
+	}
+	
 }
