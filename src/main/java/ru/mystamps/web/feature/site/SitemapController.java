@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
@@ -45,7 +44,7 @@ public class SitemapController {
 	
 	private final SeriesService seriesService;
 	
-	@GetMapping(Url.SITEMAP_XML)
+	@GetMapping(SiteUrl.SITEMAP_XML)
 	public void getSitemapXml(HttpServletResponse response) {
 		response.setContentType("application/xml");
 		response.setCharacterEncoding("UTF-8");
@@ -60,8 +59,8 @@ public class SitemapController {
 			writer.println("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 			
 			writer.print("\t<url>\n\t\t<loc>");
-			writer.print(Url.PUBLIC_URL);
-			writer.print(Url.INDEX_PAGE);
+			writer.print(SiteUrl.PUBLIC_URL);
+			writer.print(SiteUrl.INDEX_PAGE);
 			writer.println("</loc>\n\t</url>");
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
@@ -85,7 +84,7 @@ public class SitemapController {
 	}
 	
 	private static String createLocEntry(SitemapInfoDto item) {
-		return Url.PUBLIC_URL
+		return SiteUrl.PUBLIC_URL
 			+ SeriesUrl.INFO_SERIES_PAGE.replace("{id}", String.valueOf(item.getId()));
 	}
 	

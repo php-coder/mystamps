@@ -60,6 +60,7 @@ import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.event.EventsConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.site.SiteConfig;
+import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
@@ -104,7 +105,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController(AccountUrl.AUTHENTICATION_PAGE);
-		registry.addViewController(Url.FORBIDDEN_PAGE);
+		registry.addViewController(SiteUrl.FORBIDDEN_PAGE);
 	}
 	
 	@Override

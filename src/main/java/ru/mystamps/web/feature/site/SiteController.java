@@ -22,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.common.Pager;
@@ -53,7 +52,7 @@ public class SiteController {
 	private final SeriesService seriesService;
 	private final SuspiciousActivityService suspiciousActivityService;
 	
-	@GetMapping(Url.INDEX_PAGE)
+	@GetMapping(SiteUrl.INDEX_PAGE)
 	public String showIndexPage(Model model, Locale userLocale) {
 		long categoryCounter    = categoryService.countAll();
 		long countryCounter     = countryService.countAll();
@@ -83,7 +82,7 @@ public class SiteController {
 	 * @author Sergey Chechenev
 	 * @author Slava Semushin
 	 */
-	@GetMapping(Url.SITE_EVENTS_PAGE)
+	@GetMapping(SiteUrl.SITE_EVENTS_PAGE)
 	public void viewSiteEvents(
 		@RequestParam(name = "page", defaultValue = "1") int pageNum,
 		Model model) {

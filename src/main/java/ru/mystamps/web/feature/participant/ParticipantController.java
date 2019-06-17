@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.site.SiteUrl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -73,7 +73,7 @@ public class ParticipantController {
 		
 		participantService.add(form);
 		
-		return redirectTo(Url.INDEX_PAGE);
+		return redirectTo(SiteUrl.INDEX_PAGE);
 	}
 	
 }

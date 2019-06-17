@@ -24,8 +24,8 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
+import ru.mystamps.web.feature.site.SiteUrl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,7 +37,7 @@ public class StepDefinitions  {
 
 	@Given("^as a user$")
 	public void loginAsUser() {
-		driver.get(Url.SITE + AccountUrl.AUTHENTICATION_PAGE);
+		driver.get(SiteUrl.SITE + AccountUrl.AUTHENTICATION_PAGE);
 		driver.findElement(By.id("login")).click();
 		driver.findElement(By.id("login")).clear();
 		driver.findElement(By.id("login")).sendKeys("coder");
@@ -49,11 +49,11 @@ public class StepDefinitions  {
 
 	@When("^I add series to my collection$")
 	public void addSeriesToCollection() {
-		driver.get(Url.SITE);
+		driver.get(SiteUrl.SITE);
 		driver.findElement(By.linkText("1 stamp")).click();
 		if (driver.findElements(By.id("series-danger")).size() != 0) {
 			driver.findElement(By.id("series-danger")).click();
-			driver.get(Url.SITE);
+			driver.get(SiteUrl.SITE);
 			driver.findElement(By.linkText("1 stamp")).click();
 		}
 		driver.findElement(By.id("series-success")).click();

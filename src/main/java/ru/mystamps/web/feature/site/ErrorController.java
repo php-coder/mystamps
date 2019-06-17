@@ -24,7 +24,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
 import javax.servlet.RequestDispatcher;
@@ -37,7 +36,7 @@ public class ErrorController {
 	
 	private final SiteService siteService;
 	
-	@RequestMapping(Url.NOT_FOUND_PAGE)
+	@RequestMapping(SiteUrl.NOT_FOUND_PAGE)
 	public void notFound(
 			HttpServletRequest request,
 			@CurrentUser Integer currentUserId,
@@ -53,7 +52,7 @@ public class ErrorController {
 		siteService.logAboutAbsentPage(page, method, currentUserId, ip, referer, agent);
 	}
 	
-	@RequestMapping(Url.INTERNAL_ERROR_PAGE)
+	@RequestMapping(SiteUrl.INTERNAL_ERROR_PAGE)
 	public void internalError(
 		// CheckStyle: ignore LineLength for next 3 lines
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION_TYPE, required = false) Class<?> exceptionType,
@@ -62,7 +61,7 @@ public class ErrorController {
 		
 		// FIXME: log to database (with *.status_code, *.message, *.servlet_name and user details)
 		
-		if (page != null && !Url.INTERNAL_ERROR_PAGE.equals(page)) {
+		if (page != null && !SiteUrl.INTERNAL_ERROR_PAGE.equals(page)) {
 			LOG.error(
 				"Exception '{}' occurred on page {}",
 				getNameOrAsIs(exceptionType),

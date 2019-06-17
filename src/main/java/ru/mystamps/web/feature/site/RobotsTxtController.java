@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.country.CountryUrl;
@@ -35,7 +34,7 @@ import java.io.PrintWriter;
 public class RobotsTxtController {
 	private static final Logger LOG = LoggerFactory.getLogger(RobotsTxtController.class);
 	
-	@GetMapping(Url.ROBOTS_TXT)
+	@GetMapping(SiteUrl.ROBOTS_TXT)
 	@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 	public void getRobotsText(HttpServletResponse response) {
 		response.setContentType("text/plain");
@@ -44,7 +43,7 @@ public class RobotsTxtController {
 		try {
 			PrintWriter writer = response.getWriter();
 			
-			writer.println("# robots.txt for " + Url.PUBLIC_URL);
+			writer.println("# robots.txt for " + SiteUrl.PUBLIC_URL);
 			writer.println("User-Agent: *");
 			writer.println("Disallow: " + AccountUrl.REGISTRATION_PAGE);
 			writer.println("Disallow: " + AccountUrl.ACTIVATE_ACCOUNT_PAGE);
@@ -53,10 +52,10 @@ public class RobotsTxtController {
 			writer.println("Disallow: " + CategoryUrl.ADD_CATEGORY_PAGE);
 			writer.println("Disallow: " + CountryUrl.ADD_COUNTRY_PAGE);
 			writer.println("Disallow: " + SeriesUrl.ADD_SERIES_PAGE);
-			writer.println("Disallow: " + Url.FORBIDDEN_PAGE);
-			writer.println("Disallow: " + Url.NOT_FOUND_PAGE);
-			writer.println("Disallow: " + Url.INTERNAL_ERROR_PAGE);
-			writer.println("Sitemap: " + Url.PUBLIC_URL + Url.SITEMAP_XML);
+			writer.println("Disallow: " + SiteUrl.FORBIDDEN_PAGE);
+			writer.println("Disallow: " + SiteUrl.NOT_FOUND_PAGE);
+			writer.println("Disallow: " + SiteUrl.INTERNAL_ERROR_PAGE);
+			writer.println("Sitemap: " + SiteUrl.PUBLIC_URL + SiteUrl.SITEMAP_XML);
 		} catch (IOException ex) {
 			LOG.error("Can't return robots.txt: {}", ex.getMessage());
 		}

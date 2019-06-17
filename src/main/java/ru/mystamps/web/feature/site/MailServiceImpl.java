@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.scheduling.annotation.Async;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.SendUsersActivationDto;
 import ru.mystamps.web.feature.report.AdminDailyReport;
@@ -131,7 +130,7 @@ public class MailServiceImpl implements MailService {
 		);
 		
 		Map<String, String> ctx = new HashMap<>();
-		ctx.put("site_url", testMode ? Url.SITE : Url.PUBLIC_URL);
+		ctx.put("site_url", testMode ? SiteUrl.SITE : SiteUrl.PUBLIC_URL);
 		ctx.put("activation_url_with_key", activationUrl);
 		ctx.put("expire_after_days", String.valueOf(CronService.PURGE_AFTER_DAYS));
 		

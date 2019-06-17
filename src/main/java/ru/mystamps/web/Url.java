@@ -27,6 +27,7 @@ import ru.mystamps.web.feature.report.ReportUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
+import ru.mystamps.web.feature.site.SiteUrl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,21 +40,7 @@ import java.util.Map;
  * @author Slava Semushin
  */
 public final class Url {
-	public static final String PUBLIC_URL            = "https://my-stamps.ru";
 	public static final String STATIC_RESOURCES_URL  = "https://stamps.filezz.ru";
-	
-	// see also robotframework-maven-plugin configuration at pom.xml
-	public static final String SITE                  = "http://127.0.0.1:8080";
-	
-	public static final String INDEX_PAGE            = "/";
-	public static final String ROBOTS_TXT            = "/robots.txt";
-	public static final String SITEMAP_XML           = "/sitemap.xml";
-
-	public static final String SITE_EVENTS_PAGE      = "/site/events";
-	
-	public static final String FORBIDDEN_PAGE        = "/error/403";
-	public static final String NOT_FOUND_PAGE        = "/error/404";
-	public static final String INTERNAL_ERROR_PAGE   = "/error/500";
 	
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION      = "v0.3.13";
@@ -110,10 +97,10 @@ public final class Url {
 		SeriesUrl.exposeUrlsToView(map);
 		SeriesImportUrl.exposeUrlsToView(map);
 		SeriesSalesImportUrl.exposeUrlsToView(map);
+		SiteUrl.exposeUrlsToView(map);
 		
 		map.put("BOOTSTRAP_LANGUAGE", BOOTSTRAP_LANGUAGE);
-		map.put("PUBLIC_URL", production ? PUBLIC_URL : SITE);
-		map.put("SITE_EVENTS_PAGE", SITE_EVENTS_PAGE);
+		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
 		
 		if (serveContentFromSingleHost) {
 			ImageUrl.exposeResourcesToView(map);

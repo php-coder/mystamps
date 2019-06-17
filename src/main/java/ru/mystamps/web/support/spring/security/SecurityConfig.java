@@ -53,6 +53,7 @@ import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
 import ru.mystamps.web.feature.site.SiteService;
+import ru.mystamps.web.feature.site.SiteUrl;
 
 import javax.servlet.Filter;
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
 				.mvcMatchers(SeriesUrl.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
-				.mvcMatchers(Url.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
+				.mvcMatchers(SiteUrl.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
 				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(ReportUrl.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
 				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
@@ -115,12 +116,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("password")
 				.loginProcessingUrl(AccountUrl.LOGIN_PAGE)
 				.failureUrl(AccountUrl.AUTHENTICATION_PAGE + "?failed")
-				.defaultSuccessUrl(Url.INDEX_PAGE, true)
+				.defaultSuccessUrl(SiteUrl.INDEX_PAGE, true)
 				.permitAll()
 				.and()
 			.logout()
 				.logoutUrl(AccountUrl.LOGOUT_PAGE)
-				.logoutSuccessUrl(Url.INDEX_PAGE)
+				.logoutSuccessUrl(SiteUrl.INDEX_PAGE)
 				.invalidateHttpSession(true)
 				.permitAll()
 				.and()
@@ -155,7 +156,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AccessDeniedHandler getAccessDeniedHandler() {
-		return new LogCsrfEventAndShow403PageForAccessDenied(siteService, Url.FORBIDDEN_PAGE);
+		return new LogCsrfEventAndShow403PageForAccessDenied(siteService, SiteUrl.FORBIDDEN_PAGE);
 	}
 	
 	@Bean

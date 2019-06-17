@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
@@ -51,6 +50,7 @@ import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesForm;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
+import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.security.Authority;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
@@ -477,7 +477,7 @@ public class SeriesController {
 		
 		if (StringUtils.isBlank(catalogNumber)) {
 			redirectAttributes.addFlashAttribute("numberIsEmpty", true);
-			return "redirect:" + Url.INDEX_PAGE;
+			return "redirect:" + SiteUrl.INDEX_PAGE;
 		}
 		
 		// @todo #776 Add integration tests for search series by Zagorski number
