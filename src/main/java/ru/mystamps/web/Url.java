@@ -132,7 +132,7 @@ public final class Url {
 				@Override
 				public String put(String key, String value) {
 					// Use a separate domain for our own resources
-					return map.put(STATIC_RESOURCES_URL + key, value);
+					return map.put(key, STATIC_RESOURCES_URL + value);
 				}
 			};
 			
