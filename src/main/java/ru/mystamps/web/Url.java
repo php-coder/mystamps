@@ -74,9 +74,6 @@ public final class Url {
 	public static final String SELECTIZE_CSS_CDN     = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css";
 	public static final String SELECTIZE_JS_CDN      = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js";
 	
-	// see also ru.mystamps.web.support.togglz.TogglzConfig#getTogglzConsole()
-	public static final String TOGGLZ_CONSOLE_PAGE    = "/togglz";
-	
 	// see also src/main/resources/application-test.properties
 	public static final String H2_CONSOLE_PAGE       = "/console";
 	

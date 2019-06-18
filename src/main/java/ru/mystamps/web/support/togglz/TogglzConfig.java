@@ -29,7 +29,6 @@ import org.togglz.core.manager.FeatureManagerBuilder;
 import org.togglz.core.repository.cache.CachingStateRepository;
 import org.togglz.core.repository.jdbc.JDBCStateRepository;
 import org.togglz.spring.security.SpringSecurityUserProvider;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.support.spring.security.StringAuthority;
 
 import javax.sql.DataSource;
@@ -38,6 +37,9 @@ import java.util.Collections;
 @Configuration
 @RequiredArgsConstructor
 public class TogglzConfig {
+	
+	private static final String TOGGLZ_CONSOLE_PAGE = "/togglz";
+	
 	private final DataSource dataSource;
 	
 	@Bean
@@ -67,7 +69,7 @@ public class TogglzConfig {
 		servlet.setName("TogglzConsole");
 		servlet.setServlet(new TogglzConsoleServlet());
 		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
-		servlet.setUrlMappings(Collections.singletonList(Url.TOGGLZ_CONSOLE_PAGE + "/*"));
+		servlet.setUrlMappings(Collections.singletonList(TOGGLZ_CONSOLE_PAGE + "/*"));
 		return servlet;
 	}
 	
