@@ -103,7 +103,7 @@ public final class Url {
 		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
 		
 		if (serveContentFromSingleHost) {
-			ImageUrl.exposeResourcesToView(map);
+			ImageUrl.exposeResourcesToView(map, null);
 			
 			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
@@ -119,24 +119,7 @@ public final class Url {
 			map.put("SERIES_ADD_JS", SERIES_ADD_JS);
 			map.put("SERIES_INFO_JS", SERIES_INFO_JS);
 		} else {
-			// This is a simplest decorator around Map that modifies inserted URLs by prepending
-			// a host for static resources to them.
-			//
-			// I don't want to use ForwardingMap (Guava) or TransformedMap (commons-collections)
-			// as we don't have them in dependencies and I don't want to add them either just for
-			// a few lines of code.
-			//
-			// NOTE: this implementation won't work as expected when a caller uses putAll(),
-			// putIfAbsent() or modifies a map by other ways.
-			Map<String, String> resourcesMap = new HashMap<String, String>(map) {
-				@Override
-				public String put(String key, String value) {
-					// Use a separate domain for our own resources
-					return map.put(key, STATIC_RESOURCES_URL + value);
-				}
-			};
-			
-			ImageUrl.exposeResourcesToView(resourcesMap);
+			ImageUrl.exposeResourcesToView(map, STATIC_RESOURCES_URL);
 			
 			map.put("CATALOG_UTILS_JS", STATIC_RESOURCES_URL + CATALOG_UTILS_JS);
 			map.put("COLLECTION_INFO_JS", STATIC_RESOURCES_URL + COLLECTION_INFO_JS);

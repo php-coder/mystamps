@@ -35,9 +35,18 @@ public final class ImageUrl {
 	private ImageUrl() {
 	}
 	
-	public static void exposeResourcesToView(Map<String, String> resources) {
-		resources.put("GET_IMAGE_PAGE", GET_IMAGE_PAGE);
-		resources.put("GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
+	public static void exposeResourcesToView(Map<String, String> resources, String host) {
+		put(resources, host, "GET_IMAGE_PAGE", GET_IMAGE_PAGE);
+		put(resources, host, "GET_IMAGE_PREVIEW_PAGE", GET_IMAGE_PREVIEW_PAGE);
+	}
+	
+	private static void put(Map<String, String> map, String valuePrefix, String key, String value) {
+		if (valuePrefix == null) {
+			map.put(key, value);
+			return;
+		}
+		
+		map.put(key, valuePrefix + value);
 	}
 	
 }
