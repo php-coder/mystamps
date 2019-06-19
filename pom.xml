@@ -462,7 +462,7 @@
 		<!-- Set JVM options for maven-surefire-plugin -->
 		<argLine>-Xss256k</argLine>
 		
-		<!-- Don't forget to update version in the Url class -->
+		<!-- Don't forget to update version in the ResourceUrl class -->
 		<bootstrap.version>3.4.1</bootstrap.version>
 		
 		<cglib.version>2.2.2</cglib.version>
@@ -520,7 +520,7 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<jetty.version>9.2.18.v20160721</jetty.version>
 		
-		<!-- Don't forget to update version in the Url class -->
+		<!-- Don't forget to update version in the ResourceUrl class -->
 		<jquery.version>1.9.1</jquery.version>
 		
 		<jsoup.version>1.12.1</jsoup.version>
@@ -554,7 +554,7 @@
 		<robotframework-selenium.version>2.53.1.1</robotframework-selenium.version>
 		<robotframework.version>3.0.4</robotframework.version>
 		
-		<!-- Don't forget to update version in the Url class and in the src/main/webapp/WEB-INF/views/series/add.html -->
+		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.5</selectizejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-dependencies/pom.xml) -->

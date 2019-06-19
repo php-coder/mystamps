@@ -44,6 +44,17 @@ public final class ResourceUrl {
 	private static final String SERIES_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
 	private static final String BOOTSTRAP_LANGUAGE = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	private static final String FAVICON_ICO        = "/favicon.ico";
+
+	// see also pom.xml and MvcConfig.addResourceHandlers()
+	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
+	private static final String BOOTSTRAP_JS       = "/bootstrap/3.4.1/js/bootstrap.min.js";
+	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
+	private static final String SELECTIZE_JS       = "/0.12.5/js/standalone/selectize.min.js";
+	
+	// CheckStyle: ignore LineLength for next 3 lines
+	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
+	private static final String SELECTIZE_CSS      = "/public/selectize/0.12.5/css/selectize.bootstrap3.css";
+	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css";
 	
 	private ResourceUrl() {
 	}
@@ -61,6 +72,25 @@ public final class ResourceUrl {
 		put(resources, host, "PARTICIPANT_ADD_JS", PARTICIPANT_ADD_JS);
 		put(resources, host, "SERIES_ADD_JS", SERIES_ADD_JS);
 		put(resources, host, "SERIES_INFO_JS", SERIES_INFO_JS);
+	}
+	
+	// see also MvcConfig.addResourceHandlers()
+	public static void exposeWebjarResourcesToView(Map<String, String> resources, boolean useCdn) {
+		if (useCdn) {
+			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
+			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_JS", BOOTSTRAP_JS);
+			put(resources, "https://yandex.st", "JQUERY_JS", JQUERY_JS);
+			// CheckStyle: ignore LineLength for next 1 line
+			put(resources, "https://cdnjs.cloudflare.com/ajax/libs/selectize.js", "SELECTIZE_JS", SELECTIZE_JS);
+			put(resources, null, "SELECTIZE_CSS", SELECTIZE_CSS_CDN);
+			return;
+		}
+		
+		put(resources, "/public", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
+		put(resources, "/public", "BOOTSTRAP_JS", BOOTSTRAP_JS);
+		put(resources, "/public", "JQUERY_JS", JQUERY_JS);
+		put(resources, "/public/selectize", "SELECTIZE_JS", SELECTIZE_JS);
+		put(resources, null, "SELECTIZE_CSS", SELECTIZE_CSS);
 	}
 	
 	private static void put(Map<String, String> map, String valuePrefix, String key, String value) {

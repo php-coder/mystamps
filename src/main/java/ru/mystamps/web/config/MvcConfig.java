@@ -126,7 +126,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 			.resourceChain(true)
 			.addResolver(resourceResolver);
 		
-		// For WebJars:
+		// For WebJars. See also ResourceUrl class
 		registry.addResourceHandler("/public/bootstrap/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/");
 		registry.addResourceHandler("/public/jquery/**")

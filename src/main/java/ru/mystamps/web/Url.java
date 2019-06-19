@@ -45,24 +45,6 @@ public final class Url {
 	// see also src/main/resources/application-test.properties
 	public static final String H2_CONSOLE_PAGE = "/console";
 	
-	// CheckStyle: ignore LineLength for next 3 lines
-	private static final String BOOTSTRAP_CSS      = "/public/bootstrap/3.4.1/css/bootstrap.min.css";
-	private static final String BOOTSTRAP_JS       = "/public/bootstrap/3.4.1/js/bootstrap.min.js";
-	private static final String JQUERY_JS          = "/public/jquery/1.9.1/jquery.min.js";
-	
-	// CheckStyle: ignore LineLength for next 3 lines
-	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
-	private static final String SELECTIZE_CSS      = "/public/selectize/0.12.5/css/selectize.bootstrap3.css";
-	private static final String SELECTIZE_JS       = "/public/selectize/0.12.5/js/standalone/selectize.min.js";
-	
-	// see also pom.xml and ru.mystamps.web.config.MvcConfig#addResourceHandlers()
-	// CheckStyle: ignore LineLength for next 5 lines
-	private static final String BOOTSTRAP_CSS_CDN  = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
-	private static final String BOOTSTRAP_JS_CDN   = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js";
-	private static final String JQUERY_JS_CDN      = "https://yandex.st/jquery/1.9.1/jquery.min.js";
-	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css";
-	private static final String SELECTIZE_JS_CDN   = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/js/standalone/selectize.min.js";
-	
 	private Url() {
 	}
 	
@@ -83,27 +65,16 @@ public final class Url {
 		SeriesSalesImportUrl.exposeUrlsToView(map);
 		SiteUrl.exposeUrlsToView(map);
 		
+		ResourceUrl.exposeWebjarResourcesToView(map, production);
+		
 		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
 		
 		if (serveContentFromSingleHost) {
 			ImageUrl.exposeResourcesToView(map, null);
 			ResourceUrl.exposeResourcesToView(map, null);
-			
-			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS);
-			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS);
-			map.put("JQUERY_JS", JQUERY_JS);
-			map.put("SELECTIZE_CSS", SELECTIZE_CSS);
-			map.put("SELECTIZE_JS", SELECTIZE_JS);
 		} else {
 			ImageUrl.exposeResourcesToView(map, ResourceUrl.STATIC_RESOURCES_URL);
 			ResourceUrl.exposeResourcesToView(map, ResourceUrl.STATIC_RESOURCES_URL);
-			
-			// Use CDN for the external resources like libraries
-			map.put("BOOTSTRAP_CSS", BOOTSTRAP_CSS_CDN);
-			map.put("BOOTSTRAP_JS", BOOTSTRAP_JS_CDN);
-			map.put("JQUERY_JS", JQUERY_JS_CDN);
-			map.put("SELECTIZE_CSS", SELECTIZE_CSS_CDN);
-			map.put("SELECTIZE_JS", SELECTIZE_JS_CDN);
 		}
 		
 		return map;
