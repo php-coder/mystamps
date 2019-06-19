@@ -1,4 +1,4 @@
-0.x
+0.4
 - (infrastructure) switched to Java8
 - (user interface) ported to Bootstrap 3
 - (infrastructure) ported to Spring Boot
