@@ -27,7 +27,21 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import ru.mystamps.web.Url;
+import ru.mystamps.web.feature.account.AccountUrl;
+import ru.mystamps.web.feature.category.CategoryUrl;
+import ru.mystamps.web.feature.collection.CollectionUrl;
+import ru.mystamps.web.feature.country.CountryUrl;
+import ru.mystamps.web.feature.image.ImageUrl;
+import ru.mystamps.web.feature.participant.ParticipantUrl;
+import ru.mystamps.web.feature.report.ReportUrl;
+import ru.mystamps.web.feature.series.SeriesUrl;
+import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
+import ru.mystamps.web.feature.site.ResourceUrl;
+import ru.mystamps.web.feature.site.SiteUrl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Adjusts {@link ThymeleafViewResolver} instance by setting static variables.
@@ -59,7 +73,34 @@ public class ThymeleafViewResolverInitializingBean
 		}
 		
 		boolean productionEnv = environment.acceptsProfiles("prod");
-		viewResolver.setStaticVariables(Url.asMap(productionEnv));
+		viewResolver.setStaticVariables(resourcesAsMap(productionEnv));
+	}
+
+	// Not all URLs are exported here but only those that are being used on views
+	private Map<String, ?> resourcesAsMap(boolean production) {
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
+		
+		AccountUrl.exposeUrlsToView(map);
+		CategoryUrl.exposeUrlsToView(map);
+		CountryUrl.exposeUrlsToView(map);
+		CollectionUrl.exposeUrlsToView(map);
+		ParticipantUrl.exposeUrlsToView(map);
+		ReportUrl.exposeUrlsToView(map);
+		ResourceUrl.exposeUrlsToView(map);
+		SeriesUrl.exposeUrlsToView(map);
+		SeriesImportUrl.exposeUrlsToView(map);
+		SeriesSalesImportUrl.exposeUrlsToView(map);
+		SiteUrl.exposeUrlsToView(map);
+		
+		String resourcesHost = production ? ResourceUrl.STATIC_RESOURCES_URL : null;
+		ImageUrl.exposeResourcesToView(map, resourcesHost);
+		ResourceUrl.exposeResourcesToView(map, resourcesHost);
+		
+		ResourceUrl.exposeWebjarResourcesToView(map, production);
+
+		return map;
 	}
 	
 }

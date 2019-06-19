@@ -17,22 +17,6 @@
  */
 package ru.mystamps.web;
 
-import ru.mystamps.web.feature.account.AccountUrl;
-import ru.mystamps.web.feature.category.CategoryUrl;
-import ru.mystamps.web.feature.collection.CollectionUrl;
-import ru.mystamps.web.feature.country.CountryUrl;
-import ru.mystamps.web.feature.image.ImageUrl;
-import ru.mystamps.web.feature.participant.ParticipantUrl;
-import ru.mystamps.web.feature.report.ReportUrl;
-import ru.mystamps.web.feature.series.SeriesUrl;
-import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportUrl;
-import ru.mystamps.web.feature.site.ResourceUrl;
-import ru.mystamps.web.feature.site.SiteUrl;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Holds path to site and all URLs.
  *
@@ -46,32 +30,6 @@ public final class Url {
 	public static final String H2_CONSOLE_PAGE = "/console";
 	
 	private Url() {
-	}
-	
-	public static Map<String, String> asMap(boolean production) {
-		// Not all URLs are exported here but only those that are being used on views
-		Map<String, String> map = new HashMap<>();
-		AccountUrl.exposeUrlsToView(map);
-		CategoryUrl.exposeUrlsToView(map);
-		CountryUrl.exposeUrlsToView(map);
-		CollectionUrl.exposeUrlsToView(map);
-		ParticipantUrl.exposeUrlsToView(map);
-		ReportUrl.exposeUrlsToView(map);
-		ResourceUrl.exposeUrlsToView(map);
-		SeriesUrl.exposeUrlsToView(map);
-		SeriesImportUrl.exposeUrlsToView(map);
-		SeriesSalesImportUrl.exposeUrlsToView(map);
-		SiteUrl.exposeUrlsToView(map);
-		
-		ResourceUrl.exposeWebjarResourcesToView(map, production);
-		
-		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
-		
-		String resourcesHost = production ? ResourceUrl.STATIC_RESOURCES_URL : null;
-		ImageUrl.exposeResourcesToView(map, resourcesHost);
-		ResourceUrl.exposeResourcesToView(map, resourcesHost);
-		
-		return map;
 	}
 	
 }
