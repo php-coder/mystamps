@@ -30,6 +30,7 @@
 - (infrastructure) port the integration tests to Robot Framework. Also remove TestNG and FEST assertions
 - (functionality)  implement import of a series sales by URL
 - (infrastructure) add support for PostgreSQL
+- (infrastructure) restructure Java packages to split code by features
 
 0.3
 - (functionality)  implemented possibility to user to add series to his collection
