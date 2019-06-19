@@ -94,6 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(SeriesUrl.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
 				.mvcMatchers(SiteUrl.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
+				.mvcMatchers(CategoryUrl.SUGGEST_SERIES_CATEGORY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
 				.mvcMatchers(ReportUrl.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
 				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
