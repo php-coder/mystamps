@@ -49,9 +49,7 @@ public final class Url {
 	}
 	
 	public static Map<String, String> asMap(boolean production) {
-		boolean serveContentFromSingleHost = !production;
-		
-		// Not all URLs are listed here but only those that are being used on views
+		// Not all URLs are exported here but only those that are being used on views
 		Map<String, String> map = new HashMap<>();
 		AccountUrl.exposeUrlsToView(map);
 		CategoryUrl.exposeUrlsToView(map);
@@ -69,13 +67,9 @@ public final class Url {
 		
 		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
 		
-		if (serveContentFromSingleHost) {
-			ImageUrl.exposeResourcesToView(map, null);
-			ResourceUrl.exposeResourcesToView(map, null);
-		} else {
-			ImageUrl.exposeResourcesToView(map, ResourceUrl.STATIC_RESOURCES_URL);
-			ResourceUrl.exposeResourcesToView(map, ResourceUrl.STATIC_RESOURCES_URL);
-		}
+		String resourcesHost = production ? ResourceUrl.STATIC_RESOURCES_URL : null;
+		ImageUrl.exposeResourcesToView(map, resourcesHost);
+		ResourceUrl.exposeResourcesToView(map, resourcesHost);
 		
 		return map;
 	}
