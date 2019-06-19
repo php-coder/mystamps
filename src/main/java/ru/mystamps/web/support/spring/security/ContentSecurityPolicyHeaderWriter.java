@@ -19,7 +19,6 @@ package ru.mystamps.web.support.spring.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.header.HeaderWriter;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
 
@@ -42,7 +41,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d+/(ask|image))";
 	
-	private static final String H2_CONSOLE_PATTERN = Url.H2_CONSOLE_PAGE + '/';
+	// see also spring.h2.console.path in application-test.properties and SecurityConfig
+	private static final String H2_CONSOLE_PATTERN = "/console/";
 	
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";

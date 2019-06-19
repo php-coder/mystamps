@@ -41,7 +41,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.category.CategoryUrl;
@@ -133,7 +132,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.csrf()
 				// Allow unsecured requests to H2 consoles.
-				.ignoringAntMatchers(Url.H2_CONSOLE_PAGE + "/**")
+				// See also spring.h2.console.path in application-test.properties and
+				// ContentSecurityPolicyHeaderWriter.H2_CONSOLE_PATTERN
+				.ignoringAntMatchers("/console/**")
 				.and()
 			.rememberMe()
 				// FIXME: GH #27
