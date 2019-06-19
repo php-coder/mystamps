@@ -39,7 +39,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
-import ru.mystamps.web.Url;
 import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryConfig;
@@ -59,6 +58,7 @@ import ru.mystamps.web.feature.series.importing.SeriesImportConfig;
 import ru.mystamps.web.feature.series.importing.SeriesImportUrl;
 import ru.mystamps.web.feature.series.importing.event.EventsConfig;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
+import ru.mystamps.web.feature.site.ResourceUrl;
 import ru.mystamps.web.feature.site.SiteConfig;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
@@ -111,7 +111,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		VersionResourceResolver resourceResolver = new VersionResourceResolver()
-			.addFixedVersionStrategy(Url.RESOURCES_VERSION, "/**");
+			.addFixedVersionStrategy(ResourceUrl.RESOURCES_VERSION, "/**");
 		
 		@SuppressWarnings("checkstyle:magicnumber")
 		CacheControl cacheControl = CacheControl.maxAge(7, TimeUnit.DAYS);
