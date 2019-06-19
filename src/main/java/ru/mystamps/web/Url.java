@@ -60,8 +60,8 @@ public final class Url {
 	private static final String BOOTSTRAP_CSS_CDN  = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
 	private static final String BOOTSTRAP_JS_CDN   = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js";
 	private static final String JQUERY_JS_CDN      = "https://yandex.st/jquery/1.9.1/jquery.min.js";
-	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.bootstrap3.min.css";
-	private static final String SELECTIZE_JS_CDN   = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/js/standalone/selectize.min.js";
+	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css";
+	private static final String SELECTIZE_JS_CDN   = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/js/standalone/selectize.min.js";
 	
 	private Url() {
 	}
