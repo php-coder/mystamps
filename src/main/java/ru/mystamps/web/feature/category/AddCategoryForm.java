@@ -28,13 +28,12 @@ import javax.validation.GroupSequence;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_EN_REGEXP;
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_MAX_LENGTH;
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_MIN_LENGTH;
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_NO_HYPHEN_REGEXP;
-// CheckStyle: ignore LineLength for next 1 line
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP;
-import static ru.mystamps.web.feature.category.CategoryValidation.CATEGORY_NAME_RU_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_EN_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_MAX_LENGTH;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_MIN_LENGTH;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_NO_REPEATING_HYPHENS_REGEXP;
+import static ru.mystamps.web.feature.category.CategoryValidation.NAME_RU_REGEXP;
 
 @Getter
 @Setter
@@ -54,29 +53,29 @@ public class AddCategoryForm implements AddCategoryDto {
 	@NotEmpty(groups = Group.Level1.class)
 	@Size.List({
 		@Size(
-			min = CATEGORY_NAME_MIN_LENGTH,
+			min = NAME_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Group.Level2.class
 		),
 		@Size(
-			max = CATEGORY_NAME_MAX_LENGTH,
+			max = NAME_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = CATEGORY_NAME_EN_REGEXP,
+			regexp = NAME_EN_REGEXP,
 			message = "{value.invalid-en-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
-			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
 			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
-			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
+			regexp = NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Group.Level5.class
 		)
@@ -88,29 +87,29 @@ public class AddCategoryForm implements AddCategoryDto {
 	
 	@Size.List({
 		@Size(
-			min = CATEGORY_NAME_MIN_LENGTH,
+			min = NAME_MIN_LENGTH,
 			message = "{value.too-short}",
 			groups = Group.Level2.class
 		),
 		@Size(
-			max = CATEGORY_NAME_MAX_LENGTH,
+			max = NAME_MAX_LENGTH,
 			message = "{value.too-long}",
 			groups = Group.Level2.class
 		)
 	})
 	@Pattern.List({
 		@Pattern(
-			regexp = CATEGORY_NAME_RU_REGEXP,
+			regexp = NAME_RU_REGEXP,
 			message = "{value.invalid-ru-chars}",
 			groups = Group.Level3.class
 		),
 		@Pattern(
-			regexp = CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP,
+			regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
 			message = "{value.repeating-hyphen}",
 			groups = Group.Level4.class
 		),
 		@Pattern(
-			regexp = CATEGORY_NAME_NO_HYPHEN_REGEXP,
+			regexp = NAME_NO_HYPHEN_REGEXP,
 			message = "{value.hyphen}",
 			groups = Group.Level5.class
 		)

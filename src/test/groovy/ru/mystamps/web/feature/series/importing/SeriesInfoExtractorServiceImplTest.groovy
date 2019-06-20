@@ -85,7 +85,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCategory() should filter out invalid candidates'() {
 		given:
 			String shortName = 'ok'
-			String longName = 'x' * (CategoryValidation.CATEGORY_NAME_MAX_LENGTH + 1)
+			String longName = 'x' * (CategoryValidation.NAME_MAX_LENGTH + 1)
 			String invalidEnName = 't3st_'
 			String invalidRuName = 'т_е_с_т'
 			String validEnName = 'valid'

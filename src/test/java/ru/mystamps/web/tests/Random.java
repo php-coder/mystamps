@@ -136,8 +136,8 @@ public final class Random {
 	
 	public static String categoryName() {
 		String name = between(
-				CategoryValidation.CATEGORY_NAME_MIN_LENGTH,
-				CategoryValidation.CATEGORY_NAME_MAX_LENGTH
+				CategoryValidation.NAME_MIN_LENGTH,
+				CategoryValidation.NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();

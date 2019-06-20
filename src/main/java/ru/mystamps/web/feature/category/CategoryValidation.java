@@ -19,17 +19,16 @@ package ru.mystamps.web.feature.category;
 
 import ru.mystamps.web.feature.category.CategoryDb.Category;
 
-// @todo #927 CategoryValidation: remove CATEGORY_ prefix from the constants
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class CategoryValidation {
 	
-	public static final int CATEGORY_NAME_MIN_LENGTH = 3;
-	public static final int CATEGORY_NAME_MAX_LENGTH = Category.NAME_LENGTH;
-	public static final String CATEGORY_NAME_EN_REGEXP = "[- a-zA-Z]+";
-	public static final String CATEGORY_NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
-	static final String CATEGORY_NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
+	public static final int NAME_MIN_LENGTH = 3;
+	public static final int NAME_MAX_LENGTH = Category.NAME_LENGTH;
+	public static final String NAME_EN_REGEXP = "[- a-zA-Z]+";
+	public static final String NAME_RU_REGEXP = "[- а-яёА-ЯЁ]+";
+	static final String NAME_NO_HYPHEN_REGEXP = "[ \\p{L}]([- \\p{L}]+[ \\p{L}])*";
 	@SuppressWarnings("PMD.LongVariable")
-	static final String CATEGORY_NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
+	static final String NAME_NO_REPEATING_HYPHENS_REGEXP = "(?!.+[-]{2,}).+";
 	
 	private CategoryValidation() {
 	}
