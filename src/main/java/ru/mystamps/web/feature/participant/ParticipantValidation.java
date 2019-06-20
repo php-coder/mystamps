@@ -19,13 +19,12 @@ package ru.mystamps.web.feature.participant;
 
 import ru.mystamps.web.feature.participant.ParticipantDb.TransactionParticipant;
 
-// @todo #927 ParticipantValidation: remove PARTICIPANT_ prefix from the constants
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class ParticipantValidation {
 	
-	public static final int PARTICIPANT_NAME_MIN_LENGTH = 3;
-	public static final int PARTICIPANT_NAME_MAX_LENGTH = TransactionParticipant.NAME_LENGTH;
-	static final int PARTICIPANT_URL_MAX_LENGTH  = TransactionParticipant.URL_LENGTH;
+	public static final int NAME_MIN_LENGTH = 3;
+	public static final int NAME_MAX_LENGTH = TransactionParticipant.NAME_LENGTH;
+	static final int URL_MAX_LENGTH = TransactionParticipant.URL_LENGTH;
 	
 	private ParticipantValidation() {
 	}

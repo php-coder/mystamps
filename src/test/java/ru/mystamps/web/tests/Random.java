@@ -176,8 +176,8 @@ public final class Random {
 	
 	public static String participantName() {
 		return between(
-			ParticipantValidation.PARTICIPANT_NAME_MIN_LENGTH,
-			ParticipantValidation.PARTICIPANT_NAME_MAX_LENGTH
+			ParticipantValidation.NAME_MIN_LENGTH,
+			ParticipantValidation.NAME_MAX_LENGTH
 		).english();
 	}
 	

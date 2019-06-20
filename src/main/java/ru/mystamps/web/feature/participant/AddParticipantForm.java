@@ -25,9 +25,9 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_NAME_MAX_LENGTH;
-import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_NAME_MIN_LENGTH;
-import static ru.mystamps.web.feature.participant.ParticipantValidation.PARTICIPANT_URL_MAX_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.NAME_MAX_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.NAME_MIN_LENGTH;
+import static ru.mystamps.web.feature.participant.ParticipantValidation.URL_MAX_LENGTH;
 
 @Getter
 @Setter
@@ -35,13 +35,13 @@ public class AddParticipantForm implements AddParticipantDto {
 	
 	@NotEmpty
 	@Size.List({
-		@Size(min = PARTICIPANT_NAME_MIN_LENGTH, message = "{value.too-short}"),
-		@Size(max = PARTICIPANT_NAME_MAX_LENGTH, message = "{value.too-long}")
+		@Size(min = NAME_MIN_LENGTH, message = "{value.too-short}"),
+		@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}")
 	})
 	private String name;
 	
 	@URL
-	@Size(max = PARTICIPANT_URL_MAX_LENGTH, message = "{value.too-long}")
+	@Size(max = URL_MAX_LENGTH, message = "{value.too-long}")
 	private String url;
 	
 	// FIXME: must be positive
