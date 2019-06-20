@@ -167,7 +167,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	def 'extractCountry() should filter out invalid candidates'() {
 		given:
 			String shortName = 'ok'
-			String longName = 'x' * (CountryValidation.COUNTRY_NAME_MAX_LENGTH + 1)
+			String longName = 'x' * (CountryValidation.NAME_MAX_LENGTH + 1)
 			String invalidEnName = 't3st_'
 			String invalidRuName = 'т_е_с_т'
 			String validEnName = 'valid'

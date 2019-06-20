@@ -156,8 +156,8 @@ public final class Random {
 	
 	public static String countryName() {
 		String name = between(
-				CountryValidation.COUNTRY_NAME_MIN_LENGTH,
-				CountryValidation.COUNTRY_NAME_MAX_LENGTH
+				CountryValidation.NAME_MIN_LENGTH,
+				CountryValidation.NAME_MAX_LENGTH
 			)
 			.with(oneOf(" -"))
 			.english();
