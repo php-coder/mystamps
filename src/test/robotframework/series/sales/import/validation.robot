@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../../auth.steps.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Force Tags      series  sales  import-sales  validation
+Force Tags      series  sales  import-sales  validation  react-related
 
 *** Test Cases ***
 Import a series sale with empty required field

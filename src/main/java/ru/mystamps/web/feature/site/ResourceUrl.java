@@ -32,18 +32,20 @@ public final class ResourceUrl {
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION = "v0.4.0";
+	public static final String RESOURCES_VERSION = "v0.4.1";
 
-	// CheckStyle: ignore LineLength for next 8 lines
-	private static final String CATALOG_UTILS_JS   = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
-	private static final String COLLECTION_INFO_JS = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
-	private static final String DATE_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";
-	private static final String MAIN_CSS           = "/static/"    + RESOURCES_VERSION + "/styles/main.min.css";
-	private static final String PARTICIPANT_ADD_JS = "/public/js/" + RESOURCES_VERSION + "/participant/add.min.js";
-	private static final String SERIES_ADD_JS      = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";
-	private static final String SERIES_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
-	private static final String BOOTSTRAP_LANGUAGE = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
-	private static final String FAVICON_ICO        = "/favicon.ico";
+	// CheckStyle: ignore LineLength for next 10 lines
+	private static final String CATALOG_UTILS_JS    = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
+	private static final String COLLECTION_INFO_JS  = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
+	private static final String DATE_UTILS_JS       = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";
+	private static final String MAIN_CSS            = "/static/"    + RESOURCES_VERSION + "/styles/main.min.css";
+	private static final String PARTICIPANT_ADD_JS  = "/public/js/" + RESOURCES_VERSION + "/participant/add.min.js";
+	private static final String SERIES_ADD_JS       = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";
+	private static final String SERIES_INFO_JS      = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
+	// @todo #1057 Use minified version of SeriesSaleImportForm.js
+	private static final String SALE_IMPORT_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSaleImportForm.js";
+	private static final String BOOTSTRAP_LANGUAGE  = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
+	private static final String FAVICON_ICO         = "/favicon.ico";
 
 	// see also pom.xml and MvcConfig.addResourceHandlers()
 	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
@@ -74,6 +76,7 @@ public final class ResourceUrl {
 		put(resources, host, "PARTICIPANT_ADD_JS", PARTICIPANT_ADD_JS);
 		put(resources, host, "SERIES_ADD_JS", SERIES_ADD_JS);
 		put(resources, host, "SERIES_INFO_JS", SERIES_INFO_JS);
+		put(resources, host, "SALE_IMPORT_FORM_JS", SALE_IMPORT_FORM_JS);
 	}
 	
 	// see also MvcConfig.addResourceHandlers()

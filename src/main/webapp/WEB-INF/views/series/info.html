@@ -708,51 +708,10 @@
 							</div>
 
 							<!--/* @todo #995 Series sale import: add support for new sellers */-->
-							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
-								<div class="col-sm-12">
-									<div class="row">
-										<div class="col-sm-12">
-											<h5 th:text="#{t_import_info_who_selling_series}">
-												Import info about selling this series
-											</h5>
-										</div>
-									</div>
-									<div class="row">
-										<div id="import-series-sale-failed-msg"
-											class="alert alert-danger text-center col-sm-8 col-sm-offset-2 hidden"
-											th:text="#{t_could_not_import_info}">
-											Could not import information from this page
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<form id="import-series-sale-form" class="form-horizontal">
-												
-												<div class="form-group form-group-sm">
-													<label for="series-sale-url" class="control-label col-sm-3">
-														<span th:remove="tag" th:text="#{t_url}">
-															URL
-														</span>
-														<span class="required_field">*</span>
-													</label>
-													<div class="col-sm-6">
-														<input type="url" id="series-sale-url" class="form-control" required="required" />
-														<span id="series-sale-url.errors" class="help-block hidden"></span>
-													</div>
-												</div>
-												
-												<div class="form-group form-group-sm">
-													<div class="col-sm-offset-3 col-sm-4">
-														<button id="series-sale-submit-btn" type="submit" class="btn btn-primary" th:text="#{t_import_info}">
-															Import info
-														</button>
-													</div>
-												</div>
-												
-											</form>
-										</div>
-									</div>
-								</div>
+							<!--/* @todo #1057 Series sale import form: show a message when JavaScript is disabled */-->
+							<div id="importSeriesSaleForm"
+								togglz:active="ADD_PURCHASES_AND_SALES"
+								sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
 							</div>
 							
 						</div>
@@ -785,49 +744,69 @@
 
 		<!--/*
 			NOTE: It won't work properly, if user can import a sale but can't view it because
-			initPage() is came from series/info.js file.
+			SeriesSaleImportForm uses DateUtils.formatDateToDdMmYyyy() from DateUtils.js file.
 		*/-->
-		<script th:inline="javascript" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
-			$(document).ready(function() {
-				/*[+
-				initPage(
-					$.ajax,
-					[['__@{${IMPORT_SERIES_SALES}}__']],
-					[[${_csrf.headerName}]],
-					[[${_csrf.token}]]
-				);
-				+]*/
+		<!--/*/
+		<th:block togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
+		/*/-->
+		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
+		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
+		<script th:inline="javascript">
+			/*[+
+			var props = {
+				'url': [[ '__@{${IMPORT_SERIES_SALES}}__' ]],
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {
+					't_import_info_who_selling_series': [[ #{t_import_info_who_selling_series} ]],
+					't_could_not_import_info':          [[ #{t_could_not_import_info} ]],
+					't_url':                            [[ #{t_url} ]],
+					't_import_info':                    [[ #{t_import_info} ]]
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var props = { 'l10n': {} };
+			window.fetch = function() {
+				var failOnForm = false;
+				var failOnField = false;
+				var stubResponse;
 				
-				/*[- */
-				var stubResponse = {
-					'sellerId':  3,
-					'price':     3.5,
-					'currency' : 'USD'
-				};
-				var errorStubResponse = {
-					status: 400,
-					responseText: '{ "fieldErrors": { "url": [ "Invalid value" ] } }'
-				};
-				var stubAjax = function() {
-					var that = {
-						done: function stubDone(callback) {
-							setTimeout(callback, 500 /* 0.5 second */, stubResponse);
-							return that;
-						},
-						fail: function stubFail(callback) {
-							//callback(errorStubResponse);
-							return that;
-						},
-						always: function stubAlways(callback) {
-							callback();
-							return that;
-						}
-					};
-					return that;
-				};
-				initPage(stubAjax);
-				/* -]*/
-			});
+				if (failOnForm) {
+					stubResponse = new Response(null, { status: 500, statusText: 'Fake Server Error' });
+				
+				} else if (failOnField) {
+					var body = new Blob(
+						[ '{ "fieldErrors": { "url": [ "Invalid value" ] } }' ],
+						{ type : 'application/json' }
+					);
+					stubResponse = new Response(body, { status: 400 });
+				
+				} else {
+					var body = new Blob(
+						[ '{ "sellerId": 3, "price": 3.5, "currency" : "USD" }' ],
+						{ type : 'application/json' }
+					);
+					stubResponse = new Response(body, { status: 200 });
+				}
+				
+				return new Promise(function delayExecution(resolve) {
+					setTimeout(resolve, 500 /* 0.5 second */);
+				
+				}).then(function returnResponse() {
+					return Promise.resolve(stubResponse);
+				});
+			};
+			/* -]*/
+			
+			var rootElement = React.createElement(SeriesSaleImportForm, props);
+			var destNode = document.getElementById('importSeriesSaleForm');
+			ReactDOM.render(rootElement, destNode);
 		</script>
+		<!--/*/
+		</th:block>
+		/*/-->
 	</body>
 </html>
