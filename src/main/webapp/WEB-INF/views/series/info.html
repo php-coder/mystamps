@@ -461,7 +461,7 @@
 							
 							<div class="row" th:if="${not #lists.isEmpty(purchasesAndSales)}" togglz:active="SHOW_PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
 								<div class="col-sm-12">
-									<h5 th:text="|#{t_who_selling_series}:|">Who was selling/buying this series:</h5>
+									<h5 th:text="#{t_who_selling_series}">Who was selling/buying this series</h5>
 									<ul th:remove="all-but-first">
 										<li id="series-sale-1-info"
 											th:id="|series-sale-${iter.count}-info|"
@@ -515,7 +515,7 @@
 							
 							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
 								<div class="col-sm-12">
-									<h5 th:text="|#{t_add_info_who_selling_series}:|">Add info about selling/buying this series:</h5>
+									<h5 th:text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 									<form id="add-series-sales-form"
 										method="post"
 										class="form-horizontal"
