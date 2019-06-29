@@ -18,6 +18,9 @@ src/main/webapp/WEB-INF/static/styles/*.min.css
 src/main/javascript/*.min.js
 src/main/javascript/*/*.min.js
 
+# managed by frontend-maven-plugin
+src/main/frontend/node/
+
 # Vagrant related files
 .vagrant/
 vagrant/provisioning/vagrant.retry

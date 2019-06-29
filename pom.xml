@@ -490,6 +490,7 @@
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
 		<error-prone.version>2.3.3</error-prone.version>
+		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-dependencies/pom.xml) -->
@@ -1203,6 +1204,37 @@
 								</compilerArg>
 							</compilerArgs>
 						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>frontend</id>
+			<build>
+				<plugins>
+					<!--
+						We assume that most of the time we develop backend rather frontend.
+						So, we cache and skip the frontend-related things by default. This
+						should save us a little time on every iteration during development
+						on local environment.
+					-->
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>${frontend.plugin.version}</version>
+						<configuration>
+							<nodeVersion>v10.16.0</nodeVersion>
+							<workingDirectory>${basedir}/src/main/frontend</workingDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>install-node-and-npm</id>
+								<goals>
+									<goal>install-node-and-npm</goal>
+								</goals>
+								<phase>initialize</phase>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
