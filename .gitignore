@@ -20,6 +20,7 @@ src/main/javascript/*/*.min.js
 
 # managed by frontend-maven-plugin
 src/main/frontend/node/
+src/main/frontend/node_modules/
 
 # Vagrant related files
 .vagrant/

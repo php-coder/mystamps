@@ -1234,6 +1234,16 @@
 								</goals>
 								<phase>initialize</phase>
 							</execution>
+							<execution>
+								<id>npm-ci</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<phase>initialize</phase>
+								<configuration>
+									<arguments>ci</arguments>
+								</configuration>
+							</execution>
 						</executions>
 					</plugin>
 				</plugins>
