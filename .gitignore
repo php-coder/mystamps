@@ -32,3 +32,6 @@ vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
 # used by docker/prod.yml
 docker/application-prod.properties
 docker/mysql_backup_mystamps.sql.gz
+
+# maven-wrapper
+.mvn/wrapper/maven-wrapper.jar

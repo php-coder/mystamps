@@ -5,12 +5,12 @@ WireMock is a simulator for HTTP-based APIs. We use this tool in the integration
 external services. For example, for testing import of the stamps series from sites.
 
 ## Running on TravisCI
-WireMock is automatically running/stopping during integration tests execution (`mvn verify`).
+WireMock is automatically running/stopping during integration tests execution (`./mvnw verify`).
 
 ## Running manually
 In order to run the server as a standlone process:
 * uncomment `<keepRunning>` option in the `pom.xml` file
-* execute the `mvn wiremock:run` command
+* execute the `./mvnw wiremock:run` command
 
 After that the mock server will be available on 8888 port.
 

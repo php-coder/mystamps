@@ -5,11 +5,11 @@ possible configurations, we support only those that are typically used:
 
 * **a single container** where the application is running with `test` profile.
   In this mode, it also runs in-memory database H2. This is roughly the same as
-  executing `mvn spring-boot:run` command but inside a Docker container.
+  executing `./mvnw spring-boot:run` command but inside a Docker container.
 
   * Create a WAR file and build the image `phpcoder/mystamps:latest`:
     ```console
-    $ mvn package dockerfile:build
+    $ ./mvnw package dockerfile:build
     ```
   * Run a container with `docker-compose`:
     ```console

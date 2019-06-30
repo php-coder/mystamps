@@ -663,8 +663,8 @@
 			</plugin>
 			
 			<!--
-			     Usage:
-			     mvn spotbugs:check (checks the sources and produces report to the console)
+				Usage:
+				./mvnw spotbugs:check (checks the sources and produces report to the console)
 			-->
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
@@ -945,8 +945,8 @@
 			</plugin>
 			
 			<!--
-			     Usage:
-			     mvn codenarc:codenarc (checks the sources and generates report in target/site/codenarc.html)
+				Usage:
+				./mvnw codenarc:codenarc (checks the sources and generates report in target/site/codenarc.html)
 			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -1004,7 +1004,7 @@
 			</plugin>
 			
 			<!--
-				Usage: mvn org.owasp:dependency-check-maven:check
+				Usage: ./mvnw org.owasp:dependency-check-maven:check
 				(analyze dependencies for vulnerabilities and creates report in target/dependency-check-report.html)
 			-->
 			<plugin>
@@ -1014,8 +1014,8 @@
 			</plugin>
 			
 			<!--
-			     Usage:
-			     mvn robotframework:run (runs tests and generates report in target/robotframework-reports/report.html)
+				Usage:
+				./mvnw robotframework:run (runs tests and generates report in target/robotframework-reports/report.html)
 			-->
 			<plugin>
 				<groupId>org.robotframework</groupId>
@@ -1102,7 +1102,7 @@
 			
 			<!--
 				Usage:
-				mvn wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
+				./mvnw wiremock:run (run WireMock server with mocks from src/test/wiremock/mappings)
 			-->
 			<plugin>
 				<groupId>uk.co.automatictester</groupId>

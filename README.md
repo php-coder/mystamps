@@ -26,7 +26,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run a lo
 * install Java (at least 8th version is required)
 * install Maven
 * clone this project
-* from the console inside the directory with source code, execute the command `mvn spring-boot:run`
+* from the console inside the directory with source code, execute the command `./mvnw spring-boot:run`
 * open up `http://127.0.0.1:8080` in a browser
 * browse the site or log in as one of the pre-created users: `admin`, `paid`, or `coder` with password `test`
 * press `Ctrl-C` to stop the server
