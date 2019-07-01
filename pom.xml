@@ -278,6 +278,20 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react</artifactId>
+			<version>${react.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react-dom</artifactId>
+			<version>${react.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- For mocking of non-interface types -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -548,6 +562,9 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
+		
+		<!-- Don't forget to update version in the ResourceUrl class -->
+		<react.version>16.8.6</react.version>
 		
 		<resources.plugin.version>3.1.0</resources.plugin.version>
 		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>

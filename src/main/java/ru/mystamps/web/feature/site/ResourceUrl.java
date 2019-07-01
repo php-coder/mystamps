@@ -49,6 +49,8 @@ public final class ResourceUrl {
 	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
 	private static final String BOOTSTRAP_JS       = "/bootstrap/3.4.1/js/bootstrap.min.js";
 	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
+	private static final String REACT_JS           = "16.8.6/umd/react.production.min.js";
+	private static final String REACT_DOM_JS       = "16.8.6/umd/react-dom.production.min.js";
 	private static final String SELECTIZE_JS       = "/0.12.5/js/standalone/selectize.min.js";
 	
 	// CheckStyle: ignore LineLength for next 3 lines
@@ -80,6 +82,8 @@ public final class ResourceUrl {
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 			put(resources, "https://yandex.st", "JQUERY_JS", JQUERY_JS);
+			put(resources, "https://unpkg.com/react@", "REACT_JS", REACT_JS);
+			put(resources, "https://unpkg.com/react-dom@", "REACT_DOM_JS", REACT_DOM_JS);
 			// CheckStyle: ignore LineLength for next 1 line
 			put(resources, "https://cdnjs.cloudflare.com/ajax/libs/selectize.js", "SELECTIZE_JS", SELECTIZE_JS);
 			put(resources, null, "SELECTIZE_CSS", SELECTIZE_CSS_CDN);
@@ -89,6 +93,8 @@ public final class ResourceUrl {
 		put(resources, "/public", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 		put(resources, "/public", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 		put(resources, "/public", "JQUERY_JS", JQUERY_JS);
+		put(resources, "/public/react/", "REACT_JS", REACT_JS);
+		put(resources, "/public/react-dom/", "REACT_DOM_JS", REACT_DOM_JS);
 		put(resources, "/public/selectize", "SELECTIZE_JS", SELECTIZE_JS);
 		put(resources, null, "SELECTIZE_CSS", SELECTIZE_CSS);
 	}
