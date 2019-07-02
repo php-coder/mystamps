@@ -472,8 +472,7 @@ public class SeriesController {
 		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,
 		Model model,
 		Locale userLocale,
-		RedirectAttributes redirectAttributes)
-		throws IOException {
+		RedirectAttributes redirectAttributes) {
 		
 		if (StringUtils.isBlank(catalogNumber)) {
 			redirectAttributes.addFlashAttribute("numberIsEmpty", true);
