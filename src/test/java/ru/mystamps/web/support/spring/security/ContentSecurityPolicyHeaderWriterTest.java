@@ -246,6 +246,18 @@ public class ContentSecurityPolicyHeaderWriterTest {
 				)
 			);
 			
+			assertThat(
+				directives,
+				hasItemInArray(
+					"script-src "
+						+ "'unsafe-inline' "
+						+ "https://stamps.filezz.ru "
+						+ "https://maxcdn.bootstrapcdn.com "
+						+ "https://yandex.st "
+						+ "https://unpkg.com"
+				)
+			);
+			
 			assertThat(directives, hasItemInArray("connect-src 'self'"));
 
 			// hope that all other directives are the same as on the index page

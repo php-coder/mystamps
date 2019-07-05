@@ -137,6 +137,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://cdnjs.cloudflare.com' is required by selectize.bootstrap3.min.css
 	private static final String SCRIPTS_SERIES_ADD_PAGE = " https://cdnjs.cloudflare.com";
 	
+	// - 'https://unpkg.com' is required by react/react-dom
+	private static final String SCRIPTS_SERIES_INFO_PAGE = " https://unpkg.com";
+	
 	// - 'unsafe-eval' is required by loader.js from Google Charts
 	// - 'https://www.gstatic.com' is required by Google Charts
 	private static final String SCRIPT_COLLECTION_INFO = " 'unsafe-eval' https://www.gstatic.com";
@@ -214,8 +217,9 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 			sb.append(SEPARATOR)
 			  .append(CHILD_SRC);
 		} else if (SERIES_INFO_PAGE_PATTERN.matcher(uri).matches()) {
-			// anonymous and users without a required authority actually don't need this directive
-			sb.append(SEPARATOR)
+			// anonymous and users without a required authority actually don't need these directives
+			sb.append(SCRIPTS_SERIES_INFO_PAGE)
+			  .append(SEPARATOR)
 			  .append(CONNECT_SRC);
 		}
 		
