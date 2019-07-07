@@ -8,7 +8,7 @@ external services. For example, for testing import of the stamps series from sit
 WireMock is automatically running/stopping during integration tests execution (`./mvnw verify`).
 
 ## Running manually
-In order to run the server as a standlone process:
+In order to run the server as a standalone process:
 * uncomment `<keepRunning>` option in the `pom.xml` file
 * execute the `./mvnw wiremock:run` command
 
