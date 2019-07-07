@@ -9,8 +9,9 @@ WireMock is automatically running/stopping during integration tests execution (`
 
 ## Running manually
 In order to run the server as a standalone process:
-* uncomment `<keepRunning>` option in the `pom.xml` file
-* execute the `./mvnw wiremock:run` command
+```console
+$ ./mvnw wiremock:run -DkeepRunning=true
+```
 
 After that the mock server will be available on 8888 port.
 

@@ -1126,10 +1126,6 @@
 				<artifactId>wiremock-maven-plugin</artifactId>
 				<version>${wiremock.plugin.version}</version>
 				<configuration>
-					<!-- Handy for manual debugging -->
-					<!--
-					<keepRunning>true</keepRunning>
-					-->
 					<dir>${basedir}/src/test/wiremock</dir>
 					<!--
 						The list of available options:
