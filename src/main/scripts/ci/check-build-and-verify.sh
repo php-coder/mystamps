@@ -200,7 +200,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
-		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false \
+		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false -Dskip.npm -Dskip.installnodenpm \
 			>test.log 2>&1 || TEST_STATUS=fail
 	fi
 	print_status "$TEST_STATUS" 'Run unit tests'
@@ -220,7 +220,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
 fi
 
-mvn --batch-mode verify -Denforcer.skip=true -DskipUnitTests=true \
+mvn --batch-mode --activate-profiles frontend verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 # Workaround for #538
 "$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log

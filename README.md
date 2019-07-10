@@ -36,7 +36,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run a lo
 
 * *At the heart of*: Spring Framework (and especially Spring Boot)
 * *Template engine*: Thymeleaf
-* *UI*: HTML, Bootstrap and a bit of JavaScript with JQuery
+* *UI*: HTML, Bootstrap and JavaScript (React, JQuery)
 * *Security*: Spring Security
 * *Databases*: H2, MySQL or PostgreSQL
 * *Database access*: Spring's `JdbcTemplate`
