@@ -2,7 +2,7 @@
   "name": "mystamps-frontend",
   "version": "0.0.4",
   "description": "Frontend of https://my-stamps.ru",
-  "main": "index.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -15,15 +15,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/php-coder/mystamps.git"
+    "url": "https://github.com/php-coder/mystamps.git",
+    "directory": "src/main/frontend"
   },
   "keywords": [
     "mystamps"
   ],
-  "author": "Slava Semushin",
+  "author": {
+    "name": "Slava Semushin",
+    "email": "slava.semushin@gmail.com"
+  },
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/php-coder/mystamps/issues"
+    "url": "https://github.com/php-coder/mystamps/issues",
+    "email": "slava.semushin@gmail.com"
   },
   "homepage": "https://github.com/php-coder/mystamps#readme",
   "babel": {
