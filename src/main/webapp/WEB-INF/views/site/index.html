@@ -159,13 +159,13 @@
 							<h4 class="panel-title" th:text="#{t_search_by_catalog}">Search by catalog</h4>
 						</div>
 						<div class="panel-body">
-							<form method="get" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
+							<form id="search-series-form" method="get" action="../series/search_result.html" th:action="@{${SEARCH_SERIES_BY_CATALOG}}">
 								<div class="form-group" th:classappend="${numberIsEmpty != null ? 'has-error' : ''}">
 									<label for="catalogNumber" th:text="|#{t_number}:|">Number:</label>
 									<input id="catalogNumber" name="catalogNumber" type="search" class="form-control"
 										required="required" placeholder="Example: 999" th:placeholder="|#{t_example}: 999|" />
 									<!--/*/
-									<span th:if="${numberIsEmpty != null}" th:text="#{value.empty}" class="help-block">
+									<span id="catalogNumber.errors" th:if="${numberIsEmpty != null}" th:text="#{value.empty}" class="help-block">
 										Value must not be empty
 									</span>
 									/*/-->
