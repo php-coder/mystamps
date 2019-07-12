@@ -36,6 +36,6 @@ execute all the steps that we need:
    ```
 3) in another terminal, run integration tests as many times as you need:
    ```console
-   ./mwnw robotframework:run -Dincludes=testme
+   ./mvnw robotframework:run -Dincludes=testme
    ```
 
