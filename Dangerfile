@@ -668,7 +668,7 @@ end
 
 if github.pr_body !~ /Addressed to #\d+/
 	warn(
-		"danger check: pull request description doesn't contain a link to original issue.\n"\
+		"danger check: pull request **description** doesn't contain a link to original issue.\n"\
 		"Consider adding a comment in the following format: `Addressed to #XXX` where `XXX` is an issue number"
 	)
 end
