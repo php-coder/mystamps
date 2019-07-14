@@ -32,12 +32,12 @@ import javax.validation.constraints.Size;
 	RequestImportForm.class,
 	Group.Level1.class,
 	Group.Level2.class,
-	Group.Level3.class
+	Group.Level3.class,
+	Group.Level4.class
 })
 public class RequestImportForm implements RequestImportDto {
 	
 	// @todo #995 Series sale import: use its own interface and form
-	// @todo #995 /series/sales/import: validate that we have a parser for this url
 	@NotEmpty(groups = Group.Level1.class)
 	@Size(
 		// For series sales a max length is SERIES_SALES_URL_MAX_LENGTH but since they are equal,
@@ -49,5 +49,6 @@ public class RequestImportForm implements RequestImportDto {
 		groups = Group.Level2.class
 	)
 	@URL(groups = Group.Level3.class)
+	@HasSiteParser(groups = Group.Level4.class)
 	private String url;
 }
