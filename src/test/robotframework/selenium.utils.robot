@@ -66,3 +66,11 @@ Wait Until Element Value Is
 	...                 ${text}
 	...                 ';
 	Wait For Condition  ${elemHasValue}
+
+Select Random Option From List
+	[Documentation]            Choose a random option from a select element
+	[Arguments]                ${locator}    
+	${options}=  	           Get List Items  ${locator}
+	${size}=     	           Get Length  ${options}
+	${randomIndex}=	           Evaluate  random.randint(0, ${size}-1)  modules=random
+    Select From List By Index  ${locator}  ${randomIndex}
