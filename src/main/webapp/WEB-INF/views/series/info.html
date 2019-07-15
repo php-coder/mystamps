@@ -769,28 +769,31 @@
 			
 			/*[- */
 			var props = { 'l10n': {} };
+			var responseCount = 0;
 			window.fetch = function() {
-				var failOnForm = false;
-				var failOnField = false;
+				var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
+				var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
 				var stubResponse;
 				
-				if (failOnForm) {
+				if (outcome === 'failOnForm') {
 					stubResponse = new Response(null, { status: 500, statusText: 'Fake Server Error' });
 				
-				} else if (failOnField) {
+				} else if (outcome === 'failOnField') {
 					var body = new Blob(
 						[ '{ "fieldErrors": { "url": [ "Invalid value" ] } }' ],
 						{ type : 'application/json' }
 					);
 					stubResponse = new Response(body, { status: 400 });
 				
-				} else {
+				} else if (outcome === 'success') {
 					var body = new Blob(
 						[ '{ "sellerId": 3, "price": 3.5, "currency" : "USD" }' ],
 						{ type : 'application/json' }
 					);
 					stubResponse = new Response(body, { status: 200 });
 				}
+				
+				responseCount++;
 				
 				return new Promise(function delayExecution(resolve) {
 					setTimeout(resolve, 500 /* 0.5 second */);
