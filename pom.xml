@@ -372,20 +372,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
 			<groupId>io.qala.datagen</groupId>
 			<artifactId>qala-datagen</artifactId>
 			<version>${datagen.version}</version>
@@ -494,7 +480,6 @@
 		<commons.lang.version>3.8</commons.lang.version>
 		<commons.text.version>1.4</commons.text.version>
 		<compiler.plugin.version>3.7.0</compiler.plugin.version>
-		<cucumber.version>1.2.5</cucumber.version>
 		<datagen.version>2.2.1</datagen.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
