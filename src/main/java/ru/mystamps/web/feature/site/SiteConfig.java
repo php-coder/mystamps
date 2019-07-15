@@ -85,6 +85,11 @@ public class SiteConfig {
 			return new SitemapController(seriesService);
 		}
 		
+		@Bean
+		public CspController cspController() {
+			return new CspController();
+		}
+
 	}
 	
 	@RequiredArgsConstructor
