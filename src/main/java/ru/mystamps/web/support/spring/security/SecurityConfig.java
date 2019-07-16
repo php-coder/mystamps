@@ -135,7 +135,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Allow unsecured requests to H2 consoles.
 				// See also spring.h2.console.path in application-test.properties and
 				// ContentSecurityPolicyHeaderWriter.H2_CONSOLE_PATTERN
-				.ignoringAntMatchers("/console/**")
+				.ignoringAntMatchers("/console/**", SiteUrl.CSP_REPORTS_HANDLER)
 				.and()
 			.rememberMe()
 				// FIXME: GH #27
