@@ -479,7 +479,6 @@ public class SeriesController {
 			return "redirect:" + SiteUrl.INDEX_PAGE;
 		}
 		
-		// @todo #776 Add integration tests for search series by Zagorski number
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
