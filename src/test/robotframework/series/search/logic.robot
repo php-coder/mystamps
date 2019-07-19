@@ -19,6 +19,7 @@ Search series by existing catalog number
 	scott       99
 	yvert       99
 	gibbons     99
+	solovyov    77
 
 *** Keywords ***
 Before Test Suite
