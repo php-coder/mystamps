@@ -20,6 +20,7 @@ Search series by existing catalog number
 	yvert       99
 	gibbons     99
 	solovyov    77
+	zagorski    83
 
 *** Keywords ***
 Before Test Suite
