@@ -480,7 +480,6 @@ public class SeriesController {
 		}
 		
 		// @todo #776 Add integration tests for search series by Zagorski number
-		// @todo #777 Add integration tests for search series by Solovyov number
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		List<SeriesInfoDto> series;
 		switch (catalogName) {
