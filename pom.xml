@@ -342,27 +342,7 @@
 				</exclusion>
 				<exclusion>
 					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-edge-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-chrome-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-ie-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-safari-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
 					<artifactId>selenium-leg-rc</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-firefox-driver</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.machinepublishers</groupId>
