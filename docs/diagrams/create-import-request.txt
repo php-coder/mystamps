@@ -8,13 +8,13 @@ participant EventPublisher
 note over Browser,SeriesImportController: request import series form
 opt GET /series/import/request
 Browser->+SeriesImportController:
-SeriesImportController->-Browser: RequestImportForm
+SeriesImportController->-Browser: RequestSeriesImportForm
 end
 
 note over Browser,SeriesImportController: submit request for importing a series
 opt POST /series/import/request
-Browser->+SeriesImportController: RequestImportForm
-SeriesImportController->+SeriesImportService: RequestImportForm
+Browser->+SeriesImportController: RequestSeriesImportForm
+SeriesImportController->+SeriesImportService: RequestSeriesImportForm
 SeriesImportService->-SeriesImportController: requestId
 note right of SeriesImportService: Unprocessed
 SeriesImportController->EventPublisher: ImportRequestCreated

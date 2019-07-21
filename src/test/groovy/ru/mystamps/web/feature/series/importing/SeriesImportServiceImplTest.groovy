@@ -58,7 +58,7 @@ class SeriesImportServiceImplTest extends Specification {
 	private final ApplicationEventPublisher eventPublisher = Mock()
 	
 	private SeriesImportService service
-	private RequestImportForm form
+	private RequestSeriesImportForm form
 	
 	def setup() {
 		service = new SeriesImportServiceImpl(
@@ -70,7 +70,7 @@ class SeriesImportServiceImplTest extends Specification {
 			participantService,
 			eventPublisher
 		)
-		form = new RequestImportForm()
+		form = new RequestSeriesImportForm()
 	}
 	
 	//

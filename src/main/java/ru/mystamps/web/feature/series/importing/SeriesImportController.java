@@ -72,13 +72,13 @@ public class SeriesImportController {
 	
 	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)
 	public void showRequestImportForm(Model model) {
-		RequestImportForm requestImportForm = new RequestImportForm();
+		RequestSeriesImportForm requestImportForm = new RequestSeriesImportForm();
 		model.addAttribute("requestImportForm", requestImportForm);
 	}
 	
 	@PostMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)
 	public String processRequestImportForm(
-		@Valid RequestImportForm form,
+		@Valid RequestSeriesImportForm form,
 		BindingResult result,
 		@CurrentUser Integer currentUserId) {
 		

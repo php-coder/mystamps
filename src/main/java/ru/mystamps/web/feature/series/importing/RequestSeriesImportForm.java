@@ -29,13 +29,13 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @GroupSequence({
-	RequestImportForm.class,
+	RequestSeriesImportForm.class,
 	Group.Level1.class,
 	Group.Level2.class,
 	Group.Level3.class,
 	Group.Level4.class
 })
-public class RequestImportForm implements RequestImportDto {
+public class RequestSeriesImportForm implements RequestImportDto {
 	
 	// @todo #995 Series sale import: use its own interface and form
 	@NotEmpty(groups = Group.Level1.class)
