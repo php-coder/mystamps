@@ -19,10 +19,9 @@ package ru.mystamps.web.feature.series.sale;
 
 import ru.mystamps.web.feature.series.sale.SeriesSalesDb.SeriesSales;
 
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
-final class SeriesSalesValidation {
+public final class SeriesSalesValidation {
 	
-	static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
+	public static final int SERIES_SALES_URL_MAX_LENGTH = SeriesSales.TRANSACTION_URL_LENGTH;
 	
 	private SeriesSalesValidation() {
 	}

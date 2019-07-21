@@ -15,12 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series.importing;
+package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
+import ru.mystamps.web.feature.series.importing.HasSiteParser;
+import ru.mystamps.web.feature.series.importing.RequestImportDto;
+import ru.mystamps.web.feature.series.sale.SeriesSalesValidation;
 import ru.mystamps.web.support.beanvalidation.Group;
 
 import javax.validation.GroupSequence;
@@ -29,17 +32,19 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @GroupSequence({
-	RequestSeriesImportForm.class,
+	RequestSeriesSaleImportForm.class,
 	Group.Level1.class,
 	Group.Level2.class,
 	Group.Level3.class,
 	Group.Level4.class
 })
-public class RequestSeriesImportForm implements RequestImportDto {
+public class RequestSeriesSaleImportForm implements RequestImportDto {
 	
 	@NotEmpty(groups = Group.Level1.class)
 	@Size(
-		max = SeriesImportValidation.IMPORT_REQUEST_URL_MAX_LENGTH,
+		// Because the import saves nothing, this check actually isn't required. Perhaps,
+		// we shouldn't validate on this stage and let it fail later, during a sale creation.
+		max = SeriesSalesValidation.SERIES_SALES_URL_MAX_LENGTH,
 		message = "{value.too-long}",
 		groups = Group.Level2.class
 	)

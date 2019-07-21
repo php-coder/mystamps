@@ -25,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mystamps.web.feature.series.importing.RequestSeriesImportForm;
 
 import javax.validation.Valid;
 
@@ -39,7 +38,7 @@ public class SeriesSaleImportController {
 	
 	@PostMapping(SeriesSalesImportUrl.IMPORT_SERIES_SALES)
 	public ResponseEntity<SeriesSaleExtractedInfo> downloadAndParse(
-		@RequestBody @Valid RequestSeriesImportForm form) {
+		@RequestBody @Valid RequestSeriesSaleImportForm form) {
 		
 		String url = form.getUrl();
 		
