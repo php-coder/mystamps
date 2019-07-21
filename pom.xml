@@ -16,6 +16,13 @@
 			<version>${thymeleaf.togglz.version}</version>
 		</dependency>
 		
+		<!-- Required for InternetAddress class -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>${javax-mail.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -107,12 +114,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>
-		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-starters/spring-boot-starter-mail/pom.xml -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.21.RELEASE/spring-boot-starters/spring-boot-starter-security/pom.xml -->

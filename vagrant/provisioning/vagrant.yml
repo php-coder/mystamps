@@ -6,7 +6,6 @@
   vars:
     profile: 'test'
     user_db_password: 'q1'
-    user_mail_password: 'q2'
     mailgun_api_password: 'q3'
     # required for Ubuntu 16.04. which installs Python 2.x to a non-standard path
     ansible_python_interpreter: "/usr/bin/python2.7"

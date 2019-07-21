@@ -30,7 +30,6 @@ public interface MailgunEmailSendingStrategy {
 	 * @param email data and meta-data for sending an e-mail
 	 * @throws EmailSendingException when any error occurs
 	 * @see ApiMailgunEmailSendingStrategy
-	 * @see SmtpMailgunEmailSendingStrategy
 	 * @see <a href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging">Tagging</a>
 	 * @see <a href="https://documentation.mailgun.com/en/latest/user_manual.html#sending-in-test-mode">Sending in Test Mode</a>
 	 */

@@ -22,6 +22,7 @@ import org.togglz.core.annotation.EnabledByDefault;
 import org.togglz.core.annotation.Label;
 import org.togglz.core.context.FeatureContext;
 
+// @todo #1022 Togglz: remove SEND_MAIL_VIA_HTTP_API from database
 public enum Features implements Feature {
 	
 	@Label("/series/{id}: possibility to user to add series to collection")
@@ -47,10 +48,6 @@ public enum Features implements Feature {
 	@Label("Send mail with activation key to user")
 	@EnabledByDefault
 	SEND_ACTIVATION_MAIL,
-	
-	@Label("Send mail via HTTP API and fallback to SMTP as the last resort")
-	@EnabledByDefault
-	SEND_MAIL_VIA_HTTP_API,
 	
 	@Label("/series/add: show link with auto-suggestions")
 	@EnabledByDefault

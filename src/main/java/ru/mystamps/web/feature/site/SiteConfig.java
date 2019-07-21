@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.mail.javamail.JavaMailSender;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.account.UsersActivationService;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -34,9 +33,7 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.report.ReportService;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.support.mailgun.ApiMailgunEmailSendingStrategy;
-import ru.mystamps.web.support.mailgun.FallbackMailgunEmailSendingStrategy;
 import ru.mystamps.web.support.mailgun.MailgunEmailSendingStrategy;
-import ru.mystamps.web.support.mailgun.SmtpMailgunEmailSendingStrategy;
 
 import java.util.Locale;
 
@@ -103,7 +100,6 @@ public class SiteConfig {
 		private final ReportService reportService;
 		private final SeriesService seriesService;
 		private final Environment env;
-		private final JavaMailSender mailSender;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		private final MessageSource messageSource;
 		private final RestTemplateBuilder restTemplateBuilder;
@@ -135,9 +131,11 @@ public class SiteConfig {
 			String password = env.getRequiredProperty("mailgun.password");
 			String endpoint = env.getRequiredProperty("mailgun.endpoint");
 			
-			MailgunEmailSendingStrategy mailStrategy = new FallbackMailgunEmailSendingStrategy(
-				new ApiMailgunEmailSendingStrategy(restTemplateBuilder, endpoint, user, password),
-				new SmtpMailgunEmailSendingStrategy(mailSender)
+			MailgunEmailSendingStrategy mailStrategy = new ApiMailgunEmailSendingStrategy(
+				restTemplateBuilder,
+				endpoint,
+				user,
+				password
 			);
 			
 			return new MailServiceImpl(
