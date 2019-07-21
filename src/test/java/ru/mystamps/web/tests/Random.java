@@ -39,7 +39,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.time.ZoneOffset;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -297,8 +296,7 @@ public final class Random {
 	}
 	
 	public static String jsoupLocator() {
-		List<String> locators = Arrays.asList("#id", "a[href]", "img[src$=.png]", "div#logo");
-		return sample(locators);
+		return sample("#id", "a[href]", "img[src$=.png]", "div#logo");
 	}
 	
 	private static Set<String> catalogNumbers() {
