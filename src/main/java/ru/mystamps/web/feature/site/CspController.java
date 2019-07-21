@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class CspController {
 
+	// @todo #1058 /site/csp/reports: add integration tests
 	@PostMapping(SiteUrl.CSP_REPORTS_HANDLER)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void handleReport(@RequestBody String body) {
