@@ -9,9 +9,9 @@ Force Tags       series  sales  validation
 *** Test Cases ***
 Create series sale with too long url
 	${letter}=              Set Variable  j
-	Input Text              id=url  http://${letter * 255}
+	Input Text              id=url  http://${letter * 767}
 	Submit Form             id=add-series-sales-form
-	Element Text Should Be  id=url.errors  Value is greater than allowable maximum of 255 characters
+	Element Text Should Be  id=url.errors  Value is greater than allowable maximum of 767 characters
 
 Create series sale with invalid url
 	Input Text              id=url  invalid-url
