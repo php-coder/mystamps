@@ -26,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.mystamps.web.common.LocaleUtils;
@@ -78,7 +79,7 @@ public class SeriesImportController {
 	
 	@PostMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)
 	public String processRequestImportForm(
-		@Valid RequestSeriesImportForm form,
+		@Valid @ModelAttribute("requestImportForm") RequestSeriesImportForm form,
 		BindingResult result,
 		@CurrentUser Integer currentUserId) {
 		
