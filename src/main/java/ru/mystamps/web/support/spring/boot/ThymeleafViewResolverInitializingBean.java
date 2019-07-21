@@ -42,6 +42,7 @@ import ru.mystamps.web.feature.site.SiteUrl;
 
 import java.util.HashMap;
 import java.util.Map;
+import ru.mystamps.web.support.spring.security.SecurityConfig;
 
 /**
  * Adjusts {@link ThymeleafViewResolver} instance by setting static variables.
@@ -71,13 +72,14 @@ public class ThymeleafViewResolverInitializingBean
 			);
 			return;
 		}
-		
-		boolean productionEnv = environment.acceptsProfiles("prod");
-		viewResolver.setStaticVariables(resourcesAsMap(productionEnv));
+
+		boolean production = environment.acceptsProfiles("prod");
+		boolean useCdn = Boolean.valueOf(environment.getProperty(SecurityConfig.APP_USE_CDN));
+		viewResolver.setStaticVariables(resourcesAsMap(production, useCdn));
 	}
 
 	// Not all URLs are exported here but only those that are being used on views
-	private Map<String, ?> resourcesAsMap(boolean production) {
+	private Map<String, ?> resourcesAsMap(boolean production, boolean useCdn) {
 		Map<String, String> map = new HashMap<>();
 		
 		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
@@ -98,7 +100,7 @@ public class ThymeleafViewResolverInitializingBean
 		ImageUrl.exposeResourcesToView(map, resourcesHost);
 		ResourceUrl.exposeResourcesToView(map, resourcesHost);
 		
-		ResourceUrl.exposeWebjarResourcesToView(map, production);
+		ResourceUrl.exposeWebjarResourcesToView(map, useCdn);
 
 		return map;
 	}

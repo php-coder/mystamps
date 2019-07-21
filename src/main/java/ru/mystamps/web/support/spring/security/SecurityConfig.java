@@ -61,6 +61,8 @@ import java.util.Collections;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	public static final String APP_USE_CDN = "app.use-cdn";
+	
 	@Autowired
 	private MessageSource messageSource;
 	
@@ -80,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
 	protected void configure(HttpSecurity http) throws Exception {
-		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		boolean useSingleHost = !environment.acceptsProfiles("prod") && !Boolean.valueOf(environment.getProperty(APP_USE_CDN));
 		boolean hasH2Console = environment.acceptsProfiles("test");
 
 		ContentSecurityPolicyHeaderWriter cspWriter =
