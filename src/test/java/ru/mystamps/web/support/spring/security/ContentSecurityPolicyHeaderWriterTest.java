@@ -20,6 +20,8 @@ package ru.mystamps.web.support.spring.security;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import ru.mystamps.web.feature.site.SiteUrl;
+import ru.mystamps.web.tests.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +48,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void writeContentSecurityPolicyHeader() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(bool(), bool());
+			new ContentSecurityPolicyHeaderWriter(bool(), bool(), Random.host());
 		
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
@@ -64,7 +66,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onIndexPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, bool());
+			new ContentSecurityPolicyHeaderWriter(true, bool(), SiteUrl.SITE);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives, hasItemInArray("default-src 'none'"));
@@ -78,7 +80,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray("report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly")
+			hasItemInArray("report-uri http://127.0.0.1:8080/site/csp/reports")
 		);
 		
 		assertThat(directives, hasItemInArray("style-src https://cdn.jsdelivr.net 'self'"));
@@ -90,7 +92,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onIndexPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer
-			= new ContentSecurityPolicyHeaderWriter(false, bool());
+			= new ContentSecurityPolicyHeaderWriter(false, bool(), SiteUrl.PUBLIC_URL);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives, hasItemInArray("default-src 'none'"));
@@ -104,7 +106,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		
 		assertThat(
 			directives,
-			hasItemInArray("report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly")
+			hasItemInArray("report-uri https://my-stamps.ru/site/csp/reports")
 		);
 		
 		assertThat(
@@ -134,7 +136,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onCollectionInfoPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, bool());
+			new ContentSecurityPolicyHeaderWriter(true, bool(), Random.host());
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -167,7 +169,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onCollectionInfoPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, bool());
+			new ContentSecurityPolicyHeaderWriter(false, bool(), Random.host());
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -203,7 +205,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onSeriesAddImagePageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, bool());
+			new ContentSecurityPolicyHeaderWriter(true, bool(), Random.host());
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -229,7 +231,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onSeriesAddImagePageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, bool());
+			new ContentSecurityPolicyHeaderWriter(false, bool(), Random.host());
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -268,7 +270,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onSeriesAddPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, bool());
+			new ContentSecurityPolicyHeaderWriter(true, bool(), Random.host());
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -302,7 +304,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onSeriesAddPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, bool());
+			new ContentSecurityPolicyHeaderWriter(false, bool(), Random.host());
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -339,7 +341,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onH2ConsoleWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, true);
+			new ContentSecurityPolicyHeaderWriter(true, true, Random.host());
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		// test only the directives that are differ from the index page
@@ -374,7 +376,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 	@Test
 	public void onH2ConsoleWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, false);
+			new ContentSecurityPolicyHeaderWriter(false, false, Random.host());
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		// "style-src" directive should be the same as for the index page

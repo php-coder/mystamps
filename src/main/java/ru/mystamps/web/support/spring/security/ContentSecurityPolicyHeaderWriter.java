@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.header.HeaderWriter;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
+import ru.mystamps.web.feature.site.SiteUrl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,8 +63,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://maxcdn.bootstrapcdn.com' is required by glyphicons-halflings-regular.woff2
 	private static final String FONT_SRC_CDN = "font-src https://maxcdn.bootstrapcdn.com";
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	private static final String REPORT_URI = "report-uri https://mystamps.report-uri.com/r/d/csp/reportOnly";
+	private static final String REPORT_URI = "report-uri ";
 	
 	// - 'https://cdn.jsdelivr.net' is required by languages.min.css (FIXME: GH #246)
 	private static final String STYLE_SRC = "style-src https://cdn.jsdelivr.net";
@@ -165,6 +165,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private final boolean useSingleHost;
 	private final boolean hasH2Console;
+	private final String host;
 	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
@@ -183,7 +184,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
 		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_CDN).append(SEPARATOR)
 		  .append(useSingleHost ? FONT_SRC_SELF : FONT_SRC_CDN).append(SEPARATOR)
-		  .append(REPORT_URI).append(SEPARATOR)
+		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC)
 		  .append(useSingleHost ? STYLES_SELF : STYLES_CDN);
 		

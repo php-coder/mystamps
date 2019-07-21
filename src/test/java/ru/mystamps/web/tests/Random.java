@@ -32,6 +32,7 @@ import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
+import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.service.TestObjects;
 
 import java.math.BigDecimal;
@@ -297,6 +298,10 @@ public final class Random {
 	
 	public static String jsoupLocator() {
 		return sample("#id", "a[href]", "img[src$=.png]", "div#logo");
+	}
+	
+	public static String host() {
+		return sample(SiteUrl.SITE, SiteUrl.PUBLIC_URL);
 	}
 	
 	private static Set<String> catalogNumbers() {
