@@ -21,7 +21,7 @@ package ru.mystamps.web.feature.series.sale;
 final class SeriesSalesDb {
 	
 	static final class SeriesSales {
-		static final int TRANSACTION_URL_LENGTH = 255;
+		static final int TRANSACTION_URL_LENGTH = 767;
 	}
 	
 }
