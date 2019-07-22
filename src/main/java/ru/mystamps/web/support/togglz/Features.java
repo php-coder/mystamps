@@ -51,7 +51,10 @@ public enum Features implements Feature {
 	
 	@Label("/series/add: show link with auto-suggestions")
 	@EnabledByDefault
-	SHOW_SUGGESTION_LINK;
+	SHOW_SUGGESTION_LINK,
+	
+	@Label("/site/index: search by catalog in collection")
+	SEARCH_IN_COLLECTION;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);

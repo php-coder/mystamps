@@ -2,7 +2,8 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -181,6 +182,11 @@
 										<option value="zagorski" th:text="#{t_zagorski}">Zagorski</option>
 									</select>
 								</div>
+								<!-- @todo #673 Add integration tests for search by a catalog in user's collection -->
+								<div class="form-group" sec:authorize="isAuthenticated()" togglz:active="SEARCH_IN_COLLECTION">
+									<input id="in-collection" name="inCollection" type="checkbox" />
+									<label for="in-collection" th:text="#{t_in_my_collection}">In my collection</label>
+								</div>								
 								<div class="form-group">
 									<input type="submit" value="Search" th:value="#{t_search}" class="btn btn-primary" />
 								</div>
