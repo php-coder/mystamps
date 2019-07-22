@@ -163,7 +163,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		// number of separators between directives
 		+ 5;
 	
-	private final boolean useSingleHost;
+	private final boolean useCdn;
 	private final boolean hasH2Console;
 	private final String host;
 	
@@ -182,11 +182,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
-		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_CDN).append(SEPARATOR)
-		  .append(useSingleHost ? FONT_SRC_SELF : FONT_SRC_CDN).append(SEPARATOR)
+		  .append(IMG_SRC).append(useCdn ? IMG_SRC_CDN : IMG_SRC_SELF).append(SEPARATOR)
+		  .append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC)
-		  .append(useSingleHost ? STYLES_SELF : STYLES_CDN);
+		  .append(useCdn ? STYLES_CDN : STYLES_SELF);
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
@@ -204,7 +204,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		sb.append(SEPARATOR)
 		  .append(SCRIPT_SRC)
-		  .append(useSingleHost ? SCRIPTS_SELF : SCRIPTS_CDN);
+		  .append(useCdn ? SCRIPTS_CDN : SCRIPTS_SELF);
 		
 		if (onCollectionInfoPage) {
 			sb.append(SCRIPT_COLLECTION_INFO);
