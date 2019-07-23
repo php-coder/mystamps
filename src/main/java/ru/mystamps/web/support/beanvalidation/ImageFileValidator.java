@@ -150,7 +150,10 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 			}
 			
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("Looks like file isn't an image. First bytes: {}", formatBytes(firstPart));
+				LOG.debug(
+					"Looks like file isn't an image. First bytes: {}",
+					formatBytes(firstPart)
+				);
 			}
 			return false;
 			
