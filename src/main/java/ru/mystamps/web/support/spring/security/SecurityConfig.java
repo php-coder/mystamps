@@ -80,8 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
 	protected void configure(HttpSecurity http) throws Exception {
-		boolean useCdn = environment.acceptsProfiles("prod");
 		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		boolean useCdn = environment.getProperty("app.use-cdn", Boolean.class, Boolean.TRUE);
 		boolean hasH2Console = environment.acceptsProfiles("test");
 		
 		// @todo #226 Introduce app.use-public-hostname property
