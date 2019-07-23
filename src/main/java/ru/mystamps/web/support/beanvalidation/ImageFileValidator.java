@@ -139,15 +139,19 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 					return true;
 				}
 				
-				LOG.debug(
-					"Looks like file isn't a PNG image. First bytes: {} {}",
-					formatBytes(firstPart),
-					formatBytes(secondPart)
-				);
+				if (LOG.isDebugEnabled()) {
+					LOG.debug(
+						"Looks like file isn't a PNG image. First bytes: {} {}",
+						formatBytes(firstPart),
+						formatBytes(secondPart)
+					);
+				}
 				return false;
 			}
 			
-			LOG.debug("Looks like file isn't an image. First bytes: {}", formatBytes(firstPart));
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Looks like file isn't an image. First bytes: {}", formatBytes(firstPart));
+			}
 			return false;
 			
 		} catch (IOException e) {
