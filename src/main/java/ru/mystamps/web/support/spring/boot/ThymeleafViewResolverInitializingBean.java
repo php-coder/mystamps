@@ -73,11 +73,12 @@ public class ThymeleafViewResolverInitializingBean
 		}
 		
 		boolean productionEnv = environment.acceptsProfiles("prod");
-		viewResolver.setStaticVariables(resourcesAsMap(productionEnv));
+		boolean useCdn = environment.getProperty("app.use-cdn", Boolean.class, Boolean.TRUE);
+		viewResolver.setStaticVariables(resourcesAsMap(productionEnv, useCdn));
 	}
 
 	// Not all URLs are exported here but only those that are being used on views
-	private Map<String, ?> resourcesAsMap(boolean production) {
+	private Map<String, ?> resourcesAsMap(boolean production, boolean useCdn) {
 		Map<String, String> map = new HashMap<>();
 		
 		map.put("PUBLIC_URL", production ? SiteUrl.PUBLIC_URL : SiteUrl.SITE);
@@ -98,7 +99,7 @@ public class ThymeleafViewResolverInitializingBean
 		ImageUrl.exposeResourcesToView(map, resourcesHost);
 		ResourceUrl.exposeResourcesToView(map, resourcesHost);
 		
-		ResourceUrl.exposeWebjarResourcesToView(map, production);
+		ResourceUrl.exposeWebjarResourcesToView(map, useCdn);
 
 		return map;
 	}
