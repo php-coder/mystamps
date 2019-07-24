@@ -55,7 +55,6 @@
 	<!--<rule ref="category/java/codestyle.xml/AtLeastOneConstructor" />-->
 	<rule ref="category/java/codestyle.xml/AvoidDollarSigns" />
 	<rule ref="category/java/codestyle.xml/AvoidFinalLocalVariable" />
-	<rule ref="category/java/codestyle.xml/AvoidPrefixingMethodParameters" />
 	<rule ref="category/java/codestyle.xml/AvoidProtectedFieldInFinalClass" />
 	<rule ref="category/java/codestyle.xml/AvoidProtectedMethodInFinalClassNotExtending" />
 	<rule ref="category/java/codestyle.xml/AvoidUsingNativeCode" />
