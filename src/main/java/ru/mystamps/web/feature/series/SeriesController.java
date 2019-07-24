@@ -508,6 +508,7 @@ public class SeriesController {
 				break;
 		}
 		
+		// @todo #1098 Optimize a search within user's collection
 		if (Features.SEARCH_IN_COLLECTION.isActive()
 			&& inCollection
 			&& currentUserId != null) {
