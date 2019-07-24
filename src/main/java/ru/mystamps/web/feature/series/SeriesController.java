@@ -72,6 +72,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 
@@ -470,6 +471,8 @@ public class SeriesController {
 	public String searchSeriesByCatalog(
 		@RequestParam(name = "catalogNumber", defaultValue = "") String catalogNumber,
 		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,
+		@RequestParam(name = "inCollection", defaultValue = "false") Boolean inCollection,
+		@CurrentUser Integer currentUserId,
 		Model model,
 		Locale userLocale,
 		RedirectAttributes redirectAttributes) {
@@ -504,6 +507,18 @@ public class SeriesController {
 				series = Collections.emptyList();
 				break;
 		}
+		
+		if (Features.SEARCH_IN_COLLECTION.isActive()
+			&& inCollection
+			&& currentUserId != null) {
+			series = series
+					.stream()
+					.filter(
+						e -> collectionService.isSeriesInCollection(currentUserId, e.getId())
+					)
+					.collect(Collectors.toList());
+		}
+		
 		model.addAttribute("searchResults", series);
 		
 		return "series/search_result";
