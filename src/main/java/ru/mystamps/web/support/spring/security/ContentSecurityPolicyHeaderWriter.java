@@ -68,15 +68,15 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String REPORT_URI = "report-uri ";
 	
 	// - 'https://cdn.jsdelivr.net' is required by languages.min.css (FIXME: GH #246)
-	private static final String STYLE_SRC = "style-src https://cdn.jsdelivr.net";
+	private static final String STYLE_SRC = "style-src https://cdn.jsdelivr.net ";
 	
 	// - 'self' is required for our own CSS files
-	private static final String STYLES_SELF = " 'self'";
+	private static final String STYLES_SELF = "'self'";
 	
 	// - 'https://stamps.filezz.ru' is required for our own CSS files
 	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
 	private static final String STYLES_CDN =
-		" https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com";
+		"https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com";
 	
 	// - 'sha256-Dpm...' is required for 'box-shadow: none; border: 0px;' inline CSS
 	// that are using on /series/add and /series/{id} pages.
