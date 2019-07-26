@@ -126,16 +126,16 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// 'unsafe-hashed-attributes' from CSP3. Details:
 	// https://github.com/jquery/jquery/blob/d71f6a53927ad02d/jquery.js#L1441-L1447
 	// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
-	private static final String SCRIPT_SRC = "script-src 'unsafe-inline'";
+	private static final String SCRIPT_SRC = "script-src 'unsafe-inline' ";
 	
 	// - 'self' is required for our own JS files
-	private static final String SCRIPTS_SELF = " 'self'";
+	private static final String SCRIPTS_SELF = "'self'";
 
 	// - 'https://stamps.filezz.ru' is required for our own JS files
 	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
 	// - 'https://yandex.st' is required for jquery.min.js
 	private static final String SCRIPTS_CDN =
-		" https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com https://yandex.st";
+		"https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com https://yandex.st";
 	
 	// - 'https://cdnjs.cloudflare.com' is required by selectize.bootstrap3.min.css
 	private static final String SCRIPTS_SERIES_ADD_PAGE = " https://cdnjs.cloudflare.com";
