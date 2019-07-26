@@ -55,7 +55,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String IMG_SRC_SELF = " 'self'";
 	
 	// - 'https://stamps.filezz.ru' is required for uploaded images and its previews
-	private static final String IMG_SRC_CDN = " https://stamps.filezz.ru";
+	private static final String IMG_SRC_ALT = " https://stamps.filezz.ru";
 	
 	// - 'self' is required by glyphicons-halflings-regular.woff2 from bootstrap
 	private static final String FONT_SRC_SELF = "font-src 'self'";
@@ -182,7 +182,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
-		  .append(IMG_SRC).append(useCdn ? IMG_SRC_CDN : IMG_SRC_SELF).append(SEPARATOR)
+		  .append(IMG_SRC).append(useCdn ? IMG_SRC_ALT : IMG_SRC_SELF).append(SEPARATOR)
 		  .append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC)
