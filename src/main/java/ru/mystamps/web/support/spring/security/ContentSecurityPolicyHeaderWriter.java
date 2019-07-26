@@ -74,9 +74,10 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String STYLES_SELF = "'self'";
 	
 	// - 'https://stamps.filezz.ru' is required for our own CSS files
+	private static final String STYLES_ALT = "https://stamps.filezz.ru";
+	
 	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
-	private static final String STYLES_CDN =
-		"https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com";
+	private static final String STYLES_CDN = "https://maxcdn.bootstrapcdn.com";
 	
 	// - 'sha256-Dpm...' is required for 'box-shadow: none; border: 0px;' inline CSS
 	// that are using on /series/add and /series/{id} pages.
@@ -187,8 +188,13 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		  .append(IMG_SRC).append(useCdn ? IMG_SRC_ALT : IMG_SRC_SELF).append(SEPARATOR)
 		  .append(FONT_SRC).append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
-		  .append(STYLE_SRC)
-		  .append(useCdn ? STYLES_CDN : STYLES_SELF);
+		  .append(STYLE_SRC);
+		
+		if (useCdn) {
+			sb.append(STYLES_ALT).append(' ').append(STYLES_CDN);
+		} else {
+			sb.append(STYLES_SELF);
+		}
 		
 		if (onCollectionInfoPage) {
 			sb.append(STYLE_COLLECTION_INFO);
