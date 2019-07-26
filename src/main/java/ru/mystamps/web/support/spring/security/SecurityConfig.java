@@ -81,6 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
 	protected void configure(HttpSecurity http) throws Exception {
 		boolean useCdn = environment.acceptsProfiles("prod");
+		boolean useSingleHost = !environment.acceptsProfiles("prod");
 		boolean hasH2Console = environment.acceptsProfiles("test");
 		
 		// @todo #226 Introduce app.use-public-hostname property
@@ -88,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		String hostname = usePublicHostname ? SiteUrl.PUBLIC_URL : SiteUrl.SITE;
 
 		ContentSecurityPolicyHeaderWriter cspWriter =
-			new ContentSecurityPolicyHeaderWriter(useCdn, hasH2Console, hostname);
+			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname);
 		
 		http
 			.authorizeRequests()

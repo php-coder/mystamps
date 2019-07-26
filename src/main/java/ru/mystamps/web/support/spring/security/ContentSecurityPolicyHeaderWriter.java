@@ -168,6 +168,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		+ 5;
 	
 	private final boolean useCdn;
+	private final boolean useSingleHost;
 	private final boolean hasH2Console;
 	private final String host;
 	
@@ -186,15 +187,13 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
-		  .append(IMG_SRC).append(useCdn ? IMG_SRC_ALT : IMG_SRC_SELF).append(SEPARATOR)
+		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_ALT).append(SEPARATOR)
 		  .append(FONT_SRC).append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
-		  .append(STYLE_SRC);
+		  .append(STYLE_SRC).append(useSingleHost ? STYLES_SELF : STYLES_ALT);
 		
 		if (useCdn) {
-			sb.append(STYLES_ALT).append(' ').append(STYLES_CDN);
-		} else {
-			sb.append(STYLES_SELF);
+			sb.append(' ').append(STYLES_CDN);
 		}
 		
 		if (onCollectionInfoPage) {
@@ -212,12 +211,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		}
 		
 		sb.append(SEPARATOR)
-		  .append(SCRIPT_SRC);
+		  .append(SCRIPT_SRC)
+		  .append(useSingleHost ? SCRIPTS_SELF : SCRIPTS_ALT);
 		
 		if (useCdn) {
-			sb.append(SCRIPTS_ALT).append(' ').append(SCRIPTS_CDN);
-		} else {
-			sb.append(SCRIPTS_SELF);
+			sb.append(' ').append(SCRIPTS_CDN);
 		}
 		
 		if (onCollectionInfoPage) {
