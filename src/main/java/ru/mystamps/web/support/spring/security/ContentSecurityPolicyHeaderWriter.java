@@ -157,16 +157,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private static final char SEPARATOR = ';';
 	
-	private static final int MIN_HEADER_LENGTH =
-		DEFAULT_SRC.length()
-		+ IMG_SRC.length()
-		+ FONT_SRC.length()
-		+ REPORT_URI.length()
-		+ STYLE_SRC.length()
-		+ SCRIPT_SRC.length()
-		// number of separators between directives
-		+ 5;
-	
 	private final boolean useCdn;
 	private final boolean useSingleHost;
 	private final boolean hasH2Console;
@@ -184,7 +174,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);
 		boolean onH2ConsolePage = hasH2Console && uri.startsWith(H2_CONSOLE_PATTERN);
 		
-		StringBuilder sb = new StringBuilder(MIN_HEADER_LENGTH);
+		StringBuilder sb = new StringBuilder();
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
 		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_ALT).append(SEPARATOR)
