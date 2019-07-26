@@ -132,10 +132,11 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String SCRIPTS_SELF = "'self'";
 
 	// - 'https://stamps.filezz.ru' is required for our own JS files
+	private static final String SCRIPTS_ALT = "https://stamps.filezz.ru";
+
 	// - 'https://maxcdn.bootstrapcdn.com' is required for bootstrap.min.js
 	// - 'https://yandex.st' is required for jquery.min.js
-	private static final String SCRIPTS_CDN =
-		"https://stamps.filezz.ru https://maxcdn.bootstrapcdn.com https://yandex.st";
+	private static final String SCRIPTS_CDN = "https://maxcdn.bootstrapcdn.com https://yandex.st";
 	
 	// - 'https://cdnjs.cloudflare.com' is required by selectize.bootstrap3.min.css
 	private static final String SCRIPTS_SERIES_ADD_PAGE = " https://cdnjs.cloudflare.com";
@@ -211,8 +212,13 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		}
 		
 		sb.append(SEPARATOR)
-		  .append(SCRIPT_SRC)
-		  .append(useCdn ? SCRIPTS_CDN : SCRIPTS_SELF);
+		  .append(SCRIPT_SRC);
+		
+		if (useCdn) {
+			sb.append(SCRIPTS_ALT).append(' ').append(SCRIPTS_CDN);
+		} else {
+			sb.append(SCRIPTS_SELF);
+		}
 		
 		if (onCollectionInfoPage) {
 			sb.append(SCRIPT_COLLECTION_INFO);
