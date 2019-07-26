@@ -57,11 +57,13 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://stamps.filezz.ru' is required for uploaded images and its previews
 	private static final String IMG_SRC_ALT = " https://stamps.filezz.ru";
 	
+	private static final String FONT_SRC = "font-src ";
+	
 	// - 'self' is required by glyphicons-halflings-regular.woff2 from bootstrap
-	private static final String FONT_SRC_SELF = "font-src 'self'";
+	private static final String FONT_SRC_SELF = "'self'";
 	
 	// - 'https://maxcdn.bootstrapcdn.com' is required by glyphicons-halflings-regular.woff2
-	private static final String FONT_SRC_CDN = "font-src https://maxcdn.bootstrapcdn.com";
+	private static final String FONT_SRC_CDN = "https://maxcdn.bootstrapcdn.com";
 	
 	private static final String REPORT_URI = "report-uri ";
 	
@@ -156,7 +158,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final int MIN_HEADER_LENGTH =
 		DEFAULT_SRC.length()
 		+ IMG_SRC.length()
-		+ FONT_SRC_SELF.length()
+		+ FONT_SRC.length()
 		+ REPORT_URI.length()
 		+ STYLE_SRC.length()
 		+ SCRIPT_SRC.length()
@@ -183,7 +185,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
 		  .append(IMG_SRC).append(useCdn ? IMG_SRC_ALT : IMG_SRC_SELF).append(SEPARATOR)
-		  .append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
+		  .append(FONT_SRC).append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC)
 		  .append(useCdn ? STYLES_CDN : STYLES_SELF);
