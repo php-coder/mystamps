@@ -203,4 +203,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return bean;
 	}
 	
+	@Bean
+	public FilterRegistrationBean userMdcLoggingFilter() {
+		FilterRegistrationBean bean = new FilterRegistrationBean(
+			new UserMdcLoggingFilter()
+		);
+		bean.addUrlPatterns("/*");
+		return bean;
+	}
+
 }
