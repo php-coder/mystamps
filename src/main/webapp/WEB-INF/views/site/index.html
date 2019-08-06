@@ -182,7 +182,6 @@
 										<option value="zagorski" th:text="#{t_zagorski}">Zagorski</option>
 									</select>
 								</div>
-								<!-- @todo #673 Add integration tests for search by a catalog in user's collection -->
 								<div class="form-group" sec:authorize="isAuthenticated()" togglz:active="SEARCH_IN_COLLECTION">
 									<input id="in-collection" name="inCollection" type="checkbox" />
 									<label for="in-collection" th:text="#{t_in_my_collection}">In my collection</label>
