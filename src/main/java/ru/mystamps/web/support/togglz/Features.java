@@ -54,6 +54,7 @@ public enum Features implements Feature {
 	SHOW_SUGGESTION_LINK,
 	
 	@Label("/site/index: search by catalog in collection")
+	@EnabledByDefault
 	SEARCH_IN_COLLECTION;
 	
 	public boolean isActive() {

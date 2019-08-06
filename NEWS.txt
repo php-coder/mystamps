@@ -1,3 +1,6 @@
+0.x (upcoming release)
+- (feature) add possibility for search series by catalog number in user's collection (contributed by Mukesh Katariya)
+
 0.4
 - (infrastructure) switched to Java8
 - (user interface) ported to Bootstrap 3
