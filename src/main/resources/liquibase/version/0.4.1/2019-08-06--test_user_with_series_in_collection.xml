@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="create-a-user-with-a-series-in-his-collection" author="mukeshk" context="test-data">
+		<comment>Creates the user "seriesowner" that has series #1 in its collection</comment>
+		<insert tableName="users">
+			<column name="login" value="seriesowner" />
+			<column name="role" value="USER" />
+			<column name="name" value="Series Owner" />
+			<column name="email" value="seriesowner@example.com" />
+			<!-- Password: test -->
+			<column name="hash" value="$2a$10$8Rxlvw8r7r7a.w5rxOJYY.XbBE71ivvGjlnE6w/G73A58l1I76VRK" />
+			<column name="registered_at" valueComputed="${NOW}" />
+			<column name="activated_at" valueComputed="${NOW}" />
+		</insert>
+
+		<insert tableName="collections">
+			<column name="user_id" valueComputed="(SELECT id FROM users WHERE login = 'seriesowner')" />
+			<column name="slug" value="seriesowner" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE login = 'seriesowner')" />
+		</insert>
+
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug='seriesowner')" />
+			<column name="series_id" value="1" />
+			<column name="number_of_stamps" value="1" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
