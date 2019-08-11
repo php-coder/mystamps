@@ -1,5 +1,6 @@
 0.x (upcoming release)
 - (feature) add possibility for search series by catalog number in user's collection (contributed by Mukesh Katariya)
+- (ci)      cancel code coverage publishing to codecov.io service
 
 0.4
 - (infrastructure) switched to Java8
