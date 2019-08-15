@@ -439,7 +439,7 @@
 								
 								<!--/*/
 								<div class="col-sm-12" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-									<form method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+									<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
 										<p th:text="#{t_series_in_collection}">
 											Series is part of your collection
 										</p>

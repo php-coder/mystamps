@@ -6,7 +6,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
 	<changeSet id="create-a-user-with-a-series-in-his-collection" author="mukeshk" context="test-data">
-		<comment>Creates the user "seriesowner" that has series #1 in its collection</comment>
+		<comment>Creates the user "seriesowner" that has series #1 and #3 in its collection</comment>
 		<insert tableName="users">
 			<column name="login" value="seriesowner" />
 			<column name="role" value="USER" />
@@ -29,6 +29,22 @@
 			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
 			<column name="series_id" value="1" />
 			<column name="number_of_stamps" value="1" />
+		</insert>
+
+		<insert tableName="series">
+			<column name="quantity" valueNumeric="5" />
+			<column name="perforated" valueBoolean="TRUE" />
+			<column name="category_id" valueNumeric="1" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users WHERE login = 'seriesowner')" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE login = 'seriesowner')" />
+		</insert>
+		
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueNumeric="3" />
+			<column name="number_of_stamps" valueNumeric="3" />
 		</insert>
 	</changeSet>
 
