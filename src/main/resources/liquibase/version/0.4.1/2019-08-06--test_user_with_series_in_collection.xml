@@ -27,8 +27,8 @@
 
 		<insert tableName="collections_series">
 			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
-			<column name="series_id" value="1" />
-			<column name="number_of_stamps" value="1" />
+			<column name="series_id" valueNumeric="1" />
+			<column name="number_of_stamps" valueNumeric="1" />
 		</insert>
 
 		<insert tableName="series">
