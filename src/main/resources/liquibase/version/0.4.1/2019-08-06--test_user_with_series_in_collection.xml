@@ -32,7 +32,7 @@
 		</insert>
 
 		<insert tableName="series">
-			<column name="quantity" valueNumeric="5" />
+			<column name="quantity" valueNumeric="3" />
 			<column name="perforated" valueBoolean="TRUE" />
 			<column name="category_id" valueNumeric="1" />
 			<column name="created_at" valueComputed="${NOW}" />
@@ -43,7 +43,7 @@
 		
 		<insert tableName="collections_series">
 			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
-			<column name="series_id" valueNumeric="3" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
 			<column name="number_of_stamps" valueNumeric="3" />
 		</insert>
 	</changeSet>

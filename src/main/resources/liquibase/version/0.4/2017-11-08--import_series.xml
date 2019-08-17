@@ -134,7 +134,7 @@
 	<changeSet id="add-another-test-series" author="php-coder" context="test-data">
 		
 		<insert tableName="series">
-			<column name="quantity" valueNumeric="3" />
+			<column name="quantity" valueNumeric="2" />
 			<column name="perforated" valueBoolean="false" />
 			<column name="category_id" valueNumeric="1" />
 			<column name="country_id" valueNumeric="1" />
@@ -146,7 +146,7 @@
 		</insert>
 		
 		<insert tableName="series_images">
-			<column name="series_id" valueNumeric="2" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 2 ORDER BY id LIMIT 1)" />
 			<column name="image_id" valueNumeric="1" />
 		</insert>
 		
