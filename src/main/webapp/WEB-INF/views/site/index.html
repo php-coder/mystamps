@@ -25,7 +25,7 @@
 						th:with="lang=${#locale.language == 'en' ? 'ru' : 'en'},langName=${#locale.language == 'en' ? 'Русский' : 'English'}">
 					<span class="lang-xs" lang="ru"
 						th:lang="${lang}"></span>
-					<a href="javascript:void(0)" hreflang="ru"
+					<a id="change-lang-link" href="javascript:void(0)" hreflang="ru"
 						th:href="|?lang=${lang}|" th:hreflang="${lang}" th:text="${langName}">Русский</a>
 				</div><!--
 				
