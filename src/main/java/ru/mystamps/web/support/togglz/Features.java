@@ -55,7 +55,10 @@ public enum Features implements Feature {
 	
 	@Label("/site/index: search by catalog in collection")
 	@EnabledByDefault
-	SEARCH_IN_COLLECTION;
+	SEARCH_IN_COLLECTION,
+
+	@Label("/site/index: feature to check that Togglz works")
+	ALWAYS_DISABLED;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);
