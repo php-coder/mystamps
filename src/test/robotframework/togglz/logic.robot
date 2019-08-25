@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   Verify that togglz works                 
+Documentation   Verify that togglz works
 Library         SeleniumLibrary
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
