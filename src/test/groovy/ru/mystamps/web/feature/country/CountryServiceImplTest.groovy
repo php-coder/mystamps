@@ -204,7 +204,7 @@ class CountryServiceImplTest extends Specification {
 	
 	def 'findIdsWhenNameStartsWith() should invoke dao, pass argument and return result from dao'() {
 		given:
-			String name = between(1, 10).english().toLowerCase()
+			String name = between(1, 10).english().toLowerCase(Locale.ENGLISH)
 			String expectedPattern = name + '%'
 		and:
 			List<Integer> expectedResult = Random.listOfIntegers()

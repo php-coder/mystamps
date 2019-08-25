@@ -66,7 +66,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'save() should give a proper name to a file'() {
 		given:
-			String expectedExtension = imageInfoDto.type.toLowerCase()
+			String expectedExtension = imageInfoDto.type.toLowerCase(Locale.ENGLISH)
 			String expectedName = imageInfoDto.id
 			String expectedFileName = expectedName + '.' + expectedExtension
 		when:

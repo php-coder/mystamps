@@ -25,6 +25,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ru.mystamps.web.tests.Random;
+import java.util.Locale;
 
 import static io.qala.datagen.RandomShortApi.nullOr;
 import static io.qala.datagen.RandomShortApi.nullOrBlank;
@@ -66,8 +67,8 @@ public class JsoupSiteParserTest {
 		String expectedIssueDate = Random.issueYear().toString();
 		String imageUrl = String.format(
 			"/%s-%s-%s.png",
-			expectedCountry.toLowerCase(),
-			expectedCategory.toLowerCase(),
+			expectedCountry.toLowerCase(Locale.ENGLISH),
+			expectedCategory.toLowerCase(Locale.ENGLISH),
 			expectedIssueDate
 		);
 		String expectedImageUrl = baseUri + imageUrl;
@@ -128,8 +129,8 @@ public class JsoupSiteParserTest {
 		String expectedIssueDate = Random.issueYear().toString();
 		String imageUrl = String.format(
 			"/%s-%s-%s.png",
-			expectedCountry.toLowerCase(),
-			expectedCategory.toLowerCase(),
+			expectedCountry.toLowerCase(Locale.ENGLISH),
+			expectedCategory.toLowerCase(Locale.ENGLISH),
 			expectedIssueDate
 		);
 		String sellerUrl = String.format("/seller/%d/info.htm", positiveInteger());
