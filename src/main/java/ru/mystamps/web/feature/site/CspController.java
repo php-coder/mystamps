@@ -18,20 +18,32 @@
 package ru.mystamps.web.feature.site;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @Slf4j
 public class CspController {
+	private static final String UNKNOWN = "<unknown>";
 
 	// @todo #1058 /site/csp/reports: add integration tests
 	@PostMapping(SiteUrl.CSP_REPORTS_HANDLER)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void handleReport(@RequestBody String body) {
+	public void handleReport(
+		@RequestBody String body,
+		HttpServletRequest request,
+		@RequestHeader(name = "user-agent", defaultValue = UNKNOWN) String userAgent) {
+		
+		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
+		
+		log.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
 		log.warn(body);
 	}
 
