@@ -67,12 +67,12 @@
 					</h3>
 					
 					<!--/*/
-					<p class="text-center" th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
+					<p id="empty-collection-msg" class="text-center" th:if="${#lists.isEmpty(seriesOfCollection)}" th:text="#{t_empty_collection}">
 						In this collection is no stamps
 					</p>
 					/*/-->
 					
-					<table class="table table-hover" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+					<table id="collection-estimation" class="table table-hover" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 						<thead>
 							<tr class="active">
 								<th th:text="#{t_series}">Series</th>

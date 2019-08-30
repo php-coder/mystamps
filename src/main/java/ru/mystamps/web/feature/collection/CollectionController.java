@@ -93,7 +93,6 @@ public class CollectionController {
 		return "collection/info";
 	}
 	
-	// @todo #884 Add integration tests for collection estimation page
 	@GetMapping(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
 	public String showPrices(
 		@PathVariable("slug") String slug,
