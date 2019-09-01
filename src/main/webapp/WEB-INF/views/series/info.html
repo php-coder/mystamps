@@ -338,8 +338,7 @@
 									</dl>
 								</div>
 							</div>
-							<div class="row" th:if="${not #lists.isEmpty(similarSeries)}">
-								<!--/* @todo #967 Add integration tests for showing similar series */-->
+							<div id="similar-series" class="row" th:if="${not #lists.isEmpty(similarSeries)}">
 								<div class="col-sm-10 col-sm-offset-2">
 									<h5 class="text-center" th:text="#{t_similar_series}">
 										Similar series

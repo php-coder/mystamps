@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<changeSet id="create-similar-series" author="mukeshk" context="test-data">
+		<comment>Creates two series and mark them as similar</comment>
+
+		<insert tableName="series">
+			<column name="quantity" valueNumeric="4" />
+			<column name="perforated" valueBoolean="TRUE" />
+			<column name="category_id" valueNumeric="1" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users ORDER BY id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users ORDER BY id LIMIT 1)" />
+		</insert>
+
+		<insert tableName="series">
+			<column name="quantity" valueNumeric="5" />
+			<column name="perforated" valueBoolean="TRUE" />
+			<column name="category_id" valueNumeric="1" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="created_by" valueComputed="(SELECT id FROM users ORDER BY id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users ORDER BY id LIMIT 1)" />
+		</insert>
+
+		<insert tableName="similar_series">
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 4 ORDER BY id LIMIT 1)" />
+			<column name="similar_series_id" valueComputed="(SELECT id FROM series WHERE quantity = 5 ORDER BY id LIMIT 1)" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
