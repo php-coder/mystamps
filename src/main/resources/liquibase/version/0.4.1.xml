@@ -7,5 +7,6 @@
 	
 	<include file="0.4.1/2019-07-21--series_sales_transaction_url_length.xml" relativeToChangelogFile="true"/>
 	<include file="0.4.1/2019-08-06--test_user_with_series_in_collection.xml" relativeToChangelogFile="true"/>
-	
+	<include file="0.4.1/2019-08-31--test_similar_series.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
