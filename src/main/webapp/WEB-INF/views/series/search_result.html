@@ -77,7 +77,7 @@
 					
 					<div class="row">
 						<div class="col-sm-4">
-							<ul class="search-results" th:if="${not #lists.isEmpty(searchResults)}" th:remove="all-but-first">
+							<ul id="search-results" th:if="${not #lists.isEmpty(searchResults)}" th:remove="all-but-first">
 								<li th:each="series : ${searchResults}">
 									<span th:if="${series.category != null}" th:remove="tag">
 										<a href="../category/info.html" th:href="@{${INFO_CATEGORY_PAGE}(slug=${series.category.slug})}" th:text="${series.category.name}">Animals</a>&nbsp;&raquo;

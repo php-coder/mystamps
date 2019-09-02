@@ -33,4 +33,4 @@ Search Series By Catalog Name And Number
 	Input Text                   id=catalogNumber  ${number}
 	Select From List By Value    id=catalogName    ${name}
 	Submit Form                  id=search-series-form
-	Page Should Contain Element  css=.search-results [href="/series/1"]
+	Page Should Contain Element  css=#search-results [href="/series/1"]

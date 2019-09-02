@@ -38,4 +38,4 @@ Search Series By Catalog Name And Number In Collection
 	Select From List By Value    id=catalogName    ${name}
 	Select Checkbox              id=in-collection
 	Submit Form                  id=search-series-form
-	Page Should Contain Element  css=.search-results [href="/series/1"]
+	Page Should Contain Element  css=#search-results [href="/series/1"]
