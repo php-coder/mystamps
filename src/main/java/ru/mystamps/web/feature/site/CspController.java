@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 public class CspController {
 	private static final String UNKNOWN = "<unknown>";
 
-	// @todo #1058 /site/csp/reports: add integration tests
 	@PostMapping(SiteUrl.CSP_REPORTS_HANDLER)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void handleReport(
