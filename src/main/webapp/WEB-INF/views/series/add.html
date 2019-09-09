@@ -2,8 +2,7 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -139,7 +138,7 @@
 								/*/-->
 							</div>
 							
-							<small togglz:active="SHOW_SUGGESTION_LINK">
+							<small>
 								<a tabindex="-1"
 									th:text="#{t_pick_percent_name}"
 									href="javascript:$('#js-suggest-category-link').hide(); chooseCategoryBySlug('sport'); void(0)"
@@ -180,7 +179,7 @@
 								/*/-->
 							</div>
 							
-							<small togglz:active="SHOW_SUGGESTION_LINK">
+							<small>
 								<a tabindex="-1"
 									th:text="#{t_pick_percent_name}"
 									href="javascript:$('#js-suggest-country-link').hide(); chooseCountryBySlug('russia'); void(0)"
@@ -254,7 +253,7 @@
 									accept="image/png,image/jpeg"
 									th:field="*{uploadedImage}"
 									th:attr="required=${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? null : 'required'}" />
-								<small togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES" sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
+								<small sec:authorize="hasAuthority('ADD_IMAGES_TO_SERIES')">
 									<span class="hint-block" th:text="#{t_add_more_images_hint}">
 										Later you will be able to add additional images
 									</span>

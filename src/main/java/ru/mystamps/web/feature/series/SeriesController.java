@@ -630,8 +630,7 @@ public class SeriesController {
 		model.put("isSeriesInCollection", isSeriesInCollection);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
 		
-		if (Features.SHOW_PURCHASES_AND_SALES.isActive()
-			&& SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
 			
 			List<PurchaseAndSaleDto> purchasesAndSales =
 				seriesService.findPurchasesAndSales(seriesId);
@@ -647,8 +646,7 @@ public class SeriesController {
 	}
 	
 	private void addSeriesSalesFormToModel(Model model) {
-		if (!(Features.ADD_PURCHASES_AND_SALES.isActive()
-			&& SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES))) {
+		if (!SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES)) {
 			return;
 		}
 		

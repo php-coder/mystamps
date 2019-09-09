@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.feature.image.ImageDb.Images;
 import ru.mystamps.web.support.spring.security.HasAuthority;
-import ru.mystamps.web.support.togglz.Features;
 
 import java.util.List;
 import java.util.Locale;
@@ -97,10 +96,6 @@ public class ImageServiceImpl implements ImageService {
 	public ImageDto getOrCreatePreview(Integer imageId) {
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
-		
-		if (!Features.SHOW_IMAGES_PREVIEW.isActive()) {
-			return null;
-		}
 		
 		ImageInfoDto previewInfo = new ImageInfoDto(imageId, "jpeg");
 

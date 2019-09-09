@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.site.MailService;
-import ru.mystamps.web.support.togglz.Features;
 
 import java.util.Date;
 import java.util.List;
@@ -54,9 +53,7 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		
 		log.info("Users activation has been created ({})", activation);
 		
-		if (Features.SEND_ACTIVATION_MAIL.isActive()) {
-			mailService.sendActivationKeyToUser(new SendUsersActivationDto(activation));
-		}
+		mailService.sendActivationKeyToUser(new SendUsersActivationDto(activation));
 	}
 	
 	@Override

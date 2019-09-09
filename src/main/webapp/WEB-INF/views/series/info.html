@@ -2,8 +2,7 @@
 <html lang="en" th:lang="${#locale.language == 'ru' ? 'ru' : 'en'}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:togglz="https://github.com/heneke/thymeleaf-extras-togglz">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,7 +89,7 @@
 								</div>
 							</div>
 							
-							<div class="row" th:if="${allowAddingImages}" togglz:active="ADD_ADDITIONAL_IMAGES_TO_SERIES">
+							<div class="row" th:if="${allowAddingImages}">
 								<div class="col-sm-10">
 									<form id="add-image-form"
 										method="post"
@@ -361,7 +360,7 @@
 						
 						<div class="col-sm-4">
 							
-							<div class="row" togglz:active="ADD_SERIES_TO_COLLECTION">
+							<div class="row">
 								<div class="col-sm-12" th:if="${not isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
 									<form id="add-series-form" method="post" action="../collection/info.html"
 										th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}"
@@ -458,7 +457,7 @@
 								/*/-->
 							</div>
 							
-							<div class="row" th:if="${not #lists.isEmpty(purchasesAndSales)}" togglz:active="SHOW_PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+							<div class="row" th:if="${not #lists.isEmpty(purchasesAndSales)}" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
 								<div class="col-sm-12">
 									<h5 th:text="#{t_who_selling_series}">Who was selling/buying this series</h5>
 									<ul th:remove="all-but-first">
@@ -512,7 +511,7 @@
 								</div>
 							</div>
 							
-							<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
+							<div class="row" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
 								<div class="col-sm-12">
 									<h5 th:text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 									<form id="add-series-sales-form"
@@ -718,10 +717,7 @@
 
 							<!--/* @todo #995 Series sale import: add support for new sellers */-->
 							<!--/* @todo #1057 Series sale import form: show a message when JavaScript is disabled */-->
-							<div id="importSeriesSaleForm"
-								togglz:active="ADD_PURCHASES_AND_SALES"
-								sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
-							</div>
+							<div id="importSeriesSaleForm" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')"></div>
 							
 						</div>
 						
@@ -743,7 +739,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		
 		<!--/*/
-		<th:block togglz:active="SHOW_PURCHASES_AND_SALES" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+		<th:block sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
 		/*/-->
 		<script src="../../../../javascript/DateUtils.js" th:src="${DATE_UTILS_JS}"></script>
 		<script src="../../../../javascript/series/info.js" th:src="${SERIES_INFO_JS}"></script>
@@ -756,7 +752,7 @@
 			SeriesSaleImportForm uses DateUtils.formatDateToDdMmYyyy() from DateUtils.js file.
 		*/-->
 		<!--/*/
-		<th:block togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
+		<th:block sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
 		/*/-->
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>

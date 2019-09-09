@@ -22,36 +22,9 @@ import org.togglz.core.annotation.EnabledByDefault;
 import org.togglz.core.annotation.Label;
 import org.togglz.core.context.FeatureContext;
 
+// @todo #605 Togglz: remove items left from >= 0.4.1 milestone
 // @todo #1022 Togglz: remove SEND_MAIL_VIA_HTTP_API from database
 public enum Features implements Feature {
-	
-	@Label("/series/{id}: possibility to user to add series to collection")
-	@EnabledByDefault
-	ADD_SERIES_TO_COLLECTION,
-	
-	@Label("/series/{id}: possibility of user to add additional images to series")
-	@EnabledByDefault
-	ADD_ADDITIONAL_IMAGES_TO_SERIES,
-	
-	@Label("/series/{id}: show series purchases and sales")
-	@EnabledByDefault
-	SHOW_PURCHASES_AND_SALES,
-	
-	@Label("/series/{id}: show images preview")
-	@EnabledByDefault
-	SHOW_IMAGES_PREVIEW,
-	
-	@Label("/series/{id}: possibility of user to add series purchases and sales")
-	@EnabledByDefault
-	ADD_PURCHASES_AND_SALES,
-	
-	@Label("Send mail with activation key to user")
-	@EnabledByDefault
-	SEND_ACTIVATION_MAIL,
-	
-	@Label("/series/add: show link with auto-suggestions")
-	@EnabledByDefault
-	SHOW_SUGGESTION_LINK,
 	
 	@Label("/site/index: search by catalog in collection")
 	@EnabledByDefault
