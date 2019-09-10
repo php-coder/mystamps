@@ -2,8 +2,10 @@
 Documentation    Verify series creation validation scenarios from admin
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
+Test Setup       Disable Client Validation
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -66,3 +68,5 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
 
+Disable Client Validation
+	Remove Element Attribute  quantity  required

@@ -2,12 +2,14 @@
 Documentation    Verify import series validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       series  import-series  validation
 
 *** Test Cases ***
 Submit request with blank required field
+	[Setup]                 Disable Client Validation
 	Submit Form             id=import-series-form
 	Element Text Should Be  id=url.errors  Value must not be empty
 
@@ -29,3 +31,5 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/import/request
 
+Disable Client Validation
+	Remove Element Attribute  url  required

@@ -2,12 +2,14 @@
 Documentation    Verify participant creation validation scenarios
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       participant  validation
 
 *** Test Cases ***
 Create participant with blank required fields
+	[Setup]                 Disable Client Validation
 	Submit Form             id=add-participant-form
 	Element Text Should Be  id=name.errors  Value must not be empty
 
@@ -36,3 +38,5 @@ Before Test Suite
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/participant/add
 
+Disable Client Validation
+	Remove Element Attribute  name  required

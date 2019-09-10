@@ -2,12 +2,14 @@
 Documentation    Verify validation of adding a series to collection
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       collection  validation
 
 *** Test Cases ***
 Add a series without required field
+	[Setup]                 Disable Client Validation
 	Input Text              id=number-of-stamps  ${EMPTY}
 	Submit Form             id=add-series-form
 	Element Text Should Be  id=number-of-stamps.errors  Value must not be empty
@@ -32,3 +34,5 @@ Before Test Suite
 	# We also need a series with no more than 4 stamps, so the 5 stamps will lead to an error.
 	Go To                               ${SITE_URL}/series/2
 
+Disable Client Validation
+	Remove Element Attribute  number-of-stamps  required

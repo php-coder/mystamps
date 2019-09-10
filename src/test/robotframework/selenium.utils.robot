@@ -24,6 +24,14 @@ Emailfield Value Should Be
 	${value}=        Get Value  ${locator}
 	Should Be Equal  ${expected}  ${value}
 
+# We can't use "Select From List By Label" because
+# 1) it doesn't work with invisible elements (and selectize.js makes a field invisible)
+# 2) selectize.js dynamically creates a list of countries only when we click on a field
+Selectize By Value
+	[Documentation]     Select the given value in a select that is using selectize.js by provided id
+	[Arguments]         ${id}  ${slug}
+	Execute Javascript  return $('#${id}').selectize()[0].selectize.setValue('${slug}');
+
 Select Country
 	[Documentation]                   Select the given value in a select list that is using selectize.js
 	[Arguments]                       ${value}
@@ -74,3 +82,8 @@ Select Random Option From List
 	${size}=                   Get Length  ${options}
 	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
 	Select From List By Index  ${locator}  ${randomIndex}
+
+Remove Element Attribute
+	[Documentation]     Remove an attribute with a specified name from an element identified by its id
+	[Arguments]         ${id}  ${name}
+	Execute Javascript  return window.document.getElementById('${id}').removeAttribute('${name}');

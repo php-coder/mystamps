@@ -3,6 +3,7 @@ Documentation    Verify miscellaneous aspects of series creation
 Library          Collections
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       series  misc
@@ -69,6 +70,9 @@ Catalog numbers should accept existing numbers
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	# Workaround for an invalid form when it contains required file input:
+	# https://github.com/HtmlUnit/htmlunit/issues/76
+	Remove Element Attribute   image  required
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    99
 	Input Text                 id=scottNumbers     99

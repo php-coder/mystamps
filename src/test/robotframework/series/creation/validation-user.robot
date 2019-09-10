@@ -2,8 +2,10 @@
 Documentation    Verify series creation validation scenarios from a user
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
+Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
+Test Setup       Disable Client Validation
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -60,6 +62,10 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
+
+Disable Client Validation
+	Remove Element Attribute  quantity  required
+	Remove Element Attribute  image     required
 
 Invalid Catalog Numbers Should Be Rejected
 	[Arguments]                    ${catalogNumbers}

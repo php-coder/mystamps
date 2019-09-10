@@ -326,44 +326,16 @@
 					<artifactId>snakeyaml</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>com.codeborne</groupId>
-					<artifactId>phantomjsdriver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.opera</groupId>
-					<artifactId>operadriver</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>io.appium</groupId>
 					<artifactId>java-client</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>io.github.bonigarcia</groupId>
+					<artifactId>webdrivermanager</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>io.selendroid</groupId>
 					<artifactId>selendroid-client</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-edge-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-chrome-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-ie-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-safari-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-leg-rc</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-firefox-driver</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>com.machinepublishers</groupId>
@@ -505,6 +477,9 @@
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
 		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<htmlunit.version>2.36.0</htmlunit.version>
+		
 		<jacoco.plugin.version>0.8.2</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
@@ -554,18 +529,18 @@
 		
 		<resources.plugin.version>3.1.0</resources.plugin.version>
 		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>
-		<robotframework-plugin.version>1.4.7</robotframework-plugin.version>
-		<robotframework-selenium.version>2.53.1.1</robotframework-selenium.version>
-		<robotframework.version>3.0.4</robotframework.version>
+		<robotframework-plugin.version>1.5.1</robotframework-plugin.version>
+		<robotframework-selenium.version>3.141.59.2653</robotframework-selenium.version>
+		<robotframework.version>3.1.2</robotframework.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.5</selectizejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<selenium-htmlunit.version>2.21</selenium-htmlunit.version>
+		<selenium-htmlunit.version>2.36.0</selenium-htmlunit.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<selenium.version>2.53.1</selenium.version>
+		<selenium.version>3.141.59</selenium.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<servlet-api.version>3.1.0</servlet-api.version>
