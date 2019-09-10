@@ -8,7 +8,6 @@ Force Tags       collection  series  logic
 
 *** Test Cases ***
 Remove a series from user's collection
-	[Tags]                        unstable
 	Go To                         ${SITE_URL}/series/3
 	Submit Form                   id=remove-series-form
 	Page Should Not Contain Link  css=[href="/series/3"]

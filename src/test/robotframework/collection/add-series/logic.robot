@@ -8,7 +8,6 @@ Force Tags       collection  series  logic
 
 *** Test Cases ***
 Add a series to user's collection
-	[Tags]                    unstable
 	Go To                     ${SITE_URL}/series/2
 	Submit Form               id=add-series-form
 	Page Should Contain Link  css=[href="/series/2"]
