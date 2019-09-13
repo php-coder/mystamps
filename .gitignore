@@ -25,6 +25,8 @@ src/main/frontend/node_modules/
 # Vagrant related files
 .vagrant/
 vagrant/provisioning/vagrant.retry
+vagrant/provisioning/prod.inventory
+vagrant/provisioning/prod.yml
 vagrant/provisioning/roles/php-coder.oraclejdk/
 vagrant/provisioning/roles/php-coder.nginx/
 vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
