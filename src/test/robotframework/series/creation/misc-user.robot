@@ -45,10 +45,13 @@ Catalog numbers should be stripped from any spaces
 	Textfield Value Should Be  id=zagorskiNumbers  11,12
 
 Catalog numbers should ignore duplicate values
-	[Tags]                     unstable
+	Go To                      ${SITE_URL}/series/add
 	Select From List By Label  id=category  Sport
 	Input Text                 id=quantity  2
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
+	# Workaround for an invalid form when it contains required file input:
+	# https://github.com/HtmlUnit/htmlunit/issues/76
+	Remove Element Attribute   image  required
 	Click Element              id=add-catalog-numbers-link
 	Input Text                 id=michelNumbers    104,105,104
 	Input Text                 id=scottNumbers     114,115,114
