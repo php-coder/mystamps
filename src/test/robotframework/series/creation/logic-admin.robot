@@ -30,9 +30,8 @@ Create series by filling only required fields and providing a URL to image
 	Page Should Contain Image  id=series-image-1
 
 Create series by filling all fields
-	[Tags]                     unstable
 	Select From List By Label  id=category  Sport
-	Select Country             Italy
+	Selectize By Value         country  italy
 	Input Text                 id=quantity  3
 	Unselect Checkbox          id=perforated
 	Choose File                id=image  ${MAIN_RESOURCE_DIR}${/}test.png
