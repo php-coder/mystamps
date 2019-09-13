@@ -50,7 +50,6 @@ Catalog numbers should reject invalid values
 	10000
 
 Catalog price should reject invalid values
-	[Tags]      unstable
 	[Template]  Invalid Catalog Price Should Be Rejected
 	0
 	-1
@@ -104,6 +103,7 @@ Invalid Catalog Price Should Be Rejected
 	# invisible (because link is toggling the visibility and when there are
 	# errors, fields are visible from the begining).
 	Go To                          ${SITE_URL}/series/add
+	Disable Client Validation
 	Click Element                  id=add-catalog-numbers-link
 	# we should wait until all 4 fields with class js-catalogs-info will be
 	# visible but for simplicity we just check that the last field is visible
