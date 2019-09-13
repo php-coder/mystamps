@@ -21,7 +21,6 @@ Issue year should have options for range from 1840 to the current year
 	Should Be Equal As Integers  ${numberOfYears}   ${expectedNumberOfYears}
 
 Catalog numbers should accept valid values
-	[Tags]      unstable
 	[Template]  Valid Catalog Numbers Should Be Accepted
 	7
 	7,8
@@ -95,9 +94,16 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
 
+Disable Client Validation
+	Remove Element Attribute  quantity  required
+	Remove Element Attribute  image     required
+
 Valid Catalog Numbers Should Be Accepted
 	[Arguments]                      ${catalogNumbers}
+	Go To                            ${SITE_URL}/series/add
+	Disable Client Validation
 	Click Element                    id=add-catalog-numbers-link
+	Wait Until Element Is Visible    id=michelNumbers
 	Input Text                       id=michelNumbers    ${catalogNumbers}
 	Input Text                       id=scottNumbers     ${catalogNumbers}
 	Input Text                       id=yvertNumbers     ${catalogNumbers}
