@@ -8,7 +8,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
-		<title th:text="#{t_500_title}">500: internal server error</title>
+		<!--/*/
+			<th:block th:switch="${#response.status}">
+			<title th:case="'403'" th:text="#{t_403_title}">403: forbidden</title>
+			<title th:case="'404'" th:text="#{t_404_title}">404: page not found</title>
+		/*/-->
+		<title th:case="'500'" th:text="#{t_500_title}">500: internal server error</title>
+		<!--/*/ </th:block> /*/-->
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
@@ -53,11 +59,21 @@
 			
 			<div class="row text-center">
 				<div id="content" class="col-sm-12">
-					<h1 id="error-code">
+					<h1 id="error-code" th:text="${#response.status}">
 						500
 					</h1>
-					<h4 id="error-msg" th:utext="#{t_500_description('&lt;br /&gt;')}">
-						Internal<br />server error
+					<h4 id="error-msg" th:switch="${#response.status}">
+						<!--/*/
+						<span th:case="'403'" th:text="#{t_403_description}" th:remove="tag">
+							Forbidden
+						</span>
+						<span th:case="'404'" th:utext="#{t_404_description('&lt;br /&gt;')}" th:remove="tag">
+							Requested page<br />not found
+						</span>
+						/*/-->
+						<span th:case="*" th:utext="#{t_500_description('&lt;br /&gt;')}" th:remove="tag">
+							Internal<br />server error
+						</span>
 					</h4>
 				</div>
 			</div>
