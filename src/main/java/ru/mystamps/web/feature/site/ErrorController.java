@@ -37,7 +37,7 @@ public class ErrorController {
 	private final SiteService siteService;
 	
 	@RequestMapping(SiteUrl.NOT_FOUND_PAGE)
-	public void notFound(
+	public String notFound(
 			HttpServletRequest request,
 			@CurrentUser Integer currentUserId,
 			// CheckStyle: ignore LineLength for next 1 line
@@ -50,10 +50,12 @@ public class ErrorController {
 		String method = request.getMethod();
 		
 		siteService.logAboutAbsentPage(page, method, currentUserId, ip, referer, agent);
+		
+		return "error/status-code";
 	}
 	
 	@RequestMapping(SiteUrl.INTERNAL_ERROR_PAGE)
-	public void internalError(
+	public String internalError(
 		// CheckStyle: ignore LineLength for next 3 lines
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION_TYPE, required = false) Class<?> exceptionType,
 		@RequestAttribute(name = RequestDispatcher.ERROR_EXCEPTION, required = false) Exception exception,
@@ -69,6 +71,7 @@ public class ErrorController {
 				exception
 			);
 		}
+		return "error/status-code";
 	}
 	
 	private static Object getNameOrAsIs(Class<?> clazz) {
