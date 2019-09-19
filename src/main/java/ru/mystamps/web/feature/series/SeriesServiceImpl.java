@@ -138,13 +138,6 @@ public class SeriesServiceImpl implements SeriesService {
 			imageService.removeIfPossible(imageInfo);
 			throw ex;
 		}
-		
-		log.info(
-			"Image #{} has been added to series #{} by user #{}",
-			imageId,
-			seriesId,
-			userId
-		);
 	}
 	
 	@Override
