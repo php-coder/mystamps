@@ -9,11 +9,11 @@ Force Tags       participant  misc
 
 *** Test Cases ***
 Name and url should be stripped from leading and trailing spaces
-	Input Text                 id=name  ${SPACE * 2}f${SPACE * 2}
-	Input Text                 id=url   ${SPACE * 2}url${SPACE * 2}
-	Submit Form                id=add-participant-form
-	Textfield Value Should Be  id=name  f
-	Urlfield Value Should Be   id=url   url
+	Input Text                 id:name  ${SPACE * 2}f${SPACE * 2}
+	Input Text                 id:url   ${SPACE * 2}url${SPACE * 2}
+	Submit Form                id:add-participant-form
+	Textfield Value Should Be  id:name  f
+	Urlfield Value Should Be   id:url   url
 
 *** Keywords ***
 Before Test Suite

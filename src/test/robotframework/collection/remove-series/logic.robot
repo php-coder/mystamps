@@ -9,8 +9,8 @@ Force Tags       collection  series  logic
 *** Test Cases ***
 Remove a series from user's collection
 	Go To                         ${SITE_URL}/series/3
-	Submit Form                   id=remove-series-form
-	Page Should Not Contain Link  css=[href="/series/3"]
+	Submit Form                   id:remove-series-form
+	Page Should Not Contain Link  css:[href="/series/3"]
 
 *** Keywords ***
 Before Test Suite

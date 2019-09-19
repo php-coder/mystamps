@@ -10,26 +10,26 @@ Force Tags       participant  validation
 *** Test Cases ***
 Create participant with blank required fields
 	[Setup]                 Disable Client Validation
-	Submit Form             id=add-participant-form
-	Element Text Should Be  id=name.errors  Value must not be empty
+	Submit Form             id:add-participant-form
+	Element Text Should Be  id:name.errors  Value must not be empty
 
 Create participant with too short name
-	Input Text              id=name  xx
-	Submit Form             id=add-participant-form
-	Element Text Should Be  id=name.errors  Value is less than allowable minimum of 3 characters
+	Input Text              id:name  xx
+	Submit Form             id:add-participant-form
+	Element Text Should Be  id:name.errors  Value is less than allowable minimum of 3 characters
 
 Create participant with too long name and url
 	${letter}=              Set Variable  j
-	Input Text              id=name  ${letter * 51}
-	Input Text              id=url   http://${letter * 255}
-	Submit Form             id=add-participant-form
-	Element Text Should Be  id=name.errors  Value is greater than allowable maximum of 50 characters
-	Element Text Should Be  id=url.errors   Value is greater than allowable maximum of 255 characters
+	Input Text              id:name  ${letter * 51}
+	Input Text              id:url   http://${letter * 255}
+	Submit Form             id:add-participant-form
+	Element Text Should Be  id:name.errors  Value is greater than allowable maximum of 50 characters
+	Element Text Should Be  id:url.errors   Value is greater than allowable maximum of 255 characters
 
 Create participant with invalid url
-	Input Text              id=url  invalid-url
-	Submit Form             id=add-participant-form
-	Element Text Should Be  id=url.errors  Value must be a valid URL
+	Input Text              id:url  invalid-url
+	Submit Form             id:add-participant-form
+	Element Text Should Be  id:url.errors  Value must be a valid URL
 
 *** Keywords ***
 Before Test Suite

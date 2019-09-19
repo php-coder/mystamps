@@ -10,7 +10,7 @@ Force Tags      account  activation  misc
 *** Test Cases ***
 User cannot activate account again
 	Page Should Contain              You have already activated account
-	Page Should Not Contain Element  id=activate-account-form
+	Page Should Not Contain Element  id:activate-account-form
 
 *** Keywords ***
 Before Test Suite

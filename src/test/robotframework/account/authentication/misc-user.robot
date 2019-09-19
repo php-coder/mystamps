@@ -10,7 +10,7 @@ Force Tags      account  authentication  misc
 *** Test Cases ***
 User cannot authenticate again
 	Page Should Contain              You have already authenticated
-	Page Should Not Contain Element  id=auth-account-form
+	Page Should Not Contain Element  id:auth-account-form
 
 *** Keywords ***
 Before Test Suite

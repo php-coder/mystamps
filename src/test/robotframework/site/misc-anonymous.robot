@@ -8,23 +8,23 @@ Force Tags       misc  main-page
 *** Test Cases ***
 Anonymous should see a link for listing categories
 	[Tags]                    category
-	Page Should Contain Link  link=show list of categories
+	Page Should Contain Link  link:show list of categories
 
 Anonymous should not see a link for adding categories
 	[Tags]                        category
-	Page Should Not Contain Link  link=add a category
+	Page Should Not Contain Link  link:add a category
 
 Anonymous should see a link for listing countries
 	[Tags]                    country
-	Page Should Contain Link  link=show list of countries
+	Page Should Contain Link  link:show list of countries
 
 Anonymous should not see a link for adding countries
 	[Tags]                        country
-	Page Should Not Contain Link  link=add a country
+	Page Should Not Contain Link  link:add a country
 
 Anonymous should not see a link for adding series
 	[Tags]                        series
-	Page Should Not Contain Link  link=add a stamp series
+	Page Should Not Contain Link  link:add a stamp series
 
 *** Keywords ***
 Before Test Suite

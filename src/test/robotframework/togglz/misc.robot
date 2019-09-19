@@ -7,7 +7,7 @@ Force Tags      togglz  misc
 
 *** Test Cases ***
 Extra characters should never be shown if Togglz works
-	Page Should Not Contain Element  id=always-disabled-element
+	Page Should Not Contain Element  id:always-disabled-element
 
 *** Keywords ***
 Before Test Suite

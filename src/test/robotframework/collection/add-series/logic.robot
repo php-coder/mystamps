@@ -9,8 +9,8 @@ Force Tags       collection  series  logic
 *** Test Cases ***
 Add a series to user's collection
 	Go To                     ${SITE_URL}/series/2
-	Submit Form               id=add-series-form
-	Page Should Contain Link  css=[href="/series/2"]
+	Submit Form               id:add-series-form
+	Page Should Contain Link  css:[href="/series/2"]
 
 *** Keywords ***
 Before Test Suite

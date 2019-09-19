@@ -9,8 +9,8 @@ Force Tags      series  search  validation
 *** Test Cases ***
 Search the series with empty required field
 	[Setup]                 Disable Client Validation
-	Submit Form             id=search-series-form
-	Element Text Should Be  id=catalogNumber.errors  Value must not be empty
+	Submit Form             id:search-series-form
+	Element Text Should Be  id:catalogNumber.errors  Value must not be empty
 
 *** Keywords ***
 Before Test Suite

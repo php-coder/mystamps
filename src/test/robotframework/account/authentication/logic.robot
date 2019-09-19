@@ -7,19 +7,19 @@ Force Tags      account  authentication  logic
 
 *** Test Cases ***
 Successful authentication
-	Input Text                  id=login     coder
-	Input Text                  id=password  test
-	Submit Form                 id=auth-account-form
+	Input Text                  id:login     coder
+	Input Text                  id:password  test
+	Submit Form                 id:auth-account-form
 	Location Should Be          ${SITE_URL}/
-	Page Should Contain Link    link=Test Suite
-	Page Should Contain Button  value=Sign out
+	Page Should Contain Link    link:Test Suite
+	Page Should Contain Button  value:Sign out
 
 Log out
 	Go To                     ${SITE_URL}/account/auth
-	Submit Form               id=logout-form
+	Submit Form               id:logout-form
 	Location Should Be        ${SITE_URL}/
-	Page Should Contain Link  link=Sign in
-	Page Should Contain Link  link=Register
+	Page Should Contain Link  link:Sign in
+	Page Should Contain Link  link:Register
 
 *** Keywords ***
 Before Test Suite

@@ -38,10 +38,10 @@ Country Field Should Have Option
 	# We can't use "List Selection Should Be" because
 	# 1) it doesn't work with invisible elements (and selectize.js makes field invisible)
 	# 2) selectize.js dynamically creates list of countries only when we're clicking on the field
-	Click Element                     id=country-selectized
+	Click Element                     id:country-selectized
 	${dropdownXpath}=                 Set Variable  //*[contains(@class, "selectize-dropdown-content")]
-	Wait Until Page Contains Element  xpath=${dropdownXpath}/*[contains(@class, "option")]
-	Xpath Should Match X Times        xpath=${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
+	Wait Until Page Contains Element  xpath:${dropdownXpath}/*[contains(@class, "option")]
+	Xpath Should Match X Times        xpath:${dropdownXpath}/*[text() = "${value}"]  expectedXpathCount=1
 
 Link Should Point To
 	[Documentation]  Verify that "href" attribute of the element refers to a link

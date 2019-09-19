@@ -9,8 +9,8 @@ Force Tags       collection  access
 *** Test Cases ***
 Opening a page of non-existing collection show an error
 	Go To                             ${SITE_URL}/collection/collection-404-error-test
-	Element Text Should Be            id=error-code  404
-	Element Text Should Match Regexp  id=error-msg   Requested page[\\n\\r]+not found
+	Element Text Should Be            id:error-code  404
+	Element Text Should Match Regexp  id:error-msg   Requested page[\\n\\r]+not found
 
 *** Keywords ***
 Before Test Suite

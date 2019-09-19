@@ -10,10 +10,10 @@ Force Tags       series  misc
 *** Test Cases ***
 Comment should be stripped from leading and trailing spaces
 	Disable Client Validation
-	Click Element              id=add-comment-link
-	Input Text                 id=comment  ${SPACE * 2}example comment${SPACE * 2}
-	Submit Form                id=add-series-form
-	Textarea Value Should Be   id=comment  example comment
+	Click Element              id:add-comment-link
+	Input Text                 id:comment  ${SPACE * 2}example comment${SPACE * 2}
+	Submit Form                id:add-series-form
+	Textarea Value Should Be   id:comment  example comment
 
 *** Keywords ***
 Before Test Suite

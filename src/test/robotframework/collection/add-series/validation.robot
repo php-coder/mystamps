@@ -10,20 +10,20 @@ Force Tags       collection  validation
 *** Test Cases ***
 Add a series without required field
 	[Setup]                 Disable Client Validation
-	Input Text              id=number-of-stamps  ${EMPTY}
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=number-of-stamps.errors  Value must not be empty
+	Input Text              id:number-of-stamps  ${EMPTY}
+	Submit Form             id:add-series-form
+	Element Text Should Be  id:number-of-stamps.errors  Value must not be empty
 
 Add a series with too few number of stamps
-	Input Text              id=number-of-stamps  0
-	Submit Form             id=add-series-form
-	Element Text Should Be  id=number-of-stamps.errors  Value must be greater than or equal to 1
+	Input Text              id:number-of-stamps  0
+	Submit Form             id:add-series-form
+	Element Text Should Be  id:number-of-stamps.errors  Value must be greater than or equal to 1
 
 Add a series with too many number of stamps
-	Input Text              id=number-of-stamps  5
-	Submit Form             id=add-series-form
+	Input Text              id:number-of-stamps  5
+	Submit Form             id:add-series-form
 	${msg}=                 Set Variable  Number of stamps must be less than or equal to a stamps quantity in the series
-	Element Text Should Be  id=number-of-stamps.errors  ${msg}
+	Element Text Should Be  id:number-of-stamps.errors  ${msg}
 
 *** Keywords ***
 Before Test Suite

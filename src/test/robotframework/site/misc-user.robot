@@ -9,31 +9,31 @@ Force Tags       misc  main-page
 *** Test Cases ***
 User should not see a link to a page for importing a series
 	[Tags]                        import-series
-	Page Should Not Contain Link  link=import a series
+	Page Should Not Contain Link  link:import a series
 
 User should not see a link to a list of import requests
 	[Tags]                        import-series
-	Page Should Not Contain Link  link=show list of import requests
+	Page Should Not Contain Link  link:show list of import requests
 
 User should see a link for adding series
 	[Tags]                        series
-	Page Should Contain Link      link=add a stamp series
+	Page Should Contain Link      link:add a stamp series
 
 User should see a link for adding countries
 	[Tags]                        country
-	Page Should Contain Link      link=add a country
+	Page Should Contain Link      link:add a country
 
 User should see a link for listing countries
 	[Tags]                        country
-	Page Should Contain Link      link=show list of countries
+	Page Should Contain Link      link:show list of countries
 
 User should see a link for adding categories
 	[Tags]                        category
-	Page Should Contain Link      link=add a category
+	Page Should Contain Link      link:add a category
 
 User should see a link for listing categories
 	[Tags]                        category
-	Page Should Contain Link      link=show list of categories
+	Page Should Contain Link      link:show list of categories
 
 *** Keywords ***
 Before Test Suite

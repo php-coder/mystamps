@@ -11,24 +11,24 @@ Force Tags       category  logic
 
 *** Test Cases ***
 Create category with name in English (fill only mandatory fields)
-	Input Text                        id=name  Cars
-	Submit Form                       id=add-category-form
+	Input Text                        id:name  Cars
+	Submit Form                       id:add-category-form
 	Location Should Be                ${SITE_URL}/category/cars
-	Element Text Should Be            id=page-header  Cars
-	Element Text Should Match Regexp  id=msg-success  Category has been added\.[\\n\\r]+Now you could proceed with creating series\.
+	Element Text Should Be            id:page-header  Cars
+	Element Text Should Match Regexp  id:msg-success  Category has been added\.[\\n\\r]+Now you could proceed with creating series\.
 	Go To                             ${SITE_URL}/series/add
-	${availableCategories}=           Get List Items  id=category
+	${availableCategories}=           Get List Items  id:category
 	List Should Contain Value         ${availableCategories}  Cars
 	# FIXME: verify that after changing language, header will be in English
 
 Create category with name in English and Russian
-	Input Text              id=name  Space
-	Input Text              id=nameRu  Космос
-	Submit Form             id=add-category-form
+	Input Text              id:name  Space
+	Input Text              id:nameRu  Космос
+	Submit Form             id:add-category-form
 	Location Should Be      ${SITE_URL}/category/space
-	Element Text Should Be  id=page-header  Space
+	Element Text Should Be  id:page-header  Space
 	Go To                   ${SITE_URL}/category/space?lang=ru
-	Element Text Should Be  id=page-header  Космос
+	Element Text Should Be  id:page-header  Космос
 
 *** Keywords ***
 Before Test Suite

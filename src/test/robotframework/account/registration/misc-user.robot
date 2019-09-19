@@ -10,7 +10,7 @@ Force Tags      account  registration  misc
 *** Test Cases ***
 User cannot register account again
 	Page Should Contain              You have already registered
-	Page Should Not Contain Element  id=register-account-form
+	Page Should Not Contain Element  id:register-account-form
 
 *** Keywords ***
 Before Test Suite
