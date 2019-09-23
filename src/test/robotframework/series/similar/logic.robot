@@ -14,5 +14,5 @@ Similar series should be linked to each other
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}/  ${BROWSER}
+	Open Browser                        about:blank  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source

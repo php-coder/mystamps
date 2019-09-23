@@ -19,6 +19,6 @@ Opening a page of non-existing series show an error
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        about:blank  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 

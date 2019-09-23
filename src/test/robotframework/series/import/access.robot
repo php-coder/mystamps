@@ -23,6 +23,6 @@ Anonymous user cannot see a list of import requests
 
 *** Keywords ***
 Before Test Suite
-	Open Browser                        ${SITE_URL}  ${BROWSER}
+	Open Browser                        about:blank  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
