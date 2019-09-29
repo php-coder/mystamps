@@ -31,6 +31,7 @@
   roles:
   - role: php-coder.oraclejdk
   - role: mystamps-user
+  - role: rclone
   - role: mystamps-app
   - {
       role: php-coder.nginx,
@@ -40,5 +41,9 @@
   - role: mystamps-nginx
   - {
       role: mystamps-backup,
+      when: profile == 'prod'
+    }
+  - {
+      role: mystamps-restic-backup,
       when: profile == 'prod'
     }

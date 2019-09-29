@@ -1,0 +1,143 @@
+---
+
+- name: Creating /data/backups
+  file:
+    path: /data/backups
+    owner: mystamps
+    group: mystamps
+    mode: '0750'
+    state: directory
+
+- name: Granting access to the database to mystamps user
+  template:
+    src: my.cnf
+    dest: /data/mystamps/.my.cnf
+    force: yes
+    backup: no
+    owner: mystamps
+    group: mystamps
+    mode: '0600'
+
+- name: Creating a cron task for doing database backups
+  template:
+    src: mystamps-backup-db
+    dest: /etc/cron.d/mystamps-backup-db
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Removing old cron task
+  file:
+    path: /etc/cron.d/mystamps
+    state: absent
+
+- name: Installing restic
+  apt:
+    package: restic
+    state: present
+
+- name: Creating /data/bin directory
+  file:
+    path: /data/bin
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+# @todo #705 remote-backup.sh: find a way to protect duplicity against ps
+- name: Creating a script for doing remote backup
+  template:
+    src: remote-backup.sh
+    dest: /data/bin/remote-backup.sh
+    force: yes
+    backup: no
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Get data about current rclone_config (before)
+  stat:
+    path: /data/mystamps/.config/rclone/rclone.conf
+    get_md5: yes
+  register: rclone_before
+
+- name: Creating rclone config
+  become_user: mystamps
+  become: yes
+  shell: |
+    set -o pipefail
+
+    rclone listremotes | grep {{ rclone_repo_name }} || \
+    rclone config create {{ rclone_repo_name }} webdav \
+    url https://nextcloud.asm0dey.ru \
+    vendor nextcloud \
+    user {{ nextcloud_user }} \
+    pass {{ nextcloud_password }}
+  changed_when: no
+
+- name: Get data about current rclone_config (after)
+  stat:
+    path: /data/mystamps/.config/rclone/rclone.conf
+    get_md5: yes
+  register: rclone_after
+
+- debug: msg='rclone config updated'
+  changed_when: "'{{ rclone_before.stat.exists }}' != '{{ rclone_after.stat.exists }}' or '{{ rclone_before.stat.md5 }}' != '{{ rclone_after.stat.md5 }}'"
+
+- name: Create restic mysql repo
+  become: yes
+  become_user: mystamps
+  shell: |
+    set -o pipefail
+
+    restic snapshots \
+    --password-command "echo {{ item.password }}" \
+    -r rclone:{{ rclone_repo_name }}:/restic/{{ item.name }} || \
+    restic init \
+    --password-command "echo {{ item.password }}" \
+    -r rclone:{{ rclone_repo_name }}:/restic/{{ item.name }}
+  with_items:
+    - { name: mysql, password: "{{ restic_mysql_password }}" }
+    - { name: uploads, password: "{{ restic_uploads_password }}" }
+  changed_when: no
+
+- name: Create cron for mysql backup archiving
+  cron:
+    cron_file: /etc/cron.d/mystamps-restic-backup-remote
+    job: >-
+      umask 027;
+      mysqldump --single-transaction mystamps |
+      bzip2 >
+      /data/backups/mysql_backup_mystamps_$(date +\%Y\%m\%d-\%H\%M\%S).sql.bz2 2>&1
+    user: mystamps
+    minute: 30
+    hour: 0
+    state: present
+
+- name: Create cron for mysql backup upload
+  cron:
+      cron_file: /etc/cron.d/mystamps-restic-backup-remote
+      job: "/data/bin/remote-backup.sh mysql-backups"
+      user: mystamps
+      minute: 45
+      hour: 0
+      state: present
+
+- name: Create cron for uploads backup
+  cron:
+      cron_file: /etc/cron.d/mystamps-restic-backup-remote
+      job: "/data/bin/remote-backup.sh uploads"
+      user: mystamps
+      minute: 50
+      hour: 0
+      state: present
+
+- name: Setup mailto crontab var
+  cronvar:
+      name: MAILTO
+      cron_file: /etc/cron.d/mystamps-restic-backup-remote
+      value: "{{ admin_email }}"
+      state: present
+      user: mystamps
