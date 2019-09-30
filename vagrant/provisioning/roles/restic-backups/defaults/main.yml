@@ -7,3 +7,13 @@ uploads_target_url: file:///tmp/uploads
 mysql_backups_target_url: file:///tmp/mysql-backups
 # Passphrase for GPG to encrypt archives
 gpg_passphrase:
+
+restic_version: 0.9.5
+restic_sha256: "08cd75e56a67161e9b16885816f04b2bf1fb5b03bc0677b0ccf3812781c1a2ec"
+
+rclone_repo_name: asm0deys_nextcloud
+restic_mysql_password: 'test'
+restic_uploads_password: 'test'
+
+nextcloud_user: asm0dey
+nextcloud_password: 'zk.,k.vehxbrf123'

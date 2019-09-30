@@ -5,6 +5,11 @@
     name: mystamps
     state: present
 
+- name: Create /data dir
+  file:
+      path: /data
+      state: directory
+
 - name: Creating user
   user:
     name: mystamps
