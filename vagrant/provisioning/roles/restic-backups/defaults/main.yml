@@ -1,0 +1,14 @@
+---
+admin_email: coder
+user_db_password: p@ssword
+
+restic_version: 0.9.5
+restic_sha256: '08cd75e56a67161e9b16885816f04b2bf1fb5b03bc0677b0ccf3812781c1a2ec'
+
+rclone_repo_name: asm0deys_nextcloud
+restic_mysql_password: 'test'
+restic_uploads_password: 'test'
+restic_prefix: /remote.php/webdav/restic/
+
+nextcloud_user: nextcloud
+nextcloud_password: complexPassw0rd

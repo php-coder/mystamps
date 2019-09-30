@@ -42,3 +42,7 @@
       role: mystamps-backup,
       when: profile == 'prod'
     }
+  - {
+      role: restic-backup,
+      when: profile == 'prod'
+    }

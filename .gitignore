@@ -38,3 +38,8 @@ docker/mysql_backup_mystamps.sql.gz
 
 # maven-wrapper
 .mvn/wrapper/maven-wrapper.jar
+
+# @asm0dey uses molecule for role testing which generates .pyc files
+# And also creates molecule directory
+*.pyc
+molecule/
