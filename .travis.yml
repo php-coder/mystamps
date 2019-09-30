@@ -21,6 +21,7 @@ before_script:
       if [ "$TRAVIS_BRANCH" = 'prod' -a "$TRAVIS_PULL_REQUEST" = 'false' ]; then
         pip install --user ansible==2.1.1.0;
       fi;
+      pip install --user ansible-lint;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
         gem install danger nokogiri --no-ri --no-rdoc;
       fi;
