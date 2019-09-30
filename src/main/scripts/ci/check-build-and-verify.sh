@@ -32,6 +32,7 @@ TEST_STATUS=
 CODENARC_STATUS=
 SPOTBUGS_STATUS=
 VERIFY_STATUS=
+ANSIBLE_LINT_STATUS=
 
 DANGER_STATUS=skip
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
@@ -66,6 +67,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
 			AFFECTS_PROPERTIES="$(echo "$MODIFIED_FILES"    |  grep -q '\.properties$' || echo 'no')"
 			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
+			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
 			
 			if [ "$AFFECTS_POM_XML" = 'no' ]; then
 				POM_STATUS=skip
@@ -97,7 +99,12 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				fi
 				[ "$AFFECTS_ROBOT_FILES" != 'no' ] || RFLINT_STATUS=skip
 				[ "$AFFECTS_SHELL_FILES" != 'no' ] || SHELLCHECK_STATUS=skip
+
+				if [ "$AFFECTS_PLAYBOOKS" = 'no' ]; then
+					ANSIBLE_LINT_STATUS=skip
+				fi
 			fi
+
 			echo 'INFO: Some checks could be skipped'
 		else
 			echo "INFO: Couldn't determine list of modified files."
@@ -212,6 +219,15 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			>spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
 	fi
 	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
+
+	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
+		ansible-lint \
+			vagrant/provisioning/vagrant.yml \
+			vagrant/provisioning/bootstrap.yml \
+			src/main/scripts/ci/ansible/deploy.yml \
+			>ansible_lint.log 2>&1 || ANSIBLE_LINT_STATUS=fail
+	fi
+	print_status "$ANSIBLE_LINT_STATUS" 'Run Ansible Lint'
 fi
 
 mvn --batch-mode --activate-profiles frontend,native2ascii verify -Denforcer.skip=true -DskipUnitTests=true \
@@ -228,19 +244,20 @@ fi
 print_status "$DANGER_STATUS" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CS_STATUS" = 'skip' ]         || print_log cs.log         'Run CheckStyle'
-	[ "$PMD_STATUS" = 'skip' ]        || print_log pmd.log        'Run PMD'
-	[ "$LICENSE_STATUS" = 'skip' ]    || print_log license.log    'Check license headers'
-	[ "$POM_STATUS" = 'skip' ]        || print_log pom.log        'Check sorting of pom.xml'
-	[ "$BOOTLINT_STATUS" = 'skip' ]   || print_log bootlint.log   'Run bootlint'
-	[ "$RFLINT_STATUS" = 'skip' ]     || print_log rflint.log     'Run robot framework lint'
-	[ "$SHELLCHECK_STATUS" = 'skip' ] || print_log shellcheck.log 'Run shellcheck'
-	[ "$JASMINE_STATUS" = 'skip' ]    || print_log jasmine.log    'Run JavaScript unit tests'
-	[ "$HTML_STATUS" = 'skip' ]       || print_log validator.log  'Run html5validator'
-	[ "$ENFORCER_STATUS" = 'skip' ]   || print_log enforcer.log   'Run maven-enforcer-plugin'
-	[ "$TEST_STATUS" = 'skip' ]       || print_log test.log       'Run unit tests'
-	[ "$CODENARC_STATUS" = 'skip' ]   || print_log codenarc.log   'Run CodeNarc'
-	[ "$SPOTBUGS_STATUS" = 'skip' ]   || print_log spotbugs.log   'Run SpotBugs'
+	[ "$CS_STATUS" = 'skip' ]             || print_log cs.log             'Run CheckStyle'
+	[ "$PMD_STATUS" = 'skip' ]            || print_log pmd.log            'Run PMD'
+	[ "$LICENSE_STATUS" = 'skip' ]        || print_log license.log        'Check license headers'
+	[ "$POM_STATUS" = 'skip' ]            || print_log pom.log            'Check sorting of pom.xml'
+	[ "$BOOTLINT_STATUS" = 'skip' ]       || print_log bootlint.log       'Run bootlint'
+	[ "$RFLINT_STATUS" = 'skip' ]         || print_log rflint.log         'Run robot framework lint'
+	[ "$SHELLCHECK_STATUS" = 'skip' ]     || print_log shellcheck.log     'Run shellcheck'
+	[ "$JASMINE_STATUS" = 'skip' ]        || print_log jasmine.log        'Run JavaScript unit tests'
+	[ "$HTML_STATUS" = 'skip' ]           || print_log validator.log      'Run html5validator'
+	[ "$ENFORCER_STATUS" = 'skip' ]       || print_log enforcer.log       'Run maven-enforcer-plugin'
+	[ "$TEST_STATUS" = 'skip' ]           || print_log test.log           'Run unit tests'
+	[ "$CODENARC_STATUS" = 'skip' ]       || print_log codenarc.log       'Run CodeNarc'
+	[ "$SPOTBUGS_STATUS" = 'skip' ]       || print_log spotbugs.log       'Run SpotBugs'
+	[ "$ANSIBLE_LINT_STATUS" = 'skip' ]   || print_log ansible_lint.log   'Run Ansible Lint'
 fi
 
 print_log verify.log   'Run integration tests'
@@ -249,8 +266,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify-raw.log verify.log danger.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify-raw.log verify.log danger.log ansible_lint.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
