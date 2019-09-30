@@ -1,4 +1,6 @@
 0.x (upcoming release)
+
+0.4.1
 - (feature) add possibility for search series by catalog number in user's collection (contributed by Mukesh Katariya)
 - (ci)      cancel code coverage publishing to codecov.io service
 
