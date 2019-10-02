@@ -132,7 +132,7 @@
     state: touch
   changed_when: no
 
-- name: Creating  cron for mysql backup archiving
+- name: Creating cron for mysql backup archiving
   cron:
     cron_file: /etc/cron.d/mystamps-restic-backup-remote
     job: >-
