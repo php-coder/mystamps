@@ -146,7 +146,7 @@
     state: present
     name: MySQL backup archive
 
-- name: Creating  cron for mysql backup upload
+- name: Creating cron for mysql backup upload
   cron:
     cron_file: /etc/cron.d/mystamps-restic-backup-remote
     job: '/data/bin/remote-backup.sh mysql-backups'
