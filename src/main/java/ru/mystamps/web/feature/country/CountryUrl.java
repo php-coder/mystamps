@@ -32,7 +32,6 @@ public final class CountryUrl {
 	public static final String SUGGEST_SERIES_COUNTRY = "/suggest/series_country";
 	public static final String ADD_COUNTRY_PAGE       = "/country/add";
 	static final String GET_COUNTRIES_PAGE            = "/countries";
-	static final String INFO_COUNTRY_PAGE             = "/country/{slug}";
 	
 	// For backward compatibility
 	static final String LIST_COUNTRIES_PAGE     = "/country/list";
@@ -44,7 +43,6 @@ public final class CountryUrl {
 	public static void exposeUrlsToView(Map<String, String> urls) {
 		urls.put("ADD_COUNTRY_PAGE", ADD_COUNTRY_PAGE);
 		urls.put("GET_COUNTRIES_PAGE", GET_COUNTRIES_PAGE);
-		urls.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		urls.put("SUGGEST_SERIES_COUNTRY", SUGGEST_SERIES_COUNTRY);
 	}
 	

@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.feature.series.SeriesService;
 
 /**
  * Spring configuration that is required for using countries in an application.
@@ -37,11 +36,10 @@ public class CountryConfig {
 	public static class Controllers {
 		
 		private final CountryService countryService;
-		private final SeriesService seriesService;
 		
 		@Bean
 		public CountryController countryController() {
-			return new CountryController(countryService, seriesService);
+			return new CountryController(countryService);
 		}
 		
 		@Bean

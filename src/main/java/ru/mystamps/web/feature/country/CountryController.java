@@ -32,8 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
@@ -50,7 +49,6 @@ import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 public class CountryController {
 	
 	private final CountryService countryService;
-	private final SeriesService seriesService;
 	
 	@InitBinder("addCountryForm")
 	protected void initBinder(WebDataBinder binder) {
@@ -81,35 +79,7 @@ public class CountryController {
 		
 		redirectAttributes.addFlashAttribute("justAddedCountry", true);
 		
-		return redirectTo(CountryUrl.INFO_COUNTRY_PAGE, slug);
-	}
-	
-	// CheckStyle: ignore LineLength for next 1 line
-	// @todo #927 CountryController: remove dependency on SeriesService by moving showInfoBySlug() method
-	@GetMapping(CountryUrl.INFO_COUNTRY_PAGE)
-	public String showInfoBySlug(
-		@Country @PathVariable("slug") LinkEntityDto country,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		if (country == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		String slug = country.getSlug();
-		String name = country.getName();
-		
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> series = seriesService.findByCountrySlug(slug, lang);
-		
-		model.addAttribute("countrySlug", slug);
-		model.addAttribute("countryName", name);
-		model.addAttribute("seriesOfCountry", series);
-		
-		return "country/info";
+		return redirectTo(SeriesUrl.INFO_COUNTRY_PAGE, slug);
 	}
 	
 	/**
@@ -128,7 +98,7 @@ public class CountryController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(CountryUrl.INFO_COUNTRY_PAGE);
+		view.setUrl(SeriesUrl.INFO_COUNTRY_PAGE);
 		
 		return view;
 	}
