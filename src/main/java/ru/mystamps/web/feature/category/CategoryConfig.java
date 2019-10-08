@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.feature.series.SeriesService;
 
 /**
  * Spring configuration that is required for using categories in an application.
@@ -37,11 +36,10 @@ public class CategoryConfig {
 	public static class Controllers {
 		
 		private final CategoryService categoryService;
-		private final SeriesService seriesService;
 		
 		@Bean
 		public CategoryController categoryController() {
-			return new CategoryController(categoryService, seriesService);
+			return new CategoryController(categoryService);
 		}
 		
 		@Bean

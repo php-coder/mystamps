@@ -32,6 +32,7 @@ public final class SeriesUrl {
 	public static final String ADD_SERIES_PAGE          = "/series/add";
 	public static final String ADD_SERIES_ASK_PAGE      = "/series/{id}/ask";
 	public static final String INFO_SERIES_PAGE         = "/series/{id}";
+	public static final String INFO_CATEGORY_PAGE       = "/category/{slug}";
 	public static final String INFO_COUNTRY_PAGE        = "/country/{slug}";
 	public static final String ADD_IMAGE_SERIES_PAGE    = "/series/{id}/image";
 	public static final String SERIES_INFO_PAGE_REGEXP  = "/series/(\\d+|\\d+/(ask|image))";
@@ -48,6 +49,7 @@ public final class SeriesUrl {
 		urls.put("ADD_IMAGE_SERIES_PAGE", ADD_IMAGE_SERIES_PAGE);
 		urls.put("ADD_SERIES_ASK_PAGE", ADD_SERIES_ASK_PAGE);
 		urls.put("ADD_SERIES_PAGE", ADD_SERIES_PAGE);
+		urls.put("INFO_CATEGORY_PAGE", INFO_CATEGORY_PAGE);
 		urls.put("INFO_COUNTRY_PAGE", INFO_COUNTRY_PAGE);
 		urls.put("INFO_SERIES_PAGE", INFO_SERIES_PAGE);
 		urls.put("SEARCH_SERIES_BY_CATALOG", SEARCH_SERIES_BY_CATALOG);

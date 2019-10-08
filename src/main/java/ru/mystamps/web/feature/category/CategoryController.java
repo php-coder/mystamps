@@ -32,8 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
-import ru.mystamps.web.feature.series.SeriesInfoDto;
-import ru.mystamps.web.feature.series.SeriesService;
+import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
@@ -50,7 +49,6 @@ import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 public class CategoryController {
 	
 	private final CategoryService categoryService;
-	private final SeriesService seriesService;
 	
 	@InitBinder("addCategoryForm")
 	protected void initBinder(WebDataBinder binder) {
@@ -81,35 +79,7 @@ public class CategoryController {
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		
-		return redirectTo(CategoryUrl.INFO_CATEGORY_PAGE, slug);
-	}
-	
-	// CheckStyle: ignore LineLength for next 1 line
-	// @todo #927 CategoryController: remove dependency on SeriesService by moving showInfoBySlug() method
-	@GetMapping(CategoryUrl.INFO_CATEGORY_PAGE)
-	public String showInfoBySlug(
-		@Category @PathVariable("slug") LinkEntityDto category,
-		Model model,
-		Locale userLocale,
-		HttpServletResponse response)
-		throws IOException {
-		
-		if (category == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		String slug = category.getSlug();
-		String name = category.getName();
-		
-		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> series = seriesService.findByCategorySlug(slug, lang);
-		
-		model.addAttribute("categorySlug", slug);
-		model.addAttribute("categoryName", name);
-		model.addAttribute("seriesOfCategory", series);
-		
-		return "category/info";
+		return redirectTo(SeriesUrl.INFO_CATEGORY_PAGE, slug);
 	}
 	
 	@GetMapping(CategoryUrl.INFO_CATEGORY_BY_ID_PAGE)
@@ -125,7 +95,7 @@ public class CategoryController {
 		
 		RedirectView view = new RedirectView();
 		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(CategoryUrl.INFO_CATEGORY_PAGE);
+		view.setUrl(SeriesUrl.INFO_CATEGORY_PAGE);
 		
 		return view;
 	}

@@ -281,6 +281,32 @@ public class SeriesController {
 		return "country/info";
 	}
 	
+	@GetMapping(SeriesUrl.INFO_CATEGORY_PAGE)
+	public String showInfoBySlug(
+		@Category @PathVariable("slug") LinkEntityDto category,
+		Model model,
+		Locale userLocale,
+		HttpServletResponse response)
+		throws IOException {
+		
+		if (category == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		String slug = category.getSlug();
+		String name = category.getName();
+		
+		String lang = LocaleUtils.getLanguageOrNull(userLocale);
+		List<SeriesInfoDto> series = seriesService.findByCategorySlug(slug, lang);
+		
+		model.addAttribute("categorySlug", slug);
+		model.addAttribute("categoryName", name);
+		model.addAttribute("seriesOfCategory", series);
+		
+		return "category/info";
+	}
+	
 	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
 	public String processImageWithImageUrl(
