@@ -185,7 +185,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
 				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 				'An "img" element must have an "alt" attribute' \
-				'The first child "option" element of a "select" element with a "required" attribute' \
 				'Element "option" without attribute "label" must not be empty' \
 				'The "width" attribute on the "td" element is obsolete' \
 			--show-warnings \
