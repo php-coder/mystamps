@@ -26,14 +26,10 @@ import java.util.Map;
  *
  * @author Slava Semushin
  */
-@SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class CollectionUrl {
 	
 	public static final String INFO_COLLECTION_PAGE       = "/collection/{slug}";
 	public static final String ESTIMATION_COLLECTION_PAGE = "/collection/{slug}/estimation";
-	
-	// For backward compatibility
-	static final String INFO_COLLECTION_BY_ID_PAGE = "/collection/{id}/{slug}";
 	
 	private CollectionUrl() {
 	}

@@ -20,19 +20,15 @@ package ru.mystamps.web.feature.account;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.feature.account.ActivateAccountForm.ActKeyChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.FormChecks;
 import ru.mystamps.web.feature.account.ActivateAccountForm.LoginChecks;
@@ -94,20 +90,6 @@ public class AccountController {
 		}
 		
 		return form;
-	}
-	
-	@GetMapping(AccountUrl.ACTIVATE_ACCOUNT_PAGE_WITH_KEY)
-	public View showActivationFormWithKey(
-		@PathVariable("key") String activationKey,
-		RedirectAttributes redirectAttributes) {
-		
-		redirectAttributes.addAttribute("key", activationKey);
-		
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(AccountUrl.ACTIVATE_ACCOUNT_PAGE);
-		
-		return view;
 	}
 	
 	@PostMapping(AccountUrl.ACTIVATE_ACCOUNT_PAGE)

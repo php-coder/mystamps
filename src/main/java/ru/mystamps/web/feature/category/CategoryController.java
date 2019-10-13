@@ -18,27 +18,21 @@
 package ru.mystamps.web.feature.category;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -82,24 +76,6 @@ public class CategoryController {
 		return redirectTo(SeriesUrl.INFO_CATEGORY_PAGE, slug);
 	}
 	
-	@GetMapping(CategoryUrl.INFO_CATEGORY_BY_ID_PAGE)
-	public View showInfoById(
-		@Category @PathVariable("slug") LinkEntityDto country,
-		HttpServletResponse response)
-		throws IOException {
-		
-		if (country == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(SeriesUrl.INFO_CATEGORY_PAGE);
-		
-		return view;
-	}
-	
 	@GetMapping(CategoryUrl.GET_CATEGORIES_PAGE)
 	public String showCategories(Model model, Locale userLocale) {
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
@@ -108,14 +84,6 @@ public class CategoryController {
 		model.addAttribute("categories", categories);
 		
 		return "category/list";
-	}
-	
-	@GetMapping(CategoryUrl.LIST_CATEGORIES_PAGE)
-	public View list() {
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(CategoryUrl.GET_CATEGORIES_PAGE);
-		return view;
 	}
 	
 }

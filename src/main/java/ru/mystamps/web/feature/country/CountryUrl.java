@@ -33,10 +33,6 @@ public final class CountryUrl {
 	public static final String ADD_COUNTRY_PAGE       = "/country/add";
 	static final String GET_COUNTRIES_PAGE            = "/countries";
 	
-	// For backward compatibility
-	static final String LIST_COUNTRIES_PAGE     = "/country/list";
-	static final String INFO_COUNTRY_BY_ID_PAGE = "/country/{id}/{slug}";
-	
 	private CountryUrl() {
 	}
 	

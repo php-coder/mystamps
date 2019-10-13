@@ -19,13 +19,10 @@ package ru.mystamps.web.feature.collection;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
@@ -122,30 +119,6 @@ public class CollectionController {
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
 		return "collection/estimation";
-	}
-
-	@GetMapping(CollectionUrl.INFO_COLLECTION_BY_ID_PAGE)
-	public View showInfoById(
-		@PathVariable("slug") String slug,
-		HttpServletResponse response)
-		throws IOException {
-		
-		if (slug == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		CollectionInfoDto collection = collectionService.findBySlug(slug);
-		if (collection == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return null;
-		}
-		
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(CollectionUrl.INFO_COLLECTION_PAGE);
-		
-		return view;
 	}
 	
 	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")

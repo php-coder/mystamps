@@ -20,7 +20,6 @@ package ru.mystamps.web.feature.series;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +31,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
@@ -142,34 +139,6 @@ public class SeriesController {
 		}
 		
 		model.addAttribute("addSeriesForm", addSeriesForm);
-	}
-	
-	@GetMapping(SeriesUrl.ADD_SERIES_WITH_CATEGORY_PAGE)
-	public View showFormWithCategory(
-		@PathVariable("slug") String category,
-		RedirectAttributes redirectAttributes) {
-		
-		redirectAttributes.addAttribute("category", category);
-		
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(SeriesUrl.ADD_SERIES_PAGE);
-		
-		return view;
-	}
-	
-	@GetMapping(SeriesUrl.ADD_SERIES_WITH_COUNTRY_PAGE)
-	public View showFormWithCountry(
-		@PathVariable("slug") String country,
-		RedirectAttributes redirectAttributes) {
-		
-		redirectAttributes.addAttribute("country", country);
-		
-		RedirectView view = new RedirectView();
-		view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-		view.setUrl(SeriesUrl.ADD_SERIES_PAGE);
-		
-		return view;
 	}
 	
 	@PostMapping(path = SeriesUrl.ADD_SERIES_PAGE, params = "imageUrl")

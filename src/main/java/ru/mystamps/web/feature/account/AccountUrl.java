@@ -35,9 +35,6 @@ public final class AccountUrl {
 	public static final String LOGOUT_PAGE           = "/account/logout";
 	public static final String ACTIVATE_ACCOUNT_PAGE = "/account/activate";
 	
-	// For backward compatibility
-	static final String ACTIVATE_ACCOUNT_PAGE_WITH_KEY = "/account/activate/key/{key}";
-	
 	private AccountUrl() {
 	}
 	

@@ -38,10 +38,6 @@ public final class SeriesUrl {
 	public static final String SERIES_INFO_PAGE_REGEXP  = "/series/(\\d+|\\d+/(ask|image))";
 	static final String SEARCH_SERIES_BY_CATALOG        = "/series/search/by_catalog";
 	
-	// For backward compatibility
-	static final String ADD_SERIES_WITH_CATEGORY_PAGE = "/series/add/category/{slug}";
-	static final String ADD_SERIES_WITH_COUNTRY_PAGE  = "/series/add/country/{slug}";
-	
 	private SeriesUrl() {
 	}
 	

@@ -33,10 +33,6 @@ public final class CategoryUrl {
 	public static final String ADD_CATEGORY_PAGE       = "/category/add";
 	static final String GET_CATEGORIES_PAGE            = "/categories";
 	
-	// For backward compatibility
-	static final String LIST_CATEGORIES_PAGE       = "/category/list";
-	static final String INFO_CATEGORY_BY_ID_PAGE   = "/category/{id}/{slug}";
-	
 	private CategoryUrl() {
 	}
 	
