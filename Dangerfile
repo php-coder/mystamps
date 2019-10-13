@@ -390,7 +390,7 @@ if File.file?(validator_output)
 	errors_count = 0
 	File.readlines(validator_output).each do |line|
 		errors_count += 1
-		line.sub!(/^WARNING:html5validator.validator:/, '')
+		line.sub!(/^(ERROR|WARNING):html5validator.validator:/, '')
 		
 		parsed = line.match(/^"file:(?<file>[^"]+)":(?<line>\d+)[^:]+: (error|info warning): (?<msg>.+)/)
 		msg    = parsed['msg'].sub(/\.$/, '')
