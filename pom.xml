@@ -224,11 +224,12 @@
 		</dependency>
 		
 		<!--
-			Isn't being used by default but can be activated by overriding the following properties:
-			- spring.datasource.url (jdbc:postgresql://localhost:5432/mystamps)
+			Required for "postgres" profile (see src/main/resources/application-postgres.properties).
+			Perhaps, you would need to override the following properties as by default it's
+			configured for TravisCI environment:
+			- spring.datasource.url
 			- spring.datasource.username
 			- spring.datasource.password
-			- spring.datasource.driver-class-name (org.postgresql.Driver)
 		-->
 		<dependency>
 			<groupId>org.postgresql</groupId>

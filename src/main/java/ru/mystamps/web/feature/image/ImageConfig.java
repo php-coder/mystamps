@@ -74,7 +74,8 @@ public class ImageConfig {
 		
 	}
 	
-	@Profile("test")
+	// @todo #1054 Introduce profiles for image persistence strategies
+	@Profile({ "test", "postgres" })
 	@RequiredArgsConstructor
 	public static class DbStrategyConfig {
 		

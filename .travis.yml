@@ -1,15 +1,21 @@
 dist: xenial
 language: java
 
-# @todo #1034 Travis CI: run tests on PostgreSQL
 env:
   matrix:
     - SPRING_PROFILES_ACTIVE=test
     - SPRING_PROFILES_ACTIVE=travis
+    - SPRING_PROFILES_ACTIVE=postgres
   global:
     - MAVEN_OPTS='-Xss256k'
    #- secure: "fBav56BzY+A+Vs1g9YSfo1oLDCO1rFrXl49lJkOA5/XpnsKEEs4lI2RcOzz0wiJKXFNgcliiAJWoYMI8Esqz+lkyFWan4ij5Co0UzJcytDuY+2o+jaqwx45DuDYPogABzT+hWjLCxQLLG46gUkChzT8kcvOOn6JxC7Ff8q5MnoM="
 
+# @todo #1054 Ensure all integration tests to pass on PostgreSQL
+jobs:
+  allow_failures:
+    - env: SPRING_PROFILES_ACTIVE=postgres
+
+# @todo #1054 Unify PostgreSQL version/configuration between Travis and docker-compose
 before_script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
@@ -26,6 +32,8 @@ before_script:
       fi;
       sudo apt-get -qq update;
       sudo apt-get install -y shellcheck;
+    elif [ "$SPRING_PROFILES_ACTIVE" = 'postgres' ]; then
+      psql -U postgres -c 'create database mystamps;';
     fi
 
 script:
@@ -76,6 +84,7 @@ cache:
 
 services:
   - mysql
+  - postgresql
 
 branches:
   except:
