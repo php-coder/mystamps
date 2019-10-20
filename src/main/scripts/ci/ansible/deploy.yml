@@ -34,7 +34,7 @@
     when: uptimerobot is defined and uptimerobot.monitorid and uptimerobot.apikey
 
   # we can't use service module here because our sudoers allows to execute only exact commands
-  - name: Stopping service
+  - name: Stopping service # noqa 301 ignoring this because we're always stopping service before deploy
     raw:
       sudo systemctl stop mystamps
 
@@ -48,7 +48,7 @@
       backup: yes
 
   # we can't use service module here because our sudoers allows to execute only exact commands
-  - name: Starting service
+  - name: Starting service # noqa 301 ignoring this because we're always starting service after deploy
     raw:
       sudo systemctl start mystamps
 
