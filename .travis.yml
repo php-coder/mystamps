@@ -43,7 +43,7 @@ after_failure:
   # We encode it to a bzipped binary form and dump to console. It can be
   # examined later with the following commands:
   #
-  # $ curl -s https://api.travis-ci.org/v3/job/$JOB_ID/log.txt | sed -n '/^===== REPORT START/,/^===== REPORT END/p' | sed -e 1d -e '$d' -e 's/\r$//' | base64 -d | gzip -dc >target/robotframework-reports/output.xml
+  # $ curl -s https://api.travis-ci.org/v3/job/$JOB_ID/log.txt | sed -n '/^===== REPORT START/,/^===== REPORT END/p' | sed -e 1d -e '$d' -e 's/\r$//' | base64 -d | bzip2 -dc >target/robotframework-reports/output.xml
   # $ ./mvnw robotframework:rebot
   # $ open target/robotframework-reports/report.html
   #
