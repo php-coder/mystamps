@@ -40,7 +40,16 @@
 	</changeSet>
 	
 	<changeSet id="add-zagorski-numbers-to-series" author="php-coder" context="test-data">
-		<sqlFile path="../../sql/test-series-with-zagorski-numbers.sql" relativeToChangelogFile="true" />
+		
+		<insert tableName="zagorski_catalog">
+			<column name="code" value="83" />
+		</insert>
+		
+		<insert tableName="series_zagorski_catalog">
+			<column name="series_id" valueNumeric="1" />
+			<column name="zagorski_id" valueComputed="(SELECT id FROM zagorski_catalog WHERE code = '83')" />
+		</insert>
+		
 	</changeSet>
 	
 </databaseChangeLog>
