@@ -29,6 +29,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSaleInfo;
 
 // Getters/setters/no-arg constructor are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
@@ -74,6 +75,7 @@ public class JsoupSiteParser implements SiteParser {
 	/**
 	 * Parse HTML document to get info about series.
 	 *
+	 * @param htmlPage html page content
 	 * @return info about a series from the document
 	 */
 	@Override
@@ -93,14 +95,29 @@ public class JsoupSiteParser implements SiteParser {
 		info.setQuantity(extractQuantity(body));
 		info.setPerforated(extractPerforated(body));
 		info.setMichelNumbers(extractMichelNumbers(body));
-		info.setSellerName(extractSellerName(body));
-		info.setSellerUrl(extractSellerUrl(body));
-		info.setPrice(extractPrice(body));
-		info.setCurrency(extractCurrency(body));
+		info.setSaleInfo(extractSeriesSale(body));
 		
 		return info;
 	}
 
+	// @todo #1029 JsoupSiteParser.parseSeriesSale(): add unit tests
+	/**
+	 * Parse HTML document to get info about series sale.
+	 *
+	 * @param htmlPage html page content
+	 * @return series sale info from the document
+	 */
+	@Override
+	public SeriesSaleInfo parseSeriesSale(String htmlPage) {
+		Validate.isTrue(StringUtils.isNotBlank(htmlPage), "Page content must be non-blank");
+		
+		String baseUri = matchedUrl;
+		Document doc = Jsoup.parse(htmlPage, baseUri);
+		Element body = doc.body();
+		
+		return extractSeriesSale(body);
+	}
+	
 	@Override
 	public String toString() {
 		return name;
@@ -184,6 +201,15 @@ public class JsoupSiteParser implements SiteParser {
 		LOG.debug("Extracted michel numbers: '{}'", description);
 		return description;
 		
+	}
+	
+	private SeriesSaleInfo extractSeriesSale(Element body) {
+		String sellerName = extractSellerName(body);
+		String sellerUrl  = extractSellerUrl(body);
+		String price      = extractPrice(body);
+		String currency   = extractCurrency(body);
+		
+		return new SeriesSaleInfo(sellerName, sellerUrl, price, currency);
 	}
 	
 	protected String extractSellerName(Element body) {

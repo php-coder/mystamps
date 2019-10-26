@@ -15,11 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series.importing.extractor;
+package ru.mystamps.web.feature.series.importing.sale;
 
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleInfo;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-public interface SiteParser {
-	SeriesInfo parse(String htmlPage);
-	SeriesSaleInfo parseSeriesSale(String htmlPage);
+/**
+ * Representation of series sale info.
+ */
+@Getter
+@ToString
+@EqualsAndHashCode
+@RequiredArgsConstructor
+public class SeriesSaleInfo {
+	private final String sellerName;
+	private final String sellerUrl;
+	private final String price;
+	private final String currency;
+	
+	/**
+	 * Check whether info about a series sale is available.
+	 */
+	public boolean isEmpty() {
+		// The following fields aren't taken into account because:
+		// - sellerUrl: SeriesInfoExtractorService might deduce it based on a page URL
+		// - currency: SeriesInfoExtractorService might use a default value
+		return sellerName == null && price == null;
+	}
+	
 }

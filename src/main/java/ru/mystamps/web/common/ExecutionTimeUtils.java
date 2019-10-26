@@ -15,26 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series.importing.extractor;
+package ru.mystamps.web.common;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
-import org.slf4j.Logger;
-import ru.mystamps.web.common.ExecutionTimeUtils;
-import ru.mystamps.web.feature.series.importing.sale.SeriesSaleInfo;
 
-// @todo #801 TimedSiteParser: add unit tests
-@RequiredArgsConstructor
-public class TimedSiteParser implements SiteParser {
+public final class ExecutionTimeUtils {
 	
-	private final Logger log;
-	private final SiteParser parser;
+	private ExecutionTimeUtils() {
+	}
 	
-	@Override
-	public SeriesInfo parse(String htmlPage) {
+	public static <R> R measureAndLog(Supplier<R> func, Consumer<StopWatch> logger) {
 		// Why we don't use Spring's StopWatch?
 		// 1) because its javadoc says that it's not intended for production
 		// 2) because we don't want to have strong dependencies on the Spring Framework
@@ -45,31 +37,12 @@ public class TimedSiteParser implements SiteParser {
 		// make method body too complicated by adding many try/catches and I believe that such
 		// exception will never happen because it would mean that we're using API in a wrong way.
 		timer.start();
-		SeriesInfo result = parser.parse(htmlPage);
+		R result = func.get();
 		timer.stop();
 		
-		if (result != null) {
-			log.debug(
-				"HTML page with {} characters has been parsed in {} msecs",
-				StringUtils.length(htmlPage),
-				timer.getTime()
-			);
-		}
+		logger.accept(timer);
 		
 		return result;
-	}
-	
-	@Override
-	public SeriesSaleInfo parseSeriesSale(String htmlPage) {
-		return ExecutionTimeUtils.measureAndLog(
-			() -> parser.parseSeriesSale(htmlPage),
-			(timer) -> log.debug("HTML page with {} characters has been parsed in {} msecs", StringUtils.length(htmlPage), timer.getTime())
-		);
-	}
-	
-	@Override
-	public String toString() {
-		return parser.toString();
 	}
 	
 }

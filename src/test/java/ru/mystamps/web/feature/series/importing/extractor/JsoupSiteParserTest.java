@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSaleInfo;
 import ru.mystamps.web.tests.Random;
 import java.util.Locale;
 
@@ -91,10 +92,14 @@ public class JsoupSiteParserTest {
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
 		expectedInfo.setImageUrl(expectedImageUrl);
-		expectedInfo.setSellerName(expectedSellerName);
-		expectedInfo.setSellerUrl(expectedSellerUrl);
-		expectedInfo.setPrice(expectedPrice);
-		expectedInfo.setCurrency(expectedCurrency);
+		
+		SeriesSaleInfo expectedSaleInfo = new SeriesSaleInfo(
+			expectedSellerName,
+			expectedSellerUrl,
+			expectedPrice,
+			expectedCurrency
+		);
+		expectedInfo.setSaleInfo(expectedSaleInfo);
 		
 		String html = String.format(
 			"<html>"
@@ -152,9 +157,14 @@ public class JsoupSiteParserTest {
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
 		expectedInfo.setImageUrl(expectedImageUrl);
-		expectedInfo.setSellerName(expectedSellerName);
-		expectedInfo.setSellerUrl(expectedSellerUrl);
-		expectedInfo.setPrice(expectedPrice);
+		
+		SeriesSaleInfo expectedSaleInfo = new SeriesSaleInfo(
+			expectedSellerName,
+			expectedSellerUrl,
+			expectedPrice,
+			null
+		);
+		expectedInfo.setSaleInfo(expectedSaleInfo);
 		
 		String html = String.format(
 			"<html>"

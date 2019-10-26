@@ -58,8 +58,7 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 		
 		String content = result.getDataAsString();
 		
-		// @todo #995 SiteParser: introduce a method for parsing only sales-related info
-		SeriesInfo info = parser.parse(content);
+		SeriesSaleInfo info = parser.parseSeriesSale(content);
 		if (info.isEmpty()) {
 			throw new RuntimeException("could not parse the page");
 		}

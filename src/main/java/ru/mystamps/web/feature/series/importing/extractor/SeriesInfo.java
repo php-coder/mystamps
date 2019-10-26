@@ -21,6 +21,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ru.mystamps.web.feature.series.importing.sale.SeriesSaleInfo;
 
 /**
  * Representation of a series info.
@@ -37,10 +38,8 @@ public class SeriesInfo {
 	private String quantity;
 	private String perforated;
 	private String michelNumbers;
-	private String sellerName;
-	private String sellerUrl;
-	private String price;
-	private String currency;
+	// the code assumes that saleInfo is always non-null
+	private SeriesSaleInfo saleInfo;
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -53,8 +52,23 @@ public class SeriesInfo {
 			&& quantity == null
 			&& perforated == null
 			&& michelNumbers == null
-			&& sellerName == null
-			&& price == null;
+			&& saleInfo.isEmpty();
+	}
+	
+	public String getSellerName() {
+		return saleInfo.getSellerName();
+	}
+	
+	public String getSellerUrl() {
+		return saleInfo.getSellerUrl();
+	}
+	
+	public String getPrice() {
+		return saleInfo.getPrice();
+	}
+	
+	public String getCurrency() {
+		return saleInfo.getCurrency();
 	}
 	
 }
