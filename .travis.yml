@@ -16,8 +16,10 @@ jobs:
     - env: SPRING_PROFILES_ACTIVE=postgres
 
 # @todo #1054 Unify PostgreSQL version/configuration between Travis and docker-compose
+# set -e is needed to fail fast. See https://github.com/travis-ci/travis-ci/issues/10480
 before_script:
-  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
+  - set -e;
+    if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
