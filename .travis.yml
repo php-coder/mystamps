@@ -15,8 +15,8 @@ jobs:
   allow_failures:
     - env: SPRING_PROFILES_ACTIVE=postgres
 
-# @todo #1054 Unify PostgreSQL version/configuration between Travis and docker-compose
 # set -e is needed to fail fast. See https://github.com/travis-ci/travis-ci/issues/10480
+# @todo #1054 Unify PostgreSQL version/configuration between Travis and docker-compose
 before_script:
   - set -e;
     if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
