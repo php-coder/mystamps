@@ -574,7 +574,8 @@
 		
 		<togglz.version>2.6.1.Final</togglz.version>
 		<war.plugin.version>3.2.2</war.plugin.version>
-		<wiremock.plugin.version>4.4.1</wiremock.plugin.version>
+		<wiremock.plugin.version>5.0.0</wiremock.plugin.version>
+		<wiremock.version>2.25.1</wiremock.version>
 	</properties>
 	
 	<build>
@@ -1078,8 +1079,15 @@
 						http://wiremock.org/docs/running-standalone/
 					-->
 					<!-- Handy for debugging: add &#45;&#45;verbose option -->
-					<params>--port=8888 --disable-banner --container-threads=4 --jetty-acceptor-threads=1</params>
+					<params>--port=8888 --disable-banner --container-threads=5 --jetty-acceptor-threads=1</params>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.github.tomakehurst</groupId>
+						<artifactId>wiremock-jre8</artifactId>
+						<version>${wiremock.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<goals>
