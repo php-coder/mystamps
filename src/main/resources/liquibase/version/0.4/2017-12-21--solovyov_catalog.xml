@@ -40,7 +40,16 @@
 	</changeSet>
 	
 	<changeSet id="add-solovyov-numbers-to-series" author="php-coder" context="test-data">
-		<sqlFile path="../../sql/test-series-with-solovyov-numbers.sql" relativeToChangelogFile="true" />
+		
+		<insert tableName="solovyov_catalog">
+			<column name="code" value="77" />
+		</insert>
+		
+		<insert tableName="series_solovyov_catalog">
+			<column name="series_id" valueNumeric="1" />
+			<column name="solovyov_id" valueComputed="(SELECT id FROM solovyov_catalog WHERE code = '77')" />
+		</insert>
+		
 	</changeSet>
 	
 </databaseChangeLog>
