@@ -34,7 +34,7 @@ public class UserDetails {
 	
 	public enum Role {
 		USER, ADMIN, PAID
-	};
+	}
 	
 	public boolean isAdmin() {
 		return role == Role.ADMIN;
