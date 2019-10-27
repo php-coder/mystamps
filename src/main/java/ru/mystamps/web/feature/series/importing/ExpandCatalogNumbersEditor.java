@@ -38,7 +38,7 @@ public class ExpandCatalogNumbersEditor extends PropertyEditorSupport {
 	private static final String EMPTY = "";
 	
 	@Override
-	public void setAsText(String text) throws IllegalArgumentException {
+	public void setAsText(String text) {
 		String result = null;
 		
 		if (text != null) {

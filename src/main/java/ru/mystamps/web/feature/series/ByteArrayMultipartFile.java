@@ -72,7 +72,7 @@ class ByteArrayMultipartFile implements MultipartFile {
 	}
 
 	@Override
-	public void transferTo(File dest) throws IOException, IllegalStateException {
+	public void transferTo(File dest) throws IOException {
 		// Default mode is: CREATE, WRITE, and TRUNCATE_EXISTING.
 		// To prevent unexpected rewriting of existing file, we're overriding this behavior by
 		// explicitly specifying options.
