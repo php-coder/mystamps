@@ -6,7 +6,25 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 	
 	<changeSet id="create-user-paid" author="php-coder" context="test-data">
-		<sqlFile path="classpath:/liquibase/sql/test-user-paid.sql" relativeToChangelogFile="false" />
+		
+		<insert tableName="users">
+			<column name="login" value="paid" />
+			<column name="role" value="PAID" />
+			<column name="name" value="Paid User" />
+			<column name="email" value="paid-user@example.com" />
+			<!-- Password: test -->
+			<column name="hash" value="$2a$10$8Rxlvw8r7r7a.w5rxOJYY.XbBE71ivvGjlnE6w/G73A58l1I76VRK" />
+			<column name="registered_at" valueComputed="${NOW}" />
+			<column name="activated_at" valueComputed="${NOW}" />
+		</insert>
+		
+		<insert tableName="collections">
+			<column name="user_id" valueComputed="(SELECT id FROM users WHERE login = 'paid')" />
+			<column name="slug" value="paid" />
+			<column name="updated_at" valueComputed="${NOW}" />
+			<column name="updated_by" valueComputed="(SELECT id FROM users WHERE login = 'paid')" />
+		</insert>
+		
 	</changeSet>
 	
 </databaseChangeLog>
