@@ -9,6 +9,7 @@ Force Tags      account  registration  logic
 
 *** Test Cases ***
 After account creation an e-mail with activation link should be send
+	[Tags]                  unstable
 	Input Text              id:email  coder@rock.home
 	Submit Form             id:register-account-form
 	Element Text Should Be  id:msg-success  Instructions to finish registration have been sent to your e-mail
