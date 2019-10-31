@@ -43,6 +43,6 @@ If you are programmer/sysadmin or you just feeling that you are able to run a lo
 * *Database migrations*: Liquibase
 * *Validation*: JSR-303 (Hibernate Validator)
 * *Logging*: Slf4j (Logback)
-* *Unit tests*: Groovy and Spock Framework (for Java code), jasmine (for JavaScript code)
+* *Unit tests*: Groovy with Spock Framework or JUnit (for Java code), jasmine (for JavaScript code)
 * *Integration tests*: Selenium3, RobotFramework, WireMock
-* *Others*: Lombok, Togglz, WebJars
+* *Others*: Lombok, Togglz, WebJars, AssertJ

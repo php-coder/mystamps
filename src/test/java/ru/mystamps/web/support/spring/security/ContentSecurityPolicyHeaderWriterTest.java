@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.support.spring.security;
 
+import org.assertj.core.api.WithAssertions;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -27,14 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static io.qala.datagen.RandomShortApi.bool;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.arrayWithSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 
-public class ContentSecurityPolicyHeaderWriterTest {
+public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	
 	private static final int NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES = 6;
 	private static final int NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE = 7;
@@ -55,8 +50,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		writer.writeHeaders(request, response);
 		
 		String header = response.getHeader("Content-Security-Policy-Report-Only");
-		assertThat(header, is(notNullValue()));
-		assertThat(header.split(";"), is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+		assertThat(header).isNotNull();
+		assertThat(header.split(";")).hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 	//
@@ -69,24 +64,16 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			new ContentSecurityPolicyHeaderWriter(false, true, bool(), SiteUrl.SITE);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
-		assertThat(directives, hasItemInArray("default-src 'none'"));
-		
-		assertThat(
-			directives,
-			hasItemInArray("img-src https://cdn.jsdelivr.net 'self'")
-		);
-		
-		assertThat(directives, hasItemInArray("font-src 'self'"));
-		
-		assertThat(
-			directives,
-			hasItemInArray("report-uri http://127.0.0.1:8080/site/csp/reports")
-		);
-		
-		assertThat(directives, hasItemInArray("style-src https://cdn.jsdelivr.net 'self'"));
-		assertThat(directives, hasItemInArray("script-src 'unsafe-inline' 'self'"));
-		
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+		assertThat(directives)
+			.contains(
+				"default-src 'none'",
+				"img-src https://cdn.jsdelivr.net 'self'",
+				"font-src 'self'",
+				"report-uri http://127.0.0.1:8080/site/csp/reports",
+				"style-src https://cdn.jsdelivr.net 'self'",
+				"script-src 'unsafe-inline' 'self'"
+			)
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 	@Test
@@ -95,42 +82,27 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			= new ContentSecurityPolicyHeaderWriter(true, false, bool(), SiteUrl.PUBLIC_URL);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
-		assertThat(directives, hasItemInArray("default-src 'none'"));
-		
-		assertThat(
-			directives,
-			hasItemInArray("img-src https://cdn.jsdelivr.net https://stamps.filezz.ru")
-		);
-		
-		assertThat(directives, hasItemInArray("font-src https://maxcdn.bootstrapcdn.com"));
-		
-		assertThat(
-			directives,
-			hasItemInArray("report-uri https://my-stamps.ru/site/csp/reports")
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			.contains(
+				"default-src 'none'",
+				"img-src https://cdn.jsdelivr.net https://stamps.filezz.ru",
+				"font-src https://maxcdn.bootstrapcdn.com",
+				"report-uri https://my-stamps.ru/site/csp/reports"
+			)
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
 			)
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+			.contains(
 				"script-src "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
 					+ "https://yandex.st"
 			)
-		);
-		
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 	@Test
@@ -140,30 +112,23 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "https://www.gstatic.com "
 					+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
 			)
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+			.contains(
 				"script-src "
 					+ "'unsafe-inline' "
 					+ "'self' "
 					+ "'unsafe-eval' "
 					+ "https://www.gstatic.com"
 			)
-		);
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 	@Test
@@ -173,9 +138,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
@@ -183,11 +147,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ "https://www.gstatic.com "
 					+ "'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='"
 			)
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+			.contains(
 				"script-src "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
@@ -196,10 +156,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ "'unsafe-eval' "
 					+ "https://www.gstatic.com"
 			)
-		);
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 	@Test
@@ -211,20 +169,16 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			String[] directives = writer.constructDirectives(page).split(";");
 
 			// test only the directives that are differ from the index page
-			assertThat(
-				directives,
-				hasItemInArray(
+			assertThat(directives)
+				.contains(
 					"style-src "
 						+ "https://cdn.jsdelivr.net "
 						+ "'self' "
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
-			);
-
-			assertThat(directives, hasItemInArray("connect-src 'self'"));
-			
-			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE)));
+				.contains("connect-src 'self'")
+				// hope that all other directives are the same as on the index page
+				.hasSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE);
 		}
 	}
 	
@@ -237,20 +191,15 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			String[] directives = writer.constructDirectives(page).split(";");
 
 			// test only the directives that are differ from the index page
-			assertThat(
-				directives,
-				hasItemInArray(
+			assertThat(directives)
+				.contains(
 					"style-src "
 						+ "https://cdn.jsdelivr.net "
 						+ "https://stamps.filezz.ru "
 						+ "https://maxcdn.bootstrapcdn.com "
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
 				)
-			);
-			
-			assertThat(
-				directives,
-				hasItemInArray(
+				.contains(
 					"script-src "
 						+ "'unsafe-inline' "
 						+ "https://stamps.filezz.ru "
@@ -258,12 +207,9 @@ public class ContentSecurityPolicyHeaderWriterTest {
 						+ "https://yandex.st "
 						+ "https://unpkg.com"
 				)
-			);
-			
-			assertThat(directives, hasItemInArray("connect-src 'self'"));
-
-			// hope that all other directives are the same as on the index page
-			assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE)));
+				.contains("connect-src 'self'")
+				// hope that all other directives are the same as on the index page
+				.hasSize(NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE);
 		}
 	}
 	
@@ -274,31 +220,23 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
 					+ "https://cdnjs.cloudflare.com"
 			)
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+			.contains(
 				"script-src "
 					+ "'unsafe-inline' "
 					+ "'self' "
 					+ "https://cdnjs.cloudflare.com"
 			)
-		);
-		
-		assertThat(directives, hasItemInArray("connect-src 'self'"));
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE)));
+			.contains("connect-src 'self'")
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE);
 	}
 	
 	@Test
@@ -308,9 +246,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
@@ -318,11 +255,7 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
 					+ "https://cdnjs.cloudflare.com"
 			)
-		);
-		
-		assertThat(
-			directives,
-			hasItemInArray(
+			.contains(
 				"script-src "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
@@ -330,12 +263,9 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ "https://yandex.st "
 					+ "https://cdnjs.cloudflare.com"
 			)
-		);
-		
-		assertThat(directives, hasItemInArray("connect-src 'self'"));
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE)));
+			.contains("connect-src 'self'")
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE);
 	}
 	
 	@Test
@@ -345,9 +275,8 @@ public class ContentSecurityPolicyHeaderWriterTest {
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		// test only the directives that are differ from the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives).
+			contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net"
 					+ " 'self'"
@@ -365,12 +294,9 @@ public class ContentSecurityPolicyHeaderWriterTest {
 					+ " 'sha256-rqkMEwsWwrInJqctxmIaWOCFPV+Qmym3tMHH3wtq3Y0='"
 					+ " 'sha256-PGJ8tjuz2DXGgB1Sie9pW8BrxBGK6EQndbLEkXd44T8='"
 			)
-		);
-		
-		assertThat(directives, hasItemInArray("child-src 'self'"));
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE)));
+			.contains("child-src 'self'")
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE);
 	}
 	
 	@Test
@@ -379,21 +305,17 @@ public class ContentSecurityPolicyHeaderWriterTest {
 			new ContentSecurityPolicyHeaderWriter(true, false, false, Random.host());
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
-		// "style-src" directive should be the same as for the index page
-		assertThat(
-			directives,
-			hasItemInArray(
+		assertThat(directives)
+			// "style-src" directive should be the same as for the index page
+			.contains(
 				"style-src "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
 			)
-		);
-		
-		assertThat(directives, not(hasItemInArray("child-src 'self'")));
-		
-		// hope that all other directives are the same as on the index page
-		assertThat(directives, is(arrayWithSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES)));
+			.doesNotContain("child-src 'self'")
+			// hope that all other directives are the same as on the index page
+			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
 	
 }
