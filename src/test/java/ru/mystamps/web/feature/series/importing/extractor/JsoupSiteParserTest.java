@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
+import org.assertj.core.api.WithAssertions;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,12 +31,8 @@ import java.util.Locale;
 import static io.qala.datagen.RandomShortApi.nullOr;
 import static io.qala.datagen.RandomShortApi.nullOrBlank;
 import static io.qala.datagen.RandomShortApi.positiveInteger;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 
-public class JsoupSiteParserTest {
+public class JsoupSiteParserTest implements WithAssertions {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
@@ -118,7 +115,7 @@ public class JsoupSiteParserTest {
 		
 		SeriesInfo info = parser.parse(html);
 		
-		assertThat(info, is(equalTo(expectedInfo)));
+		assertThat(info).isEqualTo(expectedInfo);
 	}
 	
 	@Test
@@ -184,7 +181,7 @@ public class JsoupSiteParserTest {
 		
 		SeriesInfo info = parser.parse(html);
 		
-		assertThat(info, is(equalTo(expectedInfo)));
+		assertThat(info).isEqualTo(expectedInfo);
 	}
 	
 	//
@@ -197,7 +194,7 @@ public class JsoupSiteParserTest {
 		String expectedName = nullOr(Random.name());
 		parser.setName(expectedName);
 		
-		assertThat(parser.toString(), equalTo(expectedName));
+		assertThat(parser.toString()).isEqualTo(expectedName);
 	}
 	
 	//
@@ -212,7 +209,7 @@ public class JsoupSiteParserTest {
 		
 		String category = parser.extractCategory(doc);
 		
-		assertThat(category, is(nullValue()));
+		assertThat(category).isNull();
 	}
 	
 	@Test
@@ -222,7 +219,7 @@ public class JsoupSiteParserTest {
 		
 		String category = parser.extractCategory(doc);
 		
-		assertThat(category, is(nullValue()));
+		assertThat(category).isNull();
 	}
 	
 	@Test
@@ -235,8 +232,8 @@ public class JsoupSiteParserTest {
 		
 		String category = parser.extractCategory(doc);
 		
-		String msg = String.format("couldn't extract a category from '%s'", doc);
-		assertThat(msg, category, equalTo(expectedName));
+		assertThat(category).as("couldn't extract a category from '%s'", doc)
+			.isEqualTo(expectedName);
 	}
 	
 	@Test
@@ -250,8 +247,8 @@ public class JsoupSiteParserTest {
 		
 		String category = parser.extractCategory(doc);
 		
-		String msg = String.format("couldn't extract a category from '%s'", doc);
-		assertThat(msg, category, equalTo(expectedName));
+		assertThat(category).as("couldn't extract a category from '%s'", doc)
+			.isEqualTo(expectedName);
 	}
 	
 	//
@@ -266,7 +263,7 @@ public class JsoupSiteParserTest {
 		
 		String country = parser.extractCountry(doc);
 		
-		assertThat(country, is(nullValue()));
+		assertThat(country).isNull();
 	}
 	
 	@Test
@@ -276,7 +273,7 @@ public class JsoupSiteParserTest {
 		
 		String country = parser.extractCountry(doc);
 		
-		assertThat(country, is(nullValue()));
+		assertThat(country).isNull();
 	}
 	
 	@Test
@@ -289,8 +286,8 @@ public class JsoupSiteParserTest {
 		
 		String country = parser.extractCountry(doc);
 		
-		String msg = String.format("couldn't extract a country from '%s'", doc);
-		assertThat(msg, country, equalTo(expectedName));
+		assertThat(country).as("couldn't extract a country from '%s'", doc)
+			.isEqualTo(expectedName);
 	}
 	
 	@Test
@@ -304,8 +301,8 @@ public class JsoupSiteParserTest {
 		
 		String country = parser.extractCountry(doc);
 		
-		String msg = String.format("couldn't extract a country from '%s'", doc);
-		assertThat(msg, country, equalTo(expectedName));
+		assertThat(country).as("couldn't extract a country from '%s'", doc)
+			.isEqualTo(expectedName);
 	}
 	
 	//
@@ -319,7 +316,7 @@ public class JsoupSiteParserTest {
 		
 		String imageUrl = parser.extractImageUrl(doc);
 		
-		assertThat(imageUrl, is(nullValue()));
+		assertThat(imageUrl).isNull();
 	}
 	
 	@Test
@@ -329,7 +326,7 @@ public class JsoupSiteParserTest {
 		
 		String imageUrl = parser.extractImageUrl(doc);
 		
-		assertThat(imageUrl, is(nullValue()));
+		assertThat(imageUrl).isNull();
 	}
 	
 	@Test
@@ -347,8 +344,8 @@ public class JsoupSiteParserTest {
 		
 		String imageUrl = parser.extractImageUrl(doc);
 		
-		String msg = String.format("couldn't extract image url from '%s'", doc);
-		assertThat(msg, imageUrl, equalTo(expectedImageUrl));
+		assertThat(imageUrl).as("couldn't extract image url from '%s'", doc)
+			.isEqualTo(expectedImageUrl);
 	}
 	
 	@Test
@@ -366,8 +363,8 @@ public class JsoupSiteParserTest {
 		
 		String imageUrl = parser.extractImageUrl(doc);
 		
-		String msg = String.format("couldn't extract image url from '%s'", doc);
-		assertThat(msg, imageUrl, equalTo(expectedImageUrl));
+		assertThat(imageUrl).as("couldn't extract image url from '%s'", doc)
+			.isEqualTo(expectedImageUrl);
 	}
 	
 	@Test
@@ -379,7 +376,7 @@ public class JsoupSiteParserTest {
 		
 		String imageUrl = parser.extractImageUrl(doc);
 		
-		assertThat(imageUrl, is(nullValue()));
+		assertThat(imageUrl).isNull();
 	}
 	
 	//
@@ -394,7 +391,7 @@ public class JsoupSiteParserTest {
 		
 		String date = parser.extractIssueDate(doc);
 		
-		assertThat(date, is(nullValue()));
+		assertThat(date).isNull();
 	}
 	
 	@Test
@@ -404,7 +401,7 @@ public class JsoupSiteParserTest {
 		
 		String date = parser.extractIssueDate(doc);
 		
-		assertThat(date, is(nullValue()));
+		assertThat(date).isNull();
 	}
 	
 	@Test
@@ -417,8 +414,8 @@ public class JsoupSiteParserTest {
 		
 		String date = parser.extractIssueDate(doc);
 		
-		String msg = String.format("couldn't extract issue date from '%s'", doc);
-		assertThat(msg, date, equalTo(expectedDate));
+		assertThat(date).as("couldn't extract issue date from '%s'", doc)
+			.isEqualTo(expectedDate);
 	}
 	
 	@Test
@@ -432,8 +429,8 @@ public class JsoupSiteParserTest {
 		
 		String date = parser.extractIssueDate(doc);
 		
-		String msg = String.format("couldn't extract issue date from '%s'", doc);
-		assertThat(msg, date, equalTo(expectedDate));
+		assertThat(date).as("couldn't extract issue date from '%s'", doc)
+			.isEqualTo(expectedDate);
 	}
 	
 	//
@@ -447,7 +444,7 @@ public class JsoupSiteParserTest {
 		
 		String quantity = parser.extractQuantity(doc);
 		
-		assertThat(quantity, is(nullValue()));
+		assertThat(quantity).isNull();
 	}
 	
 	@Test
@@ -457,7 +454,7 @@ public class JsoupSiteParserTest {
 		
 		String quantity = parser.extractQuantity(doc);
 		
-		assertThat(quantity, is(nullValue()));
+		assertThat(quantity).isNull();
 	}
 	
 	@Test
@@ -470,8 +467,8 @@ public class JsoupSiteParserTest {
 		
 		String quantity = parser.extractQuantity(doc);
 		
-		String msg = String.format("couldn't extract quantity from '%s'", doc);
-		assertThat(msg, quantity, equalTo(expectedQuantity));
+		assertThat(quantity).as("couldn't extract quantity from '%s'", doc)
+			.isEqualTo(expectedQuantity);
 	}
 	
 	//
@@ -485,7 +482,7 @@ public class JsoupSiteParserTest {
 		
 		String perforated = parser.extractPerforated(doc);
 		
-		assertThat(perforated, is(nullValue()));
+		assertThat(perforated).isNull();
 	}
 	
 	@Test
@@ -495,7 +492,7 @@ public class JsoupSiteParserTest {
 		
 		String perforated = parser.extractPerforated(doc);
 		
-		assertThat(perforated, is(nullValue()));
+		assertThat(perforated).isNull();
 	}
 	
 	@Test
@@ -508,8 +505,8 @@ public class JsoupSiteParserTest {
 		
 		String perforated = parser.extractPerforated(doc);
 		
-		String msg = String.format("couldn't extract perforated flag from '%s'", doc);
-		assertThat(msg, perforated, equalTo(expectedValue));
+		assertThat(perforated).as("couldn't extract perforated flag from '%s'", doc)
+			.isEqualTo(expectedValue);
 	}
 	
 	//
@@ -523,7 +520,7 @@ public class JsoupSiteParserTest {
 		
 		String name = parser.extractSellerName(doc);
 		
-		assertThat(name, is(nullValue()));
+		assertThat(name).isNull();
 	}
 	
 	@Test
@@ -533,7 +530,7 @@ public class JsoupSiteParserTest {
 		
 		String name = parser.extractSellerName(doc);
 		
-		assertThat(name, is(nullValue()));
+		assertThat(name).isNull();
 	}
 	
 	@Test
@@ -546,8 +543,8 @@ public class JsoupSiteParserTest {
 		
 		String name = parser.extractSellerName(doc);
 		
-		String msg = String.format("couldn't extract seller name from '%s'", doc);
-		assertThat(msg, name, equalTo(expectedValue));
+		assertThat(name).as("couldn't extract seller name from '%s'", doc)
+			.isEqualTo(expectedValue);
 	}
 	
 	//
@@ -561,7 +558,7 @@ public class JsoupSiteParserTest {
 		
 		String url = parser.extractSellerUrl(doc);
 		
-		assertThat(url, is(nullValue()));
+		assertThat(url).isNull();
 	}
 	
 	@Test
@@ -571,7 +568,7 @@ public class JsoupSiteParserTest {
 		
 		String url = parser.extractSellerUrl(doc);
 		
-		assertThat(url, is(nullValue()));
+		assertThat(url).isNull();
 	}
 	
 	@Test
@@ -584,8 +581,8 @@ public class JsoupSiteParserTest {
 		
 		String url = parser.extractSellerUrl(doc);
 		
-		String msg = String.format("couldn't extract seller url from '%s'", doc);
-		assertThat(msg, url, equalTo(expectedUrl));
+		assertThat(url).as("couldn't extract seller url from '%s'", doc)
+			.isEqualTo(expectedUrl);
 	}
 	
 	//
@@ -599,7 +596,7 @@ public class JsoupSiteParserTest {
 		
 		String price = parser.extractPrice(doc);
 		
-		assertThat(price, is(nullValue()));
+		assertThat(price).isNull();
 	}
 	
 	@Test
@@ -609,7 +606,7 @@ public class JsoupSiteParserTest {
 		
 		String price = parser.extractPrice(doc);
 		
-		assertThat(price, is(nullValue()));
+		assertThat(price).isNull();
 	}
 	
 	@Test
@@ -622,8 +619,8 @@ public class JsoupSiteParserTest {
 		
 		String price = parser.extractPrice(doc);
 		
-		String msg = String.format("couldn't extract price from '%s'", doc);
-		assertThat(msg, price, equalTo(expectedValue));
+		assertThat(price).as("couldn't extract price from '%s'", doc)
+			.isEqualTo(expectedValue);
 	}
 	
 	@Test
@@ -639,8 +636,8 @@ public class JsoupSiteParserTest {
 		
 		String price = parser.extractPrice(doc);
 		
-		String msg = String.format("couldn't extract price from '%s'", doc);
-		assertThat(msg, price, equalTo(expectedValue));
+		assertThat(price).as("couldn't extract price from '%s'", doc)
+			.isEqualTo(expectedValue);
 	}
 	
 	//
@@ -653,7 +650,7 @@ public class JsoupSiteParserTest {
 		
 		String currency = parser.extractCurrency(null);
 		
-		assertThat(currency, is(nullValue()));
+		assertThat(currency).isNull();
 	}
 	
 	@Test
@@ -663,7 +660,7 @@ public class JsoupSiteParserTest {
 		
 		String currency = parser.extractCurrency(null);
 		
-		assertThat(currency, equalTo(expectedCurrency));
+		assertThat(currency).isEqualTo(expectedCurrency);
 	}
 	
 	private static Element createDocumentFromText(String html) {
