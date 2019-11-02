@@ -368,7 +368,7 @@
 										<p th:text="#{t_series_not_in_collection}">
 											Series isn't part of your collection
 										</p>
-										<p th:if="${series.quantity != 1}">
+										<p id="number-of-stamps-block" th:if="${series.quantity != 1}">
 											<span th:text="#{t_i_have}" th:remove="tag">I have</span>
 											<input id="number-of-stamps"
 												type="number"

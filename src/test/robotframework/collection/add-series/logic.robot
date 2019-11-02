@@ -9,6 +9,7 @@ Force Tags       collection  series  logic
 *** Test Cases ***
 Add a series to user's collection
 	Go To                     ${SITE_URL}/series/2
+	Element Text Should Be    id:number-of-stamps-block  I have 2 out of 2 stamps
 	Submit Form               id:add-series-form
 	Page Should Contain Link  css:[href="/series/2"]
 
