@@ -12,6 +12,8 @@ Add a series to user's collection
 	Element Text Should Be    id:number-of-stamps-block  I have 2 out of 2 stamps
 	Submit Form               id:add-series-form
 	Page Should Contain Link  css:[href="/series/2"]
+	# See https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
+	Element Text Should Be    css:[href="/series/2"] ~ .label-success  New
 
 *** Keywords ***
 Before Test Suite
