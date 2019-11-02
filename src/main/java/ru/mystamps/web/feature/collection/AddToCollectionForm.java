@@ -28,7 +28,6 @@ import java.math.BigDecimal;
 import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERIES;
 
 // @todo #477 Add to collection: integration test for invisible quantity for a series with 1 stamp
-// @todo #477 Add to collection: add integration test for custom number of stamps
 // @todo #663 Add to collection: add integration test for specifying a price
 @Getter
 @Setter
