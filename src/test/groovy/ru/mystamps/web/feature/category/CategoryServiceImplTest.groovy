@@ -57,7 +57,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for add()
 	//
 	
-	def "add() should throw exception when dto is null"() {
+	def 'add() should throw exception when dto is null'() {
 		when:
 			service.add(null, Random.userId())
 		then:
@@ -65,7 +65,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'DTO must be non null'
 	}
 	
-	def "add() should throw exception when English category name is null"() {
+	def 'add() should throw exception when English category name is null'() {
 		given:
 			form.setName(null)
 		when:
@@ -75,7 +75,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Category name in English must be non null'
 	}
 	
-	def "add() should throw exception when user is null"() {
+	def 'add() should throw exception when user is null'() {
 		when:
 			service.add(form, null)
 		then:
@@ -83,7 +83,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'User id must be non null'
 	}
 	
-	def "add() should call dao"() {
+	def 'add() should call dao'() {
 		given:
 			Integer expectedId = 10
 		and:
@@ -109,7 +109,7 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass slug to dao"() {
+	def 'add() should pass slug to dao'() {
 		given:
 			String name = '-foo123 test_'
 		and:
@@ -126,7 +126,7 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass values to dao"() {
+	def 'add() should pass values to dao'() {
 		given:
 			Integer expectedUserId = 10
 			String expectedEnglishName = 'Animals'
@@ -221,7 +221,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for findAllAsLinkEntities(String)
 	//
 	
-	def "findAllAsLinkEntities(String) should call dao"() {
+	def 'findAllAsLinkEntities(String) should call dao'() {
 		given:
 			LinkEntityDto category1 = new LinkEntityDto(1, 'first-category', 'First Category')
 		and:
@@ -289,7 +289,7 @@ class CategoryServiceImplTest extends Specification {
 			''   | _
 	}
 	
-	def "findOneAsLinkEntity() should pass arguments to dao"() {
+	def 'findOneAsLinkEntity() should pass arguments to dao'() {
 		given:
 			String expectedSlug = 'people'
 		and:
@@ -308,7 +308,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countAll()
 	//
 	
-	def "countAll() should call dao and returns result"() {
+	def 'countAll() should call dao and returns result'() {
 		given:
 			long expectedResult = 10
 		when:
@@ -323,7 +323,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countCategoriesOf()
 	//
 	
-	def "countCategoriesOf() should throw exception when collection id is null"() {
+	def 'countCategoriesOf() should throw exception when collection id is null'() {
 		when:
 			service.countCategoriesOf(null)
 		then:
@@ -331,7 +331,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Collection id must be non null'
 	}
 	
-	def "countCategoriesOf() should pass arguments to dao"() {
+	def 'countCategoriesOf() should pass arguments to dao'() {
 		given:
 			Integer expectedCollectionId = 10
 		when:
@@ -344,7 +344,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countBySlug()
 	//
 	
-	def "countBySlug() should throw exception when slug is null"() {
+	def 'countBySlug() should throw exception when slug is null'() {
 		when:
 			service.countBySlug(null)
 		then:
@@ -352,7 +352,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Category slug must be non null'
 	}
 	
-	def "countBySlug() should call dao"() {
+	def 'countBySlug() should call dao'() {
 		given:
 			categoryDao.countBySlug(_ as String) >> 3L
 		when:
@@ -365,7 +365,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countByName()
 	//
 	
-	def "countByName() should throw exception when name is null"() {
+	def 'countByName() should throw exception when name is null'() {
 		when:
 			service.countByName(null)
 		then:
@@ -373,7 +373,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Name must be non null'
 	}
 	
-	def "countByName() should call dao"() {
+	def 'countByName() should call dao'() {
 		given:
 			categoryDao.countByName(_ as String) >> 2L
 		when:
@@ -382,7 +382,7 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByName() should pass category name to dao in lowercase"() {
+	def 'countByName() should pass category name to dao in lowercase'() {
 		when:
 			service.countByName('Sport')
 		then:
@@ -393,7 +393,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countByNameRu()
 	//
 	
-	def "countByNameRu() should throw exception when name is null"() {
+	def 'countByNameRu() should throw exception when name is null'() {
 		when:
 			service.countByNameRu(null)
 		then:
@@ -401,7 +401,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Name in Russian must be non null'
 	}
 	
-	def "countByNameRu() should call dao"() {
+	def 'countByNameRu() should call dao'() {
 		given:
 			categoryDao.countByNameRu(_ as String) >> 2L
 		when:
@@ -410,7 +410,7 @@ class CategoryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByNameRu() should pass category name to dao in lowercase"() {
+	def 'countByNameRu() should pass category name to dao in lowercase'() {
 		when:
 			service.countByNameRu('Спорт')
 		then:
@@ -421,7 +421,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countAddedSince()
 	//
 	
-	def "countAddedSince() should throw exception when date is null"() {
+	def 'countAddedSince() should throw exception when date is null'() {
 		when:
 			service.countAddedSince(null)
 		then:
@@ -429,7 +429,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
+	def 'countAddedSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate = new Date()
 		and:
@@ -446,7 +446,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for countUntranslatedNamesSince()
 	//
 	
-	def "countUntranslatedNamesSince() should throw exception when date is null"() {
+	def 'countUntranslatedNamesSince() should throw exception when date is null'() {
 		when:
 			service.countUntranslatedNamesSince(null)
 		then:
@@ -454,7 +454,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
+	def 'countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate = new Date()
 		and:
@@ -471,7 +471,7 @@ class CategoryServiceImplTest extends Specification {
 	// Tests for getStatisticsOf()
 	//
 
-	def "getStatisticsOf() should throw exception when collection id is null"() {
+	def 'getStatisticsOf() should throw exception when collection id is null'() {
 		when:
 			service.getStatisticsOf(null, 'whatever')
 		then:
@@ -479,7 +479,7 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Collection id must be non null'
 	}
 
-	def "getStatisticsOf() should pass arguments to dao"() {
+	def 'getStatisticsOf() should pass arguments to dao'() {
 		given:
 			Integer expectedCollectionId = 15
 		and:
