@@ -22,6 +22,7 @@ import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CategoryService {
@@ -38,6 +39,6 @@ public interface CategoryService {
 	long countByNameRu(String name);
 	long countAddedSince(Date date);
 	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 	String suggestCategoryForUser(Integer userId);
 }

@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -75,7 +76,8 @@ public class CollectionController {
 			long seriesCounter   = collectionService.countSeriesOf(collectionId);
 			long stampsCounter   = collectionService.countStampsOf(collectionId);
 			
-			List<Object[]> categoriesStat = categoryService.getStatisticsOf(collectionId, lang);
+			Map<String, Integer> categoriesStat =
+				categoryService.getStatisticsOf(collectionId, lang);
 			List<Object[]> countriesStat  = getCountriesStatistics(collectionId, lang);
 			
 			model.addAttribute("categoryCounter", categoryCounter);

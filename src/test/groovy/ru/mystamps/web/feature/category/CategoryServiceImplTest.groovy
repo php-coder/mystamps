@@ -29,6 +29,7 @@ import spock.lang.Unroll
 
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
+import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomValue.between
 import static io.qala.datagen.StringModifier.Impls.oneOf
 
@@ -479,15 +480,19 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'Collection id must be non null'
 	}
 
-	def 'getStatisticsOf() should pass arguments to dao'() {
+	def 'getStatisticsOf() should invoke dao, pass arguments and return result from dao'() {
 		given:
 			Integer expectedCollectionId = Random.id()
 		and:
 			String expectedLang = Random.lang()
+		and:
+			Map<String, Integer> expectedResult = [ (Random.categoryName()) : positiveInteger() ]
 		when:
-			service.getStatisticsOf(expectedCollectionId, expectedLang)
+			Map<String, Integer> result = service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
-			1 * categoryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> null
+			1 * categoryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 	//
