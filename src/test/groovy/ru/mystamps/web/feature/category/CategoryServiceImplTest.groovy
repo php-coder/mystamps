@@ -486,7 +486,7 @@ class CategoryServiceImplTest extends Specification {
 		and:
 			String expectedLang = Random.lang()
 		and:
-			Map<String, Integer> expectedResult = [ (Random.categoryName()) : positiveInteger() ]
+			Map<String, Integer> expectedResult = [ (Random.categoryName()):positiveInteger() ]
 		when:
 			Map<String, Integer> result = service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
