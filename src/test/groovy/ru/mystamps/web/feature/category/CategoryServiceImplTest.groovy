@@ -473,7 +473,7 @@ class CategoryServiceImplTest extends Specification {
 
 	def 'getStatisticsOf() should throw exception when collection id is null'() {
 		when:
-			service.getStatisticsOf(null, 'whatever')
+			service.getStatisticsOf(null, Random.lang())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Collection id must be non null'
@@ -481,9 +481,9 @@ class CategoryServiceImplTest extends Specification {
 
 	def 'getStatisticsOf() should pass arguments to dao'() {
 		given:
-			Integer expectedCollectionId = 15
+			Integer expectedCollectionId = Random.id()
 		and:
-			String expectedLang = 'expected'
+			String expectedLang = Random.lang()
 		when:
 			service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
