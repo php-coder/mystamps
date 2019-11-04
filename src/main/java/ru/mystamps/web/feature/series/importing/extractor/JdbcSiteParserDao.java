@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.support.spring.jdbc.MapStringStringResultSetExtractor;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class JdbcSiteParserDao implements SiteParserDao {
 	
 	private static final ResultSetExtractor<Map<String, String>> PARAMS_EXTRACTOR =
-		new MapResultSetExtractor("name", "value");
+		new MapStringStringResultSetExtractor("name", "value");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series.importing.extractor;
+package ru.mystamps.web.support.spring.jdbc;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
-class MapResultSetExtractor implements ResultSetExtractor<Map<String, String>> {
+public class MapStringStringResultSetExtractor implements ResultSetExtractor<Map<String, String>> {
 	
 	private final String keyFieldName;
 	private final String valueFieldName;
