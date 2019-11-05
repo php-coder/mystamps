@@ -130,7 +130,8 @@ public class CollectionController {
 		// manually localize "Unknown" country's name
 		Integer unknownCounter = countriesStat.get("Unknown");
 		if (unknownCounter != null) {
-			String localizedValue = messageSource.getMessage("t_unspecified", null, new Locale(lang));
+			String localizedValue =
+				messageSource.getMessage("t_unspecified", null, new Locale(lang));
 			countriesStat.put(localizedValue, unknownCounter);
 			countriesStat.remove("Unknown");
 		}
