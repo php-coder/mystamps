@@ -21,6 +21,7 @@ import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CountryDao {
@@ -32,7 +33,7 @@ public interface CountryDao {
 	long countCountriesOfCollection(Integer collectionId);
 	long countAddedSince(Date date);
 	long countUntranslatedNamesSince(Date date);
-	List<Object[]> getStatisticsOf(Integer collectionId, String lang);
+	Map<String, Integer> getStatisticsOf(Integer collectionId, String lang);
 	List<Integer> findIdsByNames(List<String> names);
 	List<Integer> findIdsByNamePattern(String pattern);
 	List<LinkEntityDto> findAllAsLinkEntities(String lang);

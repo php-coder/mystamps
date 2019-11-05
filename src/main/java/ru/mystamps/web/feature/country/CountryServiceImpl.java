@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -186,7 +187,7 @@ public class CountryServiceImpl implements CountryService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
+	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
 		Validate.isTrue(collectionId != null, "Collection id must be non null");
 		
 		return countryDao.getStatisticsOf(collectionId, lang);

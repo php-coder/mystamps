@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -28,6 +29,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.RowMappers;
+import ru.mystamps.web.support.spring.jdbc.MapStringIntegerResultSetExtractor;
 
 import java.util.Collections;
 import java.util.Date;
@@ -38,6 +40,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCountryDao implements CountryDao {
+	
+	private static final ResultSetExtractor<Map<String, Integer>> NAME_COUNTER_EXTRACTOR =
+		new MapStringIntegerResultSetExtractor("name", "counter");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -181,7 +186,7 @@ public class JdbcCountryDao implements CountryDao {
 	}
 	
 	@Override
-	public List<Object[]> getStatisticsOf(Integer collectionId, String lang) {
+	public Map<String, Integer> getStatisticsOf(Integer collectionId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("collection_id", collectionId);
 		params.put("lang", lang);
@@ -189,7 +194,7 @@ public class JdbcCountryDao implements CountryDao {
 		return jdbcTemplate.query(
 			countStampsByCountriesSql,
 			params,
-			RowMappers::forNameAndCounter
+			NAME_COUNTER_EXTRACTOR
 		);
 	}
 	

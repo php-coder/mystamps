@@ -29,13 +29,6 @@ public final class RowMappers {
 		return createLinkEntityDto(rs, "id", "slug", "name");
 	}
 	
-	public static Object[] forNameAndCounter(ResultSet rs, int unused) throws SQLException {
-		return new Object[]{
-			rs.getString("name"),
-			JdbcUtils.getInteger(rs, "counter")
-		};
-	}
-	
 	public static EntityWithParentDto forEntityWithParentDto(ResultSet rs, int unused)
 		throws SQLException {
 		

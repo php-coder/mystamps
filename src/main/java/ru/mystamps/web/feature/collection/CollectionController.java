@@ -78,7 +78,8 @@ public class CollectionController {
 			
 			Map<String, Integer> categoriesStat =
 				categoryService.getStatisticsOf(collectionId, lang);
-			List<Object[]> countriesStat  = getCountriesStatistics(collectionId, lang);
+			
+			Map<String, Integer> countriesStat = getCountriesStatistics(collectionId, lang);
 			
 			model.addAttribute("categoryCounter", categoryCounter);
 			model.addAttribute("countryCounter", countryCounter);
@@ -123,16 +124,15 @@ public class CollectionController {
 		return "collection/estimation";
 	}
 	
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-	private List<Object[]> getCountriesStatistics(Integer collectionId, String lang) {
-		List<Object[]> countriesStat = countryService.getStatisticsOf(collectionId, lang);
+	private Map<String, Integer> getCountriesStatistics(Integer collectionId, String lang) {
+		Map<String, Integer> countriesStat = countryService.getStatisticsOf(collectionId, lang);
 		
-		for (Object[] countryStat : countriesStat) {
-			// manually localize "Unknown" country's name
-			Object name = countryStat[0];
-			if ("Unknown".equals(name)) {
-				countryStat[0] = messageSource.getMessage("t_unspecified", null, new Locale(lang));
-			}
+		// manually localize "Unknown" country's name
+		Integer unknownCounter = countriesStat.get("Unknown");
+		if (unknownCounter != null) {
+			String localizedValue = messageSource.getMessage("t_unspecified", null, new Locale(lang));
+			countriesStat.put(localizedValue, unknownCounter);
+			countriesStat.remove("Unknown");
 		}
 		
 		return countriesStat;

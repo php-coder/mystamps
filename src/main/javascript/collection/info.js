@@ -25,14 +25,11 @@ function createDataTable(stat) {
 	table.addColumn('string', 'Category/Country');
 	table.addColumn('number', 'Quantity of stamps');
 	
-	if (Array.isArray(stat)) {
-		table.addRows(stat);
-	} else {
-		// {a: 5} => [a, 5]
-		Object.keys(stat).forEach(function transformToList(key) {
-			var value = stat[key];
-			table.addRow([key, value]);
-		});
-	}
+	// {a: 5} => [a, 5]
+	Object.keys(stat).forEach(function transformToList(key) {
+		var value = stat[key];
+		table.addRow([key, value]);
+	});
+	
 	return table;
 }
