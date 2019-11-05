@@ -56,7 +56,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for add()
 	//
 	
-	def "add() should throw exception when dto is null"() {
+	def 'add() should throw exception when dto is null'() {
 		when:
 			service.add(null, Random.userId())
 		then:
@@ -64,7 +64,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'DTO must be non null'
 	}
 	
-	def "add() should throw exception when country name in English is null"() {
+	def 'add() should throw exception when country name in English is null'() {
 		given:
 			form.setName(null)
 		when:
@@ -74,7 +74,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Country name in English must be non null'
 	}
 	
-	def "add() should throw exception when user is null"() {
+	def 'add() should throw exception when user is null'() {
 		when:
 			service.add(form, null)
 		then:
@@ -82,7 +82,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'User id must be non null'
 	}
 	
-	def "add() should call dao"() {
+	def 'add() should call dao'() {
 		given:
 			Integer expectedId = 10
 		and:
@@ -108,7 +108,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass slug to dao"() {
+	def 'add() should pass slug to dao'() {
 		given:
 			String name = '-foo123 test_'
 		and:
@@ -125,7 +125,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def "add() should pass values to dao"() {
+	def 'add() should pass values to dao'() {
 		given:
 			Integer expectedUserId = 10
 			String expectedEnglishName = 'Italy'
@@ -220,7 +220,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for findAllAsLinkEntities(String)
 	//
 	
-	def "findAllAsLinkEntities(String) should call dao"() {
+	def 'findAllAsLinkEntities(String) should call dao'() {
 		given:
 			LinkEntityDto country1 = new LinkEntityDto(1, 'first-country', 'First Country')
 		and:
@@ -272,7 +272,7 @@ class CountryServiceImplTest extends Specification {
 			''   | _
 	}
 	
-	def "findOneAsLinkEntity() should pass arguments to dao"() {
+	def 'findOneAsLinkEntity() should pass arguments to dao'() {
 		given:
 			String expectedSlug = 'france'
 		and:
@@ -291,7 +291,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countAll()
 	//
 	
-	def "countAll() should call dao and returns result"() {
+	def 'countAll() should call dao and returns result'() {
 		given:
 			long expectedResult = 20
 		when:
@@ -306,7 +306,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countCountriesOf()
 	//
 	
-	def "countCountriesOf() should throw exception when collection id is null"() {
+	def 'countCountriesOf() should throw exception when collection id is null'() {
 		when:
 			service.countCountriesOf(null)
 		then:
@@ -314,7 +314,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Collection id must be non null'
 	}
 	
-	def "countCountriesOf() should pass arguments to dao"() {
+	def 'countCountriesOf() should pass arguments to dao'() {
 		given:
 			Integer expectedCollectionId = 9
 		when:
@@ -327,7 +327,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countBySlug()
 	//
 	
-	def "countBySlug() should throw exception when slug is null"() {
+	def 'countBySlug() should throw exception when slug is null'() {
 		when:
 			service.countBySlug(null)
 		then:
@@ -335,7 +335,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Country slug must be non null'
 	}
 	
-	def "countBySlug() should call dao"() {
+	def 'countBySlug() should call dao'() {
 		given:
 			countryDao.countBySlug(_ as String) >> 3L
 		when:
@@ -348,7 +348,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countByName()
 	//
 	
-	def "countByName() should throw exception when name is null"() {
+	def 'countByName() should throw exception when name is null'() {
 		when:
 			service.countByName(null)
 		then:
@@ -356,7 +356,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Name must be non null'
 	}
 	
-	def "countByName() should call dao"() {
+	def 'countByName() should call dao'() {
 		given:
 			countryDao.countByName(_ as String) >> 2L
 		when:
@@ -365,7 +365,7 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByName() should pass country name to dao in lowercase"() {
+	def 'countByName() should pass country name to dao in lowercase'() {
 		when:
 			service.countByName('Canada')
 		then:
@@ -376,7 +376,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countByNameRu()
 	//
 	
-	def "countByNameRu() should throw exception when name is null"() {
+	def 'countByNameRu() should throw exception when name is null'() {
 		when:
 			service.countByNameRu(null)
 		then:
@@ -384,7 +384,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Name in Russian must be non null'
 	}
 	
-	def "countByNameRu() should call dao"() {
+	def 'countByNameRu() should call dao'() {
 		given:
 			countryDao.countByNameRu(_ as String) >> 2L
 		when:
@@ -393,7 +393,7 @@ class CountryServiceImplTest extends Specification {
 			result == 2L
 	}
 	
-	def "countByNameRu() should pass category name to dao in lowercase"() {
+	def 'countByNameRu() should pass category name to dao in lowercase'() {
 		when:
 			service.countByNameRu('Канада')
 		then:
@@ -404,7 +404,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countAddedSince()
 	//
 	
-	def "countAddedSince() should throw exception when date is null"() {
+	def 'countAddedSince() should throw exception when date is null'() {
 		when:
 			service.countAddedSince(null)
 		then:
@@ -412,7 +412,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	def "countAddedSince() should invoke dao, pass argument and return result from dao"() {
+	def 'countAddedSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate = new Date()
 		and:
@@ -429,7 +429,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for countUntranslatedNamesSince()
 	//
 	
-	def "countUntranslatedNamesSince() should throw exception when date is null"() {
+	def 'countUntranslatedNamesSince() should throw exception when date is null'() {
 		when:
 			service.countUntranslatedNamesSince(null)
 		then:
@@ -437,7 +437,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Date must be non null'
 	}
 	
-	def "countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao"() {
+	def 'countUntranslatedNamesSince() should invoke dao, pass argument and return result from dao'() {
 		given:
 			Date expectedDate = new Date()
 		and:
@@ -454,7 +454,7 @@ class CountryServiceImplTest extends Specification {
 	// Tests for getStatisticsOf()
 	//
 	
-	def "getStatisticsOf() should throw exception when collection id is null"() {
+	def 'getStatisticsOf() should throw exception when collection id is null'() {
 		when:
 			service.getStatisticsOf(null, 'whatever')
 		then:
@@ -462,7 +462,7 @@ class CountryServiceImplTest extends Specification {
 			ex.message == 'Collection id must be non null'
 	}
 	
-	def "getStatisticsOf() should pass arguments to dao"() {
+	def 'getStatisticsOf() should pass arguments to dao'() {
 		given:
 			Integer expectedCollectionId = 17
 		and:
