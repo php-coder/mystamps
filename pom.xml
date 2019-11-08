@@ -122,6 +122,30 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
+		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-test/pom.xml -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.jayway.jsonpath</groupId>
+					<artifactId>json-path</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.skyscreamer</groupId>
+					<artifactId>jsonassert</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-library</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
 		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

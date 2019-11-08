@@ -22,4 +22,12 @@
 	</root>
 	<!-- End of org/springframework/boot/logging/logback/base.xml content -->
 	
+	<logger name="org.springframework.test.context.support.AbstractContextLoader" level="WARN">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger name="org.springframework.boot.test.context.SpringBootTestContextBootstrapper" level="WARN">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
 </configuration>
