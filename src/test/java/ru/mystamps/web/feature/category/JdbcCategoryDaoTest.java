@@ -99,7 +99,7 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/users-coder.sql",
 			"/db/collections-coder.sql",
 			"/db/categories-fauna.sql",
-			"/db/series-1-fauna-qty5.sql",
+			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
@@ -141,7 +141,7 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/users-coder.sql",
 			"/db/collections-coder.sql",
 			"/db/categories-sport.sql",
-			"/db/series-2-sport-qty3.sql",
+			"/db/series-2-sport-qty3.sql"
 		},
 		statements = {
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
@@ -162,7 +162,7 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 			"/db/users-coder.sql",
 			"/db/collections-coder.sql",
 			"/db/categories-fauna.sql",
-			"/db/series-1-fauna-qty5.sql",
+			"/db/series-1-fauna-qty5.sql"
 		},
 		statements = {
 			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
