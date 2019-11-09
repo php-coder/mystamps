@@ -99,6 +99,28 @@ public class JdbcCountryDaoTest implements WithAssertions {
 		scripts = {
 			"/db/users-coder.sql",
 			"/db/collections-coder.sql",
+			"/db/categories-sport.sql",
+			"/db/countries-italy.sql",
+			"/db/series-4-italy-qty5.sql"
+		},
+		statements =  {
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
+				+ "VALUES (1, 4, 2)"
+		}
+	)
+	public void getStatisticsOfWithIncompleteSeries() {
+		// given
+		// when
+		Map<String, Integer> statistics = countryDao.getStatisticsOf(1, "en");
+		// then
+		assertThat(statistics).containsEntry("Italy", 2);
+	}
+	
+	@Test
+	@Sql(
+		scripts = {
+			"/db/users-coder.sql",
+			"/db/collections-coder.sql",
 			"/db/categories-fauna.sql",
 			"/db/series-1-fauna-qty5.sql"
 		},
