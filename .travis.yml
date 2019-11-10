@@ -36,7 +36,7 @@ before_script:
 
 script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/check-build-and-verify.sh;
+      travis_wait ./src/main/scripts/ci/check-build-and-verify.sh;
     else
       ./src/main/scripts/ci/check-build-and-verify.sh --only-integration-tests;
     fi
