@@ -15,10 +15,15 @@ jobs:
   allow_failures:
     - env: SPRING_PROFILES_ACTIVE=postgres
 
-# set -e is needed to fail fast. See https://github.com/travis-ci/travis-ci/issues/10480
+# * set -e is needed to fail fast.
+#   See https://github.com/travis-ci/travis-ci/issues/10480
+# * travis_terminate allows us to gracefully handle "set -e" shutdown.
+#    See https://travis-ci.community/t/log-are-truncated-when-my-script-exits-abnormally/5878
+#
 # @todo #1054 Unify PostgreSQL version/configuration between Travis and docker-compose
 before_script:
-  - set -e;
+  - trap 'travis_terminate 1' ERR;
+    set -e;
     if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
