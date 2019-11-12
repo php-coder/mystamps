@@ -4,7 +4,7 @@
   gather_facts: no
   remote_user: mystamps
   vars:
-    local_war_dir: ../../../../../target
+    local_war_dir: "{{ playbook_dir }}/../../../../../target"
     remote_war_dir: /data/mystamps
     uptimerobot:
       monitorid: 'MyStamps'
