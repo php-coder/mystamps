@@ -51,6 +51,44 @@ public class JdbcCountryDaoTest implements WithAssertions {
 	private CountryDao countryDao;
 	
 	//
+	// Tests for countCountriesOfCollection()
+	//
+	
+	@Test
+	public void countCountriesOfCollectionWithEmptyCollection() {
+		// given
+		// when
+		long numberOfCountries = countryDao.countCountriesOfCollection(Random.id());
+		// then
+		assertThat(numberOfCountries).isEqualTo(0);
+	}
+	
+	@Test
+	@Sql(
+		scripts = {
+			"/db/users-coder.sql",
+			"/db/collections-coder.sql",
+			"/db/categories-sport.sql",
+			"/db/countries-italy.sql",
+			"/db/countries-france.sql",
+			"/db/series-4-italy-qty5.sql",
+			"/db/series-5-france-qty4.sql",
+			"/db/series-6-france-qty6.sql"
+		},
+		statements =  {
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
+				+ "VALUES (1, 4, 5), (1, 5, 4), (1, 6, 6)"
+		}
+	)
+	public void countCountriesOfCollectionWithMultipleSeriesFromEachCountry() {
+		// given
+		// when
+		long numberOfCountries = countryDao.countCountriesOfCollection(1);
+		// then
+		assertThat(numberOfCountries).isEqualTo(2);
+	}
+	
+	//
 	// Tests for getStatisticsOf()
 	//
 	
