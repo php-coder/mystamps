@@ -88,6 +88,32 @@ public class JdbcCountryDaoTest implements WithAssertions {
 		assertThat(numberOfCountries).isEqualTo(2);
 	}
 	
+	@Test
+	@Sql(
+		scripts = {
+			"/db/users-coder.sql",
+			"/db/collections-coder.sql",
+			"/db/categories-sport.sql",
+			"/db/series-2-sport-qty3.sql",
+			"/db/series-3-sport-qty7.sql"
+		},
+		statements =  {
+			"INSERT INTO collections_series(collection_id, series_id, number_of_stamps) "
+				+ "VALUES (1, 2, 3), (1, 3, 7)"
+		}
+	)
+	public void countCountriesOfCollectionWithSeriesFromUnknownCountries() {
+		// as countries are unknown, we assume the pessimistic scenario
+		// where all the series belong to the same country
+		
+		// given
+		long expectedNumberOfCountries = 1;
+		// when
+		long numberOfCountries = countryDao.countCountriesOfCollection(1);
+		// then
+		assertThat(numberOfCountries).isEqualTo(expectedNumberOfCountries);
+	}
+	
 	//
 	// Tests for getStatisticsOf()
 	//
