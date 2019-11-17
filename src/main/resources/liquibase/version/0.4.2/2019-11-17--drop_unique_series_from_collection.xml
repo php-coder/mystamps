@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+	
+	<!--
+		We have to create a non-existing index first in order to prevent
+		
+			ERROR 1025 (HY000): Error on rename of './mystamps/#sql-488_b7' to './mystamps/collections_series'
+			(errno: 150 - Foreign key constraint is incorrectly formed)
+		
+		from happening on MySQL.
+		
+		It occurs because fk_collections_series_collection_id index hasn't been created when the table was created.
+		MySQL is smart enough to understand that it can use uc_collections_series_collection_id_series_id
+		compound index instead. Now, when we want to remove this index, MySQL refuses an attempt as in this case
+		there will be no index for collection_id field. That's why we create it explicitly.
+	-->
+	<changeSet id="add-collections_series_series_id-index" author="php-coder" context="scheme" dbms="mysql">
+		
+		<createIndex tableName="collections_series" indexName="fk_collections_series_collection_id">
+			<column name="collection_id" />
+		</createIndex>
+		
+	</changeSet>
+	
+	<changeSet id="drop-unique-constraint-from-collections_series-table" author="php-coder" context="scheme">
+		
+		<dropUniqueConstraint
+			tableName="collections_series"
+			constraintName="uc_collections_series_collection_id_series_id" />
+		
+		<rollback
+			changeSetId="add-unique-constraint-to-collections_series-table"
+			changeSetAuthor="cssru"
+			changeSetPath="classpath:/liquibase/version/0.4/2016-01-04--unique_series_in_collection.xml" />
+		
+	</changeSet>
+	
+</databaseChangeLog>
