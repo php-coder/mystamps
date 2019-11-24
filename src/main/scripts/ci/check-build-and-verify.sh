@@ -93,7 +93,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
 			AFFECTS_PROPERTIES="$(echo "$MODIFIED_FILES"    |  grep -q '\.properties$' || echo 'no')"
 			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
-			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
+			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|prod|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
 			
 			if [ "$AFFECTS_POM_XML" = 'no' ]; then
 				POM_STATUS=skip
