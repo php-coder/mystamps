@@ -248,6 +248,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 
 	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
 		ansible-lint \
+			vagrant/provisioning/prod.yml \
 			vagrant/provisioning/vagrant.yml \
 			vagrant/provisioning/bootstrap.yml \
 			src/main/scripts/ci/ansible/deploy.yml \

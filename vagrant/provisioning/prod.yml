@@ -1,0 +1,40 @@
+---
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  vars:
+    profile: 'prod'
+  vars_files:
+    - './vars/prod.yml'
+
+  pre_tasks:
+
+  - name: Removing nano
+    apt:
+      package: nano
+      state: absent
+
+  - name: Creating /data directory
+    file:
+      path: /data
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+
+  roles:
+  - php-coder.oraclejdk
+  - mystamps-user
+  - { role: mystamps-app, tags: app }
+  - {
+      role: php-coder.nginx,
+      remove_default_vhost: yes,
+      state: stopped
+    }
+  - { role: mystamps-nginx, tags: ssl }
+  - {
+      role: mystamps-backup,
+      tags: backup,
+      when: profile == 'prod'
+    }
