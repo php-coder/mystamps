@@ -25,7 +25,7 @@ case "${1:-}" in
 	'mysql-backups')
 		PASSPHRASE="$PASSPHRASE" su mystamps 2>&1 \
 			-c "${DUPLICITY_CMD} --name=mysql-backups /data/backups ${MYSQL_BACKUPS_DST}"
-		su mystamps 2>&1 \
+		PASSPHRASE="$PASSPHRASE" su mystamps 2>&1 \
 			-c "duplicity remove-all-but-n-full 3 --force ${MYSQL_BACKUPS_DST}"
 		;;
 	*)
