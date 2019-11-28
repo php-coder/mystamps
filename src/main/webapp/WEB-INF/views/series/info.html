@@ -440,15 +440,15 @@
 								</div>
 								
 								<div class="col-sm-12" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-									<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-										<p th:text="#{t_series_in_collection}">
-											Series is part of your collection
-										</p>
-										<p>
+									<p th:text="#{t_series_in_collection}">
+										Series is part of your collection
+									</p>
+									<p>
+										<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
 											<input type="hidden" name="action" value="REMOVE" />
 											<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
-										</p>
-									</form>
+										</form>
+									</p>
 								</div>
 								
 								<!--/*/
