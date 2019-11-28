@@ -250,7 +250,7 @@ public class JdbcCollectionDao implements CollectionDao {
 		if (affected != 1) {
 			// CheckStyle: ignore LineLength for next 2 lines
 			LOG.warn(
-				"Unexpected number of affected rows after removing series #{} from collection of user #{}: %{}",
+				"Unexpected number of affected rows after removing series #{} from collection of user #{}: {}",
 				seriesId,
 				userId,
 				affected
