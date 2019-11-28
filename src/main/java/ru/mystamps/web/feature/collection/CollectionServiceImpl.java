@@ -86,10 +86,9 @@ public class CollectionServiceImpl implements CollectionService {
 		collectionDao.markAsModified(userId, new Date());
 		
 		log.info(
-			"Series #{} ({}) has been added to collection of user #{}",
+			"Series #{} ({}) has been added to collection",
 			dto.getSeriesId(),
-			formatSeriesInfo(collectionDto),
-			userId
+			formatSeriesInfo(collectionDto)
 		);
 	}
 	
@@ -103,7 +102,7 @@ public class CollectionServiceImpl implements CollectionService {
 		collectionDao.removeSeriesFromUserCollection(userId, seriesId);
 		collectionDao.markAsModified(userId, new Date());
 		
-		log.info("Series #{} has been removed from collection of user #{}", seriesId, userId);
+		log.info("Series #{} has been removed from collection", seriesId);
 	}
 	
 	@Override
