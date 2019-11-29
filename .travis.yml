@@ -26,7 +26,7 @@ before_script:
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
       npm install -g bootlint;
-      pip install --user html5validator robotframework-lint ansible==2.5.15 ansible-lint;
+      pip install --user html5validator==0.3.1 robotframework-lint ansible==2.5.15 ansible-lint;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
         gem install danger nokogiri --no-ri --no-rdoc;
       fi;
