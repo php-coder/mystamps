@@ -443,12 +443,10 @@
 									<p th:text="#{t_series_in_collection}">
 										Series is part of your collection
 									</p>
-									<p>
-										<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-											<input type="hidden" name="action" value="REMOVE" />
-											<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
-										</form>
-									</p>
+									<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+										<input type="hidden" name="action" value="REMOVE" />
+										<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
+									</form>
 								</div>
 								
 								<!--/*/
