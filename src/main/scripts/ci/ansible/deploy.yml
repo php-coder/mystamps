@@ -15,7 +15,6 @@
     stat:
       path: "{{ local_war_dir }}/mystamps.war"
       get_checksum: no
-      get_md5: no
     register: war_file
     become: no
     delegate_to: 127.0.0.1

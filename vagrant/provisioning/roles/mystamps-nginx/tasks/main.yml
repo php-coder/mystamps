@@ -24,7 +24,7 @@
     owner: root
     group: root
     mode: '0644'
-  with_items:
+  loop:
   - mystamps-http.conf
   - mystamps-ssl.conf
   - mystamps-static.conf
@@ -40,7 +40,7 @@
     owner: root
     group: root
     mode: '0644'
-  with_items:
+  loop:
   - 503.en.html
   - 503.ru.html
   notify:
@@ -60,7 +60,7 @@
     owner: root
     group: nginx
     mode: '0640'
-  with_items:
+  loop:
   - my-stamps.ru.key
   - my-stamps.ru.crt
   notify:

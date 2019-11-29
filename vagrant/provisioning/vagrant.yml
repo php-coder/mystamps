@@ -32,13 +32,10 @@
   - role: php-coder.oraclejdk
   - role: mystamps-user
   - role: mystamps-app
-  - {
-      role: php-coder.nginx,
-      remove_default_vhost: yes,
+  - role: php-coder.nginx
+    vars:
+      remove_default_vhost: yes
       state: stopped
-    }
   - role: mystamps-nginx
-  - {
-      role: mystamps-backup,
-      when: profile == 'prod'
-    }
+  - role: mystamps-backup
+    when: profile == 'prod'
