@@ -8,7 +8,7 @@ env:
     - SPRING_PROFILES_ACTIVE=postgres
   global:
     - MAVEN_OPTS='-Xss256k'
-   #- secure: "fBav56BzY+A+Vs1g9YSfo1oLDCO1rFrXl49lJkOA5/XpnsKEEs4lI2RcOzz0wiJKXFNgcliiAJWoYMI8Esqz+lkyFWan4ij5Co0UzJcytDuY+2o+jaqwx45DuDYPogABzT+hWjLCxQLLG46gUkChzT8kcvOOn6JxC7Ff8q5MnoM="
+    - secure: "fBav56BzY+A+Vs1g9YSfo1oLDCO1rFrXl49lJkOA5/XpnsKEEs4lI2RcOzz0wiJKXFNgcliiAJWoYMI8Esqz+lkyFWan4ij5Co0UzJcytDuY+2o+jaqwx45DuDYPogABzT+hWjLCxQLLG46gUkChzT8kcvOOn6JxC7Ff8q5MnoM="
 
 # travis_terminate is used for getting a fail-fast behavior and don't abort the execution of the Travis scripts.
 # See https://travis-ci.community/t/log-are-truncated-when-my-script-exits-abnormally/5878
