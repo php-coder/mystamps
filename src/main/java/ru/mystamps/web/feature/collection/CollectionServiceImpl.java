@@ -82,13 +82,14 @@ public class CollectionServiceImpl implements CollectionService {
 			collectionDto.setCurrency(dto.getCurrency().toString());
 		}
 		
-		collectionDao.addSeriesToUserCollection(collectionDto);
+		Integer seriesInstanceId = collectionDao.addSeriesToUserCollection(collectionDto);
 		collectionDao.markAsModified(userId, new Date());
 		
 		log.info(
-			"Series #{} ({}) has been added to collection",
+			"Series #{} ({}) has been added to collection: #{}",
 			dto.getSeriesId(),
-			formatSeriesInfo(collectionDto)
+			formatSeriesInfo(collectionDto),
+			seriesInstanceId
 		);
 	}
 	

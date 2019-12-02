@@ -219,7 +219,7 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
-	public void addSeriesToUserCollection(AddToCollectionDbDto dto) {
+	public Integer addSeriesToUserCollection(AddToCollectionDbDto dto) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", dto.getOwnerId());
 		params.put("series_id", dto.getSeriesId());
@@ -227,7 +227,14 @@ public class JdbcCollectionDao implements CollectionDao {
 		params.put("price", dto.getPrice());
 		params.put("currency", dto.getCurrency());
 		
-		int affected = jdbcTemplate.update(addSeriesToCollectionSql, params);
+		KeyHolder holder = new GeneratedKeyHolder();
+		
+		int affected = jdbcTemplate.update(
+			addSeriesToCollectionSql,
+			new MapSqlParameterSource(params),
+			holder,
+			JdbcUtils.ID_KEY_COLUMN
+		);
 		
 		// CheckStyle: ignore LineLength for next 3 lines
 		Validate.validState(
@@ -237,6 +244,8 @@ public class JdbcCollectionDao implements CollectionDao {
 			dto.getOwnerId(),
 			affected
 		);
+		
+		return holder.getKey().intValue();
 	}
 	
 	@SuppressWarnings("PMD.AvoidLiteralsInIfCondition")

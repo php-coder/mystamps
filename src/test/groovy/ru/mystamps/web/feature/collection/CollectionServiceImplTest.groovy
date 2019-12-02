@@ -194,7 +194,7 @@ class CollectionServiceImplTest extends Specification {
 				assert dto.seriesId == expectedSeriesId
 				assert dto.numberOfStamps == expectedNumberOfStamps
 				return true
-			})
+			}) >> Random.id()
 		and:
 			1 * collectionDao.markAsModified(
 				expectedUserId,

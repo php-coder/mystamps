@@ -34,7 +34,7 @@ public interface CollectionDao {
 	Integer add(AddCollectionDbDto collection);
 	void markAsModified(Integer userId, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
-	void addSeriesToUserCollection(AddToCollectionDbDto dto);
+	Integer addSeriesToUserCollection(AddToCollectionDbDto dto);
 	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);
 	CollectionInfoDto findCollectionInfoBySlug(String slug);
 }
