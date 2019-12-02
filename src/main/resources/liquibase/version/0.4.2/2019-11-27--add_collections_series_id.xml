@@ -5,16 +5,39 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 	
-	<changeSet id="add-collections_series-id-field" author="php-coder" context="scheme">
+	<changeSet id="add-collections_series-id-field" author="php-coder" context="scheme" dbms="h2">
 		
 		<addColumn tableName="collections_series">
-			<column name="id" type="INTEGER" autoIncrement="true" beforeColumn="collection_id" />
+			<column name="id" type="INTEGER" autoIncrement="true" />
 		</addColumn>
+		
+		<modifySql>
+			<append value=" FIRST" />
+		</modifySql>
+		
+	</changeSet>
+	
+	<changeSet author="php-coder" id="add-collections_series-id-pk" context="scheme" dbms="h2">
 		
 		<addPrimaryKey
 			tableName="collections_series"
 			columnNames="id"
 			constraintName="pk_collections_series_id" />
+		
+	</changeSet>
+	
+	<changeSet id="add-collections_series-id-field" author="php-coder" context="scheme" dbms="mysql,postgresql">
+		
+		<addColumn tableName="collections_series">
+			<column name="id" type="INTEGER" autoIncrement="true">
+				<constraints primaryKey="true" primaryKeyName="pk_collections_series_id" />
+			</column>
+		</addColumn>
+		
+		<modifySql dbms="mysql">
+			<!-- Workaround for: https://liquibase.jira.com/browse/CORE-2347 -->
+			<append value=" FIRST" />
+		</modifySql>
 		
 	</changeSet>
 	
