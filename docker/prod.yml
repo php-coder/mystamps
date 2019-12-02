@@ -18,6 +18,8 @@ services:
       - SERVER_SESSION_COOKIE_SECURE=false
     volumes:
       - ./application-prod.properties:/data/mystamps/application-prod.properties:ro
+      # to use a WAR file from filesystem and avoid to build an image every time
+      #- ../target/mystamps.war:/data/mystamps/mystamps.war:ro
     networks:
       - internal-network
     depends_on:
