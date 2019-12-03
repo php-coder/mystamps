@@ -209,9 +209,11 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		html5validator \
 			--root src/main/webapp/WEB-INF/views \
 			--no-langdetect \
-			--ignore-re 'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
+			--ignore-re \
+				'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
 				'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
 				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
+			--ignore \
 				'An "img" element must have an "alt" attribute' \
 				'Element "option" without attribute "label" must not be empty' \
 				'The "width" attribute on the "td" element is obsolete' \
