@@ -642,17 +642,14 @@ public class SeriesController {
 		model.put("solovyovNumbers", solovyovNumbers);
 		model.put("zagorskiNumbers", zagorskiNumbers);
 		
+		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
+		model.put("allowAddingImages", userCanAddImagesToSeries);
+
 		boolean isSeriesInCollection =
 			collectionService.isSeriesInCollection(currentUserId, seriesId);
-		
-		boolean userCanAddImagesToSeries =
-			isUserCanAddImagesToSeries(series);
-
 		model.put("isSeriesInCollection", isSeriesInCollection);
-		model.put("allowAddingImages", userCanAddImagesToSeries);
 		
 		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
-			
 			List<PurchaseAndSaleDto> purchasesAndSales =
 				seriesService.findPurchasesAndSales(seriesId);
 			model.put("purchasesAndSales", purchasesAndSales);
