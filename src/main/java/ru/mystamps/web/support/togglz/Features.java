@@ -30,6 +30,9 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SEARCH_IN_COLLECTION,
 
+	@Label("Use a country microservice for the country-related functions")
+	USE_COUNTRY_MICROSERVICE,
+	
 	@Label("/site/index: feature to check that Togglz works")
 	ALWAYS_DISABLED;
 	

@@ -19,8 +19,10 @@ package ru.mystamps.web.feature.country;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
@@ -52,13 +54,18 @@ public class CountryConfig {
 	@RequiredArgsConstructor
 	public static class Services {
 		
+		private final Environment env;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final RestTemplateBuilder restTemplateBuilder;
 		
 		@Bean
 		public CountryService countryService(CountryDao countryDao) {
-			return new CountryServiceImpl(
-				LoggerFactory.getLogger(CountryServiceImpl.class),
-				countryDao
+			return new TogglzWithFallbackCountryService(
+				new ApiCountryService(restTemplateBuilder, env),
+				new CountryServiceImpl(
+					LoggerFactory.getLogger(CountryServiceImpl.class),
+					countryDao
+				)
 			);
 		}
 		
