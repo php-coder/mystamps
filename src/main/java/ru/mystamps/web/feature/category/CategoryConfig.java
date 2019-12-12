@@ -26,8 +26,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 /**
  * Spring configuration that is required for using categories in an application.
  *
- * The beans are grouped into two classes to make possible to register a controller
- * and the services in the separated application contexts.
+ * The beans are grouped into different classes to make possible to register a controller
+ * and the services in the separate application contexts. DAOs have been extracted to use
+ * them independently from services in the tests.
  */
 @Configuration
 public class CategoryConfig {
@@ -52,15 +53,22 @@ public class CategoryConfig {
 	@RequiredArgsConstructor
 	public static class Services {
 		
-		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final CategoryDao categoryDao;
 		
 		@Bean
-		public CategoryService categoryService(CategoryDao categoryDao) {
+		public CategoryService categoryService() {
 			return new CategoryServiceImpl(
 				LoggerFactory.getLogger(CategoryServiceImpl.class),
 				categoryDao
 			);
 		}
+		
+	}
+	
+	@RequiredArgsConstructor
+	public static class Daos {
+		
+		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
 		public CategoryDao categoryDao() {

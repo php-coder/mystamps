@@ -27,13 +27,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import ru.mystamps.web.config.DaoConfig;
 import ru.mystamps.web.tests.Random;
 
 import java.util.Map;
 
 @JdbcTest
-// @todo #1143 Introduce a dedicated config for DAO classes
-@ContextConfiguration(classes = CategoryConfig.Services.class)
+@ContextConfiguration(classes = DaoConfig.class)
 @TestPropertySource(
 	properties = {
 		// don't load test data, start with an empty database

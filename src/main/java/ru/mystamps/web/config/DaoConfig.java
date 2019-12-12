@@ -20,10 +20,12 @@ package ru.mystamps.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.country.CountryConfig;
 
 @Configuration
 @Import({
+	CategoryConfig.Daos.class,
 	CountryConfig.Daos.class
 })
 public class DaoConfig {
