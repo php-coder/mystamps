@@ -19,7 +19,6 @@
 package ru.mystamps.web.feature.country;
 
 import org.assertj.core.api.WithAssertions;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+import ru.mystamps.web.config.DaoConfig;
 import ru.mystamps.web.tests.Random;
 
 import java.util.Map;
 
-// FIXME: deal with failing tests
-@Ignore
 @JdbcTest
-// LATER: use a single application context with DAOs (see #1150)
-@ContextConfiguration(classes = CountryConfig.Services.class)
+@ContextConfiguration(classes = DaoConfig.class)
 @TestPropertySource(
 	properties = {
 		// don't load test data, start with an empty database

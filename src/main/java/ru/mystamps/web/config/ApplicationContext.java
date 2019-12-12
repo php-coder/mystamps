@@ -28,6 +28,7 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 
 @Configuration
 @Import({
+	DaoConfig.class,
 	SecurityConfig.class,
 	ServicesConfig.class,
 	TaskExecutorConfig.class,

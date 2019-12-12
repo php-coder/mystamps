@@ -28,8 +28,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 /**
  * Spring configuration that is required for using countries in an application.
  *
- * The beans are grouped into two classes to make possible to register a controller
- * and the services in the separated application contexts.
+ * The beans are grouped into different classes to make possible to register a controller
+ * and the services in the separate application contexts. DAOs have been extracted to use
+ * them independently from services in the tests.
  */
 @Configuration
 public class CountryConfig {
@@ -54,12 +55,12 @@ public class CountryConfig {
 	@RequiredArgsConstructor
 	public static class Services {
 		
+		private final CountryDao countryDao;
 		private final Environment env;
-		private final NamedParameterJdbcTemplate jdbcTemplate;
 		private final RestTemplateBuilder restTemplateBuilder;
 		
 		@Bean
-		public CountryService countryService(CountryDao countryDao) {
+		public CountryService countryService() {
 			return new TogglzWithFallbackCountryService(
 				new ApiCountryService(restTemplateBuilder, env),
 				new CountryServiceImpl(
@@ -68,6 +69,13 @@ public class CountryConfig {
 				)
 			);
 		}
+		
+	}
+	
+	@RequiredArgsConstructor
+	public static class Daos {
+		
+		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
 		public CountryDao countryDao() {
