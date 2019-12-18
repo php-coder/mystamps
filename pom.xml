@@ -457,9 +457,6 @@
 	</parent>
 	
 	<properties>
-		<!-- Set JVM options for maven-surefire-plugin -->
-		<argLine>-Xss256k</argLine>
-		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<assertj.version>3.14.0</assertj.version>
 		
@@ -916,6 +913,12 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<disableXmlReport>${disableXmlReport}</disableXmlReport>
+					<!--
+						Workaround for a bug in surefire plugin: it doesn't respect sourceEncoding
+						and doesn't pass it into a forked process.
+						See: https://stackoverflow.com/questions/17656475/maven-source-encoding-in-utf-8-not-working
+					-->
+					<argLine>-Dfile.encoding=${project.build.sourceEncoding} -Xss256k</argLine>
 				</configuration>
 			</plugin>
 			
