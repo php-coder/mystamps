@@ -1,5 +1,6 @@
 0.x (upcoming release)
 - (infrastructure) all integration tests now pass on PostgreSQL
+- (infrastructure) migrate unit tests from Hamcrest to AssertJ
 
 0.4.1
 - (feature) add possibility for search series by catalog number in user's collection (contributed by Mukesh Katariya)
