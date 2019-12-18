@@ -23,6 +23,7 @@
     assert:
       that:
         war_file.stat.exists
+    quiet: yes
     become: no
     delegate_to: 127.0.0.1
 
