@@ -219,13 +219,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<!-- Dependencies which used only in prod environment -->
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>${commons-dbcp.version}</version>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${hikaricp.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- Dependencies which used only in prod environment -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -470,9 +471,6 @@
 		<codenarc.version>0.27.0</codenarc.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<commons-dbcp.version>1.4</commons-dbcp.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<commons-pool.version>1.5.4</commons-pool.version>
 		
 		<commons.lang.version>3.8</commons.lang.version>
@@ -498,6 +496,9 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<hikaricp.version>3.4.1</hikaricp.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
 		<htmlunit.version>2.36.0</htmlunit.version>
