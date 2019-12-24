@@ -8,7 +8,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="robots" content="noindex" />
-		<title th:text="|#{t_my_stamps}: #{t_suspicious_activities}|">My stamps: suspicious activities</title>
 		<link rel="shortcut icon" type="image/x-icon" href="../../../favicon.ico" th:href="${FAVICON_ICO}" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
@@ -158,38 +157,36 @@
 					</div>
 					
 					<div th:if="${not #lists.isEmpty(activities)}" class="row text-center">
-						<div class="col-sm-12">
-							<nav>
-								<ul class="pagination">
-									<li class="disabled" th:class="${pager.prev == null}? 'disabled'">
-										<span aria-hidden="true" th:if="${pager.prev == null}">&laquo;</span>
-										<!--/*/
-										<a href="#" aria-label="Previous"
-											th:if="${pager.prev != null}"
-											th:href="@{${SITE_EVENTS_PAGE}(page=${pager.prev})}">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-										/*/-->
-									</li>
-									<li class="active" th:each="item : ${pager.items}" th:class="${item == pager.currentPage}? 'active'">
-										<a href="#" th:href="@{${SITE_EVENTS_PAGE}(page=${item})}"
-											th:utext="|${item} &lt;span class='sr-only'&gt;(current)&lt;/span&gt;|">
-											1 <span class="sr-only">(current)</span>
-										</a>
-									</li>
-									<li class="disabled" th:class="${pager.next == null}? 'disabled'">
-										<span aria-hidden="true" th:if="${pager.next == null}">&raquo;</span>
-										<!--/*/
-										<a href="#" aria-label="Next"
-											th:if="${pager.next != null}"
-											th:href="@{${SITE_EVENTS_PAGE}(page=${pager.next})}">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-										/*/-->
-									</li>
-								</ul>
-							</nav>
-						</div>
+						<nav>
+							<ul class="pagination">
+								<li class="disabled" th:class="${pager.prev == null}? 'disabled'">
+									<span aria-hidden="true" th:if="${pager.prev == null}">&laquo;</span>
+									<!--/*/
+									<a href="#" aria-label="Previous"
+										th:if="${pager.prev != null}"
+										th:href="@{${SITE_EVENTS_PAGE}(page=${pager.prev})}">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+									/*/-->
+								</li>
+								<li class="active" th:each="item : ${pager.items}" th:class="${item == pager.currentPage}? 'active'">
+									<a href="#" th:href="@{${SITE_EVENTS_PAGE}(page=${item})}"
+										th:utext="|${item} &lt;span class='sr-only'&gt;(current)&lt;/span&gt;|">
+										1 <span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class="disabled" th:class="${pager.next == null}? 'disabled'">
+									<span aria-hidden="true" th:if="${pager.next == null}">&raquo;</span>
+									<!--/*/
+									<a href="#" aria-label="Next"
+										th:if="${pager.next != null}"
+										th:href="@{${SITE_EVENTS_PAGE}(page=${pager.next})}">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+									/*/-->
+								</li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

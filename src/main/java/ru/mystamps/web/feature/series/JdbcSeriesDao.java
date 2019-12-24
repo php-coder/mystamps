@@ -34,12 +34,6 @@ import java.util.List;
 import java.util.Map;
 
 // FIXME: move stamps related methods to separate interface (#88)
-@SuppressWarnings({
-	"PMD.AvoidDuplicateLiterals",
-	"PMD.TooManyMethods",
-	"PMD.TooManyFields",
-	"PMD.LongVariable"
-})
 @RequiredArgsConstructor
 public class JdbcSeriesDao implements SeriesDao {
 	

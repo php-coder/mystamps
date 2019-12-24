@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.country;
 
+import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,6 @@ import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
 import ru.mystamps.web.support.spring.security.CurrentUser;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 

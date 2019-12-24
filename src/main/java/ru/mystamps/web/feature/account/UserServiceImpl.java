@@ -28,6 +28,7 @@ import ru.mystamps.web.feature.collection.CollectionService;
 import java.util.Date;
 import java.util.Locale;
 
+import static ru.mystamps.web.feature.account.UserDetails.Role.ADMIN;
 import static ru.mystamps.web.feature.account.UserDetails.Role.USER;
 
 @RequiredArgsConstructor
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
 		
 		AddUserDbDto user = new AddUserDbDto();
 		user.setLogin(login);
-		user.setRole(USER);
+		//user.setRole(USER);
 		user.setName(finalName);
 		user.setEmail(email);
 		user.setRegisteredAt(registrationDate);

@@ -7,7 +7,7 @@ Suite Teardown  Close Browser
 Force Tags      series  search  logic
 
 *** Test Cases ***
-Search series by non-existing catalog number
+Search series by non-existing catalog number 
 	Input Text                      id:catalogNumber  888
 	Select Random Option From List  id:catalogName
 	Submit Form                     id:search-series-form

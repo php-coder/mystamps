@@ -149,13 +149,6 @@
 	</Match>
 	<Match>
 		<!--
-			It's ok, that we're don't override parent's equals() method.
-		-->
-		<Class name="ru.mystamps.web.support.spring.security.CustomUserDetails" />
-		<Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS" />
-	</Match>
-	<Match>
-		<!--
 			I don't care about a serialVersionUID field.
 		-->
 		<Bug pattern="SE_NO_SERIALVERSIONID" />

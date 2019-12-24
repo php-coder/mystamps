@@ -109,7 +109,7 @@ class CollectionServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'FactoryMethodName', 'UnnecessaryReturnKeyword'])
 	def 'createCollection() should assign updated at to current date'() {
 		when:
-			service.createCollection(Random.userId(), 'any-login')
+			service.createCollection(Random.userId(), "any-login")
 		then:
 			1 * collectionDao.add({ AddCollectionDbDto collection ->
 				assert DateUtils.roughlyEqual(collection?.updatedAt, new Date())

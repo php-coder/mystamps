@@ -13,7 +13,7 @@ Anonymous user cannot create series
 	Element Text Should Be  id:error-msg  Forbidden
 
 Opening a page of non-existing series show an error
-	Go To                             ${SITE_URL}/series/999
+	Go To                             ${SITE_URL}/series/1
 	Element Text Should Be            id:error-code  404
 	Element Text Should Match Regexp  id:error-msg   Requested page[\\n\\r]+not found
 
