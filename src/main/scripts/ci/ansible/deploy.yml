@@ -33,7 +33,6 @@
       apikey: "{{ uptimerobot.apikey }}"
       state: paused
     when: uptimerobot is defined and uptimerobot.monitorid and uptimerobot.apikey
-    ignore_errors: yes
 
   # we can't use systemd module here because our sudoers allows to execute only exact commands
   - name: Stopping service # noqa 301 ignoring this because we're always stopping service before deploy
@@ -60,5 +59,4 @@
       apikey: "{{ uptimerobot.apikey }}"
       state: started
     when: uptimerobot is defined and uptimerobot.monitorid and uptimerobot.apikey
-    ignore_errors: yes
 
