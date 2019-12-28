@@ -15,5 +15,5 @@ spec:
         app: mystamps
     spec:
       containers:
-      - image: phpcoder/mystamps:0.4.1
+      - image: phpcoder/mystamps:0.4.2
         name: mystamps
