@@ -14,7 +14,9 @@
   - name: Getting info about WAR file
     stat:
       path: "{{ local_war_dir }}/mystamps.war"
+      get_attributes: no
       get_checksum: no
+      get_mime: no
     register: war_file
     become: no
     delegate_to: 127.0.0.1
