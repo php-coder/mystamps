@@ -29,9 +29,14 @@ import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({
+	"PMD.TooManyMethods",
+	// complains on "Series id must be non null"
+	"PMD.AvoidDuplicateLiterals"
+})
 public class CollectionServiceImpl implements CollectionService {
 	
 	private final Logger log;
@@ -96,14 +101,22 @@ public class CollectionServiceImpl implements CollectionService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
-	public void removeFromCollection(Integer userId, Integer seriesId) {
+	public void removeFromCollection(Integer userId, Integer seriesId, Integer seriesInstanceId) {
 		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(seriesInstanceId != null, "Series instance id must be non null");
 		
-		collectionDao.removeSeriesFromUserCollection(userId, seriesId);
+		collectionDao.removeSeriesFromUserCollection(userId, seriesInstanceId);
 		collectionDao.markAsModified(userId, new Date());
 		
-		log.info("Series #{} has been removed from collection", seriesId);
+		// The method accepts seriesId only for logging it.
+		// As seriesId is provided by user and we don't check whether it's related to
+		// seriesInstanceId, we can't fully rely on that but for the logging purposes it's enough
+		log.info(
+			"Series #{}: instance #{} has been removed from collection",
+			seriesId,
+			seriesInstanceId
+		);
 	}
 	
 	@Override
@@ -117,6 +130,17 @@ public class CollectionServiceImpl implements CollectionService {
 		}
 		
 		return collectionDao.isSeriesInUserCollection(userId, seriesId);
+	}
+	
+	// @todo #1123 CollectionService.findSeriesInstances(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.UPDATE_COLLECTION)
+	public Map<Integer, Integer> findSeriesInstances(Integer userId, Integer seriesId) {
+		Validate.isTrue(userId != null, "User id must be non null");
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return collectionDao.findSeriesInstances(userId, seriesId);
 	}
 	
 	@Override

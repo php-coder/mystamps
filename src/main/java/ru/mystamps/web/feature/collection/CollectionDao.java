@@ -21,6 +21,7 @@ import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionDao {
@@ -34,6 +35,7 @@ public interface CollectionDao {
 	Integer add(AddCollectionDbDto collection);
 	void markAsModified(Integer userId, Date updatedAt);
 	boolean isSeriesInUserCollection(Integer userId, Integer seriesId);
+	Map<Integer, Integer> findSeriesInstances(Integer userId, Integer seriesId);
 	Integer addSeriesToUserCollection(AddToCollectionDbDto dto);
 	void removeSeriesFromUserCollection(Integer userId, Integer seriesId);
 	CollectionInfoDto findCollectionInfoBySlug(String slug);

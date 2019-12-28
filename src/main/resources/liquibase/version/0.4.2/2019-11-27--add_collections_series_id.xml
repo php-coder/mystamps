@@ -41,4 +41,14 @@
 		
 	</changeSet>
 	
+	<changeSet id="add-series-3-to-collection-once-more" author="php-coder" context="test-data">
+		
+		<insert tableName="collections_series">
+			<column name="collection_id" valueComputed="(SELECT id FROM collections WHERE slug = 'seriesowner')" />
+			<column name="series_id" valueComputed="(SELECT id FROM series WHERE quantity = 3 ORDER BY id LIMIT 1)" />
+			<column name="number_of_stamps" valueNumeric="2" />
+		</insert>
+		
+	</changeSet>
+	
 </databaseChangeLog>

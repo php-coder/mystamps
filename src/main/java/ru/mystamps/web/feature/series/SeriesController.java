@@ -412,6 +412,7 @@ public class SeriesController {
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
+		redirectAttributes.addFlashAttribute("justAddedNumberOfStamps", form.getNumberOfStamps());
 
 		String collectionSlug = currentUserDetails.getUserCollectionSlug();
 		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
@@ -420,6 +421,7 @@ public class SeriesController {
 	@PostMapping(path = SeriesUrl.INFO_SERIES_PAGE, params = "action=REMOVE")
 	public String removeFromCollection(
 		@PathVariable("id") Integer seriesId,
+		@RequestParam(name = "id", defaultValue = "0") Integer seriesInstanceId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response)
@@ -430,6 +432,11 @@ public class SeriesController {
 			return null;
 		}
 		
+		if (seriesInstanceId == 0) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return null;
+		}
+		
 		boolean seriesExists = seriesService.isSeriesExist(seriesId);
 		if (!seriesExists) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -437,7 +444,7 @@ public class SeriesController {
 		}
 		
 		Integer userId = currentUserDetails.getUserId();
-		collectionService.removeFromCollection(userId, seriesId);
+		collectionService.removeFromCollection(userId, seriesId, seriesInstanceId);
 		
 		redirectAttributes.addFlashAttribute("justRemovedSeries", true);
 		
@@ -644,10 +651,12 @@ public class SeriesController {
 		
 		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
-
-		boolean isSeriesInCollection =
-			collectionService.isSeriesInCollection(currentUserId, seriesId);
-		model.put("isSeriesInCollection", isSeriesInCollection);
+		
+		if (SecurityContextUtils.hasAuthority(Authority.UPDATE_COLLECTION)) {
+			Map<Integer, Integer> seriesInstances =
+				collectionService.findSeriesInstances(currentUserId, seriesId);
+			model.put("seriesInstances", seriesInstances);
+		}
 		
 		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
 			List<PurchaseAndSaleDto> purchasesAndSales =

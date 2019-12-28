@@ -1,4 +1,5 @@
 0.x (upcoming release)
+- (feature)        users can add multiple instances of a series into a collection
 - (infrastructure) all integration tests now pass on PostgreSQL
 - (infrastructure) migrate unit tests from Hamcrest to AssertJ
 

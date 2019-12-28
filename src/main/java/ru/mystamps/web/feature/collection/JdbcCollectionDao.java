@@ -23,12 +23,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.support.spring.jdbc.MapIntegerIntegerResultSetExtractor;
 
 import java.util.Collections;
 import java.util.Date;
@@ -40,6 +42,9 @@ import java.util.Map;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCollectionDao implements CollectionDao {
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
+	
+	private static final ResultSetExtractor<Map<Integer, Integer>> INSTANCES_COUNTER_EXTRACTOR =
+		new MapIntegerIntegerResultSetExtractor("id", "number_of_stamps");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -73,11 +78,14 @@ public class JdbcCollectionDao implements CollectionDao {
 	@Value("${collection.is_series_in_collection}")
 	private String isSeriesInUserCollectionSql;
 	
+	@Value("${collection.find_series_instances}")
+	private String findSeriesInstancesSql;
+	
 	@Value("${collection.add_series_to_collection}")
 	private String addSeriesToCollectionSql;
 	
-	@Value("${collection.remove_series_from_collection}")
-	private String removeSeriesFromCollectionSql;
+	@Value("${collection.remove_series_instance_from_collection}")
+	private String removeSeriesInstanceSql;
 	
 	@Value("${collection.find_info_by_slug}")
 	private String findCollectionInfoBySlugSql;
@@ -219,6 +227,19 @@ public class JdbcCollectionDao implements CollectionDao {
 	}
 	
 	@Override
+	public Map<Integer, Integer> findSeriesInstances(Integer userId, Integer seriesId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("user_id", userId);
+		params.put("series_id", seriesId);
+		
+		return jdbcTemplate.query(
+			findSeriesInstancesSql,
+			params,
+			INSTANCES_COUNTER_EXTRACTOR
+		);
+	}
+	
+	@Override
 	public Integer addSeriesToUserCollection(AddToCollectionDbDto dto) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("user_id", dto.getOwnerId());
@@ -250,17 +271,17 @@ public class JdbcCollectionDao implements CollectionDao {
 	
 	@SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
 	@Override
-	public void removeSeriesFromUserCollection(Integer userId, Integer seriesId) {
+	public void removeSeriesFromUserCollection(Integer userId, Integer seriesInstanceId) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("id", seriesInstanceId);
 		params.put("user_id", userId);
-		params.put("series_id", seriesId);
 		
-		int affected = jdbcTemplate.update(removeSeriesFromCollectionSql, params);
+		int affected = jdbcTemplate.update(removeSeriesInstanceSql, params);
 		if (affected != 1) {
 			// CheckStyle: ignore LineLength for next 2 lines
 			LOG.warn(
-				"Unexpected number of affected rows after removing series #{} from collection of user #{}: {}",
-				seriesId,
+				"Unexpected number of affected rows after removing series instance #{} from collection of user #{}: {}",
+				seriesInstanceId,
 				userId,
 				affected
 			);

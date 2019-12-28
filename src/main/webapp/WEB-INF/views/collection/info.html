@@ -141,7 +141,8 @@
 										th:if="${series.quantity != series.numberOfStamps}"
 										th:text="#{t_m_out_of_n(${series.numberOfStamps}, ${series.quantity})}"></span>
 									/*/-->
-									<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id}" class="label label-success">New</span>
+									<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id and justAddedNumberOfStamps == series.NumberOfStamps}" class="label label-success">New</span>
+									<!--/* @todo #1123 /collection/{slug}: show "New" badge only once */-->
 								</li>
 								<li>
 									<a href="../category/info.html">Animals, Italy, 22&nbsp;stamps</a>

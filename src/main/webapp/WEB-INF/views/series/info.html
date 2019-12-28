@@ -366,9 +366,13 @@
 										th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}"
 										th:object="${addToCollectionForm}">
 
+										<p id="series-status-msg" th:unless="${#maps.isEmpty(seriesInstances)}" th:text="|#{t_series_in_collection}:|">
+											You already have this series. Add another one instance:
+										</p>
+										
 										<!--/*/
-										<p th:if="${not isSeriesInCollection}" th:text="#{t_series_not_in_collection}">
-											Series isn't part of your collection
+										<p id="series-status-msg" th:if="${#maps.isEmpty(seriesInstances)}" th:text="|#{t_series_not_in_collection}:|">
+											You don't have this series. Add one instance:
 										</p>
 										/*/-->
 										
@@ -439,14 +443,34 @@
 									</form>
 								</div>
 								
-								<div class="col-sm-12" th:if="${isSeriesInCollection}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
-									<p th:text="#{t_series_in_collection}">
-										Series is part of your collection
-									</p>
-									<form id="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+								<div class="col-sm-12" th:if="${not #maps.isEmpty(seriesInstances)}" sec:authorize="hasAuthority('UPDATE_COLLECTION')">
+									<!--/*/
+									<th:block th:each="entry : ${seriesInstances}" th:with="instanceId=${entry.key},numberOfStamps=${entry.value}">
+									/*/-->
+										<form class="remove-series-form" method="post" action="../collection/info.html" th:action="@{${INFO_SERIES_PAGE}(id=${series.id})}">
+											<input type="hidden" name="id" th:value="${instanceId}" />
+											<input type="hidden" name="action" value="REMOVE" />
+											<p>
+												<input type="submit" class="btn btn-xs btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
+												<span class="label label-default"
+													th:if="${series.quantity != numberOfStamps}"
+													th:text="#{t_m_out_of_n(${numberOfStamps}, ${series.quantity})}">
+													3 out of 7
+												</span>
+											</p>
+										</form>
+									<!--/*/
+									</th:block>
+									/*/-->
+									<!--/*-->
+									<form class="remove-series-form" method="post" action="../collection/info.html">
+										<input type="hidden" name="id" value="1" />
 										<input type="hidden" name="action" value="REMOVE" />
-										<input type="submit" class="btn btn-danger" value="Remove from collection" th:value="#{t_remove_from_collection}" />
+										<p>
+											<input type="submit" class="btn btn-xs btn-danger" value="Remove from collection" />
+										</p>
 									</form>
+									<!--*/-->
 								</div>
 								
 								<!--/*/

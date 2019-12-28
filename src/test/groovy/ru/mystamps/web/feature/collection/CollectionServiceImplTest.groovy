@@ -211,7 +211,7 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'removeFromCollection() should throw exception when user id is null'() {
 		when:
-			service.removeFromCollection(null, Random.id())
+			service.removeFromCollection(null, Random.id(), Random.id())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'User id must be non null'
@@ -219,21 +219,30 @@ class CollectionServiceImplTest extends Specification {
 	
 	def 'removeFromCollection() should throw exception when series id is null'() {
 		when:
-			service.removeFromCollection(Random.userId(), null)
+			service.removeFromCollection(Random.userId(), null, Random.id())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series id must be non null'
 	}
 	
+	def 'removeFromCollection() should throw exception when series instance id is null'() {
+		when:
+			service.removeFromCollection(Random.userId(), Random.id(), null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series instance id must be non null'
+	}
+	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'removeFromCollection() should remove series from collection and mark it as modified'() {
+	def 'removeFromCollection() should remove series instance from collection and mark it as modified'() {
 		given:
 			Integer expectedUserId = Random.userId()
 			Integer expectedSeriesId = Random.id()
+			Integer expectedSeriesInstanceId = Random.id()
 		when:
-			service.removeFromCollection(expectedUserId, expectedSeriesId)
+			service.removeFromCollection(expectedUserId, expectedSeriesId, expectedSeriesInstanceId)
 		then:
-			1 * collectionDao.removeSeriesFromUserCollection(expectedUserId, expectedSeriesId)
+			1 * collectionDao.removeSeriesFromUserCollection(expectedUserId, expectedSeriesInstanceId)
 		and:
 			1 * collectionDao.markAsModified(
 				expectedUserId,

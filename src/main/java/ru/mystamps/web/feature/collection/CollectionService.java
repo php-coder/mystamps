@@ -21,13 +21,15 @@ import ru.mystamps.web.common.LinkEntityDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("PMD.TooManyMethods")
 public interface CollectionService {
 	void createCollection(Integer ownerId, String ownerLogin);
 	void addToCollection(Integer userId, AddToCollectionDto dto);
-	void removeFromCollection(Integer userId, Integer seriesId);
+	void removeFromCollection(Integer userId, Integer seriesId, Integer seriesInstanceId);
 	boolean isSeriesInCollection(Integer userId, Integer seriesId);
+	Map<Integer, Integer> findSeriesInstances(Integer userId, Integer seriesId);
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
 	long countSeriesOf(Integer collectionId);
