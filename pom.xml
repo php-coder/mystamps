@@ -460,9 +460,6 @@
 		<codenarc.plugin.version>0.22-1</codenarc.plugin.version>
 		<codenarc.version>0.27.0</codenarc.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
-		<commons-pool.version>1.5.4</commons-pool.version>
-		
 		<commons.lang.version>3.8</commons.lang.version>
 		<commons.text.version>1.4</commons.text.version>
 		<compiler.plugin.version>3.7.0</compiler.plugin.version>
