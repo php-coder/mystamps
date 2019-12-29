@@ -447,8 +447,12 @@
 		<version>1.5.22.RELEASE</version>
 	</parent>
 	
+	<!--
+		All default versions from Spring Boot can be found there:
+		https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml
+	-->
 	<properties>
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<assertj.version>3.14.0</assertj.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class -->
@@ -475,19 +479,19 @@
 		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<groovy.version>2.0.8</groovy.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<h2.version>1.4.199</h2.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<hikaricp.version>3.4.1</hikaricp.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<htmlunit.version>2.36.0</htmlunit.version>
 		
 		<jacoco.plugin.version>0.8.2</jacoco.plugin.version>
@@ -498,13 +502,13 @@
 		
 		<javadoc.plugin.version>3.0.1</javadoc.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-mail.version>1.5.4</javax-mail.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-validation.version>1.1.0.Final</javax-validation.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<jetty.version>9.2.28.v20190418</jetty.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class -->
@@ -512,27 +516,27 @@
 		
 		<jsoup.version>1.12.1</jsoup.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<junit.version>4.12</junit.version>
 		
 		<license.plugin.version>3.0</license.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<liquibase.version>3.5.5</liquibase.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<lombok.version>1.18.6</lombok.version>
 		
 		<minify.plugin.version>1.7.6</minify.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<mysql.version>5.1.46</mysql.version>
 		
 		<native2ascii.plugin.version>2.0.1</native2ascii.plugin.version>
 		<owasp-plugin.version>3.0.2</owasp-plugin.version>
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
@@ -547,23 +551,23 @@
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.5</selectizejs.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<selenium-htmlunit.version>2.36.0</selenium-htmlunit.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<selenium.version>3.141.59</selenium.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<servlet-api.version>3.1.0</servlet-api.version>
 		
 		<skipUnitTests>false</skipUnitTests>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<slf4j.version>1.7.26</slf4j.version>
 		
 		<sortpom.plugin.version>2.5.0</sortpom.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<spock.version>1.0-groovy-2.0</spock.version>
 		
 		<spotbugs.plugin.version>3.1.11</spotbugs.plugin.version>
@@ -574,12 +578,12 @@
 		<surefire.plugin.version>2.22.0</surefire.plugin.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 		
 		<thymeleaf.togglz.version>2.0.1.RELEASE</thymeleaf.togglz.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml) -->
+		<!-- Redefine default value from spring-boot-dependencies -->
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
 		
 		<togglz.version>2.6.1.Final</togglz.version>
