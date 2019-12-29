@@ -431,16 +431,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!--
-			For ConfigFileApplicationContextInitializer class.
-			https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-test/pom.xml
-		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.togglz</groupId>
 			<artifactId>togglz-testing</artifactId>
