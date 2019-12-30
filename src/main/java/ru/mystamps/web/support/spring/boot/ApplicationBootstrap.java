@@ -34,7 +34,7 @@ import ru.mystamps.web.config.DispatcherServletContext;
 	ApplicationContext.class,
 	DispatcherServletContext.class,
 	ThymeleafViewResolverInitializingBean.class,
-	JettyServletContainerCustomizer.class,
+	JettyWebServerFactoryCustomizer.class,
 	ErrorPagesCustomizer.class
 })
 public class ApplicationBootstrap {

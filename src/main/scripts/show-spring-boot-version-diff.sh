@@ -12,7 +12,9 @@ set -o pipefail
 CURRENT_DIR="$(dirname "$0")"
 PROJECT_POM="$CURRENT_DIR/../../../pom.xml"
 SPRING_VERSION="$(grep -FA1 '<artifactId>spring-boot-starter-parent' "$PROJECT_POM" | awk -F'[<>]' '/<version>/{print $3}')"
-SPRING_POM="https://raw.githubusercontent.com/spring-projects/spring-boot/v$SPRING_VERSION/spring-boot-dependencies/pom.xml"
+
+# @todo #869 show-spring-boot-version-diff.sh: properly handle recursive properties
+SPRING_POM="https://raw.githubusercontent.com/spring-projects/spring-boot/v$SPRING_VERSION/spring-boot-project/spring-boot-dependencies/pom.xml"
 
 printf "Comparing with Spring Boot %s (project vs spring versions)\\n\\n" "$SPRING_VERSION"
 

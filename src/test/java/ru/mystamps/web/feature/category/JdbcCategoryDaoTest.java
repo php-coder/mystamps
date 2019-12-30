@@ -37,10 +37,10 @@ import java.util.Map;
 @TestPropertySource(
 	properties = {
 		// don't load test data, start with an empty database
-		"liquibase.contexts=scheme,init-data",
+		"spring.liquibase.contexts=scheme,init-data",
 		// overrides settings from application-test.properties to keep the console clean,
 		// comment this out when you need to debug tests. See also logback-test.xml
-		"logging.level.=WARN", "logging.level.ru.mystamps=WARN"
+		"logging.level.root=WARN", "logging.level.ru.mystamps=WARN"
 	},
 	// @todo #1143 Improve a way of importing properties files in the tests
 	locations = "/sql/category_dao_queries.properties")

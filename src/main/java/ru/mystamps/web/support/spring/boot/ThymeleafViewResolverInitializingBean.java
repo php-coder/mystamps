@@ -26,7 +26,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
 import ru.mystamps.web.feature.collection.CollectionUrl;

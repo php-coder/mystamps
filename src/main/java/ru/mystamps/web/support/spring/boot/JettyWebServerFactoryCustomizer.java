@@ -22,14 +22,14 @@ import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.jetty.JettyServerCustomizer;
+import org.springframework.boot.web.embedded.jetty.JettyServerCustomizer;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JettyServletContainerCustomizer implements EmbeddedServletContainerCustomizer {
+public class JettyWebServerFactoryCustomizer
+	implements WebServerFactoryCustomizer<JettyServletWebServerFactory> {
 	
 	private static final JettyServerCustomizer JETTY_CUSTOMIZER = new JettyServerCustomizer() {
 		@Override
@@ -52,12 +52,8 @@ public class JettyServletContainerCustomizer implements EmbeddedServletContainer
 	};
 	
 	@Override
-	public void customize(ConfigurableEmbeddedServletContainer container) {
-		if (container instanceof JettyEmbeddedServletContainerFactory) {
-			JettyEmbeddedServletContainerFactory jetty =
-				(JettyEmbeddedServletContainerFactory)container;
-			jetty.addServerCustomizers(JETTY_CUSTOMIZER);
-		}
+	public void customize(JettyServletWebServerFactory factory) {
+			factory.addServerCustomizers(JETTY_CUSTOMIZER);
 	}
 	
 }

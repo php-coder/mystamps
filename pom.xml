@@ -49,7 +49,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 		</dependency>
@@ -66,7 +66,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -78,19 +78,13 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.tomcat</groupId>
-					<artifactId>tomcat-jdbc</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
@@ -110,19 +104,19 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-security/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-security/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-test/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-test/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -143,22 +137,26 @@
 					<groupId>org.hamcrest</groupId>
 					<artifactId>hamcrest-library</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.xmlunit</groupId>
+					<artifactId>xmlunit-core</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>nz.net.ultraq.thymeleaf</groupId>
-					<artifactId>thymeleaf-layout-dialect</artifactId>
+					<groupId>org.thymeleaf.extras</groupId>
+					<artifactId>thymeleaf-extras-java8time</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -196,9 +194,9 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/?v=5.2#validator-annotation-processor -->
+		<!-- https://docs.jboss.org/hibernate/validator/6.0/reference/en-US/html_single/#validator-annotation-processor -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator-annotation-processor</artifactId>
 			<version>${hibernate-validator.version}</version>
 			<scope>provided</scope>
@@ -265,8 +263,8 @@
 		
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>${thymeleaf-extras-springsecurity4.version}</version>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>${thymeleaf-extras-springsecurity.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -422,6 +420,7 @@
 		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -440,16 +439,16 @@
 		
 	</dependencies>
 	
+	<!-- https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
 	<parent>
-		<!-- https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.22.RELEASE</version>
+		<version>2.0.9.RELEASE</version>
 	</parent>
 	
 	<!--
 		All default versions from Spring Boot can be found there:
-		https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-dependencies/pom.xml
+		https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml
 	-->
 	<properties>
 		<!-- Redefine default value from spring-boot-dependencies -->
@@ -486,7 +485,7 @@
 		<h2.version>1.4.199</h2.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<hibernate-validator.version>5.4.2.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.0.16.Final</hibernate-validator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<hikaricp.version>3.4.1</hikaricp.version>
@@ -497,19 +496,23 @@
 		<jacoco.plugin.version>0.8.2</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
+		<!--
+			Redefine default value from spring-boot-starter-parent:
+			https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+		-->
 		<java.version>1.8</java.version>
 		
 		<javadoc.plugin.version>3.0.1</javadoc.plugin.version>
+		<javassist.version>3.21.0-GA</javassist.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-mail.version>1.5.4</javax-mail.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<javax-validation.version>1.1.0.Final</javax-validation.version>
+		<javax-validation.version>2.0.1.Final</javax-validation.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<jetty.version>9.2.28.v20190418</jetty.version>
+		<jetty.version>9.4.19.v20190610</jetty.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class -->
 		<jquery.version>1.9.1</jquery.version>
@@ -567,19 +570,20 @@
 		
 		<sortpom.plugin.version>2.5.0</sortpom.plugin.version>
 		
-		<!-- Redefine default value from spring-boot-dependencies -->
 		<spock.version>1.0-groovy-2.0</spock.version>
-		
 		<spotbugs.plugin.version>3.1.11</spotbugs.plugin.version>
 		
-		<!-- Define default value for spring-boot-starter-parent (https://github.com/spring-projects/spring-boot/blob/v1.5.22.RELEASE/spring-boot-starters/spring-boot-starter-parent/pom.xml) -->
+		<!--
+			Define default value for spring-boot-starter-parent:
+			https://github.com/spring-projects/spring-boot/blob/v2.0.9.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+		-->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		
 		<surefire.plugin.version>2.22.0</surefire.plugin.version>
 		<thumbnailator.version>0.4.8</thumbnailator.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+		<thymeleaf-extras-springsecurity.version>3.0.4.RELEASE</thymeleaf-extras-springsecurity.version>
 		
 		<thymeleaf.togglz.version>2.0.1.RELEASE</thymeleaf.togglz.version>
 		
@@ -785,9 +789,8 @@
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<debug>false</debug>
-					<failOnWarning>true</failOnWarning>
-					<!-- Required for using method's parameters inside of @PreAuthorize expressions -->
-					<parameters>true</parameters>
+					<!-- @todo #869 Fix compilation warnings and enable failOnWarning again -->
+					<!--<failOnWarning>true</failOnWarning>-->
 					<!-- Required for ErrorProne -->
 					<!-- @todo #971 Document ErrorProne tool -->
 					<compilerArgs>

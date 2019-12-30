@@ -15,7 +15,7 @@ services:
       # override password from application-prod.properties to be the same as in db
       - SPRING_DATASOURCE_PASSWORD=secret
       # only for testing locally. See also: https://github.com/php-coder/mystamps/issues/670
-      - SERVER_SESSION_COOKIE_SECURE=false
+      - SERVER_SERVLET_SESSION_COOKIE_SECURE=false
     volumes:
       - ./application-prod.properties:/data/mystamps/application-prod.properties:ro
       # to use a WAR file from filesystem and avoid to build an image every time

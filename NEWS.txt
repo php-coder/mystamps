@@ -1,4 +1,5 @@
 0.x (upcoming release)
+- (infrastructure) Migrate to Spring Boot 2
 
 0.4.2
 - (feature)        users can add multiple instances of a series into a collection

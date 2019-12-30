@@ -23,7 +23,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -85,9 +84,6 @@ public class EventsConfig {
 		);
 	}
 	
-	// This bean has logic that access database. To ensure that all migrations have been applied
-	// we need this dependency. This annotation shouldn't be needed in Spring Boot 2.
-	@DependsOn("liquibase")
 	@Bean
 	public ApplicationListener<DownloadingSucceeded> downloadingSucceededEventListener(
 		SiteParserService siteParserService,
