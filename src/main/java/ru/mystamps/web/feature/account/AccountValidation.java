@@ -39,6 +39,8 @@ public final class AccountValidation {
 	static final int PASSWORD_MAX_LENGTH = 72;
 	
 	static final int EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;
+	// Require 2+ level domains in e-mails.
+	static final String EMAIL_2ND_LEVEL_DOMAIN_REGEXP = ".+@.+\\..+";
 	
 	static final int ACT_KEY_LENGTH = UsersActivation.ACTIVATION_KEY_LENGTH;
 	static final String ACT_KEY_REGEXP = "[0-9a-z]+";

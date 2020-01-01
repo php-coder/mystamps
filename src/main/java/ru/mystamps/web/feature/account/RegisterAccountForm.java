@@ -19,13 +19,14 @@ package ru.mystamps.web.feature.account;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.mystamps.web.support.beanvalidation.Email;
 import ru.mystamps.web.support.beanvalidation.Group;
 
 import javax.validation.GroupSequence;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import static ru.mystamps.web.feature.account.AccountValidation.EMAIL_2ND_LEVEL_DOMAIN_REGEXP;
 import static ru.mystamps.web.feature.account.AccountValidation.EMAIL_MAX_LENGTH;
 
 @Getter
@@ -40,7 +41,7 @@ public class RegisterAccountForm implements RegisterAccountDto {
 	
 	@NotEmpty(groups = Group.Level1.class)
 	@Size(max = EMAIL_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
-	@Email(groups = Group.Level3.class)
+	@Email(regexp = EMAIL_2ND_LEVEL_DOMAIN_REGEXP, groups = Group.Level3.class)
 	private String email;
 	
 }
