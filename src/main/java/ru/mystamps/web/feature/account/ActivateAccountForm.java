@@ -28,7 +28,14 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import static ru.mystamps.web.feature.account.AccountValidation.ACT_KEY_REGEXP;
+import static ru.mystamps.web.feature.account.AccountValidation.LOGIN_MAX_LENGTH;
+import static ru.mystamps.web.feature.account.AccountValidation.LOGIN_MIN_LENGTH;
+import static ru.mystamps.web.feature.account.AccountValidation.LOGIN_REGEXP;
 import static ru.mystamps.web.feature.account.AccountValidation.NAME_MAX_LENGTH;
+import static ru.mystamps.web.feature.account.AccountValidation.NAME_NO_HYPHEN_REGEXP;
+import static ru.mystamps.web.feature.account.AccountValidation.NAME_REGEXP;
+import static ru.mystamps.web.feature.account.AccountValidation.PASSWORD_MAX_LENGTH;
+import static ru.mystamps.web.feature.account.AccountValidation.PASSWORD_MIN_LENGTH;
 
 @Getter
 @Setter
@@ -47,61 +54,25 @@ import static ru.mystamps.web.feature.account.AccountValidation.NAME_MAX_LENGTH;
 public class ActivateAccountForm implements ActivateAccountDto {
 	
 	@NotEmpty(groups = Login1Checks.class)
-	@Size.List({
-		@Size(
-			min = AccountValidation.LOGIN_MIN_LENGTH,
-			message = "{value.too-short}",
-			groups = Login2Checks.class
-		),
-		@Size(
-			max = AccountValidation.LOGIN_MAX_LENGTH,
-			message = "{value.too-long}",
-			groups = Login2Checks.class
-		)
-	})
-	@Pattern.List({
-		@Pattern(
-			regexp = AccountValidation.LOGIN_REGEXP,
-			message = "{login.invalid}",
-			groups = Login3Checks.class
-		),
-		@Pattern(
-			regexp = AccountValidation.LOGIN_NO_REPEATING_CHARS_REGEXP,
-			message = "{login.repetition_chars}",
-			groups = Login4Checks.class
-		)
-	})
+	@Size(min = LOGIN_MIN_LENGTH, message = "{value.too-short}", groups = Login2Checks.class)
+	@Size(max = LOGIN_MAX_LENGTH, message = "{value.too-long}", groups = Login2Checks.class)
+	@Pattern(regexp = LOGIN_REGEXP, message = "{login.invalid}", groups = Login3Checks.class)
+	@Pattern(
+		regexp = AccountValidation.LOGIN_NO_REPEATING_CHARS_REGEXP,
+		message = "{login.repetition_chars}",
+		groups = Login4Checks.class
+	)
 	@UniqueLogin(groups = Login5Checks.class)
 	private String login;
 	
 	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Name1Checks.class)
-	@Pattern.List({
-		@Pattern(
-			regexp = AccountValidation.NAME_REGEXP,
-			message = "{name.invalid}",
-			groups = Name2Checks.class
-		),
-		@Pattern(
-			regexp = AccountValidation.NAME_NO_HYPHEN_REGEXP,
-			message = "{value.hyphen}",
-			groups = Name3Checks.class
-		)
-	})
+	@Pattern(regexp = NAME_REGEXP, message = "{name.invalid}", groups = Name2Checks.class)
+	@Pattern(regexp = NAME_NO_HYPHEN_REGEXP, message = "{value.hyphen}", groups = Name3Checks.class)
 	private String name;
 	
 	@NotEmpty(groups = Password1Checks.class)
-	@Size.List({
-		@Size(
-			min = AccountValidation.PASSWORD_MIN_LENGTH,
-			message = "{value.too-short}",
-			groups = Password2Checks.class
-		),
-		@Size(
-			max = AccountValidation.PASSWORD_MAX_LENGTH,
-			message = "{value.too-long}",
-			groups = Password2Checks.class
-		)
-	})
+	@Size(min = PASSWORD_MIN_LENGTH, message = "{value.too-short}", groups = Password2Checks.class)
+	@Size(max = PASSWORD_MAX_LENGTH, message = "{value.too-long}", groups = Password2Checks.class)
 	private String password;
 	
 	@NotEmpty(groups = PasswordConfirmation1Checks.class)

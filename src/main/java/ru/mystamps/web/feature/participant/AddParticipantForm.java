@@ -34,10 +34,8 @@ import static ru.mystamps.web.feature.participant.ParticipantValidation.URL_MAX_
 public class AddParticipantForm implements AddParticipantDto {
 	
 	@NotEmpty
-	@Size.List({
-		@Size(min = NAME_MIN_LENGTH, message = "{value.too-short}"),
-		@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}")
-	})
+	@Size(min = NAME_MIN_LENGTH, message = "{value.too-short}")
+	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}")
 	private String name;
 	
 	@URL

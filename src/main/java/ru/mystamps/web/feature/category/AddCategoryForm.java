@@ -51,69 +51,45 @@ import static ru.mystamps.web.feature.category.CategoryValidation.NAME_RU_REGEXP
 public class AddCategoryForm implements AddCategoryDto {
 	
 	@NotEmpty(groups = Group.Level1.class)
-	@Size.List({
-		@Size(
-			min = NAME_MIN_LENGTH,
-			message = "{value.too-short}",
-			groups = Group.Level2.class
-		),
-		@Size(
-			max = NAME_MAX_LENGTH,
-			message = "{value.too-long}",
-			groups = Group.Level2.class
-		)
-	})
-	@Pattern.List({
-		@Pattern(
-			regexp = NAME_EN_REGEXP,
-			message = "{value.invalid-en-chars}",
-			groups = Group.Level3.class
-		),
-		@Pattern(
-			regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
-			message = "{value.repeating-hyphen}",
-			groups = Group.Level4.class
-		),
-		@Pattern(
-			regexp = NAME_NO_HYPHEN_REGEXP,
-			message = "{value.hyphen}",
-			groups = Group.Level5.class
-		)
-	})
+	@Size(min = NAME_MIN_LENGTH, message = "{value.too-short}", groups = Group.Level2.class)
+	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
+	@Pattern(
+		regexp = NAME_EN_REGEXP,
+		message = "{value.invalid-en-chars}",
+		groups = Group.Level3.class
+	)
+	@Pattern(
+		regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
+		message = "{value.repeating-hyphen}",
+		groups = Group.Level4.class
+	)
+	@Pattern(
+		regexp = NAME_NO_HYPHEN_REGEXP,
+		message = "{value.hyphen}",
+		groups = Group.Level5.class
+	)
 	@DenyValues(value = {"add", "list"}, groups = Group.Level6.class)
 	@UniqueCategoryName(lang = Lang.EN, groups = Group.Level7.class)
 	@UniqueCategorySlug(groups = Group.Level8.class)
 	private String name;
 	
-	@Size.List({
-		@Size(
-			min = NAME_MIN_LENGTH,
-			message = "{value.too-short}",
-			groups = Group.Level2.class
-		),
-		@Size(
-			max = NAME_MAX_LENGTH,
-			message = "{value.too-long}",
-			groups = Group.Level2.class
-		)
-	})
-	@Pattern.List({
-		@Pattern(
-			regexp = NAME_RU_REGEXP,
-			message = "{value.invalid-ru-chars}",
-			groups = Group.Level3.class
-		),
-		@Pattern(
-			regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
-			message = "{value.repeating-hyphen}",
-			groups = Group.Level4.class
-		),
-		@Pattern(
-			regexp = NAME_NO_HYPHEN_REGEXP,
-			message = "{value.hyphen}",
-			groups = Group.Level5.class
-		)
-	})
+	@Size(min = NAME_MIN_LENGTH, message = "{value.too-short}", groups = Group.Level2.class)
+	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Group.Level2.class)
+	@Pattern(
+		regexp = NAME_RU_REGEXP,
+		message = "{value.invalid-ru-chars}",
+		groups = Group.Level3.class
+	)
+	@Pattern(
+		regexp = NAME_NO_REPEATING_HYPHENS_REGEXP,
+		message = "{value.repeating-hyphen}",
+		groups = Group.Level4.class
+	)
+	@Pattern(
+		regexp = NAME_NO_HYPHEN_REGEXP,
+		message = "{value.hyphen}",
+		groups = Group.Level5.class
+	)
 	@UniqueCategoryName(lang = Lang.RU, groups = Group.Level7.class)
 	private String nameRu;
 	
