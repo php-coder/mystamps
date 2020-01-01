@@ -19,11 +19,11 @@ package ru.mystamps.web.feature.account;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 import ru.mystamps.web.support.beanvalidation.FieldsMatch;
 import ru.mystamps.web.support.beanvalidation.FieldsMismatch;
 
 import javax.validation.GroupSequence;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 

@@ -19,11 +19,11 @@ package ru.mystamps.web.feature.account;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 import ru.mystamps.web.support.beanvalidation.Email;
 import ru.mystamps.web.support.beanvalidation.Group;
 
 import javax.validation.GroupSequence;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import static ru.mystamps.web.feature.account.AccountValidation.EMAIL_MAX_LENGTH;

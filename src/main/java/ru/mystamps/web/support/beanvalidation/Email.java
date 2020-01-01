@@ -40,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @see <a href="https://hibernate.atlassian.net/browse/HVAL-43">Issue in Hibernate's JIRA</a>
  * @author Slava Semushin
  */
-@org.hibernate.validator.constraints.Email
+@javax.validation.constraints.Email
 @Pattern(regexp = ".+@.+\\..+")
 @ReportAsSingleViolation
 @Target({ METHOD, FIELD, ANNOTATION_TYPE })

@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.importing.sale;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 import ru.mystamps.web.feature.series.importing.HasSiteParser;
 import ru.mystamps.web.feature.series.importing.RequestImportDto;
@@ -27,6 +26,7 @@ import ru.mystamps.web.feature.series.sale.SeriesSalesValidation;
 import ru.mystamps.web.support.beanvalidation.Group;
 
 import javax.validation.GroupSequence;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Getter

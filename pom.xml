@@ -789,8 +789,7 @@
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 					<debug>false</debug>
-					<!-- @todo #869 Fix compilation warnings and enable failOnWarning again -->
-					<!--<failOnWarning>true</failOnWarning>-->
+					<failOnWarning>true</failOnWarning>
 					<!-- Required for ErrorProne -->
 					<!-- @todo #971 Document ErrorProne tool -->
 					<compilerArgs>
