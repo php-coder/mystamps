@@ -28,11 +28,6 @@ public class UniqueLoginValidator implements ConstraintValidator<UniqueLogin, St
 	private final UserService userService;
 	
 	@Override
-	public void initialize(UniqueLogin annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {

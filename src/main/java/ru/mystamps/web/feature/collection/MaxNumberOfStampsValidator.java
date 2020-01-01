@@ -38,11 +38,6 @@ public class MaxNumberOfStampsValidator
 	private final SeriesService seriesService;
 	
 	@Override
-	public void initialize(MaxNumberOfStamps annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(AddToCollectionDto dto, ConstraintValidatorContext ctx) {
 		
 		if (dto == null) {

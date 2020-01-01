@@ -30,11 +30,6 @@ public class UniqueCategorySlugValidator
 	private final CategoryService categoryService;
 	
 	@Override
-	public void initialize(UniqueCategorySlug annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {

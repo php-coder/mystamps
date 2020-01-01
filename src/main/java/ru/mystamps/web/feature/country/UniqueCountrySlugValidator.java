@@ -29,11 +29,6 @@ public class UniqueCountrySlugValidator implements ConstraintValidator<UniqueCou
 	private final CountryService countryService;
 	
 	@Override
-	public void initialize(UniqueCountrySlug annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {

@@ -93,11 +93,6 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		return String.format("%02x %02x %02x %02x", bytes[0], bytes[1], bytes[2], bytes[3]);
 	}
 	
-	@Override
-	public void initialize(ImageFile annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
 	// The following warnings will gone after splitting this validator (see #593)
 	@SuppressWarnings({ "PMD.ModifiedCyclomaticComplexity", "PMD.NPathComplexity" })
 	@Override

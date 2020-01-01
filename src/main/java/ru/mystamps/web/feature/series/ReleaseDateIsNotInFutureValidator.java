@@ -33,11 +33,6 @@ public class ReleaseDateIsNotInFutureValidator
 	implements ConstraintValidator<ReleaseDateIsNotInFuture, AddSeriesDto> {
 	
 	@Override
-	public void initialize(ReleaseDateIsNotInFuture annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(AddSeriesDto dto, ConstraintValidatorContext context) {
 		if (dto == null) {
 			return true;

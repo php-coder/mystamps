@@ -26,11 +26,6 @@ import javax.validation.ConstraintValidatorContext;
 public class NotEmptyFileValidator implements ConstraintValidator<NotEmptyFile, MultipartFile> {
 	
 	@Override
-	public void initialize(NotEmptyFile annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(MultipartFile file, ConstraintValidatorContext ctx) {
 		
 		if (file == null) {

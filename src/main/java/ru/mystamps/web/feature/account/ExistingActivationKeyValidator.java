@@ -29,11 +29,6 @@ public class ExistingActivationKeyValidator
 	private final UsersActivationService usersActivationService;
 	
 	@Override
-	public void initialize(ExistingActivationKey annotation) {
-		// Intentionally empty: nothing to initialize
-	}
-	
-	@Override
 	public boolean isValid(String value, ConstraintValidatorContext ctx) {
 		
 		if (value == null) {
