@@ -57,16 +57,14 @@ import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERI
 	imageUrlFieldName = DownloadImageInterceptor.IMAGE_URL_FIELD_NAME,
 	groups = AddSeriesForm.ImageUrl1Checks.class
 )
-@NotNullIfFirstField.List({
-	@NotNullIfFirstField(
-		first = "month", second = "year", message = "{month.requires.year}",
-		groups = AddSeriesForm.ReleaseDate1Checks.class
-	),
-	@NotNullIfFirstField(
-		first = "day", second = "month", message = "{day.requires.month}",
-		groups = AddSeriesForm.ReleaseDate1Checks.class
-	)
-})
+@NotNullIfFirstField(
+	first = "month", second = "year", message = "{month.requires.year}",
+	groups = AddSeriesForm.ReleaseDate1Checks.class
+)
+@NotNullIfFirstField(
+	first = "day", second = "month", message = "{day.requires.month}",
+	groups = AddSeriesForm.ReleaseDate1Checks.class
+)
 @ReleaseDateIsNotInFuture(groups = AddSeriesForm.ReleaseDate3Checks.class)
 public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, NullableImageUrl {
 	

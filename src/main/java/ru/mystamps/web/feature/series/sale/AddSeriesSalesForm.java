@@ -35,14 +35,8 @@ import java.util.Date;
 // @todo #678 Add integration tests for price and alternative price: both or none are required
 @Getter
 @Setter
-@FieldsMismatch.List({
-	@FieldsMismatch(
-		first = "sellerId", second = "buyerId", message = "{seller.buyer.match}"
-	),
-	@FieldsMismatch(
-		first = "currency", second = "altCurrency", message = "{currencies.prices.match}"
-	)
-})
+@FieldsMismatch(first = "sellerId", second = "buyerId", message = "{seller.buyer.match}")
+@FieldsMismatch(first = "currency", second = "altCurrency", message = "{currencies.prices.match}")
 @BothOrNoneRequired(
 	first = "altPrice",
 	second = "altCurrency",

@@ -20,6 +20,7 @@ package ru.mystamps.web.support.beanvalidation;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -29,6 +30,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ TYPE, ANNOTATION_TYPE })
 @Retention(RUNTIME)
+@Repeatable(FieldsMatch.List.class)
 @Constraint(validatedBy = FieldsMatchValidator.class)
 @Documented
 public @interface FieldsMatch {
@@ -38,4 +40,15 @@ public @interface FieldsMatch {
 	
 	String first();
 	String second();
+	
+	/**
+	 * Allow to place several {@code @FieldsMatch} annotations on the same element.
+	 */
+	@Target({ ANNOTATION_TYPE, TYPE })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		FieldsMatch[] value();
+	}
+	
 }
