@@ -27,6 +27,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import static ru.mystamps.web.feature.account.AccountValidation.ACT_KEY_REGEXP;
+import static ru.mystamps.web.feature.account.AccountValidation.NAME_MAX_LENGTH;
+
 @Getter
 @Setter
 @FieldsMismatch(
@@ -71,11 +74,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 	@UniqueLogin(groups = Login5Checks.class)
 	private String login;
 	
-	@Size(
-		max = AccountValidation.NAME_MAX_LENGTH,
-		message = "{value.too-long}",
-		groups = Name1Checks.class
-	)
+	@Size(max = NAME_MAX_LENGTH, message = "{value.too-long}", groups = Name1Checks.class)
 	@Pattern.List({
 		@Pattern(
 			regexp = AccountValidation.NAME_REGEXP,
@@ -115,11 +114,7 @@ public class ActivateAccountForm implements ActivateAccountDto {
 		message = "{value.invalid-length}",
 		groups = ActKey2Checks.class
 	)
-	@Pattern(
-		regexp = AccountValidation.ACT_KEY_REGEXP,
-		message = "{key.invalid}",
-		groups = ActKey3Checks.class
-	)
+	@Pattern(regexp = ACT_KEY_REGEXP, message = "{key.invalid}", groups = ActKey3Checks.class)
 	@ExistingActivationKey(groups = ActKey4Checks.class)
 	private String activationKey;
 	
