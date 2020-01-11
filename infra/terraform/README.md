@@ -14,7 +14,12 @@
   ```console
   $ terraform import digitalocean_droplet.web <id>
   $ terraform import digitalocean_domain.site my-stamps.ru
+  $ terraform import digitalocean_record.www my-stamps.ru,<id>
+  $ terraform import digitalocean_record.no-www my-stamps.ru,<id>
   ```
+  The ids can be obtained by API:
+  - https://developers.digitalocean.com/documentation/v2/#list-all-droplets
+  - https://developers.digitalocean.com/documentation/v2/#list-all-domain-records
 * Plan and apply:
   ```console
   $ terraform plan -out terraform.tfplan

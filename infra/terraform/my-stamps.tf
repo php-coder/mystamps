@@ -22,3 +22,17 @@ resource "digitalocean_droplet" "web" {
 resource "digitalocean_domain" "site" {
   name = "my-stamps.ru"
 }
+
+# https://www.terraform.io/docs/providers/do/r/record.html
+resource "digitalocean_record" "no-www" {
+  domain = digitalocean_domain.site.name
+  type   = "A"
+  name   = "@"
+  value  = digitalocean_droplet.web.ipv4_address
+}
+resource "digitalocean_record" "www" {
+  domain = digitalocean_domain.site.name
+  type   = "A"
+  name   = "www"
+  value  = digitalocean_droplet.web.ipv4_address
+}
