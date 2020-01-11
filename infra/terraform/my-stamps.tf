@@ -18,12 +18,12 @@ resource "digitalocean_droplet" "web" {
   private_networking = true
 }
 
-# https://www.terraform.io/docs/providers/do/r/domain.html
+# Domain docs: https://www.terraform.io/docs/providers/do/r/domain.html
 resource "digitalocean_domain" "site" {
   name = "my-stamps.ru"
 }
 
-# https://www.terraform.io/docs/providers/do/r/record.html
+# Record docs: https://www.terraform.io/docs/providers/do/r/record.html
 resource "digitalocean_record" "no-www" {
   domain = digitalocean_domain.site.name
   type   = "A"
