@@ -16,6 +16,9 @@
   $ terraform import digitalocean_domain.site my-stamps.ru
   $ terraform import digitalocean_record.www my-stamps.ru,<id>
   $ terraform import digitalocean_record.no-www my-stamps.ru,<id>
+  $ terraform import digitalocean_record.ns1 my-stamps.ru,<id>
+  $ terraform import digitalocean_record.ns2 my-stamps.ru,<id>
+  $ terraform import digitalocean_record.ns3 my-stamps.ru,<id>
   ```
   The ids can be obtained by API:
   - https://developers.digitalocean.com/documentation/v2/#list-all-droplets

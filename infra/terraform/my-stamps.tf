@@ -36,3 +36,21 @@ resource "digitalocean_record" "www" {
   name   = "www"
   value  = digitalocean_droplet.web.ipv4_address
 }
+resource "digitalocean_record" "ns1" {
+  domain = digitalocean_domain.site.name
+  type   = "NS"
+  name   = "@" # <-- to match the current settings. It's better to use "ns1" instead
+  value  = "ns1.digitalocean.com."
+}
+resource "digitalocean_record" "ns2" {
+  domain = digitalocean_domain.site.name
+  type   = "NS"
+  name   = "@" # <-- to match the current settings. It's better to use "ns2" instead
+  value  = "ns2.digitalocean.com."
+}
+resource "digitalocean_record" "ns3" {
+  domain = digitalocean_domain.site.name
+  type   = "NS"
+  name   = "@" # <-- to match the current settings. It's better to use "ns3" instead
+  value  = "ns3.digitalocean.com."
+}
