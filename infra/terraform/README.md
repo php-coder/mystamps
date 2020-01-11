@@ -13,6 +13,7 @@
 * Import existing configuration (optionally; only first time)
   ```console
   $ terraform import digitalocean_droplet.web <id>
+  $ terraform import digitalocean_domain.site my-stamps.ru
   ```
 * Plan and apply:
   ```console

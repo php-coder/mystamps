@@ -18,3 +18,7 @@ resource "digitalocean_droplet" "web" {
   private_networking = true
 }
 
+# https://www.terraform.io/docs/providers/do/r/domain.html
+resource "digitalocean_domain" "site" {
+  name = "my-stamps.ru"
+}
