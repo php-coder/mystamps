@@ -32,6 +32,12 @@ vagrant/provisioning/roles/php-coder.nginx/
 vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
 vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
 
+# Terraform related files
+infra/terraform/.terraform/
+infra/terraform/terraform.tfplan
+infra/terraform/terraform.tfvars
+infra/terraform/terraform.tfstate
+
 # used by docker/prod.yml
 docker/application-prod.properties
 docker/mysql_backup_mystamps.sql.gz
