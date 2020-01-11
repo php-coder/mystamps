@@ -348,7 +348,7 @@
 												<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
 												<span th:remove="tag" th:if="${series.year != null}" th:text="|${series.year}, |">1999, </span>
 												<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
-												<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(without perforation)</span>
+												<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(imperf.)</span>
 											</a>
 										</li>
 										<li><a href="../series/info.html">Italy, 4&nbsp;stamps</a></li>

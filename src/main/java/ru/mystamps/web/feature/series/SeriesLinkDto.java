@@ -26,7 +26,7 @@ import lombok.ToString;
  *
  * Example of a link:
  * <code>
- * &lt;a href="/series/{id}"&gt;{country}, {year}, {quantity} stamps (without perforation)&lt;/a&gt;
+ * &lt;a href="/series/{id}"&gt;{country}, {year}, {quantity} stamps (imperf.)&lt;/a&gt;
  * </code>
  */
 @Getter
