@@ -54,3 +54,17 @@ resource "digitalocean_record" "ns3" {
   name   = "@" # <-- to match the current settings. It's better to use "ns3" instead
   value  = "ns3.digitalocean.com."
 }
+resource "digitalocean_record" "mx1" {
+  domain   = digitalocean_domain.site.name
+  type     = "MX"
+  name     = "@" # <-- to match the current settings. It's better to use "mx1" instead
+  value    = "mxa.mailgun.org."
+  priority = 10
+}
+resource "digitalocean_record" "mx2" {
+  domain   = digitalocean_domain.site.name
+  type     = "MX"
+  name     = "@" # <-- to match the current settings. It's better to use "mx2" instead
+  value    = "mxb.mailgun.org."
+  priority = 10
+}
