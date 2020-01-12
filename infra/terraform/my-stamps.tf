@@ -68,3 +68,9 @@ resource "digitalocean_record" "mx2" {
   value    = "mxb.mailgun.org."
   priority = 10
 }
+resource "digitalocean_record" "email" {
+  domain   = digitalocean_domain.site.name
+  type   = "CNAME"
+  name   = "email"
+  value  = "mailgun.org."
+}
