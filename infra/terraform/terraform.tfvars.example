@@ -1,2 +1,2 @@
 # How to obtain a token: https://www.digitalocean.com/docs/api/create-personal-access-token/
-token = "<insert-token-here>"
+do_token = "<insert-token-here>"

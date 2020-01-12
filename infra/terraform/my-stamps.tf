@@ -1,10 +1,10 @@
 # @todo #1000 CI: validate and check Terraform configuration
 
-variable "token" {}
+variable "do_token" {}
 
 # Provider docs: https://www.terraform.io/docs/providers/do/index.html
 provider "digitalocean" {
-  token   = var.token
+  token   = var.do_token
   version = "~> 1.12"
 }
 
