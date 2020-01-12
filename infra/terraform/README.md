@@ -22,6 +22,9 @@
   $ terraform import digitalocean_record.mx1 my-stamps.ru,<id>
   $ terraform import digitalocean_record.mx2 my-stamps.ru,<id>
   $ terraform import digitalocean_record.email my-stamps.ru,<id>
+  $ terraform import digitalocean_record.spf my-stamps.ru,<id>
+  $ terraform import digitalocean_record.verification my-stamps.ru,<id>
+  $ terraform import digitalocean_record.domain_key my-stamps.ru,<id>
   ```
   The ids can be obtained by API:
   - https://developers.digitalocean.com/documentation/v2/#list-all-droplets
