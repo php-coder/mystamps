@@ -69,7 +69,7 @@ resource "digitalocean_record" "mx2" {
   priority = 10
 }
 resource "digitalocean_record" "email" {
-  domain   = digitalocean_domain.site.name
+  domain = digitalocean_domain.site.name
   type   = "CNAME"
   name   = "email"
   value  = "mailgun.org."
