@@ -24,13 +24,13 @@ src/main/frontend/node_modules/
 
 # Vagrant related files
 .vagrant/
-vagrant/provisioning/vagrant.retry
-vagrant/provisioning/prod.inventory
-vagrant/provisioning/vars/prod.yml
-vagrant/provisioning/roles/php-coder.oraclejdk/
-vagrant/provisioning/roles/php-coder.nginx/
-vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
-vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
+infra/vagrant/provisioning/vagrant.retry
+infra/vagrant/provisioning/prod.inventory
+infra/vagrant/provisioning/vars/prod.yml
+infra/vagrant/provisioning/roles/php-coder.oraclejdk/
+infra/vagrant/provisioning/roles/php-coder.nginx/
+infra/vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.key
+infra/vagrant/provisioning/roles/mystamps-nginx/files/prod/my-stamps.ru.crt
 
 # Terraform related files
 infra/terraform/.terraform/
