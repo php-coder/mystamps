@@ -887,11 +887,11 @@
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>
-							<!-- copy docker/Dockerfile to target/ -->
+							<!-- copy infra/docker/Dockerfile to target/ -->
 							<outputDirectory>target</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${basedir}/docker</directory>
+									<directory>${basedir}/infra/docker</directory>
 									<includes>
 										<include>Dockerfile</include>
 									</includes>

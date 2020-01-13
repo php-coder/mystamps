@@ -13,7 +13,7 @@ possible configurations, we support only those that are typically used:
     ```
   * Run a container with `docker-compose`:
     ```console
-    $ cd docker
+    $ cd infra/docker
     $ docker-compose up -d
     ```
     or with a plain Docker:

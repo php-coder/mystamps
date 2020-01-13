@@ -39,9 +39,9 @@ infra/terraform/terraform.tfvars
 infra/terraform/terraform.tfstate
 infra/terraform/terraform.tfstate.backup
 
-# used by docker/prod.yml
-docker/application-prod.properties
-docker/mysql_backup_mystamps.sql.gz
+# used by infra/docker/prod.yml
+infra/docker/application-prod.properties
+infra/docker/mysql_backup_mystamps.sql.gz
 
 # maven-wrapper
 .mvn/wrapper/maven-wrapper.jar
