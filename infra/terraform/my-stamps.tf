@@ -2,7 +2,7 @@
 
 variable "do_token" {}
 
-# Provider docs: https://www.terraform.io/docs/providers/do/index.html
+# Digital Ocean provider docs: https://www.terraform.io/docs/providers/do/index.html
 provider "digitalocean" {
   token   = var.do_token
   version = "~> 1.12"
