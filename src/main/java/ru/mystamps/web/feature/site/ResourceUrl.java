@@ -32,7 +32,7 @@ public final class ResourceUrl {
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION = "v0.4.2";
+	public static final String RESOURCES_VERSION = "v0.4.2.1";
 
 	// CheckStyle: ignore LineLength for next 10 lines
 	private static final String CATALOG_UTILS_JS    = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
