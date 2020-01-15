@@ -81,7 +81,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		parser.setImageUrlLocator("#image-url");
 		parser.setSellerLocator("#seller-info");
 		parser.setPriceLocator("#price");
-		parser.setCurrencyValue(expectedCurrency);
+		parser.setCurrencyLocator("#currency");
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
@@ -102,6 +102,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<a id='image-url' href='%s'>look at image</a>"
 					+ "<a id='seller-info' href='%s'>%s</a>"
 					+ "<p id='price'>%s</p>"
+					+ "<p id='currency'>%s</p>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
@@ -110,7 +111,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 			imageUrl,
 			expectedSellerUrl,
 			expectedSellerName,
-			expectedPrice
+			expectedPrice,
+			expectedCurrency
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -135,6 +137,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		String expectedSellerName = Random.sellerName();
 		String expectedSellerUrl = baseUri + sellerUrl;
 		String expectedPrice = Random.price().toString();
+		String expectedCurrency = Random.currency().toString();
 		
 		parser.setMatchedUrl(baseUri);
 		parser.setCategoryLocator("h1");
@@ -143,6 +146,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		parser.setImageUrlLocator("a.image");
 		parser.setSellerLocator("a.seller");
 		parser.setPriceLocator("b");
+		parser.setCurrencyLocator("div");
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
@@ -152,6 +156,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		expectedInfo.setSellerName(expectedSellerName);
 		expectedInfo.setSellerUrl(expectedSellerUrl);
 		expectedInfo.setPrice(expectedPrice);
+		expectedInfo.setCurrency(expectedCurrency);
 		
 		String html = String.format(
 			"<html>"
@@ -162,12 +167,14 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<a class='image' href='%s'>look at image</a>"
 					+ "<a class='seller' href='%s'>%s</a>"
 					+ "<b>%s</b>"
+					+ "<div>%s</div>"
 					+ "<h1>ignored</h1>"
 					+ "<p>ignored</p>"
 					+ "<span>ignored</span>"
 					+ "<a class='image' href='none'>look at image</a>"
 					+ "<a class='seller' href='none'>seller name</a>"
 					+ "<b>ignored</b>"
+					+ "<div>ignored</div>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
@@ -176,7 +183,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 			expectedImageUrl,
 			expectedSellerUrl,
 			expectedSellerName,
-			expectedPrice
+			expectedPrice,
+			expectedCurrency
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -645,8 +653,9 @@ public class JsoupSiteParserTest implements WithAssertions {
 	//
 	
 	@Test
-	public void extractCurrencyShouldReturnNullWhenCurrencyValueIsNotSet() {
+	public void extractCurrencyShouldReturnNullWhenCurrencyValuesAreNotSet() {
 		parser.setCurrencyValue(null);
+		parser.setCurrencyLocator(null);
 		
 		String currency = parser.extractCurrency(null);
 		
@@ -654,11 +663,29 @@ public class JsoupSiteParserTest implements WithAssertions {
 	}
 	
 	@Test
+	public void extractCurrencyShouldReturnValueOfCurrencyLocator() {
+		String expectedValue = "CZK";
+		
+		parser.setCurrencyLocator("#currency");
+		parser.setCurrencyValue("RUB");
+		
+		String html = String.format("<span id='currency'>%s</span>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		
+		String currency = parser.extractCurrency(doc);
+		
+		assertThat(currency).as("couldn't extract currency from '%s'", doc)
+			.isEqualTo(expectedValue);
+	}
+	
+	@Test
 	public void extractCurrencyShouldReturnCurrencyValue() {
 		String expectedCurrency = Random.currency().toString();
 		parser.setCurrencyValue(expectedCurrency);
+		parser.setCurrencyLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
 		
-		String currency = parser.extractCurrency(null);
+		String currency = parser.extractCurrency(doc);
 		
 		assertThat(currency).isEqualTo(expectedCurrency);
 	}

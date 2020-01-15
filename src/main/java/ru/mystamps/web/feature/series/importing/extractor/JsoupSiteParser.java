@@ -54,6 +54,7 @@ public class JsoupSiteParser implements SiteParser {
 	private String issueDateLocator;
 	private String sellerLocator;
 	private String priceLocator;
+	private String currencyLocator;
 	private String currencyValue;
 	
 	// @todo #975 SiteParserServiceImpl: add unit tests for constructor
@@ -68,6 +69,7 @@ public class JsoupSiteParser implements SiteParser {
 		issueDateLocator        = cfg.getIssueDateLocator();
 		sellerLocator           = cfg.getSellerLocator();
 		priceLocator            = cfg.getPriceLocator();
+		currencyLocator         = cfg.getCurrencyLocator();
 		currencyValue           = cfg.getCurrencyValue();
 	}
 	
@@ -219,6 +221,13 @@ public class JsoupSiteParser implements SiteParser {
 	}
 	
 	protected String extractCurrency(Element body) {
+		if (currencyLocator != null) {
+			String currency = getTextOfTheFirstElement(body, currencyLocator);
+			if (currency != null) {
+				return currency;
+			}
+		}
+		
 		if (currencyValue == null) {
 			return null;
 		}

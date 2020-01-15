@@ -44,6 +44,7 @@ public class SiteParserConfiguration {
 	private String issueDateLocator;
 	private String sellerLocator;
 	private String priceLocator;
+	private String currencyLocator;
 	private String currencyValue;
 	
 	/* default */ SiteParserConfiguration(Map<String, String> params) {
@@ -58,6 +59,8 @@ public class SiteParserConfiguration {
 		issueDateLocator        = params.get("issue-date-locator");
 		sellerLocator           = params.get("seller-locator");
 		priceLocator            = params.get("price-locator");
+		// @todo #979 Add integration test for import of series with currency-locator
+		currencyLocator         = params.get("currency-locator");
 		currencyValue           = params.get("currency-value");
 	}
 	
