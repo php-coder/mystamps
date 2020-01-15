@@ -611,22 +611,36 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == null
 	}
 	
-	def 'extractCurrency() should return null for unknown currency'() {
-		given:
-			String invalidCurrency = 'CAD'
-		when:
-			String result = service.extractCurrency(invalidCurrency)
-		then:
-			result == null
+	@Unroll
+	def 'extractCurrency() should return null for "#fragment"'(String fragment) {
+		expect:
+			service.extractCurrency(fragment) == null
+		where:
+			fragment | _
+			'CAD'    | _
+			'труб'   | _
 	}
 	
-	def 'extractCurrency() should extract currency from a fragment'() {
+	def 'extractCurrency() should extract exactly specified currency'() {
 		given:
 			String validCurrency = Random.currency()
 		when:
 			String result = service.extractCurrency(validCurrency)
 		then:
 			result == validCurrency
+	}
+	
+	@Unroll
+	def 'extractCurrency() should extract RUB currency from "#fragment"'(String fragment) {
+		expect:
+			service.extractCurrency(fragment) == 'RUB'
+		where:
+			fragment    | _
+			'1 рубль'   | _
+			'10 рублей' | _
+			'100 руб'   | _
+			'200руб'    | _
+			'660 руб.'  | _
 	}
 	
 }

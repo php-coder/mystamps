@@ -64,6 +64,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern MICHEL_NUMBERS_REGEXP =
 		Pattern.compile("#[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
 	
+	// Regular expression that matches Rubles (Russian currency).
+	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?руб");
+	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);
 	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.NAME_RU_REGEXP);
@@ -394,10 +397,18 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			log.debug("Currency is {}", currency);
 			return currency.toString();
 			
-		} catch (IllegalArgumentException ex) {
-			log.debug("Could not extract currency: {}", ex.getMessage());
-			return null;
+		} catch (IllegalArgumentException ignored) {
 		}
+		
+		Matcher matcher = RUB_CURRENCY_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			log.debug("Currency is RUB");
+			return Currency.RUB.toString();
+		}
+		
+		log.debug("Could not extract currency from a fragment");
+		
+		return null;
 	}
 	
 	private Integer extractSellerByNameAndUrl(String name, String url) {
