@@ -366,6 +366,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return url;
 	}
 	
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	/* default */ BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
@@ -373,16 +374,25 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		log.debug("Determine price from '{}'", fragment);
 		
-		try {
-			BigDecimal price = new BigDecimal(fragment);
-			log.debug("Price is {}", price);
-			// @todo #695 SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0
-			return price;
-			
-		} catch (NumberFormatException ex) {
-			log.debug("Could not extract price: {}", ex.getMessage());
-			return null;
+		String[] candidates = StringUtils.split(fragment, ' ');
+		for (String candidate : candidates) {
+			// replace comma with dot to handle 10,5 in the same way as 10.5
+			if (candidate.contains(",")) {
+				candidate = StringUtils.replaceChars(candidate, ',', '.');
+			}
+			try {
+				BigDecimal price = new BigDecimal(candidate);
+				log.debug("Price is {}", price);
+				// @todo #695 SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0
+				return price;
+
+			} catch (NumberFormatException ignored) {
+				// continue with the next candidate
+			}
 		}
+		
+		log.debug("Could not extract price from a fragment");
+		return null;
 	}
 	
 	/* default */ String extractCurrency(String fragment) {

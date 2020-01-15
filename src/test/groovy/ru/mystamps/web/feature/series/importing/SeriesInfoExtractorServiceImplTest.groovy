@@ -591,13 +591,26 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			result == null
 	}
 
-	def 'extractPrice() should extract price from a fragment'() {
+	def 'extractPrice() should extract exactly specified price'() {
 		given:
 			BigDecimal expectedPrice = Random.price()
 		when:
 			BigDecimal result = service.extractPrice(expectedPrice.toString())
 		then:
 			result == expectedPrice
+	}
+	
+	@Unroll
+	def 'extractPrice() should extract "10" from "#fragment"'(String fragment) {
+		expect:
+			service.extractPrice(fragment) == BigDecimal.TEN
+		where:
+			fragment        | _
+			'10 EUR'        | _
+			'10.0 EUR'      | _
+			'10.00 EUR'     | _
+			'10,00 EUR'     | _
+			'10 руб 16 коп' | _
 	}
 	
 	//
