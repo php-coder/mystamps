@@ -116,7 +116,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return Collections.emptyList();
 		}
 		
-		log.debug("Determining category from a fragment: '{}'", fragment);
+		log.debug("Determine category from '{}'", fragment);
 		
 		String[] names = StringUtils.split(fragment, "\n\t ,.");
 		List<String> candidates = Arrays.stream(names)
@@ -152,7 +152,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return Collections.emptyList();
 		}
 		
-		log.debug("Determining country from a fragment: '{}'", fragment);
+		log.debug("Determine country from '{}'", fragment);
 		
 		String[] words = StringUtils.split(fragment, "\n\t ,.");
 		
@@ -198,7 +198,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining release year from a fragment: '{}'", fragment);
+		log.debug("Determine release year from '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, " \t,");
 		for (String candidate : candidates) {
@@ -227,7 +227,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining quantity from a fragment: '{}'", fragment);
+		log.debug("Determine quantity from '{}'", fragment);
 		
 		Matcher matcher = NUMBER_OF_STAMPS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
@@ -249,7 +249,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining perforation from a fragment: '{}'", fragment);
+		log.debug("Determine perforation from '{}'", fragment);
 		
 		boolean withoutPerforation =
 			StringUtils.containsIgnoreCase(fragment, "б/з")
@@ -272,7 +272,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return Collections.emptySet();
 		}
 		
-		log.debug("Determining michel numbers from a fragment: '{}'", fragment);
+		log.debug("Determine michel numbers from '{}'", fragment);
 		
 		Matcher matcher = MICHEL_NUMBERS_REGEXP.matcher(fragment);
 		if (matcher.find()) {
@@ -300,7 +300,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 		
 		if (StringUtils.isNotBlank(pageUrl)) {
-			log.debug("Determining seller by site, page URL = '{}'", pageUrl);
+			log.debug("Determine seller by site, page URL = '{}'", pageUrl);
 			try {
 				String siteUrl = new URL(pageUrl).getHost();
 				// @todo #978 SeriesInfoExtractorServiceImpl.extractSeller(): validate name
@@ -321,11 +321,11 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining seller group by seller url '{}'", sellerUrl);
+		log.debug("Determine seller group by seller url '{}'", sellerUrl);
 		
 		try {
 			String name = new URL(sellerUrl).getHost();
-			log.debug("Determining seller group: looking for a group named '{}'", name);
+			log.debug("Determine seller group: look for a group named '{}'", name);
 			
 			Integer groupId = participantService.findGroupIdByName(name);
 			if (groupId != null) {
@@ -368,7 +368,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining price from a fragment: '{}'", fragment);
+		log.debug("Determine price from '{}'", fragment);
 		
 		try {
 			BigDecimal price = new BigDecimal(fragment);
@@ -387,7 +387,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		log.debug("Determining currency from a fragment: '{}'", fragment);
+		log.debug("Determine currency from '{}'", fragment);
 		
 		try {
 			Currency currency = Enum.valueOf(Currency.class, fragment);
@@ -401,7 +401,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	private Integer extractSellerByNameAndUrl(String name, String url) {
-		log.debug("Determining seller by name '{}' and url '{}'", name, url);
+		log.debug("Determine seller by name '{}' and url '{}'", name, url);
 		
 		Integer sellerId = participantService.findSellerId(name, url);
 		if (sellerId == null) {
@@ -414,7 +414,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	private Integer extractSellerBySiteName(String name) {
-		log.debug("Determining seller by site name '{}'", name);
+		log.debug("Determine seller by site name '{}'", name);
 		
 		Integer sellerId = participantService.findSellerId(name);
 		if (sellerId == null) {
