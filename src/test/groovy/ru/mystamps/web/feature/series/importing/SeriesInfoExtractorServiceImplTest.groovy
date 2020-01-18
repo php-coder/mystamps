@@ -394,6 +394,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'13 беззубцовые марок' || 13
 			'4 беззубцовые марки'  ||  4
 			'32 БЕЗЗУБЦОВЫЕ МАРКИ' || 32
+			'4 блока'              || 4
 			'6 блоков'             || 6
 			'6 зубцовых блоков'    || 6
 	}
