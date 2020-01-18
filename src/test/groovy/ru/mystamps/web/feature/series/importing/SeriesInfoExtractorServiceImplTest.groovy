@@ -388,12 +388,15 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractQuantity(fragment) == expectedQuantity
 		where:
 			fragment               || expectedQuantity
+			'1 марка'              ||  1
 			'5 марок'              ||  5
 			'5 МАРОК'              ||  5
 			'22 марки'             || 22
 			'13 беззубцовые марок' || 13
+			'1 беззубцовая марка'  ||  1
 			'4 беззубцовые марки'  ||  4
 			'32 БЕЗЗУБЦОВЫЕ МАРКИ' || 32
+			'1 блок'               || 1
 			'4 блока'              || 4
 			'6 блоков'             || 6
 			'6 зубцовых блоков'    || 6
