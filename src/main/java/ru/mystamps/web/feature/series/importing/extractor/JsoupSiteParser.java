@@ -224,6 +224,7 @@ public class JsoupSiteParser implements SiteParser {
 		if (currencyLocator != null) {
 			String currency = getTextOfTheFirstElement(body, currencyLocator);
 			if (currency != null) {
+				LOG.debug("Extracted currency: '{}'", currency);
 				return currency;
 			}
 		}
