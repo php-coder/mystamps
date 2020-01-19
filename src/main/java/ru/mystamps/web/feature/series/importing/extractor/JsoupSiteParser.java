@@ -216,6 +216,10 @@ public class JsoupSiteParser implements SiteParser {
 		}
 		
 		String price = elem.ownText();
+		if (StringUtils.isBlank(price)) {
+			price = elem.text();
+		}
+		
 		LOG.debug("Extracted price: '{}'", price);
 		return price;
 	}

@@ -648,6 +648,24 @@ public class JsoupSiteParserTest implements WithAssertions {
 			.isEqualTo(expectedValue);
 	}
 	
+	@Test
+	public void extractPriceShouldFallbackToTextOfChildrenTags() {
+		parser.setPriceLocator("#price");
+		
+		String expectedPrice = String.valueOf(Random.price());
+		String expectedValue = "price:" + expectedPrice;
+		String html = String.format(
+			"<span id='price'><b>price:</b><b>%s</b></span>",
+			expectedPrice
+		);
+		Element doc = createDocumentFromText(html);
+		
+		String price = parser.extractPrice(doc);
+		
+		assertThat(price).as("couldn't extract price from '%s'", doc)
+			.isEqualTo(expectedValue);
+	}
+	
 	//
 	// Tests for extractCurrency()
 	//
