@@ -174,7 +174,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		// We need only the first part from "text/html; charset=UTF-8"
 		contentType = StringUtils.substringBefore(contentType, ";");
 		
-		if (allowedContentTypes != null && !ArrayUtils.contains(allowedContentTypes, contentType)) {
+		if (!ArrayUtils.contains(allowedContentTypes, contentType)) {
 			// FIXME(security): fix possible log injection
 			LOG.debug("Couldn't download file: unsupported file type '{}'", contentType);
 			return Code.INVALID_FILE_TYPE;
