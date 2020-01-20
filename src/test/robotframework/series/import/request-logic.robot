@@ -26,7 +26,7 @@ Import series from an external site (in English, use category, country and date 
 	Should Be Equal                  ${country}         Italy
 	Should Be Empty                  ${quantity}
 	Checkbox Should Be Selected      id:perforated
-	Urlfield Value Should Be         id:image-url       http://127.0.0.1:8080/image/1
+	Textfield Value Should Be        id:image-url       http://127.0.0.1:8080/image/1
 	Should Be Equal                  ${year}            2000
 	Input Text                       id:quantity  1
 	Submit Form                      id:create-series-form
@@ -64,7 +64,7 @@ Import series from an external site (in Russian, use description locator)
 	Should Be Equal              ${country}         Italy
 	Should Be Empty              ${quantity}
 	Checkbox Should Be Selected  id:perforated
-	Urlfield Value Should Be     id:image-url       http://localhost:8080/image/1
+	Textfield Value Should Be    id:image-url       http://localhost:8080/image/1
 	Should Be Equal              ${year}            2000
 
 Import series from external site with catalog numbers (use description locator)
@@ -107,7 +107,7 @@ Import series and series sale with a new seller from an external site
 	${group}=                   Get Selected List Label  id:seller-group
 	Should Be Equal             ${group}  example.com
 	Textfield Value Should Be   id:seller-name  Lando Livianus
-	Urlfield Value Should Be    id:seller-url   http://example.com/lando-livianus
+	Textfield Value Should Be   id:seller-url   http://example.com/lando-livianus
 	Submit Form                 id:create-series-form
 	# after importing a series, sale info should contain a new seller
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y

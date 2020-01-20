@@ -13,7 +13,7 @@ Import a series sale with an existing seller
 	Submit Form                  id:import-series-sale-form
 	# the original field is emptied after successful request,  so we wait for it
 	Wait Until Element Value Is  series-sale-url     ${EMPTY}
-	Urlfield Value Should Be     id:url              ${MOCK_SERVER}/series/sales/import/logic/existing-seller.html
+	Textfield Value Should Be    id:url              ${MOCK_SERVER}/series/sales/import/logic/existing-seller.html
 	List Selection Should Be     id:seller           Eicca Toppinen
 	Textfield Value Should Be    id:price            350
 	List Selection Should Be     id:currency         RUB

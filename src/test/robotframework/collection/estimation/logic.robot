@@ -19,18 +19,14 @@ Series with its price should be taken into account
 	Submit Form                  id:add-series-form
 	Go To                        ${SITE_URL}/collection/paid/estimation
 	Table Cell Should Contain    collection-estimation  row=2  column=2  text=100.00 ${expectedCurrency}
-	# FIXME: use "Table Footer Should Contain" instead, when it will be fixed.
-	# See https://github.com/Hi-Fi/robotframework-seleniumlibrary-java/issues/88
-	Table Header Should Contain  collection-estimation  100.00 ${expectedCurrency}
+	Table Footer Should Contain  collection-estimation  100.00 ${expectedCurrency}
 
 Series without price should be shown but not taken into account
 	Go To                        ${SITE_URL}/series/2
 	Submit Form                  id:add-series-form
 	Go To                        ${SITE_URL}/collection/paid/estimation
 	Table Cell Should Contain    collection-estimation  row=3  column=2  text=${EMPTY}
-	# FIXME: use "Table Footer Should Contain" instead, when it will be fixed.
-	# See https://github.com/Hi-Fi/robotframework-seleniumlibrary-java/issues/88
-	Table Header Should Contain  collection-estimation  100.00 ${expectedCurrency}
+	Table Footer Should Contain  collection-estimation  100.00 ${expectedCurrency}
 
 *** Keywords ***
 Before Test Suite

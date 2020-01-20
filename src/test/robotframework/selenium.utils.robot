@@ -8,22 +8,6 @@ Element Text Should Match Regexp
 	${text}=             Get Text  ${locator}
 	Should Match Regexp  ${text}  ${regexp}
 
-# Workaround for "Textfield Value Should Be" that causes NPE with <input type="url">:
-# https://github.com/Hi-Fi/robotframework-seleniumlibrary-java/issues/52
-Urlfield Value Should Be
-	[Documentation]  Verifies text field locator has exactly text expected
-	[Arguments]      ${locator}  ${expected}
-	${value}=        Get Value  ${locator}
-	Should Be Equal  ${expected}  ${value}
-
-# Workaround for "Textfield Value Should Be" that causes NPE with <input type="email">:
-# https://github.com/Hi-Fi/robotframework-seleniumlibrary-java/issues/52
-Emailfield Value Should Be
-	[Documentation]  Verifies text field locator has exactly text expected
-	[Arguments]      ${locator}  ${expected}
-	${value}=        Get Value  ${locator}
-	Should Be Equal  ${expected}  ${value}
-
 # We can't use "Select From List By Label" because
 # 1) it doesn't work with invisible elements (and selectize.js makes a field invisible)
 # 2) selectize.js dynamically creates a list of countries only when we click on a field
