@@ -476,7 +476,7 @@
 		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
 		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
-		<error-prone.version>2.3.3</error-prone.version>
+		<error-prone.version>2.3.4</error-prone.version>
 		<frontend.plugin.version>1.7.6</frontend.plugin.version>
 		<gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
 		
@@ -796,12 +796,15 @@
 					<!-- @todo #971 Document ErrorProne tool -->
 					<compilerArgs>
 						<compilerArg>-XDcompilePolicy=simple</compilerArg>
+						<!-- @todo #1170 ErrorProne: activate experimental checks -->
 						<!--
 							The following checks have been disabled:
 							- MissingOverride: produce false positives with @Getter from Lombok
 							- MixedMutabilityReturnType: because I like to use Collections.empty*() methods
+							- UnnecessaryAnonymousClass: I prefer to have an explicit implementation in a constant
+							- PreferJavaTimeOverload: disabled because of false positives: https://github.com/google/error-prone/issues/1435
 						-->
-						<compilerArg>-Xplugin:ErrorProne -Xep:MissingOverride:OFF -Xep:MixedMutabilityReturnType:OFF</compilerArg>
+						<compilerArg>-Xplugin:ErrorProne -Xep:MissingOverride:OFF -Xep:MixedMutabilityReturnType:OFF -Xep:UnnecessaryAnonymousClass:OFF -Xep:PreferJavaTimeOverload:OFF</compilerArg>
 					</compilerArgs>
 					<annotationProcessorPaths>
 						<path>
