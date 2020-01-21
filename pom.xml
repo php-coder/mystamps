@@ -549,7 +549,7 @@
 		
 		<resources.plugin.version>3.1.0</resources.plugin.version>
 		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>
-		<robotframework-plugin.version>1.5.1</robotframework-plugin.version>
+		<robotframework-plugin.version>1.6.0</robotframework-plugin.version>
 		<robotframework-selenium.version>3.141.59.26535</robotframework-selenium.version>
 		<robotframework.version>3.1.2</robotframework.version>
 		
@@ -1014,6 +1014,10 @@
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
 					<randomize>suite</randomize>
+					<!-- See http://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#controlling-console-output -->
+					<console>dotted</console>
+					<!-- See http://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#removing-keywords -->
+					<removeKeywords>PASSED</removeKeywords>
 					<!-- Handy for debugging. Log file will be created in target/ directory -->
 					<!--
 					<debugFile>${project.build.directory}/robotframework.log</debugFile>
