@@ -260,9 +260,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 fi
 
 mvn --batch-mode --activate-profiles frontend,native2ascii verify -Denforcer.skip=true -DskipUnitTests=true \
-	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
-# Workaround for #538
-"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
+	>verify.log 2>&1 || VERIFY_STATUS=fail
 
 print_status "$VERIFY_STATUS" 'Run integration tests'
 
@@ -295,7 +293,7 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify-raw.log verify.log danger.log ansible_lint.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
 if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
