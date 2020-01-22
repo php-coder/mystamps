@@ -495,7 +495,7 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<htmlunit.version>2.36.0</htmlunit.version>
 		
-		<jacoco.plugin.version>0.8.2</jacoco.plugin.version>
+		<jacoco.plugin.version>0.8.5</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
 		<!--
