@@ -82,7 +82,12 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 			}
 			
 			try (InputStream stream = new BufferedInputStream(conn.getInputStream())) {
-				Code validationResult = validateConnection(conn);
+				Code validationResult = validateResponseCode(conn);
+				if (validationResult != Code.SUCCESS) {
+					return DownloadResult.failed(validationResult);
+				}
+				
+				validationResult = validateContentType(conn);
 				if (validationResult != Code.SUCCESS) {
 					return DownloadResult.failed(validationResult);
 				}
@@ -155,7 +160,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 		}
 	}
 	
-	private Code validateConnection(HttpURLConnection conn) throws IOException {
+	private Code validateResponseCode(HttpURLConnection conn) throws IOException {
 		int status = conn.getResponseCode();
 		if (status == HttpURLConnection.HTTP_MOVED_TEMP
 			|| status == HttpURLConnection.HTTP_MOVED_PERM) {
@@ -169,6 +174,10 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 			return Code.UNEXPECTED_ERROR;
 		}
 		
+		return Code.SUCCESS;
+	}
+	
+	private Code validateContentType(HttpURLConnection conn) {
 		String contentType = conn.getContentType();
 		
 		// We need only the first part from "text/html; charset=UTF-8"
