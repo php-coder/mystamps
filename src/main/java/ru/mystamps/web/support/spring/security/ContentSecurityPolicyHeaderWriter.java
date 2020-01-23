@@ -68,7 +68,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String REPORT_URI = "report-uri ";
 	
 	// - 'https://cdn.jsdelivr.net' is required by languages.min.css (FIXME: GH #246)
-	private static final String STYLE_SRC = "style-src https://cdn.jsdelivr.net ";
+	private static final String STYLE_SRC = "style-src 'report-sample' https://cdn.jsdelivr.net ";
 	
 	// - 'self' is required for our own CSS files
 	private static final String STYLES_SELF = "'self'";
@@ -126,7 +126,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// 'unsafe-hashed-attributes' from CSP3. Details:
 	// https://github.com/jquery/jquery/blob/d71f6a53927ad02d/jquery.js#L1441-L1447
 	// and https://w3c.github.io/webappsec-csp/#unsafe-hashed-attributes-usage)
-	private static final String SCRIPT_SRC = "script-src 'unsafe-inline' ";
+	private static final String SCRIPT_SRC = "script-src 'report-sample' 'unsafe-inline' ";
 	
 	// - 'self' is required for our own JS files
 	private static final String SCRIPTS_SELF = "'self'";

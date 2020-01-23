@@ -70,8 +70,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 				"img-src https://cdn.jsdelivr.net 'self'",
 				"font-src 'self'",
 				"report-uri http://127.0.0.1:8080/site/csp/reports",
-				"style-src https://cdn.jsdelivr.net 'self'",
-				"script-src 'unsafe-inline' 'self'"
+				"style-src 'report-sample' https://cdn.jsdelivr.net 'self'",
+				"script-src 'report-sample' 'unsafe-inline' 'self'"
 			)
 			.hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
@@ -91,12 +91,14 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			)
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
 			)
 			.contains(
 				"script-src "
+					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
@@ -115,6 +117,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives)
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "https://www.gstatic.com "
@@ -122,6 +125,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			)
 			.contains(
 				"script-src "
+					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "'self' "
 					+ "'unsafe-eval' "
@@ -141,6 +145,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives)
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
@@ -149,6 +154,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			)
 			.contains(
 				"script-src "
+					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
@@ -172,6 +178,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			assertThat(directives)
 				.contains(
 					"style-src "
+						+ "'report-sample' "
 						+ "https://cdn.jsdelivr.net "
 						+ "'self' "
 						+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU='"
@@ -194,6 +201,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			assertThat(directives)
 				.contains(
 					"style-src "
+						+ "'report-sample' "
 						+ "https://cdn.jsdelivr.net "
 						+ "https://stamps.filezz.ru "
 						+ "https://maxcdn.bootstrapcdn.com "
@@ -201,6 +209,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 				)
 				.contains(
 					"script-src "
+						+ "'report-sample' "
 						+ "'unsafe-inline' "
 						+ "https://stamps.filezz.ru "
 						+ "https://maxcdn.bootstrapcdn.com "
@@ -223,6 +232,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives)
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "'self' "
 					+ "'sha256-DpmxvnMJIlwkpmmAANZYNzmyfnX2PQCBDO4CB2BFjzU=' "
@@ -230,6 +240,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			)
 			.contains(
 				"script-src "
+					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "'self' "
 					+ "https://cdnjs.cloudflare.com"
@@ -249,6 +260,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives)
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
@@ -257,6 +269,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			)
 			.contains(
 				"script-src "
+					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
@@ -278,6 +291,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(directives).
 			contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net"
 					+ " 'self'"
 					+ " 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
@@ -309,6 +323,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 			// "style-src" directive should be the same as for the index page
 			.contains(
 				"style-src "
+					+ "'report-sample' "
 					+ "https://cdn.jsdelivr.net "
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com"
