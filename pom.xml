@@ -916,10 +916,8 @@
 						Workaround for a bug in surefire plugin: it doesn't respect sourceEncoding
 						and doesn't pass it into a forked process.
 						See: https://stackoverflow.com/questions/17656475/maven-source-encoding-in-utf-8-not-working
-						
-						NB: @{argLine} is needed for JaCoCo java agent.
 					-->
-					<argLine>@{argLine} -Dfile.encoding=${project.build.sourceEncoding} -Xss256k</argLine>
+					<argLine>-Dfile.encoding=${project.build.sourceEncoding} -Xss256k</argLine>
 				</configuration>
 			</plugin>
 			
