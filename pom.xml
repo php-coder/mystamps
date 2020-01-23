@@ -308,6 +308,24 @@
 			<artifactId>react</artifactId>
 			<version>${react.version}</version>
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>loose-envify</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>object-assign</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>prop-types</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>scheduler</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
@@ -315,6 +333,24 @@
 			<artifactId>react-dom</artifactId>
 			<version>${react.version}</version>
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>loose-envify</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>object-assign</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>prop-types</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>scheduler</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- For mocking of non-interface types -->
