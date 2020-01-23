@@ -27,12 +27,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.regex.Pattern;
 
 @RestController
 @Slf4j
 public class CspController {
 	private static final String UNKNOWN = "<unknown>";
 
+	private static final Pattern ORIGINAL_POLICY_PATTERN = Pattern.compile(
+		"\"original-policy\":\"[^\"]+\","
+	);
+	
 	@PostMapping(SiteUrl.CSP_REPORTS_HANDLER)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void handleReport(
@@ -41,9 +46,11 @@ public class CspController {
 		@RequestHeader(name = "user-agent", defaultValue = UNKNOWN) String userAgent) {
 		
 		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
-		
 		log.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
-		log.warn(body);
+
+		// Omit "original-policy" as it quite long and useless most of the time
+		String report = ORIGINAL_POLICY_PATTERN.matcher(body).replaceFirst(StringUtils.EMPTY);
+		log.warn(report);
 	}
 
 }
