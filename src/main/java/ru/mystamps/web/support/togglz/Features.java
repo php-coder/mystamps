@@ -34,7 +34,11 @@ public enum Features implements Feature {
 	USE_COUNTRY_MICROSERVICE,
 	
 	@Label("/site/index: feature to check that Togglz works")
-	ALWAYS_DISABLED;
+	ALWAYS_DISABLED,
+	
+	@Label("Use Content-Security-Policy-Report-Only header instead of Content-Security-Policy")
+	@EnabledByDefault
+	CSP_REPORT_ONLY;
 	
 	public boolean isActive() {
 		return FeatureContext.getFeatureManager().isActive(this);

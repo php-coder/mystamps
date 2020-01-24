@@ -22,6 +22,7 @@ import org.springframework.security.web.header.HeaderWriter;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.site.SiteUrl;
+import ru.mystamps.web.support.togglz.Features;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,9 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 
+	private static final String CSP_HEADER             = "Content-Security-Policy";
+	private static final String CSP_REPORT_ONLY_HEADER = "Content-Security-Policy-Report-Only";
+	
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
 		CollectionUrl.INFO_COLLECTION_PAGE.replace("{slug}", "");
 	
@@ -165,7 +169,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		String uri = request.getRequestURI();
-		response.setHeader("Content-Security-Policy-Report-Only", constructDirectives(uri));
+		String header = Features.CSP_REPORT_ONLY.isActive() ? CSP_REPORT_ONLY_HEADER : CSP_HEADER;
+		response.setHeader(header, constructDirectives(uri));
 	}
 
 	@SuppressWarnings({ "PMD.NPathComplexity", "PMD.ModifiedCyclomaticComplexity" })

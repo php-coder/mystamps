@@ -468,6 +468,13 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
+			<artifactId>togglz-junit</artifactId>
+			<version>${togglz.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.togglz</groupId>
 			<artifactId>togglz-testing</artifactId>
 			<version>${togglz.version}</version>
 			<scope>test</scope>

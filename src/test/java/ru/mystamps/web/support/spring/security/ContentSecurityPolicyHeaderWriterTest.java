@@ -18,10 +18,13 @@
 package ru.mystamps.web.support.spring.security;
 
 import org.assertj.core.api.WithAssertions;
+import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.togglz.junit.TogglzRule;
 import ru.mystamps.web.feature.site.SiteUrl;
+import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.tests.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,20 +39,33 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	private static final int NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE = 7;
 	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
 	
+	@Rule
+	public TogglzRule togglz = TogglzRule.allEnabled(Features.class);
+	
 	//
 	// Tests for writeHeaders()
 	//
 	
 	@Test
 	public void writeContentSecurityPolicyHeader() {
+		// given
 		ContentSecurityPolicyHeaderWriter writer =
 			new ContentSecurityPolicyHeaderWriter(bool(), bool(), bool(), Random.host());
-		
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
+
+		// when
 		writer.writeHeaders(request, response);
-		
+		// then
 		String header = response.getHeader("Content-Security-Policy-Report-Only");
+		assertThat(header).isNotNull();
+		assertThat(header.split(";")).hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
+		
+		// when
+		togglz.disable(Features.CSP_REPORT_ONLY);
+		writer.writeHeaders(request, response);
+		// then
+		header = response.getHeader("Content-Security-Policy");
 		assertThat(header).isNotNull();
 		assertThat(header.split(";")).hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 	}
