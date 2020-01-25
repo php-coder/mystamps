@@ -4,7 +4,7 @@
 //
 
 function initPage(statByCategories, statByCountries) {
-	var chartsVersion = '44';
+	var chartsVersion = '47';
 	google.charts.load(chartsVersion, {'packages':['corechart']});
 	google.charts.setOnLoadCallback(function drawCharts() {
 		drawChart('categories-chart', createDataTable(statByCategories));

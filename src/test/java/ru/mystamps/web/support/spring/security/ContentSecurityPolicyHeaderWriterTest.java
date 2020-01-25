@@ -144,7 +144,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ "'report-sample' "
 					+ "'unsafe-inline' "
 					+ "'self' "
-					+ "'unsafe-eval' "
 					+ "https://www.gstatic.com"
 			)
 			// hope that all other directives are the same as on the index page
@@ -175,7 +174,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 					+ "https://stamps.filezz.ru "
 					+ "https://maxcdn.bootstrapcdn.com "
 					+ "https://yandex.st "
-					+ "'unsafe-eval' "
 					+ "https://www.gstatic.com"
 			)
 			// hope that all other directives are the same as on the index page

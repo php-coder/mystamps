@@ -148,9 +148,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	// - 'https://unpkg.com' is required by react/react-dom
 	private static final String SCRIPTS_SERIES_INFO_PAGE = " https://unpkg.com";
 	
-	// - 'unsafe-eval' is required by loader.js from Google Charts
 	// - 'https://www.gstatic.com' is required by Google Charts
-	private static final String SCRIPT_COLLECTION_INFO = " 'unsafe-eval' https://www.gstatic.com";
+	private static final String SCRIPT_COLLECTION_INFO = " https://www.gstatic.com";
 	
 	// - 'self' is required for AJAX requests from our scripts
 	// (country suggestions on /series/add and series sale import on /series/{id})
