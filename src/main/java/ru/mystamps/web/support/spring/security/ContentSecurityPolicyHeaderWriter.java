@@ -174,7 +174,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		
 		sb.append(DEFAULT_SRC).append(SEPARATOR)
 		  .append(IMG_SRC).append(useSingleHost ? IMG_SRC_SELF : IMG_SRC_ALT).append(SEPARATOR)
-		  .append(FONT_SRC).append(useCdn ?  FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
+		  .append(FONT_SRC).append(useCdn ? FONT_SRC_CDN : FONT_SRC_SELF).append(SEPARATOR)
 		  .append(REPORT_URI).append(host).append(SiteUrl.CSP_REPORTS_HANDLER).append(SEPARATOR)
 		  .append(STYLE_SRC).append(useSingleHost ? STYLES_SELF : STYLES_ALT);
 		
