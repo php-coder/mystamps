@@ -22,9 +22,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import ru.mystamps.web.tests.Random;
 import java.util.Locale;
 
@@ -33,9 +31,6 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank;
 import static io.qala.datagen.RandomShortApi.positiveInteger;
 
 public class JsoupSiteParserTest implements WithAssertions {
-	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 	
 	private JsoupSiteParser parser;
 	
@@ -50,10 +45,15 @@ public class JsoupSiteParserTest implements WithAssertions {
 	
 	@Test
 	public void parseShouldRequireNonBlankPageContent() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Page content must be non-blank");
-		
-		parser.parse(nullOrBlank());
+		// given
+		// when
+		Throwable thrown = catchThrowable(() -> {
+			parser.parse(nullOrBlank());
+		});
+		// then
+		assertThat(thrown)
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Page content must be non-blank");
 	}
 	
 	@Test
