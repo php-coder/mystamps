@@ -97,31 +97,23 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		" https://www.gstatic.com 'sha256-/kXZODfqoc2myS1eI6wr0HH8lUt+vRhW8H/oL+YJcMg='";
 	
 	// - 'sha256-biL...' is required for 'display: none;' inline CSS
-	// - 'sha256-ZdH...' is required for 'display: none' inline CSS
 	// - 'sha256-aqN...' is required for 'display:none' inline CSS
 	// - 'sha256-tIs...' is required for 'text-decoration: none;' inline CSS
 	// - 'sha256-VPM...' is required for 'vertical-align: middle;' inline CSS
 	// - 'sha256-CDs...' is required for 'padding:0px' inline CSS
-	// - 'sha256-65m...' is required for 'white-space:nowrap' inline CSS
-	// - 'sha256-xSK...' is required for 'margin: 0px; padding: 0px;' inline CSS
 	// - 'sha256-Jnn...' is required for 'padding:0;width:10px;height:10px;' inline CSS
 	// - 'sha256-yBh...' is required for 'margin: 20px' inline CSS
-	// - 'sha256-ec+...' is required for 'width:300px' inline CSS
-	// - 'sha256-rqk...' is required for 'width:300px;' inline CSS
+	// - 'sha256-RZ7...' is required for 'color:gray' inline CSS (table.js:246:4)
 	// - 'sha256-PGJ...' is required for 'width:200px;' inline CSS
 	private static final String STYLE_H2_CONSOLE =
 		" 'sha256-biLFinpqYMtWHmXfkA1BPeCY0/fNt46SAZ+BBk5YUog='"
-		+ " 'sha256-ZdHxw9eWtnxUb3mk6tBS+gIiVUPE3pGM470keHPDFlE='"
 		+ " 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='"
 		+ " 'sha256-tIs8OfjWm8MHgPJrHv7mM4wvA/FDFcra3Pd5icRMX+k='"
 		+ " 'sha256-VPm872V2JvE+vhivDg7UeH+N9a9YzzqGGow5mzY48hc='"
 		+ " 'sha256-CDs+xFw5uMoNgtE5XIrz5GXgs3O+/NFkYK2IK/vKSBE='"
-		+ " 'sha256-65mkwZPt4V1miqNM9CcVYkrpnlQigG9H6Vi9OM/JCgY='"
-		+ " 'sha256-xSKCQeN6yeCb4HCkijkjoBFHWdJFwmwDiFa3XlZZ6Bs='"
 		+ " 'sha256-JnnwE+8wsBgf/bh1qyvAsUVHBgiTioeZ1NSUKff7mOM='"
 		+ " 'sha256-yBhVF062O1IGu3ZngyEhh9l561VFLsJpdSxVtbwisRY='"
-		+ " 'sha256-eC+jXvbVSsG0J4zQfR5fWxxUCqpaa5DZLbINjWNCu48='"
-		+ " 'sha256-rqkMEwsWwrInJqctxmIaWOCFPV+Qmym3tMHH3wtq3Y0='"
+		+ " 'sha256-RZ7vfNSfdJtvDeBSz2SI5g3wroaD1A1SzsDb04Yw9V0='"
 		+ " 'sha256-PGJ8tjuz2DXGgB1Sie9pW8BrxBGK6EQndbLEkXd44T8='";
 	
 	// - 'unsafe-inline' is required by jquery.min.js (that is using code inside of
