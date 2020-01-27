@@ -210,9 +210,10 @@ class LegacySiteServiceImplTest extends Specification {
 				assert activity?.method == expectedMethod
 				return true
 			})
-		where: expectedMethod | _
-			'OPTIONS'         | _
-			null              | _
+		where:
+			expectedMethod | _
+			'OPTIONS'      | _
+			null           | _
 	}
 
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -311,10 +312,11 @@ class LegacySiteServiceImplTest extends Specification {
 				assert activity?.refererPage == null
 				return true
 			})
-		where: refererPage | _
-			'  '           | _
-			''             | _
-			null           | _
+		where:
+			refererPage | _
+			'  '        | _
+			''          | _
+			null        | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -352,10 +354,11 @@ class LegacySiteServiceImplTest extends Specification {
 				assert activity?.userAgent == null
 				return true
 			})
-		where: userAgent | _
-			'  '     | _
-			''       | _
-			null     | _
+		where:
+			userAgent | _
+			'  '      | _
+			''        | _
+			null      | _
 	}
 	
 }
