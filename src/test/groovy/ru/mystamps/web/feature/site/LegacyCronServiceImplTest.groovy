@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.site
 
+import org.assertj.core.api.WithAssertions
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.account.UserService
 import ru.mystamps.web.feature.account.UsersActivationFullDto
@@ -30,7 +31,7 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class LegacyCronServiceImplTest extends Specification {
+class LegacyCronServiceImplTest extends Specification implements WithAssertions {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
@@ -66,14 +67,14 @@ class LegacyCronServiceImplTest extends Specification {
 		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
 	}
 	
-	private static void assertMidnightOfYesterday(Date date) {
-		assert date != null
+	private void assertMidnightOfYesterday(Date date) {
+		assertThat(date).isNotNull()
 		assertDatesEqual(date, new Date().previous())
 		assertMidnight(date)
 	}
 	
-	private static void assertMidnightOfToday(Date date) {
-		assert date != null
+	private void assertMidnightOfToday(Date date) {
+		assertThat(date).isNotNull()
 		assertDatesEqual(date, new Date())
 		assertMidnight(date)
 	}
