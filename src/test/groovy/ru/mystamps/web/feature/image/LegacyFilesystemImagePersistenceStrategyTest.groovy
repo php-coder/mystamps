@@ -26,8 +26,8 @@ import java.nio.file.Path
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
 class LegacyFilesystemImagePersistenceStrategyTest extends Specification {
-	private static final STORAGE_DIR = File.separator + 'tmp'
-	private static final PREVIEW_DIR = File.separator + 'tmp'
+	private static final String STORAGE_DIR = File.separator + 'tmp'
+	private static final String PREVIEW_DIR = File.separator + 'tmp'
 	
 	private final MultipartFile multipartFile = Mock()
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
