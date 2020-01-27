@@ -40,10 +40,11 @@ class LegacyImageServiceImplTest extends Specification {
 		imageDao
 	)
 	
+	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
-		multipartFile.size >> 1024L
-		multipartFile.contentType >> 'image/png'
-		multipartFile.originalFilename >> 'super-image.png'
+		multipartFile.getSize() >> 1024L
+		multipartFile.getContentType() >> 'image/png'
+		multipartFile.getOriginalFilename() >> 'super-image.png'
 		imageDao.add(_ as String, _ as String) >> 17
 	}
 	

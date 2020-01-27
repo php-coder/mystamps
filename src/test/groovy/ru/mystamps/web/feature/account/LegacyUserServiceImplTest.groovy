@@ -36,18 +36,19 @@ class LegacyUserServiceImplTest extends Specification {
 	private UserService service
 	private ActivateAccountForm activationForm
 	
+	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
 		AddUserDbDto user = TestObjects.createAddUserDbDto()
 		
-		encoder.encode(_ as String) >> user.hash
+		encoder.encode(_ as String) >> user.getHash()
 		
 		UsersActivationDto activation = TestObjects.createUsersActivationDto()
 		usersActivationService.findByActivationKey(_ as String) >> activation
 		
 		activationForm = new ActivateAccountForm()
-		activationForm.setLogin(user.login)
+		activationForm.setLogin(user.getLogin())
 		activationForm.setPassword(TestObjects.TEST_PASSWORD)
-		activationForm.setName(user.name)
+		activationForm.setName(user.getName())
 		activationForm.setActivationKey(TestObjects.TEST_ACTIVATION_KEY)
 		
 		service = new UserServiceImpl(
