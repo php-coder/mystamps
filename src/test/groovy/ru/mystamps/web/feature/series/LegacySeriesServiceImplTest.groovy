@@ -955,7 +955,7 @@ class LegacySeriesServiceImplTest extends Specification {
 			1 * solovyovCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
-	def 'findBySolovyovNumber() shouldn\'t try to find series info if there are no series'() {
+	def "findBySolovyovNumber() shouldn't try to find series info if there are no series"() {
 		given:
 			solovyovCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
@@ -994,7 +994,7 @@ class LegacySeriesServiceImplTest extends Specification {
 			1 * zagorskiCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
-	def 'findByZagorskiNumber() shouldn\'t try to find series info if there are no series'() {
+	def "findByZagorskiNumber() shouldn't try to find series info if there are no series"() {
 		given:
 			zagorskiCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:

@@ -70,7 +70,7 @@ class LegacyCollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings('FactoryMethodName')
-	def 'createCollection() should throw exception when owner login can\'t be converted to slug'() {
+	def "createCollection() should throw exception when owner login can't be converted to slug"() {
 		when:
 			service.createCollection(Random.userId(), '')
 		then:

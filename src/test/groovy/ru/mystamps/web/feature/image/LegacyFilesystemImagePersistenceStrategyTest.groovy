@@ -94,7 +94,7 @@ class LegacyFilesystemImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
-	def 'get() should return null when file doesn\'t exist'() {
+	def "get() should return null when file doesn't exist"() {
 		given:
 			strategy.exists(_ as Path) >> false
 		and:
