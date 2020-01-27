@@ -54,11 +54,12 @@ class LegacyCronServiceImplTest extends Specification implements WithAssertions 
 		mailService
 	)
 	
-	private static void assertMidnight(Date date) {
-		assert date[Calendar.HOUR_OF_DAY] == 0
-		assert date[Calendar.MINUTE]      == 0
-		assert date[Calendar.SECOND]      == 0
-		assert date[Calendar.MILLISECOND] == 0
+	private void assertMidnight(Date date) {
+		assertThat(date)
+			.hasHourOfDay(0)
+			.hasMinute(0)
+			.hasSecond(0)
+			.hasMillisecond(0)
 	}
 	
 	private static void assertDatesEqual(Date first, Date second) {
