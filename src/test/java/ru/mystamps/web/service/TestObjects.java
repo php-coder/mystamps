@@ -86,12 +86,11 @@ public final class TestObjects {
 	}
 	
 	public static UsersActivationFullDto createUsersActivationFullDto() {
-		UsersActivationFullDto activation = new UsersActivationFullDto(
+		return new UsersActivationFullDto(
 			TEST_ACTIVATION_KEY,
 			TEST_EMAIL,
 			Random.date()
 		);
-		return activation;
 	}
 	
 	public static UsersActivationDto createUsersActivationDto() {
