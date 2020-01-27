@@ -329,7 +329,6 @@ class LegacySeriesImportServiceImplTest extends Specification {
 				assert status?.newStatus == expectedNewStatus
 				return true
 			})
-	
 	}
 	
 	//

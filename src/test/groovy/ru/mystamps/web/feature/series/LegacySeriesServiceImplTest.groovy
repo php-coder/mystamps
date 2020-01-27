@@ -758,7 +758,7 @@ class LegacySeriesServiceImplTest extends Specification {
 			result.createdBy    == expectedInfo.createdBy
 			
 			result.imageIds     == expectedImageIds
-
+			
 			result.michel?.numbers   == expectedMichelNumbers
 			result.michel?.price     == expectedInfo.michelPrice
 			

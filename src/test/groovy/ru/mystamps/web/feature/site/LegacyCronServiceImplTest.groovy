@@ -231,7 +231,7 @@ class LegacyCronServiceImplTest extends Specification {
 	def "purgeUsersActivations() should do nothing if no activations"() {
 		given:
 			usersActivationService.findOlderThan(_ as Integer) >> []
-		when:		
+		when:
 			service.purgeUsersActivations()
 		then:
 			0 * usersActivationService.remove(_ as String)
