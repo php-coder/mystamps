@@ -41,7 +41,7 @@ import static io.qala.datagen.RandomShortApi.positiveLong
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class SeriesServiceImplTest extends Specification {
+class LegacySeriesServiceImplTest extends Specification {
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()
 	private final StampsCatalogService michelCatalogService = Mock()

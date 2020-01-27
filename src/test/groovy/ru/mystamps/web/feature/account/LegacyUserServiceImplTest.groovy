@@ -26,7 +26,7 @@ import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class UserServiceImplTest extends Specification {
+class LegacyUserServiceImplTest extends Specification {
 	
 	private final UserDao userDao = Mock()
 	private final UsersActivationService usersActivationService = Mock()

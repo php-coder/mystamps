@@ -15,10 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.category
+package ru.mystamps.web.feature.country
 
 import org.slf4j.helpers.NOPLogger
-import ru.mystamps.web.common.EntityWithParentDto
 import ru.mystamps.web.common.LinkEntityDto
 import ru.mystamps.web.common.SlugUtils
 import ru.mystamps.web.service.TestObjects
@@ -41,17 +40,17 @@ import static io.qala.datagen.StringModifier.Impls.oneOf
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class CategoryServiceImplTest extends Specification {
+class LegacyCountryServiceImplTest extends Specification {
 	
-	private final CategoryDao categoryDao = Mock()
-	private final CategoryService service = new CategoryServiceImpl(NOPLogger.NOP_LOGGER, categoryDao)
+	private final CountryDao countryDao = Mock()
+	private final CountryService service = new CountryServiceImpl(NOPLogger.NOP_LOGGER, countryDao)
 	
-	private AddCategoryForm form
+	private AddCountryForm form
 	
 	def setup() {
-		form = new AddCategoryForm()
-		form.setName(Random.categoryName())
-		form.setNameRu('Любое название категории')
+		form = new AddCountryForm()
+		form.setName(Random.countryName())
+		form.setNameRu('Любое название страны')
 	}
 	
 	//
@@ -66,14 +65,14 @@ class CategoryServiceImplTest extends Specification {
 			ex.message == 'DTO must be non null'
 	}
 	
-	def 'add() should throw exception when English category name is null'() {
+	def 'add() should throw exception when country name in English is null'() {
 		given:
 			form.setName(null)
 		when:
 			service.add(form, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
-			ex.message == 'Category name in English must be non null'
+			ex.message == 'Country name in English must be non null'
 	}
 	
 	def 'add() should throw exception when user is null'() {
@@ -88,11 +87,11 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			Integer expectedId = 10
 		and:
-			form.setName('Example Category')
+			form.setName('Example Country')
 		and:
-			String expectedSlug = 'example-category'
+			String expectedSlug = 'example-country'
 		and:
-			categoryDao.add(_ as AddCategoryDbDto) >> expectedId
+			countryDao.add(_ as AddCountryDbDto) >> expectedId
 		when:
 			String actualSlug = service.add(form, Random.userId())
 		then:
@@ -120,8 +119,8 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.add(form, Random.userId())
 		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.slug == slug
+			1 * countryDao.add({ AddCountryDbDto country ->
+				assert country?.slug == slug
 				return true
 			}) >> 40
 	}
@@ -130,23 +129,23 @@ class CategoryServiceImplTest extends Specification {
 	def 'add() should pass values to dao'() {
 		given:
 			Integer expectedUserId = 10
-			String expectedEnglishName = 'Animals'
-			String expectedRussianName = 'Животные'
+			String expectedEnglishName = 'Italy'
+			String expectedRussianName = 'Италия'
 		and:
 			form.setName(expectedEnglishName)
 			form.setNameRu(expectedRussianName)
 		when:
 			service.add(form, expectedUserId)
 		then:
-			1 * categoryDao.add({ AddCategoryDbDto category ->
-				assert category?.name == expectedEnglishName
-				assert category?.nameRu == expectedRussianName
-				assert category?.createdBy == expectedUserId
-				assert category?.updatedBy == expectedUserId
-				assert DateUtils.roughlyEqual(category?.createdAt, new Date())
-				assert DateUtils.roughlyEqual(category?.updatedAt, new Date())
+			1 * countryDao.add({ AddCountryDbDto country ->
+				assert country?.name == expectedEnglishName
+				assert country?.nameRu == expectedRussianName
+				assert country?.createdBy == expectedUserId
+				assert country?.updatedBy == expectedUserId
+				assert DateUtils.roughlyEqual(country?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(country?.updatedAt, new Date())
 				return true
-			}) >> 70
+			}) >> 80
 	}
 	
 	//
@@ -167,7 +166,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.findIdsByNames(expectedNames)
 		then:
-			1 * categoryDao.findIdsByNames(expectedNames) >> expectedResult
+			1 * countryDao.findIdsByNames(expectedNames) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -179,7 +178,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findIdsByNames(names)
 		then:
-			1 * categoryDao.findIdsByNames(expectedNames) >> Random.listOfIntegers()
+			1 * countryDao.findIdsByNames(expectedNames) >> Random.listOfIntegers()
 	}
 	
 	//
@@ -213,7 +212,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			List<Integer> result = service.findIdsWhenNameStartsWith(name)
 		then:
-			1 * categoryDao.findIdsByNamePattern(expectedPattern) >> expectedResult
+			1 * countryDao.findIdsByNamePattern(expectedPattern) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -224,17 +223,17 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'findAllAsLinkEntities(String) should call dao'() {
 		given:
-			LinkEntityDto category1 = new LinkEntityDto(1, 'first-category', 'First Category')
+			LinkEntityDto country1 = new LinkEntityDto(1, 'first-country', 'First Country')
 		and:
-			LinkEntityDto category2 = new LinkEntityDto(2, 'second-category', 'Second Category')
+			LinkEntityDto country2 = new LinkEntityDto(2, 'second-country', 'Second Country')
 		and:
-			List<LinkEntityDto> expectedCategories = [ category1, category2 ]
+			List<LinkEntityDto> expectedCountries = [ country1, country2 ]
 		and:
-			categoryDao.findAllAsLinkEntities(_ as String) >> expectedCategories
+			countryDao.findAllAsLinkEntities(_ as String) >> expectedCountries
 		when:
-			List<LinkEntityDto> resultCategories = service.findAllAsLinkEntities('fr')
+			List<LinkEntityDto> resultCountries = service.findAllAsLinkEntities('de')
 		then:
-			resultCategories == expectedCategories
+			resultCountries == expectedCountries
 	}
 	
 	@Unroll
@@ -242,7 +241,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
 		then:
-			1 * categoryDao.findAllAsLinkEntities(expectedLanguage)
+			1 * countryDao.findAllAsLinkEntities(expectedLanguage)
 		where:
 			expectedLanguage | _
 			'ru'             | _
@@ -250,40 +249,24 @@ class CategoryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findCategoriesWithParents()
-	//
-	
-	def 'findCategoriesWithParents() should invoke dao and return its result'() {
-		given:
-			String expectedLang = nullOr(Random.lang())
-			List<EntityWithParentDto> expectedResult = Random.listOfEntityWithParentDto()
-		when:
-			List<EntityWithParentDto> result = service.findCategoriesWithParents(expectedLang)
-		then:
-			1 * categoryDao.findCategoriesWithParents(expectedLang) >> expectedResult
-		and:
-			result == expectedResult
-	}
-	
-	//
 	// Tests for findOneAsLinkEntity()
 	//
 	
-	def 'findOneAsLinkEntity() should throw exception when category slug is null'() {
+	def 'findOneAsLinkEntity() should throw exception when country slug is null'() {
 		when:
 			service.findOneAsLinkEntity(null, Random.lang())
 		then:
 			IllegalArgumentException ex = thrown()
-			ex.message == 'Category slug must be non null'
+			ex.message == 'Country slug must be non null'
 	}
 	
 	@Unroll
-	def "findOneAsLinkEntity() should throw exception when category slug is '#slug'"(String slug) {
+	def "findOneAsLinkEntity() should throw exception when country slug is '#slug'"(String slug) {
 		when:
 			service.findOneAsLinkEntity(slug, 'ru')
 		then:
 			IllegalArgumentException ex = thrown()
-			ex.message == 'Category slug must be non empty'
+			ex.message == 'Country slug must be non empty'
 		where:
 			slug | _
 			' '  | _
@@ -292,7 +275,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'findOneAsLinkEntity() should pass arguments to dao'() {
 		given:
-			String expectedSlug = 'people'
+			String expectedSlug = 'france'
 		and:
 			String expectedLang = 'fr'
 		and:
@@ -300,7 +283,7 @@ class CategoryServiceImplTest extends Specification {
 		when:
 			LinkEntityDto actualDto = service.findOneAsLinkEntity(expectedSlug, expectedLang)
 		then:
-			1 * categoryDao.findOneAsLinkEntity(expectedSlug, expectedLang) >> expectedDto
+			1 * countryDao.findOneAsLinkEntity(expectedSlug, expectedLang) >> expectedDto
 		and:
 			actualDto == expectedDto
 	}
@@ -311,34 +294,34 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'countAll() should call dao and returns result'() {
 		given:
-			long expectedResult = 10
+			long expectedResult = 20
 		when:
 			long result = service.countAll()
 		then:
-			1 * categoryDao.countAll() >> expectedResult
+			1 * countryDao.countAll() >> expectedResult
 		and:
 			result == expectedResult
 	}
 	
 	//
-	// Tests for countCategoriesOf()
+	// Tests for countCountriesOf()
 	//
 	
-	def 'countCategoriesOf() should throw exception when collection id is null'() {
+	def 'countCountriesOf() should throw exception when collection id is null'() {
 		when:
-			service.countCategoriesOf(null)
+			service.countCountriesOf(null)
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Collection id must be non null'
 	}
 	
-	def 'countCategoriesOf() should pass arguments to dao'() {
+	def 'countCountriesOf() should pass arguments to dao'() {
 		given:
-			Integer expectedCollectionId = 10
+			Integer expectedCollectionId = 9
 		when:
-			service.countCategoriesOf(expectedCollectionId)
+			service.countCountriesOf(expectedCollectionId)
 		then:
-			1 * categoryDao.countCategoriesOfCollection(expectedCollectionId) >> 0L
+			1 * countryDao.countCountriesOfCollection(expectedCollectionId) >> 0L
 	}
 	
 	//
@@ -350,12 +333,12 @@ class CategoryServiceImplTest extends Specification {
 			service.countBySlug(null)
 		then:
 			IllegalArgumentException ex = thrown()
-			ex.message == 'Category slug must be non null'
+			ex.message == 'Country slug must be non null'
 	}
 	
 	def 'countBySlug() should call dao'() {
 		given:
-			categoryDao.countBySlug(_ as String) >> 3L
+			countryDao.countBySlug(_ as String) >> 3L
 		when:
 			long result = service.countBySlug('any-slug')
 		then:
@@ -376,18 +359,18 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'countByName() should call dao'() {
 		given:
-			categoryDao.countByName(_ as String) >> 2L
+			countryDao.countByName(_ as String) >> 2L
 		when:
 			long result = service.countByName('Any name here')
 		then:
 			result == 2L
 	}
 	
-	def 'countByName() should pass category name to dao in lowercase'() {
+	def 'countByName() should pass country name to dao in lowercase'() {
 		when:
-			service.countByName('Sport')
+			service.countByName('Canada')
 		then:
-			1 * categoryDao.countByName('sport')
+			1 * countryDao.countByName('canada')
 	}
 	
 	//
@@ -404,7 +387,7 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'countByNameRu() should call dao'() {
 		given:
-			categoryDao.countByNameRu(_ as String) >> 2L
+			countryDao.countByNameRu(_ as String) >> 2L
 		when:
 			long result = service.countByNameRu('Any name here')
 		then:
@@ -413,9 +396,9 @@ class CategoryServiceImplTest extends Specification {
 	
 	def 'countByNameRu() should pass category name to dao in lowercase'() {
 		when:
-			service.countByNameRu('Спорт')
+			service.countByNameRu('Канада')
 		then:
-			1 * categoryDao.countByNameRu('спорт')
+			1 * countryDao.countByNameRu('канада')
 	}
 	
 	//
@@ -434,11 +417,11 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			Date expectedDate = new Date()
 		and:
-			long expectedResult = 33
+			long expectedResult = 34
 		when:
 			long result = service.countAddedSince(expectedDate)
 		then:
-			1 * categoryDao.countAddedSince(expectedDate) >> expectedResult
+			1 * countryDao.countAddedSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -459,11 +442,11 @@ class CategoryServiceImplTest extends Specification {
 		given:
 			Date expectedDate = new Date()
 		and:
-			long expectedResult = 17
+			long expectedResult = 18
 		when:
 			long result = service.countUntranslatedNamesSince(expectedDate)
 		then:
-			1 * categoryDao.countUntranslatedNamesSince(expectedDate) >> expectedResult
+			1 * countryDao.countUntranslatedNamesSince(expectedDate) >> expectedResult
 		and:
 			result == expectedResult
 	}
@@ -471,7 +454,7 @@ class CategoryServiceImplTest extends Specification {
 	//
 	// Tests for getStatisticsOf()
 	//
-
+	
 	def 'getStatisticsOf() should throw exception when collection id is null'() {
 		when:
 			service.getStatisticsOf(null, Random.lang())
@@ -479,53 +462,79 @@ class CategoryServiceImplTest extends Specification {
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Collection id must be non null'
 	}
-
+	
 	def 'getStatisticsOf() should invoke dao, pass arguments and return result from dao'() {
 		given:
 			Integer expectedCollectionId = Random.id()
 		and:
 			String expectedLang = Random.lang()
 		and:
-			Map<String, Integer> expectedResult = [ (Random.categoryName()):positiveInteger() ]
+			Map<String, Integer> expectedResult = [ (Random.countryName()):positiveInteger() ]
 		when:
 			Map<String, Integer> result = service.getStatisticsOf(expectedCollectionId, expectedLang)
 		then:
-			1 * categoryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> expectedResult
+			1 * countryDao.getStatisticsOf(expectedCollectionId, expectedLang) >> expectedResult
 		and:
 			result == expectedResult
 	}
 	
 	//
-	// Tests for suggestCategoryForUser()
+	// Tests for suggestCountryForUser()
 	//
 	
-	def 'suggestCategoryForUser() should throw exception when user id is null'() {
+	def 'suggestCountryForUser() should throw exception when user id is null'() {
 		when:
-			service.suggestCategoryForUser(null)
+			service.suggestCountryForUser(null)
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'User id must be non null'
 	}
 	
-	def 'suggestCategoryForUser() should return category of the last created series'() {
+	def 'suggestCountryForUser() should return country of the last created series'() {
 		given:
 			Integer expectedUserId = Random.userId()
-			String expectedSlug = Random.categorySlug()
+			String expectedSlug = Random.countrySlug()
 		when:
-			String slug = service.suggestCategoryForUser(expectedUserId)
+			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
-			1 * categoryDao.findCategoryOfLastCreatedSeriesByUser(expectedUserId) >> expectedSlug
+			1 * countryDao.findCountryOfLastCreatedSeriesByUser(expectedUserId) >> expectedSlug
 		and:
 			slug == expectedSlug
 	}
 	
-	def 'suggestCategoryForUser() should return null when cannot suggest'() {
+	def 'suggestCountryForUser() should return popular country from collection'() {
+		given:
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.countrySlug()
 		when:
-			String slug = service.suggestCategoryForUser(Random.userId())
+			String slug = service.suggestCountryForUser(expectedUserId)
 		then:
-			1 * categoryDao.findCategoryOfLastCreatedSeriesByUser(_ as Integer) >> null
+			1 * countryDao.findPopularCountryInCollection(expectedUserId) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+
+	def 'suggestCountryForUser() should return a recently created country'() {
+		given:
+			Integer expectedUserId = Random.userId()
+			String expectedSlug = Random.countrySlug()
+		when:
+			String slug = service.suggestCountryForUser(expectedUserId)
+		then:
+			1 * countryDao.findLastCountryCreatedByUser(expectedUserId) >> expectedSlug
+		and:
+			slug == expectedSlug
+	}
+
+	def 'suggestCountryForUser() should return null when cannot suggest'() {
+		when:
+			String slug = service.suggestCountryForUser(Random.userId())
+		then:
+			1 * countryDao.findCountryOfLastCreatedSeriesByUser(_ as Integer) >> null
+			1 * countryDao.findPopularCountryInCollection(_ as Integer) >> null
+			1 * countryDao.findLastCountryCreatedByUser(_ as Integer) >> null
 		and:
 			slug == null
 	}
-
+	
 }

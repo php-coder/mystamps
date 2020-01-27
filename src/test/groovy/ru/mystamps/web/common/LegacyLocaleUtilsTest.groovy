@@ -21,7 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class LocaleUtilsTest extends Specification {
+class LegacyLocaleUtilsTest extends Specification {
 	
 	//
 	// Tests for getLanguageOrNull()

@@ -24,7 +24,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class SeriesSalesServiceImplTest extends Specification {
+class LegacySeriesSalesServiceImplTest extends Specification {
 	
 	private final SeriesSalesDao seriesSalesDao = Mock()
 	private final SeriesSalesService service = new SeriesSalesServiceImpl(

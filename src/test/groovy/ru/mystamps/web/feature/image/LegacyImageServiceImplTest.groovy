@@ -26,7 +26,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class ImageServiceImplTest extends Specification {
+class LegacyImageServiceImplTest extends Specification {
 
 	private final ImageDao imageDao = Mock()
 	private final MultipartFile multipartFile = Mock()

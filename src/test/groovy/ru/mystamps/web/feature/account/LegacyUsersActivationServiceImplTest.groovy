@@ -25,7 +25,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class UsersActivationServiceImplTest extends Specification {
+class LegacyUsersActivationServiceImplTest extends Specification {
 	
 	private final UsersActivationDao usersActivationDao = Mock()
 	private final MailService mailService = Mock()

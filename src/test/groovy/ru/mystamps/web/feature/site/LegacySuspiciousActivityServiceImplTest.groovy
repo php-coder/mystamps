@@ -22,7 +22,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class SuspiciousActivityServiceImplTest extends Specification {
+class LegacySuspiciousActivityServiceImplTest extends Specification {
 	
 	private final SuspiciousActivityDao suspiciousActivityDao = Mock()
 	

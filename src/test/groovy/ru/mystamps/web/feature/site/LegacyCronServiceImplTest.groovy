@@ -30,7 +30,7 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class CronServiceImplTest extends Specification {
+class LegacyCronServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()

@@ -43,7 +43,7 @@ import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServic
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class SeriesInfoExtractorServiceImplTest extends Specification {
+class LegacySeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()

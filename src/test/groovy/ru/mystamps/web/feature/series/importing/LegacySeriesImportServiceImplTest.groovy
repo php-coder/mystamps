@@ -48,7 +48,7 @@ import static io.qala.datagen.RandomValue.between
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class SeriesImportServiceImplTest extends Specification {
+class LegacySeriesImportServiceImplTest extends Specification {
 	
 	private final SeriesImportDao seriesImportDao = Mock()
 	private final SeriesService seriesService = Mock()

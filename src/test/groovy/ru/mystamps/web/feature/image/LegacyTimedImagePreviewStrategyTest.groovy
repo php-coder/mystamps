@@ -22,7 +22,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class TimedImagePreviewStrategyTest extends Specification {
+class LegacyTimedImagePreviewStrategyTest extends Specification {
 	
 	private final ImagePreviewStrategy origStrategy = Mock()
 	

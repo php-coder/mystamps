@@ -37,7 +37,7 @@ import static io.qala.datagen.RandomShortApi.positiveLong
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class CollectionServiceImplTest extends Specification {
+class LegacyCollectionServiceImplTest extends Specification {
 	
 	private final CollectionDao collectionDao = Mock()
 	

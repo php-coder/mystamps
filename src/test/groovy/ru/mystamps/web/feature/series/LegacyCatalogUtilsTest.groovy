@@ -21,7 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class CatalogUtilsTest extends Specification {
+class LegacyCatalogUtilsTest extends Specification {
 	
 	//
 	// Tests for toShortForm()

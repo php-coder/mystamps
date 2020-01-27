@@ -21,7 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class PagerTest extends Specification {
+class LegacyPagerTest extends Specification {
 	
 	//
 	// Tests for Pager()

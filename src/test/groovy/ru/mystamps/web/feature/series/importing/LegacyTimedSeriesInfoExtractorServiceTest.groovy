@@ -32,7 +32,7 @@ import static io.qala.datagen.RandomShortApi.nullOr
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class TimedSeriesInfoExtractorServiceTest extends Specification {
+class LegacyTimedSeriesInfoExtractorServiceTest extends Specification {
 	
 	private final SeriesInfoExtractorService origService = Mock()
 	

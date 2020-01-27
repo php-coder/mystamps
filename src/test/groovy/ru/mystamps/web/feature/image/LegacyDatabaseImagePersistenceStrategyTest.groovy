@@ -23,7 +23,7 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class DatabaseImagePersistenceStrategyTest extends Specification {
+class LegacyDatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private final ImageDataDao imageDataDao = Mock()
 	private final MultipartFile multipartFile = Mock()

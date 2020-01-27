@@ -23,7 +23,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class StampsCatalogServiceImplTest extends Specification {
+class LegacyStampsCatalogServiceImplTest extends Specification {
 	
 	private final StampsCatalogDao stampsCatalogDao = Mock()
 	
