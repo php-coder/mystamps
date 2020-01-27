@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.site
 
+import static org.assertj.core.util.DateUtil.yesterday
+
 import org.assertj.core.api.WithAssertions
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.account.UserService
@@ -62,21 +64,15 @@ class LegacyCronServiceImplTest extends Specification implements WithAssertions 
 			.hasMillisecond(0)
 	}
 	
-	private static void assertDatesEqual(Date first, Date second) {
-		assert first[Calendar.YEAR]         == second[Calendar.YEAR]
-		assert first[Calendar.MONTH]        == second[Calendar.MONTH]
-		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
-	}
-	
 	private void assertMidnightOfYesterday(Date date) {
 		assertThat(date).isNotNull()
-		assertDatesEqual(date, new Date().previous())
+		assertThat(date).isInSameDayAs(yesterday())
 		assertMidnight(date)
 	}
 	
 	private void assertMidnightOfToday(Date date) {
 		assertThat(date).isNotNull()
-		assertDatesEqual(date, new Date())
+		assertThat(date).isToday()
 		assertMidnight(date)
 	}
 	
