@@ -19,6 +19,9 @@ package ru.mystamps.web.feature.site
 
 import static org.assertj.core.util.DateUtil.yesterday
 
+@SuppressWarnings('UnnecessaryGroovyImport')
+import java.util.Date
+
 import org.assertj.core.api.WithAssertions
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.account.UserService
