@@ -71,8 +71,7 @@ public final class TestObjects {
 	
 	public static final String TEST_EMAIL           = "test@example.org";
 	public static final String TEST_ACTIVATION_KEY  = "1234567890";
-	
-	protected static final String TEST_PASSWORD     = "secret";
+	public static final String TEST_PASSWORD        = "secret";
 	
 	private static final String TEST_NAME           = "Test Name";
 	private static final String TEST_URL            = "test.example.org";
@@ -87,12 +86,11 @@ public final class TestObjects {
 	}
 	
 	public static UsersActivationFullDto createUsersActivationFullDto() {
-		UsersActivationFullDto activation = new UsersActivationFullDto(
+		return new UsersActivationFullDto(
 			TEST_ACTIVATION_KEY,
 			TEST_EMAIL,
 			Random.date()
 		);
-		return activation;
 	}
 	
 	public static UsersActivationDto createUsersActivationDto() {

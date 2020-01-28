@@ -25,9 +25,9 @@ import spock.lang.Specification
 import java.nio.file.Path
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class FilesystemImagePersistenceStrategyTest extends Specification {
-	private static final STORAGE_DIR = File.separator + 'tmp'
-	private static final PREVIEW_DIR = File.separator + 'tmp'
+class LegacyFilesystemImagePersistenceStrategyTest extends Specification {
+	private static final String STORAGE_DIR = File.separator + 'tmp'
+	private static final String PREVIEW_DIR = File.separator + 'tmp'
 	
 	private final MultipartFile multipartFile = Mock()
 	private final ImageInfoDto imageInfoDto = TestObjects.createImageInfoDto()
@@ -94,7 +94,7 @@ class FilesystemImagePersistenceStrategyTest extends Specification {
 	// Tests for get()
 	//
 	
-	def 'get() should return null when file doesn\'t exist'() {
+	def "get() should return null when file doesn't exist"() {
 		given:
 			strategy.exists(_ as Path) >> false
 		and:

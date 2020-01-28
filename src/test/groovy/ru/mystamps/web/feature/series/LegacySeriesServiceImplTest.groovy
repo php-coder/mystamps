@@ -41,7 +41,7 @@ import static io.qala.datagen.RandomShortApi.positiveLong
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class SeriesServiceImplTest extends Specification {
+class LegacySeriesServiceImplTest extends Specification {
 	private final ImageService imageService = Mock()
 	private final SeriesDao seriesDao = Mock()
 	private final StampsCatalogService michelCatalogService = Mock()
@@ -758,7 +758,7 @@ class SeriesServiceImplTest extends Specification {
 			result.createdBy    == expectedInfo.createdBy
 			
 			result.imageIds     == expectedImageIds
-
+			
 			result.michel?.numbers   == expectedMichelNumbers
 			result.michel?.price     == expectedInfo.michelPrice
 			
@@ -955,7 +955,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * solovyovCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
-	def 'findBySolovyovNumber() shouldn\'t try to find series info if there are no series'() {
+	def "findBySolovyovNumber() shouldn't try to find series info if there are no series"() {
 		given:
 			solovyovCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:
@@ -994,7 +994,7 @@ class SeriesServiceImplTest extends Specification {
 			1 * zagorskiCatalogService.findSeriesIdsByNumber(expectedNumber) >> []
 	}
 	
-	def 'findByZagorskiNumber() shouldn\'t try to find series info if there are no series'() {
+	def "findByZagorskiNumber() shouldn't try to find series info if there are no series"() {
 		given:
 			zagorskiCatalogService.findSeriesIdsByNumber(_ as String) >> []
 		when:

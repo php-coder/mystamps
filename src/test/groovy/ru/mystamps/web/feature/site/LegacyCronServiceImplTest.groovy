@@ -17,6 +17,12 @@
  */
 package ru.mystamps.web.feature.site
 
+import static org.assertj.core.util.DateUtil.yesterday
+
+@SuppressWarnings('UnnecessaryGroovyImport')
+import java.util.Date
+
+import org.assertj.core.api.WithAssertions
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.feature.account.UserService
 import ru.mystamps.web.feature.account.UsersActivationFullDto
@@ -30,7 +36,7 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class CronServiceImplTest extends Specification {
+class LegacyCronServiceImplTest extends Specification implements WithAssertions {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
@@ -53,28 +59,23 @@ class CronServiceImplTest extends Specification {
 		mailService
 	)
 	
-	private static void assertMidnight(Date date) {
-		assert date[Calendar.HOUR_OF_DAY] == 0
-		assert date[Calendar.MINUTE]      == 0
-		assert date[Calendar.SECOND]      == 0
-		assert date[Calendar.MILLISECOND] == 0
+	private void assertMidnight(Date date) {
+		assertThat(date)
+			.hasHourOfDay(0)
+			.hasMinute(0)
+			.hasSecond(0)
+			.hasMillisecond(0)
 	}
 	
-	private static void assertDatesEqual(Date first, Date second) {
-		assert first[Calendar.YEAR]         == second[Calendar.YEAR]
-		assert first[Calendar.MONTH]        == second[Calendar.MONTH]
-		assert first[Calendar.DAY_OF_MONTH] == second[Calendar.DAY_OF_MONTH]
-	}
-	
-	private static void assertMidnightOfYesterday(Date date) {
-		assert date != null
-		assertDatesEqual(date, new Date().previous())
+	private void assertMidnightOfYesterday(Date date) {
+		assertThat(date).isNotNull()
+		assertThat(date).isInSameDayAs(yesterday())
 		assertMidnight(date)
 	}
 	
-	private static void assertMidnightOfToday(Date date) {
-		assert date != null
-		assertDatesEqual(date, new Date())
+	private void assertMidnightOfToday(Date date) {
+		assertThat(date).isNotNull()
+		assertThat(date).isToday()
 		assertMidnight(date)
 	}
 	
@@ -231,7 +232,7 @@ class CronServiceImplTest extends Specification {
 	def "purgeUsersActivations() should do nothing if no activations"() {
 		given:
 			usersActivationService.findOlderThan(_ as Integer) >> []
-		when:		
+		when:
 			service.purgeUsersActivations()
 		then:
 			0 * usersActivationService.remove(_ as String)

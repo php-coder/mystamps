@@ -23,7 +23,7 @@ import ru.mystamps.web.service.TestObjects
 import spock.lang.Specification
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class DatabaseImagePersistenceStrategyTest extends Specification {
+class LegacyDatabaseImagePersistenceStrategyTest extends Specification {
 	
 	private final ImageDataDao imageDataDao = Mock()
 	private final MultipartFile multipartFile = Mock()
@@ -32,13 +32,15 @@ class DatabaseImagePersistenceStrategyTest extends Specification {
 	private ImagePersistenceStrategy strategy
 	
 	def setup() {
-		strategy = new DatabaseImagePersistenceStrategy(
+		DatabaseImagePersistenceStrategy dbStrategy = new DatabaseImagePersistenceStrategy(
 			NOPLogger.NOP_LOGGER,
 			imageDataDao
 		)
 		
 		// init() does nothing except logging but by invoking it we're improving code coverage
-		strategy.init()
+		dbStrategy.init()
+		
+		strategy = dbStrategy
 	}
 	
 	//

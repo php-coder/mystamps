@@ -34,7 +34,7 @@ import static io.qala.datagen.RandomShortApi.nullOrBlank
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class ParticipantServiceImplTest extends Specification {
+class LegacyParticipantServiceImplTest extends Specification {
 	
 	private final ParticipantDao participantDao = Mock()
 	private final ParticipantService service = new ParticipantServiceImpl(

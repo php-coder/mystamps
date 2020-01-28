@@ -43,7 +43,7 @@ import static ru.mystamps.web.feature.series.importing.SeriesInfoExtractorServic
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class SeriesInfoExtractorServiceImplTest extends Specification {
+class LegacySeriesInfoExtractorServiceImplTest extends Specification {
 	
 	private final CategoryService categoryService = Mock()
 	private final CountryService countryService = Mock()
@@ -327,7 +327,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			year == expectedYear
 	}
 	
-	def 'extractReleaseYear() shouldn\'t extract dates before 1840'() {
+	def "extractReleaseYear() shouldn't extract dates before 1840"() {
 		given:
 			Integer unsupportedYear = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
 			String fragment = String.valueOf(unsupportedYear)
@@ -337,7 +337,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			year == null
 	}
 	
-	def 'extractReleaseYear() shouldn\'t extract dates after 2099'() {
+	def "extractReleaseYear() shouldn't extract dates after 2099"() {
 		given:
 			Integer unsupportedYear = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
 			String fragment = String.valueOf(unsupportedYear)
@@ -348,7 +348,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	def 'extractReleaseYear() shouldn\'t extract date from "#fragment"'(String fragment) {
+	def "extractReleaseYear() shouldn't extract date from '#fragment'"(String fragment) {
 		when:
 			Integer year = service.extractReleaseYear(fragment)
 		then:

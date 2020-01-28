@@ -26,7 +26,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class ImageServiceImplTest extends Specification {
+class LegacyImageServiceImplTest extends Specification {
 
 	private final ImageDao imageDao = Mock()
 	private final MultipartFile multipartFile = Mock()
@@ -40,10 +40,11 @@ class ImageServiceImplTest extends Specification {
 		imageDao
 	)
 	
+	@SuppressWarnings('UnnecessaryGetter')
 	def setup() {
-		multipartFile.size >> 1024L
-		multipartFile.contentType >> 'image/png'
-		multipartFile.originalFilename >> 'super-image.png'
+		multipartFile.getSize() >> 1024L
+		multipartFile.getContentType() >> 'image/png'
+		multipartFile.getOriginalFilename() >> 'super-image.png'
 		imageDao.add(_ as String, _ as String) >> 17
 	}
 	

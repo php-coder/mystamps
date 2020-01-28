@@ -26,7 +26,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class SiteServiceImplTest extends Specification {
+class LegacySiteServiceImplTest extends Specification {
 	private static final String TEST_TYPE         = TestObjects.TEST_ACTIVITY_TYPE
 	private static final String TEST_PAGE         = TestObjects.TEST_ACTIVITY_PAGE
 	private static final String TEST_IP           = TestObjects.TEST_ACTIVITY_IP
@@ -210,9 +210,10 @@ class SiteServiceImplTest extends Specification {
 				assert activity?.method == expectedMethod
 				return true
 			})
-		where: expectedMethod | _
-			'OPTIONS'         | _
-			null              | _
+		where:
+			expectedMethod | _
+			'OPTIONS'      | _
+			null           | _
 	}
 
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -311,10 +312,11 @@ class SiteServiceImplTest extends Specification {
 				assert activity?.refererPage == null
 				return true
 			})
-		where: refererPage | _
-			'  '           | _
-			''             | _
-			null           | _
+		where:
+			refererPage | _
+			'  '        | _
+			''          | _
+			null        | _
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -352,10 +354,11 @@ class SiteServiceImplTest extends Specification {
 				assert activity?.userAgent == null
 				return true
 			})
-		where: userAgent | _
-			'  '     | _
-			''       | _
-			null     | _
+		where:
+			userAgent | _
+			'  '      | _
+			''        | _
+			null      | _
 	}
 	
 }

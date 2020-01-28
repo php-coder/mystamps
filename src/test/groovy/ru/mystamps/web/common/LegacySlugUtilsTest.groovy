@@ -21,7 +21,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @SuppressWarnings(['ClassJavadoc', 'MethodName', 'NoDef', 'NoTabCharacter', 'TrailingWhitespace'])
-class SlugUtilsTest extends Specification {
+class LegacySlugUtilsTest extends Specification {
 	
 	//
 	// Tests for slugify()

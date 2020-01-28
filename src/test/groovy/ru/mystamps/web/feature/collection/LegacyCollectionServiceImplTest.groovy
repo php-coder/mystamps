@@ -37,7 +37,7 @@ import static io.qala.datagen.RandomShortApi.positiveLong
 	'NoTabCharacter',
 	'TrailingWhitespace',
 ])
-class CollectionServiceImplTest extends Specification {
+class LegacyCollectionServiceImplTest extends Specification {
 	
 	private final CollectionDao collectionDao = Mock()
 	
@@ -70,7 +70,7 @@ class CollectionServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings('FactoryMethodName')
-	def 'createCollection() should throw exception when owner login can\'t be converted to slug'() {
+	def "createCollection() should throw exception when owner login can't be converted to slug"() {
 		when:
 			service.createCollection(Random.userId(), '')
 		then:
