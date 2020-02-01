@@ -64,6 +64,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern MICHEL_NUMBERS_REGEXP =
 		Pattern.compile("#[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
 	
+	// Regular expression matches prices that have a space between digits.
+	private static final Pattern PRICE_WITH_SPACES = Pattern.compile("([0-9]) ([0-9])");
+	
 	// Regular expression that matches Rubles (Russian currency).
 	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?руб");
 	
@@ -367,13 +370,23 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return url;
 	}
 	
-	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
+	@SuppressWarnings({
+		"PMD.AvoidInstantiatingObjectsInLoops",
+		"PMD.AvoidReassigningParameters",
+		"checkstyle:parameterassignment"
+	})
 	/* default */ BigDecimal extractPrice(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
 		}
 		
 		log.debug("Determine price from '{}'", fragment);
+		
+		// "1 000" -> "1000"
+		Matcher matcher = PRICE_WITH_SPACES.matcher(fragment);
+		if (matcher.find()) {
+			fragment = matcher.replaceAll("$1$2");
+		}
 		
 		String[] candidates = StringUtils.split(fragment, ' ');
 		for (String candidate : candidates) {

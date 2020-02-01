@@ -618,6 +618,17 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'10 руб 16 коп' | _
 	}
 	
+	@Unroll
+	def 'extractPrice() should ignore a space in "#fragment"'(String fragment, BigDecimal result) {
+		expect:
+			service.extractPrice(fragment) == result
+		where:
+			fragment         || result
+			'10 800,00 руб.' || new BigDecimal('10800')
+			'1 200'          || new BigDecimal('1200')
+			'1 000 000'      || new BigDecimal('1000000')
+	}
+	
 	//
 	// Tests for extractCurrency()
 	//
