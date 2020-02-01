@@ -619,6 +619,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBooleanExpression')
 	def 'extractPrice() should ignore a space in "#fragment"'(String fragment, BigDecimal result) {
 		expect:
 			service.extractPrice(fragment) == result
