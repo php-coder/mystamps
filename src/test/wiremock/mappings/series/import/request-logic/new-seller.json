@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/series/import/request-logic/new-seller.html"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/html"
+    },
+    "bodyFileName": "series/import/request-logic/new-seller.html"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/series/sales/import/logic/empty.html"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/html"
+    },
+    "bodyFileName": "series/sales/import/logic/empty.html"
+  }
+}
