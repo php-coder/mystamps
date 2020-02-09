@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/series/import/request-logic/charset-windows-1251.html"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/html;charset=windows-1251"
+    },
+    "bodyFileName": "series/import/request-logic/charset-windows-1251.html"
+  }
+}

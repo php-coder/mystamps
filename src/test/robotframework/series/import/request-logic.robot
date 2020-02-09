@@ -77,6 +77,16 @@ Import series from external site with catalog numbers (use description locator)
 	Click Link                  id:import-request-link
 	Element Should Be Disabled  id:michel-numbers
 
+Import series when a page in a non-utf-8 charset
+	[Documentation]         Verify that a page's charset is respected
+	Input Text              id:url  ${MOCK_SERVER}/series/import/request-logic/charset-windows-1251.html
+	Submit Form             id:import-series-form
+	Element Text Should Be  id:request-status  ParsingSucceeded
+	${category}=            Get Selected List Label  id:category
+	${country}=             Get Selected List Label  id:country
+	Should Be Equal         ${category}  Prehistoric animals
+	Should Be Equal         ${country}   Italy
+
 Import series and series sale with existing seller from an external site
 	[Documentation]             Verify import series and sale (with existing seller)
 	Input Text                  id:url  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html

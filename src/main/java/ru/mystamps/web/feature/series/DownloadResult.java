@@ -22,22 +22,38 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class DownloadResult {
+	private static final Logger LOG = LoggerFactory.getLogger(DownloadResult.class);
+	
 	private final Code code;
 	private final byte[] data;
 	private final String contentType;
+	private final Charset charset;
 	
 	public static DownloadResult failed(Code code) {
-		return new DownloadResult(code, ArrayUtils.EMPTY_BYTE_ARRAY, StringUtils.EMPTY);
+		return new DownloadResult(
+			code,
+			ArrayUtils.EMPTY_BYTE_ARRAY,
+			StringUtils.EMPTY,
+			StandardCharsets.UTF_8
+		);
 	}
 	
 	public static DownloadResult succeeded(byte[] data, String contentType) {
-		return new DownloadResult(Code.SUCCESS, data, contentType);
+		Charset charset = extractCharset(contentType);
+		if (charset == null) {
+			charset = StandardCharsets.UTF_8;
+		}
+		return new DownloadResult(Code.SUCCESS, data, contentType, charset);
 	}
 	
 	public boolean hasFailed() {
@@ -49,7 +65,7 @@ public class DownloadResult {
 	}
 	
 	public String getDataAsString() {
-		return new String(data, StandardCharsets.UTF_8);
+		return new String(data, charset);
 	}
 	
 	public enum Code {
@@ -60,6 +76,21 @@ public class DownloadResult {
 		FILE_NOT_FOUND,
 		INSUFFICIENT_PERMISSIONS,
 		UNEXPECTED_ERROR,
+	}
+	
+	private static Charset extractCharset(String contentType) {
+		try {
+			MediaType mediaType = MediaType.parseMediaType(contentType);
+			return mediaType.getCharset();
+			
+		} catch (IllegalArgumentException ex) {
+			// MediaType.parseMediaType() might throw InvalidMediaTypeException.
+			// MediaType.getCharset() might throw IllegalArgumentException,
+			// IllegalCharsetNameException, or UnsupportedCharsetException.
+			// All of them are inherited from IllegalArgumentException, so we catch only this class
+			LOG.debug("Couldn't extract charset from '{}': {}", contentType, ex.getMessage());
+			return null;
+		}
 	}
 	
 }
