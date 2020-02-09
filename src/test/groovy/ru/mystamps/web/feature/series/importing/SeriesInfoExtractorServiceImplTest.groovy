@@ -671,6 +671,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'100 руб'   | _
 			'200руб'    | _
 			'660 руб.'  | _
+			'800 р.'    | _
 	}
 	
 }

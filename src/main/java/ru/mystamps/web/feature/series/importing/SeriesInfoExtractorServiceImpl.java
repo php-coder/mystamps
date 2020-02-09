@@ -68,7 +68,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern PRICE_WITH_SPACES = Pattern.compile("([0-9]) ([0-9])");
 	
 	// Regular expression that matches Rubles (Russian currency).
-	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?руб");
+	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?р(уб|\\.)");
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);
