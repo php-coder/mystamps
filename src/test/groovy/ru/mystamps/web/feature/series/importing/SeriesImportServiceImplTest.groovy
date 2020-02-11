@@ -35,6 +35,7 @@ import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.english
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.nullOrBlank
@@ -365,7 +366,7 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			String content = between(1, 10).english()
 		when:
-			service.saveDownloadedContent(null, content)
+			service.saveDownloadedContent(null, content, bool())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Request id must be non null'
@@ -374,7 +375,7 @@ class SeriesImportServiceImplTest extends Specification {
 	@Unroll
 	def "saveDownloadedContent() should throw exception when content is '#content'"(String content) {
 		when:
-			service.saveDownloadedContent(Random.id(), content)
+			service.saveDownloadedContent(Random.id(), content, bool())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Content must be non-blank'
@@ -390,7 +391,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			String expectedContent = between(1, 10).english()
 		when:
-			service.saveDownloadedContent(expectedRequestId, expectedContent)
+			service.saveDownloadedContent(expectedRequestId, expectedContent, bool())
 		then:
 			1 * seriesImportDao.addRawContent(
 				expectedRequestId,
@@ -407,16 +408,32 @@ class SeriesImportServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
-	def 'saveDownloadedContent() should change status'() {
+	def 'saveDownloadedContent() should change status for new request'() {
 		given:
 			Integer expectedRequestId = Random.id()
 		when:
-			service.saveDownloadedContent(expectedRequestId, between(1, 10).english())
+			service.saveDownloadedContent(expectedRequestId, between(1, 10).english(), false)
 		then:
 			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
 					assert status?.requestId == expectedRequestId
 					assert DateUtils.roughlyEqual(status.date, new Date())
 					assert status?.oldStatus == SeriesImportRequestStatus.UNPROCESSED
+					assert status?.newStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
+					return true
+			})
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'saveDownloadedContent() should change status for failed request'() {
+		given:
+			Integer expectedRequestId = Random.id()
+		when:
+			service.saveDownloadedContent(expectedRequestId, between(1, 10).english(), true)
+		then:
+			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
+					assert status?.requestId == expectedRequestId
+					assert DateUtils.roughlyEqual(status.date, new Date())
+					assert status?.oldStatus == SeriesImportRequestStatus.DOWNLOADING_FAILED
 					assert status?.newStatus == SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
 					return true
 			})

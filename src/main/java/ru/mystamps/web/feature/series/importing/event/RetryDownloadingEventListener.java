@@ -18,55 +18,75 @@
 package ru.mystamps.web.feature.series.importing.event;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import ru.mystamps.web.feature.series.DownloadResult;
 import ru.mystamps.web.feature.series.DownloaderService;
+import ru.mystamps.web.feature.series.importing.ImportRequestDto;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 
 /**
- * Listener of the {@link ImportRequestCreated} event.
+ * Listener of the {@link RetryDownloading} event.
  *
  * Downloads a file, saves it to database and publish the {@link DownloadingSucceeded} event.
- * When downloading of a file fails, it changes request status to 'DownloadingFailed'.
  *
+ * It is similar to {@link ImportRequestCreatedEventListener} with the following differences:
+ * - it loads a request from database as we have only id
+ * - it doesn't modify a request state when downloading fails
+ * - it invokes {@code saveDownloadedContent()} with retry=true parameter
+ *
+ * @see ImportRequestCreatedEventListener
  * @see DownloadingSucceededEventListener
  */
 @RequiredArgsConstructor
-public class ImportRequestCreatedEventListener
-	implements ApplicationListener<ImportRequestCreated> {
+public class RetryDownloadingEventListener implements ApplicationListener<RetryDownloading> {
 	
-	// CheckStyle: ignore LineLength for next 1 line
-	private static final Logger LOG = LoggerFactory.getLogger(ImportRequestCreatedEventListener.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RetryDownloadingEventListener.class);
 	
 	private final DownloaderService downloaderService;
 	private final SeriesImportService seriesImportService;
 	private final ApplicationEventPublisher eventPublisher;
 	
 	@Override
-	public void onApplicationEvent(ImportRequestCreated event) {
-		String url = event.getUrl();
+	public void onApplicationEvent(RetryDownloading event) {
 		Integer requestId = event.getRequestId();
-		
-		LOG.info("Request #{}: start downloading '{}'", requestId, url);
-		
-		DownloadResult result = downloaderService.download(url);
-		if (result.hasFailed()) {
-			// CheckStyle: ignore LineLength for next 1 line
-			LOG.info("Request #{}: downloading of '{}' failed: {}", requestId, url, result.getCode());
 
-			seriesImportService.changeStatus(
-				requestId,
-				SeriesImportRequestStatus.UNPROCESSED,
-				SeriesImportRequestStatus.DOWNLOADING_FAILED
-			);
+		ImportRequestDto request = seriesImportService.findById(requestId);
+		if (request == null) {
+			// FIXME: how to handle error? maybe publish UnexpectedErrorEvent?
+			LOG.error("Request #{}: couldn't retry is it doesn't exist", requestId);
+			return;
+		}
+
+		String status = request.getStatus();
+		if (SeriesImportRequestStatus.DOWNLOADING_FAILED.equals(status)) {
+			LOG.warn("Request #{}: unexpected status '{}'. Abort a retry process", request, status);
 			return;
 		}
 		
-		seriesImportService.saveDownloadedContent(requestId, result.getDataAsString(), false);
+		String url = request.getUrl();
+		LOG.info("Request #{}: retry downloading '{}'", requestId, url);
+		
+		DownloadResult result = downloaderService.download(url);
+		if (result.hasFailed()) {
+			LOG.info(
+				"Request #{}: downloading of '{}' failed again: {}",
+				requestId,
+				url,
+				result.getCode()
+			);
+			
+			// in case of failure we don't need to change request status as we assume that
+			// it's already set to DownloadingFailed
+			return;
+		}
+		
+		// FIXME: do we need updated_by field?
+		seriesImportService.saveDownloadedContent(requestId, result.getDataAsString(), true);
 		
 		eventPublisher.publishEvent(new DownloadingSucceeded(this, requestId, url));
 	}

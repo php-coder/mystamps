@@ -148,7 +148,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 	
 	@Override
 	@Transactional
-	public void saveDownloadedContent(Integer requestId, String content) {
+	public void saveDownloadedContent(Integer requestId, String content, boolean retry) {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		Validate.isTrue(StringUtils.isNotBlank(content), "Content must be non-blank");
 		
@@ -158,11 +158,11 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		log.info("Request #{}: page were downloaded ({} characters)", requestId, content.length());
 		
-		changeStatus(
-			requestId,
-			SeriesImportRequestStatus.UNPROCESSED,
-			SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED
-		);
+		String oldStatus = retry
+			? SeriesImportRequestStatus.DOWNLOADING_FAILED
+			: SeriesImportRequestStatus.UNPROCESSED;
+		
+		changeStatus(requestId, oldStatus, SeriesImportRequestStatus.DOWNLOADING_SUCCEEDED);
 	}
 	
 	@Override

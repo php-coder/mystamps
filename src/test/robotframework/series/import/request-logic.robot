@@ -141,6 +141,14 @@ Submit a request with a document that couldn't be parsed
 	Submit Form             id:import-series-form
 	Element Text Should Be  id:request-status  ParsingFailed
 
+Retry of downloading allows the import to be succeed
+	[Documentation]         Verify that a failed request can be re-triggered
+	Go To                   ${SITE_URL}/series/import/request/1
+	Element Text Should Be  id:request-url     http://127.0.0.1:8080/series/1?lang=en
+	Element Text Should Be  id:request-status  DownloadingFailed
+	Submit Form             id:retry-import-series-form
+	Element Text Should Be  id:request-status  ParsingSucceeded
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

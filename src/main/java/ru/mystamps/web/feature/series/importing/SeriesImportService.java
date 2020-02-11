@@ -35,7 +35,7 @@ public interface SeriesImportService {
 	);
 	void changeStatus(Integer requestId, String oldStatus, String newStatus);
 	ImportRequestDto findById(Integer requestId);
-	void saveDownloadedContent(Integer requestId, String content);
+	void saveDownloadedContent(Integer requestId, String content, boolean retry);
 	String getDownloadedContent(Integer requestId);
 	void saveParsedData(Integer requestId, SeriesExtractedInfo seriesInfo, String imageUrl);
 	SeriesParsedDataDto getParsedData(Integer requestId, String lang);

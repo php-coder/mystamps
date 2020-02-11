@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.participant.ParticipantService;
@@ -36,6 +37,7 @@ import ru.mystamps.web.feature.series.CatalogUtils;
 import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.feature.series.importing.event.ImportRequestCreated;
+import ru.mystamps.web.feature.series.importing.event.RetryDownloading;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.support.spring.security.CurrentUser;
@@ -93,6 +95,25 @@ public class SeriesImportController {
 		ImportRequestCreated requestCreated =
 			new ImportRequestCreated(this, requestId, form.getUrl());
 		eventPublisher.publishEvent(requestCreated);
+		
+		return redirectTo(SeriesImportUrl.REQUEST_IMPORT_PAGE, requestId);
+	}
+
+	// @todo #1254 Update workflow to mention RetryDownloading event
+	@PostMapping(path = SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE, params = "requestId")
+	public String rerunImport(
+		@RequestParam("requestId") Integer requestId,
+		HttpServletResponse response)
+		throws IOException {
+		
+		ImportRequestDto request = seriesImportService.findById(requestId);
+		if (request == null) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return null;
+		}
+		
+		RetryDownloading retryDownloading = new RetryDownloading(this, requestId);
+		eventPublisher.publishEvent(retryDownloading);
 		
 		return redirectTo(SeriesImportUrl.REQUEST_IMPORT_PAGE, requestId);
 	}

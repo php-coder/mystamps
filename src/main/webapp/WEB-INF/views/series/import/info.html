@@ -90,7 +90,16 @@
 						</dd>
 					</dl>
 				</div>
-					
+				
+				<!--/*/
+				<div class="col-sm-1 col-sm-offset-6" th:if="${request.status == 'DownloadingFailed'}">
+					<form id="retry-import-series-form" method="post" th:action="@{${REQUEST_IMPORT_SERIES_PAGE}}">
+						<input type="hidden" name="requestId" th:value="${id}" />
+						<input type="submit" class="btn btn-primary btn-sm" value="Retry" th:value="#{t_retry}" />
+					</form>
+				</div>
+				/*/-->
+				
 				<div class="col-sm-4 col-sm-offset-4" th:if="${showForm}" th:with="disabled=${request.seriesId != null}">
 					<h3 th:text="#{t_gathered_data}">
 						Gathered data

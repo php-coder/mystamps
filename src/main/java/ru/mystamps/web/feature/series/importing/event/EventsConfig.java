@@ -85,6 +85,15 @@ public class EventsConfig {
 	}
 	
 	@Bean
+	public ApplicationListener<RetryDownloading> retryDownloadingEventListener() {
+		return new RetryDownloadingEventListener(
+			servicesConfig.getSeriesDownloaderService(),
+			seriesImportService,
+			eventPublisher
+		);
+	}
+	
+	@Bean
 	public ApplicationListener<DownloadingSucceeded> downloadingSucceededEventListener(
 		SiteParserService siteParserService,
 		SeriesInfoExtractorService extractorService
