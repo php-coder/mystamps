@@ -62,7 +62,7 @@ public class RetryDownloadingEventListener implements ApplicationListener<RetryD
 		}
 
 		String status = request.getStatus();
-		if (SeriesImportRequestStatus.DOWNLOADING_FAILED.equals(status)) {
+		if (!SeriesImportRequestStatus.DOWNLOADING_FAILED.equals(status)) {
 			LOG.warn("Request #{}: unexpected status '{}'. Abort a retry process", request, status);
 			return;
 		}
