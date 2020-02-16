@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,8 @@ import ru.mystamps.web.feature.series.SeriesController;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
+
+import java.util.Collections;
 
 /**
  * Spring configuration that is required for importing series in an application.
@@ -57,6 +60,17 @@ public class SeriesImportConfig {
 				participantService,
 				eventPublisher
 			);
+		}
+		
+		@Bean
+		public FilterRegistrationBean importSeriesFormTrimmerFilter() {
+			FilterRegistrationBean bean =
+				new FilterRegistrationBean<>(new ImportSeriesFormTrimmerFilter());
+			
+			String pattern = SeriesImportUrl.REQUEST_IMPORT_PAGE.replace("{id}", "*");
+			bean.setUrlPatterns(Collections.singletonList(pattern));
+			
+			return bean;
 		}
 		
 	}
