@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify import series validation scenarios
+Documentation    Validation of an import request
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
