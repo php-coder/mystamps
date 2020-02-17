@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-participant-for-gh1232" author="php-coder" context="test-data">
+		
+		<insert tableName="transaction_participants">
+			<column name="name" value="gh1232" />
+			<column name="url" value="http://example.com/issue/1232/with-seller-id" />
+			<column name="is_buyer" valueBoolean="false" />
+			<column name="is_seller" valueBoolean="true" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>

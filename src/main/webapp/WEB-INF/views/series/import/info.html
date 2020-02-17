@@ -360,7 +360,8 @@
 								</tr>
 								/*/-->
 								
-								<tr th:if="${hasSellerInfo and importSeriesForm.seller.groupId != null}" th:classappend="${#fields.hasErrors('seller.groupId') ? 'has-error' : ''}">
+								<tr th:if="${(hasSellerInfo and importSeriesForm.seller.groupId != null) or (hasSalesInfo and importSeriesForm.seriesSale.sellerId == null)}"
+									th:classappend="${#fields.hasErrors('seller.groupId') ? 'has-error' : ''}">
 									<th>
 										<label for="seller-group" class="control-label" th:text="#{t_seller_group}">
 											Seller group
@@ -390,7 +391,8 @@
 									</td>
 								</tr>
 								
-								<tr th:if="${hasSellerInfo and importSeriesForm.seller.name != null}" th:classappend="${#fields.hasErrors('seller.name') ? 'has-error' : ''}">
+								<tr th:if="${(hasSellerInfo and importSeriesForm.seller.name != null) or (hasSalesInfo and importSeriesForm.seriesSale.sellerId == null)}"
+									th:classappend="${#fields.hasErrors('seller.name') ? 'has-error' : ''}">
 									<th>
 										<label for="seller-name" class="control-label" th:text="#{t_seller_name}">
 											Seller name
@@ -413,7 +415,8 @@
 									</td>
 								</tr>
 								
-								<tr th:if="${hasSellerInfo and importSeriesForm.seller.url != null}" th:classappend="${#fields.hasErrors('seller.url') ? 'has-error' : ''}">
+								<tr th:if="${(hasSellerInfo and importSeriesForm.seller.url != null) or (hasSalesInfo and importSeriesForm.seriesSale.sellerId == null)}"
+									th:classappend="${#fields.hasErrors('seller.url') ? 'has-error' : ''}">
 									<th>
 										<label for="seller-url" class="control-label" th:text="#{t_seller_url}">
 											Seller URL

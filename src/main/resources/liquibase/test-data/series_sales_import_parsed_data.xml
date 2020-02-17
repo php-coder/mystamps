@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="add-series-sale-without-seller-info-but-with-price" author="php-coder" context="test-data">
+		
+		<insert tableName="series_sales_import_parsed_data">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1232')" />
+			<column name="price" valueNumeric="100" />
+			<column name="currency" value="RUB" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+		<insert tableName="series_sales_import_parsed_data">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1232/with-seller-id')" />
+			<column name="seller_id" valueNumeric="(SELECT id FROM transaction_participants WHERE url = 'http://example.com/issue/1232/with-seller-id')" />
+			<column name="price" valueNumeric="100" />
+			<column name="currency" value="RUB" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>
