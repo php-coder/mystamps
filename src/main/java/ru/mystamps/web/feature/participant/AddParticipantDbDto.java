@@ -23,7 +23,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(of = { "name", "buyer", "seller" })
+@ToString
 public class AddParticipantDbDto {
 	private String name;
 	private String url;
