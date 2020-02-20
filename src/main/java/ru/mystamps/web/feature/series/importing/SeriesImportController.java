@@ -71,6 +71,7 @@ public class SeriesImportController {
 	protected void initImportSeriesForm(WebDataBinder binder) {
 		// CheckStyle: ignore LineLength for next 1 line
 		binder.registerCustomEditor(String.class, "michelNumbers", new ExpandCatalogNumbersEditor());
+		binder.registerCustomEditor(String.class, "seller.name", new StringTrimmerEditor(true));
 	}
 	
 	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)

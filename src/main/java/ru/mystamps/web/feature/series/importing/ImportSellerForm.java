@@ -25,7 +25,6 @@ import ru.mystamps.web.feature.participant.AddParticipantDto;
 @Setter
 public class ImportSellerForm implements AddParticipantDto {
 	
-	// @todo #695 /series/import/request/{id}(seller.name): trim empty values to null
 	// @todo #695 /series/import/request/{id}(seller.name): add validation against short values
 	// @todo #695 /series/import/request/{id}(seller.name): add validation against long values
 	private String name;
