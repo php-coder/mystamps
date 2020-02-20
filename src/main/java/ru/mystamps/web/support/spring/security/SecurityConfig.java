@@ -25,6 +25,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -204,8 +205,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public UserMdcLoggingFilter userMdcLoggingFilter() {
-		return new UserMdcLoggingFilter();
+	public FilterRegistrationBean userMdcLoggingFilter() {
+		FilterRegistrationBean bean = new FilterRegistrationBean(new UserMdcLoggingFilter());
+		// the filters that need to include userId in their logs, should have the order grater than
+		// Ordered.LOWEST_PRECEDENCE - 100 to get applied after us
+		bean.setOrder(Ordered.LOWEST_PRECEDENCE - 100);
+		return bean;
 	}
 
 }
