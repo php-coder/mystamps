@@ -72,6 +72,7 @@ public class SeriesImportController {
 		// CheckStyle: ignore LineLength for next 1 line
 		binder.registerCustomEditor(String.class, "michelNumbers", new ExpandCatalogNumbersEditor());
 		binder.registerCustomEditor(String.class, "seller.name", new StringTrimmerEditor(true));
+		binder.registerCustomEditor(String.class, "seller.url", new StringTrimmerEditor(true));
 	}
 	
 	@GetMapping(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE)

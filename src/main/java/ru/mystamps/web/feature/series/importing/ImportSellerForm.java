@@ -29,7 +29,6 @@ public class ImportSellerForm implements AddParticipantDto {
 	// @todo #695 /series/import/request/{id}(seller.name): add validation against long values
 	private String name;
 	
-	// @todo #695 /series/import/request/{id}(seller.url): trim empty values to null
 	// @todo #695 /series/import/request/{id}(seller.url): add validation for valid url
 	// @todo #695 /series/import/request/{id}(seller.url): add validation against long values
 	private String url;
