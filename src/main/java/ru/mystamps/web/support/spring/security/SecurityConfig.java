@@ -209,6 +209,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		FilterRegistrationBean bean = new FilterRegistrationBean(new UserMdcLoggingFilter());
 		// the filters that need to include userId in their logs, should have the order grater than
 		// Ordered.LOWEST_PRECEDENCE - 100 to get applied after us
+		// CheckStyle: ignore MagicNumber for next 1 line
 		bean.setOrder(Ordered.LOWEST_PRECEDENCE - 100);
 		return bean;
 	}
