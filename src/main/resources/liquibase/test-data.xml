@@ -10,10 +10,10 @@
 	<!-- Depends on: series_import_request_statuses, users -->
 	<include file="test-data/series_import_requests.xml" relativeToChangelogFile="true" />
 	
-	<!-- Depends on: series_import_requests, transaction_participants -->
+	<!-- Depends on: series_import_requests -->
 	<include file="test-data/series_import_parsed_data.xml" relativeToChangelogFile="true" />
 	
-	<!-- Depends on: series_import_requests -->
+	<!-- Depends on: series_import_requests, transaction_participants -->
 	<include file="test-data/series_sales_import_parsed_data.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
