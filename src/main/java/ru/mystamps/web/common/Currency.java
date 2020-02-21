@@ -18,5 +18,5 @@
 package ru.mystamps.web.common;
 
 public enum Currency {
-	EUR, USD, GBP, RUB, CZK, BYN;
+	EUR, USD, GBP, RUB, CZK, BYN, UAH;
 }

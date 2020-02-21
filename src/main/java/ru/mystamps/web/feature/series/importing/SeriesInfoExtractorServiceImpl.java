@@ -73,6 +73,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Regular expression that matches Rubles (Russian currency).
 	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?р(уб|\\.)");
 	
+	// Regular expression that matches Ukrainian hryvnia.
+	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("[0-9] грн");
+	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);
 	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.NAME_RU_REGEXP);
@@ -437,6 +440,12 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		if (matcher.find()) {
 			log.debug("Currency is RUB");
 			return Currency.RUB.toString();
+		}
+		
+		matcher = UAH_CURRENCY_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			log.debug("Currency is UAH");
+			return Currency.UAH.toString();
 		}
 		
 		log.debug("Could not extract currency from a fragment");

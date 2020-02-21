@@ -119,7 +119,7 @@
 							<tr class="info">
 								<th th:text="|#{t_total}:|">Total:</th>
 								<th
-									th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])},totalCzk=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'CZK'].![price])},totalByn=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'BYN'].![price])}">
+									th:with="totalRub=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'RUB'].![price])},totalUsd=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'USD'].![price])},totalEur=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'EUR'].![price])},totalCzk=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'CZK'].![price])},totalByn=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'BYN'].![price])},totalUah=${#aggregates.sum(seriesOfCollection.?[price != null and currency.toString() == 'UAH'].![price])}">
 									<span th:text="|${totalRub} RUB|" th:if="${totalRub != null}" th:remove="tag">14.4 RUB</span>
 									<br th:if="${totalUsd != null and totalRub != null}" />
 									<span th:text="|${totalUsd} USD|" th:if="${totalUsd != null}" th:remove="tag">2 USD</span>
@@ -129,6 +129,8 @@
 									<span th:text="|${totalCzk} CZK|" th:if="${totalCzk != null}" th:remove="tag">707 CZK</span>
 									<br th:if="${totalByn != null and (totalRub != null or totalUsd != null or totalEur != null or totalCzk != null)}" />
 									<span th:text="|${totalByn} BYN|" th:if="${totalByn != null}" th:remove="tag">130 BYN</span>
+									<br th:if="${totalUah != null and (totalRub != null or totalUsd != null or totalEur != null or totalCzk != null or totalByn != null)}" />
+									<span th:text="|${totalUah} UAH|" th:if="${totalUah != null}" th:remove="tag">200 UAH</span>
 								</th>
 							</tr>
 						</tfoot>
