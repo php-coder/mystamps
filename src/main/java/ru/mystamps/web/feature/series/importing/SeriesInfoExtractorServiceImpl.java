@@ -67,6 +67,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Regular expression matches prices that have a space between digits.
 	private static final Pattern PRICE_WITH_SPACES = Pattern.compile("([0-9]) ([0-9])");
 	
+	// Regular expression that matches Belarusian ruble.
+	private static final Pattern BYN_CURRENCY_REGEXP = Pattern.compile("[0-9] бел\\. руб\\.");
+	
 	// Regular expression that matches Rubles (Russian currency).
 	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?р(уб|\\.)");
 	
@@ -424,7 +427,13 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		} catch (IllegalArgumentException ignored) {
 		}
 		
-		Matcher matcher = RUB_CURRENCY_REGEXP.matcher(fragment);
+		Matcher matcher = BYN_CURRENCY_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			log.debug("Currency is BYN");
+			return Currency.BYN.toString();
+		}
+		
+		matcher = RUB_CURRENCY_REGEXP.matcher(fragment);
 		if (matcher.find()) {
 			log.debug("Currency is RUB");
 			return Currency.RUB.toString();

@@ -674,4 +674,13 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'800 р.'    | _
 	}
 	
+	@Unroll
+	def 'extractCurrency() should extract BYN currency from "#fragment"'(String fragment) {
+		expect:
+			service.extractCurrency(fragment) == 'BYN'
+		where:
+			fragment         | _
+			'8,90 бел. руб.' | _
+	}
+	
 }

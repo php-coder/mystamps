@@ -1,4 +1,5 @@
 0.x (upcoming release)
+- (feature)        add support for Belarusian ruble
 - (feature)        a request that failed to download a file, can be retried
 - (infrastructure) Migrate to Spring Boot 2
 
