@@ -526,7 +526,7 @@
 		<disableXmlReport>true</disableXmlReport>
 		
 		<dockerfile.plugin.version>1.4.6</dockerfile.plugin.version>
-		<enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+		<enforcer.plugin.version>3.0.0-M3</enforcer.plugin.version>
 		<error-prone-javac.version>9+181-r4173-1</error-prone-javac.version>
 		<error-prone.version>2.3.4</error-prone.version>
 		<frontend.plugin.version>1.7.6</frontend.plugin.version>
