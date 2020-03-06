@@ -7,6 +7,5 @@
 	
 	<include file="0.4.2/2019-11-17--drop_unique_series_from_collection.xml" relativeToChangelogFile="true" />
 	<include file="0.4.2/2019-11-27--add_collections_series_id.xml" relativeToChangelogFile="true" />
-	<include file="0.4.2/2020-02-11--downloading_failed_import_requests.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
