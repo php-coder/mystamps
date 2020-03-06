@@ -5,6 +5,19 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 	
+	<changeSet id="add-series-parsed-data-for-gh1256" author="php-coder" context="test-data">
+		
+		<insert tableName="series_import_parsed_data">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1256')" />
+			<column name="category_id" valueComputed="(SELECT id FROM categories WHERE slug = 'prehistoric-animals')" />
+			<column name="image_url" value="http://127.0.0.1:8080/image/1" />
+			<column name="quantity" valueNumeric="3" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+	</changeSet>
+	
 	<changeSet id="add-series-parsed-data-for-gh1232" author="php-coder" context="test-data">
 		
 		<insert tableName="series_import_parsed_data">
