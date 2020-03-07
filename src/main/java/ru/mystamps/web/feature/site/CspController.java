@@ -17,8 +17,9 @@
  */
 package ru.mystamps.web.feature.site;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.regex.Pattern;
 
 @RestController
-@Slf4j
 public class CspController {
+	private static final Logger LOG = LoggerFactory.getLogger(CspController.class);
+	
 	private static final String UNKNOWN = "<unknown>";
 
 	private static final Pattern ORIGINAL_POLICY_PATTERN = Pattern.compile(
@@ -46,11 +48,11 @@ public class CspController {
 		@RequestHeader(name = "user-agent", defaultValue = UNKNOWN) String userAgent) {
 		
 		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
-		log.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
+		LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
 
 		// Omit "original-policy" as it quite long and useless most of the time
 		String report = ORIGINAL_POLICY_PATTERN.matcher(body).replaceFirst(StringUtils.EMPTY);
-		log.warn(report);
+		LOG.warn(report);
 	}
 
 }
