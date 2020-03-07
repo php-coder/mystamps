@@ -1049,10 +1049,14 @@
 				<version>${liquibase.version}</version>
 				<configuration>
 					<changeLogFile>${basedir}/src/main/resources/liquibase/changelog.xml</changeLogFile>
-					<propertyFile>${basedir}/src/main/resources/liquibase/liquibase.properties</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
 					<!-- See also application-prod.properties -->
 					<contexts>scheme,init-data,prod-data</contexts>
+					<!-- This configuration matches with infra/docker/prod.yml -->
+					<driver>com.mysql.jdbc.Driver</driver>
+					<url>jdbc:mysql://localhost:3306/mystamps?characterEncoding=UTF-8&amp;useSSL=false</url>
+					<username>mystamps</username>
+					<password>secret</password>
 				</configuration>
 			</plugin>
 			
