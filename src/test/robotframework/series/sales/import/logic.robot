@@ -5,6 +5,7 @@ Resource        ../../../auth.steps.robot
 Resource        ../../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
+Test Setup      Before Test
 Force Tags      series  sales  import-sales  logic  react-related
 
 *** Test Cases ***
@@ -29,4 +30,6 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
+
+Before Test
 	Go To  ${SITE_URL}/series/1
