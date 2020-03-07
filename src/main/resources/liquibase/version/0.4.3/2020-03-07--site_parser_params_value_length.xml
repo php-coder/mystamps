@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="increase-length-of-site_parser_params-value-field" author="php-coder" context="scheme">
+		
+		<modifyDataType tableName="site_parser_params"
+			columnName="value"
+			newDataType="VARCHAR(100)" />
+		
+		<!--
+			modifyDataType loses NOT NULL property on MySQL:
+			http://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
+			In order to fix that, we patch the SQL query to specify NOT NULL again.
+		-->
+		<modifySql dbms="mysql">
+			<append value=" NOT NULL" />
+		</modifySql>
+		
+	</changeSet>
+	
+</databaseChangeLog>
