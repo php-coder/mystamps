@@ -28,10 +28,6 @@ class SeriesSaleImportForm extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		
-		if (this.state.url == '') {
-			return;
-		}
-		
 		// @todo #1057 SeriesSaleImportForm: wait until setState() finishes
 		// (see https://reactjs.org/docs/react-component.html#setstate)
 		this.setState({
