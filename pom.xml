@@ -1048,7 +1048,7 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase.version}</version>
 				<configuration>
-					<changeLogFile>/liquibase/changelog.xml</changeLogFile>
+					<changeLogFile>${basedir}/src/main/resources/liquibase/changelog.xml</changeLogFile>
 					<propertyFile>${basedir}/src/main/resources/liquibase/liquibase.properties</propertyFile>
 					<migrationSqlOutputFile>/dev/stdout</migrationSqlOutputFile>
 					<!-- See also application-prod.properties -->
