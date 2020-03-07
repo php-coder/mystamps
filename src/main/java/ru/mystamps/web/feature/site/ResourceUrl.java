@@ -32,7 +32,7 @@ public final class ResourceUrl {
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION = "v0.4.2.2";
+	public static final String RESOURCES_VERSION = "v0.4.2.3";
 
 	// CheckStyle: ignore LineLength for next 10 lines
 	private static final String CATALOG_UTILS_JS    = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
@@ -48,6 +48,7 @@ public final class ResourceUrl {
 	private static final String FAVICON_ICO         = "/favicon.ico";
 
 	// see also pom.xml and MvcConfig.addResourceHandlers()
+	private static final String AXIOS_JS           = "0.19.2/dist/axios.min.js";
 	private static final String BOOTSTRAP_CSS      = "/bootstrap/3.4.1/css/bootstrap.min.css";
 	private static final String BOOTSTRAP_JS       = "/bootstrap/3.4.1/js/bootstrap.min.js";
 	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
@@ -82,6 +83,7 @@ public final class ResourceUrl {
 	// see also MvcConfig.addResourceHandlers()
 	public static void exposeWebjarResourcesToView(Map<String, String> resources, boolean useCdn) {
 		if (useCdn) {
+			put(resources, "https://unpkg.com/axios@", "AXIOS_JS", AXIOS_JS);
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 			put(resources, "https://maxcdn.bootstrapcdn.com", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 			put(resources, "https://yandex.st", "JQUERY_JS", JQUERY_JS);
@@ -93,6 +95,7 @@ public final class ResourceUrl {
 			return;
 		}
 		
+		put(resources, "/public/axios/", "AXIOS_JS", AXIOS_JS);
 		put(resources, "/public", "BOOTSTRAP_CSS", BOOTSTRAP_CSS);
 		put(resources, "/public", "BOOTSTRAP_JS", BOOTSTRAP_JS);
 		put(resources, "/public", "JQUERY_JS", JQUERY_JS);

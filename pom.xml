@@ -305,6 +305,19 @@
 		
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
+			<artifactId>axios</artifactId>
+			<version>${axios.version}</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>follow-redirects</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
 			<artifactId>react</artifactId>
 			<version>${react.version}</version>
 			<scope>runtime</scope>
@@ -505,6 +518,9 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<assertj.version>3.14.0</assertj.version>
+		
+		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
+		<axios.version>0.19.2</axios.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class -->
 		<bootstrap.version>3.4.1</bootstrap.version>

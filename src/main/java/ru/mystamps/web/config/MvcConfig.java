@@ -127,6 +127,8 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addResolver(resourceResolver);
 		
 		// For WebJars. See also ResourceUrl class
+		registry.addResourceHandler("/public/axios/**")
+			.addResourceLocations("classpath:/META-INF/resources/webjars/axios/");
 		registry.addResourceHandler("/public/bootstrap/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/");
 		registry.addResourceHandler("/public/jquery/**")

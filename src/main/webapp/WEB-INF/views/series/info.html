@@ -788,6 +788,7 @@
 		/*/-->
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
+		<script src="https://unpkg.com/axios@0.19.2/dist/axios.js" th:src="${AXIOS_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
@@ -807,37 +808,48 @@
 			/*[- */
 			var props = { 'l10n': {} };
 			var responseCount = 0;
-			window.fetch = function() {
-				var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
-				var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
-				var stubResponse;
-				
-				if (outcome === 'failOnForm') {
-					stubResponse = new Response(null, { status: 500, statusText: 'Fake Server Error' });
-				
-				} else if (outcome === 'failOnField') {
-					var body = new Blob(
-						[ '{ "fieldErrors": { "url": [ "Invalid value" ] } }' ],
-						{ type : 'application/json' }
-					);
-					stubResponse = new Response(body, { status: 400 });
-				
-				} else if (outcome === 'success') {
-					var body = new Blob(
-						[ '{ "sellerId": 3, "price": 3.5, "currency" : "USD" }' ],
-						{ type : 'application/json' }
-					);
-					stubResponse = new Response(body, { status: 200 });
+			window.axios = {
+				post: function() {
+					var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
+					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
+					var stubResponse;
+					
+					if (outcome === 'failOnForm') {
+						stubResponse = {
+							status: 500,
+							statusText: 'Fake Server Error'
+						};
+					
+					} else if (outcome === 'failOnField') {
+						stubResponse = {
+							status: 400,
+							data: {
+								"fieldErrors": {
+									"url": [ "Invalid value" ]
+								}
+							}
+						};
+					
+					} else if (outcome === 'success') {
+						stubResponse = {
+							status: 200,
+							data: {
+								"sellerId": 3,
+								"price": 3.5,
+								"currency" : "USD"
+							}
+						};
+					}
+					
+					responseCount++;
+					
+					return new Promise(function delayExecution(resolve) {
+						setTimeout(resolve, 500 /* 0.5 second */);
+					
+					}).then(function returnResponse() {
+						return stubResponse.status == 500 ? Promise.reject(stubResponse) : Promise.resolve(stubResponse);
+					});
 				}
-				
-				responseCount++;
-				
-				return new Promise(function delayExecution(resolve) {
-					setTimeout(resolve, 500 /* 0.5 second */);
-				
-				}).then(function returnResponse() {
-					return Promise.resolve(stubResponse);
-				});
 			};
 			/* -]*/
 			

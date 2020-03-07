@@ -40,61 +40,49 @@ class SeriesSaleImportForm extends React.Component {
 			validationErrors: []
 		});
 		
-		const headers = new Headers();
-		headers.set('Content-Type', 'application/json; charset=UTF-8');
-		headers.set(this.props.csrfHeaderName, this.props.csrfTokenValue);
-		
-		const request = new Request(
+		axios.post(
 			this.props.url,
 			{
-				method: 'POST',
-				headers,
-				body: JSON.stringify({ 'url': this.state.url }),
-				cache: 'no-store'
+				'url': this.state.url
+			},
+			{
+				headers: {
+					[this.props.csrfHeaderName]: this.props.csrfTokenValue,
+					'Cache-Control': 'no-store'
+				},
+				validateStatus: (status) => {
+					return status == 200 || status == 400;
+				}
 			}
-		);
+		).then(response => {
+			const data = response.data;
+			if (data.hasOwnProperty('fieldErrors')) {
+				this.setState({ isDisabled: false, validationErrors: data.fieldErrors.url });
+				return;
+			}
+			
+			const today = DateUtils.formatDateToDdMmYyyy(new Date());
+			document.getElementById('date').value = today;
+			document.getElementById('url').value = this.state.url;
+			
+			if (data.price) {
+				document.getElementById('price').value = data.price;
+			}
+			
+			if (data.currency) {
+				document.getElementById('currency').value = data.currency;
+			}
+			
+			if (data.sellerId) {
+				document.getElementById('seller').value = data.sellerId;
+			}
+			
+			this.setState({ isDisabled: false, url: '' });
 		
-		fetch(request)
-			.then(response => {
-				if (response.ok || response.status == 400) {
-					return response.json();
-				}
-				throw new Error(response.statusText);
-			})
-			.then(data => {
-				if (data.hasOwnProperty('fieldErrors')) {
-					this.setState({
-						isDisabled: false,
-						validationErrors: data.fieldErrors.url
-					});
-					return;
-				}
-				
-				const today = DateUtils.formatDateToDdMmYyyy(new Date());
-				document.getElementById('date').value = today;
-                
-				document.getElementById('url').value = this.state.url;
-				
-				if (data.price) {
-					document.getElementById('price').value = data.price;
-				}
-				
-				if (data.currency) {
-					document.getElementById('currency').value = data.currency;
-				}
-				
-				if (data.sellerId) {
-					document.getElementById('seller').value = data.sellerId;
-				}
-				this.setState({ isDisabled: false, url: '' });
-			})
-			.catch(error => {
-				console.error(error);
-				this.setState({
-					isDisabled: false,
-					hasServerError: true
-				});
-			});
+		}).catch(error => {
+			console.error(error);
+			this.setState({ isDisabled: false, hasServerError: true });
+		});
 	}
 	
 	render() {
