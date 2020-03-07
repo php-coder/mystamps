@@ -6,7 +6,7 @@ Resource        ../../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Test Setup      Before Test
-Force Tags      series  sales  import-sales  logic  react-related
+Force Tags      series  sales  import-sales  logic
 
 *** Test Cases ***
 Import a series sale with an existing seller

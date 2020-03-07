@@ -1098,8 +1098,6 @@
 					<nonCriticalTags>
 						<!-- Allow to tests with this tag to fail without changing final status -->
 						<nonCriticalTag>unstable</nonCriticalTag>
-						<!-- @todo #1057 Make React related integration tests work -->
-						<nonCriticalTag>react-related</nonCriticalTag>
 					</nonCriticalTags>
 				</configuration>
 				<dependencies>
