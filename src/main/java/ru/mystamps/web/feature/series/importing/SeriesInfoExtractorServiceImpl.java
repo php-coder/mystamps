@@ -106,6 +106,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		String sellerUrl = extractSellerUrl(sellerId, data.getSellerUrl());
 		BigDecimal price = extractPrice(data.getPrice());
 		String currency = extractCurrency(data.getCurrency());
+		BigDecimal altPrice = extractPrice(data.getAltPrice());
+		String altCurrency = extractCurrency(data.getAltCurrency());
 		
 		return new SeriesExtractedInfo(
 			categoryIds,
@@ -119,7 +121,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			sellerName,
 			sellerUrl,
 			price,
-			currency
+			currency,
+			altPrice,
+			altCurrency
 		);
 	}
 	

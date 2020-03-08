@@ -260,6 +260,9 @@ public final class TestObjects {
 			Random.sellerName(),
 			Random.url(),
 			String.valueOf(Random.price()),
+			Random.currency().toString(),
+			String.valueOf(Random.price()),
+			// FIXME: alternative currency shouldn't match with currency
 			Random.currency().toString()
 		);
 	}
@@ -327,6 +330,9 @@ public final class TestObjects {
 			sellerName,
 			sellerUrl,
 			Random.price(),
+			Random.currency().toString(),
+			Random.price(),
+			// FIXME: alternative currency shouldn't match with currency
 			Random.currency().toString()
 		);
 	}
@@ -339,6 +345,8 @@ public final class TestObjects {
 			null,
 			null,
 			Collections.emptySet(),
+			null,
+			null,
 			null,
 			null,
 			null,

@@ -41,6 +41,8 @@ public class SeriesInfo {
 	private String sellerUrl;
 	private String price;
 	private String currency;
+	private String altPrice;
+	private String altCurrency;
 	
 	/**
 	 * Check whether any info about a series is available.

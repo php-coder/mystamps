@@ -96,7 +96,9 @@ public class DownloadingSucceededEventListener
 			info.getSellerName(),
 			info.getSellerUrl(),
 			info.getPrice(),
-			info.getCurrency()
+			info.getCurrency(),
+			info.getAltPrice(),
+			info.getAltCurrency()
 		);
 		
 		SeriesExtractedInfo seriesInfo = extractorService.extract(event.getUrl(), data);

@@ -75,7 +75,9 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 			info.getSellerName(),
 			info.getSellerUrl(),
 			info.getPrice(),
-			info.getCurrency()
+			info.getCurrency(),
+			info.getAltPrice(),
+			info.getAltCurrency()
 		);
 		
 		// CheckStyle: ignore LineLength for next 1 line

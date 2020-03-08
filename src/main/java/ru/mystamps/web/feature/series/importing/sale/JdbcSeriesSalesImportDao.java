@@ -48,6 +48,8 @@ public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {
 		params.put("seller_url", data.getSellerUrl());
 		params.put("price", data.getPrice());
 		params.put("currency", data.getCurrency());
+		params.put("alt_price", data.getAltPrice());
+		params.put("alt_currency", data.getAltCurrency());
 		params.put("created_at", data.getCreatedAt());
 		params.put("updated_at", data.getUpdatedAt());
 		

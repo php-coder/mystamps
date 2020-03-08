@@ -73,6 +73,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		String expectedSellerUrl = Random.url();
 		String expectedPrice = Random.price().toString();
 		String expectedCurrency = Random.currency().toString();
+		String expectedAltPrice = Random.price().toString();
+		String expectedAltCurrency = Random.currency().toString();
 		
 		parser.setMatchedUrl(baseUri);
 		parser.setCategoryLocator("#category-name");
@@ -82,6 +84,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		parser.setSellerLocator("#seller-info");
 		parser.setPriceLocator("#price");
 		parser.setCurrencyLocator("#currency");
+		parser.setAltPriceLocator("#alt-price");
+		parser.setAltCurrencyLocator("#alt-currency");
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
@@ -92,6 +96,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		expectedInfo.setSellerUrl(expectedSellerUrl);
 		expectedInfo.setPrice(expectedPrice);
 		expectedInfo.setCurrency(expectedCurrency);
+		expectedInfo.setAltPrice(expectedAltPrice);
+		expectedInfo.setAltCurrency(expectedAltCurrency);
 		
 		String html = String.format(
 			"<html>"
@@ -103,6 +109,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<a id='seller-info' href='%s'>%s</a>"
 					+ "<p id='price'>%s</p>"
 					+ "<p id='currency'>%s</p>"
+					+ "<p id='alt-price'>%s</p>"
+					+ "<p id='alt-currency'>%s</p>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
@@ -112,7 +120,9 @@ public class JsoupSiteParserTest implements WithAssertions {
 			expectedSellerUrl,
 			expectedSellerName,
 			expectedPrice,
-			expectedCurrency
+			expectedCurrency,
+			expectedAltPrice,
+			expectedAltCurrency
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -138,6 +148,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		String expectedSellerUrl = baseUri + sellerUrl;
 		String expectedPrice = Random.price().toString();
 		String expectedCurrency = Random.currency().toString();
+		String expectedAltPrice = Random.price().toString();
+		String expectedAltCurrency = Random.currency().toString();
 		
 		parser.setMatchedUrl(baseUri);
 		parser.setCategoryLocator("h1");
@@ -147,6 +159,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		parser.setSellerLocator("a.seller");
 		parser.setPriceLocator("b");
 		parser.setCurrencyLocator("div");
+		parser.setAltPriceLocator("i");
+		parser.setAltCurrencyLocator("em");
 		
 		SeriesInfo expectedInfo = new SeriesInfo();
 		expectedInfo.setCategoryName(expectedCategory);
@@ -157,6 +171,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		expectedInfo.setSellerUrl(expectedSellerUrl);
 		expectedInfo.setPrice(expectedPrice);
 		expectedInfo.setCurrency(expectedCurrency);
+		expectedInfo.setAltPrice(expectedAltPrice);
+		expectedInfo.setAltCurrency(expectedAltCurrency);
 		
 		String html = String.format(
 			"<html>"
@@ -168,6 +184,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<a class='seller' href='%s'>%s</a>"
 					+ "<b>%s</b>"
 					+ "<div>%s</div>"
+					+ "<i>%s</i>"
+					+ "<em>%s</em>"
 					+ "<h1>ignored</h1>"
 					+ "<p>ignored</p>"
 					+ "<span>ignored</span>"
@@ -175,6 +193,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<a class='seller' href='none'>seller name</a>"
 					+ "<b>ignored</b>"
 					+ "<div>ignored</div>"
+					+ "<i>ignored</i>"
+					+ "<em>ignored</em>"
 				+ "</body>"
 			+ "</html",
 			expectedCategory,
@@ -184,7 +204,9 @@ public class JsoupSiteParserTest implements WithAssertions {
 			expectedSellerUrl,
 			expectedSellerName,
 			expectedPrice,
-			expectedCurrency
+			expectedCurrency,
+			expectedAltPrice,
+			expectedAltCurrency
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -706,6 +728,88 @@ public class JsoupSiteParserTest implements WithAssertions {
 		String currency = parser.extractCurrency(doc);
 		
 		assertThat(currency).isEqualTo(expectedCurrency);
+	}
+	
+	//
+	// Tests for extractAltPrice()
+	//
+	
+	@Test
+	public void extractAltPriceShouldReturnNullWhenAltPriceLocatorIsNotSet() {
+		// given
+		parser.setAltPriceLocator(null);
+		Element doc = createEmptyDocument();
+		// when
+		String price = parser.extractAltPrice(doc);
+		// then
+		assertThat(price).isNull();
+	}
+	
+	@Test
+	public void extractAltPriceShouldReturnNullWhenElementNotFound() {
+		// given
+		parser.setAltPriceLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		// when
+		String price = parser.extractAltPrice(doc);
+		// then
+		assertThat(price).isNull();
+	}
+	
+	@Test
+	public void extractAltPriceShouldReturnTextOfAltPriceLocator() {
+		// given
+		parser.setAltPriceLocator("#alt-price");
+		
+		String expectedValue = String.valueOf(Random.price());
+		String html = String.format("<span id='alt-price'>%s</span>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		// when
+		String price = parser.extractAltPrice(doc);
+		// then
+		assertThat(price).as("couldn't extract alternative price from '%s'", doc)
+			.isEqualTo(expectedValue);
+	}
+	
+	//
+	// Tests for extractAltCurrency()
+	//
+	
+	@Test
+	public void extractAltCurrencyShouldReturnNullWhenAltCurrencyLocatorIsNotSet() {
+		// given
+		parser.setAltCurrencyLocator(null);
+		Element doc = createEmptyDocument();
+		// when
+		String currency = parser.extractAltCurrency(doc);
+		// then
+		assertThat(currency).isNull();
+	}
+	
+	@Test
+	public void extractAltCurrencyShouldReturnNullWhenElementNotFound() {
+		// given
+		parser.setAltCurrencyLocator(Random.jsoupLocator());
+		Element doc = createEmptyDocument();
+		// when
+		String currency = parser.extractAltCurrency(doc);
+		// then
+		assertThat(currency).isNull();
+	}
+	
+	@Test
+	public void extractAltCurrencyShouldReturnTextOfAltCurrencyLocator() {
+		// given
+		parser.setAltCurrencyLocator("#alt-currency");
+		
+		String expectedValue = Random.currency().toString();
+		String html = String.format("<span id='alt-currency'>%s</span>", expectedValue);
+		Element doc = createDocumentFromText(html);
+		// when
+		String currency = parser.extractAltCurrency(doc);
+		// then
+		assertThat(currency).as("couldn't extract alternative currency from '%s'", doc)
+			.isEqualTo(expectedValue);
 	}
 	
 	private static Element createDocumentFromText(String html) {

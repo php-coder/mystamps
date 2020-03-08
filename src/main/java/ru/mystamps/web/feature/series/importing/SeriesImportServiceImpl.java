@@ -221,6 +221,14 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 			seriesSalesParsedData.setCurrency(seriesInfo.getCurrency());
 		}
 		
+		// @todo #1230 SeriesImportServiceImpl.saveParsedData():
+		//  add unit test for alternative price and currency
+		BigDecimal altPrice = seriesInfo.getAltPrice();
+		if (altPrice != null) {
+			seriesSalesParsedData.setAltPrice(altPrice);
+			seriesSalesParsedData.setAltCurrency(seriesInfo.getAltCurrency());
+		}
+		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
 		//  for the case when parsed value don't match database

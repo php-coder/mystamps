@@ -56,6 +56,8 @@ public class JsoupSiteParser implements SiteParser {
 	private String priceLocator;
 	private String currencyLocator;
 	private String currencyValue;
+	private String altPriceLocator;
+	private String altCurrencyLocator;
 	
 	// @todo #975 SiteParserServiceImpl: add unit tests for constructor
 	public JsoupSiteParser(SiteParserConfiguration cfg) {
@@ -71,6 +73,8 @@ public class JsoupSiteParser implements SiteParser {
 		priceLocator            = cfg.getPriceLocator();
 		currencyLocator         = cfg.getCurrencyLocator();
 		currencyValue           = cfg.getCurrencyValue();
+		altPriceLocator         = cfg.getAltPriceLocator();
+		altCurrencyLocator      = cfg.getAltCurrencyLocator();
 	}
 	
 	/**
@@ -99,6 +103,8 @@ public class JsoupSiteParser implements SiteParser {
 		info.setSellerUrl(extractSellerUrl(body));
 		info.setPrice(extractPrice(body));
 		info.setCurrency(extractCurrency(body));
+		info.setAltPrice(extractAltPrice(body));
+		info.setAltCurrency(extractAltCurrency(body));
 		
 		return info;
 	}
@@ -239,6 +245,26 @@ public class JsoupSiteParser implements SiteParser {
 		
 		LOG.debug("Extracted currency: '{}'", currencyValue);
 		return currencyValue;
+	}
+	
+	protected String extractAltPrice(Element body) {
+		String price = getTextOfTheFirstElement(body, altPriceLocator);
+		if (price == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted alt price: '{}'", price);
+		return price;
+	}
+	
+	protected String extractAltCurrency(Element body) {
+		String currency = getTextOfTheFirstElement(body, altCurrencyLocator);
+		if (currency == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted alt currency: '{}'", currency);
+		return currency;
 	}
 	
 	private static Element getFirstElement(Element body, String locator) {
