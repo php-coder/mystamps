@@ -63,7 +63,7 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 		
 		seriesSalesDao.add(sale);
 		
-		log.info("Sale for series #{} has been added by user #{}", seriesId, userId);
+		log.info("Sale for series #{} has been added", seriesId);
 	}
 	
 }
