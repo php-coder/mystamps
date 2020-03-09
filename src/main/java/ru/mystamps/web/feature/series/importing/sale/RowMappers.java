@@ -39,6 +39,8 @@ final class RowMappers {
 		String sellerUrl = rs.getString("seller_url");
 		BigDecimal price = rs.getBigDecimal("price");
 		Currency currency = JdbcUtils.getCurrency(rs, "currency");
+		BigDecimal altPrice = rs.getBigDecimal("alt_price");
+		Currency altCurrency = JdbcUtils.getCurrency(rs, "alt_currency");
 
 		return new SeriesSaleParsedDataDto(
 			sellerId,
@@ -46,7 +48,9 @@ final class RowMappers {
 			sellerName,
 			sellerUrl,
 			price,
-			currency
+			currency,
+			altPrice,
+			altCurrency
 		);
 	}
 	

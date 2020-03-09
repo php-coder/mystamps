@@ -495,6 +495,63 @@
 									</td>
 								</tr>
 								
+								<tr th:if="${hasSalesInfo and (importSeriesForm.seriesSale.altPrice != null or !disabled)}"
+									th:classappend="${#fields.hasErrors('seriesSale.altPrice') or #fields.hasErrors('seriesSale.altCurrency') ? 'has-error' : ''}">
+									<th>
+										<label for="alt-price" class="control-label" th:text="#{t_alternative_price}">
+											Alternative price
+										</label>
+									</th>
+									<td>
+										<table>
+											<tr>
+												<td width="30%">
+													<input id="alt-price"
+														type="text"
+														class="form-control"
+														size="5"
+														value="2300"
+														th:field="*{seriesSale.altPrice}"
+														th:disabled="${disabled}" />
+												</td>
+												<td width="30%">
+													<select id="alt-currency" class="form-control" th:field="*{seriesSale.altCurrency}" th:disabled="${disabled}">
+														<option value=""></option>
+														<option value="USD">USD</option>
+														<option value="EUR">EUR</option>
+														<option value="GBP">GBP</option>
+														<option value="RUB">RUB</option>
+														<option value="CZK" selected="selected">CZK</option>
+														<option value="BYN">BYN</option>
+														<option value="UAH">UAH</option>
+													</select>
+												</td>
+												<td width="40%"></td>
+											</tr>
+											<!--/*/
+											<tr>
+												<td>
+													<span id="alt-price.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('seriesSale.altPrice')}"
+														th:each="error : ${#fields.errors('seriesSale.altPrice')}"
+														th:text="${error}"></span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span id="alt-currency.errors"
+														class="help-block"
+														th:if="${#fields.hasErrors('seriesSale.altCurrency')}"
+														th:each="error : ${#fields.errors('seriesSale.altCurrency')}"
+														th:text="${error}"></span>
+												</td>
+											</tr>
+											/*/-->
+										</table>
+									</td>
+								</tr>
+								
 								<tr th:unless="${disabled}">
 									<td></td>
 									<td>

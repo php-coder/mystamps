@@ -93,13 +93,15 @@ Import series and series sale with existing seller from an external site
 	Submit Form                 id:import-series-form
 	${requestLocation}=         Get Location
 	# sale info should be parsed and shown at the request page
-	List Selection Should Be    id:seller    Eicca Toppinen
-	Textfield Value Should Be   id:price     111
-	List Selection Should Be    id:currency  RUB
+	List Selection Should Be    id:seller        Eicca Toppinen
+	Textfield Value Should Be   id:price         111
+	List Selection Should Be    id:currency      RUB
+	Textfield Value Should Be   id:alt-price     1.5
+	List Selection Should Be    id:alt-currency  EUR
 	Submit Form                 id:create-series-form
 	# after importing a series, sale info should be shown at the info page
 	${currentDate}=             Get Current Date  result_format=%d.%m.%Y
-	Element Text Should Be      id:series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB
+	Element Text Should Be      id:series-sale-1-info         ${currentDate} Eicca Toppinen was selling for 111.00 RUB (1.50 EUR)
 	Link Should Point To        id:series-sale-1-seller       http://example.com/eicca-toppinen
 	Link Should Point To        id:series-sale-1-transaction  ${MOCK_SERVER}/series/import/request-logic/existing-seller.html
 	Go To                       ${requestLocation}
@@ -107,6 +109,8 @@ Import series and series sale with existing seller from an external site
 	Element Should Be Disabled  id:seller
 	Element Should Be Disabled  id:price
 	Element Should Be Disabled  id:currency
+	Element Should Be Disabled  id:alt-price
+	Element Should Be Disabled  id:alt-currency
 
 Import series and series sale with a new seller from an external site
 	[Documentation]             Verify import series and sale (with a new seller)

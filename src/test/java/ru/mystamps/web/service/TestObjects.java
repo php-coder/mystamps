@@ -395,6 +395,9 @@ public final class TestObjects {
 			sellerName,
 			sellerUrl,
 			Random.price(),
+			Random.currency(),
+			Random.price(),
+			// FIXME: alternative currency shouldn't match with currency
 			Random.currency()
 		);
 	}

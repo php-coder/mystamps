@@ -32,4 +32,6 @@ public class SeriesSaleParsedDataDto {
 	private final String sellerUrl;
 	private final BigDecimal price;
 	private final Currency currency;
+	private final BigDecimal altPrice;
+	private final Currency altCurrency;
 }

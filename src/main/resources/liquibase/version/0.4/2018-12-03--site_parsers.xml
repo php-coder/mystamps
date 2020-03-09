@@ -155,6 +155,18 @@
 			<column name="value" value="RUB" />
 		</insert>
 		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
+			<column name="name" value="alt-price-locator" />
+			<column name="value" value="#alt-price" />
+		</insert>
+		
+		<insert tableName="site_parser_params">
+			<column name="parser_id" valueComputed="(SELECT id FROM site_parsers WHERE name = 'mockserver')" />
+			<column name="name" value="alt-currency-locator" />
+			<column name="value" value="#alt-currency" />
+		</insert>
+		
 	</changeSet>
 	
 </databaseChangeLog>

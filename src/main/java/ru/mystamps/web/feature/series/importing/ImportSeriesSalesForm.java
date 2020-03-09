@@ -43,6 +43,11 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	@NotNull
 	private Currency currency;
 	
+	// CheckStyle: ignore LineLength for next 1 line
+	// @todo #1230 /series/import/request/{id}: validate that both alt price/currency are present or absent
+	private BigDecimal altPrice;
+	private Currency altCurrency;
+	
 	// We don't expose these fields to a form because we know already what
 	// values should be. Even if user will try to provide its own values, it's not
 	// a problem as we always rewrite them in the controller.
@@ -50,21 +55,9 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	private String url;
 	
 	//
-	// The methods bellow required for AddSeriesSalesDto interface.
-	// They are no-op methods because we don't support all values during series import.
+	// The method below is required for AddSeriesSalesDto interface.
+	// It is no-op method because we don't support all values during series import.
 	//
-	
-	// For future: altPrice is required when altCurrency is specified
-	@Override
-	public BigDecimal getAltPrice() {
-		return null;
-	}
-	
-	// For future: altCurrency is required when altPrice is specified
-	@Override
-	public Currency getAltCurrency() {
-		return null;
-	}
 	
 	@Override
 	public Integer getBuyerId() {
