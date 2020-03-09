@@ -28,4 +28,6 @@ public class SeriesSaleExtractedInfo {
 	private final Integer sellerId;
 	private final BigDecimal price;
 	private final String currency;
+	private final BigDecimal altPrice;
+	private final String altCurrency;
 }

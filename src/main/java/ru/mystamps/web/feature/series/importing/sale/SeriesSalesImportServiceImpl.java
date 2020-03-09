@@ -87,7 +87,9 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 		return new SeriesSaleExtractedInfo(
 			seriesInfo.getSellerId(),
 			seriesInfo.getPrice(),
-			seriesInfo.getCurrency()
+			seriesInfo.getCurrency(),
+			seriesInfo.getAltPrice(),
+			seriesInfo.getAltCurrency()
 		);
 	}
 	

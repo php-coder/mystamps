@@ -69,6 +69,14 @@ class SeriesSaleImportForm extends React.Component {
 				document.getElementById('currency').value = data.currency;
 			}
 			
+			if (data.altPrice) {
+				document.getElementById('alt-price').value = data.altPrice;
+			}
+			
+			if (data.altCurrency) {
+				document.getElementById('alt-currency').value = data.altCurrency;
+			}
+			
 			if (data.sellerId) {
 				document.getElementById('seller').value = data.sellerId;
 			}

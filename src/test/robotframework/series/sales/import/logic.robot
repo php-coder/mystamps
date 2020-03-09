@@ -18,6 +18,8 @@ Import a series sale with an existing seller
 	List Selection Should Be     id:seller           Eicca Toppinen
 	Textfield Value Should Be    id:price            350
 	List Selection Should Be     id:currency         RUB
+	Textfield Value Should Be    id:alt-price        6.3
+	List Selection Should Be     id:alt-currency     EUR
 
 Import a series sale without information
 	Input Text                     id:series-sale-url  ${MOCK_SERVER}/series/sales/import/logic/empty.html
