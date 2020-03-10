@@ -76,6 +76,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Regular expression that matches Ukrainian hryvnia.
 	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("[0-9] грн");
 	
+	// Regular expression that matches US dollar.
+	private static final Pattern USD_CURRENCY_REGEXP = Pattern.compile("[0-9]\\$");
+	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);
 	private static final Pattern VALID_CATEGORY_NAME_RU = Pattern.compile(CategoryValidation.NAME_RU_REGEXP);
@@ -454,6 +457,12 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		if (matcher.find()) {
 			log.debug("Currency is UAH");
 			return Currency.UAH.toString();
+		}
+		
+		matcher = USD_CURRENCY_REGEXP.matcher(fragment);
+		if (matcher.find()) {
+			log.debug("Currency is USD");
+			return Currency.USD.toString();
 		}
 		
 		log.debug("Could not extract currency from a fragment");

@@ -693,4 +693,13 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'135.74 грн' | _
 	}
 	
+	@Unroll
+	def 'extractCurrency() should extract USD currency from "#fragment"'(String fragment) {
+		expect:
+			service.extractCurrency(fragment) == 'USD'
+		where:
+			fragment | _
+			'1,36$'  | _
+	}
+	
 }
