@@ -404,6 +404,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			if (candidate.contains(",")) {
 				candidate = StringUtils.replaceChars(candidate, ',', '.');
 			}
+			// "10$" -> "10"
+			if (candidate.endsWith("$") && candidate.length() > 2) {
+				candidate = candidate.substring(0, candidate.length() - 1);
+			}
 			try {
 				BigDecimal price = new BigDecimal(candidate);
 				log.debug("Price is {}", price);

@@ -611,6 +611,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractPrice(fragment) == BigDecimal.TEN
 		where:
 			fragment        | _
+			'10$'           | _
 			'10 EUR'        | _
 			'10.0 EUR'      | _
 			'10.00 EUR'     | _
