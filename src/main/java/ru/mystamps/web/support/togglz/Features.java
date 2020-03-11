@@ -22,8 +22,6 @@ import org.togglz.core.annotation.EnabledByDefault;
 import org.togglz.core.annotation.Label;
 import org.togglz.core.context.FeatureContext;
 
-// @todo #605 Togglz: remove items left from >= 0.4.1 milestone
-// @todo #1022 Togglz: remove SEND_MAIL_VIA_HTTP_API from database
 public enum Features implements Feature {
 	
 	@Label("/site/index: search by catalog in collection")

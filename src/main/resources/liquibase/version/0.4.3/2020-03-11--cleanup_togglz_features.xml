@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="cleanup_togglz_features" author="php-coder" context="prod-data">
+		
+		<!--
+			Liquibase migrates database before Togglz and on the first run
+			it's possible that there is no TOGGLZ table yet.
+		-->
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="TOGGLZ" />
+		</preConditions>
+		
+		<delete tableName="TOGGLZ">
+			<where>
+				FEATURE_NAME IN (
+					"ADD_ADDITIONAL_IMAGES_TO_SERIES",
+					"ADD_PURCHASES_AND_SALES",
+					"ADD_SERIES_TO_COLLECTION",
+					"LIST_CATEGORIES",
+					"LIST_COUNTRIES",
+					"SEND_ACTIVATION_MAIL",
+					"SEND_MAIL_VIA_HTTP_API",
+					"SHOW_COLLECTION_CHARTS",
+					"SHOW_COLLECTION_STATISTICS",
+					"SHOW_IMAGES_PREVIEW",
+					"SHOW_PURCHASES_AND_SALES",
+					"SHOW_RECENT_COLLECTIONS_ON_INDEX_PAGE",
+					"SHOW_RECENT_SERIES_ON_INDEX_PAGE",
+					"SHOW_SEARCH_PANEL_ON_INDEX_PAGE",
+					"SHOW_SUGGESTION_LINK",
+					"VIEW_SITE_EVENTS"
+				)
+			</where>
+		</delete>
+
+	</changeSet>
+	
+</databaseChangeLog>
