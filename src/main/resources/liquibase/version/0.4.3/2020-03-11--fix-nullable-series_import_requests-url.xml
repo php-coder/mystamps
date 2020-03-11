@@ -7,7 +7,10 @@
 	
 	<changeSet id="make-series_import_requests-url-non-nullable-again" author="php-coder" context="scheme" dbms="mysql">
 		
-		<addNotNullConstraint tableName="series_import_requests" columnName="url" />
+		<addNotNullConstraint
+			tableName="series_import_requests"
+			columnName="url"
+			columnDataType="VARCHAR(767)" />
 		
 	</changeSet>
 	
