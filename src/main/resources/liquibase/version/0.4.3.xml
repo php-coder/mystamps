@@ -8,5 +8,6 @@
 	<include file="0.4.3/2020-03-07--site_parser_params_value_length.xml" relativeToChangelogFile="true" />
 	<include file="0.4.3/2020-03-08--add_alt_price_to_series_sales_import_parsed_data.xml" relativeToChangelogFile="true" />
 	<include file="0.4.3/2020-03-11--cleanup_togglz_features.xml" relativeToChangelogFile="true" />
+	<include file="0.4.3/2020-03-11--fix-nullable-series_import_requests-url.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
