@@ -55,6 +55,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
+	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
 		"(?<quantity>[1-9][0-9]{0,2})(-?(ти|ой|ух))?( ((без)?зубцов(ая|ы[ех])))? (мар(ок|к[аи])|блок(а|ов)?)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
