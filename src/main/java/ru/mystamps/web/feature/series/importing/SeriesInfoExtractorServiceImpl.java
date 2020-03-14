@@ -54,9 +54,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern RELEASE_YEAR_REGEXP =
 		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})г?");
 	
-	// Regular expression matches number of the stamps in a series (from 1 to 99).
+	// Regular expression matches number of the stamps in a series (from 1 to 999).
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
-		"(?<quantity>[1-9][0-9]?)( ((без)?зубцов(ая|ы[ех])))? (мар(ок|к[аи])|блок(а|ов)?)",
+		"(?<quantity>[1-9][0-9]{0,2})( ((без)?зубцов(ая|ы[ех])))? (мар(ок|к[аи])|блок(а|ов)?)",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
 	
