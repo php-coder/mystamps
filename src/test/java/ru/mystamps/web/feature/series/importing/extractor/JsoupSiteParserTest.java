@@ -602,11 +602,29 @@ public class JsoupSiteParserTest implements WithAssertions {
 	}
 	
 	@Test
-	public void extractSellerUrlShouldReturnValueOfHrefAttribute() {
+	public void extractSellerUrlShouldReturnValueOfSellerLocator() {
 		parser.setSellerLocator("a");
 		
 		String expectedUrl = Random.url();
 		String html = String.format("<a href='%s'>test</a>", expectedUrl);
+		Element doc = createDocumentFromText(html);
+		
+		String url = parser.extractSellerUrl(doc);
+		
+		assertThat(url).as("couldn't extract seller url from '%s'", doc)
+			.isEqualTo(expectedUrl);
+	}
+	
+	@Test
+	public void extractSellerUrlShouldReturnValueOfSellerUrlLocator() {
+		parser.setSellerUrlLocator("#seller");
+		parser.setSellerLocator("a");
+		
+		String expectedUrl = Random.url();
+		String html = String.format(
+			"<a href='http:/example.com/test'>test</a><a id='seller' href='%s'>seller</a>",
+			expectedUrl
+		);
 		Element doc = createDocumentFromText(html);
 		
 		String url = parser.extractSellerUrl(doc);

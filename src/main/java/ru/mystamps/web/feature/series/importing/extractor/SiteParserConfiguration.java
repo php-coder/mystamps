@@ -43,6 +43,7 @@ public class SiteParserConfiguration {
 	private String imageUrlAttribute;
 	private String issueDateLocator;
 	private String sellerLocator;
+	private String sellerUrlLocator;
 	private String priceLocator;
 	private String currencyLocator;
 	private String currencyValue;
@@ -60,6 +61,8 @@ public class SiteParserConfiguration {
 		imageUrlAttribute       = params.get("image-url-attribute");
 		issueDateLocator        = params.get("issue-date-locator");
 		sellerLocator           = params.get("seller-locator");
+		// @todo #1281 Add integration test for import with seller-url-locator
+		sellerUrlLocator        = params.get("seller-url-locator");
 		priceLocator            = params.get("price-locator");
 		// @todo #979 Add integration test for import of series with currency-locator
 		currencyLocator         = params.get("currency-locator");

@@ -53,6 +53,7 @@ public class JsoupSiteParser implements SiteParser {
 	private String imageUrlAttribute;
 	private String issueDateLocator;
 	private String sellerLocator;
+	private String sellerUrlLocator;
 	private String priceLocator;
 	private String currencyLocator;
 	private String currencyValue;
@@ -70,6 +71,7 @@ public class JsoupSiteParser implements SiteParser {
 		imageUrlAttribute       = cfg.getImageUrlAttribute();
 		issueDateLocator        = cfg.getIssueDateLocator();
 		sellerLocator           = cfg.getSellerLocator();
+		sellerUrlLocator        = cfg.getSellerUrlLocator();
 		priceLocator            = cfg.getPriceLocator();
 		currencyLocator         = cfg.getCurrencyLocator();
 		currencyValue           = cfg.getCurrencyValue();
@@ -205,7 +207,9 @@ public class JsoupSiteParser implements SiteParser {
 	}
 	
 	protected String extractSellerUrl(Element body) {
-		Element elem = getFirstElement(body, sellerLocator);
+		String locator = ObjectUtils.firstNonNull(sellerUrlLocator, sellerLocator);
+		
+		Element elem = getFirstElement(body, locator);
 		if (elem == null) {
 			return null;
 		}
