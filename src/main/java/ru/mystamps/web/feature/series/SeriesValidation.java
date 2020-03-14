@@ -23,7 +23,7 @@ import ru.mystamps.web.feature.series.SeriesDb.Series;
 public final class SeriesValidation {
 	
 	public static final int MIN_STAMPS_IN_SERIES = 1;
-	public static final int MAX_STAMPS_IN_SERIES = 65;
+	public static final int MAX_STAMPS_IN_SERIES = 150;
 	public static final int MIN_RELEASE_YEAR     = 1840;
 	static final String CATALOG_NUMBERS_REGEXP = "[1-9][0-9]{0,3}(,[1-9][0-9]{0,3})*";
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
