@@ -291,6 +291,8 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'2010     brazil'                | _
 			'prehistoric animals 2010 congo' | _
 			'2010г'                          | _
+			'2010г.'                         | _
+			'2010год'                        | _
 			'Палау 2010, 2 малых листа'      | _
 			'test,2010'                      | _
 	}

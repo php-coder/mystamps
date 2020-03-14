@@ -52,7 +52,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// Regular expression matches release year of the stamps (from 1840 till 2099).
 	private static final Pattern RELEASE_YEAR_REGEXP =
-		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})г?");
+		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
