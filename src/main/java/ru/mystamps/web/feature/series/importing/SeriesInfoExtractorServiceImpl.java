@@ -51,8 +51,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	protected static final int MAX_SUPPORTED_RELEASE_YEAR = 2099;
 	
 	// Regular expression matches release year of the stamps (from 1840 till 2099).
+	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern RELEASE_YEAR_REGEXP =
-		Pattern.compile("(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
+		Pattern.compile("([0-9]{2}\\.[0-9]{2}\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
 	// CheckStyle: ignore LineLength for next 2 lines

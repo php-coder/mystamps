@@ -295,6 +295,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'2010год'                        | _
 			'Палау 2010, 2 малых листа'      | _
 			'test,2010'                      | _
+			'01.02.2010'                     | _
 	}
 	
 	@SuppressWarnings('UnnecessaryGetter')
