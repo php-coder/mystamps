@@ -16,7 +16,8 @@ Seller info should be visible where only price and currency have been extracted
 
 Seller info should be invisible where seller id has been extracted
 	Go To                          ${SITE_URL}/series/import/request/4
-	List Selection Should Be       id:seller  gh1232
+	Element Text Should Be         id:request-url  http://example.com/issue/1232/with-seller-id
+	List Selection Should Be       id:seller       gh1232
 	Element Should Not Be Visible  id:seller-group
 	Element Should Not Be Visible  id:seller-name
 	Element Should Not Be Visible  id:seller-url
