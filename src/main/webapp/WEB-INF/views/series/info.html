@@ -792,7 +792,7 @@
 		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
-			var props = {
+			var importFormProps = {
 				'url': [[ '__@{${IMPORT_SERIES_SALES}}__' ]],
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
@@ -806,7 +806,7 @@
 			+]*/
 			
 			/*[- */
-			var props = { 'l10n': {} };
+			var importFormProps = { 'l10n': {} };
 			var responseCount = 0;
 			window.axios = {
 				post: function() {
@@ -853,7 +853,7 @@
 			};
 			/* -]*/
 			
-			var rootElement = React.createElement(SeriesSaleImportForm, props);
+			var rootElement = React.createElement(SeriesSaleImportForm, importFormProps);
 			var destNode = document.getElementById('importSeriesSaleForm');
 			ReactDOM.render(rootElement, destNode);
 		</script>
