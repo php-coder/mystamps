@@ -38,4 +38,16 @@
 		
 	</changeSet>
 	
+	<changeSet id="add-series-sale-with-price-and-currency-only" author="php-coder" context="test-data">
+		
+		<insert tableName="series_sales_import_parsed_data">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1279')" />
+			<column name="price" valueNumeric="100" />
+			<column name="currency" value="RUB" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+	</changeSet>
+	
 </databaseChangeLog>

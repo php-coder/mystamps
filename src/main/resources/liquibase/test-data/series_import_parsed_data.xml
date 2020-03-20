@@ -34,4 +34,14 @@
 		
 	</changeSet>
 	
+	<changeSet id="add-series-parsed-data-for-gh1279" author="php-coder" context="test-data">
+		
+		<insert tableName="series_import_parsed_data">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1279')" />
+			<column name="created_at" valueComputed="${NOW}" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+	</changeSet>
+	
 </databaseChangeLog>

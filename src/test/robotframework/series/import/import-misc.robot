@@ -21,6 +21,14 @@ Seller info should be invisible where seller id has been extracted
 	Element Should Not Be Visible  id:seller-name
 	Element Should Not Be Visible  id:seller-url
 
+Alternative price and currency should be invisible when they are empty
+	Go To                          ${SITE_URL}/series/import/request/5
+	Element Text Should Be         id:request-url  http://example.com/issue/1279
+	Textfield Value Should Be      id:price        100
+	List Selection Should Be       id:currency     RUB
+	Element Should Not Be Visible  id:alt-price
+	Element Should Not Be Visible  id:alt-currency
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}

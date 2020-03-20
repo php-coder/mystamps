@@ -49,4 +49,16 @@
 		
 	</changeSet>
 	
+	<changeSet id="add-import-request-for-gh1279" author="php-coder" context="test-data">
+		
+		<insert tableName="series_import_requests">
+			<column name="url" value="http://example.com/issue/1279" />
+			<column name="status_id" valueComputed="(SELECT id FROM series_import_request_statuses WHERE name = 'ParsingSucceeded')" />
+			<column name="requested_at" valueComputed="${NOW}" />
+			<column name="requested_by" valueComputed="(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1)" />
+			<column name="updated_at" valueComputed="${NOW}" />
+		</insert>
+		
+	</changeSet>
+	
 </databaseChangeLog>
