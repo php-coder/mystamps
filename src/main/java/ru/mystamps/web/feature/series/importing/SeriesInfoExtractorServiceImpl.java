@@ -101,7 +101,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	public SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data) {
 		List<Integer> categoryIds = extractCategory(data.getCategoryName());
 		List<Integer> countryIds = extractCountry(data.getCountryName());
-		Integer releaseYear = extractReleaseYear(data.getReleaseYear());
+		Integer releaseYear = extractReleaseYear(data.getIssueDate());
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
 		Set<String> michelNumbers = extractMichelNumbers(data.getMichelNumbers());

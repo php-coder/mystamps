@@ -26,7 +26,7 @@ public class RawParsedDataDto {
 	private final String categoryName;
 	private final String countryName;
 	private final String imageUrl;
-	private final String releaseYear;
+	private final String issueDate;
 	private final String quantity;
 	private final String perforated;
 	private final String michelNumbers;
