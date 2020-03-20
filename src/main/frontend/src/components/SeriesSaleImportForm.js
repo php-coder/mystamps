@@ -138,7 +138,7 @@ class SeriesSaleImportForm extends React.Component {
 								<div className="form-group form-group-sm">
 									<div className="col-sm-offset-3 col-sm-4">
 										<button type="submit"
-											className="btn btn-primary"
+											className="btn btn-primary btn-sm"
 											disabled={this.state.isDisabled}>
 											{ this.props.l10n['t_import_info'] || 'Import info' }
 										</button>
