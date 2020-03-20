@@ -853,9 +853,13 @@
 			};
 			/* -]*/
 			
-			var rootElement = React.createElement(SeriesSaleImportForm, importFormProps);
-			var destNode = document.getElementById('importSeriesSaleForm');
-			ReactDOM.render(rootElement, destNode);
+			var renderComponent = function(component, props, elementId) {
+				var rootElement = React.createElement(component, props);
+				var destNode = document.getElementById(elementId);
+				ReactDOM.render(rootElement, destNode);
+			};
+			
+			renderComponent(SeriesSaleImportForm, importFormProps, 'importSeriesSaleForm');
 		</script>
 		<!--/*/
 		</th:block>
