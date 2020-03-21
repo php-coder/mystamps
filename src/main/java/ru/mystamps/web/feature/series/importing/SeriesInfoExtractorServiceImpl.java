@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,12 +48,13 @@ import java.util.stream.Stream;
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorService {
 	
-	// Related to RELEASE_YEAR_REGEXP and used in unit tests.
+	// Related to RELEASE_DATE_REGEXP and used in unit tests.
 	protected static final int MAX_SUPPORTED_RELEASE_YEAR = 2099;
 	
-	// Regular expression matches release year of the stamps (from 1840 till 2099).
+	// Regular expression matches release date of the stamps.
+	// Year should be in range within 1840 and 2099 inclusive.
 	// CheckStyle: ignore LineLength for next 2 lines
-	private static final Pattern RELEASE_YEAR_REGEXP =
+	private static final Pattern RELEASE_DATE_REGEXP =
 		Pattern.compile("([0-9]{2}\\.[0-9]{2}\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
@@ -101,7 +103,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	public SeriesExtractedInfo extract(String pageUrl, RawParsedDataDto data) {
 		List<Integer> categoryIds = extractCategory(data.getCategoryName());
 		List<Integer> countryIds = extractCountry(data.getCountryName());
-		Integer releaseYear = extractReleaseYear(data.getIssueDate());
+		Map<String, Integer> releaseDate = extractIssueDate(data.getIssueDate());
 		Integer quantity = extractQuantity(data.getQuantity());
 		Boolean perforated = extractPerforated(data.getPerforated());
 		Set<String> michelNumbers = extractMichelNumbers(data.getMichelNumbers());
@@ -117,7 +119,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return new SeriesExtractedInfo(
 			categoryIds,
 			countryIds,
-			releaseYear,
+			releaseDate.get("year"),
 			quantity,
 			perforated,
 			michelNumbers,
@@ -214,16 +216,16 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
-	/* default */ Integer extractReleaseYear(String fragment) {
+	/* default */ Map<String, Integer> extractIssueDate(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
-			return null;
+			return Collections.emptyMap();
 		}
 		
-		log.debug("Determine release year from '{}'", fragment);
+		log.debug("Determine release date from '{}'", fragment);
 		
 		String[] candidates = StringUtils.split(fragment, " \t,");
 		for (String candidate : candidates) {
-			Matcher matcher = RELEASE_YEAR_REGEXP.matcher(candidate);
+			Matcher matcher = RELEASE_DATE_REGEXP.matcher(candidate);
 			if (!matcher.matches()) {
 				continue;
 			}
@@ -231,16 +233,16 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			try {
 				Integer year = Integer.valueOf(matcher.group("year"));
 				log.debug("Release year is {}", year);
-				return year;
+				return Collections.singletonMap("year", year);
 				
 			} catch (NumberFormatException ignored) { // NOPMD: EmptyCatchBlock
 				// continue with the next element
 			}
 		}
 		
-		log.debug("Could not extract release year from a fragment");
+		log.debug("Could not extract release date from a fragment");
 		
-		return null;
+		return Collections.emptyMap();
 	}
 	
 	/* default */ Integer extractQuantity(String fragment) {

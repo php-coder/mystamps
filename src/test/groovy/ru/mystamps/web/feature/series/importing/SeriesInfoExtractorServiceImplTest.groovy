@@ -230,59 +230,59 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for extractReleaseYear()
+	// Tests for extractIssueDate()
 	//
 	
-	def 'extractReleaseYear() should return null when fragment is null, empty or blank'() {
+	def 'extractIssueDate() should return empty map when fragment is null, empty or blank'() {
 		given:
 			String fragment = nullOrBlank()
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == null
+			date.isEmpty()
 	}
 	
-	def 'extractReleaseYear() should extract year from XIX century'() {
+	def 'extractIssueDate() should extract year from XIX century'() {
 		given:
 			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, 1899).integer()
 		and:
 			String fragment = String.valueOf(expectedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 	}
 	
-	def 'extractReleaseYear() should extract year from XX century'() {
+	def 'extractIssueDate() should extract year from XX century'() {
 		given:
 			Integer expectedYear = between(1900, 1999).integer()
 		and:
 			String fragment = String.valueOf(expectedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 	}
 	
-	def 'extractReleaseYear() should extract year from XXI century'() {
+	def 'extractIssueDate() should extract year from XXI century'() {
 		given:
 			Integer expectedYear = between(2000, MAX_SUPPORTED_RELEASE_YEAR).integer()
 		and:
 			String fragment = String.valueOf(expectedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 	}
 	
 	@Unroll
-	def 'extractReleaseYear() should extract date from "#fragment"'(String fragment) {
+	def 'extractIssueDate() should extract date from "#fragment"'(String fragment) {
 		given:
 			Integer expectedYear = 2010 // should be in sync with examples below
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 		where:
 			fragment                         | _
 			'italy 2010'                     | _
@@ -299,7 +299,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@SuppressWarnings('UnnecessaryGetter')
-	def 'extractReleaseYear() should return the first year if there are many'() {
+	def 'extractIssueDate() should return the first year if there are many'() {
 		given:
 			Integer currentYear = Year.now().getValue()
 			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
@@ -308,13 +308,13 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		and:
 			String fragment = String.format('%d %d', expectedYear, anotherYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 	}
 	
 	@SuppressWarnings('UnnecessaryGetter')
-	def 'extractReleaseYear() should skip invalid date'() {
+	def 'extractIssueDate() should skip invalid date'() {
 		given:
 			Integer unsupportedYearInPast = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
 			Integer unsupportedYearInFuture = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
@@ -325,37 +325,37 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		and:
 			String fragment = String.format('%d %d', unsupportedYear, expectedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == expectedYear
+			date.get('year') == expectedYear
 	}
 	
-	def 'extractReleaseYear() shouldn\'t extract dates before 1840'() {
+	def 'extractIssueDate() shouldn\'t extract dates before 1840'() {
 		given:
 			Integer unsupportedYear = between(0, SeriesValidation.MIN_RELEASE_YEAR - 1).integer()
 			String fragment = String.valueOf(unsupportedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == null
+			date.isEmpty()
 	}
 	
-	def 'extractReleaseYear() shouldn\'t extract dates after 2099'() {
+	def 'extractIssueDate() shouldn\'t extract dates after 2099'() {
 		given:
 			Integer unsupportedYear = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
 			String fragment = String.valueOf(unsupportedYear)
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == null
+			date.isEmpty()
 	}
 	
 	@Unroll
-	def 'extractReleaseYear() shouldn\'t extract date from "#fragment"'(String fragment) {
+	def 'extractIssueDate() shouldn\'t extract date from "#fragment"'(String fragment) {
 		when:
-			Integer year = service.extractReleaseYear(fragment)
+			Map<String, Integer> date = service.extractIssueDate(fragment)
 		then:
-			year == null
+			date.isEmpty()
 		where:
 			fragment           | _
 			'-2000'            | _
