@@ -28,8 +28,6 @@ import ru.mystamps.web.feature.series.SeriesValidation
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import java.time.Year
-
 import static io.qala.datagen.RandomElements.from
 import static io.qala.datagen.RandomShortApi.nullOrBlank
 import static io.qala.datagen.RandomValue.between
@@ -301,10 +299,9 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryGetter')
 	def 'extractIssueDate() should return the first year if there are many'() {
 		given:
-			Integer currentYear = Year.now().getValue()
-			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer expectedYear = Random.issueYear()
 		and:
-			Integer anotherYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer anotherYear = Random.issueYear()
 		and:
 			String fragment = String.format('%d %d', expectedYear, anotherYear)
 		when:
@@ -320,8 +317,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			Integer unsupportedYearInFuture = between(MAX_SUPPORTED_RELEASE_YEAR + 1, Integer.MAX_VALUE).integer()
 			Integer unsupportedYear = from(unsupportedYearInPast, unsupportedYearInFuture).sample()
 		and:
-			Integer currentYear = Year.now().getValue()
-			Integer expectedYear = between(SeriesValidation.MIN_RELEASE_YEAR, currentYear).integer()
+			Integer expectedYear = Random.issueYear()
 		and:
 			String fragment = String.format('%d %d', unsupportedYear, expectedYear)
 		when:
