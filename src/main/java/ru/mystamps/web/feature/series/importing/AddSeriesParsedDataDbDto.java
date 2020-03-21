@@ -30,6 +30,8 @@ public class AddSeriesParsedDataDbDto {
 	private Integer categoryId;
 	private Integer countryId;
 	private String imageUrl;
+	private Integer releaseDay;
+	private Integer releaseMonth;
 	private Integer releaseYear;
 	private Integer quantity;
 	private Boolean perforated;

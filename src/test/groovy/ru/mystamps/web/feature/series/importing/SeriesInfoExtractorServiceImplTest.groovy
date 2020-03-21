@@ -361,6 +361,21 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'part of word2000' | _
 	}
 
+	def 'extractIssueDate() should extract a full issue date'() {
+		given:
+			Integer expectedDay = Random.dayOfMonth()
+			Integer expectedMonth = Random.monthOfYear()
+			Integer expectedYear = Random.issueYear()
+		and:
+			String fragment = String.format('%02d.%02d.%d', expectedDay, expectedMonth, expectedYear)
+		when:
+			Map<String, Integer> date = service.extractIssueDate(fragment)
+		then:
+			date.get('day')   == expectedDay
+			date.get('month') == expectedMonth
+			date.get('year')  == expectedYear
+	}
+	
 	//
 	// Tests for extractQuantity()
 	//

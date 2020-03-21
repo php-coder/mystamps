@@ -153,6 +153,8 @@ public class SeriesImportController {
 			form.setCategory(series.getCategory());
 			form.setCountry(series.getCountry());
 			form.setImageUrl(series.getImageUrl());
+			form.setDay(series.getIssueDay());
+			form.setMonth(series.getIssueMonth());
 			form.setYear(series.getIssueYear());
 			form.setQuantity(series.getQuantity());
 			if (series.getPerforated() != null) {

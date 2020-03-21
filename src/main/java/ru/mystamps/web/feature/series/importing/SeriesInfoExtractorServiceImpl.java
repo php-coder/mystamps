@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Year should be in range within 1840 and 2099 inclusive.
 	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern RELEASE_DATE_REGEXP =
-		Pattern.compile("([0-9]{2}\\.[0-9]{2}\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
+		Pattern.compile("((?<day>[0-9]{2})\\.(?<month>[0-9]{2})\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
 	// CheckStyle: ignore LineLength for next 2 lines
@@ -119,6 +120,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return new SeriesExtractedInfo(
 			categoryIds,
 			countryIds,
+			releaseDate.get("day"),
+			releaseDate.get("month"),
 			releaseDate.get("year"),
 			quantity,
 			perforated,
@@ -216,6 +219,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		return Collections.emptyList();
 	}
 	
+	@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 	/* default */ Map<String, Integer> extractIssueDate(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return Collections.emptyMap();
@@ -233,7 +237,20 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			try {
 				Integer year = Integer.valueOf(matcher.group("year"));
 				log.debug("Release year is {}", year);
-				return Collections.singletonMap("year", year);
+				
+				String day = matcher.group("day");
+				String month = matcher.group("month");
+
+				Map<String, Integer> result = new HashMap<>();
+				result.put("year", year);
+				
+				if (day != null && month != null) {
+					// @todo #1287 SeriesInfoExtractorServiceImpl.extractIssueDate():
+					//  filter out invalid day/month
+					result.put("day", Integer.valueOf(day));
+					result.put("month", Integer.valueOf(month));
+				}
+				return result;
 				
 			} catch (NumberFormatException ignored) { // NOPMD: EmptyCatchBlock
 				// continue with the next element

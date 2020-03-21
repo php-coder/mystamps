@@ -27,6 +27,8 @@ public class SeriesParsedDataDto {
 	private final LinkEntityDto category;
 	private final LinkEntityDto country;
 	private final String imageUrl;
+	private final Integer issueDay;
+	private final Integer issueMonth;
 	private final Integer issueYear;
 	private final Integer quantity;
 	private final Boolean perforated;

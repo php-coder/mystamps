@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.common.LinkEntityDto;
@@ -34,10 +35,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+import static ru.mystamps.web.feature.series.SeriesValidation.MAX_DAYS_IN_MONTH;
+import static ru.mystamps.web.feature.series.SeriesValidation.MAX_MONTHS_IN_YEAR;
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.feature.series.SeriesValidation.MIN_RELEASE_YEAR;
 import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERIES;
 
+// @todo #1287 /series/import/request/{id}: add integration tests for release day and month
+// @todo #1287 /series/import/request/{id}: month is required when day is specified
+// @todo #1287 /series/import/request/{id}: year is required when month is specified
+// @todo #1287 /series/import/request/{id}: release date should be in past
 @Getter
 @Setter
 public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
@@ -67,6 +74,14 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	@NotNull
 	@URL
 	private String imageUrl;
+	
+	// @todo #1287 /series/import/request/{id}(day): add integration test for invalid day
+	@Range(min = 1, max = MAX_DAYS_IN_MONTH, message = "{day.invalid}")
+	private Integer day;
+	
+	// @todo #1287 /series/import/request/{id}(month): add integration test for invalid month
+	@Range(min = 1, max = MAX_MONTHS_IN_YEAR, message = "{month.invalid}")
+	private Integer month;
 	
 	// @todo #709 /series/import/request/{id}(year): add validation for min value
 	// @todo #709 /series/import/request/{id}(year): add validation for year in future
@@ -106,16 +121,6 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 	@Override
 	public MultipartFile getImage() {
 		return downloadedImage;
-	}
-	
-	@Override
-	public Integer getDay() {
-		return null;
-	}
-	
-	@Override
-	public Integer getMonth() {
-		return null;
 	}
 	
 	@Override

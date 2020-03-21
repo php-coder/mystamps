@@ -26,9 +26,12 @@ import java.util.Set;
 
 @Getter
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.TooManyFields")
 public class SeriesExtractedInfo {
 	private final List<Integer> categoryIds;
 	private final List<Integer> countryIds;
+	private final Integer releaseDay;
+	private final Integer releaseMonth;
 	private final Integer releaseYear;
 	private final Integer quantity;
 	private final Boolean perforated;

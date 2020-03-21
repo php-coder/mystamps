@@ -58,6 +58,8 @@ final class RowMappers {
 		);
 		
 		String imageUrl = rs.getString("image_url");
+		Integer releaseDay = JdbcUtils.getInteger(rs, "release_day");
+		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
 		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
 		Integer quantity = JdbcUtils.getInteger(rs, "quantity");
 		Boolean perforated = JdbcUtils.getBoolean(rs, "perforated");
@@ -67,6 +69,8 @@ final class RowMappers {
 			category,
 			country,
 			imageUrl,
+			releaseDay,
+			releaseMonth,
 			releaseYear,
 			quantity,
 			perforated,

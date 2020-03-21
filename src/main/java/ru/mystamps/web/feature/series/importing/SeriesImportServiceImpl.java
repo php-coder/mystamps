@@ -189,6 +189,8 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		seriesParsedData.setUpdatedAt(now);
 		seriesParsedData.setCategoryId(categoryId);
 		seriesParsedData.setCountryId(countryId);
+		seriesParsedData.setReleaseDay(seriesInfo.getReleaseDay());
+		seriesParsedData.setReleaseMonth(seriesInfo.getReleaseMonth());
 		seriesParsedData.setReleaseYear(seriesInfo.getReleaseYear());
 		seriesParsedData.setQuantity(seriesInfo.getQuantity());
 		seriesParsedData.setPerforated(seriesInfo.getPerforated());

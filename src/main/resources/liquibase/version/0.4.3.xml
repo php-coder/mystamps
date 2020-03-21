@@ -10,5 +10,6 @@
 	<include file="0.4.3/2020-03-11--cleanup_togglz_features.xml" relativeToChangelogFile="true" />
 	<include file="0.4.3/2020-03-11--fix-nullable-series_import_requests-url.xml" relativeToChangelogFile="true" />
 	<include file="0.4.3/2020-03-12--michel_catalog_code_length.xml" relativeToChangelogFile="true" />
+	<include file="0.4.3/2020-03-21--add_release_day_to_series_import_parsed_data.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

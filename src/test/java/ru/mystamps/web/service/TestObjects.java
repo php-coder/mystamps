@@ -236,11 +236,21 @@ public final class TestObjects {
 		
 		String countryName = Random.countryName();
 		String countrySlug = SlugUtils.slugify(countryName);
+
+		Integer day = null;
+		Integer month = null;
+		boolean hasFullDate = bool();
+		if (hasFullDate) {
+			day = Random.dayOfMonth();
+			month = Random.monthOfYear();
+		}
 		
 		return new SeriesParsedDataDto(
 			new LinkEntityDto(Random.id(), categorySlug, categoryName),
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
 			Random.url(),
+			day,
+			month,
 			Random.issueYear(),
 			Random.quantity(),
 			Random.perforated(),
@@ -318,9 +328,19 @@ public final class TestObjects {
 			sellerUrl = Random.url();
 		}
 		
+		Integer day = null;
+		Integer month = null;
+		boolean hasFullDate = bool();
+		if (hasFullDate) {
+			day = Random.dayOfMonth();
+			month = Random.monthOfYear();
+		}
+		
 		return new SeriesExtractedInfo(
 			Random.listOfIntegers(),
 			Random.listOfIntegers(),
+			day,
+			month,
 			Random.issueYear(),
 			Random.quantity(),
 			Random.perforated(),
@@ -341,6 +361,8 @@ public final class TestObjects {
 		return new SeriesExtractedInfo(
 			Collections.emptyList(),
 			Collections.emptyList(),
+			null,
+			null,
 			null,
 			null,
 			null,

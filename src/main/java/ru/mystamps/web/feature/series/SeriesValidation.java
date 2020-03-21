@@ -22,6 +22,9 @@ import ru.mystamps.web.feature.series.SeriesDb.Series;
 @SuppressWarnings("PMD.CommentDefaultAccessModifier")
 public final class SeriesValidation {
 	
+	public static final int MAX_DAYS_IN_MONTH = 31;
+	public static final int MAX_MONTHS_IN_YEAR = 12;
+	
 	public static final int MIN_STAMPS_IN_SERIES = 1;
 	public static final int MAX_STAMPS_IN_SERIES = 150;
 	public static final int MIN_RELEASE_YEAR     = 1840;
@@ -29,9 +32,6 @@ public final class SeriesValidation {
 	@SuppressWarnings({ "PMD.LongVariable", "checkstyle:linelength" })
 	static final String CATALOG_NUMBERS_AND_LETTERS_REGEXP = "[1-9][0-9]{0,3}[a-z]?(,[1-9][0-9]{0,3}[a-z]?)*";
 	static final int MAX_SERIES_COMMENT_LENGTH = Series.COMMENT_LENGTH;
-	
-	static final int MAX_DAYS_IN_MONTH = 31;
-	static final int MAX_MONTHS_IN_YEAR = 12;
 	
 	private SeriesValidation() {
 	}

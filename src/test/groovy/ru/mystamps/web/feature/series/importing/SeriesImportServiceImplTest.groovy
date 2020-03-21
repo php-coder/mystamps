@@ -542,27 +542,31 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			SeriesExtractedInfo expectedSeriesInfo = TestObjects.createSeriesExtractedInfo()
 		and:
-			Integer expectedCategoryId  = expectedSeriesInfo.getCategoryIds().get(0)
-			Integer expectedCountryId   = expectedSeriesInfo.getCountryIds().get(0)
-			Integer expectedReleaseYear = expectedSeriesInfo.getReleaseYear()
-			Integer expectedQuantity    = expectedSeriesInfo.getQuantity()
-			Boolean expectedPerforated  = expectedSeriesInfo.getPerforated()
-			Integer expectedSellerId    = expectedSeriesInfo.getSellerId()
-			String expectedSellerName   = expectedSeriesInfo.getSellerName()
-			String expectedSellerUrl    = expectedSeriesInfo.getSellerUrl()
-			BigDecimal expectedPrice    = expectedSeriesInfo.getPrice()
-			String expectedCurrency     = expectedSeriesInfo.getCurrency()
+			Integer expectedCategoryId   = expectedSeriesInfo.getCategoryIds().get(0)
+			Integer expectedCountryId    = expectedSeriesInfo.getCountryIds().get(0)
+			Integer expectedReleaseDay   = expectedSeriesInfo.getReleaseDay()
+			Integer expectedReleaseMonth = expectedSeriesInfo.getReleaseMonth()
+			Integer expectedReleaseYear  = expectedSeriesInfo.getReleaseYear()
+			Integer expectedQuantity     = expectedSeriesInfo.getQuantity()
+			Boolean expectedPerforated   = expectedSeriesInfo.getPerforated()
+			Integer expectedSellerId     = expectedSeriesInfo.getSellerId()
+			String expectedSellerName    = expectedSeriesInfo.getSellerName()
+			String expectedSellerUrl     = expectedSeriesInfo.getSellerUrl()
+			BigDecimal expectedPrice     = expectedSeriesInfo.getPrice()
+			String expectedCurrency      = expectedSeriesInfo.getCurrency()
 		when:
 			service.saveParsedData(Random.id(), expectedSeriesInfo, Random.url())
 		then:
 			1 * seriesImportDao.addParsedData(
 				_ as Integer,
 				{ AddSeriesParsedDataDbDto parsedData ->
-					assert parsedData?.categoryId  == expectedCategoryId
-					assert parsedData?.countryId   == expectedCountryId
-					assert parsedData?.releaseYear == expectedReleaseYear
-					assert parsedData?.quantity    == expectedQuantity
-					assert parsedData?.perforated  == expectedPerforated
+					assert parsedData?.categoryId   == expectedCategoryId
+					assert parsedData?.countryId    == expectedCountryId
+					assert parsedData?.releaseDay   == expectedReleaseDay
+					assert parsedData?.releaseMonth == expectedReleaseMonth
+					assert parsedData?.releaseYear  == expectedReleaseYear
+					assert parsedData?.quantity     == expectedQuantity
+					assert parsedData?.perforated   == expectedPerforated
 					return true
 				}
 			)

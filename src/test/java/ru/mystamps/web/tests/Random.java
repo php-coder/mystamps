@@ -191,6 +191,14 @@ public final class Random {
 		return participantName();
 	}
 	
+	public static Integer dayOfMonth() {
+		return between(1L, SeriesValidation.MAX_DAYS_IN_MONTH).integer();
+	}
+	
+	public static Integer monthOfYear() {
+		return between(1L, SeriesValidation.MAX_MONTHS_IN_YEAR).integer();
+	}
+	
 	public static Integer issueYear() {
 		return between(
 			SeriesValidation.MIN_RELEASE_YEAR,
