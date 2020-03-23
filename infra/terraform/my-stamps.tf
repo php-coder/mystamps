@@ -1,4 +1,6 @@
 # @todo #1000 CI: validate and check Terraform configuration
+# @todo #1000 Terraform: add UptimeRobot
+# @todo #1000 Terraform: add Mailgun
 
 variable "do_token" {}
 

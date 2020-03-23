@@ -2,7 +2,8 @@
 - (feature)        add support for Ukrainian hryvnia
 - (feature)        add support for Belarusian ruble
 - (feature)        a request that failed to download a file, can be retried
-- (infrastructure) Migrate to Spring Boot 2
+- (infrastructure) migrate to Spring Boot 2
+- (infrastructure) apply infrastructure-as-code approach with Terraform
 
 0.4.2
 - (feature)        users can add multiple instances of a series into a collection
