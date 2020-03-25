@@ -1,4 +1,6 @@
 0.x (upcoming release)
+
+0.4.3
 - (feature)        add support for Ukrainian hryvnia
 - (feature)        add support for Belarusian ruble
 - (feature)        a request that failed to download a file, can be retried
