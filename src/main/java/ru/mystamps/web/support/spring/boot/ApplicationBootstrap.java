@@ -19,6 +19,8 @@ package ru.mystamps.web.support.spring.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.togglz.core.context.StaticFeatureManagerProvider;
@@ -30,6 +32,7 @@ import ru.mystamps.web.config.DispatcherServletContext;
 // CheckStyle: I cannot declare the constructor as private because app won't start.
 @SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
 @EnableAutoConfiguration
+@EnableConfigurationProperties(H2ConsoleProperties.class)
 @Import({
 	ApplicationContext.class,
 	DispatcherServletContext.class,

@@ -18,8 +18,10 @@
 package ru.mystamps.web.support.spring.security;
 
 import org.assertj.core.api.WithAssertions;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.togglz.junit.TogglzRule;
@@ -38,9 +40,15 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	private static final int NUMBER_OF_DIRECTIVES_ON_ADD_SERIES_PAGE = 7;
 	private static final int NUMBER_OF_DIRECTIVES_ON_INFO_SERIES_PAGE = 7;
 	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
-	
+	private static final H2ConsoleProperties h2ConsoleProperties = new H2ConsoleProperties();
+
 	@Rule
 	public TogglzRule togglz = TogglzRule.allEnabled(Features.class);
+	
+	@BeforeClass
+	public static void setupClass() {
+		h2ConsoleProperties.setPath("/console/");
+	}
 	
 	//
 	// Tests for writeHeaders()
@@ -50,7 +58,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	public void writeContentSecurityPolicyHeader() {
 		// given
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(bool(), bool(), bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(bool(), bool(), bool(), Random.host(), h2ConsoleProperties);
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
 
@@ -77,7 +85,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onIndexPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, true, bool(), SiteUrl.SITE);
+			new ContentSecurityPolicyHeaderWriter(false, true, bool(), SiteUrl.SITE, h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives)
@@ -95,7 +103,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onIndexPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer
-			= new ContentSecurityPolicyHeaderWriter(true, false, bool(), SiteUrl.PUBLIC_URL);
+			= new ContentSecurityPolicyHeaderWriter(true, false, bool(), SiteUrl.PUBLIC_URL, h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
 		assertThat(directives)
@@ -126,7 +134,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onCollectionInfoPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -153,7 +161,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onCollectionInfoPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
 		// test only the directives that differ from the index page
@@ -183,7 +191,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onSeriesAddImagePageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host(), h2ConsoleProperties);
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -206,7 +214,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onSeriesAddImagePageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host(), h2ConsoleProperties);
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
 			String[] directives = writer.constructDirectives(page).split(";");
@@ -239,7 +247,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onSeriesAddPageWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(false, true, bool(), Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -267,7 +275,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onSeriesAddPageWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host());
+			new ContentSecurityPolicyHeaderWriter(true, false, bool(), Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
 		// test only the directives that differ from the index page
@@ -298,7 +306,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onH2ConsoleWithLocalResources() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(false, true, true, Random.host());
+			new ContentSecurityPolicyHeaderWriter(false, true, true, Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		// test only the directives that are differ from the index page
@@ -326,7 +334,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	@Test
 	public void onH2ConsoleWithResourcesFromCdn() {
 		ContentSecurityPolicyHeaderWriter writer =
-			new ContentSecurityPolicyHeaderWriter(true, false, false, Random.host());
+			new ContentSecurityPolicyHeaderWriter(true, false, false, Random.host(), h2ConsoleProperties);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
 		assertThat(directives)

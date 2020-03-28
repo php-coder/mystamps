@@ -19,6 +19,7 @@ package ru.mystamps.web.support.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter;
 import org.springframework.context.ApplicationListener;
@@ -72,6 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SiteService siteService;
 	
+	@Autowired
+	private H2ConsoleProperties h2ConsoleProperties;
+	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
@@ -90,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		String hostname = usePublicHostname ? SiteUrl.PUBLIC_URL : SiteUrl.SITE;
 
 		ContentSecurityPolicyHeaderWriter cspWriter =
-			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname);
+			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname, h2ConsoleProperties);
 		
 		http
 			.authorizeRequests()
@@ -141,7 +145,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Allow unsecured requests to H2 consoles.
 				// See also spring.h2.console.path in application-test.properties and
 				// ContentSecurityPolicyHeaderWriter.H2_CONSOLE_PATTERN
-				.ignoringAntMatchers("/console/**", SiteUrl.CSP_REPORTS_HANDLER)
+				.ignoringAntMatchers(h2ConsoleProperties.getPath() + "/**", SiteUrl.CSP_REPORTS_HANDLER)
 				.and()
 			.rememberMe()
 				// FIXME: GH #27

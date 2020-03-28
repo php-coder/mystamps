@@ -18,6 +18,7 @@
 package ru.mystamps.web.support.spring.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.security.web.header.HeaderWriter;
 import ru.mystamps.web.feature.collection.CollectionUrl;
 import ru.mystamps.web.feature.series.SeriesUrl;
@@ -45,9 +46,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 		Pattern.compile(SeriesUrl.SERIES_INFO_PAGE_REGEXP);
 	
 	private static final String ADD_IMAGE_PAGE_PATTERN = "/series/(add|\\d+|\\d+/(ask|image))";
-	
-	// see also spring.h2.console.path in application-test.properties and SecurityConfig
-	private static final String H2_CONSOLE_PATTERN = "/console/";
 	
 	// default policy prevents loading resources from any source
 	private static final String DEFAULT_SRC = "default-src 'none'";
@@ -156,6 +154,8 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private final boolean useSingleHost;
 	private final boolean hasH2Console;
 	private final String host;
+	private final H2ConsoleProperties h2ConsoleProperties;
+	
 	
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
@@ -168,7 +168,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);
-		boolean onH2ConsolePage = hasH2Console && uri.startsWith(H2_CONSOLE_PATTERN);
+		boolean onH2ConsolePage = hasH2Console && uri.startsWith(h2ConsoleProperties.getPath());
 		
 		StringBuilder sb = new StringBuilder();
 		
