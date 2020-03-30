@@ -19,6 +19,7 @@ package ru.mystamps.web.support.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter;
 import org.springframework.context.ApplicationListener;
@@ -72,6 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SiteService siteService;
 	
+	@Autowired(required = false)
+	private H2ConsoleProperties h2ConsoleProperties;
+	
 	@Override
 	@SuppressWarnings("PMD.SignatureDeclareThrowsException")
 	public void configure(WebSecurity web) throws Exception {
@@ -89,8 +93,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		boolean usePublicHostname = environment.acceptsProfiles("prod");
 		String hostname = usePublicHostname ? SiteUrl.PUBLIC_URL : SiteUrl.SITE;
 
+		String h2ConsolePath = hasH2Console ? h2ConsoleProperties.getPath() : null;
+
+		// Allow unsecured requests to H2 consoles if available.
+		// See also spring.h2.console.path in application-test.properties
+		String[] pathsToIgnore =
+			hasH2Console ? new String[]{h2ConsolePath + "/**", SiteUrl.CSP_REPORTS_HANDLER}
+			             : new String[]{SiteUrl.CSP_REPORTS_HANDLER};
+		
 		ContentSecurityPolicyHeaderWriter cspWriter =
-			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname);
+			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname, h2ConsolePath);
 		
 		http
 			.authorizeRequests()
@@ -138,10 +150,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 				.and()
 			.csrf()
-				// Allow unsecured requests to H2 consoles.
-				// See also spring.h2.console.path in application-test.properties and
-				// ContentSecurityPolicyHeaderWriter.H2_CONSOLE_PATTERN
-				.ignoringAntMatchers("/console/**", SiteUrl.CSP_REPORTS_HANDLER)
+				.ignoringAntMatchers(pathsToIgnore)
 				.and()
 			.rememberMe()
 				// FIXME: GH #27
