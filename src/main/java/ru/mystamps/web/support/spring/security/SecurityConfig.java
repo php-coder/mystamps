@@ -87,22 +87,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		boolean useSingleHost = !environment.acceptsProfiles("prod");
 		boolean useCdn = environment.getProperty("app.use-cdn", Boolean.class, Boolean.TRUE);
-		boolean hasH2Console = environment.acceptsProfiles("test");
 		
 		// @todo #226 Introduce app.use-public-hostname property
 		boolean usePublicHostname = environment.acceptsProfiles("prod");
 		String hostname = usePublicHostname ? SiteUrl.PUBLIC_URL : SiteUrl.SITE;
 
-		String h2ConsolePath = hasH2Console ? h2ConsoleProperties.getPath() : null;
+		String h2ConsolePath = h2ConsoleProperties != null ? h2ConsoleProperties.getPath() : null;
 
 		// Allow unsecured requests to H2 consoles if available.
 		// See also spring.h2.console.path in application-test.properties
 		String[] pathsToIgnore =
-			hasH2Console ? new String[]{h2ConsolePath + "/**", SiteUrl.CSP_REPORTS_HANDLER}
-			             : new String[]{SiteUrl.CSP_REPORTS_HANDLER};
+			h2ConsolePath != null ? new String[]{h2ConsolePath + "/**", SiteUrl.CSP_REPORTS_HANDLER}
+			                      : new String[]{SiteUrl.CSP_REPORTS_HANDLER};
 		
 		ContentSecurityPolicyHeaderWriter cspWriter =
-			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hasH2Console, hostname, h2ConsolePath);
+			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hostname, h2ConsolePath);
 		
 		http
 			.authorizeRequests()

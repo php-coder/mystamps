@@ -53,7 +53,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				bool(),
 				bool(),
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -85,7 +84,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				SiteUrl.SITE,
 			    H2_CONSOLE_PATH
 			);
@@ -108,7 +106,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 			true,
 			false,
-			bool(),
 			SiteUrl.PUBLIC_URL,
 			H2_CONSOLE_PATH
 		);
@@ -144,7 +141,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -176,7 +172,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -211,7 +206,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -239,7 +233,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -277,7 +270,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -310,7 +302,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -346,7 +337,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				true,
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -379,9 +369,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				false,
 				Random.host(),
-				H2_CONSOLE_PATH
+				null
 			);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
