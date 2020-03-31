@@ -151,7 +151,6 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	
 	private final boolean useCdn;
 	private final boolean useSingleHost;
-	private final boolean hasH2Console;
 	private final String host;
 	private final String h2ConsolePath;
 	
@@ -167,7 +166,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	protected String constructDirectives(String uri) {
 		boolean onCollectionInfoPage = uri.startsWith(COLLECTION_INFO_PAGE_PATTERN);
 		boolean onAddSeriesPage = uri.equals(SeriesUrl.ADD_SERIES_PAGE);
-		boolean onH2ConsolePage = hasH2Console && uri.startsWith(h2ConsolePath);
+		boolean onH2ConsolePage = h2ConsolePath != null && uri.startsWith(h2ConsolePath);
 		
 		StringBuilder sb = new StringBuilder();
 		

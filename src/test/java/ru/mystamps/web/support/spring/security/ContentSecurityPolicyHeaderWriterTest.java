@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static io.qala.datagen.RandomShortApi.bool;
+import static io.qala.datagen.RandomShortApi.nullOr;
 
 public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	
@@ -53,9 +54,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				bool(),
 				bool(),
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		HttpServletRequest request = new MockHttpServletRequest();
 		HttpServletResponse response = new MockHttpServletResponse();
@@ -85,9 +85,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				SiteUrl.SITE,
-			    H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
@@ -108,9 +107,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 			true,
 			false,
-			bool(),
 			SiteUrl.PUBLIC_URL,
-			H2_CONSOLE_PATH
+			nullOr(H2_CONSOLE_PATH)
 		);
 		String[] directives = writer.constructDirectives("/").split(";");
 		
@@ -144,9 +142,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
@@ -176,9 +173,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		String[] directives = writer.constructDirectives("/collection/user").split(";");
 		
@@ -211,9 +207,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
@@ -239,9 +234,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		
 		for (String page : new String[]{"/series/11", "/series/12/ask", "/series/13/image"}) {
@@ -277,9 +271,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
@@ -310,9 +303,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				bool(),
 				Random.host(),
-				H2_CONSOLE_PATH
+				nullOr(H2_CONSOLE_PATH)
 			);
 		String[] directives = writer.constructDirectives("/series/add").split(";");
 		
@@ -346,7 +338,6 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				false,
 				true,
-				true,
 				Random.host(),
 				H2_CONSOLE_PATH
 			);
@@ -379,9 +370,8 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				true,
 				false,
-				false,
 				Random.host(),
-				H2_CONSOLE_PATH
+				null
 			);
 		String[] directives = writer.constructDirectives("/console/").split(";");
 		
