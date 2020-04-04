@@ -770,19 +770,14 @@
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
 		
-		<!--/*/
-		<th:block sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
-		/*/-->
-		<script src="../../../../javascript/DateUtils.js" th:src="${DATE_UTILS_JS}"></script>
-		<script src="../../../../javascript/series/info.js" th:src="${SERIES_INFO_JS}"></script>
-		<!--/*/
-		</th:block>
-		/*/-->
+		<script sec:authorize="hasAnyAuthority('VIEW_SERIES_SALES', 'IMPORT_SERIES_SALES')"
+			src="../../../../javascript/DateUtils.js"
+			th:src="${DATE_UTILS_JS}"></script>
 
-		<!--/*
-			NOTE: It won't work properly, if user can import a sale but can't view it because
-			SeriesSaleImportForm uses DateUtils.formatDateToDdMmYyyy() from DateUtils.js file.
-		*/-->
+		<script sec:authorize="hasAuthority('VIEW_SERIES_SALES')"
+			src="../../../../javascript/series/info.js"
+			th:src="${SERIES_INFO_JS}"></script>
+		
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
 		/*/-->
