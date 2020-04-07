@@ -79,7 +79,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?р(уб|\\.)");
 	
 	// Regular expression that matches Ukrainian hryvnia.
-	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("[0-9] грн");
+	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("([0-9] |\\b)грн\\b");
 	
 	// Regular expression that matches US dollar.
 	private static final Pattern USD_CURRENCY_REGEXP = Pattern.compile("[0-9]\\$");

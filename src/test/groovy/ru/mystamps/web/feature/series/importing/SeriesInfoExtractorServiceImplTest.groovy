@@ -670,6 +670,8 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			fragment | _
 			'CAD'    | _
 			'труб'   | _
+			'агрн'   | _
+			'грном'  | _
 	}
 	
 	def 'extractCurrency() should extract exactly specified currency'() {
@@ -710,6 +712,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractCurrency(fragment) == 'UAH'
 		where:
 			fragment     | _
+			'грн'        | _
 			'135.74 грн' | _
 	}
 	
