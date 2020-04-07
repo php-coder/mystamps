@@ -413,6 +413,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'1 блок'               || 1
 			'4 блока'              || 4
 			'6 блоков'             || 6
+			'6 БЛ'                 || 6
 			'6 зубцовых блоков'    || 6
 			'серия из 5-ти марок'  || 5
 			'серия из 21-ой марки' || 21
