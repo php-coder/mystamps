@@ -442,13 +442,17 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		expect:
 			service.extractPerforated(fragment) == false
 		where:
-			fragment       | _
-			'б/з'          | _
-			'Б/З'          | _
-			'беззубцовые'  | _
-			'БЕЗЗУБЦОВЫЕ'  | _
-			'б/перфорации' | _
-			'без зубцов'   | _
+			fragment         | _
+			'б.з.'           | _
+			'б/з'            | _
+			'Б/З'            | _
+			'БЗ'             | _
+			'беззубцовые'    | _
+			'БЕЗЗУБЦОВЫЕ'    | _
+			'Без перфорации' | _
+			'б/перфорации'   | _
+			'без зуб'        | _
+			'без зубцов'     | _
 	}
 	
 	//
