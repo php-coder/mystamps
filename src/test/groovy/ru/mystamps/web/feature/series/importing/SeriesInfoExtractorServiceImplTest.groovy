@@ -473,11 +473,13 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractMichelNumbers(fragment) == expected
 		where:
 			fragment      || expected
+			// negative cases
 			nullOrBlank() || []
-			'# 1-3'       || [ '1', '2', '3' ]
-			'#9997-9999'  || [ '9997', '9998', '9999' ]
 			'#9999-9997'  || []
 			'#0997-0999'  || []
+			// positive cases
+			'# 1-3'       || [ '1', '2', '3' ]
+			'#9997-9999'  || [ '9997', '9998', '9999' ]
 	}
 	
 	//
