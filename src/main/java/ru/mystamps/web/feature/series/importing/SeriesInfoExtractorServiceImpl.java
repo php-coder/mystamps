@@ -56,7 +56,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// Year should be in range within 1840 and 2099 inclusive.
 	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern RELEASE_DATE_REGEXP =
-		Pattern.compile("((?<day>[0-9]{2})\\.(?<month>[0-9]{2})\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?)?");
+		Pattern.compile("((?<day>[0-9]{2})\\.(?<month>[0-9]{2})\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?|\\.)?");
 	
 	// Regular expression matches number of the stamps in a series (from 1 to 999).
 	// CheckStyle: ignore LineLength for next 2 lines
