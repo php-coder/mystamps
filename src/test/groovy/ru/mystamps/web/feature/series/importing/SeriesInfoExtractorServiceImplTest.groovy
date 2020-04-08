@@ -416,6 +416,8 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'32 БЕЗЗУБЦОВЫЕ МАРКИ' || 32
 			'1 блок'               || 1
 			'4 блока'              || 4
+			'2 люкс блока'         || 2
+			'2 люкс-блока'         || 2
 			'6 блоков'             || 6
 			'6 БЛ'                 || 6
 			'6 зубцовых блоков'    || 6
