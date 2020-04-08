@@ -391,6 +391,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractQuantity(fragment) == null
 		where:
 			fragment                                               | _
+			'2 чего-либо'                                          | _
 			'0 марок'                                              | _
 			(SeriesValidation.MAX_STAMPS_IN_SERIES + 1) + ' марок' | _
 	}
