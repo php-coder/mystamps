@@ -67,7 +67,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	
 	// Regular expression matches range of Michel catalog numbers (from 1 to 9999).
 	private static final Pattern MICHEL_NUMBERS_REGEXP =
-		Pattern.compile("#[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
+		Pattern.compile("(#|Michel)[ ]?(?<begin>[1-9][0-9]{0,3})-(?<end>[1-9][0-9]{0,3})");
 	
 	// Regular expression matches prices that have a space between digits.
 	private static final Pattern PRICE_WITH_SPACES = Pattern.compile("([0-9]) ([0-9])");
