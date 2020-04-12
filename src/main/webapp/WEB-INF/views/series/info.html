@@ -794,36 +794,42 @@
 			/*[- */
 			var responseCount = 0;
 			window.axios = {
-				post: function() {
+				post: function(url) {
 					var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
 					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
-					var stubResponse;
-					
-					if (outcome === 'failOnForm') {
-						stubResponse = {
-							status: 500,
-							statusText: 'Fake Server Error'
-						};
-					
-					} else if (outcome === 'failOnField') {
-						stubResponse = {
-							status: 400,
-							data: {
-								"fieldErrors": {
-									"url": [ "Invalid value" ]
+					var possibleResponses = {
+						'/series/sales/import': {
+							'failOnField': {
+								status: 400,
+								data: {
+									'fieldErrors': {
+										'url': [ 'Invalid value' ]
+									}
+								}
+							},
+							'success': {
+								status: 200,
+								data: {
+									'sellerId': 3,
+									'price': 3.5,
+									'currency' : 'USD'
 								}
 							}
-						};
+						}
+					};
+					var stubResponse;
 					
-					} else if (outcome === 'success') {
-						stubResponse = {
-							status: 200,
-							data: {
-								"sellerId": 3,
-								"price": 3.5,
-								"currency" : "USD"
-							}
-						};
+					switch (outcome) {
+						case 'success':
+						case 'failOnField':
+							stubResponse = possibleResponses[url][outcome];
+							break;
+						case 'failOnForm':
+						default:
+							stubResponse = {
+								status: 500,
+								statusText: 'Fake Server Error'
+							};
 					}
 					
 					responseCount++;
@@ -862,7 +868,10 @@
 			+]*/
 			
 			/*[- */
-			var importFormProps = { 'l10n': {} };
+			var importFormProps = {
+				'url': '/series/sales/import',
+				'l10n': {}
+			};
 			/* -]*/
 			
 			renderComponent(SeriesSaleImportForm, importFormProps, 'importSeriesSaleForm');
