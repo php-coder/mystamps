@@ -48,4 +48,6 @@ public interface SeriesService {
 	List<SitemapInfoDto> findAllForSitemap();
 	
 	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
+	
+	void markAsSimilar(AddSimilarSeriesForm dto);
 }

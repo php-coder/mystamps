@@ -123,6 +123,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					)
 				.regexMatchers(HttpMethod.POST, SeriesUrl.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
 					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
+				.mvcMatchers(HttpMethod.POST, SeriesUrl.MARK_SIMILAR_SERIES)
+					.hasAnyAuthority(StringAuthority.MARK_SIMILAR_SERIES)
 				.mvcMatchers(HttpMethod.POST, SeriesSalesImportUrl.IMPORT_SERIES_SALES)
 					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
 				.anyRequest().permitAll()

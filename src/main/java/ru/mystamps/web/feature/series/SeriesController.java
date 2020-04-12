@@ -19,7 +19,11 @@ package ru.mystamps.web.feature.series;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +34,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mystamps.web.common.EntityWithParentDto;
 import ru.mystamps.web.common.LinkEntityDto;
@@ -78,6 +84,8 @@ import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.GodClass" })
 public class SeriesController {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SeriesController.class);
+	
 	private static final Integer CURRENT_YEAR;
 	private static final Map<Integer, Integer> YEARS;
 	
@@ -551,6 +559,27 @@ public class SeriesController {
 		model.addAttribute("searchResults", series);
 		
 		return "series/search_result";
+	}
+	
+	// @todo #1280 Mark similar series: gracefully handle error when value mismatches to type
+	@PostMapping(SeriesUrl.MARK_SIMILAR_SERIES)
+	@ResponseBody
+	public ResponseEntity<Void> markSimilarSeries(
+		@RequestBody @Valid AddSimilarSeriesForm form) {
+		
+		try {
+			seriesService.markAsSimilar(form);
+			return ResponseEntity.noContent().build();
+
+		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
+			LOG.error(
+				"Couldn't mark series #{} similar to #{}: {}",
+				form.getSeriesId(),
+				form.getSimilarSeriesId(),
+				ex.getMessage()
+			);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	// "public" in order to be accessible from SeriesImportController

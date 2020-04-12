@@ -356,6 +356,7 @@
 									</ul>
 								</div>
 							</div>
+							<div id="similar-series-form" sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')"></div>
 						</div>
 						
 						<div class="col-sm-4">
@@ -779,7 +780,7 @@
 			th:src="${SERIES_INFO_JS}"></script>
 		
 		<!--/*/
-		<th:block sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
+		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES')">
 		/*/-->
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
@@ -798,6 +799,20 @@
 					var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
 					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
 					var possibleResponses = {
+						'/series/similar': {
+							'failOnField': {
+								status: 400,
+								data: {
+									'fieldErrors': {
+										'seriesId': [ 'Invalid series id' ]
+									}
+								}
+							},
+							'success': {
+								status: 204,
+								data: {}
+							}
+						},
 						'/series/sales/import': {
 							'failOnField': {
 								status: 400,
@@ -845,6 +860,40 @@
 				}
 			};
 			/* -]*/
+		</script>
+		<!--/*/
+		</th:block>
+		/*/-->
+		
+		<!--/* @todo #1280 Mark similar series: add integration tests */-->
+		<!--/*/
+		<th:block sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')">
+		/*/-->
+		<script src="../../../../../../target/classes/js/components/SimilarSeriesForm.js" th:src="${SIMILAR_SERIES_FORM_JS}"></script>
+		<script th:inline="javascript">
+			/*[+
+			var similarSeriesFormProps = {
+				'seriesId': [[ ${series.id} ]],
+				'url': [[ '__@{${MARK_SIMILAR_SERIES}}__' ]],
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {
+					't_server_error':      [[ #{t_server_error} ]],
+					't_mark_as_similar':   [[ #{t_mark_as_similar} ]],
+					't_similar_series_id': [[ #{t_similar_series_id} ]],
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var similarSeriesFormProps = {
+				'seriesId': 1,
+				'url': '/series/similar',
+				'l10n': {}
+			};
+			/* -]*/
+			
+			renderComponent(SimilarSeriesForm, similarSeriesFormProps, 'similar-series-form');
 		</script>
 		<!--/*/
 		</th:block>

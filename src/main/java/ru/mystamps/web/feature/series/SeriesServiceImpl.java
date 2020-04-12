@@ -301,6 +301,24 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.findPurchasesAndSales(seriesId);
 	}
 	
+	// @todo #1280 SeriesServiceImpl.markAsSimilar(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.MARK_SIMILAR_SERIES)
+	public void markAsSimilar(AddSimilarSeriesForm dto) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		
+		Integer seriesId = dto.getSeriesId();
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		Integer similarSeriesId = dto.getSimilarSeriesId();
+		Validate.isTrue(similarSeriesId != null, "Similar series id must be non null");
+		
+		seriesDao.markAsSimilar(seriesId, similarSeriesId);
+		
+		log.info("Series #{} has been marked as similar to #{}", seriesId, similarSeriesId);
+	}
+	
 	private List<SeriesInfoDto> findByCatalogNumber(
 		StampsCatalogService catalogService,
 		String number, String lang) {

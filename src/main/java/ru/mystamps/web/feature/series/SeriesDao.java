@@ -41,4 +41,6 @@ public interface SeriesDao {
 	long countUpdatedSince(Date date);
 	
 	Integer findQuantityById(Integer seriesId);
+	
+	void markAsSimilar(Integer seriesId, Integer similarSeriesId);
 }

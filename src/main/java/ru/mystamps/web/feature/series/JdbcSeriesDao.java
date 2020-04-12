@@ -93,6 +93,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.find_quantity_by_id}")
 	private String findQuantityByIdSql;
 	
+	@Value("${series.add_similar_series}")
+	private String addSimilarSeriesSql;
+	
 	@Override
 	public Integer add(AddSeriesDbDto series) {
 		Map<String, Object> params = new HashMap<>();
@@ -289,6 +292,21 @@ public class JdbcSeriesDao implements SeriesDao {
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;
 		}
+	}
+	
+	@Override
+	public void markAsSimilar(Integer seriesId, Integer similarSeriesId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("similar_series_id", similarSeriesId);
+		
+		int affected = jdbcTemplate.update(addSimilarSeriesSql, params);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after adding similar series: %d",
+			affected
+		);
 	}
 	
 }
