@@ -1,6 +1,6 @@
 # Lines starting with '#' are comments.
 # Each line is a file pattern followed by one or more owners.
-# For more information about this file, see: https://github.com/blog/2392-introducing-code-owners
+# For more information about this file, see: https://github.blog/2017-07-06-introducing-code-owners/
 
 # Set default owner for everything in the repo.
 *	@php-coder
