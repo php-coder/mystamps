@@ -1,6 +1,6 @@
 # This file is written on Ruby language.
-# Here is a quick Ruby overview: http://danger.systems/guides/a_quick_ruby_overview.html
-# See also Danger specific methods: http://danger.systems/reference.html
+# Here is a quick Ruby overview: https://danger.systems/guides/a_quick_ruby_overview.html
+# See also Danger specific methods: https://danger.systems/reference.html
 
 # We we'll use nokogiri for parsing XML
 # Here is a good introduction: https://blog.engineyard.com/2010/getting-started-with-nokogiri

@@ -110,8 +110,8 @@
 	<rule ref="category/java/codestyle.xml/ShortMethodName" />
 	<!--
 		See also:
-		- http://sourceforge.net/p/pmd/bugs/951/
-		- http://sourceforge.net/p/pmd/feature-requests/546/
+		- https://sourceforge.net/p/pmd/bugs/951/
+		- https://sourceforge.net/p/pmd/bugs/1361/
 	-->
 	<!--<rule ref="category/java/codestyle.xml/ShortVariable" />-->
 	<rule ref="category/java/codestyle.xml/SuspiciousConstantFieldName" />

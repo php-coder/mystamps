@@ -20,7 +20,7 @@
     - some best practices
 
   Checkstyle is very configurable. Be sure to read the documentation at
-  http://checkstyle.sourceforge.net (or in your downloaded distribution).
+  https://checkstyle.sourceforge.io (or in your downloaded distribution).
 
   Most Checks are configurable, be sure to consult the documentation.
 
@@ -34,17 +34,17 @@
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
-        http://checkstyle.sourceforge.net/config.html#Checker
+        https://checkstyle.sourceforge.io/config.html#Checker
 
         <property name="basedir" value="${basedir}"/>
     -->
 
     <!-- Checks that each Java package has a Javadoc file used for commenting.    -->
-    <!-- See http://checkstyle.sourceforge.net/config_javadoc.html#JavadocPackage -->
+    <!-- See https://checkstyle.sourceforge.io/config_javadoc.html#JavadocPackage -->
     <module name="JavadocPackage" />
 
     <!-- Checks whether files end with a new line.                                 -->
-    <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->
+    <!-- See https://checkstyle.sourceforge.io/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
         <property name="severity" value="warning"/>
         <!--
@@ -55,7 +55,7 @@
     </module>
 
     <!-- Checks that property files contain the same keys.                  -->
-    <!-- See http://checkstyle.sourceforge.net/config_misc.html#Translation -->
+    <!-- See https://checkstyle.sourceforge.io/config_misc.html#Translation -->
     <module name="Translation"/>
 
     <module name="FileLength"/>
@@ -98,7 +98,7 @@
         <module name="SuppressWarningsHolder"/>
 
         <!-- Checks for Javadoc comments.                              -->
-        <!-- See http://checkstyle.sourceforge.net/config_javadoc.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_javadoc.html -->
         <!--
             <module name="JavadocMethod"/>
             <module name="JavadocType"/>
@@ -108,7 +108,7 @@
 
 
         <!-- Checks for Naming Conventions.                           -->
-        <!-- See http://checkstyle.sourceforge.net/config_naming.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_naming.html -->
         <module name="AbstractClassName"/>
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
@@ -122,14 +122,14 @@
 
 
         <!-- Checks for Headers                                           -->
-        <!-- See http://checkstyle.sourceforge.net/config_header.html     -->
+        <!-- See https://checkstyle.sourceforge.io/config_header.html     -->
         <!-- <module name="Header">                                       -->
             <!-- The follow property value demonstrates the ability       -->
             <!-- to have access to ANT properties. In this case it uses   -->
             <!-- the ${basedir} property to allow Checkstyle to be run    -->
             <!-- from any directory within a project. See property        -->
             <!-- expansion,                                               -->
-            <!-- http://checkstyle.sourceforge.net/config.html#Properties -->
+            <!-- https://checkstyle.sourceforge.io/config.html#Properties -->
             <!-- <property                                                -->
             <!--     name="headerFile"                                    -->
             <!--     value="${basedir}/java.header"/>                     -->
@@ -137,7 +137,7 @@
 
 
         <!-- Checks for imports                                        -->
-        <!-- See http://checkstyle.sourceforge.net/config_imports.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_imports.html -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"> <!-- defaults to sun.* packages -->
             <property name="illegalPkgs" value="org.apache.log4j, org.apache.commons.lang"/>
@@ -153,7 +153,7 @@
 
 
         <!-- Checks for Size Violations.                             -->
-        <!-- See http://checkstyle.sourceforge.net/config_sizes.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_sizes.html -->
         <module name="LineLength">
             <property name="severity" value="warning"/>
             <property name="max" value="100"/>
@@ -164,7 +164,7 @@
 
 
         <!-- Checks for whitespace                                        -->
-        <!-- See http://checkstyle.sourceforge.net/config_whitespace.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_whitespace.html -->
         <module name="EmptyForIteratorPad"/>
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter">
@@ -186,13 +186,13 @@
 
 
         <!-- Modifier Checks                                            -->
-        <!-- See http://checkstyle.sourceforge.net/config_modifier.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_modifier.html -->
         <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
 
 
         <!-- Checks for blocks. You know, those {}'s                  -->
-        <!-- See http://checkstyle.sourceforge.net/config_blocks.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
         <module name="LeftCurly"/>
@@ -201,7 +201,7 @@
 
 
         <!-- Checks for common coding problems                        -->
-        <!-- See http://checkstyle.sourceforge.net/config_coding.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_coding.html -->
 	<!--
         <module name="AvoidInlineConditionals"/>
 	-->
@@ -233,7 +233,7 @@
         -->
 
         <!-- Checks for class design                                  -->
-        <!-- See http://checkstyle.sourceforge.net/config_design.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_design.html -->
         <!--
             <module name="DesignForExtension"/>
         -->
@@ -246,7 +246,7 @@
 
 
         <!-- Miscellaneous other checks.                            -->
-        <!-- See http://checkstyle.sourceforge.net/config_misc.html -->
+        <!-- See https://checkstyle.sourceforge.io/config_misc.html -->
         <module name="ArrayTypeStyle"/>
         <!--
         <module name="FinalParameters">

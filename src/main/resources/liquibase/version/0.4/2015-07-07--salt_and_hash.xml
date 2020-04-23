@@ -17,7 +17,7 @@
 		
 		<!--
 			We can't use modifyDataType because it looses not null setting:
-			http://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
+			https://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
 		-->
 		<sql>
 			ALTER TABLE users
