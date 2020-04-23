@@ -666,13 +666,6 @@ if File.file?(rf_report)
 	print_errors_summary 'robotframework-maven-plugin', errors_count, 'https://github.com/php-coder/mystamps/wiki/integration-tests'
 end
 
-if github.pr_body !~ /Addressed to #\d+/
-	warn(
-		"danger check: pull request **description** doesn't contain a link to original issue.\n"\
-		"Consider adding a comment in the following format: `Addressed to #XXX` where `XXX` is an issue number"
-	)
-end
-
 commits = git.commits.size
 if commits > 1
 	if git.commits.any? { |c| c.message =~ /^Merge branch/ || c.message =~ /^Merge remote-tracking branch/ }
@@ -688,13 +681,6 @@ if commits > 1
 			"But be careful because **it can destroy** all your changes!"
 		)
 	end
-end
-
-if github.branch_for_head !~ /^gh[0-9]+_/
-	warn("danger check: branch `#{github.branch_for_head}` does not comply with our best practices. "\
-		"Branch name should use the following scheme: `ghXXX_meaningful-name` where `XXX` is an issue number. "\
-		"**Next time**, please, use this scheme :)"
-	)
 end
 
 js_file  = %r{^src/main/javascript/.*\.js$}
