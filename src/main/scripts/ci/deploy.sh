@@ -22,7 +22,7 @@ cleanup() {
 trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
 
 # Disable host key checking to suppress interactive prompt.
-# See: https://docs.ansible.com/ansible/latest/user_guide/intro_getting_started.html#host-key-checking
+# See: https://docs.ansible.com/ansible/2.9/user_guide/connection_details.html#host-key-checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 
 if [ -z "${encrypted_bf07cb25089f_key:-}" ] || [ -z "${encrypted_bf07cb25089f_iv:-}" ] ; then
