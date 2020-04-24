@@ -622,7 +622,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		
 		String expectedUrl = Random.url();
 		String html = String.format(
-			"<a href='http:/example.com/test'>test</a><a id='seller' href='%s'>seller</a>",
+			"<a href='http://example.com/test'>test</a><a id='seller' href='%s'>seller</a>",
 			expectedUrl
 		);
 		Element doc = createDocumentFromText(html);
