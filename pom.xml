@@ -1082,9 +1082,9 @@
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
 					<randomize>suite</randomize>
-					<!-- See http://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#controlling-console-output -->
+					<!-- See https://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#controlling-console-output -->
 					<console>dotted</console>
-					<!-- See http://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#removing-keywords -->
+					<!-- See https://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#removing-keywords -->
 					<removeKeywords>PASSED</removeKeywords>
 					<!-- Handy for debugging. Log file will be created in target/ directory -->
 					<!--
@@ -1207,7 +1207,7 @@
 	<licenses>
 		<license>
 			<name>GNU GPL v2</name>
-			<url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+			<url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>

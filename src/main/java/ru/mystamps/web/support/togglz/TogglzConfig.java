@@ -61,7 +61,7 @@ public class TogglzConfig {
 	 *
 	 * Access it via http://127.0.0.1:8080/togglz after authentication as "admin" user.
 	 *
-	 * @see http://www.togglz.org/documentation/admin-console.html
+	 * @see https://www.togglz.org/documentation/admin-console.html
 	 */
 	@Bean
 	public ServletRegistrationBean getTogglzConsole() {

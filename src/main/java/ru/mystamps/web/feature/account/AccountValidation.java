@@ -35,7 +35,7 @@ public final class AccountValidation {
 	
 	static final int PASSWORD_MIN_LENGTH = 4;
 	// We limit max length because bcrypt has a maximum password length.
-	// See also: http://www.mscharhag.com/software-development/bcrypt-maximum-password-length
+	// See also: https://www.mscharhag.com/software-development/bcrypt-maximum-password-length
 	static final int PASSWORD_MAX_LENGTH = 72;
 	
 	static final int EMAIL_MAX_LENGTH = UsersActivation.EMAIL_LENGTH;

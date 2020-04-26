@@ -13,7 +13,7 @@
 
 		<!--
 			modifyDataType loses NOT NULL property on MySQL:
-			http://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
+			https://forum.liquibase.org/topic/warning-of-losing-primary-key-autoincrement-for-mysql
 			In order to fix that, we patch the SQL query to specify NOT NULL again.
 		-->
 		<modifySql dbms="mysql">

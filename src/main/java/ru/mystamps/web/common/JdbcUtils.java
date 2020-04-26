@@ -27,7 +27,7 @@ public final class JdbcUtils {
 	private JdbcUtils() {
 	}
 	
-	// @see http://stackoverflow.com/q/2920364/checking-for-a-null-int-value-from-a-java-resultset
+	// @see https://stackoverflow.com/q/2920364/checking-for-a-null-int-value-from-a-java-resultset
 	@SuppressWarnings("PMD.PrematureDeclaration")
 	public static Integer getInteger(ResultSet resultSet, String fieldName) throws SQLException {
 		int value = resultSet.getInt(fieldName);
