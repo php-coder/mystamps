@@ -73,7 +73,7 @@ public class ImageServiceImpl implements ImageService {
 		}
 		
 		ImageInfoDto imageInfo = new ImageInfoDto(imageId, imageType);
-		log.info("Image info has been saved to database ({})", imageInfo);
+		log.info("Image #{}: meta data has been saved ({})", imageId, imageInfo);
 		
 		imagePersistenceStrategy.save(file, imageInfo);
 		

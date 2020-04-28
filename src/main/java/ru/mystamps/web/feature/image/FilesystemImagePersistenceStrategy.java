@@ -83,7 +83,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Path dest = generateFilePath(storageDir, image);
 			writeToFile(file, dest);
 			
-			log.info("Image data has been written into file {}", dest);
+			log.info("Image #{}: data has been written into file {}", image.getId(), dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);
@@ -96,7 +96,7 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 			Path dest = generateFilePath(previewDir, image);
 			writeToFile(data, dest);
 			
-			log.info("Image preview data has been written into file {}", dest);
+			log.info("Image #{}: preview has been written into file {}", image.getId(), dest);
 		
 		} catch (IOException ex) {
 			throw new ImagePersistenceException(ex);
@@ -160,8 +160,14 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		Path dest = generateFilePath(storageDir, image);
 		try {
 			Files.deleteIfExists(dest);
+			log.debug("Image #{}: data ({}) has been removed", image.getId(), dest);
+			
 		} catch (Exception ex) { // NOPMD: AvoidCatchingGenericException
-			log.warn("Couldn't delete file {}: {}", dest, ex.getMessage());
+			log.warn(
+				"Couldn't delete file {}: {}. You have to remove it manually",
+				dest,
+				ex.getMessage()
+			);
 		}
 	}
 	
