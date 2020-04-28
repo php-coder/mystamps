@@ -17,12 +17,13 @@
  */
 package ru.mystamps.web.feature.image;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface ImageDao {
-	Integer add(String type, String filename);
-	void replace(Integer id, String type, String filename);
-	void addToSeries(Integer seriesId, Integer imageId);
-	ImageInfoDto findById(Integer imageId);
-	List<Integer> findBySeriesId(Integer seriesId);
+@Getter
+@Setter
+public class ReplaceImageDataDbDto {
+	private Integer imageId;
+	private byte[] content;
+	private boolean preview;
 }

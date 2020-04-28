@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ImagePersistenceStrategy {
 	void save(MultipartFile file, ImageInfoDto image);
 	void savePreview(byte[] data, ImageInfoDto image);
+	void replace(byte[] data, ImageInfoDto oldImage, ImageInfoDto newImage);
+	void replacePreview(byte[] data, ImageInfoDto image);
 	ImageDto get(ImageInfoDto image);
 	ImageDto getPreview(ImageInfoDto image);
 	void removeIfPossible(ImageInfoDto image);

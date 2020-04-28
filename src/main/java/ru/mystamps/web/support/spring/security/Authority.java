@@ -36,6 +36,7 @@ public final class Authority {
 	public static final GrantedAuthority IMPORT_SERIES_SALES    = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES_SALES);
 	public static final GrantedAuthority MANAGE_TOGGLZ          = new SimpleGrantedAuthority(StringAuthority.MANAGE_TOGGLZ);
 	public static final GrantedAuthority MARK_SIMILAR_SERIES    = new SimpleGrantedAuthority(StringAuthority.MARK_SIMILAR_SERIES);
+	public static final GrantedAuthority REPLACE_IMAGE          = new SimpleGrantedAuthority(StringAuthority.REPLACE_IMAGE);
 	public static final GrantedAuthority UPDATE_COLLECTION      = new SimpleGrantedAuthority(StringAuthority.UPDATE_COLLECTION);
 	public static final GrantedAuthority VIEW_ANY_ESTIMATION    = new SimpleGrantedAuthority(StringAuthority.VIEW_ANY_ESTIMATION);
 	public static final GrantedAuthority VIEW_DAILY_STATS       = new SimpleGrantedAuthority(StringAuthority.VIEW_DAILY_STATS);

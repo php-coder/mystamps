@@ -140,6 +140,20 @@ public class SeriesServiceImpl implements SeriesService {
 		}
 	}
 	
+	// @todo #1303 SeriesServiceImpl.replaceImage(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.REPLACE_IMAGE)
+	public void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId) {
+		Validate.isTrue(dto != null, "DTO must be non null");
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
+		
+		seriesDao.markAsModified(seriesId, new Date(), userId);
+		
+		imageService.replace(dto.getImageId(), dto.getImage());
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public long countAll() {

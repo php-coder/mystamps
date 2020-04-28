@@ -285,6 +285,35 @@ public class SeriesController {
 	}
 	
 	@SuppressWarnings("checkstyle:parameternumber")
+	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = { "replaceImage", "imageUrl" })
+	public String replaceImageWithImageUrl(
+		@Validated({
+			AddImageForm.ImageUrlChecks.class,
+			AddImageForm.RequireImageIdCheck.class,
+			AddImageForm.ImageChecks.class
+		}) AddImageForm form,
+		BindingResult result,
+		@PathVariable("id") Integer seriesId,
+		Model model,
+		@CurrentUser Integer currentUserId,
+		Locale userLocale,
+		HttpServletRequest request,
+		HttpServletResponse response)
+		throws IOException {
+		
+		return processImage(
+			form,
+			result,
+			seriesId,
+			model,
+			currentUserId,
+			userLocale,
+			request,
+			response
+		);
+	}
+	
+	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "imageUrl")
 	public String processImageWithImageUrl(
 		@Validated({
@@ -359,7 +388,12 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		seriesService.addImageToSeries(form, series.getId(), currentUserId);
+		boolean replaceImage = request.getParameter("replaceImage") != null;
+		if (replaceImage) {
+			seriesService.replaceImage(form, series.getId(), currentUserId);
+		} else {
+			seriesService.addImageToSeries(form, series.getId(), currentUserId);
+		}
 		
 		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, series.getId());
 	}
@@ -680,6 +714,14 @@ public class SeriesController {
 		
 		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
+		
+		// we require DOWNLOAD_IMAGE and ADD_IMAGES_TO_SERIES in order to reduce
+		// a number of the possible cases to maintain
+		boolean userCanReplaceImages =
+			SecurityContextUtils.hasAuthority(Authority.REPLACE_IMAGE)
+			&& SecurityContextUtils.hasAuthority(Authority.DOWNLOAD_IMAGE)
+			&& SecurityContextUtils.hasAuthority(Authority.ADD_IMAGES_TO_SERIES);
+		model.put("allowReplacingImages", userCanReplaceImages);
 		
 		if (SecurityContextUtils.hasAuthority(Authority.UPDATE_COLLECTION)) {
 			Map<Integer, Integer> seriesInstances =

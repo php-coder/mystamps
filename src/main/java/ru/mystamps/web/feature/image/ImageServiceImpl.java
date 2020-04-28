@@ -27,12 +27,15 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.mystamps.web.feature.image.ImageDb.Images;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 import static org.apache.commons.lang3.StringUtils.substringAfter;
 import static org.apache.commons.lang3.StringUtils.substringBefore;
 
+// Complains on duplicated String literal "Image id must be non null"
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
 	
@@ -76,6 +79,59 @@ public class ImageServiceImpl implements ImageService {
 		
 		return imageInfo;
 	}
+
+	// @todo #1303 ImageServiceImpl.replace(): add unit tests
+	// @todo #1303 ImageServiceImpl: reduce duplication between add() and replace()
+	// @todo #1303 ImageServiceImpl.replace(): ensure that method cleanups file after exception
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.REPLACE_IMAGE)
+	public void replace(Integer imageId, MultipartFile file) {
+		Validate.isTrue(imageId != null, "Image id must be non null");
+		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
+		
+		Validate.isTrue(file != null, "File must be non null");
+		Validate.isTrue(file.getSize() > 0, "Image size must be greater than zero");
+		
+		String contentType = file.getContentType();
+		Validate.isTrue(contentType != null, "File type must be non null");
+		
+		String extension = extractExtensionFromContentType(contentType);
+		Validate.validState(
+			StringUtils.equalsAny(extension, "png", "jpeg"),
+			"File type must be PNG or JPEG image, but '%s' (%s) were passed",
+			contentType, extension
+		);
+		
+		String imageType = extension.toUpperCase(Locale.ENGLISH);
+		
+		// Trim and abbreviate a filename. It shouldn't fail a process because the field is optional
+		String filename = StringUtils.trimToNull(file.getOriginalFilename());
+		filename = abbreviateIfLengthGreaterThan(filename, Images.FILENAME_LENGTH);
+		
+		ImageInfoDto oldImageInfo = imageDao.findById(imageId);
+		
+		imageDao.replace(imageId, imageType, filename);
+		log.info(
+			"Image #{}: meta data has been replaced by '{}', type={}",
+			imageId,
+			filename,
+			imageType
+		);
+		
+		byte[] image = getBytes(file);
+		ImageInfoDto newImageInfo = new ImageInfoDto(imageId, imageType);
+		imagePersistenceStrategy.replace(image, oldImageInfo, newImageInfo);
+		
+		// It was also possible to replace an image, remove a preview and let it to be generated
+		// later, on demand. But this process will be split in time and if a preview generation
+		// fails, we'll end up with inconsistency between an image and its preview. As such issues
+		// visible to users and might go unnoticed by admins, we decided to generate both images
+		// at the same time and have more guarantees regarding consistency.
+		byte[] preview = imagePreviewStrategy.createPreview(image);
+		ImageInfoDto previewInfo = ImageInfoDto.newPreview(imageId);
+		imagePersistenceStrategy.replacePreview(preview, previewInfo);
+	}
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -97,7 +153,7 @@ public class ImageServiceImpl implements ImageService {
 		Validate.isTrue(imageId != null, "Image id must be non null");
 		Validate.isTrue(imageId > 0, "Image id must be greater than zero");
 		
-		ImageInfoDto previewInfo = new ImageInfoDto(imageId, "jpeg");
+		ImageInfoDto previewInfo = ImageInfoDto.newPreview(imageId);
 
 		// NB: the race between getPreview() and createReview() is possible.
 		// If this happens, the last request will overwrite the first.
@@ -174,6 +230,14 @@ public class ImageServiceImpl implements ImageService {
 		);
 		
 		return StringUtils.abbreviate(text, maxLength);
+	}
+	
+	private static byte[] getBytes(MultipartFile file) {
+		try {
+			return file.getBytes();
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 	
 }

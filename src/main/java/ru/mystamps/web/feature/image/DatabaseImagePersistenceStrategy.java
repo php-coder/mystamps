@@ -64,6 +64,30 @@ public class DatabaseImagePersistenceStrategy implements ImagePersistenceStrateg
 		log.info("Image #{}: preview has been saved", image.getId());
 	}
 	
+	// @todo #1303 DatabaseImagePersistenceStrategy.replace(): add unit tests
+	@Override
+	public void replace(byte[] data, ImageInfoDto oldImage, ImageInfoDto newImage) {
+		ReplaceImageDataDbDto newData = new ReplaceImageDataDbDto();
+		newData.setImageId(oldImage.getId());
+		newData.setContent(data);
+		newData.setPreview(false);
+		
+		imageDataDao.replace(newData);
+		log.info("Image #{}: image has been replaced", oldImage.getId());
+	}
+	
+	// @todo #1303 DatabaseImagePersistenceStrategy.replacePreview(): add unit tests
+	@Override
+	public void replacePreview(byte[] data, ImageInfoDto image) {
+		ReplaceImageDataDbDto newData = new ReplaceImageDataDbDto();
+		newData.setImageId(image.getId());
+		newData.setContent(data);
+		newData.setPreview(true);
+		
+		imageDataDao.replace(newData);
+		log.info("Image #{}: preview has been replaced", image.getId());
+	}
+	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
 		ImageDto imageDto = imageDataDao.findByImageId(image.getId(), false);

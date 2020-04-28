@@ -20,4 +20,5 @@ package ru.mystamps.web.feature.image;
 public interface ImageDataDao {
 	ImageDto findByImageId(Integer imageId, boolean preview);
 	Integer add(AddImageDataDbDto imageData);
+	void replace(ReplaceImageDataDbDto imageData);
 }

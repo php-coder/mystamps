@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.image;
 
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Locale;
+import java.util.Objects;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrategy {
 	
 	private final Logger log;
@@ -100,6 +103,48 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		}
 	}
 	
+	// @todo #1303 FilesystemImagePersistenceStrategy.replace(): add unit tests
+	@Override
+	public void replace(byte[] data, ImageInfoDto oldImage, ImageInfoDto newImage) {
+		Validate.validState(
+			Objects.equals(oldImage.getId(), newImage.getId()),
+			"Old and new image must have the same id but they aren't: %d != %d",
+			oldImage.getId(),
+			newImage.getId()
+		);
+		
+		try {
+			Path dest = generateFilePath(storageDir, newImage);
+			rewriteFile(data, dest);
+			log.info("Image #{}: data ({}) has been replaced", oldImage.getId(), dest);
+			
+			// when we replace file.jpeg by file.png we have to remove the old one
+			if (!oldImage.getType().equals(newImage.getType())) {
+				removeIfPossible(oldImage);
+			}
+			
+		} catch (IOException ex) {
+			throw new ImagePersistenceException(ex);
+		}
+	}
+	
+	// @todo #1303 FilesystemImagePersistenceStrategy.replacePreview(): add unit tests
+	@Override
+	public void replacePreview(byte[] data, ImageInfoDto image) {
+		// we assume that a preview is always generated as JPEG so that
+		// the new and old files have the same filename
+		
+		try {
+			Path dest = generateFilePath(previewDir, image);
+			rewriteFile(data, dest);
+			
+			log.info("Image #{}: preview ({}) has been replaced", image.getId(), dest);
+			
+		} catch (IOException ex) {
+			throw new ImagePersistenceException(ex);
+		}
+	}
+	
 	@Override
 	public ImageDto get(ImageInfoDto image) {
 		return get(storageDir, image, true);
@@ -140,6 +185,11 @@ public class FilesystemImagePersistenceStrategy implements ImagePersistenceStrat
 		// To prevent unexpected rewriting of existing file, we're overriding this behavior by
 		// explicitly specifying options.
 		Files.write(dest, data, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+	}
+	
+	// protected to allow spying
+	protected void rewriteFile(byte[] data, Path dest) throws IOException {
+		Files.write(dest, data);
 	}
 	
 	// protected to allow spying

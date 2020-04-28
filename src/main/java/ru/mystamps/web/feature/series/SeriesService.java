@@ -25,6 +25,7 @@ import java.util.List;
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
+	void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId);
 	long countAll();
 	long countAllStamps();
 	long countAddedSince(Date date);

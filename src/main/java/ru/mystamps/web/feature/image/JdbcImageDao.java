@@ -40,6 +40,9 @@ public class JdbcImageDao implements ImageDao {
 	@Value("${image.add}")
 	private String addImageSql;
 	
+	@Value("${image.replace}")
+	private String replaceImageSql;
+	
 	@Value("${series_image.add}")
 	private String addImageToSeriesSql;
 	
@@ -70,6 +73,23 @@ public class JdbcImageDao implements ImageDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+	
+	@Override
+	public void replace(Integer id, String type, String filename) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("type", type);
+		params.put("filename", filename);
+		
+		int affected = jdbcTemplate.update(replaceImageSql, params);
+		
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after replacing image #%d: %d",
+			id,
+			affected
+		);
 	}
 	
 	@Override

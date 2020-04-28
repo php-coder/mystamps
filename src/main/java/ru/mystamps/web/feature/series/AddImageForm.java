@@ -30,6 +30,7 @@ import ru.mystamps.web.support.beanvalidation.NotEmptyFile;
 import ru.mystamps.web.support.beanvalidation.NotEmptyFilename;
 
 import javax.validation.GroupSequence;
+import javax.validation.constraints.NotNull;
 
 import static ru.mystamps.web.feature.image.ImageValidation.MAX_IMAGE_SIZE;
 
@@ -40,7 +41,8 @@ import static ru.mystamps.web.feature.image.ImageValidation.MAX_IMAGE_SIZE;
 	imageUrlFieldName = DownloadImageInterceptor.IMAGE_URL_FIELD_NAME,
 	groups = AddImageForm.ImageUrl1Checks.class
 )
-public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableImageUrl {
+public class AddImageForm
+	implements AddImageDto, ReplaceImageDto, HasImageOrImageUrl, NullableImageUrl {
 	
 	// Name of this field should match with the value of
 	// DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME.
@@ -61,6 +63,11 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	@MaxFileSize(value = MAX_IMAGE_SIZE, unit = Unit.Kbytes, groups = Group.Level2.class)
 	@ImageFile(groups = Group.Level2.class)
 	private MultipartFile downloadedImage;
+	
+	// @todo #1303 Replace image: add integration test for mandatory imageId
+	// @todo #1303 Replace image: validate that image id is valid
+	@NotNull(groups = RequireImageIdCheck.class)
+	private Integer imageId;
 	
 	@Override
 	public MultipartFile getImage() {
@@ -86,6 +93,9 @@ public class AddImageForm implements AddImageDto, HasImageOrImageUrl, NullableIm
 	}
 	
 	public interface RequireImageCheck {
+	}
+	
+	public interface RequireImageIdCheck {
 	}
 	
 	@GroupSequence({

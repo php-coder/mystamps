@@ -15,14 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.image;
+package ru.mystamps.web.feature.series;
 
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
-public interface ImageDao {
-	Integer add(String type, String filename);
-	void replace(Integer id, String type, String filename);
-	void addToSeries(Integer seriesId, Integer imageId);
-	ImageInfoDto findById(Integer imageId);
-	List<Integer> findBySeriesId(Integer seriesId);
+public interface ReplaceImageDto {
+	Integer getImageId();
+	MultipartFile getImage();
 }

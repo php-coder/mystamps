@@ -23,6 +23,7 @@ import java.util.List;
 
 public interface ImageService {
 	ImageInfoDto save(MultipartFile file);
+	void replace(Integer imageId, MultipartFile file);
 	ImageDto get(Integer imageId);
 	ImageDto getOrCreatePreview(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);

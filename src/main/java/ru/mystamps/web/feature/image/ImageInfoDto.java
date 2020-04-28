@@ -27,6 +27,14 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class ImageInfoDto {
+	
+	private static final String PREVIEW_TYPE = "jpeg";
+	
 	private final Integer id;
 	private final String type;
+	
+	public static ImageInfoDto newPreview(Integer imageId) {
+		return new ImageInfoDto(imageId, PREVIEW_TYPE);
+	}
+	
 }
