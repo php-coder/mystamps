@@ -1,3 +1,5 @@
+@startuml
+
 title Series import flow: stage 2 (download page)
 
 participant ImportRequestCreatedEventListener
@@ -5,16 +7,24 @@ participant DownloaderService
 participant SeriesImportService
 participant EventPublisher
 
-ImportRequestCreatedEventListener->+DownloaderService: url
-DownloaderService->-ImportRequestCreatedEventListener:
+ImportRequestCreatedEventListener->DownloaderService: url
+activate DownloaderService
+DownloaderService->ImportRequestCreatedEventListener:
+deactivate DownloaderService
 alt
-ImportRequestCreatedEventListener->+SeriesImportService: content of downloaded page
+ImportRequestCreatedEventListener->SeriesImportService: content of downloaded page
+activate SeriesImportService
 SeriesImportService->SeriesImportService:
-SeriesImportService->-ImportRequestCreatedEventListener:
+SeriesImportService->ImportRequestCreatedEventListener:
 note right of SeriesImportService: Unprocessed -> DownloadingSucceeded
+deactivate SeriesImportService
 ImportRequestCreatedEventListener->EventPublisher: DownloadingSucceeded
 else
-ImportRequestCreatedEventListener->+SeriesImportService:
-SeriesImportService->-ImportRequestCreatedEventListener:
+ImportRequestCreatedEventListener->SeriesImportService:
+activate SeriesImportService
+SeriesImportService->ImportRequestCreatedEventListener:
 note right of SeriesImportService: Unprocessed -> DownloadingFailed
+deactivate SeriesImportService
 end
+
+@enduml
