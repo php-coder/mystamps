@@ -5,6 +5,14 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 	
-	<include file="0.4.4/2020-05-02--hidden_series_images.xml" relativeToChangelogFile="true" />
+	<changeSet id="add-hidden-field-to-series_images" author="php-coder" context="scheme">
+		
+		<addColumn tableName="series_images">
+			<column name="hidden" type="BOOLEAN" defaultValueBoolean="false">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+		
+	</changeSet>
 	
 </databaseChangeLog>
