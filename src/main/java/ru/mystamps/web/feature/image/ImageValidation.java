@@ -20,7 +20,7 @@ package ru.mystamps.web.feature.image;
 public final class ImageValidation {
 	
 	/** Maximum uploading image size in kilobytes. */
-	public static final long MAX_IMAGE_SIZE = 500;
+	public static final long MAX_IMAGE_SIZE = 700;
 	
 	private ImageValidation() {
 	}
