@@ -1,6 +1,7 @@
 0.x (upcoming release)
 - (feature) a series can be marked as a similar to another one
 - (feature) series images can be replaced
+- (feature) add preliminary support for hidden images
 
 0.4.3
 - (feature)        add support for Ukrainian hryvnia

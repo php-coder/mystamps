@@ -36,6 +36,7 @@ public final class StringAuthority {
 	public static final String UPDATE_COLLECTION      = "UPDATE_COLLECTION";
 	public static final String VIEW_ANY_ESTIMATION    = "VIEW_ANY_ESTIMATION";
 	public static final String VIEW_DAILY_STATS       = "VIEW_DAILY_STATS";
+	public static final String VIEW_HIDDEN_IMAGES     = "VIEW_HIDDEN_IMAGES";
 	public static final String VIEW_SERIES_SALES      = "VIEW_SERIES_SALES";
 	public static final String VIEW_SITE_EVENTS       = "VIEW_SITE_EVENTS";
 	

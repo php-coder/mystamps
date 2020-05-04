@@ -27,6 +27,6 @@ public interface ImageService {
 	ImageDto get(Integer imageId);
 	ImageDto getOrCreatePreview(Integer imageId);
 	void addToSeries(Integer seriesId, Integer imageId);
-	List<Integer> findBySeriesId(Integer seriesId);
+	List<Integer> findBySeriesId(Integer seriesId, boolean hidden);
 	void removeIfPossible(ImageInfoDto imageInfo);
 }

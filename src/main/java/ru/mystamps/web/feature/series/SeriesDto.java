@@ -46,6 +46,9 @@ public class SeriesDto {
 	@Getter
 	private final List<Integer> imageIds;
 	
+	@Getter
+	private final List<Integer> hiddenImageIds;
+	
 	@SuppressWarnings({ "checkstyle:parameternumber", "PMD.ExcessiveParameterList" })
 	public SeriesDto(
 		SeriesFullInfoDto info,
@@ -55,7 +58,8 @@ public class SeriesDto {
 		List<String> gibbonsNumbers,
 		List<String> solovyovNumbers,
 		List<String> zagorskiNumbers,
-		List<Integer> imageIds) {
+		List<Integer> imageIds,
+		List<Integer> hiddenImageIds) {
 		
 		this.info     = info;
 		this.michel   = new CatalogInfoDto(michelNumbers, info.getMichelPrice());
@@ -65,6 +69,7 @@ public class SeriesDto {
 		this.solovyov = new CatalogInfoDto(solovyovNumbers, info.getSolovyovPrice());
 		this.zagorski = new CatalogInfoDto(zagorskiNumbers, info.getZagorskiPrice());
 		this.imageIds = imageIds;
+		this.hiddenImageIds = hiddenImageIds;
 	}
 	
 	public Integer getId() {

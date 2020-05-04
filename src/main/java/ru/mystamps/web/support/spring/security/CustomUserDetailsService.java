@@ -84,6 +84,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.REPLACE_IMAGE);
 			authorities.add(Authority.VIEW_ANY_ESTIMATION);
 			authorities.add(Authority.VIEW_DAILY_STATS);
+			authorities.add(Authority.VIEW_HIDDEN_IMAGES);
 			authorities.add(Authority.VIEW_SERIES_SALES);
 			authorities.add(Authority.VIEW_SITE_EVENTS);
 		

@@ -167,7 +167,29 @@
 									</form>
 								</div>
 							</div>
-						
+							
+							<!--/* @todo #1356 Hidden images: add integration tests  */-->
+							<!--/* @todo #1356 Hidden images: allow to replace a hidden image  */-->
+							<!--/* @todo #1356 Hidden images: admin can hide an image  */-->
+							<!--/* @todo #1356 Hidden images: protect hidden images from direct access  */-->
+							<div class="row" th:if="${not #lists.isEmpty(series.hiddenImageIds)}" th:each="imageId,iter : ${series.hiddenImageIds}">
+								<div class="col-sm-12">
+									<h5 th:text="#{t_hidden_images}">Hidden images</h5>
+									<a id="series-hidden-image-link-1"
+										target="_blank"
+										href="../../../../resources/test/test.png"
+										th:id="|series-hidden-image-link-${iter.count}|"
+										th:href="@{${GET_IMAGE_PAGE}(id=${imageId})}">
+										
+										<img class="img-responsive series-images"
+											 id="series-hidden-image-1"
+											 src="../../../../resources/test/test.png"
+											 th:id="|series-hidden-image-${iter.count}|"
+											 th:src="@{${GET_IMAGE_PREVIEW_PAGE}(id=${imageId})}" />
+									</a>
+								</div>
+							</div>
+							
 						</div>
 						
 						<div class="col-sm-4">

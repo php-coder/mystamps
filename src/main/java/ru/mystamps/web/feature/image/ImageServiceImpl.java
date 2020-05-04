@@ -184,10 +184,10 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Integer> findBySeriesId(Integer seriesId) {
+	public List<Integer> findBySeriesId(Integer seriesId, boolean hidden) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		return imageDao.findBySeriesId(seriesId);
+		return imageDao.findBySeriesId(seriesId, hidden);
 	}
 	
 	@Override

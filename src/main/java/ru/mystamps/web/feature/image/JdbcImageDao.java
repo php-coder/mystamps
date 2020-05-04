@@ -115,10 +115,14 @@ public class JdbcImageDao implements ImageDao {
 	}
 	
 	@Override
-	public List<Integer> findBySeriesId(Integer seriesId) {
+	public List<Integer> findBySeriesId(Integer seriesId, boolean hidden) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("hidden", hidden);
+		
 		return jdbcTemplate.queryForList(
 			findBySeriesIdSql,
-			Collections.singletonMap("series_id", seriesId),
+			params,
 			Integer.class
 		);
 	}

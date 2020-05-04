@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.image
 
+import static io.qala.datagen.RandomShortApi.bool
+
 import org.slf4j.helpers.NOPLogger
 import org.springframework.web.multipart.MultipartFile
 import ru.mystamps.web.feature.image.ImageDb.Images
@@ -370,7 +372,7 @@ class ImageServiceImplTest extends Specification {
 	
 	def "findBySeriesId() should throw exception when series id is null"() {
 		when:
-			service.findBySeriesId(null)
+			service.findBySeriesId(null, bool())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series id must be non null'
@@ -380,13 +382,17 @@ class ImageServiceImplTest extends Specification {
 	def "findBySeriesId() should invoke dao, pass argument and return result from dao"() {
 		given:
 			Integer expectedSeriesId = 14
+			boolean expectedHidden = bool()
 		and:
 			List<Integer> expectedResult = [ 1, 2 ]
 		when:
-			List<Integer> result = service.findBySeriesId(expectedSeriesId)
+			List<Integer> result = service.findBySeriesId(expectedSeriesId, expectedHidden)
 		then:
 			1 * imageDao.findBySeriesId({ Integer seriesId ->
 				assert seriesId == expectedSeriesId
+				return true
+			}, { boolean hidden ->
+				assert hidden == expectedHidden
 				return true
 			}) >> expectedResult
 		and:

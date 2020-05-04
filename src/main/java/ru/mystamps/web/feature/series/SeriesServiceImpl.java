@@ -200,7 +200,11 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public SeriesDto findFullInfoById(Integer seriesId, String lang) {
+	public SeriesDto findFullInfoById(
+		Integer seriesId,
+		String lang,
+		boolean userCanSeeHiddenImages) {
+		
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		SeriesFullInfoDto seriesBaseInfo = seriesDao.findByIdAsSeriesFullInfo(seriesId, lang);
@@ -215,7 +219,13 @@ public class SeriesServiceImpl implements SeriesService {
 		List<String> solovyovNumbers = solovyovCatalogService.findBySeriesId(seriesId);
 		List<String> zagorskiNumbers = zagorskiCatalogService.findBySeriesId(seriesId);
 		
-		List<Integer> imageIds = imageService.findBySeriesId(seriesId);
+		List<Integer> imageIds = imageService.findBySeriesId(seriesId, false);
+		
+		// @todo #1356 SeriesServiceImpl.findFullInfoById(): add unit test for hidden images
+		List<Integer> hiddenImageIds = Collections.emptyList();
+		if (userCanSeeHiddenImages) {
+			hiddenImageIds = imageService.findBySeriesId(seriesId, true);
+		}
 		
 		return new SeriesDto(
 			seriesBaseInfo,
@@ -225,7 +235,8 @@ public class SeriesServiceImpl implements SeriesService {
 			gibbonsNumbers,
 			solovyovNumbers,
 			zagorskiNumbers,
-			imageIds
+			imageIds,
+			hiddenImageIds
 		);
 	}
 	

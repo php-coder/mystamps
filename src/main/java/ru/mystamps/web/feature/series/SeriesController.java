@@ -214,7 +214,10 @@ public class SeriesController {
 		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			Authority.VIEW_HIDDEN_IMAGES
+		);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -363,7 +366,10 @@ public class SeriesController {
 		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			Authority.VIEW_HIDDEN_IMAGES
+		);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -434,7 +440,14 @@ public class SeriesController {
 		
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
-			SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+			boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+				Authority.VIEW_HIDDEN_IMAGES
+			);
+			SeriesDto series = seriesService.findFullInfoById(
+				seriesId,
+				lang,
+				userCanSeeHiddenImages
+			);
 			if (series == null) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return null;
@@ -511,7 +524,10 @@ public class SeriesController {
 		}
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang);
+		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			Authority.VIEW_HIDDEN_IMAGES
+		);
+		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

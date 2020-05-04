@@ -33,7 +33,7 @@ public interface SeriesService {
 	boolean isSeriesExist(Integer seriesId);
 	Integer findQuantityById(Integer seriesId);
 	
-	SeriesDto findFullInfoById(Integer seriesId, String lang);
+	SeriesDto findFullInfoById(Integer seriesId, String lang, boolean userCanSeeHiddenImages);
 	
 	List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang);
 	List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang);

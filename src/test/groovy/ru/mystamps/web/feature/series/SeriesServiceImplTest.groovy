@@ -691,14 +691,14 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findFullInfoById() should throw exception when series id is null"() {
 		when:
-			service.findFullInfoById(null, null)
+			service.findFullInfoById(null, null, bool())
 		then:
 			thrown(IllegalArgumentException)
 	}
 	
 	def "findFullInfoById() should return null when series not found"() {
 		when:
-			SeriesDto result = service.findFullInfoById(Random.id(), Random.lang())
+			SeriesDto result = service.findFullInfoById(Random.id(), Random.lang(), bool())
 		then:
 			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as String)
 		and:
@@ -725,7 +725,7 @@ class SeriesServiceImplTest extends Specification {
 			List<String> expectedSolovyovNumbers = Random.solovyovNumbers().toList()
 			List<Integer> expectedImageIds       = Random.listOfIntegers()
 		when:
-			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang)
+			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang, false)
 		then:
 			1 * seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, expectedLang) >> expectedInfo
 		and:
@@ -741,7 +741,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			1 * zagorskiCatalogService.findBySeriesId(expectedSeriesId) >> expectedZagorskiNumbers
 		and:
-			1 * imageService.findBySeriesId(expectedSeriesId) >> expectedImageIds
+			1 * imageService.findBySeriesId(expectedSeriesId, false) >> expectedImageIds
 		and:
 			result != null
 			result.id           == expectedInfo.id

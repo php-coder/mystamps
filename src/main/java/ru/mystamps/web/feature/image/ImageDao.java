@@ -24,5 +24,5 @@ public interface ImageDao {
 	void replace(Integer id, String type, String filename);
 	void addToSeries(Integer seriesId, Integer imageId);
 	ImageInfoDto findById(Integer imageId);
-	List<Integer> findBySeriesId(Integer seriesId);
+	List<Integer> findBySeriesId(Integer seriesId, boolean hidden);
 }
