@@ -5,8 +5,14 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 	
-	<include file="0.4.4/2020-05-02--hidden_series_images.xml" relativeToChangelogFile="true" />
-	<include file="0.4.4/2020-05-04--series_sale_condition.xml" relativeToChangelogFile="true" />
-	<include file="0.4.4/2020-05-04--collections_series_condition.xml" relativeToChangelogFile="true" />
+	<changeSet id="add-condition-field-to-collections_series" author="php-coder" context="scheme">
+		
+		<addColumn tableName="collections_series">
+			<column name="condition"
+				type="VARCHAR(4)"
+				remarks="Most used values: USED, MNH, CTO" />
+		</addColumn>
+		
+	</changeSet>
 	
 </databaseChangeLog>
