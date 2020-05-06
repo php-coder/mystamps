@@ -7,7 +7,7 @@ class AddReleaseYearForm extends React.Component {
 	
 	render() {
 		return (
-			<div>TODO: add release year form</div>
+			<div></div>
 		)
 	}
 }

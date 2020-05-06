@@ -7,7 +7,7 @@ class AddCatalogPriceForm extends React.Component {
 	
 	render() {
 		return (
-			<div>TODO: add price form</div>
+			<div></div>
 		)
 	}
 }

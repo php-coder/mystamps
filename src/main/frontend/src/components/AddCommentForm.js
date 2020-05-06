@@ -7,7 +7,7 @@ class AddCommentForm extends React.Component {
 	
 	render() {
 		return (
-			<div>TODO: add comment form</div>
+			<div></div>
 		)
 	}
 }
