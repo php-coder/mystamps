@@ -410,7 +410,8 @@
 									</ul>
 								</div>
 							</div>
-							<div id="similar-series-form" sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')"></div>
+							
+							<div id="mark-similar-series" sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')"></div>
 						</div>
 						
 						<div class="col-sm-4">
@@ -804,7 +805,7 @@
 
 							<!--/* @todo #995 Series sale import: add support for new sellers */-->
 							<!--/* @todo #1057 Series sale import form: show a message when JavaScript is disabled */-->
-							<div id="importSeriesSaleForm" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')"></div>
+							<div id="import-series-sale" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')"></div>
 							
 						</div>
 						
@@ -947,7 +948,7 @@
 			};
 			/* -]*/
 			
-			renderComponent(SimilarSeriesForm, similarSeriesFormProps, 'similar-series-form');
+			renderComponent(SimilarSeriesForm, similarSeriesFormProps, 'mark-similar-series');
 		</script>
 		<!--/*/
 		</th:block>
@@ -979,7 +980,7 @@
 			};
 			/* -]*/
 			
-			renderComponent(SeriesSaleImportForm, importFormProps, 'importSeriesSaleForm');
+			renderComponent(SeriesSaleImportForm, importFormProps, 'import-series-sale');
 		</script>
 		<!--/*/
 		</th:block>
