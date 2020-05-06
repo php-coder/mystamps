@@ -392,6 +392,8 @@
 								</div>
 							</div>
 							
+							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+							
 							<div id="add-comment" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')"></div>
 							
 							<div id="similar-series" class="row" th:if="${not #lists.isEmpty(similarSeries)}">
@@ -838,7 +840,7 @@
 			th:src="${SERIES_INFO_JS}"></script>
 		
 		<!--/*/
-		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'ADD_COMMENTS_TO_SERIES')">
+		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'CREATE_SERIES', 'ADD_COMMENTS_TO_SERIES')">
 		/*/-->
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
@@ -918,6 +920,33 @@
 				}
 			};
 			/* -]*/
+		</script>
+		<!--/*/
+		</th:block>
+		/*/-->
+		
+		<!--/*/
+		<th:block sec:authorize="hasAuthority('CREATE_SERIES')">
+		/*/-->
+		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
+		<script th:inline="javascript">
+			/*[+
+			var addCatalogPriceProps = {
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var addCatalogPriceProps = {
+				'url': '/series/100',
+				'l10n': {}
+			};
+			/* -]*/
+			
+			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
 		</script>
 		<!--/*/
 		</th:block>
