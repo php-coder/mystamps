@@ -47,6 +47,7 @@ public final class ResourceUrl {
 	private static final String SIMILAR_SERIES_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.js";
 	private static final String ADD_COMMENT_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddCommentForm.js";
 	private static final String CATALOG_PRICE_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.js";
+	private static final String RELEASE_YEAR_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.js";
 	private static final String BOOTSTRAP_LANGUAGE     = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	private static final String FAVICON_ICO            = "/favicon.ico";
 
@@ -84,6 +85,7 @@ public final class ResourceUrl {
 		put(resources, host, "SIMILAR_SERIES_FORM_JS", SIMILAR_SERIES_FORM_JS);
 		put(resources, host, "ADD_COMMENT_FORM_JS", ADD_COMMENT_FORM_JS);
 		put(resources, host, "CATALOG_PRICE_FORM_JS", CATALOG_PRICE_FORM_JS);
+		put(resources, host, "RELEASE_YEAR_FORM_JS", RELEASE_YEAR_FORM_JS);
 	}
 	
 	// see also MvcConfig.addResourceHandlers()
