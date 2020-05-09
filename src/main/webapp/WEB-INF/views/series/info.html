@@ -930,6 +930,7 @@
 								data: {
 									'fieldErrors': {
 										'comment': ['Comment error'],
+										'year': ['Year error'],
 									}
 								}
 							},
@@ -980,8 +981,9 @@
 			var addReleaseYearProps = {
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {
-				}
+				'l10n': {},
+				'sinceYear': 1840,
+				'tillYear': new Date().getFullYear()
 			};
 			var addCatalogPriceProps = {
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
@@ -994,7 +996,9 @@
 			/*[- */
 			var addReleaseYearProps = {
 				'url': '/series/100',
-				'l10n': {}
+				'l10n': {},
+				'sinceYear': 1840,
+				'tillYear': new Date().getFullYear()
 			};
 			var addCatalogPriceProps = {
 				'url': '/series/100',
