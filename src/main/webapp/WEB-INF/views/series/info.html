@@ -894,6 +894,49 @@
 									'altCurrency' : 'CZK'
 								}
 							}
+						}						
+					};
+					var stubResponse;
+
+					switch (outcome) {
+						case 'success':
+						case 'failOnField':
+							stubResponse = possibleResponses[url][outcome];
+							break;
+						case 'failOnForm':
+						default:
+							stubResponse = {
+								status: 500,
+								statusText: 'Fake Server Error'
+							};
+					}
+
+					responseCount++;
+
+					return new Promise(function delayExecution(resolve) {
+						setTimeout(resolve, 500 /* 0.5 second */);
+
+					}).then(function returnResponse() {
+						return stubResponse.status == 500 ? Promise.reject(stubResponse) : Promise.resolve(stubResponse);
+					});
+				},
+				patch: function (url) {
+					var possibleOutcomes = ['failOnForm', 'failOnField', 'success'];
+					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
+					var possibleResponses = {
+						'/series/100': {
+							'failOnField': {
+								status: 400,
+								data: {
+									'fieldErrors': {
+										'comment': ['Comment error'],
+									}
+								}
+							},
+							'success': {
+								status: 200,
+								data: {}
+							}
 						}
 					};
 					var stubResponse;
