@@ -2,7 +2,7 @@
 // IMPORTANT:
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
-// @todo #1342 AddCatalogPriceForm: show a currency
+// @todo #1388 AddCatalogPriceForm: consider using a tooltip for currency
 
 class AddCatalogPriceForm extends React.Component {
 	constructor(props) {
@@ -31,6 +31,21 @@ class AddCatalogPriceForm extends React.Component {
 		this.setState({
 			catalog: event.target.value
 		});
+	}
+
+	getCurrencyByCatalogName(catalog) {
+		switch (catalog) {
+			case 'michel':
+			case 'yvert':
+				return ['\u20AC', 'EUR'];
+			case 'scott':
+				return ['$', 'USD'];
+			case 'gibbons':
+				return ['\u00A3', 'GBP'];
+			case 'solovyov':
+			case 'zagorski':
+				return ['\u20BD', 'RUB'];
+		}
 	}
 
 	handleSubmit(event) {
@@ -86,6 +101,8 @@ class AddCatalogPriceForm extends React.Component {
 	}
 	render() {
 		const hasValidationErrors = this.state.validationErrors.length > 0;
+		const [currencySymbol, currencyName] = this.getCurrencyByCatalogName(this.state.catalog);
+		
 		return (
 			<div className="col-sm-12 form-group">
 				<form className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`} onSubmit={this.handleSubmit}>
@@ -129,17 +146,17 @@ class AddCatalogPriceForm extends React.Component {
 						<label className="control-label col-sm-3">
 							{ this.props.l10n['t_price'] || 'Price' }
 						</label>
-						<div className="col-sm-6">
-							<div className="row">
-								<div className="col-xs-6">
-									<input
-										className="form-control"
-										id="catalog-price"
-										type="text"
-										size="5"
-										required="required"
-										onChange={ this.handleChangePrice }/>
-								</div>			
+						<div className="col-sm-3">
+							<div className="input-group">
+								<span className="input-group-addon">{ currencySymbol }</span>
+								<input
+									id="catalog-price"
+									type="text"
+									className="form-control"
+									size="5"
+									title={ currencyName }
+									required="required"
+									onChange={ this.handleChangePrice }/>
 							</div>
 						</div>
 					</div>
