@@ -395,6 +395,8 @@
 							<div id="add-release-year" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+
+							<div id="add-catalog-numbers" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 							
 							<div id="add-comment" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')"></div>
 							
@@ -931,7 +933,8 @@
 									'fieldErrors': {
 										'comment': ['Comment error'],
 										'year': ['Year error'],
-										'price': ['Price error']
+										'price': ['Price error'],
+										'numbers': ['Numbers error']
 									}
 								}
 							},
@@ -977,6 +980,8 @@
 		/*/-->
 		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/AddCatalogNumbersForm.js" th:src="${CATALOG_NUMBERS_FORM_JS}"></script>
+
 		<script th:inline="javascript">
 			/*[+
 			var addReleaseYearProps = {
@@ -987,6 +992,12 @@
 				'tillYear': new Date().getFullYear()
 			};
 			var addCatalogPriceProps = {
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {
+				}
+			};
+			var addCatalogNumbersProps = {
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
 				'l10n': {
@@ -1005,10 +1016,15 @@
 				'url': '/series/100',
 				'l10n': {}
 			};
+			var addCatalogNumbersProps = {
+				'url': '/series/100',
+				'l10n': {}
+			};
 			/* -]*/
 			
 			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
 			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
+			renderComponent(AddCatalogNumbersForm, addCatalogNumbersProps, 'add-catalog-numbers');
 		</script>
 		<!--/*/
 		</th:block>

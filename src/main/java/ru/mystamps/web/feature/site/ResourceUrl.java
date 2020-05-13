@@ -32,9 +32,9 @@ public final class ResourceUrl {
 	public static final String STATIC_RESOURCES_URL = "https://stamps.filezz.ru";
 	
 	// MUST be updated when any of our resources were modified
-	public static final String RESOURCES_VERSION = "v0.4.3.3";
+	public static final String RESOURCES_VERSION = "v0.4.3.4";
 
-	// CheckStyle: ignore LineLength for next 14 lines
+	// CheckStyle: ignore LineLength for next 15 lines
 	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	private static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";
@@ -47,6 +47,7 @@ public final class ResourceUrl {
 	private static final String SIMILAR_SERIES_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.js";
 	private static final String ADD_COMMENT_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddCommentForm.js";
 	private static final String CATALOG_PRICE_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.js";
+	private static final String CATALOG_NUMBERS_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogNumbersForm.js";
 	private static final String RELEASE_YEAR_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.js";
 	private static final String BOOTSTRAP_LANGUAGE     = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	private static final String FAVICON_ICO            = "/favicon.ico";
@@ -85,6 +86,7 @@ public final class ResourceUrl {
 		put(resources, host, "SIMILAR_SERIES_FORM_JS", SIMILAR_SERIES_FORM_JS);
 		put(resources, host, "ADD_COMMENT_FORM_JS", ADD_COMMENT_FORM_JS);
 		put(resources, host, "CATALOG_PRICE_FORM_JS", CATALOG_PRICE_FORM_JS);
+		put(resources, host, "CATALOG_NUMBERS_FORM_JS", CATALOG_NUMBERS_FORM_JS);
 		put(resources, host, "RELEASE_YEAR_FORM_JS", RELEASE_YEAR_FORM_JS);
 	}
 	
