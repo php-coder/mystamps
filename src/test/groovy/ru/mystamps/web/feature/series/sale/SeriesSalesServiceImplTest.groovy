@@ -113,7 +113,6 @@ class SeriesSalesServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = 777
 			Integer expectedUserId = 888
-			SeriesCondition expectedCondition = nullOr(Random.seriesCondition())
 		and:
 			// mandatory fields
 			form.setSellerId(444)
@@ -125,7 +124,7 @@ class SeriesSalesServiceImplTest extends Specification {
 			form.setAltPrice(altPrice)
 			form.setAltCurrency(altCurrency)
 			form.setBuyerId(buyerId)
-			form.setCondition(expectedCondition)
+			form.setCondition(nullOr(Random.seriesCondition()))
 		when:
 			service.add(form, expectedSeriesId, expectedUserId)
 		then:
@@ -138,7 +137,7 @@ class SeriesSalesServiceImplTest extends Specification {
 				assert dto?.altPrice    == form.altPrice
 				assert dto?.altCurrency == form.altCurrency?.toString()
 				assert dto?.buyerId     == form.buyerId
-				assert dto?.condition   == form.condition
+				assert dto?.condition   == form.condition?.toString()
 				assert dto?.createdBy   == expectedUserId
 				assert dto?.seriesId    == expectedSeriesId
 				assert DateUtils.roughlyEqual(dto?.createdAt, new Date())
