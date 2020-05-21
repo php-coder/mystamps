@@ -35,6 +35,7 @@ public class AddSeriesSalesDbDto {
 	private BigDecimal altPrice;
 	private String altCurrency;
 	private Integer buyerId;
+	private String condition;
 	private Date createdAt;
 	private Integer createdBy;
 }

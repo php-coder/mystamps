@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -44,4 +45,5 @@ public class SeriesExtractedInfo {
 	private final String currency;
 	private final BigDecimal altPrice;
 	private final String altCurrency;
+	private final SeriesCondition condition;
 }

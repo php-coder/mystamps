@@ -107,6 +107,7 @@ public class JsoupSiteParser implements SiteParser {
 		info.setCurrency(extractCurrency(body));
 		info.setAltPrice(extractAltPrice(body));
 		info.setAltCurrency(extractAltCurrency(body));
+		info.setCondition(extractCondition(body));
 		
 		return info;
 	}
@@ -269,6 +270,17 @@ public class JsoupSiteParser implements SiteParser {
 		
 		LOG.debug("Extracted alt currency: '{}'", currency);
 		return currency;
+	}
+	
+	// @todo #1326 JsoupSiteParser.extractCondition(): add unit tests
+	protected String extractCondition(Element body) {
+		String description = getTextOfTheFirstElement(body, shortDescriptionLocator);
+		if (description == null) {
+			return null;
+		}
+		
+		LOG.debug("Extracted condition: '{}'", description);
+		return description;
 	}
 	
 	private static Element getFirstElement(Element body, String locator) {

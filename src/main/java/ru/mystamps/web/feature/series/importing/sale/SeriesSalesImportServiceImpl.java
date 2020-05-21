@@ -77,7 +77,8 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 			info.getPrice(),
 			info.getCurrency(),
 			info.getAltPrice(),
-			info.getAltCurrency()
+			info.getAltCurrency(),
+			info.getCondition()
 		);
 		
 		// CheckStyle: ignore LineLength for next 1 line
@@ -89,7 +90,8 @@ public class SeriesSalesImportServiceImpl implements SeriesSalesImportService {
 			seriesInfo.getPrice(),
 			seriesInfo.getCurrency(),
 			seriesInfo.getAltPrice(),
-			seriesInfo.getAltCurrency()
+			seriesInfo.getAltCurrency(),
+			seriesInfo.getCondition()
 		);
 	}
 	

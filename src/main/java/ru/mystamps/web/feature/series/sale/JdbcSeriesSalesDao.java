@@ -45,6 +45,7 @@ public class JdbcSeriesSalesDao implements SeriesSalesDao {
 		params.put("alt_price", sale.getAltPrice());
 		params.put("alt_currency", sale.getAltCurrency());
 		params.put("buyer_id", sale.getBuyerId());
+		params.put("condition", sale.getCondition());
 		params.put("created_at", sale.getCreatedAt());
 		params.put("created_by", sale.getCreatedBy());
 		

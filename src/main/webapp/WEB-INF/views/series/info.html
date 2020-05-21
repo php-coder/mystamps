@@ -756,6 +756,23 @@
 											</div>
 										</div>
 										
+										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('condition') ? 'has-error' : ''}">
+											<label for="condition" class="control-label col-sm-3" th:text="#{t_condition}">
+												Condition
+											</label>
+											<div class="col-sm-3">
+												<select id="condition" class="form-control" th:field="*{condition}">
+													<option value=""></option>
+													<option value="MNH">MNH</option>
+													<option value="MVLH">MVLH</option>
+													<option value="CANCELLED" th:text="#{t_cancelled}">Сancelled</option>
+												</select>
+												<!--/*/
+												<span id="condition.errors" class="help-block" th:if="${#fields.hasErrors('condition')}" th:each="error : ${#fields.errors('condition')}" th:text="${error}"></span>
+												/*/-->
+											</div>
+										</div>
+										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
 											<label for="buyer" class="control-label col-sm-3" th:text="#{t_buyer}">
 												Buyer

@@ -54,6 +54,9 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 			sale.setAltCurrency(dto.getAltCurrency().toString());
 		}
 		sale.setBuyerId(dto.getBuyerId());
+		if (dto.getCondition() != null) {
+			sale.setCondition(dto.getCondition().toString());
+		}
 		
 		Date now = new Date();
 		sale.setCreatedAt(now);

@@ -17,9 +17,12 @@
  */
 package ru.mystamps.web.feature.series.sale
 
+import static io.qala.datagen.RandomShortApi.nullOr
+
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.common.Currency
 import ru.mystamps.web.tests.DateUtils
+import ru.mystamps.web.tests.Random
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -108,6 +111,10 @@ class SeriesSalesServiceImplTest extends Specification {
 		Integer buyerId) {
 		
 		given:
+			Integer expectedSeriesId = 777
+			Integer expectedUserId = 888
+			SeriesCondition expectedCondition = nullOr(Random.seriesCondition())
+		and:
 			// mandatory fields
 			form.setSellerId(444)
 			form.setPrice(new BigDecimal('100'))
@@ -118,9 +125,7 @@ class SeriesSalesServiceImplTest extends Specification {
 			form.setAltPrice(altPrice)
 			form.setAltCurrency(altCurrency)
 			form.setBuyerId(buyerId)
-		and:
-			Integer expectedSeriesId = 777
-			Integer expectedUserId = 888
+			form.setCondition(expectedCondition)
 		when:
 			service.add(form, expectedSeriesId, expectedUserId)
 		then:
@@ -133,6 +138,7 @@ class SeriesSalesServiceImplTest extends Specification {
 				assert dto?.altPrice    == form.altPrice
 				assert dto?.altCurrency == form.altCurrency?.toString()
 				assert dto?.buyerId     == form.buyerId
+				assert dto?.condition   == form.condition
 				assert dto?.createdBy   == expectedUserId
 				assert dto?.seriesId    == expectedSeriesId
 				assert DateUtils.roughlyEqual(dto?.createdAt, new Date())

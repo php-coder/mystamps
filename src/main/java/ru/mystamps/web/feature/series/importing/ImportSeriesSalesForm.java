@@ -22,6 +22,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.NumberFormat;
 import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -61,6 +62,11 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	
 	@Override
 	public Integer getBuyerId() {
+		return null;
+	}
+	
+	@Override
+	public SeriesCondition getCondition() {
 		return null;
 	}
 	

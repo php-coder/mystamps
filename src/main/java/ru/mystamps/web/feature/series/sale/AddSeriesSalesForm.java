@@ -70,6 +70,9 @@ public class AddSeriesSalesForm implements AddSeriesSalesDto {
 	
 	private Integer buyerId;
 	
+	// @todo #1326 Series sale import: add integration test for series condition
+	private SeriesCondition condition;
+	
 	@GroupSequence({
 		Group.Level1.class,
 		Group.Level2.class,

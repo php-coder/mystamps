@@ -28,6 +28,7 @@ import ru.mystamps.web.feature.country.CountryService;
 import ru.mystamps.web.feature.country.CountryValidation;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesValidation;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -116,6 +117,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		String currency = extractCurrency(data.getCurrency());
 		BigDecimal altPrice = extractPrice(data.getAltPrice());
 		String altCurrency = extractCurrency(data.getAltCurrency());
+		SeriesCondition condition = extractCondition(data.getCondition());
 		
 		return new SeriesExtractedInfo(
 			categoryIds,
@@ -133,7 +135,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			price,
 			currency,
 			altPrice,
-			altCurrency
+			altCurrency,
+			condition
 		);
 	}
 	
@@ -490,6 +493,33 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 		
 		log.debug("Could not extract currency from a fragment");
+		
+		return null;
+	}
+	
+	// @todo #1326 SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests
+	@SuppressWarnings({
+		"checkstyle:missingswitchdefault",
+		"PMD.TooFewBranchesForASwitchStatement",
+		"PMD.SwitchStmtsShouldHaveDefault"
+	})
+	/* default */ SeriesCondition extractCondition(String fragment) {
+		if (StringUtils.isBlank(fragment)) {
+			return null;
+		}
+		
+		String[] candidates = StringUtils.split(fragment, ' ');
+		for (String candidate : candidates) {
+			switch(candidate) {
+				case "MNH":
+				case "MVLH":
+					SeriesCondition condition = SeriesCondition.valueOf(candidate);
+					log.debug("Condition is {}", condition);
+					return condition;
+			}
+		}
+		
+		log.debug("Could not extract condition from a fragment");
 		
 		return null;
 	}

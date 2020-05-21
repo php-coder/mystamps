@@ -43,6 +43,7 @@ public class SeriesInfo {
 	private String currency;
 	private String altPrice;
 	private String altCurrency;
+	private String condition;
 	
 	/**
 	 * Check whether any info about a series is available.

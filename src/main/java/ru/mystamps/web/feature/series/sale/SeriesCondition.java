@@ -15,26 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series.importing;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+package ru.mystamps.web.feature.series.sale;
 
-@Getter
-@RequiredArgsConstructor
-public class RawParsedDataDto {
-	private final String categoryName;
-	private final String countryName;
-	private final String imageUrl;
-	private final String issueDate;
-	private final String quantity;
-	private final String perforated;
-	private final String michelNumbers;
-	private final String sellerName;
-	private final String sellerUrl;
-	private final String price;
-	private final String currency;
-	private final String altPrice;
-	private final String altCurrency;
-	private final String condition;
+public enum SeriesCondition {
+	MNH,
+	MVLH,
+	CANCELLED;
 }

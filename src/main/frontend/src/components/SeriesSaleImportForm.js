@@ -81,6 +81,10 @@ class SeriesSaleImportForm extends React.Component {
 				document.getElementById('seller').value = data.sellerId;
 			}
 			
+			if (data.condition) {
+				document.getElementById('condition').value = data.condition;
+			}
+			
 			this.setState({ isDisabled: false, url: '' });
 		
 		}).catch(error => {

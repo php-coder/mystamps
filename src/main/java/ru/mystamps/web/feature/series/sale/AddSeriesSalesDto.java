@@ -32,4 +32,5 @@ public interface AddSeriesSalesDto {
 	BigDecimal getAltPrice();
 	Currency getAltCurrency();
 	Integer getBuyerId();
+	SeriesCondition getCondition();
 }

@@ -32,6 +32,7 @@ import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesValidation;
 import ru.mystamps.web.feature.series.importing.ImportRequestFullInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportDb.SeriesImportRequestStatus;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.service.TestObjects;
 
@@ -116,6 +117,10 @@ public final class Random {
 	
 	public static Currency currency() {
 		return sample(Currency.values());
+	}
+	
+	public static SeriesCondition seriesCondition() {
+		return sample(SeriesCondition.values());
 	}
 	
 	public static String url() {
