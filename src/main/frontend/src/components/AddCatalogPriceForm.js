@@ -4,7 +4,7 @@
 //
 // @todo #1388 AddCatalogPriceForm: consider using a tooltip for currency
 
-class AddCatalogPriceForm extends React.Component {
+class AddCatalogPriceForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

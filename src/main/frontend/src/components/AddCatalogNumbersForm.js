@@ -3,7 +3,7 @@
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
 
-class AddCatalogNumbersForm extends React.Component {
+class AddCatalogNumbersForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
