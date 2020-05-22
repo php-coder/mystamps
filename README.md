@@ -5,17 +5,17 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ru.mystamps%3Amystamps&metric=alert_status)](https://sonarcloud.io/dashboard?id=ru.mystamps%3Amystamps)
 [![Uptime Statistic](https://badgen.net/uptime-robot/month/ur243278-551fbb732949dbdee27c7552)](https://stats.uptimerobot.com/1jXAjFpgP)
 
-## What's it?
+## What is it?
 
-It's a website for anybody who collects post stamps and wants to have an online version of the collection.
+This is a website for anybody who collects post stamps and wants to have an online version of the collection.
 
 ## How can it be useful to me?
 
-With this site you can:
-* look at the statistic (including charts) about your collection (how many series and stamps do you have? From which countries and in which categories they are?)
+On the site you can:
+* see the statistics (including charts) about your collection: how many series and stamps do you have? From what countries and from what categories?
 * share a link to the collection with friends
-* use it as a list of stamps which you are selling on auction
-* add to the signature on forums
+* use it as a list of the stamps that you are selling on an auction
+* add to the signature on the forums or e-mail
 * use it where a photo of your collection is needed
 
 ## How can I try it?
@@ -23,8 +23,9 @@ With this site you can:
 You can look at it and try on https://my-stamps.ru
 
 If you are programmer/sysadmin or you just feeling that you are able to run a local version of the site then follow the following instructions:
+If you want to run it locally, follow the instructions:
 
-* install Java (at least 8th version is required)
+* install JDK (at least 8th version is required)
 * clone this project
 * from the console inside the directory with source code, execute the command `./mvnw spring-boot:run`
 * open up `http://127.0.0.1:8080` in a browser
@@ -33,7 +34,7 @@ If you are programmer/sysadmin or you just feeling that you are able to run a lo
 
 **Caution!** The purpose of that version is a preview of the site and its capabilities. Because of that, the **changes** that you can make on the site **will be lost after stopping the server**!
 
-## What's inside? (interesting only for programmers)
+## What is inside?
 
 * *At the heart of*: Spring Framework (and especially Spring Boot)
 * *Template engine*: Thymeleaf
