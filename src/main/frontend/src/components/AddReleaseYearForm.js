@@ -3,7 +3,7 @@
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
 
-class AddReleaseYearForm extends React.Component {
+class AddReleaseYearForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

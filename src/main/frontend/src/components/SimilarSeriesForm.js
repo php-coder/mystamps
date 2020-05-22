@@ -4,7 +4,7 @@
 //
 
 // @todo #1280 SimilarSeriesForm: add tests
-class SimilarSeriesForm extends React.Component {
+class SimilarSeriesForm extends React.PureComponent {
 	
 	constructor(props) {
 		super(props);

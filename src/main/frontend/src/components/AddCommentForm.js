@@ -3,7 +3,7 @@
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
 
-class AddCommentForm extends React.Component {
+class AddCommentForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

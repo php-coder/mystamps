@@ -4,7 +4,7 @@
 //
 
 // @todo #1057 SeriesSaleImportForm: add tests
-class SeriesSaleImportForm extends React.Component {
+class SeriesSaleImportForm extends React.PureComponent {
 	
 	constructor(props) {
 		super(props);
