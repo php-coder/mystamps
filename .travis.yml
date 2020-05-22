@@ -50,6 +50,8 @@ after_failure:
   # $ ./mvnw robotframework:rebot
   # $ open target/robotframework-reports/report.html
   #
+  # NB: on macOS, replace base64 -d by base64 -D
+  #
   - if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
       echo '===== REPORT START =====';
       bzip2 <target/robotframework-reports/output.xml | base64;
