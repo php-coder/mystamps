@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series;
 import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -98,6 +99,10 @@ final class RowMappers {
 		BigDecimal secondPrice  = rs.getBigDecimal("second_price");
 		Currency secondCurrency = JdbcUtils.getCurrency(rs, "second_currency");
 		
+		// LATER: consider extracting this into a helper method
+		String conditionField = rs.getString("condition");
+		SeriesCondition condition = rs.wasNull() ? null : SeriesCondition.valueOf(conditionField);
+		
 		return new PurchaseAndSaleDto(
 			date,
 			sellerName,
@@ -108,7 +113,8 @@ final class RowMappers {
 			firstPrice,
 			firstCurrency,
 			secondPrice,
-			secondCurrency
+			secondCurrency,
+			condition
 		);
 	}
 

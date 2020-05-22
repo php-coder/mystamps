@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.common.Currency;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -41,4 +42,5 @@ public class PurchaseAndSaleDto {
 	private final Currency firstCurrency;
 	private final BigDecimal secondPrice;
 	private final Currency secondCurrency;
+	private final SeriesCondition condition;
 }
