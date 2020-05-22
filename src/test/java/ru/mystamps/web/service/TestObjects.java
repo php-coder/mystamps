@@ -218,7 +218,8 @@ public final class TestObjects {
 			Random.price(),
 			Random.currency(),
 			Random.price(),
-			Random.currency()
+			Random.currency(),
+			nullOr(Random.seriesCondition())
 		);
 	}
 	
