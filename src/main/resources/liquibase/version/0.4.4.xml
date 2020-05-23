@@ -8,5 +8,6 @@
 	<include file="0.4.4/2020-05-02--hidden_series_images.xml" relativeToChangelogFile="true" />
 	<include file="0.4.4/2020-05-04--series_sale_condition.xml" relativeToChangelogFile="true" />
 	<include file="0.4.4/2020-05-04--collections_series_condition.xml" relativeToChangelogFile="true" />
+	<include file="0.4.4/2020-05-23--modify_condition_field.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>

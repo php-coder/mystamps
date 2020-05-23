@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	
+	<changeSet id="modify-collections_series-condition-field" author="php-coder" context="scheme">
+		
+		<renameColumn
+			tableName="collections_series"
+			oldColumnName="condition"
+			newColumnName="cond"
+			columnDataType="VARCHAR(4)" />
+		
+		<modifyDataType
+			tableName="collections_series"
+			columnName="cond"
+			newDataType="VARCHAR(9)" />
+		
+		<setColumnRemarks
+			tableName="collections_series"
+			columnName="cond"
+			remarks="Example: MNH, CANCELLED" />
+		
+	</changeSet>
+	
+	<changeSet id="modify-series_sales-condition-field" author="php-coder" context="scheme">
+		
+		<renameColumn
+			tableName="series_sales"
+			oldColumnName="condition"
+			newColumnName="cond"
+			columnDataType="VARCHAR(4)" />
+		
+		<modifyDataType
+			tableName="series_sales"
+			columnName="cond"
+			newDataType="VARCHAR(9)" />
+		
+		<setColumnRemarks
+			tableName="series_sales"
+			columnName="cond"
+			remarks="Example: MNH, CANCELLED" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

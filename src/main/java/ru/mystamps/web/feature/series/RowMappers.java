@@ -100,7 +100,7 @@ final class RowMappers {
 		Currency secondCurrency = JdbcUtils.getCurrency(rs, "second_currency");
 		
 		// LATER: consider extracting this into a helper method
-		String conditionField = rs.getString("condition");
+		String conditionField = rs.getString("cond");
 		SeriesCondition condition = rs.wasNull() ? null : SeriesCondition.valueOf(conditionField);
 		
 		return new PurchaseAndSaleDto(
