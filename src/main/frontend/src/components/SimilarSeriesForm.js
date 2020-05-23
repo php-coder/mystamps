@@ -76,19 +76,36 @@ class SimilarSeriesForm extends React.PureComponent {
 	}
 	
 	render() {
-		const hasValidationErrors = this.state.validationErrors.length > 0;
+		return (
+			<SimilarSeriesFormView
+				l10n={this.props.l10n}
+				handleChange={this.handleChange}
+				handleSubmit={this.handleSubmit}
+				similarSeriesId={this.state.similarSeriesId}
+				isDisabled={this.state.isDisabled}
+				hasServerError={this.state.hasServerError}
+				validationErrors={this.state.validationErrors}
+			/>
+		)
+	}
+}
+
+class SimilarSeriesFormView extends React.PureComponent {
+	render() {
+		const {similarSeriesId, hasServerError, isDisabled, validationErrors, handleChange, handleSubmit} = this.props;
+		const hasValidationErrors = validationErrors.length > 0;
 		
 		return (
 			<div className="row">
 				<div id="mark-similar-series-failed-msg"
-					className={`alert alert-danger text-center col-sm-8 col-sm-offset-2 ${this.state.hasServerError ? '' : 'hidden'}`}>
+					className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
 					{ this.props.l10n['t_server_error'] || 'Server error' }
 				</div>
 				
 				<div className="col-sm-9 col-sm-offset-3">
 					<form id="mark-similar-series-form"
 						className={`form-inline ${hasValidationErrors ? 'has-error' : ''}`}
-						onSubmit={this.handleSubmit}>
+						onSubmit={ handleSubmit }>
 						
 						<div className="form-group form-group-sm">
 							<input id="similar-id"
@@ -96,20 +113,20 @@ class SimilarSeriesForm extends React.PureComponent {
 								className="form-control"
 								required="required"
 								placeholder={ this.props.l10n['t_similar_series_id'] || 'Similar series ID' }
-								value={this.state.similarSeriesId}
-								onChange={this.handleChange}
-								disabled={this.state.isDisabled} />
+								value={ similarSeriesId }
+								onChange={ handleChange }
+								disabled={ isDisabled } />
 						</div>
 						
 						<div className="form-group form-group-sm">
 							<button type="submit"
 								className="btn btn-primary btn-sm"
-								disabled={this.state.isDisabled}>
+								disabled={ isDisabled }>
 								{ this.props.l10n['t_mark_as_similar'] || 'Mark as similar' }
 							</button>
 						</div>
 						<span id="similar-id.errors" className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
-							{ this.state.validationErrors.join(', ') }
+							{ validationErrors.join(', ') }
 						</span>
 						
 					</form>
