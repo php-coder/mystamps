@@ -16,12 +16,6 @@ class AddReleaseYearForm extends React.PureComponent {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	generateRange(start, end) {
-		return new Array(end - start + 1)
-			.fill()
-			.map((_, idx) => start + idx);
-	}
-
 	handleChange(event) {
 		event.preventDefault();
 		this.setState({
@@ -81,17 +75,40 @@ class AddReleaseYearForm extends React.PureComponent {
 	}
 
 	render() {
-		const rangeOfYears = this.generateRange(
-			this.props.sinceYear,
-			this.props.tillYear
+		return (
+			<AddReleaseYearFormView
+				l10n={this.props.l10n}
+				handleSubmit={this.handleSubmit}
+				hasServerError={this.state.hasServerError}
+				handleChange={this.handleChange}
+				validationErrors={this.state.validationErrors}
+				isDisabled={this.state.isDisabled}
+				sinceYear={this.props.sinceYear}
+				tillYear={this.props.tillYear}
+			/>
 		);
-		const hasValidationErrors = this.state.validationErrors.length > 0;
+	}
+}
+
+class AddReleaseYearFormView extends React.PureComponent {
+
+	generateRange(start, end) {
+		return new Array(end - start + 1)
+			.fill()
+			.map((_, idx) => start + idx);
+	}
+
+	render() {
+		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled, sinceYear, tillYear} = this.props;
+		const hasValidationErrors = validationErrors.length > 0;
+		const rangeOfYears = this.generateRange(sinceYear, tillYear);
+		
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`} onSubmit={this.handleSubmit}>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
 					<div
 						id="add-release-year-failed-msg"
-						className={`alert alert-danger text-center col-sm-8 col-sm-offset-2 ${	this.state.hasServerError ? '' : 'hidden' }`}>
+						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden' }` }>
 						{ this.props.l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
@@ -104,7 +121,7 @@ class AddReleaseYearForm extends React.PureComponent {
 								name="release-year"
 								className="form-control"
 								required="required"
-								onChange={this.handleChange}>
+								onChange={ handleChange }>
 								<option value=""></option>
 								{rangeOfYears.map(year => (
 									<option key={year.toString()} value={year}>
@@ -118,12 +135,12 @@ class AddReleaseYearForm extends React.PureComponent {
 						<span
 							id="release-year.errors"
 							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
-							{ this.state.validationErrors.join(', ') }
+							{ validationErrors.join(', ') }
 						</span>
 						<button
 							type="submit"
 							className="btn btn-primary btn-sm"
-							disabled={ this.state.isDisabled }>
+							disabled={ isDisabled }>
 							{ this.props.l10n['t_add'] || 'Add' }
 						</button>
 					</div>

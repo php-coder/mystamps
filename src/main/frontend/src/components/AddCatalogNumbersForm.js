@@ -84,13 +84,31 @@ class AddCatalogNumbersForm extends React.PureComponent {
 			});
 	}
 	render() {
-		const hasValidationErrors = this.state.validationErrors.length > 0;
+		return (
+			<AddCatalogNumbersFormView
+				l10n={this.props.l10n}
+				handleSubmit={this.handleSubmit}
+				hasServerError={this.state.hasServerError}
+				handleChangeCatalog={this.handleChangeCatalog}
+				handleChangeNumbers={this.handleChangeNumbers}
+				validationErrors={this.state.validationErrors}
+				isDisabled={this.state.isDisabled}
+			/>
+		);
+	}
+}
+
+class AddCatalogNumbersFormView extends React.PureComponent {
+	render() {
+		const {handleSubmit, hasServerError, handleChangeCatalog, handleChangeNumbers, validationErrors, isDisabled} = this.props;
+		const hasValidationErrors = validationErrors.length > 0;
+
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`} onSubmit={this.handleSubmit}>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
 					<div
 						id="add-catalog-numbers-failed-msg"
-						className={`alert alert-danger text-center col-sm-8 col-sm-offset-2 ${this.state.hasServerError ? '' : 'hidden'}`}>
+						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
 						{ this.props.l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
@@ -102,7 +120,7 @@ class AddCatalogNumbersForm extends React.PureComponent {
 								id="catalog-name"
 								name="catalogName"
 								className="form-control"
-								onChange={this.handleChangeCatalog}>
+								onChange={ handleChangeCatalog }>
 								<option value="michel">
 									{ this.props.l10n['t_michel'] || 'Michel' }
 								</option>
@@ -136,7 +154,7 @@ class AddCatalogNumbersForm extends React.PureComponent {
 									className="form-control"
 									size="5"
 									required="required"
-									onChange={ this.handleChangeNumbers } />
+									onChange={ handleChangeNumbers } />
 							</div>
 						</div>
 					</div>
@@ -144,12 +162,12 @@ class AddCatalogNumbersForm extends React.PureComponent {
 						<span
 							id="catalog-numbers.errors"
 							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
-							{ this.state.validationErrors.join(', ') }
+							{ validationErrors.join(', ') }
 						</span>
 						<button
 							type="submit"
 							className="btn btn-primary btn-sm"
-							disabled={ this.state.isDisabled }>
+							disabled={ isDisabled }>
 							{ this.props.l10n['t_add'] || 'Add' }
 						</button>
 					</div>

@@ -73,13 +73,29 @@ class AddCommentForm extends React.PureComponent {
 			});
 	}
 	render() {
-		const hasValidationErrors = this.state.validationErrors.length > 0;
+		return (
+			<AddCommentFormView 
+				l10n={this.props.l10n}
+				handleSubmit={this.handleSubmit}
+				hasServerError={this.state.hasServerError}
+				handleChange={this.handleChange}
+				validationErrors={this.state.validationErrors}
+				isDisabled={this.state.isDisabled}
+			/>
+		);
+	}
+}
+
+class AddCommentFormView extends React.PureComponent {
+	render() {
+		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled} = this.props;
+		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`} onSubmit={this.handleSubmit}>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
 					<div
 						id="add-comment-failed-msg"
-						className={`alert alert-danger text-center col-sm-8 col-sm-offset-2 ${this.state.hasServerError ? '' : 'hidden'}`}>
+						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
 						{ this.props.l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
@@ -93,7 +109,7 @@ class AddCommentForm extends React.PureComponent {
 								cols="22"
 								rows="3"
 								required="required"
-								onChange={this.handleChange}>
+								onChange={ handleChange }>
 							</textarea>
 						</div>
 					</div>
@@ -101,12 +117,12 @@ class AddCommentForm extends React.PureComponent {
 						<span
 							id="comment.errors"
 							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
-							{ this.state.validationErrors.join(', ') }
+							{ validationErrors.join(', ') }
 						</span>
 						<button
 							type="submit"
 							className="btn btn-primary btn-sm"
-							disabled={ this.state.isDisabled }>
+							disabled={ isDisabled }>
 							{ this.props.l10n['t_add'] || 'Add' }
 						</button>
 					</div>

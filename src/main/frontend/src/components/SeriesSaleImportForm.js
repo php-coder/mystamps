@@ -94,7 +94,24 @@ class SeriesSaleImportForm extends React.PureComponent {
 	}
 	
 	render() {
-		const hasValidationErrors = this.state.validationErrors.length > 0;
+		return (
+			<SeriesSaleImportFormView
+				l10n={this.props.l10n}
+				hasServerError={this.state.hasServerError}
+				handleSubmit={this.handleSubmit}
+				url={this.state.url}
+				handleChange={this.handleChange}
+				isDisabled={this.state.isDisabled}
+				validationErrors={this.state.validationErrors}
+			/>
+		)
+	}
+}
+
+class SeriesSaleImportFormView extends React.PureComponent {
+	render() {
+		const { hasServerError, handleSubmit, url, handleChange, isDisabled, validationErrors} = this.props;
+		const hasValidationErrors = validationErrors.length > 0;
 		
 		return (
 			<div className="row">
@@ -108,7 +125,7 @@ class SeriesSaleImportForm extends React.PureComponent {
 					</div>
 					<div className="row">
 						<div id="import-series-sale-failed-msg"
-							className={`alert alert-danger text-center col-sm-8 col-sm-offset-2 ${this.state.hasServerError ? '' : 'hidden'}`}>
+							className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
 							{ this.props.l10n['t_could_not_import_info'] || 'Could not import information from this page' }
 						</div>
 					</div>
@@ -116,7 +133,7 @@ class SeriesSaleImportForm extends React.PureComponent {
 						<div className="col-sm-12">
 							<form id="import-series-sale-form"
 								className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`}
-								onSubmit={this.handleSubmit}>
+								onSubmit={ handleSubmit }>
 								
 								<div className="form-group form-group-sm">
 									<label htmlFor="series-sale-url" className="control-label col-sm-3">
@@ -129,12 +146,12 @@ class SeriesSaleImportForm extends React.PureComponent {
 											type="url"
 											className="form-control"
 											required="required"
-											value={this.state.url}
-											onChange={this.handleChange}
-											disabled={this.state.isDisabled} />
+											value={ url }
+											onChange={ handleChange }
+											disabled={ isDisabled } />
 										<span id="series-sale-url.errors"
 											className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
-											{ this.state.validationErrors.join(', ') }
+											{ validationErrors.join(', ') }
 										</span>
 									</div>
 								</div>
@@ -143,7 +160,7 @@ class SeriesSaleImportForm extends React.PureComponent {
 									<div className="col-sm-offset-3 col-sm-4">
 										<button type="submit"
 											className="btn btn-primary btn-sm"
-											disabled={this.state.isDisabled}>
+											disabled={ isDisabled }>
 											{ this.props.l10n['t_import_info'] || 'Import info' }
 										</button>
 									</div>
