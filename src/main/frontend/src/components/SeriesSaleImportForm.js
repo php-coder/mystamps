@@ -132,7 +132,7 @@ class SeriesSaleImportFormView extends React.PureComponent {
 					<div className="row">
 						<div className="col-sm-12">
 							<form id="import-series-sale-form"
-								className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`}
+								className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 								onSubmit={ handleSubmit }>
 								
 								<div className="form-group form-group-sm">
@@ -150,7 +150,7 @@ class SeriesSaleImportFormView extends React.PureComponent {
 											onChange={ handleChange }
 											disabled={ isDisabled } />
 										<span id="series-sale-url.errors"
-											className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
+											className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
 											{ validationErrors.join(', ') }
 										</span>
 									</div>

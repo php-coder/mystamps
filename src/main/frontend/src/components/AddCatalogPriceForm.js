@@ -123,7 +123,8 @@ class AddCatalogPriceFormView extends React.PureComponent {
 		const [currencySymbol, currencyName] = this.getCurrencyByCatalogName(catalog);
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+					onSubmit={ handleSubmit }>
 					<div
 						id="add-catalog-price-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
@@ -169,7 +170,7 @@ class AddCatalogPriceFormView extends React.PureComponent {
 					<div className="col-sm-offset-3 col-sm-4">
 						<span
 							id="catalog-price.errors"
-							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
+							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
 							{ validationErrors.join(', ') }
 						</span>
 						<button

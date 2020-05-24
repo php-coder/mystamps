@@ -92,7 +92,8 @@ class AddCommentFormView extends React.PureComponent {
 		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+					onSubmit={ handleSubmit }>
 					<div
 						id="add-comment-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
@@ -116,7 +117,7 @@ class AddCommentFormView extends React.PureComponent {
 					<div className="col-sm-offset-3 col-sm-4">
 						<span
 							id="comment.errors"
-							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
+							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
 							{ validationErrors.join(', ') }
 						</span>
 						<button

@@ -105,7 +105,8 @@ class AddReleaseYearFormView extends React.PureComponent {
 		
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` } onSubmit={ handleSubmit }>
+				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+					onSubmit={ handleSubmit }>
 					<div
 						id="add-release-year-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden' }` }>
@@ -124,9 +125,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 								onChange={ handleChange }>
 								<option value=""></option>
 								{rangeOfYears.map(year => (
-									<option key={year.toString()} value={year}>
-										{ year }
-									</option>
+									<option key={year.toString()} value={year}>{ year }</option>
 								))}
 							</select>
 						</div>
@@ -134,7 +133,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 					<div className="col-sm-offset-3 col-sm-4">
 						<span
 							id="release-year.errors"
-							className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
+							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
 							{ validationErrors.join(', ') }
 						</span>
 						<button
