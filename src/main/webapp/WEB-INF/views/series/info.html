@@ -398,7 +398,7 @@
 
 							<div id="add-catalog-numbers" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 							
-							<div id="add-comment" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')"></div>
+							<div id="add-comment" sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')" th:if="${series.comment == null}"></div>
 							
 							<div id="similar-series" class="row" th:if="${not #lists.isEmpty(similarSeries)}">
 								<div class="col-sm-10 col-sm-offset-2">
@@ -1058,15 +1058,19 @@
 		/*/-->
 		
 		<!--/*/
-		<th:block sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')">
+		<th:block sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')" th:if="${series.comment == null}">
 		/*/-->
 		<script src="../../../../../../target/classes/js/components/AddCommentForm.js" th:src="${ADD_COMMENT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
 			var addCommentProps = {
+				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
 				'l10n': {
+					't_server_error': [[ #{t_server_error} ]],
+					't_comment':      [[ #{t_comment} ]],
+					't_add':          [[ #{t_add} ]]
 				}
 			};
 			+]*/

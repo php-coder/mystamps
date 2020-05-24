@@ -54,8 +54,8 @@ class AddCommentForm extends React.PureComponent {
 
 				if (data.hasOwnProperty('fieldErrors')) {
 					const fieldErrors = [];
-					if (data.fieldErrors.comment) {
-						fieldErrors.push(...data.fieldErrors.comment);
+					if (data.fieldErrors.value) {
+						fieldErrors.push(...data.fieldErrors.value);
 					}
 					this.setState({
 						isDisabled: false,

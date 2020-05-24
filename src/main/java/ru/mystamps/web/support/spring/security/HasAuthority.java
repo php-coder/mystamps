@@ -20,6 +20,7 @@ package ru.mystamps.web.support.spring.security;
 @SuppressWarnings({ "checkstyle:linelength", "PMD.AvoidDuplicateLiterals" })
 public final class HasAuthority {
 	// Constants sorted in an ascending order.
+	public static final String ADD_COMMENTS_TO_SERIES = "hasAuthority('" + StringAuthority.ADD_COMMENTS_TO_SERIES + "')";
 	public static final String ADD_PARTICIPANT = "hasAuthority('" + StringAuthority.ADD_PARTICIPANT + "')";
 	@SuppressWarnings("PMD.LongVariable")
 	public static final String ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION =

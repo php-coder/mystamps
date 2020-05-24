@@ -25,6 +25,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
+
 @RestControllerAdvice
 public class RestExceptionHandler {
 	
@@ -41,6 +43,22 @@ public class RestExceptionHandler {
 		
 		return new ResponseEntity<>(
 			new ValidationErrors(ex.getBindingResult()),
+			HttpStatus.BAD_REQUEST
+		);
+	}
+	
+	// handle cases like "@RequestBody @Valid @NotEmpty List<@Valid PatchRequest> patches"
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ValidationErrors> handleConstraintViolationException(
+		ConstraintViolationException ex) {
+		
+		if (ex == null) {
+			LOG.warn("Couldn't handle ConstraintViolationException that is null");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<>(
+			new ValidationErrors(ex.getConstraintViolations()),
 			HttpStatus.BAD_REQUEST
 		);
 	}

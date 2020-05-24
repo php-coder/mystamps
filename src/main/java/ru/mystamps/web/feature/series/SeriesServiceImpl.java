@@ -118,6 +118,23 @@ public class SeriesServiceImpl implements SeriesService {
 		return id;
 	}
 
+	// @todo #785 SeriesServiceImpl.addComment(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.ADD_COMMENTS_TO_SERIES)
+	public void addComment(Integer seriesId, String comment) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		// We don't touch updated_at/updated_by fields because:
+		// - a comment is a meta information that is visible only by admins.
+		//   From user's point of view, this field doesn't exist
+		// - updated_at field is used by logic for sitemap.xml generation
+		//   and we don't want to affect this
+		seriesDao.addComment(seriesId, comment);
+		
+		log.info("Series #{}: a comment has been added", seriesId);
+	}
+	
 	@Override
 	@Transactional
 	@PreAuthorize("isAuthenticated()")

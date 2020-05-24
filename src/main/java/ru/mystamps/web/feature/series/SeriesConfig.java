@@ -69,6 +69,11 @@ public class SeriesConfig {
 			);
 		}
 		
+		@Bean
+		public RestSeriesController restSeriesController() {
+			return new RestSeriesController(seriesService);
+		}
+		
 	}
 	
 	@Import(Daos.class)

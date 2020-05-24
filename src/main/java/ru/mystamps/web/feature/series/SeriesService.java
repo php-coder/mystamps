@@ -24,6 +24,7 @@ import java.util.List;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);
+	void addComment(Integer seriesId, String comment);
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
 	void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId);
 	long countAll();

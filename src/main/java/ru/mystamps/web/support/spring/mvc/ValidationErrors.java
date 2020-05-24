@@ -21,10 +21,14 @@ import lombok.Getter;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ElementKind;
+import javax.validation.Path.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 public class ValidationErrors {
@@ -36,6 +40,10 @@ public class ValidationErrors {
 			.forEach(this::extractFieldError);
 	}
 	
+	public ValidationErrors(Set<ConstraintViolation<?>> violations) {
+		violations.forEach(this::extractFieldError);
+	}
+	
 	private void extractFieldError(FieldError error) {
 		String name    = error.getField();
 		String message = error.getDefaultMessage();
@@ -43,8 +51,37 @@ public class ValidationErrors {
 		getErrorsByFieldName(name).add(message);
 	}
 	
+	// @todo #785 Improve error handling for requests with a list of objects
+	private void extractFieldError(ConstraintViolation<?> violation) {
+		// Extract a field name from a path: updateSeries.patches[0].value -> value
+		// In this case, we loose index (see Node.getIndex() and Node.isInIterable()) but
+		// as now we always have requests with a single object, that's not severe.
+		// Ideally, for multiple objects we should return ValidationErrors[] instead of
+		// ValidationErrors
+		Node last = getLastOrNull(violation.getPropertyPath());
+		String name;
+		if (last == null || last.getKind() != ElementKind.PROPERTY) {
+			// fallback to a field path for unsupported kinds
+			name = violation.getPropertyPath().toString();
+		} else {
+			name = last.getName();
+		}
+		
+		String message = violation.getMessage();
+		
+		getErrorsByFieldName(name).add(message);
+	}
+	
 	private List<String> getErrorsByFieldName(String name) {
 		return fieldErrors.computeIfAbsent(name, key -> new ArrayList<>());
+	}
+	
+	private static <T> T getLastOrNull(Iterable<T> elements) {
+		T last = null;
+		for (T elem : elements) {
+			last = elem;
+		}
+		return last;
 	}
 	
 }

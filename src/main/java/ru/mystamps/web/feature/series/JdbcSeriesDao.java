@@ -48,6 +48,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.create}")
 	private String createSeriesSql;
 	
+	@Value("${series.add_comment}")
+	private String addCommentSql;
+	
 	@Value("${series.mark_as_modified}")
 	private String markAsModifiedSql;
 	
@@ -134,6 +137,22 @@ public class JdbcSeriesDao implements SeriesDao {
 		);
 		
 		return Integer.valueOf(holder.getKey().intValue());
+	}
+	
+	@Override
+	public void addComment(Integer seriesId, String comment) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", seriesId);
+		params.put("comment", comment);
+		
+		int affected = jdbcTemplate.update(addCommentSql, params);
+		
+		// @todo #785 Update series: handle refuse to update an existing comment gracefully
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after updating series: %d",
+			affected
+		);
 	}
 	
 	/**

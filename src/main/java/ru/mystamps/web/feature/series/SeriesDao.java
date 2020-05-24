@@ -24,6 +24,7 @@ import java.util.List;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
+	void addComment(Integer seriesId, String comment);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	List<SitemapInfoDto> findAllForSitemap();
 	List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang);

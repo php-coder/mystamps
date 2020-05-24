@@ -2,6 +2,7 @@
 - (feature) a series can be marked as a similar to another one
 - (feature) series images can be replaced
 - (feature) add preliminary support for hidden images
+- (feature) admin can add a comment to a series
 
 0.4.3
 - (feature)        add support for Ukrainian hryvnia
