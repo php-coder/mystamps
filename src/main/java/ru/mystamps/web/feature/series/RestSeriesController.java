@@ -60,14 +60,14 @@ class RestSeriesController {
 		}
 		
 		for (PatchRequest patch : patches) {
-			if (patch.op != Operation.add) {
+			if (patch.getOp() != Operation.add) {
 				// @todo #785 Update series: properly fail on non-supported operations
 				continue;
 			}
 			
-			switch (patch.path) {
+			switch (patch.getPath()) {
 				case "/comment":
-					seriesService.addComment(seriesId, patch.value);
+					seriesService.addComment(seriesId, patch.getValue());
 					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path
