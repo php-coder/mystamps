@@ -99,7 +99,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 	}
 
 	render() {
-		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled, sinceYear, tillYear} = this.props;
+		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled, sinceYear, tillYear, l10n} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		const rangeOfYears = this.generateRange(sinceYear, tillYear);
 		
@@ -109,11 +109,11 @@ class AddReleaseYearFormView extends React.PureComponent {
 					<div
 						id="add-release-year-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden' }` }>
-						{ this.props.l10n['t_server_error'] || 'Server error' }
+						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
 						<label className="control-label col-sm-3">
-							{ this.props.l10n['t_release_year'] ||	'Release year' }
+							{ l10n['t_release_year'] || 'Release year' }
 						</label>
 						<div className="col-sm-6">
 							<select
@@ -141,7 +141,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 							type="submit"
 							className="btn btn-primary btn-sm"
 							disabled={ isDisabled }>
-							{ this.props.l10n['t_add'] || 'Add' }
+							{ l10n['t_add'] || 'Add' }
 						</button>
 					</div>
 				</form>

@@ -88,7 +88,7 @@ class AddCommentForm extends React.PureComponent {
 
 class AddCommentFormView extends React.PureComponent {
 	render() {
-		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled} = this.props;
+		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled, l10n} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
@@ -96,11 +96,11 @@ class AddCommentFormView extends React.PureComponent {
 					<div
 						id="add-comment-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-						{ this.props.l10n['t_server_error'] || 'Server error' }
+						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
 						<label className="control-label col-sm-3">
-							{ this.props.l10n['t_comment'] || 'Comment' }
+							{ l10n['t_comment'] || 'Comment' }
 						</label>
 						<div className="col-sm-6">
 							<textarea
@@ -123,7 +123,7 @@ class AddCommentFormView extends React.PureComponent {
 							type="submit"
 							className="btn btn-primary btn-sm"
 							disabled={ isDisabled }>
-							{ this.props.l10n['t_add'] || 'Add' }
+							{ l10n['t_add'] || 'Add' }
 						</button>
 					</div>
 				</form>

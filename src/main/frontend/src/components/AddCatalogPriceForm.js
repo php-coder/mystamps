@@ -118,7 +118,7 @@ class AddCatalogPriceFormView extends React.PureComponent {
 		}
 	}
 	render() {
-		const {handleSubmit, hasServerError, handleChangeCatalog, handleChangePrice, validationErrors, isDisabled, catalog} = this.props;
+		const {handleSubmit, hasServerError, handleChangeCatalog, handleChangePrice, validationErrors, isDisabled, catalog, l10n} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		const [currencySymbol, currencyName] = this.getCurrencyByCatalogName(catalog);
 		return (
@@ -127,11 +127,11 @@ class AddCatalogPriceFormView extends React.PureComponent {
 					<div
 						id="add-catalog-price-failed-msg"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-						{ this.props.l10n['t_server_error'] || 'Server error' }
+						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
 						<label className="control-label col-sm-3">
-							{ this.props.l10n['t_catalog'] || 'Catalog' }
+							{ l10n['t_catalog'] || 'Catalog' }
 						</label>
 						<div className="col-sm-6">
 							<select
@@ -139,30 +139,18 @@ class AddCatalogPriceFormView extends React.PureComponent {
 								name="catalogName"
 								className="form-control"
 								onChange={ handleChangeCatalog }>
-								<option value="michel">
-									{ this.props.l10n['t_michel'] || 'Michel' }
-								</option>
-								<option value="scott">
-									{ this.props.l10n['t_scott'] || 'Scott' }
-								</option>
-								<option value="yvert">
-									{ this.props.l10n['t_yvert'] || 'Yvert et Tellier' }
-								</option>
-								<option value="gibbons">
-									{ this.props.l10n['t_sg'] || 'Stanley Gibbons' }
-								</option>
-								<option value="solovyov">
-									{ this.props.l10n['t_solovyov'] || 'Solovyov' }
-								</option>
-								<option value="zagorski">
-									{ this.props.l10n['t_zagorski'] || 'Zagorski' }
-								</option>
+								<option value="michel">{ l10n['t_michel'] || 'Michel' }</option>
+								<option value="scott">{ l10n['t_scott'] || 'Scott' }</option>
+								<option value="yvert">{ l10n['t_yvert'] || 'Yvert et Tellier' }</option>
+								<option value="gibbons">{ l10n['t_sg'] || 'Stanley Gibbons' }</option>
+								<option value="solovyov">{ l10n['t_solovyov'] || 'Solovyov' }</option>
+								<option value="zagorski">{ l10n['t_zagorski'] || 'Zagorski' }</option>
 							</select>
 						</div>
 					</div>
 					<div className="form-group form-group-sm">
 						<label className="control-label col-sm-3">
-							{ this.props.l10n['t_price'] || 'Price' }
+							{ l10n['t_price'] || 'Price' }
 						</label>
 						<div className="col-sm-3">
 							<div className="input-group">
@@ -188,7 +176,7 @@ class AddCatalogPriceFormView extends React.PureComponent {
 							type="submit"
 							className="btn btn-primary btn-sm"
 							disabled={ isDisabled }>
-							{ this.props.l10n['t_add'] || 'Add' }
+							{ l10n['t_add'] || 'Add' }
 						</button>
 					</div>
 				</form>

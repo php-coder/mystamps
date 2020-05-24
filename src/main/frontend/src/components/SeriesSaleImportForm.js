@@ -110,7 +110,7 @@ class SeriesSaleImportForm extends React.PureComponent {
 
 class SeriesSaleImportFormView extends React.PureComponent {
 	render() {
-		const { hasServerError, handleSubmit, url, handleChange, isDisabled, validationErrors} = this.props;
+		const { hasServerError, handleSubmit, url, handleChange, isDisabled, validationErrors, l10n} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		
 		return (
@@ -119,14 +119,14 @@ class SeriesSaleImportFormView extends React.PureComponent {
 					<div className="row">
 						<div className="col-sm-12">
 							<h5>
-								{ this.props.l10n['t_import_info_who_selling_series'] || 'Import info about selling this series' }
+								{ l10n['t_import_info_who_selling_series'] || 'Import info about selling this series' }
 							</h5>
 						</div>
 					</div>
 					<div className="row">
 						<div id="import-series-sale-failed-msg"
 							className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-							{ this.props.l10n['t_could_not_import_info'] || 'Could not import information from this page' }
+							{ l10n['t_could_not_import_info'] || 'Could not import information from this page' }
 						</div>
 					</div>
 					<div className="row">
@@ -137,7 +137,7 @@ class SeriesSaleImportFormView extends React.PureComponent {
 								
 								<div className="form-group form-group-sm">
 									<label htmlFor="series-sale-url" className="control-label col-sm-3">
-										{ this.props.l10n['t_url'] || 'URL' }
+										{ l10n['t_url'] || 'URL' }
 										<span className="required_field"> *</span>
 									</label>
 									<div className="col-sm-6">
@@ -161,7 +161,7 @@ class SeriesSaleImportFormView extends React.PureComponent {
 										<button type="submit"
 											className="btn btn-primary btn-sm"
 											disabled={ isDisabled }>
-											{ this.props.l10n['t_import_info'] || 'Import info' }
+											{ l10n['t_import_info'] || 'Import info' }
 										</button>
 									</div>
 								</div>
