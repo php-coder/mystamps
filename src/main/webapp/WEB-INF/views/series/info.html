@@ -1050,7 +1050,7 @@
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
 				'l10n': {},
-				'sinceYear': 1840,
+				'sinceYear': [[ ${T(ru.mystamps.web.feature.series.SeriesValidation).MIN_RELEASE_YEAR} ]],
 				'tillYear': new Date().getFullYear()
 			};
 			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
