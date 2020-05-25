@@ -585,7 +585,7 @@
 												th:href="${transaction.transactionUrl}"
 												th:text="${firstPrice + optionalSecondPrice}">100 USD</a>
 											<!--/*/
-											<th:block th:if="${transaction.condition != null}" th:switch="${transaction.condition}">
+											<th:block th:if="${transaction.condition != null}" th:switch="${transaction.condition.toString()}">
 												<span th:text="|(${#strings.unCapitalize('__#{t_cancelled}__')})|" th:case=" 'CANCELLED' ">cancelled</span>
 											/*/-->
 												<span th:text="|(${transaction.condition})|" th:case="*">(MNH)</span>
