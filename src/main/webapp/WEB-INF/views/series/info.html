@@ -392,7 +392,7 @@
 								</div>
 							</div>
 							
-							<div id="add-release-year" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
+							<div id="add-release-year" sec:authorize="hasAuthority('CREATE_SERIES')" th:if="${series.releaseYear == null}"></div>
 							
 							<div id="add-catalog-price" sec:authorize="hasAuthority('CREATE_SERIES')"></div>
 
@@ -1011,13 +1011,6 @@
 
 		<script th:inline="javascript">
 			/*[+
-			var addReleaseYearProps = {
-				'csrfHeaderName': [[ ${_csrf.headerName} ]],
-				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {},
-				'sinceYear': 1840,
-				'tillYear': new Date().getFullYear()
-			};
 			var addCatalogPriceProps = {
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
@@ -1049,9 +1042,19 @@
 			};
 			/* -]*/
 			
-			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
 			renderComponent(AddCatalogPriceForm, addCatalogPriceProps, 'add-catalog-price');
 			renderComponent(AddCatalogNumbersForm, addCatalogNumbersProps, 'add-catalog-numbers');
+			
+			/*[# th:if="${series.releaseYear == null}"]*/
+			var addReleaseYearProps = {
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {},
+				'sinceYear': 1840,
+				'tillYear': new Date().getFullYear()
+			};
+			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
+			/*[/]*/
 		</script>
 		<!--/*/
 		</th:block>
