@@ -1046,6 +1046,7 @@
 			renderComponent(AddCatalogNumbersForm, addCatalogNumbersProps, 'add-catalog-numbers');
 			
 			/*[# th:if="${series.releaseYear == null}"]*/
+			/*[+
 			var addReleaseYearProps = {
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
@@ -1054,6 +1055,7 @@
 				'tillYear': new Date().getFullYear()
 			};
 			renderComponent(AddReleaseYearForm, addReleaseYearProps, 'add-release-year');
+			+]*/
 			/*[/]*/
 		</script>
 		<!--/*/
