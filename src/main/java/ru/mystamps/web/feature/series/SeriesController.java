@@ -252,7 +252,7 @@ public class SeriesController {
 		String name = country.getName();
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
-		List<SeriesInfoDto> series = seriesService.findByCountrySlug(slug, lang);
+		List<SeriesInGalleryDto> series = seriesService.findByCountrySlug(slug, lang);
 		
 		model.addAttribute("countrySlug", slug);
 		model.addAttribute("countryName", name);

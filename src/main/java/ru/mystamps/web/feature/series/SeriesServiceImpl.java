@@ -303,10 +303,10 @@ public class SeriesServiceImpl implements SeriesService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<SeriesInfoDto> findByCountrySlug(String slug, String lang) {
+	public List<SeriesInGalleryDto> findByCountrySlug(String slug, String lang) {
 		Validate.isTrue(slug != null, "Country slug must be non null");
 		
-		return seriesDao.findByCountrySlugAsSeriesInfo(slug, lang);
+		return seriesDao.findByCountrySlug(slug, lang);
 	}
 	
 	@Override

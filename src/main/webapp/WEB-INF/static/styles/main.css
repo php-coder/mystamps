@@ -108,3 +108,16 @@ label {
 .number-input {
 	width: 4em;
 }
+
+.image-gallery {
+	display: flex;
+	flex-wrap: wrap;
+}
+.image-gallery figure {
+	/* margin: <top> <right> <bottom> <left> */
+	margin: 15px 0 15px 15px;
+}
+.image-gallery figcaption {
+	margin-top: 5px;
+	text-align: center;
+}

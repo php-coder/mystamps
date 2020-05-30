@@ -37,6 +37,7 @@ import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.AddSeriesForm;
 import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
+import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
 import ru.mystamps.web.feature.series.SeriesLinkDto;
 import ru.mystamps.web.feature.series.SitemapInfoDto;
@@ -151,6 +152,17 @@ public final class TestObjects {
 			15, 10, Random.issueYear(),
 			16,
 			Random.perforated()
+		);
+	}
+	
+	public static SeriesInGalleryDto createSeriesInGalleryDto() {
+		return new SeriesInGalleryDto(
+			Random.id(),
+			nullOr(Random.issueYear()),
+			Random.quantity(),
+			Random.perforated(),
+			Random.id(),
+			Random.categoryName()
 		);
 	}
 	

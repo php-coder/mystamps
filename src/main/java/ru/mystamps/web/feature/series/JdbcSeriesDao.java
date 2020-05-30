@@ -243,12 +243,12 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public List<SeriesInfoDto> findByCountrySlugAsSeriesInfo(String slug, String lang) {
+	public List<SeriesInGalleryDto> findByCountrySlug(String slug, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("slug", slug);
 		params.put("lang", lang);
 		
-		return jdbcTemplate.query(findByCountrySlugSql, params, RowMappers::forSeriesInfoDto);
+		return jdbcTemplate.query(findByCountrySlugSql, params, RowMappers::forSeriesInGalleryDto);
 	}
 	
 	/**

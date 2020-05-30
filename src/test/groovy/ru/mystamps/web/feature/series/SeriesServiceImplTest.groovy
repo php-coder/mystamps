@@ -1059,13 +1059,13 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findByCountrySlug() should call dao and return result"() {
 		given:
-			SeriesInfoDto series = TestObjects.createSeriesInfoDto()
+			SeriesInGalleryDto series = TestObjects.createSeriesInGalleryDto()
 		and:
-			List<SeriesInfoDto> expectedResult = [ series ]
+			List<SeriesInGalleryDto> expectedResult = [ series ]
 		and:
-			seriesDao.findByCountrySlugAsSeriesInfo(_ as String, _ as String) >> expectedResult
+			seriesDao.findByCountrySlug(_ as String, _ as String) >> expectedResult
 		when:
-			List<SeriesInfoDto> result = service.findByCountrySlug('germany', Random.lang())
+			List<SeriesInGalleryDto> result = service.findByCountrySlug('germany', Random.lang())
 		then:
 			result == expectedResult
 	}

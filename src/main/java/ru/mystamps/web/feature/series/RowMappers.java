@@ -29,6 +29,8 @@ import java.util.Date;
 
 import static ru.mystamps.web.common.RowMappers.createLinkEntityDto;
 
+// complains on "release_year", "quantity" and "perforated"
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class RowMappers {
 	
 	private RowMappers() {
@@ -79,6 +81,26 @@ final class RowMappers {
 			releaseYear,
 			quantity,
 			perforated
+		);
+	}
+	
+	/* default */ static SeriesInGalleryDto forSeriesInGalleryDto(ResultSet rs, int unused)
+		throws SQLException {
+		
+		Integer seriesId    = rs.getInt("id");
+		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity    = rs.getInt("quantity");
+		Boolean perforated  = rs.getBoolean("perforated");
+		Integer previewId   = JdbcUtils.getInteger(rs, "preview_id");
+		String category     = rs.getString("category");
+		
+		return new SeriesInGalleryDto(
+			seriesId,
+			releaseYear,
+			quantity,
+			perforated,
+			previewId,
+			category
 		);
 	}
 	

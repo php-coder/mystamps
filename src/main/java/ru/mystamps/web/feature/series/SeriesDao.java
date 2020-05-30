@@ -32,7 +32,7 @@ public interface SeriesDao {
 	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategorySlugAsSeriesInfo(String slug, String lang);
-	List<SeriesInfoDto> findByCountrySlugAsSeriesInfo(String slug, String lang);
+	List<SeriesInGalleryDto> findByCountrySlug(String slug, String lang);
 	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
 
 	long countAll();
