@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 @RequiredArgsConstructor
 public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	
@@ -39,7 +41,7 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	
 	@Override
 	public List<String> add(Set<String> catalogNumbers) {
-		Validate.validState(!"".equals(addCatalogNumberSql), "Query must be non empty");
+		Validate.validState(!EMPTY.equals(addCatalogNumberSql), "Query must be non empty");
 		
 		List<String> inserted = new ArrayList<>();
 		for (String number : catalogNumbers) {
@@ -59,7 +61,7 @@ public class JdbcStampsCatalogDao implements StampsCatalogDao {
 	public void addToSeries(Integer seriesId, Set<String> catalogNumbers) {
 		Validate.validState(seriesId != null, "Series id must be non null");
 		Validate.validState(!catalogNumbers.isEmpty(), "Catalog numbers must be non empty");
-		Validate.validState(!"".equals(addCatalogNumbersToSeriesSql), "Query must be non empty");
+		Validate.validState(!EMPTY.equals(addCatalogNumbersToSeriesSql), "Query must be non empty");
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put("series_id", seriesId);

@@ -77,6 +77,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
 import static ru.mystamps.web.common.ControllerUtils.redirectTo;
 
 @Controller
@@ -107,7 +109,7 @@ public class SeriesController {
 	
 	@InitBinder("addSeriesForm")
 	protected void initSeriesFormBinder(WebDataBinder binder) {
-		StringTrimmerEditor editor = new StringTrimmerEditor(" ", true);
+		StringTrimmerEditor editor = new StringTrimmerEditor(SPACE, true);
 		binder.registerCustomEditor(String.class, "michelNumbers", editor);
 		binder.registerCustomEditor(String.class, "scottNumbers", editor);
 		binder.registerCustomEditor(String.class, "yvertNumbers", editor);
@@ -555,8 +557,8 @@ public class SeriesController {
 	
 	@GetMapping(SeriesUrl.SEARCH_SERIES_BY_CATALOG)
 	public String searchSeriesByCatalog(
-		@RequestParam(name = "catalogNumber", defaultValue = "") String catalogNumber,
-		@RequestParam(name = "catalogName", defaultValue = "") String catalogName,
+		@RequestParam(name = "catalogNumber", defaultValue = EMPTY) String catalogNumber,
+		@RequestParam(name = "catalogName", defaultValue = EMPTY) String catalogName,
 		@RequestParam(name = "inCollection", defaultValue = "false") Boolean inCollection,
 		@CurrentUser Integer currentUserId,
 		Model model,

@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.regex.Pattern;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 /**
  * Implementation of {@link HeaderWriter} that is adding CSP header depending on the current URL.
  */
@@ -39,7 +41,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private static final String CSP_REPORT_ONLY_HEADER = "Content-Security-Policy-Report-Only";
 	
 	private static final String COLLECTION_INFO_PAGE_PATTERN =
-		CollectionUrl.INFO_COLLECTION_PAGE.replace("{slug}", "");
+		CollectionUrl.INFO_COLLECTION_PAGE.replace("{slug}", EMPTY);
 	
 	private static final Pattern SERIES_INFO_PAGE_PATTERN =
 		Pattern.compile(SeriesUrl.SERIES_INFO_PAGE_REGEXP);

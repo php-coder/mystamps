@@ -55,6 +55,7 @@ import static io.qala.datagen.RandomShortApi.sampleMultiple;
 import static io.qala.datagen.RandomValue.between;
 import static io.qala.datagen.StringModifier.Impls.multipleOf;
 import static io.qala.datagen.StringModifier.Impls.oneOf;
+import static org.apache.commons.lang3.StringUtils.SPACE;
 
 public final class Random {
 	
@@ -104,7 +105,7 @@ public final class Random {
 			.with(multipleOf(" -_"))
 			.alphanumeric();
 		
-		if (StringUtils.containsAny(login, "  ", "--", "__")) {
+		if (StringUtils.containsAny(login, SPACE, "--", "__")) {
 			return login();
 		}
 		
@@ -147,8 +148,8 @@ public final class Random {
 			.with(oneOf(" -"))
 			.english();
 		
-		if (StringUtils.startsWithAny(name, " ", "-")
-			|| StringUtils.endsWithAny(name, " ", "-")) {
+		if (StringUtils.startsWithAny(name, SPACE, "-")
+			|| StringUtils.endsWithAny(name, SPACE, "-")) {
 			return countryName();
 		}
 		
@@ -167,8 +168,8 @@ public final class Random {
 			.with(oneOf(" -"))
 			.english();
 		
-		if (StringUtils.startsWithAny(name, " ", "-")
-			|| StringUtils.endsWithAny(name, " ", "-")) {
+		if (StringUtils.startsWithAny(name, SPACE, "-")
+			|| StringUtils.endsWithAny(name, SPACE, "-")) {
 			return countryName();
 		}
 		

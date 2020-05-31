@@ -21,6 +21,8 @@ import org.apache.commons.lang3.Validate;
 
 import java.util.Locale;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 public final class SlugUtils {
 	
 	private SlugUtils() {
@@ -35,9 +37,9 @@ public final class SlugUtils {
 			// replace multiple hyphens by one
 			.replaceAll("-{2,}", "-")
 			// remove leading hyphen
-			.replaceAll("^-", "")
+			.replaceAll("^-", EMPTY)
 			// remove ending hyphen
-			.replaceAll("-$", "");
+			.replaceAll("-$", EMPTY);
 	}
 	
 }

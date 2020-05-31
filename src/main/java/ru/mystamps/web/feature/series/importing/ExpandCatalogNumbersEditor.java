@@ -24,6 +24,9 @@ import ru.mystamps.web.feature.series.CatalogUtils;
 import java.beans.PropertyEditorSupport;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
+
 /**
  * Expands range of catalog numbers (1-3) into a comma-separated list (1,2,3).
  *
@@ -32,10 +35,6 @@ import java.util.Set;
 // @todo #694 ExpandCatalogNumbersEditor: add unit tests
 @RequiredArgsConstructor
 public class ExpandCatalogNumbersEditor extends PropertyEditorSupport {
-	
-	// We can't use StringUtils.EMPTY constant from commons-lang because
-	// we are using StringUtils from Spring.
-	private static final String EMPTY = "";
 	
 	@Override
 	public void setAsText(String text) {
@@ -50,7 +49,7 @@ public class ExpandCatalogNumbersEditor extends PropertyEditorSupport {
 			//
 			// @todo #694 ExpandCatalogNumbersEditor: find a better way of editors composition
 			String value = text.trim();
-			value = StringUtils.deleteAny(value, " ");
+			value = StringUtils.deleteAny(value, SPACE);
 			
 			if (!value.equals(EMPTY)) {
 				try {

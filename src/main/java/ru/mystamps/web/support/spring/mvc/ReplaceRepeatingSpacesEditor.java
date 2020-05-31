@@ -22,6 +22,9 @@ import lombok.RequiredArgsConstructor;
 import java.beans.PropertyEditorSupport;
 import java.util.regex.Pattern;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.SPACE;
+
 /**
  * @author Maxim Shestakov
  * @author Slava Semushin
@@ -36,10 +39,10 @@ public class ReplaceRepeatingSpacesEditor extends PropertyEditorSupport {
 		String text = name.trim();
 
 		if (text.contains("  ")) {
-			text = REPEATING_SPACES.matcher(text).replaceAll(" ");
+			text = REPEATING_SPACES.matcher(text).replaceAll(SPACE);
 		}
 
-		if (emptyAsNull && "".equals(text)) { // NOPMD: AvoidLiteralsInIfCondition (it's ok for me)
+		if (emptyAsNull && EMPTY.equals(text)) {
 			text = null; // NOPMD: NullAssignment (we need it)
 		}
 
