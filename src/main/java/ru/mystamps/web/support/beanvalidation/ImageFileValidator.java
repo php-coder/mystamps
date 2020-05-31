@@ -28,12 +28,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
+import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
+import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
+
 public class ImageFileValidator implements ConstraintValidator<ImageFile, MultipartFile> {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ImageFileValidator.class);
-	
-	private static final String JPEG_CONTENT_TYPE = "image/jpeg";
-	private static final String PNG_CONTENT_TYPE  = "image/png";
 	
 	// see https://en.wikipedia.org/wiki/JPEG#Syntax_and_structure
 	// CheckStyle: ignore NoWhitespaceAfterCheck for next 3 lines
@@ -111,7 +111,7 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		}
 
 		String contentType = file.getContentType();
-		if (!StringUtils.equalsAny(contentType, PNG_CONTENT_TYPE, JPEG_CONTENT_TYPE)) {
+		if (!StringUtils.equalsAny(contentType, IMAGE_PNG_VALUE, IMAGE_JPEG_VALUE)) {
 			LOG.debug("Reject file with content type '{}'", contentType);
 			return false;
 		}

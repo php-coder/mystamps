@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import ru.mystamps.web.feature.account.AccountConfig;
 import ru.mystamps.web.feature.category.CategoryConfig;
 import ru.mystamps.web.feature.collection.CollectionConfig;
@@ -64,7 +65,10 @@ public class ServicesConfig {
 		return new TimedDownloaderService(
 			LoggerFactory.getLogger(TimedDownloaderService.class),
 			new HttpURLConnectionDownloaderService(
-				new String[]{"image/jpeg", "image/png"},
+				new String[]{
+					MediaType.IMAGE_JPEG_VALUE,
+					MediaType.IMAGE_PNG_VALUE
+				},
 				env.getRequiredProperty("app.downloader.timeout", Integer.class)
 			)
 		);
@@ -75,7 +79,11 @@ public class ServicesConfig {
 		return new TimedDownloaderService(
 			LoggerFactory.getLogger(TimedDownloaderService.class),
 			new HttpURLConnectionDownloaderService(
-				new String[]{"text/html", "image/jpeg", "image/png"},
+				new String[]{
+					MediaType.TEXT_HTML_VALUE,
+					MediaType.IMAGE_JPEG_VALUE,
+					MediaType.IMAGE_PNG_VALUE
+				},
 				env.getRequiredProperty("app.downloader.timeout", Integer.class)
 			)
 		);

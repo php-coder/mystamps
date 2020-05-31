@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -50,8 +51,8 @@ public class AuthenticationFailureListener
 		String method  = request.getMethod();
 		String page    = request.getRequestURI();
 		String ip      = request.getRemoteAddr();
-		String referer = request.getHeader("referer");
-		String agent   = request.getHeader("user-agent");
+		String referer = request.getHeader(HttpHeaders.REFERER);
+		String agent   = request.getHeader(HttpHeaders.USER_AGENT);
 		Date date      = new Date(event.getTimestamp());
 		
 		siteService.logAboutFailedAuthentication(page, method, null, ip, referer, agent, date);

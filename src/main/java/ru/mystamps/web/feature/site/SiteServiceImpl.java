@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
+import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.feature.site.SiteDb.SuspiciousActivity;
@@ -97,8 +98,8 @@ public class SiteServiceImpl implements SiteService {
 			request.getMethod(),
 			SecurityContextUtils.getUserId(),
 			request.getRemoteAddr(),
-			request.getHeader("referer"),
-			request.getHeader("user-agent"),
+			request.getHeader(HttpHeaders.REFERER),
+			request.getHeader(HttpHeaders.USER_AGENT),
 			new Date()
 		);
 		
@@ -117,8 +118,8 @@ public class SiteServiceImpl implements SiteService {
 			request.getMethod(),
 			SecurityContextUtils.getUserId(),
 			request.getRemoteAddr(),
-			request.getHeader("referer"),
-			request.getHeader("user-agent"),
+			request.getHeader(HttpHeaders.REFERER),
+			request.getHeader(HttpHeaders.USER_AGENT),
 			new Date()
 		);
 		

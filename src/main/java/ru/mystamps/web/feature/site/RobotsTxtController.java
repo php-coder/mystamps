@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.site;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.feature.account.AccountUrl;
@@ -37,7 +38,7 @@ public class RobotsTxtController {
 	@GetMapping(SiteUrl.ROBOTS_TXT)
 	@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 	public void getRobotsText(HttpServletResponse response) {
-		response.setContentType("text/plain");
+		response.setContentType(MediaType.TEXT_PLAIN_VALUE);
 		response.setCharacterEncoding("UTF-8");
 		
 		try {

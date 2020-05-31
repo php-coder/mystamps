@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.site;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.mystamps.web.feature.series.SeriesService;
@@ -46,7 +47,7 @@ public class SitemapController {
 	
 	@GetMapping(SiteUrl.SITEMAP_XML)
 	public void getSitemapXml(HttpServletResponse response) {
-		response.setContentType("application/xml");
+		response.setContentType(MediaType.APPLICATION_XML_VALUE);
 		response.setCharacterEncoding("UTF-8");
 		
 		DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);

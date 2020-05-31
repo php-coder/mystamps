@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.site;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +46,7 @@ public class CspController {
 	public void handleReport(
 		@RequestBody String body,
 		HttpServletRequest request,
-		@RequestHeader(name = "user-agent", defaultValue = UNKNOWN) String userAgent) {
+		@RequestHeader(name = HttpHeaders.USER_AGENT, defaultValue = UNKNOWN) String userAgent) {
 		
 		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
 		LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);

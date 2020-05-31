@@ -22,6 +22,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StreamUtils;
 import ru.mystamps.web.feature.series.DownloadResult.Code;
@@ -131,7 +132,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	private static void configureUserAgent(URLConnection conn) {
 		// FIXME: make it configurable
 		conn.setRequestProperty(
-			"User-Agent",
+			HttpHeaders.USER_AGENT,
 			"Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:46.0) Gecko/20100101 Firefox/46.0"
 		);
 	}
