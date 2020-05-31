@@ -218,10 +218,10 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	//
-	// Tests for findAllAsLinkEntities(String)
+	// Tests for findAllAsLinkEntities()
 	//
 	
-	def 'findAllAsLinkEntities(String) should call dao'() {
+	def 'findAllAsLinkEntities() should call dao'() {
 		given:
 			LinkEntityDto country1 = new LinkEntityDto(1, 'first-country', 'First Country')
 		and:
@@ -237,7 +237,7 @@ class CountryServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	def "findAllAsLinkEntities(String) should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
+	def "findAllAsLinkEntities() should pass language '#expectedLanguage' to dao"(String expectedLanguage) {
 		when:
 			service.findAllAsLinkEntities(expectedLanguage)
 		then:
