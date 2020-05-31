@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.Currency;
+import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.category.CategoryValidation;
 import ru.mystamps.web.feature.country.CountryService;
@@ -508,7 +509,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			return null;
 		}
 		
-		String[] candidates = StringUtils.split(fragment, ' ');
+		String[] candidates = StringUtils.split(
+			StringUtils.upperCase(fragment, LocaleUtils.RUSSIAN),
+			' '
+		);
 		for (String candidate : candidates) {
 			switch(candidate) {
 				case "MNH":
@@ -517,6 +521,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 					SeriesCondition condition = SeriesCondition.valueOf(candidate);
 					log.debug("Condition is {}", condition);
 					return condition;
+				case "ГАШ.":
+					log.debug("Condition is CANCELLED");
+					return SeriesCondition.CANCELLED;
 			}
 		}
 		
