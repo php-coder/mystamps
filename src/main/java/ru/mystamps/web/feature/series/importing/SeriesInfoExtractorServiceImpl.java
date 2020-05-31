@@ -512,6 +512,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		for (String candidate : candidates) {
 			switch(candidate) {
 				case "MNH":
+				case "MNHOG":
 				case "MVLH":
 					SeriesCondition condition = SeriesCondition.valueOf(candidate);
 					log.debug("Condition is {}", condition);

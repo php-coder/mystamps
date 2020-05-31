@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series.sale;
 
 public enum SeriesCondition {
 	MNH,
+	MNHOG,
 	MVLH,
 	CANCELLED;
 }
