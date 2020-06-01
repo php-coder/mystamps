@@ -98,7 +98,8 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	@NotNull
 	private Boolean perforated;
 	
-	@CatalogNumbers
+	// @todo #1277 /series/add: add integration test to check that Michel numbers may contain letter
+	@CatalogNumbers(allowLetters = true)
 	private String michelNumbers;
 	
 	@Price
