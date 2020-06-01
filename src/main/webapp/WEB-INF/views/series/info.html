@@ -1049,9 +1049,14 @@
 			/*[# th:if="${series.releaseYear == null}"]*/
 			/*[+
 			var addReleaseYearProps = {
+				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
-				'l10n': {},
+				'l10n': {
+					't_server_error': [[ #{t_server_error} ]],
+					't_year':         [[ #{t_year} ]],
+					't_add':          [[ #{t_add} ]]
+				},
 				'sinceYear': [[ ${T(ru.mystamps.web.feature.series.SeriesValidation).MIN_RELEASE_YEAR} ]],
 				'tillYear': new Date().getFullYear()
 			};

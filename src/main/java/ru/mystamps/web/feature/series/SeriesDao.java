@@ -25,6 +25,7 @@ import java.util.List;
 public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
 	void addComment(Integer seriesId, String comment);
+	void addReleaseYear(AddReleaseYearDbDto dto);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	List<SitemapInfoDto> findAllForSitemap();
 	List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang);

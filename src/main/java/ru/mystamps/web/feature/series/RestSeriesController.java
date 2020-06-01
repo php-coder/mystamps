@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mystamps.web.support.spring.mvc.PatchRequest;
 import ru.mystamps.web.support.spring.mvc.PatchRequest.Operation;
+import ru.mystamps.web.support.spring.security.CurrentUser;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -42,11 +43,12 @@ class RestSeriesController {
 	
 	// @todo #785 Update series: add integration test
 	// @todo #785 Update series: add validation for a comment
+	// @todo #1343 Update series: add validation for a release year
 	@PatchMapping(SeriesUrl.INFO_SERIES_PAGE)
-	@SuppressWarnings("PMD.TooFewBranchesForASwitchStatement")
 	public ResponseEntity<Void> updateSeries(
 		@PathVariable("id") Integer seriesId,
 		@RequestBody @Valid @NotEmpty List<@Valid PatchRequest> patches,
+		@CurrentUser Integer currentUserId,
 		HttpServletResponse response) throws IOException {
 		
 		if (seriesId == null) {
@@ -68,6 +70,12 @@ class RestSeriesController {
 			switch (patch.getPath()) {
 				case "/comment":
 					seriesService.addComment(seriesId, patch.getValue());
+					break;
+				case "/release_year":
+					seriesService.addReleaseYear(
+						seriesId,
+						Integer.valueOf(patch.getValue()),
+						currentUserId);
 					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path

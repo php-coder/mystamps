@@ -51,6 +51,9 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.add_comment}")
 	private String addCommentSql;
 	
+	@Value("${series.add_release_year}")
+	private String addReleaseYearSql;
+	
 	@Value("${series.mark_as_modified}")
 	private String markAsModifiedSql;
 	
@@ -155,6 +158,24 @@ public class JdbcSeriesDao implements SeriesDao {
 		);
 	}
 	
+	@Override
+	public void addReleaseYear(AddReleaseYearDbDto dto) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", dto.getSeriesId());
+		params.put("release_year", dto.getReleaseYear());
+		params.put("updated_at", dto.getUpdatedAt());
+		params.put("updated_by", dto.getUpdatedBy());
+		
+		int affected = jdbcTemplate.update(addReleaseYearSql, params);
+		
+		// @todo #1343 Update series: handle refuse to update an existing release year gracefully
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after updating series: %d",
+			affected
+		);
+	}
+
 	/**
 	 * @author Sergey Chechenev
 	 */

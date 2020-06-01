@@ -135,6 +135,28 @@ public class SeriesServiceImpl implements SeriesService {
 		log.info("Series #{}: a comment has been added", seriesId);
 	}
 	
+	// @todo #1343 SeriesServiceImpl.addReleaseYear(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	public void addReleaseYear(Integer seriesId, Integer year, Integer userId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(year != null, "Release year must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
+		
+		AddReleaseYearDbDto dto = new AddReleaseYearDbDto();
+		dto.setSeriesId(seriesId);
+		dto.setReleaseYear(year);
+		dto.setUpdatedBy(userId);
+		
+		Date now = new Date();
+		dto.setUpdatedAt(now);
+		
+		seriesDao.addReleaseYear(dto);
+		
+		log.info("Series #{}: release year set to {}", seriesId, year);
+	}
+	
 	@Override
 	@Transactional
 	@PreAuthorize("isAuthenticated()")

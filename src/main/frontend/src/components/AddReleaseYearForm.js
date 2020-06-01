@@ -55,8 +55,8 @@ class AddReleaseYearForm extends React.PureComponent {
 				const data = response.data;
 				if (data.hasOwnProperty('fieldErrors')) {
 					const fieldErrors = [];
-					if (data.fieldErrors.year) {
-						fieldErrors.push(...data.fieldErrors.year);
+					if (data.fieldErrors.value) {
+						fieldErrors.push(...data.fieldErrors.value);
 					}
 					this.setState({
 						isDisabled: false,
@@ -114,7 +114,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 					</div>
 					<div className="form-group form-group-sm">
 						<label className="control-label col-sm-3">
-							{ l10n['t_release_year'] || 'Release year' }
+							{ l10n['t_year'] || 'Year' }
 						</label>
 						<div className="col-sm-6">
 							<select
