@@ -90,7 +90,7 @@ Invalid Catalog Numbers Should Be Rejected
 	...                            Any number may end with a latin letter in lower case
 	Element Text Should Be         id:michelNumbers.errors    Value must be a list of numbers separated by comma
 	Element Text Should Be         id:scottNumbers.errors     ${alnumMessage}
-	Element Text Should Be         id:yvertNumbers.errors     Value must be a list of numbers separated by comma
+	Element Text Should Be         id:yvertNumbers.errors     ${alnumMessage}
 	Element Text Should Be         id:gibbonsNumbers.errors   Value must be a list of numbers separated by comma
 	Element Text Should Be         id:solovyovNumbers.errors  Value must be a list of numbers separated by comma
 	Element Text Should Be         id:zagorskiNumbers.errors  Value must be a list of numbers separated by comma

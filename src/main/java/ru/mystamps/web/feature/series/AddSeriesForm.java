@@ -112,7 +112,8 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 	@Price
 	private BigDecimal scottPrice;
 	
-	@CatalogNumbers
+	// @todo #1421 /series/add: add integration test to check that Yvert numbers may contain letters
+	@CatalogNumbers(allowLetters = true)
 	private String yvertNumbers;
 	
 	@Price
