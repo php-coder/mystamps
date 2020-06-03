@@ -22,5 +22,6 @@ public enum SeriesCondition {
 	MNH,
 	MNHOG,
 	MVLH,
+	CTO,
 	CANCELLED;
 }

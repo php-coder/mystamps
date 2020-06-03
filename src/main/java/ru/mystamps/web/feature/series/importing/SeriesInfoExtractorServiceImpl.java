@@ -515,6 +515,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		);
 		for (String candidate : candidates) {
 			switch(candidate) {
+				case "CTO":
 				case "MNH":
 				case "MNHOG":
 				case "MVLH":
