@@ -499,10 +499,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	}
 	
 	// @todo #1326 SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests
-	@SuppressWarnings({
-		"checkstyle:missingswitchdefault",
-		"PMD.SwitchStmtsShouldHaveDefault"
-	})
+	@SuppressWarnings("PMD.AvoidBranchingStatementAsLastInLoop")
 	/* default */ SeriesCondition extractCondition(String fragment) {
 		if (StringUtils.isBlank(fragment)) {
 			return null;
@@ -513,20 +510,24 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			' '
 		);
 		for (String candidate : candidates) {
+			SeriesCondition condition;
 			switch(candidate) {
 				case "CTO":
 				case "MNH":
 				case "MNHOG":
 				case "MVLH":
-					SeriesCondition condition = SeriesCondition.valueOf(candidate);
-					log.debug("Condition is {}", condition);
-					return condition;
+					condition = SeriesCondition.valueOf(candidate);
+					break;
 				case "ГАШ":
 				case "ГАШ.":
 				case "ГАШЕНЫЕ":
-					log.debug("Condition is CANCELLED");
-					return SeriesCondition.CANCELLED;
+					condition = SeriesCondition.CANCELLED;
+					break;
+				default:
+					continue;
 			}
+			log.debug("Condition is {}", condition);
+			return condition;
 		}
 		
 		log.debug("Could not extract condition from a fragment");
