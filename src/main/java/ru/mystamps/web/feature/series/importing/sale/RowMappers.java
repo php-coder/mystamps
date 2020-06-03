@@ -19,6 +19,7 @@ package ru.mystamps.web.feature.series.importing.sale;
 
 import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.common.JdbcUtils;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -41,6 +42,10 @@ final class RowMappers {
 		Currency currency = JdbcUtils.getCurrency(rs, "currency");
 		BigDecimal altPrice = rs.getBigDecimal("alt_price");
 		Currency altCurrency = JdbcUtils.getCurrency(rs, "alt_currency");
+		
+		// LATER: consider extracting this into a helper method
+		String conditionField = rs.getString("cond");
+		SeriesCondition condition = rs.wasNull() ? null : SeriesCondition.valueOf(conditionField);
 
 		return new SeriesSaleParsedDataDto(
 			sellerId,
@@ -50,7 +55,8 @@ final class RowMappers {
 			price,
 			currency,
 			altPrice,
-			altCurrency
+			altCurrency,
+			condition
 		);
 	}
 	

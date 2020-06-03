@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	
+	<changeSet id="add-condition-field-to-series_sales_import_parsed_data" author="php-coder" context="scheme">
+		
+		<addColumn tableName="series_sales_import_parsed_data">
+			<column name="cond"
+				type="VARCHAR(9)"
+				afterColumn="alt_currency"
+				remarks="Must match to the series_sales.cond field" />
+		</addColumn>
+		
+	</changeSet>
+	
+</databaseChangeLog>

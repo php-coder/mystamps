@@ -35,6 +35,7 @@ import ru.mystamps.web.feature.series.importing.event.ParsingFailed;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
@@ -229,6 +230,12 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		if (altPrice != null) {
 			seriesSalesParsedData.setAltPrice(altPrice);
 			seriesSalesParsedData.setAltCurrency(seriesInfo.getAltCurrency());
+		}
+		
+		// @todo #1326 SeriesImportServiceImpl.saveParsedData(): add unit test for condition
+		SeriesCondition condition = seriesInfo.getCondition();
+		if (condition != null) {
+			seriesSalesParsedData.setCondition(condition.toString());
 		}
 		
 		// IMPORTANT: don't add code that modifies database above this line!

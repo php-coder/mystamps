@@ -49,6 +49,9 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	private BigDecimal altPrice;
 	private Currency altCurrency;
 	
+	// @todo #1326 Series import: add integration test for series condition
+	private SeriesCondition condition;
+	
 	// We don't expose these fields to a form because we know already what
 	// values should be. Even if user will try to provide its own values, it's not
 	// a problem as we always rewrite them in the controller.
@@ -62,11 +65,6 @@ public class ImportSeriesSalesForm implements AddSeriesSalesDto {
 	
 	@Override
 	public Integer getBuyerId() {
-		return null;
-	}
-	
-	@Override
-	public SeriesCondition getCondition() {
 		return null;
 	}
 	

@@ -522,6 +522,32 @@
 									</td>
 								</tr>
 								
+								<tr th:if="${hasSalesInfo and (importSeriesForm.seriesSale.condition != null)}"
+									th:classappend="${#fields.hasErrors('seriesSale.condition') ? 'has-error' : ''}">
+									<th>
+										<label for="condition" class="control-label" th:text="#{t_condition}">
+											Condition
+										</label>
+									</th>
+									<td>
+										<select id="condition" class="form-control" th:field="*{seriesSale.condition}" th:disabled="${disabled}">
+											<option value=""></option>
+											<option value="MNH">MNH</option>
+											<option value="MNHOG">MNHOG</option>
+											<option value="MVLH">MVLH</option>
+											<option value="CTO">CTO</option>
+											<option value="CANCELLED" th:text="#{t_cancelled}">Сancelled</option>
+										</select>
+										<!--/*/
+										<span id="condition.errors"
+											class="help-block"
+											th:if="${#fields.hasErrors('seriesSale.condition')}"
+											th:each="error : ${#fields.errors('seriesSale.condition')}"
+											th:text="${error}"></span>
+										/*/-->
+									</td>
+								</tr>
+								
 								<tr th:if="${hasSalesInfo and (importSeriesForm.seriesSale.price != null or !disabled)}" th:classappend="${#fields.hasErrors('seriesSale.price') or #fields.hasErrors('seriesSale.currency') ? 'has-error' : ''}">
 									<th>
 										<label for="price" class="control-label" th:text="#{t_price}">

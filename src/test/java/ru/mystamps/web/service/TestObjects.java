@@ -436,7 +436,8 @@ public final class TestObjects {
 			Random.currency(),
 			Random.price(),
 			// FIXME: alternative currency shouldn't match with currency
-			Random.currency()
+			Random.currency(),
+			nullOr(Random.seriesCondition())
 		);
 	}
 	

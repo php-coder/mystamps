@@ -5,6 +5,7 @@
 - (feature)     admin can add a comment to a series
 - (feature)     admin can add a release year to a series
 - (improvement) on a country info page show the series with an image
+- (feature)     add a condition (MNH/MNHOG/MVLH/CTO/cancelled) to a series sale
 
 0.4.3
 - (feature)        add support for Ukrainian hryvnia

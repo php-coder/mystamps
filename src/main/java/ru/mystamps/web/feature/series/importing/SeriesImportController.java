@@ -171,6 +171,7 @@ public class SeriesImportController {
 			seriesSaleForm.setCurrency(seriesSale.getCurrency());
 			seriesSaleForm.setAltPrice(seriesSale.getAltPrice());
 			seriesSaleForm.setAltCurrency(seriesSale.getAltCurrency());
+			seriesSaleForm.setCondition(seriesSale.getCondition());
 			
 			ImportSellerForm sellerForm = new ImportSellerForm();
 			sellerForm.setName(seriesSale.getSellerName());

@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series.importing.sale;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.common.Currency;
+import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 
@@ -34,4 +35,5 @@ public class SeriesSaleParsedDataDto {
 	private final Currency currency;
 	private final BigDecimal altPrice;
 	private final Currency altCurrency;
+	private final SeriesCondition condition;
 }

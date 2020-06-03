@@ -36,6 +36,7 @@ public class SeriesSalesParsedDataDbDto {
 	private String currency;
 	private BigDecimal altPrice;
 	private String altCurrency;
+	private String condition;
 	private Date createdAt;
 	private Date updatedAt;
 	
