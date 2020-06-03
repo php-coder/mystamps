@@ -523,6 +523,13 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 				case "ГАШЕНЫЕ":
 					condition = SeriesCondition.CANCELLED;
 					break;
+				// written in Russian
+				case "СТО":
+					condition = SeriesCondition.CTO;
+					break;
+				case "MNH**":
+					condition = SeriesCondition.MNH;
+					break;
 				default:
 					continue;
 			}
