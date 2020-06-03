@@ -501,7 +501,6 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	// @todo #1326 SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests
 	@SuppressWarnings({
 		"checkstyle:missingswitchdefault",
-		"PMD.TooFewBranchesForASwitchStatement",
 		"PMD.SwitchStmtsShouldHaveDefault"
 	})
 	/* default */ SeriesCondition extractCondition(String fragment) {
@@ -522,7 +521,9 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 					SeriesCondition condition = SeriesCondition.valueOf(candidate);
 					log.debug("Condition is {}", condition);
 					return condition;
+				case "ГАШ":
 				case "ГАШ.":
+				case "ГАШЕНЫЕ":
 					log.debug("Condition is CANCELLED");
 					return SeriesCondition.CANCELLED;
 			}
