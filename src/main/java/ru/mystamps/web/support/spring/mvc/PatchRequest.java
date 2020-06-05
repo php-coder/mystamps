@@ -48,6 +48,10 @@ public class PatchRequest {
 	@NotEmpty
 	private String value;
 
+	public Integer integerValue() {
+		return Integer.valueOf(value);
+	}
+	
 	public BigDecimal bigDecimalValue() {
 		return new BigDecimal(value);
 	}

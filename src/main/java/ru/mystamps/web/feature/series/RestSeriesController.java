@@ -81,7 +81,7 @@ class RestSeriesController {
 					seriesService.addComment(seriesId, patch.getValue());
 					break;
 				case "/release_year":
-					seriesService.addReleaseYear(seriesId, Integer.valueOf(patch.getValue()), currentUserId);
+					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);
 					break;
 				case "/michel_price":
 					seriesService.addPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
