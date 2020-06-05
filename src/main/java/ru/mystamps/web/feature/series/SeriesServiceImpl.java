@@ -26,9 +26,11 @@ import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 // FIXME: move stamps related methods to separate interface (#88)
@@ -155,6 +157,44 @@ public class SeriesServiceImpl implements SeriesService {
 		seriesDao.addReleaseYear(dto);
 		
 		log.info("Series #{}: release year set to {}", seriesId, year);
+	}
+	
+	// @todo #1340 SeriesServiceImpl.addPrice(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	// CheckStyle: ignore LineLength for next 1 line
+	public void addPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(price != null, "Price must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
+		
+		AddCatalogPriceDbDto dto = new AddCatalogPriceDbDto();
+		dto.setSeriesId(seriesId);
+		dto.setPrice(price);
+		dto.setUpdatedBy(userId);
+		
+		Date now = new Date();
+		dto.setUpdatedAt(now);
+
+		// CheckStyle: ignore MethodParamPad for next 5 lines
+		switch (catalog) {
+			case MICHEL:   seriesDao.addMichelPrice  (dto); break;
+			case SCOTT:    seriesDao.addScottPrice   (dto); break;
+			case YVERT:    seriesDao.addYvertPrice   (dto); break;
+			case GIBBONS:  seriesDao.addGibbonsPrice (dto); break;
+			case SOLOVYOV: seriesDao.addSolovyovPrice(dto); break;
+			case ZAGORSKI: seriesDao.addZagorskiPrice(dto); break;
+			default:
+				throw new IllegalStateException("Unknown stamps catalog: " + catalog);
+		}
+		
+		log.info(
+			"Series #{}: {} price set to {}",
+			seriesId,
+			catalog.toString().toLowerCase(Locale.ENGLISH),
+			price
+		);
 	}
 	
 	@Override

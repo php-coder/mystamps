@@ -4,6 +4,7 @@
 - (feature)     add preliminary support for hidden images
 - (feature)     admin can add a comment to a series
 - (feature)     admin can add a release year to a series
+- (feature)     admin can add a price in Michel, Scott, Yvert, Gibbons, Solovyov, and Zagorski catalogs
 - (improvement) on a country info page show the series with an image
 - (feature)     add a condition (MNH/MNHOG/MVLH/CTO/cancelled) to a series sale
 

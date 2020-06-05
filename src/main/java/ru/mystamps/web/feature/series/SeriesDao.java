@@ -45,4 +45,11 @@ public interface SeriesDao {
 	Integer findQuantityById(Integer seriesId);
 	
 	void markAsSimilar(Integer seriesId, Integer similarSeriesId);
+	
+	void addMichelPrice(AddCatalogPriceDbDto dto);
+	void addScottPrice(AddCatalogPriceDbDto dto);
+	void addYvertPrice(AddCatalogPriceDbDto dto);
+	void addGibbonsPrice(AddCatalogPriceDbDto dto);
+	void addSolovyovPrice(AddCatalogPriceDbDto dto);
+	void addZagorskiPrice(AddCatalogPriceDbDto dto);
 }

@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.feature.series;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);
 	void addComment(Integer seriesId, String comment);
 	void addReleaseYear(Integer seriesId, Integer year, Integer userId);
+	void addPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
 	void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId);
 	long countAll();

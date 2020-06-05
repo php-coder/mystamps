@@ -34,6 +34,13 @@ import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.List;
 
+import static ru.mystamps.web.feature.series.StampsCatalog.GIBBONS;
+import static ru.mystamps.web.feature.series.StampsCatalog.MICHEL;
+import static ru.mystamps.web.feature.series.StampsCatalog.SCOTT;
+import static ru.mystamps.web.feature.series.StampsCatalog.SOLOVYOV;
+import static ru.mystamps.web.feature.series.StampsCatalog.YVERT;
+import static ru.mystamps.web.feature.series.StampsCatalog.ZAGORSKI;
+
 @Validated
 @RestController
 @RequiredArgsConstructor
@@ -43,6 +50,7 @@ class RestSeriesController {
 	
 	// @todo #785 Update series: add integration test
 	// @todo #785 Update series: add validation for a comment
+	// @todo #1340 Update series: add validation for a price
 	// @todo #1343 Update series: add validation for a release year
 	@PatchMapping(SeriesUrl.INFO_SERIES_PAGE)
 	public ResponseEntity<Void> updateSeries(
@@ -67,6 +75,7 @@ class RestSeriesController {
 				continue;
 			}
 			
+			// CheckStyle: ignore LineLength for next 27 lines
 			switch (patch.getPath()) {
 				case "/comment":
 					seriesService.addComment(seriesId, patch.getValue());
@@ -76,6 +85,24 @@ class RestSeriesController {
 						seriesId,
 						Integer.valueOf(patch.getValue()),
 						currentUserId);
+					break;
+				case "/michel_price":
+					seriesService.addPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/scott_price":
+					seriesService.addPrice(SCOTT, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/yvert_price":
+					seriesService.addPrice(YVERT, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/gibbons_price":
+					seriesService.addPrice(GIBBONS, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/solovyov_price":
+					seriesService.addPrice(SOLOVYOV, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/zagorski_price":
+					seriesService.addPrice(ZAGORSKI, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path

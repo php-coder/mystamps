@@ -16,40 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-package ru.mystamps.web.support.spring.mvc;
+package ru.mystamps.web.feature.series;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 
-// See for details: http://jsonpatch.com
 @Getter
 @Setter
-@ToString
-public class PatchRequest {
-
-	public enum Operation {
-		add, copy, move, remove, replace, test;
-	}
-
-	// @todo #785 Update series: add integration test for required "op" field
-	@NotNull
-	private Operation op;
-
-	// @todo #785 Update series: add integration test for non-empty "path" field
-	@NotEmpty
-	private String path;
-
-	// @todo #785 Update series: add integration test for non-empty "value" field
-	@NotEmpty
-	private String value;
-
-	public BigDecimal bigDecimalValue() {
-		return new BigDecimal(value);
-	}
-	
+public class AddCatalogPriceDbDto {
+	private Integer seriesId;
+	private BigDecimal price;
+	private Date updatedAt;
+	private Integer updatedBy;
 }

@@ -103,6 +103,14 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
+		<Class name="ru.mystamps.web.feature.series.AddCatalogPriceDbDto" />
+		<Or>
+			<Method name="getUpdatedAt" />
+			<Method name="setUpdatedAt" />
+		</Or>
+		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+	</Match>
+	<Match>
 		<Class name="ru.mystamps.web.feature.series.PurchaseAndSaleDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>

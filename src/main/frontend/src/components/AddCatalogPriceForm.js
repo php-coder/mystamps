@@ -65,8 +65,8 @@ class AddCatalogPriceForm extends React.PureComponent {
 				const data = response.data;
 				if (data.hasOwnProperty('fieldErrors')) {
 					const fieldErrors = [];
-					if (data.fieldErrors.price) {
-						fieldErrors.push(...data.fieldErrors.price);
+					if (data.fieldErrors.value) {
+						fieldErrors.push(...data.fieldErrors.value);
 					}
 
 					this.setState({

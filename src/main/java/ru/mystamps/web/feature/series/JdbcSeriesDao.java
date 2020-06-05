@@ -102,6 +102,24 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.add_similar_series}")
 	private String addSimilarSeriesSql;
 	
+	@Value("${series.add_michel_price}")
+	private String addMichelPriceSql;
+	
+	@Value("${series.add_scott_price}")
+	private String addScottPriceSql;
+	
+	@Value("${series.add_yvert_price}")
+	private String addYvertPriceSql;
+	
+	@Value("${series.add_gibbons_price}")
+	private String addGibbonsPriceSql;
+	
+	@Value("${series.add_solovyov_price}")
+	private String addSolovyovPriceSql;
+	
+	@Value("${series.add_zagorski_price}")
+	private String addZagorskiPriceSql;
+	
 	@Override
 	public Integer add(AddSeriesDbDto series) {
 		Map<String, Object> params = new HashMap<>();
@@ -345,6 +363,53 @@ public class JdbcSeriesDao implements SeriesDao {
 		Validate.validState(
 			affected == 1,
 			"Unexpected number of affected rows after adding similar series: %d",
+			affected
+		);
+	}
+	
+	@Override
+	public void addMichelPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addMichelPriceSql, dto);
+	}
+	
+	@Override
+	public void addScottPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addScottPriceSql, dto);
+	}
+	
+	@Override
+	public void addYvertPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addYvertPriceSql, dto);
+	}
+	
+	@Override
+	public void addGibbonsPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addGibbonsPriceSql, dto);
+	}
+	
+	@Override
+	public void addSolovyovPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addSolovyovPriceSql, dto);
+	}
+	
+	@Override
+	public void addZagorskiPrice(AddCatalogPriceDbDto dto) {
+		addCatalogPrice(addZagorskiPriceSql, dto);
+	}
+	
+	private void addCatalogPrice(String query, AddCatalogPriceDbDto dto) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("series_id", dto.getSeriesId());
+		params.put("price", dto.getPrice());
+		params.put("updated_at", dto.getUpdatedAt());
+		params.put("updated_by", dto.getUpdatedBy());
+		
+		int affected = jdbcTemplate.update(query, params);
+		
+		// @todo #1340 Update series: handle refuse to update an existing price gracefully
+		Validate.validState(
+			affected == 1,
+			"Unexpected number of affected rows after updating series: %d",
 			affected
 		);
 	}
