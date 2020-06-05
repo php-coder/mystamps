@@ -75,16 +75,13 @@ class RestSeriesController {
 				continue;
 			}
 			
-			// CheckStyle: ignore LineLength for next 27 lines
+			// CheckStyle: ignore LineLength for next 24 lines
 			switch (patch.getPath()) {
 				case "/comment":
 					seriesService.addComment(seriesId, patch.getValue());
 					break;
 				case "/release_year":
-					seriesService.addReleaseYear(
-						seriesId,
-						Integer.valueOf(patch.getValue()),
-						currentUserId);
+					seriesService.addReleaseYear(seriesId, Integer.valueOf(patch.getValue()), currentUserId);
 					break;
 				case "/michel_price":
 					seriesService.addPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
