@@ -27,7 +27,7 @@ public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);
 	void addComment(Integer seriesId, String comment);
 	void addReleaseYear(Integer seriesId, Integer year, Integer userId);
-	void addPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
+	void addCatalogPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
 	void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId);
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
 	void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId);

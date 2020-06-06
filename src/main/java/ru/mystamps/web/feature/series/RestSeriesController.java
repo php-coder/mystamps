@@ -85,22 +85,22 @@ class RestSeriesController {
 					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);
 					break;
 				case "/michel_price":
-					seriesService.addPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/scott_price":
-					seriesService.addPrice(SCOTT, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(SCOTT, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/yvert_price":
-					seriesService.addPrice(YVERT, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(YVERT, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/gibbons_price":
-					seriesService.addPrice(GIBBONS, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(GIBBONS, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/solovyov_price":
-					seriesService.addPrice(SOLOVYOV, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(SOLOVYOV, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/zagorski_price":
-					seriesService.addPrice(ZAGORSKI, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(ZAGORSKI, seriesId, patch.bigDecimalValue(), currentUserId);
 					break;
 				case "/michel_numbers":
 					seriesService.addCatalogNumbers(MICHEL, seriesId, patch.getValue(), currentUserId);

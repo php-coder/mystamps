@@ -164,7 +164,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
 	// CheckStyle: ignore LineLength for next 1 line
-	public void addPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId) {
+	public void addCatalogPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(price != null, "Price must be non null");
 		Validate.isTrue(userId != null, "User id must be non null");
