@@ -197,6 +197,31 @@ public class SeriesServiceImpl implements SeriesService {
 		);
 	}
 	
+	// @todo #1339 SeriesServiceImpl.addCatalogNumbers(): add unit tests
+	@Override
+	@Transactional
+	@PreAuthorize(HasAuthority.CREATE_SERIES)
+	// CheckStyle: ignore LineLength for next 1 line
+	public void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(numbers != null, "Numbers must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
+		
+		seriesDao.markAsModified(seriesId, new Date(), userId);
+		
+		// CheckStyle: ignore LineLength for next 7 lines
+		switch (catalog) {
+			case MICHEL:   createCatalogNumbersAndAddToSeries(seriesId, michelCatalogService,   numbers); break;
+			case SCOTT:    createCatalogNumbersAndAddToSeries(seriesId, scottCatalogService,    numbers); break;
+			case YVERT:    createCatalogNumbersAndAddToSeries(seriesId, yvertCatalogService,    numbers); break;
+			case GIBBONS:  createCatalogNumbersAndAddToSeries(seriesId, gibbonsCatalogService,  numbers); break;
+			case SOLOVYOV: createCatalogNumbersAndAddToSeries(seriesId, solovyovCatalogService, numbers); break;
+			case ZAGORSKI: createCatalogNumbersAndAddToSeries(seriesId, zagorskiCatalogService, numbers); break;
+			default:
+				throw new IllegalStateException("Unknown stamps catalog: " + catalog);
+		}
+	}
+	
 	@Override
 	@Transactional
 	@PreAuthorize("isAuthenticated()")

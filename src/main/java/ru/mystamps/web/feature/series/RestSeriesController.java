@@ -50,6 +50,7 @@ class RestSeriesController {
 	
 	// @todo #785 Update series: add integration test
 	// @todo #785 Update series: add validation for a comment
+	// @todo #1339 Update series: add validation for catalog numbers
 	// @todo #1340 Update series: add validation for a price
 	// @todo #1343 Update series: add validation for a release year
 	@PatchMapping(SeriesUrl.INFO_SERIES_PAGE)
@@ -75,7 +76,7 @@ class RestSeriesController {
 				continue;
 			}
 			
-			// CheckStyle: ignore LineLength for next 24 lines
+			// CheckStyle: ignore LineLength for next 42 lines
 			switch (patch.getPath()) {
 				case "/comment":
 					seriesService.addComment(seriesId, patch.getValue());
@@ -100,6 +101,24 @@ class RestSeriesController {
 					break;
 				case "/zagorski_price":
 					seriesService.addPrice(ZAGORSKI, seriesId, patch.bigDecimalValue(), currentUserId);
+					break;
+				case "/michel_numbers":
+					seriesService.addCatalogNumbers(MICHEL, seriesId, patch.getValue(), currentUserId);
+					break;
+				case "/scott_numbers":
+					seriesService.addCatalogNumbers(SCOTT, seriesId, patch.getValue(), currentUserId);
+					break;
+				case "/yvert_numbers":
+					seriesService.addCatalogNumbers(YVERT, seriesId, patch.getValue(), currentUserId);
+					break;
+				case "/gibbons_numbers":
+					seriesService.addCatalogNumbers(GIBBONS, seriesId, patch.getValue(), currentUserId);
+					break;
+				case "/solovyov_numbers":
+					seriesService.addCatalogNumbers(SOLOVYOV, seriesId, patch.getValue(), currentUserId);
+					break;
+				case "/zagorski_numbers":
+					seriesService.addCatalogNumbers(ZAGORSKI, seriesId, patch.getValue(), currentUserId);
 					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path

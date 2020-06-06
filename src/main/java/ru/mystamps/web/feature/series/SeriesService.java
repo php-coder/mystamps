@@ -28,6 +28,7 @@ public interface SeriesService {
 	void addComment(Integer seriesId, String comment);
 	void addReleaseYear(Integer seriesId, Integer year, Integer userId);
 	void addPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
+	void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId);
 	void addImageToSeries(AddImageDto dto, Integer seriesId, Integer userId);
 	void replaceImage(ReplaceImageDto dto, Integer seriesId, Integer userId);
 	long countAll();

@@ -47,7 +47,7 @@ class AddCatalogNumbersForm extends React.PureComponent {
 					{
 						op: 'add',
 						path: `/${this.state.catalog}_numbers`,
-						value: this.state.numbers.split(',')
+						value: this.state.numbers
 					}
 				],
 				{
@@ -64,8 +64,8 @@ class AddCatalogNumbersForm extends React.PureComponent {
 				const data = response.data;
 				if (data.hasOwnProperty('fieldErrors')) {
 					const fieldErrors = [];
-					if (data.fieldErrors.numbers) {
-						fieldErrors.push(...data.fieldErrors.numbers);
+					if (data.fieldErrors.value) {
+						fieldErrors.push(...data.fieldErrors.value);
 					}
 
 					this.setState({
@@ -143,6 +143,7 @@ class AddCatalogNumbersFormView extends React.PureComponent {
 									className="form-control"
 									size="5"
 									required="required"
+									placeholder={ `${l10n['t_example'] || 'Example'}: 90-92,117` }
 									onChange={ handleChangeNumbers } />
 							</div>
 						</div>

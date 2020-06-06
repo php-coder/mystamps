@@ -1031,9 +1031,21 @@
 				}
 			};
 			var addCatalogNumbersProps = {
+				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
 				'l10n': {
+					't_server_error': [[ #{t_server_error} ]],
+					't_catalog':      [[ #{t_catalog} ]],
+					't_michel':       [[ #{t_michel} ]],
+					't_scott':        [[ #{t_scott} ]],
+					't_yvert':        [[ #{t_yvert} ]],
+					't_sg':           [[ #{t_sg} ]],
+					't_solovyov':     [[ #{t_solovyov} ]],
+					't_zagorski':     [[ #{t_zagorski} ]],
+					't_numbers':      [[ #{t_numbers} ]],
+					't_example':      [[ #{t_example} ]],
+					't_add':          [[ #{t_add} ]]
 				}
 			};
 			+]*/
