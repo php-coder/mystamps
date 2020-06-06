@@ -172,9 +172,11 @@
 							<!--/* @todo #1356 Hidden images: allow to replace a hidden image  */-->
 							<!--/* @todo #1356 Hidden images: admin can hide an image  */-->
 							<!--/* @todo #1356 Hidden images: protect hidden images from direct access  */-->
-							<div class="row" th:if="${not #lists.isEmpty(series.hiddenImageIds)}" th:each="imageId,iter : ${series.hiddenImageIds}">
+							<div class="row" th:if="${not #lists.isEmpty(series.hiddenImageIds)}">
 								<div class="col-sm-12">
 									<h5 th:text="#{t_hidden_images}">Hidden images</h5>
+								</div>
+								<div class="col-sm-12" th:each="imageId,iter : ${series.hiddenImageIds}">
 									<a id="series-hidden-image-link-1"
 										target="_blank"
 										href="../../../../resources/test/test.png"
@@ -188,6 +190,13 @@
 											 th:src="@{${GET_IMAGE_PREVIEW_PAGE}(id=${imageId})}" />
 									</a>
 								</div>
+								<!--/*-->
+								<div class="col-sm-12">
+									<a id="series-hidden-image-link-2" target="_blank" href="../../../../resources/test/test.png">
+										<img class="img-responsive series-images" id="series-hidden-image-2" src="../../../../resources/test/test.png">
+									</a>
+								</div>
+								<!--*/-->
 							</div>
 							
 						</div>
