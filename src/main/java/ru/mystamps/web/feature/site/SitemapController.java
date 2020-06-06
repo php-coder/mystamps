@@ -56,23 +56,23 @@ public class SitemapController {
 		try {
 			PrintWriter writer = response.getWriter();
 			
-			writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			writer.println("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+			writer.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+			writer.print("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 			
 			writer.print("<url><loc>");
 			writer.print(SiteUrl.PUBLIC_URL);
 			writer.print(SiteUrl.INDEX_PAGE);
-			writer.println("</loc></url>");
+			writer.print("</loc></url>\n");
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
 				writer.print("<url><loc>");
 				writer.print(createLocEntry(item));
 				writer.print("</loc><lastmod>");
 				writer.print(createLastModEntry(dateFormatter, item));
-				writer.println("</lastmod></url>");
+				writer.print("</lastmod></url>\n");
 			}
 			
-			writer.println("</urlset>");
+			writer.print("</urlset>\n");
 		} catch (IOException ex) {
 			LOG.error("Can't return sitemap.xml: {}", ex.getMessage());
 		}
