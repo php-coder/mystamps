@@ -43,6 +43,11 @@ public class SitemapController {
 	// According to http://www.w3.org/TR/NOTE-datetime
 	private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mmXXX";
 	
+	private static final String INDEX_URL_ENTRY =
+		"<url><loc>"
+		+ SiteUrl.PUBLIC_URL + SiteUrl.INDEX_PAGE
+		+ "</loc></url>\n";
+	
 	private final SeriesService seriesService;
 	
 	@GetMapping(SiteUrl.SITEMAP_XML)
@@ -59,10 +64,7 @@ public class SitemapController {
 			writer.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 			writer.print("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 			
-			writer.print("<url><loc>");
-			writer.print(SiteUrl.PUBLIC_URL);
-			writer.print(SiteUrl.INDEX_PAGE);
-			writer.print("</loc></url>\n");
+			writer.print(INDEX_URL_ENTRY);
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
 				writer.print("<url><loc>");
