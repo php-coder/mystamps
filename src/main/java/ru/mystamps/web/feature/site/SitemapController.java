@@ -59,23 +59,17 @@ public class SitemapController {
 			writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			writer.println("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 			
-			writer.print("\t<url>\n\t\t<loc>");
+			writer.print("<url><loc>");
 			writer.print(SiteUrl.PUBLIC_URL);
 			writer.print(SiteUrl.INDEX_PAGE);
-			writer.println("</loc>\n\t</url>");
+			writer.println("</loc></url>");
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
-				writer.println("\t<url>");
-				
-				writer.print("\t\t<loc>");
+				writer.print("<url><loc>");
 				writer.print(createLocEntry(item));
-				writer.println("</loc>");
-				
-				writer.print("\t\t<lastmod>");
+				writer.print("</loc><lastmod>");
 				writer.print(createLastModEntry(dateFormatter, item));
-				writer.println("</lastmod>");
-				
-				writer.println("\t</url>");
+				writer.println("</lastmod></url>");
 			}
 			
 			writer.println("</urlset>");
