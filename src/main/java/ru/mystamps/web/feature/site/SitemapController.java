@@ -67,17 +67,22 @@ public class SitemapController {
 			writer.print(INDEX_URL_ENTRY);
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
-				writer.print("<url><loc>");
-				writer.print(createLocEntry(item));
-				writer.print("</loc><lastmod>");
-				writer.print(createLastModEntry(dateFormatter, item));
-				writer.print("</lastmod></url>\n");
+				writer.print(createUrlEntry(dateFormatter, item));
 			}
 			
 			writer.print("</urlset>\n");
 		} catch (IOException ex) {
 			LOG.error("Can't return sitemap.xml: {}", ex.getMessage());
 		}
+	}
+	
+	private static String createUrlEntry(DateFormat dateFormatter, SitemapInfoDto item) {
+		return new StringBuilder("<url><loc>")
+			.append(createLocEntry(item))
+			.append("</loc><lastmod>")
+			.append(createLastModEntry(dateFormatter, item))
+			.append("</lastmod></url>\n")
+			.toString();
 	}
 	
 	private static String createLocEntry(SitemapInfoDto item) {
