@@ -46,7 +46,7 @@ public class SitemapController {
 	private final SeriesService seriesService;
 	
 	@GetMapping(SiteUrl.SITEMAP_XML)
-	public void getSitemapXml(HttpServletResponse response) {
+	public void generateSitemapXml(HttpServletResponse response) {
 		response.setContentType(MediaType.APPLICATION_XML_VALUE);
 		response.setCharacterEncoding("UTF-8");
 		

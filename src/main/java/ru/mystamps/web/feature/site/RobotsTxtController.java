@@ -37,7 +37,7 @@ public class RobotsTxtController {
 	
 	@GetMapping(SiteUrl.ROBOTS_TXT)
 	@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-	public void getRobotsText(HttpServletResponse response) {
+	public void generateRobotsTxt(HttpServletResponse response) {
 		response.setContentType(MediaType.TEXT_PLAIN_VALUE);
 		response.setCharacterEncoding("UTF-8");
 		
