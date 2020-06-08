@@ -149,7 +149,7 @@ public final class TestObjects {
 			Random.id(),
 			new LinkEntityDto(Random.id(), SlugUtils.slugify(category), category),
 			new LinkEntityDto(Random.id(), SlugUtils.slugify(country), country),
-			15, 10, Random.issueYear(),
+			Random.issueYear(),
 			16,
 			Random.perforated()
 		);
@@ -172,7 +172,9 @@ public final class TestObjects {
 			info.getId(),
 			info.getCategory(),
 			info.getCountry(),
-			info.getReleaseDay(), info.getReleaseMonth(), info.getReleaseYear(),
+			Random.dayOfMonth(),
+			Random.monthOfYear(),
+			info.getReleaseYear(),
 			info.getQuantity(),
 			info.getPerforated(),
 			"this is a full info",

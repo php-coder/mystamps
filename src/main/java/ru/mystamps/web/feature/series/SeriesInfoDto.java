@@ -18,35 +18,16 @@
 package ru.mystamps.web.feature.series;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.common.LinkEntityDto;
 
 @Getter
+@RequiredArgsConstructor
 public class SeriesInfoDto {
 	private final Integer id;
 	private final LinkEntityDto category;
 	private final LinkEntityDto country;
-	private final Integer releaseDay;
-	private final Integer releaseMonth;
 	private final Integer releaseYear;
 	private final Integer quantity;
 	private final Boolean perforated;
-	
-	@SuppressWarnings("checkstyle:parameternumber")
-	public SeriesInfoDto(
-			Integer id,
-			LinkEntityDto category,
-			LinkEntityDto country,
-			Integer releaseDay, Integer releaseMonth, Integer releaseYear,
-			Integer quantity,
-			Boolean perforated) {
-		this.id = id;
-		this.category = category;
-		this.country = country;
-		this.releaseDay = releaseDay;
-		this.releaseMonth = releaseMonth;
-		this.releaseYear = releaseYear;
-		this.quantity = quantity;
-		this.perforated = perforated;
-	}
-	
 }

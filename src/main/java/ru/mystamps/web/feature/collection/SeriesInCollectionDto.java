@@ -26,8 +26,6 @@ public class SeriesInCollectionDto {
 	private final Integer id;
 	private final String category;
 	private final String country;
-	private final Integer releaseDay;
-	private final Integer releaseMonth;
 	private final Integer releaseYear;
 	private final Boolean perforated;
 	private final Integer quantity;

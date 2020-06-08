@@ -45,8 +45,6 @@ final class RowMappers {
 		Integer seriesId     = rs.getInt("id");
 		String category      = rs.getString("category");
 		String country       = rs.getString("country");
-		Integer releaseDay   = JdbcUtils.getInteger(rs, "release_day");
-		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
 		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
 		Integer quantity     = rs.getInt("quantity");
 		Boolean perforated   = rs.getBoolean("perforated");
@@ -56,8 +54,6 @@ final class RowMappers {
 			seriesId,
 			category,
 			country,
-			releaseDay,
-			releaseMonth,
 			releaseYear,
 			perforated,
 			quantity,
