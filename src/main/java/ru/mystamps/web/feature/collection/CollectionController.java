@@ -70,7 +70,7 @@ public class CollectionController {
 			collectionService.findSeriesInCollection(collectionId, lang);
 		model.addAttribute("seriesOfCollection", seriesOfCollection);
 		
-		if (seriesOfCollection.iterator().hasNext()) {
+		if (!seriesOfCollection.isEmpty()) {
 			long categoryCounter = categoryService.countCategoriesOf(collectionId);
 			long countryCounter  = countryService.countCountriesOf(collectionId);
 			long seriesCounter   = collectionService.countSeriesOf(collectionId);
