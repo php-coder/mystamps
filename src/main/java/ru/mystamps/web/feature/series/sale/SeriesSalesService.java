@@ -17,6 +17,11 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
+import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
+
+import java.util.List;
+
 public interface SeriesSalesService {
 	void add(AddSeriesSalesDto dto, Integer seriesId, Integer userId);
+	List<PurchaseAndSaleDto> findSales(Integer seriesId);
 }

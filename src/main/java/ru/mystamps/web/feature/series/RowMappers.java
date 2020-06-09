@@ -17,15 +17,12 @@
  */
 package ru.mystamps.web.feature.series;
 
-import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
-import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static ru.mystamps.web.common.RowMappers.createLinkEntityDto;
 
@@ -97,42 +94,6 @@ final class RowMappers {
 			perforated,
 			previewId,
 			category
-		);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	/* default */ static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		Date date               = rs.getDate("date");
-		String sellerName       = rs.getString("seller_name");
-		String sellerUrl        = rs.getString("seller_url");
-		String buyerName        = rs.getString("buyer_name");
-		String buyerUrl         = rs.getString("buyer_url");
-		String transactionUrl   = rs.getString("transaction_url");
-		BigDecimal firstPrice   = rs.getBigDecimal("first_price");
-		Currency firstCurrency  = JdbcUtils.getCurrency(rs, "first_currency");
-		BigDecimal secondPrice  = rs.getBigDecimal("second_price");
-		Currency secondCurrency = JdbcUtils.getCurrency(rs, "second_currency");
-		
-		// LATER: consider extracting this into a helper method
-		String conditionField = rs.getString("cond");
-		SeriesCondition condition = rs.wasNull() ? null : SeriesCondition.valueOf(conditionField);
-		
-		return new PurchaseAndSaleDto(
-			date,
-			sellerName,
-			sellerUrl,
-			buyerName,
-			buyerUrl,
-			transactionUrl,
-			firstPrice,
-			firstCurrency,
-			secondPrice,
-			secondCurrency,
-			condition
 		);
 	}
 

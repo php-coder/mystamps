@@ -53,7 +53,5 @@ public interface SeriesService {
 	List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang);
 	List<SitemapInfoDto> findAllForSitemap();
 	
-	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
-	
 	void markAsSimilar(AddSimilarSeriesForm dto);
 }

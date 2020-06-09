@@ -1140,29 +1140,4 @@ class SeriesServiceImplTest extends Specification {
 			result == expectedResult
 	}
 	
-	//
-	// Tests for findPurchasesAndSales()
-	//
-	
-	def "findPurchasesAndSales() should throw exception when series id is null"() {
-		when:
-			service.findPurchasesAndSales(null)
-		then:
-			IllegalArgumentException ex = thrown()
-			ex.message == 'Series id must be non null'
-	}
-	
-	def "findPurchasesAndSales() should invoke dao, pass argument and return result from dao"() {
-		given:
-			Integer expectedSeriesId = Random.id()
-		and:
-			List<PurchaseAndSaleDto> expectedResult = [ TestObjects.createPurchaseAndSaleDto() ]
-		when:
-			List<PurchaseAndSaleDto> result = service.findPurchasesAndSales(expectedSeriesId)
-		then:
-			1 * seriesDao.findPurchasesAndSales(expectedSeriesId) >> expectedResult
-		and:
-			result == expectedResult
-	}
-	
 }

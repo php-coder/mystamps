@@ -418,18 +418,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return seriesDao.findAllForSitemap();
 	}
 	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
-	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
-		Validate.isTrue(seriesId != null, "Series id must be non null");
-
-		return seriesDao.findPurchasesAndSales(seriesId);
-	}
-	
 	// @todo #1280 SeriesServiceImpl.markAsSimilar(): add unit tests
 	@Override
 	@Transactional

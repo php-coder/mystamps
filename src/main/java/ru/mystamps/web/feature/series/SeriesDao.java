@@ -34,7 +34,6 @@ public interface SeriesDao {
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategorySlugAsSeriesInfo(String slug, String lang);
 	List<SeriesInGalleryDto> findByCountrySlug(String slug, String lang);
-	List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId);
 
 	long countAll();
 	long countAllStamps();

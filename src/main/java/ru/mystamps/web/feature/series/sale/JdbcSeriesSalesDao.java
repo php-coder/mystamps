@@ -21,8 +21,11 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -32,6 +35,9 @@ public class JdbcSeriesSalesDao implements SeriesSalesDao {
 	
 	@Value("${series_sales.add}")
 	private String addSeriesSaleSql;
+	
+	@Value("${series_sales.find_sales_by_series_id}")
+	private String findSeriesSalesBySeriesIdSql;
 	
 	@Override
 	public void add(AddSeriesSalesDbDto sale) {
@@ -55,6 +61,18 @@ public class JdbcSeriesSalesDao implements SeriesSalesDao {
 			affected == 1,
 			"Unexpected number of affected rows after adding series sales: %d",
 			affected
+		);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	public List<PurchaseAndSaleDto> findSeriesSales(Integer seriesId) {
+		return jdbcTemplate.query(
+			findSeriesSalesBySeriesIdSql,
+			Collections.singletonMap("series_id", seriesId),
+			RowMappers::forPurchaseAndSaleDto
 		);
 	}
 	

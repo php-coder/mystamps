@@ -22,9 +22,11 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
+import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class SeriesSalesServiceImpl implements SeriesSalesService {
@@ -67,6 +69,18 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 		seriesSalesDao.add(sale);
 		
 		log.info("Sale for series #{} has been added", seriesId);
+	}
+	
+	/**
+	 * @author Sergey Chechenev
+	 */
+	@Override
+	@Transactional(readOnly = true)
+	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
+	public List<PurchaseAndSaleDto> findSales(Integer seriesId) {
+		Validate.isTrue(seriesId != null, "Series id must be non null");
+		
+		return seriesSalesDao.findSeriesSales(seriesId);
 	}
 	
 }

@@ -749,7 +749,7 @@ public class SeriesController {
 		
 		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
 			List<PurchaseAndSaleDto> purchasesAndSales =
-				seriesService.findPurchasesAndSales(seriesId);
+				seriesSalesService.findSales(seriesId);
 			model.put("purchasesAndSales", purchasesAndSales);
 		}
 		

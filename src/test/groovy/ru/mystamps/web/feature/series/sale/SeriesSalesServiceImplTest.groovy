@@ -21,6 +21,8 @@ import static io.qala.datagen.RandomShortApi.nullOr
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.common.Currency
+import ru.mystamps.web.feature.series.PurchaseAndSaleDto
+import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
 import spock.lang.Specification
@@ -147,6 +149,31 @@ class SeriesSalesServiceImplTest extends Specification {
 			date            | url           | altPrice               | altCurrency  | buyerId
 			null            | null          | null                   | null         | null
 			new Date() - 10 | 'example.com' | new BigDecimal('6200') | Currency.RUB | 555
+	}
+	
+	//
+	// Tests for findSales()
+	//
+	
+	def 'findSales() should throw exception when series id is null'() {
+		when:
+			service.findSales(null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
+	}
+	
+	def 'findSales() should invoke dao, pass argument and return result from dao'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+		and:
+			List<PurchaseAndSaleDto> expectedResult = [TestObjects.createPurchaseAndSaleDto() ]
+		when:
+			List<PurchaseAndSaleDto> result = service.findSales(expectedSeriesId)
+		then:
+			1 * seriesSalesDao.findSeriesSales(expectedSeriesId) >> expectedResult
+		and:
+			result == expectedResult
 	}
 	
 }

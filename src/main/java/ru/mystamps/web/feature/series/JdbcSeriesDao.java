@@ -37,8 +37,7 @@ import java.util.Map;
 @SuppressWarnings({
 	"PMD.AvoidDuplicateLiterals",
 	"PMD.TooManyMethods",
-	"PMD.TooManyFields",
-	"PMD.LongVariable"
+	"PMD.TooManyFields"
 })
 @RequiredArgsConstructor
 public class JdbcSeriesDao implements SeriesDao {
@@ -77,9 +76,6 @@ public class JdbcSeriesDao implements SeriesDao {
 	
 	@Value("${series.find_by_country_slug}")
 	private String findByCountrySlugSql;
-	
-	@Value("${series_sales.find_sales_by_series_id}")
-	private String findPurchasesAndSalesBySeriesIdSql;
 	
 	@Value("${series.count_all_series}")
 	private String countAllSql;
@@ -288,18 +284,6 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("lang", lang);
 		
 		return jdbcTemplate.query(findByCountrySlugSql, params, RowMappers::forSeriesInGalleryDto);
-	}
-	
-	/**
-	 * @author Sergey Chechenev
-	 */
-	@Override
-	public List<PurchaseAndSaleDto> findPurchasesAndSales(Integer seriesId) {
-		return jdbcTemplate.query(
-			findPurchasesAndSalesBySeriesIdSql,
-			Collections.singletonMap("series_id", seriesId),
-			RowMappers::forPurchaseAndSaleDto
-		);
 	}
 	
 	@Override
