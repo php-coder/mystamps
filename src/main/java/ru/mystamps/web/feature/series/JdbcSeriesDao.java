@@ -78,7 +78,7 @@ public class JdbcSeriesDao implements SeriesDao {
 	@Value("${series.find_by_country_slug}")
 	private String findByCountrySlugSql;
 	
-	@Value("${series.find_purchases_and_sales_by_series_id}")
+	@Value("${series_sales.find_sales_by_series_id}")
 	private String findPurchasesAndSalesBySeriesIdSql;
 	
 	@Value("${series.count_all_series}")
