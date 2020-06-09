@@ -748,9 +748,8 @@ public class SeriesController {
 		}
 		
 		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
-			List<PurchaseAndSaleDto> purchasesAndSales =
-				seriesSalesService.findSales(seriesId);
-			model.put("purchasesAndSales", purchasesAndSales);
+			List<PurchaseAndSaleDto> seriesSales = seriesSalesService.findSales(seriesId);
+			model.put("seriesSales", seriesSales);
 		}
 		
 		if (SecurityContextUtils.hasAuthority(Authority.IMPORT_SERIES)) {

@@ -559,13 +559,13 @@
 								/*/-->
 							</div>
 							
-							<div class="row" th:if="${not #lists.isEmpty(purchasesAndSales)}" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
+							<div class="row" th:if="${not #lists.isEmpty(seriesSales)}" sec:authorize="hasAuthority('VIEW_SERIES_SALES')">
 								<div class="col-sm-12">
 									<h5 th:text="#{t_who_selling_series}">Who was selling/buying this series</h5>
 									<ul th:remove="all-but-first">
 										<li id="series-sale-1-info"
 											th:id="|series-sale-${iter.count}-info|"
-											th:each="transaction,iter : ${purchasesAndSales}"
+											th:each="transaction,iter : ${seriesSales}"
 											th:with="firstPrice=${#numbers.formatDecimal(transaction.firstPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.firstCurrency},
 														 optionalSecondPrice=${transaction.secondPrice != null ? ('&nbsp;' + '(' + #numbers.formatDecimal(transaction.secondPrice, 0, 'DEFAULT', 2, 'DEFAULT') + '&nbsp;' + transaction.secondCurrency + ')') : ''}">
 											<!--/*/
