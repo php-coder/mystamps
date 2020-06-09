@@ -297,10 +297,13 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		boolean withoutPerforation =
 			StringUtils.containsIgnoreCase(fragment, "б/з")
+			|| StringUtils.containsIgnoreCase(fragment, "б\\з")
 			|| StringUtils.containsIgnoreCase(fragment, "б.з.")
 			|| StringUtils.containsIgnoreCase(fragment, "БЗ")
 			|| StringUtils.containsIgnoreCase(fragment, "без зуб")
 			|| StringUtils.containsIgnoreCase(fragment, "беззубцовые")
+			|| StringUtils.containsIgnoreCase(fragment, "без перф.")
+			|| StringUtils.containsIgnoreCase(fragment, "неперфорированный")
 			|| StringUtils.containsIgnoreCase(fragment, "б/перфорации")
 			|| StringUtils.containsIgnoreCase(fragment, "без перфорации");
 		if (withoutPerforation) {
