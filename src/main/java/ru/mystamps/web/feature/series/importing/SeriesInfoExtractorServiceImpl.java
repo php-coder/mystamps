@@ -60,10 +60,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern RELEASE_DATE_REGEXP =
 		Pattern.compile("((?<day>[0-9]{2})\\.(?<month>[0-9]{2})\\.)?(?<year>18[4-9][0-9]|19[0-9]{2}|20[0-9]{2})(г(од|\\.)?|\\.)?");
 	
-	// Regular expression matches number of the stamps in a series (from 1 to 999).
+	// Regular expression matches number of the stamps in a series.
 	// CheckStyle: ignore LineLength for next 2 lines
 	private static final Pattern NUMBER_OF_STAMPS_REGEXP = Pattern.compile(
-		"(?<quantity>[1-9][0-9]{0,2})(-?(ти|ой|ух))?( ((без)?зубцов(ая|ы[ех])))?(м\\*{0,2}| (мар(ок|к[аи])|(люкс[- ])?блок(а|ов)?|БЛ))",
+		"(?<quantity>[1-9][0-9]*)(-?(ти|ой|ух))?( ((без)?зубцов(ая|ы[ех])))?(м\\*{0,2}| (мар(ок|к[аи])|(люкс[- ])?блок(а|ов)?|БЛ))",
 		Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE
 	);
 	
