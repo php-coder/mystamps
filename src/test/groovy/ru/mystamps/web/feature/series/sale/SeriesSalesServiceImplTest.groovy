@@ -21,7 +21,6 @@ import static io.qala.datagen.RandomShortApi.nullOr
 
 import org.slf4j.helpers.NOPLogger
 import ru.mystamps.web.common.Currency
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto
 import ru.mystamps.web.service.TestObjects
 import ru.mystamps.web.tests.DateUtils
 import ru.mystamps.web.tests.Random
@@ -167,9 +166,9 @@ class SeriesSalesServiceImplTest extends Specification {
 		given:
 			Integer expectedSeriesId = Random.id()
 		and:
-			List<PurchaseAndSaleDto> expectedResult = [TestObjects.createPurchaseAndSaleDto() ]
+			List<SeriesSaleDto> expectedResult = [TestObjects.createSeriesSaleDto() ]
 		when:
-			List<PurchaseAndSaleDto> result = service.findSales(expectedSeriesId)
+			List<SeriesSaleDto> result = service.findSales(expectedSeriesId)
 		then:
 			1 * seriesSalesDao.findSeriesSales(expectedSeriesId) >> expectedResult
 		and:

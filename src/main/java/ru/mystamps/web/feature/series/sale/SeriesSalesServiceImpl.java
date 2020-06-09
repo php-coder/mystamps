@@ -22,7 +22,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
 import java.util.Date;
@@ -77,7 +76,7 @@ public class SeriesSalesServiceImpl implements SeriesSalesService {
 	@Override
 	@Transactional(readOnly = true)
 	@PreAuthorize(HasAuthority.VIEW_SERIES_SALES)
-	public List<PurchaseAndSaleDto> findSales(Integer seriesId) {
+	public List<SeriesSaleDto> findSales(Integer seriesId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
 		return seriesSalesDao.findSeriesSales(seriesId);

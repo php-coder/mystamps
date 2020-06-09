@@ -52,6 +52,7 @@ import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.importing.ImportRequestInfo;
 import ru.mystamps.web.feature.series.importing.SeriesImportService;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesForm;
+import ru.mystamps.web.feature.series.sale.SeriesSaleDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.security.Authority;
@@ -748,7 +749,7 @@ public class SeriesController {
 		}
 		
 		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
-			List<PurchaseAndSaleDto> seriesSales = seriesSalesService.findSales(seriesId);
+			List<SeriesSaleDto> seriesSales = seriesSalesService.findSales(seriesId);
 			model.put("seriesSales", seriesSales);
 		}
 		

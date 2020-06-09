@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
- * Spring configuration that is required for using series sales/purchases in an application.
+ * Spring configuration that is required for using series sales in an application.
  */
 @Configuration
 public class SeriesSalesConfig {

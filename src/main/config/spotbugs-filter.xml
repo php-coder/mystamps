@@ -111,7 +111,7 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
-		<Class name="ru.mystamps.web.feature.series.PurchaseAndSaleDto" />
+		<Class name="ru.mystamps.web.feature.series.sale.SeriesSaleDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>

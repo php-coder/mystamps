@@ -15,23 +15,21 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package ru.mystamps.web.feature.series;
+package ru.mystamps.web.feature.series.sale;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ru.mystamps.web.common.Currency;
-import ru.mystamps.web.feature.series.sale.SeriesCondition;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-// @todo #927 PurchaseAndSaleDto: move with related classes to series.sale package
 /**
  * @author Sergey Chechenev
  */
 @Getter
 @RequiredArgsConstructor
-public class PurchaseAndSaleDto {
+public class SeriesSaleDto {
 	private final Date date;
 	private final String sellerName;
 	private final String sellerUrl;

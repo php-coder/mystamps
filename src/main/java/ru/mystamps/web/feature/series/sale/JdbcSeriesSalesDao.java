@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,11 +67,11 @@ public class JdbcSeriesSalesDao implements SeriesSalesDao {
 	 * @author Sergey Chechenev
 	 */
 	@Override
-	public List<PurchaseAndSaleDto> findSeriesSales(Integer seriesId) {
+	public List<SeriesSaleDto> findSeriesSales(Integer seriesId) {
 		return jdbcTemplate.query(
 			findSeriesSalesBySeriesIdSql,
 			Collections.singletonMap("series_id", seriesId),
-			RowMappers::forPurchaseAndSaleDto
+			RowMappers::forSeriesSaleDto
 		);
 	}
 	

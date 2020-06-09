@@ -35,7 +35,6 @@ import ru.mystamps.web.feature.participant.AddParticipantForm;
 import ru.mystamps.web.feature.participant.EntityWithIdDto;
 import ru.mystamps.web.feature.series.AddSeriesDto;
 import ru.mystamps.web.feature.series.AddSeriesForm;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 import ru.mystamps.web.feature.series.SeriesFullInfoDto;
 import ru.mystamps.web.feature.series.SeriesInGalleryDto;
 import ru.mystamps.web.feature.series.SeriesInfoDto;
@@ -51,6 +50,7 @@ import ru.mystamps.web.feature.series.importing.SeriesParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesParsedDataDbDto;
 import ru.mystamps.web.feature.series.sale.AddSeriesSalesDto;
+import ru.mystamps.web.feature.series.sale.SeriesSaleDto;
 import ru.mystamps.web.feature.site.SuspiciousActivityDto;
 import ru.mystamps.web.tests.Random;
 
@@ -221,8 +221,8 @@ public final class TestObjects {
 	/**
 	 * @author Sergey Chechenev
 	 */
-	public static PurchaseAndSaleDto createPurchaseAndSaleDto() {
-		return new PurchaseAndSaleDto(
+	public static SeriesSaleDto createSeriesSaleDto() {
+		return new SeriesSaleDto(
 			Random.date(),
 			TEST_NAME,
 			TEST_URL,

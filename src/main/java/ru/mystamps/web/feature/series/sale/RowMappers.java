@@ -19,7 +19,6 @@ package ru.mystamps.web.feature.series.sale;
 
 import ru.mystamps.web.common.Currency;
 import ru.mystamps.web.common.JdbcUtils;
-import ru.mystamps.web.feature.series.PurchaseAndSaleDto;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -34,7 +33,7 @@ final class RowMappers {
 	/**
 	 * @author Sergey Chechenev
 	 */
-	/* default */ static PurchaseAndSaleDto forPurchaseAndSaleDto(ResultSet rs, int unused)
+	/* default */ static SeriesSaleDto forSeriesSaleDto(ResultSet rs, int unused)
 		throws SQLException {
 		
 		Date date               = rs.getDate("date");
@@ -52,7 +51,7 @@ final class RowMappers {
 		String conditionField = rs.getString("cond");
 		SeriesCondition condition = rs.wasNull() ? null : SeriesCondition.valueOf(conditionField);
 		
-		return new PurchaseAndSaleDto(
+		return new SeriesSaleDto(
 			date,
 			sellerName,
 			sellerUrl,
