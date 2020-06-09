@@ -394,6 +394,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			fragment                                               | _
 			'2 чего-либо'                                          | _
 			'0 марок'                                              | _
+			'№1576-1578=4,2МЕ'                                     | _
 			'Велоцираптор 2003 Блок с/з'                           | _
 			(SeriesValidation.MAX_STAMPS_IN_SERIES + 1) + ' марок' | _
 	}
