@@ -87,9 +87,9 @@
 					</p>
 					/*/-->
 					
-					<div class="row">
+					<div class="row" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 						<div class="col-sm-2 col-sm-offset-2">
-							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
 								</div>
@@ -111,7 +111,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3">
-							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
 								</div>
@@ -119,7 +119,7 @@
 							</div>
 						</div>
 						<div class="col-sm-3">
-							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
 								</div>
