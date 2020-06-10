@@ -12,9 +12,9 @@ Remove the first instance of a series from user's collection
 	Xpath Should Match X Times  xpath://input[@value="Remove from collection"]  2
 	# Submit the first form
 	Submit Form                 css:.remove-series-form
-	Page Should Contain Link    css:[href="/series/3"]
+	Page Should Contain Link    css:.image-gallery figcaption [href="/series/3"]
 	# See https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator
-	Element Text Should Be      css:[href="/series/3"] ~ .label-default  2 out of 3
+	Element Text Should Be      css:.image-gallery figcaption [href="/series/3"] ~ .label-default  2 out of 3
 
 Remove the last instance of a series from user's collection
 	Go To                         ${SITE_URL}/series/3

@@ -7,6 +7,7 @@
 - (feature)     admin can add a price in Michel, Scott, Yvert, Gibbons, Solovyov, and Zagorski catalogs
 - (feature)     admin can add numbers in Michel, Scott, Yvert, Gibbons, Solovyov, and Zagorski catalogs
 - (improvement) on a country info page show the series with an image
+- (improvement) on a collection info page show the series with an image
 - (feature)     add a condition (MNH/MNHOG/MVLH/CTO/cancelled) to a series sale
 
 0.4.3

@@ -48,6 +48,7 @@ final class RowMappers {
 		Integer releaseYear  = JdbcUtils.getInteger(rs, "release_year");
 		Integer quantity     = rs.getInt("quantity");
 		Boolean perforated   = rs.getBoolean("perforated");
+		Integer previewId    = JdbcUtils.getInteger(rs, "preview_id");
 		Integer numberOfStamps = rs.getInt("number_of_stamps");
 		
 		return new SeriesInCollectionDto(
@@ -57,6 +58,7 @@ final class RowMappers {
 			releaseYear,
 			perforated,
 			quantity,
+			previewId,
 			numberOfStamps
 		);
 	}

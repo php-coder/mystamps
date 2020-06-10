@@ -29,6 +29,7 @@ public class SeriesInCollectionDto {
 	private final Integer releaseYear;
 	private final Boolean perforated;
 	private final Integer quantity;
+	private final Integer previewId;
 	// quantity holds number of stamps in a series, while user may
 	// have less stamps in his collection
 	private final Integer numberOfStamps;

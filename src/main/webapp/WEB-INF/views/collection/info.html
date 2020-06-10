@@ -88,7 +88,7 @@
 					/*/-->
 					
 					<div class="row">
-						<div class="col-sm-2 col-md-push-4">
+						<div class="col-sm-2 col-sm-offset-2">
 							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_in_collection}">In this collection</h4>
@@ -110,7 +110,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-push-4">
+						<div class="col-sm-3">
 							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_countries}">Stamps by countries</h4>
@@ -118,7 +118,7 @@
 								<div id="countries-chart" class="panel-body no-padding"></div>
 							</div>
 						</div>
-						<div class="col-sm-3 col-md-push-4">
+						<div class="col-sm-3">
 							<div class="panel panel-default" th:if="${not #lists.isEmpty(seriesOfCollection)}">
 								<div class="panel-heading">
 									<h4 class="panel-title" th:text="#{t_stamps_by_categories}">Stamps by categories</h4>
@@ -126,32 +126,80 @@
 								<div id="categories-chart" class="panel-body no-padding"></div>
 							</div>
 						</div>
-						<div class="col-sm-4 col-md-pull-8">
-							<ul th:if="${not #lists.isEmpty(seriesOfCollection)}" th:remove="all-but-first">
-								<li th:each="series : ${seriesOfCollection}">
+					</div>
+					
+					<div class="row" th:if="${not #lists.isEmpty(seriesOfCollection)}">
+						<div class="col-sm-12">
+							
+							<div class="image-gallery" th:remove="all-but-first">
+								
+								<figure th:each="series : ${seriesOfCollection}"
+										th:with="desc=|${series.category}, ${series.country != null ? series.country + ', ' : ''}${series.releaseYear != null ? series.releaseYear + ', ' : ''}${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}${not series.perforated ? ' (__#{t_wo_perforation_short}__)' : ''}|">
+									
 									<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}">
-										<span th:remove="tag" th:text="|${series.category}, |">Animals, </span>
-										<span th:remove="tag" th:if="${series.country != null}" th:text="|${series.country}, |">Italy, </span>
-										<span th:remove="tag" th:if="${series.releaseYear != null}" th:text="|${series.releaseYear}, |">1999, </span>
-										<span th:remove="tag" th:text="|${series.quantity}&nbsp;${series.quantity != 1 ? '__#{t_stamps}__' : '__#{t_stamp}__'}|">7&nbsp;stamps</span>
-										<span th:remove="tag" th:if="${not series.perforated}" th:text="|(#{t_wo_perforation_short})|">(imperf.)</span>
+										<img src="http://via.placeholder.com/250"
+											 alt="Prehistoric animals, Italy, 1999, 7&nbsp;stamps (imperf.)"
+											 title="Prehistoric animals, Italy, 1999, 7&nbsp;stamps (imperf.)"
+											 th:alt="${desc}"
+											 th:title="${desc}"
+											 th:src="@{${GET_IMAGE_PREVIEW_PAGE}(id=${series.previewId})}" />
 									</a>
-									<!--/*/
-									<span class="label label-default"
-										th:if="${series.quantity != series.numberOfStamps}"
-										th:text="#{t_m_out_of_n(${series.numberOfStamps}, ${series.quantity})}"></span>
-									/*/-->
-									<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id and justAddedNumberOfStamps == series.NumberOfStamps}" class="label label-success">New</span>
-									<!--/* @todo #1123 /collection/{slug}: show "New" badge only once */-->
-								</li>
-								<li>
-									<a href="../series/info.html">Animals, Italy, 22&nbsp;stamps</a>
-									<span class="label label-default">20 out of 22</span>
-								</li>
-								<li>
-									<a href="../series/info.html">Animals, Italy, 1983, 5&nbsp;stamps</a>
-								</li>
-							</ul>
+									<figcaption>
+										<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}" th:text="${desc}">
+											Prehistoric animals, Italy, 1999, 7&nbsp;stamps (imperf.)
+										</a>
+										<!--/*/
+										<span class="label label-default"
+											th:if="${series.quantity != series.numberOfStamps}"
+											th:text="#{t_m_out_of_n(${series.numberOfStamps}, ${series.quantity})}"></span>
+										/*/-->
+										<span th:if="${justAddedSeriesId != null and justAddedSeriesId == series.id and justAddedNumberOfStamps == series.NumberOfStamps}" class="label label-success">New</span>
+										<!--/* @todo #1123 /collection/{slug}: show "New" badge only once */-->
+										<!--/* @todo #511 /collection/{slug}: wrap a long caption */-->
+									</figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Prehistoric animals, Italy, 22&nbsp;stamps" title="Prehistoric animals, Italy, 22&nbsp;stamps" />
+									</a>
+									<figcaption><a href="../series/info.html">Prehistoric animals, Italy, 22&nbsp;stamps</a></figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Cartoons, Italy, 2005, 5&nbsp;stamps" title="Cartoons, Italy, 2005, 5&nbsp;stamps" />
+									</a>
+									<figcaption><a href="../series/info.html">Cartoons, Italy, 2005, 5&nbsp;stamps</a></figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Prehistoric animals, Italy, 22&nbsp;stamps" title="Prehistoric animals, Italy, 22&nbsp;stamps" />
+									</a>
+									<figcaption>
+										<a href="../series/info.html">Prehistoric animals, Italy, 22&nbsp;stamps</a>
+										<span class="label label-default">20 out of 22</span>
+									</figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Prehistoric animals, Italy, 1983, 5&nbsp;stamps" title="Prehistoric animals, Italy, 1983, 5&nbsp;stamps" />
+									</a>
+									<figcaption><a href="../series/info.html">Prehistoric animals, Italy, 1983, 5&nbsp;stamps</a></figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Famous People, Italy, 2003, 4&nbsp;stamps" title="Famous People, Italy, 2003, 4&nbsp;stamps" />
+									</a>
+									<figcaption><a href="../series/info.html">Famous People, Italy, 2003, 4&nbsp;stamps</a></figcaption>
+								</figure>
+								<figure>
+									<a href="../series/info.html">
+										<img src="http://via.placeholder.com/250" alt="Sport, Italy, 1996, 1&nbsp;stamp" title="Sport, Italy, 1996, 1&nbsp;stamp" />
+									</a>
+									<figcaption><a href="../series/info.html">Sport, Italy, 1996, 1&nbsp;stamp</a></figcaption>
+								</figure>
+								
+							</div>
+							
 						</div>
 					</div>
 				</div>
