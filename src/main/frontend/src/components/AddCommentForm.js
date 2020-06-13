@@ -92,7 +92,7 @@ class AddCommentFormView extends React.PureComponent {
 		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+				<form id="add-comment-form" className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
 					<div
 						id="add-comment-failed-msg"
