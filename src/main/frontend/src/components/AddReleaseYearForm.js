@@ -113,7 +113,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
-						<label className="control-label col-sm-3">
+						<label for="release-year" className="control-label col-sm-3">
 							{ l10n['t_year'] || 'Year' }
 						</label>
 						<div className="col-sm-6">
