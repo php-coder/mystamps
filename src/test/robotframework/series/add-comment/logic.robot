@@ -2,6 +2,7 @@
 Documentation   Verify scenarios of adding a comment to a series
 Library         SeleniumLibrary
 Resource        ../../auth.steps.robot
+Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
 Force Tags      series  add-comment  logic
