@@ -11,7 +11,7 @@ Add a comment
 	Input Text                        id:comment  A comment
 	Submit Form                       id:add-comment-form
 	Wait Until Page Does Not Contain  id:add-comment-form
-	Element Text Should Be            id:comment  A comment
+	Wait Until Element Value Is       comment  A comment
 
 *** Keywords ***
 Before Test Suite
