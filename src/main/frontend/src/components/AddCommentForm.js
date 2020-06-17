@@ -100,7 +100,7 @@ class AddCommentFormView extends React.PureComponent {
 						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
-						<label for="comment" className="control-label col-sm-3">
+						<label htmlFor="comment" className="control-label col-sm-3">
 							{ l10n['t_comment'] || 'Comment' }
 						</label>
 						<div className="col-sm-6">
