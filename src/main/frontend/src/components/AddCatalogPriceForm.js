@@ -123,7 +123,7 @@ class AddCatalogPriceFormView extends React.PureComponent {
 		const [currencySymbol, currencyName] = this.getCurrencyByCatalogName(catalog);
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+				<form id="add-catalog-price-form" className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
 					<div
 						id="add-catalog-price-failed-msg"
