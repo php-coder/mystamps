@@ -105,7 +105,7 @@ class AddReleaseYearFormView extends React.PureComponent {
 		
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+				<form id="add-release-year-form" className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
 					<div
 						id="add-release-year-failed-msg"
