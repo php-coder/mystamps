@@ -48,7 +48,6 @@ class RestSeriesController {
 	
 	private final SeriesService seriesService;
 	
-	// @todo #785 Update series: add integration test
 	// @todo #785 Update series: add validation for a comment
 	// @todo #1339 Update series: add validation for catalog numbers
 	// @todo #1340 Update series: add validation for a price

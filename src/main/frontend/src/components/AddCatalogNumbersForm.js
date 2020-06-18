@@ -105,7 +105,8 @@ class AddCatalogNumbersFormView extends React.PureComponent {
 
 		return (
 			<div className="col-sm-12 form-group">
-				<form className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+				<form id="add-catalog-numbers-form"
+					className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
 					<div
 						id="add-catalog-numbers-failed-msg"
