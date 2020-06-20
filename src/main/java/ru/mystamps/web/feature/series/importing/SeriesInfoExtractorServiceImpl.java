@@ -525,7 +525,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 					break;
 				case "ГАШ":
 				case "ГАШ.":
-				case "ГАШЕНЫЕ":
+				case "ГАШЕНЫЙ": case "ГАШЕНАЯ": case "ГАШЕНЫЕ": case "ГАШЕНЫХ":
+				case "ГАШЁНЫЙ": case "ГАШЁНАЯ": case "ГАШЁНЫЕ": case "ГАШЁНЫХ":
 					condition = SeriesCondition.CANCELLED;
 					break;
 				// written in Russian
