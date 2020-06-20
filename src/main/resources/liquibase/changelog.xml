@@ -15,6 +15,7 @@
 	<include file="version/0.4.2.xml" relativeToChangelogFile="true" />
 	<include file="version/0.4.3.xml" relativeToChangelogFile="true" />
 	<include file="version/0.4.4.xml" relativeToChangelogFile="true" />
+	<include file="version/0.4.5.xml" relativeToChangelogFile="true" />
 	
 	<include file="test-data.xml" relativeToChangelogFile="true" />
 
