@@ -1,4 +1,6 @@
 0.x (upcoming release)
+
+0.4.4
 - (feature)     a series can be marked as a similar to another one
 - (feature)     series images can be replaced
 - (feature)     add preliminary support for hidden images
