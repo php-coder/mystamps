@@ -63,7 +63,12 @@ public class UsersActivationServiceImpl implements UsersActivationService {
 		
 		usersActivationDao.removeByActivationKey(activationKey);
 		
-		log.info("Users activation '{}' has been deleted", activationKey);
+		// we log with a low level because this method is always executed as part of a business
+		// operation and we don't know a full context or don't have all the details on our level.
+		// For example, during cleaning up an expired records, an outer method has a full object
+		// and logs also e-mail and creation date. During account creation, the information that
+		// the activation has been removed, isn't important and might be safely excluded from logs.
+		log.debug("Users activation '{}' has been deleted", activationKey);
 	}
 	
 	@Override
