@@ -24,6 +24,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -130,12 +131,22 @@ public class ApiMailgunEmailSendingStrategy implements MailgunEmailSendingStrate
 				String.class
 			);
 			
-			LOG.info("Mailgun response code: {}", response.getStatusCode());
-			LOG.debug("Mailgun response headers: {}", response.getHeaders());
-			LOG.info("Mailgun response body: {}", StringUtils.remove(response.getBody(), '\n'));
+			boolean isWarning = response.getStatusCodeValue() == HttpStatus.OK.value();
+			String body = StringUtils.remove(response.getBody(), '\n');
+			logWarningOrDebug(isWarning, "Mailgun response code: {}", response.getStatusCode());
+			logWarningOrDebug(isWarning, "Mailgun response headers: {}", response.getHeaders());
+			logWarningOrDebug(isWarning, "Mailgun response body: {}", body);
 			
 		} catch (UnsupportedEncodingException | RestClientException ex) {
 			throw new EmailSendingException("Can't send mail to " + email.recipientAddress(), ex);
+		}
+	}
+	
+	private static void logWarningOrDebug(boolean isWarning, String msg, Object... args) {
+		if (isWarning) {
+			LOG.warn(msg, args);
+		} else {
+			LOG.debug(msg, args);
 		}
 	}
 	
