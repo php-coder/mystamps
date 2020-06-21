@@ -31,6 +31,9 @@ public enum Features implements Feature {
 	@Label("Use a country microservice for the country-related functions")
 	USE_COUNTRY_MICROSERVICE,
 	
+	@Label("Use React components instead of server rendered HTML")
+	USE_REACT,
+	
 	@Label("/site/index: feature to check that Togglz works")
 	ALWAYS_DISABLED,
 	
