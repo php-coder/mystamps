@@ -37,6 +37,7 @@ public class AddSimilarSeriesForm implements AddSimilarSeriesDto {
 	// @todo #1280 AddSimilarSeriesForm: add integration test for mandatory similarSeriesId
 	// @todo #1280 AddSimilarSeriesForm: similarSeriesId must exist
 	// @todo #1448 AddSimilarSeriesForm.similarSeriesId: remove deprecated member
+	//
 	// NOTE: similarSeriesId is deprecated and exist only for backward compatibility
 	private Integer similarSeriesId;
 	
