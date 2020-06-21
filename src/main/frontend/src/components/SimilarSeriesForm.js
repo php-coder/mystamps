@@ -10,7 +10,7 @@ class SimilarSeriesForm extends React.PureComponent {
 		super(props);
 		this.state = {
 			seriesId: props.seriesId,
-			similarSeriesId: '',
+			similarSeriesIds: [],
 			isDisabled: false,
 			hasServerError: false,
 			validationErrors: []
@@ -22,26 +22,30 @@ class SimilarSeriesForm extends React.PureComponent {
 	handleChange(event) {
 		event.preventDefault();
 		this.setState({
-			similarSeriesId: event.target.value
+			similarSeriesIds: event.target.value
 		});
 	}
 	
 	handleSubmit(event) {
 		event.preventDefault();
 		
+		const similarSeriesIds = CatalogUtils.expandNumbers(this.state.similarSeriesIds)
+			.split(',')
+			.map(number => parseInt(number, 10))
+			.filter(number => !isNaN(number));
+		
 		this.setState({
+			similarSeriesIds: similarSeriesIds,
 			isDisabled: true,
 			hasServerError: false,
 			validationErrors: []
 		});
 		
-		const similarSeriesId = parseInt(this.state.similarSeriesId, 10) || this.state.similarSeriesId;
-		
 		axios.post(
 			this.props.url,
 			{
 				'seriesId': this.state.seriesId,
-				'similarSeriesId': similarSeriesId
+				'similarSeriesIds': similarSeriesIds
 			},
 			{
 				headers: {
@@ -59,8 +63,8 @@ class SimilarSeriesForm extends React.PureComponent {
 				if (data.fieldErrors.seriesId) {
 					fieldErrors.push(...data.fieldErrors.seriesId);
 				}
-				if (data.fieldErrors.similarSeriesId) {
-					fieldErrors.push(...data.fieldErrors.similarSeriesId);
+				if (data.fieldErrors.similarSeriesIds) {
+					fieldErrors.push(...data.fieldErrors.similarSeriesIds);
 				}
 				this.setState({ isDisabled: false, validationErrors: fieldErrors });
 				return;
@@ -81,7 +85,7 @@ class SimilarSeriesForm extends React.PureComponent {
 				l10n={this.props.l10n}
 				handleChange={this.handleChange}
 				handleSubmit={this.handleSubmit}
-				similarSeriesId={this.state.similarSeriesId}
+				similarSeriesIds={this.state.similarSeriesIds}
 				isDisabled={this.state.isDisabled}
 				hasServerError={this.state.hasServerError}
 				validationErrors={this.state.validationErrors}
@@ -92,7 +96,7 @@ class SimilarSeriesForm extends React.PureComponent {
 
 class SimilarSeriesFormView extends React.PureComponent {
 	render() {
-		const {similarSeriesId, hasServerError, isDisabled, validationErrors, handleChange, handleSubmit} = this.props;
+		const {similarSeriesIds, hasServerError, isDisabled, validationErrors, handleChange, handleSubmit} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		
 		return (
@@ -112,8 +116,8 @@ class SimilarSeriesFormView extends React.PureComponent {
 								type="text"
 								className="form-control"
 								required="required"
-								placeholder={ this.props.l10n['t_similar_series_id'] || 'Similar series ID' }
-								value={ similarSeriesId }
+								placeholder={ this.props.l10n['t_similar_series_ids'] || 'Similar series ID(s)' }
+								value={ similarSeriesIds }
 								onChange={ handleChange }
 								disabled={ isDisabled } />
 						</div>

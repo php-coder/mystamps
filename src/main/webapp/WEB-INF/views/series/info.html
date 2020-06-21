@@ -1140,6 +1140,7 @@
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')">
 		/*/-->
+		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/SimilarSeriesForm.js" th:src="${SIMILAR_SERIES_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
@@ -1151,7 +1152,7 @@
 				'l10n': {
 					't_server_error':      [[ #{t_server_error} ]],
 					't_mark_as_similar':   [[ #{t_mark_as_similar} ]],
-					't_similar_series_id': [[ #{t_similar_series_id} ]],
+					't_similar_series_ids': [[ #{t_similar_series_ids} ]],
 				}
 			};
 			+]*/

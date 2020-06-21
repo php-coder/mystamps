@@ -626,9 +626,9 @@ public class SeriesController {
 
 		} catch (RuntimeException ex) { // NOPMD: AvoidCatchingGenericException; try to catch-all
 			LOG.error(
-				"Couldn't mark series #{} similar to #{}: {}",
+				"Couldn't mark series #{} similar to {}: {}",
 				form.getSeriesId(),
-				form.getSimilarSeriesId(),
+				form.getSimilarSeriesIds(),
 				ex.getMessage()
 			);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

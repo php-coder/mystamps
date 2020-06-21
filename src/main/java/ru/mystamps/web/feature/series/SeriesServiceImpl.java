@@ -428,12 +428,14 @@ public class SeriesServiceImpl implements SeriesService {
 		Integer seriesId = dto.getSeriesId();
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		Integer similarSeriesId = dto.getSimilarSeriesId();
-		Validate.isTrue(similarSeriesId != null, "Similar series id must be non null");
-		
-		seriesDao.markAsSimilar(seriesId, similarSeriesId);
-		
-		log.info("Series #{} has been marked as similar to #{}", seriesId, similarSeriesId);
+		Set<Integer> similarSeriesIds = dto.getSimilarSeriesIds();
+		Validate.isTrue(similarSeriesIds != null, "Similar series ids must be non null");
+
+		// @todo #1448 SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO
+		for (Integer similarSeriesId : similarSeriesIds) {
+			seriesDao.markAsSimilar(seriesId, similarSeriesId);
+			log.info("Series #{} has been marked as similar to #{}", seriesId, similarSeriesId);
+		}
 	}
 	
 	private List<SeriesInfoDto> findByCatalogNumber(

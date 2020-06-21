@@ -20,7 +20,10 @@ package ru.mystamps.web.feature.series;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
+import java.util.Set;
 
 // @todo #1280 AddSimilarSeriesForm: series and similar series must be different
 @Getter
@@ -33,6 +36,34 @@ public class AddSimilarSeriesForm implements AddSimilarSeriesDto {
 	
 	// @todo #1280 AddSimilarSeriesForm: add integration test for mandatory similarSeriesId
 	// @todo #1280 AddSimilarSeriesForm: similarSeriesId must exist
-	@NotNull
+	// @todo #1448 AddSimilarSeriesForm.similarSeriesId: remove deprecated member
+	// NOTE: similarSeriesId is deprecated and exist only for backward compatibility
 	private Integer similarSeriesId;
+	
+	private Set<Integer> similarSeriesIds;
+	
+	@NotNull
+	public Integer getSimilarSeriesId() {
+		if (similarSeriesId != null) {
+			return similarSeriesId;
+		}
+		
+		if (similarSeriesIds != null && !similarSeriesIds.isEmpty()) {
+			return similarSeriesIds.iterator().next();
+		}
+		
+		return null;
+	}
+	
+	// @todo #1448 AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty
+	@NotEmpty
+	public Set<Integer> getSimilarSeriesIds() {
+		// respect the old interface to not break compatibility
+		if (similarSeriesId != null) {
+			return Collections.singleton(similarSeriesId);
+		}
+		
+		return similarSeriesIds;
+	}
+	
 }
