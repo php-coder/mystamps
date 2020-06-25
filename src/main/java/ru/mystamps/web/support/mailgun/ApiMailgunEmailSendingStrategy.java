@@ -131,7 +131,7 @@ public class ApiMailgunEmailSendingStrategy implements MailgunEmailSendingStrate
 				String.class
 			);
 			
-			boolean isWarning = response.getStatusCodeValue() == HttpStatus.OK.value();
+			boolean isWarning = response.getStatusCodeValue() != HttpStatus.OK.value();
 			String body = StringUtils.remove(response.getBody(), '\n');
 			logWarningOrDebug(isWarning, "Mailgun response code: {}", response.getStatusCode());
 			logWarningOrDebug(isWarning, "Mailgun response headers: {}", response.getHeaders());
