@@ -116,7 +116,7 @@ class SimilarSeriesFormView extends React.PureComponent {
 								type="text"
 								className="form-control"
 								required="required"
-								placeholder={ l10n['t_similar_series_ids'] || 'Similar series ID(s)' }
+								placeholder={ `${l10n['t_example'] || 'Example'}: 3,9-12` }
 								value={ similarSeriesIds }
 								onChange={ handleChange }
 								disabled={ isDisabled } />
