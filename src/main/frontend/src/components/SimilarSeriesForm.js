@@ -96,14 +96,14 @@ class SimilarSeriesForm extends React.PureComponent {
 
 class SimilarSeriesFormView extends React.PureComponent {
 	render() {
-		const {similarSeriesIds, hasServerError, isDisabled, validationErrors, handleChange, handleSubmit} = this.props;
+		const {similarSeriesIds, hasServerError, isDisabled, validationErrors, handleChange, handleSubmit, l10n} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		
 		return (
 			<div className="row">
 				<div id="mark-similar-series-failed-msg"
 					className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-					{ this.props.l10n['t_server_error'] || 'Server error' }
+					{ l10n['t_server_error'] || 'Server error' }
 				</div>
 				
 				<div className="col-sm-9 col-sm-offset-3">
@@ -116,7 +116,7 @@ class SimilarSeriesFormView extends React.PureComponent {
 								type="text"
 								className="form-control"
 								required="required"
-								placeholder={ this.props.l10n['t_similar_series_ids'] || 'Similar series ID(s)' }
+								placeholder={ l10n['t_similar_series_ids'] || 'Similar series ID(s)' }
 								value={ similarSeriesIds }
 								onChange={ handleChange }
 								disabled={ isDisabled } />
@@ -126,7 +126,7 @@ class SimilarSeriesFormView extends React.PureComponent {
 							<button type="submit"
 								className="btn btn-primary btn-sm"
 								disabled={ isDisabled }>
-								{ this.props.l10n['t_mark_as_similar'] || 'Mark as similar' }
+								{ l10n['t_mark_as_similar'] || 'Mark as similar' }
 							</button>
 						</div>
 						<span id="similar-id.errors" className={`help-block ${hasValidationErrors ? '' : 'hidden'}`}>
