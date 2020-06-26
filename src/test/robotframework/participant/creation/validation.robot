@@ -9,7 +9,7 @@ Force Tags       participant  validation
 
 *** Test Cases ***
 Create participant with blank required fields
-	[Setup]                 Disable Client Validation
+	[Setup]                 Disable Client Validation  add-participant-form
 	Submit Form             id:add-participant-form
 	Element Text Should Be  id:name.errors  Value must not be empty
 
@@ -37,6 +37,3 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/participant/add
-
-Disable Client Validation
-	Remove Element Attribute  name  required

@@ -4,7 +4,7 @@ Library         SeleniumLibrary
 Resource        ../../selenium.utils.robot
 Suite Setup     Before Test Suite
 Suite Teardown  Close Browser
-Test Setup      Disable Client Validation
+Test Setup      Disable Client Validation  activate-account-form
 Force Tags      account  activation  validation
 
 *** Test Cases ***
@@ -105,15 +105,9 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}/account/activate  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
-Disable Client Validation
-	Remove Element Attribute  login                 required
-	Remove Element Attribute  password              required
-	Remove Element Attribute  passwordConfirmation  required
-	Remove Element Attribute  activationKey         required
-
 Login should not contain repeated special characters
 	[Arguments]                ${login}
-	Disable Client Validation
+	Disable Client Validation  activate-account-form
 	Input Text                 id:login         ${login}
 	Submit Form                id:activate-account-form
 	Element Text Should Be     id:login.errors  Login must not contain repetition of hyphen, dot or underscore

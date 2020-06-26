@@ -8,7 +8,7 @@ Force Tags      account  authentication  validation
 
 *** Test Cases ***
 Authenticate with empty credentials
-	[Setup]                 Disable Client Validation
+	[Setup]                 Disable Client Validation  auth-account-form
 	Input Text              id:login        ${EMPTY}
 	Input Text              id:password     ${EMPTY}
 	Submit Form             id:auth-account-form
@@ -24,8 +24,4 @@ Authenticate with invalid credentials
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
-
-Disable Client Validation
-	Remove Element Attribute  login     required
-	Remove Element Attribute  password  required
 

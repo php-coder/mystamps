@@ -9,7 +9,7 @@ Force Tags       collection  validation
 
 *** Test Cases ***
 Add a series without required field
-	[Setup]                 Disable Client Validation
+	[Setup]                 Disable Client Validation  add-series-form
 	Input Text              id:number-of-stamps  ${EMPTY}
 	Submit Form             id:add-series-form
 	Element Text Should Be  id:number-of-stamps.errors  Value must not be empty
@@ -33,6 +33,3 @@ Before Test Suite
 	# We need a series with more than 1 stamp, so the number-of-stamps field won't be hidden.
 	# We also need a series with no more than 4 stamps, so the 5 stamps will lead to an error.
 	Go To                               ${SITE_URL}/series/2
-
-Disable Client Validation
-	Remove Element Attribute  number-of-stamps  required

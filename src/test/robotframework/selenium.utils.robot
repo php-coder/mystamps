@@ -52,7 +52,7 @@ Select Random Option From List
 	${randomIndex}=            Evaluate  random.randint(0, ${size}-1)  modules=random
 	Select From List By Index  ${locator}  ${randomIndex}
 
-Remove Element Attribute
-	[Documentation]     Remove an attribute with a specified name from an element identified by its id
-	[Arguments]         ${id}  ${name}
-	Execute Javascript  return window.document.getElementById('${id}').removeAttribute('${name}');
+Disable Client Validation
+	[Documentation]     Disable client validation for a form with a specified ID
+	[Arguments]         ${id}
+	Execute Javascript  return window.document.getElementById('${id}').setAttribute('novalidate', 'true');

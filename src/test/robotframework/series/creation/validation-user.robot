@@ -5,7 +5,7 @@ Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Test Setup       Disable Client Validation
+Test Setup       Disable Client Validation  add-series-form
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -61,10 +61,6 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
 
-Disable Client Validation
-	Remove Element Attribute  quantity  required
-	Remove Element Attribute  image     required
-
 Invalid Catalog Numbers Should Be Rejected
 	[Arguments]                    ${catalogNumbers}
 	# open page each time to be sure that we're starting from the clean state.
@@ -73,7 +69,7 @@ Invalid Catalog Numbers Should Be Rejected
 	# invisible (because link is toggling the visibility and when there are
 	# errors, fields are visible from the begining).
 	Go To                          ${SITE_URL}/series/add
-	Disable Client Validation
+	Disable Client Validation      add-series-form
 	Click Element                  id:add-catalog-numbers-link
 	# we should wait until all 4 fields with class js-catalogs-info will be
 	# visible but for simplicity we just check that the last field is visible
@@ -103,7 +99,7 @@ Invalid Catalog Price Should Be Rejected
 	# invisible (because link is toggling the visibility and when there are
 	# errors, fields are visible from the begining).
 	Go To                          ${SITE_URL}/series/add
-	Disable Client Validation
+	Disable Client Validation      add-series-form
 	Click Element                  id:add-catalog-numbers-link
 	# we should wait until all 4 fields with class js-catalogs-info will be
 	# visible but for simplicity we just check that the last field is visible

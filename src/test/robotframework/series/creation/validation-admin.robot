@@ -5,7 +5,7 @@ Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Test Setup       Disable Client Validation
+Test Setup       Disable Client Validation  add-series-form
 Force Tags       series  validation
 
 *** Test Cases ***
@@ -67,6 +67,3 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
-
-Disable Client Validation
-	Remove Element Attribute  quantity  required

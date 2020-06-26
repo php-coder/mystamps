@@ -29,7 +29,7 @@ Catalog numbers should accept valid values
 
 Catalog numbers should be stripped from any spaces
 	Go To                          ${SITE_URL}/series/add
-	Disable Client Validation
+	Disable Client Validation      add-series-form
 	Click Element                  id:add-catalog-numbers-link
 	Wait Until Element Is Visible  id:michelNumbers
 	Input Text                     id:michelNumbers    ${SPACE * 2}1 , 2${SPACE * 2}
@@ -93,14 +93,10 @@ Before Test Suite
 	Log In As                           login=coder  password=test
 	Go To                               ${SITE_URL}/series/add
 
-Disable Client Validation
-	Remove Element Attribute  quantity  required
-	Remove Element Attribute  image     required
-
 Valid Catalog Numbers Should Be Accepted
 	[Arguments]                      ${catalogNumbers}
 	Go To                            ${SITE_URL}/series/add
-	Disable Client Validation
+	Disable Client Validation        add-series-form
 	Click Element                    id:add-catalog-numbers-link
 	Wait Until Element Is Visible    id:michelNumbers
 	Input Text                       id:michelNumbers    ${catalogNumbers}

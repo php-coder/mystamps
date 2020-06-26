@@ -4,7 +4,7 @@ Library          SeleniumLibrary
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
-Test Setup       Disable Client Validation
+Test Setup       Disable Client Validation  activate-account-form
 Force Tags       account  activation  misc
 
 *** Test Cases ***
@@ -58,13 +58,9 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}/account/activate  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 
-Disable Client Validation
-	Remove Element Attribute  password              required
-	Remove Element Attribute  passwordConfirmation  required
-
 Name should not cause an error
 	[Arguments]                      ${name}
-	Disable Client Validation
+	Disable Client Validation        activate-account-form
 	Input Text                       id:name  ${name}
 	Submit Form                      id:activate-account-form
 	Page Should Not Contain Element  id:name.errors

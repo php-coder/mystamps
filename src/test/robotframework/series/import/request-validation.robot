@@ -9,7 +9,7 @@ Force Tags       series  import-series  validation
 
 *** Test Cases ***
 Submit request with blank required field
-	[Setup]                 Disable Client Validation
+	[Setup]                 Disable Client Validation  import-series-form
 	Submit Form             id:import-series-form
 	Element Text Should Be  id:url.errors  Value must not be empty
 
@@ -30,6 +30,3 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/import/request
-
-Disable Client Validation
-	Remove Element Attribute  url  required

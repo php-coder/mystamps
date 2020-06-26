@@ -9,7 +9,7 @@ Force Tags       series  misc
 
 *** Test Cases ***
 Comment should be stripped from leading and trailing spaces
-	Disable Client Validation
+	Disable Client Validation  add-series-form
 	Click Element              id:add-comment-link
 	Input Text                 id:comment  ${SPACE * 2}example comment${SPACE * 2}
 	Submit Form                id:add-series-form
@@ -21,6 +21,3 @@ Before Test Suite
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
 	Go To                               ${SITE_URL}/series/add
-
-Disable Client Validation
-	Remove Element Attribute  quantity  required
