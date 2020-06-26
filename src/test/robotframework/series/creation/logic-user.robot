@@ -13,9 +13,6 @@ Create series by filling only required fields
 	Select From List By Label  id:category  Sport
 	Input Text                 id:quantity  2
 	Choose File                id:image     ${MAIN_RESOURCE_DIR}${/}test.png
-	# Workaround for an invalid form when it contains required file input:
-	# https://github.com/HtmlUnit/htmlunit/issues/76
-	Remove Element Attribute   image  required
 	Submit Form                id:add-series-form
 	Element Text Should Be     id:category_name  Sport
 	Element Text Should Be     id:quantity       2
@@ -28,9 +25,6 @@ Create series by filling all fields
 	Input Text                 id:quantity  3
 	Unselect Checkbox          id:perforated
 	Choose File                id:image  ${MAIN_RESOURCE_DIR}${/}test.png
-	# Workaround for an invalid form when it contains required file input:
-	# https://github.com/HtmlUnit/htmlunit/issues/76
-	Remove Element Attribute   image  required
 	Click Element              id:specify-issue-date-link
 	Select From List By Value  id:day    8
 	Select From List By Value  id:month  9
