@@ -1007,8 +1007,7 @@
 					});
 				},
 				get: function (url) {
-					var possibleOutcomes = [ 'success' ];
-					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
+					var outcome = 'success';
 					var possibleResponses = {
 						'/series/100': {
 							'success': {
@@ -1095,8 +1094,6 @@
 								statusText: 'Fake Server Error'
 							};
 					}
-					
-					responseCount++;
 					
 					return new Promise(function delayExecution(resolve) {
 						setTimeout(resolve, 500 /* 0.5 second */);
