@@ -23,7 +23,7 @@ before_script:
       npm install -g bootlint;
       pip install --user html5validator==0.3.1 robotframework-lint==1.1 ansible==2.9.2 ansible-lint;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
-        gem install danger nokogiri --no-ri --no-rdoc;
+        gem install danger nokogiri --no-document;
       fi;
       sudo apt-get -qq update;
       sudo apt-get install -y shellcheck;
