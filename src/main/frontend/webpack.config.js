@@ -16,7 +16,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, '../../../target/classes/js/components'),
-        filename: '[name].js'
+        filename: '[name].min.js'
     },
     module: {
         rules: [

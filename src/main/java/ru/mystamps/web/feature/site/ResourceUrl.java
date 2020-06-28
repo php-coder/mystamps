@@ -42,14 +42,13 @@ public final class ResourceUrl {
 	private static final String PARTICIPANT_ADD_JS     = "/public/js/" + RESOURCES_VERSION + "/participant/add.min.js";
 	private static final String SERIES_ADD_JS          = "/public/js/" + RESOURCES_VERSION + "/series/add.min.js";
 	private static final String SERIES_INFO_JS         = "/public/js/" + RESOURCES_VERSION + "/series/info.min.js";
-	// @todo #1057 Use minified version of SeriesSaleImportForm.js
-	private static final String SALE_IMPORT_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSaleImportForm.js";
-	private static final String SIMILAR_SERIES_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.js";
-	private static final String ADD_COMMENT_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddCommentForm.js";
-	private static final String CATALOG_PRICE_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.js";
-	private static final String CATALOG_NUMBERS_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogNumbersForm.js";
-	private static final String RELEASE_YEAR_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.js";
-	private static final String SERIES_SALES_LIST_JS   = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSalesList.js";
+	private static final String SALE_IMPORT_FORM_JS     = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSaleImportForm.min.js";
+	private static final String SIMILAR_SERIES_FORM_JS  = "/public/js/" + RESOURCES_VERSION + "/components/SimilarSeriesForm.min.js";
+	private static final String ADD_COMMENT_FORM_JS     = "/public/js/" + RESOURCES_VERSION + "/components/AddCommentForm.min.js";
+	private static final String CATALOG_PRICE_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.min.js";
+	private static final String CATALOG_NUMBERS_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogNumbersForm.min.js";
+	private static final String RELEASE_YEAR_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.min.js";
+	private static final String SERIES_SALES_LIST_JS    = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSalesList.min.js";
 
 	private static final String BOOTSTRAP_LANGUAGE     = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
 	private static final String FAVICON_ICO            = "/favicon.ico";

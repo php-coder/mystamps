@@ -1118,9 +1118,9 @@
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('CREATE_SERIES')">
 		/*/-->
-		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/AddCatalogNumbersForm.js" th:src="${CATALOG_NUMBERS_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/AddReleaseYearForm.min.js" th:src="${RELEASE_YEAR_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/AddCatalogPriceForm.min.js" th:src="${CATALOG_PRICE_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/AddCatalogNumbersForm.min.js" th:src="${CATALOG_NUMBERS_FORM_JS}"></script>
 
 		<script th:inline="javascript">
 			/*[+
@@ -1210,7 +1210,7 @@
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('VIEW_SERIES_SALES')" togglz:active="USE_REACT">
 		/*/-->
-		<script src="../../../../../../target/classes/js/components/SeriesSalesList.js" th:src="${SERIES_SALES_LIST_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/SeriesSalesList.min.js" th:src="${SERIES_SALES_LIST_JS}"></script>
 		
 		<script th:inline="javascript">
 			/*[+
@@ -1243,7 +1243,7 @@
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('ADD_COMMENTS_TO_SERIES')" th:if="${series.comment == null}">
 		/*/-->
-		<script src="../../../../../../target/classes/js/components/AddCommentForm.js" th:src="${ADD_COMMENT_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/AddCommentForm.min.js" th:src="${ADD_COMMENT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
 			var addCommentProps = {
@@ -1276,7 +1276,7 @@
 		<th:block sec:authorize="hasAuthority('MARK_SIMILAR_SERIES')">
 		/*/-->
 		<script src="../../../../javascript/CatalogUtils.js" th:src="${CATALOG_UTILS_JS}"></script>
-		<script src="../../../../../../target/classes/js/components/SimilarSeriesForm.js" th:src="${SIMILAR_SERIES_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/SimilarSeriesForm.min.js" th:src="${SIMILAR_SERIES_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
 			var similarSeriesProps = {
@@ -1309,7 +1309,7 @@
 		<!--/*/
 		<th:block sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
 		/*/-->
-		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.min.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
 			var seriesSaleImportProps = {
