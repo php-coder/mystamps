@@ -97,8 +97,8 @@ class SeriesSaleItem extends React.PureComponent {
 				{' '}
 				<ParticipantLink url={sale.sellerUrl} name={sale.sellerName} />
 				{' '}
-				{ hasBuyer ?
-					(l10n['t_sold_to'] || 'sold to')
+				{ hasBuyer
+					? (l10n['t_sold_to'] || 'sold to')
 					: (l10n['t_was_selling'] || 'was selling for')
 				}
 				{' '}
@@ -121,8 +121,8 @@ class ParticipantLink extends React.PureComponent {
 		const { name, url } = this.props;
 		const hasUrl = !!url;
 		return (
-			hasUrl ?
-				<a href={url} rel="nofollow">{ name }</a>
+			hasUrl
+				? <a href={url} rel="nofollow">{ name }</a>
 				: name
 		)
 	}
