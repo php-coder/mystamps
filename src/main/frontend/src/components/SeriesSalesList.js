@@ -129,3 +129,5 @@ class ParticipantLink extends React.PureComponent {
 		)
 	}
 }
+
+window.SeriesSalesList = SeriesSalesList;

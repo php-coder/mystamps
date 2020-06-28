@@ -148,3 +148,5 @@ class AddReleaseYearFormView extends React.PureComponent {
 		);
 	}
 }
+
+window.AddReleaseYearForm = AddReleaseYearForm;

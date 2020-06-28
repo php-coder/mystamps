@@ -174,3 +174,5 @@ class SeriesSaleImportFormView extends React.PureComponent {
 		)
 	}
 }
+
+window.SeriesSaleImportForm = SeriesSaleImportForm;

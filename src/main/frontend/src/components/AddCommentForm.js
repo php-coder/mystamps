@@ -132,3 +132,5 @@ class AddCommentFormView extends React.PureComponent {
 		);
 	}
 }
+
+window.AddCommentForm = AddCommentForm;

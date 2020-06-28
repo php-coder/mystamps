@@ -5,14 +5,16 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "~7.10.1",
     "@babel/core": "~7.10.2",
     "@babel/preset-env": "~7.10.2",
-    "@babel/preset-react": "~7.10.1"
+    "@babel/preset-react": "~7.10.1",
+    "babel-loader": "~8.1.0",
+    "webpack": "~4.43.0",
+    "webpack-cli": "~3.3.12"
   },
   "scripts": {
-    "build": "babel src --out-dir ../../../target/classes/js",
-    "watch": "babel src --out-dir ../../../target/classes/js --watch"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -31,11 +33,5 @@
     "url": "https://github.com/php-coder/mystamps/issues",
     "email": "slava.semushin@gmail.com"
   },
-  "homepage": "https://github.com/php-coder/mystamps#readme",
-  "babel": {
-    "presets": [
-      "@babel/preset-react",
-      "@babel/preset-env"
-    ]
-  }
+  "homepage": "https://github.com/php-coder/mystamps#readme"
 }

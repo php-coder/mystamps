@@ -29,7 +29,7 @@ class SimilarSeriesForm extends React.PureComponent {
 	handleSubmit(event) {
 		event.preventDefault();
 		
-		const similarSeriesIds = CatalogUtils.expandNumbers(this.state.similarSeriesIds)
+		const similarSeriesIds = window.CatalogUtils.expandNumbers(this.state.similarSeriesIds)
 			.split(',')
 			.map(number => parseInt(number, 10))
 			.filter(number => !isNaN(number));
@@ -139,3 +139,5 @@ class SimilarSeriesFormView extends React.PureComponent {
 		)
 	}
 }
+
+window.SimilarSeriesForm = SimilarSeriesForm;

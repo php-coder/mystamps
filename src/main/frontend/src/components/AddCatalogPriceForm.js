@@ -185,3 +185,5 @@ class AddCatalogPriceFormView extends React.PureComponent {
 		);
 	}
 }
+
+window.AddCatalogPriceForm = AddCatalogPriceForm;

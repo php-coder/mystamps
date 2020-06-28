@@ -167,3 +167,5 @@ class AddCatalogNumbersFormView extends React.PureComponent {
 		);
 	}
 }
+
+window.AddCatalogNumbersForm = AddCatalogNumbersForm;
