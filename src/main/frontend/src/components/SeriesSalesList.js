@@ -86,6 +86,11 @@ class SeriesSaleItem extends React.PureComponent {
 		const hasTransactionUrl = !!sale.transactionUrl;
 		const hasSecondPrice = !!sale.secondPrice;
 
+		let priceInfo = `${sale.firstPrice}\u00A0${sale.firstCurrency}`;
+		if (hasSecondPrice) {
+			priceInfo += ` (${sale.secondPrice}\u00A0${sale.secondCurrency})`;
+		}
+		
 		return (
 			<li id={ `series-sale-${index}-info` }>
 				{ hasDate && sale.date }
@@ -101,15 +106,9 @@ class SeriesSaleItem extends React.PureComponent {
 				{' '}
 				{ hasBuyer && (l10n['t_sold_for'] || 'for') }
 				{' '}
-				{ hasTransactionUrl ?
-					<a href={sale.transactionUrl} id={ `series-sale-${index}-transaction` } rel="nofollow">
-						{ `${sale.firstPrice}\u00A0${sale.firstCurrency}` }
-						{ hasSecondPrice && ` (${sale.secondPrice}\u00A0${sale.secondCurrency})` }
-					</a>
-					: <React.Fragment>
-						{ `${sale.firstPrice}\u00A0${sale.firstCurrency}` }
-						{ hasSecondPrice && ` (${sale.secondPrice}\u00A0${sale.secondCurrency})` }
-					</React.Fragment>
+				{ hasTransactionUrl
+					? <a href={sale.transactionUrl} id={ `series-sale-${index}-transaction` } rel="nofollow">{ priceInfo }</a>
+					: priceInfo
 				}
 				{ hasCondition && ` (${sale.condition !== 'CANCELLED' ? sale.condition : (l10n['t_cancelled'] || 'cancelled')})` }
 			</li>
