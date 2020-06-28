@@ -102,7 +102,7 @@ class SeriesSaleItem extends React.PureComponent {
 					: (l10n['t_was_selling'] || 'was selling for')
 				}
 				{' '}
-				{ hasBuyer && (<ParticipantLink url={sale.buyerUrl} name={sale.buyerName} />) }
+				{ hasBuyer && <ParticipantLink url={sale.buyerUrl} name={sale.buyerName} /> }
 				{' '}
 				{ hasBuyer && (l10n['t_sold_for'] || 'for') }
 				{' '}
