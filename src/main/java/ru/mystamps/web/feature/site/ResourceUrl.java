@@ -34,7 +34,7 @@ public final class ResourceUrl {
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION = "v0.4.4.1";
 
-	// CheckStyle: ignore LineLength for next 18 lines
+	// CheckStyle: ignore LineLength for next 16 lines
 	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	private static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";
