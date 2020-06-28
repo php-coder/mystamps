@@ -104,15 +104,14 @@ class SeriesSaleItem extends React.PureComponent {
 				{ hasTransactionUrl ?
 					<a href={sale.transactionUrl} id={ `series-sale-${index}-transaction` } rel="nofollow">
 						{ `${sale.firstPrice}\u00A0${sale.firstCurrency}` }
-						{ hasSecondPrice && `(${sale.secondPrice}\u00A0${sale.secondCurrency})` }
+						{ hasSecondPrice && ` (${sale.secondPrice}\u00A0${sale.secondCurrency})` }
 					</a>
 					: <React.Fragment>
 						{ `${sale.firstPrice}\u00A0${sale.firstCurrency}` }
-						{ hasSecondPrice && `(${sale.secondPrice}\u00A0${sale.secondCurrency})` }
+						{ hasSecondPrice && ` (${sale.secondPrice}\u00A0${sale.secondCurrency})` }
 					</React.Fragment>
 				}
-				{' '}
-				{ hasCondition && (sale.condition !== 'CANCELLED' ? sale.condition : (l10n['t_cancelled'] || 'cancelled')) }
+				{ hasCondition && ` (${sale.condition !== 'CANCELLED' ? sale.condition : (l10n['t_cancelled'] || 'cancelled')})` }
 			</li>
 		)
 	}
