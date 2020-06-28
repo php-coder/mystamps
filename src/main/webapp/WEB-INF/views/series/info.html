@@ -964,7 +964,7 @@
 					});
 				},
 				patch: function (url) {
-					var possibleOutcomes = ['failOnForm', 'failOnField', 'success'];
+					var possibleOutcomes = [ 'failOnForm', 'failOnField', 'success' ];
 					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
 					var possibleResponses = {
 						'/series/100': {
@@ -1007,7 +1007,7 @@
 					});
 				},
 				get: function (url) {
-					var possibleOutcomes = [ 'success'];
+					var possibleOutcomes = [ 'success' ];
 					var outcome = possibleOutcomes[responseCount % possibleOutcomes.length];
 					var possibleResponses = {
 						'/series/100': {
