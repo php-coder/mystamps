@@ -104,19 +104,19 @@ class AddReleaseYearFormView extends React.PureComponent {
 		const rangeOfYears = this.generateRange(sinceYear, tillYear);
 		
 		return (
-			<div className="col-sm-12 form-group">
-				<form id="add-release-year-form" className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
-					onSubmit={ handleSubmit }>
-					<div
-						id="add-release-year-failed-msg"
-						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden' }` }>
-						{ l10n['t_server_error'] || 'Server error' }
-					</div>
-					<div className="form-group form-group-sm">
+			<div className="row">
+				<div id="add-release-year-failed-msg"
+					className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
+					{ l10n['t_server_error'] || 'Server error' }
+				</div>
+				<div className="col-sm-12">
+					<form id="add-release-year-form"
+						className={`form-horizontal ${hasValidationErrors ? 'has-error' : ''}`}
+						onSubmit={ handleSubmit }>
 						<label htmlFor="release-year" className="control-label col-sm-3">
 							{ l10n['t_year'] || 'Year' }
 						</label>
-						<div className="col-sm-6">
+						<div className="form-group form-group-sm col-sm-5">
 							<select
 								id="release-year"
 								name="release-year"
@@ -128,22 +128,23 @@ class AddReleaseYearFormView extends React.PureComponent {
 									<option key={year.toString()} value={year}>{ year }</option>
 								))}
 							</select>
+							<span
+								id="release-year.errors"
+								className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
+								{ validationErrors.join(', ') }
+							</span>
 						</div>
-					</div>
-					<div className="col-sm-offset-3 col-sm-4">
-						<span
-							id="release-year.errors"
-							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
-							{ validationErrors.join(', ') }
-						</span>
-						<button
-							type="submit"
-							className="btn btn-primary btn-sm"
-							disabled={ isDisabled }>
-							{ l10n['t_add'] || 'Add' }
-						</button>
-					</div>
-				</form>
+						<div className="form-group form-group-sm">
+							<button type="submit"
+								className="btn btn-primary btn-sm"
+								disabled={ isDisabled }>
+								{ l10n['t_add'] || 'Add' }
+							</button>
+							
+						</div>
+						
+					</form>
+				</div>
 			</div>
 		);
 	}
