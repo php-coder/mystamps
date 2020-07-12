@@ -19,8 +19,10 @@ package ru.mystamps.web.feature.category;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
@@ -53,13 +55,18 @@ public class CategoryConfig {
 	@RequiredArgsConstructor
 	public static class Services {
 		
+		private final Environment env;
 		private final CategoryDao categoryDao;
+		private final RestTemplateBuilder restTemplateBuilder;
 		
 		@Bean
 		public CategoryService categoryService() {
-			return new CategoryServiceImpl(
-				LoggerFactory.getLogger(CategoryServiceImpl.class),
-				categoryDao
+			return new TogglzWithFallbackCategoryService(
+				new ApiCategoryService(restTemplateBuilder, env),
+				new CategoryServiceImpl(
+					LoggerFactory.getLogger(CategoryServiceImpl.class),
+					categoryDao
+				)
 			);
 		}
 		

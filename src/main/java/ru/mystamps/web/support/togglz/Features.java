@@ -28,6 +28,9 @@ public enum Features implements Feature {
 	@EnabledByDefault
 	SEARCH_IN_COLLECTION,
 
+	@Label("Use a category microservice for the category-related functions")
+	USE_CATEGORY_MICROSERVICE,
+
 	@Label("Use a country microservice for the country-related functions")
 	USE_COUNTRY_MICROSERVICE,
 	
