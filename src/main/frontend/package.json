@@ -1,8 +1,30 @@
 {
   "name": "mystamps-frontend",
   "version": "0.4.4",
-  "description": "Frontend of https://my-stamps.ru",
   "private": true,
+  "description": "Frontend of https://my-stamps.ru",
+  "keywords": [
+    "mystamps"
+  ],
+  "homepage": "https://github.com/php-coder/mystamps#readme",
+  "bugs": {
+    "url": "https://github.com/php-coder/mystamps/issues",
+    "email": "slava.semushin@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/php-coder/mystamps.git",
+    "directory": "src/main/frontend"
+  },
+  "license": "GPL-2.0",
+  "author": {
+    "name": "Slava Semushin",
+    "email": "slava.semushin@gmail.com"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "~7.10.2",
@@ -11,27 +33,5 @@
     "babel-loader": "~8.1.0",
     "webpack": "~4.43.0",
     "webpack-cli": "~3.3.12"
-  },
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/php-coder/mystamps.git",
-    "directory": "src/main/frontend"
-  },
-  "keywords": [
-    "mystamps"
-  ],
-  "author": {
-    "name": "Slava Semushin",
-    "email": "slava.semushin@gmail.com"
-  },
-  "license": "GPL-2.0",
-  "bugs": {
-    "url": "https://github.com/php-coder/mystamps/issues",
-    "email": "slava.semushin@gmail.com"
-  },
-  "homepage": "https://github.com/php-coder/mystamps#readme"
+  }
 }
