@@ -535,6 +535,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 					condition = SeriesCondition.CTO;
 					break;
 				case "MNH**":
+				case "MNH**.":
 					condition = SeriesCondition.MNH;
 					break;
 				default:
