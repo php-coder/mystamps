@@ -956,11 +956,13 @@
 
 					responseCount++;
 
-					return new Promise(function delayExecution(resolve) {
-						setTimeout(resolve, 500 /* 0.5 second */);
-
-					}).then(function returnResponse() {
-						return stubResponse.status == 500 ? Promise.reject(stubResponse) : Promise.resolve(stubResponse);
+					return new Promise(function delayExecution(resolve, reject) {
+						setTimeout(
+							function returnResponse() {
+								stubResponse.status == 500 ? reject(stubResponse) : resolve(stubResponse);
+							},
+							500 /* 0.5 second */
+						);
 					});
 				},
 				patch: function (url) {
@@ -999,11 +1001,13 @@
 					
 					responseCount++;
 					
-					return new Promise(function delayExecution(resolve) {
-						setTimeout(resolve, 500 /* 0.5 second */);
-					
-					}).then(function returnResponse() {
-						return stubResponse.status == 500 ? Promise.reject(stubResponse) : Promise.resolve(stubResponse);
+					return new Promise(function delayExecution(resolve, reject) {
+						setTimeout(
+							function returnResponse() {
+								stubResponse.status == 500 ? reject(stubResponse) : resolve(stubResponse);
+							},
+							500 /* 0.5 second */
+						);
 					});
 				},
 				get: function (url) {
