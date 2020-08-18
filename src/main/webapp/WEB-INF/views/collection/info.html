@@ -143,6 +143,9 @@
 											 th:alt="${desc}"
 											 th:title="${desc}"
 											 th:src="@{${GET_IMAGE_PREVIEW_PAGE}(id=${series.previewId})}" />
+										<span class="label label-default image-counter"
+											th:if="${series.numberOfImages &gt; 1}"
+											th:text="#{t_images_counter(${series.numberOfImages})}">5 images</span>
 									</a>
 									<figcaption>
 										<a href="../series/info.html" th:href="@{${INFO_SERIES_PAGE}(id=${series.id})}" th:text="${desc}">
@@ -173,6 +176,7 @@
 								<figure>
 									<a href="../series/info.html">
 										<img src="http://via.placeholder.com/250" alt="Prehistoric animals, Italy, 22&nbsp;stamps" title="Prehistoric animals, Italy, 22&nbsp;stamps" />
+										<span class="label label-default image-counter">2 images</span>
 									</a>
 									<figcaption>
 										<a href="../series/info.html">Prehistoric animals, Italy, 22&nbsp;stamps</a>

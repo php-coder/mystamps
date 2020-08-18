@@ -50,6 +50,7 @@ final class RowMappers {
 		Boolean perforated   = rs.getBoolean("perforated");
 		Integer previewId    = JdbcUtils.getInteger(rs, "preview_id");
 		Integer numberOfStamps = rs.getInt("number_of_stamps");
+		Integer numberOfImages = rs.getInt("number_of_images");
 		
 		return new SeriesInCollectionDto(
 			seriesId,
@@ -59,7 +60,8 @@ final class RowMappers {
 			perforated,
 			quantity,
 			previewId,
-			numberOfStamps
+			numberOfStamps,
+			numberOfImages
 		);
 	}
 	

@@ -33,4 +33,5 @@ public class SeriesInCollectionDto {
 	// quantity holds number of stamps in a series, while user may
 	// have less stamps in his collection
 	private final Integer numberOfStamps;
+	private final Integer numberOfImages;
 }

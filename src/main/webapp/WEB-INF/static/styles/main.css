@@ -119,8 +119,14 @@ label {
 .image-gallery figure {
 	/* margin: <top> <right> <bottom> <left> */
 	margin: 15px 0 15px 15px;
+	position: relative;
 }
 .image-gallery figcaption {
 	margin-top: 5px;
 	text-align: center;
+}
+.image-gallery .image-counter {
+	position: absolute;
+	top: 10px;
+	left: 10px;
 }
