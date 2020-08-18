@@ -1095,11 +1095,12 @@
 							};
 					}
 					
-					return new Promise(function delayExecution(resolve) {
-						setTimeout(resolve, 500 /* 0.5 second */);
-					
-					}).then(function returnResponse() {
-						return stubResponse.status == 500 ? Promise.reject(stubResponse) : Promise.resolve(stubResponse);
+					return new Promise(function returnResponse(resolve, reject) {
+						if (stubResponse.status == 500) {
+							reject(stubResponse);
+						} else {
+							resolve(stubResponse);
+						}
 					});
 				}
 			};
