@@ -156,12 +156,15 @@ public final class TestObjects {
 	}
 	
 	public static SeriesInGalleryDto createSeriesInGalleryDto() {
+		Integer numberOfImages = 1;
+		
 		return new SeriesInGalleryDto(
 			Random.id(),
 			nullOr(Random.issueYear()),
 			Random.quantity(),
 			Random.perforated(),
 			Random.id(),
+			numberOfImages,
 			Random.categoryName()
 		);
 	}

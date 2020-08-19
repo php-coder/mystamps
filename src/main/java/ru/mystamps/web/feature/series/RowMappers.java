@@ -80,12 +80,13 @@ final class RowMappers {
 	/* default */ static SeriesInGalleryDto forSeriesInGalleryDto(ResultSet rs, int unused)
 		throws SQLException {
 		
-		Integer seriesId    = rs.getInt("id");
-		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
-		Integer quantity    = rs.getInt("quantity");
-		Boolean perforated  = rs.getBoolean("perforated");
-		Integer previewId   = JdbcUtils.getInteger(rs, "preview_id");
-		String category     = rs.getString("category");
+		Integer seriesId       = rs.getInt("id");
+		Integer releaseYear    = JdbcUtils.getInteger(rs, "release_year");
+		Integer quantity       = rs.getInt("quantity");
+		Boolean perforated     = rs.getBoolean("perforated");
+		Integer previewId      = JdbcUtils.getInteger(rs, "preview_id");
+		Integer numberOfImages = rs.getInt("number_of_images");
+		String category        = rs.getString("category");
 		
 		return new SeriesInGalleryDto(
 			seriesId,
@@ -93,6 +94,7 @@ final class RowMappers {
 			quantity,
 			perforated,
 			previewId,
+			numberOfImages,
 			category
 		);
 	}

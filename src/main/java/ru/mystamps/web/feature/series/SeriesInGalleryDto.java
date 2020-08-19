@@ -28,5 +28,6 @@ public class SeriesInGalleryDto {
 	private final Integer quantity;
 	private final Boolean perforated;
 	private final Integer previewId;
+	private final Integer numberOfImages;
 	private final String category;
 }
