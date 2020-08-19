@@ -100,7 +100,7 @@
 									th:alt="${label}"
 									th:title="${label}"
 									th:src="@{${GET_IMAGE_PREVIEW_PAGE}(id=${series.previewId})}" />
-								<span class="label label-default image-counter"
+								<span class="label image-counter"
 									th:if="${series.numberOfImages &gt; 1}"
 									th:text="#{t_images_counter(${series.numberOfImages})}">5 images</span>
 							</a>
