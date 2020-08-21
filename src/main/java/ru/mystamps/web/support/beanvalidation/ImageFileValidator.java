@@ -36,10 +36,8 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	private static final Logger LOG = LoggerFactory.getLogger(ImageFileValidator.class);
 	
 	// see https://en.wikipedia.org/wiki/JPEG#Syntax_and_structure
-	// CheckStyle: ignore NoWhitespaceAfterCheck for next 3 lines
-	private static final byte[][] JPEG_SIGNATURES = {
-		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE0 },
-		{ (byte)0xFF, (byte)0xD8, (byte)0xFF, (byte)0xE1 }
+	private static final byte[] JPEG_SIGNATURE = {
+		(byte)0xFF, (byte)0xD8, (byte)0xFF,
 	};
 	
 	// see https://en.wikipedia.org/wiki/Portable_Network_Graphics#File_header
@@ -50,14 +48,8 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	private static boolean isJpeg(byte[] bytes) {
 		// FIXME: also check that last 2 bytes are FF D9 (use RandomAccessFile)
 		// FIXME(java9): use Arrays.equals() with 6 parameters to avoid memory allocation
-		byte[] firstBytes = Arrays.copyOf(bytes, JPEG_SIGNATURES[0].length);
-		for (byte[] signature: JPEG_SIGNATURES) {
-			if (Arrays.equals(firstBytes, signature)) {
-				return true;
-			}
-		}
-		
-		return false;
+		byte[] firstBytes = Arrays.copyOf(bytes, JPEG_SIGNATURE.length);
+		return Arrays.equals(firstBytes, JPEG_SIGNATURE);
 	}
 	
 	private static boolean isPng(byte[] bytes) {
