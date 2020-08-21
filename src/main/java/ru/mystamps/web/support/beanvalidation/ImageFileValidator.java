@@ -64,21 +64,15 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		return Arrays.equals(bytes, PNG_SIGNATURE);
 	}
 	
-	private static byte[] readEightBytes(InputStream is) {
+	private static byte[] readEightBytes(InputStream is) throws IOException {
 		// CheckStyle: ignore MagicNumber for next 1 line
 		byte[] bytes = new byte[8];
-		try {
-			int read = is.read(bytes, 0, bytes.length);
-			if (read != bytes.length) {
-				return null;
-			}
-			
-			return bytes;
-			
-		} catch (IOException e) {
-			LOG.warn("Error during reading from file: {}", e.getMessage());
+		int read = is.read(bytes, 0, bytes.length);
+		if (read != bytes.length) {
 			return null;
 		}
+		
+		return bytes;
 	}
 	
 	private static String formatBytes(byte[] bytes) {
