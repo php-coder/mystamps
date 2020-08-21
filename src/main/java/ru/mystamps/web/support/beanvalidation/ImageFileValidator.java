@@ -109,21 +109,18 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		
 		try (InputStream stream = file.getInputStream()) {
 			
-			byte[] firstBytes = readEightBytes(stream);
-			if (firstBytes == null) {
+			byte[] bytes = readEightBytes(stream);
+			if (bytes == null) {
 				LOG.warn("Failed to read first bytes from file");
 				return false;
 			}
 			
-			if (isJpeg(firstBytes) || isPng(firstBytes)) {
+			if (isJpeg(bytes) || isPng(bytes)) {
 				return true;
 			}
 			
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(
-					"Looks like file isn't an image. First bytes: {}",
-					formatBytes(firstBytes)
-				);
+				LOG.debug("Looks like file isn't an image. First bytes: {}", formatBytes(bytes));
 			}
 			
 			return false;
