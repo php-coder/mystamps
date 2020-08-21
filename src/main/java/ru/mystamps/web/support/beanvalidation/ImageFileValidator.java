@@ -43,19 +43,16 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	};
 	
 	// see https://en.wikipedia.org/wiki/Portable_Network_Graphics#File_header
-	private static final byte[] PNG_FIRST_PART_SIGNATURE = {
-		(byte)0x89, 0x50, 0x4E, 0x47
-	};
-	
-	private static final byte[] PNG_SECOND_PART_SIGNATURE = {
-		0x0D, 0x0A, 0x1A, 0x0A
+	private static final byte[] PNG_SIGNATURE = {
+		(byte)0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A
 	};
 	
 	private static boolean isJpeg(byte[] bytes) {
 		// FIXME: also check that last 2 bytes are FF D9 (use RandomAccessFile)
-		
+		// FIXME(java9): use Arrays.equals() with 6 parameters to avoid memory allocation
+		byte[] firstBytes = Arrays.copyOf(bytes, JPEG_SIGNATURES[0].length);
 		for (byte[] signature: JPEG_SIGNATURES) {
-			if (Arrays.equals(bytes, signature)) {
+			if (Arrays.equals(firstBytes, signature)) {
 				return true;
 			}
 		}
@@ -63,17 +60,13 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		return false;
 	}
 	
-	private static boolean doesItLookLikePng(byte[] bytes) {
-		return Arrays.equals(bytes, PNG_FIRST_PART_SIGNATURE);
+	private static boolean isPng(byte[] bytes) {
+		return Arrays.equals(bytes, PNG_SIGNATURE);
 	}
 	
-	private static boolean isItReallyPng(byte[] bytes) {
-		return Arrays.equals(bytes, PNG_SECOND_PART_SIGNATURE);
-	}
-	
-	private static byte[] readFourBytes(InputStream is) {
+	private static byte[] readEightBytes(InputStream is) {
 		// CheckStyle: ignore MagicNumber for next 1 line
-		byte[] bytes = new byte[4];
+		byte[] bytes = new byte[8];
 		try {
 			int read = is.read(bytes, 0, bytes.length);
 			if (read != bytes.length) {
@@ -89,8 +82,12 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	}
 	
 	private static String formatBytes(byte[] bytes) {
-		// CheckStyle: ignore MagicNumber for next 1 line
-		return String.format("%02x %02x %02x %02x", bytes[0], bytes[1], bytes[2], bytes[3]);
+		// CheckStyle: ignore MagicNumber for next 4 lines
+		return String.format(
+			"%02x %02x %02x %02x %02x %02x %02x %02x",
+			bytes[0], bytes[1], bytes[2], bytes[3],
+			bytes[4], bytes[5], bytes[6], bytes[7]
+		);
 	}
 	
 	// The following warnings will gone after splitting this validator (see #593)
@@ -118,38 +115,23 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 		
 		try (InputStream stream = file.getInputStream()) {
 			
-			byte[] firstPart = readFourBytes(stream);
-			if (firstPart == null) {
-				LOG.warn("Failed to read 4 bytes from file");
+			byte[] firstBytes = readEightBytes(stream);
+			if (firstBytes == null) {
+				LOG.warn("Failed to read first bytes from file");
 				return false;
 			}
 			
-			if (isJpeg(firstPart)) {
+			if (isJpeg(firstBytes) || isPng(firstBytes)) {
 				return true;
-			}
-			
-			if (doesItLookLikePng(firstPart)) {
-				byte[] secondPart = readFourBytes(stream);
-				if (isItReallyPng(secondPart)) {
-					return true;
-				}
-				
-				if (LOG.isDebugEnabled()) {
-					LOG.debug(
-						"Looks like file isn't a PNG image. First bytes: {} {}",
-						formatBytes(firstPart),
-						formatBytes(secondPart)
-					);
-				}
-				return false;
 			}
 			
 			if (LOG.isDebugEnabled()) {
 				LOG.debug(
 					"Looks like file isn't an image. First bytes: {}",
-					formatBytes(firstPart)
+					formatBytes(firstBytes)
 				);
 			}
+			
 			return false;
 			
 		} catch (IOException e) {
