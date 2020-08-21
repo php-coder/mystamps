@@ -21,7 +21,7 @@ package ru.mystamps.web.feature.series;
 final class SeriesDb {
 	
 	static final class Series {
-		static final int COMMENT_LENGTH = 255;
+		static final int COMMENT_LENGTH = 1024;
 	}
 	
 }

@@ -57,9 +57,9 @@ Create series with too long comment
 	${letter}=                     Set Variable  x
 	Click Element                  id:add-comment-link
 	Wait Until Element Is Visible  id:comment
-	Input Text                     id:comment  ${letter * 256}
+	Input Text                     id:comment  ${letter * 1025}
 	Submit Form                    id:add-series-form
-	Element Text Should Be         id:comment.errors  Value is greater than allowable maximum of 255 characters
+	Element Text Should Be         id:comment.errors  Value is greater than allowable maximum of 1024 characters
 
 *** Keywords ***
 Before Test Suite

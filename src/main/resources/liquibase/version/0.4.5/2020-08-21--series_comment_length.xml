@@ -5,6 +5,12 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 	
-	<include file="0.4.5/2020-08-21--series_comment_length.xml" relativeToChangelogFile="true" />
+	<changeSet id="increase-length-of-series-comment-field" author="php-coder" context="scheme">
+		
+		<modifyDataType tableName="series"
+			columnName="comment"
+			newDataType="VARCHAR(1024)" />
+		
+	</changeSet>
 	
 </databaseChangeLog>
