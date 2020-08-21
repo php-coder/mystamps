@@ -43,11 +43,11 @@ public class ImageFileValidator implements ConstraintValidator<ImageFile, Multip
 	};
 	
 	// see https://en.wikipedia.org/wiki/Portable_Network_Graphics#File_header
-	private static final byte[] PNG_FIRST_PART_SIGNATURE = new byte[] {
+	private static final byte[] PNG_FIRST_PART_SIGNATURE = {
 		(byte)0x89, 0x50, 0x4E, 0x47
 	};
 	
-	private static final byte[] PNG_SECOND_PART_SIGNATURE = new byte[] {
+	private static final byte[] PNG_SECOND_PART_SIGNATURE = {
 		0x0D, 0x0A, 0x1A, 0x0A
 	};
 	
