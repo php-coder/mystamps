@@ -131,3 +131,12 @@ label {
 	left: 10px;
 	background-color: black;
 }
+
+.container-fluid {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+#content {
+	flex-grow: 1;
+}

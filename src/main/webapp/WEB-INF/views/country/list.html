@@ -58,8 +58,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
-				<div id="content" class="col-sm-12" th:with="country_list=#{t_countries}">
+			<div class="row" id="content">
+				<div class="col-sm-12" th:with="country_list=#{t_countries}">
 					<h3 th:text="${#strings.capitalize(country_list)}">
 						Countries
 					</h3>

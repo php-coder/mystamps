@@ -61,8 +61,8 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
-				<div id="content" class="col-sm-12" th:with="header=#{t_stamps_of(${countryName})}">
+			<div class="row" id="content">
+				<div class="col-sm-12" th:with="header=#{t_stamps_of(${countryName})}">
 					<h3 id="page-header" th:text="${#strings.capitalize(header)}">
 						Stamps of Italy
 					</h3>

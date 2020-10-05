@@ -40,6 +40,15 @@
 			#content {
 				padding: 10px;
 			}
+
+			.container-fluid {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+			}
+			#content {
+				flex-grow: 1;
+			}
 		</style>
 	</head>
 	<body>
@@ -50,8 +59,8 @@
 				</div>
 			</div>
 			
-			<div class="row text-center">
-				<div id="content" class="col-sm-12">
+			<div class="row text-center" id="content">
+				<div class="col-sm-12">
 					<h1 id="error-code">
 						503
 					</h1>
