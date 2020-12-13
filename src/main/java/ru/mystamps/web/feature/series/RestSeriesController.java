@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.series;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,13 +34,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.List;
-
-import static ru.mystamps.web.feature.series.StampsCatalog.GIBBONS;
-import static ru.mystamps.web.feature.series.StampsCatalog.MICHEL;
-import static ru.mystamps.web.feature.series.StampsCatalog.SCOTT;
-import static ru.mystamps.web.feature.series.StampsCatalog.SOLOVYOV;
-import static ru.mystamps.web.feature.series.StampsCatalog.YVERT;
-import static ru.mystamps.web.feature.series.StampsCatalog.ZAGORSKI;
+import java.util.Locale;
 
 @Validated
 @RestController
@@ -75,8 +70,8 @@ class RestSeriesController {
 				continue;
 			}
 			
-			// CheckStyle: ignore LineLength for next 42 lines
-			switch (patch.getPath()) {
+			String path = patch.getPath();
+			switch (path) {
 				case "/comment":
 					seriesService.addComment(seriesId, patch.getValue());
 					break;
@@ -84,40 +79,30 @@ class RestSeriesController {
 					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);
 					break;
 				case "/michel_price":
-					seriesService.addCatalogPrice(MICHEL, seriesId, patch.bigDecimalValue(), currentUserId);
-					break;
 				case "/scott_price":
-					seriesService.addCatalogPrice(SCOTT, seriesId, patch.bigDecimalValue(), currentUserId);
-					break;
 				case "/yvert_price":
-					seriesService.addCatalogPrice(YVERT, seriesId, patch.bigDecimalValue(), currentUserId);
-					break;
 				case "/gibbons_price":
-					seriesService.addCatalogPrice(GIBBONS, seriesId, patch.bigDecimalValue(), currentUserId);
-					break;
 				case "/solovyov_price":
-					seriesService.addCatalogPrice(SOLOVYOV, seriesId, patch.bigDecimalValue(), currentUserId);
-					break;
 				case "/zagorski_price":
-					seriesService.addCatalogPrice(ZAGORSKI, seriesId, patch.bigDecimalValue(), currentUserId);
+					seriesService.addCatalogPrice(
+						extractCatalog(path),
+						seriesId,
+						patch.bigDecimalValue(),
+						currentUserId
+					);
 					break;
 				case "/michel_numbers":
-					seriesService.addCatalogNumbers(MICHEL, seriesId, patch.getValue(), currentUserId);
-					break;
 				case "/scott_numbers":
-					seriesService.addCatalogNumbers(SCOTT, seriesId, patch.getValue(), currentUserId);
-					break;
 				case "/yvert_numbers":
-					seriesService.addCatalogNumbers(YVERT, seriesId, patch.getValue(), currentUserId);
-					break;
 				case "/gibbons_numbers":
-					seriesService.addCatalogNumbers(GIBBONS, seriesId, patch.getValue(), currentUserId);
-					break;
 				case "/solovyov_numbers":
-					seriesService.addCatalogNumbers(SOLOVYOV, seriesId, patch.getValue(), currentUserId);
-					break;
 				case "/zagorski_numbers":
-					seriesService.addCatalogNumbers(ZAGORSKI, seriesId, patch.getValue(), currentUserId);
+					seriesService.addCatalogNumbers(
+						extractCatalog(path),
+						seriesId,
+						patch.getValue(),
+						currentUserId
+					);
 					break;
 				default:
 					// @todo #785 Update series: properly fail on invalid path
@@ -128,5 +113,12 @@ class RestSeriesController {
 		return ResponseEntity.noContent().build();
 	}
 	
+	private static StampsCatalog extractCatalog(String path) {
+		// "/catalog_something" => "catalog" => "CATALOG"
+		String catalogName = StringUtils.substringBetween(path, "/", "_")
+			.toUpperCase(Locale.ENGLISH);
+		return StampsCatalog.valueOf(catalogName);
+	}
+
 }
 
