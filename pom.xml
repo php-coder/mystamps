@@ -471,10 +471,6 @@
 				</exclusion>
 				<exclusion>
 					<groupId>org.hamcrest</groupId>
-					<artifactId>hamcrest-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.hamcrest</groupId>
 					<artifactId>hamcrest-library</artifactId>
 				</exclusion>
 				<exclusion>
@@ -907,7 +903,7 @@
 								<!-- Because we use org.mortbay.jasper:apache-el instead -->
 								<exclude>org.apache.tomcat.embed:tomcat-embed-el</exclude>
 								<exclude>junit:*:*:*:compile</exclude>
-								<exclude>org.hamcrest:*:*:*:*</exclude>
+								<exclude>org.hamcrest:*:*:*:compile</exclude>
 								<exclude>org.yaml:snakeyaml</exclude>
 							</excludes>
 						</bannedDependencies>
