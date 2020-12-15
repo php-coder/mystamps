@@ -536,7 +536,7 @@
 		
 		<commons.text.version>1.4</commons.text.version>
 		<compiler.plugin.version>3.8.1</compiler.plugin.version>
-		<datagen.version>2.2.1</datagen.version>
+		<datagen.version>2.5.1</datagen.version>
 		
 		<!-- Disable XML reports by default. Enabled manually by passing -DdisableXmlReport=false in CI environment -->
 		<disableXmlReport>true</disableXmlReport>
