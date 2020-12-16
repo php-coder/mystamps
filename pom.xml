@@ -591,7 +591,7 @@
 		<jsoup.version>1.13.1</jsoup.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<junit.version>4.13</junit.version>
+		<junit.version>4.13.1</junit.version>
 		
 		<license.plugin.version>3.0</license.plugin.version>
 		
