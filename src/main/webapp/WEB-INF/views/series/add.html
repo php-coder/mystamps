@@ -15,9 +15,10 @@
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
-	<body th:with="suggestCountryUrl=${addSeriesForm.country != null and addSeriesForm.country.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_COUNTRY}}__'''},suggestCategoryUrl=${addSeriesForm.category != null and addSeriesForm.category.slug != null ? 'null' : '''__@{${SUGGEST_SERIES_CATEGORY}}__'''}"
-		th:onload="|initPage(${suggestCategoryUrl}, ${suggestCountryUrl})|"
-		onload="initPage(null, null)">
+	<body
+		th:data-suggest-category-url="${addSeriesForm.category != null and addSeriesForm.category.slug != null ? '' : '__@{${SUGGEST_SERIES_CATEGORY}}__'}"
+		th:data-suggest-country-url="${addSeriesForm.country != null and addSeriesForm.country.slug != null ? '' : '__@{${SUGGEST_SERIES_COUNTRY}}__'}"
+		onload="initPage(document.body.getAttribute('data-suggest-category-url'), document.body.getAttribute('data-suggest-country-url'))">
 		<div class="container-fluid">
 			<div class="row" id="header">
 				<div id="logo" class="col-sm-9 vcenter">
