@@ -211,7 +211,8 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--no-langdetect \
 			--ignore-re \
 				'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
-				'Attribute “(th|sec|togglz):[a-z]+” is not serializable' \
+				'Attribute “th:[-a-z]+” not allowed on element "body" at this point' \
+				'Attribute “(th|sec|togglz):[-a-z]+” is not serializable' \
 				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
 			--ignore \
 				'An "img" element must have an "alt" attribute' \
