@@ -59,7 +59,7 @@ public class ApiMailgunEmailSendingStrategy implements MailgunEmailSendingStrate
 		this.endpoint = endpoint;
 		
 		this.restTemplate = restTemplateBuilder
-			.basicAuthorization(user, password)
+			.basicAuthentication(user, password)
 			.build();
 	}
 	

@@ -26,6 +26,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import ru.mystamps.web.feature.account.AccountUrl;
 import ru.mystamps.web.feature.category.CategoryUrl;
@@ -72,7 +73,8 @@ public class ThymeleafViewResolverInitializingBean
 			return;
 		}
 		
-		boolean productionEnv = environment.acceptsProfiles("prod");
+		Profiles prod = Profiles.of("prod");
+		boolean productionEnv = environment.acceptsProfiles(prod);
 		boolean useCdn = environment.getProperty("app.use-cdn", Boolean.class, Boolean.TRUE);
 		viewResolver.setStaticVariables(resourcesAsMap(productionEnv, useCdn));
 	}

@@ -28,6 +28,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -85,11 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@SuppressWarnings({ "PMD.SignatureDeclareThrowsException", "checkstyle:linelength" })
 	protected void configure(HttpSecurity http) throws Exception {
-		boolean useSingleHost = !environment.acceptsProfiles("prod");
+		Profiles prod = Profiles.of("prod");
+		boolean useSingleHost = !environment.acceptsProfiles(prod);
 		boolean useCdn = environment.getProperty("app.use-cdn", Boolean.class, Boolean.TRUE);
 		
 		// @todo #226 Introduce app.use-public-hostname property
-		boolean usePublicHostname = environment.acceptsProfiles("prod");
+		boolean usePublicHostname = environment.acceptsProfiles(prod);
 		String hostname = usePublicHostname ? SiteUrl.PUBLIC_URL : SiteUrl.SITE;
 
 		String h2ConsolePath = h2ConsoleProperties == null ? null : h2ConsoleProperties.getPath();
@@ -160,6 +162,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.headers()
 				.defaultsDisabled() // FIXME
+				// @todo #1161 Add Feature-Policy header
 				.addHeaderWriter(cspWriter);
 	}
 	

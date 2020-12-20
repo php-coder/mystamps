@@ -24,6 +24,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.account.UserService;
 import ru.mystamps.web.feature.account.UsersActivationService;
@@ -124,7 +125,8 @@ public class SiteConfig {
 		
 		@Bean
 		public MailService mailService() {
-			boolean isProductionEnvironment = env.acceptsProfiles("prod");
+			Profiles prod = Profiles.of("prod");
+			boolean isProductionEnvironment = env.acceptsProfiles(prod);
 			boolean enableTestMode = !isProductionEnvironment;
 			
 			String user = "api";
