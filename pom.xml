@@ -1041,7 +1041,7 @@
 				<version>${codenarc.plugin.version}</version>
 				<configuration>
 					<codeNarcVersion>${codenarc.version}</codeNarcVersion>
-					<groovyVersion>${groovy.version}</groovyVersion>
+					<groovyVersion>${groovy-old.version}</groovyVersion>
 					<sourceDirectory>src/test/groovy</sourceDirectory>
 					<!--
 						rulesets/enhanced.xml was excluded because of a lot of errors about failed
