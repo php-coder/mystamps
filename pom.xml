@@ -1256,7 +1256,7 @@
 	
 	<ciManagement>
 		<system>Travis CI</system>
-		<url>https://travis-ci.org/php-coder/mystamps</url>
+		<url>https://travis-ci.com/php-coder/mystamps</url>
 	</ciManagement>
 	
 	<scm>
