@@ -42,6 +42,13 @@ Create series with day of month but without month
 	Submit Form                id:add-series-form
 	Element Text Should Be     id:month.errors  Month must be specified
 
+Create series with month but without year
+	Click Element              id:specify-issue-date-link
+	Select From List By Value  id:day    1
+	Select From List By Value  id:month  2
+	Submit Form                id:add-series-form
+	Element Text Should Be     id:year.errors  Year must be specified
+
 Catalog numbers should reject invalid values
 	[Template]  Invalid Catalog Numbers Should Be Rejected
 	t
