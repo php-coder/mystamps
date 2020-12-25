@@ -36,6 +36,12 @@ Create series with an empty image
 	Submit Form             id:add-series-form
 	Element Text Should Be  id:image.errors  File must not be empty
 
+Create series with day of month but without month
+	Click Element              id:specify-issue-date-link
+	Select From List By Value  id:day  1
+	Submit Form                id:add-series-form
+	Element Text Should Be     id:month.errors  Month must be specified
+
 Catalog numbers should reject invalid values
 	[Template]  Invalid Catalog Numbers Should Be Rejected
 	t
