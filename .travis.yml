@@ -73,7 +73,7 @@ deploy:
   skip_cleanup: true
 
 jdk:
-  - openjdk8
+  - openjdk11
 
 cache:
   directories:
