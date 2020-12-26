@@ -63,9 +63,10 @@ public class SeriesImportConfig {
 			);
 		}
 		
+		// CheckStyle: ignore LineLength for next 2 lines
 		@Bean
-		public FilterRegistrationBean importSeriesFormTrimmerFilter() {
-			FilterRegistrationBean bean =
+		public FilterRegistrationBean<ImportSeriesFormTrimmerFilter> importSeriesFormTrimmerFilter() {
+			FilterRegistrationBean<ImportSeriesFormTrimmerFilter> bean =
 				new FilterRegistrationBean<>(new ImportSeriesFormTrimmerFilter());
 			
 			String pattern = SeriesImportUrl.REQUEST_IMPORT_PAGE.replace("{id}", "*");

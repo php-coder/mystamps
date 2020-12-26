@@ -201,12 +201,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	// Bean name will be shown in logs
 	@Bean(name = "resetLocaleFilter")
-	public FilterRegistrationBean getResetLocaleFilter(
+	public FilterRegistrationBean<SessionLocaleResolverAwareFilter> getResetLocaleFilter(
 		@Qualifier("requestContextFilter") Filter filter) {
 		
-		FilterRegistrationBean bean = new FilterRegistrationBean(
-			new SessionLocaleResolverAwareFilter()
-		);
+		FilterRegistrationBean<SessionLocaleResolverAwareFilter> bean =
+			new FilterRegistrationBean<>(new SessionLocaleResolverAwareFilter());
 		
 		// SessionLocaleResolverAwareFilter should be invoked after RequestContextFilter
 		// to overwrite locale in LocaleContextHolder
@@ -220,8 +219,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Bean
-	public FilterRegistrationBean userMdcLoggingFilter() {
-		FilterRegistrationBean bean = new FilterRegistrationBean(new UserMdcLoggingFilter());
+	public FilterRegistrationBean<UserMdcLoggingFilter> userMdcLoggingFilter() {
+		FilterRegistrationBean<UserMdcLoggingFilter> bean =
+			new FilterRegistrationBean<>(new UserMdcLoggingFilter());
 		// the filters that need to include userId in their logs, should have the order grater than
 		// Ordered.LOWEST_PRECEDENCE - 100 to get applied after us
 		// CheckStyle: ignore MagicNumber for next 1 line

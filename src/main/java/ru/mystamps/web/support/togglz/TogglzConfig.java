@@ -64,8 +64,8 @@ public class TogglzConfig {
 	 * @see https://www.togglz.org/documentation/admin-console.html
 	 */
 	@Bean
-	public ServletRegistrationBean getTogglzConsole() {
-		ServletRegistrationBean servlet = new ServletRegistrationBean();
+	public ServletRegistrationBean<TogglzConsoleServlet> getTogglzConsole() {
+		ServletRegistrationBean<TogglzConsoleServlet> servlet = new ServletRegistrationBean<>();
 		servlet.setName("TogglzConsole");
 		servlet.setServlet(new TogglzConsoleServlet());
 		// See also src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java
