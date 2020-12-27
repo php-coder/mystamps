@@ -47,6 +47,7 @@ footer {
 
 #content {
 	padding: 10px;
+	flex-grow: 1;
 }
 
 #content h3 {
@@ -136,7 +137,4 @@ label {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-}
-#content {
-	flex-grow: 1;
 }
