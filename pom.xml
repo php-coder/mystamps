@@ -628,9 +628,9 @@
 		
 		<resources.plugin.version>3.2.0</resources.plugin.version>
 		<robotframework-httprequest.version>0.0.15</robotframework-httprequest.version>
-		<robotframework-plugin.version>1.6.0</robotframework-plugin.version>
+		<robotframework-plugin.version>1.7.2</robotframework-plugin.version>
 		<robotframework-selenium.version>3.141.59.26535</robotframework-selenium.version>
-		<robotframework.version>3.1.2</robotframework.version>
+		<robotframework.version>3.2.2</robotframework.version>
 		
 		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/add.html -->
 		<selectizejs.version>0.12.5</selectizejs.version>
@@ -1099,9 +1099,9 @@
 					<testCasesDirectory>${basedir}/src/test/robotframework</testCasesDirectory>
 					<xunitFile>NONE</xunitFile>
 					<randomize>suite</randomize>
-					<!-- See https://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#controlling-console-output -->
+					<!-- See https://robotframework.org/robotframework/3.2.2/RobotFrameworkUserGuide.html#controlling-console-output -->
 					<console>dotted</console>
-					<!-- See https://robotframework.org/robotframework/3.1.2/RobotFrameworkUserGuide.html#removing-keywords -->
+					<!-- See https://robotframework.org/robotframework/3.2.2/RobotFrameworkUserGuide.html#removing-keywords -->
 					<removeKeywords>PASSED</removeKeywords>
 					<!-- Handy for debugging. Log file will be created in target/ directory -->
 					<!--
