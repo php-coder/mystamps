@@ -9,10 +9,11 @@ Force Tags      series  add-comment  logic
 
 *** Test Cases ***
 Add a comment
-	Input Text                        id:comment  A comment
+	Input Text                        id:new-comment  A comment
 	Submit Form                       id:add-comment-form
 	Wait Until Page Does Not Contain  id:add-comment-form
-	Wait Until Element Value Is       comment  A comment
+	Wait Until Page Contains Element  id:comment
+	Element Text Should Be            id:comment  A comment
 
 *** Keywords ***
 Before Test Suite

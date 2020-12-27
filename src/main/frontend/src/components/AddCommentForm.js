@@ -100,12 +100,12 @@ class AddCommentFormView extends React.PureComponent {
 						{ l10n['t_server_error'] || 'Server error' }
 					</div>
 					<div className="form-group form-group-sm">
-						<label htmlFor="comment" className="control-label col-sm-3">
+						<label htmlFor="new-comment" className="control-label col-sm-3">
 							{ l10n['t_comment'] || 'Comment' }
 						</label>
 						<div className="col-sm-6">
 							<textarea
-								id="comment"
+								id="new-comment"
 								className="form-control"
 								cols="22"
 								rows="3"
@@ -116,7 +116,7 @@ class AddCommentFormView extends React.PureComponent {
 					</div>
 					<div className="col-sm-offset-3 col-sm-4">
 						<span
-							id="comment.errors"
+							id="new-comment.errors"
 							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
 							{ validationErrors.join(', ') }
 						</span>

@@ -33,6 +33,8 @@ Link Should Point To
 	${url}=          Get Element Attribute  ${locator}@href
 	Should Be Equal  ${expectedUrl}  ${url}
 
+# NOTE: this keyword should be used as a last resort. Prefer "Wait Until Page Contains Element"
+# with some other keyword for checking element's state where possible
 Wait Until Element Value Is
 	[Documentation]     Hybrid of "Wait Until Page Contains Element" and "Textfield Value Should Be" keywords
 	[Arguments]         ${id}  ${text}
