@@ -65,6 +65,9 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
+CURDIR="$(dirname "$0")"
+EXEC_CMD="$CURDIR/../execute-command.sh"
+
 echo
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
@@ -144,130 +147,85 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
-		mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
-			>cs.log 2>&1 || CS_STATUS=fail
+		"$EXEC_CMD" checkstyle >cs.log 2>&1 || CS_STATUS=fail
 	fi
 	print_status "$CS_STATUS" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
-		mvn --batch-mode pmd:check \
-			>pmd.log 2>&1 || PMD_STATUS=fail
+		"$EXEC_CMD" pmd >pmd.log 2>&1 || PMD_STATUS=fail
 	fi
 	print_status "$PMD_STATUS" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
-		mvn --batch-mode license:check \
-			>license.log 2>&1 || LICENSE_STATUS=fail
+		"$EXEC_CMD" check-license >license.log 2>&1 || LICENSE_STATUS=fail
 	fi
 	print_status "$LICENSE_STATUS" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
-		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
-			>pom.log 2>&1 || POM_STATUS=fail
+		"$EXEC_CMD" check-pom >pom.log 2>&1 || POM_STATUS=fail
 	fi
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
-		find src/main -type f -name '*.html' -print0 | xargs -0 bootlint --disable W013 \
-			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
+		"$EXEC_CMD" bootlint >bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 	fi
 	print_status "$BOOTLINT_STATUS" 'Run bootlint'
 	
 	if [ "$RFLINT_STATUS" != 'skip' ]; then
-		rflint \
-			--error=all \
-			--ignore TooFewKeywordSteps \
-			--configure LineTooLong:130 \
-			src/test/robotframework \
-			>rflint.log 2>&1 || RFLINT_STATUS=fail
+		"$EXEC_CMD" rflint >rflint.log 2>&1 || RFLINT_STATUS=fail
 	fi
 	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
-		# Shellcheck doesn't support recursive scanning: https://github.com/koalaman/shellcheck/issues/143
-		# Also I don't want to invoke it many times (slower, more code for handling failures), so I prefer this way.
-		# shellcheck disable=SC2207
-		SHELL_FILES=( $(find src/main/scripts -type f -name '*.sh') )
-		shellcheck \
-			--shell bash \
-			--format gcc \
-			"${SHELL_FILES[@]}" \
-			>shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
+		"$EXEC_CMD" shellcheck >shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
 	fi
 	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
-		mvn --batch-mode jasmine:test \
-			>jasmine.log 2>&1 || JASMINE_STATUS=fail
+		"$EXEC_CMD" jasmine >jasmine.log 2>&1 || JASMINE_STATUS=fail
 	fi
 	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
-		# FIXME: remove ignoring of error about alt attribute after resolving #314
-		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
-		# @todo #695 /series/import/request/{id}: use divs instead of table for elements aligning
-		html5validator \
-			--root src/main/webapp/WEB-INF/views \
-			--no-langdetect \
-			--ignore-re \
-				'Attribute “(th|sec|togglz|xmlns):[a-z]+” not allowed' \
-				'Attribute “th:[-a-z]+” not allowed on element "body" at this point' \
-				'Attribute “(th|sec|togglz):[-a-z]+” is not serializable' \
-				'Attribute with the local name “xmlns:[a-z]+” is not serializable' \
-			--ignore \
-				'An "img" element must have an "alt" attribute' \
-				'Element "option" without attribute "label" must not be empty' \
-				'The "width" attribute on the "td" element is obsolete' \
-			--show-warnings \
-			>validator.log 2>&1 || HTML_STATUS=fail
+		"$EXEC_CMD" html5validator >validator.log 2>&1 || HTML_STATUS=fail
 	fi
 	print_status "$HTML_STATUS" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
-		mvn --batch-mode enforcer:enforce \
-			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
+		"$EXEC_CMD" enforcer >enforcer.log 2>&1 || ENFORCER_STATUS=fail
 	fi
 	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
-		mvn --batch-mode test -Denforcer.skip=true -DskipMinify=true -DdisableXmlReport=false -Dskip.npm -Dskip.installnodenpm \
-			>test.log 2>&1 || TEST_STATUS=fail
+		"$EXEC_CMD" unit-tests >test.log 2>&1 || TEST_STATUS=fail
 	fi
 	print_status "$TEST_STATUS" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
-			>codenarc.log 2>&1 || CODENARC_STATUS=fail
+		"$EXEC_CMD" codenarc >codenarc.log 2>&1 || CODENARC_STATUS=fail
 	fi
 	print_status "$CODENARC_STATUS" 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode spotbugs:check \
-			>spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
+		"$EXEC_CMD" spotbugs >spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
 	fi
 	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
 
 	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
-		ansible-lint \
-			infra/vagrant/provisioning/prod.yml \
-			infra/vagrant/provisioning/vagrant.yml \
-			infra/vagrant/provisioning/bootstrap.yml \
-			src/main/scripts/ci/ansible/deploy.yml \
-			>ansible_lint.log 2>&1 || ANSIBLE_LINT_STATUS=fail
+		"$EXEC_CMD" ansible-lint >ansible_lint.log 2>&1 || ANSIBLE_LINT_STATUS=fail
 	fi
 	print_status "$ANSIBLE_LINT_STATUS" 'Run Ansible Lint'
 fi
 
-mvn --batch-mode --activate-profiles frontend,native2ascii verify -Denforcer.skip=true -DskipUnitTests=true \
-	>verify.log 2>&1 || VERIFY_STATUS=fail
+"$EXEC_CMD" integration-tests >verify.log 2>&1 || VERIFY_STATUS=fail
 
 print_status "$VERIFY_STATUS" 'Run integration tests'
 
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
-	danger >danger.log 2>&1 || DANGER_STATUS=fail
+	"$EXEC_CMD" danger >danger.log 2>&1 || DANGER_STATUS=fail
 fi
 print_status "$DANGER_STATUS" 'Run danger'
 
