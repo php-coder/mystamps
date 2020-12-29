@@ -182,76 +182,76 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		"$EXEC_CMD" checkstyle >cs.log 2>&1 || CS_STATUS=fail
 		CS_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$CS_STATUS" $CS_TIME 'Run CheckStyle'
+	print_status "$CS_STATUS" "$CS_TIME" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" pmd >pmd.log 2>&1 || PMD_STATUS=fail
 		PMD_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$PMD_STATUS" $PMD_TIME 'Run PMD'
+	print_status "$PMD_STATUS" "$PMD_TIME" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" check-license >license.log 2>&1 || LICENSE_STATUS=fail
 		LICENSE_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$LICENSE_STATUS" $LICENSE_TIME 'Check license headers'
+	print_status "$LICENSE_STATUS" "$LICENSE_TIME" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" check-pom >pom.log 2>&1 || POM_STATUS=fail
 		POM_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$POM_STATUS" $POM_TIME 'Check sorting of pom.xml'
+	print_status "$POM_STATUS" "$POM_TIME" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" bootlint >bootlint.log 2>&1 || BOOTLINT_STATUS=fail
 		BOOTLINT_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$BOOTLINT_STATUS" $BOOTLINT_TIME 'Run bootlint'
+	print_status "$BOOTLINT_STATUS" "$BOOTLINT_TIME" 'Run bootlint'
 	
 	if [ "$RFLINT_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" rflint >rflint.log 2>&1 || RFLINT_STATUS=fail
 		RFLINT_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$RFLINT_STATUS" $RFLINT_TIME 'Run robot framework lint'
+	print_status "$RFLINT_STATUS" "$RFLINT_TIME" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" shellcheck >shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
 		SHELLCHECK_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$SHELLCHECK_STATUS" $SHELLCHECK_TIME 'Run shellcheck'
+	print_status "$SHELLCHECK_STATUS" "$SHELLCHECK_TIME" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" jasmine >jasmine.log 2>&1 || JASMINE_STATUS=fail
 		JASMINE_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$JASMINE_STATUS" $JASMINE_TIME 'Run JavaScript unit tests'
+	print_status "$JASMINE_STATUS" "$JASMINE_TIME" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		"$EXEC_CMD" html5validator >validator.log 2>&1 || HTML_STATUS=fail
 		HTML_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$HTML_STATUS" $HTML_TIME 'Run html5validator'
+	print_status "$HTML_STATUS" "$HTML_TIME" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" enforcer >enforcer.log 2>&1 || ENFORCER_STATUS=fail
 		ENFORCER_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$ENFORCER_STATUS" $ENFORCER_TIME 'Run maven-enforcer-plugin'
+	print_status "$ENFORCER_STATUS" "$ENFORCER_TIME" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
 		"$EXEC_CMD" unit-tests >test.log 2>&1 || TEST_STATUS=fail
 		TEST_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$TEST_STATUS" $TEST_TIME 'Run unit tests'
+	print_status "$TEST_STATUS" "$TEST_TIME" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -259,7 +259,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		"$EXEC_CMD" codenarc >codenarc.log 2>&1 || CODENARC_STATUS=fail
 		CODENARC_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$CODENARC_STATUS" $CODENARC_TIME 'Run CodeNarc'
+	print_status "$CODENARC_STATUS" "$CODENARC_TIME" 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -267,7 +267,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		"$EXEC_CMD" spotbugs >spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
 		SPOTBUGS_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$SPOTBUGS_STATUS" $SPOTBUGS_TIME 'Run SpotBugs'
+	print_status "$SPOTBUGS_STATUS" "$SPOTBUGS_TIME" 'Run SpotBugs'
 
 	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -281,7 +281,7 @@ START_TIME=$SECONDS
 "$EXEC_CMD" integration-tests >verify.log 2>&1 || VERIFY_STATUS=fail
 VERIFY_TIME=$[SECONDS-START_TIME]
 
-print_status "$VERIFY_STATUS" $VERIFY_TIME 'Run integration tests'
+print_status "$VERIFY_STATUS" "$VERIFY_TIME" 'Run integration tests'
 
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
@@ -289,7 +289,7 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	"$EXEC_CMD" danger >danger.log 2>&1 || DANGER_STATUS=fail
 	DANGER_TIME=$[SECONDS-START_TIME]
 fi
-print_status "$DANGER_STATUS" $DANGER_TIME 'Run danger'
+print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$CS_STATUS" = 'skip' ]             || print_log cs.log             'Run CheckStyle'
