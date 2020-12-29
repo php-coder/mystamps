@@ -14,7 +14,8 @@ print_status() {
 	# $1 equals to 'fail' if check has failed
 	# $1 equals to 'skip' if check has skipped
 	local result="$1"
-	local msg="$2"
+	local execution_time="$2"
+	local msg="$3"
 	
 	local status='SUCCESS'
 	local color=32
@@ -26,7 +27,20 @@ print_status() {
 		status='SKIP'
 		color=33
 	fi
-	printf "* %-30s \033[1;%dm%-7s\033[0m\n" "$msg" "$color" "$status"
+	
+	local time
+	if [ $execution_time -gt 0 ]; then
+		local mins seconds
+		mins=$[execution_time / 60]
+		secs=$[execution_time % 60]
+		if [ $mins -eq 0 ]; then
+			time="$(printf '%2ss' "$secs")"
+		else
+			time="$(printf '%2sm%2ds' "$mins" "$secs")"
+		fi
+	fi
+	
+	printf '* %-30s% 7s\t\t\033[1;%dm%-7s\033[0m\n' "$msg" "$time" "$color" "$status"
 }
 
 print_log() {
@@ -64,6 +78,23 @@ DANGER_STATUS=skip
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
 	DANGER_STATUS=
 fi
+
+CS_TIME=0
+PMD_TIME=0
+LICENSE_TIME=0
+POM_TIME=0
+BOOTLINT_TIME=0
+RFLINT_TIME=0
+SHELLCHECK_TIME=0
+JASMINE_TIME=0
+HTML_TIME=0
+ENFORCER_TIME=0
+TEST_TIME=0
+CODENARC_TIME=0
+SPOTBUGS_TIME=0
+VERIFY_TIME=0
+ANSIBLE_LINT_TIME=0
+DANGER_TIME=0
 
 CURDIR="$(dirname "$0")"
 EXEC_CMD="$CURDIR/../execute-command.sh"
@@ -147,87 +178,118 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" checkstyle >cs.log 2>&1 || CS_STATUS=fail
+		CS_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$CS_STATUS" 'Run CheckStyle'
+	print_status "$CS_STATUS" $CS_TIME 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" pmd >pmd.log 2>&1 || PMD_STATUS=fail
+		PMD_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$PMD_STATUS" 'Run PMD'
+	print_status "$PMD_STATUS" $PMD_TIME 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" check-license >license.log 2>&1 || LICENSE_STATUS=fail
+		LICENSE_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$LICENSE_STATUS" 'Check license headers'
+	print_status "$LICENSE_STATUS" $LICENSE_TIME 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" check-pom >pom.log 2>&1 || POM_STATUS=fail
+		POM_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$POM_STATUS" 'Check sorting of pom.xml'
+	print_status "$POM_STATUS" $POM_TIME 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" bootlint >bootlint.log 2>&1 || BOOTLINT_STATUS=fail
+		BOOTLINT_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$BOOTLINT_STATUS" 'Run bootlint'
+	print_status "$BOOTLINT_STATUS" $BOOTLINT_TIME 'Run bootlint'
 	
 	if [ "$RFLINT_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" rflint >rflint.log 2>&1 || RFLINT_STATUS=fail
+		RFLINT_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$RFLINT_STATUS" 'Run robot framework lint'
+	print_status "$RFLINT_STATUS" $RFLINT_TIME 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" shellcheck >shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
+		SHELLCHECK_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
+	print_status "$SHELLCHECK_STATUS" $SHELLCHECK_TIME 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" jasmine >jasmine.log 2>&1 || JASMINE_STATUS=fail
+		JASMINE_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
+	print_status "$JASMINE_STATUS" $JASMINE_TIME 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		"$EXEC_CMD" html5validator >validator.log 2>&1 || HTML_STATUS=fail
+		HTML_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$HTML_STATUS" 'Run html5validator'
+	print_status "$HTML_STATUS" $HTML_TIME 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" enforcer >enforcer.log 2>&1 || ENFORCER_STATUS=fail
+		ENFORCER_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
+	print_status "$ENFORCER_STATUS" $ENFORCER_TIME 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" unit-tests >test.log 2>&1 || TEST_STATUS=fail
+		TEST_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$TEST_STATUS" 'Run unit tests'
+	print_status "$TEST_STATUS" $TEST_TIME 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		# run after tests for getting compiled sources
 		"$EXEC_CMD" codenarc >codenarc.log 2>&1 || CODENARC_STATUS=fail
+		CODENARC_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$CODENARC_STATUS" 'Run CodeNarc'
+	print_status "$CODENARC_STATUS" $CODENARC_TIME 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		# run after tests for getting compiled sources
 		"$EXEC_CMD" spotbugs >spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
+		SPOTBUGS_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
+	print_status "$SPOTBUGS_STATUS" $SPOTBUGS_TIME 'Run SpotBugs'
 
 	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
+		START_TIME=$SECONDS
 		"$EXEC_CMD" ansible-lint >ansible_lint.log 2>&1 || ANSIBLE_LINT_STATUS=fail
+		ANSIBLE_LINT_TIME=$[SECONDS-START_TIME]
 	fi
-	print_status "$ANSIBLE_LINT_STATUS" 'Run Ansible Lint'
+	print_status "$ANSIBLE_LINT_STATUS" $ANSIBLE_LINT_TIME 'Run Ansible Lint'
 fi
 
+START_TIME=$SECONDS
 "$EXEC_CMD" integration-tests >verify.log 2>&1 || VERIFY_STATUS=fail
+VERIFY_TIME=$[SECONDS-START_TIME]
 
-print_status "$VERIFY_STATUS" 'Run integration tests'
+print_status "$VERIFY_STATUS" $VERIFY_TIME 'Run integration tests'
 
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
+	START_TIME=$SECONDS
 	"$EXEC_CMD" danger >danger.log 2>&1 || DANGER_STATUS=fail
+	DANGER_TIME=$[SECONDS-START_TIME]
 fi
-print_status "$DANGER_STATUS" 'Run danger'
+print_status "$DANGER_STATUS" $DANGER_TIME 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$CS_STATUS" = 'skip' ]             || print_log cs.log             'Run CheckStyle'
