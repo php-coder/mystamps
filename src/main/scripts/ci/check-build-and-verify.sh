@@ -26,7 +26,7 @@ print_status() {
 		status='SKIP'
 		color=33
 	fi
-	printf "* %s... \033[1;%dm%s\033[0m\n" "$msg" "$color" "$status"
+	printf "* %-30s \033[1;%dm%-7s\033[0m\n" "$msg" "$color" "$status"
 }
 
 print_log() {
