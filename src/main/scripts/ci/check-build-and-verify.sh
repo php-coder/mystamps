@@ -28,7 +28,7 @@ print_status() {
 		color=33
 	fi
 	
-	local time
+	local time=
 	if [ $execution_time -gt 0 ]; then
 		local mins seconds
 		mins=$[execution_time / 60]
