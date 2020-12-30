@@ -24,6 +24,11 @@ Submit request with invalid url
 	Submit Form             id:import-series-form
 	Element Text Should Be  id:url.errors  Value must be a valid URL
 
+Submit request with an unsupported site
+	Input Text              id:url  http://example.com
+	Submit Form             id:import-series-form
+	Element Text Should Be  id:url.errors  Import from this site isn't supported
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
