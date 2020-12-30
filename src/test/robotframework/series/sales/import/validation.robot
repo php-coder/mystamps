@@ -28,6 +28,12 @@ Import a series sale with too long url
 	Wait Until Element Is Visible  id:series-sale-url.errors
 	Element Text Should Be         id:series-sale-url.errors  Value is greater than allowable maximum of 767 characters
 
+Import a series sale from an unsupported site
+	Input Text                     id:series-sale-url  http://example.com
+	Submit Form                    id:import-series-sale-form
+	Wait Until Element Is Visible  id:series-sale-url.errors
+	Element Text Should Be         id:series-sale-url.errors  Import from this site isn't supported
+
 *** Keywords ***
 Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
