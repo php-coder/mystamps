@@ -21,6 +21,7 @@ package ru.mystamps.web.support.spring.mvc;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -47,6 +48,12 @@ public class PatchRequest {
 	// @todo #785 Update series: add integration test for non-empty "value" field
 	@NotEmpty
 	private String value;
+	
+	// @initBinder with StringTrimmerEditor() doesn't work with @RequestBody, so we do that manually
+	// @todo #1447 Add test to ensure that catalog numbers are trimmed
+	public void setValue(String value) {
+		this.value = StringUtils.trimToNull(value);
+	}
 
 	public Integer integerValue() {
 		return Integer.valueOf(value);
