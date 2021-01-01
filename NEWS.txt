@@ -1,5 +1,8 @@
 0.x (upcoming release)
 
+0.4.5
+(infrastructure) migrate to Spring Boot 2.1
+
 0.4.4
 - (feature)     a series can be marked as a similar to another one
 - (feature)     series images can be replaced

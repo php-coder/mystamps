@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: phpcoder/mystamps:0.4.4
+    image: phpcoder/mystamps:0.4.5
     cap_drop:
       - 'ALL'
     ports:
