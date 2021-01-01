@@ -26,7 +26,7 @@
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
-	<logger name="org.springframework.boot.test.context.SpringBootTestContextBootstrapper" level="WARN">
+	<logger name="org.springframework.boot.test.autoconfigure.jdbc.JdbcTestContextBootstrapper" level="WARN">
 		<appender-ref ref="CONSOLE" />
 	</logger>
 	
