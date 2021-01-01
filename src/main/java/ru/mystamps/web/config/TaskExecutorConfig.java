@@ -28,6 +28,7 @@ import java.util.concurrent.Executor;
  * @author Sergey Chechenev
  * @author Slava Semushin
  */
+// @todo #1161 Consider using spring.task.execution properties instead of manual configuration
 @Configuration
 @EnableAsync
 public class TaskExecutorConfig extends AsyncConfigurerSupport {
