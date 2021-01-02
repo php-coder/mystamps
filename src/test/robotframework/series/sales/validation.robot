@@ -28,6 +28,18 @@ Create series sale with the prices in the same currency
 	Submit Form                id:add-series-sales-form
 	Element Text Should Be     id:alt-currency.errors  Price and alternative price must be in a different currencies
 
+Create series sale with alternative price but without currency
+	Input Text                 id:alt-price            200
+	Select From List By Value  id:alt-currency         ${EMPTY}
+	Submit Form                id:add-series-sales-form
+	Element Text Should Be     id:alt-currency.errors  Alternative price and currency must be specified or left empty, specifying only one of them makes no-sense
+
+Create series sale with alternative currency but without price
+	Input Text                 id:alt-price            ${EMPTY}
+	Select From List By Label  id:alt-currency         GBP
+	Submit Form                id:add-series-sales-form
+	Element Text Should Be     id:alt-currency.errors  Alternative price and currency must be specified or left empty, specifying only one of them makes no-sense
+
 Create series sale with the same seller and buyer
 	Select From List By Label  id:seller        Tommy Lee Jones
 	Select From List By Label  id:buyer         Tommy Lee Jones

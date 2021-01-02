@@ -32,7 +32,6 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
-// @todo #678 Add integration tests for price and alternative price: both or none are required
 @Getter
 @Setter
 @FieldsMismatch(first = "sellerId", second = "buyerId", message = "{seller.buyer.match}")
