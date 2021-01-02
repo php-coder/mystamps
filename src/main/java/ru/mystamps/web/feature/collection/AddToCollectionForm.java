@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.collection;
 import lombok.Getter;
 import lombok.Setter;
 import ru.mystamps.web.common.Currency;
+import ru.mystamps.web.support.beanvalidation.BothOrNoneRequired;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,11 @@ import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERI
 @Getter
 @Setter
 @MaxNumberOfStamps
+@BothOrNoneRequired(
+	first = "price",
+	second = "currency",
+	message = "{price.currency.both-required}"
+)
 public class AddToCollectionForm implements AddToCollectionDto {
 	
 	@NotNull
@@ -41,7 +47,6 @@ public class AddToCollectionForm implements AddToCollectionDto {
 	// @todo #663 /series/{id}(price): must be greater than zero
 	private BigDecimal price;
 	
-	// @todo #663 /series/{id}(currency): must be required when price is specified
 	private Currency currency;
 	
 	// In order to ensure that numberOfStamps <= series.quantity,

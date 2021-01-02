@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Verify validation of adding a series to collection
+Documentation    Verify validation of adding a series to collection for a user
 Library          SeleniumLibrary
 Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
