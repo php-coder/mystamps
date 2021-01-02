@@ -429,6 +429,27 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>htmlunit-driver</artifactId>
 			<version>${selenium-htmlunit.version}</version>
@@ -493,7 +514,7 @@
 		
 		<dependency>
 			<groupId>org.togglz</groupId>
-			<artifactId>togglz-junit</artifactId>
+			<artifactId>togglz-junit5</artifactId>
 			<version>${togglz.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -601,6 +622,7 @@
 		<jsoup.version>1.13.1</jsoup.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
+		<junit-jupiter.version>5.3.2</junit-jupiter.version>
 		<junit.version>4.13.1</junit.version>
 		
 		<license.plugin.version>3.0</license.plugin.version>

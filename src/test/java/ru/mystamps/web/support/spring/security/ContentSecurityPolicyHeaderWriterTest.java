@@ -18,11 +18,11 @@
 package ru.mystamps.web.support.spring.security;
 
 import org.assertj.core.api.WithAssertions;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.togglz.junit.TogglzRule;
+import org.togglz.junit5.AllEnabled;
+import org.togglz.testing.TestFeatureManager;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.togglz.Features;
 import ru.mystamps.web.tests.Random;
@@ -41,15 +41,13 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 	private static final int NUMBER_OF_DIRECTIVES_ON_H2_CONSOLE_PAGE = 7;
 	private static final String H2_CONSOLE_PATH = "/console/";
 
-	@Rule
-	public TogglzRule togglz = TogglzRule.allEnabled(Features.class);
-	
 	//
 	// Tests for writeHeaders()
 	//
 	
 	@Test
-	public void writeContentSecurityPolicyHeader() {
+	@AllEnabled(Features.class)
+	public void writeContentSecurityPolicyHeader(TestFeatureManager featureManager) {
 		// given
 		ContentSecurityPolicyHeaderWriter writer = new ContentSecurityPolicyHeaderWriter(
 				bool(),
@@ -68,7 +66,7 @@ public class ContentSecurityPolicyHeaderWriterTest implements WithAssertions {
 		assertThat(header.split(";")).hasSize(NUMBER_OF_DIRECTIVES_ON_STANDARD_PAGES);
 		
 		// when
-		togglz.disable(Features.CSP_REPORT_ONLY);
+		featureManager.disable(Features.CSP_REPORT_ONLY);
 		writer.writeHeaders(request, response);
 		// then
 		header = response.getHeader("Content-Security-Policy");

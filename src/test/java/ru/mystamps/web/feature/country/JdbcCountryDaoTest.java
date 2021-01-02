@@ -18,14 +18,14 @@
 package ru.mystamps.web.feature.country;
 
 import org.assertj.core.api.WithAssertions;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mystamps.web.config.DaoConfig;
 import ru.mystamps.web.tests.Random;
 
@@ -43,7 +43,7 @@ import java.util.Map;
 	},
 	// LATER: find a better way for importing properties files (see #1151)
 	locations = "/sql/country_dao_queries.properties")
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class JdbcCountryDaoTest implements WithAssertions {
 	
 	@Autowired

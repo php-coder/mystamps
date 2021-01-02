@@ -157,6 +157,7 @@ class ContentSecurityPolicyHeaderWriter implements HeaderWriter {
 	private final String h2ConsolePath;
 	
 	
+	// @todo #1160 ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz
 	@Override
 	public void writeHeaders(HttpServletRequest request, HttpServletResponse response) {
 		String uri = request.getRequestURI();

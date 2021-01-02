@@ -21,8 +21,8 @@ import org.assertj.core.api.WithAssertions;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import ru.mystamps.web.tests.Random;
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 	
 	private JsoupSiteParser parser;
 	
-	@Before
+	@BeforeEach
 	public void init() {
 		parser = new JsoupSiteParser();
 	}
