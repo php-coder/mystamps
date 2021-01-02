@@ -51,7 +51,7 @@ public class CspController {
 		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
 		LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
 
-		// Omit "original-policy" as it quite long and useless most of the time
+		// Omit "original-policy" as it's quite long and it's useless most of the time
 		String report = ORIGINAL_POLICY_PATTERN.matcher(body).replaceFirst(StringUtils.EMPTY);
 		LOG.warn(report);
 	}
