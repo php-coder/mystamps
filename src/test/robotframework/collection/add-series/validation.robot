@@ -5,11 +5,11 @@ Resource         ../../auth.steps.robot
 Resource         ../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
+Test Setup       Disable Client Validation  add-series-form
 Force Tags       collection  validation
 
 *** Test Cases ***
 Add a series without required field
-	[Setup]                 Disable Client Validation  add-series-form
 	Input Text              id:number-of-stamps  ${EMPTY}
 	Submit Form             id:add-series-form
 	Element Text Should Be  id:number-of-stamps.errors  Value must not be empty
