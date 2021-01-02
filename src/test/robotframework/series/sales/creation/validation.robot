@@ -9,6 +9,15 @@ Test Setup       Disable Client Validation  add-series-sales-form
 Force Tags       series  sales  validation
 
 *** Test Cases ***
+Create series with empty required fields
+	Select From List By Value  id:seller           ${EMPTY}
+	Input Text                 id:price            ${EMPTY}
+	Select From List By Value  id:currency         ${EMPTY}
+	Submit Form                id:add-series-sales-form
+	Element Text Should Be     id:seller.errors    Value must not be empty
+	Element Text Should Be     id:price.errors     Value must not be empty
+	Element Text Should Be     id:currency.errors  Value must not be empty
+
 Create series sale with too long url
 	${letter}=              Set Variable  j
 	Input Text              id:url  http://${letter * 767}
