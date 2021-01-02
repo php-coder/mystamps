@@ -48,12 +48,14 @@ public class CspController {
 		HttpServletRequest request,
 		@RequestHeader(name = HttpHeaders.USER_AGENT, defaultValue = UNKNOWN) String userAgent) {
 		
-		String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
-		LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
+		if (LOG.isWarnEnabled()) {
+			String ip = StringUtils.defaultString(request.getRemoteAddr(), UNKNOWN);
+			LOG.warn("CSP report from IP: {}, user agent: {}", ip, userAgent);
 
-		// Omit "original-policy" as it's quite long and it's useless most of the time
-		String report = ORIGINAL_POLICY_PATTERN.matcher(body).replaceFirst(StringUtils.EMPTY);
-		LOG.warn(report);
+			// Omit "original-policy" as it's quite long and it's useless most of the time
+			String report = ORIGINAL_POLICY_PATTERN.matcher(body).replaceFirst(StringUtils.EMPTY);
+			LOG.warn(report);
+		}
 	}
 
 }
