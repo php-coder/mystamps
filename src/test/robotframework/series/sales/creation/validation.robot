@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation    Verify validation scenarios for adding series sales
 Library          SeleniumLibrary
-Resource         ../../auth.steps.robot
-Resource         ../../selenium.utils.robot
+Resource         ../../../auth.steps.robot
+Resource         ../../../selenium.utils.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Test Setup       Disable Client Validation  add-series-sales-form
