@@ -2,6 +2,7 @@
 // IMPORTANT:
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
+// @todo #1342 AddCatalogPriceForm: add tests
 // @todo #1388 AddCatalogPriceForm: consider using a tooltip for currency
 
 class AddCatalogPriceForm extends React.PureComponent {

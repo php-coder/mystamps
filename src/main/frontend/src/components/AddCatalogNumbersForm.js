@@ -3,6 +3,7 @@
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
 
+// @todo #1341 AddCatalogNumbersForm: add tests
 class AddCatalogNumbersForm extends React.PureComponent {
 	constructor(props) {
 		super(props);
