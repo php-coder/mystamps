@@ -89,7 +89,7 @@ class AddCommentForm extends React.PureComponent {
 
 class AddCommentFormView extends React.PureComponent {
 	render() {
-		const {handleSubmit, hasServerError, handleChange, validationErrors, isDisabled, l10n} = this.props;
+		const {handleSubmit, hasServerError, handleChange, validationErrors = [], isDisabled, l10n = {}} = this.props;
 		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
