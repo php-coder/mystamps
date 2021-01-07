@@ -32,7 +32,7 @@ execute all the steps that we need:
    ```
 2) in another terminal, run Wiremock server, only if your test need it:
    ```console
-   ./mvnw wiremock:run -DkeepRunning=true
+   ./mvnw wiremock:run -Dwiremock.keepRunning=true
    ```
 3) in another terminal, run integration tests as many times as you need:
    ```console
