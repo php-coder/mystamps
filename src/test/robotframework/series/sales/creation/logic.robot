@@ -9,6 +9,7 @@ Force Tags       series  sales  logic
 
 *** Test Cases ***
 Add a sale with only required fields
+	Go To                      ${SITE_URL}/series/2
 	Select From List By Label  id:seller              Tommy Lee Jones
 	Input Text                 id:price               125
 	Select From List By Value  id:currency            RUB
@@ -16,6 +17,7 @@ Add a sale with only required fields
 	Element Text Should Be     id:series-sale-1-info  Tommy Lee Jones was selling for 125.00 RUB
 
 Add a sale with all fields
+	Go To                      ${SITE_URL}/series/3
 	Input Text                 id:date          04.01.2021
 	Select From List By Label  id:seller        Eicca Toppinen
 	Input Text                 id:url           http://example.com/series-sale
@@ -35,4 +37,3 @@ Before Test Suite
 	Open Browser                        ${SITE_URL}/account/auth  ${BROWSER}
 	Register Keyword To Run On Failure  Log Source
 	Log In As                           login=admin  password=test
-	Go To                               ${SITE_URL}/series/2
