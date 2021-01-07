@@ -593,7 +593,7 @@
 		<hikaricp.version>3.4.5</hikaricp.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<htmlunit.version>2.41.0</htmlunit.version>
+		<htmlunit.version>2.46.0</htmlunit.version>
 		
 		<jacoco.plugin.version>0.8.6</jacoco.plugin.version>
 		<jasmine.plugin.version>2.2</jasmine.plugin.version>
@@ -658,7 +658,7 @@
 		<selectizejs.version>0.12.5</selectizejs.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<selenium-htmlunit.version>2.41.0</selenium-htmlunit.version>
+		<selenium-htmlunit.version>2.46.0</selenium-htmlunit.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<selenium.version>3.141.59</selenium.version>
