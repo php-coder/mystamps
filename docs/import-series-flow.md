@@ -13,18 +13,18 @@ Importing a series from another resource is a 4-stages process:
 
 ## Create import request
 
-![Stage 1: create import request](diagrams/create-import-request.png)
+![Stage 1: create import request](https://github.com/php-coder/mystamps/blob/generated-assets/docs/diagrams/create-import-request.png)
 
 ## Download page
 
-![Stage 2: download page](diagrams/download-page.png)
+![Stage 2: download page](https://github.com/php-coder/mystamps/blob/generated-assets/docs/diagrams/download-page.png)
 
 ## Parse page
 
-![Stage 3: parse page](diagrams/parse-page.png)
+![Stage 3: parse page](https://github.com/php-coder/mystamps/blob/generated-assets/docs/diagrams/parse-page.png)
 
-![Stage 3a: handle error of parsing page](diagrams/parse-page-failed.png)
+![Stage 3a: handle error of parsing page](https://github.com/php-coder/mystamps/blob/generated-assets/docs/diagrams/parse-page-failed.png)
 
 ## Import a series
 
-![Stage 4: import a series](diagrams/import-series.png)
+![Stage 4: import a series](https://github.com/php-coder/mystamps/blob/generated-assets/docs/diagrams/import-series.png)
