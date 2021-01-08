@@ -1,0 +1,99 @@
+@startwbs all-use-cases.png
+' See for details:
+' - https://plantuml.com/en/wbs-diagram
+' - https://plantuml.com/en/color
+' - https://plantuml.com/en/creole
+
+<style>
+	wbsDiagram {
+		arrow {
+			LineStyle 1
+		}
+		' highlight root
+		rootNode {
+			BackgroundColor SandyBrown
+		}
+		' highlight domains
+		:depth(1) {
+			BackgroundColor Bisque
+		}
+		' highlight cases
+		:depth(2) {
+			BackgroundColor OldLace
+		}
+		:depth(3) {
+			BackgroundColor OldLace
+		}
+	}
+</style>
+
+* = Use-Cases\n| A | anonymous |\n| U | user |\n| P | paid user |\n| AD | admin |
+
+** __Account__
+*** **register** (A)
+*** **activate** (A)
+*** **sign in** (A)
+*** **sign out** (U)
+
+** __Category__
+*** **add** (U)
+*** **view** a list (A)
+*** **view** info (A)
+
+** __Country__
+*** **add** (U)
+*** **view** a list (A)
+*** **view** info (A)
+
+** __Collection__
+*** **view** info (A)
+*** **view** estimated price (P)
+*** **view** estimated price\nof any collection (AD)
+*** **add** a series (U)
+*** **add** a series with price (P)
+*** **remove** a series (U)
+
+** __Participant__
+*** **add** (AD)
+
+** __Series__
+*** **view** info (A)
+--- **search by catalog numbers**
+---- on the site (A)
+---- within own collection (U)
+--- **create** (U)
+---- auto-filling category/country from URL (U)
+---- category/country suggestion (U)
+---- with an image from URL (AD)
+---- with a comment (AD)
+*** **add** a year (U)
+*** **add** catalog numbers (U)
+*** **add** a catalog price (U)
+*** **add** a comment (AD)
+*** **add** an image (U)
+*** **add** an image from URL (AD)
+*** **replace** an image (AD)
+*** **view** hidden images (AD)
+*** **mark** similar series (AD)
+
+** __Series Import__
+*** **submit** a request (AD)
+*** **view** request info (AD)
+*** **view** a list of requests (AD)
+*** **import** a series (AD)
+
+** __Series Sale__
+*** **add** a series sale (AD)
+*** **import** a series sale (AD)
+*** **view** series sales (AD)
+
+** __Site__
+*** **view** index page (A)
+*** **return** custom error pages (A)
+*** **return** ""robots.txt"" (A)
+*** **return** ""sitemap.xml"" (A)
+*** **view** daily report (AD)
+*** **view** suspicious activity (AD)
+*** **manage** feature flags (AD)
+
+@endwbs
