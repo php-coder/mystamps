@@ -1,6 +1,7 @@
 @startuml
 
 title Series import flow: stage 1 (create import request)
+hide footbox
 
 participant Browser
 participant SeriesImportController

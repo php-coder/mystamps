@@ -1,6 +1,7 @@
 @startuml
 
 title Series import flow: stage 3a (handle error of parsing page)
+hide footbox
 
 participant ParsingFailedEventListener
 participant SeriesImportService

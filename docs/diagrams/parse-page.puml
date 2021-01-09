@@ -1,6 +1,7 @@
 @startuml
 
 title Series import flow: stage 3 (parse page)
+hide footbox
 
 participant DownloadingSucceededEventListener
 participant SiteParserService

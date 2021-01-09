@@ -1,6 +1,7 @@
 @startuml
 
 title Series import flow: stage 2 (download page)
+hide footbox
 
 participant ImportRequestCreatedEventListener
 participant DownloaderService
