@@ -2,6 +2,9 @@
 
 title Series import flow: stage 3a (handle error of parsing page)
 hide footbox
+skinparam sequence {
+	LifeLineBackgroundColor LightGray
+}
 
 participant ParsingFailedEventListener
 participant SeriesImportService

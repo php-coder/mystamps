@@ -1,6 +1,9 @@
 @startuml
 
 title Series import flow: stage 4 (import a series)
+skinparam sequence {
+	LifeLineBackgroundColor LightGray
+}
 
 participant Browser
 participant SeriesImportController

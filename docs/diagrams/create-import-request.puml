@@ -2,6 +2,9 @@
 
 title Series import flow: stage 1 (create import request)
 hide footbox
+skinparam sequence {
+	LifeLineBackgroundColor LightGray
+}
 
 participant Browser
 participant SeriesImportController
