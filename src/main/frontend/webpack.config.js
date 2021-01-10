@@ -24,10 +24,8 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [ "@babel/preset-react", "@babel/preset-env" ]
-                    }
+                    // See also the configuration in babel.config.js
+                    loader: 'babel-loader'
                 }
             }
         ]
