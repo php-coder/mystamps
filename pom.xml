@@ -645,7 +645,12 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<postgresql.version>9.4.1212.jre7</postgresql.version>
 		
-		<!-- Don't forget to update version in the ResourceUrl class and in the src/main/webapp/WEB-INF/views/series/info.html -->
+		<!--
+			Don't forget to update version in the following places:
+			- ResourceUrl class
+			- src/main/webapp/WEB-INF/views/series/info.html
+			- src/main/frontend/package.json
+		-->
 		<react.version>16.8.6</react.version>
 		
 		<resources.plugin.version>3.2.0</resources.plugin.version>

@@ -23,14 +23,22 @@
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test": "jest",
+    "watch-test": "jest --watch"
   },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "~7.10.5",
     "@babel/preset-env": "~7.10.4",
     "@babel/preset-react": "~7.10.4",
+    "@testing-library/jest-dom": "~5.11.8",
+    "@testing-library/react": "~11.2.3",
+    "babel-jest": "~26.6.3",
     "babel-loader": "~8.1.0",
+    "jest": "~26.6.3",
+    "react": "~16.8.6",
+    "react-dom": "~16.8.6",
     "webpack": "~4.43.0",
     "webpack-cli": "~3.3.12"
   }

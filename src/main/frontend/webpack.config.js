@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 const SRC_DIR = './src/components/';
 
@@ -29,5 +30,11 @@ module.exports = {
                 }
             }
         ]
+    },
+    externals: {
+        // Don't include React library to bundles even if the code has import-s.
+        // We need these import-s for unit tests but we load React separately on the pages.
+        // See https://v4.webpack.js.org/configuration/externals/
+        'react': 'React'
     }
 }
