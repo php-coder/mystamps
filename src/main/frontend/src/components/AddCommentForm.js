@@ -93,10 +93,13 @@ class AddCommentFormView extends React.PureComponent {
 		const hasValidationErrors = validationErrors.length > 0;
 		return (
 			<div className="col-sm-12 form-group">
-				<form id="add-comment-form" className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
+				<form id="add-comment-form"
+					aria-label={ l10n['t_add_comment'] || 'Add a comment' }
+					className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
 					<div
 						id="add-comment-failed-msg"
+						role="alert"
 						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
 						{ l10n['t_server_error'] || 'Server error' }
 					</div>
