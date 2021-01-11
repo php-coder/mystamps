@@ -2,6 +2,7 @@
 // IMPORTANT:
 // You must update ResourceUrl.RESOURCES_VERSION each time whenever you're modified this file!
 //
+import React from 'react';
 
 // @todo #1338 AddCommentForm: add tests
 class AddCommentForm extends React.PureComponent {
@@ -138,3 +139,4 @@ class AddCommentFormView extends React.PureComponent {
 }
 
 window.AddCommentForm = AddCommentForm;
+window.AddCommentFormView = AddCommentFormView;
