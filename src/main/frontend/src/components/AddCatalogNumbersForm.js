@@ -134,7 +134,7 @@ class AddCatalogNumbersFormView extends React.PureComponent {
 						</div>
 					</div>
 					<div className="form-group form-group-sm">
-						<label htmlFor="catalog-numbers" className="control-label col-sm-3">
+						<label htmlFor="catalog-numbers" className="control-label col-sm-3 required-field">
 							{ l10n['t_numbers'] || 'Numbers' }
 						</label>
 						<div className="row">

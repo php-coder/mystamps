@@ -151,7 +151,7 @@ class AddCatalogPriceFormView extends React.PureComponent {
 						</div>
 					</div>
 					<div className="form-group form-group-sm">
-						<label htmlFor="catalog-price" className="control-label col-sm-3">
+						<label htmlFor="catalog-price" className="control-label col-sm-3 required-field">
 							{ l10n['t_price'] || 'Price' }
 						</label>
 						<div className="col-sm-3">

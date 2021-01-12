@@ -63,6 +63,12 @@ footer {
 	font-style: italic;
 }
 
+.required-field:after {
+	/* \00a0 is the same as nbsp; */
+	content: '\00a0*';
+	color: #8b0000;
+}
+
 .required_field {
 	color: #8b0000;
 }
