@@ -200,10 +200,9 @@
 								
 								<tr th:unless="${disabled}" th:classappend="${#fields.hasErrors('quantity') ? 'has-error' : ''}">
 									<th>
-										<label for="quantity" class="control-label" th:text="#{t_quantity}">
+										<label for="quantity" class="control-label required-field" th:text="#{t_quantity}">
 											Quantity
 										</label>
-										<span class="required_field">*</span>
 									</th>
 									<td>
 										<input id="quantity"

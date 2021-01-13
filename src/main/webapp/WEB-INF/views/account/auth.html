@@ -94,9 +94,8 @@
 						<form id="auth-account-form" action="../site/index.html" th:action="@{${LOGIN_PAGE}}" method="post" class="form-horizontal">
 							
 							<div class="form-group">
-								<label for="login" class="control-label col-sm-4">
-									<span th:remove="tag" th:text="#{t_login}">Login</span>
-									<span class="required_field">*</span>
+								<label for="login" class="control-label col-sm-4 required-field" th:text="#{t_login}">
+									Login
 								</label>
 								<div class="col-sm-4">
 									<input type="text" id="login" name="login" required="required" value="" class="form-control" />
@@ -104,9 +103,8 @@
 							</div>
 							
 							<div class="form-group">
-								<label for="password" class="control-label col-sm-4">
-									<span th:remove="tag" th:text="#{t_password}">Password</span>
-									<span class="required_field">*</span>
+								<label for="password" class="control-label col-sm-4 required-field" th:text="#{t_password}">
+									Password
 								</label>
 								<div class="col-sm-4">
 									<input type="password" id="password" name="password" required="required" value="" class="form-control" />

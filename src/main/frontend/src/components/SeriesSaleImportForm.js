@@ -136,9 +136,8 @@ class SeriesSaleImportFormView extends React.PureComponent {
 								onSubmit={ handleSubmit }>
 								
 								<div className="form-group form-group-sm">
-									<label htmlFor="series-sale-url" className="control-label col-sm-3">
+									<label htmlFor="series-sale-url" className="control-label col-sm-3 required-field">
 										{ l10n['t_url'] || 'URL' }
-										<span className="required_field"> *</span>
 									</label>
 									<div className="col-sm-6">
 										<input id="series-sale-url"

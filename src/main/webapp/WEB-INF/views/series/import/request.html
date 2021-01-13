@@ -76,9 +76,8 @@
 					<form id="import-series-form" method="get" action="info.html" class="form-horizontal" th:method="post" th:action="@{${REQUEST_IMPORT_SERIES_PAGE}}" th:object="${requestImportForm}">
 						
 						<div class="form-group" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-							<label class="control-label col-sm-4" for="url">
-								<span th:remove="tag" th:text="#{t_url}">URL</span>
-								<span class="required_field">*</span>
+							<label for="url" class="control-label col-sm-4 required-field" th:text="#{t_url}">
+								URL
 							</label>
 							<div class="col-sm-5">
 								<input id="url" type="url" class="form-control" required="required" autofocus="autofocus" th:field="*{url}" />

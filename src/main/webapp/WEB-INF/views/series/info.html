@@ -656,11 +656,8 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
-											<label for="seller" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_seller}">
-													Seller
-												</span>
-												<span class="required_field">*</span>
+											<label for="seller" class="control-label col-sm-3 required-field" th:text="#{t_seller}">
+												Seller
 											</label>
 											<div class="col-sm-6">
 												<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
@@ -718,11 +715,8 @@
 										</div>
 										
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
-											<label for="price" class="control-label col-sm-3">
-												<span th:remove="tag" th:text="#{t_price}">
-													Price
-												</span>
-												<span class="required_field">*</span>
+											<label for="price" class="control-label col-sm-3 required-field" th:text="#{t_price}">
+												Price
 											</label>
 											<div class="col-sm-6">
 												<div class="row">
