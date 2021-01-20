@@ -144,3 +144,9 @@ label {
 	min-height: 100vh;
 	flex-direction: column;
 }
+
+.pie-chart-box {
+	width: 379px;
+	height: 200px;
+	padding: 0;
+}
