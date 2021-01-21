@@ -99,7 +99,10 @@
 										th:action="@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}"
 										th:object="${addImageForm}">
 										<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('uploadedImage') ? 'has-error' : ''}">
-											<label for="image" class="control-label col-sm-3" th:text="#{t_image}">
+											<label for="image"
+												class="control-label col-sm-3"
+												th:classappend="${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? '' : 'required-field'}"
+												th:text="#{t_image}">
 												Image
 											</label>
 											<div class="col-sm-9">
