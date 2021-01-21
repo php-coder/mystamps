@@ -233,13 +233,11 @@
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('uploadedImage') ? 'has-error' : ''}">
-							<label for="image" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_image}">
-									Image
-								</span>
-								<!--/*/
-								<span class="required_field" th:if="${not #authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')')}">*</span>
-								/*/-->
+							<label for="image"
+								class="control-label col-sm-3"
+								th:classappend="${#authorization.expression('hasAuthority(''DOWNLOAD_IMAGE'')') ? '' : 'required-field'}"
+								th:text="#{t_image}">
+								Image
 							</label>
 							<div class="col-sm-7">
 								<input id="image"
