@@ -126,6 +126,8 @@ public class SeriesServiceImpl implements SeriesService {
 	@PreAuthorize(HasAuthority.ADD_COMMENTS_TO_SERIES)
 	public void addComment(Integer seriesId, String comment) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(comment != null, "Comment must be non null");
+		Validate.isTrue(comment.trim().isEmpty(), "Comment must be non empty");
 		
 		// We don't touch updated_at/updated_by fields because:
 		// - a comment is a meta information that is visible only by admins.
