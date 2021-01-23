@@ -70,7 +70,7 @@
 *** **add** catalog numbers (U)
 *** **add** a catalog price (U)
 *** **add** a comment (AD)
-*** **add** an image (U)
+*** **add** an image (AD and an owner)
 *** **add** an image from URL (AD)
 *** **replace** an image (AD)
 *** **view** hidden images (AD)
