@@ -32,6 +32,7 @@ import static io.qala.datagen.RandomShortApi.bool
 import static io.qala.datagen.RandomShortApi.nullOr
 import static io.qala.datagen.RandomShortApi.positiveInteger
 import static io.qala.datagen.RandomShortApi.positiveLong
+import static io.qala.datagen.RandomShortApi.sample
 
 @SuppressWarnings([
 	'ClassJavadoc',
@@ -465,6 +466,44 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			IllegalStateException ex = thrown()
 			ex.message == 'oops'
+	}
+	
+	//
+	// Tests for addComment()
+	//
+	
+	def 'addComment() should throw exception when series id is null'() {
+		when:
+			service.addComment(null, null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
+	}
+	
+	def 'addComment() should throw exception when comment is null'() {
+		when:
+			service.addComment(Random.id(), null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Comment must be non null'
+	}
+	
+	def 'addComment() should throw exception when comment is empty or blank'() {
+		when:
+			service.addComment(Random.id(), sample('', '  '))
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Comment must be non empty'
+	}
+	
+	def 'addComment() should pass parameters to seried dao'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+			String expectedComment = 'this is important'
+		when:
+			service.addComment(expectedSeriesId, expectedComment)
+		then:
+			1 * seriesDao.addComment(expectedSeriesId, expectedComment)
 	}
 	
 	//
