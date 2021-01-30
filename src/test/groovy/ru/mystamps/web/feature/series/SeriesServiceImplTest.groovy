@@ -693,7 +693,8 @@ class SeriesServiceImplTest extends Specification {
 		when:
 			service.findFullInfoById(null, null, bool())
 		then:
-			thrown(IllegalArgumentException)
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Series id must be non null'
 	}
 	
 	def "findFullInfoById() should return null when series not found"() {
