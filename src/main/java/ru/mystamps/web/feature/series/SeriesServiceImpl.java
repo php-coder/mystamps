@@ -120,7 +120,6 @@ public class SeriesServiceImpl implements SeriesService {
 		return id;
 	}
 
-	// @todo #785 SeriesServiceImpl.addComment(): add unit tests
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.ADD_COMMENTS_TO_SERIES)
