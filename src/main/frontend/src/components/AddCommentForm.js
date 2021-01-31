@@ -98,12 +98,13 @@ class AddCommentFormView extends React.PureComponent {
 					aria-label={ l10n['t_add_comment'] || 'Add a comment' }
 					className={ `form-horizontal ${hasValidationErrors ? 'has-error' : ''}` }
 					onSubmit={ handleSubmit }>
-					<div
-						id="add-comment-failed-msg"
-						role="alert"
-						className={ `alert alert-danger text-center col-sm-8 col-sm-offset-2 ${hasServerError ? '' : 'hidden'}` }>
-						{ l10n['t_server_error'] || 'Server error' }
-					</div>
+					{ hasServerError &&
+						<div id="add-comment-failed-msg"
+							role="alert"
+							className="alert alert-danger text-center col-sm-8 col-sm-offset-2">
+							{ l10n['t_server_error'] || 'Server error' }
+						</div>
+					}
 					<div className="form-group form-group-sm">
 						<label htmlFor="new-comment" className="control-label col-sm-3 required-field">
 							{ l10n['t_comment'] || 'Comment' }
@@ -120,11 +121,11 @@ class AddCommentFormView extends React.PureComponent {
 						</div>
 					</div>
 					<div className="col-sm-offset-3 col-sm-4">
-						<span
-							id="new-comment.errors"
-							className={ `help-block ${hasValidationErrors ? '' : 'hidden'}` }>
-							{ validationErrors.join(', ') }
-						</span>
+						{ hasValidationErrors &&
+							<span id="new-comment.errors" className="help-block">
+								{ validationErrors.join(', ') }
+							</span>
+						}
 						<button
 							type="submit"
 							className="btn btn-primary btn-sm"

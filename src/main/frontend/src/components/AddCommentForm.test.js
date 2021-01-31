@@ -41,7 +41,6 @@ describe('AddCommentFormView', () => {
 			// then
 			const alert = screen.getByRole('alert');
 			expect(alert).toHaveTextContent('Server error');
-			expect(alert).not.toHaveClass('hidden');
 		});
 
 		it('the comment field', () => {
@@ -58,7 +57,6 @@ describe('AddCommentFormView', () => {
 			// @todo #1489 Use toHaveErrorMessage() or toHaveDescription() for checking error messages
 			const fieldErrors = container.querySelector('#new-comment\\.errors');
 			expect(fieldErrors).not.toBeNull();
-			expect(fieldErrors).not.toHaveClass('hidden');
 			expect(fieldErrors).toHaveTextContent('err1, err2');
 		});
 	});
