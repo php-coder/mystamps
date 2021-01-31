@@ -60,11 +60,14 @@ public class ValidationErrors {
 		// ValidationErrors
 		Node last = getLastOrNull(violation.getPropertyPath());
 		String name;
-		if (last == null || last.getKind() != ElementKind.PROPERTY) {
+		if (last != null && last.getKind() == ElementKind.PROPERTY) {
+			name = last.getName();
+		} else if (last != null && last.getKind() == ElementKind.PARAMETER) {
+			// emulate validation of PatchRequest.value field
+			name = "value";
+		} else {
 			// fallback to a field path for unsupported kinds
 			name = violation.getPropertyPath().toString();
-		} else {
-			name = last.getName();
 		}
 		
 		String message = violation.getMessage();

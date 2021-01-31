@@ -17,15 +17,28 @@
  */
 package ru.mystamps.web.feature.series;
 
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT_LENGTH;
 
 // FIXME: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
 	Integer add(AddSeriesDto dto, Integer userId);
-	void addComment(Integer seriesId, String comment, Integer userId);
+
+	// CheckStyle: ignore LineLength for next 6 lines
+	// @todo #1411 Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties
+	void addComment(
+		Integer seriesId,
+		Integer userId,
+		// @NotBlank isn't needed because PatchRequest.value has @NotEmpty and its setter trims blank values to null
+		@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "Value is greater than allowable maximum of {max} characters")
+		String comment
+	);
+	
 	void addReleaseYear(Integer seriesId, Integer year, Integer userId);
 	void addCatalogPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
 	void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId);

@@ -43,7 +43,6 @@ class RestSeriesController {
 	
 	private final SeriesService seriesService;
 	
-	// @todo #785 Update series: add validation for a comment
 	// @todo #1339 Update series: add validation for catalog numbers
 	// @todo #1340 Update series: add validation for a price
 	// @todo #1343 Update series: add validation for a release year
@@ -73,7 +72,7 @@ class RestSeriesController {
 			String path = patch.getPath();
 			switch (path) {
 				case "/comment":
-					seriesService.addComment(seriesId, patch.getValue(), currentUserId);
+					seriesService.addComment(seriesId, currentUserId, patch.getValue());
 					break;
 				case "/release_year":
 					seriesService.addReleaseYear(seriesId, patch.integerValue(), currentUserId);

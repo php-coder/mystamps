@@ -439,7 +439,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when series id is null'() {
 		when:
-			service.addComment(null, null, Random.userId())
+			service.addComment(null, Random.userId(), 'text')
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series id must be non null'
@@ -447,7 +447,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when comment is null'() {
 		when:
-			service.addComment(Random.id(), null, Random.userId())
+			service.addComment(Random.id(), Random.userId(), null)
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Comment must be non null'
@@ -455,7 +455,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when comment is empty or blank'() {
 		when:
-			service.addComment(Random.id(), sample('', '  '), Random.userId())
+			service.addComment(Random.id(), Random.userId(), sample('', '  '))
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Comment must be non empty'
@@ -463,7 +463,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when user id is null'() {
 		when:
-			service.addComment(Random.id(), 'a comment', null)
+			service.addComment(Random.id(), null, 'a comment')
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'User id must be non null'
@@ -476,7 +476,7 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedUserId = Random.userId()
 			String expectedComment = 'this is important'
 		when:
-			service.addComment(expectedSeriesId, expectedComment, expectedUserId)
+			service.addComment(expectedSeriesId, expectedUserId, expectedComment)
 		then:
 			1 * seriesDao.addComment({ AddCommentDbDto dto ->
 				assert dto?.seriesId == expectedSeriesId

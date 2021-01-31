@@ -22,6 +22,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import ru.mystamps.web.feature.image.ImageInfoDto;
 import ru.mystamps.web.feature.image.ImageService;
 import ru.mystamps.web.support.spring.security.HasAuthority;
@@ -38,6 +39,7 @@ import java.util.Set;
 // The String literal "Series id must be non null" appears N times in this file
 // and we think that it's OK.
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals" })
+@Validated
 @RequiredArgsConstructor
 public class SeriesServiceImpl implements SeriesService {
 	
@@ -115,11 +117,11 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.ADD_COMMENTS_TO_SERIES)
-	public void addComment(Integer seriesId, String comment, Integer userId) {
+	public void addComment(Integer seriesId, Integer userId, String comment) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
+		Validate.isTrue(userId != null, "User id must be non null");
 		Validate.isTrue(comment != null, "Comment must be non null");
 		Validate.isTrue(!comment.trim().isEmpty(), "Comment must be non empty");
-		Validate.isTrue(userId != null, "User id must be non null");
 		
 		// We don't need to modify series.updated_at/updated_by fields because:
 		// - a comment is a meta information that is invisible publicly
