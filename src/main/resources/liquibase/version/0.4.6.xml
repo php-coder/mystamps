@@ -6,5 +6,6 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
 	
 	<include file="0.4.6/2021-01-30--series_comments.xml" relativeToChangelogFile="true" />
+	<include file="0.4.6/2021-01-31--make-comment-field-non-nullable.xml" relativeToChangelogFile="true" />
 	
 </databaseChangeLog>
