@@ -190,7 +190,7 @@ class SeriesImportServiceImplTest extends Specification {
 				expectedUserId
 			)
 		then:
-			1 * seriesService.add(expectedDto, expectedUserId, false) >> expectedSeriesId
+			1 * seriesService.add(expectedDto, expectedUserId) >> expectedSeriesId
 		and:
 			seriesId == expectedSeriesId
 	}
@@ -201,7 +201,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedSeriesId = Random.id()
 			Integer expectedUserId = Random.userId()
 		and:
-			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
+			seriesService.add(_ as AddSeriesDto, _ as Integer) >> expectedSeriesId
 		when:
 			service.addSeries(
 				TestObjects.createAddSeriesDto(),
@@ -220,7 +220,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedSellerId = Random.id()
 			AddParticipantDto expectedSellerDto = TestObjects.createAddParticipantDto()
 		and:
-			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> Random.id()
+			seriesService.add(_ as AddSeriesDto, _ as Integer) >> Random.id()
 		when:
 			service.addSeries(
 				TestObjects.createAddSeriesDto(),
@@ -248,7 +248,7 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			Integer expectedSeriesId = Random.id()
 		and:
-			seriesService.add(_ as AddSeriesDto, _ as Integer, _ as Boolean) >> expectedSeriesId
+			seriesService.add(_ as AddSeriesDto, _ as Integer) >> expectedSeriesId
 		when:
 			service.addSeries(
 				TestObjects.createAddSeriesDto(),

@@ -38,13 +38,11 @@ import javax.validation.GroupSequence;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 import static ru.mystamps.web.feature.image.ImageValidation.MAX_IMAGE_SIZE;
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_DAYS_IN_MONTH;
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_MONTHS_IN_YEAR;
-import static ru.mystamps.web.feature.series.SeriesValidation.MAX_SERIES_COMMENT_LENGTH;
 import static ru.mystamps.web.feature.series.SeriesValidation.MAX_STAMPS_IN_SERIES;
 import static ru.mystamps.web.feature.series.SeriesValidation.MIN_RELEASE_YEAR;
 import static ru.mystamps.web.feature.series.SeriesValidation.MIN_STAMPS_IN_SERIES;
@@ -141,9 +139,6 @@ public class AddSeriesForm implements AddSeriesDto, HasImageOrImageUrl, Nullable
 
 	@Price
 	private BigDecimal zagorskiPrice;
-	
-	@Size(max = MAX_SERIES_COMMENT_LENGTH, message = "{value.too-long}")
-	private String comment;
 	
 	// Name of this field should match with the value of
 	// DownloadImageInterceptor.UPLOADED_IMAGE_FIELD_NAME.

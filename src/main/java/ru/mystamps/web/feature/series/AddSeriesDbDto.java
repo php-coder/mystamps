@@ -26,7 +26,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString(exclude = { "comment", "createdAt", "createdBy", "updatedAt", "updatedBy" })
+@ToString(exclude = { "createdAt", "createdBy", "updatedAt", "updatedBy" })
 @SuppressWarnings("PMD.TooManyFields")
 public class AddSeriesDbDto {
 	private Integer categoryId;
@@ -45,8 +45,6 @@ public class AddSeriesDbDto {
 	private Integer releaseDay;
 	private Integer releaseMonth;
 	private Integer releaseYear;
-	
-	private String comment;
 	
 	private Date createdAt;
 	private Integer createdBy;

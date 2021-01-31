@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Set;
 
 // FIXME: move stamps related methods to separate interface (#88)
@@ -53,7 +54,7 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.CREATE_SERIES)
-	public Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments) {
+	public Integer add(AddSeriesDto dto, Integer userId) {
 		Validate.isTrue(dto != null, "DTO must be non null");
 		Validate.isTrue(dto.getQuantity() != null, "Quantity must be non null");
 		Validate.isTrue(dto.getPerforated() != null, "Perforated property must be non null");
@@ -79,15 +80,6 @@ public class SeriesServiceImpl implements SeriesService {
 		series.setSolovyovPrice(dto.getSolovyovPrice());
 		series.setZagorskiPrice(dto.getZagorskiPrice());
 
-		if (userCanAddComments && dto.getComment() != null) {
-			Validate.isTrue(
-				!dto.getComment().trim().isEmpty(),
-				"Comment must be non empty"
-			);
-			
-			series.setComment(dto.getComment());
-		}
-		
 		Date now = new Date();
 		series.setCreatedAt(now);
 		series.setUpdatedAt(now);
@@ -123,17 +115,26 @@ public class SeriesServiceImpl implements SeriesService {
 	@Override
 	@Transactional
 	@PreAuthorize(HasAuthority.ADD_COMMENTS_TO_SERIES)
-	public void addComment(Integer seriesId, String comment) {
+	public void addComment(Integer seriesId, String comment, Integer userId) {
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		Validate.isTrue(comment != null, "Comment must be non null");
 		Validate.isTrue(!comment.trim().isEmpty(), "Comment must be non empty");
+		Validate.isTrue(userId != null, "User id must be non null");
 		
-		// We don't touch updated_at/updated_by fields because:
-		// - a comment is a meta information that is visible only by admins.
-		//   From user's point of view, this field doesn't exist
+		// We don't need to modify series.updated_at/updated_by fields because:
+		// - a comment is a meta information that is invisible publicly
 		// - updated_at field is used by logic for sitemap.xml generation
 		//   and we don't want to affect this
-		seriesDao.addComment(seriesId, comment);
+		AddCommentDbDto dto = new AddCommentDbDto();
+		dto.setSeriesId(seriesId);
+		dto.setUserId(userId);
+		dto.setComment(comment);
+		
+		Date now = new Date();
+		dto.setCreatedAt(now);
+		dto.setUpdatedAt(now);
+		
+		seriesDao.addComment(dto);
 		
 		log.info("Series #{}: a comment has been added", seriesId);
 	}
@@ -307,12 +308,18 @@ public class SeriesServiceImpl implements SeriesService {
 	@Transactional(readOnly = true)
 	public SeriesDto findFullInfoById(
 		Integer seriesId,
+		Integer userId,
 		String lang,
 		boolean userCanSeeHiddenImages) {
 		
 		Validate.isTrue(seriesId != null, "Series id must be non null");
 		
-		SeriesFullInfoDto seriesBaseInfo = seriesDao.findByIdAsSeriesFullInfo(seriesId, lang);
+		// @todo #1505 Don't load a series comment for anonymous users
+		SeriesFullInfoDto seriesBaseInfo = seriesDao.findByIdAsSeriesFullInfo(
+			seriesId,
+			Optional.ofNullable(userId).orElse(0),
+			lang
+		);
 		if (seriesBaseInfo == null) {
 			return null;
 		}

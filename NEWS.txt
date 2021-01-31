@@ -1,4 +1,5 @@
 0.x (upcoming release)
+- (feature)      users can add a comment to a series
 (infrastructure) migrate to JUnit 5
 
 0.4.5

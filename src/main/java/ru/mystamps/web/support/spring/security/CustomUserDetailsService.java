@@ -64,6 +64,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private static Collection<? extends GrantedAuthority> getAuthorities(UserDetails userDetails) {
 		// Constants sorted in an ascending order.
 		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 		authorities.add(Authority.CREATE_CATEGORY);
 		authorities.add(Authority.CREATE_COUNTRY);
 		authorities.add(Authority.CREATE_SERIES);
@@ -71,7 +72,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		if (userDetails.isAdmin()) {
 			// Constants sorted in an ascending order.
-			authorities.add(Authority.ADD_COMMENTS_TO_SERIES);
 			authorities.add(Authority.ADD_IMAGES_TO_SERIES);
 			authorities.add(Authority.ADD_PARTICIPANT);
 			authorities.add(Authority.ADD_SERIES_PRICE);

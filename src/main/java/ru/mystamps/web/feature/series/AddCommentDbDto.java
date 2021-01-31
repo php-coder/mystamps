@@ -17,37 +17,17 @@
  */
 package ru.mystamps.web.feature.series;
 
-import org.springframework.web.multipart.MultipartFile;
-import ru.mystamps.web.common.LinkEntityDto;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
-public interface AddSeriesDto {
-	LinkEntityDto getCategory();
-	LinkEntityDto getCountry();
-	Integer getDay();
-	Integer getMonth();
-	Integer getYear();
-	Integer getQuantity();
-	Boolean getPerforated();
-	
-	String getMichelNumbers();
-	BigDecimal getMichelPrice();
-	
-	String getScottNumbers();
-	BigDecimal getScottPrice();
-	
-	String getYvertNumbers();
-	BigDecimal getYvertPrice();
-	
-	String getGibbonsNumbers();
-	BigDecimal getGibbonsPrice();
-	
-	String getSolovyovNumbers();
-	BigDecimal getSolovyovPrice();
-	
-	String getZagorskiNumbers();
-	BigDecimal getZagorskiPrice();
-	
-	MultipartFile getImage();
+@Getter
+@Setter
+public class AddCommentDbDto {
+	private Integer seriesId;
+	private Integer userId;
+	private String comment;
+	private Date createdAt;
+	private Date updatedAt;
 }

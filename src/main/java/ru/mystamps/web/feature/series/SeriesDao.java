@@ -24,13 +24,13 @@ import java.util.List;
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesDao {
 	Integer add(AddSeriesDbDto series);
-	void addComment(Integer seriesId, String comment);
+	void addComment(AddCommentDbDto dto);
 	void addReleaseYear(AddReleaseYearDbDto dto);
 	void markAsModified(Integer seriesId, Date updateAt, Integer updatedBy);
 	List<SitemapInfoDto> findAllForSitemap();
 	List<SeriesLinkDto> findSimilarSeries(Integer seriesId, String lang);
 	List<SeriesLinkDto> findLastAdded(int quantity, String lang);
-	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang);
+	SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, Integer userId, String lang);
 	List<SeriesInfoDto> findByIdsAsSeriesInfo(List<Integer> seriesIds, String lang);
 	List<SeriesInfoDto> findByCategorySlugAsSeriesInfo(String slug, String lang);
 	List<SeriesInGalleryDto> findByCountrySlug(String slug, String lang);

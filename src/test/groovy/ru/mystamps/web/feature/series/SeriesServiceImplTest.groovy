@@ -89,7 +89,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception if dto is null"() {
 		when:
-			service.add(null, Random.userId(), bool())
+			service.add(null, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'DTO must be non null'
@@ -99,7 +99,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setQuantity(null)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Quantity must be non null'
@@ -109,7 +109,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setPerforated(null)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Perforated property must be non null'
@@ -119,7 +119,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(null)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Category must be non null'
@@ -129,7 +129,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setCategory(new LinkEntityDto(null, 'test', 'Test'))
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Category id must be non null'
@@ -137,7 +137,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "add() should throw exception when user is null"() {
 		when:
-			service.add(form, null, bool())
+			service.add(form, null)
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'User id must be non null'
@@ -152,7 +152,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCountry(country)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.countryId == expectedCountryId
@@ -171,7 +171,7 @@ class SeriesServiceImplTest extends Specification {
 			form.setMonth(month)
 			form.setYear(year)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.releaseDay == expectedDay
@@ -200,7 +200,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			form.setCategory(category)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.categoryId == expectedCategoryId
@@ -214,7 +214,7 @@ class SeriesServiceImplTest extends Specification {
 			Integer expectedQuantity = Random.quantity()
 			form.setQuantity(expectedQuantity)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.quantity == expectedQuantity
@@ -228,7 +228,7 @@ class SeriesServiceImplTest extends Specification {
 			Boolean expectedPerforated = Random.perforated()
 			form.setPerforated(expectedPerforated)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.perforated == expectedPerforated
@@ -248,7 +248,7 @@ class SeriesServiceImplTest extends Specification {
 			form.setSolovyovPrice(expectedPrice)
 			form.setZagorskiPrice(expectedPrice)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.michelPrice == expectedPrice
@@ -261,47 +261,12 @@ class SeriesServiceImplTest extends Specification {
 			}) >> Random.id()
 	}
 	
-	def "add() should throw exception if comment is empty"() {
-		given:
-			form.setComment('  ')
-		when:
-			service.add(form, Random.userId(), true)
-		then:
-			IllegalArgumentException ex = thrown()
-			ex.message == 'Comment must be non empty'
-	}
-	
-	@Unroll
-	@SuppressWarnings([
-		'ClosureAsLastMethodParameter',
-		'LineLength',
-		'UnnecessaryReturnKeyword',
-		/* false positive: */ 'UnnecessaryBooleanExpression',
-	])
-	def "add() should pass '#expectedComment' as comment to series dao if user can add comment is #canAddComment"(boolean canAddComment, String comment, String expectedComment) {
-		given:
-			form.setComment(comment)
-		when:
-			service.add(form, Random.userId(), canAddComment)
-		then:
-			1 * seriesDao.add({ AddSeriesDbDto series ->
-				assert series?.comment == expectedComment
-				return true
-			}) >> Random.id()
-		where:
-			canAddComment | comment     || expectedComment
-			false         | null        || null
-			false         | 'test'      || null
-			true          | null        || null
-			true          | 'Some text' || 'Some text'
-	}
-	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def "add() should assign created/updated at/by to current date/user"() {
 		given:
 			Integer expectedUserId = Random.userId()
 		when:
-			service.add(form, expectedUserId, bool())
+			service.add(form, expectedUserId)
 		then:
 			1 * seriesDao.add({ AddSeriesDbDto series ->
 				assert series?.createdBy == expectedUserId
@@ -316,7 +281,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			Integer expected = Random.id()
 		when:
-			Integer actual = service.add(form, Random.userId(), bool())
+			Integer actual = service.add(form, Random.userId())
 		then:
 			1 * seriesDao.add(_ as AddSeriesDbDto) >> expected
 		and:
@@ -333,7 +298,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * michelCatalogService.add(expectedNumbers)
 		and:
@@ -350,7 +315,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * scottCatalogService.add(expectedNumbers)
 		and:
@@ -367,7 +332,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * yvertCatalogService.add(expectedNumbers)
 		and:
@@ -384,7 +349,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * gibbonsCatalogService.add(expectedNumbers)
 		and:
@@ -401,7 +366,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * solovyovCatalogService.add(expectedNumbers)
 		and:
@@ -418,7 +383,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			seriesDao.add(_ as AddSeriesDbDto) >> expectedSeriesId
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * zagorskiCatalogService.add(expectedNumbers)
 		and:
@@ -429,7 +394,7 @@ class SeriesServiceImplTest extends Specification {
 		given:
 			form.setUploadedImage(multipartFile)
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			1 * imageService.save(multipartFile) >> TestObjects.createImageInfoDto()
 	}
@@ -442,7 +407,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			Integer expectedImageId = Random.id()
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			// FIXME: why we can't use _ as MultipartFile here?
 			imageService.save(_) >> new ImageInfoDto(expectedImageId, 'JPEG')
@@ -458,7 +423,7 @@ class SeriesServiceImplTest extends Specification {
 		and:
 			imageService.addToSeries(_ as Integer, _ as Integer) >> { throw new IllegalStateException('oops') }
 		when:
-			service.add(form, Random.userId(), bool())
+			service.add(form, Random.userId())
 		then:
 			imageService.save(_) >> expectedImageInfo
 		and:
@@ -474,7 +439,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when series id is null'() {
 		when:
-			service.addComment(null, null)
+			service.addComment(null, null, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series id must be non null'
@@ -482,7 +447,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when comment is null'() {
 		when:
-			service.addComment(Random.id(), null)
+			service.addComment(Random.id(), null, Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Comment must be non null'
@@ -490,20 +455,37 @@ class SeriesServiceImplTest extends Specification {
 	
 	def 'addComment() should throw exception when comment is empty or blank'() {
 		when:
-			service.addComment(Random.id(), sample('', '  '))
+			service.addComment(Random.id(), sample('', '  '), Random.userId())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Comment must be non empty'
 	}
 	
-	def 'addComment() should pass parameters to seried dao'() {
+	def 'addComment() should throw exception when user id is null'() {
+		when:
+			service.addComment(Random.id(), 'a comment', null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'User id must be non null'
+	}
+	
+	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
+	def 'addComment() should add a comment'() {
 		given:
 			Integer expectedSeriesId = Random.id()
+			Integer expectedUserId = Random.userId()
 			String expectedComment = 'this is important'
 		when:
-			service.addComment(expectedSeriesId, expectedComment)
+			service.addComment(expectedSeriesId, expectedComment, expectedUserId)
 		then:
-			1 * seriesDao.addComment(expectedSeriesId, expectedComment)
+			1 * seriesDao.addComment({ AddCommentDbDto dto ->
+				assert dto?.seriesId == expectedSeriesId
+				assert dto?.userId == expectedUserId
+				assert dto?.comment == expectedComment
+				assert DateUtils.roughlyEqual(dto?.createdAt, new Date())
+				assert DateUtils.roughlyEqual(dto?.updatedAt, new Date())
+				return true
+			})
 	}
 	
 	//
@@ -730,7 +712,7 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findFullInfoById() should throw exception when series id is null"() {
 		when:
-			service.findFullInfoById(null, null, bool())
+			service.findFullInfoById(null, null, null, bool())
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series id must be non null'
@@ -738,9 +720,9 @@ class SeriesServiceImplTest extends Specification {
 	
 	def "findFullInfoById() should return null when series not found"() {
 		when:
-			SeriesDto result = service.findFullInfoById(Random.id(), Random.lang(), bool())
+			SeriesDto result = service.findFullInfoById(Random.id(), Random.userId(), Random.lang(), bool())
 		then:
-			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as String)
+			1 * seriesDao.findByIdAsSeriesFullInfo(_ as Integer, _ as Integer, _ as String)
 		and:
 			0 * michelCatalogService.findBySeriesId(_ as Integer)
 			0 * scottCatalogService.findBySeriesId(_ as Integer)
@@ -755,6 +737,7 @@ class SeriesServiceImplTest extends Specification {
 	def "findFullInfoById() should return info about series"() {
 		given:
 			Integer expectedSeriesId = Random.id()
+			Integer expectedUserId = nullOr(Random.userId())
 			String expectedLang = Random.lang()
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
 			List<String> expectedMichelNumbers   = [ '1', '2' ]
@@ -765,9 +748,9 @@ class SeriesServiceImplTest extends Specification {
 			List<String> expectedSolovyovNumbers = Random.solovyovNumbers().toList()
 			List<Integer> expectedImageIds       = Random.listOfIntegers()
 		when:
-			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedLang, false)
+			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedUserId, expectedLang, false)
 		then:
-			1 * seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, expectedLang) >> expectedInfo
+			1 * seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, expectedUserId, expectedLang) >> expectedInfo
 		and:
 			1 * michelCatalogService.findBySeriesId(expectedSeriesId) >> expectedMichelNumbers
 		and:

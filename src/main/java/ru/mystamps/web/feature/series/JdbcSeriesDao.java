@@ -132,7 +132,6 @@ public class JdbcSeriesDao implements SeriesDao {
 		params.put("gibbons_price", series.getGibbonsPrice());
 		params.put("solovyov_price", series.getSolovyovPrice());
 		params.put("zagorski_price", series.getZagorskiPrice());
-		params.put("comment", series.getComment());
 		params.put("created_at", series.getCreatedAt());
 		params.put("created_by", series.getCreatedBy());
 		params.put("updated_at", series.getUpdatedAt());
@@ -157,17 +156,20 @@ public class JdbcSeriesDao implements SeriesDao {
 	}
 	
 	@Override
-	public void addComment(Integer seriesId, String comment) {
+	public void addComment(AddCommentDbDto dto) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("series_id", seriesId);
-		params.put("comment", comment);
+		params.put("series_id", dto.getSeriesId());
+		params.put("user_id", dto.getUserId());
+		params.put("comment", dto.getComment());
+		params.put("created_at", dto.getCreatedAt());
+		params.put("updated_at", dto.getUpdatedAt());
 		
 		int affected = jdbcTemplate.update(addCommentSql, params);
 		
 		// @todo #785 Update series: handle refuse to update an existing comment gracefully
 		Validate.validState(
 			affected == 1,
-			"Unexpected number of affected rows after updating series: %d",
+			"Unexpected number of affected rows after adding a series comment: %d",
 			affected
 		);
 	}
@@ -239,10 +241,12 @@ public class JdbcSeriesDao implements SeriesDao {
 		return jdbcTemplate.query(findLastAddedSeriesSql, params, RowMappers::forSeriesLinkDto);
 	}
 	
+	// CheckStyle: ignore LineLength for next 2 lines
 	@Override
-	public SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, String lang) {
+	public SeriesFullInfoDto findByIdAsSeriesFullInfo(Integer seriesId, Integer userId, String lang) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("series_id", seriesId);
+		params.put("user_id", userId);
 		params.put("lang", lang);
 		
 		try {

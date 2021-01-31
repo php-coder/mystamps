@@ -178,9 +178,4 @@ public class ImportSeriesForm implements AddSeriesDto, NullableImageUrl {
 		return null;
 	}
 	
-	@Override
-	public String getComment() {
-		return null;
-	}
-	
 }

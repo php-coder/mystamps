@@ -100,7 +100,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Integer requestId,
 		Integer userId) {
 		
-		Integer seriesId = seriesService.add(dto, userId, false);
+		Integer seriesId = seriesService.add(dto, userId);
 		
 		if (saleDto != null) {
 			if (saleDto.getSellerId() == null && sellerDto != null) {

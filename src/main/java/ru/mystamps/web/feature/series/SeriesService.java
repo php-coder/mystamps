@@ -24,8 +24,8 @@ import java.util.List;
 // FIXME: move stamps related methods to separate interface (#88)
 @SuppressWarnings("PMD.TooManyMethods")
 public interface SeriesService {
-	Integer add(AddSeriesDto dto, Integer userId, boolean userCanAddComments);
-	void addComment(Integer seriesId, String comment);
+	Integer add(AddSeriesDto dto, Integer userId);
+	void addComment(Integer seriesId, String comment, Integer userId);
 	void addReleaseYear(Integer seriesId, Integer year, Integer userId);
 	void addCatalogPrice(StampsCatalog catalog, Integer seriesId, BigDecimal price, Integer userId);
 	void addCatalogNumbers(StampsCatalog catalog, Integer seriesId, String numbers, Integer userId);
@@ -38,7 +38,12 @@ public interface SeriesService {
 	boolean isSeriesExist(Integer seriesId);
 	Integer findQuantityById(Integer seriesId);
 	
-	SeriesDto findFullInfoById(Integer seriesId, String lang, boolean userCanSeeHiddenImages);
+	SeriesDto findFullInfoById(
+		Integer seriesId,
+		Integer userId,
+		String lang,
+		boolean userCanSeeHiddenImages
+	);
 	
 	List<SeriesInfoDto> findByMichelNumber(String michelNumberCode, String lang);
 	List<SeriesInfoDto> findByScottNumber(String scottNumberCode, String lang);

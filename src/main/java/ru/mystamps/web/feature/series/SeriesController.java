@@ -117,7 +117,6 @@ public class SeriesController {
 		binder.registerCustomEditor(String.class, "gibbonsNumbers", editor);
 		binder.registerCustomEditor(String.class, "solovyovNumbers", editor);
 		binder.registerCustomEditor(String.class, "zagorskiNumbers", editor);
-		binder.registerCustomEditor(String.class, "comment", new StringTrimmerEditor(true));
 	}
 	
 	@InitBinder("addSeriesSalesForm")
@@ -194,10 +193,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		boolean userCanAddComments = SecurityContextUtils.hasAuthority(
-			Authority.ADD_COMMENTS_TO_SERIES
-		);
-		Integer seriesId = seriesService.add(form, currentUserId, userCanAddComments);
+		Integer seriesId = seriesService.add(form, currentUserId);
 		
 		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, seriesId);
 	}
@@ -220,7 +216,12 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
+		SeriesDto series = seriesService.findFullInfoById(
+			seriesId,
+			currentUserId,
+			lang,
+			userCanSeeHiddenImages
+		);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -372,7 +373,12 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
+		SeriesDto series = seriesService.findFullInfoById(
+			seriesId,
+			currentUserId,
+			lang,
+			userCanSeeHiddenImages
+		);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -448,6 +454,7 @@ public class SeriesController {
 			);
 			SeriesDto series = seriesService.findFullInfoById(
 				seriesId,
+				userId,
 				lang,
 				userCanSeeHiddenImages
 			);
@@ -530,7 +537,12 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
-		SeriesDto series = seriesService.findFullInfoById(seriesId, lang, userCanSeeHiddenImages);
+		SeriesDto series = seriesService.findFullInfoById(
+			seriesId,
+			currentUserId,
+			lang,
+			userCanSeeHiddenImages
+		);
 		if (series == null) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;

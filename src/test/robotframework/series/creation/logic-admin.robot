@@ -52,8 +52,6 @@ Create series by filling all fields
 	Input Text                 id:solovyovPrice    200.5
 	Input Text                 id:zagorskiNumbers  150, 151, 152
 	Input Text                 id:zagorskiPrice    300.55
-	Click Element              id:add-comment-link
-	Input Text                 id:comment  Any text
 	Submit Form                id:add-series-form
 	Element Text Should Be     id:category_name  Sport
 	Element Text Should Be     id:country_name   Italy
@@ -67,7 +65,6 @@ Create series by filling all fields
 	Element Text Should Be     id:gibbons_catalog_info   \#130-132 (400.34 GBP)
 	Element Text Should Be     id:solovyov_catalog_info  \#140-142 (200.5 RUB)
 	Element Text Should Be     id:zagorski_catalog_info  \#150-152 (300.55 RUB)
-	Element Text Should Be     id:comment                Any text
 	Page Should Contain Image  id:series-image-1
 
 *** Keywords ***

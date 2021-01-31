@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	
+	<changeSet id="create-series_comments-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_comments">
+			<column name="series_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="series(id)"
+					foreignKeyName="fk_series_comments_series_id" />
+			</column>
+			<column name="user_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="users(id)"
+					foreignKeyName="fk_series_comments_user_id" />
+			</column>
+			<column name="comment" type="VARCHAR(1024)" />
+			<column name="created_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+			<column name="updated_at" type="DATETIME">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addUniqueConstraint
+			tableName="series_comments"
+			columnNames="series_id, user_id"
+			constraintName="uc_series_comments_series_id_user_id" />
+		
+	</changeSet>
+	
+	<changeSet id="migrate-existing-series-comments" author="php-coder" context="test-data, prod-data">
+		<comment>Move existing comments and bind them to the first admin user</comment>
+		
+		<sql>
+			INSERT INTO series_comments(series_id, user_id, comment, created_at, updated_at)
+			SELECT
+				id,
+				(SELECT id FROM users WHERE role = 'ADMIN' ORDER by id LIMIT 1),
+				comment,
+				${NOW},
+				${NOW}
+			FROM series
+			WHERE comment IS NOT NULL
+		</sql>
+		
+		<rollback>
+			<sql>
+				DELETE FROM series_comments
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="drop-comment-column-from-series-table" author="php-coder" context="scheme">
+		<comment>Drops comment column from series table</comment>
+		
+		<dropColumn tableName="series" columnName="comment" />
+		
+	</changeSet>
+	
+</databaseChangeLog>
