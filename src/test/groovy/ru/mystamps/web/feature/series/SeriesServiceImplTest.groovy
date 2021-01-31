@@ -736,8 +736,9 @@ class SeriesServiceImplTest extends Specification {
 	@SuppressWarnings('UnnecessaryObjectReferences')
 	def "findFullInfoById() should return info about series"() {
 		given:
+			Integer userId = nullOr(Random.userId())
+			Integer expectedUserId = userId == null ? 0 : userId
 			Integer expectedSeriesId = Random.id()
-			Integer expectedUserId = nullOr(Random.userId())
 			String expectedLang = Random.lang()
 			SeriesFullInfoDto expectedInfo = TestObjects.createSeriesFullInfoDto()
 			List<String> expectedMichelNumbers   = [ '1', '2' ]
@@ -748,7 +749,7 @@ class SeriesServiceImplTest extends Specification {
 			List<String> expectedSolovyovNumbers = Random.solovyovNumbers().toList()
 			List<Integer> expectedImageIds       = Random.listOfIntegers()
 		when:
-			SeriesDto result = service.findFullInfoById(expectedSeriesId, expectedUserId, expectedLang, false)
+			SeriesDto result = service.findFullInfoById(expectedSeriesId, userId, expectedLang, false)
 		then:
 			1 * seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, expectedUserId, expectedLang) >> expectedInfo
 		and:
