@@ -1,9 +1,9 @@
 0.x (upcoming release)
 - (feature)      users can add a comment to a series
-(infrastructure) migrate to JUnit 5
+- (infrastructure) migrate to JUnit 5
 
 0.4.5
-(infrastructure) migrate to Spring Boot 2.1
+- (infrastructure) migrate to Spring Boot 2.1
 
 0.4.4
 - (feature)     a series can be marked as a similar to another one
