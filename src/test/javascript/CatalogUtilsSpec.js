@@ -8,7 +8,7 @@ describe("CatalogUtils.expandNumbers()", function() {
 		expect(CatalogUtils.expandNumbers(null)).toBeNull();
 	});
 	
-	it("should return undefined for empty unndefined", function() {
+	it("should return undefined for undefined", function() {
 		expect(CatalogUtils.expandNumbers(undefined)).toBeUndefined();
 	});
 	
