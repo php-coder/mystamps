@@ -172,6 +172,8 @@
 								</div>
 							</div>
 							
+							<div id="hide-image" class="row" sec:authorize="hasAuthority('HIDE_IMAGE')" th:if="${#lists.size(series.imageIds) > 1}"></div>
+							
 							<!--/* @todo #1356 Hidden images: add integration tests  */-->
 							<!--/* @todo #1356 Hidden images: allow to replace a hidden image  */-->
 							<!--/* @todo #1356 Hidden images: admin can hide an image  */-->
@@ -882,7 +884,7 @@
 			th:src="${SERIES_INFO_JS}"></script>
 		
 		<!--/*/
-		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'CREATE_SERIES', 'ADD_COMMENTS_TO_SERIES')">
+		<th:block sec:authorize="hasAnyAuthority('IMPORT_SERIES_SALES', 'MARK_SIMILAR_SERIES', 'CREATE_SERIES', 'ADD_COMMENTS_TO_SERIES', 'HIDE_IMAGE')">
 		/*/-->
 		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
@@ -1334,5 +1336,40 @@
 		<!--/*/
 		</th:block>
 		/*/-->
+		
+		<!--/*/
+		<th:block sec:authorize="hasAuthority('HIDE_IMAGE')" th:if="${#lists.size(series.imageIds) > 1}">
+		/*/-->
+		<script src="../../../../../../target/classes/js/components/HideImageForm.min.js" th:src="${HIDE_IMAGE_FORM_JS}"></script>
+		<script th:inline="javascript">
+			/*[+
+			var hideImageProps = {
+				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
+				'imageIds': [[ ${series.imageIds} ]],
+				'csrfHeaderName': [[ ${_csrf.headerName} ]],
+				'csrfTokenValue': [[ ${_csrf.token} ]],
+				'l10n': {
+					't_image_id':     [[ #{t_image_id} ]],
+					't_server_error': [[ #{t_server_error} ]],
+					't_not_chosen':   [[ #{t_not_chosen} ]],
+					't_hide_image':   [[ #{t_hide_image} ]]
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var hideImageProps = {
+				'url': '/series/100',
+				'l10n': {},
+				'imageIds': [ 1 ]
+			};
+			/* -]*/
+			
+			renderComponent(HideImageForm, hideImageProps, 'hide-image');
+		</script>
+		<!--/*/
+		</th:block>
+		/*/-->
+		
 	</body>
 </html>

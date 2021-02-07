@@ -34,7 +34,7 @@ public final class ResourceUrl {
 	// MUST be updated when any of our resources were modified
 	public static final String RESOURCES_VERSION = "v0.4.5.4";
 
-	// CheckStyle: ignore LineLength for next 16 lines
+	// CheckStyle: ignore LineLength for next 17 lines
 	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	private static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/DateUtils.min.js";
@@ -48,6 +48,7 @@ public final class ResourceUrl {
 	private static final String CATALOG_PRICE_FORM_JS   = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogPriceForm.min.js";
 	private static final String CATALOG_NUMBERS_FORM_JS = "/public/js/" + RESOURCES_VERSION + "/components/AddCatalogNumbersForm.min.js";
 	private static final String RELEASE_YEAR_FORM_JS    = "/public/js/" + RESOURCES_VERSION + "/components/AddReleaseYearForm.min.js";
+	private static final String HIDE_IMAGE_FORM_JS      = "/public/js/" + RESOURCES_VERSION + "/components/HideImageForm.min.js";
 	private static final String SERIES_SALES_LIST_JS    = "/public/js/" + RESOURCES_VERSION + "/components/SeriesSalesList.min.js";
 
 	private static final String BOOTSTRAP_LANGUAGE     = "https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css";
@@ -89,6 +90,7 @@ public final class ResourceUrl {
 		put(resources, host, "CATALOG_PRICE_FORM_JS", CATALOG_PRICE_FORM_JS);
 		put(resources, host, "CATALOG_NUMBERS_FORM_JS", CATALOG_NUMBERS_FORM_JS);
 		put(resources, host, "RELEASE_YEAR_FORM_JS", RELEASE_YEAR_FORM_JS);
+		put(resources, host, "HIDE_IMAGE_FORM_JS", HIDE_IMAGE_FORM_JS);
 		put(resources, host, "SERIES_SALES_LIST_JS", SERIES_SALES_LIST_JS);
 
 	}

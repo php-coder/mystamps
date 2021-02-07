@@ -11,6 +11,7 @@ module.exports = {
         AddCatalogPriceForm:   SRC_DIR + 'AddCatalogPriceForm.js',
         AddCommentForm:        SRC_DIR + 'AddCommentForm.js',
         AddReleaseYearForm:    SRC_DIR + 'AddReleaseYearForm.js',
+        HideImageForm:         SRC_DIR + 'HideImageForm.js',
         SeriesSaleImportForm:  SRC_DIR + 'SeriesSaleImportForm.js',
         SeriesSalesList:       SRC_DIR + 'SeriesSalesList.js',
         SimilarSeriesForm:     SRC_DIR + 'SimilarSeriesForm.js'

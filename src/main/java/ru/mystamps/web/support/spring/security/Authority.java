@@ -31,6 +31,7 @@ public final class Authority {
 	public static final GrantedAuthority CREATE_CATEGORY        = new SimpleGrantedAuthority(StringAuthority.CREATE_CATEGORY);
 	public static final GrantedAuthority CREATE_COUNTRY         = new SimpleGrantedAuthority(StringAuthority.CREATE_COUNTRY);
 	public static final GrantedAuthority CREATE_SERIES          = new SimpleGrantedAuthority(StringAuthority.CREATE_SERIES);
+	public static final GrantedAuthority HIDE_IMAGE             = new SimpleGrantedAuthority(StringAuthority.HIDE_IMAGE);
 	public static final GrantedAuthority DOWNLOAD_IMAGE         = new SimpleGrantedAuthority(StringAuthority.DOWNLOAD_IMAGE);
 	public static final GrantedAuthority IMPORT_SERIES          = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES);
 	public static final GrantedAuthority IMPORT_SERIES_SALES    = new SimpleGrantedAuthority(StringAuthority.IMPORT_SERIES_SALES);

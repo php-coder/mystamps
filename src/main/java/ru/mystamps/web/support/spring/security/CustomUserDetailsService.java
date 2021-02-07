@@ -77,6 +77,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			authorities.add(Authority.ADD_SERIES_PRICE);
 			authorities.add(Authority.ADD_SERIES_SALES);
 			authorities.add(Authority.DOWNLOAD_IMAGE);
+			authorities.add(Authority.HIDE_IMAGE);
 			authorities.add(Authority.IMPORT_SERIES);
 			authorities.add(Authority.IMPORT_SERIES_SALES);
 			authorities.add(Authority.MANAGE_TOGGLZ);
