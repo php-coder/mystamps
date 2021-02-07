@@ -917,6 +917,20 @@
 								data: {}
 							}
 						},
+						'/series/100/image': {
+							'failOnField': {
+								status: 400,
+								data: {
+									'fieldErrors': {
+										'imageId': [ 'Invalid image id' ]
+									}
+								}
+							},
+							'success': {
+								status: 204,
+								data: {}
+							}
+						},
 						'/series/sales/import': {
 							'failOnField': {
 								status: 400,
@@ -1344,7 +1358,7 @@
 		<script th:inline="javascript">
 			/*[+
 			var hideImageProps = {
-				'url': [[ '__@{${INFO_SERIES_PAGE}(id=${series.id})}__' ]],
+				'url': [[ '__@{${ADD_IMAGE_SERIES_PAGE}(id=${series.id})}__' ]],
 				'imageIds': [[ ${series.imageIds} ]],
 				'csrfHeaderName': [[ ${_csrf.headerName} ]],
 				'csrfTokenValue': [[ ${_csrf.token} ]],
@@ -1359,7 +1373,7 @@
 			
 			/*[- */
 			var hideImageProps = {
-				'url': '/series/100',
+				'url': '/series/100/image',
 				'l10n': {},
 				'imageIds': [ 1 ]
 			};

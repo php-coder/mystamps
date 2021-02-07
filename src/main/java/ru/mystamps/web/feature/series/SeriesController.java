@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -349,7 +350,11 @@ public class SeriesController {
 	}
 	
 	@SuppressWarnings("checkstyle:parameternumber")
-	@PostMapping(path = SeriesUrl.ADD_IMAGE_SERIES_PAGE, params = "!imageUrl")
+	@PostMapping(
+		path = SeriesUrl.ADD_IMAGE_SERIES_PAGE,
+		params = "!imageUrl",
+		consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+	)
 	public String processImage(
 		@Validated({
 			AddImageForm.RequireImageCheck.class,

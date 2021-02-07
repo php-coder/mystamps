@@ -20,8 +20,12 @@ class HideImageForm extends React.PureComponent {
 
 	handleChange(event) {
 		event.preventDefault();
+		const id = parseInt(event.target.value, 10);
+		if (isNaN(id)) {
+			return;
+		}
 		this.setState({
-			comment: event.target.value
+			imageId: id
 		});
 	}
 
@@ -34,45 +38,46 @@ class HideImageForm extends React.PureComponent {
 			validationErrors: []
 		});
 
-		axios.patch(
-			this.props.url, [
-				{
-					op: 'add',
-					path: '/comment',
-					value: this.state.imageId
-				}
-			],
+		axios.post(
+			this.props.url,
+			{
+				'action': 'HIDE',
+				'imageId': this.state.imageId
+			},
 			{
 				headers: {
 					[this.props.csrfHeaderName]: this.props.csrfTokenValue,
 					'Cache-Control': 'no-store'
 				},
-				validateStatus: status => {
+				validateStatus: (status) => {
 					return status == 204 || status == 400;
 				}
-			})
-			.then(response => {
-				const data = response.data;
+			}
+		).then(response => {
+			const data = response.data;
 
-				if (data.hasOwnProperty('fieldErrors')) {
-					const fieldErrors = [];
-					if (data.fieldErrors.value) {
-						fieldErrors.push(...data.fieldErrors.value);
-					}
-					this.setState({
-						isDisabled: false,
-						validationErrors: fieldErrors
-					});
-					return;
+			if (data.hasOwnProperty('fieldErrors')) {
+				const fieldErrors = [];
+				if (data.fieldErrors.action) {
+					fieldErrors.push(...data.fieldErrors.action);
 				}
+				if (data.fieldErrors.imageId) {
+					fieldErrors.push(...data.fieldErrors.imageId);
+				}
+				this.setState({
+					isDisabled: false,
+					validationErrors: fieldErrors
+				});
+				return;
+			}
 
-				// no need to reset the state as page will be reloaded
-				window.location.reload();
-			})
-			.catch(error => {
-				console.error(error);
-				this.setState({ isDisabled: false, hasServerError: true });
-			});
+			// no need to reset the state as page will be reloaded
+			window.location.reload();
+		})
+		.catch(error => {
+			console.error(error);
+			this.setState({ isDisabled: false, hasServerError: true });
+		});
 	}
 	render() {
 		return (
@@ -118,7 +123,7 @@ class HideImageFormView extends React.PureComponent {
 								<option value="">{ l10n['t_not_chosen'] || 'Not chosen' }</option>
 								{
 									this.props.imageIds.map(imageId =>
-										<option key={ imageId } value="{ imageId }">{ imageId }</option>
+										<option key={ imageId } value={ imageId }>{ imageId }</option>
 									)
 								}
 							</select>
