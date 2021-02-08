@@ -43,6 +43,7 @@ import java.util.Locale;
 class RestSeriesController {
 	
 	private final SeriesService seriesService;
+	private final SeriesImageService seriesImageService;
 	
 	// @todo #1339 Update series: add validation for catalog numbers
 	// @todo #1340 Update series: add validation for a price
@@ -124,6 +125,8 @@ class RestSeriesController {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
+		
+		seriesImageService.hideImage(seriesId, form.getImageId());
 		
 		return ResponseEntity.noContent().build();
 	}

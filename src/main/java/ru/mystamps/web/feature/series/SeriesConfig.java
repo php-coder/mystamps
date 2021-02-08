@@ -52,6 +52,7 @@ public class SeriesConfig {
 		private final CollectionService collectionService;
 		private final CountryService countryService;
 		private final SeriesService seriesService;
+		private final SeriesImageService seriesImageService;
 		private final SeriesImportService seriesImportService;
 		private final SeriesSalesService seriesSalesService;
 		private final ParticipantService participantService;
@@ -71,7 +72,7 @@ public class SeriesConfig {
 		
 		@Bean
 		public RestSeriesController restSeriesController() {
-			return new RestSeriesController(seriesService);
+			return new RestSeriesController(seriesService, seriesImageService);
 		}
 		
 	}
@@ -80,6 +81,7 @@ public class SeriesConfig {
 	@RequiredArgsConstructor
 	public static class Services {
 		
+		private final SeriesImageDao seriesImageDao;
 		private final ImageService imageService;
 		private final Map<String, StampsCatalogDao> stampsCatalogDaos;
 		
@@ -103,6 +105,14 @@ public class SeriesConfig {
 				gibbonsCatalogService,
 				solovyovCatalogService,
 				zagorskiCatalogService
+			);
+		}
+
+		@Bean
+		public SeriesImageService seriesImageService() {
+			return new SeriesImageServiceImpl(
+				LoggerFactory.getLogger(SeriesImageServiceImpl.class),
+				seriesImageDao
 			);
 		}
 		
@@ -163,7 +173,10 @@ public class SeriesConfig {
 	}
 	
 	@RequiredArgsConstructor
-	@PropertySource("classpath:/sql/stamps_catalog_dao_queries.properties")
+	@PropertySource({
+		"classpath:sql/series_image_dao_queries.properties",
+		"classpath:/sql/stamps_catalog_dao_queries.properties"
+	})
 	/* default */ static class Daos {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -172,6 +185,11 @@ public class SeriesConfig {
 		@Bean
 		public SeriesDao seriesDao() {
 			return new JdbcSeriesDao(jdbcTemplate);
+		}
+		
+		@Bean
+		public SeriesImageDao seriesImageDao() {
+			return new JdbcSeriesImageDao(jdbcTemplate);
 		}
 		
 		@Bean

@@ -36,6 +36,7 @@ public final class HasAuthority {
 	public static final String CREATE_COUNTRY = "hasAuthority('" + StringAuthority.CREATE_COUNTRY + "')";
 	public static final String CREATE_SERIES = "hasAuthority('" + StringAuthority.CREATE_SERIES + "')";
 	public static final String DOWNLOAD_IMAGE = "hasAuthority('" + StringAuthority.DOWNLOAD_IMAGE + "')";
+	public static final String HIDE_IMAGE = "hasAuthority('" + StringAuthority.HIDE_IMAGE + "')";
 	public static final String IMPORT_SERIES = "hasAuthority('" + StringAuthority.IMPORT_SERIES + "')";
 	public static final String MARK_SIMILAR_SERIES = "hasAuthority('" + StringAuthority.MARK_SIMILAR_SERIES + "')";
 	public static final String REPLACE_IMAGE = "hasAuthority('" + StringAuthority.REPLACE_IMAGE + "')";
