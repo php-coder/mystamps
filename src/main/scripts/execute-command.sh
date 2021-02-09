@@ -77,6 +77,7 @@ case ${1:-} in
 				'An "img" element must have an "alt" attribute' \
 				'Element "option" without attribute "label" must not be empty' \
 				'The "width" attribute on the "td" element is obsolete' \
+				'Attribute "loading" not allowed on element "img" at this point' \
 			--show-warnings
 		;;
 	'integration-tests')
