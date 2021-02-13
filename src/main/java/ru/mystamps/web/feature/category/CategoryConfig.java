@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -73,13 +74,15 @@ public class CategoryConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource("classpath:sql/category_dao_queries.properties")
 	public static class Daos {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final Environment env;
 		
 		@Bean
 		public CategoryDao categoryDao() {
-			return new JdbcCategoryDao(jdbcTemplate);
+			return new JdbcCategoryDao(env, jdbcTemplate);
 		}
 		
 	}

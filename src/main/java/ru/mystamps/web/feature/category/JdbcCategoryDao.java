@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.category;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -38,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCategoryDao implements CategoryDao {
 	
@@ -46,53 +44,43 @@ public class JdbcCategoryDao implements CategoryDao {
 		new MapStringIntegerResultSetExtractor("name", "counter");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@Value("${category.create}")
-	private String addCategorySql;
-	
-	@Value("${category.count_all_categories}")
-	private String countAllSql;
-	
-	@Value("${category.count_categories_by_slug}")
-	private String countBySlugSql;
-	
-	@Value("${category.count_categories_by_name}")
-	private String countByNameSql;
-	
-	@Value("${category.count_categories_by_name_ru}")
-	private String countByNameRuSql;
-	
-	@Value("${category.count_categories_of_collection}")
-	private String countCategoriesOfCollectionSql;
-	
-	@Value("${category.count_categories_added_since}")
-	private String countCategoriesAddedSinceSql;
-	
-	@Value("${category.count_untranslated_names_since}")
-	private String countUntranslatedNamesSinceSql;
-	
-	@Value("${category.count_stamps_by_categories}")
-	private String countStampsByCategoriesSql;
-	
-	@Value("${category.find_ids_by_names}")
-	private String findIdsByNamesSql;
-	
-	@Value("${category.find_ids_by_name_pattern}")
-	private String findIdsByNamePatternSql;
-	
-	@Value("${category.find_all_categories_names_with_slug}")
-	private String findCategoriesNamesWithSlugSql;
-	
-	@Value("${category.find_category_link_info_by_slug}")
-	private String findLinkEntityBySlugSql;
-	
+	private final String addCategorySql;
+	private final String countAllSql;
+	private final String countBySlugSql;
+	private final String countByNameSql;
+	private final String countByNameRuSql;
+	private final String countCategoriesOfCollectionSql;
+	private final String countCategoriesAddedSinceSql;
+	private final String countUntranslatedNamesSinceSql;
+	private final String countStampsByCategoriesSql;
+	private final String findIdsByNamesSql;
+	private final String findIdsByNamePatternSql;
+	private final String findCategoriesNamesWithSlugSql;
+	private final String findLinkEntityBySlugSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${category.find_categories_with_parent_names}")
-	private String findCategoriesWithParentNamesSql;
-	
+	private final String findCategoriesWithParentNamesSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${category.find_from_last_created_series_by_user}")
-	private String findFromLastCreatedSeriesByUserSql;
+	private final String findFromLastCreatedSeriesByUserSql;
+	
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcCategoryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                       = jdbcTemplate;
+		this.addCategorySql                     = env.getRequiredProperty("category.create");
+		this.countAllSql                        = env.getRequiredProperty("category.count_all_categories");
+		this.countBySlugSql                     = env.getRequiredProperty("category.count_categories_by_slug");
+		this.countByNameSql                     = env.getRequiredProperty("category.count_categories_by_name");
+		this.countByNameRuSql                   = env.getRequiredProperty("category.count_categories_by_name_ru");
+		this.countCategoriesOfCollectionSql     = env.getRequiredProperty("category.count_categories_of_collection");
+		this.countCategoriesAddedSinceSql       = env.getRequiredProperty("category.count_categories_added_since");
+		this.countUntranslatedNamesSinceSql     = env.getRequiredProperty("category.count_untranslated_names_since");
+		this.countStampsByCategoriesSql         = env.getRequiredProperty("category.count_stamps_by_categories");
+		this.findIdsByNamesSql                  = env.getRequiredProperty("category.find_ids_by_names");
+		this.findIdsByNamePatternSql            = env.getRequiredProperty("category.find_ids_by_name_pattern");
+		this.findCategoriesNamesWithSlugSql     = env.getRequiredProperty("category.find_all_categories_names_with_slug");
+		this.findLinkEntityBySlugSql            = env.getRequiredProperty("category.find_category_link_info_by_slug");
+		this.findCategoriesWithParentNamesSql   = env.getRequiredProperty("category.find_categories_with_parent_names");
+		this.findFromLastCreatedSeriesByUserSql = env.getRequiredProperty("category.find_from_last_created_series_by_user");
+	}
 	
 	@Override
 	public Integer add(AddCategoryDbDto category) {
