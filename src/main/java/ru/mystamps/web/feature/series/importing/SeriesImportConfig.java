@@ -24,7 +24,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.participant.ParticipantService;
 import ru.mystamps.web.feature.series.SeriesController;
@@ -83,6 +85,7 @@ public class SeriesImportConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource("classpath:sql/series_import_request_dao_queries.properties")
 	public static class Services {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -90,6 +93,7 @@ public class SeriesImportConfig {
 		private final SeriesService seriesService;
 		private final SeriesSalesService seriesSalesService;
 		private final ApplicationEventPublisher eventPublisher;
+		private final Environment env;
 		
 		@Bean
 		public SeriesImportService seriesImportService(
@@ -109,7 +113,7 @@ public class SeriesImportConfig {
 		
 		@Bean
 		public SeriesImportDao seriesImportDao() {
-			return new JdbcSeriesImportDao(jdbcTemplate);
+			return new JdbcSeriesImportDao(env, jdbcTemplate);
 		}
 		
 	}

@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series.importing;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -35,40 +34,34 @@ import java.util.Map;
 
 // it complains that "request_id" is present many times
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-@RequiredArgsConstructor
 public class JdbcSeriesImportDao implements SeriesImportDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String createSeriesImportRequestSql;
+	private final String setSeriesIdAndChangeStatusSql;
+	private final String changeStatusSql;
+	private final String findImportRequestByIdSql;
+	private final String addRawContentSql;
+	private final String findRawContentSql;
+	private final String addParsedDataSql;
+	private final String findParsedDataSql;
+	private final String findRequestInfoSql;
+	private final String findAllSql;
 	
-	@Value("${series_import_requests.create}")
-	private String createSeriesImportRequestSql;
-	
-	@Value("${series_import_requests.set_series_id_and_change_status}")
-	private String setSeriesIdAndChangeStatusSql;
-	
-	@Value("${series_import_requests.change_status}")
-	private String changeStatusSql;
-	
-	@Value("${series_import_requests.find_by_id}")
-	private String findImportRequestByIdSql;
-	
-	@Value("${series_import_requests.add_raw_content}")
-	private String addRawContentSql;
-	
-	@Value("${series_import_requests.find_raw_content_by_request_id}")
-	private String findRawContentSql;
-	
-	@Value("${series_import_requests.add_series_parsed_data}")
-	private String addParsedDataSql;
-	
-	@Value("${series_import_requests.find_series_parsed_data_by_request_id}")
-	private String findParsedDataSql;
-	
-	@Value("${series_import_requests.find_request_info_by_series_id}")
-	private String findRequestInfoSql;
-	
-	@Value("${series_import_requests.find_all}")
-	private String findAllSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSeriesImportDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                  = jdbcTemplate;
+		this.createSeriesImportRequestSql  = env.getRequiredProperty("series_import_requests.create");
+		this.setSeriesIdAndChangeStatusSql = env.getRequiredProperty("series_import_requests.set_series_id_and_change_status");
+		this.changeStatusSql               = env.getRequiredProperty("series_import_requests.change_status");
+		this.findImportRequestByIdSql      = env.getRequiredProperty("series_import_requests.find_by_id");
+		this.addRawContentSql              = env.getRequiredProperty("series_import_requests.add_raw_content");
+		this.findRawContentSql             = env.getRequiredProperty("series_import_requests.find_raw_content_by_request_id");
+		this.addParsedDataSql              = env.getRequiredProperty("series_import_requests.add_series_parsed_data");
+		this.findParsedDataSql             = env.getRequiredProperty("series_import_requests.find_series_parsed_data_by_request_id");
+		this.findRequestInfoSql            = env.getRequiredProperty("series_import_requests.find_request_info_by_series_id");
+		this.findAllSql                    = env.getRequiredProperty("series_import_requests.find_all");
+	}
 	
 	@Override
 	public Integer add(ImportSeriesDbDto importRequest) {
