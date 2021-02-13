@@ -23,6 +23,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.config.ServicesConfig;
 import ru.mystamps.web.feature.category.CategoryService;
@@ -39,6 +41,7 @@ import ru.mystamps.web.feature.series.importing.extractor.SiteParserServiceImpl;
 
 @Configuration
 @RequiredArgsConstructor
+@PropertySource("classpath:sql/site_parser_dao_queries.properties")
 public class EventsConfig {
 	
 	private final CategoryService categoryService;
@@ -48,6 +51,7 @@ public class EventsConfig {
 	private final ServicesConfig servicesConfig;
 	private final ApplicationEventPublisher eventPublisher;
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final Environment env;
 	
 	@Bean
 	public SiteParserService siteParserService(SiteParserDao siteParserDao) {
@@ -72,7 +76,7 @@ public class EventsConfig {
 	
 	@Bean
 	public SiteParserDao siteParserDao() {
-		return new JdbcSiteParserDao(jdbcTemplate);
+		return new JdbcSiteParserDao(env, jdbcTemplate);
 	}
 	
 	@Bean

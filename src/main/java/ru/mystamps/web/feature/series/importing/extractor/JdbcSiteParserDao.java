@@ -17,8 +17,7 @@
  */
 package ru.mystamps.web.feature.series.importing.extractor;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -28,23 +27,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcSiteParserDao implements SiteParserDao {
 	
 	private static final ResultSetExtractor<Map<String, String>> PARAMS_EXTRACTOR =
 		new MapStringStringResultSetExtractor("name", "value");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@Value("${site_parser.find_like_matched_url}")
-	private String findParserIdByMatchedUrlSql;
-	
-	@Value("${site_parser.find_names}")
-	private String findParserNamesSql;
-	
+	private final String findParserIdByMatchedUrlSql;
+	private final String findParserNamesSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${site_parser_param.find_all_with_parser_name}")
-	private String findParametersWithParserNameSql;
+	private final String findParametersWithParserNameSql;
+	
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSiteParserDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                    = jdbcTemplate;
+		this.findParserIdByMatchedUrlSql     = env.getRequiredProperty("site_parser.find_like_matched_url");
+		this.findParserNamesSql              = env.getRequiredProperty("site_parser.find_names");
+		this.findParametersWithParserNameSql = env.getRequiredProperty("site_parser_param.find_all_with_parser_name");
+	}
 	
 	@Override
 	public Integer findParserIdForUrl(String url) {
