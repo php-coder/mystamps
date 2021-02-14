@@ -82,6 +82,7 @@ public class ImageConfig {
 	@RequiredArgsConstructor
 	public static class DbStrategyConfig {
 		
+		private final Environment env;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
@@ -94,7 +95,7 @@ public class ImageConfig {
 		
 		@Bean
 		public ImageDataDao imageDataDao() {
-			return new JdbcImageDataDao(jdbcTemplate);
+			return new JdbcImageDataDao(env, jdbcTemplate);
 		}
 		
 	}

@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.image;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -30,19 +29,19 @@ import ru.mystamps.web.common.JdbcUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcImageDataDao implements ImageDataDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String findByImageIdSql;
+	private final String addImageDataSql;
+	private final String replaceImageDataSql;
 	
-	@Value("${image_data.find_by_image_id}")
-	private String findByImageIdSql;
-	
-	@Value("${image_data.add}")
-	private String addImageDataSql;
-	
-	@Value("${image_data.replace}")
-	private String replaceImageDataSql;
+	public JdbcImageDataDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate        = jdbcTemplate;
+		this.findByImageIdSql    = env.getRequiredProperty("image_data.find_by_image_id");
+		this.addImageDataSql     = env.getRequiredProperty("image_data.add");
+		this.replaceImageDataSql = env.getRequiredProperty("image_data.replace");
+	}
 	
 	@Override
 	public ImageDto findByImageId(Integer imageId, boolean preview) {
