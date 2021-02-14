@@ -23,11 +23,11 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.math.BigDecimal;
 
-// @todo #1513 Add integration test to check that prices accept a decimal comma
 // CheckStyle: ignore LineLength for next 2 lines
 /**
  * Converter for BigDecimal that correctly parse values with a comma separator (in addition to a point).
  */
+// @todo #1513 Add integration test to check that prices accept a decimal comma
 public class BigDecimalConverter implements Converter<String, BigDecimal> {
 	
 	@Override
