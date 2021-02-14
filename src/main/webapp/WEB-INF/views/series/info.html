@@ -456,11 +456,11 @@
 										</p>
 										/*/-->
 										
-										<p id="number-of-stamps-block" th:if="${series.quantity != 1}">
+										<p id="number-of-stamps-block" th:if="${series.quantity != 1}" class="form-inline">
 											<span th:text="#{t_i_have}" th:remove="tag">I have</span>
 											<input id="number-of-stamps"
 												type="number"
-												class="number-input"
+												class="form-control input-sm number-input"
 												required="required"
 												min="1"
 												max="7"
@@ -480,11 +480,13 @@
 												th:text="${error}"></span>
 										</p>
 										/*/-->
-										<p th:with="price_msg=#{t_price},paidUser=${#authorization.expression('hasAuthority(''ADD_SERIES_PRICE'')')}"
+										<p class="form-inline"
+											th:with="price_msg=#{t_price},paidUser=${#authorization.expression('hasAuthority(''ADD_SERIES_PRICE'')')}"
 											th:attrappend="title=${paidUser ? null : '__#{t_only_for_paid_users}__'}">
 											
 											<span th:text="#{t_i_bought_for}" th:remove="tag">I bought for</span>
 											<input id="paid-price"
+												class="form-control input-sm number-input"
 												type="text"
 												size="5"
 												placeholder="price"
@@ -493,6 +495,7 @@
 												th:disabled="${paidUser ? null : 'disabled'}"
 												/>
 											<select id="paid-currency"
+												class="form-control input-sm"
 												th:field="*{currency}"
 												th:disabled="${paidUser ? null : 'disabled'}">
 												<option value=""></option>

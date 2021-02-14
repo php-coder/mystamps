@@ -116,7 +116,8 @@ label {
 }
 
 .number-input {
-	width: 4em;
+	/* !important is needed in order to override "width: auto" from .form-control */
+	width: 4em !important;
 }
 
 .image-gallery {
