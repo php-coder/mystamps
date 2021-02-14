@@ -61,7 +61,7 @@ public class JdbcCollectionDao implements CollectionDao {
 	private final String findCollectionInfoBySlugSql;
 	
 	@SuppressWarnings("checkstyle:linelength")
-	public JdbcCollectionDao(Environment env,NamedParameterJdbcTemplate jdbcTemplate) {
+	public JdbcCollectionDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate                  = jdbcTemplate;
 		this.findLastCreatedCollectionsSql = env.getRequiredProperty("collection.find_last_created");
 		this.findSeriesByCollectionIdSql   = env.getRequiredProperty("collection.find_series_by_collection_id");
