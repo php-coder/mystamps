@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.country;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -37,7 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCountryDao implements CountryDao {
 	
@@ -45,57 +43,46 @@ public class JdbcCountryDao implements CountryDao {
 		new MapStringIntegerResultSetExtractor("name", "counter");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
-	
-	@Value("${country.create}")
-	private String addCountrySql;
-	
-	@Value("${country.count_all_countries}")
-	private String countAllSql;
-	
-	@Value("${country.count_countries_by_slug}")
-	private String countBySlugSql;
-	
-	@Value("${country.count_countries_by_name}")
-	private String countByNameSql;
-	
-	@Value("${country.count_countries_by_name_ru}")
-	private String countByNameRuSql;
-	
-	@Value("${country.count_countries_of_collection}")
-	private String countCountriesOfCollectionSql;
-	
-	@Value("${country.count_countries_added_since}")
-	private String countCountriesAddedSinceSql;
-	
-	@Value("${country.count_untranslated_names_since}")
-	private String countUntranslatedNamesSinceSql;
-	
-	@Value("${country.count_stamps_by_countries}")
-	private String countStampsByCountriesSql;
-	
-	@Value("${country.find_ids_by_names}")
-	private String findIdsByNamesSql;
-	
-	@Value("${country.find_ids_by_name_pattern}")
-	private String findIdsByNamePatternSql;
-	
-	@Value("${country.find_all_countries_names_with_slug}")
-	private String findCountriesNamesWithSlugSql;
-	
-	@Value("${country.find_country_link_info_by_slug}")
-	private String findCountryLinkEntityBySlugSql;
-
+	private final String addCountrySql;
+	private final String countAllSql;
+	private final String countBySlugSql;
+	private final String countByNameSql;
+	private final String countByNameRuSql;
+	private final String countCountriesOfCollectionSql;
+	private final String countCountriesAddedSinceSql;
+	private final String countUntranslatedNamesSinceSql;
+	private final String countStampsByCountriesSql;
+	private final String findIdsByNamesSql;
+	private final String findIdsByNamePatternSql;
+	private final String findCountriesNamesWithSlugSql;
+	private final String findCountryLinkEntityBySlugSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${country.find_from_last_created_series_by_user}")
-	private String findFromLastCreatedSeriesByUserSql;
-
+	private final String findFromLastCreatedSeriesByUserSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${country.find_popular_country_from_user_collection}")
-	private String findPopularCountryInCollectionSql;
-
+	private final String findPopularCountryInCollectionSql;
 	@SuppressWarnings("PMD.LongVariable")
-	@Value("${country.find_last_country_created_by_user}")
-	private String findLastCountryCreatedByUserSql;
+	private final String findLastCountryCreatedByUserSql;
+	
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcCountryDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                       = jdbcTemplate;
+		this.addCountrySql                      = env.getRequiredProperty("country.create");
+		this.countAllSql                        = env.getRequiredProperty("country.count_all_countries");
+		this.countBySlugSql                     = env.getRequiredProperty("country.count_countries_by_slug");
+		this.countByNameSql                     = env.getRequiredProperty("country.count_countries_by_name");
+		this.countByNameRuSql                   = env.getRequiredProperty("country.count_countries_by_name_ru");
+		this.countCountriesOfCollectionSql      = env.getRequiredProperty("country.count_countries_of_collection");
+		this.countCountriesAddedSinceSql        = env.getRequiredProperty("country.count_countries_added_since");
+		this.countUntranslatedNamesSinceSql     = env.getRequiredProperty("country.count_untranslated_names_since");
+		this.countStampsByCountriesSql          = env.getRequiredProperty("country.count_stamps_by_countries");
+		this.findIdsByNamesSql                  = env.getRequiredProperty("country.find_ids_by_names");
+		this.findIdsByNamePatternSql            = env.getRequiredProperty("country.find_ids_by_name_pattern");
+		this.findCountriesNamesWithSlugSql      = env.getRequiredProperty("country.find_all_countries_names_with_slug");
+		this.findCountryLinkEntityBySlugSql     = env.getRequiredProperty("country.find_country_link_info_by_slug");
+		this.findFromLastCreatedSeriesByUserSql = env.getRequiredProperty("country.find_from_last_created_series_by_user");
+		this.findPopularCountryInCollectionSql  = env.getRequiredProperty("country.find_popular_country_from_user_collection");
+		this.findLastCountryCreatedByUserSql    = env.getRequiredProperty("country.find_last_country_created_by_user");
+	}
 	
 	@Override
 	public Integer add(AddCountryDbDto country) {
