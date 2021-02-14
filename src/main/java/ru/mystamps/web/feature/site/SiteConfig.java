@@ -23,6 +23,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -91,6 +92,7 @@ public class SiteConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource("classpath:sql/suspicious_activity_dao_queries.properties")
 	public static class Services {
 
 		private final CategoryService categoryService;
@@ -168,7 +170,7 @@ public class SiteConfig {
 		
 		@Bean
 		public SuspiciousActivityDao suspiciousActivityDao() {
-			return new JdbcSuspiciousActivityDao(jdbcTemplate);
+			return new JdbcSuspiciousActivityDao(env, jdbcTemplate);
 		}
 		
 	}

@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.site;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.Collections;
@@ -28,22 +27,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcSuspiciousActivityDao implements SuspiciousActivityDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String addSuspiciousActivitySql;
+	private final String countAllSql;
+	private final String countByTypeSinceSql;
+	private final String findAllSql;
 	
-	@Value("${suspicious_activity.create}")
-	private String addSuspiciousActivitySql;
-	
-	@Value("${suspicious_activity.count_all}")
-	private String countAllSql;
-	
-	@Value("${suspicious_activity.count_by_type_since}")
-	private String countByTypeSinceSql;
-	
-	@Value("${suspicious_activity.find_all}")
-	private String findAllSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSuspiciousActivityDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate             = jdbcTemplate;
+		this.addSuspiciousActivitySql = env.getRequiredProperty("suspicious_activity.create");
+		this.countAllSql              = env.getRequiredProperty("suspicious_activity.count_all");
+		this.countByTypeSinceSql      = env.getRequiredProperty("suspicious_activity.count_by_type_since");
+		this.findAllSql               = env.getRequiredProperty("suspicious_activity.find_all");
+	}
 	
 	@Override
 	public void add(AddSuspiciousActivityDbDto activity) {
