@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.category.CategoryService;
 import ru.mystamps.web.feature.country.CountryService;
@@ -56,9 +58,11 @@ public class CollectionConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource("classpath:sql/collection_dao_queries.properties")
 	public static class Services {
 		
 		private final NamedParameterJdbcTemplate jdbcTemplate;
+		private final Environment env;
 		
 		@Bean
 		public CollectionService collectionService(CollectionDao collectionDao) {
@@ -70,7 +74,7 @@ public class CollectionConfig {
 		
 		@Bean
 		public CollectionDao collectionDao() {
-			return new JdbcCollectionDao(jdbcTemplate);
+			return new JdbcCollectionDao(env, jdbcTemplate);
 		}
 		
 	}

@@ -17,11 +17,10 @@
  */
 package ru.mystamps.web.feature.collection;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -38,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
 public class JdbcCollectionDao implements CollectionDao {
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
@@ -47,48 +45,39 @@ public class JdbcCollectionDao implements CollectionDao {
 		new MapIntegerIntegerResultSetExtractor("id", "number_of_stamps");
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String findLastCreatedCollectionsSql;
+	private final String findSeriesByCollectionIdSql;
+	private final String findSeriesWithPricesBySlugSql;
+	private final String countCollectionsOfUsersSql;
+	private final String countUpdatedSinceSql;
+	private final String countSeriesOfCollectionSql;
+	private final String countStampsOfCollectionSql;
+	private final String addCollectionSql;
+	private final String markAsModifiedSql;
+	private final String isSeriesInUserCollectionSql;
+	private final String findSeriesInstancesSql;
+	private final String addSeriesToCollectionSql;
+	private final String removeSeriesInstanceSql;
+	private final String findCollectionInfoBySlugSql;
 	
-	@Value("${collection.find_last_created}")
-	private String findLastCreatedCollectionsSql;
-	
-	@Value("${collection.find_series_by_collection_id}")
-	private String findSeriesByCollectionIdSql;
-	
-	@Value("${collection.find_series_with_prices_by_slug}")
-	private String findSeriesWithPricesBySlugSql;
-	
-	@Value("${collection.count_collections_of_users}")
-	private String countCollectionsOfUsersSql;
-	
-	@Value("${collection.count_updated_since}")
-	private String countUpdatedSinceSql;
-	
-	@Value("${collection.count_series_of_collection}")
-	private String countSeriesOfCollectionSql;
-	
-	@Value("${collection.count_stamps_of_collection}")
-	private String countStampsOfCollectionSql;
-	
-	@Value("${collection.create}")
-	private String addCollectionSql;
-
-	@Value("${collection.mark_as_modified}")
-	private String markAsModifiedSql;
-	
-	@Value("${collection.is_series_in_collection}")
-	private String isSeriesInUserCollectionSql;
-	
-	@Value("${collection.find_series_instances}")
-	private String findSeriesInstancesSql;
-	
-	@Value("${collection.add_series_to_collection}")
-	private String addSeriesToCollectionSql;
-	
-	@Value("${collection.remove_series_instance_from_collection}")
-	private String removeSeriesInstanceSql;
-	
-	@Value("${collection.find_info_by_slug}")
-	private String findCollectionInfoBySlugSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcCollectionDao(Environment env,NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                  = jdbcTemplate;
+		this.findLastCreatedCollectionsSql = env.getRequiredProperty("collection.find_last_created");
+		this.findSeriesByCollectionIdSql   = env.getRequiredProperty("collection.find_series_by_collection_id");
+		this.findSeriesWithPricesBySlugSql = env.getRequiredProperty("collection.find_series_with_prices_by_slug");
+		this.countCollectionsOfUsersSql    = env.getRequiredProperty("collection.count_collections_of_users");
+		this.countUpdatedSinceSql          = env.getRequiredProperty("collection.count_updated_since");
+		this.countSeriesOfCollectionSql    = env.getRequiredProperty("collection.count_series_of_collection");
+		this.countStampsOfCollectionSql    = env.getRequiredProperty("collection.count_stamps_of_collection");
+		this.addCollectionSql              = env.getRequiredProperty("collection.create");
+		this.markAsModifiedSql             = env.getRequiredProperty("collection.mark_as_modified");
+		this.isSeriesInUserCollectionSql   = env.getRequiredProperty("collection.is_series_in_collection");
+		this.findSeriesInstancesSql        = env.getRequiredProperty("collection.find_series_instances");
+		this.addSeriesToCollectionSql      = env.getRequiredProperty("collection.add_series_to_collection");
+		this.removeSeriesInstanceSql       = env.getRequiredProperty("collection.remove_series_instance_from_collection");
+		this.findCollectionInfoBySlugSql   = env.getRequiredProperty("collection.find_info_by_slug");
+	}
 	
 	@Override
 	public List<LinkEntityDto> findLastCreated(int quantity) {
