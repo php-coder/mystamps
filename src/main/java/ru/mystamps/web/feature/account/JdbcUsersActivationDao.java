@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.account;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.Collections;
@@ -29,28 +28,26 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-@RequiredArgsConstructor
 public class JdbcUsersActivationDao implements UsersActivationDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String findByActivationKeySql;
+	private final String findOlderThanDateSql;
+	private final String countByActivationKeySql;
+	private final String countCreatedSinceSql;
+	private final String removeByActivationKeySql;
+	private final String addActivationKeySql;
 	
-	@Value("${users_activation.find_by_activation_key}")
-	private String findByActivationKeySql;
-	
-	@Value("${users_activation.find_older_than}")
-	private String findOlderThanDateSql;
-	
-	@Value("${users_activation.count_by_activation_key}")
-	private String countByActivationKeySql;
-	
-	@Value("${users_activation.count_created_since}")
-	private String countCreatedSinceSql;
-	
-	@Value("${users_activation.remove_by_activation_key}")
-	private String removeByActivationKeySql;
-	
-	@Value("${users_activation.create}")
-	private String addActivationKeySql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcUsersActivationDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate             = jdbcTemplate;
+		this.findByActivationKeySql   = env.getRequiredProperty("users_activation.find_by_activation_key");
+		this.findOlderThanDateSql     = env.getRequiredProperty("users_activation.find_older_than");
+		this.countByActivationKeySql  = env.getRequiredProperty("users_activation.count_by_activation_key");
+		this.countCreatedSinceSql     = env.getRequiredProperty("users_activation.count_created_since");
+		this.removeByActivationKeySql = env.getRequiredProperty("users_activation.remove_by_activation_key");
+		this.addActivationKeySql      = env.getRequiredProperty("users_activation.create");
+	}
 	
 	@Override
 	public UsersActivationDto findByActivationKey(String activationKey) {

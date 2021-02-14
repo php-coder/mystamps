@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.account;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,22 +31,21 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcUserDao implements UserDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String countByLoginSql;
+	private final String countActivatedSinceSql;
+	private final String findUserDetailsByLoginSql;
+	private final String addUserSql;
 	
-	@Value("${user.count_users_by_login}")
-	private String countByLoginSql;
-	
-	@Value("${user.count_activated_since}")
-	private String countActivatedSinceSql;
-	
-	@Value("${user.find_user_details_by_login}")
-	private String findUserDetailsByLoginSql;
-	
-	@Value("${user.create}")
-	private String addUserSql;
+	public JdbcUserDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate              = jdbcTemplate;
+		this.countByLoginSql           = env.getRequiredProperty("user.count_users_by_login");
+		this.countActivatedSinceSql    = env.getRequiredProperty("user.count_activated_since");
+		this.findUserDetailsByLoginSql = env.getRequiredProperty("user.find_user_details_by_login");
+		this.addUserSql                = env.getRequiredProperty("user.create");
+	}
 	
 	@Override
 	public long countByLogin(String login) {

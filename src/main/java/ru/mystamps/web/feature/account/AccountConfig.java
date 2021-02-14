@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.mystamps.web.feature.collection.CollectionService;
@@ -50,8 +52,13 @@ public class AccountConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource({
+		"classpath:sql/user_dao_queries.properties",
+		"classpath:sql/users_activation_dao_queries.properties"
+	})
 	public static class Services {
 		
+		private final Environment env;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		
 		@Bean
@@ -84,12 +91,12 @@ public class AccountConfig {
 		
 		@Bean
 		public UserDao userDao() {
-			return new JdbcUserDao(jdbcTemplate);
+			return new JdbcUserDao(env, jdbcTemplate);
 		}
 		
 		@Bean
 		public UsersActivationDao usersActivationDao() {
-			return new JdbcUsersActivationDao(jdbcTemplate);
+			return new JdbcUsersActivationDao(env, jdbcTemplate);
 		}
 		
 	}
