@@ -61,6 +61,7 @@ import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportConfig;
 import ru.mystamps.web.feature.site.ResourceUrl;
 import ru.mystamps.web.feature.site.SiteConfig;
 import ru.mystamps.web.feature.site.SiteUrl;
+import ru.mystamps.web.support.spring.mvc.BigDecimalConverter;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
 import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
@@ -95,6 +96,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new CategoryLinkEntityDtoConverter(categoryService));
 		registry.addConverter(new CountryLinkEntityDtoConverter(countryService));
+		registry.addConverter(new BigDecimalConverter());
 	}
 	
 	@Override
