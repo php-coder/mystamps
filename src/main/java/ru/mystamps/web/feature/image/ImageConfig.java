@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -49,8 +50,10 @@ public class ImageConfig {
 	
 	@RequiredArgsConstructor
 	@Import({ DbStrategyConfig.class, FsStrategyConfig.class })
+	@PropertySource("classpath:sql/image_dao_queries.properties")
 	public static class Services {
 		
+		private final Environment env;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		private final ImagePersistenceStrategy imagePersistenceStrategy;
 		
@@ -69,7 +72,7 @@ public class ImageConfig {
 		
 		@Bean
 		public ImageDao imageDao() {
-			return new JdbcImageDao(jdbcTemplate);
+			return new JdbcImageDao(env, jdbcTemplate);
 		}
 		
 	}

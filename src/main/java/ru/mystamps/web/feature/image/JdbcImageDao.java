@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.image;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,25 +31,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcImageDao implements ImageDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String addImageSql;
+	private final String replaceImageSql;
+	private final String addImageToSeriesSql;
+	private final String findByIdSql;
+	private final String findBySeriesIdSql;
 	
-	@Value("${image.add}")
-	private String addImageSql;
-	
-	@Value("${image.replace}")
-	private String replaceImageSql;
-	
-	@Value("${series_image.add}")
-	private String addImageToSeriesSql;
-	
-	@Value("${image.find_by_id}")
-	private String findByIdSql;
-	
-	@Value("${series_image.find_by_series_id}")
-	private String findBySeriesIdSql;
+	public JdbcImageDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate        = jdbcTemplate;
+		this.addImageSql         = env.getRequiredProperty("image.add");
+		this.replaceImageSql     = env.getRequiredProperty("image.replace");
+		this.addImageToSeriesSql = env.getRequiredProperty("series_image.add");
+		this.findByIdSql         = env.getRequiredProperty("image.find_by_id");
+		this.findBySeriesIdSql   = env.getRequiredProperty("series_image.find_by_series_id");
+	}
 	
 	@Override
 	public Integer add(String type, String filename) {
