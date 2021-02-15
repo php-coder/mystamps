@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series.sale;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.Collections;
@@ -27,16 +26,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcSeriesSalesDao implements SeriesSalesDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String addSeriesSaleSql;
+	private final String findSeriesSalesBySeriesIdSql;
 	
-	@Value("${series_sales.add}")
-	private String addSeriesSaleSql;
-	
-	@Value("${series_sales.find_sales_by_series_id}")
-	private String findSeriesSalesBySeriesIdSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSeriesSalesDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                 = jdbcTemplate;
+		this.addSeriesSaleSql             = env.getRequiredProperty("series_sales.add");
+		this.findSeriesSalesBySeriesIdSql = env.getRequiredProperty("series_sales.find_sales_by_series_id");
+	}
 	
 	@Override
 	public void add(AddSeriesSalesDbDto sale) {
