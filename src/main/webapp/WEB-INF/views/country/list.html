@@ -73,7 +73,7 @@
 						</a>
 					</div>
 					
-					<ul th:if="${not #lists.isEmpty(countries)}">
+					<ul th:if="${not #lists.isEmpty(countries)}" class="countries-list">
 						<li th:each="country : ${countries}">
 							<a href="../country/info.html" th:href="@{${INFO_COUNTRY_PAGE}(slug=${country.slug})}" th:text="${country.name}">Italy</a>
 						</li>

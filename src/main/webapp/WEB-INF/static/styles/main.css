@@ -151,3 +151,25 @@ label {
 	height: 200px;
 	padding: 0;
 }
+
+@media (min-width: 384px) { /* Extra Small devices (our custom) */
+	.countries-list {
+		column-count: 2;
+	}
+}
+/* Media queries use values from Bootstrap (https://getbootstrap.com/docs/3.4/css/#grid-media-queries) */
+@media (min-width: 768px) { /* Small devices */
+	.countries-list {
+		column-count: 3;
+	}
+}
+@media (min-width: 992px) { /* Medium devices */
+	.countries-list {
+		column-count: 4;
+	}
+}
+@media (min-width: 1200px) { /* Large devices */
+	.countries-list {
+		column-count: 5;
+	}
+}
