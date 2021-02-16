@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.participant;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -35,31 +34,28 @@ import java.util.Map;
 
 // The String literal "name" appears 4 times in this file
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-@RequiredArgsConstructor
 public class JdbcParticipantDao implements ParticipantDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String addParticipantSql;
+	private final String findBuyersWithParentNamesSql;
+	private final String findSellersWithParentNamesSql;
+	private final String findSellerIdByNameSql;
+	private final String findSellerIdByNameAndUrlSql;
+	private final String findAllGroupsSql;
+	private final String findGroupIdByNameSql;
 	
-	@Value("${transaction_participant.create}")
-	private String addParticipantSql;
-	
-	@Value("${transaction_participant.find_buyers_with_parent_names}")
-	private String findBuyersWithParentNamesSql;
-	
-	@Value("${transaction_participant.find_sellers_with_parent_names}")
-	private String findSellersWithParentNamesSql;
-	
-	@Value("${transaction_participant.find_seller_id_by_name}")
-	private String findSellerIdByNameSql;
-	
-	@Value("${transaction_participant.find_seller_id_by_name_and_url}")
-	private String findSellerIdByNameAndUrlSql;
-	
-	@Value("${transaction_participant_group.find_all}")
-	private String findAllGroupsSql;
-	
-	@Value("${transaction_participant_group.find_id_by_name}")
-	private String findGroupIdByNameSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcParticipantDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate                  = jdbcTemplate;
+		this.addParticipantSql             = env.getRequiredProperty("transaction_participant.create");
+		this.findBuyersWithParentNamesSql  = env.getRequiredProperty("transaction_participant.find_buyers_with_parent_names");
+		this.findSellersWithParentNamesSql = env.getRequiredProperty("transaction_participant.find_sellers_with_parent_names");
+		this.findSellerIdByNameSql         = env.getRequiredProperty("transaction_participant.find_seller_id_by_name");
+		this.findSellerIdByNameAndUrlSql   = env.getRequiredProperty("transaction_participant.find_seller_id_by_name_and_url");
+		this.findAllGroupsSql              = env.getRequiredProperty("transaction_participant_group.find_all");
+		this.findGroupIdByNameSql          = env.getRequiredProperty("transaction_participant_group.find_id_by_name");
+	}
 	
 	@Override
 	public Integer add(AddParticipantDbDto participant) {

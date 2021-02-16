@@ -17,11 +17,8 @@
  */
 package ru.mystamps.web.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.mystamps.web.support.spring.security.SecurityConfig;
 import ru.mystamps.web.support.togglz.TogglzConfig;
@@ -37,15 +34,4 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 @EnableTransactionManagement
 @SuppressWarnings({ "checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass" })
 public class ApplicationContext {
-	
-	@Bean
-	public static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
-		PropertySourcesPlaceholderConfigurer configurer =
-			new PropertySourcesPlaceholderConfigurer();
-		configurer.setLocations(
-			new ClassPathResource("sql/transaction_participants_dao_queries.properties")
-		);
-		return configurer;
-	}
-	
 }
