@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series.importing.sale;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -27,16 +26,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcSeriesSalesImportDao implements SeriesSalesImportDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String addParsedDataSql;
+	private final String findParsedDataSql;
 	
-	@Value("${series_import_requests.add_series_sales_parsed_data}")
-	private String addParsedDataSql;
-	
-	@Value("${series_import_requests.find_series_sale_parsed_data_by_request_id}")
-	private String findParsedDataSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSeriesSalesImportDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate      = jdbcTemplate;
+		this.addParsedDataSql  = env.getRequiredProperty("series_sales_import.add_series_sales_parsed_data");
+		this.findParsedDataSql = env.getRequiredProperty("series_sales_import.find_series_sale_parsed_data_by_request_id");
+	}
 	
 	@Override
 	public void addParsedData(Integer requestId, SeriesSalesParsedDataDbDto data) {

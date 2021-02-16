@@ -21,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.mystamps.web.feature.series.DownloaderService;
 import ru.mystamps.web.feature.series.importing.SeriesInfoExtractorService;
@@ -48,8 +50,10 @@ public class SeriesSalesImportConfig {
 	}
 	
 	@RequiredArgsConstructor
+	@PropertySource("classpath:sql/series_sales_import_dao_queries.properties")
 	public static class Services {
 		
+		private final Environment env;
 		private final NamedParameterJdbcTemplate jdbcTemplate;
 		private final SiteParserService siteParserService;
 		private final SeriesInfoExtractorService extractorService;
@@ -69,7 +73,7 @@ public class SeriesSalesImportConfig {
 		
 		@Bean
 		public SeriesSalesImportDao seriesSalesImportDao() {
-			return new JdbcSeriesSalesImportDao(jdbcTemplate);
+			return new JdbcSeriesSalesImportDao(env, jdbcTemplate);
 		}
 		
 	}
