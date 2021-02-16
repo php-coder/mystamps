@@ -174,6 +174,7 @@ public class SeriesConfig {
 	
 	@RequiredArgsConstructor
 	@PropertySource({
+		"classpath:sql/series_dao_queries.properties",
 		"classpath:sql/series_image_dao_queries.properties",
 		"classpath:/sql/stamps_catalog_dao_queries.properties"
 	})
@@ -184,12 +185,12 @@ public class SeriesConfig {
 		
 		@Bean
 		public SeriesDao seriesDao() {
-			return new JdbcSeriesDao(jdbcTemplate);
+			return new JdbcSeriesDao(env, jdbcTemplate);
 		}
 		
 		@Bean
 		public SeriesImageDao seriesImageDao() {
-			return new JdbcSeriesImageDao(jdbcTemplate);
+			return new JdbcSeriesImageDao(env, jdbcTemplate);
 		}
 		
 		@Bean

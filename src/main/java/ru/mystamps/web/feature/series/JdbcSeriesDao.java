@@ -17,9 +17,8 @@
  */
 package ru.mystamps.web.feature.series;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -39,82 +38,62 @@ import java.util.Map;
 	"PMD.TooManyMethods",
 	"PMD.TooManyFields"
 })
-@RequiredArgsConstructor
 public class JdbcSeriesDao implements SeriesDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String createSeriesSql;
+	private final String addCommentSql;
+	private final String addReleaseYearSql;
+	private final String markAsModifiedSql;
+	private final String findAllForSitemapSql;
+	private final String findSimilarSeriesSql;
+	private final String findLastAddedSeriesSql;
+	private final String findFullInfoByIdSql;
+	private final String findByIdsSql;
+	private final String findByCategorySlugSql;
+	private final String findByCountrySlugSql;
+	private final String countAllSql;
+	private final String countAllStampsSql;
+	private final String countSeriesByIdSql;
+	private final String countSeriesAddedSinceSql;
+	private final String countSeriesUpdatedSinceSql;
+	private final String findQuantityByIdSql;
+	private final String addSimilarSeriesSql;
+	private final String addMichelPriceSql;
+	private final String addScottPriceSql;
+	private final String addYvertPriceSql;
+	private final String addGibbonsPriceSql;
+	private final String addSolovyovPriceSql;
+	private final String addZagorskiPriceSql;
 	
-	@Value("${series.create}")
-	private String createSeriesSql;
-	
-	@Value("${series.add_comment}")
-	private String addCommentSql;
-	
-	@Value("${series.add_release_year}")
-	private String addReleaseYearSql;
-	
-	@Value("${series.mark_as_modified}")
-	private String markAsModifiedSql;
-	
-	@Value("${series.find_all_for_sitemap}")
-	private String findAllForSitemapSql;
-	
-	@Value("${series.find_similar_series}")
-	private String findSimilarSeriesSql;
-	
-	@Value("${series.find_last_added}")
-	private String findLastAddedSeriesSql;
-	
-	@Value("${series.find_full_info_by_id}")
-	private String findFullInfoByIdSql;
-	
-	@Value("${series.find_by_ids}")
-	private String findByIdsSql;
-	
-	@Value("${series.find_by_category_slug}")
-	private String findByCategorySlugSql;
-	
-	@Value("${series.find_by_country_slug}")
-	private String findByCountrySlugSql;
-	
-	@Value("${series.count_all_series}")
-	private String countAllSql;
-	
-	@Value("${series.count_all_stamps}")
-	private String countAllStampsSql;
-	
-	@Value("${series.count_series_by_id}")
-	private String countSeriesByIdSql;
-	
-	@Value("${series.count_series_added_since}")
-	private String countSeriesAddedSinceSql;
-	
-	@Value("${series.count_series_updated_since}")
-	private String countSeriesUpdatedSinceSql;
-	
-	@Value("${series.find_quantity_by_id}")
-	private String findQuantityByIdSql;
-	
-	@Value("${series.add_similar_series}")
-	private String addSimilarSeriesSql;
-	
-	@Value("${series.add_michel_price}")
-	private String addMichelPriceSql;
-	
-	@Value("${series.add_scott_price}")
-	private String addScottPriceSql;
-	
-	@Value("${series.add_yvert_price}")
-	private String addYvertPriceSql;
-	
-	@Value("${series.add_gibbons_price}")
-	private String addGibbonsPriceSql;
-	
-	@Value("${series.add_solovyov_price}")
-	private String addSolovyovPriceSql;
-	
-	@Value("${series.add_zagorski_price}")
-	private String addZagorskiPriceSql;
+	@SuppressWarnings("checkstyle:linelength")
+	public JdbcSeriesDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate               = jdbcTemplate;
+		this.createSeriesSql            = env.getRequiredProperty("series.create");
+		this.addCommentSql              = env.getRequiredProperty("series.add_comment");
+		this.addReleaseYearSql          = env.getRequiredProperty("series.add_release_year");
+		this.markAsModifiedSql          = env.getRequiredProperty("series.mark_as_modified");
+		this.findAllForSitemapSql       = env.getRequiredProperty("series.find_all_for_sitemap");
+		this.findSimilarSeriesSql       = env.getRequiredProperty("series.find_similar_series");
+		this.findLastAddedSeriesSql     = env.getRequiredProperty("series.find_last_added");
+		this.findFullInfoByIdSql        = env.getRequiredProperty("series.find_full_info_by_id");
+		this.findByIdsSql               = env.getRequiredProperty("series.find_by_ids");
+		this.findByCategorySlugSql      = env.getRequiredProperty("series.find_by_category_slug");
+		this.findByCountrySlugSql       = env.getRequiredProperty("series.find_by_country_slug");
+		this.countAllSql                = env.getRequiredProperty("series.count_all_series");
+		this.countAllStampsSql          = env.getRequiredProperty("series.count_all_stamps");
+		this.countSeriesByIdSql         = env.getRequiredProperty("series.count_series_by_id");
+		this.countSeriesAddedSinceSql   = env.getRequiredProperty("series.count_series_added_since");
+		this.countSeriesUpdatedSinceSql = env.getRequiredProperty("series.count_series_updated_since");
+		this.findQuantityByIdSql        = env.getRequiredProperty("series.find_quantity_by_id");
+		this.addSimilarSeriesSql        = env.getRequiredProperty("series.add_similar_series");
+		this.addMichelPriceSql          = env.getRequiredProperty("series.add_michel_price");
+		this.addScottPriceSql           = env.getRequiredProperty("series.add_scott_price");
+		this.addYvertPriceSql           = env.getRequiredProperty("series.add_yvert_price");
+		this.addGibbonsPriceSql         = env.getRequiredProperty("series.add_gibbons_price");
+		this.addSolovyovPriceSql        = env.getRequiredProperty("series.add_solovyov_price");
+		this.addZagorskiPriceSql        = env.getRequiredProperty("series.add_zagorski_price");
+	}
 	
 	@Override
 	public Integer add(AddSeriesDbDto series) {

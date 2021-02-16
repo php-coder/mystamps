@@ -43,7 +43,6 @@ public class ApplicationContext {
 		PropertySourcesPlaceholderConfigurer configurer =
 			new PropertySourcesPlaceholderConfigurer();
 		configurer.setLocations(
-			new ClassPathResource("sql/series_dao_queries.properties"),
 			new ClassPathResource("sql/transaction_participants_dao_queries.properties")
 		);
 		return configurer;

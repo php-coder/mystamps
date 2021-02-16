@@ -17,21 +17,22 @@
  */
 package ru.mystamps.web.feature.series;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 public class JdbcSeriesImageDao implements SeriesImageDao {
 	
 	private final NamedParameterJdbcTemplate jdbcTemplate;
+	private final String hideImageSql;
 	
-	@Value("${series_images.mark_as_hidden}")
-	private String hideImageSql;
+	public JdbcSeriesImageDao(Environment env, NamedParameterJdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.hideImageSql = env.getRequiredProperty("series_images.mark_as_hidden");
+	}
 	
 	@Override
 	public void hideImage(Integer seriesId, Integer imageId) {
