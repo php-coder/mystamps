@@ -59,7 +59,7 @@ public class PatchRequest {
 	}
 	
 	public BigDecimal bigDecimalValue() {
-		return new BigDecimal(value);
+		return BigDecimalConverter.valueOf(value);
 	}
 	
 }

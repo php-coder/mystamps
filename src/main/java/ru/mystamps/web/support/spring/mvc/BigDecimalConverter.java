@@ -36,6 +36,10 @@ public class BigDecimalConverter implements Converter<String, BigDecimal> {
 			return null;
 		}
 		
+		return valueOf(source);
+	}
+	
+	public static BigDecimal valueOf(String source) {
 		String value = source;
 		if (source.indexOf(',') >= 0) {
 			// "10,5" => "10.5"
