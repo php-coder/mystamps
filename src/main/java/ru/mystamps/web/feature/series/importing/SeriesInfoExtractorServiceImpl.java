@@ -422,6 +422,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		"PMD.AvoidInstantiatingObjectsInLoops",
 		"PMD.AvoidReassigningParameters",
 		"PMD.NPathComplexity",
+		"PMD.ModifiedCyclomaticComplexity",
 		"checkstyle:parameterassignment"
 	})
 	/* default */ BigDecimal extractPrice(String fragment) {
@@ -437,7 +438,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			fragment = matcher.replaceAll("$1$2");
 		}
 
-		String prefix = "US$";
+		String[] prefixes = new String[]{"US$", "€"};
 		String postfix = "$";
 		
 		String[] candidates = StringUtils.split(fragment, ' ');
@@ -455,9 +456,12 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			if (candidate.endsWith(postfix) && candidate.length() > postfix.length()) {
 				candidate = StringUtils.substringBeforeLast(candidate, postfix);
 			}
-			// "US$10" -> "10"
-			if (candidate.startsWith(prefix) && candidate.length() > prefix.length()) {
-				candidate = StringUtils.substringAfter(candidate, prefix);
+			// "${prefix}10" -> "10"
+			for (String prefix : prefixes) {
+				if (candidate.startsWith(prefix) && candidate.length() > prefix.length()) {
+					candidate = StringUtils.substringAfter(candidate, prefix);
+					break;
+				}
 			}
 			try {
 				BigDecimal price = new BigDecimal(candidate);

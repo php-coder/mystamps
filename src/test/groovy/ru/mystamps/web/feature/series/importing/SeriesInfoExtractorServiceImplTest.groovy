@@ -660,6 +660,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'10.0 EUR'      | BigDecimal.TEN
 			'10.00 EUR'     | BigDecimal.TEN
 			'10,00 EUR'     | BigDecimal.TEN
+			'€3.50'         | new BigDecimal('3.50')
 			'10 руб 16 коп' | BigDecimal.TEN
 			'RUB 1,218.79'  | new BigDecimal('1218.79')
 	}
