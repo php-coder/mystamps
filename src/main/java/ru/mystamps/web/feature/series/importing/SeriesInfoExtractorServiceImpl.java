@@ -443,7 +443,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 				candidate = StringUtils.replaceChars(candidate, ',', '.');
 			}
 			// "10$" -> "10"
-			if (candidate.endsWith("$") && candidate.length() > 2) {
+			if (candidate.endsWith("$") && candidate.length() >= 2) {
 				candidate = candidate.substring(0, candidate.length() - 1);
 			}
 			try {

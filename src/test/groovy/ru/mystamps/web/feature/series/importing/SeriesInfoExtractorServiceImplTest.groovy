@@ -652,6 +652,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			service.extractPrice(fragment) == expected
 		where:
 			fragment        | expected
+			'1$'            | BigDecimal.ONE
 			'10$'           | BigDecimal.TEN
 			'10 EUR'        | BigDecimal.TEN
 			'10.0 EUR'      | BigDecimal.TEN
