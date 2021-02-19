@@ -437,6 +437,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		}
 
 		String prefix = "US$";
+		String postfix = "$";
 		
 		String[] candidates = StringUtils.split(fragment, ' ');
 		for (String candidate : candidates) {
@@ -445,8 +446,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 				candidate = StringUtils.replaceChars(candidate, ',', '.');
 			}
 			// "10$" -> "10"
-			if (candidate.endsWith("$") && candidate.length() >= 2) {
-				candidate = candidate.substring(0, candidate.length() - 1);
+			if (candidate.endsWith(postfix) && candidate.length() > postfix.length()) {
+				candidate = StringUtils.substringBeforeLast(candidate, postfix);
 			}
 			// "US$10" -> "10"
 			if (candidate.startsWith(prefix) && candidate.length() > prefix.length()) {
