@@ -647,17 +647,17 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
-	def 'extractPrice() should extract "10" from "#fragment"'(String fragment) {
+	def 'extractPrice() should extract "#expected" from "#fragment"'(String fragment, BigDecimal expected) {
 		expect:
-			service.extractPrice(fragment) == BigDecimal.TEN
+			service.extractPrice(fragment) == expected
 		where:
-			fragment        | _
-			'10$'           | _
-			'10 EUR'        | _
-			'10.0 EUR'      | _
-			'10.00 EUR'     | _
-			'10,00 EUR'     | _
-			'10 руб 16 коп' | _
+			fragment        | expected
+			'10$'           | BigDecimal.TEN
+			'10 EUR'        | BigDecimal.TEN
+			'10.0 EUR'      | BigDecimal.TEN
+			'10.00 EUR'     | BigDecimal.TEN
+			'10,00 EUR'     | BigDecimal.TEN
+			'10 руб 16 коп' | BigDecimal.TEN
 	}
 	
 	@Unroll
