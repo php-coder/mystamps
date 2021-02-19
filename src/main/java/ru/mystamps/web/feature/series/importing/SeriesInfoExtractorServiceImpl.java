@@ -85,7 +85,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("([0-9] |\\b)грн\\b");
 	
 	// Regular expression that matches US dollar.
-	private static final Pattern USD_CURRENCY_REGEXP = Pattern.compile("[0-9]\\$");
+	private static final Pattern USD_CURRENCY_REGEXP = Pattern.compile("([0-9]\\$|US\\$[0-9])");
 	
 	// CheckStyle: ignore LineLength for next 4 lines
 	private static final Pattern VALID_CATEGORY_NAME_EN = Pattern.compile(CategoryValidation.NAME_EN_REGEXP);

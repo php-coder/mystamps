@@ -743,8 +743,9 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 		expect:
 			service.extractCurrency(fragment) == 'USD'
 		where:
-			fragment | _
-			'1,36$'  | _
+			fragment   | _
+			'1,36$'    | _
+			'US$16.50' | _
 	}
 	
 }
