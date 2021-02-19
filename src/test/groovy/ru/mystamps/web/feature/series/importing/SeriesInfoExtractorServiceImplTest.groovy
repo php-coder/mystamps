@@ -716,6 +716,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'200руб'    | _
 			'660 руб.'  | _
 			'800 р.'    | _
+			'RUB 1218'  | _
 	}
 	
 	@Unroll

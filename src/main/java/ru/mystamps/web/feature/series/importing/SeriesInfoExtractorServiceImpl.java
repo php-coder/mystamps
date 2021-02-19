@@ -78,7 +78,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	private static final Pattern BYN_CURRENCY_REGEXP = Pattern.compile("[0-9] бел\\. руб\\.");
 	
 	// Regular expression that matches Rubles (Russian currency).
-	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("[0-9][ ]?р(уб|\\.)");
+	// CheckStyle: ignore LineLength for next 1 line
+	private static final Pattern RUB_CURRENCY_REGEXP = Pattern.compile("([0-9][ ]?р(уб|\\.)|RUB [0-9])");
 	
 	// Regular expression that matches Ukrainian hryvnia.
 	private static final Pattern UAH_CURRENCY_REGEXP = Pattern.compile("([0-9] |\\b)грн\\b");
