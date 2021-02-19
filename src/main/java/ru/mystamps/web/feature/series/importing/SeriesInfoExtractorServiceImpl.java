@@ -421,6 +421,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 	@SuppressWarnings({
 		"PMD.AvoidInstantiatingObjectsInLoops",
 		"PMD.AvoidReassigningParameters",
+		"PMD.NPathComplexity",
 		"checkstyle:parameterassignment"
 	})
 	/* default */ BigDecimal extractPrice(String fragment) {
@@ -441,9 +442,14 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		
 		String[] candidates = StringUtils.split(fragment, ' ');
 		for (String candidate : candidates) {
-			// replace comma with dot to handle 10,5 in the same way as 10.5
 			if (candidate.contains(",")) {
-				candidate = StringUtils.replaceChars(candidate, ',', '.');
+				if (candidate.contains(".")) {
+					// "1,218.79" => "1218.79"
+					candidate = StringUtils.remove(candidate, ',');
+				} else {
+					// replace comma with dot to handle 10,5 in the same way as 10.5
+					candidate = StringUtils.replaceChars(candidate, ',', '.');
+				}
 			}
 			// "10$" -> "10"
 			if (candidate.endsWith(postfix) && candidate.length() > postfix.length()) {
