@@ -647,6 +647,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 	}
 	
 	@Unroll
+	@SuppressWarnings('UnnecessaryBigDecimalInstantiation')
 	def 'extractPrice() should extract "#expected" from "#fragment"'(String fragment, BigDecimal expected) {
 		expect:
 			service.extractPrice(fragment) == expected
@@ -654,6 +655,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			fragment        | expected
 			'1$'            | BigDecimal.ONE
 			'10$'           | BigDecimal.TEN
+			'US$16.50'      | new BigDecimal('16.50')
 			'10 EUR'        | BigDecimal.TEN
 			'10.0 EUR'      | BigDecimal.TEN
 			'10.00 EUR'     | BigDecimal.TEN

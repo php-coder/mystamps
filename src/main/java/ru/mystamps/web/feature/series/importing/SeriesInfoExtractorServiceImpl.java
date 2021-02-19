@@ -435,6 +435,8 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 		if (matcher.find()) {
 			fragment = matcher.replaceAll("$1$2");
 		}
+
+		String prefix = "US$";
 		
 		String[] candidates = StringUtils.split(fragment, ' ');
 		for (String candidate : candidates) {
@@ -445,6 +447,10 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			// "10$" -> "10"
 			if (candidate.endsWith("$") && candidate.length() >= 2) {
 				candidate = candidate.substring(0, candidate.length() - 1);
+			}
+			// "US$10" -> "10"
+			if (candidate.startsWith(prefix) && candidate.length() > prefix.length()) {
+				candidate = StringUtils.substringAfter(candidate, prefix);
 			}
 			try {
 				BigDecimal price = new BigDecimal(candidate);
