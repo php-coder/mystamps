@@ -335,7 +335,6 @@ public class SeriesServiceImpl implements SeriesService {
 		
 		List<Integer> imageIds = imageService.findBySeriesId(seriesId, false);
 		
-		// @todo #1356 SeriesServiceImpl.findFullInfoById(): add unit test for hidden images
 		List<Integer> hiddenImageIds = Collections.emptyList();
 		if (userCanSeeHiddenImages) {
 			hiddenImageIds = imageService.findBySeriesId(seriesId, true);

@@ -800,6 +800,23 @@ class SeriesServiceImplTest extends Specification {
 			
 			result.zagorski?.numbers  == expectedZagorskiNumbers
 			result.zagorski?.price    == expectedInfo.zagorskiPrice
+
+			result.hiddenImageIds?.isEmpty()
+	}
+
+	def 'findFullInfoById() should load hidden images when user can see them'() {
+		given:
+			Integer expectedSeriesId = Random.id()
+			List<Integer> expectedImageIds = Random.listOfIntegers()
+		and:
+			seriesDao.findByIdAsSeriesFullInfo(expectedSeriesId, _ as Integer, _ as String) >>
+				TestObjects.createSeriesFullInfoDto()
+		when:
+			SeriesDto result = service.findFullInfoById(expectedSeriesId, Random.userId(), Random.lang(), true)
+		then:
+			1 * imageService.findBySeriesId(expectedSeriesId, true) >> expectedImageIds
+		and:
+			result?.hiddenImageIds == expectedImageIds
 	}
 	
 	//
