@@ -456,6 +456,7 @@ class SeriesInfoExtractorServiceImplTest extends Specification {
 			'б/з'              | _
 			'Б/З'              | _
 			'БЗ'               | _
+			'беззубцовый'      | _
 			'беззубцовые'      | _
 			'беззубцовых'      | _
 			'БЕЗЗУБЦОВЫЕ'      | _

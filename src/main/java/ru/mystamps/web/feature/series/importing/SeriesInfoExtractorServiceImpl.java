@@ -306,6 +306,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 			"Б.З.",
 			"БЗ",
 			"БЕЗ ЗУБ",
+			"БЕЗЗУБЦОВЫЙ",
 			"БЕЗЗУБЦОВЫЕ",
 			"БЕЗЗУБЦОВЫХ",
 			"БЕЗ ПЕРФ.",
