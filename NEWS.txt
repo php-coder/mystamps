@@ -1,4 +1,7 @@
 0.x (upcoming release)
+
+
+0.4.6
 - (feature)        users can add a comment to a series
 - (feature)        admin can hide an image
 - (infrastructure) migrate to JUnit 5
