@@ -20,13 +20,13 @@ case "${1:-}" in
 		su mystamps 2>&1 \
 			-c "${DUPLICITY_CMD} --name=uploads --no-encryption /data/uploads ${UPLOADS_DST}"
 		su mystamps 2>&1 \
-			-c "duplicity remove-all-but-n-full 4 --force ${UPLOADS_DST}"
+			-c "duplicity remove-all-but-n-full 2 --force ${UPLOADS_DST}"
 		;;
 	'mysql-backups')
 		PASSPHRASE="$PASSPHRASE" su mystamps 2>&1 \
 			-c "${DUPLICITY_CMD} --name=mysql-backups /data/backups ${MYSQL_BACKUPS_DST}"
 		PASSPHRASE="$PASSPHRASE" su mystamps 2>&1 \
-			-c "duplicity remove-all-but-n-full 4 --force ${MYSQL_BACKUPS_DST}"
+			-c "duplicity remove-all-but-n-full 2 --force ${MYSQL_BACKUPS_DST}"
 		;;
 	*)
 		echo 2>&1 "Usage: $(dirname "$0") (uploads|mysql-backups)"
