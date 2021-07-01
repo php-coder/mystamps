@@ -218,7 +218,6 @@ public class JsoupSiteParserTest implements WithAssertions {
 	// Tests for toString()
 	//
 	
-	@SuppressWarnings("checkstyle:magicnumber")
 	@Test
 	public void toStringShouldReturnName() {
 		String expectedName = nullOr(Random.name());
