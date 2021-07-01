@@ -280,7 +280,7 @@ public final class TestObjects {
 		return new RawParsedDataDto(
 			Random.categoryName(),
 			Random.countryName(),
-			Random.url(),
+			Collections.singletonList(Random.url()),
 			Random.issueYear().toString(),
 			Random.quantity().toString(),
 			String.valueOf(Random.perforated()),

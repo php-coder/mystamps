@@ -20,12 +20,14 @@ package ru.mystamps.web.feature.series.importing;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @RequiredArgsConstructor
 public class RawParsedDataDto {
 	private final String categoryName;
 	private final String countryName;
-	private final String imageUrl;
+	private final List<String> imageUrls;
 	private final String issueDate;
 	private final String quantity;
 	private final String perforated;
@@ -37,4 +39,12 @@ public class RawParsedDataDto {
 	private final String altPrice;
 	private final String altCurrency;
 	private final String condition;
+
+	// for backward compatibility
+	public String getImageUrl() {
+		if (imageUrls == null || imageUrls.isEmpty()) {
+			return null;
+		}
+		return imageUrls.get(0);
+	}
 }

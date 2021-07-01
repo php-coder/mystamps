@@ -46,14 +46,6 @@ public class SeriesInfo {
 	private String altPrice;
 	private String altCurrency;
 	private String condition;
-
-	// for backward compatibility
-	public String getImageUrl() {
-		if (imageUrls == null || imageUrls.isEmpty()) {
-			return null;
-		}
-		return imageUrls.get(0);
-	}
 	
 	/**
 	 * Check whether any info about a series is available.

@@ -88,7 +88,7 @@ public class DownloadingSucceededEventListener
 		RawParsedDataDto data = new RawParsedDataDto(
 			info.getCategoryName(),
 			info.getCountryName(),
-			info.getImageUrl(),
+			info.getImageUrls(),
 			info.getIssueDate(),
 			info.getQuantity(),
 			info.getPerforated(),
