@@ -27,8 +27,14 @@ import org.apache.commons.lang3.Validate;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 // Getters/setters/no-arg constructor are being used in unit tests
 @Getter(AccessLevel.PROTECTED)
@@ -96,7 +102,7 @@ public class JsoupSiteParser implements SiteParser {
 		
 		info.setCategoryName(extractCategory(body));
 		info.setCountryName(extractCountry(body));
-		info.setImageUrl(extractImageUrl(body));
+		info.setImageUrls(extractImageUrls(body));
 		info.setIssueDate(extractIssueDate(body));
 		info.setQuantity(extractQuantity(body));
 		info.setPerforated(extractPerforated(body));
@@ -141,16 +147,26 @@ public class JsoupSiteParser implements SiteParser {
 		return country;
 	}
 	
-	protected String extractImageUrl(Element body) {
-		Element elem = getFirstElement(body, imageUrlLocator);
-		if (elem == null) {
-			return null;
+	protected List<String> extractImageUrls(Element body) {
+		List<Element> elems = getElements(body, imageUrlLocator);
+		if (elems.isEmpty()) {
+			return Collections.emptyList();
 		}
 		
 		String attrName = ObjectUtils.firstNonNull(imageUrlAttribute, "href");
-		String url = elem.absUrl(attrName);
-		LOG.debug("Extracted image url: '{}'", url);
-		return StringUtils.trimToNull(url);
+		
+		List<String> urls = elems
+			.stream()
+			.map(elem -> elem.absUrl(attrName))
+			.map(StringUtils::trimToNull)
+			.filter(Objects::nonNull)
+			.collect(Collectors.toList());
+		if (urls.isEmpty()) {
+			return Collections.emptyList();
+		}
+		
+		LOG.debug("Extracted {} image urls: {}", urls.size(), urls);
+		return urls;
 	}
 	
 	protected String extractIssueDate(Element body) {
@@ -281,6 +297,17 @@ public class JsoupSiteParser implements SiteParser {
 		
 		LOG.debug("Extracted condition: '{}'", description);
 		return description;
+	}
+	
+	private static List<Element> getElements(Element body, String locator) {
+		if (locator == null) {
+			return Collections.emptyList();
+		}
+		
+		Elements elems = body.select(locator);
+		Validate.validState(elems != null, "Element.select(%s) must return non-null", locator);
+		
+		return elems;
 	}
 	
 	private static Element getFirstElement(Element body, String locator) {

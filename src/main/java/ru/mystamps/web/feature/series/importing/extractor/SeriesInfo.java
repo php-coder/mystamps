@@ -22,6 +22,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * Representation of a series info.
  */
@@ -32,7 +34,7 @@ import lombok.ToString;
 public class SeriesInfo {
 	private String categoryName;
 	private String countryName;
-	private String imageUrl;
+	private List<String> imageUrls;
 	private String issueDate;
 	private String quantity;
 	private String perforated;
@@ -44,6 +46,14 @@ public class SeriesInfo {
 	private String altPrice;
 	private String altCurrency;
 	private String condition;
+
+	// for backward compatibility
+	public String getImageUrl() {
+		if (imageUrls == null || imageUrls.isEmpty()) {
+			return null;
+		}
+		return imageUrls.get(0);
+	}
 	
 	/**
 	 * Check whether any info about a series is available.
@@ -51,7 +61,7 @@ public class SeriesInfo {
 	public boolean isEmpty() {
 		return categoryName == null
 			&& countryName == null
-			&& imageUrl == null
+			&& (imageUrls == null || imageUrls.isEmpty())
 			&& issueDate == null
 			&& quantity == null
 			&& perforated == null

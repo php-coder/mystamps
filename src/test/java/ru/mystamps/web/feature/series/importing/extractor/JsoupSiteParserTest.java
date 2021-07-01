@@ -24,6 +24,10 @@ import org.jsoup.nodes.Element;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.mystamps.web.tests.Random;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import static io.qala.datagen.RandomShortApi.nullOr;
@@ -91,7 +95,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 		expectedInfo.setCategoryName(expectedCategory);
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
-		expectedInfo.setImageUrl(expectedImageUrl);
+		expectedInfo.setImageUrls(Collections.singletonList(expectedImageUrl));
 		expectedInfo.setSellerName(expectedSellerName);
 		expectedInfo.setSellerUrl(expectedSellerUrl);
 		expectedInfo.setPrice(expectedPrice);
@@ -136,14 +140,23 @@ public class JsoupSiteParserTest implements WithAssertions {
 		String expectedCategory = Random.categoryName();
 		String expectedCountry = Random.countryName();
 		String expectedIssueDate = Random.issueYear().toString();
-		String imageUrl = String.format(
-			"/%s-%s-%s.png",
+		String firstImageUrl = String.format(
+			"/%s-%s-%s-1.png",
 			expectedCountry.toLowerCase(Locale.ENGLISH),
 			expectedCategory.toLowerCase(Locale.ENGLISH),
 			expectedIssueDate
 		);
+		String secondImageUrl = String.format(
+			"/%s-%s-%s-2.png",
+			expectedCountry.toLowerCase(Locale.ENGLISH),
+			expectedCategory.toLowerCase(Locale.ENGLISH),
+			expectedIssueDate
+		);
+		List<String> expectedImageUrls = Arrays.asList(
+			baseUri + firstImageUrl,
+			baseUri + secondImageUrl
+		);
 		String sellerUrl = String.format("/seller/%d/info.htm", positiveInteger());
-		String expectedImageUrl = baseUri + imageUrl;
 		String expectedSellerName = Random.sellerName();
 		String expectedSellerUrl = baseUri + sellerUrl;
 		String expectedPrice = Random.price().toString();
@@ -166,7 +179,8 @@ public class JsoupSiteParserTest implements WithAssertions {
 		expectedInfo.setCategoryName(expectedCategory);
 		expectedInfo.setCountryName(expectedCountry);
 		expectedInfo.setIssueDate(expectedIssueDate);
-		expectedInfo.setImageUrl(expectedImageUrl);
+		// in case of image URLs, it should find all of them
+		expectedInfo.setImageUrls(expectedImageUrls);
 		expectedInfo.setSellerName(expectedSellerName);
 		expectedInfo.setSellerUrl(expectedSellerUrl);
 		expectedInfo.setPrice(expectedPrice);
@@ -189,7 +203,7 @@ public class JsoupSiteParserTest implements WithAssertions {
 					+ "<h1>ignored</h1>"
 					+ "<p>ignored</p>"
 					+ "<span>ignored</span>"
-					+ "<a class='image' href='none'>look at image</a>"
+					+ "<a class='image' href='%s'>look at image</a>"
 					+ "<a class='seller' href='none'>seller name</a>"
 					+ "<b>ignored</b>"
 					+ "<div>ignored</div>"
@@ -200,13 +214,14 @@ public class JsoupSiteParserTest implements WithAssertions {
 			expectedCategory,
 			expectedCountry,
 			expectedIssueDate,
-			expectedImageUrl,
+			firstImageUrl,
 			expectedSellerUrl,
 			expectedSellerName,
 			expectedPrice,
 			expectedCurrency,
 			expectedAltPrice,
-			expectedAltCurrency
+			expectedAltCurrency,
+			secondImageUrl
 		);
 		
 		SeriesInfo info = parser.parse(html);
@@ -335,31 +350,31 @@ public class JsoupSiteParserTest implements WithAssertions {
 	}
 	
 	//
-	// Tests for extractImageUrl()
+	// Tests for extractImageUrls()
 	//
 	
 	@Test
-	public void extractImageUrlShouldReturnNullWhenLocatorIsNotSet() {
+	public void extractImageUrlsShouldReturnEmptyResultWhenLocatorIsNotSet() {
 		parser.setImageUrlLocator(null);
 		Element doc = createEmptyDocument();
 		
-		String imageUrl = parser.extractImageUrl(doc);
+		List<String> imageUrls = parser.extractImageUrls(doc);
 		
-		assertThat(imageUrl).isNull();
+		assertThat(imageUrls).isEmpty();
 	}
 	
 	@Test
-	public void extractImageUrlShouldReturnNullWhenElementNotFound() {
+	public void extractImageUrlsShouldReturnEmptyResultWhenElementNotFound() {
 		parser.setImageUrlLocator(Random.jsoupLocator());
 		Element doc = createEmptyDocument();
 		
-		String imageUrl = parser.extractImageUrl(doc);
+		List<String> imageUrls = parser.extractImageUrls(doc);
 		
-		assertThat(imageUrl).isNull();
+		assertThat(imageUrls).isEmpty();
 	}
 	
 	@Test
-	public void extractImageUrlShouldReturnValueOfImageUrlAttribute() {
+	public void extractImageUrlsShouldReturnValueOfImageUrlAttribute() {
 		parser.setImageUrlLocator("a");
 		parser.setImageUrlAttribute("data-full-path");
 		
@@ -371,14 +386,16 @@ public class JsoupSiteParserTest implements WithAssertions {
 		);
 		Element doc = createDocumentFromText(html);
 		
-		String imageUrl = parser.extractImageUrl(doc);
+		List<String> imageUrls = parser.extractImageUrls(doc);
 		
-		assertThat(imageUrl).as("couldn't extract image url from '%s'", doc)
-			.isEqualTo(expectedImageUrl);
+		assertThat(imageUrls).as("couldn't extract image urls from '%s'", doc)
+			.hasOnlyOneElementSatisfying(
+				url -> assertThat(url).isEqualTo(expectedImageUrl)
+			);
 	}
 	
 	@Test
-	public void extractImageUrlShouldReturnValueOfHrefAttributeByDefault() {
+	public void extractImageUrlsShouldReturnValueOfHrefAttributeByDefault() {
 		parser.setImageUrlLocator("a");
 		parser.setImageUrlAttribute(null);
 		
@@ -390,22 +407,24 @@ public class JsoupSiteParserTest implements WithAssertions {
 		);
 		Element doc = createDocumentFromText(html);
 		
-		String imageUrl = parser.extractImageUrl(doc);
+		List<String> imageUrls = parser.extractImageUrls(doc);
 		
-		assertThat(imageUrl).as("couldn't extract image url from '%s'", doc)
-			.isEqualTo(expectedImageUrl);
+		assertThat(imageUrls).as("couldn't extract image urls from '%s'", doc)
+			.hasOnlyOneElementSatisfying(
+				url -> assertThat(url).isEqualTo(expectedImageUrl)
+			);
 	}
 	
 	@Test
-	public void extractImageUrlShouldReturnNullInsteadOfEmptyString() {
+	public void extractImageUrlsShouldIgnoreEmptyUrls() {
 		parser.setImageUrlLocator("a");
 		
 		String html = "<a href=''>test</a>";
 		Element doc = createDocumentFromText(html);
 		
-		String imageUrl = parser.extractImageUrl(doc);
+		List<String> imageUrls = parser.extractImageUrls(doc);
 		
-		assertThat(imageUrl).isNull();
+		assertThat(imageUrls).isEmpty();
 	}
 	
 	//
