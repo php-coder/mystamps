@@ -472,7 +472,11 @@ class SeriesImportServiceImplTest extends Specification {
 	
 	def 'saveParsedData() should throw exception when request id is null'() {
 		when:
-			service.saveParsedData(null, TestObjects.createEmptySeriesExtractedInfo(), Random.url())
+			service.saveParsedData(
+				null,
+				TestObjects.createEmptySeriesExtractedInfo(),
+				Collections.singletonList(Random.url())
+			)
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Request id must be non null'
@@ -480,10 +484,18 @@ class SeriesImportServiceImplTest extends Specification {
 	
 	def 'saveParsedData() should throw exception when series info is null'() {
 		when:
-			service.saveParsedData(Random.id(), null, Random.url())
+			service.saveParsedData(Random.id(), null, Collections.singletonList(Random.url()))
 		then:
 			IllegalArgumentException ex = thrown()
 			ex.message == 'Series info must be non null'
+	}
+	
+	def 'saveParsedData() should throw exception when image urls are null'() {
+		when:
+			service.saveParsedData(Random.id(), TestObjects.createEmptySeriesExtractedInfo(), null)
+		then:
+			IllegalArgumentException ex = thrown()
+			ex.message == 'Image URLs must be non null'
 	}
 	
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
@@ -491,7 +503,11 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		when:
-			service.saveParsedData(expectedRequestId, TestObjects.createEmptySeriesExtractedInfo(), null)
+			service.saveParsedData(
+				expectedRequestId,
+				TestObjects.createEmptySeriesExtractedInfo(),
+				Collections.emptyList()
+			)
 		then:
 			1 * eventPublisher.publishEvent({ ParsingFailed event ->
 				assert event?.requestId == expectedRequestId
@@ -505,7 +521,11 @@ class SeriesImportServiceImplTest extends Specification {
 			Integer expectedRequestId = Random.id()
 			String expectedImageUrl = Random.url()
 		when:
-			service.saveParsedData(expectedRequestId, TestObjects.createSeriesExtractedInfo(), expectedImageUrl)
+			service.saveParsedData(
+				expectedRequestId,
+				TestObjects.createSeriesExtractedInfo(),
+				Collections.singletonList(expectedImageUrl)
+			)
 		then:
 			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
@@ -524,7 +544,11 @@ class SeriesImportServiceImplTest extends Specification {
 		given:
 			Integer expectedRequestId = Random.id()
 		when:
-			service.saveParsedData(expectedRequestId, TestObjects.createSeriesExtractedInfo(), Random.url())
+			service.saveParsedData(
+				expectedRequestId,
+				TestObjects.createSeriesExtractedInfo(),
+				Collections.singletonList(Random.url())
+			)
 		then:
 			1 * seriesSalesImportService.saveParsedData(
 				expectedRequestId,
@@ -555,7 +579,7 @@ class SeriesImportServiceImplTest extends Specification {
 			BigDecimal expectedPrice     = expectedSeriesInfo.getPrice()
 			String expectedCurrency      = expectedSeriesInfo.getCurrency()
 		when:
-			service.saveParsedData(Random.id(), expectedSeriesInfo, Random.url())
+			service.saveParsedData(Random.id(), expectedSeriesInfo, Collections.singletonList(Random.url()))
 		then:
 			1 * seriesImportDao.addParsedData(
 				_ as Integer,
@@ -588,7 +612,11 @@ class SeriesImportServiceImplTest extends Specification {
 	@SuppressWarnings(['ClosureAsLastMethodParameter', 'UnnecessaryReturnKeyword'])
 	def 'saveParsedData() should change request status'() {
 		when:
-			service.saveParsedData(Random.id(), TestObjects.createEmptySeriesExtractedInfo(), Random.url())
+			service.saveParsedData(
+				Random.id(),
+				TestObjects.createEmptySeriesExtractedInfo(),
+				Collections.singletonList(Random.url())
+			)
 		then:
 			1 * seriesImportDao.changeStatus({ UpdateImportRequestStatusDbDto status ->
 					assert DateUtils.roughlyEqual(status.date, new Date())

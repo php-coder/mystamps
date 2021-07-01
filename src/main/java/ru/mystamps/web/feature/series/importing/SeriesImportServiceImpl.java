@@ -174,16 +174,19 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		return seriesImportDao.findRawContentByRequestId(requestId);
 	}
 	
+	// CheckStyle: ignore LineLength for next 3 lines
 	@Override
 	@Transactional
-	public void saveParsedData(Integer requestId, SeriesExtractedInfo seriesInfo, String imageUrl) {
+	public void saveParsedData(Integer requestId, SeriesExtractedInfo seriesInfo, List<String> imageUrls) {
 		Validate.isTrue(requestId != null, "Request id must be non null");
 		Validate.isTrue(seriesInfo != null, "Series info must be non null");
+		Validate.isTrue(imageUrls != null, "Image URLs must be non null");
 		
 		Integer categoryId = getFirstElement(seriesInfo.getCategoryIds());
 		Integer countryId = getFirstElement(seriesInfo.getCountryIds());
 		
 		AddSeriesParsedDataDbDto seriesParsedData = new AddSeriesParsedDataDbDto();
+		String imageUrl = getFirstElement(imageUrls);
 		seriesParsedData.setImageUrl(imageUrl);
 		Date now = new Date();
 		seriesParsedData.setCreatedAt(now);
@@ -291,7 +294,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		return seriesImportDao.findAll();
 	}
 	
-	private static Integer getFirstElement(List<Integer> list) {
+	private static <T> T getFirstElement(List<T> list) {
 		if (list.isEmpty()) {
 			return null;
 		}

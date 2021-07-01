@@ -104,7 +104,7 @@ public class DownloadingSucceededEventListener
 		
 		SeriesExtractedInfo seriesInfo = extractorService.extract(event.getUrl(), data);
 		
-		seriesImportService.saveParsedData(requestId, seriesInfo, data.getImageUrl());
+		seriesImportService.saveParsedData(requestId, seriesInfo, data.getImageUrls());
 	}
 	
 }

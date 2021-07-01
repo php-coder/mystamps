@@ -40,11 +40,4 @@ public class RawParsedDataDto {
 	private final String altCurrency;
 	private final String condition;
 
-	// for backward compatibility
-	public String getImageUrl() {
-		if (imageUrls == null || imageUrls.isEmpty()) {
-			return null;
-		}
-		return imageUrls.get(0);
-	}
 }
