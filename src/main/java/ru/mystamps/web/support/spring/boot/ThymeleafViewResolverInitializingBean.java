@@ -18,8 +18,6 @@
 package ru.mystamps.web.support.spring.boot;
 
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -53,9 +51,6 @@ import java.util.Map;
 @Setter
 public class ThymeleafViewResolverInitializingBean
 	implements InitializingBean, ApplicationContextAware, EnvironmentAware {
-	
-	private static final Logger LOG =
-		LoggerFactory.getLogger(ThymeleafViewResolverInitializingBean.class);
 	
 	private ApplicationContext applicationContext;
 	private Environment environment;
