@@ -80,6 +80,7 @@
 	</rule>
 	<rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier" />
 	<rule ref="category/java/codestyle.xml/ConfusingTernary" />
+	<rule ref="category/java/codestyle.xml/ControlStatementBraces" />
 	<!-- Exclude DefaultPackage because it conflicts with CommentDefaultAccessModifier -->
 	<!--<rule ref="category/java/codestyle.xml/DefaultPackage" />-->
 	<rule ref="category/java/codestyle.xml/DontImportJavaLang" />
@@ -88,10 +89,7 @@
 	<rule ref="category/java/codestyle.xml/ExtendsObject" />
 	<rule ref="category/java/codestyle.xml/FieldDeclarationsShouldBeAtStartOfClass" />
 	<rule ref="category/java/codestyle.xml/ForLoopShouldBeWhileLoop" />
-	<rule ref="category/java/codestyle.xml/ForLoopsMustUseBraces" />
 	<rule ref="category/java/codestyle.xml/GenericsNaming" />
-	<rule ref="category/java/codestyle.xml/IfElseStmtsMustUseBraces" />
-	<rule ref="category/java/codestyle.xml/IfStmtsMustUseBraces" />
 	<!--<rule ref="category/java/codestyle.xml/LocalHomeNamingConvention" />-->
 	<!--<rule ref="category/java/codestyle.xml/LocalInterfaceSessionNamingConvention" />-->
 	<!--<rule ref="category/java/codestyle.xml/LocalVariableCouldBeFinal" />-->
@@ -133,7 +131,6 @@
 	<rule ref="category/java/codestyle.xml/UselessParentheses" />
 	<rule ref="category/java/codestyle.xml/UselessQualifiedThis" />
 	<rule ref="category/java/codestyle.xml/VariableNamingConventions" />
-	<rule ref="category/java/codestyle.xml/WhileLoopsMustUseBraces" />
 	
 	<rule ref="category/java/design.xml/AbstractClassWithoutAnyMethod" />
 	<rule ref="category/java/design.xml/AvoidCatchingGenericException" />
