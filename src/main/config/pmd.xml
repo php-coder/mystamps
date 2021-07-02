@@ -21,6 +21,12 @@
 	<rule ref="category/java/bestpractices.xml/ConstantsInInterface" />
 	<rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitchStmt" />
 	<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
+	<rule ref="category/java/bestpractices.xml/GuardLogStatement">
+		<properties>
+			<property name="logLevels" value="trace,debug,info,warn,error" />
+			<property name="guardsMethods" value="isTraceEnabled,isDebugEnabled,isInfoEnabled,isWarnEnabled,isErrorEnabled" />
+		</properties>
+	</rule>
 	<!--<rule ref="category/java/bestpractices.xml/JUnit4SuitesShouldUseSuiteAnnotation" />-->
 	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseAfterAnnotation" />
 	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseBeforeAnnotation" />

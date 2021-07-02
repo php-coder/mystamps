@@ -65,13 +65,6 @@ public class ThymeleafViewResolverInitializingBean
 	public void afterPropertiesSet() throws Exception {
 		ThymeleafViewResolver viewResolver =
 			applicationContext.getBean(ThymeleafViewResolver.class);
-		if (viewResolver == null) {
-			LOG.warn(
-				"Cannot adjust ThymeleafViewResolver: "
-				+ "bean of this type wasn't found in application context"
-			);
-			return;
-		}
 		
 		Profiles prod = Profiles.of("prod");
 		boolean productionEnv = environment.acceptsProfiles(prod);
