@@ -260,7 +260,7 @@ public class SeriesInfoExtractorServiceImpl implements SeriesInfoExtractorServic
 				}
 				return result;
 				
-			} catch (NumberFormatException ignored) { // NOPMD: EmptyCatchBlock
+			} catch (NumberFormatException ignored) {
 				// continue with the next element
 			}
 		}

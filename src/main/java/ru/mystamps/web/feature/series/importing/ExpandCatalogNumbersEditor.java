@@ -59,7 +59,7 @@ public class ExpandCatalogNumbersEditor extends PropertyEditorSupport {
 					Set<String> catalogNumbers = CatalogUtils.parseCatalogNumbers(value);
 					result = String.join(",", catalogNumbers);
 					
-				} catch (IllegalArgumentException ignored) { // NOPMD: EmptyCatchBlock
+				} catch (IllegalArgumentException ignored) {
 					// Intentionally empty: invalid values should be retain as-is.
 					// They will be rejected later during validation.
 				}
