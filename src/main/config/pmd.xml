@@ -89,6 +89,7 @@
 	<rule ref="category/java/codestyle.xml/FieldDeclarationsShouldBeAtStartOfClass" />
 	<rule ref="category/java/codestyle.xml/ForLoopShouldBeWhileLoop" />
 	<rule ref="category/java/codestyle.xml/GenericsNaming" />
+	<rule ref="category/java/codestyle.xml/IdenticalCatchBranches" />
 	<!--<rule ref="category/java/codestyle.xml/LocalHomeNamingConvention" />-->
 	<!--<rule ref="category/java/codestyle.xml/LocalInterfaceSessionNamingConvention" />-->
 	<!--<rule ref="category/java/codestyle.xml/LocalVariableCouldBeFinal" />-->
@@ -316,6 +317,7 @@
 	<rule ref="category/java/performance.xml/UseStringBufferForStringAppends" />
 	<rule ref="category/java/performance.xml/UseStringBufferLength" />
 	
+	<rule ref="category/java/security.xml/HardCodedCryptoKey" />
 	<rule ref="category/java/security.xml/InsecureCryptoIv" />
 	
 </ruleset>
