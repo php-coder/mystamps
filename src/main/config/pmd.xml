@@ -152,9 +152,7 @@
 	<rule ref="category/java/design.xml/LogicInversion" />
 	<!--<rule ref="category/java/design.xml/LoosePackageCoupling" />-->
 	<rule ref="category/java/design.xml/ModifiedCyclomaticComplexity" />
-	<rule ref="category/java/design.xml/NcssConstructorCount" />
-	<rule ref="category/java/design.xml/NcssMethodCount" />
-	<rule ref="category/java/design.xml/NcssTypeCount" />
+	<rule ref="category/java/design.xml/NcssCount" />
 	<rule ref="category/java/design.xml/NPathComplexity" />
 	<rule ref="category/java/design.xml/SignatureDeclareThrowsException" />
 	<rule ref="category/java/design.xml/SimplifiedTernary" />
