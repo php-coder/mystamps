@@ -21,7 +21,7 @@ before_script:
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
       npm install -g bootlint@1.1.0;
-      pip install --user html5validator==0.3.3 ruamel.yaml==0.2.2 robotframework==3.2.2 robotframework-lint==1.1 ansible==2.9.2 ansible-lint==4.2.0;
+      pip install --user html5validator==0.3.3 ruamel.yaml.clib==0.2.2 robotframework==3.2.2 robotframework-lint==1.1 ansible==2.9.2 ansible-lint==4.2.0;
       if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
         gem install danger:8.2.2 nokogiri:1.10.10 --no-document;
       fi;
