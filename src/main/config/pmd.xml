@@ -20,6 +20,7 @@
 	<rule ref="category/java/bestpractices.xml/CheckResultSet" />
 	<rule ref="category/java/bestpractices.xml/ConstantsInInterface" />
 	<rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitchStmt" />
+	<rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
 	<!--<rule ref="category/java/bestpractices.xml/JUnit4SuitesShouldUseSuiteAnnotation" />-->
 	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseAfterAnnotation" />
 	<rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseBeforeAnnotation" />
@@ -138,6 +139,7 @@
 	<rule ref="category/java/design.xml/CouplingBetweenObjects" />
 	<!-- We use ModifiedCyclomaticComplexity -->
 	<!--<rule ref="category/java/design.xml/CyclomaticComplexity" />-->
+	<!--<rule ref="category/java/design.xml/DataClass" />-->
 	<rule ref="category/java/design.xml/DoNotExtendJavaLangError" />
 	<rule ref="category/java/design.xml/ExceptionAsFlowControl" />
 	<rule ref="category/java/design.xml/ExcessiveClassLength" />
@@ -208,6 +210,7 @@
 	<!--<rule ref="category/java/errorprone.xml/DataflowAnomalyAnalysis" />-->
 	<rule ref="category/java/errorprone.xml/DoNotCallGarbageCollectionExplicitly" />
 	<rule ref="category/java/errorprone.xml/DoNotCallSystemExit" />
+	<rule ref="category/java/errorprone.xml/DoNotExtendJavaLangThrowable" />
 	<rule ref="category/java/errorprone.xml/DoNotThrowExceptionInFinally" />
 	<rule ref="category/java/errorprone.xml/DontImportSun" />
 	<rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices" />
@@ -281,6 +284,7 @@
 	<rule ref="category/java/performance.xml/AddEmptyString" />
 	<rule ref="category/java/performance.xml/AppendCharacterWithChar" />
 	<rule ref="category/java/performance.xml/AvoidArrayLoops" />
+	<rule ref="category/java/performance.xml/AvoidFileStream" />
 	<rule ref="category/java/performance.xml/AvoidInstantiatingObjectsInLoops" />
 	<rule ref="category/java/performance.xml/AvoidUsingShortType" />
 	<rule ref="category/java/performance.xml/BigIntegerInstantiation" />
