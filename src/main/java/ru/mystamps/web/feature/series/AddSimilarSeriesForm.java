@@ -44,6 +44,7 @@ public class AddSimilarSeriesForm implements AddSimilarSeriesDto {
 	private Set<Integer> similarSeriesIds;
 	
 	@NotNull
+	@Override
 	public Integer getSimilarSeriesId() {
 		if (similarSeriesId != null) {
 			return similarSeriesId;
