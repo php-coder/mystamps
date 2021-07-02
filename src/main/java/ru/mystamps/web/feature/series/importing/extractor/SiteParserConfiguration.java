@@ -30,8 +30,6 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-// optional fields can't be made final because they have setters
-@SuppressWarnings("PMD.ImmutableField")
 public class SiteParserConfiguration {
 	private final String name;
 	private final String matchedUrl;

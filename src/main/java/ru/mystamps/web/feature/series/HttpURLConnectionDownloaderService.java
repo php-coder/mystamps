@@ -46,7 +46,7 @@ public class HttpURLConnectionDownloaderService implements DownloaderService {
 	
 	// We don't support redirects because they allow to bypass some of our validations.
 	// FIXME: How exactly redirects can harm?
-	@SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.ImmutableField"})
+	@SuppressWarnings("PMD.RedundantFieldInitializer")
 	private boolean followRedirects = false;
 	
 	// Only types listed here will be downloaded. For other types, INVALID_FILE_TYPE error

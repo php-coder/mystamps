@@ -40,12 +40,7 @@ import java.util.stream.Collectors;
 @Getter(AccessLevel.PROTECTED)
 @Setter(AccessLevel.PROTECTED)
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-@SuppressWarnings({
-	"PMD.GodClass",
-	"PMD.TooManyMethods",
-	// the fields are effectively final but I keep them non-final to simplify testing
-	"PMD.ImmutableField"
-})
+@SuppressWarnings({"PMD.GodClass", "PMD.TooManyMethods"})
 public class JsoupSiteParser implements SiteParser {
 	private static final Logger LOG = LoggerFactory.getLogger(JsoupSiteParser.class);
 	
