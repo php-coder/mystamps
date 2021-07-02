@@ -32,6 +32,5 @@ import ru.mystamps.web.support.togglz.TogglzConfig;
 	TogglzConfig.class
 })
 @EnableTransactionManagement
-@SuppressWarnings({ "checkstyle:hideutilityclassconstructor", "PMD.UseUtilityClass" })
 public class ApplicationContext {
 }
