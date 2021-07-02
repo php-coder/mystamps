@@ -185,7 +185,9 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		params.put("request_id", requestId);
 		params.put("category_id", data.getCategoryId());
 		params.put("country_id", data.getCountryId());
-		params.put("image_url", data.getImageUrl());
+		List<String> imageUrls = data.getImageUrls();
+		String imageUrl = imageUrls == null || imageUrls.isEmpty() ? null : imageUrls.get(0);
+		params.put("image_url", imageUrl);
 		params.put("release_day", data.getReleaseDay());
 		params.put("release_month", data.getReleaseMonth());
 		params.put("release_year", data.getReleaseYear());

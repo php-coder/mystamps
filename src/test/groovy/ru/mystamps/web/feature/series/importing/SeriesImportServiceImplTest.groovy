@@ -519,19 +519,15 @@ class SeriesImportServiceImplTest extends Specification {
 	def 'saveParsedData() should save series parsed data'() {
 		given:
 			Integer expectedRequestId = Random.id()
-			String expectedImageUrl = Random.url()
+			List<String> expectedImageUrls = Collections.singletonList(Random.url())
 		when:
-			service.saveParsedData(
-				expectedRequestId,
-				TestObjects.createSeriesExtractedInfo(),
-				Collections.singletonList(expectedImageUrl)
-			)
+			service.saveParsedData(expectedRequestId, TestObjects.createSeriesExtractedInfo(), expectedImageUrls)
 		then:
 			1 * seriesImportDao.addParsedData(
 				expectedRequestId,
 				{ AddSeriesParsedDataDbDto parsedData ->
 					// other members are tested in another test
-					assert parsedData?.imageUrl == expectedImageUrl
+					assert parsedData?.imageUrls == expectedImageUrls
 					assert DateUtils.roughlyEqual(parsedData?.createdAt, new Date())
 					assert DateUtils.roughlyEqual(parsedData?.updatedAt, new Date())
 					return true

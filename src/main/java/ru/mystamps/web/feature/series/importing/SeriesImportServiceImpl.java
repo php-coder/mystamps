@@ -186,8 +186,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		Integer countryId = getFirstElement(seriesInfo.getCountryIds());
 		
 		AddSeriesParsedDataDbDto seriesParsedData = new AddSeriesParsedDataDbDto();
-		String imageUrl = getFirstElement(imageUrls);
-		seriesParsedData.setImageUrl(imageUrl);
+		seriesParsedData.setImageUrls(imageUrls);
 		Date now = new Date();
 		seriesParsedData.setCreatedAt(now);
 		seriesParsedData.setUpdatedAt(now);

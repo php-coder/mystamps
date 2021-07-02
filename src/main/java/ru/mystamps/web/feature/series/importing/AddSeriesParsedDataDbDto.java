@@ -22,6 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ import java.util.Date;
 public class AddSeriesParsedDataDbDto {
 	private Integer categoryId;
 	private Integer countryId;
-	private String imageUrl;
+	private List<String> imageUrls;
 	private Integer releaseDay;
 	private Integer releaseMonth;
 	private Integer releaseYear;
@@ -39,10 +40,12 @@ public class AddSeriesParsedDataDbDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	// they aren't useless
+	@SuppressWarnings("PMD.UselessParentheses")
 	public boolean hasAtLeastOneFieldFilled() {
 		return categoryId != null
 			|| countryId != null
-			|| imageUrl != null
+			|| (imageUrls != null && !imageUrls.isEmpty())
 			|| releaseYear != null
 			|| quantity != null
 			|| perforated != null
