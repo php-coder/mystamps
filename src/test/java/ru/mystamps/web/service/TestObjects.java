@@ -263,10 +263,9 @@ public final class TestObjects {
 			month = Random.monthOfYear();
 		}
 		
-		return new SeriesParsedDataDto(
+		SeriesParsedDataDto dto = new SeriesParsedDataDto(
 			new LinkEntityDto(Random.id(), categorySlug, categoryName),
 			new LinkEntityDto(Random.id(), countrySlug, countryName),
-			Random.url(),
 			day,
 			month,
 			Random.issueYear(),
@@ -274,6 +273,8 @@ public final class TestObjects {
 			Random.perforated(),
 			String.join(",", Random.michelNumbers())
 		);
+		dto.setImageUrls(Collections.singletonList(Random.url()));
+		return dto;
 	}
 	
 	public static RawParsedDataDto createRawParsedDataDto() {

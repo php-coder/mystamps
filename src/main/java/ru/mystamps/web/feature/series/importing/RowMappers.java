@@ -57,7 +57,6 @@ final class RowMappers {
 			"country_name"
 		);
 		
-		String imageUrl = rs.getString("image_url");
 		Integer releaseDay = JdbcUtils.getInteger(rs, "release_day");
 		Integer releaseMonth = JdbcUtils.getInteger(rs, "release_month");
 		Integer releaseYear = JdbcUtils.getInteger(rs, "release_year");
@@ -68,7 +67,6 @@ final class RowMappers {
 		return new SeriesParsedDataDto(
 			category,
 			country,
-			imageUrl,
 			releaseDay,
 			releaseMonth,
 			releaseYear,

@@ -48,6 +48,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	private final String addParsedDataSql;
 	private final String addParsedImageUrlSql;
 	private final String findParsedDataSql;
+	private final String findParsedImageUrlsSql;
 	private final String findRequestInfoSql;
 	private final String findAllSql;
 	
@@ -63,6 +64,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		this.addParsedDataSql              = env.getRequiredProperty("series_import_requests.add_series_parsed_data");
 		this.addParsedImageUrlSql          = env.getRequiredProperty("series_import_requests.add_series_parsed_image_url");
 		this.findParsedDataSql             = env.getRequiredProperty("series_import_requests.find_series_parsed_data_by_request_id");
+		this.findParsedImageUrlsSql        = env.getRequiredProperty("series_import_requests.find_series_parsed_image_urls_by_request_id");
 		this.findRequestInfoSql            = env.getRequiredProperty("series_import_requests.find_request_info_by_series_id");
 		this.findAllSql                    = env.getRequiredProperty("series_import_requests.find_all");
 	}
@@ -252,11 +254,23 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 			params.put("request_id", requestId);
 			params.put("lang", lang);
 			
-			return jdbcTemplate.queryForObject(
+			SeriesParsedDataDto parsedData = jdbcTemplate.queryForObject(
 				findParsedDataSql,
 				params,
 				RowMappers::forSeriesParsedDataDto
 			);
+			if (parsedData == null) {
+				return null;
+			}
+			
+			List<String> imageUrls = jdbcTemplate.queryForList(
+				findParsedImageUrlsSql,
+				Collections.singletonMap("request_id", requestId),
+				String.class
+			);
+			parsedData.setImageUrls(imageUrls);
+			
+			return parsedData;
 			
 		} catch (EmptyResultDataAccessException ignored) {
 			return null;

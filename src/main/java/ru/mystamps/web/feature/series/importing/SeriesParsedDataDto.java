@@ -19,18 +19,29 @@ package ru.mystamps.web.feature.series.importing;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import ru.mystamps.web.common.LinkEntityDto;
+
+import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
 public class SeriesParsedDataDto {
 	private final LinkEntityDto category;
 	private final LinkEntityDto country;
-	private final String imageUrl;
 	private final Integer issueDay;
 	private final Integer issueMonth;
 	private final Integer issueYear;
 	private final Integer quantity;
 	private final Boolean perforated;
 	private final String michelNumbers;
+	
+	@Setter
+	private List<String> imageUrls;
+	
+	// for backward compatibility
+	public String getImageUrl() {
+		return imageUrls == null || imageUrls.isEmpty() ? null : imageUrls.get(0);
+	}
+	
 }
