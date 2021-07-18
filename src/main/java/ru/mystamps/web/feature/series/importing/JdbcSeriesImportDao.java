@@ -22,10 +22,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +46,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 	private final String addRawContentSql;
 	private final String findRawContentSql;
 	private final String addParsedDataSql;
+	private final String addParsedImageUrlSql;
 	private final String findParsedDataSql;
 	private final String findRequestInfoSql;
 	private final String findAllSql;
@@ -58,6 +61,7 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		this.addRawContentSql              = env.getRequiredProperty("series_import_requests.add_raw_content");
 		this.findRawContentSql             = env.getRequiredProperty("series_import_requests.find_raw_content_by_request_id");
 		this.addParsedDataSql              = env.getRequiredProperty("series_import_requests.add_series_parsed_data");
+		this.addParsedImageUrlSql          = env.getRequiredProperty("series_import_requests.add_series_parsed_image_url");
 		this.findParsedDataSql             = env.getRequiredProperty("series_import_requests.find_series_parsed_data_by_request_id");
 		this.findRequestInfoSql            = env.getRequiredProperty("series_import_requests.find_request_info_by_series_id");
 		this.findAllSql                    = env.getRequiredProperty("series_import_requests.find_all");
@@ -185,9 +189,6 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 		params.put("request_id", requestId);
 		params.put("category_id", data.getCategoryId());
 		params.put("country_id", data.getCountryId());
-		List<String> imageUrls = data.getImageUrls();
-		String imageUrl = imageUrls == null || imageUrls.isEmpty() ? null : imageUrls.get(0);
-		params.put("image_url", imageUrl);
 		params.put("release_day", data.getReleaseDay());
 		params.put("release_month", data.getReleaseMonth());
 		params.put("release_year", data.getReleaseYear());
@@ -204,6 +205,43 @@ public class JdbcSeriesImportDao implements SeriesImportDao {
 			"Unexpected number of affected rows after adding parsed data to request #%d: %d",
 			requestId,
 			affected
+		);
+		
+		// for backward compatibility
+		addParsedImageUrls(requestId, data.getImageUrls());
+	}
+	
+	@Override
+	@SuppressWarnings("checkstyle:linelength")
+	public void addParsedImageUrls(Integer requestId, List<String> imageUrls) {
+		if (imageUrls == null || imageUrls.isEmpty()) {
+			return;
+		}
+		
+		// manually construct SqlParameterSource[] instead of using
+		// SqlParameterSourceUtils.createBatch() in order to reduce a number of temporary objects.
+		// See also: https://www.baeldung.com/spring-jdbc-jdbctemplate#2-batch-operations-using-namedparameterjdbctemplate
+		SqlParameterSource[] batchedParams = imageUrls.stream()
+			.map(imageUrl -> new MapSqlParameterSource("request_id", requestId).addValue("url", imageUrl))
+			.toArray(size -> new SqlParameterSource[size]);
+		
+		int[] affected = jdbcTemplate.batchUpdate(addParsedImageUrlSql, batchedParams);
+		
+		Validate.validState(
+			affected.length == batchedParams.length,
+			"Unexpected number of batches after inserting parsed image urls of request #%d: %d (expected: %d)",
+			requestId,
+			affected.length,
+			batchedParams.length
+		);
+		
+		long affectedRows = Arrays.stream(affected).sum();
+		Validate.validState(
+			affectedRows == imageUrls.size(),
+			"Unexpected number of affected rows after inserting parsed image urls of request #%d: %d (expected: %d)",
+			requestId,
+			affectedRows,
+			imageUrls.size()
 		);
 	}
 	

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	
+	<changeSet id="create-series_import_parsed_image_urls-table" author="php-coder" context="scheme">
+		
+		<createTable tableName="series_import_parsed_image_urls">
+			<column name="request_id" type="INTEGER">
+				<constraints
+					nullable="false"
+					references="series_import_requests(id)"
+					foreignKeyName="fk_series_import_parsed_image_urls_series_import_requests_id" />
+			</column>
+			<column name="url" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addUniqueConstraint
+			tableName="series_import_parsed_image_urls"
+			columnNames="request_id, url"
+			constraintName="uc_series_import_parsed_image_urls_request_id_url" />
+		
+	</changeSet>
+	
+	<changeSet id="migrate-existing-image-urls" author="php-coder" context="test-data, prod-data">
+		<comment>Migrates data from series_import_parsed_data.image_url to series_import_parsed_image_urls</comment>
+		
+		<sql>
+			INSERT INTO series_import_parsed_image_urls(request_id, url)
+			     SELECT request_id, image_url
+			       FROM series_import_parsed_data
+			      WHERE image_url IS NOT NULL
+			   ORDER BY request_id
+		</sql>
+		
+		<rollback>
+			<sql>
+				DELETE FROM series_import_parsed_image_urls
+			</sql>
+		</rollback>
+		
+	</changeSet>
+	
+	<changeSet id="drop-image_url-column-from-series_import_parsed_data-table" author="php-coder" context="scheme">
+		<dropColumn tableName="series_import_parsed_data" columnName="image_url" />
+	</changeSet>
+	
+</databaseChangeLog>

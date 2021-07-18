@@ -28,6 +28,7 @@ public interface SeriesImportDao {
 	void addRawContent(Integer requestId, Date createdAt, Date updatedAt, String content);
 	String findRawContentByRequestId(Integer requestId);
 	void addParsedData(Integer requestId, AddSeriesParsedDataDbDto data);
+	void addParsedImageUrls(Integer requestId, List<String> imageUrls);
 	SeriesParsedDataDto findParsedDataByRequestId(Integer requestId, String lang);
 	ImportRequestInfo findRequestInfo(Integer seriesId);
 	List<ImportRequestFullInfo> findAll();

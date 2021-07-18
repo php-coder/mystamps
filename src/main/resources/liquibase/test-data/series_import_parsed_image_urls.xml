@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	
+	<changeSet id="add-series-parsed-image-urls-for-gh1256" author="php-coder" context="test-data">
+		
+		<insert tableName="series_import_parsed_image_urls">
+			<column name="request_id" valueComputed="(SELECT id FROM series_import_requests WHERE url = 'http://example.com/issue/1256')" />
+			<column name="url" value="http://127.0.0.1:8080/image/1" />
+		</insert>
+		
+	</changeSet>
+	
+</databaseChangeLog>
