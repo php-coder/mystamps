@@ -3,7 +3,7 @@
 	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 	
 	<changeSet id="modify-collections_series-condition-field" author="php-coder" context="scheme">
 		
@@ -21,6 +21,7 @@
 		<setColumnRemarks
 			tableName="collections_series"
 			columnName="cond"
+			columnDataType="VARCHAR(9)"
 			remarks="Example: MNH, CANCELLED" />
 		
 	</changeSet>
@@ -41,6 +42,7 @@
 		<setColumnRemarks
 			tableName="series_sales"
 			columnName="cond"
+			columnDataType="VARCHAR(9)"
 			remarks="Example: MNH, CANCELLED" />
 		
 	</changeSet>
