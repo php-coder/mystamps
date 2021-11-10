@@ -1,3 +1,5 @@
+import './CatalogUtils.js'
+
 describe("CatalogUtils.expandNumbers()", function() {
 	
 	it("should return empty string for empty string", function() {

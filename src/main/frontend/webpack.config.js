@@ -5,6 +5,7 @@ const webpack = require('webpack');
 module.exports = {
     mode: 'production',
     entry: {
+        'utils/CatalogUtils':               './src/utils/CatalogUtils.js',
         'utils/DateUtils':                  './src/utils/DateUtils.js',
 
         'components/AddCatalogNumbersForm': './src/components/AddCatalogNumbersForm.js',

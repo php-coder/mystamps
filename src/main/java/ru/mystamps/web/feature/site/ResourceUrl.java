@@ -35,7 +35,7 @@ public final class ResourceUrl {
 	public static final String RESOURCES_VERSION = "v0.4.6.0";
 
 	// CheckStyle: ignore LineLength for next 17 lines
-	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/CatalogUtils.min.js";
+	private static final String CATALOG_UTILS_JS      = "/public/js/" + RESOURCES_VERSION + "/utils/CatalogUtils.min.js";
 	private static final String COLLECTION_INFO_JS     = "/public/js/" + RESOURCES_VERSION + "/collection/info.min.js";
 	private static final String DATE_UTILS_JS          = "/public/js/" + RESOURCES_VERSION + "/utils/DateUtils.min.js";
 	private static final String MAIN_CSS               = "/static/"    + RESOURCES_VERSION + "/styles/main.min.css";

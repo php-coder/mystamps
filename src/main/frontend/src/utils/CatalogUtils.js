@@ -75,3 +75,5 @@ var CatalogUtils = {
 	}
 	
 }
+
+window.CatalogUtils = CatalogUtils;
