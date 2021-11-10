@@ -1,3 +1,5 @@
+import './DateUtils.js'
+
 describe('DateUtils.formatDateToDdMmYyyy()', function() {
 	
 	it('should return a string in a format dd.mm.yyyy', function() {

@@ -16,3 +16,5 @@ var DateUtils = {
 	}
 	
 }
+
+window.DateUtils = DateUtils;
