@@ -45,7 +45,7 @@ If you want to run it locally, follow the instructions:
 * *Database migrations*: Liquibase
 * *Validation*: Hibernate Validator
 * *Logging*: Slf4j (Logback)
-* *Unit tests*: Groovy with Spock Framework or JUnit (for Java code), jasmine (for JavaScript code)
+* *Unit tests*: Groovy with Spock Framework or JUnit (for Java code), Jest (for JavaScript code)
 * *Integration tests*: Selenium3, RobotFramework, WireMock
 * *Deployment*: bash, Ansible, Terraform
 * *Others*: Lombok, Togglz, WebJars, AssertJ

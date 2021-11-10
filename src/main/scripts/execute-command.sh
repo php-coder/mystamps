@@ -88,10 +88,12 @@ case ${1:-} in
 			-Denforcer.skip=true \
 			-DskipUnitTests=true
 		;;
-	'jasmine')
+	'jest')
 		exec "$MVN" \
 			--batch-mode \
-			jasmine:test
+			--activate-profiles frontend \
+			frontend:npm \
+			-Dfrontend.npm.arguments='test'
 		;;
 	'pmd')
 		exec "$MVN" \
@@ -144,7 +146,7 @@ case ${1:-} in
 		echo >&2 '- enforcer'
 		echo >&2 '- html5validator'
 		echo >&2 '- integration-tests'
-		echo >&2 '- jasmine'
+		echo >&2 '- jest'
 		echo >&2 '- pmd'
 		echo >&2 '- rflint'
 		echo >&2 '- shellcheck'

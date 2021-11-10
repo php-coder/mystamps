@@ -65,7 +65,7 @@ POM_STATUS=
 BOOTLINT_STATUS=
 RFLINT_STATUS=
 SHELLCHECK_STATUS=
-JASMINE_STATUS=
+JEST_STATUS=
 HTML_STATUS=
 ENFORCER_STATUS=
 TEST_STATUS=
@@ -86,7 +86,7 @@ POM_TIME=0
 BOOTLINT_TIME=0
 RFLINT_TIME=0
 SHELLCHECK_TIME=0
-JASMINE_TIME=0
+JEST_TIME=0
 HTML_TIME=0
 ENFORCER_TIME=0
 TEST_TIME=0
@@ -149,7 +149,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				fi
 				
 				[ "$AFFECTS_GROOVY_FILES" != 'no' ] || CODENARC_STATUS=skip
-				[ "$AFFECTS_JS_FILES" != 'no' ] || JASMINE_STATUS=skip
+				[ "$AFFECTS_JS_FILES" != 'no' ] || JEST_STATUS=skip
 			fi
 			
 			if [ "$AFFECTS_TRAVIS_CFG" = 'no' ]; then
@@ -226,12 +226,12 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	print_status "$SHELLCHECK_STATUS" "$SHELLCHECK_TIME" 'Run shellcheck'
 	
-	if [ "$JASMINE_STATUS" != 'skip' ]; then
+	if [ "$JEST_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
-		"$EXEC_CMD" jasmine >jasmine.log 2>&1 || JASMINE_STATUS=fail
-		JASMINE_TIME=$((SECONDS - START_TIME))
+		"$EXEC_CMD" jest >jest.log 2>&1 || JEST_STATUS=fail
+		JEST_TIME=$((SECONDS - START_TIME))
 	fi
-	print_status "$JASMINE_STATUS" "$JASMINE_TIME" 'Run JavaScript unit tests'
+	print_status "$JEST_STATUS" "$JEST_TIME" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		"$EXEC_CMD" html5validator >validator.log 2>&1 || HTML_STATUS=fail
@@ -299,7 +299,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$BOOTLINT_STATUS" = 'skip' ]       || print_log bootlint.log       'Run bootlint'
 	[ "$RFLINT_STATUS" = 'skip' ]         || print_log rflint.log         'Run robot framework lint'
 	[ "$SHELLCHECK_STATUS" = 'skip' ]     || print_log shellcheck.log     'Run shellcheck'
-	[ "$JASMINE_STATUS" = 'skip' ]        || print_log jasmine.log        'Run JavaScript unit tests'
+	[ "$JEST_STATUS" = 'skip' ]           || print_log jest.log           'Run JavaScript unit tests'
 	[ "$HTML_STATUS" = 'skip' ]           || print_log validator.log      'Run html5validator'
 	[ "$ENFORCER_STATUS" = 'skip' ]       || print_log enforcer.log       'Run maven-enforcer-plugin'
 	[ "$TEST_STATUS" = 'skip' ]           || print_log test.log           'Run unit tests'
@@ -314,8 +314,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi

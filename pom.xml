@@ -596,7 +596,6 @@
 		<htmlunit.version>2.46.0</htmlunit.version>
 		
 		<jacoco.plugin.version>0.8.6</jacoco.plugin.version>
-		<jasmine.plugin.version>2.2</jasmine.plugin.version>
 		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
@@ -754,21 +753,6 @@
 					<sortProperties>true</sortProperties>
 					<!-- Use tabs instead of spaces for indentation -->
 					<nrOfIndentSpace>-1</nrOfIndentSpace>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>com.github.searls</groupId>
-				<artifactId>jasmine-maven-plugin</artifactId>
-				<version>${jasmine.plugin.version}</version>
-				<configuration>
-					<!--
-						Remove explicit specifying of version when phantomjs will be available for Linux
-						https://github.com/searls/jasmine-maven-plugin/issues/278
-					-->
-					<phantomjs>
-						<version>1.9.8</version>
-					</phantomjs>
 				</configuration>
 			</plugin>
 			
