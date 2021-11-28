@@ -92,6 +92,7 @@ case ${1:-} in
 		exec "$MVN" \
 			--batch-mode \
 			--activate-profiles frontend \
+			frontend:install-node-and-npm \
 			frontend:npm \
 			-Dfrontend.npm.arguments='test'
 		;;
