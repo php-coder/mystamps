@@ -94,7 +94,7 @@ case ${1:-} in
 			--activate-profiles frontend \
 			frontend:install-node-and-npm \
 			frontend:npm \
-			-Dfrontend.npm.arguments='test'
+			-Dfrontend.npm.arguments='install-ci-test'
 		;;
 	'pmd')
 		exec "$MVN" \
