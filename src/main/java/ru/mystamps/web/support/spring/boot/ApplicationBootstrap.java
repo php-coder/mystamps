@@ -29,22 +29,25 @@ import ru.mystamps.web.config.DispatcherServletContext;
 // PMD: "All methods are static" here because it's a program entry point.
 // CheckStyle: I cannot declare the constructor as private because app won't start.
 @SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
-@EnableAutoConfiguration
-@Import({
-	ApplicationContext.class,
-	DispatcherServletContext.class,
-	ThymeleafViewResolverInitializingBean.class,
-	JettyWebServerFactoryCustomizer.class,
-	ErrorPagesCustomizer.class
-})
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) {
 		ConfigurableApplicationContext context =
-			SpringApplication.run(ApplicationBootstrap.class, args);
+			SpringApplication.run(DefaultStartup.class, args);
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
+	}
+
+	@EnableAutoConfiguration
+	@Import({
+		ApplicationContext.class,
+		DispatcherServletContext.class,
+		ThymeleafViewResolverInitializingBean.class,
+		JettyWebServerFactoryCustomizer.class,
+		ErrorPagesCustomizer.class
+	})
+	public static class DefaultStartup {
 	}
 	
 }
