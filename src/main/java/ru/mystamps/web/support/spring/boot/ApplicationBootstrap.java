@@ -40,8 +40,6 @@ import ru.mystamps.web.config.DispatcherServletContext;
 public class ApplicationBootstrap {
 	
 	public static void main(String... args) {
-		System.setProperty("java.awt.headless", "true");
-		
 		ConfigurableApplicationContext context =
 			SpringApplication.run(ApplicationBootstrap.class, args);
 		
