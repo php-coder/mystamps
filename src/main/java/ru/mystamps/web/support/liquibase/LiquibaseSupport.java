@@ -27,6 +27,7 @@ import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.integration.spring.SpringLiquibase;
 import liquibase.integration.spring.SpringResourceAccessor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
@@ -40,6 +41,7 @@ import java.util.Collections;
 /**
  * Provides ability to run Spring Boot application to only validate Liquibase migrations.
  */
+@Slf4j
 public final class LiquibaseSupport {
 	
 	private LiquibaseSupport() {
@@ -104,8 +106,17 @@ public final class LiquibaseSupport {
 	// NOTE: spring.liquibase.labels aren't supported as we don't use them
 	private static void validate(Liquibase liquibase, SpringLiquibase springLiquibase)
 		throws LiquibaseException {
-		DatabaseChangeLog changeLog = liquibase.getDatabaseChangeLog();
-		changeLog.validate(liquibase.getDatabase(), springLiquibase.getContexts());
+		
+		log.info("Validating the migrations");
+		try {
+			DatabaseChangeLog changeLog = liquibase.getDatabaseChangeLog();
+			changeLog.validate(liquibase.getDatabase(), springLiquibase.getContexts());
+			log.info("Migrations are valid");
+
+		} catch (LiquibaseException ex) {
+			log.error("Failed to validate migrations", ex);
+			throw ex;
+		}
 	}
 	
 	// CheckStyle: ignore LineLength for next 2 lines
