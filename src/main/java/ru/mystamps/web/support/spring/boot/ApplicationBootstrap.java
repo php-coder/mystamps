@@ -54,7 +54,7 @@ public class ApplicationBootstrap {
 		}
 		
 		ConfigurableApplicationContext context =
-			SpringApplication.run(DefaultStartup.class, args);
+			new SpringApplication(DefaultStartup.class).run(args);
 		
 		FeatureManager featureManager = context.getBean(FeatureManager.class);
 		StaticFeatureManagerProvider.setFeatureManager(featureManager);
