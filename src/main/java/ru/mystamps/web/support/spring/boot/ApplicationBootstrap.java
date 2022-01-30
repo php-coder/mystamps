@@ -17,6 +17,7 @@
  */
 package ru.mystamps.web.support.spring.boot;
 
+import liquibase.exception.LiquibaseException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -25,13 +26,33 @@ import org.togglz.core.context.StaticFeatureManagerProvider;
 import org.togglz.core.manager.FeatureManager;
 import ru.mystamps.web.config.ApplicationContext;
 import ru.mystamps.web.config.DispatcherServletContext;
+import ru.mystamps.web.support.liquibase.LiquibaseSupport;
 
 // PMD: "All methods are static" here because it's a program entry point.
 // CheckStyle: I cannot declare the constructor as private because app won't start.
 @SuppressWarnings({ "PMD.UseUtilityClass", "checkstyle:hideutilityclassconstructor" })
 public class ApplicationBootstrap {
 	
-	public static void main(String... args) {
+	public static void main(String... args) throws LiquibaseException {
+		// When the application is started as
+		//
+		//     java -jar target/mystamps.war liquibase validate
+		// or
+		//    ./mvnw spring-boot:run -Dspring-boot.run.arguments='liquibase,validate'
+		//
+		// we don't run a full application but loads only Liquibase-related classes
+		boolean executeOnlyLiquibase = args.length == 2
+			&& "liquibase".equals(args[0])
+			&& "validate".equals(args[1]);
+		if (executeOnlyLiquibase) {
+			ConfigurableApplicationContext context = LiquibaseSupport
+				.createSpringApplication()
+				.run(args);
+			
+			LiquibaseSupport.validate(context);
+			return;
+		}
+		
 		ConfigurableApplicationContext context =
 			SpringApplication.run(DefaultStartup.class, args);
 		
