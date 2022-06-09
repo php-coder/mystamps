@@ -626,7 +626,7 @@
 		<license.plugin.version>3.0</license.plugin.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<liquibase.version>4.7.1</liquibase.version>
+		<liquibase.version>4.11.0</liquibase.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<lombok.version>1.18.22</lombok.version>
