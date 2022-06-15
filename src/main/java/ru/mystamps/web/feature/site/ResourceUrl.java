@@ -61,12 +61,11 @@ public final class ResourceUrl {
 	private static final String JQUERY_JS          = "/jquery/1.9.1/jquery.min.js";
 	private static final String REACT_JS           = "16.8.6/umd/react.production.min.js";
 	private static final String REACT_DOM_JS       = "16.8.6/umd/react-dom.production.min.js";
-	private static final String SELECTIZE_JS       = "/0.12.5/js/standalone/selectize.min.js";
+	private static final String SELECTIZE_JS       = "/0.13.3/js/standalone/selectize.min.js";
 	
-	// CheckStyle: ignore LineLength for next 3 lines
-	// FIXME: use minimal version of CSS file when it will be available (https://github.com/webjars/selectize.js/issues/3)
-	private static final String SELECTIZE_CSS      = "/public/selectize/0.12.5/css/selectize.bootstrap3.css";
-	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css";
+	// CheckStyle: ignore LineLength for next 2 lines
+	private static final String SELECTIZE_CSS      = "/public/selectize/0.13.3/css/selectize.bootstrap3.css";
+	private static final String SELECTIZE_CSS_CDN  = "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap3.min.css";
 	
 	private ResourceUrl() {
 	}

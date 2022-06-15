@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" th:href="${BOOTSTRAP_CSS}" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/usrz/bootstrap-languages@3ac2a3d2b27ac43a471cd99e79d378a03b2c6b5f/languages.min.css" th:href="${BOOTSTRAP_LANGUAGE}" />
 		<link rel="stylesheet" href="../../static/styles/main.css" th:href="${MAIN_CSS}" />
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap3.min.css" th:href="${SELECTIZE_CSS}" />
 	</head>
 	<body
 		th:data-suggest-category-url="${addSeriesForm.category != null and addSeriesForm.category.slug != null ? '' : '__@{${SUGGEST_SERIES_CATEGORY}}__'}"
@@ -526,7 +526,7 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="http://yandex.st/jquery/1.9.1/jquery.min.js" th:src="${JQUERY_JS}"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" th:src="${BOOTSTRAP_JS}"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.5/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js" th:src="${SELECTIZE_JS}"></script>
 		
 		<script src="../../../../../../target/classes/js/utils/CatalogUtils.min.js" th:src="${CATALOG_UTILS_JS}"></script>
 		<script src="../../../../javascript/series/add.js" th:src="${SERIES_ADD_JS}"></script>
