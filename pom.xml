@@ -594,7 +594,7 @@
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<htmlunit.version>2.46.0</htmlunit.version>
 		
-		<jacoco.plugin.version>0.8.6</jacoco.plugin.version>
+		<jacoco.plugin.version>0.8.8</jacoco.plugin.version>
 		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
