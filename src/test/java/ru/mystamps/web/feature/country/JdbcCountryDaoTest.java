@@ -23,7 +23,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mystamps.web.config.DaoConfig;
@@ -31,9 +30,7 @@ import ru.mystamps.web.tests.Random;
 
 import java.util.Map;
 
-@JdbcTest
-@ContextConfiguration(classes = DaoConfig.class)
-@TestPropertySource(
+@JdbcTest(
 	properties = {
 		// don't load test data, start with an empty database
 		"spring.liquibase.contexts=scheme,init-data",
@@ -41,6 +38,7 @@ import java.util.Map;
 		// comment this out when you need to debug tests. See also logback-test.xml
 		"logging.level.root=WARN", "logging.level.ru.mystamps=WARN"
 	})
+@ContextConfiguration(classes = DaoConfig.class)
 @ExtendWith(SpringExtension.class)
 public class JdbcCountryDaoTest implements WithAssertions {
 	
