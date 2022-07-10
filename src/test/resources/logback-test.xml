@@ -22,6 +22,16 @@
 	</root>
 	<!-- End of org/springframework/boot/logging/logback/base.xml content -->
 	
+	<!--
+		Enable to debug caching of the Spring contexts.
+		See: https://rieckpil.de/improve-build-times-with-context-caching-from-spring-test/
+	-->
+	<!--
+	<logger name="org.springframework.test.context.cache" level="DEBUG">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	-->
+	
 	<logger name="org.springframework.test.context.support.AbstractContextLoader" level="WARN">
 		<appender-ref ref="CONSOLE" />
 	</logger>
