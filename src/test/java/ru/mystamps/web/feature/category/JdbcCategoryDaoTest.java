@@ -40,9 +40,7 @@ import java.util.Map;
 		// overrides settings from application-test.properties to keep the console clean,
 		// comment this out when you need to debug tests. See also logback-test.xml
 		"logging.level.root=WARN", "logging.level.ru.mystamps=WARN"
-	},
-	// @todo #1143 Improve a way of importing properties files in the tests
-	locations = "/sql/category_dao_queries.properties")
+	})
 @ExtendWith(SpringExtension.class)
 public class JdbcCategoryDaoTest implements WithAssertions {
 	
