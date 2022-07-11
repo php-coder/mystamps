@@ -25,6 +25,7 @@ services:
     depends_on:
       - db
   db:
+    # https://github.com/docker-library/postgres/blob/ad464b0375fc64e70e01305bf93183428a2ef0ec/11/Dockerfile
     image: postgres:11.3
     environment:
       - POSTGRES_USER=mystamps

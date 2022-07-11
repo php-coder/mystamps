@@ -25,6 +25,7 @@ services:
     depends_on:
       - db
   db:
+    # https://github.com/docker-library/mysql/blob/429047ac5e28d59d40a2ac84a189c9d25310f060/5.7/Dockerfile
     image: mysql:5.7.20
     command: --character-set-server=utf8
     environment:
