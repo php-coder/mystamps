@@ -400,6 +400,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.teketik</groupId>
+			<artifactId>spring-test-context-cache-limiter</artifactId>
+			<version>${spring-test-context-cache-limiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>io.qala.datagen</groupId>
 			<artifactId>qala-datagen</artifactId>
 			<version>${datagen.version}</version>
@@ -682,6 +689,8 @@
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
 		<spring-framework.version>5.1.20.RELEASE</spring-framework.version>
+		
+		<spring-test-context-cache-limiter.version>boot2-v1.2</spring-test-context-cache-limiter.version>
 		
 		<!--
 			Define default value for spring-boot-starter-parent:
@@ -1009,6 +1018,13 @@
 				<configuration>
 					<skipTests>${skipUnitTests}</skipTests>
 					<disableXmlReport>${disableXmlReport}</disableXmlReport>
+					<systemPropertyVariables>
+						<!--
+							Specify the maximum number of contexts that should be created during unit tests
+							See for details: https://github.com/antoinemeyer/spring-test-context-cache-limiter
+						-->
+						<spring.test.context.limitSize>1</spring.test.context.limitSize>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			
