@@ -39,6 +39,7 @@ public final class SiteUrl {
 	public static final String SITE_EVENTS_PAGE    = "/site/events";
 	public static final String CSP_REPORTS_HANDLER = "/site/csp/reports";
 	
+	public static final String BAD_REQUEST_PAGE    = "/error/400";
 	public static final String FORBIDDEN_PAGE      = "/error/403";
 	public static final String NOT_FOUND_PAGE      = "/error/404";
 	public static final String INTERNAL_ERROR_PAGE = "/error/500";

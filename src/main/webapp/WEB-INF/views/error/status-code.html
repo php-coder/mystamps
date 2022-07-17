@@ -10,6 +10,7 @@
 		<meta name="robots" content="noindex" />
 		<!--/*/
 			<th:block th:switch="${#response.status}">
+			<title th:case="'400'" th:text="#{t_400_title}">400: bad request</title>
 			<title th:case="'403'" th:text="#{t_403_title}">403: forbidden</title>
 			<title th:case="'404'" th:text="#{t_404_title}">404: page not found</title>
 		/*/-->
@@ -64,6 +65,9 @@
 					</h1>
 					<h4 id="error-msg" th:switch="${#response.status}">
 						<!--/*/
+						<span th:case="'400'" th:text="#{t_400_description}" th:remove="tag">
+							Bad request
+						</span>
 						<span th:case="'403'" th:text="#{t_403_description}" th:remove="tag">
 							Forbidden
 						</span>

@@ -108,6 +108,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController(AccountUrl.AUTHENTICATION_PAGE);
 		registry.addViewController(SiteUrl.FORBIDDEN_PAGE).setViewName("error/status-code");
+		registry.addViewController(SiteUrl.BAD_REQUEST_PAGE).setViewName("error/status-code");
 	}
 	
 	@Override

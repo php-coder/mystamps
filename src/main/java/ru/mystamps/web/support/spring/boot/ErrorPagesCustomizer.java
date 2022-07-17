@@ -31,6 +31,7 @@ public class ErrorPagesCustomizer implements ErrorPageRegistrar {
 	@Override
 	public void registerErrorPages(ErrorPageRegistry registry) {
 		registry.addErrorPages(
+			new ErrorPage(HttpStatus.BAD_REQUEST, SiteUrl.BAD_REQUEST_PAGE),
 			new ErrorPage(HttpStatus.FORBIDDEN, SiteUrl.FORBIDDEN_PAGE),
 			new ErrorPage(HttpStatus.NOT_FOUND, SiteUrl.NOT_FOUND_PAGE),
 			new ErrorPage(RequestRejectedException.class, SiteUrl.NOT_FOUND_PAGE),
