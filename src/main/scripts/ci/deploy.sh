@@ -25,6 +25,10 @@ trap 'cleanup' EXIT SIGHUP SIGINT SIGTERM
 # See: https://docs.ansible.com/ansible/2.9/user_guide/connection_details.html#host-key-checking
 export ANSIBLE_HOST_KEY_CHECKING=False
 
+# Make the output of a failed task human readable.
+# See: https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#envvar-ANSIBLE_STDOUT_CALLBACK
+export ANSIBLE_STDOUT_CALLBACK=debug
+
 if [ -z "${encrypted_bf07cb25089f_key:-}" ] || [ -z "${encrypted_bf07cb25089f_iv:-}" ] ; then
 	echo >&2 'ERROR: encrypted_bf07cb25089f_key or encrypted_bf07cb25089f_iv were not defined!'
 	exit 1
