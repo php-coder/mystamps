@@ -40,9 +40,9 @@
   # The command to execute JVM is similar to ExecStart from /etc/systemd/system/mystamps.service
   - name: Ensuring whether Liquibase migrations are valid
     shell: |
+      set -o pipefail
       set -o nounset
       set -o errexit
-      set -o pipefail
       eval "$(sed -n '/^[A-Z]/s||export &|p' mystamps.conf)"
       java $JAVA_OPTS -jar mystamps-candidate.war liquibase validate
     args:
