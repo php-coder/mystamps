@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    Verify required elements appearance on the main page from an admin
 Library          SeleniumLibrary
-Resource         ../auth.steps.robot
+Resource         ../../auth.steps.robot
 Suite Setup      Before Test Suite
 Suite Teardown   Close Browser
 Force Tags       misc  main-page
