@@ -41,10 +41,12 @@
   - name: Ensuring whether Liquibase migrations are valid
     shell: |
       set -eu
+      set -o pipefail
       eval "$(sed -n '/^[A-Z]/s||export &|p' mystamps.conf)"
       java $JAVA_OPTS -jar mystamps-candidate.war liquibase validate
     args:
       chdir: /data/mystamps
+      executable: /bin/bash
     changed_when: False
     register: liquibase_validate
 
