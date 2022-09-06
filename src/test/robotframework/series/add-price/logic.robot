@@ -24,6 +24,7 @@ Before Test Suite
 	Go To                               ${SITE_URL}/series/4
 
 Add a price
+	[Tags]                            unstable
 	[Arguments]                       ${catalog}  ${price}  ${currency}
 	Select From List By Value         id:price-catalog-name  ${catalog}
 	Input Text                        id:catalog-price  ${price}
