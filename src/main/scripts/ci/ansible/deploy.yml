@@ -29,6 +29,35 @@
     become: no
     delegate_to: 127.0.0.1
 
+  - name: Copying a candidate WAR file
+    copy:
+      src: "{{ local_war_dir }}/mystamps.war"
+      dest: "{{ remote_war_dir }}/mystamps-candidate.war"
+      owner: mystamps
+      group: mystamps
+      mode: '0755'
+
+  # The command to execute JVM is similar to ExecStart from /etc/systemd/system/mystamps.service
+  - name: Ensuring whether Liquibase migrations are valid
+    shell: |
+      set -eu
+      eval "$(sed -n '/^[A-Z]/s||export &|p' mystamps.conf)"
+      java $JAVA_OPTS -jar mystamps-candidate.war liquibase validate
+    args:
+      chdir: /data/mystamps
+    changed_when: False
+    register: liquibase_validate
+
+  - name: Show stdout of liquibase validate
+    debug:
+      var: liquibase_validate.stdout_lines
+    when: not liquibase_validate.failed
+
+  - name: Show stderr of liquibase validate
+    debug:
+      var: liquibase_validate.stderr_lines
+    when: not liquibase_validate.failed
+
   - name: Stopping monitoring
     uptimerobot:
       monitorid: "{{ uptimerobot.monitorid }}"
@@ -46,8 +75,9 @@
 
   - name: Copying WAR file
     copy:
-      src: "{{ local_war_dir }}/mystamps.war"
+      src: "{{ remote_war_dir }}/mystamps-candidate.war"
       dest: "{{ remote_war_dir }}/mystamps.war"
+      remote_src: yes
       owner: mystamps
       group: mystamps
       mode: '0755'
