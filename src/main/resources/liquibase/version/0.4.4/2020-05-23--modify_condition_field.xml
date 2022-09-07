@@ -6,6 +6,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 	
 	<changeSet id="modify-collections_series-condition-field" author="php-coder" context="scheme">
+		<validCheckSum>8:e68d35a7c2773ef7e4f064a6b365a115</validCheckSum>
 		
 		<renameColumn
 			tableName="collections_series"
@@ -27,6 +28,7 @@
 	</changeSet>
 	
 	<changeSet id="modify-series_sales-condition-field" author="php-coder" context="scheme">
+		<validCheckSum>8:26084de457d9fbc7274e8828a9a9ecfc</validCheckSum>
 		
 		<renameColumn
 			tableName="series_sales"
