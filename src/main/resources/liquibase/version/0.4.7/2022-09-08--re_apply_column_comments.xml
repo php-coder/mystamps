@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+	
+	<!--
+		Re-apply changes from "0.4.4/2020-05-23--modify_condition_field.xml" and put comments to the fields instead of the tables.
+		See for details: https://github.com/liquibase/liquibase/pull/942
+	-->
+	
+	<changeSet id="put-comment-on-collections_series-field-instead-of-on-table" author="php-coder" context="scheme" dbms="mysql">
+		
+		<setColumnRemarks
+			tableName="collections_series"
+			columnName="cond"
+			columnDataType="VARCHAR(9)"
+			remarks="Example: MNH, CANCELLED" />
+		
+		<setTableRemarks
+			tableName="collections_series"
+			remarks="" />
+	
+	</changeSet>
+
+	<changeSet id="put-comment-on-series_sales-field-instead-of-on-table" author="php-coder" context="scheme" dbms="mysql">
+		
+		<setColumnRemarks
+			tableName="series_sales"
+			columnName="cond"
+			columnDataType="VARCHAR(9)"
+			remarks="Example: MNH, CANCELLED" />
+		
+		<setTableRemarks
+			tableName="series_sales"
+			remarks="" />
+	
+	</changeSet>
+	
+</databaseChangeLog>
