@@ -19,7 +19,7 @@ services:
       #- SPRING_LIQUIBASE_CONTEXTS=scheme,init-data,prod-data
     #volumes:
       # to use a WAR file from filesystem and avoid to build an image every time
-      #- ../target/mystamps.war:/data/mystamps/mystamps.war:ro
+      #- ../../target/mystamps.war:/data/mystamps/mystamps.war:ro
     networks:
       - internal-network
     depends_on:
