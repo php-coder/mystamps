@@ -6,7 +6,7 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 	
 	<!--
-		Re-apply changes from "0.4.4/2020-05-23--modify_condition_field.xml" and put comments to the fields instead of the tables.
+		Re-apply changes from "0.4.4/2020-05-23-modify_condition_field.xml" and put comments to the fields instead of the tables.
 		See for details: https://github.com/liquibase/liquibase/pull/942
 	-->
 	
