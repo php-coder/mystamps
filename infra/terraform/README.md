@@ -27,8 +27,8 @@
   $ terraform import digitalocean_record.domain_key my-stamps.ru,<id>
   ```
   The ids can be obtained by API:
-  - https://developers.digitalocean.com/documentation/v2/#list-all-droplets
-  - https://developers.digitalocean.com/documentation/v2/#list-all-domain-records
+  - https://docs.digitalocean.com/reference/api/api-reference/#operation/droplets_list
+  - https://docs.digitalocean.com/reference/api/api-reference/#operation/domains_list_records
 * Plan and apply:
   ```console
   $ terraform plan -out terraform.tfplan
