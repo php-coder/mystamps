@@ -2,6 +2,10 @@
 # @todo #1000 Terraform: add UptimeRobot
 # @todo #1000 Terraform: add Mailgun
 
+terraform {
+  required_version = ">= 0.12"
+}
+
 variable "do_token" {
 }
 
