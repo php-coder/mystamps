@@ -29,6 +29,13 @@
   The ids can be obtained by API:
   - https://docs.digitalocean.com/reference/api/api-reference/#operation/droplets_list
   - https://docs.digitalocean.com/reference/api/api-reference/#operation/domains_list_records
+  For example:
+  ```console
+  $ export DIGITALOCEAN_TOKEN="$(grep -Po 'do_token = "\K[^\"]+' terraform.tfvars)"
+  $ curl -sS -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/droplets" | jq '.droplets[].id'
+  12345678
+  $ curl -sS -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" "https://api.digitalocean.com/v2/domains/my-stamps.ru/records" | jq
+  ```
 * Plan and apply:
   ```console
   $ terraform plan -out terraform.tfplan
