@@ -120,7 +120,7 @@ public class ApiMailgunEmailSendingStrategy implements MailgunEmailSendingStrate
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.set(HttpHeaders.CONTENT_TYPE, MediaType.MULTIPART_FORM_DATA_VALUE);
-			headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_UTF8_VALUE);
+			headers.set(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE);
 			
 			HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(parts, headers);
 			

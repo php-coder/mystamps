@@ -54,9 +54,6 @@ public final class LiquibaseSupport {
 		// See https://docs.liquibase.com/commands/config-ref/should-run-parameter.html
 		System.setProperty("liquibase.shouldRun", "false");
 		
-		// Explicitly disable JMX. It might be enabled when we run via maven
-		System.setProperty("spring.jmx.enabled", "false");
-		
 		// Override value (WARN) from application*.properties
 		System.setProperty("logging.level.liquibase", "INFO");
 		

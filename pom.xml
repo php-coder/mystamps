@@ -79,7 +79,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -91,13 +91,13 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jdbc/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-jetty/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
@@ -117,19 +117,19 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-logging/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-security/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-security/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-thymeleaf/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -141,7 +141,7 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-web/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -434,23 +434,10 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Other dependencies (junit-junit-engine and junit-vintage-engine) pull from spring-boot-starter-test -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>${junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit-jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
 			<version>${junit-jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
@@ -489,7 +476,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-test/pom.xml -->
+		<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-test/pom.xml -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -504,12 +491,16 @@
 					<artifactId>mockito-core</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-junit-jupiter</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>org.skyscreamer</groupId>
 					<artifactId>jsonassert</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.hamcrest</groupId>
-					<artifactId>hamcrest-library</artifactId>
+					<artifactId>hamcrest</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.xmlunit</groupId>
@@ -534,16 +525,16 @@
 		
 	</dependencies>
 	
-	<!-- https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
+	<!-- https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.18.RELEASE</version>
+		<version>2.2.13.RELEASE</version>
 	</parent>
 	
 	<!--
 		All default versions from Spring Boot can be found there:
-		https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml
+		https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml
 	-->
 	<properties>
 		<!--
@@ -605,7 +596,7 @@
 		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
-			https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+			https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
 		-->
 		<java.version>1.8</java.version>
 		
@@ -688,13 +679,17 @@
 		
 		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
 		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
-		<spring-framework.version>5.1.20.RELEASE</spring-framework.version>
+		<spring-framework.version>5.2.22.RELEASE</spring-framework.version>
+		
+		<!-- Redefine default value from spring-boot-dependencies in order to have the latest version -->
+		<!-- LATER: remove overriding once version from Spring Boot will match the used one  -->
+		<spring-security.version>5.2.15.RELEASE</spring-security.version>
 		
 		<spring-test-context-cache-limiter.version>boot2-v1.2</spring-test-context-cache-limiter.version>
 		
 		<!--
 			Define default value for spring-boot-starter-parent:
-			https://github.com/spring-projects/spring-boot/blob/v2.1.18.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
+			https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
 		-->
 		<start-class>ru.mystamps.web.support.spring.boot.ApplicationBootstrap</start-class>
 		

@@ -176,6 +176,10 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 	
 	@Override
+	// CheckStyle: ignore LineLength for next 2 lines
+	// LATER: remove deprecation and usage of setUseSuffixPatternMatch() during upgrade to Spring Framework 5.3
+	// See: https://docs.spring.io/spring-framework/docs/5.2.22.RELEASE/javadoc-api/org/springframework/web/servlet/config/annotation/PathMatchConfigurer.html#setUseSuffixPatternMatch-java.lang.Boolean-
+	@SuppressWarnings("deprecation")
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		// If enabled a method mapped to "/users" also matches to "/users/"
 		configurer.setUseTrailingSlashMatch(false);
