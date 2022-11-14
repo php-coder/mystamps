@@ -613,7 +613,7 @@
 		<javassist.version>3.21.0-GA</javassist.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<javax-mail.version>1.5.4</javax-mail.version>
+		<javax-mail.version>1.6.2</javax-mail.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-validation.version>2.0.1.Final</javax-validation.version>
