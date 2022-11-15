@@ -157,9 +157,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf(csrf -> csrf
 				.ignoringAntMatchers(pathsToIgnore)
 			)
-			.rememberMe()
+			.rememberMe(rememberMe -> rememberMe
 				// FIXME: GH #27
 				.disable()
+			)
 			.headers()
 				.defaultsDisabled() // FIXME
 				// @todo #1161 Add Feature-Policy header
