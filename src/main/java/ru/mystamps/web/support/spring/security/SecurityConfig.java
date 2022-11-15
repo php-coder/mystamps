@@ -133,7 +133,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
 				.anyRequest().permitAll()
 				.and()
-			.formLogin()
+			.formLogin(formLogin -> formLogin
 				.loginPage(AccountUrl.AUTHENTICATION_PAGE)
 				.usernameParameter("login")
 				.passwordParameter("password")
@@ -141,7 +141,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl(AccountUrl.AUTHENTICATION_PAGE + "?failed")
 				.defaultSuccessUrl(SiteUrl.INDEX_PAGE, true)
 				.permitAll()
-				.and()
+			)
 			.logout()
 				.logoutUrl(AccountUrl.LOGOUT_PAGE)
 				.logoutSuccessUrl(SiteUrl.INDEX_PAGE)
