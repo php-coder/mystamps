@@ -142,12 +142,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl(SiteUrl.INDEX_PAGE, true)
 				.permitAll()
 			)
-			.logout()
+			.logout(logout -> logout
 				.logoutUrl(AccountUrl.LOGOUT_PAGE)
 				.logoutSuccessUrl(SiteUrl.INDEX_PAGE)
 				.invalidateHttpSession(true)
 				.permitAll()
-				.and()
+			)
 			.exceptionHandling()
 				.accessDeniedHandler(getAccessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
