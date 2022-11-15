@@ -106,7 +106,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hostname, h2ConsolePath);
 		
 		http
-			.authorizeRequests()
+			.authorizeRequests(authorizeRequests -> authorizeRequests
 				.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
 				.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
 				.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
@@ -132,7 +132,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.mvcMatchers(HttpMethod.POST, SeriesSalesImportUrl.IMPORT_SERIES_SALES)
 					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
 				.anyRequest().permitAll()
-				.and()
+			)
 			.formLogin(formLogin -> formLogin
 				.loginPage(AccountUrl.AUTHENTICATION_PAGE)
 				.usernameParameter("login")
