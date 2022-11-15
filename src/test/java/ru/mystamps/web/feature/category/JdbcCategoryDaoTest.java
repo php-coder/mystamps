@@ -55,7 +55,6 @@ public class JdbcCategoryDaoTest implements WithAssertions {
 		assertThat(statistics).isEmpty();
 	}
 	
-	// LATER: extract all "scripts" to a class level. Requires @SqlMergeMode from Spring 5.2
 	@Test
 	@Sql(
 		scripts = {
