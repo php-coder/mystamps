@@ -105,6 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		ContentSecurityPolicyHeaderWriter cspWriter =
 			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hostname, h2ConsolePath);
 		
+		// @todo #1149 Move feature-specific rules to the dedicated packages
 		http.authorizeRequests(authorizeRequests -> authorizeRequests
 			.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
 			.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
