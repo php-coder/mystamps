@@ -105,67 +105,72 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		ContentSecurityPolicyHeaderWriter cspWriter =
 			new ContentSecurityPolicyHeaderWriter(useCdn, useSingleHost, hostname, h2ConsolePath);
 		
-		http
-			.authorizeRequests(authorizeRequests -> authorizeRequests
-				.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
-				.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
-				.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
-				.mvcMatchers(SeriesUrl.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
-				.mvcMatchers(HttpMethod.PATCH, SeriesUrl.INFO_SERIES_PAGE)
-					.hasAnyAuthority(StringAuthority.CREATE_SERIES, StringAuthority.ADD_COMMENTS_TO_SERIES)
-				.mvcMatchers(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
-				.mvcMatchers(SiteUrl.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
-				.mvcMatchers(CategoryUrl.SUGGEST_SERIES_CATEGORY).hasAuthority(StringAuthority.CREATE_SERIES)
-				.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
-				.mvcMatchers(ReportUrl.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
-				.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
-					.access(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION)
-				.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
-					.hasAnyAuthority(
-						StringAuthority.UPDATE_COLLECTION,
-						StringAuthority.ADD_IMAGES_TO_SERIES
-					)
-				.regexMatchers(HttpMethod.POST, SeriesUrl.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
-					.hasAuthority(StringAuthority.ADD_SERIES_SALES)
-				.mvcMatchers(HttpMethod.POST, SeriesUrl.MARK_SIMILAR_SERIES)
-					.hasAnyAuthority(StringAuthority.MARK_SIMILAR_SERIES)
-				.mvcMatchers(HttpMethod.POST, SeriesSalesImportUrl.IMPORT_SERIES_SALES)
-					.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
-				.anyRequest().permitAll()
-			)
-			.formLogin(formLogin -> formLogin
-				.loginPage(AccountUrl.AUTHENTICATION_PAGE)
-				.usernameParameter("login")
-				.passwordParameter("password")
-				.loginProcessingUrl(AccountUrl.LOGIN_PAGE)
-				.failureUrl(AccountUrl.AUTHENTICATION_PAGE + "?failed")
-				.defaultSuccessUrl(SiteUrl.INDEX_PAGE, true)
-				.permitAll()
-			)
-			.logout(logout -> logout
-				.logoutUrl(AccountUrl.LOGOUT_PAGE)
-				.logoutSuccessUrl(SiteUrl.INDEX_PAGE)
-				.invalidateHttpSession(true)
-				.permitAll()
-			)
-			.exceptionHandling(exceptionHandling -> exceptionHandling
-				.accessDeniedHandler(getAccessDeniedHandler())
-				// This entry point handles when you request a protected page and you are
-				// not yet authenticated
-				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
-			)
-			.csrf(csrf -> csrf
-				.ignoringAntMatchers(pathsToIgnore)
-			)
-			.rememberMe(rememberMe -> rememberMe
-				// FIXME: GH #27
-				.disable()
-			)
-			.headers(headers -> headers
-				.defaultsDisabled() // FIXME
-				// @todo #1161 Add Feature-Policy header
-				.addHeaderWriter(cspWriter)
-			);
+		http.authorizeRequests(authorizeRequests -> authorizeRequests
+			.mvcMatchers(CategoryUrl.ADD_CATEGORY_PAGE).hasAuthority(StringAuthority.CREATE_CATEGORY)
+			.mvcMatchers(CountryUrl.ADD_COUNTRY_PAGE).hasAuthority(StringAuthority.CREATE_COUNTRY)
+			.mvcMatchers(ParticipantUrl.ADD_PARTICIPANT_PAGE).hasAuthority(StringAuthority.ADD_PARTICIPANT)
+			.mvcMatchers(SeriesUrl.ADD_SERIES_PAGE).hasAuthority(StringAuthority.CREATE_SERIES)
+			.mvcMatchers(HttpMethod.PATCH, SeriesUrl.INFO_SERIES_PAGE)
+				.hasAnyAuthority(StringAuthority.CREATE_SERIES, StringAuthority.ADD_COMMENTS_TO_SERIES)
+			.mvcMatchers(SeriesImportUrl.REQUEST_IMPORT_SERIES_PAGE).hasAuthority(StringAuthority.IMPORT_SERIES)
+			.mvcMatchers(SiteUrl.SITE_EVENTS_PAGE).hasAuthority(StringAuthority.VIEW_SITE_EVENTS)
+			.mvcMatchers(CategoryUrl.SUGGEST_SERIES_CATEGORY).hasAuthority(StringAuthority.CREATE_SERIES)
+			.mvcMatchers(CountryUrl.SUGGEST_SERIES_COUNTRY).hasAuthority(StringAuthority.CREATE_SERIES)
+			.mvcMatchers(ReportUrl.DAILY_STATISTICS).hasAuthority(StringAuthority.VIEW_DAILY_STATS)
+			.mvcMatchers(CollectionUrl.ESTIMATION_COLLECTION_PAGE)
+				.access(HasAuthority.ADD_SERIES_PRICE_AND_COLLECTION_OWNER_OR_VIEW_ANY_ESTIMATION)
+			.regexMatchers(HttpMethod.POST, "/series/[0-9]+")
+				.hasAnyAuthority(
+					StringAuthority.UPDATE_COLLECTION,
+					StringAuthority.ADD_IMAGES_TO_SERIES
+				)
+			.regexMatchers(HttpMethod.POST, SeriesUrl.ADD_SERIES_ASK_PAGE.replace("{id}", "[0-9]+"))
+				.hasAuthority(StringAuthority.ADD_SERIES_SALES)
+			.mvcMatchers(HttpMethod.POST, SeriesUrl.MARK_SIMILAR_SERIES)
+				.hasAnyAuthority(StringAuthority.MARK_SIMILAR_SERIES)
+			.mvcMatchers(HttpMethod.POST, SeriesSalesImportUrl.IMPORT_SERIES_SALES)
+				.hasAuthority(StringAuthority.IMPORT_SERIES_SALES)
+			.anyRequest().permitAll()
+		);
+		
+		http.formLogin(formLogin -> formLogin
+			.loginPage(AccountUrl.AUTHENTICATION_PAGE)
+			.usernameParameter("login")
+			.passwordParameter("password")
+			.loginProcessingUrl(AccountUrl.LOGIN_PAGE)
+			.failureUrl(AccountUrl.AUTHENTICATION_PAGE + "?failed")
+			.defaultSuccessUrl(SiteUrl.INDEX_PAGE, true)
+			.permitAll()
+		);
+		
+		http .logout(logout -> logout
+			.logoutUrl(AccountUrl.LOGOUT_PAGE)
+			.logoutSuccessUrl(SiteUrl.INDEX_PAGE)
+			.invalidateHttpSession(true)
+			.permitAll()
+		);
+		
+		http.exceptionHandling(exceptionHandling -> exceptionHandling
+			.accessDeniedHandler(getAccessDeniedHandler())
+			// This entry point handles when you request a protected page and you are
+			// not yet authenticated
+			.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
+		);
+		
+		http.csrf(csrf -> csrf
+			.ignoringAntMatchers(pathsToIgnore)
+		);
+		
+		http.rememberMe(rememberMe -> rememberMe
+			// FIXME: GH #27
+			.disable()
+		);
+		
+		http.headers(headers -> headers
+			.defaultsDisabled() // FIXME
+			// @todo #1161 Add Feature-Policy header
+			.addHeaderWriter(cspWriter)
+		);
 	}
 	
 	// Used in AccountConfig.Services.userService()
