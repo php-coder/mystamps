@@ -161,10 +161,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// FIXME: GH #27
 				.disable()
 			)
-			.headers()
+			.headers(headers -> headers
 				.defaultsDisabled() // FIXME
 				// @todo #1161 Add Feature-Policy header
-				.addHeaderWriter(cspWriter);
+				.addHeaderWriter(cspWriter)
+			);
 	}
 	
 	// Used in AccountConfig.Services.userService()
