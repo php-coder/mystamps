@@ -154,9 +154,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// not yet authenticated
 				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
 			)
-			.csrf()
+			.csrf(csrf -> csrf
 				.ignoringAntMatchers(pathsToIgnore)
-				.and()
+			)
 			.rememberMe()
 				// FIXME: GH #27
 				.disable()
