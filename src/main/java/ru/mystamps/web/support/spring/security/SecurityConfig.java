@@ -148,12 +148,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 				.permitAll()
 			)
-			.exceptionHandling()
+			.exceptionHandling(exceptionHandling -> exceptionHandling
 				.accessDeniedHandler(getAccessDeniedHandler())
 				// This entry point handles when you request a protected page and you are
 				// not yet authenticated
 				.authenticationEntryPoint(new Http403ForbiddenEntryPoint())
-				.and()
+			)
 			.csrf()
 				.ignoringAntMatchers(pathsToIgnore)
 				.and()
