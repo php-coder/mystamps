@@ -18,8 +18,6 @@
 package ru.mystamps.web.support.spring.security;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
@@ -34,17 +32,11 @@ import java.util.Date;
 public class AuthenticationFailureListener
 	implements ApplicationListener<AuthenticationFailureBadCredentialsEvent> {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationFailureListener.class);
-	
 	private final SiteService siteService;
 	
 	@Override
 	public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
 		HttpServletRequest request = getRequest();
-		if (request == null) {
-			LOG.warn("Can't get http request object");
-			return;
-		}
 		
 		// FIXME: log more info (login for example) (#59)
 		// FIXME: sanitize all user's values (#60)
@@ -61,9 +53,6 @@ public class AuthenticationFailureListener
 	private static HttpServletRequest getRequest() {
 		ServletRequestAttributes attrs =
 			(ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
-		if (attrs == null) {
-			return null;
-		}
 		
 		return attrs.getRequest();
 	}
