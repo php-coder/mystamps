@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series.importing;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +41,7 @@ import ru.mystamps.web.feature.series.importing.event.ImportRequestCreated;
 import ru.mystamps.web.feature.series.importing.event.RetryDownloading;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSaleParsedDataDto;
 import ru.mystamps.web.feature.series.importing.sale.SeriesSalesImportService;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,13 +86,13 @@ public class SeriesImportController {
 	public String processRequestImportForm(
 		@Valid @ModelAttribute("requestImportForm") RequestSeriesImportForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId) {
+		@AuthenticationPrincipal CustomUserDetails currentUser) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		Integer requestId = seriesImportService.addRequest(form, currentUserId);
+		Integer requestId = seriesImportService.addRequest(form, currentUser.getUserId());
 		
 		// @todo #927 Extract logic to a separate method or add to SeriesImportService.addRequest()
 		ImportRequestCreated requestCreated =
@@ -207,7 +208,7 @@ public class SeriesImportController {
 		Model model,
 		@Valid ImportSeriesForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletRequest httpRequest,
 		HttpServletResponse httpResponse)
@@ -262,7 +263,7 @@ public class SeriesImportController {
 			form.getSeller(),
 			seriesSaleForm,
 			requestId,
-			currentUserId
+			currentUser.getUserId()
 		);
 		
 		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, seriesId);

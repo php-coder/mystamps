@@ -57,7 +57,6 @@ import ru.mystamps.web.feature.series.sale.SeriesSaleDto;
 import ru.mystamps.web.feature.series.sale.SeriesSalesService;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.security.Authority;
-import ru.mystamps.web.support.spring.security.CurrentUser;
 import ru.mystamps.web.support.spring.security.CustomUserDetails;
 import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 import ru.mystamps.web.support.thymeleaf.GroupByParent;
@@ -159,12 +158,12 @@ public class SeriesController {
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		Model model,
 		HttpServletRequest request) {
 		
-		return processInput(form, result, currentUserId, userLocale, model, request);
+		return processInput(form, result, currentUser, userLocale, model, request);
 	}
 	
 	@PostMapping(path = SeriesUrl.ADD_SERIES_PAGE, params = "!imageUrl")
@@ -174,7 +173,7 @@ public class SeriesController {
 			AddSeriesForm.ReleaseDateChecks.class,
 			AddSeriesForm.ImageChecks.class }) AddSeriesForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		Model model,
 		HttpServletRequest request) {
@@ -194,7 +193,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Integer seriesId = seriesService.add(form, currentUserId);
+		Integer seriesId = seriesService.add(form, currentUser.getUserId());
 		
 		return redirectTo(SeriesUrl.INFO_SERIES_PAGE, seriesId);
 	}
@@ -203,7 +202,7 @@ public class SeriesController {
 	public String showInfo(
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
@@ -217,6 +216,7 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
+		Integer currentUserId = currentUser.getUserId();
 		SeriesDto series = seriesService.findFullInfoById(
 			seriesId,
 			currentUserId,
@@ -303,7 +303,7 @@ public class SeriesController {
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -314,7 +314,7 @@ public class SeriesController {
 			result,
 			seriesId,
 			model,
-			currentUserId,
+			currentUser,
 			userLocale,
 			request,
 			response
@@ -331,7 +331,7 @@ public class SeriesController {
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -342,7 +342,7 @@ public class SeriesController {
 			result,
 			seriesId,
 			model,
-			currentUserId,
+			currentUser,
 			userLocale,
 			request,
 			response
@@ -363,7 +363,7 @@ public class SeriesController {
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -378,6 +378,7 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
+		Integer currentUserId = currentUser.getUserId();
 		SeriesDto series = seriesService.findFullInfoById(
 			seriesId,
 			currentUserId,
@@ -468,6 +469,7 @@ public class SeriesController {
 				return null;
 			}
 			
+			// CheckStyle: ignore LineLength for next 1 line
 			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
 			model.addAllAttributes(commonAttrs);
 			
@@ -528,7 +530,7 @@ public class SeriesController {
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		Model model,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
@@ -542,6 +544,7 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
+		Integer currentUserId = currentUser.getUserId();
 		SeriesDto series = seriesService.findFullInfoById(
 			seriesId,
 			currentUserId,
@@ -578,7 +581,7 @@ public class SeriesController {
 		@RequestParam(name = "catalogNumber", defaultValue = EMPTY) String catalogNumber,
 		@RequestParam(name = "catalogName", defaultValue = EMPTY) String catalogName,
 		@RequestParam(name = "inCollection", defaultValue = "false") Boolean inCollection,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		Model model,
 		Locale userLocale,
 		RedirectAttributes redirectAttributes) {
@@ -615,6 +618,7 @@ public class SeriesController {
 		}
 		
 		// @todo #1098 Optimize a search within user's collection
+		Integer currentUserId = currentUser.getUserId();
 		if (Features.SEARCH_IN_COLLECTION.isActive()
 			&& inCollection
 			&& currentUserId != null) {

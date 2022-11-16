@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.mystamps.web.support.spring.mvc.PatchRequest;
 import ru.mystamps.web.support.spring.mvc.PatchRequest.Operation;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -52,7 +53,7 @@ class RestSeriesController {
 	public ResponseEntity<Void> updateSeries(
 		@PathVariable("id") Integer seriesId,
 		@RequestBody @Valid @NotEmpty List<@Valid PatchRequest> patches,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		HttpServletResponse response) throws IOException {
 		
 		if (seriesId == null) {
@@ -71,6 +72,7 @@ class RestSeriesController {
 				continue;
 			}
 			
+			Integer currentUserId = currentUser.getUserId();
 			String path = patch.getPath();
 			switch (path) {
 				case "/comment":

@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.category;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ import ru.mystamps.web.common.LinkEntityDto;
 import ru.mystamps.web.common.LocaleUtils;
 import ru.mystamps.web.feature.series.SeriesUrl;
 import ru.mystamps.web.support.spring.mvc.ReplaceRepeatingSpacesEditor;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -62,14 +63,14 @@ public class CategoryController {
 	public String processInput(
 		@Valid AddCategoryForm form,
 		BindingResult result,
-		@CurrentUser Integer currentUserId,
+		@AuthenticationPrincipal CustomUserDetails currentUser,
 		RedirectAttributes redirectAttributes) {
 		
 		if (result.hasErrors()) {
 			return null;
 		}
 		
-		String slug = categoryService.add(form, currentUserId);
+		String slug = categoryService.add(form, currentUser.getUserId());
 		
 		redirectAttributes.addFlashAttribute("justAddedCategory", true);
 		

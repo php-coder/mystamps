@@ -27,7 +27,6 @@ import org.springframework.http.CacheControl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -63,9 +62,7 @@ import ru.mystamps.web.feature.site.SiteConfig;
 import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.mvc.BigDecimalConverter;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
-import ru.mystamps.web.support.spring.security.CurrentUserArgumentResolver;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -142,11 +139,6 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addResourceLocations("classpath:/META-INF/resources/webjars/react-dom/");
 		registry.addResourceHandler("/public/selectize/**")
 			.addResourceLocations("classpath:/META-INF/resources/webjars/selectize.js/");
-	}
-	
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new CurrentUserArgumentResolver());
 	}
 	
 	@Override

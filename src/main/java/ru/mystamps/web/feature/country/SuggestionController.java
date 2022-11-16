@@ -19,9 +19,10 @@ package ru.mystamps.web.feature.country;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,9 +35,9 @@ class SuggestionController {
 	 * @author Slava Semushin
 	 */
 	@GetMapping(CountryUrl.SUGGEST_SERIES_COUNTRY)
-	public String suggestCountryForUser(@CurrentUser Integer currentUserId) {
+	public String suggestCountryForUser(@AuthenticationPrincipal CustomUserDetails currentUser) {
 		return StringUtils.defaultString(
-			countryService.suggestCountryForUser(currentUserId),
+			countryService.suggestCountryForUser(currentUser.getUserId()),
 			StringUtils.EMPTY
 		);
 	}

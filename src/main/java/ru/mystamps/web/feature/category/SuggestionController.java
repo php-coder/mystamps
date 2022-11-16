@@ -19,9 +19,10 @@ package ru.mystamps.web.feature.category;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,9 +31,9 @@ class SuggestionController {
 	private final CategoryService categoryService;
 	
 	@GetMapping(CategoryUrl.SUGGEST_SERIES_CATEGORY)
-	public String suggestCategoryForUser(@CurrentUser Integer currentUserId) {
+	public String suggestCategoryForUser(@AuthenticationPrincipal CustomUserDetails currentUser) {
 		return StringUtils.defaultString(
-			categoryService.suggestCategoryForUser(currentUserId),
+			categoryService.suggestCategoryForUser(currentUser.getUserId()),
 			StringUtils.EMPTY
 		);
 	}

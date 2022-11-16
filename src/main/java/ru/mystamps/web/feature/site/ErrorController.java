@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mystamps.web.support.spring.security.CurrentUser;
+import ru.mystamps.web.support.spring.security.SecurityContextUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +40,6 @@ public class ErrorController {
 	@RequestMapping(SiteUrl.NOT_FOUND_PAGE)
 	public String notFound(
 			HttpServletRequest request,
-			@CurrentUser Integer currentUserId,
 			// CheckStyle: ignore LineLength for next 1 line
 			@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page,
 			@RequestHeader(name = HttpHeaders.REFERER, required = false) String referer,
@@ -50,6 +49,8 @@ public class ErrorController {
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
+		// LATER: find out why @AuthenticationPrincipal gives null instead of a user
+		Integer currentUserId = SecurityContextUtils.getUserId();
 		siteService.logAboutAbsentPage(page, method, currentUserId, ip, referer, agent);
 		
 		return "error/status-code";
