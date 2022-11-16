@@ -748,7 +748,7 @@ public class SeriesController {
 		model.put("solovyovNumbers", solovyovNumbers);
 		model.put("zagorskiNumbers", zagorskiNumbers);
 		
-		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(series);
+		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(currentUserId, series);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
 		
 		// we require DOWNLOAD_IMAGE and ADD_IMAGES_TO_SERIES in order to reduce
@@ -816,9 +816,9 @@ public class SeriesController {
 	
 	// I like these parentheses and also ErrorProne suggests to have an explicit order
 	@SuppressWarnings("PMD.UselessParentheses")
-	private static boolean isUserCanAddImagesToSeries(SeriesDto series) {
+	private static boolean isUserCanAddImagesToSeries(Integer userId, SeriesDto series) {
 		return isAdmin()
-			|| (isOwner(series) && isAllowedToAddingImages(series));
+			|| (isOwner(userId, series) && isAllowedToAddingImages(series));
 	}
 	
 	private static boolean isAdmin() {
@@ -826,13 +826,9 @@ public class SeriesController {
 	}
 	
 	@SuppressWarnings("PMD.UnusedNullCheckInEquals")
-	private static boolean isOwner(SeriesDto series) {
-		Integer userId = SecurityContextUtils.getUserId();
+	private static boolean isOwner(Integer userId, SeriesDto series) {
 		return userId != null
-			&& Objects.equals(
-				series.getCreatedBy(),
-				userId
-			);
+			&& Objects.equals(series.getCreatedBy(), userId);
 	}
 	
 }
