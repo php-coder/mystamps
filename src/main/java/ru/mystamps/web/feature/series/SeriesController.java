@@ -450,7 +450,7 @@ public class SeriesController {
 			return null;
 		}
 		
-		Integer userId = currentUserDetails.getUserId();
+		Integer currentUserId = currentUserDetails.getUserId();
 		
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
@@ -459,7 +459,7 @@ public class SeriesController {
 			);
 			SeriesDto series = seriesService.findFullInfoById(
 				seriesId,
-				userId,
+				currentUserId,
 				lang,
 				userCanSeeHiddenImages
 			);
@@ -468,7 +468,7 @@ public class SeriesController {
 				return null;
 			}
 			
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, userId, lang);
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
 			model.addAllAttributes(commonAttrs);
 			
 			addSeriesSalesFormToModel(model);
@@ -478,7 +478,7 @@ public class SeriesController {
 			return "series/info";
 		}
 		
-		collectionService.addToCollection(userId, form);
+		collectionService.addToCollection(currentUserId, form);
 		
 		redirectAttributes.addFlashAttribute("justAddedSeries", true);
 		redirectAttributes.addFlashAttribute("justAddedSeriesId", seriesId);
