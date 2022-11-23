@@ -21,11 +21,12 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mystamps.web.support.spring.security.SecurityContextUtils;
+import ru.mystamps.web.support.spring.security.CustomUserDetails;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +41,7 @@ public class ErrorController {
 	@RequestMapping(SiteUrl.NOT_FOUND_PAGE)
 	public String notFound(
 			HttpServletRequest request,
+			@AuthenticationPrincipal CustomUserDetails currentUser,
 			// CheckStyle: ignore LineLength for next 1 line
 			@RequestAttribute(name = RequestDispatcher.ERROR_REQUEST_URI, required = false) String page,
 			@RequestHeader(name = HttpHeaders.REFERER, required = false) String referer,
@@ -49,8 +51,7 @@ public class ErrorController {
 		String ip     = request.getRemoteAddr();
 		String method = request.getMethod();
 		
-		// LATER: find out why @AuthenticationPrincipal gives null instead of a user
-		Integer currentUserId = SecurityContextUtils.getUserId();
+		Integer currentUserId = currentUser == null ? null : currentUser.getUserId();
 		siteService.logAboutAbsentPage(page, method, currentUserId, ip, referer, agent);
 		
 		return "error/status-code";

@@ -216,7 +216,7 @@ public class SeriesController {
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
 			Authority.VIEW_HIDDEN_IMAGES
 		);
-		Integer currentUserId = currentUser.getUserId();
+		Integer currentUserId = currentUser == null ? null : currentUser.getUserId();
 		SeriesDto series = seriesService.findFullInfoById(
 			seriesId,
 			currentUserId,
@@ -618,7 +618,7 @@ public class SeriesController {
 		}
 		
 		// @todo #1098 Optimize a search within user's collection
-		Integer currentUserId = currentUser.getUserId();
+		Integer currentUserId = currentUser == null ? null : currentUser.getUserId();
 		if (Features.SEARCH_IN_COLLECTION.isActive()
 			&& inCollection
 			&& currentUserId != null) {
