@@ -665,7 +665,7 @@
 		<selenium.version>3.141.59</selenium.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<servlet-api.version>3.1.0</servlet-api.version>
+		<servlet-api.version>4.0.1</servlet-api.version>
 		
 		<skipUnitTests>false</skipUnitTests>
 		
