@@ -20,6 +20,9 @@ After account creation an e-mail with activation link should be send
 	Log                     ${response.json}
 	Length Should Be        ${response.json['requests']}  1
 	${body}=                Set Variable  ${response.json['requests'][0]['body']}
+	Should Contain          ${body}  coder@rock.home
+	Should Contain          ${body}  My Stamps <dont-reply@my-stamps.ru>
+	Should Contain          ${body}  [my-stamps.ru] Account activation
 	${linkRegexp}=          Set Variable  ${SITE_URL}/account/activate\\?key=[0-9a-z]{10}
 	${links}=               Get Regexp Matches  ${body}  ${linkRegexp}
 	Length Should Be        ${links}  1
