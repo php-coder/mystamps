@@ -25,7 +25,9 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -203,6 +205,7 @@ public class SeriesController {
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
@@ -214,6 +217,7 @@ public class SeriesController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			authentication,
 			Authority.VIEW_HIDDEN_IMAGES
 		);
 		Integer currentUserId = currentUser == null ? null : currentUser.getUserId();
@@ -228,10 +232,11 @@ public class SeriesController {
 			return null;
 		}
 		
-		Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
+		Map<String, ?> commonAttrs =
+			prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
 		model.addAllAttributes(commonAttrs);
 		
-		addSeriesSalesFormToModel(model);
+		addSeriesSalesFormToModel(authentication, model);
 		addImageFormToModel(model);
 		addStampsToCollectionForm(model, series);
 		
@@ -304,6 +309,7 @@ public class SeriesController {
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -315,6 +321,7 @@ public class SeriesController {
 			seriesId,
 			model,
 			currentUser,
+			authentication,
 			userLocale,
 			request,
 			response
@@ -332,6 +339,7 @@ public class SeriesController {
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -343,6 +351,7 @@ public class SeriesController {
 			seriesId,
 			model,
 			currentUser,
+			authentication,
 			userLocale,
 			request,
 			response
@@ -364,6 +373,7 @@ public class SeriesController {
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		HttpServletRequest request,
 		HttpServletResponse response)
@@ -376,6 +386,7 @@ public class SeriesController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			authentication,
 			Authority.VIEW_HIDDEN_IMAGES
 		);
 		Integer currentUserId = currentUser.getUserId();
@@ -392,15 +403,16 @@ public class SeriesController {
 		
 		loadErrorsFromDownloadInterceptor(form, result, request);
 		
-		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
+		boolean maxQuantityOfImagesExceeded = !isAdmin(authentication)
+			&& !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			Map<String, ?> commonAttrs =
-				prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
+				prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
 			model.addAllAttributes(commonAttrs);
 			
-			addSeriesSalesFormToModel(model);
+			addSeriesSalesFormToModel(authentication, model);
 			addStampsToCollectionForm(model, series);
 			
 			// don't try to re-display file upload field
@@ -427,6 +439,7 @@ public class SeriesController {
 		BindingResult result,
 		@PathVariable("id") Integer seriesId,
 		@AuthenticationPrincipal CustomUserDetails currentUserDetails,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		RedirectAttributes redirectAttributes,
 		HttpServletResponse response,
@@ -456,6 +469,7 @@ public class SeriesController {
 		if (result.hasErrors()) {
 			String lang = LocaleUtils.getLanguageOrNull(userLocale);
 			boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+				authentication,
 				Authority.VIEW_HIDDEN_IMAGES
 			);
 			SeriesDto series = seriesService.findFullInfoById(
@@ -470,10 +484,10 @@ public class SeriesController {
 			}
 			
 			// CheckStyle: ignore LineLength for next 1 line
-			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
+			Map<String, ?> commonAttrs = prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
 			model.addAllAttributes(commonAttrs);
 			
-			addSeriesSalesFormToModel(model);
+			addSeriesSalesFormToModel(authentication, model);
 			addImageFormToModel(model);
 			addStampsToCollectionForm(model, series);
 			
@@ -523,7 +537,8 @@ public class SeriesController {
 		String collectionSlug = currentUserDetails.getUserCollectionSlug();
 		return redirectTo(CollectionUrl.INFO_COLLECTION_PAGE, collectionSlug);
 	}
-	
+
+	@SuppressWarnings("checkstyle:parameternumber")
 	@PostMapping(SeriesUrl.ADD_SERIES_ASK_PAGE)
 	public String processAskForm(
 		@Validated({ Default.class, AddSeriesSalesForm.UrlChecks.class }) AddSeriesSalesForm form,
@@ -531,6 +546,7 @@ public class SeriesController {
 		@PathVariable("id") Integer seriesId,
 		Model model,
 		@AuthenticationPrincipal CustomUserDetails currentUser,
+		@CurrentSecurityContext(expression = "authentication") Authentication authentication,
 		Locale userLocale,
 		HttpServletResponse response)
 		throws IOException {
@@ -542,6 +558,7 @@ public class SeriesController {
 		
 		String lang = LocaleUtils.getLanguageOrNull(userLocale);
 		boolean userCanSeeHiddenImages = SecurityContextUtils.hasAuthority(
+			authentication,
 			Authority.VIEW_HIDDEN_IMAGES
 		);
 		Integer currentUserId = currentUser.getUserId();
@@ -556,15 +573,16 @@ public class SeriesController {
 			return null;
 		}
 		
-		boolean maxQuantityOfImagesExceeded = !isAdmin() && !isAllowedToAddingImages(series);
+		boolean maxQuantityOfImagesExceeded = !isAdmin(authentication)
+			&& !isAllowedToAddingImages(series);
 		model.addAttribute("maxQuantityOfImagesExceeded", maxQuantityOfImagesExceeded);
 		
 		if (result.hasErrors() || maxQuantityOfImagesExceeded) {
 			Map<String, ?> commonAttrs =
-				prepareCommonAttrsForSeriesInfo(series, currentUserId, lang);
+				prepareCommonAttrsForSeriesInfo(series, currentUserId, authentication, lang);
 			model.addAllAttributes(commonAttrs);
 			
-			addSeriesSalesFormToModel(model);
+			addSeriesSalesFormToModel(authentication, model);
 			addImageFormToModel(model);
 			addStampsToCollectionForm(model, series);
 			
@@ -729,6 +747,7 @@ public class SeriesController {
 	private Map<String, ?> prepareCommonAttrsForSeriesInfo(
 		SeriesDto series,
 		Integer currentUserId,
+		Authentication authentication,
 		String lang) {
 		
 		Map<String, Object> model = new HashMap<>();
@@ -752,29 +771,30 @@ public class SeriesController {
 		model.put("solovyovNumbers", solovyovNumbers);
 		model.put("zagorskiNumbers", zagorskiNumbers);
 		
-		boolean userCanAddImagesToSeries = isUserCanAddImagesToSeries(currentUserId, series);
+		boolean userCanAddImagesToSeries =
+			isUserCanAddImagesToSeries(authentication, currentUserId, series);
 		model.put("allowAddingImages", userCanAddImagesToSeries);
 		
 		// we require DOWNLOAD_IMAGE and ADD_IMAGES_TO_SERIES in order to reduce
 		// a number of the possible cases to maintain
 		boolean userCanReplaceImages =
-			SecurityContextUtils.hasAuthority(Authority.REPLACE_IMAGE)
-			&& SecurityContextUtils.hasAuthority(Authority.DOWNLOAD_IMAGE)
-			&& SecurityContextUtils.hasAuthority(Authority.ADD_IMAGES_TO_SERIES);
+			SecurityContextUtils.hasAuthority(authentication, Authority.REPLACE_IMAGE)
+			&& SecurityContextUtils.hasAuthority(authentication, Authority.DOWNLOAD_IMAGE)
+			&& SecurityContextUtils.hasAuthority(authentication, Authority.ADD_IMAGES_TO_SERIES);
 		model.put("allowReplacingImages", userCanReplaceImages);
 		
-		if (SecurityContextUtils.hasAuthority(Authority.UPDATE_COLLECTION)) {
+		if (SecurityContextUtils.hasAuthority(authentication, Authority.UPDATE_COLLECTION)) {
 			Map<Integer, Integer> seriesInstances =
 				collectionService.findSeriesInstances(currentUserId, seriesId);
 			model.put("seriesInstances", seriesInstances);
 		}
 		
-		if (SecurityContextUtils.hasAuthority(Authority.VIEW_SERIES_SALES)) {
+		if (SecurityContextUtils.hasAuthority(authentication, Authority.VIEW_SERIES_SALES)) {
 			List<SeriesSaleDto> seriesSales = seriesSalesService.findSales(seriesId);
 			model.put("seriesSales", seriesSales);
 		}
 		
-		if (SecurityContextUtils.hasAuthority(Authority.IMPORT_SERIES)) {
+		if (SecurityContextUtils.hasAuthority(authentication, Authority.IMPORT_SERIES)) {
 			ImportRequestInfo importInfo = seriesImportService.findRequestInfo(seriesId);
 			model.put("importInfo", importInfo);
 		}
@@ -782,8 +802,8 @@ public class SeriesController {
 		return model;
 	}
 	
-	private void addSeriesSalesFormToModel(Model model) {
-		if (!SecurityContextUtils.hasAuthority(Authority.ADD_SERIES_SALES)) {
+	private void addSeriesSalesFormToModel(Authentication authentication, Model model) {
+		if (!SecurityContextUtils.hasAuthority(authentication, Authority.ADD_SERIES_SALES)) {
 			return;
 		}
 		
@@ -820,13 +840,17 @@ public class SeriesController {
 	
 	// I like these parentheses and also ErrorProne suggests to have an explicit order
 	@SuppressWarnings("PMD.UselessParentheses")
-	private static boolean isUserCanAddImagesToSeries(Integer userId, SeriesDto series) {
-		return isAdmin()
+	private static boolean isUserCanAddImagesToSeries(
+		Authentication authentication,
+		Integer userId,
+		SeriesDto series
+	) {
+		return isAdmin(authentication)
 			|| (isOwner(userId, series) && isAllowedToAddingImages(series));
 	}
 	
-	private static boolean isAdmin() {
-		return SecurityContextUtils.hasAuthority(Authority.ADD_IMAGES_TO_SERIES);
+	private static boolean isAdmin(Authentication authentication) {
+		return SecurityContextUtils.hasAuthority(authentication, Authority.ADD_IMAGES_TO_SERIES);
 	}
 	
 	@SuppressWarnings("PMD.UnusedNullCheckInEquals")

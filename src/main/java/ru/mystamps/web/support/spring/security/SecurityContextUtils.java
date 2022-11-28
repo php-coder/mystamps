@@ -33,8 +33,11 @@ public final class SecurityContextUtils {
 	 * @author Sergey Chechenev
 	 */
 	public static boolean hasAuthority(GrantedAuthority authority) {
-		return Optional
-			.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+		return hasAuthority(SecurityContextHolder.getContext().getAuthentication(), authority);
+	}
+	
+	public static boolean hasAuthority(Authentication authentication, GrantedAuthority authority) {
+		return Optional.ofNullable(authentication)
 			.map(Authentication::getAuthorities)
 			.orElse(Collections.emptyList())
 			.contains(authority);
