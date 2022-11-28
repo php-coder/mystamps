@@ -19,8 +19,8 @@
 		<!-- Required for InternetAddress class -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>${javax-mail.version}</version>
+			<artifactId>jakarta.mail</artifactId>
+			<version>${jakarta-mail.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -604,7 +604,7 @@
 		<javassist.version>3.21.0-GA</javassist.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
-		<javax-mail.version>1.6.2</javax-mail.version>
+		<jakarta-mail.version>1.6.7</jakarta-mail.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-validation.version>2.0.1.Final</javax-validation.version>
