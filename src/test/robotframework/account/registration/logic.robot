@@ -19,8 +19,9 @@ After account creation an e-mail with activation link should be send
 	${response}=            Post Request  mailserver  /__admin/requests/find  data=${searchQuery}
 	Log                     ${response.json}
 	Length Should Be        ${response.json['requests']}  1
+	${body}=                Set Variable  ${response.json['requests'][0]['body']}
 	${linkRegexp}=          Set Variable  ${SITE_URL}/account/activate\\?key=[0-9a-z]{10}
-	${links}=               Get Regexp Matches  ${response.json['requests'][0]['body']}  ${linkRegexp}
+	${links}=               Get Regexp Matches  ${body}  ${linkRegexp}
 	Length Should Be        ${links}  1
 
 *** Keywords ***
