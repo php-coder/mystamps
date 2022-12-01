@@ -63,8 +63,8 @@ import ru.mystamps.web.feature.site.SiteUrl;
 import ru.mystamps.web.support.spring.mvc.BigDecimalConverter;
 import ru.mystamps.web.support.spring.mvc.RestExceptionHandler;
 
+import java.time.Duration;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableScheduling
@@ -114,7 +114,7 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addFixedVersionStrategy(ResourceUrl.RESOURCES_VERSION, "/**");
 		
 		@SuppressWarnings("checkstyle:magicnumber")
-		CacheControl cacheControl = CacheControl.maxAge(7, TimeUnit.DAYS);
+		CacheControl cacheControl = CacheControl.maxAge(Duration.ofDays(7));
 		
 		registry.addResourceHandler("/static/**")
 			.addResourceLocations("/WEB-INF/static/")
