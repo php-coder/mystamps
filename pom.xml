@@ -18,8 +18,8 @@
 		
 		<!-- Required for InternetAddress class -->
 		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>jakarta.mail</artifactId>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
 			<version>${jakarta-mail.version}</version>
 		</dependency>
 		
