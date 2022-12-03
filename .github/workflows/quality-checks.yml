@@ -76,3 +76,23 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Check pom.xml
         run: ./src/main/scripts/execute-command.sh check-pom
+  run-bootlint:
+    name: Run Bootstrap linter
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install bootlint
+        # https://docs.npmjs.com/cli/v8/commands/npm-install
+        run: >-
+          npm install \
+            --no-audit \
+            --no-fund \
+            --global \
+            bootlint@1.1.0
+      - name: Run bootlint
+        run: ./src/main/scripts/execute-command.sh bootlint
