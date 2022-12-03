@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-CODENARC_STATUS=
 SPOTBUGS_STATUS=
 VERIFY_STATUS=
 ANSIBLE_LINT_STATUS=
@@ -68,7 +67,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-CODENARC_TIME=0
 SPOTBUGS_TIME=0
 VERIFY_TIME=0
 ANSIBLE_LINT_TIME=0
@@ -96,15 +94,12 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
 			AFFECTS_SPOTBUGS_CFG="$(echo "$MODIFIED_FILES"  |  grep -q 'spotbugs-filter\.xml$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
-			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
 			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|prod|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
 			
 			if [ "$AFFECTS_POM_XML" = 'no' ]; then
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_SPOTBUGS_CFG" != 'no' ] || SPOTBUGS_STATUS=skip
 				fi
-				
-				[ "$AFFECTS_GROOVY_FILES" != 'no' ] || CODENARC_STATUS=skip
 			fi
 			
 			if [ "$AFFECTS_TRAVIS_CFG" = 'no' ]; then
@@ -124,14 +119,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$CODENARC_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		# run after tests for getting compiled sources
-		"$EXEC_CMD" codenarc >codenarc.log 2>&1 || CODENARC_STATUS=fail
-		CODENARC_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$CODENARC_STATUS" "$CODENARC_TIME" 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -164,7 +151,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CODENARC_STATUS" = 'skip' ]       || print_log codenarc.log       'Run CodeNarc'
 	[ "$SPOTBUGS_STATUS" = 'skip' ]       || print_log spotbugs.log       'Run SpotBugs'
 	[ "$ANSIBLE_LINT_STATUS" = 'skip' ]   || print_log ansible_lint.log   'Run Ansible Lint'
 fi
@@ -175,8 +161,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
