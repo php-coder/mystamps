@@ -177,6 +177,11 @@ jobs:
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Compile sources
-        run: mvn compile
+        run: >-
+          mvn \
+            --batch-mode \
+            -Denforcer.skip=true \
+            -DskipMinify \
+            compile
       - name: Run CodeNarc
         run: ./src/main/scripts/execute-command.sh codenarc
