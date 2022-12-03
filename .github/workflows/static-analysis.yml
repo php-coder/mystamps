@@ -128,3 +128,17 @@ jobs:
         run: shellcheck --version
       - name: Run shellcheck
         run: ./src/main/scripts/execute-command.sh shellcheck
+  run-html5validator:
+    name: Run html5validator
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install html5validator
+        run: pip3 install --user html5validator==0.4.2
+      - name: Run html5validator
+        run: ./src/main/scripts/execute-command.sh html5validator
