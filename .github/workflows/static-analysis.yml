@@ -142,6 +142,20 @@ jobs:
         run: pip3 install --user html5validator==0.4.2
       - name: Run html5validator
         run: ./src/main/scripts/execute-command.sh html5validator
+  run-ansible-lint:
+    name: Run ansible-lint
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install ansible-lint
+        run: pip3 install --user ansible-lint==4.2.0
+      - name: Run ansible-lint
+        run: ./src/main/scripts/execute-command.sh ansible-lint
   run-enforcer:
     name: Run maven-enforcer-plugin
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on

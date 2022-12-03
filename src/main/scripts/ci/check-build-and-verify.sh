@@ -59,7 +59,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 fi
 
 VERIFY_STATUS=
-ANSIBLE_LINT_STATUS=
 
 DANGER_STATUS=skip
 if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
@@ -67,7 +66,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 fi
 
 VERIFY_TIME=0
-ANSIBLE_LINT_TIME=0
 DANGER_TIME=0
 
 CURDIR="$(dirname "$0")"
@@ -88,15 +86,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		MODIFIED_FILES="$(git --no-pager diff --name-only "$TRAVIS_COMMIT_RANGE" -- 2>/dev/null || :)"
 		
 		if [ -n "$MODIFIED_FILES" ]; then
-			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
-			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|prod|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
-			
-			if [ "$AFFECTS_TRAVIS_CFG" = 'no' ]; then
-				if [ "$AFFECTS_PLAYBOOKS" = 'no' ]; then
-					ANSIBLE_LINT_STATUS=skip
-				fi
-			fi
-
 			echo 'INFO: Some checks could be skipped'
 		else
 			echo "INFO: Couldn't determine list of modified files."
@@ -108,13 +97,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$ANSIBLE_LINT_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" ansible-lint >ansible_lint.log 2>&1 || ANSIBLE_LINT_STATUS=fail
-		ANSIBLE_LINT_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$ANSIBLE_LINT_STATUS" $ANSIBLE_LINT_TIME 'Run Ansible Lint'
 fi
 
 START_TIME=$SECONDS
@@ -131,18 +113,14 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
-if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$ANSIBLE_LINT_STATUS" = 'skip' ]   || print_log ansible_lint.log   'Run Ansible Lint'
-fi
-
 print_log verify.log   'Run integration tests'
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f verify.log danger.log ansible_lint.log
+rm -f verify.log danger.log
 
-if echo "$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
