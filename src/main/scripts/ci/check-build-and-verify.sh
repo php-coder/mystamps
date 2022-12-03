@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-TEST_STATUS=
 CODENARC_STATUS=
 SPOTBUGS_STATUS=
 VERIFY_STATUS=
@@ -69,7 +68,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-TEST_TIME=0
 CODENARC_TIME=0
 SPOTBUGS_TIME=0
 VERIFY_TIME=0
@@ -104,10 +102,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			if [ "$AFFECTS_POM_XML" = 'no' ]; then
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_SPOTBUGS_CFG" != 'no' ] || SPOTBUGS_STATUS=skip
-					
-					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
-						TEST_STATUS=skip
-					fi
 				fi
 				
 				[ "$AFFECTS_GROOVY_FILES" != 'no' ] || CODENARC_STATUS=skip
@@ -130,13 +124,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$TEST_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" unit-tests >test.log 2>&1 || TEST_STATUS=fail
-		TEST_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$TEST_STATUS" "$TEST_TIME" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -177,7 +164,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$TEST_STATUS" = 'skip' ]           || print_log test.log           'Run unit tests'
 	[ "$CODENARC_STATUS" = 'skip' ]       || print_log codenarc.log       'Run CodeNarc'
 	[ "$SPOTBUGS_STATUS" = 'skip' ]       || print_log spotbugs.log       'Run SpotBugs'
 	[ "$ANSIBLE_LINT_STATUS" = 'skip' ]   || print_log ansible_lint.log   'Run Ansible Lint'
@@ -189,8 +175,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
