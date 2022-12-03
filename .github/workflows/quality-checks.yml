@@ -96,3 +96,21 @@ jobs:
             bootlint@1.1.0
       - name: Run bootlint
         run: ./src/main/scripts/execute-command.sh bootlint
+  run-rflint:
+    name: Run RobotFramework linter
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install rflint
+        run: >-
+          pip3 install \
+            --user \
+            robotframework==3.2.2 \
+            robotframework-lint==1.1
+      - name: Run rflint
+        run: ./src/main/scripts/execute-command.sh rflint
