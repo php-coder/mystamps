@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-JEST_STATUS=
 HTML_STATUS=
 ENFORCER_STATUS=
 TEST_STATUS=
@@ -72,7 +71,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-JEST_TIME=0
 HTML_TIME=0
 ENFORCER_TIME=0
 TEST_TIME=0
@@ -103,7 +101,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
 			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
 			AFFECTS_SPOTBUGS_CFG="$(echo "$MODIFIED_FILES"  |  grep -q 'spotbugs-filter\.xml$' || echo 'no')"
-			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
 			AFFECTS_HTML_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.html$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
@@ -121,7 +118,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				fi
 				
 				[ "$AFFECTS_GROOVY_FILES" != 'no' ] || CODENARC_STATUS=skip
-				[ "$AFFECTS_JS_FILES" != 'no' ] || JEST_STATUS=skip
 			fi
 			
 			if [ "$AFFECTS_TRAVIS_CFG" = 'no' ]; then
@@ -144,13 +140,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$JEST_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" jest >jest.log 2>&1 || JEST_STATUS=fail
-		JEST_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$JEST_STATUS" "$JEST_TIME" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
 		"$EXEC_CMD" html5validator >validator.log 2>&1 || HTML_STATUS=fail
@@ -211,7 +200,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$JEST_STATUS" = 'skip' ]           || print_log jest.log           'Run JavaScript unit tests'
 	[ "$HTML_STATUS" = 'skip' ]           || print_log validator.log      'Run html5validator'
 	[ "$ENFORCER_STATUS" = 'skip' ]       || print_log enforcer.log       'Run maven-enforcer-plugin'
 	[ "$TEST_STATUS" = 'skip' ]           || print_log test.log           'Run unit tests'
@@ -226,8 +214,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
