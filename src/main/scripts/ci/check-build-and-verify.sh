@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-LICENSE_STATUS=
 POM_STATUS=
 BOOTLINT_STATUS=
 RFLINT_STATUS=
@@ -77,7 +76,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-LICENSE_TIME=0
 POM_TIME=0
 BOOTLINT_TIME=0
 RFLINT_TIME=0
@@ -119,7 +117,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_ROBOT_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.robot$' || echo 'no')"
 			AFFECTS_SHELL_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.sh$' || echo 'no')"
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
-			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
 			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|prod|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
 			
 			if [ "$AFFECTS_POM_XML" = 'no' ]; then
@@ -131,8 +128,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 					
 					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
 						TEST_STATUS=skip
-						
-						[ "$AFFECTS_LICENSE_HEADER" != 'no' ] || LICENSE_STATUS=skip
 					fi
 				fi
 				
@@ -164,13 +159,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$LICENSE_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" check-license >license.log 2>&1 || LICENSE_STATUS=fail
-		LICENSE_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$LICENSE_STATUS" "$LICENSE_TIME" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -266,7 +254,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$LICENSE_STATUS" = 'skip' ]        || print_log license.log        'Check license headers'
 	[ "$POM_STATUS" = 'skip' ]            || print_log pom.log            'Check sorting of pom.xml'
 	[ "$BOOTLINT_STATUS" = 'skip' ]       || print_log bootlint.log       'Run bootlint'
 	[ "$RFLINT_STATUS" = 'skip' ]         || print_log rflint.log         'Run robot framework lint'
@@ -286,8 +273,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
