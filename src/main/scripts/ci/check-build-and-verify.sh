@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-PMD_STATUS=
 LICENSE_STATUS=
 POM_STATUS=
 BOOTLINT_STATUS=
@@ -78,7 +77,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-PMD_TIME=0
 LICENSE_TIME=0
 POM_TIME=0
 BOOTLINT_TIME=0
@@ -115,7 +113,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
 			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
 			AFFECTS_SPOTBUGS_CFG="$(echo "$MODIFIED_FILES"  |  grep -q 'spotbugs-filter\.xml$' || echo 'no')"
-			AFFECTS_PMD_XML="$(echo "$MODIFIED_FILES"       |  grep -q 'pmd\.xml$' || echo 'no')"
 			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
 			AFFECTS_HTML_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.html$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
@@ -131,7 +128,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_SPOTBUGS_CFG" != 'no' ] || SPOTBUGS_STATUS=skip
-					[ "$AFFECTS_PMD_XML" != 'no' ] || PMD_STATUS=skip
 					
 					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
 						TEST_STATUS=skip
@@ -168,13 +164,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$PMD_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" pmd >pmd.log 2>&1 || PMD_STATUS=fail
-		PMD_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$PMD_STATUS" "$PMD_TIME" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -277,7 +266,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$PMD_STATUS" = 'skip' ]            || print_log pmd.log            'Run PMD'
 	[ "$LICENSE_STATUS" = 'skip' ]        || print_log license.log        'Check license headers'
 	[ "$POM_STATUS" = 'skip' ]            || print_log pom.log            'Check sorting of pom.xml'
 	[ "$BOOTLINT_STATUS" = 'skip' ]       || print_log bootlint.log       'Run bootlint'
@@ -298,8 +286,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
