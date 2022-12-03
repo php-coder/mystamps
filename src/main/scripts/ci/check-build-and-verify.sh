@@ -58,7 +58,6 @@ if [ "${1:-}" = '--only-integration-tests' ]; then
 	RUN_ONLY_INTEGRATION_TESTS=yes
 fi
 
-CS_STATUS=
 PMD_STATUS=
 LICENSE_STATUS=
 POM_STATUS=
@@ -79,7 +78,6 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
-CS_TIME=0
 PMD_TIME=0
 LICENSE_TIME=0
 POM_TIME=0
@@ -116,7 +114,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 		if [ -n "$MODIFIED_FILES" ]; then
 			AFFECTS_POM_XML="$(echo "$MODIFIED_FILES"      | grep -Fxq 'pom.xml' || echo 'no')"
 			AFFECTS_TRAVIS_CFG="$(echo "$MODIFIED_FILES"   | grep -Fxq '.travis.yml' || echo 'no')"
-			AFFECTS_CS_CFG="$(echo "$MODIFIED_FILES"        | grep -Eq '(checkstyle\.xml|checkstyle-suppressions\.xml)$' || echo 'no')"
 			AFFECTS_SPOTBUGS_CFG="$(echo "$MODIFIED_FILES"  |  grep -q 'spotbugs-filter\.xml$' || echo 'no')"
 			AFFECTS_PMD_XML="$(echo "$MODIFIED_FILES"       |  grep -q 'pmd\.xml$' || echo 'no')"
 			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
@@ -125,7 +122,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_ROBOT_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.robot$' || echo 'no')"
 			AFFECTS_SHELL_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.sh$' || echo 'no')"
 			AFFECTS_GROOVY_FILES="$(echo "$MODIFIED_FILES"  |  grep -q '\.groovy$' || echo 'no')"
-			AFFECTS_PROPERTIES="$(echo "$MODIFIED_FILES"    |  grep -q '\.properties$' || echo 'no')"
 			AFFECTS_LICENSE_HEADER="$(echo "$MODIFIED_FILES" | grep -q 'license_header\.txt$' || echo 'no')"
 			AFFECTS_PLAYBOOKS="$(echo "$MODIFIED_FILES"      |  grep -Eq '(vagrant|prod|deploy|bootstrap|/roles/.+)\.yml$' || echo 'no')"
 			
@@ -136,10 +132,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				if [ "$AFFECTS_JAVA_FILES" = 'no' ]; then
 					[ "$AFFECTS_SPOTBUGS_CFG" != 'no' ] || SPOTBUGS_STATUS=skip
 					[ "$AFFECTS_PMD_XML" != 'no' ] || PMD_STATUS=skip
-					
-					if [ "$AFFECTS_CS_CFG" = 'no' ] && [ "$AFFECTS_PROPERTIES" = 'no' ]; then
-						CS_STATUS=skip
-					fi
 					
 					if [ "$AFFECTS_GROOVY_FILES" = 'no' ]; then
 						TEST_STATUS=skip
@@ -176,13 +168,6 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	
 	echo
-	
-	if [ "$CS_STATUS" != 'skip' ]; then
-		START_TIME=$SECONDS
-		"$EXEC_CMD" checkstyle >cs.log 2>&1 || CS_STATUS=fail
-		CS_TIME=$((SECONDS - START_TIME))
-	fi
-	print_status "$CS_STATUS" "$CS_TIME" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
 		START_TIME=$SECONDS
@@ -292,7 +277,6 @@ fi
 print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CS_STATUS" = 'skip' ]             || print_log cs.log             'Run CheckStyle'
 	[ "$PMD_STATUS" = 'skip' ]            || print_log pmd.log            'Run PMD'
 	[ "$LICENSE_STATUS" = 'skip' ]        || print_log license.log        'Check license headers'
 	[ "$POM_STATUS" = 'skip' ]            || print_log pom.log            'Check sorting of pom.xml'
@@ -314,8 +298,8 @@ if [ "$DANGER_STATUS" != 'skip' ]; then
 	print_log danger.log 'Run danger'
 fi
 
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
+rm -f pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jest.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify.log danger.log ansible_lint.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JEST_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
