@@ -594,6 +594,9 @@
 		
 		<jacoco.plugin.version>0.8.8</jacoco.plugin.version>
 		
+		<!-- Redefine default value from spring-boot-dependencies -->
+		<jakarta-mail.version>1.6.7</jakarta-mail.version>
+		
 		<!--
 			Redefine default value from spring-boot-starter-parent:
 			https://github.com/spring-projects/spring-boot/blob/v2.2.13.RELEASE/spring-boot-project/spring-boot-starters/spring-boot-starter-parent/pom.xml
@@ -602,9 +605,6 @@
 		
 		<javadoc.plugin.version>3.4.0</javadoc.plugin.version>
 		<javassist.version>3.21.0-GA</javassist.version>
-		
-		<!-- Redefine default value from spring-boot-dependencies -->
-		<jakarta-mail.version>1.6.7</jakarta-mail.version>
 		
 		<!-- Redefine default value from spring-boot-dependencies -->
 		<javax-validation.version>2.0.1.Final</javax-validation.version>
