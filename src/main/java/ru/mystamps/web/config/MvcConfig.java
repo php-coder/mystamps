@@ -113,7 +113,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		VersionResourceResolver resourceResolver = new VersionResourceResolver()
 			.addFixedVersionStrategy(ResourceUrl.RESOURCES_VERSION, "/**");
 		
-		@SuppressWarnings("checkstyle:magicnumber")
+		// CheckStyle: ignore MagicNumber for next 1 line
 		CacheControl cacheControl = CacheControl.maxAge(Duration.ofDays(7));
 		
 		registry.addResourceHandler("/static/**")
