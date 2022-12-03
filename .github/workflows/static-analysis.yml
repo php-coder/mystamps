@@ -185,3 +185,28 @@ jobs:
             compile
       - name: Run CodeNarc
         run: ./src/main/scripts/execute-command.sh codenarc
+  run-spotbugs:
+    name: Run SpotBugs
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install JDK
+        uses: actions/setup-java@v3.7.0 # https://github.com/actions/setup-java
+        with:
+          distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
+          java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
+          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Compile sources
+        run: >-
+          mvn \
+            --batch-mode \
+            -Denforcer.skip=true \
+            -DskipMinify \
+            compile
+      - name: Run SpotBugs
+        run: ./src/main/scripts/execute-command.sh spotbugs
