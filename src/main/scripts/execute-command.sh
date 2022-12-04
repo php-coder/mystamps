@@ -53,9 +53,6 @@ case ${1:-} in
 			-Dcodenarc.maxPriority2Violations=0 \
 			-Dcodenarc.maxPriority3Violations=0
 		;;
-	'danger')
-		exec danger
-		;;
 	'enforcer')
 		exec "$MVN" \
 			--batch-mode \
@@ -143,7 +140,6 @@ case ${1:-} in
 		echo >&2 '- check-pom'
 		echo >&2 '- checkstyle'
 		echo >&2 '- codenarc'
-		echo >&2 '- danger'
 		echo >&2 '- enforcer'
 		echo >&2 '- html5validator'
 		echo >&2 '- integration-tests'

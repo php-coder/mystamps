@@ -60,13 +60,7 @@ fi
 
 VERIFY_STATUS=
 
-DANGER_STATUS=skip
-if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-false}" != 'false' ]; then
-	DANGER_STATUS=
-fi
-
 VERIFY_TIME=0
-DANGER_TIME=0
 
 CURDIR="$(dirname "$0")"
 EXEC_CMD="$CURDIR/../execute-command.sh"
@@ -105,22 +99,10 @@ VERIFY_TIME=$((SECONDS - START_TIME))
 
 print_status "$VERIFY_STATUS" "$VERIFY_TIME" 'Run integration tests'
 
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	START_TIME=$SECONDS
-	"$EXEC_CMD" danger >danger.log 2>&1 || DANGER_STATUS=fail
-	DANGER_TIME=$((SECONDS - START_TIME))
-fi
-print_status "$DANGER_STATUS" "$DANGER_TIME" 'Run danger'
-
 print_log verify.log   'Run integration tests'
 
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	print_log danger.log 'Run danger'
-fi
+rm -f verify.log
 
-rm -f verify.log danger.log
-
-if echo "$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
+if echo "$VERIFY_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi

@@ -20,9 +20,6 @@ before_script:
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
       pip install --user ansible==2.9.2;
-      if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then
-        gem install danger:8.2.2 nokogiri:1.10.10 --no-document;
-      fi;
     elif [ "$SPRING_PROFILES_ACTIVE" = 'postgres' ]; then
       psql -U postgres -c 'create database mystamps;';
     fi

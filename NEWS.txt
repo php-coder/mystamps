@@ -1,6 +1,7 @@
 0.x (upcoming release)
 
 - (infrastructure) port JavaScript unit tests from Jasmine to Jest
+- (infrastructure) discontinue usage of Danger
 
 0.4.6
 - (feature)        users can add a comment to a series
