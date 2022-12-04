@@ -3,7 +3,6 @@ language: java
 
 env:
   matrix:
-    - SPRING_PROFILES_ACTIVE=test
     - SPRING_PROFILES_ACTIVE=travis
     - SPRING_PROFILES_ACTIVE=postgres
   global:
