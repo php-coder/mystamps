@@ -1,0 +1,26 @@
+name: Comparison with Spring Boot dependencies
+
+on:
+  push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
+    branches:
+      - master
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushpull_requestpull_request_targetpathspaths-ignore
+    paths:
+      - pom.xml
+      - src/main/scripts/show-spring-boot-version-diff.sh
+      - .github/workflows/dependencies-diff.yml
+
+jobs:
+  show-spring-boot-version-diff:
+    name: Run show-spring-boot-version-diff.sh
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Compare versions
+        run: ./src/main/scripts/show-spring-boot-version-diff.sh

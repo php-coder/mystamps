@@ -52,11 +52,6 @@ after_failure:
       sleep 5;
     fi
 
-after_success:
-  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/show-spring-boot-version-diff.sh;
-    fi
-
 deploy:
   provider: script
   script: ./src/main/scripts/ci/deploy.sh
