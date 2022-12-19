@@ -19,7 +19,7 @@ before_script:
       mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
       mkdir -p /tmp/uploads /tmp/preview;
       cp src/main/resources/test/test.png /tmp/uploads/1.png;
-      pip install --user ansible==2.9.2;
+      pip install --user ansible==2.9.27;
     elif [ "$SPRING_PROFILES_ACTIVE" = 'postgres' ]; then
       psql -U postgres -c 'create database mystamps;';
     fi
