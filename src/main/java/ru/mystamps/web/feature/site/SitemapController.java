@@ -78,16 +78,11 @@ public class SitemapController {
 	
 	private static String createUrlEntry(DateFormat dateFormatter, SitemapInfoDto item) {
 		return new StringBuilder("<url><loc>")
-			.append(createLocEntry(item))
+			.append(SiteUrl.PUBLIC_URL).append(SeriesUrl.INFO_SERIES_PAGE.replace("{id}", item.getId()))
 			.append("</loc><lastmod>")
 			.append(createLastModEntry(dateFormatter, item))
 			.append("</lastmod></url>\n")
 			.toString();
-	}
-	
-	private static String createLocEntry(SitemapInfoDto item) {
-		return SiteUrl.PUBLIC_URL
-			+ SeriesUrl.INFO_SERIES_PAGE.replace("{id}", item.getId());
 	}
 	
 	private static String createLastModEntry(DateFormat dateFormatter, SitemapInfoDto item) {
