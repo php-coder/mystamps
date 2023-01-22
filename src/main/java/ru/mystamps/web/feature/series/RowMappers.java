@@ -37,7 +37,7 @@ final class RowMappers {
 		throws SQLException {
 		
 		return new SitemapInfoDto(
-			rs.getInt("id"),
+			rs.getString("id"),
 			rs.getTimestamp("updated_at")
 		);
 	}

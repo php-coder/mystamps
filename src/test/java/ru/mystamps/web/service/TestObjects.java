@@ -137,7 +137,7 @@ public final class TestObjects {
 	}
 	
 	public static SitemapInfoDto createSitemapInfoDto() {
-		return new SitemapInfoDto(Random.id(), Random.date());
+		return new SitemapInfoDto(String.valueOf(Random.id()), Random.date());
 	}
 	
 	@SuppressWarnings("checkstyle:magicnumber")

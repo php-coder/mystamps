@@ -27,6 +27,6 @@ import java.util.Date;
 @ToString
 @RequiredArgsConstructor
 public class SitemapInfoDto {
-	private final Integer id;
+	private final String id;
 	private final Date updatedAt;
 }

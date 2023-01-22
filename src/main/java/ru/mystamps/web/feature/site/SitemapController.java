@@ -87,7 +87,7 @@ public class SitemapController {
 	
 	private static String createLocEntry(SitemapInfoDto item) {
 		return SiteUrl.PUBLIC_URL
-			+ SeriesUrl.INFO_SERIES_PAGE.replace("{id}", String.valueOf(item.getId()));
+			+ SeriesUrl.INFO_SERIES_PAGE.replace("{id}", item.getId());
 	}
 	
 	private static String createLastModEntry(DateFormat dateFormatter, SitemapInfoDto item) {
