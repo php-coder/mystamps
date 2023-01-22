@@ -67,7 +67,8 @@ public class SitemapController {
 			writer.print(INDEX_URL_ENTRY);
 			
 			for (SitemapInfoDto item : seriesService.findAllForSitemap()) {
-				writer.print(createUrlEntry(dateFormatter, item));
+				// CheckStyle: ignore LineLength for next 1 line
+				writer.print(createUrlEntry(dateFormatter, item, SeriesUrl.INFO_SERIES_PAGE, "{id}"));
 			}
 			
 			writer.print("</urlset>\n");
@@ -76,9 +77,14 @@ public class SitemapController {
 		}
 	}
 	
-	private static String createUrlEntry(DateFormat dateFormatter, SitemapInfoDto item) {
+	private static String createUrlEntry(
+		DateFormat dateFormatter,
+		SitemapInfoDto item,
+		String urlFormat,
+		String urlPatternToReplace
+	) {
 		return new StringBuilder("<url><loc>")
-			.append(SiteUrl.PUBLIC_URL).append(SeriesUrl.INFO_SERIES_PAGE.replace("{id}", item.getId()))
+			.append(SiteUrl.PUBLIC_URL).append(urlFormat.replace(urlPatternToReplace, item.getId()))
 			.append("</loc><lastmod>")
 			.append(createLastModEntry(dateFormatter, item))
 			.append("</lastmod></url>\n")
