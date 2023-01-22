@@ -29,6 +29,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.support.spring.jdbc.MapIntegerIntegerResultSetExtractor;
 
 import java.util.Collections;
@@ -37,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods" })
+@SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods", "PMD.TooManyFields" })
 public class JdbcCollectionDao implements CollectionDao {
 	private static final Logger LOG = LoggerFactory.getLogger(JdbcCollectionDao.class);
 	
@@ -48,6 +49,7 @@ public class JdbcCollectionDao implements CollectionDao {
 	private final String findLastCreatedCollectionsSql;
 	private final String findSeriesByCollectionIdSql;
 	private final String findSeriesWithPricesBySlugSql;
+	private final String findAllForSitemapSql;
 	private final String countCollectionsOfUsersSql;
 	private final String countUpdatedSinceSql;
 	private final String countSeriesOfCollectionSql;
@@ -66,6 +68,7 @@ public class JdbcCollectionDao implements CollectionDao {
 		this.findLastCreatedCollectionsSql = env.getRequiredProperty("collection.find_last_created");
 		this.findSeriesByCollectionIdSql   = env.getRequiredProperty("collection.find_series_by_collection_id");
 		this.findSeriesWithPricesBySlugSql = env.getRequiredProperty("collection.find_series_with_prices_by_slug");
+		this.findAllForSitemapSql          = env.getRequiredProperty("collection.find_all_for_sitemap");
 		this.countCollectionsOfUsersSql    = env.getRequiredProperty("collection.count_collections_of_users");
 		this.countUpdatedSinceSql          = env.getRequiredProperty("collection.count_updated_since");
 		this.countSeriesOfCollectionSql    = env.getRequiredProperty("collection.count_series_of_collection");
@@ -114,6 +117,15 @@ public class JdbcCollectionDao implements CollectionDao {
 			findSeriesWithPricesBySlugSql,
 			params,
 			RowMappers::forSeriesInCollectionWithPriceDto
+		);
+	}
+	
+	@Override
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return jdbcTemplate.query(
+			findAllForSitemapSql,
+			Collections.emptyMap(),
+			ru.mystamps.web.common.RowMappers::forSitemapInfoDto
 		);
 	}
 	

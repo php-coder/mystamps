@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.collection;
 
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -38,4 +39,5 @@ public interface CollectionService {
 	List<SeriesInCollectionDto> findSeriesInCollection(Integer collectionId, String lang);
 	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
 	CollectionInfoDto findBySlug(String slug);
+	List<SitemapInfoDto> findAllForSitemap();
 }

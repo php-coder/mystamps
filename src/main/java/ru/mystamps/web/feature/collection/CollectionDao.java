@@ -18,6 +18,7 @@
 package ru.mystamps.web.feature.collection;
 
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ public interface CollectionDao {
 	List<LinkEntityDto> findLastCreated(int quantity);
 	List<SeriesInCollectionDto> findSeriesByCollectionId(Integer collectionId, String lang);
 	List<SeriesInCollectionWithPriceDto> findSeriesWithPricesBySlug(String slug, String lang);
+	List<SitemapInfoDto> findAllForSitemap();
 	long countCollectionsOfUsers();
 	long countUpdatedSince(Date date);
 	long countSeriesOfCollection(Integer collectionId);

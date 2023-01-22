@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mystamps.web.common.LinkEntityDto;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.common.SlugUtils;
 import ru.mystamps.web.support.spring.security.HasAuthority;
 
@@ -207,6 +208,13 @@ public class CollectionServiceImpl implements CollectionService {
 		Validate.isTrue(slug != null, "Collection slug must be non null");
 		
 		return collectionDao.findCollectionInfoBySlug(slug);
+	}
+
+	// @todo #1605 CollectionService.findAllForSitemap(): add unit tests
+	@Override
+	@Transactional(readOnly = true)
+	public List<SitemapInfoDto> findAllForSitemap() {
+		return collectionDao.findAllForSitemap();
 	}
 	
 	private static String formatSeriesInfo(AddToCollectionDbDto collectionDto) {
