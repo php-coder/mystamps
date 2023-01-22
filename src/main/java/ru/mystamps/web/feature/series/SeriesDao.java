@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.series;
 
+import ru.mystamps.web.common.SitemapInfoDto;
+
 import java.util.Date;
 import java.util.List;
 

@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.mystamps.web.common.SitemapInfoDto;
 import ru.mystamps.web.feature.series.SeriesService;
 import ru.mystamps.web.feature.series.SeriesUrl;
-import ru.mystamps.web.feature.series.SitemapInfoDto;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

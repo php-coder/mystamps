@@ -17,6 +17,8 @@
  */
 package ru.mystamps.web.feature.series;
 
+import ru.mystamps.web.common.SitemapInfoDto;
+
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;

@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import ru.mystamps.web.common.JdbcUtils;
+import ru.mystamps.web.common.SitemapInfoDto;
 
 import java.util.Collections;
 import java.util.Date;
@@ -198,7 +199,7 @@ public class JdbcSeriesDao implements SeriesDao {
 		return jdbcTemplate.query(
 			findAllForSitemapSql,
 			Collections.emptyMap(),
-			RowMappers::forSitemapInfoDto
+			ru.mystamps.web.common.RowMappers::forSitemapInfoDto
 		);
 	}
 	

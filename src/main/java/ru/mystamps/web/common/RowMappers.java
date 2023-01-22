@@ -61,5 +61,14 @@ public final class RowMappers {
 			rs.getString(nameColumn)
 		);
 	}
+
+	public static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int unused)
+		throws SQLException {
+
+		return new SitemapInfoDto(
+			rs.getString("id"),
+			rs.getTimestamp("updated_at")
+		);
+	}
 	
 }

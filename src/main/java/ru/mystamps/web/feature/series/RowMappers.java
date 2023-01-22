@@ -33,15 +33,6 @@ final class RowMappers {
 	private RowMappers() {
 	}
 	
-	/* default */ static SitemapInfoDto forSitemapInfoDto(ResultSet rs, int unused)
-		throws SQLException {
-		
-		return new SitemapInfoDto(
-			rs.getString("id"),
-			rs.getTimestamp("updated_at")
-		);
-	}
-
 	/* default */ static SeriesLinkDto forSeriesLinkDto(ResultSet rs, int unused)
 		throws SQLException {
 		

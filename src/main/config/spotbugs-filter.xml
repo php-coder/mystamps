@@ -125,7 +125,7 @@
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>
-		<Class name="ru.mystamps.web.feature.series.SitemapInfoDto" />
+		<Class name="ru.mystamps.web.common.SitemapInfoDto" />
 		<Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
 	</Match>
 	<Match>

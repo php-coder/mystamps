@@ -20,6 +20,7 @@ package ru.mystamps.web.feature.series
 import org.slf4j.helpers.NOPLogger
 import org.springframework.web.multipart.MultipartFile
 import ru.mystamps.web.common.LinkEntityDto
+import ru.mystamps.web.common.SitemapInfoDto
 import ru.mystamps.web.feature.image.ImageInfoDto
 import ru.mystamps.web.feature.image.ImageService
 import ru.mystamps.web.service.TestObjects
