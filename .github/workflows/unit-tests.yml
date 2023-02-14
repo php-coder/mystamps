@@ -22,6 +22,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Run Jest
         run: ./src/main/scripts/execute-command.sh jest
+
   run-unit-tests:
     name: Unit Tests (Java)
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on

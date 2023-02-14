@@ -22,6 +22,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Run CheckStyle
         run: ./src/main/scripts/execute-command.sh checkstyle
+
   run-pmd:
     name: Run PMD
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -40,6 +41,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Run PMD
         run: ./src/main/scripts/execute-command.sh pmd
+
   check-license:
     name: Check license in file headers
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -58,6 +60,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Check license header
         run: ./src/main/scripts/execute-command.sh check-license
+
   check-pom:
     name: Check pom.xml
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -76,6 +79,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Check pom.xml
         run: ./src/main/scripts/execute-command.sh check-pom
+
   run-bootlint:
     name: Run Bootstrap linter
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -96,6 +100,7 @@ jobs:
             bootlint@1.1.0
       - name: Run bootlint
         run: ./src/main/scripts/execute-command.sh bootlint
+
   run-rflint:
     name: Run RobotFramework linter
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -114,6 +119,7 @@ jobs:
             robotframework-lint==1.1
       - name: Run rflint
         run: ./src/main/scripts/execute-command.sh rflint
+
   run-shellcheck:
     name: Run ShellCheck
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -128,6 +134,7 @@ jobs:
         run: shellcheck --version
       - name: Run shellcheck
         run: ./src/main/scripts/execute-command.sh shellcheck
+
   run-html5validator:
     name: Run html5validator
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -142,6 +149,7 @@ jobs:
         run: pip3 install --user html5validator==0.4.2
       - name: Run html5validator
         run: ./src/main/scripts/execute-command.sh html5validator
+
   run-ansible-lint:
     name: Run ansible-lint
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -156,6 +164,7 @@ jobs:
         run: pip3 install --user ansible-lint==4.2.0
       - name: Run ansible-lint
         run: ./src/main/scripts/execute-command.sh ansible-lint
+
   run-enforcer:
     name: Run maven-enforcer-plugin
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -174,6 +183,7 @@ jobs:
           cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
       - name: Run maven-enforcer-plugin
         run: ./src/main/scripts/execute-command.sh enforcer
+
   run-codenarc:
     name: Run CodeNarc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -199,6 +209,7 @@ jobs:
             compile
       - name: Run CodeNarc
         run: ./src/main/scripts/execute-command.sh codenarc
+
   run-spotbugs:
     name: Run SpotBugs
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
