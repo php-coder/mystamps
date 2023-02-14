@@ -16,7 +16,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -35,7 +35,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -54,7 +54,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -73,7 +73,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -177,7 +177,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -196,7 +196,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
@@ -222,7 +222,7 @@ jobs:
           # Whether to configure the token or SSH key with the local git config. Default: true
           persist-credentials: false
       - name: Install JDK
-        uses: actions/setup-java@v3.9.0 # https://github.com/actions/setup-java
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
         with:
           distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
           java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
