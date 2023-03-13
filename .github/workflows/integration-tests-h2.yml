@@ -1,4 +1,4 @@
-name: Integration Tests
+name: Integration Tests (H2)
 
 on:
   push:
@@ -19,7 +19,7 @@ defaults:
 
 jobs:
   run-integration-tests:
-    name: Integration Tests (H2)
+    name: Integration Tests
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-20.04
     steps:
