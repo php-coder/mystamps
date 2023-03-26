@@ -11,6 +11,13 @@ on:
       - src/main/scripts/show-spring-boot-version-diff.sh
       - .github/workflows/dependencies-diff.yml
 
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
 jobs:
   show-spring-boot-version-diff:
     name: Run show-spring-boot-version-diff.sh

@@ -4,6 +4,13 @@ on:
   push:
   pull_request:
 
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
 jobs:
   run-integration-tests:
     name: Integration Tests (H2)
