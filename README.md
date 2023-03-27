@@ -2,7 +2,6 @@
 
 [![Build Status](https://api.travis-ci.com/php-coder/mystamps.svg?branch=master)](https://app.travis-ci.com/github/php-coder/mystamps)
 [![PDD Status](http://www.0pdd.com/svg?name=php-coder/mystamps)](https://www.0pdd.com/p?name=php-coder/mystamps)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ru.mystamps%3Amystamps&metric=alert_status)](https://sonarcloud.io/dashboard?id=ru.mystamps%3Amystamps)
 [![Uptime Statistic](https://badgen.net/uptime-robot/month/ur243278-551fbb732949dbdee27c7552)](https://stats.uptimerobot.com/1jXAjFpgP)
 
 ## What is it?
