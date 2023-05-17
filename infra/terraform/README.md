@@ -1,13 +1,20 @@
 # Provisioning a server with Terraform
 
+* Install [tfenv](https://github.com/tfutils/tfenv) and terraform
+  ```console
+  $ brew install tfenv
+  $ cd infra/terraform
+  $ export HTTPS_PROXY=socks5://127.0.0.1:1122 # optionally
+  $ tfenv install
+  ```
 * Setup credentials (only first time)
   ```console
-  $ cd infra/terraform
   $ cp terraform.tfvars{.example,}
   $ vim terraform.tfvars
   ```
 * Initialize and download modules (if needed)
   ```console
+  $ export HTTPS_PROXY=socks5://127.0.0.1:1122 # optionally
   $ terraform init
   ```
 * Import existing configuration (optionally; only first time)
