@@ -18,11 +18,10 @@ provider "digitalocean" {
 # Droplet docs: https://www.terraform.io/docs/providers/do/r/droplet.html
 resource "digitalocean_droplet" "web" {
   # "ubuntu-16-04-x64" resolves into Ubuntu 16.04.6 while our server is based on Ubuntu 16.04.1
-  image              = "18572320"
-  name               = "my-stamps.ru"
-  region             = "fra1"
-  size               = "s-1vcpu-1gb"
-  private_networking = true
+  image  = "18572320"
+  name   = "my-stamps.ru"
+  region = "fra1"
+  size   = "s-1vcpu-1gb"
 }
 
 # Domain docs: https://www.terraform.io/docs/providers/do/r/domain.html
