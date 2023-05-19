@@ -2,17 +2,12 @@
 # @todo #1000 Terraform: add UptimeRobot
 # @todo #1000 Terraform: add Mailgun
 
-terraform {
-  required_version = ">= 0.12"
-}
-
 variable "do_token" {
 }
 
 # Digital Ocean provider docs: https://www.terraform.io/docs/providers/do/index.html
 provider "digitalocean" {
   token   = var.do_token
-  version = "2.22.2"
 }
 
 # Droplet docs: https://www.terraform.io/docs/providers/do/r/droplet.html
