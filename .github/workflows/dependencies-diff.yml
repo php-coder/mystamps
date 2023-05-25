@@ -11,6 +11,10 @@ on:
       - src/main/scripts/show-spring-boot-version-diff.sh
       - .github/workflows/dependencies-diff.yml
 
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  contents: read # for "git clone"
+
 defaults:
   # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
   run:
