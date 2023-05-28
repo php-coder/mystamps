@@ -5,12 +5,12 @@
 variable "do_token" {
 }
 
-# Digital Ocean provider docs: https://www.terraform.io/docs/providers/do/index.html
+# Digital Ocean provider docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs
 provider "digitalocean" {
   token = var.do_token
 }
 
-# Droplet docs: https://www.terraform.io/docs/providers/do/r/droplet.html
+# Droplet docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/droplet.html
 resource "digitalocean_droplet" "web" {
   # "ubuntu-16-04-x64" resolves into Ubuntu 16.04.6 while our server is based on Ubuntu 16.04.1
   image  = "18572320"
@@ -19,12 +19,12 @@ resource "digitalocean_droplet" "web" {
   size   = "s-1vcpu-1gb"
 }
 
-# Domain docs: https://www.terraform.io/docs/providers/do/r/domain.html
+# Domain docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/domain.html
 resource "digitalocean_domain" "site" {
   name = "my-stamps.ru"
 }
 
-# Record docs: https://www.terraform.io/docs/providers/do/r/record.html
+# Record docs: https://registry.terraform.io/providers/digitalocean/digitalocean/2.28.1/docs/resources/record.html
 resource "digitalocean_record" "no-www" {
   domain = digitalocean_domain.site.name
   type   = "A"
