@@ -1,0 +1,62 @@
+name: Integration Tests (PostgreSQL)
+
+on:
+  push:
+  pull_request:
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  # NOTE: actions/upload-artifact makes no use of permissions
+  # See https://github.com/actions/upload-artifact/issues/197#issuecomment-832279436
+  contents: read # for "git clone"
+
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
+jobs:
+  run-integration-tests:
+    name: Integration Tests
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
+    services:
+      # NB: The hostname of the service container is automatically mapped to the label name
+      db:
+        # https://github.com/docker-library/postgres/blob/ad464b0375fc64e70e01305bf93183428a2ef0ec/11/Dockerfile
+        # NOTE: it's better to have the same as in infra/docker/postgres.yml
+        image: postgres:11.3
+        env:
+          # NOTE: it's better to have credentials the same as in infra/docker/postgres.yml
+          POSTGRES_USER: mystamps
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DATABASE: mystamps
+        # https://docs.github.com/en/actions/using-containerized-services/about-service-containers#mapping-docker-host-and-service-container-ports
+        ports:
+          # <host port>:<container port>
+          - "5432:5432"
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.5.2 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install JDK
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
+        with:
+          distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
+          java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
+          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      - name: Run integration tests
+        env:
+          SPRING_PROFILES_ACTIVE: postgres
+        run: ./src/main/scripts/execute-command.sh integration-tests
+      - name: Save RobotFramework reports
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3.1.1 # https://github.com/actions/upload-artifact
+        with:
+          name: robotframework-reports
+          path: target/robotframework-reports/

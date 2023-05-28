@@ -11,6 +11,7 @@ version: '3'
 services:
   web:
     environment:
+      # NOTE: it's better to have credentials the same as in src/main/resources/application-postgres.properties
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mystamps
       - SPRING_DATASOURCE_USERNAME=mystamps
       - SPRING_DATASOURCE_PASSWORD=secret
@@ -26,8 +27,10 @@ services:
       - db
   db:
     # https://github.com/docker-library/postgres/blob/ad464b0375fc64e70e01305bf93183428a2ef0ec/11/Dockerfile
+    # NOTE: it's better to have the same as in .github/workflows/integration-tests-postgres.yml
     image: postgres:11.3
     environment:
+      # NOTE: it's better to have credentials the same as in .github/workflows/integration-tests-postgres.yml
       - POSTGRES_USER=mystamps
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DATABASE=mystamps
