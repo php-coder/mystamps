@@ -37,7 +37,7 @@ jobs:
         # https://docs.github.com/en/actions/using-containerized-services/about-service-containers#mapping-docker-host-and-service-container-ports
         ports:
           # <host port>:<container port>
-          - "5432:5432"
+          - '5432:5432'
     steps:
       - name: Clone source code
         uses: actions/checkout@v3.5.2 # https://github.com/actions/checkout
