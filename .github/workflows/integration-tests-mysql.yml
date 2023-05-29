@@ -1,0 +1,85 @@
+name: Integration Tests (MySQL)
+
+on:
+  push:
+  pull_request:
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  # NOTE: actions/upload-artifact makes no use of permissions
+  # See https://github.com/actions/upload-artifact/issues/197#issuecomment-832279436
+  contents: read # for "git clone"
+
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
+jobs:
+  run-integration-tests:
+    name: Integration Tests
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
+    services:
+      db:
+        # https://hub.docker.com/_/mysql
+        # https://github.com/docker-library/mysql/blob/429047ac5e28d59d40a2ac84a189c9d25310f060/5.7/Dockerfile
+        # NOTE: it's better to have the same as in infra/docker/postgres.yml
+        image: mysql:5.7.20
+        env:
+          # NOTE: it's better to have credentials the same as in infra/docker/prod.yml and src/main/resources/application-travis.properties
+          # the generated root password will be printed to stdout (GENERATED ROOT PASSWORD: ...)
+          MYSQL_RANDOM_ROOT_PASSWORD: 'true'
+          MYSQL_USER: mystamps
+          MYSQL_PASSWORD: secret
+          # the user specified above will be granted superuser access automatically
+          MYSQL_DATABASE: mystamps
+        options: >-
+          --health-cmd "mysqladmin ping --user mystamps --password=secret"
+          --health-start-period 1s
+          --health-interval 1s
+          --health-retries 10
+          --health-timeout 5s
+        # https://docs.github.com/en/actions/using-containerized-services/about-service-containers#mapping-docker-host-and-service-container-ports
+        ports:
+          # <host port>:<container port>
+          - '3306:3306'
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.5.2 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: false
+      - name: Install JDK
+        uses: actions/setup-java@v3.10.0 # https://github.com/actions/setup-java
+        with:
+          distribution: 'adopt' # https://github.com/actions/setup-java#supported-distributions
+          java-version: '8'     # https://github.com/actions/setup-java#supported-version-syntax
+          cache: 'maven'        # https://github.com/actions/setup-java#caching-packages-dependencies
+      # This is a workaround for github action limitation: we can't specify command for the service (--character-set-server=utf8)
+      # and have to modify database manually. See also:
+      # https://github.com/actions/runner/discussions/1872 and https://github.com/orgs/community/discussions/26688
+      # @todo #1154 Set charset of MySQL container by providing a custom my.cnf
+      - name: Change character set on database
+        run: >-
+          docker exec ${{ job.services.db.id }} \
+            mysql \
+              --user mystamps \
+              --password=secret \
+              --execute 'ALTER DATABASE mystamps CHARACTER SET utf8'
+      - name: Run integration tests
+        env:
+          SPRING_PROFILES_ACTIVE: travis
+        run: |
+          mkdir -p /tmp/uploads /tmp/preview
+          cp src/main/resources/test/test.png /tmp/uploads/1.png
+          ./src/main/scripts/execute-command.sh integration-tests
+      - name: Save RobotFramework reports
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3.1.1 # https://github.com/actions/upload-artifact
+        with:
+          name: robotframework-reports
+          path: target/robotframework-reports/

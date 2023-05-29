@@ -2,8 +2,6 @@ dist: xenial
 language: java
 
 env:
-  matrix:
-    - SPRING_PROFILES_ACTIVE=travis
   global:
     - MAVEN_OPTS='-Xss256k'
     - secure: "fBav56BzY+A+Vs1g9YSfo1oLDCO1rFrXl49lJkOA5/XpnsKEEs4lI2RcOzz0wiJKXFNgcliiAJWoYMI8Esqz+lkyFWan4ij5Co0UzJcytDuY+2o+jaqwx45DuDYPogABzT+hWjLCxQLLG46gUkChzT8kcvOOn6JxC7Ff8q5MnoM="
@@ -12,45 +10,14 @@ env:
 # See https://travis-ci.community/t/log-are-truncated-when-my-script-exits-abnormally/5878
 before_script:
   - trap 'travis_terminate 1' ERR;
-    if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      mysql -u root -e 'CREATE DATABASE mystamps CHARACTER SET utf8;';
-      mkdir -p /tmp/uploads /tmp/preview;
-      cp src/main/resources/test/test.png /tmp/uploads/1.png;
-      pip install --user ansible==2.9.27;
-    fi
-
-script:
-  - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then
-      ./src/main/scripts/ci/check-build-and-verify.sh;
-    fi
-  # Travis CI may miss a part of the huge output if we'll exit immediately
-  # See: https://github.com/travis-ci/travis-ci/issues/6018
-  - sleep 5
-
-after_failure:
-  # In order to be able debug robot framework test flakes we need to have a report.
-  # We encode it to a bzipped binary form and dump to console. It can be
-  # examined later with the following commands:
-  #
-  # $ curl -sS https://api.travis-ci.com/v3/job/$JOB_ID/log.txt | sed -n '/^===== REPORT START/,/^===== REPORT END/p' | sed -e 1d -e '$d' -e 's/\r$//' | base64 -d | bzip2 -dc >target/robotframework-reports/output.xml
-  # $ ./mvnw robotframework:rebot
-  # $ open target/robotframework-reports/report.html
-  #
-  # NB: on macOS, replace base64 -d by base64 -D
-  #
-  - if fgrep -qs 'status="FAIL"' target/robotframework-reports/output.xml; then
-      echo '===== REPORT START =====';
-      bzip2 <target/robotframework-reports/output.xml | base64;
-      echo '===== REPORT END =====';
-      sleep 5;
-    fi
+    pip install --user ansible==2.9.27;
 
 deploy:
   provider: script
   script: ./src/main/scripts/ci/deploy.sh
   on:
     branch: prod
-    condition: '"$SPRING_PROFILES_ACTIVE" = "travis" && "$TRAVIS_PULL_REQUEST" = "false"'
+    condition: '"$TRAVIS_PULL_REQUEST" = "false"'
   skip_cleanup: true
 
 jdk:
@@ -60,12 +27,9 @@ cache:
   directories:
   - $HOME/.m2
 
-services:
-  - mysql
-
 branches:
-  except:
-  - /^(re|old)_.*$/
+  only:
+  - prod
 
 notifications:
   email:

@@ -27,9 +27,12 @@ services:
   db:
     # https://hub.docker.com/_/mysql
     # https://github.com/docker-library/mysql/blob/429047ac5e28d59d40a2ac84a189c9d25310f060/5.7/Dockerfile
+    # NOTE: it's better to have the same as in .github/workflows/integration-tests-mysql.yml
     image: mysql:5.7.20
     command: --character-set-server=utf8
     environment:
+      # NOTE: it's better to have credentials the same as in .github/workflows/integration-tests-mysql.yml
+      # and src/main/resources/application-travis.properties
       # the generated root password will be printed to stdout (GENERATED ROOT PASSWORD: ...)
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=mystamps
