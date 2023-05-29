@@ -24,7 +24,6 @@ jobs:
     runs-on: ubuntu-20.04
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
     services:
-      # NB: The hostname of the service container is automatically mapped to the label name
       db:
         # https://hub.docker.com/_/postgres
         # https://github.com/docker-library/postgres/blob/ad464b0375fc64e70e01305bf93183428a2ef0ec/11/Dockerfile
