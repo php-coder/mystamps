@@ -1,0 +1,130 @@
+name: Extract todos from code
+
+on:
+  push:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpull_requestpull_request_targetbranchesbranches-ignore
+    branches:
+      - master
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-excluding-paths
+    paths-ignore:
+      - '**.json'
+      - '**.jpg'
+      - '**.png'
+      - '**.ico'
+      - '**.md'
+
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  contents: write # for "git push"
+
+defaults:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#defaultsrun
+  run:
+    # Enable fail-fast behavior using set -eo pipefail
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#exit-codes-and-error-action-preference
+    shell: bash
+
+jobs:
+  extract-pdd-puzzles:
+    name: Extract todos from code
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Clone source code
+        uses: actions/checkout@v3.5.2 # https://github.com/actions/checkout
+        with:
+          # Whether to configure the token or SSH key with the local git config. Default: true
+          persist-credentials: true
+
+      - name: Install pdd
+        run: sudo gem install pdd:0.23.1 --no-document
+
+      - name: Checkout existing todos to another directory
+        run: |
+          git fetch --depth=1 origin generated-todos
+          git worktree add generated-todos generated-todos
+
+      - name: Extract todos
+        run: |
+          pdd \
+            --skip-gitignore \
+            --exclude '**/*.json' \
+            --exclude '**/*.jpg' \
+            --exclude '**/*.png' \
+            --exclude '**/*.ico' \
+            --exclude '**/*.md' \
+            --exclude '**/*.enc' \
+            --exclude 'src/test/wiremock/**/*' \
+            --exclude 'generated-todos/**' \
+            --verbose \
+            --file pdd.xml
+
+      - name: Remove the current date from pdd.xml
+        run: sed -i -E '/<time>[-0-9T:Z]+<\/time>/d;/<puzzles/s| date="[-0-9T:Z]+"||' pdd.xml
+
+      - name: Generate todos-in-code.tsv
+        run: ./src/main/scripts/ci/pdd-xml-to-json.sh pdd.xml | ./src/main/scripts/ci/pdd-json-to-tsv.sh > todos-in-code.tsv
+
+      - name: Check whether there are new todos
+        run: |
+          CREATE_COMMIT=no
+
+          if [ ! -f generated-todos/pdd.xml ]; then
+            echo 'pdd.xml has just been created'
+            CREATE_COMMIT=yes
+          elif ! diff --brief generated-todos/pdd.xml pdd.xml >/dev/null; then
+            echo 'pdd.xml has been modified'
+            CREATE_COMMIT=yes
+          fi
+
+          if [ ! -f generated-todos/todos-in-code.tsv ]; then
+            echo 'todos-in-code.tsv has just been created'
+            CREATE_COMMIT=yes
+          elif ! diff --brief generated-todos/todos-in-code.tsv todos-in-code.tsv >/dev/null; then
+            echo 'todos-in-code.tsv has been modified'
+            CREATE_COMMIT=yes
+          fi
+
+          if [ "$CREATE_COMMIT" = 'yes' ]; then
+            printf 'pdd.xml: %d puzzles\n' "$(grep -c '<puzzle>' pdd.xml)"
+            printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d todos-in-code.tsv | wc -l)"
+          else
+            echo 'neither pdd.xml nor todos-in-code.tsv have been modified'
+          fi
+
+          # Make variable available for the next steps
+          echo "CREATE_COMMIT=$CREATE_COMMIT" | tee -a "$GITHUB_ENV"
+
+      - name: Collect information about the original commit
+        if: env.CREATE_COMMIT == 'yes'
+        run: |
+          # Make variables available for the next steps
+          (
+            echo "COMMIT_MSG=$(git show "$GITHUB_SHA" --no-patch --format=oneline --abbrev-commit)"
+            echo "AUTHOR_EMAIL=$(git show "$GITHUB_SHA" --no-patch --format=%aE)"
+            echo "AUTHOR_NAME=$(git show "$GITHUB_SHA" --no-patch --format=%aN)"
+          ) | tee -a "$GITHUB_ENV"
+
+      - name: Commit the changes
+        if: env.CREATE_COMMIT == 'yes'
+        env:
+          GIT_AUTHOR_NAME:     "GitHub Action on behalf of ${{ env.AUTHOR_NAME }}"
+          GIT_COMMITTER_NAME:  "GitHub Action on behalf of ${{ env.AUTHOR_NAME }}"
+          GIT_AUTHOR_EMAIL:    "${{ env.AUTHOR_EMAIL }}"
+          GIT_COMMITTER_EMAIL: "${{ env.AUTHOR_EMAIL }}"
+          NEW_COMMIT_MSG:      "chore: processed ${{ env.COMMIT_MSG }}"
+        working-directory: generated-todos
+        run: |
+          for FILE in pdd.xml todos-in-code.tsv; do
+            mv -f ../$FILE .
+            git add $FILE
+          done
+          git commit --all -m "$NEW_COMMIT_MSG"
+          git push
+
+      - name: Cleanup
+        if: always()
+        run: |
+          [ ! -f pdd.xml ] || rm -fv pdd.xml
+          [ ! -f todos-in-code.tsv ] || rm -fv todos-in-code.tsv
+          [ ! -d generated-todos ] || git worktree remove generated-todos
