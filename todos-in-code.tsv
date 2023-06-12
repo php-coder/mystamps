@@ -1,0 +1,209 @@
+Id	Ticket	"Title"	File	Lines
+109-a721e051	109	"Check src/main/config/nginx/503.*html by html5validator"	src/main/scripts/execute-command.sh	63-63
+226-af195ad8	226	"Introduce app.use-public-hostname property"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	93-93
+477-6f081e18	477	"Add to collection: integration test for invisible quantity for a series with 1 stamp"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	31-31
+493-278bfc9b	493	"AddCountryDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	244-244
+493-62b014f2	493	"AddCategoryDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	233-233
+493-632130de	493	"AddCollectionDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	255-255
+493-c468b8b5	493	"SuspiciousActivityDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	269-269
+493-ce63acfd	493	"AddSuspiciousActivityDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	264-264
+511-f20a64c0	511	"/collection/{slug}: wrap a long caption"	src/main/webapp/WEB-INF/views/collection/info.html	162-162
+517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	222-222
+517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	221-221
+517-d58933f7	517	"Add integration tests for category suggestion"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	203-203
+592-8fadbb56	592	"GroupByParent: add unit tests"	src/main/java/ru/mystamps/web/support/thymeleaf/GroupByParent.java	35-35
+660-32942e08	660	"JdbcSeriesImportDao.addRawContent(): introduce dao"	src/main/java/ru/mystamps/web/feature/series/importing/JdbcSeriesImportDao.java	150-150
+663-2b32ef86	663	"Add to collection: add integration test for specifying a price"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	32-32
+663-8bbd6c00	663	"/series/{id}(price): must be greater than zero"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	47-47
+665-32370c4c	665	"TimedDownloaderService: add unit tests"	src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java	30-30
+671-aade0c20	671	"/series/add: add integration test to check that Scott numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	106-106
+671-e8c4f51d	671	"/series/add: add integration test for Scott numbers error message"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	107-107
+684-b075a77e	684	"Series import: add integration test for the case when parsed value don't match database"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	244-245
+687-994e661c	687	"Random.STATUSES: reduce duplication by using EnumSet.allOf()"	src/test/java/ru/mystamps/web/tests/Random.java	62-62
+687-c6d33b89	687	"replace set of strings by enum"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java	30-30
+690-384e961f	690	"HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()"	src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java	38-38
+694-18bba425	694	"Import series: add support for Zagorski catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	104-104
+694-2b8246eb	694	"SeriesImportServiceImpl.saveParsedData(): add unit tests for michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	201-201
+694-35aab30a	694	"CatalogUtils: consider introducing toLongForm(String) method"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	58-58
+694-424e441b	694	"Import series: add support for Yvert catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	102-102
+694-5e76eadc	694	"CatalogUtils.toShortForm(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/CatalogUtils.java	61-61
+694-5ff627a7	694	"SeriesInfoExtractorServiceImpl: support for a single Michel number"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	327-327
+694-6574cec0	694	"ExpandCatalogNumbersEditor: add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	35-35
+694-8e1ac4c4	694	"Import series: add support for Scott catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	101-101
+694-993ff349	694	"/series/import/request/{id}: add integration test for trimming of michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	56-57
+694-b7a345ad	694	"/series/import/request/{id}(michelNumbers): add integration test for validation"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	106-106
+694-d17b3e39	694	"Support for a separate locator for a field with michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	199-199
+694-d360b036	694	"Import series: add support for Gibbons catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	103-103
+694-d39599f4	694	"SeriesInfoExtractorServiceImpl: support for a comma separated Michel numbers"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	328-328
+694-d3adec03	694	"ExpandCatalogNumbersEditor: find a better way of editors composition"	src/main/java/ru/mystamps/web/feature/series/importing/ExpandCatalogNumbersEditor.java	50-50
+694-f7d3a238	694	"Import series: add support for Solovyov catalog numbers"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	105-105
+695-0c97d8b1	695	"/series/import/request/{id}(seriesSale): add integration test for validation of required fields"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	32-33
+695-18c5a29c	695	"/series/import/request/{id}: seller's name and url are required when sellerId is empty"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	31-31
+695-1c6fc247	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out non-urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	418-418
+695-30836e69	695	"SeriesInfoExtractorServiceImpl.extractPrice(): filter out values <= 0"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	473-473
+695-3605c681	695	"/series/import/request/{id}(seller.name): add validation against long values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	29-29
+695-3e442dbc	695	"/series/import/request/{id}(seller.url): add validation against long values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	33-33
+695-6636bb5e	695	"Remove hasAtLeastOneFieldFilled() methods from DTOs"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	253-253
+695-7d753493	695	"/series/import/request/{id}(seller.name): add validation against short values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	28-28
+695-acc3d320	695	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name/url (length etc)"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	357-357
+695-b081f579	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out long names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	407-407
+695-c38ae205	695	"SeriesInfoExtractorServiceImpl.extractSellerUrl(): filter out too long urls"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	419-419
+695-c3acafce	695	"SeriesImportService.addSeries(): introduce DTO object"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportService.java	28-28
+695-eb735e9f	695	"/series/import/request/{id}: use divs instead of table for elements aligning"	src/main/scripts/execute-command.sh	64-64
+695-ee1c9a1a	695	"SeriesInfoExtractorServiceImpl.extractSellerName(): filter out short names"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	406-406
+695-f2940c60	695	"/series/import/request/{id}(seller.url): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	32-32
+705-eb60edc9	705	"remote-backup.sh: find a way to protect duplicity against ps"	infra/vagrant/provisioning/roles/mystamps-backup/tasks/main.yml	64-64
+709-2eff2f2e	709	"/series/import/request/{id}(quantity): add integration test for max value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	62-62
+709-3f7597a9	709	"/series/import/request/{id}(imageUrl): add validation for valid url"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	73-73
+709-51c3200e	709	"/series/import/request/{id}(perforated): add integration test for required field"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	68-68
+709-64870988	709	"/series/import/request/{id}(category): add integration test for required field"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	52-52
+709-6a277942	709	"/series/import/request/{id}(imageUrl): add validation for non-empty file"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	95-95
+709-74ca36a7	709	"/series/import/request/{id}(imageUrl): add integration test for required field"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	94-94
+709-7b960d82	709	"/series/import/request/{id}(imageUrl): add validation for file type"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	97-97
+709-8e67a194	709	"/series/import/request/{id}(quantity): add integration test for required field"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	60-60
+709-8f32202e	709	"/series/import/request/{id}(year): add validation for min value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	86-86
+709-fd5f9ae4	709	"/series/import/request/{id}(quantity): add integration test for min value"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	61-61
+709-fe188622	709	"/series/import/request/{id}(year): add validation for year in future"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	87-87
+709-ffbd8602	709	"/series/import/request/{id}(imageUrl): add validation for file size"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	96-96
+734-10236b8a	734	"TestObjects.createAddSeriesDto(): return randomized values"	src/test/java/ru/mystamps/web/service/TestObjects.java	307-307
+738-13880c1a	738	"Random.participantGroupName(): make the generated names conform to the validation rules (when they will appear)"	src/test/java/ru/mystamps/web/tests/Random.java	190-191
+749-2a40850f	749	"/series/{id}: add integration test that import info is only visible to admin"	src/test/robotframework/series/import/request-logic.robot	39-39
+769-4310f3c0	769	"Random.price(): return randomized values"	src/test/java/ru/mystamps/web/tests/Random.java	96-96
+769-d2cdc518	769	"/series/add: validate that Zagorski numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	135-136
+770-3251a080	770	"/series/add: validate that Solovyov numbers are specified only for stamps from USSR/Russia"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	127-128
+782-a11927bd	782	"Series import: add integration test for extracting perforation flag"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	294-294
+785-140bc7bd	785	"Update series: add integration test for non-empty ""path"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	43-43
+785-37a48219	785	"Update series: properly fail on non-supported operations"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	71-71
+785-4e1225ab	785	"Update series: add integration test for required ""op"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	39-39
+785-70fca94a	785	"Improve error handling for requests with a list of objects"	src/main/java/ru/mystamps/web/support/spring/mvc/ValidationErrors.java	54-54
+785-a8e6066a	785	"Update series: properly fail on invalid path"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	111-111
+785-c0b6c3f6	785	"Update series: add integration test for non-empty ""value"" field"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	47-47
+785-c33d2a08	785	"Update series: handle refuse to update an existing comment gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	149-149
+801-b1837c29	801	"TimedSiteParser: add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/TimedSiteParser.java	25-25
+803-64628226	803	"SeriesInfoExtractorServiceImpl.extract(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	107-107
+819-04650c42	819	"CountryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/country/CountryServiceImpl.java	95-95
+819-38c578c8	819	"CategoryServiceImpl.findIdsWhenNameStartsWith(): add unit test for converting to lower case"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	95-95
+834-3f317328	834	"SeriesSalesImportServiceImpl.saveParsedData(): introduce dto without dates"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	98-98
+857-34fbb536	857	"/series/import/request/{id}(seller.group): add validation against negative values"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	36-36
+857-719bea28	857	"Check that a just created seller belongs to the ""example.com"" group"	src/test/robotframework/series/import/request-logic.robot	130-130
+857-83098214	857	"TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service"	src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java	98-98
+857-a6f9cdd0	857	"SeriesImportServiceImpl.saveParsedData(): add unit test for seller group"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	214-214
+857-aa59724c	857	"/series/import/request/{id}(seller.group): add validation for existing group"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	37-37
+869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	16-16
+869-982802a1	869	"Find a better way to deal with SpotBugs warnings in DAO classes -->"	src/main/config/spotbugs-filter.xml	7-7
+884-03637f5c	884	"/collection/{slug}/estimation: optimize summing of prices"	src/main/webapp/WEB-INF/views/collection/estimation.html	118-118
+892-9e92b338	892	"Add integration tests for showing a link to collection estimation page"	src/main/webapp/WEB-INF/views/collection/info.html	101-101
+927-0bf380a9	927	"Move series package one level up"	src/main/java/ru/mystamps/web/feature/series/package-info.java	1-1
+927-0de549b6	927	"Move collection package one level up"	src/main/java/ru/mystamps/web/feature/collection/package-info.java	1-1
+927-285714a8	927	"Move category package one level up"	src/main/java/ru/mystamps/web/feature/category/package-info.java	1-1
+927-5e01dc83	927	"Move site package to one level up"	src/main/java/ru/mystamps/web/feature/site/package-info.java	1-1
+927-61bc647b	927	"Move image package one level up"	src/main/java/ru/mystamps/web/feature/image/package-info.java	1-1
+927-664a2788	927	"Move participant package one level up"	src/main/java/ru/mystamps/web/feature/participant/package-info.java	1-1
+927-9e515adc	927	"Extract logic to a separate method or add to SeriesImportService.addRequest()"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java	97-97
+927-d8dc99c9	927	"Move country package one level up"	src/main/java/ru/mystamps/web/feature/country/package-info.java	1-1
+927-e31062c0	927	"Move account package one level up"	src/main/java/ru/mystamps/web/feature/account/package-info.java	1-1
+927-e9697c74	927	"Move report package one level up"	src/main/java/ru/mystamps/web/feature/report/package-info.java	1-1
+971-32d95143	971	"Document ErrorProne tool -->"	pom.xml	895-895
+975-c9aec551	975	"SiteParserServiceImpl: add unit tests for constructor"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	64-64
+975-d6c13208	975	"SiteParserServiceImpl.findParserNames(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	54-54
+975-e76660de	975	"SiteParserServiceImpl.findForUrl(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	33-33
+978-63d2b8ea	978	"SeriesInfoExtractorServiceImpl.extractSeller(): validate name"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	365-365
+979-ca86046a	979	"Add integration test for import of series with currency-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	65-65
+995-71e1e7c8	995	"Series sale import: add support for new sellers"	src/main/webapp/WEB-INF/views/series/info.html	857-857
+995-950efed9	995	"SeriesSalesImportServiceImpl.downloadAndParse(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	42-42
+995-a90e239c	995	"SeriesInfoExtractorService: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	85-85
+995-dfb3dc6f	995	"SiteParser: introduce a method for parsing only sales-related info"	src/main/java/ru/mystamps/web/feature/series/importing/sale/SeriesSalesImportServiceImpl.java	61-61
+1000-66d57f44	1000	"Terraform: add Mailgun"	infra/terraform/my-stamps.tf	3-3
+1000-6a846ef7	1000	"Terraform: add UptimeRobot"	infra/terraform/my-stamps.tf	2-2
+1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
+1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-8
+1054-0d061f99	1054	"Introduce ""mailgun-mock"" profile"	src/main/resources/application-postgres.properties	25-25
+1054-25fd6f7f	1054	"Extract list of exclusions to a common profile Full list of autoconfiguration classes: https://docs.spring.io/spring-boot/docs/2.2.x/reference/html/appendix-auto-configuration-classes.html The difference between test profile is that we don't need H2ConsoleAutoConfiguration"	src/main/resources/application-postgres.properties	41-45
+1054-33066ab3	1054	"Introduce profiles for image persistence strategies"	src/main/java/ru/mystamps/web/feature/image/ImageConfig.java	80-80
+1054-41eae704	1054	"Extract part of spring.messages configuration to a common profile"	src/main/resources/application-postgres.properties	10-10
+1054-7817233c	1054	"Extract part of Thymeleaf configuration to a common profile"	src/main/resources/application-postgres.properties	19-19
+1054-d4786412	1054	"Introduce profiles for liquibase contexts"	src/main/resources/application-postgres.properties	29-29
+1057-5419ab18	1057	"SeriesSaleImportForm: wait until setState() finishes (see https://reactjs.org/docs/react-component.html#setstate)"	src/main/frontend/src/components/SeriesSaleImportForm.js	31-32
+1057-ae51bd20	1057	"SeriesSaleImportForm: add tests"	src/main/frontend/src/components/SeriesSaleImportForm.js	6-6
+1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
+1060-542e4feb	1060	"Document usage of frontend-maven-plugin -->"	pom.xml	1323-1324
+1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	638-638
+1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	136-136
+1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
+1149-f52d6199	1149	"Move feature-specific rules to the dedicated packages"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	108-108
+1154-3fe7f1f2	1154	"Set charset of MySQL container by providing a custom my.cnf"	.github/workflows/integration-tests-mysql.yml	65-65
+1154-b99af137	1154	"Rename profile ""travis"" to ""mysql"""	src/main/resources/application-travis.properties	2-2
+1160-545c948a	1160	"ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz"	src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java	160-160
+1161-69decc53	1161	"Add Feature-Policy header"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	172-172
+1161-a2706b18	1161	"Consider using spring.task.execution properties instead of manual configuration"	src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java	31-31
+1170-4b91f3a7	1170	"ErrorProne: activate experimental checks -->"	pom.xml	897-898
+1230-8769330d	1230	"/series/import/request/{id}: validate that both alt price/currency are present or absent"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	48-48
+1230-9685721f	1230	"SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	229-230
+1254-f96635a2	1254	"Update workflow to mention RetryDownloading event"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java	105-105
+1268-64454c39	1268	"Update Terraform to 0.15.x"	infra/terraform/versions.tf	2-2
+1277-5efa16a9	1277	"/series/add: add integration test to check that Michel numbers may contain letter"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	99-99
+1280-233d287d	1280	"Mark similar series: add integration tests"	src/main/webapp/WEB-INF/views/series/info.html	1289-1289
+1280-50f25bf4	1280	"AddSimilarSeriesForm: seriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	33-33
+1280-6ea086d8	1280	"AddSimilarSeriesForm: series and similar series must be different"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	28-28
+1280-77fd103b	1280	"AddSimilarSeriesForm: add integration test for mandatory similarSeriesId"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	37-37
+1280-7ac54ef9	1280	"Mark similar series: gracefully handle error when value mismatches to type"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	656-656
+1280-9a82bce8	1280	"SimilarSeriesForm: add tests"	src/main/frontend/src/components/SimilarSeriesForm.js	6-6
+1280-e234a7b0	1280	"SeriesServiceImpl.markAsSimilar(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	431-431
+1280-e7733cce	1280	"AddSimilarSeriesForm: similarSeriesId must exist"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	38-38
+1281-8f164ecd	1281	"Add integration test for import with seller-url-locator"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserConfiguration.java	62-62
+1282-0969f19a	1282	"Consider adding a field with an image used for preview"	src/main/resources/sql/series_dao_queries.properties	178-178
+1287-00d4c9e9	1287	"SeriesInfoExtractorServiceImpl.extractIssueDate(): filter out invalid day/month"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	256-257
+1287-08af32c7	1287	"/series/import/request/{id}: add integration tests for release day and month"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	44-44
+1287-318d9e28	1287	"/series/import/request/{id}(month): add integration test for invalid month"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	82-82
+1287-35da0048	1287	"/series/import/request/{id}(day): add integration test for invalid day"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	78-78
+1287-6ef6a9d5	1287	"/series/import/request/{id}: year is required when month is specified"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	46-46
+1287-760de89e	1287	"/series/import/request/{id}: month is required when day is specified"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	45-45
+1287-917ee600	1287	"/series/import/request/{id}: release date should be in past"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesForm.java	47-47
+1303-015294f3	1303	"Replace image: add integration test for mandatory imageId"	src/main/java/ru/mystamps/web/feature/series/AddImageForm.java	67-67
+1303-25f7ab3b	1303	"Replace image form: arrange submit buttons in a one line"	src/main/webapp/WEB-INF/views/series/info.html	167-167
+1303-59dd45e7	1303	"FilesystemImagePersistenceStrategy.replacePreview(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java	133-133
+1303-5b557695	1303	"ImageServiceImpl.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	83-83
+1303-7320596f	1303	"ImageServiceImpl: reduce duplication between add() and replace()"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	84-84
+1303-7c7e06c0	1303	"SeriesServiceImpl.replaceImage(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	252-252
+1303-7ef1304a	1303	"DatabaseImagePersistenceStrategy.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java	67-67
+1303-c0d00ebb	1303	"Replace image: validate that image id is valid"	src/main/java/ru/mystamps/web/feature/series/AddImageForm.java	68-68
+1303-c2bfae4d	1303	"FilesystemImagePersistenceStrategy.replace(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/FilesystemImagePersistenceStrategy.java	108-108
+1303-dcf84f86	1303	"DatabaseImagePersistenceStrategy.replacePreview(): add unit tests"	src/main/java/ru/mystamps/web/feature/image/DatabaseImagePersistenceStrategy.java	79-79
+1303-fbc787d3	1303	"ImageServiceImpl.replace(): ensure that method cleanups file after exception"	src/main/java/ru/mystamps/web/feature/image/ImageServiceImpl.java	85-85
+1326-2bc92a3c	1326	"SeriesImportServiceImpl.saveParsedData(): add unit test for condition"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	237-237
+1326-2cfe45cd	1326	"JsoupSiteParser.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	286-286
+1326-4794f854	1326	"Series sale import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/sale/AddSeriesSalesForm.java	72-72
+1326-d460ac09	1326	"SeriesInfoExtractorServiceImpl.extractCondition(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesInfoExtractorServiceImpl.java	535-535
+1326-e5faca08	1326	"Series import: add integration test for series condition"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	52-52
+1329-5cbf2e5d	1329	"SeriesSalesList: add tests"	src/main/frontend/src/components/SeriesSalesList.js	6-6
+1338-4f752b8a	1338	"AddCommentForm: add tests"	src/main/frontend/src/components/AddCommentForm.js	7-7
+1339-3c1b068a	1339	"SeriesServiceImpl.addCatalogNumbers(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	205-205
+1339-9a7986f1	1339	"Update series: add validation for catalog numbers"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	49-49
+1340-1b97f079	1340	"Update series: handle refuse to update an existing price gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	377-377
+1340-34ef47fe	1340	"Update series: add validation for a price"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	50-50
+1340-c6d2a382	1340	"SeriesServiceImpl.addPrice(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	167-167
+1341-d3b9ba1b	1341	"AddCatalogNumbersForm: add tests"	src/main/frontend/src/components/AddCatalogNumbersForm.js	6-6
+1342-c6d2f2ba	1342	"AddCatalogPriceForm: add tests"	src/main/frontend/src/components/AddCatalogPriceForm.js	5-5
+1343-a893935d	1343	"Update series: add validation for a release year"	src/main/java/ru/mystamps/web/feature/series/RestSeriesController.java	51-51
+1343-c710f5d6	1343	"Update series: handle refuse to update an existing release year gracefully"	src/main/java/ru/mystamps/web/feature/series/JdbcSeriesDao.java	167-167
+1343-fe3ada44	1343	"SeriesServiceImpl.addReleaseYear(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	145-145
+1344-fb12fdf0	1344	"AddReleaseYearForm: add tests"	src/main/frontend/src/components/AddReleaseYearForm.js	6-6
+1356-b1ab6b12	1356	"Hidden images: add integration tests"	src/main/webapp/WEB-INF/views/series/info.html	177-177
+1356-cbf177f8	1356	"Hidden images: protect hidden images from direct access"	src/main/webapp/WEB-INF/views/series/info.html	179-179
+1356-ff7ebcc8	1356	"Hidden images: allow to replace a hidden image"	src/main/webapp/WEB-INF/views/series/info.html	178-178
+1383-68064f45	1383	"HideImageForm: add tests"	src/main/frontend/src/components/HideImageForm.js	7-7
+1388-110ff48f	1388	"AddCatalogPriceForm: consider using a tooltip for currency"	src/main/frontend/src/components/AddCatalogPriceForm.js	6-6
+1411-1e303594	1411	"Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties"	src/main/java/ru/mystamps/web/feature/series/SeriesService.java	35-35
+1421-f0722df3	1421	"/series/add: add integration test to check that Yvert numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	114-114
+1447-3c055652	1447	"Add test to ensure that catalog numbers are trimmed"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	52-52
+1448-3d19f9e8	1448	"AddSimilarSeriesForm.similarSeriesId: remove deprecated member NOTE: similarSeriesId is deprecated and exist only for backward compatibility"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	39-41
+1448-d5a68b83	1448	"AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	60-60
+1448-eb3f0fe6	1448	"SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	444-444
+1455-dfea25aa	1455	"Remove export of components to window"	src/main/frontend/webpack.config.js	4-4
+1484-0743f8f3	1484	"Remove usage of jest-standard-reporter once facebook/jest#5064 is resolved"	src/main/frontend/jest.config.js	11-11
+1484-7c5cb814	1484	"Find a better way to use ESM with Jest and replace jest-esm-transformer"	src/main/frontend/jest.config.js	6-6
+1484-a3f3427b	1484	"Document Jest usage"	src/main/frontend/jest.config.js	1-1
+1489-42680117	1489	"Use toHaveErrorMessage() or toHaveDescription() for checking error messages"	src/main/frontend/src/components/AddCommentForm.test.js	57-57
+1505-6101f84e	1505	"Don't load a series comment for anonymous users"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	320-320
+1513-5b274200	1513	"Add integration test to check that prices accept a decimal comma"	src/main/java/ru/mystamps/web/support/spring/mvc/BigDecimalConverter.java	29-29
+1605-c1ea4a5f	1605	"CollectionService.findAllForSitemap(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	213-213
