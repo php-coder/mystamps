@@ -28,7 +28,9 @@ class SeriesSaleImportForm extends React.PureComponent {
 	handleSubmit(event) {
 		event.preventDefault();
 		
-		// @todo #1057 SeriesSaleImportForm: wait until setState() finishes
+		/*
+		 * @todo #1057 SeriesSaleImportForm: wait until setState() finishes
+		 */
 		// (see https://reactjs.org/docs/react-component.html#setstate)
 		this.setState({
 			isDisabled: true,
