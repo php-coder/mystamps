@@ -242,7 +242,7 @@ public class SeriesImportServiceImpl implements SeriesImportService {
 		
 		// IMPORTANT: don't add code that modifies database above this line!
 		// @todo #684 Series import: add integration test
-		//  for the case when parsed value don't match database
+		//  for the case when parsed value doesn't match database
 		if (!seriesParsedData.hasAtLeastOneFieldFilled()) {
 			eventPublisher.publishEvent(new ParsingFailed(this, requestId));
 			return;
