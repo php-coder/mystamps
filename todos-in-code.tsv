@@ -2,11 +2,11 @@ Id	Ticket	"Title"	File	Lines
 109-a721e051	109	"Check src/main/config/nginx/503.*html by html5validator"	src/main/scripts/execute-command.sh	63-63
 226-af195ad8	226	"Introduce app.use-public-hostname property"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	93-93
 477-6f081e18	477	"Add to collection: integration test for invisible quantity for a series with 1 stamp"	src/main/java/ru/mystamps/web/feature/collection/AddToCollectionForm.java	31-31
-493-278bfc9b	493	"AddCountryDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	244-244
-493-62b014f2	493	"AddCategoryDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	233-233
-493-632130de	493	"AddCollectionDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	255-255
-493-c468b8b5	493	"SuspiciousActivityDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	269-269
-493-ce63acfd	493	"AddSuspiciousActivityDbDto: port to a new datetime API -->"	src/main/config/spotbugs-filter.xml	264-264
+493-2b6007d4	493	"SuspiciousActivityDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	280-280
+493-42e1fc4c	493	"AddCollectionDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	262-262
+493-6ad65c8d	493	"AddSuspiciousActivityDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	273-273
+493-bc96ed45	493	"AddCountryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	249-249
+493-f666e113	493	"AddCategoryDbDto: port to a new datetime API"	src/main/config/spotbugs-filter.xml	236-236
 511-f20a64c0	511	"/collection/{slug}: wrap a long caption"	src/main/webapp/WEB-INF/views/collection/info.html	162-162
 517-385bf5f0	517	"CategoryService.suggestCategoryForUser(): suggest the most popular category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	222-222
 517-49fc5900	517	"CategoryService.suggestCategoryForUser(): suggest a last created category"	src/main/java/ru/mystamps/web/feature/category/CategoryServiceImpl.java	221-221
@@ -89,8 +89,8 @@ Id	Ticket	"Title"	File	Lines
 857-83098214	857	"TransactionParticipantServiceImpl.findGroupIdByName(): move to a separate service"	src/main/java/ru/mystamps/web/feature/participant/ParticipantServiceImpl.java	98-98
 857-a6f9cdd0	857	"SeriesImportServiceImpl.saveParsedData(): add unit test for seller group"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	214-214
 857-aa59724c	857	"/series/import/request/{id}(seller.group): add validation for existing group"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSellerForm.java	37-37
+869-7bf9fe59	869	"Find a better way to deal with SpotBugs warnings in DAO classes"	src/main/config/spotbugs-filter.xml	8-8
 869-90e5e0f1	869	"show-spring-boot-version-diff.sh: properly handle recursive properties"	src/main/scripts/show-spring-boot-version-diff.sh	16-16
-869-982802a1	869	"Find a better way to deal with SpotBugs warnings in DAO classes -->"	src/main/config/spotbugs-filter.xml	7-7
 884-03637f5c	884	"/collection/{slug}/estimation: optimize summing of prices"	src/main/webapp/WEB-INF/views/collection/estimation.html	118-118
 892-9e92b338	892	"Add integration tests for showing a link to collection estimation page"	src/main/webapp/WEB-INF/views/collection/info.html	101-101
 927-0bf380a9	927	"Move series package one level up"	src/main/java/ru/mystamps/web/feature/series/package-info.java	1-1
@@ -103,7 +103,7 @@ Id	Ticket	"Title"	File	Lines
 927-d8dc99c9	927	"Move country package one level up"	src/main/java/ru/mystamps/web/feature/country/package-info.java	1-1
 927-e31062c0	927	"Move account package one level up"	src/main/java/ru/mystamps/web/feature/account/package-info.java	1-1
 927-e9697c74	927	"Move report package one level up"	src/main/java/ru/mystamps/web/feature/report/package-info.java	1-1
-971-32d95143	971	"Document ErrorProne tool -->"	pom.xml	895-895
+971-7e983586	971	"Document ErrorProne tool"	pom.xml	896-896
 975-c9aec551	975	"SiteParserServiceImpl: add unit tests for constructor"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/JsoupSiteParser.java	64-64
 975-d6c13208	975	"SiteParserServiceImpl.findParserNames(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	54-54
 975-e76660de	975	"SiteParserServiceImpl.findForUrl(): add unit tests"	src/main/java/ru/mystamps/web/feature/series/importing/extractor/SiteParserServiceImpl.java	33-33
@@ -118,15 +118,15 @@ Id	Ticket	"Title"	File	Lines
 1000-7b4c3a87	1000	"CI: validate and check Terraform configuration"	infra/terraform/my-stamps.tf	1-1
 1034-0016977f	1034	"Document how to run with PostgreSQL and docker-compose"	infra/docker/postgres.yml	7-8
 1054-0d061f99	1054	"Introduce ""mailgun-mock"" profile"	src/main/resources/application-postgres.properties	25-25
-1054-25fd6f7f	1054	"Extract list of exclusions to a common profile Full list of autoconfiguration classes: https://docs.spring.io/spring-boot/docs/2.2.x/reference/html/appendix-auto-configuration-classes.html The difference between test profile is that we don't need H2ConsoleAutoConfiguration"	src/main/resources/application-postgres.properties	41-45
+1054-1c349c8e	1054	"Extract list of exclusions to a common profile"	src/main/resources/application-postgres.properties	44-44
 1054-33066ab3	1054	"Introduce profiles for image persistence strategies"	src/main/java/ru/mystamps/web/feature/image/ImageConfig.java	80-80
 1054-41eae704	1054	"Extract part of spring.messages configuration to a common profile"	src/main/resources/application-postgres.properties	10-10
 1054-7817233c	1054	"Extract part of Thymeleaf configuration to a common profile"	src/main/resources/application-postgres.properties	19-19
 1054-d4786412	1054	"Introduce profiles for liquibase contexts"	src/main/resources/application-postgres.properties	29-29
-1057-5419ab18	1057	"SeriesSaleImportForm: wait until setState() finishes (see https://reactjs.org/docs/react-component.html#setstate)"	src/main/frontend/src/components/SeriesSaleImportForm.js	31-32
 1057-ae51bd20	1057	"SeriesSaleImportForm: add tests"	src/main/frontend/src/components/SeriesSaleImportForm.js	6-6
 1057-afe1bb59	1057	"Series sale import form: show a message when JavaScript is disabled"	src/main/webapp/WEB-INF/views/series/info.html	858-858
-1060-542e4feb	1060	"Document usage of frontend-maven-plugin -->"	pom.xml	1323-1324
+1057-ea0a43ea	1057	"SeriesSaleImportForm: wait until setState() finishes"	src/main/frontend/src/components/SeriesSaleImportForm.js	32-32
+1060-e52eab60	1060	"Document usage of frontend-maven-plugin"	pom.xml	1328-1328
 1098-de488059	1098	"Optimize a search within user's collection"	src/main/java/ru/mystamps/web/feature/series/SeriesController.java	638-638
 1123-296bb340	1123	"CollectionService.findSeriesInstances(): add unit tests"	src/main/java/ru/mystamps/web/feature/collection/CollectionServiceImpl.java	136-136
 1123-42494b3d	1123	"/collection/{slug}: show ""New"" badge only once"	src/main/webapp/WEB-INF/views/collection/info.html	161-161
@@ -136,7 +136,7 @@ Id	Ticket	"Title"	File	Lines
 1160-545c948a	1160	"ContentSecurityPolicyHeaderWriter shouldn't depend from Togglz"	src/main/java/ru/mystamps/web/support/spring/security/ContentSecurityPolicyHeaderWriter.java	160-160
 1161-69decc53	1161	"Add Feature-Policy header"	src/main/java/ru/mystamps/web/support/spring/security/SecurityConfig.java	172-172
 1161-a2706b18	1161	"Consider using spring.task.execution properties instead of manual configuration"	src/main/java/ru/mystamps/web/config/TaskExecutorConfig.java	31-31
-1170-4b91f3a7	1170	"ErrorProne: activate experimental checks -->"	pom.xml	897-898
+1170-64f18d35	1170	"ErrorProne: activate experimental checks"	pom.xml	900-900
 1230-8769330d	1230	"/series/import/request/{id}: validate that both alt price/currency are present or absent"	src/main/java/ru/mystamps/web/feature/series/importing/ImportSeriesSalesForm.java	48-48
 1230-9685721f	1230	"SeriesImportServiceImpl.saveParsedData(): add unit test for alternative price and currency"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	229-230
 1254-f96635a2	1254	"Update workflow to mention RetryDownloading event"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportController.java	105-105
@@ -196,7 +196,7 @@ Id	Ticket	"Title"	File	Lines
 1411-1e303594	1411	"Configure MethodValidationPostProcessor to use messages from ValidationMessages.properties"	src/main/java/ru/mystamps/web/feature/series/SeriesService.java	35-35
 1421-f0722df3	1421	"/series/add: add integration test to check that Yvert numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	114-114
 1447-3c055652	1447	"Add test to ensure that catalog numbers are trimmed"	src/main/java/ru/mystamps/web/support/spring/mvc/PatchRequest.java	52-52
-1448-3d19f9e8	1448	"AddSimilarSeriesForm.similarSeriesId: remove deprecated member NOTE: similarSeriesId is deprecated and exist only for backward compatibility"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	39-41
+1448-65ca5ec2	1448	"AddSimilarSeriesForm.similarSeriesId: remove deprecated member"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	39-39
 1448-d5a68b83	1448	"AddSimilarSeriesForm: add integration test that similarSeriesIds isn't empty"	src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java	60-60
 1448-eb3f0fe6	1448	"SeriesServiceImpl.markAsSimilar(): mark multiple series at once in DAO"	src/main/java/ru/mystamps/web/feature/series/SeriesServiceImpl.java	444-444
 1455-dfea25aa	1455	"Remove export of components to window"	src/main/frontend/webpack.config.js	4-4

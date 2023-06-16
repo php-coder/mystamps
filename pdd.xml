@@ -16,9 +16,9 @@
     <ticket>971</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>971-32d95143</id>
-    <lines>895-895</lines>
-    <body>Document ErrorProne tool --&gt;</body>
+    <id>971-7e983586</id>
+    <lines>896-896</lines>
+    <body>Document ErrorProne tool</body>
     <file>pom.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -27,9 +27,9 @@
     <ticket>1170</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1170-4b91f3a7</id>
-    <lines>897-898</lines>
-    <body>ErrorProne: activate experimental checks --&gt;</body>
+    <id>1170-64f18d35</id>
+    <lines>900-900</lines>
+    <body>ErrorProne: activate experimental checks</body>
     <file>pom.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -38,9 +38,9 @@
     <ticket>1060</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1060-542e4feb</id>
-    <lines>1323-1324</lines>
-    <body>Document usage of frontend-maven-plugin --&gt;</body>
+    <id>1060-e52eab60</id>
+    <lines>1328-1328</lines>
+    <body>Document usage of frontend-maven-plugin</body>
     <file>pom.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -82,9 +82,9 @@
     <ticket>869</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>869-982802a1</id>
-    <lines>7-7</lines>
-    <body>Find a better way to deal with SpotBugs warnings in DAO classes --&gt;</body>
+    <id>869-7bf9fe59</id>
+    <lines>8-8</lines>
+    <body>Find a better way to deal with SpotBugs warnings in DAO classes</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -93,9 +93,9 @@
     <ticket>493</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>493-62b014f2</id>
-    <lines>233-233</lines>
-    <body>AddCategoryDbDto: port to a new datetime API --&gt;</body>
+    <id>493-f666e113</id>
+    <lines>236-236</lines>
+    <body>AddCategoryDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -104,9 +104,9 @@
     <ticket>493</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>493-278bfc9b</id>
-    <lines>244-244</lines>
-    <body>AddCountryDbDto: port to a new datetime API --&gt;</body>
+    <id>493-bc96ed45</id>
+    <lines>249-249</lines>
+    <body>AddCountryDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>@php-coder</author>
     <email>slava.semushin@gmail.com</email>
@@ -115,9 +115,9 @@
     <ticket>493</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>493-632130de</id>
-    <lines>255-255</lines>
-    <body>AddCollectionDbDto: port to a new datetime API --&gt;</body>
+    <id>493-42e1fc4c</id>
+    <lines>262-262</lines>
+    <body>AddCollectionDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
@@ -126,9 +126,9 @@
     <ticket>493</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>493-ce63acfd</id>
-    <lines>264-264</lines>
-    <body>AddSuspiciousActivityDbDto: port to a new datetime API --&gt;</body>
+    <id>493-6ad65c8d</id>
+    <lines>273-273</lines>
+    <body>AddSuspiciousActivityDbDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
@@ -137,9 +137,9 @@
     <ticket>493</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>493-c468b8b5</id>
-    <lines>269-269</lines>
-    <body>SuspiciousActivityDto: port to a new datetime API --&gt;</body>
+    <id>493-2b6007d4</id>
+    <lines>280-280</lines>
+    <body>SuspiciousActivityDto: port to a new datetime API</body>
     <file>src/main/config/spotbugs-filter.xml</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
@@ -390,9 +390,9 @@
     <ticket>1448</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1448-3d19f9e8</id>
-    <lines>39-41</lines>
-    <body>AddSimilarSeriesForm.similarSeriesId: remove deprecated member NOTE: similarSeriesId is deprecated and exist only for backward compatibility</body>
+    <id>1448-65ca5ec2</id>
+    <lines>39-39</lines>
+    <body>AddSimilarSeriesForm.similarSeriesId: remove deprecated member</body>
     <file>src/main/java/ru/mystamps/web/feature/series/AddSimilarSeriesForm.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
@@ -1919,9 +1919,9 @@
     <ticket>1057</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1057-5419ab18</id>
-    <lines>31-32</lines>
-    <body>SeriesSaleImportForm: wait until setState() finishes (see https://reactjs.org/docs/react-component.html#setstate)</body>
+    <id>1057-ea0a43ea</id>
+    <lines>32-32</lines>
+    <body>SeriesSaleImportForm: wait until setState() finishes</body>
     <file>src/main/frontend/src/components/SeriesSaleImportForm.js</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
@@ -2007,9 +2007,9 @@
     <ticket>1054</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>1054-25fd6f7f</id>
-    <lines>41-45</lines>
-    <body>Extract list of exclusions to a common profile Full list of autoconfiguration classes: https://docs.spring.io/spring-boot/docs/2.2.x/reference/html/appendix-auto-configuration-classes.html The difference between test profile is that we don't need H2ConsoleAutoConfiguration</body>
+    <id>1054-1c349c8e</id>
+    <lines>44-44</lines>
+    <body>Extract list of exclusions to a common profile</body>
     <file>src/main/resources/application-postgres.properties</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
