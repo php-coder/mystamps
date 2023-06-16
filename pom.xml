@@ -892,9 +892,13 @@
 					<compilerArgs>
 						<compilerArg>-Xlint:unchecked</compilerArg>
 						<!-- Required for ErrorProne -->
-						<!-- @todo #971 Document ErrorProne tool -->
+						<!--
+							@todo #971 Document ErrorProne tool
+						-->
 						<compilerArg>-XDcompilePolicy=simple</compilerArg>
-						<!-- @todo #1170 ErrorProne: activate experimental checks -->
+						<!--
+							@todo #1170 ErrorProne: activate experimental checks
+						-->
 						<!--
 							The following checks have been disabled:
 							- MissingOverride: produce false positives with @Getter from Lombok
@@ -1320,7 +1324,9 @@
 			</activation>
 			<build>
 				<plugins>
-					<!-- @todo #1060 Document usage of frontend-maven-plugin -->
+					<!--
+						@todo #1060 Document usage of frontend-maven-plugin
+					-->
 					<!--
 						We assume that most of the time we develop backend rather frontend.
 						So, we cache and skip the frontend-related things by default. This
