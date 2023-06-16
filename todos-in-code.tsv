@@ -18,7 +18,7 @@ Id	Ticket	"Title"	File	Lines
 665-32370c4c	665	"TimedDownloaderService: add unit tests"	src/main/java/ru/mystamps/web/feature/series/TimedDownloaderService.java	30-30
 671-aade0c20	671	"/series/add: add integration test to check that Scott numbers may contain letters"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	106-106
 671-e8c4f51d	671	"/series/add: add integration test for Scott numbers error message"	src/main/java/ru/mystamps/web/feature/series/AddSeriesForm.java	107-107
-684-b075a77e	684	"Series import: add integration test for the case when parsed value don't match database"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	244-245
+684-0b0d5497	684	"Series import: add integration test for the case when parsed value doesn't match database"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java	244-245
 687-994e661c	687	"Random.STATUSES: reduce duplication by using EnumSet.allOf()"	src/test/java/ru/mystamps/web/tests/Random.java	62-62
 687-c6d33b89	687	"replace set of strings by enum"	src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportDb.java	30-30
 690-384e961f	690	"HasSiteParserValidator: introduce SiteParserService.hasParserForUrl()"	src/main/java/ru/mystamps/web/feature/series/importing/HasSiteParserValidator.java	38-38

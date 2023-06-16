@@ -1215,9 +1215,9 @@
     <ticket>684</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
-    <id>684-b075a77e</id>
+    <id>684-0b0d5497</id>
     <lines>244-245</lines>
-    <body>Series import: add integration test for the case when parsed value don't match database</body>
+    <body>Series import: add integration test for the case when parsed value doesn't match database</body>
     <file>src/main/java/ru/mystamps/web/feature/series/importing/SeriesImportServiceImpl.java</file>
     <author>Slava Semushin</author>
     <email>slava.semushin@gmail.com</email>
