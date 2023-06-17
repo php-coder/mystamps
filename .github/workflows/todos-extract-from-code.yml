@@ -67,25 +67,25 @@ jobs:
 
       - name: Check whether there are new todos
         run: |
-          CREATE_COMMIT=no
+          PUZZLES_FILES_MODIFIED=no
 
           if [ ! -f generated-todos/pdd.xml ]; then
             echo 'pdd.xml has just been created'
-            CREATE_COMMIT=yes
+            PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/pdd.xml pdd.xml >/dev/null; then
             echo 'pdd.xml has been modified'
-            CREATE_COMMIT=yes
+            PUZZLES_FILES_MODIFIED=yes
           fi
 
           if [ ! -f generated-todos/todos-in-code.tsv ]; then
             echo 'todos-in-code.tsv has just been created'
-            CREATE_COMMIT=yes
+            PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/todos-in-code.tsv todos-in-code.tsv >/dev/null; then
             echo 'todos-in-code.tsv has been modified'
-            CREATE_COMMIT=yes
+            PUZZLES_FILES_MODIFIED=yes
           fi
 
-          if [ "$CREATE_COMMIT" = 'yes' ]; then
+          if [ "$PUZZLES_FILES_MODIFIED" = 'yes' ]; then
             printf 'pdd.xml: %d puzzles\n' "$(grep -c '<puzzle>' pdd.xml)"
             printf 'todos-in-code.tsv: %d todos\n' "$(sed 1d todos-in-code.tsv | wc -l)"
           else
@@ -93,10 +93,10 @@ jobs:
           fi
 
           # Make variable available for the next steps
-          echo "CREATE_COMMIT=$CREATE_COMMIT" | tee -a "$GITHUB_ENV"
+          echo "PUZZLES_FILES_MODIFIED=$PUZZLES_FILES_MODIFIED" | tee -a "$GITHUB_ENV"
 
       - name: Collect information about the original commit
-        if: env.CREATE_COMMIT == 'yes'
+        if: env.PUZZLES_FILES_MODIFIED == 'yes'
         run: |
           # Make variables available for the next steps
           (
@@ -106,7 +106,7 @@ jobs:
           ) | tee -a "$GITHUB_ENV"
 
       - name: Commit the changes
-        if: env.CREATE_COMMIT == 'yes'
+        if: env.PUZZLES_FILES_MODIFIED == 'yes'
         env:
           GIT_AUTHOR_NAME:     "GitHub Action on behalf of ${{ env.AUTHOR_NAME }}"
           GIT_COMMITTER_NAME:  "GitHub Action on behalf of ${{ env.AUTHOR_NAME }}"
