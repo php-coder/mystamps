@@ -1,4 +1,4 @@
-name: Extract todos from code
+name: Create issues from todos
 
 on:
   push:
@@ -121,6 +121,36 @@ jobs:
             git add $FILE
           done
           git commit --all -m "$NEW_COMMIT_MSG"
+          git push
+
+      - name: Connect todos to the issues
+        if: env.PUZZLES_FILES_MODIFIED == 'yes'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./src/main/scripts/ci/connect-todos-to-issues.sh generated-todos/todos-in-code.tsv
+
+      - name: Check whether todos-on-github.tsv has been modified
+        if: env.PUZZLES_FILES_MODIFIED == 'yes'
+        working-directory: generated-todos
+        run: |
+          PUZZLES_MAPPING_MODIFIED=no
+
+          if ! git diff-index --quiet HEAD -- todos-on-github.tsv; then
+            PUZZLES_MAPPING_MODIFIED=yes
+            echo 'todos-on-github.tsv has been modified'
+          fi
+
+          # Make variable available for the next steps
+          echo "PUZZLES_MAPPING_MODIFIED=$PUZZLES_MAPPING_MODIFIED" | tee -a "$GITHUB_ENV"
+
+      - name: Commit updated mapping
+        if: env.PUZZLES_FILES_MODIFIED == 'yes' && env.PUZZLES_MAPPING_MODIFIED == 'yes'
+        env:
+          NEW_COMMIT_MSG: "chore: sync issues for ${{ env.COMMIT_MSG }}"
+        working-directory: generated-todos
+        run: |
+          git add todos-on-github.tsv
+          git commit todos-on-github.tsv -m "$NEW_COMMIT_MSG"
           git push
 
       - name: Cleanup
