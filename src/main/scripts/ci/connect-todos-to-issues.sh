@@ -54,6 +54,15 @@ export GH_TOKEN="$(gh auth token)"
 # a non-empty string enabled debug output
 ENABLE_DEBUG=
 
+# What a label to put on the issue
+ISSUE_LABEL=techdebt
+
+ISSUE_BODY_TEMPLATE='echo "The puzzle $PUZZLE_ID from #$ORIG_ISSUE has to be resolved:
+
+https://github.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/${PUZZLE_FILE}#L${PUZZLE_LINE_START}-L${PUZZLE_LINE_END}
+
+Tech debt for: $GITHUB_SHA (#$ORIG_ISSUE)"'
+
 DIR="$(dirname "$1")"
 MAPPING_FILE="$DIR/todos-on-github.tsv"
 
@@ -63,6 +72,10 @@ if [ ! -f "$MAPPING_FILE" ]; then
 else
     info "$MAPPING_FILE exists"
 fi
+
+[ -f "$DIR/todos-in-code.tsv" ] || fatal "$DIR/todos-in-code.tsv doesn't exists!"
+[ -n "${GITHUB_SHA:-}" ]        || fatal 'GITHUB_SHA env variable is not set!'
+[ -n "${GITHUB_REPOSITORY:-}" ] || fatal 'GITHUB_REPOSITORY env variable is not set!'
 
 PUZZLES_COUNT=0
 NEW_ISSUES_COUNT=0
@@ -136,6 +149,25 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
 
     if [ $ISSUES_COUNT -le 0 ]; then
         info "$PUZZLE_ID: no related issues found. Need to create a new issue: $TITLE"
+
+        IFS=$'\t' read SKIP_PUZZLE_ID ORIG_ISSUE SKIP_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$DIR/todos-in-code.tsv")
+
+        # "50-51" => {50, 51}
+        IFS='-' read PUZZLE_LINE_START PUZZLE_LINE_END < <(echo "$PUZZLE_LINES")
+
+        ISSUE_BODY="$(eval "$ISSUE_BODY_TEMPLATE")"
+        debug "$PUZZLE_ID: issue body:"
+        debug '--- BEGIN ---'
+        debug "$ISSUE_BODY"
+        debug '--- END ---'
+
+        ISSUE_LINK="$(gh issue create --repo "$REPO" --label "$ISSUE_LABEL" --title "$TITLE" --body "$ISSUE_BODY" | sed -n '/issues/p')"
+        # https://github.com/php-coder/mystamps/issues/1111 => 1111
+        ISSUE_ID="$(echo "$ISSUE_LINK" | sed -E 's|.*/issues/([0-9]+)$|\1|')"
+        info "$PUZZLE_ID => #$ISSUE_ID: issue has been created: $ISSUE_LINK"
+
+        info "$PUZZLE_ID => #$ISSUE_ID: link with $ISSUE_ID (just created)"
+        printf '%s\t%s\topen\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" >> "$MAPPING_FILE"
         NEW_ISSUES_COUNT=$[NEW_ISSUES_COUNT + 1]
         continue
     fi
