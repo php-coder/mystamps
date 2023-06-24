@@ -57,7 +57,7 @@ ENABLE_DEBUG=
 # What a label to put on the issue
 ISSUE_LABEL=techdebt
 
-ISSUE_BODY_TEMPLATE='echo "The puzzle $PUZZLE_ID from #$ORIG_ISSUE has to be resolved:
+ISSUE_BODY_TEMPLATE='echo "The puzzle \`${PUZZLE_ID}\` from #$ORIG_ISSUE has to be resolved:
 
 https://github.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/${PUZZLE_FILE}#L${PUZZLE_LINE_START}-L${PUZZLE_LINE_END}
 
