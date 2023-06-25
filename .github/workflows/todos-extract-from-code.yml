@@ -129,8 +129,8 @@ jobs:
         if: env.PUZZLES_FILES_MODIFIED == 'no'
         working-directory: generated-todos
         run: |
-          NEW_PIZZLES="$(comm -23 <(cut -d$'\t' -f1 todos-in-code.tsv | sort) <(cut -d$'\t' -f1 todos-on-github.tsv | sort))"
-          if [ -n "$NEW_PIZZLES" ]; then
+          NEW_PUZZLES="$(comm -23 <(cut -d$'\t' -f1 todos-in-code.tsv | sort) <(cut -d$'\t' -f1 todos-on-github.tsv | sort))"
+          if [ -n "$NEW_PUZZLES" ]; then
             echo "Found puzzles without related issues:"
             echo "$NEW_PUZZLES" | while read PUZZLE_ID; do
               grep "$PUZZLE_ID" todos-in-code.tsv | IFS=$'\t' read SKIP_PUZZLE_ID TICKET TITLE REST
