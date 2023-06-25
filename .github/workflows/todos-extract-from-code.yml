@@ -133,8 +133,8 @@ jobs:
           if [ -n "$NEW_PUZZLES" ]; then
             echo "Found puzzles without related issues:"
             echo "$NEW_PUZZLES" | while read PUZZLE_ID; do
-              grep "$PUZZLE_ID" todos-in-code.tsv | IFS=$'\t' read SKIP_PUZZLE_ID TICKET TITLE REST
-              echo "$PUZZLE_ID from #$TICKET: $(echo "$TITLE" | sed 's|^"||;s|"$||;s|""|"|'g)"
+              TITLE="$(grep "$PUZZLE_ID" todos-in-code.tsv | cut -d$'\t' -f3 | sed 's|^"||;s|"$||;s|""|"|g')"
+              echo "- $PUZZLE_ID: $TITLE"
             done
             HAVE_PUZZLES_WITHOUT_ISSUES=yes
           else
