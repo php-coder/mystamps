@@ -161,7 +161,7 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
         debug "$ISSUE_BODY"
         debug '--- END ---'
 
-        ISSUE_LINK="$(gh issue create --repo "$REPO" --label "$ISSUE_LABEL" --title "$TITLE" --body "$ISSUE_BODY" | sed -n '/issues/p')"
+        ISSUE_LINK="$(gh issue create --repo "$GITHUB_REPOSITORY" --label "$ISSUE_LABEL" --title "$TITLE" --body "$ISSUE_BODY" | sed -n '/issues/p')"
         # https://github.com/php-coder/mystamps/issues/1111 => 1111
         ISSUE_ID="$(echo "$ISSUE_LINK" | sed -E 's|.*/issues/([0-9]+)$|\1|')"
         info "$PUZZLE_ID => #$ISSUE_ID: issue has been created: $ISSUE_LINK"
