@@ -123,8 +123,29 @@ jobs:
           git commit --all -m "$NEW_COMMIT_MSG"
           git push
 
+      # It's possible that for some puzzles we haven't created issues yet
+      # (because of network, rate limit or other kind of errors)
+      - name: Check whether there are puzzles without related issues
+        if: env.PUZZLES_FILES_MODIFIED == 'no'
+        working-directory: generated-todos
+        run: |
+          NEW_PIZZLES="$(comm -23 <(cut -d$'\t' -f1 todos-in-code.tsv | sort) <(cut -d$'\t' -f1 todos-on-github.tsv | sort))"
+          if [ -n "$NEW_PIZZLES" ]; then
+            echo "Found puzzles without related issues:"
+            echo "$NEW_PUZZLES" | while read PUZZLE_ID; do
+              grep "$PUZZLE_ID" todos-in-code.tsv | IFS=$'\t' read SKIP_PUZZLE_ID TICKET TITLE REST
+              echo "$PUZZLE_ID from #$TICKET: $(echo "$TITLE" | sed 's|^"||;s|"$||;s|""|"|'g)"
+            done
+            HAVE_PUZZLES_WITHOUT_ISSUES=yes
+          else
+            HAVE_PUZZLES_WITHOUT_ISSUES=no
+          fi
+
+          # Make variable available for the next steps
+          echo "HAVE_PUZZLES_WITHOUT_ISSUES=$HAVE_PUZZLES_WITHOUT_ISSUES" | tee -a "$GITHUB_ENV"
+
       - name: Connect todos to the issues
-        if: env.PUZZLES_FILES_MODIFIED == 'yes'
+        if: env.PUZZLES_FILES_MODIFIED == 'yes' || env.HAVE_PUZZLES_WITHOUT_ISSUES == 'yes'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./src/main/scripts/ci/connect-todos-to-issues.sh generated-todos/todos-in-code.tsv
