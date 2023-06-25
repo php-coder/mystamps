@@ -152,7 +152,7 @@ jobs:
         run: ./src/main/scripts/ci/connect-todos-to-issues.sh generated-todos/todos-in-code.tsv
 
       - name: Check whether todos-on-github.tsv has been modified
-        if: env.PUZZLES_FILES_MODIFIED == 'yes'
+        if: env.PUZZLES_FILES_MODIFIED == 'yes' || env.HAVE_PUZZLES_WITHOUT_ISSUES == 'yes'
         working-directory: generated-todos
         run: |
           PUZZLES_MAPPING_MODIFIED=no
@@ -166,7 +166,7 @@ jobs:
           echo "PUZZLES_MAPPING_MODIFIED=$PUZZLES_MAPPING_MODIFIED" | tee -a "$GITHUB_ENV"
 
       - name: Commit updated mapping
-        if: env.PUZZLES_FILES_MODIFIED == 'yes' && env.PUZZLES_MAPPING_MODIFIED == 'yes'
+        if: env.PUZZLES_MAPPING_MODIFIED == 'yes'
         env:
           NEW_COMMIT_MSG: "chore: sync issues for ${{ env.COMMIT_MSG }}"
         working-directory: generated-todos
