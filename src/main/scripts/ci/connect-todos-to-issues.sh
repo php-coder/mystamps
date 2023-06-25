@@ -113,11 +113,11 @@ while IFS=$'\t' read PUZZLE_ID TICKET TITLE REST; do
     # NB: we search by body as a title isn't reliable: it might be modified after issue creation and don't match with code
     # (but later, we check a title anyway)
     debug "$PUZZLE_ID: search issues with a body that contain puzzle id '$PUZZLE_ID' or a title that is equal to '$TITLE'"
-    SEARCH_BY_BODY="$(gh search issues --repo php-coder/mystamps --json number,state,url,title,body --match body "$PUZZLE_ID")"
+    SEARCH_BY_BODY="$(gh search issues --repo "$GITHUB_REPOSITORY" --json number,state,url,title,body --match body "$PUZZLE_ID")"
     ISSUES_BY_BODY_COUNT="$(echo "$SEARCH_BY_BODY" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_BY_BODY_COUNT issue(s) by body"
 
-    SEARCH_BY_TITLE="$(gh search issues --repo php-coder/mystamps --json number,state,url,title,body --match title "$TITLE")"
+    SEARCH_BY_TITLE="$(gh search issues --repo "$GITHUB_REPOSITORY" --json number,state,url,title,body --match title "$TITLE")"
     ISSUES_BY_TITLE_COUNT="$(echo "$SEARCH_BY_TITLE" | jq '. | length')"
     debug "$PUZZLE_ID: found $ISSUES_BY_TITLE_COUNT issue(s) by title"
 
