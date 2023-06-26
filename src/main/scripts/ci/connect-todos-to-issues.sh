@@ -76,7 +76,9 @@ else
     info "$ISSUES_MAPPING_FILE exists"
 fi
 
-[ -f "$DIR/todos-in-code.tsv" ] || fatal "$DIR/todos-in-code.tsv doesn't exists!"
+CODE_MAPPING_FILE="$1"
+[ -f "$CODE_MAPPING_FILE" ] || fatal "$CODE_MAPPING_FILE doesn't exists!"
+
 [ -n "${GITHUB_SHA:-}" ]        || fatal 'GITHUB_SHA env variable is not set!'
 [ -n "${GITHUB_REPOSITORY:-}" ] || fatal 'GITHUB_REPOSITORY env variable is not set!'
 
@@ -159,7 +161,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
 
         # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
         # shellcheck disable=SC2034
-        IFS=$'\t' read -r UNUSED_PUZZLE_ID ORIG_ISSUE UNUSED_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$DIR/todos-in-code.tsv")
+        IFS=$'\t' read -r UNUSED_PUZZLE_ID ORIG_ISSUE UNUSED_TITLE PUZZLE_FILE PUZZLE_LINES < <(grep --max-count=1 "^$PUZZLE_ID" "$CODE_MAPPING_FILE")
 
         # "50-51" => {50, 51}
         # These variables are needed for eval-ing ISSUE_BODY_TEMPLATE
@@ -235,7 +237,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
         info "$PUZZLE_ID => #$ISSUE_ID: link with $ISSUE_ID ($ISSUE_STATE)"
         printf '%s\t%s\t%s\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" "$ISSUE_STATE" >> "$ISSUES_MAPPING_FILE"
     fi
-done <<< "$(grep -v '^Id' "$1")"
+done <<< "$(grep -v '^Id' "$CODE_MAPPING_FILE")"
 
 info ''
 info 'DONE'
