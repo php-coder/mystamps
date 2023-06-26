@@ -96,34 +96,6 @@ jobs:
           # Make variable available for the next steps
           echo "PUZZLES_FILES_MODIFIED=$PUZZLES_FILES_MODIFIED" | tee -a "$GITHUB_ENV"
 
-      - name: Initialize Git variables for committing the changes
-        if: env.PUZZLES_FILES_MODIFIED == 'yes'
-        run: |
-          AUTHOR_EMAIL="$(git show "$GITHUB_SHA" --no-patch --format=%aE)"
-          AUTHOR_NAME="$(git show "$GITHUB_SHA" --no-patch --format=%aN)"
-
-          # Make variables available for the next steps
-          (
-            echo "COMMIT_MSG=$(git show "$GITHUB_SHA" --no-patch --format=oneline --abbrev-commit)"
-            echo "GIT_AUTHOR_NAME=GitHub Action on behalf of $AUTHOR_NAME"
-            echo "GIT_COMMITTER_NAME=GitHub Action on behalf of $AUTHOR_NAME"
-            echo "GIT_AUTHOR_EMAIL=$AUTHOR_EMAIL"
-            echo "GIT_COMMITTER_EMAIL=$AUTHOR_EMAIL"
-          ) | tee -a "$GITHUB_ENV"
-
-      - name: Commit the changes
-        if: env.PUZZLES_FILES_MODIFIED == 'yes'
-        env:
-          NEW_COMMIT_MSG: "chore: processed ${{ env.COMMIT_MSG }}"
-        working-directory: generated-todos
-        run: |
-          for FILE in pdd.xml todos-in-code.tsv; do
-            mv -f ../$FILE .
-            git add $FILE
-          done
-          git commit --all -m "$NEW_COMMIT_MSG"
-          git push
-
       # It's possible that for some puzzles we haven't created issues yet
       # (because of network, rate limit or other kind of errors)
       - name: Check whether there are puzzles without related issues
@@ -164,6 +136,34 @@ jobs:
 
           # Make variable available for the next steps
           echo "PUZZLES_MAPPING_MODIFIED=$PUZZLES_MAPPING_MODIFIED" | tee -a "$GITHUB_ENV"
+
+      - name: Initialize Git variables for committing the changes
+        if: env.PUZZLES_FILES_MODIFIED == 'yes' || env.PUZZLES_MAPPING_MODIFIED == 'yes'
+        run: |
+          AUTHOR_EMAIL="$(git show "$GITHUB_SHA" --no-patch --format=%aE)"
+          AUTHOR_NAME="$(git show "$GITHUB_SHA" --no-patch --format=%aN)"
+
+          # Make variables available for the next steps
+          (
+            echo "COMMIT_MSG=$(git show "$GITHUB_SHA" --no-patch --format=oneline --abbrev-commit)"
+            echo "GIT_AUTHOR_NAME=GitHub Action on behalf of $AUTHOR_NAME"
+            echo "GIT_COMMITTER_NAME=GitHub Action on behalf of $AUTHOR_NAME"
+            echo "GIT_AUTHOR_EMAIL=$AUTHOR_EMAIL"
+            echo "GIT_COMMITTER_EMAIL=$AUTHOR_EMAIL"
+          ) | tee -a "$GITHUB_ENV"
+
+      - name: Commit the changes
+        if: env.PUZZLES_FILES_MODIFIED == 'yes'
+        env:
+          NEW_COMMIT_MSG: "chore: processed ${{ env.COMMIT_MSG }}"
+        working-directory: generated-todos
+        run: |
+          for FILE in pdd.xml todos-in-code.tsv; do
+            mv -f ../$FILE .
+            git add $FILE
+          done
+          git commit --all -m "$NEW_COMMIT_MSG"
+          git push
 
       - name: Commit updated mapping
         if: env.PUZZLES_MAPPING_MODIFIED == 'yes'
