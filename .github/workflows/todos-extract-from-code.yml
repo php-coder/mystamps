@@ -66,6 +66,8 @@ jobs:
       - name: Generate todos-in-code.tsv
         run: ./src/main/scripts/ci/pdd-xml-to-json.sh pdd.xml | ./src/main/scripts/ci/pdd-json-to-tsv.sh > todos-in-code.tsv
 
+      # @todo #1610 Close an issue or post a comment when a puzzle got removed from code
+      # @todo #1610 Post a comment when issue got closed without removing a puzzle
       - name: Check whether there are new todos
         run: |
           PUZZLES_FILES_MODIFIED=no
