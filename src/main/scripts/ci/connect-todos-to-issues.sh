@@ -67,13 +67,13 @@ https://github.com/${GITHUB_REPOSITORY}/blob/${GITHUB_SHA}/${PUZZLE_FILE}#L${PUZ
 Tech debt for: $GITHUB_SHA (#$ORIG_ISSUE)"'
 
 DIR="$(dirname "$1")"
-MAPPING_FILE="$DIR/todos-on-github.tsv"
+ISSUES_MAPPING_FILE="$DIR/todos-on-github.tsv"
 
-if [ ! -f "$MAPPING_FILE" ]; then
-    info "$MAPPING_FILE doesn't exist. Creating..."
-    printf 'Id\tIssue\tState\tCreated\n' >> "$MAPPING_FILE"
+if [ ! -f "$ISSUES_MAPPING_FILE" ]; then
+    info "$ISSUES_MAPPING_FILE doesn't exist. Creating..."
+    printf 'Id\tIssue\tState\tCreated\n' >> "$ISSUES_MAPPING_FILE"
 else
-    info "$MAPPING_FILE exists"
+    info "$ISSUES_MAPPING_FILE exists"
 fi
 
 [ -f "$DIR/todos-in-code.tsv" ] || fatal "$DIR/todos-in-code.tsv doesn't exists!"
@@ -92,7 +92,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
     TITLE="$(echo "$TITLE" | sed -e 's|^"||;' -e 's|"$||' -e 's|""|"|g')"
 
     debug "$PUZZLE_ID: has title: '$TITLE'"
-    MAPPING="$(grep --max-count=1 "^${PUZZLE_ID}[[:space:]]" "$MAPPING_FILE" || :)"
+    MAPPING="$(grep --max-count=1 "^${PUZZLE_ID}[[:space:]]" "$ISSUES_MAPPING_FILE" || :)"
     if [ -n "$MAPPING" ]; then
         IFS=$'\t' read -r UNUSED_PUZZLE_ID ISSUE_ID UNUSED_REST <<<"$MAPPING"
         info "$PUZZLE_ID => #$ISSUE_ID: is already linked"
@@ -149,7 +149,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
         # UNUSED_REST is really unused but without it, read appends the rest of a line to the last variable
         # shellcheck disable=SC2034
         echo "$CANDIDATES" | while read -r ISSUE_ID ISSUE_STATE UNUSED_REST; do
-            error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$MAPPING_FILE"
+            error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$ISSUES_MAPPING_FILE"
         done
         fatal ''
     fi
@@ -178,7 +178,7 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
         info "$PUZZLE_ID => #$ISSUE_ID: issue has been created: $ISSUE_LINK"
 
         info "$PUZZLE_ID => #$ISSUE_ID: link with $ISSUE_ID (just created)"
-        printf '%s\t%s\topen\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" >> "$MAPPING_FILE"
+        printf '%s\t%s\topen\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" >> "$ISSUES_MAPPING_FILE"
         NEW_ISSUES_COUNT=$((NEW_ISSUES_COUNT + 1))
         continue
     fi
@@ -226,14 +226,14 @@ while IFS=$'\t' read -r PUZZLE_ID UNUSED_TICKET TITLE UNUSED_REST; do
             error "Ways to resolve:"
             error "    1) edit $ISSUE_URL and modify its body to contain $PUZZLE_ID"
             error "    2) manually create a mapping between this puzzle and the issue:"
-            error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$MAPPING_FILE"
+            error "       echo '$PUZZLE_ID\t$ISSUE_ID\t$ISSUE_STATE\tmanually' >>$ISSUES_MAPPING_FILE"
             fatal ''
         else
             debug "$PUZZLE_ID => #$ISSUE_ID: body contains puzzle id"
         fi
 
         info "$PUZZLE_ID => #$ISSUE_ID: link with $ISSUE_ID ($ISSUE_STATE)"
-        printf '%s\t%s\t%s\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" "$ISSUE_STATE" >> "$MAPPING_FILE"
+        printf '%s\t%s\t%s\tautomatically\n' "$PUZZLE_ID" "$ISSUE_ID" "$ISSUE_STATE" >> "$ISSUES_MAPPING_FILE"
     fi
 done <<< "$(grep -v '^Id' "$1")"
 
