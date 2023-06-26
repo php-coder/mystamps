@@ -74,6 +74,7 @@ jobs:
 
           if [ ! -f generated-todos/pdd.xml ]; then
             echo 'pdd.xml has just been created'
+            mv pdd.xml generated-todos/pdd.xml
             PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/pdd.xml pdd.xml >/dev/null; then
             echo 'pdd.xml has been modified'
@@ -82,6 +83,7 @@ jobs:
 
           if [ ! -f generated-todos/todos-in-code.tsv ]; then
             echo 'todos-in-code.tsv has just been created'
+            mv todos-in-code.tsv generated-todos/todos-in-code.tsv
             PUZZLES_FILES_MODIFIED=yes
           elif ! diff --brief generated-todos/todos-in-code.tsv todos-in-code.tsv >/dev/null; then
             echo 'todos-in-code.tsv has been modified'
@@ -160,11 +162,7 @@ jobs:
           NEW_COMMIT_MSG: "chore: processed ${{ env.COMMIT_MSG }}"
         working-directory: generated-todos
         run: |
-          for FILE in pdd.xml todos-in-code.tsv; do
-            mv -f ../$FILE .
-            git add $FILE
-          done
-          git commit --all -m "$NEW_COMMIT_MSG"
+          git commit pdd.xml todos-in-code.tsv -m "$NEW_COMMIT_MSG"
           git push
 
       - name: Commit updated mapping
