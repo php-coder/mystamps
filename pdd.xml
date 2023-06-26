@@ -2279,6 +2279,28 @@
     <email>slava.semushin@gmail.com</email>
   </puzzle>
   <puzzle>
+    <ticket>1610</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1610-3bdaa3a0</id>
+    <lines>69-69</lines>
+    <body>Close an issue or post a comment when a puzzle got removed from code</body>
+    <file>.github/workflows/todos-extract-from-code.yml</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
+    <ticket>1610</ticket>
+    <estimate>0</estimate>
+    <role>DEV</role>
+    <id>1610-40bd5b91</id>
+    <lines>70-70</lines>
+    <body>Post a comment when issue got closed without removing a puzzle</body>
+    <file>.github/workflows/todos-extract-from-code.yml</file>
+    <author>Slava Semushin</author>
+    <email>slava.semushin@gmail.com</email>
+  </puzzle>
+  <puzzle>
     <ticket>1154</ticket>
     <estimate>0</estimate>
     <role>DEV</role>
